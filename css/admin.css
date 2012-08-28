@@ -1,0 +1,33 @@
+.column-service, .column-worker, .column-status{
+width:15%;
+}
+.column-date{
+width:25%;
+}
+.column-app_ID{
+width:5%;
+}
+.column-delete{
+width:4%;
+}
+th.column-delete{
+padding:5px 0 0 0 !important;
+}
+td.column-delete{
+padding:5px 0 0 7px !important;
+}
+
+a.pickcolor {
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	border: 1px solid #dfdfdf;
+	margin: 0 7px 0 3px;
+	padding: 4px 14px;
+}
+li.toplevel_page_appointments div.wp-menu-image{
+background: url(../images/menu_icon.png) no-repeat bottom;
+}
+li.toplevel_page_appointments:hover div.wp-menu-image, li.toplevel_page_appointments.wp-has-current-submenu div.wp-menu-image {
+background-position: top;
+}

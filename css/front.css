@@ -1,0 +1,429 @@
+.appointments-wrapper, .app_timetable {
+	padding: 0.3em;
+}
+.wait_img{
+z-index:1000;
+}
+.app_timetable {
+margin-left:20px;
+}
+.app_monthly_schedule_wrapper, .app_timetable_wrapper{
+float:left;
+width:50%;
+}
+.app_timetable_cell{
+float:left;
+width:25%;
+border:1px solid grey;
+font-size: 0.8em;
+text-align:left;
+padding:3px;
+overflow:hidden;
+}
+.app_timetable_cell div:hover{
+opacity:0.6;
+}
+.app_timetable_title{
+text-align:center;
+font-weight:bold;
+}
+.appointments-pagination .previous{
+float:left;
+}
+
+td.today {
+opacity: 0.6;
+}
+
+.appointments-pagination .next{
+float:right;
+}
+.appointments-paypal{
+display:none;
+}
+.appointments-list {
+	clear: both;
+	padding: 1em;
+}
+.appointments-list table {
+	width: 100%;
+	border-collapse: collapse;
+	/* table-layout:fixed; */
+}
+.appointments-list table th {
+	width: 12%;
+	background: #333;
+	color: #ddd;
+	padding: .2em .4em .2em .4em;
+	cursor: default;
+}
+.appointments-list table td {
+	border: 1px solid #ddd;
+	height: 14px;
+	padding: 0;
+}
+.appointments-list table td:hover{
+opacity:0.6;
+}
+.appointments-list table td.free, .app_timetable div.free {
+	cursor: pointer;
+}
+.appointments-legend-table{
+	font-size: 0.75em;
+	table-layout:fixed;
+	overflow: hidden;
+	border: 0 !important;
+}
+table.appointments-legend-table {
+	width: 90%;
+}
+.appointments-legend-table  td{
+	padding-right: 10px;
+	text-align:right;
+	height: 20px;
+	min-width: 30px;
+	border: none !important;
+	cursor:default;
+}
+.appointments-weekly-calendar-hours-mins{
+font-weight:bold;
+font-size:0.65em;
+text-align:center;
+min-width: 110px;
+}
+
+.appointments-confirmation-wrapper{
+display:none;
+}
+
+.appointments-confirmation-wrapper label{
+display:block;
+}
+.appointments-confirmation-wrapper input[type="text"]{
+width: 60%;
+}
+
+.appointments-confirmation-wrapper span{
+margin-right: 10px;
+width: 30%;
+display:block;
+float:left
+}
+
+.appointments-confirmation-text{
+font-weight:bold;
+}
+
+/* Login */
+
+.app_form_container{padding:20px;margin:10px;text-align:left;}
+.appointments_login{margin-bottom:0.6em; border:none;}
+.app_or{font-size:16px;margin:10px 0;letter-spacing: 1px;}
+.app_inner1{}
+.app_inner2{ margin-bottom: 0;}
+.app_inner3{}
+.app_login_submit{display:none;}
+.app_login_submit input{margin-right:10px;width:100px;}
+.app_wait_img img{border:none;}
+.app_login_submit input[type="password"]{
+padding: 0.5em;
+background: white;
+border: 1px solid #EEE;
+-moz-border-radius: 5px;
+-khtml-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+}
+
+/* Buttons
+	 ====================  */
+
+.app_submit_btn{ 
+	width:auto;
+}
+
+a.appointments-login_link-cancel, .app_submit_btn {
+	color: #4e4d4d;
+	font-size: 13px;
+  cursor: pointer;
+  display: inline-block;
+  background-color: #f6f6f6;
+  background-repeat: no-repeat;
+  font-family: Lucida Grande, Helvetica Neue, Helvetica, Arial;
+  text-shadow: 0 1px 0 #ffffff;
+  background: #f8f8f8; /* Old browsers */
+	background: -moz-linear-gradient(top,  #f8f8f8 0%, #eae9e9 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#eae9e9)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #f8f8f8 0%,#eae9e9 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #f8f8f8 0%,#eae9e9 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #f8f8f8 0%,#eae9e9 100%); /* IE10+ */
+	background: linear-gradient(top,  #f8f8f8 0%,#eae9e9 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#eae9e9',GradientType=0 ); /* IE6-9 */
+  padding: 6px 14px 6px;
+  line-height: normal;
+  border: 1px solid #e3e3e3;
+  border-bottom-color: #d1d1d1;
+  border-radius: 3px;
+  
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1);
+  	 -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1);
+  				box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1);
+  
+  -webkit-transition: 0.1s linear all;
+  	 -moz-transition: 0.1s linear all;
+  		-ms-transition: 0.1s linear all;
+  		 -o-transition: 0.1s linear all;
+  				transition: 0.1s linear all;
+  
+	text-decoration:none;
+}
+
+a.appointments-login_link-cancel:hover,  .app_submit_btn:hover {
+	border: 1px solid #c9c9c9;
+	color: #1a1a1a;
+	
+  -webkit-transition: 0.1s linear all;
+  	 -moz-transition: 0.1s linear all;
+  		-ms-transition: 0.1s linear all;
+  		 -o-transition: 0.1s linear all;
+  				transition: 0.1s linear all;
+}
+
+a.appointments-login_link-cancel:active,  .app_submit_btn:active {
+	border: 1px solid #b1b1b1;
+	color: #7f7f7f;
+	background: #d0d0d0; /* Old browsers */
+	background: -moz-linear-gradient(top,  #d0d0d0 0%, #dfdfdf 60%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d0d0d0), color-stop(60%,#dfdfdf)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #d0d0d0 0%,#dfdfdf 60%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #d0d0d0 0%,#dfdfdf 60%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #d0d0d0 0%,#dfdfdf 60%); /* IE10+ */
+	background: linear-gradient(top,  #d0d0d0 0%,#dfdfdf 60%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0d0d0', endColorstr='#dfdfdf',GradientType=0 ); /* IE6-9 */
+			
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  	 -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  				box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  
+  -webkit-transition: 0s linear all;
+     -moz-transition: 0s linear all;
+  		-ms-transition: 0s linear all;
+  		 -o-transition: 0s linear all;
+  				transition: 0s linear all;
+}
+
+.app_form_container {
+	text-align: center;
+	border: 1px solid #e3e3e3;
+	border-radius: 3px;
+}
+
+
+.appointments-login_links {
+	margin: 0;
+	padding: 0;
+	list-style: none !important;
+}
+
+ul.appointments-login_links li {
+	text-align: center;
+}
+
+
+a.appointments-login_link-facebook {
+  cursor: pointer;
+  display: inline-block;
+  background: #3B5998 url(../images/app-sprite01.png) 5px 5px no-repeat !important;
+  padding: 5px 14px 6px 30px;
+  text-shadow: 0 1px 1px #333;
+  color: #fff;
+  font-size: 13px;
+  line-height: normal;
+  border: 1px solid #2a406d;
+  -webkit-border-radius: 4px;
+  	 -moz-border-radius: 4px;
+  				border-radius: 4px;
+  				
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  	 -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  				box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  				
+  -webkit-transition: 0.1s linear all;
+  	 -moz-transition: 0.1s linear all;
+  		-ms-transition: 0.1s linear all;
+  		 -o-transition: 0.1s linear all;
+  				transition: 0.1s linear all;
+  margin-top: 20px;
+}
+a.appointments-login_link-facebook:hover, a.appointments-login_link-facebook.active {
+  background: #2a406d url(../images/app-sprite01.png) 5px 5px no-repeat !important;
+  color: #fff;
+  text-decoration: none;
+}
+
+a.appointments-login_link-twitter {
+  cursor: pointer;
+  display: inline-block;
+  background: #439eb8 url(../images/app-sprite01.png) 5px -17px no-repeat !important;
+  padding: 5px 14px 6px 30px;
+  text-shadow: 0 1px 1px #333;
+  color: #fff;
+  font-size: 13px;
+  line-height: normal;
+  border: 1px solid #39859b;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  	 -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+ 	 				box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+ 	 				
+  -webkit-transition: 0.1s linear all;
+  	 -moz-transition: 0.1s linear all;
+  		-ms-transition: 0.1s linear all;
+  		 -o-transition: 0.1s linear all;
+  				transition: 0.1s linear all;
+  margin-top: 10px;
+}
+a.appointments-login_link-twitter:hover, a.appointments-login_link-twitter.active {
+  color: #fff;
+  text-decoration: none;
+  background: #338ba4 url(../images/app-sprite01.png) 5px -17px no-repeat !important;
+}
+
+a.appointments-login_link-wordpress {
+  cursor: pointer;
+  display: inline-block;
+  background: #777 url(../images/app-sprite01.png) 5px -38px no-repeat !important;
+  padding: 5px 14px 6px 30px;
+  text-shadow: 0 1px 1px #111;
+  color: #fff;
+  font-size: 13px;
+  line-height: normal;
+  border: 1px solid #444;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+ 		 -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  				box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  				
+  -webkit-transition: 0.1s linear all;
+ 		 -moz-transition: 0.1s linear all;
+  		-ms-transition: 0.1s linear all;
+  		 -o-transition: 0.1s linear all;
+  				transition: 0.1s linear all;
+  margin: 10px 0 20px 0;
+}
+a.appointments-login_link-wordpress:hover, a.appointments-login_link-wordpress.active {
+  background: #444 url(../images/app-sprite01.png) 5px -38px no-repeat !important;
+  color: #fff;
+  text-decoration: none;
+}
+
+a.appointments-login_link-facebook, a.appointments-login_link-twitter, a.appointments-login_link-wordpress {
+	font-family:  Lucida Grande, Helvetica Neue, Helvetica, Arial;
+	text-shadow: 0 1px 0px rgba(0,0,0,0.4);
+	font-weight: normal;
+}
+
+a.appointments-login_link-submit {
+  width: 50px;
+  cursor: pointer;
+  display: inline-block;
+  background: #999;
+  padding: 5px 14px 6px 20px;
+  text-shadow: 0 1px 1px #111;
+  color: #fff;
+  font-size: 13px;
+  line-height: normal;
+  border: 1px solid #444;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -webkit-transition: 0.1s linear all;
+  -moz-transition: 0.1s linear all;
+  -ms-transition: 0.1s linear all;
+  -o-transition: 0.1s linear all;
+  transition: 0.1s linear all;
+  margin-bottom: 5px;
+}
+a.appointments-login_link-submit:hover, a.appointments-login_link-submit.active {
+  background: #444 ;
+  color: #fff;
+  text-decoration: none;
+}
+/* _________________________ 
+   added css 20 Aug, @victor */
+
+.appointments-list table { 
+  padding: 0; 
+  margin: 0; 
+}
+
+.appointments-list table td { border: 1px solid #d0d0d0; color:#333; }
+.app_timetable_cell { color:#333; }
+.appointments-list table th { 
+  width:10%; 
+  background-color: transparent; 
+  /* color: #4c4c4c; */
+  text-transform: none; 
+  font-size: 1.3em; 
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 200;
+  border: 1px solid #d0d0d0;
+  padding: 1%; 
+}
+.entry-content .appointments-list td.appointments-weekly-calendar-hours-mins { width:30%; }
+.entry-content .appointments-list td { 
+  width:10%; 
+  vertical-align: middle; 
+}
+.appointments-list table th.hourmin_column { width:30%; }
+.appointments-list table tbody tr:nth-child(2n+1) { background-color: rgba(247,247,247,0.2); }
+.appointments-list table td { height:3em; font-size:0.7em; }
+.appointments-list table td.busy:after, 
+.appointments-list table td.notpossible:after {
+  content: 'x';
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 200;
+  font-size: 130%;
+  display: block;
+  color: #d1d1d1;
+}
+.appointments-list table td:hover { opacity: 1;}
+.appointments-list table td.free:hover,
+.appointments-list table td.free.today { opacity: 0.5; font-weight: bold; }
+
+/* month view */
+.app_monthly_schedule_wrapper table th {
+  width: 14%;
+}
+
+.app_monthly_schedule_wrapper table td.busy:after,
+.app_monthly_schedule_wrapper table td.notpossible:after{
+  content: '';
+  line-height: 0;
+}
+.app_monthly_schedule_wrapper table tbody tr:nth-child(2n+1) { background-color: inherit; }
+.app_monthly_schedule_wrapper table td p { margin-bottom: 0.5em; margin-left: 4px; }
+.app_timetable_cell { text-align: center; width: 30%; border: none; margin:1px; }
+
+/* text layout */
+.appointments-my-appointments table,
+.appointments-my-appointments,
+.appointments-wrapper { 
+  width: 100%; 
+}
+.appointments-my-appointments table th { font-size: 1.2em; background-color: rgba(230, 230, 230, 0.2); }
+.appointments-my-appointments table th,
+.appointments-my-appointments table td { width:20%; padding:1.5%; }
+.appointments-my-appointments .my-appointments-status { width:15%; }
+.appointments-my-appointments .my-appointments-date { width:25%; }
+.appointments-wrapper { margin-top:10px; }
+.appointments-wrapper h2 { font-size: 1.9em; }
+
+.app_services_dropdown_title,
+.app_workers_dropdown_title { font-size:1.4em; margin:10px 0; font-weight: bold; }
