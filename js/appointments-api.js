@@ -11,6 +11,7 @@ function create_app_login_interface ($me) {
 		'<ul class="appointments-login_links">' +
 			'<li><a href="#" class="appointments-login_link appointments-login_link-facebook">' + l10nAppApi.facebook + '</a></li>' +
 			'<li><a href="#" class="appointments-login_link appointments-login_link-twitter">' + l10nAppApi.twitter + '</a></li>' +
+			'<li><a href="#" class="appointments-login_link appointments-login_link-google">' + l10nAppApi.google + '</a></li>' +
 			'<li><a href="#" class="appointments-login_link appointments-login_link-wordpress">' + l10nAppApi.wordpress + '</a></li>' +
 			'<li class="app_login_submit"><input type="text" class="app_username" value="Username" onfocus="app_checkclear(this)" /><input type="password" class="app_password" value="Password" onfocus="app_checkclear(this)" /><a href="javascript:void(0)" class="appointments-login_link appointments-login_link-submit">' + l10nAppApi.submit + '</a></li>' +
 			'<li><a href="#" class="appointments-login_link appointments-login_link-cancel">' + l10nAppApi.cancel + '</a></li>' +
@@ -40,6 +41,7 @@ function create_app_login_interface ($me) {
 							}
 							if ( data.status && data.status==1 ) { 
 								$(".appointments-login_inner").text(l10nAppApi.logged_in);
+								window.location.href = window.location.href;
 							}
 							else {
 								alert(l10nAppApi.error);
@@ -84,6 +86,7 @@ function create_app_login_interface ($me) {
 									}
 									if ( data.status && data.status==1 ) { 
 										$(".appointments-login_inner").text(l10nAppApi.logged_in);
+										window.location.href = window.location.href;
 									}
 									else {
 										alert(l10nAppApi.error);
@@ -95,7 +98,50 @@ function create_app_login_interface ($me) {
 				})
 				return false;
 			};
-		} else if ($lnk.is(".appointments-login_link-wordpress")) {
+		} 
+		else if ($lnk.is(".appointments-login_link-google")) {
+			callback = function () {
+				var googleLogin = window.open('https://www.google.com/accounts', "google_login", "scrollbars=no,resizable=no,toolbar=no,location=no,directories=no,status=no,menubar=no,copyhistory=no,height=400,width=800");
+				$.post(_appointments_data.ajax_url, {
+					"action": "app_get_google_auth_url",
+					"url": window.location.href
+				}, function (data) {
+					var href = data.url;
+					googleLogin.location = href;
+					var gTimer = setInterval(function () {
+						try {
+							if (googleLogin.location.hostname == window.location.hostname) {
+								// We're back!
+								clearInterval(gTimer);
+								googleLogin.close();
+								// change UI
+								$root.html('<img src="' + _appointments_data.root_url + 'waiting.gif" /> ' + l10nAppApi.please_wait);
+								$.post(_appointments_data.ajax_url, {
+									"action": "app_google_login"
+								}, function (data) {
+									var status = 0;
+									try { status = parseInt(data.status); } catch (e) { status = 0; }
+									if (!status) { // ... handle error
+										$root.remove();
+										$me.click();
+										return false;
+									}
+									if ( data.status && data.status==1 ) { 
+										$(".appointments-login_inner").text(l10nAppApi.logged_in);
+										window.location.href = window.location.href;
+									}
+									else {
+										alert(l10nAppApi.error);
+									}
+								});
+							}
+						} catch (e) {}
+					}, 300);
+				})
+				return false;
+			};
+		}
+		else if ($lnk.is(".appointments-login_link-wordpress")) {
 			// Pass on to wordpress login
 			callback = function () {
 				//window.location = $me.parents(".appointments_login").find(".app_login_hidden").attr("href");
@@ -121,6 +167,7 @@ function create_app_login_interface ($me) {
 						}
 						if ( data.status && data.status==1 ) { 
 								$(".appointments-login_inner").text(l10nAppApi.logged_in);
+								window.location.href = window.location.href;
 							}
 						else {
 							alert(l10nAppApi.error);
@@ -144,13 +191,7 @@ function create_app_login_interface ($me) {
 }
 
 // Init
-$(function () {
-	$(".appointments-list table td.free").click(function () {
-			create_app_login_interface($(".appointments-login_show_login"));
-			return false;
-		})
-	;
-});
+
 $(function () {
 	$(".appointments-login_show_login").click(function () {
 			create_app_login_interface($(this));
