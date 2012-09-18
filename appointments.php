@@ -1330,7 +1330,7 @@ class Appointments {
 		$script .= 'var wait_img= "<img class=\'wait_img\' src=\''.plugins_url('appointments/images/waiting.gif'). '\' />";';
 		if ( is_user_logged_in() || 'yes' != $this->options["login_required"] ) {
 			$script .= '$(".appointments-list table td.free, .app_timetable div.free").not(".app_monthly_schedule_wrapper table td.free").click(function(){';
-			$script .= '$(".appointments-list td.free").removeClass("selected");';
+			$script .= '$(".appointments-list td.free").removeClass("selected"); $(".app_timetable_cell.free").removeClass("selected");';
 			$script .= '$(this).addClass("selected");';
 			$script .= '$(this).css("text-align","center").append(wait_img);';
 			$script .= 'var app_value = $(this).find(".appointments_take_appointment").val();';
