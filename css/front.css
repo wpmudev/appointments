@@ -421,7 +421,7 @@ a.appointments-login_link-submit:hover, a.appointments-login_link-submit.active 
   vertical-align: middle;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 200;
-  font-size: 1.6em;
+  font-size: 2.1em;
   display: block;
   color: #d1d1d1;
 }
@@ -429,7 +429,8 @@ a.appointments-login_link-submit:hover, a.appointments-login_link-submit.active 
 .appointments-list table td.free:hover,
 .appointments-list table td.free.today { opacity: 0.5; font-weight: bold; }
 .busy, .notpossible { cursor:not-allowed; }
-.free.selected { border:3px solid #fff; opacity: 0.5; }
+#content tr td.free.selected,
+tr td.free.selected { border-top:none; border:2px solid #fff; opacity: 0.5; }
 
 /* month view */
 .app_monthly_schedule_wrapper table th {
@@ -464,7 +465,7 @@ a.appointments-login_link-submit:hover, a.appointments-login_link-submit.active 
 
 .app_service_excerpts { margin: 0.5em 0; }
 .appointments-wrapper h3,
-.appointments-confirmation-wrapper h3 { font-size: 0.8em; font-weight: 500; }
+.appointments-confirmation-wrapper h3 { font-size: 0.8em; font-weight: 500; text-transform: uppercase; }
 .appointments-legend { margin:1em 0; }
 .appointments-legend-table { float: right; clear: both; }
 .appointments-pagination { clear:both; }
@@ -481,6 +482,7 @@ a.appointments-login_link-submit:hover, a.appointments-login_link-submit.active 
 }
 .appointments-pagination a { 
   color: #474747;
+  text-decoration: none;
   text-shadow:0 1px 0 #fff; 
   padding:0.5em 1.2em; 
   border-radius: 3px;
@@ -508,14 +510,14 @@ a.appointments-login_link-submit:hover, a.appointments-login_link-submit.active 
 }
 
 .appointments-confirmation-wrapper fieldset { border:1px solid #999; padding: 20px; }
-
+.appointments-confirmation-wrapper fieldset div { margin:10px 0; }
 /* helpers */
 .clearfix:before,.clearfix:after{content:"\0020";display:block;height:0;overflow:hidden;}
 .clearfix:after{clear:both;}
 .clearfix{zoom:1;}
 
 /* animation */
-.elem {
+.appointments-confirmation-start label {
   -webkit-transition: 0.3s linear all;
      -moz-transition: 0.3s linear all;
       -ms-transition: 0.3s linear all;
