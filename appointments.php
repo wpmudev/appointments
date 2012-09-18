@@ -1330,6 +1330,8 @@ class Appointments {
 		$script .= 'var wait_img= "<img class=\'wait_img\' src=\''.plugins_url('appointments/images/waiting.gif'). '\' />";';
 		if ( is_user_logged_in() || 'yes' != $this->options["login_required"] ) {
 			$script .= '$(".appointments-list table td.free, .app_timetable div.free").not(".app_monthly_schedule_wrapper table td.free").click(function(){';
+			$script .= '$(".appointments-list td.free").removeClass("selected");';
+			$script .= '$(this).addClass("selected");';
 			$script .= '$(this).css("text-align","center").append(wait_img);';
 			$script .= 'var app_value = $(this).find(".appointments_take_appointment").val();';
 			$script .= '$(".appointments-confirmation-final-value").val(app_value);';
@@ -2321,6 +2323,7 @@ class Appointments {
 		$script .= 'selected_timetable.show("slow");';
 		$script .= '});';
 
+
 		$this->script = $this->script . $script;
 
 		return $ret;			
@@ -2600,15 +2603,29 @@ class Appointments {
 		return "<{$which}><tr>{$cells}</tr></{$which}>";
 	}
 	
+	// function get_day_names () {
+	// 	return array(
+	// 		__('Sunday',	'appointments'),
+	// 		__('Monday',	'appointments'),
+	// 		__('Tuesday',	'appointments'),
+	// 		__('Wednesday',	'appointments'),
+	// 		__('Thursday',	'appointments'),
+	// 		__('Friday',	'appointments'),
+	// 		__('Saturday',	'appointments'),
+	// 	);
+	// }
+
+	// using shortened day names because default .entry-content width is max 584px which isn't enough
+
 	function get_day_names () {
 		return array(
-			__('Sunday',	'appointments'),
-			__('Monday',	'appointments'),
-			__('Tuesday',	'appointments'),
-			__('Wednesday',	'appointments'),
-			__('Thursday',	'appointments'),
-			__('Friday',	'appointments'),
-			__('Saturday',	'appointments'),
+			__('Sun',	'appointments'),
+			__('Mon',	'appointments'),
+			__('Tue',	'appointments'),
+			__('Wed',	'appointments'),
+			__('Thu',	'appointments'),
+			__('Fri',	'appointments'),
+			__('Sat',	'appointments'),
 		);
 	}
 	
