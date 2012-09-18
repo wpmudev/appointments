@@ -412,13 +412,13 @@ a.appointments-login_link-submit:hover, a.appointments-login_link-submit.active 
 .appointments-list table td { height:3em; font-size:0.7em; }
 .appointments-list table td.busy:after, 
 .appointments-list table td.notpossible:after {
-  content: 'x';
+  content: '\00D7';
   position: relative;
   text-align: center;
   vertical-align: middle;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 200;
-  font-size: 130%;
+  font-size: 1.6em;
   display: block;
   color: #d1d1d1;
 }
@@ -456,3 +456,17 @@ a.appointments-login_link-submit:hover, a.appointments-login_link-submit.active 
 
 .app_services_dropdown_title,
 .app_workers_dropdown_title { font-size:1.4em; margin:10px 0; font-weight: bold; }
+
+.app_service_excerpts { margin: 0.5em 0; }
+.appointments-wrapper h3 { font-size: 0.8em; }
+
+/* form elements */
+.app_services_dropdown_select, 
+.app_workers_dropdown_select { padding: 0.4em 0; }
+.app_services_dropdown_select select,
+.app_workers_dropdown_select select { margin-right: 1em; }
+
+/* helpers */
+.clearfix:before,.clearfix:after{content:"\0020";display:block;height:0;overflow:hidden;}
+.clearfix:after{clear:both;}
+.clearfix{zoom:1;}
