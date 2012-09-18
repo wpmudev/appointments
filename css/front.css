@@ -431,6 +431,7 @@ a.appointments-login_link-submit:hover, a.appointments-login_link-submit.active 
 .busy, .notpossible { cursor:not-allowed; }
 #content tr td.free.selected,
 tr td.free.selected { border-top:none; border:2px solid #fff; opacity: 0.5; }
+.app_timetable_cell.free.selected { opacity: 0.5; }
 
 /* month view */
 .app_monthly_schedule_wrapper table th {
@@ -445,7 +446,7 @@ tr td.free.selected { border-top:none; border:2px solid #fff; opacity: 0.5; }
 .app_monthly_schedule_wrapper table tbody tr:nth-child(2n+1) { background-color: inherit; }
 .app_monthly_schedule_wrapper table td p { margin-bottom: 0.5em; margin-left: 4px; }
 .app_timetable_cell { text-align: center; width: 30%; border: none; margin:1px; }
-
+.appointments-my-appointments { font-size: 0.8em; }
 /* text layout */
 .appointments-my-appointments table,
 .appointments-my-appointments,
