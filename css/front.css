@@ -1,6 +1,8 @@
+/*
 .appointments-wrapper, .app_timetable {
 	padding: 0.3em;
 }
+*/
 .wait_img{
 z-index:1000;
 }
@@ -43,7 +45,7 @@ display:none;
 }
 .appointments-list {
 	clear: both;
-	padding: 1em;
+	padding: 0;
 }
 .appointments-list table {
 	width: 100%;
@@ -54,7 +56,7 @@ display:none;
 	width: 12%;
 	background: #333;
 	color: #ddd;
-	padding: .2em .4em .2em .4em;
+	/*padding: .2em .4em .2em .4em;*/
 	cursor: default;
 }
 .appointments-list table td {
@@ -386,7 +388,8 @@ a.appointments-login_link-submit:hover, a.appointments-login_link-submit.active 
 
 .appointments-list table { 
   padding: 0; 
-  margin: 0; 
+  margin: 0;
+  table-layout: fixed; 
 }
 
 .appointments-list table td { border: 1px solid #d0d0d0; color:#333; }
@@ -394,13 +397,12 @@ a.appointments-login_link-submit:hover, a.appointments-login_link-submit.active 
 .appointments-list table th { 
   width:10%; 
   background-color: transparent; 
-  /* color: #4c4c4c; */
+  text-align: center;
   text-transform: none; 
-  font-size: 1.3em; 
+  font-size: 1.2em; 
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 200;
   border: 1px solid #d0d0d0;
-  padding: 1%; 
 }
 .entry-content .appointments-list td.appointments-weekly-calendar-hours-mins { width:30%; }
 .entry-content .appointments-list td { 
@@ -425,6 +427,8 @@ a.appointments-login_link-submit:hover, a.appointments-login_link-submit.active 
 .appointments-list table td:hover { opacity: 1;}
 .appointments-list table td.free:hover,
 .appointments-list table td.free.today { opacity: 0.5; font-weight: bold; }
+.busy, .notpossible { cursor:not-allowed; }
+.free.selected { border:2px solid #fff; }
 
 /* month view */
 .app_monthly_schedule_wrapper table th {
