@@ -1282,10 +1282,10 @@ class Appointments {
 			$gcal_checked = '';
 			
 		$ret = '';
-		$ret .= '<div class="appointments-confirmation-wrapper">';
-		$ret .= '<div class="appointments-confirmation-text">';
+		$ret .= '<div class="appointments-confirmation-wrapper"><fieldset>';
+		$ret .= '<legend>';
 		$ret .= $title;
-		$ret .= '</div>';
+		$ret .= '</legend>';
 		$ret .= '<div class="appointments-confirmation-service">';
 		$ret .= '</div>';
 		$ret .= '<div class="appointments-confirmation-start">';
@@ -1323,7 +1323,7 @@ class Appointments {
 		$ret .= '<input type="button" class="appointments-confirmation-button" value="'.$button_text.'" />';
 		$ret .= '<input type="button" class="appointments-confirmation-cancel-button" value="'.__('Cancel', 'appointments').'" />';
 		$ret .= '</div>';
-		$ret .= '</div>';
+		$ret .= '</fieldset></div>';
 		$ret  = apply_filters( 'app_confirmation_fields', $ret );
 		
 		$script  = '';
@@ -1341,40 +1341,40 @@ class Appointments {
 						if ( response && response.error )
 							alert(response.error);
 						else{
-							$(".appointments-confirmation-wrapper").show();
-							$(".appointments-confirmation-service").html(response.service);
-							$(".appointments-confirmation-start").html(response.start);
-							$(".appointments-confirmation-end").html(response.end);
-							$(".appointments-confirmation-price").html(response.price);
-							if (response.price != "0"){
-								$(".appointments-confirmation-price").show();
-							}
-							if (response.name =="ask"){
-								$(".appointments-name-field").show();
-							}
-							if (response.email =="ask"){
-								$(".appointments-email-field").show();
-							}
-							if (response.phone =="ask"){
-								$(".appointments-phone-field").show();
-							}
-							if (response.address =="ask"){
-								$(".appointments-address-field").show();
-							}
-							if (response.city =="ask"){
-								$(".appointments-city-field").show();
-							}
-							if (response.note =="ask"){
-								$(".appointments-note-field").show();
-							}
-							if (response.gcal =="ask"){
-								$(".appointments-gcal-field").show();
-							}
-							if (response.additional =="ask"){
-								$(".appointments-additional-field").show();
-							}
-							$(".appointments-confirmation-button").focus();
-					}
+								$(".appointments-confirmation-wrapper").show();
+								$(".appointments-confirmation-service").html(response.service);
+								$(".appointments-confirmation-start").html(response.start);
+								$(".appointments-confirmation-end").html(response.end);
+								$(".appointments-confirmation-price").html(response.price);
+								if (response.price != "0"){
+									$(".appointments-confirmation-price").show();
+								}
+								if (response.name =="ask"){
+									$(".appointments-name-field").show();
+								}
+								if (response.email =="ask"){
+									$(".appointments-email-field").show();
+								}
+								if (response.phone =="ask"){
+									$(".appointments-phone-field").show();
+								}
+								if (response.address =="ask"){
+									$(".appointments-address-field").show();
+								}
+								if (response.city =="ask"){
+									$(".appointments-city-field").show();
+								}
+								if (response.note =="ask"){
+									$(".appointments-note-field").show();
+								}
+								if (response.gcal =="ask"){
+									$(".appointments-gcal-field").show();
+								}
+								if (response.additional =="ask"){
+									$(".appointments-additional-field").show();
+								}
+								$(".appointments-confirmation-button").focus();
+						}
 					},"json");';
 			$script .= '});';
 		}
@@ -2126,12 +2126,12 @@ class Appointments {
 		}
 		if ( $prev > $prev_min ) {
 			$c .= '<div class="previous">';
-			$c .= '<a href="'. add_query_arg( "wcalendar", $prev ) .'#app_schedule">'. __('<< Previous', 'appointments') .'</a>';
+			$c .= '<a href="'. add_query_arg( "wcalendar", $prev ) .'#app_schedule">'. __('&laquo; Previous', 'appointments') .'</a>';
 			$c .= '</div>';
 		}
 		if ( $next < $next_max ) {
 			$c .= '<div class="next">';
-			$c .= '<a href="'. add_query_arg( "wcalendar", $next ). '#app_schedule">'. __('Next >>', 'appointments') .'</a>';
+			$c .= '<a href="'. add_query_arg( "wcalendar", $next ). '#app_schedule">'. __('Next &raquo;', 'appointments') .'</a>';
 			$c .= '</div>';
 		}
 		$c .= '<div style="clear:both"></div>';
