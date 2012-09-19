@@ -485,7 +485,7 @@ tr td.free.selected { border-top:none; border:2px solid #fff; opacity: 0.5; }
   color: #474747;
   text-decoration: none;
   text-shadow:0 1px 0 #fff; 
-  padding:0.5em 1.2em; 
+  padding:0.2em 1.2em; 
   border-radius: 3px;
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
@@ -511,7 +511,8 @@ tr td.free.selected { border-top:none; border:2px solid #fff; opacity: 0.5; }
 }
 
 .appointments-confirmation-wrapper fieldset { border:1px solid #999; padding: 20px; }
-.appointments-confirmation-wrapper fieldset div { margin:10px 0; }
+.appointments-confirmation-wrapper fieldset div { margin:0 0 10px 0; }
+.app_worker_excerpts { margin:10px 0; }
 /* helpers */
 .clearfix:before,.clearfix:after{content:"\0020";display:block;height:0;overflow:hidden;}
 .clearfix:after{clear:both;}
