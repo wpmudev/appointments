@@ -13,6 +13,7 @@ margin-left:20px;
 float:left;
 width:50%;
 }
+aside.widget .app_monthly_schedule_wrapper { width: 100%; }
 .app_timetable_cell{
 float:left;
 width:25%;
