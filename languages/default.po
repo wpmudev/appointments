@@ -1,0 +1,2996 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Appointments+ V1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-09-27 12:25+0700\n"
+"PO-Revision-Date: 2012-09-27 12:25+0700\n"
+"Last-Translator: Incsub <puck198@hotmail.com>\n"
+"Language-Team: incsub\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: English\n"
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:510
+msgid "Our staff"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:512
+msgid "A specialist"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:531
+#: Settings\PUCK\Desktop\appointments/appointments.php:911
+msgid "Not defined"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:881
+msgid "Pending"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:882
+msgid "Paid"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:883
+msgid "Confirmed"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:884
+msgid "Removed"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:885
+msgid "Completed"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:898
+#: Settings\PUCK\Desktop\appointments/appointments.php:6263
+#: Settings\PUCK\Desktop\appointments/appointments.php:7532
+msgid "Name"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:899
+msgid "Email"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:900
+msgid "Phone"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:901
+msgid "Address"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:902
+msgid "City"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:903
+msgid "Note"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:921
+msgid "Free"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:922
+msgid "Busy"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:923
+msgid "Not possible"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:992
+msgid "<h3>My Appointments</h3>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1020
+#: Settings\PUCK\Desktop\appointments/appointments.php:7213
+#: Settings\PUCK\Desktop\appointments/appointments.php:7548
+msgid "Provider"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1035
+#: Settings\PUCK\Desktop\appointments/appointments.php:7210
+msgid "Client"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1050
+#: Settings\PUCK\Desktop\appointments/appointments.php:7212
+#: Settings\PUCK\Desktop\appointments/appointments.php:7859
+msgid "Service"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1051
+msgid "Date and time"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1051
+#: Settings\PUCK\Desktop\appointments/appointments.php:7214
+#: Settings\PUCK\Desktop\appointments/appointments.php:7635
+#: Settings\PUCK\Desktop\appointments/appointments.php:7862
+msgid "Status"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1065
+msgid "Click to submit this appointment to your Google Calendar account"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1087
+msgid "Please select a service:"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1088
+#: Settings\PUCK\Desktop\appointments/appointments.php:1168
+msgid "Show available times"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1167
+msgid "Please choose a service provider:"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1192
+msgid "Anyone"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1259
+msgid "More information <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1321
+msgid "Please click here to login:"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1322
+msgid "Login required to make an appointment. Now you will be redirected to login page."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1329
+#: Settings\PUCK\Desktop\appointments/appointments.php:2288
+#: Settings\PUCK\Desktop\appointments/appointments.php:2291
+#: Settings\PUCK\Desktop\appointments/appointments.php:2563
+#: Settings\PUCK\Desktop\appointments/appointments.php:2566
+msgid "Login"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1359
+msgid "<h3>Please check the appointment details below and confirm:</h3>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1360
+msgid "Please click here to confirm this appointment"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1361
+msgid "We have received your appointment. Thanks!"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1362
+msgid "Please enter the requested field"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1363
+msgid "Your name:"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1364
+msgid "Your email:"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1365
+msgid "Your phone:"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1366
+msgid "Your address:"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1367
+msgid "City:"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1368
+msgid "Your notes:"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1369
+msgid "Access Google Calendar and submit appointment"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1429
+#: Settings\PUCK\Desktop\appointments/appointments.php:4275
+#: Settings\PUCK\Desktop\appointments/appointments.php:7672
+#: Settings\PUCK\Desktop\appointments/appointments.php:8170
+msgid "Cancel"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1572
+msgid "A connection problem occurred. Please try again."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1609
+msgid "We are sorry, but this time slot is no more available. It seems that some other person has just appointed for that. Please refresh the page and try another time frame."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1612
+msgid "Service name: "
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1613
+msgid "Date and time: "
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1614
+msgid "Lasts (approx): "
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1614
+msgid "minutes"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1616
+msgid "Price: "
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1681
+msgid "You have already applied for an appointment. Please wait until you hear from us."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1788
+msgid "We are sorry, but this time frame is no more available. It seems that some ather person has just appointed for that. Please refresh the page and try another time frame."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1812
+msgid "Appointment could not be saved. Please contact website admin."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1876
+#, php-format
+msgid "%s Appointment"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1902
+#, php-format
+msgid "Something wrong about the submitted %s"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1944
+msgid "Payment for SERVICE"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1945
+msgid "Please confirm PRICE CURRENCY payment for SERVICE"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:1950
+msgid "Deposit for SERVICE"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2099
+#, php-format
+msgid "Paypal confirmation arrived, but status could not be changed for some reason. Please check appointment with ID %s"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2101
+msgid "Appointment status could not be changed"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2107
+msgid "Last transaction has been reversed. Reason: Payment has been reversed (charge back)"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2116
+msgid "Last transaction has been reversed. Reason: Payment has been refunded"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2125
+msgid "Last transaction has been reversed. Reason: Payment Denied"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2136
+msgid "Customer did not include a confirmed shipping address"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2137
+msgid "Funds not captured yet"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2138
+msgid "eCheck that has not cleared yet"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2139
+msgid "Payment waiting for aproval by service provider"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2140
+msgid "Payment waiting for service provider to handle multi-currency process"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2141
+msgid "Customer did not register or confirm his/her email yet"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2142
+msgid "Waiting for service provider to upgrade the PayPal account"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2143
+msgid "Waiting for service provider to verify his/her PayPal account"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2147
+msgid "Last transaction is pending. Reason: "
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2222
+msgid "<< Previous"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2227
+msgid "Next >>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2244
+msgid "<h3>Our schedule for START</h3>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2245
+msgid "Click a free day to apply for an appointment."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2246
+#: Settings\PUCK\Desktop\appointments/appointments.php:2522
+msgid "You need to login to make an appointment. Please click here to register/login: LOGIN_PAGE"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2520
+msgid "<h3>Our schedule from START to END</h3>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2521
+msgid "Click on a free time slot to apply for an appointment."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2691
+#: Settings\PUCK\Desktop\appointments/appointments.php:2693
+msgid " "
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2700
+msgid "Sunday"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2701
+msgid "Monday"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2702
+msgid "Tuesday"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2703
+msgid "Wednesday"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2704
+msgid "Thursday"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2705
+msgid "Friday"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2706
+msgid "Saturday"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2712
+msgid "Su"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2713
+msgid "Mo"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2714
+msgid "Tu"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2715
+msgid "We"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2716
+msgid "Th"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2717
+msgid "Fr"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:2718
+msgid "Sa"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:3357
+#, php-format
+msgid "%s edited his working hours."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:3382
+msgid "Appointments+"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:3387
+#: Settings\PUCK\Desktop\appointments/appointments.php:3544
+msgid "My Appointments"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:3395
+#: Settings\PUCK\Desktop\appointments/appointments.php:3546
+msgid "My Appointments as Provider"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:3422
+#: Settings\PUCK\Desktop\appointments/appointments.php:3642
+msgid "My Working Hours"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:3428
+#: Settings\PUCK\Desktop\appointments/appointments.php:3644
+msgid "My Break Hours"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:3434
+#: Settings\PUCK\Desktop\appointments/appointments.php:3647
+msgid "My Exceptional Working Days"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:3440
+#: Settings\PUCK\Desktop\appointments/appointments.php:3651
+msgid "My Holidays"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:3534
+#: Settings\PUCK\Desktop\appointments/appointments.php:4826
+#: Settings\PUCK\Desktop\appointments/appointments.php:7148
+msgid "Appointments"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:3559
+msgid "Appointments Settings"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:3866
+msgid "Choose Option &raquo;"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:4270
+msgid "Login with Facebook"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:4271
+msgid "Login with Twitter"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:4272
+msgid "Login with Google+"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:4273
+msgid "Login with WordPress"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:4274
+msgid "Submit"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:4276
+msgid "Please, wait..."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:4277
+msgid "You are now logged in"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:4278
+msgid "Login error. Please try again."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:4474
+#, php-format
+msgid "Confirmation message sent to %s for appointment ID:%s"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:4495
+msgid "An appointment requires your confirmation"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:4496
+#, php-format
+msgid "The new appointment has an ID %s and you can edit it clicking this link: %s"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:4500
+#, php-format
+msgid "Notification message sent to %s for appointment ID:%s"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:4549
+#: Settings\PUCK\Desktop\appointments/appointments.php:4621
+#, php-format
+msgid "Reminder message sent to %s for appointment ID:%s"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:4594
+msgid "You are getting this reminder message for your appointment as a provider. The below is a copy of what may have been sent to your client:"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:4782
+msgid "Javascript error on : "
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:4784
+#, php-format
+msgid ""
+"<b>[Appointments+]</b> You have at least one javascript error on %s.\n"
+"\t\t\t\t<br />Error message: %s<br />File: %s<br />Line: %s"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:4802
+msgid "<b>[Appointments+]</b> You must define at least once service"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:4810
+msgid "<b>[Appointments+]</b> One of your services has a duration smaller than time base"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:4827
+#: Settings\PUCK\Desktop\appointments/appointments.php:7824
+msgid "Transactions"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:4828
+msgid "Settings"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5307
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5314
+msgid "Appointments+ Settings"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5320
+#: Settings\PUCK\Desktop\appointments/appointments.php:6151
+msgid "Working Hours"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5321
+msgid "Exceptions"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5322
+msgid "Services"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5323
+msgid "Service Providers"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5324
+#: Settings\PUCK\Desktop\appointments/appointments.php:6611
+msgid "Shortcodes"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5325
+msgid "Logs"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5326
+msgid "FAQ"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5335
+msgid "General"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5350
+msgid "Appointments+ plugin makes it possible for your clients to make appointments from the front end or for you to enter appointments from backend. You can define services with different durations and assign service providers to any of them. In this page, you can set settings which will be valid in general."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5356
+#: Settings\PUCK\Desktop\appointments/appointments.php:6676
+msgid "General Settings"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5361
+msgid "Time base (minutes)"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5374
+msgid "Minimum time that will be effective for durations, appointment and schedule intervals. Default: 30. Do NOT change this after you started receiving appointments."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5378
+msgid "Additional time base (minutes)"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5380
+msgid "If the above time bases do not fit your business, you can add a new one, e.g. 240. Only numbers divisible by 10 or 15 are accepted."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5384
+msgid "Admin side time base (minutes)"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5386
+msgid "This gives flexibility while manually setting and editing the appointments. For example, if you enter here 15, you can reschedule an appointment for 15 minutes intervals even base time is 45 minutes. If you leave this empty, then the above selected time base will be applied on the admin side."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5390
+msgid "Appointment limit (days)"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5392
+msgid "Maximum number of days from today that a client can book an appointment. Default: 30"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5396
+msgid "Disable pending appointments after (mins)"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5398
+msgid "Pending appointments will be automatically removed (not deleted - deletion is only possible manually) after this set time and that appointment time will be freed. Enter 0 to disable. Default: 60. Please note that pending appointments whose starting time have been passed will always be removed, regardless of any other setting."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5402
+msgid "Minimum time to pass for new appointment (secs)"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5404
+msgid "You can limit appointment application frequency to prevent spammers who can block your appointments. This is only applied to pending appointments. Enter 0 to disable. Tip: To prevent any further appointment applications of a client before a payment or manual confirmation, enter a huge number here."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5408
+msgid "Allow Service Provider set working hours"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5411
+#: Settings\PUCK\Desktop\appointments/appointments.php:5424
+#: Settings\PUCK\Desktop\appointments/appointments.php:5435
+#: Settings\PUCK\Desktop\appointments/appointments.php:5482
+#: Settings\PUCK\Desktop\appointments/appointments.php:5618
+#: Settings\PUCK\Desktop\appointments/appointments.php:5658
+#: Settings\PUCK\Desktop\appointments/appointments.php:5731
+#: Settings\PUCK\Desktop\appointments/appointments.php:5946
+#: Settings\PUCK\Desktop\appointments/appointments.php:5958
+#: Settings\PUCK\Desktop\appointments/appointments.php:5984
+#: Settings\PUCK\Desktop\appointments/appointments.php:6005
+#: Settings\PUCK\Desktop\appointments/appointments.php:6040
+#: Settings\PUCK\Desktop\appointments/appointments.php:6071
+#: Settings\PUCK\Desktop\appointments/appointments.php:7061
+msgid "No"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5412
+#: Settings\PUCK\Desktop\appointments/appointments.php:5425
+#: Settings\PUCK\Desktop\appointments/appointments.php:5436
+#: Settings\PUCK\Desktop\appointments/appointments.php:5483
+#: Settings\PUCK\Desktop\appointments/appointments.php:5619
+#: Settings\PUCK\Desktop\appointments/appointments.php:5659
+#: Settings\PUCK\Desktop\appointments/appointments.php:5732
+#: Settings\PUCK\Desktop\appointments/appointments.php:5947
+#: Settings\PUCK\Desktop\appointments/appointments.php:5959
+#: Settings\PUCK\Desktop\appointments/appointments.php:5985
+#: Settings\PUCK\Desktop\appointments/appointments.php:6006
+#: Settings\PUCK\Desktop\appointments/appointments.php:6041
+#: Settings\PUCK\Desktop\appointments/appointments.php:6072
+#: Settings\PUCK\Desktop\appointments/appointments.php:7062
+msgid "Yes"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5414
+msgid "Whether you let service providers to enter their working hours using their user page."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5421
+msgid "Allow Overwork (end of day)"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5427
+msgid "Whether you accept appointments exceeding working hours for the end of day. For example, if you are working until 6pm, and a client asks an appointment for a 60 minutes service at 5:30pm, to allow such an appointment you should select this setting as Yes. Please note that this is only practical if the selected service lasts longer than the base time. Such time slots are marked as \"not possible\" in the schedule."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5432
+msgid "Allow Overwork (break hours)"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5438
+msgid "Same as above, but valid for break hours. If you want to allow appointments exceeding break times, then select this as Yes."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5448
+msgid "Display Settings"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5453
+msgid "Create an Appointment Page"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5456
+#: Settings\PUCK\Desktop\appointments/appointments.php:5902
+msgid "with"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5458
+#: Settings\PUCK\Desktop\appointments/appointments.php:5904
+msgid "current month's schedule"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5459
+#: Settings\PUCK\Desktop\appointments/appointments.php:5905
+msgid "current and next month's schedules"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5460
+#: Settings\PUCK\Desktop\appointments/appointments.php:5906
+msgid "current week's schedule"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5461
+#: Settings\PUCK\Desktop\appointments/appointments.php:5907
+msgid "current and next week's schedules"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5464
+msgid "Creates a front end Appointment page with title \"Make an Appointment\" with the selected schedule type and inserts all necessary shortcodes (My Appointments, Service Selection, Service Provider Selection, Appointment Schedule, Front end Login, Confirmation Field, Paypal Form)  inside it. You can edit, add parameters to shortcodes, remove undesired shortcodes and customize this page later."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5468
+#: Settings\PUCK\Desktop\appointments/appointments.php:5914
+msgid "<b>Note:</b> You already have such a page. If you check this checkbox, another page with the same title will be created. To edit existing page: "
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5469
+#: Settings\PUCK\Desktop\appointments/appointments.php:5472
+#: Settings\PUCK\Desktop\appointments/appointments.php:5915
+#: Settings\PUCK\Desktop\appointments/appointments.php:5918
+msgid "Click here"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5471
+#: Settings\PUCK\Desktop\appointments/appointments.php:5917
+msgid "To view the page:"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5479
+msgid "Show Legend"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5485
+msgid "Whether to display description fields above the pagination area."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5490
+msgid "Color Set"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5493
+msgid "Preset 1"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5494
+msgid "Preset 2"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5495
+msgid "Preset 3"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5496
+msgid "Custom"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5502
+msgid "Sample:"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5523
+msgid "You can select table cell colors from presets with the given samples or you can define your custom set below which is visible after you select \"Custom\"."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5549
+msgid "Custom Color Set"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5562
+msgid "If you have selected Custom color set, for each cell enter 3 OR 6-digit Hex code of the color manually without # in front or use the colorpicker."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5601
+msgid "Require these from the client:"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5610
+msgid "The selected fields will be available in the confirmation area and they will be asked from the client. If selected, filling of them is mandatory (except note field)."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5615
+msgid "Add Google Calendar Button"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5622
+msgid "Whether to let client access his Google Calendar account using Google Calendar button. Button is inserted in the confirmation area, as well as My Appointments shortcode and user page/tab if applicable."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5627
+msgid "Google Calendar Location"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5630
+msgid "Enter the text that will be used as location field in Google Calendar. If left empty, your website description is sent instead"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5635
+msgid "Additional css Rules"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5639
+msgid "You can add css rules to customize styling. These wiill be added to the front end appointment page only."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5649
+msgid "Accessibility Settings"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5655
+msgid "Login Required"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5661
+msgid "Whether you require the client to login to the website to apply for an appointment. Plugin lets front end logins, without the need for leaving the front end appointment page."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5679
+msgid "Accept Login from Front end"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5682
+msgid "Enables login to website from front end using Facebook, Twitter, Google+ or Wordpress."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5687
+msgid "My website already uses Facebook"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5690
+msgid "By default, Facebook script will be loaded by the plugin. If you are already running Facebook scripts, to prevent any conflict, check this option."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5695
+msgid "Facebook App ID"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5698
+#, php-format
+msgid "Enter your App ID number here. If you don't have a Facebook App yet, you will need to create one <a href='%s'>here</a>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5703
+msgid "Twitter Consumer Key"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5706
+#, php-format
+msgid "Enter your Twitter App ID number here. If you don't have a Twitter App yet, you will need to create one <a href=\"%s\">here</a>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5711
+msgid "Twitter Consumer Secret"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5714
+msgid "Enter your Twitter App ID Secret here."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5723
+msgid "Payment Settings"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5728
+msgid "Payment required"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5734
+#, php-format
+msgid "Whether you require a payment to accept appointments. If selected Yes, client is asked to pay through Paypal and the appointment will be in pending status until the payment is confirmed by Paypal IPN. If selected No, appointment will be in pending status until you manually approve it using the %s."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5734
+msgid "Appointments page"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5739
+msgid "Paypal Currency"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5779
+msgid "PayPal Mode"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5782
+msgid "Sandbox"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5783
+msgid "Live"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5789
+msgid "PayPal Merchant E-mail"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5797
+msgid "Thank You Page"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5800
+msgid "The page that client will be returned when he clicks the return link on Paypal website."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5806
+msgid "Deposit (%)"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5809
+msgid "You may want to ask a certain percentage of the service price as deposit, e.g. 25. Leave this field empty to ask for full price."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5814
+msgid "Deposit (fixed)"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5817
+msgid "Same as above, but a fixed deposit will be asked from the client per appointment. If both fields are filled, only the fixed deposit will be taken into account."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5824
+#: Settings\PUCK\Desktop\appointments/appointments.php:5881
+#, php-format
+msgid "The below fields require %s plugin. "
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5829
+msgid "Don't ask advance payment from selected Membership level(s)"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5832
+msgid "Below selected level(s) will not be asked for an advance payment or deposit. This does not mean that service will be free of charge for them. Such member appointments are automatically confirmed."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5837
+msgid "Discount for selected Membership level(s) (%)"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5840
+msgid "Below selected level(s) will get a discount given in percent, e.g. 20. Leave this field empty for no discount. Tip: If you enter 100, service will be free of charge for these members."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5845
+msgid "Membership levels for the above selections"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5866
+msgid "No level was defined yet"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5869
+msgid "Membership plugin is not activated."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5872
+msgid "Selected level(s) will not be asked advance payment/deposit and/or will take a discount, depending on the above selections. You can select multiple levels using CTRL and SHIFT keys."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5886
+msgid "Integrate with MarketPress"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5889
+msgid "Appointments can be set as products. Any appointment shortcode added to a product page will make that page an \"Appointment Product Page\". For details, please see FAQ."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5892
+msgid "Note: MarketPress is not active"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5899
+msgid "Create an Appointment Product Page"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5910
+msgid "Same as the above \"Create an Appointment Page\", but this time appointment shortcodes will be inserted in a new Product page and page title will be \"Appointment\". This is also the product name."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5937
+msgid "Notification Settings"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5943
+msgid "Send Confirmation email"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5949
+msgid "Whether to send an email after confirmation of the appointment. Note: Admin and service provider will also be bcc'ed."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5955
+msgid "Send Notification to admin if confirmation is required"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5961
+msgid "You may want to receive a notification email whenever a new appointment is taken from front end in pending status. This email is only sent if you do not require a payment, that is, if your confirmation is required."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5967
+msgid "Confirmation Email Subject"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5974
+msgid "Confirmation email Message"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5981
+msgid "Send Reminder email to the Client"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5987
+msgid "Whether to send reminder email(s) to the client before the appointment."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5993
+msgid "Reminder email Sending Time for the Client (hours)"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:5997
+msgid "Defines how many hours reminder will be sent to the client before the appointment will take place. Multiple reminders are possible. To do so, enter reminding hours separated with a comma, e.g. 48,24."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6002
+msgid "Send Reminder email to the Provider"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6008
+msgid "Whether to send reminder email(s) to the service provider before the appointment."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6014
+msgid "Reminder email Sending Time for the Provider (hours)"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6018
+msgid "Same as above, but defines the time for service provider."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6023
+msgid "Reminder email Subject"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6030
+msgid "Reminder email Message"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6037
+msgid "Log Sent email Records"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6043
+msgid "Whether to log confirmation and reminder email records (Not the emails themselves)."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6052
+msgid "For the above email subject and message contents, you can use the following placeholders which will be replaced by their real values:"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6062
+msgid "Performance Settings"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6068
+msgid "Use Built-in Cache"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6074
+msgid "Appointments+ has a built-in cache to increase performance. If you are making changes in the styling of your appointment pages, modifying shortcode parameters or having some issues while using it, disable it by selecting No."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6079
+msgid "Clear Cache"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6082
+msgid "Cache is automatically cleared at regular intervals (Default: 10 minutes) or when you change a setting. To clear it manually check this checkbox."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6087
+msgid "Disable Javascript Error Tracking for Admin Side"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6090
+msgid "Appointments+ has a built in basic javascript check script. If any of the visited page on the admin side has javascript errors, a warning will be seen and a log record will be created. To disable this feature, check this checkbox. Note: Not all the errors may be caught."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6095
+msgid "Disable Javascript Error Tracking for Frontend"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6098
+msgid "The same as above but disables this feature which is used on front end Appointment pages only. Note: Errors are displayed on top of the page and they are only visible to admin."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6109
+msgid "Save Settings"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6117
+msgid "<i>Here you can define working hours and breaks for your business. When you add new service providers, their working and break hours will be set to the default schedule. Then you can edit their schedule by selecting their names from the dropdown menu below.</i>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6123
+#: Settings\PUCK\Desktop\appointments/appointments.php:6184
+msgid "List for:"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6126
+#: Settings\PUCK\Desktop\appointments/appointments.php:6187
+#: Settings\PUCK\Desktop\appointments/appointments.php:7551
+msgid "No specific provider"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6152
+msgid "Break Hours"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6168
+msgid "Save Working Hours"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6174
+msgid "<i>Here you can define exceptional working or non working days for your business and for your service providers. You should enter holidays here. You can also define a normally non working week day (e.g. a specific Sunday) as a working day. When you add new service providers, their expections will be set to the default schedule.</i>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6205
+msgid "Exceptional working days, e.g. a specific Sunday you decided to work:"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6216
+msgid "Exceptional NON working days, e.g. holidays:"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6227
+msgid "Please enter each date using YYYY-MM-DD format (e.g. 2012-08-13) and separate each day with a comma. Datepick will allow entering multiple dates. "
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6236
+msgid "Save Exceptional Days"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6253
+msgid "<i>Here you should define your services for which your client will be making appointments. <b>There must be at least one service defined.</b> Capacity is the number of customers that can take the service at the same time. Enter 0 for no limit (Limited to number of service providers, or to 1 if no service provider is defined for that service). Price is only required if you request payment to accept appointments. You can define a description page for the service you are providing.</i>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6255
+msgid "Add New Service"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6262
+#: Settings\PUCK\Desktop\appointments/appointments.php:6308
+#: Settings\PUCK\Desktop\appointments/appointments.php:7209
+msgid "ID"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6264
+msgid "Capacity"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6265
+msgid "Duration (mins)"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6266
+#: Settings\PUCK\Desktop\appointments/appointments.php:7566
+msgid "Price"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6267
+msgid "Description page"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6280
+#: Settings\PUCK\Desktop\appointments/appointments.php:7009
+msgid "No services defined"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6290
+msgid "Save Services"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6292
+msgid "<i>Tip: To delete a service, just clear its name and save.</i>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6298
+msgid "<i>Here you can optionally select your service providers, i.e. workers, and assign them to certain services. Your service providers must be members of the website. You can define additional price for them. This will be added to the price of the service. You can define a bio page for the service providers.</i>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6300
+msgid "Add New Service Provider"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6309
+msgid "Service Provider"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6310
+msgid "Additional Price"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6311
+msgid "Services Provided*"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6312
+msgid "Bio page"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6314
+msgid "* Use CTRL and SHIFT keys to select multiple options"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6328
+msgid "No service providers defined"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6338
+msgid "Save Service Providers"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6340
+msgid "<i>Tip: To delete a service provider, just clear his services and save.</i>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6349
+msgid "Appointments+ uses shortcodes to generate output on the front end. This gives you the flexibility to customize your appointment pages using the WordPress post editor without the need for php coding. There are several parameters of the shortcodes by which your customizations can be really custom. On the other hand, if you don't set these parameters, Appointments+ will still work properly. Thus, setting parameters is fully optional. <br /><b>Important:</b> You should temporarily turn off built in cache while making changes in the parameters or adding new shortcodes."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6351
+msgid "<b>Note:</b> As default, all \"title\" parameters are wrapped with h3 tag. But of course you can override them by entering your own title text, with a different h tag, or without any tag."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6355
+msgid "<b>Description:</b> Inserts a table where client or service provider can see his upcoming appointments"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6357
+#: Settings\PUCK\Desktop\appointments/appointments.php:6372
+#: Settings\PUCK\Desktop\appointments/appointments.php:6387
+#: Settings\PUCK\Desktop\appointments/appointments.php:6402
+#: Settings\PUCK\Desktop\appointments/appointments.php:6420
+#: Settings\PUCK\Desktop\appointments/appointments.php:6438
+#: Settings\PUCK\Desktop\appointments/appointments.php:6450
+#: Settings\PUCK\Desktop\appointments/appointments.php:6463
+#: Settings\PUCK\Desktop\appointments/appointments.php:6480
+msgid "<b>Parameters:</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6359
+msgid "provider: Enter 1 if this appointment list belongs to a service provider. Default: \"0\" (client)"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6360
+msgid "provider_id: Enter the user ID of the provider whose list will be displayed. If ommitted, current service provider will be displayed. Default: \"0\" (current service provider)"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6361
+msgid "title: Title text. Default: \"My Appointments\""
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6362
+msgid "status: Which status(es) will be included. Possible values: paid, confirmed, completed, pending, removed. Default: \"paid, confirmed\""
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6363
+msgid "gcal: Enter 0 to disable Google Calendar button by which clients can add appointments to their Google Calendar after booking the appointment. Default: \"1\" (enabled)"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6370
+msgid "<b>Description:</b> Creates a dropdown menu of all available services"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6374
+#: Settings\PUCK\Desktop\appointments/appointments.php:6389
+msgid "select: Text above the select menu"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6375
+#: Settings\PUCK\Desktop\appointments/appointments.php:6390
+msgid "show: Button text to show the results for the selected"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6376
+msgid "description: Selects which part of the description page will be displayed under the dropdown menu when a service is selected . Selectable values are \"none\", \"excerpt\", \"content\". Default: \"excerpt\""
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6377
+msgid "thumb_size: Inserts the post thumbnail if page has a featured image. Selectable values are \"none\", \"thumbnail\", \"medium\", \"full\" or a 2 numbers separated by comma representing width and height in pixels, e.g. 32,32. Default: \"96,96\""
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6378
+#: Settings\PUCK\Desktop\appointments/appointments.php:6393
+msgid "thumb_class: css class that will be applied to the thumbnail. Default: \"alignleft\""
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6385
+msgid "<b>Description:</b> Creates a dropdown menu of all available service providers"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6391
+msgid "description: Selects which part of the bio page  will be displayed under the dropdown menu when a service provider is selected . Selectable values are \"none\", \"excerpt\", \"content\". Default: \"excerpt\""
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6392
+msgid "thumb_size: Inserts the post thumbnail if page has a featured image or service provider avatar. Selectable values are \"none\", \"thumbnail\", \"medium\", \"full\" or a 2 numbers separated by comma representing width and height in pixels, e.g. 32,32 in case of post thumbnail, or \"avatar\" and an optional avatar size separated by comma, e.g. \"avatar,72\". Note: If selected so, avatar is displayed even service provider does not have a bio page. Default: \"96,96\""
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6400
+msgid "<b>Description:</b> Creates a weekly table whose cells are clickable to apply for an appointment"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6404
+msgid "title: Text that will be displayed as the schedule title. Placeholders START and END will be replaced by their real values. Default: \"Our schedule from START to END\""
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6405
+#: Settings\PUCK\Desktop\appointments/appointments.php:6423
+msgid "logged: Text that will be displayed after the title only to the clients who are logged in or you don't require a login. Default: \"Click on a free box to apply for an appointment.\""
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6406
+#: Settings\PUCK\Desktop\appointments/appointments.php:6424
+msgid "notlogged: Text that will be displayed after the title only to the clients who are not logged in and you require a login. LOGIN_PAGE will be replaced with your website's login page. Default: \"You need to login to make an appointment. Please click here to register/login: LOGIN_PAGE\""
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6407
+#: Settings\PUCK\Desktop\appointments/appointments.php:6425
+msgid "service: Enter service ID only if you want to force the table display the service with entered ID. Default: \"0\" (Service is selected by dropdown)"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6408
+#: Settings\PUCK\Desktop\appointments/appointments.php:6426
+msgid "worker: Enter service provider ID only if you want to force the table display the service provider with entered ID. Default: \"0\" (Service provider is selected by dropdown)"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6409
+msgid "long: If entered 1, long week days are displayed on the schedule table row, e.g. \"Saturday\" instead of \"Sa\". Default: \"0\""
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6410
+msgid "class: A css class name for the schedule table. Default is empty."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6411
+msgid "add: Number of weeks to add to the schedule to use for preceding weeks' schedules. Enter 1 for next week, 2 for the other week, so on. Default: \"0\" (Current week) "
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6418
+msgid "<b>Description:</b> Creates a monthly calendar plus time tables whose free time slots are clickable to apply for an appointment"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6422
+msgid "title: Text that will be displayed as the schedule title. Placeholders START and END will be replaced by their real values. Default: \"Our schedule for START\""
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6427
+msgid "long: If entered 1, long week days are displayed on the calendar row, e.g. \"Saturday\" instead of \"Sa\". Default: \"0\""
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6428
+msgid "class: A css class name for the calendar. Default is empty."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6429
+msgid "add: Number of months to add to the schedule to use for preceding months' schedules. Enter 1 for next month, 2 for the other month, so on. Default: \"0\" (Current month) "
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6436
+msgid "<b>Description:</b> Inserts pagination codes (previous, next week or month links) and Legend area."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6440
+msgid "step: Number of weeks or months that selected time will increase or decrease with each next or previous link click. You may consider entering 4 if you have 4 schedule tables on the page. Default: \"1\""
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6441
+msgid "month: If entered 1, step parameter will mean month, otherwise week. In short, enter 1 for monthly schedule. Default: \"0\""
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6448
+msgid "<b>Description:</b> Inserts front end login buttons for Facebook, Twitter and Wordpress"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6452
+msgid "login_text: Text above the login buttons, proceeded by a login link. Default: \"Please click here to login:\""
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6453
+msgid "redirect_text: Javascript text if front end login is not set and user is redirected to login page"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6460
+msgid "<b>Description:</b> Inserts a form which displays the details of the selected appointment and has fields which should be filled by the client"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6465
+msgid "title: Text above fields. Default: \"Please check the appointment details below and confirm:\""
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6466
+msgid "button_text: Text of the button that asks client to confirm the appointment. Default: \"Please click here to confirm this appointment\""
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6467
+msgid "confirm_text: Javascript text that will be displayed after receiving of the appointment. This will only be displayed if you do not require payment. Default: \"We have received your appointment. Thanks!\""
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6468
+msgid "warning_text: Javascript text displayed if client does not fill a required field. Default: \"Please enter the requested field\""
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6469
+msgid "name, email, phone, address, city, note: Descriptive title of the fields. e.g. to ask for post code instead of address, use <code>address=\"Post code\"</code>."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6470
+msgid "gcal: Text that will be displayed beside Google Calendar selection checkbox. Default: \"Open Google Calendar and submit appointment \""
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6478
+msgid "<b>Description:</b> Inserts Paypal Pay button and form"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6482
+msgid "item_name: Item name that will be seen on Paypal. Default: \"Payment for SERVICE\" if deposit is not asked, \"Deposit for SERVICE\" if deposit is asked"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6483
+msgid "button_text: Text that will be displayed on Paypal button. Default: \"Please confirm PRICE CURRENCY payment for SERVICE\""
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6484
+msgid "For the above Paypal parameters, you can use SERVICE, PRICE, CURRENCY placeholders which will be replaced by their real values."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6500
+msgid "There are no log records yet."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6503
+msgid "Uploads directory is not writable."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6510
+msgid "Clear Log File"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6510
+#: Settings\PUCK\Desktop\appointments/appointments.php:7340
+msgid "Clicking this button deletes logs saved on the server"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6520
+msgid "<b>How can I restart the tutorial?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6522
+msgid "To restart tutorial about settings click here:"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6526
+msgid "Settings Tutorial Restart"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6528
+msgid "To restart tutorial about entering and editing Appointments click here:"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6532
+msgid "Appointments Creation and Editing Tutorial Restart"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6537
+msgid "<b>What is the importance of Time Base and how should I set it?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6539
+msgid "<i>Time Base</i> is the most important parameter of Appointments+. It is the minimum time that you can select for your appointments. If you set it too high then you may not be possible to optimize your appointments. If you set it too low, your schedule will be too crowded and you may have difficulty in managing your appointments. You should enter here the duration of the shortest service you are providing."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6544
+msgid "<b>What is the complete process to make an appointment?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6546
+msgid "With the widest settings, client will do the followings on the front page:"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6549
+msgid "Select a service"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6552
+msgid "Select a service provider"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6555
+msgid "Select a free time on the schedule"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6558
+msgid "Login (if required)"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6561
+msgid "Enter the required fields (name, email, phone, address, city) and confirm the selected appointment"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6564
+msgid "Clicks Paypal payment button (if required)"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6567
+msgid "Redirected to a Thank You page after Paypal payment"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6574
+msgid "<b>Is it necessary to have at least one service?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6576
+msgid "Yes. Appointments+ requires at least one service to be defined. Please note that a default service should have been already installed during installation. If you delete it, and no other service remains, then you will get a warning message. In this case plugin may not function properly."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6581
+msgid "<b>Is it necessary to define service providers?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6583
+msgid "No. You may as well be working by yourself, doing your own business. Plugin will work properly without any service provider, i.e worker, defined. In this case Appointments+ assumes that there is ONE service provider working, giving all the services."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6588
+msgid "<b>Is it necessary to use Services and Service Providers shortcodes?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6590
+msgid "No. If you do not use these shortcodes then your client will not be able to select a service and Appointments+ will pick the service with the smallest ID. We have already noted that a service provider definition is only optional."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6595
+msgid "<b>Does Appointments+ provide some widgets?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6597
+msgid "Yes. Appointments+ has Services and Service Providers widgets which provides a list of service or service providers with links to their description pages and a Monthly Calendar widget that redirects user to the selected appointment page when a free day is clicked."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6602
+msgid "<b>Can I use the shortcodes in any page as I wish?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6604
+msgid "Some shortcodes have only meaning if they are used in combination with some others. For example the Services shortcode will not have a function unless you have a Schedule on the same page. They are defined as separate shortcodes so that you can customize them on your pages. But for the My Appointments and Schedule shortcodes, there is no restriction."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6609
+msgid "<b>Can I show more than one week schedule in one page?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6611
+#, php-format
+msgid "Yes. Use \"add\" parameter of schedule shortcode to add additional week schedules. See %s tabs for details."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6616
+msgid "<b>Does the client need to be registered to the website to apply for an appointment?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6618
+msgid "You can set whether this is required with <i>Login Required</i> setting. You can ask details (name, email, phone, address, city) about the client before accepting the appointment, thus you may not need user registrations. These data are saved in a cookie and autofilled when they apply for a new appointment, so your regular clients do not need to refill them."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6623
+msgid "<b>How are the appointments confirmed?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6625
+msgid "If you have selected <i>Payment Required</i> field as Yes, then an appointment is automatically confirmed after a succesful Paypal payment and confirmation of Paypal IPN. If you selected Payment Required as No, then confirmation should be done manually, for example after connecting via phone."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6630
+msgid "<b>How can I manually confirm an appointment?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6632
+#, php-format
+msgid "Using the %s, find the appointment based on user name and change the status after you click <i>See Details and Edit</i> link. Note that this link will be visible only after you take the cursor over the record. Please also note that you can edit all the appointment data here."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6632
+#: Settings\PUCK\Desktop\appointments/appointments.php:6639
+#: Settings\PUCK\Desktop\appointments/appointments.php:6706
+msgid "Appointments admin page"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6637
+msgid "<b>Can I enter a manual appointment from admin side?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6639
+#, php-format
+msgid "Yes. You may as well be having manual appointments, e.g. by phone. Just click <i>Add New</i> link on top of the %s and enter the fields and save the record. Please note that NO checks (Is that time frame free? Are we working that day? etc...) are done when you are entering a manual appointment. Consider entering or checking appointments from the front end to prevent mistakes."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6644
+msgid "<b>I don't want front end appointments, I want to enter them only manually from admin side. What should I do?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6646
+msgid "If you don't want your schedule to be seen either, then simply do not add Schedule shortcode in your pages, or set that page as \"private\" for admin use. But if you want your schedule to be seen publicly, then just use Schedule shortcode, but no other shortcodes else."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6651
+msgid "<b>I don't want my break times and holidays to be seen by the clients. How can I do that?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6653
+msgid "Select css background color for busy and not possible fields to be the same (for example white). Select <i>Show Legend</i> setting as No. Now, visitors can only see your free times and apply for those; they cannot distinguish if you are occupied or not working for the rest."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6659
+msgid "<b>How can I prevent a second appointment by a client until I confirm his first appointment?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6661
+#, php-format
+msgid "Enter a huge number, e.g. 10000000, in <i>Minimum time to pass for new appointment</i> field. Please note that this is not 100% safe and there is no safe solution against this unless you require payment to accept an appointment."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6667
+msgid "<b>I have several service providers (workers) and each of them has different working hours, break hours and holidays. Does Appointments+ support this?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6669
+msgid "Yes. For each and every service provider you can individually set working, break hours and exceptions (holidays and additional working days). To do so, use the <i>Working Hours</i> and <i>Exceptions</i> tabs and select the service provider you want to make the changes from the service provider dropdown menu, make necessary changes and save. Plase note that when a service provider is added, his working schedule is set to the business working schedule. Thus, you only need to edit the variations of his schedule."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6674
+msgid "<b>How can I set start day of the week and adjust date and time formats?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6676
+#, php-format
+msgid "Appointments+ follows Wordpress date and time settings. If you change them from %s page, plugin will automatically adapt them."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6681
+msgid "<b>What does service capacity mean? Can you give an example?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6683
+msgid "It is the capacity of a service (e.g. because of technical reasons) independent of number of service providers giving that service. Imagine a dental clinic with three dentists working, each having their examination rooms, but there is only one X-Ray unit. Then, X-Ray Service has a capacity 1, and examination service has 3. Please note that you should only define capacity of X-Ray service 1 in this case. The other services whose capacity are left as zero will be automatically limited to the number of dentists giving that particular service. Because for those, limitation comes from the service providers, not from the service itself."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6688
+msgid "<b>I have defined several services and service providers. For a particular service, there is no provider assigned. What happens?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6690
+msgid "For that particular service, clients cannot apply for an appointment because there will be no free time slot. Just delete services you are not using."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6696
+msgid "<b>I am giving a service only on certain days of the week. Is it possible to achieve this with Appointments+?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6698
+msgid "Yes. Create a \"dummy\" service provider and assign the service only to it. Then set its working days as those days. That's all."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6704
+msgid "<b>How can I permanently delete appointment records?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6706
+#, php-format
+msgid "To avoid any mistakes, appointment records can only be deleted from Removed area of %s. First change the status of the appointment to \"removed\" and then delete it selecting the Removed area."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6712
+msgid "<b>What happens if a client was applying for an appointment but at the same time another client booked the same time slot?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6714
+msgid "Appointments+ checks the availability of the appointment twice: First when client clicks a free box and then when he clicks the confirmation button. If that time slot is taken by another client during these checks, he will be acknowledged that that time frame is not avaliable any more. All these checks are done in real time by ajax calls, so duplicate appointments are not possible."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6720
+msgid "<b>What does the Built-in Cache do? Can I still use other caching plugins?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6722
+#: Settings\PUCK\Desktop\appointments/appointments.php:8035
+msgid "Appointments+ comes with a built-in specific cache. It functions only on appointment pages and caches the content part of the page only. It is recommended to enable it especially if you have a high traffic appointment page. You can continue to use other general purpose caching plugins like W3T, WP Super Cache, Quick Cache."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6728
+msgid "<b>I have just installed Appointments+ and nothing happens as I click a free time slot on the Make an Appointment page. What can be the problem?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6730
+msgid "You most likely have a javascript error on the page. This may be coming from a faulty theme or plugin. To confirm the javascript error, open the page using Google Chrome or Firefox and then press Ctrl+Shift+j. In the opening window if you see any warnings or errors, then switch to the default theme to locate the issue. If errors disappear, then you need to check and correct your theme files. If they don't disappear, then deactivate all your plugins and re-activate them one by one, starting from Appointments+ and check each time as you activate a plugin."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6736
+msgid "<b>How is the plugin supposed to work by the way?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6738
+#, php-format
+msgid "Please visit our %s."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6738
+msgid "Demo website"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6744
+msgid "<b>How does integration with Membership work? Are there special considerations?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6746
+msgid "Membership member levels can be let exempt from advance payments/deposits. Also you can apply discounts for the selected membership levels. There are no special considerations: Appointments+ would manage them automatically."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6754
+msgid "<b>How does integration with MarketPress work? Are there special considerations?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6756
+msgid "If you select \"Integrate with MarketPress\" any MarketPress product page having Appointments+ shortcodes will be regarded as an \"Appointment Product Page\". Those pages are automatically modified and you are not supposed to be doing anything special. For your information, here is how the integration works:"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6760
+msgid "An Appointment will be regarded as a digital product, therefore shipping information is not asked if ordered alone."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6763
+msgid "Like any other digital product, quantity of an appointment is always fixed to 1, but client can add as many appointments as he wishes with different variations, that is, with different date and time."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6766
+msgid "Download link that is normally added to confirmation email for digital product orders is removed."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6769
+msgid "Appointments in the cart are shown as \"Appointment Product Page Title: Appointment ID (Appointment date and time)\"."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6772
+msgid "\"Add to Cart\" and \"Buy Now\" buttons on the Appointment Product page are not visible until client confirms the appointment."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6775
+msgid "\"Add to Cart\" and \"Buy Now\" buttons are only possible for a full appointment product page, therefore on products list page, an Appointments+ product will always have a \"Choose Option\" button. No price will be shown. For the same reason, please use Single Product shortcode with only content=\"full\" setting."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6778
+msgid "Paypal button of Appointments+ is invisible and thus its own Paypal Standard Payments option is disabled. Client will use the payment gateways MarketPress is providing. You can use all MarketPress payment gateways."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6781
+msgid "Quantity and Variation fields on the product page are always invisible."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6784
+msgid "Price of the appointment on the cart is the deposit price, if a deposit field is set. Otherwise it is the full price."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6787
+msgid "If an appointment product is manually removed from the cart by the client, its record will also be removed from the appointments table."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6790
+msgid "An appointment product can be automatically removed from the cart if \"Disable pending appointments after\" setting is set and client does not finalize the purchase during that time. Thus you may consider to add a warning note that transaction should be completed within the selected time."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6793
+msgid "If this happens while client is paying and client does pay, however, that appointment will be taken out from removed status and it will be marked as paid."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6796
+msgid "On the admin product management page if it is an Appointments+ Product, variations, SKU, price column fields will display \"-\"."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6799
+msgid "Transactions are shown in MarketPress, but related appointment record is updated, that is, status is changed to \"paid\"."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6805
+msgid "Advanced"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6808
+msgid "This part of FAQ requires some knowledge about HTML, php and/or WordPress coding."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6814
+msgid "<b>Can I create my own page templates?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6816
+msgid "Yes. Using <code>do_shortcode</code> function and loading Appointments+ css and javascript files, you can do this. See sample-appointments-page.php file in /includes directory for a sample."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6822
+msgid "<b>I have customized the front.css file. How can I prevent it being overwritten by plugin updates?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6824
+msgid "Copy front.css content and paste them in css file of your theme. Add this code inside functions.php of the theme: <code>add_theme_support( \"appointments_style\" )</code>. Then, integral plugin css file front.css will not be called."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6830
+msgid "<b>I don't see the time base I need. For example I need 240 minutes appointments. How can I do that?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6832
+msgid "."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6838
+msgid "<b>Is it possible not to ask payment or deposit for certain users?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6840
+msgid "Please note that this is quite simple if you are using Membership plugin. If not, referring this filter create a function in your functions.php to set Paypal price as zero for the selected user, user role and/or service: <code>$paypal_price = apply_filters( 'app_paypal_amount', $paypal_price, $service, $worker, $user_id );</code> This will not make the service free of charge, but user will not be asked for an advance payment. Also you may want to change status to confirmed. See next FAQ."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6846
+msgid "<b>I am not requiring advance payment from the users. It possible to automatically confirm appointments of certain users?</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6848
+msgid "Yes. Referring this filter create a function in your functions.php to set status as \"confirmed\" for the selected user, user role and/or service: <code>$status = apply_filters( 'app_post_confirmation_status', $status, $price, $service, $worker, $user_id );</code> "
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6879
+msgid "Are you sure to clear the log file?"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6889
+msgid "Log file cleared..."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6903
+msgid "Log file could not be deleted"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:6946
+#: Settings\PUCK\Desktop\appointments/appointments.php:7013
+msgid "None"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7049
+#: Settings\PUCK\Desktop\appointments/appointments.php:7051
+msgid "Day"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7049
+msgid "Work?"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7049
+#: Settings\PUCK\Desktop\appointments/appointments.php:7051
+#: Settings\PUCK\Desktop\appointments/appointments.php:7588
+msgid "Start"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7049
+#: Settings\PUCK\Desktop\appointments/appointments.php:7051
+#: Settings\PUCK\Desktop\appointments/appointments.php:7619
+msgid "End"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7051
+msgid "Give break?"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7148
+msgid "Add New"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7153
+msgid "Active appointments"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7154
+msgid "Pending appointments"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7155
+msgid "Completed appointments"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7156
+msgid "Removed appointments"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7157
+msgid "Click to toggle information about statuses"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7162
+msgid "<b>Completed:</b> Appointment became overdue after it is confirmed or paid"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7163
+msgid "<b>Removed:</b> Appointment was not paid for or was not confirmed manually in the allowed time"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7164
+msgid "If you require payment:"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7165
+msgid "<b>Active/Paid:</b> Paid and confirmed by Paypal"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7166
+msgid "<b>Pending:</b> Client applied for the appointment, but not yet paid."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7169
+msgid "If you do not require payment:"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7170
+msgid "<b>Active/Confirmed:</b> Manually confirmed"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7171
+msgid "<b>Pending:</b> Client applied for the appointment, but it is not manually confirmed."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7211
+msgid "Date/Time"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7289
+msgid "See Details and Edit"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7314
+#: Settings\PUCK\Desktop\appointments/appointments.php:7943
+#: Settings\PUCK\Desktop\appointments/appointments.php:7952
+msgid "None yet"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7327
+msgid "No appointments have been found."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7340
+msgid "Permanently Delete Selected Records"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7351
+msgid "Are you sure to delete the selected record(s)?"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7383
+#: Settings\PUCK\Desktop\appointments/appointments.php:7401
+#: Settings\PUCK\Desktop\appointments/appointments.php:7445
+msgid "Unexpected error"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7482
+msgid "CLIENT"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7485
+#: Settings\PUCK\Desktop\appointments/appointments.php:7857
+msgid "User"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7486
+msgid "Not registered user"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7528
+msgid "SERVICE"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7576
+msgid "APPOINTMENT"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7580
+msgid "Created"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7654
+msgid "(Re)send confirmation email"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7658
+msgid "Send confirmation email"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7662
+msgid "Confirm"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7673
+msgid "Save/Update"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7673
+msgid "Save / Update"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7731
+#, php-format
+msgid "Status changed from %s to %s by %s for appointment ID:%d"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7733
+msgid "<b>Changes saved.</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7736
+msgid "<b>New appointment succesfully saved.</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7738
+msgid "<b>Record could not be saved OR you did not make any changes!</b>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7827
+msgid "Recent transactions"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7828
+msgid "Pending transactions"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7829
+msgid "Future transactions"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7856
+msgid "App ID"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7858
+msgid "Date"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7860
+msgid "Amount"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7861
+msgid "Transaction id"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7963
+msgid "No Transactions have been found, patience is a virtue."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7989
+msgid "Appointments+ Tutorial"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7990
+msgid "Welcome to Appointments+ plugin. This tutorial will hopefully help you to make a quick start by adjusting the most important settings to your needs. You can restart this tutorial any time clicking the link on the FAQ page."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7994
+msgid "Time Base"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7995
+msgid "Time Base is the most important parameter of Appointments+. It is the minimum time that you can select for your appointments. If you set it too high then you may not be possible to optimize your appointments. If you set it too low, your schedule will be too crowded and you may have difficulty in managing your appointments. You should enter here the duration of the shortest service you are providing."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:7999
+#: Settings\PUCK\Desktop\appointments/appointments.php:8004
+msgid "Creating a functional front end appointment page"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8000
+msgid "Appointments+ provides an easy way of creating an appointment page. Check this checkbox to include all shortcodes in a full functional page. You can later edit this page."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8005
+msgid "You can select a schedule type from the list. To see how they look, you can also create more than one page, one by one and then delete unused ones."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8009
+msgid "Selecting a Color Set to Match Your Theme"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8010
+msgid "It is possible to select color sets for your schedule tables from predefined sets, or customize them. When you select Custom, you will be able to set your own colors for different statuses (Busy, free, not possible/not working)."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8014
+msgid "Do you require login?"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8015
+msgid "You can set whether client is required to log into the website to apply for an appointment. When you select this setting as Yes, you will see additional settings."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8019
+msgid "Requiring information from client"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8020
+msgid "You may ask the client to fill some selectable fields so that they may not need to register on your website."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8024
+msgid "Do you require payment?"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8025
+msgid "You can set whether client is asked for a payment to accept his appointment. If this setting is selected as Yes, appointment will be in pending status until a succesful Paypal payment is completed. After you select this, you will see additional fields for your Paypal account, deposits and integration with Membership plugin."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8029
+msgid "Email notifications"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8030
+msgid "There are several notification settings. Using these, you can confirm and remind your clients and also your service providers."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8034
+msgid "Built-in Cache"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8039
+#: Settings\PUCK\Desktop\appointments/appointments.php:8054
+#: Settings\PUCK\Desktop\appointments/appointments.php:8079
+msgid "Save settings"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8040
+#: Settings\PUCK\Desktop\appointments/appointments.php:8055
+msgid "Do not forget to save your settings."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8044
+#: Settings\PUCK\Desktop\appointments/appointments.php:8049
+msgid "Setting your business hours"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8045
+msgid "Now you should set your business working hours. Click Working Hours tab and then click Next."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8050
+msgid "Below you will see two tables, one for your working hours and the other for your break hours during the day. The second one is optional. On the left you will see no selection options yet. But as you add new services providers, you can set their working and break hours by selecting from this dropdown menu. This is only necessary if their working hours are different from those of your business."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8059
+msgid "Entering your holidays"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8060
+msgid "Click the Exceptions tab to define your holidays and then click Next."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8064
+msgid "Setting exceptional days"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8065
+msgid "Below you can define your holidays and exceptional working days, for example a specific Sunday you want to work on. These dates will override your weekly working schedule for that day only. Note that you will be able to set these exceptional days for each service provider individually, when you define them."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8069
+#: Settings\PUCK\Desktop\appointments/appointments.php:8074
+msgid "Setting your services"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8070
+msgid "Click the Services tab to set your services and then click Next."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8075
+msgid "You can add new service by clicking this button. A default service should have been installed during installation. You can edit and even delete that too, but you should have at least one service in this table."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8080
+msgid "Do not forget to save your settings. Clicking Add New Service button does NOT save it to the database until you click the Save button."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8084
+msgid "Adding and setting your service providers"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8085
+msgid "Click the Service Providers tab to set your service providers and then click Next."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8089
+msgid "Adding service providers"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8090
+msgid "Adding service providers is optional. You may need this if the working schedule of your service providers are different or you want the client to pick a provider by his name. You can add new service provider by clicking this button. "
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8095
+msgid "Additional Information"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8096
+msgid "You can find detailed information about shortcode parameters on the Shortcodes page and answers to common questions on the FAQ page. Of course we will be glad to help you on our Community pages too."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8100
+#: Settings\PUCK\Desktop\appointments/appointments.php:8130
+msgid "Appointment List"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8101
+msgid "As you start receiving appointments, you will see them here. Click on the Appointments menu item to start the other tutorial, if you have not seen it yet."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8131
+msgid "Appointment records are grouped by their statuses. You can see these groupings by clicking the Info icon."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8135
+msgid "Entering a Manual Appointment"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8136
+msgid "When you received appointments from your clients, they will be added to this page automatically. But you can always add a new appointment manually. Please click the Add New link and then click Next."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8140
+#: Settings\PUCK\Desktop\appointments/appointments.php:8150
+#: Settings\PUCK\Desktop\appointments/appointments.php:8155
+msgid "Entering Data for the New Appointment"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8141
+msgid "As you can see, you can enter all parameters here. Enter some random values and select status as PENDING, for this example. Then click Next"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8145
+msgid "Sending Confirmation emails Manually"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8146
+msgid "If you require payment, confirmation email is automatically sent after a Paypal payment. However if you are confirming appointments manually, you should check this checkbox for a confirmation email to be sent. You can also use this option for resending the confirmation email, e.g. after rescheduling an appointment."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8151
+msgid "Save and then click Next."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8156
+msgid "The result is shown here. Normally you should get a success message. Otherwise it means that you have a javascript problem on admin side."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8160
+msgid "Save New Appointment"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8161
+msgid "As we added this appointment as \"Pending\" we will see it under Pending appointments. Click Pending appointments and then click Next."
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8165
+msgid "Editing an Appointment"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8166
+msgid "You can edit any appointment record. Just hover on the record and then click See Details and Edit"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8171
+msgid "It is always possible to Cancel. Please note that these records are NOT saved until you click the Save button. Thanks for using Appointments+"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8245
+#, php-format
+msgid "Easily get updates, support, and one-click WPMU DEV plugin/theme installations right from in your dashboard - <strong><a href=\"%s\" title=\"Install Now &raquo;\">install the free WPMU DEV Dashboard plugin</a></strong>. &nbsp;&nbsp;&nbsp;<small><a href=\"http://premium.wpmudev.org/wpmu-dev/update-notifications-plugin-information/\">(find out more)</a></small>"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/appointments.php:8249
+#, php-format
+msgid "Updates, Support, Premium Plugins, Community - <strong><a href=\"%s\" title=\"Activate Now &raquo;\">activate the WPMU DEV Dashboard plugin now</a></strong>."
+msgstr ""
+
+#: C:\Documents
+#: and
+#: Settings\PUCK\Desktop\appointments/includes/pointer-tutorials.php:134
+msgid "Tutorial"
+msgstr ""
+
+#: C:\Documents
+#: and
+#: Settings\PUCK\Desktop\appointments/includes/pointer-tutorials.php:417
+msgid "Next &raquo;"
+msgstr ""
+
+#: C:\Documents
+#: and
+#: Settings\PUCK\Desktop\appointments/includes/pointer-tutorials.php:429
+#: Settings\PUCK\Desktop\appointments/includes/pointer-tutorials.php:448
+msgid "Dismiss"
+msgstr ""
+
+#: C:\Documents
+#: and
+#: Settings\PUCK\Desktop\appointments/includes/pointer-tutorials.php:430
+#: Settings\PUCK\Desktop\appointments/includes/pointer-tutorials.php:449
+#, php-format
+msgid "Dismiss %s"
+msgstr ""
+
+#: C:\Documents
+#: and
+#: Settings\PUCK\Desktop\appointments/includes/pointer-tutorials.php:436
+msgid "&laquo; Previous"
+msgstr ""
+
+#: C:\Documents
+#: and
+#: Settings\PUCK\Desktop\appointments/includes/pointer-tutorials.php:488
+#, php-format
+msgid "%s: Step %d of %d"
+msgstr ""
+
+#: C:\Documents
+#: and
+#: Settings\PUCK\Desktop\appointments/includes/sample-appointments-page.php:34
+msgid "Pages:"
+msgstr ""
+
+#: C:\Documents
+#: and
+#: Settings\PUCK\Desktop\appointments/includes/sample-appointments-page.php:38
+msgid "Edit"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/includes/widgets.php:31
+msgid "Title:"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/includes/widgets.php:47
+msgid "List of services and links to their description pages"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/includes/widgets.php:48
+msgid "Appointments+ Services"
+msgstr ""
+
+#: C:\Documents
+#: and Settings\PUCK\Desktop\appointments/includes/widgets.php:77
+msgid "Number of services to show:"
+msgstr ""
+
+#: C:\Documents
+#: and
+#: Settings\PUCK\Desktop\appointments/includes/widgets.php:102
+msgid "List of service providers and links to their description pages"
+msgstr ""
+
+#: C:\Documents
+#: and
+#: Settings\PUCK\Desktop\appointments/includes/widgets.php:103
+msgid "Appointments+ Service Providers"
+msgstr ""
+
+#: C:\Documents
+#: and
+#: Settings\PUCK\Desktop\appointments/includes/widgets.php:133
+msgid "Number of service providers to show:"
+msgstr ""
+
+#: C:\Documents
+#: and
+#: Settings\PUCK\Desktop\appointments/includes/widgets.php:162
+msgid "A montly calendar that redirects user to the selected appointment page when a free day is clicked"
+msgstr ""
+
+#: C:\Documents
+#: and
+#: Settings\PUCK\Desktop\appointments/includes/widgets.php:163
+msgid "Appointments+ Monthly Calendar"
+msgstr ""
+
+#: C:\Documents
+#: and
+#: Settings\PUCK\Desktop\appointments/includes/widgets.php:221
+msgid "Appointment page:"
+msgstr ""
+
+#: C:\Documents
+#: and
+#: Settings\PUCK\Desktop\appointments/includes/widgets.php:228
+msgid "Months to add to current month:"
+msgstr ""
+
