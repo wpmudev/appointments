@@ -1,0 +1,40 @@
+V1.0.5:	- New admin notice in case of duplicate shortcodes on the same page
+		- Date format in emails fixed
+		- Complication in European and US date formats during manual edit fixed
+		- New hooks added
+		- Better readability for FAQ
+		
+V1.0.4.3: - Fix for mixed carts (Appointments + normal products) in MarketPress integration
+
+V1.0.4.2: - Support for non standard date formats to be used in datepick
+		  - Added new filters
+
+V1.0.4.1: - ajax_url fixed
+
+V1.0.4:	- Datepicker js warning fixed
+		- Adding new service after deleting all services issue fixed
+		- Now database cache is correctly flushed after editing a service or provider
+		- Records for worker are also deleted when user is deleted. His existing appointments are assigned to general staff.
+		- Javascript error tracking function disabled until a future release
+		- Support for older php versions (<5.3): January 1970 issues in monthly schedules fixed
+		- Cache usage default setting is set to No
+
+V1.0.3.1: - Just some typo corrections
+
+V1.0.3: - Custom time formats are now supported
+		- Javascript error tracking function added
+		- Service and providers names in emails are fixed
+
+V1.0.2: - New hooks added
+		- Creating tables for sub blogs in multisite mode fixed
+		- Conflict between caching and wpautop resolved
+		- New setting: Send notification email in case a new appointment is taken that requires confirmation
+		- New settings: Additional base time and admin base time which let better customizations
+
+V1.0.1:	- Integration with MarketPress
+		- php warning after save post is fixed
+		- Styling corrected for Monthly Calendar widget
+		- Service provider display name corrected
+		- Google Calendar location can now be set from settings
+		
+V1.0.0: Initial release
