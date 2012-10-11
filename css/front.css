@@ -514,7 +514,7 @@ tr td.free.selected { border-top:none; border:2px solid #fff; opacity: 0.5; }
   background-image: linear-gradient(90deg, #e0e0e0 0%, #e0e0e0 0.24%, #fff 70.17%, #fff 100%);
 }
 
-a[name="app_schedule"] { height:0; padding: 0; width: 0; line-height: 0; font-size: 0; position: absolute; }
+a#app_schedule { height:0; padding: 0; width: 0; line-height: 0; font-size: 0; position: absolute; }
 
 .appointments-confirmation-wrapper fieldset { border:1px solid #999; padding: 20px; }
 .appointments-confirmation-wrapper fieldset div { margin:0 0 10px 0; }
