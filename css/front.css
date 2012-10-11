@@ -80,7 +80,7 @@ opacity:0.6;
 	border: 0 !important;
 }
 table.appointments-legend-table {
-	width: 90%;
+	width: auto;
 }
 .appointments-legend-table  td{
 	padding-right: 10px;
