@@ -1,0 +1,901 @@
+<?php
+/**
+ * Class for Google Calendar API for Appointments+
+ * @author: Hakan Evin
+ * @note: This may be the first WordPress compatible class that uses Google Calendar API as a service, 
+ * that is, when calendar owner is not required to be online
+ * @since 1.2.0
+ */
+ 
+if ( !class_exists( 'AppointmentsGcal' ) ) {
+class AppointmentsGcal {
+
+	/**
+	 * Constructor
+	 */
+	function AppointmentsGcal() {
+		$this->__construct();
+	}
+	function __construct() {
+		
+		global $wpdb;
+		
+		$this->local_time	= current_time('timestamp');
+		$this->options = get_option( 'appointments_options' );
+		
+		// DB version
+		$this->db_version 	= get_option( 'app_db_version' );
+		$this->app_table 	= $wpdb->prefix . "app_appointments";
+		
+		$this->plugin_dir 	= WP_PLUGIN_DIR . '/appointments';
+		$this->plugin_url 	= plugins_url( 'appointments' );
+		
+		require_once $this->plugin_dir . '/includes/gcal/Google_Client.php';
+		require_once $this->plugin_dir . '/includes/gcal/contrib/Google_CalendarService.php';
+		if ( !session_id() )
+			session_start();
+
+		add_action( 'admin_init', array( &$this, 'save_settings' ) );
+		
+		if ( isset( $_GET['gcal_api_test'] ) && 1 == $_GET['gcal_api_test'] )
+			set_exception_handler( array( &$this, 'exception_error_handler' ) );
+	}
+
+	/**
+	 * Refresh the page with the exception as GET parameter thus page is not killed
+	 */
+	function exception_error_handler($exception ) {
+		wp_redirect( add_query_arg( array( 'gcal_api_test_result' => urlencode($exception), 'gcal_api_test' => false, 'gcal_api_pre_test' => false ) ) );
+	}
+	
+	/**
+	 * Outputs Google Calendar tab on admin settings page
+	 */
+	function render_tab() {
+		
+		$this->display_nag();
+		?>
+		
+		<div id="poststuff" class="metabox-holder">
+		<span class="description"><?php _e('Appointments+ can integrate with Google Calendar accounts by 2 different ways: 1) Google Calendar Button 2) Google Calendar API.', 'appointments') ?></span>
+		<br />
+		<br />
+		<span class="description"><?php _e('Google Calendar Button method is simple to implement, but it is semi-automatic, that is, client or service provider should click the button to submit the appointment to his Google calendar account.', 'appointments') ?></span>
+		<br />
+		<br />
+		<span class="description"><?php _e('Setting of Google Calendar API is sophisticated because of requirements and security measures of Google itself, but once it is correctly set, appointments are automatically sent to the Google calendar account. Synchronization (automatic import of Google Calendar events to Appointments+) is also possible with the API method. Clients cannot use API method; only website itself and/or service providers can use it. Note: Each service provider should carry out the below setting steps, if they want to follow their appointments on their own calendars.', 'appointments') ?></span>
+		<br />
+		<br />
+			<form method="post" action="<?php echo add_query_arg( array( 'gcal_api_test'=>false, 'gcal_api_test_result'=>false, 'gcal_api_pre_test'=>false, 'gcal_import_now'=>false) ) ?>" >
+
+			<div class="postbox">
+
+			<h3 class='hndle'><span><?php _e('Google Calendar General Setting', 'appointments') ?></span></h3>
+				<div class="inside">
+					<table class="form-table">
+							
+						<tr valign="top">
+							<th scope="row" ><?php _e('Google Calendar Location','appointments')?></th>
+							<td colspan="2">
+							<input type="text" style="width:400px" name="gcal_location" value="<?php if (isset($this->options["gcal_location"])) echo $this->options["gcal_location"] ?>" />
+							<br /><span class="description"><?php _e('Enter the text that will be used as location field in Google Calendar. If left empty, your website description is sent instead', 'appointments')?></span>
+							</td>
+						</tr>
+
+					
+					</table>
+				</div>
+			</div>
+			
+			<div class="postbox">
+
+			<h3 class='hndle'><span><?php _e('Google Calendar Button Settings', 'appointments') ?></span></h3>
+				<div class="inside">
+					<table class="form-table">
+							
+						<tr valign="top">
+							<th scope="row" ><?php _e('Add Google Calendar Button', 'appointments')?></th>
+							<td colspan="2">
+							<select name="gcal">
+							<option value="no" <?php if ( @$this->options['gcal'] != 'yes' ) echo "selected='selected'"?>><?php _e('No', 'appointments')?></option>
+							<option value="yes" <?php if ( @$this->options['gcal'] == 'yes' ) echo "selected='selected'"?>><?php _e('Yes', 'appointments')?></option>
+							</select>
+							<br />
+							<span class="description"><?php _e('Whether to let client access his Google Calendar account using Google Calendar button. Button is inserted in the confirmation area, as well as My Appointments shortcode and user page/tab if applicable.', 'appointments') ?></span>
+							</td>
+						</tr>
+						
+						<tr valign="top">
+							<th scope="row" ><?php _e('Open Google Calendar in the Same Window', 'appointments')?></th>
+							<td colspan="2">
+							<input type="checkbox" name="gcal_same_window" <?php if ( isset( $this->options["gcal_same_window"] ) && $this->options["gcal_same_window"] ) echo 'checked="checked"' ?> />&nbsp;&nbsp;&nbsp;
+							<span class="description"><?php _e('As default, Google Calendar is opened in a new tab or window. If you check this option, user will be redirected to Google Calendar from the appointment page, without opening a new tab or window. Note: While applying for the appointment, this is effective if payment is not required, or price is zero (Otherwise payment button/form would be lost).', 'appointments') ?></span>
+							</td>
+						</tr>
+					
+					</table>
+				</div>
+			</div>
+
+			<div class="postbox">
+				<h3 class='hndle'><span><?php _e('Google Calendar API Settings - BETA', 'appointments') ?></span></h3>
+				<div class="inside">
+				<?php _e( 'Important Note: Google Calendar API for Appointments+ is in Beta stage, because as of January 2013, Google itself does not officially list Google Calendar in its supported "Service Accounts" which this plugin needs. However, we tested it on several websites and saw that it is working. There may be some restrictions by Google that we may not know. Use this option carefully and please give us feedback about the results.', 'appointments') ?> 
+					<table class="form-table">
+
+						<tr valign="top">
+							<th scope="row" ><?php _e('Allow Service Providers for Google Calendar API Integration', 'appointments')?></th>
+							<td colspan="2">
+							<select name="gcal_api_allow_worker">
+							<option value="no" <?php if ( @$this->options['gcal_api_allow_worker'] != 'yes' ) echo "selected='selected'"?>><?php _e('No', 'appointments')?></option>
+							<option value="yes" <?php if ( @$this->options['gcal_api_allow_worker'] == 'yes' ) echo "selected='selected'"?>><?php _e('Yes', 'appointments')?></option>
+							</select>
+							<br />
+							<span class="description"><?php _e('Whether you let your service providers to integrate with their own Google Calendar account using their profile page. Note: Each of them will need to set up their accounts following the steps as listed in Instructions below (will also be shown in their profile pages) and you will need to upload their key files yourself using FTP.', 'appointments') ?></span>
+							</td>
+						</tr>
+						
+						<tr valign="top">
+							<th scope="row" ><?php _e('Appointments will be sent to Google Calendar for', 'appointments')?></th>
+							<td colspan="2">
+							<select name="gcal_api_scope">
+							<option value="all" <?php if ( @$this->options['gcal_api_scope'] != 'general' ) echo "selected='selected'"?>><?php _e('All', 'appointments')?></option>
+							<option value="no_preference" <?php if ( @$this->options['gcal_api_scope'] == 'no_preference' ) echo "selected='selected'"?>><?php _e('No preference case', 'appointments')?></option>
+							</select>
+							<br />
+							<span class="description"><?php _e('If you select "All", any appointment made from this website will be sent to the selected calendar. If you select "No preference case", only appointments which do not have an assigned service provider will be sent.', 'appointments') ?></span>
+							</td>
+						</tr>
+							
+					<?php $this->display_settings(); ?>
+					
+					</table>
+				</div>
+			</div>
+			
+				<input type="hidden" name="action_api" value="save_general" />
+				<?php wp_nonce_field( 'update_api_settings', 'api_nonce' ); ?>
+				<p class="submit">
+				<input type="submit" class="button-primary" value="<?php _e('Save Settings', 'appointments') ?>" />
+				</p>
+			
+			</form>
+		
+		</div>
+	<?php
+	}
+
+	/**
+	 * Displays nag
+	 * @param worker_id: Check and display this for the user profile page
+	 */
+	function display_nag( $worker_id=0 ) {
+		$error = false;
+		$message = '';		
+		if ( isset( $_GET['gcal_api_test'] ) && 1 == $_GET['gcal_api_test'] ) {
+			if ( $result = $this->is_not_suitable( $worker_id ) ) {
+				$message .= $result;
+				if ( __('Your server installation meets requirements.','appointments') != $result )
+					$error = true;
+			}
+			else {
+				// Insert a test event
+				$result = $this->insert_event( 0, true, $worker_id );
+				if ( $result )
+					$message .= __('Test is successful. Please REFRESH your Google Calendar and check that test appointment has been saved.','appointments');
+				else {
+					$message .= Google_ServiceException::getErrors();
+					$error = true;
+				}
+			}
+		}
+		if ( isset( $_GET['gcal_import_now'] ) && 1 == $_GET['gcal_import_now'] ) {
+			$result = $this->import_and_update_events( $worker_id );
+			if ( $result )
+				$message .= $result;
+			else
+				$message .= __('No future events are found in your Google calendar. Thus no events are imported and no updates and deletions made.','appointments');
+		}
+		
+		if ( $message )
+			$this->show_message( $message, $error );
+			
+		if ( isset( $_GET['gcal_api_test_result'] ) && '' != $_GET['gcal_api_test_result'] ) {
+			$m = stripslashes(urldecode($_GET['gcal_api_test_result'] ));
+			// Get rid of unnecessary information
+			if ( strpos( $m, 'Stack trace' ) !== false ) {
+				$temp = explode( 'Stack trace', $m );
+				$m = $temp[0];
+			}
+			$this->show_message( __('The following error has been reported by Google Calendar API:<br />', 'appointments') . $m .
+				__('<br /><b>Recommendation:</b> Please double check your settings.', 'appointments'), true );
+		}
+	}
+
+	/**
+	 * Displays Google API settings
+	 * @param worker_id: Check and display this for the user profile page
+	 */
+	function display_settings( $worker_id=0 ) {
+		
+		$gcal_api_mode			= $this->get_api_mode( $worker_id );
+		$gcal_service_account	= $this->get_service_account( $worker_id );
+		$gcal_key_file			= $this->get_key_file( $worker_id );
+		$gcal_selected_calendar	= $this->get_selected_calendar( $worker_id );
+		
+		$this->instructions();
+		
+		?>
+		<tr valign="top">
+			<th scope="row" ><?php _e('Integration Mode', 'appointments')?></th>
+			<td colspan="2">
+			<select name="gcal_api_mode">
+			<option value="none" ><?php _e('Integration disabled', 'appointments')?></option>
+			<option value="app2gcal" <?php if ( $gcal_api_mode == 'app2gcal' ) echo "selected='selected'"?>><?php _e('A+ -> GCal (Only export appointments)', 'appointments')?></option>
+			<option value="sync" <?php if ( $gcal_api_mode == 'sync' ) echo "selected='selected'"?>><?php _e('A+ <-> GCal (Synchronization)', 'appointments')?></option>
+			</select>
+			<br />
+			<span class="description"><?php _e('Select method of integration. A+ -> GCal setting sends appointments to your selected Google calendar, but events in your Google Calendar account are not imported to Appointments+ and thus they do not reserve your available working times. A+ <-> GCal setting works in both directions. This synchronization is not immediate; it requires at least some traffic to your website and not handled less than 10 minutes intervals. To update it manually use "Import and Update Events Now" link which is only visible if the settings let it so.', 'appointments') ?></span>
+			</td>
+		</tr>
+		
+		<?php if ( 'sync' == $gcal_api_mode && $gcal_service_account && $gcal_key_file && $gcal_selected_calendar ) {
+			
+		  ?>
+		 <tr>
+			<th scope="row">&nbsp;</th>
+			<td>
+			<?php print "<a href='".add_query_arg( array( 'gcal_import_now'=>1,'gcal_api_test'=>false, 'gcal_api_test_result'=>false) )."'>Import and Update Events Now</a>"; ?>
+			<br />
+			<span class="description"><?php _e('Clicking this link will manually import and update your Events from the selected calendar without waiting for 10 minutes. Note: Past events are never imported.', 'appointments') ?></span>
+			</td>
+		</tr>
+			<?php  
+		}
+		?>
+		<tr>
+			<th scope="row"><?php _e('Key file name', 'appointments') ?></th>
+			<td>
+			<input value="<?php echo $gcal_key_file; ?>" size="90" name="gcal_key_file" type="text" />
+			<br />
+			<span class="description"><?php _e('Enter key file name here without extention, e.g. ab12345678901234567890-privatekey', 'appointments') ?></span>
+			</td>
+		</tr>
+		
+		<tr>
+			<th scope="row"><?php _e('Service account email address', 'appointments') ?></th>
+			<td>
+			<input value="<?php echo $gcal_service_account; ?>" size="90" name="gcal_service_account" type="text" />
+			<br />
+			<span class="description"><?php _e('Enter Service account email address here, e.g. 1234567890@developer.gserviceaccount.com', 'appointments') ?></span>
+			</td>
+		</tr>
+		
+		<tr>
+			<th scope="row"><?php _e('Calendar to be used', 'appointments') ?></th>
+			<td>
+			<input value="<?php echo $gcal_selected_calendar; ?>" size="90" name="gcal_selected_calendar" type="text" />
+			<br />
+			<span class="description"><?php _e('Enter the ID of the Google calendar in which your appointments will be saved, e.g. abcdefg1234567890@group.calendar.google.com.','appointments') ?></span>
+			</td>
+		</tr>
+		
+		<?php if ( $gcal_service_account && $gcal_key_file && $gcal_selected_calendar ) {
+			
+		  ?>
+		 <tr>
+			<th scope="row">&nbsp;</th>
+			<td>
+			<?php print "<a href='".add_query_arg( array( 'gcal_api_test'=>1, 'gcal_api_test_result'=>false, 'gcal_api_pre_test'=>false) )."'>" . __('Test Connection', 'appointments' ) . "</a>"; ?>
+			<br />
+			<span class="description"><?php _e('Clicking this link will attempt to connect your GCal account and write a sample appointment which lasts 30 minutes and starts 10 minutes after your current server time. If there are some setting or connection errors, you will be informed about them.', 'appointments') ?></span>
+			</td>
+		</tr>
+			<?php  
+		}
+	}
+
+	/**
+	 * Display instructions for setup
+	 */
+	function instructions( ) {
+		  ?>
+		 <tr>
+			<th scope="row"><?php _e('Instructions', 'appointments') ?></th>
+			<td>
+			<?php _e('To set up Google Calendar API, please click the "i" icon and carefully follow these steps:', 'appointments') ?>
+			&nbsp;&nbsp;<a href="javascript:void(0)" class="info-button" title="<?php _e('Click to toggle instructions', 'appointments')?>"><img src="<?php echo $this->plugin_url . '/images/information.png'?>" alt="" /></a>
+			<div class="api-instructions" style="display:none">
+			<?php printf( __('Tip: There is a video tutorial showing these steps %s.', 'appointments'), '<a href="http://youtu.be/hul60oJ1Eiw" target="_blank">' . __('here', 'appointments'). '</a>') ?>
+				<ul style="list-style-type:decimal;">
+				<li>
+				<?php printf( __('Google Calendar API requires php V5.3+ and some php extensions. Click this link to check if your server installation meets those requirements: %s', 'appointments'), "<a href='".add_query_arg( array( 'gcal_api_test'=>1, 'gcal_api_test_result'=>false, 'gcal_api_pre_test'=>1) )."'>" . __('Check Requirements', 'appointments' ) . "</a>") ?>
+				</li>
+				
+				<li>
+				<?php printf( __('Go to Google apis console by clicking %s. Login to your Google account if you are not already logged in.', 'appointments'), '<a href="https://code.google.com/apis/console/" target="_blank">https://code.google.com/apis/console/</a>') ?>
+				</li>
+				
+				<li>
+				<?php _e('Create a new project using the left side pane. Name the project as Appointments+', 'appointments') ?>
+				</li>
+				
+				<li>
+				<?php _e('Click "Services" from left side pane and set "Calendar API" as ON.', 'appointments') ?>
+				</li>
+				
+				<li>
+				<?php _e('Click "API Access" from left side pane.', 'appointments') ?>
+				</li>
+				
+				<li>
+				<?php _e('Click "Create an OAuth 2.0 Client ID" button.', 'appointments') ?>
+				</li>
+				
+				<li>
+				<?php _e('Enter a Product Name, e.g. A+, inside the opening pop-up. Click Next.', 'appointments') ?>
+				</li>
+				
+				<li>
+				<?php _e('Select "Service account" under Client ID Settings in the new pop-up.', 'appointments') ?>
+				</li>
+				
+				<li>
+				<?php _e('Click "create Client ID". Getting the result may take a few seconds.', 'appointments') ?>
+				</li>
+				
+				<li>
+				<?php _e('Click "Download private key" button in the opening pop-up.', 'appointments') ?>
+				</li>
+				
+				<li>
+				<?php printf( __('Using your FTP client program, copy this key file under %s folder. This file is required as you will grant access to your Google Calendar account even if you are not online. So this file serves as a proof of your consent to access to your Google calendar account. Note: This file cannot be uploaded in any other way. If you do not have FTP access, ask the website admin to do it for you.', 'appointments'), $this->plugin_dir .'/includes/gcal/key/' ) ?>
+				</li>
+				
+				<li>
+				<?php  _e('Enter the name of the key file to "Key file name" setting of Appointments+. Exclude the extention .p12.', 'appointments') ?>
+				</li>
+				
+				<li>
+				<?php  _e('Copy "Email address" setting of Google apis console and paste it to "Service account email address" setting of Appointments+.', 'appointments') ?>
+				</li>
+				
+				<li>
+				<?php  printf(__('Open your Google Calendar by clicking this link: %s', 'appointments'), '<a href="https://www.google.com/calendar/render" target="_blank">https://www.google.com/calendar/render</a>') ?>
+				</li>
+				
+				<li>
+				<?php  _e('Create a new Calendar by selecting "my Calendars > Create new calendar" on left side pane.', 'appointments') ?>
+				</li>
+				
+				<li>
+				<?php  _e('Give a name to the new calendar, e.g. Appointments test calendar. <b>Check that Calendar Time Zone setting matches with time zone setting of your WordPress website.</b> Otherwise there will be a time shift.', 'appointments') ?>
+				</li>
+				
+				<li>
+				<?php  _e('Paste already copied "Email address" setting of Google apis console to "Person" field under "Share with specific person".', 'appointments') ?>
+				</li>
+				
+				<li>
+				<?php  _e('Set "Permission Settings" of this person as "make changes to events".', 'appointments') ?>
+				</li>
+				
+				<li>
+				<?php  _e('Click "Add Person".', 'appointments') ?>
+				</li>
+				
+				<li>
+				<?php  _e('Click "Create Calendar".', 'appointments') ?>
+				</li>
+				
+				<li>
+				<?php  _e('Select the created calendar and click "Calendar settings".', 'appointments') ?>
+				</li>
+				
+				<li>
+				<?php  _e('Copy "Calendar ID" value on Calendar Address row.', 'appointments') ?>
+				</li>
+				
+				<li>
+				<?php  _e('Paste this value to "Calendar to be used" field of Appointments+ settings.', 'appointments') ?>
+				</li>
+				
+				<li>
+				<?php  _e('Select the desired Integration mode: A+->GCal or A+<->GCal.', 'appointments') ?>
+				</li>
+				
+				<li>
+				<?php  _e('Click "Save Settings" on Appointments+ settings.', 'appointments') ?>
+				</li>
+				
+				<li>
+				<?php  _e('After these stages, you have set up Google Calendar API. To test the connection, click the "Test Connection" link which should be visible after you clicked save settings button.', 'appointments') ?>
+				</li>
+				
+				<li>
+				<?php  _e('If you get a success message, you should see a test event inserted to the Google Calendar and you are ready to go. If you get an error message, double check your settings.', 'appointments') ?>
+				</li>
+				
+			</ul>
+			</div>
+			</td>
+		</tr>
+		<script type="text/javascript">
+		jQuery(document).ready(function($){
+			$(".info-button").click(function(){
+				$(".api-instructions").toggle('fast');
+			});
+		});
+		</script>
+			<?php  
+	}
+	/**
+	 * Show results of the test
+	 * @param error: If this is an error message set as true
+	 */
+	function show_message( $message, $error=false ) {
+		if ( $error )
+			$class = 'error';
+		else
+			$class = 'updated';
+		echo '<div class="'.$class.'"><p>' .
+				sprintf( __('<b>[Appointments+]</b> %s', 'appointments'), $message ) .
+			'</p></div>';
+	}
+
+	/**
+	 * Save admin settings
+	 */
+	function save_settings() {
+		global $appointments;
+		if ( isset($_POST["action_api"]) && !wp_verify_nonce($_POST['api_nonce'],'update_api_settings') ) {
+			add_action( 'admin_notices', array( $appointments, 'warning' ) );
+			return;
+		}
+		
+		if ( !isset($_POST["action_api"]) || 'save_general' != $_POST["action_api"] ) {
+			return;
+		}
+		
+		if (!current_user_can('manage_options')) {
+			wp_die( __('You do not have sufficient permissions to access this page.','appointments') );
+		}
+		
+		$options["gcal"]					= $_POST["gcal"];
+		$options["gcal_same_window"]		= isset( $_POST["gcal_same_window"] );
+		$options["gcal_location"]			= stripslashes( @$_POST["gcal_location"] );
+		
+		$options['gcal_api_allow_worker']	= $_POST['gcal_api_allow_worker'];
+		$options['gcal_api_scope']			= $_POST['gcal_api_scope'];
+		$options['gcal_api_mode']			= $_POST['gcal_api_mode'];
+		$options['gcal_service_account']	= trim( $_POST['gcal_service_account'] );
+		$options['gcal_key_file']			= trim( str_replace( '.p12', '', $_POST['gcal_key_file'] ) );
+		$options['gcal_selected_calendar']	= $_POST['gcal_selected_calendar'];
+		
+		$this->options = array_merge( $this->options, $options );
+		
+		if ( update_option('appointments_options', $this->options )  ) {
+			add_action( 'admin_notices', array( $appointments, 'saved' ) );
+			$appointments->options = $this->options;
+		}
+	}
+
+	/**
+	 * Return GCal API mode (none, app2gcal or sync )
+	 * @param worker_id: Optional worker ID whose data will be restored
+	 * @return string
+	 */
+	function get_api_mode( $worker_id=0 ) {
+		if ( !$worker_id ) {
+			if ( isset( $this->options['gcal_api_mode'] ) )
+				return $this->options['gcal_api_mode'];
+			else
+				return '';
+		}
+		else
+			return get_user_meta( $worker_id, 'app_api_mode', true );
+	}
+
+	/**
+	 * Return GCal service account
+	 * @param worker_id: Optional worker ID whose data will be restored
+	 * @return string
+	 */
+	function get_service_account( $worker_id=0 ) {
+		if ( !$worker_id ) {
+			if ( isset( $this->options['gcal_service_account'] ) )
+				return $this->options['gcal_service_account'];
+			else
+				return '';
+		}
+		else
+			return get_user_meta( $worker_id, 'app_service_account', true );
+	}
+
+	/**
+	 * Return GCal key file name without the extension
+	 * @param worker_id: Optional worker ID whose data will be restored
+	 * @return string
+	 */
+	function get_key_file( $worker_id=0 ) {
+		if ( !$worker_id ) {
+			if ( isset( $this->options['gcal_key_file'] ) )
+				return $this->options['gcal_key_file'];
+			else
+				return '';
+		}
+		else
+			return get_user_meta( $worker_id, 'app_key_file', true );
+	}
+
+	/**
+	 * Return GCal selected calendar ID
+	 * @param worker_id: Optional worker ID whose data will be restored
+	 * @return string
+	 */
+	function get_selected_calendar( $worker_id=0 ) {
+		if ( !$worker_id ) {
+			if ( isset( $this->options['gcal_selected_calendar'] ) )
+				return $this->options['gcal_selected_calendar'];
+			else
+				return '';
+		}
+		else
+			return get_user_meta( $worker_id, 'app_selected_calendar', true );
+	}
+
+	/**
+	 * Checks if php version and extentions are correct
+	 * @param worker_id: Optional worker ID whose account is to be checked
+	 * @return string (Empty string means suitable)
+	 */
+	function is_not_suitable( $worker_id=0 ) {
+	
+		if ( version_compare( $this->db_version, '1.2.0', '<' ) )
+			return __('You have to update the Appointments+ tables. To do so, deactivate and reactivate the plugin.','appointments');
+
+		if ( version_compare(PHP_VERSION, '5.3.0', '<') )
+			return __('Google PHP API Client requires at least PHP 5.3','appointments');
+			
+		// Disabled for now
+		if ( false && memory_get_usage() < 31000000 )
+			return sprintf( __('Google PHP API Client requires at least 32 MByte Server RAM. Please check this link how to increase it: %s','appointments'), '<a href="http://codex.wordpress.org/Editing_wp-config.php#Increasing_memory_allocated_to_PHP" target="_blank">'.__('Increasing_memory_allocated_to_PHP','appointments').'</a>');
+
+		if (!function_exists('curl_init'))
+			return __('Google PHP API Client requires the CURL PHP extension','appointments' );
+
+		if (!function_exists('json_decode'))
+			return __('Google PHP API Client requires the JSON PHP extension','appointments');
+
+		if ( !function_exists('http_build_query'))
+			return __('Google PHP API Client requires http_build_query()','appointments');
+			
+		// Dont continue further if this is pre check	
+		if ( isset( $_GET['gcal_api_pre_test'] ) && 1== $_GET['gcal_api_pre_test'] )
+			return __('Your server installation meets requirements.','appointments');
+			
+		if ( !file_exists( $this->plugin_dir . '/includes/gcal/key/'. $this->get_key_file( $worker_id ) . '.p12' ) )
+			return __('Key file does not exist','appointments');
+		
+		return '';
+	}
+
+	
+	/**
+	 * Checks for settings and prerequisites
+	 * @param worker_id: Optional worker ID whose account is to be checked
+	 * @return bool
+	 */
+	function is_active( $worker_id=0 ) {
+	
+		// If integration is disabled, nothing to do
+		if ( 'none' == $this->get_api_mode( $worker_id ) )
+			return false;
+	
+		if ( $this->is_not_suitable( $worker_id ) )
+			return false;
+
+		if ( $this->get_key_file( $worker_id ) &&  $this->get_service_account( $worker_id ) && $this->get_selected_calendar( $worker_id ) )
+			return true;
+			
+		// All other cases are not allowed
+		return false;
+	}
+	
+	/**
+	 * Connects to GCal API
+	 */
+	function connect( $worker_id=0 ) {
+		if ( !$this->is_active( $worker_id ) )
+			return false;
+		
+		// Just in case
+		require_once $this->plugin_dir . '/includes/gcal/Google_Client.php';
+			
+		$this->client = new Google_Client();
+		$this->client->setApplicationName("Appointments+");
+		$this->client->setUseObjects(true);
+		$key = @file_get_contents( $this->plugin_dir . '/includes/gcal/key/'. $this->get_key_file( $worker_id ) . '.p12' );
+		$this->client->setAssertionCredentials(new Google_AssertionCredentials(
+			$this->options['gcal_service_account'],
+			array('https://www.googleapis.com/auth/calendar'),
+			$key)
+		);
+
+		$this->service = new Google_CalendarService($this->client);
+		
+		return true;
+	}
+
+	/**
+	 * Creates a Google Event object and set its parameters
+	 * @param app: Appointment object to be set as event 
+	 */
+	function set_event_parameters( $app ) {
+		global $appointments;
+		$summary = sprintf( __('%s Appointment', 'appointments'), $appointments->get_service_name( $app->service ) );
+
+		if ( isset( $this->options["gcal_location"] ) && '' != trim( $this->options["gcal_location"] ) )
+			$location = $this->options["gcal_location"];
+		else
+			$location = get_bloginfo( 'description' );
+		
+		// Find time difference from Greenwich as GCal asks UTC
+		if ( !current_time('timestamp') )
+			$tdif = 0;
+		else
+			$tdif = current_time('timestamp') - time();
+
+		$start = new Google_EventDateTime();
+		$start->setDateTime( date( "Y-m-d\TH:i:s\Z", strtotime($app->start) - $tdif ) );
+		
+		$end = new Google_EventDateTime();
+		$end->setDateTime( date( "Y-m-d\TH:i:s\Z", strtotime($app->end) - $tdif ) );
+		
+		// An email is always required
+		if ( !$app->email )
+			$email = $appointments->get_worker_email( $app->worker );
+		else
+			$email = $app->email;
+		if ( !$email ) {	
+			global $current_site;
+			$email = get_option('admin_email');
+			if ( !$email )
+				$admin_email = 'admin@' . $current_site->domain;
+		}
+			
+		$attendee1 = new Google_EventAttendee();
+		$attendee1->setEmail( $email );
+		$attendees = array($attendee1);
+
+		$this->event = new Google_Event( );
+		$this->event->setSummary( $summary );
+		$this->event->setLocation( $location );
+		$this->event->setStart( $start );
+		$this->event->setEnd( $end );
+		// TODO: make note customizable 
+		$this->event->setDescription( $app->note );
+		$this->event->attendees = $attendees;
+	}
+
+	/**
+	 * Handle insertion of events depending on settings
+	 * @param app_id: Appointment ID to be inserted
+	 */
+	function insert( $app_id ) {
+		global $appointments;
+		$app = $appointments->get_app( $app_id );
+		$worker_id = $app->worker;
+		// No preference case
+		if ( !$worker_id ) {
+			if ( 'none' != $this->get_api_mode( ) )
+				$this->insert_event( $app_id );
+		}
+		else {
+			if ( isset( $this->options['gcal_api_allow_worker'] ) && 'yes' == $this->options['gcal_api_allow_worker'] )
+				$this->insert_event( $app_id, false, $worker_id );
+			// Add this to general calendar if selected so
+			if ( isset( $this->options['gcal_api_scope'] ) && 'all' == $this->options['gcal_api_scope'] )
+				$this->insert_event( $app_id );
+		}
+	}
+	
+	/**
+	 * Inserts an appointment to the selected calendar as event
+	 * @param app_id: Appointment ID to be inserted
+	 * @test: Insert a test appointment
+	 */
+	function insert_event( $app_id, $test=false, $worker_id=0 ) {
+			
+		if ( !$this->connect( $worker_id ) )
+			return false;
+
+		global $appointments, $wpdb;
+		if ( $test ) {
+			$app = new stdClass();
+			$app->start = date( 'Y-m-d H:i:s', $this->local_time + 600 );
+			$app->end = date( 'Y-m-d H:i:s', $this->local_time + 2400 );
+			$app->service = $appointments->get_first_service_id();
+			global $current_site;
+			$admin_email = get_option('admin_email');
+			if ( !$admin_email )
+				$admin_email = 'admin@' . $current_site->domain;
+			$app->email = $admin_email;
+			$app->note = __('This is a test appointment inserted by Appointments+','appointments');
+		}
+		else
+			$app = $appointments->get_app( $app_id );
+		
+		// Create Event obeject and set parameters
+		$this->set_event_parameters( $app );
+		
+		// Insert event
+		$createdEvent = $this->service->events->insert(  $this->options['gcal_selected_calendar'], $this->event );
+		
+		// Write Event ID to database
+		$gcal_ID = $createdEvent->getId();
+		if ( $gcal_ID && !$test )
+			$wpdb->update( $this->app_table, array( 'gcal_ID' => $gcal_ID, 'gcal_updated' => date ("Y-m-d H:i:s", $this->local_time ) ), array( 'ID'=>$app_id ) );
+		// Test result successful
+		if ( $gcal_ID )
+			return true;
+	}
+
+	/**
+	 * Handle update of events 
+	 * @param app_id: Appointment ID to be deleted
+	 */
+	function update( $app_id ) {
+		global $appointments;
+		$app = $appointments->get_app( $app_id );
+		$worker_id = $app->worker;
+		// Update this event from general calendar
+		$this->update_event( $app_id );
+		// Also update service provider event if we have a provider
+		if ( $worker_id )
+			$this->update_event( $app_id, $worker_id );
+	}
+
+	/**
+	 * Update event as appointment is modified
+	 * @param app_id: Appointment ID to be updated
+	 */
+	function update_event( $app_id, $worker_id=0 ) {
+		if ( !$this->connect( $worker_id ) )
+			return false;
+
+		global $appointments, $wpdb;
+		$app = $appointments->get_app( $app_id );
+		if ( $app->gcal_ID ) {
+			$this->set_event_parameters( $app );
+			
+			// Update event
+			$updatedEvent = $this->service->events->update( $this->get_selected_calendar( $worker_id ), $app->gcal_ID, $this->event );
+			// Update Time of database
+			$gcal_ID = $updatedEvent->getId();
+			if ( $gcal_ID && $gcal_ID == $app->gcal_ID )
+				$wpdb->update( $this->app_table, array( 'gcal_updated' => date ("Y-m-d H:i:s", $this->local_time ) ), array( 'ID'=>$app_id ) );
+		}
+	}
+	
+	/**
+	 * Handle deletion of events 
+	 * @param app_id: Appointment ID to be deleted
+	 */
+	function delete( $app_id ) {
+		global $appointments;
+		$app = $appointments->get_app( $app_id );
+		$worker_id = $app->worker;
+		// In any case delete this event from general calendar
+		$this->delete_event( $app_id );
+		// Also delete service provider event if we have a provider
+		if ( $worker_id )
+			$this->delete_event( $app_id, $worker_id );
+	}
+
+	/**
+	 * Delete event as appointment is either removed, completed or set as pending
+	 * @param app_id: Appointment ID to be deleted
+	 */
+	function delete_event( $app_id, $worker_id=0 ) {
+		if ( !$this->connect( $worker_id ) )
+			return false;
+		global $appointments;
+		$app = $appointments->get_app( $app_id );
+		if ( $app->gcal_ID )
+			$this->service->events->delete( $this->get_selected_calendar( $worker_id ), $app->gcal_ID );
+	}
+
+	/**
+	 * Handle import and update of all Google Calendars
+	 */
+	function import_and_update( ) {
+		global $appointments, $wpdb;
+		// Check for general
+		if ( 'sync' == $this->get_api_mode() )
+			$this->import_and_update_events();
+		// Check for providers
+		if ( isset( $this->options['gcal_api_allow_worker'] ) && 'yes' == $this->options['gcal_api_allow_worker'] ) {
+			$results = $wpdb->get_results( "SELECT user_id FROM " . $wpdb->usermeta . " WHERE app_api_mode='sync' " );
+			if ( $results ) {
+				foreach( $results as $result ) {
+					$this->import_and_update_events( $result->user_id );
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Import the list of events for the selected calendar for the worker and update them
+	 * @param worker_id: ID of the worker whose list will be gotten
+	 */
+	function import_and_update_events( $worker_id=0 ) {
+		global $appointments, $wpdb;
+		if ( !$this->connect( $worker_id ) )
+			return false;
+		// Get only future events
+		$events = $this->service->events->listEvents( $this->get_selected_calendar( $worker_id ), array('timeMin'=>date( "Y-m-d\TH:i:s\Z", $this->local_time ) ) );
+		
+		$message = $event_ids = '';
+		$updated = $inserted = $deleted = 0;
+		
+		if ( $events && is_array( $events->getItems()) ) {
+			foreach ($events->getItems() as $event) {
+				$event_id = $event->getID();
+				$event_start = $event->getStart();
+				$event_end = $event->getEnd();
+				// Service ID is not important as we will use this record for blocking our time slots only
+				$service_id = $appointments->get_first_service_id();
+				 if ( $event_id && $event_start && $event_end ) {
+					 // Add the ID to the list
+					 $event_ids .= "'". $event_id . "',";
+					 $app = $wpdb->get_row( "SELECT * FROM ". $this->app_table . " WHERE status='reserved' AND gcal_ID='".$event_id."' " );
+					 if ( $app ) {
+						// Update
+						$r1 = $wpdb->update( $this->app_table, 
+										array( 
+										'start' 		=> date( "Y-m-d H:i:s", strtotime($event_start->dateTime) ),
+										'end' 			=> date( "Y-m-d H:i:s", strtotime($event_end->dateTime) ),
+										'gcal_updated'	=> date( "Y-m-d H:i:s", $this->local_time )
+										), 
+										array('gcal_ID'=>$event_id) 
+						);
+						if ( $r1 )
+							$updated++;
+					 }
+					 else {
+						$r2 = $wpdb->insert( $this->app_table, 
+										array(
+										'start' 		=> date( "Y-m-d H:i:s", strtotime($event_start->dateTime) ),
+										'end' 			=> date( "Y-m-d H:i:s", strtotime($event_end->dateTime) ),
+										'status'		=> 'reserved', 
+										'service'		=> $service_id, 
+										'worker'		=> $worker_id,
+										'gcal_ID'		=> $event_id,
+										'gcal_updated'	=> date( "Y-m-d H:i:s", $this->local_time )
+										) 
+						);
+						if ( $r2 )
+							$inserted++;
+					}
+				}
+			}
+			if ( $event_ids ) {
+				$event_ids = "(". rtrim( $event_ids, ',' ) . ")";
+				// Delete unlisted events
+				$r3 = $wpdb->query( "DELETE FROM " . $this->app_table . " WHERE status='reserved' AND gcal_ID NOT IN " . $event_ids . " " );
+				if ( $r3 )
+					$deleted++;
+			}
+		}
+		if ( $inserted )
+			$message .= sprintf( __('%s event(s) inserted.','appointments'), $inserted ). ' ';
+		if ( $updated )
+			$message .= sprintf( __('%s event(s) updated.','appointments'), $updated ). ' ';
+		if ( $deleted )
+			$message .= sprintf( __('%s event(s) deleted.','appointments'), $deleted ). ' ';
+			
+		return $message;
+	}
+}
+}
