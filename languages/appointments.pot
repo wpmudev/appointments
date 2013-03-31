@@ -1,0 +1,4410 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Appointments+ V1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-03-31 13:07+0700\n"
+"PO-Revision-Date: 2013-03-31 13:07+0700\n"
+"Last-Translator: incsub.com <hakan@incsub.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.5.3\n"
+"X-Poedit-SearchPath-0: C:\\Users\\Hakan\\Desktop\\appointments\n"
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:654
+msgid "Our staff"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:656
+msgid "A specialist"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:712
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1131
+msgid "Not defined"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1100
+msgid "Pending"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1101
+msgid "Paid"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1102
+msgid "Confirmed"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1103
+msgid "Completed"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1104
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9215
+msgid "Reserved by GCal"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1105
+msgid "Removed"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1118
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8001
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9963
+msgid "Name"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1119
+msgid "Email"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1120
+msgid "Phone"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1121
+msgid "Address"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1122
+msgid "City"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1123
+msgid "Note"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1141
+msgid "Free"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1142
+msgid "Busy"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1143
+msgid "Not possible"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1214
+msgid "<h3>My Appointments</h3>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1249
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9477
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9979
+msgid "Provider"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1268
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9474
+msgid "Client"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1300
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9476
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10328
+msgid "Service"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1301
+msgid "Date/time"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1302
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9478
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10067
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10331
+msgid "Status"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1306
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10094
+msgid "Confirm"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1310
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1922
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5414
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10104
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10640
+msgid "Cancel"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1360
+msgid "Click to submit this appointment to your Google Calendar account"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1372
+msgid "No appointments"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1380
+msgid "Submit Confirm"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1413
+msgid "Are you sure to cancel the selected appointment?"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1427
+msgid "Selected appointment cancelled."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1433
+msgid "A connection error occurred."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1455
+msgid "Please select a service:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1456
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1576
+msgid "Show available times"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1575
+msgid "Please choose a service provider:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1615
+msgid "No preference"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1700
+msgid "More information <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1778
+msgid "Please click here to login:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1779
+msgid ""
+"Login required to make an appointment. Now you will be redirected to login "
+"page."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1786
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2880
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2883
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:3202
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:3205
+msgid "Login"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1816
+msgid "<h3>Please check the appointment details below and confirm:</h3>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1817
+msgid "Please click here to confirm this appointment"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1818
+msgid "We have received your appointment. Thanks!"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1819
+msgid "Please fill in the requested field"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1820
+msgid "Your name:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1821
+msgid "Your email:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1822
+msgid "Your phone:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1823
+msgid "Your address:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1824
+msgid "City:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1825
+msgid "Your notes:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:1826
+msgid "Access Google Calendar and submit appointment"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2076
+msgid "A connection problem occurred. Please try again."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2115
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2307
+msgid ""
+"We are sorry, but this time slot is no longer available. Please refresh the "
+"page and try another time slot. Thank you."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2118
+msgid "Service name: "
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2119
+msgid "Date and time: "
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2120
+msgid "Lasts (approx): "
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2120
+msgid "minutes"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2122
+msgid "Price: "
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2127
+msgid "Service provider: "
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2193
+msgid ""
+"You have already applied for an appointment. Please wait until you hear from "
+"us."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2331
+msgid "Appointment could not be saved. Please contact website admin."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2412
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:868
+#, php-format
+msgid "%s Appointment"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2437
+#, php-format
+msgid "Something wrong about the submitted %s"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2481
+msgid "Payment for SERVICE"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2482
+msgid "Please confirm PRICE CURRENCY payment for SERVICE"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2487
+msgid "Deposit for SERVICE"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2638
+#, php-format
+msgid ""
+"Paypal confirmation arrived, but status could not be changed for some "
+"reason. Please check appointment with ID %s"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2640
+msgid "Appointment status could not be changed"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2646
+msgid ""
+"Last transaction has been reversed. Reason: Payment has been reversed "
+"(charge back)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2655
+msgid "Last transaction has been reversed. Reason: Payment has been refunded"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2664
+msgid "Last transaction has been reversed. Reason: Payment Denied"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2675
+msgid "Customer did not include a confirmed shipping address"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2676
+msgid "Funds not captured yet"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2677
+msgid "eCheck that has not cleared yet"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2678
+msgid "Payment waiting for aproval by service provider"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2679
+msgid "Payment waiting for service provider to handle multi-currency process"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2680
+msgid "Customer did not register or confirm his/her email yet"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2681
+msgid "Waiting for service provider to upgrade the PayPal account"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2682
+msgid "Waiting for service provider to verify his/her PayPal account"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2686
+msgid "Last transaction is pending. Reason: "
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2759
+msgid "Next Week"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2760
+msgid "Previous Week"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2767
+msgid "Next Month"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2768
+msgid "Previous Month"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2810
+msgid "<h3>Our schedule for START</h3>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2811
+msgid "Click a free day to apply for an appointment."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:2812
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:3137
+msgid ""
+"You need to login to make an appointment. Please click here to register/"
+"login: LOGIN_PAGE"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:3135
+msgid "<h3>Our schedule from START to END</h3>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:3136
+msgid "Click on a free time slot to apply for an appointment."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:3336
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:3338
+msgid " "
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:3345
+msgid "Sunday"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:3346
+msgid "Monday"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:3347
+msgid "Tuesday"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:3348
+msgid "Wednesday"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:3349
+msgid "Thursday"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:3350
+msgid "Friday"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:3351
+msgid "Saturday"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:3357
+msgid "Su"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:3358
+msgid "Mo"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:3359
+msgid "Tu"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:3360
+msgid "We"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:3361
+msgid "Th"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:3362
+msgid "Fr"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:3363
+msgid "Sa"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4188
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:603
+msgid "SERVICE Appointment"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4195
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:589
+msgid ""
+"Client Name: CLIENT\n"
+"Service Name: SERVICE\n"
+"Service Provider Name: SERVICE_PROVIDER\n"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4211
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5967
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6014
+#, php-format
+msgid "Client %s cancelled appointment with ID: %s"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4225
+#, php-format
+msgid "Service Provider %s manually confirmed appointment with ID: %s"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4284
+#, php-format
+msgid "%s edited his working hours."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4315
+msgid "Appointments+"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4319
+msgid "My Name"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4326
+msgid "My email for A+"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4333
+msgid "My Phone"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4340
+msgid "My Address"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4347
+msgid "My City"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4355
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4560
+msgid "My Appointments"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4366
+msgid "Are you sure to cancel the selected appointment(s)?"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4377
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4562
+msgid "My Appointments as Provider"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4388
+msgid "Are you sure to confirm the selected appointment(s)?"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4418
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4659
+msgid "My Working Hours"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4424
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4661
+msgid "My Break Hours"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4430
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4664
+msgid "My Exceptional Working Days"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4436
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4668
+msgid "My Holidays"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4451
+msgid "Appointments+ Google Calendar API"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4550
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6343
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9207
+msgid "Appointments"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4575
+msgid "Appointments Settings"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4674
+msgid "Save Changes"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4762
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:4914
+msgid "Choose Option &raquo;"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5409
+msgid "Login with Facebook"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5410
+msgid "Login with Twitter"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5411
+msgid "Login with Google+"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5412
+msgid "Login with WordPress"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5413
+msgid "Submit"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5415
+msgid "Please, wait..."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5416
+msgid "You are now logged in"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5417
+msgid "Login error. Please try again."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5574
+msgid "Confirmation of your Appointment"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5576
+msgid "Reminder for your Appointment"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5632
+#, php-format
+msgid "Confirmation message sent to %s for appointment ID:%s"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5646
+#, php-format
+msgid ""
+"A new appointment has been made on %s. Below please find a copy of what has "
+"been sent to your client:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5651
+msgid "New Appointment"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5680
+msgid "An appointment has been cancelled"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5681
+#, php-format
+msgid ""
+"Appointment with ID %s has been cancelled by the client. You can see it "
+"clicking this link: %s"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5684
+msgid "An appointment requires your confirmation"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5685
+#, php-format
+msgid ""
+"The new appointment has an ID %s and you can edit it clicking this link: %s"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5697
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5720
+#, php-format
+msgid "Notification message sent to %s for appointment ID:%s"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5707
+#, php-format
+msgid "Cancelled appointment has an ID %s for %s."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5710
+#, php-format
+msgid ""
+"The new appointment has an ID %s for %s and you can confirm it using your "
+"profile page."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5777
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5855
+#, php-format
+msgid "Reminder message sent to %s for appointment ID:%s"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:5822
+msgid ""
+"You are receiving this reminder message for your appointment as a provider. "
+"The below is a copy of what may have been sent to your client:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6010
+msgid ""
+"There is an issue with this appointment. Please refresh page and try again. "
+"If problem persists, please contact website admin."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6019
+msgid ""
+"Appointment could not be cancelled. Please refresh the page and try again."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6023
+msgid "Cancellation of appointments is disabled. Please contact website admin."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6179
+msgid "Javascript error on : "
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6181
+#, php-format
+msgid ""
+"<b>[Appointments+]</b> You have at least one javascript error on %s.\n"
+"\t\t\t\t<br />Error message: %s<br />File: %s<br />Line: %s"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6233
+msgid "<b>[Appointments+]</b> You must define at least once service."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6241
+msgid ""
+"<b>[Appointments+]</b> One of your services has a duration smaller than time "
+"base. Please visit Services tab and after making your corrections save new "
+"settings."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6248
+msgid ""
+"<b>[Appointments+]</b> One of your services is not divisible by the time "
+"base. Please visit Services tab and after making your corrections save new "
+"settings."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6255
+msgid ""
+"<b>[Appointments+]</b> One of your services has a duration greater than 24 "
+"hours. Appointments+ does not support services exceeding 1440 minutes (24 "
+"hours). "
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6266
+msgid ""
+"<b>[Appointments+]</b> One of your services does not have a service provider "
+"assigned. Delete services you are not using."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6267
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6288
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6307
+msgid "Dismiss this notice for this session"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6267
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6288
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6307
+#: C:\Users\Hakan\Desktop\appointments/includes/pointer-tutorials.php:429
+#: C:\Users\Hakan\Desktop\appointments/includes/pointer-tutorials.php:448
+msgid "Dismiss"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6276
+msgid ""
+"<b>[Appointments+]</b> Appointments+ database tables need to be updated. "
+"Please deactivate and reactivate the plugin (DO NOT DELETE the plugin). You "
+"will not lose any saved information."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6287
+msgid ""
+"<b>[Appointments+]</b> Either php curl is not installed or HTTPS wrappers "
+"are not enabled. Login with Google+ will not work."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6295
+msgid ""
+"<b>[Appointments+]</b> More than one instance of services, service "
+"providers, confirmation, Paypal or login shortcodes on the same page may "
+"cause problems.</p>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6306
+msgid ""
+"<b>[Appointments+]</b> Confirmation shortcode [app_confirmation] is always "
+"required to complete an appointment."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6322
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6326
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6330
+msgid "Notice dismissed."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6344
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10293
+msgid "Transactions"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6345
+msgid "Settings"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6824
+#, php-format
+msgid "Appointment(s) with id(s):%s deleted by user:%s"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6845
+#, php-format
+msgid "Status of Appointment(s) with id(s):%s changed to %s by user:%s"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6965
+msgid "Cache cleared."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6973
+msgid "Settings saved and cache cleared."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6980
+msgid "Settings saved."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6987
+msgid "Selected record(s) deleted."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:6994
+msgid "Selected record(s) updated."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7001
+msgid "You are not authorised to do this."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7010
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:537
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7017
+msgid "Appointments+ Settings"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7023
+msgid "Google Calendar"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7024
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7889
+msgid "Working Hours"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7025
+msgid "Exceptions"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7026
+msgid "Services"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7027
+msgid "Service Providers"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7028
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8411
+msgid "Shortcodes"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7029
+msgid "Logs"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7030
+msgid "FAQ"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7039
+msgid "General"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7054
+msgid ""
+"Appointments+ plugin makes it possible for your clients to apply for "
+"appointments from the front end or for you to enter appointments from "
+"backend. You can define services with different durations and assign service "
+"providers to any of them. In this page, you can set settings which will be "
+"valid in general."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7060
+msgid "Time Settings"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7065
+msgid "Time base (minutes)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7078
+msgid ""
+"Minimum time that will be effective for durations, appointment and schedule "
+"intervals. Service durations can only be set as multiples of this value. "
+"Default: 30."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7082
+msgid "Additional time base (minutes)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7084
+msgid ""
+"If the above time bases do not fit your business, you can add a new one, e."
+"g. 240. Note: After you save this additional time base, you must select it "
+"using the above setting. Note: Minimum allowed time base setting is 10 "
+"minutes."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7088
+msgid "Admin side time base (minutes)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7090
+msgid ""
+"This setting may be used to provide flexibility while manually setting and "
+"editing the appointments. For example, if you enter here 15, you can "
+"reschedule an appointment for 15 minutes intervals even selected time base "
+"is 45 minutes. If you leave this empty, then the above selected time base "
+"will be applied on the admin side."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7094
+msgid "Appointments lower limit (hours)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7096
+msgid ""
+"This will block time slots to be booked with the set value starting from "
+"current time. For example, if you need 2 days to evaluate and accept an "
+"appointment, enter 48 here. Default: 0 (no blocking - appointments can be "
+"made if end time has not been passed)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7100
+msgid "Appointments upper limit (days)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7102
+msgid ""
+"Maximum number of days from today that a client can book an appointment. "
+"Default: 365"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7106
+msgid "Disable pending appointments after (mins)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7108
+msgid ""
+"Pending appointments will be automatically removed (not deleted - deletion "
+"is only possible manually) after this set time and that appointment time "
+"will be freed. Enter 0 to disable. Default: 60. Please note that pending and "
+"GCal reserved appointments whose starting time have been passed will always "
+"be removed, regardless of any other setting."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7112
+msgid "Minimum time to pass for new appointment (secs)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7114
+msgid ""
+"You can limit appointment application frequency to prevent spammers who can "
+"block your appointments. This is only applied to pending appointments. Enter "
+"0 to disable. Tip: To prevent any further appointment applications of a "
+"client before a payment or manual confirmation, enter a huge number here."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7122
+msgid "Accessibility Settings"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7128
+msgid "Auto confirm"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7131
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7142
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7161
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7172
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7194
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7295
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7443
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7664
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7676
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7702
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7723
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7758
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7789
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7808
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7819
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9073
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:127
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:164
+msgid "No"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7132
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7143
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7162
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7173
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7195
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7296
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7444
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7665
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7677
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7703
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7724
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7759
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7790
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7809
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7820
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9074
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:128
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:165
+msgid "Yes"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7134
+msgid ""
+"Setting this as Yes will automatically confirm all appointment applications "
+"for no payment required case. Note: \"Payment required\" case will still "
+"require a payment."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7139
+msgid "Allow client cancel own appointments"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7145
+msgid ""
+"Whether to allow clients cancel their appointments using the link in "
+"confirmation and reminder emails or using my appointments table or for "
+"logged in users, using check boxes in their profile pages. For the email "
+"case, you will also need to add CANCEL placeholder to the email message "
+"settings below. For my appointments table, you will need to add parameter "
+"allow_cancel=\"1\" to the shortcode. Note: Admin and service provider will "
+"always get a notification email."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7150
+msgid "Appointment cancelled page"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7152
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7516
+msgid "Home page"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7153
+msgid ""
+"In case he is cancelling using the email link, the page that client will be "
+"redirected after he cancelled his appointment."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7158
+msgid "Allow service provider set working hours"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7164
+msgid ""
+"Whether you let service providers to set their working/break hours, "
+"exceptional days using their profile page or their navigation tab in "
+"BuddyPress."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7169
+msgid "Allow service provider confirm own appointments"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7175
+msgid ""
+"Whether you let service providers to confirm pending appointments assigned "
+"to them using their profile page."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7181
+msgid "Assign dummy service providers to"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7184
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8941
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9019
+msgid "None"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7186
+msgid ""
+"You can define \"Dummy\" service providers to enrich your service provider "
+"alternatives and variate your working schedules. They will behave exactly "
+"like ordinary users except the emails they are supposed to receive will be "
+"forwarded to the user you select here. Note: You cannot select another dummy "
+"user. It must be a user which is not set as dummy."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7191
+msgid "Login required"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7197
+msgid ""
+"Whether you require the client to login to the website to apply for an "
+"appointment. Plugin lets front end logins, without the need for leaving the "
+"front end appointment page."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7215
+msgid "Accept login from front end"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7218
+msgid ""
+"Enables login to website from front end using Facebook, Twitter, Google+ or "
+"Wordpress."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7223
+msgid "My website already uses Facebook"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7226
+msgid ""
+"By default, Facebook script will be loaded by the plugin. If you are already "
+"running Facebook scripts, to prevent any conflict, check this option."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7231
+msgid "Facebook App ID"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7234
+#, php-format
+msgid ""
+"Enter your App ID number here. If you don't have a Facebook App yet, you "
+"will need to create one <a href='%s'>here</a>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7239
+msgid "Twitter Consumer Key"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7242
+#, php-format
+msgid ""
+"Enter your Twitter App ID number here. If you don't have a Twitter App yet, "
+"you will need to create one <a href=\"%s\">here</a>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7247
+msgid "Twitter Consumer Secret"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7250
+msgid "Enter your Twitter App ID Secret here."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7259
+msgid "Display Settings"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7264
+msgid "Create an Appointment Page"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7267
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7619
+msgid "with"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7269
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7621
+msgid "current month's schedule"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7270
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7622
+msgid "current and next month's schedules"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7271
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7623
+msgid "current week's schedule"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7272
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7624
+msgid "current and next week's schedules"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7275
+msgid ""
+"Creates a front end Appointment page with title \"Make an Appointment\" with "
+"the selected schedule type and inserts all necessary shortcodes (My "
+"Appointments, Service Selection, Service Provider Selection, Appointment "
+"Schedule, Front end Login, Confirmation Field, Paypal Form)  inside it. You "
+"can edit, add parameters to shortcodes, remove undesired shortcodes and "
+"customize this page later."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7280
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7631
+msgid ""
+"<b>Note:</b> You already have such a page. If you check this checkbox, "
+"another page with the same title will be created. To edit existing page: "
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7281
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7284
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7632
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7635
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8036
+msgid "Click here"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7283
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7634
+msgid "To view the page:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7292
+msgid "Show Legend"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7298
+msgid "Whether to display description fields above the pagination area."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7303
+msgid "Color Set"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7306
+msgid "Preset 1"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7307
+msgid "Preset 2"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7308
+msgid "Preset 3"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7309
+msgid "Custom"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7315
+msgid "Sample:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7336
+msgid ""
+"You can select table cell colors from presets with the given samples or you "
+"can define your custom set below which is visible after you select \"Custom"
+"\"."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7362
+msgid "Custom Color Set"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7375
+msgid ""
+"If you have selected Custom color set, for each cell enter 3 OR 6-digit Hex "
+"code of the color manually without # in front or use the colorpicker."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7408
+msgid "Require these from the client:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7417
+msgid ""
+"The selected fields will be available in the confirmation area and they will "
+"be asked from the client. If selected, filling of them is mandatory (except "
+"note field)."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7422
+msgid "Additional css Rules"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7426
+msgid ""
+"You can add css rules to customize styling. These will be added to the front "
+"end appointment page only."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7435
+msgid "Payment Settings"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7440
+msgid "Payment required"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7446
+#, php-format
+msgid ""
+"Whether you require a payment to accept appointments. If selected Yes, "
+"client is asked to pay through Paypal and the appointment will be in pending "
+"status until the payment is confirmed by Paypal IPN. If selected No, "
+"appointment will be in pending status until you manually approve it using "
+"the %s unless Auto Confirm is not set as Yes."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7446
+msgid "Appointments page"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7451
+msgid "Paypal Currency"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7457
+msgid "AUD - Australian Dollar"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7458
+msgid "BRL - Brazilian Real"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7459
+msgid "CAD - Canadian Dollar"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7460
+msgid "CHF - Swiss Franc"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7461
+msgid "CZK - Czech Koruna"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7462
+msgid "DKK - Danish Krone"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7463
+msgid "EUR - Euro"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7464
+msgid "GBP - Pound Sterling"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7465
+msgid "ILS - Israeli Shekel"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7466
+msgid "HKD - Hong Kong Dollar"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7467
+msgid "HUF - Hungarian Forint"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7468
+msgid "JPY - Japanese Yen"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7469
+msgid "MYR - Malaysian Ringgits"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7470
+msgid "MXN - Mexican Peso"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7471
+msgid "NOK - Norwegian Krone"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7472
+msgid "NZD - New Zealand Dollar"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7473
+msgid "PHP - Philippine Pesos"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7474
+msgid "PLN - Polish Zloty"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7475
+msgid "SEK - Swedish Krona"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7476
+msgid "SGD - Singapore Dollar"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7477
+msgid "TWD - Taiwan New Dollars"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7478
+msgid "THB - Thai Baht"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7479
+msgid "TRY - Turkish lira"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7480
+msgid "USD - U.S. Dollar"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7491
+msgid "PayPal Mode"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7494
+msgid "Sandbox"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7495
+msgid "Live"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7501
+msgid "PayPal Merchant E-mail"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7506
+#, php-format
+msgid ""
+"Just for your information, your IPN link is: <b>%s </b>. You may need this "
+"information in some cases."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7514
+msgid "Thank You Page"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7517
+msgid ""
+"The page that client will be returned when he clicks the return link on "
+"Paypal website."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7523
+msgid "Deposit (%)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7526
+msgid ""
+"You may want to ask a certain percentage of the service price as deposit, e."
+"g. 25. Leave this field empty to ask for full price."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7531
+msgid "Deposit (fixed)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7534
+msgid ""
+"Same as above, but a fixed deposit will be asked from the client per "
+"appointment. If both fields are filled, only the fixed deposit will be taken "
+"into account."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7541
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7598
+#, php-format
+msgid "The below fields require %s plugin. "
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7546
+msgid "Don't ask advance payment from selected Membership level(s)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7549
+msgid ""
+"Below selected level(s) will not be asked for an advance payment or deposit. "
+"This does not mean that service will be free of charge for them. Such member "
+"appointments are automatically confirmed."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7554
+msgid "Discount for selected Membership level(s) (%)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7557
+msgid ""
+"Below selected level(s) will get a discount given in percent, e.g. 20. Leave "
+"this field empty for no discount. Tip: If you enter 100, service will be "
+"free of charge for these members."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7562
+msgid "Membership levels for the above selections"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7583
+msgid "No level was defined yet"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7586
+msgid "Membership plugin is not activated."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7589
+msgid ""
+"Selected level(s) will not be asked advance payment/deposit and/or will take "
+"a discount, depending on the above selections. You can select multiple "
+"levels using CTRL and SHIFT keys."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7603
+msgid "Integrate with MarketPress"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7606
+msgid ""
+"Appointments can be set as products. Any appointment shortcode added to a "
+"product page will make that page an \"Appointment Product Page\". For "
+"details, please see FAQ."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7609
+msgid "Note: MarketPress is not active"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7616
+msgid "Create an Appointment Product Page"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7627
+msgid ""
+"Same as the above \"Create an Appointment Page\", but this time appointment "
+"shortcodes will be inserted in a new Product page and page title will be "
+"\"Appointment\". This is also the product name."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7655
+msgid "Notification Settings"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7661
+msgid "Send Confirmation email"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7667
+msgid ""
+"Whether to send an email after confirmation of the appointment. Note: Admin "
+"and service provider will also get a copy as separate emails."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7673
+msgid "Send Notification to admin if confirmation is required"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7679
+msgid ""
+"You may want to receive a notification email whenever a new appointment is "
+"made from front end in pending status. This email is only sent if you do not "
+"require a payment, that is, if your approval is required. Note: Notification "
+"email is also sent to the service provider, if a provider is namely selected "
+"by the client, and \"Allow Service Provider Confirm Own Appointments\" is "
+"set as Yes."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7685
+msgid "Confirmation Email Subject"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7692
+msgid "Confirmation email Message"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7699
+msgid "Send Reminder email to the Client"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7705
+msgid "Whether to send reminder email(s) to the client before the appointment."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7711
+msgid "Reminder email Sending Time for the Client (hours)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7715
+msgid ""
+"Defines how many hours reminder will be sent to the client before the "
+"appointment will take place. Multiple reminders are possible. To do so, "
+"enter reminding hours separated with a comma, e.g. 48,24."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7720
+msgid "Send Reminder email to the Provider"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7726
+msgid ""
+"Whether to send reminder email(s) to the service provider before the "
+"appointment."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7732
+msgid "Reminder email Sending Time for the Provider (hours)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7736
+msgid "Same as above, but defines the time for service provider."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7741
+msgid "Reminder email Subject"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7748
+msgid "Reminder email Message"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7755
+msgid "Log Sent email Records"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7761
+msgid ""
+"Whether to log confirmation and reminder email records (Not the emails "
+"themselves)."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7770
+msgid ""
+"For the above email subject and message contents, you can use the following "
+"placeholders which will be replaced by their real values:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7770
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:349
+msgid "(Client's email)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7770
+msgid "(Adds a cancellation link to the email body)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7780
+msgid "Advanced Settings"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7786
+msgid "Use Built-in Cache"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7792
+msgid ""
+"Appointments+ has a built-in cache to increase performance. If you are "
+"making changes in the styling of your appointment pages, modifying shortcode "
+"parameters or having some issues while using it, disable it by selecting No."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7797
+msgid "Clear Cache"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7800
+msgid ""
+"Cache is automatically cleared at regular intervals (Default: 10 minutes) or "
+"when you change a setting. To clear it manually check this checkbox."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7805
+msgid "Allow Overwork (end of day)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7811
+msgid ""
+"Whether you accept appointments exceeding working hours for the end of day. "
+"For example, if you are working until 6pm, and a client asks an appointment "
+"for a 60 minutes service at 5:30pm, to allow such an appointment you should "
+"select this setting as Yes. Please note that this is only practical if the "
+"selected service lasts longer than the base time. Such time slots are marked "
+"as \"not possible\" in the schedule."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7816
+msgid "Allow Overwork (break hours)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7822
+msgid ""
+"Same as above, but valid for break hours. If you want to allow appointments "
+"exceeding break times, then select this as Yes."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7827
+msgid "Number of appointment records per page"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7830
+msgid ""
+"Number of records to be displayed on admin appointments page. If left empty: "
+"50"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7842
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:193
+msgid "Save Settings"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7855
+msgid ""
+"<i>Here you can define working hours and breaks for your business. When you "
+"add new service providers, their working and break hours will be set to the "
+"default schedule. Then you can edit their schedule by selecting their names "
+"from the dropdown menu below.</i>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7861
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7922
+msgid "List for:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7864
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7925
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9982
+msgid "No specific provider"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7890
+msgid "Break Hours"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7906
+msgid "Save Working Hours"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7912
+msgid ""
+"<i>Here you can define exceptional working or non working days for your "
+"business and for your service providers. You should enter holidays here. You "
+"can also define a normally non working week day (e.g. a specific Sunday) as "
+"a working day. When you add new service providers, their expections will be "
+"set to the default schedule.</i>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7943
+msgid "Exceptional working days, e.g. a specific Sunday you decided to work:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7954
+msgid "Exceptional NON working days, e.g. holidays:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7965
+msgid ""
+"Please enter each date using YYYY-MM-DD format (e.g. 2012-08-13) and "
+"separate each day with a comma. Datepick will allow entering multiple dates. "
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7974
+msgid "Save Exceptional Days"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7991
+msgid ""
+"<i>Here you should define your services for which your client will be making "
+"appointments. <b>There must be at least one service defined.</b> Capacity is "
+"the number of customers that can take the service at the same time. Enter 0 "
+"for no specific limit (Limited to number of service providers, or to 1 if no "
+"service provider is defined for that service). Price is only required if you "
+"request payment to accept appointments. You can define a description page "
+"for the service you are providing.</i>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:7993
+msgid "Add New Service"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8000
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8046
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9473
+msgid "ID"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8002
+msgid "Capacity"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8003
+msgid "Duration (mins)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8004
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9997
+msgid "Price"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8005
+msgid "Description page"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8018
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9015
+msgid "No services defined"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8028
+msgid "Save Services"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8030
+msgid "<i>Tip: To delete a service, just clear its name and save.</i>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8036
+#, php-format
+msgid ""
+"<i>Here you can optionally select your service providers, i.e. workers, and "
+"assign them to certain services. Your service providers must be users of the "
+"website. To add a new user %s. You can define additional price for them. "
+"This will be added to the price of the service. You can define a bio page "
+"for the service provider. <br />A dummy service provider is a user whose "
+"emails are redirected to another user that is set on the General tab.</i>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8038
+msgid "Add New Service Provider"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8047
+msgid "Service Provider"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8048
+msgid "Dummy?"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8049
+msgid "Additional Price"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8050
+msgid "Services Provided*"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8051
+msgid "Bio page"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8054
+msgid ""
+"* <b>You must select at least one service, otherwise provider will not be "
+"saved!</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8068
+msgid "No service providers defined"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8078
+msgid "Save Service Providers"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8080
+msgid ""
+"<i>Tip: To remove a service provider, uncheck all \"Services Provided\" "
+"selections and save.</i>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8086
+msgid "Select services"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8087
+msgid "Check all"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8088
+msgid "Uncheck all"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8089
+msgid "# selected"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8105
+msgid ""
+"Appointments+ uses shortcodes to generate output on the front end. This "
+"gives you the flexibility to customize your appointment pages using the "
+"WordPress post editor without the need for php coding. There are several "
+"parameters of the shortcodes by which your customizations can be really "
+"custom. On the other hand, if you don't set these parameters, Appointments+ "
+"will still work properly. Thus, setting parameters is fully optional. <br /"
+"><b>Important:</b> You should temporarily turn off built in cache while "
+"making changes in the parameters or adding new shortcodes."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8107
+msgid ""
+"<b>Note:</b> As default, all \"title\" parameters are wrapped with h3 tag. "
+"But of course you can override them by entering your own title text, with a "
+"different h tag, or without any tag. For example: <code>"
+"[app_monthly_schedule title=\"&lt;h4&gt;My schedule for START&lt;/h4&gt;\"]</"
+"code>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8112
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8129
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8147
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8166
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8185
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8204
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8217
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8230
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8248
+msgid "<b>Shortcode:</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8113
+msgid ""
+"<b>Description:</b> Inserts a table where client or service provider can see "
+"his upcoming appointments"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8115
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8132
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8150
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8169
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8188
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8207
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8220
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8234
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8251
+msgid "<b>Parameters:</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8117
+msgid ""
+"provider: Enter 1 if this appointment list belongs to a service provider. "
+"Default: \"0\" (client)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8118
+msgid ""
+"provider_id: Enter the user ID of the provider whose list will be displayed. "
+"If ommitted, current service provider will be displayed. Default: "
+"\"0\" (current service provider)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8119
+msgid "title: Title text. Default: \"My Appointments\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8120
+msgid ""
+"status: Which status(es) will be included. Possible values: paid, confirmed, "
+"completed, pending, removed, reserved. Default: \"paid, confirmed\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8121
+msgid ""
+"gcal: Enter 0 to disable Google Calendar button by which clients can add "
+"appointments to their Google Calendar after booking the appointment. "
+"Default: \"1\" (enabled)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8122
+msgid ""
+"order_by: Sort order of the appointments. Possible values: ID, start. "
+"Optionally DESC (descending) can be used, e.g. \"start DESC\" will reverse "
+"the order. Default: \"ID\". Note: This is the sort order as page loads. "
+"Table can be dynamically sorted by any field from front end (Some date "
+"formats may not be sorted correctly)."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8123
+msgid ""
+"allow_cancel: Enter 1 if you want to allow cancellation of appointments by "
+"the client using this table. \"Allow client cancel own appointments\" "
+"setting must also be set as Yes. Default: \"0\" (Cancellation is not "
+"allowed)."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8130
+msgid "<b>Description:</b> Creates a dropdown menu of available services"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8134
+msgid ""
+"select: Text above the select menu. Default: \"Please select a service\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8135
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8153
+msgid ""
+"show: Button text to show the results for the selected. Default: \"Show "
+"available times\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8136
+msgid ""
+"description: Selects which part of the description page will be displayed "
+"under the dropdown menu when a service is selected . Selectable values are "
+"\"none\", \"excerpt\", \"content\". Default: \"excerpt\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8137
+msgid ""
+"thumb_size: Inserts the post thumbnail if page has a featured image. "
+"Selectable values are \"none\", \"thumbnail\", \"medium\", \"full\" or a 2 "
+"numbers separated by comma representing width and height in pixels, e.g. "
+"32,32. Default: \"96,96\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8138
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8156
+msgid ""
+"thumb_class: css class that will be applied to the thumbnail. Default: "
+"\"alignleft\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8139
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8157
+msgid ""
+"autorefresh: If set as 1, Show button will not be displayed and page will be "
+"automatically refreshed as client changes selection. Note: Client cannot "
+"browse through the selections and thus check descriptions on the fly "
+"(without the page is refreshed). Default: \"0\" (disabled)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8140
+msgid ""
+"order_by: Sort order of the services. Possible values: ID, name, duration, "
+"price. Optionally DESC (descending) can be used, e.g. \"name DESC\" will "
+"reverse the order. Default: \"ID\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8141
+msgid ""
+"worker: In some cases, you may want to display services which are given only "
+"by a certain provider. In that case enter provider ID here. Note: order_by "
+"parameter will not work in combination with this one. Default: \"0\" (all "
+"defined services)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8148
+msgid ""
+"<b>Description:</b> Creates a dropdown menu of all available service "
+"providers"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8152
+msgid ""
+"select: Text above the select menu. Default: \"Please select a service "
+"provider\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8154
+msgid ""
+"description: Selects which part of the bio page will be displayed under the "
+"dropdown menu when a service provider is selected . Selectable values are "
+"\"none\", \"excerpt\", \"content\". Default: \"excerpt\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8155
+msgid ""
+"thumb_size: Inserts the post thumbnail if page has a featured image or "
+"service provider avatar. Selectable values are \"none\", \"thumbnail\", "
+"\"medium\", \"full\" or a 2 numbers separated by comma representing width "
+"and height in pixels, e.g. 32,32 in case of post thumbnail, or \"avatar\" "
+"and an optional avatar size separated by comma, e.g. \"avatar,72\". Note: If "
+"selected so, avatar is displayed even service provider does not have a bio "
+"page. Default: \"96,96\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8158
+msgid ""
+"order_by: Sort order of the service providers. Possible values: ID, name. "
+"Optionally DESC (descending) can be used, e.g. \"name DESC\" will reverse "
+"the order. Default: \"ID\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8159
+msgid ""
+"service: In some cases, you may want to force to display providers who give "
+"only a certain service. In that case enter service ID here. Default: "
+"\"0\" (list is determined by services dropdown)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8167
+msgid ""
+"<b>Description:</b> Creates a weekly table whose cells are clickable to "
+"apply for an appointment"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8171
+msgid ""
+"title: Text that will be displayed as the schedule title. Placeholders START "
+"and END will be automatically replaced by their real values. Default: \"Our "
+"schedule from START to END\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8172
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8191
+msgid ""
+"logged: Text that will be displayed after the title only to the clients who "
+"are logged in or you don't require a login. Default: \"Click on a free box "
+"to apply for an appointment.\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8173
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8192
+msgid ""
+"notlogged: Text that will be displayed after the title only to the clients "
+"who are not logged in and you require a login. LOGIN_PAGE will be replaced "
+"with your website's login page. Default: \"You need to login to make an "
+"appointment. Please click here to register/login: LOGIN_PAGE\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8174
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8193
+msgid ""
+"service: Enter service ID only if you want to force the table display the "
+"service with entered ID. Default: \"0\" (Service is selected by dropdown)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8175
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8194
+msgid ""
+"worker: Enter service provider ID only if you want to force the table "
+"display the service provider with entered ID. Default: \"0\" (Service "
+"provider is selected by dropdown)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8176
+msgid ""
+"long: If entered 1, long week days are displayed on the schedule table row, "
+"e.g. \"Saturday\" instead of \"Sa\". Default: \"0\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8177
+msgid "class: A css class name for the schedule table. Default is empty."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8178
+msgid ""
+"add: Number of weeks to add to the schedule to use for preceding weeks' "
+"schedules. Enter 1 for next week, 2 for the other week, so on. Default: "
+"\"0\" (Current week) "
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8179
+msgid ""
+"date: Normally calendar starts from the current week. If you want to force "
+"it to start from a certain date, enter that date here. Most date formats are "
+"supported, but YYYY-MM-DD is recommended. Notes: 1) This value will also "
+"affect other subsequent calendars on the same page. 2) Date value will not "
+"change starting day of week. It is sufficient to enter a date inside the "
+"week. Default: \"0\" (Current week) "
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8186
+msgid ""
+"<b>Description:</b> Creates a monthly calendar plus time tables whose free "
+"time slots are clickable to apply for an appointment"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8190
+msgid ""
+"title: Text that will be displayed as the schedule title. Placeholders START "
+"and END will be automatically replaced by their real values. Default: \"Our "
+"schedule for START\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8195
+msgid ""
+"long: If entered 1, long week days are displayed on the calendar row, e.g. "
+"\"Saturday\" instead of \"Sa\". Default: \"0\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8196
+msgid "class: A css class name for the calendar. Default is empty."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8197
+msgid ""
+"add: Number of months to add to the schedule to use for preceding months' "
+"schedules. Enter 1 for next month, 2 for the other month, so on. Default: "
+"\"0\" (Current month) "
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8198
+msgid ""
+"date: Normally calendar starts from the current month. If you want to force "
+"it to start from a certain date, enter that date here. Most date formats are "
+"supported, but YYYY-MM-DD is recommended. Notes: 1) This value will also "
+"affect other subsequent calendars on the same page. 2) It is sufficient to "
+"enter a date inside the month. Default: \"0\" (Current month) "
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8205
+msgid ""
+"<b>Description:</b> Inserts pagination codes (previous, next week or month "
+"links) and Legend area."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8209
+msgid ""
+"step: Number of weeks or months that selected time will increase or decrease "
+"with each next or previous link click. You may consider entering 4 if you "
+"have 4 schedule tables on the page. Default: \"1\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8210
+msgid ""
+"month: If entered 1, step parameter will mean month, otherwise week. In "
+"short, enter 1 for monthly schedule. Default: \"0\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8211
+msgid ""
+"date: This is only required if this shortcode resides above any schedule "
+"shortcodes. Otherwise it will follow date settings of the schedule "
+"shortcodes. Default: \"0\" (Current week or month) "
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8218
+msgid ""
+"<b>Description:</b> Inserts front end login buttons for Facebook, Twitter "
+"and Wordpress"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8222
+msgid ""
+"login_text: Text above the login buttons, proceeded by a login link. "
+"Default: \"Please click here to login:\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8223
+msgid ""
+"redirect_text: Javascript text if front end login is not set and user is "
+"redirected to login page"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8231
+msgid ""
+"<b>Description:</b> Inserts a form which displays the details of the "
+"selected appointment and has fields which should be filled by the client. "
+"<b>This shortcode is always required to complete an appointment.</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8236
+msgid ""
+"title: Text above fields. Default: \"Please check the appointment details "
+"below and confirm:\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8237
+msgid ""
+"button_text: Text of the button that asks client to confirm the appointment. "
+"Default: \"Please click here to confirm this appointment\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8238
+msgid ""
+"confirm_text: Javascript text that will be displayed after receiving of the "
+"appointment. This will only be displayed if you do not require payment. "
+"Default: \"We have received your appointment. Thanks!\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8239
+msgid ""
+"warning_text: Javascript text displayed if client does not fill a required "
+"field. Default: \"Please fill in the requested field\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8240
+msgid ""
+"name, email, phone, address, city, note: Descriptive title of the fields. e."
+"g. to ask for post code instead of address, use <code>address=\"Post code\"</"
+"code>."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8241
+msgid ""
+"gcal: Text that will be displayed beside Google Calendar checkbox. Default: "
+"\"Open Google Calendar and submit appointment \""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8249
+msgid "<b>Description:</b> Inserts Paypal Pay button and form"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8253
+msgid ""
+"item_name: Item name that will be seen on Paypal. Default: \"Payment for "
+"SERVICE\" if deposit is not asked, \"Deposit for SERVICE\" if deposit is "
+"asked"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8254
+msgid ""
+"button_text: Text that will be displayed on Paypal button. Default: \"Please "
+"confirm PRICE CURRENCY payment for SERVICE\""
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8255
+msgid ""
+"For the above Paypal parameters, you can use SERVICE, PRICE, CURRENCY "
+"placeholders which will be replaced by their real values."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8271
+msgid "There are no log records yet."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8274
+msgid "Uploads directory is not writable."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8281
+msgid "Clear Log File"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8281
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9606
+msgid "Clicking this button deletes logs saved on the server"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8311
+msgid "<b>How can I restart the tutorial?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8313
+msgid "To restart tutorial about settings click here:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8317
+msgid "Settings Tutorial Restart"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8319
+msgid "To restart tutorial about entering and editing Appointments click here:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8323
+msgid "Appointments Creation and Editing Tutorial Restart"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8328
+msgid "<b>What is the importance of Time Base and how should I set it?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8330
+msgid ""
+"<i>Time Base</i> is the most important parameter of Appointments+. It is the "
+"minimum time that you can select for your appointments. If you set it too "
+"high then you may not be possible to optimize your appointments. If you set "
+"it too low, your schedule will be too crowded and you may have difficulty in "
+"managing your appointments. You should enter here the duration of the "
+"shortest service you are providing. Please also note that service durations "
+"can only be multiples of the time base. So if you need 30 and 45 minutes "
+"services, you should select 15 minutes as the time base."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8336
+msgid ""
+"<b>I don't see the time base that I need. For example I need 240 minutes "
+"appointments. How can I do that?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8338
+msgid ""
+"You can add one more time base using <i>Additional time base</i> setting. "
+"You must select this setting in <i>time base</i> setting to be effective."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8344
+msgid "<b>What is the complete process for an appointment?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8346
+msgid ""
+"With the widest settings, client will do the followings on the front page:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8349
+msgid "Select a service"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8352
+msgid "Select a service provider"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8355
+msgid "Select a free time on the schedule"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8358
+msgid "Login (if required)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8361
+msgid ""
+"Enter the required fields (name, email, phone, address, city) and confirm "
+"the selected appointment"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8364
+msgid "Click Paypal payment button (if required)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8367
+msgid "Redirected to a Thank You page after Paypal payment"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8374
+msgid "<b>Is it necessary to have at least one service?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8376
+msgid ""
+"Yes. Appointments+ requires at least one service to be defined. Please note "
+"that a default service should have been already installed during "
+"installation. If you delete it, and no other service remains, then you will "
+"get a warning message. In this case plugin may not function properly."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8381
+msgid "<b>Is it necessary to define service providers?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8383
+msgid ""
+"No. You may as well be working by yourself, doing your own business. Plugin "
+"will work properly without any service provider, i.e worker, defined. In "
+"this case Appointments+ assumes that there is ONE service provider working, "
+"giving all the services."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8388
+msgid ""
+"<b>Is it necessary to use Services and Service Providers shortcodes?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8390
+msgid ""
+"No. If you do not use these shortcodes then your client will not be able to "
+"select a service and Appointments+ will pick the service with the smallest "
+"ID or the one selected with \"service\" parameter of the schedule shortcode. "
+"We have already noted that a service provider definition is only optional."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8395
+msgid "<b>Does Appointments+ provide some widgets?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8397
+msgid ""
+"Yes. Appointments+ has Services and Service Providers widgets which provides "
+"a list of service or service providers with links to their description/bio "
+"pages and a Monthly Calendar widget that redirects user to the selected "
+"appointment page when a free day is clicked. Note: Service and service "
+"provider items not having assigned description/bio pages are not displayed."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8402
+msgid "<b>Can I use the shortcodes in any page as I wish?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8404
+msgid ""
+"Some shortcodes have only meaning if they are used in combination with some "
+"others. For example the Services shortcode will not have a function unless "
+"you have a Schedule on the same page. They are defined as separate "
+"shortcodes so that you can customize them on your pages. Except for My "
+"Appointments and Schedule shortcodes, only one instance of a shortcode is "
+"allowed on the same page."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8409
+msgid ""
+"<b>Can I have schedules showing more than two weeks or months on the same "
+"page?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8411
+#, php-format
+msgid ""
+"Yes. Use \"add\" parameter of schedule shortcode to add additional "
+"schedules. There is no limit for the number of schedules that you can use on "
+"the same page. See %s tab for details."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8416
+msgid ""
+"<b>Does the client need to be registered to the website to apply for an "
+"appointment?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8418
+msgid ""
+"You can set whether this is required with <i>Login Required</i> setting. You "
+"can ask details (name, email, phone, address, city) about the client before "
+"accepting the appointment, thus you may not need user registrations. These "
+"data are saved in a cookie and autofilled when they apply for a new "
+"appointment, so your regular clients do not need to refill them."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8423
+msgid "<b>How are the appointments confirmed?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8425
+msgid ""
+"If you have selected <i>Payment Required</i> field as Yes, then an "
+"appointment is automatically confirmed after a succesful Paypal payment and "
+"confirmation of Paypal IPN. If you selected Payment Required as No, then "
+"confirmation can be done manually, or automatically depending on Auto "
+"Confirm setting."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8430
+msgid "<b>How can I manually confirm an appointment?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8432
+#, php-format
+msgid ""
+"Using the %s, find the appointment based on user name and change the status "
+"after you click <i>See Details and Edit</i> link. Note that this link will "
+"be visible only after you take the cursor over the record. Please also note "
+"that you can edit all the appointment data here."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8432
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8439
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8506
+msgid "Appointments admin page"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8437
+msgid "<b>Can I enter a manual appointment from admin side?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8439
+#, php-format
+msgid ""
+"Yes. You may as well be having manual appointments, e.g. by phone. Just "
+"click <i>Add New</i> link on top of the %s and enter the fields and save the "
+"record. Please note that NO checks (Is that time frame free? Are we working "
+"that day? etc...) are done when you are entering a manual appointment. "
+"Consider entering or checking appointments from the front end to prevent "
+"mistakes."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8444
+msgid ""
+"<b>I don't want front end appointments, I want to enter them only manually "
+"from admin side. What should I do?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8446
+msgid ""
+"If you don't want your schedule to be seen either, then simply do not add "
+"Schedule shortcode in your pages, or set that page as \"private\" for admin "
+"use. But if you want your schedule to be seen publicly, then just use "
+"Schedule shortcode, but no other shortcodes else."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8451
+msgid ""
+"<b>I don't want my break times and holidays to be seen by the clients. How "
+"can I do that?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8453
+msgid ""
+"Select css background color for busy and not possible fields to be the same "
+"(for example white). Select <i>Show Legend</i> setting as No. Now, visitors "
+"can only see your free times and apply for those; they cannot distinguish if "
+"you are occupied or not working for the rest."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8459
+msgid ""
+"<b>How can I prevent a second appointment by a client until I confirm his "
+"first appointment?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8461
+#, php-format
+msgid ""
+"Enter a huge number, e.g. 10000000, in <i>Minimum time to pass for new "
+"appointment</i> field. Please note that this is not 100% safe and there is "
+"no safe solution against this unless you require payment to accept an "
+"appointment."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8467
+msgid ""
+"<b>I have several service providers (workers) and each of them has different "
+"working hours, break hours and holidays. Does Appointments+ support this?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8469
+msgid ""
+"Yes. For each and every service provider you can individually set working, "
+"break hours and exceptions (holidays and additional working days). To do so, "
+"use the <i>Working Hours</i> and <i>Exceptions</i> tabs and select the "
+"service provider you want to make the changes from the service provider "
+"dropdown menu, make necessary changes and save. Plase note that when a "
+"service provider is added, his working schedule is set to the business "
+"working schedule. Thus, you only need to edit the variations of his schedule."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8474
+msgid ""
+"<b>How can I set start day of the week and adjust date and time formats?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8476
+#, php-format
+msgid ""
+"Appointments+ follows Wordpress date and time settings. If you change them "
+"from %s page, plugin will automatically adapt them."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8476
+msgid "General Settings"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8481
+msgid "<b>What does service capacity mean? Can you give an example?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8483
+msgid ""
+"It is the capacity of a service (e.g. because of technical reasons) "
+"independent of number of service providers giving that service. Imagine a "
+"dental clinic with three dentists working, each having their examination "
+"rooms, but there is only one X-Ray unit. Then, X-Ray Service has a capacity "
+"1, and examination service has 3. Please note that you should only define "
+"capacity of X-Ray service 1 in this case. The other services whose capacity "
+"are left as zero will be automatically limited to the number of dentists "
+"giving that particular service. Because for those, limitation comes from the "
+"service providers, not from the service itself. Capacity field is for "
+"limiting the workforce, not for increasing it. See the FAQ in Advanced "
+"section to increase your available workforce and thus number of available "
+"appointments per time slot."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8488
+msgid ""
+"<b>I have defined several services and service providers. For a particular "
+"service, there is no provider assigned. What happens?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8490
+msgid ""
+"For that particular service, clients cannot apply for an appointment because "
+"there will be no free time slot. Just delete services you are not using."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8496
+msgid ""
+"<b>I am giving a service only on certain days of the week, different than my "
+"normal working days. Is it possible to set this in Appointments+?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8498
+msgid ""
+"Yes. Create a \"dummy\" service provider and assign that particular service "
+"only to it. Then set its working days as those days."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8504
+msgid "<b>How can I permanently delete appointment records?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8506
+#, php-format
+msgid ""
+"To avoid any mistakes, appointment records can only be deleted from Removed "
+"area of %s. First change the status of the appointment to \"removed\" and "
+"then delete it selecting the Removed area."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8512
+msgid ""
+"<b>What happens if a client was applying for an appointment but at the same "
+"time another client booked the same time slot?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8514
+msgid ""
+"Appointments+ checks the availability of the appointment twice: First when "
+"client clicks a free box and then when he clicks the confirmation button. If "
+"that time slot is taken by another client during these checks, he will be "
+"acknowledged that that time frame is not avaliable any more. All these "
+"checks are done in real time by ajax calls, so duplicate appointments are "
+"not possible."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8520
+msgid ""
+"<b>What does the Built-in Cache do? Can I still use other caching plugins?</"
+"b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8522
+msgid ""
+"Appointments+ comes with a built-in specific cache. It functions only on "
+"appointment pages and caches the content part of the page only. It is "
+"recommended to enable it especially if you have a high traffic appointment "
+"page. You can continue to use other general purpose caching plugins, namely "
+"W3T, WP Super Cache, Quick Cache. The other object or page caching plugins "
+"are not tested."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8528
+msgid ""
+"<b>I have just installed Appointments+ and nothing happens as I click a free "
+"time slot on the Make an Appointment page. What can be the problem?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8530
+msgid ""
+"If you have created the appointment page manually, check if you have added "
+"\"app_confirmation\" shortcode which is always required to complete an "
+"appointment. If this is not the case, you most likely have a javascript "
+"error on the page. This may be coming from a faulty theme or plugin. To "
+"confirm the javascript error, open the page using Google Chrome or Firefox "
+"and then press Ctrl+Shift+j. In the opening window if you see any warnings "
+"or errors, then switch to the default theme to locate the issue. If errors "
+"disappear, then you need to check and correct your theme files. If they "
+"don't disappear, then deactivate all your plugins and re-activate them one "
+"by one, starting from Appointments+ and check each time as you activate a "
+"plugin."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8536
+msgid "<b>How is the plugin supposed to work by the way?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8538
+#, php-format
+msgid "Please visit our %s."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8538
+msgid "Demo website"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8544
+msgid ""
+"<b>How does integration with Membership work? Are there any special "
+"considerations?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8546
+msgid ""
+"Membership member levels can be let exempt from advance payments/deposits. "
+"Also you can apply discounts for the selected membership levels. There are "
+"no special considerations: Appointments+ will be managing them automatically."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8553
+msgid ""
+"<b>How does integration with MarketPress work? Are there any special "
+"considerations?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8555
+msgid ""
+"If you select <i>Integrate with MarketPress</i> which is visible after "
+"<i>Payment Required</i> is set as Yes, any MarketPress product page having "
+"Appointments+ shortcodes will be regarded as an \"Appointment Product Page"
+"\". Those pages are automatically modified and you are not supposed to be "
+"doing anything special. For your information, here is how the integration "
+"works:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8559
+msgid ""
+"An Appointment will be regarded as a digital product, therefore shipping "
+"information is not asked if ordered alone."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8562
+msgid ""
+"Like any other digital product, quantity of an appointment is always fixed "
+"to 1, but client can add as many appointments as he wishes with different "
+"variations, that is, with different date and time."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8565
+msgid ""
+"Download link that is normally added to confirmation email for digital "
+"product orders is removed."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8568
+msgid ""
+"Appointments in the cart are shown as \"Appointment Product Page Title: "
+"Appointment ID (Appointment date and time)\"."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8571
+msgid ""
+"\"Add to Cart\" and \"Buy Now\" buttons on the Appointment Product page are "
+"not visible until client confirms the appointment."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8574
+msgid ""
+"\"Add to Cart\" and \"Buy Now\" buttons are only possible for a full "
+"appointment product page, therefore on products list page, an Appointments+ "
+"product will always have a \"Choose Option\" button. No price will be shown. "
+"For the same reason, please use Single Product shortcode with only content="
+"\"full\" setting."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8577
+msgid ""
+"Paypal button of Appointments+ is invisible and thus its own Paypal Standard "
+"Payments option is disabled. Client will use the payment gateways "
+"MarketPress is providing. You can use all MarketPress payment gateways."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8580
+msgid "Quantity and Variation fields on the product page are always invisible."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8583
+msgid ""
+"Price of the appointment on the cart is the deposit price, if a deposit "
+"field is set. Otherwise it is the full price."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8586
+msgid ""
+"If an appointment product is manually removed from the cart by the client, "
+"its record will also be removed from the appointments table."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8589
+msgid ""
+"An appointment product can be automatically removed from the cart if "
+"\"Disable pending appointments after\" setting is set and client does not "
+"finalize the purchase during that time. Thus you may consider to add a "
+"warning note that transaction should be completed within the selected time."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8592
+msgid ""
+"If this happens while client is paying and client does pay, however, that "
+"appointment will be taken out from removed status and it will be marked as "
+"paid."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8595
+msgid ""
+"On the admin product management page if it is an Appointments+ Product, "
+"variations, SKU, price column fields will display \"-\"."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8598
+msgid ""
+"Transactions are shown in MarketPress, but related appointment record is "
+"updated, that is, status is changed to \"paid\"."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8601
+msgid ""
+"If Manual Payment gateway is activated and client uses that method, "
+"appointment will be in \"pending\" status until you manually confirm it."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8609
+msgid "<b>What does DUMMY service provider mean? How can I get use of it?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8611
+msgid ""
+"A Dummy service provider can be an imaginary or real user intended to enrich "
+"your business. It behaves exactly like a normal user, except that all emails "
+"are sent to a preselected real user from General settings tab. With this "
+"feature you can arrange your working schedules better and imitate several "
+"workers behaviour without losing the communication with the client. If you "
+"are combining several dummy providers into one real user, you can set "
+"service capacity to disallow more appointments than you can handle."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8617
+msgid ""
+"<b>How can I view my planner as a service provider in calendar view?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8619
+msgid ""
+"Create a private or password protected page and include the schedule "
+"shortcode like this: <code>[app_monthly_schedule worker=\"1\"]</code>. "
+"Replace 1 with your user ID which is the same as worker/provider ID. You can "
+"also use app_schedule shortcode for a weekly planner instead, or you can use "
+"both. You may consider adding app_pagination and app_my_appointments "
+"shortcodes too."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8625
+msgid ""
+"<b>My working hours cover the midnight and exceeds to the other day. For "
+"example from 8pm Monday to 2am Tuesday. Is it possible to set this?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8627
+msgid ""
+"Yes. Set your working hours as 24am to 24am (00:00 to 00:00) and your break "
+"hours as 2am to 8pm (02:00 to 20:00)."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8633
+msgid "<b>What are the prerequisites to use Google Calendar API?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8635
+msgid ""
+"PHP V5.3 or above, php extentions curl, JSON, http_build_query are required "
+"to use Google Calendar API. Also you need to have FTP access to your website "
+"in order to upload the private key file. This file cannot be uploaded using "
+"WordPress media upload function."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8641
+msgid ""
+"<b>Why do I need this Google Calendar API key file anyway? Isn't there any "
+"other way?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8643
+msgid ""
+"As of now, there is no other way and it is unlikely to be another way in the "
+"future. This key file serves as an electronic signature which proves that "
+"you grant access to your Google Calendar account."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8649
+msgid ""
+"<b>But I am using another application which does not need Google Calendar "
+"API key file. How does that application work then?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8651
+msgid ""
+"Such applications make the synchronisation when you are online. It is easy "
+"to receive your consent when your are online. Your being logged in is "
+"sufficient, but necessary. Here, we need your consent, thus electronic "
+"signature, even if you are offline, so that appointments can be submitted to "
+"your Google Calendar any time. For the same reason, each service provider "
+"who wants to synchronize his/her appointments with Google Calendar should "
+"carry out the required setup steps."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8657
+msgid ""
+"<b>Google Calendar Integration is not working and/or I am getting some "
+"errors. What can be the reasons and how can I solve them?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8659
+msgid ""
+"Always double check your settings and compare those with the tutorial video. "
+"Common mistakes: Calendar API is not turned on, service account does not "
+"have \"make changes to events\" authority, wrong calendar is selected."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8661
+msgid ""
+"There are some limitations of Google Calendar itself too: 1) Check that you "
+"are NOT using your primary calendar, 2) Check that your account is NOT a "
+"business account."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8663
+msgid ""
+"Some errors may not be displayed and can be saved in log file. Check Logs "
+"tab for those messages."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8665
+msgid ""
+"For details read instructions and notes in Google Calendar tab carefully."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8671
+msgid "<b>How can I let my service providers freely edit appointments?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8673
+msgid ""
+"Appointment records can only be edited on the admin side appointment page. "
+"Use an appropriate role/capability manager plugin and grant \"manage_options"
+"\" capability to your service providers. There are some plugins that let you "
+"select particular roles, even particular users/providers for this purpose."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8679
+msgid "<b>How can I let my clients cancel their own appointments?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8681
+msgid ""
+"First of all, you must set \"Allow client cancel own appointments\" setting "
+"as Yes. Then:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8684
+msgid "A logged in client can cancel his appointments using his profile page."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8687
+msgid ""
+"Any client can cancel his own appointment using links in confirmation and/or "
+"reminder emails if you use CANCEL placeholder in your email bodies."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8690
+msgid ""
+"Any client can cancel his own appointment using the checkbox in my "
+"appointments table if you set allow_cancel=\"1\" in my_appointments "
+"shortcode."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8700
+msgid "Advanced"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8703
+msgid ""
+"This part of FAQ requires some knowledge about HTML, php and/or WordPress "
+"coding."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8709
+msgid "<b>Can I create my own page templates?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8711
+msgid ""
+"Yes. Using <code>do_shortcode</code> function and loading Appointments+ css "
+"and javascript files, you can do this. See sample-appointments-page.php file "
+"in /includes directory for a sample."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8717
+msgid ""
+"<b>I have customized the front.css file. How can I prevent it being "
+"overwritten by plugin updates?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8719
+msgid ""
+"Copy front.css content and paste it in css file of your theme. Add this code "
+"inside functions.php of the theme: <code>add_theme_support"
+"( \"appointments_style\" )</code>. Then, integral plugin css file front.css "
+"will not be called."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8725
+msgid "<b>Is it possible not to ask payment or deposit for certain users?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8727
+msgid ""
+"Please note that this is quite simple if you are using Membership plugin. If "
+"not, referring this filter create a function in your functions.php to set "
+"Paypal price as zero for the selected user, user role and/or service: <code>"
+"$paypal_price = apply_filters( 'app_paypal_amount', $paypal_price, $service, "
+"$worker, $user_id );</code> This will not make the service free of charge, "
+"but user will not be asked for an advance payment."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8733
+msgid ""
+"<b>How can I force the schedules start at a non standard time, for example "
+"9:15?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8735
+msgid ""
+"Add these codes inside functions.php of your current theme (9.25 is not a "
+"typo; that is because 15/60=0.25): "
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8748
+msgid ""
+"<b>I want to accept more than one appointment applications for each time "
+"slot. Entering higher numbers in \"capacity\" field in Services tab does not "
+"work. Why?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8750
+msgid ""
+"Please note that Appointments+ is designed for one-to-one appointments, that "
+"is, one service provider serving a single client at a time and to manage "
+"available workforce. Capacity field is for limiting the workforce, not for "
+"increasing it. You have two alternatives to achieve this: a) Use dummy "
+"service providers b) Add these codes in functions.php and modify as required:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8759
+msgid ""
+"Please also note that this is a kind of \"hack\" and when you have more than "
+"one service provider, this function may not work as expected in regards to "
+"working hours, as \"virtual\" providers will not be bound to working hours "
+"of existing providers. "
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8765
+msgid "<b>How can I use HTML in emails?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8767
+msgid ""
+"Appointments+ uses wp_mail function and HTML is disabled as default. To "
+"enable HTML in emails, add these codes inside functions.php:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8780
+msgid ""
+"<b>I have a time base of 10 minutes. I have services up to 480 minutes. How "
+"can I achieve this?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8782
+msgid ""
+"The following example lets you select services with durations up to "
+"48*10=480 minutes. Add these codes inside functions.php:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8795
+msgid ""
+"<b>How can I redirect a user after a confirmed appointment to a thank you "
+"page when payment is not required?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8797
+msgid ""
+"Add these codes inside functions.php and modify the example.com url as "
+"required:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8811
+msgid ""
+"<b>How can I show hours instead of minutes in the front end when my services "
+"last more than an hour?</b>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8813
+msgid "Use this sample and modify as required:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8867
+msgid "Are you sure to clear the log file?"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8877
+msgid "Log file cleared..."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:8891
+msgid "Log file could not be deleted"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9061
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9063
+msgid "Day"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9061
+msgid "Work?"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9061
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9063
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10020
+msgid "Start"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9061
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9063
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10051
+msgid "End"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9063
+msgid "Give break?"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9207
+msgid "Add New"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9212
+msgid "Active appointments"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9213
+msgid "Pending appointments"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9214
+msgid "Completed appointments"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9216
+msgid "Removed appointments"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9217
+msgid "Click to toggle information about statuses"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9222
+msgid ""
+"<b>Completed:</b> Appointment became overdue after it is confirmed or paid"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9223
+msgid ""
+"<b>Removed:</b> Appointment was not paid for or was not confirmed manually "
+"in the allowed time"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9224
+msgid ""
+"<b>Reserved by GCal:</b> If you import appointments from Google Calender "
+"using Google Calendar API, that is, synchronize your calendar with "
+"Appointments+, events in your Google Calendar will be regarded as "
+"appointments and they will be shown here. These records cannot be edited "
+"here. Use your Google Calendar instead. They will be automatically updated "
+"in A+ too."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9225
+msgid "If you require payment:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9226
+msgid "<b>Active/Paid:</b> Paid and confirmed by Paypal"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9227
+msgid "<b>Pending:</b> Client applied for the appointment, but not yet paid."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9230
+msgid "If you do not require payment:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9231
+msgid "<b>Active/Confirmed:</b> Manually confirmed"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9232
+msgid ""
+"<b>Pending:</b> Client applied for the appointment, but it is not manually "
+"confirmed."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9238
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9244
+msgid "Search Client"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9257
+msgid "Bulk status change"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9262
+msgid "Change Status"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9291
+msgid "Sort by"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9292
+msgid "Creation date (Oldest to newest)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9293
+msgid "Creation date (Newest to oldest)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9294
+msgid "Appointment date (Closest first)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9295
+msgid "Appointment date (Closest last)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9297
+msgid "Sort"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9307
+msgid "Filter by service"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9321
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9345
+msgid "Filter"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9331
+msgid "Filter by service provider"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9358
+msgid "Reset sort order and filters"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9374
+msgid "Export Appointments"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9374
+msgid ""
+"If you click this button a CSV file containing ALL appointment records will "
+"be saved on your PC"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9399
+msgid "Nothing to download!"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9475
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10327
+msgid "Date/Time"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9555
+msgid "See Details (Cannot be edited)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9555
+msgid "See Details and Edit"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9580
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10413
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10422
+msgid "None yet"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9593
+msgid "No appointments have been found."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9606
+msgid "Permanently Delete Selected Records"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9624
+msgid "Are you sure to delete the selected record(s)?"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9655
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9673
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9718
+msgid "Unexpected error"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9913
+msgid "CLIENT"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9916
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10326
+msgid "User"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9917
+msgid "Not registered user"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:9959
+msgid "SERVICE"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10008
+msgid "APPOINTMENT"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10012
+msgid "Created"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10086
+msgid "(Re)send confirmation email"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10090
+msgid "Send confirmation email"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10107
+msgid ""
+"GCal reserved appointments cannot be edited here. Edit them in your Google "
+"calendar."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10111
+msgid "Click to save or update"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10113
+msgid "Save / Update"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10200
+#, php-format
+msgid "Status changed from %s to %s by %s for appointment ID:%d"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10202
+msgid "<span style=\"color:green;font-weight:bold\">Changes saved.</span>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10205
+msgid ""
+"<span style=\"color:green;font-weight:bold\">New appointment succesfully "
+"saved.</span>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10207
+msgid ""
+"<span style=\"color:red;font-weight:bold\">Record could not be saved OR you "
+"did not make any changes!</span>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10296
+msgid "Recent transactions"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10297
+msgid "Pending transactions"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10298
+msgid "Future transactions"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10325
+msgid "App ID"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10329
+msgid "Amount"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10330
+msgid "Transaction id"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10433
+msgid "No Transactions have been found, patience is a virtue."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10459
+msgid "Appointments+ Tutorial"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10460
+msgid ""
+"Welcome to Appointments+ plugin. This tutorial will hopefully help you to "
+"make a quick start by adjusting the most important settings to your needs. "
+"You can restart this tutorial any time clicking the link on the FAQ page."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10464
+msgid "Time Base"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10465
+msgid ""
+"Time Base is the most important parameter of Appointments+. It is the "
+"minimum time that you can select for your appointments. If you set it too "
+"high then you may not be possible to optimize your appointments. If you set "
+"it too low, your schedule will be too crowded and you may have difficulty in "
+"managing your appointments. You should enter here the duration of the "
+"shortest service you are providing."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10469
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10474
+msgid "Creating a functional front end appointment page"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10470
+msgid ""
+"Appointments+ provides an easy way of creating an appointment page. Check "
+"this checkbox to include all shortcodes in a full functional page. You can "
+"later edit this page."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10475
+msgid ""
+"You can select a schedule type from the list. To see how they look, you can "
+"also create more than one page, one by one and then delete unused ones."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10479
+msgid "Selecting a Color Set to Match Your Theme"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10480
+msgid ""
+"It is possible to select color sets for your schedule tables from predefined "
+"sets, or customize them. When you select Custom, you will be able to set "
+"your own colors for different statuses (Busy, free, not possible/not "
+"working)."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10484
+msgid "Do you require login?"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10485
+msgid ""
+"You can set whether client is required to log into the website to apply for "
+"an appointment. When you select this setting as Yes, you will see additional "
+"settings."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10489
+msgid "Requiring information from client"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10490
+msgid ""
+"You may ask the client to fill some selectable fields so that they may not "
+"need to register on your website."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10494
+msgid "Do you require payment?"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10495
+msgid ""
+"You can set whether client is asked for a payment to accept his appointment. "
+"If this setting is selected as Yes, appointment will be in pending status "
+"until a succesful Paypal payment is completed. After you select this, you "
+"will see additional fields for your Paypal account, deposits and integration "
+"with Membership plugin."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10499
+msgid "Email notifications"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10500
+msgid ""
+"There are several notification settings. Using these, you can confirm and "
+"remind your clients and also your service providers."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10504
+msgid "Built-in Cache"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10505
+msgid ""
+"Appointments+ comes with a built-in specific cache. It functions only on "
+"appointment pages and caches the content part of the page only. It is "
+"recommended to enable it especially if you have a high traffic appointment "
+"page. You can continue to use other general purpose caching plugins like "
+"W3T, WP Super Cache, Quick Cache."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10509
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10524
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10549
+msgid "Save settings"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10510
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10525
+msgid "Do not forget to save your settings."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10514
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10519
+msgid "Setting your business hours"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10515
+msgid ""
+"Now you should set your business working hours. Click Working Hours tab and "
+"then click Next."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10520
+msgid ""
+"Below you will see two tables, one for your working hours and the other for "
+"your break hours during the day. The second one is optional. On the left you "
+"will see no selection options yet. But as you add new services providers, "
+"you can set their working and break hours by selecting from this dropdown "
+"menu. This is only necessary if their working hours are different from those "
+"of your business."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10529
+msgid "Entering your holidays"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10530
+msgid "Click the Exceptions tab to define your holidays and then click Next."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10534
+msgid "Setting exceptional days"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10535
+msgid ""
+"Below you can define your holidays and exceptional working days, for example "
+"a specific Sunday you want to work on. These dates will override your weekly "
+"working schedule for that day only. Note that you will be able to set these "
+"exceptional days for each service provider individually, when you define "
+"them."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10539
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10544
+msgid "Setting your services"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10540
+msgid "Click the Services tab to set your services and then click Next."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10545
+msgid ""
+"You can add new service by clicking this button. A default service should "
+"have been installed during installation. You can edit and even delete that "
+"too, but you should have at least one service in this table."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10550
+msgid ""
+"Do not forget to save your settings. Clicking Add New Service button does "
+"NOT save it to the database until you click the Save button."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10554
+msgid "Adding and setting your service providers"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10555
+msgid ""
+"Click the Service Providers tab to set your service providers and then click "
+"Next."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10559
+msgid "Adding service providers"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10560
+msgid ""
+"Adding service providers is optional. You may need this if the working "
+"schedule of your service providers are different or you want the client to "
+"pick a provider by his name. You can add new service provider by clicking "
+"this button. "
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10565
+msgid "Additional Information"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10566
+msgid ""
+"You can find detailed information about shortcode parameters on the "
+"Shortcodes page and answers to common questions on the FAQ page. Of course "
+"we will be glad to help you on our Community pages too."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10570
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10600
+msgid "Appointment List"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10571
+msgid ""
+"As you start receiving appointments, you will see them here. Click on the "
+"Appointments menu item to start the other tutorial, if you have not seen it "
+"yet."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10601
+msgid ""
+"Appointment records are grouped by their statuses. You can see these "
+"groupings by clicking the Info icon."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10605
+msgid "Entering a Manual Appointment"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10606
+msgid ""
+"When you received appointments from your clients, they will be added to this "
+"page automatically. But you can always add a new appointment manually. "
+"Please click ADD NEW link and then click Next."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10610
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10620
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10625
+msgid "Entering Data for the New Appointment"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10611
+msgid ""
+"As you can see, you can enter all parameters here. Enter some random values "
+"and select status as PENDING, for this example. Then click Next"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10615
+msgid "Sending Confirmation emails Manually"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10616
+msgid ""
+"If you require payment, confirmation email is automatically sent after a "
+"Paypal payment. However if you are confirming appointments manually, you "
+"should check this checkbox for a confirmation email to be sent. You can also "
+"use this option for resending the confirmation email, e.g. after "
+"rescheduling an appointment."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10621
+msgid "Save and then click Next."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10626
+msgid ""
+"The result is shown here. Normally you should get a success message. "
+"Otherwise it means that you have a javascript problem on admin side."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10630
+msgid "Save New Appointment"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10631
+msgid ""
+"As we added this appointment as \"Pending\" we will see it under Pending "
+"appointments. Click Pending appointments and then click Next."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10635
+msgid "Editing an Appointment"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10636
+msgid ""
+"You can edit any appointment record. Just hover on the record and then click "
+"See Details and Edit"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10641
+msgid ""
+"It is always possible to Cancel. Please note that these records are NOT "
+"saved until you click the Save button. Thanks for using Appointments+"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10794
+#, php-format
+msgid ""
+"Easily get updates, support, and one-click WPMU DEV plugin/theme "
+"installations right from in your dashboard - <strong><a href=\"%s\" title="
+"\"Install Now &raquo;\">install the free WPMU DEV Dashboard plugin</a></"
+"strong>. &nbsp;&nbsp;&nbsp;<small><a href=\"http://premium.wpmudev.org/wpmu-"
+"dev/update-notifications-plugin-information/\">(find out more)</a></small>"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/appointments.php:10798
+#, php-format
+msgid ""
+"Updates, Support, Premium Plugins, Community - <strong><a href=\"%s\" title="
+"\"Activate Now &raquo;\">activate the WPMU DEV Dashboard plugin now</a></"
+"strong>."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:40
+msgid "Session could not be started. This may indicate a theme issue."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:87
+msgid ""
+"Appointments+ can integrate with Google Calendar accounts by 2 different "
+"ways: 1) Google Calendar Button 2) Google Calendar API."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:90
+msgid ""
+"Google Calendar Button method is simple to implement, but it is semi-"
+"automatic, that is, client or service provider should click the button to "
+"submit the appointment to his Google calendar account."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:93
+msgid ""
+"Setting of Google Calendar API is sophisticated because of requirements and "
+"security measures of Google itself, but once it is correctly set, "
+"appointments are automatically sent to the Google calendar account. "
+"Synchronization (automatic import of Google Calendar events to Appointments"
+"+) is also possible with the API method. Clients cannot use API method; only "
+"website itself and/or service providers can use it. Note: Each service "
+"provider should carry out the below setting steps, if they want to follow "
+"their appointments on their own calendars."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:100
+msgid "Google Calendar General Setting"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:105
+msgid "Google Calendar Location"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:108
+msgid ""
+"Enter the text that will be used as location field in Google Calendar. If "
+"left empty, your website description is sent instead"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:119
+msgid "Google Calendar Button Settings"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:124
+msgid "Add Google Calendar Button"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:131
+msgid ""
+"Whether to let client access his Google Calendar account using Google "
+"Calendar button. Button is inserted in the confirmation area, as well as My "
+"Appointments shortcode and user page/tab if applicable."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:136
+msgid "Open Google Calendar in the Same Window"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:139
+msgid ""
+"As default, Google Calendar is opened in a new tab or window. If you check "
+"this option, user will be redirected to Google Calendar from the appointment "
+"page, without opening a new tab or window. Note: While applying for the "
+"appointment, this is effective if payment is not required, or price is zero "
+"(Otherwise payment button/form would be lost)."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:148
+msgid "Google Calendar API Settings - BETA"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:150
+msgid ""
+"<b>Important Note:</b> Google Calendar API for Appointments+ is in Beta "
+"stage, because as of February 2013, Google itself does not officially list "
+"Google Calendar in its supported \"Service Accounts\" which this plugin "
+"needs. However, we tested it on several websites and saw that it is working. "
+"There may be some restrictions by Google that we may not know. Use this "
+"option carefully and please give us feedback about the results."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:152
+msgid ""
+"<b>Note on Google account/calendar that will be used:</b> A namely selected "
+"service provider is connected to the calendar selected in his profile page "
+"and \"No preference\" service provider is connected to the calendar selected "
+"on this page (also possible to have a copy of all new appointments in this "
+"calendar if you select \"All\" below)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:154
+msgid ""
+"<b>Note for Google Business Account users:</b> GCal API usage is not free of "
+"charge for business accounts. You should first contact Google sales "
+"department to make it available or use an individual account instead."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:156
+msgid ""
+"<b>Note on deleting an appointment or event:</b> To prevent authority "
+"conflicts, deletion is only possible from the side that appointment/event "
+"created in the first place. For example, you cannot delete an appointment "
+"using Google Calendar if it has been saved there by A+. You must delete the "
+"appointment using A+ admin pages, which will automatically remove the event "
+"associated with it. But deleting such an event in Google Calendar will NOT "
+"remove the appointment."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:161
+msgid "Allow Service Providers for Google Calendar API Integration"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:168
+msgid ""
+"Whether you let your service providers to integrate with their own Google "
+"Calendar account using their profile page. Note: Each of them will need to "
+"set up their accounts following the steps as listed in Instructions below "
+"(will also be shown in their profile pages) and you will need to upload "
+"their key files yourself using FTP."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:173
+msgid "Appointments will be sent to Google Calendar for"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:176
+msgid "All"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:177
+msgid "No preference case"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:180
+msgid ""
+"If you select \"All\", any appointment made from this website will be sent "
+"to the selected calendar. If you select \"No preference case\", only "
+"appointments which do not have an assigned service provider will be sent."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:213
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:741
+msgid "Your server installation meets requirements."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:220
+msgid ""
+"Test is successful. Please REFRESH your Google Calendar and check that test "
+"appointment has been saved."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:233
+msgid ""
+"No future new events are found in your Google calendar. Thus no events are "
+"imported and no updates and deletions made."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:247
+msgid "Do NOT use your primary Google calendar, but create a new one."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:250
+msgid "The following error has been reported by Google Calendar API:<br />"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:251
+msgid "<br /><b>Recommendation:</b> Please double check your settings."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:283
+msgid "Integration Mode"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:286
+msgid "Integration disabled"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:287
+msgid "A+ -> GCal (Only export appointments)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:288
+msgid "A+ <-> GCal (Synchronization)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:291
+msgid ""
+"Select method of integration. A+ -> GCal setting sends appointments to your "
+"selected Google calendar, but events in your Google Calendar account are not "
+"imported to Appointments+ and thus they do not reserve your available "
+"working times. A+ <-> GCal setting works in both directions. This "
+"synchronization is not immediate; it requires at least some traffic to your "
+"website and not handled less than 10 minutes intervals. To update it "
+"manually use \"Import and Update Events Now\" link which is only visible if "
+"the settings let it so."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:303
+msgid ""
+"Clicking this link will manually import and update your Events from the "
+"selected calendar without waiting for 10 minutes. Note: Maximum 500 future "
+"events that will start until appointment limit setting are imported in the "
+"order of their starting time. Past events and all day events are not "
+"imported."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:310
+msgid "Key file name"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:314
+msgid ""
+"Enter key file name here without extention, e.g. ab12345678901234567890-"
+"privatekey"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:319
+msgid "Service account email address"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:323
+msgid ""
+"Enter Service account email address here, e.g. 1234567890@developer."
+"gserviceaccount.com"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:328
+msgid "Calendar to be used"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:332
+msgid ""
+"Enter the ID of the Google calendar in which your appointments will be "
+"saved, e.g. abcdefg1234567890@group.calendar.google.com."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:337
+msgid "Event summary (name)"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:344
+msgid "Event description"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:349
+msgid ""
+"For the above 2 fields, you can use the following placeholders which will be "
+"replaced by their real values:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:351
+msgid "Please be careful about privacy if your calendar is public."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:363
+msgid "Test Connection"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:365
+msgid ""
+"Clicking this link will attempt to connect your GCal account and write a "
+"sample appointment which lasts 30 minutes and starts 10 minutes after your "
+"current server time. If there are some setting or connection errors, you "
+"will be informed about them."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:379
+msgid "Instructions"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:381
+msgid ""
+"To set up Google Calendar API, please click the \"i\" icon and carefully "
+"follow these steps:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:382
+msgid "Click to toggle instructions"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:384
+#, php-format
+msgid "Tip: There is a video tutorial showing these steps %s."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:384
+msgid "here"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:387
+#, php-format
+msgid ""
+"Google Calendar API requires php V5.3+ and some php extensions. Click this "
+"link to check if your server installation meets those requirements: %s"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:387
+msgid "Check Requirements"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:391
+#, php-format
+msgid ""
+"Go to Google apis console by clicking %s. Login to your Google account if "
+"you are not already logged in."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:395
+msgid ""
+"Create a new project using the left side pane. Name the project as "
+"Appointments+"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:399
+msgid "Click \"Services\" from left side pane and set \"Calendar API\" as ON."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:403
+msgid "Click \"API Access\" from left side pane."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:407
+msgid "Click \"Create an OAuth 2.0 Client ID\" button."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:411
+msgid "Enter a Product Name, e.g. A+, inside the opening pop-up. Click Next."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:415
+msgid "Select \"Service account\" under Client ID Settings in the new pop-up."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:419
+msgid "Click \"create Client ID\". Getting the result may take a few seconds."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:423
+msgid "Click \"Download private key\" button in the opening pop-up."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:427
+#, php-format
+msgid ""
+"Using your FTP client program, copy this key file to folder: %s . This file "
+"is required as you will grant access to your Google Calendar account even if "
+"you are not online. So this file serves as a proof of your consent to access "
+"to your Google calendar account. Note: This file cannot be uploaded in any "
+"other way. If you do not have FTP access, ask the website admin to do it for "
+"you."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:431
+msgid ""
+"Enter the name of the key file to \"Key file name\" setting of Appointments"
+"+. Exclude the extention .p12."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:435
+msgid ""
+"Copy \"Email address\" setting of Google apis console and paste it to "
+"\"Service account email address\" setting of Appointments+."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:439
+#, php-format
+msgid "Open your Google Calendar by clicking this link: %s"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:443
+#, php-format
+msgid ""
+"Create a new Calendar by selecting \"my Calendars > Create new calendar\" on "
+"left side pane. <b>Try NOT to use your primary calendar. If you have to, "
+"please see this post: </b> %s"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:443
+msgid "Forum"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:447
+msgid ""
+"Give a name to the new calendar, e.g. Appointments test calendar. <b>Check "
+"that Calendar Time Zone setting matches with time zone setting of your "
+"WordPress website.</b> Otherwise there will be a time shift."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:451
+msgid ""
+"Paste already copied \"Email address\" setting of Google apis console to "
+"\"Person\" field under \"Share with specific person\"."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:455
+msgid ""
+"Set \"Permission Settings\" of this person as \"make changes to events\"."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:459
+msgid "Click \"Add Person\"."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:463
+msgid "Click \"Create Calendar\"."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:467
+msgid "Select the created calendar and click \"Calendar settings\"."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:471
+msgid "Copy \"Calendar ID\" value on Calendar Address row."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:475
+msgid ""
+"Paste this value to \"Calendar to be used\" field of Appointments+ settings."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:479
+msgid "Select the desired Integration mode: A+->GCal or A+<->GCal."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:483
+msgid "Click \"Save Settings\" on Appointments+ settings."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:487
+msgid ""
+"After these stages, you have set up Google Calendar API. To test the "
+"connection, click the \"Test Connection\" link which should be visible after "
+"you clicked save settings button."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:491
+msgid ""
+"If you get a success message, you should see a test event inserted to the "
+"Google Calendar and you are ready to go. If you get an error message, double "
+"check your settings."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:518
+#, php-format
+msgid "<b>[Appointments+]</b> %s"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:721
+msgid ""
+"You have to update the Appointments+ tables. To do so, deactivate and "
+"reactivate the plugin."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:724
+msgid "Google PHP API Client requires at least PHP 5.3"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:728
+#, php-format
+msgid ""
+"Google PHP API Client requires at least 32 MByte Server RAM. Please check "
+"this link how to increase it: %s"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:728
+msgid "Increasing_memory_allocated_to_PHP"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:731
+msgid "Google PHP API Client requires the CURL PHP extension"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:734
+msgid "Google PHP API Client requires the JSON PHP extension"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:737
+msgid "Google PHP API Client requires http_build_query()"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:744
+msgid "Key file does not exist"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:948
+msgid "Test client name"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:949
+msgid "Test phone"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:950
+msgid "Test address"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:951
+msgid "Test city"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:962
+msgid "This is a test appointment inserted by Appointments+"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:1136
+#, php-format
+msgid "%s appointment record(s) affected."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/class.gcal.php:1152
+#, php-format
+msgid "%s appointment(s) deleted."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/pointer-tutorials.php:134
+msgid "Tutorial"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/pointer-tutorials.php:417
+msgid "Next &raquo;"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/pointer-tutorials.php:430
+#: C:\Users\Hakan\Desktop\appointments/includes/pointer-tutorials.php:449
+#, php-format
+msgid "Dismiss %s"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/pointer-tutorials.php:436
+msgid "&laquo; Previous"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/pointer-tutorials.php:488
+#, php-format
+msgid "%s: Step %d of %d"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/sample-appointments-page.php:34
+msgid "Pages:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/sample-appointments-page.php:38
+msgid "Edit"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/widgets.php:31
+msgid "Title:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/widgets.php:47
+msgid "List of services and links to their description pages"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/widgets.php:48
+msgid "Appointments+ Services"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/widgets.php:77
+msgid "Number of services to show:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/widgets.php:102
+msgid "List of service providers and links to their bio pages"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/widgets.php:103
+msgid "Appointments+ Service Providers"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/widgets.php:133
+msgid "Number of service providers to show:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/widgets.php:162
+msgid ""
+"A montly calendar that redirects user to the selected appointment page when "
+"a free day is clicked. Use several instances to show several months and set "
+"\"Months to add to current month\" as required, e.g. 0 for the first "
+"instance, 1 for the second one, and so on."
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/widgets.php:163
+msgid "Appointments+ Monthly Calendar"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/widgets.php:230
+msgid "Appointment page:"
+msgstr ""
+
+#: C:\Users\Hakan\Desktop\appointments/includes/widgets.php:237
+msgid "Months to add to current month:"
+msgstr ""
