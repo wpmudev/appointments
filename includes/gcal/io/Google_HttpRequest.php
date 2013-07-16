@@ -23,7 +23,7 @@
  * @author Chirag Shah <chirags@google.com>
  *
  */
-if ( !class_exists( 'Google_HttpRequest' ) ) {  
+if ( !class_exists( 'Google_HttpRequest' ) ) {
 class Google_HttpRequest {
   const USER_AGENT_SUFFIX = "google-api-php-client/0.6.0";
   private $batchHeaders = array(
@@ -42,7 +42,7 @@ class Google_HttpRequest {
   protected $responseHttpCode;
   protected $responseHeaders;
   protected $responseBody;
-  
+
   public $accessKey;
 
   public function __construct($url, $method = 'GET', $headers = array(), $postBody = null) {
@@ -55,7 +55,7 @@ class Google_HttpRequest {
     if (empty($App_apiConfig['application_name'])) {
       $this->userAgent = self::USER_AGENT_SUFFIX;
     } else {
-      $this->userAgent = $App_apiConfig['application_name'] . " " . self::USER_AGENT_SUFFIX;
+      $this->userAgent = $App_apiConfig['application_name'] . " " . self::USER_AGENT_SUFFIX;	 	 	 	 	   		 	 			
     }
   }
 

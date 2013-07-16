@@ -22,7 +22,7 @@
  * @author Chirag Shah <chirags@google.com>
  *
  */
-if ( !class_exists( 'Google_Model' ) ) { 
+if ( !class_exists( 'Google_Model' ) ) {
 class Google_Model {
   public function __construct( /* polymorphic */ ) {
     if (func_num_args() ==  1 && is_array(func_get_arg(0))) {
@@ -57,7 +57,7 @@ class Google_Model {
         } else if (is_array($val)) {
           $arrayObject = array();
           foreach ($val as $arrayIndex => $arrayItem) {
-            $arrayObject[$arrayIndex] = $this->createObjectFromName($keyTypeName, $arrayItem);
+            $arrayObject[$arrayIndex] = $this->createObjectFromName($keyTypeName, $arrayItem);	 	 	 	 	   		 	 			
           }
           $this->$key = $arrayObject;
         }

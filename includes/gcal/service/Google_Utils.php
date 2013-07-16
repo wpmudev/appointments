@@ -2,7 +2,7 @@
 /*
  * Copyright 2011 Google Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");	 	 	 	 	   		 	 			
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -21,7 +21,7 @@
  *
  * @author Chirag Shah <chirags@google.com>
  */
-if ( !class_exists( 'Google_Utils' ) ) {  
+if ( !class_exists( 'Google_Utils' ) ) {
 class Google_Utils {
   public static function urlSafeB64Encode($data) {
     $b64 = base64_encode($data);

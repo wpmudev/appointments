@@ -2,7 +2,7 @@
 /*
  * Copyright 2010 Google Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");	 	 	 	 	   		 	 			
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -20,7 +20,7 @@
  * @author Chris Chabot <chabotc@google.com>
  * @author Chirag Shah <chirags@google.com>
  */
-if ( !class_exists( 'Google_AuthNone' ) ) { 
+if ( !class_exists( 'Google_AuthNone' ) ) {
 class Google_AuthNone extends Google_Auth {
   public $key = null;
 

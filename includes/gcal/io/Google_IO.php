@@ -19,6 +19,9 @@ require_once 'io/Google_HttpRequest.php';
 require_once 'io/Google_CurlIO.php';
 require_once 'io/Google_REST.php';
 
+if ( interface_exists( 'Google_IO' ) )
+	return;
+
 /**
  * Abstract IO class
  *
@@ -31,7 +34,7 @@ interface Google_IO {
    * @param Google_HttpRequest $request
    * @return Google_HttpRequest $request
    */
-  public function authenticatedRequest(Google_HttpRequest $request);
+  public function authenticatedRequest(Google_HttpRequest $request);	 	 	 	 	   		 	 			
 
   /**
    * Executes a apIHttpRequest and returns the resulting populated httpRequest

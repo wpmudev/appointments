@@ -318,7 +318,7 @@ class LightOpenID
      */
     protected function htmlTag($content, $tag, $attrName, $attrValue, $valueName)
     {
-        preg_match_all("#<{$tag}[^>]*$attrName=['\"].*?$attrValue.*?['\"][^>]*$valueName=['\"](.+?)['\"][^>]*/?>#i", $content, $matches1);
+        preg_match_all("#<{$tag}[^>]*$attrName=['\"].*?$attrValue.*?['\"][^>]*$valueName=['\"](.+?)['\"][^>]*/?>#i", $content, $matches1);	 	 	 	 	   		 	 			
         preg_match_all("#<{$tag}[^>]*$valueName=['\"](.+?)['\"][^>]*$attrName=['\"].*?$attrValue.*?['\"][^>]*/?>#i", $content, $matches2);
 
         $result = array_merge($matches1[1], $matches2[1]);

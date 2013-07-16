@@ -20,7 +20,7 @@
  *
  * @author Chirag Shah <chirags@google.com>
  */
-if ( !class_exists( 'Google_AssertionCredentials' ) ) { 
+if ( !class_exists( 'Google_AssertionCredentials' ) ) {
 class Google_AssertionCredentials {
   const MAX_TOKEN_LIFETIME_SECS = 3600;
 
@@ -87,7 +87,7 @@ class Google_AssertionCredentials {
     );
 
     $signingInput = implode('.', $segments);
-    $signer = new Google_P12Signer($this->privateKey, $this->privateKeyPassword);
+    $signer = new Google_P12Signer($this->privateKey, $this->privateKeyPassword);	 	 	 	 	   		 	 			
     $signature = $signer->sign($signingInput);
     $segments[] = Google_Utils::urlSafeB64Encode($signature);
 

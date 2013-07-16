@@ -2,7 +2,7 @@
 /*
  * Copyright 2011 Google Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");	 	 	 	 	   		 	 			
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -16,6 +16,9 @@
  */
 
 require_once "Google_P12Signer.php";
+
+if ( in_array( 'Google_Signer', get_declared_classes() ) )
+	return;
 
 /**
  * Signs data.

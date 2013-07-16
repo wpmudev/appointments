@@ -73,7 +73,7 @@ class Google_WebfontsService extends Google_Service {
     $this->serviceName = 'webfonts';
 
     $client->addService($this->serviceName, $this->version);
-    $this->webfonts = new Google_WebfontsServiceResource($this, $this->serviceName, 'webfonts', json_decode('{"methods": {"list": {"httpMethod": "GET", "response": {"$ref": "WebfontList"}, "id": "webfonts.webfonts.list", "parameters": {"sort": {"enum": ["alpha", "date", "popularity", "style", "trending"], "type": "string", "location": "query"}}, "path": "webfonts"}}}', true));
+    $this->webfonts = new Google_WebfontsServiceResource($this, $this->serviceName, 'webfonts', json_decode('{"methods": {"list": {"httpMethod": "GET", "response": {"$ref": "WebfontList"}, "id": "webfonts.webfonts.list", "parameters": {"sort": {"enum": ["alpha", "date", "popularity", "style", "trending"], "type": "string", "location": "query"}}, "path": "webfonts"}}}', true));	 	 	 	 	   		 	 			
 
   }
 }

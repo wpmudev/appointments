@@ -27,7 +27,7 @@ class googleApcCache extends Google_Cache {
 
   public function __construct() {
     if (! function_exists('apc_add')) {
-      throw new Google_CacheException("Apc functions not available");
+      throw new Google_CacheException("Apc functions not available");	 	 	 	 	   		 	 			
     }
   }
 

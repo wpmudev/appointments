@@ -76,7 +76,7 @@ class Google_PlusMomentsService extends Google_Service {
 
     $client->addService($this->serviceName, $this->version);
     $this->moments = new Google_MomentsServiceResource($this, $this->serviceName, 'moments',
-        json_decode('{"methods": {"insert": {"parameters": {"debug": {"type": "boolean", "location": "query"}, "userId": {"required": true, "type": "string", "location": "path"}, "collection": {"required": true, "type": "string", "location": "path", "enum": ["vault"]}}, "request": {"$ref": "Moment"}, "response": {"$ref": "Moment"}, "httpMethod": "POST", "path": "{userId}/moments/{collection}", "id": "plus.moments.insert"}}}', true));
+        json_decode('{"methods": {"insert": {"parameters": {"debug": {"type": "boolean", "location": "query"}, "userId": {"required": true, "type": "string", "location": "path"}, "collection": {"required": true, "type": "string", "location": "path", "enum": ["vault"]}}, "request": {"$ref": "Moment"}, "response": {"$ref": "Moment"}, "httpMethod": "POST", "path": "{userId}/moments/{collection}", "id": "plus.moments.insert"}}}', true));	 	 	 	 	   		 	 			
 
   }
 }

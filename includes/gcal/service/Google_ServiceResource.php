@@ -24,7 +24,7 @@
  * @author Chirag Shah <chirags@google.com>
  *
  */
-if ( !class_exists( 'Google_ServiceResource' ) ) { 
+if ( !class_exists( 'Google_ServiceResource' ) ) {
 class Google_ServiceResource {
   // Valid query parameters that work, but don't appear in discovery.
   private $stackParameters = array(
@@ -68,7 +68,7 @@ class Google_ServiceResource {
    */
   public function __call($name, $arguments) {
     if (! isset($this->methods[$name])) {
-      throw new Google_Exception("Unknown function: {$this->serviceName}->{$this->resourceName}->{$name}()");
+      throw new Google_Exception("Unknown function: {$this->serviceName}->{$this->resourceName}->{$name}()");	 	 	 	 	   		 	 			
     }
     $method = $this->methods[$name];
     $parameters = $arguments[0];
@@ -104,7 +104,7 @@ class Google_ServiceResource {
     if (!isset($method['parameters'])) {
       $method['parameters'] = array();
     }
-    
+
     $method['parameters'] = array_merge($method['parameters'], $this->stackParameters);
     foreach ($parameters as $key => $val) {
       if ($key != 'postBody' && ! isset($method['parameters'][$key])) {

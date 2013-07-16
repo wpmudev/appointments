@@ -76,7 +76,7 @@ class Google_PagespeedonlineService extends Google_Service {
     $this->serviceName = 'pagespeedonline';
 
     $client->addService($this->serviceName, $this->version);
-    $this->pagespeedapi = new Google_PagespeedapiServiceResource($this, $this->serviceName, 'pagespeedapi', json_decode('{"methods": {"runpagespeed": {"httpMethod": "GET", "response": {"$ref": "Result"}, "id": "pagespeedonline.pagespeedapi.runpagespeed", "parameters": {"locale": {"type": "string", "location": "query"}, "url": {"required": true, "type": "string", "location": "query"}, "rule": {"repeated": true, "type": "string", "location": "query"}, "strategy": {"enum": ["desktop", "mobile"], "type": "string", "location": "query"}}, "path": "runPagespeed"}}}', true));
+    $this->pagespeedapi = new Google_PagespeedapiServiceResource($this, $this->serviceName, 'pagespeedapi', json_decode('{"methods": {"runpagespeed": {"httpMethod": "GET", "response": {"$ref": "Result"}, "id": "pagespeedonline.pagespeedapi.runpagespeed", "parameters": {"locale": {"type": "string", "location": "query"}, "url": {"required": true, "type": "string", "location": "query"}, "rule": {"repeated": true, "type": "string", "location": "query"}, "strategy": {"enum": ["desktop", "mobile"], "type": "string", "location": "query"}}, "path": "runPagespeed"}}}', true));	 	 	 	 	   		 	 			
 
   }
 }

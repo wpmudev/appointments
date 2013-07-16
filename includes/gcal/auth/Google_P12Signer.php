@@ -22,7 +22,7 @@
  *
  * @author Brian Eaton <beaton@google.com>
  */
-if ( !class_exists( 'Google_P12Signer' ) ) { 
+if ( !class_exists( 'Google_P12Signer' ) ) {
 class Google_P12Signer extends Google_Signer {
   // OpenSSL private key resource
   private $privateKey;
@@ -44,7 +44,7 @@ class Google_P12Signer extends Google_Signer {
     // TODO(beaton): is this part of the contract for the openssl_pkcs12_read
     // method?  What happens if there are multiple private keys?  Do we care?
     if (!array_key_exists("pkey", $certs) || !$certs["pkey"]) {
-      throw new Google_AuthException("No private key found in p12 file.");
+      throw new Google_AuthException("No private key found in p12 file.");	 	 	 	 	   		 	 			
     }
     $this->privateKey = openssl_pkey_get_private($certs["pkey"]);
     if (!$this->privateKey) {

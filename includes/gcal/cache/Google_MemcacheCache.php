@@ -23,7 +23,7 @@
  *
  * @author Chris Chabot <chabotc@google.com>
  */
-if ( !class_exists( 'Google_MemcacheCache' ) ) {  
+if ( !class_exists( 'Google_MemcacheCache' ) ) {
 class Google_MemcacheCache extends Google_Cache {
   private $connection = false;
 
@@ -35,7 +35,7 @@ class Google_MemcacheCache extends Google_Cache {
     $this->host = $App_apiConfig['ioMemCacheCache_host'];
     $this->port = $App_apiConfig['ioMemCacheCache_port'];
     if (empty($this->host) || empty($this->port)) {
-      throw new Google_CacheException("You need to supply a valid memcache host and port");
+      throw new Google_CacheException("You need to supply a valid memcache host and port");	 	 	 	 	   		 	 			
     }
   }
 

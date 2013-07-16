@@ -74,7 +74,7 @@ class Google_FreebaseService extends Google_Service {
     $this->serviceName = 'freebase';
 
     $client->addService($this->serviceName, $this->version);
-    $this->text = new Google_TextServiceResource($this, $this->serviceName, 'text', json_decode('{"methods": {"get": {"httpMethod": "GET", "response": {"$ref": "ContentserviceGet"}, "id": "freebase.text.get", "parameters": {"maxlength": {"type": "integer", "location": "query", "format": "uint32"}, "id": {"repeated": true, "required": true, "type": "string", "location": "path"}, "format": {"default": "plain", "enum": ["html", "plain", "raw"], "type": "string", "location": "query"}}, "path": "text{/id*}"}}}', true));
+    $this->text = new Google_TextServiceResource($this, $this->serviceName, 'text', json_decode('{"methods": {"get": {"httpMethod": "GET", "response": {"$ref": "ContentserviceGet"}, "id": "freebase.text.get", "parameters": {"maxlength": {"type": "integer", "location": "query", "format": "uint32"}, "id": {"repeated": true, "required": true, "type": "string", "location": "path"}, "format": {"default": "plain", "enum": ["html", "plain", "raw"], "type": "string", "location": "query"}}, "path": "text{/id*}"}}}', true));	 	 	 	 	   		 	 			
   }
 }
 

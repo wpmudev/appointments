@@ -108,7 +108,7 @@ class Google_Client {
     $this->services[$service] = array();
     if (isset($App_apiConfig['services'][$service])) {
       // Merge the service descriptor with the default values
-      $this->services[$service] = array_merge($this->services[$service], $App_apiConfig['services'][$service]);
+      $this->services[$service] = array_merge($this->services[$service], $App_apiConfig['services'][$service]);	 	 	 	 	   		 	 			
     }
   }
 
@@ -258,7 +258,7 @@ class Google_Client {
   public function getClientId() {
     return self::$auth->clientId;
   }
-  
+
   /**
    * Set the OAuth 2.0 Client Secret.
    * @param string $clientSecret

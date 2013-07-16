@@ -116,7 +116,7 @@ class Google_CurlIO implements Google_IO {
     // Retry if certificates are missing.
     if (curl_errno($ch) == CURLE_SSL_CACERT) {
 	  global $appointments;
-      $appointments->log( __( 'Either 1) Connection error to Google server. You may neglect this message if it is happening sporadically, or 2) SSL certificate problem, verify that the CA cert is OK.', 'appointments' ) );
+      $appointments->log( __( 'Either 1) Connection error to Google server. You may neglect this message if it is happening sporadically, or 2) SSL certificate problem, verify that the CA cert is OK.', 'appointments' ) );	 	 	 	 	   		 	 			
       curl_setopt($ch, CURLOPT_CAINFO, dirname(__FILE__) . '/cacerts.pem');
       $respData = curl_exec($ch);
     }

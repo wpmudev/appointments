@@ -26,7 +26,7 @@ require_once "service/Google_Utils.php";
  * @author Chirag Shah <chirags@google.com>
  *
  */
-if ( !class_exists( 'Google_OAuth2' ) ) {  
+if ( !class_exists( 'Google_OAuth2' ) ) {
 class Google_OAuth2 extends Google_Auth {
   public $clientId;
   public $clientSecret;
@@ -54,7 +54,7 @@ class Google_OAuth2 extends Google_Auth {
    */
   public function __construct() {
     global $App_apiConfig;
-    
+
     if (! empty($App_apiConfig['developer_key'])) {
       $this->developerKey = $App_apiConfig['developer_key'];
     }
@@ -70,7 +70,7 @@ class Google_OAuth2 extends Google_Auth {
     if (! empty($App_apiConfig['oauth2_redirect_uri'])) {
       $this->redirectUri = $App_apiConfig['oauth2_redirect_uri'];
     }
-    
+
     if (! empty($App_apiConfig['oauth2_access_type'])) {
       $this->accessType = $App_apiConfig['oauth2_access_type'];
     }
@@ -111,14 +111,14 @@ class Google_OAuth2 extends Google_Auth {
         if ($decodedResponse != null && $decodedResponse['error']) {
           $response = $decodedResponse['error'];
         }
-        throw new Google_AuthException("Error fetching OAuth2 access token, message: '$response'", $request->getResponseHttpCode());
+        throw new Google_AuthException("Error fetching OAuth2 access token, message: '$response'", $request->getResponseHttpCode());	 	 	 	 	   		 	 			
       }
     }
 
     $authUrl = $this->createAuthUrl($service['scope']);
     header('Location: ' . $authUrl);
     return true;
-  } 
+  }
 
   /**
    * Create a URL to obtain user authorization.

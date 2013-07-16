@@ -2,7 +2,7 @@
 /*
  * Copyright 2008 Google Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");	 	 	 	 	   		 	 			
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -17,6 +17,9 @@
 
 require_once "Google_FileCache.php";
 require_once "Google_MemcacheCache.php";
+
+if ( in_array( 'Google_Cache', get_declared_classes() ) )
+	return;
 
 /**
  * Abstract storage class

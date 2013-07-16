@@ -12,7 +12,7 @@ function add_appointments_css_style() {
 	global $appointments;
 	$appointments->load_scripts_styles( );
 }
-add_action( 'template_redirect', 'add_appointments_css_style' );
+add_action( 'template_redirect', 'add_appointments_css_style' );	 	 	 	 	   		 	 			
 
 */
 
@@ -33,7 +33,7 @@ get_header(); ?>
 							<?php do_shortcode('[app_schedule]'); ?>
 							<?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:' ) . '</span>', 'after' => '</div>' ) ); ?>
 						</div><!-- .entry-content -->
-						
+
 						<footer class="entry-meta">
 							<?php edit_post_link( __( 'Edit' ), '<span class="edit-link">', '</span>' ); ?>
 						</footer><!-- .entry-meta -->

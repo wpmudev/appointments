@@ -24,7 +24,7 @@
  *
  * @author Chris Chabot <chabotc@google.com>
  */
-if ( !class_exists( 'Google_FileCache' ) ) { 
+if ( !class_exists( 'Google_FileCache' ) ) {
 class Google_FileCache extends Google_Cache {
   private $path;
 
@@ -45,7 +45,7 @@ class Google_FileCache extends Google_Cache {
       if (! @mkdir($storageDir, 0755, true)) {
         // make sure the failure isn't because of a concurrency issue
         if (! is_dir($storageDir)) {
-          throw new Google_CacheException("Could not create storage directory: $storageDir");
+          throw new Google_CacheException("Could not create storage directory: $storageDir");	 	 	 	 	   		 	 			
         }
       }
       // @codeCoverageIgnoreEnd

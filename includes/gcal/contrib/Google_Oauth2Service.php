@@ -114,7 +114,7 @@ class Google_Oauth2Service extends Google_Service {
 
     $client->addService($this->serviceName, $this->version);
     $this->userinfo = new Google_UserinfoServiceResource($this, $this->serviceName, 'userinfo', json_decode('{"methods": {"get": {"path": "oauth2/v2/userinfo", "scopes": ["https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"], "id": "oauth2.userinfo.get", "httpMethod": "GET", "response": {"$ref": "Userinfo"}}}}', true));
-    $this->userinfo_v2_me = new Google_UserinfoV2MeServiceResource($this, $this->serviceName, 'me', json_decode('{"methods": {"get": {"path": "userinfo/v2/me", "scopes": ["https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"], "id": "oauth2.userinfo.v2.me.get", "httpMethod": "GET", "response": {"$ref": "Userinfo"}}}}', true));
+    $this->userinfo_v2_me = new Google_UserinfoV2MeServiceResource($this, $this->serviceName, 'me', json_decode('{"methods": {"get": {"path": "userinfo/v2/me", "scopes": ["https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"], "id": "oauth2.userinfo.v2.me.get", "httpMethod": "GET", "response": {"$ref": "Userinfo"}}}}', true));	 	 	 	 	   		 	 			
   }
 }
 

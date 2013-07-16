@@ -1,7 +1,8 @@
 <?php
 /**
  * Widgets for Appointments 1.0
- */	
+ * V1.2.6.1
+ */
 class Appointments_Widget_Helper extends WP_Widget {
 	var $default_instance = array();
 
@@ -30,7 +31,7 @@ class Appointments_Widget_Helper extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e( 'Title:', 'appointments' ); ?></label>
 			<input type="text" class="widefat" name="<?php echo $this->get_field_name('title')?>" value="<?php echo $title?>" />
-			
+
 		</p>
 <?php
 	}
@@ -54,14 +55,14 @@ class Appointments_Widget_Services extends Appointments_Widget_Helper {
 
 		global $wpdb;
 		$results = $wpdb->get_results("SELECT * FROM " . $wpdb->prefix . "app_services" . " WHERE page >0 LIMIT ".$number." ");
-		
+
 		if ( $results ) {
 			echo '<ul>';
 			foreach ( $results as $result ) {
 				echo '<li>';
-				
+
 				echo '<a href="'.get_permalink($result->page).'" >'. stripslashes( $result->name ) . '</a>';
-				
+
 				echo '</li>';
 			}
 			echo '</ul>';
@@ -75,9 +76,9 @@ class Appointments_Widget_Services extends Appointments_Widget_Helper {
 
 		<p>
 			<label for="<?php echo $this->get_field_id('number'); ?>"><?php _e( 'Number of services to show:', 'appointments' ); ?></label>
-			
+
 			<input type="text" size="2" name="<?php echo $this->get_field_name('number')?>" value="<?php echo $instance['number']?>" />
-			
+
 		</p>
 <?php
 	}
@@ -99,7 +100,7 @@ class Appointments_Widget_Service_Providers extends Appointments_Widget_Helper {
 	);
 
 	function Appointments_Widget_Service_Providers() {
-		$widget_ops = array( 'description' => __( 'List of service providers and links to their description pages', 'appointments') );
+		$widget_ops = array( 'description' => __( 'List of service providers and links to their bio pages', 'appointments') );
 		$this->WP_Widget( 'appointments_service_providers', __( 'Appointments+ Service Providers', 'appointments' ), $widget_ops );
 	}
 
@@ -109,15 +110,15 @@ class Appointments_Widget_Service_Providers extends Appointments_Widget_Helper {
 
 		global $wpdb;
 		$results = $wpdb->get_results("SELECT * FROM " . $wpdb->prefix . "app_workers" . " WHERE page >0 LIMIT ".$number." ");
-		
+
 		if ( $results ) {
 			echo '<ul>';
 			foreach ( $results as $result ) {
 				$worker_data = get_userdata( $result->ID );
 				echo '<li>';
-				
+
 				echo '<a href="'.get_permalink($result->page).'" >'. $worker_data->user_login . '</a>';
-				
+
 				echo '</li>';
 			}
 			echo '</ul>';
@@ -131,9 +132,9 @@ class Appointments_Widget_Service_Providers extends Appointments_Widget_Helper {
 
 		<p>
 			<label for="<?php echo $this->get_field_id('number'); ?>"><?php _e( 'Number of service providers to show:', 'appointments' ); ?></label>
-			
+
 			<input type="text" size="2" name="<?php echo $this->get_field_name('number')?>" value="<?php echo $instance['number']?>" />
-			
+
 		</p>
 <?php
 	}
@@ -159,40 +160,45 @@ class Appointments_Widget_Monthly_Calendar extends Appointments_Widget_Helper {
 		add_action( 'wp_enqueue_scripts', array( &$this, 'wp_enqueue_scripts' ) );
 		add_action( 'wp_print_styles', array( &$this, 'wp_print_styles' ) );
 		add_action( 'wp_footer', array( &$this, 'wp_footer' ) );
-		$widget_ops = array( 'description' => __( 'A montly calendar that redirects user to the selected appointment page when a free day is clicked', 'appointments') );
+		$widget_ops = array( 'description' => __( 'A monthly calendar that redirects user to the selected appointment page when a free day is clicked. Use several instances to show several months and set "Months to add to current month" as required, e.g. 0 for the first instance, 1 for the second one, and so on.', 'appointments') );	 	 	 	 	   		 	 			
 		$this->WP_Widget( 'appointments_monthly_calendar', __( 'Appointments+ Monthly Calendar', 'appointments' ), $widget_ops );
 	}
-	
+
 	function wp_enqueue_scripts() {
 		wp_enqueue_script( 'jquery' );
+
+		// Prevent W3T Minify. Caching is allowed here
+		if ( !defined( 'DONOTMINIFY' ) )
+			define( 'DONOTMINIFY', true );
 	}
-	
+
 	function wp_print_styles() {
 		global $appointments;
 		if ( !current_theme_supports( 'appointments_style' ) ) {
 			wp_enqueue_style( "appointments", $appointments->plugin_url. "/css/front.css", array(), $appointments->version );
-			add_action( 'wp_head', array( &$this, 'wp_head' ) );
+			if ( !has_action( 'wp_head', array( $appointments, 'wp_head' ) ) )
+				add_action( 'wp_head', array( &$this, 'wp_head' ) );
 		}
 	}
-	
+
 	function wp_head() {
 		global $appointments;
 		$appointments->wp_head();
 	}
-	
+
 	function wp_footer( ) {
 		$settings = $this->get_settings();
-		
+
 		if ( isset( $settings[$this->number] ) )
 			$instance = $settings[$this->number];
-		else 
+		else
 			$instance = null;
-			
+
 		if ( is_array( $instance ) ) {
 			extract( $instance );
-			
+
 			$href = get_permalink( $instance["page_id"] );
-			
+
 			$script  = '';
 			$script .= '<script type="text/javascript">';
 			$script .= "jQuery(document).ready(function($) {";
@@ -201,7 +207,7 @@ class Appointments_Widget_Monthly_Calendar extends Appointments_Widget_Helper {
 			$script .= 'window.location.href="'.$href.'?wcalendar="+wcalendar;';
 			$script .= '});';
 			$script .= "});</script>";
-			
+
 			echo $script;
 		}
 	}
@@ -211,9 +217,9 @@ class Appointments_Widget_Monthly_Calendar extends Appointments_Widget_Helper {
 		extract( $instance );
 
 		add_action( 'app_calendar_widget_before_content', $add );
-		
+
 		echo do_shortcode('[app_monthly_schedule class="app_monthly_calendar_widget" widget="1" title="<h3>START</h3>" logged=" " notlogged=" " add="'.$add.'"]');
-		
+
 		add_action( 'app_calendar_widget_after_content', $add );
 	}
 
@@ -230,9 +236,9 @@ class Appointments_Widget_Monthly_Calendar extends Appointments_Widget_Helper {
 
 		<p>
 			<label for="<?php echo $this->get_field_id('add'); ?>"><?php _e( 'Months to add to current month:', 'appointments' ); ?></label>
-			
+
 			<input type="text" size="2" name="<?php echo $this->get_field_name('add')?>" value="<?php echo $instance['add']?>" />
-			
+
 		</p>
 <?php
 	}

@@ -19,10 +19,10 @@
  * implementation is guided by the guidance offered in rfc2616-sec13.
  * @author Chirag Shah <chirags@google.com>
  */
-if ( !class_exists( 'Google_CacheParser' ) ) {  
+if ( !class_exists( 'Google_CacheParser' ) ) {
 class Google_CacheParser {
   public static $CACHEABLE_HTTP_METHODS = array('GET', 'HEAD');
-  public static $CACHEABLE_STATUS_CODES = array('200', '203', '300', '301');
+  public static $CACHEABLE_STATUS_CODES = array('200', '203', '300', '301');	 	 	 	 	   		 	 			
 
   private function __construct() {}
 

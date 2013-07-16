@@ -19,7 +19,7 @@
  * @author Chirag Shah <chirags@google.com>
  *
  */
-if ( !class_exists( 'Google_MediaFileUpload' ) ) { 
+if ( !class_exists( 'Google_MediaFileUpload' ) ) {
 class Google_MediaFileUpload {
   const UPLOAD_MEDIA_TYPE = 'media';
   const UPLOAD_MULTIPART_TYPE = 'multipart';
@@ -115,7 +115,7 @@ class Google_MediaFileUpload {
 
     elseif (self::UPLOAD_MULTIPART_TYPE == $uploadType) {
       // This is a multipart/related upload.
-      $boundary = isset($params['boundary']['value']) ? $params['boundary']['value'] : mt_rand();
+      $boundary = isset($params['boundary']['value']) ? $params['boundary']['value'] : mt_rand();	 	 	 	 	   		 	 			
       $boundary = str_replace('"', '', $boundary);
       $payload['content-type'] = 'multipart/related; boundary=' . $boundary;
       $related = "--$boundary\r\n";

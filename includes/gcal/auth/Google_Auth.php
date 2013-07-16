@@ -2,7 +2,7 @@
 /*
  * Copyright 2010 Google Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");	 	 	 	 	   		 	 			
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -17,6 +17,9 @@
 
 require_once "Google_AuthNone.php";
 require_once "Google_OAuth2.php";
+
+if ( in_array( 'Google_Auth', get_declared_classes() ) )
+	return;
 
 /**
  * Abstract class for the Authentication in the API client

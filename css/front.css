@@ -145,7 +145,7 @@ border-radius: 5px;
 /* Buttons
 	 ====================  */
 
-.app_submit_btn{ 
+.app_submit_btn{
 	width:auto;
 }
 
@@ -171,24 +171,24 @@ a.appointments-login_link-cancel, .app_submit_btn {
   border: 1px solid #e3e3e3;
   border-bottom-color: #d1d1d1;
   border-radius: 3px;
-  
+
   -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1);
   	 -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1);
   				box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1);
-  
+
   -webkit-transition: 0.1s linear all;
   	 -moz-transition: 0.1s linear all;
   		-ms-transition: 0.1s linear all;
   		 -o-transition: 0.1s linear all;
   				transition: 0.1s linear all;
-  
+
 	text-decoration:none;
 }
 
 a.appointments-login_link-cancel:hover,  .app_submit_btn:hover {
 	border: 1px solid #c9c9c9;
 	color: #1a1a1a;
-	
+
   -webkit-transition: 0.1s linear all;
   	 -moz-transition: 0.1s linear all;
   		-ms-transition: 0.1s linear all;
@@ -207,11 +207,11 @@ a.appointments-login_link-cancel:active,  .app_submit_btn:active {
 	background: -ms-linear-gradient(top,  #d0d0d0 0%,#dfdfdf 60%); /* IE10+ */
 	background: linear-gradient(top,  #d0d0d0 0%,#dfdfdf 60%); /* W3C */
 			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0d0d0', endColorstr='#dfdfdf',GradientType=0 ); /* IE6-9 */
-			
+
 	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
   	 -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
   				box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  
+
   -webkit-transition: 0s linear all;
      -moz-transition: 0s linear all;
   		-ms-transition: 0s linear all;
@@ -250,11 +250,11 @@ a.appointments-login_link-facebook {
   -webkit-border-radius: 4px;
   	 -moz-border-radius: 4px;
   				border-radius: 4px;
-  				
+
   -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
   	 -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
   				box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-  				
+
   -webkit-transition: 0.1s linear all;
   	 -moz-transition: 0.1s linear all;
   		-ms-transition: 0.1s linear all;
@@ -282,7 +282,7 @@ a.appointments-login_link-twitter {
   -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
   	 -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
  	 				box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
- 	 				
+
   -webkit-transition: 0.1s linear all;
   	 -moz-transition: 0.1s linear all;
   		-ms-transition: 0.1s linear all;
@@ -339,7 +339,7 @@ a.appointments-login_link-wordpress {
   -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
  		 -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
   				box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-  				
+
   -webkit-transition: 0.1s linear all;
  		 -moz-transition: 0.1s linear all;
   		-ms-transition: 0.1s linear all;
@@ -388,37 +388,37 @@ a.appointments-login_link-submit:hover, a.appointments-login_link-submit.active 
   color: #fff;
   text-decoration: none;
 }
-/* _________________________ 
+/* _________________________
    added css 20 Aug, @victor */
 
-.appointments-list table { 
-  padding: 0; 
+.appointments-list table {
+  padding: 0;
   margin: 0;
-  table-layout: fixed; 
+  table-layout: fixed;
 }
 
 .appointments-list table td { border: 1px solid #d0d0d0; color:#333; }
 .app_timetable_cell { color:#333; }
-.appointments-list table th { 
-  width:10%; 
-  background-color: transparent; 
+.appointments-list table th {
+  width:10%;
+  background-color: transparent;
   text-align: center;
-  text-transform: none; 
-  font-size: 1em; 
+  text-transform: none;
+  font-size: 1em;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 200;
   border: 1px solid #d0d0d0;
   color: #474747;
 }
 .entry-content .appointments-list td.appointments-weekly-calendar-hours-mins { width:30%; }
-.entry-content .appointments-list td { 
-  width:10%; 
-  vertical-align: middle; 
+.entry-content .appointments-list td {
+  width:10%;
+  vertical-align: middle;
 }
 .appointments-list table th.hourmin_column { width:30%; }
 .appointments-list table tbody tr:nth-child(2n+1) { background-color: rgba(247,247,247,0.2); }
 .appointments-list table td { height:3em; font-size:0.7em; }
-.appointments-list table td.busy:after, 
+.appointments-list table td.busy:after,
 .appointments-list table td.notpossible:after {
   content: '\00D7';
   position: relative;
@@ -451,18 +451,28 @@ tr td.free.selected { border-top:none; border:2px solid #fff; opacity: 0.5; }
 .app_monthly_schedule_wrapper table tbody tr:nth-child(2n+1) { background-color: inherit; }
 .app_monthly_schedule_wrapper table td p { margin-bottom: 0.5em; margin-left: 4px; }
 .app_timetable_cell { text-align: center; width: 30%; border: none; margin:1px; }
-.appointments-my-appointments { font-size: 0.8em; }
+.appointments-my-appointments  { font-size: 0.8em; }
 /* text layout */
 .appointments-my-appointments table,
 .appointments-my-appointments,
-.appointments-wrapper { 
-  width: 100%; 
+.appointments-all-appointments table,
+.appointments-all-appointments,
+.appointments-wrapper {
+  width: 100%;
 }
 .appointments-my-appointments table th { font-size: 1.2em; background-color: rgba(230, 230, 230, 0.2); }
 .appointments-my-appointments table th,
-.appointments-my-appointments table td { width:20%; padding:1.5%; }
+.appointments-my-appointments table td { width:15%; padding:1.5%; }
 .appointments-my-appointments .my-appointments-status { width:15%; }
 .appointments-my-appointments .my-appointments-date { width:25%; }
+
+.appointments-all-appointments  { font-size: 0.8em; }
+.appointments-all-appointments table th { font-size: 1.2em; background-color: rgba(230, 230, 230, 0.2); }
+.appointments-all-appointments table th,
+.appointments-all-appointments table td { width:20%; padding:1.5%; }
+.appointments-all-appointments .all-appointments-status { width:15%; }
+.appointments-all-appointments .all-appointments-date { width:25%; }
+
 .appointments-wrapper { margin-top:10px; }
 .appointments-wrapper h2 { font-size: 1.9em; }
 
@@ -477,7 +487,7 @@ tr td.free.selected { border-top:none; border:2px solid #fff; opacity: 0.5; }
 .appointments-pagination { clear:both; }
 
 /* form elements */
-.app_services_dropdown_select, 
+.app_services_dropdown_select,
 .app_workers_dropdown_select { padding: 0.4em 0; }
 .app_services_dropdown_select select,
 .app_workers_dropdown_select select { margin-right: 1em; }
@@ -486,11 +496,11 @@ tr td.free.selected { border-top:none; border:2px solid #fff; opacity: 0.5; }
   /*border-top:1px solid rgba(100,100,100, 0.1);*/
   padding:1.2em 0;
 }
-.appointments-pagination a { 
+.appointments-pagination a {
   color: #474747;
   text-decoration: none;
-  text-shadow:0 1px 0 #fff; 
-  padding:0.2em 1.2em; 
+  text-shadow:0 1px 0 #fff;
+  padding:0.2em 1.2em;
   border-radius: 3px;
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
@@ -506,8 +516,8 @@ tr td.free.selected { border-top:none; border:2px solid #fff; opacity: 0.5; }
   background-image: -webkit-linear-gradient(90deg, #ededed 0%, #ededed 0.24%, #fff 70.17%, #fff 100%);
   background-image: linear-gradient(90deg, #ededed 0%, #ededed 0.24%, #fff 70.17%, #fff 100%);
 }
-.appointments-pagination a:hover { 
-  text-decoration: none; 
+.appointments-pagination a:hover {
+  text-decoration: none;
   background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0iaGF0MCIgZ3JhZGllbnRVbml0cz0ib2JqZWN0Qm91bmRpbmdCb3giIHgxPSI1MCUiIHkxPSIxMDAlIiB4Mj0iNTAlIiB5Mj0iLTEuNDIxMDg1NDcxNTIwMmUtMTQlIj4KPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2UwZTBlMCIgc3RvcC1vcGFjaXR5PSIxIi8+CjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNlMGUwZTAiIHN0b3Atb3BhY2l0eT0iMSIvPgo8c3RvcCBvZmZzZXQ9IjcwJSIgc3RvcC1jb2xvcj0iI2ZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgIDwvbGluZWFyR3JhZGllbnQ+Cgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0idXJsKCNoYXQwKSIgLz4KPC9zdmc+);
   background-image: -moz-linear-gradient(90deg, #e0e0e0 0%, #e0e0e0 0.24%, #fff 70.17%, #fff 100%);
   background-image: -o-linear-gradient(90deg, #e0e0e0 0%, #e0e0e0 0.24%, #fff 70.17%, #fff 100%);
@@ -557,3 +567,63 @@ div.error p {
 	margin: 5px 0 15px;
 }
 
+/* tablesorter */
+table.tablesorter thead tr .header {
+	background-image: url(../images/bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+table.tablesorter thead tr .headerSortUp {
+	background-image: url(../images/asc.gif);
+}
+table.tablesorter thead tr .headerSortDown {
+	background-image: url(../images/desc.gif);
+}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+opacity: 0.5;
+}
+
+.app-scheduled_appointment {
+  cursor: pointer;
+  padding: 0 2px;
+}
+.app-scheduled_appointment.app-is_service {
+  opacity: .7;
+}
+.app-scheduled_appointment.app-is_mine {
+  font-weight: bold;
+}
+.app-worker_montly_calendar td {
+  height: 6em;
+  width: 14.2%;
+  vertical-align: top;
+  padding: 5px !important;
+}
+.app-worker_montly_calendar td.app-today, .app-worker_montly_calendar td.app-today:hover {
+  background: rgba(164,33,33,.2);
+}
+.app-worker_montly_calendar td .app-end_time {
+  display: none;
+}
+.app-worker_montly_calendar td p {
+  margin: 0; padding: 0;
+  opacity: .5;
+  font-size: 2em;
+}
+.app-worker_montly_calendar-out {
+  clear: both;
+}
+.app-worker_montly_calendar-out ul, .app-worker_montly_calendar-out ul li {
+  list-style: none !important;
+  background-image: none !important;
+  margin: 0 !important; padding: 0 !important;
+}
+.app-worker_montly_calendar-out ul li {
+  float: left;
+  width: 24%;
+  margin-right: 1% !important;
+}
+.app-worker_montly_calendar-out ul li b {
+  display: block;
+}

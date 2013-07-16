@@ -21,7 +21,7 @@
  * @author Chris Chabot <chabotc@google.com>
  * @author Chirag Shah <chirags@google.com>
  */
-if ( !class_exists( 'Google_REST' ) ) {   
+if ( !class_exists( 'Google_REST' ) ) {
 class Google_REST {
   /**
    * Executes a apiServiceRequest using a RESTful call by transforming it into
@@ -40,7 +40,7 @@ class Google_REST {
     return $ret;
   }
 
-  
+
   /**
    * Decode an HTTP Response.
    * @static
@@ -52,10 +52,10 @@ class Google_REST {
     $code = $response->getResponseHttpCode();
     $body = $response->getResponseBody();
     $decoded = null;
-    
+
     if ($code != '200' && $code != '201' && $code != '204') {
       $decoded = json_decode($body, true);
-      $err = 'Error calling ' . $response->getRequestMethod() . ' ' . $response->getUrl();
+      $err = 'Error calling ' . $response->getRequestMethod() . ' ' . $response->getUrl();	 	 	 	 	   		 	 			
       if ($decoded != null && isset($decoded['error']['message'])  && isset($decoded['error']['code'])) {
         // if we're getting a json encoded error definition, use that instead of the raw response
         // body for improved readability
@@ -66,7 +66,7 @@ class Google_REST {
 	  global $appointments;
       $appointments->log($err);
     }
-    
+
     // Only attempt to decode the response, if the response code wasn't (204) 'no content'
     if ($code != '204') {
       $decoded = json_decode($body, true);

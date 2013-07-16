@@ -27,7 +27,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * Blogpost: http://lab.kevburnsjr.com/php-uri-template-parser
  * Source: http://github.com/KevBurnsJr/php-uri-template-parser
  */
-if ( !class_exists( 'URI_Template_Parser' ) ) {  
+if ( !class_exists( 'URI_Template_Parser' ) ) {
 class URI_Template_Parser {
 
   public static $operators = array('+', ';', '?', '/', '.');
@@ -38,7 +38,7 @@ class URI_Template_Parser {
   public static $gen_delims = array(':', '/', '?', '#', '[', ']', '@');
   public static $gen_delims_pct = array('%3A', '%2F', '%3F', '%23', '%5B', '%5D', '%40');
   public static $sub_delims = array('!', '$', '&', '\'', '(', ')', '*', '+', ',', ';', '=');
-  public static $sub_delims_pct = array('%21', '%24', '%26', '%27', '%28', '%29', '%2A', '%2B', '%2C', '%3B', '%3D');
+  public static $sub_delims_pct = array('%21', '%24', '%26', '%27', '%28', '%29', '%2A', '%2B', '%2C', '%3B', '%3D');	 	 	 	 	   		 	 			
   public static $reserved;
   public static $reserved_pct;
 

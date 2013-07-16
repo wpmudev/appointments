@@ -1,20 +1,24 @@
-.column-service, .column-worker, .column-status{
+.app-column-service, .app-column-worker, .app-column-status{
 width:15%;
 }
-.column-date{
-width:25%;
+.app-column-date{
+width:25% !important;
 }
-.column-app_ID{
+.app-column-app_ID, .app-column-subscription{
 width:5%;
 }
-.column-delete{
+.app-column-delete{
 width:4%;
 }
-th.column-delete{
+th.app-column-delete{
 padding:5px 0 0 0 !important;
 }
-td.column-delete{
+td.app-column-delete{
 padding:5px 0 0 7px !important;
+}
+
+.app-check-column input[type="checkbox"]{
+margin-left:8px;
 }
 
 a.pickcolor {
@@ -30,4 +34,39 @@ background: url(../images/menu_icon.png) no-repeat bottom;
 }
 li.toplevel_page_appointments:hover div.wp-menu-image, li.toplevel_page_appointments.wp-has-current-submenu div.wp-menu-image {
 background-position: top;
+}
+
+.widefat tr.app-repeated td {
+	border: none;
+}
+.app-add_break span {
+	display: none;
+}
+.app-add_break:after {
+	content: "+";
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.app-addon-requires {
+	font-style: italic;
+	color: #633;
+}
+.app-beta-version {
+	color: #c33;
+}
+.app_deactivate_plugin {
+	color: #933;
+}
+.app_activate_plugin.app-beta {
+	opacity: .5;
+}
+
+.app-has_explanation {
+	border-bottom: 1px dotted #aaa;
+}
+
+.app-postbox_container {
+	width: 49%;
+	margin-right: .5%;
 }

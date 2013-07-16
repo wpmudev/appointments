@@ -20,7 +20,7 @@
  *
  * @author Brian Eaton <beaton@google.com>
  */
-if ( !class_exists( 'Google_LoginTicket' ) ) { 
+if ( !class_exists( 'Google_LoginTicket' ) ) {
 class Google_LoginTicket {
   const USER_ATTR = "id";
 
@@ -59,7 +59,7 @@ class Google_LoginTicket {
    * @return array
    */
   public function getAttributes() {
-    return array("envelope" => $this->envelope, "payload" => $this->payload);
+    return array("envelope" => $this->envelope, "payload" => $this->payload);	 	 	 	 	   		 	 			
   }
 }
 }

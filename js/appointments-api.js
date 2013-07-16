@@ -1,6 +1,11 @@
 /* ----- Login with Fb/Tw ----- */
 (function ($) {
 
+function is_available (service) {
+	var all = l10nAppApi && l10nAppApi.show_login_button ? l10nAppApi.show_login_button : [];
+	return all.indexOf(service) >= 0;
+}
+
 function create_app_login_interface ($me) {
 	if ($("#appointments-login_links-wrapper").length) {
 		$("#appointments-login_links-wrapper").remove();
@@ -9,11 +14,11 @@ function create_app_login_interface ($me) {
 	var $root = $("#appointments-login_links-wrapper");
 	$root.html(
 		'<ul class="appointments-login_links">' +
-			'<li><a href="#" class="appointments-login_link appointments-login_link-facebook">' + l10nAppApi.facebook + '</a></li>' +
-			'<li><a href="#" class="appointments-login_link appointments-login_link-twitter">' + l10nAppApi.twitter + '</a></li>' +
-			'<li><a href="#" class="appointments-login_link appointments-login_link-google">' + l10nAppApi.google + '</a></li>' +
-			'<li><a href="#" class="appointments-login_link appointments-login_link-wordpress">' + l10nAppApi.wordpress + '</a></li>' +
-			'<li class="app_login_submit"><input type="text" class="app_username" value="Username" onfocus="app_checkclear(this)" /><input type="password" class="app_password" value="Password" onfocus="app_checkclear(this)" /><a href="javascript:void(0)" class="appointments-login_link appointments-login_link-submit">' + l10nAppApi.submit + '</a></li>' +
+			(is_available('facebook') ? '<li><a href="#" class="appointments-login_link appointments-login_link-facebook">' + l10nAppApi.facebook + '</a></li>' : '') +
+			(is_available('twitter') ? '<li><a href="#" class="appointments-login_link appointments-login_link-twitter">' + l10nAppApi.twitter + '</a></li>' : '') +
+			(is_available('google') ? '<li><a href="#" class="appointments-login_link appointments-login_link-google">' + l10nAppApi.google + '</a></li>' : '') +
+			(is_available('wordpress') ? '<li><a href="#" class="appointments-login_link appointments-login_link-wordpress">' + l10nAppApi.wordpress + '</a></li>' : '') +
+			'<li class="app_login_submit"><input type="text" class="app_username" name="log" placeholder="Username" /><input type="password" name="pwd" class="app_password" placeholder="Password" /><a href="javascript:void(0)" class="appointments-login_link appointments-login_link-submit">' + l10nAppApi.submit + '</a></li>' +
 			'<li><a href="#" class="appointments-login_link appointments-login_link-cancel">' + l10nAppApi.cancel + '</a></li>' +
 		'</ul>'
 	);
@@ -22,6 +27,10 @@ function create_app_login_interface ($me) {
 		var $lnk = $(this);
 		var callback = false;
 		if ($lnk.is(".appointments-login_link-facebook")) {
+			if ("undefined" == typeof FB) {
+				$lnk.parents('li').hide();
+				return true;
+			}
 			// Facebook login
 			callback = function () {
 				FB.login(function (resp) {
@@ -34,12 +43,12 @@ function create_app_login_interface ($me) {
 							"token": FB.getAccessToken()
 						}, function (data) {
 							var status = 0;
-							try { status = parseInt(data.status); } catch (e) { status = 0; }
+							try { status = parseInt(data.status, 10); } catch (e) { status = 0; }
 							if (!status) { // ... handle error
 								$root.remove();
 								return false;
 							}
-							if ( data.status && data.status==1 ) { 
+							if ( data.status && data.status==1 ) {
 								$(".appointments-login_inner").text(l10nAppApi.logged_in);
 								window.location.href = window.location.href;
 							}
@@ -52,6 +61,10 @@ function create_app_login_interface ($me) {
 				return false;
 			};
 		} else if ($lnk.is(".appointments-login_link-twitter")) {
+			if (!l10nAppApi._can_use_twitter) {
+				$lnk.parents('li').hide();
+				return true;
+			}
 			callback = function () {
 				var init_url = $.browser.opera ? '' : 'https://api.twitter.com/';
 				var twLogin = window.open(init_url, "twitter_login", "scrollbars=no,resizable=no,toolbar=no,location=no,directories=no,status=no,menubar=no,copyhistory=no,height=400,width=600");
@@ -79,12 +92,12 @@ function create_app_login_interface ($me) {
 									"data": search
 								}, function (data) {
 									var status = 0;
-									try { status = parseInt(data.status); } catch (e) { status = 0; }
+									try { status = parseInt(data.status, 10); } catch (e) { status = 0; }
 									if (!status) { // ... handle error
 										$root.remove();
 										return false;
 									}
-									if ( data.status && data.status==1 ) { 
+									if ( data.status && data.status==1 ) {
 										$(".appointments-login_inner").text(l10nAppApi.logged_in);
 										window.location.href = window.location.href;
 									}
@@ -95,10 +108,10 @@ function create_app_login_interface ($me) {
 							}
 						} catch (e) {}
 					}, 300);
-				})
+				});
 				return false;
 			};
-		} 
+		}
 		else if ($lnk.is(".appointments-login_link-google")) {
 			callback = function () {
 				var googleLogin = window.open('https://www.google.com/accounts', "google_login", "scrollbars=no,resizable=no,toolbar=no,location=no,directories=no,status=no,menubar=no,copyhistory=no,height=400,width=800");
@@ -120,13 +133,13 @@ function create_app_login_interface ($me) {
 									"action": "app_google_login"
 								}, function (data) {
 									var status = 0;
-									try { status = parseInt(data.status); } catch (e) { status = 0; }
+									try { status = parseInt(data.status, 10); } catch (e) { status = 0; }
 									if (!status) { // ... handle error
 										$root.remove();
 										$me.click();
 										return false;
 									}
-									if ( data.status && data.status==1 ) { 
+									if ( data.status && data.status==1 ) {
 										$(".appointments-login_inner").text(l10nAppApi.logged_in);
 										window.location.href = window.location.href;
 									}
@@ -137,7 +150,7 @@ function create_app_login_interface ($me) {
 							}
 						} catch (e) {}
 					}, 300);
-				})
+				});
 				return false;
 			};
 		}
@@ -160,12 +173,12 @@ function create_app_login_interface ($me) {
 					}, function (data) {
 						$(".app_wait_img").remove();
 						var status = 0;
-						try { status = parseInt(data.status); } catch (e) { status = 0; }
+						try { status = parseInt(data.status, 10); } catch (e) { status = 0; }
 						if (!status) { // ... handle error
 							$lnk.after('<div class="app_error">'+data.error+'</div>');
 							return false;
 						}
-						if ( data.status && data.status==1 ) { 
+						if ( data.status && data.status==1 ) {
 								$(".appointments-login_inner").text(l10nAppApi.logged_in);
 								window.location.href = window.location.href;
 							}
@@ -193,7 +206,7 @@ function create_app_login_interface ($me) {
 // Init
 
 $(function () {
-	$(".appointments-login_show_login").click(function () {
+	$(document).on("click", ".appointments-login_show_login", function () {
 			create_app_login_interface($(this));
 			return false;
 		})
@@ -201,6 +214,6 @@ $(function () {
 });
 })(jQuery);
 function app_checkclear(what){
-	if(!what._haschanged){what.value=''};
+	if(!what._haschanged){what.value='';}
 	what._haschanged=true;
 }

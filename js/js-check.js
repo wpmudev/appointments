@@ -27,3 +27,13 @@ window.onerror = function(errorMsg, file, lineNumber) {
 	);
   }
 }
+
+// Remove # from url so that page can be refreshed
+function app_location() {
+	var loc = window.location.href;
+	index = loc.indexOf("#");
+	if (index > 0) {
+	loc = loc.substring(0, index);
+	}
+	return loc;
+}
