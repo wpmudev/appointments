@@ -27,7 +27,7 @@ class App_Users_LimitServicesLogin {
 
 	public function inject_scripts ($l10n) {
 		$selected = empty($this->_data['show_login_button'])
-			? array_keys($services)
+			? array_keys()
 			: $this->_data['show_login_button']
 		;
 		$l10n['show_login_button'] = $selected;

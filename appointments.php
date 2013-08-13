@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.3
+Version: 1.3.1
 Author: Hakan Evin <hakan@incsub.com>
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -31,7 +31,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	var $version = "1.3";
+	var $version = "1.3.1";
 
 	/**
      * Constructor
@@ -85,18 +85,6 @@ class Appointments {
 		add_action( 'wp_ajax_inline_edit_save', array( &$this, 'inline_edit_save' ) ); 	// Save edits
 		add_action( 'wp_ajax_js_error', array( &$this, 'js_error' ) ); 					// Track js errors
 		add_action( 'wp_ajax_app_export', array( &$this, 'export' ) ); 					// Export apps
-
-		// Shortcodes
-		//add_shortcode( 'app_all_appointments', array(&$this,'all_appointments') );		// New in V1.2.7
-		//add_shortcode( 'app_my_appointments', array(&$this,'my_appointments') );
-		//add_shortcode( 'app_services', array(&$this,'services') );
-		//add_shortcode( 'app_service_providers', array(&$this,'service_providers') );
-		//add_shortcode( 'app_schedule', array(&$this,'weekly_calendar') );
-		//add_shortcode( 'app_monthly_schedule', array(&$this,'monthly_calendar') );
-		//add_shortcode( 'app_pagination', array(&$this,'pagination') );
-		//add_shortcode( 'app_confirmation', array(&$this,'confirmation') );
-		//add_shortcode( 'app_login', array(&$this,'login') );
-		//add_shortcode( 'app_paypal', array(&$this,'paypal') );
 
 		// Front end ajax hooks
 		add_action( 'wp_ajax_pre_confirmation', array( &$this, 'pre_confirmation' ) ); 			// Get pre_confirmation results
@@ -1120,9 +1108,9 @@ class Appointments {
 	 */
 	function get_min_time(){
 		if ( isset( $this->options["min_time"] ) && $this->options["min_time"] && $this->options["min_time"]>apply_filters( 'app_safe_min_time', 9 ) )
-			return (int)$this->options["min_time"];
+			return apply_filters('app-time-min_time', (int)$this->options["min_time"]);
 		else
-			return apply_filters( 'app_safe_time', 10 );
+			return apply_filters('app-time-min_time', apply_filters( 'app_safe_time', 10 ));
 	}
 
 	/**
@@ -2081,8 +2069,12 @@ class Appointments {
 		$first = $start *3600 + $day_start; // Timestamp of the first cell
 		$last = $end *3600 + $day_start; // Timestamp of the last cell
 
-		$service = $this->get_service($this->service);
-		$step = (!empty($service->duration) ? $service->duration : $this->get_min_time()) * 60; // Timestamp increase interval to one cell ahead
+		if (defined('APP_USE_LEGACY_DURATION_CALCULUS') && APP_USE_LEGACY_DURATION_CALCULUS) {
+			$step = $this->get_min_time() * 60; // Timestamp increase interval to one cell ahead
+		} else {
+			$service = $this->get_service($this->service);
+			$step = (!empty($service->duration) ? $service->duration : $this->get_min_time()) * 60; // Timestamp increase interval to one cell ahead
+		}
 
 
 		$ret  = '';
@@ -2184,8 +2176,12 @@ class Appointments {
 		$last = $end *3600 + $sunday; // Timestamp of the last cell of first Sunday
 		$schedule_key = sprintf("%sx%s", $date, $date+(7*86400));
 
-		$service = $this->get_service($this->service);
-		$step = (!empty($service->duration) ? $service->duration : $this->get_min_time()) * 60; // Timestamp increase interval to one cell below
+		if (defined('APP_USE_LEGACY_DURATION_CALCULUS') && APP_USE_LEGACY_DURATION_CALCULUS) {
+			$step = $this->get_min_time() * 60; // Timestamp increase interval to one cell below
+		} else {
+			$service = $this->get_service($this->service);
+			$step = (!empty($service->duration) ? $service->duration : $this->get_min_time()) * 60; // Timestamp increase interval to one cell below
+		}
 
 		$days = $this->arrange( array(0,1,2,3,4,5,6), -1, true ); // Arrange days acc. to start of week
 
@@ -2277,13 +2273,13 @@ class Appointments {
 
 	function get_day_names () {
 		return array(
-			__('Sunday',	'appointments'),
-			__('Monday',	'appointments'),
-			__('Tuesday',	'appointments'),
-			__('Wednesday',	'appointments'),
-			__('Thursday',	'appointments'),
-			__('Friday',	'appointments'),
-			__('Saturday',	'appointments'),
+			__('Sunday', 'appointments'),
+			__('Monday', 'appointments'),
+			__('Tuesday', 'appointments'),
+			__('Wednesday', 'appointments'),
+			__('Thursday', 'appointments'),
+			__('Friday', 'appointments'),
+			__('Saturday', 'appointments'),
 		);
 	}
 
@@ -3168,10 +3164,7 @@ class Appointments {
 		}
 		if ( isset( $_POST['gcal_description'] ) ) {
 			if ( !trim( $_POST['gcal_description'] ) )
-$gcal_description = __("Client Name: CLIENT
-Service Name: SERVICE
-Service Provider Name: SERVICE_PROVIDER
-", "appointments")
+$gcal_description = __("Client Name: CLIENT\nService Name: SERVICE\nService Provider Name: SERVICE_PROVIDER\n", "appointments")
 ;
 			else
 				$gcal_description = $_POST['gcal_description'];
@@ -3784,16 +3777,18 @@ Service Provider Name: SERVICE_PROVIDER
 	 * @Since 1.0.1
 	 */
 	function edit_products_custom_columns( $column ) {
-
 		global $post, $mp;
-		if ( !$this->is_app_mp_page( $post ) )
-			return;
-		if ( 'variations' == $column || 'sku' == $column || 'pricing' == $column ) {
-			remove_action( 'manage_posts_custom_column', array($mp, 'edit_products_custom_columns') );
+		if (!$this->is_app_mp_page($post)) return;
+		$hook = version_compare($mp->version, '2.8.8', '<')
+			? 'manage_posts_custom_column'
+			: 'manage_product_posts_custom_column'
+		;
+		if ('variations' == $column || 'sku' == $column || 'pricing' == $column) {
+			remove_action($hook, array($mp, 'edit_products_custom_columns'));
 			echo '-';
+		} else {
+			add_action($hook, array($mp, 'edit_products_custom_columns'));
 		}
-		else
-			add_action( 'manage_posts_custom_column', array($mp, 'edit_products_custom_columns') );
 	}
 
 	/**
@@ -4391,6 +4386,11 @@ Service Provider Name: SERVICE_PROVIDER
 		if ( !defined( 'DONOTMINIFY' ) )
 			define( 'DONOTMINIFY', true );
 
+		// Set up services support defaults
+		$show_login_button = array('google', 'wordpress');
+		if (!empty($this->options['facebook-app_id'])) $show_login_button[] = 'facebook';
+		if (!empty($this->options['twitter-app_id']) && !empty($this->options['twitter-app_secret'])) $show_login_button[] = 'twitter';
+
 		// Load the rest only if API use is selected
 		if (@$this->options['accept_api_logins']) {
 			wp_enqueue_script('appointments_api_js', $this->plugin_url . '/js/appointments-api.js', array('jquery'), $this->version );
@@ -4405,6 +4405,7 @@ Service Provider Name: SERVICE_PROVIDER
 				'logged_in' => __('You are now logged in', 'appointments'),
 				'error' => __('Login error. Please try again.', 'appointments'),
 				'_can_use_twitter' => (!empty($this->options['twitter-app_id']) && !empty($this->options['twitter-app_secret'])),
+				'show_login_button' => $show_login_button,
 			)));
 
 			if (!empty($this->options['facebook-app_id'])) {
@@ -5119,10 +5120,14 @@ SITE_NAME
 		// Make a locale check to update locale_error flag
 		$date_check = $this->to_us( date_i18n( $this->safe_date_format(), strtotime('today') ) );
 
-		// Localize datepick only if there is no locale error
-		if ( $file = $this->datepick_localfile() ) {
-			if ( !$this->locale_error )
-				wp_enqueue_script( 'jquery-datepick-local', $this->plugin_url . $file, array('jquery'), $this->version);
+		// Localize datepick only if not defined otherwise
+		if (
+			!(defined('APP_FLAG_SKIP_DATEPICKER_L10N') && APP_FLAG_SKIP_DATEPICKER_L10N)
+			&&
+			$file = $this->datepick_localfile()
+		) {
+			//if ( !$this->locale_error ) wp_enqueue_script( 'jquery-datepick-local', $this->plugin_url . $file, array('jquery'), $this->version);
+			wp_enqueue_script( 'jquery-datepick-local', $this->plugin_url . $file, array('jquery'), $this->version);
 		}
 		if ( !@$this->options["disable_js_check_admin"] )
 			wp_enqueue_script( 'app-js-check', $this->plugin_url . '/js/js-check.js', array('jquery'), $this->version);
@@ -5151,20 +5156,43 @@ SITE_NAME
 	// Return datepick locale file if it exists
 	// Since 1.0.6
 	function datepick_localfile() {
-
 		$locale = preg_replace('/_/', '-', get_locale());
-
 		$locale = apply_filters( 'app_locale', $locale );
-		$file = '/js/jquery.datepick-'.$locale.'.js';
-		if ( file_exists( $this->plugin_dir . $file ) )
-			return $file;
 
-		if ( substr_count( $locale, '-' ) ) {
-			$l = explode( '-', $locale );
-			$locale = $l[0];
+		if (function_exists('glob') && !(defined('APP_FLAG_NO_GLOB') && APP_FLAG_NO_GLOB)) {
+			$filename = false;
+			$all = glob("{$this->plugin_dir}/js/jquery.datepick-*.js");
+			$full_match = preg_quote("{$locale}.js", '/');
+			$partial_match = false;
+			if (substr_count($locale, '-')) {
+				list($main_locale, $rest) = explode('-', $locale, 2);
+				if (!empty($main_locale)) $partial_match = preg_quote("{$main_locale}.js", '/');
+			}
+
+			foreach ($all as $file) {
+				if (preg_match('/' . $full_match . '$/', $file)) {
+					$filename = $file;
+					break;
+				} else if ($partial_match && preg_match('/' . $partial_match . '$/', $file)) {
+					$filename = $file;
+				}
+			}
+			return !empty($filename)
+				? "/js/" . basename($filename)
+				: false
+			;
+		} else {
 			$file = '/js/jquery.datepick-'.$locale.'.js';
 			if ( file_exists( $this->plugin_dir . $file ) )
 				return $file;
+
+			if ( substr_count( $locale, '-' ) ) {
+				$l = explode( '-', $locale );
+				$locale = $l[0];
+				$file = '/js/jquery.datepick-'.$locale.'.js';
+				if ( file_exists( $this->plugin_dir . $file ) )
+					return $file;
+			}
 		}
 
 		return false;
@@ -5217,8 +5245,7 @@ SITE_NAME
 			$this->error_url = $_POST['url'];
 			$this->log( __('Javascript error on : ', 'appointments') . $this->error_url );
 			die( json_encode( array( 'message'	=> '<div class="error"><p>' .
-				sprintf( __('<b>[Appointments+]</b> You have at least one javascript error on %s.
-				<br />Error message: %s<br />File: %s<br />Line: %s', 'appointments'), $this->error_url, @$_POST['errorMessage'], @$_POST['file'], @$_POST['lineNumber']) .
+				sprintf( __('<b>[Appointments+]</b> You have at least one javascript error on %s.<br />Error message: %s<br />File: %s<br />Line: %s', 'appointments'), $this->error_url, @$_POST['errorMessage'], @$_POST['file'], @$_POST['lineNumber']) .
 			'</p></div>')
 			)
 			);
@@ -6191,7 +6218,7 @@ PLACEHOLDER
 						<td colspan="2"><input type="text" style="width:50px" name="spam_time" value="<?php if ( isset($this->options["spam_time"]) ) echo $this->options["spam_time"] ?>" />
 						<span class="description"><?php _e('You can limit appointment application frequency to prevent spammers who can block your appointments. This is only applied to pending appointments. Enter 0 to disable. Tip: To prevent any further appointment applications of a client before a payment or manual confirmation, enter a huge number here.', 'appointments') ?></span>
 						</tr>
-
+						<?php do_action('app-settings-time_settings'); ?>
 						</table>
 					</div>
 				</div>

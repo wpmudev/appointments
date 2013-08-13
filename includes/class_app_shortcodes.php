@@ -94,7 +94,7 @@ class App_Shortcode_WorkerMonthlyCalendar extends App_Shortcode {
 
 		$today = date('Y-m-d', current_time('timestamp'));
 
-		$out = '<div class="app-worker_montly_calendar-wrapper"><table class="app-worker_montly_calendar">';
+		$out = '<div class="app-worker_monthly_calendar-wrapper"><table class="app-worker_monthly_calendar">';
 
 		$out .= $appointments->_get_table_meta_row_monthly('thead', true);
 
@@ -168,7 +168,7 @@ class App_Shortcode_WorkerMonthlyCalendar extends App_Shortcode {
 			$ret .= '<td class="no-right-border" colspan="' . (6 + $last_dow - $week_start) . '">&nbsp;</td></tr>';
 		}
 
-		$out .= '</tbody></table> <div class="app-worker_montly_calendar-out"></div> </div>';
+		$out .= '</tbody></table> <div class="app-worker_monthly_calendar-out"></div> </div>';
 
 		$appointments->add2footer(
 '
@@ -177,7 +177,7 @@ $(".app-scheduled_appointment")
 	.find(".app-scheduled_appointment-info").hide().end()
 	.on("click", function () {
 		var $me = $(this),
-			$out = $me.parents(".app-worker_montly_calendar-wrapper").find(".app-worker_montly_calendar-out"),
+			$out = $me.parents(".app-worker_monthly_calendar-wrapper").find(".app-worker_monthly_calendar-out"),
 			$info = $me.find(".app-scheduled_appointment-info")
 		;
 		$out.empty().hide().append($info.html()).slideDown("slow");
@@ -189,6 +189,13 @@ $(".app-scheduled_appointment")
 		);
 
 		return $out;
+	}
+}
+// Special-case shortcode for typo handling
+class App_Shortcode_WorkerMontlyCalendar extends App_Shortcode_WorkerMonthlyCalendar { 
+	public function register ($key) {
+		$this->_key = $key;
+		add_shortcode($key, array($this, "process_shortcode"));
 	}
 }
 
@@ -1196,6 +1203,11 @@ class App_Shortcode_ServiceProviders extends App_Shortcode {
 				'help' => __('Text above the select menu. Default: "Please select a service"', 'appointments'),
 				'example' => __('Please choose a service provider:', 'appointments'),
 			),
+			'empty_option' => array(
+				'value' => __('No preference', 'appointments'),
+				'help' => __('Empty option label for the selection', 'appointments'),
+				'example' => __('Please, select', 'appointments'),
+			),
 			'show' => array(
 				'value' => __('Show available times', 'appointments'),
 				'help' => __('Button text to show the results for the selected. Default: "Show available times"', 'appointments'),
@@ -1277,7 +1289,7 @@ class App_Shortcode_ServiceProviders extends App_Shortcode {
 		$s .= '<select name="app_select_workers" class="app_select_workers">';
 		// Do not show "Anyone" if there is only ONE provider
 		if ( 1 != count( $workers ) )
-			$s .= '<option value="0">'. __('No preference', 'appointments') . '</option>';
+			$s .= '<option value="0">'. $empty_option . '</option>';
 
 		foreach ( $workers as $worker ) {
 			$worker_description = '';
@@ -1833,7 +1845,8 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 
 
 function app_core_shortcodes_register ($shortcodes) {
-	$shortcodes['app_worker_montly_calendar'] = 'App_Shortcode_WorkerMonthlyCalendar';
+	$shortcodes['app_worker_montly_calendar'] = 'App_Shortcode_WorkerMontlyCalendar'; // Typo :(
+	$shortcodes['app_worker_monthly_calendar'] = 'App_Shortcode_WorkerMonthlyCalendar';
 	$shortcodes['app_schedule'] = 'App_Shortcode_WeeklySchedule';
 	$shortcodes['app_monthly_schedule'] = 'App_Shortcode_MonthlySchedule';
 	$shortcodes['app_pagination'] = 'App_Shortcode_Pagination';

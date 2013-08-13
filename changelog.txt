@@ -1,3 +1,10 @@
+v1.3.1
+- Optional fix for Google SDK file caching paths and open_basedir clash.
+- Fix for l10n issues and local js file paths loading.
+- Fix for context roles default settings.
+- Fix for GCal user columns trumping over all the new ones.
+- Added duration calculus settings add-on.
+
 v1.3
 - Fix for service providers name display.
 - Fix for sessions initialization issue.

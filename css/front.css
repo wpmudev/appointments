@@ -594,36 +594,36 @@ opacity: 0.5;
 .app-scheduled_appointment.app-is_mine {
   font-weight: bold;
 }
-.app-worker_montly_calendar td {
+.app-worker_monthly_calendar td {
   height: 6em;
   width: 14.2%;
   vertical-align: top;
   padding: 5px !important;
 }
-.app-worker_montly_calendar td.app-today, .app-worker_montly_calendar td.app-today:hover {
+.app-worker_monthly_calendar td.app-today, .app-worker_monthly_calendar td.app-today:hover {
   background: rgba(164,33,33,.2);
 }
-.app-worker_montly_calendar td .app-end_time {
+.app-worker_monthly_calendar td .app-end_time {
   display: none;
 }
-.app-worker_montly_calendar td p {
+.app-worker_monthly_calendar td p {
   margin: 0; padding: 0;
   opacity: .5;
   font-size: 2em;
 }
-.app-worker_montly_calendar-out {
+.app-worker_monthly_calendar-out {
   clear: both;
 }
-.app-worker_montly_calendar-out ul, .app-worker_montly_calendar-out ul li {
+.app-worker_monthly_calendar-out ul, .app-worker_monthly_calendar-out ul li {
   list-style: none !important;
   background-image: none !important;
   margin: 0 !important; padding: 0 !important;
 }
-.app-worker_montly_calendar-out ul li {
+.app-worker_monthly_calendar-out ul li {
   float: left;
   width: 24%;
   margin-right: 1% !important;
 }
-.app-worker_montly_calendar-out ul li b {
+.app-worker_monthly_calendar-out ul li b {
   display: block;
 }

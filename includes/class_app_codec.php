@@ -166,12 +166,13 @@ abstract class App_Codec {
 
 class App_Shortcodes extends App_Codec {
 
-	private function __construct () {
-		$this->_instances = apply_filters('app-shortcodes-register', array());
-	}
-
 	public static function serve () {
 		$me = new App_Shortcodes;
-		$me->_register();
+		add_action('init', array($me, 'do_register'));
+	}
+
+	public function do_register () {
+		$this->_instances = apply_filters('app-shortcodes-register', array());
+		$this->_register();
 	}
 }

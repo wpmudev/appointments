@@ -21,7 +21,7 @@ class App_Roles {
 			self::CTX_PAGE_APPOINTMENTS => __('Appointments page', 'appointments'),
 			self::CTX_PAGE_TRANSACTIONS => __('Transactions page', 'appointments'),
 			self::CTX_PAGE_SETTINGS => __('Settings page', 'appointments'),
-			self::CTX_PAGE_SHORTCODES => __('Settings page', 'appointments'),
+			self::CTX_PAGE_SHORTCODES => __('Shortcodes page', 'appointments'),
 			self::CTX_PAGE_FAQ => __('FAQ page', 'appointments'),
 			self::CTX_DASHBOARD => __('Dashboard widget', 'appointments'),
 			self::CTX_GLOBAL => __('Misc', 'appointments'),

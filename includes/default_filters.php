@@ -16,3 +16,15 @@ if (!(defined('APP_DISALLOW_META_WRAPPERS') && APP_DISALLOW_META_WRAPPERS)) {
 	add_filter('app-settings-services-service-name', '_app_wrap_meta_output', 9991);
 	add_filter('app-settings-workers-worker-name', '_app_wrap_meta_output', 9991);
 }
+
+if (defined('APP_GCAL_CLIENT_TEMP_DIR_AUTO_LOOKUP') && APP_GCAL_CLIENT_TEMP_DIR_AUTO_LOOKUP) {
+	/**
+	 * Wrapper for Google Client cache filepath + open_basedir restriction resolution.
+	 */
+	function _app_gcal_client_temp_dir_lookup ($params) {
+		if (!function_exists('get_temp_dir')) return $params;
+		$params['ioFileCache_directory'] = get_temp_dir() . 'Google_Client';
+		return $params;
+	}
+	add_filter('app-gcal-client_parameters', '_app_gcal_client_temp_dir_lookup');
+}

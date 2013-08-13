@@ -85,11 +85,11 @@ class AppointmentsGcal {
 	function users_custom_column( $text, $column_name, $user_id ) {
 
 		// Nothing to do if providers are not allowed to set GCal API
-		if ( 'yes' != @$this->options['gcal_api_allow_worker'] )
-			return;
+		if ( 'yes' != @$this->options['gcal_api_allow_worker'] || 'gcal_mode' != $column_name )
+			return $text;
 
 		global $appointments;
-		if ( !$appointments->is_worker( $user_id ) || 'gcal_mode' != $column_name )
+		if ( !$appointments->is_worker( $user_id ) )
 			return ' - ';
 
 		$mode = $this->get_api_mode( $user_id );
@@ -906,7 +906,8 @@ class AppointmentsGcal {
 		// Just in case
 		require_once $this->plugin_dir . '/includes/gcal/Google_Client.php';
 
-		$this->client = new Google_Client();
+		$extra_config = apply_filters('app-gcal-client_parameters', array());
+		$this->client = new Google_Client($extra_config);
 		$this->client->setApplicationName("Appointments+");
 		$this->client->setUseObjects(true);
 		$key = $this->_file_get_contents( $worker_id );
