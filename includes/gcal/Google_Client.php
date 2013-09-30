@@ -31,18 +31,20 @@ if (file_exists(dirname(__FILE__)  . '/local_config.php')) {
 }
 
 // Include the top level classes, they each include their own dependencies
-require_once 'service/Google_Model.php';
-require_once 'service/Google_Service.php';
-require_once 'service/Google_ServiceResource.php';
-require_once 'auth/Google_AssertionCredentials.php';
-require_once 'auth/Google_Signer.php';
-require_once 'auth/Google_P12Signer.php';
-require_once 'service/Google_BatchRequest.php';
-require_once 'external/URITemplateParser.php';
-require_once 'auth/Google_Auth.php';
-require_once 'cache/Google_Cache.php';
-require_once 'io/Google_IO.php';
-require_once('service/Google_MediaFileUpload.php');
+if (!defined('APP_GOOGLE_SKIP_API_LOADING') && APP_GOOGLE_SKIP_API_LOADING) {
+  require_once 'service/Google_Model.php';
+  require_once 'service/Google_Service.php';
+  require_once 'service/Google_ServiceResource.php';
+  require_once 'auth/Google_AssertionCredentials.php';
+  require_once 'auth/Google_Signer.php';
+  require_once 'auth/Google_P12Signer.php';
+  require_once 'service/Google_BatchRequest.php';
+  require_once 'external/URITemplateParser.php';
+  require_once 'auth/Google_Auth.php';
+  require_once 'cache/Google_Cache.php';
+  require_once 'io/Google_IO.php';
+  require_once('service/Google_MediaFileUpload.php');
+}
 
 /**
  * The Google API Client

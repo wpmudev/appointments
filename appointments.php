@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.3.1
+Version: 1.3.2-BETA-5
 Author: Hakan Evin <hakan@incsub.com>
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -31,7 +31,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	var $version = "1.3.1";
+	var $version = "1.3.2-BETA-5";
 
 	/**
      * Constructor
@@ -62,7 +62,7 @@ class Appointments {
 		add_action( 'remove_user_from_blog', array( &$this, 'remove_user_from_blog' ), 10, 2 );	// Remove his records only for that blog
 
 		add_action( 'plugins_loaded', array(&$this, 'localization') );		// Localize the plugin
-		add_action( 'init', array( &$this, 'init' ) ); 						// Initial stuff
+		add_action( 'init', array( &$this, 'init' ), 20 ); 						// Initial stuff
 		add_action( 'init', array( &$this, 'cancel' ), 3 ); 				// Check cancellation of an appointment
 		add_filter( 'the_posts', array(&$this, 'load_styles') );			// Determine if we use shortcodes on the page
 		add_action( 'wp_ajax_nopriv_app_paypal_ipn', array(&$this, 'handle_paypal_return')); // Send Paypal to IPN function
@@ -130,7 +130,7 @@ class Appointments {
 		add_action( 'plugins_loaded', array( &$this, 'check_marketpress_plugin') );
 
 		$this->gcal_api = false;
-		add_action('init', array($this, 'setup_gcal_sync'));
+		add_action('init', array($this, 'setup_gcal_sync'), 10);
 
 		// Database variables
 		global $wpdb;
@@ -2117,7 +2117,6 @@ class Appointments {
 				// We found at least one timetable cell to be free
 				$this->is_a_timetable_cell_free = true;
 			}
-
 			$class_name = apply_filters( 'app_class_name', $class_name, $ccs, $cce );
 
 			$ret .= '<div class="app_timetable_cell '.$class_name.'" title="'.esc_attr($title).'">'.
@@ -2586,6 +2585,7 @@ class Appointments {
 	 */
 	function available_workers( $ccs, $cce ) {
 		// If a worker is selected we dont need to do anything special
+
 		if ( $this->worker )
 			return $this->get_capacity();
 
@@ -2702,6 +2702,17 @@ class Appointments {
 
 		$n = 0;
 		foreach ( $apps as $app ) {
+// @FIX: this will allow for "only one service and only one provider per time slot"
+if ($this->worker && $this->service && ($app->service != $this->service)) {
+	continue;
+	// This is for the following scenario:
+	// 1) any number of providers per service
+	// 2) any number of services
+	// 3) only one service and only one provider per time slot:
+	// 	- selecting one provider+service makes this provider and selected service unavailable in a time slot
+	// 	- other providers are unaffected, other services are available 
+}
+// End @FIX
 			if ( $start >= strtotime( $app->start ) && $end <= strtotime( $app->end ) )
 				$n++; // Number of appointments for this time frame
 		}
@@ -4889,7 +4900,7 @@ SITE_NAME
 	/**
 	 *	Email message headers
 	 */
-	function message_headers( ) {
+	function message_headers () {
 		$admin_email = $this->get_admin_email();
 		$blogname = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
 		$content_type = apply_filters('app-emails-content_type', 'text/plain');
@@ -7388,7 +7399,7 @@ PLACEHOLDER
 		$html .= '<tr><td>';
 		$html .= $k;
 		$html .= '</td><td>';
-		$html .= $workers  . apply_filters('app-settings-workers-worker-name', '', $worker->ID, $worker);
+		$html .= $workers  . apply_filters('app-settings-workers-worker-name', '', (is_object($worker) ? $worker->ID : false), $worker);
 		$html .= '</td><td>';
 		$html .= '<input type="checkbox" name="workers['.$k.'][dummy]" '.$dummy.' />';
 		$html .= '</td><td>';
@@ -7444,6 +7455,9 @@ PLACEHOLDER
 	 */
 	function working_hour_form( $status='open' ) {
 
+		$_old_time_format = $this->time_format;
+		$this->time_format = "H:i";
+
 		$this->get_lsw();
 
 		if ( isset( $this->options["admin_min_time"] ) && $this->options["admin_min_time"] )
@@ -7474,7 +7488,7 @@ PLACEHOLDER
 					if (0 == $idx) $form .= $day;
 					$form .= '</td>';
 					$form .= '<td>';
-					$form .= '<select name="'.$status.'['.$day.'][active][' . $idx . ']">';
+					$form .= '<select name="'.$status.'['.$day.'][active][' . $idx . ']" autocomplete="off">';
 					if ( 'yes' == $active )
 						$s = " selected='selected'";
 					else $s = '';
@@ -7486,7 +7500,7 @@ PLACEHOLDER
 					$form .= '<select name="'.$status.'['.$day.'][start][' . $idx . ']">';
 					for ( $t=0; $t<3600*24; $t=$t+$min_secs ) {
 						$dhours = $this->secs2hours( $t ); // Hours in 08:30 format
-						if ( isset($whours[$day]['start'][$idx]) && $dhours == $whours[$day]['start'][$idx] )
+						if ( isset($whours[$day]['start'][$idx]) && strtotime($dhours) == strtotime($whours[$day]['start'][$idx]) )
 							$s = " selected='selected'";
 						else $s = '';
 
@@ -7498,10 +7512,10 @@ PLACEHOLDER
 					$form .= '</td>';
 
 					$form .= '<td>';
-					$form .= '<select name="'.$status.'['.$day.'][end][' . $idx . ']">';
+					$form .= '<select name="'.$status.'['.$day.'][end][' . $idx . ']" autocomplete="off">';
 					for ( $t=$min_secs; $t<=3600*24; $t=$t+$min_secs ) {
 						$dhours = $this->secs2hours( $t ); // Hours in 08:30 format
-						if ( isset($whours[$day]['end'][$idx]) && $dhours == $whours[$day]['end'][$idx] )
+						if ( isset($whours[$day]['end'][$idx]) && strtotime($dhours) == strtotime($whours[$day]['end'][$idx]) )
 							$s = " selected='selected'";
 						else $s = '';
 
@@ -7521,7 +7535,7 @@ PLACEHOLDER
 				$form .= $day;
 				$form .= '</td>';
 				$form .= '<td>';
-				$form .= '<select name="'.$status.'['.$day.'][active]">';
+				$form .= '<select name="'.$status.'['.$day.'][active]" autocomplete="off">';
 				if ( isset($whours[$day]['active']) && 'yes' == $whours[$day]['active'] )
 					$s = " selected='selected'";
 				else $s = '';
@@ -7530,10 +7544,10 @@ PLACEHOLDER
 				$form .= '</select>';
 				$form .= '</td>';
 				$form .= '<td>';
-				$form .= '<select name="'.$status.'['.$day.'][start]">';
+				$form .= '<select name="'.$status.'['.$day.'][start]" autocomplete="off">';
 				for ( $t=0; $t<3600*24; $t=$t+$min_secs ) {
 					$dhours = $this->secs2hours( $t ); // Hours in 08:30 format
-					if ( isset($whours[$day]['start']) && $dhours == $whours[$day]['start'] )
+					if ( isset($whours[$day]['start']) && strtotime($dhours) == strtotime($whours[$day]['start']) )
 						$s = " selected='selected'";
 					else $s = '';
 
@@ -7545,10 +7559,10 @@ PLACEHOLDER
 				$form .= '</td>';
 
 				$form .= '<td>';
-				$form .= '<select name="'.$status.'['.$day.'][end]">';
+				$form .= '<select name="'.$status.'['.$day.'][end]" autocomplete="off">';
 				for ( $t=$min_secs; $t<=3600*24; $t=$t+$min_secs ) {
 					$dhours = $this->secs2hours( $t ); // Hours in 08:30 format
-					if ( isset($whours[$day]['end']) && $dhours == $whours[$day]['end'] )
+					if ( isset($whours[$day]['end']) && strtotime($dhours) == strtotime($whours[$day]['end']) )
 						$s = " selected='selected'";
 					else $s = '';
 
@@ -7565,6 +7579,8 @@ PLACEHOLDER
 		}
 
 		$form .= '</table>';
+
+		$this->time_format = $_old_time_format;
 
 		return $form;
 	}
@@ -7857,7 +7873,8 @@ PLACEHOLDER
 
 		$file = fopen('php://temp/maxmemory:'. (12*1024*1024), 'r+');
 		// Add field names to the file
-		fputcsv( $file, $this->db->get_col_info() );
+		$columns = array_map('strtolower', $this->db->get_col_info());
+		fputcsv( $file,  $columns );
 
 		foreach ( $apps as $app ) {
 			array_walk( $app, array(&$this, 'export_helper') );

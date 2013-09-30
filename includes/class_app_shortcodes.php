@@ -1823,6 +1823,10 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 								window.open(response.gcal_url,"_blank");
 							}
 							if ( response.mp == 1 ) {
+								$(".mp_buy_form")
+									.find("[name=\'variation\']").remove().end()
+									.append("<input type=\'hidden\' name=\'variation\' />")
+								;
 								$(".mp_buy_form input[name=\'variation\']").val(response.variation);
 								$(".mp_buy_form").show();
 							}
