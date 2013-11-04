@@ -33,7 +33,7 @@ class App_Locations_WorkerLocations {
 
 		// Add settings
 		add_action('app-locations-settings-after_locations_list', array($this, 'show_settings'));
-		add_filter('app-options-before_save', array($this, 'save_settings'));
+		add_filter('app-locations-before_save', array($this, 'save_settings'));
 
 		add_action('admin_notices', array($this, 'show_nags'));
 

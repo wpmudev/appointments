@@ -29,7 +29,7 @@ class App_Locations_LocationsWorker {
 		// Set up admin interface
 		add_filter('appointments_tabs', array($this, 'settings_tab_add'));
 		add_action('app-settings-tabs', array($this, 'settings_tab_create'));
-		add_filter('app-options-before_save', array($this, 'save_settings'));
+		add_filter('admin_init', array($this, 'save_settings'));
 		add_action('app-admin-admin_scripts', array($this, 'include_scripts'));
 		add_action('app-admin-admin_styles', array($this, 'include_styles'));
 
@@ -117,7 +117,7 @@ class App_Locations_LocationsWorker {
 					<button type="button" class="app-locations-delete button"><?php _e('Delete', 'appointments'); ?></button>
 				</li>
 			<?php } ?>
-			<input type="hidden" name="action_app" value="save_general" />
+			<input type="hidden" name="action_app" value="save_locations" />
 			<?php wp_nonce_field( 'update_app_settings', 'app_nonce' ); ?>
 			</ul>
 		</div>
@@ -132,7 +132,7 @@ class App_Locations_LocationsWorker {
 				<tr valign="top">
 					<th scope="row"><?php _e('Show my appointments location', 'appointments')?></th>
 					<td>
-						<select name="locations_settings[my_appointments]">
+						<select name="locations_settings[my_appointments]" autocomplete="off">
 							<option value=""></option>
 							<option value="after_service" <?php selected($this->_data['locations_settings']['my_appointments'], 'after_service'); ?> ><?php _e('Automatic, after service', 'appointments'); ?></option>
 							<option value="after_worker" <?php selected($this->_data['locations_settings']['my_appointments'], 'after_worker'); ?> ><?php _e('Automatic, after provider', 'appointments'); ?></option>
@@ -144,10 +144,10 @@ class App_Locations_LocationsWorker {
 				<tr valign="top">
 					<th scope="row"><?php _e('Show all appointments location', 'appointments')?></th>
 					<td>
-						<select name="locations_settings[all_appointments]">
+						<select name="locations_settings[all_appointments]" autocomplete="off">
 							<option value=""></option>
 							<option value="after_service" <?php selected($this->_data['locations_settings']['all_appointments'], 'after_service'); ?> ><?php _e('Automatic, after service', 'appointments'); ?></option>
-							<option value="after_provider" <?php selected($this->_data['locations_settings']['all_appointments'], 'after_worker'); ?> ><?php _e('Automatic, after provider', 'appointments'); ?></option>
+							<option value="after_provider" <?php selected($this->_data['locations_settings']['all_appointments'], 'after_provider'); ?> ><?php _e('Automatic, after provider', 'appointments'); ?></option>
 							<option value="after_client" <?php selected($this->_data['locations_settings']['all_appointments'], 'after_client'); ?> ><?php _e('Automatic, after client', 'appointments'); ?></option>
 							<option value="after_date" <?php selected($this->_data['locations_settings']['all_appointments'], 'after_date'); ?> ><?php _e('Automatic, after date/time', 'appointments'); ?></option>
 							<option value="after_status" <?php selected($this->_data['locations_settings']['all_appointments'], 'after_status'); ?> ><?php _e('Automatic, after status', 'appointments'); ?></option>
@@ -168,7 +168,12 @@ class App_Locations_LocationsWorker {
 	}
 
 	public function save_settings ($options) {
-		if (empty($_POST['locations'])) return $options;
+		if (empty($_POST['action_app']) || 'save_locations' != $_POST['action_app']) return false;
+		if (!App_Roles::current_user_can('manage_options', App_Roles::CTX_PAGE_SETTINGS)) return false;
+		if (!wp_verify_nonce($_POST['app_nonce'],'update_app_settings')) return false;
+		if (empty($_POST['locations'])) return false;
+		
+		$options = get_option('appointments_options', array());
 
 		$raw = stripslashes_deep($_POST['locations']);
 		$data = array();
@@ -183,7 +188,12 @@ class App_Locations_LocationsWorker {
 		$settings = stripslashes_deep($_POST['locations_settings']);
 		$options['locations_settings'] = !empty($settings) ? $settings : array();
 
-		return $options;
+		$options = apply_filters('app-locations-before_save', $options);
+
+		update_option('appointments_options', $options);
+
+		wp_redirect(add_query_arg('saved', 1));
+		die;
 	}
 
 	public function initialize () {

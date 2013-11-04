@@ -31,7 +31,7 @@ if (file_exists(dirname(__FILE__)  . '/local_config.php')) {
 }
 
 // Include the top level classes, they each include their own dependencies
-if (!defined('APP_GOOGLE_SKIP_API_LOADING') && APP_GOOGLE_SKIP_API_LOADING) {
+if (!(defined('APP_GOOGLE_SKIP_API_LOADING') && APP_GOOGLE_SKIP_API_LOADING)) {
   require_once 'service/Google_Model.php';
   require_once 'service/Google_Service.php';
   require_once 'service/Google_ServiceResource.php';

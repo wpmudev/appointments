@@ -1,3 +1,25 @@
+v1.4
+- Allowing for optional Google SDK dependencies loading.
+- Lowering the case of exported column names to prevent Excel bug from triggering (http://support.microsoft.com/kb/215591)
+- Fix for the "only one service and only one provider per time slot" condition
+- Adding the explicit ordering to prevent race conditioning
+- Normalizing the variation implementation on appointment confirmation.
+- Preventing the autocompletion on working hours forms and dropping the meridiam designator.
+- Moving locations saving action.
+- Appointments within an enclosed timeframe will mark the timeframe as busy.
+- Differentiating durations and boundaries logic in add-on.
+- Allowing for toggling between exact (legacy) matching and overlap detection.
+- Deprecating the userdata overwrites.
+- Making the admin data overrides legacy and optional.
+- Exposing a new flag for free auto-confirmation in paid environment.
+- Fetching a list of already present appointments to prevent duplicates on GCal sync.
+- Bugfix for email macro expansion.
+- Keying weekdays by their translation names.
+- Dropping the old reserved GCals if the DB version is under threshold.
+- Added the product cart add-on.
+- Added export scoping.
+- Added user-supplied custom fields add-on.
+
 v1.3.1
 - Optional fix for Google SDK file caching paths and open_basedir clash.
 - Fix for l10n issues and local js file paths loading.

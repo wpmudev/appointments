@@ -108,8 +108,9 @@ function delete_location () {
 	return false;
 }
 
-function save_inline_appointment_data (e, data) {
-	var $location = $('[name="location"]'),
+function save_inline_appointment_data (e, data, $ctx) {
+	$ctx = $ctx.length ? $ctx : $("body");
+	var $location = $ctx.find('[name="location"]'),
 		location_id = ($location.length ? $location.val() : '')
 	;
 	data['location'] = location_id;

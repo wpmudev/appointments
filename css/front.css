@@ -627,3 +627,18 @@ opacity: 0.5;
 .app-worker_monthly_calendar-out ul li b {
   display: block;
 }
+
+/* ----- Breakpoints ----- */
+@media screen and (max-width : 768px) {
+  .app_monthly_schedule_wrapper, .app_timetable_wrapper {
+    width: 100%;
+  }
+  .app_monthly_schedule_wrapper table th {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+  }
+  .appointments-confirmation-wrapper span {
+    float: none;
+  }
+}

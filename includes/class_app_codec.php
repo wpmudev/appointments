@@ -4,7 +4,12 @@ abstract class App_Template {
 	protected static $_status_names = array();
 
 	public static function get_status_name ($status) {
-		$status_names = self::get_status_names();
+		$status_names = wp_parse_args(
+			self::get_status_names(),
+			array(
+				'active' => __('Active', 'appointments'),
+			)
+		);
 		return !empty($status_names[$status])
 			? $status_names[$status]
 			: $status
@@ -13,12 +18,12 @@ abstract class App_Template {
 
 	public static function get_status_names () {
 		if (!self::$_status_names) self::$_status_names = apply_filters('app-template-status_names', apply_filters( 'app_statuses', array(
-			'pending'	=> __('Pending', 'appointments'),
-			'paid'		=> __('Paid', 'appointments'),
-			'confirmed'	=> __('Confirmed', 'appointments'),
-			'completed'	=> __('Completed', 'appointments'),
-			'reserved'	=> __('Reserved by GCal', 'appointments'),
-			'removed'	=> __('Removed', 'appointments'),
+			'pending' => __('Pending', 'appointments'),
+			'paid' => __('Paid', 'appointments'),
+			'confirmed' => __('Confirmed', 'appointments'),
+			'completed' => __('Completed', 'appointments'),
+			'reserved' => __('Reserved by GCal', 'appointments'),
+			'removed' => __('Removed', 'appointments'),
 		)));
 		return self::$_status_names;
 	}
@@ -175,4 +180,97 @@ class App_Shortcodes extends App_Codec {
 		$this->_instances = apply_filters('app-shortcodes-register', array());
 		$this->_register();
 	}
+}
+
+/**
+ * General purpose macro expansion codec class
+ */
+class App_Macro_GeneralCodec {
+	const FILTER_TITLE = 'title';
+	const FILTER_BODY = 'body';
+	
+	protected $_macros = array(
+		'LOGIN_PAGE',
+		'REGISTRATION_PAGE',
+	);
+
+	public function get_macros () {
+		return $this->_macros;
+	}
+
+	public function expand ($str, $filter=false) {
+		if (!$str) return $str;
+		foreach ($this->_macros as $macro) {
+			$callback = false;
+			$method = 'replace_' . strtolower($macro);
+			if (is_callable(array($this, $method))) {
+				$callback = array($this, $method);
+				$str = preg_replace_callback(
+					'/(?:^|\b)' . preg_quote($macro, '/') . '(?:\b|$)/', 
+					$callback, $str
+				);
+			}
+		}
+		if (!$filter || self::FILTER_TITLE == $filter) $str = wp_strip_all_tags($str);
+		if (self::FILTER_BODY == $filter) $str = apply_filters('the_content', $str);
+		return apply_filters('app-codec-expand', $str, $this->_appointment);
+	}
+
+	public function replace_login_page () {
+		return '<a class="appointments-login_show_login" href="' . site_url( 'wp-login.php') . '">' . __('Login','appointments') . '</a>';
+	}
+	public function replace_registration_page () {
+		return '<a class="appointments-login_show_login appointments-register" href="' . wp_registration_url() . '">' . __('Register','appointments') . '</a>';
+	}
+}
+
+
+/**
+ * Individual Macro expansion codec class.
+ */
+class App_Macro_Codec extends App_Macro_GeneralCodec {
+
+	protected $_appointment;
+	protected $_core;
+	protected $_user;
+
+	public function __construct ($app=false, $user_id=false) {
+		$this->_macros = apply_filters('app-codec-macros', array_merge($this->_macros, array(
+			'START_DATE',
+			'END_DATE',
+			'SERVICE',
+			'WORKER',
+		)));
+		$this->_appointment = $app ? $app : false;
+		$this->_user = $user_id ? get_user_by('id', $user_id) : false;
+
+		global $appointments;
+		$this->_core = $appointments;
+	}
+
+	public function set_user ($user) {
+		if (is_object($user)) $this->_user = $user;
+	}
+
+
+	public function replace_start_date () {
+		return mysql2date($this->_core->datetime_format, $this->_appointment->start);
+	}
+
+	public function replace_end_date () {
+		return mysql2date($this->_core->datetime_format, $this->_appointment->end);
+	}
+
+	public function replace_service () {
+		return $this->_core->get_service_name($this->_appointment->service);
+	}
+
+	public function replace_worker () {
+		return $this->_core->get_worker_name($this->_appointment->worker);
+	}
+
+	public function replace_user_name () {
+		return $this->_user->display_name;
+	}
+
 }

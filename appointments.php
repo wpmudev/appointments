@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.3.2-BETA-5
+Version: 1.4
 Author: Hakan Evin <hakan@incsub.com>
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -31,7 +31,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	var $version = "1.3.2-BETA-5";
+	var $version = "1.4";
 
 	/**
      * Constructor
@@ -770,7 +770,9 @@ class Appointments {
 						? bp_core_get_user_domain($result->user)
 						: admin_url("user-edit.php?user_id="). $result->user
 					;
-					$name = '<a href="' . apply_filters('app_get_client_name-href', $href, $app_id, $result) . '" target="_blank">'. $userdata->user_login . '</a>';
+					$name = '<a href="' . apply_filters('app_get_client_name-href', $href, $app_id, $result) . '" target="_blank">' . 
+						($result->name && !(defined('APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES') && APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES) ? $result->name : $userdata->user_login) . 
+					'</a>';
 				}
 				else
 					$name = $result->name;
@@ -1129,7 +1131,15 @@ class Appointments {
 	 * @return array
 	 */
 	function weekdays() {
-		return array( 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' );
+		return array( 
+			__('Sunday', 'appointments') => 'Sunday', 
+			__('Monday', 'appointments') => 'Monday', 
+			__('Tuesday', 'appointments') => 'Tuesday', 
+			__('Wednesday', 'appointments') => 'Wednesday', 
+			__('Thursday', 'appointments') => 'Thursday', 
+			__('Friday', 'appointments') => 'Friday', 
+			__('Saturday', 'appointments') => 'Saturday'
+		);
 	}
 
 	/**
@@ -1491,6 +1501,20 @@ class Appointments {
 		$paypal_price = $this->get_price( true );
 		$paypal_price = apply_filters( 'app_post_confirmation_paypal_price', $paypal_price, $service, $worker, $start, $end );
 
+		// Break here - is the appointment free and, if so, shall we auto-confirm?
+		if (
+			!$price && !$paypal_price // Free appointment ...
+			&& 
+			'pending' === $status && "yes" === $this->options["payment_required"] // ... in a paid environment ...
+			&& 
+			(!empty($this->options["auto_confirm"]) && "yes" === $this->options["auto_confirm"]) // ... with auto-confirm activated
+		) {
+			$status = defined('APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM') && APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM 
+				? 'confirmed' 
+				: $status
+			;
+		}
+
 		if ( isset( $_POST["app_name"] ) )
 			$name = sanitize_text_field( $_POST["app_name"] );
 		else
@@ -1544,6 +1568,8 @@ class Appointments {
 			$gcal = $_POST["app_gcal"];
 		else
 			$gcal = '';
+
+		do_action('app-additional_fields-validate');
 
 		// It may be required to add additional data here
 		$note = apply_filters( 'app_note_field', $note );
@@ -2658,14 +2684,15 @@ class Appointments {
 	function is_busy( $start, $end, $capacity ) {
 
 		$week= date( "W", $start );
+		$period = new App_Period($start, $end);
 
 		// If a specific worker is selected, we will look at his schedule first.
 		if ( 0 != $this->worker ) {
 			$apps = $this->get_reserve_apps_by_worker( $this->location, $this->worker, $week );
 			if ( $apps ) {
 				foreach ( $apps as $app ) {
-					if ( $start >= strtotime( $app->start ) && $end <= strtotime( $app->end ) )
-						return true;
+					//if ( $start >= strtotime( $app->start ) && $end <= strtotime( $app->end ) ) return true;
+					if ($period->contains($app->start, $app->end)) return true;
 				}
 			}
 		}
@@ -2713,8 +2740,8 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 	// 	- other providers are unaffected, other services are available 
 }
 // End @FIX
-			if ( $start >= strtotime( $app->start ) && $end <= strtotime( $app->end ) )
-				$n++; // Number of appointments for this time frame
+			//if ( $start >= strtotime( $app->start ) && $end <= strtotime( $app->end ) ) $n++;
+			if ($period->contains($app->start, $app->end)) $n++;
 		}
 
 		if ( $n >= $this->available_workers( $start, $end ) )
@@ -2876,7 +2903,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		do_action( 'app_save_cookie', $app_id, $apps );
 
 		// Save user data too
-		if ( is_user_logged_in() ) {
+		if ( is_user_logged_in() && defined('APP_USE_LEGACY_USERDATA_OVERWRITING') && APP_USE_LEGACY_USERDATA_OVERWRITING ) {
 			global $current_user;
 			if ( $name )
 				update_user_meta( $current_user->ID, 'app_name', $name );
@@ -3840,7 +3867,7 @@ $gcal_description = __("Client Name: CLIENT\nService Name: SERVICE\nService Prov
 			$result = $this->get_app( $app_id );
 			if ( $result ) {
 				$name = $name . " (". date_i18n( $this->datetime_format, strtotime( $result->start ) ) . ")";
-				$name = apply_filters( 'app_mp_product_name_in_cart', $name, $this->get_service_name( $result->service ), $this->get_worker_name( $result->worker ), $result->start );
+				$name = apply_filters( 'app_mp_product_name_in_cart', $name, $this->get_service_name( $result->service ), $this->get_worker_name( $result->worker ), $result->start, $result );
 			}
 		}
 		return $name;
@@ -4216,8 +4243,8 @@ $gcal_description = __("Client Name: CLIENT\nService Name: SERVICE\nService Prov
 
 		// If no DB version, this is a new installation
 		if ( !$db_version = get_option( 'app_db_version' ) ) {
-			$db_version = "1.2.2";
-			update_option( 'app_db_version', '1.2.2' );
+			$db_version = "1.2.3";
+			update_option( 'app_db_version', '1.2.3' );
 		}
 
 		// Update database for versions less than 1.0.6
@@ -4249,10 +4276,15 @@ $gcal_description = __("Client Name: CLIENT\nService Name: SERVICE\nService Prov
 		}
 
 		// Update database for versions less than 1.2.2
+		// Aaand... this never ran previously :/ 
+		// Okay then, leave this as is and deal with it differently.
 		if ( version_compare( $db_version, '1.2.2', '<' ) ) {
 			$result = $wpdb->query($sql_0);
 			update_option( 'app_db_version', '1.2.2' );
 		}
+
+		// Check AppointmentsGcal::import_and_update_events()
+		// for v1.2.3 DB schema update
 	}
 
 	/**
@@ -4326,6 +4358,7 @@ $gcal_description = __("Client Name: CLIENT\nService Name: SERVICE\nService Prov
 		}
 
 		echo $this->esc_rn( $script );
+		do_action('app-footer_scripts-after');
 	}
 
 	/**
@@ -4761,7 +4794,7 @@ SITE_NAME
 									$this->get_worker_name( $r->worker), $r->start, $r->price, $this->get_deposit($r->price), $r->phone, $r->note, $r->address, $r->email, $r->city ),
 								'message'	=> apply_filters( 'app_reminder_message', $this->add_cancel_link( $this->_replace( $this->options["reminder_message"],
 									$r->name, $this->get_service_name( $r->service), $this->get_worker_name( $r->worker), $r->start,
-									$r->price, $this->get_deposit($r->price), $r->phone, $r->note, $r->address, $r->email, $r->city ), $app_id ), $r, $app_id )
+									$r->price, $this->get_deposit($r->price), $r->phone, $r->note, $r->address, $r->email, $r->city ), $r->ID ), $r, $r->ID )
 							);
 					// Update "sent" field
 					$wpdb->update( $this->app_table,
@@ -6542,7 +6575,7 @@ PLACEHOLDER
 					<span class="description"><?php _e('You can add css rules to customize styling. These will be added to the front end appointment page only.', 'appointments') ?></span>
 					</td>
 				</tr>
-
+				<?php do_action('app-settings-display_settings'); ?>
 				</table>
 			</div>
 		</div>
@@ -6727,6 +6760,8 @@ PLACEHOLDER
 					</span>
 					</td>
 			</tr>
+
+			<?php do_action('app-settings-payment_settings-marketpress'); ?>
 
 			<tr class="payment_row" <?php if ( $this->options['payment_required'] != 'yes' ) echo 'style="display:none"';?>>
 				<th scope="row" ><?php _e('Create an Appointment Product Page', 'appointments')?></th>
@@ -7454,7 +7489,6 @@ PLACEHOLDER
 	 *  @param status: Open (working hours) or close (break hours)
 	 */
 	function working_hour_form( $status='open' ) {
-
 		$_old_time_format = $this->time_format;
 		$this->time_format = "H:i";
 
@@ -7479,13 +7513,13 @@ PLACEHOLDER
 			$form .= '<tr><th>'.__('Day', 'appointments').'</th><th>'.__('Work?', 'appointments' ).'</th><th>'.__('Start', 'appointments').'</th><th>'.__('End', 'appointments').'</th></tr>';
 		else
 			$form .= '<tr><th>'.__('Day', 'appointments').'</th><th>'.__('Give break?','appointments').'</th><th>'.__('Start','appointments').'</th><th>'.__('End','appointments').'</th></tr>';
-		foreach ( $this->weekdays() as $day ) {
+		foreach ( $this->weekdays() as $day_label => $day ) {
 			if (!empty($whours[$day]['active']) && is_array($whours[$day]['active'])) {
 				$total_whour_segments = count($whours[$day]['active']) - 1;
 				// We have multiple breaks for today.
 				foreach ($whours[$day]['active'] as $idx => $active) {
 					$form .= '<tr ' . ($idx < $total_whour_segments ? 'class="app-repeated"' : '') . '><td>';
-					if (0 == $idx) $form .= $day;
+					if (0 == $idx) $form .= $day_label;
 					$form .= '</td>';
 					$form .= '<td>';
 					$form .= '<select name="'.$status.'['.$day.'][active][' . $idx . ']" autocomplete="off">';
@@ -7532,7 +7566,7 @@ PLACEHOLDER
 			} else {
 				// Oh, it's just one break.
 				$form .= '<tr><td>';
-				$form .= $day;
+				$form .= $day_label;
 				$form .= '</td>';
 				$form .= '<td>';
 				$form .= '<select name="'.$status.'['.$day.'][active]" autocomplete="off">';
@@ -7844,7 +7878,43 @@ PLACEHOLDER
 			<br />
 			<form action="<?php echo admin_url('admin-ajax.php?action=app_export'); ?>" method="post">
 				<input type="hidden" name="action" value="app_export" />
-				<input type="submit" class="button-secondary" value="<?php _e('Export Appointments','appointments') ?>" title="<?php _e('If you click this button a CSV file containing ALL appointment records will be saved on your PC','appointments') ?>" />
+				<input type="hidden" name="export_type" id="app-export_type" value="type" />
+				<input type="submit" id="app-export-selected" class="app-export_trigger button-secondary" value="<?php esc_attr_e(__('Export selected Appointments','appointments')); ?>" />
+				<input type="submit" id="app-export-type" class="app-export_trigger button-primary" value="<?php esc_attr_e(sprintf(__('Export %s Appointments','appointments'), App_Template::get_status_name($type))); ?>" data-type="<?php esc_attr_e($type); ?>" />
+				<input type="submit" id="app-export-all" class="app-export_trigger button-secondary" value="<?php _e('Export all Appointments','appointments') ?>" title="<?php _e('If you click this button a CSV file containing ALL appointment records will be saved on your PC','appointments') ?>" />
+<script>
+(function ($) {
+function toggle_selected_export () {
+	var $sel = $(".column-delete.app-check-column :checked");
+	if ($sel.length) $("#app-export-selected").show();
+	else $("#app-export-selected").hide();
+}
+$(document).on("click", ".app-export_trigger", function () {
+	var $me = $(this),
+		$form = $me.closest("form"),
+		$sel = $(".column-delete.app-check-column :checked"),
+		$type = $form.find("#app-export_type")
+	;
+	if ($me.is("#app-export-selected") && $sel.length) {
+		$sel.each(function () {
+			$form.append("<input type='hidden' name='app[]' value='" + $(this).val() + "' />");
+		});
+		$type.val("selected");
+		return true;
+	} else if ($me.is("#app-export-type")) {
+		$form.append("<input type='hidden' name='status' value='" + $me.attr("data-type") + "' />");
+		$type.val("type");
+		return true;
+	} else if ($me.is("#app-export-all")) {
+		$type.val("all");
+		return true;
+	}
+	return false;
+});
+$(document).on("change", ".column-delete.app-check-column input, .app-column-delete input", toggle_selected_export);
+$(toggle_selected_export);
+})(jQuery);
+</script>
 			</form>
 
 		</div> <!-- wrap -->
@@ -7865,11 +7935,24 @@ PLACEHOLDER
 	 * @since 1.0.9
 	 */
 	function export(){
+		
+		$sql = false;
+		$type = !empty($_POST['export_type']) ? $_POST['export_type'] : 'all';
+		if ('selected' == $type && !empty($_POST['app'])) {
+			// selected appointments
+			$ids = array_filter(array_map('intval', $_POST['app']));
+			if ($ids) $sql = "SELECT * FROM {$this->app_table} WHERE ID IN(" . join(',', $ids) . ") ORDER BY ID";
+		} else if ('type' == $type) {
+			$status = !empty($_POST['status']) ? $_POST['status'] : false;
+			if ($status) $sql = $this->db->prepare("SELECT * FROM {$this->app_table} WHERE status=%s ORDER BY ID", $status);
+		} else if ('all' == $type) {
+			$sql = "SELECT * FROM {$this->app_table} ORDER BY ID";
+		}
+		if (!$sql) wp_die(__('Nothing to download!','appointments'));
 
-		$apps = $this->db->get_results( "SELECT * FROM " . $this->app_table . " ORDER BY ID", ARRAY_A );
+		$apps = $this->db->get_results($sql, ARRAY_A);
 
-		if ( !is_array( $apps ) || empty( $apps ) )
-			die(__('Nothing to download!','appointments'));
+		if ( !is_array( $apps ) || empty( $apps ) ) wp_die(__('Nothing to download!','appointments'));
 
 		$file = fopen('php://temp/maxmemory:'. (12*1024*1024), 'r+');
 		// Add field names to the file
@@ -8116,6 +8199,7 @@ PLACEHOLDER
 				var col_len = $("table").find("tr:first th").length;
 				// Add new
 				$(".add-new-h2").click(function(){
+					$("table.widefat .inline-edit-row .cancel").click(); // Remove active edits
 					$(".add-new-waiting").show();
 					var data = {action: 'inline_edit', col_len: col_len, app_id:0, nonce: '<?php echo wp_create_nonce() ?>'};
 					$.post(ajaxurl, data, function(response) {
@@ -8181,7 +8265,7 @@ PLACEHOLDER
 					if (save_parent.find('input[name="resend"]').is(':checked') ) { resend=1;}
 					var app_id = save_parent.find('input[name="app_id"]').val();
 					var data = {action: 'inline_edit_save', user:user, name:name, email:email, phone:phone, address:address,city:city, service:service, worker:worker, price:price, date:date, time:time, note:note, status:status, resend:resend, app_id: app_id, nonce: '<?php echo wp_create_nonce() ?>'};
-					$(document).trigger('app-appointment-inline_edit-save_data', [data]);
+					$(document).trigger('app-appointment-inline_edit-save_data', [data, save_parent]);
 					$.post(ajaxurl, data, function(response) {
 						save_parent.find(".waiting").hide();
 						if ( response && response.error ){
@@ -8327,23 +8411,23 @@ PLACEHOLDER
 			if ( $app->user ) {
 				$name = get_user_meta( $app->user, 'app_name', true );
 				if ( $name )
-					$app->name = $name;
+					$app->name = $app->name && !(defined('APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES') && APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES) ? $app->name : $name;
 
 				$email = get_user_meta( $app->user, 'app_email', true );
 				if ( $email )
-					$app->email = $email;
+					$app->email = $app->email && !(defined('APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES') && APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES) ? $app->email : $email;
 
 				$phone = get_user_meta( $app->user, 'app_phone', true );
 				if ( $phone )
-					$app->phone = $phone;
+					$app->phone = $app->phone && !(defined('APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES') && APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES) ? $app->phone : $phone;
 
 				$address = get_user_meta( $app->user, 'app_address', true );
 				if ( $address )
-					$app->address = $address;
+					$app->address = $app->address && !(defined('APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES') && APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES) ? $app->address : $address;
 
 				$city = get_user_meta( $app->user, 'app_city', true );
 				if ( $city )
-					$app->city = $city;
+					$app->city = $app->city && !(defined('APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES') && APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES) ? $app->city : $city;
 			}
 		}
 		else {
@@ -8426,6 +8510,7 @@ PLACEHOLDER
 		$html .= '<input type="text" name="city" class="ptitle" value="'.stripslashes( $app->city ).'" />';
 		$html .= '</span>';
 		$html .= '</label>';
+		$html .= apply_filters('app-appointments_list-edit-client', '', $app);
 		$html .= '</div>';
 		$html .= '</fieldset>';
 
@@ -8660,7 +8745,7 @@ PLACEHOLDER
 
 		do_action('app-appointment-inline_edit-after_save', ($update_result ? $app_id : $wpdb->insert_id), $data);
 
-		if ( ( $update_result || $insert_result ) && $data['user'] ) {
+		if ( ( $update_result || $insert_result ) && $data['user'] && defined('APP_USE_LEGACY_USERDATA_OVERWRITING') && APP_USE_LEGACY_USERDATA_OVERWRITING ) {
 			if ( $data['name'] )
 				update_user_meta( $data['user'], 'app_name',  $data['name'] );
 			if (  $data['email'] )
@@ -8930,6 +9015,7 @@ define('APP_PLUGIN_DIR', dirname(__FILE__), true);
 
 if (file_exists(APP_PLUGIN_DIR . '/includes/wpmudev-dash-notification.php')) require_once APP_PLUGIN_DIR . '/includes/wpmudev-dash-notification.php';
 require_once APP_PLUGIN_DIR . '/includes/default_filters.php';
+require_once APP_PLUGIN_DIR . '/includes/class_app_timed_abstractions.php';
 require_once APP_PLUGIN_DIR . '/includes/class_app_roles.php';
 require_once APP_PLUGIN_DIR . '/includes/class_app_codec.php';
 require_once APP_PLUGIN_DIR . '/includes/class_app_shortcodes.php';

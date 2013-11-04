@@ -10,7 +10,8 @@ Author: Ve Bailovity (Incsub)
 
 class App_Schedule_Durations {
 
-	private $_flag_changes_applied = false;
+	private $_duration_flag_changes_applied = false;
+	private $_boundaries_flag_changes_applied = false;
 	
 	private function __construct () {}
 
@@ -34,15 +35,23 @@ class App_Schedule_Durations {
 	}
 
 	public function apply_duration_calculus () {
-		if (defined('APP_USE_LEGACY_DURATION_CALCULUS')) return false;
-		if (!empty($this->_data['duration_calculus']) && 'legacy' == $this->_data['duration_calculus']) {
-			define('APP_USE_LEGACY_DURATION_CALCULUS', true, true);
-			$this->_flag_changes_applied = true;
+		if (!defined('APP_USE_LEGACY_DURATION_CALCULUS')) {
+			if (!empty($this->_data['duration_calculus']) && 'legacy' == $this->_data['duration_calculus']) {
+				define('APP_USE_LEGACY_DURATION_CALCULUS', true, true);
+				$this->_duration_flag_changes_applied = true;
+			}
+		}
+		if (!defined('APP_USE_LEGACY_BOUNDARIES_CALCULUS')) {
+			if (!empty($this->_data['boundaries_calculus']) && 'legacy' == $this->_data['boundaries_calculus']) {
+				define('APP_USE_LEGACY_BOUNDARIES_CALCULUS', true, true);
+				$this->_boundaries_flag_changes_applied = true;
+			}
 		}
 	}
 
 	public function save_settings ($options) {
 		if (!empty($_POST['duration_calculus'])) $options['duration_calculus'] = $_POST['duration_calculus'];
+		if (!empty($_POST['boundaries_calculus'])) $options['boundaries_calculus'] = $_POST['boundaries_calculus'];
 		return $options;
 	}
 
@@ -55,7 +64,9 @@ class App_Schedule_Durations {
 			'<th scope="row" >' . __('Time slot calculus method', 'appointments') . '</th>' .
 		'';
 		echo '<td colspan="2">';
-		if (defined('APP_USE_LEGACY_DURATION_CALCULUS') && !$this->_flag_changes_applied) {
+		
+		// Duration
+		if (defined('APP_USE_LEGACY_DURATION_CALCULUS') && !$this->_duration_flag_changes_applied) {
 			echo '<div class="error below-h2">' .
 				'<p>' . __('Your duration calculus will be determined by the define value.', 'appointments') . '</p>' .
 			'</div>';
@@ -73,6 +84,27 @@ class App_Schedule_Durations {
 				'</br >';
 			}
 		}
+		// Boundaries
+		echo '<h4>' . __('Boundaries detection', 'appointments') . '</h4>';
+		if (defined('APP_USE_LEGACY_BOUNDARIES_CALCULUS') && !$this->_boundaries_flag_changes_applied) {
+			echo '<div class="error below-h2">' .
+				'<p>' . __('Your boundaries calculus will be determined by the define value.', 'appointments') . '</p>' .
+			'</div>';
+		} else {
+			$boundaries = array(
+				'legacy' => __('Exact period matching <em>(legacy)</em>', 'appointments'),
+				'detect_overlap' => __('Detect overlap', 'appointments'),
+			);
+			$method = !empty($this->_data['boundaries_calculus']) ? $this->_data['boundaries_calculus'] : 'detect_overlap';
+			foreach ($boundaries as $key => $label) {
+				$checked = checked($key, $method, false);
+				echo "<input type='radio' name='boundaries_calculus' id='app-boundaries_calculus-{$key}' value='{$key}' {$checked} />" .
+					'&nbsp;' .
+					"<label for='app-boundaries_calculus-{$key}'>{$label}</label>" .
+				'</br >';
+			}
+		}
+		
 		echo '</td>';
 		echo '</tr>';
 	}

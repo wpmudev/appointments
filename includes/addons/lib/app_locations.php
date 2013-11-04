@@ -43,6 +43,7 @@ abstract class App_Locations_Location {
 	// the reference to this in forcefully INT type
 	protected function _create_id () {
 		$id = sprintf('%d', rand(0,99));
+		$appx = '';
 		$count = 0;
 		while ($count < 3) {
 			$appx .= sprintf('%04d', rand(0,99));

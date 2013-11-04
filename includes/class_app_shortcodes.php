@@ -218,7 +218,7 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 			),
 			'notlogged' => array(
 				'value' => __('You need to login to make an appointment. Please click here to register/login: LOGIN_PAGE', 'appointments'),
-				'help' => __('Text that will be displayed after the title only to the clients who are not logged in and you require a login. LOGIN_PAGE will be replaced with your website\'s login page.', 'appointments'),
+				'help' => __('Text that will be displayed after the title only to the clients who are not logged in and you require a login. <code>LOGIN_PAGE</code> will be replaced with your website\'s login page, while <code>REGISTRATION_PAGE</code> will be replaced with your website\'s registration page.', 'appointments'),
 				'example' => __('You need to login to make an appointment. Please click here to register/login: LOGIN_PAGE', 'appointments'),
 			),
 			'service' => array(
@@ -317,15 +317,19 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 
 		if ( is_user_logged_in() || 'yes' != $appointments->options["login_required"] ) {
 			$c .= $logged ? "<div class='appointments-instructions'>{$logged}</div>" : '';
-		}
-		else if ( !@$appointments->options["accept_api_logins"] )
-			$c .= str_replace( 'LOGIN_PAGE', '<a class="appointments-login_show_login" href="'.site_url( 'wp-login.php').'">'. __('Login','appointments'). '</a>', $notlogged );
-		else {
-			$c .= '<div class="appointments-login">';
-			$c .= str_replace( 'LOGIN_PAGE', '<a class="appointments-login_show_login" href="javascript:void(0)">'. __('Login','appointments'). '</a>', $notlogged );
-			$c .= '<div class="appointments-login_inner">';
-			$c .= '</div>';
-			$c .= '</div>';
+		} else {
+			$codec = new App_Macro_GeneralCodec;
+			if ( !@$appointments->options["accept_api_logins"] ) {
+				//$c .= str_replace( 'LOGIN_PAGE', '<a class="appointments-login_show_login" href="'.site_url( 'wp-login.php').'">'. __('Login','appointments'). '</a>', $notlogged );
+				$c .= $codec->expand($notlogged, App_Macro_GeneralCodec::FILTER_BODY);
+			} else {
+				$c .= '<div class="appointments-login">';
+				//$c .= str_replace( 'LOGIN_PAGE', '<a class="appointments-login_show_login" href="javascript:void(0)">'. __('Login','appointments'). '</a>', $notlogged );
+				$c .= $codec->expand($notlogged, App_Macro_GeneralCodec::FILTER_BODY);
+				$c .= '<div class="appointments-login_inner">';
+				$c .= '</div>';
+				$c .= '</div>';
+			}
 		}
 
         $c .= '<div class="appointments-list">';
@@ -364,7 +368,7 @@ class App_Shortcode_MonthlySchedule extends App_Shortcode {
 			),
 			'notlogged' => array(
 				'value' => __('You need to login to make an appointment. Please click here to register/login: LOGIN_PAGE', 'appointments'),
-				'help' => __('Text that will be displayed after the title only to the clients who are not logged in and you require a login. LOGIN_PAGE will be replaced with your website\'s login page.', 'appointments'),
+				'help' => __('Text that will be displayed after the title only to the clients who are not logged in and you require a login. <code>LOGIN_PAGE</code> will be replaced with your website\'s login page, while <code>REGISTRATION_PAGE</code> will be replaced with your website\'s registration page.', 'appointments'),
 				'example' => __('You need to login to make an appointment. Please click here to register/login: LOGIN_PAGE', 'appointments'),
 			),
 			'service' => array(
@@ -466,15 +470,19 @@ class App_Shortcode_MonthlySchedule extends App_Shortcode {
 
 		if ( is_user_logged_in() || 'yes' != $appointments->options["login_required"] ) {
 			$c .= $logged ? "<div class='appointments-instructions'>{$logged}</div>" : '';
-		}
-		else if ( !@$appointments->options["accept_api_logins"] )
-			$c .= str_replace( 'LOGIN_PAGE', '<a class="appointments-login_show_login" href="'.site_url( 'wp-login.php').'">'. __('Login','appointments'). '</a>', $notlogged );
-		else {
-			$c .= '<div class="appointments-login">';
-			$c .= str_replace( 'LOGIN_PAGE', '<a class="appointments-login_show_login" href="javascript:void(0)">'. __('Login','appointments'). '</a>', $notlogged );
-			$c .= '<div class="appointments-login_inner">';
-			$c .= '</div>';
-			$c .= '</div>';
+		} else {
+			$codec = new App_Macro_GeneralCodec;
+			if ( !@$appointments->options["accept_api_logins"] ) {
+				//$c .= str_replace( 'LOGIN_PAGE', '<a class="appointments-login_show_login" href="'.site_url( 'wp-login.php').'">'. __('Login','appointments'). '</a>', $notlogged );
+				$c .= $codec->expand($notlogged, App_Macro_GeneralCodec::FILTER_BODY);
+			} else {
+				$c .= '<div class="appointments-login">';
+				//$c .= str_replace( 'LOGIN_PAGE', '<a class="appointments-login_show_login" href="javascript:void(0)">'. __('Login','appointments'). '</a>', $notlogged );
+				$c .= $codec->expand($notlogged, App_Macro_GeneralCodec::FILTER_BODY);
+				$c .= '<div class="appointments-login_inner">';
+				$c .= '</div>';
+				$c .= '</div>';
+			}
 		}
 
 		$c .= '<div class="appointments-list">';

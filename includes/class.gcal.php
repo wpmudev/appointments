@@ -1025,6 +1025,7 @@ class AppointmentsGcal {
 
 		// Insert event
 		$createdEvent = $this->service->events->insert( $this->get_selected_calendar( $worker_id ), $this->event );
+		if ($createdEvent && !is_object($createdEvent) && class_exists('Google_CalendarListEntry')) $createdEvent = new Google_CalendarListEntry($createdEvent);
 
 		// Write Event ID to database
 		$gcal_ID = $createdEvent->getId();
@@ -1151,9 +1152,21 @@ class AppointmentsGcal {
 				)
 			)
 		);
-
+		if ($events && !$this->service->events->useObjects() && class_exists('Google_Events')) {
+			$events = new Google_Events($events);
+		}
 		$message = $event_ids = '';
 		$values = array();
+
+		$present_events = $wpdb->get_col("SELECT DISTINCT gcal_ID FROM {$this->app_table} WHERE gcal_ID IS NOT NULL");
+		$to_update = array();
+
+		// Drop all previously reserved GCALs, because we'll reimport them now
+		if (version_compare($this->db_version, '1.2.3', '<') && version_compare($this->db_version, '1.2.2', '=')) {
+			$wpdb->query("DELETE FROM {$this->app_table} WHERE status='reserved'");
+			$this->db_version = '1.2.3';
+			update_option('app_db_version', $this->db_version);
+		}
 
 		if ( $events && is_array( $events->getItems()) ) {
 			// Service ID is not important as we will use this record for blocking our time slots only
@@ -1175,8 +1188,13 @@ class AppointmentsGcal {
 
 				// Check start and end times as in case of all day events this field is empty
 				if ( $event_id && $event_start_timestamp > $this->local_time && $event_end_timestamp > $this->local_time ) {
-						$values[] = "('". date( "Y-m-d H:i:s", $this->local_time ) ."',". $service_id .",". $worker_id .",'reserved','". date( "Y-m-d H:i:s", strtotime($event_start->dateTime) + $tdif )
-							."','". date( "Y-m-d H:i:s", $event_end_timestamp ) ."','". $wpdb->escape($event->getSummary()) ."','". $event_id ."','". date( "Y-m-d H:i:s", $event_updated_timestamp ) ."')";
+						if (!in_array($event_id, $present_events)) {
+							$present_events[] = $event_id;
+							$values[] = "('". date( "Y-m-d H:i:s", $this->local_time ) ."',". $service_id .",". $worker_id .",'reserved','". date( "Y-m-d H:i:s", strtotime($event_start->dateTime) + $tdif )
+								."','". date( "Y-m-d H:i:s", $event_end_timestamp ) ."','". $wpdb->escape($event->getSummary()) ."','". $event_id ."','". date( "Y-m-d H:i:s", $event_updated_timestamp ) ."')";
+						} else {
+							$to_update[] = "start='" . date("Y-m-d H:i:s", $event_start_timestamp) . "', end='" . date("Y-m-d H:i:s", $event_end_timestamp) . "', gcal_updated='" . date("Y-m-d H:i:s", $event_updated_timestamp) . "' WHERE gcal_ID='" . $event_id . "' LIMIT 1";
+						}
 				}
 			}
 
@@ -1186,11 +1204,19 @@ class AppointmentsGcal {
 				// Insert and update all events with a single query
 				$result = $wpdb->query( "INSERT INTO " . $this->app_table . " (created,service,worker,status,start,end,note,gcal_ID,gcal_updated)
 					VALUES ". implode(',',$values).  "
-					ON DUPLICATE KEY UPDATE start=VALUES(start), end=VALUES(end), gcal_updated=VALUES(gcal_updated)" );
+					ON DUPLICATE KEY UPDATE start=VALUES(start), end=VALUES(end), gcal_updated=VALUES(gcal_updated)" ); // Key is autoincrement, it'll never update!
 
 				if ( $result ) {
-					$message .= sprintf( __('%s appointment record(s) affected.','appointments'), $result ). ' ';
+					$message = sprintf( __('%s appointment record(s) affected.','appointments'), $result ). ' ';
 				}
+			}
+			if (!empty($to_update)) {
+				$result = (int)$result;
+				foreach ($to_update as $upd) {
+					$res2 = $wpdb->query("UPDATE {$this->app_table} SET {$upd}");
+					if ($res2) $result++;
+				}
+				$message = sprintf( __('%s appointment record(s) affected.','appointments'), $result ). ' ';
 			}
 		}
 
