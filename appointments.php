@@ -4,7 +4,7 @@ Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
 Version: 1.4
-Author: Hakan Evin <hakan@incsub.com>
+Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
 WDP ID: 679841
@@ -12,7 +12,8 @@ WDP ID: 679841
 
 /*
 Copyright 2007-2013 Incsub (http://incsub.com)
-
+Author - Hakan Evin <hakan@incsub.com>
+Contributor - Ve Bailovity (Incsub)
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License (Version 2 - GPLv2) as published by
 the Free Software Foundation.
