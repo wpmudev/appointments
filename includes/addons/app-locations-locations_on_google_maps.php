@@ -255,8 +255,10 @@ class App_Locations_GoogleMaps {
 	}
 
 	public function add_joint_my_appointments_map ($out, $my_appointments) {
+		if (empty($my_appointments)) return $out;
 		if (!class_exists('AgmMarkerReplacer')) return $out;
 		$maps = array();
+		
 		foreach ($my_appointments as $app) {
 			if (empty($app->location)) continue;
 			$location = $this->_locations->find_by('id', $app->location);

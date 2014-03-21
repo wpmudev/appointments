@@ -35,7 +35,7 @@ class App_Users_AdminPermissions {
 	}
 
 	public function filter_requested_caps ($capability, $context) {
-		if (is_super_admin()) return true;
+		if (is_super_admin()) return $capability;
 		$context = App_Roles::get_context($context);
 
 		if (!empty($this->_data['roles'][$context])) {

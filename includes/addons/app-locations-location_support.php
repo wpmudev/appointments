@@ -215,6 +215,39 @@ class App_Locations_LocationsWorker {
 			add_filter('app_all_appointments_column_name', array($this, 'all_appointments_headers'), 1);
 			add_filter('app-shortcode-all_appointments-' . $injection_point, array($this, 'all_appointments_address'), 1, 2);
 		}
+
+		// Add macro expansion filtering
+		add_filter('app-codec-macros', array($this, 'add_to_macro_list'));
+		add_filter('app-codec-macro_default-replace_location', array($this, 'expand_location_macro'), 10, 3);
+		add_filter('app-codec-macro_default-replace_location_address', array($this, 'expand_location_address_macro'), 10, 2);
+	}
+
+	public function add_to_macro_list ($macros) {
+		$macros[] = 'LOCATION';
+		$macros[] = 'LOCATION_ADDRESS';
+		return $macros;
+	}
+
+	public function expand_location_address_macro ($content, $app) {
+		if (empty($app->location)) return $content;
+		
+		$location = $this->_locations->find_by('id', $app->location);
+		if (empty($location)) return $content;
+
+		$address = $location->get_address();
+		return preg_replace('/(?:^|\b)LOCATION_ADDRESS(?:\b|$)/', $address, $content);
+	}
+
+	public function expand_location_macro ($content, $app, $filter) {
+		if (empty($app->location)) return $content;
+		
+		$location = $this->_locations->find_by('id', $app->location);
+		if (empty($location)) return $content;
+
+		$address = $location->get_display_markup(
+			(App_Macro_Codec::FILTER_BODY == $filter)
+		);
+		return preg_replace('/(?:^|\b)LOCATION(?:\b|$)/', $address, $content);
 	}
 
 	public function my_appointments_headers ($headers) {

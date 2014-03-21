@@ -6,6 +6,9 @@
  * that is, when calendar owner is not required to be online
  * V1.2.8
  *
+ * Google Apps reference: http://premium.wpmudev.org/forums/topic/cant-use-google-calendar#post-437790
+ * Google Apps reference: http://premium.wpmudev.org/forums/topic/appointments-will-not-select-services-or-providers#post-437785
+ *
  * @since 1.2.0
  */
 
@@ -96,6 +99,7 @@ class AppointmentsGcal {
 
 		switch ( $mode ) {
 			case 'none':		return __( 'None', 'appointments'); break;
+			case 'gcal2app':	return __( 'A+<-GCal', 'appointments'); break;
 			case 'app2gcal':	return __( 'A+->GCal', 'appointments'); break;
 			case 'sync':		return __( 'A+<->GCal', 'appointments'); break;
 			default:			return ' - '; break;
@@ -329,6 +333,7 @@ class AppointmentsGcal {
 			<td colspan="2">
 			<select name="gcal_api_mode">
 			<option value="none" ><?php _e('Integration disabled', 'appointments')?></option>
+			<option value="gcal2app" <?php if ( $gcal_api_mode == 'gcal2app' ) echo "selected='selected'"?>><?php _e('A+ <- GCal (Only import appointments)', 'appointments')?></option>
 			<option value="app2gcal" <?php if ( $gcal_api_mode == 'app2gcal' ) echo "selected='selected'"?>><?php _e('A+ -> GCal (Only export appointments)', 'appointments')?></option>
 			<option value="sync" <?php if ( $gcal_api_mode == 'sync' ) echo "selected='selected'"?>><?php _e('A+ <-> GCal (Synchronization)', 'appointments')?></option>
 			</select>
@@ -753,7 +758,7 @@ class AppointmentsGcal {
 	 */
 	function get_description( $worker_id=0 ) {
 		$text = '';
-		if ($worker_id) {
+		if ($worker_id && !empty($this->options['gcal_api_allow_worker']) && 'yes' == $this->options['gcal_api_allow_worker']) {
 			$text = get_user_meta($worker_id, 'app_gcal_description', true);
 		}
 		if (empty($text)) $text = !empty($this->options['gcal_description'])
@@ -965,9 +970,37 @@ class AppointmentsGcal {
 		$this->event->setLocation( $location );
 		$this->event->setStart( $start );
 		$this->event->setEnd( $end );
-		$this->event->setSummary( $a->_replace( $this->get_summary( $worker_id ), $app->name, $a->get_service_name($app->service), $a->get_worker_name($app->worker), $app->start, $app->price, $a->get_deposit($app->price), $app->phone, $app->note, $app->address, $app->email, $app->city ) );
-		$this->event->setDescription( $a->_replace( $this->get_description( $worker_id ), $app->name, $a->get_service_name($app->service), $a->get_worker_name($app->worker), $app->start, $app->price, $a->get_deposit($app->price), $app->phone, $app->note, $app->address, $app->email, $app->city ) );
+		$this->event->setSummary(apply_filters(
+			'app-gcal-set_summary',
+			$a->_replace( $this->get_summary( $worker_id ), $app->name, $a->get_service_name($app->service), $a->get_worker_name($app->worker), $app->start, $app->price, $a->get_deposit($app->price), $app->phone, $app->note, $app->address, $app->email, $app->city ),
+			$app
+		));
+		$this->event->setDescription(apply_filters(
+			'app-gcal-set_description',
+			$a->_replace( $this->get_description( $worker_id ), $app->name, $a->get_service_name($app->service), $a->get_worker_name($app->worker), $app->start, $app->price, $a->get_deposit($app->price), $app->phone, $app->note, $app->address, $app->email, $app->city ),
+			$app
+		));
 		$this->event->attendees = $attendees;
+
+		// Alright, now deal with event sequencing
+		if (!empty($app->gcal_ID)) {
+			$tmp = $this->service->events->get($this->get_selected_calendar( $worker_id ), $app->gcal_ID);
+			if (!empty($tmp['sequence'])) $this->event->sequence = $tmp['sequence'];
+		}
+	}
+
+	private function _is_writable_mode ($worker_id=false) {
+		$mode = $this->get_api_mode($worker_id);
+		if ($worker_id && empty($mode)) $mode = $this->get_api_mode(); // Fallback to site default if no option selected.
+		$mode = empty($mode)
+			? 'none'
+			: $mode
+		; // If we still don't have a mode, then we don't want to sync.
+		return !in_array($mode, array(
+			// Non-writable modes
+			'gcal2app',
+			'none'
+		));
 	}
 
 	/**
@@ -980,15 +1013,18 @@ class AppointmentsGcal {
 		$worker_id = $app->worker;
 		// No preference case
 		if ( !$worker_id ) {
+			/*
 			if ( 'none' != $this->get_api_mode( ) )
 				$this->insert_event( $app_id );
+			*/
+			if ($this->_is_writable_mode()) $this->insert_event($app_id);
 		}
 		else {
-			if ( isset( $this->options['gcal_api_allow_worker'] ) && 'yes' == $this->options['gcal_api_allow_worker'] && 'none' != $this->get_api_mode( $worker_id ) )
-				$this->insert_event( $app_id, false, $worker_id );
+			//if ( isset( $this->options['gcal_api_allow_worker'] ) && 'yes' == $this->options['gcal_api_allow_worker'] && 'none' != $this->get_api_mode( $worker_id ) )
+			if (isset($this->options['gcal_api_allow_worker']) && 'yes' == $this->options['gcal_api_allow_worker'] && $this->_is_writable_mode($worker_id)) $this->insert_event($app_id, false, $worker_id);
 			// Add this to general calendar if selected so
-			if ( isset( $this->options['gcal_api_scope'] ) && 'all' == $this->options['gcal_api_scope'] && 'none' != $this->get_api_mode() )
-				$this->insert_event( $app_id );
+			//if ( isset( $this->options['gcal_api_scope'] ) && 'all' == $this->options['gcal_api_scope'] && 'none' != $this->get_api_mode() )
+			if (isset($this->options['gcal_api_scope']) && 'all' == $this->options['gcal_api_scope'] && $this->_is_writable_mode()) $this->insert_event($app_id);
 		}
 	}
 
@@ -1024,16 +1060,21 @@ class AppointmentsGcal {
 		$this->set_event_parameters( $app, $app->worker );
 
 		// Insert event
-		$createdEvent = $this->service->events->insert( $this->get_selected_calendar( $worker_id ), $this->event );
-		if ($createdEvent && !is_object($createdEvent) && class_exists('Google_CalendarListEntry')) $createdEvent = new Google_CalendarListEntry($createdEvent);
+		try {
+			$createdEvent = $this->service->events->insert( $this->get_selected_calendar( $worker_id ), $this->event );
+			if ($createdEvent && !is_object($createdEvent) && class_exists('Google_CalendarListEntry')) $createdEvent = new Google_CalendarListEntry($createdEvent);
 
-		// Write Event ID to database
-		$gcal_ID = $createdEvent->getId();
-		if ( $gcal_ID && !$test )
-			$wpdb->update( $this->app_table, array( 'gcal_ID' => $gcal_ID, 'gcal_updated' => date ("Y-m-d H:i:s", $this->local_time ) ), array( 'ID'=>$app_id ) );
-		// Test result successful
-		if ( $gcal_ID )
-			return true;
+			// Write Event ID to database
+			$gcal_ID = $createdEvent->getId();
+			if ( $gcal_ID && !$test )
+				$wpdb->update( $this->app_table, array( 'gcal_ID' => $gcal_ID, 'gcal_updated' => date ("Y-m-d H:i:s", $this->local_time ) ), array( 'ID'=>$app_id ) );
+			// Test result successful
+			if ( $gcal_ID )
+				return true;
+		} catch (Exception $e) {
+			$appointments->log("Insert went wrong: " . $e->getMessage());
+			return false;
+		}
 	}
 
 	/**
@@ -1046,13 +1087,11 @@ class AppointmentsGcal {
 		$worker_id = $app->worker;
 		if ( $app->gcal_ID ) {
 			// Update this event from general calendar
-			$this->update_event( $app_id );
+			if ($this->_is_writable_mode()) $this->update_event( $app_id );
 			// Also update service provider event if we have a provider
-			if ( $worker_id )
-				$this->update_event( $app_id, $worker_id );
+			if ($worker_id && $this->_is_writable_mode($worker_id)) $this->update_event( $app_id, $worker_id );
 		}
-		else
-			$this->insert_event( $app_id, false, $worker_id );
+		else if ($this->_is_writable_mode($worker_id)) $this->insert_event( $app_id, false, $worker_id );
 	}
 
 	/**
@@ -1069,11 +1108,17 @@ class AppointmentsGcal {
 			$this->set_event_parameters( $app, $worker_id );
 
 			// Update event
-			$updatedEvent = $this->service->events->update( $this->get_selected_calendar( $worker_id ), $app->gcal_ID, $this->event );
-			// Update Time of database
-			$gcal_ID = $updatedEvent->getId();
-			if ( $gcal_ID && $gcal_ID == $app->gcal_ID )
-				$wpdb->update( $this->app_table, array( 'gcal_updated' => date ("Y-m-d H:i:s", $this->local_time ) ), array( 'ID'=>$app_id ) );
+			try {
+				$updatedEvent = $this->service->events->update( $this->get_selected_calendar( $worker_id ), $app->gcal_ID, $this->event );
+				if ($updatedEvent && !is_object($updatedEvent) && class_exists('Google_CalendarListEntry')) $updatedEvent = new Google_CalendarListEntry($updatedEvent);
+
+				// Update Time of database
+				$gcal_ID = $updatedEvent->getId();
+				if ( $gcal_ID && $gcal_ID == $app->gcal_ID )
+					$wpdb->update( $this->app_table, array( 'gcal_updated' => date ("Y-m-d H:i:s", $this->local_time ) ), array( 'ID'=>$app_id ) );
+			} catch (Exception $e) {
+				$appointments->log("Update went wrong: " . $e->getMessage());
+			}
 		}
 	}
 
@@ -1084,12 +1129,12 @@ class AppointmentsGcal {
 	function delete( $app_id ) {
 		global $appointments;
 		$app = $appointments->get_app( $app_id );
+//$appointments->log(sprintf("Attempting to delete the appointment %s from GCal", $app_id));
 		$worker_id = $app->worker;
 		// In any case delete this event from general calendar
-		$this->delete_event( $app_id );
+		if ($this->_is_writable_mode()) $this->delete_event( $app_id );
 		// Also delete service provider event if we have a provider
-		if ( $worker_id )
-			$this->delete_event( $app_id, $worker_id );
+		if ($worker_id && $this->_is_writable_mode($worker_id)) $this->delete_event( $app_id, $worker_id );
 	}
 
 	/**
@@ -1101,8 +1146,17 @@ class AppointmentsGcal {
 			return false;
 		global $appointments;
 		$app = $appointments->get_app( $app_id );
-		if ( $app->gcal_ID )
-			$this->service->events->delete( $this->get_selected_calendar( $worker_id ), $app->gcal_ID );
+//$appointments->log(sprintf("Deleting the appointment %s from GCal (worker id: %s)", $app_id, $worker_id));
+		if ($app->gcal_ID) {
+			try {
+				$result = $this->service->events->delete( $this->get_selected_calendar( $worker_id ), $app->gcal_ID );
+			} catch (Exception $e) {
+				$appointments->log("Deleting went wrong: " . $e->getMessage());
+			}
+//$appointments->log(sprintf("The appointment %s (worker id: %s, GCal id: %s) deleted.", $app_id, $worker_id, $app->gcal_ID));
+		} else {
+//$appointments->log(sprintf("Deleting the appointment %s (worker id: %s) FAILED, unknown GCal id.", $app_id, $worker_id));
+		}
 	}
 
 	/**

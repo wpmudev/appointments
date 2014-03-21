@@ -178,7 +178,7 @@ jQuery(document).ready(function($){
 	<li>
 	<?php _e('<b>I have several service providers (workers) and each of them has different working hours, break hours and holidays. Does Appointments+ support this?</b>', 'appointments');?>
 	<br />
-	<?php _e('Yes. For each and every service provider you can individually set working, break hours and exceptions (holidays and additional working days). To do so, use the <i>Working Hours</i> and <i>Exceptions</i> tabs and select the service provider you want to make the changes from the service provider dropdown menu, make necessary changes and save. Plase note that when a service provider is added, his working schedule is set to the business working schedule. Thus, you only need to edit the variations of his schedule.', 'appointments');?>
+	<?php _e('Yes. For each and every service provider you can individually set working, break hours and exceptions (holidays and additional working days). To do so, use the <i>Working Hours</i> and <i>Exceptions</i> tabs and select the service provider you want to make the changes from the service provider dropdown menu, make necessary changes and save. Please note that when a service provider is added, his working schedule is set to the business working schedule. Thus, you only need to edit the variations of his schedule.', 'appointments');?>
 	</li>
 </ul>
 <ul id='q19'>

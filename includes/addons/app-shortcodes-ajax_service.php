@@ -3,7 +3,7 @@
 Plugin Name: AJAX shortcode
 Description: Combines service, provider and calendar selection into one AJAX-powered interface
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.0-BETA-1
+Version: 1.0-BETA-2
 AddonType: Shortcodes
 Author: Ve Bailovity (Incsub)
 */
@@ -19,6 +19,8 @@ class App_Shortcodes_AjaxCombo {
 		'app_paypal',
 		'app_thank_you',
 	);
+
+	private $_known_shortcodes = array();
 
 	private function __construct () {
 
@@ -95,7 +97,7 @@ class App_Shortcodes_AjaxCombo {
 
 	public function ajax_list_times () {
 		$all = $this->_get_cached_data();
-		$callback = isset($all['monthly_schedule']) ? 'monthly_calendar' : 'weekly_calendar';
+		$callback = isset($all['monthly_schedule']) ? 'app_monthly_schedule' : 'app_schedule';
 		$args = isset($all['monthly_schedule']) ? $all['monthly_schedule'] : $all['schedule'];
 
 		$worker_id = !empty($_POST['provider_id']) ? (int)$_POST['provider_id'] : false;
@@ -103,12 +105,17 @@ class App_Shortcodes_AjaxCombo {
 		
 		$service_id = !empty($_POST['service_id']) ? (int)$_POST['service_id'] : false;
 		if ($service_id) $args['service'] = $service_id;
+		else if (empty($service_id) && !empty($all['service_providers']['service'])) $args['service'] = $all['service_providers']['service'];
 
-		global $appointments;
-		die($appointments->$callback($args) . 
-			$appointments->confirmation(array()) .
-			$appointments->paypal(array())
-		);
+		$handler = $this->_spawn_shortcode_handler($callback);
+		$confirmation = $this->_spawn_shortcode_handler('app_confirmation');
+		$paypal = $this->_spawn_shortcode_handler('app_paypal');
+
+		$response = ($handler && $confirmation && $paypal) 
+			? $handler->process_shortcode($args) . $confirmation->process_shortcode() . $paypal->process_shortcode()
+			: ''
+		;
+		die($response);
 	}
 
 	private function _cache_shortcode_data ($code, $data) {
@@ -141,15 +148,29 @@ class App_Shortcodes_AjaxCombo {
 	}
 
 	private function _list_providers ($atts) {
-		global $appointments;
 		$atts['_noscript'] = true;
-		return $appointments->service_providers($atts);
+		$handler = $this->_spawn_shortcode_handler('app_service_providers');
+		if ($handler) return $handler->process_shortcode($atts);
+		return false;
 	}
 
 	private function _list_services ($atts) {
-		global $appointments;
 		$atts['_noscript'] = true;
-		return $appointments->services($atts);
+		$handler = $this->_spawn_shortcode_handler('app_services');
+		if ($handler) return $handler->process_shortcode($atts);
+		return false;
+	}
+
+	private function _spawn_shortcode_handler ($name) {
+		if (empty($this->_known_shortcodes)) $this->_obtain_known_shortcodes_list();
+		return !empty($this->_known_shortcodes[$name]) && class_exists($this->_known_shortcodes[$name])
+			? new $this->_known_shortcodes[$name]
+			: false
+		;
+	}
+
+	private function _obtain_known_shortcodes_list () {
+		$this->_known_shortcodes = apply_filters('app-shortcodes-register', array());
 	}
 
 

@@ -52,6 +52,67 @@ class App_Users_AdditionalFields {
 		add_filter('app_notification_message', array($this, 'expand_email_macros'), 10, 3);
 		add_filter('app_confirmation_message', array($this, 'expand_email_macros'), 10, 3);
 		add_filter('app_reminder_message', array($this, 'expand_email_macros'), 10, 3);
+
+		// GCal expansion filters
+		add_filter('app-gcal-set_summary', array($this, 'expand_gcal_macros'), 10, 2);
+		add_filter('app-gcal-set_description', array($this, 'expand_gcal_macros'), 10, 2);
+
+		// Export filtering
+		add_filter('app-export-columns', array($this, 'inject_additional_columns'));
+		add_filter('app-export-appointment', array($this, 'inject_additional_properties'));
+
+		// General fields substitution
+		add_filter('app-internal-additional_fields-expand', array($this, 'expand_general_fields'), 10, 2);
+	}
+
+	public function inject_additional_columns ($cols) {
+		$fields = !empty($this->_data['additional_fields']) ? $this->_data['additional_fields'] : array();
+		if (empty($fields)) return $cols;
+
+		foreach ($fields as $field) {
+			$name = 'field_' .
+				preg_replace('/[^_a-z]/i', '', $field['label']) .
+				preg_replace('/[^0-9]/', '', $field['label'])
+			;
+			$cols[] = $name;
+		}
+
+		return $cols;
+	}
+
+	public function inject_additional_properties ($app) {
+		if (empty($app['ID'])) return $app;
+
+		$fields = !empty($this->_data['additional_fields']) ? $this->_data['additional_fields'] : array();
+		if (empty($fields)) return $app;
+
+		$app_meta = $this->_get_appointment_meta($app['ID']);
+		if (empty($app_meta)) return $app;
+
+		foreach ($fields as $field) {
+			$label = esc_html($field['label']);
+			$name = $this->_to_clean_name($label);
+			$key = strtolower('field_' .
+				preg_replace('/[^_a-z]/i', '', $label) .
+				preg_replace('/[^0-9]/', '', $label)
+			);
+			$value = !empty($app_meta[$name]) ? esc_html($app_meta[$name]) : '';
+			if (empty($app[$key])) $app[$key] = $value;
+		}
+
+		return $app;
+	}
+
+	public function expand_general_fields ($text, $app_id) {
+		if (empty($text) || empty($app_id) || !is_numeric($app_id)) return $text;
+		return $this->expand_email_macros($text, null, $app_id);
+	}
+
+	public function expand_gcal_macros ($body, $app) {
+		$app_id = !empty($app->ID) ? $app->ID : false;
+		if (empty($app_id)) return $body;
+
+		return $this->expand_email_macros($body, $app, $app_id);
 	}
 
 	public function expand_email_macros ($body, $app, $app_id) {
@@ -214,7 +275,8 @@ $(document).ajaxSend(function(e, xhr, opts) {
 
 	public function save_settings ($options) {
 		if (isset($_POST['app-additional_fields-cleanup'])) $options['additional_fields-cleanup'] = (int)$_POST['app-additional_fields-cleanup'];
-		if (empty($_POST['app-additional_fields'])) return $options;
+		//if (empty($_POST['app-additional_fields'])) return $options; // Allow additional fields cleaning up
+		if (empty($_POST['app-additional_fields'])) $_POST['app-additional_fields'] = array();
 		$data = stripslashes_deep($_POST['app-additional_fields']);
 		$options['additional_fields'] = array();
 		foreach ($data as $field) {
@@ -286,7 +348,7 @@ $(document).ajaxSend(function(e, xhr, opts) {
 		<b><%= label %></b> <em><small>(<%= type %>)</small></em>
 		<br />
 		<?php echo esc_html('Required', 'appointments'); ?>: <b><%= required ? '<?php echo esc_js(__("Yes", "appointments")); ?>' : '<?php echo esc_js(__("No", "appointments")); ?>' %></b>
-		<input type="hidden" name="app-additional_fields[]" value="<%= escape(_value) %>" />
+		<input type="hidden" name="app-additional_fields[]" value="<%= encodeURIComponent(_value) %>" />
 		<a href="#remove" class="app-additional_fields-remove"><?php echo esc_html('Remove', 'appointments'); ?></a>
 	</div>
 </script>
@@ -342,7 +404,9 @@ $(function () {
 	}
 
 	private function _to_clean_name ($label) {
-		return preg_replace('/[^-_a-z0-9]/', '', strtolower($label));
+		$clean = preg_replace('/[^-_a-z0-9]/', '', strtolower($label));
+		if (empty($clean)) $clean = substr(md5($label), 0, 8);
+		return $clean;
 	}
 
 	private function _to_email_macro ($label) {
@@ -371,3 +435,12 @@ $(function () {
 
 }
 App_Users_AdditionalFields::serve();
+
+if (!function_exists('app_additional_fields_expand')) {
+	function app_additional_fields_expand ($text, $app_id) {
+		return !empty($app_id)
+			? apply_filters('app-internal-additional_fields-expand', $text, $app_id)
+			: $text
+		;
+	}
+}

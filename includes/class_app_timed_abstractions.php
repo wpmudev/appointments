@@ -19,6 +19,9 @@ class App_Period {
 		;
 	}
 
+	public function get_start () { return $this->_start; }
+	public function get_end () { return $this->_end; }
+
 	// doesn't handle enclosed appointments
 	protected function _contains_exact ($start, $end) {
 		return (

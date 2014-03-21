@@ -47,11 +47,18 @@ class App_Schedule_Durations {
 				$this->_boundaries_flag_changes_applied = true;
 			}
 		}
+		if (!defined('APP_BREAK_TIMES_PADDING_CALCULUS')) {
+			if (!empty($this->_data['breaks_calculus']) && 'legacy' != $this->_data['breaks_calculus']) {
+				define('APP_BREAK_TIMES_PADDING_CALCULUS', true, true);
+				$this->_breaks_flag_changes_applied = true;
+			}
+		}
 	}
 
 	public function save_settings ($options) {
 		if (!empty($_POST['duration_calculus'])) $options['duration_calculus'] = $_POST['duration_calculus'];
 		if (!empty($_POST['boundaries_calculus'])) $options['boundaries_calculus'] = $_POST['boundaries_calculus'];
+		if (!empty($_POST['breaks_calculus'])) $options['breaks_calculus'] = $_POST['breaks_calculus'];
 		return $options;
 	}
 
@@ -101,6 +108,26 @@ class App_Schedule_Durations {
 				echo "<input type='radio' name='boundaries_calculus' id='app-boundaries_calculus-{$key}' value='{$key}' {$checked} />" .
 					'&nbsp;' .
 					"<label for='app-boundaries_calculus-{$key}'>{$label}</label>" .
+				'</br >';
+			}
+		}
+		// Break times
+		echo '<h4>' . __('Break times calculus', 'appointments') . '</h4>';
+		if (defined('APP_BREAK_TIMES_PADDING_CALCULUS') && !$this->_breaks_flag_changes_applied) {
+			echo '<div class="error below-h2">' .
+				'<p>' . __('Your break times calculus will be determined by the define value.', 'appointments') . '</p>' .
+			'</div>';
+		} else {
+			$breaks = array(
+				'legacy' => __('Invalidate enclosed offsets <em>(legacy)</em>', 'appointments'),
+				'pad' => __('Shift next period', 'appointments'),
+			);
+			$method = !empty($this->_data['breaks_calculus']) ? $this->_data['breaks_calculus'] : 'legacy';
+			foreach ($breaks as $key => $label) {
+				$checked = checked($key, $method, false);
+				echo "<input type='radio' name='breaks_calculus' id='app-breaks_calculus-{$key}' value='{$key}' {$checked} />" .
+					'&nbsp;' .
+					"<label for='app-breaks_calculus-{$key}'>{$label}</label>" .
 				'</br >';
 			}
 		}

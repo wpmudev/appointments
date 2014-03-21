@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.4
+Version: 1.4.1
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	var $version = "1.4";
+	var $version = "1.4.1";
 
 	/**
      * Constructor
@@ -56,15 +56,13 @@ class Appointments {
 		$this->date_format			= get_option('date_format');
 		$this->datetime_format		= $this->date_format . " " . $this->time_format;
 
-		add_action( 'wpmu_new_blog', array( &$this, 'new_blog' ), 10, 6);	// Install database tables for a new blog
-		add_action( 'delete_blog', array( &$this, 'delete_blog' ), 10, 2);	// Uninstall tables for a deleted blog
 		add_action( 'delete_user', array( &$this, 'delete_user' ) );		// Modify database in case a user is deleted
 		add_action( 'wpmu_delete_user', array( &$this, 'delete_user' ) );	// Same as above
 		add_action( 'remove_user_from_blog', array( &$this, 'remove_user_from_blog' ), 10, 2 );	// Remove his records only for that blog
 
 		add_action( 'plugins_loaded', array(&$this, 'localization') );		// Localize the plugin
 		add_action( 'init', array( &$this, 'init' ), 20 ); 						// Initial stuff
-		add_action( 'init', array( &$this, 'cancel' ), 3 ); 				// Check cancellation of an appointment
+		add_action( 'init', array( &$this, 'cancel' ), 19 ); 				// Check cancellation of an appointment
 		add_filter( 'the_posts', array(&$this, 'load_styles') );			// Determine if we use shortcodes on the page
 		add_action( 'wp_ajax_nopriv_app_paypal_ipn', array(&$this, 'handle_paypal_return')); // Send Paypal to IPN function
 
@@ -97,18 +95,15 @@ class Appointments {
 		add_action( 'wp_ajax_nopriv_cancel_app', array( &$this, 'cancel' ) ); 					// Cancel appointment from my appointments
 
 		// API login after the options have been initialized
-		add_action('init', array($this, 'setup_api_logins'));
+		add_action('init', array($this, 'setup_api_logins'), 10);
 
 		// Widgets
 		require_once( $this->plugin_dir . '/includes/widgets.php' );
 		add_action( 'widgets_init', array( &$this, 'widgets_init' ) );
 
 		// Buddypress
-		add_action( 'bp_setup_nav', array( &$this, 'setup_nav'), 20 );
-		add_action( 'bp_init', array( &$this, 'bp_init') );
-		add_action( 'bp_init', array( &$this, 'cancel' ), 3 ); 						// Check cancellation of an appointment
-		add_action( 'template_redirect', array( &$this, 'bp_template_redirect') ); 	// bp_template_redirect is not working
-		add_action( 'wp_footer', array( &$this, 'bp_footer' ) ); 					// The same action as wp_footer
+		require_once($this->plugin_dir . '/includes/class_app_buddypress.php');
+		if (class_exists('App_BuddyPress')) App_BuddyPress::serve();
 
 		// Caching
 		if ( 'yes' == @$this->options['use_cache'] ) {
@@ -155,10 +150,10 @@ class Appointments {
 		$this->log_file 		= $this->uploads_dir . "appointments-log.txt";
 
 		// Other default settings
-		$this->script = $this->bp_script = $this->uri = $this->error_url = '';
+		$this->script = $this->uri = $this->error_url = '';
 		$this->location = $this->service = $this->worker = 0;
 		$this->gcal_image = '<img src="' . $this->plugin_url . '/images/gc_button1.gif" />';
-		$this->locale_error = $this->bp = false;
+		$this->locale_error = false;
 
 		// Create a salt, if it doesn't exist from the previous installation
 		if ( !$salt = get_option( "appointments_salt" ) ) {
@@ -551,14 +546,24 @@ class Appointments {
 		$apps = wp_cache_get( 'reserve_apps_'. $l . '_' . $s . '_' . $w . '_' . $week );
 		if ( false === $apps ) {
 			$location = $l ? "location='" . $this->db->escape($location) . "' AND" : '';
-			if ( 0 == $week )
+			if ( 0 == $week ) {
 				$apps = $this->db->get_results( "SELECT * FROM " . $this->app_table . "
 					WHERE ".$location." service=".$s." AND worker=".$w."
 					AND (status='pending' OR status='paid' OR status='confirmed' OR status='reserved') " );
-			else
-				$apps = $this->db->get_results( "SELECT * FROM " . $this->app_table . "
-					WHERE ".$location." service=".$s." AND worker=".$w."
-					AND (status='pending' OR status='paid' OR status='confirmed' OR status='reserved') AND WEEKOFYEAR(start)=".$week. " " );
+			} else {
+// @FIX: Problem: an appointment might already be ticked as "completed",
+// because of it's start time being in the past. Its end time, however, can still easily be
+// in the future. For long-running appointments (e.g. 2-3h) this could break the schedule slots
+// and show a registered- and paid for- slot as "available", when it's actually not.
+// E.g. http://premium.wpmudev.org/forums/topic/appointments-booking-conflictoverlapping-bookings
+				$apps = $this->db->get_results( "SELECT * FROM " . $this->app_table . 
+					" WHERE ".$location." service=".$s." AND worker=" . $w .
+					//" AND (status='pending' OR status='paid' OR status='confirmed' OR status='reserved') AND WEEKOFYEAR(start)=".$week. " " ); // THIS IS A PROBLEM! It doesn't take into account the completed events ALTHOUGH they may very well still be there
+					" AND (status='pending' OR status='paid' OR status='confirmed' OR status='reserved' or status='completed') AND WEEKOFYEAR(start)=".$week. " " );
+// *ONLY* applied to weekly-scoped data gathering, because otherwise this would possibly
+// return all kinds of irrelevant data (appointments passed LONG time ago).
+// End @FIX
+			}
 			wp_cache_set( 'reserve_apps_'. $l . '_' . $s . '_' . $w . '_' . $week, $apps );
 		}
 		return $apps;
@@ -1069,9 +1074,11 @@ class Appointments {
 
 	/**
 	 * Converts number of seconds to hours:mins acc to the WP time format setting
+	 * @param integer secs Seconds
+	 * @param string $forced_format Forcing the return timestamp format
 	 * @return string
 	 */
-	function secs2hours( $secs ) {
+	function secs2hours( $secs, $forced_format=false ) {
 		$min = (int)($secs / 60);
 		$hours = "00";
 		if ( $min < 60 )
@@ -1085,8 +1092,8 @@ class Appointments {
 				$mins = "0" . $mins;
 			$hours_min = $hours . ":" . $mins;
 		}
-		if ( $this->time_format )
-			$hours_min = date( $this->time_format, strtotime( $hours_min . ":00" ) );
+		if (!empty($forced_format)) $hours_min = date_i18n($forced_format, strtotime($hours_min . ":00"));
+		else if ($this->time_format) $hours_min = date_i18n($this->time_format, strtotime($hours_min . ":00")); // @TODO: TEST THIS THOROUGHLY!!!!
 
 		return $hours_min;
 	}
@@ -1259,6 +1266,7 @@ class Appointments {
 
 	/**
 	 * Generate an excerpt from the selected service/worker page
+	 * Applies custom filter set instead of the default one.
 	 */
 	function get_excerpt( $page_id, $thumb_size, $thumb_class, $worker_id=0 ) {
 		$text = '';
@@ -1284,7 +1292,8 @@ class Appointments {
 	}
 
 	/**
-	 * Fetch content from the selected service/worker page
+	 * Fetch content from the selected service/worker page.
+	 * Applies custom filter set instead of the default one.
 	 */
 	function get_content( $page_id, $thumb_size, $thumb_class, $worker_id=0 ) {
 		$content = '';
@@ -2095,25 +2104,86 @@ class Appointments {
 
 		$first = $start *3600 + $day_start; // Timestamp of the first cell
 		$last = $end *3600 + $day_start; // Timestamp of the last cell
+		$min_step_time = $this->get_min_time() * 60; // Cache min step increment
 
 		if (defined('APP_USE_LEGACY_DURATION_CALCULUS') && APP_USE_LEGACY_DURATION_CALCULUS) {
-			$step = $this->get_min_time() * 60; // Timestamp increase interval to one cell ahead
+			$step = $min_step_time; // Timestamp increase interval to one cell ahead
 		} else {
 			$service = $this->get_service($this->service);
-			$step = (!empty($service->duration) ? $service->duration : $this->get_min_time()) * 60; // Timestamp increase interval to one cell ahead
+			$step = (!empty($service->duration) ? $service->duration : $min_step_time) * 60; // Timestamp increase interval to one cell ahead
 		}
 
+		if (!(defined('APP_USE_LEGACY_DURATION_CALCULUS') && APP_USE_LEGACY_DURATION_CALCULUS)) {
+			$start_result = $this->get_work_break( $this->location, $this->worker, 'open' );
+			if (!empty($start_result->hours)) $start_unpacked_days = maybe_unserialize($start_result->hours);
+		} else $start_unpacked_days = array();
+		if (defined('APP_BREAK_TIMES_PADDING_CALCULUS') && APP_BREAK_TIMES_PADDING_CALCULUS) {
+			$break_result = $this->get_work_break($this->location, $this->worker, 'closed');
+			if (!empty($break_result->hours)) $break_times = maybe_unserialize($break_result->hours);
+		} else $break_times = array();
 
 		$ret  = '';
 		$ret .= '<div class="app_timetable app_timetable_'.$day_start.'"'.$style.'>';
 		$ret .= '<div class="app_timetable_title">';
 		$ret .= date_i18n( $this->date_format, $day_start );
 		$ret .= '</div>';
-
+		
+		// Allow direct step increment manipulation,
+		// mainly for service duration based calculus start/stop times
+		$step = apply_filters('app-timetable-step_increment', $step);
+		
 		for ( $t=$first; $t<$last; $t=$t+$step ) {
+			
+			$ccs = apply_filters('app_ccs', $t); 				// Current cell starts
+			$cce = apply_filters('app_cce', $ccs + $step);		// Current cell ends
 
-			$ccs = apply_filters( 'app_ccs', $t ); 				// Current cell starts
-			$cce = $ccs + $step;								// Current cell ends
+// Fix for service durations calculus and workhours start conflict with different duration services
+// Example: http://premium.wpmudev.org/forums/topic/problem-with-time-slots-not-properly-allocating-free-time
+			if (!empty($start_unpacked_days) && !(defined('APP_USE_LEGACY_DURATION_CALCULUS') && APP_USE_LEGACY_DURATION_CALCULUS)) {
+				$this_day_key = date('l', $t);
+				if (!empty($start_unpacked_days[$this_day_key])) {
+					// Check slot start vs opening start
+					$this_day_opening_timestamp = strtotime(date('Y-m-d ' . $start_unpacked_days[$this_day_key]['start'], $ccs));
+					if ($t < $this_day_opening_timestamp) {
+						$t = ($t - $step) + (apply_filters('app_safe_time', 1) * 60);
+						continue;
+					}
+
+					// Check slot end vs opening end - optional, but still applies
+					//$this_day_closing_timestamp = strtotime(date('Y-m-d ' . $start_unpacked_days[$this_day_key]['end'], $ccs));
+					//if ($cce > $this_day_closing_timestamp) continue;
+				}
+			}
+// Breaks are not behaving like paddings, which is to be expected.
+// This fix (2) will force them to behave more like paddings
+			if (!empty($break_times[$this_day_key]['active']) && defined('APP_BREAK_TIMES_PADDING_CALCULUS') && APP_BREAK_TIMES_PADDING_CALCULUS) {
+				$active = $break_times[$this_day_key]['active'];
+				$break_starts = $break_times[$this_day_key]['start'];
+				$break_ends = $break_times[$this_day_key]['end'];
+				if (!is_array($active) && 'no' !== $active) {
+					$break_start_ts = strtotime(date('Y-m-d ' . $break_starts, $ccs));
+					$break_end_ts = strtotime(date('Y-m-d ' . $break_ends, $ccs));
+					if ($t == $break_start_ts) {
+						$t += ($break_end_ts - $break_start_ts) - $step;
+						continue;
+					}
+				} else if (is_array($active) && in_array('yes', array_values($active))) {
+					$has_break_time = false;
+					for ($idx=0; $idx<count($break_starts); $idx++) {
+						$break_start_ts = strtotime(date('Y-m-d ' . $break_starts[$idx], $ccs));
+						$break_end_ts = strtotime(date('Y-m-d ' . $break_ends[$idx], $ccs));
+						if ($t == $break_start_ts) {
+							$has_break_time = $break_end_ts - $break_start_ts;
+							break;
+						}
+					}
+					if ($has_break_time) {
+						$t += ($has_break_time - $step);
+						continue;
+					}
+				}
+			}
+// End fixes area
 
 			$is_busy = $this->is_busy( $ccs, $cce, $capacity );
 			$title = apply_filters('app-schedule_cell-title', date_i18n($this->datetime_format, $ccs), $is_busy, $ccs, $cce, $schedule_key);
@@ -2227,6 +2297,10 @@ class Appointments {
 		$working_days = $this->get_working_days( $this->worker, $this->location ); // Get an array of working days
 		$capacity = $this->get_capacity();
 
+		// Allow direct step increment manipulation,
+		// mainly for service duration based calculus start/stop times
+		$step = apply_filters('app-timetable-step_increment', $step);
+
 		for ( $t=$first; $t<$last; $t=$t+$step ) {
 			foreach ( $days as $key=>$i ) {
 				if ( $i == -1 ) {
@@ -2235,8 +2309,8 @@ class Appointments {
 					$ret .= "<td class='appointments-weekly-calendar-hours-mins'>".$from." &#45; ".$to."</td>";
 				}
 				else {
-					$ccs = apply_filters( 'app_ccs', $t + $i * 86400 ); // Current cell starts
-					$cce = $ccs + $step;								// Current cell ends
+					$ccs = apply_filters('app_ccs', $t + $i * 86400); // Current cell starts
+					$cce = apply_filters('app_cce', $ccs + $step); // Current cell ends
 
 					$class_name = '';
 					$is_busy = $this->is_busy( $ccs, $cce, $capacity );
@@ -2465,8 +2539,8 @@ class Appointments {
 				foreach ($day["active"] as $idx => $active) {
 					$end = $this->to_military( $day["end"][$idx] );
 					// Special case: End is 00:00
-					if ( '00:00' == $end )
-						$end = '24:00';
+					if ('00:00' == $end) $end = '24:00';
+
 					if ( 
 						$ccs >= strtotime( $this_day. " ". $this->to_military( $day["start"][$idx] ), $this->local_time ) 
 						&&
@@ -2683,7 +2757,6 @@ class Appointments {
 	 * @return bool
 	 */
 	function is_busy( $start, $end, $capacity ) {
-
 		$week= date( "W", $start );
 		$period = new App_Period($start, $end);
 
@@ -2697,6 +2770,11 @@ class Appointments {
 				}
 			}
 		}
+
+		// If we're here, no worker is set or (s)he's not busy by default. Let's go for quick filter trip.
+		$is_busy = apply_filters('app-is_busy', false, $period, $capacity);
+		if ($is_busy) return true;
+		
 		// If we are here, no preference is selected (provider_id=0) or selected provider is not busy. There are 2 cases here:
 		// 1) There are several providers: Look for reserve apps for the workers giving this service.
 		// 2) No provider defined: Look for reserve apps for worker=0, because he will carry out all services
@@ -3477,222 +3555,6 @@ $gcal_description = __("Client Name: CLIENT\nService Name: SERVICE\nService Prov
 	<?php
 	}
 
-/*******************************
-* Methods for Buddypress
-********************************
-*/
-
-	/**
-     * Save setting submitted from front end
-     */
-	function bp_init() {
-
-		$this->bp = true;
-
-		if ( !isset( $_POST["app_bp_settings_submit"] ) || !isset( $_POST["app_bp_settings_user"] ) )
-			return;
-
-		// In the future we may use this function without BP too
-		if ( function_exists( 'bp_loggedin_user_id') )
-			$user_id = bp_loggedin_user_id();
-		else {
-			global $current_user;
-			$user_id = $current_user->ID;
-		}
-
-		if ( !$user_id || !wp_verify_nonce($_POST['app_bp_settings_submit'],'app_bp_settings_submit')
-				|| $user_id != $_POST["app_bp_settings_user"] || !$this->is_worker( $user_id )
-				|| !isset( $this->options["allow_worker_wh"] ) || 'yes' != $this->options["allow_worker_wh"] ) {
-			wp_die( 'You don\'t have the authority to do this.', 'appointments' );
-			exit;
-		}
-		// Checks are ok, let's save settings.
-		$this->save_profile( $user_id );
-	}
-
-	/**
-     * Determine which page we are on
-	 * If it is correct, load necessary scripts and css files
-     */
-	function bp_template_redirect() {
-		global $bp;
-		if ( !is_object( $bp ) )
-			return;
-
-		$scheme        = is_ssl() ? 'https://' : 'http://';
-		$requested_url = strtolower( $scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] );
-
-		$page_url = str_replace( $bp->displayed_user->domain . 'appointments/', '', $requested_url );
-
-		// Load datepick if we are on settings page
-		if ( strpos( $page_url, 'appointment-settings' ) !== false ) {
-			$this->bp_script ='$("#open_datepick").datepick({dateFormat: "yyyy-mm-dd",multiSelect: 999, monthsToShow: 2});
-				$("#closed_datepick").datepick({dateFormat: "yyyy-mm-dd",multiSelect: 999, monthsToShow: 2});';
-
-			wp_enqueue_script( 'jquery-datepick', $this->plugin_url . '/js/jquery.datepick.min.js', array('jquery'), $this->version);
-			wp_enqueue_style( "jquery-datepick", $this->plugin_url . "/css/jquery.datepick.css", false, $this->version );
-		}
-	}
-
-	/**
-	 * Load javascript to the footer
-	 */
-	function bp_footer() {
-		$script = '';
-		$this->bp_script = apply_filters( 'app_bp_footer_scripts', $this->bp_script );
-
-		if ( $this->bp_script ) {
-			$script .= '<script type="text/javascript">';
-			$script .= "jQuery(document).ready(function($) {";
-			$script .= $this->bp_script;
-			$script .= "});</script>";
-		}
-
-		echo $this->esc_rn( $script );
-	}
-
-	/**
-     * Add a nav and two subnav items
-     */
-	function setup_nav() {
-		global $bp;
-		bp_core_new_nav_item( array(
-			'name' => __( 'Appointments', 'appointments' ),
-			'slug' => 'appointments',
-			'show_for_displayed_user' => false,
-			'screen_function' => array( &$this, 'tab_template' )
-		) );
-
-		$link = $bp->loggedin_user->domain . 'appointments/';
-
-		$user_id = bp_loggedin_user_id();
-		if ( !$this->is_worker( $user_id ) )
-			$name = __( 'My Appointments', 'appointments' );
-		else
-			$name = __( 'My Appointments as Provider', 'appointments' );
-
-		bp_core_new_subnav_item( array(
-			'name' => $name,
-			'slug' => 'my-appointments',
-			'parent_url' => $link,
-			'parent_slug' => 'appointments',
-			'screen_function' => array( &$this, 'tab_template_my_app' )
-		) );
-
-		// Generate this tab only if allowed
-		if ( $this->is_worker( $user_id ) && isset($this->options["allow_worker_wh"]) && 'yes' == $this->options["allow_worker_wh"] ) {
-			bp_core_new_subnav_item( array(
-				'name' => __( 'Appointments Settings', 'appointments' ),
-				'slug' => 'appointment-settings',
-				'parent_url' => $link,
-				'parent_slug' => 'appointments',
-				'screen_function' => array( &$this, 'tab_template_app_settings' )
-			) );
-		}
-	}
-
-	/**
-     * Helper functions that BP requires
-     */
-	function tab_template() {
-		bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
-	}
-
-	function tab_template_my_app() {
-		add_action( 'bp_template_content', array( &$this, 'screen_content_my_app' ) );
-		bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
-	}
-
-	function tab_template_app_settings() {
-		add_action( 'bp_template_content', array( &$this, 'screen_content_app_settings' ) );
-		bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
-	}
-
-	/**
-     * Generate content for my apps
-     */
-	function screen_content_my_app() {
-		if ( isset( $this->options["gcal"] ) && 'yes' == $this->options["gcal"] )
-			$gcal = ''; // Default is already enabled
-		else
-			$gcal = ' gcal="0"';
-
-		$user_id = bp_loggedin_user_id();
-
-		do_action( 'app_before_bp_my_appointments', $user_id );
-
-		if ( !$this->is_worker( $user_id ) )
-			echo do_shortcode("[app_my_appointments ".$gcal."]");
-		else
-			echo do_shortcode('[app_my_appointments status="paid,confirmed,pending" _allow_confirm=1 provider=1 '.$gcal.']');
-
-		do_action( 'app_after_bp_my_appointments', $user_id );
-	}
-
-	/**
-     * Generate content for app settings
-     */
-	function screen_content_app_settings() {
-		// In the future we may use this function without BP too
-		if ( function_exists( 'bp_loggedin_user_id') )
-			$user_id = bp_loggedin_user_id();
-		else {
-			global $current_user;
-			$user_id = $current_user->ID;
-		}
-
-		if ( $this->is_worker( $user_id ) && isset($this->options["allow_worker_wh"]) && 'yes' == $this->options["allow_worker_wh"] ) {
-			// A little trick to pass correct lsw variables to the related function
-			$_REQUEST["app_location_id"] = 0;
-			$_REQUEST["app_provider_id"] = $user_id;
-
-			$this->get_lsw();
-
-			$result = array();
-			$result_open = $this->get_exception( $this->location, $this->worker, 'open' );
-			if ( $result_open )
-				$result["open"] = $result_open->days;
-			else
-				$result["open"] = null;
-
-			$result_closed = $this->get_exception( $this->location, $this->worker, 'closed' );
-			if ( $result_closed )
-				$result["closed"] = $result_closed->days;
-			else
-				$result["closed"] = null;
-
-			do_action( 'app_before_bp_app_settings', $user_id );
-
-			?>
-			<div class="standard-form">
-				<form method="post">
-					<h4><?php _e('My Working Hours', 'appointments'); ?></h4>
-					<?php echo $this->working_hour_form('open'); ?>
-					<h4><?php _e('My Break Hours', 'appointments'); ?></h4>
-					<?php echo $this->working_hour_form('closed'); ?>
-
-					<h4><?php _e('My Exceptional Working Days', 'appointments'); ?></h4>
-
-					<input class="datepick" id="open_datepick" type="text" style="width:100%" name="open[exceptional_days]" value="<?php if (isset($result["open"])) echo $result["open"]?>" />
-
-					<h4><?php _e('My Holidays', 'appointments'); ?></h4>
-
-					<input class="datepick" id="closed_datepick" type="text" style="width:100%" name="closed[exceptional_days]" value="<?php if (isset($result["closed"])) echo $result["closed"]?>" />
-
-
-					<div class="submit">
-						<input type="submit" name="app_bp_settings_submit" value="<?php _e('Save Changes', 'appointments')?>" class="auto">
-						<input type="hidden" name="app_bp_settings_user" value="<?php echo $user_id ?>">
-						<?php wp_nonce_field('app_bp_settings_submit','app_bp_settings_submit'); ?>
-					</div>
-				</form>
-			</div>
-
-			<?php
-			do_action( 'app_after_bp_app_settings', $user_id );
-		}
-	}
-
 /****************************************
 * Methods for integration with Membership
 *****************************************
@@ -3893,7 +3755,8 @@ $gcal_description = __("Client Name: CLIENT\nService Name: SERVICE\nService Prov
 						list( $product_name, $app_id ) = split( ':', $var['name'] );
 						$app_id = (int)trim( $app_id );
 						if ( $this->change_status( 'paid', $app_id ) ) {
-							do_action( 'app_mp_order_paid', $app_id );
+							do_action( 'app_mp_order_paid', $app_id, $order ); // FIRST do the action
+							if (!empty($this->options["send_confirmation"]) && 'yes' == $this->options["send_confirmation"]) $this->send_confirmation($app_id);
 						}
 					}
 				}
@@ -4076,250 +3939,25 @@ $gcal_description = __("Client Name: CLIENT\nService Name: SERVICE\nService Prov
 	/**
      * Find blogs and install tables for each of them
 	 * @since 1.0.2
+	 * @until 1.4.1 - omg no, please let's never do this again
      */
-	function install() {
-		global $wpdb;
-
-		if ( function_exists('is_multisite') && is_multisite() ) {
-				$network = isset($_SERVER['SCRIPT_NAME']) ? $_SERVER['SCRIPT_NAME'] : "";
-				$activate = isset($_GET['action']) ? $_GET['action'] : "";
-				$is_network = ($network=='/wp-admin/network/plugins.php') ? true:false;
-				$is_activation = ($activate=='deactivate') ? false:true;
-
-			if ($is_network && $is_activation){
-				$old_blog = $wpdb->blogid;
-				// Get all blog ids
-				$blogids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" );
-				foreach ($blogids as $blog_id) {
-					switch_to_blog($blog_id);
-					Appointments::_install();
-				}
-				switch_to_blog($old_blog);
-				return;
-			}
-		}
-		Appointments::_install();
-	}
-
+	function install() { do_action('app-core-doing_it_wrong', __METHOD__); }
 	/**
      * Install database tables
      */
-	function _install() {
-		// Create a salt, if it doesn't exist from the previous installation
-		if ( !$salt = get_option( "appointments_salt" ) ) {
-			$salt = mt_rand();
-			add_option( "appointments_salt", $salt ); // Save it to be used until it is cleared manually
-		}
-
-		global $wpdb;
-
-		$sql = "CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "app_appointments" . "` (
-		`ID` bigint(20) unsigned NOT NULL auto_increment,
-		`created` datetime,
-		`user` bigint(20) NOT NULL default '0',
-		`name` varchar(250) default NULL,
-		`email` varchar(250) default NULL,
-		`phone` varchar(250) default NULL,
-		`address` varchar(250) default NULL,
-		`city` varchar(250) default NULL,
-		`location` bigint(20) NOT NULL default '0',
-		`service` bigint(20) NOT NULL default '0',
-		`worker` bigint(20) NOT NULL default '0',
-		`price` bigint(20) default NULL,
-		`status` varchar(35) default NULL,
-		`start` datetime default NULL,
-		`end` datetime default NULL,
-		`sent` text,
-		`sent_worker` text,
-		`note` text,
-		`gcal_ID` varchar(250) default NULL,
-		`gcal_updated` datetime,
-		PRIMARY KEY  (`ID`)
-		)
-		DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-
-		// V1.2.0: New gcal field
-		$sql_ = "ALTER TABLE `" .$wpdb->prefix . "app_appointments". "` ADD (`gcal_ID` varchar(250) default NULL, `gcal_updated` datetime default NULL) ";
-
-		// V1.2.2: make gcal_ID unique
-		$sql_0 = "ALTER TABLE `" .$wpdb->prefix . "app_appointments". "` ADD UNIQUE (`gcal_ID`) ";
-
-		$sql1 = "CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "app_transactions" . "` (
-		`transaction_ID` bigint(20) unsigned NOT NULL auto_increment,
-		`transaction_app_ID` bigint(20) NOT NULL default '0',
-		`transaction_paypal_ID` varchar(30) default NULL,
-		`transaction_stamp` bigint(35) NOT NULL default '0',
-		`transaction_total_amount` bigint(20) default NULL,
-		`transaction_currency` varchar(35) default NULL,
-		`transaction_status` varchar(35) default NULL,
-		`transaction_note` text,
-		PRIMARY KEY  (`transaction_ID`),
-		KEY `transaction_app_ID` (`transaction_app_ID`)
-		)
-		DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-
-		$sql2 = "CREATE TABLE IF NOT EXISTS `" .$wpdb->prefix . "app_working_hours" . "` (
-		`ID` bigint(20) unsigned NOT NULL auto_increment,
-		`location` bigint(20) NOT NULL default '0',
-		`service` bigint(20) NOT NULL default '0',
-		`worker` bigint(20) NOT NULL default '0',
-		`status` varchar(30) default NULL,
-		`hours` text,
-		`note` text,
-		PRIMARY KEY  (`ID`)
-		)
-		DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-
-		// TODO: Make this WP time format free
-		$sql21 = "INSERT INTO " .$wpdb->prefix . "app_working_hours (ID, location, worker,  `status`, hours, note) VALUES
-		(NULL, 0, 0, 'open', 'a:7:{s:6:\"Sunday\";a:3:{s:6:\"active\";s:2:\"no\";s:5:\"start\";s:7:\"8:00 am\";s:3:\"end\";s:7:\"1:00 pm\";}s:6:\"Monday\";a:3:{s:6:\"active\";s:3:\"yes\";s:5:\"start\";s:7:\"8:00 am\";s:3:\"end\";s:7:\"5:00 pm\";}s:7:\"Tuesday\";a:3:{s:6:\"active\";s:3:\"yes\";s:5:\"start\";s:7:\"8:00 am\";s:3:\"end\";s:7:\"5:00 pm\";}s:9:\"Wednesday\";a:3:{s:6:\"active\";s:3:\"yes\";s:5:\"start\";s:7:\"8:00 am\";s:3:\"end\";s:7:\"5:00 pm\";}s:8:\"Thursday\";a:3:{s:6:\"active\";s:3:\"yes\";s:5:\"start\";s:7:\"8:00 am\";s:3:\"end\";s:7:\"5:00 pm\";}s:6:\"Friday\";a:3:{s:6:\"active\";s:3:\"yes\";s:5:\"start\";s:7:\"8:00 am\";s:3:\"end\";s:7:\"5:00 pm\";}s:8:\"Saturday\";a:3:{s:6:\"active\";s:2:\"no\";s:5:\"start\";s:7:\"8:00 am\";s:3:\"end\";s:7:\"1:00 pm\";}}', NULL),
-		(NULL, 0, 0, 'closed', 'a:7:{s:6:\"Sunday\";a:3:{s:6:\"active\";s:2:\"no\";s:5:\"start\";s:8:\"12:00 pm\";s:3:\"end\";s:7:\"1:00 pm\";}s:6:\"Monday\";a:3:{s:6:\"active\";s:2:\"no\";s:5:\"start\";s:8:\"12:00 pm\";s:3:\"end\";s:7:\"1:00 pm\";}s:7:\"Tuesday\";a:3:{s:6:\"active\";s:2:\"no\";s:5:\"start\";s:8:\"12:00 pm\";s:3:\"end\";s:7:\"1:00 pm\";}s:9:\"Wednesday\";a:3:{s:6:\"active\";s:2:\"no\";s:5:\"start\";s:8:\"12:00 pm\";s:3:\"end\";s:7:\"1:00 pm\";}s:8:\"Thursday\";a:3:{s:6:\"active\";s:2:\"no\";s:5:\"start\";s:8:\"12:00 pm\";s:3:\"end\";s:7:\"1:00 pm\";}s:6:\"Friday\";a:3:{s:6:\"active\";s:2:\"no\";s:5:\"start\";s:8:\"12:00 pm\";s:3:\"end\";s:7:\"1:00 pm\";}s:8:\"Saturday\";a:3:{s:6:\"active\";s:2:\"no\";s:5:\"start\";s:8:\"12:00 pm\";s:3:\"end\";s:7:\"1:00 pm\";}}', NULL);	 	 	 	 	   		 	 			
-		";
-
-		$sql3 = "CREATE TABLE IF NOT EXISTS `" .$wpdb->prefix . "app_exceptions" . "` (
-		`ID` bigint(20) unsigned NOT NULL auto_increment,
-		`location` bigint(20) NOT NULL default '0',
-		`service` bigint(20) NOT NULL default '0',
-		`worker` bigint(20) NOT NULL default '0',
-		`status` varchar(30) default NULL,
-		`days` text,
-		`note` text,
-		PRIMARY KEY  (`ID`)
-		)
-		DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-
-
-		$sql4 = "CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "app_services" . "` (
-		`ID` bigint(20) unsigned,
-		`name` varchar(255) default NULL,
-		`capacity` bigint(20) NOT NULL default '0',
-		`duration` bigint(20) NOT NULL default '0',
-		`price` varchar(255) default NULL,
-		`page` bigint(20) NOT NULL default '0',
-		PRIMARY KEY  (`ID`)
-		)
-		DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-
-		$sql41 = "INSERT INTO " . $wpdb->prefix . "app_services (ID, `name`, capacity, duration, `price`, page)
-		VALUES (1, 'Default Service', 0, 30, '1', 0)
-		";
-
-		$sql5 = "CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "app_workers" . "` (
-		`ID` bigint(20) unsigned,
-		`dummy` varchar(255) default NULL,
-		`price` varchar(255) default NULL,
-		`services_provided` text,
-		`page` bigint(20) NOT NULL default '0',
-		PRIMARY KEY  (`ID`)
-		)
-		DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-
-		// V1.0.6: New dummy field
-		$sql51 = "ALTER TABLE `" .$wpdb->prefix . "app_workers". "` ADD `dummy` varchar(255) DEFAULT NULL AFTER `ID` ";
-
-		$sql6 = "CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "app_cache" . "` (
-		`uri` varchar(255) default NULL,
-		`created` datetime,
-		`content` longtext,
-		`script` longtext,
-		 UNIQUE (`uri`)
-		)
-		DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-
-		$wpdb->query($sql);
-		$wpdb->query($sql1);
-		// Add default working hours
-		$wpdb->query($sql2);
-		$count = $wpdb->get_var( "SELECT COUNT(ID) FROM " . $wpdb->prefix . "app_working_hours " );
-		if ( !$count )
-			$wpdb->query($sql21);
-		$wpdb->query($sql3);
-		// Add default service
-		$wpdb->query($sql4);
-		$count = $wpdb->get_var( "SELECT COUNT(ID) FROM " . $wpdb->prefix . "app_services " );
-		if ( !$count )
-			$wpdb->query($sql41);
-		$wpdb->query($sql5);
-		$wpdb->query($sql6);
-
-		// If no DB version, this is a new installation
-		if ( !$db_version = get_option( 'app_db_version' ) ) {
-			$db_version = "1.2.3";
-			update_option( 'app_db_version', '1.2.3' );
-		}
-
-		// Update database for versions less than 1.0.6
-		if ( version_compare( $db_version, '1.0.6', '<' ) ) {
-			$result = $wpdb->query($sql51);
-			if ( $result || $wpdb->query( "SHOW COLUMNS FROM " . $wpdb->prefix . "app_workers" . " LIKE 'dummy' " ) )
-				update_option( 'app_db_version', '1.0.6' );
-		}
-		// Check and update database for versions less than 1.1.8
-		if( version_compare( $db_version, '1.1.8', '<' ) ) {
-			$table_status = $wpdb->get_row( "SHOW TABLE STATUS LIKE '" . $wpdb->prefix . "app_services' " );
-
-			if ( 'utf8_general_ci' != $table_status->Collation ) {
-				$wpdb->query( "ALTER TABLE `" . $wpdb->prefix . "app_appointments" . "` CHARACTER SET utf8 COLLATE utf8_general_ci " );
-				$wpdb->query( "ALTER TABLE `" . $wpdb->prefix . "app_transactions" . "` CHARACTER SET utf8 COLLATE utf8_general_ci " );
-				$wpdb->query( "ALTER TABLE `" . $wpdb->prefix . "app_working_hours" . "` CHARACTER SET utf8 COLLATE utf8_general_ci " );
-				$wpdb->query( "ALTER TABLE `" . $wpdb->prefix . "app_exceptions" . "` CHARACTER SET utf8 COLLATE utf8_general_ci " );
-				$wpdb->query( "ALTER TABLE `" . $wpdb->prefix . "app_services" . "` CHARACTER SET utf8 COLLATE utf8_general_ci " );
-				$wpdb->query( "ALTER TABLE `" . $wpdb->prefix . "app_workers" . "` CHARACTER SET utf8 COLLATE utf8_general_ci " );
-				$wpdb->query( "ALTER TABLE `" . $wpdb->prefix . "app_cache" . "` CHARACTER SET utf8 COLLATE utf8_general_ci " );
-			}
-			update_option( 'app_db_version', '1.1.8' );
-		}
-		// Update database for versions less than 1.2.0
-		if ( version_compare( $db_version, '1.2.0', '<' ) ) {
-			$result = $wpdb->query($sql_);
-			if ( $result || $wpdb->query( "SHOW COLUMNS FROM " . $wpdb->prefix . "app_appointments" . " LIKE 'gcal_ID' " ) )
-				update_option( 'app_db_version', '1.2.0' );
-		}
-
-		// Update database for versions less than 1.2.2
-		// Aaand... this never ran previously :/ 
-		// Okay then, leave this as is and deal with it differently.
-		if ( version_compare( $db_version, '1.2.2', '<' ) ) {
-			$result = $wpdb->query($sql_0);
-			update_option( 'app_db_version', '1.2.2' );
-		}
-
-		// Check AppointmentsGcal::import_and_update_events()
-		// for v1.2.3 DB schema update
-	}
-
+	function _install() { do_action('app-core-doing_it_wrong', __METHOD__); }
 	/**
 	 * Install tables for new blog
 	 * @since 1.0.2
+	 * @until 1.4.1
 	 */
-	function new_blog($blog_id, $user_id, $domain, $path, $site_id, $meta ) {
-		global $wpdb;
-
-		if ( !function_exists( 'is_plugin_active_for_network' ) )
-			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
-
-		if ( is_plugin_active_for_network('appointments/appointments.php') ) {
-			$old_blog = $wpdb->blogid;
-			switch_to_blog( $blog_id );
-			Appointments::_install();
-			switch_to_blog( $old_blog );
-		}
-	}
-
+	function new_blog($blog_id, $user_id, $domain, $path, $site_id, $meta ) { do_action('app-core-doing_it_wrong', __METHOD__); }
 	/**
 	 * Remove tables for a deleted blog
 	 * @since 1.0.2
+	 * @until 1.4.1
 	 */
-	function delete_blog( $blog_id, $drop ) {
-		global $wpdb;
-
-		if ( $blog_id >1 ) {
-			$old_blog = $wpdb->blogid;
-			switch_to_blog( $blog_id );
-			_wpmudev_appointments_uninstall( );
-			switch_to_blog( $old_blog );
-		}
-	}
+	function delete_blog( $blog_id, $drop )  { do_action('app-core-doing_it_wrong', __METHOD__); }
 
 	/**
 	 * Initialize widgets
@@ -4652,6 +4290,12 @@ SITE_NAME
 			$_REQUEST["app_service_id"] = $r->service;
 			$_REQUEST["app_provider_id"] = $r->worker;
 
+			// Why oh why didn't we do this all along?
+			if (empty($r->email) && !empty($r->user) && (int)$r->user) {
+				$wp_user = get_user_by('id', (int)$r->user);
+				if ($wp_user && !empty($wp_user->user_email)) $r->email = $wp_user->user_email;
+			}
+
 			$body = apply_filters( 'app_confirmation_message', $this->add_cancel_link( $this->_replace( $this->options["confirmation_message"],
 					$r->name, $this->get_service_name( $r->service), $this->get_worker_name( $r->worker), $r->start, $r->price,
 					$this->get_deposit($r->price), $r->phone, $r->note, $r->address, $r->email, $r->city ), $app_id ), $r, $app_id );
@@ -4721,14 +4365,24 @@ SITE_NAME
 				$subject = __('An appointment requires your confirmation', 'appointments');
 				$body = sprintf( __('The new appointment has an ID %s and you can edit it clicking this link: %s','appointments'), $app_id, admin_url("admin.php?page=appointments&type=pending") );
 			}
-			$body = apply_filters( 'app_notification_message', $body, $r, $app_id );
+			$body = apply_filters('app_notification_message', 
+				apply_filters(
+					'app-messages-' . ($cancel ? 'cancellation' : 'notification') . '-body', 
+					$body, $r, $app_id
+				),
+				$r, $app_id
+			);
+			$subject = apply_filters(
+				'app-messages-' . ($cancel ? 'cancellation' : 'notification') . '-subject', 
+				$subject, $r, $app_id
+			);
 
 			$mail_result = wp_mail(
-					$admin_email,
-					$subject,
-					$body,
-					$this->message_headers( )
-				);
+				$admin_email,
+				$subject,
+				$body,
+				$this->message_headers()
+			);
 
 			if ( $mail_result && isset( $this->options["log_emails"] ) && 'yes' == $this->options["log_emails"] ) {
 				$this->log( sprintf( __('Notification message sent to %s for appointment ID:%s','appointments'), $admin_email, $app_id ) );
@@ -4742,16 +4396,25 @@ SITE_NAME
 
 				if ( $cancel ) {
 				/* Translators: First %s is for appointment ID and the second one is for date and time of the appointment */
-					$body = sprintf( __('Cancelled appointment has an ID %s for %s.','appointments'), $app_id, date_i18n( $this->datetime_format, strtotime($r->start) ) );
+					$body = sprintf(__('Cancelled appointment has an ID %s for %s.','appointments'), $app_id, date_i18n($this->datetime_format, strtotime($r->start)));
 				}
-				else
-					$body = sprintf( __('The new appointment has an ID %s for %s and you can confirm it using your profile page.','appointments'), $app_id, date_i18n( $this->datetime_format, strtotime($r->start) ) );
+				else {
+					$body = sprintf(__('The new appointment has an ID %s for %s and you can confirm it using your profile page.','appointments'), $app_id, date_i18n($this->datetime_format, strtotime($r->start)));
+				}
+				$body = apply_filters(
+					'app-messages-worker-' . ($cancel ? 'cancellation' : 'notification'),
+					$body, $r, $app_id
+				);
+				$subject = apply_filters(
+					'app-messages-worker-' . ($cancel ? 'cancellation' : 'notification') . '-subject', 
+					$subject, $r, $app_id
+				);
 
 				$mail_result = wp_mail(
-					$this->get_worker_email( $r->worker ),
+					$this->get_worker_email($r->worker),
 					$subject,
 					$body,
-					$this->message_headers( )
+					$this->message_headers()
 				);
 
 				if ( $mail_result && isset( $this->options["log_emails"] ) && 'yes' == $this->options["log_emails"] )
@@ -4898,7 +4561,7 @@ SITE_NAME
 	/**
 	 *	Replace placeholders with real values for email subject and content
 	 */
-	function _replace( $text, $user, $service, $worker, $datetime, $price, $deposit, $phone, $note, $address, $email, $city ) {
+	function _replace( $text, $user, $service, $worker, $datetime, $price, $deposit, $phone='', $note='', $address='', $email='', $city='' ) {
 		/*
 		return str_replace(
 					array( "SITE_NAME", "CLIENT", "SERVICE_PROVIDER", "SERVICE", "DATE_TIME", "PRICE", "DEPOSIT", "PHONE", "NOTE", "ADDRESS", "EMAIL", "CITY" ),
@@ -5012,13 +4675,11 @@ SITE_NAME
 	 * @since 1.2.6
 	 */
 	function cancel() {
-
 		if ( isset( $this->options['allow_cancel'] ) && 'yes' == $this->options['allow_cancel'] ) {
 
 			/* Cancel by the link in email */
 			// We don't want to break any other plugin's init, so these conditions are very strict
 			if ( isset( $_GET['app_cancel'] ) && isset( $_GET['app_id'] ) && isset( $_GET['app_nonce'] ) ) {
-
 				$app_id = $_GET['app_id'];
 				$app = $this->get_app( $app_id );
 
@@ -5036,6 +4697,8 @@ SITE_NAME
 					if ( $this->change_status( 'removed', $app_id ) ) {
 						$this->log( sprintf( __('Client %s cancelled appointment with ID: %s','appointments'), $this->get_client_name( $app_id ), $app_id ) );
 						$this->send_notification( $app_id, true );
+						if (!empty($this->gcal_api) && is_object($this->gcal_api)) $this->gcal_api->delete($app_id); // Drop the cancelled appointment
+						do_action('app-appointments-appointment_cancelled', $app_id);
 						// If there is a header warning other plugins can do whatever they need
 						if ( !headers_sent() ) {
 							if ( isset( $this->options['cancel_page'] ) &&  $this->options['cancel_page'] ) {
@@ -5083,6 +4746,8 @@ SITE_NAME
 				if ( $this->change_status( 'removed', $app_id ) ) {
 					$this->log( sprintf( __('Client %s cancelled appointment with ID: %s','appointments'), $this->get_client_name( $app_id ), $app_id ) );
 					$this->send_notification( $app_id, true );
+					if (!empty($this->gcal_api) && is_object($this->gcal_api)) $this->gcal_api->delete($app_id); // Drop the cancelled appointment
+					do_action('app-appointments-appointment_cancelled', $app_id);
 					die( json_encode( array('success'=>1)));
 				}
 				else
@@ -5158,7 +4823,13 @@ SITE_NAME
 	// Enqeue js on admin pages
 	function admin_scripts() {
 		$screen = get_current_screen();
-		if (empty($screen->base) || !preg_match('/(^|\b|_)appointments($|\b|_)/', $screen->base)) return false;
+		$title = sanitize_title(__('Appointments', 'appointments'));
+
+		if (empty($screen->base) || (
+			!preg_match('/(^|\b|_)appointments($|\b|_)/', $screen->base)
+			&&
+			!preg_match('/(^|\b|_)' . preg_quote($title, '/') . '($|\b|_)/', $screen->base) // Super-weird admin screen base being translatable!!!
+		)) return false;
 		wp_enqueue_script( 'jquery-colorpicker', $this->plugin_url . '/js/colorpicker.js', array('jquery'), $this->version);
 		wp_enqueue_script( 'jquery-datepick', $this->plugin_url . '/js/jquery.datepick.min.js', array('jquery'), $this->version);
 		wp_enqueue_script( 'jquery-multiselect', $this->plugin_url . '/js/jquery.multiselect.min.js', array('jquery-ui-core','jquery-ui-widget', 'jquery-ui-position'), $this->version);
@@ -5191,7 +4862,13 @@ SITE_NAME
 		wp_enqueue_style( "appointments-admin", $this->plugin_url . "/css/admin.css", false, $this->version );
 		
 		$screen = get_current_screen();
-		if (empty($screen->base) || !preg_match('/(^|\b|_)appointments($|\b|_)/', $screen->base)) return false;
+		$title = sanitize_title(__('Appointments', 'appointments'));
+
+		if (empty($screen->base) || (
+			!preg_match('/(^|\b|_)appointments($|\b|_)/', $screen->base)
+			&&
+			!preg_match('/(^|\b|_)' . preg_quote($title, '/') . '($|\b|_)/', $screen->base) // Super-weird admin screen base being translatable!!!
+		)) return false;
 		wp_enqueue_style( "jquery-datepick", $this->plugin_url . "/css/jquery.datepick.css", false, $this->version );
 		wp_enqueue_style( "jquery-multiselect", $this->plugin_url . "/css/jquery.multiselect.css", false, $this->version );
 		wp_enqueue_style( "jquery-ui-smoothness", $this->plugin_url . "/css/smoothness/jquery-ui-1.8.16.custom.css", false, $this->version );
@@ -5457,7 +5134,6 @@ SITE_NAME
 		add_submenu_page('appointments', __('Settings','appointments'), __('Settings','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_SETTINGS), "app_settings", array(&$this,'settings'));
 		add_submenu_page('appointments', __('Shortcodes','appointments'), __('Shortcodes','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_SHORTCODES), "app_shortcodes", array(&$this,'shortcodes_page'));
 		add_submenu_page('appointments', __('FAQ','appointments'), __('FAQ','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_FAQ), "app_faq", array(&$this,'faq_page'));
-
 		// Add datepicker to appointments page
 		add_action( "admin_print_scripts-$page", array( &$this, 'admin_scripts' ) );
 
@@ -5559,159 +5235,15 @@ SITE_NAME
 				if ( isset( $_POST["force_flush"] ) )
 					add_action( 'admin_notices', array ( &$this, 'cleared' ) );
 			}
+
+			if (isset($_POST['make_an_appointment']) || isset($_POST['make_an_appointment_product'])) {
+				$this->_create_pages();
+			}
+
 			// Redirecting when saving options
 			if ($saved) {
 				wp_redirect(add_query_arg('saved', 1));
 				die;
-			}
-
-// Bimonthly schedule
-$two_months = '
-<td colspan="2">
-[app_monthly_schedule]
-</td>
-</tr>
-<td colspan="2">
-[app_monthly_schedule add="1"]
-</td>
-</tr>
-<tr>
-<td colspan="2">
-[app_pagination step="2" month="1"]
-</td>
-';
-
-// Monthly schedule
-$one_month = '
-<td colspan="2">
-[app_monthly_schedule]
-</td>
-</tr>
-<tr>
-<td colspan="2">
-[app_pagination month="1"]
-</td>
-';
-
-// Two week schedule
-$two_weeks = '
-<td>
-[app_schedule]
-</td>
-<td>
-[app_schedule add="1"]
-</td>
-</tr>
-<tr>
-<td colspan="2">
-[app_pagination step="2"]
-</td>
-';
-
-// One week schedule
-$one_week = '
-<td colspan="2">
-[app_schedule long="1"]
-</td>
-</tr>
-<tr>
-<td colspan="2">
-[app_pagination]
-</td>
-';
-
-// Common parts
-$template = '
-<table>
-<tbody>
-<tr>
-<td colspan="2">
-[app_my_appointments]
-</td>
-</tr>
-<tr>
-<td>[app_services]</td>
-<td>[app_service_providers]</td>
-</tr>
-<tr>
-PLACEHOLDER
-</tr>
-<tr>
-<td colspan="2">
-[app_login]
-</td>
-</tr>
-<tr>
-<td colspan="2">
-[app_confirmation]
-</td>
-</tr>
-<tr>
-<td colspan="2">
-[app_paypal]
-</td>
-</tr>
-</tbody>
-</table>
-';
-			// Add an appointment page
-			if ( isset( $_POST["make_an_appointment"] ) ) {
-
-				switch( $_POST["app_page_type"] ) {
-					case 'two_months':	$content = str_replace( 'PLACEHOLDER', $two_months, $template ); break;
-					case 'one_month':	$content = str_replace( 'PLACEHOLDER', $one_month, $template ); break;
-					case 'two_weeks':	$content = str_replace( 'PLACEHOLDER', $two_weeks, $template ); break;
-					case 'one_week':	$content = str_replace( 'PLACEHOLDER', $one_week, $template ); break;
-					default:			$content = str_replace( 'PLACEHOLDER', $one_month, $template ); break;
-				}
-
-				wp_insert_post(
-						array(
-							'post_title'	=> 'Make an Appointment',
-							'post_status'	=> 'publish',
-							'post_type'		=> 'page',
-							'post_content'	=> $content
-						)
-				);
-			}
-
-			// Add an appointment product page
-			if ( isset( $_POST["make_an_appointment_product"] ) && $this->marketpress_active ) {
-
-				switch( $_POST["app_page_type_mp"] ) {
-					case 'two_months':	$content = str_replace( 'PLACEHOLDER', $two_months, $template ); break;
-					case 'one_month':	$content = str_replace( 'PLACEHOLDER', $one_month, $template ); break;
-					case 'two_weeks':	$content = str_replace( 'PLACEHOLDER', $two_weeks, $template ); break;
-					case 'one_week':	$content = str_replace( 'PLACEHOLDER', $one_week, $template ); break;
-					default:			$content = str_replace( 'PLACEHOLDER', $one_month, $template ); break;
-				}
-
-				$post_id = wp_insert_post(
-						array(
-							'post_title'	=> 'Appointment',
-							'post_status'	=> 'publish',
-							'post_type'		=> 'product',
-							'post_content'	=> $content
-						)
-				);
-				if ( $post_id ) {
-					// Add a download link, so that app will be a digital product
-					$file = get_post_meta($post_id, 'mp_file', true);
-					if ( !$file )
-						add_post_meta( $post_id, 'mp_file', get_permalink( $post_id) );
-
-/*
-					// Do NOT! Add product link because it'll blow up store orders...
-					$link = get_post_meta($post_id, 'mp_product_link', true);
-					if ( !$link )
-						add_post_meta( $post_id, 'mp_product_link', get_permalink( $post_id ) );
-*/
-
-					// MP requires at least 2 variations, so we add a dummy one
-					add_post_meta( $post_id, 'mp_var_name', array( 0 ) );
-					add_post_meta( $post_id, 'mp_sku', array( 0 ) );
-					add_post_meta( $post_id, 'mp_price', array( 0 ) );
-				}
 			}
 		}
 
@@ -5981,7 +5513,7 @@ PLACEHOLDER
 						// If confirmed or paid, add these to GCal
 						else if ( 'paid' == $new_status || 'confirmed' == $new_status ) {
 							foreach ( $_POST["app"] as $app_id ) {
-								$this->gcal_api->insert( $app_id );
+								$this->gcal_api->update( $app_id );
 							}
 						}
 					}
@@ -5995,6 +5527,157 @@ PLACEHOLDER
 			( isset( $_POST["app_status_change"] ) && $_POST["app_new_status"] ) )
 			// As it means any setting is saved, lets clear cache
 			$this->flush_cache();
+	}
+
+	private function _create_pages () {
+// Bimonthly schedule
+$two_months = '
+<td colspan="2">
+[app_monthly_schedule]
+</td>
+</tr>
+<td colspan="2">
+[app_monthly_schedule add="1"]
+</td>
+</tr>
+<tr>
+<td colspan="2">
+[app_pagination step="2" month="1"]
+</td>
+';
+
+// Monthly schedule
+$one_month = '
+<td colspan="2">
+[app_monthly_schedule]
+</td>
+</tr>
+<tr>
+<td colspan="2">
+[app_pagination month="1"]
+</td>
+';
+
+// Two week schedule
+$two_weeks = '
+<td>
+[app_schedule]
+</td>
+<td>
+[app_schedule add="1"]
+</td>
+</tr>
+<tr>
+<td colspan="2">
+[app_pagination step="2"]
+</td>
+';
+
+// One week schedule
+$one_week = '
+<td colspan="2">
+[app_schedule long="1"]
+</td>
+</tr>
+<tr>
+<td colspan="2">
+[app_pagination]
+</td>
+';
+
+// Common parts
+$template = '
+<table>
+<tbody>
+<tr>
+<td colspan="2">
+[app_my_appointments]
+</td>
+</tr>
+<tr>
+<td>[app_services]</td>
+<td>[app_service_providers]</td>
+</tr>
+<tr>
+PLACEHOLDER
+</tr>
+<tr>
+<td colspan="2">
+[app_login]
+</td>
+</tr>
+<tr>
+<td colspan="2">
+[app_confirmation]
+</td>
+</tr>
+<tr>
+<td colspan="2">
+[app_paypal]
+</td>
+</tr>
+</tbody>
+</table>
+';
+		// Add an appointment page
+		if ( isset( $_POST["make_an_appointment"] ) ) {
+
+			switch( $_POST["app_page_type"] ) {
+				case 'two_months':	$content = str_replace( 'PLACEHOLDER', $two_months, $template ); break;
+				case 'one_month':	$content = str_replace( 'PLACEHOLDER', $one_month, $template ); break;
+				case 'two_weeks':	$content = str_replace( 'PLACEHOLDER', $two_weeks, $template ); break;
+				case 'one_week':	$content = str_replace( 'PLACEHOLDER', $one_week, $template ); break;
+				default:			$content = str_replace( 'PLACEHOLDER', $one_month, $template ); break;
+			}
+
+			wp_insert_post(
+					array(
+						'post_title'	=> 'Make an Appointment',
+						'post_status'	=> 'publish',
+						'post_type'		=> 'page',
+						'post_content'	=> $content
+					)
+			);
+		}
+
+		// Add an appointment product page
+		if ( isset( $_POST["make_an_appointment_product"] ) && $this->marketpress_active ) {
+
+			switch( $_POST["app_page_type_mp"] ) {
+				case 'two_months':	$content = str_replace( 'PLACEHOLDER', $two_months, $template ); break;
+				case 'one_month':	$content = str_replace( 'PLACEHOLDER', $one_month, $template ); break;
+				case 'two_weeks':	$content = str_replace( 'PLACEHOLDER', $two_weeks, $template ); break;
+				case 'one_week':	$content = str_replace( 'PLACEHOLDER', $one_week, $template ); break;
+				default:			$content = str_replace( 'PLACEHOLDER', $one_month, $template ); break;
+			}
+
+			$post_id = wp_insert_post(
+					array(
+						'post_title'	=> 'Appointment',
+						'post_status'	=> 'publish',
+						'post_type'		=> 'product',
+						'post_content'	=> $content
+					)
+			);
+			if ( $post_id ) {
+				// Add a download link, so that app will be a digital product
+				$file = get_post_meta($post_id, 'mp_file', true);
+				if ( !$file )
+					add_post_meta( $post_id, 'mp_file', get_permalink( $post_id) );
+
+/*
+				// Do NOT! Add product link because it'll blow up store orders...
+				$link = get_post_meta($post_id, 'mp_product_link', true);
+				if ( !$link )
+					add_post_meta( $post_id, 'mp_product_link', get_permalink( $post_id ) );
+*/
+
+				// MP requires at least 2 variations, so we add a dummy one
+				add_post_meta( $post_id, 'mp_var_name', array( 0 ) );
+				add_post_meta( $post_id, 'mp_sku', array( 0 ) );
+				add_post_meta( $post_id, 'mp_price', array( 0 ) );
+			}
+		}
 	}
 
 	function shortcodes_page () {
@@ -7490,8 +7173,9 @@ PLACEHOLDER
 	 *  @param status: Open (working hours) or close (break hours)
 	 */
 	function working_hour_form( $status='open' ) {
-		$_old_time_format = $this->time_format;
-		$this->time_format = "H:i";
+		//$_old_time_format = $this->time_format;
+		//$this->time_format = "H:i";
+		$_required_format = "H:i";
 
 		$this->get_lsw();
 
@@ -7534,13 +7218,14 @@ PLACEHOLDER
 					$form .= '<td>';
 					$form .= '<select name="'.$status.'['.$day.'][start][' . $idx . ']">';
 					for ( $t=0; $t<3600*24; $t=$t+$min_secs ) {
-						$dhours = $this->secs2hours( $t ); // Hours in 08:30 format
+						$dhours = esc_attr($this->secs2hours($t, $_required_format)); // Hours in 08:30 format - escape, because they're values now.
+						$shours = $this->secs2hours($t);
 						if ( isset($whours[$day]['start'][$idx]) && strtotime($dhours) == strtotime($whours[$day]['start'][$idx]) )
-							$s = " selected='selected'";
+							$s = "selected='selected'";
 						else $s = '';
 
-						$form .= '<option'.$s.'>';
-						$form .= $dhours;
+						$form .= "<option {$s} value='{$dhours}'>";
+						$form .= $shours;
 						$form .= '</option>';
 					}
 					$form .= '</select>';
@@ -7549,13 +7234,14 @@ PLACEHOLDER
 					$form .= '<td>';
 					$form .= '<select name="'.$status.'['.$day.'][end][' . $idx . ']" autocomplete="off">';
 					for ( $t=$min_secs; $t<=3600*24; $t=$t+$min_secs ) {
-						$dhours = $this->secs2hours( $t ); // Hours in 08:30 format
+						$dhours = esc_attr($this->secs2hours($t, $_required_format)); // Hours in 08:30 format - escape, because they're values now.
+						$shours = $this->secs2hours($t);
 						if ( isset($whours[$day]['end'][$idx]) && strtotime($dhours) == strtotime($whours[$day]['end'][$idx]) )
-							$s = " selected='selected'";
+							$s = "selected='selected'";
 						else $s = '';
 
-						$form .= '<option'.$s.'>';
-						$form .= $dhours;
+						$form .= "<option {$s} value='{$dhours}'>";
+						$form .= $shours;
 						$form .= '</option>';
 					}
 					$form .= '</select>';
@@ -7581,13 +7267,14 @@ PLACEHOLDER
 				$form .= '<td>';
 				$form .= '<select name="'.$status.'['.$day.'][start]" autocomplete="off">';
 				for ( $t=0; $t<3600*24; $t=$t+$min_secs ) {
-					$dhours = $this->secs2hours( $t ); // Hours in 08:30 format
+					$dhours = esc_attr($this->secs2hours($t, $_required_format)); // Hours in 08:30 format - escape, because they're values now.
+					$shours = $this->secs2hours($t);
 					if ( isset($whours[$day]['start']) && strtotime($dhours) == strtotime($whours[$day]['start']) )
-						$s = " selected='selected'";
+						$s = "selected='selected'";
 					else $s = '';
 
-					$form .= '<option'.$s.'>';
-					$form .= $dhours;
+					$form .= "<option {$s} value='{$dhours}'>";
+					$form .= $shours;
 					$form .= '</option>';
 				}
 				$form .= '</select>';
@@ -7596,13 +7283,14 @@ PLACEHOLDER
 				$form .= '<td>';
 				$form .= '<select name="'.$status.'['.$day.'][end]" autocomplete="off">';
 				for ( $t=$min_secs; $t<=3600*24; $t=$t+$min_secs ) {
-					$dhours = $this->secs2hours( $t ); // Hours in 08:30 format
+					$dhours = esc_attr($this->secs2hours($t, $_required_format)); // Hours in 08:30 format - escape, because they're values now.
+					$shours = $this->secs2hours($t);
 					if ( isset($whours[$day]['end']) && strtotime($dhours) == strtotime($whours[$day]['end']) )
 						$s = " selected='selected'";
 					else $s = '';
 
-					$form .= '<option'.$s.'>';
-					$form .= $dhours;
+					$form .= "<option {$s} value='{$dhours}'>";
+					$form .= $shours;
 					$form .= '</option>';
 				}
 				$form .= '</select>';
@@ -7615,7 +7303,7 @@ PLACEHOLDER
 
 		$form .= '</table>';
 
-		$this->time_format = $_old_time_format;
+		//$this->time_format = $_old_time_format;
 
 		return $form;
 	}
@@ -7916,6 +7604,7 @@ $(document).on("change", ".column-delete.app-check-column input, .app-column-del
 $(toggle_selected_export);
 })(jQuery);
 </script>
+				<?php do_action('app-export-export_form_end'); ?>
 			</form>
 
 		</div> <!-- wrap -->
@@ -7945,7 +7634,8 @@ $(toggle_selected_export);
 			if ($ids) $sql = "SELECT * FROM {$this->app_table} WHERE ID IN(" . join(',', $ids) . ") ORDER BY ID";
 		} else if ('type' == $type) {
 			$status = !empty($_POST['status']) ? $_POST['status'] : false;
-			if ($status) $sql = $this->db->prepare("SELECT * FROM {$this->app_table} WHERE status=%s ORDER BY ID", $status);
+			if ('active' === $status) $sql = $this->db->prepare("SELECT * FROM {$this->app_table} WHERE status IN('confirmed','paid') ORDER BY ID", $status);
+			else if ($status) $sql = $this->db->prepare("SELECT * FROM {$this->app_table} WHERE status=%s ORDER BY ID", $status);
 		} else if ('all' == $type) {
 			$sql = "SELECT * FROM {$this->app_table} ORDER BY ID";
 		}
@@ -7957,12 +7647,14 @@ $(toggle_selected_export);
 
 		$file = fopen('php://temp/maxmemory:'. (12*1024*1024), 'r+');
 		// Add field names to the file
-		$columns = array_map('strtolower', $this->db->get_col_info());
+		$columns = array_map('strtolower', apply_filters('app-export-columns', $this->db->get_col_info()));
 		fputcsv( $file,  $columns );
 
 		foreach ( $apps as $app ) {
+			$raw = $app;
 			array_walk( $app, array(&$this, 'export_helper') );
-			fputcsv( $file, $app );
+			$app = apply_filters('app-export-appointment', $app, $raw);
+			if (!empty($app)) fputcsv( $file, $app );
 		}
 
 		$filename = "appointments_".date('F')."_".date('d')."_".date('Y').".csv";
@@ -8728,11 +8420,9 @@ $(toggle_selected_export);
 				else if ( ( 'paid' == $data['status'] || 'confirmed' == $data['status'] ) && is_object( $this->gcal_api ) )
 					$this->gcal_api->update( $app_id ); // This also checks for event insert
 			}
-			if ( $update_result && $resend ) {
-				if ( 'removed' == $data['status'] )
-					do_action( 'app_removed', $app_id );
-				else
-					$this->send_confirmation( $app_id );
+			if ($update_result && $resend) {
+				if ('removed' == $data['status']) do_action( 'app_removed', $app_id );
+				//else $this->send_confirmation( $app_id );
 			}
 		}
 		else {
@@ -8742,6 +8432,9 @@ $(toggle_selected_export);
 				$this->send_confirmation( $wpdb->insert_id );
 			if ( $insert_result && is_object( $this->gcal_api ) )
 				$this->gcal_api->insert( $app_id );
+		}
+		if ($resend && 'removed' != $data['status']) {
+			$this->send_confirmation( $app_id );
 		}
 
 		do_action('app-appointment-inline_edit-after_save', ($update_result ? $app_id : $wpdb->insert_id), $data);
@@ -8767,11 +8460,15 @@ $(toggle_selected_export);
 				$this->log( $this->log( sprintf( __('Status changed from %s to %s by %s for appointment ID:%d','appointments'), $app->status, $data["status"], $current_user->user_login, $app->ID ) ) );
 			}
 			die( json_encode( array("result" => __('<span style="color:green;font-weight:bold">Changes saved.</span>', 'appointments') ) ) );
-		}
-		else if ( $insert_result )
+		} else if ( $insert_result ) {
 			die( json_encode( array("result" => __('<span style="color:green;font-weight:bold">New appointment succesfully saved.</span>', 'appointments') ) ) );
-		else
-			die( json_encode( array("result" => __('<span style="color:red;font-weight:bold">Record could not be saved OR you did not make any changes!</span>', 'appointments') ) ) );
+		} else {
+			$message = $resend && !empty($data['status']) && $removed != $data['status']
+				? sprintf('<span style="color:green;font-weight:bold">%s</span>', __('Confirmation message (re)sent', 'appointments'))
+				: sprintf('<span style="color:red;font-weight:bold">%s</span>', __('Record could not be saved OR you did not make any changes!', 'appointments'))
+			;
+			die(json_encode(array("result" => $message)));
+		}
 	}
 
 	 // For future use
@@ -9013,14 +8710,17 @@ $(toggle_selected_export);
 }
 
 define('APP_PLUGIN_DIR', dirname(__FILE__), true);
+define('APP_PLUGIN_FILE', __FILE__, true);
 
-if (file_exists(APP_PLUGIN_DIR . '/includes/wpmudev-dash-notification.php')) require_once APP_PLUGIN_DIR . '/includes/wpmudev-dash-notification.php';
 require_once APP_PLUGIN_DIR . '/includes/default_filters.php';
+require_once APP_PLUGIN_DIR . '/includes/class_app_install.php';
 require_once APP_PLUGIN_DIR . '/includes/class_app_timed_abstractions.php';
 require_once APP_PLUGIN_DIR . '/includes/class_app_roles.php';
 require_once APP_PLUGIN_DIR . '/includes/class_app_codec.php';
 require_once APP_PLUGIN_DIR . '/includes/class_app_shortcodes.php';
 require_once APP_PLUGIN_DIR . '/includes/class_app_addon_helper.php';
+
+App_Installer::serve();
 
 App_AddonHandler::serve();
 App_Shortcodes::serve();
@@ -9034,83 +8734,35 @@ if (is_admin()) {
 
 	require_once APP_PLUGIN_DIR . '/includes/support/class_app_admin_help.php';
 	App_AdminHelp::serve();
+
+	// Setup dashboard notices
+	if (file_exists(APP_PLUGIN_DIR . '/includes/wpmudev-dash-notification.php')) {
+		global $wpmudev_notices;
+		if (!is_array($wpmudev_notices)) $wpmudev_notices = array();
+		$wpmudev_notices[] = array(
+			'id' => 679841,
+			'name' => 'Appointments+',
+			'screens' => array(
+				'appointments_page_app_settings',
+				'appointments_page_app_shortcodes',
+				'appointments_page_app_faq',
+			),
+		);
+		require_once APP_PLUGIN_DIR . '/includes/wpmudev-dash-notification.php';
+	}
+	// End dash bootstrap
 }
 
 /**
  * Find blogs and uninstall tables for each of them
  * @since 1.0.2
+ * @until 1.4.1
  */
 if ( !function_exists( 'wpmudev_appointments_uninstall' ) ) {
-	function wpmudev_appointments_uninstall() {
-		global $wpdb;
-
-		if ( function_exists('is_multisite') && is_multisite() ) {
-				$network = isset($_SERVER['SCRIPT_NAME']) ? $_SERVER['SCRIPT_NAME'] : "";
-				$activate = isset($_GET['action']) ? $_GET['action'] : "";
-				$is_network = ($network=='/wp-admin/network/plugins.php') ? true:false;
-				$is_activation = ($activate=='deactivate') ? false:true;
-
-			if ($is_network && !$is_activation){
-				$old_blog = $wpdb->blogid;
-				// Get all blog ids
-				$blogids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" );
-				foreach ($blogids as $blog_id) {
-					switch_to_blog($blog_id);
-					_wpmudev_appointments_uninstall( );
-				}
-				switch_to_blog($old_blog);
-				return;
-			}
-		}
-		// If not multisite, just make an ordinary uninstall
-		_wpmudev_appointments_uninstall( );
-	}
+	function wpmudev_appointments_uninstall () { do_action('app-core-doing_it_wrong', __FUNCTION__); }
 }
 
 if ( !function_exists( '_wpmudev_appointments_uninstall' ) ) {
-	function _wpmudev_appointments_uninstall( ) {
-		global $wpdb;
-
-		delete_option( 'appointments_options' );
-		delete_option( 'app_last_update' );
-		delete_option( 'app_db_version' );
-
-		$wpdb->query( "DROP TABLE " . $wpdb->prefix . "app_working_hours" );
-		$wpdb->query( "DROP TABLE " . $wpdb->prefix . "app_exceptions" );
-		$wpdb->query( "DROP TABLE " . $wpdb->prefix . "app_services" );
-		$wpdb->query( "DROP TABLE " . $wpdb->prefix . "app_workers" );
-		$wpdb->query( "DROP TABLE " . $wpdb->prefix . "app_appointments" );
-		$wpdb->query( "DROP TABLE " . $wpdb->prefix . "app_transactions" );
-		$wpdb->query( "DROP TABLE " . $wpdb->prefix . "app_cache" );
-
-		// Delete user metas
-		$wpdb->query( "DELETE FROM " . $wpdb->usermeta . " WHERE meta_key='app_api_mode' OR meta_key='app_service_account'
-			OR meta_key='app_key_file' OR meta_key='app_selected_calendar' OR meta_key='app_gcal_summary' OR meta_key='app_gcal_description' OR meta_key LIKE 'app_dismiss%' " );
-
-		// Remove all possible folders with their contents
-		$uploads = wp_upload_dir();
-		if ( isset( $uploads["basedir"] ) )
-			$uploads_dir 	= $uploads["basedir"] . "/";
-		else
-			$uploads_dir 	= WP_CONTENT_DIR . "/uploads/";
-
-		wpmudev_appointments_rmdir( $uploads_dir . '__app/' );
-		if ( defined( 'AUTH_KEY' ) )
-			wpmudev_appointments_rmdir( $uploads_dir . md5( 'AUTH_KEY' ) . '/' );
-
-	}
-
-	// Recursively remove a folder
-	function wpmudev_appointments_rmdir( $dir ) {
-		foreach( glob($dir . '/*') as $file ) {
-			if( is_dir( $file ) )
-				@wpmudev_appointments_rmdir( $file );
-			else
-				@unlink( $file );
-		}
-		@rmdir( $dir );
-	}
+	function _wpmudev_appointments_uninstall () { do_action('app-core-doing_it_wrong', __FUNCTION__); }
+	function wpmudev_appointments_rmdir ($dir) { do_action('app-core-doing_it_wrong', __FUNCTION__); }
 }
-
-register_uninstall_hook(  __FILE__ , "wpmudev_appointments_uninstall" );
-register_activation_hook( __FILE__, array('Appointments', 'install') );

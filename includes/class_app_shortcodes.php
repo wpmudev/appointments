@@ -1,5 +1,12 @@
 <?php
+/**
+ * Contains the default App_Shortcode descendent implementations.
+ */
 
+
+/**
+ * Monthly worker calendar overview.
+ */
 class App_Shortcode_WorkerMonthlyCalendar extends App_Shortcode {
 
 	public function __construct () {

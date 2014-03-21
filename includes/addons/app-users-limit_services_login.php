@@ -26,8 +26,9 @@ class App_Users_LimitServicesLogin {
 	}
 
 	public function inject_scripts ($l10n) {
+		$services = $this->_get_services();
 		$selected = empty($this->_data['show_login_button'])
-			? array_keys()
+			? array_keys($services)
 			: $this->_data['show_login_button']
 		;
 		$l10n['show_login_button'] = $selected;
@@ -45,12 +46,7 @@ class App_Users_LimitServicesLogin {
 	}
 
 	public function show_settings ($style) {
-		$services = array(
-			'facebook' => 'Facebook',
-			'twitter' => 'Twitter',
-			'google' => 'Google',
-			'wordpress' => 'WordPress',
-		);
+		$services = $this->_get_services();
 		$selected = empty($this->_data['show_login_button'])
 			? array_keys($services)
 			: $this->_data['show_login_button']
@@ -67,6 +63,15 @@ class App_Users_LimitServicesLogin {
 	</td>
 </tr>
 		<?php
+	}
+
+	private function _get_services () {
+		return array(
+			'facebook' => 'Facebook',
+			'twitter' => 'Twitter',
+			'google' => 'Google',
+			'wordpress' => 'WordPress',
+		);
 	}
 }
 App_Users_LimitServicesLogin::serve();

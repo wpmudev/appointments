@@ -209,7 +209,7 @@ class App_Macro_GeneralCodec {
 					'/(?:^|\b)' . preg_quote($macro, '/') . '(?:\b|$)/', 
 					$callback, $str
 				);
-			}
+			} else $str = apply_filters('app-codec-macro_default-' . $method, $str, $this->_appointment, $filter);
 		}
 		if (!$filter || self::FILTER_TITLE == $filter) $str = wp_strip_all_tags($str);
 		if (self::FILTER_BODY == $filter) $str = apply_filters('the_content', $str);

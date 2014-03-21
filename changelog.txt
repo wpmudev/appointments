@@ -1,3 +1,21 @@
+v1.4.1
+- Fix for confirmation emails sent on purchase via MarketPress integration.
+- Fix for services with different durations not properly allocating free times.
+- Fix for BuddyPress redirects.
+- Fix for GCal synchronisation on non-immediate actions.
+- Fix for GCal exception handling.
+- Fix for page creation issue with concurrent settings change.
+- Fix for Additional Fields add-on deletion when there's only one field.
+- Fix for administrative permissions (props Ash).
+- Added additional fields placeholders for GCal sync.
+- Added the import-only GCal integration mode.
+- Fixed overlaps in time selections.
+- Added service paddings add-on.
+- Added stackable break times option to durations add-on.
+- Added shared resources add-on.
+- Improved MarketPress integration for new appointments.
+- Refactored install and uninstall routines.
+
 v1.4
 - Allowing for optional Google SDK dependencies loading.
 - Lowering the case of exported column names to prevent Excel bug from triggering (http://support.microsoft.com/kb/215591)
