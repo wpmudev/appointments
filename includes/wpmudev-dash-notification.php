@@ -13,26 +13,25 @@ if ( !class_exists('WPMUDEV_Dashboard_Notice3') ) {
 		var $update_count = 0;
 		
 		function __construct() {
-			add_action(
-				(defined('BP_VERSION') ? 'admin_init' : 'plugins_loaded'), 
-				array($this, 'init'),
-				0
-			);
+			add_action( 'init', array( &$this, 'init' ) );
 		}
 		
 		function init() {
 			global $wpmudev_un;
+			
+			if ( class_exists( 'WPMUDEV_Dashboard' ) || ( isset($wpmudev_un->version) && version_compare($wpmudev_un->version, '3.4', '<') ) )
+				return;
+			
+			// Schedule update jobs
+			if ( !wp_next_scheduled('wpmudev_scheduled_jobs') ) {
+				wp_schedule_event(time(), 'twicedaily', 'wpmudev_scheduled_jobs');
+			}
+			add_action( 'wpmudev_scheduled_jobs', array( $this, 'updates_check') );
+			add_action( 'delete_site_transient_update_plugins', array( &$this, 'updates_check' ) ); //refresh after upgrade/install
+			add_action( 'delete_site_transient_update_themes', array( &$this, 'updates_check' ) ); //refresh after upgrade/install
+			
 			if ( is_admin() && current_user_can( 'install_plugins' ) ) {
-				if ( class_exists( 'WPMUDEV_Dashboard' ) || ( isset($wpmudev_un->version) && version_compare($wpmudev_un->version, '3.4', '<') ) )
-					return;
 				
-				// Schedule update jobs
-				if ( !wp_next_scheduled('wpmudev_scheduled_jobs') ) {
-					wp_schedule_event(time(), 'twicedaily', 'wpmudev_scheduled_jobs');
-				}
-				add_action( 'wpmudev_scheduled_jobs', array( $this, 'updates_check') );
-				add_action( 'delete_site_transient_update_plugins', array( &$this, 'updates_check' ) ); //refresh after upgrade/install
-				add_action( 'delete_site_transient_update_themes', array( &$this, 'updates_check' ) ); //refresh after upgrade/install
 				add_action( 'site_transient_update_plugins', array( &$this, 'filter_plugin_count' ) );
 				add_action( 'site_transient_update_themes', array( &$this, 'filter_theme_count' ) );
 				add_filter( 'plugins_api', array( &$this, 'filter_plugin_info' ), 20, 3 ); //run later to work with bad autoupdate plugins
@@ -482,7 +481,7 @@ if ( !class_exists('WPMUDEV_Dashboard_Notice3') ) {
 				return $res;
 			}
 	
-			return false;
+			return $res;
 		}
 		
 		function filter_plugin_rows() {

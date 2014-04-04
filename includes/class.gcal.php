@@ -985,7 +985,11 @@ class AppointmentsGcal {
 		// Alright, now deal with event sequencing
 		if (!empty($app->gcal_ID)) {
 			$tmp = $this->service->events->get($this->get_selected_calendar( $worker_id ), $app->gcal_ID);
-			if (!empty($tmp['sequence'])) $this->event->sequence = $tmp['sequence'];
+			$sequence = is_object($tmp) && !empty($tmp->sequence)
+				? $tmp->sequence
+				: (is_array($tmp) && !empty($tmp['sequence']) ? $tmp['sequence'] : false)
+			;
+			if (!empty($sequence)) $this->event->sequence = $sequence; // Add sequence if we have it
 		}
 	}
 

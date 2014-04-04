@@ -123,7 +123,7 @@ class App_Schedule_Paddings {
 		$out .= '</label>';
 		$out .= '</div>';
 
-		return $out;
+		return strtr($out, "'", '"'); // We have to escape this, because of the way the JS injection works on the services page (wtf really o.0)
 	}
 
 	public function save_service_padding ($service_id) {

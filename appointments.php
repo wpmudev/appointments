@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.4.1
+Version: 1.4.2-BETA-2
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	var $version = "1.4.1";
+	var $version = "1.4.2-BETA-2";
 
 	/**
      * Constructor
@@ -77,7 +77,7 @@ class Appointments {
 		add_action( 'admin_notices', array( &$this, 'admin_notices' ) ); 				// Warns admin
 		add_action( 'admin_print_scripts', array(&$this, 'admin_scripts') );			// Load scripts
 		add_action( 'admin_print_styles', array(&$this, 'admin_css') );					// Add style to all admin pages
-		add_action( 'admin_print_styles-appointments_page_app_settings', array( &$this, 'admin_css_settings' ) ); // Add style to settings page
+		//add_action( 'admin_print_styles-appointments_page_app_settings', array( &$this, 'admin_css_settings' ) ); // Add style to settings page - DEPRECATED since v1.4.2-BETA-2
 		add_action( 'right_now_content_table_end', array($this, 'add_app_counts') );	// Add app counts
 		add_action( 'wp_ajax_delete_log', array( &$this, 'delete_log' ) ); 				// Clear log
 		add_action( 'wp_ajax_inline_edit', array( &$this, 'inline_edit' ) ); 			// Add/edit appointments
@@ -4851,12 +4851,15 @@ SITE_NAME
 		wp_enqueue_script("appointments-admin", $this->plugin_url . "/js/admin.js", array('jquery'), $this->version);
 		do_action('app-admin-admin_scripts');
 	}
-
 	// Enqueue css on settings page
+	/**
+	 * @deprecated since v1.4.2-BETA-2
+	 */
+/*
 	function admin_css_settings() {
 		wp_enqueue_style( 'jquery-colorpicker-css', $this->plugin_url . '/css/colorpicker.css', false, $this->version);
 	}
-
+*/
 	// Enqueue css for all admin pages
 	function admin_css() {
 		wp_enqueue_style( "appointments-admin", $this->plugin_url . "/css/admin.css", false, $this->version );
@@ -4869,6 +4872,7 @@ SITE_NAME
 			&&
 			!preg_match('/(^|\b|_)' . preg_quote($title, '/') . '($|\b|_)/', $screen->base) // Super-weird admin screen base being translatable!!!
 		)) return false;
+		wp_enqueue_style( 'jquery-colorpicker-css', $this->plugin_url . '/css/colorpicker.css', false, $this->version);
 		wp_enqueue_style( "jquery-datepick", $this->plugin_url . "/css/jquery.datepick.css", false, $this->version );
 		wp_enqueue_style( "jquery-multiselect", $this->plugin_url . "/css/jquery.multiselect.css", false, $this->version );
 		wp_enqueue_style( "jquery-ui-smoothness", $this->plugin_url . "/css/smoothness/jquery-ui-1.8.16.custom.css", false, $this->version );
@@ -6980,7 +6984,7 @@ PLACEHOLDER
 				if ( $('#number_of_services').val() > 0 ) {
 					n = parseInt( $('#number_of_services').val() ) + 1;
 				}
-				$('#services-table').append('<?php echo $this->esc_rn( $this->add_service() )?>');
+				$('#services-table').append('<?php echo $this->esc_rn( $this->add_service()); ?>');
 				$('#number_of_services').val(n);
 				$('#div_save_services').show();
 				$('.no_services_defined').hide();
@@ -8430,7 +8434,7 @@ $(toggle_selected_export);
 			$insert_result = $wpdb->insert( $this->app_table, $data );
 			if ( $insert_result && $resend )
 				$this->send_confirmation( $wpdb->insert_id );
-			if ( $insert_result && is_object( $this->gcal_api ) )
+			if ( $insert_result && ( 'paid' == $data['status'] || 'confirmed' == $data['status'] ) && is_object( $this->gcal_api ) )
 				$this->gcal_api->insert( $app_id );
 		}
 		if ($resend && 'removed' != $data['status']) {
