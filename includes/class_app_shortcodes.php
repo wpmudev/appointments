@@ -787,7 +787,12 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 				'value' => 0,
 				'help' => __('Enter 1 if you want to allow cancellation of appointments by the client using this table. "Allow client cancel own appointments" setting must also be set as Yes. Default: "0" (Cancellation is not allowed).', 'appointments'),
 				'example' => '1',
-			),	
+			),
+			'strict' => array(
+				'value' => 0,
+				'help' => __('Ensure strict matching when searching for appointments to display. The shortcode will, by default, use the widest possible match.', 'appointments'),
+				'example' => '1',
+			),
 
 			'_allow_confirm' => array('value' => 0),
 			'_tablesorter' => array('value' => 1),
@@ -833,22 +838,35 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 			$provider_or_client = __('Provider', 'appointments' );
 
 			$q = '';
-			foreach ( $apps as $app_id ) {
-				if ( is_numeric( $app_id ) )
-					$q .= " ID=".$app_id." OR ";
-			}
-			$q = rtrim( $q, "OR " );
+			if ($strict) {
+				// Strict matching
+				if (is_user_logged_in()) {
+					$q = "user={$current_user->ID}"; // If the user is logged in, show just those apps
+				} else {
+					// Otherwise, deal with the cookie-cached ones
+					$apps = array_values(array_filter(array_map('intval', $apps)));
+					if (!empty($apps)) $q = "ID IN(" . join(',', $apps) . ")";
+				}
+			} else {
+				// Non-strict matching	
+				foreach ( $apps as $app_id ) {
+					if ( is_numeric( $app_id ) )
+						$q .= " ID=".$app_id." OR ";
+				}
+				$q = rtrim( $q, "OR " );
 
-			// But he may as well has appointments added manually (requires being registered user)
-			if ( is_user_logged_in() ) {
-				$q .= " OR user=".$current_user->ID;
-				$q = ltrim( $q, " OR" );
+				// But he may as well has appointments added manually (requires being registered user)
+				if ( is_user_logged_in() ) {
+					$q .= " OR user=".$current_user->ID;
+					$q = ltrim( $q, " OR" );
+				}
 			}
-			if ( $q && $stat )
-				$results = $wpdb->get_results( "SELECT * FROM " . $appointments->app_table .
-				" WHERE (".$q.") AND (".$stat.") ORDER BY " . $appointments->sanitize_order_by( $order_by ) ." " );
-			else
-				$results = false;
+			if ( $q && $stat ) {
+				$results = $wpdb->get_results(
+					"SELECT * FROM " . $appointments->app_table .
+					" WHERE (".$q.") AND (".$stat.") ORDER BY " . $appointments->sanitize_order_by( $order_by )
+				);
+			} else $results = false;
 		}
 		else {
 			$provider_or_client = __('Client', 'appointments' );

@@ -1,3 +1,9 @@
+v1.4.2
+- Fix for quotes escaping issue with injected javascript.
+- Fix for permissions issue with bbpress/buddypress pages registration.
+- Fix for colorpicker localized dependencies loading issue.
+- Added "strict" shortcode argument to app_my_appointments shortcode.
+
 v1.4.1
 - Fix for confirmation emails sent on purchase via MarketPress integration.
 - Fix for services with different durations not properly allocating free times.
