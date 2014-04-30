@@ -106,20 +106,29 @@ class Appointments_Widget_Service_Providers extends Appointments_Widget_Helper {
 
 	function content( $instance ) {
 
-		extract( $instance );
+		//extract( $instance );
+		$count = !empty($instance['count']) && is_numeric($instance['count'])
+			? (int)$instance['count']
+			: 5
+		;
+		$allow_no_links = !empty($instance['allow_no_links'])
+			? ''
+			: 'WHERE page>0'
+		;
 
-		global $wpdb;
-		$results = $wpdb->get_results("SELECT * FROM " . $wpdb->prefix . "app_workers" . " WHERE page >0 LIMIT ".$number." ");
+		global $appointments;
+		$results = $appointments->db->get_results("SELECT * FROM {$appointments->workers_table} {$allow_no_links} LIMIT {$count}");
 
 		if ( $results ) {
 			echo '<ul>';
 			foreach ( $results as $result ) {
-				$worker_data = get_userdata( $result->ID );
-				echo '<li>';
-
-				echo '<a href="'.get_permalink($result->page).'" >'. $worker_data->user_login . '</a>';
-
-				echo '</li>';
+				$link_template = !empty($result->page)
+					? '<a href="' . get_permalink($result->page) . '">%s</a>'
+					: '<span class="app_worker">%s</a>'
+				;
+				echo '<li>' .
+					sprintf($link_template, $appointments->get_worker_name($result->ID)) .
+				'</li>';
 			}
 			echo '</ul>';
 		}
@@ -132,9 +141,11 @@ class Appointments_Widget_Service_Providers extends Appointments_Widget_Helper {
 
 		<p>
 			<label for="<?php echo $this->get_field_id('number'); ?>"><?php _e( 'Number of service providers to show:', 'appointments' ); ?></label>
-
-			<input type="text" size="2" name="<?php echo $this->get_field_name('number')?>" value="<?php echo $instance['number']?>" />
-
+			<input type="text" size="2" id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number')?>" value="<?php echo $instance['number']?>" />
+		</p>
+		<p>
+			<input type="checkbox" name="<?php echo $this->get_field_name('allow_no_links')?>" id="<?php echo $this->get_field_id('allow_no_links'); ?>" value="1" <?php checked($instance['allow_no_links'], true); ?> />
+			<label for="<?php echo $this->get_field_id('allow_no_links'); ?>"><?php _e( 'Show service providers without biographies', 'appointments' ); ?></label>
 		</p>
 <?php
 	}
@@ -144,6 +155,7 @@ class Appointments_Widget_Service_Providers extends Appointments_Widget_Helper {
 		$new_instance = $this->parse_instance( $new_instance );
 		$instance['title'] = strip_tags( $new_instance['title'] );
 		$instance['number'] = (int) $new_instance['number'];
+		$instance['allow_no_links'] = !empty($new_instance['allow_no_links']) ? 1 : 0;
 		return $instance;
 	}
 }

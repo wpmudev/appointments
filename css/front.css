@@ -152,6 +152,10 @@ border-radius: 5px;
 	width:auto;
 }
 
+a.appointments-login_link-cancel {
+  margin-top: 20px;
+}
+
 a.appointments-login_link-cancel, .app_submit_btn {
 	color: #4e4d4d;
 	font-size: 13px;
@@ -237,6 +241,10 @@ a.appointments-login_link-cancel:active,  .app_submit_btn:active {
 
 ul.appointments-login_links li {
 	text-align: center;
+}
+
+ul.appointments-login_links li a {
+  text-decoration: none;
 }
 
 
@@ -348,7 +356,7 @@ a.appointments-login_link-wordpress {
   		-ms-transition: 0.1s linear all;
   		 -o-transition: 0.1s linear all;
   				transition: 0.1s linear all;
-  margin: 10px 0 20px 0;
+  margin: 10px 0;
 }
 a.appointments-login_link-wordpress:hover, a.appointments-login_link-wordpress.active {
   background: #444 url(../images/app-sprite01.png) 5px -38px no-repeat !important;
@@ -356,10 +364,14 @@ a.appointments-login_link-wordpress:hover, a.appointments-login_link-wordpress.a
   text-decoration: none;
 }
 
-a.appointments-login_link-facebook, a.appointments-login_link-twitter, a.appointments-login_link-wordpress {
-	font-family:  Lucida Grande, Helvetica Neue, Helvetica, Arial;
-	text-shadow: 0 1px 0px rgba(0,0,0,0.4);
-	font-weight: normal;
+a.appointments-register_link-wordpress {
+  font-size: 13px;
+}
+
+a.appointments-login_link-facebook, a.appointments-login_link-twitter, a.appointments-login_link-wordpress, a.appointments-register_link-wordpress {
+  font-family:  Lucida Grande, Helvetica Neue, Helvetica, Arial;
+  text-shadow: 0 1px 0px rgba(0,0,0,0.4);
+  font-weight: normal;
 }
 
 a.appointments-login_link-submit {
@@ -480,7 +492,10 @@ tr td.free.selected { border-top:none; border:2px solid #fff; opacity: 0.5; }
 .appointments-wrapper h2 { font-size: 1.9em; }
 
 .app_services_dropdown_title,
-.app_workers_dropdown_title { font-size:1.4em; margin:10px 0; font-weight: bold; }
+.app_workers_dropdown_title,
+.app_service_locations_dropdown_title,
+.app_provider_locations_dropdown_title
+{ font-size:1.4em; margin:10px 0; font-weight: bold; }
 
 .app_service_excerpts { margin: 0.5em 0; }
 .appointments-wrapper h3,
@@ -491,9 +506,15 @@ tr td.free.selected { border-top:none; border:2px solid #fff; opacity: 0.5; }
 
 /* form elements */
 .app_services_dropdown_select,
-.app_workers_dropdown_select { padding: 0.4em 0; }
+.app_workers_dropdown_select,
+.app_service_locations_dropdown,
+.app_provider_locations_dropdown
+{ padding: 0.4em 0; }
 .app_services_dropdown_select select,
-.app_workers_dropdown_select select { margin-right: 1em; }
+.app_workers_dropdown_select select,
+.app_service_locations_dropdown select,
+.app_provider_locations_dropdown select
+{ margin-right: 1em; }
 
 .appointments-pagination {
   /*border-top:1px solid rgba(100,100,100, 0.1);*/
@@ -572,16 +593,16 @@ div.error p {
 
 /* tablesorter */
 table.tablesorter thead tr .header {
-	background-image: url(../images/bg.gif);
+	/*background-image: url(../images/bg.gif); No such thing*/
 	background-repeat: no-repeat;
 	background-position: center right;
 	cursor: pointer;
 }
 table.tablesorter thead tr .headerSortUp {
-	background-image: url(../images/asc.gif);
+	/*background-image: url(../images/asc.gif); No such thing*/
 }
 table.tablesorter thead tr .headerSortDown {
-	background-image: url(../images/desc.gif);
+	/*background-image: url(../images/desc.gif); No such thing*/
 }
 table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
 opacity: 0.5;

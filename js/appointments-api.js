@@ -19,6 +19,7 @@ function create_app_login_interface ($me) {
 			(is_available('google') ? '<li><a href="#" class="appointments-login_link appointments-login_link-google">' + l10nAppApi.google + '</a></li>' : '') +
 			(is_available('wordpress') ? '<li><a href="#" class="appointments-login_link appointments-login_link-wordpress">' + l10nAppApi.wordpress + '</a></li>' : '') +
 			'<li class="app_login_submit"><input type="text" class="app_username" name="log" placeholder="Username" /><input type="password" name="pwd" class="app_password" placeholder="Password" /><a href="javascript:void(0)" class="appointments-login_link appointments-login_link-submit">' + l10nAppApi.submit + '</a></li>' +
+			(l10nAppApi.registration_url ? '<li><a href="' + l10nAppApi.registration_url + '" class="appointments-login_link appointments-register_link-wordpress">' + l10nAppApi.register + '</a></li>' : '') +
 			'<li><a href="#" class="appointments-login_link appointments-login_link-cancel">' + l10nAppApi.cancel + '</a></li>' +
 		'</ul>'
 	);

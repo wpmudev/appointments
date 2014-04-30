@@ -32,6 +32,14 @@ class App_Users_LimitServicesLogin {
 			: $this->_data['show_login_button']
 		;
 		$l10n['show_login_button'] = $selected;
+
+		if (!empty($l10n['wordpress']) && !empty($this->_data['use_blogname_for_login'])) {
+			$blogname = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
+			$l10n['wordpress'] = sprintf(__('Login with %s', 'appointments'), $blogname);
+			if (!empty($l10n['register'])) {
+				$l10n['register'] = sprintf(__('Register with %s', 'appointments'), $blogname);
+			}
+		}
 		return $l10n;
 	}
 
@@ -42,6 +50,7 @@ class App_Users_LimitServicesLogin {
 
 	public function save_settings ($options) {
 		if (!empty($_POST['show_login_button'])) $options['show_login_button'] = stripslashes_deep($_POST['show_login_button']);
+		$options['use_blogname_for_login'] = !empty($_POST['use_blogname_for_login']);
 		return $options;
 	}
 
@@ -60,6 +69,13 @@ class App_Users_LimitServicesLogin {
 		<label for="slb-<?php esc_attr_e($service); ?>"><?php echo $label; ?></label>
 		<br />
 	<?php } ?>
+	<hr />
+	<div class="app-lsl-other_options">
+		<label for="app-use_blogname_for_login">
+			<input type="checkbox" name="use_blogname_for_login" id="app-use_blogname_for_login" value="1" <?php checked($this->_data['use_blogname_for_login'], 1); ?> />
+			<?php printf(__('Use %s name for login button', 'appointments'), (is_multisite() ? __('network', 'appointments') : __('site', 'appointments'))); ?>
+		</label>
+	</div>
 	</td>
 </tr>
 		<?php

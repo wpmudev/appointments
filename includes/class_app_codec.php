@@ -156,6 +156,7 @@ abstract class App_Shortcode extends App_Codec_Instance {
 abstract class App_Codec {
 	
 	protected $_instances = array();
+	protected $_running = array();
 	
 	/**
 	 * Registers shortcode handlers.
@@ -165,20 +166,32 @@ abstract class App_Codec {
 			if (!class_exists($codec)) continue;
 			$code = new $codec;
 			$code->register($key);
+			$this->_running[$key] = $code;
 		}
 	}
 }
 
 class App_Shortcodes extends App_Codec {
 
+	private static $_me;
+
 	public static function serve () {
-		$me = new App_Shortcodes;
-		add_action('init', array($me, 'do_register'));
+		if (!empty(self::$_me)) return false;
+		self::$_me = new App_Shortcodes;
+		add_action('init', array(self::$_me, 'do_register'));
 	}
 
 	public function do_register () {
 		$this->_instances = apply_filters('app-shortcodes-register', array());
 		$this->_register();
+	}
+
+	public static function get_shortcode_instance ($key) {
+		if (empty(self::$_me)) return false;
+		return !empty(self::$_me->_running[$key])
+			? self::$_me->_running[$key]
+			: false
+		;
 	}
 }
 

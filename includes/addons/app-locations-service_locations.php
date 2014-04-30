@@ -62,6 +62,12 @@ class App_Locations_ServiceLocations {
 			add_shortcode('app_service_location', '__return_false');
 			add_filter('app-services-service_description', array($this, 'inject_location_markup'), 10, 3);
 		}
+
+		if (!class_exists('App_Shortcode_ServiceLocationsShortcode')) {
+			require_once(dirname(__FILE__) . '/lib/app_service_locations_shortcode.php');
+			App_Shortcode_ServiceLocationsShortcode::serve();
+			App_Shortcode_RequiredServiceLocationsShortcode::serve();
+		}
 	}
 
 	public function record_appointment_location ($appointment_id) {
@@ -69,7 +75,7 @@ class App_Locations_ServiceLocations {
 		$appointment = $appointments->get_app($appointment_id);
 		if (empty($appointment->service)) return false;
 
-		$location_id = $this->_service_to_location_id($appointment->service);
+		$location_id = self::service_to_location_id($appointment->service);
 		if (!$location_id) return false;
 
 		return $wpdb->update(
@@ -139,7 +145,7 @@ class App_Locations_ServiceLocations {
 		$markup .= '<label>' . __('Location:', 'appointments') . '</label>&nbsp;';
 		$markup .= '<select name="service_location[' . $service_id . ']"><option value=""></option>';
 		foreach ($locations as $location) {
-			$checked = $location->get_id() == $this->_service_to_location_id($service_id) ? 'selected="selected"' : '';
+			$checked = $location->get_id() == self::service_to_location_id($service_id) ? 'selected="selected"' : '';
 			$markup .= '<option value="' . $location->get_id() . '" ' . $checked . '>' . $location->get_admin_label() . '</option>';
 		}
 		$markup .= '</select>';
@@ -150,7 +156,7 @@ class App_Locations_ServiceLocations {
 		if (!$service_id) return false;
 		$key = self::STORAGE_PREFIX . $service_id;
 
-		$old_location_id = $this->_service_to_location_id($service_id);
+		$old_location_id = self::service_to_location_id($service_id);
 		$location_id = !empty($_POST['service_location'][$service_id]) ? $_POST['service_location'][$service_id] : false;
 
 		if ($old_location_id != $location_id) $this->_update_appointment_locations($service_id, $old_location_id, $location_id);
@@ -158,7 +164,7 @@ class App_Locations_ServiceLocations {
 		return update_option($key, $location_id);
 	}
 
-	private function _service_to_location_id ($service_id) {
+	public static function service_to_location_id ($service_id) {
 		if (!$service_id) return false;
 		$key = self::STORAGE_PREFIX . $service_id;
 
@@ -167,7 +173,7 @@ class App_Locations_ServiceLocations {
 	
 	private function _service_to_location ($service_id) {
 		if (!$this->_locations) return false;
-		$location_id = $this->_service_to_location_id($service_id);
+		$location_id = self::service_to_location_id($service_id);
 		return $this->_locations->find_by('id', $location_id);
 	}
 

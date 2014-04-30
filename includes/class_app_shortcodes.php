@@ -261,6 +261,16 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 				'help' => __('Normally calendar starts from the current week. If you want to force it to start from a certain date, enter that date here. Most date formats are supported, but YYYY-MM-DD is recommended. Notes: 1) This value will also affect other subsequent calendars on the same page. 2) Date value will not change starting day of week. It is sufficient to enter a date inside the week. Default: "0" (Current week)', 'appointments'),
 				'example' => '2014-02-01',
 			),
+			'require_provider' => array(
+				'value' => 0,
+				'help' => __('Setting this argument to "1" means a timetable will not be rendered unless a service provider has been previously selected.', 'appointments'),
+				'example' => 1,
+			),
+			'required_message' => array(
+				'value' => __('Please, select a service provider.', 'appointments'),
+				'help' => __('The message that will be shown if service providers are required.', 'appointments'),
+				'example' => __('Please, select a service provider.', 'appointments'),
+			),
 
 		);
 	}
@@ -318,32 +328,43 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 		else
 			$title = '';
 
+		$has_worker = !empty($appointments->worker) || !empty($worker);
+
 		$c  = '';
         $c .= '<div class="appointments-wrapper">';
-        $c .= $title;
 
-		if ( is_user_logged_in() || 'yes' != $appointments->options["login_required"] ) {
-			$c .= $logged ? "<div class='appointments-instructions'>{$logged}</div>" : '';
-		} else {
-			$codec = new App_Macro_GeneralCodec;
-			if ( !@$appointments->options["accept_api_logins"] ) {
-				//$c .= str_replace( 'LOGIN_PAGE', '<a class="appointments-login_show_login" href="'.site_url( 'wp-login.php').'">'. __('Login','appointments'). '</a>', $notlogged );
-				$c .= $codec->expand($notlogged, App_Macro_GeneralCodec::FILTER_BODY);
+        if (!$has_worker && !empty($require_provider)) {
+			$c .= !empty($required_message)
+				? $required_message
+				: __('Please, select a service provider.', 'appointments')
+			;
+ 		} else {
+	        $c .= $title;
+
+			if ( is_user_logged_in() || 'yes' != $appointments->options["login_required"] ) {
+				$c .= $logged ? "<div class='appointments-instructions'>{$logged}</div>" : '';
 			} else {
-				$c .= '<div class="appointments-login">';
-				//$c .= str_replace( 'LOGIN_PAGE', '<a class="appointments-login_show_login" href="javascript:void(0)">'. __('Login','appointments'). '</a>', $notlogged );
-				$c .= $codec->expand($notlogged, App_Macro_GeneralCodec::FILTER_BODY);
-				$c .= '<div class="appointments-login_inner">';
-				$c .= '</div>';
-				$c .= '</div>';
+				$codec = new App_Macro_GeneralCodec;
+				if ( !@$appointments->options["accept_api_logins"] ) {
+					//$c .= str_replace( 'LOGIN_PAGE', '<a class="appointments-login_show_login" href="'.site_url( 'wp-login.php').'">'. __('Login','appointments'). '</a>', $notlogged );
+					$c .= $codec->expand($notlogged, App_Macro_GeneralCodec::FILTER_BODY);
+				} else {
+					$c .= '<div class="appointments-login">';
+					//$c .= str_replace( 'LOGIN_PAGE', '<a class="appointments-login_show_login" href="javascript:void(0)">'. __('Login','appointments'). '</a>', $notlogged );
+					$c .= $codec->expand($notlogged, App_Macro_GeneralCodec::FILTER_BODY);
+					$c .= '<div class="appointments-login_inner">';
+					$c .= '</div>';
+					$c .= '</div>';
+				}
 			}
+
+	        $c .= '<div class="appointments-list">';
+	 		$c .= $appointments->get_weekly_calendar($time, $class, $long);
+
+			$c .= '</div>';
 		}
-
-        $c .= '<div class="appointments-list">';
- 		$c .= $appointments->get_weekly_calendar($time, $class, $long);
-
-		$c .= '</div>
-		</div>';
+		$c .= '</div>'; // .appointments-wrapper
+		
 		$script = '';
 
 		if (!$_noscript) $appointments->add2footer( $script );
@@ -411,7 +432,16 @@ class App_Shortcode_MonthlySchedule extends App_Shortcode {
 				'help' => __('Normally calendar starts from the current month. If you want to force it to start from a certain date, enter that date here. Most date formats are supported, but YYYY-MM-DD is recommended. Notes: 1) This value will also affect other subsequent calendars on the same page. 2) It is sufficient to enter a date inside the month. Default: "0" (Current month)', 'appointments'),
 				'example' => '2014-02-01',
 			),
-
+			'require_provider' => array(
+				'value' => 0,
+				'help' => __('Setting this argument to "1" means a timetable will not be rendered unless a service provider has been previously selected.', 'appointments'),
+				'example' => 1,
+			),
+			'required_message' => array(
+				'value' => __('Please, select a service provider.', 'appointments'),
+				'help' => __('The message that will be shown if service providers are required.', 'appointments'),
+				'example' => __('Please, select a service provider.', 'appointments'),
+			),
 		);
 	}
 
@@ -471,32 +501,42 @@ class App_Shortcode_MonthlySchedule extends App_Shortcode {
 		else
 			$title = '';
 
+		$has_worker = !empty($appointments->worker) || !empty($worker);
+
 		$c  = '';
         $c .= '<div class="appointments-wrapper">';
-        $c .= $title;
 
-		if ( is_user_logged_in() || 'yes' != $appointments->options["login_required"] ) {
-			$c .= $logged ? "<div class='appointments-instructions'>{$logged}</div>" : '';
-		} else {
-			$codec = new App_Macro_GeneralCodec;
-			if ( !@$appointments->options["accept_api_logins"] ) {
-				//$c .= str_replace( 'LOGIN_PAGE', '<a class="appointments-login_show_login" href="'.site_url( 'wp-login.php').'">'. __('Login','appointments'). '</a>', $notlogged );
-				$c .= $codec->expand($notlogged, App_Macro_GeneralCodec::FILTER_BODY);
+		if (!$has_worker && !empty($require_provider)) {
+			$c .= !empty($required_message)
+				? $required_message
+				: __('Please, select a service provider.', 'appointments')
+			;
+ 		} else {
+	        $c .= $title;
+
+			if ( is_user_logged_in() || 'yes' != $appointments->options["login_required"] ) {
+				$c .= $logged ? "<div class='appointments-instructions'>{$logged}</div>" : '';
 			} else {
-				$c .= '<div class="appointments-login">';
-				//$c .= str_replace( 'LOGIN_PAGE', '<a class="appointments-login_show_login" href="javascript:void(0)">'. __('Login','appointments'). '</a>', $notlogged );
-				$c .= $codec->expand($notlogged, App_Macro_GeneralCodec::FILTER_BODY);
-				$c .= '<div class="appointments-login_inner">';
-				$c .= '</div>';
-				$c .= '</div>';
+				$codec = new App_Macro_GeneralCodec;
+				if ( !@$appointments->options["accept_api_logins"] ) {
+					//$c .= str_replace( 'LOGIN_PAGE', '<a class="appointments-login_show_login" href="'.site_url( 'wp-login.php').'">'. __('Login','appointments'). '</a>', $notlogged );
+					$c .= $codec->expand($notlogged, App_Macro_GeneralCodec::FILTER_BODY);
+				} else {
+					$c .= '<div class="appointments-login">';
+					//$c .= str_replace( 'LOGIN_PAGE', '<a class="appointments-login_show_login" href="javascript:void(0)">'. __('Login','appointments'). '</a>', $notlogged );
+					$c .= $codec->expand($notlogged, App_Macro_GeneralCodec::FILTER_BODY);
+					$c .= '<div class="appointments-login_inner">';
+					$c .= '</div>';
+					$c .= '</div>';
+				}
 			}
+
+			$c .= '<div class="appointments-list">';
+	 			$c .= $appointments->get_monthly_calendar($time, $class, $long, $widget);
+			$c .= '</div>';
+
 		}
-
-		$c .= '<div class="appointments-list">';
- 		$c .= $appointments->get_monthly_calendar($time, $class, $long, $widget);
-
-		$c .= '</div>
-		</div>';
+		$c .= '</div>'; // .appointments-wrapper
 		$script = '';
 
 		$appointments->add2footer( $script );
@@ -1104,7 +1144,7 @@ class App_Shortcode_Services extends App_Shortcode {
 			),
 			'worker' => array(
 				'value' => 0,
-				'help' => __('In some cases, you may want to display services which are given only by a certain provider. In that case enter provider ID here. Note: order_by parameter will not work in combination with this one. Default: "0" (all defined services). Note: Multiple selections are not allowed.', 'appointments'),
+				'help' => __('In some cases, you may want to display services which are given only by a certain provider. In that case enter provider ID here. Default: "0" (all defined services). Note: Multiple selections are not allowed.', 'appointments'),
 				'example' => '12',
 			),
 			'_noscript' => array('value' => 0),
@@ -1133,6 +1173,8 @@ class App_Shortcode_Services extends App_Shortcode {
 				$_REQUEST['app_service_id'] = $fsby; // Set this as first service
 				$appointments->get_lsw(); // Update
 			}
+			// Re-sort worker services
+			if (!empty($services) && !empty($order_by) && 'ID' !== $order_by) $services = $this->_reorder_services($services, $order_by);
 		}
 		else
 			$services = $appointments->get_services( $order_by );
@@ -1222,6 +1264,34 @@ class App_Shortcode_Services extends App_Shortcode {
 		if (!$_noscript) $appointments->add2footer( $script );
 
 		return $s;
+	}
+
+	/**
+	 * Sort the services when we can't do so via SQL
+	 */
+	private function _reorder_services ($services, $order) {
+		if (empty($services)) return $services;
+		list($by,$direction) = explode(' ', trim($order), 2);
+		
+		$by = trim($by) ? trim($by) : 'ID';
+		$by = in_array($by, array('ID', 'name', 'capacity', 'duration', 'price', 'page'))
+			? $by
+			: 'ID'
+		;
+		
+		$direction = trim($direction) ? strtoupper(trim($direction)) : 'ASC';
+		$direction = in_array($direction, array('ASC', 'DESC'))
+			? $direction
+			: 'ASC'
+		;
+		
+		$comparator = 'ASC' === $direction
+			? create_function('$a, $b', "return strcmp(\$a->$by, \$b->$by);")
+			: create_function('$a, $b', "return strcmp(\$b->$by, \$a->$by);")
+		;
+		usort($services, $comparator);
+
+		return $services;
 	}
 }
 

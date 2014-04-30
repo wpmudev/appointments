@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.4.2
+Version: 1.4.3-BETA-3
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	var $version = "1.4.2";
+	var $version = "1.4.3-BETA-3";
 
 	/**
      * Constructor
@@ -1376,6 +1376,13 @@ class Appointments {
 		$_REQUEST["app_service_id"] = $service;
 		$_REQUEST["app_provider_id"] = $worker;
 		$this->get_lsw();
+
+		// Alright, so before we go further, let's check if we can
+		if (!is_user_logged_in() && (!empty($this->options['login_required']) && 'yes' == $this->options['login_required'])) {
+			die(json_encode(array(
+				'error' => __('You need to login to make an appointment.', 'appointments'),
+			)));
+		}
 
 		$price = $this->get_price( );
 
@@ -4074,6 +4081,12 @@ $gcal_description = __("Client Name: CLIENT\nService Name: SERVICE\nService Prov
 		if (!empty($this->options['facebook-app_id'])) $show_login_button[] = 'facebook';
 		if (!empty($this->options['twitter-app_id']) && !empty($this->options['twitter-app_secret'])) $show_login_button[] = 'twitter';
 
+		// Is registration allowed?
+		$do_register = is_multisite()
+			? in_array(get_site_option('registration'), array('all', 'user'))
+			: (int)get_option('users_can_register')
+		;
+
 		// Load the rest only if API use is selected
 		if (@$this->options['accept_api_logins']) {
 			wp_enqueue_script('appointments_api_js', $this->plugin_url . '/js/appointments-api.js', array('jquery'), $this->version );
@@ -4089,6 +4102,9 @@ $gcal_description = __("Client Name: CLIENT\nService Name: SERVICE\nService Prov
 				'error' => __('Login error. Please try again.', 'appointments'),
 				'_can_use_twitter' => (!empty($this->options['twitter-app_id']) && !empty($this->options['twitter-app_secret'])),
 				'show_login_button' => $show_login_button,
+				
+				'register' => ($do_register ? __('Register', 'appointments') : ''),
+				'registration_url' => ($do_register ? wp_registration_url() : ''),
 			)));
 
 			if (!empty($this->options['facebook-app_id'])) {
@@ -4309,6 +4325,7 @@ SITE_NAME
 						$this->message_headers( ),
 						apply_filters( 'app_confirmation_email_attachments', '' )
 					);
+
 			if ( $r->email && $mail_result ) {
 				// Log only if it is set so
 				if ( isset( $this->options["log_emails"] ) && 'yes' == $this->options["log_emails"] )
@@ -4825,11 +4842,16 @@ SITE_NAME
 		$screen = get_current_screen();
 		$title = sanitize_title(__('Appointments', 'appointments'));
 
+		$allow_profile = !empty($this->options['allow_worker_wh']) && 'yes' == $this->options['allow_worker_wh'];
+
 		if (empty($screen->base) || (
 			!preg_match('/(^|\b|_)appointments($|\b|_)/', $screen->base)
 			&&
 			!preg_match('/(^|\b|_)' . preg_quote($title, '/') . '($|\b|_)/', $screen->base) // Super-weird admin screen base being translatable!!!
+			&&
+			(!$allow_profile || !preg_match('/profile/', $screen->base) || !(defined('IS_PROFILE_PAGE') && IS_PROFILE_PAGE))
 		)) return false;
+
 		wp_enqueue_script( 'jquery-colorpicker', $this->plugin_url . '/js/colorpicker.js', array('jquery'), $this->version);
 		wp_enqueue_script( 'jquery-datepick', $this->plugin_url . '/js/jquery.datepick.min.js', array('jquery'), $this->version);
 		wp_enqueue_script( 'jquery-multiselect', $this->plugin_url . '/js/jquery.multiselect.min.js', array('jquery-ui-core','jquery-ui-widget', 'jquery-ui-position'), $this->version);
@@ -4867,11 +4889,16 @@ SITE_NAME
 		$screen = get_current_screen();
 		$title = sanitize_title(__('Appointments', 'appointments'));
 
+		$allow_profile = !empty($this->options['allow_worker_wh']) && 'yes' == $this->options['allow_worker_wh'];
+
 		if (empty($screen->base) || (
 			!preg_match('/(^|\b|_)appointments($|\b|_)/', $screen->base)
 			&&
 			!preg_match('/(^|\b|_)' . preg_quote($title, '/') . '($|\b|_)/', $screen->base) // Super-weird admin screen base being translatable!!!
+			&&
+			(!$allow_profile || !preg_match('/profile/', $screen->base) || !(defined('IS_PROFILE_PAGE') && IS_PROFILE_PAGE))
 		)) return false;
+
 		wp_enqueue_style( 'jquery-colorpicker-css', $this->plugin_url . '/css/colorpicker.css', false, $this->version);
 		wp_enqueue_style( "jquery-datepick", $this->plugin_url . "/css/jquery.datepick.css", false, $this->version );
 		wp_enqueue_style( "jquery-multiselect", $this->plugin_url . "/css/jquery.multiselect.css", false, $this->version );
@@ -5518,6 +5545,10 @@ SITE_NAME
 						else if ( 'paid' == $new_status || 'confirmed' == $new_status ) {
 							foreach ( $_POST["app"] as $app_id ) {
 								$this->gcal_api->update( $app_id );
+								// Also send out an email
+								if (!empty($this->options["send_confirmation"]) && 'yes' == $this->options["send_confirmation"]) {
+									$this->send_confirmation($app_id);
+								}
 							}
 						}
 					}
@@ -7935,16 +7966,24 @@ $(toggle_selected_export);
 				// Add datepicker only once and when focused
 				// Ref: http://stackoverflow.com/questions/3796207/using-one-with-live-jquery
 				$("table").on("focus", ".datepicker", function(e){
-					if( $(e.target).data('focused')!='yes' ) {
+					var $me = $(e.target);
+					$me.attr("data-timestamp", '');
+					if( $me.data('focused')!='yes' ) {
 						var php_date_format = "<?php echo $this->safe_date_format() ?>";
 						var js_date_format = php_date_format.replace("F","MM").replace("j","dd").replace("Y","yyyy").replace("y","yy");
-						$(".datepicker").datepick({dateFormat: js_date_format});
+						$(".datepicker").datepick({
+							dateFormat: js_date_format,
+							onClose: function (dates) {
+								if (!dates.length || !dates[0] || !dates[0].getFullYear) return;
+								var time = dates[0].getFullYear() + '-' + (parseInt(dates[0].getMonth(), 10)+1) + '-' + dates[0].getDate();
+								$me.attr("data-timestamp", time);
+							}
+						});
 					}
 					 $(e.target).data('focused','yes');
 				});
 				$("table").on("click", ".save", function(){
 					var save_parent = $(this).parents(".inline-edit-row");
-					save_parent.find(".waiting").show();
 					var user = save_parent.find('select[name="user"] option:selected').val();
 					var name = save_parent.find('input[name="cname"]').val();
 					var email = save_parent.find('input[name="email"]').val();
@@ -7958,6 +7997,12 @@ $(toggle_selected_export);
 					var time = save_parent.find('select[name="time"] option:selected').val();
 					var note = save_parent.find('textarea').val();
 					var status = save_parent.find('select[name="status"] option:selected').val();
+
+					var dt = save_parent.find('input[name="date"]').attr("data-timestamp");
+					if (dt.length) date = dt;
+					else return false;
+
+					save_parent.find(".waiting").show();
 					var resend = 0;
 					if (save_parent.find('input[name="resend"]').is(':checked') ) { resend=1;}
 					var app_id = save_parent.find('input[name="app_id"]').val();
