@@ -27,6 +27,18 @@ $(function () {
 
 		return false;
 	});
+	// --- Drop repeated rows ---
+	$(".app-working_hours-workhour_form tr.app-repeated").each(function () {
+		var $me = $(this).find("td:last");
+		$me.append('<a href="#remove-break" class="app-remove_break"></a>');
+	});
+	$(document).on("click", ".app-remove_break", function (e) {
+		e.preventDefault();
+		var $target = $(this).closest("tr.app-repeated");
+		if (!$target.length) return false;
+		$target.remove();
+		return false;
+	});
 
 	// --- Handle column meta toggles ---
 	$(document).on('click', '.app-settings-column_meta_info-toggle', function () {

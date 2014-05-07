@@ -89,10 +89,10 @@ class App_Shortcode_ServiceLocationsShortcode extends App_Shortcode {
 		$href = add_query_arg(
 			'app_service_location', '::asl::',
 			remove_query_arg(array(
-				'app_service_location',
+				//'app_service_location',
 				'app_provider_location',
 				'app_provider_id',
-				'app_service_id'
+				//'app_service_id'
 			))
 		);
 

@@ -953,7 +953,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 			$colspan++;
 		}
 		if ( $a_cancel ) {
-			$ret .= '<th class="my-appointments-cancel">'. __('Cancel', 'appointments' ) . '</th>';
+			$ret .= '<th class="my-appointments-cancel">'. _x('Cancel', 'Discard existing info', 'appointments') . '</th>';
 			$colspan++;
 		}
 		if ( $gcal && 'yes' == $appointments->options['gcal'] ) {
@@ -1347,6 +1347,11 @@ class App_Shortcode_ServiceProviders extends App_Shortcode {
 				'help' => __('In some cases, you may want to force to display providers who give only a certain service. In that case enter service ID here. Default: "0" (list is determined by services dropdown). Note: Multiple selections are not allowed.', 'appointments'),
 				'example' => '12',
 			),
+			'require_service' => array(
+				'value' => 0,
+				'help' => __('Do not show service provider selection at all until the service has been previously selected.', 'appointments'),
+				'example' => '1',
+			),
 			'_noscript' => array('value' => 0),
 
 		);
@@ -1359,11 +1364,14 @@ class App_Shortcode_ServiceProviders extends App_Shortcode {
 	public function process_shortcode ($args=array(), $content='') {
 		extract(wp_parse_args($args, $this->_defaults_to_args()));
 
+		if (!empty($require_service) && empty($service) && empty($_REQUEST['app_service_id'])) return $content;
+
 		global $wpdb, $appointments;
 		$appointments->get_lsw();
 
 		if ( !trim( $order_by ) )
 			$order_by = 'ID';
+
 
 		if ( !$service ) {
 			if ( 0 == $appointments->service )
@@ -1779,7 +1787,7 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 		$ret .= '<div class="appointments-confirmation-buttons">';
 		$ret .= '<input type="hidden" class="appointments-confirmation-final-value" />';
 		$ret .= '<input type="button" class="appointments-confirmation-button" value="'.$button_text.'" />';
-		$ret .= '<input type="button" class="appointments-confirmation-cancel-button" value="'.__('Cancel', 'appointments').'" />';
+		$ret .= '<input type="button" class="appointments-confirmation-cancel-button" value="'._x('Cancel', 'Drop current action', 'appointments').'" />';
 		$ret .= '</div>';
 		$ret .= '</fieldset></div>';
 		$ret  = apply_filters( 'app_confirmation_fields', $ret );

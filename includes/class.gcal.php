@@ -25,7 +25,7 @@ class AppointmentsGcal {
 	}
 	function __construct() {
 
-		global $wpdb;
+		global $wpdb, $appointments;
 
 		$this->local_time	= current_time('timestamp');
 		$this->options = get_option( 'appointments_options' );
@@ -34,15 +34,14 @@ class AppointmentsGcal {
 		$this->db_version 	= get_option( 'app_db_version' );
 		$this->app_table 	= $wpdb->prefix . "app_appointments";
 
-		$this->plugin_dir 	= WP_PLUGIN_DIR . '/appointments';
-		$this->plugin_url 	= plugins_url( 'appointments' );
+		$this->plugin_dir 	= $appointments->plugin_dir;
+		$this->plugin_url 	= $appointments->plugin_url;
 
 		require_once $this->plugin_dir . '/includes/gcal/Google_Client.php';
 		require_once $this->plugin_dir . '/includes/gcal/contrib/Google_CalendarService.php';
 
 		// Try to start a session. If cannot, log it.
 		if ( !session_id() && !@session_start() ) {
-			global $appointments;
 			$appointments->log( __('Session could not be started. This may indicate a theme issue.', 'appointments' ) );
 		}
 

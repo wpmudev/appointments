@@ -72,7 +72,7 @@ class App_Locations_LocationsWorker {
 					'save_location' => __('Save', 'appointments'),
 					'new_location' => __('Create a New Location', 'appointments'),
 					'edit_location' => __('Edit Location', 'appointments'),
-					'cancel_editing' => __('Cancel', 'appointments'),
+					'cancel_editing' => _x('Cancel', 'Drop current action', 'appointments'),
 				),
 			),
 		)));

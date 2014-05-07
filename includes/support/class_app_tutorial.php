@@ -214,7 +214,7 @@ class App_Tutorial {
 		    'position' => array( 'edge' => 'left', 'align' => 'center' ),
 		));
 
-		$tutorial->add_step(admin_url('admin.php?page=appointments&type=pending'), 'toplevel_page_appointments', '.cancel', __('Cancel', 'appointments'), array(
+		$tutorial->add_step(admin_url('admin.php?page=appointments&type=pending'), 'toplevel_page_appointments', '.cancel', _x('Cancel', 'Drop current action', 'appointments'), array(
 		    'content'  => '<p>' . esc_js(__('It is always possible to Cancel. Please note that these records are NOT saved until you click the Save button. Thanks for using Appointments+', 'appointments' )).'</p>',
 		    'position' => array( 'edge' => 'left', 'align' => 'center' ),
 		));

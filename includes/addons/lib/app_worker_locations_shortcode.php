@@ -89,9 +89,9 @@ class App_Shortcode_WorkerLocationsShortcode extends App_Shortcode {
 		$href = add_query_arg(
 			'app_provider_location', '::apl::',
 			remove_query_arg(array(
-				'app_service_location',
+				//'app_service_location',
 				'app_provider_location',
-				'app_provider_id',
+				//'app_provider_id',
 				'app_service_id'
 			))
 		);

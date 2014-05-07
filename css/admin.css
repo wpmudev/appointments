@@ -36,9 +36,6 @@ li.toplevel_page_appointments:hover div.wp-menu-image, li.toplevel_page_appointm
 background-position: top;
 }
 
-.widefat tr.app-repeated td {
-	border: none;
-}
 .app-add_break span {
 	display: none;
 }
@@ -46,6 +43,10 @@ background-position: top;
 	content: "+";
 	font-size: 24px;
 	font-weight: bold;
+}
+a.app-remove_break, a.app-remove_break:hover, a.app-remove_break:active { color: #C33; }
+.app-remove_break:after {
+	content: " x";
 }
 
 .app-addon-requires {

@@ -149,6 +149,7 @@ class App_Locations_MappedLocation extends App_Locations_Location {
 	private $_maps_codec;
 
 	public function __construct () {
+		if (!class_exists('AgmMapModel')) return false;
 		$this->_maps_model = new AgmMapModel;
 		if (!is_admin()) $this->_maps_codec = new AgmMarkerReplacer;
 	}

@@ -1,3 +1,10 @@
+v1.4.3
+- Fix for emails on bulk status changes.
+- Fix for filtering the worker names in the widget.
+- Fix for date/time parsing problem with certain locales.
+- Added reordering worker services by requested order.
+- Added the registration URL to list of supported actions.
+
 v1.4.2
 - Fix for quotes escaping issue with injected javascript.
 - Fix for permissions issue with bbpress/buddypress pages registration.

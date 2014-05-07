@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.4.3-BETA-3
+Version: 1.4.3
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	var $version = "1.4.3-BETA-3";
+	var $version = "1.4.3";
 
 	/**
      * Constructor
@@ -42,8 +42,8 @@ class Appointments {
 	}
 	function __construct() {
 
-		$this->plugin_dir = WP_PLUGIN_DIR . '/appointments';
-		$this->plugin_url = plugins_url( 'appointments' );
+		$this->plugin_dir = plugin_dir_path(__FILE__);
+		$this->plugin_url = plugins_url(basename(dirname(__FILE__)));
 
 		// Read all options at once
 		$this->options = get_option( 'appointments_options' );
@@ -4096,7 +4096,7 @@ $gcal_description = __("Client Name: CLIENT\nService Name: SERVICE\nService Prov
 				'google' => __('Login with Google+', 'appointments'),
 				'wordpress' => __('Login with WordPress', 'appointments'),
 				'submit' => __('Submit', 'appointments'),
-				'cancel' => __('Cancel', 'appointments'),
+				'cancel' => _x('Cancel', 'Drop current action', 'appointments'),
 				'please_wait' => __('Please, wait...', 'appointments'),
 				'logged_in' => __('You are now logged in', 'appointments'),
 				'error' => __('Login error. Please try again.', 'appointments'),
@@ -7228,7 +7228,7 @@ PLACEHOLDER
 			$whours = array();
 
 		$form = '';
-		$form .= '<table>';
+		$form .= '<table class="app-working_hours-workhour_form">';
 		if ( 'open' == $status )
 			$form .= '<tr><th>'.__('Day', 'appointments').'</th><th>'.__('Work?', 'appointments' ).'</th><th>'.__('Start', 'appointments').'</th><th>'.__('End', 'appointments').'</th></tr>';
 		else
@@ -7238,7 +7238,7 @@ PLACEHOLDER
 				$total_whour_segments = count($whours[$day]['active']) - 1;
 				// We have multiple breaks for today.
 				foreach ($whours[$day]['active'] as $idx => $active) {
-					$form .= '<tr ' . ($idx < $total_whour_segments ? 'class="app-repeated"' : '') . '><td>';
+					$form .= '<tr ' . ($idx > 0 ? 'class="app-repeated"' : '') . '><td>';
 					if (0 == $idx) $form .= $day_label;
 					$form .= '</td>';
 					$form .= '<td>';
@@ -8405,7 +8405,7 @@ $(toggle_selected_export);
 		$html .= '</fieldset>';
 		/* General fields required for save and cancel */
 		$html .= '<p class="submit inline-edit-save">';
-		$html .= '<a href="javascript:void(0)" title="'.__('Cancel', 'appointments').'" class="button-secondary cancel alignleft">'.__('Cancel','appointments').'</a>';
+		$html .= '<a href="javascript:void(0)" title="'._x('Cancel', 'Drop current action', 'appointments').'" class="button-secondary cancel alignleft">'._x('Cancel', 'Drop current action', 'appointments').'</a>';
 		if ( 'reserved' == $app->status ) {
 			$js = 'style="display:none"';
 			$title = __('GCal reserved appointments cannot be edited here. Edit them in your Google calendar.', 'appointments');
