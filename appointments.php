@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.4.3
+Version: 1.4.3.1
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	var $version = "1.4.3";
+	var $version = "1.4.3.1";
 
 	/**
      * Constructor
@@ -8142,6 +8142,7 @@ $(toggle_selected_export);
 		$app_id = $_POST["app_id"];
 		if ( $app_id ) {
 			$app = $wpdb->get_row( "SELECT * FROM " . $this->app_table . " WHERE ID=".$app_id." " );
+			$start_date_timestamp = date("Y-m-d", strtotime($app->start));
 			if ( $this->locale_error )
 				$start_date = date( $safe_date_format, strtotime( $app->start ) );
 			else
@@ -8193,6 +8194,7 @@ $(toggle_selected_export);
 			// Select time as next 1 hour
 			$start_time = date_i18n( $this->time_format, intval(($this->local_time + 60*$this->get_min_time())/3600)*3600 );
 
+			$start_date_timestamp = date("Y-m-d", $this->local_time + 60*$this->get_min_time());
 			// Set start date as now + 60 minutes.
 			if ( $this->locale_error ) {
 				$start_date = date( $safe_date_format, $this->local_time + 60*$this->get_min_time() );
@@ -8322,7 +8324,7 @@ $(toggle_selected_export);
 		$html .= '<label style="float:left;width:65%">';
 		$html .= '<span class="title">'.__('Start', 'appointments'). '</span>';
 		$html .= '<span class="input-text-wrap" >';
-		$html .= '<input type="text" name="date" class="datepicker" size="12" value="'.$start_date.'" />';
+		$html .= '<input type="text" name="date" class="datepicker" size="12" value="'.$start_date.'" data-timestamp="' . esc_attr($start_date_timestamp) . '"  />';
 		$html .= '</label>';
 		$html .= '<label style="float:left;width:30%; padding-left:5px;">';
 

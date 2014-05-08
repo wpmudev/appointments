@@ -1,3 +1,6 @@
+v1.4.3.1
+- Fix for date/time parsing problem with inital formatting.
+
 v1.4.3
 - Fix for emails on bulk status changes.
 - Fix for filtering the worker names in the widget.
