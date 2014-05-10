@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.4.3.1
+Version: 1.4.4-ALPHA-2
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	var $version = "1.4.3.1";
+	var $version = "1.4.4-ALPHA-2";
 
 	/**
      * Constructor
@@ -269,7 +269,7 @@ class Appointments {
 			else
 				$min = 0; // No services ?? - Not possible but let's be safe
 		}
-		return $min;
+		return apply_filters('app-services-first_service_id', $min);
 	}
 
 	/**
@@ -309,7 +309,7 @@ class Appointments {
 		$order_by = $this->sanitize_order_by( $order_by );
 		$services = wp_cache_get( 'all_services_' . $order_by );
 		if ( false === $services ) {
-			$services = $this->db->get_results("SELECT * FROM " . $this->services_table . " ORDER BY ". $order_by ." " );
+			$services = $this->db->get_results("SELECT * FROM " . $this->services_table . " ORDER BY ". esc_sql($order_by) ." " );
 			wp_cache_set( 'all_services_' . $order_by, $services );
 		}
 		return $services;
@@ -394,7 +394,7 @@ class Appointments {
 				$workers = $workers_;
 			}
 			else
-				$workers = $this->db->get_results("SELECT * FROM " . $this->workers_table . " ORDER BY ".$order_by ." " );
+				$workers = $this->db->get_results("SELECT * FROM " . $this->workers_table . " ORDER BY ". esc_sql($order_by) ." " );
 			wp_cache_set( 'all_workers_' . str_replace( ' ', '_', $order_by ), $workers );
 		}
 		return $workers;
@@ -483,7 +483,7 @@ class Appointments {
 		$work_breaks = wp_cache_get( 'work_breaks_'. $l . '_' . $w );
 
 		if ( false === $work_breaks ) {
-			$work_breaks = $this->db->get_results( "SELECT * FROM ". $this->wh_table. " WHERE worker=".$w." AND location=".$l." ");
+			$work_breaks = $this->db->get_results( $this->db->prepare("SELECT * FROM {$this->wh_table} WHERE worker=%d AND location=%d", $w, $l) );
 			wp_cache_set( 'work_breaks_'. $l . '_' . $w, $work_breaks );
 		}
 		if ( $work_breaks ) {
@@ -505,7 +505,7 @@ class Appointments {
 		$exception = null;
 		$exceptions = wp_cache_get( 'exceptions_'. $l . '_' . $w );
 		if ( false === $exceptions ) {
-			$exceptions = $this->db->get_results( "SELECT * FROM " . $this->exceptions_table . " WHERE worker=".$w." AND location=".$l." " );
+			$exceptions = $this->db->get_results( $this->db->prepare("SELECT * FROM {$this->exceptions_table} WHERE worker=%d AND location=%d", $w, $l) );
 			wp_cache_set( 'exceptions_'. $l . '_' . $w, $exceptions );
 		}
 		if ( $exceptions ) {
@@ -530,7 +530,7 @@ class Appointments {
 			return false;
 		$app = wp_cache_get( 'app_'. $app_id );
 		if ( false === $app ) {
-			$app = $this->db->get_row( "SELECT * FROM " . $this->app_table . " WHERE ID=".$app_id." " );
+			$app = $this->db->get_row( $this->db->prepare("SELECT * FROM {$this->app_table} WHERE ID=%d", $app_id) );
 			wp_cache_set( 'app_'. $app_id, $app );
 		}
 		return $app;
@@ -547,19 +547,25 @@ class Appointments {
 		if ( false === $apps ) {
 			$location = $l ? "location='" . $this->db->escape($location) . "' AND" : '';
 			if ( 0 == $week ) {
-				$apps = $this->db->get_results( "SELECT * FROM " . $this->app_table . "
-					WHERE ".$location." service=".$s." AND worker=".$w."
-					AND (status='pending' OR status='paid' OR status='confirmed' OR status='reserved') " );
+				$apps = $this->db->get_results($this->db->prepare(
+					"SELECT * FROM {$this->app_table} " .
+						"WHERE {$location} service=%d AND worker=%d " .
+					"AND (status='pending' OR status='paid' OR status='confirmed' OR status='reserved')",
+					$s, $w)
+				);
 			} else {
 // @FIX: Problem: an appointment might already be ticked as "completed",
 // because of it's start time being in the past. Its end time, however, can still easily be
 // in the future. For long-running appointments (e.g. 2-3h) this could break the schedule slots
 // and show a registered- and paid for- slot as "available", when it's actually not.
 // E.g. http://premium.wpmudev.org/forums/topic/appointments-booking-conflictoverlapping-bookings
-				$apps = $this->db->get_results( "SELECT * FROM " . $this->app_table . 
-					" WHERE ".$location." service=".$s." AND worker=" . $w .
+				$apps = $this->db->get_results($this->db->prepare(
+					"SELECT * FROM {$this->app_table} " . 
+					"WHERE {$location} service=%d AND worker=%d " .
 					//" AND (status='pending' OR status='paid' OR status='confirmed' OR status='reserved') AND WEEKOFYEAR(start)=".$week. " " ); // THIS IS A PROBLEM! It doesn't take into account the completed events ALTHOUGH they may very well still be there
-					" AND (status='pending' OR status='paid' OR status='confirmed' OR status='reserved' or status='completed') AND WEEKOFYEAR(start)=".$week. " " );
+					"AND (status='pending' OR status='paid' OR status='confirmed' OR status='reserved' or status='completed') AND WEEKOFYEAR(start)=%d",
+					$s, $w, $week)
+				);
 // *ONLY* applied to weekly-scoped data gathering, because otherwise this would possibly
 // return all kinds of irrelevant data (appointments passed LONG time ago).
 // End @FIX
@@ -766,7 +772,7 @@ class Appointments {
 	function get_client_name( $app_id ) {
 		$name = '';
 		// This is only used on admin side, so an optimization is not required.
-		$result = $this->db->get_row( "SELECT * FROM " . $this->app_table . " WHERE ID=".$app_id." " );
+		$result = $this->db->get_row( $this->db->prepare("SELECT * FROM {$this->app_table} WHERE ID=%d", $app_id) );
 		if ( $result !== null ) {
 			// Client can be a user
 			if ( $result->user ) {
@@ -942,7 +948,7 @@ class Appointments {
 		// The other functions are called after this (content with priority 100 and the other with footer hook)
 		$this->uri = $this->get_uri();
 
-		$result = $this->db->get_row( "SELECT * FROM " . $this->cache_table . " WHERE uri= '". $this->uri . "' " );
+		$result = $this->db->get_row( $this->db->prepare("SELECT * FROM {$this->cache_table} WHERE uri=%s", $this->uri) );
 		if ( $result != null ) {
 			// Clear uri so other functions do not deal with update/insert
 			$this->uri = false;
@@ -1036,7 +1042,7 @@ class Appointments {
 	function flush_cache( ) {
 		wp_cache_flush();
 		if ( 'yes' == @$this->options["use_cache"] )
-			$result = $this->db->query( "TRUNCATE TABLE " . $this->cache_table . " " );
+			$result = $this->db->query( "TRUNCATE TABLE {$this->cache_table} " );
 	}
 
 /****************
@@ -3327,8 +3333,10 @@ $gcal_description = __("Client Name: CLIENT\nService Name: SERVICE\nService Prov
 			$result = $result2 = false;
 			$location = 0;
 			foreach ( array( 'closed', 'open' ) as $stat ) {
-				$count = $wpdb->get_var("SELECT COUNT(*) FROM ". $this->wh_table .
-						" WHERE location=".$location." AND worker=".$profileuser_id." AND status='".$stat."' ");
+				$count = $wpdb->get_var($wpdb->prepare(
+					"SELECT COUNT(*) FROM {$this->wh_table} WHERE location=%d AND worker=%d AND status=%s",
+					$location, $profileuser_id, $stat
+				));
 
 				if ( $count > 0 ) {
 					$result = $wpdb->update( $this->wh_table,
@@ -3345,8 +3353,10 @@ $gcal_description = __("Client Name: CLIENT\nService Name: SERVICE\nService Prov
 						);
 				}
 				// Save exceptions
-				$count2 = $wpdb->get_var( "SELECT COUNT(*) FROM ". $this->exceptions_table .
-						" WHERE location=".$location." AND worker=".$profileuser_id." AND status='".$stat."' ");
+				$count2 = $wpdb->get_var($wpdb->prepare(
+					"SELECT COUNT(*) FROM {$this->exceptions_table} WHERE location=%d AND worker=%d AND status=%s",
+					$location, $profileuser_id, $stat
+				));
 
 				if ( $count2 > 0 ) {
 					$result2 = $wpdb->update( $this->exceptions_table,
@@ -4299,7 +4309,7 @@ SITE_NAME
 		if ( !isset( $this->options["send_confirmation"] ) || 'yes' != $this->options["send_confirmation"] )
 			return;
 		global $wpdb;
-		$r = $wpdb->get_row( "SELECT * FROM " . $this->app_table . " WHERE ID=".$app_id." " );
+		$r = $wpdb->get_row( $wpdb->prepare("SELECT * FROM {$this->app_table} WHERE ID=%d", $app_id) );
 		if ( $r != null ) {
 
 			$_REQUEST["app_location_id"] = 0;
@@ -4369,7 +4379,7 @@ SITE_NAME
 		if ( !$cancel && !isset( $this->options["send_notification"] ) || 'yes' != $this->options["send_notification"] )
 			return;
 		global $wpdb;
-		$r = $wpdb->get_row( "SELECT * FROM " . $this->app_table . " WHERE ID=".$app_id." " );
+		$r = $wpdb->get_row( $wpdb->prepare("SELECT * FROM {$this->app_table} WHERE ID=%d", $app_id) );
 		if ( $r != null ) {
 
 			$admin_email = apply_filters( 'app_notification_email', $this->get_admin_email( ), $r );
@@ -4457,10 +4467,11 @@ SITE_NAME
 
 		$messages = array();
 		foreach ( $hours as $hour ) {
+			$rlike = esc_sql(like_escape(trim($hour)));
 			$results = $wpdb->get_results( "SELECT * FROM " . $this->app_table . "
 				WHERE (status='paid' OR status='confirmed')
-				AND (sent NOT LIKE '%:".trim($hour).":%' OR sent IS NULL)
-				AND DATE_ADD('".date( 'Y-m-d H:i:s', $this->local_time )."', INTERVAL ".$hour." HOUR) > start " );
+				AND (sent NOT LIKE '%:{$rlike}:%' OR sent IS NULL)
+				AND DATE_ADD('".date( 'Y-m-d H:i:s', $this->local_time )."', INTERVAL ".(int)$hour." HOUR) > start " );
 
 			if ( $results ) {
 				foreach ( $results as $r ) {
@@ -4531,11 +4542,12 @@ SITE_NAME
 
 		$messages = array();
 		foreach ( $hours as $hour ) {
+			$rlike = esc_sql(like_escape(trim($hour)));
 			$results = $wpdb->get_results( "SELECT * FROM " . $this->app_table . "
 				WHERE (status='paid' OR status='confirmed')
 				AND worker <> 0
-				AND (sent_worker NOT LIKE '%:".trim($hour).":%' OR sent_worker IS NULL)
-				AND DATE_ADD('".date( 'Y-m-d H:i:s', $this->local_time )."', INTERVAL ".$hour." HOUR) > start " );
+				AND (sent_worker NOT LIKE '%:{$rlike}:%' OR sent_worker IS NULL)
+				AND DATE_ADD('".date( 'Y-m-d H:i:s', $this->local_time )."', INTERVAL ".(int)$hour." HOUR) > start " );
 
 			$provider_add_text  = __('You are receiving this reminder message for your appointment as a provider. The below is a copy of what may have been sent to your client:', 'appointments');
 			$provider_add_text .= "\n\n\n";
@@ -4643,7 +4655,7 @@ SITE_NAME
 
 		global $wpdb;
 
-		$expireds = $wpdb->get_results( "SELECT * FROM " . $this->app_table . " WHERE start<'" . date ("Y-m-d H:i:s", $this->local_time ). "' " );
+		$expireds = $wpdb->get_results( $wpdb->prepare("SELECT * FROM {$this->app_table} WHERE start<%s", date("Y-m-d H:i:s", $this->local_time)) );
 		if ( $expireds ) {
 			foreach ( $expireds as $expired ) {
 				if ( 'pending' == $expired->status || 'reserved' == $expired->status )
@@ -4664,7 +4676,7 @@ SITE_NAME
 		// Clear appointments that are staying in pending status long enough
 		if ( isset( $this->options["clear_time"] ) && $this->options["clear_time"] > 0 ) {
 			$clear_secs = $this->options["clear_time"] * 60;
-			$expireds = $wpdb->get_results( "SELECT * FROM " . $this->app_table . " WHERE status='pending' AND created<'" . date ("Y-m-d H:i:s", $this->local_time - $clear_secs ). "' " );
+			$expireds = $wpdb->get_results( $wpdb->prepare("SELECT * FROM {$this->app_table} WHERE status='pending' AND created<%s", date("Y-m-d H:i:s", $this->local_time - $clear_secs)) );
 			if ( $expireds ) {
 				foreach ( $expireds as $expired ) {
 					$update = $wpdb->update( $this->app_table,
@@ -5283,8 +5295,10 @@ SITE_NAME
 		if ( isset($_POST["action_app"]) && 'save_working_hours' == $_POST["action_app"] ) {
 			$location = (int)$_POST['location'];
 			foreach ( array( 'closed', 'open' ) as $stat ) {
-				$query = "SELECT COUNT(*) FROM ". $this->wh_table .
-						" WHERE location=".$location." AND worker=".$this->worker." AND status='".$stat."' ";
+				$query = $this->db->prepare(
+					"SELECT COUNT(*) FROM {$this->wh_table} WHERE location=%d AND worker=%d AND status=%s",
+					$location, $this->worker, $stat
+				);
 
 				$count = $wpdb->get_var($query);
 
@@ -5315,8 +5329,10 @@ SITE_NAME
 		if ( isset($_POST["action_app"]) && 'save_exceptions' == $_POST["action_app"] ) {
 			$location = (int)$_POST['location'];
 			foreach ( array( 'closed', 'open' ) as $stat ) {
-				$count = $wpdb->get_var( "SELECT COUNT(*) FROM ". $this->exceptions_table .
-						" WHERE location=".$location." AND worker=".$this->worker." AND status='".$stat."' ");
+				$count = $wpdb->get_var($wpdb->prepare(
+					"SELECT COUNT(*) FROM {$this->exceptions_table} WHERE location=%d AND worker=%d AND status=%s",
+					$location, $this->worker, $stat
+				));
 
 				if ( $count > 0 ) {
 					$r = $wpdb->update( $this->exceptions_table,
@@ -5356,7 +5372,7 @@ SITE_NAME
 			foreach ( $_POST["services"] as $ID=>$service ) {
 				if ( '' != trim( $service["name"] ) ) {
 					// Update or insert?
-					$count = $wpdb->get_var( "SELECT COUNT(ID) FROM " . $this->services_table . " WHERE ID=".$ID." " );
+					$count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(ID) FROM {$this->services_table} WHERE ID=%d", $ID));
 					if ( $count ) {
 						$r = $wpdb->update( $this->services_table,
 									array(
@@ -5391,9 +5407,14 @@ SITE_NAME
 				}
 				else {
 					// Entering an empty name means deleting of a service
-					$r = $wpdb->query( "DELETE FROM ". $this->services_table . " WHERE ID=".$ID." LIMIT 1 " );
+					$r = $wpdb->query(
+						$wpdb->prepare("DELETE FROM {$this->services_table} WHERE ID=%d LIMIT 1", $ID)
+					);
 					// Remove deleted service also from workers table
-					$r1 = $wpdb->query( "UPDATE ". $this->workers_table . " SET services_provided = REPLACE(services_provided,':".$ID.":','') ");
+					$r1 = $wpdb->query(
+						$wpdb->prepare("UPDATE {$this->workers_table} SET services_provided = REPLACE(services_provided,':%d:','') ", $ID)
+						//"UPDATE ". $this->workers_table . " SET services_provided = REPLACE(services_provided,':".$ID.":','') "
+					);
 					if ( $r || $r1 )
 						$result = true;
 				}
@@ -5408,7 +5429,7 @@ SITE_NAME
 				if ( $ID && !empty ( $worker["services_provided"] ) ) {
 					$inserted = false;
 					// Does the worker have already a record?
-					$count = $wpdb->get_var( "SELECT COUNT(*) FROM " . $this->workers_table . " WHERE ID=".$ID." " );
+					$count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$this->workers_table} WHERE ID=%d", $ID));
 					if ( $count ) {
 						if ( !$this->db_version )
 							$r = $wpdb->update( $this->workers_table,
@@ -5435,31 +5456,34 @@ SITE_NAME
 							$updated = true;
 					}
 					else {
-						if ( !$this->db_version )
-							$r = $wpdb->insert( $this->workers_table,
-										array(
-											'ID'				=> $worker["user"],
-											'price'				=> preg_replace("/[^0-9,.]/", "", $worker["price"]),
-											'services_provided'	=> $this->_implode( $worker["services_provided"] ),
-											'page'				=> $worker["page"]
-											),
-										array( '%d', '%s', '%s','%d' )
-										);
-						else
-							$r = $wpdb->insert( $this->workers_table,
-										array(
-											'ID'				=> $worker["user"],
-											'price'				=> preg_replace("/[^0-9,.]/", "", $worker["price"]),
-											'services_provided'	=> $this->_implode( $worker["services_provided"] ),
-											'page'				=> $worker["page"],
-											'dummy'				=> isset ( $worker["dummy"] )
-											),
-										array( '%d', '%s', '%s', '%d', '%s' )
-										);
+						if ( !$this->db_version ) {
+							$r = $wpdb->insert(
+								$this->workers_table,
+								array(
+									'ID'				=> $worker["user"],
+									'price'				=> preg_replace("/[^0-9,.]/", "", $worker["price"]),
+									'services_provided'	=> $this->_implode( $worker["services_provided"] ),
+									'page'				=> $worker["page"]
+								),
+								array( '%d', '%s', '%s','%d' )
+							);
+						} else {
+							$r = $wpdb->insert(
+								$this->workers_table,
+								array(
+									'ID'				=> $worker["user"],
+									'price'				=> preg_replace("/[^0-9,.]/", "", $worker["price"]),
+									'services_provided'	=> $this->_implode( $worker["services_provided"] ),
+									'page'				=> $worker["page"],
+									'dummy'				=> isset ( $worker["dummy"] )
+								),
+								array( '%d', '%s', '%s', '%d', '%s' )
+							);
+						}
 						if ( $r ) {
 							// Insert the default working hours to the worker's working hours
 							foreach ( array('open', 'closed') as $stat ) {
-								$result_wh = $wpdb->get_row( "SELECT * FROM " . $this->wh_table . " WHERE location=0 AND service=0 AND status='".$stat."' ", ARRAY_A );
+								$result_wh = $wpdb->get_row( $wpdb->prepare("SELECT * FROM {$this->wh_table} WHERE location=0 AND service=0 AND status=%s", $stat), ARRAY_A );
 								if ( $result_wh != null ) {
 									$result_wh["ID"] = 'NULL';
 									$result_wh["worker"] = $ID;
@@ -5470,13 +5494,14 @@ SITE_NAME
 							}
 							// Insert the default holidays to the worker's holidays
 							foreach ( array('open', 'closed') as $stat ) {
-								$result_wh = $wpdb->get_row( "SELECT * FROM " . $this->exceptions_table . " WHERE location=0 AND service=0 AND status='".$stat."' ", ARRAY_A );
+								$result_wh = $wpdb->get_row( $wpdb->prepare("SELECT * FROM {$this->exceptions_table} WHERE location=0 AND service=0 AND status=%s", $stat), ARRAY_A );
 								if ( $result_wh != null ) {
 									$result_wh["ID"] = 'NULL';
 									$result_wh["worker"] = $ID;
-									$wpdb->insert( $this->exceptions_table,
-													$result_wh
-												);
+									$wpdb->insert(
+										$this->exceptions_table,
+										$result_wh
+									);
 								}
 							}
 							$inserted = true;
@@ -5486,9 +5511,12 @@ SITE_NAME
 				}
 				// Entering an empty service name means deleting of a worker
 				else if ( $ID ) {
-					$r = $wpdb->query( "DELETE FROM " . $this->workers_table . " WHERE ID=".$ID." LIMIT 1 " );
-					$r1 = $wpdb->query( "DELETE FROM " . $this->wh_table . " WHERE worker=".$ID." " );
-					$r2 = $wpdb->query( "DELETE FROM " . $this->exceptions_table . " WHERE worker=".$ID." " );
+					//$r = $wpdb->query( "DELETE FROM " . $this->workers_table . " WHERE ID=".$ID." LIMIT 1 " );
+					//$r1 = $wpdb->query( "DELETE FROM " . $this->wh_table . " WHERE worker=".$ID." " );
+					//$r2 = $wpdb->query( "DELETE FROM " . $this->exceptions_table . " WHERE worker=".$ID." " );
+					$r = $wpdb->query( $wpdb->prepare("DELETE FROM {$this->workers_table} WHERE ID=%d LIMIT 1", $ID) );
+					$r1 = $wpdb->query( $wpdb->prepare("DELETE FROM {$this->wh_table} WHERE worker=%d", $ID) );
+					$r2 = $wpdb->query( $wpdb->prepare("DELETE FROM {$this->exceptions_table} WHERE worker=%d", $ID) );
 					if ( $r || $r1 || $r2 )
 						$result = true;
 				}
@@ -5502,7 +5530,7 @@ SITE_NAME
 			&& isset( $_POST["app"] ) && is_array( $_POST["app"] ) ) {
 			$q = '';
 			foreach ( $_POST["app"] as $app_id ) {
-				$q .= " ID=". $app_id. " OR";
+				$q .= " ID=". (int)$app_id. " OR";
 			}
 			$q = rtrim( $q, " OR" );
 			$result = $wpdb->query( "DELETE FROM " . $this->app_table . " WHERE " . $q . " " );
@@ -5519,12 +5547,12 @@ SITE_NAME
 		if ( isset( $_POST["app_status_change"] ) && $_POST["app_new_status"] && isset( $_POST["app"] ) && is_array( $_POST["app"] ) ) {
 			$q = '';
 			foreach ( $_POST["app"] as $app_id ) {
-				$q .= " ID=". $app_id. " OR";
+				$q .= " ID=". (int)$app_id. " OR";
 			}
 			$q = rtrim( $q, " OR" );
 
 			// Make a new status re-check here - It should be in status map
-			$new_status = $_POST["app_new_status"];
+			$new_status = esc_sql($_POST["app_new_status"]);
 			if ( array_key_exists( $new_status, $this->get_statuses() ) ) {
 				$result = $wpdb->query( "UPDATE " . $this->app_table . " SET status='".$new_status."' WHERE " . $q . " " );
 				if ( $result ) {
@@ -5776,15 +5804,19 @@ PLACEHOLDER
 			return;
 
 		global $wpdb;
-		$r = $wpdb->query( "DELETE FROM " . $this->workers_table . " WHERE ID=".$ID." LIMIT 1 " );
-		$r1 = $wpdb->query( "DELETE FROM " . $this->wh_table . " WHERE worker=".$ID." " );
-		$r2 = $wpdb->query( "DELETE FROM " . $this->exceptions_table . " WHERE worker=".$ID." " );
+		//$r = $wpdb->query( "DELETE FROM " . $this->workers_table . " WHERE ID=".$ID." LIMIT 1 " );
+		//$r1 = $wpdb->query( "DELETE FROM " . $this->wh_table . " WHERE worker=".$ID." " );
+		//$r2 = $wpdb->query( "DELETE FROM " . $this->exceptions_table . " WHERE worker=".$ID." " );
+		$r = $wpdb->query( $wpdb->prepare("DELETE FROM {$this->workers_table} WHERE ID=%d LIMIT 1", $ID) );
+		$r1 = $wpdb->query( $wpdb->prepare("DELETE FROM {$this->wh_table} WHERE worker=%d", $ID) );
+		$r2 = $wpdb->query( $wpdb->prepare("DELETE FROM {$this->exceptions_table} WHERE worker=%d", $ID) );
 
 		// Also modify app table
-		$r3 = $wpdb->update( $this->app_table,
-						array( 'worker'	=>	0 ),
-						array( 'worker'	=> $ID )
-					);
+		$r3 = $wpdb->update( 
+			$this->app_table,
+			array( 'worker'	=>	0 ),
+			array( 'worker'	=> $ID )
+		);
 
 		if ( $r || $r1 || $r2 || $r3 )
 			$this->flush_cache();
@@ -5811,15 +5843,19 @@ PLACEHOLDER
 		if ( !$prefix )
 			return;
 
-		$r = $wpdb->query( "DELETE FROM " . $prefix . "app_workers WHERE ID=".$ID." LIMIT 1 " );
-		$r1 = $wpdb->query( "DELETE FROM " . $prefix . "app_working_hours WHERE worker=".$ID." " );
-		$r2 = $wpdb->query( "DELETE FROM " . $prefix . "app_exceptions WHERE worker=".$ID." " );
+		//$r = $wpdb->query( "DELETE FROM " . $prefix . "app_workers WHERE ID=".$ID." LIMIT 1 " );
+		//$r1 = $wpdb->query( "DELETE FROM " . $prefix . "app_working_hours WHERE worker=".$ID." " );
+		//$r2 = $wpdb->query( "DELETE FROM " . $prefix . "app_exceptions WHERE worker=".$ID." " );
+		$r = $wpdb->query( $wpdb->prepare("DELETE FROM {$prefix}app_workers WHERE ID=%d LIMIT 1", $ID) );
+		$r1 = $wpdb->query( $wpdb->prepare("DELETE FROM {$prefix}app_working_hours WHERE worker=%d", $ID) );
+		$r2 = $wpdb->query( $wpdb->prepare("DELETE FROM {$prefix}app_exceptions WHERE worker=%d", $ID) );
 
 		// Also modify app table
-		$r3 = $wpdb->update( $prefix . "app_appointments",
-						array( 'worker'	=>	0 ),
-						array( 'worker'	=> $ID )
-					);
+		$r3 = $wpdb->update(
+			$prefix . "app_appointments",
+			array( 'worker'	=>	0 ),
+			array( 'worker'	=> $ID )
+		);
 
 		if ( $r || $r1 || $r2 || $r3 )
 			$this->flush_cache();
@@ -6785,7 +6821,7 @@ PLACEHOLDER
 			<?php
 			$result = array();
 			foreach ( array( 'open', 'closed' ) as $stat ) {
-				$result[$stat] = $wpdb->get_var( "SELECT days FROM " . $this->exceptions_table . " WHERE status='".$stat."' AND worker=".$this->worker." " );
+				$result[$stat] = $wpdb->get_var($wpdb->prepare("SELECT days FROM {$this->exceptions_table} WHERE status=%s AND worker=%d", $stat, $this->worker));
 			}
 			$workers = $this->get_workers();
 			?>
@@ -7349,42 +7385,42 @@ PLACEHOLDER
 	function get_admin_apps($type, $startat, $num) {
 
 		if( isset( $_GET['s'] ) && trim( $_GET['s'] ) != '' ) {
-			$s = $_GET['s'];
+			$s = esc_sql(like_escape($_GET['s']));
 			$add = " AND ( name LIKE '%{$s}%' OR email LIKE '%{$s}%' OR ID IN ( SELECT ID FROM {$this->db->users} WHERE user_login LIKE '%{$s}%' ) ) ";
 		}
 		else
 			$add = "";
 
 		if(isset($_GET['app_service_id']) && $_GET['app_service_id'] )
-			$add .= " AND service={$_GET['app_service_id']} ";
+			$add .= $this->db->prepare(" AND service=%d", $_GET['app_service_id']);
 
 		if(isset($_GET['app_provider_id']) && $_GET['app_provider_id'] )
-			$add .= " AND worker={$_GET['app_provider_id']} ";
+			$add .= $this->db->prepare(" AND worker=%d", $_GET['app_provider_id']);
 
 		if ( isset( $_GET['app_order_by']) && $_GET['app_order_by'] )
-			$order_by = str_replace( '_', ' ', $_GET['app_order_by'] );
+			$order_by = esc_sql(str_replace( '_', ' ', $_GET['app_order_by'] ));
 		else
 			$order_by = "ID DESC";
 
 		switch($type) {
 
 			case 'active':
-						$sql = "SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('confirmed', 'paid') {$add} ORDER BY {$order_by} LIMIT {$startat}, {$num}";
+						$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('confirmed', 'paid') {$add} ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
 						break;
 			case 'pending':
-						$sql = "SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('pending') {$add} ORDER BY {$order_by} LIMIT {$startat}, {$num}";
+						$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('pending') {$add} ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
 						break;
 			case 'completed':
-						$sql = "SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('completed') {$add} ORDER BY {$order_by} LIMIT {$startat}, {$num}";
+						$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('completed') {$add} ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
 						break;
 			case 'removed':
-						$sql = "SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('removed') {$add} ORDER BY {$order_by} LIMIT {$startat}, {$num}";
+						$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('removed') {$add} ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
 						break;
 			case 'reserved':
-						$sql = "SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('reserved') {$add} ORDER BY {$order_by} LIMIT {$startat}, {$num}";
+						$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('reserved') {$add} ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
 						break;
 			default:
-						$sql = "SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('confirmed', 'paid') {$add} ORDER BY {$order_by} LIMIT {$startat}, {$num}";
+						$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('confirmed', 'paid') {$add} ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
 						break;
 		}
 
@@ -8141,7 +8177,7 @@ $(toggle_selected_export);
 		global $wpdb;
 		$app_id = $_POST["app_id"];
 		if ( $app_id ) {
-			$app = $wpdb->get_row( "SELECT * FROM " . $this->app_table . " WHERE ID=".$app_id." " );
+			$app = $wpdb->get_row( $wpdb->prepare("SELECT * FROM {$this->app_table} WHERE ID=%d", $app_id) );
 			$start_date_timestamp = date("Y-m-d", strtotime($app->start));
 			if ( $this->locale_error )
 				$start_date = date( $safe_date_format, strtotime( $app->start ) );
@@ -8433,7 +8469,7 @@ $(toggle_selected_export);
 	function inline_edit_save() {
 		$app_id = $_POST["app_id"];
 		global $wpdb, $current_user;
-		$app = $wpdb->get_row( "SELECT * FROM " . $this->app_table . " WHERE ID=".$app_id." " );
+		$app = $wpdb->get_row( $wpdb->prepare("SELECT * FROM {$this->app_table} WHERE ID=%d", $app_id) );
 
 		$data = array();
 		if ( $app != null )
@@ -8708,7 +8744,7 @@ $(toggle_selected_export);
 								</td>
 								<td class="column-service">
 								<?php
-								$service_id = $this->db->get_var( "SELECT service FROM " . $this->app_table . " WHERE ID=". $transaction->transaction_app_ID . " " );
+								$service_id = $this->db->get_var($this->db->prepare("SELECT service FROM {$this->app_table} WHERE ID=%d",$transaction->transaction_app_ID));
 								echo $this->get_service_name( $service_id );
 								?>
 								</td>
