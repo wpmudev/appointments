@@ -4879,7 +4879,7 @@ SITE_NAME
 			//if ( !$this->locale_error ) wp_enqueue_script( 'jquery-datepick-local', $this->plugin_url . $file, array('jquery'), $this->version);
 			wp_enqueue_script( 'jquery-datepick-local', $this->plugin_url . $file, array('jquery'), $this->version);
 		}
-		if ( !@$this->options["disable_js_check_admin"] )
+		if ( empty($this->options["disable_js_check_admin"]) )
 			wp_enqueue_script( 'app-js-check', $this->plugin_url . '/js/js-check.js', array('jquery'), $this->version);
 
 		wp_enqueue_script("appointments-admin", $this->plugin_url . "/js/admin.js", array('jquery'), $this->version);
@@ -5180,6 +5180,8 @@ SITE_NAME
 		// Add datepicker to appointments page
 		add_action( "admin_print_scripts-$page", array( &$this, 'admin_scripts' ) );
 
+		do_action('app-admin-admin_pages_added', $page);
+
 		if ( isset($_POST["action_app"]) && !wp_verify_nonce($_POST['app_nonce'],'update_app_settings') ) {
 			add_action( 'admin_notices', array( &$this, 'warning' ) );
 			return;
@@ -5389,6 +5391,7 @@ SITE_NAME
 							$result = true;
 					}
 					else {
+						//if ((int)$this->db->get_var("SELECT COUNT(ID) FROM {$this->services_table}") >= 2) { /* ... */ }
 						$r = $wpdb->insert( $this->services_table,
 									array(
 										'ID'		=> $ID,
@@ -8792,6 +8795,9 @@ $(toggle_selected_export);
 		<?php
 	}
 
+	function reached_ceiling () {
+		return false;
+	}
 
 }
 }

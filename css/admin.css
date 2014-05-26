@@ -30,7 +30,7 @@ a.pickcolor {
 	padding: 4px 14px;
 }
 li.toplevel_page_appointments div.wp-menu-image{
-background: url(../images/menu_icon.png) no-repeat bottom;
+background: url(../images/menu_icon.png) no-repeat top;
 }
 li.toplevel_page_appointments:hover div.wp-menu-image, li.toplevel_page_appointments.wp-has-current-submenu div.wp-menu-image {
 background-position: top;
