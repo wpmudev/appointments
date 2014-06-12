@@ -50,7 +50,11 @@ class App_Shortcode_WorkerMonthlyCalendar extends App_Shortcode {
 			? strtotime($args['start_at'])
 			: false
 		;
-		$args['start_at'] = $args['start_at'] ? $args['start_at'] : current_time('timestamp');
+		if (!$args['start_at'] && !empty($_GET['wcalendar']) && is_numeric($_GET['wcalendar'])) {
+			$args['start_at'] = (int)$_GET['wcalendar'];
+		} else {
+			$args['start_at'] = current_time('timestamp');
+		}
 
 		$appointments = $this->_get_worker_appointments($args['worker_id'], $status, $args['start_at']);
 		if (empty($appointments)) return $content;
@@ -308,8 +312,8 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 			$_GET["wcalendar"] = $time;
 		}
 		else {
-			if ( isset( $_GET["wcalendar"] ) )
-				$time = $_GET["wcalendar"] + ($add * 7 * 86400) ;
+			if ( isset( $_GET["wcalendar"] ) && (int)$_GET['wcalendar'] )
+				$time = (int)$_GET["wcalendar"] + ($add * 7 * 86400) ;
 			else
 				$time = $appointments->local_time + ($add * 7 * 86400);
 		}
@@ -481,8 +485,8 @@ class App_Shortcode_MonthlySchedule extends App_Shortcode {
 		}
 		else {
 			if (!empty($_GET['wcalendar_human'])) $_GET['wcalendar'] = strtotime($_GET['wcalendar_human']);
-			if ( isset( $_GET["wcalendar"] ) )
-				$time = $appointments->first_of_month( $_GET["wcalendar"], $add  );
+			if ( isset( $_GET["wcalendar"] ) && (int)$_GET['wcalendar'] )
+				$time = $appointments->first_of_month( (int)$_GET["wcalendar"], $add  );
 			else
 				$time = $appointments->first_of_month( $appointments->local_time, $add  );
 		}
@@ -589,8 +593,8 @@ class App_Shortcode_Pagination extends App_Shortcode {
 			$_GET["wcalendar"] = $time;
 		}
 		else {
-			if ( isset( $_GET["wcalendar"] ) )
-				$time = $_GET["wcalendar"] ;
+			if ( isset( $_GET["wcalendar"] ) && (int)$_GET['wcalendar'] )
+				$time = (int)$_GET["wcalendar"] ;
 			else
 				$time = $appointments->local_time;
 		}
@@ -1232,8 +1236,8 @@ class App_Shortcode_Services extends App_Shortcode {
 		$s .= $e;
 		$s .= '</div>';
 		$s .= '</div>';
-		if ( isset( $_GET['wcalendar'] ) )
-			$wcalendar = $_GET['wcalendar'];
+		if ( isset( $_GET['wcalendar'] ) && (int)$_GET['wcalendar'] )
+			$wcalendar = (int)$_GET['wcalendar'];
 		else
 			$wcalendar = false;
 		// First remove these parameters and add them again to make wcalendar appear before js variable
@@ -1435,8 +1439,8 @@ class App_Shortcode_ServiceProviders extends App_Shortcode {
 		$s .= '</div>';
 
 		$s .= '</div>';
-		if ( isset( $_GET['wcalendar'] ) )
-			$wcalendar = $_GET['wcalendar'];
+		if ( isset( $_GET['wcalendar'] ) && (int)$_GET['wcalendar'] )
+			$wcalendar = (int)$_GET['wcalendar'];
 		else
 			$wcalendar = false;
 		// First remove these parameters and add them again to make wcalendar appear before js variable
@@ -1604,7 +1608,9 @@ class App_Shortcode_Paypal extends App_Shortcode {
 		// Add a class if user not logged in. May be required for addons.
 		if ( !is_user_logged_in() )
 			$form .= ' app_not_loggedin';
-		$form .= '" type="submit" name="submit_btn" value="'. str_replace( array("CURRENCY"), array($appointments->options["currency"]), $button_text).'" />';
+
+		$display_currency = App_Template::get_currency_symbol($appointments->options["currency"]);
+		$form .= '" type="submit" name="submit_btn" value="'. str_replace( array("CURRENCY"), array($display_currency), $button_text).'" />';
 
 		// They say Paypal uses this for tracking. I would prefer to remove it if it is not mandatory.
 		$form .= '<img style="display:none" alt="" border="0" width="1" height="1" src="https://www.paypal.com/en_US/i/scr/pixel.gif" />';
