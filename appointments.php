@@ -8523,11 +8523,13 @@ $(toggle_selected_export);
 			if ( $insert_result && ( 'paid' == $data['status'] || 'confirmed' == $data['status'] ) && is_object( $this->gcal_api ) )
 				$this->gcal_api->insert( $app_id );
 		}
-		if ($resend && 'removed' != $data['status']) {
+
+                do_action('app-appointment-inline_edit-after_save', ($update_result ? $app_id : $wpdb->insert_id), $data);
+                
+                if ($resend && 'removed' != $data['status']) {
 			$this->send_confirmation( $app_id );
 		}
 
-		do_action('app-appointment-inline_edit-after_save', ($update_result ? $app_id : $wpdb->insert_id), $data);
 
 		if ( ( $update_result || $insert_result ) && $data['user'] && defined('APP_USE_LEGACY_USERDATA_OVERWRITING') && APP_USE_LEGACY_USERDATA_OVERWRITING ) {
 			if ( $data['name'] )
