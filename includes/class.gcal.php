@@ -441,7 +441,7 @@ class AppointmentsGcal {
 				</li>
 
 				<li>
-				<?php _e('Create a new project using the left side pane. Name the project as Appointments+', 'appointments') ?>
+				<?php _e('Create a new project using the left side pane. Name the project &quot;Appointments&quot; (or use your chosen name instead)', 'appointments') ?>
 				</li>
 
 				<li>
