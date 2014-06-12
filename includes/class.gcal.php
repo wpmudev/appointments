@@ -1069,8 +1069,11 @@ class AppointmentsGcal {
 
 			// Write Event ID to database
 			$gcal_ID = $createdEvent->getId();
-			if ( $gcal_ID && !$test )
+			if ( $gcal_ID && !$test ) {
 				$wpdb->update( $this->app_table, array( 'gcal_ID' => $gcal_ID, 'gcal_updated' => date ("Y-m-d H:i:s", $this->local_time ) ), array( 'ID'=>$app_id ) );
+			} else {
+				$appointments->log("The insert did not create a real result we can work with");
+			}
 			// Test result successful
 			if ( $gcal_ID )
 				return true;
@@ -1093,8 +1096,12 @@ class AppointmentsGcal {
 			if ($this->_is_writable_mode()) $this->update_event( $app_id );
 			// Also update service provider event if we have a provider
 			if ($worker_id && $this->_is_writable_mode($worker_id)) $this->update_event( $app_id, $worker_id );
+		} else {
+			// First up update general calendar
+			if ($this->_is_writable_mode()) $this->insert_event( $app_id, false );
+			// Also insert for this service provider, if needed
+			if ($worker_id && $this->_is_writable_mode($worker_id)) $this->insert_event( $app_id, false, $worker_id );
 		}
-		else if ($this->_is_writable_mode($worker_id)) $this->insert_event( $app_id, false, $worker_id );
 	}
 
 	/**
