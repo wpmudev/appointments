@@ -2,6 +2,8 @@
 
 abstract class App_Template {
 	protected static $_status_names = array();
+	protected static $_currencies = array();
+	protected static $_currency_symbols = array();
 
 	public static function get_status_name ($status) {
 		$status_names = wp_parse_args(
@@ -26,6 +28,70 @@ abstract class App_Template {
 			'removed' => __('Removed', 'appointments'),
 		)));
 		return self::$_status_names;
+	}
+
+	public static function get_currencies () {
+		if (!self::$_currencies) self::$_currencies = apply_filters('app-template-currencies', array(
+			'AUD' => __('AUD - Australian Dollar', 'appointments'),
+			'BRL' => __('BRL - Brazilian Real', 'appointments'),
+			'CAD' => __('CAD - Canadian Dollar', 'appointments'),
+			'CHF' => __('CHF - Swiss Franc', 'appointments'),
+			'CZK' => __('CZK - Czech Koruna', 'appointments'),
+			'DKK' => __('DKK - Danish Krone', 'appointments'),
+			'EUR' => __('EUR - Euro', 'appointments'),
+			'GBP' => __('GBP - Pound Sterling', 'appointments'),
+			'ILS' => __('ILS - Israeli Shekel', 'appointments'),
+			'HKD' => __('HKD - Hong Kong Dollar', 'appointments'),
+			'HUF' => __('HUF - Hungarian Forint', 'appointments'),
+			'JPY' => __('JPY - Japanese Yen', 'appointments'),
+			'MYR' => __('MYR - Malaysian Ringgits', 'appointments'),
+			'MXN' => __('MXN - Mexican Peso', 'appointments'),
+			'NOK' => __('NOK - Norwegian Krone', 'appointments'),
+			'NZD' => __('NZD - New Zealand Dollar', 'appointments'),
+			'PHP' => __('PHP - Philippine Pesos', 'appointments'),
+			'PLN' => __('PLN - Polish Zloty', 'appointments'),
+			'SEK' => __('SEK - Swedish Krona', 'appointments'),
+			'SGD' => __('SGD - Singapore Dollar', 'appointments'),
+			'TWD' => __('TWD - Taiwan New Dollars', 'appointments'),
+			'THB' => __('THB - Thai Baht', 'appointments'),
+			'TRY' => __('TRY - Turkish lira', 'appointments'),
+			'USD' => __('USD - U.S. Dollar', 'appointments'),
+		));
+		return self::$_currencies;
+	}
+
+	public static function get_currency_symbol ($currency) {
+		if (empty($currency)) return false;
+		if (!self::$_currency_symbols) self::$_currency_symbols = apply_filters('app-template-currency_symbols', array(
+			'AUD' => __('AUD', 'appointments'),
+			'BRL' => __('BRL', 'appointments'),
+			'CAD' => __('CAD', 'appointments'),
+			'CHF' => __('CHF', 'appointments'),
+			'CZK' => __('CZK', 'appointments'),
+			'DKK' => __('DKK', 'appointments'),
+			'EUR' => __('EUR', 'appointments'),
+			'GBP' => __('GBP', 'appointments'),
+			'ILS' => __('ILS', 'appointments'),
+			'HKD' => __('HKD', 'appointments'),
+			'HUF' => __('HUF', 'appointments'),
+			'JPY' => __('JPY', 'appointments'),
+			'MYR' => __('MYR', 'appointments'),
+			'MXN' => __('MXN', 'appointments'),
+			'NOK' => __('NOK', 'appointments'),
+			'NZD' => __('NZD', 'appointments'),
+			'PHP' => __('PHP', 'appointments'),
+			'PLN' => __('PLN', 'appointments'),
+			'SEK' => __('SEK', 'appointments'),
+			'SGD' => __('SGD', 'appointments'),
+			'TWD' => __('TWD', 'appointments'),
+			'THB' => __('THB', 'appointments'),
+			'TRY' => __('TRY', 'appointments'),
+			'USD' => __('USD', 'appointments'),
+		));
+		return !empty(self::$_currency_symbols[$currency])
+			? self::$_currency_symbols[$currency]
+			: false
+		;
 	}
 }
 
