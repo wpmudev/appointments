@@ -47,6 +47,7 @@ class App_Users_AdditionalFields {
 
 		// Display additional notes
 		add_filter('app-appointments_list-edit-client', array($this, 'display_inline_data'), 10, 2);
+		add_action('app-appointment-inline_edit-before_response', array($this, 'save_admin_submitted_data'), 10, 2);
 
 		// Email filters
 		add_filter('app_notification_message', array($this, 'expand_email_macros'), 10, 3);
@@ -137,8 +138,15 @@ class App_Users_AdditionalFields {
 		$fields = !empty($this->_data['additional_fields']) ? $this->_data['additional_fields'] : array();
 		if (empty($fields)) return $form;
 
+		$is_editable = !empty($this->_data['additional_fields-admin_edit']);
+
 		$app_meta = $this->_get_appointment_meta($app->ID);
-		if (empty($app_meta)) return $form;
+		if (!$is_editable && empty($app_meta)) return $form;
+
+		$disabled = $is_editable
+			? ''
+			: "disabled='disabled'"
+		;
 
 		foreach ($fields as $field) {
 			$label = esc_html($field['label']);
@@ -147,10 +155,45 @@ class App_Users_AdditionalFields {
 
 			$form .= '<label>' . 
 				"<span class='title'>{$label}</span>" .
-				"<span class='input-text-wrap'><input type='text' class='widefat' disabled='disabled' value='{$value}' /></span>" .
+				"<span class='input-text-wrap'><input type='text' class='widefat appointments-field-entry' data-name='{$name}' {$disabled} value='{$value}' /></span>" .
 			'</label>';
 		}
+		if (!$is_editable) return $form;
+
+		$form .=<<<EO_ADMIN_JS
+<script>
+(function ($) {
+	$.ajaxSetup({
+		beforeSend: function (jqxhr, settings) {
+			if (!(settings && "data" in settings && settings.data.match(/action=inline_edit_save/))) return;
+			var matches = settings.data.match(/\bapp_id=(\d+)/),
+				app_id = matches && matches.length ? matches[1] : false,
+				root = app_id ? $(':hidden[name="app_id"][value="' + app_id + '"]').closest("tr") : $("body"),
+				fields = root.find(".appointments-field-entry")
+			;
+			fields.each(function () {
+				var me = $(this),
+					name = me.attr("data-name"),
+					value = me.is(":checkbox") ? (me.is(":checked") ? 1 : 0) : me.val()
+				;
+				settings.data += '&' + encodeURIComponent(name) + '=' + encodeURIComponent(value);
+			});
+		}
+	});
+})(jQuery);
+</script>
+EO_ADMIN_JS;
 		return $form;
+	}
+
+	public function save_admin_submitted_data ($app_id, $data) {
+		if (empty($this->_data['additional_fields-admin_edit'])) return false;
+		if (empty($app_id) && !empty($data['ID']) && is_numeric($data['ID'])) $app_id = (int)$data['ID'];
+		$this->validate_submitted_fields();
+		if ($this->save_submitted_fields($app_id)) {
+			// Okay, so we saved the data...
+			die( json_encode( array("result" => __('<span style="color:green;font-weight:bold">Changes saved.</span>', 'appointments') ) ) );
+		}
 	}
 
 	public function bulk_cleanup_data ($app_ids) {
@@ -222,7 +265,7 @@ class App_Users_AdditionalFields {
 		}
 		//$data['__fields__'] = $fields;
 
-		$this->_add_appointment_meta($appointment_id, $data);
+		return $this->_add_appointment_meta($appointment_id, $data);
 
 	}
 
@@ -275,6 +318,7 @@ $(document).ajaxSend(function(e, xhr, opts) {
 
 	public function save_settings ($options) {
 		if (isset($_POST['app-additional_fields-cleanup'])) $options['additional_fields-cleanup'] = (int)$_POST['app-additional_fields-cleanup'];
+		if (isset($_POST['app-additional_fields-admin_edit'])) $options['additional_fields-admin_edit'] = (int)$_POST['app-additional_fields-admin_edit'];
 		//if (empty($_POST['app-additional_fields'])) return $options; // Allow additional fields cleaning up
 		if (empty($_POST['app-additional_fields'])) $_POST['app-additional_fields'] = array();
 		$data = stripslashes_deep($_POST['app-additional_fields']);
@@ -295,6 +339,7 @@ $(document).ajaxSend(function(e, xhr, opts) {
 		);
 		$fields = !empty($this->_data['additional_fields']) ? $this->_data['additional_fields'] : array();
 		$cleanup = !isset($this->_data['additional_fields-cleanup']) || !empty($this->_data['additional_fields-cleanup']) ? 'checked="checked"' : '';
+		$admin_edit = !empty($this->_data['additional_fields-admin_edit']) ? 'checked="checked"' : '';
 		?>
 <tr valign="top" class="api_detail" <?php echo $style?>>
 	<th scope="row" ><?php _e('Additional fields', 'appointments')?></th>
@@ -304,6 +349,12 @@ $(document).ajaxSend(function(e, xhr, opts) {
 				<input type="hidden" name="app-additional_fields-cleanup" value="" />
 				<input type="checkbox" name="app-additional_fields-cleanup" id="app-additional_fields-cleanup" value="1" <?php echo $cleanup; ?> />
 				<?php echo esc_html(__('Cleanup saved data for removed appointments', 'appointments')); ?>
+			</label>
+			<br />
+			<label for="app-additional_fields-admin_edit">
+				<input type="hidden" name="app-additional_fields-admin_edit" value="" />
+				<input type="checkbox" name="app-additional_fields-admin_edit" id="app-additional_fields-admin_edit" value="1" <?php echo $admin_edit; ?> />
+				<?php echo esc_html(__('Allow admin-side fields editing', 'appointments')); ?>
 			</label>
 			<p><span class="description"><?php _e('This setting controls whether your additional fields data will be kept around when appointments change state to &quot;removed&quot;', 'appointments'); ?></span></p>
 		</div>
@@ -416,7 +467,7 @@ $(function () {
 	private function _add_appointment_meta ($appointment_id, $data) {
 		$appointments_data = get_option('appointments_data', array());
 		if (!empty($appointment_id)) $appointments_data[$appointment_id] = $data;
-		update_option("appointments_data", $appointments_data);
+		return update_option("appointments_data", $appointments_data);
 	}
 
 	private function _remove_appointment_meta ($appointment_id) {

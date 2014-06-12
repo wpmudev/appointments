@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.4.4-ALPHA-2
+Version: 1.4.4-BETA-2
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	var $version = "1.4.4-ALPHA-2";
+	var $version = "1.4.4-BETA-2";
 
 	/**
      * Constructor
@@ -1396,6 +1396,11 @@ class Appointments {
 		$price = apply_filters( 'app_display_amount', $price, $service, $worker );
 		$price = apply_filters( 'app_pre_confirmation_price', $price, $service, $worker, $start, $end );
 
+		$display_currency = !empty($this->options["currency"])
+			? App_Template::get_currency_symbol($this->options["currency"])
+			: App_Template::get_currency_symbol('USD')
+		;
+
 		global $wpdb;
 
 		if ( $this->is_busy( $start,  $end, $this->get_capacity() ) )
@@ -1406,7 +1411,7 @@ class Appointments {
 		$start = '<label><span>'.__('Date and time: ', 'appointments' ). '</span>'. apply_filters( 'app_confirmation_start', date_i18n( $this->datetime_format, $start ), $start ) . '</label>';
 		$end = '<label><span>'.__('Lasts (approx): ', 'appointments' ). '</span>'. apply_filters( 'app_confirmation_lasts', $service_obj->duration . " ". __('minutes', 'appointments'), $service_obj->duration ) . '</label>';
 		if ( $price > 0 )
-			$price = '<label><span>'.__('Price: ', 'appointments' ).  '</span>'. apply_filters( 'app_confirmation_price', $price . " " . $this->options["currency"], $price ) . '</label>';
+			$price = '<label><span>'.__('Price: ', 'appointments' ).  '</span>'. apply_filters( 'app_confirmation_price', $price . " " . $display_currency, $price ) . '</label>';
 		else
 			$price = 0;
 
@@ -2091,8 +2096,8 @@ class Appointments {
 
 		// We need this only for the first timetable
 		// Otherwise $time will be calculated from $day_start
-		if ( isset( $_GET["wcalendar"] ) )
-			$time = $_GET["wcalendar"];
+		if ( isset( $_GET["wcalendar"] ) && (int)$_GET['wcalendar'] )
+			$time = (int)$_GET["wcalendar"];
 		else
 			$time = $this->local_time;
 
@@ -6360,32 +6365,7 @@ PLACEHOLDER
 	          <select name="currency">
 	          <?php
 	          $sel_currency = ($this->options['currency']) ? $this->options['currency'] : $this->options['currency'];
-	          $currencies = array(
-	              'AUD' => __('AUD - Australian Dollar', 'appointments'),
-	              'BRL' => __('BRL - Brazilian Real', 'appointments'),
-	              'CAD' => __('CAD - Canadian Dollar', 'appointments'),
-	              'CHF' => __('CHF - Swiss Franc', 'appointments'),
-	              'CZK' => __('CZK - Czech Koruna', 'appointments'),
-	              'DKK' => __('DKK - Danish Krone', 'appointments'),
-	              'EUR' => __('EUR - Euro', 'appointments'),
-	              'GBP' => __('GBP - Pound Sterling', 'appointments'),
-	              'ILS' => __('ILS - Israeli Shekel', 'appointments'),
-	              'HKD' => __('HKD - Hong Kong Dollar', 'appointments'),
-	              'HUF' => __('HUF - Hungarian Forint', 'appointments'),
-	              'JPY' => __('JPY - Japanese Yen', 'appointments'),
-	              'MYR' => __('MYR - Malaysian Ringgits', 'appointments'),
-	              'MXN' => __('MXN - Mexican Peso', 'appointments'),
-	              'NOK' => __('NOK - Norwegian Krone', 'appointments'),
-	              'NZD' => __('NZD - New Zealand Dollar', 'appointments'),
-	              'PHP' => __('PHP - Philippine Pesos', 'appointments'),
-	              'PLN' => __('PLN - Polish Zloty', 'appointments'),
-	              'SEK' => __('SEK - Swedish Krona', 'appointments'),
-	              'SGD' => __('SGD - Singapore Dollar', 'appointments'),
-	              'TWD' => __('TWD - Taiwan New Dollars', 'appointments'),
-	              'THB' => __('THB - Thai Baht', 'appointments'),
-				  'TRY' => __('TRY - Turkish lira', 'appointments'),
-	              'USD' => __('USD - U.S. Dollar', 'appointments')
-	          );
+	          $currencies = App_Template::get_currencies();
 
 	          foreach ($currencies as $k => $v) {
 	              echo '<option value="' . $k . '"' . ($k == $sel_currency ? ' selected' : '') . '>' . esc_html($v, true) . '</option>' . "\n";
@@ -8523,13 +8503,12 @@ $(toggle_selected_export);
 			if ( $insert_result && ( 'paid' == $data['status'] || 'confirmed' == $data['status'] ) && is_object( $this->gcal_api ) )
 				$this->gcal_api->insert( $app_id );
 		}
+		
+		do_action('app-appointment-inline_edit-after_save', ($update_result ? $app_id : $wpdb->insert_id), $data);
 
-                do_action('app-appointment-inline_edit-after_save', ($update_result ? $app_id : $wpdb->insert_id), $data);
-                
-                if ($resend && 'removed' != $data['status']) {
+		if ($resend && 'removed' != $data['status']) {
 			$this->send_confirmation( $app_id );
 		}
-
 
 		if ( ( $update_result || $insert_result ) && $data['user'] && defined('APP_USE_LEGACY_USERDATA_OVERWRITING') && APP_USE_LEGACY_USERDATA_OVERWRITING ) {
 			if ( $data['name'] )
@@ -8545,6 +8524,8 @@ $(toggle_selected_export);
 
 			do_action( 'app_save_user_meta', $data['user'], $data );
 		}
+		
+		do_action('app-appointment-inline_edit-before_response', ($update_result ? $app_id : $wpdb->insert_id), $data);
 
 		if ( $update_result ) {
 			// Log change of status
