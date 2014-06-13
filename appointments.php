@@ -697,8 +697,11 @@ class Appointments {
 				else
 					$user_name = $userdata->display_name;
 
-				if ( !$user_name )
-					$user_name = $userdata->first_name . " " . $userdata->last_name;
+				if ( !$user_name ){
+                                        $first_name = get_user_meta($worker, 'first_name', true);
+                                        $last_name = get_user_meta($worker, 'last_name', true);
+					$user_name = $first_name . " " . $last_name;
+                                }
 				if ( "" == trim( $user_name ) )
 					$user_name = $userdata->user_login;
 			}
@@ -1500,8 +1503,11 @@ class Appointments {
 			$user_email = $userdata->email;
 
 			$user_name = $userdata->display_name;
-			if ( !$user_name )
-				$user_name = $userdata->first_name . " " . $userdata->last_name;
+			if ( !$user_name ){
+                                $first_name = get_user_meta($worker, 'first_name', true);
+                                $last_name = get_user_meta($worker, 'last_name', true);
+                                $user_name = $first_name . " " . $last_name;
+                        }
 			if ( "" == trim( !$user_name ) )
 				$user_name = $userdata->user_login;
 		}
