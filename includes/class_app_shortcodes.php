@@ -1242,7 +1242,7 @@ class App_Shortcode_Services extends App_Shortcode {
 			$wcalendar = false;
 		// First remove these parameters and add them again to make wcalendar appear before js variable
 		$href = add_query_arg( array( "wcalendar"=>false, "app_provider_id" => false, "app_service_id" => false ) );
-		$href = apply_filters( 'app_service_href', add_query_arg( array( "wcalendar"=>$wcalendar, "app_service_id" => "'+selected_service" ), $href ) );
+		$href = apply_filters( 'app_service_href', add_query_arg( array( "wcalendar"=>$wcalendar, "app_service_id" => "__selected_service__" ), $href ) );
 
 		if ( $autorefresh ) {
 			$script .= "$('.app_services_button').hide();";
@@ -1256,13 +1256,13 @@ class App_Shortcode_Services extends App_Shortcode {
 		$script .= "$('.app_service_excerpt').hide();";
 		$script .= "$('#app_service_excerpt_'+selected_service).show();";
 		if ( $autorefresh ) {
-			$script .= "window.location.href='".$href.";";
+			$script .= "window.location.href='".$href."'.replace(/__selected_service__/, selected_service);";
 		}
 		$script .= "});";
 
 		$script .= "$('.app_services_button').click(function(){";
 		$script .= "var selected_service=$('.app_select_services option:selected').val();";
-		$script .= "window.location.href='".$href.";";
+		$script .= "window.location.href='".$href."'.replace(/__selected_service__/, selected_service);";
 		$script .= "});";
 
 		if (!$_noscript) $appointments->add2footer( $script );
@@ -1445,7 +1445,7 @@ class App_Shortcode_ServiceProviders extends App_Shortcode {
 			$wcalendar = false;
 		// First remove these parameters and add them again to make wcalendar appear before js variable
 		$href = add_query_arg( array( "wcalendar"=>false, "app_provider_id" =>false ) );
-		$href = apply_filters( 'app_worker_href', add_query_arg( array( "wcalendar"=>$wcalendar, "app_provider_id" => "'+selected_worker" ), $href ) );	
+		$href = apply_filters( 'app_worker_href', add_query_arg( array( "wcalendar"=>$wcalendar, "app_provider_id" => "__selected_worker__" ), $href ) );	
 
 		if ( $autorefresh ) {
 			$script .= "$('.app_workers_button').hide();";
@@ -1458,14 +1458,14 @@ class App_Shortcode_ServiceProviders extends App_Shortcode {
 		$script .= "$('.app_worker_excerpt').hide();";
 		$script .= "$('#app_worker_excerpt_'+selected_worker).show();";
 		if ( $autorefresh ) {
-			$script .= "var redirection_url='" . $href . " + (!!parseInt(selected_worker, 10) ? '#app_worker_excerpt_'+selected_worker : '');";
+			$script .= "var redirection_url='" . $href . "'.replace(/__selected_worker__/, selected_worker) + (!!parseInt(selected_worker, 10) ? '#app_worker_excerpt_'+selected_worker : '');";
 			$script .= "window.location.href=redirection_url;";
 		}
 		$script .= "});";
 
 		$script .= "$('.app_workers_button').click(function(){";
 		$script .= "var selected_worker=$('.app_select_workers option:selected').val();";
-		$script .= "var redirection_url='" . $href . " + (!!parseInt(selected_worker, 10) ? '#app_worker_excerpt_'+selected_worker : '');";
+		$script .= "var redirection_url='" . $href . "'.replace(/__selected_worker__/, selected_worker) + (!!parseInt(selected_worker, 10) ? '#app_worker_excerpt_'+selected_worker : '');";
 		$script .= "window.location.href=redirection_url;";
 		$script .= "});";
 
