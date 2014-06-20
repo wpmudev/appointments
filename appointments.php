@@ -49,12 +49,16 @@ class Appointments {
 		$this->options = get_option( 'appointments_options' );
 
 		// To follow WP Start of week, time, date settings
-		$this->local_time			= current_time('timestamp');
-		if ( !$this->start_of_week	= get_option('start_of_week') )
-			$this->start_of_week	= 0;
-		$this->time_format			= get_option('time_format');
-		$this->date_format			= get_option('date_format');
-		$this->datetime_format		= $this->date_format . " " . $this->time_format;
+		$this->local_time = current_time('timestamp');
+		if ( !$this->start_of_week = get_option('start_of_week') ) $this->start_of_week = 0;
+		
+		$this->time_format = get_option('time_format');
+		if (empty($this->time_format)) $this->time_format = "H:i";
+
+		$this->date_format = get_option('date_format');
+		if (empty($this->date_format)) $this->date_format = "Y-m-d";
+		
+		$this->datetime_format = $this->date_format . " " . $this->time_format;
 
 		add_action( 'delete_user', array( &$this, 'delete_user' ) );		// Modify database in case a user is deleted
 		add_action( 'wpmu_delete_user', array( &$this, 'delete_user' ) );	// Same as above
