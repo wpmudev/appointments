@@ -51,6 +51,9 @@ class App_Schedule_Paddings {
 		// Augment service settings pages
 		add_filter('app-settings-services-service-name', array($this, 'add_service_selection'), 10, 2);
 		add_action('app-services-service-updated', array($this, 'save_service_padding'));
+		
+		add_filter('app-settings-workers-worker-name', array($this, 'add_worker_selection'), 10, 2);
+		add_action('app-workers-worker-updated', array($this, 'save_worker_padding'));
 	}
 
 	public function initialize () {
@@ -59,6 +62,7 @@ class App_Schedule_Paddings {
 		
 		$schedule_padding = !empty($appointments->options['schedule_padding']) ? $appointments->options['schedule_padding'] : array();
 		$services_padding = get_option('appointments_services_padding', array());
+		$workers_padding = get_option('appointments_workers_padding', array());
 
 		// Stubbing the model data
 		$this->_data = array(
@@ -66,9 +70,7 @@ class App_Schedule_Paddings {
 				'type' => self::PADDING_TYPE_LARGEST,
 			)),
 			'service_padding' => $services_padding,
-			'worker_padding' => array(
-
-			),
+			'worker_padding' => $workers_padding,
 		);
 	}
 
@@ -82,14 +84,22 @@ class App_Schedule_Paddings {
 			? $this->_data['schedule_padding']['type']
 			: self::PADDING_TYPE_LARGEST
 		;
+		$type_help = array(
+			self::PADDING_TYPE_SMALLEST => __('... applying the smaller padding of the two', 'appointments'),
+			self::PADDING_TYPE_LARGEST => __('... applying the larger padding of the two', 'appointments'),
+			self::PADDING_TYPE_CUMULATIVE => __('... adding the two together and applying the result', 'appointments'),
+		);
 		?>
 <tr valign="top">
 	<th scope="row"><?php _e('Padding resolution type', 'appointments'); ?></th>
 	<td>
+		<div><span class="description"><?php _e('When both the current service and the current service provider have paddings assigned, resolve them by...', 'appointments'); ?></span></div>
 	<?php foreach ($this->_allowed_paddings as $padding => $name) { ?>
 		<label for="app-padding-<?php echo esc_attr($padding); ?>">
 			<input type="radio" id="app-padding-<?php echo esc_attr($padding); ?>" name="schedule_padding" value="<?php echo esc_attr($padding); ?>" <?php checked($saved, $padding); ?> />
 			<?php echo $name; ?>
+			<br />
+			<span class="description"><?php echo $type_help[$padding]; ?></span>
 		</label><br />
 	<?php } ?>
 	</td>
@@ -126,6 +136,35 @@ class App_Schedule_Paddings {
 		return strtr($out, "'", '"'); // We have to escape this, because of the way the JS injection works on the services page (wtf really o.0)
 	}
 
+	public function add_worker_selection ($out, $worker_id) {
+		$paddings = !empty($this->_data['worker_padding'][$worker_id])
+			? $this->_data['worker_padding'][$worker_id]
+			: array(self::PADDING_BEFORE => 0, self::PADDING_AFTER => 0)
+		;
+		$range = range(0, 180, 5);
+		$out .= '<div class="app-worker_padding">';
+		$out .= '<h4>' . __('Padding times', 'appointments') . '</h4>';
+		$out .= '<label>';
+		$out .= $this->_allowed_positions[self::PADDING_BEFORE] . "&nbsp;<select name='worker_padding_before[{$worker_id}]'>";
+		foreach ($range as $value) {
+			$selected = selected($paddings[self::PADDING_BEFORE], $value, false);
+			$out .= "<option value='{$value}' {$selected}>{$value}</option>";
+		}
+		$out .= '</select>';
+		$out .= '</label>';
+		$out .= '<label>';
+		$out .= $this->_allowed_positions[self::PADDING_AFTER] . "&nbsp;<select name='worker_padding_after[{$worker_id}]'>";
+		foreach ($range as $value) {
+			$selected = selected($paddings[self::PADDING_AFTER], $value, false);
+			$out .= "<option value='{$value}' {$selected}>{$value}</option>";
+		}
+		$out .= '</select>';
+		$out .= '</label>';
+		$out .= '</div>';
+
+		return strtr($out, "'", '"'); // We have to escape this, because of the way the JS injection works on the services page (wtf really o.0)
+	}
+
 	public function save_service_padding ($service_id) {
 		if (!isset($_POST['service_padding_before'][$service_id]) || !isset($_POST['service_padding_after'][$service_id])) return false;
 		$before = isset($_POST['service_padding_before'][$service_id])
@@ -142,6 +181,24 @@ class App_Schedule_Paddings {
 			self::PADDING_AFTER => $after,
 		);
 		update_option('appointments_services_padding', $services_padding);
+	}
+
+	public function save_worker_padding ($worker_id) {
+		if (!isset($_POST['worker_padding_before'][$worker_id]) || !isset($_POST['worker_padding_after'][$worker_id])) return false;
+		$before = isset($_POST['worker_padding_before'][$worker_id])
+			? (int)$_POST['worker_padding_before'][$worker_id]
+			: 0
+		;
+		$after = isset($_POST['worker_padding_after'][$worker_id])
+			? (int)$_POST['worker_padding_after'][$worker_id]
+			: 0
+		;
+		$workers_padding = get_option('appointments_workers_padding', array());
+		$workers_padding[$worker_id] = array(
+			self::PADDING_BEFORE => $before,
+			self::PADDING_AFTER => $after,
+		);
+		update_option('appointments_workers_padding', $workers_padding);
 	}
 
 	/**
@@ -175,7 +232,7 @@ class App_Schedule_Paddings {
 			: 0
 		;
 		$additive = 0;
-		switch ($this->_data['schedule_padding']) {
+		switch ($this->_data['schedule_padding']['type']) {
 			case self::PADDING_TYPE_CUMULATIVE:
 				$additive = $service_time + $worker_time;
 				break;
@@ -203,7 +260,7 @@ class App_Schedule_Paddings {
 			: 0
 		;
 		$additive = 0;
-		switch ($this->_data['schedule_padding']) {
+		switch ($this->_data['schedule_padding']['type']) {
 			case self::PADDING_TYPE_CUMULATIVE:
 				$additive = $service_time + $worker_time;
 				break;
