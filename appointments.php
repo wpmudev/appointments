@@ -4382,6 +4382,7 @@ SITE_NAME
 					);
 			}
 		}
+		return true;
 	}
 
 	/**
@@ -4463,6 +4464,7 @@ SITE_NAME
 					$this->log( sprintf( __('Notification message sent to %s for appointment ID:%s','appointments'), $this->get_worker_email( $r->worker ), $app_id ) );
 			}
 		}
+		return true;
 	}
 
 	/**
@@ -4521,6 +4523,7 @@ SITE_NAME
 					$this->log( sprintf( __('Reminder message sent to %s for appointment ID:%s','appointments'), $message["to"], $message["ID"] ) );
 			}
 		}
+		return true;
 	}
 
 	/**
@@ -8461,6 +8464,7 @@ $(toggle_selected_export);
 
 	function inline_edit_save() {
 		$app_id = $_POST["app_id"];
+		$email_sent = false;
 		global $wpdb, $current_user;
 		$app = $wpdb->get_row( $wpdb->prepare("SELECT * FROM {$this->app_table} WHERE ID=%d", $app_id) );
 
@@ -8508,16 +8512,17 @@ $(toggle_selected_export);
 		else {
 			// Insert
 			$insert_result = $wpdb->insert( $this->app_table, $data );
-			if ( $insert_result && $resend )
-				$this->send_confirmation( $wpdb->insert_id );
+			if ( $insert_result && $resend && empty($email_sent) ) {
+				$email_sent = $this->send_confirmation( $wpdb->insert_id );
+			}
 			if ( $insert_result && ( 'paid' == $data['status'] || 'confirmed' == $data['status'] ) && is_object( $this->gcal_api ) )
 				$this->gcal_api->insert( $app_id );
 		}
 		
 		do_action('app-appointment-inline_edit-after_save', ($update_result ? $app_id : $wpdb->insert_id), $data);
 
-		if ($resend && 'removed' != $data['status']) {
-			$this->send_confirmation( $app_id );
+		if ($resend && 'removed' != $data['status'] && empty($email_sent) ) {
+			$email_sent = $this->send_confirmation( $app_id );
 		}
 
 		if ( ( $update_result || $insert_result ) && $data['user'] && defined('APP_USE_LEGACY_USERDATA_OVERWRITING') && APP_USE_LEGACY_USERDATA_OVERWRITING ) {
