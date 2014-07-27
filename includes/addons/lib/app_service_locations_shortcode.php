@@ -65,8 +65,9 @@ class App_Shortcode_ServiceLocationsShortcode extends App_Shortcode {
 		foreach ($services as $srv) {
 			if (empty($srv->ID)) continue;
 			$location_id = App_Locations_ServiceLocations::service_to_location_id($srv->ID);
-			if (!empty($location_id)) $locations[] = $model->find_by('id', $location_id);
+			if (!empty($location_id)) $locations[$location_id] = $model->find_by('id', $location_id);
 		}
+		$locations = array_values(array_filter($locations));
 
 		if (empty($locations)) return $content;
 		$ret = '';

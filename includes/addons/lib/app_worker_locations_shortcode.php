@@ -65,8 +65,9 @@ class App_Shortcode_WorkerLocationsShortcode extends App_Shortcode {
 		foreach ($workers as $wrk) {
 			if (empty($wrk->ID)) continue;
 			$location_id = App_Locations_WorkerLocations::worker_to_location_id($wrk->ID);
-			if (!empty($location_id)) $locations[] = $model->find_by('id', $location_id);
+			if (!empty($location_id)) $locations[$location_id] = $model->find_by('id', $location_id);
 		}
+		$locations = array_values(array_filter($locations));
 
 		if (empty($locations)) return $content;
 		$ret = '';
