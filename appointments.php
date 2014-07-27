@@ -4744,7 +4744,10 @@ SITE_NAME
 					if ( $this->change_status( 'removed', $app_id ) ) {
 						$this->log( sprintf( __('Client %s cancelled appointment with ID: %s','appointments'), $this->get_client_name( $app_id ), $app_id ) );
 						$this->send_notification( $app_id, true );
+						
 						if (!empty($this->gcal_api) && is_object($this->gcal_api)) $this->gcal_api->delete($app_id); // Drop the cancelled appointment
+						else if (!defined('APP_GCAL_DISABLE')) $this->log("Unable to issue a remote call to delete the remote appointment.");
+						
 						do_action('app-appointments-appointment_cancelled', $app_id);
 						// If there is a header warning other plugins can do whatever they need
 						if ( !headers_sent() ) {
@@ -4793,7 +4796,10 @@ SITE_NAME
 				if ( $this->change_status( 'removed', $app_id ) ) {
 					$this->log( sprintf( __('Client %s cancelled appointment with ID: %s','appointments'), $this->get_client_name( $app_id ), $app_id ) );
 					$this->send_notification( $app_id, true );
+					
 					if (!empty($this->gcal_api) && is_object($this->gcal_api)) $this->gcal_api->delete($app_id); // Drop the cancelled appointment
+					else if (!defined('APP_GCAL_DISABLE')) $this->log("Unable to issue a remote call to delete the remote appointment.");
+
 					do_action('app-appointments-appointment_cancelled', $app_id);
 					die( json_encode( array('success'=>1)));
 				}
