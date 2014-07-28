@@ -2433,7 +2433,7 @@ class Appointments {
 		$date = $timestamp ? $timestamp : $this->local_time;
 		// Return today's timestamp if today is sunday and start of the week is set as Sunday
 		if ( "Sunday" == date( "l", $date ) && 0 == $this->start_of_week )
-			return strtotime("today");
+			return strtotime("today", $date);
 		// Else return last week's timestamp
 		else
 			return strtotime("last Sunday", $date );
