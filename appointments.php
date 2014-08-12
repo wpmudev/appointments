@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.4.4-BETA-3
+Version: 1.4.4
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	var $version = "1.4.4-BETA-3";
+	var $version = "1.4.4";
 
 	/**
      * Constructor
@@ -3308,12 +3308,11 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			update_user_meta( $profileuser_id, 'app_gcal_summary', $summary );
 		}
 		if ( isset( $_POST['gcal_description'] ) ) {
-			if ( !trim( $_POST['gcal_description'] ) )
-$gcal_description = __("Client Name: CLIENT\nService Name: SERVICE\nService Provider Name: SERVICE_PROVIDER\n", "appointments")
-;
-			else
+			if ( !trim( $_POST['gcal_description'] ) ) {
+				$gcal_description = __("Client Name: CLIENT\nService Name: SERVICE\nService Provider Name: SERVICE_PROVIDER\n", "appointments");
+			} else {
 				$gcal_description = $_POST['gcal_description'];
-
+			}
 			update_user_meta( $profileuser_id, 'app_gcal_description', $gcal_description );
 		}
 
@@ -3324,6 +3323,11 @@ $gcal_description = __("Client Name: CLIENT\nService Name: SERVICE\nService Prov
 				if ( $this->change_status( 'removed', $app_id ) ) {
 					$this->log( sprintf( __('Client %s cancelled appointment with ID: %s','appointments'), $this->get_client_name( $app_id ), $app_id ) );
 					$this->send_notification( $app_id, true );
+
+					if (!empty($this->gcal_api) && is_object($this->gcal_api)) $this->gcal_api->delete($app_id); // Drop the cancelled appointment
+					else if (!defined('APP_GCAL_DISABLE')) $this->log("Unable to issue a remote call to delete the remote appointment.");
+					
+					// Do we also do_action app-appointments-appointment_cancelled?
 				}
 			}
 		}

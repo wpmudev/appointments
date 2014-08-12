@@ -1,3 +1,15 @@
+v1.4.4
+- Fix for editable fields toggling.
+- Fix for relying on JS injection, using replacement instead.
+- Fix for quoting and macro escaping issue.
+- Fix for numeric GET parameters.
+- Fix for currency symbol l10n issues.
+- Fix for multiplied display of unique locations.
+- Fix for profile cancellation GCal integration issue.
+- Added worker montly calendar paging support.
+- Added the Default Service add-on.
+- Added the Pending Appointments count notification add-on.
+
 v1.4.3.1
 - Fix for date/time parsing problem with inital formatting.
 
