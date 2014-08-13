@@ -4628,7 +4628,7 @@ SITE_NAME
 			'SITE_NAME' => wp_specialchars_decode(get_option('blogname'), ENT_QUOTES),
 			'CLIENT' => $user,
 			'SERVICE_PROVIDER' => $worker,
-			'SERVICE' => $service,
+			'SERVICE' => escape_backreference($service),
 			'DATE_TIME' => mysql2date($this->datetime_format, $datetime),
 			'PRICE' => $price,
 			'DEPOSIT' => $deposit,
@@ -4644,6 +4644,15 @@ SITE_NAME
 		}
 		return $text;
 	}
+
+	/**
+     *	Avoid back-reference collisions.
+     *  http://us1.php.net/manual/en/function.preg-replace.php#103985
+     */
+    function escape_backreference($x)
+    {
+        return preg_replace('/\$(\d)/', '\\\$$1', $x);
+    }
 
 	/**
 	 *	Email message headers
