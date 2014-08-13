@@ -4628,7 +4628,7 @@ SITE_NAME
 			'SITE_NAME' => wp_specialchars_decode(get_option('blogname'), ENT_QUOTES),
 			'CLIENT' => $user,
 			'SERVICE_PROVIDER' => $worker,
-			'SERVICE' => escape_backreference($service),
+			'SERVICE' => $this->escape_backreference($service),
 			'DATE_TIME' => mysql2date($this->datetime_format, $datetime),
 			'PRICE' => $price,
 			'DEPOSIT' => $deposit,
