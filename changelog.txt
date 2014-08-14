@@ -1,3 +1,5 @@
+- Fix forn Service name being truncated if it contains a dollar sign. 
+
 v1.4.4
 - Fix for editable fields toggling.
 - Fix for relying on JS injection, using replacement instead.
