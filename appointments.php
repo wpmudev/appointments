@@ -6249,7 +6249,7 @@ PLACEHOLDER
 					<tr valign="top" class="api_detail" <?php echo $style?>>
 						<th scope="row" ><?php _e('Facebook App ID','appointments')?></th>
 						<td colspan="2">
-						<input type="text" style="width:200px" name="facebook-app_id" value="<?php if (isset($this->options["facebook-app_id"])) echo $this->options["facebook-app_id"] ?>" />
+						<input type="text" style="width:200px" name="facebook-app_id" value="<?php if (isset($this->options["facebook-app_id"])) echo esc_attr($this->options["facebook-app_id"]); ?>" />
 						<br /><span class="description"><?php printf(__("Enter your App ID number here. If you don't have a Facebook App yet, you will need to create one <a href='%s'>here</a>", 'appointments'), 'https://developers.facebook.com/apps')?></span>
 						</td>
 					</tr>
@@ -6257,7 +6257,7 @@ PLACEHOLDER
 					<tr valign="top" class="api_detail" <?php echo $style?>>
 						<th scope="row" ><?php _e('Twitter Consumer Key','appointments')?></th>
 						<td colspan="2">
-						<input type="text" style="width:200px" name="twitter-app_id" value="<?php if (isset($this->options["twitter-app_id"])) echo $this->options["twitter-app_id"] ?>" />
+						<input type="text" style="width:200px" name="twitter-app_id" value="<?php if (isset($this->options["twitter-app_id"])) echo esc_attr($this->options["twitter-app_id"]); ?>" />
 						<br /><span class="description"><?php printf(__('Enter your Twitter App ID number here. If you don\'t have a Twitter App yet, you will need to create one <a href="%s">here</a>', 'appointments'), 'https://dev.twitter.com/apps/new')?></span>
 						</td>
 					</tr>
