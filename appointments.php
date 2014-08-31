@@ -4131,7 +4131,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 				'error' => __('Login error. Please try again.', 'appointments'),
 				'_can_use_twitter' => (!empty($this->options['twitter-app_id']) && !empty($this->options['twitter-app_secret'])),
 				'show_login_button' => $show_login_button,
-				
+				'gg_client_id' => $this->options['google-client_id'],
 				'register' => ($do_register ? __('Register', 'appointments') : ''),
 				'registration_url' => ($do_register ? wp_registration_url() : ''),
 			)));
@@ -5249,6 +5249,7 @@ SITE_NAME
 			$this->options['facebook-app_id']			= trim( $_POST['facebook-app_id'] );
 			$this->options['twitter-app_id']			= trim( $_POST['twitter-app_id'] );
 			$this->options['twitter-app_secret']		= trim( $_POST['twitter-app_secret'] );
+			$this->options['google-client_id']			= trim( $_POST['google-client_id'] );
 
 			$this->options["app_page_type"]				= $_POST["app_page_type"];
 			$this->options["show_legend"]				= $_POST["show_legend"];
@@ -6190,8 +6191,20 @@ PLACEHOLDER
 					<tr valign="top" class="api_detail" <?php echo $style?>>
 						<th scope="row" ><?php _e('Twitter Consumer Secret','appointments')?></th>
 						<td colspan="2">
-						<input type="text" style="width:200px" name="twitter-app_secret" value="<?php if (isset($this->options["twitter-app_secret"])) echo $this->options["twitter-app_secret"] ?>" />
+						<input type="text" style="width:200px" name="twitter-app_secret" value="<?php if (isset($this->options["twitter-app_secret"])) echo esc_attr($this->options["twitter-app_secret"]); ?>" />
 						<br /><span class="description"><?php _e('Enter your Twitter App ID Secret here.', 'appointments')?></span>
+						</td>
+					</tr>
+					<tr valign="top" class="api_detail" <?php echo $style?>>
+						<th scope="row" ><?php _e('Google Client ID','appointments')?></th>
+						<td colspan="2">
+							<input type="text" style="width:200px" name="google-client_id" value="<?php if (isset($this->options["google-client_id"])) echo esc_attr($this->options["google-client_id"]); ?>" />
+							<p>
+								<span class="description"><?php printf(__('Enter your Google App Client ID here. If you don\'t have a Google App yet, you will need to create one <a href="%s">here</a>', 'appointments'), 'https://console.developers.google.com/'); ?></span>
+								<br />
+								<span class="description"><small><?php _e('If you leave this field empty, Google Auth will revert to legacy OpenID.', 'appointments'); ?></small></span>
+							</p>
+
 						</td>
 					</tr>
 					<?php do_action('app-settings-accessibility_settings', $style); ?>
