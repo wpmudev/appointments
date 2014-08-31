@@ -184,6 +184,7 @@ class Appointments {
 		add_action('wp_ajax_nopriv_app_get_twitter_auth_url', array($this, 'handle_get_twitter_auth_url'));
 		add_action('wp_ajax_nopriv_app_twitter_login', array($this, 'handle_twitter_login'));
 		add_action('wp_ajax_nopriv_app_ajax_login', array($this, 'ajax_login'));
+		add_action('wp_ajax_nopriv_app_google_plus_login', array($this, 'handle_gplus_login'));
 
 		// Google+ login
 		if (!class_exists('LightOpenID')) {
@@ -3051,6 +3052,79 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 				"status" => 0,
 				"error" => $user->get_error_message()
 			)));
+	}
+
+	/**
+	 * Handles the Google+ OAuth type login.
+	 */
+	function handle_gplus_login () {
+		header("Content-type: application/json");
+		$resp = array(
+			"status" => 0,
+		);
+		if (empty($this->options['google-client_id'])) die(json_encode($resp)); // Yeah, we're not equipped to deal with this
+
+		$data = stripslashes_deep($_POST);
+		$token = !empty($data['token']) ? $data['token'] : false;
+		if (empty($token)) die(json_encode($resp));
+
+		// Start verifying
+		$page = wp_remote_get('https://www.googleapis.com/userinfo/v2/me', array(
+			'sslverify' => false,
+			'timeout' => 5,
+			'headers' => array(
+				'Authorization' => sprintf('Bearer %s', $token),
+			)
+		));
+		if (200 != wp_remote_retrieve_response_code($page)) die(json_encode($resp));
+
+		$body = wp_remote_retrieve_body($page);
+		$response = json_decode($body, true); // Body is JSON
+		if (empty($response['id'])) die(json_encode($resp));
+
+		$first = !empty($response['given_name']) ? $response['given_name'] : '';
+		$last = !empty($response['family_name']) ? $response['family_name'] : '';
+		$email = !empty($response['email']) ? $response['email'] : '';
+
+		if (empty($email) || (empty($first) && empty($last))) die(json_encode($resp)); // In case we're missing stuff
+
+		$username = false;
+		if (!empty($last) && !empty($first)) $username = "{$first}_{$last}";
+		else if (!empty($first)) $username = $first;
+		else if (!empty($last)) $username = $last;
+
+		if (empty($username)) die(json_encode($resp)); // In case we're missing stuff
+
+		$wordp_user = get_user_by('email', $email);
+
+		if (!$wordp_user) { // Not an existing user, let's create a new one
+			$password = wp_generate_password(12, false);
+			$count = 0;
+			while (username_exists($username)) {
+				$username .= rand(0,9);
+				if (++$count > 10) break;
+			}
+
+			$wordp_user = wp_create_user($username, $password, $email);
+			if (is_wp_error($wordp_user))
+				die(json_encode($resp)); // Failure creating user
+			else {
+				update_user_meta($wordp_user, 'first_name', $first);
+				update_user_meta($wordp_user, 'last_name', $last);
+			}
+		}
+		else {
+			$wordp_user = $wordp_user->ID;
+		}
+
+		$user = get_userdata($wordp_user);
+		wp_set_current_user($user->ID, $user->user_login);
+		wp_set_auth_cookie($user->ID); // Logged in with Google, yay
+		do_action('wp_login', $user->user_login);
+
+		die(json_encode(array(
+			"status" => 1,
+		)));
 	}
 
 	/**
