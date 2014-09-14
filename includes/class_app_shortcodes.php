@@ -468,8 +468,7 @@ class App_Shortcode_MonthlySchedule extends App_Shortcode {
 		// Force worker or pick up the single worker
 		if ( $worker ) {
 			// Check if such a worker exists
-			if ( !$appointments->is_worker( $worker ) )
-				return;
+			if (!$appointments->is_worker($worker)) return;
 			$_REQUEST["app_provider_id"] = $worker;
 		}
 		else if ( $single_worker = $appointments->is_single_worker( $appointments->service ) ) {
@@ -494,16 +493,19 @@ class App_Shortcode_MonthlySchedule extends App_Shortcode {
 		$year = date("Y", $time);
 		$month = date("m",  $time);
 
-		if ( '' != $title )
+		if (!empty($title)) {
+			$replacements = array(
+				date_i18n("F Y",  strtotime("{$year}-{$month}-01")), // START
+				$appointments->get_worker_name($_REQUEST['app_provider_id']),
+				$appointments->get_service_name($_REQUEST['app_service_id']),
+			);
 			$title = str_replace(
-								array( "START"),
-								array(
-									date_i18n("F Y",  strtotime("{$year}-{$month}-01") )
-									),
-								$title
-						);
-		else
+				array("START", "WORKER", "SERVICE"),
+				$replacements,
+			$title);
+		} else {
 			$title = '';
+		}
 
 		$has_worker = !empty($appointments->worker) || !empty($worker);
 
