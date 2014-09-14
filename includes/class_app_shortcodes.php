@@ -390,7 +390,7 @@ class App_Shortcode_MonthlySchedule extends App_Shortcode {
 		$this->_defaults = array(
 			'title' => array(
 				'value' => __('<h3>Our schedule for START</h3>', 'appointments'),
-				'help' => __('Text that will be displayed as the schedule title. Placeholders START and END will be automatically replaced by their real values.', 'appointments'),
+				'help' => __('Text that will be displayed as the schedule title. Placeholders START, WORKER and SERVICE will be automatically replaced by their real values.', 'appointments'),
 				'example' => __('Our schedule for START', 'appointments'),
 			),
 			'logged' => array(
