@@ -518,7 +518,7 @@ class App_Shortcode_MonthlySchedule extends App_Shortcode {
 				: __('Please, select a service provider.', 'appointments')
 			;
  		} else {
-	        $c .= $title;
+	        $c .= apply_filters('app-shortcodes-monthly_schedule-title', $title, $args);
 
 			if ( is_user_logged_in() || 'yes' != $appointments->options["login_required"] ) {
 				$c .= $logged ? "<div class='appointments-instructions'>{$logged}</div>" : '';
