@@ -32,14 +32,8 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	var $version = "1.4.5-BETA-2";
+	var $version = "1.4.5-BETA-3";
 
-	/**
-     * Constructor
-     */
-	function Appointments() {
-		$this->__construct();
-	}
 	function __construct() {
 
 		$this->plugin_dir = plugin_dir_path(__FILE__);
