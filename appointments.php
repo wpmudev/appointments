@@ -1247,22 +1247,25 @@ class Appointments {
 	 */
 	function change_status( $stat, $app_id ) {
 		global $wpdb;
-		if ( !$app_id || !$stat )
-			return false;
+		
+		if (!$app_id || !$stat) return false;
 
-		$result = $wpdb->update( $this->app_table,
-									array('status'	=> $stat),
-									array('ID'		=> $app_id)
-					);
-		if ( $result ) {
+		$result = $wpdb->update($this->app_table,
+			array('status' => $stat),
+			array('ID' => $app_id)
+		);
+
+		if ($result) {
 			$this->flush_cache();
 			do_action( 'app_change_status', $stat, $app_id );
-			if ( ($stat == 'paid' || $stat == 'confirmed') && is_object( $this->gcal_api ) )
+
+			//if ( ($stat == 'paid' || $stat == 'confirmed') && is_object( $this->gcal_api ) ) {
+			if (is_object($this->gcal_api) &&  $this->gcal_api->is_syncable_status($stat)) {
 				$this->gcal_api->update( $app_id );
+			}
 			return true;
 		}
-		else
-			return false;
+		return false;
 	}
 
 
@@ -1660,8 +1663,9 @@ class Appointments {
 			$this->send_confirmation( $insert_id );
 
 		// Add to GCal API
-		if ( ('confirmed' == $status || 'paid' == $status) && is_object( $this->gcal_api ) )
+		if (is_object($this->gcal_api) && $this->gcal_api->is_syncable_status($status)) {
 			$this->gcal_api->insert( $insert_id );
+		}
 
 		// GCal button
 		if ( isset( $this->options["gcal"] ) && 'yes' == $this->options["gcal"] && $gcal )
@@ -5679,7 +5683,7 @@ SITE_NAME
 							}
 						}
 						// If confirmed or paid, add these to GCal
-						else if ( 'paid' == $new_status || 'confirmed' == $new_status ) {
+						else if (is_object($this->gcal_api) && $this->gcal_api->is_syncable_status($new_status)) {
 							foreach ( $_POST["app"] as $app_id ) {
 								$this->gcal_api->update( $app_id );
 								// Also send out an email
@@ -8600,10 +8604,11 @@ $(toggle_selected_export);
 			// Update
 			$update_result = $wpdb->update( $this->app_table, $data, array('ID' => $app_id) );
 			if ( $update_result ) {
-				if ( ( 'pending' == $data['status'] || 'removed' == $data['status'] || 'completed' == $data['status'] ) && is_object( $this->gcal_api ) )
+				if ( ( 'pending' == $data['status'] || 'removed' == $data['status'] || 'completed' == $data['status'] ) && is_object( $this->gcal_api ) ) {
 					$this->gcal_api->delete( $app_id );
-				else if ( ( 'paid' == $data['status'] || 'confirmed' == $data['status'] ) && is_object( $this->gcal_api ) )
+				} else if (is_object($this->gcal_api) && $this->gcal_api->is_syncable_status($data['status'])) {
 					$this->gcal_api->update( $app_id ); // This also checks for event insert
+				}
 			}
 			if ($update_result && $resend) {
 				if ('removed' == $data['status']) do_action( 'app_removed', $app_id );
@@ -8616,8 +8621,9 @@ $(toggle_selected_export);
 			if ( $insert_result && $resend && empty($email_sent) ) {
 				$email_sent = $this->send_confirmation( $wpdb->insert_id );
 			}
-			if ( $insert_result && ( 'paid' == $data['status'] || 'confirmed' == $data['status'] ) && is_object( $this->gcal_api ) )
+			if ( $insert_result && is_object($this->gcal_api) && $this->gcal_api->is_syncable_status($data['status'])) {
 				$this->gcal_api->insert( $app_id );
+			}
 		}
 		
 		do_action('app-appointment-inline_edit-after_save', ($update_result ? $app_id : $wpdb->insert_id), $data);
