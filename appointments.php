@@ -4758,8 +4758,10 @@ SITE_NAME
 
 		global $wpdb;
 
+		$process_expired = apply_filters('app-auto_cleanup-process_expired', true);
+
 		$expireds = $wpdb->get_results( $wpdb->prepare("SELECT * FROM {$this->app_table} WHERE start<%s", date("Y-m-d H:i:s", $this->local_time)) );
-		if ( $expireds ) {
+		if ( $expireds && $process_expired ) {
 			foreach ( $expireds as $expired ) {
 				if ( 'pending' == $expired->status || 'reserved' == $expired->status )
 					$new_status = 'removed';
