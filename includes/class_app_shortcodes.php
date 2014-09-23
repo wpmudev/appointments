@@ -1752,7 +1752,6 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 			if ( $city_meta )
 				$c = $city_meta;
 		}
-
 		$ret = '';
 		$ret .= '<div class="appointments-confirmation-wrapper"><fieldset>';
 		$ret .= '<legend>';
@@ -1968,6 +1967,18 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 
 
 function app_core_shortcodes_register ($shortcodes) {
+
+	// Unless manually disabled...
+	if (!(defined('APP_PRESERVE_DEFAULT_FORMATTING_ORDER') && APP_PRESERVE_DEFAULT_FORMATTING_ORDER)) {
+		// ... or disabled by some code ...
+		if (has_action('the_content', 'wpautop')) {
+			// ... move the default formatting functions higher up the chain
+			remove_filter('the_content', 'wpautop');
+			add_filter('the_content', 'wpautop', 20);
+			add_filter('the_content', 'shortcode_unautop', 21);
+		}
+	}
+
 	$shortcodes['app_worker_montly_calendar'] = 'App_Shortcode_WorkerMontlyCalendar'; // Typo :(
 	$shortcodes['app_worker_monthly_calendar'] = 'App_Shortcode_WorkerMonthlyCalendar';
 	$shortcodes['app_schedule'] = 'App_Shortcode_WeeklySchedule';
