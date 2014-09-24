@@ -24,7 +24,6 @@ class AppointmentsGcal {
 		$this->__construct();
 	}
 	function __construct() {
-
 		global $wpdb, $appointments;
 
 		$this->local_time	= current_time('timestamp');
@@ -1195,14 +1194,12 @@ class AppointmentsGcal {
 	 */
 	function import_and_update_events( $worker_id=0 ) {
 		global $appointments, $wpdb;
-		if ( !$this->connect( $worker_id ) )
-			return false;
+		
+		if (!$this->connect($worker_id)) return false;
 
 		// Find time difference from Greenwich as GCal time will be converted to UTC, but we want local time
-		if ( !current_time('timestamp') )
-			$tdif = 0;
-		else
-			$tdif = current_time('timestamp') - time();
+		if (!current_time('timestamp')) $tdif = 0;
+		else $tdif = current_time('timestamp') - time();
 
 		// Get only future events and limit them with appointment limit setting and 500 events
 		$events = $this->service->events->listEvents( $this->get_selected_calendar( $worker_id ),
@@ -1219,7 +1216,8 @@ class AppointmentsGcal {
 		if ($events && !$this->service->events->useObjects() && class_exists('Google_Events')) {
 			$events = new Google_Events($events);
 		}
-		$message = $event_ids = '';
+		$message = '';
+		$event_ids = array();
 		$values = array();
 
 		$present_events = $wpdb->get_col("SELECT DISTINCT gcal_ID FROM {$this->app_table} WHERE gcal_ID IS NOT NULL");
@@ -1240,7 +1238,7 @@ class AppointmentsGcal {
 			foreach ($events->getItems() as $event) {
 				$event_id = $event->getID();
 				// Add the ID to the list
-				$event_ids .= "'". $event_id . "',";
+				$event_ids[] = !empty($event_id) ? "'{$event_id}'" : '';
 
 				$event_start = $event->getStart();
 				$event_end = $event->getEnd();
@@ -1262,6 +1260,7 @@ class AppointmentsGcal {
 				}
 			}
 
+			// Insert new events
 			if ( !empty( $values ) ) {
 				// Try to adjust auto increment value
 				$this->adjust_auto_increment();
@@ -1274,6 +1273,8 @@ class AppointmentsGcal {
 					$message = sprintf( __('%s appointment record(s) affected.','appointments'), $result ). ' ';
 				}
 			}
+
+			// Update existing events
 			if (!empty($to_update)) {
 				$result = (int)$result;
 				foreach ($to_update as $upd) {
@@ -1284,14 +1285,18 @@ class AppointmentsGcal {
 			}
 		}
 
-		if ( $event_ids ) {
-				// Delete unlisted events for the selected worker
-				$event_ids = "(". rtrim( $event_ids, ',' ) . ")";
-				$r3 = $wpdb->query( "DELETE FROM " . $this->app_table . " WHERE status='reserved' AND worker=".$worker_id." AND gcal_ID NOT IN " . $event_ids . " " );
-				if ( $r3 ) {
-					$this->deleted++;
-					$this->adjust_auto_increment();
-				}
+		// Next step - deal with the previously imported appointments removal
+		$r3 = false;
+		if (!empty($event_ids)) {
+			// Delete unlisted events for the selected worker
+			$event_ids_range = '(' . join(array_filter($event_ids), ',') . ')';
+			$r3 = $wpdb->query($wpdb->prepare("DELETE FROM {$this->app_table} WHERE status='reserved' AND worker=%d AND gcal_ID NOT IN {$event_ids_range}", $worker_id));
+		} else { // In case we have existing reserved events that have been removed from GCal and nothing else
+			$r3 = $wpdb->query($wpdb->prepare("DELETE FROM {$this->app_table} WHERE status='reserved' AND worker=%d AND gcal_ID IS NOT NULL", $worker_id));
+		}
+		if ($r3) { // We have deleted some appointments in previous step.
+			$this->deleted++;
+			$this->adjust_auto_increment();
 		}
 
 		if ( $this->deleted )
@@ -1309,6 +1314,11 @@ class AppointmentsGcal {
 		$max = $wpdb->get_var( "SELECT MAX(ID) FROM " . $this->app_table . " " );
 		if ( $max )
 			 $wpdb->query( "ALTER TABLE " . $this->app_table ." AUTO_INCREMENT=". ($max+1). " " );
+	}
+
+	public function is_syncable_status ($status=false) {
+		$syncable_status = apply_filters('app-gcal-syncable_status', array('paid', 'confirmed'));
+		return in_array($status, $syncable_status);
 	}
 }
 }

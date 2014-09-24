@@ -16,7 +16,12 @@ function create_app_login_interface ($me) {
 		'<ul class="appointments-login_links">' +
 			(is_available('facebook') ? '<li><a href="#" class="appointments-login_link appointments-login_link-facebook">' + l10nAppApi.facebook + '</a></li>' : '') +
 			(is_available('twitter') ? '<li><a href="#" class="appointments-login_link appointments-login_link-twitter">' + l10nAppApi.twitter + '</a></li>' : '') +
-			(is_available('google') ? '<li><a href="#" class="appointments-login_link appointments-login_link-google">' + l10nAppApi.google + '</a></li>' : '') +
+			(is_available('google') ? (
+				l10nAppApi.gg_client_id
+					//? '<li><div id="app-gg-sign_in">' + l10nAppApi.google + '</div></li>'
+					? '<li><span id="signinButton"> <span class="g-signin"data-callback="app_google_plus_login_callback"data-clientid="' + l10nAppApi.gg_client_id + '"data-cookiepolicy="single_host_origin"data-scope="profile email"> </span> </span></li>'
+					: '<li><a href="#" class="appointments-login_link appointments-login_link-google">' + l10nAppApi.google + '</a></li>'
+			) : '')  +
 			(is_available('wordpress') ? '<li><a href="#" class="appointments-login_link appointments-login_link-wordpress">' + l10nAppApi.wordpress + '</a></li>' : '') +
 			'<li class="app_login_submit"><input type="text" class="app_username" name="log" placeholder="Username" /><input type="password" name="pwd" class="app_password" placeholder="Password" /><a href="javascript:void(0)" class="appointments-login_link appointments-login_link-submit">' + l10nAppApi.submit + '</a></li>' +
 			(l10nAppApi.registration_url ? '<li><a href="' + l10nAppApi.registration_url + '" class="appointments-login_link appointments-register_link-wordpress">' + l10nAppApi.register + '</a></li>' : '') +
@@ -202,16 +207,34 @@ function create_app_login_interface ($me) {
 			.bind('click', callback)
 		;
 	});
+	if (l10nAppApi.gg_client_id && "undefined" !== typeof gapi && "undefined" !== typeof gapi.signin) gapi.signin.go();
+}
+
+function signinCallback(authResult) {
+	if (authResult['status']['signed_in']) {
+		$.post(_appointments_data.ajax_url, {
+			"action": "app_google_plus_login",
+			"token": authResult['access_token']
+		}, function (data) {
+			window.location.href = window.location.href;
+		});
+	}
 }
 
 // Init
-
 $(function () {
 	$(document).on("click", ".appointments-login_show_login", function () {
-			create_app_login_interface($(this));
-			return false;
-		})
-	;
+		create_app_login_interface($(this));
+		return false;
+	});
+	if (l10nAppApi.gg_client_id) {
+		window.app_google_plus_login_callback = signinCallback;
+		(function() {
+			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			po.src = 'https://apis.google.com/js/client:plusone.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+		})();
+	}
 });
 })(jQuery);
 function app_checkclear(what){

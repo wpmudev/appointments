@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.4.4
+Version: 1.4.5-BETA-4
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -32,14 +32,8 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	var $version = "1.4.4";
+	var $version = "1.4.5-BETA-4";
 
-	/**
-     * Constructor
-     */
-	function Appointments() {
-		$this->__construct();
-	}
 	function __construct() {
 
 		$this->plugin_dir = plugin_dir_path(__FILE__);
@@ -184,6 +178,7 @@ class Appointments {
 		add_action('wp_ajax_nopriv_app_get_twitter_auth_url', array($this, 'handle_get_twitter_auth_url'));
 		add_action('wp_ajax_nopriv_app_twitter_login', array($this, 'handle_twitter_login'));
 		add_action('wp_ajax_nopriv_app_ajax_login', array($this, 'ajax_login'));
+		add_action('wp_ajax_nopriv_app_google_plus_login', array($this, 'handle_gplus_login'));
 
 		// Google+ login
 		if (!class_exists('LightOpenID')) {
@@ -1252,22 +1247,25 @@ class Appointments {
 	 */
 	function change_status( $stat, $app_id ) {
 		global $wpdb;
-		if ( !$app_id || !$stat )
-			return false;
+		
+		if (!$app_id || !$stat) return false;
 
-		$result = $wpdb->update( $this->app_table,
-									array('status'	=> $stat),
-									array('ID'		=> $app_id)
-					);
-		if ( $result ) {
+		$result = $wpdb->update($this->app_table,
+			array('status' => $stat),
+			array('ID' => $app_id)
+		);
+
+		if ($result) {
 			$this->flush_cache();
 			do_action( 'app_change_status', $stat, $app_id );
-			if ( ($stat == 'paid' || $stat == 'confirmed') && is_object( $this->gcal_api ) )
+
+			//if ( ($stat == 'paid' || $stat == 'confirmed') && is_object( $this->gcal_api ) ) {
+			if (is_object($this->gcal_api) &&  $this->gcal_api->is_syncable_status($stat)) {
 				$this->gcal_api->update( $app_id );
+			}
 			return true;
 		}
-		else
-			return false;
+		return false;
 	}
 
 
@@ -1665,8 +1663,9 @@ class Appointments {
 			$this->send_confirmation( $insert_id );
 
 		// Add to GCal API
-		if ( ('confirmed' == $status || 'paid' == $status) && is_object( $this->gcal_api ) )
+		if (is_object($this->gcal_api) && $this->gcal_api->is_syncable_status($status)) {
 			$this->gcal_api->insert( $insert_id );
+		}
 
 		// GCal button
 		if ( isset( $this->options["gcal"] ) && 'yes' == $this->options["gcal"] && $gcal )
@@ -2103,7 +2102,6 @@ class Appointments {
 	 * Helper function to create a time table for monthly schedule
 	 */
 	function get_timetable( $day_start, $capacity, $schedule_key=false ) {
-
 		// We need this only for the first timetable
 		// Otherwise $time will be calculated from $day_start
 		if ( isset( $_GET["wcalendar"] ) && (int)$_GET['wcalendar'] )
@@ -3051,6 +3049,79 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 				"status" => 0,
 				"error" => $user->get_error_message()
 			)));
+	}
+
+	/**
+	 * Handles the Google+ OAuth type login.
+	 */
+	function handle_gplus_login () {
+		header("Content-type: application/json");
+		$resp = array(
+			"status" => 0,
+		);
+		if (empty($this->options['google-client_id'])) die(json_encode($resp)); // Yeah, we're not equipped to deal with this
+
+		$data = stripslashes_deep($_POST);
+		$token = !empty($data['token']) ? $data['token'] : false;
+		if (empty($token)) die(json_encode($resp));
+
+		// Start verifying
+		$page = wp_remote_get('https://www.googleapis.com/userinfo/v2/me', array(
+			'sslverify' => false,
+			'timeout' => 5,
+			'headers' => array(
+				'Authorization' => sprintf('Bearer %s', $token),
+			)
+		));
+		if (200 != wp_remote_retrieve_response_code($page)) die(json_encode($resp));
+
+		$body = wp_remote_retrieve_body($page);
+		$response = json_decode($body, true); // Body is JSON
+		if (empty($response['id'])) die(json_encode($resp));
+
+		$first = !empty($response['given_name']) ? $response['given_name'] : '';
+		$last = !empty($response['family_name']) ? $response['family_name'] : '';
+		$email = !empty($response['email']) ? $response['email'] : '';
+
+		if (empty($email) || (empty($first) && empty($last))) die(json_encode($resp)); // In case we're missing stuff
+
+		$username = false;
+		if (!empty($last) && !empty($first)) $username = "{$first}_{$last}";
+		else if (!empty($first)) $username = $first;
+		else if (!empty($last)) $username = $last;
+
+		if (empty($username)) die(json_encode($resp)); // In case we're missing stuff
+
+		$wordp_user = get_user_by('email', $email);
+
+		if (!$wordp_user) { // Not an existing user, let's create a new one
+			$password = wp_generate_password(12, false);
+			$count = 0;
+			while (username_exists($username)) {
+				$username .= rand(0,9);
+				if (++$count > 10) break;
+			}
+
+			$wordp_user = wp_create_user($username, $password, $email);
+			if (is_wp_error($wordp_user))
+				die(json_encode($resp)); // Failure creating user
+			else {
+				update_user_meta($wordp_user, 'first_name', $first);
+				update_user_meta($wordp_user, 'last_name', $last);
+			}
+		}
+		else {
+			$wordp_user = $wordp_user->ID;
+		}
+
+		$user = get_userdata($wordp_user);
+		wp_set_current_user($user->ID, $user->user_login);
+		wp_set_auth_cookie($user->ID); // Logged in with Google, yay
+		do_action('wp_login', $user->user_login);
+
+		die(json_encode(array(
+			"status" => 1,
+		)));
 	}
 
 	/**
@@ -4131,7 +4202,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 				'error' => __('Login error. Please try again.', 'appointments'),
 				'_can_use_twitter' => (!empty($this->options['twitter-app_id']) && !empty($this->options['twitter-app_secret'])),
 				'show_login_button' => $show_login_button,
-				
+				'gg_client_id' => $this->options['google-client_id'],
 				'register' => ($do_register ? __('Register', 'appointments') : ''),
 				'registration_url' => ($do_register ? wp_registration_url() : ''),
 			)));
@@ -4218,95 +4289,70 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		// Since wp-cron is not reliable, use this instead
 		add_option( "app_last_update", time() );
 
-$confirmation_message = "Dear CLIENT,
+		$confirmation_message = App_Template::get_default_confirmation_message();
+		$reminder_message = App_Template::get_default_reminder_message();
 
-We are pleased to confirm your appointment for SITE_NAME.
-
-Here are the appointment details:
-Requested service: SERVICE
-Date and time: DATE_TIME
-
-SERVICE_PROVIDER will assist you for this service.
-
-Kind regards,
-SITE_NAME
-";
-
-$reminder_message = "Dear CLIENT,
-
-We would like to remind your appointment with SITE_NAME.
-
-Here are your appointment details:
-Requested service: SERVICE
-Date and time: DATE_TIME
-
-SERVICE_PROVIDER will assist you for this service.
-
-Kind regards,
-SITE_NAME
-";
-		add_option( 'appointments_options', array(
-													'min_time'					=> 30,
-													'additional_min_time'		=> '',
-													'admin_min_time'			=> '',
-													'app_lower_limit'			=> 0,
-													'app_limit'					=> 365,
-													'clear_time'				=> 60,
-													'spam_time'					=> 0,
-													'auto_confirm'				=> 'no',
-													'allow_worker_selection'	=> 'no',
-													'allow_worker_confirm'		=> 'no',
-													'allow_overwork'			=> 'no',
-													'allow_overwork_break'		=> 'no',
-													'dummy_assigned_to'			=> 0,
-													'app_page_type'				=> 'monthly',
-													'accept_api_logins'			=> '',
-													'facebook-app_id'			=> '',
-													'twitter-app_id'			=> '',
-													'twitter-app_secret'		=> '',
-													'show_legend'				=> 'yes',
-													'gcal'						=> 'yes',
-													'gcal_location'				=> '',
-													'color_set'					=> 1,
-													'free_color'				=> '48c048',
-													'busy_color'				=> 'ffffff',
-													'notpossible_color'			=> 'ffffff',
-													'make_an_appointment'		=> '',
-													'ask_name'					=> '1',
-													'ask_email'					=> '1',
-													'ask_phone'					=> '1',
-													'ask_address'				=> '',
-													'ask_city'					=> '',
-													'ask_note'					=> '',
-													'additional_css'			=> '.entry-content td{border:none;width:50%}',
-													'payment_required'			=> 'no',
-													'percent_deposit'			=> '',
-													'fixed_deposit'				=> '',
-													'currency'					=> 'USD',
-													'mode'						=> 'sandbox',
-													'merchant_email'			=> '',
-													'return'					=> 1,
-													'login_required'			=> 'no',
-													'send_confirmation'			=> 'yes',
-													'send_notification'			=> 'no',
-													'send_reminder'				=> 'yes',
-													'reminder_time'				=> '24',
-													'send_reminder_worker'		=> 'yes',
-													'reminder_time_worker'		=> '4',
-													'confirmation_subject'		=> __('Confirmation of your Appointment','appointments'),
-													'confirmation_message'		=> $confirmation_message,
-													'reminder_subject'			=> __('Reminder for your Appointment','appointments'),
-													'reminder_message'			=> $reminder_message,
-													'log_emails'				=> 'yes',
-													'use_cache'					=> 'no',
-													'use_mp'					=> false,
-													'allow_cancel'				=> 'no',
-													'cancel_page'				=> 0
-										)
-		);
+		add_option('appointments_options', array(
+			'min_time'					=> 30,
+			'additional_min_time'		=> '',
+			'admin_min_time'			=> '',
+			'app_lower_limit'			=> 0,
+			'app_limit'					=> 365,
+			'clear_time'				=> 60,
+			'spam_time'					=> 0,
+			'auto_confirm'				=> 'no',
+			'allow_worker_selection'	=> 'no',
+			'allow_worker_confirm'		=> 'no',
+			'allow_overwork'			=> 'no',
+			'allow_overwork_break'		=> 'no',
+			'dummy_assigned_to'			=> 0,
+			'app_page_type'				=> 'monthly',
+			'accept_api_logins'			=> '',
+			'facebook-app_id'			=> '',
+			'twitter-app_id'			=> '',
+			'twitter-app_secret'		=> '',
+			'show_legend'				=> 'yes',
+			'gcal'						=> 'yes',
+			'gcal_location'				=> '',
+			'color_set'					=> 1,
+			'free_color'				=> '48c048',
+			'busy_color'				=> 'ffffff',
+			'notpossible_color'			=> 'ffffff',
+			'make_an_appointment'		=> '',
+			'ask_name'					=> '1',
+			'ask_email'					=> '1',
+			'ask_phone'					=> '1',
+			'ask_address'				=> '',
+			'ask_city'					=> '',
+			'ask_note'					=> '',
+			'additional_css'			=> '.entry-content td{border:none;width:50%}',
+			'payment_required'			=> 'no',
+			'percent_deposit'			=> '',
+			'fixed_deposit'				=> '',
+			'currency'					=> 'USD',
+			'mode'						=> 'sandbox',
+			'merchant_email'			=> '',
+			'return'					=> 1,
+			'login_required'			=> 'no',
+			'send_confirmation'			=> 'yes',
+			'send_notification'			=> 'no',
+			'send_reminder'				=> 'yes',
+			'reminder_time'				=> '24',
+			'send_reminder_worker'		=> 'yes',
+			'reminder_time_worker'		=> '4',
+			'confirmation_subject'		=> __('Confirmation of your Appointment','appointments'),
+			'confirmation_message'		=> $confirmation_message,
+			'reminder_subject'			=> __('Reminder for your Appointment','appointments'),
+			'reminder_message'			=> $reminder_message,
+			'log_emails'				=> 'yes',
+			'use_cache'					=> 'no',
+			'use_mp'					=> false,
+			'allow_cancel'				=> 'no',
+			'cancel_page'				=> 0
+		));
 
 		//  Run this code not before 10 mins
-		if ( ( time( ) - get_option( "app_last_update" ) ) < apply_filters( 'app_update_time', 600 ) )
+		if ( ( time() - get_option( "app_last_update" ) ) < apply_filters( 'app_update_time', 600 ) )
 			return;
 		$this->remove_appointments();
 		$this->send_reminder();
@@ -4468,6 +4514,94 @@ SITE_NAME
 					$this->log( sprintf( __('Notification message sent to %s for appointment ID:%s','appointments'), $this->get_worker_email( $r->worker ), $app_id ) );
 			}
 		}
+		return true;
+	}
+
+	/**
+	 * Sends out a removal notification email.
+	 * This email is sent out only on admin status change, *not* on appointment cancellation by user.
+	 * The email will go out to the client and, perhaps, worker and admin.
+	 */
+	function send_removal_notification ($app_id) {
+		if ( !isset( $this->options["send_removal_notification"] ) || 'yes' != $this->options["send_removal_notification"] ) return false;
+		$app = $this->get_app($app_id);
+		$log = isset($this->options["log_emails"]) && 'yes' == $this->options["log_emails"];
+		$email = !empty($app->email) ? $app->email : false;
+		if (empty($email) && !empty($app->user) && is_numeric($app->user)) {
+			// If we don't have an email, try getting one if user ID is set
+			$wp_user = get_user_by('id', (int)$app->user);
+			if ($wp_user && !empty($wp_user->user_email)) $email = $wp_user->user_email;
+		}
+		if (empty($email)) {
+			// No reason to carry on, we don't know how to notify the client
+			if ($log) $this->log(sprintf(__('Unable to notify the client about the appointment ID:%s removal, stopping.', 'appointments'), $app_id));
+			return false;
+		}
+
+		$subject = !empty($this->options['removal_notification_subject']) 
+			? $this->options['removal_notification_subject'] 
+			: App_Template::get_default_removal_notification_subject()
+		;
+		$subject = $this->_replace($subject,
+			$app->name,
+			$this->get_service_name($app->service), 
+			$this->get_worker_name($app->worker),
+			$app->start, 
+			$app->price, 
+			$this->get_deposit($app->price), 
+			$app->phone, 
+			$app->note, 
+			$app->address, 
+			$app->email, 
+			$app->city
+		);
+		$msg = !empty($this->options['removal_notification_message']) 
+			? $this->options['removal_notification_message'] 
+			: App_Template::get_default_removal_notification_message()
+		;
+		$msg = $this->_replace($msg,
+			$app->name,
+			$this->get_service_name($app->service), 
+			$this->get_worker_name($app->worker),
+			$app->start, 
+			$app->price, 
+			$this->get_deposit($app->price), 
+			$app->phone, 
+			$app->note, 
+			$app->address, 
+			$app->email, 
+			$app->city
+		);
+		$result = wp_mail(
+			$email,
+			$subject,
+			$msg,
+			$this->message_headers()
+		);
+		if ($result && $log) {
+			$this->log(sprintf(__('Removal notification message sent to %s for appointment ID:%s', 'appointments'), $email, $app_id));
+		}
+
+		$disable = apply_filters( 'app_removal_notification_disable_admin', false, $app, $app_id );
+		if ($disable) return false;
+
+		//  Send a copy to admin and service provider
+		$to = array($this->get_admin_email());
+
+		$worker_email = $this->get_worker_email($app->worker);
+		if ($worker_email) $to[]= $worker_email;
+
+		$provider_add_text  = sprintf(__('An appointment removal notification for %s has been sent to your client:', 'appointments'), $app_id);
+		$provider_add_text .= "\n\n\n";
+
+		wp_mail(
+			$to,
+			__('Removal notification', 'appointments'),
+			$provider_add_text . $msg,
+			$this->message_headers()
+		);
+
+
 		return true;
 	}
 
@@ -4686,8 +4820,10 @@ SITE_NAME
 
 		global $wpdb;
 
+		$process_expired = apply_filters('app-auto_cleanup-process_expired', true);
+
 		$expireds = $wpdb->get_results( $wpdb->prepare("SELECT * FROM {$this->app_table} WHERE start<%s", date("Y-m-d H:i:s", $this->local_time)) );
-		if ( $expireds ) {
+		if ( $expireds && $process_expired ) {
 			foreach ( $expireds as $expired ) {
 				if ( 'pending' == $expired->status || 'reserved' == $expired->status )
 					$new_status = 'removed';
@@ -5249,6 +5385,7 @@ SITE_NAME
 			$this->options['facebook-app_id']			= trim( $_POST['facebook-app_id'] );
 			$this->options['twitter-app_id']			= trim( $_POST['twitter-app_id'] );
 			$this->options['twitter-app_secret']		= trim( $_POST['twitter-app_secret'] );
+			$this->options['google-client_id']			= trim( $_POST['google-client_id'] );
 
 			$this->options["app_page_type"]				= $_POST["app_page_type"];
 			$this->options["show_legend"]				= $_POST["show_legend"];
@@ -5286,6 +5423,11 @@ SITE_NAME
 			$this->options["reminder_time_worker"]		= str_replace( " ", "", $_POST["reminder_time_worker"] );
 			$this->options["reminder_subject"]			= stripslashes( $_POST["reminder_subject"] );
 			$this->options["reminder_message"]			= stripslashes( $_POST["reminder_message"] );
+			
+			$this->options["send_removal_notification"] = $_POST["send_removal_notification"];
+			$this->options["removal_notification_subject"] = stripslashes( $_POST["removal_notification_subject"] );
+			$this->options["removal_notification_message"] = stripslashes( $_POST["removal_notification_message"] );
+
 			$this->options["log_emails"]				= $_POST["log_emails"];
 
 			$this->options['use_cache'] 				= $_POST['use_cache'];
@@ -5607,10 +5749,11 @@ SITE_NAME
 						if ( 'removed' == $new_status ) {
 							foreach ( $_POST["app"] as $app_id ) {
 								$this->gcal_api->delete( $app_id );
+								$this->send_removal_notification($app_id);
 							}
 						}
 						// If confirmed or paid, add these to GCal
-						else if ( 'paid' == $new_status || 'confirmed' == $new_status ) {
+						else if (is_object($this->gcal_api) && $this->gcal_api->is_syncable_status($new_status)) {
 							foreach ( $_POST["app"] as $app_id ) {
 								$this->gcal_api->update( $app_id );
 								// Also send out an email
@@ -5633,147 +5776,34 @@ SITE_NAME
 	}
 
 	private function _create_pages () {
-// Bimonthly schedule
-$two_months = '
-<td colspan="2">
-[app_monthly_schedule]
-</td>
-</tr>
-<td colspan="2">
-[app_monthly_schedule add="1"]
-</td>
-</tr>
-<tr>
-<td colspan="2">
-[app_pagination step="2" month="1"]
-</td>
-';
-
-// Monthly schedule
-$one_month = '
-<td colspan="2">
-[app_monthly_schedule]
-</td>
-</tr>
-<tr>
-<td colspan="2">
-[app_pagination month="1"]
-</td>
-';
-
-// Two week schedule
-$two_weeks = '
-<td>
-[app_schedule]
-</td>
-<td>
-[app_schedule add="1"]
-</td>
-</tr>
-<tr>
-<td colspan="2">
-[app_pagination step="2"]
-</td>
-';
-
-// One week schedule
-$one_week = '
-<td colspan="2">
-[app_schedule long="1"]
-</td>
-</tr>
-<tr>
-<td colspan="2">
-[app_pagination]
-</td>
-';
-
-// Common parts
-$template = '
-<table>
-<tbody>
-<tr>
-<td colspan="2">
-[app_my_appointments]
-</td>
-</tr>
-<tr>
-<td>[app_services]</td>
-<td>[app_service_providers]</td>
-</tr>
-<tr>
-PLACEHOLDER
-</tr>
-<tr>
-<td colspan="2">
-[app_login]
-</td>
-</tr>
-<tr>
-<td colspan="2">
-[app_confirmation]
-</td>
-</tr>
-<tr>
-<td colspan="2">
-[app_paypal]
-</td>
-</tr>
-</tbody>
-</table>
-';
 		// Add an appointment page
 		if ( isset( $_POST["make_an_appointment"] ) ) {
-
-			switch( $_POST["app_page_type"] ) {
-				case 'two_months':	$content = str_replace( 'PLACEHOLDER', $two_months, $template ); break;
-				case 'one_month':	$content = str_replace( 'PLACEHOLDER', $one_month, $template ); break;
-				case 'two_weeks':	$content = str_replace( 'PLACEHOLDER', $two_weeks, $template ); break;
-				case 'one_week':	$content = str_replace( 'PLACEHOLDER', $one_week, $template ); break;
-				default:			$content = str_replace( 'PLACEHOLDER', $one_month, $template ); break;
-			}
-
+			$tpl = !empty($_POST['app_page_type']) ? $_POST['app_page_type'] : false;
 			wp_insert_post(
 					array(
 						'post_title'	=> 'Make an Appointment',
 						'post_status'	=> 'publish',
 						'post_type'		=> 'page',
-						'post_content'	=> $content
+						'post_content'	=> App_Template::get_default_page_template($tpl)
 					)
 			);
 		}
 
 		// Add an appointment product page
 		if ( isset( $_POST["make_an_appointment_product"] ) && $this->marketpress_active ) {
-
-			switch( $_POST["app_page_type_mp"] ) {
-				case 'two_months':	$content = str_replace( 'PLACEHOLDER', $two_months, $template ); break;
-				case 'one_month':	$content = str_replace( 'PLACEHOLDER', $one_month, $template ); break;
-				case 'two_weeks':	$content = str_replace( 'PLACEHOLDER', $two_weeks, $template ); break;
-				case 'one_week':	$content = str_replace( 'PLACEHOLDER', $one_week, $template ); break;
-				default:			$content = str_replace( 'PLACEHOLDER', $one_month, $template ); break;
-			}
-
+			$tpl = !empty($_POST['app_page_type_mp']) ? $_POST['app_page_type_mp'] : false;
 			$post_id = wp_insert_post(
 					array(
 						'post_title'	=> 'Appointment',
 						'post_status'	=> 'publish',
 						'post_type'		=> 'product',
-						'post_content'	=> $content
+						'post_content'	=> App_Template::get_default_page_template($tpl)
 					)
 			);
 			if ( $post_id ) {
 				// Add a download link, so that app will be a digital product
 				$file = get_post_meta($post_id, 'mp_file', true);
-				if ( !$file )
-					add_post_meta( $post_id, 'mp_file', get_permalink( $post_id) );
-
-/*
-				// Do NOT! Add product link because it'll blow up store orders...
-				$link = get_post_meta($post_id, 'mp_product_link', true);
-				if ( !$link )
-					add_post_meta( $post_id, 'mp_product_link', get_permalink( $post_id ) );
-*/
+				if ( !$file ) add_post_meta( $post_id, 'mp_file', get_permalink( $post_id) );
 
 				// MP requires at least 2 variations, so we add a dummy one
 				add_post_meta( $post_id, 'mp_var_name', array( 0 ) );
@@ -5991,1115 +6021,8 @@ PLACEHOLDER
 			?>
 		</h3>
 		<div class="clear"></div>
-		<?php switch( $tab ) {
-		case 'main':	?>
-
-		<div id="poststuff" class="metabox-holder">
-		<span class="description"><?php _e('Appointments+ plugin makes it possible for your clients to apply for appointments from the front end or for you to enter appointments from backend. You can define services with different durations and assign service providers to any of them. In this page, you can set settings which will be valid in general.', 'appointments') ?></span>
-		<br />
-		<br />
-			<form method="post" action="" >
-
-				<div class="postbox">
-					<h3 class='hndle'><span><?php _e('Time Settings', 'appointments') ?></span></h3>
-					<div class="inside">
-						<table class="form-table">
-
-						<tr valign="top">
-						<th scope="row" ><?php _e('Time base (minutes)', 'appointments')?></th>
-						<td colspan="2">
-						<select name="min_time">
-						<?php
-						foreach ( $this->time_base() as $min_time ) {
-							if ( ( isset($this->options["min_time"]) ) && $this->options["min_time"] == $min_time )
-								$s = ' selected="selected"';
-							else
-								$s = '';
-							echo '<option value="'.$min_time .'"'. $s . '>'. $min_time . '</option>';
-						}
-						?>
-						</select>
-						<span class="description"><?php _e('Minimum time that will be effective for durations, appointment and schedule intervals. Service durations can only be set as multiples of this value. Default: 30.', 'appointments') ?></span>
-						</tr>
-
-						<tr valign="top">
-						<th scope="row" ><?php _e('Additional time base (minutes)', 'appointments')?></th>
-						<td colspan="2"><input type="text" style="width:50px" name="additional_min_time" value="<?php if ( isset($this->options["additional_min_time"]) ) echo $this->options["additional_min_time"] ?>" />
-						<span class="description"><?php _e('If the above time bases do not fit your business, you can add a new one, e.g. 240. Note: After you save this additional time base, you must select it using the above setting. Note: Minimum allowed time base setting is 10 minutes.', 'appointments') ?></span>
-						</tr>
-
-						<tr valign="top">
-						<th scope="row" ><?php _e('Admin side time base (minutes)', 'appointments')?></th>
-						<td colspan="2"><input type="text" style="width:50px" name="admin_min_time" value="<?php if ( isset($this->options["admin_min_time"]) ) echo $this->options["admin_min_time"] ?>" />
-						<span class="description"><?php _e('This setting may be used to provide flexibility while manually setting and editing the appointments. For example, if you enter here 15, you can reschedule an appointment for 15 minutes intervals even selected time base is 45 minutes. If you leave this empty, then the above selected time base will be applied on the admin side.', 'appointments') ?></span>
-						</tr>
-
-						<tr valign="top">
-						<th scope="row" ><?php _e('Appointments lower limit (hours)', 'appointments')?></th>
-						<td colspan="2"><input type="text" style="width:50px" name="app_lower_limit" value="<?php if ( isset($this->options["app_lower_limit"]) ) echo $this->options["app_lower_limit"] ?>" />
-						<span class="description"><?php _e('This will block time slots to be booked with the set value starting from current time. For example, if you need 2 days to evaluate and accept an appointment, enter 48 here. Default: 0 (no blocking - appointments can be made if end time has not been passed)', 'appointments') ?></span>
-						</tr>
-
-						<tr valign="top">
-						<th scope="row" ><?php _e('Appointments upper limit (days)', 'appointments')?></th>
-						<td colspan="2"><input type="text" style="width:50px" name="app_limit" value="<?php if ( isset($this->options["app_limit"]) ) echo $this->options["app_limit"] ?>" />
-						<span class="description"><?php _e('Maximum number of days from today that a client can book an appointment. Default: 365', 'appointments') ?></span>
-						</tr>
-
-						<tr valign="top">
-						<th scope="row" ><?php _e('Disable pending appointments after (mins)', 'appointments')?></th>
-						<td colspan="2"><input type="text" style="width:50px" name="clear_time" value="<?php if ( isset($this->options["clear_time"]) ) echo $this->options["clear_time"] ?>" />
-						<span class="description"><?php _e('Pending appointments will be automatically removed (not deleted - deletion is only possible manually) after this set time and that appointment time will be freed. Enter 0 to disable. Default: 60. Please note that pending and GCal reserved appointments whose starting time have been passed will always be removed, regardless of any other setting.', 'appointments') ?></span>
-						</tr>
-
-						<tr valign="top">
-						<th scope="row" ><?php _e('Minimum time to pass for new appointment (secs)', 'appointments')?></th>
-						<td colspan="2"><input type="text" style="width:50px" name="spam_time" value="<?php if ( isset($this->options["spam_time"]) ) echo $this->options["spam_time"] ?>" />
-						<span class="description"><?php _e('You can limit appointment application frequency to prevent spammers who can block your appointments. This is only applied to pending appointments. Enter 0 to disable. Tip: To prevent any further appointment applications of a client before a payment or manual confirmation, enter a huge number here.', 'appointments') ?></span>
-						</tr>
-						<?php do_action('app-settings-time_settings'); ?>
-						</table>
-					</div>
-				</div>
-
-		<div class="postbox">
-            <h3 class='hndle'><span><?php _e('Accessibility Settings', 'appointments') ?></span></h3>
-            <div class="inside">
-
-				<table class="form-table">
-
-					<tr valign="top">
-						<th scope="row" ><?php _e('Auto confirm', 'appointments')?></th>
-						<td colspan="2">
-						<select name="auto_confirm">
-						<option value="no" <?php if ( @$this->options['auto_confirm'] <> 'yes' ) echo "selected='selected'"?>><?php _e('No', 'appointments')?></option>
-						<option value="yes" <?php if ( @$this->options['auto_confirm'] == 'yes' ) echo "selected='selected'"?>><?php _e('Yes', 'appointments')?></option>
-						</select>
-						<span class="description"><?php _e('Setting this as Yes will automatically confirm all appointment applications for no payment required case. Note: "Payment required" case will still require a payment.', 'appointments') ?></span>
-						</td>
-					</tr>
-
-					<tr valign="top">
-						<th scope="row" ><?php _e('Allow client cancel own appointments', 'appointments')?></th>
-						<td colspan="2">
-						<select name="allow_cancel">
-						<option value="no" <?php if ( @$this->options['allow_cancel'] <> 'yes' ) echo "selected='selected'"?>><?php _e('No', 'appointments')?></option>
-						<option value="yes" <?php if ( @$this->options['allow_cancel'] == 'yes' ) echo "selected='selected'"?>><?php _e('Yes', 'appointments')?></option>
-						</select>
-						<span class="description"><?php _e('Whether to allow clients cancel their appointments using the link in confirmation and reminder emails or using my appointments table or for logged in users, using check boxes in their profile pages. For the email case, you will also need to add CANCEL placeholder to the email message settings below. For my appointments table, you will need to add parameter allow_cancel="1" to the shortcode. Note: Admin and service provider will always get a notification email.', 'appointments') ?></span>
-						</td>
-					</tr>
-
-					<tr valign="top">
-						<th scope="row"><?php _e('Appointment cancelled page', 'appointments') ?></th>
-						<td colspan="2">
-						<?php wp_dropdown_pages( array( "show_option_none"=>__('Home page', 'appointments'),"option_none_value "=>0,"name"=>"cancel_page", "selected"=>@$this->options["cancel_page"] ) ) ?>
-						<span class="description"><?php _e('In case he is cancelling using the email link, the page that client will be redirected after he cancelled his appointment.', 'appointments') ?></span>
-						</td>
-					</tr>
-
-					<tr valign="top">
-						<th scope="row" ><?php _e('Allow service provider set working hours', 'appointments')?></th>
-						<td colspan="2">
-						<select name="allow_worker_wh">
-						<option value="no" <?php if ( @$this->options['allow_worker_wh'] <> 'yes' ) echo "selected='selected'"?>><?php _e('No', 'appointments')?></option>
-						<option value="yes" <?php if ( @$this->options['allow_worker_wh'] == 'yes' ) echo "selected='selected'"?>><?php _e('Yes', 'appointments')?></option>
-						</select>
-						<span class="description"><?php _e('Whether you let service providers to set their working/break hours, exceptional days using their profile page or their navigation tab in BuddyPress.', 'appointments') ?></span>
-						</td>
-					</tr>
-
-					<tr valign="top">
-						<th scope="row" ><?php _e('Allow service provider confirm own appointments', 'appointments')?></th>
-						<td colspan="2">
-						<select name="allow_worker_confirm">
-						<option value="no" <?php if ( @$this->options['allow_worker_confirm'] <> 'yes' ) echo "selected='selected'"?>><?php _e('No', 'appointments')?></option>
-						<option value="yes" <?php if ( @$this->options['allow_worker_confirm'] == 'yes' ) echo "selected='selected'"?>><?php _e('Yes', 'appointments')?></option>
-						</select>
-						<span class="description"><?php _e('Whether you let service providers to confirm pending appointments assigned to them using their profile page.', 'appointments') ?></span>
-						</td>
-					</tr>
-
-
-					<tr valign="top">
-						<th scope="row" ><?php _e('Assign dummy service providers to', 'appointments')?></th>
-						<td colspan="2">
-						<?php
-						wp_dropdown_users( array( 'show_option_all'=>__('None','appointments'), 'show'=>'user_login', 'selected' => isset( $this->options["dummy_assigned_to"] ) ? $this->options["dummy_assigned_to"] : 0, 'name'=>'dummy_assigned_to' ) );
-						?>
-						<span class="description"><?php _e('You can define "Dummy" service providers to enrich your service provider alternatives and variate your working schedules. They will behave exactly like ordinary users except the emails they are supposed to receive will be forwarded to the user you select here. Note: You cannot select another dummy user. It must be a user which is not set as dummy.', 'appointments') ?></span>
-						</td>
-					</tr>
-
-					<tr valign="top">
-						<th scope="row" ><?php _e('Login required', 'appointments')?></th>
-						<td colspan="2">
-						<select name="login_required">
-						<option value="no" <?php if ( @$this->options['login_required'] != 'yes' ) echo "selected='selected'"?>><?php _e('No', 'appointments')?></option>
-						<option value="yes" <?php if ( @$this->options['login_required'] == 'yes' ) echo "selected='selected'"?>><?php _e('Yes', 'appointments')?></option>
-						</select>
-						<span class="description"><?php _e('Whether you require the client to login to the website to apply for an appointment. Plugin lets front end logins, without the need for leaving the front end appointment page.', 'appointments') ?></span>
-						</td>
-					</tr>
-					<?php
-					if ( 'yes' != $this->options["login_required"] )
-						$style='style="display:none"';
-					else
-						$style='';
-					?>
-					<script type="text/javascript">
-					jQuery(document).ready(function($){
-						$('select[name="login_required"]').change(function() {
-							if ( $('select[name="login_required"] :selected').val() == 'yes') { $(".api_detail").show(); }
-							else { $(".api_detail").hide(); }
-						});
-					});
-					</script>
-					<tr valign="top" class="api_detail" <?php echo $style?>>
-						<th scope="row" ><?php _e('Accept login from front end','appointments')?></th>
-						<td colspan="2">
-						<input type="checkbox" id="accept_api_logins" name="accept_api_logins" value="true" <?php if ( isset($this->options["accept_api_logins"]) && $this->options["accept_api_logins"]) echo "checked='checked'"?>>
-						<span class="description"><?php _e('Enables login to website from front end using Facebook, Twitter, Google+ or Wordpress.','appointments')?></span>
-						</td>
-					</tr>
-
-					<tr valign="top" class="api_detail" <?php echo $style?>>
-						<th scope="row" ><?php _e('My website already uses Facebook','appointments')?></th>
-						<td colspan="2">
-						<input type="checkbox" name="facebook-no_init" value="true" <?php if ( isset($this->options["facebook-no_init"]) && $this->options["facebook-no_init"]) echo "checked='checked'"?>>
-						<span class="description"><?php _e('By default, Facebook script will be loaded by the plugin. If you are already running Facebook scripts, to prevent any conflict, check this option.','appointments')?></span>
-						</td>
-					</tr>
-
-					<tr valign="top" class="api_detail" <?php echo $style?>>
-						<th scope="row" ><?php _e('Facebook App ID','appointments')?></th>
-						<td colspan="2">
-						<input type="text" style="width:200px" name="facebook-app_id" value="<?php if (isset($this->options["facebook-app_id"])) echo $this->options["facebook-app_id"] ?>" />
-						<br /><span class="description"><?php printf(__("Enter your App ID number here. If you don't have a Facebook App yet, you will need to create one <a href='%s'>here</a>", 'appointments'), 'https://developers.facebook.com/apps')?></span>
-						</td>
-					</tr>
-
-					<tr valign="top" class="api_detail" <?php echo $style?>>
-						<th scope="row" ><?php _e('Twitter Consumer Key','appointments')?></th>
-						<td colspan="2">
-						<input type="text" style="width:200px" name="twitter-app_id" value="<?php if (isset($this->options["twitter-app_id"])) echo $this->options["twitter-app_id"] ?>" />
-						<br /><span class="description"><?php printf(__('Enter your Twitter App ID number here. If you don\'t have a Twitter App yet, you will need to create one <a href="%s">here</a>', 'appointments'), 'https://dev.twitter.com/apps/new')?></span>
-						</td>
-					</tr>
-
-					<tr valign="top" class="api_detail" <?php echo $style?>>
-						<th scope="row" ><?php _e('Twitter Consumer Secret','appointments')?></th>
-						<td colspan="2">
-						<input type="text" style="width:200px" name="twitter-app_secret" value="<?php if (isset($this->options["twitter-app_secret"])) echo $this->options["twitter-app_secret"] ?>" />
-						<br /><span class="description"><?php _e('Enter your Twitter App ID Secret here.', 'appointments')?></span>
-						</td>
-					</tr>
-					<?php do_action('app-settings-accessibility_settings', $style); ?>
-				</table>
-			</div>
+			<?php App_Template::admin_settings_tab($tab); ?>
 		</div>
-
-				<div class="postbox">
-					<h3 class='hndle'><span><?php _e('Display Settings', 'appointments') ?></span></h3>
-					<div class="inside">
-						<table class="form-table">
-
-						<tr valign="top">
-						<th scope="row" ><?php _e('Create an Appointment Page', 'appointments')?></th>
-						<td colspan="2">
-						<input type="checkbox" name="make_an_appointment" <?php if ( isset( $this->options["make_an_appointment"] ) && $this->options["make_an_appointment"] ) echo 'checked="checked"' ?> />
-						&nbsp;<?php _e('with', 'appointments') ?>&nbsp;
-						<select name="app_page_type">
-						<option value="one_month"><?php _e('current month\'s schedule', 'appointments')?></option>
-						<option value="two_months" <?php if ( 'two_months' == @$this->options["app_page_type"] ) echo 'selected="selected"' ?>><?php _e('current and next month\'s schedules', 'appointments')?></option>
-						<option value="one_week" <?php if ( 'one_week' == @$this->options["app_page_type"] ) echo 'selected="selected"' ?>><?php _e('current week\'s schedule', 'appointments')?></option>
-						<option value="two_weeks" <?php if ( 'two_weeks' == @$this->options["app_page_type"] ) echo 'selected="selected"' ?>><?php _e('current and next week\'s schedules', 'appointments')?></option>
-						</select>
-						<br />
-						<span class="description"><?php _e('Creates a front end Appointment page with title "Make an Appointment" with the selected schedule type and inserts all necessary shortcodes (My Appointments, Service Selection, Service Provider Selection, Appointment Schedule, Front end Login, Confirmation Field, Paypal Form)  inside it. You can edit, add parameters to shortcodes, remove undesired shortcodes and customize this page later.', 'appointments') ?></span>
-						<?php
-						$page_id = $wpdb->get_var( "SELECT ID FROM ". $wpdb->posts. " WHERE post_title = 'Make an Appointment' AND post_type='page' ");
-						if ( $page_id ) { ?>
-							<br />
-							<span class="description"><?php _e('<b>Note:</b> You already have such a page. If you check this checkbox, another page with the same title will be created. To edit existing page: ' , 'appointments') ?>
-							<a href="<?php echo admin_url('post.php?post='.$page_id.'&action=edit')?>" target="_blank"><?php _e('Click here', 'appointments')?></a>
-							&nbsp;
-							<?php _e('To view the page:', 'appointments') ?>
-							<a href="<?php echo get_permalink( $page_id)?>" target="_blank"><?php _e('Click here', 'appointments')?></a>
-							</span>
-						<?php }
-						?>
-						</td>
-						</tr>
-
-					<tr valign="top">
-						<th scope="row" ><?php _e('Show Legend', 'appointments')?></th>
-						<td colspan="2">
-						<select name="show_legend">
-						<option value="no" <?php if ( @$this->options['show_legend'] <> 'yes' ) echo "selected='selected'"?>><?php _e('No', 'appointments')?></option>
-						<option value="yes" <?php if ( @$this->options['show_legend'] == 'yes' ) echo "selected='selected'"?>><?php _e('Yes', 'appointments')?></option>
-						</select>
-						<span class="description"><?php _e('Whether to display description fields above the pagination area.', 'appointments') ?></span>
-						</td>
-					</tr>
-
-					<tr valign="top">
-						<th scope="row" ><?php _e('Color Set', 'appointments')?></th>
-						<td style="width:10%">
-						<select name="color_set">
-						<option value="1" <?php if ( @$this->options['color_set'] == 1 ) echo "selected='selected'"?>><?php _e('Preset 1', 'appointments')?></option>
-						<option value="2" <?php if ( @$this->options['color_set'] == 2 ) echo "selected='selected'"?>><?php _e('Preset 2', 'appointments')?></option>
-						<option value="3" <?php if ( @$this->options['color_set'] == 3 ) echo "selected='selected'"?>><?php _e('Preset 3', 'appointments')?></option>
-						<option value="0" <?php if ( @$this->options['color_set'] == 0 ) echo "selected='selected'"?>><?php _e('Custom', 'appointments')?></option>
-						</select>
-						</td>
-						<td >
-						<div class="preset_samples" <?php if ( @$this->options['color_set'] == 0 ) echo 'style="display:none"' ?>>
-						<label style="width:15%;display:block;float:left;font-weight:bold;">
-						<?php _e('Sample:', 'appointments') ?>
-						</label>
-						<?php foreach ( $this->get_classes() as $class=>$name ) { ?>
-						<label style="width:28%;display:block;float:left;">
-							<span style="float:left">
-								<?php echo $name ?>:
-							</span>
-							<span style="float:left;margin-right:8px;">
-								<a href="javascript:void(0)" class="pickcolor <?php echo $class?> hide-if-no-js" <?php if ( @$this->options['color_set'] != 0 ) echo 'style="background-color:#'. $this->get_preset($class, $this->options['color_set']). '"' ?>></a>
-							</span>
-
-						</label>
-					<?php } ?>
-						<div style="clear:both"></div>
-						</div>
-						</td>
-					</tr>
-
-					<tr valign="top">
-						<th scope="row" >&nbsp;</th>
-						<td colspan="2">
-						<span class="description"><?php _e('You can select table cell colors from presets with the given samples or you can define your custom set below which is visible after you select "Custom".', 'appointments') ?></span>
-						</td>
-					</tr>
-
-					<script type="text/javascript">
-					jQuery(document).ready(function($){
-						var hex = new Array;
-
-						$('select[name="color_set"]').change(function() {
-							var n = $('select[name="color_set"] :selected').val();
-							if ( n == 0) { $(".custom_color_row").show(); $(".preset_samples").hide(); }
-							else { $(".custom_color_row").hide();
-							$(".preset_samples").show();
-							<?php foreach ( $this->get_classes() as $class=>$name ) {
-							echo $class .'=new Array;';
-							for ( $k=1; $k<=3; $k++ ) {
-								echo $class .'['. $k .'] = "'. $this->get_preset( $class, $k ) .'";';
-							}
-							echo '$(".preset_samples").find("a.'. $class .'").css("background-color", "#"+'. $class.'[n]);';
-							} ?>
-							}
-						});
-					});
-					</script>
-
-					<tr valign="top" class="custom_color_row" <?php if ( @$this->options['color_set'] != 0 ) echo 'style="display:none"'?>>
-						<th scope="row" ><?php _e('Custom Color Set', 'appointments')?></th>
-						<td colspan="2">
-					<?php foreach ( $this->get_classes() as $class=>$name ) { ?>
-						<label style="width:31%;display:block;float:left;">
-							<span style="float:left"><?php echo $name ?>:</span>
-							<span style="float:left;margin-right:8px;">
-								<a href="javascript:void(0)" class="pickcolor hide-if-no-js" <?php if( isset($this->options[$class."_color"]) ) echo 'style="background-color:#'. $this->options[$class."_color"]. '"' ?>></a>
-								<input style="width:50px" type="text" class="colorpicker_input" maxlength="6" name="<?php echo $class?>_color" id="<?php echo $class?>_color" value="<?php if( isset($this->options[$class."_color"]) ) echo $this->options[$class."_color"] ?>" />
-							</span>
-
-						</label>
-					<?php } ?>
-						<div style="clear:both"></div>
-						<span class="description"><?php _e('If you have selected Custom color set, for each cell enter 3 OR 6-digit Hex code of the color manually without # in front or use the colorpicker.', 'appointments') ?></span>
-						</td>
-					</tr>
-			<script type="text/javascript">
-			jQuery(document).ready(function($){
-				$('.colorpicker_input').each( function() {
-					var id = this.id;
-					$('#'+id).ColorPicker({
-						onSubmit: function(hsb, hex, rgb, el) {
-							$(el).val(hex);
-							$(el).ColorPickerHide();
-						},
-						onBeforeShow: function () {
-							$(this).ColorPickerSetColor(this.value);
-						},
-						onChange: function (hsb, hex, rgb) {
-							$('#'+id).val(hex);
-							$('#'+id).parent().find('a.pickcolor').css('background-color', '#'+hex);
-						}
-					  })
-					  .bind('keyup', function(){
-						$(this).ColorPickerSetColor(this.value);
-					});;
-				});
-				$('.colorpicker_input').keyup( function() {
-					var a = $(this).val();
-					a = a.replace(/[^a-fA-F0-9]/, '');
-					if ( a.length === 3 || a.length === 6 )
-						$(this).parent().find('a.pickcolor').css('background-color', '#'+a);
-				});
-			});
-			</script>
-			<tr valign="top">
-				<th scope="row" ><?php _e('Require these from the client:', 'appointments')?></th>
-				<td colspan="2">
-				<input type="checkbox" name="ask_name" <?php if ( isset( $this->options["ask_name"] ) && $this->options["ask_name"] ) echo 'checked="checked"' ?> />&nbsp;<?php echo $this->get_field_name('name') ?>&nbsp;&nbsp;&nbsp;
-				<input type="checkbox" name="ask_email" <?php if ( isset( $this->options["ask_email"] ) && $this->options["ask_email"] ) echo 'checked="checked"' ?> />&nbsp;<?php echo $this->get_field_name('email') ?>&nbsp;&nbsp;&nbsp;
-				<input type="checkbox" name="ask_phone" <?php if ( isset( $this->options["ask_phone"] ) && $this->options["ask_phone"] ) echo 'checked="checked"' ?> />&nbsp;<?php echo $this->get_field_name('phone') ?>&nbsp;&nbsp;&nbsp;
-				<input type="checkbox" name="ask_address" <?php if ( isset( $this->options["ask_address"] ) && $this->options["ask_address"] ) echo 'checked="checked"' ?> />&nbsp;<?php echo $this->get_field_name('address') ?>&nbsp;&nbsp;&nbsp;
-				<input type="checkbox" name="ask_city" <?php if ( isset( $this->options["ask_city"] ) && $this->options["ask_city"] ) echo 'checked="checked"' ?> />&nbsp;<?php echo $this->get_field_name('city') ?>&nbsp;&nbsp;&nbsp;
-				<input type="checkbox" name="ask_note" <?php if ( isset( $this->options["ask_note"] ) && $this->options["ask_note"] ) echo 'checked="checked"' ?> />&nbsp;<?php echo $this->get_field_name('note') ?>&nbsp;&nbsp;&nbsp;
-				<br />
-				<span class="description"><?php _e('The selected fields will be available in the confirmation area and they will be asked from the client. If selected, filling of them is mandatory (except note field).', 'appointments') ?></span>
-				</td>
-				</tr>
-
-				<tr>
-					<th scope="row"><?php _e('Additional css Rules', 'appointments') ?></th>
-					<td colspan="2">
-					<textarea cols="90" name="additional_css"><?php echo esc_textarea($this->options['additional_css']); ?></textarea>
-					<br />
-					<span class="description"><?php _e('You can add css rules to customize styling. These will be added to the front end appointment page only.', 'appointments') ?></span>
-					</td>
-				</tr>
-				<?php do_action('app-settings-display_settings'); ?>
-				</table>
-			</div>
-		</div>
-
-		<div class="postbox">
-			<h3 class='hndle'><span><?php _e('Payment Settings', 'appointments'); ?></span></h3>
-			<div class="inside">
-			<table class="form-table">
-
-			<tr valign="top">
-				<th scope="row" ><?php _e('Payment required', 'appointments')?></th>
-				<td colspan="2">
-				<select name="payment_required">
-				<option value="no" <?php if ( @$this->options['payment_required'] <> 'yes' ) echo "selected='selected'"?>><?php _e('No', 'appointments')?></option>
-				<option value="yes" <?php if ( @$this->options['payment_required'] == 'yes' ) echo "selected='selected'"?>><?php _e('Yes', 'appointments')?></option>
-				</select>
-				<span class="description"><?php printf( __('Whether you require a payment to accept appointments. If selected Yes, client is asked to pay through Paypal and the appointment will be in pending status until the payment is confirmed by Paypal IPN. If selected No, appointment will be in pending status until you manually approve it using the %s unless Auto Confirm is not set as Yes.', 'appointments'), '<a href="'.admin_url('admin.php?page=appointments').'">'.__('Appointments page', 'appointments').'</a>' ) ?></span>
-				</td>
-			</tr>
-
-			<tr class="payment_row" <?php if ( $this->options['payment_required'] != 'yes' ) echo 'style="display:none"'?>>
-				<th scope="row"><?php _e('Paypal Currency', 'appointments') ?></th>
-				<td colspan="2">
-	          <select name="currency">
-	          <?php
-	          $sel_currency = ($this->options['currency']) ? $this->options['currency'] : $this->options['currency'];
-	          $currencies = App_Template::get_currencies();
-
-	          foreach ($currencies as $k => $v) {
-	              echo '<option value="' . $k . '"' . ($k == $sel_currency ? ' selected' : '') . '>' . esc_html($v, true) . '</option>' . "\n";
-	          }
-	          ?>
-	          </select>
-	        </td>
-	        </tr>
-				<tr class="payment_row" <?php if ( $this->options['payment_required'] != 'yes' ) echo 'style="display:none"'?>>
-					<th scope="row"><?php _e('PayPal Mode', 'appointments') ?></th>
-					<td colspan="2">
-					<select name="mode">
-					  <option value="sandbox"<?php selected($this->options['mode'], 'sandbox') ?>><?php _e('Sandbox', 'appointments') ?></option>
-					  <option value="live"<?php selected($this->options['mode'], 'live') ?>><?php _e('Live', 'appointments') ?></option>
-					</select>
-					</td>
-				</tr>
-
-				<tr class="payment_row" <?php if ( $this->options['payment_required'] != 'yes' ) echo 'style="display:none"'?>>
-					<th scope="row"><?php _e('PayPal Merchant E-mail', 'appointments') ?></th>
-					<td colspan="2">
-					<input value="<?php echo esc_attr($this->options['merchant_email']); ?>" size="30" name="merchant_email" type="text" />
-					<span class="description">
-					<?php
-					printf( __('Just for your information, your IPN link is: <b>%s </b>. You may need this information in some cases.', 'appointments'), admin_url('admin-ajax.php?action=app_paypal_ipn') );
-					?>
-					</span>
-					</td>
-				</tr>
-
-				</tr>
-				<tr class="payment_row" <?php if ( $this->options['payment_required'] != 'yes' ) echo 'style="display:none"'?>>
-					<th scope="row"><?php _e('Thank You Page', 'appointments') ?></th>
-					<td colspan="2">
-					<?php wp_dropdown_pages( array( "show_option_none"=>__('Home page', 'appointments'),"option_none_value "=>0,"name"=>"return", "selected"=>@$this->options["return"] ) ) ?>
-					<span class="description"><?php _e('The page that client will be returned when he clicks the return link on Paypal website.', 'appointments') ?></span>
-					</td>
-
-				</tr>
-
-			<tr class="payment_row" <?php if ( $this->options['payment_required'] != 'yes' ) echo 'style="display:none"'?>>
-					<th scope="row"><?php _e('Deposit (%)', 'appointments') ?></th>
-					<td colspan="2">
-					<input value="<?php echo esc_attr(@$this->options['percent_deposit']); ?>" style="width:50px" name="percent_deposit" type="text" />
-					<span class="description"><?php _e('You may want to ask a certain percentage of the service price as deposit, e.g. 25. Leave this field empty to ask for full price.', 'appointments') ?></span>
-					</td>
-			</tr>
-
-			<tr class="payment_row" <?php if ( $this->options['payment_required'] != 'yes' ) echo 'style="display:none"'?>>
-					<th scope="row"><?php _e('Deposit (fixed)', 'appointments') ?></th>
-					<td colspan="2">
-					<input value="<?php echo esc_attr(@$this->options['fixed_deposit']); ?>" style="width:50px" name="fixed_deposit" type="text" />
-					<span class="description"><?php _e('Same as above, but a fixed deposit will be asked from the client per appointment. If both fields are filled, only the fixed deposit will be taken into account.', 'appointments') ?></span>
-					</td>
-			</tr>
-
-			<tr class="payment_row" <?php if ( $this->options['payment_required'] != 'yes' ) echo 'style="display:none"'; else echo 'style="border-top: 1px solid lightgrey;"'?>>
-					<th scope="row">&nbsp;</th>
-					<td colspan="2">
-					<span class="description"><?php printf( __('The below fields require %s plugin. ', 'appointments'), '<a href="http://premium.wpmudev.org/project/membership/" target="_blank">Membership</a>') ?></span>
-					</td>
-			</tr>
-
-			<tr class="payment_row" <?php if ( $this->options['payment_required'] != 'yes' ) echo 'style="display:none"';?>>
-					<th scope="row"><?php _e('Don\'t ask advance payment from selected Membership level(s)', 'appointments') ?></th>
-					<td colspan="2">
-					<input type="checkbox" name="members_no_payment" <?php if ( isset( $this->options["members_no_payment"] ) && $this->options["members_no_payment"] ) echo 'checked="checked"' ?> />
-					<span class="description"><?php _e('Below selected level(s) will not be asked for an advance payment or deposit. This does not mean that service will be free of charge for them. Such member appointments are automatically confirmed.', 'appointments') ?></span>
-					</td>
-			</tr>
-
-			<tr class="payment_row" <?php if ( $this->options['payment_required'] != 'yes' ) echo 'style="display:none"'; ?>>
-					<th scope="row"><?php _e('Discount for selected Membership level(s) (%)', 'appointments') ?></th>
-					<td colspan="2">
-					<input type="text" name="members_discount" style="width:50px" value="<?php echo @$this->options["members_discount"] ?>" />
-					<span class="description"><?php _e('Below selected level(s) will get a discount given in percent, e.g. 20. Leave this field empty for no discount. Tip: If you enter 100, service will be free of charge for these members.', 'appointments') ?></span>
-					</td>
-			</tr>
-
-			<tr class="payment_row" <?php if ( $this->options['payment_required'] != 'yes' ) echo 'style="display:none"'?>>
-					<th scope="row"><?php _e('Membership levels for the above selections', 'appointments') ?></th>
-					<td colspan="2">
-					<?php
-					if ( $this->membership_active ) {
-						$meta = maybe_unserialize( @$this->options["members"] );
-						global $membershipadmin;
-						$levels = $membershipadmin->get_membership_levels(array('level_id' => 'active'));
-						if ( $levels && is_array( $levels ) ) {
-							echo '<div style="float:left"><select multiple="multiple" name="members[level][]" >';
-							foreach ( $levels as $level ) {
-								if ( $level->level_slug != 'visitors' ) { // Do not include strangers
-									if ( is_array( $meta["level"] ) AND in_array( $level->id, $meta["level"] ) )
-										$sela = 'selected="selected"';
-									else
-										$sela = '';
-									echo '<option value="'.$level->id.'"' . $sela . '>'. $level->level_title . '</option>';
-								}
-							}
-							echo '</select></div>';
-						}
-						else
-							echo '<input type="text" size="40" value="'. __('No level was defined yet','appointments').'" readonly="readonly" />';
-					}
-					else
-						echo '<input type="text" size="40" value="'. __('Membership plugin is not activated.','appointments').'" readonly="readonly" />';
-					?>
-					<div style="float:left;width:80%;margin-left:5px;">
-					<span class="description"><?php _e('Selected level(s) will not be asked advance payment/deposit and/or will take a discount, depending on the above selections. You can select multiple levels using CTRL and SHIFT keys.', 'appointments') ?></span>
-					</div>
-					<div style="clear:both"></div>
-					</td>
-			</tr>
-
-			<tr class="payment_row" <?php if ( $this->options['payment_required'] != 'yes' ) echo 'style="display:none"'; else echo 'style="border-top: 1px solid lightgrey;"'?>>
-					<th scope="row">&nbsp;</th>
-					<td colspan="2">
-					<span class="description"><?php printf( __('The below fields require %s plugin. ', 'appointments'), '<a href="http://premium.wpmudev.org/project/e-commerce/" target="_blank">MarketPress</a>') ?></span>
-					</td>
-			</tr>
-
-			<tr class="payment_row" <?php if ( $this->options['payment_required'] != 'yes' ) echo 'style="display:none"';?>>
-					<th scope="row"><?php _e('Integrate with MarketPress', 'appointments') ?></th>
-					<td colspan="2">
-					<input type="checkbox" name="use_mp" <?php if ( isset( $this->options["use_mp"] ) && $this->options["use_mp"] ) echo 'checked="checked"' ?> />
-					<span class="description"><?php _e('Appointments can be set as products. Any appointment shortcode added to a product page will make that page an "Appointment Product Page". For details, please see FAQ.', 'appointments') ?>
-					<?php if ( !$this->marketpress_active ) {
-					echo '<br />';
-					_e( 'Note: MarketPress is not actived on this website', 'appointments' );
-					}	?>
-					</span>
-					</td>
-			</tr>
-
-			<?php do_action('app-settings-payment_settings-marketpress'); ?>
-
-			<tr class="payment_row" <?php if ( $this->options['payment_required'] != 'yes' ) echo 'style="display:none"';?>>
-				<th scope="row" ><?php _e('Create an Appointment Product Page', 'appointments')?></th>
-				<td colspan="2">
-				<input type="checkbox" name="make_an_appointment_product" <?php if ( isset( $this->options["make_an_appointment_product"] ) && $this->options["make_an_appointment_product"] ) echo 'checked="checked"' ?> />
-				&nbsp;<?php _e('with', 'appointments') ?>&nbsp;
-				<select name="app_page_type_mp">
-				<option value="one_month"><?php _e('current month\'s schedule', 'appointments')?></option>
-				<option value="two_months" <?php if ( 'two_months' == @$this->options["app_page_type_mp"] ) echo 'selected="selected"' ?>><?php _e('current and next month\'s schedules', 'appointments')?></option>
-				<option value="one_week" <?php if ( 'one_week' == @$this->options["app_page_type_mp"] ) echo 'selected="selected"' ?>><?php _e('current week\'s schedule', 'appointments')?></option>
-				<option value="two_weeks" <?php if ( 'two_weeks' == @$this->options["app_page_type_mp"] ) echo 'selected="selected"' ?>><?php _e('current and next week\'s schedules', 'appointments')?></option>
-				</select>
-				<br />
-				<span class="description"><?php _e('Same as the above "Create an Appointment Page", but this time appointment shortcodes will be inserted in a new Product page and page title will be "Appointment". This is also the product name.', 'appointments') ?></span>
-				<?php
-				$page_id = $wpdb->get_var( "SELECT ID FROM ". $wpdb->posts. " WHERE post_title = 'Appointment' AND post_type='product' ");
-				if ( $page_id ) { ?>
-					<br /><span class="description"><?php _e('<b>Note:</b> You already have such a page. If you check this checkbox, another page with the same title will be created. To edit existing page: ', 'appointments') ?>
-					<a href="<?php echo admin_url('post.php?post='.$page_id.'&action=edit')?>" target="_blank"><?php _e('Click here', 'appointments')?></a>
-					&nbsp;
-					<?php _e('To view the page:', 'appointments') ?>
-					<a href="<?php echo get_permalink( $page_id)?>" target="_blank"><?php _e('Click here', 'appointments')?></a>
-				</span>
-				<?php }
-				?>
-				</td>
-			</tr>
-
-	        </table>
-			</div>
-			</div>
-			<script type="text/javascript">
-			jQuery(document).ready(function($){
-				$('select[name="payment_required"]').change(function() {
-					if ( $('select[name="payment_required"]').val() == "yes" ) { $(".payment_row").show(); }
-					else { $(".payment_row").hide(); }
-				});
-			});
-			</script>
-
-			<div class="postbox">
-            <h3 class='hndle'><span class="notification_settings"><?php _e('Notification Settings', 'appointments') ?></span></h3>
-            <div class="inside">
-
-				<table class="form-table">
-
-				<tr valign="top">
-					<th scope="row" ><?php _e('Send Confirmation email', 'appointments')?></th>
-					<td colspan="2">
-					<select name="send_confirmation">
-					<option value="no" <?php if ( @$this->options['send_confirmation'] <> 'yes' ) echo "selected='selected'"?>><?php _e('No', 'appointments')?></option>
-					<option value="yes" <?php if ( @$this->options['send_confirmation'] == 'yes' ) echo "selected='selected'"?>><?php _e('Yes', 'appointments')?></option>
-					</select>
-					<span class="description"><?php _e('Whether to send an email after confirmation of the appointment. Note: Admin and service provider will also get a copy as separate emails.', 'appointments') ?></span>
-					</td>
-					</tr>
-   				<tr>
-
-				<tr valign="top">
-					<th scope="row" ><?php _e('Send Notification to admin if confirmation is required', 'appointments')?></th>
-					<td colspan="2">
-					<select name="send_notification">
-					<option value="no" <?php if ( @$this->options['send_notification'] <> 'yes' ) echo "selected='selected'"?>><?php _e('No', 'appointments')?></option>
-					<option value="yes" <?php if ( @$this->options['send_notification'] == 'yes' ) echo "selected='selected'"?>><?php _e('Yes', 'appointments')?></option>
-					</select>
-					<span class="description"><?php _e('You may want to receive a notification email whenever a new appointment is made from front end in pending status. This email is only sent if you do not require a payment, that is, if your approval is required. Note: Notification email is also sent to the service provider, if a provider is namely selected by the client, and "Allow Service Provider Confirm Own Appointments" is set as Yes.', 'appointments') ?></span>
-					</td>
-					</tr>
-   				<tr>
-
-				<tr>
-					<th scope="row"><?php _e('Confirmation Email Subject', 'appointments') ?></th>
-					<td>
-					<input value="<?php echo esc_attr($this->options['confirmation_subject']); ?>" size="90" name="confirmation_subject" type="text" />
-					</td>
-				</tr>
-
-				<tr>
-					<th scope="row"><?php _e('Confirmation email Message', 'appointments') ?></th>
-					<td>
-					<textarea cols="90" name="confirmation_message"><?php echo esc_textarea($this->options['confirmation_message']); ?></textarea>
-					</td>
-				</tr>
-
-				<tr valign="top">
-					<th scope="row" ><?php _e('Send Reminder email to the Client', 'appointments')?></th>
-					<td colspan="2">
-					<select name="send_reminder">
-					<option value="no" <?php if ( @$this->options['send_reminder'] <> 'yes' ) echo "selected='selected'"?>><?php _e('No', 'appointments')?></option>
-					<option value="yes" <?php if ( @$this->options['send_reminder'] == 'yes' ) echo "selected='selected'"?>><?php _e('Yes', 'appointments')?></option>
-					</select>
-					<span class="description"><?php _e('Whether to send reminder email(s) to the client before the appointment.', 'appointments') ?></span>
-					</td>
-					</tr>
-   				<tr>
-
-				<tr>
-					<th scope="row"><?php _e('Reminder email Sending Time for the Client (hours)', 'appointments') ?></th>
-					<td>
-					<input value="<?php echo esc_attr($this->options['reminder_time']); ?>" size="90" name="reminder_time" type="text" />
-					<br />
-					<span class="description"><?php _e('Defines how many hours reminder will be sent to the client before the appointment will take place. Multiple reminders are possible. To do so, enter reminding hours separated with a comma, e.g. 48,24.', 'appointments') ?></span>
-					</td>
-				</tr>
-
-				<tr valign="top">
-					<th scope="row" ><?php _e('Send Reminder email to the Provider', 'appointments')?></th>
-					<td colspan="2">
-					<select name="send_reminder_worker">
-					<option value="no" <?php if ( @$this->options['send_reminder_worker'] <> 'yes' ) echo "selected='selected'"?>><?php _e('No', 'appointments')?></option>
-					<option value="yes" <?php if ( @$this->options['send_reminder_worker'] == 'yes' ) echo "selected='selected'"?>><?php _e('Yes', 'appointments')?></option>
-					</select>
-					<span class="description"><?php _e('Whether to send reminder email(s) to the service provider before the appointment.', 'appointments') ?></span>
-					</td>
-					</tr>
-   				<tr>
-
-				<tr>
-					<th scope="row"><?php _e('Reminder email Sending Time for the Provider (hours)', 'appointments') ?></th>
-					<td>
-					<input value="<?php echo esc_attr($this->options['reminder_time_worker']); ?>" size="90" name="reminder_time_worker" type="text" />
-					<br />
-					<span class="description"><?php _e('Same as above, but defines the time for service provider.', 'appointments') ?></span>
-					</td>
-				</tr>
-
-				<tr>
-					<th scope="row"><?php _e('Reminder email Subject', 'appointments') ?></th>
-					<td>
-					<input value="<?php echo esc_attr($this->options['reminder_subject']); ?>" size="90" name="reminder_subject" type="text" />
-					</td>
-				</tr>
-
-				<tr>
-					<th scope="row"><?php _e('Reminder email Message', 'appointments') ?></th>
-					<td>
-					<textarea cols="90" name="reminder_message"><?php echo esc_textarea($this->options['reminder_message']); ?></textarea>
-					</td>
-				</tr>
-
-				<tr valign="top">
-					<th scope="row" ><?php _e('Log Sent email Records', 'appointments')?></th>
-					<td colspan="2">
-					<select name="log_emails">
-					<option value="no" <?php if ( @$this->options['log_emails'] <> 'yes' ) echo "selected='selected'"?>><?php _e('No', 'appointments')?></option>
-					<option value="yes" <?php if ( @$this->options['log_emails'] == 'yes' ) echo "selected='selected'"?>><?php _e('Yes', 'appointments')?></option>
-					</select>
-					<span class="description"><?php _e('Whether to log confirmation and reminder email records (Not the emails themselves).', 'appointments') ?></span>
-					</td>
-					</tr>
-   				<tr>
-
-				<tr>
-				<th scope="row">&nbsp;</th>
-				<td>
-				<span class="description">
-				<?php _e('For the above email subject and message contents, you can use the following placeholders which will be replaced by their real values:', 'appointments') ?>&nbsp;SITE_NAME, CLIENT, SERVICE, SERVICE_PROVIDER, DATE_TIME, PRICE, DEPOSIT, <span class="app-has_explanation" title="(PRICE - DEPOSIT)">BALANCE</span>, PHONE, NOTE, ADDRESS, CITY, EMAIL <?php _e("(Client's email)", "appointments")?>, CANCEL <?php _e("(Adds a cancellation link to the email body)", "appointments")?>
-				</span>
-				</td>
-				</tr>
-
-				</table>
-			</div>
-			</div>
-
-		<div class="postbox">
-            <h3 class='hndle'><span><?php _e('Advanced Settings', 'appointments') ?></span></h3>
-            <div class="inside">
-
-				<table class="form-table">
-
-					<tr valign="top">
-						<th scope="row" ><?php _e('Use Built-in Cache', 'appointments')?></th>
-						<td colspan="2">
-						<select name="use_cache">
-						<option value="no" <?php if ( @$this->options['use_cache'] <> 'yes' ) echo "selected='selected'"?>><?php _e('No', 'appointments')?></option>
-						<option value="yes" <?php if ( @$this->options['use_cache'] == 'yes' ) echo "selected='selected'"?>><?php _e('Yes', 'appointments')?></option>
-						</select>
-						<span class="description"><?php _e('Appointments+ has a built-in cache to increase performance. If you are making changes in the styling of your appointment pages, modifying shortcode parameters or having some issues while using it, disable it by selecting No.', 'appointments') ?></span>
-						</td>
-					</tr>
-
-					<tr valign="top">
-						<th scope="row" ><?php _e('Clear Cache', 'appointments')?></th>
-						<td colspan="2">
-						<input type="checkbox" name="force_cache" <?php if ( isset( $this->options["force_cache"] ) && $this->options["force_cache"] ) echo 'checked="checked"' ?> />
-						<span class="description"><?php _e('Cache is automatically cleared at regular intervals (Default: 10 minutes) or when you change a setting. To clear it manually check this checkbox.', 'appointments') ?></span>
-						</td>
-					</tr>
-
-					<tr valign="top">
-						<th scope="row" ><?php _e('Allow Overwork (end of day)', 'appointments')?></th>
-						<td colspan="2">
-						<select name="allow_overwork">
-						<option value="no" <?php if ( @$this->options['allow_overwork'] <> 'yes' ) echo "selected='selected'"?>><?php _e('No', 'appointments')?></option>
-						<option value="yes" <?php if ( @$this->options['allow_overwork'] == 'yes' ) echo "selected='selected'"?>><?php _e('Yes', 'appointments')?></option>
-						</select>
-						<span class="description"><?php _e('Whether you accept appointments exceeding working hours for the end of day. For example, if you are working until 6pm, and a client asks an appointment for a 60 minutes service at 5:30pm, to allow such an appointment you should select this setting as Yes. Please note that this is only practical if the selected service lasts longer than the base time. Such time slots are marked as "not possible" in the schedule.', 'appointments') ?></span>
-						</td>
-					</tr>
-
-					<tr valign="top">
-						<th scope="row" ><?php _e('Allow Overwork (break hours)', 'appointments')?></th>
-						<td colspan="2">
-						<select name="allow_overwork_break">
-						<option value="no" <?php if ( @$this->options['allow_overwork_break'] <> 'yes' ) echo "selected='selected'"?>><?php _e('No', 'appointments')?></option>
-						<option value="yes" <?php if ( @$this->options['allow_overwork_break'] == 'yes' ) echo "selected='selected'"?>><?php _e('Yes', 'appointments')?></option>
-						</select>
-						<span class="description"><?php _e('Same as above, but valid for break hours. If you want to allow appointments exceeding break times, then select this as Yes.', 'appointments') ?></span>
-						</td>
-					</tr>
-
-					<tr valign="top">
-						<th scope="row" ><?php _e('Number of appointment records per page', 'appointments')?></th>
-						<td colspan="2">
-						<input type="text" style="width:50px" name="records_per_page" value="<?php if ( isset($this->options["records_per_page"]) ) echo $this->options["records_per_page"] ?>" />
-						<span class="description"><?php _e('Number of records to be displayed on admin appointments page. If left empty: 50', 'appointments') ?></span>
-						</td>
-					</tr>
-					<?php do_action('app-settings-advanced_settings'); ?>
-				</table>
-			</div>
-			</div>
-			<?php do_action('app-settings-after_advanced_settings'); ?>
-
-				<input type="hidden" name="action_app" value="save_general" />
-				<?php wp_nonce_field( 'update_app_settings', 'app_nonce' ); ?>
-				<p class="submit">
-				<input type="submit" class="button-primary" value="<?php _e('Save Settings', 'appointments') ?>" />
-				</p>
-
-			</form>
-
-		</div>
-		<?php break;
-
-		case 'gcal':
-			if ( is_object( $this->gcal_api ) )
-				$this->gcal_api->render_tab();
-		break;
-
-		case 'working_hours': _e( '<i>Here you can define working hours and breaks for your business. When you add new service providers, their working and break hours will be set to the default schedule. Then you can edit their schedule by selecting their names from the dropdown menu below.</i>', 'appointments'); ?>
-			<br />
-			<br />
-			<?php
-			$workers = $wpdb->get_results( "SELECT * FROM " . $this->workers_table . " " );
-			?>
-			<?php _e('List for:', 'appointments')?>
-			&nbsp;
-			<select id="app_provider_id" name="app_provider_id">
-			<option value="0"><?php _e('No specific provider', 'appointments')?></option>
-			<?php
-			if ( $workers ) {
-				foreach ( $workers as $worker ) {
-					if ( $this->worker == $worker->ID )
-						$s = " selected='selected'";
-					else
-						$s = '';
-					echo '<option value="'.$worker->ID.'"'.$s.'>' . $this->get_worker_name( $worker->ID, false ) . '</option>';
-				}
-			}
-			?>
-			</select>
-			<br /><br />
-			<script type="text/javascript">
-			jQuery(document).ready(function($){
-				$('#app_provider_id').change(function(){
-					var app_provider_id = $('#app_provider_id option:selected').val();
-					window.location.href = "<?php echo admin_url('admin.php?page=app_settings&tab=working_hours')?>" + "&app_provider_id=" + app_provider_id;
-				});
-			});
-			</script>
-			<form method="post" action="" >
-				<table class="widefat fixed">
-				<tr>
-				<th style="width:40%"><?php _e( 'Working Hours', 'appointments' ) ?></th>
-				<th style="width:40%"><?php _e( 'Break Hours', 'appointments' ) ?></th>
-				<tr>
-				<td>
-				<?php echo $this->working_hour_form( 'open' ); ?>
-				</td>
-				<td>
-				<?php echo $this->working_hour_form( 'closed' ); ?>
-				</td>
-				</tr>
-				</table>
-
-				<input type="hidden" name="worker" value="0" />
-				<input type="hidden" name="location" value="0" />
-				<input type="hidden" name="action_app" value="save_working_hours" />
-				<?php wp_nonce_field( 'update_app_settings', 'app_nonce' ); ?>
-				<p class="submit">
-				<input type="submit" class="button-primary" value="<?php _e('Save Working Hours', 'appointments') ?>" />
-				</p>
-
-			</form>
-			<?php break; ?>
-
-		<?php case 'exceptions': _e( '<i>Here you can define exceptional working or non working days for your business and for your service providers. You should enter holidays here. You can also define a normally non working week day (e.g. a specific Sunday) as a working day. When you add new service providers, their expections will be set to the default schedule.</i>', 'appointments'); ?>
-			<br />
-			<br />
-			<?php
-			$result = array();
-			foreach ( array( 'open', 'closed' ) as $stat ) {
-				$result[$stat] = $wpdb->get_var($wpdb->prepare("SELECT days FROM {$this->exceptions_table} WHERE status=%s AND worker=%d", $stat, $this->worker));
-			}
-			$workers = $this->get_workers();
-			?>
-			<?php _e('List for:', 'appointments')?>
-			&nbsp;
-			<select id="app_provider_id" name="app_provider_id">
-			<option value="0"><?php _e('No specific provider', 'appointments')?></option>
-			<?php
-			if ( $workers ) {
-				foreach ( $workers as $worker ) {
-					if ( $this->worker == $worker->ID )
-						$s = " selected='selected'";
-					else
-						$s = '';
-					echo '<option value="'.$worker->ID.'"'.$s.'>' . $this->get_worker_name( $worker->ID, false ) . '</option>';
-				}
-			}
-			?>
-			</select>
-			<br /><br />
-			<form method="post" action="" >
-				<table class="widefat fixed">
-				<tr>
-				<td>
-				<?php _e( 'Exceptional working days, e.g. a specific Sunday you decided to work:', 'appointments') ?>
-				</td>
-				</tr>
-				<tr>
-				<td>
-				<input class="datepick" id="open_datepick" type="text" style="width:100%" name="open[exceptional_days]" value="<?php if (isset($result["open"])) echo $result["open"]?>" />
-				</td>
-				</tr>
-
-				<tr>
-				<td>
-				<?php _e( 'Exceptional NON working days, e.g. holidays:', 'appointments') ?>
-				</td>
-				</tr>
-				<tr>
-				<td>
-				<input class="datepick" id="closed_datepick" type="text" style="width:100%" name="closed[exceptional_days]" value="<?php if (isset($result["closed"])) echo $result["closed"]?>" />
-				</td>
-				</tr>
-
-				<tr>
-				<td>
-				<span class="description"><?php _e('Please enter each date using YYYY-MM-DD format (e.g. 2012-08-13) and separate each day with a comma. Datepick will allow entering multiple dates. ', 'appointments')?></span>
-				</td>
-				</tr>
-				</table>
-
-				<input type="hidden" name="location" value="0" />
-				<input type="hidden" name="action_app" value="save_exceptions" />
-				<?php wp_nonce_field( 'update_app_settings', 'app_nonce' ); ?>
-				<p class="submit">
-				<input type="submit" class="button-primary" value="<?php _e('Save Exceptional Days', 'appointments') ?>" />
-				</p>
-
-			</form>
-			<script type="text/javascript">
-			jQuery(document).ready(function($){
-				$('#app_provider_id').change(function(){
-					var app_provider_id = $('#app_provider_id option:selected').val();
-					window.location.href = "<?php echo admin_url('admin.php?page=app_settings&tab=exceptions')?>" + "&app_provider_id=" + app_provider_id;
-				});
-				$("#open_datepick").datepick({dateFormat: 'yyyy-mm-dd',multiSelect: 999, monthsToShow: 2});
-				$("#closed_datepick").datepick({dateFormat: 'yyyy-mm-dd',multiSelect: 999, monthsToShow: 2});
-			});
-			</script>
-
-		<?php break; ?>
-
-		<?php case 'services': _e( '<i>Here you should define your services for which your client will be making appointments. <b>There must be at least one service defined.</b> Capacity is the number of customers that can take the service at the same time. Enter 0 for no specific limit (Limited to number of service providers, or to 1 if no service provider is defined for that service). Price is only required if you request payment to accept appointments. You can define a description page for the service you are providing.</i>', 'appointments') ?>
-			<div class='submit'>
-			<input type="button" id="add_service" class='button-secondary' value='<?php _e( 'Add New Service', 'appointments' ) ?>' />
-			</div>
-
-			<form method="post" action="" >
-
-				<table class="widefat fixed" id="services-table" >
-				<tr>
-				<th style="width:5%"><?php _e( 'ID', 'appointments') ?></th>
-				<th style="width:35%"><?php _e( 'Name', 'appointments') ?></th>
-				<th style="width:10%"><?php _e( 'Capacity', 'appointments') ?></th>
-				<th style="width:15%"><?php _e( 'Duration (mins)', 'appointments') ?></th>
-				<th style="width:10%"><?php echo __( 'Price', 'appointments') . ' ('. $this->options['currency']. ')' ?></th>
-				<th style="width:25%"><?php _e( 'Description page', 'appointments') ?></th>
-				</tr>
-				<?php
-				$services = $this->get_services();
-				$max_id = null;
-				if ( is_array( $services ) && $nos = count( $services ) ) {
-					foreach ( $services as $service ) {
-						echo $this->add_service( true, $service );
-						if ( $service->ID > $max_id )
-							$max_id = $service->ID;
-					}
-				}
-				else {
-					echo '<tr class="no_services_defined"><td colspan="4">'. __( 'No services defined', 'appointments' ) . '</td></tr>';
-				}
-				?>
-
-				</table>
-
-				<div class='submit' id='div_save_services' <?php if ($max_id==null) echo 'style="display:none"' ?>>
-				<input type="hidden" name="number_of_services" id="number_of_services" value="<?php echo $max_id;?>" />
-				<input type="hidden" name="action_app" value="save_services" />
-				<?php wp_nonce_field( 'update_app_settings', 'app_nonce' ); ?>
-				<input class='button-primary' type='submit' value='<?php _e( 'Save Services', 'appointments' ) ?>' />
-				&nbsp;&nbsp;
-				<?php _e( '<i>Tip: To delete a service, just clear its name and save.</i>', 'appointments' ); ?>
-				</div>
-
-			</form>
-			<?php break; ?>
-
-			<?php case 'workers': printf( __( '<i>Here you can optionally select your service providers, i.e. workers, and assign them to certain services. Your service providers must be users of the website. To add a new user %s. You can define additional price for them. This will be added to the price of the service. You can define a bio page for the service provider. <br />A dummy service provider is a user whose emails are redirected to another user that is set on the General tab.</i>', 'appointments'), '<a href="'.admin_url('user-new.php').'">' . __('Click here', 'appointments') . '</a>'); ?>
-			<div class='submit'>
-			<input type="button" id="add_worker" class='button-secondary' value='<?php _e( 'Add New Service Provider', 'appointments' ) ?>' />
-			<img class="add-new-waiting" style="display:none;" src="<?php echo admin_url('images/wpspin_light.gif')?>" alt="">
-			</div>
-
-			<form method="post" action="" >
-
-				<table class="widefat fixed" id="workers-table" >
-				<tr>
-				<th style="width:5%"><?php _e( 'ID', 'appointments') ?></th>
-				<th style="width:25%"><?php _e( 'Service Provider', 'appointments') ?></th>
-				<th style="width:10%"><?php _e( 'Dummy?', 'appointments') ?></th>
-				<th style="width:10%"><?php  echo __( 'Additional Price', 'appointments') . ' ('. $this->options['currency']. ')' ?></th>
-				<th style="width:25%"><?php _e( 'Services Provided*', 'appointments') ?></th>
-				<th style="width:25%"><?php _e( 'Bio page', 'appointments') ?></th>
-				</tr>
-				<tr>
-				<td colspan="6"><span class="description" style="font-size:11px"><?php _e('* <b>You must select at least one service, otherwise provider will not be saved!</b>', 'appointments') ?></span>
-				</td>
-				</tr>
-				<?php
-				$workers = $wpdb->get_results("SELECT * FROM " . $this->workers_table . " " );
-				$max_id = 0;
-				if ( is_array( $workers ) && $nos = count( $workers ) ) {
-					foreach ( $workers as $worker ) {
-						echo $this->add_worker( true, $worker );
-						if ( $worker->ID > $max_id )
-							$max_id = $worker->ID;
-					}
-				}
-				else {
-					echo '<tr class="no_workers_defined"><td colspan="6">'. __( 'No service providers defined', 'appointments' ) . '</td></tr>';
-				}
-				?>
-
-				</table>
-
-				<div class='submit' id='div_save_workers' <?php if (!$max_id) echo 'style="display:none"' ?>>
-				<input type="hidden" name="number_of_workers" id="number_of_workers" value="<?php echo $max_id;?>" />
-				<input type="hidden" name="action_app" value="save_workers" />
-				<?php wp_nonce_field( 'update_app_settings', 'app_nonce' ); ?>
-				<input class='button-primary' type='submit' value='<?php _e( 'Save Service Providers', 'appointments' ) ?>' />
-				&nbsp;&nbsp;
-				<?php _e( '<i>Tip: To remove a service provider, uncheck all "Services Provided" selections and save.</i>', 'appointments' ); ?>
-				</div>
-
-			</form>
-			<script type="text/javascript">
-			var multiselect_options = {
-				noneSelectedText:'<?php echo esc_js( __('Select services', 'appointments' )) ?>',
-				checkAllText:'<?php echo esc_js( __('Check all', 'appointments' )) ?>',
-				uncheckAllText:'<?php echo esc_js( __('Uncheck all', 'appointments' )) ?>',
-				selectedText:'<?php echo esc_js( __('# selected', 'appointments' )) ?>',
-				selectedList:5,
-				position: {
-				  my: 'left bottom',
-				  at: 'left top'
-			   }
-			};
-			jQuery(document).ready(function($){
-				$(".add_worker_multiple").multiselect(multiselect_options);
-			});
-			</script>
-			<?php break; ?>
-
-		<?php case 'log':	?>
-		<div class="postbox">
-			<div class="inside" id="app_log">
-			<?php
-				if ( is_writable( $this->uploads_dir ) ) {
-					if ( file_exists( $this->log_file ) )
-						echo nl2br( file_get_contents( $this->log_file ) );
-					else
-						echo __( 'There are no log records yet.', 'appointments' );
-				}
-				else
-					echo __( 'Uploads directory is not writable.', 'appointments' );
-				?>
-			</div>
-		</div>
-			<table class="form-table">
-				<tr valign="top">
-					<th scope="row" >
-					<input type="button" id="log_clear_button" class="button-secondary" value="<?php _e('Clear Log File') ?>" title="<?php _e('Clicking this button deletes logs saved on the server') ?>" />
-					</th>
-				</tr>
-			</table>
-		<?php break; ?>
-
-		<?php
-			case 'addons': App_AddonHandler::create_addon_settings(); break;
-		?>
-
-		<?php
-		// For custom tab additions
-		case 'custom1':	do_action( 'app_additional_tab1' ); break;
-		case 'custom2':	do_action( 'app_additional_tab2' ); break;
-		case 'custom3':	do_action( 'app_additional_tab3' ); break;
-
-		default: do_action('app-settings-tabs', $tab); break;
-
-		} // End of the big switch ?>
-		</div>
-		<script type="text/javascript">
-		jQuery(document).ready(function($){
-			$('#add_service').click(function(){
-				$('.add-new-waiting').show();
-				var n = 1;
-				if ( $('#number_of_services').val() > 0 ) {
-					n = parseInt( $('#number_of_services').val() ) + 1;
-				}
-				$('#services-table').append('<?php echo $this->esc_rn( $this->add_service()); ?>');
-				$('#number_of_services').val(n);
-				$('#div_save_services').show();
-				$('.no_services_defined').hide();
-				$('.add-new-waiting').hide();
-			});
-			$('#add_worker').click(function(){
-				$('.add-new-waiting').show();
-				var k = parseInt( $('#number_of_workers').val() ) + 1;
-				$('#workers-table').append('<?php echo $this->esc_rn( $this->add_worker() )?>');
-				$('#number_of_workers').val(k);
-				$('#div_save_workers').show();
-				$('.no_workers_defined').hide();
-				$(".add_worker_multiple").multiselect( multiselect_options );
-				$('.add-new-waiting').hide();
-			});
-			$('#log_clear_button').click(function() {
-				if ( !confirm('<?php echo esc_js( __("Are you sure to clear the log file?","appointments") ) ?>') ) {return false;}
-				else{
-					$('.add-new-waiting').show();
-					var data = {action: 'delete_log', nonce: '<?php echo wp_create_nonce() ?>'};
-					$.post(ajaxurl, data, function(response) {
-						$('.add-new-waiting').hide();
-						if ( response && response.error ) {
-							alert(response.error);
-						}
-						else{
-							$("#app_log").html('<?php echo esc_js( __("Log file cleared...","appointments") ) ?>');
-						}
-					},'json');
-				}
-			});
-		});
-		</script>
 	<?php
 	}
 
@@ -7420,24 +6343,25 @@ PLACEHOLDER
 		switch($type) {
 
 			case 'active':
-						$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('confirmed', 'paid') {$add} ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
+						$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('confirmed', 'paid') APP_ADD ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
 						break;
 			case 'pending':
-						$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('pending') {$add} ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
+						$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('pending') APP_ADD ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
 						break;
 			case 'completed':
-						$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('completed') {$add} ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
+						$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('completed') APP_ADD ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
 						break;
 			case 'removed':
-						$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('removed') {$add} ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
+						$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('removed') APP_ADD ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
 						break;
 			case 'reserved':
-						$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('reserved') {$add} ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
+						$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('reserved') APP_ADD ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
 						break;
 			default:
-						$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('confirmed', 'paid') {$add} ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
+						$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('confirmed', 'paid') APP_ADD ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
 						break;
 		}
+		$sql = preg_replace('/\bAPP_ADD\b/', $add, $sql);
 
 		return $this->db->get_results( $sql );
 
@@ -8518,10 +7442,12 @@ $(toggle_selected_export);
 			// Update
 			$update_result = $wpdb->update( $this->app_table, $data, array('ID' => $app_id) );
 			if ( $update_result ) {
-				if ( ( 'pending' == $data['status'] || 'removed' == $data['status'] || 'completed' == $data['status'] ) && is_object( $this->gcal_api ) )
+				if ( ( 'pending' == $data['status'] || 'removed' == $data['status'] || 'completed' == $data['status'] ) && is_object( $this->gcal_api ) ) {
 					$this->gcal_api->delete( $app_id );
-				else if ( ( 'paid' == $data['status'] || 'confirmed' == $data['status'] ) && is_object( $this->gcal_api ) )
+				} else if (is_object($this->gcal_api) && $this->gcal_api->is_syncable_status($data['status'])) {
 					$this->gcal_api->update( $app_id ); // This also checks for event insert
+				}
+				if ('removed' === $data['status']) $this->send_removal_notification($app_id);
 			}
 			if ($update_result && $resend) {
 				if ('removed' == $data['status']) do_action( 'app_removed', $app_id );
@@ -8534,8 +7460,9 @@ $(toggle_selected_export);
 			if ( $insert_result && $resend && empty($email_sent) ) {
 				$email_sent = $this->send_confirmation( $wpdb->insert_id );
 			}
-			if ( $insert_result && ( 'paid' == $data['status'] || 'confirmed' == $data['status'] ) && is_object( $this->gcal_api ) )
+			if ( $insert_result && is_object($this->gcal_api) && $this->gcal_api->is_syncable_status($data['status'])) {
 				$this->gcal_api->insert( $app_id );
+			}
 		}
 		
 		do_action('app-appointment-inline_edit-after_save', ($update_result ? $app_id : $wpdb->insert_id), $data);

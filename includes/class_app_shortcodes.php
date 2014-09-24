@@ -390,7 +390,7 @@ class App_Shortcode_MonthlySchedule extends App_Shortcode {
 		$this->_defaults = array(
 			'title' => array(
 				'value' => __('<h3>Our schedule for START</h3>', 'appointments'),
-				'help' => __('Text that will be displayed as the schedule title. Placeholders START and END will be automatically replaced by their real values.', 'appointments'),
+				'help' => __('Text that will be displayed as the schedule title. Placeholders START, WORKER and SERVICE will be automatically replaced by their real values.', 'appointments'),
 				'example' => __('Our schedule for START', 'appointments'),
 			),
 			'logged' => array(
@@ -468,8 +468,7 @@ class App_Shortcode_MonthlySchedule extends App_Shortcode {
 		// Force worker or pick up the single worker
 		if ( $worker ) {
 			// Check if such a worker exists
-			if ( !$appointments->is_worker( $worker ) )
-				return;
+			if (!$appointments->is_worker($worker)) return;
 			$_REQUEST["app_provider_id"] = $worker;
 		}
 		else if ( $single_worker = $appointments->is_single_worker( $appointments->service ) ) {
@@ -494,16 +493,19 @@ class App_Shortcode_MonthlySchedule extends App_Shortcode {
 		$year = date("Y", $time);
 		$month = date("m",  $time);
 
-		if ( '' != $title )
+		if (!empty($title)) {
+			$replacements = array(
+				date_i18n("F Y",  strtotime("{$year}-{$month}-01")), // START
+				$appointments->get_worker_name($_REQUEST['app_provider_id']),
+				$appointments->get_service_name($_REQUEST['app_service_id']),
+			);
 			$title = str_replace(
-								array( "START"),
-								array(
-									date_i18n("F Y",  strtotime("{$year}-{$month}-01") )
-									),
-								$title
-						);
-		else
+				array("START", "WORKER", "SERVICE"),
+				$replacements,
+			$title);
+		} else {
 			$title = '';
+		}
 
 		$has_worker = !empty($appointments->worker) || !empty($worker);
 
@@ -516,7 +518,7 @@ class App_Shortcode_MonthlySchedule extends App_Shortcode {
 				: __('Please, select a service provider.', 'appointments')
 			;
  		} else {
-	        $c .= $title;
+	        $c .= apply_filters('app-shortcodes-monthly_schedule-title', $title, $args);
 
 			if ( is_user_logged_in() || 'yes' != $appointments->options["login_required"] ) {
 				$c .= $logged ? "<div class='appointments-instructions'>{$logged}</div>" : '';
@@ -1750,7 +1752,6 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 			if ( $city_meta )
 				$c = $city_meta;
 		}
-
 		$ret = '';
 		$ret .= '<div class="appointments-confirmation-wrapper"><fieldset>';
 		$ret .= '<legend>';
@@ -1966,6 +1967,18 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 
 
 function app_core_shortcodes_register ($shortcodes) {
+
+	// Unless manually disabled...
+	if (!(defined('APP_PRESERVE_DEFAULT_FORMATTING_ORDER') && APP_PRESERVE_DEFAULT_FORMATTING_ORDER)) {
+		// ... or disabled by some code ...
+		if (has_action('the_content', 'wpautop')) {
+			// ... move the default formatting functions higher up the chain
+			remove_filter('the_content', 'wpautop');
+			add_filter('the_content', 'wpautop', 20);
+			add_filter('the_content', 'shortcode_unautop', 21);
+		}
+	}
+
 	$shortcodes['app_worker_montly_calendar'] = 'App_Shortcode_WorkerMontlyCalendar'; // Typo :(
 	$shortcodes['app_worker_monthly_calendar'] = 'App_Shortcode_WorkerMonthlyCalendar';
 	$shortcodes['app_schedule'] = 'App_Shortcode_WeeklySchedule';

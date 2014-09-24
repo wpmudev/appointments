@@ -93,6 +93,119 @@ abstract class App_Template {
 			: false
 		;
 	}
+
+	public static function get_default_confirmation_message () {
+		return "Dear CLIENT,
+
+We are pleased to confirm your appointment for SITE_NAME.
+
+Here are the appointment details:
+Requested service: SERVICE
+Date and time: DATE_TIME
+
+SERVICE_PROVIDER will assist you for this service.
+
+Kind regards,
+SITE_NAME
+";
+	}
+
+	public static function get_default_reminder_message () {
+		return "Dear CLIENT,
+
+We would like to remind your appointment with SITE_NAME.
+
+Here are your appointment details:
+Requested service: SERVICE
+Date and time: DATE_TIME
+
+SERVICE_PROVIDER will assist you for this service.
+
+Kind regards,
+SITE_NAME
+";
+	}
+	
+	public static function get_default_removal_notification_message () {
+		return "Dear CLIENT,
+
+We would like to inform you that your appointment with SITE_NAME on DATE_TIME has been removed.
+
+Here are your appointment details:
+Requested service: SERVICE
+Date and time: DATE_TIME
+
+Kind regards,
+SITE_NAME
+";
+	}
+
+	public static function get_default_removal_notification_subject () {
+		return __('Appointment has been removed','appointments');
+	}
+
+	public static function get_default_page_template ($tpl=false) {
+		$page_templates = array(
+			'two_months' => '<td colspan="2">[app_monthly_schedule]</td></tr><td colspan="2">[app_monthly_schedule add="1"]</td></tr><tr><td colspan="2">[app_pagination step="2" month="1"]</td>',
+			'one_month' => '<td colspan="2">[app_monthly_schedule]</td></tr><tr><td colspan="2">[app_pagination month="1"]</td>',
+			'two_weeks' => '<td>[app_schedule]</td><td>[app_schedule add="1"]</td></tr><tr><td colspan="2">[app_pagination step="2"]</td>',
+			'one_week' => '<td colspan="2">[app_schedule long="1"]</td></tr><tr><td colspan="2">[app_pagination]</td>',
+		);
+		$common = '<table><tbody>' .
+			'<tr><td colspan="2">[app_my_appointments]</td></tr>' .
+			'<tr><td>[app_services]</td><td>[app_service_providers]</td></tr>' .
+			'<tr>PLACEHOLDER</tr>' .
+			'<tr><td colspan="2">[app_login]</td></tr>' .
+			'<tr><td colspan="2">[app_confirmation]</td></tr>' .
+			'<tr><td colspan="2">[app_paypal]</td></tr>' .
+		'</tbody></table>';
+		$tpl = !empty($tpl) && in_array($tpl, array_keys($page_templates))
+			? $tpl
+			: 'one_month'
+		;
+
+		$bit = !empty($page_templates[$tpl])
+			? $page_templates[$tpl]
+			: $page_templates['one_month']
+		;
+
+		return str_replace('PLACEHOLDER', $bit, $common);
+	}
+
+	public static function admin_settings_tab ($tab=false) {
+		$tpl_tabs = array(
+			'main' => 'settings-main',
+			'gcal' => 'settings-gcal',
+			'working_hours' => 'settings-working_hours',
+			'exceptions' => 'settings-exceptions',
+			'services' => 'settings-services',
+			'workers' => 'settings-workers',
+			'log' => 'view_log',
+		);
+		$callback_tabs = array(
+			'addons' => array('App_AddonHandler', 'create_addon_settings'),
+		);
+		$action_tabs = array(
+			'custom1' => 'app_additional_tab1',
+			'custom2' => 'app_additional_tab2',
+			'custom3' => 'app_additional_tab3',
+		);
+		if (in_array($tab, array_keys($tpl_tabs)) && !empty($tpl_tabs[$tab])) {
+			// Load up the template
+			$file = APP_PLUGIN_DIR . '/includes/templates/app-admin-' . preg_replace('/[^-_a-z0-9]/i', '', $tpl_tabs[$tab]) . '.php';
+			if (file_exists($file)) require_once($file);
+		} else if (in_array($tab, array_keys($callback_tabs)) && is_callable($callback_tabs[$tab])) {
+			// Do the callback
+			call_user_func($callback_tabs[$tab]);
+		} else if (in_array($tab, array_keys($action_tabs)) && !empty($action_tabs[$tab])) {
+			// Perform action
+			do_action($action_tabs[$tab]);
+		} else {
+			// Do the default action
+			do_action('app-settings-tabs', $tab);
+		}
+
+	}
 }
 
 
