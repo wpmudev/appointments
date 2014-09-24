@@ -24,7 +24,6 @@ class AppointmentsGcal {
 		$this->__construct();
 	}
 	function __construct() {
-
 		global $wpdb, $appointments;
 
 		$this->local_time	= current_time('timestamp');

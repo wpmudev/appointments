@@ -2102,7 +2102,6 @@ class Appointments {
 	 * Helper function to create a time table for monthly schedule
 	 */
 	function get_timetable( $day_start, $capacity, $schedule_key=false ) {
-
 		// We need this only for the first timetable
 		// Otherwise $time will be calculated from $day_start
 		if ( isset( $_GET["wcalendar"] ) && (int)$_GET['wcalendar'] )
