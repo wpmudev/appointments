@@ -664,5 +664,6 @@ opacity: 0.5;
   }
   .appointments-confirmation-wrapper span {
     float: none;
+    width: auto;
   }
 }
