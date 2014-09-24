@@ -4519,6 +4519,94 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 	}
 
 	/**
+	 * Sends out a removal notification email.
+	 * This email is sent out only on admin status change, *not* on appointment cancellation by user.
+	 * The email will go out to the client and, perhaps, worker and admin.
+	 */
+	function send_removal_notification ($app_id) {
+		if ( !isset( $this->options["send_removal_notification"] ) || 'yes' != $this->options["send_removal_notification"] ) return false;
+		$app = $this->get_app($app_id);
+		$log = isset($this->options["log_emails"]) && 'yes' == $this->options["log_emails"];
+		$email = !empty($app->email) ? $app->email : false;
+		if (empty($email) && !empty($app->user) && is_numeric($app->user)) {
+			// If we don't have an email, try getting one if user ID is set
+			$wp_user = get_user_by('id', (int)$app->user);
+			if ($wp_user && !empty($wp_user->user_email)) $email = $wp_user->user_email;
+		}
+		if (empty($email)) {
+			// No reason to carry on, we don't know how to notify the client
+			if ($log) $this->log(sprintf(__('Unable to notify the client about the appointment ID:%s removal, stopping.', 'appointments'), $app_id));
+			return false;
+		}
+
+		$subject = !empty($this->options['removal_notification_subject']) 
+			? $this->options['removal_notification_subject'] 
+			: App_Template::get_default_removal_notification_subject()
+		;
+		$subject = $this->_replace($subject,
+			$app->name,
+			$this->get_service_name($app->service), 
+			$this->get_worker_name($app->worker),
+			$app->start, 
+			$app->price, 
+			$this->get_deposit($app->price), 
+			$app->phone, 
+			$app->note, 
+			$app->address, 
+			$app->email, 
+			$app->city
+		);
+		$msg = !empty($this->options['removal_notification_message']) 
+			? $this->options['removal_notification_message'] 
+			: App_Template::get_default_removal_notification_message()
+		;
+		$msg = $this->_replace($msg,
+			$app->name,
+			$this->get_service_name($app->service), 
+			$this->get_worker_name($app->worker),
+			$app->start, 
+			$app->price, 
+			$this->get_deposit($app->price), 
+			$app->phone, 
+			$app->note, 
+			$app->address, 
+			$app->email, 
+			$app->city
+		);
+		$result = wp_mail(
+			$email,
+			$subject,
+			$msg,
+			$this->message_headers()
+		);
+		if ($result && $log) {
+			$this->log(sprintf(__('Removal notification message sent to %s for appointment ID:%s', 'appointments'), $email, $app_id));
+		}
+
+		$disable = apply_filters( 'app_removal_notification_disable_admin', false, $app, $app_id );
+		if ($disable) return false;
+
+		//  Send a copy to admin and service provider
+		$to = array($this->get_admin_email());
+
+		$worker_email = $this->get_worker_email($app->worker);
+		if ($worker_email) $to[]= $worker_email;
+
+		$provider_add_text  = sprintf(__('An appointment removal notification for %s has been sent to your client:', 'appointments'), $app_id);
+		$provider_add_text .= "\n\n\n";
+
+		wp_mail(
+			$to,
+			__('Removal notification', 'appointments'),
+			$provider_add_text . $msg,
+			$this->message_headers()
+		);
+
+
+		return true;
+	}
+
+	/**
 	 *	Check and send reminders to clients for appointments
 	 *
 	 */
@@ -5336,6 +5424,11 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			$this->options["reminder_time_worker"]		= str_replace( " ", "", $_POST["reminder_time_worker"] );
 			$this->options["reminder_subject"]			= stripslashes( $_POST["reminder_subject"] );
 			$this->options["reminder_message"]			= stripslashes( $_POST["reminder_message"] );
+			
+			$this->options["send_removal_notification"] = $_POST["send_removal_notification"];
+			$this->options["removal_notification_subject"] = stripslashes( $_POST["removal_notification_subject"] );
+			$this->options["removal_notification_message"] = stripslashes( $_POST["removal_notification_message"] );
+
 			$this->options["log_emails"]				= $_POST["log_emails"];
 
 			$this->options['use_cache'] 				= $_POST['use_cache'];
@@ -5657,6 +5750,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 						if ( 'removed' == $new_status ) {
 							foreach ( $_POST["app"] as $app_id ) {
 								$this->gcal_api->delete( $app_id );
+								$this->send_removal_notification($app_id);
 							}
 						}
 						// If confirmed or paid, add these to GCal
