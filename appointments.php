@@ -5683,147 +5683,34 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 	}
 
 	private function _create_pages () {
-// Bimonthly schedule
-$two_months = '
-<td colspan="2">
-[app_monthly_schedule]
-</td>
-</tr>
-<td colspan="2">
-[app_monthly_schedule add="1"]
-</td>
-</tr>
-<tr>
-<td colspan="2">
-[app_pagination step="2" month="1"]
-</td>
-';
-
-// Monthly schedule
-$one_month = '
-<td colspan="2">
-[app_monthly_schedule]
-</td>
-</tr>
-<tr>
-<td colspan="2">
-[app_pagination month="1"]
-</td>
-';
-
-// Two week schedule
-$two_weeks = '
-<td>
-[app_schedule]
-</td>
-<td>
-[app_schedule add="1"]
-</td>
-</tr>
-<tr>
-<td colspan="2">
-[app_pagination step="2"]
-</td>
-';
-
-// One week schedule
-$one_week = '
-<td colspan="2">
-[app_schedule long="1"]
-</td>
-</tr>
-<tr>
-<td colspan="2">
-[app_pagination]
-</td>
-';
-
-// Common parts
-$template = '
-<table>
-<tbody>
-<tr>
-<td colspan="2">
-[app_my_appointments]
-</td>
-</tr>
-<tr>
-<td>[app_services]</td>
-<td>[app_service_providers]</td>
-</tr>
-<tr>
-PLACEHOLDER
-</tr>
-<tr>
-<td colspan="2">
-[app_login]
-</td>
-</tr>
-<tr>
-<td colspan="2">
-[app_confirmation]
-</td>
-</tr>
-<tr>
-<td colspan="2">
-[app_paypal]
-</td>
-</tr>
-</tbody>
-</table>
-';
 		// Add an appointment page
 		if ( isset( $_POST["make_an_appointment"] ) ) {
-
-			switch( $_POST["app_page_type"] ) {
-				case 'two_months':	$content = str_replace( 'PLACEHOLDER', $two_months, $template ); break;
-				case 'one_month':	$content = str_replace( 'PLACEHOLDER', $one_month, $template ); break;
-				case 'two_weeks':	$content = str_replace( 'PLACEHOLDER', $two_weeks, $template ); break;
-				case 'one_week':	$content = str_replace( 'PLACEHOLDER', $one_week, $template ); break;
-				default:			$content = str_replace( 'PLACEHOLDER', $one_month, $template ); break;
-			}
-
+			$tpl = !empty($_POST['app_page_type']) ? $_POST['app_page_type'] : false;
 			wp_insert_post(
 					array(
 						'post_title'	=> 'Make an Appointment',
 						'post_status'	=> 'publish',
 						'post_type'		=> 'page',
-						'post_content'	=> $content
+						'post_content'	=> App_Template::get_default_page_template($tpl)
 					)
 			);
 		}
 
 		// Add an appointment product page
 		if ( isset( $_POST["make_an_appointment_product"] ) && $this->marketpress_active ) {
-
-			switch( $_POST["app_page_type_mp"] ) {
-				case 'two_months':	$content = str_replace( 'PLACEHOLDER', $two_months, $template ); break;
-				case 'one_month':	$content = str_replace( 'PLACEHOLDER', $one_month, $template ); break;
-				case 'two_weeks':	$content = str_replace( 'PLACEHOLDER', $two_weeks, $template ); break;
-				case 'one_week':	$content = str_replace( 'PLACEHOLDER', $one_week, $template ); break;
-				default:			$content = str_replace( 'PLACEHOLDER', $one_month, $template ); break;
-			}
-
+			$tpl = !empty($_POST['app_page_type_mp']) ? $_POST['app_page_type_mp'] : false;
 			$post_id = wp_insert_post(
 					array(
 						'post_title'	=> 'Appointment',
 						'post_status'	=> 'publish',
 						'post_type'		=> 'product',
-						'post_content'	=> $content
+						'post_content'	=> App_Template::get_default_page_template($tpl)
 					)
 			);
 			if ( $post_id ) {
 				// Add a download link, so that app will be a digital product
 				$file = get_post_meta($post_id, 'mp_file', true);
-				if ( !$file )
-					add_post_meta( $post_id, 'mp_file', get_permalink( $post_id) );
-
-/*
-				// Do NOT! Add product link because it'll blow up store orders...
-				$link = get_post_meta($post_id, 'mp_product_link', true);
-				if ( !$link )
-					add_post_meta( $post_id, 'mp_product_link', get_permalink( $post_id ) );
-*/
+				if ( !$file ) add_post_meta( $post_id, 'mp_file', get_permalink( $post_id) );
 
 				// MP requires at least 2 variations, so we add a dummy one
 				add_post_meta( $post_id, 'mp_var_name', array( 0 ) );
