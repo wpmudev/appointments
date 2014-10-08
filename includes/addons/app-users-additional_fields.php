@@ -269,23 +269,26 @@ EO_ADMIN_JS;
 
 	}
 
-	public function inject_additional_fields ($form) {
-		$fields = !empty($this->_data['additional_fields']) ? $this->_data['additional_fields'] : array();
-		if (empty($fields)) return $form;
+    public function inject_additional_fields ($form) {
+        global $current_user;
 
-		foreach ($fields as $field) {
-			$label = esc_html($field['label']);
-			$clean = $this->_to_clean_name($label);
-			$id = "appointments-{$clean}" . md5(serialize($field));
-			$type = esc_attr($field['type']);
-			$value = 'checkbox' == $type ? 1 : '';
-			$form .= "<div class='appointments-field appointments-{$clean}-field'>" .
-				'<label for="' . $id . '"><span>' . $label . '</span></label>' .
-				"<input type='{$type}' id='{$id}' class='appointments-field-entry appointments-{$clean}-field-entry' data-name='{$clean}' value='{$value}' />" .
-			"</div>";
-		}
-		return $form;
-	}
+        $fields = !empty($this->_data['additional_fields']) ? $this->_data['additional_fields'] : array();
+        if (empty($fields)) return $form;
+
+        foreach ($fields as $field) {
+            $label = esc_html($field['label']);
+            $clean = $this->_to_clean_name($label);
+            $id = "appointments-{$clean}" . md5(serialize($field));
+            $type = esc_attr($field['type']);
+            $user_meta_value = get_user_meta( $current_user->ID, 'app_' . $clean, true );
+            $value = $user_meta_value ? $user_meta_value : ('checkbox' == $type ? 1 : '');
+            $form .= "<div class='appointments-field appointments-{$clean}-field'>" .
+                '<label for="' . $id . '"><span>' . $label . '</span></label>' .
+                "<input type='{$type}' id='{$id}' class='appointments-field-entry appointments-{$clean}-field-entry' data-name='{$clean}' value='{$value}' />" .
+                "</div>";
+        }
+        return $form;
+    }
 
 	public function inject_additional_fields_script () {
 		if (empty($this->_data['additional_fields'])) return false;
