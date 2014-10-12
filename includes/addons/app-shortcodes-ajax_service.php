@@ -5,7 +5,7 @@ Description: Combines service, provider and calendar selection into one AJAX-pow
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
 Version: 1.0-BETA-2
 AddonType: Shortcodes
-Author: Ve Bailovity (Incsub)
+Author: WPMU DEV
 */
 
 class App_Shortcodes_AjaxCombo {

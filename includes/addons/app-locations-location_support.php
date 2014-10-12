@@ -5,7 +5,7 @@ Description: Allows you to create locations for your appointments.
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
 Version: 1.0
 AddonType: Locations
-Author: Ve Bailovity (Incsub)
+Author: WPMU DEV
 */
 
 class App_Locations_LocationsWorker {

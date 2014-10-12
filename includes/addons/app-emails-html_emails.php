@@ -5,7 +5,7 @@ Description: By default, the plugin sents plain text emails. Activating this add
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
 Version: 1.0
 AddonType: Emails
-Author: Ve Bailovity (Incsub)
+Author: WPMU DEV
 */
 
 class App_Emails_HtmlEmails {

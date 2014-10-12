@@ -6,7 +6,7 @@ Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
 Version: 1.0
 AddonType: Locations
 Requires: Locations add-on
-Author: Ve Bailovity (Incsub)
+Author: WPMU DEV
 */
 
 class App_Locations_WorkerLocations {

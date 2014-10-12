@@ -6,7 +6,7 @@ Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
 Version: 1.0
 AddonType: Integration
 Requires: MarketPress
-Author: Ve Bailovity (Incsub)
+Author: WPMU DEV
 */
 
 class App_Mp_ProductCartDisplay {
