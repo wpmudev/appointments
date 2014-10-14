@@ -562,7 +562,7 @@ class Appointments {
 					"SELECT * FROM {$this->app_table} " . 
 					"WHERE {$location} service=%d AND worker=%d " .
 					//" AND (status='pending' OR status='paid' OR status='confirmed' OR status='reserved') AND WEEKOFYEAR(start)=".$week. " " ); // THIS IS A PROBLEM! It doesn't take into account the completed events ALTHOUGH they may very well still be there
-					"AND (status='pending' OR status='paid' OR status='confirmed' OR status='reserved' or status='completed') AND WEEKOFYEAR(start)=%d",
+					"AND (status='pending' OR status='paid' OR status='confirmed' OR status='reserved' OR status='completed') AND WEEKOFYEAR(start)=%d",
 					$s, $w, $week)
 				);
 // *ONLY* applied to weekly-scoped data gathering, because otherwise this would possibly
@@ -4822,21 +4822,24 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 
 		$process_expired = apply_filters('app-auto_cleanup-process_expired', true);
 
-		$expireds = $wpdb->get_results( $wpdb->prepare("SELECT * FROM {$this->app_table} WHERE start<%s", date("Y-m-d H:i:s", $this->local_time)) );
+		$expireds = $wpdb->get_results( $wpdb->prepare("SELECT * FROM {$this->app_table} WHERE start<%s AND status NOT IN ('completed', 'removed')", date("Y-m-d H:i:s", $this->local_time)) );
 		if ( $expireds && $process_expired ) {
 			foreach ( $expireds as $expired ) {
-				if ( 'pending' == $expired->status || 'reserved' == $expired->status )
-					$new_status = 'removed';
-				else if ( 'confirmed' == $expired->status || 'paid' == $expired->status )
+				if ( 'pending' == $expired->status || 'reserved' == $expired->status ) {
+					if ('reserved' == $expired->status && strtotime($expired->end) > $this->local_time) $new_status = $expired->status; // Don't shift the GCal apps until they actually expire (end time in past)
+					else $new_status = 'removed';
+				} else if ( 'confirmed' == $expired->status || 'paid' == $expired->status ) {
 					$new_status = 'completed';
-				else
+				} else {
 					$new_status = $expired->status; // Do nothing ??
+				}
 				$update = $wpdb->update( $this->app_table,
 								array( 'status'	=> $new_status ),
 								array( 'ID'	=> $expired->ID )
 							);
-				if ( $update )
+				if ( $update ) {
 					do_action( 'app_remove_expired', $expired, $new_status );
+				}
 			}
 		}
 
