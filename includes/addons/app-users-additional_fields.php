@@ -226,6 +226,10 @@ EO_ADMIN_JS;
 	public function cleanup_data ($app) {
 		$cleanup = !isset($this->_data['additional_fields-cleanup']) || !empty($this->_data['additional_fields-cleanup']);
 		if (!$cleanup) return false;
+		
+		$status = !empty($app->status) ? $app->status : '';
+		if ('removed' != $status) return false;
+
 		$fields = !empty($this->_data['additional_fields']) ? $this->_data['additional_fields'] : array();
 		if (empty($fields)) return false;
 		if (!empty($app->ID)) $this->_remove_appointment_meta($app->ID);
