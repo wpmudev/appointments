@@ -5,7 +5,7 @@ Description: Adds a visual notification to your Appointments menu item and perio
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
 Version: 1.0
 AddonType: Admin
-Author: Ve Bailovity (Incsub)
+Author: WPMU DEV
 */
 
 class App_Admin_PendingCount {

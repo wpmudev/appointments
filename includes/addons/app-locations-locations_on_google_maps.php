@@ -6,7 +6,7 @@ Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
 Version: 1.0
 AddonType: Locations
 Requires: Google Maps plugin, Locations add-on
-Author: Ve Bailovity (Incsub)
+Author: WPMU DEV
 */
 
 class App_GoogleMaps_MyAppointmentsShortcode extends App_Shortcode {

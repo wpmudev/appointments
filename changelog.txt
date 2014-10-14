@@ -1,4 +1,12 @@
-- Fix forn Service name being truncated if it contains a dollar sign. 
+v1.4.5
+- Fix for issues with searching appointments.
+- Fix for markup filtering breaking the shortcode arguments.
+- Fix for Service name being truncated if it contains a dollar sign (props Jose). 
+- Fix for long-running GCal appointments display issue.
+- Added automatic completion for additional fields (props Jose).
+- Added worker and service expansion in schedule titles.
+- Added Google+ login support.
+- Added removal notification email.
 
 v1.4.4
 - Fix for editable fields toggling.

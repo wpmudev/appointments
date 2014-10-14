@@ -5,7 +5,7 @@ Description: Allows you to select a post type for your service descriptions (ava
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
 Version: 1.0
 AddonType: Post Types
-Author: Ve Bailovity (Incsub)
+Author: WPMU DEV
 */
 
 class App_PostTypes_ServiceDescription {

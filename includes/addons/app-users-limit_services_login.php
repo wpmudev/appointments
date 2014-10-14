@@ -6,7 +6,7 @@ Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
 Version: 1.0
 AddonType: Users
 Requires: "Login required" setting to be set to "Yes".
-Author: Ve Bailovity (Incsub)
+Author: WPMU DEV
 */
 
 class App_Users_LimitServicesLogin {

@@ -5,7 +5,7 @@ Description: Allows you to require additional fields to be entered by your users
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
 Version: 1.0
 AddonType: Users
-Author: Ve Bailovity (Incsub)
+Author: WPMU DEV
 */
 
 class App_Users_AdditionalFields {
@@ -125,9 +125,11 @@ class App_Users_AdditionalFields {
 
 		foreach ($fields as $field) {
 			$label = esc_html($field['label']);
-			$name = $this->_to_clean_name($label);
-			$macro = $this->_to_email_macro($label);
+			$name = $this->_to_clean_name($field['label']);
+			$macro = $this->_to_email_macro($field['label']);
 			$value = !empty($app_meta[$name]) ? esc_html($app_meta[$name]) : '';
+
+			$value = apply_filters('app-additional_fields-field_value', $value, $field, $app);
 
 			$body = preg_replace('/' . preg_quote($macro, '/') . '/U', $value, $body);
 		}
@@ -150,7 +152,7 @@ class App_Users_AdditionalFields {
 
 		foreach ($fields as $field) {
 			$label = esc_html($field['label']);
-			$name = $this->_to_clean_name($label);
+			$name = $this->_to_clean_name($field['label']);
 			$value = !empty($app_meta[$name]) ? esc_attr($app_meta[$name]) : '';
 
 			$form .= '<label>' . 
@@ -226,6 +228,10 @@ EO_ADMIN_JS;
 	public function cleanup_data ($app) {
 		$cleanup = !isset($this->_data['additional_fields-cleanup']) || !empty($this->_data['additional_fields-cleanup']);
 		if (!$cleanup) return false;
+		
+		$status = !empty($app->status) ? $app->status : '';
+		if ('removed' != $status) return false;
+
 		$fields = !empty($this->_data['additional_fields']) ? $this->_data['additional_fields'] : array();
 		if (empty($fields)) return false;
 		if (!empty($app->ID)) $this->_remove_appointment_meta($app->ID);
@@ -259,6 +265,7 @@ EO_ADMIN_JS;
 
 		$data = array();
 		$raw = stripslashes_deep($_POST);
+
 		foreach ($fields as $field) {
 			$name = $this->_to_clean_name($field['label']);
 			$data[$name] = !empty($raw[$name]) ? wp_strip_all_tags(rawurldecode($raw[$name])) : '';
@@ -277,7 +284,7 @@ EO_ADMIN_JS;
 
         foreach ($fields as $field) {
             $label = esc_html($field['label']);
-            $clean = $this->_to_clean_name($label);
+            $clean = $this->_to_clean_name($field['label']);
             $id = "appointments-{$clean}" . md5(serialize($field));
             $type = esc_attr($field['type']);
             $user_meta_value = get_user_meta( $current_user->ID, 'app_' . $clean, true );
