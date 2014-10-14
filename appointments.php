@@ -4096,12 +4096,14 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		$script = '';
 		$this->script = apply_filters( 'app_footer_scripts', $this->script );
 
-		if ( $this->script ) {
-			$script .= '<script type="text/javascript">';
-			$script .= "jQuery(document).ready(function($) {";
-			$script .= $this->script;
-			$script .= "});</script>";
-		}
+        if ( $this->script ) {
+            $script .= "<script type='text/javascript'>";
+            $script .= "var appDocReadyHandler = function($){";
+            $script .= $this->script;
+            $script .= "};";
+            $script .= "jQuery(document).ready(appDocReadyHandler)";
+            $script .= "</script>";
+        }
 
 		echo $this->esc_rn( $script );
 		do_action('app-footer_scripts-after');
