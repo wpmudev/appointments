@@ -5059,6 +5059,12 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			wp_enqueue_script( 'app-js-check', $this->plugin_url . '/js/js-check.js', array('jquery'), $this->version);
 
 		wp_enqueue_script("appointments-admin", $this->plugin_url . "/js/admin.js", array('jquery'), $this->version);
+		wp_localize_script("appointments-admin", "_app_admin_data", array(
+			'ajax_url' => admin_url('admin-ajax.php'),
+			'strings' => array(
+				'preparing_export' => __('Preparing for export, please hold on...', 'appointments'),
+			),
+		));
 		do_action('app-admin-admin_scripts');
 	}
 	// Enqueue css on settings page
