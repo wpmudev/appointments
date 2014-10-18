@@ -1316,8 +1316,12 @@ class AppointmentsGcal {
 			 $wpdb->query( "ALTER TABLE " . $this->app_table ." AUTO_INCREMENT=". ($max+1). " " );
 	}
 
+	private function _get_syncable_status () {
+		return apply_filters('app-gcal-syncable_status', array('paid', 'confirmed'));
+	}
+
 	public function is_syncable_status ($status=false) {
-		$syncable_status = apply_filters('app-gcal-syncable_status', array('paid', 'confirmed'));
+		$syncable_status = $this->_get_syncable_status();
 		return in_array($status, $syncable_status);
 	}
 }
