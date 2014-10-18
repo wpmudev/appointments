@@ -52,6 +52,9 @@ class AppointmentsGcal {
 		add_filter( 'manage_users_custom_column', array( &$this, 'users_custom_column' ), 10, 3 );
 		add_filter( 'manage_users_columns', array( &$this, 'users_columns' ) );
 
+		// Deal with export requests
+		add_action('wp_ajax_app-gcal-export_and_update', array($this, 'json_export_appointments'));
+
 		// Prevent exceptions to kill the page
 		if ( ( isset( $_GET['gcal_api_test'] ) && 1 == $_GET['gcal_api_test'] )
 			|| ( isset( $_GET['gcal_import_now'] ) && $_GET['gcal_import_now'] ) )
@@ -63,6 +66,37 @@ class AppointmentsGcal {
 			$this->uploads_dir 	= $uploads["basedir"] . "/";
 		else
 			$this->uploads_dir 	= WP_CONTENT_DIR . "/uploads/";
+	}
+
+	/**
+	 * Exports existing appointments to GCal.
+	 * @since v1.4.6
+	 */
+	function json_export_appointments () {
+		$msg = __('All done!', 'appointments');
+		$export = get_option('app_tmp_appointments_to_export', array());
+		if (empty($export)) {
+			// Fetching the export appointments, since the cache is empty
+			global $wpdb;
+			$status = $this->_get_syncable_status();
+			if (is_array($status) && !empty($status)) {
+				$clean_stat = "'" . join("','", array_values(array_filter(array_map('trim', $status)))) . "'";
+				$export = $wpdb->get_col("SELECT ID FROM {$this->app_table} WHERE status IN({$clean_stat})");
+			}
+		}
+
+		if (!empty($export)) {
+			$app_id = array_pop($export);
+			if (is_numeric($app_id)) $this->update($app_id);
+			if (!empty($export)) $msg = sprintf(__('Processing, %d appointments left.'), count($export));
+		}
+
+		update_option('app_tmp_appointments_to_export', $export);
+		wp_send_json(array(
+			'msg' => $msg,
+			'remaining' => count($export),
+		));
+		die;
 	}
 
 	/**
@@ -346,9 +380,18 @@ class AppointmentsGcal {
 		 <tr>
 			<th scope="row">&nbsp;</th>
 			<td>
-			<?php print "<a href='".add_query_arg( array( 'gcal_import_now'=>1,'gcal_api_test'=>false, 'gcal_api_test_result'=>false, 'gcal_api_worker_id' => $gcal_api_worker_id) )."'>Import and Update Events Now</a>"; ?>
-			<br />
-			<span class="description"><?php _e('Clicking this link will manually import and update your Events from the selected calendar without waiting for 10 minutes. Note: Maximum 500 future events that will start until appointment limit setting are imported in the order of their starting time. Past events and all day events are not imported.', 'appointments') ?></span>
+				<?php print "<a href='".add_query_arg( array( 'gcal_import_now'=>1,'gcal_api_test'=>false, 'gcal_api_test_result'=>false, 'gcal_api_worker_id' => $gcal_api_worker_id) )."'>Import and Update Events from GCal Now</a>"; ?>
+				<br />
+				<span class="description"><?php _e('Clicking this link will manually import and update your Events from the selected calendar without waiting for 10 minutes. Note: Maximum 500 future events that will start until appointment limit setting are imported in the order of their starting time. Past events and all day events are not imported.', 'appointments') ?></span>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row">&nbsp;</th>
+			<td>
+				<?php print "<a href='#export' class='app-gcal-export_and_update'>Export and Update Events to GCal Now</a>"; ?>
+				<br />
+				<span class="description"><?php _e('Clicking this link will manually export and update your Events to the selected calendar. Past appointments will not be exported.', 'appointments') ?></span>
+				<div class="app-gcal-result"></div>
 			</td>
 		</tr>
 			<?php
