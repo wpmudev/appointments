@@ -390,7 +390,7 @@ class AppointmentsGcal {
 			<td>
 				<?php print "<a href='#export' class='app-gcal-export_and_update'>Export and Update Events to GCal Now</a>"; ?>
 				<br />
-				<span class="description"><?php _e('Clicking this link will manually export and update your Events to the selected calendar. Past appointments will not be exported.', 'appointments') ?></span>
+				<span class="description"><?php _e('Clicking this link will manually export and update your existing appointments to the selected calendar. Past appointments will not be exported.', 'appointments') ?></span>
 				<div class="app-gcal-result"></div>
 			</td>
 		</tr>
