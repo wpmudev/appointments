@@ -1,3 +1,8 @@
+v1.4.6
+- Fix for admin side javascript globals.
+- Fix for global format reordering, and allowing for both local and global reordering.
+- Added appointments GCal manual export option.
+
 v1.4.5
 - Fix for issues with searching appointments.
 - Fix for markup filtering breaking the shortcode arguments.
