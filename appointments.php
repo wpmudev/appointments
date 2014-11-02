@@ -380,6 +380,7 @@ class Appointments {
 	 * @return array of objects
 	 */
 	function get_workers( $order_by="ID" ) {
+        $order_by = apply_filters( 'app_get_workers_orderby', $order_by );
 		$order_by = $this->sanitize_order_by( $order_by );
 		$workers = wp_cache_get( 'all_workers_' . str_replace( ' ', '_', $order_by ) );
 		if ( false === $workers ) {
