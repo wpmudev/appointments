@@ -4,7 +4,7 @@
 <br />
 <br />
 <?php
-$workers = $wpdb->get_results( "SELECT * FROM " . $appointments->workers_table . " " );
+$workers = $appointments->get_workers();
 ?>
 <?php _e('List for:', 'appointments')?>
 &nbsp;
