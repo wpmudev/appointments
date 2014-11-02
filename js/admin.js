@@ -56,4 +56,32 @@ $(function () {
 		return false;
 	});
 });
+
+
+function export_to_gcal ($result) {
+	$.post(_app_admin_data.ajax_url, {
+		action: 'app-gcal-export_and_update'
+	}, function (resp) {
+		var remaining = parseInt(resp.remaining, 10),
+			msg = resp.msg
+		;
+		$result.empty().append('<p>' + msg + '</p>');
+		if (remaining && remaining > 0) export_to_gcal($result); // Recurse for another call.
+	}, 'json');
+}
+$(function () {
+	var $link = $(".app-gcal-export_and_update");
+	if (!$link.length) return false;
+	
+	var $root = $link.closest("td"),
+		$result = $root.find(".app-gcal-result")
+	;
+	$link.on("click", function (e) {
+		e.preventDefault();
+		e.stopPropagation();
+		$result.empty().append('<p>' + _app_admin_data.strings.preparing_export + '</p>');
+		export_to_gcal($result);
+	});
+});
+
 })(jQuery);

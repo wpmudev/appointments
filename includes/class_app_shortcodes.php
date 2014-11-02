@@ -1965,17 +1965,32 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 	}
 }
 
+/**
+ * Non-default formatting reorder callback.
+ * Bound to filter, will actually reorder default WP content formatting.
+ */
+function app_core_late_map_global_formatting_reorder ($content) {
+	if (!preg_match('/\[app_/', $content)) return $content;
+	
+	remove_filter('the_content', 'wpautop');
+	add_filter('the_content', 'wpautop', 20);
+	add_filter('the_content', 'shortcode_unautop', 21);
+	
+	return $content;
+}
 
 function app_core_shortcodes_register ($shortcodes) {
 
-	// Unless manually disabled...
-	if (!(defined('APP_PRESERVE_DEFAULT_FORMATTING_ORDER') && APP_PRESERVE_DEFAULT_FORMATTING_ORDER)) {
+	// Unless manually enabled...
+	if (defined('APP_REORDER_DEFAULT_FORMATTING') && APP_REORDER_DEFAULT_FORMATTING) {
 		// ... or disabled by some code ...
 		if (has_action('the_content', 'wpautop')) {
-			// ... move the default formatting functions higher up the chain
-			remove_filter('the_content', 'wpautop');
-			add_filter('the_content', 'wpautop', 20);
-			add_filter('the_content', 'shortcode_unautop', 21);
+			if (defined('APP_DEFAULT_FORMATTING_GLOBAL_REORDER') && APP_DEFAULT_FORMATTING_GLOBAL_REORDER) { // If global define is in place, just do this
+				// ... move the default formatting functions higher up the chain
+				remove_filter('the_content', 'wpautop');
+				add_filter('the_content', 'wpautop', 20);
+				add_filter('the_content', 'shortcode_unautop', 21);
+			} else add_filter('the_content', 'app_core_late_map_global_formatting_reorder', 0); // With no global formatting, do "the_content" filtering bits only. Note the "0"
 		}
 	}
 
