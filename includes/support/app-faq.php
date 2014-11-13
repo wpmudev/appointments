@@ -336,7 +336,7 @@ jQuery(document).ready(function($){
 	<li>
 	<?php _e('<b>My working hours cover the midnight and exceeds to the other day. For example from 8pm Monday to 2am Tuesday. Is it possible to set this?</b>', 'appointments');?>
 	<br />
-	<?php _e('Yes. Set your working hours as 24am to 24am (00:00 to 00:00) and your break hours as 2am to 8pm (02:00 to 20:00).', 'appointments');?>
+	<?php _e('Yes. Set your working hours as 24am to 24am (00:00 to 00:00) and your break hours as 2am to 8pm (02:00 to 20:00). Remember to also allow end of day overwork in General settings.', 'appointments');?>
 	</li>
 </ul>
 
