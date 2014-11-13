@@ -53,6 +53,7 @@ class App_Users_AdditionalFields {
 		add_filter('app_notification_message', array($this, 'expand_email_macros'), 10, 3);
 		add_filter('app_confirmation_message', array($this, 'expand_email_macros'), 10, 3);
 		add_filter('app_reminder_message', array($this, 'expand_email_macros'), 10, 3);
+		add_filter('app_removal_notification_message', array($this, 'expand_email_macros'), 10, 3);
 
 		// GCal expansion filters
 		add_filter('app-gcal-set_summary', array($this, 'expand_gcal_macros'), 10, 2);
