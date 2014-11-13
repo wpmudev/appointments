@@ -4572,6 +4572,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			$app->email, 
 			$app->city
 		);
+		$msg = apply_filters('app_removal_notification_message', $msg, $app, $app_id);
 		$result = wp_mail(
 			$email,
 			$subject,
