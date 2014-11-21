@@ -5410,7 +5410,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			$this->options["ask_address"]				= isset( $_POST["ask_address"] );
 			$this->options["ask_city"]					= isset( $_POST["ask_city"] );
 			$this->options["ask_note"]					= isset( $_POST["ask_note"] );
-			$this->options["additional_css"]			= trim( $_POST["additional_css"] );
+			$this->options["additional_css"]			= trim( stripslashes_deep($_POST["additional_css"]) );
 
 			$this->options["payment_required"]			= $_POST["payment_required"];
 			$this->options["percent_deposit"]			= trim( str_replace( '%', '', $_POST["percent_deposit"] ) );
