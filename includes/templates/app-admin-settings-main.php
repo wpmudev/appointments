@@ -694,6 +694,8 @@
 				</select>
 				<span class="description">
 					<?php _e('Send out an email to appropriate clients and providers when an appointment has been removed.', 'appointments') ?>
+					<br />
+					<?php _e('<b>Note:</b> This email will only be sent for explicitly removed appointments only. The appointments that get removed due to expiration will not be affected.', 'appointments') ?>
 				</span>
 			</td>
 		</tr>
@@ -727,11 +729,11 @@
 		<tr valign="top">
 			<th scope="row" ><?php _e('Log Sent email Records', 'appointments')?></th>
 			<td colspan="2">
-			<select name="log_emails">
-			<option value="no" <?php if ( @$appointments->options['log_emails'] <> 'yes' ) echo "selected='selected'"?>><?php _e('No', 'appointments')?></option>
-			<option value="yes" <?php if ( @$appointments->options['log_emails'] == 'yes' ) echo "selected='selected'"?>><?php _e('Yes', 'appointments')?></option>
-			</select>
-			<span class="description"><?php _e('Whether to log confirmation and reminder email records (Not the emails themselves).', 'appointments') ?></span>
+				<select name="log_emails">
+					<option value="no" <?php if ( @$appointments->options['log_emails'] <> 'yes' ) echo "selected='selected'"?>><?php _e('No', 'appointments')?></option>
+					<option value="yes" <?php if ( @$appointments->options['log_emails'] == 'yes' ) echo "selected='selected'"?>><?php _e('Yes', 'appointments')?></option>
+				</select>
+				<span class="description"><?php _e('Whether to log confirmation and reminder email records (Not the emails themselves).', 'appointments') ?></span>
 			</td>
 			</tr>
 			<tr>
