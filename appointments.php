@@ -5425,18 +5425,18 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 
 			$this->options["send_confirmation"]			= $_POST["send_confirmation"];
 			$this->options["send_notification"]			= @$_POST["send_notification"];
-			$this->options["confirmation_subject"]		= stripslashes( $_POST["confirmation_subject"] );
-			$this->options["confirmation_message"]		= stripslashes( $_POST["confirmation_message"] );
+			$this->options["confirmation_subject"]		= stripslashes_deep( $_POST["confirmation_subject"] );
+			$this->options["confirmation_message"]		= stripslashes_deep( $_POST["confirmation_message"] );
 			$this->options["send_reminder"]				= $_POST["send_reminder"];
 			$this->options["reminder_time"]				= str_replace( " ", "", $_POST["reminder_time"] );
 			$this->options["send_reminder_worker"]		= $_POST["send_reminder_worker"];
 			$this->options["reminder_time_worker"]		= str_replace( " ", "", $_POST["reminder_time_worker"] );
-			$this->options["reminder_subject"]			= stripslashes( $_POST["reminder_subject"] );
-			$this->options["reminder_message"]			= stripslashes( $_POST["reminder_message"] );
+			$this->options["reminder_subject"]			= stripslashes_deep( $_POST["reminder_subject"] );
+			$this->options["reminder_message"]			= stripslashes_deep( $_POST["reminder_message"] );
 			
 			$this->options["send_removal_notification"] = $_POST["send_removal_notification"];
-			$this->options["removal_notification_subject"] = stripslashes( $_POST["removal_notification_subject"] );
-			$this->options["removal_notification_message"] = stripslashes( $_POST["removal_notification_message"] );
+			$this->options["removal_notification_subject"] = stripslashes_deep( $_POST["removal_notification_subject"] );
+			$this->options["removal_notification_message"] = stripslashes_deep( $_POST["removal_notification_message"] );
 
 			$this->options["log_emails"]				= $_POST["log_emails"];
 
