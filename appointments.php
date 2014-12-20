@@ -159,6 +159,11 @@ class Appointments {
 			add_option( "appointments_salt", $salt ); // Save it to be used until it is cleared manually
 		}
 		$this->salt = $salt;
+
+		// Deal with zero-priced appointments auto-confirm
+		if ('yes' == $this->options['payment_required'] && !empty($this->options['allow_free_autoconfirm'])) {
+			if (!defined('APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM')) define('APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM', true);
+		}
 	}
 
 	function setup_gcal_sync () {
@@ -5422,6 +5427,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			$this->options['mode'] 						= $_POST['mode'];
 			$this->options['merchant_email'] 			= trim( $_POST['merchant_email'] );
 			$this->options['return'] 					= $_POST['return'];
+			$this->options['allow_free_autoconfirm'] 	= !empty($_POST['allow_free_autoconfirm']);
 
 			$this->options["send_confirmation"]			= $_POST["send_confirmation"];
 			$this->options["send_notification"]			= @$_POST["send_notification"];

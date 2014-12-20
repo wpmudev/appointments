@@ -471,6 +471,14 @@
 			</td>
 	</tr>
 
+	<tr class="payment_row" <?php if ( $appointments->options['payment_required'] != 'yes' ) echo 'style="display:none"'?>>
+		<th scope="row"><?php _e('Allow zero-priced appointments auto-confirm', 'appointments') ?></th>
+		<td colspan="2">
+			<input value="1" <?php checked(true, @$appointments->options['allow_free_autoconfirm']); ?> name="allow_free_autoconfirm" type="checkbox" />
+			<span class="description"><?php _e('Allow auto-confirm for zero-priced appointments in a paid environment.', 'appointments') ?></span>
+		</td>
+	</tr>
+
 	<tr class="payment_row" <?php if ( $appointments->options['payment_required'] != 'yes' ) echo 'style="display:none"'; else echo 'style="border-top: 1px solid lightgrey;"'?>>
 			<th scope="row">&nbsp;</th>
 			<td colspan="2">
