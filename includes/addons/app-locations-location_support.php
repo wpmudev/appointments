@@ -254,7 +254,7 @@ class App_Locations_LocationsWorker {
 		return preg_replace('/(?:^|\b)LOCATION_ADDRESS(?:\b|$)/', $address, $content);
 	}
 
-	public function expand_location_macro ($content, $app, $filter) {
+	public function expand_location_macro ($content, $app, $filter=false) {
 		if (empty($app->location)) return $content;
 		
 		$location = $this->_locations->find_by('id', $app->location);
