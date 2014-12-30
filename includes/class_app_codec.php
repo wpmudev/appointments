@@ -192,8 +192,8 @@ SITE_NAME
 		);
 		if (in_array($tab, array_keys($tpl_tabs)) && !empty($tpl_tabs[$tab])) {
 			// Load up the template
-			$file = APP_PLUGIN_DIR . '/includes/templates/app-admin-' . preg_replace('/[^-_a-z0-9]/i', '', $tpl_tabs[$tab]) . '.php';
-			if (file_exists($file)) require_once($file);
+			$file = self::_to_template_file($tpl_tabs[$tab]);
+			if (!empty($file)) require_once($file);
 		} else if (in_array($tab, array_keys($callback_tabs)) && is_callable($callback_tabs[$tab])) {
 			// Do the callback
 			call_user_func($callback_tabs[$tab]);
