@@ -577,7 +577,12 @@ class App_Shortcode_Pagination extends App_Shortcode {
 				'value' => 0,
 				'help' => __('This is only required if this shortcode resides above any schedule shortcodes. Otherwise it will follow date settings of the schedule shortcodes. Default: "0" (Current week or month)', 'appointments'),
 				'example' => '0',
-			)
+			),
+			'anchors' => array(
+				'value' => 1,
+				'help' => __('Setting this argument to <code>0</code> will prevent pagination links from adding schedule hash anchors. Default: "1"', 'appointments'),
+				'example' => '1',
+			),
 		);
 	}
 
@@ -642,14 +647,19 @@ class App_Shortcode_Pagination extends App_Shortcode {
 			$month_week_previous = __('Previous Month', 'appointments');
 		}
 
+		$hash = !empty($anchors) && (int)$anchors
+			? '#app_schedule'
+			: ''
+		;
+
 		if ( $prev > $prev_min ) {
 			$c .= '<div class="previous">';
-			$c .= '<a href="'. add_query_arg( "wcalendar", $prev ) .'#app_schedule">&laquo; '. $month_week_previous . '</a>';
+			$c .= '<a href="'. add_query_arg( "wcalendar", $prev ) . $hash . '">&laquo; '. $month_week_previous . '</a>';
 			$c .= '</div>';
 		}
 		if ( $next < $next_max ) {
 			$c .= '<div class="next">';
-			$c .= '<a href="'. add_query_arg( "wcalendar", $next ). '#app_schedule">'. $month_week_next . ' &raquo;</a>';
+			$c .= '<a href="'. add_query_arg( "wcalendar", $next ) . $hash . '">'. $month_week_next . ' &raquo;</a>';
 			$c .= '</div>';
 		}
 		$c .= '<div style="clear:both"></div>';
