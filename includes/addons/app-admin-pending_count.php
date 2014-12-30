@@ -72,6 +72,8 @@ class App_Admin_PendingCount {
 <script>
 ;(function ($) {
 
+if (typeof(wp) === "undefined") return false;
+
 function update_interface (data) {
 	var root = $("#toplevel_page_appointments"),
 		target = root.find(".wp-menu-name"),
