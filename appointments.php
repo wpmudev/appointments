@@ -6967,21 +6967,37 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		
 		do_action('app-appointment-inline_edit-before_response', ($update_result ? $app_id : $wpdb->insert_id), $data);
 
+		$result = array(
+			'app_id' => 0,
+			'message' => '',
+		);
 		if ( $update_result ) {
 			// Log change of status
 			if ( $data['status'] != $app->status ) {
 				$this->log( $this->log( sprintf( __('Status changed from %s to %s by %s for appointment ID:%d','appointments'), $app->status, $data["status"], $current_user->user_login, $app->ID ) ) );
 			}
-			die( json_encode( array("result" => __('<span style="color:green;font-weight:bold">Changes saved.</span>', 'appointments') ) ) );
+			$result = array(
+				'app_id' => $app->ID,
+				'message' => __('<span style="color:green;font-weight:bold">Changes saved.</span>', 'appointments'),
+			);
 		} else if ( $insert_result ) {
-			die( json_encode( array("result" => __('<span style="color:green;font-weight:bold">New appointment succesfully saved.</span>', 'appointments') ) ) );
+			$result = array(
+				'app_id' => $wpdb->insert_id,
+				'message' => __('<span style="color:green;font-weight:bold">Changes saved.</span>', 'appointments'),
+			);
 		} else {
 			$message = $resend && !empty($data['status']) && $removed != $data['status']
 				? sprintf('<span style="color:green;font-weight:bold">%s</span>', __('Confirmation message (re)sent', 'appointments'))
 				: sprintf('<span style="color:red;font-weight:bold">%s</span>', __('Record could not be saved OR you did not make any changes!', 'appointments'))
 			;
-			die(json_encode(array("result" => $message)));
+			$result = array(
+				'app_id' => ($update_result ? $app_id : $wpdb->insert_id),
+				'message' => $message,
+			);
 		}
+
+		$result = apply_filters('app-appointment-inline_edit-result', $result, ($update_result ? $app_id : $wpdb->insert_id), $data);
+		die(json_encode($result));
 	}
 
 	 // For future use

@@ -195,8 +195,14 @@ EO_ADMIN_JS;
 		$this->validate_submitted_fields();
 		if ($this->save_submitted_fields($app_id)) {
 			// Okay, so we saved the data...
-			die( json_encode( array("result" => __('<span style="color:green;font-weight:bold">Changes saved.</span>', 'appointments') ) ) );
+			// ... now let's say so!
+			add_filter('app-appointment-inline_edit-result', array($this, 'mark_successful_save'));
 		}
+	}
+
+	public function mark_successful_save ($result) {
+		if (!empty($result['message'])) $result['message'] = __('<span style="color:green;font-weight:bold">Changes saved.</span>', 'appointments');
+		return $result;
 	}
 
 	public function bulk_cleanup_data ($app_ids) {
