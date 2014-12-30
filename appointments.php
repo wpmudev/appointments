@@ -6592,10 +6592,11 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		if ( $app_id ) {
 			$app = $wpdb->get_row( $wpdb->prepare("SELECT * FROM {$this->app_table} WHERE ID=%d", $app_id) );
 			$start_date_timestamp = date("Y-m-d", strtotime($app->start));
-			if ( $this->locale_error )
+			if ( $this->locale_error ) {
 				$start_date = date( $safe_date_format, strtotime( $app->start ) );
-			else
+			} else {
 				$start_date = date_i18n( $safe_date_format, strtotime( $app->start ) );
+			}
 
 			$start_time = date_i18n( $this->time_format, strtotime( $app->start ) );
 			$end_datetime = date_i18n( $this->datetime_format, strtotime( $app->end ) );
@@ -6621,15 +6622,19 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 				if ( $city )
 					$app->city = $app->city && !(defined('APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES') && APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES) ? $app->city : $city;
 			}
-		}
-		else {
+		} else {
+			$app = new stdClass(); // This means insert a new app object
+/*
+//DO NOT DO THIS!!!!
+//This is just begging for a race condition issue >.<
 			// Get maximum ID
 			$app_max = $wpdb->get_var( "SELECT MAX(ID) FROM " . $this->app_table . " " );
 			// Check if nothing has saved yet
 			if ( !$app_max )
 				$app_max = 0;
-			$app = new stdClass(); // This means insert a new app object
 			$app->ID = $app_max + 1 ; // We want to create a new record
+*/
+			$app->ID = 0;
 			// Set other fields to default so that we don't get notice messages
 			$app->user = $app->location = $app->worker = 0;
 			$app->created = $app->end = $app->name = $app->email = $app->phone = $app->address = $app->city = $app->status = $app->sent = $app->sent_worker = $app->note = '';
