@@ -206,6 +206,25 @@ SITE_NAME
 		}
 
 	}
+
+	public static function admin_appointments_list () {
+		$file = self::_to_template_file('appointment_list');
+		if (!empty($file)) require_once($file);
+	}
+	
+	public static function admin_my_appointments_list ($type='active') {
+		$file = self::_to_template_file('my_appointments_list');
+		if (!empty($file)) require_once($file);
+	}
+
+	private static function _to_template_file ($fragment) {
+		if (empty($fragment)) return false;
+		$file = APP_PLUGIN_DIR . '/includes/templates/app-admin-' . preg_replace('/[^-_a-z0-9]/i', '', $fragment) . '.php';
+		return file_exists($file)
+			? $file
+			: false
+		;
+	}
 }
 
 
