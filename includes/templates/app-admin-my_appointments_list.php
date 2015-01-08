@@ -279,7 +279,7 @@ if ( isset( $_GET["type"] ) && 'removed' == $_GET["type"] ) {
 				if ( response && response.error ){
 					save_parent.find(".error").html(response.error).show().delay(10000).fadeOut('slow');
 				} else if (response) {
-					save_parent.find(".error").html(response.result).show().delay(10000).fadeOut('slow');
+					save_parent.find(".error").html(response.message).show().delay(10000).fadeOut('slow');
 				} else {alert("<?php echo esc_js(__('Unexpected error','appointments'))?>");}
 				if (!(app_id && parseInt(app_id, 10)) && response && response.app_id) {
 					app_id = parseInt(response.app_id, 10);
