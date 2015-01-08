@@ -14,7 +14,7 @@ class App_Shortcode_WorkerMonthlyCalendar extends App_Shortcode {
 			'status' => array(
 				'value' => 'paid,confirmed',
 				'help' => __('Show Appointments with this status (comma-separated list)', 'appointments'),
-				'allowed_values' => array('paid', 'confirmed', 'service', 'completed'),
+				'allowed_values' => array('paid', 'confirmed', 'pending', 'completed'),
 				'example' => 'paid,confirmed',
 			),
 			'worker_id' => array(
