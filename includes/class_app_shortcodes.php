@@ -46,13 +46,13 @@ class App_Shortcode_WorkerMonthlyCalendar extends App_Shortcode {
 
 		$status = $this->_arg_to_string_list($args['status']);
 
-		$args['start_at'] = !empty($args['start_at']) 
+		$args['start_at'] = !empty($args['start_at'])
 			? strtotime($args['start_at'])
 			: false
 		;
 		if (!$args['start_at'] && !empty($_GET['wcalendar']) && is_numeric($_GET['wcalendar'])) {
 			$args['start_at'] = (int)$_GET['wcalendar'];
-		} else {
+		} else if (!$args['start_at']) {
 			$args['start_at'] = current_time('timestamp');
 		}
 
