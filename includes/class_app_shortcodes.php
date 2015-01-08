@@ -33,7 +33,7 @@ class App_Shortcode_WorkerMonthlyCalendar extends App_Shortcode {
 	public function process_shortcode ($args=array(), $content='') {
 		$status = false;
 		$args = wp_parse_args($args, $this->_defaults_to_args());
-		
+
 		if (!empty($args['worker_id'])) {
 			$args['worker_id'] = $this->_arg_to_int($args['worker_id']);
 		} else if (is_user_logged_in()) {
@@ -60,7 +60,7 @@ class App_Shortcode_WorkerMonthlyCalendar extends App_Shortcode {
 		if (empty($appointments)) return $content;
 
 		return $this->_create_appointments_table($appointments, $args);
-		
+
 		return $content;
 	}
 
@@ -81,10 +81,10 @@ class App_Shortcode_WorkerMonthlyCalendar extends App_Shortcode {
 			? $wpdb->prepare('(worker=%d OR service IN(' . join(',', $service_ids) . '))', $worker_id)
 			: $wpdb->prepare('worker=%d', $worker_id)
 		;
-		
+
 		$status = is_array($status) ? array_map(array($wpdb, 'escape'), $status) : false;
 		$status_sql = $status ? "AND status IN('" . join("','", $status) . "')" : '';
-		
+
 		$first = strtotime(date('Y-m-01', $start_at));
 		$last = ($first + (date('t', $first) * 86400 )) - 1;
 
@@ -121,7 +121,7 @@ class App_Shortcode_WorkerMonthlyCalendar extends App_Shortcode {
 			$current_timestamp = strtotime($date);
 			$dow = (int)date('w', strtotime($date));
 			$morning = strtotime("{$date} 00:00");
-			
+
 			if ($week_start == $dow) $out .= '</tr><tr>';
 
 			$daily_schedule = '';
@@ -147,7 +147,7 @@ class App_Shortcode_WorkerMonthlyCalendar extends App_Shortcode {
 					;
 				}
 
-				$daily_schedule .= '<div class="app-scheduled_appointment ' . join(' ', $app_class) . '">' . 
+				$daily_schedule .= '<div class="app-scheduled_appointment ' . join(' ', $app_class) . '">' .
 					date_i18n($appointments->time_format, $app_start) . ' <span class="app-end_time">- ' . date_i18n($appointments->time_format, $app_end) . '</span>' .
 					'<div class="app-scheduled_appointment-info" style="display:none">' .
 						'<ul>' .
@@ -203,7 +203,7 @@ $(".app-scheduled_appointment")
 	}
 }
 // Special-case shortcode for typo handling
-class App_Shortcode_WorkerMontlyCalendar extends App_Shortcode_WorkerMonthlyCalendar { 
+class App_Shortcode_WorkerMontlyCalendar extends App_Shortcode_WorkerMonthlyCalendar {
 	public function register ($key) {
 		$this->_key = $key;
 		add_shortcode($key, array($this, "process_shortcode"));
@@ -368,7 +368,7 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 			$c .= '</div>';
 		}
 		$c .= '</div>'; // .appointments-wrapper
-		
+
 		$script = '';
 
 		if (!$_noscript) $appointments->add2footer( $script );
@@ -560,7 +560,7 @@ class App_Shortcode_MonthlySchedule extends App_Shortcode {
  * Pagination shortcode.
  */
 class App_Shortcode_Pagination extends App_Shortcode {
-	
+
 	public function __construct () {
 		$this->_defaults = array(
 			'step' => array(
@@ -822,7 +822,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 				'value' => __('<h3>My Appointments</h3>', 'appointments'),
 				'help' => __('Title text.', 'appointments'),
 				'example' => __('My Appointments', 'appointments'),
-			),	
+			),
 			'status' => array(
 				'value' => 'paid,confirmed',
 				'help' => __('Which status(es) will be included. Possible values: paid, confirmed, completed, pending, removed, reserved or combinations of them separated with comma.', 'appointments'),
@@ -833,7 +833,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 				'value' => 1,
 				'help' => __('Enter 0 to disable Google Calendar button by which clients can add appointments to their Google Calendar after booking the appointment. Default: "1" (enabled - provided that "Add Google Calendar Button" setting is set as Yes)', 'appointments'),
 				'example' => '0',
-			),	
+			),
 			'order_by' => array(
 				'value' => 'ID',
 				'help' => __('Sort order of the appointments. Possible values: ID, start. Optionally DESC (descending) can be used, e.g. "start DESC" will reverse the order. Default: "ID". Note: This is the sort order as page loads. Table can be dynamically sorted by any field from front end (Some date formats may not be sorted correctly).', 'appointments'),
@@ -904,7 +904,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 					if (!empty($apps)) $q = "ID IN(" . join(',', $apps) . ")";
 				}
 			} else {
-				// Non-strict matching	
+				// Non-strict matching
 				foreach ( $apps as $app_id ) {
 					if ( is_numeric( $app_id ) )
 						$q .= " ID=".$app_id." OR ";
@@ -985,7 +985,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 				$ret .= $appointments->get_service_name( $r->service ) . '</td>';
 				$ret .= apply_filters('app-shortcode-my_appointments-after_service', '', $r);
 				$ret .= '<td>';
-				
+
 				if ( !$provider )
 					$ret .= $appointments->get_worker_name( $r->worker ) . '</td>';
 				else
@@ -1131,7 +1131,7 @@ class App_Shortcode_Services extends App_Shortcode {
 				'value' => __('Show available times', 'appointments'),
 				'help' => __('Button text to show the results for the selected. Default: "Show available times"', 'appointments'),
 				'example' => __('Show available times', 'appointments'),
-			),	
+			),
 			'description' => array(
 				'value' => 'excerpt',
 				'help' => __('WSelects which part of the description page will be displayed under the dropdown menu when a service is selected . Selectable values are "none", "excerpt", "content". Default: "excerpt"', 'appointments'),
@@ -1288,19 +1288,19 @@ class App_Shortcode_Services extends App_Shortcode {
 	private function _reorder_services ($services, $order) {
 		if (empty($services)) return $services;
 		list($by,$direction) = explode(' ', trim($order), 2);
-		
+
 		$by = trim($by) ? trim($by) : 'ID';
 		$by = in_array($by, array('ID', 'name', 'capacity', 'duration', 'price', 'page'))
 			? $by
 			: 'ID'
 		;
-		
+
 		$direction = trim($direction) ? strtoupper(trim($direction)) : 'ASC';
 		$direction = in_array($direction, array('ASC', 'DESC'))
 			? $direction
 			: 'ASC'
 		;
-		
+
 		$comparator = 'ASC' === $direction
 			? create_function('$a, $b', "return strcmp(\$a->$by, \$b->$by);")
 			: create_function('$a, $b', "return strcmp(\$b->$by, \$a->$by);")
@@ -1331,7 +1331,7 @@ class App_Shortcode_ServiceProviders extends App_Shortcode {
 				'value' => __('Show available times', 'appointments'),
 				'help' => __('Button text to show the results for the selected. Default: "Show available times"', 'appointments'),
 				'example' => __('Show available times', 'appointments'),
-			),	
+			),
 			'description' => array(
 				'value' => 'excerpt',
 				'help' => __('Selects which part of the bio page will be displayed under the dropdown menu when a service provider is selected . Selectable values are "none", "excerpt", "content". Default: "excerpt"', 'appointments'),
@@ -1457,7 +1457,7 @@ class App_Shortcode_ServiceProviders extends App_Shortcode {
 			$wcalendar = false;
 		// First remove these parameters and add them again to make wcalendar appear before js variable
 		$href = add_query_arg( array( "wcalendar"=>false, "app_provider_id" =>false ) );
-		$href = apply_filters( 'app_worker_href', add_query_arg( array( "wcalendar"=>$wcalendar, "app_provider_id" => "__selected_worker__" ), $href ) );	
+		$href = apply_filters( 'app_worker_href', add_query_arg( array( "wcalendar"=>$wcalendar, "app_provider_id" => "__selected_worker__" ), $href ) );
 
 		if ( $autorefresh ) {
 			$script .= "$('.app_workers_button').hide();";
@@ -1695,7 +1695,7 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 				'value' => __('Access Google Calendar and submit appointment','appointments'),
 				'help' => __('Text that will be displayed beside Google Calendar checkbox. Default: "Open Google Calendar and submit appointment"', 'appointments'),
 				'example' => __('Access Google Calendar and submit appointment','appointments'),
-			),		
+			),
 		);
 	}
 
@@ -1981,11 +1981,11 @@ class App_Shortcode_Confirmation extends App_Shortcode {
  */
 function app_core_late_map_global_formatting_reorder ($content) {
 	if (!preg_match('/\[app_/', $content)) return $content;
-	
+
 	remove_filter('the_content', 'wpautop');
 	add_filter('the_content', 'wpautop', 20);
 	add_filter('the_content', 'shortcode_unautop', 21);
-	
+
 	return $content;
 }
 

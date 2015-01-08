@@ -45,13 +45,13 @@ class Appointments {
 		// To follow WP Start of week, time, date settings
 		$this->local_time = current_time('timestamp');
 		if ( !$this->start_of_week = get_option('start_of_week') ) $this->start_of_week = 0;
-		
+
 		$this->time_format = get_option('time_format');
 		if (empty($this->time_format)) $this->time_format = "H:i";
 
 		$this->date_format = get_option('date_format');
 		if (empty($this->date_format)) $this->date_format = "Y-m-d";
-		
+
 		$this->datetime_format = $this->date_format . " " . $this->time_format;
 
 		add_action( 'delete_user', array( &$this, 'delete_user' ) );		// Modify database in case a user is deleted
@@ -564,7 +564,7 @@ class Appointments {
 // and show a registered- and paid for- slot as "available", when it's actually not.
 // E.g. http://premium.wpmudev.org/forums/topic/appointments-booking-conflictoverlapping-bookings
 				$apps = $this->db->get_results($this->db->prepare(
-					"SELECT * FROM {$this->app_table} " . 
+					"SELECT * FROM {$this->app_table} " .
 					"WHERE {$location} service=%d AND worker=%d " .
 					//" AND (status='pending' OR status='paid' OR status='confirmed' OR status='reserved') AND WEEKOFYEAR(start)=".$week. " " ); // THIS IS A PROBLEM! It doesn't take into account the completed events ALTHOUGH they may very well still be there
 					"AND (status='pending' OR status='paid' OR status='confirmed' OR status='reserved' OR status='completed') AND WEEKOFYEAR(start)=%d",
@@ -789,8 +789,8 @@ class Appointments {
 						? bp_core_get_user_domain($result->user)
 						: admin_url("user-edit.php?user_id="). $result->user
 					;
-					$name = '<a href="' . apply_filters('app_get_client_name-href', $href, $app_id, $result) . '" target="_blank">' . 
-						($result->name && !(defined('APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES') && APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES) ? $result->name : $userdata->user_login) . 
+					$name = '<a href="' . apply_filters('app_get_client_name-href', $href, $app_id, $result) . '" target="_blank">' .
+						($result->name && !(defined('APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES') && APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES) ? $result->name : $userdata->user_login) .
 					'</a>';
 				}
 				else
@@ -1152,13 +1152,13 @@ class Appointments {
 	 * @return array
 	 */
 	function weekdays() {
-		return array( 
-			__('Sunday', 'appointments') => 'Sunday', 
-			__('Monday', 'appointments') => 'Monday', 
-			__('Tuesday', 'appointments') => 'Tuesday', 
-			__('Wednesday', 'appointments') => 'Wednesday', 
-			__('Thursday', 'appointments') => 'Thursday', 
-			__('Friday', 'appointments') => 'Friday', 
+		return array(
+			__('Sunday', 'appointments') => 'Sunday',
+			__('Monday', 'appointments') => 'Monday',
+			__('Tuesday', 'appointments') => 'Tuesday',
+			__('Wednesday', 'appointments') => 'Wednesday',
+			__('Thursday', 'appointments') => 'Thursday',
+			__('Friday', 'appointments') => 'Friday',
 			__('Saturday', 'appointments') => 'Saturday'
 		);
 	}
@@ -1252,7 +1252,7 @@ class Appointments {
 	 */
 	function change_status( $stat, $app_id ) {
 		global $wpdb;
-		
+
 		if (!$app_id || !$stat) return false;
 
 		$result = $wpdb->update($this->app_table,
@@ -1545,13 +1545,13 @@ class Appointments {
 		// Break here - is the appointment free and, if so, shall we auto-confirm?
 		if (
 			!$price && !$paypal_price // Free appointment ...
-			&& 
+			&&
 			'pending' === $status && "yes" === $this->options["payment_required"] // ... in a paid environment ...
-			&& 
+			&&
 			(!empty($this->options["auto_confirm"]) && "yes" === $this->options["auto_confirm"]) // ... with auto-confirm activated
 		) {
-			$status = defined('APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM') && APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM 
-				? 'confirmed' 
+			$status = defined('APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM') && APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM
+				? 'confirmed'
 				: $status
 			;
 		}
@@ -2158,13 +2158,13 @@ class Appointments {
 		$ret .= '<div class="app_timetable_title">';
 		$ret .= date_i18n( $this->date_format, $day_start );
 		$ret .= '</div>';
-		
+
 		// Allow direct step increment manipulation,
 		// mainly for service duration based calculus start/stop times
 		$step = apply_filters('app-timetable-step_increment', $step);
-		
+
 		for ( $t=$first; $t<$last; $t=$t+$step ) {
-			
+
 			$ccs = apply_filters('app_ccs', $t); 				// Current cell starts
 			$cce = apply_filters('app_cce', $ccs + $step);		// Current cell ends
 
@@ -2572,10 +2572,10 @@ class Appointments {
 					// Special case: End is 00:00
 					if ('00:00' == $end) $end = '24:00';
 
-					if ( 
-						$ccs >= strtotime( $this_day. " ". $this->to_military( $day["start"][$idx] ), $this->local_time ) 
+					if (
+						$ccs >= strtotime( $this_day. " ". $this->to_military( $day["start"][$idx] ), $this->local_time )
 						&&
-						$cce <= $this->str2time( $this_day, $end ) 
+						$cce <= $this->str2time( $this_day, $end )
 					) {
 						return true;
 					}
@@ -2757,8 +2757,8 @@ class Appointments {
 							$end = '24:00';
 						if (
 							$ccs >= strtotime( $this_day. " ". $this->to_military( $day["start"] ), $this->local_time )
-							&& 
-							$cce <= $this->str2time( $this_day, $end ) 
+							&&
+							$cce <= $this->str2time( $this_day, $end )
 							&&
 							!$this->is_break( $ccs, $cce, $worker->ID )
 						) $n++;
@@ -2805,7 +2805,7 @@ class Appointments {
 		// If we're here, no worker is set or (s)he's not busy by default. Let's go for quick filter trip.
 		$is_busy = apply_filters('app-is_busy', false, $period, $capacity);
 		if ($is_busy) return true;
-		
+
 		// If we are here, no preference is selected (provider_id=0) or selected provider is not busy. There are 2 cases here:
 		// 1) There are several providers: Look for reserve apps for the workers giving this service.
 		// 2) No provider defined: Look for reserve apps for worker=0, because he will carry out all services
@@ -2847,7 +2847,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 	// 2) any number of services
 	// 3) only one service and only one provider per time slot:
 	// 	- selecting one provider+service makes this provider and selected service unavailable in a time slot
-	// 	- other providers are unaffected, other services are available 
+	// 	- other providers are unaffected, other services are available
 }
 // End @FIX
 			//if ( $start >= strtotime( $app->start ) && $end <= strtotime( $app->end ) ) $n++;
@@ -3402,7 +3402,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 
 					if (!empty($this->gcal_api) && is_object($this->gcal_api)) $this->gcal_api->delete($app_id); // Drop the cancelled appointment
 					else if (!defined('APP_GCAL_DISABLE')) $this->log("Unable to issue a remote call to delete the remote appointment.");
-					
+
 					// Do we also do_action app-appointments-appointment_cancelled?
 				}
 			}
@@ -3750,19 +3750,19 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			return $button;
 
 		if ( isset($_REQUEST['order'] ) ) {
-			$button = preg_replace( 
+			$button = preg_replace(
 				'%<input class="mp_button_buynow"(.*?)value="(.*?)" />%is',
-				'<input class="mp_button_buynow" type="submit" name="buynow" value="'.$book_now.'" />', 
-				$button 
+				'<input class="mp_button_buynow" type="submit" name="buynow" value="'.$book_now.'" />',
+				$button
 			);
 			$button = preg_replace(
 				'%<input class="mp_button_addcart"(.*?)value="(.*?)" />%is',
-				'<input class="mp_button_buynow" type="submit" name="buynow" value="'.$book_now.'" />', 
+				'<input class="mp_button_buynow" type="submit" name="buynow" value="'.$book_now.'" />',
 				$button
 			);
 			$button = preg_replace(
 				'%<form(.*?)></form>%is',
-				'<a class="mp_link_buynow" href="'.get_permalink($product_id).'">'.$book_now.'</a>', 
+				'<a class="mp_link_buynow" href="'.get_permalink($product_id).'">'.$book_now.'</a>',
 				$button
 			);
 
@@ -4173,7 +4173,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		}
 
 		do_action('app-scripts-general');
-		
+
 		// Prevent external caching plugins for this page
 		if ( !defined( 'DONOTCACHEPAGE' ) )
 			define( 'DONOTCACHEPAGE', true );
@@ -4463,15 +4463,15 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 				$subject = __('An appointment requires your confirmation', 'appointments');
 				$body = sprintf( __('The new appointment has an ID %s and you can edit it clicking this link: %s','appointments'), $app_id, admin_url("admin.php?page=appointments&type=pending") );
 			}
-			$body = apply_filters('app_notification_message', 
+			$body = apply_filters('app_notification_message',
 				apply_filters(
-					'app-messages-' . ($cancel ? 'cancellation' : 'notification') . '-body', 
+					'app-messages-' . ($cancel ? 'cancellation' : 'notification') . '-body',
 					$body, $r, $app_id
 				),
 				$r, $app_id
 			);
 			$subject = apply_filters(
-				'app-messages-' . ($cancel ? 'cancellation' : 'notification') . '-subject', 
+				'app-messages-' . ($cancel ? 'cancellation' : 'notification') . '-subject',
 				$subject, $r, $app_id
 			);
 
@@ -4504,7 +4504,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 					$body, $r, $app_id
 				);
 				$subject = apply_filters(
-					'app-messages-worker-' . ($cancel ? 'cancellation' : 'notification') . '-subject', 
+					'app-messages-worker-' . ($cancel ? 'cancellation' : 'notification') . '-subject',
 					$subject, $r, $app_id
 				);
 
@@ -4543,38 +4543,38 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			return false;
 		}
 
-		$subject = !empty($this->options['removal_notification_subject']) 
-			? $this->options['removal_notification_subject'] 
+		$subject = !empty($this->options['removal_notification_subject'])
+			? $this->options['removal_notification_subject']
 			: App_Template::get_default_removal_notification_subject()
 		;
 		$subject = $this->_replace($subject,
 			$app->name,
-			$this->get_service_name($app->service), 
+			$this->get_service_name($app->service),
 			$this->get_worker_name($app->worker),
-			$app->start, 
-			$app->price, 
-			$this->get_deposit($app->price), 
-			$app->phone, 
-			$app->note, 
-			$app->address, 
-			$app->email, 
+			$app->start,
+			$app->price,
+			$this->get_deposit($app->price),
+			$app->phone,
+			$app->note,
+			$app->address,
+			$app->email,
 			$app->city
 		);
-		$msg = !empty($this->options['removal_notification_message']) 
-			? $this->options['removal_notification_message'] 
+		$msg = !empty($this->options['removal_notification_message'])
+			? $this->options['removal_notification_message']
 			: App_Template::get_default_removal_notification_message()
 		;
 		$msg = $this->_replace($msg,
 			$app->name,
-			$this->get_service_name($app->service), 
+			$this->get_service_name($app->service),
 			$this->get_worker_name($app->worker),
-			$app->start, 
-			$app->price, 
-			$this->get_deposit($app->price), 
-			$app->phone, 
-			$app->note, 
-			$app->address, 
-			$app->email, 
+			$app->start,
+			$app->price,
+			$this->get_deposit($app->price),
+			$app->phone,
+			$app->note,
+			$app->address,
+			$app->email,
 			$app->city
 		);
 		$msg = apply_filters('app_removal_notification_message', $msg, $app, $app_id);
@@ -4760,7 +4760,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 					$text
 				);
 		*/
-		$balance = !empty($price) && !empty($deposit) 
+		$balance = !empty($price) && !empty($deposit)
 			? (float)$price - (float)$deposit
 			: (!empty($price) ? $price : 0.0)
 		;
@@ -4804,7 +4804,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		if (!(defined('APP_EMAIL_DROP_LEGACY_HEADERS') && APP_EMAIL_DROP_LEGACY_HEADERS)) {
 			$message_headers = "MIME-Version: 1.0\n" . "From: {$blogname}" .  " <{$admin_email}>\n" . "Content-Type: {$content_type}; charset=\"" . get_option('blog_charset') . "\"\n";
 		} else {
-			$message_headers = "MIME-Version: 1.0\n" . 
+			$message_headers = "MIME-Version: 1.0\n" .
 				"Content-Type: {$content_type}; charset=\"" . get_option('blog_charset') . "\"\n"
 			;
 			add_filter('wp_mail_from', create_function('', "return '{$admin_email}';"));
@@ -4902,10 +4902,10 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 					if ( $this->change_status( 'removed', $app_id ) ) {
 						$this->log( sprintf( __('Client %s cancelled appointment with ID: %s','appointments'), $this->get_client_name( $app_id ), $app_id ) );
 						$this->send_notification( $app_id, true );
-						
+
 						if (!empty($this->gcal_api) && is_object($this->gcal_api)) $this->gcal_api->delete($app_id); // Drop the cancelled appointment
 						else if (!defined('APP_GCAL_DISABLE')) $this->log("Unable to issue a remote call to delete the remote appointment.");
-						
+
 						do_action('app-appointments-appointment_cancelled', $app_id);
 						// If there is a header warning other plugins can do whatever they need
 						if ( !headers_sent() ) {
@@ -4954,7 +4954,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 				if ( $this->change_status( 'removed', $app_id ) ) {
 					$this->log( sprintf( __('Client %s cancelled appointment with ID: %s','appointments'), $this->get_client_name( $app_id ), $app_id ) );
 					$this->send_notification( $app_id, true );
-					
+
 					if (!empty($this->gcal_api) && is_object($this->gcal_api)) $this->gcal_api->delete($app_id); // Drop the cancelled appointment
 					else if (!defined('APP_GCAL_DISABLE')) $this->log("Unable to issue a remote call to delete the remote appointment.");
 
@@ -5085,7 +5085,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 	// Enqueue css for all admin pages
 	function admin_css() {
 		wp_enqueue_style( "appointments-admin", $this->plugin_url . "/css/admin.css", false, $this->version );
-		
+
 		$screen = get_current_screen();
 		$title = sanitize_title(__('Appointments', 'appointments'));
 
@@ -5439,7 +5439,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			$this->options["reminder_time_worker"]		= str_replace( " ", "", $_POST["reminder_time_worker"] );
 			$this->options["reminder_subject"]			= stripslashes_deep( $_POST["reminder_subject"] );
 			$this->options["reminder_message"]			= stripslashes_deep( $_POST["reminder_message"] );
-			
+
 			$this->options["send_removal_notification"] = $_POST["send_removal_notification"];
 			$this->options["removal_notification_subject"] = stripslashes_deep( $_POST["removal_notification_subject"] );
 			$this->options["removal_notification_message"] = stripslashes_deep( $_POST["removal_notification_message"] );
@@ -5898,7 +5898,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		$r2 = $wpdb->query( $wpdb->prepare("DELETE FROM {$this->exceptions_table} WHERE worker=%d", $ID) );
 
 		// Also modify app table
-		$r3 = $wpdb->update( 
+		$r3 = $wpdb->update(
 			$this->app_table,
 			array( 'worker'	=>	0 ),
 			array( 'worker'	=> $ID )
@@ -6400,7 +6400,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 	 * @since 1.0.9
 	 */
 	function export(){
-		
+
 		$sql = false;
 		$type = !empty($_POST['export_type']) ? $_POST['export_type'] : 'all';
 		if ('selected' == $type && !empty($_POST['app'])) {
@@ -6943,7 +6943,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 				$this->gcal_api->insert( $app_id );
 			}
 		}
-		
+
 		do_action('app-appointment-inline_edit-after_save', ($update_result ? $app_id : $wpdb->insert_id), $data);
 
 		if ($resend && 'removed' != $data['status'] && empty($email_sent) ) {
@@ -6964,7 +6964,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 
 			do_action( 'app_save_user_meta', $data['user'], $data );
 		}
-		
+
 		do_action('app-appointment-inline_edit-before_response', ($update_result ? $app_id : $wpdb->insert_id), $data);
 
 		$result = array(
