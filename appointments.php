@@ -2092,11 +2092,13 @@ class Appointments {
 		$ret .= '<div style="clear:both"></div>';
 
 		$script  = '';
-		$script .= '$(".app_monthly_schedule_wrapper table td.free").click(function(){';
-		$script .= 'var selected_timetable=$(".app_timetable_"+$(this).find(".appointments_select_time").val());';
-		$script .= '$(".app_timetable:not(selected_timetable)").hide();';
-		$script .= 'selected_timetable.show("slow");';
-		$script .= '});';
+		$script .= 'var selector = ".app_monthly_schedule_wrapper table td.free", callback = function (e) {';
+			$script .= '$(selector).off("click", callback);';
+			$script .= 'var selected_timetable=$(".app_timetable_"+$(this).find(".appointments_select_time").val());';
+			$script .= '$(".app_timetable:not(selected_timetable)").hide();';
+			$script .= 'selected_timetable.show("slow", function () { $(selector).on("click", callback); });';
+		$script .= '};';
+		$script .= '$(selector).on("click", callback);';
 
 		$this->add2footer( $script );
 
