@@ -1858,6 +1858,10 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 								$(".appointments-additional-field").show();
 							}
 							$(".appointments-confirmation-button").focus();
+							var offset = $(".appointments-confirmation-wrapper").offset();
+							if (offset && "top" in offset && offset.top) {
+								$(window).scrollTop(offset.top);
+							}
 					}
 					},"json");';
 			$script .= '});';
