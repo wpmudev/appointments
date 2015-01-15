@@ -243,6 +243,7 @@ jQuery(document).ready(function($){
 	</li>
 </ul>
 
+<!--
 <ul id='q27'>
 	<li>
 	<?php _e('<b>How is the plugin supposed to work by the way?</b>', 'appointments');?>
@@ -250,6 +251,7 @@ jQuery(document).ready(function($){
 	<?php printf( __('Please visit our %s.', 'appointments'), '<a href="http://appointmentsplus.org/" target="_blank">'.__('Demo website', 'appointments' ).'</a>');?>
 	</li>
 </ul>
+-->
 
 <ul id='q28'>
 	<li>
