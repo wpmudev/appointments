@@ -89,7 +89,7 @@ class App_Shortcode_WorkerMonthlyCalendar extends App_Shortcode {
 		$last = ($first + (date('t', $first) * 86400 )) - 1;
 
 		$sql = $wpdb->prepare(
-			"SELECT * FROM {$appointments->app_table} WHERE {$worker_sql} {$status_sql} AND UNIX_TIMESTAMP(start)>%d AND UNIX_TIMESTAMP(end)<%d",
+			"SELECT * FROM {$appointments->app_table} WHERE {$worker_sql} {$status_sql} AND UNIX_TIMESTAMP(start)>%d AND UNIX_TIMESTAMP(end)<%d ORDER BY start",
 			$first, $last
 		);
 		return $wpdb->get_results($sql);
