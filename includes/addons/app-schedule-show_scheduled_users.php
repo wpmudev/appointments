@@ -45,8 +45,10 @@ class App_Schedule_ShowUsers {
 		if (!$apps) return false;
 
 		$ret = array();
+		$period = new App_Period($start, $end);
 		foreach ($apps as $app) {
-			if (mysql2date('U',$app->start) >= $start && mysql2date('U',$app->end) <= $end) $ret[] = $app;
+			//if (mysql2date('U',$app->start) >= $start && mysql2date('U',$app->end) <= $end) $ret[] = $app;
+			if ($period->contains($app->start, $app->end)) $ret[] = $app;
 		}
 		return $ret;
 	}

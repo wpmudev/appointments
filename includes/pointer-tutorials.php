@@ -203,11 +203,7 @@ if ( !class_exists( 'Pointer_Tutorial' ) ) {
 		 *	@param string $url Url to the icon image file. Should be 32x32 normally
 		 */
 		public function add_icon( $url ) {
-			//$this->add_style( '.wpmudev_dashboard-pointer .wp-pointer-content h3:before { background-image: url("' . $url . '"); }' );
-			
-			// Changed this to allow for icons outside dashboard.
-			// Also, !important is needed because of the removed selector specificity
-			$this->add_style( '.wp-pointer-content h3:before { background-image: url("' . $url . '") !important; }' );
+			$this->add_style( '.wpmudev_dashboard-pointer .wp-pointer-content h3:before { background-image: url("' . $url . '"); }' );
 		}
 		
 		/*
@@ -427,10 +423,7 @@ if ( !class_exists( 'Pointer_Tutorial' ) ) {
 				} else if ( isset($this->page_pointers[$pointer_id+1]) ) {
 					$next_pointer = $this->page_pointers[$pointer_id+1]['selector'];
 					$next_pointer_id = $pointer_id + 1;
-					// Added scrolling to next pointer.
-					// This will also fix positioning/orientation bugs that happen in some cases
-					// when the pointer is close to being off-screen.
-					$next_pointer = "$(window).scrollTop($('$next_pointer').offset().top-300); $('$next_pointer').pointer( options$next_pointer_id ).pointer('open').focus();";
+					$next_pointer = "$('$next_pointer').pointer( options$next_pointer_id ).pointer('open').focus();";
 					$next_title = $this->page_pointers[$pointer_id+1]['title'];
 				} else {
 					$next_name = __('Dismiss', $this->textdomain);
@@ -448,17 +441,14 @@ if ( !class_exists( 'Pointer_Tutorial' ) ) {
 				} else if ( isset($this->page_pointers[$pointer_id-1]) ) {
 					$prev_pointer = $this->page_pointers[$pointer_id-1]['selector'];
 					$prev_pointer_id = $pointer_id - 1;
-					// Added scrolling to previous pointer.
-					// This will also fix positioning/orientation bugs that happen in some cases
-					// when the pointer is close to being off-screen.
-					$prev_pointer = "$(window).scrollTop($('$prev_pointer').offset().top-300); $('$prev_pointer').pointer( options$prev_pointer_id ).pointer('open').focus();";
+					$prev_pointer = "$('$prev_pointer').pointer( options$prev_pointer_id ).pointer('open').focus();";
 					$prev_title = $this->page_pointers[$pointer_id-1]['title'];
 				}
 				
 				$close_name = __('Dismiss', $this->textdomain);
 				$close_title = sprintf(__('Dismiss %s', $this->textdomain), $this->tutorial_name);
 				?>
-				//step <?php echo $pointer_id; ?> pointer<?php if ($pointer_id == $current_step) { ?> (Current)<?php } ?>				
+				/*step <?php echo $pointer_id; ?> pointer<?php if ($pointer_id == $current_step) { ?> (Current)<?php } ?>*/
 				var options<?php echo $pointer_id; ?> = <?php echo json_encode( $args ); ?>;
 	
 				options<?php echo $pointer_id; ?> = $.extend( options<?php echo $pointer_id; ?>, {

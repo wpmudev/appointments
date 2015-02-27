@@ -146,7 +146,7 @@ class App_Locations_WorkerLocations {
 		$markup .= '<select name="worker_location[' . $worker_id . ']"><option value=""></option>';
 		foreach ($locations as $location) {
 			$checked = $location->get_id() == self::worker_to_location_id($worker_id) ? 'selected="selected"' : '';
-			$markup .= '<option value="' . $location->get_id() . '" ' . $checked . '>' . $location->get_admin_label() . '</option>';
+			$markup .= '<option value="' . $location->get_id() . '" ' . $checked . '>' . esc_html($location->get_admin_label()) . '</option>';
 		}
 		$markup .= '</select>';
 		return $out . $markup;

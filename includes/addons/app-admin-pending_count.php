@@ -3,7 +3,7 @@
 Plugin Name: Pending Appointments count notification
 Description: Adds a visual notification to your Appointments menu item and periodically syncs this count with the server.
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.0
+Version: 1.1
 AddonType: Admin
 Author: WPMU DEV
 */
@@ -26,9 +26,19 @@ class App_Admin_PendingCount {
 		add_action('plugins_loaded', array($this, 'initialize'));
 
 		add_action('admin_footer', array($this, 'add_script'));
+		add_action('admin_notices', array($this, 'check_prerequisites'));
 		add_filter('heartbeat_received', array($this, 'hb_send_response'), 10, 3);
 
 		add_action('app-admin-admin_pages_added', array($this, 'update_menu_item'));
+	}
+
+	public function check_prerequisites () {
+		if (!current_user_can(App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_APPOINTMENTS))) return false;
+		if ($this->_check_heartbeat()) return false;
+
+		echo '<div class="error"><p>' .
+			__('There seems to be something wrong with the WP Heartbeat API state. The &quot;Pending Appointments count notification&quot; add-on might not work properly because of this.', 'appointments') .
+		'</p></div>';
 	}
 
 	public function update_menu_item ($page) {
@@ -72,6 +82,8 @@ class App_Admin_PendingCount {
 <script>
 ;(function ($) {
 
+if (typeof(wp) === "undefined") return false;
+
 function update_interface (data) {
 	var root = $("#toplevel_page_appointments"),
 		target = root.find(".wp-menu-name"),
@@ -107,6 +119,10 @@ EO_AAPC_JS;
 
 	private function _get_pending_template () {
 		return '<span class="awaiting-mod"><span class="pending-count">%d</span></span>';
+	}
+
+	private function _check_heartbeat () {
+		return wp_script_is('heartbeat', 'queue') && wp_script_is('heartbeat', 'registered');
 	}
 }
 if (is_admin()) App_Admin_PendingCount::serve();

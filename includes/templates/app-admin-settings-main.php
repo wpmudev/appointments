@@ -471,6 +471,14 @@
 			</td>
 	</tr>
 
+	<tr class="payment_row" <?php if ( $appointments->options['payment_required'] != 'yes' ) echo 'style="display:none"'?>>
+		<th scope="row"><?php _e('Allow zero-priced appointments auto-confirm', 'appointments') ?></th>
+		<td colspan="2">
+			<input value="1" <?php checked(true, @$appointments->options['allow_free_autoconfirm']); ?> name="allow_free_autoconfirm" type="checkbox" />
+			<span class="description"><?php _e('Allow auto-confirm for zero-priced appointments in a paid environment.', 'appointments') ?></span>
+		</td>
+	</tr>
+
 	<tr class="payment_row" <?php if ( $appointments->options['payment_required'] != 'yes' ) echo 'style="display:none"'; else echo 'style="border-top: 1px solid lightgrey;"'?>>
 			<th scope="row">&nbsp;</th>
 			<td colspan="2">
@@ -694,6 +702,8 @@
 				</select>
 				<span class="description">
 					<?php _e('Send out an email to appropriate clients and providers when an appointment has been removed.', 'appointments') ?>
+					<br />
+					<?php _e('<b>Note:</b> This email will only be sent for explicitly removed appointments only. The appointments that get removed due to expiration will not be affected.', 'appointments') ?>
 				</span>
 			</td>
 		</tr>
@@ -727,11 +737,11 @@
 		<tr valign="top">
 			<th scope="row" ><?php _e('Log Sent email Records', 'appointments')?></th>
 			<td colspan="2">
-			<select name="log_emails">
-			<option value="no" <?php if ( @$appointments->options['log_emails'] <> 'yes' ) echo "selected='selected'"?>><?php _e('No', 'appointments')?></option>
-			<option value="yes" <?php if ( @$appointments->options['log_emails'] == 'yes' ) echo "selected='selected'"?>><?php _e('Yes', 'appointments')?></option>
-			</select>
-			<span class="description"><?php _e('Whether to log confirmation and reminder email records (Not the emails themselves).', 'appointments') ?></span>
+				<select name="log_emails">
+					<option value="no" <?php if ( @$appointments->options['log_emails'] <> 'yes' ) echo "selected='selected'"?>><?php _e('No', 'appointments')?></option>
+					<option value="yes" <?php if ( @$appointments->options['log_emails'] == 'yes' ) echo "selected='selected'"?>><?php _e('Yes', 'appointments')?></option>
+				</select>
+				<span class="description"><?php _e('Whether to log confirmation and reminder email records (Not the emails themselves).', 'appointments') ?></span>
 			</td>
 			</tr>
 			<tr>

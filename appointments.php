@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.4.6
+Version: 1.4.7-BETA-7
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	var $version = "1.4.6";
+	var $version = "1.4.7-BETA-7";
 
 	function __construct() {
 
@@ -45,13 +45,13 @@ class Appointments {
 		// To follow WP Start of week, time, date settings
 		$this->local_time = current_time('timestamp');
 		if ( !$this->start_of_week = get_option('start_of_week') ) $this->start_of_week = 0;
-		
+
 		$this->time_format = get_option('time_format');
 		if (empty($this->time_format)) $this->time_format = "H:i";
 
 		$this->date_format = get_option('date_format');
 		if (empty($this->date_format)) $this->date_format = "Y-m-d";
-		
+
 		$this->datetime_format = $this->date_format . " " . $this->time_format;
 
 		add_action( 'delete_user', array( &$this, 'delete_user' ) );		// Modify database in case a user is deleted
@@ -159,6 +159,11 @@ class Appointments {
 			add_option( "appointments_salt", $salt ); // Save it to be used until it is cleared manually
 		}
 		$this->salt = $salt;
+
+		// Deal with zero-priced appointments auto-confirm
+		if ('yes' == $this->options['payment_required'] && !empty($this->options['allow_free_autoconfirm'])) {
+			if (!defined('APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM')) define('APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM', true);
+		}
 	}
 
 	function setup_gcal_sync () {
@@ -560,7 +565,7 @@ class Appointments {
 // and show a registered- and paid for- slot as "available", when it's actually not.
 // E.g. http://premium.wpmudev.org/forums/topic/appointments-booking-conflictoverlapping-bookings
 				$apps = $this->db->get_results($this->db->prepare(
-					"SELECT * FROM {$this->app_table} " . 
+					"SELECT * FROM {$this->app_table} " .
 					"WHERE {$location} service=%d AND worker=%d " .
 					//" AND (status='pending' OR status='paid' OR status='confirmed' OR status='reserved') AND WEEKOFYEAR(start)=".$week. " " ); // THIS IS A PROBLEM! It doesn't take into account the completed events ALTHOUGH they may very well still be there
 					"AND (status='pending' OR status='paid' OR status='confirmed' OR status='reserved' OR status='completed') AND WEEKOFYEAR(start)=%d",
@@ -785,8 +790,8 @@ class Appointments {
 						? bp_core_get_user_domain($result->user)
 						: admin_url("user-edit.php?user_id="). $result->user
 					;
-					$name = '<a href="' . apply_filters('app_get_client_name-href', $href, $app_id, $result) . '" target="_blank">' . 
-						($result->name && !(defined('APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES') && APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES) ? $result->name : $userdata->user_login) . 
+					$name = '<a href="' . apply_filters('app_get_client_name-href', $href, $app_id, $result) . '" target="_blank">' .
+						($result->name && !(defined('APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES') && APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES) ? $result->name : $userdata->user_login) .
 					'</a>';
 				}
 				else
@@ -1148,13 +1153,13 @@ class Appointments {
 	 * @return array
 	 */
 	function weekdays() {
-		return array( 
-			__('Sunday', 'appointments') => 'Sunday', 
-			__('Monday', 'appointments') => 'Monday', 
-			__('Tuesday', 'appointments') => 'Tuesday', 
-			__('Wednesday', 'appointments') => 'Wednesday', 
-			__('Thursday', 'appointments') => 'Thursday', 
-			__('Friday', 'appointments') => 'Friday', 
+		return array(
+			__('Sunday', 'appointments') => 'Sunday',
+			__('Monday', 'appointments') => 'Monday',
+			__('Tuesday', 'appointments') => 'Tuesday',
+			__('Wednesday', 'appointments') => 'Wednesday',
+			__('Thursday', 'appointments') => 'Thursday',
+			__('Friday', 'appointments') => 'Friday',
 			__('Saturday', 'appointments') => 'Saturday'
 		);
 	}
@@ -1248,7 +1253,7 @@ class Appointments {
 	 */
 	function change_status( $stat, $app_id ) {
 		global $wpdb;
-		
+
 		if (!$app_id || !$stat) return false;
 
 		$result = $wpdb->update($this->app_table,
@@ -1541,13 +1546,13 @@ class Appointments {
 		// Break here - is the appointment free and, if so, shall we auto-confirm?
 		if (
 			!$price && !$paypal_price // Free appointment ...
-			&& 
+			&&
 			'pending' === $status && "yes" === $this->options["payment_required"] // ... in a paid environment ...
-			&& 
+			&&
 			(!empty($this->options["auto_confirm"]) && "yes" === $this->options["auto_confirm"]) // ... with auto-confirm activated
 		) {
-			$status = defined('APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM') && APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM 
-				? 'confirmed' 
+			$status = defined('APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM') && APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM
+				? 'confirmed'
 				: $status
 			;
 		}
@@ -2088,11 +2093,13 @@ class Appointments {
 		$ret .= '<div style="clear:both"></div>';
 
 		$script  = '';
-		$script .= '$(".app_monthly_schedule_wrapper table td.free").click(function(){';
-		$script .= 'var selected_timetable=$(".app_timetable_"+$(this).find(".appointments_select_time").val());';
-		$script .= '$(".app_timetable:not(selected_timetable)").hide();';
-		$script .= 'selected_timetable.show("slow");';
-		$script .= '});';
+		$script .= 'var selector = ".app_monthly_schedule_wrapper table td.free", callback = function (e) {';
+			$script .= '$(selector).off("click", callback);';
+			$script .= 'var selected_timetable=$(".app_timetable_"+$(this).find(".appointments_select_time").val());';
+			$script .= '$(".app_timetable:not(selected_timetable)").hide();';
+			$script .= 'selected_timetable.show("slow", function () { $(selector).on("click", callback); });';
+		$script .= '};';
+		$script .= '$(selector).on("click", callback);';
 
 		$this->add2footer( $script );
 
@@ -2154,13 +2161,13 @@ class Appointments {
 		$ret .= '<div class="app_timetable_title">';
 		$ret .= date_i18n( $this->date_format, $day_start );
 		$ret .= '</div>';
-		
+
 		// Allow direct step increment manipulation,
 		// mainly for service duration based calculus start/stop times
 		$step = apply_filters('app-timetable-step_increment', $step);
-		
+
 		for ( $t=$first; $t<$last; $t=$t+$step ) {
-			
+
 			$ccs = apply_filters('app_ccs', $t); 				// Current cell starts
 			$cce = apply_filters('app_cce', $ccs + $step);		// Current cell ends
 
@@ -2568,10 +2575,10 @@ class Appointments {
 					// Special case: End is 00:00
 					if ('00:00' == $end) $end = '24:00';
 
-					if ( 
-						$ccs >= strtotime( $this_day. " ". $this->to_military( $day["start"][$idx] ), $this->local_time ) 
+					if (
+						$ccs >= strtotime( $this_day. " ". $this->to_military( $day["start"][$idx] ), $this->local_time )
 						&&
-						$cce <= $this->str2time( $this_day, $end ) 
+						$cce <= $this->str2time( $this_day, $end )
 					) {
 						return true;
 					}
@@ -2753,8 +2760,8 @@ class Appointments {
 							$end = '24:00';
 						if (
 							$ccs >= strtotime( $this_day. " ". $this->to_military( $day["start"] ), $this->local_time )
-							&& 
-							$cce <= $this->str2time( $this_day, $end ) 
+							&&
+							$cce <= $this->str2time( $this_day, $end )
 							&&
 							!$this->is_break( $ccs, $cce, $worker->ID )
 						) $n++;
@@ -2801,7 +2808,7 @@ class Appointments {
 		// If we're here, no worker is set or (s)he's not busy by default. Let's go for quick filter trip.
 		$is_busy = apply_filters('app-is_busy', false, $period, $capacity);
 		if ($is_busy) return true;
-		
+
 		// If we are here, no preference is selected (provider_id=0) or selected provider is not busy. There are 2 cases here:
 		// 1) There are several providers: Look for reserve apps for the workers giving this service.
 		// 2) No provider defined: Look for reserve apps for worker=0, because he will carry out all services
@@ -2843,7 +2850,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 	// 2) any number of services
 	// 3) only one service and only one provider per time slot:
 	// 	- selecting one provider+service makes this provider and selected service unavailable in a time slot
-	// 	- other providers are unaffected, other services are available 
+	// 	- other providers are unaffected, other services are available
 }
 // End @FIX
 			//if ( $start >= strtotime( $app->start ) && $end <= strtotime( $app->end ) ) $n++;
@@ -3398,7 +3405,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 
 					if (!empty($this->gcal_api) && is_object($this->gcal_api)) $this->gcal_api->delete($app_id); // Drop the cancelled appointment
 					else if (!defined('APP_GCAL_DISABLE')) $this->log("Unable to issue a remote call to delete the remote appointment.");
-					
+
 					// Do we also do_action app-appointments-appointment_cancelled?
 				}
 			}
@@ -3746,19 +3753,19 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			return $button;
 
 		if ( isset($_REQUEST['order'] ) ) {
-			$button = preg_replace( 
+			$button = preg_replace(
 				'%<input class="mp_button_buynow"(.*?)value="(.*?)" />%is',
-				'<input class="mp_button_buynow" type="submit" name="buynow" value="'.$book_now.'" />', 
-				$button 
+				'<input class="mp_button_buynow" type="submit" name="buynow" value="'.$book_now.'" />',
+				$button
 			);
 			$button = preg_replace(
 				'%<input class="mp_button_addcart"(.*?)value="(.*?)" />%is',
-				'<input class="mp_button_buynow" type="submit" name="buynow" value="'.$book_now.'" />', 
+				'<input class="mp_button_buynow" type="submit" name="buynow" value="'.$book_now.'" />',
 				$button
 			);
 			$button = preg_replace(
 				'%<form(.*?)></form>%is',
-				'<a class="mp_link_buynow" href="'.get_permalink($product_id).'">'.$book_now.'</a>', 
+				'<a class="mp_link_buynow" href="'.get_permalink($product_id).'">'.$book_now.'</a>',
 				$button
 			);
 
@@ -4171,7 +4178,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		}
 
 		do_action('app-scripts-general');
-		
+
 		// Prevent external caching plugins for this page
 		if ( !defined( 'DONOTCACHEPAGE' ) )
 			define( 'DONOTCACHEPAGE', true );
@@ -4461,15 +4468,15 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 				$subject = __('An appointment requires your confirmation', 'appointments');
 				$body = sprintf( __('The new appointment has an ID %s and you can edit it clicking this link: %s','appointments'), $app_id, admin_url("admin.php?page=appointments&type=pending") );
 			}
-			$body = apply_filters('app_notification_message', 
+			$body = apply_filters('app_notification_message',
 				apply_filters(
-					'app-messages-' . ($cancel ? 'cancellation' : 'notification') . '-body', 
+					'app-messages-' . ($cancel ? 'cancellation' : 'notification') . '-body',
 					$body, $r, $app_id
 				),
 				$r, $app_id
 			);
 			$subject = apply_filters(
-				'app-messages-' . ($cancel ? 'cancellation' : 'notification') . '-subject', 
+				'app-messages-' . ($cancel ? 'cancellation' : 'notification') . '-subject',
 				$subject, $r, $app_id
 			);
 
@@ -4502,7 +4509,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 					$body, $r, $app_id
 				);
 				$subject = apply_filters(
-					'app-messages-worker-' . ($cancel ? 'cancellation' : 'notification') . '-subject', 
+					'app-messages-worker-' . ($cancel ? 'cancellation' : 'notification') . '-subject',
 					$subject, $r, $app_id
 				);
 
@@ -4541,40 +4548,41 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			return false;
 		}
 
-		$subject = !empty($this->options['removal_notification_subject']) 
-			? $this->options['removal_notification_subject'] 
+		$subject = !empty($this->options['removal_notification_subject'])
+			? $this->options['removal_notification_subject']
 			: App_Template::get_default_removal_notification_subject()
 		;
 		$subject = $this->_replace($subject,
 			$app->name,
-			$this->get_service_name($app->service), 
+			$this->get_service_name($app->service),
 			$this->get_worker_name($app->worker),
-			$app->start, 
-			$app->price, 
-			$this->get_deposit($app->price), 
-			$app->phone, 
-			$app->note, 
-			$app->address, 
-			$app->email, 
+			$app->start,
+			$app->price,
+			$this->get_deposit($app->price),
+			$app->phone,
+			$app->note,
+			$app->address,
+			$app->email,
 			$app->city
 		);
-		$msg = !empty($this->options['removal_notification_message']) 
-			? $this->options['removal_notification_message'] 
+		$msg = !empty($this->options['removal_notification_message'])
+			? $this->options['removal_notification_message']
 			: App_Template::get_default_removal_notification_message()
 		;
 		$msg = $this->_replace($msg,
 			$app->name,
-			$this->get_service_name($app->service), 
+			$this->get_service_name($app->service),
 			$this->get_worker_name($app->worker),
-			$app->start, 
-			$app->price, 
-			$this->get_deposit($app->price), 
-			$app->phone, 
-			$app->note, 
-			$app->address, 
-			$app->email, 
+			$app->start,
+			$app->price,
+			$this->get_deposit($app->price),
+			$app->phone,
+			$app->note,
+			$app->address,
+			$app->email,
 			$app->city
 		);
+		$msg = apply_filters('app_removal_notification_message', $msg, $app, $app_id);
 		$result = wp_mail(
 			$email,
 			$subject,
@@ -4757,7 +4765,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 					$text
 				);
 		*/
-		$balance = !empty($price) && !empty($deposit) 
+		$balance = !empty($price) && !empty($deposit)
 			? (float)$price - (float)$deposit
 			: (!empty($price) ? $price : 0.0)
 		;
@@ -4801,7 +4809,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		if (!(defined('APP_EMAIL_DROP_LEGACY_HEADERS') && APP_EMAIL_DROP_LEGACY_HEADERS)) {
 			$message_headers = "MIME-Version: 1.0\n" . "From: {$blogname}" .  " <{$admin_email}>\n" . "Content-Type: {$content_type}; charset=\"" . get_option('blog_charset') . "\"\n";
 		} else {
-			$message_headers = "MIME-Version: 1.0\n" . 
+			$message_headers = "MIME-Version: 1.0\n" .
 				"Content-Type: {$content_type}; charset=\"" . get_option('blog_charset') . "\"\n"
 			;
 			add_filter('wp_mail_from', create_function('', "return '{$admin_email}';"));
@@ -4899,10 +4907,10 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 					if ( $this->change_status( 'removed', $app_id ) ) {
 						$this->log( sprintf( __('Client %s cancelled appointment with ID: %s','appointments'), $this->get_client_name( $app_id ), $app_id ) );
 						$this->send_notification( $app_id, true );
-						
+
 						if (!empty($this->gcal_api) && is_object($this->gcal_api)) $this->gcal_api->delete($app_id); // Drop the cancelled appointment
 						else if (!defined('APP_GCAL_DISABLE')) $this->log("Unable to issue a remote call to delete the remote appointment.");
-						
+
 						do_action('app-appointments-appointment_cancelled', $app_id);
 						// If there is a header warning other plugins can do whatever they need
 						if ( !headers_sent() ) {
@@ -4951,7 +4959,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 				if ( $this->change_status( 'removed', $app_id ) ) {
 					$this->log( sprintf( __('Client %s cancelled appointment with ID: %s','appointments'), $this->get_client_name( $app_id ), $app_id ) );
 					$this->send_notification( $app_id, true );
-					
+
 					if (!empty($this->gcal_api) && is_object($this->gcal_api)) $this->gcal_api->delete($app_id); // Drop the cancelled appointment
 					else if (!defined('APP_GCAL_DISABLE')) $this->log("Unable to issue a remote call to delete the remote appointment.");
 
@@ -5082,7 +5090,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 	// Enqueue css for all admin pages
 	function admin_css() {
 		wp_enqueue_style( "appointments-admin", $this->plugin_url . "/css/admin.css", false, $this->version );
-		
+
 		$screen = get_current_screen();
 		$title = sanitize_title(__('Appointments', 'appointments'));
 
@@ -5412,7 +5420,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			$this->options["ask_address"]				= isset( $_POST["ask_address"] );
 			$this->options["ask_city"]					= isset( $_POST["ask_city"] );
 			$this->options["ask_note"]					= isset( $_POST["ask_note"] );
-			$this->options["additional_css"]			= trim( $_POST["additional_css"] );
+			$this->options["additional_css"]			= trim( stripslashes_deep($_POST["additional_css"]) );
 
 			$this->options["payment_required"]			= $_POST["payment_required"];
 			$this->options["percent_deposit"]			= trim( str_replace( '%', '', $_POST["percent_deposit"] ) );
@@ -5424,21 +5432,22 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			$this->options['mode'] 						= $_POST['mode'];
 			$this->options['merchant_email'] 			= trim( $_POST['merchant_email'] );
 			$this->options['return'] 					= $_POST['return'];
+			$this->options['allow_free_autoconfirm'] 	= !empty($_POST['allow_free_autoconfirm']);
 
 			$this->options["send_confirmation"]			= $_POST["send_confirmation"];
 			$this->options["send_notification"]			= @$_POST["send_notification"];
-			$this->options["confirmation_subject"]		= stripslashes( $_POST["confirmation_subject"] );
-			$this->options["confirmation_message"]		= stripslashes( $_POST["confirmation_message"] );
+			$this->options["confirmation_subject"]		= stripslashes_deep( $_POST["confirmation_subject"] );
+			$this->options["confirmation_message"]		= stripslashes_deep( $_POST["confirmation_message"] );
 			$this->options["send_reminder"]				= $_POST["send_reminder"];
 			$this->options["reminder_time"]				= str_replace( " ", "", $_POST["reminder_time"] );
 			$this->options["send_reminder_worker"]		= $_POST["send_reminder_worker"];
 			$this->options["reminder_time_worker"]		= str_replace( " ", "", $_POST["reminder_time_worker"] );
-			$this->options["reminder_subject"]			= stripslashes( $_POST["reminder_subject"] );
-			$this->options["reminder_message"]			= stripslashes( $_POST["reminder_message"] );
-			
+			$this->options["reminder_subject"]			= stripslashes_deep( $_POST["reminder_subject"] );
+			$this->options["reminder_message"]			= stripslashes_deep( $_POST["reminder_message"] );
+
 			$this->options["send_removal_notification"] = $_POST["send_removal_notification"];
-			$this->options["removal_notification_subject"] = stripslashes( $_POST["removal_notification_subject"] );
-			$this->options["removal_notification_message"] = stripslashes( $_POST["removal_notification_message"] );
+			$this->options["removal_notification_subject"] = stripslashes_deep( $_POST["removal_notification_subject"] );
+			$this->options["removal_notification_message"] = stripslashes_deep( $_POST["removal_notification_message"] );
 
 			$this->options["log_emails"]				= $_POST["log_emails"];
 
@@ -5894,7 +5903,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		$r2 = $wpdb->query( $wpdb->prepare("DELETE FROM {$this->exceptions_table} WHERE worker=%d", $ID) );
 
 		// Also modify app table
-		$r3 = $wpdb->update( 
+		$r3 = $wpdb->update(
 			$this->app_table,
 			array( 'worker'	=>	0 ),
 			array( 'worker'	=> $ID )
@@ -6387,258 +6396,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 	 *	Creates the list for Appointments admin page
 	 */
 	function appointment_list() {
-
-		global $page, $action, $type;
-
-		wp_reset_vars( array('type') );
-
-		if(empty($type)) $type = 'active';
-
-		$filter = array();
-
-		if(isset($_GET['s'])) {
-			$s = stripslashes($_GET['s']);
-			$filter['s'] = $s;
-		} else {
-			$s = '';
-		}
-
-		if(isset($_GET['app_service_id']))
-			$service_id = $_GET['app_service_id'];
-		else
-			$service_id = '';
-
-		if(isset($_GET['app_provider_id']))
-			$worker_id = $_GET['app_provider_id'];
-		else
-			$worker_id = '';
-
-		if(isset($_GET['app_order_by']))
-			$order_by = $_GET['app_order_by'];
-		else
-			$order_by = '';
-
-		?>
-		<div id="wpbody-content">
-		<div class='wrap'>
-			<div class="icon32" style="margin:8px 0 0 0"><img src="<?php echo $this->plugin_url . '/images/appointments.png'; ?>" /></div>
-			<h2><?php echo __('Appointments','appointments'); ?><a href="javascript:void(0)" class="add-new-h2"><?php _e('Add New', 'appointments')?></a>
-			<img class="add-new-waiting" style="display:none;" src="<?php echo admin_url('images/wpspin_light.gif')?>" alt="">
-			</h2>
-
-			<ul class="subsubsub">
-				<li><a href="<?php echo add_query_arg('type', 'active'); ?>" class="rbutton <?php if($type == 'active') echo 'current'; ?>"><?php  _e('Active appointments', 'appointments'); ?></a> | </li>
-				<li><a href="<?php echo add_query_arg('type', 'pending'); ?>" class="rbutton <?php if($type == 'pending') echo 'current'; ?>"><?php  _e('Pending appointments', 'appointments'); ?></a> | </li>
-				<li><a href="<?php echo add_query_arg('type', 'completed'); ?>" class="rbutton <?php if($type == 'completed') echo 'current'; ?>"><?php  _e('Completed appointments', 'appointments'); ?></a> | </li>
-				<li><a href="<?php echo add_query_arg('type', 'reserved'); ?>" class="rbutton <?php if($type == 'reserved') echo 'current'; ?>"><?php  _e('Reserved by GCal', 'appointments'); ?></a> | </li>
-				<li><a href="<?php echo add_query_arg('type', 'removed'); ?>" class="rbutton <?php if($type == 'removed') echo 'current'; ?>"><?php  _e('Removed appointments', 'appointments'); ?></a></li>
-				<li><a href="javascript:void(0)" class="info-button" title="<?php _e('Click to toggle information about statuses', 'appointments')?>"><img src="<?php echo $this->plugin_url . '/images/information.png'?>" alt="" /></a></li>
-			</ul>
-		<br /><br />
-		<span class="description status-description" style="display:none;">
-		<ul>
-		<li><?php _e('<b>Completed:</b> Appointment became overdue after it is confirmed or paid', 'appointments') ?></li>
-		<li><?php _e('<b>Removed:</b> Appointment was not paid for or was not confirmed manually in the allowed time', 'appointments') ?></li>
-		<li><?php _e('<b>Reserved by GCal:</b> If you import appointments from Google Calender using Google Calendar API, that is, synchronize your calendar with Appointments+, events in your Google Calendar will be regarded as appointments and they will be shown here. These records cannot be edited here. Use your Google Calendar instead. They will be automatically updated in A+ too.', 'appointments') ?></li>
-		<li><?php _e('If you require payment:', 'appointments') ?></li>
-		<li><?php _e('<b>Active/Paid:</b> Paid and confirmed by Paypal', 'appointments') ?></li>
-		<li><?php _e('<b>Pending:</b> Client applied for the appointment, but not yet paid.', 'appointments') ?></li>
-		</ul>
-		<ul>
-		<li><?php _e('If you do not require payment:', 'appointments') ?></li>
-		<li><?php _e('<b>Active/Confirmed:</b> Manually confirmed', 'appointments') ?></li>
-		<li><?php _e('<b>Pending:</b> Client applied for the appointment, but it is not manually confirmed.', 'appointments') ?></li>
-		</ul>
-		</span>
-
-		<form method="get" action="<?php echo add_query_arg('page', 'appointments'); ?>" class="search-form">
-		<p class="search-box">
-			<label for="app-search-input" class="screen-reader-text"><?php _e('Search Client','appointments'); ?>:</label>
-			<input type="hidden" value="appointments" name="page" />
-			<input type="hidden" value="<?php echo $type?>" name="type" />
-			<input type="hidden" value="<?php echo $service_id?>" name="app_service_id" />
-			<input type="hidden" value="<?php echo $worker_id?>" name="app_provider_id" />
-			<input type="text" value="<?php echo esc_attr($s); ?>" name="s" />
-			<input type="submit" class="button" value="<?php _e('Search Client','appointments'); ?>" />
-		</p>
-		</form>
-
-		<br class='clear' />
-
-		<div class="tablenav top">
-
-			<div class="alignleft actions">
-				<form id="app-bulk-change-form" method="post" action="<?php echo add_query_arg('page', 'appointments'); ?>" >
-					<input type="hidden" value="appointments" name="page" />
-					<input type="hidden" value="1" name="app_status_change" />
-					<select name="app_new_status" style='float:none;'>
-						<option value=""><?php _e('Bulk status change','appointments'); ?></option>
-						<?php foreach ( $this->get_statuses() as $value=>$name ) {
-							echo '<option value="'.$value.'" class="hide-if-no-js">'.$name.'</option>';
-						} ?>
-					</select>
-					<input type="submit" class="button app-change-status-btn" value="<?php _e('Change Status','appointments'); ?>" />
-				</form>
-			</div>
-			<script type="text/javascript">
-			jQuery(document).ready(function($){
-				$(".app-change-status-btn").click(function(e){
-					var button = $(this);
-					e.preventDefault();
-					// var data = { 'app[]' : []};
-					$("td.app-check-column input:checkbox:checked").each(function() {
-					  // data['app[]'].push($(this).val());
-					    button.after('<input type="hidden" name="app[]" value="'+$(this).val()+'"/>');
-					});
-
-						$('#app-bulk-change-form').submit();
-
-				});
-			});
-			</script>
-
-			<div class="alignright">
-
-				<div class="alignleft actions">
-					<form method="get" action="<?php echo add_query_arg('page', 'appointments'); ?>" >
-						<input type="hidden" value="appointments" name="page" />
-						<input type="hidden" value="<?php echo $type?>" name="type" />
-						<input type="hidden" value="<?php echo $service_id?>" name="app_service_id" />
-						<input type="hidden" value="<?php echo $worker_id?>" name="app_provider_id" />
-						<select name="app_order_by" style='float:none;'>
-							<option value=""><?php _e('Sort by','appointments'); ?></option>
-							<option value="ID" <?php selected( $order_by, 'ID' ); ?>><?php _e('Creation date (Oldest to newest)','appointments'); ?></option>
-							<option value="ID_DESC" <?php selected( $order_by, 'ID_DESC' ); ?>><?php _e('Creation date (Newest to oldest)','appointments'); ?></option>
-							<option value="start" <?php selected( $order_by, 'start' ); ?>><?php _e('Appointment date (Closest first)','appointments'); ?></option>
-							<option value="start_DESC" <?php selected( $order_by, 'start_DESC' ); ?>><?php _e('Appointment date (Closest last)','appointments'); ?></option>
-						</select>
-						<input type="submit" class="button" value="<?php _e('Sort','appointments'); ?>" />
-					</form>
-				</div>
-
-				<div class="alignleft actions">
-					<form method="get" action="<?php echo add_query_arg('page', 'appointments'); ?>" >
-						<input type="hidden" value="appointments" name="page" />
-						<input type="hidden" value="<?php echo $type?>" name="type" />
-						<input type="hidden" value="<?php echo $worker_id?>" name="app_provider_id" />
-						<select name="app_service_id" style='float:none;'>
-							<option value=""><?php _e('Filter by service','appointments'); ?></option>
-						<?php
-						$services = $this->get_services();
-						if ( $services ) {
-							foreach ( $services as $service ) {
-								if ( $service_id == $service->ID )
-									$selected = " selected='selected' ";
-								else
-									$selected = "";
-								echo '<option '.$selected.' value="'.$service->ID.'">'. $this->get_service_name( $service->ID ) .'</option>';
-							}
-						}
-						?>
-						</select>
-						<input type="submit" class="button" value="<?php _e('Filter','appointments'); ?>" />
-					</form>
-				</div>
-
-				<div class="alignleft actions">
-					<form method="get" action="<?php echo add_query_arg('page', 'appointments'); ?>" >
-						<input type="hidden" value="appointments" name="page" />
-						<input type="hidden" value="<?php echo $type?>" name="type" />
-						<input type="hidden" value="<?php echo $service_id?>" name="app_service_id" />
-						<select name="app_provider_id" style='float:none;'>
-							<option value=""><?php _e('Filter by service provider','appointments'); ?></option>
-						<?php
-						$workers = $this->get_workers();
-						if ( $workers ) {
-							foreach ( $workers as $worker ) {
-								if ( $worker_id == $worker->ID )
-									$selected = " selected='selected' ";
-								else
-									$selected = "";
-								echo '<option '.$selected.' value="'.$worker->ID.'">'. $this->get_worker_name( $worker->ID ) .'</option>';
-							}
-						}
-						?>
-						</select>
-						<input type="submit" class="button" value="<?php _e('Filter','appointments'); ?>" />
-					</form>
-
-				</div>
-
-				<div class="alignright actions">
-					<form method="get" action="<?php echo add_query_arg('page', 'appointments'); ?>" >
-						<input type="hidden" value="appointments" name="page" />
-						<input type="hidden" value="<?php echo $type?>" name="type" />
-						<input type="hidden" value="" name="app_service_id" />
-						<input type="hidden" value="" name="app_provider_id" />
-						<input type="hidden" value="" name="app_order_by" />
-						<input type="hidden" value="" name="s" />
-						<input type="submit" class="button" value="<?php _e('Reset sort order and filters','appointments'); ?>" />
-					</form>
-
-				</div>
-
-			</div>
-		</div>
-
-			<?php
-				$this->myapps($type);
-
-			?>
-			<br />
-			<br />
-			<form action="<?php echo admin_url('admin-ajax.php?action=app_export'); ?>" method="post">
-				<input type="hidden" name="action" value="app_export" />
-				<input type="hidden" name="export_type" id="app-export_type" value="type" />
-				<input type="submit" id="app-export-selected" class="app-export_trigger button-secondary" value="<?php esc_attr_e(__('Export selected Appointments','appointments')); ?>" />
-				<input type="submit" id="app-export-type" class="app-export_trigger button-primary" value="<?php esc_attr_e(sprintf(__('Export %s Appointments','appointments'), App_Template::get_status_name($type))); ?>" data-type="<?php esc_attr_e($type); ?>" />
-				<input type="submit" id="app-export-all" class="app-export_trigger button-secondary" value="<?php _e('Export all Appointments','appointments') ?>" title="<?php _e('If you click this button a CSV file containing ALL appointment records will be saved on your PC','appointments') ?>" />
-<script>
-(function ($) {
-function toggle_selected_export () {
-	var $sel = $(".column-delete.app-check-column :checked");
-	if ($sel.length) $("#app-export-selected").show();
-	else $("#app-export-selected").hide();
-}
-$(document).on("click", ".app-export_trigger", function () {
-	var $me = $(this),
-		$form = $me.closest("form"),
-		$sel = $(".column-delete.app-check-column :checked"),
-		$type = $form.find("#app-export_type")
-	;
-	if ($me.is("#app-export-selected") && $sel.length) {
-		$sel.each(function () {
-			$form.append("<input type='hidden' name='app[]' value='" + $(this).val() + "' />");
-		});
-		$type.val("selected");
-		return true;
-	} else if ($me.is("#app-export-type")) {
-		$form.append("<input type='hidden' name='status' value='" + $me.attr("data-type") + "' />");
-		$type.val("type");
-		return true;
-	} else if ($me.is("#app-export-all")) {
-		$type.val("all");
-		return true;
-	}
-	return false;
-});
-$(document).on("change", ".column-delete.app-check-column input, .app-column-delete input", toggle_selected_export);
-$(toggle_selected_export);
-})(jQuery);
-</script>
-				<?php do_action('app-export-export_form_end'); ?>
-			</form>
-
-		</div> <!-- wrap -->
-		</div>
-		<script type="text/javascript">
-		jQuery(document).ready(function($){
-			$(".info-button").click(function(){
-				$(".status-description").toggle('fast');
-			});
-		});
-		</script>
-		<?php
+		App_Template::admin_appointments_list();
 
 	}
 
@@ -6647,7 +6405,7 @@ $(toggle_selected_export);
 	 * @since 1.0.9
 	 */
 	function export(){
-		
+
 		$sql = false;
 		$type = !empty($_POST['export_type']) ? $_POST['export_type'] : 'all';
 		if ('selected' == $type && !empty($_POST['app'])) {
@@ -6721,298 +6479,7 @@ $(toggle_selected_export);
 	 *
 	 */
 	function myapps($type = 'active') {
-
-		if(empty($_GET['paged'])) {
-			$paged = 1;
-		} else {
-			$paged = ((int) $_GET['paged']);
-		}
-
-		if ( isset( $this->options["records_per_page"] ) && $this->options["records_per_page"] )
-			$rpp = $this->options["records_per_page"];
-		else
-			$rpp = 50;
-
-		$startat = ($paged - 1) * $rpp;
-
-		$apps = $this->get_admin_apps($type, $startat, $rpp);
-		$total = $this->get_apps_total();
-
-		$columns = array();
-
-		if ( true || isset( $_GET["type"] ) && 'removed' == $_GET["type"] )
-			$columns['delete'] = '<input type="checkbox" />';
-		$columns['app_ID'] = __('ID','appointments');
-		$columns['user'] = __('Client','appointments');
-		$columns['date'] = __('Date/Time','appointments');
-		$columns['service'] = __('Service','appointments');
-		$columns['worker'] = __('Provider','appointments');
-		$columns['status'] = __('Status','appointments');
-
-		$trans_navigation = paginate_links( array(
-			'base' => add_query_arg( 'paged', '%#%' ),
-			'format' => '',
-			'total' => ceil($total / $rpp),
-			'current' => $paged
-		));
-
-		if ( $trans_navigation ) {
-			echo '<div class="tablenav">';
-			echo "<div class='tablenav-pages'>$trans_navigation</div>";
-			echo '</div>';
-		}
-
-		// Only for "Removed" tab
-		if ( true || isset( $_GET["type"] ) && 'removed' == $_GET["type"] ) {
-		?>
-			<form method="post" >
-
-		<?php
-		}
-		?>
-
-			<table cellspacing="0" class="widefat">
-				<thead>
-				<tr>
-				<?php
-					foreach($columns as $key => $col) {
-						?>
-						<th style="" class="manage-column column-<?php echo $key; ?> app-column-<?php echo $key; ?>" id="<?php echo $key; ?>" scope="col"><?php echo $col; ?></th>
-						<?php
-					}
-				?>
-				</tr>
-				</thead>
-
-				<tfoot>
-				<tr>
-				<?php
-					reset($columns);
-					foreach($columns as $key => $col) {
-						?>
-						<th style="" class="manage-column column-<?php echo $key; ?> app-column-<?php echo $key; ?>" id="<?php echo $key; ?>" scope="col"><?php echo $col; ?></th>
-						<?php
-					}
-				?>
-				</tr>
-				</tfoot>
-
-				<tbody>
-					<?php
-					if($apps) {
-						foreach($apps as $key => $app) {
-
-							?>
-							<tr valign="middle" class="alternate app-tr">
-							<?php
-							// Only for "Removed" tab
-							if ( true || isset( $_GET["type"] ) && 'removed' == $_GET["type"] ) {
-							?>
-								<td class="column-delete check-column app-check-column">
-								<input type="checkbox" name="app[]" value="<?php echo $app->ID;?>" />
-								</td>
-
-							<?php
-							}
-							?>
-								<td class="column-app_ID">
-									<span class="span_app_ID"><?php	echo $app->ID;?></span>
-
-								</td>
-								<td class="column-user">
-									<?php
-										echo $this->get_client_name( $app->ID );
-									?>
-									<div class="row-actions">
-									<a href="javascript:void(0)" class="app-inline-edit"><?php if ( 'reserved' == $app->status ) _e('See Details (Cannot be edited)', 'appointments'); else _e('See Details and Edit', 'appointments') ?></a>
-									<img class="waiting" style="display:none;" src="<?php echo admin_url('images/wpspin_light.gif')?>" alt="">
-									</div>
-								</td>
-								<td class="column-date">
-									<?php
-										echo mysql2date($this->datetime_format, $app->start);
-
-									?>
-								</td>
-								<td class="column-service">
-									<?php
-									echo $this->get_service_name( $app->service );
-									?>
-								</td>
-								<td class="column-worker">
-									<?php
-										echo $this->get_worker_name( $app->worker );
-									?>
-								</td>
-								<td class="column-status">
-									<?php
-										if(!empty($app->status)) {
-											echo App_Template::get_status_name($app->status);
-										} else {
-											echo __('None yet','appointments');
-										}
-									?>
-								</td>
-							</tr>
-							<?php
-
-						}
-					}
-					else {
-						$columncount = count($columns);
-						?>
-						<tr valign="middle" class="alternate" >
-							<td colspan="<?php echo $columncount; ?>" scope="row"><?php _e('No appointments have been found.','appointments'); ?></td>
-						</tr>
-						<?php
-					}
-					?>
-
-				</tbody>
-			</table>
-		<?php
-		// Only for "Removed" tab
-		if ( isset( $_GET["type"] ) && 'removed' == $_GET["type"] ) {
-		?>
-			<p>
-			<input type="submit" id="delete_removed" class="button-secondary" value="<?php _e('Permanently Delete Selected Records', 'appointments') ?>" title="<?php _e('Clicking this button deletes logs saved on the server') ?>" />
-			<input type="hidden" name="delete_removed" value="delete_removed" />
-
-			</p>
-
-
-		<?php } ?>
-			</form>
-
-			<script type="text/javascript">
-			var service_price = new Array();
-			<?php foreach( $this->get_services() as $service_obj ) { ?>
-				service_price[<?php echo $service_obj->ID ?>] = '<?php echo $service_obj->price ?>';
-			<?php
-			}
-			?>
-			jQuery(document).ready(function($){
-				$("#delete_removed").click( function() {
-					if ( !confirm('<?php echo esc_js( __("Are you sure to delete the selected record(s)?","appointments") ) ?>') )
-					{return false;}
-					else {
-						return true;
-					}
-				});
-				var th_sel = $("th.column-delete input:checkbox");
-				var td_sel = $("td.column-delete input:checkbox");
-				th_sel.change( function() {
-					if ( $(this).is(':checked') ) {
-						td_sel.attr("checked","checked");
-						th_sel.not(this).attr("checked","checked");
-					}
-					else{
-						td_sel.removeAttr('checked');
-						th_sel.not(this).removeAttr('checked');
-					}
-				});
-				var col_len = $("table").find("tr:first th").length;
-				// Add new
-				$(".add-new-h2").click(function(){
-					$("table.widefat .inline-edit-row .cancel").click(); // Remove active edits
-					$(".add-new-waiting").show();
-					var data = {action: 'inline_edit', col_len: col_len, app_id:0, nonce: '<?php echo wp_create_nonce() ?>'};
-					$.post(ajaxurl, data, function(response) {
-						$(".add-new-waiting").hide();
-						if ( response && response.error ){
-							alert(response.error);
-						}
-						else if (response) {
-							$("table.widefat").prepend(response.result);
-						}
-						else {alert("<?php echo esc_js(__('Unexpected error','appointments'))?>");}
-					},'json');
-				});
-				// Edit
-				$(".app-inline-edit").click(function(){
-					var app_parent = $(this).parents(".app-tr");
-					app_parent.find(".waiting").show();
-					var app_id = app_parent.find(".span_app_ID").html();
-					var data = {action: 'inline_edit', col_len: col_len, app_id: app_id, nonce: '<?php echo wp_create_nonce() ?>'};
-					$.post(ajaxurl, data, function(response) {
-						app_parent.find(".waiting").hide();
-						if ( response && response.error ){
-							alert(response.error);
-						}
-						else if (response) {
-							app_parent.hide();
-							app_parent.after(response.result);
-						}
-						else {alert('<?php echo esc_js(__('Unexpected error','appointments'))?>');}
-					},'json');
-				});
-				$("table").on("click", ".cancel", function(){
-					$(".inline-edit-row").hide();
-					$(".app-tr").show();
-				});
-				// Add datepicker only once and when focused
-				// Ref: http://stackoverflow.com/questions/3796207/using-one-with-live-jquery
-				$("table").on("focus", ".datepicker", function(e){
-					var $me = $(e.target);
-					$me.attr("data-timestamp", '');
-					if( $me.data('focused')!='yes' ) {
-						var php_date_format = "<?php echo $this->safe_date_format() ?>";
-						var js_date_format = php_date_format.replace("F","MM").replace("j","dd").replace("Y","yyyy").replace("y","yy");
-						$(".datepicker").datepick({
-							dateFormat: js_date_format,
-							onClose: function (dates) {
-								if (!dates.length || !dates[0] || !dates[0].getFullYear) return;
-								var time = dates[0].getFullYear() + '-' + (parseInt(dates[0].getMonth(), 10)+1) + '-' + dates[0].getDate();
-								$me.attr("data-timestamp", time);
-							}
-						});
-					}
-					 $(e.target).data('focused','yes');
-				});
-				$("table").on("click", ".save", function(){
-					var save_parent = $(this).parents(".inline-edit-row");
-					var user = save_parent.find('select[name="user"] option:selected').val();
-					var name = save_parent.find('input[name="cname"]').val();
-					var email = save_parent.find('input[name="email"]').val();
-					var phone = save_parent.find('input[name="phone"]').val();
-					var address = save_parent.find('input[name="address"]').val();
-					var city = save_parent.find('input[name="city"]').val();
-					var service = save_parent.find('select[name="service"] option:selected').val();
-					var worker = save_parent.find('select[name="worker"] option:selected').val();
-					var price = save_parent.find('input[name="price"]').val();
-					var date = save_parent.find('input[name="date"]').val();
-					var time = save_parent.find('select[name="time"] option:selected').val();
-					var note = save_parent.find('textarea').val();
-					var status = save_parent.find('select[name="status"] option:selected').val();
-
-					var dt = save_parent.find('input[name="date"]').attr("data-timestamp");
-					if (dt.length) date = dt;
-					else return false;
-
-					save_parent.find(".waiting").show();
-					var resend = 0;
-					if (save_parent.find('input[name="resend"]').is(':checked') ) { resend=1;}
-					var app_id = save_parent.find('input[name="app_id"]').val();
-					var data = {action: 'inline_edit_save', user:user, name:name, email:email, phone:phone, address:address,city:city, service:service, worker:worker, price:price, date:date, time:time, note:note, status:status, resend:resend, app_id: app_id, nonce: '<?php echo wp_create_nonce() ?>'};
-					$(document).trigger('app-appointment-inline_edit-save_data', [data, save_parent]);
-					$.post(ajaxurl, data, function(response) {
-						save_parent.find(".waiting").hide();
-						if ( response && response.error ){
-							save_parent.find(".error").html(response.error).show().delay(10000).fadeOut('slow');
-						}
-						else if (response) {
-							save_parent.find(".error").html(response.result).show().delay(10000).fadeOut('slow');
-						}
-						else {alert("<?php echo esc_js(__('Unexpected error','appointments'))?>");}
-					},'json');
-				});
-				// Change service price as selection changes
-				$("table").on("change", 'select[name="service"]', function(){
-					$(this).parents(".inline-edit-col").find('input[name="price"]').val(service_price[$(this).val()]);
-				});
-			});
-			</script>
-		<?php
+		App_Template::admin_my_appointments_list($type);
 	}
 
 	/**
@@ -7130,10 +6597,11 @@ $(toggle_selected_export);
 		if ( $app_id ) {
 			$app = $wpdb->get_row( $wpdb->prepare("SELECT * FROM {$this->app_table} WHERE ID=%d", $app_id) );
 			$start_date_timestamp = date("Y-m-d", strtotime($app->start));
-			if ( $this->locale_error )
+			if ( $this->locale_error ) {
 				$start_date = date( $safe_date_format, strtotime( $app->start ) );
-			else
+			} else {
 				$start_date = date_i18n( $safe_date_format, strtotime( $app->start ) );
+			}
 
 			$start_time = date_i18n( $this->time_format, strtotime( $app->start ) );
 			$end_datetime = date_i18n( $this->datetime_format, strtotime( $app->end ) );
@@ -7159,15 +6627,19 @@ $(toggle_selected_export);
 				if ( $city )
 					$app->city = $app->city && !(defined('APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES') && APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES) ? $app->city : $city;
 			}
-		}
-		else {
+		} else {
+			$app = new stdClass(); // This means insert a new app object
+/*
+//DO NOT DO THIS!!!!
+//This is just begging for a race condition issue >.<
 			// Get maximum ID
 			$app_max = $wpdb->get_var( "SELECT MAX(ID) FROM " . $this->app_table . " " );
 			// Check if nothing has saved yet
 			if ( !$app_max )
 				$app_max = 0;
-			$app = new stdClass(); // This means insert a new app object
 			$app->ID = $app_max + 1 ; // We want to create a new record
+*/
+			$app->ID = 0;
 			// Set other fields to default so that we don't get notice messages
 			$app->user = $app->location = $app->worker = 0;
 			$app->created = $app->end = $app->name = $app->email = $app->phone = $app->address = $app->city = $app->status = $app->sent = $app->sent_worker = $app->note = '';
@@ -7476,7 +6948,7 @@ $(toggle_selected_export);
 				$this->gcal_api->insert( $app_id );
 			}
 		}
-		
+
 		do_action('app-appointment-inline_edit-after_save', ($update_result ? $app_id : $wpdb->insert_id), $data);
 
 		if ($resend && 'removed' != $data['status'] && empty($email_sent) ) {
@@ -7497,24 +6969,40 @@ $(toggle_selected_export);
 
 			do_action( 'app_save_user_meta', $data['user'], $data );
 		}
-		
+
 		do_action('app-appointment-inline_edit-before_response', ($update_result ? $app_id : $wpdb->insert_id), $data);
 
+		$result = array(
+			'app_id' => 0,
+			'message' => '',
+		);
 		if ( $update_result ) {
 			// Log change of status
 			if ( $data['status'] != $app->status ) {
 				$this->log( $this->log( sprintf( __('Status changed from %s to %s by %s for appointment ID:%d','appointments'), $app->status, $data["status"], $current_user->user_login, $app->ID ) ) );
 			}
-			die( json_encode( array("result" => __('<span style="color:green;font-weight:bold">Changes saved.</span>', 'appointments') ) ) );
+			$result = array(
+				'app_id' => $app->ID,
+				'message' => __('<span style="color:green;font-weight:bold">Changes saved.</span>', 'appointments'),
+			);
 		} else if ( $insert_result ) {
-			die( json_encode( array("result" => __('<span style="color:green;font-weight:bold">New appointment succesfully saved.</span>', 'appointments') ) ) );
+			$result = array(
+				'app_id' => $wpdb->insert_id,
+				'message' => __('<span style="color:green;font-weight:bold">Changes saved.</span>', 'appointments'),
+			);
 		} else {
 			$message = $resend && !empty($data['status']) && $removed != $data['status']
 				? sprintf('<span style="color:green;font-weight:bold">%s</span>', __('Confirmation message (re)sent', 'appointments'))
 				: sprintf('<span style="color:red;font-weight:bold">%s</span>', __('Record could not be saved OR you did not make any changes!', 'appointments'))
 			;
-			die(json_encode(array("result" => $message)));
+			$result = array(
+				'app_id' => ($update_result ? $app_id : $wpdb->insert_id),
+				'message' => $message,
+			);
 		}
+
+		$result = apply_filters('app-appointment-inline_edit-result', $result, ($update_result ? $app_id : $wpdb->insert_id), $data);
+		die(json_encode($result));
 	}
 
 	 // For future use

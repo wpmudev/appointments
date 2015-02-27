@@ -204,6 +204,23 @@ class App_Installer {
 
 		// Check AppointmentsGcal::import_and_update_events()
 		// for v1.2.3 DB schema update
+
+		$this->_upgrade_to_124();
+
+	}
+
+	/**
+	 * For some reason, appointment prices were integer only!
+	 */
+	private function _upgrade_to_124 () {
+		global $wpdb;
+		$db_version = get_option('app_db_version');
+		// Check for floating point prices in appointments
+		if ( version_compare( $db_version, '1.2.4', '<' ) ) {
+			$sql = "ALTER TABLE `{$wpdb->prefix}app_appointments` CHANGE COLUMN `price` `price` FLOAT NULL DEFAULT NULL AFTER `worker`;";
+			$result = $wpdb->query($sql);
+			update_option( 'app_db_version', '1.2.4' );
+		}
 	}
 
 	public static function uninstall () {
@@ -272,6 +289,10 @@ class App_Installer {
 	}
 
 	private function _run_integrity_check () {
-		if (!get_option('app_db_version', false)) $this->install();
+		if (!get_option('app_db_version', false)) {
+			$this->install();
+		} else {
+			$this->_upgrade_to_124();
+		}
 	}
 }

@@ -243,6 +243,7 @@ jQuery(document).ready(function($){
 	</li>
 </ul>
 
+<!--
 <ul id='q27'>
 	<li>
 	<?php _e('<b>How is the plugin supposed to work by the way?</b>', 'appointments');?>
@@ -250,6 +251,7 @@ jQuery(document).ready(function($){
 	<?php printf( __('Please visit our %s.', 'appointments'), '<a href="http://appointmentsplus.org/" target="_blank">'.__('Demo website', 'appointments' ).'</a>');?>
 	</li>
 </ul>
+-->
 
 <ul id='q28'>
 	<li>
@@ -336,7 +338,7 @@ jQuery(document).ready(function($){
 	<li>
 	<?php _e('<b>My working hours cover the midnight and exceeds to the other day. For example from 8pm Monday to 2am Tuesday. Is it possible to set this?</b>', 'appointments');?>
 	<br />
-	<?php _e('Yes. Set your working hours as 24am to 24am (00:00 to 00:00) and your break hours as 2am to 8pm (02:00 to 20:00).', 'appointments');?>
+	<?php _e('Yes. Set your working hours as 24am to 24am (00:00 to 00:00) and your break hours as 2am to 8pm (02:00 to 20:00). Remember to also allow end of day overwork in General settings.', 'appointments');?>
 	</li>
 </ul>
 
