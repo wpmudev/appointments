@@ -2180,6 +2180,7 @@ class Appointments {
 					$this_day_opening_timestamp = strtotime(date('Y-m-d ' . $start_unpacked_days[$this_day_key]['start'], $ccs));
 					if ($t < $this_day_opening_timestamp) {
 						$t = ($t - $step) + (apply_filters('app_safe_time', 1) * 60);
+                        $t = apply_filters('app_next_time_step', $t+$step, $ccs, $step); //Allows dynamic/variable step increment.
 						continue;
 					}
 
@@ -2199,6 +2200,7 @@ class Appointments {
 					$break_end_ts = strtotime(date('Y-m-d ' . $break_ends, $ccs));
 					if ($t == $break_start_ts) {
 						$t += ($break_end_ts - $break_start_ts) - $step;
+                        $t = apply_filters('app_next_time_step', $t+$step, $ccs, $step); //Allows dynamic/variable step increment.
 						continue;
 					}
 				} else if (is_array($active) && in_array('yes', array_values($active))) {
@@ -2213,6 +2215,7 @@ class Appointments {
 					}
 					if ($has_break_time) {
 						$t += ($has_break_time - $step);
+                        $t = apply_filters('app_next_time_step', $t+$step, $ccs, $step); //Allows dynamic/variable step increment.
 						continue;
 					}
 				}
@@ -2254,6 +2257,8 @@ class Appointments {
 						$this->secs2hours( $ccs - $day_start ). '<input type="hidden" class="appointments_take_appointment" value="'.$this->pack( $ccs, $cce ).'" />';
 
 			$ret .= '</div>';
+
+            $t = apply_filters('app_next_time_step', $t+$step, $t, $step); //Allows dynamic/variable step increment.
 		}
 
 		$ret .= '<div style="clear:both"></div>';
