@@ -1114,6 +1114,26 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 
 		return $ret;
 	}
+
+	/**
+	 * Checks whether it's sane to display the editable appointments list for current user on a BP profile
+	 *
+	 * @param bool $allow_confirm Shortcode argument.
+	 * @return bool
+	 */
+	private function _can_display_editable ($allow_confirm=false) {
+		if (is_admin()) return false;
+		if (!$allow_confirm) return false;
+
+		if (!function_exists('bp_loggedin_user_id') || !function_exists('bp_displayed_user_id')) return false;
+
+		if (!is_user_logged_in()) return false; // Logged out users aren't being shown editable stuff, ever.
+
+		$bp_ready = class_exists('App_BuddyPress') && App_BuddyPress::is_ready();
+		$allow_current_user = bp_displayed_user_id() === bp_loggedin_user_id();
+
+		return $bp_ready && $allow_current_user;
+	}
 }
 
 /**
