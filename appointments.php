@@ -3721,16 +3721,16 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			// Also check if it is activated
 			if ( isset( $this->options["use_mp"] ) && $this->options["use_mp"] ) {
 				$this->mp = true;
-				add_action( 'manage_posts_custom_column', array(&$this, 'edit_products_custom_columns'), 1 );
-				add_action( 'wp_ajax_nopriv_mp-update-cart', array(&$this, 'pre_update_cart'), 1 );
-				add_action( 'wp_ajax_mp-update-cart', array(&$this, 'pre_update_cart'), 1 );
-				add_action( 'wp', array(&$this, 'remove_from_cart_manual'), 1 );
-				add_filter( 'the_content', array( &$this, 'product_page' ), 18 );
-				add_action( 'mp_order_paid', array( &$this, 'handle_mp_payment' ) );
-				add_filter( 'mp_product_list_meta', array( &$this, 'mp_product_list_meta' ), 10, 2 );
-				add_filter( 'mp_order_notification_body', array( &$this, 'modify_email' ), 10, 2 );
-				add_filter( 'mp_product_name_display_in_cart', array( &$this, 'modify_name' ), 10, 2 );
-				add_filter( 'mp_buy_button_tag', array( &$this, 'mp_buy_button_tag' ), 10, 3 );
+				add_action( 'manage_posts_custom_column', array($this, 'edit_products_custom_columns'), 1 );
+				add_action( 'wp_ajax_nopriv_mp-update-cart', array($this, 'pre_update_cart'), 1 );
+				add_action( 'wp_ajax_mp-update-cart', array($this, 'pre_update_cart'), 1 );
+				add_action( 'wp', array($this, 'remove_from_cart_manual'), 1 );
+				add_filter( 'the_content', array($this, 'product_page'), 18 );
+				add_action( 'mp_order_paid', array($this, 'handle_mp_payment'));
+				add_filter( 'mp_product_list_meta', array($this, 'mp_product_list_meta'), 10, 2);
+				add_filter( 'mp_order_notification_body', array($this, 'modify_email'), 10, 2 );
+				add_filter( 'mp_product_name_display_in_cart', array($this, 'modify_name'), 10, 2 );
+				add_filter( 'mp_buy_button_tag', array($this, 'mp_buy_button_tag'), 10, 3 );
 				return true;
 			}
 		}
