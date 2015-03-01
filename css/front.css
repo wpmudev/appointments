@@ -375,7 +375,7 @@ a.appointments-login_link-facebook, a.appointments-login_link-twitter, a.appoint
 }
 
 a.appointments-login_link-submit {
-  width: 50px;
+  /*width: 50px;*/
   cursor: pointer;
   display: inline-block;
   background: #999;
