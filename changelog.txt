@@ -1,3 +1,17 @@
+v1.4.7
+- Expose removal notification message body for filtering and expand additional fields e-mail macros.
+- Fix slashes escaping in user-added CSS.
+- Fix HTML output in locations and pointer tutorial issues.
+- Fix appointment period calculus to respect the overall settings in "show scheduled users" add-on.
+- Add email and GCal export support for appointment location macro expansion.
+- Fix the appointments table price column being an integer.
+- Add zero-priced appointments auto-confirm flag as an option.
+- Fix errors on installs with disabled Heartbeat API.
+- Fix for race condition conflicts with appointment IDs.
+- Fix for misleading supported type toggle.
+- Fix for iOS ignoring focus offset.
+- Fix for double date opening bug on Windows.
+
 v1.4.6
 - Fix for admin side javascript globals.
 - Fix for global format reordering, and allowing for both local and global reordering.
