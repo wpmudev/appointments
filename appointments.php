@@ -385,6 +385,7 @@ class Appointments {
 	 * @return array of objects
 	 */
 	function get_workers( $order_by="ID" ) {
+        $order_by = apply_filters( 'app_get_workers_orderby', $order_by );
 		$order_by = $this->sanitize_order_by( $order_by );
 		$workers = wp_cache_get( 'all_workers_' . str_replace( ' ', '_', $order_by ) );
 		if ( false === $workers ) {
@@ -2165,7 +2166,7 @@ class Appointments {
 		// mainly for service duration based calculus start/stop times
 		$step = apply_filters('app-timetable-step_increment', $step);
 
-		for ( $t=$first; $t<$last; $t=$t+$step ) {
+		for ( $t=$first; $t<$last; ) {
 
 			$ccs = apply_filters('app_ccs', $t); 				// Current cell starts
 			$cce = apply_filters('app_cce', $ccs + $step);		// Current cell ends
@@ -2179,6 +2180,7 @@ class Appointments {
 					$this_day_opening_timestamp = strtotime(date('Y-m-d ' . $start_unpacked_days[$this_day_key]['start'], $ccs));
 					if ($t < $this_day_opening_timestamp) {
 						$t = ($t - $step) + (apply_filters('app_safe_time', 1) * 60);
+                        $t = apply_filters('app_next_time_step', $t+$step, $ccs, $step); //Allows dynamic/variable step increment.
 						continue;
 					}
 
@@ -2198,6 +2200,7 @@ class Appointments {
 					$break_end_ts = strtotime(date('Y-m-d ' . $break_ends, $ccs));
 					if ($t == $break_start_ts) {
 						$t += ($break_end_ts - $break_start_ts) - $step;
+                        $t = apply_filters('app_next_time_step', $t+$step, $ccs, $step); //Allows dynamic/variable step increment.
 						continue;
 					}
 				} else if (is_array($active) && in_array('yes', array_values($active))) {
@@ -2212,6 +2215,7 @@ class Appointments {
 					}
 					if ($has_break_time) {
 						$t += ($has_break_time - $step);
+                        $t = apply_filters('app_next_time_step', $t+$step, $ccs, $step); //Allows dynamic/variable step increment.
 						continue;
 					}
 				}
@@ -2253,6 +2257,8 @@ class Appointments {
 						$this->secs2hours( $ccs - $day_start ). '<input type="hidden" class="appointments_take_appointment" value="'.$this->pack( $ccs, $cce ).'" />';
 
 			$ret .= '</div>';
+
+            $t = apply_filters('app_next_time_step', $t+$step, $t, $step); //Allows dynamic/variable step increment.
 		}
 
 		$ret .= '<div style="clear:both"></div>';
@@ -4103,12 +4109,14 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		$script = '';
 		$this->script = apply_filters( 'app_footer_scripts', $this->script );
 
-		if ( $this->script ) {
-			$script .= '<script type="text/javascript">';
-			$script .= "jQuery(document).ready(function($) {";
-			$script .= $this->script;
-			$script .= "});</script>";
-		}
+        if ( $this->script ) {
+            $script .= "<script type='text/javascript'>";
+            $script .= "var appDocReadyHandler = function($){";
+            $script .= $this->script;
+            $script .= "};";
+            $script .= "jQuery(document).ready(appDocReadyHandler)";
+            $script .= "</script>";
+        }
 
 		echo $this->esc_rn( $script );
 		do_action('app-footer_scripts-after');
