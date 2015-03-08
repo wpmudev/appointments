@@ -2166,7 +2166,7 @@ class Appointments {
 		// mainly for service duration based calculus start/stop times
 		$step = apply_filters('app-timetable-step_increment', $step);
 
-		for ( $t=$first; $t<$last; $t=$t+$step ) {
+		for ( $t=$first; $t<$last; ) {
 
 			$ccs = apply_filters('app_ccs', $t); 				// Current cell starts
 			$cce = apply_filters('app_cce', $ccs + $step);		// Current cell ends
