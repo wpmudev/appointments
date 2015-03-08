@@ -950,10 +950,12 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 
 		$ret  = '';
 		$ret .= '<div class="appointments-my-appointments">';
+		
 		// Make this a form for BP if confirmation is allowed, but not on admin side user profile page
-		if ( $appointments->bp && $allow_confirm && !is_admin() ) {
+		if ($this->_can_display_editable($allow_confirm)) {
 			$ret .= '<form method="post">';
 		}
+		
 		$ret .= $title;
 		$ret  = apply_filters( 'app_my_appointments_before_table', $ret );
 		$ret .= '<table class="my-appointments tablesorter"><thead>';
@@ -1039,21 +1041,21 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 				$ret .= '</tr>';
 
 			}
-		}
-		else
+		} else {
 			$ret .= '<tr><td colspan="'.$colspan.'">'. __('No appointments','appointments'). '</td></tr>';
+		}
 
 		$ret .= '</tbody></table>';
 		$ret  = apply_filters( 'app_my_appointments_after_table', $ret, $results );
 
-		// Don't let this button appear on user profile page in BP
-		if ( $appointments->bp && $allow_confirm && !is_admin() ) {
-			$ret .='<div class="submit">
-						<input type="submit" name="app_bp_settings_submit" value="'.__('Submit Confirm', 'appointments').'" class="auto">
-						<input type="hidden" name="app_bp_settings_user" value="'. $bp->displayed_user->id .'">';
-			$ret .= wp_nonce_field('app_bp_settings_submit','app_bp_settings_submit', true, false );
-			$ret .= '</div>
-				</form>';
+
+		if ($this->_can_display_editable($allow_confirm)) {
+			$ret .='<div class="submit">' .
+				'<input type="submit" name="app_bp_settings_submit" value="' . esc_attr(__('Submit Confirm', 'appointments')) . '" class="auto">' .
+				'<input type="hidden" name="app_bp_settings_user" value="' . esc_attr($bp->displayed_user->id) . '">' .
+				wp_nonce_field('app_bp_settings_submit', 'app_bp_settings_submit', true, false ) .
+			'</div>';
+			$ret .= '</form>';
 		}
 
 		$ret .= '</div>';
@@ -1113,6 +1115,26 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 			);
 
 		return $ret;
+	}
+
+	/**
+	 * Checks whether it's sane to display the editable appointments list for current user on a BP profile
+	 *
+	 * @param bool $allow_confirm Shortcode argument.
+	 * @return bool
+	 */
+	private function _can_display_editable ($allow_confirm=false) {
+		if (is_admin()) return false;
+		if (!$allow_confirm) return false;
+
+		if (!function_exists('bp_loggedin_user_id') || !function_exists('bp_displayed_user_id')) return false;
+
+		if (!is_user_logged_in()) return false; // Logged out users aren't being shown editable stuff, ever.
+
+		$bp_ready = class_exists('App_BuddyPress') && App_BuddyPress::is_ready();
+		$allow_current_user = bp_displayed_user_id() === bp_loggedin_user_id();
+
+		return $bp_ready && $allow_current_user;
 	}
 }
 

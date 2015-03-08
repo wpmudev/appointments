@@ -6,6 +6,8 @@ class App_BuddyPress {
 	private $_bp_script = '';
 	private $_core = false;
 
+	private static $_bp_ready = false;
+
 	private function __construct () {}
 
 	public function initialize () {
@@ -17,6 +19,10 @@ class App_BuddyPress {
 	public static function serve () {
 		$me = new self;
 		$me->_add_hooks();
+	}
+
+	public static function is_ready () {
+		return self::$_bp_ready;
 	}
 
 	private function _add_hooks () {
@@ -33,6 +39,7 @@ class App_BuddyPress {
 	function bp_init () {
 
 		$this->_bp = true;
+		self::$_bp_ready = true;
 
 		if (!isset($_POST["app_bp_settings_submit"] ) || !isset( $_POST["app_bp_settings_user"])) return;
 
