@@ -4790,7 +4790,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			'CITY' => $city,
 		);
 		foreach($replacement as $macro => $repl) {
-			$text = preg_replace('/' . preg_quote($macro, '/') . '/U', $repl, $text);
+			$text = preg_replace('/\b' . preg_quote($macro, '/') . '\b/U', $repl, $text);
 		}
 		return $text;
 	}

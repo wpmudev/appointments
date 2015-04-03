@@ -132,7 +132,7 @@ class App_Users_AdditionalFields {
 
 			$value = apply_filters('app-additional_fields-field_value', $value, $field, $app);
 
-			$body = preg_replace('/' . preg_quote($macro, '/') . '/U', $value, $body);
+			$body = preg_replace('/\b' . preg_quote($macro, '/') . '\b/U', $value, $body);
 		}
 		return $body;
 	}
