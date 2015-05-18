@@ -392,6 +392,12 @@
 	</div>
 </div>
 
+<?php
+if ( empty( $appointments->options['payment_required'] ) ) {
+	$appointments->options['payment_required'] = 'no';
+}
+$use_payments = ('yes' == $appointments->options['payment_required']);
+?>
 <div class="postbox">
 	<h3 class='hndle'><span><?php _e('Payment Settings', 'appointments'); ?></span></h3>
 	<div class="inside">
@@ -401,14 +407,14 @@
 		<th scope="row" ><?php _e('Payment required', 'appointments')?></th>
 		<td colspan="2">
 		<select name="payment_required">
-		<option value="no" <?php if ( @$appointments->options['payment_required'] <> 'yes' ) echo "selected='selected'"?>><?php _e('No', 'appointments')?></option>
-		<option value="yes" <?php if ( @$appointments->options['payment_required'] == 'yes' ) echo "selected='selected'"?>><?php _e('Yes', 'appointments')?></option>
+		<option value="no" <?php if ( ! $use_payments ) echo "selected='selected'"?>><?php _e('No', 'appointments')?></option>
+		<option value="yes" <?php if ( $use_payments ) echo "selected='selected'"?>><?php _e('Yes', 'appointments')?></option>
 		</select>
 		<span class="description"><?php printf( __('Whether you require a payment to accept appointments. If selected Yes, client is asked to pay through Paypal and the appointment will be in pending status until the payment is confirmed by Paypal IPN. If selected No, appointment will be in pending status until you manually approve it using the %s unless Auto Confirm is not set as Yes.', 'appointments'), '<a href="'.admin_url('admin.php?page=appointments').'">'.__('Appointments page', 'appointments').'</a>' ) ?></span>
 		</td>
 	</tr>
 
-	<tr class="payment_row" <?php if ( $appointments->options['payment_required'] != 'yes' ) echo 'style="display:none"'?>>
+	<tr class="payment_row" <?php if ( ! $use_payments ) echo 'style="display:none"'?>>
 		<th scope="row"><?php _e('Paypal Currency', 'appointments') ?></th>
 		<td colspan="2">
       <select name="currency">
@@ -423,7 +429,7 @@
       </select>
     </td>
     </tr>
-		<tr class="payment_row" <?php if ( $appointments->options['payment_required'] != 'yes' ) echo 'style="display:none"'?>>
+		<tr class="payment_row" <?php if ( ! $use_payments ) echo 'style="display:none"'?>>
 			<th scope="row"><?php _e('PayPal Mode', 'appointments') ?></th>
 			<td colspan="2">
 			<select name="mode">
@@ -433,7 +439,7 @@
 			</td>
 		</tr>
 
-		<tr class="payment_row" <?php if ( $appointments->options['payment_required'] != 'yes' ) echo 'style="display:none"'?>>
+		<tr class="payment_row" <?php if ( ! $use_payments ) echo 'style="display:none"'?>>
 			<th scope="row"><?php _e('PayPal Merchant E-mail', 'appointments') ?></th>
 			<td colspan="2">
 			<input value="<?php echo esc_attr($appointments->options['merchant_email']); ?>" size="30" name="merchant_email" type="text" />
@@ -446,7 +452,7 @@
 		</tr>
 
 		</tr>
-		<tr class="payment_row" <?php if ( $appointments->options['payment_required'] != 'yes' ) echo 'style="display:none"'?>>
+		<tr class="payment_row" <?php if ( ! $use_payments ) echo 'style="display:none"'?>>
 			<th scope="row"><?php _e('Thank You Page', 'appointments') ?></th>
 			<td colspan="2">
 			<?php wp_dropdown_pages( array( "show_option_none"=>__('Home page', 'appointments'),"option_none_value "=>0,"name"=>"return", "selected"=>@$appointments->options["return"] ) ) ?>
@@ -455,7 +461,7 @@
 
 		</tr>
 
-	<tr class="payment_row" <?php if ( $appointments->options['payment_required'] != 'yes' ) echo 'style="display:none"'?>>
+	<tr class="payment_row" <?php if ( ! $use_payments ) echo 'style="display:none"'?>>
 			<th scope="row"><?php _e('Deposit (%)', 'appointments') ?></th>
 			<td colspan="2">
 			<input value="<?php echo esc_attr(@$appointments->options['percent_deposit']); ?>" style="width:50px" name="percent_deposit" type="text" />
@@ -463,7 +469,7 @@
 			</td>
 	</tr>
 
-	<tr class="payment_row" <?php if ( $appointments->options['payment_required'] != 'yes' ) echo 'style="display:none"'?>>
+	<tr class="payment_row" <?php if ( ! $use_payments ) echo 'style="display:none"'?>>
 			<th scope="row"><?php _e('Deposit (fixed)', 'appointments') ?></th>
 			<td colspan="2">
 			<input value="<?php echo esc_attr(@$appointments->options['fixed_deposit']); ?>" style="width:50px" name="fixed_deposit" type="text" />
@@ -471,7 +477,7 @@
 			</td>
 	</tr>
 
-	<tr class="payment_row" <?php if ( $appointments->options['payment_required'] != 'yes' ) echo 'style="display:none"'?>>
+	<tr class="payment_row" <?php if ( ! $use_payments ) echo 'style="display:none"'?>>
 		<th scope="row"><?php _e('Allow zero-priced appointments auto-confirm', 'appointments') ?></th>
 		<td colspan="2">
 			<input value="1" <?php checked(true, @$appointments->options['allow_free_autoconfirm']); ?> name="allow_free_autoconfirm" type="checkbox" />
@@ -479,14 +485,20 @@
 		</td>
 	</tr>
 
-	<tr class="payment_row" <?php if ( $appointments->options['payment_required'] != 'yes' ) echo 'style="display:none"'; else echo 'style="border-top: 1px solid lightgrey;"'?>>
+	<?php
+	/* Membership plugin is officially replaced by Membership2.
+	We only display the deprecated options to users that still use the old plugin. */
+	?>
+
+	<?php if ( class_exists( 'M_Membership' ) ) : ?>
+	<tr class="payment_row" style="<?php if ( ! $use_payments ) echo 'display:none;'; ?>border-top: 1px solid lightgrey;">
 			<th scope="row">&nbsp;</th>
 			<td colspan="2">
 			<span class="description"><?php printf( __('The below fields require %s plugin. ', 'appointments'), '<a href="http://premium.wpmudev.org/project/membership/" target="_blank">Membership</a>') ?></span>
 			</td>
 	</tr>
 
-	<tr class="payment_row" <?php if ( $appointments->options['payment_required'] != 'yes' ) echo 'style="display:none"';?>>
+	<tr class="payment_row" <?php if ( ! $use_payments ) echo 'style="display:none"';?>>
 			<th scope="row"><?php _e('Don\'t ask advance payment from selected Membership level(s)', 'appointments') ?></th>
 			<td colspan="2">
 			<input type="checkbox" name="members_no_payment" <?php if ( isset( $appointments->options["members_no_payment"] ) && $appointments->options["members_no_payment"] ) echo 'checked="checked"' ?> />
@@ -494,7 +506,7 @@
 			</td>
 	</tr>
 
-	<tr class="payment_row" <?php if ( $appointments->options['payment_required'] != 'yes' ) echo 'style="display:none"'; ?>>
+	<tr class="payment_row" <?php if ( ! $use_payments ) echo 'style="display:none"'; ?>>
 			<th scope="row"><?php _e('Discount for selected Membership level(s) (%)', 'appointments') ?></th>
 			<td colspan="2">
 			<input type="text" name="members_discount" style="width:50px" value="<?php echo @$appointments->options["members_discount"] ?>" />
@@ -502,7 +514,7 @@
 			</td>
 	</tr>
 
-	<tr class="payment_row" <?php if ( $appointments->options['payment_required'] != 'yes' ) echo 'style="display:none"'?>>
+	<tr class="payment_row" <?php if ( ! $use_payments ) echo 'style="display:none"'?>>
 			<th scope="row"><?php _e('Membership levels for the above selections', 'appointments') ?></th>
 			<td colspan="2">
 			<?php
@@ -535,15 +547,16 @@
 			<div style="clear:both"></div>
 			</td>
 	</tr>
+	<?php endif; /* End of deprecated Membership integration. */ ?>
 
-	<tr class="payment_row" <?php if ( $appointments->options['payment_required'] != 'yes' ) echo 'style="display:none"'; else echo 'style="border-top: 1px solid lightgrey;"'?>>
+	<tr class="payment_row" style="<?php if ( ! $use_payments ) echo 'display:none;'; ?>border-top: 1px solid lightgrey;">
 			<th scope="row">&nbsp;</th>
 			<td colspan="2">
 			<span class="description"><?php printf( __('The below fields require %s plugin. ', 'appointments'), '<a href="http://premium.wpmudev.org/project/e-commerce/" target="_blank">MarketPress</a>') ?></span>
 			</td>
 	</tr>
 
-	<tr class="payment_row" <?php if ( $appointments->options['payment_required'] != 'yes' ) echo 'style="display:none"';?>>
+	<tr class="payment_row" <?php if ( ! $use_payments ) echo 'style="display:none"';?>>
 			<th scope="row"><?php _e('Integrate with MarketPress', 'appointments') ?></th>
 			<td colspan="2">
 			<input type="checkbox" name="use_mp" <?php if ( isset( $appointments->options["use_mp"] ) && $appointments->options["use_mp"] ) echo 'checked="checked"' ?> />
@@ -558,7 +571,7 @@
 
 	<?php do_action('app-settings-payment_settings-marketpress'); ?>
 
-	<tr class="payment_row" <?php if ( $appointments->options['payment_required'] != 'yes' ) echo 'style="display:none"';?>>
+	<tr class="payment_row" <?php if ( ! $use_payments ) echo 'style="display:none"';?>>
 		<th scope="row" ><?php _e('Create an Appointment Product Page', 'appointments')?></th>
 		<td colspan="2">
 		<input type="checkbox" name="make_an_appointment_product" <?php if ( isset( $appointments->options["make_an_appointment_product"] ) && $appointments->options["make_an_appointment_product"] ) echo 'checked="checked"' ?> />
@@ -584,6 +597,14 @@
 		?>
 		</td>
 	</tr>
+
+	<?php
+	/**
+	 * Integrations or add-ons can use this action to add their own payment
+	 * settings to the form.
+	 */
+	do_action( 'app_settings_form_payment', $appointments->options, $use_payments );
+	?>
 
     </table>
 	</div>
@@ -711,9 +732,9 @@
 		<tr>
 			<th scope="row"><?php _e('Removal Notification Email Subject', 'appointments') ?></th>
 			<td>
-				<?php 
-					$rn_subject = !empty($appointments->options['removal_notification_subject']) 
-						? $appointments->options['removal_notification_subject'] 
+				<?php
+					$rn_subject = !empty($appointments->options['removal_notification_subject'])
+						? $appointments->options['removal_notification_subject']
 						: App_Template::get_default_removal_notification_subject()
 					;
 				?>
@@ -724,11 +745,11 @@
 		<tr>
 			<th scope="row"><?php _e('Removal Notification Email Message', 'appointments') ?></th>
 			<td>
-				<?php 
-					$rn_msg = !empty($appointments->options['removal_notification_message']) 
-						? $appointments->options['removal_notification_message'] 
+				<?php
+					$rn_msg = !empty($appointments->options['removal_notification_message'])
+						? $appointments->options['removal_notification_message']
 						: App_Template::get_default_removal_notification_message()
-					; 
+					;
 				?>
 				<textarea cols="90" name="removal_notification_message"><?php echo esc_textarea($rn_msg); ?></textarea>
 			</td>
@@ -817,7 +838,7 @@
 		</table>
 	</div>
 </div>
-	
+
 <?php do_action('app-settings-after_advanced_settings'); ?>
 
 <input type="hidden" name="action_app" value="save_general" />
