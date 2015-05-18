@@ -103,6 +103,12 @@ class Appointments {
 		require_once($this->plugin_dir . '/includes/class_app_buddypress.php');
 		if (class_exists('App_BuddyPress')) App_BuddyPress::serve();
 
+		// Membership2 Integration
+		$m2_integration = $this->plugin_dir . '/includes/class_app_membership2.php';
+		if ( file_exists( $m2_integration ) ) {
+			require_once $m2_integration;
+		}
+
 		// Caching
 		if ( 'yes' == @$this->options['use_cache'] ) {
 			add_filter( 'the_content', array( &$this, 'pre_content' ), 8 );				// Check content before do_shortcode
@@ -829,7 +835,7 @@ class Appointments {
 		 * Filter allows other plugins or integrations to apply a discount to
 		 * the price.
 		 */
-		$price = apply_filter( 'app_get_price_prepare', $price, $this );
+		$price = apply_filter( 'app_get_price_prepare', $price, $paypal, $this );
 
 		// Discount
 		if ( $this->is_member() && isset( $this->options["members_discount"] ) && $this->options["members_discount"] ) {
@@ -5440,9 +5446,17 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			$this->options["payment_required"]			= $_POST["payment_required"];
 			$this->options["percent_deposit"]			= trim( str_replace( '%', '', $_POST["percent_deposit"] ) );
 			$this->options["fixed_deposit"]				= trim( str_replace( $this->options["currency"], '', $_POST["fixed_deposit"] ) );
-			$this->options['members_no_payment'] 		= isset( $_POST['members_no_payment'] );
-			$this->options['members_discount'] 			= trim( str_replace( '%', '', $_POST['members_discount'] ) );
-			$this->options["members"]					= maybe_serialize( @$_POST["members"] );
+
+			/*
+			 * Membership plugin is replaced by Membership2. Old options are
+			 * only saved when the depreacted Membership plugin is still active.
+			 */
+			if ( class_exists( 'M_Membership' ) ) {
+				$this->options['members_no_payment']	= isset( $_POST['members_no_payment'] ); // not used??
+				$this->options['members_discount']		= trim( str_replace( '%', '', $_POST['members_discount'] ) );
+				$this->options['members']				= maybe_serialize( @$_POST["members"] );
+			}
+
 			$this->options['currency'] 					= $_POST['currency'];
 			$this->options['mode'] 						= $_POST['mode'];
 			$this->options['merchant_email'] 			= trim( $_POST['merchant_email'] );
