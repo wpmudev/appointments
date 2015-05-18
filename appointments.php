@@ -825,27 +825,37 @@ class Appointments {
 
 		$price = $service_obj->price + $worker_price;
 
+		/**
+		 * Filter allows other plugins or integrations to apply a discount to
+		 * the price.
+		 */
+		$price = apply_filter( 'app_get_price_prepare', $price, $this );
+
 		// Discount
 		if ( $this->is_member() && isset( $this->options["members_discount"] ) && $this->options["members_discount"] ) {
 			// Special condition: Free for members
 			if ( 100 == $this->options["members_discount"] )
 				$price = 0;
 			else
-				$price = number_format( $price * ( 100 - $this->options["members_discount"] )/100, 2 );
+				$price = $price * ( 100 - $this->options["members_discount"] )/100;
 		}
 
 		if ( $paypal ) {
 			// Deposit
 			if ( isset( $this->options["percent_deposit"] ) && $this->options["percent_deposit"] )
-				$price = number_format( $price * $this->options["percent_deposit"] / 100, 2 );
+				$price = $price * $this->options["percent_deposit"] / 100;
 			if ( isset( $this->options["fixed_deposit"] ) && $this->options["fixed_deposit"] )
 				$price = $this->options["fixed_deposit"];
 
 			// It is possible to ask special amounts to be paid
-			return apply_filters( 'app_paypal_amount', $price, $this->service, $this->worker, $current_user->ID );
+			$price = apply_filters( 'app_paypal_amount', $price, $this->service, $this->worker, $current_user->ID );
+		} else {
+			$price = apply_filters( 'app_get_price', $price, $this->service, $this->worker, $current_user->ID );
 		}
 
-		return apply_filters( 'app_get_price', $price, $this->service, $this->worker, $current_user->ID );
+		// Use number_format right at the end, cause it converts the number to a string.
+		$price = number_format( $price, 2 );
+		return $price;
 	}
 
 	/**
