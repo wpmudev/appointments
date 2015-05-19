@@ -835,7 +835,7 @@ class Appointments {
 		 * Filter allows other plugins or integrations to apply a discount to
 		 * the price.
 		 */
-		$price = apply_filter( 'app_get_price_prepare', $price, $paypal, $this );
+		$price = apply_filters( 'app_get_price_prepare', $price, $paypal, $this );
 
 		// Discount
 		if ( $this->is_member() && isset( $this->options["members_discount"] ) && $this->options["members_discount"] ) {
