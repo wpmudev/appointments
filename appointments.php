@@ -2189,8 +2189,8 @@ class Appointments {
 
 // Fix for service durations calculus and workhours start conflict with different duration services
 // Example: http://premium.wpmudev.org/forums/topic/problem-with-time-slots-not-properly-allocating-free-time
-			if (!empty($start_unpacked_days) && !(defined('APP_USE_LEGACY_DURATION_CALCULUS') && APP_USE_LEGACY_DURATION_CALCULUS)) {
-				$this_day_key = date('l', $t);
+            $this_day_key = date('l', $t);
+            if (!empty($start_unpacked_days) && !(defined('APP_USE_LEGACY_DURATION_CALCULUS') && APP_USE_LEGACY_DURATION_CALCULUS)) {
 				if (!empty($start_unpacked_days[$this_day_key])) {
 					// Check slot start vs opening start
 					$this_day_opening_timestamp = strtotime(date('Y-m-d ' . $start_unpacked_days[$this_day_key]['start'], $ccs));
