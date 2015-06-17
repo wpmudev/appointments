@@ -51,7 +51,7 @@ class App_Membership2 {
 		// Apply a discount to logged-in members.
 		add_filter(
 			'app_get_price_prepare',
-			array( $this, 'get_price' ), 10, 2
+			array( $this, 'get_price' ), 10, 3
 		);
 
 		// Add CSS/JS to the top of the settings form
