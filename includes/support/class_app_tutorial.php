@@ -17,7 +17,7 @@ class App_Tutorial {
 	function tutorial1() {
 		global $appointments;
 		//load the file
-		if (!class_exists('Pointer_Tutorial')) require_once( $appointments->plugin_dir . '/includes/pointer-tutorials.php' );
+		if (!class_exists('Pointer_Tutorial')) require_once( $appointments->plugin_dir . '/includes/external/pointer-tutorials.php' );
 
 		//create our tutorial, with default redirect prefs
 		$tutorial = new Pointer_Tutorial('app_tutorial1', true, false);
@@ -162,7 +162,7 @@ class App_Tutorial {
 	function tutorial2() {
 		global $appointments;
 		//load the file
-		if (!class_exists('Pointer_Tutorial')) require_once( $appointments->plugin_dir . '/includes/pointer-tutorials.php' );
+		if (!class_exists('Pointer_Tutorial')) require_once( $appointments->plugin_dir . '/includes/external/pointer-tutorials.php' );
 
 		//create our tutorial, with default redirect prefs
 		$tutorial = new Pointer_Tutorial('app_tutorial2', true, false);

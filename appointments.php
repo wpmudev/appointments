@@ -194,7 +194,7 @@ class Appointments {
 		// Google+ login
 		if (!class_exists('LightOpenID')) {
 			if( function_exists('curl_init') || in_array('https', stream_get_wrappers()) ) {
-				include_once( $this->plugin_dir . '/includes/lightopenid/openid.php' );
+				include_once( $this->plugin_dir . '/includes/external/lightopenid/openid.php' );
 				$this->openid = new LightOpenID;
 			}
 		}
@@ -3214,7 +3214,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		if ( !$this->options['twitter-app_id'] )
 			$this->options = get_option( 'appointments_options' );
 		if (!class_exists('TwitterOAuth'))
-			include WP_PLUGIN_DIR . '/appointments/includes/twitteroauth/twitteroauth.php';
+			include WP_PLUGIN_DIR . '/appointments/includes/external/twitteroauth/twitteroauth.php';
 		$twitter = new TwitterOAuth(
 			$this->options['twitter-app_id'],
 			$this->options['twitter-app_secret'],
@@ -7302,7 +7302,7 @@ if (is_admin()) {
 	App_AdminHelp::serve();
 
 	// Setup dashboard notices
-	if (file_exists(APP_PLUGIN_DIR . '/includes/wpmudev-dash-notification.php')) {
+	if (file_exists(APP_PLUGIN_DIR . '/includes/external/wpmudev-dash-notification.php')) {
 		global $wpmudev_notices;
 		if (!is_array($wpmudev_notices)) $wpmudev_notices = array();
 		$wpmudev_notices[] = array(
@@ -7314,7 +7314,7 @@ if (is_admin()) {
 				'appointments_page_app_faq',
 			),
 		);
-		require_once APP_PLUGIN_DIR . '/includes/wpmudev-dash-notification.php';
+		require_once APP_PLUGIN_DIR . '/includes/external/wpmudev-dash-notification.php';
 	}
 	// End dash bootstrap
 }
