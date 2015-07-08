@@ -6951,7 +6951,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		$data = apply_filters('app-appointment-inline_edit-save_data', $data);
 
 		$update_result = $insert_result = false;
-		if( $app != null ) {
+		if ($app != null) {
 			// Update
 			$update_result = $wpdb->update( $this->app_table, $data, array('ID' => $app_id) );
 			if ( $update_result ) {
@@ -6966,15 +6966,14 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 				if ('removed' == $data['status']) do_action( 'app_removed', $app_id );
 				//else $this->send_confirmation( $app_id );
 			}
-		}
-		else {
+		} else {
 			// Insert
 			$insert_result = $wpdb->insert( $this->app_table, $data );
 			if ( $insert_result && $resend && empty($email_sent) ) {
 				$email_sent = $this->send_confirmation( $wpdb->insert_id );
 			}
 			if ( $insert_result && is_object($this->gcal_api) && $this->gcal_api->is_syncable_status($data['status'])) {
-				$this->gcal_api->insert( $app_id );
+				$this->gcal_api->insert( $wpdb->insert_id );
 			}
 		}
 
