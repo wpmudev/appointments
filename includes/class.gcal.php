@@ -36,8 +36,7 @@ class AppointmentsGcal {
 		$this->plugin_dir 	= $appointments->plugin_dir;
 		$this->plugin_url 	= $appointments->plugin_url;
 
-		require_once $this->plugin_dir . '/includes/gcal/Google_Client.php';
-		require_once $this->plugin_dir . '/includes/gcal/contrib/Google_CalendarService.php';
+		require_once $this->plugin_dir . '/includes/external/google/Client.php';
 
 		// Try to start a session. If cannot, log it.
 		if ( !session_id() && !@session_start() ) {
@@ -300,7 +299,7 @@ class AppointmentsGcal {
 				if ( $result )
 					$message .= __('Test is successful. Please REFRESH your Google Calendar and check that test appointment has been saved.','appointments');
 				else {
-					$message .= Google_ServiceException::getErrors();
+					$message .= App_Google_ServiceException::getErrors();
 					$error = true;
 				}
 			}
@@ -950,20 +949,20 @@ class AppointmentsGcal {
 			return false;
 
 		// Just in case
-		require_once $this->plugin_dir . '/includes/gcal/Google_Client.php';
+		require_once $this->plugin_dir . '/includes/external/google/Client.php';
 
 		$extra_config = apply_filters('app-gcal-client_parameters', array());
-		$this->client = new Google_Client($extra_config);
+		$this->client = new App_Google_Client($extra_config);
 		$this->client->setApplicationName("Appointments+");
-		$this->client->setUseObjects(true);
+		//$this->client->setUseObjects(true);
 		$key = $this->_file_get_contents( $worker_id );
-		$this->client->setAssertionCredentials(new Google_AssertionCredentials(
+		$this->client->setAssertionCredentials(new App_Google_Auth_AssertionCredentials(
 			$this->get_service_account( $worker_id),
 			array('https://www.googleapis.com/auth/calendar'),
 			$key)
 		);
 
-		$this->service = new Google_CalendarService($this->client);
+		$this->service = new App_Google_Service_Calendar($this->client);
 
 		return true;
 	}
@@ -975,38 +974,36 @@ class AppointmentsGcal {
 	function set_event_parameters( $app, $worker_id=0 ) {
 		global $appointments;
 		$a = $appointments;
-		$summary = sprintf( __('%s Appointment', 'appointments'), $a->get_service_name( $app->service ) );
+		
+		$summary = sprintf(__('%s Appointment', 'appointments'), $a->get_service_name($app->service));
 
-		if ( isset( $this->options["gcal_location"] ) && '' != trim( $this->options["gcal_location"] ) )
+		if (isset($this->options["gcal_location"] ) && '' != trim( $this->options["gcal_location"])) {
 			$location = str_replace( array('ADDRESS', 'CITY'), array($app->address, $app->city), $this->options["gcal_location"] );
-		else
-			$location = get_bloginfo( 'description' );
+		} else {
+			$location = get_bloginfo('description');
+		}
 
 		// Find time difference from Greenwich as GCal asks UTC
-		if ( !current_time('timestamp') )
-			$tdif = 0;
-		else
-			$tdif = current_time('timestamp') - time();
+		if (!current_time('timestamp')) $tdif = 0;
+		else $tdif = current_time('timestamp') - time();
 
-		$start = new Google_EventDateTime();
-		$start->setDateTime( date( "Y-m-d\TH:i:s\Z", strtotime($app->start) - $tdif ) );
+		$start = new App_Google_Service_Calendar_EventDateTime();
+		$start->setDateTime(date("Y-m-d\TH:i:s\Z", strtotime($app->start) - $tdif));
 
-		$end = new Google_EventDateTime();
-		$end->setDateTime( date( "Y-m-d\TH:i:s\Z", strtotime($app->end) - $tdif ) );
+		$end = new App_Google_Service_Calendar_EventDateTime();
+		$end->setDateTime(date("Y-m-d\TH:i:s\Z", strtotime($app->end) - $tdif));
 
 		// An email is always required
-		if ( !$app->email )
-			$email = $a->get_worker_email( $app->worker );
-		else
-			$email = $app->email;
-		if ( !$email )
-			$email = $a->get_admin_email( );
+		if (!$app->email) $email = $a->get_worker_email($app->worker);
+		else $email = $app->email;
 
-		$attendee1 = new Google_EventAttendee();
+		if (!$email) $email = $a->get_admin_email( );
+
+		$attendee1 = new App_Google_Service_Calendar_EventAttendee();
 		$attendee1->setEmail( $email );
 		$attendees = array($attendee1);
 
-		$this->event = new Google_Event( );
+		$this->event = new App_Google_Service_Calendar_Event();
 		$this->event->setSummary( $summary );
 		$this->event->setLocation( $location );
 		$this->event->setStart( $start );
@@ -1056,20 +1053,19 @@ class AppointmentsGcal {
 		global $appointments;
 		$app = $appointments->get_app( $app_id );
 		$worker_id = $app->worker;
+
 		// No preference case
 		if ( !$worker_id ) {
-			/*
-			if ( 'none' != $this->get_api_mode( ) )
-				$this->insert_event( $app_id );
-			*/
 			if ($this->_is_writable_mode()) $this->insert_event($app_id);
-		}
-		else {
-			//if ( isset( $this->options['gcal_api_allow_worker'] ) && 'yes' == $this->options['gcal_api_allow_worker'] && 'none' != $this->get_api_mode( $worker_id ) )
-			if (isset($this->options['gcal_api_allow_worker']) && 'yes' == $this->options['gcal_api_allow_worker'] && $this->_is_writable_mode($worker_id)) $this->insert_event($app_id, false, $worker_id);
+		} else {
+			// So, first up, let's go with worker
+			if (isset($this->options['gcal_api_allow_worker']) && 'yes' == $this->options['gcal_api_allow_worker'] && $this->_is_writable_mode($worker_id)) {
+				$this->insert_event($app_id, false, $worker_id);
+			}
 			// Add this to general calendar if selected so
-			//if ( isset( $this->options['gcal_api_scope'] ) && 'all' == $this->options['gcal_api_scope'] && 'none' != $this->get_api_mode() )
-			if (isset($this->options['gcal_api_scope']) && 'all' == $this->options['gcal_api_scope'] && $this->_is_writable_mode()) $this->insert_event($app_id);
+			if (isset($this->options['gcal_api_scope']) && 'all' == $this->options['gcal_api_scope'] && $this->_is_writable_mode()) {
+				$this->insert_event($app_id);
+			}
 		}
 	}
 
@@ -1079,12 +1075,10 @@ class AppointmentsGcal {
 	 * @test: Insert a test appointment
 	 */
 	function insert_event( $app_id, $test=false, $worker_id=0 ) {
-
-		if ( !$this->connect( $worker_id ) )
-			return false;
+		if (!$this->connect($worker_id)) return false;
 
 		global $appointments, $wpdb;
-		if ( $test ) {
+		if ($test) {
 			$app = new stdClass();
 			$app->name = __('Test client name', 'appointments');
 			$app->phone = __('Test phone', 'appointments');
@@ -1096,10 +1090,10 @@ class AppointmentsGcal {
 			$app->end = date( 'Y-m-d H:i:s', $this->local_time + 2400 );
 			$app->service = $appointments->get_first_service_id();
 			$app->email = $appointments->get_admin_email( );
-			$app->note = __('This is a test appointment inserted by Appointments+','appointments');
-		}
-		else
+			$app->note = __('This is a test appointment inserted by Appointments+', 'appointments');
+		} else {
 			$app = $appointments->get_app( $app_id );
+		}
 
 		// Create Event object and set parameters
 		$this->set_event_parameters( $app, $app->worker );
@@ -1107,7 +1101,7 @@ class AppointmentsGcal {
 		// Insert event
 		try {
 			$createdEvent = $this->service->events->insert( $this->get_selected_calendar( $worker_id ), $this->event );
-			if ($createdEvent && !is_object($createdEvent) && class_exists('Google_CalendarListEntry')) $createdEvent = new Google_CalendarListEntry($createdEvent);
+			if ($createdEvent && !is_object($createdEvent) && class_exists('App_Google_Service_Calendar_CalendarListEntry')) $createdEvent = new App_Google_Service_Calendar_CalendarListEntry($createdEvent);
 
 			// Write Event ID to database
 			$gcal_ID = $createdEvent->getId();
@@ -1117,8 +1111,7 @@ class AppointmentsGcal {
 				$appointments->log("The insert did not create a real result we can work with");
 			}
 			// Test result successful
-			if ( $gcal_ID )
-				return true;
+			if ( $gcal_ID ) return true;
 		} catch (Exception $e) {
 			$appointments->log("Insert went wrong: " . $e->getMessage());
 			return false;
@@ -1162,7 +1155,7 @@ class AppointmentsGcal {
 			// Update event
 			try {
 				$updatedEvent = $this->service->events->update( $this->get_selected_calendar( $worker_id ), $app->gcal_ID, $this->event );
-				if ($updatedEvent && !is_object($updatedEvent) && class_exists('Google_CalendarListEntry')) $updatedEvent = new Google_CalendarListEntry($updatedEvent);
+				if ($updatedEvent && !is_object($updatedEvent) && class_exists('App_Google_Service_Calendar_CalendarListEntry')) $updatedEvent = new App_Google_Service_Calendar_CalendarListEntry($updatedEvent);
 
 				// Update Time of database
 				$gcal_ID = $updatedEvent->getId();
@@ -1256,8 +1249,8 @@ class AppointmentsGcal {
 				)
 			)
 		);
-		if ($events && !$this->service->events->useObjects() && class_exists('Google_Events')) {
-			$events = new Google_Events($events);
+		if ($events && /*!$this->service->events->useObjects() &&*/ class_exists('App_Google_Service_Calendar_Events')) {
+			$events = new App_Google_Service_Calendar_Events($events);
 		}
 		$message = '';
 		$event_ids = array();
