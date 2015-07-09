@@ -42,7 +42,11 @@ class App_Schedule_Paddings {
 
 	private function _add_hooks () {
 		add_action('plugins_loaded', array($this, 'initialize'));
+		
+		//Apply padding to front-end timetable.
 		add_filter('app-timetable-step_increment', array($this, 'apply_step_increment_padding'));
+		//Apply padding to backend admin settings.
+		add_filter('app_admin_min_time', array($this, 'apply_admin_min_time_padding'));
 
 		// UI - resolution type
 		add_action('app-settings-time_settings', array($this, 'show_settings'));
@@ -284,10 +288,55 @@ class App_Schedule_Paddings {
 	}
 
 	private function _get_current_service_padding () {
+		global $current_screen;
+		if( is_admin() && !empty($current_screen) && $current_screen->id == 'appointments_page_app_settings'){
+			if( !empty($_REQUEST['tab']) && $_REQUEST['tab'] == 'working_hours' ){
+				$service = 0;
+				if( $this->_core->worker ){
+					$service = $this->resolve_service_id($this->_core->worker);
+				} else {
+					$service = $this->resolve_service_id();
+				}
+	
+				$this->_core->service = $service ? $service : $this->_core->service;
+			}
+		} else if ( is_admin() && DOING_AJAX ) {
+			//Get service ID for the current appointment when using inline edit.
+			if($_REQUEST['action'] == 'inline_edit' && !empty($_REQUEST['app_id'])){
+				$app = $this->_core->get_app($_REQUEST['app_id']);
+				$this->_core->service = $app->service;
+			}
+		}
 		if ($this->_core->service && !empty($this->_data['service_padding'][$this->_core->service])) {
 			// Determine the service padding
 			return $this->_data['service_padding'][$this->_core->service];
 		}
+		return false;
+	}
+	
+	public function apply_admin_min_time_padding($time){
+		$time_sec = 60 * $time;//Minutes to seconds.
+		$time = $this->apply_step_increment_padding($time_sec);//Calculate the padding in seconds.
+		$time = $time / 60;//Back to minutes.
+	
+		return $time;
+	}
+	
+	private function resolve_service_id ($worker = false){
+		//Try to guess the service ID related to the working hours.
+		//This would be accurate only for specific providers providing a single service.
+		$services = array();
+		if($worker){
+			$services = $this->_core->get_services_by_worker($worker);
+		} else {
+			$services = $this->_core->get_services();
+		}
+		foreach( $services as $key => $service ){
+			if ($this->_data['service_padding'][$service->ID][self::PADDING_BEFORE] || $this->_data['service_padding'][$service->ID][self::PADDING_AFTER] ){
+				return $service->ID;
+			}
+		}
+	
 		return false;
 	}
 
