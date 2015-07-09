@@ -6969,20 +6969,24 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		} else {
 			// Insert
 			$insert_result = $wpdb->insert( $this->app_table, $data );
+			/*
+// Moved
 			if ( $insert_result && $resend && empty($email_sent) ) {
 				$email_sent = $this->send_confirmation( $wpdb->insert_id );
 			}
 			if ( $insert_result && is_object($this->gcal_api) && $this->gcal_api->is_syncable_status($data['status'])) {
 				$this->gcal_api->insert( $wpdb->insert_id );
 			}
+			*/
 		}
 
 		do_action('app-appointment-inline_edit-after_save', ($update_result ? $app_id : $wpdb->insert_id), $data);
-
+/*
+// Moved
 		if ($resend && 'removed' != $data['status'] && empty($email_sent) ) {
 			$email_sent = $this->send_confirmation( $app_id );
 		}
-
+*/
 		if ( ( $update_result || $insert_result ) && $data['user'] && defined('APP_USE_LEGACY_USERDATA_OVERWRITING') && APP_USE_LEGACY_USERDATA_OVERWRITING ) {
 			if ( $data['name'] )
 				update_user_meta( $data['user'], 'app_name',  $data['name'] );
@@ -6999,6 +7003,17 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		}
 
 		do_action('app-appointment-inline_edit-before_response', ($update_result ? $app_id : $wpdb->insert_id), $data);
+
+		// Move mail sending here so the fields can expand
+		if ( $insert_result && $resend && empty($email_sent) ) {
+			$email_sent = $this->send_confirmation( $wpdb->insert_id );
+		}
+		if ( $insert_result && is_object($this->gcal_api) && $this->gcal_api->is_syncable_status($data['status'])) {
+			$this->gcal_api->insert( $wpdb->insert_id );
+		}
+		if ($resend && !empty($app_id) && 'removed' != $data['status'] && empty($email_sent) ) {
+			$email_sent = $this->send_confirmation( $app_id );
+		}
 
 		$result = array(
 			'app_id' => 0,
@@ -7019,7 +7034,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 				'message' => __('<span style="color:green;font-weight:bold">Changes saved.</span>', 'appointments'),
 			);
 		} else {
-			$message = $resend && !empty($data['status']) && $removed != $data['status']
+			$message = $resend && !empty($data['status']) && 'removed' != $data['status']
 				? sprintf('<span style="color:green;font-weight:bold">%s</span>', __('Confirmation message (re)sent', 'appointments'))
 				: sprintf('<span style="color:red;font-weight:bold">%s</span>', __('Record could not be saved OR you did not make any changes!', 'appointments'))
 			;
