@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.4.7
+Version: 1.5-BETA-1
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	var $version = "1.4.7";
+	var $version = "1.5-BETA-1";
 
 	function __construct() {
 
@@ -194,7 +194,7 @@ class Appointments {
 		// Google+ login
 		if (!class_exists('LightOpenID')) {
 			if( function_exists('curl_init') || in_array('https', stream_get_wrappers()) ) {
-				include_once( $this->plugin_dir . '/includes/lightopenid/openid.php' );
+				include_once( $this->plugin_dir . '/includes/external/lightopenid/openid.php' );
 				$this->openid = new LightOpenID;
 			}
 		}
@@ -3214,7 +3214,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		if ( !$this->options['twitter-app_id'] )
 			$this->options = get_option( 'appointments_options' );
 		if (!class_exists('TwitterOAuth'))
-			include WP_PLUGIN_DIR . '/appointments/includes/twitteroauth/twitteroauth.php';
+			include WP_PLUGIN_DIR . '/appointments/includes/external/twitteroauth/twitteroauth.php';
 		$twitter = new TwitterOAuth(
 			$this->options['twitter-app_id'],
 			$this->options['twitter-app_secret'],
@@ -6951,7 +6951,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		$data = apply_filters('app-appointment-inline_edit-save_data', $data);
 
 		$update_result = $insert_result = false;
-		if( $app != null ) {
+		if ($app != null) {
 			// Update
 			$update_result = $wpdb->update( $this->app_table, $data, array('ID' => $app_id) );
 			if ( $update_result ) {
@@ -6966,15 +6966,14 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 				if ('removed' == $data['status']) do_action( 'app_removed', $app_id );
 				//else $this->send_confirmation( $app_id );
 			}
-		}
-		else {
+		} else {
 			// Insert
 			$insert_result = $wpdb->insert( $this->app_table, $data );
 			if ( $insert_result && $resend && empty($email_sent) ) {
 				$email_sent = $this->send_confirmation( $wpdb->insert_id );
 			}
 			if ( $insert_result && is_object($this->gcal_api) && $this->gcal_api->is_syncable_status($data['status'])) {
-				$this->gcal_api->insert( $app_id );
+				$this->gcal_api->insert( $wpdb->insert_id );
 			}
 		}
 
@@ -7302,7 +7301,7 @@ if (is_admin()) {
 	App_AdminHelp::serve();
 
 	// Setup dashboard notices
-	if (file_exists(APP_PLUGIN_DIR . '/includes/wpmudev-dash-notification.php')) {
+	if (file_exists(APP_PLUGIN_DIR . '/includes/external/wpmudev-dash-notification.php')) {
 		global $wpmudev_notices;
 		if (!is_array($wpmudev_notices)) $wpmudev_notices = array();
 		$wpmudev_notices[] = array(
@@ -7314,7 +7313,7 @@ if (is_admin()) {
 				'appointments_page_app_faq',
 			),
 		);
-		require_once APP_PLUGIN_DIR . '/includes/wpmudev-dash-notification.php';
+		require_once APP_PLUGIN_DIR . '/includes/external/wpmudev-dash-notification.php';
 	}
 	// End dash bootstrap
 }
