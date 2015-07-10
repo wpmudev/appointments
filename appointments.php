@@ -2706,7 +2706,9 @@ class Appointments {
 			$css_plus_duration = $ccs + ($duration *60);
 
 			foreach( $days as $day_name=>$day ) {
-				if ( $day_name == $this_days_name && isset( $day["active"] ) && 'yes' == $day["active"] ) {
+				// // Jose's fix pt1 (c19c7d65bb860a265ceb7f6a6075ae668bd60100)
+				//if ( $day_name == $this_days_name && isset( $day["active"] ) && 'yes' == $day["active"] ) {
+				if ( $day_name == $this_days_name ) {
 
 					// Special case: End time is 00:00
 					$end_mil = $this->to_military( $day["end"] );
@@ -2919,6 +2921,8 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			if ( is_array( $days ) ) {
 				$min = 24; $max = 0;
 				foreach ( $days as $day ) {
+					// Jose's fix pt2 (c19c7d65bb860a265ceb7f6a6075ae668bd60100)
+					/*
 					if ( isset( $day["active"] ) && 'yes' == $day["active"] ) {
 						$start = date( "G", strtotime( $this->to_military( $day["start"] ) ) );
 						$end_timestamp = strtotime( $this->to_military( $day["end"] ) );
@@ -2934,6 +2938,20 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 						if ( 0 == $end && '00' == date( "i", $end_timestamp ) )
 							$max = 24;
 					}
+					*/
+					$start = date( "G", strtotime( $this->to_military( $day["start"] ) ) );
+	                $end_timestamp = strtotime( $this->to_military( $day["end"] ) );
+	                $end = date( "G", $end_timestamp );
+	                // Add 1 hour if there are some minutes left. e.g. for 10:10pm, make max as 23
+	                if ( '00' != date( "i", $end_timestamp ) && $end != 24 )
+	                    $end = $end + 1;
+	                if ( $start < $min )
+	                    $min = $start;
+	                if ( $end > $max )
+	                    $max = $end;
+	                // Special case: If end is 0:00, regard it as 24
+	                if ( 0 == $end && '00' == date( "i", $end_timestamp ) )
+	                    $max = 24;
 				}
 				return array( "min"=>$min, "max"=>$max );
 			}
