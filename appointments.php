@@ -6243,7 +6243,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		else
 			$min_time = $this->get_min_time();
 
-		$min_secs = 60 * $min_time;
+		$min_secs = 60 * apply_filters( 'app_admin_min_time', $min_time );
 
 		$wb = $this->get_work_break( $this->location, $this->worker, $status );
 		if ( $wb )
