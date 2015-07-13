@@ -17,12 +17,6 @@ if (!defined('APP_GCAL_MAX_RESULTS_LIMIT')) define('APP_GCAL_MAX_RESULTS_LIMIT',
 if ( !class_exists( 'AppointmentsGcal' ) ) {
 class AppointmentsGcal {
 
-	/**
-	 * Constructor
-	 */
-	function AppointmentsGcal() {
-		$this->__construct();
-	}
 	function __construct() {
 		global $wpdb, $appointments;
 
