@@ -555,9 +555,9 @@ a#app_schedule { height:0; padding: 0; width: 0; line-height: 0; font-size: 0; p
 .appointments-confirmation-wrapper fieldset div { margin:0 0 10px 0; }
 .app_worker_excerpts { margin:10px 0; }
 /* helpers */
-.clearfix:before,.clearfix:after{content:"\0020";display:block;height:0;overflow:hidden;}
-.clearfix:after{clear:both;}
-.clearfix{zoom:1;}
+.app-clearfix:before,.app-clearfix:after{content:"\0020";display:block;height:0;overflow:hidden;}
+.app-clearfix:after{clear:both;}
+.app-clearfix{zoom:1;}
 
 /* animation */
 .appointments-confirmation-start label {
