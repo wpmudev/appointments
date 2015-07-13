@@ -1324,8 +1324,8 @@ class App_Shortcode_Services extends App_Shortcode {
 		;
 
 		$comparator = 'ASC' === $direction
-			? create_function('$a, $b', "return strcmp(\$a->$by, \$b->$by);")
-			: create_function('$a, $b', "return strcmp(\$b->$by, \$a->$by);")
+			? create_function('$a, $b', "return strnatcasecmp(\$a->{$by}, \$b->{$by});")
+			: create_function('$a, $b', "return strnatcasecmp(\$b->{$by}, \$a->{$by});")
 		;
 		usort($services, $comparator);
 
