@@ -1205,8 +1205,8 @@ class AppointmentsGcal {
 		global $appointments, $wpdb;
 		// Check for general
 		$this->updated = $this->inserted = $this->deleted = 0;
-		if ( 'sync' == $this->get_api_mode() )
-			$this->import_and_update_events();
+		if ('sync' === $this->get_api_mode()) $this->import_and_update_events();
+
 		// Check for providers
 		if ( isset( $this->options['gcal_api_allow_worker'] ) && 'yes' == $this->options['gcal_api_allow_worker'] ) {
 			$results = $wpdb->get_results( "SELECT user_id FROM " . $wpdb->usermeta . " WHERE meta_key='app_api_mode' AND meta_value='sync' " );
@@ -1224,25 +1224,23 @@ class AppointmentsGcal {
 	 */
 	function import_and_update_events( $worker_id=0 ) {
 		global $appointments, $wpdb;
-		
+//$appointments->log("start import");
 		if (!$this->connect($worker_id)) return false;
+//$appointments->log(sprintf("connected to worker ID %d", $worker_id));
+
 
 		// Find time difference from Greenwich as GCal time will be converted to UTC, but we want local time
 		if (!current_time('timestamp')) $tdif = 0;
 		else $tdif = current_time('timestamp') - time();
 
+		$arguments = apply_filters('app_gcal_args', array(
+			'timeMin' => apply_filters('app_gcal_time_min', date("c", $this->local_time)),
+			'timeMax' => apply_filters('app_gcal_time_max', date("c", $this->local_time + 3600 * 24 * $appointments->get_app_limit())),
+			'singleEvents' => apply_filters( 'app_gcal_single_events', true),
+			'maxResults' => apply_filters('app_gcal_max_results', APP_GCAL_MAX_RESULTS_LIMIT),
+			'orderBy' => apply_filters('app_gcal_orderby', 'startTime'),
+		));
 		// Get only future events and limit them with appointment limit setting and 500 events
-		$events = $this->service->events->listEvents( $this->get_selected_calendar( $worker_id ),
-			apply_filters( 'app_gcal_args',
-				array(
-				'timeMin'		=> apply_filters( 'app_gcal_time_min', date( "c", $this->local_time ) ),
-				'timeMax'		=> apply_filters( 'app_gcal_time_max', date( "c", $this->local_time + 3600 * 24 * $appointments->get_app_limit() ) ),
-				'singleEvents'	=> apply_filters( 'app_gcal_single_events', true ),
-				'maxResults'	=> apply_filters( 'app_gcal_max_results', APP_GCAL_MAX_RESULTS_LIMIT ),
-				'orderBy'		=> apply_filters( 'app_gcal_orderby', 'startTime' )
-				)
-			)
-		);
 		if ($events && /*!$this->service->events->useObjects() &&*/ class_exists('App_Google_Service_Calendar_Events')) {
 			$events = new App_Google_Service_Calendar_Events($events);
 		}
