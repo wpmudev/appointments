@@ -95,6 +95,13 @@ class Appointments {
 		// API login after the options have been initialized
 		add_action('init', array($this, 'setup_api_logins'), 10);
 
+		// Check for cookies
+		if (!empty($this->options['login_required']) && 'yes' === $this->options['login_required']) {
+			// If we require a login and we had an user logged in, 
+			// we don't need cookies after they log out
+			add_action('wp_logout', array($this, 'drop_cookies_on_logout'));
+		}
+
 		// Widgets
 		require_once( $this->plugin_dir . '/includes/widgets.php' );
 		add_action( 'widgets_init', array( &$this, 'widgets_init' ) );
@@ -3070,6 +3077,26 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 
 			do_action( 'app_save_user_meta', $current_user->ID, array( 'name'=>$name, 'email'=>$email, 'phone'=>$phone, 'address'=>$address, 'city'=>$city ) );
 		}
+	}
+
+	/**
+	 * Make sure we clean up cookies after logging out.
+	 */
+	public function drop_cookies_on_logout () {
+		if (empty($this->options['login_required']) || 'yes' !== $this->options['login_required']) return false;
+
+		$path = defined('COOKIEPATH')
+			? COOKIEPATH
+			: '/'
+		;
+		$domain = defined('COOKIEDOMAIN')
+			? COOKIEDOMAIN
+			: ''
+		;
+		$drop = $this->local_time - 3600;
+
+		@setcookie("wpmudev_appointments", "", $drop, $path, $domain);
+		@setcookie("wpmudev_appointments_userdata", "", $drop, $path, $domain);
 	}
 
 
