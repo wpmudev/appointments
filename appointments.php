@@ -4796,9 +4796,9 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 								'to'		=> $this->get_worker_email( $r->worker ),
 								'subject'	=> $this->_replace( $this->options["reminder_subject"], $r->name, $this->get_service_name($r->service),
 									$this->get_worker_name($r->worker), $r->start, $r->price, $this->get_deposit($r->price), $r->phone, $r->note, $r->address, $r->email ),
-								'message'	=> $provider_add_text . $this->_replace( $this->options["reminder_message"], $r->name,
+								'message'	=> $provider_add_text . $this->add_cancel_link($this->_replace( $this->options["reminder_message"], $r->name,
 									$this->get_service_name( $r->service), $this->get_worker_name( $r->worker), $r->start, $r->price,
-									$this->get_deposit($r->price), $r->phone, $r->note, $r->address, $r->email )
+									$this->get_deposit($r->price), $r->phone, $r->note, $r->address, $r->email ))
 							);
 					// Update "sent" field
 					$wpdb->update( $this->app_table,
