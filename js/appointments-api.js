@@ -72,48 +72,54 @@ function create_app_login_interface ($me) {
 				return true;
 			}
 			callback = function () {
-				var init_url = $.browser.opera ? '' : 'https://api.twitter.com/';
-				var twLogin = window.open(init_url, "twitter_login", "scrollbars=no,resizable=no,toolbar=no,location=no,directories=no,status=no,menubar=no,copyhistory=no,height=400,width=600");
+				var twLogin = window.open('', "twitter_login", "scrollbars=no,resizable=no,toolbar=no,location=no,directories=no,status=no,menubar=no,copyhistory=no,height=400,width=600");
+				twLogin.document.write(l10nAppApi.please_wait || "Please hold on...");
 				$.post(_appointments_data.ajax_url, {
 					"action": "app_get_twitter_auth_url",
 					"url": window.location.toString()
 				}, function (data) {
-					try {
-						twLogin.location = data.url;
-					} catch (e) { twLogin.location.replace(data.url); }
-					var tTimer = setInterval(function () {
-						try {
-							if (twLogin.location.hostname == window.location.hostname) {
-								// We're back!
-								var location = twLogin.location;
-								var search = '';
-								try { search = location.search; } catch (e) { search = ''; }
-								clearInterval(tTimer);
-								twLogin.close();
-								// change UI
-								$root.html('<img src="' + _appointments_data.root_url + 'waiting.gif" /> ' + l10nAppApi.please_wait);
-								$.post(_appointments_data.ajax_url, {
-									"action": "app_twitter_login",
-									"secret": data.secret,
-									"data": search
-								}, function (data) {
-									var status = 0;
-									try { status = parseInt(data.status, 10); } catch (e) { status = 0; }
-									if (!status) { // ... handle error
-										$root.remove();
-										return false;
+					var href = data.url,
+						cback = function () {
+							$(twLogin).off("unload", cback);
+							var tTimer = setInterval(function () {
+								try {
+									if (twLogin.location.hostname == window.location.hostname) {
+										clearInterval(tTimer);
+										twLogin.close();
+										// We're back!
+										var location = twLogin.location;
+										var search = '';
+										try { search = location.search; } catch (e) { search = ''; }
+										clearInterval(tTimer);
+										twLogin.close();
+										// change UI
+										$root.html('<img src="' + _appointments_data.root_url + 'waiting.gif" /> ' + (l10nAppApi.please_wait || "Please hold on..."));
+										$.post(_appointments_data.ajax_url, {
+											"action": "app_twitter_login",
+											"secret": data.secret,
+											"data": search
+										}, function (data) {
+											var status = 0;
+											try { status = parseInt(data.status, 10); } catch (e) { status = 0; }
+											if (!status) { // ... handle error
+												$root.remove();
+												return false;
+											}
+											if ( data.status && data.status==1 ) {
+												$(".appointments-login_inner").text(l10nAppApi.logged_in);
+												window.location.href = window.location.href;
+											}
+											else {
+												alert(l10nAppApi.error);
+											}
+										});
 									}
-									if ( data.status && data.status==1 ) {
-										$(".appointments-login_inner").text(l10nAppApi.logged_in);
-										window.location.href = window.location.href;
-									}
-									else {
-										alert(l10nAppApi.error);
-									}
-								});
-							}
-						} catch (e) {}
-					}, 300);
+								} catch (e) {}
+							}, 300);
+						}
+					;
+					$(twLogin).on("unload", cback);
+					twLogin.location = href;
 				});
 				return false;
 			};
