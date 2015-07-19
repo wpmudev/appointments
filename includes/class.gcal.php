@@ -136,9 +136,9 @@ class AppointmentsGcal {
 	 */
 	function exception_error_handler( $exception ) {
 		// If we don't remove these GETs there will be an infinite loop
-		if ( !headers_sent() )
-			wp_redirect( add_query_arg( array( 'gcal_api_test_result' => urlencode($exception), 'gcal_import_now' => false, 'gcal_api_test' => false, 'gcal_api_pre_test' => false ) ) );
-		else {
+		if ( !headers_sent() ) {
+			wp_redirect(esc_url(add_query_arg(array('gcal_api_test_result' => urlencode($exception), 'gcal_import_now' => false, 'gcal_api_test' => false, 'gcal_api_pre_test' => false))));
+		} else {
 			// We cannot display it, so we save it
 			global $appointments;
 			$appointments->log( $exception );
@@ -167,7 +167,7 @@ class AppointmentsGcal {
 		<span class="description"><?php _e('Setting of Google Calendar API is sophisticated because of requirements and security measures of Google itself, but once it is correctly set, appointments are automatically sent to the Google calendar account. Synchronization (automatic import of Google Calendar events to Appointments+) is also possible with the API method. Clients cannot use API method; only website itself and/or service providers can use it. Note: Each service provider should carry out the below setting steps, if they want to follow their appointments on their own calendars.', 'appointments') ?></span>
 		<br />
 		<br />
-			<form method="post" action="<?php echo add_query_arg( array( 'gcal_api_test'=>false, 'gcal_api_test_result'=>false, 'gcal_api_pre_test'=>false, 'gcal_import_now'=>false) ) ?>" >
+			<form method="post" action="<?php echo esc_url(add_query_arg(array('gcal_api_test'=>false, 'gcal_api_test_result'=>false, 'gcal_api_pre_test'=>false, 'gcal_import_now'=>false))) ?>" >
 
 			<div class="postbox">
 
@@ -373,7 +373,7 @@ class AppointmentsGcal {
 		 <tr>
 			<th scope="row">&nbsp;</th>
 			<td>
-				<?php print "<a href='".add_query_arg( array( 'gcal_import_now'=>1,'gcal_api_test'=>false, 'gcal_api_test_result'=>false, 'gcal_api_worker_id' => $gcal_api_worker_id) )."'>Import and Update Events from GCal Now</a>"; ?>
+				<?php print "<a href='".esc_url(add_query_arg(array('gcal_import_now'=>1,'gcal_api_test'=>false, 'gcal_api_test_result'=>false, 'gcal_api_worker_id' => $gcal_api_worker_id)))."'>Import and Update Events from GCal Now</a>"; ?>
 				<br />
 				<span class="description"><?php _e('Clicking this link will manually import and update your Events from the selected calendar without waiting for 10 minutes. Note: Maximum 500 future events that will start until appointment limit setting are imported in the order of their starting time. Past events and all day events are not imported.', 'appointments') ?></span>
 			</td>
@@ -444,7 +444,7 @@ class AppointmentsGcal {
 		 <tr>
 			<th scope="row">&nbsp;</th>
 			<td>
-			<?php print "<a href='".add_query_arg( array( 'gcal_api_test'=>1, 'gcal_api_test_result'=>false, 'gcal_api_pre_test'=>false, 'gcal_api_worker_id' => $gcal_api_worker_id ) )."'>" . __('Test Connection', 'appointments' ) . "</a>"; ?>
+			<?php print "<a href='".esc_url(add_query_arg(array('gcal_api_test'=>1, 'gcal_api_test_result'=>false, 'gcal_api_pre_test'=>false, 'gcal_api_worker_id' => $gcal_api_worker_id)))."'>" . __('Test Connection', 'appointments' ) . "</a>"; ?>
 			<br />
 			<span class="description"><?php _e('Clicking this link will attempt to connect your GCal account and write a sample appointment which lasts 30 minutes and starts 10 minutes after your current server time. If there are some setting or connection errors, you will be informed about them.', 'appointments') ?></span>
 			</td>
