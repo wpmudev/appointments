@@ -204,10 +204,33 @@
 				<td colspan="2">
 					<input type="text" style="width:200px" name="google-client_id" value="<?php if (isset($appointments->options["google-client_id"])) echo esc_attr($appointments->options["google-client_id"]); ?>" />
 					<p>
-						<span class="description"><?php printf(__('Enter your Google App Client ID here. If you don\'t have a Google App yet, you will need to create one <a href="%s">here</a>', 'appointments'), 'https://console.developers.google.com/'); ?></span>
+						<span class="description"><?php printf(__('Enter your Google App Client ID here. If you don\'t have a Google App yet, you will need to create one <a href="%s">here</a>', 'appointments'), 'https://console.developers.google.com/'); ?>.</span>
+						<span class="description"><a class="app-info_trigger" data-target="gauth-instructions" href="#gauth-instructions"><?php _e('Show me how', 'appointments'); ?></a></span>
 						<br />
-						<span class="description"><small><?php _e('If you leave this field empty, Google Auth will revert to legacy OpenID.', 'appointments'); ?></small></span>
+						<span class="description">
+							<small>
+								<?php _e('If you leave this field empty, Google Auth will revert to legacy OpenID.', 'appointments'); ?>
+								<b><?php _e('The legacy OpenID is deprecated by Google, and will not work for new domains.', 'appointments'); ?></b>
+							</small>
+						</span>
 					</p>
+					<div class="description app-info_target gauth-instructions">
+							<h4><?php _e('Creating and setting up a Google Application to work with Appointments Plus authentication', 'appointments'); ?></h4>
+							<p><?php _e('Before we begin, you need to <a target="_blank" href="https://console.developers.google.com/">create a Google Application', 'appointments'); ?></a>.</p>
+							<p><?php _e('To do so, follow these steps:', 'appointments'); ?></p>
+							<ol>
+								<li><a target="_blank" href="https://console.developers.google.com/"><?php _e('Create your application', 'appointments'); ?></a></li>
+								<li><?php _e('Click <em>Create Project</em> button', 'appointments'); ?></li>
+								<li><?php _e('In the left sidebar, select <em>APIs & auth</em>.', 'appointments'); ?></li>
+								<li><?php _e('Find the <em>Google+ API</em> service and set its status to <em>ON</em>.', 'appointments'); ?></li>
+								<li><?php _e('In the sidebar, select <em>Credentials</em>, then in the <em>OAuth</em> section of the page, select <em>Create New Client ID</em>.', 'appointments'); ?></li>
+								<li><?php _e('In the <em>Application type</em> section of the dialog, select <em>Web application</em>.', 'appointments'); ?></li>
+								<li><?php _e('In the <em>Authorized JavaScript origins</em> field, enter the origin for your app. You can enter multiple origins to allow for your app to run on different protocols, domains, or subdomains.', 'appointments'); ?></li>
+								<li><?php _e('In the <em>Authorized redirect URI</em> field, delete the default value.', 'appointments'); ?></li>
+								<li><?php _e('Select <em>Create Client ID</em>.', 'appointments'); ?></li>
+								<li><?php _e('Copy the value of the field labeled <em>Client ID</em>, and enter it in the text field in plugin settings labeled <strong>Google Client ID</strong>', 'appointments'); ?></li>
+							</ol>
+					</div>
 
 				</td>
 			</tr>
