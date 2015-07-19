@@ -71,3 +71,12 @@ a.app-remove_break, a.app-remove_break:hover, a.app-remove_break:active { color:
 	width: 49%;
 	margin-right: .5%;
 }
+
+.wp-admin .app-info_trigger {
+	margin-left: 1em;
+	background: url(../images/information.png) top left no-repeat;
+	padding-left: 18px;
+}
+.wp-admin .app-info_target {
+	display: none;
+}

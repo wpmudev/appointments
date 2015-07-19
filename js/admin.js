@@ -84,4 +84,29 @@ $(function () {
 	});
 });
 
+
+// Hook up info trigger/target resolution
+function toggle_target (e) {
+	var $trigger = $(this),
+		target = false,
+		$target = false
+	;
+	if (e && e.preventDefault) e.preventDefault();
+	if (e && e.stopPropagation) e.stopPropagation();
+
+	target = $trigger.attr("data-target");
+	if (!target) return false;
+
+	$target = $(".app-info_target." + target);
+	if (!$target.length) return false;
+
+	if ($target.is(":visible")) $target.hide("fast");
+	else $target.show("fast");
+
+	return false;
+}
+$(function () {
+	$(document).on("click", ".app-info_trigger", toggle_target);
+});
+
 })(jQuery);
