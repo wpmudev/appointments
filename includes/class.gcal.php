@@ -458,136 +458,49 @@ class AppointmentsGcal {
 	 * Display instructions for setup
 	 */
 	function instructions( ) {
-		  ?>
-		 <tr>
+		?>
+		<tr>
 			<th scope="row"><?php _e('Instructions', 'appointments') ?></th>
 			<td>
 			<?php _e('To set up Google Calendar API, please click the "i" icon and carefully follow these steps:', 'appointments') ?>
-			&nbsp;&nbsp;<a href="javascript:void(0)" class="info-button" title="<?php _e('Click to toggle instructions', 'appointments')?>"><img src="<?php echo $this->plugin_url . '/images/information.png'?>" alt="" /></a>
-			<div class="api-instructions" style="display:none">
-			<?php printf( __('Tip: There is a video tutorial showing these steps %s.', 'appointments'), '<a href="http://youtu.be/hul60oJ1Eiw" target="_blank">' . __('here', 'appointments'). '</a>') ?>
+			<span class="description"><a href="#gcal-instructions" data-target="api-instructions" class="app-info_trigger" title="<?php _e('Click to toggle instructions', 'appointments')?>"><?php _e('Show me how', 'appointments'); ?></a></span>
+			<div class="description app-info_target api-instructions">
+				<?php printf( __('Tip: There is a video tutorial showing these steps %s.', 'appointments'), '<a href="http://youtu.be/hul60oJ1Eiw" target="_blank">' . __('here', 'appointments'). '</a>') ?>
 				<ul style="list-style-type:decimal;">
-				<li>
-				<?php printf( __('Google Calendar API requires php V5.3+ and some php extensions. Click this link to check if your server installation meets those requirements: %s', 'appointments'), "<a href='".add_query_arg( array( 'gcal_api_test'=>1, 'gcal_api_test_result'=>false, 'gcal_api_pre_test'=>1) )."'>" . __('Check Requirements', 'appointments' ) . "</a>") ?>
-				</li>
-
-				<li>
-				<?php printf( __('Go to Google apis console by clicking %s. Login to your Google account if you are not already logged in.', 'appointments'), '<a href="https://code.google.com/apis/console/" target="_blank">https://code.google.com/apis/console/</a>') ?>
-				</li>
-
-				<li>
-				<?php _e('Create a new project using the left side pane. Name the project &quot;Appointments&quot; (or use your chosen name instead)', 'appointments') ?>
-				</li>
-
-				<li>
-				<?php _e('Click "Services" from left side pane and set "Calendar API" as ON.', 'appointments') ?>
-				</li>
-
-				<li>
-				<?php _e('Click "API Access" from left side pane.', 'appointments') ?>
-				</li>
-
-				<li>
-				<?php _e('Click "Create an OAuth 2.0 Client ID" button.', 'appointments') ?>
-				</li>
-
-				<li>
-				<?php _e('Enter a Product Name, e.g. A+, inside the opening pop-up. Click Next.', 'appointments') ?>
-				</li>
-
-				<li>
-				<?php _e('Select "Service account" under Client ID Settings in the new pop-up.', 'appointments') ?>
-				</li>
-
-				<li>
-				<?php _e('Click "create Client ID". Getting the result may take a few seconds.', 'appointments') ?>
-				</li>
-
-				<li>
-				<?php _e('Click "Download private key" button in the opening pop-up.', 'appointments') ?>
-				</li>
-
-				<li>
-				<?php printf( __('Using your FTP client program, copy this key file to folder: %s . This file is required as you will grant access to your Google Calendar account even if you are not online. So this file serves as a proof of your consent to access to your Google calendar account. Note: This file cannot be uploaded in any other way. If you do not have FTP access, ask the website admin to do it for you.', 'appointments'), $this->plugin_dir .'/includes/gcal/key/' ) ?>
-				</li>
-
-				<li>
-				<?php  _e('Enter the name of the key file to "Key file name" setting of Appointments+. Exclude the extention .p12.', 'appointments') ?>
-				</li>
-
-				<li>
-				<?php  _e('Copy "Email address" setting of Google apis console and paste it to "Service account email address" setting of Appointments+.', 'appointments') ?>
-				</li>
-
-				<li>
-				<?php  printf(__('Open your Google Calendar by clicking this link: %s', 'appointments'), '<a href="https://www.google.com/calendar/render" target="_blank">https://www.google.com/calendar/render</a>') ?>
-				</li>
-
-				<li>
-				<?php  printf( __('Create a new Calendar by selecting "my Calendars > Create new calendar" on left side pane. <b>Try NOT to use your primary calendar. If you have to, please see this post: </b> %s', 'appointments'), '<a href="http://premium.wpmudev.org/forums/topic/appointments-error-1#post-376708" target="_blank">'. __( 'Forum', 'appointments'). '</a>') ?>
-				</li>
-
-				<li>
-				<?php  _e('Give a name to the new calendar, e.g. Appointments test calendar. <b>Check that Calendar Time Zone setting matches with time zone setting of your WordPress website.</b> Otherwise there will be a time shift.', 'appointments') ?>
-				</li>
-
-				<li>
-				<?php  _e('Paste already copied "Email address" setting of Google apis console to "Person" field under "Share with specific person".', 'appointments') ?>
-				</li>
-
-				<li>
-				<?php  _e('Set "Permission Settings" of this person as "make changes to events".', 'appointments') ?>
-				</li>
-
-				<li>
-				<?php  _e('Click "Add Person".', 'appointments') ?>
-				</li>
-
-				<li>
-				<?php  _e('Click "Create Calendar".', 'appointments') ?>
-				</li>
-
-				<li>
-				<?php  _e('Select the created calendar and click "Calendar settings".', 'appointments') ?>
-				</li>
-
-				<li>
-				<?php  _e('Copy "Calendar ID" value on Calendar Address row.', 'appointments') ?>
-				</li>
-
-				<li>
-				<?php  _e('Paste this value to "Calendar to be used" field of Appointments+ settings.', 'appointments') ?>
-				</li>
-
-				<li>
-				<?php  _e('Select the desired Integration mode: A+->GCal or A+<->GCal.', 'appointments') ?>
-				</li>
-
-				<li>
-				<?php  _e('Click "Save Settings" on Appointments+ settings.', 'appointments') ?>
-				</li>
-
-				<li>
-				<?php  _e('After these stages, you have set up Google Calendar API. To test the connection, click the "Test Connection" link which should be visible after you clicked save settings button.', 'appointments') ?>
-				</li>
-
-				<li>
-				<?php  _e('If you get a success message, you should see a test event inserted to the Google Calendar and you are ready to go. If you get an error message, double check your settings.', 'appointments') ?>
-				</li>
-
-			</ul>
+					<li><?php printf( __('Google Calendar API requires php V5.3+ and some php extensions. Click this link to check if your server installation meets those requirements: %s', 'appointments'), "<a href='".esc_url(add_query_arg(array( 'gcal_api_test'=>1, 'gcal_api_test_result'=>false, 'gcal_api_pre_test'=>1)))."'>" . __('Check Requirements', 'appointments' ) . "</a>") ?></li>
+					<li><?php printf( __('Go to Google apis console by clicking %s. Login to your Google account if you are not already logged in.', 'appointments'), '<a href="https://code.google.com/apis/console/" target="_blank">https://code.google.com/apis/console/</a>') ?></li>
+					<li><?php _e('Create a new project using the left side pane. Name the project &quot;Appointments&quot; (or use your chosen name instead)', 'appointments') ?></li>
+					<li><?php _e('Click "Services" from left side pane and set "Calendar API" as ON.', 'appointments') ?></li>
+					<li><?php _e('Click "API Access" from left side pane.', 'appointments') ?></li>
+					<li><?php _e('Click "Create an OAuth 2.0 Client ID" button.', 'appointments') ?></li>
+					<li><?php _e('Enter a Product Name, e.g. A+, inside the opening pop-up. Click Next.', 'appointments') ?></li>
+					<li><?php _e('Select "Service account" under Client ID Settings in the new pop-up.', 'appointments') ?></li>
+					<li><?php _e('Click "create Client ID". Getting the result may take a few seconds.', 'appointments') ?></li>
+					<li><?php _e('Click "Download private key" button in the opening pop-up.', 'appointments') ?></li>
+					<li><?php printf( __('Using your FTP client program, copy this key file to folder: %s . This file is required as you will grant access to your Google Calendar account even if you are not online. So this file serves as a proof of your consent to access to your Google calendar account. Note: This file cannot be uploaded in any other way. If you do not have FTP access, ask the website admin to do it for you.', 'appointments'), $this->plugin_dir .'/includes/gcal/key/' ) ?></li>
+					<li><?php  _e('Enter the name of the key file to "Key file name" setting of Appointments+. Exclude the extention .p12.', 'appointments') ?></li>
+					<li><?php  _e('Copy "Email address" setting of Google apis console and paste it to "Service account email address" setting of Appointments+.', 'appointments') ?></li>
+					<li><?php  printf(__('Open your Google Calendar by clicking this link: %s', 'appointments'), '<a href="https://www.google.com/calendar/render" target="_blank">https://www.google.com/calendar/render</a>') ?></li>
+					<li><?php  printf( __('Create a new Calendar by selecting "my Calendars > Create new calendar" on left side pane. <b>Try NOT to use your primary calendar. If you have to, please see this post: </b> %s', 'appointments'), '<a href="http://premium.wpmudev.org/forums/topic/appointments-error-1#post-376708" target="_blank">'. __( 'Forum', 'appointments'). '</a>') ?></li>
+					<li><?php  _e('Give a name to the new calendar, e.g. Appointments test calendar. <b>Check that Calendar Time Zone setting matches with time zone setting of your WordPress website.</b> Otherwise there will be a time shift.', 'appointments') ?></li>
+					<li><?php  _e('Paste already copied "Email address" setting of Google apis console to "Person" field under "Share with specific person".', 'appointments') ?></li>
+					<li><?php  _e('Set "Permission Settings" of this person as "make changes to events".', 'appointments') ?></li>
+					<li><?php  _e('Click "Add Person".', 'appointments') ?></li>
+					<li><?php  _e('Click "Create Calendar".', 'appointments') ?></li>
+					<li><?php  _e('Select the created calendar and click "Calendar settings".', 'appointments') ?></li>
+					<li><?php  _e('Copy "Calendar ID" value on Calendar Address row.', 'appointments') ?></li>
+					<li><?php  _e('Paste this value to "Calendar to be used" field of Appointments+ settings.', 'appointments') ?></li>
+					<li><?php  _e('Select the desired Integration mode: A+->GCal or A+<->GCal.', 'appointments') ?></li>
+					<li><?php  _e('Click "Save Settings" on Appointments+ settings.', 'appointments') ?></li>
+					<li><?php  _e('After these stages, you have set up Google Calendar API. To test the connection, click the "Test Connection" link which should be visible after you clicked save settings button.', 'appointments') ?></li>
+					<li><?php  _e('If you get a success message, you should see a test event inserted to the Google Calendar and you are ready to go. If you get an error message, double check your settings.', 'appointments') ?></li>
+				</ul>
 			</div>
 			</td>
 		</tr>
-		<script type="text/javascript">
-		jQuery(document).ready(function($){
-			$(".info-button").click(function(){
-				$(".api-instructions").toggle('fast');
-			});
-		});
-		</script>
-			<?php
+		<?php
 	}
+
 	/**
 	 * Show results of the test
 	 * @param message: Message to be displayed
