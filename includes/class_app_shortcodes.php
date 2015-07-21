@@ -1084,7 +1084,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 				$(".app-my-appointments-cancel").change( function() {
 					if ( $(this).is(":checked") ) {
 						var cancel_box = $(this);
-						if ( !confirm("'. esc_js( __("Are you sure to cancel the selected appointment?","appointments") ) .'") ) {
+						if ( !confirm("'. esc_js( __("Are you sure you want to cancel the selected appointment?","appointments") ) .'") ) {
 							cancel_box.attr("checked", false);
 							return false;
 						}
