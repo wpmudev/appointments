@@ -6982,6 +6982,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		}
 		
 		$data['user'] = $_POST['user'];
+		$data['email'] = !empty($_POST['email']) && is_email($_POST['email']) ? $_POST['email'] : '';
 		$data['name'] = $_POST['name'];
 		$data['phone'] = $_POST['phone'];
 		$data['address'] = $_POST['address'];
