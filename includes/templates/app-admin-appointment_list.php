@@ -85,7 +85,7 @@ else
 			<select name="app_new_status" style='float:none;'>
 				<option value=""><?php _e('Bulk status change','appointments'); ?></option>
 				<?php foreach ( $appointments->get_statuses() as $value=>$name ) {
-					echo '<option value="'.$value.'" class="hide-if-no-js">'.$name.'</option>';
+					echo '<option value="' . esc_attr($value) . '" class="hide-if-no-js">'.$name.'</option>';
 				} ?>
 			</select>
 			<input type="submit" class="button app-change-status-btn" value="<?php _e('Change Status','appointments'); ?>" />
@@ -142,7 +142,7 @@ else
 							$selected = " selected='selected' ";
 						else
 							$selected = "";
-						echo '<option '.$selected.' value="'.$service->ID.'">'. $appointments->get_service_name( $service->ID ) .'</option>';
+						echo '<option '.$selected.' value="' . esc_attr($service->ID) . '">'. $appointments->get_service_name( $service->ID ) .'</option>';
 					}
 				}
 				?>
@@ -166,7 +166,7 @@ else
 							$selected = " selected='selected' ";
 						else
 							$selected = "";
-						echo '<option '.$selected.' value="'.$worker->ID.'">'. $appointments->get_worker_name( $worker->ID ) .'</option>';
+						echo '<option '.$selected.' value="' . esc_attr($worker->ID) . '">'. $appointments->get_worker_name( $worker->ID ) .'</option>';
 					}
 				}
 				?>

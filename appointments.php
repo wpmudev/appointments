@@ -6739,10 +6739,11 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 
 		$html = '';
 		$html .= '<tr class="inline-edit-row inline-edit-row-post quick-edit-row-post">';
-		if ( isset( $_POST["col_len"] ) )
-			$html .= '<td colspan="'.$_POST["col_len"].'" class="colspanchange">';
-		else
-			$html .= '<td colspan="6" class="colspanchange">';
+
+		$html .= isset($_POST['col_len']) && is_numeric($_POST['col_len'])
+			? '<td colspan="' . (int)$_POST["col_len"] . '" class="colspanchange">'
+			: '<td colspan="6" class="colspanchange">'
+		;
 
 		$html .= '<fieldset class="inline-edit-col-left" style="width:33%">';
 		$html .= '<div class="inline-edit-col">';
@@ -6756,35 +6757,35 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		$html .= '<label>';
 		$html .= '<span class="title">'.$this->get_field_name('name'). '</span>';
 		$html .= '<span class="input-text-wrap">';
-		$html .= '<input type="text" name="cname" class="ptitle" value="'.stripslashes( $app->name ).'" />';
+		$html .= '<input type="text" name="cname" class="ptitle" value="' . esc_attr(stripslashes($app->name)) . '" />';
 		$html .= '</span>';
 		$html .= '</label>';
 		/* Client email */
 		$html .= '<label>';
 		$html .= '<span class="title">'.$this->get_field_name('email'). '</span>';
 		$html .= '<span class="input-text-wrap">';
-		$html .= '<input type="text" name="email" class="ptitle" value="'.$app->email.'" />';
+		$html .= '<input type="text" name="email" class="ptitle" value="' . esc_attr($app->email) . '" />';
 		$html .= '</span>';
 		$html .= '</label>';
 		/* Client Phone */
 		$html .= '<label>';
 		$html .= '<span class="title">'.$this->get_field_name('phone'). '</span>';
 		$html .= '<span class="input-text-wrap">';
-		$html .= '<input type="text" name="phone" class="ptitle" value="'.stripslashes( $app->phone ).'" />';
+		$html .= '<input type="text" name="phone" class="ptitle" value="' . esc_attr(stripslashes($app->phone)) . '" />';
 		$html .= '</span>';
 		$html .= '</label>';
 		/* Client Address */
 		$html .= '<label>';
 		$html .= '<span class="title">'.$this->get_field_name('address'). '</span>';
 		$html .= '<span class="input-text-wrap">';
-		$html .= '<input type="text" name="address" class="ptitle" value="'.stripslashes( $app->address ).'" />';
+		$html .= '<input type="text" name="address" class="ptitle" value="' . esc_attr(stripslashes($app->address)) . '" />';
 		$html .= '</span>';
 		$html .= '</label>';
 		/* Client City */
 		$html .= '<label>';
 		$html .= '<span class="title">'.$this->get_field_name('city'). '</span>';
 		$html .= '<span class="input-text-wrap">';
-		$html .= '<input type="text" name="city" class="ptitle" value="'.stripslashes( $app->city ).'" />';
+		$html .= '<input type="text" name="city" class="ptitle" value="' . esc_attr(stripslashes($app->city)) . '" />';
 		$html .= '</span>';
 		$html .= '</label>';
 		$html .= apply_filters('app-appointments_list-edit-client', '', $app);
@@ -6805,7 +6806,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 					$sel = ' selected="selected"';
 				else
 					$sel = '';
-				$html .= '<option value="'.$service->ID.'"'.$sel.'>'. stripslashes( $service->name ) . '</option>';
+				$html .= '<option value="' . esc_attr($service->ID) . '"'.$sel.'>'. stripslashes( $service->name ) . '</option>';
 			}
 		}
 		$html .= '</select>';
@@ -6824,7 +6825,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 				}
 				else
 					$sel = '';
-				$html .= '<option value="'.$worker->ID.'"'.$sel.'>'. $this->get_worker_name( $worker->ID, false ) . '</option>';
+				$html .= '<option value="' . esc_attr($worker->ID) . '"'.$sel.'>'. $this->get_worker_name( $worker->ID, false ) . '</option>';
 			}
 		}
 		$html .= '</select>';
@@ -6833,7 +6834,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		$html .= '<label>';
 		$html .= '<span class="title">'.__('Price', 'appointments'). '</span>';
 		$html .= '<span class="input-text-wrap">';
-		$html .= '<input type="text" name="price" style="width:50%" class="ptitle" value="'.$app->price.'" />';
+		$html .= '<input type="text" name="price" style="width:50%" class="ptitle" value="' . esc_attr($app->price) . '" />';
 		$html .= '</span>';
 		$html .= '</label>';
 		$html .= '</label>';
@@ -6857,7 +6858,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		$html .= '<label style="float:left;width:65%">';
 		$html .= '<span class="title">'.__('Start', 'appointments'). '</span>';
 		$html .= '<span class="input-text-wrap" >';
-		$html .= '<input type="text" name="date" class="datepicker" size="12" value="'.$start_date.'" data-timestamp="' . esc_attr($start_date_timestamp) . '"  />';
+		$html .= '<input type="text" name="date" class="datepicker" size="12" value="' . esc_attr($start_date) . '" data-timestamp="' . esc_attr($start_date_timestamp) . '"  />';
 		$html .= '</label>';
 		$html .= '<label style="float:left;width:30%; padding-left:5px;">';
 
@@ -6900,7 +6901,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		$html .= '<label>';
 		$html .= '<span class="title">'.$this->get_field_name('note'). '</span>';
 		$html .= '<textarea cols="22" rows=1">';
-		$html .= stripslashes( $app->note );
+		$html .= esc_textarea(stripslashes($app->note));
 		$html .= '</textarea>';
 		$html .= '</label>';
 		/* Status */
@@ -6953,9 +6954,9 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			$js = 'href="javascript:void(0)"';
 			$title = __('Click to save or update', 'appointments');
 		}
-		$html .= '<a '.$js.' title="'.$title.'" class="button-primary save alignright">'.__('Save / Update','appointments').'</a>';
+		$html .= '<a '.$js.' title="' . esc_attr($title) . '" class="button-primary save alignright">'.__('Save / Update','appointments').'</a>';
 		$html .= '<img class="waiting" style="display:none;" src="'.admin_url('images/wpspin_light.gif').'" alt="">';
-		$html .= '<input type="hidden" name="app_id" value="'.$app->ID.'">';
+		$html .= '<input type="hidden" name="app_id" value="' . esc_attr($app->ID) . '">';
 		$html .= '<span class="error" style="display:none"></span>';
 		$html .= '<br class="clear">';
 		$html .= '</p>';

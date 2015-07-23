@@ -56,7 +56,7 @@ if ( true || isset( $_GET["type"] ) && 'removed' == $_GET["type"] ) {
 		<?php
 			foreach($columns as $key => $col) {
 				?>
-				<th style="" class="manage-column column-<?php echo $key; ?> app-column-<?php echo $key; ?>" id="<?php echo $key; ?>" scope="col"><?php echo $col; ?></th>
+				<th style="" class="manage-column column-<?php echo esc_attr($key); ?> app-column-<?php echo esc_attr($key); ?>" id="<?php echo esc_attr($key); ?>" scope="col"><?php echo $col; ?></th>
 				<?php
 			}
 		?>
@@ -69,7 +69,7 @@ if ( true || isset( $_GET["type"] ) && 'removed' == $_GET["type"] ) {
 			reset($columns);
 			foreach($columns as $key => $col) {
 				?>
-				<th style="" class="manage-column column-<?php echo $key; ?> app-column-<?php echo $key; ?>" id="<?php echo $key; ?>" scope="col"><?php echo $col; ?></th>
+				<th style="" class="manage-column column-<?php echo esc_attr($key); ?> app-column-<?php echo esc_attr($key); ?>" id="<?php echo esc_attr($key); ?>" scope="col"><?php echo $col; ?></th>
 				<?php
 			}
 		?>
@@ -88,7 +88,7 @@ if ( true || isset( $_GET["type"] ) && 'removed' == $_GET["type"] ) {
 					if ( true || isset( $_GET["type"] ) && 'removed' == $_GET["type"] ) {
 					?>
 						<td class="column-delete check-column app-check-column">
-						<input type="checkbox" name="app[]" value="<?php echo $app->ID;?>" />
+						<input type="checkbox" name="app[]" value="<?php echo esc_attr($app->ID);?>" />
 						</td>
 
 					<?php
@@ -100,7 +100,7 @@ if ( true || isset( $_GET["type"] ) && 'removed' == $_GET["type"] ) {
 						</td>
 						<td class="column-user">
 							<?php
-								echo $appointments->get_client_name( $app->ID );
+								echo stripslashes($appointments->get_client_name($app->ID));
 							?>
 							<div class="row-actions">
 							<a href="javascript:void(0)" class="app-inline-edit"><?php if ( 'reserved' == $app->status ) _e('See Details (Cannot be edited)', 'appointments'); else _e('See Details and Edit', 'appointments') ?></a>
