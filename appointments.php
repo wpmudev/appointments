@@ -6971,31 +6971,46 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		$app_id = $_POST["app_id"];
 		$email_sent = false;
 		global $wpdb, $current_user;
-		$app = $wpdb->get_row( $wpdb->prepare("SELECT * FROM {$this->app_table} WHERE ID=%d", $app_id) );
-
+		$app = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->app_table} WHERE ID=%d", $app_id));
 		$data = array();
-		if ( $app != null )
+		
+		if ($app != null) {
 			$data['ID'] = $app_id;
-		else {
-			$data['created']	= date("Y-m-d H:i:s", $this->local_time );
-			$data['ID'] 		= 'NULL';
+		} else {
+			$data['created'] = date("Y-m-d H:i:s", $this->local_time );
+			$data['ID'] = 'NULL';
 		}
-		$data['user']		= $_POST['user'];
-		$data['email']		= $_POST['email'];
-		$data['name']		= $_POST['name'];
-		$data['phone']		= $_POST['phone'];
-		$data['address'] 	= $_POST['address'];
-		$data['city']		= $_POST['city'];
-		$data['service']	= $_POST['service'];
-		$service			= $this->get_service( $_POST['service'] );
-		$data['worker']		= $_POST['worker'];
-		$data['price']		= $_POST['price'];
+		
+		$data['user'] = $_POST['user'];
+		$data['name'] = $_POST['name'];
+		$data['phone'] = $_POST['phone'];
+		$data['address'] = $_POST['address'];
+		$data['city'] = $_POST['city'];
+		$data['service'] = $_POST['service'];
+		$service = $this->get_service( $_POST['service'] );
+		$data['worker'] = $_POST['worker'];
+		$data['price'] = $_POST['price'];
 		// Clear comma from date format. It creates problems for php5.2
-		$data['start']		= date( 'Y-m-d H:i:s', strtotime( str_replace( ',','', $this->to_us( $_POST['date'] ) ). " " . $this->to_military( $_POST['time'] ) ) );
-		$data['end']		= date( 'Y-m-d H:i:s', strtotime( str_replace( ',','', $this->to_us( $_POST['date'] ) ). " " . $this->to_military( $_POST['time'] ) ) + $service->duration *60 );
-		$data['note']		= $_POST['note'];
-		$data['status']		= $_POST['status'];
-		$resend				= $_POST["resend"];
+		$data['start']	= date(
+			'Y-m-d H:i:s', 
+			strtotime(
+				str_replace(',', '', $this->to_us($_POST['date'])) . 
+				" " . 
+				date('H:i', strtotime($_POST['time']))
+			)
+		);
+		$data['end'] = date(
+			'Y-m-d H:i:s', 
+			strtotime(
+				str_replace(',', '', $this->to_us($_POST['date'])) . 
+				" " . 
+				date('H:i', strtotime($_POST['time']))
+			)
+			+ ($service->duration * 60)
+		);
+		$data['note'] = $_POST['note'];
+		$data['status'] = $_POST['status'];
+		$resend = $_POST["resend"];
 
 		$data = apply_filters('app-appointment-inline_edit-save_data', $data);
 
