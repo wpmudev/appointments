@@ -6870,12 +6870,16 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		$min_secs = 60 * apply_filters( 'app_admin_min_time', $min_time );
 		$html .= '<select name="time" >';
 		for ( $t=0; $t<3600*24; $t=$t+$min_secs ) {
+			$s = array();
 			$dhours = $this->secs2hours( $t ); // Hours in 08:30 format
-			if ( $dhours == $start_time )
-				$s = " selected='selected'";
-			else $s = '';
 
-			$html .= '<option'.$s.'>';
+			$s[] = $dhours == $start_time
+				? 'selected="selected"'
+				: ''
+			;
+			$s[] = 'value="' . esc_attr($this->secs2hours($t, 'H:i')) . '"';
+
+			$html .= '<option ' . join(' ', array_values(array_filter($s))) . '>';
 			$html .= $dhours;
 			$html .= '</option>';
 		}
