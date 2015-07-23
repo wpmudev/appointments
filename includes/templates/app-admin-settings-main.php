@@ -210,7 +210,7 @@
 						<span class="description">
 							<small>
 								<?php _e('If you leave this field empty, Google Auth will revert to legacy OpenID.', 'appointments'); ?>
-								<b><?php _e('The legacy OpenID is deprecated by Google, and will not work for new domains.', 'appointments'); ?></b>
+								<b><?php _e('The legacy OpenID has been deprecated by Google, and will not work if the domain for your site wasn\'t set up to use it before May 2014.', 'appointments'); ?></b>
 							</small>
 						</span>
 					</p>
