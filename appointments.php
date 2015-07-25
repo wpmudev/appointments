@@ -1534,15 +1534,13 @@ class Appointments {
 			$user_email = $userdata->email;
 
 			$user_name = $userdata->display_name;
-			if ( !$user_name ){
-                                $first_name = get_user_meta($worker, 'first_name', true);
-                                $last_name = get_user_meta($worker, 'last_name', true);
-                                $user_name = $first_name . " " . $last_name;
-                        }
-			if ( "" == trim( !$user_name ) )
-				$user_name = $userdata->user_login;
-		}
-		else{
+			if (!$user_name) {
+                $first_name = get_user_meta($worker, 'first_name', true);
+                $last_name = get_user_meta($worker, 'last_name', true);
+                $user_name = $first_name . " " . $last_name;
+            }
+			if ("" == trim($user_name)) $user_name = $userdata->user_login;
+		} else {
 			$user_id = 0;
 			$user_email = '';
 			$user_name = '';
