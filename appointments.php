@@ -1584,59 +1584,49 @@ class Appointments {
 			;
 		}
 
-		if ( isset( $_POST["app_name"] ) )
-			$name = sanitize_text_field( $_POST["app_name"] );
-		else
-			$name = $user_name;
-
+		$name = !empty($_POST['app_name'])
+			? sanitize_text_field($_POST["app_name"])
+			: $user_name
+		;
 		$name_check = apply_filters( "app_name_check", true, $name );
-		if ( !$name_check )
-			$this->json_die( 'name' );
+		if (!$name_check) $this->json_die( 'name' );
 
-		if ( isset( $_POST["app_email"] ) )
-			$email = $_POST["app_email"];
-		else
-			$email = $user_email;
+		$email = !empty($_POST['app_email']) && is_email($_POST['app_email'])
+			? $_POST['app_email']
+			: $user_email
+		;
+		if ($this->options["ask_email"] && !is_email($email)) $this->json_die( 'email' );
 
-		if ( $this->options["ask_email"] && !is_email( $email ) )
-			$this->json_die( 'email' );
+		$phone = !empty($_POST['app_phone'])
+			? sanitize_text_field($_POST["app_phone"])
+			: ''
+		;
+		$phone_check = apply_filters("app_phone_check", true, $phone);
+		if (!$phone_check) $this->json_die('phone');
 
-		if ( isset( $_POST["app_phone"] ) )
-			$phone = sanitize_text_field( $_POST["app_phone"] );
-		else
-			$phone = '';
+		$address = !empty($_POST['app_address'])
+			? sanitize_text_field($_POST["app_address"])
+			: ''
+		;
+		$address_check = apply_filters("app_address_check", true, $address);
+		if (!$address_check) $this->json_die('address');
 
-		$phone_check = apply_filters( "app_phone_check", true, $phone );
-		if ( !$phone_check )
-			$this->json_die( 'phone' );
+		$city = !empty($_POST['app_city'])
+			? sanitize_text_field($_POST["app_city"])
+			: ''
+		;
+		$city_check = apply_filters("app_city_check", true, $city);
+		if (!$city_check) $this->json_die( 'city' );
 
-		if ( isset( $_POST["app_address"] ) )
-			$address = sanitize_text_field( $_POST["app_address"] );
-		else
-			$address = '';
+		$note = !empty($_POST['app_note'])
+			? sanitize_text_field($_POST["app_note"])
+			: ''
+		;
 
-		$address_check = apply_filters( "app_address_check", true, $address );
-		if ( !$address_check )
-			$this->json_die( 'address' );
-
-		if ( isset( $_POST["app_city"] ) )
-			$city = sanitize_text_field( $_POST["app_city"] );
-		else
-			$city = '';
-
-		$city_check = apply_filters( "app_city_check", true, $city );
-		if ( !$city_check )
-			$this->json_die( 'city' );
-
-		if ( isset( $_POST["app_note"] ) )
-			$note = sanitize_text_field( $_POST["app_note"] );
-		else
-			$note = '';
-
-		if ( isset( $_POST["app_gcal"] ) && $_POST["app_gcal"] )
-			$gcal = $_POST["app_gcal"];
-		else
-			$gcal = '';
+		$gcal = !empty($_POST['app_gcal'])
+			? $_POST['app_gcal']
+			: ''
+		;
 
 		do_action('app-additional_fields-validate');
 
