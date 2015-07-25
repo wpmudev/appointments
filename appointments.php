@@ -1515,20 +1515,26 @@ class Appointments {
 	 */
 	function post_confirmation() {
 
-		if ( !$this->check_spam() )
-			die( json_encode( array("error"=>apply_filters( 'app_spam_message',__( 'You have already applied for an appointment. Please wait until you hear from us.', 'appointments')))));
+		if (!$this->check_spam()) {
+			die(json_encode(array(
+				"error" => apply_filters(
+					'app_spam_message',
+					__( 'You have already applied for an appointment. Please wait until you hear from us.', 'appointments')
+				),
+			)));
+		}
 
 		global $wpdb, $current_user, $post;
 
-		$values 		= explode( ":", $_POST["value"] );
-		$location 		= $values[0];
-		$service 		= $values[1];
-		$worker 		= $values[2];
-		$start 			= $values[3];
-		$end 			= $values[4];
-		$post_id		= $values[5];
+		$values = explode( ":", $_POST["value"] );
+		$location = $values[0];
+		$service = $values[1];
+		$worker = $values[2];
+		$start = $values[3];
+		$end = $values[4];
+		$post_id = $values[5];
 
-		if ( is_user_logged_in( ) ) {
+		if (is_user_logged_in()) {
 			$user_id = $current_user->ID;
 			$userdata = get_userdata( $current_user->ID );
 			$user_email = $userdata->email;
@@ -1554,15 +1560,15 @@ class Appointments {
 
 		// Default status
 		$status = 'pending';
-
-		if ( 'yes' != $this->options["payment_required"] && isset( $this->options["auto_confirm"] ) && 'yes' == $this->options["auto_confirm"] )
+		if ('yes' != $this->options["payment_required"] && isset($this->options["auto_confirm"]) && 'yes' == $this->options["auto_confirm"]) {
 			$status = 'confirmed';
+		}
 
 		// We may have 2 prices now: 1) Service full price, 2) Amount that will be paid to Paypal
-		$price = $this->get_price( );
-		$price = apply_filters( 'app_post_confirmation_price', $price, $service, $worker, $start, $end );
-		$paypal_price = $this->get_price( true );
-		$paypal_price = apply_filters( 'app_post_confirmation_paypal_price', $paypal_price, $service, $worker, $start, $end );
+		$price = $this->get_price();
+		$price = apply_filters('app_post_confirmation_price', $price, $service, $worker, $start, $end);
+		$paypal_price = $this->get_price(true);
+		$paypal_price = apply_filters('app_post_confirmation_paypal_price', $paypal_price, $service, $worker, $start, $end);
 
 		// Break here - is the appointment free and, if so, shall we auto-confirm?
 		if (
@@ -1635,43 +1641,51 @@ class Appointments {
 		do_action('app-additional_fields-validate');
 
 		// It may be required to add additional data here
-		$note = apply_filters( 'app_note_field', $note );
+		$note = apply_filters('app_note_field', $note);
 
-		$service_result = $this->get_service( $service );
+		$service_result = $this->get_service($service);
 
-		if ( $service_result !== null )
-			$duration = $service_result->duration;
-		if ( !$duration )
-			$duration = $this->get_min_time(); // In minutes
+		if ($service_result !== null) $duration = $service_result->duration;
+		if (!$duration) $duration = $this->get_min_time(); // In minutes
 
 		$duration = apply_filters( 'app_post_confirmation_duration', $duration, $service, $worker, $user_id );
 
-		if ( $this->is_busy( $start,  $start + ($duration * 60), $this->get_capacity() ) )
-			die( json_encode( array("error"=>apply_filters( 'app_booked_message', __( 'We are sorry, but this time slot is no longer available. Please refresh the page and try another time slot. Thank you.', 'appointments')))));
+		if ($this->is_busy($start,  $start + ($duration * 60), $this->get_capacity())) {
+			die(json_encode(array(
+				"error" => apply_filters(
+					'app_booked_message', 
+					__('We are sorry, but this time slot is no longer available. Please refresh the page and try another time slot. Thank you.', 'appointments')
+				),
+			)));
+		}
 
-		$status = apply_filters( 'app_post_confirmation_status', $status, $price, $service, $worker, $user_id );
+		$status = apply_filters('app_post_confirmation_status', $status, $price, $service, $worker, $user_id);
 
-		$result = $wpdb->insert( $this->app_table,
-							array(
-								'created'	=>	date ("Y-m-d H:i:s", $this->local_time ),
-								'user'		=>	$user_id,
-								'name'		=>	$name,
-								'email'		=>	$email,
-								'phone'		=>	$phone,
-								'address'	=>	$address,
-								'city'		=>	$city,
-								'location'	=>	$location,
-								'service'	=>	$service,
-								'worker'	=> 	$worker,
-								'price'		=>	$price,
-								'status'	=>	$status,
-								'start'		=>	date ("Y-m-d H:i:s", $start),
-								'end'		=>	date ("Y-m-d H:i:s", $start + ($duration * 60 ) ),
-								'note'		=>	$note
-							)
-						);
-		if ( !$result ) {
-			die( json_encode( array("error"=>__( 'Appointment could not be saved. Please contact website admin.', 'appointments'))));
+		$result = $wpdb->insert(
+			$this->app_table,
+			array(
+				'created'	=>	date ("Y-m-d H:i:s", $this->local_time ),
+				'user'		=>	$user_id,
+				'name'		=>	$name,
+				'email'		=>	$email,
+				'phone'		=>	$phone,
+				'address'	=>	$address,
+				'city'		=>	$city,
+				'location'	=>	$location,
+				'service'	=>	$service,
+				'worker'	=> 	$worker,
+				'price'		=>	$price,
+				'status'	=>	$status,
+				'start'		=>	date ("Y-m-d H:i:s", $start),
+				'end'		=>	date ("Y-m-d H:i:s", $start + ($duration * 60 ) ),
+				'note'		=>	$note
+			)
+		);
+
+		if (!$result) {
+			die(json_encode(array(
+				"error" => __( 'Appointment could not be saved. Please contact website admin.', 'appointments'),
+			)));
 		}
 
 		// A new appointment is accepted, so clear cache
@@ -1681,13 +1695,19 @@ class Appointments {
 		do_action( 'app_new_appointment', $insert_id );
 
 		// Send confirmation for pending, payment not required cases, if selected so
-		if ( 'yes' != $this->options["payment_required"] && isset( $this->options["send_notification"] )
-			&& 'yes' == $this->options["send_notification"] && 'pending' == $status )
+		if (
+			'yes' != $this->options["payment_required"] && 
+			isset($this->options["send_notification"]) &&
+			'yes' == $this->options["send_notification"] && 
+			'pending' == $status
+		) {
 			$this->send_notification( $insert_id );
+		}
 
 		// Send confirmation if we forced it
-		if ( 'confirmed' == $status && isset( $this->options["send_confirmation"] ) && 'yes' == $this->options["send_confirmation"] )
+		if ('confirmed' == $status && isset($this->options["send_confirmation"]) && 'yes' == $this->options["send_confirmation"]) {
 			$this->send_confirmation( $insert_id );
+		}
 
 		// Add to GCal API
 		if (is_object($this->gcal_api) && $this->gcal_api->is_syncable_status($status)) {
@@ -1695,10 +1715,11 @@ class Appointments {
 		}
 
 		// GCal button
-		if ( isset( $this->options["gcal"] ) && 'yes' == $this->options["gcal"] && $gcal )
+		if (isset($this->options["gcal"]) && 'yes' == $this->options["gcal"] && $gcal) {
 			$gcal_url = $this->gcal( $service, $start, $start + ($duration * 60 ), false, $address, $city );
-		else
+		} else {
 			$gcal_url = '';
+		}
 
 		// Check if this is a App Product page and add variation if it is
 		$post = get_post( $post_id );
@@ -1706,40 +1727,36 @@ class Appointments {
 			$mp = 1;
 			$variation = $this->add_variation( $insert_id, $post_id, $service, $worker, $start, $end );
 		}
-		else
-			$mp = $variation = 0;
-
-		if ( isset( $this->options["gcal_same_window"] ) && $this->options["gcal_same_window"] )
-			$gcal_same_window = 1;
-		else
-			$gcal_same_window = 0;
-
-		if ( isset( $this->options["payment_required"] ) && 'yes' == $this->options["payment_required"] ) {
-			die( json_encode(
-							array(
-							"cell"				=> $_POST["value"],
-							"app_id"			=> $insert_id,
-							"refresh"			=> 0,
-							"price"				=> $paypal_price,
-							"service_name"		=> stripslashes( $service_result->name ),
-							'gcal_url'			=> $gcal_url,
-							'gcal_same_window'	=> $gcal_same_window,
-							'mp'				=> $mp,
-							'variation'			=> $variation
-							)
-						)
-					);
-		}
 		else {
-			die( json_encode(
-							array(
-							"cell"				=> $_POST["value"],
-							"app_id"			=> $insert_id,
-							"refresh"			=> 1,
-							'gcal_url'			=> $gcal_url,
-							'gcal_same_window'	=> $gcal_same_window,
-							)
-				));
+			$mp = $variation = 0;
+		}
+
+		if (isset( $this->options["gcal_same_window"] ) && $this->options["gcal_same_window"]) {
+			$gcal_same_window = 1;
+		} else {
+			$gcal_same_window = 0;
+		}
+
+		if (isset( $this->options["payment_required"] ) && 'yes' == $this->options["payment_required"]) {
+			die(json_encode(array(
+				"cell" => $_POST["value"],
+				"app_id" => $insert_id,
+				"refresh" => 0,
+				"price" => $paypal_price,
+				"service_name" => stripslashes( $service_result->name ),
+				'gcal_url' => $gcal_url,
+				'gcal_same_window' => $gcal_same_window,
+				'mp' => $mp,
+				'variation' => $variation
+			)));
+		} else {
+			die(json_encode(array(
+				"cell" => $_POST["value"],
+				"app_id" => $insert_id,
+				"refresh" => 1,
+				'gcal_url' => $gcal_url,
+				'gcal_same_window' => $gcal_same_window,
+			)));
 		}
 	}
 
