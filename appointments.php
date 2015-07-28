@@ -1713,19 +1713,13 @@ class Appointments {
 
 		// Check if this is a App Product page and add variation if it is
 		$post = get_post( $post_id );
+		$mp = $variation = 0;
 		if ( $this->check_marketpress_plugin() && 'product' == $post->post_type && strpos( $post->post_content, '[app_' ) !== false ) {
 			$mp = 1;
 			$variation = $this->add_variation( $insert_id, $post_id, $service, $worker, $start, $end );
 		}
-		else {
-			$mp = $variation = 0;
-		}
 
-		if (isset( $this->options["gcal_same_window"] ) && $this->options["gcal_same_window"]) {
-			$gcal_same_window = 1;
-		} else {
-			$gcal_same_window = 0;
-		}
+		$gcal_same_window = !empty($this->options["gcal_same_window"]) ? 1 : 0;
 
 		if (isset( $this->options["payment_required"] ) && 'yes' == $this->options["payment_required"]) {
 			die(json_encode(array(
@@ -1762,22 +1756,22 @@ class Appointments {
 	function gcal( $service, $start, $end, $php=false, $address, $city ) {
 		// Find time difference from Greenwich as GCal asks UTC
 		$tdif = current_time('timestamp') - time();
-		$text = sprintf( __('%s Appointment', 'appointments'), $this->get_service_name( $service ) );
-		if ( !$php )
-			$text = esc_js( $text );
+		$text = sprintf(__('%s Appointment', 'appointments'), $this->get_service_name($service));
 
-		if ( isset( $this->options["gcal_location"] ) && '' != trim( $this->options["gcal_location"] ) )
-			$location = esc_js( str_replace( array('ADDRESS', 'CITY'), array($address, $city), $this->options["gcal_location"] ) );
-		else
-			$location = esc_js( get_bloginfo( 'description' ) );
+		if (!$php) $text = esc_js( $text );
+
+		$location = isset($this->options["gcal_location"]) && '' != trim($this->options["gcal_location"])
+			? esc_js(str_replace(array('ADDRESS', 'CITY'), array($address, $city), $this->options["gcal_location"]))
+			: esc_js(get_bloginfo('description'))
+		;
 
 		$param = array(
-					'action'	=> 'TEMPLATE',
-					'text'		=> $text,
-					'dates'		=> date( "Ymd\THis\Z", $start - $tdif ) . "/" . date( "Ymd\THis\Z", $end - $tdif ),
-					'sprop'		=> 'website:' . home_url(),
-					'location'	=> $location
-				);
+			'action' => 'TEMPLATE',
+			'text' => $text,
+			'dates' => date("Ymd\THis\Z", $start - $tdif) . "/" . date("Ymd\THis\Z", $end - $tdif),
+			'sprop' => 'website:' . home_url(),
+			'location' => $location
+		);
 
 		return add_query_arg( apply_filters( 'app_gcal_variables', $param, $service, $start, $end ), 'http://www.google.com/calendar/event' );
 	}
