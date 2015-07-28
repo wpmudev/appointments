@@ -1773,7 +1773,10 @@ class Appointments {
 			'location' => $location
 		);
 
-		return add_query_arg( apply_filters( 'app_gcal_variables', $param, $service, $start, $end ), 'http://www.google.com/calendar/event' );
+		return esc_url(add_query_arg(
+			apply_filters('app_gcal_variables', $param, $service, $start, $end), 
+			'http://www.google.com/calendar/event'
+		));
 	}
 
 	/**
