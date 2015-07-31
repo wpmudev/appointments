@@ -1,3 +1,13 @@
+v1.5
+- Deprecate the old Google API client library and update to v1.1.4.
+- Fix style helpers conflict.
+- Fix reapplied appointment ordering.
+- Fix Twitter login popup initial redirect.
+- Fix time format values for adding appointments back end.
+- Fix type casting in price boolean checks.
+- Fix logic error in client name resolution fallback.
+- Add cancel link to worker reminder emails.
+
 v1.4.7
 - Expose removal notification message body for filtering and expand additional fields e-mail macros.
 - Fix slashes escaping in user-added CSS.
