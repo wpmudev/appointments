@@ -419,10 +419,10 @@ $(document).ajaxSend(function(e, xhr, opts) {
 </tr>
 <script id="app-additional_fields-template" type="text/template">
 	<div class="app-field">
-		<b><%= label %></b> <em><small>(<%= type %>)</small></em>
+		<b>{{ label }}</b> <em><small>({{ type }})</small></em>
 		<br />
-		<?php echo esc_html('Required', 'appointments'); ?>: <b><%= required ? '<?php echo esc_js(__("Yes", "appointments")); ?>' : '<?php echo esc_js(__("No", "appointments")); ?>' %></b>
-		<input type="hidden" name="app-additional_fields[]" value="<%= encodeURIComponent(_value) %>" />
+		<?php echo esc_html('Required', 'appointments'); ?>: <b>{{ required ? '<?php echo esc_js(__("Yes", "appointments")); ?>' : '<?php echo esc_js(__("No", "appointments")); ?>' }}</b>
+		<input type="hidden" name="app-additional_fields[]" value="{{ encodeURIComponent(_value) }}" />
 		<a href="#remove" class="app-additional_fields-remove"><?php echo esc_html('Remove', 'appointments'); ?></a>
 	</div>
 </script>
@@ -430,6 +430,22 @@ $(document).ajaxSend(function(e, xhr, opts) {
 (function ($) {
 
 var tpl = $("#app-additional_fields-template").html();
+
+function parse_template (str, data) {
+	var orig_settings = _.templateSettings,
+		t = false
+	;
+	_.templateSettings = {
+		evaluate : /\{\[([\s\S]+?)\]\}/g,
+		interpolate : /\{\{([\s\S]+?)\}\}/g
+	};
+
+	t = _.template(str, data);
+
+	_.templateSettings = orig_settings;
+
+	return t;
+}
 
 function add_new_field () {
 	var $new_fields = $("#app-new_additional_field").find("input,select"),
@@ -444,7 +460,7 @@ function add_new_field () {
 		data[name] = value;
 	});
 	data._value = JSON.stringify(data);
-	$root.append(_.template(tpl, data));
+	$root.append(parse_template(tpl, data));
 	return false;
 }
 
