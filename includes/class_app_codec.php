@@ -217,6 +217,16 @@ SITE_NAME
 		if (!empty($file)) require_once($file);
 	}
 
+	public static function admin_transactions_list ($type='past') {
+		$file = self::_to_template_file('transactions_list');
+		if (!empty($file)) require_once($file);
+	}
+
+	public static function admin_my_transactions_list ($type='past') {
+		$file = self::_to_template_file('my_transactions_list');
+		if (!empty($file)) require_once($file);
+	}
+
 	private static function _to_template_file ($fragment) {
 		if (empty($fragment)) return false;
 		$file = APP_PLUGIN_DIR . '/includes/templates/app-admin-' . preg_replace('/[^-_a-z0-9]/i', '', $fragment) . '.php';
