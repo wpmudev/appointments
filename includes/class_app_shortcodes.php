@@ -496,8 +496,12 @@ class App_Shortcode_MonthlySchedule extends App_Shortcode {
 		if (!empty($title)) {
 			$replacements = array(
 				date_i18n("F Y",  strtotime("{$year}-{$month}-01")), // START
-				$appointments->get_worker_name($_REQUEST['app_provider_id']),
-				$appointments->get_service_name($_REQUEST['app_service_id']),
+				$appointments->get_worker_name(
+					(!empty($_REQUEST['app_provider_id']) ? $_REQUEST['app_provider_id'] : null)
+				),
+				$appointments->get_service_name(
+					(!empty($_REQUEST['app_service_id']) ? $_REQUEST['app_service_id'] : null)
+				),
 			);
 			$title = str_replace(
 				array("START", "WORKER", "SERVICE"),

@@ -199,8 +199,9 @@ class App_Locations_WorkerLocations {
 	}
 
 	private function _get_location_markup ($location, $rich_content=true) {
-		return '<div class="app-worker_description-location" id="app-worker_description-location-' . $location->get_id() . '">' .
-			apply_filters('app-locations-location_output', $location->get_display_markup($rich_content), $worker_id, $location) .
+		$lid = $location->get_id();
+		return '<div class="app-worker_description-location" id="app-worker_description-location-' . esc_attr($lid) . '">' .
+			apply_filters('app-locations-location_output', $location->get_display_markup($rich_content), $lid, $location) .
 		'</div>';
 	}
 
