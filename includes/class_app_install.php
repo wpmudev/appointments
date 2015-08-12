@@ -289,8 +289,14 @@ class App_Installer {
 	}
 
 	private function _run_integrity_check () {
-		if (!get_option('app_db_version', false)) {
+		$db_version = get_option('app_db_version', false);
+		if (!$db_version) {
 			$this->install();
+		} else if (version_compare($db_version, '1.2.2', '<') && is_multisite()) {
+			if (!function_exists('is_plugin_active_for_network')) require_once(ABSPATH . '/wp-admin/includes/plugin.php');
+			if (is_plugin_active_for_network('appointments/appointments.php')) {
+				$this->install();
+			}
 		} else {
 			$this->_upgrade_to_124();
 		}
