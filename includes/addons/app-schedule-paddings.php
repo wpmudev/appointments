@@ -315,6 +315,8 @@ class App_Schedule_Paddings {
 	}
 	
 	public function apply_admin_min_time_padding($time){
+		return $time; // Do NOT!! do this - messes up _everything_
+		
 		$time_sec = 60 * $time;//Minutes to seconds.
 		$time = $this->apply_step_increment_padding($time_sec);//Calculate the padding in seconds.
 		$time = $time / 60;//Back to minutes.
