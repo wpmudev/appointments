@@ -1,3 +1,11 @@
+v1.5.1
+- Fix underscore templating conflict issue on certain configurations.
+- Add a bit more elaborate logging and exception handling.
+- Fix Google configuration override API so traditional hook works.
+- Fix paddings issue applied on appointments creation admin-side.
+- Fix schema updates on network environments.
+- Fix page reloads on login required in certain scenarios.
+
 v1.5
 - Deprecate the old Google API client library and update to v1.1.4.
 - Fix style helpers conflict.
