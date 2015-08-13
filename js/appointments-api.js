@@ -57,6 +57,7 @@ function create_app_login_interface ($me) {
 							if ( data.status && data.status==1 ) {
 								$(".appointments-login_inner").text(l10nAppApi.logged_in);
 								window.location.href = window.location.href;
+								window.location.reload();
 							}
 							else {
 								alert(l10nAppApi.error);
@@ -108,6 +109,7 @@ function create_app_login_interface ($me) {
 											if ( data.status && data.status==1 ) {
 												$(".appointments-login_inner").text(l10nAppApi.logged_in);
 												window.location.href = window.location.href;
+												window.location.reload();
 											}
 											else {
 												alert(l10nAppApi.error);
@@ -154,6 +156,7 @@ function create_app_login_interface ($me) {
 									if ( data.status && data.status==1 ) {
 										$(".appointments-login_inner").text(l10nAppApi.logged_in);
 										window.location.href = window.location.href;
+										window.location.reload();
 									}
 									else {
 										alert(l10nAppApi.error);
@@ -193,6 +196,7 @@ function create_app_login_interface ($me) {
 						if ( data.status && data.status==1 ) {
 								$(".appointments-login_inner").text(l10nAppApi.logged_in);
 								window.location.href = window.location.href;
+								window.location.reload();
 							}
 						else {
 							alert(l10nAppApi.error);
@@ -223,6 +227,7 @@ function signinCallback(authResult) {
 			"token": authResult['access_token']
 		}, function (data) {
 			window.location.href = window.location.href;
+			window.location.reload();
 		});
 	}
 }
