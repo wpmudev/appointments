@@ -34,7 +34,7 @@ class App_Shortcode_ServiceLocationsShortcode extends App_Shortcode {
 		);
 
 		if (!empty($_REQUEST['app_service_location']) && is_numeric($_REQUEST['app_service_location'])) {
-			$this->_requested_location_id = (int)$_REQUEST['app_service_location'];
+			$this->_requested_location_id = (float)$_REQUEST['app_service_location'];
 		}
 
 		if (!is_admin() && !empty($this->_requested_location_id)) {
