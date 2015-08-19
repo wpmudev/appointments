@@ -1401,15 +1401,15 @@ class Appointments {
 	 * Check and return necessary fields to the front end
 	 * @return json object
 	 */
-	function pre_confirmation() {
+	function pre_confirmation () {
 
-		$values 		= explode( ":", $_POST["value"] );
-		$location 		= $values[0];
-		$service 		= $values[1];
-		$worker 		= $values[2];
-		$start 			= $values[3];
-		$end 			= $values[4];
-		$post_id		= $values[5];
+		$values = explode( ":", $_POST["value"] );
+		$location = $values[0];
+		$service = $values[1];
+		$worker = $values[2];
+		$start = $values[3];
+		$end = $values[4];
+		$post_id = $values[5];
 
 		// A little trick to pass correct lsw variables to the get_price, is_busy and get_capacity functions
 		$_REQUEST["app_location_id"] = $location;
@@ -1424,11 +1424,11 @@ class Appointments {
 			)));
 		}
 
-		$price = $this->get_price( );
+		$price = $this->get_price();
 
 		// It is possible to apply special discounts
-		$price = apply_filters( 'app_display_amount', $price, $service, $worker );
-		$price = apply_filters( 'app_pre_confirmation_price', $price, $service, $worker, $start, $end );
+		$price = apply_filters('app_display_amount', $price, $service, $worker);
+		$price = apply_filters('app_pre_confirmation_price', $price, $service, $worker, $start, $end);
 
 		$display_currency = !empty($this->options["currency"])
 			? App_Template::get_currency_symbol($this->options["currency"])
@@ -1437,76 +1437,83 @@ class Appointments {
 
 		global $wpdb;
 
-		if ( $this->is_busy( $start,  $end, $this->get_capacity() ) )
-			die( json_encode( array("error"=>apply_filters( 'app_booked_message',__( 'We are sorry, but this time slot is no longer available. Please refresh the page and try another time slot. Thank you.', 'appointments')))));
+		if ($this->is_busy($start,  $end, $this->get_capacity())) {
+			die(json_encode(array(
+				"error" => apply_filters(
+					'app_booked_message',
+					__( 'We are sorry, but this time slot is no longer available. Please refresh the page and try another time slot. Thank you.', 'appointments')
+				)
+			)));
+		}
 
-		$service_obj = $this->get_service( $service );
-		$service = '<label><span>'. __('Service name: ', 'appointments' ).  '</span>'. apply_filters( 'app_confirmation_service', stripslashes( $service_obj->name ), $service_obj->name ) . '</label>';
-		$start = '<label><span>'.__('Date and time: ', 'appointments' ). '</span>'. apply_filters( 'app_confirmation_start', date_i18n( $this->datetime_format, $start ), $start ) . '</label>';
-		$end = '<label><span>'.__('Lasts (approx): ', 'appointments' ). '</span>'. apply_filters( 'app_confirmation_lasts', $service_obj->duration . " ". __('minutes', 'appointments'), $service_obj->duration ) . '</label>';
-		if ( $price > 0 )
-			$price = '<label><span>'.__('Price: ', 'appointments' ).  '</span>'. apply_filters( 'app_confirmation_price', $price . " " . $display_currency, $price ) . '</label>';
-		else
-			$price = 0;
+		$service_obj = $this->get_service($service);
+		$service = '<label><span>' . __('Service name: ', 'appointments') .  '</span>'. apply_filters('app_confirmation_service', stripslashes($service_obj->name), $service_obj->name) . '</label>';
+		$start = '<label><span>' . __('Date and time: ', 'appointments') . '</span>'. apply_filters('app_confirmation_start', date_i18n($this->datetime_format, $start), $start) . '</label>';
+		$end = '<label><span>' . __('Lasts (approx): ', 'appointments') . '</span>'. apply_filters('app_confirmation_lasts', $service_obj->duration . " " . __('minutes', 'appointments'), $service_obj->duration) . '</label>';
+		
+		$price = $price > 0
+			? '<label><span>' . __('Price: ', 'appointments') .  '</span>'. apply_filters('app_confirmation_price', $price . " " . $display_currency, $price) . '</label>'
+			: 0
+		;
 
-		if ( $worker )
-			$worker = '<label><span>'. __('Service provider: ', 'appointments' ).  '</span>'. apply_filters( 'app_confirmation_worker', stripslashes( $this->get_worker_name( $worker ) ), $worker ) . '</label>';
-		else
-			$worker = '';
+		$worker = !empty($worker)
+			? '<label><span>' . __('Service provider: ', 'appointments' ) . '</span>'. apply_filters('app_confirmation_worker', stripslashes($this->get_worker_name($worker)), $worker) . '</label>'
+			: ''
+		;
 
-		if ( $this->options["ask_name"] )
-			$ask_name = "ask";
-		else
-			$ask_name = "";
+		$ask_name = !empty($this->options['ask_name'])
+			? 'ask'
+			: ''
+		;
 
-		if ( $this->options["ask_email"] )
-			$ask_email = "ask";
-		else
-			$ask_email = "";
+		$ask_email = !empty($this->options['ask_email'])
+			? 'ask'
+			: ''
+		;
 
-		if ( $this->options["ask_phone"] )
-			$ask_phone = "ask";
-		else
-			$ask_phone = "";
+		$ask_phone = !empty($this->options['ask_phone'])
+			? 'ask'
+			: ''
+		;
 
-		if ( $this->options["ask_address"] )
-			$ask_address = "ask";
-		else
-			$ask_address = "";
+		$ask_address = !empty($this->options['ask_address'])
+			? 'ask'
+			: ''
+		;
 
-		if ( $this->options["ask_city"] )
-			$ask_city = "ask";
-		else
-			$ask_city = "";
+		$ask_city = !empty($this->options['ask_city'])
+			? 'ask'
+			: ''
+		;
 
-		if ( $this->options["ask_note"] )
-			$ask_note = "ask";
-		else
-			$ask_note = "";
+		$ask_note = !empty($this->options['ask_note'])
+			? 'ask'
+			: ''
+		;
 
-		if ( isset( $this->options["gcal"] ) && 'yes' == $this->options["gcal"] )
-			$ask_gcal = "ask";
-		else
-			$ask_gcal = "";
+		$ask_gcal = isset( $this->options["gcal"] ) && 'yes' == $this->options["gcal"]
+			? 'ask'
+			: ''
+		;
 
 		$reply_array = array(
-							'service'	=> $service,
-							'worker'	=> $worker,
-							'start'		=> $start,
-							'end'		=> $end,
-							'price'		=> $price,
-							'name'		=> $ask_name,
-							'email'		=> $ask_email,
-							'phone'		=> $ask_phone,
-							'address'	=> $ask_address,
-							'city'		=> $ask_city,
-							'note'		=> $ask_note,
-							'gcal'		=> $ask_gcal
-						);
+			'service'	=> $service,
+			'worker'	=> $worker,
+			'start'		=> $start,
+			'end'		=> $end,
+			'price'		=> $price,
+			'name'		=> $ask_name,
+			'email'		=> $ask_email,
+			'phone'		=> $ask_phone,
+			'address'	=> $ask_address,
+			'city'		=> $ask_city,
+			'note'		=> $ask_note,
+			'gcal'		=> $ask_gcal
+		);
 
-		$reply_array = apply_filters( 'app_pre_confirmation_reply', $reply_array );
+		$reply_array = apply_filters('app_pre_confirmation_reply', $reply_array);
 
-		die( json_encode( $reply_array ));
+		die(json_encode($reply_array));
 	}
 
 	/**
