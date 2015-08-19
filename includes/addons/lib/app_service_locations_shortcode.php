@@ -51,6 +51,12 @@ class App_Shortcode_ServiceLocationsShortcode extends App_Shortcode {
 				$result[] = $srv;
 			}
 		}
+		
+		// Only one service in the list, let's assume this is the selected one too
+		if (!empty($result) && 1 === count($result) && !empty($result[0]->ID)) {
+			$_REQUEST['app_service_id'] = $result[0]->ID; // oh wow this is just nasty
+		}
+
 		return $result;
 	}
 
@@ -132,7 +138,10 @@ class App_Shortcode_RequiredServiceLocationsShortcode extends App_Shortcode_Serv
 
 	public function process_shortcode ($args=array(), $content='') {
 		$instance = App_Shortcodes::get_shortcode_instance('app_services');
-		if (!empty($this->_requested_location_id) && $instance && method_exists($instance, 'process_shortcode')) return $instance->process_shortcode($args, $content);
-		else return parent::process_shortcode($args, $content);
+
+		return !empty($this->_requested_location_id) && $instance && method_exists($instance, 'process_shortcode')
+			? $instance->process_shortcode($args, $content)
+			: parent::process_shortcode($args, $content)
+		;
 	}
 }
