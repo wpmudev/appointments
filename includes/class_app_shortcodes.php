@@ -1300,18 +1300,37 @@ class App_Shortcode_Services extends App_Shortcode {
 		$script .= "$('.app_service_excerpt').hide();";
 		$script .= "$('#app_service_excerpt_'+selected_service).show();";
 		if ( $autorefresh ) {
-			$script .= "window.location.href='" . esc_url($href) . "'.replace(/__selected_service__/, selected_service);";
+			$script .= "window.location.href='" . $this->_js_esc_url($href) . "'.replace(/__selected_service__/, selected_service);";
 		}
 		$script .= "});";
 
 		$script .= "$('.app_services_button').click(function(){";
 		$script .= "var selected_service=$('.app_select_services option:selected').val();";
-		$script .= "window.location.href='" . esc_url($href) . "'.replace(/__selected_service__/, selected_service);";
+		$script .= "window.location.href='" . $this->_js_esc_url($href) . "'.replace(/__selected_service__/, selected_service);";
 		$script .= "});";
 
 		if (!$_noscript) $appointments->add2footer($script);
 
 		return $s;
+	}
+
+	/**
+	 * Escape the URL, but convert back search query entities (i.e. ampersands)
+	 *
+	 * @param string $raw Raw URL to parse
+	 *
+	 * @return string Usable URL
+	 */
+	private function _js_esc_url ($raw='') {
+		$url = esc_url($raw);
+		$parts = explode('?', $url);
+		
+		if (empty($parts[1])) return $url;
+		if (false === strpos($parts[1], '#038;') && false === strpos($parts[1], '&amp;')) return $url;
+
+		$parts[1] = preg_replace('/&(#038|amp);/', '&', $parts[1]);
+
+		return join('?', $parts);
 	}
 
 	/**
