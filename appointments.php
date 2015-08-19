@@ -2927,6 +2927,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		$result = $this->get_work_break( $this->location, $this->worker, 'open' );
 		if ( $result !== null ) {
 			$days = maybe_unserialize( $result->hours );
+			$days = array_filter($days);
 			if ( is_array( $days ) ) {
 				$min = 24; $max = 0;
 				foreach ( $days as $day ) {
