@@ -4722,20 +4722,47 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 					$_REQUEST["app_provider_id"] = $r->worker;
 
 					$messages[] = array(
-								'ID'		=> $r->ID,
-								'to'		=> $r->email,
-								'subject'	=> $this->_replace( $this->options["reminder_subject"], $r->name, $this->get_service_name( $r->service),
-									$this->get_worker_name( $r->worker), $r->start, $r->price, $this->get_deposit($r->price), $r->phone, $r->note, $r->address, $r->email, $r->city ),
-								'message'	=> apply_filters( 'app_reminder_message', $this->add_cancel_link( $this->_replace( $this->options["reminder_message"],
-									$r->name, $this->get_service_name( $r->service), $this->get_worker_name( $r->worker), $r->start,
-									$r->price, $this->get_deposit($r->price), $r->phone, $r->note, $r->address, $r->email, $r->city ), $r->ID ), $r, $r->ID )
-							);
+						'ID' => $r->ID,
+						'to' => $r->email,
+						'subject' => $this->_replace(
+							$this->options["reminder_subject"], 
+							$r->name, 
+							$this->get_service_name($r->service),
+							$this->get_worker_name($r->worker), 
+							$r->start, 
+							$r->price, 
+							$this->get_deposit($r->price), 
+							$r->phone, 
+							$r->note, 
+							$r->address, 
+							$r->email, 
+							$r->city
+						),
+						'message' => apply_filters('app_reminder_message', $this->add_cancel_link(
+							$this->_replace( 
+								$this->options["reminder_message"],
+								$r->name, 
+								$this->get_service_name($r->service), 
+								$this->get_worker_name($r->worker), 
+								$r->start,
+								$r->price, 
+								$this->get_deposit($r->price), 
+								$r->phone, 
+								$r->note, 
+								$r->address, 
+								$r->email, 
+								$r->city
+							), 
+							$r->ID), 
+						$r, $r->ID)
+					);
 					// Update "sent" field
-					$wpdb->update( $this->app_table,
-									array( 'sent'	=> rtrim( $r->sent, ":" ) . ":" . trim( $hour ) . ":" ),
-									array( 'ID'		=> $r->ID ),
-									array ( '%s' )
-								);
+					$wpdb->update(
+						$this->app_table,
+						array('sent' => rtrim($r->sent, ":") . ":" . trim($hour) . ":"),
+						array('ID' => $r->ID),
+						array('%s')
+					);
 				}
 			}
 		}
@@ -4802,20 +4829,45 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 					$_REQUEST["app_provider_id"] = $r->worker;
 
 					$messages[] = array(
-								'ID'		=> $r->ID,
-								'to'		=> $this->get_worker_email( $r->worker ),
-								'subject'	=> $this->_replace( $this->options["reminder_subject"], $r->name, $this->get_service_name($r->service),
-									$this->get_worker_name($r->worker), $r->start, $r->price, $this->get_deposit($r->price), $r->phone, $r->note, $r->address, $r->email ),
-								'message'	=> $provider_add_text . $this->add_cancel_link($this->_replace( $this->options["reminder_message"], $r->name,
-									$this->get_service_name( $r->service), $this->get_worker_name( $r->worker), $r->start, $r->price,
-									$this->get_deposit($r->price), $r->phone, $r->note, $r->address, $r->email ))
-							);
+						'ID' => $r->ID,
+						'to' => $this->get_worker_email( $r->worker ),
+						'subject' => $this->_replace(
+							$this->options["reminder_subject"], 
+							$r->name, 
+							$this->get_service_name($r->service),
+							$this->get_worker_name($r->worker), 
+							$r->start, 
+							$r->price, 
+							$this->get_deposit($r->price), 
+							$r->phone, 
+							$r->note, 
+							$r->address, 
+							$r->email
+						),
+						'message' => apply_filters('app_reminder_message', $provider_add_text . $this->add_cancel_link(
+							$this->_replace(
+								$this->options["reminder_message"], 
+								$r->name,
+								$this->get_service_name($r->service), 
+								$this->get_worker_name($r->worker), 
+								$r->start, 
+								$r->price,
+								$this->get_deposit($r->price), 
+								$r->phone, 
+								$r->note, 
+								$r->address, 
+								$r->email
+							), 
+							$r->ID),
+						$r, $r->ID), 
+					);
 					// Update "sent" field
-					$wpdb->update( $this->app_table,
-									array( 'sent_worker' => rtrim( $r->sent_worker, ":" ) . ":" . trim( $hour ) . ":" ),
-									array( 'ID'		=> $r->ID ),
-									array ( '%s' )
-								);
+					$wpdb->update(
+						$this->app_table,
+						array('sent_worker' => rtrim($r->sent_worker, ":") . ":" . trim($hour) . ":"),
+						array('ID' => $r->ID),
+						array('%s')
+					);
 				}
 			}
 		}
