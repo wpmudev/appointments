@@ -34,7 +34,7 @@ class App_Shortcode_WorkerLocationsShortcode extends App_Shortcode {
 		);
 
 		if (!empty($_REQUEST['app_provider_location']) && is_numeric($_REQUEST['app_provider_location'])) {
-			$this->_requested_location_id = (int)$_REQUEST['app_provider_location'];
+			$this->_requested_location_id = (float)$_REQUEST['app_provider_location'];
 		}
 
 		if (!is_admin() && !empty($this->_requested_location_id)) {
@@ -51,6 +51,7 @@ class App_Shortcode_WorkerLocationsShortcode extends App_Shortcode {
 				$result[] = $wrk;
 			}
 		}
+
 		return $result;
 	}
 
