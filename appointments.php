@@ -2165,8 +2165,8 @@ class Appointments {
 			$start = 8;
 			$end = 18;
 		}
-		$start = apply_filters( 'app_schedule_starting_hour', $start );
-		$end = apply_filters( 'app_schedule_ending_hour', $end );
+		$start = apply_filters( 'app_schedule_starting_hour', $start, $day_start, 'day' );
+		$end = apply_filters( 'app_schedule_ending_hour', $end, $day_start, 'day' );
 
 		$first = $start *3600 + $day_start; // Timestamp of the first cell
 		$last = $end *3600 + $day_start; // Timestamp of the last cell
@@ -2336,8 +2336,8 @@ class Appointments {
 			$start = 8;
 			$end = 18;
 		}
-		$start = apply_filters( 'app_schedule_starting_hour', $start );
-		$end = apply_filters( 'app_schedule_ending_hour', $end );
+		$start = apply_filters( 'app_schedule_starting_hour', $start, $date, 'week' );
+		$end = apply_filters( 'app_schedule_ending_hour', $end, $date, 'week' );
 
 		$first = $start *3600 + $sunday; // Timestamp of the first cell of first Sunday
 		$last = $end *3600 + $sunday; // Timestamp of the last cell of first Sunday
