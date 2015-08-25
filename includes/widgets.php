@@ -18,10 +18,11 @@ class Appointments_Widget_Helper extends WP_Widget {
 
 		echo $before_widget;
 
-		if ( $title )
+		if (!empty($title)) {
 			echo $before_title . $title . $after_title;
+		}
 
-		$this->content( $instance );
+		$this->content($instance);
 
 		echo $after_widget;
 	}
@@ -30,7 +31,7 @@ class Appointments_Widget_Helper extends WP_Widget {
 ?>
 		<p>
 			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e( 'Title:', 'appointments' ); ?></label>
-			<input type="text" class="widefat" name="<?php echo $this->get_field_name('title')?>" value="<?php echo $title?>" />
+			<input type="text" class="widefat" name="<?php echo $this->get_field_name('title')?>" value="<?php echo esc_attr($title); ?>" />
 
 		</p>
 <?php
@@ -78,8 +79,7 @@ class Appointments_Widget_Services extends Appointments_Widget_Helper {
 
 		<p>
 			<label for="<?php echo $this->get_field_id('number'); ?>"><?php _e( 'Number of services to show:', 'appointments' ); ?></label>
-
-			<input type="text" size="2" name="<?php echo $this->get_field_name('number')?>" value="<?php echo $instance['number']?>" />
+			<input type="text" size="2" name="<?php echo $this->get_field_name('number')?>" value="<?php echo esc_attr($instance['number']); ?>" />
 
 		</p>
 <?php
@@ -139,13 +139,15 @@ class Appointments_Widget_Service_Providers extends Appointments_Widget_Helper {
 	}
 
 	function form( $instance ) {
-		$instance = $this->parse_instance( $instance );
-		$this->title_field( $instance['title'] );
+		$instance = $this->parse_instance($instance);
+		$this->title_field($instance['title']);
+
+		if (!isset($instance['allow_no_links'])) $instance['allow_no_links'] = false;
 ?>
 
 		<p>
 			<label for="<?php echo $this->get_field_id('number'); ?>"><?php _e( 'Number of service providers to show:', 'appointments' ); ?></label>
-			<input type="text" size="2" id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number')?>" value="<?php echo $instance['number']?>" />
+			<input type="text" size="2" id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number')?>" value="<?php echo esc_attr($instance['number']); ?>" />
 		</p>
 		<p>
 			<input type="checkbox" name="<?php echo $this->get_field_name('allow_no_links')?>" id="<?php echo $this->get_field_id('allow_no_links'); ?>" value="1" <?php checked($instance['allow_no_links'], true); ?> />
@@ -228,15 +230,14 @@ class Appointments_Widget_Monthly_Calendar extends Appointments_Widget_Helper {
 		}
 	}
 
-	function content( $instance ) {
+	function content ($instance) {
+		extract($instance);
 
-		extract( $instance );
-
-		add_action( 'app_calendar_widget_before_content', $add );
+		add_action('app_calendar_widget_before_content', $add);
 
 		echo do_shortcode('[app_monthly_schedule class="app_monthly_calendar_widget" widget="1" title="<h3>START</h3>" logged=" " notlogged=" " add="'.$add.'"]');
 
-		add_action( 'app_calendar_widget_after_content', $add );
+		add_action('app_calendar_widget_after_content', $add);
 	}
 
 	function form( $instance ) {
@@ -246,14 +247,16 @@ class Appointments_Widget_Monthly_Calendar extends Appointments_Widget_Helper {
 		<p>
 			<label for="<?php echo $this->get_field_id('page_id'); ?>"><?php _e( 'Appointment page:', 'appointments' ); ?></label>
 			<?php
-			wp_dropdown_pages( array( 'selected' => $instance['page_id'], 'name' => $this->get_field_name('page_id') ) );
+			wp_dropdown_pages(array(
+				'selected' => $instance['page_id'], 
+				'name' => $this->get_field_name('page_id'),
+			));
 			?>
 		</p>
 
 		<p>
 			<label for="<?php echo $this->get_field_id('add'); ?>"><?php _e( 'Months to add to current month:', 'appointments' ); ?></label>
-
-			<input type="text" size="2" name="<?php echo $this->get_field_name('add')?>" value="<?php echo $instance['add']?>" />
+			<input type="text" size="2" name="<?php echo $this->get_field_name('add')?>" value="<?php echo esc_attr($instance['add']); ?>" />
 
 		</p>
 <?php
