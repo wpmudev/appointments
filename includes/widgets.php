@@ -45,8 +45,10 @@ class Appointments_Widget_Services extends Appointments_Widget_Helper {
 	);
 
 	function Appointments_Widget_Services() {
-		$widget_ops = array( 'description' => __( 'List of services and links to their description pages', 'appointments') );
-		$this->WP_Widget( 'appointments_services', __( 'Appointments+ Services', 'appointments' ), $widget_ops );
+		$widget_ops = array(
+			'description' => __( 'List of services and links to their description pages', 'appointments'),
+		);
+		parent::__construct('appointments_services', __( 'Appointments+ Services', 'appointments' ), $widget_ops);
 	}
 
 	function content( $instance ) {
@@ -100,8 +102,10 @@ class Appointments_Widget_Service_Providers extends Appointments_Widget_Helper {
 	);
 
 	function Appointments_Widget_Service_Providers() {
-		$widget_ops = array( 'description' => __( 'List of service providers and links to their bio pages', 'appointments') );
-		$this->WP_Widget( 'appointments_service_providers', __( 'Appointments+ Service Providers', 'appointments' ), $widget_ops );
+		$widget_ops = array(
+			'description' => __( 'List of service providers and links to their bio pages', 'appointments'),
+		);
+		parent::__construct('appointments_service_providers', __( 'Appointments+ Service Providers', 'appointments' ), $widget_ops);
 	}
 
 	function content( $instance ) {
@@ -169,47 +173,47 @@ class Appointments_Widget_Monthly_Calendar extends Appointments_Widget_Helper {
 	);
 
 	function Appointments_Widget_Monthly_Calendar() {
-		add_action( 'wp_enqueue_scripts', array( &$this, 'wp_enqueue_scripts' ) );
-		add_action( 'wp_print_styles', array( &$this, 'wp_print_styles' ) );
-		add_action( 'wp_footer', array( &$this, 'wp_footer' ) );
-		$widget_ops = array( 'description' => __( 'A monthly calendar that redirects user to the selected appointment page when a free day is clicked. Use several instances to show several months and set "Months to add to current month" as required, e.g. 0 for the first instance, 1 for the second one, and so on.', 'appointments') );	 	 	 	 	   		 	 			
-		$this->WP_Widget( 'appointments_monthly_calendar', __( 'Appointments+ Monthly Calendar', 'appointments' ), $widget_ops );
+		add_action('wp_enqueue_scripts', array($this, 'wp_enqueue_scripts'));
+		add_action('wp_print_styles', array($this, 'wp_print_styles'));
+		add_action('wp_footer', array($this, 'wp_footer'));
+		$widget_ops = array(
+			'description' => __( 'A monthly calendar that redirects user to the selected appointment page when a free day is clicked. Use several instances to show several months and set "Months to add to current month" as required, e.g. 0 for the first instance, 1 for the second one, and so on.', 'appointments'),
+		);
+		parent::__construct('appointments_monthly_calendar', __( 'Appointments+ Monthly Calendar', 'appointments' ), $widget_ops);
 	}
 
 	function wp_enqueue_scripts() {
 		wp_enqueue_script( 'jquery' );
 
 		// Prevent W3T Minify. Caching is allowed here
-		if ( !defined( 'DONOTMINIFY' ) )
-			define( 'DONOTMINIFY', true );
+		if (!defined('DONOTMINIFY')) define( 'DONOTMINIFY', true );
 	}
 
 	function wp_print_styles() {
 		global $appointments;
-		if ( !current_theme_supports( 'appointments_style' ) ) {
-			wp_enqueue_style( "appointments", $appointments->plugin_url. "/css/front.css", array(), $appointments->version );
-			if ( !has_action( 'wp_head', array( $appointments, 'wp_head' ) ) )
-				add_action( 'wp_head', array( &$this, 'wp_head' ) );
+		if (!current_theme_supports('appointments_style')) {
+			wp_enqueue_style("appointments", $appointments->plugin_url. "/css/front.css", array(), $appointments->version);
+			if (!has_action('wp_head', array($appointments, 'wp_head'))) add_action('wp_head', array($this, 'wp_head'));
 		}
 	}
 
-	function wp_head() {
+	function wp_head () {
 		global $appointments;
 		$appointments->wp_head();
 	}
 
-	function wp_footer( ) {
+	function wp_footer () {
 		$settings = $this->get_settings();
 
-		if ( isset( $settings[$this->number] ) )
-			$instance = $settings[$this->number];
-		else
-			$instance = null;
+		$instance = isset($settings[$this->number])
+			? $settings[$this->number]
+			: null
+		;
 
-		if ( is_array( $instance ) ) {
-			extract( $instance );
+		if (is_array($instance)) {
+			extract($instance);
 
-			$href = get_permalink( $instance["page_id"] );
+			$href = get_permalink($instance["page_id"]);
 
 			$script  = '';
 			$script .= '<script type="text/javascript">';
