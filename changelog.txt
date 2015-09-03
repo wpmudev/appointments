@@ -1,3 +1,13 @@
+v1.5.1.1
+- Fix work hours array filtering.
+- Fix ampersand escapes in JS redirection URL filtering.
+- Fix numeric requests overflowing the integer value.
+- Fix selected service in filtered list.
+- Fix macro expansion in worker reminder emails.
+- Fix WP_Widget constructor calls.
+- Add MarketPress 3.0 compatibility.
+- Add extra parameters to scheduling hours filter hook signatures.
+
 v1.5.1
 - Fix underscore templating conflict issue on certain configurations.
 - Add a bit more elaborate logging and exception handling.
