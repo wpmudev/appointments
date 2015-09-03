@@ -61,7 +61,7 @@ $(document).on("app-confirmation-response_received", function (e, response) {
 		$this->_has_marketpress = class_exists('MarketPress');
 
 		if ($this->_has_marketpress && !empty($this->_data['auto_add_to_cart'])) {
-			add_action('wp_footer', array($this, 'auto_add_to_cart'));
+			if (defined('MP_VERSION') && version_compare(MP_VERSION, '3.0', '>=')) add_action('wp_footer', array($this, 'auto_add_to_cart'));
 		}
 	}
 
