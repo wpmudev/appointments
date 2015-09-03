@@ -1,4 +1,4 @@
-v1.5.1.1
+v1.5.2
 - Fix work hours array filtering.
 - Fix ampersand escapes in JS redirection URL filtering.
 - Fix numeric requests overflowing the integer value.
