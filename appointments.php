@@ -3799,11 +3799,11 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			if ( isset( $this->options["use_mp"] ) && $this->options["use_mp"] ) {
 				$this->mp = true;
 				if (defined('MP_VERSION') && version_compare(MP_VERSION, '3.0', '>=')) {
-					require_once('includes/class_app_mp_bridge_legacy.php');
-					App_MP_Bridge_Legacy::serve();
-				} else {
 					require_once('includes/class_app_mp_bridge.php');
 					App_MP_Bridge::serve();
+				} else {
+					require_once('includes/class_app_mp_bridge_legacy.php');
+					App_MP_Bridge_Legacy::serve();
 				}
 				return true;
 			}
