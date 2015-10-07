@@ -120,7 +120,14 @@ class App_MP_Bridge {
 		), false);
 		if (empty($variation_id)) return false;
 
-		$price = apply_filters('app_mp_price', $this->_core->get_price( true ), $service, $worker, $start, $end); // Filter added at V1.2.3.1
+		$price = false;
+		$raw_price = apply_filters('app_mp_price', $this->_core->get_price( true ), $service, $worker, $start, $end); // Filter added at V1.2.3.1
+		if (function_exists('filter_var') && defined('FILTER_VALIDATE_FLOAT') && defined('FILTER_FLAG_ALLOW_THOUSAND')) {
+			$price = filter_var($raw_price, FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_THOUSAND); // Undo the problematic number formatting issue
+		}
+		if (false === $price) {
+			$price = str_replace(',', '', $raw_price);
+		}
 
 		update_post_meta($variation_id, 'name', $app_id);
 		update_post_meta($variation_id, 'sku', $this->_core->service);
