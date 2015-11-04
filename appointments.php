@@ -1762,10 +1762,13 @@ class Appointments {
 	 */
 	function gcal( $service, $start, $end, $php=false, $address, $city ) {
 		// Find time difference from Greenwich as GCal asks UTC
-		$tdif = current_time('timestamp') - time();
+
 		$text = sprintf(__('%s Appointment', 'appointments'), $this->get_service_name($service));
 
 		if (!$php) $text = esc_js( $text );
+
+		$gmt_start = get_gmt_from_date( date( 'Y-m-d H:i:s', $start ), "Ymd\THis\Z" );
+		$gmt_end = get_gmt_from_date( date( 'Y-m-d H:i:s', $end ), "Ymd\THis\Z" );
 
 		$location = isset($this->options["gcal_location"]) && '' != trim($this->options["gcal_location"])
 			? esc_js(str_replace(array('ADDRESS', 'CITY'), array($address, $city), $this->options["gcal_location"]))
@@ -1775,7 +1778,7 @@ class Appointments {
 		$param = array(
 			'action' => 'TEMPLATE',
 			'text' => $text,
-			'dates' => date("Ymd\THis\Z", $start - $tdif) . "/" . date("Ymd\THis\Z", $end - $tdif),
+			'dates' => $gmt_start . "/" . $gmt_end,
 			'sprop' => 'website:' . home_url(),
 			'location' => $location
 		);
