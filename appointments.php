@@ -36,6 +36,8 @@ class Appointments {
 
 	function __construct() {
 
+		include_once( 'includes/helpers.php' );
+
 		$this->plugin_dir = plugin_dir_path(__FILE__);
 		$this->plugin_url = plugins_url(basename(dirname(__FILE__)));
 
@@ -317,20 +319,7 @@ class Appointments {
 		return 0;
 	}
 
-	/**
-	 * Get all services
-	 * @param order_by: ORDER BY clause for mysql
-	 * @return array of objects
-	 */
-	function get_services( $order_by="ID" ) {
-		$order_by = $this->sanitize_order_by( $order_by );
-		$services = wp_cache_get( 'all_services_' . $order_by );
-		if ( false === $services ) {
-			$services = $this->db->get_results("SELECT * FROM " . $this->services_table . " ORDER BY ". esc_sql($order_by) ." " );
-			wp_cache_set( 'all_services_' . $order_by, $services );
-		}
-		return $services;
-	}
+
 
 	 /**
 	 * Allow only certain order_by clauses
@@ -351,21 +340,18 @@ class Appointments {
 	 * @return object
 	 */
 	function get_service( $ID ) {
-		$service = wp_cache_get( 'service_'. $ID );
-		if ( false === $service ) {
-			$services = $this->get_services();
-			if ( $services ) {
-				foreach ( $services as $s ) {
-					if ( $s->ID == $ID ) {
-						$service = $s;
-						break;
-					}
+		$services = $this->get_services();
+		if ( $services ) {
+			foreach ( $services as $s ) {
+				if ( $s->ID == $ID ) {
+					$service = $s;
+					break;
 				}
-				wp_cache_set( 'service_'. $ID, $service );
 			}
-			else
-				$service = null;
 		}
+		else
+			$service = null;
+
 		return $service;
 	}
 
@@ -376,19 +362,16 @@ class Appointments {
 	 * @return array of objects
 	 */
 	function get_services_by_worker( $w ) {
-		$services_by_worker = wp_cache_get( 'services_by_worker_' . $w );
-		if ( false === $services_by_worker ) {
-			$services_by_worker = array();
-			$worker = $this->get_worker( $w );
-			if ( $worker && is_object( $worker ) ) {
-				$services_provided = $this->_explode( $worker->services_provided );
-				asort( $services_provided ); // Sort by service ID from low to high
-				foreach( $services_provided as $service_id ) {
-					$services_by_worker[] = $this->get_service( $service_id );
-				}
+		$services_by_worker = array();
+		$worker = $this->get_worker( $w );
+		if ( $worker && is_object( $worker ) ) {
+			$services_provided = $this->_explode( $worker->services_provided );
+			asort( $services_provided ); // Sort by service ID from low to high
+			foreach( $services_provided as $service_id ) {
+				$services_by_worker[] = $this->get_service( $service_id );
 			}
-			wp_cache_set( 'services_by_worker_' . $w , $services_by_worker );
 		}
+
 		return $services_by_worker;
 	}
 
@@ -400,7 +383,16 @@ class Appointments {
 	function get_workers( $order_by="ID" ) {
         $order_by = apply_filters( 'app_get_workers_orderby', $order_by );
 		$order_by = $this->sanitize_order_by( $order_by );
-		$workers = wp_cache_get( 'all_workers_' . str_replace( ' ', '_', $order_by ) );
+
+		$orderby_cache_key = 'appointments_workers_orderby';
+		$results_cache_key = 'appointments_workers_results';
+
+		$cached_orderby = wp_cache_get( $orderby_cache_key, 'appointments_workers' );
+		if ( $cached_orderby != $order_by ) {
+			appointments_delete_workers_cache();
+		}
+
+		$workers = wp_cache_get( $results_cache_key, 'appointments_workers' );
 		if ( false === $workers ) {
 			// Sorting by name requires special case
 			if ( stripos( $order_by, 'name' ) !== false ) {
@@ -413,9 +405,37 @@ class Appointments {
 			}
 			else
 				$workers = $this->db->get_results("SELECT * FROM " . $this->workers_table . " ORDER BY ". esc_sql($order_by) ." " );
-			wp_cache_set( 'all_workers_' . str_replace( ' ', '_', $order_by ), $workers );
+
+			wp_cache_set( $orderby_cache_key, $order_by, 'appointments_workers' );
+			wp_cache_set( $results_cache_key, $workers, 'appointments_workers' );
 		}
 		return $workers;
+	}
+
+	/**
+	 * Get all services
+	 * @param order_by: ORDER BY clause for mysql
+	 * @return array of objects
+	 */
+	function get_services( $order_by="ID" ) {
+		$order_by = $this->sanitize_order_by( $order_by );
+
+		$orderby_cache_key = 'appointments_services_orderby';
+		$results_cache_key = 'appointments_services_results';
+
+		$cached_orderby = wp_cache_get( $orderby_cache_key, 'appointments_services' );
+		if ( $cached_orderby != $order_by ) {
+			appointments_delete_services_cache();
+		}
+
+		$services = wp_cache_get( $results_cache_key, 'appointments_services' );
+		if ( false === $services ) {
+			$services = $this->db->get_results("SELECT * FROM " . $this->services_table . " ORDER BY ". esc_sql($order_by) ." " );
+			wp_cache_set( $orderby_cache_key, $order_by, 'appointments_services' );
+			wp_cache_set( $results_cache_key, $services, 'appointments_services' );
+		}
+
+		return $services;
 	}
 
 	/**
@@ -498,12 +518,13 @@ class Appointments {
 	 */
 	function get_work_break( $l, $w, $stat ) {
 		$work_break = null;
-		$work_breaks = wp_cache_get( 'work_breaks_'. $l . '_' . $w );
-
+		$cache_key = 'appointments_work_breaks-' . $l . '-' . $w;
+		$work_breaks = wp_cache_get( $cache_key );
 		if ( false === $work_breaks ) {
 			$work_breaks = $this->db->get_results( $this->db->prepare("SELECT * FROM {$this->wh_table} WHERE worker=%d AND location=%d", $w, $l) );
-			wp_cache_set( 'work_breaks_'. $l . '_' . $w, $work_breaks );
+			wp_cache_set( $cache_key, $work_breaks );
 		}
+
 		if ( $work_breaks ) {
 			foreach ( $work_breaks as $wb ) {
 				if ( $wb->status == $stat ) {
@@ -5350,6 +5371,8 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 				}
 				if ( $result )
 					add_action( 'admin_notices', array ( &$this, 'saved' ) );
+
+				appointments_delete_work_breaks_cache( $location, $this->worker );
 			}
 		}
 		// Save Exceptions
@@ -5449,6 +5472,9 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			}
 			if( $result )
 				add_action( 'admin_notices', array ( &$this, 'saved' ) );
+
+
+			appointments_delete_services_cache();
 		}
 		// Save Workers
 		if ( isset($_POST["action_app"]) && 'save_workers' == $_POST["action_app"] && is_array( $_POST["workers"] ) ) {
