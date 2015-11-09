@@ -274,7 +274,7 @@ class Appointments {
 	 * @return integer
 	 */
 	function get_first_service_id() {
-		$min = wp_cache_get( 'min_service_id' );
+		$min = wp_cache_get( 'min_service_id', 'appointments_services' );
 		if ( false === $min ) {
 			$services = $this->get_services();
 			if ( $services ) {
@@ -283,7 +283,7 @@ class Appointments {
 					if ( $service->ID < $min )
 						$min = $service->ID;
 				}
-				wp_cache_set( 'min_service_id', $min );
+				wp_cache_set( 'min_service_id', $min, 'appointments_services' );
 			}
 			else
 				$min = 0; // No services ?? - Not possible but let's be safe
@@ -567,11 +567,8 @@ class Appointments {
 	function get_app( $app_id ) {
 		if ( !$app_id )
 			return false;
-		$app = wp_cache_get( 'app_'. $app_id );
-		if ( false === $app ) {
-			$app = $this->db->get_row( $this->db->prepare("SELECT * FROM {$this->app_table} WHERE ID=%d", $app_id) );
-			wp_cache_set( 'app_'. $app_id, $app );
-		}
+
+		$app = $this->db->get_row( $this->db->prepare("SELECT * FROM {$this->app_table} WHERE ID=%d", $app_id) );
 		return $app;
 	}
 
@@ -582,7 +579,6 @@ class Appointments {
 	 * @return array of objects
 	 */
 	function get_reserve_apps( $l, $s, $w, $week=0 ) {
-		$apps = wp_cache_get( 'reserve_apps_'. $l . '_' . $s . '_' . $w . '_' . $week );
 		if ( false === $apps ) {
 			$location = $l ? "location='" . $this->db->escape($location) . "' AND" : '';
 			if ( 0 == $week ) {
@@ -609,7 +605,6 @@ class Appointments {
 // return all kinds of irrelevant data (appointments passed LONG time ago).
 // End @FIX
 			}
-			wp_cache_set( 'reserve_apps_'. $l . '_' . $s . '_' . $w . '_' . $week, $apps );
 		}
 		return $apps;
 	}
@@ -620,7 +615,6 @@ class Appointments {
 	 * @return array of objects
 	 */
 	function get_reserve_apps_by_worker( $l, $w, $week=0 ) {
-		$apps = wp_cache_get( 'reserve_apps_by_worker_'. $l . '_' . $w . '_' . $week );
 		if ( false === $apps ) {
 			$services = $this->get_services();
 			if ( $services ) {
@@ -631,7 +625,6 @@ class Appointments {
 						$apps = array_merge( $apps, $apps_worker );
 				}
 			}
-			wp_cache_set( 'reserve_apps_by_worker_'. $l . '_' . $w . '_' . $week, $apps );
 		}
 		return $apps;
 	}
@@ -643,7 +636,6 @@ class Appointments {
 	 * @return array of objects
 	 */
 	function get_reserve_apps_by_service( $l, $s, $week=0 ) {
-		$apps = wp_cache_get( 'reserve_apps_by_service_'. $l . '_' . $s . '_' . $week );
 		if ( false === $apps ) {
 			$workers = $this->get_workers_by_service( $s );
 			$apps = array();
@@ -662,7 +654,6 @@ class Appointments {
 			// Remove duplicates
 			$apps = $this->array_unique_object_by_ID( $apps );
 
-			wp_cache_set( 'reserve_apps_by_service_'. $l . '_' . $s . '_' . $week, $apps );
 		}
 		return $apps;
 	}
@@ -930,7 +921,6 @@ class Appointments {
 	 * @return integer
 	 */
 	function get_capacity() {
-		$capacity = wp_cache_get( 'capacity_'. $this->service );
 		if ( false === $capacity ) {
 			// If no worker is defined, capacity is always 1
 			$count = count( $this->get_workers() );
@@ -951,7 +941,6 @@ class Appointments {
 				else
 					$capacity = 1; // No service ?? - Not possible but let's be safe
 			}
-			wp_cache_set( 'capacity_'. $this->service, $capacity );
 		}
 		return apply_filters( 'app_get_capacity', $capacity, $this->service, $this->worker );
 	}
@@ -3580,6 +3569,8 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 						array( '%d', '%d', '%s', '%s' )
 						);
 				}
+
+
 			}
 			if ( $result || $result2 ) {
 				$message = sprintf( __('%s edited his working hours.', 'appointments'), $this->get_worker_name( $profileuser_id ) );
@@ -5414,6 +5405,8 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 				}
 				if ( $result )
 					add_action( 'admin_notices', array ( &$this, 'saved' ) );
+
+				appointments_delete_exceptions_cache( $location, $this->worker );
 			}
 		}
 		// Save Services
@@ -6964,7 +6957,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 	}
 
 	function transactions () {
-		App_Template::admin_transactions_list($type);
+		App_Template::admin_transactions_list();
 	}
 
 	function mytransactions ($type = 'past') {
