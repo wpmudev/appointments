@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.5.2
+Version: 1.5.3
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	var $version = "1.5.2";
+	var $version = "1.5.3";
 
 	function __construct() {
 
@@ -176,7 +176,7 @@ class Appointments {
 		$this->salt = $salt;
 
 		// Deal with zero-priced appointments auto-confirm
-		if ('yes' == $this->options['payment_required'] && !empty($this->options['allow_free_autoconfirm'])) {
+		if ( isset( $this->options['payment_required'] ) && 'yes' == $this->options['payment_required'] && !empty($this->options['allow_free_autoconfirm'])) {
 			if (!defined('APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM')) define('APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM', true);
 		}
 	}

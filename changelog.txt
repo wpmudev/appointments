@@ -1,3 +1,10 @@
+
+2015-11-19 - 1.5.3
+-------------------------------
+- Fixed: some cache system issues
+- Fixed: Timeshift with daylight savings issue.
+- Fixed: warnings/notices
+
 v1.5.2
 - Fix work hours array filtering.
 - Fix ampersand escapes in JS redirection URL filtering.
