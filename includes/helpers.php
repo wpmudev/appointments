@@ -21,3 +21,11 @@ function appointments_delete_exceptions_cache( $l, $w ) {
 	$cache_key = 'exceptions-' . $l . '-' . $w;
 	wp_cache_delete( $cache_key );
 }
+
+function appointments_session_start() {
+
+}
+
+function appointments_session_id() {
+
+}

@@ -75,3 +75,16 @@ a.app-remove_break, a.app-remove_break:hover, a.app-remove_break:active { color:
 .wp-admin .app-info_target {
 	display: none;
 }
+
+
+#dashboard_right_now a.app-pending:before,
+#dashboard_right_now a.app-active:before {
+	content: '\f469';
+}
+
+#dashboard_right_now a.app-active:before {
+	color: #56b086;
+}
+#dashboard_right_now a.app-pending:before {
+	color: #ffa26d;
+}

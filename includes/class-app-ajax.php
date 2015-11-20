@@ -1,11 +1,12 @@
 <?php
 
 
-class Appointmets_AJAX {
+class Appointments_AJAX {
 
 	public $options = array();
 
 	public function __construct() {
+		global $appointments;
 		add_action( 'wp_ajax_nopriv_app_paypal_ipn', array(&$this, 'handle_paypal_return')); // Send Paypal to IPN function
 
 		add_action( 'wp_ajax_delete_log', array( &$this, 'delete_log' ) ); 				// Clear log
@@ -20,8 +21,8 @@ class Appointmets_AJAX {
 		add_action( 'wp_ajax_post_confirmation', array( &$this, 'post_confirmation' ) ); 		// Do after final confirmation
 		add_action( 'wp_ajax_nopriv_post_confirmation', array( &$this, 'post_confirmation' ) ); // Do after final confirmation
 
-		add_action( 'wp_ajax_cancel_app', array( &$this, 'cancel' ) ); 							// Cancel appointment from my appointments
-		add_action( 'wp_ajax_nopriv_cancel_app', array( &$this, 'cancel' ) );
+		add_action( 'wp_ajax_cancel_app', array( $appointments, 'cancel' ) ); 							// Cancel appointment from my appointments
+		add_action( 'wp_ajax_nopriv_cancel_app', array( $appointments, 'cancel' ) );
 	}
 
 	/**
@@ -510,101 +511,7 @@ class Appointmets_AJAX {
 	}
 
 
-	/**
-	 * Handle cancellation of an appointment by the client
-	 * @since 1.2.6
-	 */
-	function cancel() {
-		global $appointments;
 
-		if ( isset( $this->options['allow_cancel'] ) && 'yes' == $this->options['allow_cancel'] ) {
-
-			/* Cancel by the link in email */
-			// We don't want to break any other plugin's init, so these conditions are very strict
-			if ( isset( $_GET['app_cancel'] ) && isset( $_GET['app_id'] ) && isset( $_GET['app_nonce'] ) ) {
-				$app_id = $_GET['app_id'];
-				$app = $appointments->get_app( $app_id );
-
-				if( isset( $app->status ) )
-					$stat = $app->status;
-				else
-					$stat = '';
-
-				// Addons may want to add or omit some stats, but as default we don't want completed appointments to be cancelled
-				$in_allowed_stat = apply_filters( 'app_cancel_allowed_status', ('pending' == $stat || 'confirmed' == $stat || 'paid' == $stat), $stat, $app_id );
-
-				// Also the clicked link may belong to a formerly created and deleted appointment.
-				// Another irrelevant app may have been created after cancel link has been sent. So we will check creation date
-				if ( $in_allowed_stat && $_GET['app_nonce'] == md5( $_GET['app_id']. $appointments->salt . strtotime( $app->created ) ) ) {
-					if ( $appointments->change_status( 'removed', $app_id ) ) {
-						$appointments->log( sprintf( __('Client %s cancelled appointment with ID: %s','appointments'), $appointments->get_client_name( $app_id ), $app_id ) );
-						$appointments->send_notification( $app_id, true );
-
-						if (!empty($appointments->gcal_api) && is_object($appointments->gcal_api)) $appointments->gcal_api->delete($app_id); // Drop the cancelled appointment
-						else if (!defined('APP_GCAL_DISABLE')) $appointments->log("Unable to issue a remote call to delete the remote appointment.");
-
-						do_action('app-appointments-appointment_cancelled', $app_id);
-						// If there is a header warning other plugins can do whatever they need
-						if ( !headers_sent() ) {
-							if ( isset( $appointments->options['cancel_page'] ) &&  $appointments->options['cancel_page'] ) {
-								wp_redirect( get_permalink( $appointments->options['cancel_page'] ) );
-								exit;
-							}
-							else {
-								wp_redirect( home_url() );
-								exit;
-							}
-						}
-					}
-					// Gracefully go to home page if appointment has already been cancelled, or do something here
-					do_action( 'app_cancel_failed', $app_id );
-				}
-			}
-
-			/* Cancel from my appointments table by ajax */
-			if ( isset( $_POST['app_id'] ) && isset( $_POST['cancel_nonce'] ) ) {
-				$app_id = $_POST['app_id'];
-
-				// Check if user is the real owner of this appointment to prevent malicious attempts
-				$owner = false;
-				// First try to find from database
-				if ( is_user_logged_in() ) {
-					global $current_user;
-					$app = $appointments->get_app( $app_id );
-					if ( $app->user && $app->user == $current_user->ID )
-						$owner = true;
-				}
-				// Then check cookie. Check is not so strict here, as he couldn't be seeing that cancel checkbox in the first place
-				if ( !$owner && isset( $_COOKIE["wpmudev_appointments"] ) ) {
-					$apps = unserialize( stripslashes( $_COOKIE["wpmudev_appointments"] ) );
-					if ( is_array( $apps ) && in_array( $app_id, $apps ) )
-						$owner = true;
-				}
-				// Addons may want to do something here
-				$owner = apply_filters( 'app_cancellation_owner', $owner, $app_id );
-
-				// He is the wrong guy, or he may have cleared his cookies while he is on the page
-				if ( !$owner )
-					die( json_encode( array('error'=>esc_js(__('There is an issue with this appointment. Please refresh the page and try again. If problem persists, please contact website admin.','appointments') ) ) ) );
-
-				// Now we can safely continue for cancel
-				if ( $appointments->change_status( 'removed', $app_id ) ) {
-					$appointments->log( sprintf( __('Client %s cancelled appointment with ID: %s','appointments'), $appointments->get_client_name( $app_id ), $app_id ) );
-					$appointments->send_notification( $app_id, true );
-
-					if (!empty($appointments->gcal_api) && is_object($appointments->gcal_api)) $appointments->gcal_api->delete($app_id); // Drop the cancelled appointment
-					else if (!defined('APP_GCAL_DISABLE')) $appointments->log("Unable to issue a remote call to delete the remote appointment.");
-
-					do_action('app-appointments-appointment_cancelled', $app_id);
-					die( json_encode( array('success'=>1)));
-				}
-				else
-					die( json_encode( array('error'=>esc_js(__('Appointment could not be cancelled. Please refresh the page and try again.','appointments') ) ) ) );
-			}
-		}
-		else if ( isset( $_POST['app_id'] ) && isset( $_POST['cancel_nonce'] ) )
-			die( json_encode( array('error'=>esc_js(__('Cancellation of appointments is disabled. Please contact website admin.','appointments') ) ) ) );
-	}
 
 	/**
 	 * Make checks on submitted fields and save appointment
