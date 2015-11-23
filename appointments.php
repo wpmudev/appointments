@@ -340,6 +340,7 @@ class Appointments {
 	 * @return object
 	 */
 	function get_service( $ID ) {
+		$service = false;
 		$services = $this->get_services();
 		if ( $services ) {
 			foreach ( $services as $s ) {
@@ -579,6 +580,7 @@ class Appointments {
 	 * @return array of objects
 	 */
 	function get_reserve_apps( $l, $s, $w, $week=0 ) {
+		$apps = false;
 		if ( false === $apps ) {
 			$location = $l ? "location='" . $this->db->escape($location) . "' AND" : '';
 			if ( 0 == $week ) {
@@ -615,6 +617,7 @@ class Appointments {
 	 * @return array of objects
 	 */
 	function get_reserve_apps_by_worker( $l, $w, $week=0 ) {
+		$apps = false;
 		if ( false === $apps ) {
 			$services = $this->get_services();
 			if ( $services ) {
@@ -921,6 +924,7 @@ class Appointments {
 	 * @return integer
 	 */
 	function get_capacity() {
+		$capacity = false;
 		if ( false === $capacity ) {
 			// If no worker is defined, capacity is always 1
 			$count = count( $this->get_workers() );
