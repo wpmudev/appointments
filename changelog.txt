@@ -1,4 +1,9 @@
 
+
+2015-11-25 - 1.5.4
+-------------------------------
+- Fixed: Appointments were not appearing in calendar due to cache system
+
 2015-11-19 - 1.5.3
 -------------------------------
 - Fixed: some cache system issues
