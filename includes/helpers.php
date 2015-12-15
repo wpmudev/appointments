@@ -1,12 +1,5 @@
 <?php
 
-
-function appointments_delete_services_cache() {
-	wp_cache_delete( 'appointments_services_orderby', 'appointments_services' );
-	wp_cache_delete( 'appointments_services_results', 'appointments_services' );
-	wp_cache_delete( 'min_service_id', 'appointments_services' );
-}
-
 function appointments_delete_workers_cache() {
 	wp_cache_delete( 'appointments_workers_orderby', 'appointments_workers' );
 	wp_cache_delete( 'appointments_workers_results', 'appointments_workers' );
@@ -28,4 +21,21 @@ function appointments_session_start() {
 
 function appointments_session_id() {
 
+}
+
+/**
+ * Return an Appointments table name
+ *
+ * @param string $table Table slug
+ *
+ * @return mixed
+ */
+function appointments_get_table( $table ) {
+	global $wpdb;
+
+	$tables = array(
+		'services' => $wpdb->prefix . 'app_services'
+	);
+
+	return isset ( $tables[ $table ] ) ? $tables[ $table ] : false;
 }

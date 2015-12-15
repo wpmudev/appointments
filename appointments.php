@@ -83,6 +83,8 @@ class Appointments {
 		add_action( 'init', array( &$this, 'cancel' ), 19 ); 				// Check cancellation of an appointment
 		add_filter( 'the_posts', array(&$this, 'load_styles') );			// Determine if we use shortcodes on the page
 
+		include_once( 'includes/class-app-service.php' );
+
 		if ( is_admin() ) {
 			include_once( 'admin/class-app-admin.php' );
 			new Appointments_Admin();
@@ -340,20 +342,7 @@ class Appointments {
 	 * @return object
 	 */
 	function get_service( $ID ) {
-		$service = false;
-		$services = $this->get_services();
-		if ( $services ) {
-			foreach ( $services as $s ) {
-				if ( $s->ID == $ID ) {
-					$service = $s;
-					break;
-				}
-			}
-		}
-		else
-			$service = null;
-
-		return $service;
+		return appointments_get_service( $ID );
 	}
 
 	/**
@@ -419,24 +408,8 @@ class Appointments {
 	 * @return array of objects
 	 */
 	function get_services( $order_by="ID" ) {
-		$order_by = $this->sanitize_order_by( $order_by );
-
-		$orderby_cache_key = 'appointments_services_orderby';
-		$results_cache_key = 'appointments_services_results';
-
-		$cached_orderby = wp_cache_get( $orderby_cache_key, 'appointments_services' );
-		if ( $cached_orderby != $order_by ) {
-			appointments_delete_services_cache();
-		}
-
-		$services = wp_cache_get( $results_cache_key, 'appointments_services' );
-		if ( false === $services ) {
-			$services = $this->db->get_results("SELECT * FROM " . $this->services_table . " ORDER BY ". esc_sql($order_by) ." " );
-			wp_cache_set( $orderby_cache_key, $order_by, 'appointments_services' );
-			wp_cache_set( $results_cache_key, $services, 'appointments_services' );
-		}
-
-		return $services;
+		$args = array( 'orderby'=> $order_by );
+		return appointments_get_services( $args );
 	}
 
 	/**
@@ -793,7 +766,7 @@ class Appointments {
 		// Safe text if we delete a service
 		$name = __('Not defined', 'appointments');
 		$result = $this->get_service( $service );
-		if ( $result != null )
+		if ( $result )
 			$name = $result->name;
 
 		$name = apply_filters( 'app_get_service_name', $name, $service );
@@ -4989,4 +4962,14 @@ if ( !function_exists( 'wpmudev_appointments_uninstall' ) ) {
 if ( !function_exists( '_wpmudev_appointments_uninstall' ) ) {
 	function _wpmudev_appointments_uninstall () { do_action('app-core-doing_it_wrong', __FUNCTION__); }
 	function wpmudev_appointments_rmdir ($dir) { do_action('app-core-doing_it_wrong', __FUNCTION__); }
+}
+
+function appointments_activate() {
+	$installer = new App_Installer();
+	$installer->install();
+}
+
+function appointments_uninstall() {
+	$installer = new App_Installer();
+	$installer::uninstall();
 }

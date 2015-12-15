@@ -237,9 +237,7 @@ class App_MP_Bridge_Legacy {
 
 			// Find minimum service price here:
 			global $wpdb;
-			$min_price = $wpdb->get_var( "SELECT MIN(price) FROM " . $this->_core->services_table . " WHERE price>0 " );
-			if ( !$min_price )
-				$min_price = 0;
+			$min_price = appointments_get_services_min_price();
 
 			add_post_meta( $post_id, 'mp_price', array( $min_price ) );
 			// Variation ID

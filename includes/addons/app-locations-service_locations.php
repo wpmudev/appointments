@@ -206,9 +206,11 @@ class App_Locations_ServiceLocations {
 	}
 
 	private function _map_description_post_to_service_id ($post_id) {
-		global $appointments, $wpdb;
-		$sql = $wpdb->prepare("SELECT ID FROM {$appointments->services_table} WHERE page=%d", $post_id);
-		return $wpdb->get_var($sql);
+		$services = appointments_get_services( array( 'page' => $post_id, 'fields' => 'ID' ) );
+		if ( ! empty( $services ) )
+			return $services[0];
+
+		return '';
 	}
 }
 App_Locations_ServiceLocations::serve();

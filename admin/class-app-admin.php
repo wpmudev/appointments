@@ -482,7 +482,7 @@ class Appointments_Admin {
 
 		global $current_user;
 		$r = false;
-		$results = $appointments->get_services();
+		$results = appointments_get_services();
 		if ( !$results ) {
 			echo '<div class="error"><p>' .
 			     __('<b>[Appointments+]</b> You must define at least once service.', 'appointments') .
@@ -733,7 +733,7 @@ class Appointments_Admin {
 			if ( isset( $_POST["force_flush"] ) || $saved ) {
 				$appointments->flush_cache();
 				if ( isset( $_POST["force_flush"] ) )
-					add_action( 'admin_notices', array ( &$this, 'cleared' ) );
+					add_action( 'admin_notices', array ( &$appointments, 'cleared' ) );
 			}
 
 			if (isset($_POST['make_an_appointment']) || isset($_POST['make_an_appointment_product'])) {
@@ -779,7 +779,7 @@ class Appointments_Admin {
 
 				}
 				if ( $result )
-					add_action( 'admin_notices', array ( &$this, 'saved' ) );
+					add_action( 'admin_notices', array ( &$appointments, 'saved' ) );
 
 				appointments_delete_work_breaks_cache( $location, $appointments->worker );
 			}
@@ -822,7 +822,7 @@ class Appointments_Admin {
 						$result = true;
 				}
 				if ( $result )
-					add_action( 'admin_notices', array ( &$this, 'saved' ) );
+					add_action( 'admin_notices', array ( &$appointments, 'saved' ) );
 
 				appointments_delete_exceptions_cache( $location, $appointments->worker );
 			}
@@ -833,45 +833,36 @@ class Appointments_Admin {
 			foreach ( $_POST["services"] as $ID=>$service ) {
 				if ( '' != trim( $service["name"] ) ) {
 					// Update or insert?
-					$count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(ID) FROM {$appointments->services_table} WHERE ID=%d", $ID));
-					if ( $count ) {
-						$r = $wpdb->update( $appointments->services_table,
-							array(
-								'name'		=> $service["name"],
-								'capacity'	=> (int)$service["capacity"],
-								'duration'	=> $service["duration"],
-								'price'		=> preg_replace("/[^0-9,.]/", "", $service["price"]),
-								'page'		=> $service["page"]
-							),
-							array( 'ID'		=> $ID ),
-							array( '%s', '%d', '%d','%s','%d' )
+					$_service = appointments_get_service( $ID );
+					if ( $_service ) {
+						$args = array(
+							'name'		=> $service["name"],
+							'capacity'	=> (int)$service["capacity"],
+							'duration'	=> $service["duration"],
+							'price'		=> $service["price"],
+							'page'		=> $service["page"]
 						);
-						if ( $r )
-							$result = true;
+
+						$result = appointments_update_service( $ID, $args );
 					}
 					else {
-						//if ((int)$this->db->get_var("SELECT COUNT(ID) FROM {$this->services_table}") >= 2) { /* ... */ }
-						$r = $wpdb->insert( $appointments->services_table,
-							array(
-								'ID'		=> $ID,
-								'name'		=> $service["name"],
-								'capacity'	=> (int)$service["capacity"],
-								'duration'	=> $service["duration"],
-								'price'		=> preg_replace("/[^0-9,.]/", "", $service["price"]),
-								'page'		=> $service["page"]
-							),
-							array( '%d', '%s', '%d', '%d','%s','%d' )
+						$args = array(
+							'ID'		=> $ID,
+							'name'		=> $service["name"],
+							'capacity'	=> (int)$service["capacity"],
+							'duration'	=> $service["duration"],
+							'price'		=> $service["price"],
+							'page'		=> $service["page"]
 						);
-						if ( $r )
-							$result = true;
+						$result = appointments_insert_service( $args );
 					}
+
 					do_action('app-services-service-updated', $ID);
 				}
 				else {
 					// Entering an empty name means deleting of a service
-					$r = $wpdb->query(
-						$wpdb->prepare("DELETE FROM {$appointments->services_table} WHERE ID=%d LIMIT 1", $ID)
-					);
+					$r = appointments_delete_service( $ID );
+
 					// Remove deleted service also from workers table
 					$r1 = $wpdb->query(
 						$wpdb->prepare("UPDATE {$appointments->workers_table} SET services_provided = REPLACE(services_provided,':%d:','') ", $ID)
@@ -882,7 +873,7 @@ class Appointments_Admin {
 				}
 			}
 			if( $result )
-				add_action( 'admin_notices', array ( &$this, 'saved' ) );
+				add_action( 'admin_notices', array ( &$appointments, 'saved' ) );
 
 
 			appointments_delete_services_cache();
@@ -987,7 +978,7 @@ class Appointments_Admin {
 				}
 			}
 			if( $result || $updated || $inserted )
-				add_action( 'admin_notices', array ( &$this, 'saved' ) );
+				add_action( 'admin_notices', array ( &$appointments, 'saved' ) );
 		}
 
 		// Delete removed app records
