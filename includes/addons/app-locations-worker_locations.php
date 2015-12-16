@@ -207,8 +207,11 @@ class App_Locations_WorkerLocations {
 
 	private function _map_description_post_to_worker_id ($post_id) {
 		global $appointments, $wpdb;
-		$sql = $wpdb->prepare("SELECT ID FROM {$appointments->workers_table} WHERE page=%d", $post_id);
-		return $wpdb->get_var($sql);
+		$workers = appointments_get_workers( array( 'page' => $post_id ) );
+		if ( ! empty( $workers ) )
+			return $workers[0]->ID;
+
+		return false;
 	}
 }
 App_Locations_WorkerLocations::serve();

@@ -84,6 +84,7 @@ class Appointments {
 		add_filter( 'the_posts', array(&$this, 'load_styles') );			// Determine if we use shortcodes on the page
 
 		include_once( 'includes/class-app-service.php' );
+		include_once( 'includes/class-app-worker.php' );
 
 		if ( is_admin() ) {
 			include_once( 'admin/class-app-admin.php' );
@@ -371,35 +372,26 @@ class Appointments {
 	 * @return array of objects
 	 */
 	function get_workers( $order_by="ID" ) {
-        $order_by = apply_filters( 'app_get_workers_orderby', $order_by );
-		$order_by = $this->sanitize_order_by( $order_by );
+		$args = array(
+			'orderby' => $order_by
+		);
+		return appointments_get_workers( $args );
 
-		$orderby_cache_key = 'appointments_workers_orderby';
-		$results_cache_key = 'appointments_workers_results';
-
-		$cached_orderby = wp_cache_get( $orderby_cache_key, 'appointments_workers' );
-		if ( $cached_orderby != $order_by ) {
-			appointments_delete_workers_cache();
-		}
-
-		$workers = wp_cache_get( $results_cache_key, 'appointments_workers' );
-		if ( false === $workers ) {
-			// Sorting by name requires special case
-			if ( stripos( $order_by, 'name' ) !== false ) {
-				$workers_ = $this->db->get_results("SELECT * FROM " . $this->workers_table . " " );
-				if ( stripos( $order_by, 'desc' ) !== false )
-					usort( $workers_, array( &$this, 'get_workers_desc' ) );
-				else
-					usort( $workers_, array( &$this, 'get_workers_asc' ) );
-				$workers = $workers_;
-			}
+		// @TODO: Some sorting:
+		// Sorting by name requires special case
+		if ( stripos( $order_by, 'name' ) !== false ) {
+			$workers_ = $this->db->get_results("SELECT * FROM " . $this->workers_table . " " );
+			if ( stripos( $order_by, 'desc' ) !== false )
+				usort( $workers_, array( &$this, 'get_workers_desc' ) );
 			else
-				$workers = $this->db->get_results("SELECT * FROM " . $this->workers_table . " ORDER BY ". esc_sql($order_by) ." " );
-
-			wp_cache_set( $orderby_cache_key, $order_by, 'appointments_workers' );
-			wp_cache_set( $results_cache_key, $workers, 'appointments_workers' );
+				usort( $workers_, array( &$this, 'get_workers_asc' ) );
+			$workers = $workers_;
 		}
-		return $workers;
+		else
+			$workers = $this->db->get_results("SELECT * FROM " . $this->workers_table . " ORDER BY ". esc_sql($order_by) ." " );
+
+		wp_cache_set( $orderby_cache_key, $order_by, 'appointments_workers' );
+		wp_cache_set( $results_cache_key, $workers, 'appointments_workers' );
 	}
 
 	/**
@@ -4192,18 +4184,16 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		//$r = $wpdb->query( "DELETE FROM " . $this->workers_table . " WHERE ID=".$ID." LIMIT 1 " );
 		//$r1 = $wpdb->query( "DELETE FROM " . $this->wh_table . " WHERE worker=".$ID." " );
 		//$r2 = $wpdb->query( "DELETE FROM " . $this->exceptions_table . " WHERE worker=".$ID." " );
-		$r = $wpdb->query( $wpdb->prepare("DELETE FROM {$this->workers_table} WHERE ID=%d LIMIT 1", $ID) );
-		$r1 = $wpdb->query( $wpdb->prepare("DELETE FROM {$this->wh_table} WHERE worker=%d", $ID) );
-		$r2 = $wpdb->query( $wpdb->prepare("DELETE FROM {$this->exceptions_table} WHERE worker=%d", $ID) );
+		$r1 = appointments_delete_worker( $ID );
 
 		// Also modify app table
-		$r3 = $wpdb->update(
+		$r2 = $wpdb->update(
 			$this->app_table,
 			array( 'worker'	=>	0 ),
 			array( 'worker'	=> $ID )
 		);
 
-		if ( $r || $r1 || $r2 || $r3 )
+		if ( $r1 || $r2 )
 			$this->flush_cache();
 	}
 
@@ -4228,21 +4218,16 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		if ( !$prefix )
 			return;
 
-		//$r = $wpdb->query( "DELETE FROM " . $prefix . "app_workers WHERE ID=".$ID." LIMIT 1 " );
-		//$r1 = $wpdb->query( "DELETE FROM " . $prefix . "app_working_hours WHERE worker=".$ID." " );
-		//$r2 = $wpdb->query( "DELETE FROM " . $prefix . "app_exceptions WHERE worker=".$ID." " );
-		$r = $wpdb->query( $wpdb->prepare("DELETE FROM {$prefix}app_workers WHERE ID=%d LIMIT 1", $ID) );
-		$r1 = $wpdb->query( $wpdb->prepare("DELETE FROM {$prefix}app_working_hours WHERE worker=%d", $ID) );
-		$r2 = $wpdb->query( $wpdb->prepare("DELETE FROM {$prefix}app_exceptions WHERE worker=%d", $ID) );
+		$r1 = appointments_delete_worker( $ID );
 
 		// Also modify app table
-		$r3 = $wpdb->update(
+		$r2 = $wpdb->update(
 			$prefix . "app_appointments",
 			array( 'worker'	=>	0 ),
 			array( 'worker'	=> $ID )
 		);
 
-		if ( $r || $r1 || $r2 || $r3 )
+		if ( $r1 || $r2 )
 			$this->flush_cache();
 	}
 

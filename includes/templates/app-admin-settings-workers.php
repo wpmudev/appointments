@@ -22,7 +22,7 @@
 	</td>
 	</tr>
 	<?php
-	$workers = $wpdb->get_results("SELECT * FROM " . $appointments->workers_table . " " );
+	$workers = appointments_get_workers();
 	$max_id = 0;
 	if ( is_array( $workers ) && $nos = count( $workers ) ) {
 		foreach ( $workers as $worker ) {

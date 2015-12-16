@@ -862,120 +862,75 @@ class Appointments_Admin {
 				else {
 					// Entering an empty name means deleting of a service
 					$r = appointments_delete_service( $ID );
-
-					// Remove deleted service also from workers table
-					$r1 = $wpdb->query(
-						$wpdb->prepare("UPDATE {$appointments->workers_table} SET services_provided = REPLACE(services_provided,':%d:','') ", $ID)
-					//"UPDATE ". $this->workers_table . " SET services_provided = REPLACE(services_provided,':".$ID.":','') "
-					);
-					if ( $r || $r1 )
+					if ( $r )
 						$result = true;
 				}
 			}
 			if( $result )
 				add_action( 'admin_notices', array ( &$appointments, 'saved' ) );
 
-
-			appointments_delete_services_cache();
 		}
 		// Save Workers
 		if ( isset($_POST["action_app"]) && 'save_workers' == $_POST["action_app"] && is_array( $_POST["workers"] ) ) {
-			foreach ( $_POST["workers"] as $worker ) {
-				$ID = $worker["user"];
-				if ( $ID && !empty ( $worker["services_provided"] ) ) {
-					$inserted = false;
-					// Does the worker have already a record?
-					$count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$appointments->workers_table} WHERE ID=%d", $ID));
-					if ( $count ) {
-						if ( !$appointments->db_version )
-							$r = $wpdb->update( $appointments->workers_table,
-								array(
-									'price'				=> preg_replace("/[^0-9,.]/", "", $worker["price"]),
-									'services_provided'	=> $this->_implode( $worker["services_provided"] ),
-									'page'				=> $worker["page"]
-								),
-								array( 'ID'				=> $worker["user"] ),
-								array( '%s', '%s','%d' )
+			foreach ( $_POST["workers"] as $worker_id => $worker ) {
+				$new_worker_id = absint( $worker["user"] );
+ 				$worker_id = absint( $worker_id );
+				$inserted = false;
+				$updated = false;
+				$result = false;
+
+				$worker_exists = appointments_get_worker( $worker_id );
+
+				if ( $worker_exists ) {
+					// Update
+					if ( ( $new_worker_id != $worker_id ) && ! empty ( $worker["services_provided"] ) ) {
+						// We are trying to chage the user ID
+						$count = appointments_get_worker( $new_worker_id );
+
+						// If the new ID already exist, do nothing
+						if ( ! $count ) {
+							// Otherwise, change the ID
+							$args = array(
+									'ID' => $new_worker_id,
+									'price' => $worker["price"],
+									'services_provided' => $worker["services_provided"],
+									'dummy' => isset( $worker["dummy"] ),
+									'page' => $worker['page']
 							);
-						else
-							$r = $wpdb->update( $appointments->workers_table,
-								array(
-									'price'				=> preg_replace("/[^0-9,.]/", "", $worker["price"]),
-									'services_provided'	=> $this->_implode( $worker["services_provided"] ),
-									'page'				=> $worker["page"],
-									'dummy'				=> isset( $worker["dummy"] )
-								),
-								array( 'ID'				=> $worker["user"] ),
-								array( '%s', '%s','%d', '%s' )
-							);
+							$updated = appointments_update_worker( $worker_id, $args );
+						}
+					}
+					elseif ( ( $new_worker_id == $worker_id ) && ! empty ( $worker["services_provided"] ) ) {
+						// Do not change user ID but update
+						$args = array(
+								'price' => $worker["price"],
+								'services_provided' => $worker["services_provided"],
+								'dummy' => isset( $worker["dummy"] ),
+								'page' => $worker['page']
+						);
+						$updated = appointments_update_worker( $worker_id, $args );
+					}
+					elseif ( empty( $worker["services_provided"] ) ) {
+						$r = appointments_delete_worker( $worker_id );
 						if ( $r )
-							$updated = true;
+							$result = true;
 					}
-					else {
-						if ( !$appointments->db_version ) {
-							$r = $wpdb->insert(
-								$appointments->workers_table,
-								array(
-									'ID'				=> $worker["user"],
-									'price'				=> preg_replace("/[^0-9,.]/", "", $worker["price"]),
-									'services_provided'	=> $this->_implode( $worker["services_provided"] ),
-									'page'				=> $worker["page"]
-								),
-								array( '%d', '%s', '%s','%d' )
-							);
-						} else {
-							$r = $wpdb->insert(
-								$appointments->workers_table,
-								array(
-									'ID'				=> $worker["user"],
-									'price'				=> preg_replace("/[^0-9,.]/", "", $worker["price"]),
-									'services_provided'	=> $this->_implode( $worker["services_provided"] ),
-									'page'				=> $worker["page"],
-									'dummy'				=> isset ( $worker["dummy"] )
-								),
-								array( '%d', '%s', '%s', '%d', '%s' )
-							);
-						}
-						if ( $r ) {
-							// Insert the default working hours to the worker's working hours
-							foreach ( array('open', 'closed') as $stat ) {
-								$result_wh = $wpdb->get_row( $wpdb->prepare("SELECT * FROM {$appointments->wh_table} WHERE location=0 AND service=0 AND status=%s", $stat), ARRAY_A );
-								if ( $result_wh != null ) {
-									$result_wh["ID"] = 'NULL';
-									$result_wh["worker"] = $ID;
-									$wpdb->insert( $appointments->wh_table,
-										$result_wh
-									);
-								}
-							}
-							// Insert the default holidays to the worker's holidays
-							foreach ( array('open', 'closed') as $stat ) {
-								$result_wh = $wpdb->get_row( $wpdb->prepare("SELECT * FROM {$appointments->exceptions_table} WHERE location=0 AND service=0 AND status=%s", $stat), ARRAY_A );
-								if ( $result_wh != null ) {
-									$result_wh["ID"] = 'NULL';
-									$result_wh["worker"] = $ID;
-									$wpdb->insert(
-											$appointments->exceptions_table,
-										$result_wh
-									);
-								}
-							}
-							$inserted = true;
-						}
-					}
-					do_action('app-workers-worker-updated', $ID);
 				}
-				// Entering an empty service name means deleting of a worker
-				else if ( $ID ) {
-					//$r = $wpdb->query( "DELETE FROM " . $this->workers_table . " WHERE ID=".$ID." LIMIT 1 " );
-					//$r1 = $wpdb->query( "DELETE FROM " . $this->wh_table . " WHERE worker=".$ID." " );
-					//$r2 = $wpdb->query( "DELETE FROM " . $this->exceptions_table . " WHERE worker=".$ID." " );
-					$r = $wpdb->query( $wpdb->prepare("DELETE FROM {$appointments->workers_table} WHERE ID=%d LIMIT 1", $ID) );
-					$r1 = $wpdb->query( $wpdb->prepare("DELETE FROM {$appointments->wh_table} WHERE worker=%d", $ID) );
-					$r2 = $wpdb->query( $wpdb->prepare("DELETE FROM {$appointments->exceptions_table} WHERE worker=%d", $ID) );
-					if ( $r || $r1 || $r2 )
-						$result = true;
+				elseif ( ! $worker_exists && ! empty( $worker["services_provided"] ) ) {
+					// Insert
+					$args = array(
+						'ID'				=> $worker["user"],
+						'price'				=> $worker["price"],
+						'services_provided'	=> $worker["services_provided"],
+						'page'				=> $worker["page"],
+						'dummy'				=> isset ( $worker["dummy"] )
+					);
+					$inserted = appointments_insert_worker( $args );
+
+					if ( $inserted )
+						do_action( 'app-workers-worker-updated', $worker_id );
 				}
+
 			}
 			if( $result || $updated || $inserted )
 				add_action( 'admin_notices', array ( &$appointments, 'saved' ) );

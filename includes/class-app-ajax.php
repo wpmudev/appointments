@@ -346,7 +346,7 @@ class Appointments_AJAX {
 		$html .= '</select>';
 		$html .= '</label>';
 		/* Workers */
-		$workers = $wpdb->get_results("SELECT * FROM " . $appointments->workers_table . " " );
+		$workers = appointments_get_workers();
 		$html .= '<label>';
 		$html .= '<span class="title">'.__('Provider', 'appointments'). '</span>';
 		$html .= '<select name="worker">';

@@ -165,7 +165,7 @@ function appointments_update_service( $service_id, $args ) {
 
 	do_action( 'wpmudev_appointments_update_service', $service_id, $args, $old_service );
 
-	return $result;
+	return (bool)$result;
 }
 
 
@@ -355,6 +355,15 @@ function appointments_delete_service( $service_id ) {
 	$result = $wpdb->query(
 		$wpdb->prepare(
 			"DELETE FROM $table WHERE ID = %d" ,
+			$service_id
+		)
+	);
+
+	// Remove the service from all workers
+	$table = appointments_get_table( 'workers' );
+	$wpdb->query(
+		$wpdb->prepare(
+			"UPDATE $table SET services_provided = REPLACE( services_provided,':%d:','' )",
 			$service_id
 		)
 	);

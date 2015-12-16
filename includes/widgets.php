@@ -121,6 +121,7 @@ class Appointments_Widget_Service_Providers extends Appointments_Widget_Helper {
 		;
 
 		global $appointments;
+		// @TODO: appointments_get_workers should make this for us
 		$results = $appointments->db->get_results("SELECT * FROM {$appointments->workers_table} {$allow_no_links} LIMIT {$count}");
 
 		if ( $results ) {
