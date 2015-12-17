@@ -170,6 +170,12 @@ class App_Workers_Test extends App_UnitTestCase {
 		$workers = appointments_get_workers( array( 'count' => true ) );
 		$this->assertEquals( 2, $workers );
 
+		$workers = appointments_get_workers( array( 'limit' => 1 ) );
+		$this->assertCount( 1, $workers );
+
+		$workers = appointments_get_workers( array( 'with_page' => true ) );
+		$this->assertCount( 1, $workers );
+
 	}
 
 	function test_update_worker() {
@@ -211,6 +217,26 @@ class App_Workers_Test extends App_UnitTestCase {
 		$result = appointments_update_worker( $user_id_2, array( 'ID' => 8888 ) );
 		$this->assertFalse( $result );
 
+	}
+
+	function test_get_worker_services() {
+		$args = $this->factory->user->generate_args();
+		$user_id = $this->factory->user->create_object( $args );
+
+		$service_id_1 = appointments_insert_service( array( 'name' => 'My Service 1' ) );
+		$service_id_2 = appointments_insert_service( array( 'name' => 'My Service 2' ) );
+
+		$args = array(
+			'ID' => $user_id,
+			'services_provided' => array( $service_id_1, $service_id_2 ),
+			'dummy' => false
+		);
+		appointments_insert_worker( $args );
+
+		$services = appointments_get_worker_services( $user_id );
+		$this->assertCount( 2, $services );
+		$this->assertInstanceOf( 'Appointments_Service', $services[0] );
+		$this->assertInstanceOf( 'Appointments_Service', $services[1] );
 	}
 
 	/**

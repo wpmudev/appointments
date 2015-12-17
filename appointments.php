@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.5.4
+Version: 1.5.5-beta
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -346,25 +346,6 @@ class Appointments {
 		return appointments_get_service( $ID );
 	}
 
-	/**
-	 * Get services given by a certain worker
-	 * @param w: ID of the worker
-	 * @since 1.2.3
-	 * @return array of objects
-	 */
-	function get_services_by_worker( $w ) {
-		$services_by_worker = array();
-		$worker = $this->get_worker( $w );
-		if ( $worker && is_object( $worker ) ) {
-			$services_provided = $this->_explode( $worker->services_provided );
-			asort( $services_provided ); // Sort by service ID from low to high
-			foreach( $services_provided as $service_id ) {
-				$services_by_worker[] = $this->get_service( $service_id );
-			}
-		}
-
-		return $services_by_worker;
-	}
 
 	/**
 	 * Get all workers
@@ -422,24 +403,6 @@ class Appointments {
 		return strcmp( $this->get_worker_name( $b->ID ), $this->get_worker_name( $a->ID ) );
 	}
 
-	/**
-	 * Get a single worker with given ID
-	 * @param ID: Id of the worker to be retrieved
-	 * @return object
-	 */
-	function get_worker( $ID ) {
-		$worker = null;
-		$workers = $this->get_workers();
-		if ( $workers ) {
-			foreach ( $workers as $w ) {
-				if ( $w->ID == $ID ) {
-					$worker = $w;
-					break;
-				}
-			}
-		}
-		return $worker;
-	}
 
 	/**
 	 * Get workers giving a specific service (by its ID)
@@ -450,17 +413,11 @@ class Appointments {
 	 * @return array of objects
 	 */
 	function get_workers_by_service( $ID, $order_by="ID" ) {
-		//$order_by = $this->sanitize_order_by( $order_by );
-		$workers_by_service = false;
-		$workers = $this->get_workers( $order_by );
-		if ( $workers ) {
-			$workers_by_service = array();
-			foreach ( $workers as $worker ) {
-				if ( strpos( $worker->services_provided, ':'.$ID.':' ) !== false )
-					$workers_by_service[] = $worker;
-			}
-		}
-		return $workers_by_service;
+		$workers = appointments_get_workers( array( 'orderby' => $order_by, 'service' => $ID ) );
+		if ( empty( $workers ) )
+			return false;
+
+		return $workers;
 	}
 
 	/**
@@ -626,22 +583,6 @@ class Appointments {
 		return $apps;
 	}
 
-	/**
-	 * Find if a user is worker
-	 * @param user_id: Id of the user who will be checked if he is worker
-	 * @return bool
-	 */
-	function is_worker( $user_id=0 ) {
-		global $wpdb, $current_user;
-		if ( !$user_id )
-			$user_id = $current_user->ID;
-
-		$result = $this->get_worker( $user_id );
-		if ( $result != null )
-			return true;
-
-		return false;
-	}
 
 	/**
 	 * Find if a user is dummy
@@ -655,8 +596,8 @@ class Appointments {
 			$user_id = $current_user->ID;
 
 		// A dummy should be a worker
-		$result = $this->get_worker( $user_id );
-		if ( $result == null )
+		$result = appointments_get_worker( $user_id );
+		if ( ! $result )
 			return false;
 
 		// This is only supported after V1.0.6 and if DB is altered
@@ -679,7 +620,7 @@ class Appointments {
 		$user_name = '';
 		if ( 0 == $worker ) {
 			// Show different text to authorized people
-			if ( is_admin() || App_Roles::current_user_can( 'manage_options', App_Roles::CTX_STAFF ) || $this->is_worker( $current_user->ID ) )
+			if ( is_admin() || App_Roles::current_user_can( 'manage_options', App_Roles::CTX_STAFF ) || appointments_is_worker( $current_user->ID ) )
 				$user_name = __('Our staff', 'appointments');
 			else
 				$user_name = __('A specialist', 'appointments');
@@ -809,9 +750,9 @@ class Appointments {
 		global $current_user;
 		$this->get_lsw();
 		$service_obj = $this->get_service( $this->service );
-		$worker_obj = $this->get_worker( $this->worker );
+		$worker_obj = appointments_get_worker( $this->worker );
 
-		if ( $worker_obj != null && $worker_obj->price )
+		if ( $worker_obj && $worker_obj->price )
 			$worker_price = $worker_obj->price;
 		else
 			$worker_price = 0;
@@ -4181,9 +4122,6 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			return;
 
 		global $wpdb;
-		//$r = $wpdb->query( "DELETE FROM " . $this->workers_table . " WHERE ID=".$ID." LIMIT 1 " );
-		//$r1 = $wpdb->query( "DELETE FROM " . $this->wh_table . " WHERE worker=".$ID." " );
-		//$r2 = $wpdb->query( "DELETE FROM " . $this->exceptions_table . " WHERE worker=".$ID." " );
 		$r1 = appointments_delete_worker( $ID );
 
 		// Also modify app table
@@ -4380,7 +4318,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		$services = $this->get_services();
 		if ( $services ) {
 			if ( $php && is_object( $worker ) )
-				$services_provided = $this->_explode( $worker->services_provided );
+				$services_provided = $worker->services_provided;
 			else
 				$services_provided = false;
 			$html .= '<select class="add_worker_multiple" style="width:280px" multiple="multiple" name="workers['.$k.'][services_provided][]" >';

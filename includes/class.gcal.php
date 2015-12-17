@@ -117,7 +117,7 @@ class AppointmentsGcal {
 			return $text;
 
 		global $appointments;
-		if ( !$appointments->is_worker( $user_id ) )
+		if ( ! appointments_is_worker( $user_id ) )
 			return ' - ';
 
 		$mode = $this->get_api_mode( $user_id );

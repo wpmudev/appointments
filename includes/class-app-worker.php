@@ -43,6 +43,13 @@ class Appointments_Worker {
 		return $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table WHERE worker = %d", $this->ID ) );
 	}
 
+	public function get_services() {
+		if ( empty( $this->services_provided ) )
+			return array();
+
+		return array_map( 'appointments_get_service', $this->services_provided );
+	}
+
 }
 
 function appointments_get_worker( $worker_id ) {
@@ -69,6 +76,10 @@ function appointments_get_worker( $worker_id ) {
 		return new Appointments_Worker( $worker );
 
 	return false;
+}
+
+function appointments_is_worker( $id ) {
+	return appointments_get_worker( $id ) ? true : false;
 }
 
 function appointments_insert_worker( $args = array() ) {
@@ -295,7 +306,10 @@ function appointments_get_workers( $args = array() ) {
 		'orderby' => 'ID',
 		'page' => false, // Filter by page ID
 		'count' => false,
-		'fields' => false
+		'fields' => false,
+		'service' => false, // Filter by service
+		'with_page' => false, // Only pages IDs > 0
+		'limit' => false
 	);
 
 	$args = wp_parse_args( $args, $defaults );
@@ -306,21 +320,36 @@ function appointments_get_workers( $args = array() ) {
 	$page_id = absint( $args['page'] );
 
 	if ( $page_id )
-		$where[] = $wpdb->prepare( "s.page = %d", $page_id );
+		$where[] = $wpdb->prepare( "w.page = %d", $page_id );
+
+	$service_id = absint( $args['service'] );
+	if ( $service_id ) {
+		$where[] = $wpdb->prepare( "w.services_provided LIKE %s", '%:' . $service_id . ':%' );
+	}
 
 	$user_id = absint( $args['user_id'] );
 	if ( $user_id )
-		$where[] = $wpdb->prepare( "s.ID = %d", $user_id );
+		$where[] = $wpdb->prepare( "w.ID = %d", $user_id );
+
+	if ( $args['with_page'] ) {
+		$where[] = "w.page > 0";
+	}
 
 	// @TODO: We need to move this to somewhere else
 	$allowed_orderby = $whitelist = apply_filters( 'app_order_by_whitelist', array( 'ID', 'name', 'start', 'end', 'duration', 'price',
-		'ID DESC', 'name DESC', 'start DESC', 'end DESC', 'duration DESC', 'price DESC', 'RAND()' ) );
+		'ID DESC', 'name DESC', 'start DESC', 'end DESC', 'duration DESC', 'price DESC', 'RAND()', 'name ASC', 'name DESC' ) );
 
 	$order_query = "";
 
 	if ( in_array( $args['orderby'], $allowed_orderby ) ) {
 		$orderby = apply_filters( 'app_get_workers_orderby', $args['orderby'] );
 		$order_query = "ORDER BY $orderby";
+	}
+
+	$limit_query = '';
+	$limit = absint( $args['limit'] );
+	if ( $limit ) {
+		$limit_query = $wpdb->prepare( "LIMIT %d", $limit );
 	}
 
 	if ( $where )
@@ -338,9 +367,9 @@ function appointments_get_workers( $args = array() ) {
 			$get_col = false;
 
 		if ( $get_col )
-			$query = "SELECT $field FROM $table s $where $order_query";
+			$query = "SELECT $field FROM $table w $where $order_query $limit_query";
 		else
-			$query = "SELECT * FROM $table s $where $order_query";
+			$query = "SELECT * FROM $table w $where $order_query $limit_query";
 
 		$cache_key = md5( $query . '-' . 'app_get_workers' );
 		$cached_queries = wp_cache_get( 'app_get_workers' );
@@ -430,6 +459,15 @@ function appointments_delete_worker( $worker_id ) {
 	}
 
 	return false;
+}
+
+
+function appointments_get_worker_services( $worker_id ) {
+	$worker = appointments_get_worker( $worker_id );
+	if ( $worker )
+		return $worker->get_services();
+
+	return array();
 }
 
 function appointments_delete_worker_working_hours( $worker_id ) {

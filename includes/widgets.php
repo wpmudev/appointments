@@ -110,19 +110,17 @@ class Appointments_Widget_Service_Providers extends Appointments_Widget_Helper {
 
 	function content( $instance ) {
 
+		$args = array();
+
 		//extract( $instance );
-		$count = !empty($instance['count']) && is_numeric($instance['count'])
-			? (int)$instance['count']
+		$args['limit'] = !empty($instance['number']) && is_numeric($instance['number'])
+			? (int)$instance['number']
 			: 5
 		;
-		$allow_no_links = !empty($instance['allow_no_links'])
-			? ''
-			: 'WHERE page>0'
-		;
+		$args['with_page'] = !empty($instance['allow_no_links']) ? false : true;
 
 		global $appointments;
-		// @TODO: appointments_get_workers should make this for us
-		$results = $appointments->db->get_results("SELECT * FROM {$appointments->workers_table} {$allow_no_links} LIMIT {$count}");
+		$results = appointments_get_workers( $args );
 
 		if ( $results ) {
 			echo '<ul>';

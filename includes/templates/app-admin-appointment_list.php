@@ -159,7 +159,7 @@ else
 				<select name="app_provider_id" style='float:none;'>
 					<option value=""><?php _e('Filter by service provider','appointments'); ?></option>
 				<?php
-				$workers = $appointments->get_workers();
+				$workers = appointments_get_workers();
 				if ( $workers ) {
 					foreach ( $workers as $worker ) {
 						if ( $worker_id == $worker->ID )

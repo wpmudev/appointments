@@ -90,7 +90,7 @@ class Appointments_Admin {
 		}
 
 		// Only user who is a worker can save the rest
-		if ( !$appointments->is_worker( $profileuser_id ) )
+		if ( ! appointments_is_worker( $profileuser_id ) )
 			return;
 
 		// Confirm an appointment using profile page
@@ -233,7 +233,7 @@ class Appointments_Admin {
 				</td>
 			</tr>
 
-			<?php if ( !$appointments->is_worker( $profileuser->ID ) ) { ?>
+			<?php if ( ! appointments_is_worker( $profileuser->ID ) ) { ?>
 				<tr>
 					<th><label><?php _e("My Appointments", 'appointments'); ?></label></th>
 					<td>
@@ -329,7 +329,7 @@ class Appointments_Admin {
 				</script>
 			<?php } ?>
 			<?php } ?>
-			<?php if ( isset($appointments->options["gcal_api_allow_worker"]) && 'yes' == $appointments->options["gcal_api_allow_worker"] && $appointments->is_worker( $profileuser->ID ) ) { ?>
+			<?php if ( isset($appointments->options["gcal_api_allow_worker"]) && 'yes' == $appointments->options["gcal_api_allow_worker"] && appointments_is_worker( $profileuser->ID ) ) { ?>
 				<tr>
 					<th><label><?php _e("Appointments+ Google Calendar API", 'appointments'); ?></label></th>
 					<td>
@@ -969,7 +969,7 @@ class Appointments_Admin {
 				if ( $result ) {
 					global $current_user;
 					$userdata = get_userdata( $current_user->ID );
-					add_action( 'admin_notices', array ( &$this, 'updated' ) );
+					add_action( 'admin_notices', array ( &$appointments, 'updated' ) );
 					do_action( 'app_bulk_status_change',  $_POST["app"] );
 					$appointments->log( sprintf( __('Status of Appointment(s) with id(s):%s changed to %s by user:%s', 'appointments' ),  implode( ', ', $_POST["app"] ), $new_status, $userdata->user_login ) );
 

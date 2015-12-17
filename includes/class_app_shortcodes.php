@@ -72,7 +72,7 @@ class App_Shortcode_WorkerMonthlyCalendar extends App_Shortcode {
 		global $appointments, $wpdb;
 		$worker_sql = $status_sql = '';
 
-		$services = $appointments->get_services_by_worker($worker_id);
+		$services = appointments_get_worker_services($worker_id);
 		$service_ids = !empty($services)
 			? array_filter(array_map('intval', wp_list_pluck($services, 'ID')))
 			: false
@@ -82,7 +82,7 @@ class App_Shortcode_WorkerMonthlyCalendar extends App_Shortcode {
 			: $wpdb->prepare('worker=%d', $worker_id)
 		;
 
-		$status = is_array($status) ? array_map(array($wpdb, 'escape'), $status) : false;
+		$status = is_array($status) ? array_map( 'esc_sql', $status) : false;
 		$status_sql = $status ? "AND status IN('" . join("','", $status) . "')" : '';
 
 		$first = strtotime(date('Y-m-01', $start_at));
@@ -169,6 +169,8 @@ class App_Shortcode_WorkerMonthlyCalendar extends App_Shortcode {
 				$daily_schedule .
 			'</td>';
 		}
+
+		$ret = '';
 		if (0 == (6 - $last_dow + $week_start)) {
 			$ret .= '</tr>';
 		} else if ($last_dow > $week_start) {
@@ -296,7 +298,7 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 
 		if ( $worker ) {
 			// Check if such a worker exists
-			if ( !$appointments->is_worker( $worker ) )
+			if ( ! appointments_is_worker( $worker ) )
 				return;
 			$_REQUEST["app_provider_id"] = $worker;
 		}
@@ -468,7 +470,7 @@ class App_Shortcode_MonthlySchedule extends App_Shortcode {
 		// Force worker or pick up the single worker
 		if ( $worker ) {
 			// Check if such a worker exists
-			if (!$appointments->is_worker($worker)) return;
+			if (! appointments_is_worker($worker)) return;
 			$_REQUEST["app_provider_id"] = $worker;
 		}
 		else if ( $single_worker = $appointments->is_single_worker( $appointments->service ) ) {
@@ -941,7 +943,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		}
 
 		// Can worker confirm pending appointments?
-		if ( $_allow_confirm && $appointments->is_worker( $current_user->ID ) && isset( $appointments->options['allow_worker_confirm'] ) && 'yes' == $appointments->options['allow_worker_confirm'] )
+		if ( $_allow_confirm && appointments_is_worker( $current_user->ID ) && isset( $appointments->options['allow_worker_confirm'] ) && 'yes' == $appointments->options['allow_worker_confirm'] )
 			$allow_confirm = true;
 		else
 			$allow_confirm = false;
@@ -1207,7 +1209,7 @@ class App_Shortcode_Services extends App_Shortcode {
 		if (!trim($order_by)) $order_by = 'ID';
 
 		if ($worker) {
-			$services = $appointments->get_services_by_worker( $worker );
+			$services = appointments_get_worker_services( $worker );
 			// Find first service by this worker
 			$fsby = $services[0]->ID;
 			if ( $fsby && !@$_REQUEST['app_service_id'] ) {
