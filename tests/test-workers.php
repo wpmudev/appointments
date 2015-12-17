@@ -303,7 +303,7 @@ class App_Workers_Test extends App_UnitTestCase {
 
 		$this->assertNotEmpty( wp_cache_get( $user_id, 'app_workers' ) );
 
-		// If we insert another service, cache sould be cleared
+		// If we insert another worker, cache sould be cleared
 		appointments_insert_worker( array( 'ID' => $user_id_3, 'services_provided' => array( $service_id ) ) );
 		$this->assertFalse( wp_cache_get( 'app_get_workers' ) );
 

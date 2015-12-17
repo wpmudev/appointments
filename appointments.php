@@ -85,6 +85,7 @@ class Appointments {
 
 		include_once( 'includes/class-app-service.php' );
 		include_once( 'includes/class-app-worker.php' );
+		include_once( 'includes/class-app-appointment.php' );
 
 		if ( is_admin() ) {
 			include_once( 'admin/class-app-admin.php' );
@@ -502,35 +503,7 @@ class Appointments {
 	 * @return array of objects
 	 */
 	function get_reserve_apps( $l, $s, $w, $week=0 ) {
-		$apps = false;
-		if ( false === $apps ) {
-			$location = $l ? "location='" . $this->db->escape($location) . "' AND" : '';
-			if ( 0 == $week ) {
-				$apps = $this->db->get_results($this->db->prepare(
-					"SELECT * FROM {$this->app_table} " .
-						"WHERE {$location} service=%d AND worker=%d " .
-					"AND (status='pending' OR status='paid' OR status='confirmed' OR status='reserved')",
-					$s, $w)
-				);
-			} else {
-// @FIX: Problem: an appointment might already be ticked as "completed",
-// because of it's start time being in the past. Its end time, however, can still easily be
-// in the future. For long-running appointments (e.g. 2-3h) this could break the schedule slots
-// and show a registered- and paid for- slot as "available", when it's actually not.
-// E.g. http://premium.wpmudev.org/forums/topic/appointments-booking-conflictoverlapping-bookings
-				$apps = $this->db->get_results($this->db->prepare(
-					"SELECT * FROM {$this->app_table} " .
-					"WHERE {$location} service=%d AND worker=%d " .
-					//" AND (status='pending' OR status='paid' OR status='confirmed' OR status='reserved') AND WEEKOFYEAR(start)=".$week. " " ); // THIS IS A PROBLEM! It doesn't take into account the completed events ALTHOUGH they may very well still be there
-					"AND (status='pending' OR status='paid' OR status='confirmed' OR status='reserved' OR status='completed') AND WEEKOFYEAR(start)=%d",
-					$s, $w, $week)
-				);
-// *ONLY* applied to weekly-scoped data gathering, because otherwise this would possibly
-// return all kinds of irrelevant data (appointments passed LONG time ago).
-// End @FIX
-			}
-		}
-		return $apps;
+		return appointments_get_appointments( $l, $s, $w, $week );
 	}
 
 	/**
@@ -1205,6 +1178,7 @@ class Appointments {
 		);
 
 		if ($result) {
+			appointments_clear_appointment_cache( $app_id );
 			$this->flush_cache();
 			do_action( 'app_change_status', $stat, $app_id );
 
@@ -3636,6 +3610,8 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 						array('ID' => $r->ID),
 						array('%s')
 					);
+
+					appointments_clear_appointment_cache( $r->ID );
 				}
 			}
 		}
@@ -3741,6 +3717,8 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 						array('ID' => $r->ID),
 						array('%s')
 					);
+
+					appointments_clear_appointment_cache( $r->ID );
 				}
 			}
 		}
@@ -3850,6 +3828,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 								array( 'ID'	=> $expired->ID )
 							);
 				if ( $update ) {
+					appointments_clear_appointment_cache( $expired->ID );
 					do_action( 'app_remove_expired', $expired, $new_status );
 				}
 			}
@@ -3866,6 +3845,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 									array( 'ID'	=> $expired->ID )
 								);
 					if ( $update ) {
+						appointments_clear_appointment_cache( $expired->ID );
 						do_action( 'app_remove_pending', $expired );
 					}
 				}
@@ -4131,8 +4111,10 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			array( 'worker'	=> $ID )
 		);
 
-		if ( $r1 || $r2 )
+		if ( $r1 || $r2 ) {
+			appointments_clear_appointment_cache();
 			$this->flush_cache();
+		}
 	}
 
 	/**

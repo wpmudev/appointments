@@ -78,11 +78,15 @@ class App_Locations_ServiceLocations {
 		$location_id = self::service_to_location_id($appointment->service);
 		if (!$location_id) return false;
 
-		return $wpdb->update(
+		$result = $wpdb->update(
 			$appointments->app_table, 
 			array('location' => $location_id),
 			array('ID' => $appointment_id)
 		);
+
+		if ( $result ) {
+			appointments_clear_appointment_cache( $appointment_id );
+		}
 	}
 
 	public function show_settings () {
@@ -190,6 +194,10 @@ class App_Locations_ServiceLocations {
 				'service' => $service_id,
 			), '%s', '%s'
 		);
+
+		if ( $res ) {
+			appointments_clear_appointment_cache();
+		}
 	}
 
 	private function _get_service_location_markup ($service_id, $fallback='', $rich_content=true) {

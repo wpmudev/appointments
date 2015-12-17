@@ -99,6 +99,7 @@ class Appointments_AJAX {
 			// Update
 			$update_result = $wpdb->update( $appointments->app_table, $data, array('ID' => $app_id) );
 			if ( $update_result ) {
+				appointments_clear_appointment_cache( $app_id );
 				if ( ( 'pending' == $data['status'] || 'removed' == $data['status'] || 'completed' == $data['status'] ) && is_object( $appointments->gcal_api ) ) {
 					$appointments->gcal_api->delete( $app_id );
 				} else if (is_object($appointments->gcal_api) && $appointments->gcal_api->is_syncable_status($data['status'])) {
@@ -113,6 +114,7 @@ class Appointments_AJAX {
 		} else {
 			// Insert
 			$insert_result = $wpdb->insert( $appointments->app_table, $data );
+			appointments_clear_appointment_cache();
 			/*
 // Moved
 			if ( $insert_result && $resend && empty($email_sent) ) {
@@ -676,6 +678,8 @@ class Appointments_AJAX {
 				'note'		=>	$note
 			)
 		);
+
+		appointments_clear_appointment_cache();
 
 		if (!$result) {
 			die(json_encode(array(

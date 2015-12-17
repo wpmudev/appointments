@@ -947,8 +947,9 @@ class Appointments_Admin {
 			$result = $wpdb->query( "DELETE FROM " . $appointments->app_table . " WHERE " . $q . " " );
 			if ( $result ) {
 				global $current_user;
+				appointments_clear_appointment_cache();
 				$userdata = get_userdata( $current_user->ID );
-				add_action( 'admin_notices', array ( &$this, 'deleted' ) );
+				add_action( 'admin_notices', array ( &$appointments, 'deleted' ) );
 				do_action( 'app_deleted',  $_POST["app"] );
 				$appointments->log( sprintf( __('Appointment(s) with id(s):%s deleted by user:%s', 'appointments' ),  implode( ', ', $_POST["app"] ), $userdata->user_login ) );
 			}
@@ -967,6 +968,7 @@ class Appointments_Admin {
 			if ( array_key_exists( $new_status, $appointments->get_statuses() ) ) {
 				$result = $wpdb->query( "UPDATE " . $appointments->app_table . " SET status='".$new_status."' WHERE " . $q . " " );
 				if ( $result ) {
+					appointments_clear_appointment_cache();
 					global $current_user;
 					$userdata = get_userdata( $current_user->ID );
 					add_action( 'admin_notices', array ( &$appointments, 'updated' ) );
