@@ -939,15 +939,13 @@ class Appointments_Admin {
 		// Delete removed app records
 		if ( isset($_POST["delete_removed"]) && 'delete_removed' == $_POST["delete_removed"]
 		     && isset( $_POST["app"] ) && is_array( $_POST["app"] ) ) {
-			$q = '';
+			$result = 0;
 			foreach ( $_POST["app"] as $app_id ) {
-				$q .= " ID=". (int)$app_id. " OR";
+				$result = $result + appointments_delete_appointment( $app_id );
 			}
-			$q = rtrim( $q, " OR" );
-			$result = $wpdb->query( "DELETE FROM " . $appointments->app_table . " WHERE " . $q . " " );
+
 			if ( $result ) {
 				global $current_user;
-				appointments_clear_appointment_cache();
 				$userdata = get_userdata( $current_user->ID );
 				add_action( 'admin_notices', array ( &$appointments, 'deleted' ) );
 				do_action( 'app_deleted',  $_POST["app"] );
@@ -957,40 +955,35 @@ class Appointments_Admin {
 
 		// Bulk status change
 		if ( isset( $_POST["app_status_change"] ) && $_POST["app_new_status"] && isset( $_POST["app"] ) && is_array( $_POST["app"] ) ) {
-			$q = '';
+
+			$result = 0;
+			$new_status = $_POST["app_new_status"];
 			foreach ( $_POST["app"] as $app_id ) {
-				$q .= " ID=". (int)$app_id. " OR";
+				$result = $result + (int)appointments_update_appointment_status( absint( $app_id ), $new_status  );
 			}
-			$q = rtrim( $q, " OR" );
 
-			// Make a new status re-check here - It should be in status map
-			$new_status = esc_sql($_POST["app_new_status"]);
-			if ( array_key_exists( $new_status, $appointments->get_statuses() ) ) {
-				$result = $wpdb->query( "UPDATE " . $appointments->app_table . " SET status='".$new_status."' WHERE " . $q . " " );
-				if ( $result ) {
-					appointments_clear_appointment_cache();
-					global $current_user;
-					$userdata = get_userdata( $current_user->ID );
-					add_action( 'admin_notices', array ( &$appointments, 'updated' ) );
-					do_action( 'app_bulk_status_change',  $_POST["app"] );
-					$appointments->log( sprintf( __('Status of Appointment(s) with id(s):%s changed to %s by user:%s', 'appointments' ),  implode( ', ', $_POST["app"] ), $new_status, $userdata->user_login ) );
+			if ( $result ) {
+				$userdata = get_userdata( get_current_user_id() );
+				add_action( 'admin_notices', array ( &$appointments, 'updated' ) );
+				do_action( 'app_bulk_status_change',  $_POST["app"] );
 
-					if ( is_object( $appointments->gcal_api ) ) {
-						// If deleted, remove these from GCal too
-						if ( 'removed' == $new_status ) {
-							foreach ( $_POST["app"] as $app_id ) {
-								$appointments->gcal_api->delete( $app_id );
-								$appointments->send_removal_notification($app_id);
-							}
+				$appointments->log( sprintf( __('Status of Appointment(s) with id(s):%s changed to %s by user:%s', 'appointments' ),  implode( ', ', $_POST["app"] ), $new_status, $userdata->user_login ) );
+
+				if ( is_object( $appointments->gcal_api ) ) {
+					// If deleted, remove these from GCal too
+					if ( 'removed' == $new_status ) {
+						foreach ( $_POST["app"] as $app_id ) {
+							$appointments->gcal_api->delete( $app_id );
+							$appointments->send_removal_notification($app_id);
 						}
-						// If confirmed or paid, add these to GCal
-						else if (is_object($appointments->gcal_api) && $appointments->gcal_api->is_syncable_status($new_status)) {
-							foreach ( $_POST["app"] as $app_id ) {
-								$appointments->gcal_api->update( $app_id );
-								// Also send out an email
-								if (!empty($appointments->options["send_confirmation"]) && 'yes' == $appointments->options["send_confirmation"]) {
-									$appointments->send_confirmation($app_id);
-								}
+					}
+					// If confirmed or paid, add these to GCal
+					else if (is_object($appointments->gcal_api) && $appointments->gcal_api->is_syncable_status($new_status)) {
+						foreach ( $_POST["app"] as $app_id ) {
+							$appointments->gcal_api->update( $app_id );
+							// Also send out an email
+							if (!empty($appointments->options["send_confirmation"]) && 'yes' == $appointments->options["send_confirmation"]) {
+								appointments_send_confirmation( $app_id );
 							}
 						}
 					}

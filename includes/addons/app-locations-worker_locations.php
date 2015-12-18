@@ -78,15 +78,7 @@ class App_Locations_WorkerLocations {
 		$location_id = self::worker_to_location_id($appointment->worker);
 		if (!$location_id) return false;
 
-		$res = $wpdb->update(
-			$appointments->app_table, 
-			array('location' => $location_id),
-			array('ID' => $appointment_id)
-		);
-
-		if ( $res ) {
-			appointments_clear_appointment_cache( $appointment_id );
-		}
+		appointments_update_appointment( $appointment_id, array('location' => $location_id) );
 	}
 
 	public function show_settings () {

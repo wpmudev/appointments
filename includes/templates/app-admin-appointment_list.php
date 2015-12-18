@@ -84,7 +84,7 @@ else
 			<input type="hidden" value="1" name="app_status_change" />
 			<select name="app_new_status" style='float:none;'>
 				<option value=""><?php _e('Bulk status change','appointments'); ?></option>
-				<?php foreach ( $appointments->get_statuses() as $value=>$name ) {
+				<?php foreach ( appointments_get_statuses() as $value=>$name ) {
 					echo '<option value="' . esc_attr($value) . '" class="hide-if-no-js">'.$name.'</option>';
 				} ?>
 			</select>

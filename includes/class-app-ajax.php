@@ -45,20 +45,11 @@ class Appointments_AJAX {
 	}
 
 	function inline_edit_save() {
-		global $appointments;
+		global $appointments, $wpdb, $current_user;
 
-		$app_id = $_POST["app_id"];
-		$email_sent = false;
-		global $wpdb, $current_user;
-		$app = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$appointments->app_table} WHERE ID=%d", $app_id));
+		$app_id = absint( $_POST["app_id"] );
+		$app = appointments_get_appointment( $app_id );
 		$data = array();
-
-		if ($app != null) {
-			$data['ID'] = $app_id;
-		} else {
-			$data['created'] = date("Y-m-d H:i:s", $appointments->local_time );
-			$data['ID'] = 'NULL';
-		}
 
 		$data['user'] = $_POST['user'];
 		$data['email'] = !empty($_POST['email']) && is_email($_POST['email']) ? $_POST['email'] : '';
@@ -67,98 +58,55 @@ class Appointments_AJAX {
 		$data['address'] = $_POST['address'];
 		$data['city'] = $_POST['city'];
 		$data['service'] = $_POST['service'];
-		$service = $appointments->get_service( $_POST['service'] );
 		$data['worker'] = $_POST['worker'];
 		$data['price'] = $_POST['price'];
-		// Clear comma from date format. It creates problems for php5.2
-		$data['start']	= date(
-			'Y-m-d H:i:s',
-			strtotime(
-				str_replace(',', '', $appointments->to_us($_POST['date'])) .
-				" " .
-				date('H:i', strtotime($_POST['time']))
-			)
-		);
-		$data['end'] = date(
-			'Y-m-d H:i:s',
-			strtotime(
-				str_replace(',', '', $appointments->to_us($_POST['date'])) .
-				" " .
-				date('H:i', strtotime($_POST['time']))
-			)
-			+ ($service->duration * 60)
-		);
 		$data['note'] = $_POST['note'];
 		$data['status'] = $_POST['status'];
+		$data['date'] = $_POST['date'];
+		$data['time'] = $_POST['time'];
 		$resend = $_POST["resend"];
 
 		$data = apply_filters('app-appointment-inline_edit-save_data', $data);
 
 		$update_result = $insert_result = false;
-		if ($app != null) {
+		if ( $app ) {
 			// Update
-			$update_result = $wpdb->update( $appointments->app_table, $data, array('ID' => $app_id) );
+			$update_result = appointments_update_appointment( $app_id, $data );
 			if ( $update_result ) {
-				appointments_clear_appointment_cache( $app_id );
 				if ( ( 'pending' == $data['status'] || 'removed' == $data['status'] || 'completed' == $data['status'] ) && is_object( $appointments->gcal_api ) ) {
 					$appointments->gcal_api->delete( $app_id );
 				} else if (is_object($appointments->gcal_api) && $appointments->gcal_api->is_syncable_status($data['status'])) {
 					$appointments->gcal_api->update( $app_id ); // This also checks for event insert
 				}
-				if ('removed' === $data['status']) $appointments->send_removal_notification($app_id);
 			}
-			if ($update_result && $resend) {
-				if ('removed' == $data['status']) do_action( 'app_removed', $app_id );
-				//else $this->send_confirmation( $app_id );
+
+			if ( $resend && 'removed' != $data['status'] ) {
+				appointments_send_confirmation( $app_id );
 			}
+
 		} else {
 			// Insert
-			$insert_result = $wpdb->insert( $appointments->app_table, $data );
-			appointments_clear_appointment_cache();
-			/*
-// Moved
-			if ( $insert_result && $resend && empty($email_sent) ) {
-				$email_sent = $this->send_confirmation( $wpdb->insert_id );
-			}
-			if ( $insert_result && is_object($this->gcal_api) && $this->gcal_api->is_syncable_status($data['status'])) {
-				$this->gcal_api->insert( $wpdb->insert_id );
-			}
-			*/
-		}
-
-		do_action('app-appointment-inline_edit-after_save', ($update_result ? $app_id : $wpdb->insert_id), $data);
-		/*
-		// Moved
-				if ($resend && 'removed' != $data['status'] && empty($email_sent) ) {
-					$email_sent = $this->send_confirmation( $app_id );
+			$app_id = appointments_insert_appointment( $data );
+			if ( $app_id ) {
+				$insert_result = true;
+				if ( $resend ) {
+					appointments_send_confirmation( $app_id );
 				}
-		*/
-		if ( ( $update_result || $insert_result ) && $data['user'] && defined('APP_USE_LEGACY_USERDATA_OVERWRITING') && APP_USE_LEGACY_USERDATA_OVERWRITING ) {
-			if ( $data['name'] )
-				update_user_meta( $data['user'], 'app_name',  $data['name'] );
-			if (  $data['email'] )
-				update_user_meta( $data['user'], 'app_email', $data['email'] );
-			if ( $data['phone'] )
-				update_user_meta( $data['user'], 'app_phone', $data['phone'] );
-			if ( $data['address'] )
-				update_user_meta( $data['user'], 'app_address', $data['address'] );
-			if ( $data['city'] )
-				update_user_meta( $data['user'], 'app_city', $data['city'] );
-
-			do_action( 'app_save_user_meta', $data['user'], $data );
+			}
 		}
 
-		do_action('app-appointment-inline_edit-before_response', ($update_result ? $app_id : $wpdb->insert_id), $data);
+		do_action('app-appointment-inline_edit-after_save', $app_id, $data);
+		do_action('app-appointment-inline_edit-before_response', $app_id, $data);
+
+		$app = appointments_get_appointment( $app_id );
+		if ( ! $app ) {
+			$insert_result = false;
+			$update_result = false;
+		}
 
 		// Move mail sending here so the fields can expand
-		if ( $insert_result && $resend && empty($email_sent) ) {
-			$email_sent = $appointments->send_confirmation( $wpdb->insert_id );
-		}
 		if ( $insert_result && is_object($appointments->gcal_api) && $appointments->gcal_api->is_syncable_status($data['status'])) {
-			$appointments->gcal_api->insert( $wpdb->insert_id );
-		}
-		if ($resend && !empty($app_id) && 'removed' != $data['status'] && empty($email_sent) ) {
-			$email_sent = $appointments->send_confirmation( $app_id );
+			$appointments->gcal_api->insert( $app->ID );
 		}
 
 		$result = array(
@@ -176,7 +124,7 @@ class Appointments_AJAX {
 			);
 		} else if ( $insert_result ) {
 			$result = array(
-				'app_id' => $wpdb->insert_id,
+				'app_id' => $app->ID,
 				'message' => __('<span style="color:green;font-weight:bold">Changes saved.</span>', 'appointments'),
 			);
 		} else {
@@ -185,12 +133,12 @@ class Appointments_AJAX {
 				: sprintf('<span style="color:red;font-weight:bold">%s</span>', __('Record could not be saved OR you did not make any changes!', 'appointments'))
 			;
 			$result = array(
-				'app_id' => ($update_result ? $app_id : $wpdb->insert_id),
+				'app_id' => $app_id,
 				'message' => $message,
 			);
 		}
 
-		$result = apply_filters('app-appointment-inline_edit-result', $result, ($update_result ? $app_id : $wpdb->insert_id), $data);
+		$result = apply_filters('app-appointment-inline_edit-result', $result, $app_id, $data);
 		die(json_encode($result));
 	}
 
@@ -239,16 +187,6 @@ class Appointments_AJAX {
 			}
 		} else {
 			$app = new stdClass(); // This means insert a new app object
-			/*
-			//DO NOT DO THIS!!!!
-			//This is just begging for a race condition issue >.<
-						// Get maximum ID
-						$app_max = $wpdb->get_var( "SELECT MAX(ID) FROM " . $this->app_table . " " );
-						// Check if nothing has saved yet
-						if ( !$app_max )
-							$app_max = 0;
-						$app->ID = $app_max + 1 ; // We want to create a new record
-			*/
 			$app->ID = 0;
 			// Set other fields to default so that we don't get notice messages
 			$app->user = $app->location = $app->worker = 0;

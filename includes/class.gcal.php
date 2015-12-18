@@ -1015,7 +1015,12 @@ class AppointmentsGcal {
 			// Write Event ID to database
 			$gcal_ID = $createdEvent->getId();
 			if ( $gcal_ID && !$test ) {
-				$wpdb->update( $this->app_table, array( 'gcal_ID' => $gcal_ID, 'gcal_updated' => date ("Y-m-d H:i:s", $this->local_time ) ), array( 'ID'=>$app_id ) );
+
+				$args = array(
+					'gcal_updated' => date( "Y-m-d H:i:s", $this->local_time ),
+					'gcal_ID' => $gcal_ID
+				);
+				appointments_update_appointment( $app_id, $args );
 			} else {
 				$appointments->log("The insert did not create a real result we can work with");
 			}
