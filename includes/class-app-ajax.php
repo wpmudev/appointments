@@ -337,8 +337,8 @@ class Appointments_AJAX {
 		$html .= '<label style="float:left;width:30%; padding-left:5px;">';
 
 		// Check if an admin min time (time base) is set. @since 1.0.2
-		if ( isset( $this->options["admin_min_time"] ) && $this->options["admin_min_time"] )
-			$min_time = $this->options["admin_min_time"];
+		if ( isset( $appointments->options["admin_min_time"] ) && $appointments->options["admin_min_time"] )
+			$min_time = $appointments->options["admin_min_time"];
 		else
 			$min_time = $appointments->get_min_time();
 
@@ -504,7 +504,7 @@ class Appointments_AJAX {
 
 		// Default status
 		$status = 'pending';
-		if ('yes' != $this->options["payment_required"] && isset($this->options["auto_confirm"]) && 'yes' == $this->options["auto_confirm"]) {
+		if ('yes' != $appointments->options["payment_required"] && isset($appointments->options["auto_confirm"]) && 'yes' == $appointments->options["auto_confirm"]) {
 			$status = 'confirmed';
 		}
 
@@ -518,9 +518,9 @@ class Appointments_AJAX {
 		if (
 			!(float)$price && !(float)$paypal_price // Free appointment ...
 			&&
-			'pending' === $status && "yes" === $this->options["payment_required"] // ... in a paid environment ...
+			'pending' === $status && "yes" === $appointments->options["payment_required"] // ... in a paid environment ...
 			&&
-			(!empty($this->options["auto_confirm"]) && "yes" === $this->options["auto_confirm"]) // ... with auto-confirm activated
+			(!empty($appointments->options["auto_confirm"]) && "yes" === $appointments->options["auto_confirm"]) // ... with auto-confirm activated
 		) {
 			$status = defined('APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM') && APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM
 				? 'confirmed'
@@ -539,7 +539,7 @@ class Appointments_AJAX {
 			? $_POST['app_email']
 			: $user_email
 		;
-		if ($this->options["ask_email"] && !is_email($email)) $appointments->json_die( 'email' );
+		if ($appointments->options["ask_email"] && !is_email($email)) $appointments->json_die( 'email' );
 
 		$phone = !empty($_POST['app_phone'])
 			? sanitize_text_field($_POST["app_phone"])
@@ -633,16 +633,16 @@ class Appointments_AJAX {
 
 		// Send confirmation for pending, payment not required cases, if selected so
 		if (
-			'yes' != $this->options["payment_required"] &&
-			isset($this->options["send_notification"]) &&
-			'yes' == $this->options["send_notification"] &&
+			'yes' != $appointments->options["payment_required"] &&
+			isset($appointments->options["send_notification"]) &&
+			'yes' == $appointments->options["send_notification"] &&
 			'pending' == $status
 		) {
 			$appointments->send_notification( $insert_id );
 		}
 
 		// Send confirmation if we forced it
-		if ('confirmed' == $status && isset($this->options["send_confirmation"]) && 'yes' == $this->options["send_confirmation"]) {
+		if ('confirmed' == $status && isset($appointments->options["send_confirmation"]) && 'yes' == $appointments->options["send_confirmation"]) {
 			$appointments->send_confirmation( $insert_id );
 		}
 
@@ -652,7 +652,7 @@ class Appointments_AJAX {
 		}
 
 		// GCal button
-		if (isset($this->options["gcal"]) && 'yes' == $this->options["gcal"] && $gcal) {
+		if (isset($appointments->options["gcal"]) && 'yes' == $appointments->options["gcal"] && $gcal) {
 			$gcal_url = $appointments->gcal( $service, $start, $start + ($duration * 60 ), false, $address, $city );
 		} else {
 			$gcal_url = '';
@@ -666,9 +666,9 @@ class Appointments_AJAX {
 		$mp = isset($additional['mp']) ? $additional['mp'] : 0;
 		$variation = isset($additional['variation']) ? $additional['variation'] : 0;
 
-		$gcal_same_window = !empty($this->options["gcal_same_window"]) ? 1 : 0;
+		$gcal_same_window = !empty($appointments->options["gcal_same_window"]) ? 1 : 0;
 
-		if (isset( $this->options["payment_required"] ) && 'yes' == $this->options["payment_required"]) {
+		if (isset( $appointments->options["payment_required"] ) && 'yes' == $appointments->options["payment_required"]) {
 			die(json_encode(array(
 				"cell" => $_POST["value"],
 				"app_id" => $insert_id,
@@ -681,13 +681,14 @@ class Appointments_AJAX {
 				'variation' => $variation
 			)));
 		} else {
-			die(json_encode(array(
+			$result = array(
 				"cell" => $_POST["value"],
 				"app_id" => $insert_id,
 				"refresh" => 1,
 				'gcal_url' => $gcal_url,
 				'gcal_same_window' => $gcal_same_window,
-			)));
+			);
+			wp_send_json( $result );
 		}
 	}
 
@@ -699,11 +700,11 @@ class Appointments_AJAX {
 		global $appointments;
 
 		// PayPal IPN handling code
-		$this->options = get_option( 'appointments_options' );
+		$appointments->options = get_option( 'appointments_options' );
 
 		if ((isset($_POST['payment_status']) || isset($_POST['txn_type'])) && isset($_POST['custom'])) {
 
-			if ($this->options['mode'] == 'live') {
+			if ($appointments->options['mode'] == 'live') {
 				$domain = 'https://www.paypal.com';
 			} else {
 				$domain = 'https://www.sandbox.paypal.com';
@@ -873,7 +874,7 @@ class Appointments_AJAX {
 		$appointments->get_lsw();
 
 		// Alright, so before we go further, let's check if we can
-		if (!is_user_logged_in() && (!empty($this->options['login_required']) && 'yes' == $this->options['login_required'])) {
+		if (!is_user_logged_in() && (!empty($appointments->options['login_required']) && 'yes' == $appointments->options['login_required'])) {
 			die(json_encode(array(
 				'error' => __('You need to login to make an appointment.', 'appointments'),
 			)));
@@ -885,8 +886,8 @@ class Appointments_AJAX {
 		$price = apply_filters('app_display_amount', $price, $service, $worker);
 		$price = apply_filters('app_pre_confirmation_price', $price, $service, $worker, $start, $end);
 
-		$display_currency = !empty($this->options["currency"])
-			? App_Template::get_currency_symbol($this->options["currency"])
+		$display_currency = !empty($appointments->options["currency"])
+			? App_Template::get_currency_symbol($appointments->options["currency"])
 			: App_Template::get_currency_symbol('USD')
 		;
 
@@ -914,37 +915,37 @@ class Appointments_AJAX {
 			: ''
 		;
 
-		$ask_name = !empty($this->options['ask_name'])
+		$ask_name = !empty($appointments->options['ask_name'])
 			? 'ask'
 			: ''
 		;
 
-		$ask_email = !empty($this->options['ask_email'])
+		$ask_email = !empty($appointments->options['ask_email'])
 			? 'ask'
 			: ''
 		;
 
-		$ask_phone = !empty($this->options['ask_phone'])
+		$ask_phone = !empty($appointments->options['ask_phone'])
 			? 'ask'
 			: ''
 		;
 
-		$ask_address = !empty($this->options['ask_address'])
+		$ask_address = !empty($appointments->options['ask_address'])
 			? 'ask'
 			: ''
 		;
 
-		$ask_city = !empty($this->options['ask_city'])
+		$ask_city = !empty($appointments->options['ask_city'])
 			? 'ask'
 			: ''
 		;
 
-		$ask_note = !empty($this->options['ask_note'])
+		$ask_note = !empty($appointments->options['ask_note'])
 			? 'ask'
 			: ''
 		;
 
-		$ask_gcal = isset( $this->options["gcal"] ) && 'yes' == $this->options["gcal"]
+		$ask_gcal = isset( $appointments->options["gcal"] ) && 'yes' == $appointments->options["gcal"]
 			? 'ask'
 			: ''
 		;

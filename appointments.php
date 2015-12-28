@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.5.5-beta
+Version: 1.5.5-beta-2
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	public $version = "1.5.4";
+	public $version = "1.5.5-beta2";
 	public $db_version;
 
 	public $local_time;
@@ -4877,4 +4877,14 @@ function appointments_activate() {
 function appointments_uninstall() {
 	$installer = new App_Installer();
 	$installer::uninstall();
+}
+
+function appointments_plugin_url() {
+	global $appointments;
+	return trailingslashit( $appointments->plugin_url );
+}
+
+function appointments_plugin_dir() {
+	global $appointments;
+	return trailingslashit( $appointments->plugin_dir );
 }
