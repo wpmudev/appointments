@@ -11,6 +11,7 @@ Author: WPMU DEV
 
 class App_Mp_ProductCartDisplay {
 
+	/** @var  Appointments */
 	private $_core;
 	private $_data = array();
 	private $_has_marketpress = false;
