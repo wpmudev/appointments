@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.5.5-beta-2
+Version: 1.5.5-beta2
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -413,8 +413,9 @@ class Appointments {
 	 * @param order_by: ORDER BY clause for mysql
 	 * @return array of objects
 	 */
-	function get_workers_by_service( $ID, $order_by="ID" ) {
-		$workers = appointments_get_workers( array( 'orderby' => $order_by, 'service' => $ID ) );
+	function get_workers_by_service( $ID, $order_by = "ID" ) {
+		$workers = appointments_get_workers_by_service( $ID, $order_by );
+
 		if ( empty( $workers ) )
 			return false;
 
@@ -1298,7 +1299,7 @@ class Appointments {
 	 * Generate an excerpt from the selected service/worker page
 	 * Applies custom filter set instead of the default one.
 	 */
-	function get_excerpt( $page_id, $thumb_size, $thumb_class, $worker_id=0 ) {
+	function get_excerpt( $page_id, $thumb_size, $thumb_class, $worker_id=0, $show_thumb_holder = false ) {
 		$text = '';
 		if ( !$page_id )
 			return $text;
@@ -1316,7 +1317,14 @@ class Appointments {
 		$excerpt_more = apply_filters('app_excerpt_more', ' &hellip; <a href="'. esc_url( get_permalink($page->ID) ) . '" target="_blank">' . __( 'More information <span class="meta-nav">&rarr;</span>', 'appointments' ) . '</a>');
 		$text = wp_trim_words( $text, $excerpt_length, $excerpt_more );
 
-		$thumb = $this->get_thumbnail( $page_id, $thumb_size, $thumb_class, $worker_id );
+		if ( $show_thumb_holder ) {
+			// @TODO Little crap :( to avoid so many queries when there are many services
+			$thumb = '<div class="appointments-service-thumb appointments-service-thumb-' . absint( $page_id ) . '" data-page="' . absint( $page_id ) . '"></div>';
+		}
+		else {
+			$thumb = $this->get_thumbnail( $page_id, $thumb_size, $thumb_class, $worker_id );
+		}
+
 
 		return apply_filters( 'app_excerpt', $thumb. $text, $page_id, $worker_id );
 	}
@@ -1325,7 +1333,7 @@ class Appointments {
 	 * Fetch content from the selected service/worker page.
 	 * Applies custom filter set instead of the default one.
 	 */
-	function get_content( $page_id, $thumb_size, $thumb_class, $worker_id=0 ) {
+	function get_content( $page_id, $thumb_size, $thumb_class, $worker_id=0, $show_thumb_holder = false ) {
 		$content = '';
 		if ( !$page_id )
 			return $content;
@@ -1333,7 +1341,14 @@ class Appointments {
 		if ( !$page )
 			return $content;
 
-		$thumb = $this->get_thumbnail( $page_id, $thumb_size, $thumb_class, $worker_id );
+		if ( $show_thumb_holder ) {
+			// @TODO Little crap :( to avoid so many queries when there are many services
+			$thumb = '<div class="appointments-service-thumb appointments-service-thumb-' . absint( $page_id ) . '" data-page="' . absint( $page_id ) . '"></div>';
+		}
+		else {
+			$thumb = $this->get_thumbnail( $page_id, $thumb_size, $thumb_class, $worker_id );
+		}
+
 
 		$app_content = apply_filters( 'app_pre_content', wpautop( $this->strip_app_shortcodes( $page->post_content ), $page_id, $worker_id ) );
 
@@ -1495,6 +1510,7 @@ class Appointments {
 	function get_monthly_calendar( $timestamp=false, $class='', $long, $widget ) {
 		global $wpdb;
 
+
 		$this->get_lsw();
 
 		$price = $this->get_price( );
@@ -1537,6 +1553,7 @@ class Appointments {
 		$capacity = $this->get_capacity();
 		$time_table = '';
 
+
 		for ($i=1; $i<=$days; $i++) {
 			$date = date('Y-m-' . sprintf("%02d", $i), $time);
 			$dow = (int)date('w', strtotime($date));
@@ -1545,30 +1562,35 @@ class Appointments {
 			if ($this->start_of_week == $dow)
 				$ret .= '</tr><tr>';
 
+			$init_time = time();
+
 			$class_name = '';
 			// First mark passed days
-			if ( $this->local_time > $cce )
+			if ( $this->local_time > $cce ) {
 				$class_name = 'notpossible app_past';
+			}
 			// Then check if this time is blocked
 			else if ( isset( $this->options["app_lower_limit"] ) && $this->options["app_lower_limit"]
-				&&( $this->local_time + $this->options["app_lower_limit"] * 3600) > $cce )
+				&&( $this->local_time + $this->options["app_lower_limit"] * 3600) > $cce ) {
 				$class_name = 'notpossible app_blocked';
+			}
 			// Check today is holiday
-			else if ( $this->is_holiday( $ccs, $cce ) )
+			else if ( $this->is_holiday( $ccs, $cce ) ) {
 				$class_name = 'notpossible app_holiday';
+			}
 			// Check if we are working today
-			else if ( !in_array( date("l", $ccs ), $working_days ) && !$this->is_exceptional_working_day( $ccs, $cce ) )
+			else if ( !in_array( date("l", $ccs ), $working_days ) && !$this->is_exceptional_working_day( $ccs, $cce ) ) {
 				$class_name = 'notpossible notworking';
+			}
 			// Check if we are exceeding app limit at the end of day
-			else if ( $cce > $this->local_time + ( $this->get_app_limit() + 1 )*86400 )
+			else if ( $cce > $this->local_time + ( $this->get_app_limit() + 1 )*86400 ) {
 				$class_name = 'notpossible';
+			}
 			// If nothing else, then it must be free unless all time slots are taken
 			else {
 				// At first assume all cells are busy
 				$this->is_a_timetable_cell_free = false;
-
 				$time_table .= $this->get_timetable( $ccs, $capacity, $schedule_key );
-
 				// Look if we have at least one cell free from get_timetable function
 				if ( $this->is_a_timetable_cell_free )
 					$class_name = 'free';
@@ -1578,6 +1600,9 @@ class Appointments {
 				if ( $widget )
 					$time_table = '';
 			}
+
+
+
 			// Check for today
 			if ( $this->local_time > $ccs && $this->local_time < $cce )
 				$class_name = $class_name . ' today';
@@ -1586,6 +1611,7 @@ class Appointments {
 			<input type="hidden" class="appointments_select_time" value="'.$ccs .'" /></td>';
 
 		}
+
 		if ( 0 == (6 - $last + $this->start_of_week) )
 			$ret .= '</tr>';
 		else if ( $last > $this->start_of_week )
@@ -1618,20 +1644,41 @@ class Appointments {
 		$script .= '$(selector).on("click", callback);';
 
 		$this->add2footer( $script );
-
 		return $ret;
+	}
+
+	function console_log( $start, $desc = '' ) {
+		$finish = microtime( true );
+		?>
+		<script>console.log('<?php echo $desc . ' - ' . ( $finish - $start ); ?>');</script>
+		<?php
 	}
 
 	/**
 	 * Helper function to create a time table for monthly schedule
 	 */
 	function get_timetable( $day_start, $capacity, $schedule_key=false ) {
+
+		$timetable_key = $day_start . '-' . $capacity;
+
+		if ( ! $schedule_key ) {
+			$timetable_key .= '-0';
+		}
+		else {
+			$timetable_key .=  '-' . $schedule_key;
+		}
+
 		// We need this only for the first timetable
 		// Otherwise $time will be calculated from $day_start
-		if ( isset( $_GET["wcalendar"] ) && (int)$_GET['wcalendar'] )
+		if ( isset( $_GET["wcalendar"] ) && (int)$_GET['wcalendar'] ) {
 			$time = (int)$_GET["wcalendar"];
-		else
+		}
+		else {
 			$time = $this->local_time;
+		}
+
+		$timetable_key .= '-' . date( 'Ym', $time );
+
 
 		// Are we looking to today?
 		// If today is a working day, shows its free times by default
@@ -1640,37 +1687,156 @@ class Appointments {
 		else
 			$style = ' style="display:none"';
 
-		$start = $end = 0;
-		if ( $min_max = $this->min_max_wh( 0, 0 ) ) {
-			$start = $min_max["min"];
-			$end = $min_max["max"];
-		}
-		if ( $start >= $end ) {
-			$start = 8;
-			$end = 18;
-		}
-		$start = apply_filters( 'app_schedule_starting_hour', $start, $day_start, 'day' );
-		$end = apply_filters( 'app_schedule_ending_hour', $end, $day_start, 'day' );
+		$timetables = get_transient( 'app_timetables' );
 
-		$first = $start *3600 + $day_start; // Timestamp of the first cell
-		$last = $end *3600 + $day_start; // Timestamp of the last cell
-		$min_step_time = $this->get_min_time() * 60; // Cache min step increment
+		if ( is_array( $timetables ) && isset( $timetables[ $timetable_key ] ) ) {
+			$data =  $timetables[ $timetable_key ];
+		}
+		else {
 
-		if (defined('APP_USE_LEGACY_DURATION_CALCULUS') && APP_USE_LEGACY_DURATION_CALCULUS) {
-			$step = $min_step_time; // Timestamp increase interval to one cell ahead
-		} else {
-			$service = $this->get_service($this->service);
-			$step = (!empty($service->duration) ? $service->duration : $min_step_time) * 60; // Timestamp increase interval to one cell ahead
+
+			$start = $end = 0;
+			if ( $min_max = $this->min_max_wh( 0, 0 ) ) {
+				$start = $min_max["min"];
+				$end = $min_max["max"];
+			}
+			if ( $start >= $end ) {
+				$start = 8;
+				$end = 18;
+			}
+			$start = apply_filters( 'app_schedule_starting_hour', $start, $day_start, 'day' );
+			$end = apply_filters( 'app_schedule_ending_hour', $end, $day_start, 'day' );
+
+			$first = $start *3600 + $day_start; // Timestamp of the first cell
+			$last = $end *3600 + $day_start; // Timestamp of the last cell
+			$min_step_time = $this->get_min_time() * 60; // Cache min step increment
+
+			if (defined('APP_USE_LEGACY_DURATION_CALCULUS') && APP_USE_LEGACY_DURATION_CALCULUS) {
+				$step = $min_step_time; // Timestamp increase interval to one cell ahead
+			} else {
+				$service = $this->get_service($this->service);
+				$step = (!empty($service->duration) ? $service->duration : $min_step_time) * 60; // Timestamp increase interval to one cell ahead
+			}
+
+			if (!(defined('APP_USE_LEGACY_DURATION_CALCULUS') && APP_USE_LEGACY_DURATION_CALCULUS)) {
+				$start_result = $this->get_work_break( $this->location, $this->worker, 'open' );
+				if (!empty($start_result->hours)) $start_unpacked_days = maybe_unserialize($start_result->hours);
+			} else $start_unpacked_days = array();
+			if (defined('APP_BREAK_TIMES_PADDING_CALCULUS') && APP_BREAK_TIMES_PADDING_CALCULUS) {
+				$break_result = $this->get_work_break($this->location, $this->worker, 'closed');
+				if (!empty($break_result->hours)) $break_times = maybe_unserialize($break_result->hours);
+			} else $break_times = array();
+
+			// Allow direct step increment manipulation,
+			// mainly for service duration based calculus start/stop times
+			$step = apply_filters('app-timetable-step_increment', $step);
+
+			$data = array();
+			for ( $t=$first; $t<$last; ) {
+
+				$ccs = apply_filters('app_ccs', $t); 				// Current cell starts
+				$cce = apply_filters('app_cce', $ccs + $step);		// Current cell ends
+
+// Fix for service durations calculus and workhours start conflict with different duration services
+// Example: http://premium.wpmudev.org/forums/topic/problem-with-time-slots-not-properly-allocating-free-time
+				$this_day_key = date('l', $t);
+				if (!empty($start_unpacked_days) && !(defined('APP_USE_LEGACY_DURATION_CALCULUS') && APP_USE_LEGACY_DURATION_CALCULUS)) {
+					if (!empty($start_unpacked_days[$this_day_key])) {
+						// Check slot start vs opening start
+						$this_day_opening_timestamp = strtotime(date('Y-m-d ' . $start_unpacked_days[$this_day_key]['start'], $ccs));
+						if ($t < $this_day_opening_timestamp) {
+							$t = ($t - $step) + (apply_filters('app_safe_time', 1) * 60);
+							$t = apply_filters('app_next_time_step', $t+$step, $ccs, $step); //Allows dynamic/variable step increment.
+							continue;
+						}
+
+						// Check slot end vs opening end - optional, but still applies
+						//$this_day_closing_timestamp = strtotime(date('Y-m-d ' . $start_unpacked_days[$this_day_key]['end'], $ccs));
+						//if ($cce > $this_day_closing_timestamp) continue;
+					}
+				}
+// Breaks are not behaving like paddings, which is to be expected.
+// This fix (2) will force them to behave more like paddings
+				if (!empty($break_times[$this_day_key]['active']) && defined('APP_BREAK_TIMES_PADDING_CALCULUS') && APP_BREAK_TIMES_PADDING_CALCULUS) {
+					$active = $break_times[$this_day_key]['active'];
+					$break_starts = $break_times[$this_day_key]['start'];
+					$break_ends = $break_times[$this_day_key]['end'];
+					if (!is_array($active) && 'no' !== $active) {
+						$break_start_ts = strtotime(date('Y-m-d ' . $break_starts, $ccs));
+						$break_end_ts = strtotime(date('Y-m-d ' . $break_ends, $ccs));
+						if ($t == $break_start_ts) {
+							$t += ($break_end_ts - $break_start_ts) - $step;
+							$t = apply_filters('app_next_time_step', $t+$step, $ccs, $step); //Allows dynamic/variable step increment.
+							continue;
+						}
+					} else if (is_array($active) && in_array('yes', array_values($active))) {
+						$has_break_time = false;
+						for ($idx=0; $idx<count($break_starts); $idx++) {
+							$break_start_ts = strtotime(date('Y-m-d ' . $break_starts[$idx], $ccs));
+							$break_end_ts = strtotime(date('Y-m-d ' . $break_ends[$idx], $ccs));
+							if ($t == $break_start_ts) {
+								$has_break_time = $break_end_ts - $break_start_ts;
+								break;
+							}
+						}
+						if ($has_break_time) {
+							$t += ($has_break_time - $step);
+							$t = apply_filters('app_next_time_step', $t+$step, $ccs, $step); //Allows dynamic/variable step increment.
+							continue;
+						}
+					}
+				}
+// End fixes area
+
+				$is_busy = $this->is_busy( $ccs, $cce, $capacity );
+				$title = apply_filters('app-schedule_cell-title', date_i18n($this->datetime_format, $ccs), $is_busy, $ccs, $cce, $schedule_key);
+
+				$class_name = '';
+				// Mark now
+				if ( $this->local_time > $ccs && $this->local_time < $cce )
+					$class_name = 'notpossible now';
+				// Mark passed hours
+				else if ( $this->local_time > $ccs )
+					$class_name = 'notpossible app_past';
+				// Then check if this time is blocked
+				else if ( isset( $this->options["app_lower_limit"] ) && $this->options["app_lower_limit"]
+				          &&( $this->local_time + $this->options["app_lower_limit"] * 3600) > $cce )
+					$class_name = 'notpossible app_blocked';
+				// Check if this is break
+				else if ( $this->is_break( $ccs, $cce ) )
+					$class_name = 'notpossible app_break';
+				// Then look for appointments
+				else if ( $is_busy )
+					$class_name = 'busy';
+				// Then check if we have enough time to fulfill this app
+				else if ( !$this->is_service_possible( $ccs, $cce, $capacity ) )
+					$class_name = 'notpossible service_notpossible';
+				// If nothing else, then it must be free
+				else {
+					$class_name = 'free';
+					// We found at least one timetable cell to be free
+				}
+				$class_name = apply_filters( 'app_class_name', $class_name, $ccs, $cce );
+
+				$data[] = array(
+					'class' => $class_name,
+					'title' => $title,
+					'hours' => $this->secs2hours( $ccs - $day_start ),
+					'value' => $this->pack( $ccs, $cce )
+				);
+
+
+				$t = apply_filters('app_next_time_step', $t+$step, $t, $step); //Allows dynamic/variable step increment.
+			}
 		}
 
-		if (!(defined('APP_USE_LEGACY_DURATION_CALCULUS') && APP_USE_LEGACY_DURATION_CALCULUS)) {
-			$start_result = $this->get_work_break( $this->location, $this->worker, 'open' );
-			if (!empty($start_result->hours)) $start_unpacked_days = maybe_unserialize($start_result->hours);
-		} else $start_unpacked_days = array();
-		if (defined('APP_BREAK_TIMES_PADDING_CALCULUS') && APP_BREAK_TIMES_PADDING_CALCULUS) {
-			$break_result = $this->get_work_break($this->location, $this->worker, 'closed');
-			if (!empty($break_result->hours)) $break_times = maybe_unserialize($break_result->hours);
-		} else $break_times = array();
+
+		if ( ! $timetables || ! is_array( $timetables ) ) {
+			$timetables = array();
+		}
+
+		$timetables[ $timetable_key ] = $data;
+		set_transient( 'app_timetables', $timetables, 86400 ); // save for one day
 
 		$ret  = '';
 		$ret .= '<div class="app_timetable app_timetable_'.$day_start.'"'.$style.'>';
@@ -1678,108 +1844,22 @@ class Appointments {
 		$ret .= date_i18n( $this->date_format, $day_start );
 		$ret .= '</div>';
 
-		// Allow direct step increment manipulation,
-		// mainly for service duration based calculus start/stop times
-		$step = apply_filters('app-timetable-step_increment', $step);
-
-		for ( $t=$first; $t<$last; ) {
-
-			$ccs = apply_filters('app_ccs', $t); 				// Current cell starts
-			$cce = apply_filters('app_cce', $ccs + $step);		// Current cell ends
-
-// Fix for service durations calculus and workhours start conflict with different duration services
-// Example: http://premium.wpmudev.org/forums/topic/problem-with-time-slots-not-properly-allocating-free-time
-            $this_day_key = date('l', $t);
-            if (!empty($start_unpacked_days) && !(defined('APP_USE_LEGACY_DURATION_CALCULUS') && APP_USE_LEGACY_DURATION_CALCULUS)) {
-				if (!empty($start_unpacked_days[$this_day_key])) {
-					// Check slot start vs opening start
-					$this_day_opening_timestamp = strtotime(date('Y-m-d ' . $start_unpacked_days[$this_day_key]['start'], $ccs));
-					if ($t < $this_day_opening_timestamp) {
-						$t = ($t - $step) + (apply_filters('app_safe_time', 1) * 60);
-                        $t = apply_filters('app_next_time_step', $t+$step, $ccs, $step); //Allows dynamic/variable step increment.
-						continue;
-					}
-
-					// Check slot end vs opening end - optional, but still applies
-					//$this_day_closing_timestamp = strtotime(date('Y-m-d ' . $start_unpacked_days[$this_day_key]['end'], $ccs));
-					//if ($cce > $this_day_closing_timestamp) continue;
-				}
-			}
-// Breaks are not behaving like paddings, which is to be expected.
-// This fix (2) will force them to behave more like paddings
-			if (!empty($break_times[$this_day_key]['active']) && defined('APP_BREAK_TIMES_PADDING_CALCULUS') && APP_BREAK_TIMES_PADDING_CALCULUS) {
-				$active = $break_times[$this_day_key]['active'];
-				$break_starts = $break_times[$this_day_key]['start'];
-				$break_ends = $break_times[$this_day_key]['end'];
-				if (!is_array($active) && 'no' !== $active) {
-					$break_start_ts = strtotime(date('Y-m-d ' . $break_starts, $ccs));
-					$break_end_ts = strtotime(date('Y-m-d ' . $break_ends, $ccs));
-					if ($t == $break_start_ts) {
-						$t += ($break_end_ts - $break_start_ts) - $step;
-                        $t = apply_filters('app_next_time_step', $t+$step, $ccs, $step); //Allows dynamic/variable step increment.
-						continue;
-					}
-				} else if (is_array($active) && in_array('yes', array_values($active))) {
-					$has_break_time = false;
-					for ($idx=0; $idx<count($break_starts); $idx++) {
-						$break_start_ts = strtotime(date('Y-m-d ' . $break_starts[$idx], $ccs));
-						$break_end_ts = strtotime(date('Y-m-d ' . $break_ends[$idx], $ccs));
-						if ($t == $break_start_ts) {
-							$has_break_time = $break_end_ts - $break_start_ts;
-							break;
-						}
-					}
-					if ($has_break_time) {
-						$t += ($has_break_time - $step);
-                        $t = apply_filters('app_next_time_step', $t+$step, $ccs, $step); //Allows dynamic/variable step increment.
-						continue;
-					}
-				}
-			}
-// End fixes area
-
-			$is_busy = $this->is_busy( $ccs, $cce, $capacity );
-			$title = apply_filters('app-schedule_cell-title', date_i18n($this->datetime_format, $ccs), $is_busy, $ccs, $cce, $schedule_key);
-
-			$class_name = '';
-			// Mark now
-			if ( $this->local_time > $ccs && $this->local_time < $cce )
-				$class_name = 'notpossible now';
-			// Mark passed hours
-			else if ( $this->local_time > $ccs )
-				$class_name = 'notpossible app_past';
-			// Then check if this time is blocked
-			else if ( isset( $this->options["app_lower_limit"] ) && $this->options["app_lower_limit"]
-				&&( $this->local_time + $this->options["app_lower_limit"] * 3600) > $cce )
-				$class_name = 'notpossible app_blocked';
-			// Check if this is break
-			else if ( $this->is_break( $ccs, $cce ) )
-				$class_name = 'notpossible app_break';
-			// Then look for appointments
-			else if ( $is_busy )
-				$class_name = 'busy';
-			// Then check if we have enough time to fulfill this app
-			else if ( !$this->is_service_possible( $ccs, $cce, $capacity ) )
-				$class_name = 'notpossible service_notpossible';
-			// If nothing else, then it must be free
-			else {
-				$class_name = 'free';
-				// We found at least one timetable cell to be free
+		foreach ( $data as $row ) {
+			if ( 'free' == $row['class'] ) {
+				// We found at least a cell free
 				$this->is_a_timetable_cell_free = true;
 			}
-			$class_name = apply_filters( 'app_class_name', $class_name, $ccs, $cce );
 
-			$ret .= '<div class="app_timetable_cell '.$class_name.'" title="'.esc_attr($title).'">'.
-						$this->secs2hours( $ccs - $day_start ). '<input type="hidden" class="appointments_take_appointment" value="'.$this->pack( $ccs, $cce ).'" />';
+			$ret .= '<div class="app_timetable_cell '.$row['class'].'" title="'.esc_attr($row['title']).'">'.
+			        $row['hours']. '<input type="hidden" class="appointments_take_appointment" value="'.$row['value'].'" />';
 
 			$ret .= '</div>';
-
-            $t = apply_filters('app_next_time_step', $t+$step, $t, $step); //Allows dynamic/variable step increment.
 		}
-
 		$ret .= '<div style="clear:both"></div>';
 
 		$ret .= '</div>';
+
+
 
 		return $ret;
 

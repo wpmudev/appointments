@@ -256,4 +256,5 @@ class App_Appointments_Test extends App_UnitTestCase {
 		$app = appointments_get_appointment( $app_id );
 		$this->assertFalse( $app );
 	}
+
 }

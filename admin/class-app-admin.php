@@ -732,6 +732,7 @@ class Appointments_Admin {
 			// Flush cache
 			if ( isset( $_POST["force_flush"] ) || $saved ) {
 				$appointments->flush_cache();
+				appointments_delete_timetables_cache();
 				if ( isset( $_POST["force_flush"] ) )
 					add_action( 'admin_notices', array ( &$appointments, 'cleared' ) );
 			}
@@ -782,6 +783,7 @@ class Appointments_Admin {
 					add_action( 'admin_notices', array ( &$appointments, 'saved' ) );
 
 				appointments_delete_work_breaks_cache( $location, $appointments->worker );
+				appointments_delete_timetables_cache();
 			}
 		}
 		// Save Exceptions

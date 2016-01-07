@@ -313,6 +313,48 @@ class App_Workers_Test extends App_UnitTestCase {
 		$cache = wp_cache_get( 'app_get_workers' );
 		$this->assertCount( 1, $cache );
 
+		wp_cache_flush();
+
+		// If we get all workers, they should be added to workers list cache
+		appointments_get_workers();
+		$worker = wp_cache_get( $user_id, 'app_workers' );
+		$this->assertEquals( $worker->ID, $user_id );
+
+
+	}
+
+	function test_get_workers_by_service() {
+		$args = $this->factory->user->generate_args();
+		$user_id_1 = $this->factory->user->create_object( $args );
+
+		$args = $this->factory->user->generate_args();
+		$user_id_2 = $this->factory->user->create_object( $args );
+
+		$service_id_1 = appointments_insert_service( array( 'name' => 'My Service' ) );
+		$service_id_2 = appointments_insert_service( array( 'name' => 'My Service 2' ) );
+
+		$args = array(
+			'ID' => $user_id_1,
+			'price' => '19.7',
+			'services_provided' => array( $service_id_1 ),
+			'dummy' => true
+		);
+		appointments_insert_worker( $args );
+
+
+		$args = array(
+			'ID' => $user_id_2,
+			'price' => '19.7',
+			'services_provided' => array( $service_id_1, $service_id_2 ),
+			'dummy' => true
+		);
+		appointments_insert_worker( $args );
+
+		$workers = appointments_get_workers_by_service( $service_id_1 );
+		$this->assertCount( 2, $workers );
+		$workers = appointments_get_workers_by_service( $service_id_2 );
+		$this->assertCount( 1, $workers );
+
 	}
 
 

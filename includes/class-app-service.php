@@ -381,6 +381,7 @@ function appointments_delete_service_cache( $service_id ) {
 	wp_cache_delete( $service_id, 'app_services' );
 	wp_cache_delete( 'app_get_services' );
 	wp_cache_delete( 'app_count_services' );
+	appointments_delete_timetables_cache();
 }
 
 
@@ -388,5 +389,6 @@ function appointments_delete_services_cache() {
 	wp_cache_delete( 'appointments_services_orderby', 'appointments_services' );
 	wp_cache_delete( 'appointments_services_results', 'appointments_services' );
 	wp_cache_delete( 'min_service_id', 'appointments_services' );
+	appointments_delete_timetables_cache();
 }
 

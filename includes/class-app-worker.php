@@ -57,7 +57,7 @@ function appointments_get_worker( $worker_id ) {
 
 	$table = appointments_get_table( 'workers' );
 
-	$worker = false;
+	$worker = wp_cache_get( $worker_id, 'app_workers' );
 
 	if ( ! $worker ) {
 		$worker = $wpdb->get_row(
@@ -433,6 +433,20 @@ function appointments_get_workers( $args = array() ) {
 	}
 }
 
+function appointments_get_workers_by_service( $service_id, $order_by = 'ID' ) {
+	$workers = appointments_get_workers( array( 'orderby' => $order_by ) );
+	$filtered_workers = array();
+	foreach ( $workers as $worker ) {
+		/** @var Appointments_Worker $worker */
+		if ( in_array( $service_id, $worker->services_provided ) ) {
+			$filtered_workers[] = $worker;
+		}
+	}
+
+	return $filtered_workers;
+
+}
+
 function appointments_delete_worker( $worker_id ) {
 	global $wpdb;
 
@@ -491,4 +505,5 @@ function appointments_delete_worker_cache( $worker_id ) {
 	wp_cache_delete( $worker_id, 'app_workers' );
 	wp_cache_delete( 'app_get_workers' );
 	wp_cache_delete( 'app_count_workers' );
+	appointments_delete_timetables_cache();
 }

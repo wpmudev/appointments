@@ -47,3 +47,17 @@ function appointments_get_table( $table ) {
 function appointments_get_db_version() {
 	return get_option( 'app_db_version' );
 }
+
+function appointments_delete_timetables_cache() {
+	delete_transient( 'app_timetables' );
+}
+
+function appointments_get_timetable( $day_start, $capacity, $schedule_key=false ) {
+	global $appointments;
+	return $appointments->get_timetable( $day_start, $capacity, $schedule_key );
+}
+
+function appointments_get_capacity() {
+	global $appointments;
+	return $appointments->get_capacity();
+}

@@ -23,6 +23,18 @@ class Appointments_AJAX {
 
 		add_action( 'wp_ajax_cancel_app', array( $appointments, 'cancel' ) ); 							// Cancel appointment from my appointments
 		add_action( 'wp_ajax_nopriv_cancel_app', array( $appointments, 'cancel' ) );
+
+		add_action( 'wp_ajax_services_load_thumbnail', array( $this, 'load_service_thumbnail' ) );
+		add_action( 'wp_ajax_nopriv_services_load_thumbnail', array( $this, 'load_service_thumbnail' ) );
+	}
+
+	public function load_service_thumbnail() {
+		global $appointments;
+
+		$data = $_GET;
+		$thumb = $appointments->get_thumbnail( absint( $data['page'] ), $data['size'], $data['thumb_class'], absint( $data['worker'] ) );
+
+		wp_send_json_success( array( 'hello' ) );
 	}
 
 	/**

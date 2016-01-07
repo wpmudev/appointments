@@ -433,7 +433,6 @@ function appointments_get_appointments( $l, $s, $w, $week=0 ) {
 	$table = appointments_get_table( 'appointments' );
 	$where = array();
 
-	$where[] = $wpdb->prepare( "service = %d", $s );
 	$where[] = $wpdb->prepare( "worker = %d", $w );
 
 	if ( $l ) {
@@ -460,7 +459,8 @@ function appointments_get_appointments( $l, $s, $w, $week=0 ) {
 	$where = "WHERE " . implode( " AND ", $where );
 
 	$query = "SELECT * FROM $table $where";
-	$cache_key = md5( $query . '-get_appointments' );
+	// We cache by worker
+	$cache_key = md5( $query . '-get_appointments-worker-' . absint( $w ) );
 	$cached_queries = wp_cache_get( 'app_get_appointments' );
 	if ( ! is_array( $cached_queries ) ) {
 		$cached_queries = array();
@@ -479,7 +479,22 @@ function appointments_get_appointments( $l, $s, $w, $week=0 ) {
 		$apps = $cached_queries[ $cache_key ];
 	}
 
-	return $apps;
+	if ( empty( $apps ) ) {
+		$apps = array();
+	}
+
+	// Now filter by service
+	$service_id = absint( $s );
+	$filtered_apps = array();
+	foreach ( $apps as $app ) {
+		/** @var Appointments_Appointment $app */
+		$app_service = absint( $app->service );
+		if ( $app_service && $app_service == $service_id ) {
+			$filtered_apps[] = $app;
+		}
+	}
+
+	return $filtered_apps;
 }
 
 /**
@@ -502,6 +517,7 @@ function appointments_clear_appointment_cache( $app_id = false ) {
 
 
 	wp_cache_delete( 'app_get_appointments' );
+	appointments_delete_timetables_cache();
 }
 
 
