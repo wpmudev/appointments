@@ -12,7 +12,8 @@ class App_Admin_PendingCount {
 
 	const HB_KEY = 'aapc-get_count';
 	const UPPER_LIMIT = 10;
-	
+
+	/** @var Appointments $_core */
 	private $_core;
 
 	private function __construct () {}

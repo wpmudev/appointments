@@ -52,7 +52,7 @@ class WpmuDev_ContextualHelp {
 	 * @param string $screen_id Screen ID to clear.
 	 */
 	public function remove_page ($screen_id) {
-		@$this->_pages[$screen_id] = array();
+		$this->_pages[$screen_id] = array();
 	}
 	
 	/**
@@ -64,7 +64,7 @@ class WpmuDev_ContextualHelp {
 	public function add_tab ($screen_id, $tab=array()) {
 		if (!is_array($tab)) return false;
 		$this->_pages[] = isset($this->_pages[$screen_id]) ? $this->_pages[$screen_id] : array();
-		@$this->_pages[$screen_id]['tabs'][] = $tab;
+		$this->_pages[$screen_id]['tabs'][] = $tab;
 	}
 	
 	/**

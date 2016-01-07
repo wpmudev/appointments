@@ -18,6 +18,8 @@ class App_Schedule_Paddings {
 	const PADDING_TYPE_SMALLEST = 'smallest';
 
 	private $_data;
+
+	/** @var  Appointments $_core */
 	private $_core;
 
 	private $_allowed_paddings = array();
@@ -329,7 +331,7 @@ class App_Schedule_Paddings {
 		//This would be accurate only for specific providers providing a single service.
 		$services = array();
 		if($worker){
-			$services = $this->_core->get_services_by_worker($worker);
+			$services = appointments_get_worker_services( $worker );
 		} else {
 			$services = $this->_core->get_services();
 		}

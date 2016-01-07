@@ -4,6 +4,10 @@ class App_BuddyPress {
 
 	private $_bp = false;
 	private $_bp_script = '';
+
+	/**
+	 * @var bool|Appointments
+	 */
 	private $_core = false;
 
 	private static $_bp_ready = false;
@@ -60,7 +64,7 @@ class App_BuddyPress {
 			exit;
 		}
 		// Checks are ok, let's save settings.
-		$this->_core->save_profile( $user_id );
+		$this->_core->admin->save_profile( $user_id );
 	}
 
 	/**

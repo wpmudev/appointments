@@ -10,6 +10,8 @@ Author: WPMU DEV
 
 class App_Schedule_DefaultService {
 	private $_data;
+
+	/** @var  Appointments $_core */
 	private $_core;
 
 	private function __construct () {}

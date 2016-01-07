@@ -11,6 +11,7 @@ Author: WPMU DEV
 class App_Users_AdditionalFields {
 
 	private $_data;
+	/** @var  Appointments $_core */
 	private $_core;
 
 	private function __construct () {}

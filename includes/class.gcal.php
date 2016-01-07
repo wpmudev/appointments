@@ -1196,6 +1196,7 @@ class AppointmentsGcal {
 		}
 
 		if ( $events && is_array( $events->getItems()) ) {
+			/** @var App_Google_Service_Calendar_Event $event */
 			// Service ID is not important as we will use this record for blocking our time slots only
 			$service_id = $appointments->get_first_service_id();
 

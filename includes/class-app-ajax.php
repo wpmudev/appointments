@@ -724,7 +724,6 @@ class Appointments_AJAX {
 
 			$req = 'cmd=_notify-validate';
 			foreach ($_POST as $k => $v) {
-				if (get_magic_quotes_gpc()) $v = stripslashes($v);
 				$req .= '&' . $k . '=' . $v;
 			}
 

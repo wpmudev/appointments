@@ -40,6 +40,7 @@ class Appointments {
 	public $exceptions_table;
 	public $app_table;
 	public $workers_table;
+	/** @var AppointmentsGcal|bool */
 	public $gcal_api;
 	public $locale_error;
 	public $time_format;
@@ -49,8 +50,11 @@ class Appointments {
 	public $plugin_dir;
 	public $worker;
 	public $location;
+	public $service;
 	public $openid;
 	public $plugin_url;
+	/** @var Appointments_Admin  */
+	public $admin;
 
 	function __construct() {
 
@@ -89,7 +93,7 @@ class Appointments {
 
 		if ( is_admin() ) {
 			include_once( 'admin/class-app-admin.php' );
-			new Appointments_Admin();
+			$this->admin = new Appointments_Admin();
 		}
 
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
@@ -582,6 +586,10 @@ class Appointments {
 			return true;
 
 		return false;
+	}
+
+	public function is_worker( $worker_id ) {
+		return appointments_is_worker( $worker_id );
 	}
 
 

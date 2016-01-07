@@ -18,6 +18,7 @@ abstract class App_Locations_Location {
 	public static function get_location ($data) {
 		$class = apply_filters('app-locations-location-model_instance_class', APP_LOCATIONS_LOCATION_DEFAULT_MODEL_INSTANCE);
 		$class = $class && class_exists($class) ? $class : APP_LOCATIONS_LOCATION_DEFAULT_MODEL_INSTANCE;
+		/** @var App_Locations_Location $instance */
 		$instance = new $class;
 		$instance->to_location($data);
 		return $instance;
@@ -114,6 +115,7 @@ class App_Locations_Model {
 	public function update () {
 		$data = array();
 		foreach ($this->_data as $location) {
+			/** @var App_Locations_Location $location */
 			$data[] = $location->to_storage();
 		}
 		update_option(self::STORAGE_AREA, $data);
@@ -122,6 +124,7 @@ class App_Locations_Model {
 
 	public function find_by ($field, $value) {
 		foreach ($this->_data as $location) {
+			/** @var App_Locations_Location $location */
 			if ($location->get($field) == $value) return $location;
 		}
 		return false;
@@ -129,6 +132,7 @@ class App_Locations_Model {
 
 	public function index_by ($field, $value) {
 		foreach ($this->_data as $idx => $location) {
+			/** @var App_Locations_Location $location */
 			if ($location->get($field) == $value) return $idx;
 		}
 		return false;

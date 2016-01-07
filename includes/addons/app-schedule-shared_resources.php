@@ -11,6 +11,7 @@ Author: WPMU DEV
 class App_Schedule_SharedResources {
 
 	private $_data;
+	/** @var  Appointments */
 	private $_core;
 
 	private function __construct () {}
@@ -118,6 +119,12 @@ class App_Schedule_SharedResources {
 		return (int)$capacity;
 	}
 
+	/**
+	 * @param array $service_ids
+	 * @param App_Period $period
+	 *
+	 * @return int
+	 */
 	private function _get_booked_appointments_for_period ($service_ids, $period) {
 		$start = date('Y-m-d H:i:s', $period->get_start());
 		$end = date('Y-m-d H:i:s', $period->get_end());
