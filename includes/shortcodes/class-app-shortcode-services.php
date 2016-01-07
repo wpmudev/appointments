@@ -105,13 +105,14 @@ class App_Shortcode_Services extends App_Shortcode {
 				<div class="app_services_dropdown_title" id="app_services_dropdown_title">
 					<?php echo $args['select']; ?>
 				</div>
-			<div class="app_services_dropdown_select">
-				<select id="app_select_services" name="app_select_services" class="app_select_services">
-					<?php foreach ( $services as $service ): ?>
-						<option value="<?php echo $service->ID; ?>" <?php selected( $service->ID, $appointments->service ); ?>><?php echo stripslashes( $service->name ); ?></option>
-					<?php endforeach; ?>
-				</select>
-				<input type="button" class="app_services_button" value="<?php echo esc_attr( $args['show'] ); ?>">
+				<div class="app_services_dropdown_select">
+					<select id="app_select_services" name="app_select_services" class="app_select_services">
+						<?php foreach ( $services as $service ): ?>
+							<option value="<?php echo $service->ID; ?>" <?php selected( $service->ID, $appointments->service ); ?>><?php echo stripslashes( $service->name ); ?></option>
+						<?php endforeach; ?>
+					</select>
+					<input type="button" class="app_services_button" value="<?php echo esc_attr( $args['show'] ); ?>">
+				</div>
 			</div>
 
 			<div class="app_service_excerpts">
