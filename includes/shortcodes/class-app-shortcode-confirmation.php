@@ -213,7 +213,7 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 			'askPhone' => $appointments->options["ask_phone"],
 			'askAddress' => $appointments->options["ask_address"],
 			'askCity' => $appointments->options["ask_city"],
-			'askGCal' => isset( $this->options["gcal"] ) && 'yes' == $appointments->options["gcal"],
+			'askGCal' => isset( $appointments->options["gcal"] ) && 'yes' == $appointments->options["gcal"],
 			'warningText' => esc_js( $args['warning_text'] ),
 			'confirmationText' => esc_js( $args['confirm_text'] ),
 			'connectionErrorText' => esc_js( __('A connection problem occurred. Please try again.','appointments') )
