@@ -3734,6 +3734,20 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 	}
 
 	/**
+	 * Determine if a page is A+ Product page from the shortcodes used
+	 * @param $product custom post object
+	 * @return bool
+	 * @Since 1.0.1
+	 */
+	function is_app_mp_page( $product ) {
+		$result = false;
+		if ( is_object( $product ) && strpos( $product->post_content, '[app_' ) !== false )
+			$result = true;
+		// Maybe required for templates
+		return apply_filters( 'app_is_mp_page', $result, $product );
+	}
+
+	/**
 	 *	Check and send reminders to worker for appointments
 	 */
 	function send_reminder_worker() {
