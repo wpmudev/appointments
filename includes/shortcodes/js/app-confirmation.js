@@ -110,6 +110,8 @@ jQuery( document).ready( function( $ ) {
         },
 
         confirmation: function() {
+            this.$cancelButton.after(this.waitImg);
+
             var final_value = $(".appointments-confirmation-final-value").val();
             var app_name = $(".appointments-name-field-entry").val();
             var app_email = $(".appointments-email-field-entry").val();
@@ -213,10 +215,10 @@ jQuery( document).ready( function( $ ) {
                     }
                     if ( response.mp == 1 ) {
                         $(".mp_buy_form")
-                            .find("[name=\'variation\']").remove().end()
-                            .append("<input type=\'hidden\' name=\'variation\' />")
+                            .find("[name='variation']").remove().end()
+                            .append("<input type='hidden' name='variation' />")
                         ;
-                        $(".mp_buy_form input[name=\'variation\']").val(response.variation);
+                        $(".mp_buy_form input[name='variation']").val(response.variation);
                         $(".mp_buy_form").show();
                     }
                     else {
