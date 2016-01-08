@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.5.5-beta4
+Version: 1.5.5-beta5
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
