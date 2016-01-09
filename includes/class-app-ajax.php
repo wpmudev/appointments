@@ -982,5 +982,82 @@ class Appointments_AJAX {
 	}
 
 
+	/**
+	 * Save a CSV file of all appointments
+	 * @since 1.0.9
+	 */
+	function export(){
+		global $appointments;
+
+		$sql = false;
+		$type = !empty($_POST['export_type']) ? $_POST['export_type'] : 'all';
+		if ('selected' == $type && !empty($_POST['app'])) {
+			// selected appointments
+			$ids = array_filter(array_map('intval', $_POST['app']));
+			if ($ids) $sql = "SELECT * FROM {$appointments->app_table} WHERE ID IN(" . join(',', $ids) . ") ORDER BY ID";
+		} else if ('type' == $type) {
+			$status = !empty($_POST['status']) ? $_POST['status'] : false;
+			if ('active' === $status) $sql = $appointments->db->prepare("SELECT * FROM {$appointments->app_table} WHERE status IN('confirmed','paid') ORDER BY ID", $status);
+			else if ($status) $sql = $appointments->db->prepare("SELECT * FROM {$appointments->app_table} WHERE status=%s ORDER BY ID", $status);
+		} else if ('all' == $type) {
+			$sql = "SELECT * FROM {$appointments->app_table} ORDER BY ID";
+		}
+		if (!$sql) wp_die(__('Nothing to download!','appointments'));
+
+		$apps = $appointments->db->get_results($sql, ARRAY_A);
+
+		if ( !is_array( $apps ) || empty( $apps ) ) wp_die(__('Nothing to download!','appointments'));
+
+		$file = fopen('php://temp/maxmemory:'. (12*1024*1024), 'r+');
+		// Add field names to the file
+		$columns = array_map('strtolower', apply_filters('app-export-columns', $appointments->db->get_col_info()));
+		fputcsv( $file,  $columns );
+
+		foreach ( $apps as $app ) {
+			$raw = $app;
+			array_walk( $app, array(&$this, 'export_helper') );
+			$app = apply_filters('app-export-appointment', $app, $raw);
+			if (!empty($app)) fputcsv( $file, $app );
+		}
+
+		$filename = "appointments_".date('F')."_".date('d')."_".date('Y').".csv";
+
+		//serve the file
+		rewind($file);
+		ob_end_clean(); //kills any buffers set by other plugins
+		header('Content-Description: File Transfer');
+		header('Content-Type: text/csv');
+		header('Content-Disposition: attachment; filename="'.$filename.'"');
+		header('Content-Transfer-Encoding: binary');
+		header('Expires: 0');
+		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+		header('Pragma: public');
+		$output = stream_get_contents($file);
+		//$output = $output . "\xEF\xBB\xBF"; // UTF-8 BOM
+		header('Content-Length: ' . strlen($output));
+		fclose($file);
+		die($output);
+	}
+
+	/**
+	 * Helper function for export
+	 * @since 1.0.9
+	 */
+	function export_helper( &$value, $key ) {
+		global $appointments;
+		if ( 'created' == $key || 'start' == $key || 'end' == $key )
+			$value = mysql2date( $appointments->datetime_format, $value );
+		else if ( 'user' == $key && $value ) {
+			$userdata = get_userdata( $value );
+			if ( $userdata )
+				$value = $userdata->user_login;
+		}
+		else if ( 'service' == $key )
+			$value = $appointments->get_service_name( $value );
+		else if ( 'worker' == $key )
+			$value = $appointments->get_worker_name( $value );
+	}
+
+
 
 }
