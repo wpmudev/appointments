@@ -6,17 +6,18 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: appointments 1.5.5\n"
+"Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-11 15:33+0000\n"
+"POT-Creation-Date: 2016-01-11 17:30+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language-Team: WPMU DEV\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Poedit 1.8.2\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: admin/class-app-admin.php:62 includes/class.gcal.php:596
 msgid "SERVICE Appointment"
@@ -2913,8 +2914,8 @@ msgstr ""
 #. global $appointments;
 #. $appointments->load_scripts_styles( );
 #. }
-#. add_action( 'template_redirect', 'add_appointments_css_style' );	 	 	 	 	   		 	 			
-#. 
+#. add_action( 'template_redirect', 'add_appointments_css_style' );
+#.
 #.
 #: includes/sample-appointments-page.php:34
 msgid "Pages:"
@@ -5582,6 +5583,129 @@ msgstr ""
 msgid "Months to add to current month:"
 msgstr ""
 
+#: node_modules/grunt-checktextdomain/test/expected/incorrect-domain-autocorrect.php:3
+#: node_modules/grunt-checktextdomain/test/expected/incorrect-domain-autocorrect.php:5
+#: node_modules/grunt-checktextdomain/test/expected/incorrect-domain-autocorrect.php:9
+#: node_modules/grunt-checktextdomain/test/expected/incorrect-domain-autocorrect.php:10
+#: node_modules/grunt-checktextdomain/test/expected/incorrect-domain-autocorrect.php:14
+#: node_modules/grunt-checktextdomain/test/expected/incorrect-domain-autocorrect.php:15
+#: node_modules/grunt-checktextdomain/test/expected/variable-domain-autocorrect.php:4
+#: node_modules/grunt-checktextdomain/test/expected/variable-domain-autocorrect.php:6
+#: node_modules/grunt-checktextdomain/test/expected/variable-domain-autocorrect.php:10
+#: node_modules/grunt-checktextdomain/test/expected/variable-domain-autocorrect.php:11
+#: node_modules/grunt-checktextdomain/test/expected/variable-domain-autocorrect.php:15
+#: node_modules/grunt-checktextdomain/test/expected/variable-domain-autocorrect.php:16
+#: node_modules/grunt-checktextdomain/test/fixtures/correct-domain.php:3
+#: node_modules/grunt-checktextdomain/test/fixtures/correct-domain.php:5
+#: node_modules/grunt-checktextdomain/test/fixtures/correct-domain.php:9
+#: node_modules/grunt-checktextdomain/test/fixtures/correct-domain.php:10
+#: node_modules/grunt-checktextdomain/test/fixtures/correct-domain.php:14
+#: node_modules/grunt-checktextdomain/test/fixtures/correct-domain.php:15
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain-autocorrect.php:3
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain-autocorrect.php:5
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain-autocorrect.php:9
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain-autocorrect.php:10
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain-autocorrect.php:14
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain-autocorrect.php:15
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain.php:3
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain.php:5
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain.php:9
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain.php:10
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain.php:14
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain.php:15
+#: node_modules/grunt-checktextdomain/test/fixtures/missing-domain.php:3
+#: node_modules/grunt-checktextdomain/test/fixtures/missing-domain.php:5
+#: node_modules/grunt-checktextdomain/test/fixtures/missing-domain.php:9
+#: node_modules/grunt-checktextdomain/test/fixtures/missing-domain.php:10
+#: node_modules/grunt-checktextdomain/test/fixtures/missing-domain.php:14
+#: node_modules/grunt-checktextdomain/test/fixtures/missing-domain.php:15
+#: node_modules/grunt-checktextdomain/test/fixtures/variable-domain-autocorrect.php:4
+#: node_modules/grunt-checktextdomain/test/fixtures/variable-domain-autocorrect.php:6
+#: node_modules/grunt-checktextdomain/test/fixtures/variable-domain-autocorrect.php:10
+#: node_modules/grunt-checktextdomain/test/fixtures/variable-domain-autocorrect.php:11
+#: node_modules/grunt-checktextdomain/test/fixtures/variable-domain-autocorrect.php:15
+#: node_modules/grunt-checktextdomain/test/fixtures/variable-domain-autocorrect.php:16
+msgid "Hello World"
+msgstr ""
+
+#: node_modules/grunt-checktextdomain/test/expected/incorrect-domain-autocorrect.php:4
+#: node_modules/grunt-checktextdomain/test/expected/incorrect-domain-autocorrect.php:6
+#: node_modules/grunt-checktextdomain/test/expected/incorrect-domain-autocorrect.php:11
+#: node_modules/grunt-checktextdomain/test/expected/incorrect-domain-autocorrect.php:16
+#: node_modules/grunt-checktextdomain/test/expected/variable-domain-autocorrect.php:5
+#: node_modules/grunt-checktextdomain/test/expected/variable-domain-autocorrect.php:7
+#: node_modules/grunt-checktextdomain/test/expected/variable-domain-autocorrect.php:12
+#: node_modules/grunt-checktextdomain/test/expected/variable-domain-autocorrect.php:17
+#: node_modules/grunt-checktextdomain/test/fixtures/correct-domain.php:4
+#: node_modules/grunt-checktextdomain/test/fixtures/correct-domain.php:6
+#: node_modules/grunt-checktextdomain/test/fixtures/correct-domain.php:11
+#: node_modules/grunt-checktextdomain/test/fixtures/correct-domain.php:16
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain-autocorrect.php:4
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain-autocorrect.php:6
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain-autocorrect.php:11
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain-autocorrect.php:16
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain.php:4
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain.php:6
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain.php:11
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain.php:16
+#: node_modules/grunt-checktextdomain/test/fixtures/missing-domain.php:4
+#: node_modules/grunt-checktextdomain/test/fixtures/missing-domain.php:6
+#: node_modules/grunt-checktextdomain/test/fixtures/missing-domain.php:11
+#: node_modules/grunt-checktextdomain/test/fixtures/missing-domain.php:16
+#: node_modules/grunt-checktextdomain/test/fixtures/variable-domain-autocorrect.php:5
+#: node_modules/grunt-checktextdomain/test/fixtures/variable-domain-autocorrect.php:7
+#: node_modules/grunt-checktextdomain/test/fixtures/variable-domain-autocorrect.php:12
+#: node_modules/grunt-checktextdomain/test/fixtures/variable-domain-autocorrect.php:17
+msgctxt "verb"
+msgid "Post"
+msgstr ""
+
+#: node_modules/grunt-checktextdomain/test/expected/incorrect-domain-autocorrect.php:20
+#: node_modules/grunt-checktextdomain/test/expected/incorrect-domain-autocorrect.php:24
+#: node_modules/grunt-checktextdomain/test/expected/variable-domain-autocorrect.php:21
+#: node_modules/grunt-checktextdomain/test/expected/variable-domain-autocorrect.php:25
+#: node_modules/grunt-checktextdomain/test/fixtures/correct-domain.php:20
+#: node_modules/grunt-checktextdomain/test/fixtures/correct-domain.php:24
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain-autocorrect.php:20
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain-autocorrect.php:24
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain.php:20
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain.php:24
+#: node_modules/grunt-checktextdomain/test/fixtures/missing-domain.php:20
+#: node_modules/grunt-checktextdomain/test/fixtures/missing-domain.php:24
+#: node_modules/grunt-checktextdomain/test/fixtures/plurals.php:3
+#: node_modules/grunt-checktextdomain/test/fixtures/plurals.php:8
+#: node_modules/grunt-checktextdomain/test/fixtures/plurals.php:15
+#: node_modules/grunt-checktextdomain/test/fixtures/variable-domain-autocorrect.php:21
+#: node_modules/grunt-checktextdomain/test/fixtures/variable-domain-autocorrect.php:25
+#, php-format
+msgid "%d apple"
+msgid_plural "%d apples"
+msgstr[0] ""
+msgstr[1] ""
+
+#: node_modules/grunt-checktextdomain/test/expected/incorrect-domain-autocorrect.php:21
+#: node_modules/grunt-checktextdomain/test/expected/incorrect-domain-autocorrect.php:25
+#: node_modules/grunt-checktextdomain/test/expected/variable-domain-autocorrect.php:22
+#: node_modules/grunt-checktextdomain/test/expected/variable-domain-autocorrect.php:26
+#: node_modules/grunt-checktextdomain/test/fixtures/correct-domain.php:21
+#: node_modules/grunt-checktextdomain/test/fixtures/correct-domain.php:25
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain-autocorrect.php:21
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain-autocorrect.php:25
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain.php:21
+#: node_modules/grunt-checktextdomain/test/fixtures/incorrect-domain.php:25
+#: node_modules/grunt-checktextdomain/test/fixtures/missing-domain.php:25
+#: node_modules/grunt-checktextdomain/test/fixtures/plurals.php:4
+#: node_modules/grunt-checktextdomain/test/fixtures/plurals.php:9
+#: node_modules/grunt-checktextdomain/test/fixtures/plurals.php:16
+#: node_modules/grunt-checktextdomain/test/fixtures/variable-domain-autocorrect.php:22
+#: node_modules/grunt-checktextdomain/test/fixtures/variable-domain-autocorrect.php:26
+#, php-format
+msgctxt "noun, job positions"
+msgid "%d post"
+msgid_plural "%d posts"
+msgstr[0] ""
+msgstr[1] ""
+
 #: node_modules/grunt-pot/test/fixtures/some-file.php:3
 msgid "I'm a translatable string."
 msgstr ""
@@ -5600,4 +5724,46 @@ msgstr[1] ""
 #. / TRANSLATORS: This should be translated as a shorthand for YEAR-MONTH-DAY using 4, 2 and 2 digits.
 #: node_modules/grunt-pot/test/fixtures/some-other-file.php:16
 msgid "yyyy-mm-dd"
+msgstr ""
+
+#: node_modules/grunt-wp-i18n/test/fixtures/basic-theme/exclude/file.php:3
+#: node_modules/grunt-wp-i18n/test/fixtures/plugin-include/plugin-include.php:6
+msgid "Exclude"
+msgstr ""
+
+#: node_modules/grunt-wp-i18n/test/fixtures/plugin-include/include/file.php:2
+msgid "Include"
+msgstr ""
+
+#: node_modules/grunt-wp-i18n/test/fixtures/text-domains/add-domain.php:2
+#: node_modules/grunt-wp-i18n/test/fixtures/text-domains/update-all-domains.php:2
+#: node_modules/grunt-wp-i18n/test/fixtures/text-domains/update-all-domains.php:3
+#: node_modules/grunt-wp-i18n/test/fixtures/text-domains/update-all-domains.php:4
+#: node_modules/grunt-wp-i18n/test/fixtures/text-domains/update-domains.php:2
+#: node_modules/grunt-wp-i18n/test/fixtures/text-domains/update-domains.php:3
+msgid "String"
+msgstr ""
+
+#: node_modules/grunt-wp-i18n/test/fixtures/text-domains/update-all-domains.php:6
+#: node_modules/grunt-wp-i18n/test/fixtures/text-domains/update-all-domains.php:7
+#: node_modules/grunt-wp-i18n/test/fixtures/text-domains/update-all-domains.php:8
+msgctxt "a string"
+msgid "String"
+msgstr ""
+
+#: node_modules/grunt-wp-i18n/test/fixtures/text-domains/update-all-domains.php:9
+#: node_modules/grunt-wp-i18n/test/fixtures/text-domains/update-all-domains.php:10
+#: node_modules/grunt-wp-i18n/test/fixtures/text-domains/update-all-domains.php:11
+#, php-format
+msgid "1 Star"
+msgid_plural "%s Stars"
+msgstr[0] ""
+msgstr[1] ""
+
+#: node_modules/grunt-wp-i18n/test/fixtures/translator-comments/translator-comments.php:7
+msgid "A"
+msgstr ""
+
+#: node_modules/grunt-wp-i18n/test/fixtures/translator-comments/translator-comments.php:15
+msgid "B"
 msgstr ""
