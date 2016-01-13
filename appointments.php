@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.5.5.1
+Version: 1.5.5.2
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	public $version = "1.5.5.1";
+	public $version = "1.5.5.2";
 	public $db_version;
 
 	public $local_time;
@@ -57,7 +57,7 @@ class Appointments {
 	public $admin;
 
 	function __construct() {
-wp_cache_flush();
+
 		include_once( 'includes/helpers.php' );
 
 		$this->plugin_dir = plugin_dir_path(__FILE__);
@@ -198,6 +198,7 @@ wp_cache_flush();
 
 		if ( $this->db_version != $this->version ) {
 			wp_cache_flush();
+			delete_transient( 'app_timetables' );
 		}
 
 		update_option( 'app_db_version', $this->version );
@@ -1708,7 +1709,7 @@ wp_cache_flush();
 			$style = '';
 		else
 			$style = ' style="display:none"';
-delete_transient( 'app_timetables' );
+
 		$timetables = get_transient( 'app_timetables' );
 
 		if ( is_array( $timetables ) && isset( $timetables[ $timetable_key ] ) ) {
@@ -2442,13 +2443,14 @@ delete_transient( 'app_timetables' );
 			$apps = array();
 			if ( $workers ) {
 				foreach( $workers as $worker ) {
+					/** @var Appointments_Worker $worker **/
 					if ( $this->is_working( $start, $end, $worker->ID ) ) {
 						$app_worker = $this->get_reserve_apps_by_worker( $this->location, $worker->ID, $week );
 						if ( $app_worker && is_array( $app_worker ) )
 							$apps = array_merge( $apps, $app_worker );
 
 						// Also include appointments by general staff for services that can be given by this worker
-						$services_provided = $this->_explode( $worker->services_provided );
+						$services_provided = $worker->services_provided;
 						if ( $services_provided && is_array( $services_provided ) && !empty( $services_provided ) ) {
 							foreach ( $services_provided as $service_ID ) {
 								$apps_service_0 = $this->get_reserve_apps( $this->location, $service_ID, 0, $week );
