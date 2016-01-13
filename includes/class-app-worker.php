@@ -363,9 +363,25 @@ function appointments_get_workers( $args = array() ) {
 	// Allowed to add into the query itself
 	$allowed_orderby_in_query = array( 'ID' );
 
+	// This will be the order post-query
+	$allowed_orderby = array( 'name' );
+
 	$allowed_order = array( 'ASC', 'DESC' );
 	if ( ! in_array( $order, $allowed_order ) ) {
 		$order = '';
+	}
+
+	if ( ! in_array( $order_by, $allowed_orderby_in_query ) ) {
+		$order_by = 'ID';
+	}
+
+	//$allowed_orderby = $whitelist = apply_filters( 'app_order_by_whitelist', array( 'ID', 'name', 'start', 'end', 'duration', 'price',
+		//'ID DESC', 'name DESC', 'start DESC', 'end DESC', 'duration DESC', 'price DESC', 'RAND()', 'name ASC', 'name DESC' ) );
+
+	$order_by = apply_filters( 'app_get_workers_orderby', $order_by );
+	$order_query = "";
+	if ( in_array( $args['orderby'], $allowed_orderby ) ) {
+		$order_query = "ORDER BY $order_by $order";
 	}
 
 	if ( ! in_array( $order_by, $allowed_orderby_in_query ) ) {

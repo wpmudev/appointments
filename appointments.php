@@ -57,7 +57,7 @@ class Appointments {
 	public $admin;
 
 	function __construct() {
-
+wp_cache_flush();
 		include_once( 'includes/helpers.php' );
 
 		$this->plugin_dir = plugin_dir_path(__FILE__);
@@ -1708,7 +1708,7 @@ class Appointments {
 			$style = '';
 		else
 			$style = ' style="display:none"';
-
+delete_transient( 'app_timetables' );
 		$timetables = get_transient( 'app_timetables' );
 
 		if ( is_array( $timetables ) && isset( $timetables[ $timetable_key ] ) ) {
