@@ -1830,9 +1830,9 @@ class Appointments {
 					'class' => $class_name,
 					'title' => $title,
 					'hours' => $this->secs2hours( $ccs - $day_start ),
-					'value' => $this->pack( $ccs, $cce )
+					'ccs' => $ccs,
+					'cce' => $cce
 				);
-
 
 				$t = apply_filters('app_next_time_step', $t+$step, $t, $step); //Allows dynamic/variable step increment.
 			}
@@ -1859,7 +1859,7 @@ class Appointments {
 			}
 
 			$ret .= '<div class="app_timetable_cell '.$row['class'].'" title="'.esc_attr($row['title']).'">'.
-			        $row['hours']. '<input type="hidden" class="appointments_take_appointment" value="'.$row['value'].'" />';
+			        $row['hours']. '<input type="hidden" class="appointments_take_appointment" value="' . $this->pack( $row['ccs'], $row['cce'] ) . '" />';
 
 			$ret .= '</div>';
 		}
