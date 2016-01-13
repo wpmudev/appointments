@@ -87,6 +87,8 @@ class Appointments {
 		add_action( 'init', array( &$this, 'cancel' ), 19 ); 				// Check cancellation of an appointment
 		add_filter( 'the_posts', array(&$this, 'load_styles') );			// Determine if we use shortcodes on the page
 
+		add_action( 'admin_init', array( $this, 'maybe_upgrade' ) );
+
 		include_once( 'includes/class-app-service.php' );
 		include_once( 'includes/class-app-worker.php' );
 		include_once( 'includes/class-app-appointment.php' );
@@ -187,6 +189,18 @@ class Appointments {
 		if ( isset( $this->options['payment_required'] ) && 'yes' == $this->options['payment_required'] && !empty($this->options['allow_free_autoconfirm'])) {
 			if (!defined('APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM')) define('APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM', true);
 		}
+	}
+
+	function maybe_upgrade() {
+		if ( $this->db_version == $this->version ) {
+			return;
+		}
+
+		if ( $this->db_version != $this->version ) {
+			wp_cache_flush();
+		}
+
+		update_option( 'app_db_version', $this->version );
 	}
 
 	function setup_gcal_sync () {
@@ -2016,25 +2030,25 @@ class Appointments {
 
 	function get_day_names () {
 		return array(
-			__('Sunday', 'my-plugin'),
-			__('Monday', 'my-plugin'),
-			__('Tuesday', 'my-plugin'),
-			__('Wednesday', 'my-plugin'),
-			__('Thursday', 'my-plugin'),
-			__('Friday', 'my-plugin'),
-			__('Saturday', 'my-plugin'),
+			__('Sunday', 'appointments'),
+			__('Monday', 'appointments'),
+			__('Tuesday', 'appointments'),
+			__('Wednesday', 'appointments'),
+			__('Thursday', 'appointments'),
+			__('Friday', 'appointments'),
+			__('Saturday', 'appointments'),
 		);
 	}
 
 	function get_short_day_names () {
 		return array(
-			__('Su', 'my-plugin'),
-			__('Mo', 'my-plugin'),
-			__('Tu', 'my-plugin'),
-			__('We', 'my-plugin'),
-			__('Th', 'my-plugin'),
-			__('Fr', 'my-plugin'),
-			__('Sa', 'my-plugin'),
+			__('Su', 'appointments'),
+			__('Mo', 'appointments'),
+			__('Tu', 'appointments'),
+			__('We', 'appointments'),
+			__('Th', 'appointments'),
+			__('Fr', 'appointments'),
+			__('Sa', 'appointments'),
 		);
 	}
 
