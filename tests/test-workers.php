@@ -358,7 +358,11 @@ class App_Workers_Test extends App_UnitTestCase {
 	}
 
 	/**
+<<<<<<< Updated upstream
 	 * @group 161163
+=======
+	 * @ticket 161163
+>>>>>>> Stashed changes
 	 * @url http://premium.wpmudev.org/forums/topic/updated-appointments-and-now-not-working
 	 *
 	 * Passing "name" as orderby argument was triggering a DB error
@@ -393,6 +397,7 @@ class App_Workers_Test extends App_UnitTestCase {
 		);
 		appointments_insert_worker( $args );
 
+<<<<<<< Updated upstream
 		$args = array(
 			'orderby' => 'ID ASC'
 		);
@@ -436,6 +441,9 @@ class App_Workers_Test extends App_UnitTestCase {
 			$names[] = $worker->get_name();
 		}
 		$this->assertEquals( $names, array( 'aaaaa', 'bbbbb', 'ccccc' ) );
+=======
+		var_dump(appointments_get_workers());
+>>>>>>> Stashed changes
 	}
 
 
