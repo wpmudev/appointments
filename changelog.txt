@@ -1,3 +1,8 @@
+2016-01-13 - 1.5.5.1
+-------------------------------
+- Fixed: Week days were not translatable
+- Fixed: Timetables were selecting wrong service in some cases
+
 2016-01-11 - 1.5.5
 -------------------------------
 - Fixed: Exporting Appointments was throwing a fatal error
