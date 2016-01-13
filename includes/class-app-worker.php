@@ -50,6 +50,11 @@ class Appointments_Worker {
 		return array_map( 'appointments_get_service', $this->services_provided );
 	}
 
+	public function get_name() {
+		global $appointments;
+		return $appointments->get_worker_name( $this->ID );
+	}
+
 }
 
 function appointments_get_worker( $worker_id ) {
@@ -336,15 +341,43 @@ function appointments_get_workers( $args = array() ) {
 	}
 
 	// @TODO: We need to move this to somewhere else
-	$allowed_orderby = $whitelist = apply_filters( 'app_order_by_whitelist', array( 'ID', 'name', 'start', 'end', 'duration', 'price',
-		'ID DESC', 'name DESC', 'start DESC', 'end DESC', 'duration DESC', 'price DESC', 'RAND()', 'name ASC', 'name DESC' ) );
-
-	$order_query = "";
-
-	if ( in_array( $args['orderby'], $allowed_orderby ) ) {
-		$orderby = apply_filters( 'app_get_workers_orderby', $args['orderby'] );
-		$order_query = "ORDER BY $orderby";
+	$order_by = '';
+	$order = '';
+	if ( $args['orderby'] ) {
+		$order_by = explode( ' ', $args['orderby'] );
+		if ( is_array( $order_by ) && count( $order_by ) == 2 ) {
+			// orderby is like "ID ASC"
+			$order = strtoupper( $order_by[1] );
+			$order_by = $order_by[0];
+		}
+		elseif ( is_array( $order_by ) && count( $order_by ) == 1 ) {
+			$order_by = $order_by[0];
+		}
+		else {
+			$order_by = $args['orderby'];
+		}
 	}
+
+	// We need to make this complex due to legacy stuff
+
+	// Allowed to add into the query itself
+	$allowed_orderby_in_query = array( 'ID' );
+
+	$allowed_order = array( 'ASC', 'DESC' );
+	if ( ! in_array( $order, $allowed_order ) ) {
+		$order = '';
+	}
+
+	if ( ! in_array( $order_by, $allowed_orderby_in_query ) ) {
+		$order_by = 'ID';
+	}
+
+	//$allowed_orderby = $whitelist = apply_filters( 'app_order_by_whitelist', array( 'ID', 'name', 'start', 'end', 'duration', 'price',
+		//'ID DESC', 'name DESC', 'start DESC', 'end DESC', 'duration DESC', 'price DESC', 'RAND()', 'name ASC', 'name DESC' ) );
+
+	$order_by = apply_filters( 'app_get_workers_orderby', $order_by );
+	$order_query = "";
+	$order_query = "ORDER BY $order_by $order";
 
 	$limit_query = '';
 	$limit = absint( $args['limit'] );
@@ -366,10 +399,11 @@ function appointments_get_workers( $args = array() ) {
 		else
 			$get_col = false;
 
-		if ( $get_col )
+		if ( $get_col ) {
 			$query = "SELECT $field FROM $table w $where $order_query $limit_query";
-		else
+		} else {
 			$query = "SELECT * FROM $table w $where $order_query $limit_query";
+		}
 
 		$cache_key = md5( $query . '-' . 'app_get_workers' );
 		$cached_queries = wp_cache_get( 'app_get_workers' );
@@ -379,10 +413,11 @@ function appointments_get_workers( $args = array() ) {
 
 		if ( ! isset( $cached_queries[ $cache_key ] ) ) {
 
-			if ( $get_col )
+			if ( $get_col ) {
 				$results = $wpdb->get_col( $query );
-			else
+			} else {
 				$results = $wpdb->get_results( $query );
+			}
 
 			if ( ! empty( $results ) ) {
 				$cached_queries[ $cache_key ] = $results;
@@ -403,6 +438,42 @@ function appointments_get_workers( $args = array() ) {
 		}
 		else {
 			$workers = $results;
+		}
+
+		// Post-query ordering
+		$allowed_orderby = array( 'name' );
+
+		// And, yes, we need to do this one more time
+		if ( $args['orderby'] ) {
+			$order_by = explode( ' ', $args['orderby'] );
+			if ( is_array( $order_by ) && count( $order_by ) == 2 ) {
+				// orderby is like "ID ASC"
+				$order = strtoupper( $order_by[1] );
+				$order_by = $order_by[0];
+			}
+			elseif ( is_array( $order_by ) && count( $order_by ) == 1 ) {
+				$order_by = $order_by[0];
+			}
+			else {
+				$order_by = $args['orderby'];
+			}
+		}
+
+		if ( ! in_array( $order, $allowed_order ) ) {
+			$order = '';
+		}
+
+		if ( ! in_array( $order_by, $allowed_orderby ) ) {
+			$order_by = '';
+		}
+
+		if ( in_array( $order_by, $allowed_orderby ) ) {
+			if ( 'DESC' === $order ) {
+				usort( $workers, '_appointments_get_workers_desc' );
+			}
+			else {
+				usort( $workers, '_appointments_get_workers_asc' );
+			}
 		}
 
 
@@ -431,6 +502,26 @@ function appointments_get_workers( $args = array() ) {
 
 		return $result;
 	}
+}
+
+/**
+ * @param Appointments_Worker $a
+ * @param Appointments_Worker $b
+ *
+ * @return int
+ */
+function _appointments_get_workers_desc( $a, $b ) {
+	return strcmp( $b->get_name(), $a->get_name() );
+}
+
+/**
+ * @param Appointments_Worker $a
+ * @param Appointments_Worker $b
+ *
+ * @return int
+ */
+function _appointments_get_workers_asc( $a, $b ) {
+	return strcmp( $a->get_name(), $b->get_name() );
 }
 
 function appointments_get_workers_by_service( $service_id, $order_by = 'ID' ) {

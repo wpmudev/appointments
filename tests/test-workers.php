@@ -357,5 +357,86 @@ class App_Workers_Test extends App_UnitTestCase {
 
 	}
 
+	/**
+	 * @group 161163
+	 * @url http://premium.wpmudev.org/forums/topic/updated-appointments-and-now-not-working
+	 *
+	 * Passing "name" as orderby argument was triggering a DB error
+	 */
+	function test_order_workers() {
+		$args = $this->factory->user->generate_args( array( 'user_login' => 'bbbbb' ) );
+		$user_id_1 = $this->factory->user->create_object( $args );
+
+		$args = $this->factory->user->generate_args( array( 'user_login' => 'aaaaa' ) );
+		$user_id_2 = $this->factory->user->create_object( $args );
+
+		$args = $this->factory->user->generate_args( array( 'user_login' => 'ccccc' ) );
+		$user_id_3 = $this->factory->user->create_object( $args );
+
+		$service_id = appointments_insert_service( array( 'name' => 'My Service' ) );
+
+		$args = array(
+			'ID' => $user_id_1,
+			'services_provided' => array( $service_id )
+		);
+		appointments_insert_worker( $args );
+
+		$args = array(
+			'ID' => $user_id_2,
+			'services_provided' => array( $service_id )
+		);
+		appointments_insert_worker( $args );
+
+		$args = array(
+			'ID' => $user_id_3,
+			'services_provided' => array( $service_id )
+		);
+		appointments_insert_worker( $args );
+
+		$args = array(
+			'orderby' => 'ID ASC'
+		);
+		$workers = appointments_get_workers( $args );
+		$ids = wp_list_pluck( $workers, 'ID' );
+		$this->assertEquals( $ids, array( $user_id_1, $user_id_2, $user_id_3 ) );
+
+		$args = array(
+			'orderby' => 'ID DESC'
+		);
+		$workers = appointments_get_workers( $args );
+		$ids = wp_list_pluck( $workers, 'ID' );
+		$this->assertEquals( $ids, array( $user_id_3, $user_id_2, $user_id_1 ) );
+
+		$args = array(
+			'orderby' => 'name DESC'
+		);
+		$workers = appointments_get_workers( $args );
+		$names = array();
+		foreach ( $workers as $worker ) {
+			$names[] = $worker->get_name();
+		}
+		$this->assertEquals( $names, array( 'ccccc', 'bbbbb', 'aaaaa' ) );
+
+		$args = array(
+			'orderby' => 'name ASC'
+		);
+		$workers = appointments_get_workers( $args );
+		$names = array();
+		foreach ( $workers as $worker ) {
+			$names[] = $worker->get_name();
+		}
+		$this->assertEquals( $names, array( 'aaaaa', 'bbbbb', 'ccccc' ) );
+
+		$args = array(
+			'orderby' => 'name'
+		);
+		$workers = appointments_get_workers( $args );
+		$names = array();
+		foreach ( $workers as $worker ) {
+			$names[] = $worker->get_name();
+		}
+		$this->assertEquals( $names, array( 'aaaaa', 'bbbbb', 'ccccc' ) );
+	}
+
 
 }
