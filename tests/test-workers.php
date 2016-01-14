@@ -178,6 +178,34 @@ class App_Workers_Test extends App_UnitTestCase {
 
 	}
 
+	function test_get_all_workers() {
+		$args = $this->factory->user->generate_args();
+		$user_id_1 = $this->factory->user->create_object( $args );
+
+		$args = $this->factory->user->generate_args();
+		$user_id_2 = $this->factory->user->create_object( $args );
+
+		$service_id_1 = appointments_insert_service( array( 'name' => 'My Service 1' ) );
+		$service_id_2 = appointments_insert_service( array( 'name' => 'My Service 2' ) );
+
+		$args = array(
+			'ID' => $user_id_1,
+			'services_provided' => array( $service_id_1 )
+		);
+		appointments_insert_worker( $args );
+
+		$args = array(
+			'ID' => $user_id_2,
+			'services_provided' => array( $service_id_1, $service_id_2 ),
+		);
+		appointments_insert_worker( $args );
+
+		$workers = appointments_get_all_workers();
+		$this->assertCount( 2, $workers );
+
+		$this->assertEquals( wp_cache_get( 'app_all_workers' ), $workers );
+	}
+
 	function test_update_worker() {
 		$args = $this->factory->post->generate_args();
 		$args['post_type'] = 'page';
@@ -354,6 +382,8 @@ class App_Workers_Test extends App_UnitTestCase {
 		$this->assertCount( 2, $workers );
 		$workers = appointments_get_workers_by_service( $service_id_2 );
 		$this->assertCount( 1, $workers );
+
+		$this->assertCount( 2, wp_cache_get( 'app_workers_by_service' ) );
 
 	}
 

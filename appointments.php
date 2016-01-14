@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.5.5.2
+Version: 1.5.5.2-beta-1
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -32,8 +32,10 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	public $version = "1.5.5.2";
+	public $version = "1.5.5.2-beta-1";
 	public $db_version;
+
+	public $timetables = array();
 
 	public $local_time;
 	public $wh_table;
@@ -59,6 +61,11 @@ class Appointments {
 	function __construct() {
 
 		include_once( 'includes/helpers.php' );
+
+		$this->timetables = get_transient( 'app_timetables' );
+		if ( ! $this->timetables || ! is_array( $this->timetables ) ) {
+			$this->timetables = array();
+		}
 
 		$this->plugin_dir = plugin_dir_path(__FILE__);
 		$this->plugin_url = plugins_url(basename(dirname(__FILE__)));
@@ -532,7 +539,7 @@ class Appointments {
 	 * @return array of objects
 	 */
 	function get_reserve_apps_by_worker( $l, $w, $week=0 ) {
-		$apps = false;
+		$apps = wp_cache_get( 'reserve_apps_by_worker_'. $l . '_' . $w . '_' . $week );
 		if ( false === $apps ) {
 			$services = $this->get_services();
 			if ( $services ) {
@@ -543,6 +550,7 @@ class Appointments {
 						$apps = array_merge( $apps, $apps_worker );
 				}
 			}
+			wp_cache_set( 'reserve_apps_by_worker_'. $l . '_' . $w . '_' . $week, $apps );
 		}
 		return $apps;
 	}
@@ -1700,6 +1708,7 @@ class Appointments {
 			$time = $this->local_time;
 		}
 
+		$timetable_key .= '-' . $this->worker;
 		$timetable_key .= '-' . date( 'Ym', $time );
 
 
@@ -1709,11 +1718,9 @@ class Appointments {
 			$style = '';
 		else
 			$style = ' style="display:none"';
-
-		$timetables = get_transient( 'app_timetables' );
-
-		if ( is_array( $timetables ) && isset( $timetables[ $timetable_key ] ) ) {
-			$data =  $timetables[ $timetable_key ];
+		
+		if ( isset( $this->timetables[ $timetable_key ] ) ) {
+			$data =  $this->timetables[ $timetable_key ];
 		}
 		else {
 
@@ -1810,8 +1817,8 @@ class Appointments {
 					}
 				}
 // End fixes area
-
 				$is_busy = $this->is_busy( $ccs, $cce, $capacity );
+
 				$title = apply_filters('app-schedule_cell-title', date_i18n($this->datetime_format, $ccs), $is_busy, $ccs, $cce, $schedule_key);
 
 				$class_name = '';
@@ -1854,12 +1861,10 @@ class Appointments {
 		}
 
 
-		if ( ! $timetables || ! is_array( $timetables ) ) {
-			$timetables = array();
-		}
+		$this->timetables[ $timetable_key ] = $data;
 
-		$timetables[ $timetable_key ] = $data;
-		set_transient( 'app_timetables', $timetables, 86400 ); // save for one day
+		// Save timetables only once at the end of the execution
+		add_action( 'shutdown', array( $this, 'save_timetables' ) );
 
 		$ret  = '';
 		$ret .= '<div class="app_timetable app_timetable_'.$day_start.'"'.$style.'>';
@@ -1886,6 +1891,10 @@ class Appointments {
 
 		return $ret;
 
+	}
+
+	public function save_timetables() {
+		set_transient( 'app_timetables', $this->timetables, 86400 ); // save for one day
 	}
 
 	function _get_table_meta_row_monthly ($which, $long) {
@@ -2438,7 +2447,7 @@ class Appointments {
 		// If we are here, no preference is selected (provider_id=0) or selected provider is not busy. There are 2 cases here:
 		// 1) There are several providers: Look for reserve apps for the workers giving this service.
 		// 2) No provider defined: Look for reserve apps for worker=0, because he will carry out all services
-		if ( $this->get_workers() != null ) {
+		if ( appointments_get_all_workers() ) {
 			$workers = $this->get_workers_by_service( $this->service );
 			$apps = array();
 			if ( $workers ) {

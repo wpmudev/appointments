@@ -31,13 +31,15 @@ class App_Timetables_Test extends App_UnitTestCase {
 		$date = date( 'Y-m-01', $time );
 		$capacity = appointments_get_capacity();
 		$date_start = strtotime("{$date} 00:00");
-		$key = $date_start . '-' . $capacity . '-0' . '-' . date( 'Ym', $appointments->local_time );
+		$key = $date_start . '-' . $capacity . '-0' . '-' . $appointments->worker . '-' . date( 'Ym', $appointments->local_time );
 
 
 		// WORKERS
 
 		// Trigger the timetables cache
 		appointments_get_timetable( $date_start, $capacity );
+		// This saves the timetables
+		do_action( 'shutdown' );
 		$timetables_cache = get_transient( 'app_timetables' );
 		$this->assertNotEmpty( $timetables_cache[ $key ] );
 
@@ -49,12 +51,15 @@ class App_Timetables_Test extends App_UnitTestCase {
 			'dummy' => true
 		);
 		appointments_insert_worker( $args );
-
 		$timetables_cache = get_transient( 'app_timetables' );
 		$this->assertEmpty( $timetables_cache[ $key ] );
 
 		// Trigger the timetables cache
 		appointments_get_timetable( $date_start, $capacity );
+
+		// This saves the timetables
+		do_action( 'shutdown' );
+
 		$timetables_cache = get_transient( 'app_timetables' );
 		$this->assertNotEmpty( $timetables_cache[ $key ] );
 
@@ -65,6 +70,10 @@ class App_Timetables_Test extends App_UnitTestCase {
 
 		// Trigger the timetables cache
 		appointments_get_timetable( $date_start, $capacity );
+
+		// This saves the timetables
+		do_action( 'shutdown' );
+
 		$timetables_cache = get_transient( 'app_timetables' );
 		$this->assertNotEmpty( $timetables_cache[ $key ] );
 
@@ -78,6 +87,10 @@ class App_Timetables_Test extends App_UnitTestCase {
 
 		// Trigger the timetables cache
 		appointments_get_timetable( $date_start, $capacity );
+
+		// This saves the timetables
+		do_action( 'shutdown' );
+
 		$timetables_cache = get_transient( 'app_timetables' );
 		$this->assertNotEmpty( $timetables_cache[ $key ] );
 
@@ -107,6 +120,10 @@ class App_Timetables_Test extends App_UnitTestCase {
 
 		// Trigger the timetables cache
 		appointments_get_timetable( $date_start, $capacity );
+
+		// This saves the timetables
+		do_action( 'shutdown' );
+
 		$timetables_cache = get_transient( 'app_timetables' );
 		$this->assertNotEmpty( $timetables_cache[ $key ] );
 
@@ -117,6 +134,10 @@ class App_Timetables_Test extends App_UnitTestCase {
 
 		// Trigger the timetables cache
 		appointments_get_timetable( $date_start, $capacity );
+
+		// This saves the timetables
+		do_action( 'shutdown' );
+
 		$timetables_cache = get_transient( 'app_timetables' );
 		$this->assertNotEmpty( $timetables_cache[ $key ] );
 
@@ -132,6 +153,10 @@ class App_Timetables_Test extends App_UnitTestCase {
 
 		// Trigger the timetables cache
 		appointments_get_timetable( $date_start, $capacity );
+
+		// This saves the timetables
+		do_action( 'shutdown' );
+
 		$timetables_cache = get_transient( 'app_timetables' );
 		$this->assertNotEmpty( $timetables_cache[ $key ] );
 
@@ -142,6 +167,10 @@ class App_Timetables_Test extends App_UnitTestCase {
 
 		// Trigger the timetables cache
 		appointments_get_timetable( $date_start, $capacity );
+
+		// This saves the timetables
+		do_action( 'shutdown' );
+
 		$timetables_cache = get_transient( 'app_timetables' );
 		$this->assertNotEmpty( $timetables_cache[ $key ] );
 
@@ -152,6 +181,10 @@ class App_Timetables_Test extends App_UnitTestCase {
 
 		// Trigger the timetables cache
 		appointments_get_timetable( $date_start, $capacity );
+
+		// This saves the timetables
+		do_action( 'shutdown' );
+
 		$timetables_cache = get_transient( 'app_timetables' );
 		$this->assertNotEmpty( $timetables_cache[ $key ] );
 
