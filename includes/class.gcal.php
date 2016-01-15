@@ -1269,6 +1269,8 @@ class AppointmentsGcal {
 		if ( $this->deleted )
 			$message .= sprintf( __('%s appointment(s) deleted.','appointments'), $this->deleted ). ' ';
 
+		wp_cache_flush();
+		delete_transient( 'app_timetables' );
 		return $message;
 	}
 
