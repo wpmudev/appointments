@@ -430,6 +430,16 @@ function appointments_update_appointment_status( $app_id, $new_status ) {
 function appointments_get_appointments( $l, $s, $w, $week=0 ) {
 	global $wpdb;
 
+	$cache_key = md5( 'app-get-appointments-' . $l . '-' . $s . '-' . $w . '-' . $week );
+	$cached_queries = wp_cache_get( 'app_get_appointments' );
+	if ( ! is_array( $cached_queries ) ) {
+		$cached_queries = array();
+	}
+
+	if ( isset( $cached_queries[ $cache_key ] ) ) {
+		return $cached_queries[ $cache_key ];
+	}
+
 	$table = appointments_get_table( 'appointments' );
 	$where = array();
 
@@ -459,28 +469,15 @@ function appointments_get_appointments( $l, $s, $w, $week=0 ) {
 	$where = "WHERE " . implode( " AND ", $where );
 
 	$query = "SELECT * FROM $table $where";
-	// We cache by worker
-	$cache_key = md5( $query . '-get_appointments-worker-' . absint( $w ) );
-	$cached_queries = wp_cache_get( 'app_get_appointments' );
-	if ( ! is_array( $cached_queries ) ) {
-		$cached_queries = array();
-	}
 
-	if ( ! isset( $cached_queries[ $cache_key ] ) ) {
-		$apps = $wpdb->get_results( $query );
-		$cached_queries[ $cache_key ] = $apps;
-		wp_cache_set( 'app_get_appointments', $cached_queries );
-
-		foreach ( $apps as $app ) {
-			wp_cache_add( $app->ID, $app, 'app_appointments' );
-		}
-	}
-	else {
-		$apps = $cached_queries[ $cache_key ];
-	}
+	$apps = $wpdb->get_results( $query );
 
 	if ( empty( $apps ) ) {
 		$apps = array();
+	}
+
+	foreach ( $apps as $app ) {
+		wp_cache_add( $app->ID, $app, 'app_appointments' );
 	}
 
 	// Now filter by service
@@ -493,6 +490,9 @@ function appointments_get_appointments( $l, $s, $w, $week=0 ) {
 			$filtered_apps[] = $app;
 		}
 	}
+
+	$cached_queries[ $cache_key ] = $filtered_apps;
+	wp_cache_set( 'app_get_appointments', $cached_queries );
 
 	return $filtered_apps;
 }

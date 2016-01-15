@@ -835,10 +835,10 @@ class Appointments {
 	 * @return integer
 	 */
 	function get_capacity() {
-		$capacity = false;
+		$capacity = wp_cache_get( 'capacity_'. $this->service );
 		if ( false === $capacity ) {
 			// If no worker is defined, capacity is always 1
-			$count = count( $this->get_workers() );
+			$count = count( appointments_get_all_workers() );
 			if ( !$count ) {
 				$capacity = 1;
 			}
@@ -856,6 +856,7 @@ class Appointments {
 				else
 					$capacity = 1; // No service ?? - Not possible but let's be safe
 			}
+			wp_cache_set( 'capacity_'. $this->service, $capacity );
 		}
 		return apply_filters( 'app_get_capacity', $capacity, $this->service, $this->worker );
 	}
@@ -1621,7 +1622,9 @@ class Appointments {
 			else {
 				// At first assume all cells are busy
 				$this->is_a_timetable_cell_free = false;
+
 				$time_table .= $this->get_timetable( $ccs, $capacity, $schedule_key );
+
 				// Look if we have at least one cell free from get_timetable function
 				if ( $this->is_a_timetable_cell_free )
 					$class_name = 'free';
@@ -1724,7 +1727,6 @@ class Appointments {
 		}
 		else {
 
-
 			$start = $end = 0;
 			if ( $min_max = $this->min_max_wh( 0, 0 ) ) {
 				$start = $min_max["min"];
@@ -1763,7 +1765,6 @@ class Appointments {
 
 			$data = array();
 			for ( $t=$first; $t<$last; ) {
-
 				$ccs = apply_filters('app_ccs', $t); 				// Current cell starts
 				$cce = apply_filters('app_cce', $ccs + $step);		// Current cell ends
 
@@ -1858,7 +1859,10 @@ class Appointments {
 
 				$t = apply_filters('app_next_time_step', $t+$step, $t, $step); //Allows dynamic/variable step increment.
 			}
+
 		}
+
+
 
 
 		$this->timetables[ $timetable_key ] = $data;
@@ -1878,7 +1882,7 @@ class Appointments {
 				$this->is_a_timetable_cell_free = true;
 			}
 
-			$ret .= '<div class="app_timetable_cell '.$row['class'].'" title="'.esc_attr($row['title']).'">'.
+			$ret .= '<div class="app_timetable_cell app_timetable_cell-' . date( 'H-i', $row['ccs'] ) . '  '.$row['class'].'" title="'.esc_attr($row['title']).'">'.
 			        $row['hours']. '<input type="hidden" class="appointments_take_appointment" value="' . $this->pack( $row['ccs'], $row['cce'] ) . '" />';
 
 			$ret .= '</div>';
@@ -2448,7 +2452,7 @@ class Appointments {
 		// 1) There are several providers: Look for reserve apps for the workers giving this service.
 		// 2) No provider defined: Look for reserve apps for worker=0, because he will carry out all services
 		if ( appointments_get_all_workers() ) {
-			$workers = $this->get_workers_by_service( $this->service );
+			$workers = appointments_get_workers_by_service( $this->service );
 			$apps = array();
 			if ( $workers ) {
 				foreach( $workers as $worker ) {
@@ -2499,6 +2503,8 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		// Nothing found, so this time slot is not busy
 		return false;
 	}
+
+
 
 	/**
 	 * Remove duplicate appointment objects by app ID

@@ -319,6 +319,17 @@ function appointments_get_workers( $args = array() ) {
 
 	$args = wp_parse_args( $args, $defaults );
 
+	$serialized_args = maybe_serialize( $args );
+	$cache_key = md5( $serialized_args );
+	$cached_queries = wp_cache_get( 'app_get_workers' );
+	if ( ! is_array( $cached_queries ) ) {
+		$cached_queries = array();
+	}
+
+	if ( isset( $cached_queries[ $cache_key ] ) && ! $args['count'] ) {
+		return $cached_queries[ $cache_key ];
+	}
+
 	$table = appointments_get_table( 'workers' );
 
 	$where = array();
@@ -421,28 +432,11 @@ function appointments_get_workers( $args = array() ) {
 			$query = "SELECT * FROM $table w $where $order_query $limit_query";
 		}
 
-		$cache_key = md5( $query . '-' . 'app_get_workers' );
-		$cached_queries = wp_cache_get( 'app_get_workers' );
 
-		if ( ! is_array( $cached_queries ) )
-			$cached_queries = array();
-
-		if ( ! isset( $cached_queries[ $cache_key ] ) ) {
-
-			if ( $get_col ) {
-				$results = $wpdb->get_col( $query );
-			} else {
-				$results = $wpdb->get_results( $query );
-			}
-
-			if ( ! empty( $results ) ) {
-				$cached_queries[ $cache_key ] = $results;
-				wp_cache_set( 'app_get_workers', $cached_queries );
-			}
-
-		}
-		else {
-			$results = $cached_queries[ $cache_key ];
+		if ( $get_col ) {
+			$results = $wpdb->get_col( $query );
+		} else {
+			$results = $wpdb->get_results( $query );
 		}
 
 		$workers = array();
@@ -492,6 +486,11 @@ function appointments_get_workers( $args = array() ) {
 			}
 		}
 
+
+		if ( ! empty( $workers ) ) {
+			$cached_queries[ $cache_key ] = $workers;
+			wp_cache_set( 'app_get_workers', $cached_queries  );
+		}
 
 		return $workers;
 

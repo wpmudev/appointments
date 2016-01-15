@@ -1004,6 +1004,7 @@ class AppointmentsGcal {
 			$app = $appointments->get_app( $app_id );
 		}
 
+
 		// Create Event object and set parameters
 		$this->set_event_parameters( $app, $app->worker );
 
