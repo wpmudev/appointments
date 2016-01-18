@@ -204,8 +204,7 @@ class Appointments {
 		}
 
 		if ( $this->db_version != $this->version ) {
-			wp_cache_flush();
-			delete_transient( 'app_timetables' );
+			appointments_clear_cache();
 		}
 
 		update_option( 'app_db_version', $this->version );
