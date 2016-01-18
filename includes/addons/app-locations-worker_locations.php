@@ -68,6 +68,10 @@ class App_Locations_WorkerLocations {
 			App_Shortcode_WorkerLocationsShortcode::serve();
 			App_Shortcode_RequiredWorkerLocationsShortcode::serve();
 		}
+
+		if ( empty( $this->_data['worker_locations']['insert'] ) ) {
+			$this->_data['worker_locations']['insert'] = '';
+		}
 	}
 
 	public function record_appointment_location ($appointment_id) {

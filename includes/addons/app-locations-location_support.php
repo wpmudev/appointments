@@ -219,6 +219,13 @@ class App_Locations_LocationsWorker {
 			add_filter('app-shortcode-all_appointments-' . $injection_point, array($this, 'all_appointments_address'), 1, 2);
 		}
 
+		if ( empty( $this->_data['locations_settings']['all_appointments'] ) ) {
+			$this->_data['locations_settings']['all_appointments'] = '';
+		}
+		if ( empty( $this->_data['locations_settings']['my_appointments'] ) ) {
+			$this->_data['locations_settings']['my_appointments'] = '';
+		}
+
 		// Add macro expansion filtering
 		add_filter('app-codec-macros', array($this, 'add_to_macro_list'));
 		add_filter('app-codec-macro_default-replace_location', array($this, 'expand_location_macro'), 10, 3);
