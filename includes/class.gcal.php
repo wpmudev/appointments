@@ -1163,6 +1163,7 @@ class AppointmentsGcal {
 		));
 		// Get only future events and limit them with appointment limit setting and 500 events
 		$error_code = false;
+		$events = array();
 		try {
 			$events = $this->service->events->listEvents($this->get_selected_calendar($worker_id), $arguments);
 		} catch (Exception $e) {

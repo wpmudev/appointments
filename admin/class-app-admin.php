@@ -917,6 +917,8 @@ class Appointments_Admin {
 						if ( $r )
 							$result = true;
 					}
+
+					do_action( 'app-workers-worker-updated', $worker_id );
 				}
 				elseif ( ! $worker_exists && ! empty( $worker["services_provided"] ) ) {
 					// Insert
@@ -929,8 +931,7 @@ class Appointments_Admin {
 					);
 					$inserted = appointments_insert_worker( $args );
 
-					if ( $inserted )
-						do_action( 'app-workers-worker-updated', $worker_id );
+					do_action( 'app-workers-worker-updated', $worker_id );
 				}
 
 			}

@@ -187,6 +187,7 @@ class App_Schedule_Paddings {
 			self::PADDING_AFTER => $after,
 		);
 		update_option('appointments_services_padding', $services_padding);
+		$this->_data['service_padding'][$service_id] = array( 'before' => $before, 'after' => $after );
 	}
 
 	public function save_worker_padding ($worker_id) {
@@ -205,6 +206,7 @@ class App_Schedule_Paddings {
 			self::PADDING_AFTER => $after,
 		);
 		update_option('appointments_workers_padding', $workers_padding);
+		$this->_data['worker_padding'][$worker_id] = array( 'before' => $before, 'after' => $after );
 	}
 
 	/**
