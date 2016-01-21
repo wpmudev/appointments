@@ -625,9 +625,9 @@ class Appointments {
 		if ( 0 == $worker ) {
 			// Show different text to authorized people
 			if ( is_admin() || App_Roles::current_user_can( 'manage_options', App_Roles::CTX_STAFF ) || appointments_is_worker( $current_user->ID ) )
-				$user_name = __('Our staff', 'my-plugin');
+				$user_name = __('Our staff', 'appointments');
 			else
-				$user_name = __('A specialist', 'my-plugin');
+				$user_name = __('A specialist', 'appointments');
 		}
 		else {
 			$userdata = get_userdata( $worker );
@@ -701,7 +701,7 @@ class Appointments {
 	 */
 	function get_service_name( $service=0 ) {
 		// Safe text if we delete a service
-		$name = __('Not defined', 'my-plugin');
+		$name = __('Not defined', 'appointments');
 		$result = $this->get_service( $service );
 		if ( $result )
 			$name = $result->name;
@@ -1102,13 +1102,13 @@ class Appointments {
 	 */
 	function weekdays() {
 		return array(
-			__('Sunday', 'my-plugin') => 'Sunday',
-			__('Monday', 'my-plugin') => 'Monday',
-			__('Tuesday', 'my-plugin') => 'Tuesday',
-			__('Wednesday', 'my-plugin') => 'Wednesday',
-			__('Thursday', 'my-plugin') => 'Thursday',
-			__('Friday', 'my-plugin') => 'Friday',
-			__('Saturday', 'my-plugin') => 'Saturday'
+			__('Sunday', 'appointments') => 'Sunday',
+			__('Monday', 'appointments') => 'Monday',
+			__('Tuesday', 'appointments') => 'Tuesday',
+			__('Wednesday', 'appointments') => 'Wednesday',
+			__('Thursday', 'appointments') => 'Thursday',
+			__('Friday', 'appointments') => 'Friday',
+			__('Saturday', 'appointments') => 'Saturday'
 		);
 	}
 
@@ -1119,12 +1119,12 @@ class Appointments {
 	function get_statuses() {
 		return apply_filters( 'app_statuses',
 					array(
-						'pending'	=> __('Pending', 'my-plugin'),
-						'paid'		=> __('Paid', 'my-plugin'),
-						'confirmed'	=> __('Confirmed', 'my-plugin'),
-						'completed'	=> __('Completed', 'my-plugin'),
-						'reserved'	=> __('Reserved by GCal', 'my-plugin'),
-						'removed'	=> __('Removed', 'my-plugin')
+						'pending'	=> __('Pending', 'appointments'),
+						'paid'		=> __('Paid', 'appointments'),
+						'confirmed'	=> __('Confirmed', 'appointments'),
+						'completed'	=> __('Completed', 'appointments'),
+						'reserved'	=> __('Reserved by GCal', 'appointments'),
+						'removed'	=> __('Removed', 'appointments')
 						)
 				);
 	}
@@ -1137,12 +1137,12 @@ class Appointments {
 	function get_field_name( $key ) {
 
 		$field_names = array(
-						'name'		=> __('Name', 'my-plugin'),
-						'email'		=> __('Email', 'my-plugin'),
-						'phone'		=> __('Phone', 'my-plugin'),
-						'address'	=> __('Address', 'my-plugin'),
-						'city'		=> __('City', 'my-plugin'),
-						'note'		=> __('Note', 'my-plugin')
+						'name'		=> __('Name', 'appointments'),
+						'email'		=> __('Email', 'appointments'),
+						'phone'		=> __('Phone', 'appointments'),
+						'address'	=> __('Address', 'appointments'),
+						'city'		=> __('City', 'appointments'),
+						'note'		=> __('Note', 'appointments')
 					);
 
 		$field_names = apply_filters( 'app_get_field_name', $field_names );
@@ -1150,7 +1150,7 @@ class Appointments {
 		if ( array_key_exists( $key, $field_names ) )
 			return $field_names[$key];
 		else
-			return __( 'Not defined', 'my-plugin' );
+			return __( 'Not defined', 'appointments' );
 	}
 
 	/**
@@ -1160,9 +1160,9 @@ class Appointments {
 	function get_classes() {
 		return apply_filters( 'app_box_class_names',
 							array(
-								'free'			=> __('Free', 'my-plugin'),
-								'busy'			=> __('Busy', 'my-plugin'),
-								'notpossible'	=> __('Not possible', 'my-plugin')
+								'free'			=> __('Free', 'appointments'),
+								'busy'			=> __('Busy', 'appointments'),
+								'notpossible'	=> __('Not possible', 'appointments')
 								)
 				);
 	}
@@ -1250,7 +1250,7 @@ class Appointments {
 				// Another irrelevant app may have been created after cancel link has been sent. So we will check creation date
 				if ( $in_allowed_stat && $_GET['app_nonce'] == md5( $_GET['app_id']. $appointments->salt . strtotime( $app->created ) ) ) {
 					if ( $appointments->change_status( 'removed', $app_id ) ) {
-						$appointments->log( sprintf( __('Client %s cancelled appointment with ID: %s','my-plugin'), $appointments->get_client_name( $app_id ), $app_id ) );
+						$appointments->log( sprintf( __('Client %s cancelled appointment with ID: %s','appointments'), $appointments->get_client_name( $app_id ), $app_id ) );
 						$appointments->send_notification( $app_id, true );
 
 						if (!empty($appointments->gcal_api) && is_object($appointments->gcal_api)) $appointments->gcal_api->delete($app_id); // Drop the cancelled appointment
@@ -1298,11 +1298,11 @@ class Appointments {
 
 				// He is the wrong guy, or he may have cleared his cookies while he is on the page
 				if ( !$owner )
-					die( json_encode( array('error'=>esc_js(__('There is an issue with this appointment. Please refresh the page and try again. If problem persists, please contact website admin.','my-plugin') ) ) ) );
+					die( json_encode( array('error'=>esc_js(__('There is an issue with this appointment. Please refresh the page and try again. If problem persists, please contact website admin.','appointments') ) ) ) );
 
 				// Now we can safely continue for cancel
 				if ( $appointments->change_status( 'removed', $app_id ) ) {
-					$appointments->log( sprintf( __('Client %s cancelled appointment with ID: %s','my-plugin'), $appointments->get_client_name( $app_id ), $app_id ) );
+					$appointments->log( sprintf( __('Client %s cancelled appointment with ID: %s','appointments'), $appointments->get_client_name( $app_id ), $app_id ) );
 					$appointments->send_notification( $app_id, true );
 
 					if (!empty($appointments->gcal_api) && is_object($appointments->gcal_api)) $appointments->gcal_api->delete($app_id); // Drop the cancelled appointment
@@ -1312,11 +1312,11 @@ class Appointments {
 					die( json_encode( array('success'=>1)));
 				}
 				else
-					die( json_encode( array('error'=>esc_js(__('Appointment could not be cancelled. Please refresh the page and try again.','my-plugin') ) ) ) );
+					die( json_encode( array('error'=>esc_js(__('Appointment could not be cancelled. Please refresh the page and try again.','appointments') ) ) ) );
 			}
 		}
 		else if ( isset( $_POST['app_id'] ) && isset( $_POST['cancel_nonce'] ) )
-			die( json_encode( array('error'=>esc_js(__('Cancellation of appointments is disabled. Please contact website admin.','my-plugin') ) ) ) );
+			die( json_encode( array('error'=>esc_js(__('Cancellation of appointments is disabled. Please contact website admin.','appointments') ) ) ) );
 	}
 
 
@@ -1345,7 +1345,7 @@ class Appointments {
 		$text = apply_filters('app_the_content', $text, $page_id, $worker_id );
 		$text = str_replace(']]>', ']]&gt;', $text);
 		$excerpt_length = apply_filters('app_excerpt_length', 55);
-		$excerpt_more = apply_filters('app_excerpt_more', ' &hellip; <a href="'. esc_url( get_permalink($page->ID) ) . '" target="_blank">' . __( 'More information <span class="meta-nav">&rarr;</span>', 'my-plugin' ) . '</a>');
+		$excerpt_more = apply_filters('app_excerpt_more', ' &hellip; <a href="'. esc_url( get_permalink($page->ID) ) . '" target="_blank">' . __( 'More information <span class="meta-nav">&rarr;</span>', 'appointments' ) . '</a>');
 		$text = wp_trim_words( $text, $excerpt_length, $excerpt_more );
 
 		if ( $show_thumb_holder ) {
@@ -1449,7 +1449,7 @@ class Appointments {
 	function gcal( $service, $start, $end, $php=false, $address, $city ) {
 		// Find time difference from Greenwich as GCal asks UTC
 
-		$text = sprintf(__('%s Appointment', 'my-plugin'), $this->get_service_name($service));
+		$text = sprintf(__('%s Appointment', 'appointments'), $this->get_service_name($service));
 
 		if (!$php) $text = esc_js( $text );
 
@@ -1480,7 +1480,7 @@ class Appointments {
 	 * @return json object
 	 */
 	function json_die( $field_name ) {
-		die( json_encode( array("error"=>sprintf( __( 'Something wrong about the submitted %s', 'my-plugin'), $this->get_field_name($field_name)))));
+		die( json_encode( array("error"=>sprintf( __( 'Something wrong about the submitted %s', 'appointments'), $this->get_field_name($field_name)))));
 	}
 
 	/**
@@ -2034,9 +2034,9 @@ class Appointments {
 
 	function _get_table_meta_row ($which, $long) {
 		if ( !$long )
-			$day_names_array = $this->arrange( $this->get_short_day_names(), __(' ', 'my-plugin') );
+			$day_names_array = $this->arrange( $this->get_short_day_names(), __(' ', 'appointments') );
 		else
-			$day_names_array = $this->arrange( $this->get_day_names(), __(' ', 'my-plugin') );
+			$day_names_array = $this->arrange( $this->get_day_names(), __(' ', 'appointments') );
 		$cells = '<th class="hourmin_column">&nbsp;' . join('</th><th>', $day_names_array) . '</th>';
 		return "<{$which}><tr>{$cells}</tr></{$which}>";
 	}
@@ -3241,19 +3241,19 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		if (@$this->options['accept_api_logins']) {
 			wp_enqueue_script('appointments_api_js', $this->plugin_url . '/js/appointments-api.js', array('jquery'), $this->version );
 			wp_localize_script('appointments_api_js', 'l10nAppApi', apply_filters('app-scripts-api_l10n', array(
-				'facebook' => __('Login with Facebook', 'my-plugin'),
-				'twitter' => __('Login with Twitter', 'my-plugin'),
-				'google' => __('Login with Google+', 'my-plugin'),
-				'wordpress' => __('Login with WordPress', 'my-plugin'),
-				'submit' => __('Submit', 'my-plugin'),
-				'cancel' => _x('Cancel', 'Drop current action', 'my-plugin'),
-				'please_wait' => __('Please, wait...', 'my-plugin'),
-				'logged_in' => __('You are now logged in', 'my-plugin'),
-				'error' => __('Login error. Please try again.', 'my-plugin'),
+				'facebook' => __('Login with Facebook', 'appointments'),
+				'twitter' => __('Login with Twitter', 'appointments'),
+				'google' => __('Login with Google+', 'appointments'),
+				'wordpress' => __('Login with WordPress', 'appointments'),
+				'submit' => __('Submit', 'appointments'),
+				'cancel' => _x('Cancel', 'Drop current action', 'appointments'),
+				'please_wait' => __('Please, wait...', 'appointments'),
+				'logged_in' => __('You are now logged in', 'appointments'),
+				'error' => __('Login error. Please try again.', 'appointments'),
 				'_can_use_twitter' => (!empty($this->options['twitter-app_id']) && !empty($this->options['twitter-app_secret'])),
 				'show_login_button' => $show_login_button,
 				'gg_client_id' => $this->options['google-client_id'],
-				'register' => ($do_register ? __('Register', 'my-plugin') : ''),
+				'register' => ($do_register ? __('Register', 'appointments') : ''),
 				'registration_url' => ($do_register ? wp_registration_url() : ''),
 			)));
 
@@ -3390,9 +3390,9 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			'reminder_time'				=> '24',
 			'send_reminder_worker'		=> 'yes',
 			'reminder_time_worker'		=> '4',
-			'confirmation_subject'		=> __('Confirmation of your Appointment','my-plugin'),
+			'confirmation_subject'		=> __('Confirmation of your Appointment','appointments'),
 			'confirmation_message'		=> $confirmation_message,
-			'reminder_subject'			=> __('Reminder for your Appointment','my-plugin'),
+			'reminder_subject'			=> __('Reminder for your Appointment','appointments'),
 			'reminder_message'			=> $reminder_message,
 			'log_emails'				=> 'yes',
 			'use_cache'					=> 'no',
@@ -3455,7 +3455,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			if ( $r->email && $mail_result ) {
 				// Log only if it is set so
 				if ( isset( $this->options["log_emails"] ) && 'yes' == $this->options["log_emails"] )
-					$this->log( sprintf( __('Confirmation message sent to %s for appointment ID:%s','my-plugin'), $r->email, $app_id ) );
+					$this->log( sprintf( __('Confirmation message sent to %s for appointment ID:%s','appointments'), $r->email, $app_id ) );
 
 				do_action( 'app_confirmation_sent', $body, $r, $app_id );
 
@@ -3471,12 +3471,12 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 				if ( $worker_email )
 					$to[]= $worker_email;
 
-				$provider_add_text  = sprintf( __('A new appointment has been made on %s. Below please find a copy of what has been sent to your client:', 'my-plugin'), get_option( 'blogname' ) );
+				$provider_add_text  = sprintf( __('A new appointment has been made on %s. Below please find a copy of what has been sent to your client:', 'appointments'), get_option( 'blogname' ) );
 				$provider_add_text .= "\n\n\n";
 
 				wp_mail(
 						$to,
-						$this->_replace( __('New Appointment','my-plugin'), $r->name, $this->get_service_name( $r->service), $this->get_worker_name( $r->worker),
+						$this->_replace( __('New Appointment','appointments'), $r->name, $this->get_service_name( $r->service), $this->get_worker_name( $r->worker),
 							$r->start, $r->price, $this->get_deposit($r->price), $r->phone, $r->note, $r->address, $r->email, $r->city ),
 						$provider_add_text . $body,
 						$this->message_headers( )
@@ -3502,12 +3502,12 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			$admin_email = apply_filters( 'app_notification_email', $this->get_admin_email( ), $r );
 
 			if ( $cancel ) {
-				$subject = __('An appointment has been cancelled', 'my-plugin');
-				$body = sprintf( __('Appointment with ID %s has been cancelled by the client. You can see it clicking this link: %s','my-plugin'), $app_id, admin_url("admin.php?page=appointments&type=removed") );
+				$subject = __('An appointment has been cancelled', 'appointments');
+				$body = sprintf( __('Appointment with ID %s has been cancelled by the client. You can see it clicking this link: %s','appointments'), $app_id, admin_url("admin.php?page=appointments&type=removed") );
 			}
 			else {
-				$subject = __('An appointment requires your confirmation', 'my-plugin');
-				$body = sprintf( __('The new appointment has an ID %s and you can edit it clicking this link: %s','my-plugin'), $app_id, admin_url("admin.php?page=appointments&type=pending") );
+				$subject = __('An appointment requires your confirmation', 'appointments');
+				$body = sprintf( __('The new appointment has an ID %s and you can edit it clicking this link: %s','appointments'), $app_id, admin_url("admin.php?page=appointments&type=pending") );
 			}
 			$body = apply_filters('app_notification_message',
 				apply_filters(
@@ -3529,7 +3529,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			);
 
 			if ( $mail_result && isset( $this->options["log_emails"] ) && 'yes' == $this->options["log_emails"] ) {
-				$this->log( sprintf( __('Notification message sent to %s for appointment ID:%s','my-plugin'), $admin_email, $app_id ) );
+				$this->log( sprintf( __('Notification message sent to %s for appointment ID:%s','appointments'), $admin_email, $app_id ) );
 				do_action( 'app_notification_sent', $body, $r, $app_id );
 			}
 
@@ -3540,10 +3540,10 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 
 				if ( $cancel ) {
 				/* Translators: First %s is for appointment ID and the second one is for date and time of the appointment */
-					$body = sprintf(__('Cancelled appointment has an ID %s for %s.','my-plugin'), $app_id, date_i18n($this->datetime_format, strtotime($r->start)));
+					$body = sprintf(__('Cancelled appointment has an ID %s for %s.','appointments'), $app_id, date_i18n($this->datetime_format, strtotime($r->start)));
 				}
 				else {
-					$body = sprintf(__('The new appointment has an ID %s for %s and you can confirm it using your profile page.','my-plugin'), $app_id, date_i18n($this->datetime_format, strtotime($r->start)));
+					$body = sprintf(__('The new appointment has an ID %s for %s and you can confirm it using your profile page.','appointments'), $app_id, date_i18n($this->datetime_format, strtotime($r->start)));
 				}
 				$body = apply_filters(
 					'app-messages-worker-' . ($cancel ? 'cancellation' : 'notification'),
@@ -3562,7 +3562,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 				);
 
 				if ( $mail_result && isset( $this->options["log_emails"] ) && 'yes' == $this->options["log_emails"] )
-					$this->log( sprintf( __('Notification message sent to %s for appointment ID:%s','my-plugin'), $this->get_worker_email( $r->worker ), $app_id ) );
+					$this->log( sprintf( __('Notification message sent to %s for appointment ID:%s','appointments'), $this->get_worker_email( $r->worker ), $app_id ) );
 			}
 		}
 		return true;
@@ -3585,7 +3585,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		}
 		if (empty($email)) {
 			// No reason to carry on, we don't know how to notify the client
-			if ($log) $this->log(sprintf(__('Unable to notify the client about the appointment ID:%s removal, stopping.', 'my-plugin'), $app_id));
+			if ($log) $this->log(sprintf(__('Unable to notify the client about the appointment ID:%s removal, stopping.', 'appointments'), $app_id));
 			return false;
 		}
 
@@ -3631,7 +3631,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			$this->message_headers()
 		);
 		if ($result && $log) {
-			$this->log(sprintf(__('Removal notification message sent to %s for appointment ID:%s', 'my-plugin'), $email, $app_id));
+			$this->log(sprintf(__('Removal notification message sent to %s for appointment ID:%s', 'appointments'), $email, $app_id));
 		}
 
 		$disable = apply_filters( 'app_removal_notification_disable_admin', false, $app, $app_id );
@@ -3643,12 +3643,12 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		$worker_email = $this->get_worker_email($app->worker);
 		if ($worker_email) $to[]= $worker_email;
 
-		$provider_add_text  = sprintf(__('An appointment removal notification for %s has been sent to your client:', 'my-plugin'), $app_id);
+		$provider_add_text  = sprintf(__('An appointment removal notification for %s has been sent to your client:', 'appointments'), $app_id);
 		$provider_add_text .= "\n\n\n";
 
 		wp_mail(
 			$to,
-			__('Removal notification', 'my-plugin'),
+			__('Removal notification', 'appointments'),
 			$provider_add_text . $msg,
 			$this->message_headers()
 		);
@@ -3739,7 +3739,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			foreach ( $messages as $message ) {
 				$mail_result = wp_mail( $message["to"], $message["subject"], $message["message"], $this->message_headers(), apply_filters( 'app_reminder_email_attachments', '' ) );
 				if ( $mail_result && isset( $this->options["log_emails"] ) && 'yes' == $this->options["log_emails"] )
-					$this->log( sprintf( __('Reminder message sent to %s for appointment ID:%s','my-plugin'), $message["to"], $message["ID"] ) );
+					$this->log( sprintf( __('Reminder message sent to %s for appointment ID:%s','appointments'), $message["to"], $message["ID"] ) );
 			}
 		}
 		return true;
@@ -3800,7 +3800,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 				AND (sent_worker NOT LIKE '%:{$rlike}:%' OR sent_worker IS NULL)
 				AND DATE_ADD('".date( 'Y-m-d H:i:s', $this->local_time )."', INTERVAL ".(int)$hour." HOUR) > start " );
 
-			$provider_add_text  = __('You are receiving this reminder message for your appointment as a provider. The below is a copy of what may have been sent to your client:', 'my-plugin');
+			$provider_add_text  = __('You are receiving this reminder message for your appointment as a provider. The below is a copy of what may have been sent to your client:', 'appointments');
 			$provider_add_text .= "\n\n\n";
 
 			if ( $results ) {
@@ -3860,7 +3860,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			foreach ( $messages as $message ) {
 				$mail_result = wp_mail( $message["to"], $message["subject"], $message["message"], $this->message_headers() );
 				if ( $mail_result && isset( $this->options["log_emails"] ) && 'yes' == $this->options["log_emails"] )
-					$this->log( sprintf( __('Reminder message sent to %s for appointment ID:%s','my-plugin'), $message["to"], $message["ID"] ) );
+					$this->log( sprintf( __('Reminder message sent to %s for appointment ID:%s','appointments'), $message["to"], $message["ID"] ) );
 			}
 		}
 	}
@@ -4287,7 +4287,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 	 * Prints "Cache cleared" message on top of Admin page
 	 */
 	function cleared( ) {
-		echo '<div class="updated fade"><p><b>[Appointments+]</b> '. __('Cache cleared.','my-plugin').'</p></div>';
+		echo '<div class="updated fade"><p><b>[Appointments+]</b> '. __('Cache cleared.','appointments').'</p></div>';
 	}
 
 	/**
@@ -4295,35 +4295,35 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 	 * @since 1.1.7
 	 */
 	function saved_cleared( ) {
-		echo '<div class="updated fade"><p><b>[Appointments+]</b> '. __('Settings saved and cache cleared.','my-plugin').'</p></div>';
+		echo '<div class="updated fade"><p><b>[Appointments+]</b> '. __('Settings saved and cache cleared.','appointments').'</p></div>';
 	}
 
 	/**
 	 * Prints "saved" message on top of Admin page
 	 */
 	function saved( ) {
-		echo '<div class="updated fade"><p><b>[Appointments+]</b> '. __('Settings saved.','my-plugin').'</p></div>';
+		echo '<div class="updated fade"><p><b>[Appointments+]</b> '. __('Settings saved.','appointments').'</p></div>';
 	}
 
 	/**
 	 * Prints "deleted" message on top of Admin page
 	 */
 	function deleted( ) {
-		echo '<div class="updated fade"><p><b>[Appointments+]</b> '. __('Selected record(s) deleted.','my-plugin').'</p></div>';
+		echo '<div class="updated fade"><p><b>[Appointments+]</b> '. __('Selected record(s) deleted.','appointments').'</p></div>';
 	}
 
 	/**
 	 * Prints "updated" message on top of Admin page
 	 */
 	function updated( ) {
-		echo '<div class="updated fade"><p><b>[Appointments+]</b> '. __('Selected record(s) updated.','my-plugin').'</p></div>';
+		echo '<div class="updated fade"><p><b>[Appointments+]</b> '. __('Selected record(s) updated.','appointments').'</p></div>';
 	}
 
 	/**
 	 * Prints warning message on top of Admin page
 	 */
 	function warning( ) {
-		echo '<div class="updated fade"><p><b>[Appointments+] '. __('You are not authorised to do this.','my-plugin').'</b></p></div>';
+		echo '<div class="updated fade"><p><b>[Appointments+] '. __('You are not authorised to do this.','appointments').'</b></p></div>';
 	}
 
 
@@ -4376,7 +4376,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		$pages = apply_filters('app-service_description_pages-get_list', array());
 		if (empty($pages)) $pages = get_pages( apply_filters('app_pages_filter',array() ) );
 		$html .= '<select name="services['.$n.'][page]" >';
-		$html .= '<option value="0">'. __('None','my-plugin') .'</option>';
+		$html .= '<option value="0">'. __('None','appointments') .'</option>';
 		foreach( $pages as $page ) {
 			if ( $php )
 				$title = esc_attr( $page->post_title );
@@ -4450,12 +4450,12 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			$html .= '</select>';
 		}
 		else
-			$html .= __( 'No services defined', 'my-plugin' );
+			$html .= __( 'No services defined', 'appointments' );
 		$html .= '</td><td>';
 		$pages = apply_filters('app-biography_pages-get_list', array());
 		if (empty($pages)) $pages = get_pages( apply_filters('app_pages_filter',array() ) );
 		$html .= '<select name="workers['.$k.'][page]" >';
-		$html .= '<option value="0">'. __('None','my-plugin') .'</option>';
+		$html .= '<option value="0">'. __('None','appointments') .'</option>';
 		foreach( $pages as $page ) {
 			if ( $php )
 				$title = esc_attr( $page->post_title );
@@ -4500,9 +4500,9 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		$form = '';
 		$form .= '<table class="app-working_hours-workhour_form">';
 		if ( 'open' == $status )
-			$form .= '<tr><th>'.__('Day', 'my-plugin').'</th><th>'.__('Work?', 'my-plugin' ).'</th><th>'.__('Start', 'my-plugin').'</th><th>'.__('End', 'my-plugin').'</th></tr>';
+			$form .= '<tr><th>'.__('Day', 'appointments').'</th><th>'.__('Work?', 'appointments' ).'</th><th>'.__('Start', 'appointments').'</th><th>'.__('End', 'appointments').'</th></tr>';
 		else
-			$form .= '<tr><th>'.__('Day', 'my-plugin').'</th><th>'.__('Give break?','my-plugin').'</th><th>'.__('Start','my-plugin').'</th><th>'.__('End','my-plugin').'</th></tr>';
+			$form .= '<tr><th>'.__('Day', 'appointments').'</th><th>'.__('Give break?','appointments').'</th><th>'.__('Start','appointments').'</th><th>'.__('End','appointments').'</th></tr>';
 		foreach ( $this->weekdays() as $day_label => $day ) {
 			if (!empty($whours[$day]['active']) && is_array($whours[$day]['active'])) {
 				$total_whour_segments = count($whours[$day]['active']) - 1;
@@ -4516,8 +4516,8 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 					if ( 'yes' == $active )
 						$s = " selected='selected'";
 					else $s = '';
-					$form .= '<option value="no">'.__('No', 'my-plugin').'</option>';
-					$form .= '<option value="yes"'.$s.'>'.__('Yes', 'my-plugin').'</option>';
+					$form .= '<option value="no">'.__('No', 'appointments').'</option>';
+					$form .= '<option value="yes"'.$s.'>'.__('Yes', 'appointments').'</option>';
 					$form .= '</select>';
 					$form .= '</td>';
 					$form .= '<td>';
@@ -4550,7 +4550,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 						$form .= '</option>';
 					}
 					$form .= '</select>';
-					if ('closed' == $status && $idx == 0 && 'yes' == $active) $form .= '&nbsp;<a href="#add_break" class="app-add_break" title="' . esc_attr(__('Add break', 'my-plugin')) . '"><span>' . __('Add break', 'my-plugin') . '</span></a>';
+					if ('closed' == $status && $idx == 0 && 'yes' == $active) $form .= '&nbsp;<a href="#add_break" class="app-add_break" title="' . esc_attr(__('Add break', 'appointments')) . '"><span>' . __('Add break', 'appointments') . '</span></a>';
 					$form .= '</td>';
 
 					$form .= '</tr>';
@@ -4565,8 +4565,8 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 				if ( isset($whours[$day]['active']) && 'yes' == $whours[$day]['active'] )
 					$s = " selected='selected'";
 				else $s = '';
-				$form .= '<option value="no">'.__('No', 'my-plugin').'</option>';
-				$form .= '<option value="yes"'.$s.'>'.__('Yes', 'my-plugin').'</option>';
+				$form .= '<option value="no">'.__('No', 'appointments').'</option>';
+				$form .= '<option value="yes"'.$s.'>'.__('Yes', 'appointments').'</option>';
 				$form .= '</select>';
 				$form .= '</td>';
 				$form .= '<td>';
@@ -4599,7 +4599,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 					$form .= '</option>';
 				}
 				$form .= '</select>';
-				if ('closed' == $status && isset($whours[$day]['active']) && 'yes' == $whours[$day]['active']) $form .= '&nbsp;<a href="#add_break" class="app-add_break" title="' . esc_attr(__('Add break', 'my-plugin')) . '"><span>' . __('Add break', 'my-plugin') . '</span></a>';
+				if ('closed' == $status && isset($whours[$day]['active']) && 'yes' == $whours[$day]['active']) $form .= '&nbsp;<a href="#add_break" class="app-add_break" title="' . esc_attr(__('Add break', 'appointments')) . '"><span>' . __('Add break', 'appointments') . '</span></a>';
 				$form .= '</td>';
 
 				$form .= '</tr>';
