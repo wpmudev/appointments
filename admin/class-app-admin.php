@@ -1075,8 +1075,7 @@ class Appointments_Admin {
 		?>
 		<div class="wrap">
 			<div class="icon32" style="margin:10px 0 0 0"><img src="<?php echo $appointments->plugin_url . '/images/general.png'; ?>" /></div>
-			<h2><?php echo __('Appointments+ Settings','appointments'); ?></h2>
-			<h3 class="nav-tab-wrapper">
+			<h2 class="nav-tab-wrapper">
 				<?php
 				$tab = ( !empty($_GET['tab']) ) ? $_GET['tab'] : 'main';
 
@@ -1107,7 +1106,7 @@ class Appointments_Admin {
 
 				echo implode( "\n", $tabhtml );
 				?>
-			</h3>
+			</h2>
 			<div class="clear"></div>
 			<?php App_Template::admin_settings_tab($tab); ?>
 		</div>

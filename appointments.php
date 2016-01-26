@@ -1682,6 +1682,44 @@ class Appointments {
 		$timetable_key .= '-' . $this->worker;
 		$timetable_key .= '-' . date( 'Ym', $time );
 
+		// Calculate step
+		$start = $end = 0;
+		if ( $min_max = $this->min_max_wh( 0, 0 ) ) {
+			$start = $min_max["min"];
+			$end = $min_max["max"];
+		}
+		if ( $start >= $end ) {
+			$start = 8;
+			$end = 18;
+		}
+		$start = apply_filters( 'app_schedule_starting_hour', $start, $day_start, 'day' );
+		$end = apply_filters( 'app_schedule_ending_hour', $end, $day_start, 'day' );
+
+		$first = $start *3600 + $day_start; // Timestamp of the first cell
+		$last = $end *3600 + $day_start; // Timestamp of the last cell
+		$min_step_time = $this->get_min_time() * 60; // Cache min step increment
+
+		if (defined('APP_USE_LEGACY_DURATION_CALCULUS') && APP_USE_LEGACY_DURATION_CALCULUS) {
+			$step = $min_step_time; // Timestamp increase interval to one cell ahead
+		} else {
+			$service = appointments_get_service($this->service);
+			$step = (!empty($service->duration) ? $service->duration : $min_step_time) * 60; // Timestamp increase interval to one cell ahead
+		}
+
+		if (!(defined('APP_USE_LEGACY_DURATION_CALCULUS') && APP_USE_LEGACY_DURATION_CALCULUS)) {
+			$start_result = $this->get_work_break( $this->location, $this->worker, 'open' );
+			if (!empty($start_result->hours)) $start_unpacked_days = maybe_unserialize($start_result->hours);
+		} else $start_unpacked_days = array();
+		if (defined('APP_BREAK_TIMES_PADDING_CALCULUS') && APP_BREAK_TIMES_PADDING_CALCULUS) {
+			$break_result = $this->get_work_break($this->location, $this->worker, 'closed');
+			if (!empty($break_result->hours)) $break_times = maybe_unserialize($break_result->hours);
+		} else $break_times = array();
+
+		// Allow direct step increment manipulation,
+		// mainly for service duration based calculus start/stop times
+		$step = apply_filters('app-timetable-step_increment', $step);
+
+		$timetable_key .= '-' . $step;
 
 		// Are we looking to today?
 		// If today is a working day, shows its free times by default
@@ -1694,43 +1732,6 @@ class Appointments {
 			$data =  $this->timetables[ $timetable_key ];
 		}
 		else {
-
-			$start = $end = 0;
-			if ( $min_max = $this->min_max_wh( 0, 0 ) ) {
-				$start = $min_max["min"];
-				$end = $min_max["max"];
-			}
-			if ( $start >= $end ) {
-				$start = 8;
-				$end = 18;
-			}
-			$start = apply_filters( 'app_schedule_starting_hour', $start, $day_start, 'day' );
-			$end = apply_filters( 'app_schedule_ending_hour', $end, $day_start, 'day' );
-
-			$first = $start *3600 + $day_start; // Timestamp of the first cell
-			$last = $end *3600 + $day_start; // Timestamp of the last cell
-			$min_step_time = $this->get_min_time() * 60; // Cache min step increment
-
-			if (defined('APP_USE_LEGACY_DURATION_CALCULUS') && APP_USE_LEGACY_DURATION_CALCULUS) {
-				$step = $min_step_time; // Timestamp increase interval to one cell ahead
-			} else {
-				$service = appointments_get_service($this->service);
-				$step = (!empty($service->duration) ? $service->duration : $min_step_time) * 60; // Timestamp increase interval to one cell ahead
-			}
-
-			if (!(defined('APP_USE_LEGACY_DURATION_CALCULUS') && APP_USE_LEGACY_DURATION_CALCULUS)) {
-				$start_result = $this->get_work_break( $this->location, $this->worker, 'open' );
-				if (!empty($start_result->hours)) $start_unpacked_days = maybe_unserialize($start_result->hours);
-			} else $start_unpacked_days = array();
-			if (defined('APP_BREAK_TIMES_PADDING_CALCULUS') && APP_BREAK_TIMES_PADDING_CALCULUS) {
-				$break_result = $this->get_work_break($this->location, $this->worker, 'closed');
-				if (!empty($break_result->hours)) $break_times = maybe_unserialize($break_result->hours);
-			} else $break_times = array();
-
-			// Allow direct step increment manipulation,
-			// mainly for service duration based calculus start/stop times
-			$step = apply_filters('app-timetable-step_increment', $step);
-
 			$data = array();
 			for ( $t=$first; $t<$last; ) {
 				$ccs = apply_filters('app_ccs', $t); 				// Current cell starts
@@ -1836,7 +1837,9 @@ class Appointments {
 		$this->timetables[ $timetable_key ] = $data;
 
 		// Save timetables only once at the end of the execution
+		//add_action( 'shutdown', array( $this, 'regenerate_timetables' ) );
 		add_action( 'shutdown', array( $this, 'save_timetables' ) );
+
 
 		$ret  = '';
 		$ret .= '<div class="app_timetable app_timetable_'.$day_start.'"'.$style.'>';
@@ -1863,6 +1866,34 @@ class Appointments {
 
 		return $ret;
 
+	}
+
+	/**
+	 * Regenerate most used timetables so users do not wait too long
+	 * when viewing calendars
+	 */
+	public function regenerate_timetables() {
+		// @TODO: Regenerate based on use stats instead. This is too random.
+		global $wpdb;
+
+		$services = appointments_get_services();
+		$workers = appointments_get_workers();
+
+		$durations = wp_list_pluck( $services, 'duration' );
+		$durations = array_unique( $durations );
+
+		$capacities = wp_list_pluck( $services, 'capacity' );
+		$capacities = array_unique( $capacities );
+
+		$month = date( 'm', current_time( 'timestamp' ) );
+		$day_start = strtotime( date( 'Y-' . $month . '-01 00:00:00' ) ); // First day of this month
+		// But do not regenerate more than 6 timetables
+		for ( $i = 0; $i <= 3 && $i < count( $durations ); $i++ ) {
+			// @TODO if it's cached, don't count this one
+			for ( $j = 0; $j <= 2 && $j < count( $capacities ); $j++ ) {
+				$this->get_timetable( $durations[ $i ], $capacities[ $j ] );
+			}
+		}
 	}
 
 	public function save_timetables() {
