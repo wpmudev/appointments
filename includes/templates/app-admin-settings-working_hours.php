@@ -4,7 +4,7 @@
 <br />
 <br />
 <?php
-$workers = $appointments->get_workers();
+$workers = appointments_get_workers();
 ?>
 <?php _e('List for:', 'appointments')?>
 &nbsp;

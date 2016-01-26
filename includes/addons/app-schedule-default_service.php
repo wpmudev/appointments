@@ -52,7 +52,7 @@ class App_Schedule_DefaultService {
 	}
 
 	public function show_settings () {
-		$services = $this->_core->get_services();
+		$services = appointments_get_services();
 		$replacement = $this->_get_replacement();
 		?>
 		<tr valign="top">

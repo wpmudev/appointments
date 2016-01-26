@@ -89,7 +89,7 @@ class App_Shortcode_Services extends App_Shortcode {
 			}
 
 		} else {
-			$services = $appointments->get_services( $args['order_by'] );
+			$services = appointments_get_services( $args['order_by'] );
 		}
 
 		$services = apply_filters( 'app_services', $services );
@@ -202,7 +202,7 @@ class App_Shortcode_Services extends App_Shortcode {
 				'thumbclass' => $args['thumb_class'],
 				'autorefresh' => $args['autorefresh'],
 				'ajax' => $args['ajax'],
-				'first_service_id' => (int)$appointments->get_first_service_id(),
+				'first_service_id' => appointments_get_services_min_id(),
 				'reload_url' => $href
 			);
 			wp_localize_script( 'app-shortcode-services', 'appointmentsStrings', $i10n );

@@ -128,7 +128,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 			if ( !$provider_id )
 				$provider_id = $current_user->ID;
 			// Special case: If this is a single provider website, show staff appointments in his schedule too
-			$workers = $appointments->get_workers();
+			$workers = appointments_get_workers();
 			if ( App_Roles::current_user_can('manage_options', App_Roles::CTX_STAFF) && ( ( $workers && count( $workers ) == 1 ) || !$workers ) )
 				$provider_id .= ' OR worker=0';
 			$results = $wpdb->get_results("SELECT * FROM " . $appointments->app_table . " WHERE (worker=".$provider_id.") AND (".$stat.") ORDER BY ".$order_by." " );

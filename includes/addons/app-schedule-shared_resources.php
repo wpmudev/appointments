@@ -40,7 +40,7 @@ class App_Schedule_SharedResources {
 	public function add_service_selection ($out, $service_id) {
 		$shared_ids = $this->_get_resource_sharing_services($service_id);
 		$direct_ids = $this->_get_resource_sharing_services($service_id, true);
-		$all = $this->_core->get_services();
+		$all = appointments_get_services();
 
 		$out .= '<div class="app-shared_resources">';
 		$out .= '<h4>' . __('Shares resources with', 'appointments') . '</h4>';

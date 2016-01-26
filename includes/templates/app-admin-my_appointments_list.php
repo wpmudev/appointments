@@ -165,7 +165,7 @@ if ( isset( $_GET["type"] ) && 'removed' == $_GET["type"] ) {
 
 	<script type="text/javascript">
 	var service_price = new Array();
-	<?php foreach( $appointments->get_services() as $service_obj ) { ?>
+	<?php foreach( appointments_get_services() as $service_obj ) { ?>
 		service_price[<?php echo $service_obj->ID ?>] = '<?php echo $service_obj->price ?>';
 	<?php
 	}

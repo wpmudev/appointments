@@ -135,7 +135,7 @@ else
 				<select name="app_service_id" style='float:none;'>
 					<option value=""><?php _e('Filter by service','appointments'); ?></option>
 				<?php
-				$services = $appointments->get_services();
+				$services = appointments_get_services();
 				if ( $services ) {
 					foreach ( $services as $service ) {
 						if ( $service_id == $service->ID )

@@ -205,7 +205,7 @@ class Appointments_AJAX {
 			$app->created = $app->end = $app->name = $app->email = $app->phone = $app->address = $app->city = $app->status = $app->sent = $app->sent_worker = $app->note = '';
 
 			// Get first service and its price
-			$app->service = $appointments->get_first_service_id();
+			$app->service = appointments_get_services_min_id();
 			$_REQUEST['app_service_id'] = $app->service;
 			$_REQUEST['app_provider_id'] = 0;
 			$app->price = $appointments->get_price( );
@@ -282,7 +282,7 @@ class Appointments_AJAX {
 		$html .= '<div class="inline-edit-col">';
 		$html .= '<h4>'.__('SERVICE', 'appointments').'</h4>';
 		/* Services */
-		$services = $appointments->get_services();
+		$services = appointments_get_services();
 		$html .= '<label>';
 		$html .= '<span class="title">'.__('Name', 'appointments'). '</span>';
 		$html .= '<select name="service">';
@@ -589,7 +589,7 @@ class Appointments_AJAX {
 		// It may be required to add additional data here
 		$note = apply_filters('app_note_field', $note);
 
-		$service_result = $appointments->get_service($service);
+		$service_result = appointments_get_service( $service );
 
 		$duration = false;
 		if ($service_result !== null) $duration = $service_result->duration;
@@ -911,7 +911,7 @@ class Appointments_AJAX {
 			)));
 		}
 
-		$service_obj = $appointments->get_service($service);
+		$service_obj = appointments_get_service($service);
 		$service = '<label><span>' . __('Service name: ', 'appointments') .  '</span>'. apply_filters('app_confirmation_service', stripslashes($service_obj->name), $service_obj->name) . '</label>';
 		$start = '<label><span>' . __('Date and time: ', 'appointments') . '</span>'. apply_filters('app_confirmation_start', date_i18n($appointments->datetime_format, $start), $start) . '</label>';
 		$end = '<label><span>' . __('Lasts (approx): ', 'appointments') . '</span>'. apply_filters('app_confirmation_lasts', $service_obj->duration . " " . __('minutes', 'appointments'), $service_obj->duration) . '</label>';

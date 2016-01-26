@@ -76,6 +76,13 @@ class App_Services_Test extends App_UnitTestCase {
 		$this->assertInstanceOf( 'Appointments_Service', appointments_get_service( $service_id ) );
 
 		$this->assertFalse( appointments_get_service( 8888 ) );
+
+		// Test the deprecated function
+		$this->remove_deprecated_filters();
+		global $appointments;
+		$this->assertInstanceOf( 'Appointments_Service', $appointments->get_service( $service_id ) );
+		$this->assertEquals( $appointments->get_service( $service_id ), appointments_get_service( $service_id ) );
+		$this->add_deprecated_filters();
 	}
 
 	function test_delete_service() {
@@ -133,6 +140,13 @@ class App_Services_Test extends App_UnitTestCase {
 		$services = appointments_get_services( array( 'fields' => 'ID', 'page' => $page_id ) );
 		$this->assertCount( 1, $services );
 		$this->assertEquals( $services[0], '3' );
+
+		// Test the deprecated function
+		$this->remove_deprecated_filters();
+		global $appointments;
+		$this->assertEquals( $appointments->get_services(), appointments_get_services() );
+		$this->assertEquals( $appointments->get_services('name DESC'), appointments_get_services( array( 'orderby' => 'name DESC' )) );
+		$this->add_deprecated_filters();
 	}
 
 	function test_update_service() {
@@ -184,6 +198,43 @@ class App_Services_Test extends App_UnitTestCase {
 
 		$price = appointments_get_services_min_price();
 		$this->assertEquals( 0.5, $price );
+	}
+
+	function test_get_min_service_id() {
+		$args = array(
+			'name' => 'My Service 1',
+			'price' => 1.1
+		);
+		appointments_insert_service( $args );
+
+		$args = array(
+			'name' => 'My Service 2',
+			'price' => 0.5
+		);
+		appointments_insert_service( $args );
+
+		$args = array(
+			'name' => 'My Service 3',
+			'price' => 10
+		);
+		appointments_insert_service( $args );
+
+		$min_id = appointments_get_services_min_id();
+		$this->assertEquals( 1, $min_id ); // Default service has ID = 1
+
+		appointments_delete_service( 1 );
+
+		$min_id = appointments_get_services_min_id();
+		$this->assertEquals( 2, $min_id ); // Default service has ID = 1
+
+
+		// Test that deprecated function is returning the same
+		$this->remove_deprecated_filters();
+		global $appointments;
+		appointments_delete_service_cache(2);
+		$this->assertEquals( $appointments->get_first_service_id(), appointments_get_services_min_id() );
+		$this->add_deprecated_filters();
+
 	}
 
 
@@ -249,7 +300,25 @@ class App_Services_Test extends App_UnitTestCase {
 		$cache = wp_cache_get( 'app_get_services' );
 		$this->assertCount( 1, $cache );
 
+		// Min ID cache
+		$args = array(
+			'name' => 'My Service 2',
+			'price' => 0.5
+		);
+		appointments_insert_service( $args );
+
+		$min_id = appointments_get_services_min_id();
+		$cached_id = wp_cache_get( 'min_service_id', 'appointments_services' );
+		$this->assertEquals( $cached_id, $min_id ); // Should be 1
+
+		appointments_delete_service( $cached_id );
+		$this->assertFalse( wp_cache_get( 'min_service_id', 'appointments_services' ) ); // Should be 1
+
+		$min_id = appointments_get_services_min_id();
+		$this->assertEquals( wp_cache_get( 'min_service_id', 'appointments_services' ), $min_id );
+
 	}
+
 
 }
 

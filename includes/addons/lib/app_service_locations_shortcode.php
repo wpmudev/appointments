@@ -64,7 +64,7 @@ class App_Shortcode_ServiceLocationsShortcode extends App_Shortcode {
 		global $appointments;
 		$args = wp_parse_args($args, $this->_defaults_to_args());
 
-		$services = $appointments->get_services($args['order_by']);
+		$services = appointments_get_services( array( 'orderby' => $args['order_by'] ) );
 		$model = App_Locations_Model::get_instance();
 		$locations = array();
 

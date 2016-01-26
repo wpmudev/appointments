@@ -997,7 +997,7 @@ class AppointmentsGcal {
 			$app->price = 123;
 			$app->start = date( 'Y-m-d H:i:s', $this->local_time + 600 );
 			$app->end = date( 'Y-m-d H:i:s', $this->local_time + 2400 );
-			$app->service = $appointments->get_first_service_id();
+			$app->service = appointments_get_services_min_id();
 			$app->email = $appointments->get_admin_email( );
 			$app->note = __('This is a test appointment inserted by Appointments+', 'appointments');
 		} else {
@@ -1200,7 +1200,7 @@ class AppointmentsGcal {
 		if ( $events && is_array( $events->getItems()) ) {
 			/** @var App_Google_Service_Calendar_Event $event */
 			// Service ID is not important as we will use this record for blocking our time slots only
-			$service_id = $appointments->get_first_service_id();
+			$service_id = appointments_get_services_min_id();
 
 			// Create a list of event_id's
 			foreach ($events->getItems() as $event) {

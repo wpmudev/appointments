@@ -59,7 +59,7 @@ class App_Shortcode_WorkerLocationsShortcode extends App_Shortcode {
 		global $appointments;
 		$args = wp_parse_args($args, $this->_defaults_to_args());
 
-		$workers = $appointments->get_workers($args['order_by']);
+		$workers = appointments_get_workers(array( 'orderby' => $args['order_by'] ) );
 		$model = App_Locations_Model::get_instance();
 		$locations = array();
 

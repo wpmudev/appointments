@@ -335,7 +335,7 @@ class App_Schedule_Paddings {
 		if($worker){
 			$services = appointments_get_worker_services( $worker );
 		} else {
-			$services = $this->_core->get_services();
+			$services = appointments_get_services();
 		}
 		foreach( $services as $key => $service ){
 			if ($this->_data['service_padding'][$service->ID][self::PADDING_BEFORE] || $this->_data['service_padding'][$service->ID][self::PADDING_AFTER] ){

@@ -176,6 +176,13 @@ class App_Workers_Test extends App_UnitTestCase {
 		$workers = appointments_get_workers( array( 'with_page' => true ) );
 		$this->assertCount( 1, $workers );
 
+		// Test the deprecated function
+		$this->remove_deprecated_filters();
+		global $appointments;
+		$this->assertEquals( $appointments->get_workers(), appointments_get_workers() );
+		$this->assertEquals( $appointments->get_workers( 'name ASC' ), appointments_get_workers( array( 'orderby' => 'name ASC' )) );
+		$this->add_deprecated_filters();
+
 	}
 
 	function test_get_all_workers() {
@@ -384,6 +391,13 @@ class App_Workers_Test extends App_UnitTestCase {
 		$this->assertCount( 1, $workers );
 
 		$this->assertCount( 2, wp_cache_get( 'app_workers_by_service' ) );
+
+		// Test the deprecated function
+		$this->remove_deprecated_filters();
+		global $appointments;
+		$this->assertEquals( $appointments->get_workers_by_service( $service_id_1 ), appointments_get_workers_by_service( $service_id_1 ) );
+		$this->assertEquals( $appointments->get_workers_by_service( $service_id_2 ), appointments_get_workers_by_service( $service_id_2 ) );
+		$this->add_deprecated_filters();
 
 	}
 

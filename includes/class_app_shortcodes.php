@@ -289,7 +289,7 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 		// Force service
 		if ( $service ) {
 			// Check if such a service exists
-			if ( !$appointments->get_service( $service ) )
+			if ( !appointments_get_service( $service ) )
 				return;
 			$_REQUEST["app_service_id"] = $service;
 		}
@@ -460,7 +460,7 @@ class App_Shortcode_MonthlySchedule extends App_Shortcode {
 		// Force service
 		if ( $service ) {
 			// Check if such a service exists
-			if ( !$appointments->get_service( $service ) )
+			if ( !appointments_get_service( $service ) )
 				return;
 			$_REQUEST["app_service_id"] = $service;
 		}
@@ -891,12 +891,12 @@ class App_Shortcode_ServiceProviders extends App_Shortcode {
 
 		if ( !$service ) {
 			if ( 0 == $appointments->service )
-				$workers = $appointments->get_workers( $order_by );
+				$workers = appointments_get_workers( array( 'orderby' => $order_by ) );
 			else
-				$workers = $appointments->get_workers_by_service( $appointments->service, $order_by ); // Select only providers that can give this service
+				$workers = appointments_get_workers_by_service( $appointments->service, $order_by ); // Select only providers that can give this service
 		}
 		else
-			$workers = $appointments->get_workers_by_service( $service, $order_by );
+			$workers = appointments_get_workers_by_service( $service, $order_by );
 
 		$workers = apply_filters( 'app_workers', $workers );
 

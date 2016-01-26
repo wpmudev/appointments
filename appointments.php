@@ -303,21 +303,8 @@ class Appointments {
 	 * @return integer
 	 */
 	function get_first_service_id() {
-		$min = wp_cache_get( 'min_service_id', 'appointments_services' );
-		if ( false === $min ) {
-			$services = $this->get_services();
-			if ( $services ) {
-				$min = 9999999;
-				foreach ( $services as $service ) {
-					if ( $service->ID < $min )
-						$min = $service->ID;
-				}
-				wp_cache_set( 'min_service_id', $min, 'appointments_services' );
-			}
-			else
-				$min = 0; // No services ?? - Not possible but let's be safe
-		}
-		return apply_filters('app-services-first_service_id', $min);
+		_deprecated_function( __FUNCTION__, '1.5.6.1', 'appointments_get_services_min_id()' );
+		return appointments_get_services_min_id();
 	}
 
 	/**
@@ -327,7 +314,7 @@ class Appointments {
 	function get_service_id() {
 		if ( isset( $_REQUEST["app_service_id"] ) )
 			return (int)$_REQUEST["app_service_id"];
-		else if ( !$service_id = $this->get_first_service_id() )
+		else if ( !$service_id = appointments_get_services_min_id() )
 			$service_id = 0;
 
 		return $service_id;
@@ -365,68 +352,44 @@ class Appointments {
 
 	/**
 	 * Get a single service with given ID
+	 *
+	 * @deprecated Deprecated since version 1.5.6.1
+	 *
 	 * @param ID: Id of the service to be retrieved
 	 * @return object
 	 */
 	function get_service( $ID ) {
+		_deprecated_function( __FUNCTION__, '1.5.6.1', 'appointments_get_service()' );
 		return appointments_get_service( $ID );
 	}
 
 
 	/**
 	 * Get all workers
+	 *
+	 * @deprecated Deprecated since version 1.5.6.1
+	 *
 	 * @param order_by: ORDER BY clause for mysql
 	 * @return array of objects
 	 */
 	function get_workers( $order_by="ID" ) {
+		_deprecated_function( __FUNCTION__, '1.5.6.1', 'appointments_get_workers()' );
 		$args = array(
 			'orderby' => $order_by
 		);
 		return appointments_get_workers( $args );
-
-		// @TODO: Some sorting:
-		// Sorting by name requires special case
-		if ( stripos( $order_by, 'name' ) !== false ) {
-			$workers_ = $this->db->get_results("SELECT * FROM " . $this->workers_table . " " );
-			if ( stripos( $order_by, 'desc' ) !== false )
-				usort( $workers_, array( &$this, 'get_workers_desc' ) );
-			else
-				usort( $workers_, array( &$this, 'get_workers_asc' ) );
-			$workers = $workers_;
-		}
-		else
-			$workers = $this->db->get_results("SELECT * FROM " . $this->workers_table . " ORDER BY ". esc_sql($order_by) ." " );
-
-		wp_cache_set( $orderby_cache_key, $order_by, 'appointments_workers' );
-		wp_cache_set( $results_cache_key, $workers, 'appointments_workers' );
 	}
 
 	/**
 	 * Get all services
 	 * @param order_by: ORDER BY clause for mysql
+	 * @deprecated Deprecated since version 1.5.6.1
 	 * @return array of objects
 	 */
 	function get_services( $order_by="ID" ) {
+		_deprecated_function( __FUNCTION__, '1.5.6.1', 'appointments_get_services()' );
 		$args = array( 'orderby'=> $order_by );
 		return appointments_get_services( $args );
-	}
-
-	/**
-	 * Helper function to sort workers in ascending order
-	 * @since 1.1.9
-	 * @return integer
-	 */
-	function get_workers_asc( $a, $b ) {
-		return strcmp( $this->get_worker_name( $a->ID ), $this->get_worker_name( $b->ID ) );
-	}
-
-	/**
-	 * Helper function to sort workers in descending order
-	 * @since 1.1.9
-	 * @return integer
-	 */
-	function get_workers_desc( $a, $b ) {
-		return strcmp( $this->get_worker_name( $b->ID ), $this->get_worker_name( $a->ID ) );
 	}
 
 
@@ -434,11 +397,15 @@ class Appointments {
 	 * Get workers giving a specific service (by its ID)
  	 * We assume total number of workers is not too high, which is the practical case.
 	 * Otherwise this method would be expensive
+	 *
+	 * @deprecated Deprecated since version 1.5.6.1
+	 *
 	 * @param ID: Id of the service to be retrieved
 	 * @param order_by: ORDER BY clause for mysql
 	 * @return array of objects
 	 */
 	function get_workers_by_service( $ID, $order_by = "ID" ) {
+		_deprecated_function( __FUNCTION__, '1.5.6.1', 'appointments_get_workers_by_service()' );
 		$workers = appointments_get_workers_by_service( $ID, $order_by );
 
 		if ( empty( $workers ) )
@@ -454,7 +421,7 @@ class Appointments {
 	 * @return string (worker ID if there is one, otherwise 0)
 	 */
 	function is_single_worker( $service ) {
-		$workers = $this->get_workers_by_service( $service );
+		$workers = appointments_get_workers_by_service( $service );
 		if ( $workers && 1 === count( $workers ) && is_object( $workers[0] ) ) {
 			return $workers[0]->ID;
 		}
@@ -527,6 +494,8 @@ class Appointments {
 	 * @param week: Optionally appointments only in the number of week in ISO 8601 format (since 1.2.3).
 	 * Weekly gives much better results in RAM usage compared to monthly, with a tolerable, slight increase in number of queries
 	 * @return array of objects
+	 *
+	 * @deprecated since 1.5.6.1
 	 */
 	function get_reserve_apps( $l, $s, $w, $week=0 ) {
 		return appointments_get_appointments( $l, $s, $w, $week );
@@ -540,7 +509,7 @@ class Appointments {
 	function get_reserve_apps_by_worker( $l, $w, $week=0 ) {
 		$apps = wp_cache_get( 'reserve_apps_by_worker_'. $l . '_' . $w . '_' . $week );
 		if ( false === $apps ) {
-			$services = $this->get_services();
+			$services = appointments_get_services();
 			if ( $services ) {
 				$apps = array();
 				foreach ( $services as $service ) {
@@ -562,7 +531,7 @@ class Appointments {
 	 */
 	function get_reserve_apps_by_service( $l, $s, $week=0 ) {
 		if ( false === $apps ) {
-			$workers = $this->get_workers_by_service( $s );
+			$workers = appointments_get_workers_by_service( $s );
 			$apps = array();
 			if ( $workers ) {
 				foreach ( $workers as $worker ) {
@@ -702,7 +671,7 @@ class Appointments {
 	function get_service_name( $service=0 ) {
 		// Safe text if we delete a service
 		$name = __('Not defined', 'appointments');
-		$result = $this->get_service( $service );
+		$result = appointments_get_service( $service );
 		if ( $result )
 			$name = $result->name;
 
@@ -753,7 +722,7 @@ class Appointments {
 	function get_price( $paypal=false ) {
 		global $current_user;
 		$this->get_lsw();
-		$service_obj = $this->get_service( $this->service );
+		$service_obj = appointments_get_service( $this->service );
 		$worker_obj = appointments_get_worker( $this->worker );
 
 		if ( $worker_obj && $worker_obj->price )
@@ -843,8 +812,8 @@ class Appointments {
 			}
 			else {
 				// Else, find number of workers giving that service and capacity of the service
-				$worker_count = count( $this->get_workers_by_service( $this->service ) );
-				$service = $this->get_service( $this->service );
+				$worker_count = count( appointments_get_workers_by_service( $this->service ) );
+				$service = appointments_get_service( $this->service );
 				if ( $service != null ) {
 					if ( !$service->capacity ) {
 						$capacity = $worker_count; // No service capacity limit
@@ -1745,7 +1714,7 @@ class Appointments {
 			if (defined('APP_USE_LEGACY_DURATION_CALCULUS') && APP_USE_LEGACY_DURATION_CALCULUS) {
 				$step = $min_step_time; // Timestamp increase interval to one cell ahead
 			} else {
-				$service = $this->get_service($this->service);
+				$service = appointments_get_service($this->service);
 				$step = (!empty($service->duration) ? $service->duration : $min_step_time) * 60; // Timestamp increase interval to one cell ahead
 			}
 
@@ -1945,7 +1914,7 @@ class Appointments {
 		if (defined('APP_USE_LEGACY_DURATION_CALCULUS') && APP_USE_LEGACY_DURATION_CALCULUS) {
 			$step = $this->get_min_time() * 60; // Timestamp increase interval to one cell below
 		} else {
-			$service = $this->get_service($this->service);
+			$service = appointments_get_service($this->service);
 			$step = (!empty($service->duration) ? $service->duration : $this->get_min_time()) * 60; // Timestamp increase interval to one cell below
 		}
 
@@ -2267,7 +2236,7 @@ class Appointments {
 		if ( $this->get_app_limit() < ceil( ( $ccs - $this->local_time ) /86400 ) )
 			return false;
 
-		$result = $this->get_service( $this->service );
+		$result = appointments_get_service( $this->service );
 		if ( !$result !== null ) {
 			$duration = $result->duration;
 			if( !$duration )
@@ -2367,7 +2336,7 @@ class Appointments {
 			return apply_filters( 'app_get_capacity', 1, $this->service, $this->worker );
 
 		$n = 0;
-		$workers = $this->get_workers_by_service( $this->service );
+		$workers = appointments_get_workers_by_service( $this->service );
 		if (!$workers) return $this->get_capacity(); // If there are no workers for this service, apply the service capacity
 
 		foreach( $workers as $worker ) {
@@ -2410,7 +2379,7 @@ class Appointments {
 		}
 
 		// We have to check service capacity too
-		$service = $this->get_service( $this->service );
+		$service = appointments_get_service( $this->service );
 		if ( $service != null ) {
 			if ( !$service->capacity ) {
 				$capacity = $n; // No service capacity limit
@@ -3707,7 +3676,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 							$this->_replace( 
 								$this->options["reminder_message"],
 								$r->name, 
-								$this->get_service_name($r->service), 
+								$this->get_service_name($r->service),
 								$this->get_worker_name($r->worker), 
 								$r->start,
 								$r->price, 
@@ -3829,7 +3798,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 							$this->_replace(
 								$this->options["reminder_message"], 
 								$r->name,
-								$this->get_service_name($r->service), 
+								$this->get_service_name($r->service),
 								$this->get_worker_name($r->worker), 
 								$r->start, 
 								$r->price,
@@ -4429,7 +4398,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		$html .= '</td><td>';
 		$html .= '<input type="text" name="workers['.$k.'][price]" style="width:80%" value="'.$price.'" />';
 		$html .= '</td><td>';
-		$services = $this->get_services();
+		$services = appointments_get_services();
 		if ( $services ) {
 			if ( $php && is_object( $worker ) )
 				$services_provided = $worker->services_provided;

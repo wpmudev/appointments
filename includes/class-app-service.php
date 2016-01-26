@@ -321,6 +321,23 @@ function appointments_get_services( $args = array() ) {
 
 }
 
+function appointments_get_services_min_id() {
+	global $wpdb;
+
+	$min = wp_cache_get( 'min_service_id', 'appointments_services' );
+	if ( false === $min ) {
+		$table = appointments_get_table( 'services' );
+		$min = $wpdb->get_var( "SELECT MIN(ID) FROM $table");
+		if ( ! $min ) {
+			$min = 0;
+		}
+
+		$min = absint( $min );
+		wp_cache_set( 'min_service_id', $min, 'appointments_services' );
+	}
+	return apply_filters( 'app-services-first_service_id', $min );
+}
+
 function appointments_count_services( $args = array() ) {
 	$args['count'] = true;
 	return appointments_get_services( $args );
@@ -381,6 +398,7 @@ function appointments_delete_service_cache( $service_id ) {
 	wp_cache_delete( $service_id, 'app_services' );
 	wp_cache_delete( 'app_get_services' );
 	wp_cache_delete( 'app_count_services' );
+	wp_cache_delete( 'min_service_id', 'appointments_services' );
 	appointments_delete_timetables_cache();
 }
 

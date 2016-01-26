@@ -24,4 +24,16 @@ class App_UnitTestCase extends WP_UnitTestCase {
 		appointments_uninstall();
 		parent::tearDown();
 	}
+
+	protected function remove_deprecated_filters() {
+		remove_action( 'deprecated_function_run', array( $this, 'deprecated_function_run' ) );
+		remove_action( 'deprecated_argument_run', array( $this, 'deprecated_function_run' ) );
+		remove_action( 'doing_it_wrong_run', array( $this, 'doing_it_wrong_run' ) );
+	}
+
+	protected function add_deprecated_filters() {
+		add_action( 'deprecated_function_run', array( $this, 'deprecated_function_run' ) );
+		add_action( 'deprecated_argument_run', array( $this, 'deprecated_function_run' ) );
+		add_action( 'doing_it_wrong_run', array( $this, 'doing_it_wrong_run' ) );
+	}
 }
