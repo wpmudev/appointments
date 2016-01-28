@@ -369,7 +369,7 @@ jQuery(document).ready(function($){
 			.addClass( 'widefat' );
 		var questions = faqIndex.find( 'li' );
 		var advancedGroup = false;
-		questions.each( function ( index, element ) {
+		questions.each( function () {
 			var self = $(this);
 			var answer = self.data('answer');
 			var text = self.text();

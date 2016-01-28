@@ -1,3 +1,11 @@
+2016-01-28 - 1.5.7
+-------------------------------
+- Fixed: Timetables cache issue when services had different durations
+- Fixed: Some language domains
+- Enhancement: Added some love to FAQ screen
+- Enhancement: Improved some admin styles
+- Deprecated: Deprecated some old functions
+
 2016-01-18 - 1.5.6
 -------------------------------
 - Enhancement: Clearing cache properly when upgrading version

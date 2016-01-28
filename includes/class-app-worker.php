@@ -303,6 +303,24 @@ function appointments_update_worker( $worker_id, $args = array() ) {
 	return (bool)$result;
 }
 
+/**
+ * Get a list of workers
+ *
+ * @param array $args {
+ *     Optional. Arguments to retrieve workers.
+ *
+ *     @type int            $user_id          Filter workers by user ID. Default false
+ *     @type string         $orderby          orderby field (possible values ID, ID ASC, ID DESC, name ASC, name DESC). Default ID
+ *     @type bool|int       $page             Filter by attached page to worker. Default false
+ *     @type bool           $count            If set to true, it will return the number of workers found. Default false
+ *     @type bool|string    $fields           Fields to be returned (false or 'ID'). If false it will return all fields. Default false.
+ *     @type bool|int       $service          Filter by service ID. Default false.
+ *     @type bool           $with_page        Retrieve only workers with page attached. Default false.
+ *     @type bool|int       $limit            Max number of workers to return. If false will return all. Default false.
+ * }
+ *
+ * @return array of Appointments_Worker
+ */
 function appointments_get_workers( $args = array() ) {
 	global $wpdb;
 
@@ -539,6 +557,14 @@ function _appointments_get_workers_asc( $a, $b ) {
 	return strcmp( $a->get_name(), $b->get_name() );
 }
 
+/**
+ * Get a list of workers attached to a service
+ *
+ * @param $service_id
+ * @param string $order_by See appointments_get_workers() for more details
+ *
+ * @return array of Appointments_Worker
+ */
 function appointments_get_workers_by_service( $service_id, $order_by = 'ID' ) {
 	$workers_by_service = wp_cache_get( 'app_workers_by_service' );
 	if ( false === $workers_by_service ) {

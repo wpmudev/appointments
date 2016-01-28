@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.5.6.1
+Version: 1.5.7
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	public $version = "1.5.6.1";
+	public $version = "1.5.7";
 	public $db_version;
 
 	public $timetables = array();
@@ -256,6 +256,9 @@ class Appointments {
 	 * Get smallest service ID
 	 * We assume total number of services is not too high, which is the practical case.
 	 * Otherwise this method might be expensive
+	 *
+	 * @deprecated since 1.5.6.1
+	 *
 	 * @return integer
 	 */
 	function get_first_service_id() {
