@@ -487,7 +487,7 @@ class App_Macro_Codec extends App_Macro_GeneralCodec {
 	}
 
 	public function replace_worker () {
-		return $this->_core->get_worker_name($this->_appointment->worker);
+		return appointments_get_worker_name($this->_appointment->worker);
 	}
 
 	public function replace_user_name () {

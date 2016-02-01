@@ -76,7 +76,7 @@ class App_Locations_WorkerLocations {
 
 	public function record_appointment_location ($appointment_id) {
 		global $wpdb, $appointments;
-		$appointment = $appointments->get_app($appointment_id);
+		$appointment = appointments_get_appointment($appointment_id);
 		if (empty($appointment->worker)) return false;
 
 		$location_id = self::worker_to_location_id($appointment->worker);

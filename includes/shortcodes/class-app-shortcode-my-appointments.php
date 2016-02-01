@@ -187,7 +187,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 				$ret .= '<td>';
 
 				if ( !$provider )
-					$ret .= $appointments->get_worker_name( $r->worker ) . '</td>';
+					$ret .= appointments_get_worker_name( $r->worker ) . '</td>';
 				else
 					$ret .= $appointments->get_client_name( $r->ID ) . '</td>';
 				$ret .= apply_filters('app-shortcode-my_appointments-after_worker', '', $r);

@@ -166,7 +166,7 @@ else
 							$selected = " selected='selected' ";
 						else
 							$selected = "";
-						echo '<option '.$selected.' value="' . esc_attr($worker->ID) . '">'. $appointments->get_worker_name( $worker->ID ) .'</option>';
+						echo '<option '.$selected.' value="' . esc_attr($worker->ID) . '">'. appointments_get_worker_name( $worker->ID ) .'</option>';
 					}
 				}
 				?>

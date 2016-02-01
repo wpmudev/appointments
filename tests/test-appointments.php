@@ -90,6 +90,59 @@ class App_Appointments_Test extends App_UnitTestCase {
 		$this->assertEquals( '', $app->email );
 	}
 
+	function test_get_appointment() {
+		global $appointments;
+
+		$worker_id = $this->factory->user->create_object( $this->factory->user->generate_args() );
+		$user_id = $this->factory->user->create_object( $this->factory->user->generate_args() );
+
+		$service_args = array(
+			'name' => 'My Service',
+			'duration' => 90
+		);
+		$service_id = appointments_insert_service( $service_args );
+		$service = appointments_get_service( $service_id );
+
+		$worker_args = array(
+			'ID' => $worker_id,
+			'services_provided' => array( $service_id )
+		);
+		appointments_insert_worker( $worker_args );
+
+		$args = array(
+			'user' => $user_id,
+			'email' => 'tester@tester.com',
+			'name' => 'Tester',
+			'phone' => '667788',
+			'address' => 'An address',
+			'city' => 'Madrid',
+			'service' => $service_id,
+			'worker' => $worker_id,
+			'price' => '90',
+			'date' => 'December 18, 2024',
+			'time' => '07:30',
+			'note' => 'It\'s a note',
+			'status' => 'paid',
+			'location' => 5,
+			'gcal_updated' => '2015-12-01',
+			'gcal_ID' => 'test'
+		);
+		$app_id = appointments_insert_appointment( $args );
+
+		$appointment = appointments_get_appointment( $app_id );
+		$this->assertInstanceOf( 'Appointments_Appointment', $appointment );
+
+		// Test deprecated function
+		$this->remove_deprecated_filters();
+		$deprecated_app = $appointments->get_app( $app_id );
+		$this->assertInstanceOf( 'Appointments_Appointment', $deprecated_app );
+
+		$this->assertEquals( get_object_vars( $appointment ), get_object_vars( $deprecated_app ) );
+		$this->add_deprecated_filters();
+
+
+	}
+
 	function test_update_appointment() {
 		$worker_id = $this->factory->user->create_object( $this->factory->user->generate_args() );
 		$worker_id_2 = $this->factory->user->create_object( $this->factory->user->generate_args() );
@@ -255,6 +308,82 @@ class App_Appointments_Test extends App_UnitTestCase {
 		appointments_delete_appointment( $app_id );
 		$app = appointments_get_appointment( $app_id );
 		$this->assertFalse( $app );
+	}
+
+	function test_update_appointment_status() {
+		$worker_id = $this->factory->user->create_object( $this->factory->user->generate_args() );
+		$user_id = $this->factory->user->create_object( $this->factory->user->generate_args() );
+
+		$service_args = array(
+			'name' => 'My Service',
+			'duration' => 90
+		);
+		$service_id = appointments_insert_service( $service_args );
+
+		$worker_args = array(
+			'ID' => $worker_id,
+			'services_provided' => array( $service_id )
+		);
+		appointments_insert_worker( $worker_args );
+
+		$args = array(
+			'user' => $user_id,
+			'email' => 'tester@tester.com',
+			'name' => 'Tester',
+			'phone' => '667788',
+			'address' => 'An address',
+			'city' => 'Madrid',
+			'service' => $service_id,
+			'worker' => $worker_id,
+			'price' => '90',
+			'date' => 'December 18, 2024',
+			'time' => '07:30',
+			'note' => 'It\'s a note',
+			'status' => 'paid',
+			'location' => 5,
+		);
+		$app_id = appointments_insert_appointment( $args );
+
+		$result = appointments_update_appointment_status( $app_id, 'confirmed' );
+		$this->assertTrue( $result );
+
+		$appointment = appointments_get_appointment( $app_id );
+		$this->assertEquals( $appointment->status, 'confirmed' );
+
+		// Same status, no changes
+		$result = appointments_update_appointment_status( $app_id, 'confirmed' );
+		$this->assertFalse( $result );
+
+		// Wrong status name
+		$result = appointments_update_appointment_status( $app_id, 'fake-status' );
+		$this->assertFalse( $result );
+
+		// Test deprecated function
+		global $appointments;
+		$this->remove_deprecated_filters();
+		$result = $appointments->change_status( 'paid', $app_id );
+		$this->add_deprecated_filters();
+
+		$this->assertTrue( $result );
+
+		$appointment = appointments_get_appointment( $app_id );
+		$this->assertEquals( $appointment->status, 'paid' );
+
+
+	}
+
+	function test_get_statuses() {
+		global $appointments;
+
+		// Test deprecated function
+		$statuses = appointments_get_statuses();
+
+		$this->remove_deprecated_filters();
+		$deprecated_statuses = $appointments->get_statuses();
+		$this->add_deprecated_filters();
+
+		$this->assertEquals( $statuses, $deprecated_statuses );
+
 	}
 
 }

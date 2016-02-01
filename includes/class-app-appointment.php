@@ -21,6 +21,40 @@ class Appointments_Appointment {
 	public $note = '';
 	public $gcal_ID = '';
 	public $gcal_updated = '';
+
+	public function __construct( $worker ) {
+		foreach ( get_object_vars( $worker ) as $key => $value ) {
+			$this->$key = $this->_sanitize_field( $key, $value );
+		}
+	}
+
+	private function _sanitize_field( $field, $value ) {
+		// @TODO Sanitize
+		//$int_fields = array( 'ID', 'user', 'service', 'location', 'worker' );
+
+//		if ( in_array( $field, $int_fields ) )
+//			return absint( $value );
+//		else
+			return $value;
+	}
+
+	public function get_service() {
+		return appointments_get_service( $this->service );
+	}
+
+	public function get_service_id() {
+		return $this->service;
+	}
+
+	public function get_worker() {
+		return appointments_get_worker( $this->worker );
+	}
+
+	public function get_worker_id() {
+		return $this->worker;
+	}
+
+
 }
 
 /**
@@ -49,8 +83,9 @@ function appointments_get_appointment( $app_id ) {
 	}
 
 
-	if ( $app )
-		return $app;
+	if ( $app ) {
+		return new Appointments_Appointment( $app );
+	}
 
 	return false;
 }
@@ -254,6 +289,8 @@ function appointments_update_user_appointment_data( $app_id ) {
  * @param $app_id
  * @param $args
  * @param bool $resend
+ *
+ * @return bool True in case of success
  */
 function appointments_update_appointment( $app_id, $args ) {
 	global $wpdb, $appointments;
@@ -369,7 +406,14 @@ function appointments_update_appointment( $app_id, $args ) {
 	return true;
 }
 
-
+/**
+ * Update an appointment status
+ *
+ * @param int $app_id Appointment ID
+ * @param string $new_status New appointment status
+ *
+ * @return bool True in case of success
+ */
 function appointments_update_appointment_status( $app_id, $new_status ) {
 	global $wpdb;
 
@@ -409,7 +453,20 @@ function appointments_update_appointment_status( $app_id, $new_status ) {
 			appointments_send_removal_notification( $app_id );
 		}
 
+		/**
+		 * Fired when an Appointment changes its status
+		 *
+		 * @used-by AppointmentsGcal::app_change_status()
+		 * @used-by App_Users_AdditionalFields::manual_cleanup_data()
+		 */
 		do_action( 'wpmudev_appointments_update_appointment_status', $app_id, $new_status, $old_status );
+
+		/**
+		 * Fired when an Appointment changes its status
+		 *
+		 * @deprecated since 1.5.7.1
+		 */
+		do_action( 'app_change_status', $new_status, $app_id );
 
 		return true;
 	}

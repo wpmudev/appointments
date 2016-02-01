@@ -21,7 +21,7 @@ if ( $workers ) {
 			$s = " selected='selected'";
 		else
 			$s = '';
-		echo '<option value="'.$worker->ID.'"'.$s.'>' . $appointments->get_worker_name( $worker->ID, false ) . '</option>';
+		echo '<option value="'.$worker->ID.'"'.$s.'>' . appointments_get_worker_name( $worker->ID, false ) . '</option>';
 	}
 }
 ?>

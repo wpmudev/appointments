@@ -295,6 +295,11 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 		}
 
 		$appointments->get_lsw(); // This should come after Force service
+		$workers_by_service = appointments_get_workers_by_service( $appointments->service );
+		$single_worker = false;
+		if ( 1 === count( $workers_by_service ) ) {
+			$single_worker = $workers_by_service[0]->ID;
+		}
 
 		if ( $worker ) {
 			// Check if such a worker exists
@@ -302,7 +307,7 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 				return;
 			$_REQUEST["app_provider_id"] = $worker;
 		}
-		else if ( $single_worker = $appointments->is_single_worker( $appointments->service ) ) {
+		else if ( $single_worker ) {
 			// Select the only provider if that is the case
 			$_REQUEST["app_provider_id"] = $single_worker;
 			$worker = $single_worker;
@@ -467,13 +472,20 @@ class App_Shortcode_MonthlySchedule extends App_Shortcode {
 
 		$appointments->get_lsw(); // This should come after Force service
 
+
+		$workers_by_service = appointments_get_workers_by_service( $appointments->service );
+		$single_worker = false;
+		if ( 1 === count( $workers_by_service ) ) {
+			$single_worker = $workers_by_service[0]->ID;
+		}
+
 		// Force worker or pick up the single worker
 		if ( $worker ) {
 			// Check if such a worker exists
 			if (! appointments_is_worker($worker)) return;
 			$_REQUEST["app_provider_id"] = $worker;
 		}
-		else if ( $single_worker = $appointments->is_single_worker( $appointments->service ) ) {
+		else if ( $single_worker ) {
 			// Select the only provider if that is the case
 			$_REQUEST["app_provider_id"] = $single_worker;
 			$worker = $single_worker;
@@ -498,7 +510,7 @@ class App_Shortcode_MonthlySchedule extends App_Shortcode {
 		if (!empty($title)) {
 			$replacements = array(
 				date_i18n("F Y",  strtotime("{$year}-{$month}-01")), // START
-				$appointments->get_worker_name(
+				appointments_get_worker_name(
 					(!empty($_REQUEST['app_provider_id']) ? $_REQUEST['app_provider_id'] : null)
 				),
 				$appointments->get_service_name(
@@ -754,7 +766,7 @@ class App_Shortcode_AllAppointments extends App_Shortcode {
 				$ret .= apply_filters('app-shortcode-all_appointments-after_service', '', $r);
 
 				$ret .= '<td>';
-				$ret .= $appointments->get_worker_name( $r->worker ) . '</td>';
+				$ret .= appointments_get_worker_name( $r->worker ) . '</td>';
 				$ret .= apply_filters('app-shortcode-all_appointments-after_provider', '', $r);
 
 				$ret .= '<td>';
@@ -928,7 +940,7 @@ class App_Shortcode_ServiceProviders extends App_Shortcode {
 				$d = ' style="display:none"';
 				$sel = '';
 			}
-			$s .= '<option value="'.$worker->ID.'"'.$sel.'>'. $appointments->get_worker_name( $worker->ID )  . '</option>';
+			$s .= '<option value="'.$worker->ID.'"'.$sel.'>'. appointments_get_worker_name( $worker->ID )  . '</option>';
 			// Include excerpts
 			$e .= '<div '.$d.' class="app_worker_excerpt" id="app_worker_excerpt_'.$worker->ID.'" >';
 			// Let addons modify worker bio page

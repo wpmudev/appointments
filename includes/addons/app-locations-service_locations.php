@@ -72,7 +72,7 @@ class App_Locations_ServiceLocations {
 
 	public function record_appointment_location ($appointment_id) {
 		global $wpdb, $appointments;
-		$appointment = $appointments->get_app($appointment_id);
+		$appointment = appointments_get_appointment( $appointment_id );
 		if (empty($appointment->service)) return false;
 
 		$location_id = self::service_to_location_id($appointment->service);

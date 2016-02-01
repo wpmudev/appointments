@@ -307,7 +307,7 @@ class App_Schedule_Paddings {
 		} else if ( is_admin() && DOING_AJAX ) {
 			//Get service ID for the current appointment when using inline edit.
 			if($_REQUEST['action'] == 'inline_edit' && !empty($_REQUEST['app_id'])){
-				$app = $this->_core->get_app($_REQUEST['app_id']);
+				$app = appointments_get_appointment($_REQUEST['app_id']);
 				$this->_core->service = $app->service;
 			}
 		}

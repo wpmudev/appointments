@@ -61,6 +61,7 @@ class Appointments {
 	function __construct() {
 
 		include_once( 'includes/helpers.php' );
+		include_once( 'includes/deprecated-hooks.php' );
 
 		$this->timetables = get_transient( 'app_timetables' );
 		if ( ! $this->timetables || ! is_array( $this->timetables ) ) {
@@ -195,6 +196,10 @@ class Appointments {
 	}
 
 	function maybe_upgrade() {
+		if ( isset( $_GET['app-clear'] ) ) {
+			$this->flush_cache();
+		}
+
 		if ( $this->db_version == $this->version ) {
 			return;
 		}
@@ -375,16 +380,22 @@ class Appointments {
 
 	/**
 	 * Check if there is only one worker giving the selected service
+	 *
+	 * @deprecated since 1.5.7.1
+	 *
 	 * @param service: Id of the service for which check will be done
  	 * @since 1.1.1
-	 * @return string (worker ID if there is one, otherwise 0)
+	 * @return int|boolean (worker ID if there is one, otherwise false)
 	 */
-	function is_single_worker( $service ) {
-		$workers = appointments_get_workers_by_service( $service );
-		if ( $workers && 1 === count( $workers ) && is_object( $workers[0] ) ) {
+	function is_single_worker( $service_id ) {
+		_deprecated_function( __FUNCTION__, '1.5.7.1' );
+
+		$workers = appointments_get_workers_by_service( $service_id );
+		if ( 1 === count( $workers ) ) {
 			return $workers[0]->ID;
 		}
-		else return 0;
+
+		return false;
 	}
 
 	/**
@@ -436,16 +447,16 @@ class Appointments {
 
 	/**
 	 * Return an appointment given its ID
+	 *
+	 * @deprecated since 1.5.7.1
+	 *
 	 * @param app_id: ID of the appointment to be retreived from database
 	 * @since 1.1.8
 	 * @return object
 	 */
 	function get_app( $app_id ) {
-		if ( !$app_id )
-			return false;
-
-		$app = $this->db->get_row( $this->db->prepare("SELECT * FROM {$this->app_table} WHERE ID=%d", $app_id) );
-		return $app;
+		_deprecated_function( __FUNCTION__, '1.5.7.1', 'appointments_get_appointment()' );
+		return appointments_get_appointment( $app_id );
 	}
 
 	/**
@@ -538,16 +549,45 @@ class Appointments {
 		return false;
 	}
 
+
+	/**
+	 *
+	 * @deprecated since 1.5.7.1
+	 *
+	 * @param $worker_id
+	 *
+	 * @return bool
+	 */
 	public function is_worker( $worker_id ) {
+		_deprecated_function( __FUNCTION__, '1.5.7.1', 'appointments_is_worker()' );
 		return appointments_is_worker( $worker_id );
 	}
 
 
 	/**
 	 * Find worker name given his ID
+	 *
+	 * @deprecated since 1.5.7.1
+	 *
 	 * @return string
 	 */
-	function get_worker_name( $worker=0, $php=true ) {
+	function get_worker_name( $worker=0, $field = true ) {
+		_deprecated_function( __FUNCTION__, '1.5.7.1', 'appointments_get_worker_name()' );
+
+		if ( $field ) {
+			$field = 'default';
+		}
+		else {
+			$field = 'user_login';
+		}
+
+		return appointments_get_worker_name( $worker, $field );
+	}
+
+	/**
+	 * Only for Unit Testing purposes, do not use
+	 */
+	function _old_get_worker_name( $worker=0, $php = true ) {
 		global $current_user;
 		$user_name = '';
 		if ( 0 == $worker ) {
@@ -563,16 +603,18 @@ class Appointments {
 				$user_name = $userdata->app_name;
 			}
 			if (empty($user_name)) {
-				if ( !$php )
+				if ( !$php ) {
 					$user_name = $userdata->user_login;
-				else
+				}
+				else {
 					$user_name = $userdata->display_name;
+				}
 
 				if ( !$user_name ){
-                                        $first_name = get_user_meta($worker, 'first_name', true);
-                                        $last_name = get_user_meta($worker, 'last_name', true);
+					$first_name = get_user_meta($worker, 'first_name', true);
+					$last_name = get_user_meta($worker, 'last_name', true);
 					$user_name = $first_name . " " . $last_name;
-                                }
+				}
 				if ( "" == trim( $user_name ) )
 					$user_name = $userdata->user_login;
 			}
@@ -925,6 +967,7 @@ class Appointments {
 	 */
 	function flush_cache( ) {
 		wp_cache_flush();
+		appointments_clear_cache();
 		if ( 'yes' == @$this->options["use_cache"] )
 			$result = $this->db->query( "TRUNCATE TABLE {$this->cache_table} " );
 	}
@@ -1042,19 +1085,14 @@ class Appointments {
 
 	/**
 	 * Return all available statuses
+	 *
+	 * @deprecated Since version 1.5.7.1
+	 *
 	 * @return array
 	 */
 	function get_statuses() {
-		return apply_filters( 'app_statuses',
-					array(
-						'pending'	=> __('Pending', 'appointments'),
-						'paid'		=> __('Paid', 'appointments'),
-						'confirmed'	=> __('Confirmed', 'appointments'),
-						'completed'	=> __('Completed', 'appointments'),
-						'reserved'	=> __('Reserved by GCal', 'appointments'),
-						'removed'	=> __('Removed', 'appointments')
-						)
-				);
+		_deprecated_function( __FUNCTION__, '1.5.7.1', 'appointments_get_statuses()' );
+		return appointments_get_statuses();
 	}
 
 
@@ -1125,30 +1163,14 @@ class Appointments {
 
 	/**
 	 * Change status for a given app ID
+	 *
+	 * @deprecated since 1.5.7.1
+	 *
 	 * @return bool
 	 */
 	function change_status( $stat, $app_id ) {
-		global $wpdb;
-
-		if (!$app_id || !$stat) return false;
-
-		$result = $wpdb->update($this->app_table,
-			array('status' => $stat),
-			array('ID' => $app_id)
-		);
-
-		if ($result) {
-			appointments_clear_appointment_cache( $app_id );
-			$this->flush_cache();
-			do_action( 'app_change_status', $stat, $app_id );
-
-			//if ( ($stat == 'paid' || $stat == 'confirmed') && is_object( $this->gcal_api ) ) {
-			if (is_object($this->gcal_api) &&  $this->gcal_api->is_syncable_status($stat)) {
-				$this->gcal_api->update( $app_id );
-			}
-			return true;
-		}
-		return false;
+		_deprecated_function( __FUNCTION__, '1.5.7.1', 'appointments_update_appointment_status()' );
+		return appointments_update_appointment_status( $app_id, $stat );
 	}
 
 	/**
@@ -1164,7 +1186,7 @@ class Appointments {
 			// We don't want to break any other plugin's init, so these conditions are very strict
 			if ( isset( $_GET['app_cancel'] ) && isset( $_GET['app_id'] ) && isset( $_GET['app_nonce'] ) ) {
 				$app_id = $_GET['app_id'];
-				$app = $appointments->get_app( $app_id );
+				$app = appointments_get_appointment( $app_id );
 
 				if( isset( $app->status ) )
 					$stat = $app->status;
@@ -1211,7 +1233,7 @@ class Appointments {
 				// First try to find from database
 				if ( is_user_logged_in() ) {
 					global $current_user;
-					$app = $appointments->get_app( $app_id );
+					$app = appointments_get_appointment( $app_id );
 					if ( $app->user && $app->user == $current_user->ID )
 						$owner = true;
 				}
@@ -3102,13 +3124,13 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			}
 
 			$body = apply_filters( 'app_confirmation_message', $this->add_cancel_link( $this->_replace( $this->options["confirmation_message"],
-					$r->name, $this->get_service_name( $r->service), $this->get_worker_name( $r->worker), $r->start, $r->price,
+					$r->name, $this->get_service_name( $r->service), appointments_get_worker_name( $r->worker), $r->start, $r->price,
 					$this->get_deposit($r->price), $r->phone, $r->note, $r->address, $r->email, $r->city ), $app_id ), $r, $app_id );
 
 			$mail_result = wp_mail(
 						$r->email,
 						$this->_replace( $this->options["confirmation_subject"], $r->name,
-							$this->get_service_name( $r->service), $this->get_worker_name( $r->worker),
+							$this->get_service_name( $r->service), appointments_get_worker_name( $r->worker),
 							$r->start, $r->price, $this->get_deposit($r->price), $r->phone, $r->note, $r->address, $r->email, $r->city ),
 						$body,
 						$this->message_headers( ),
@@ -3139,7 +3161,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 
 				wp_mail(
 						$to,
-						$this->_replace( __('New Appointment','appointments'), $r->name, $this->get_service_name( $r->service), $this->get_worker_name( $r->worker),
+						$this->_replace( __('New Appointment','appointments'), $r->name, $this->get_service_name( $r->service), appointments_get_worker_name( $r->worker),
 							$r->start, $r->price, $this->get_deposit($r->price), $r->phone, $r->note, $r->address, $r->email, $r->city ),
 						$provider_add_text . $body,
 						$this->message_headers( )
@@ -3238,7 +3260,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 	 */
 	function send_removal_notification ($app_id) {
 		if ( !isset( $this->options["send_removal_notification"] ) || 'yes' != $this->options["send_removal_notification"] ) return false;
-		$app = $this->get_app($app_id);
+		$app = appointments_get_appointment($app_id);
 		$log = isset($this->options["log_emails"]) && 'yes' == $this->options["log_emails"];
 		$email = !empty($app->email) ? $app->email : false;
 		if (empty($email) && !empty($app->user) && is_numeric($app->user)) {
@@ -3259,7 +3281,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		$subject = $this->_replace($subject,
 			$app->name,
 			$this->get_service_name($app->service),
-			$this->get_worker_name($app->worker),
+			appointments_get_worker_name($app->worker),
 			$app->start,
 			$app->price,
 			$this->get_deposit($app->price),
@@ -3276,7 +3298,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		$msg = $this->_replace($msg,
 			$app->name,
 			$this->get_service_name($app->service),
-			$this->get_worker_name($app->worker),
+			appointments_get_worker_name($app->worker),
 			$app->start,
 			$app->price,
 			$this->get_deposit($app->price),
@@ -3356,7 +3378,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 							$this->options["reminder_subject"], 
 							$r->name, 
 							$this->get_service_name($r->service),
-							$this->get_worker_name($r->worker), 
+							appointments_get_worker_name($r->worker),
 							$r->start, 
 							$r->price, 
 							$this->get_deposit($r->price), 
@@ -3371,7 +3393,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 								$this->options["reminder_message"],
 								$r->name, 
 								$this->get_service_name($r->service),
-								$this->get_worker_name($r->worker), 
+								appointments_get_worker_name($r->worker),
 								$r->start,
 								$r->price, 
 								$this->get_deposit($r->price), 
@@ -3479,7 +3501,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 							$this->options["reminder_subject"], 
 							$r->name, 
 							$this->get_service_name($r->service),
-							$this->get_worker_name($r->worker), 
+							appointments_get_worker_name($r->worker),
 							$r->start, 
 							$r->price, 
 							$this->get_deposit($r->price), 
@@ -3493,7 +3515,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 								$this->options["reminder_message"], 
 								$r->name,
 								$this->get_service_name($r->service),
-								$this->get_worker_name($r->worker), 
+								appointments_get_worker_name($r->worker),
 								$r->start, 
 								$r->price,
 								$this->get_deposit($r->price), 
@@ -3665,7 +3687,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 	function add_cancel_link( $text, $app_id ) {
 		if ( isset( $this->options['allow_cancel'] ) && 'yes' == $this->options['allow_cancel'] && $app_id ) {
 
-			$app = $this->get_app( $app_id );
+			$app = appointments_get_appointment( $app_id );
 			// The link to be clicked may belong to a formerly created and deleted appointment.
 			// Another irrelevant app may have been created after cancel link has been sent. So we will add creation date for check
 			if ( $app )

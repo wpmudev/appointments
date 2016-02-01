@@ -31,7 +31,11 @@ class App_Timetables_Test extends App_UnitTestCase {
 		$date = date( 'Y-m-01', $time );
 		$capacity = appointments_get_capacity();
 		$date_start = strtotime("{$date} 00:00");
-		$key = $date_start . '-' . $capacity . '-0' . '-' . $appointments->worker . '-' . date( 'Ym', $appointments->local_time );
+		$service = appointments_get_service($service_id);
+		$min_step_time = $appointments->get_min_time() * 60;
+		$step = (!empty($service->duration) ? $service->duration : $min_step_time) * 60;
+		$key = $date_start . '-' . $capacity . '-0' . '-' . $appointments->worker . '-' . date( 'Ym', $appointments->local_time ) . '-' . $step;
+
 
 
 		// WORKERS

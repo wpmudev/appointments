@@ -358,6 +358,43 @@ class App_Workers_Test extends App_UnitTestCase {
 
 	}
 
+	function test_deprecated_is_single_worker() {
+		global $appointments;
+
+		$service_id_1 = appointments_insert_service( array( 'name' => 'My Service' ) );
+		$service_id_2 = appointments_insert_service( array( 'name' => 'My Service 2' ) );
+
+		$args = $this->factory->user->generate_args();
+		$user_id_1 = $this->factory->user->create_object( $args );
+		$args = $this->factory->user->generate_args();
+		$user_id_2 = $this->factory->user->create_object( $args );
+		$args = $this->factory->user->generate_args();
+		$user_id_3 = $this->factory->user->create_object( $args );
+
+		$args = array(
+			'ID' => $user_id_1,
+			'services_provided' => array( $service_id_1 ),
+		);
+		appointments_insert_worker( $args );
+
+		$args = array(
+			'ID' => $user_id_2,
+			'services_provided' => array( $service_id_2 ),
+		);
+		appointments_insert_worker( $args );
+
+		$args = array(
+			'ID' => $user_id_3,
+			'services_provided' => array( $service_id_2 ),
+		);
+		appointments_insert_worker( $args );
+
+		$this->remove_deprecated_filters();
+		$this->assertEquals( $appointments->is_single_worker( $service_id_1 ), $user_id_1 );
+		$this->assertFalse( $appointments->is_single_worker( $service_id_2 ) );
+		$this->add_deprecated_filters();
+	}
+
 	function test_get_workers_by_service() {
 		$args = $this->factory->user->generate_args();
 		$user_id_1 = $this->factory->user->create_object( $args );
@@ -399,6 +436,82 @@ class App_Workers_Test extends App_UnitTestCase {
 		$this->assertEquals( $appointments->get_workers_by_service( $service_id_2 ), appointments_get_workers_by_service( $service_id_2 ) );
 		$this->add_deprecated_filters();
 
+	}
+
+	function test_appointments_is_worker() {
+		$args = $this->factory->user->generate_args();
+		$user_id_1 = $this->factory->user->create_object( $args );
+
+		$args = $this->factory->user->generate_args();
+		$user_id_2 = $this->factory->user->create_object( $args );
+
+		$service_id = appointments_insert_service( array( 'name' => 'My Service' ) );
+
+		$args = array(
+			'ID' => $user_id_1,
+			'services_provided' => array( $service_id ),
+		);
+		appointments_insert_worker( $args );
+
+		$this->assertTrue( appointments_is_worker( $user_id_1 ) );
+		$this->assertFalse( appointments_is_worker( $user_id_2 ) );
+
+		// Test deprecated function
+		global $appointments;
+		$this->remove_deprecated_filters();
+		$this->assertTrue( $appointments->is_worker( $user_id_1 ) );
+		$this->assertFalse( $appointments->is_worker( $user_id_2 ) );
+		$this->add_deprecated_filters();
+	}
+
+	function test_get_worker_name() {
+		global $appointments;
+
+		$args = $this->factory->user->generate_args();
+		$args['user_login'] = 'userlogin';
+		$args['display_name'] = 'Display Name';
+		$user_id_1 = $this->factory->user->create_object( $args );
+
+		$service_id = appointments_insert_service( array( 'name' => 'My Service' ) );
+
+		$args = array(
+			'ID' => $user_id_1,
+			'services_provided' => array( $service_id ),
+		);
+		appointments_insert_worker( $args );
+
+		$this->remove_deprecated_filters();
+		$this->assertEquals( 'Display Name', $appointments->_old_get_worker_name( $user_id_1 ) );
+		$this->assertEquals( 'Display Name', appointments_get_worker_name( $user_id_1 ) );
+		$this->assertEquals( 'Display Name', $appointments->get_worker_name( $user_id_1 ) );
+
+		$this->assertEquals( 'userlogin', $appointments->_old_get_worker_name( $user_id_1, false ) );
+		$this->assertEquals( 'userlogin', appointments_get_worker_name( $user_id_1, 'user_login' ) );
+		$this->assertEquals( 'userlogin', $appointments->get_worker_name( $user_id_1, false ) );
+
+		$this->assertEquals( 'A specialist', $appointments->_old_get_worker_name( 0 ) );
+		$this->assertEquals( 'A specialist', appointments_get_worker_name( 0 ) );
+		$this->assertEquals( 'A specialist', $appointments->get_worker_name( 0 ) );
+
+		// Log in the worker
+		wp_set_current_user( $user_id_1 );
+		$this->assertEquals( 'Our staff', $appointments->_old_get_worker_name( 0 ) );
+		$this->assertEquals( 'Our staff', appointments_get_worker_name( 0 ) );
+		$this->assertEquals( 'Our staff', $appointments->get_worker_name( 0 ) );
+
+		// If there's a user meta set, it will return it no matter what we pass to the second argument
+		update_user_meta( $user_id_1, 'app_name', 'Meta Name' );
+
+		$this->assertEquals( 'Our staff', $appointments->_old_get_worker_name( 0 ) );
+		$this->assertEquals( 'Our staff', appointments_get_worker_name( 0 ) );
+		$this->assertEquals( 'Our staff', $appointments->get_worker_name( 0 ) );
+		$this->assertEquals( 'Meta Name', $appointments->_old_get_worker_name( $user_id_1 ) );
+		$this->assertEquals( 'Meta Name', appointments_get_worker_name( $user_id_1 ) );
+		$this->assertEquals( 'Meta Name', $appointments->get_worker_name( $user_id_1 ) );
+
+		$this->add_deprecated_filters();
+
+		wp_set_current_user( 0 );
 	}
 
 	/**

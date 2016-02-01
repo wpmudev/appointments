@@ -97,7 +97,7 @@ class Appointments_Admin {
 		if ( isset( $_POST['app_confirm'] ) && is_array( $_POST['app_confirm'] ) && !empty( $_POST['app_confirm'] ) ) {
 			foreach ( $_POST['app_confirm'] as $app_id=>$value ) {
 				if ( $appointments->change_status( 'confirmed', $app_id ) ) {
-					$appointments->log( sprintf( __('Service Provider %s manually confirmed appointment with ID: %s','appointments'), $appointments->get_worker_name( $current_user->ID ), $app_id ) );
+					$appointments->log( sprintf( __('Service Provider %s manually confirmed appointment with ID: %s','appointments'), appointments_get_worker_name( $current_user->ID ), $app_id ) );
 					$appointments->send_confirmation( $app_id );
 				}
 			}
@@ -162,7 +162,7 @@ class Appointments_Admin {
 
 			}
 			if ( $result || $result2 ) {
-				$message = sprintf( __('%s edited his working hours.', 'appointments'), $appointments->get_worker_name( $profileuser_id ) );
+				$message = sprintf( __('%s edited his working hours.', 'appointments'), appointments_get_worker_name( $profileuser_id ) );
 				$appointments->log( $message );
 				// Employer can be noticed here
 				do_action( "app_working_hour_update", $message, $profileuser_id );

@@ -23,6 +23,7 @@ class Appointments_Service {
 		else
 			return $value;
 	}
+
 }
 
 /**
@@ -173,7 +174,7 @@ function appointments_update_service( $service_id, $args ) {
  * Get a single service with given ID
  *
  * @param ID: Id of the service to be retrieved
- * @return object
+ * @return Appointments_Service
  */
 function appointments_get_service( $service_id ) {
 	global $wpdb;

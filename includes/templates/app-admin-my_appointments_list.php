@@ -120,7 +120,7 @@ if ( true || isset( $_GET["type"] ) && 'removed' == $_GET["type"] ) {
 						</td>
 						<td class="column-worker">
 							<?php
-								echo $appointments->get_worker_name( $app->worker );
+								echo appointments_get_worker_name( $app->worker );
 							?>
 						</td>
 						<td class="column-status">

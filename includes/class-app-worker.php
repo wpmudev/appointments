@@ -50,9 +50,37 @@ class Appointments_Worker {
 		return array_map( 'appointments_get_service', $this->services_provided );
 	}
 
-	public function get_name() {
-		global $appointments;
-		return $appointments->get_worker_name( $this->ID );
+	public function get_name( $field = 'default' ) {
+		$userdata = get_userdata( $this->ID );
+		$name = '';
+
+		if ( ! empty( $userdata->app_name ) ) {
+			// If app_name meta exists, use it
+			$name = $userdata->app_name;
+		}
+
+		if ( empty( $name ) ) {
+
+			if ( 'default' == $field || 'display_name' == $field ) {
+				$name = $userdata->display_name;
+			}
+			else {
+				$name = $userdata->user_login;
+			}
+
+			if ( empty( $name ) ) {
+				$first_name = get_user_meta( $this->ID, 'first_name', true );
+				$last_name = get_user_meta( $this->ID, 'last_name', true );
+				$name = $first_name . " " . $last_name;
+			}
+
+			if ( "" == trim( $name ) ) {
+				$name = $userdata->user_login;
+			}
+		}
+
+		return $name;
+
 	}
 
 }
@@ -81,6 +109,36 @@ function appointments_get_worker( $worker_id ) {
 		return new Appointments_Worker( $worker );
 
 	return false;
+}
+
+/**
+ * Get a worker name
+ *
+ * @param int $worker_id Worker ID
+ * @param string $field Field to return default, display_name or user_login
+ *
+ * @return string Worker name
+ */
+function appointments_get_worker_name( $worker_id, $field = 'display_name' ) {
+	$worker = appointments_get_worker( $worker_id );
+	$name = '';
+	if ( is_a( $worker, 'Appointments_Worker' ) ) {
+		$name = $worker->get_name( $field );
+	}
+
+	if ( empty( $name ) ) {
+		// Show different text to authorized people
+		// @TODO Take this code out from this function responsibility
+		$current_user_id = get_current_user_id();
+		if ( is_admin() || App_Roles::current_user_can( 'manage_options', App_Roles::CTX_STAFF ) || appointments_is_worker( $current_user_id ) ) {
+			$name = __('Our staff', 'appointments');
+		}
+		else {
+			$name = __('A specialist', 'appointments');
+		}
+	}
+
+	return apply_filters( 'app_get_worker_name', $name, $worker_id );;
 }
 
 function appointments_is_worker( $id ) {

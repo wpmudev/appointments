@@ -130,7 +130,7 @@ class Appointments_Widget_Service_Providers extends Appointments_Widget_Helper {
 					: '<span class="app_worker">%s</a>'
 				;
 				echo '<li>' .
-					sprintf($link_template, $appointments->get_worker_name($result->ID)) .
+					sprintf($link_template, appointments_get_worker_name($result->ID)) .
 				'</li>';
 			}
 			echo '</ul>';

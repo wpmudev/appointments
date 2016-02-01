@@ -59,6 +59,17 @@ class AppointmentsGcal {
 			$this->uploads_dir 	= $uploads["basedir"] . "/";
 		else
 			$this->uploads_dir 	= WP_CONTENT_DIR . "/uploads/";
+
+		add_action( 'wpmudev_appointments_update_appointment_status', array( $this, 'update_appointment_status' ), 10, 2 );
+	}
+
+	/**
+	 * Triggered when an Appointment change its status
+	 */
+	function update_appointment_status( $app_id, $new_status ) {
+		if ( $this->is_syncable_status( $new_status ) ) {
+			$this->update( $app_id );
+		}
 	}
 
 	/**
@@ -919,12 +930,12 @@ class AppointmentsGcal {
 		$this->event->setEnd( $end );
 		$this->event->setSummary(apply_filters(
 			'app-gcal-set_summary',
-			$a->_replace( $this->get_summary( $worker_id ), $app->name, $a->get_service_name($app->service), $a->get_worker_name($app->worker), $app->start, $app->price, $a->get_deposit($app->price), $app->phone, $app->note, $app->address, $app->email, $app->city ),
+			$a->_replace( $this->get_summary( $worker_id ), $app->name, $a->get_service_name($app->service), appointments_get_worker_name($app->worker), $app->start, $app->price, $a->get_deposit($app->price), $app->phone, $app->note, $app->address, $app->email, $app->city ),
 			$app
 		));
 		$this->event->setDescription(apply_filters(
 			'app-gcal-set_description',
-			$a->_replace( $this->get_description( $worker_id ), $app->name, $a->get_service_name($app->service), $a->get_worker_name($app->worker), $app->start, $app->price, $a->get_deposit($app->price), $app->phone, $app->note, $app->address, $app->email, $app->city ),
+			$a->_replace( $this->get_description( $worker_id ), $app->name, $a->get_service_name($app->service), appointments_get_worker_name($app->worker), $app->start, $app->price, $a->get_deposit($app->price), $app->phone, $app->note, $app->address, $app->email, $app->city ),
 			$app
 		));
 		$this->event->attendees = $attendees;
@@ -959,8 +970,7 @@ class AppointmentsGcal {
 	 * @param app_id: Appointment ID to be inserted
 	 */
 	function insert( $app_id ) {
-		global $appointments;
-		$app = $appointments->get_app( $app_id );
+		$app = appointments_get_appointment( $app_id );
 		$worker_id = $app->worker;
 
 		// No preference case
@@ -1001,7 +1011,7 @@ class AppointmentsGcal {
 			$app->email = $appointments->get_admin_email( );
 			$app->note = __('This is a test appointment inserted by Appointments+', 'appointments');
 		} else {
-			$app = $appointments->get_app( $app_id );
+			$app = appointments_get_appointment( $app_id );
 		}
 
 
@@ -1039,7 +1049,7 @@ class AppointmentsGcal {
 	 */
 	function update( $app_id ) {
 		global $appointments;
-		$app = $appointments->get_app( $app_id );
+		$app = appointments_get_appointment( $app_id );
 		$worker_id = $app->worker;
 		if ( $app->gcal_ID ) {
 			// Update this event from general calendar
@@ -1063,7 +1073,7 @@ class AppointmentsGcal {
 			return false;
 
 		global $appointments, $wpdb;
-		$app = $appointments->get_app( $app_id );
+		$app = appointments_get_appointment( $app_id );
 		if ( $app->gcal_ID ) {
 			$this->set_event_parameters( $app, $worker_id );
 
@@ -1087,8 +1097,7 @@ class AppointmentsGcal {
 	 * @param app_id: Appointment ID that has been deleted
 	 */
 	function delete( $app_id ) {
-		global $appointments;
-		$app = $appointments->get_app( $app_id );
+		$app = appointments_get_appointment( $app_id );
 //$appointments->log(sprintf("Attempting to delete the appointment %s from GCal", $app_id));
 		$worker_id = $app->worker;
 		// In any case delete this event from general calendar
@@ -1104,8 +1113,8 @@ class AppointmentsGcal {
 	function delete_event( $app_id, $worker_id=0 ) {
 		if ( !$this->connect( $worker_id ) )
 			return false;
-		global $appointments;
-		$app = $appointments->get_app( $app_id );
+
+		$app = appointments_get_appointment( $app_id );
 //$appointments->log(sprintf("Deleting the appointment %s from GCal (worker id: %s)", $app_id, $worker_id));
 		if ($app->gcal_ID) {
 			try {
