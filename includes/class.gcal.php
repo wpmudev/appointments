@@ -12,7 +12,7 @@
  * @since 1.2.0
  */
 
-if (!defined('APP_GCAL_MAX_RESULTS_LIMIT')) define('APP_GCAL_MAX_RESULTS_LIMIT', 500, true);
+if (!defined('APP_GCAL_MAX_RESULTS_LIMIT')) define('APP_GCAL_MAX_RESULTS_LIMIT', 500);
 
 if ( !class_exists( 'AppointmentsGcal' ) ) {
 class AppointmentsGcal {

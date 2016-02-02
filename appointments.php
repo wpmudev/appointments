@@ -4521,18 +4521,18 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 	/**
 	 *	Save a Paypal transaction to the database
 	 */
-	function record_transaction($app_id, $amount, $currency, $timestamp, $paypal_ID, $status, $note) {
+	function record_transaction($app_id, $amount, $currency, $timestamp, $paypal_id, $status, $note) {
 
 		$data = array();
 		$data['transaction_app_ID'] = $app_id;
-		$data['transaction_paypal_ID'] = $paypal_ID;
+		$data['transaction_paypal_ID'] = $paypal_id;
 		$data['transaction_stamp'] = $timestamp;
 		$data['transaction_currency'] = $currency;
 		$data['transaction_status'] = $status;
 		$data['transaction_total_amount'] = (int) round($amount * 100);
 		$data['transaction_note'] = $note;
 
-		$existing_id = $this->db->get_var( $this->db->prepare( "SELECT transaction_ID FROM {$this->transaction_table} WHERE transaction_paypal_ID = %s LIMIT 1", $paypal_ID ) );
+		$existing_id = $this->db->get_var( $this->db->prepare( "SELECT transaction_ID FROM {$this->transaction_table} WHERE transaction_paypal_ID = %s LIMIT 1", $paypal_id ) );
 
 		if(!empty($existing_id)) {
 			// Update
