@@ -196,7 +196,7 @@ class Appointments {
 	}
 
 	function maybe_upgrade() {
-		if ( isset( $_GET['app-clear'] ) ) {
+		if ( isset( $_GET['app-clear'] ) && current_user_can( 'manage_options' ) ) {
 			$this->flush_cache();
 		}
 
