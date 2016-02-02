@@ -46,7 +46,7 @@ $questions = array(
 	43 => __( 'I want to accept more than one appointment applications for each time slot. Entering higher numbers in "capacity" field in Services tab does not work. Why?', 'appointments' ),
 	44 => __( "How can I use HTML in emails?", 'appointments' ),
 	45 => __( "I have a time base of 10 minutes. I have services up to 480 minutes. How can I achieve this?", 'appointments' ),
-	46 => __( "How can I redirect a user after a confirmed appointment to a thank you page when payment is not required?", 'appointments' ),
+	46 => '',
 	47 => __( "How can I show hours instead of minutes in the front end when my services last more than an hour?", 'appointments' )
 );
 ?>
@@ -310,17 +310,6 @@ jQuery(document).ready(function($){
 		return 48;
 	}
 	add_filter( 'app_selectable_durations', 'increase_service_selections' );
-	</pre>
-	</li>
-
-	<li class="faq-answer" id='q46'>
-		<p> <?php _e('Add these codes inside functions.php and modify the example.com url as required:', 'appointments');?></p>
-
-	<pre>
-	function app_redirect( $script ){
-		return str_replace("window.location.href=app_location()", "window.location.href='http://example.com'", $script);
-	}
-	add_filter( 'app_footer_scripts', 'app_redirect' );
 	</pre>
 	</li>
 

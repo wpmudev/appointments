@@ -4561,6 +4561,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 }
 
 define('APP_PLUGIN_DIR', dirname(__FILE__), true);
+define('APP_ADMIN_PLUGIN_DIR', trailingslashit( dirname(__FILE__) ) . 'admin', true);
 define('APP_PLUGIN_FILE', __FILE__, true);
 
 require_once APP_PLUGIN_DIR . '/includes/default_filters.php';

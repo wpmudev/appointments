@@ -597,7 +597,7 @@ class Appointments_Admin {
 		<div class="wrap">
 			<div class="icon32" style="margin:10px 0 0 0"><img src="<?php echo $appointments->plugin_url . '/images/general.png'; ?>" /></div>
 			<h2><?php echo __('Appointments+ FAQ','appointments'); ?></h2>
-			<?php if (file_exists(APP_PLUGIN_DIR . '/includes/support/app-faq.php')) include(APP_PLUGIN_DIR . '/includes/support/app-faq.php'); ?>
+			<?php if (file_exists(APP_ADMIN_PLUGIN_DIR . '/app-faq.php')) include(APP_ADMIN_PLUGIN_DIR . '/app-faq.php'); ?>
 		</div>
 		<?php
 	}
