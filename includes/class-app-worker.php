@@ -681,8 +681,10 @@ function appointments_delete_worker( $worker_id ) {
 
 function appointments_get_worker_services( $worker_id ) {
 	$worker = appointments_get_worker( $worker_id );
-	if ( $worker )
+	if ( $worker ) {
 		return $worker->get_services();
+	}
+
 
 	return array();
 }
