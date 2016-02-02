@@ -30,6 +30,10 @@ window.onerror = function(errorMsg, file, lineNumber) {
 
 // Remove # from url so that page can be refreshed
 function app_location() {
+	if ( _appointments_data.thank_page_url ) {
+		return _appointments_data.thank_page_url;
+	}
+
 	var loc = window.location.href;
 	index = loc.indexOf("#");
 	if (index > 0) {

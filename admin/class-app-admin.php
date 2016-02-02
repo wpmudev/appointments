@@ -715,6 +715,7 @@ class Appointments_Admin {
 
 			$appointments->options['allow_cancel'] 				= @$_POST['allow_cancel'];
 			$appointments->options['cancel_page'] 				= @$_POST['cancel_page'];
+			$appointments->options['thank_page'] 				= @$_POST['thank_page'];
 
 			$appointments->options["records_per_page"]			= (int)trim( @$_POST["records_per_page"] );
 

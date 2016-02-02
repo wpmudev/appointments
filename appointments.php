@@ -2834,12 +2834,16 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		$this->script = apply_filters( 'app_footer_scripts', $this->script );
 
         if ( $this->script ) {
-            $script .= "<script type='text/javascript'>";
-            $script .= "var appDocReadyHandler = function($){";
-            $script .= $this->script;
-            $script .= "};";
-            $script .= "jQuery(document).ready(appDocReadyHandler)";
-            $script .= "</script>";
+	        ob_start();
+	        ?>
+	        <script type='text/javascript'>
+		        var appDocReadyHandler = function($) {
+					<?php echo $this->script; ?>
+		        };
+		        jQuery(document).ready(appDocReadyHandler);
+	        </script>
+	        <?php
+	        $script = ob_get_clean();
         }
 
 		echo $this->esc_rn( $script );
@@ -2881,10 +2885,13 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 
 		// TODO: consider this
 		wp_enqueue_script( 'app-js-check', $this->plugin_url . '/js/js-check.js', array('jquery'), $this->version);
+
+		$thank_page_id = ! empty( $this->options['thank_page'] ) ? absint( $this->options['thank_page'] ) : 0;
 		wp_localize_script( 'app-js-check', '_appointments_data',
 			array(
 				'ajax_url' => admin_url('admin-ajax.php'),
-				'root_url' => plugins_url('appointments/images/')
+				'root_url' => plugins_url('appointments/images/'),
+				'thank_page_url' => get_permalink( $thank_page_id )
 				)
 		);
 
