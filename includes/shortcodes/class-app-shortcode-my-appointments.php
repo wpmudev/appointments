@@ -63,6 +63,13 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 
 		global $wpdb, $current_user, $bp, $appointments;
 
+		if ( $args['client_id'] && get_userdata( $args['client_id'] ) ) {
+			$user_id = absint( $args['client_id'] );
+		}
+		else {
+			$user_id = $current_user->ID;
+		}
+
 		$statuses = explode( ',', $status );
 
 		if ( !is_array( $statuses ) || empty( $statuses ) )
@@ -81,10 +88,15 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 
 		// If this is a client shortcode
 		if ( !$provider ) {
-			if ( isset( $_COOKIE["wpmudev_appointments"] ) )
+			if ( $current_user->ID != $user_id ) {
+				$apps = wp_list_pluck( appointments_get_user_appointments( $user_id ), 'ID' );
+			}
+			elseif ( isset( $_COOKIE["wpmudev_appointments"] ) ) {
 				$apps = unserialize( stripslashes( $_COOKIE["wpmudev_appointments"] ) );
-			else
+			}
+			else {
 				$apps = array();
+			}
 
 			if ( !is_array( $apps) )
 				return '';
@@ -95,7 +107,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 			if ($strict) {
 				// Strict matching
 				if (is_user_logged_in()) {
-					$q = "user={$current_user->ID}"; // If the user is logged in, show just those apps
+					$q = "user={$user_id}"; // If the user is logged in, show just those apps
 				} else {
 					// Otherwise, deal with the cookie-cached ones
 					$apps = array_values(array_filter(array_map('intval', $apps)));
@@ -111,7 +123,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 
 				// But he may as well has appointments added manually (requires being registered user)
 				if ( is_user_logged_in() ) {
-					$q .= " OR user=".$current_user->ID;
+					$q .= " OR user=".$user_id;
 					$q = ltrim( $q, " OR" );
 				}
 			}
@@ -126,7 +138,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 			$provider_or_client = __('Client', 'appointments' );
 			// If no id is given, get current user
 			if ( !$provider_id )
-				$provider_id = $current_user->ID;
+				$provider_id = $user_id;
 			// Special case: If this is a single provider website, show staff appointments in his schedule too
 			$workers = appointments_get_workers();
 			if ( App_Roles::current_user_can('manage_options', App_Roles::CTX_STAFF) && ( ( $workers && count( $workers ) == 1 ) || !$workers ) )
@@ -135,7 +147,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		}
 
 		// Can worker confirm pending appointments?
-		if ( $_allow_confirm && appointments_is_worker( $current_user->ID ) && isset( $appointments->options['allow_worker_confirm'] ) && 'yes' == $appointments->options['allow_worker_confirm'] )
+		if ( $_allow_confirm && appointments_is_worker( $user_id ) && isset( $appointments->options['allow_worker_confirm'] ) && 'yes' == $appointments->options['allow_worker_confirm'] )
 			$allow_confirm = true;
 		else
 			$allow_confirm = false;

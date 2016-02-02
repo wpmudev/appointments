@@ -237,7 +237,7 @@ class Appointments_Admin {
 				<tr>
 					<th><label><?php _e("My Appointments", 'appointments'); ?></label></th>
 					<td>
-						<?php echo do_shortcode("[app_my_appointments allow_cancel=1 client_id=".$profileuser->ID." ".$gcal."]") ?>
+						<?php echo do_shortcode("[app_my_appointments allow_cancel=1 title='' client_id=".$profileuser->ID." ".$gcal."]") ?>
 					</td>
 				</tr>
 			<?php

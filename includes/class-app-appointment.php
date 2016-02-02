@@ -22,8 +22,8 @@ class Appointments_Appointment {
 	public $gcal_ID = '';
 	public $gcal_updated = '';
 
-	public function __construct( $worker ) {
-		foreach ( get_object_vars( $worker ) as $key => $value ) {
+	public function __construct( $appointment ) {
+		foreach ( get_object_vars( $appointment ) as $key => $value ) {
 			$this->$key = $this->_sanitize_field( $key, $value );
 		}
 	}
@@ -552,6 +552,39 @@ function appointments_get_appointments( $l, $s, $w, $week=0 ) {
 	wp_cache_set( 'app_get_appointments', $cached_queries );
 
 	return $filtered_apps;
+}
+
+/**
+ * @TODO Unit tests
+ *
+ * @param $user_id
+ *
+ * @return array
+ */
+function appointments_get_user_appointments( $user_id ) {
+	global $wpdb;
+
+	$user_id = absint( $user_id );
+	$user = get_userdata( $user_id );
+	if ( ! $user ) {
+		return array();
+	}
+
+	$table = appointments_get_table( 'appointments' );
+	$statuses_in = array( 'paid', 'confirmed' );
+	$where = "WHERE status IN ( '" . implode( "','", $statuses_in ) . "' ) AND user = $user_id";
+	$results = $wpdb->get_results( "SELECT * FROM $table $where" );
+
+	if ( ! $results ) {
+		return array();
+	}
+
+	$appointments = array();
+	foreach ( $results as $row ) {
+		$appointments[] = new Appointments_Appointment( $row );
+	}
+
+	return $appointments;
 }
 
 /**
