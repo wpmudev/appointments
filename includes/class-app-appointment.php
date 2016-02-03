@@ -185,10 +185,17 @@ function appointments_insert_appointment( $args ) {
 	$insert_wildcards[] = '%s';
 
 	$time = date( 'H:i', strtotime( $args['time'] ) );
-	$datetime = strtotime( str_replace(',', '', $appointments->to_us( $args['date'] ) ) . " " . $time );
-
-	$insert['start'] = date( 'Y-m-d H:i:s', $datetime );
-	$insert_wildcards[] = '%s';
+	if ( is_numeric( $args['date'] ) ) {
+		// It's a timestamp
+		$datetime = $args['date'];
+		$insert['start'] = date( 'Y-m-d H:i:s', $datetime );
+		$insert_wildcards[] = '%s';
+	}
+	else {
+		$datetime = strtotime( str_replace(',', '', $appointments->to_us( $args['date'] ) ) . " " . $time );
+		$insert['start'] = date( 'Y-m-d H:i:s', $datetime );
+		$insert_wildcards[] = '%s';
+	}
 
 	$insert['end'] = date( 'Y-m-d H:i:s', $datetime + ( $service->duration * 60 ) );
 	$insert_wildcards[] = '%s';
@@ -481,13 +488,27 @@ function appointments_update_appointment_status( $app_id, $new_status ) {
  * @param int $s Service ID
  * @param int $w Worker ID
  * @param int $week Week Number
- *
+ *$l, $s, $w, $week=0
  * @return array|null|object
  */
-function appointments_get_appointments( $l, $s, $w, $week=0 ) {
+function appointments_get_appointments( $args = array() ) {
 	global $wpdb;
 
-	$cache_key = md5( 'app-get-appointments-' . $l . '-' . $s . '-' . $w . '-' . $week );
+	$defaults = array(
+		'location' => false,
+		'service' => false,
+		'worker' => 0,
+		'week' => 0
+	);
+
+	$args = wp_parse_args( $args, $defaults );
+
+	$location_id = absint( $args['location'] );
+	$service_id = absint( $args['service'] );
+	$worker_id = absint( $args['worker'] );
+	$week = absint( $args['week'] );
+
+	$cache_key = md5( 'app-get-appointments-' . maybe_serialize( $args ) );
 	$cached_queries = wp_cache_get( 'app_get_appointments' );
 	if ( ! is_array( $cached_queries ) ) {
 		$cached_queries = array();
@@ -500,10 +521,10 @@ function appointments_get_appointments( $l, $s, $w, $week=0 ) {
 	$table = appointments_get_table( 'appointments' );
 	$where = array();
 
-	$where[] = $wpdb->prepare( "worker = %d", $w );
+	$where[] = $wpdb->prepare( "worker = %d", $worker_id );
 
-	if ( $l ) {
-		$where[] = $wpdb->prepare( "location = %d", $l );
+	if ( $location_id ) {
+		$where[] = $wpdb->prepare( "location = %d", $location_id );
 	}
 
 	if ( 0 == $week ) {
@@ -538,7 +559,6 @@ function appointments_get_appointments( $l, $s, $w, $week=0 ) {
 	}
 
 	// Now filter by service
-	$service_id = absint( $s );
 	$filtered_apps = array();
 	foreach ( $apps as $app ) {
 		/** @var Appointments_Appointment $app */
@@ -599,8 +619,9 @@ function appointments_clear_appointment_cache( $app_id = false ) {
 	else {
 		$table = appointments_get_table( 'appointments' );
 		$ids = $wpdb->get_col( "SELECT ID FROM $table" );
-		foreach ( $ids as $id )
+		foreach ( $ids as $id ) {
 			wp_cache_delete( $id, 'app_appointments' );
+		}
 	}
 
 

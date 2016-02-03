@@ -7,6 +7,8 @@
 class App_Appointments_Test extends App_UnitTestCase {
 
 	function test_insert_appointment() {
+		global $appointments;
+
 		define( 'APP_USE_LEGACY_USERDATA_OVERWRITING', true );
 
 		$worker_id = $this->factory->user->create_object( $this->factory->user->generate_args() );
@@ -88,6 +90,31 @@ class App_Appointments_Test extends App_UnitTestCase {
 		$app_id = appointments_insert_appointment( $args );
 		$app = appointments_get_appointment( $app_id );
 		$this->assertEquals( '', $app->email );
+
+		// Now tith timestamp
+		$args = array(
+			'user' => $user_id,
+			'email' => 'tester@tester.com',
+			'name' => 'Tester',
+			'phone' => '667788',
+			'address' => 'An address',
+			'city' => 'Madrid',
+			'service' => $service_id,
+			'worker' => $worker_id,
+			'price' => '90',
+			'date' => 1728729000,
+			'time' => '07:30',
+			'note' => 'It\'s a note',
+			'status' => 'paid',
+			'location' => 5,
+			'gcal_updated' => '2015-12-01',
+			'gcal_ID' => 'test'
+		);
+		$app_id = appointments_insert_appointment( $args );
+
+		$app = appointments_get_appointment( $app_id );
+		$this->assertEquals( '2024-10-12 10:30:00', $app->start );
+
 	}
 
 	function test_get_appointment() {
@@ -460,6 +487,266 @@ class App_Appointments_Test extends App_UnitTestCase {
 		sort( $apps );
 		$this->assertEquals( $apps, array( $app_id_1, $app_id_2 ) );
 
+
+	}
+
+	/**
+	 * @group get
+	 */
+	function test_get_appointments() {
+		global $appointments;
+		$worker_id_1 = $this->factory->user->create_object( $this->factory->user->generate_args() );
+		$worker_id_2 = $this->factory->user->create_object( $this->factory->user->generate_args() );
+		$worker_id_3 = $this->factory->user->create_object( $this->factory->user->generate_args() );
+		$user_id = $this->factory->user->create_object( $this->factory->user->generate_args() );
+
+		$service_args = array(
+			'name' => 'My Service',
+			'duration' => 90
+		);
+		$service_id_1 = appointments_insert_service( $service_args );
+
+		$service_args = array(
+			'name' => 'My Service 2',
+			'duration' => 90
+		);
+		$service_id_2 = appointments_insert_service( $service_args );
+
+		$worker_args = array(
+			'ID' => $worker_id_1,
+			'services_provided' => array( $service_id_1 )
+		);
+		appointments_insert_worker( $worker_args );
+
+		$worker_args = array(
+			'ID' => $worker_id_2,
+			'services_provided' => array( $service_id_1 )
+		);
+		appointments_insert_worker( $worker_args );
+
+		$worker_args = array(
+			'ID' => $worker_id_3,
+			'services_provided' => array( $service_id_2 )
+		);
+		appointments_insert_worker( $worker_args );
+
+		$args = array(
+			'user' => $user_id,
+			'email' => 'tester@tester.com',
+			'name' => 'Tester',
+			'phone' => '667788',
+			'address' => 'An address',
+			'city' => 'Madrid',
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'price' => '90',
+			'date' => 1734507000, // 2024-12-18 07:30
+			'time' => '07:30',
+			'note' => 'It\'s a note',
+			'status' => 'paid',
+			'location' => 5,
+		);
+		$week_app_1 = date( 'W', 1734507000 );
+		$app_id_1 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'user' => $user_id,
+			'email' => 'tester@tester.com',
+			'name' => 'Tester',
+			'phone' => '667788',
+			'address' => 'An address',
+			'city' => 'Madrid',
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'price' => '90',
+			'date' => 1728729000, // 2024-10-12 10:30
+			'time' => '07:30',
+			'note' => 'It\'s a note',
+			'status' => 'paid',
+			'location' => 5,
+		);
+		$week_app_2 = date( 'W', 1728729000 );
+		$app_id_2 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'user' => $user_id,
+			'email' => 'tester@tester.com',
+			'name' => 'Tester',
+			'phone' => '667788',
+			'address' => 'An address',
+			'city' => 'Madrid',
+			'service' => $service_id_1,
+			'worker' => $worker_id_2,
+			'price' => '90',
+			'date' => 1728729000, // 2024-10-12 10:30
+			'time' => '07:30',
+			'note' => 'It\'s a note',
+			'status' => 'paid',
+			'location' => 5,
+		);
+		$week_app_3 = date( 'W', 1728729000 );
+		$app_id_3 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'user' => $user_id,
+			'email' => 'tester@tester.com',
+			'name' => 'Tester',
+			'phone' => '667788',
+			'address' => 'An address',
+			'city' => 'Madrid',
+			'service' => $service_id_1,
+			'price' => '90',
+			'date' => 1728729000, // 2024-10-12 10:30
+			'time' => '07:30',
+			'note' => 'It\'s a note',
+			'status' => 'paid',
+			'location' => 5,
+		);
+		$week_app_4 = date( 'W', 1728729000 );
+		$app_id_4 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'user' => $user_id,
+			'email' => 'tester@tester.com',
+			'name' => 'Tester',
+			'phone' => '667788',
+			'address' => 'An address',
+			'city' => 'Madrid',
+			'worker' => $worker_id_3,
+			'service' => $service_id_2,
+			'price' => '90',
+			'date' => 1728729000, // 2024-10-12 10:30
+			'time' => '07:30',
+			'note' => 'It\'s a note',
+			'status' => 'paid',
+			'location' => 5,
+		);
+		$week_app_5 = date( 'W', 1728729000 );
+		$app_id_5 = appointments_insert_appointment( $args );
+
+		global $wpdb;
+		$table = appointments_get_table( 'appointments' );
+
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1
+		);
+		$apps = appointments_get_appointments( $args );
+		$this->assertCount( 2, $apps );
+
+		// Test deprecated function
+		$this->remove_deprecated_filters();
+		$deprecated_apps = $appointments->get_reserve_apps( 0, $service_id_1, $worker_id_1 );
+		$this->add_deprecated_filters();
+		$this->assertCount( 2, $deprecated_apps );
+
+		$args = array(
+			'worker' => $worker_id_1
+		);
+		$apps = appointments_get_appointments( $args );
+		$this->assertCount( 0, $apps );
+
+		// Test deprecated function
+		$this->remove_deprecated_filters();
+		$deprecated_apps = $appointments->get_reserve_apps( 0, 0, $worker_id_1 );
+		$this->add_deprecated_filters();
+		$this->assertCount( 0, $deprecated_apps );
+
+		$apps = appointments_get_appointments();
+		$this->assertCount( 0, $apps );
+
+		$args = array(
+			'worker' => $worker_id_2,
+			'service' => $service_id_1
+		);
+		$apps = appointments_get_appointments( $args );
+		$this->assertCount( 1, $apps );
+
+		// Test deprecated function
+		$this->remove_deprecated_filters();
+		$deprecated_apps = $appointments->get_reserve_apps( 0, $service_id_1, $worker_id_2 );
+		$this->add_deprecated_filters();
+		$this->assertCount( 1, $deprecated_apps );
+
+		$args = array(
+			'worker' => $worker_id_3,
+			'service' => $service_id_2
+		);
+		$apps = appointments_get_appointments( $args );
+		$this->assertCount( 1, $apps );
+
+		// Test deprecated function
+		$this->remove_deprecated_filters();
+		$deprecated_apps = $appointments->get_reserve_apps( 0, $service_id_2, $worker_id_3 );
+		$this->add_deprecated_filters();
+		$this->assertCount( 1, $deprecated_apps );
+
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'week' => $week_app_1
+		);
+		$apps = appointments_get_appointments( $args );
+		$this->assertCount( 1, $apps );
+
+		// Test deprecated function
+		$this->remove_deprecated_filters();
+		$deprecated_apps = $appointments->get_reserve_apps( 0, $service_id_1, $worker_id_1, $week_app_1 );
+		$this->add_deprecated_filters();
+		$this->assertCount( 1, $deprecated_apps );
+
+		$args = array(
+			'service' => $service_id_1
+		);
+		$apps = appointments_get_appointments( $args );
+		$this->assertCount( 1, $apps );
+
+		// Test deprecated function
+		$this->remove_deprecated_filters();
+		$deprecated_apps = $appointments->get_reserve_apps_by_service( 0, $service_id_1 );
+		$this->add_deprecated_filters();
+		$this->assertCount( 1, $deprecated_apps );
+
+	}
+
+	function test_get_client_name() {
+		global $appointments;
+		$worker_id_1 = $this->factory->user->create_object( $this->factory->user->generate_args() );
+		$user_id = $this->factory->user->create_object( $this->factory->user->generate_args() );
+
+		$service_args = array(
+			'name' => 'My Service',
+			'duration' => 90
+		);
+		$service_id_1 = appointments_insert_service( $service_args );
+
+
+		$worker_args = array(
+			'ID' => $worker_id_1,
+			'services_provided' => array( $service_id_1 )
+		);
+		appointments_insert_worker( $worker_args );
+
+		$args = array(
+			'user' => $user_id,
+			'email' => 'tester@tester.com',
+			'name' => 'Tester',
+			'phone' => '667788',
+			'address' => 'An address',
+			'city' => 'Madrid',
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'price' => '90',
+			'date' => 1734507000, // 2024-12-18 07:30
+			'time' => '07:30',
+			'note' => 'It\'s a note',
+			'status' => 'paid',
+			'location' => 5,
+		);
+		$app_id_1 = appointments_insert_appointment( $args );
+
+		$name = $appointments->get_client_name( $app_id_1 );
+		$this->assertContains( 'Tester', $name );
 
 	}
 

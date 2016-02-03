@@ -16,6 +16,8 @@ class Appointments_Admin {
 		add_action( 'personal_options_update', array( $this, 'save_profile') );
 		add_action( 'edit_user_profile_update', array( $this, 'save_profile') );
 
+		//include( APP_PLUGIN_DIR . '/admin/admin-helpers.php' );
+
 	}
 
 	/**
@@ -566,13 +568,7 @@ class Appointments_Admin {
 		return $r;
 	}
 
-	/**
-	 *	Creates the list for Appointments admin page
-	 */
-	function appointment_list() {
-		App_Template::admin_appointments_list();
 
-	}
 
 	function transactions () {
 		App_Template::admin_transactions_list();
@@ -612,15 +608,16 @@ class Appointments_Admin {
 		if ( !session_id() )
 			@session_start();
 
-		$page = add_menu_page('Appointments', __('Appointments','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_APPOINTMENTS),  'appointments', array(&$this,'appointment_list'),'dashicons-clock');
+		include_once( APP_PLUGIN_DIR . '/admin/pages/class-admin-appointments-page.php' );
+		$appointments_page = new Appointments_Admin_Appointments_Page();
 		add_submenu_page('appointments', __('Transactions','appointments'), __('Transactions','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_TRANSACTIONS), "app_transactions", array(&$this,'transactions'));
 		add_submenu_page('appointments', __('Settings','appointments'), __('Settings','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_SETTINGS), "app_settings", array(&$this,'settings'));
 		add_submenu_page('appointments', __('Shortcodes','appointments'), __('Shortcodes','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_SHORTCODES), "app_shortcodes", array(&$this,'shortcodes_page'));
 		add_submenu_page('appointments', __('FAQ','appointments'), __('FAQ','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_FAQ), "app_faq", array(&$this,'faq_page'));
 		// Add datepicker to appointments page
-		add_action( "admin_print_scripts-$page", array( &$this, 'admin_scripts' ) );
 
-		do_action('app-admin-admin_pages_added', $page);
+
+		do_action('app-admin-admin_pages_added', $appointments_page->page_id );
 
 		if ( isset($_POST["action_app"]) && !wp_verify_nonce($_POST['app_nonce'],'update_app_settings') ) {
 			add_action( 'admin_notices', array( &$this, 'warning' ) );
@@ -1072,7 +1069,6 @@ class Appointments_Admin {
 			wp_die( __('You do not have sufficient permissions to access this page.','appointments') );
 		}
 		$appointments->get_lsw();
-		global $wpdb;
 		?>
 		<div class="wrap">
 			<div class="icon32" style="margin:10px 0 0 0"><img src="<?php echo $appointments->plugin_url . '/images/general.png'; ?>" /></div>

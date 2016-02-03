@@ -160,7 +160,7 @@ class Appointments_AJAX {
 		$app_id = $_POST["app_id"];
 		$end_datetime = '';
 		if ( $app_id ) {
-			$app = $wpdb->get_row( $wpdb->prepare("SELECT * FROM {$appointments->app_table} WHERE ID=%d", $app_id) );
+			$app = appointments_get_appointment( $app_id );
 			$start_date_timestamp = date("Y-m-d", strtotime($app->start));
 			if ( $appointments->locale_error ) {
 				$start_date = date( $safe_date_format, strtotime( $app->start ) );

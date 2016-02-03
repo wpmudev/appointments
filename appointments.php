@@ -468,7 +468,14 @@ class Appointments {
 	 * @deprecated since 1.5.6.1
 	 */
 	function get_reserve_apps( $l, $s, $w, $week=0 ) {
-		return appointments_get_appointments( $l, $s, $w, $week );
+		_deprecated_function( __FUNCTION__, '1.5.7.1', 'appointments_get_appointments()' );
+		$args = array(
+			'location' => $l,
+			'service' => $s,
+			'week' => $week,
+			'worker' => $w
+		);
+		return appointments_get_appointments( $args );
 	}
 
 	/**
@@ -483,7 +490,13 @@ class Appointments {
 			if ( $services ) {
 				$apps = array();
 				foreach ( $services as $service ) {
-					$apps_worker = $this->get_reserve_apps( $l, $service->ID, $w, $week );
+					$args = array(
+						'location' => $l,
+						'service' => $service->ID,
+						'worker' => $w,
+						'week' => $week
+					);
+					$apps_worker = appointments_get_appointments( $args );
 					if ( $apps_worker )
 						$apps = array_merge( $apps, $apps_worker );
 				}
@@ -495,31 +508,21 @@ class Appointments {
 
 	/**
 	 * Return reserve appointments by service ID
+	 *
+	 * @deprecated since 1.5.7.1
+	 *
 	 * @param week: Optionally appointments only in the number of week in ISO 8601 format (since 1.2.3)
 	 * @since 1.1.3
 	 * @return array of objects
 	 */
 	function get_reserve_apps_by_service( $l, $s, $week=0 ) {
-		if ( false === $apps ) {
-			$workers = appointments_get_workers_by_service( $s );
-			$apps = array();
-			if ( $workers ) {
-				foreach ( $workers as $worker ) {
-					$apps_service = $this->get_reserve_apps( $l, $s, $worker->ID, $week );
-					if ( $apps_service )
-						$apps = array_merge( $apps, $apps_service );
-				}
-			}
-			// Also include appointments by general staff for this service
-			$apps_service_0 = $this->get_reserve_apps( $l, $s, 0, $week );
-			if ( $apps_service_0 )
-				$apps = array_merge( $apps, $apps_service_0 );
-
-			// Remove duplicates
-			$apps = $this->array_unique_object_by_ID( $apps );
-
-		}
-		return $apps;
+		_deprecated_function( __FUNCTION__, '1.5.7.1', 'appointments_get_appointments()' );
+		$args = array(
+			'location' => $l,
+			'service' => $s,
+			'week' => $week
+		);
+		return appointments_get_appointments( $args );
 	}
 
 
@@ -688,8 +691,8 @@ class Appointments {
 	function get_client_name( $app_id ) {
 		$name = '';
 		// This is only used on admin side, so an optimization is not required.
-		$result = $this->db->get_row( $this->db->prepare("SELECT * FROM {$this->app_table} WHERE ID=%d", $app_id) );
-		if ( $result !== null ) {
+		$result = appointments_get_appointment( $app_id );
+		if ( $result ) {
 			// Client can be a user
 			if ( $result->user ) {
 				$userdata = get_userdata( $result->user );
@@ -2446,7 +2449,12 @@ class Appointments {
 						$services_provided = $worker->services_provided;
 						if ( $services_provided && is_array( $services_provided ) && !empty( $services_provided ) ) {
 							foreach ( $services_provided as $service_ID ) {
-								$apps_service_0 = $this->get_reserve_apps( $this->location, $service_ID, 0, $week );
+								$args = array(
+									'location' => $this->location,
+									'service' => $service_ID,
+									'week' => $week
+								);
+								$apps_service_0 = appointments_get_appointments( $args );
 								if ( $apps_service_0 && is_array( $apps_service_0 ) )
 									$apps = array_merge( $apps, $apps_service_0 );
 							}
@@ -3117,7 +3125,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		if ( !isset( $this->options["send_confirmation"] ) || 'yes' != $this->options["send_confirmation"] )
 			return;
 		global $wpdb;
-		$r = $wpdb->get_row( $wpdb->prepare("SELECT * FROM {$this->app_table} WHERE ID=%d", $app_id) );
+		$r = appointments_get_appointment( $app_id );
 		if ( $r != null ) {
 
 			$_REQUEST["app_location_id"] = 0;
@@ -3188,8 +3196,8 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		if ( !$cancel && !isset( $this->options["send_notification"] ) || 'yes' != $this->options["send_notification"] )
 			return;
 		global $wpdb;
-		$r = $wpdb->get_row( $wpdb->prepare("SELECT * FROM {$this->app_table} WHERE ID=%d", $app_id) );
-		if ( $r != null ) {
+		$r = appointments_get_appointment( $app_id );
+		if ( $r ) {
 
 			$admin_email = apply_filters( 'app_notification_email', $this->get_admin_email( ), $r );
 
@@ -3253,8 +3261,10 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 					$this->message_headers()
 				);
 
-				if ( $mail_result && isset( $this->options["log_emails"] ) && 'yes' == $this->options["log_emails"] )
+				if ( $mail_result && isset( $this->options["log_emails"] ) && 'yes' == $this->options["log_emails"] ) {
 					$this->log( sprintf( __('Notification message sent to %s for appointment ID:%s','appointments'), $this->get_worker_email( $r->worker ), $app_id ) );
+					do_action( 'appointments_worker_notification_sent', $body, $r, $app_id );
+				}
 			}
 		}
 		return true;
