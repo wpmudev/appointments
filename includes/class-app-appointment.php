@@ -555,8 +555,6 @@ function appointments_get_appointments( $l, $s, $w, $week=0 ) {
 }
 
 /**
- * @TODO Unit tests
- *
  * @param $user_id
  *
  * @return array

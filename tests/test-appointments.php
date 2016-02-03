@@ -386,4 +386,81 @@ class App_Appointments_Test extends App_UnitTestCase {
 
 	}
 
+	function test_get_user_appointments() {
+		$worker_id = $this->factory->user->create_object( $this->factory->user->generate_args() );
+		$user_id = $this->factory->user->create_object( $this->factory->user->generate_args() );
+
+		$service_args = array(
+			'name' => 'My Service',
+			'duration' => 90
+		);
+		$service_id = appointments_insert_service( $service_args );
+
+		$worker_args = array(
+			'ID' => $worker_id,
+			'services_provided' => array( $service_id )
+		);
+		appointments_insert_worker( $worker_args );
+
+		$args = array(
+			'user' => $user_id,
+			'email' => 'tester@tester.com',
+			'name' => 'Tester',
+			'phone' => '667788',
+			'address' => 'An address',
+			'city' => 'Madrid',
+			'service' => $service_id,
+			'worker' => $worker_id,
+			'price' => '90',
+			'date' => 'December 18, 2024',
+			'time' => '07:30',
+			'note' => 'It\'s a note',
+			'status' => 'paid',
+			'location' => 5,
+		);
+		$app_id_1 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'user' => $user_id,
+			'email' => 'tester@tester.com',
+			'name' => 'Tester',
+			'phone' => '667788',
+			'address' => 'An address',
+			'city' => 'Madrid',
+			'service' => $service_id,
+			'worker' => $worker_id,
+			'price' => '90',
+			'date' => 'December 19, 2024',
+			'time' => '07:30',
+			'note' => 'It\'s a note',
+			'status' => 'paid',
+			'location' => 5,
+		);
+		$app_id_2 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'user' => $user_id,
+			'email' => 'tester@tester.com',
+			'name' => 'Tester',
+			'phone' => '667788',
+			'address' => 'An address',
+			'city' => 'Madrid',
+			'service' => $service_id,
+			'worker' => $worker_id,
+			'price' => '90',
+			'date' => 'December 19, 2024',
+			'time' => '07:30',
+			'note' => 'It\'s a note',
+			'status' => 'pending', // Not confirmed
+			'location' => 5,
+		);
+		$app_id_3 = appointments_insert_appointment( $args );
+
+		$apps = wp_list_pluck( appointments_get_user_appointments( $user_id ), 'ID' );
+		sort( $apps );
+		$this->assertEquals( $apps, array( $app_id_1, $app_id_2 ) );
+
+
+	}
+
 }
