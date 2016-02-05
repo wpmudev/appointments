@@ -63,7 +63,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 
 		global $wpdb, $current_user, $bp, $appointments;
 
-		if ( $args['client_id'] && get_userdata( $args['client_id'] ) ) {
+		if ( isset( $args['client_id'] ) && get_userdata( $args['client_id'] ) ) {
 			$user_id = absint( $args['client_id'] );
 		}
 		else {

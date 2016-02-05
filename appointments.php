@@ -1644,7 +1644,6 @@ class Appointments {
 	 * Helper function to create a time table for monthly schedule
 	 */
 	function get_timetable( $day_start, $capacity, $schedule_key=false ) {
-
 		$timetable_key = $day_start . '-' . $capacity;
 
 		if ( ! $schedule_key ) {
@@ -1703,7 +1702,7 @@ class Appointments {
 		// mainly for service duration based calculus start/stop times
 		$step = apply_filters('app-timetable-step_increment', $step);
 
-		$timetable_key .= '-' . $step;
+		$timetable_key .= '-' . $step . '-' . $this->service;
 
 		// Are we looking to today?
 		// If today is a working day, shows its free times by default

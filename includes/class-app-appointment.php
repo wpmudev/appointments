@@ -508,47 +508,52 @@ function appointments_get_appointments( $args = array() ) {
 	$worker_id = absint( $args['worker'] );
 	$week = absint( $args['week'] );
 
-	$cache_key = md5( 'app-get-appointments-' . maybe_serialize( $args ) );
+	$cache_args = $args;
+	unset( $cache_args['service'] ); // We don't query based on service
+
+	$cache_key = md5( 'app-get-appointments-' . maybe_serialize( $cache_args ) );
 	$cached_queries = wp_cache_get( 'app_get_appointments' );
 	if ( ! is_array( $cached_queries ) ) {
 		$cached_queries = array();
 	}
 
 	if ( isset( $cached_queries[ $cache_key ] ) ) {
-		return $cached_queries[ $cache_key ];
-	}
-
-	$table = appointments_get_table( 'appointments' );
-	$where = array();
-
-	$where[] = $wpdb->prepare( "worker = %d", $worker_id );
-
-	if ( $location_id ) {
-		$where[] = $wpdb->prepare( "location = %d", $location_id );
-	}
-
-	if ( 0 == $week ) {
-		$where[] = "(status='pending' OR status='paid' OR status='confirmed' OR status='reserved')";
+		$apps = $cached_queries[ $cache_key ];
 	}
 	else {
-		// @FIX: Problem: an appointment might already be ticked as "completed",
-		// because of it's start time being in the past. Its end time, however, can still easily be
-		// in the future. For long-running appointments (e.g. 2-3h) this could break the schedule slots
-		// and show a registered- and paid for- slot as "available", when it's actually not.
-		// E.g. http://premium.wpmudev.org/forums/topic/appointments-booking-conflictoverlapping-bookings
-		$where[] = "(status='pending' OR status='paid' OR status='confirmed' OR status='reserved' OR status='completed')";
+		$table = appointments_get_table( 'appointments' );
+		$where = array();
 
-		$where[] = $wpdb->prepare( "WEEKOFYEAR(start)=%d", $week );
-		// *ONLY* applied to weekly-scoped data gathering, because otherwise this would possibly
-		// return all kinds of irrelevant data (appointments passed LONG time ago).
-		// End @FIX
+		$where[] = $wpdb->prepare( "worker = %d", $worker_id );
+
+		if ( $location_id ) {
+			$where[] = $wpdb->prepare( "location = %d", $location_id );
+		}
+
+		if ( 0 == $week ) {
+			$where[] = "(status='pending' OR status='paid' OR status='confirmed' OR status='reserved')";
+		}
+		else {
+			// @FIX: Problem: an appointment might already be ticked as "completed",
+			// because of it's start time being in the past. Its end time, however, can still easily be
+			// in the future. For long-running appointments (e.g. 2-3h) this could break the schedule slots
+			// and show a registered- and paid for- slot as "available", when it's actually not.
+			// E.g. http://premium.wpmudev.org/forums/topic/appointments-booking-conflictoverlapping-bookings
+			$where[] = "(status='pending' OR status='paid' OR status='confirmed' OR status='reserved' OR status='completed')";
+
+			$where[] = $wpdb->prepare( "WEEKOFYEAR(start)=%d", $week );
+			// *ONLY* applied to weekly-scoped data gathering, because otherwise this would possibly
+			// return all kinds of irrelevant data (appointments passed LONG time ago).
+			// End @FIX
+		}
+
+		$where = "WHERE " . implode( " AND ", $where );
+
+		$query = "SELECT * FROM $table $where";
+
+		$apps = $wpdb->get_results( $query );
 	}
 
-	$where = "WHERE " . implode( " AND ", $where );
-
-	$query = "SELECT * FROM $table $where";
-
-	$apps = $wpdb->get_results( $query );
 
 	if ( empty( $apps ) ) {
 		$apps = array();
@@ -557,6 +562,9 @@ function appointments_get_appointments( $args = array() ) {
 	foreach ( $apps as $app ) {
 		wp_cache_add( $app->ID, $app, 'app_appointments' );
 	}
+
+	$cached_queries[ $cache_key ] = $apps;
+	wp_cache_set( 'app_get_appointments', $cached_queries );
 
 	// Now filter by service
 	$filtered_apps = array();
@@ -568,8 +576,7 @@ function appointments_get_appointments( $args = array() ) {
 		}
 	}
 
-	$cached_queries[ $cache_key ] = $filtered_apps;
-	wp_cache_set( 'app_get_appointments', $cached_queries );
+
 
 	return $filtered_apps;
 }

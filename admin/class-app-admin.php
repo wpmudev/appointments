@@ -620,7 +620,7 @@ class Appointments_Admin {
 		do_action('app-admin-admin_pages_added', $appointments_page->page_id );
 
 		if ( isset($_POST["action_app"]) && !wp_verify_nonce($_POST['app_nonce'],'update_app_settings') ) {
-			add_action( 'admin_notices', array( &$this, 'warning' ) );
+			add_action( 'admin_notices', array( &$appointments, 'warning' ) );
 			return;
 		}
 
