@@ -179,7 +179,7 @@ jQuery( document).ready( function( $ ) {
             }
 
             $.post(AppShortcodeConfirmation.ajaxurl, post_data, function(response) {
-                $(".wait_img").remove();
+                $(".wait_img").hide();
                 if ( response && response.error ) {
                     alert(response.error);
                 }
