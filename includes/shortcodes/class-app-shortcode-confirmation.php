@@ -216,6 +216,7 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 			'askPhone' => $appointments->options["ask_phone"],
 			'askAddress' => $appointments->options["ask_address"],
 			'askCity' => $appointments->options["ask_city"],
+			'askNote' => $appointments->options["ask_note"],
 			'askGCal' => isset( $appointments->options["gcal"] ) && 'yes' == $appointments->options["gcal"],
 			'warningText' => esc_js( $args['warning_text'] ),
 			'confirmationText' => esc_js( $args['confirm_text'] ),
