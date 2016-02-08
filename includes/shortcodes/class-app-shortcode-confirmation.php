@@ -182,9 +182,11 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 						<?php echo $args['gcal']; ?>
 					</label>
 				</div>
-				<?php $ret = apply_filters( 'app_additional_fields', ob_get_clean() ); ?>
-
-				<?php ob_start(); ?>
+				<?php
+					$ret = ob_get_clean();
+					$ret = apply_filters( 'app_additional_fields', $ret );
+					ob_start();
+				?>
 
 				<div style="clear:both"></div>
 
@@ -197,8 +199,9 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 		</div>
 
 		<?php
-
-		$ret  = apply_filters( 'app_confirmation_fields', $ret . ob_get_clean() );
+		$ret_confirmation_fields = ob_get_clean();
+		$ret_confirmation_fields = apply_filters( 'app_confirmation_fields', $ret_confirmation_fields );
+		$ret = $ret . $ret_confirmation_fields;
 
 		wp_enqueue_script( 'app-shortcode-confirmation', appointments_plugin_url() . 'includes/shortcodes/js/app-confirmation.js', array( 'jquery' ) );
 
