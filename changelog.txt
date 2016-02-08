@@ -1,3 +1,34 @@
+2016-02-08 - 1.5.8
+-------------------------------
+- New: New setting to redirect to a Thank You page after appointment confirmation
+- New: appointments_worker_notification_sent action
+- Fixed: Customer Notes field not showing up in confirmation form
+- Fixed: FAQ questions were not correctly indexed in admin page
+- Fixed: Appointments durations timetables calculations issue when Services had different durations
+- Fixed: Headers already sent error when updating pages in some cases (AJAX Search Pro Plugin conflict)
+- Fixed: When admin edit a user profile, admin appointments were displayed instead of the user's
+- Fixed: case insensitive variables/constants for HipHop environments
+- Enhance: More performance improvements
+- Enhancement: appointments_get_appointments() function allows now an array of arguments
+- Enhancement: appointments_insert_appointment() allows now a timestamp date
+- Enhancement: [app_worker_monthly_calendar] ordering by start ASC date by default
+- Enhancement: Some other minor improvements
+- Deprecated: Appointments::get_reserve_apps()
+- Deprecated: Appointments::get_reserve_apps_by_service()
+- Deprecated: Appointments::is_worker()
+- Deprecated: Appointments::change_status()
+- Deprecated: Appointments::get_service()
+- Deprecated: Appointments::get_app()
+- Deprecated: Appointments::get_services()
+- Deprecated: Appointments::is_worker()
+- Deprecated: Appointments::get_workers()
+- Deprecated: Appointments::get_first_service_id()
+- Deprecated: Appointments::get_statuses()
+- Deprecated: Appointments::is_single_worker()
+- Deprecated: Appointments::get_workers_by_service()
+- Deprecated: Appointments::get_worker_name()
+- Deprecated: app_change_status Action
+
 2016-01-28 - 1.5.7
 -------------------------------
 - Fixed: Timetables cache issue when services had different durations
