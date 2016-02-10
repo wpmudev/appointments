@@ -64,6 +64,10 @@ class App_BuddyPress {
 			exit;
 		}
 		// Checks are ok, let's save settings.
+		if ( ! is_object( $this->_core->admin ) ) {
+			$this->_core->load_admin();
+		}
+
 		$this->_core->admin->save_profile( $user_id );
 	}
 

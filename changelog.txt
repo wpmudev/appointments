@@ -1,7 +1,8 @@
-2016-02-08 - 1.5.8
+2016-02-10 - 1.5.8
 -------------------------------
 - New: New setting to redirect to a Thank You page after appointment confirmation
 - New: appointments_worker_notification_sent action
+- Fixed: Error when editing a profile in BuddyPress
 - Fixed: Customer Notes field not showing up in confirmation form
 - Fixed: FAQ questions were not correctly indexed in admin page
 - Fixed: Appointments durations timetables calculations issue when Services had different durations

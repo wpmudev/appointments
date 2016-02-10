@@ -101,8 +101,10 @@ class Appointments {
 		include_once( 'includes/class-app-worker.php' );
 		include_once( 'includes/class-app-appointment.php' );
 
-		include_once( 'admin/class-app-admin.php' );
-		$this->admin = new Appointments_Admin();
+		if ( is_admin() ) {
+			$this->load_admin();
+		}
+
 
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			include_once( 'includes/class-app-ajax.php' );
@@ -191,6 +193,11 @@ class Appointments {
 		if ( isset( $this->options['payment_required'] ) && 'yes' == $this->options['payment_required'] && !empty($this->options['allow_free_autoconfirm'])) {
 			if (!defined('APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM')) define('APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM', true);
 		}
+	}
+
+	public function load_admin() {
+		include_once( 'admin/class-app-admin.php' );
+		$this->admin = new Appointments_Admin();
 	}
 
 	function maybe_upgrade() {
