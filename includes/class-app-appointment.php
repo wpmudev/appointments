@@ -79,7 +79,7 @@ function appointments_get_appointment( $app_id ) {
 			)
 		);
 
-		wp_cache_add( $app_id, 'app_appointments' );
+		wp_cache_add( $app_id, $app, 'app_appointments' );
 	}
 
 
