@@ -750,4 +750,410 @@ class App_Appointments_Test extends App_UnitTestCase {
 
 	}
 
+
+	function test_get_expired_appointments() {
+		global $appointments;
+
+		$worker_id_1 = $this->factory->user->create_object( $this->factory->user->generate_args() );
+		$user_id = $this->factory->user->create_object( $this->factory->user->generate_args() );
+
+		$service_args = array(
+			'name' => 'My Service',
+			'duration' => 90
+		);
+		$service_id_1 = appointments_insert_service( $service_args );
+
+
+		$worker_args = array(
+			'ID' => $worker_id_1,
+			'services_provided' => array( $service_id_1 )
+		);
+		appointments_insert_worker( $worker_args );
+
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'status' => 'confirmed',
+			'date' => strtotime( '2016-01-01 10:00:00' ) // Past date
+		);
+		$app_id_1 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'status' => 'paid',
+			'date' => strtotime( '2016-01-01 11:00:00' ) // Past date
+		);
+		$app_id_2 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'status' => 'completed',
+			'date' => strtotime( '2016-01-01 11:00:00' ) // Past date but completed
+		);
+		$app_id_3 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'status' => 'paid',
+			'date' => strtotime( '2030-01-01 11:00:00' ) // Future date
+		);
+		$app_id_4 = appointments_insert_appointment( $args );
+
+		$expired = appointments_get_expired_appointments();
+		$this->assertCount( 2, $expired );
+
+		$app_ids = wp_list_pluck( $expired, 'ID' );
+		sort( $app_ids );
+		$this->assertEquals( array( $app_id_1, $app_id_2 ), $app_ids );
+
+		// Check the cache
+		$cached_data_app_1 = wp_cache_get( $app_id_1, 'app_appointments' );
+		$this->assertEquals( new Appointments_Appointment( $cached_data_app_1 ), $expired[0] );
+
+		// Now insert a pending appointment that is too old
+		// And another one that is not too old
+		$current_time = current_time( 'timestamp' );
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'status' => 'pending',
+			'date' => strtotime( '2030-01-01 11:00:00' ), // Future date
+			'created' => date( 'Y-m-d H:i:s', $current_time - 10 ) // Only 10 seconds old
+		);
+		$app_id_5 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'status' => 'pending',
+			'date' => strtotime( '2030-01-01 11:00:00' ), // Future date
+			'created' => date( 'Y-m-d H:i:s', $current_time - ( 80 * 60 ) ) // 80 minutes old
+		);
+		$app_id_6 = appointments_insert_appointment( $args );
+
+		// Search also for pending with more than 60 minutes old
+		$expired = appointments_get_expired_appointments( 60 * 60 );
+		$this->assertCount( 3, $expired );
+
+		$app_ids = wp_list_pluck( $expired, 'ID' );
+		sort( $app_ids );
+		$this->assertEquals( array( $app_id_1, $app_id_2, $app_id_6 ), $app_ids );
+
+		// Test the old function
+		$appointments->options["clear_time"] = 60;
+		$appointments->local_time = $current_time;
+		$appointments->remove_appointments();
+
+		$expired = appointments_get_expired_appointments( 60 * 60 );
+		$this->assertEmpty( $expired );
+		// Check that we haven't deleted others
+		$this->assertInstanceOf( 'Appointments_Appointment', appointments_get_appointment( $app_id_3 ) );
+
+		$this->assertEquals( 'completed', appointments_get_appointment( $app_id_1 )->status );
+		$this->assertEquals( 'completed', appointments_get_appointment( $app_id_2 )->status );
+		$this->assertEquals( 'removed', appointments_get_appointment( $app_id_6 )->status );
+
+	}
+
+	function test_appointments_cache() {
+		$worker_id_1 = $this->factory->user->create_object( $this->factory->user->generate_args() );
+		$user_id = $this->factory->user->create_object( $this->factory->user->generate_args() );
+
+		$service_args = array(
+			'name' => 'My Service',
+			'duration' => 90
+		);
+		$service_id_1 = appointments_insert_service( $service_args );
+
+
+		$worker_args = array(
+			'ID' => $worker_id_1,
+			'services_provided' => array( $service_id_1 )
+		);
+		appointments_insert_worker( $worker_args );
+
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'status' => 'paid',
+		);
+		$app_id_1 = appointments_insert_appointment( $args );
+		$app = appointments_get_appointment( $app_id_1 );
+		$cached_data = wp_cache_get( $app_id_1, 'app_appointments' );
+
+		$this->assertEquals( new Appointments_Appointment( $cached_data ), $app );
+	}
+
+	function test_count_appointments() {
+		$worker_id_1 = $this->factory->user->create_object( $this->factory->user->generate_args() );
+		$user_id = $this->factory->user->create_object( $this->factory->user->generate_args() );
+
+		$service_args = array(
+			'name' => 'My Service',
+			'duration' => 90
+		);
+		$service_id_1 = appointments_insert_service( $service_args );
+
+
+		$worker_args = array(
+			'ID' => $worker_id_1,
+			'services_provided' => array( $service_id_1 )
+		);
+		appointments_insert_worker( $worker_args );
+
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'status' => 'confirmed',
+		);
+		$app_id_1 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'status' => 'paid',
+		);
+		$app_id_2 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'status' => 'completed',
+		);
+		$app_id_3 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'status' => 'paid',
+		);
+		$app_id_4 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'status' => 'reserved',
+		);
+		$app_id_5 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'status' => 'removed',
+		);
+		$app_id_6 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'status' => 'completed',
+		);
+		$app_id_7 = appointments_insert_appointment( $args );
+
+		$result = appointments_count_appointments();
+		$this->assertEquals( 0, $result['pending'] );
+		$this->assertEquals( 1, $result['confirmed'] );
+		$this->assertEquals( 2, $result['paid'] );
+		$this->assertEquals( 2, $result['completed'] );
+		$this->assertEquals( 1, $result['reserved'] );
+		$this->assertEquals( 1, $result['removed'] );
+
+		appointments_delete_appointment( $app_id_6 );
+		$result = appointments_count_appointments();
+		$this->assertEquals( 0, $result['removed'] );
+
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'status' => 'pending',
+		);
+		$app_id_8 = appointments_insert_appointment( $args );
+		$result = appointments_count_appointments();
+		$this->assertEquals( 1, $result['pending'] );
+	}
+
+	function test_get_sent_worker_hours() {
+		$worker_id_1 = $this->factory->user->create_object( $this->factory->user->generate_args() );
+		$user_id = $this->factory->user->create_object( $this->factory->user->generate_args() );
+
+		$service_args = array(
+			'name' => 'My Service',
+			'duration' => 90
+		);
+		$service_id_1 = appointments_insert_service( $service_args );
+
+
+		$worker_args = array(
+			'ID' => $worker_id_1,
+			'services_provided' => array( $service_id_1 )
+		);
+		appointments_insert_worker( $worker_args );
+
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'status' => 'confirmed',
+		);
+		$app_id_1 = appointments_insert_appointment( $args );
+		appointments_update_appointment( $app_id_1, array( 'sent_worker' => ':1:2:4:' ) );
+		$app = appointments_get_appointment( $app_id_1 );
+		$this->assertEquals( $app->get_sent_worker_hours(), array( 1, 2, 4 ) );
+
+		appointments_update_appointment( $app_id_1, array( 'sent_worker' => array( 1, 2, 4, 6 ) ) );
+		$app = appointments_get_appointment( $app_id_1 );
+		$this->assertEquals( $app->get_sent_worker_hours(), array( 1, 2, 4, 6 ) );
+	}
+
+	function test_get_sent_user_hours() {
+		$worker_id_1 = $this->factory->user->create_object( $this->factory->user->generate_args() );
+		$user_id = $this->factory->user->create_object( $this->factory->user->generate_args() );
+
+		$service_args = array(
+			'name' => 'My Service',
+			'duration' => 90
+		);
+		$service_id_1 = appointments_insert_service( $service_args );
+
+
+		$worker_args = array(
+			'ID' => $worker_id_1,
+			'services_provided' => array( $service_id_1 )
+		);
+		appointments_insert_worker( $worker_args );
+
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'status' => 'confirmed',
+		);
+		$app_id_1 = appointments_insert_appointment( $args );
+		appointments_update_appointment( $app_id_1, array( 'sent' => ':1:2:4:' ) );
+		$app = appointments_get_appointment( $app_id_1 );
+		$this->assertEquals( $app->get_sent_user_hours(), array( 1, 2, 4 ) );
+
+		appointments_update_appointment( $app_id_1, array( 'sent' => array( 1, 2, 4, 6 ) ) );
+		$app = appointments_get_appointment( $app_id_1 );
+		$this->assertEquals( $app->get_sent_user_hours(), array( 1, 2, 4, 6 ) );
+	}
+
+	/** OLD QUERIES **/
+	function test_update_appointment_sent_worker_old() {
+		global $wpdb;
+
+		$worker_id_1 = $this->factory->user->create_object( $this->factory->user->generate_args() );
+		$user_id = $this->factory->user->create_object( $this->factory->user->generate_args() );
+
+		$service_args = array(
+			'name' => 'My Service',
+			'duration' => 90
+		);
+		$service_id_1 = appointments_insert_service( $service_args );
+
+
+		$worker_args = array(
+			'ID' => $worker_id_1,
+			'services_provided' => array( $service_id_1 )
+		);
+		appointments_insert_worker( $worker_args );
+
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'status' => 'confirmed',
+		);
+		$app_id_1 = appointments_insert_appointment( $args );
+
+		// See Appointments::send_reminder_worker()
+		$hours = array( 4, 2, 1 );
+		foreach ( $hours as $hour ) {
+			$r = appointments_get_appointment( $app_id_1 );
+			$wpdb->update(
+				appointments_get_table( 'appointments' ),
+				array('sent_worker' => rtrim($r->sent_worker, ":") . ":" . trim($hour) . ":"),
+				array('ID' => $r->ID),
+				array('%s')
+			);
+			appointments_clear_appointment_cache();
+		}
+
+		// It must result in the same thing that:
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'status' => 'confirmed',
+		);
+		$app_id_2 = appointments_insert_appointment( $args );
+		appointments_update_appointment( $app_id_2, array( 'sent_worker' => $hours ) );
+
+		$app_1 = appointments_get_appointment( $app_id_1 );
+		$app_2 = appointments_get_appointment( $app_id_2 );
+
+		$this->assertEquals( $app_1->sent_worker, ':4:2:1:' );
+		$this->assertEquals( $app_1->get_sent_worker_hours(), array( 4,2,1 ) );
+		$this->assertEquals( $app_1->sent_worker, $app_2->sent_worker );
+		$this->assertEquals( $app_1->get_sent_worker_hours(), $app_2->get_sent_worker_hours() );
+
+	}
+
+	function test_update_appointment_sent_user_old() {
+		global $wpdb;
+
+		$worker_id_1 = $this->factory->user->create_object( $this->factory->user->generate_args() );
+		$user_id = $this->factory->user->create_object( $this->factory->user->generate_args() );
+
+		$service_args = array(
+			'name' => 'My Service',
+			'duration' => 90
+		);
+		$service_id_1 = appointments_insert_service( $service_args );
+
+
+		$worker_args = array(
+			'ID' => $worker_id_1,
+			'services_provided' => array( $service_id_1 )
+		);
+		appointments_insert_worker( $worker_args );
+
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'status' => 'confirmed',
+		);
+		$app_id_1 = appointments_insert_appointment( $args );
+
+		// See Appointments::send_reminder()
+		$hours = array( 4, 2, 1 );
+		foreach ( $hours as $hour ) {
+			$r = appointments_get_appointment( $app_id_1 );
+			$wpdb->update(
+				appointments_get_table( 'appointments' ),
+				array('sent' => rtrim($r->sent, ":") . ":" . trim($hour) . ":"),
+				array('ID' => $r->ID),
+				array('%s')
+			);
+			appointments_clear_appointment_cache();
+		}
+
+		// It must result in the same thing that:
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'status' => 'confirmed',
+		);
+		$app_id_2 = appointments_insert_appointment( $args );
+		appointments_update_appointment( $app_id_2, array( 'sent' => $hours ) );
+
+		$app_1 = appointments_get_appointment( $app_id_1 );
+		$app_2 = appointments_get_appointment( $app_id_2 );
+
+		$this->assertEquals( $app_1->sent, ':4:2:1:' );
+		$this->assertEquals( $app_1->get_sent_user_hours(), array( 4,2,1 ) );
+		$this->assertEquals( $app_1->sent, $app_2->sent );
+		$this->assertEquals( $app_1->get_sent_user_hours(), $app_2->get_sent_user_hours() );
+
+	}
+
 }

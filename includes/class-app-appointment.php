@@ -54,18 +54,44 @@ class Appointments_Appointment {
 		return $this->worker;
 	}
 
+	public function get_sent_worker_hours() {
+		if ( ! $this->sent_worker ) {
+			return array();
+		}
+
+		$sent_worker_hours = trim( $this->sent_worker, ':' );
+		return explode( ':', $sent_worker_hours );
+	}
+
+	public function get_sent_user_hours() {
+		if ( ! $this->sent ) {
+			return array();
+		}
+
+		$sent_hours = trim( $this->sent, ':' );
+		return explode( ':', $sent_hours );
+	}
+
 
 }
 
 /**
  * Get a single Appointment data
  *
- * @param $app_id
+ * @param int|object $app_id Appointment ID or an object with an Appointment fields
  *
- * @return array|bool|mixed|null|object|void
+ * @return bool|Appointments_Appointment
  */
 function appointments_get_appointment( $app_id ) {
 	global $wpdb;
+
+	if ( is_a( $app_id, 'Appointments_Appointment' ) ) {
+		return $app_id;
+	}
+	elseif ( is_object( $app_id ) ) {
+		wp_cache_add( $app_id->ID, $app_id, 'app_appointments' );
+		return new Appointments_Appointment( $app_id );
+	}
 
 	$table = appointments_get_table( 'appointments' );
 
@@ -79,7 +105,7 @@ function appointments_get_appointment( $app_id ) {
 			)
 		);
 
-		wp_cache_add( $app_id, 'app_appointments' );
+		wp_cache_add( $app_id, $app, 'app_appointments' );
 	}
 
 
@@ -113,6 +139,7 @@ function appointments_insert_appointment( $args ) {
 		'price' => '',
 		'date' => '',
 		'time' => '',
+		'created' => current_time( 'mysql' ),
 		'note' => '',
 		'status' => 'pending',
 		'location' => '',
@@ -125,7 +152,7 @@ function appointments_insert_appointment( $args ) {
 	$insert = array();
 	$insert_wildcards = array();
 
-	$insert['created'] = current_time( 'mysql' );
+	$insert['created'] = $args['created'];
 	$insert_wildcards[] = '%s';
 
 	if ( $user = get_userdata( $args['user'] ) ) {
@@ -322,7 +349,9 @@ function appointments_update_appointment( $app_id, $args ) {
 		'date' => false, // There are no fields like these in the table but they can be passed to the function
 		'time' => false,
 		'gcal_updated' => '%s',
-		'gcal_ID' => '%s'
+		'gcal_ID' => '%s',
+		'sent_worker' => '%s',
+		'sent' => '%s'
 	);
 
 	$update = array();
@@ -359,6 +388,15 @@ function appointments_update_appointment( $app_id, $args ) {
 		}
 	}
 
+	if ( isset( $update['sent_worker'] ) && is_array( $update['sent_worker'] ) ) {
+		// Let's convert the array to a string
+		$update['sent_worker'] = ':' . implode( ':', $update['sent_worker'] ) . ':';
+	}
+
+	if ( isset( $update['sent'] ) && is_array( $update['sent'] ) ) {
+		// Let's convert the array to a string
+		$update['sent'] = ':' . implode( ':', $update['sent'] ) . ':';
+	}
 
 
 	if ( ! empty( $args['date'] ) && ! empty( $args['time'] ) ) {
@@ -484,11 +522,15 @@ function appointments_update_appointment_status( $app_id, $new_status ) {
 /**
  * Get the appointments list given its location, service, worker and week of the year
  *
- * @param int $l Location
- * @param int $s Service ID
- * @param int $w Worker ID
- * @param int $week Week Number
- *$l, $s, $w, $week=0
+ * @param array $args {
+ *      An array of arguments to execute the query
+ *
+ *      @type bool|int $location Location ID
+ *      @type bool|int $service Service ID
+ *      @type int $worker Worker ID
+ *      @type int $week Number of week in the year. Set to 0 if not searching by week
+ * }
+ *
  * @return array|null|object
  */
 function appointments_get_appointments( $args = array() ) {
@@ -631,7 +673,7 @@ function appointments_clear_appointment_cache( $app_id = false ) {
 		}
 	}
 
-
+	wp_cache_delete( 'app_count_appointments' );
 	wp_cache_delete( 'app_get_appointments' );
 	appointments_delete_timetables_cache();
 }
@@ -673,4 +715,83 @@ function appointments_delete_appointment( $app_id ) {
 
 	appointments_clear_appointment_cache( $app_id );
 	return (bool)$result;
+}
+
+/**
+ * Return the expired appointments
+ *
+ * @param int $pending_seconds If > 0, it will also include those that are pending and were created more than $pending_seconds seconds ago
+ *
+ * @return array List of expired appointments
+ */
+function appointments_get_expired_appointments( $pending_seconds = 0 ) {
+	global $wpdb;
+
+	$pending_seconds = absint( $pending_seconds );
+
+	$current_time = current_time( 'timestamp' );
+
+	$table = appointments_get_table( 'appointments' );
+	$expired = $wpdb->get_results(
+		$wpdb->prepare(
+			"SELECT * FROM $table
+			WHERE start < %s
+			AND status NOT IN ('completed', 'removed')",
+			date( 'Y-m-d H:i:s', $current_time )
+		)
+	);
+
+	if ( $pending_seconds ) {
+		// Get all those that are pending and $pending_seconds old
+		$pending_expired = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT * FROM $table
+					WHERE status='pending'
+					AND created < %s",
+				date( 'Y-m-d H:i:s', $current_time - $pending_seconds )
+			)
+		);
+
+		foreach ( $pending_expired as $pending_expired_app ) {
+			$expired[] = $pending_expired_app;
+		}
+	}
+
+	$results = array();
+	foreach ( $expired as $app ) {
+		// With this, we're caching the rows
+		$results[] = appointments_get_appointment( $app );
+	}
+
+	return $results;
+}
+
+
+function appointments_count_appointments() {
+	global $wpdb;
+
+	$counts = wp_cache_get( 'app_count_appointments' );
+
+	if ( false === $counts ) {
+		$table = appointments_get_table( 'appointments' );
+
+		$results = $wpdb->get_results( "SELECT status, COUNT(*) num_apps FROM $table GROUP BY status", ARRAY_A );
+		$counts = array_fill_keys( array_keys( appointments_get_statuses() ), 0 );
+
+		foreach ( $results as $row ) {
+			$counts[ $row['status'] ] = absint( $row['num_apps'] );
+		}
+
+		wp_cache_set( 'app_count_appointments', $counts );
+	}
+
+
+	/**
+	 * Modify returned appointments counts by status
+	 *
+	 * @since 1.5.8.1
+	 *
+	 * @param array $counts  An array containing the counts by status.
+	 */
+	return apply_filters( 'appointments_count_appontments', $counts );
 }

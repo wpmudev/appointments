@@ -3428,14 +3428,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 						$r, $r->ID)
 					);
 					// Update "sent" field
-					$wpdb->update(
-						$this->app_table,
-						array('sent' => rtrim($r->sent, ":") . ":" . trim($hour) . ":"),
-						array('ID' => $r->ID),
-						array('%s')
-					);
-
-					appointments_clear_appointment_cache( $r->ID );
+					appointments_update_appointment( $r->ID, array( 'sent' => rtrim($r->sent, ":") . ":" . trim($hour) . ":") );
 				}
 			}
 		}
@@ -3449,38 +3442,6 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			}
 		}
 		return true;
-	}
-
-	/**
-	 *	Remove duplicate messages by app ID
-	 */
-	function array_unique_by_ID( $messages ) {
-		if ( !is_array( $messages ) || empty( $messages ) )
-			return false;
-		$idlist = array();
-		// Save array to a temp area
-		$result = $messages;
-		foreach ( $messages as $key=>$message ) {
-			if ( in_array( $message['ID'], $idlist ) )
-				unset( $result[$key] );
-			else
-				$idlist[] = $message['ID'];
-		}
-		return $result;
-	}
-
-	/**
-	 * Determine if a page is A+ Product page from the shortcodes used
-	 * @param $product custom post object
-	 * @return bool
-	 * @Since 1.0.1
-	 */
-	function is_app_mp_page( $product ) {
-		$result = false;
-		if ( is_object( $product ) && strpos( $product->post_content, '[app_' ) !== false )
-			$result = true;
-		// Maybe required for templates
-		return apply_filters( 'app_is_mp_page', $result, $product );
 	}
 
 	/**
@@ -3519,44 +3480,37 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 						'ID' => $r->ID,
 						'to' => $this->get_worker_email( $r->worker ),
 						'subject' => $this->_replace(
-							$this->options["reminder_subject"], 
-							$r->name, 
+							$this->options["reminder_subject"],
+							$r->name,
 							$this->get_service_name($r->service),
 							appointments_get_worker_name($r->worker),
-							$r->start, 
-							$r->price, 
-							$this->get_deposit($r->price), 
-							$r->phone, 
-							$r->note, 
-							$r->address, 
+							$r->start,
+							$r->price,
+							$this->get_deposit($r->price),
+							$r->phone,
+							$r->note,
+							$r->address,
 							$r->email
 						),
 						'message' => apply_filters('app_reminder_message', $provider_add_text . $this->add_cancel_link(
-							$this->_replace(
-								$this->options["reminder_message"], 
-								$r->name,
-								$this->get_service_name($r->service),
-								appointments_get_worker_name($r->worker),
-								$r->start, 
-								$r->price,
-								$this->get_deposit($r->price), 
-								$r->phone, 
-								$r->note, 
-								$r->address, 
-								$r->email
-							), 
-							$r->ID),
-						$r, $r->ID), 
+								$this->_replace(
+									$this->options["reminder_message"],
+									$r->name,
+									$this->get_service_name($r->service),
+									appointments_get_worker_name($r->worker),
+									$r->start,
+									$r->price,
+									$this->get_deposit($r->price),
+									$r->phone,
+									$r->note,
+									$r->address,
+									$r->email
+								),
+								$r->ID),
+							$r, $r->ID),
 					);
 					// Update "sent" field
-					$wpdb->update(
-						$this->app_table,
-						array('sent_worker' => rtrim($r->sent_worker, ":") . ":" . trim($hour) . ":"),
-						array('ID' => $r->ID),
-						array('%s')
-					);
-
-					appointments_clear_appointment_cache( $r->ID );
+					appointments_update_appointment( $r->ID, array( 'sent_worker' => rtrim($r->sent_worker, ":") . ":" . trim($hour) . ":") );
 				}
 			}
 		}
@@ -3570,6 +3524,40 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			}
 		}
 	}
+
+	/**
+	 *	Remove duplicate messages by app ID
+	 */
+	function array_unique_by_ID( $messages ) {
+		if ( !is_array( $messages ) || empty( $messages ) )
+			return false;
+		$idlist = array();
+		// Save array to a temp area
+		$result = $messages;
+		foreach ( $messages as $key=>$message ) {
+			if ( in_array( $message['ID'], $idlist ) )
+				unset( $result[$key] );
+			else
+				$idlist[] = $message['ID'];
+		}
+		return $result;
+	}
+
+	/**
+	 * Determine if a page is A+ Product page from the shortcodes used
+	 * @param $product custom post object
+	 * @return bool
+	 * @Since 1.0.1
+	 */
+	function is_app_mp_page( $product ) {
+		$result = false;
+		if ( is_object( $product ) && strpos( $product->post_content, '[app_' ) !== false )
+			$result = true;
+		// Maybe required for templates
+		return apply_filters( 'app_is_mp_page', $result, $product );
+	}
+
+
 
 	/**
 	 *	Replace placeholders with real values for email subject and content
@@ -3645,50 +3633,39 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 	 *	Change status to removed if they are pending or reserved
 	 */
 	function remove_appointments( ) {
-
-		global $wpdb;
-
 		$process_expired = apply_filters('app-auto_cleanup-process_expired', true);
+		if ( ! $process_expired ) {
+			return;
+		}
 
-		$expireds = $wpdb->get_results( $wpdb->prepare("SELECT * FROM {$this->app_table} WHERE start<%s AND status NOT IN ('completed', 'removed')", date("Y-m-d H:i:s", $this->local_time)) );
+		$clear_secs = 0;
+		if ( isset( $this->options["clear_time"] ) && $this->options["clear_time"] > 0 ) {
+			$clear_secs = $this->options["clear_time"] * 60;
+		}
+
+		$expireds = appointments_get_expired_appointments( $clear_secs );
+
 		if ( $expireds && $process_expired ) {
 			foreach ( $expireds as $expired ) {
 				if ( 'pending' == $expired->status || 'reserved' == $expired->status ) {
-					if ('reserved' == $expired->status && strtotime($expired->end) > $this->local_time) $new_status = $expired->status; // Don't shift the GCal apps until they actually expire (end time in past)
-					else $new_status = 'removed';
+					if ('reserved' == $expired->status && strtotime($expired->end) > $this->local_time) {
+						$new_status = $expired->status; // Don't shift the GCal apps until they actually expire (end time in past)
+					}
+					else {
+						$new_status = 'removed';
+					}
 				} else if ( 'confirmed' == $expired->status || 'paid' == $expired->status ) {
 					$new_status = 'completed';
 				} else {
 					$new_status = $expired->status; // Do nothing ??
 				}
-				$update = $wpdb->update( $this->app_table,
-								array( 'status'	=> $new_status ),
-								array( 'ID'	=> $expired->ID )
-							);
-				if ( $update ) {
-					appointments_clear_appointment_cache( $expired->ID );
+
+				if ( appointments_update_appointment_status( $expired->ID, $new_status ) ) {
 					do_action( 'app_remove_expired', $expired, $new_status );
 				}
 			}
 		}
 
-		// Clear appointments that are staying in pending status long enough
-		if ( isset( $this->options["clear_time"] ) && $this->options["clear_time"] > 0 ) {
-			$clear_secs = $this->options["clear_time"] * 60;
-			$expireds = $wpdb->get_results( $wpdb->prepare("SELECT * FROM {$this->app_table} WHERE status='pending' AND created<%s", date("Y-m-d H:i:s", $this->local_time - $clear_secs)) );
-			if ( $expireds ) {
-				foreach ( $expireds as $expired ) {
-					$update = $wpdb->update( $this->app_table,
-									array( 'status'	=> 'removed' ),
-									array( 'ID'	=> $expired->ID )
-								);
-					if ( $update ) {
-						appointments_clear_appointment_cache( $expired->ID );
-						do_action( 'app_remove_pending', $expired );
-					}
-				}
-			}
-		}
 		update_option( "app_last_update", time() );
 
 		// Appointment status probably changed, so clear cache.
@@ -4650,5 +4627,5 @@ function appointments_plugin_url() {
 
 function appointments_plugin_dir() {
 	global $appointments;
-	return trailingslashit( $appointments->plugin_dir );
+	return trailingslashit( plugin_dir_path( __FILE__ ) );
 }

@@ -3,21 +3,24 @@
 class Appointments_Admin {
 
 	public function __construct() {
+		$this->includes();
+
 		add_action( 'admin_menu', array( $this, 'admin_init' ) ); 						// Creates admin settings window
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) ); 				// Warns admin
 		add_action( 'admin_print_scripts', array( $this, 'admin_scripts') );			// Load scripts
 		add_action( 'admin_print_styles', array( $this, 'admin_css') );
-
-		//@TODO: This filter is deprecated
-		add_action( 'dashboard_glance_items', array($this, 'add_app_counts') );
 
 		add_action( 'show_user_profile', array( $this, 'show_profile') );
 		add_action( 'edit_user_profile', array( $this, 'show_profile') );
 		add_action( 'personal_options_update', array( $this, 'save_profile') );
 		add_action( 'edit_user_profile_update', array( $this, 'save_profile') );
 
+		new Appointments_Admin_Dashboard_Widget();
 		//include( APP_PLUGIN_DIR . '/admin/admin-helpers.php' );
+	}
 
+	private function includes() {
+		include_once( appointments_plugin_dir() . 'admin/widgets/class-app-dashboard-widget.php' );
 	}
 
 	/**
@@ -352,40 +355,6 @@ class Appointments_Admin {
 		<?php
 	}
 
-	/**
-	 * Add app status counts in admin Right Now Dashboard box
-	 * http://codex.wordpress.org/Plugin_API/Action_Reference/right_now_content_table_end
-	 */
-	function add_app_counts( $items ) {
-
-		global $wpdb, $appointments;
-
-		$new_items = array();
-
-		$num_active = $wpdb->get_var("SELECT COUNT(ID) FROM " . $appointments->app_table . " WHERE status='paid' OR status='confirmed' " );
-
-		if ( $num_active ) {
-			$num = number_format_i18n( $num_active );
-			$text = sprintf( _n( '%d Active Appointment', '%d Active Appointments', intval( $num_active ) ), $num );
-			if ( App_Roles::current_user_can( 'manage_options', App_Roles::CTX_DASHBOARD ) )
-				$items[] = '<a class="app-active" href="admin.php?page=appointments">' . $text . '</a>';
-			else
-				$items[] = $text;
-		}
-
-		$num_pending = $wpdb->get_var("SELECT COUNT(ID) FROM " . $appointments->app_table . " WHERE status='pending' " );
-
-		if ( $num_pending > 0 ) {
-			$num = number_format_i18n( $num_pending );
-			$text = sprintf( _n( '%d Pending Appointment', '%d Pending Appointments', intval( $num_pending ) ), $num );
-			if ( App_Roles::current_user_can( 'manage_options', App_Roles::CTX_DASHBOARD ) )
-				$items[] = '<a class="app-pending" href="admin.php?page=appointments&type=pending">' . $text . '</a>';
-			else
-				$items[] = $text;
-		}
-
-		return $items;
-	}
 
 	function admin_css() {
 		global $appointments;
