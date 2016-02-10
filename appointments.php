@@ -101,10 +101,8 @@ class Appointments {
 		include_once( 'includes/class-app-worker.php' );
 		include_once( 'includes/class-app-appointment.php' );
 
-		if ( is_admin() ) {
-			include_once( 'admin/class-app-admin.php' );
-			$this->admin = new Appointments_Admin();
-		}
+		include_once( 'admin/class-app-admin.php' );
+		$this->admin = new Appointments_Admin();
 
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			include_once( 'includes/class-app-ajax.php' );
