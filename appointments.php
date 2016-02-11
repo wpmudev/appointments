@@ -86,8 +86,8 @@ class Appointments {
 
 		$this->datetime_format = $this->date_format . " " . $this->time_format;
 
-		add_action( 'delete_user', array( &$this, 'delete_user' ) );		// Modify database in case a user is deleted
-		add_action( 'wpmu_delete_user', array( &$this, 'delete_user' ) );	// Same as above
+		add_action( 'delete_user', array( 'appointments_delete_worker' ) );		// Modify database in case a user is deleted
+		add_action( 'wpmu_delete_user', array( 'appointments_delete_worker' ) );	// Same as above
 		add_action( 'remove_user_from_blog', array( &$this, 'remove_user_from_blog' ), 10, 2 );	// Remove his records only for that blog
 
 		add_action( 'plugins_loaded', array(&$this, 'localization') );		// Localize the plugin
@@ -473,14 +473,14 @@ class Appointments {
 	 * @deprecated since 1.5.6.1
 	 */
 	function get_reserve_apps( $l, $s, $w, $week=0 ) {
-		_deprecated_function( __FUNCTION__, '1.5.7.1', 'appointments_get_appointments()' );
+		_deprecated_function( __FUNCTION__, '1.5.7.1', 'appointments_get_appointments_filtered_by_services()' );
 		$args = array(
 			'location' => $l,
 			'service' => $s,
 			'week' => $week,
 			'worker' => $w
 		);
-		return appointments_get_appointments( $args );
+		return appointments_get_appointments_filtered_by_services( $args );
 	}
 
 	/**
@@ -501,7 +501,7 @@ class Appointments {
 						'worker' => $w,
 						'week' => $week
 					);
-					$apps_worker = appointments_get_appointments( $args );
+					$apps_worker = appointments_get_appointments_filtered_by_services( $args );
 					if ( $apps_worker )
 						$apps = array_merge( $apps, $apps_worker );
 				}
@@ -521,13 +521,13 @@ class Appointments {
 	 * @return array of objects
 	 */
 	function get_reserve_apps_by_service( $l, $s, $week=0 ) {
-		_deprecated_function( __FUNCTION__, '1.5.7.1', 'appointments_get_appointments()' );
+		_deprecated_function( __FUNCTION__, '1.5.7.1', 'appointments_get_appointments_filtered_by_services()' );
 		$args = array(
 			'location' => $l,
 			'service' => $s,
 			'week' => $week
 		);
-		return appointments_get_appointments( $args );
+		return appointments_get_appointments_filtered_by_services( $args );
 	}
 
 
@@ -2458,7 +2458,7 @@ class Appointments {
 									'service' => $service_ID,
 									'week' => $week
 								);
-								$apps_service_0 = appointments_get_appointments( $args );
+								$apps_service_0 = appointments_get_appointments_filtered_by_services( $args );
 								if ( $apps_service_0 && is_array( $apps_service_0 ) )
 									$apps = array_merge( $apps, $apps_service_0 );
 							}
@@ -3918,18 +3918,6 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 
 		global $wpdb;
 		$r1 = appointments_delete_worker( $ID );
-
-		// Also modify app table
-		$r2 = $wpdb->update(
-			$this->app_table,
-			array( 'worker'	=>	0 ),
-			array( 'worker'	=> $ID )
-		);
-
-		if ( $r1 || $r2 ) {
-			appointments_clear_appointment_cache();
-			$this->flush_cache();
-		}
 	}
 
 	/**
@@ -3939,31 +3927,9 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 	 * @since 1.2.3
 	 */
 	function remove_user_from_blog( $ID, $blog_id ) {
-		if ( !$ID || !$blog_id )
-			return;
-
-		global $wpdb;
-
-		// Let's be safe
-		if ( !method_exists( $wpdb, 'get_blog_prefix' ) )
-			return;
-
-		$prefix = $wpdb->get_blog_prefix( $blog_id );
-
-		if ( !$prefix )
-			return;
-
-		$r1 = appointments_delete_worker( $ID );
-
-		// Also modify app table
-		$r2 = $wpdb->update(
-			$prefix . "app_appointments",
-			array( 'worker'	=>	0 ),
-			array( 'worker'	=> $ID )
-		);
-
-		if ( $r1 || $r2 )
-			$this->flush_cache();
+		switch_to_blog( $blog_id );
+		appointments_delete_worker( $ID );
+		restore_current_blog();
 	}
 
 	/**

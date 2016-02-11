@@ -670,6 +670,14 @@ function appointments_delete_worker( $worker_id ) {
 	appointments_delete_worker_working_hours( $worker_id );
 	appointments_delete_worker_exceptions( $worker_id );
 
+	// Update the worker appointments
+	$app_table = appointments_get_table( 'appointments' );
+	$apps = appointments_get_appointments( array( 'worker' => $worker_id ) );
+
+	foreach ( $apps as $app ) {
+		appointments_update_appointment( $app->ID, array( 'worker' => 0 ) );
+	}
+
 	if ( $result ) {
 		appointments_delete_worker_cache( $worker_id );
 		return true;

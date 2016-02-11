@@ -14,9 +14,10 @@ require $_tests_dir . '/includes/bootstrap.php';
 
 class App_UnitTestCase extends WP_UnitTestCase {
 
+	public $factory_app;
+
 	function setUp() {
 		parent::setUp();
-
 		appointments_activate();
 	}
 
@@ -37,3 +38,4 @@ class App_UnitTestCase extends WP_UnitTestCase {
 		add_action( 'doing_it_wrong_run', array( $this, 'doing_it_wrong_run' ) );
 	}
 }
+

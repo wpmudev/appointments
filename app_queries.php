@@ -11,13 +11,6 @@ WHERE (status='paid' OR status='confirmed')
 AND (sent NOT LIKE '%:{$rlike}:%' OR sent IS NULL)
 AND DATE_ADD('".date( 'Y-m-d H:i:s', $this->local_time )."', INTERVAL ".(int)$hour." HOUR) > start " );
 
-// Update "sent" field
-$wpdb->update(
-$this->app_table,
-array('sent' => rtrim($r->sent, ":") . ":" . trim($hour) . ":"),
-array('ID' => $r->ID),
-array('%s')
-);
 
 $rlike = esc_sql(like_escape(trim($hour)));
 $results = $wpdb->get_results( "SELECT * FROM " . $this->app_table . "
@@ -25,14 +18,6 @@ WHERE (status='paid' OR status='confirmed')
 AND worker <> 0
 AND (sent_worker NOT LIKE '%:{$rlike}:%' OR sent_worker IS NULL)
 AND DATE_ADD('".date( 'Y-m-d H:i:s', $this->local_time )."', INTERVAL ".(int)$hour." HOUR) > start " );
-
-// Update "sent" field
-$wpdb->update(
-	$this->app_table,
-	array('sent_worker' => rtrim($r->sent_worker, ":") . ":" . trim($hour) . ":"),
-	array('ID' => $r->ID),
-	array('%s')
-);
 
 
 $expireds = $wpdb->get_results( $wpdb->prepare("SELECT * FROM {$this->app_table} WHERE start<%s AND status NOT IN ('completed', 'removed')", date("Y-m-d H:i:s", $this->local_time)) );
