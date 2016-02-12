@@ -1,7 +1,8 @@
-2016-02-10 - 1.5.8
+2016-02-12 - 1.6
 -------------------------------
 - New: New setting to redirect to a Thank You page after appointment confirmation
 - New: appointments_worker_notification_sent action
+- Fixed: Add Google Calendar Button dates
 - Fixed: Error when editing a profile in BuddyPress
 - Fixed: Customer Notes field not showing up in confirmation form
 - Fixed: FAQ questions were not correctly indexed in admin page
