@@ -9,7 +9,7 @@
 - Fixed: Headers already sent error when updating pages in some cases (AJAX Search Pro Plugin conflict)
 - Fixed: When admin edit a user profile, admin appointments were displayed instead of the user's
 - Fixed: case insensitive variables/constants for HipHop environments
-- Enhance: More performance improvements
+- Enhance: Timetables regeneration takes less time now
 - Enhancement: appointments_get_appointments() function allows now an array of arguments
 - Enhancement: appointments_insert_appointment() allows now a timestamp date
 - Enhancement: [app_worker_monthly_calendar] ordering by start ASC date by default
