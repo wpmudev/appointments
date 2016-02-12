@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.5.8
+Version: 1.6
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	public $version = "1.5.8";
+	public $version = "1.6";
 	public $db_version;
 
 	public $timetables = array();
@@ -267,12 +267,12 @@ class Appointments {
 	 * We assume total number of services is not too high, which is the practical case.
 	 * Otherwise this method might be expensive
 	 *
-	 * @deprecated since 1.5.6.1
+	 * @deprecated since 1.6
 	 *
 	 * @return integer
 	 */
 	function get_first_service_id() {
-		_deprecated_function( __FUNCTION__, '1.5.6.1', 'appointments_get_services_min_id()' );
+		_deprecated_function( __FUNCTION__, '1.6', 'appointments_get_services_min_id()' );
 		return appointments_get_services_min_id();
 	}
 
@@ -322,13 +322,13 @@ class Appointments {
 	/**
 	 * Get a single service with given ID
 	 *
-	 * @deprecated Deprecated since version 1.5.6.1
+	 * @deprecated Deprecated since version 1.6
 	 *
 	 * @param ID: Id of the service to be retrieved
 	 * @return object
 	 */
 	function get_service( $ID ) {
-		_deprecated_function( __FUNCTION__, '1.5.6.1', 'appointments_get_service()' );
+		_deprecated_function( __FUNCTION__, '1.6', 'appointments_get_service()' );
 		return appointments_get_service( $ID );
 	}
 
@@ -336,13 +336,13 @@ class Appointments {
 	/**
 	 * Get all workers
 	 *
-	 * @deprecated Deprecated since version 1.5.6.1
+	 * @deprecated Deprecated since version 1.6
 	 *
 	 * @param order_by: ORDER BY clause for mysql
 	 * @return array of objects
 	 */
 	function get_workers( $order_by="ID" ) {
-		_deprecated_function( __FUNCTION__, '1.5.6.1', 'appointments_get_workers()' );
+		_deprecated_function( __FUNCTION__, '1.6', 'appointments_get_workers()' );
 		$args = array(
 			'orderby' => $order_by
 		);
@@ -352,11 +352,11 @@ class Appointments {
 	/**
 	 * Get all services
 	 * @param order_by: ORDER BY clause for mysql
-	 * @deprecated Deprecated since version 1.5.6.1
+	 * @deprecated Deprecated since version 1.6
 	 * @return array of objects
 	 */
 	function get_services( $order_by="ID" ) {
-		_deprecated_function( __FUNCTION__, '1.5.6.1', 'appointments_get_services()' );
+		_deprecated_function( __FUNCTION__, '1.6', 'appointments_get_services()' );
 		$args = array( 'orderby'=> $order_by );
 		return appointments_get_services( $args );
 	}
@@ -367,14 +367,14 @@ class Appointments {
  	 * We assume total number of workers is not too high, which is the practical case.
 	 * Otherwise this method would be expensive
 	 *
-	 * @deprecated Deprecated since version 1.5.6.1
+	 * @deprecated Deprecated since version 1.6
 	 *
 	 * @param ID: Id of the service to be retrieved
 	 * @param order_by: ORDER BY clause for mysql
 	 * @return array of objects
 	 */
 	function get_workers_by_service( $ID, $order_by = "ID" ) {
-		_deprecated_function( __FUNCTION__, '1.5.6.1', 'appointments_get_workers_by_service()' );
+		_deprecated_function( __FUNCTION__, '1.6', 'appointments_get_workers_by_service()' );
 		$workers = appointments_get_workers_by_service( $ID, $order_by );
 
 		if ( empty( $workers ) )
@@ -386,14 +386,14 @@ class Appointments {
 	/**
 	 * Check if there is only one worker giving the selected service
 	 *
-	 * @deprecated since 1.5.7.1
+	 * @deprecated since 1.6
 	 *
 	 * @param service: Id of the service for which check will be done
  	 * @since 1.1.1
 	 * @return int|boolean (worker ID if there is one, otherwise false)
 	 */
 	function is_single_worker( $service_id ) {
-		_deprecated_function( __FUNCTION__, '1.5.7.1' );
+		_deprecated_function( __FUNCTION__, '1.6' );
 
 		$workers = appointments_get_workers_by_service( $service_id );
 		if ( 1 === count( $workers ) ) {
@@ -453,14 +453,14 @@ class Appointments {
 	/**
 	 * Return an appointment given its ID
 	 *
-	 * @deprecated since 1.5.7.1
+	 * @deprecated since 1.6
 	 *
 	 * @param app_id: ID of the appointment to be retreived from database
 	 * @since 1.1.8
 	 * @return object
 	 */
 	function get_app( $app_id ) {
-		_deprecated_function( __FUNCTION__, '1.5.7.1', 'appointments_get_appointment()' );
+		_deprecated_function( __FUNCTION__, '1.6', 'appointments_get_appointment()' );
 		return appointments_get_appointment( $app_id );
 	}
 
@@ -473,7 +473,7 @@ class Appointments {
 	 * @deprecated since 1.5.6.1
 	 */
 	function get_reserve_apps( $l, $s, $w, $week=0 ) {
-		_deprecated_function( __FUNCTION__, '1.5.7.1', 'appointments_get_appointments()' );
+		_deprecated_function( __FUNCTION__, '1.6', 'appointments_get_appointments()' );
 		$args = array(
 			'location' => $l,
 			'service' => $s,
@@ -514,14 +514,14 @@ class Appointments {
 	/**
 	 * Return reserve appointments by service ID
 	 *
-	 * @deprecated since 1.5.7.1
+	 * @deprecated since 1.6
 	 *
 	 * @param week: Optionally appointments only in the number of week in ISO 8601 format (since 1.2.3)
 	 * @since 1.1.3
 	 * @return array of objects
 	 */
 	function get_reserve_apps_by_service( $l, $s, $week=0 ) {
-		_deprecated_function( __FUNCTION__, '1.5.7.1', 'appointments_get_appointments()' );
+		_deprecated_function( __FUNCTION__, '1.6', 'appointments_get_appointments()' );
 		$args = array(
 			'location' => $l,
 			'service' => $s,
@@ -560,14 +560,14 @@ class Appointments {
 
 	/**
 	 *
-	 * @deprecated since 1.5.7.1
+	 * @deprecated since 1.6
 	 *
 	 * @param $worker_id
 	 *
 	 * @return bool
 	 */
 	public function is_worker( $worker_id ) {
-		_deprecated_function( __FUNCTION__, '1.5.7.1', 'appointments_is_worker()' );
+		_deprecated_function( __FUNCTION__, '1.6', 'appointments_is_worker()' );
 		return appointments_is_worker( $worker_id );
 	}
 
@@ -575,12 +575,12 @@ class Appointments {
 	/**
 	 * Find worker name given his ID
 	 *
-	 * @deprecated since 1.5.7.1
+	 * @deprecated since 1.6
 	 *
 	 * @return string
 	 */
 	function get_worker_name( $worker=0, $field = true ) {
-		_deprecated_function( __FUNCTION__, '1.5.7.1', 'appointments_get_worker_name()' );
+		_deprecated_function( __FUNCTION__, '1.6', 'appointments_get_worker_name()' );
 
 		if ( $field ) {
 			$field = 'default';
@@ -1094,12 +1094,12 @@ class Appointments {
 	/**
 	 * Return all available statuses
 	 *
-	 * @deprecated Since version 1.5.7.1
+	 * @deprecated Since version 1.6
 	 *
 	 * @return array
 	 */
 	function get_statuses() {
-		_deprecated_function( __FUNCTION__, '1.5.7.1', 'appointments_get_statuses()' );
+		_deprecated_function( __FUNCTION__, '1.6', 'appointments_get_statuses()' );
 		return appointments_get_statuses();
 	}
 
@@ -1172,12 +1172,12 @@ class Appointments {
 	/**
 	 * Change status for a given app ID
 	 *
-	 * @deprecated since 1.5.7.1
+	 * @deprecated since 1.6
 	 *
 	 * @return bool
 	 */
 	function change_status( $stat, $app_id ) {
-		_deprecated_function( __FUNCTION__, '1.5.7.1', 'appointments_update_appointment_status()' );
+		_deprecated_function( __FUNCTION__, '1.6', 'appointments_update_appointment_status()' );
 		return appointments_update_appointment_status( $app_id, $stat );
 	}
 
@@ -1427,10 +1427,10 @@ class Appointments {
 			'location' => $location
 		);
 
-		return esc_url(add_query_arg(
+		return add_query_arg(
 			apply_filters('app_gcal_variables', $param, $service, $start, $end), 
 			'http://www.google.com/calendar/event'
-		));
+		);
 	}
 
 	/**
