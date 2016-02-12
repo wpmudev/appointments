@@ -1468,6 +1468,8 @@ class Appointments {
 
 		$checkdate = date( 'Y-m-d H:i:s', $this->local_time - $this->options["spam_time"] );
 
+		$query = "SELECT * FROM " . $this->app_table .
+		         " WHERE created>'".$checkdate."' AND status='pending' AND (".$q.")  ";
 		$results = $wpdb->get_results( "SELECT * FROM " . $this->app_table .
 					" WHERE created>'".$checkdate."' AND status='pending' AND (".$q.")  " );
 		// A recent app is found
@@ -1497,9 +1499,6 @@ class Appointments {
 	 * Helper function to create a monthly schedule
 	 */
 	function get_monthly_calendar( $timestamp=false, $class='', $long, $widget ) {
-		global $wpdb;
-
-
 		$this->get_lsw();
 
 		$price = $this->get_price( );
@@ -3545,7 +3544,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 
 	/**
 	 * Determine if a page is A+ Product page from the shortcodes used
-	 * @param $product custom post object
+	 * @param WP_Post $product custom post object
 	 * @return bool
 	 * @Since 1.0.1
 	 */
@@ -4416,7 +4415,6 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 
 		if ( strpos( $date_format, 'M' ) !== false ) {
 			// Check if M (short month name) is set
-			$month_abb = array( );
 			foreach ( $months as $month_name => $month_no ) {
 				$month_name_local = $wp_locale->get_month($month_no);
 				$month_name_abb_local = $wp_locale->get_month_abbrev($month_name_local);

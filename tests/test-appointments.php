@@ -1160,6 +1160,58 @@ class App_Appointments_Test extends App_UnitTestCase {
 	}
 
 	/** OLD QUERIES **/
+
+	/**
+	 * Test query changes on Appointments:check_spam()
+	 */
+	function test_check_spam() {
+		global $appointments;
+
+		$this->options["spam_time"] = 1;
+
+		$worker_id_1 = $this->factory->user->create_object( $this->factory->user->generate_args() );
+		$user_id = $this->factory->user->create_object( $this->factory->user->generate_args() );
+
+		$service_args = array(
+			'name' => 'My Service',
+			'duration' => 90
+		);
+		$service_id_1 = appointments_insert_service( $service_args );
+
+
+		$worker_args = array(
+			'ID' => $worker_id_1,
+			'services_provided' => array( $service_id_1 )
+		);
+		appointments_insert_worker( $worker_args );
+
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'status' => 'pending',
+		);
+		$app_id_1 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'status' => 'pending',
+		);
+		$app_id_2 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+			'status' => 'pending',
+		);
+		$app_id_3 = appointments_insert_appointment( $args );
+
+		$_COOKIE["wpmudev_appointments"] = array( $app_id_1, $app_id_2, $app_id_3 );
+
+		$appointments->check_spam();
+	}
+
+
 	function test_update_appointment_sent_worker_old() {
 		global $wpdb;
 

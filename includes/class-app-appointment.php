@@ -634,7 +634,8 @@ function appointments_get_appointments( $args = array() ) {
 	$table = appointments_get_table( 'appointments' );
 
 	$defaults = array(
-		'worker' => false
+		'worker' => false,
+		'date_query' => array()
 	);
 
 	$args = wp_parse_args( $args, $defaults );
@@ -653,6 +654,17 @@ function appointments_get_appointments( $args = array() ) {
 
 		if ( false !== $args['worker'] && $worker = appointments_get_worker( $args['worker'] ) ) {
 			$where[] = $wpdb->prepare( "worker = %d", $worker->ID );
+		}
+
+		if ( ! empty( $args['date_query'] ) && is_array( $args['date_query'] ) ) {
+			$date_query_defaults = array(
+				'compare' => '=',
+				'field' => 'created',
+				'value' => current_time( 'mysql' )
+			);
+
+			$date_query = wp_parse_args( $args['date_query'], $date_query_defaults );
+
 		}
 
 		if ( ! empty( $where ) ) {
