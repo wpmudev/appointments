@@ -86,8 +86,8 @@ class Appointments {
 
 		$this->datetime_format = $this->date_format . " " . $this->time_format;
 
-		add_action( 'delete_user', array( 'appointments_delete_worker' ) );		// Modify database in case a user is deleted
-		add_action( 'wpmu_delete_user', array( 'appointments_delete_worker' ) );	// Same as above
+		add_action( 'delete_user', 'appointments_delete_worker' );		// Modify database in case a user is deleted
+		add_action( 'wpmu_delete_user', 'appointments_delete_worker' );	// Same as above
 		add_action( 'remove_user_from_blog', array( &$this, 'remove_user_from_blog' ), 10, 2 );	// Remove his records only for that blog
 
 		add_action( 'plugins_loaded', array(&$this, 'localization') );		// Localize the plugin
@@ -1447,34 +1447,37 @@ class Appointments {
 	 * @return bool
 	 */
 	function check_spam() {
-		global $wpdb;
-		if ( !isset( $this->options["spam_time"] ) || !$this->options["spam_time"] ||
-			!isset( $_COOKIE["wpmudev_appointments"] ) )
+		if ( ! isset( $this->options["spam_time"] ) || ! $this->options["spam_time"] ||
+		     ! isset( $_COOKIE["wpmudev_appointments"] )
+		) {
 			return true;
+		}
 
 		$apps = unserialize( stripslashes( $_COOKIE["wpmudev_appointments"] ) );
 
-		if ( !is_array( $apps ) || empty( $apps ) )
+		if ( ! is_array( $apps ) || empty( $apps ) ) {
 			return true;
-
-		// Get details of the appointments
-		$q = '';
-		foreach ( $apps as $app_id ) {
-			// Allow only numeric values
-			if ( is_numeric( $app_id ) )
-				$q .= " ID=".$app_id." OR ";
 		}
-		$q = rtrim( $q, "OR " );
 
 		$checkdate = date( 'Y-m-d H:i:s', $this->local_time - $this->options["spam_time"] );
 
-		$query = "SELECT * FROM " . $this->app_table .
-		         " WHERE created>'".$checkdate."' AND status='pending' AND (".$q.")  ";
-		$results = $wpdb->get_results( "SELECT * FROM " . $this->app_table .
-					" WHERE created>'".$checkdate."' AND status='pending' AND (".$q.")  " );
+		$results = appointments_get_appointments( array(
+			'app_id'     => maybe_unserialize( $_COOKIE["wpmudev_appointments"] ),
+			'status'     => 'pending',
+			'date_query' => array(
+				array(
+					'field'   => 'created',
+					'compare' => '>',
+					'value'   => $checkdate
+				)
+			)
+		) );
+
 		// A recent app is found
-		if ( $results )
+
+		if ( $results ) {
 			return false;
+		}
 
 		return true;
 	}

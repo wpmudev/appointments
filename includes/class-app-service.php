@@ -399,6 +399,7 @@ function appointments_delete_service( $service_id ) {
 
 	if ( $result ) {
 		appointments_delete_service_cache( $service_id );
+		appointments_delete_worker_cache();
 		return true;
 	}
 
