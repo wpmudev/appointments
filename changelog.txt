@@ -1,4 +1,4 @@
-2016-02-10 - 1.6
+2016-02-12 - 1.6
 -------------------------------
 - New: New setting to redirect to a Thank You page after appointment confirmation
 - New: appointments_worker_notification_sent action
