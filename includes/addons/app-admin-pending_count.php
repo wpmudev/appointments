@@ -115,7 +115,33 @@ EO_AAPC_JS;
 	}
 
 	private function _get_pending_items_count () {
-		return count($this->_core->get_admin_apps('pending', 0, self::UPPER_LIMIT));
+		$args = array();
+		if ( isset( $_GET['s'] ) && trim( $_GET['s'] ) != '' ) {
+			$args['s'] = $_GET['s'];
+		}
+
+		if ( isset( $_GET['app_service_id'] ) && $_GET['app_service_id'] ) {
+			$args['service'] = $_GET['app_service_id'];
+		}
+
+		if ( isset( $_GET['app_provider_id'] ) && $_GET['app_provider_id'] ) {
+			$args['worker'] = $_GET['app_provider_id'];
+		}
+
+		$args['order']   = 'DESC';
+		if ( isset( $_GET['app_order_by']) && $_GET['app_order_by'] ) {
+			$_orderby        = explode( '_', $_GET['app_order_by'] );
+			if ( count( $_orderby ) == 1 ) {
+				$args['order']   = $_orderby[0];
+			}
+			elseif ( count( $_orderby ) == 2 ) {
+				$args['order']   = $_orderby[1];
+				$args['orderby'] = $_orderby[0];
+			}
+
+		}
+		$args['status'] = array( 'pending' );
+		return count( appointments_get_appointments( $args ) );
 	}
 
 	private function _get_pending_template () {

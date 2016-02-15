@@ -199,9 +199,6 @@ class App_Appointments_Old_Queries_Test extends App_UnitTestCase {
 
 	}
 
-	/**
-	 * @group send
-	 */
 	function test_send_reminder_old() {
 		global $wpdb;
 
@@ -237,23 +234,96 @@ class App_Appointments_Old_Queries_Test extends App_UnitTestCase {
 		$args['status'] = 'completed';
 		$app_id_4 = appointments_insert_appointment( $args );
 
-		appointments_update_appointment( $app_id_1, array( 'sent' => array( 1, 3, 10 ), 'date' => current_time( 'timestamp' ) ) );
-		var_dump(appointments_get_appointment($app_id_1));
+		appointments_update_appointment( $app_id_1, array( 'sent' => array( 1, 3, 10 ), 'datetime' => current_time( 'timestamp' ) ) );
 		appointments_update_appointment( $app_id_2, array( 'sent' => array( 1, 10 ) ) );
 		// app 3: sent must be null
 		appointments_update_appointment( $app_id_4, array( 'sent' => array( 10 ) ) );
 
-		$this->assertCount( 1, appointments_get_unsent_appointments( 10 ) );
+		$hours = array( 4, 1, 10, 11, 0 );
+		$current_time = current_time( 'timestamp' );
+		$app_table = appointments_get_table( 'appointments' );
 
-		var_dump(appointments_get_unsent_appointments( 1 ));
-
-		return;
-		$this->app_table = appointments_get_table( 'appointments' );
-		$hour = 10;
-		$rlike = (string) absint($hour);
-		$results = $wpdb->get_results( "SELECT * FROM " . $this->app_table . "
+		foreach ( $hours as $hour ) {
+			$rlike = (string) absint($hour);
+			$old_query =  "SELECT * FROM " . $app_table . "
 				WHERE (status='paid' OR status='confirmed')
 				AND (sent NOT LIKE '%:{$rlike}:%' OR sent IS NULL)
-				AND DATE_ADD('".date( 'Y-m-d H:i:s', $this->local_time )."', INTERVAL ".(int)$hour." HOUR) > start " );
+				AND DATE_ADD('".date( 'Y-m-d H:i:s', $current_time )."', INTERVAL ".(int)$hour." HOUR) > start ";
+
+			$old_results = $wpdb->get_results( $old_query );
+			$results = appointments_get_unsent_appointments( $hour );
+
+			$this->assertCount( count( $old_results ), $results );
+
+			$old_ids = wp_list_pluck( $old_results, 'ID' );
+			$ids = wp_list_pluck( $results, 'ID' );
+
+			$this->assertEquals( $old_ids, $ids );
+		}
 	}
+
+	function test_send_reminder_worker_old() {
+		global $wpdb;
+
+		$worker_id_1 = $this->factory->user->create_object( $this->factory->user->generate_args() );
+		$user_id = $this->factory->user->create_object( $this->factory->user->generate_args() );
+
+		$service_args = array(
+			'name' => 'My Service',
+			'duration' => 90
+		);
+		$service_id_1 = appointments_insert_service( $service_args );
+
+
+		$worker_args = array(
+			'ID' => $worker_id_1,
+			'services_provided' => array( $service_id_1 )
+		);
+		appointments_insert_worker( $worker_args );
+
+		$args = array(
+			'service' => $service_id_1,
+			'worker' => $worker_id_1,
+		);
+		$args['status'] = 'confirmed';
+		$app_id_1 = appointments_insert_appointment( $args );
+
+		$args['status'] = 'paid';
+		$app_id_2 = appointments_insert_appointment( $args );
+
+		$args['status'] = 'paid';
+		$app_id_3 = appointments_insert_appointment( $args );
+
+		$args['status'] = 'completed';
+		$app_id_4 = appointments_insert_appointment( $args );
+
+		appointments_update_appointment( $app_id_1, array( 'sent_worker' => array( 1, 3, 10 ), 'datetime' => current_time( 'timestamp' ) ) );
+		appointments_update_appointment( $app_id_2, array( 'sent_worker' => array( 1, 10 ) ) );
+		// app 3: sent must be null
+		appointments_update_appointment( $app_id_4, array( 'sent_worker' => array( 10 ) ) );
+
+		$hours = array( 4, 1, 10, 11, 0 );
+		$current_time = current_time( 'timestamp' );
+		$app_table = appointments_get_table( 'appointments' );
+
+		foreach ( $hours as $hour ) {
+			$rlike = (string) absint($hour);
+			$old_query =  "SELECT * FROM " . $app_table . "
+				WHERE (status='paid' OR status='confirmed')
+				AND worker <> 0
+				AND (sent_worker NOT LIKE '%:{$rlike}:%' OR sent_worker IS NULL)
+				AND DATE_ADD('".date( 'Y-m-d H:i:s', $current_time )."', INTERVAL ".(int)$hour." HOUR) > start ";
+
+			$old_results = $wpdb->get_results( $old_query );
+			$results = appointments_get_unsent_appointments( $hour, 'worker' );
+
+			$this->assertCount( count( $old_results ), $results );
+
+			$old_ids = wp_list_pluck( $old_results, 'ID' );
+			$ids = wp_list_pluck( $results, 'ID' );
+
+			$this->assertEquals( $old_ids, $ids );
+		}
+	}
+
 }

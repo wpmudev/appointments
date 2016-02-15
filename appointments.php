@@ -3382,11 +3382,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 
 		$messages = array();
 		foreach ( $hours as $hour ) {
-			$rlike = (string) absint($hour);
-			$results = $wpdb->get_results( "SELECT * FROM " . $this->app_table . "
-				WHERE (status='paid' OR status='confirmed')
-				AND (sent NOT LIKE '%:{$rlike}:%' OR sent IS NULL)
-				AND DATE_ADD('".date( 'Y-m-d H:i:s', $this->local_time )."', INTERVAL ".(int)$hour." HOUR) > start " );
+			$results = appointments_get_unsent_appointments( $hour, 'user' );
 
 			if ( $results ) {
 				foreach ( $results as $r ) {
@@ -3462,12 +3458,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 
 		$messages = array();
 		foreach ( $hours as $hour ) {
-			$rlike = esc_sql(like_escape(trim($hour)));
-			$results = $wpdb->get_results( "SELECT * FROM " . $this->app_table . "
-				WHERE (status='paid' OR status='confirmed')
-				AND worker <> 0
-				AND (sent_worker NOT LIKE '%:{$rlike}:%' OR sent_worker IS NULL)
-				AND DATE_ADD('".date( 'Y-m-d H:i:s', $this->local_time )."', INTERVAL ".(int)$hour." HOUR) > start " );
+			$results = appointments_get_unsent_appointments( $hour, 'user' );
 
 			$provider_add_text  = __('You are receiving this reminder message for your appointment as a provider. The below is a copy of what may have been sent to your client:', 'appointments');
 			$provider_add_text .= "\n\n\n";
@@ -4262,60 +4253,6 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		//$this->time_format = $_old_time_format;
 
 		return $form;
-	}
-
-	/**
-	 *	Return results for appointments
-	 */
-	function get_admin_apps($type, $startat, $num) {
-
-		if( isset( $_GET['s'] ) && trim( $_GET['s'] ) != '' ) {
-			$s = esc_sql(like_escape($_GET['s']));
-			$add = " AND ( name LIKE '%{$s}%' OR email LIKE '%{$s}%' OR ID IN ( SELECT ID FROM {$this->db->users} WHERE user_login LIKE '%{$s}%' ) ) ";
-		}
-		else
-			$add = "";
-
-		if(isset($_GET['app_service_id']) && $_GET['app_service_id'] )
-			$add .= $this->db->prepare(" AND service=%d", $_GET['app_service_id']);
-
-		if(isset($_GET['app_provider_id']) && $_GET['app_provider_id'] )
-			$add .= $this->db->prepare(" AND worker=%d", $_GET['app_provider_id']);
-
-		if ( isset( $_GET['app_order_by']) && $_GET['app_order_by'] )
-			$order_by = esc_sql(str_replace( '_', ' ', $_GET['app_order_by'] ));
-		else
-			$order_by = "ID DESC";
-
-		switch($type) {
-
-			case 'active':
-						$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('confirmed', 'paid') APP_ADD ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
-						break;
-			case 'pending':
-						$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('pending') APP_ADD ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
-						break;
-			case 'completed':
-						$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('completed') APP_ADD ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
-						break;
-			case 'removed':
-						$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('removed') APP_ADD ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
-						break;
-			case 'reserved':
-						$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('reserved') APP_ADD ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
-						break;
-			default:
-						$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('confirmed', 'paid') APP_ADD ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
-						break;
-		}
-		$sql = preg_replace('/\bAPP_ADD\b/', $add, $sql);
-
-		return $this->db->get_results( $sql );
-
-	}
-
-	function get_apps_total() {
-		return $this->db->get_var( "SELECT FOUND_ROWS();" );
 	}
 
 

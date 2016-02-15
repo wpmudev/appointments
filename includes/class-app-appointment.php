@@ -346,13 +346,19 @@ function appointments_update_appointment( $app_id, $args ) {
 		'note' => '%s',
 		'status' => false, // We'll not update in the same query execution
 		'location' => '%d',
-		'date' => false, // There are no fields like these in the table but they can be passed to the function
-		'time' => false,
 		'gcal_updated' => '%s',
 		'gcal_ID' => '%s',
 		'sent_worker' => '%s',
-		'sent' => '%s'
+		'sent' => '%s',
 	);
+
+	$defaults = array(
+		'date' => false, // There are no fields like these in the table but they can be passed to the function
+		'time' => false,
+		'datetime' => false, // Pass a date and a time (timestamp or mysql date) here instead of date and time fields
+	);
+
+	$args = wp_parse_args( $args, $defaults );
 
 	$update = array();
 	$update_wildcards = array();
@@ -371,13 +377,6 @@ function appointments_update_appointment( $app_id, $args ) {
 	}
 	else {
 		$service = appointments_get_service( $old_appointment->service );
-	}
-
-	if ( ! $service ) {
-		$duration = 0;
-	}
-	else {
-		$duration = $service->duration;
 	}
 
 	if ( isset( $update['worker'] ) ) {
@@ -412,7 +411,7 @@ function appointments_update_appointment( $app_id, $args ) {
 		$update['sent'] = ':' . implode( ':', $update['sent'] ) . ':';
 	}
 
-
+	$duration = $service->duration;
 	if ( is_numeric( $args['datetime'] ) ) {
 		// A timestamp has been passed
 		$update['start'] = date( 'Y-m-d H:i:s', $args['datetime'] );
@@ -653,9 +652,16 @@ function appointments_get_appointments( $args = array() ) {
 
 	$defaults = array(
 		'worker' => false,
+		'service' => false,
 		'date_query' => array(),
 		'app_id' => array(),
-		'status' => false
+		'status' => false,
+		'per_page' => -1,
+		'page' => 1,
+		's' => false,
+		'orderby' => 'ID',
+		'order' => 'ASC',
+		'count' => false // Will return only the number of rows found
 	);
 
 	$args = wp_parse_args( $args, $defaults );
@@ -674,6 +680,10 @@ function appointments_get_appointments( $args = array() ) {
 
 		if ( false !== $args['worker'] && $worker = appointments_get_worker( $args['worker'] ) ) {
 			$where[] = $wpdb->prepare( "worker = %d", $worker->ID );
+		}
+
+		if ( false !== $args['service'] && $service = appointments_get_service( $args['service'] ) ) {
+			$where[] = $wpdb->prepare( "service = %d", $service->ID );
 		}
 
 		if ( ! empty( $args['date_query'] ) && is_array( $args['date_query'] ) ) {
@@ -729,6 +739,19 @@ function appointments_get_appointments( $args = array() ) {
 			$where[] = 'status IN ("' . implode( '","', $statuses ) . '")';
 		}
 
+		if ( false !== $args['s'] ) {
+			$args['s'] = trim( $args['s'] );
+			if ( $args['s'] ) {
+				// Search by user name
+				$where[] = $wpdb->prepare(
+					"name LIKE %s OR email LIKE %s OR ID IN ( SELECT ID FROM $wpdb->users WHERE user_login LIKE %s )",
+					'%' . $args['s'] . '%',
+					'%' . $args['s'] . '%',
+					'%' . $args['s'] . '%'
+				);
+			}
+		}
+
 		if ( ! empty( $where ) ) {
 			$where = "WHERE " . implode( " AND ", $where );
 		}
@@ -736,22 +759,54 @@ function appointments_get_appointments( $args = array() ) {
 			$where = '';
 		}
 
-		$query = "SELECT * FROM $table $where";
+		$allowed_orderby = array( 'ID', 'created', 'user', 'name', 'email', 'location',
+			'service', 'worker', 'price', 'status', 'start', 'end' );
+		$allowed_order = array( 'DESC', 'ASC', '' );
+		$order_query = '';
+		$args['order'] = strtoupper( $args['order'] );
+		if ( in_array( $args['orderby'], $allowed_orderby ) && in_array( $args['order'], $allowed_order ) ) {
+			$orderby = $args['orderby'];
+			$order = $args['order'];
+			$order_query = "ORDER BY $orderby $order";
+		}
+
+		$limit = '';
+		if ( $args['per_page'] > 0 ) {
+			$limit = $wpdb->prepare( "LIMIT %d, %d", intval( ( $args['page'] - 1 ) * $args['per_page'] ), intval( $args['per_page'] ) );
+		}
+
+		$found_rows = '';
+		if ( $args['count'] ) {
+			$found_rows = 'SQL_CALC_FOUND_ROWS';
+		}
+
+		$query = "SELECT $found_rows * FROM $table $where $order_query $limit";
 		$results = $wpdb->get_results( $query );
 
-		if ( $results ) {
+		if ( $args['count'] ) {
+			$results = $wpdb->get_var( "SELECT FOUND_ROWS()" );
+		}
+
+		if ( $results && ! $args['count'] ) {
 			$cached_queries[ $cache_key ] = $results;
 			wp_cache_set( 'app_get_appointments', $cached_queries );
 		}
 	}
 
-	$apps = array();
-	foreach ( $results as $row ) {
-		wp_cache_add( $row->ID, $row, 'app_appointments' );
-		$apps[] = new Appointments_Appointment( $row );
+	if ( ! $args['count'] ) {
+		$apps = array();
+		foreach ( $results as $row ) {
+			wp_cache_add( $row->ID, $row, 'app_appointments' );
+			$apps[] = new Appointments_Appointment( $row );
+		}
+
+		return $apps;
 	}
 
-	return $apps;
+	return $results;
+
+
+
 }
 
 /**
@@ -960,26 +1015,34 @@ function appointments_count_appointments() {
  * Return Appointments that have not been reminded to users given an hour
  *
  * @param int $hour
+ * @param string $type user|worker return unsent appointments for user or worker
  *
  * @return array
  */
-function appointments_get_unsent_appointments( $hour ) {
+function appointments_get_unsent_appointments( $hour, $type = 'user' ) {
 	global $wpdb;
 
 	$date = current_time( 'mysql' );
 	$table = appointments_get_table( 'appointments' );
 
-	$results = $wpdb->get_results(
-		$wpdb->prepare(
-			"SELECT * FROM $table
+	$query = $wpdb->prepare(
+		"SELECT * FROM $table
 			WHERE (status='paid' OR status='confirmed')
-			AND (sent NOT LIKE %s OR sent IS NULL)
-			AND DATE_ADD( %s, INTERVAL %d HOUR) > start",
-			'%:' . $hour . ':%',
-			$date,
-			$hour
-		)
+			AND DATE_ADD( %s, INTERVAL %d HOUR) > start ",
+		$date,
+		$hour
 	);
+
+	if ( 'worker' == $type ) {
+		$query .= $wpdb->prepare( "AND (sent_worker NOT LIKE %s OR sent_worker IS NULL)", '%:' . $hour . ':%' );
+	}
+	else {
+		$query .= $wpdb->prepare( "AND (sent NOT LIKE %s OR sent IS NULL)", '%:' . $hour . ':%' );
+	}
+
+
+
+	$results = $wpdb->get_results( $query );
 
 	$apps = array();
 	foreach ( $results as $result ) {
