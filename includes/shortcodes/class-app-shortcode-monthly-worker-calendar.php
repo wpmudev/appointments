@@ -64,30 +64,17 @@ class App_Shortcode_WorkerMonthlyCalendar extends App_Shortcode {
 	}
 
 	private function _get_worker_appointments ($worker_id, $status, $start_at) {
-		global $appointments, $wpdb;
-		$worker_sql = $status_sql = '';
-
-		$services = appointments_get_worker_services($worker_id);
-		$service_ids = !empty($services)
-			? array_filter(array_map('intval', wp_list_pluck($services, 'ID')))
-			: false
-		;
-		$worker_sql = !empty($service_ids)
-			? $wpdb->prepare('(worker=%d OR service IN(' . join(',', $service_ids) . '))', $worker_id)
-			: $wpdb->prepare('worker=%d', $worker_id)
-		;
-
-		$status = is_array($status) ? array_map( 'esc_sql', $status) : false;
-		$status_sql = $status ? "AND status IN('" . join("','", $status) . "')" : '';
-
-		$first = strtotime(date('Y-m-01', $start_at));
-		$last = ($first + (date('t', $first) * 86400 )) - 1;
-
-		$sql = $wpdb->prepare(
-			"SELECT * FROM {$appointments->app_table} WHERE {$worker_sql} {$status_sql} AND UNIX_TIMESTAMP(start)>%d AND UNIX_TIMESTAMP(end)<%d ORDER BY start ASC",
-			$first, $last
+		$args = array(
+			'worker' => $worker_id,
+			'start' => date( 'Y-m-d H:i:s', $start_at )
 		);
-		return $wpdb->get_results($sql);
+
+		$status = is_array( $status ) ? $status : false;
+		if ( $status ) {
+			$args['status'] = $status;
+		}
+
+		return appointments_get_month_appointments( $args );
 	}
 
 	private function _create_appointments_table ($scheduled, $args) {

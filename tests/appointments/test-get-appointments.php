@@ -1053,6 +1053,10 @@ class App_Get_Appointments_Test extends App_UnitTestCase {
 
 		$apps = appointments_get_appointments( array( 'service' => $service_id_2 ) );
 		$this->assertEquals( wp_list_pluck( $apps, 'ID' ), array( $app_id_2, $app_id_3 ) );
+
+		// Get by several services
+		$apps = appointments_get_appointments( array( 'service' => array( $service_id_1, $service_id_2 ) ) );
+		$this->assertEquals( wp_list_pluck( $apps, 'ID' ), array( $app_id_1, $app_id_2, $app_id_3 ) );
 	}
 
 	function test_get_appointments_count_rows() {

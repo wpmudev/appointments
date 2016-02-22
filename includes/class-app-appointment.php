@@ -682,8 +682,22 @@ function appointments_get_appointments( $args = array() ) {
 			$where[] = $wpdb->prepare( "worker = %d", $worker->ID );
 		}
 
-		if ( false !== $args['service'] && $service = appointments_get_service( $args['service'] ) ) {
-			$where[] = $wpdb->prepare( "service = %d", $service->ID );
+		if ( false !== $args['service'] && ! is_array( $args['service'] ) ) {
+			// Only one service, let's make it an array
+			$args['service'] = array( $args['service'] );
+		}
+
+		if ( ! empty( $args['service'] ) && is_array( $args['service'] ) ) {
+			$where_services = array();
+			foreach ( $args['service'] as $service_id ) {
+				$service = appointments_get_service( $service_id );
+				if ( ! $service ) {
+					continue;
+				}
+
+				$where_services[] = absint( $service_id );
+			}
+			$where[] = 'service IN (' . implode( ',', $where_services ) . ')';
 		}
 
 		if ( ! empty( $args['date_query'] ) && is_array( $args['date_query'] ) ) {
@@ -707,11 +721,9 @@ function appointments_get_appointments( $args = array() ) {
 			foreach ( $date_queries as $date_query ) {
 				$date_query = _appointments_parse_date_query( $date_query );
 				if ( $date_query ) {
-					$date_query_where[] = $wpdb->prepare( $date_query['field'] . " " . $date_query['compare'] . "%s", $date_query['value'] );;
+					$date_query_where[] = $wpdb->prepare( $date_query['field'] . $date_query['compare'] . "%s", $date_query['value'] );
 				}
 			}
-
-
 
 			if ( $date_query_where ) {
 				$where[] = '(' . implode( " " . $condition . " ", $date_query_where ) . ')';
@@ -805,8 +817,79 @@ function appointments_get_appointments( $args = array() ) {
 
 	return $results;
 
+}
 
+function appointments_get_month_appointments( $args ) {
+	global $wpdb;
 
+	$defaults = array(
+		'worker' => false,
+		'status' => false,
+		'start' => current_time( 'mysql' )
+	);
+
+	$args = wp_parse_args( $args, $defaults );
+
+	if ( ! $args['worker'] ) {
+		return array();
+	}
+
+	$worker = appointments_get_worker( $args['worker'] );
+	if ( ! $worker ) {
+		return array();
+	}
+
+	$cache_key = md5( maybe_serialize( $args ) );
+	$cached_queries = wp_cache_get( 'app_get_month_appointments' );
+	if ( ! is_array( $cached_queries ) ) {
+		$cached_queries = array();
+	}
+
+	if ( isset( $cached_queries[ $cache_key ] ) ) {
+		$results = $cached_queries[ $cache_key ];
+	}
+	else {
+		$where = array();
+
+		$services_ids = wp_list_pluck( appointments_get_worker_services( $args['worker'] ), 'ID' );
+		if ( $services_ids ) {
+			$where[] = $wpdb->prepare( "( worker = %d OR service IN (" . implode( ',', $services_ids ) . ") )", $args['worker'] );
+		}
+		else {
+			$where[] = $wpdb->prepare( "worker = %d", $args['worker'] );
+		}
+
+		if ( ! is_array( $args['status'] ) && $args['status'] ) {
+			$args['status'] = array( $args['status'] );
+		}
+
+		if ( ! empty( $args['status'] ) ) {
+			$where[] = "status IN ('" . implode( "','", $args['status'] ) . "')";
+		}
+
+		// The dates
+		$first = date( 'Y-m-01 00:00:00', strtotime( $args['start'] ) ); // Start of month
+		$first_timestamp = strtotime( $first );
+		$last_timestamp = ($first_timestamp + (date('t', $first_timestamp) * 86400 )) - 1; // End of month
+		$last = date( 'Y-m-d H:i:s', $last_timestamp );
+
+		$where[] = $wpdb->prepare( "start > %s", $first );
+		$where[] = $wpdb->prepare( "end < %s", $last );
+
+		$table = appointments_get_table( 'appointments' );
+
+		$where = "WHERE " . implode( " AND ", $where );
+		$query = "SELECT * FROM $table $where ORDER BY start ASC";
+
+		$results = $wpdb->get_results( $query );
+	}
+
+	$apps = array();
+	foreach ( $results as $row ) {
+		$apps[] = new Appointments_Appointment( $row );
+	}
+
+	return $apps;
 }
 
 /**
@@ -862,6 +945,7 @@ function appointments_clear_appointment_cache( $app_id = false ) {
 	wp_cache_delete( 'app_count_appointments' );
 	wp_cache_delete( 'app_get_appointments_filtered_by_service' );
 	wp_cache_delete( 'app_get_appointments' );
+	wp_cache_delete( 'app_get_month_appointments' );
 	appointments_delete_timetables_cache();
 }
 
@@ -957,9 +1041,11 @@ function appointments_get_expired_appointments( $pending_seconds = 0 ) {
  * @internal
  *
  * @param $date_query
+ *
+ * @return array
  */
 function _appointments_parse_date_query( $date_query = array() ) {
-	$allowed_fields = array( 'created' );
+	$allowed_fields = array( 'created', 'end', 'start' );
 	$allowed_comparers = array( '=', '>', '<', '<=', '>=' );
 
 	$date_query_defaults = array(
