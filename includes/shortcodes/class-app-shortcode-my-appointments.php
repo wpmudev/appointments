@@ -174,21 +174,18 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 			. '</th><th class="my-appointments-worker">' . $provider_or_client
 			. '</th><th class="my-appointments-date">' . __('Date/time', 'appointments' )
 			. '</th><th class="my-appointments-status">' . __('Status', 'appointments' ) . '</th>' );
-		$colspan = 4;
 
 		if ( $allow_confirm ) {
 			$ret .= '<th class="my-appointments-confirm">'. __('Confirm', 'appointments' ) . '</th>';
-			$colspan++;
 		}
 		if ( $a_cancel ) {
 			$ret .= '<th class="my-appointments-cancel">'. _x('Cancel', 'Discard existing info', 'appointments') . '</th>';
-			$colspan++;
 		}
 		if ( $gcal && 'yes' == $appointments->options['gcal'] ) {
 			$ret .= '<th class="my-appointments-gcal">&nbsp;</th>';
-			$colspan++;
 		}
-
+        
+        $colspan = substr_count($ret, '<th');
 		$ret .= '</thead><tbody>';
 
 		if ( $results ) {
