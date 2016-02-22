@@ -67,7 +67,17 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 			'required_message' => array(
 				'value' => __('Please, select a service provider.', 'appointments'),
 				'help' => __('The message that will be shown if service providers are required.', 'appointments'),
-				'example' => __('Please, select a service provider.', 'appointments'),
+				'example' => __('Please, select a service.', 'appointments'),
+			),
+			'require_service' => array(
+				'value' => 0,
+				'help' => __('Setting this argument to "1" means a timetable will not be rendered unless a service has been previously selected.', 'appointments'),
+				'example' => 1,
+			),
+			'required_service_message' => array(
+				'value' => __('Please, select a service.', 'appointments'),
+				'help' => __('The message that will be shown if services are required.', 'appointments'),
+				'example' => __('Please, select a service.', 'appointments'),
 			),
 
 		);
@@ -133,6 +143,8 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 
 		$has_worker = !empty($appointments->worker) || !empty($worker);
 
+        $has_service = !empty($require_service) ? $_REQUEST["app_service_id"] : false;
+
 		$c  = '';
         $c .= '<div class="appointments-wrapper">';
 
@@ -140,6 +152,11 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 			$c .= !empty($required_message)
 				? $required_message
 				: __('Please, select a service provider.', 'appointments')
+			;
+ 		} elseif (!$has_service && !empty($require_service)) {
+			$c .= !empty($required_service_message)
+				? $required_service_message
+				: __('Please, select a service.', 'appointments')
 			;
  		} else {
 	        $c .= $title;
@@ -245,6 +262,16 @@ class App_Shortcode_MonthlySchedule extends App_Shortcode {
 				'help' => __('The message that will be shown if service providers are required.', 'appointments'),
 				'example' => __('Please, select a service provider.', 'appointments'),
 			),
+			'require_service' => array(
+				'value' => 0,
+				'help' => __('Setting this argument to "1" means a timetable will not be rendered unless a service has been previously selected.', 'appointments'),
+				'example' => 1,
+			),
+			'required_service_message' => array(
+				'value' => __('Please, select a service.', 'appointments'),
+				'help' => __('The message that will be shown if services are required.', 'appointments'),
+				'example' => __('Please, select a service.', 'appointments'),
+			),
 		);
 	}
 
@@ -319,6 +346,10 @@ class App_Shortcode_MonthlySchedule extends App_Shortcode {
 
 		$has_worker = !empty($appointments->worker) || !empty($worker);
 
+        $has_service = !empty($require_service) ? $_REQUEST["app_service_id"] : false;
+        
+        
+
 		$c  = '';
         $c .= '<div class="appointments-wrapper">';
 
@@ -326,6 +357,11 @@ class App_Shortcode_MonthlySchedule extends App_Shortcode {
 			$c .= !empty($required_message)
 				? $required_message
 				: __('Please, select a service provider.', 'appointments')
+			;
+ 		} elseif (!$has_service && !empty($require_service)) {
+			$c .= !empty($required_service_message)
+				? $required_service_message
+				: __('Please, select a service.', 'appointments')
 			;
  		} else {
 	        $c .= apply_filters('app-shortcodes-monthly_schedule-title', $title, $args);
