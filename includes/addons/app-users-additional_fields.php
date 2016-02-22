@@ -11,6 +11,7 @@ Author: WPMU DEV
 class App_Users_AdditionalFields {
 
 	private $_data;
+	/** @var  Appointments $_core */
 	private $_core;
 
 	private function __construct () {}
@@ -40,7 +41,7 @@ class App_Users_AdditionalFields {
 		add_action('app_remove_expired', array($this, 'cleanup_data'));
 		add_action('app_remove_pending', array($this, 'cleanup_data'));
 		// Manual cleanup
-		add_action('app_change_status', array($this, 'manual_cleanup_data'), 10, 2);
+		add_action('wpmudev_appointments_update_appointment_status', array($this, 'manual_cleanup_data'), 10, 2);
 		add_action('app_bulk_status_change', array($this, 'bulk_cleanup_data'));
 		// Delete filters
 		add_action('app_deleted', array($this, 'permanently_deleted_cleanup'));
@@ -212,7 +213,7 @@ EO_ADMIN_JS;
 		foreach ($app_ids as $app_id) {
 			$app_id = (int)$app_id;
 			if (!$app_id) continue;
-			$this->cleanup_data($this->_core->get_app($app_id));
+			$this->cleanup_data(appointments_get_appointment($app_id));
 		}
 	}
 
@@ -227,9 +228,9 @@ EO_ADMIN_JS;
 		}
 	}
 
-	public function manual_cleanup_data ($status, $app_id) {
-		if ('removed' != $status) return false;
-		$this->cleanup_data($this->_core->get_app($app_id));
+	public function manual_cleanup_data ($app_id, $new_status) {
+		if ('removed' != $new_status) return false;
+		$this->cleanup_data(appointments_get_appointment($app_id));
 	}
 
 	public function cleanup_data ($app) {

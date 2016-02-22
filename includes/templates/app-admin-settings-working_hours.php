@@ -4,7 +4,7 @@
 <br />
 <br />
 <?php
-$workers = $appointments->get_workers();
+$workers = appointments_get_workers();
 ?>
 <?php _e('List for:', 'appointments')?>
 &nbsp;
@@ -17,7 +17,7 @@ if ( $workers ) {
 			$s = " selected='selected'";
 		else
 			$s = '';
-		echo '<option value="'.$worker->ID.'"'.$s.'>' . $appointments->get_worker_name( $worker->ID, false ) . '</option>';
+		echo '<option value="'.$worker->ID.'"'.$s.'>' . appointments_get_worker_name( $worker->ID, false ) . '</option>';
 	}
 }
 ?>

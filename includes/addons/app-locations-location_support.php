@@ -14,6 +14,8 @@ class App_Locations_LocationsWorker {
 	const INJECT_TAB_BEFORE = 'services';
 
 	private $_data;
+
+	/** @var  App_Locations_Model */
 	private $_locations;
 
 	private function __construct () {}
@@ -51,6 +53,7 @@ class App_Locations_LocationsWorker {
 		$editable .= '<span class="title">' . __('Location', 'appointments') . '</span>';
 		$editable .= '<select name="location"><option value=""></option>';
 		foreach ($all as $loc) {
+			/** @var AppLocation $loc */
 			$sel = selected($loc->get_id(), $appointment->location, false);
 			$editable .= '<option value="' . esc_attr($loc->get_id()) . '" ' . $sel . '>' . $loc->get_admin_label() . '</option>';
 		}
@@ -214,6 +217,13 @@ class App_Locations_LocationsWorker {
 			$injection_point = $this->_data['locations_settings']['all_appointments'];
 			add_filter('app_all_appointments_column_name', array($this, 'all_appointments_headers'), 1);
 			add_filter('app-shortcode-all_appointments-' . $injection_point, array($this, 'all_appointments_address'), 1, 2);
+		}
+
+		if ( empty( $this->_data['locations_settings']['all_appointments'] ) ) {
+			$this->_data['locations_settings']['all_appointments'] = '';
+		}
+		if ( empty( $this->_data['locations_settings']['my_appointments'] ) ) {
+			$this->_data['locations_settings']['my_appointments'] = '';
 		}
 
 		// Add macro expansion filtering

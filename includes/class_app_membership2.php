@@ -11,6 +11,8 @@ class App_Membership2 {
 	/**
 	 * A reference to the Membership2 API instance.
 	 * The property is set by $this::init()
+	 *
+	 * @var MS_Controller_Api
 	 */
 	protected $api = null;
 

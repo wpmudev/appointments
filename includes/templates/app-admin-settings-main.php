@@ -104,6 +104,14 @@
 			</tr>
 
 			<tr valign="top">
+				<th scope="row"><?php _e('Appointment thank you page', 'appointments') ?></th>
+				<td colspan="2">
+					<?php wp_dropdown_pages( array( "show_option_none"=>__('Do not redirect', 'appointments'),"option_none_value "=>0,"name"=>"thank_page", "selected"=>@$appointments->options["thank_page"] ) ) ?>
+					<span class="description"><?php _e('Page where user will be redirected to after processing an appointment.', 'appointments') ?></span>
+				</td>
+			</tr>
+
+			<tr valign="top">
 				<th scope="row" ><?php _e('Allow service provider set working hours', 'appointments')?></th>
 				<td colspan="2">
 				<select name="allow_worker_wh">

@@ -12,7 +12,7 @@
  * @since 1.2.0
  */
 
-if (!defined('APP_GCAL_MAX_RESULTS_LIMIT')) define('APP_GCAL_MAX_RESULTS_LIMIT', 500, true);
+if (!defined('APP_GCAL_MAX_RESULTS_LIMIT')) define('APP_GCAL_MAX_RESULTS_LIMIT', 500);
 
 if ( !class_exists( 'AppointmentsGcal' ) ) {
 class AppointmentsGcal {
@@ -59,6 +59,17 @@ class AppointmentsGcal {
 			$this->uploads_dir 	= $uploads["basedir"] . "/";
 		else
 			$this->uploads_dir 	= WP_CONTENT_DIR . "/uploads/";
+
+		add_action( 'wpmudev_appointments_update_appointment_status', array( $this, 'update_appointment_status' ), 10, 2 );
+	}
+
+	/**
+	 * Triggered when an Appointment change its status
+	 */
+	function update_appointment_status( $app_id, $new_status ) {
+		if ( $this->is_syncable_status( $new_status ) ) {
+			$this->update( $app_id );
+		}
 	}
 
 	/**
@@ -117,7 +128,7 @@ class AppointmentsGcal {
 			return $text;
 
 		global $appointments;
-		if ( !$appointments->is_worker( $user_id ) )
+		if ( ! appointments_is_worker( $user_id ) )
 			return ' - ';
 
 		$mode = $this->get_api_mode( $user_id );
@@ -919,12 +930,12 @@ class AppointmentsGcal {
 		$this->event->setEnd( $end );
 		$this->event->setSummary(apply_filters(
 			'app-gcal-set_summary',
-			$a->_replace( $this->get_summary( $worker_id ), $app->name, $a->get_service_name($app->service), $a->get_worker_name($app->worker), $app->start, $app->price, $a->get_deposit($app->price), $app->phone, $app->note, $app->address, $app->email, $app->city ),
+			$a->_replace( $this->get_summary( $worker_id ), $app->name, $a->get_service_name($app->service), appointments_get_worker_name($app->worker), $app->start, $app->price, $a->get_deposit($app->price), $app->phone, $app->note, $app->address, $app->email, $app->city ),
 			$app
 		));
 		$this->event->setDescription(apply_filters(
 			'app-gcal-set_description',
-			$a->_replace( $this->get_description( $worker_id ), $app->name, $a->get_service_name($app->service), $a->get_worker_name($app->worker), $app->start, $app->price, $a->get_deposit($app->price), $app->phone, $app->note, $app->address, $app->email, $app->city ),
+			$a->_replace( $this->get_description( $worker_id ), $app->name, $a->get_service_name($app->service), appointments_get_worker_name($app->worker), $app->start, $app->price, $a->get_deposit($app->price), $app->phone, $app->note, $app->address, $app->email, $app->city ),
 			$app
 		));
 		$this->event->attendees = $attendees;
@@ -959,8 +970,7 @@ class AppointmentsGcal {
 	 * @param app_id: Appointment ID to be inserted
 	 */
 	function insert( $app_id ) {
-		global $appointments;
-		$app = $appointments->get_app( $app_id );
+		$app = appointments_get_appointment( $app_id );
 		$worker_id = $app->worker;
 
 		// No preference case
@@ -997,12 +1007,13 @@ class AppointmentsGcal {
 			$app->price = 123;
 			$app->start = date( 'Y-m-d H:i:s', $this->local_time + 600 );
 			$app->end = date( 'Y-m-d H:i:s', $this->local_time + 2400 );
-			$app->service = $appointments->get_first_service_id();
+			$app->service = appointments_get_services_min_id();
 			$app->email = $appointments->get_admin_email( );
 			$app->note = __('This is a test appointment inserted by Appointments+', 'appointments');
 		} else {
-			$app = $appointments->get_app( $app_id );
+			$app = appointments_get_appointment( $app_id );
 		}
+
 
 		// Create Event object and set parameters
 		$this->set_event_parameters( $app, $app->worker );
@@ -1015,7 +1026,12 @@ class AppointmentsGcal {
 			// Write Event ID to database
 			$gcal_ID = $createdEvent->getId();
 			if ( $gcal_ID && !$test ) {
-				$wpdb->update( $this->app_table, array( 'gcal_ID' => $gcal_ID, 'gcal_updated' => date ("Y-m-d H:i:s", $this->local_time ) ), array( 'ID'=>$app_id ) );
+
+				$args = array(
+					'gcal_updated' => date( "Y-m-d H:i:s", $this->local_time ),
+					'gcal_ID' => $gcal_ID
+				);
+				appointments_update_appointment( $app_id, $args );
 			} else {
 				$appointments->log("The insert did not create a real result we can work with");
 			}
@@ -1033,7 +1049,7 @@ class AppointmentsGcal {
 	 */
 	function update( $app_id ) {
 		global $appointments;
-		$app = $appointments->get_app( $app_id );
+		$app = appointments_get_appointment( $app_id );
 		$worker_id = $app->worker;
 		if ( $app->gcal_ID ) {
 			// Update this event from general calendar
@@ -1057,7 +1073,7 @@ class AppointmentsGcal {
 			return false;
 
 		global $appointments, $wpdb;
-		$app = $appointments->get_app( $app_id );
+		$app = appointments_get_appointment( $app_id );
 		if ( $app->gcal_ID ) {
 			$this->set_event_parameters( $app, $worker_id );
 
@@ -1081,8 +1097,7 @@ class AppointmentsGcal {
 	 * @param app_id: Appointment ID that has been deleted
 	 */
 	function delete( $app_id ) {
-		global $appointments;
-		$app = $appointments->get_app( $app_id );
+		$app = appointments_get_appointment( $app_id );
 //$appointments->log(sprintf("Attempting to delete the appointment %s from GCal", $app_id));
 		$worker_id = $app->worker;
 		// In any case delete this event from general calendar
@@ -1098,8 +1113,8 @@ class AppointmentsGcal {
 	function delete_event( $app_id, $worker_id=0 ) {
 		if ( !$this->connect( $worker_id ) )
 			return false;
-		global $appointments;
-		$app = $appointments->get_app( $app_id );
+
+		$app = appointments_get_appointment( $app_id );
 //$appointments->log(sprintf("Deleting the appointment %s from GCal (worker id: %s)", $app_id, $worker_id));
 		if ($app->gcal_ID) {
 			try {
@@ -1157,6 +1172,7 @@ class AppointmentsGcal {
 		));
 		// Get only future events and limit them with appointment limit setting and 500 events
 		$error_code = false;
+		$events = array();
 		try {
 			$events = $this->service->events->listEvents($this->get_selected_calendar($worker_id), $arguments);
 		} catch (Exception $e) {
@@ -1191,8 +1207,9 @@ class AppointmentsGcal {
 		}
 
 		if ( $events && is_array( $events->getItems()) ) {
+			/** @var App_Google_Service_Calendar_Event $event */
 			// Service ID is not important as we will use this record for blocking our time slots only
-			$service_id = $appointments->get_first_service_id();
+			$service_id = appointments_get_services_min_id();
 
 			// Create a list of event_id's
 			foreach ($events->getItems() as $event) {
@@ -1262,6 +1279,8 @@ class AppointmentsGcal {
 		if ( $this->deleted )
 			$message .= sprintf( __('%s appointment(s) deleted.','appointments'), $this->deleted ). ' ';
 
+		wp_cache_flush();
+		delete_transient( 'app_timetables' );
 		return $message;
 	}
 

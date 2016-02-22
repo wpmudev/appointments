@@ -150,11 +150,10 @@ class App_MP_Bridge_Legacy {
 
 		list( $app_title, $app_id ) = split( ':', $name );
 		if ( $app_id ) {
-			global $wpdb;
-			$result = $this->_core->get_app( $app_id );
+			$result = appointments_get_appointment( $app_id );
 			if ( $result ) {
 				$name = $name . " (". date_i18n( $this->_core->datetime_format, strtotime( $result->start ) ) . ")";
-				$name = apply_filters( 'app_mp_product_name_in_cart', $name, $this->_core->get_service_name( $result->service ), $this->_core->get_worker_name( $result->worker ), $result->start, $result );
+				$name = apply_filters( 'app_mp_product_name_in_cart', $name, $this->_core->get_service_name( $result->service ), appointments_get_worker_name( $result->worker ), $result->start, $result );
 			}
 		}
 		return $name;
@@ -237,9 +236,7 @@ class App_MP_Bridge_Legacy {
 
 			// Find minimum service price here:
 			global $wpdb;
-			$min_price = $wpdb->get_var( "SELECT MIN(price) FROM " . $this->_core->services_table . " WHERE price>0 " );
-			if ( !$min_price )
-				$min_price = 0;
+			$min_price = appointments_get_services_min_price();
 
 			add_post_meta( $post_id, 'mp_price', array( $min_price ) );
 			// Variation ID

@@ -5,7 +5,7 @@
  */
 class App_Installer {
 
-	private function __construct () {}
+	public function __construct () {}
 
 	public static function serve () {
 		$me = new self;

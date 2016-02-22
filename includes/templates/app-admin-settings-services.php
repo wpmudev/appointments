@@ -17,7 +17,7 @@
 	<th style="width:25%"><?php _e( 'Description page', 'appointments') ?></th>
 	</tr>
 	<?php
-	$services = $appointments->get_services();
+	$services = appointments_get_services();
 	$max_id = null;
 	if ( is_array( $services ) && $nos = count( $services ) ) {
 		foreach ( $services as $service ) {

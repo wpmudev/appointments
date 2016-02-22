@@ -1,0 +1,18 @@
+{
+  "name": "appointments",
+  "version": "1.5.5",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt-checktextdomain": "^1.0.0",
+    "grunt-po2mo": "^0.1.2",
+    "grunt-pot": "^0.2.1",
+    "grunt-wp-i18n": "^0.5.3"
+  },
+  "author": "WPMU DEV",
+  "license": "GPLv2"
+}

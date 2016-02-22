@@ -4,6 +4,7 @@
 class Appointments_AJAX {
 
 	public $options = array();
+	public $_google_user_cache = null;
 
 	public function __construct() {
 		global $appointments;
@@ -23,6 +24,16 @@ class Appointments_AJAX {
 
 		add_action( 'wp_ajax_cancel_app', array( $appointments, 'cancel' ) ); 							// Cancel appointment from my appointments
 		add_action( 'wp_ajax_nopriv_cancel_app', array( $appointments, 'cancel' ) );
+
+		add_action( 'wp_ajax_services_load_thumbnail', array( $this, 'load_service_thumbnail' ) );
+		add_action( 'wp_ajax_nopriv_services_load_thumbnail', array( $this, 'load_service_thumbnail' ) );
+
+		// API login after the options have been initialized
+		add_action('init', array($this, 'setup_api_logins'), 10);
+	}
+
+	public function load_service_thumbnail() {
+		wp_send_json_success( array( 'hello' ) );
 	}
 
 	/**
@@ -45,20 +56,11 @@ class Appointments_AJAX {
 	}
 
 	function inline_edit_save() {
-		global $appointments;
+		global $appointments, $wpdb, $current_user;
 
-		$app_id = $_POST["app_id"];
-		$email_sent = false;
-		global $wpdb, $current_user;
-		$app = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$appointments->app_table} WHERE ID=%d", $app_id));
+		$app_id = absint( $_POST["app_id"] );
+		$app = appointments_get_appointment( $app_id );
 		$data = array();
-
-		if ($app != null) {
-			$data['ID'] = $app_id;
-		} else {
-			$data['created'] = date("Y-m-d H:i:s", $appointments->local_time );
-			$data['ID'] = 'NULL';
-		}
 
 		$data['user'] = $_POST['user'];
 		$data['email'] = !empty($_POST['email']) && is_email($_POST['email']) ? $_POST['email'] : '';
@@ -67,102 +69,57 @@ class Appointments_AJAX {
 		$data['address'] = $_POST['address'];
 		$data['city'] = $_POST['city'];
 		$data['service'] = $_POST['service'];
-		$service = $appointments->get_service( $_POST['service'] );
 		$data['worker'] = $_POST['worker'];
 		$data['price'] = $_POST['price'];
-		// Clear comma from date format. It creates problems for php5.2
-		$data['start']	= date(
-			'Y-m-d H:i:s',
-			strtotime(
-				str_replace(',', '', $appointments->to_us($_POST['date'])) .
-				" " .
-				date('H:i', strtotime($_POST['time']))
-			)
-		);
-		$data['end'] = date(
-			'Y-m-d H:i:s',
-			strtotime(
-				str_replace(',', '', $appointments->to_us($_POST['date'])) .
-				" " .
-				date('H:i', strtotime($_POST['time']))
-			)
-			+ ($service->duration * 60)
-		);
 		$data['note'] = $_POST['note'];
 		$data['status'] = $_POST['status'];
+		$data['date'] = $_POST['date'];
+		$data['time'] = $_POST['time'];
 		$resend = $_POST["resend"];
 
 		$data = apply_filters('app-appointment-inline_edit-save_data', $data);
 
 		$update_result = $insert_result = false;
-		if ($app != null) {
+		if ( $app ) {
 			// Update
-			$update_result = $wpdb->update( $appointments->app_table, $data, array('ID' => $app_id) );
+			$update_result = appointments_update_appointment( $app_id, $data );
 			if ( $update_result ) {
 				if ( ( 'pending' == $data['status'] || 'removed' == $data['status'] || 'completed' == $data['status'] ) && is_object( $appointments->gcal_api ) ) {
 					$appointments->gcal_api->delete( $app_id );
 				} else if (is_object($appointments->gcal_api) && $appointments->gcal_api->is_syncable_status($data['status'])) {
 					$appointments->gcal_api->update( $app_id ); // This also checks for event insert
 				}
-				if ('removed' === $data['status']) $appointments->send_removal_notification($app_id);
 			}
-			if ($update_result && $resend) {
-				if ('removed' == $data['status']) do_action( 'app_removed', $app_id );
-				//else $this->send_confirmation( $app_id );
+
+			if ( $resend && 'removed' != $data['status'] ) {
+				appointments_send_confirmation( $app_id );
 			}
+
 		} else {
 			// Insert
-			$insert_result = $wpdb->insert( $appointments->app_table, $data );
-			/*
-// Moved
-			if ( $insert_result && $resend && empty($email_sent) ) {
-				$email_sent = $this->send_confirmation( $wpdb->insert_id );
-			}
-			if ( $insert_result && is_object($this->gcal_api) && $this->gcal_api->is_syncable_status($data['status'])) {
-				$this->gcal_api->insert( $wpdb->insert_id );
-			}
-			*/
-		}
-
-		do_action('app-appointment-inline_edit-after_save', ($update_result ? $app_id : $wpdb->insert_id), $data);
-		/*
-		// Moved
-				if ($resend && 'removed' != $data['status'] && empty($email_sent) ) {
-					$email_sent = $this->send_confirmation( $app_id );
+			$app_id = appointments_insert_appointment( $data );
+			if ( $app_id ) {
+				$insert_result = true;
+				if ( $resend ) {
+					appointments_send_confirmation( $app_id );
 				}
-		*/
-		if ( ( $update_result || $insert_result ) && $data['user'] && defined('APP_USE_LEGACY_USERDATA_OVERWRITING') && APP_USE_LEGACY_USERDATA_OVERWRITING ) {
-			if ( $data['name'] )
-				update_user_meta( $data['user'], 'app_name',  $data['name'] );
-			if (  $data['email'] )
-				update_user_meta( $data['user'], 'app_email', $data['email'] );
-			if ( $data['phone'] )
-				update_user_meta( $data['user'], 'app_phone', $data['phone'] );
-			if ( $data['address'] )
-				update_user_meta( $data['user'], 'app_address', $data['address'] );
-			if ( $data['city'] )
-				update_user_meta( $data['user'], 'app_city', $data['city'] );
-
-			do_action( 'app_save_user_meta', $data['user'], $data );
+			}
 		}
 
-		do_action('app-appointment-inline_edit-before_response', ($update_result ? $app_id : $wpdb->insert_id), $data);
+		do_action('app-appointment-inline_edit-after_save', $app_id, $data);
+		do_action('app-appointment-inline_edit-before_response', $app_id, $data);
+
+		$app = appointments_get_appointment( $app_id );
+		if ( ! $app ) {
+			$insert_result = false;
+			$update_result = false;
+		}
 
 		// Move mail sending here so the fields can expand
-		if ( $insert_result && $resend && empty($email_sent) ) {
-			$email_sent = $appointments->send_confirmation( $wpdb->insert_id );
-		}
 		if ( $insert_result && is_object($appointments->gcal_api) && $appointments->gcal_api->is_syncable_status($data['status'])) {
-			$appointments->gcal_api->insert( $wpdb->insert_id );
-		}
-		if ($resend && !empty($app_id) && 'removed' != $data['status'] && empty($email_sent) ) {
-			$email_sent = $appointments->send_confirmation( $app_id );
+			$appointments->gcal_api->insert( $app->ID );
 		}
 
-		$result = array(
-			'app_id' => 0,
-			'message' => '',
-		);
 		if ( $update_result ) {
 			// Log change of status
 			if ( $data['status'] != $app->status ) {
@@ -174,7 +131,7 @@ class Appointments_AJAX {
 			);
 		} else if ( $insert_result ) {
 			$result = array(
-				'app_id' => $wpdb->insert_id,
+				'app_id' => $app->ID,
 				'message' => __('<span style="color:green;font-weight:bold">Changes saved.</span>', 'appointments'),
 			);
 		} else {
@@ -183,12 +140,12 @@ class Appointments_AJAX {
 				: sprintf('<span style="color:red;font-weight:bold">%s</span>', __('Record could not be saved OR you did not make any changes!', 'appointments'))
 			;
 			$result = array(
-				'app_id' => ($update_result ? $app_id : $wpdb->insert_id),
+				'app_id' => $app_id,
 				'message' => $message,
 			);
 		}
 
-		$result = apply_filters('app-appointment-inline_edit-result', $result, ($update_result ? $app_id : $wpdb->insert_id), $data);
+		$result = apply_filters('app-appointment-inline_edit-result', $result, $app_id, $data);
 		die(json_encode($result));
 	}
 
@@ -203,7 +160,7 @@ class Appointments_AJAX {
 		$app_id = $_POST["app_id"];
 		$end_datetime = '';
 		if ( $app_id ) {
-			$app = $wpdb->get_row( $wpdb->prepare("SELECT * FROM {$appointments->app_table} WHERE ID=%d", $app_id) );
+			$app = appointments_get_appointment( $app_id );
 			$start_date_timestamp = date("Y-m-d", strtotime($app->start));
 			if ( $appointments->locale_error ) {
 				$start_date = date( $safe_date_format, strtotime( $app->start ) );
@@ -237,23 +194,13 @@ class Appointments_AJAX {
 			}
 		} else {
 			$app = new stdClass(); // This means insert a new app object
-			/*
-			//DO NOT DO THIS!!!!
-			//This is just begging for a race condition issue >.<
-						// Get maximum ID
-						$app_max = $wpdb->get_var( "SELECT MAX(ID) FROM " . $this->app_table . " " );
-						// Check if nothing has saved yet
-						if ( !$app_max )
-							$app_max = 0;
-						$app->ID = $app_max + 1 ; // We want to create a new record
-			*/
 			$app->ID = 0;
 			// Set other fields to default so that we don't get notice messages
 			$app->user = $app->location = $app->worker = 0;
 			$app->created = $app->end = $app->name = $app->email = $app->phone = $app->address = $app->city = $app->status = $app->sent = $app->sent_worker = $app->note = '';
 
 			// Get first service and its price
-			$app->service = $appointments->get_first_service_id();
+			$app->service = appointments_get_services_min_id();
 			$_REQUEST['app_service_id'] = $app->service;
 			$_REQUEST['app_provider_id'] = 0;
 			$app->price = $appointments->get_price( );
@@ -330,7 +277,7 @@ class Appointments_AJAX {
 		$html .= '<div class="inline-edit-col">';
 		$html .= '<h4>'.__('SERVICE', 'appointments').'</h4>';
 		/* Services */
-		$services = $appointments->get_services();
+		$services = appointments_get_services();
 		$html .= '<label>';
 		$html .= '<span class="title">'.__('Name', 'appointments'). '</span>';
 		$html .= '<select name="service">';
@@ -346,7 +293,7 @@ class Appointments_AJAX {
 		$html .= '</select>';
 		$html .= '</label>';
 		/* Workers */
-		$workers = $wpdb->get_results("SELECT * FROM " . $appointments->workers_table . " " );
+		$workers = appointments_get_workers();
 		$html .= '<label>';
 		$html .= '<span class="title">'.__('Provider', 'appointments'). '</span>';
 		$html .= '<select name="worker">';
@@ -359,7 +306,7 @@ class Appointments_AJAX {
 				}
 				else
 					$sel = '';
-				$html .= '<option value="' . esc_attr($worker->ID) . '"'.$sel.'>'. $appointments->get_worker_name( $worker->ID, false ) . '</option>';
+				$html .= '<option value="' . esc_attr($worker->ID) . '"'.$sel.'>'. appointments_get_worker_name( $worker->ID, false ) . '</option>';
 			}
 		}
 		$html .= '</select>';
@@ -397,8 +344,8 @@ class Appointments_AJAX {
 		$html .= '<label style="float:left;width:30%; padding-left:5px;">';
 
 		// Check if an admin min time (time base) is set. @since 1.0.2
-		if ( isset( $this->options["admin_min_time"] ) && $this->options["admin_min_time"] )
-			$min_time = $this->options["admin_min_time"];
+		if ( isset( $appointments->options["admin_min_time"] ) && $appointments->options["admin_min_time"] )
+			$min_time = $appointments->options["admin_min_time"];
 		else
 			$min_time = $appointments->get_min_time();
 
@@ -515,7 +462,6 @@ class Appointments_AJAX {
 
 	/**
 	 * Make checks on submitted fields and save appointment
-	 * @return json object
 	 */
 	function post_confirmation() {
 		global $appointments;
@@ -564,7 +510,7 @@ class Appointments_AJAX {
 
 		// Default status
 		$status = 'pending';
-		if ('yes' != $this->options["payment_required"] && isset($this->options["auto_confirm"]) && 'yes' == $this->options["auto_confirm"]) {
+		if ('yes' != $appointments->options["payment_required"] && isset($appointments->options["auto_confirm"]) && 'yes' == $appointments->options["auto_confirm"]) {
 			$status = 'confirmed';
 		}
 
@@ -578,9 +524,9 @@ class Appointments_AJAX {
 		if (
 			!(float)$price && !(float)$paypal_price // Free appointment ...
 			&&
-			'pending' === $status && "yes" === $this->options["payment_required"] // ... in a paid environment ...
+			'pending' === $status && "yes" === $appointments->options["payment_required"] // ... in a paid environment ...
 			&&
-			(!empty($this->options["auto_confirm"]) && "yes" === $this->options["auto_confirm"]) // ... with auto-confirm activated
+			(!empty($appointments->options["auto_confirm"]) && "yes" === $appointments->options["auto_confirm"]) // ... with auto-confirm activated
 		) {
 			$status = defined('APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM') && APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM
 				? 'confirmed'
@@ -599,7 +545,7 @@ class Appointments_AJAX {
 			? $_POST['app_email']
 			: $user_email
 		;
-		if ($this->options["ask_email"] && !is_email($email)) $appointments->json_die( 'email' );
+		if ($appointments->options["ask_email"] && !is_email($email)) $appointments->json_die( 'email' );
 
 		$phone = !empty($_POST['app_phone'])
 			? sanitize_text_field($_POST["app_phone"])
@@ -637,7 +583,7 @@ class Appointments_AJAX {
 		// It may be required to add additional data here
 		$note = apply_filters('app_note_field', $note);
 
-		$service_result = $appointments->get_service($service);
+		$service_result = appointments_get_service( $service );
 
 		$duration = false;
 		if ($service_result !== null) $duration = $service_result->duration;
@@ -677,6 +623,8 @@ class Appointments_AJAX {
 			)
 		);
 
+		appointments_clear_appointment_cache();
+
 		if (!$result) {
 			die(json_encode(array(
 				"error" => __( 'Appointment could not be saved. Please contact website admin.', 'appointments'),
@@ -691,16 +639,16 @@ class Appointments_AJAX {
 
 		// Send confirmation for pending, payment not required cases, if selected so
 		if (
-			'yes' != $this->options["payment_required"] &&
-			isset($this->options["send_notification"]) &&
-			'yes' == $this->options["send_notification"] &&
+			'yes' != $appointments->options["payment_required"] &&
+			isset($appointments->options["send_notification"]) &&
+			'yes' == $appointments->options["send_notification"] &&
 			'pending' == $status
 		) {
 			$appointments->send_notification( $insert_id );
 		}
 
 		// Send confirmation if we forced it
-		if ('confirmed' == $status && isset($this->options["send_confirmation"]) && 'yes' == $this->options["send_confirmation"]) {
+		if ('confirmed' == $status && isset($appointments->options["send_confirmation"]) && 'yes' == $appointments->options["send_confirmation"]) {
 			$appointments->send_confirmation( $insert_id );
 		}
 
@@ -710,7 +658,7 @@ class Appointments_AJAX {
 		}
 
 		// GCal button
-		if (isset($this->options["gcal"]) && 'yes' == $this->options["gcal"] && $gcal) {
+		if (isset($appointments->options["gcal"]) && 'yes' == $appointments->options["gcal"] && $gcal) {
 			$gcal_url = $appointments->gcal( $service, $start, $start + ($duration * 60 ), false, $address, $city );
 		} else {
 			$gcal_url = '';
@@ -724,9 +672,9 @@ class Appointments_AJAX {
 		$mp = isset($additional['mp']) ? $additional['mp'] : 0;
 		$variation = isset($additional['variation']) ? $additional['variation'] : 0;
 
-		$gcal_same_window = !empty($this->options["gcal_same_window"]) ? 1 : 0;
+		$gcal_same_window = !empty($appointments->options["gcal_same_window"]) ? 1 : 0;
 
-		if (isset( $this->options["payment_required"] ) && 'yes' == $this->options["payment_required"]) {
+		if (isset( $appointments->options["payment_required"] ) && 'yes' == $appointments->options["payment_required"]) {
 			die(json_encode(array(
 				"cell" => $_POST["value"],
 				"app_id" => $insert_id,
@@ -739,13 +687,14 @@ class Appointments_AJAX {
 				'variation' => $variation
 			)));
 		} else {
-			die(json_encode(array(
+			$result = array(
 				"cell" => $_POST["value"],
 				"app_id" => $insert_id,
 				"refresh" => 1,
 				'gcal_url' => $gcal_url,
 				'gcal_same_window' => $gcal_same_window,
-			)));
+			);
+			wp_send_json( $result );
 		}
 	}
 
@@ -757,11 +706,11 @@ class Appointments_AJAX {
 		global $appointments;
 
 		// PayPal IPN handling code
-		$this->options = get_option( 'appointments_options' );
+		$appointments->options = get_option( 'appointments_options' );
 
 		if ((isset($_POST['payment_status']) || isset($_POST['txn_type'])) && isset($_POST['custom'])) {
 
-			if ($this->options['mode'] == 'live') {
+			if ($appointments->options['mode'] == 'live') {
 				$domain = 'https://www.paypal.com';
 			} else {
 				$domain = 'https://www.sandbox.paypal.com';
@@ -769,7 +718,6 @@ class Appointments_AJAX {
 
 			$req = 'cmd=_notify-validate';
 			foreach ($_POST as $k => $v) {
-				if (get_magic_quotes_gpc()) $v = stripslashes($v);
 				$req .= '&' . $k . '=' . $v;
 			}
 
@@ -912,7 +860,6 @@ class Appointments_AJAX {
 	}
 	/**
 	 * Check and return necessary fields to the front end
-	 * @return json object
 	 */
 	function pre_confirmation () {
 		global $appointments;
@@ -931,7 +878,7 @@ class Appointments_AJAX {
 		$appointments->get_lsw();
 
 		// Alright, so before we go further, let's check if we can
-		if (!is_user_logged_in() && (!empty($this->options['login_required']) && 'yes' == $this->options['login_required'])) {
+		if (!is_user_logged_in() && (!empty($appointments->options['login_required']) && 'yes' == $appointments->options['login_required'])) {
 			die(json_encode(array(
 				'error' => __('You need to login to make an appointment.', 'appointments'),
 			)));
@@ -943,8 +890,8 @@ class Appointments_AJAX {
 		$price = apply_filters('app_display_amount', $price, $service, $worker);
 		$price = apply_filters('app_pre_confirmation_price', $price, $service, $worker, $start, $end);
 
-		$display_currency = !empty($this->options["currency"])
-			? App_Template::get_currency_symbol($this->options["currency"])
+		$display_currency = !empty($appointments->options["currency"])
+			? App_Template::get_currency_symbol($appointments->options["currency"])
 			: App_Template::get_currency_symbol('USD')
 		;
 
@@ -957,7 +904,7 @@ class Appointments_AJAX {
 			)));
 		}
 
-		$service_obj = $appointments->get_service($service);
+		$service_obj = appointments_get_service($service);
 		$service = '<label><span>' . __('Service name: ', 'appointments') .  '</span>'. apply_filters('app_confirmation_service', stripslashes($service_obj->name), $service_obj->name) . '</label>';
 		$start = '<label><span>' . __('Date and time: ', 'appointments') . '</span>'. apply_filters('app_confirmation_start', date_i18n($appointments->datetime_format, $start), $start) . '</label>';
 		$end = '<label><span>' . __('Lasts (approx): ', 'appointments') . '</span>'. apply_filters('app_confirmation_lasts', $service_obj->duration . " " . __('minutes', 'appointments'), $service_obj->duration) . '</label>';
@@ -968,41 +915,41 @@ class Appointments_AJAX {
 		;
 
 		$worker = !empty($worker)
-			? '<label><span>' . __('Service provider: ', 'appointments' ) . '</span>'. apply_filters('app_confirmation_worker', stripslashes($appointments->get_worker_name($worker)), $worker) . '</label>'
+			? '<label><span>' . __('Service provider: ', 'appointments' ) . '</span>'. apply_filters('app_confirmation_worker', stripslashes(appointments_get_worker_name($worker)), $worker) . '</label>'
 			: ''
 		;
 
-		$ask_name = !empty($this->options['ask_name'])
+		$ask_name = !empty($appointments->options['ask_name'])
 			? 'ask'
 			: ''
 		;
 
-		$ask_email = !empty($this->options['ask_email'])
+		$ask_email = !empty($appointments->options['ask_email'])
 			? 'ask'
 			: ''
 		;
 
-		$ask_phone = !empty($this->options['ask_phone'])
+		$ask_phone = !empty($appointments->options['ask_phone'])
 			? 'ask'
 			: ''
 		;
 
-		$ask_address = !empty($this->options['ask_address'])
+		$ask_address = !empty($appointments->options['ask_address'])
 			? 'ask'
 			: ''
 		;
 
-		$ask_city = !empty($this->options['ask_city'])
+		$ask_city = !empty($appointments->options['ask_city'])
 			? 'ask'
 			: ''
 		;
 
-		$ask_note = !empty($this->options['ask_note'])
+		$ask_note = !empty($appointments->options['ask_note'])
 			? 'ask'
 			: ''
 		;
 
-		$ask_gcal = isset( $this->options["gcal"] ) && 'yes' == $this->options["gcal"]
+		$ask_gcal = isset( $appointments->options["gcal"] ) && 'yes' == $appointments->options["gcal"]
 			? 'ask'
 			: ''
 		;
@@ -1027,6 +974,429 @@ class Appointments_AJAX {
 		die(json_encode($reply_array));
 	}
 
+
+	/**
+	 * Save a CSV file of all appointments
+	 * @since 1.0.9
+	 */
+	function export(){
+		global $appointments;
+
+		$sql = false;
+		$type = !empty($_POST['export_type']) ? $_POST['export_type'] : 'all';
+		if ('selected' == $type && !empty($_POST['app'])) {
+			// selected appointments
+			$ids = array_filter(array_map('intval', $_POST['app']));
+			if ($ids) $sql = "SELECT * FROM {$appointments->app_table} WHERE ID IN(" . join(',', $ids) . ") ORDER BY ID";
+		} else if ('type' == $type) {
+			$status = !empty($_POST['status']) ? $_POST['status'] : false;
+			if ('active' === $status) $sql = $appointments->db->prepare("SELECT * FROM {$appointments->app_table} WHERE status IN('confirmed','paid') ORDER BY ID", $status);
+			else if ($status) $sql = $appointments->db->prepare("SELECT * FROM {$appointments->app_table} WHERE status=%s ORDER BY ID", $status);
+		} else if ('all' == $type) {
+			$sql = "SELECT * FROM {$appointments->app_table} ORDER BY ID";
+		}
+		if (!$sql) wp_die(__('Nothing to download!','appointments'));
+
+		$apps = $appointments->db->get_results($sql, ARRAY_A);
+
+		if ( !is_array( $apps ) || empty( $apps ) ) wp_die(__('Nothing to download!','appointments'));
+
+		$file = fopen('php://temp/maxmemory:'. (12*1024*1024), 'r+');
+		// Add field names to the file
+		$columns = array_map('strtolower', apply_filters('app-export-columns', $appointments->db->get_col_info()));
+		fputcsv( $file,  $columns );
+
+		foreach ( $apps as $app ) {
+			$raw = $app;
+			array_walk( $app, array(&$this, 'export_helper') );
+			$app = apply_filters('app-export-appointment', $app, $raw);
+			if (!empty($app)) fputcsv( $file, $app );
+		}
+
+		$filename = "appointments_".date('F')."_".date('d')."_".date('Y').".csv";
+
+		//serve the file
+		rewind($file);
+		ob_end_clean(); //kills any buffers set by other plugins
+		header('Content-Description: File Transfer');
+		header('Content-Type: text/csv');
+		header('Content-Disposition: attachment; filename="'.$filename.'"');
+		header('Content-Transfer-Encoding: binary');
+		header('Expires: 0');
+		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+		header('Pragma: public');
+		$output = stream_get_contents($file);
+		//$output = $output . "\xEF\xBB\xBF"; // UTF-8 BOM
+		header('Content-Length: ' . strlen($output));
+		fclose($file);
+		die($output);
+	}
+
+	/**
+	 * Helper function for export
+	 * @since 1.0.9
+	 */
+	function export_helper( &$value, $key ) {
+		global $appointments;
+		if ( 'created' == $key || 'start' == $key || 'end' == $key )
+			$value = mysql2date( $appointments->datetime_format, $value );
+		else if ( 'user' == $key && $value ) {
+			$userdata = get_userdata( $value );
+			if ( $userdata )
+				$value = $userdata->user_login;
+		}
+		else if ( 'service' == $key )
+			$value = $appointments->get_service_name( $value );
+		else if ( 'worker' == $key )
+			$value = appointments_get_worker_name( $value );
+	}
+
+	function setup_api_logins () {
+		global $appointments;
+
+		if (!@$this->options['accept_api_logins']) return false;
+
+		add_action('wp_ajax_nopriv_app_facebook_login', array($this, 'handle_facebook_login'));
+		add_action('wp_ajax_nopriv_app_get_twitter_auth_url', array($this, 'handle_get_twitter_auth_url'));
+		add_action('wp_ajax_nopriv_app_twitter_login', array($this, 'handle_twitter_login'));
+		add_action('wp_ajax_nopriv_app_ajax_login', array($this, 'ajax_login'));
+		add_action('wp_ajax_nopriv_app_google_plus_login', array($this, 'handle_gplus_login'));
+
+		// Google+ login
+		if (!class_exists('LightOpenID')) {
+			if( function_exists('curl_init') || in_array('https', stream_get_wrappers()) ) {
+				include_once( $appointments->plugin_dir . '/includes/external/lightopenid/openid.php' );
+				$appointments->openid = new LightOpenID;
+			}
+		}
+		else
+			$appointments->openid = new LightOpenID;
+
+		if ( @$appointments->openid ) {
+
+			if ( !session_id() )
+				@session_start();
+
+			add_action('wp_ajax_nopriv_app_get_google_auth_url', array($this, 'handle_get_google_auth_url'));
+			add_action('wp_ajax_nopriv_app_google_login', array($this, 'handle_google_login'));
+
+			$appointments->openid->identity = 'https://www.google.com/accounts/o8/id';
+			$appointments->openid->required = array('namePerson/first', 'namePerson/last', 'namePerson/friendly', 'contact/email');
+			if (!empty($_REQUEST['openid_ns'])) {
+				$cache = $appointments->openid->getAttributes();
+				if (isset($cache['namePerson/first']) || isset($cache['namePerson/last']) || isset($cache['contact/email'])) {
+					$_SESSION['app_google_user_cache'] = $cache;
+				}
+			}
+			if ( isset( $_SESSION['app_google_user_cache'] ) )
+				$this->_google_user_cache = $_SESSION['app_google_user_cache'];
+			else
+				$this->_google_user_cache = '';
+		}
+	}
+
+	/**
+	 * Handles Facebook user login and creation
+	 * Modified from Events and Bookings by Ve
+	 */
+	function handle_facebook_login () {
+		header("Content-type: application/json");
+		$resp = array(
+			"status" => 0,
+		);
+		$fb_uid = @$_POST['user_id'];
+		$token = @$_POST['token'];
+		if (!$token) die(json_encode($resp));
+
+		$request = new WP_Http;
+		$result = $request->request(
+			'https://graph.facebook.com/me?oauth_token=' . $token,
+			array('sslverify' => false) // SSL certificate issue workaround
+		);
+		if (200 != $result['response']['code']) die(json_encode($resp)); // Couldn't fetch info
+
+		$data = json_decode($result['body']);
+		if (!$data->email) die(json_encode($resp)); // No email, can't go further
+
+		$email = is_email($data->email);
+		if (!$email) die(json_encode($resp)); // Wrong email
+
+		$wp_user = get_user_by('email', $email);
+
+		if (!$wp_user) { // Not an existing user, let's create a new one
+			$password = wp_generate_password(12, false);
+			$username = @$data->name
+				? preg_replace('/[^_0-9a-z]/i', '_', strtolower($data->name))
+				: preg_replace('/[^_0-9a-z]/i', '_', strtolower($data->first_name)) . '_' . preg_replace('/[^_0-9a-z]/i', '_', strtolower($data->last_name))
+			;
+
+			$wp_user = wp_create_user($username, $password, $email);
+			if (is_wp_error($wp_user)) die(json_encode($resp)); // Failure creating user
+		} else {
+			$wp_user = $wp_user->ID;
+		}
+
+		$user = get_userdata($wp_user);
+
+		wp_set_current_user($user->ID, $user->user_login);
+		wp_set_auth_cookie($user->ID); // Logged in with Facebook, yay
+		do_action('wp_login', $user->user_login);
+
+		die(json_encode(array(
+			"status" => 1,
+			"user_id"=>$user->ID
+		)));
+	}
+
+	/**
+	 * Get OAuth request URL and token.
+	 */
+	function handle_get_twitter_auth_url () {
+		header("Content-type: application/json");
+		$twitter = $this->_get_twitter_object();
+		$request_token = $twitter->getRequestToken($_POST['url']);
+		echo json_encode(array(
+			'url' => $twitter->getAuthorizeURL($request_token['oauth_token']),
+			'secret' => $request_token['oauth_token_secret']
+		));
+		die;
+	}
+
+	/**
+	 * Spawn a TwitterOAuth object.
+	 */
+	function _get_twitter_object ($token=null, $secret=null) {
+		// Make sure options are loaded and fresh
+		if ( !$this->options['twitter-app_id'] )
+			$this->options = get_option( 'appointments_options' );
+		if (!class_exists('TwitterOAuth'))
+			include WP_PLUGIN_DIR . '/appointments/includes/external/twitteroauth/twitteroauth.php';
+		$twitter = new TwitterOAuth(
+			$this->options['twitter-app_id'],
+			$this->options['twitter-app_secret'],
+			$token, $secret
+		);
+		return $twitter;
+	}
+
+
+	/**
+	 * Login or create a new user using whatever data we get from Twitter.
+	 */
+	function handle_twitter_login () {
+		header("Content-type: application/json");
+		$resp = array(
+			"status" => 0,
+		);
+		$secret = @$_POST['secret'];
+		$data_str = @$_POST['data'];
+		$data_str = ('?' == substr($data_str, 0, 1)) ? substr($data_str, 1) : $data_str;
+		$data = array();
+		parse_str($data_str, $data);
+		if (!$data) die(json_encode($resp));
+
+		$twitter = $this->_get_twitter_object($data['oauth_token'], $secret);
+		$access = $twitter->getAccessToken($data['oauth_verifier']);
+
+		$twitter = $this->_get_twitter_object($access['oauth_token'], $access['oauth_token_secret']);
+		$tw_user = $twitter->get('account/verify_credentials');
+
+		// Have user, now register him/her
+		$domain = preg_replace('/www\./', '', parse_url(site_url(), PHP_URL_HOST));
+		$username = preg_replace('/[^_0-9a-z]/i', '_', strtolower($tw_user->name));
+		$email = $username . '@twitter.' . $domain; //STUB email
+		$wp_user = get_user_by('email', $email);
+
+		if (!$wp_user) { // Not an existing user, let's create a new one
+			$password = wp_generate_password(12, false);
+			$count = 0;
+			while (username_exists($username)) {
+				$username .= rand(0,9);
+				if (++$count > 10) break;
+			}
+
+			$wp_user = wp_create_user($username, $password, $email);
+			if (is_wp_error($wp_user)) die(json_encode($resp)); // Failure creating user
+		} else {
+			$wp_user = $wp_user->ID;
+		}
+
+		$user = get_userdata($wp_user);
+		wp_set_current_user($user->ID, $user->user_login);
+		wp_set_auth_cookie($user->ID); // Logged in with Twitter, yay
+		do_action('wp_login', $user->user_login);
+
+		die(json_encode(array(
+			"status" => 1,
+			"user_id"=>$user->ID
+		)));
+	}
+
+	/**
+	 * Login from front end by Wordpress
+	 */
+	function ajax_login( ) {
+
+		header("Content-type: application/json");
+		$user = wp_signon( );
+
+		if ( !is_wp_error($user) ) {
+
+			die(json_encode(array(
+				"status" => 1,
+				"user_id"=>$user->ID
+			)));
+		}
+		die(json_encode(array(
+			"status" => 0,
+			"error" => $user->get_error_message()
+		)));
+	}
+
+	/**
+	 * Handles the Google+ OAuth type login.
+	 */
+	function handle_gplus_login () {
+		header("Content-type: application/json");
+		$resp = array(
+			"status" => 0,
+		);
+		if (empty($this->options['google-client_id'])) die(json_encode($resp)); // Yeah, we're not equipped to deal with this
+
+		$data = stripslashes_deep($_POST);
+		$token = !empty($data['token']) ? $data['token'] : false;
+		if (empty($token)) die(json_encode($resp));
+
+		// Start verifying
+		$page = wp_remote_get('https://www.googleapis.com/userinfo/v2/me', array(
+			'sslverify' => false,
+			'timeout' => 5,
+			'headers' => array(
+				'Authorization' => sprintf('Bearer %s', $token),
+			)
+		));
+		if (200 != wp_remote_retrieve_response_code($page)) die(json_encode($resp));
+
+		$body = wp_remote_retrieve_body($page);
+		$response = json_decode($body, true); // Body is JSON
+		if (empty($response['id'])) die(json_encode($resp));
+
+		$first = !empty($response['given_name']) ? $response['given_name'] : '';
+		$last = !empty($response['family_name']) ? $response['family_name'] : '';
+		$email = !empty($response['email']) ? $response['email'] : '';
+
+		if (empty($email) || (empty($first) && empty($last))) die(json_encode($resp)); // In case we're missing stuff
+
+		$username = false;
+		if (!empty($last) && !empty($first)) $username = "{$first}_{$last}";
+		else if (!empty($first)) $username = $first;
+		else if (!empty($last)) $username = $last;
+
+		if (empty($username)) die(json_encode($resp)); // In case we're missing stuff
+
+		$wordp_user = get_user_by('email', $email);
+
+		if (!$wordp_user) { // Not an existing user, let's create a new one
+			$password = wp_generate_password(12, false);
+			$count = 0;
+			while (username_exists($username)) {
+				$username .= rand(0,9);
+				if (++$count > 10) break;
+			}
+
+			$wordp_user = wp_create_user($username, $password, $email);
+			if (is_wp_error($wordp_user))
+				die(json_encode($resp)); // Failure creating user
+			else {
+				update_user_meta($wordp_user, 'first_name', $first);
+				update_user_meta($wordp_user, 'last_name', $last);
+			}
+		}
+		else {
+			$wordp_user = $wordp_user->ID;
+		}
+
+		$user = get_userdata($wordp_user);
+		wp_set_current_user($user->ID, $user->user_login);
+		wp_set_auth_cookie($user->ID); // Logged in with Google, yay
+		do_action('wp_login', $user->user_login);
+
+		die(json_encode(array(
+			"status" => 1,
+		)));
+	}
+
+	/**
+	 * Get OAuth request URL and token.
+	 */
+	function handle_get_google_auth_url () {
+		global $appointments;
+		header("Content-type: application/json");
+
+		$appointments->openid->returnUrl = $_POST['url'];
+
+		/** @var LightOpenID $appointments->openid */
+		echo json_encode(array(
+			'url' => $appointments->openid->authUrl()
+		));
+		exit();
+	}
+
+	/**
+	 * Login or create a new user using whatever data we get from Google.
+	 */
+	function handle_google_login () {
+		global $appointments;
+
+		header("Content-type: application/json");
+		$resp = array(
+			"status" => 0,
+		);
+
+		/** @var LightOpenID $appointments->openid */
+		$cache = $appointments->openid->getAttributes();
+
+		if (isset($cache['namePerson/first']) || isset($cache['namePerson/last']) || isset($cache['namePerson/friendly']) || isset($cache['contact/email'])) {
+			$this->_google_user_cache = $cache;
+		}
+
+		// Have user, now register him/her
+		if ( isset( $this->_google_user_cache['namePerson/friendly'] ) )
+			$username = $this->_google_user_cache['namePerson/friendly'];
+		else
+			$username = $this->_google_user_cache['namePerson/first'];
+		$email = $this->_google_user_cache['contact/email'];
+		$wordp_user = get_user_by('email', $email);
+
+		if (!$wordp_user) { // Not an existing user, let's create a new one
+			$password = wp_generate_password(12, false);
+			$count = 0;
+			while (username_exists($username)) {
+				$username .= rand(0,9);
+				if (++$count > 10) break;
+			}
+
+			$wordp_user = wp_create_user($username, $password, $email);
+			if (is_wp_error($wordp_user))
+				die(json_encode($resp)); // Failure creating user
+			else {
+				update_user_meta($wordp_user, 'first_name', $this->_google_user_cache['namePerson/first']);
+				update_user_meta($wordp_user, 'last_name', $this->_google_user_cache['namePerson/last']);
+			}
+		}
+		else {
+			$wordp_user = $wordp_user->ID;
+		}
+
+		$user = get_userdata($wordp_user);
+		wp_set_current_user($user->ID, $user->user_login);
+		wp_set_auth_cookie($user->ID); // Logged in with Google, yay
+		do_action('wp_login', $user->user_login);
+
+		die(json_encode(array(
+			"status" => 1,
+		)));
+	}
 
 
 }

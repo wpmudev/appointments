@@ -4,6 +4,10 @@ class App_BuddyPress {
 
 	private $_bp = false;
 	private $_bp_script = '';
+
+	/**
+	 * @var bool|Appointments
+	 */
 	private $_core = false;
 
 	private static $_bp_ready = false;
@@ -60,7 +64,11 @@ class App_BuddyPress {
 			exit;
 		}
 		// Checks are ok, let's save settings.
-		$this->_core->save_profile( $user_id );
+		if ( ! is_object( $this->_core->admin ) ) {
+			$this->_core->load_admin();
+		}
+
+		$this->_core->admin->save_profile( $user_id );
 	}
 
 	/**
@@ -120,7 +128,7 @@ class App_BuddyPress {
 		$link = $bp->loggedin_user->domain . 'appointments/';
 
 		$user_id = bp_loggedin_user_id();
-		if (!$this->_core->is_worker($user_id)) $name = __('My Appointments', 'appointments');
+		if (!appointments_is_worker($user_id)) $name = __('My Appointments', 'appointments');
 		else $name = __('My Appointments as Provider', 'appointments');
 
 		bp_core_new_subnav_item(array(
@@ -132,7 +140,7 @@ class App_BuddyPress {
 		));
 
 		// Generate this tab only if allowed
-		if ($this->_core->is_worker($user_id) && isset($this->_core->options["allow_worker_wh"]) && 'yes' == $this->_core->options["allow_worker_wh"]) {
+		if (appointments_is_worker($user_id) && isset($this->_core->options["allow_worker_wh"]) && 'yes' == $this->_core->options["allow_worker_wh"]) {
 			bp_core_new_subnav_item(array(
 				'name' => __( 'Appointments Settings', 'appointments' ),
 				'slug' => 'appointment-settings',

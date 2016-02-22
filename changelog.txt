@@ -1,3 +1,84 @@
+2016-02-12 - 1.6
+-------------------------------
+- New: New setting to redirect to a Thank You page after appointment confirmation
+- New: appointments_worker_notification_sent action
+- Fixed: Add Google Calendar Button dates
+- Fixed: Error when editing a profile in BuddyPress
+- Fixed: Customer Notes field not showing up in confirmation form
+- Fixed: FAQ questions were not correctly indexed in admin page
+- Fixed: Appointments durations timetables calculations issue when Services had different durations
+- Fixed: Headers already sent error when updating pages in some cases (AJAX Search Pro Plugin conflict)
+- Fixed: When admin edit a user profile, admin appointments were displayed instead of the user's
+- Fixed: case insensitive variables/constants for HipHop environments
+- Enhance: Timetables regeneration takes less time now
+- Enhancement: appointments_get_appointments() function allows now an array of arguments
+- Enhancement: appointments_insert_appointment() allows now a timestamp date
+- Enhancement: [app_worker_monthly_calendar] ordering by start ASC date by default
+- Enhancement: Some other minor improvements
+- Deprecated: Appointments::get_reserve_apps()
+- Deprecated: Appointments::get_reserve_apps_by_service()
+- Deprecated: Appointments::is_worker()
+- Deprecated: Appointments::change_status()
+- Deprecated: Appointments::get_service()
+- Deprecated: Appointments::get_app()
+- Deprecated: Appointments::get_services()
+- Deprecated: Appointments::is_worker()
+- Deprecated: Appointments::get_workers()
+- Deprecated: Appointments::get_first_service_id()
+- Deprecated: Appointments::get_statuses()
+- Deprecated: Appointments::is_single_worker()
+- Deprecated: Appointments::get_workers_by_service()
+- Deprecated: Appointments::get_worker_name()
+- Deprecated: app_change_status Action
+
+2016-01-28 - 1.5.7
+-------------------------------
+- Fixed: Timetables cache issue when services had different durations
+- Fixed: Some language domains
+- Enhancement: Added some love to FAQ screen
+- Enhancement: Improved some admin styles
+- Deprecated: Deprecated some old functions
+
+2016-01-18 - 1.5.6
+-------------------------------
+- Enhancement: Clearing cache properly when upgrading version
+- Enhancement: Added capacity cache
+- Enhancement: Added CSS classes in every time in timetables
+- Enhancement: Appointments and Workers cache are now much faster when processing timetables
+- Enhancement: Saving timetables cache at shutdown to avoid more queries
+- Fixed Locations Add-on: Warnings in Locations screen
+- Fixed Locations Add-on: Locations were not saved in Services Providers screen
+- Fixed Paddings Add-on: Paddings were not being saved in Service Providers screen
+- Fixed GCal bug: Timetables were not being updated when importing events
+- Fixed minor performance issues when Durations add-on was active
+- Fixed: Worker is not selected automatically by default and timetable displays wrong times in some rare cases
+- Fixed: order by parameter not working when orderby = name in get_workers function
+
+2016-01-13 - 1.5.5.1
+-------------------------------
+- Fixed: Week days were not translatable
+- Fixed: Timetables were selecting wrong service in some cases
+
+2016-01-11 - 1.5.5
+-------------------------------
+- Fixed: Exporting Appointments was throwing a fatal error
+- Fixed: Loader GIF not showing on confirmation
+- Fixed: GCal was not appearing on confirmation
+- Fixed: error with MarketPress integration
+- Fixed: Deprecated/Warnings in some parts of the code
+- Fixed: Errors when processing Appointments by AJAX
+- Fixed: Confirmation fields were not appearing in Confirmation Shortcode
+- Fixed: Confirmation emails were not sent
+- Fixed: Some cache issues
+- Enhancement: Timetables code bottleneck
+- Enhancement: Timetables are now  cached for 24h
+- Enhancement: Services Shortcode markup and JS
+- Enhancement: Reduced number of queries in monthly shortcode
+- Enhancement: Many performance improvements
+- Improved Confirmation Shortcode Javascript
+- New: many new functions to interact with workers, appointments and services in an easier way
+- New: Classes for workers, services and appointments with better error handlings
+- New: Unit Tests
 
 
 2015-11-25 - 1.5.4

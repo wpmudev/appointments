@@ -18,6 +18,8 @@ class App_Schedule_Paddings {
 	const PADDING_TYPE_SMALLEST = 'smallest';
 
 	private $_data;
+
+	/** @var  Appointments $_core */
 	private $_core;
 
 	private $_allowed_paddings = array();
@@ -185,6 +187,7 @@ class App_Schedule_Paddings {
 			self::PADDING_AFTER => $after,
 		);
 		update_option('appointments_services_padding', $services_padding);
+		$this->_data['service_padding'][$service_id] = array( 'before' => $before, 'after' => $after );
 	}
 
 	public function save_worker_padding ($worker_id) {
@@ -203,6 +206,7 @@ class App_Schedule_Paddings {
 			self::PADDING_AFTER => $after,
 		);
 		update_option('appointments_workers_padding', $workers_padding);
+		$this->_data['worker_padding'][$worker_id] = array( 'before' => $before, 'after' => $after );
 	}
 
 	/**
@@ -303,7 +307,7 @@ class App_Schedule_Paddings {
 		} else if ( is_admin() && DOING_AJAX ) {
 			//Get service ID for the current appointment when using inline edit.
 			if($_REQUEST['action'] == 'inline_edit' && !empty($_REQUEST['app_id'])){
-				$app = $this->_core->get_app($_REQUEST['app_id']);
+				$app = appointments_get_appointment($_REQUEST['app_id']);
 				$this->_core->service = $app->service;
 			}
 		}
@@ -329,9 +333,9 @@ class App_Schedule_Paddings {
 		//This would be accurate only for specific providers providing a single service.
 		$services = array();
 		if($worker){
-			$services = $this->_core->get_services_by_worker($worker);
+			$services = appointments_get_worker_services( $worker );
 		} else {
-			$services = $this->_core->get_services();
+			$services = appointments_get_services();
 		}
 		foreach( $services as $key => $service ){
 			if ($this->_data['service_padding'][$service->ID][self::PADDING_BEFORE] || $this->_data['service_padding'][$service->ID][self::PADDING_AFTER] ){

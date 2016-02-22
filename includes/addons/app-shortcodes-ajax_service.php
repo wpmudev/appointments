@@ -107,8 +107,11 @@ class App_Shortcodes_AjaxCombo {
 		if ($service_id) $args['service'] = $service_id;
 		else if (empty($service_id) && !empty($all['service_providers']['service'])) $args['service'] = $all['service_providers']['service'];
 
+		/** @var App_Shortcode $handler */
 		$handler = $this->_spawn_shortcode_handler($callback);
+		/** @var App_Shortcode $confirmation */
 		$confirmation = $this->_spawn_shortcode_handler('app_confirmation');
+		/** @var App_Shortcode $paypal */
 		$paypal = $this->_spawn_shortcode_handler('app_paypal');
 
 		$response = ($handler && $confirmation && $paypal) 
@@ -150,6 +153,7 @@ class App_Shortcodes_AjaxCombo {
 	private function _list_providers ($atts) {
 		$atts['_noscript'] = true;
 		$handler = $this->_spawn_shortcode_handler('app_service_providers');
+		/** @var App_Shortcode $handler */
 		if ($handler) return $handler->process_shortcode($atts);
 		return false;
 	}
@@ -157,6 +161,7 @@ class App_Shortcodes_AjaxCombo {
 	private function _list_services ($atts) {
 		$atts['_noscript'] = true;
 		$handler = $this->_spawn_shortcode_handler('app_services');
+		/** @var App_Shortcode $handler */
 		if ($handler) return $handler->process_shortcode($atts);
 		return false;
 	}

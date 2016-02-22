@@ -37,14 +37,14 @@ class App_MP_Bridge {
 		if (!$this->_is_app_mp_page($product->post_parent)) return $html;
 
 		$app_id = MP_Product::get_variation_meta($product->ID, 'name');
-		$app = $this->_core->get_app($app_id);
+		$app = appointments_get_appointment($app_id);
 		if ($app) {
 			$name = get_the_title($product->ID) . " (". date_i18n($this->_core->datetime_format, strtotime($app->start)) . ")";
 			$name = apply_filters(
 				'app_mp_product_name_in_cart', 
 				$name, 
 				$this->_core->get_service_name($app->service), 
-				$this->_core->get_worker_name($app->worker), 
+				appointments_get_worker_name($app->worker),
 				$app->start, 
 				$app
 			);

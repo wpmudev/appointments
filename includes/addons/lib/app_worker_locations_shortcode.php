@@ -59,7 +59,7 @@ class App_Shortcode_WorkerLocationsShortcode extends App_Shortcode {
 		global $appointments;
 		$args = wp_parse_args($args, $this->_defaults_to_args());
 
-		$workers = $appointments->get_workers($args['order_by']);
+		$workers = appointments_get_workers(array( 'orderby' => $args['order_by'] ) );
 		$model = App_Locations_Model::get_instance();
 		$locations = array();
 
@@ -81,6 +81,7 @@ class App_Shortcode_WorkerLocationsShortcode extends App_Shortcode {
 		$ret .= '<div class="app_provider_locations_dropdown_select">';
 		$ret .= '<select name="app_provider_location">';
 		foreach ($locations as $location) {
+			/** @var App_Locations_DefaultLocation $location */
 			$ret .= '<option value="' . esc_attr($location->get_id()) . '" ' . selected($this->_requested_location_id, $location->get_id(), false) . '>' . esc_html($location->get_display_markup(false)) . '</option>';
 		}
 		$ret .= '</select>';

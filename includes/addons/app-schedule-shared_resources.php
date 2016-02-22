@@ -11,6 +11,7 @@ Author: WPMU DEV
 class App_Schedule_SharedResources {
 
 	private $_data;
+	/** @var  Appointments */
 	private $_core;
 
 	private function __construct () {}
@@ -39,7 +40,7 @@ class App_Schedule_SharedResources {
 	public function add_service_selection ($out, $service_id) {
 		$shared_ids = $this->_get_resource_sharing_services($service_id);
 		$direct_ids = $this->_get_resource_sharing_services($service_id, true);
-		$all = $this->_core->get_services();
+		$all = appointments_get_services();
 
 		$out .= '<div class="app-shared_resources">';
 		$out .= '<h4>' . __('Shares resources with', 'appointments') . '</h4>';
@@ -118,6 +119,12 @@ class App_Schedule_SharedResources {
 		return (int)$capacity;
 	}
 
+	/**
+	 * @param array $service_ids
+	 * @param App_Period $period
+	 *
+	 * @return int
+	 */
 	private function _get_booked_appointments_for_period ($service_ids, $period) {
 		$start = date('Y-m-d H:i:s', $period->get_start());
 		$end = date('Y-m-d H:i:s', $period->get_end());

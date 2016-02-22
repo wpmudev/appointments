@@ -3,19 +3,24 @@
 class Appointments_Admin {
 
 	public function __construct() {
+		$this->includes();
+
 		add_action( 'admin_menu', array( $this, 'admin_init' ) ); 						// Creates admin settings window
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) ); 				// Warns admin
 		add_action( 'admin_print_scripts', array( $this, 'admin_scripts') );			// Load scripts
 		add_action( 'admin_print_styles', array( $this, 'admin_css') );
-
-		//@TODO: This filter is deprecated
-		add_action( 'dashboard_glance_items', array($this, 'add_app_counts') );
 
 		add_action( 'show_user_profile', array( $this, 'show_profile') );
 		add_action( 'edit_user_profile', array( $this, 'show_profile') );
 		add_action( 'personal_options_update', array( $this, 'save_profile') );
 		add_action( 'edit_user_profile_update', array( $this, 'save_profile') );
 
+		new Appointments_Admin_Dashboard_Widget();
+		//include( APP_PLUGIN_DIR . '/admin/admin-helpers.php' );
+	}
+
+	private function includes() {
+		include_once( appointments_plugin_dir() . 'admin/widgets/class-app-dashboard-widget.php' );
 	}
 
 	/**
@@ -90,14 +95,14 @@ class Appointments_Admin {
 		}
 
 		// Only user who is a worker can save the rest
-		if ( !$appointments->is_worker( $profileuser_id ) )
+		if ( ! appointments_is_worker( $profileuser_id ) )
 			return;
 
 		// Confirm an appointment using profile page
 		if ( isset( $_POST['app_confirm'] ) && is_array( $_POST['app_confirm'] ) && !empty( $_POST['app_confirm'] ) ) {
 			foreach ( $_POST['app_confirm'] as $app_id=>$value ) {
 				if ( $appointments->change_status( 'confirmed', $app_id ) ) {
-					$appointments->log( sprintf( __('Service Provider %s manually confirmed appointment with ID: %s','appointments'), $appointments->get_worker_name( $current_user->ID ), $app_id ) );
+					$appointments->log( sprintf( __('Service Provider %s manually confirmed appointment with ID: %s','appointments'), appointments_get_worker_name( $current_user->ID ), $app_id ) );
 					$appointments->send_confirmation( $app_id );
 				}
 			}
@@ -162,7 +167,7 @@ class Appointments_Admin {
 
 			}
 			if ( $result || $result2 ) {
-				$message = sprintf( __('%s edited his working hours.', 'appointments'), $appointments->get_worker_name( $profileuser_id ) );
+				$message = sprintf( __('%s edited his working hours.', 'appointments'), appointments_get_worker_name( $profileuser_id ) );
 				$appointments->log( $message );
 				// Employer can be noticed here
 				do_action( "app_working_hour_update", $message, $profileuser_id );
@@ -233,11 +238,11 @@ class Appointments_Admin {
 				</td>
 			</tr>
 
-			<?php if ( !$appointments->is_worker( $profileuser->ID ) ) { ?>
+			<?php if ( ! appointments_is_worker( $profileuser->ID ) ) { ?>
 				<tr>
 					<th><label><?php _e("My Appointments", 'appointments'); ?></label></th>
 					<td>
-						<?php echo do_shortcode("[app_my_appointments allow_cancel=1 client_id=".$profileuser->ID." ".$gcal."]") ?>
+						<?php echo do_shortcode("[app_my_appointments allow_cancel=1 title='' client_id=".$profileuser->ID." ".$gcal."]") ?>
 					</td>
 				</tr>
 			<?php
@@ -329,7 +334,7 @@ class Appointments_Admin {
 				</script>
 			<?php } ?>
 			<?php } ?>
-			<?php if ( isset($appointments->options["gcal_api_allow_worker"]) && 'yes' == $appointments->options["gcal_api_allow_worker"] && $appointments->is_worker( $profileuser->ID ) ) { ?>
+			<?php if ( isset($appointments->options["gcal_api_allow_worker"]) && 'yes' == $appointments->options["gcal_api_allow_worker"] && appointments_is_worker( $profileuser->ID ) ) { ?>
 				<tr>
 					<th><label><?php _e("Appointments+ Google Calendar API", 'appointments'); ?></label></th>
 					<td>
@@ -350,40 +355,6 @@ class Appointments_Admin {
 		<?php
 	}
 
-	/**
-	 * Add app status counts in admin Right Now Dashboard box
-	 * http://codex.wordpress.org/Plugin_API/Action_Reference/right_now_content_table_end
-	 */
-	function add_app_counts( $items ) {
-
-		global $wpdb, $appointments;
-
-		$new_items = array();
-
-		$num_active = $wpdb->get_var("SELECT COUNT(ID) FROM " . $appointments->app_table . " WHERE status='paid' OR status='confirmed' " );
-
-		if ( $num_active ) {
-			$num = number_format_i18n( $num_active );
-			$text = sprintf( _n( '%d Active Appointment', '%d Active Appointments', intval( $num_active ) ), $num );
-			if ( App_Roles::current_user_can( 'manage_options', App_Roles::CTX_DASHBOARD ) )
-				$items[] = '<a class="app-active" href="admin.php?page=appointments">' . $text . '</a>';
-			else
-				$items[] = $text;
-		}
-
-		$num_pending = $wpdb->get_var("SELECT COUNT(ID) FROM " . $appointments->app_table . " WHERE status='pending' " );
-
-		if ( $num_pending > 0 ) {
-			$num = number_format_i18n( $num_pending );
-			$text = sprintf( _n( '%d Pending Appointment', '%d Pending Appointments', intval( $num_pending ) ), $num );
-			if ( App_Roles::current_user_can( 'manage_options', App_Roles::CTX_DASHBOARD ) )
-				$items[] = '<a class="app-pending" href="admin.php?page=appointments&type=pending">' . $text . '</a>';
-			else
-				$items[] = $text;
-		}
-
-		return $items;
-	}
 
 	function admin_css() {
 		global $appointments;
@@ -482,7 +453,7 @@ class Appointments_Admin {
 
 		global $current_user;
 		$r = false;
-		$results = $appointments->get_services();
+		$results = appointments_get_services();
 		if ( !$results ) {
 			echo '<div class="error"><p>' .
 			     __('<b>[Appointments+]</b> You must define at least once service.', 'appointments') .
@@ -516,7 +487,7 @@ class Appointments_Admin {
 				$dismiss_id = get_user_meta( $current_user->ID, 'app_dismiss', true );
 				if ( $dismiss_id )
 					$dismissed = true;
-				if ( $appointments->get_workers() && !$appointments->get_workers_by_service( $result->ID ) && !$dismissed ) {
+				if ( appointments_get_workers() && !appointments_get_workers_by_service( $result->ID ) && !$dismissed ) {
 					echo '<div class="error"><p>' .
 					     __('<b>[Appointments+]</b> One of your services does not have a service provider assigned. Delete services you are not using.', 'appointments') .
 					     '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a title="'.__('Dismiss this notice for this session', 'appointments').'" href="' . $_SERVER['REQUEST_URI'] . '&app_dismiss=1"><small>'.__('Dismiss', 'appointments').'</small></a>'.
@@ -566,13 +537,7 @@ class Appointments_Admin {
 		return $r;
 	}
 
-	/**
-	 *	Creates the list for Appointments admin page
-	 */
-	function appointment_list() {
-		App_Template::admin_appointments_list();
 
-	}
 
 	function transactions () {
 		App_Template::admin_transactions_list();
@@ -597,7 +562,7 @@ class Appointments_Admin {
 		<div class="wrap">
 			<div class="icon32" style="margin:10px 0 0 0"><img src="<?php echo $appointments->plugin_url . '/images/general.png'; ?>" /></div>
 			<h2><?php echo __('Appointments+ FAQ','appointments'); ?></h2>
-			<?php if (file_exists(APP_PLUGIN_DIR . '/includes/support/app-faq.php')) include(APP_PLUGIN_DIR . '/includes/support/app-faq.php'); ?>
+			<?php if (file_exists(APP_ADMIN_PLUGIN_DIR . '/app-faq.php')) include(APP_ADMIN_PLUGIN_DIR . '/app-faq.php'); ?>
 		</div>
 		<?php
 	}
@@ -612,18 +577,19 @@ class Appointments_Admin {
 		if ( !session_id() )
 			@session_start();
 
-		$page = add_menu_page('Appointments', __('Appointments','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_APPOINTMENTS),  'appointments', array(&$this,'appointment_list'),'dashicons-clock');
+		include_once( APP_PLUGIN_DIR . '/admin/pages/class-admin-appointments-page.php' );
+		$appointments_page = new Appointments_Admin_Appointments_Page();
 		add_submenu_page('appointments', __('Transactions','appointments'), __('Transactions','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_TRANSACTIONS), "app_transactions", array(&$this,'transactions'));
 		add_submenu_page('appointments', __('Settings','appointments'), __('Settings','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_SETTINGS), "app_settings", array(&$this,'settings'));
 		add_submenu_page('appointments', __('Shortcodes','appointments'), __('Shortcodes','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_SHORTCODES), "app_shortcodes", array(&$this,'shortcodes_page'));
 		add_submenu_page('appointments', __('FAQ','appointments'), __('FAQ','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_FAQ), "app_faq", array(&$this,'faq_page'));
 		// Add datepicker to appointments page
-		add_action( "admin_print_scripts-$page", array( &$this, 'admin_scripts' ) );
 
-		do_action('app-admin-admin_pages_added', $page);
+
+		do_action('app-admin-admin_pages_added', $appointments_page->page_id );
 
 		if ( isset($_POST["action_app"]) && !wp_verify_nonce($_POST['app_nonce'],'update_app_settings') ) {
-			add_action( 'admin_notices', array( &$this, 'warning' ) );
+			add_action( 'admin_notices', array( &$appointments, 'warning' ) );
 			return;
 		}
 
@@ -715,6 +681,7 @@ class Appointments_Admin {
 
 			$appointments->options['allow_cancel'] 				= @$_POST['allow_cancel'];
 			$appointments->options['cancel_page'] 				= @$_POST['cancel_page'];
+			$appointments->options['thank_page'] 				= @$_POST['thank_page'];
 
 			$appointments->options["records_per_page"]			= (int)trim( @$_POST["records_per_page"] );
 
@@ -732,8 +699,9 @@ class Appointments_Admin {
 			// Flush cache
 			if ( isset( $_POST["force_flush"] ) || $saved ) {
 				$appointments->flush_cache();
+				appointments_delete_timetables_cache();
 				if ( isset( $_POST["force_flush"] ) )
-					add_action( 'admin_notices', array ( &$this, 'cleared' ) );
+					add_action( 'admin_notices', array ( &$appointments, 'cleared' ) );
 			}
 
 			if (isset($_POST['make_an_appointment']) || isset($_POST['make_an_appointment_product'])) {
@@ -779,9 +747,10 @@ class Appointments_Admin {
 
 				}
 				if ( $result )
-					add_action( 'admin_notices', array ( &$this, 'saved' ) );
+					add_action( 'admin_notices', array ( &$appointments, 'saved' ) );
 
 				appointments_delete_work_breaks_cache( $location, $appointments->worker );
+				appointments_delete_timetables_cache();
 			}
 		}
 		// Save Exceptions
@@ -822,7 +791,7 @@ class Appointments_Admin {
 						$result = true;
 				}
 				if ( $result )
-					add_action( 'admin_notices', array ( &$this, 'saved' ) );
+					add_action( 'admin_notices', array ( &$appointments, 'saved' ) );
 
 				appointments_delete_exceptions_cache( $location, $appointments->worker );
 			}
@@ -833,176 +802,122 @@ class Appointments_Admin {
 			foreach ( $_POST["services"] as $ID=>$service ) {
 				if ( '' != trim( $service["name"] ) ) {
 					// Update or insert?
-					$count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(ID) FROM {$appointments->services_table} WHERE ID=%d", $ID));
-					if ( $count ) {
-						$r = $wpdb->update( $appointments->services_table,
-							array(
-								'name'		=> $service["name"],
-								'capacity'	=> (int)$service["capacity"],
-								'duration'	=> $service["duration"],
-								'price'		=> preg_replace("/[^0-9,.]/", "", $service["price"]),
-								'page'		=> $service["page"]
-							),
-							array( 'ID'		=> $ID ),
-							array( '%s', '%d', '%d','%s','%d' )
+					$_service = appointments_get_service( $ID );
+					if ( $_service ) {
+						$args = array(
+							'name'		=> $service["name"],
+							'capacity'	=> (int)$service["capacity"],
+							'duration'	=> $service["duration"],
+							'price'		=> $service["price"],
+							'page'		=> $service["page"]
 						);
-						if ( $r )
-							$result = true;
+
+						$result = appointments_update_service( $ID, $args );
 					}
 					else {
-						//if ((int)$this->db->get_var("SELECT COUNT(ID) FROM {$this->services_table}") >= 2) { /* ... */ }
-						$r = $wpdb->insert( $appointments->services_table,
-							array(
-								'ID'		=> $ID,
-								'name'		=> $service["name"],
-								'capacity'	=> (int)$service["capacity"],
-								'duration'	=> $service["duration"],
-								'price'		=> preg_replace("/[^0-9,.]/", "", $service["price"]),
-								'page'		=> $service["page"]
-							),
-							array( '%d', '%s', '%d', '%d','%s','%d' )
+						$args = array(
+							'ID'		=> $ID,
+							'name'		=> $service["name"],
+							'capacity'	=> (int)$service["capacity"],
+							'duration'	=> $service["duration"],
+							'price'		=> $service["price"],
+							'page'		=> $service["page"]
 						);
-						if ( $r )
-							$result = true;
+						$result = appointments_insert_service( $args );
 					}
+
 					do_action('app-services-service-updated', $ID);
 				}
 				else {
 					// Entering an empty name means deleting of a service
-					$r = $wpdb->query(
-						$wpdb->prepare("DELETE FROM {$appointments->services_table} WHERE ID=%d LIMIT 1", $ID)
-					);
-					// Remove deleted service also from workers table
-					$r1 = $wpdb->query(
-						$wpdb->prepare("UPDATE {$appointments->workers_table} SET services_provided = REPLACE(services_provided,':%d:','') ", $ID)
-					//"UPDATE ". $this->workers_table . " SET services_provided = REPLACE(services_provided,':".$ID.":','') "
-					);
-					if ( $r || $r1 )
+					$r = appointments_delete_service( $ID );
+					if ( $r )
 						$result = true;
 				}
 			}
 			if( $result )
-				add_action( 'admin_notices', array ( &$this, 'saved' ) );
+				add_action( 'admin_notices', array ( &$appointments, 'saved' ) );
 
-
-			appointments_delete_services_cache();
 		}
 		// Save Workers
 		if ( isset($_POST["action_app"]) && 'save_workers' == $_POST["action_app"] && is_array( $_POST["workers"] ) ) {
-			foreach ( $_POST["workers"] as $worker ) {
-				$ID = $worker["user"];
-				if ( $ID && !empty ( $worker["services_provided"] ) ) {
-					$inserted = false;
-					// Does the worker have already a record?
-					$count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$appointments->workers_table} WHERE ID=%d", $ID));
-					if ( $count ) {
-						if ( !$appointments->db_version )
-							$r = $wpdb->update( $appointments->workers_table,
-								array(
-									'price'				=> preg_replace("/[^0-9,.]/", "", $worker["price"]),
-									'services_provided'	=> $this->_implode( $worker["services_provided"] ),
-									'page'				=> $worker["page"]
-								),
-								array( 'ID'				=> $worker["user"] ),
-								array( '%s', '%s','%d' )
+			foreach ( $_POST["workers"] as $worker_id => $worker ) {
+				$new_worker_id = absint( $worker["user"] );
+ 				$worker_id = absint( $worker_id );
+				$inserted = false;
+				$updated = false;
+				$result = false;
+
+				$worker_exists = appointments_get_worker( $worker_id );
+
+				if ( $worker_exists ) {
+					// Update
+					if ( ( $new_worker_id != $worker_id ) && ! empty ( $worker["services_provided"] ) ) {
+						// We are trying to chage the user ID
+						$count = appointments_get_worker( $new_worker_id );
+
+						// If the new ID already exist, do nothing
+						if ( ! $count ) {
+							// Otherwise, change the ID
+							$args = array(
+									'ID' => $new_worker_id,
+									'price' => $worker["price"],
+									'services_provided' => $worker["services_provided"],
+									'dummy' => isset( $worker["dummy"] ),
+									'page' => $worker['page']
 							);
-						else
-							$r = $wpdb->update( $appointments->workers_table,
-								array(
-									'price'				=> preg_replace("/[^0-9,.]/", "", $worker["price"]),
-									'services_provided'	=> $this->_implode( $worker["services_provided"] ),
-									'page'				=> $worker["page"],
-									'dummy'				=> isset( $worker["dummy"] )
-								),
-								array( 'ID'				=> $worker["user"] ),
-								array( '%s', '%s','%d', '%s' )
-							);
+							$updated = appointments_update_worker( $worker_id, $args );
+						}
+					}
+					elseif ( ( $new_worker_id == $worker_id ) && ! empty ( $worker["services_provided"] ) ) {
+						// Do not change user ID but update
+						$args = array(
+								'price' => $worker["price"],
+								'services_provided' => $worker["services_provided"],
+								'dummy' => isset( $worker["dummy"] ),
+								'page' => $worker['page']
+						);
+						$updated = appointments_update_worker( $worker_id, $args );
+					}
+					elseif ( empty( $worker["services_provided"] ) ) {
+						$r = appointments_delete_worker( $worker_id );
 						if ( $r )
-							$updated = true;
+							$result = true;
 					}
-					else {
-						if ( !$appointments->db_version ) {
-							$r = $wpdb->insert(
-								$appointments->workers_table,
-								array(
-									'ID'				=> $worker["user"],
-									'price'				=> preg_replace("/[^0-9,.]/", "", $worker["price"]),
-									'services_provided'	=> $this->_implode( $worker["services_provided"] ),
-									'page'				=> $worker["page"]
-								),
-								array( '%d', '%s', '%s','%d' )
-							);
-						} else {
-							$r = $wpdb->insert(
-								$appointments->workers_table,
-								array(
-									'ID'				=> $worker["user"],
-									'price'				=> preg_replace("/[^0-9,.]/", "", $worker["price"]),
-									'services_provided'	=> $this->_implode( $worker["services_provided"] ),
-									'page'				=> $worker["page"],
-									'dummy'				=> isset ( $worker["dummy"] )
-								),
-								array( '%d', '%s', '%s', '%d', '%s' )
-							);
-						}
-						if ( $r ) {
-							// Insert the default working hours to the worker's working hours
-							foreach ( array('open', 'closed') as $stat ) {
-								$result_wh = $wpdb->get_row( $wpdb->prepare("SELECT * FROM {$appointments->wh_table} WHERE location=0 AND service=0 AND status=%s", $stat), ARRAY_A );
-								if ( $result_wh != null ) {
-									$result_wh["ID"] = 'NULL';
-									$result_wh["worker"] = $ID;
-									$wpdb->insert( $appointments->wh_table,
-										$result_wh
-									);
-								}
-							}
-							// Insert the default holidays to the worker's holidays
-							foreach ( array('open', 'closed') as $stat ) {
-								$result_wh = $wpdb->get_row( $wpdb->prepare("SELECT * FROM {$appointments->exceptions_table} WHERE location=0 AND service=0 AND status=%s", $stat), ARRAY_A );
-								if ( $result_wh != null ) {
-									$result_wh["ID"] = 'NULL';
-									$result_wh["worker"] = $ID;
-									$wpdb->insert(
-											$appointments->exceptions_table,
-										$result_wh
-									);
-								}
-							}
-							$inserted = true;
-						}
-					}
-					do_action('app-workers-worker-updated', $ID);
+
+					do_action( 'app-workers-worker-updated', $worker_id );
 				}
-				// Entering an empty service name means deleting of a worker
-				else if ( $ID ) {
-					//$r = $wpdb->query( "DELETE FROM " . $this->workers_table . " WHERE ID=".$ID." LIMIT 1 " );
-					//$r1 = $wpdb->query( "DELETE FROM " . $this->wh_table . " WHERE worker=".$ID." " );
-					//$r2 = $wpdb->query( "DELETE FROM " . $this->exceptions_table . " WHERE worker=".$ID." " );
-					$r = $wpdb->query( $wpdb->prepare("DELETE FROM {$appointments->workers_table} WHERE ID=%d LIMIT 1", $ID) );
-					$r1 = $wpdb->query( $wpdb->prepare("DELETE FROM {$appointments->wh_table} WHERE worker=%d", $ID) );
-					$r2 = $wpdb->query( $wpdb->prepare("DELETE FROM {$appointments->exceptions_table} WHERE worker=%d", $ID) );
-					if ( $r || $r1 || $r2 )
-						$result = true;
+				elseif ( ! $worker_exists && ! empty( $worker["services_provided"] ) ) {
+					// Insert
+					$args = array(
+						'ID'				=> $worker["user"],
+						'price'				=> $worker["price"],
+						'services_provided'	=> $worker["services_provided"],
+						'page'				=> $worker["page"],
+						'dummy'				=> isset ( $worker["dummy"] )
+					);
+					$inserted = appointments_insert_worker( $args );
+
+					do_action( 'app-workers-worker-updated', $worker_id );
 				}
+
 			}
 			if( $result || $updated || $inserted )
-				add_action( 'admin_notices', array ( &$this, 'saved' ) );
+				add_action( 'admin_notices', array ( &$appointments, 'saved' ) );
 		}
 
 		// Delete removed app records
 		if ( isset($_POST["delete_removed"]) && 'delete_removed' == $_POST["delete_removed"]
 		     && isset( $_POST["app"] ) && is_array( $_POST["app"] ) ) {
-			$q = '';
+			$result = 0;
 			foreach ( $_POST["app"] as $app_id ) {
-				$q .= " ID=". (int)$app_id. " OR";
+				$result = $result + appointments_delete_appointment( $app_id );
 			}
-			$q = rtrim( $q, " OR" );
-			$result = $wpdb->query( "DELETE FROM " . $appointments->app_table . " WHERE " . $q . " " );
+
 			if ( $result ) {
 				global $current_user;
 				$userdata = get_userdata( $current_user->ID );
-				add_action( 'admin_notices', array ( &$this, 'deleted' ) );
+				add_action( 'admin_notices', array ( &$appointments, 'deleted' ) );
 				do_action( 'app_deleted',  $_POST["app"] );
 				$appointments->log( sprintf( __('Appointment(s) with id(s):%s deleted by user:%s', 'appointments' ),  implode( ', ', $_POST["app"] ), $userdata->user_login ) );
 			}
@@ -1010,39 +925,35 @@ class Appointments_Admin {
 
 		// Bulk status change
 		if ( isset( $_POST["app_status_change"] ) && $_POST["app_new_status"] && isset( $_POST["app"] ) && is_array( $_POST["app"] ) ) {
-			$q = '';
+
+			$result = 0;
+			$new_status = $_POST["app_new_status"];
 			foreach ( $_POST["app"] as $app_id ) {
-				$q .= " ID=". (int)$app_id. " OR";
+				$result = $result + (int)appointments_update_appointment_status( absint( $app_id ), $new_status  );
 			}
-			$q = rtrim( $q, " OR" );
 
-			// Make a new status re-check here - It should be in status map
-			$new_status = esc_sql($_POST["app_new_status"]);
-			if ( array_key_exists( $new_status, $appointments->get_statuses() ) ) {
-				$result = $wpdb->query( "UPDATE " . $appointments->app_table . " SET status='".$new_status."' WHERE " . $q . " " );
-				if ( $result ) {
-					global $current_user;
-					$userdata = get_userdata( $current_user->ID );
-					add_action( 'admin_notices', array ( &$this, 'updated' ) );
-					do_action( 'app_bulk_status_change',  $_POST["app"] );
-					$appointments->log( sprintf( __('Status of Appointment(s) with id(s):%s changed to %s by user:%s', 'appointments' ),  implode( ', ', $_POST["app"] ), $new_status, $userdata->user_login ) );
+			if ( $result ) {
+				$userdata = get_userdata( get_current_user_id() );
+				add_action( 'admin_notices', array ( &$appointments, 'updated' ) );
+				do_action( 'app_bulk_status_change',  $_POST["app"] );
 
-					if ( is_object( $appointments->gcal_api ) ) {
-						// If deleted, remove these from GCal too
-						if ( 'removed' == $new_status ) {
-							foreach ( $_POST["app"] as $app_id ) {
-								$appointments->gcal_api->delete( $app_id );
-								$appointments->send_removal_notification($app_id);
-							}
+				$appointments->log( sprintf( __('Status of Appointment(s) with id(s):%s changed to %s by user:%s', 'appointments' ),  implode( ', ', $_POST["app"] ), $new_status, $userdata->user_login ) );
+
+				if ( is_object( $appointments->gcal_api ) ) {
+					// If deleted, remove these from GCal too
+					if ( 'removed' == $new_status ) {
+						foreach ( $_POST["app"] as $app_id ) {
+							$appointments->gcal_api->delete( $app_id );
+							$appointments->send_removal_notification($app_id);
 						}
-						// If confirmed or paid, add these to GCal
-						else if (is_object($appointments->gcal_api) && $appointments->gcal_api->is_syncable_status($new_status)) {
-							foreach ( $_POST["app"] as $app_id ) {
-								$appointments->gcal_api->update( $app_id );
-								// Also send out an email
-								if (!empty($appointments->options["send_confirmation"]) && 'yes' == $appointments->options["send_confirmation"]) {
-									$appointments->send_confirmation($app_id);
-								}
+					}
+					// If confirmed or paid, add these to GCal
+					else if (is_object($appointments->gcal_api) && $appointments->gcal_api->is_syncable_status($new_status)) {
+						foreach ( $_POST["app"] as $app_id ) {
+							$appointments->gcal_api->update( $app_id );
+							// Also send out an email
+							if (!empty($appointments->options["send_confirmation"]) && 'yes' == $appointments->options["send_confirmation"]) {
+								appointments_send_confirmation( $app_id );
 							}
 						}
 					}
@@ -1127,12 +1038,10 @@ class Appointments_Admin {
 			wp_die( __('You do not have sufficient permissions to access this page.','appointments') );
 		}
 		$appointments->get_lsw();
-		global $wpdb;
 		?>
 		<div class="wrap">
 			<div class="icon32" style="margin:10px 0 0 0"><img src="<?php echo $appointments->plugin_url . '/images/general.png'; ?>" /></div>
-			<h2><?php echo __('Appointments+ Settings','appointments'); ?></h2>
-			<h3 class="nav-tab-wrapper">
+			<h2 class="nav-tab-wrapper">
 				<?php
 				$tab = ( !empty($_GET['tab']) ) ? $_GET['tab'] : 'main';
 
@@ -1163,7 +1072,7 @@ class Appointments_Admin {
 
 				echo implode( "\n", $tabhtml );
 				?>
-			</h3>
+			</h2>
 			<div class="clear"></div>
 			<?php App_Template::admin_settings_tab($tab); ?>
 		</div>

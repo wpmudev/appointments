@@ -86,7 +86,10 @@ echo '</div>';
 						</td>
 						<td class="column-service">
 						<?php
-						$service_id = $appointments->db->get_var($appointments->db->prepare("SELECT service FROM {$appointments->app_table} WHERE ID=%d",$transaction->transaction_app_ID));
+						$app = appointments_get_appointment( $transaction->transaction_app_ID );
+						if ( $app ) {
+							$service_id = $app->service;
+						}
 						echo $appointments->get_service_name( $service_id );
 						?>
 						</td>

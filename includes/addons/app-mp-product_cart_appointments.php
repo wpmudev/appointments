@@ -11,6 +11,7 @@ Author: WPMU DEV
 
 class App_Mp_ProductCartDisplay {
 
+	/** @var  Appointments */
 	private $_core;
 	private $_data = array();
 	private $_has_marketpress = false;
@@ -75,11 +76,13 @@ $(document).on("app-confirmation-response_received", function (e, response) {
 		if ($this->_has_marketpress) {
 			$codec = new App_Macro_Codec;
 			$macros = join('</code>, <code>', $codec->get_macros());
+
+			$cart_name_format = isset( $this->_data['cart_name_format'] ) ? $this->_data['cart_name_format'] : '';
 			?>
 <tr class="payment_row" <?php if ( $this->_data['payment_required'] != 'yes' ) echo 'style="display:none"';?>>
 	<th scope="row"><?php _e('Appointment in shopping cart format', 'appointments'); ?></th>
 	<td colspan="2">
-		<input type="text" class="widefat" name="cart_name_format" id="app-cart_name_format" value="<?php echo ($this->_data['cart_name_format'] ? esc_attr($this->_data['cart_name_format']) : ''); ?>" />
+		<input type="text" class="widefat" name="cart_name_format" id="app-cart_name_format" value="<?php echo $cart_name_format; ?>" />
 		<span class="description"><?php printf(__('You can use these macros: <code>%s</code>', 'appointments'), $macros); ?></span>
 	</td>
 </tr>
