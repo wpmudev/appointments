@@ -205,13 +205,12 @@ class Appointments_Widget_Monthly_Calendar extends Appointments_Widget_Helper {
 
 	function wp_footer () {
 		$settings = $this->get_settings();
-
 		$instance = isset($settings[$this->number])
 			? $settings[$this->number]
 			: null
 		;
 
-		if (is_array($instance)) {
+		if (is_array($instance) && isset( $instance['page_id'] ) ) {
 			extract($instance);
 
 			$href = get_permalink($instance["page_id"]);
