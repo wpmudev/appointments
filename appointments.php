@@ -4520,8 +4520,7 @@ function appointments_activate() {
 }
 
 function appointments_uninstall() {
-	$installer = new App_Installer();
-	$installer::uninstall();
+	App_Installer::uninstall();
 }
 
 function appointments_plugin_url() {
