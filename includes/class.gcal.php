@@ -1111,6 +1111,7 @@ class AppointmentsGcal {
 	 * @param app_id: Appointment ID that has been deleted
 	 */
 	function delete_event( $app_id, $worker_id=0 ) {
+		global $appointments;
 		if ( !$this->connect( $worker_id ) )
 			return false;
 
