@@ -63,32 +63,24 @@ class App_Shortcode_Services extends App_Shortcode {
 	}
 
 	public function process_shortcode( $args = array(), $content = '' ) {
-		global $wpdb, $appointments;
+		global $appointments;
 
 		$args = wp_parse_args( $args, $this->_defaults_to_args() );
 		extract( $args );
-
-		$appointments->get_lsw();
 
 		if ( ! trim( $args['order_by'] ) ) {
 			$args['order_by'] = 'ID';
 		}
 
-		if ( $args['worker'] ) {
+		if ( $args['worker'] && appointments_get_worker( $args['worker'] ) ) {
 			$services = appointments_get_worker_services( $args['worker'] );
-			// Find first service by this worker
-			$fsby = $services[0]->ID;
-			if ( $fsby && ! @$_REQUEST['app_service_id'] ) {
-				$_REQUEST['app_service_id'] = $fsby; // Set this as first service
-				$appointments->get_lsw(); // Update
-			}
 
 			// Re-sort worker services
 			if ( ! empty( $services ) && ! empty( $args['order_by'] ) && 'ID' !== $args['order_by'] ) {
 				$services = $this->_reorder_services( $services, $args['order_by'] );
 			}
-
-		} else {
+		}
+		else {
 			$services = appointments_get_services( $args['order_by'] );
 		}
 
@@ -97,6 +89,16 @@ class App_Shortcode_Services extends App_Shortcode {
 		// If there are no workers do nothing
 		if ( ! $services || empty( $services ) )
 			return '';
+
+		$selected_service = 0;
+		if ( isset( $_REQUEST['app_service_id'] ) && appointments_get_service( $_REQUEST['app_service_id'] ) ) {
+			$selected_service = absint( $_REQUEST['app_service_id'] );
+		}
+		elseif ( $args['worker'] && appointments_get_worker( $args['worker'] ) ) {
+			$selected_service = $services[0]->ID;
+		}
+
+		$selected_service = apply_filters( 'appointments_services_shortcode_selected_service', $selected_service, $args, $services );
 
 		ob_start();
 		?>
@@ -108,7 +110,7 @@ class App_Shortcode_Services extends App_Shortcode {
 				<div class="app_services_dropdown_select">
 					<select id="app_select_services" name="app_select_services" class="app_select_services">
 						<?php foreach ( $services as $service ): ?>
-							<option value="<?php echo $service->ID; ?>" <?php selected( $service->ID, $appointments->service ); ?>><?php echo stripslashes( $service->name ); ?></option>
+							<option value="<?php echo $service->ID; ?>" <?php selected( $service->ID, $selected_service ); ?>><?php echo stripslashes( $service->name ); ?></option>
 						<?php endforeach; ?>
 					</select>
 					<input type="button" class="app_services_button" value="<?php echo esc_attr( $args['show'] ); ?>">
@@ -118,7 +120,7 @@ class App_Shortcode_Services extends App_Shortcode {
 			<div class="app_service_excerpts">
 				<?php if ( $args['autorefresh'] ): // Only display the selected service ?>
 					<?php
-						$service = appointments_get_service( $appointments->service );
+						$service = appointments_get_service( $selected_service );
 						if ( $service ) {
 							$page = apply_filters( 'app_service_page', $service->page, $service->ID );
 							?>
@@ -148,7 +150,7 @@ class App_Shortcode_Services extends App_Shortcode {
 				<?php else: ?>
 					<?php foreach ( $services as $service ): ?>
 						<?php $page = apply_filters( 'app_service_page', $service->page, $service->ID ); ?>
-						<div <?php echo $service->ID != $appointments->service ? 'style="display:none"' : ''; ?> class="app_service_excerpt" id="app_service_excerpt_<?php echo $service->ID; ?>">
+						<div <?php echo $service->ID != $selected_service ? 'style="display:none"' : ''; ?> class="app_service_excerpt" id="app_service_excerpt_<?php echo $service->ID; ?>">
 							<?php
 							$service_description = '';
 							switch ($args['description'] ) {
