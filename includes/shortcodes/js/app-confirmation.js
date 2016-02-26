@@ -31,7 +31,7 @@ jQuery( document).ready( function( $ ) {
             });
 
             this.$cancelButton.click(function(){
-                window.location.href = app_location();
+                window.location.href = app_cancel_location();
             });
 
             this.$confirmationButton.click( function() {

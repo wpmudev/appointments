@@ -2901,12 +2901,14 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		wp_enqueue_script( 'app-js-check', $this->plugin_url . '/js/js-check.js', array('jquery'), $this->version);
 
 		$thank_page_id = ! empty( $this->options['thank_page'] ) ? absint( $this->options['thank_page'] ) : 0;
+		$cancel_page_id = ! empty( $this->options['cancel_page'] ) ? absint( $this->options['cancel_page'] ) : 0;
 		wp_localize_script( 'app-js-check', '_appointments_data',
 			array(
 				'ajax_url' => admin_url('admin-ajax.php'),
 				'root_url' => plugins_url('appointments/images/'),
-				'thank_page_url' => get_permalink( $thank_page_id )
-				)
+				'thank_page_url' => get_permalink( $thank_page_id ),
+				'cancel_url' => get_permalink( $cancel_page_id )
+			)
 		);
 
 		if ( !current_theme_supports( 'appointments_style' ) ) {
