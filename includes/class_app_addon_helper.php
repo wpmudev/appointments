@@ -3,7 +3,7 @@
 class App_AddonHandler {
 	
 	private function __construct () {
-		define('APP_PLUGIN_ADDONS_DIR', APP_PLUGIN_DIR . '/includes/addons', true);
+		define('APP_PLUGIN_ADDONS_DIR', APP_PLUGIN_DIR . '/includes/addons');
 		$this->_load_active_plugins();
 	}
 	
