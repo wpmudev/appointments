@@ -178,21 +178,13 @@ class App_Locations_WorkerLocations {
 	}
 
 	private function _update_appointment_locations ($worker_id, $old_location_id, $location_id) {
-		global $wpdb, $appointments;
+		if ( $old_location_id == $location_id ) {
+			return;
+		}
 
-		if ($old_location_id == $location_id) return false;
-
-		$res = $wpdb->update(
-			$appointments->app_table, 
-			array('location' => $location_id),
-			array(
-				'location' => $old_location_id,
-				'worker' => $worker_id,
-			), '%s', '%s'
-		);
-
-		if ( $res ) {
-			appointments_clear_appointment_cache();
+		$apps = appointments_get_appointments( array( 'location' => $old_location_id, 'worker' => $worker_id ) );
+		foreach ( $apps as $app ) {
+			appointments_update_appointment( $app->ID, array( 'location' => $location_id ) );
 		}
 	}
 

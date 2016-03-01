@@ -435,6 +435,253 @@ class App_Appointments_Old_Queries_Test extends App_UnitTestCase {
 
 	}
 
+
+	function test_update_gcal_appointment() {
+		global $wpdb;
+
+		$args = array(
+			'gcal_updated' => '2015-01-01 10:00:00'
+		);
+		$app_id_1 = appointments_insert_appointment( $args );
+		$app_id_2 = appointments_insert_appointment( $args );
+
+		$current_time = current_time( 'mysql' );
+		$current_datetime = strtotime( $current_time );
+		$table = appointments_get_table( 'appointments' );
+		$wpdb->update( $table, array( 'gcal_updated' => date ("Y-m-d H:i:s", $current_datetime ) ), array( 'ID'=>$app_id_1 ) );
+		appointments_clear_appointment_cache( $app_id_1 );
+		appointments_update_appointment( $app_id_2, array( 'gcal_updated' => date ("Y-m-d H:i:s", $current_datetime ) ) );
+
+		// Both should match
+		$app_1 = appointments_get_appointment( $app_id_1 );
+		$app_2 = appointments_get_appointment( $app_id_2 );
+		$this->assertEquals( $app_1->gcal_updated, $current_time );
+		$this->assertEquals( $app_1->gcal_updated, $app_2->gcal_updated );
+	}
+
+	function test_update_service_and_locations() {
+		global $wpdb;
+
+		$service_args = array(
+			'name' => 'My Service',
+			'duration' => 90
+		);
+		$service_id_1 = appointments_insert_service( $service_args );
+
+		$service_args = array(
+			'name' => 'My Other Service',
+			'duration' => 90
+		);
+		$service_id_2 = appointments_insert_service( $service_args );
+
+		$args = array(
+			'gcal_updated' => '2015-01-01 10:00:00',
+			'service' => $service_id_1,
+			'location' => 1
+		);
+		$app_id_1 = appointments_insert_appointment( $args );
+		$app_id_2 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'gcal_updated' => '2015-01-01 10:00:00',
+			'service' => $service_id_1,
+			'location' => 2
+		);
+		$app_id_3 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'gcal_updated' => '2015-01-01 10:00:00',
+			'service' => $service_id_2,
+			'location' => 1
+		);
+		$app_id_4 = appointments_insert_appointment( $args );
+
+		$new_location_id = 10;
+
+		$table = appointments_get_table( 'appointments' );
+		$result = $wpdb->update(
+			$table,
+			array('location' => $new_location_id),
+			array(
+				'location' => 1,
+				'service' => $service_id_1,
+			), '%s', '%s'
+		);
+		appointments_clear_appointment_cache();
+
+		$app_1 = appointments_get_appointment( $app_id_1 );
+		$app_2 = appointments_get_appointment( $app_id_2 );
+		$app_3 = appointments_get_appointment( $app_id_3 );
+		$app_4 = appointments_get_appointment( $app_id_4 );
+		$this->assertEquals( $app_1->location, $new_location_id );
+		$this->assertEquals( $app_2->location, $new_location_id );
+		$this->assertEquals( $app_3->location, 2 );
+		$this->assertEquals( $app_4->location, 1 );
+
+		// Should be the same than:
+		$apps = appointments_get_appointments( array( 'location' => $new_location_id, 'service' => $service_id_1 ) );
+		$new_location_id = 15;
+		foreach ( $apps as $app ) {
+			appointments_update_appointment( $app->ID, array( 'location' => $new_location_id ) );
+		}
+
+		$app_1 = appointments_get_appointment( $app_id_1 );
+		$app_2 = appointments_get_appointment( $app_id_2 );
+		$app_3 = appointments_get_appointment( $app_id_3 );
+		$app_4 = appointments_get_appointment( $app_id_4 );
+		$this->assertEquals( $app_1->location, $new_location_id );
+		$this->assertEquals( $app_2->location, $new_location_id );
+		$this->assertEquals( $app_3->location, 2 );
+		$this->assertEquals( $app_4->location, 1 );
+	}
+
+	function test_update_worker_and_locations() {
+		global $wpdb;
+
+		$worker_id_1 = $this->factory->user->create_object( $this->factory->user->generate_args() );
+		$worker_id_2 = $this->factory->user->create_object( $this->factory->user->generate_args() );
+
+		$service_args = array(
+			'name' => 'My Service',
+			'duration' => 90
+		);
+		$service_id_1 = appointments_insert_service( $service_args );
+
+		$service_args = array(
+			'name' => 'My Other Service',
+			'duration' => 90
+		);
+		$service_id_2 = appointments_insert_service( $service_args );
+
+		$worker_args = array(
+			'ID' => $worker_id_1,
+			'services_provided' => array( $service_id_1, $service_id_2 )
+		);
+		appointments_insert_worker( $worker_args );
+
+		$worker_args = array(
+			'ID' => $worker_id_2,
+			'services_provided' => array( $service_id_1, $service_id_2 )
+		);
+		appointments_insert_worker( $worker_args );
+
+		$args = array(
+			'gcal_updated' => '2015-01-01 10:00:00',
+			'worker' => $worker_id_1,
+			'location' => 1
+		);
+		$app_id_1 = appointments_insert_appointment( $args );
+		$app_id_2 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'gcal_updated' => '2015-01-01 10:00:00',
+			'service' => $worker_id_1,
+			'location' => 2
+		);
+		$app_id_3 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'gcal_updated' => '2015-01-01 10:00:00',
+			'service' => $worker_id_2,
+			'location' => 1
+		);
+		$app_id_4 = appointments_insert_appointment( $args );
+
+		$new_location_id = 10;
+
+		$table = appointments_get_table( 'appointments' );
+		$result = $wpdb->update(
+			$table,
+			array('location' => $new_location_id),
+			array(
+				'location' => 1,
+				'worker' => $worker_id_1,
+			), '%s', '%s'
+		);
+		appointments_clear_appointment_cache();
+
+		$app_1 = appointments_get_appointment( $app_id_1 );
+		$app_2 = appointments_get_appointment( $app_id_2 );
+		$app_3 = appointments_get_appointment( $app_id_3 );
+		$app_4 = appointments_get_appointment( $app_id_4 );
+		$this->assertEquals( $app_1->location, $new_location_id );
+		$this->assertEquals( $app_2->location, $new_location_id );
+		$this->assertEquals( $app_3->location, 2 );
+		$this->assertEquals( $app_4->location, 1 );
+
+		// Should be the same than:
+		$apps = appointments_get_appointments( array( 'location' => $new_location_id, 'worker' => $worker_id_1 ) );
+		$new_location_id = 15;
+		foreach ( $apps as $app ) {
+			appointments_update_appointment( $app->ID, array( 'location' => $new_location_id ) );
+		}
+
+		$app_1 = appointments_get_appointment( $app_id_1 );
+		$app_2 = appointments_get_appointment( $app_id_2 );
+		$app_3 = appointments_get_appointment( $app_id_3 );
+		$app_4 = appointments_get_appointment( $app_id_4 );
+		$this->assertEquals( $app_1->location, $new_location_id );
+		$this->assertEquals( $app_2->location, $new_location_id );
+		$this->assertEquals( $app_3->location, 2 );
+		$this->assertEquals( $app_4->location, 1 );
+	}
+
+	function test_select_distinct_locations() {
+		global $wpdb;
+
+		$user_id_1 = $this->factory->user->create_object( $this->factory->user->generate_args() );
+		$user_id_2 = $this->factory->user->create_object( $this->factory->user->generate_args() );
+
+		$args = array(
+			'user' => $user_id_1,
+			'location' => 1,
+			'status' => 'paid'
+		);
+		$app_id_1 = appointments_insert_appointment( $args );
+		$app_id_2 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'user' => $user_id_2,
+			'location' => 5,
+			'status' => 'pending'
+		);
+		$app_id_3 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'user' => $user_id_1,
+			'location' => 6,
+			'status' => 'completed'
+		);
+		$app_id_4 = appointments_insert_appointment( $args );
+
+		$args = array(
+			'user' => $user_id_1,
+			'location' => 7,
+			'status' => 'paid'
+		);
+		$app_id_5 = appointments_insert_appointment( $args );
+
+
+		$raw_status = array( 'pending', 'paid' );
+		$status = "status IN('" . join("','", $raw_status) . "')";
+		$user = (!empty($status) ? 'AND ' : '') . "user=" . (int)$user_id_1;
+		$table = appointments_get_table( 'appointments' );
+		$sql = "SELECT DISTINCT location FROM {$table} WHERE {$status} {$user}";
+		$old_locations = $wpdb->get_col( $sql );
+		$old_locations = array_values( $old_locations );
+
+		$query_args = array();
+		$query_args['status'] = $raw_status;
+		$query_args['user'] = $user_id_1;
+		$apps = appointments_get_appointments( $query_args );
+		$locations = wp_list_pluck( $apps, 'location' );
+		$locations = array_unique( array_values( $locations ) );
+
+		$this->assertEquals( array_values( $old_locations ), array_values( $locations ) );
+
+
+	}
+
 	/**
 	 * This is the old function for the previous test
 	 *

@@ -602,40 +602,36 @@ class Appointments_AJAX {
 
 		$status = apply_filters('app_post_confirmation_status', $status, $price, $service, $worker, $user_id);
 
-		$result = $wpdb->insert(
-			$appointments->app_table,
-			array(
-				'created'	=>	date ("Y-m-d H:i:s", $appointments->local_time ),
-				'user'		=>	$user_id,
-				'name'		=>	$name,
-				'email'		=>	$email,
-				'phone'		=>	$phone,
-				'address'	=>	$address,
-				'city'		=>	$city,
-				'location'	=>	$location,
-				'service'	=>	$service,
-				'worker'	=> 	$worker,
-				'price'		=>	$price,
-				'status'	=>	$status,
-				'start'		=>	date ("Y-m-d H:i:s", $start),
-				'end'		=>	date ("Y-m-d H:i:s", $start + ($duration * 60 ) ),
-				'note'		=>	$note
-			)
+		$args = array(
+			'user'     => $user_id,
+			'name'     => $name,
+			'email'    => $email,
+			'phone'    => $phone,
+			'address'  => $address,
+			'city'     => $city,
+			'location' => $location,
+			'service'  => $service,
+			'worker'   => $worker,
+			'price'    => $price,
+			'status'   => $status,
+			'date'    => $start,
+			'note'     => $note,
+			'duration' => $duration
 		);
+
+		$insert_id = appointments_insert_appointment( $args );
 
 		appointments_clear_appointment_cache();
 
-		if (!$result) {
+		if (!$insert_id) {
 			die(json_encode(array(
 				"error" => __( 'Appointment could not be saved. Please contact website admin.', 'appointments'),
 			)));
 		}
 
 		// A new appointment is accepted, so clear cache
-		$insert_id = $wpdb->insert_id; // Save insert ID
 		$appointments->flush_cache();
 		$appointments->save_cookie( $insert_id, $name, $email, $phone, $address, $city, $gcal );
-		do_action( 'app_new_appointment', $insert_id );
 
 		// Send confirmation for pending, payment not required cases, if selected so
 		if (

@@ -1084,8 +1084,10 @@ class AppointmentsGcal {
 
 				// Update Time of database
 				$gcal_ID = $updatedEvent->getId();
-				if ( $gcal_ID && $gcal_ID == $app->gcal_ID )
-					$wpdb->update( $this->app_table, array( 'gcal_updated' => date ("Y-m-d H:i:s", $this->local_time ) ), array( 'ID'=>$app_id ) );
+				if ( $gcal_ID && $gcal_ID == $app->gcal_ID ) {
+					appointments_update_appointment( $app_id, array( 'gcal_updated' => date ("Y-m-d H:i:s", $this->local_time ) ) );
+				}
+
 			} catch (Exception $e) {
 				$appointments->log("Update went wrong: " . $e->getMessage());
 			}

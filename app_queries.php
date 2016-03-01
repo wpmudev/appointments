@@ -2,91 +2,6 @@
 // This is not part of the plugin just a recopilation of all queries done to appointments table
 exit();
 
-$results = $wpdb->get_results( "SELECT * FROM " . $this->app_table .
-" WHERE created>'".$checkdate."' AND status='pending' AND (".$q.")  " );
-
-
-$wpdb->get_results( "SELECT * FROM " . $this->app_table . "
-WHERE (status='paid' OR status='confirmed')
-AND (sent NOT LIKE '%:{$rlike}:%' OR sent IS NULL)
-AND DATE_ADD('".date( 'Y-m-d H:i:s', $this->local_time )."', INTERVAL ".(int)$hour." HOUR) > start " );
-
-
-$rlike = esc_sql(like_escape(trim($hour)));
-$results = $wpdb->get_results( "SELECT * FROM " . $this->app_table . "
-WHERE (status='paid' OR status='confirmed')
-AND worker <> 0
-AND (sent_worker NOT LIKE '%:{$rlike}:%' OR sent_worker IS NULL)
-AND DATE_ADD('".date( 'Y-m-d H:i:s', $this->local_time )."', INTERVAL ".(int)$hour." HOUR) > start " );
-
-
-$expireds = $wpdb->get_results( $wpdb->prepare("SELECT * FROM {$this->app_table} WHERE start<%s AND status NOT IN ('completed', 'removed')", date("Y-m-d H:i:s", $this->local_time)) );
-
-$update = $wpdb->update( $this->app_table,
-	array( 'status'	=> $new_status ),
-	array( 'ID'	=> $expired->ID )
-);
-
-$expireds = $wpdb->get_results( $wpdb->prepare("SELECT * FROM {$this->app_table} WHERE status='pending' AND created<%s", date("Y-m-d H:i:s", $this->local_time - $clear_secs)) );
-
-$update = $wpdb->update( $this->app_table,
-	array( 'status'	=> 'removed' ),
-	array( 'ID'	=> $expired->ID )
-);
-
-$r2 = $wpdb->update(
-			$this->app_table,
-			array( 'worker'	=>	0 ),
-			array( 'worker'	=> $ID )
-		);
-
-
-$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('confirmed', 'paid') APP_ADD ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
-			break;
-case 'pending':
-			$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('pending') APP_ADD ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
-			break;
-case 'completed':
-			$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('completed') APP_ADD ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
-			break;
-case 'removed':
-			$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('removed') APP_ADD ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
-			break;
-case 'reserved':
-			$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('reserved') APP_ADD ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
-			break;
-default:
-			$sql = $this->db->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM {$this->app_table} WHERE status IN ('confirmed', 'paid') APP_ADD ORDER BY {$order_by} LIMIT %d, %d", $startat, $num);
-			break;
-}
-
-$num_active = $wpdb->get_var("SELECT COUNT(ID) FROM " . $appointments->app_table . " WHERE status='paid' OR status='confirmed' " );
-
-$num_pending = $wpdb->get_var("SELECT COUNT(ID) FROM " . $appointments->app_table . " WHERE status='pending' " );
-
-$result = $wpdb->insert(
-			$appointments->app_table,
-			array(
-				'created'	=>	date ("Y-m-d H:i:s", $appointments->local_time ),
-				'user'		=>	$user_id,
-				'name'		=>	$name,
-				'email'		=>	$email,
-				'phone'		=>	$phone,
-				'address'	=>	$address,
-				'city'		=>	$city,
-				'location'	=>	$location,
-				'service'	=>	$service,
-				'worker'	=> 	$worker,
-				'price'		=>	$price,
-				'status'	=>	$status,
-				'start'		=>	date ("Y-m-d H:i:s", $start),
-				'end'		=>	date ("Y-m-d H:i:s", $start + ($duration * 60 ) ),
-				'note'		=>	$note
-			)
-		);
-
-
-
 
 if ('selected' == $type && !empty($_POST['app'])) {
 // selected appointments
@@ -105,8 +20,6 @@ $apps = $appointments->db->get_results($sql, ARRAY_A);
 
 
 $export = $wpdb->get_col("SELECT ID FROM {$this->app_table} WHERE status IN({$clean_stat})");
-
-$wpdb->update( $this->app_table, array( 'gcal_updated' => date ("Y-m-d H:i:s", $this->local_time ) ), array( 'ID'=>$app_id ) );
 
 $present_events = $wpdb->get_col("SELECT DISTINCT gcal_ID FROM {$this->app_table} WHERE gcal_ID IS NOT NULL");
 
@@ -151,27 +64,6 @@ foreach ( $statuses as $s ) {
 $stat = rtrim( $stat, "OR " );
 
 $results = $wpdb->get_results( "SELECT * FROM " . $appointments->app_table . " WHERE (".$stat.") ORDER BY ".$appointments->sanitize_order_by( $order_by )." " );
-
-$sql = "SELECT DISTINCT location FROM {$appointments->app_table} WHERE {$status} {$user}";
-
-
-$res = $wpdb->update(
-			$appointments->app_table,
-			array('location' => $location_id),
-			array(
-				'location' => $old_location_id,
-				'service' => $service_id,
-			), '%s', '%s'
-		);
-
-    $res = $wpdb->update(
-			$appointments->app_table,
-			array('location' => $location_id),
-			array(
-				'location' => $old_location_id,
-				'worker' => $worker_id,
-			), '%s', '%s'
-		);
 
 
     private function _get_booked_appointments_for_period ($service_ids, $period) {

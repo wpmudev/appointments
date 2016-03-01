@@ -71,7 +71,6 @@ class App_Locations_ServiceLocations {
 	}
 
 	public function record_appointment_location ($appointment_id) {
-		global $wpdb, $appointments;
 		$appointment = appointments_get_appointment( $appointment_id );
 		if (empty($appointment->service)) return false;
 
@@ -174,22 +173,15 @@ class App_Locations_ServiceLocations {
 	}
 
 	private function _update_appointment_locations ($service_id, $old_location_id, $location_id) {
-		global $wpdb, $appointments;
-
-		if ($old_location_id == $location_id) return false;
-
-		$res = $wpdb->update(
-			$appointments->app_table, 
-			array('location' => $location_id),
-			array(
-				'location' => $old_location_id,
-				'service' => $service_id,
-			), '%s', '%s'
-		);
-
-		if ( $res ) {
-			appointments_clear_appointment_cache();
+		if ( $old_location_id == $location_id ) {
+			return;
 		}
+
+		$apps = appointments_get_appointments( array( 'location' => $old_location_id, 'service' => $service_id ) );
+		foreach ( $apps as $app ) {
+			appointments_update_appointment( $app->ID, array( 'location' => $location_id ) );
+		}
+
 	}
 
 	private function _get_service_location_markup ($service_id, $fallback='', $rich_content=true) {

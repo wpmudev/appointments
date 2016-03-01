@@ -739,5 +739,6 @@ function appointments_delete_worker_cache( $worker_id = 0 ) {
 	wp_cache_delete( 'app_count_workers' );
 	wp_cache_delete( 'app_all_workers' );
 	wp_cache_delete( 'app_workers_by_service' );
+	//@ TODO: Delete capacity_ cache
 	appointments_delete_timetables_cache();
 }

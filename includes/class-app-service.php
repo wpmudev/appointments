@@ -407,11 +407,53 @@ function appointments_delete_service( $service_id ) {
 
 }
 
+/**
+ * Return the capacity for a given service
+ *
+ * @param $service_id
+ *
+ * @return integer
+ */
+function appointments_get_service_capacity( $service_id ) {
+	$service_id = absint( $service_id );
+	$capacity = wp_cache_get( 'capacity_'. $service_id );
+	if ( false === $capacity ) {
+		// If no worker is defined, capacity is always 1
+		$count = count( appointments_get_all_workers() );
+		if ( !$count ) {
+			$capacity = 1;
+		}
+		else {
+			// Else, find number of workers giving that service and capacity of the service
+			$worker_count = count( appointments_get_workers_by_service( $service_id ) );
+			$service = appointments_get_service( $service_id );
+			if ( $service ) {
+				if ( ! $service->capacity ) {
+					$capacity = $worker_count; // No service capacity limit
+				}
+				else {
+					$capacity = min( $service->capacity, $worker_count ); // Return whichever smaller
+				}
+
+			}
+			else {
+				$capacity = 1; // No service ?? - Not possible but let's be safe
+			}
+
+		}
+		wp_cache_set( 'capacity_'. $service_id, $capacity );
+	}
+
+	return apply_filters( 'app_get_capacity', $capacity, $service_id );
+}
+
+
 function appointments_delete_service_cache( $service_id ) {
 	wp_cache_delete( $service_id, 'app_services' );
 	wp_cache_delete( 'app_get_services' );
 	wp_cache_delete( 'app_count_services' );
 	wp_cache_delete( 'min_service_id', 'appointments_services' );
+	//@ TODO: Delete capacity_ cache
 	appointments_delete_timetables_cache();
 }
 
@@ -420,6 +462,7 @@ function appointments_delete_services_cache() {
 	wp_cache_delete( 'appointments_services_orderby', 'appointments_services' );
 	wp_cache_delete( 'appointments_services_results', 'appointments_services' );
 	wp_cache_delete( 'min_service_id', 'appointments_services' );
+	//@ TODO: Delete capacity_ cache
 	appointments_delete_timetables_cache();
 }
 

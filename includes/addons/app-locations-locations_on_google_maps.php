@@ -31,37 +31,42 @@ class App_GoogleMaps_MyAppointmentsShortcode extends App_Shortcode {
 		if (!class_exists('AgmMarkerReplacer')) return false;
 
 		$args = wp_parse_args($args, $this->_defaults_to_args());
-		$status = $user = '';
 
+		$query_args = array();
 		$raw_status = $this->_arg_to_string_list($args['status']);
-		if ($raw_status) {
-			$status = "status IN('" . join("','", $raw_status) . "')";
+		if ( $raw_status ) {
+			$query_args['status'] = $raw_status;
 		}
 
-		if (empty($args['user_id'])) {
-			if (is_user_logged_in()) {
-				$user = wp_get_current_user();
-				$user = (!empty($status) ? 'AND ' : '') . "user=" . (int)$user->ID;
+		if ( empty( $args['user_id'] ) ) {
+			if ( is_user_logged_in() ) {
+				$user               = wp_get_current_user();
+				$query_args['user'] = $user->ID;
 			} else {
-				$apps = !empty($_COOKIE["wpmudev_appointments"])
-					? unserialize(stripslashes($_COOKIE["wpmudev_appointments"]))
-					: array()
-				;
-				$user = !empty($apps)
-					? (!empty($status) ? 'AND ' : '') . 'ID in (' . join(',', $apps) . ')'
-					: ''
-				;
+				$apps = ! empty( $_COOKIE["wpmudev_appointments"] )
+					? unserialize( stripslashes( $_COOKIE["wpmudev_appointments"] ) )
+					: array();
+
+				if ( ! empty( $apps ) ) {
+					$query_args['app_id'] = $apps;
+				}
+
 			}
 		} else {
-			$user = (!empty($status) ? 'AND ' : '') . "user=" . $this->_arg_to_int($args['user_id']);
+			$query_args['user'] = $this->_arg_to_int( $args['user_id'] );
 		}
 
-		if (!$user) return $content;
+		if ( empty( $query_args['user'] ) ) {
+			return $content;
+		}
 
-		global $wpdb, $appointments;
-		$sql = "SELECT DISTINCT location FROM {$appointments->app_table} WHERE {$status} {$user}";
-		$locations = $wpdb->get_col($sql);
-		if (!$locations) return $content;
+		$apps = appointments_get_appointments( $query_args );
+		if ( ! $apps ) {
+			return $content;
+		}
+
+		$locations = wp_list_pluck( $apps, 'location' );
+		$locations = array_values( array_unique( $locations ) );
 
 		$maps = array();
 		$_locations = App_Locations_Model::get_instance();

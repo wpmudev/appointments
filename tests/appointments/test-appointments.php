@@ -77,12 +77,6 @@ class App_Appointments_Test extends App_UnitTestCase {
 		$app = appointments_get_appointment( $app_id );
 		$this->assertEquals( 0, $app->worker );
 
-		// Wrong service
-		$args['worker'] = $worker_id;
-		unset( $args['service'] );
-		$app_id = appointments_insert_appointment( $args );
-		$this->assertFalse( $app_id );
-
 		// Wrong email
 		$args['service'] = $service_id;
 		$args['email'] = 'wrong';
@@ -275,10 +269,9 @@ class App_Appointments_Test extends App_UnitTestCase {
 		$args = array(
 			'service' => 8888
 		);
-		$result = appointments_update_appointment( $app_id, $args );
-		$this->assertFalse( $result );
+		appointments_update_appointment( $app_id, $args );
 		$app = appointments_get_appointment( $app_id );
-		$this->assertEquals( $service_id_2, $app->service );
+		$this->assertEquals( 0, $app->service );
 
 		// Wrong worker
 		$args = array(
@@ -546,6 +539,53 @@ class App_Appointments_Test extends App_UnitTestCase {
 
 		$this->assertEquals( appointments_get_appointment( $app_id_1 )->worker, 0 );
 		$this->assertEquals( appointments_get_appointment( $app_id_2 )->worker, 0 );
+	}
+
+	function test_appointments_duration() {
+		$worker_id = $this->factory->user->create_object( $this->factory->user->generate_args() );
+
+		$service_args = array(
+			'name' => 'My Service',
+			'duration' => 40
+		);
+		$service_id = appointments_insert_service( $service_args );
+
+		$worker_args = array(
+			'ID' => $worker_id,
+			'services_provided' => array( $service_id ),
+		);
+		appointments_insert_worker( $worker_args );
+
+		$args = array(
+			'service' => $service_id,
+		);
+		$app_id = appointments_insert_appointment( $args );
+		$app = appointments_get_appointment( $app_id );
+
+		$start = $app->start;
+		$end = $app->end;
+		$this->assertEquals( strtotime( $start ) + ( 40 * 60 ), strtotime( $end ) );
+
+		$args = array(
+			'service' => $service_id,
+			'duration' => 50
+		);
+		$app_id = appointments_insert_appointment( $args );
+		$app = appointments_get_appointment( $app_id );
+
+		$start = $app->start;
+		$end = $app->end;
+		$this->assertEquals( strtotime( $start ) + ( 50 * 60 ), strtotime( $end ) );
+
+		global $appointments;
+		$args = array();
+		$app_id = appointments_insert_appointment( $args );
+		$app = appointments_get_appointment( $app_id );
+
+		$start = $app->start;
+		$end = $app->end;
+		$this->assertEquals( strtotime( $start ) + ( $appointments->get_min_time() * 60 ), strtotime( $end ) );
+
 	}
 
 	function test_appointments_cache() {
