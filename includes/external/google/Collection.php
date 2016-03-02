@@ -1,7 +1,7 @@
 <?php
 
-if (!class_exists('App_Google_Client')) {
-  require_once dirname(__FILE__) . '/../autoload.php';
+if (!class_exists('Google_Client')) {
+  require_once dirname(__FILE__) . '/autoload.php';
 }
 
 /**
@@ -9,7 +9,7 @@ if (!class_exists('App_Google_Client')) {
  * exposes the items array for iteration, so you can just
  * iterate over the object rather than a reference inside.
  */
-class App_Google_Collection extends App_Google_Model implements Iterator, Countable
+class Google_Collection extends Google_Model implements Iterator, Countable
 {
   protected $collection_key = 'items';
 
@@ -56,7 +56,7 @@ class App_Google_Collection extends App_Google_Model implements Iterator, Counta
     return count($this->modelData[$this->collection_key]);
   }
 
-  public function offsetExists ($offset)
+  public function offsetExists($offset)
   {
     if (!is_numeric($offset)) {
       return parent::offsetExists($offset);

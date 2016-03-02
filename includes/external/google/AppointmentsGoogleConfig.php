@@ -1,6 +1,6 @@
 <?php
 
-class App_Google_AppointmentsGoogleConfig extends App_Google_Config {
+class App_Google_AppointmentsGoogleConfig extends Google_Config {
 
 	public function __construct ($extra_config=array()) {
 		parent::__construct();

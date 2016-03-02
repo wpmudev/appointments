@@ -15,8 +15,9 @@
  * limitations under the License.
  */
 
-class App_Google_Service
+class Google_Service
 {
+  public $batchPath;
   public $rootUrl;
   public $version;
   public $servicePath;
@@ -24,7 +25,7 @@ class App_Google_Service
   public $resource;
   private $client;
 
-  public function __construct(App_Google_Client $client)
+  public function __construct(Google_Client $client)
   {
     $this->client = $client;
   }
@@ -36,5 +37,20 @@ class App_Google_Service
   public function getClient()
   {
     return $this->client;
+  }
+
+  /**
+   * Create a new HTTP Batch handler for this service
+   *
+   * @return Google_Http_Batch
+   */
+  public function createBatch()
+  {
+    return new Google_Http_Batch(
+        $this->client,
+        false,
+        $this->rootUrl,
+        $this->batchPath
+    );
   }
 }

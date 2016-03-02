@@ -15,6 +15,6 @@
  * limitations under the License.
  */
 
-class App_Google_Exception extends Exception
+class Google_Exception extends Exception
 {
 }

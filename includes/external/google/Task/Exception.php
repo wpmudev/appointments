@@ -15,10 +15,6 @@
  * limitations under the License.
  */
 
-if (!class_exists('App_Google_Client')) {
-  require_once dirname(__FILE__) . '/../autoload.php';
-}
-
-class App_Google_Task_Exception extends App_Google_Exception
+class Google_Task_Exception extends Google_Exception
 {
 }

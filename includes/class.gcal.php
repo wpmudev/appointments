@@ -868,21 +868,22 @@ class AppointmentsGcal {
 
 		// Just in case
 		require_once $this->plugin_dir . '/includes/external/google/Client.php';
+		require_once $this->plugin_dir . '/includes/external/google/AppointmentsGoogleConfig.php';
 
-		$config = new App_Google_AppointmentsGoogleConfig(apply_filters('app-gcal-client_parameters', array(
+		$config = new Google_AppointmentsGoogleConfig(apply_filters('app-gcal-client_parameters', array(
 			//'cache_class' => 'App_Google_Cache_Null', // For an example
 		)));
-		$this->client = new App_Google_Client($config);
+		$this->client = new Google_Client($config);
 		$this->client->setApplicationName("Appointments+");
 		//$this->client->setUseObjects(true);
 		$key = $this->_file_get_contents( $worker_id );
-		$this->client->setAssertionCredentials(new App_Google_Auth_AssertionCredentials(
+		$this->client->setAssertionCredentials(new Google_Auth_AssertionCredentials(
 			$this->get_service_account( $worker_id),
 			array('https://www.googleapis.com/auth/calendar'),
 			$key)
 		);
 
-		$this->service = new App_Google_Service_Calendar($this->client);
+		$this->service = new Google_Service_Calendar($this->client);
 
 		return true;
 	}
@@ -907,10 +908,10 @@ class AppointmentsGcal {
 		if (!current_time('timestamp')) $tdif = 0;
 		else $tdif = current_time('timestamp') - time();
 
-		$start = new App_Google_Service_Calendar_EventDateTime();
+		$start = new Google_Service_Calendar_EventDateTime();
 		$start->setDateTime(date("Y-m-d\TH:i:s\Z", strtotime($app->start) - $tdif));
 
-		$end = new App_Google_Service_Calendar_EventDateTime();
+		$end = new Google_Service_Calendar_EventDateTime();
 		$end->setDateTime(date("Y-m-d\TH:i:s\Z", strtotime($app->end) - $tdif));
 
 		// An email is always required
@@ -919,11 +920,11 @@ class AppointmentsGcal {
 
 		if (!$email) $email = $a->get_admin_email( );
 
-		$attendee1 = new App_Google_Service_Calendar_EventAttendee();
+		$attendee1 = new Google_Service_Calendar_EventAttendee();
 		$attendee1->setEmail( $email );
 		$attendees = array($attendee1);
 
-		$this->event = new App_Google_Service_Calendar_Event();
+		$this->event = new Google_Service_Calendar_Event();
 		$this->event->setSummary( $summary );
 		$this->event->setLocation( $location );
 		$this->event->setStart( $start );
@@ -1021,7 +1022,7 @@ class AppointmentsGcal {
 		// Insert event
 		try {
 			$createdEvent = $this->service->events->insert( $this->get_selected_calendar( $worker_id ), $this->event );
-			if ($createdEvent && !is_object($createdEvent) && class_exists('App_Google_Service_Calendar_CalendarListEntry')) $createdEvent = new App_Google_Service_Calendar_CalendarListEntry($createdEvent);
+			if ($createdEvent && !is_object($createdEvent) && class_exists('Google_Service_Calendar_CalendarListEntry')) $createdEvent = new Google_Service_Calendar_CalendarListEntry($createdEvent);
 
 			// Write Event ID to database
 			$gcal_ID = $createdEvent->getId();
@@ -1080,7 +1081,7 @@ class AppointmentsGcal {
 			// Update event
 			try {
 				$updatedEvent = $this->service->events->update( $this->get_selected_calendar( $worker_id ), $app->gcal_ID, $this->event );
-				if ($updatedEvent && !is_object($updatedEvent) && class_exists('App_Google_Service_Calendar_CalendarListEntry')) $updatedEvent = new App_Google_Service_Calendar_CalendarListEntry($updatedEvent);
+				if ($updatedEvent && !is_object($updatedEvent) && class_exists('Google_Service_Calendar_CalendarListEntry')) $updatedEvent = new Google_Service_Calendar_CalendarListEntry($updatedEvent);
 
 				// Update Time of database
 				$gcal_ID = $updatedEvent->getId();
@@ -1191,8 +1192,8 @@ class AppointmentsGcal {
 		}
 //$appointments->log(sprintf("got back some events: %d", ($events ? 1 : 0)));
 
-		if ($events && class_exists('App_Google_Service_Calendar_Events') && !($events instanceof App_Google_Service_Calendar_Events)) {
-			$events = new App_Google_Service_Calendar_Events;
+		if ($events && class_exists('Google_Service_Calendar_Events') && !($events instanceof Google_Service_Calendar_Events)) {
+			$events = new Google_Service_Calendar_Events;
 			$events->setItems($events);
 		}
 		$message = '';
@@ -1210,7 +1211,7 @@ class AppointmentsGcal {
 		}
 
 		if ( $events && is_array( $events->getItems()) ) {
-			/** @var App_Google_Service_Calendar_Event $event */
+			/** @var Google_Service_Calendar_Event $event */
 			// Service ID is not important as we will use this record for blocking our time slots only
 			$service_id = appointments_get_services_min_id();
 
