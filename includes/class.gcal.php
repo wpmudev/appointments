@@ -868,12 +868,12 @@ class AppointmentsGcal {
 
 		// Just in case
 		require_once $this->plugin_dir . '/includes/external/google/Client.php';
-		require_once $this->plugin_dir . '/includes/external/google/AppointmentsGoogleConfig.php';
+		//require_once $this->plugin_dir . '/includes/external/google/AppointmentsGoogleConfig.php';
 
-		$config = new Google_AppointmentsGoogleConfig(apply_filters('app-gcal-client_parameters', array(
-			//'cache_class' => 'App_Google_Cache_Null', // For an example
-		)));
-		$this->client = new Google_Client($config);
+//		$config = new App_Google_AppointmentsGoogleConfig(apply_filters('app-gcal-client_parameters', array(
+//			//'cache_class' => 'App_Google_Cache_Null', // For an example
+//		)));
+		$this->client = new Google_Client();
 		$this->client->setApplicationName("Appointments+");
 		//$this->client->setUseObjects(true);
 		$key = $this->_file_get_contents( $worker_id );
