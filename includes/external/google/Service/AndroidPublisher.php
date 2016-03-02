@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2016 Google Inc.
+ * Copyright 2010 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -917,11 +917,7 @@ class Google_Service_AndroidPublisher extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'productId' => array(
+                'token' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -929,7 +925,11 @@ class Google_Service_AndroidPublisher extends Google_Service
                   'location' => 'query',
                   'type' => 'integer',
                 ),
-                'token' => array(
+                'maxResults' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
+                'productId' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -1001,17 +1001,17 @@ class Google_Service_AndroidPublisher extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'maxResults' => array(
+                'token' => array(
                   'location' => 'query',
-                  'type' => 'integer',
+                  'type' => 'string',
                 ),
                 'startIndex' => array(
                   'location' => 'query',
                   'type' => 'integer',
                 ),
-                'token' => array(
+                'maxResults' => array(
                   'location' => 'query',
-                  'type' => 'string',
+                  'type' => 'integer',
                 ),
               ),
             ),'patch' => array(
@@ -2040,11 +2040,11 @@ class Google_Service_AndroidPublisher_Entitlements_Resource extends Google_Servi
    * product was sold in (for example, 'com.some.thing').
    * @param array $optParams Optional parameters.
    *
+   * @opt_param string token
+   * @opt_param string startIndex
    * @opt_param string maxResults
    * @opt_param string productId The product id of the inapp product (for example,
    * 'sku1'). This can be used to restrict the result set.
-   * @opt_param string startIndex
-   * @opt_param string token
    * @return Google_Service_AndroidPublisher_EntitlementsListResponse
    */
   public function listEntitlements($packageName, $optParams = array())
@@ -2139,9 +2139,9 @@ class Google_Service_AndroidPublisher_Inappproducts_Resource extends Google_Serv
    * products; for example, "com.spiffygame".
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string maxResults
-   * @opt_param string startIndex
    * @opt_param string token
+   * @opt_param string startIndex
+   * @opt_param string maxResults
    * @return Google_Service_AndroidPublisher_InappproductsListResponse
    */
   public function listInappproducts($packageName, $optParams = array())
@@ -3112,6 +3112,14 @@ class Google_Service_AndroidPublisher_InAppProductListing extends Google_Model
   }
 }
 
+class Google_Service_AndroidPublisher_InAppProductListings extends Google_Model
+{
+}
+
+class Google_Service_AndroidPublisher_InAppProductPrices extends Google_Model
+{
+}
+
 class Google_Service_AndroidPublisher_InappproductsBatchRequest extends Google_Collection
 {
   protected $collection_key = 'entrys';
@@ -3583,43 +3591,12 @@ class Google_Service_AndroidPublisher_ProductPurchase extends Google_Model
   }
 }
 
-class Google_Service_AndroidPublisher_Prorate extends Google_Model
+class Google_Service_AndroidPublisher_Season extends Google_Model
 {
-  protected $internal_gapi_mappings = array(
-  );
-  protected $defaultPriceType = 'Google_Service_AndroidPublisher_Price';
-  protected $defaultPriceDataType = '';
-  protected $startType = 'Google_Service_AndroidPublisher_MonthDay';
-  protected $startDataType = '';
-
-
-  public function setDefaultPrice(Google_Service_AndroidPublisher_Price $defaultPrice)
-  {
-    $this->defaultPrice = $defaultPrice;
-  }
-  public function getDefaultPrice()
-  {
-    return $this->defaultPrice;
-  }
-  public function setStart(Google_Service_AndroidPublisher_MonthDay $start)
-  {
-    $this->start = $start;
-  }
-  public function getStart()
-  {
-    return $this->start;
-  }
-}
-
-class Google_Service_AndroidPublisher_Season extends Google_Collection
-{
-  protected $collection_key = 'prorations';
   protected $internal_gapi_mappings = array(
   );
   protected $endType = 'Google_Service_AndroidPublisher_MonthDay';
   protected $endDataType = '';
-  protected $prorationsType = 'Google_Service_AndroidPublisher_Prorate';
-  protected $prorationsDataType = 'array';
   protected $startType = 'Google_Service_AndroidPublisher_MonthDay';
   protected $startDataType = '';
 
@@ -3631,14 +3608,6 @@ class Google_Service_AndroidPublisher_Season extends Google_Collection
   public function getEnd()
   {
     return $this->end;
-  }
-  public function setProrations($prorations)
-  {
-    $this->prorations = $prorations;
-  }
-  public function getProrations()
-  {
-    return $this->prorations;
   }
   public function setStart(Google_Service_AndroidPublisher_MonthDay $start)
   {

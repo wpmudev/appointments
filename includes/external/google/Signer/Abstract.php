@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2014 Google Inc.
+ * Copyright 2011 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,37 +15,15 @@
  * limitations under the License.
  */
 
-use Google\Auth\CacheInterface;
-
 /**
- * In-memory cache
+ * Signs data.
+ *
+ * @author Brian Eaton <beaton@google.com>
  */
-class Google_Cache_Memory implements CacheInterface
+abstract class Google_Signer_Abstract
 {
-  protected $cache;
-
   /**
-   * @inheritDoc
+   * Signs data, returns the signature as binary data.
    */
-  public function get($key, $expiration = false)
-  {
-    return isset($this->cache[$key]) ? $this->cache[$key] : false;
-  }
-
-  /**
-   * @inheritDoc
-   */
-  public function set($key, $value)
-  {
-    $this->cache[$key] = $value;
-  }
-
-  /**
-   * @inheritDoc
-   * @param String $key
-   */
-  public function delete($key)
-  {
-    unset($this->cache[$key]);
-  }
+  abstract public function sign($data);
 }

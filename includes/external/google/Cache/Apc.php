@@ -15,8 +15,9 @@
  * limitations under the License.
  */
 
-use Google\Auth\CacheInterface;
-use Psr\Log\LoggerInterface;
+if (!class_exists('Google_Client')) {
+  require_once dirname(__FILE__) . '/../autoload.php';
+}
 
 /**
  * A persistent storage class based on the APC cache, which is not
@@ -26,23 +27,23 @@ use Psr\Log\LoggerInterface;
  *
  * @author Chris Chabot <chabotc@google.com>
  */
-class Google_Cache_Apc implements CacheInterface
+class Google_Cache_Apc extends Google_Cache_Abstract
 {
   /**
-   * @var Psr\Log\LoggerInterface logger
+   * @var Google_Client the current client
    */
-  private $logger;
+  private $client;
 
-  public function __construct(LoggerInterface $logger = null)
+  public function __construct(Google_Client $client)
   {
-    $this->logger = $logger;
-
     if (! function_exists('apc_add') ) {
       $error = "Apc functions not available";
 
-      $this->log('error', $error);
+      $client->getLogger()->error($error);
       throw new Google_Cache_Exception($error);
     }
+
+    $this->client = $client;
   }
 
    /**
@@ -52,16 +53,14 @@ class Google_Cache_Apc implements CacheInterface
   {
     $ret = apc_fetch($key);
     if ($ret === false) {
-      $this->log(
-          'debug',
+      $this->client->getLogger()->debug(
           'APC cache miss',
           array('key' => $key)
       );
       return false;
     }
     if (is_numeric($expiration) && (time() - $ret['time'] > $expiration)) {
-      $this->log(
-          'debug',
+      $this->client->getLogger()->debug(
           'APC cache miss (expired)',
           array('key' => $key, 'var' => $ret)
       );
@@ -69,8 +68,7 @@ class Google_Cache_Apc implements CacheInterface
       return false;
     }
 
-    $this->log(
-        'debug',
+    $this->client->getLogger()->debug(
         'APC cache hit',
         array('key' => $key, 'var' => $ret)
     );
@@ -87,16 +85,14 @@ class Google_Cache_Apc implements CacheInterface
     $rc = apc_store($key, $var);
 
     if ($rc == false) {
-      $this->log(
-          'error',
+      $this->client->getLogger()->error(
           'APC cache set failed',
           array('key' => $key, 'var' => $var)
       );
       throw new Google_Cache_Exception("Couldn't store data");
     }
 
-    $this->log(
-        'debug',
+    $this->client->getLogger()->debug(
         'APC cache set',
         array('key' => $key, 'var' => $var)
     );
@@ -108,18 +104,10 @@ class Google_Cache_Apc implements CacheInterface
    */
   public function delete($key)
   {
-    $this->log(
-        'debug',
+    $this->client->getLogger()->debug(
         'APC cache delete',
         array('key' => $key)
     );
     apc_delete($key);
-  }
-
-  private function log($level, $message, $context = array())
-  {
-    if ($this->logger) {
-      $this->logger->log($level, $message, $context);
-    }
   }
 }

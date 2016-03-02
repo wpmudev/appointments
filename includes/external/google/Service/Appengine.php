@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2016 Google Inc.
+ * Copyright 2010 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,7 +16,7 @@
  */
 
 /**
- * Service definition for Appengine (v1beta5).
+ * Service definition for Appengine (v1beta4).
  *
  * <p>
  * The Google App Engine Admin API enables developers to provision and manage
@@ -24,7 +24,7 @@
  *
  * <p>
  * For more information about this service, see the API
- * <a href="https://cloud.google.com/appengine/docs/admin-api/" target="_blank">Documentation</a>
+ * <a href="https://developers.google.com/appengine/" target="_blank">Documentation</a>
  * </p>
  *
  * @author Google, Inc.
@@ -36,10 +36,10 @@ class Google_Service_Appengine extends Google_Service
       "https://www.googleapis.com/auth/cloud-platform";
 
   public $apps;
+  public $apps_modules;
+  public $apps_modules_versions;
   public $apps_operations;
-  public $apps_services;
-  public $apps_services_versions;
-  
+
 
   /**
    * Constructs the internal representation of the Appengine service.
@@ -51,7 +51,7 @@ class Google_Service_Appengine extends Google_Service
     parent::__construct($client);
     $this->rootUrl = 'https://appengine.googleapis.com/';
     $this->servicePath = '';
-    $this->version = 'v1beta5';
+    $this->version = 'v1beta4';
     $this->serviceName = 'appengine';
 
     $this->apps = new Google_Service_Appengine_Apps_Resource(
@@ -61,7 +61,7 @@ class Google_Service_Appengine extends Google_Service
         array(
           'methods' => array(
             'get' => array(
-              'path' => 'v1beta5/apps/{appsId}',
+              'path' => 'v1beta4/apps/{appsId}',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'appsId' => array(
@@ -78,61 +78,14 @@ class Google_Service_Appengine extends Google_Service
           )
         )
     );
-    $this->apps_operations = new Google_Service_Appengine_AppsOperations_Resource(
+    $this->apps_modules = new Google_Service_Appengine_AppsModules_Resource(
         $this,
         $this->serviceName,
-        'operations',
-        array(
-          'methods' => array(
-            'get' => array(
-              'path' => 'v1beta5/apps/{appsId}/operations/{operationsId}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'appsId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'operationsId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-              ),
-            ),'list' => array(
-              'path' => 'v1beta5/apps/{appsId}/operations',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'appsId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'filter' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'pageSize' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-              ),
-            ),
-          )
-        )
-    );
-    $this->apps_services = new Google_Service_Appengine_AppsServices_Resource(
-        $this,
-        $this->serviceName,
-        'services',
+        'modules',
         array(
           'methods' => array(
             'delete' => array(
-              'path' => 'v1beta5/apps/{appsId}/services/{servicesId}',
+              'path' => 'v1beta4/apps/{appsId}/modules/{modulesId}',
               'httpMethod' => 'DELETE',
               'parameters' => array(
                 'appsId' => array(
@@ -140,14 +93,14 @@ class Google_Service_Appengine extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'servicesId' => array(
+                'modulesId' => array(
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
                 ),
               ),
             ),'get' => array(
-              'path' => 'v1beta5/apps/{appsId}/services/{servicesId}',
+              'path' => 'v1beta4/apps/{appsId}/modules/{modulesId}',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'appsId' => array(
@@ -155,14 +108,14 @@ class Google_Service_Appengine extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'servicesId' => array(
+                'modulesId' => array(
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
                 ),
               ),
             ),'list' => array(
-              'path' => 'v1beta5/apps/{appsId}/services',
+              'path' => 'v1beta4/apps/{appsId}/modules',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'appsId' => array(
@@ -180,7 +133,7 @@ class Google_Service_Appengine extends Google_Service
                 ),
               ),
             ),'patch' => array(
-              'path' => 'v1beta5/apps/{appsId}/services/{servicesId}',
+              'path' => 'v1beta4/apps/{appsId}/modules/{modulesId}',
               'httpMethod' => 'PATCH',
               'parameters' => array(
                 'appsId' => array(
@@ -188,32 +141,32 @@ class Google_Service_Appengine extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'servicesId' => array(
+                'modulesId' => array(
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
                 ),
-                'mask' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
                 'migrateTraffic' => array(
                   'location' => 'query',
                   'type' => 'boolean',
+                ),
+                'mask' => array(
+                  'location' => 'query',
+                  'type' => 'string',
                 ),
               ),
             ),
           )
         )
     );
-    $this->apps_services_versions = new Google_Service_Appengine_AppsServicesVersions_Resource(
+    $this->apps_modules_versions = new Google_Service_Appengine_AppsModulesVersions_Resource(
         $this,
         $this->serviceName,
         'versions',
         array(
           'methods' => array(
             'create' => array(
-              'path' => 'v1beta5/apps/{appsId}/services/{servicesId}/versions',
+              'path' => 'v1beta4/apps/{appsId}/modules/{modulesId}/versions',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'appsId' => array(
@@ -221,14 +174,14 @@ class Google_Service_Appengine extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'servicesId' => array(
+                'modulesId' => array(
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
                 ),
               ),
             ),'delete' => array(
-              'path' => 'v1beta5/apps/{appsId}/services/{servicesId}/versions/{versionsId}',
+              'path' => 'v1beta4/apps/{appsId}/modules/{modulesId}/versions/{versionsId}',
               'httpMethod' => 'DELETE',
               'parameters' => array(
                 'appsId' => array(
@@ -236,7 +189,7 @@ class Google_Service_Appengine extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'servicesId' => array(
+                'modulesId' => array(
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
@@ -248,7 +201,7 @@ class Google_Service_Appengine extends Google_Service
                 ),
               ),
             ),'get' => array(
-              'path' => 'v1beta5/apps/{appsId}/services/{servicesId}/versions/{versionsId}',
+              'path' => 'v1beta4/apps/{appsId}/modules/{modulesId}/versions/{versionsId}',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'appsId' => array(
@@ -256,7 +209,7 @@ class Google_Service_Appengine extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'servicesId' => array(
+                'modulesId' => array(
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
@@ -272,7 +225,7 @@ class Google_Service_Appengine extends Google_Service
                 ),
               ),
             ),'list' => array(
-              'path' => 'v1beta5/apps/{appsId}/services/{servicesId}/versions',
+              'path' => 'v1beta4/apps/{appsId}/modules/{modulesId}/versions',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'appsId' => array(
@@ -280,12 +233,59 @@ class Google_Service_Appengine extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'servicesId' => array(
+                'modulesId' => array(
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
                 ),
+                'pageToken' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'pageSize' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
                 'view' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+              ),
+            ),
+          )
+        )
+    );
+    $this->apps_operations = new Google_Service_Appengine_AppsOperations_Resource(
+        $this,
+        $this->serviceName,
+        'operations',
+        array(
+          'methods' => array(
+            'get' => array(
+              'path' => 'v1beta4/apps/{appsId}/operations/{operationsId}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'appsId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'operationsId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'list' => array(
+              'path' => 'v1beta4/apps/{appsId}/operations',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'appsId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'filter' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -327,9 +327,7 @@ class Google_Service_Appengine_Apps_Resource extends Google_Service_Resource
    * @opt_param bool ensureResourcesExist Certain resources associated with an
    * application are created on-demand. Controls whether these resources should be
    * created when performing the `GET` operation. If specified and any resources
-   * could not be created, the request will fail with an error code. Additionally,
-   * this parameter can cause the request to take longer to complete. Note: This
-   * parameter will be deprecated in a future version of the API.
+   * cloud not be created, the request will fail with an error code.
    * @return Google_Service_Appengine_Application
    */
   public function get($appsId, $optParams = array())
@@ -340,6 +338,179 @@ class Google_Service_Appengine_Apps_Resource extends Google_Service_Resource
   }
 }
 
+/**
+ * The "modules" collection of methods.
+ * Typical usage is:
+ *  <code>
+ *   $appengineService = new Google_Service_Appengine(...);
+ *   $modules = $appengineService->modules;
+ *  </code>
+ */
+class Google_Service_Appengine_AppsModules_Resource extends Google_Service_Resource
+{
+
+  /**
+   * Deletes a module and all enclosed versions. (modules.delete)
+   *
+   * @param string $appsId Part of `name`. Name of the resource requested. For
+   * example: "apps/myapp/modules/default".
+   * @param string $modulesId Part of `name`. See documentation of `appsId`.
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Appengine_Operation
+   */
+  public function delete($appsId, $modulesId, $optParams = array())
+  {
+    $params = array('appsId' => $appsId, 'modulesId' => $modulesId);
+    $params = array_merge($params, $optParams);
+    return $this->call('delete', array($params), "Google_Service_Appengine_Operation");
+  }
+
+  /**
+   * Gets the current configuration of the module. (modules.get)
+   *
+   * @param string $appsId Part of `name`. Name of the resource requested. For
+   * example: "apps/myapp/modules/default".
+   * @param string $modulesId Part of `name`. See documentation of `appsId`.
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Appengine_Module
+   */
+  public function get($appsId, $modulesId, $optParams = array())
+  {
+    $params = array('appsId' => $appsId, 'modulesId' => $modulesId);
+    $params = array_merge($params, $optParams);
+    return $this->call('get', array($params), "Google_Service_Appengine_Module");
+  }
+
+  /**
+   * Lists all the modules in the application. (modules.listAppsModules)
+   *
+   * @param string $appsId Part of `name`. Name of the resource requested. For
+   * example: "apps/myapp".
+   * @param array $optParams Optional parameters.
+   *
+   * @opt_param int pageSize Maximum results to return per page.
+   * @opt_param string pageToken Continuation token for fetching the next page of
+   * results.
+   * @return Google_Service_Appengine_ListModulesResponse
+   */
+  public function listAppsModules($appsId, $optParams = array())
+  {
+    $params = array('appsId' => $appsId);
+    $params = array_merge($params, $optParams);
+    return $this->call('list', array($params), "Google_Service_Appengine_ListModulesResponse");
+  }
+
+  /**
+   * Updates the configuration of the specified module. (modules.patch)
+   *
+   * @param string $appsId Part of `name`. Name of the resource to update. For
+   * example: "apps/myapp/modules/default".
+   * @param string $modulesId Part of `name`. See documentation of `appsId`.
+   * @param Google_Module $postBody
+   * @param array $optParams Optional parameters.
+   *
+   * @opt_param bool migrateTraffic Whether to use Traffic Migration to shift
+   * traffic gradually. Traffic can only be migrated from a single version to
+   * another single version.
+   * @opt_param string mask Standard field mask for the set of fields to be
+   * updated.
+   * @return Google_Service_Appengine_Operation
+   */
+  public function patch($appsId, $modulesId, Google_Service_Appengine_Module $postBody, $optParams = array())
+  {
+    $params = array('appsId' => $appsId, 'modulesId' => $modulesId, 'postBody' => $postBody);
+    $params = array_merge($params, $optParams);
+    return $this->call('patch', array($params), "Google_Service_Appengine_Operation");
+  }
+}
+
+/**
+ * The "versions" collection of methods.
+ * Typical usage is:
+ *  <code>
+ *   $appengineService = new Google_Service_Appengine(...);
+ *   $versions = $appengineService->versions;
+ *  </code>
+ */
+class Google_Service_Appengine_AppsModulesVersions_Resource extends Google_Service_Resource
+{
+
+  /**
+   * Deploys new code and resource files to a version. (versions.create)
+   *
+   * @param string $appsId Part of `name`. Name of the resource to update. For
+   * example: "apps/myapp/modules/default".
+   * @param string $modulesId Part of `name`. See documentation of `appsId`.
+   * @param Google_Version $postBody
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Appengine_Operation
+   */
+  public function create($appsId, $modulesId, Google_Service_Appengine_Version $postBody, $optParams = array())
+  {
+    $params = array('appsId' => $appsId, 'modulesId' => $modulesId, 'postBody' => $postBody);
+    $params = array_merge($params, $optParams);
+    return $this->call('create', array($params), "Google_Service_Appengine_Operation");
+  }
+
+  /**
+   * Deletes an existing version. (versions.delete)
+   *
+   * @param string $appsId Part of `name`. Name of the resource requested. For
+   * example: "apps/myapp/modules/default/versions/v1".
+   * @param string $modulesId Part of `name`. See documentation of `appsId`.
+   * @param string $versionsId Part of `name`. See documentation of `appsId`.
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Appengine_Operation
+   */
+  public function delete($appsId, $modulesId, $versionsId, $optParams = array())
+  {
+    $params = array('appsId' => $appsId, 'modulesId' => $modulesId, 'versionsId' => $versionsId);
+    $params = array_merge($params, $optParams);
+    return $this->call('delete', array($params), "Google_Service_Appengine_Operation");
+  }
+
+  /**
+   * Gets application deployment information. (versions.get)
+   *
+   * @param string $appsId Part of `name`. Name of the resource requested. For
+   * example: "apps/myapp/modules/default/versions/v1".
+   * @param string $modulesId Part of `name`. See documentation of `appsId`.
+   * @param string $versionsId Part of `name`. See documentation of `appsId`.
+   * @param array $optParams Optional parameters.
+   *
+   * @opt_param string view Controls the set of fields returned in the `Get`
+   * response.
+   * @return Google_Service_Appengine_Version
+   */
+  public function get($appsId, $modulesId, $versionsId, $optParams = array())
+  {
+    $params = array('appsId' => $appsId, 'modulesId' => $modulesId, 'versionsId' => $versionsId);
+    $params = array_merge($params, $optParams);
+    return $this->call('get', array($params), "Google_Service_Appengine_Version");
+  }
+
+  /**
+   * Lists the versions of a module. (versions.listAppsModulesVersions)
+   *
+   * @param string $appsId Part of `name`. Name of the resource requested. For
+   * example: "apps/myapp/modules/default".
+   * @param string $modulesId Part of `name`. See documentation of `appsId`.
+   * @param array $optParams Optional parameters.
+   *
+   * @opt_param string pageToken Continuation token for fetching the next page of
+   * results.
+   * @opt_param int pageSize Maximum results to return per page.
+   * @opt_param string view Controls the set of fields returned in the `List`
+   * response.
+   * @return Google_Service_Appengine_ListVersionsResponse
+   */
+  public function listAppsModulesVersions($appsId, $modulesId, $optParams = array())
+  {
+    $params = array('appsId' => $appsId, 'modulesId' => $modulesId);
+    $params = array_merge($params, $optParams);
+    return $this->call('list', array($params), "Google_Service_Appengine_ListVersionsResponse");
+  }
+}
 /**
  * The "operations" collection of methods.
  * Typical usage is:
@@ -388,179 +559,6 @@ class Google_Service_Appengine_AppsOperations_Resource extends Google_Service_Re
     $params = array('appsId' => $appsId);
     $params = array_merge($params, $optParams);
     return $this->call('list', array($params), "Google_Service_Appengine_ListOperationsResponse");
-  }
-}
-/**
- * The "services" collection of methods.
- * Typical usage is:
- *  <code>
- *   $appengineService = new Google_Service_Appengine(...);
- *   $services = $appengineService->services;
- *  </code>
- */
-class Google_Service_Appengine_AppsServices_Resource extends Google_Service_Resource
-{
-
-  /**
-   * Deletes a service and all enclosed versions. (services.delete)
-   *
-   * @param string $appsId Part of `name`. Name of the resource requested. For
-   * example: "apps/myapp/services/default".
-   * @param string $servicesId Part of `name`. See documentation of `appsId`.
-   * @param array $optParams Optional parameters.
-   * @return Google_Service_Appengine_Operation
-   */
-  public function delete($appsId, $servicesId, $optParams = array())
-  {
-    $params = array('appsId' => $appsId, 'servicesId' => $servicesId);
-    $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Appengine_Operation");
-  }
-
-  /**
-   * Gets the current configuration of the service. (services.get)
-   *
-   * @param string $appsId Part of `name`. Name of the resource requested. For
-   * example: "apps/myapp/services/default".
-   * @param string $servicesId Part of `name`. See documentation of `appsId`.
-   * @param array $optParams Optional parameters.
-   * @return Google_Service_Appengine_Service
-   */
-  public function get($appsId, $servicesId, $optParams = array())
-  {
-    $params = array('appsId' => $appsId, 'servicesId' => $servicesId);
-    $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Appengine_Service");
-  }
-
-  /**
-   * Lists all the services in the application. (services.listAppsServices)
-   *
-   * @param string $appsId Part of `name`. Name of the resource requested. For
-   * example: "apps/myapp".
-   * @param array $optParams Optional parameters.
-   *
-   * @opt_param int pageSize Maximum results to return per page.
-   * @opt_param string pageToken Continuation token for fetching the next page of
-   * results.
-   * @return Google_Service_Appengine_ListServicesResponse
-   */
-  public function listAppsServices($appsId, $optParams = array())
-  {
-    $params = array('appsId' => $appsId);
-    $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Appengine_ListServicesResponse");
-  }
-
-  /**
-   * Updates the configuration of the specified service. (services.patch)
-   *
-   * @param string $appsId Part of `name`. Name of the resource to update. For
-   * example: "apps/myapp/services/default".
-   * @param string $servicesId Part of `name`. See documentation of `appsId`.
-   * @param Google_Service $postBody
-   * @param array $optParams Optional parameters.
-   *
-   * @opt_param string mask Standard field mask for the set of fields to be
-   * updated.
-   * @opt_param bool migrateTraffic Whether to use Traffic Migration to shift
-   * traffic gradually. Traffic can only be migrated from a single version to
-   * another single version.
-   * @return Google_Service_Appengine_Operation
-   */
-  public function patch($appsId, $servicesId, Google_Service_Appengine_Service $postBody, $optParams = array())
-  {
-    $params = array('appsId' => $appsId, 'servicesId' => $servicesId, 'postBody' => $postBody);
-    $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Appengine_Operation");
-  }
-}
-
-/**
- * The "versions" collection of methods.
- * Typical usage is:
- *  <code>
- *   $appengineService = new Google_Service_Appengine(...);
- *   $versions = $appengineService->versions;
- *  </code>
- */
-class Google_Service_Appengine_AppsServicesVersions_Resource extends Google_Service_Resource
-{
-
-  /**
-   * Deploys new code and resource files to a version. (versions.create)
-   *
-   * @param string $appsId Part of `name`. Name of the resource to update. For
-   * example: "apps/myapp/services/default".
-   * @param string $servicesId Part of `name`. See documentation of `appsId`.
-   * @param Google_Version $postBody
-   * @param array $optParams Optional parameters.
-   * @return Google_Service_Appengine_Operation
-   */
-  public function create($appsId, $servicesId, Google_Service_Appengine_Version $postBody, $optParams = array())
-  {
-    $params = array('appsId' => $appsId, 'servicesId' => $servicesId, 'postBody' => $postBody);
-    $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_Appengine_Operation");
-  }
-
-  /**
-   * Deletes an existing version. (versions.delete)
-   *
-   * @param string $appsId Part of `name`. Name of the resource requested. For
-   * example: "apps/myapp/services/default/versions/v1".
-   * @param string $servicesId Part of `name`. See documentation of `appsId`.
-   * @param string $versionsId Part of `name`. See documentation of `appsId`.
-   * @param array $optParams Optional parameters.
-   * @return Google_Service_Appengine_Operation
-   */
-  public function delete($appsId, $servicesId, $versionsId, $optParams = array())
-  {
-    $params = array('appsId' => $appsId, 'servicesId' => $servicesId, 'versionsId' => $versionsId);
-    $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Appengine_Operation");
-  }
-
-  /**
-   * Gets application deployment information. (versions.get)
-   *
-   * @param string $appsId Part of `name`. Name of the resource requested. For
-   * example: "apps/myapp/services/default/versions/v1".
-   * @param string $servicesId Part of `name`. See documentation of `appsId`.
-   * @param string $versionsId Part of `name`. See documentation of `appsId`.
-   * @param array $optParams Optional parameters.
-   *
-   * @opt_param string view Controls the set of fields returned in the `Get`
-   * response.
-   * @return Google_Service_Appengine_Version
-   */
-  public function get($appsId, $servicesId, $versionsId, $optParams = array())
-  {
-    $params = array('appsId' => $appsId, 'servicesId' => $servicesId, 'versionsId' => $versionsId);
-    $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Appengine_Version");
-  }
-
-  /**
-   * Lists the versions of a service. (versions.listAppsServicesVersions)
-   *
-   * @param string $appsId Part of `name`. Name of the resource requested. For
-   * example: "apps/myapp/services/default".
-   * @param string $servicesId Part of `name`. See documentation of `appsId`.
-   * @param array $optParams Optional parameters.
-   *
-   * @opt_param string view Controls the set of fields returned in the `List`
-   * response.
-   * @opt_param int pageSize Maximum results to return per page.
-   * @opt_param string pageToken Continuation token for fetching the next page of
-   * results.
-   * @return Google_Service_Appengine_ListVersionsResponse
-   */
-  public function listAppsServicesVersions($appsId, $servicesId, $optParams = array())
-  {
-    $params = array('appsId' => $appsId, 'servicesId' => $servicesId);
-    $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Appengine_ListVersionsResponse");
   }
 }
 
@@ -643,7 +641,6 @@ class Google_Service_Appengine_Application extends Google_Collection
   protected $internal_gapi_mappings = array(
   );
   public $codeBucket;
-  public $defaultBucket;
   protected $dispatchRulesType = 'Google_Service_Appengine_UrlDispatchRule';
   protected $dispatchRulesDataType = 'array';
   public $id;
@@ -658,14 +655,6 @@ class Google_Service_Appengine_Application extends Google_Collection
   public function getCodeBucket()
   {
     return $this->codeBucket;
-  }
-  public function setDefaultBucket($defaultBucket)
-  {
-    $this->defaultBucket = $defaultBucket;
-  }
-  public function getDefaultBucket()
-  {
-    return $this->defaultBucket;
   }
   public function setDispatchRules($dispatchRules)
   {
@@ -708,8 +697,6 @@ class Google_Service_Appengine_AutomaticScaling extends Google_Model
   public $coolDownPeriod;
   protected $cpuUtilizationType = 'Google_Service_Appengine_CpuUtilization';
   protected $cpuUtilizationDataType = '';
-  protected $diskUtilizationType = 'Google_Service_Appengine_DiskUtilization';
-  protected $diskUtilizationDataType = '';
   public $maxConcurrentRequests;
   public $maxIdleInstances;
   public $maxPendingLatency;
@@ -717,10 +704,6 @@ class Google_Service_Appengine_AutomaticScaling extends Google_Model
   public $minIdleInstances;
   public $minPendingLatency;
   public $minTotalInstances;
-  protected $networkUtilizationType = 'Google_Service_Appengine_NetworkUtilization';
-  protected $networkUtilizationDataType = '';
-  protected $requestUtilizationType = 'Google_Service_Appengine_RequestUtilization';
-  protected $requestUtilizationDataType = '';
 
 
   public function setCoolDownPeriod($coolDownPeriod)
@@ -738,14 +721,6 @@ class Google_Service_Appengine_AutomaticScaling extends Google_Model
   public function getCpuUtilization()
   {
     return $this->cpuUtilization;
-  }
-  public function setDiskUtilization(Google_Service_Appengine_DiskUtilization $diskUtilization)
-  {
-    $this->diskUtilization = $diskUtilization;
-  }
-  public function getDiskUtilization()
-  {
-    return $this->diskUtilization;
   }
   public function setMaxConcurrentRequests($maxConcurrentRequests)
   {
@@ -802,22 +777,6 @@ class Google_Service_Appengine_AutomaticScaling extends Google_Model
   public function getMinTotalInstances()
   {
     return $this->minTotalInstances;
-  }
-  public function setNetworkUtilization(Google_Service_Appengine_NetworkUtilization $networkUtilization)
-  {
-    $this->networkUtilization = $networkUtilization;
-  }
-  public function getNetworkUtilization()
-  {
-    return $this->networkUtilization;
-  }
-  public function setRequestUtilization(Google_Service_Appengine_RequestUtilization $requestUtilization)
-  {
-    $this->requestUtilization = $requestUtilization;
-  }
-  public function getRequestUtilization()
-  {
-    return $this->requestUtilization;
   }
 }
 
@@ -929,48 +888,8 @@ class Google_Service_Appengine_Deployment extends Google_Collection
   }
 }
 
-class Google_Service_Appengine_DiskUtilization extends Google_Model
+class Google_Service_Appengine_DeploymentFiles extends Google_Model
 {
-  protected $internal_gapi_mappings = array(
-  );
-  public $targetReadBytesPerSec;
-  public $targetReadOpsPerSec;
-  public $targetWriteBytesPerSec;
-  public $targetWriteOpsPerSec;
-
-
-  public function setTargetReadBytesPerSec($targetReadBytesPerSec)
-  {
-    $this->targetReadBytesPerSec = $targetReadBytesPerSec;
-  }
-  public function getTargetReadBytesPerSec()
-  {
-    return $this->targetReadBytesPerSec;
-  }
-  public function setTargetReadOpsPerSec($targetReadOpsPerSec)
-  {
-    $this->targetReadOpsPerSec = $targetReadOpsPerSec;
-  }
-  public function getTargetReadOpsPerSec()
-  {
-    return $this->targetReadOpsPerSec;
-  }
-  public function setTargetWriteBytesPerSec($targetWriteBytesPerSec)
-  {
-    $this->targetWriteBytesPerSec = $targetWriteBytesPerSec;
-  }
-  public function getTargetWriteBytesPerSec()
-  {
-    return $this->targetWriteBytesPerSec;
-  }
-  public function setTargetWriteOpsPerSec($targetWriteOpsPerSec)
-  {
-    $this->targetWriteOpsPerSec = $targetWriteOpsPerSec;
-  }
-  public function getTargetWriteOpsPerSec()
-  {
-    return $this->targetWriteOpsPerSec;
-  }
 }
 
 class Google_Service_Appengine_ErrorHandler extends Google_Model
@@ -1140,6 +1059,34 @@ class Google_Service_Appengine_Library extends Google_Model
   }
 }
 
+class Google_Service_Appengine_ListModulesResponse extends Google_Collection
+{
+  protected $collection_key = 'modules';
+  protected $internal_gapi_mappings = array(
+  );
+  protected $modulesType = 'Google_Service_Appengine_Module';
+  protected $modulesDataType = 'array';
+  public $nextPageToken;
+
+
+  public function setModules($modules)
+  {
+    $this->modules = $modules;
+  }
+  public function getModules()
+  {
+    return $this->modules;
+  }
+  public function setNextPageToken($nextPageToken)
+  {
+    $this->nextPageToken = $nextPageToken;
+  }
+  public function getNextPageToken()
+  {
+    return $this->nextPageToken;
+  }
+}
+
 class Google_Service_Appengine_ListOperationsResponse extends Google_Collection
 {
   protected $collection_key = 'operations';
@@ -1165,34 +1112,6 @@ class Google_Service_Appengine_ListOperationsResponse extends Google_Collection
   public function getOperations()
   {
     return $this->operations;
-  }
-}
-
-class Google_Service_Appengine_ListServicesResponse extends Google_Collection
-{
-  protected $collection_key = 'services';
-  protected $internal_gapi_mappings = array(
-  );
-  public $nextPageToken;
-  protected $servicesType = 'Google_Service_Appengine_Service';
-  protected $servicesDataType = 'array';
-
-
-  public function setNextPageToken($nextPageToken)
-  {
-    $this->nextPageToken = $nextPageToken;
-  }
-  public function getNextPageToken()
-  {
-    return $this->nextPageToken;
-  }
-  public function setServices($services)
-  {
-    $this->services = $services;
-  }
-  public function getServices()
-  {
-    return $this->services;
   }
 }
 
@@ -1241,6 +1160,42 @@ class Google_Service_Appengine_ManualScaling extends Google_Model
   }
 }
 
+class Google_Service_Appengine_Module extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  public $id;
+  public $name;
+  protected $splitType = 'Google_Service_Appengine_TrafficSplit';
+  protected $splitDataType = '';
+
+
+  public function setId($id)
+  {
+    $this->id = $id;
+  }
+  public function getId()
+  {
+    return $this->id;
+  }
+  public function setName($name)
+  {
+    $this->name = $name;
+  }
+  public function getName()
+  {
+    return $this->name;
+  }
+  public function setSplit(Google_Service_Appengine_TrafficSplit $split)
+  {
+    $this->split = $split;
+  }
+  public function getSplit()
+  {
+    return $this->split;
+  }
+}
+
 class Google_Service_Appengine_Network extends Google_Collection
 {
   protected $collection_key = 'forwardedPorts';
@@ -1274,50 +1229,6 @@ class Google_Service_Appengine_Network extends Google_Collection
   public function getName()
   {
     return $this->name;
-  }
-}
-
-class Google_Service_Appengine_NetworkUtilization extends Google_Model
-{
-  protected $internal_gapi_mappings = array(
-  );
-  public $targetReceivedBytesPerSec;
-  public $targetReceivedPacketsPerSec;
-  public $targetSentBytesPerSec;
-  public $targetSentPacketsPerSec;
-
-
-  public function setTargetReceivedBytesPerSec($targetReceivedBytesPerSec)
-  {
-    $this->targetReceivedBytesPerSec = $targetReceivedBytesPerSec;
-  }
-  public function getTargetReceivedBytesPerSec()
-  {
-    return $this->targetReceivedBytesPerSec;
-  }
-  public function setTargetReceivedPacketsPerSec($targetReceivedPacketsPerSec)
-  {
-    $this->targetReceivedPacketsPerSec = $targetReceivedPacketsPerSec;
-  }
-  public function getTargetReceivedPacketsPerSec()
-  {
-    return $this->targetReceivedPacketsPerSec;
-  }
-  public function setTargetSentBytesPerSec($targetSentBytesPerSec)
-  {
-    $this->targetSentBytesPerSec = $targetSentBytesPerSec;
-  }
-  public function getTargetSentBytesPerSec()
-  {
-    return $this->targetSentBytesPerSec;
-  }
-  public function setTargetSentPacketsPerSec($targetSentPacketsPerSec)
-  {
-    $this->targetSentPacketsPerSec = $targetSentPacketsPerSec;
-  }
-  public function getTargetSentPacketsPerSec()
-  {
-    return $this->targetSentPacketsPerSec;
   }
 }
 
@@ -1437,83 +1348,8 @@ class Google_Service_Appengine_OperationMetadata extends Google_Model
   }
 }
 
-class Google_Service_Appengine_OperationMetadataV1Beta5 extends Google_Model
+class Google_Service_Appengine_OperationResponse extends Google_Model
 {
-  protected $internal_gapi_mappings = array(
-  );
-  public $endTime;
-  public $insertTime;
-  public $method;
-  public $target;
-  public $user;
-
-
-  public function setEndTime($endTime)
-  {
-    $this->endTime = $endTime;
-  }
-  public function getEndTime()
-  {
-    return $this->endTime;
-  }
-  public function setInsertTime($insertTime)
-  {
-    $this->insertTime = $insertTime;
-  }
-  public function getInsertTime()
-  {
-    return $this->insertTime;
-  }
-  public function setMethod($method)
-  {
-    $this->method = $method;
-  }
-  public function getMethod()
-  {
-    return $this->method;
-  }
-  public function setTarget($target)
-  {
-    $this->target = $target;
-  }
-  public function getTarget()
-  {
-    return $this->target;
-  }
-  public function setUser($user)
-  {
-    $this->user = $user;
-  }
-  public function getUser()
-  {
-    return $this->user;
-  }
-}
-
-class Google_Service_Appengine_RequestUtilization extends Google_Model
-{
-  protected $internal_gapi_mappings = array(
-  );
-  public $targetConcurrentRequests;
-  public $targetRequestCountPerSec;
-
-
-  public function setTargetConcurrentRequests($targetConcurrentRequests)
-  {
-    $this->targetConcurrentRequests = $targetConcurrentRequests;
-  }
-  public function getTargetConcurrentRequests()
-  {
-    return $this->targetConcurrentRequests;
-  }
-  public function setTargetRequestCountPerSec($targetRequestCountPerSec)
-  {
-    $this->targetRequestCountPerSec = $targetRequestCountPerSec;
-  }
-  public function getTargetRequestCountPerSec()
-  {
-    return $this->targetRequestCountPerSec;
-  }
 }
 
 class Google_Service_Appengine_Resources extends Google_Model
@@ -1568,42 +1404,6 @@ class Google_Service_Appengine_ScriptHandler extends Google_Model
   }
 }
 
-class Google_Service_Appengine_Service extends Google_Model
-{
-  protected $internal_gapi_mappings = array(
-  );
-  public $id;
-  public $name;
-  protected $splitType = 'Google_Service_Appengine_TrafficSplit';
-  protected $splitDataType = '';
-
-
-  public function setId($id)
-  {
-    $this->id = $id;
-  }
-  public function getId()
-  {
-    return $this->id;
-  }
-  public function setName($name)
-  {
-    $this->name = $name;
-  }
-  public function getName()
-  {
-    return $this->name;
-  }
-  public function setSplit(Google_Service_Appengine_TrafficSplit $split)
-  {
-    $this->split = $split;
-  }
-  public function getSplit()
-  {
-    return $this->split;
-  }
-}
-
 class Google_Service_Appengine_SourceReference extends Google_Model
 {
   protected $internal_gapi_mappings = array(
@@ -1628,6 +1428,72 @@ class Google_Service_Appengine_SourceReference extends Google_Model
   {
     return $this->revisionId;
   }
+}
+
+class Google_Service_Appengine_StaticDirectoryHandler extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  public $applicationReadable;
+  public $directory;
+  public $expiration;
+  public $httpHeaders;
+  public $mimeType;
+  public $requireMatchingFile;
+
+
+  public function setApplicationReadable($applicationReadable)
+  {
+    $this->applicationReadable = $applicationReadable;
+  }
+  public function getApplicationReadable()
+  {
+    return $this->applicationReadable;
+  }
+  public function setDirectory($directory)
+  {
+    $this->directory = $directory;
+  }
+  public function getDirectory()
+  {
+    return $this->directory;
+  }
+  public function setExpiration($expiration)
+  {
+    $this->expiration = $expiration;
+  }
+  public function getExpiration()
+  {
+    return $this->expiration;
+  }
+  public function setHttpHeaders($httpHeaders)
+  {
+    $this->httpHeaders = $httpHeaders;
+  }
+  public function getHttpHeaders()
+  {
+    return $this->httpHeaders;
+  }
+  public function setMimeType($mimeType)
+  {
+    $this->mimeType = $mimeType;
+  }
+  public function getMimeType()
+  {
+    return $this->mimeType;
+  }
+  public function setRequireMatchingFile($requireMatchingFile)
+  {
+    $this->requireMatchingFile = $requireMatchingFile;
+  }
+  public function getRequireMatchingFile()
+  {
+    return $this->requireMatchingFile;
+  }
+}
+
+class Google_Service_Appengine_StaticDirectoryHandlerHttpHeaders extends Google_Model
+{
 }
 
 class Google_Service_Appengine_StaticFilesHandler extends Google_Model
@@ -1701,6 +1567,10 @@ class Google_Service_Appengine_StaticFilesHandler extends Google_Model
   }
 }
 
+class Google_Service_Appengine_StaticFilesHandlerHttpHeaders extends Google_Model
+{
+}
+
 class Google_Service_Appengine_Status extends Google_Collection
 {
   protected $collection_key = 'details';
@@ -1737,6 +1607,10 @@ class Google_Service_Appengine_Status extends Google_Collection
   }
 }
 
+class Google_Service_Appengine_StatusDetails extends Google_Model
+{
+}
+
 class Google_Service_Appengine_TrafficSplit extends Google_Model
 {
   protected $internal_gapi_mappings = array(
@@ -1763,13 +1637,17 @@ class Google_Service_Appengine_TrafficSplit extends Google_Model
   }
 }
 
+class Google_Service_Appengine_TrafficSplitAllocations extends Google_Model
+{
+}
+
 class Google_Service_Appengine_UrlDispatchRule extends Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $domain;
+  public $module;
   public $path;
-  public $service;
 
 
   public function setDomain($domain)
@@ -1780,6 +1658,14 @@ class Google_Service_Appengine_UrlDispatchRule extends Google_Model
   {
     return $this->domain;
   }
+  public function setModule($module)
+  {
+    $this->module = $module;
+  }
+  public function getModule()
+  {
+    return $this->module;
+  }
   public function setPath($path)
   {
     $this->path = $path;
@@ -1787,14 +1673,6 @@ class Google_Service_Appengine_UrlDispatchRule extends Google_Model
   public function getPath()
   {
     return $this->path;
-  }
-  public function setService($service)
-  {
-    $this->service = $service;
-  }
-  public function getService()
-  {
-    return $this->service;
   }
 }
 
@@ -1810,6 +1688,8 @@ class Google_Service_Appengine_UrlMap extends Google_Model
   protected $scriptType = 'Google_Service_Appengine_ScriptHandler';
   protected $scriptDataType = '';
   public $securityLevel;
+  protected $staticDirectoryType = 'Google_Service_Appengine_StaticDirectoryHandler';
+  protected $staticDirectoryDataType = '';
   protected $staticFilesType = 'Google_Service_Appengine_StaticFilesHandler';
   protected $staticFilesDataType = '';
   public $urlRegex;
@@ -1863,6 +1743,14 @@ class Google_Service_Appengine_UrlMap extends Google_Model
   {
     return $this->securityLevel;
   }
+  public function setStaticDirectory(Google_Service_Appengine_StaticDirectoryHandler $staticDirectory)
+  {
+    $this->staticDirectory = $staticDirectory;
+  }
+  public function getStaticDirectory()
+  {
+    return $this->staticDirectory;
+  }
   public function setStaticFiles(Google_Service_Appengine_StaticFilesHandler $staticFiles)
   {
     $this->staticFiles = $staticFiles;
@@ -1898,7 +1786,6 @@ class Google_Service_Appengine_Version extends Google_Collection
   public $deployer;
   protected $deploymentType = 'Google_Service_Appengine_Deployment';
   protected $deploymentDataType = '';
-  public $diskUsageBytes;
   public $env;
   public $envVariables;
   protected $errorHandlersType = 'Google_Service_Appengine_ErrorHandler';
@@ -1989,14 +1876,6 @@ class Google_Service_Appengine_Version extends Google_Collection
   public function getDeployment()
   {
     return $this->deployment;
-  }
-  public function setDiskUsageBytes($diskUsageBytes)
-  {
-    $this->diskUsageBytes = $diskUsageBytes;
-  }
-  public function getDiskUsageBytes()
-  {
-    return $this->diskUsageBytes;
   }
   public function setEnv($env)
   {
@@ -2142,4 +2021,12 @@ class Google_Service_Appengine_Version extends Google_Collection
   {
     return $this->vm;
   }
+}
+
+class Google_Service_Appengine_VersionBetaSettings extends Google_Model
+{
+}
+
+class Google_Service_Appengine_VersionEnvVariables extends Google_Model
+{
 }

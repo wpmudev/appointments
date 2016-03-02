@@ -43,7 +43,8 @@ class Appointments {
 	public $app_table;
 	public $workers_table;
 	/** @var AppointmentsGcal|bool */
-	public $gcal_api;
+	public $gcal_api = false;
+	public $gcal_api_new = false;
 	public $locale_error;
 	public $time_format;
 	public $datetime_format;
@@ -61,6 +62,7 @@ class Appointments {
 	function __construct() {
 
 		include_once( 'includes/helpers.php' );
+		include_once( 'includes/helpers-settings.php' );
 		include_once( 'includes/deprecated-hooks.php' );
 
 		$this->timetables = get_transient( 'app_timetables' );
@@ -152,7 +154,6 @@ class Appointments {
 		$this->mp_posts = array();
 		add_action( 'plugins_loaded', array( &$this, 'check_marketpress_plugin') );
 
-		$this->gcal_api = false;
 		add_action('init', array($this, 'setup_gcal_sync'), 10);
 
 		// Database variables
@@ -218,12 +219,21 @@ class Appointments {
 
 	function setup_gcal_sync () {
 		// GCal Integration
-		$this->gcal_api = false;
 		// Allow forced disabling in case of emergency
 		if ( !defined( 'APP_GCAL_DISABLE' ) ) {
 			require_once $this->plugin_dir . '/includes/class.gcal.php';
 			$this->gcal_api = new AppointmentsGcal();
 		}
+
+		$this->get_gcal_api();
+	}
+
+	function get_gcal_api() {
+		if ( false === $this->gcal_api_new && ! defined( 'APP_GCAL_DISABLE' ) ) {
+			require_once $this->plugin_dir . '/includes/class-app-gcal.php';
+			$this->gcal_api_new = new Appointments_Google_Calendar();
+		}
+		return $this->gcal_api_new;
 	}
 
 
@@ -4516,4 +4526,9 @@ function appointments_plugin_url() {
 function appointments_plugin_dir() {
 	global $appointments;
 	return trailingslashit( plugin_dir_path( __FILE__ ) );
+}
+
+function appointments() {
+	global $appointments;
+	return $appointments;
 }

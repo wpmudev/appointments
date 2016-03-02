@@ -417,7 +417,14 @@ class AppointmentsGcal {
 			<td>
 			<input value="<?php echo $gcal_service_account; ?>" size="90" name="gcal_service_account" type="text"  <?php echo $is_readonly ?> />
 			<br />
-			<span class="description"><?php _e('Enter Service account email address here, normally, this is your Gmail address', 'appointments') ?></span>
+			<p><?php _e( 'Obtain your service account email address:', 'appointments' ); ?></p>
+			<ol>
+				<li><?php printf( __( 'Go to <a href="%s" target="_blank">Service Accunts section</a>', 'appointments' ), 'https://console.developers.google.com/projectselector/permissions/serviceaccounts' ); ?></li>
+				<li><?php _e( 'Select your project', 'appointments' ); ?></li>
+				<li><?php _e( 'Click on Service Accounts tab', 'appointments' ); ?></li>
+				<li><?php _e( 'Copy your account email address', 'appointments' ); ?></li>
+			</ol>
+			<span class="description"><?php _e('Enter Service account email address here', 'appointments') ?></span>
 			</td>
 		</tr>
 

@@ -15,8 +15,9 @@
  * limitations under the License.
  */
 
-use Google\Auth\CacheInterface;
-use Psr\Log\LoggerInterface;
+if (!class_exists('Google_Client')) {
+  require_once dirname(__FILE__) . '/../autoload.php';
+}
 
 /*
  * This class implements a basic on disk storage. While that does
@@ -26,21 +27,21 @@ use Psr\Log\LoggerInterface;
  *
  * @author Chris Chabot <chabotc@google.com>
  */
-class Google_Cache_File implements CacheInterface
+class Google_Cache_File extends Google_Cache_Abstract
 {
   const MAX_LOCK_RETRIES = 10;
   private $path;
   private $fh;
 
   /**
-   * @var use Psr\Log\LoggerInterface logger
+   * @var Google_Client the current client
    */
-  private $logger;
+  private $client;
 
-  public function __construct($path, LoggerInterface $logger = null)
+  public function __construct(Google_Client $client)
   {
-    $this->path = $path;
-    $this->logger = $logger;
+    $this->client = $client;
+    $this->path = $this->client->getClassConfig($this, 'directory');
   }
 
   public function get($key, $expiration = false)
@@ -49,8 +50,7 @@ class Google_Cache_File implements CacheInterface
     $data = false;
 
     if (!file_exists($storageFile)) {
-      $this->log(
-          'debug',
+      $this->client->getLogger()->debug(
           'File cache miss',
           array('key' => $key, 'file' => $storageFile)
       );
@@ -60,8 +60,7 @@ class Google_Cache_File implements CacheInterface
     if ($expiration) {
       $mtime = filemtime($storageFile);
       if ((time() - $mtime) >= $expiration) {
-        $this->log(
-            'debug',
+        $this->client->getLogger()->debug(
             'File cache miss (expired)',
             array('key' => $key, 'file' => $storageFile)
         );
@@ -73,19 +72,17 @@ class Google_Cache_File implements CacheInterface
     if ($this->acquireReadLock($storageFile)) {
       if (filesize($storageFile) > 0) {
         $data = fread($this->fh, filesize($storageFile));
-        $data = unserialize($data);
+        $data =  unserialize($data);
       } else {
-        $this->log(
-            'debug',
+        $this->client->getLogger()->debug(
             'Cache file was empty',
             array('file' => $storageFile)
         );
       }
-      $this->unlock();
+      $this->unlock($storageFile);
     }
 
-    $this->log(
-        'debug',
+    $this->client->getLogger()->debug(
         'File cache hit',
         array('key' => $key, 'file' => $storageFile, 'var' => $data)
     );
@@ -100,17 +97,15 @@ class Google_Cache_File implements CacheInterface
       // We serialize the whole request object, since we don't only want the
       // responseContent but also the postBody used, headers, size, etc.
       $data = serialize($value);
-      fwrite($this->fh, $data);
-      $this->unlock();
+      $result = fwrite($this->fh, $data);
+      $this->unlock($storageFile);
 
-      $this->log(
-          'debug',
+      $this->client->getLogger()->debug(
           'File cache set',
           array('key' => $key, 'file' => $storageFile, 'var' => $value)
       );
     } else {
-      $this->log(
-          'notice',
+      $this->client->getLogger()->notice(
           'File cache set failed',
           array('key' => $key, 'file' => $storageFile)
       );
@@ -121,16 +116,14 @@ class Google_Cache_File implements CacheInterface
   {
     $file = $this->getCacheFile($key);
     if (file_exists($file) && !unlink($file)) {
-      $this->log(
-          'error',
+      $this->client->getLogger()->error(
           'File cache delete failed',
           array('key' => $key, 'file' => $file)
       );
       throw new Google_Cache_Exception("Cache file could not be deleted");
     }
 
-    $this->log(
-        'debug',
+    $this->client->getLogger()->debug(
         'File cache delete',
         array('key' => $key, 'file' => $file)
     );
@@ -151,50 +144,16 @@ class Google_Cache_File implements CacheInterface
     // use the first 2 characters of the hash as a directory prefix
     // this should prevent slowdowns due to huge directory listings
     // and thus give some basic amount of scalability
-    $fileHash = substr(md5($file), 0, 2);
-    $processUser = null;
-    if (function_exists('posix_geteuid')) {
-      $processUser = posix_getpwuid(posix_geteuid())['name'];
-    } elseif (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-      $processUser = get_current_user();
-    }
-    if (empty($processUser)) {
-      $this->log(
-          'notice',
-          'Process User get failed'
-      );
-    }
-    $userHash = md5($processUser);
-    $dirHash = $userHash . DIRECTORY_SEPARATOR . $fileHash;
-
-    // trim the directory separator from the path to prevent double separators
-    $rootCacheDir = rtrim($this->path, DIRECTORY_SEPARATOR);
-    $storageDir = $rootCacheDir . DIRECTORY_SEPARATOR . $dirHash;
-
-    if ($forWrite && !is_dir($storageDir)) {
-      // create root dir
-      if (!is_dir($rootCacheDir)) {
-        if (!mkdir($rootCacheDir, 0777, true)) {
-          $this->log(
-              'error',
-              'File cache creation failed',
-              array('dir' => $rootCacheDir)
-          );
-          throw new Google_Cache_Exception("Could not create cache directory: $rootCacheDir");
-        }
-      }
-
-      // create dir for file
-      if (!mkdir($storageDir, 0700, true)) {
-        $this->log(
-            'error',
+    $storageDir = $this->path . '/' . substr(md5($file), 0, 2);
+    if ($forWrite && ! is_dir($storageDir)) {
+      if (! mkdir($storageDir, 0700, true)) {
+        $this->client->getLogger()->error(
             'File cache creation failed',
             array('dir' => $storageDir)
         );
-        throw new Google_Cache_Exception("Could not create cache directory: $storageDir");
+        throw new Google_Cache_Exception("Could not create storage directory: $storageDir");
       }
     }
-
     return $storageDir;
   }
 
@@ -207,8 +166,7 @@ class Google_Cache_File implements CacheInterface
   {
     $rc = $this->acquireLock(LOCK_EX, $storageFile);
     if (!$rc) {
-      $this->log(
-          'notice',
+      $this->client->getLogger()->notice(
           'File cache write lock failed',
           array('file' => $storageFile)
       );
@@ -222,8 +180,7 @@ class Google_Cache_File implements CacheInterface
     $mode = $type == LOCK_EX ? "w" : "r";
     $this->fh = fopen($storageFile, $mode);
     if (!$this->fh) {
-      $this->log(
-          'error',
+      $this->client->getLogger()->error(
           'Failed to open file during lock acquisition',
           array('file' => $storageFile)
       );
@@ -243,17 +200,10 @@ class Google_Cache_File implements CacheInterface
     return true;
   }
 
-  public function unlock()
+  public function unlock($storageFile)
   {
     if ($this->fh) {
       flock($this->fh, LOCK_UN);
-    }
-  }
-
-  private function log($level, $message, $context = array())
-  {
-    if ($this->logger) {
-      $this->logger->log($level, $message, $context);
     }
   }
 }

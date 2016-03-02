@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2016 Google Inc.
+ * Copyright 2010 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -36,7 +36,7 @@ class Google_Service_Games extends Google_Service
   /** Share your Google+ profile information and view and manage your game activity. */
   const GAMES =
       "https://www.googleapis.com/auth/games";
-  /** Know the list of people in your circles, your age range, and language. */
+  /** Know your basic profile info and list of people in your circles.. */
   const PLUS_LOGIN =
       "https://www.googleapis.com/auth/plus.login";
 
@@ -80,7 +80,7 @@ class Google_Service_Games extends Google_Service
               'path' => 'achievements',
               'httpMethod' => 'GET',
               'parameters' => array(
-                'language' => array(
+                'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -88,7 +88,7 @@ class Google_Service_Games extends Google_Service
                   'location' => 'query',
                   'type' => 'integer',
                 ),
-                'pageToken' => array(
+                'language' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -131,7 +131,11 @@ class Google_Service_Games extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'language' => array(
+                'pageToken' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'state' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -139,11 +143,7 @@ class Google_Service_Games extends Google_Service
                   'location' => 'query',
                   'type' => 'integer',
                 ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'state' => array(
+                'language' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -206,11 +206,11 @@ class Google_Service_Games extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'language' => array(
+                'platformType' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
-                'platformType' => array(
+                'language' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -219,16 +219,6 @@ class Google_Service_Games extends Google_Service
               'path' => 'applications/played',
               'httpMethod' => 'POST',
               'parameters' => array(),
-            ),'verify' => array(
-              'path' => 'applications/{applicationId}/verify',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'applicationId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-              ),
             ),
           )
         )
@@ -243,7 +233,7 @@ class Google_Service_Games extends Google_Service
               'path' => 'events',
               'httpMethod' => 'GET',
               'parameters' => array(
-                'language' => array(
+                'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -251,7 +241,7 @@ class Google_Service_Games extends Google_Service
                   'location' => 'query',
                   'type' => 'integer',
                 ),
-                'pageToken' => array(
+                'language' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -260,7 +250,7 @@ class Google_Service_Games extends Google_Service
               'path' => 'eventDefinitions',
               'httpMethod' => 'GET',
               'parameters' => array(
-                'language' => array(
+                'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -268,7 +258,7 @@ class Google_Service_Games extends Google_Service
                   'location' => 'query',
                   'type' => 'integer',
                 ),
-                'pageToken' => array(
+                'language' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -310,7 +300,7 @@ class Google_Service_Games extends Google_Service
               'path' => 'leaderboards',
               'httpMethod' => 'GET',
               'parameters' => array(
-                'language' => array(
+                'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -318,7 +308,7 @@ class Google_Service_Games extends Google_Service
                   'location' => 'query',
                   'type' => 'integer',
                 ),
-                'pageToken' => array(
+                'language' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -351,7 +341,7 @@ class Google_Service_Games extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'language' => array(
+                'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -359,7 +349,7 @@ class Google_Service_Games extends Google_Service
                   'location' => 'query',
                   'type' => 'integer',
                 ),
-                'pageToken' => array(
+                'language' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -397,7 +387,7 @@ class Google_Service_Games extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'language' => array(
+                'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -405,7 +395,7 @@ class Google_Service_Games extends Google_Service
                   'location' => 'query',
                   'type' => 'integer',
                 ),
-                'pageToken' => array(
+                'language' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -491,7 +481,7 @@ class Google_Service_Games extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'language' => array(
+                'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -499,7 +489,7 @@ class Google_Service_Games extends Google_Service
                   'location' => 'query',
                   'type' => 'integer',
                 ),
-                'pageToken' => array(
+                'language' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -613,7 +603,7 @@ class Google_Service_Games extends Google_Service
               'path' => 'rooms',
               'httpMethod' => 'GET',
               'parameters' => array(
-                'language' => array(
+                'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -621,7 +611,7 @@ class Google_Service_Games extends Google_Service
                   'location' => 'query',
                   'type' => 'integer',
                 ),
-                'pageToken' => array(
+                'language' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -741,6 +731,14 @@ class Google_Service_Games extends Google_Service
                   'location' => 'query',
                   'type' => 'string',
                 ),
+                'returnTopIfAbsent' => array(
+                  'location' => 'query',
+                  'type' => 'boolean',
+                ),
+                'resultsAbove' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
                 'maxResults' => array(
                   'location' => 'query',
                   'type' => 'integer',
@@ -748,14 +746,6 @@ class Google_Service_Games extends Google_Service
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
-                ),
-                'resultsAbove' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'returnTopIfAbsent' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
                 ),
               ),
             ),'submit' => array(
@@ -823,7 +813,7 @@ class Google_Service_Games extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'language' => array(
+                'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -831,7 +821,7 @@ class Google_Service_Games extends Google_Service
                   'location' => 'query',
                   'type' => 'integer',
                 ),
-                'pageToken' => array(
+                'language' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -912,13 +902,13 @@ class Google_Service_Games extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'includeMatchData' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
                 'language' => array(
                   'location' => 'query',
                   'type' => 'string',
+                ),
+                'includeMatchData' => array(
+                  'location' => 'query',
+                  'type' => 'boolean',
                 ),
               ),
             ),'join' => array(
@@ -976,11 +966,7 @@ class Google_Service_Games extends Google_Service
               'path' => 'turnbasedmatches',
               'httpMethod' => 'GET',
               'parameters' => array(
-                'includeMatchData' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'language' => array(
+                'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -992,9 +978,13 @@ class Google_Service_Games extends Google_Service
                   'location' => 'query',
                   'type' => 'integer',
                 ),
-                'pageToken' => array(
+                'language' => array(
                   'location' => 'query',
                   'type' => 'string',
+                ),
+                'includeMatchData' => array(
+                  'location' => 'query',
+                  'type' => 'boolean',
                 ),
               ),
             ),'rematch' => array(
@@ -1006,11 +996,11 @@ class Google_Service_Games extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'language' => array(
+                'requestId' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
-                'requestId' => array(
+                'language' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -1019,11 +1009,7 @@ class Google_Service_Games extends Google_Service
               'path' => 'turnbasedmatches/sync',
               'httpMethod' => 'GET',
               'parameters' => array(
-                'includeMatchData' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'language' => array(
+                'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -1035,9 +1021,13 @@ class Google_Service_Games extends Google_Service
                   'location' => 'query',
                   'type' => 'integer',
                 ),
-                'pageToken' => array(
+                'language' => array(
                   'location' => 'query',
                   'type' => 'string',
+                ),
+                'includeMatchData' => array(
+                  'location' => 'query',
+                  'type' => 'boolean',
                 ),
               ),
             ),'takeTurn' => array(
@@ -1079,12 +1069,12 @@ class Google_Service_Games_AchievementDefinitions_Resource extends Google_Servic
    *
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string language The preferred language to use for strings returned
-   * by this method.
+   * @opt_param string pageToken The token returned by the previous request.
    * @opt_param int maxResults The maximum number of achievement resources to
    * return in the response, used for paging. For any response, the actual number
    * of achievement resources returned may be less than the specified maxResults.
-   * @opt_param string pageToken The token returned by the previous request.
+   * @opt_param string language The preferred language to use for strings returned
+   * by this method.
    * @return Google_Service_Games_AchievementDefinitionsListResponse
    */
   public function listAchievementDefinitions($optParams = array())
@@ -1134,15 +1124,15 @@ class Google_Service_Games_Achievements_Resource extends Google_Service_Resource
    * the authenticated player's ID.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string language The preferred language to use for strings returned
-   * by this method.
-   * @opt_param int maxResults The maximum number of achievement resources to
-   * return in the response, used for paging. For any response, the actual number
-   * of achievement resources returned may be less than the specified maxResults.
    * @opt_param string pageToken The token returned by the previous request.
    * @opt_param string state Tells the server to return only achievements with the
    * specified state. If this parameter isn't specified, all achievements are
    * returned.
+   * @opt_param int maxResults The maximum number of achievement resources to
+   * return in the response, used for paging. For any response, the actual number
+   * of achievement resources returned may be less than the specified maxResults.
+   * @opt_param string language The preferred language to use for strings returned
+   * by this method.
    * @return Google_Service_Games_PlayerAchievementListResponse
    */
   public function listAchievements($playerId, $optParams = array())
@@ -1236,10 +1226,10 @@ class Google_Service_Games_Applications_Resource extends Google_Service_Resource
    * developer console.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string language The preferred language to use for strings returned
-   * by this method.
    * @opt_param string platformType Restrict application details returned to the
    * specific platform.
+   * @opt_param string language The preferred language to use for strings returned
+   * by this method.
    * @return Google_Service_Games_Application
    */
   public function get($applicationId, $optParams = array())
@@ -1261,23 +1251,6 @@ class Google_Service_Games_Applications_Resource extends Google_Service_Resource
     $params = array_merge($params, $optParams);
     return $this->call('played', array($params));
   }
-
-  /**
-   * Verifies the auth token provided with this request is for the application
-   * with the specified ID, and returns the ID of the player it was granted for.
-   * (applications.verify)
-   *
-   * @param string $applicationId The application ID from the Google Play
-   * developer console.
-   * @param array $optParams Optional parameters.
-   * @return Google_Service_Games_ApplicationVerifyResponse
-   */
-  public function verify($applicationId, $optParams = array())
-  {
-    $params = array('applicationId' => $applicationId);
-    $params = array_merge($params, $optParams);
-    return $this->call('verify', array($params), "Google_Service_Games_ApplicationVerifyResponse");
-  }
 }
 
 /**
@@ -1297,12 +1270,12 @@ class Google_Service_Games_Events_Resource extends Google_Service_Resource
    *
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string language The preferred language to use for strings returned
-   * by this method.
+   * @opt_param string pageToken The token returned by the previous request.
    * @opt_param int maxResults The maximum number of events to return in the
    * response, used for paging. For any response, the actual number of events to
    * return may be less than the specified maxResults.
-   * @opt_param string pageToken The token returned by the previous request.
+   * @opt_param string language The preferred language to use for strings returned
+   * by this method.
    * @return Google_Service_Games_PlayerEventListResponse
    */
   public function listByPlayer($optParams = array())
@@ -1318,12 +1291,12 @@ class Google_Service_Games_Events_Resource extends Google_Service_Resource
    *
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string language The preferred language to use for strings returned
-   * by this method.
+   * @opt_param string pageToken The token returned by the previous request.
    * @opt_param int maxResults The maximum number of event definitions to return
    * in the response, used for paging. For any response, the actual number of
    * event definitions to return may be less than the specified maxResults.
-   * @opt_param string pageToken The token returned by the previous request.
+   * @opt_param string language The preferred language to use for strings returned
+   * by this method.
    * @return Google_Service_Games_EventDefinitionListResponse
    */
   public function listDefinitions($optParams = array())
@@ -1387,12 +1360,12 @@ class Google_Service_Games_Leaderboards_Resource extends Google_Service_Resource
    *
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string language The preferred language to use for strings returned
-   * by this method.
+   * @opt_param string pageToken The token returned by the previous request.
    * @opt_param int maxResults The maximum number of leaderboards to return in the
    * response. For any response, the actual number of leaderboards returned may be
    * less than the specified maxResults.
-   * @opt_param string pageToken The token returned by the previous request.
+   * @opt_param string language The preferred language to use for strings returned
+   * by this method.
    * @return Google_Service_Games_LeaderboardListResponse
    */
   public function listLeaderboards($optParams = array())
@@ -1438,12 +1411,12 @@ class Google_Service_Games_Metagame_Resource extends Google_Service_Resource
    * returned.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string language The preferred language to use for strings returned
-   * by this method.
+   * @opt_param string pageToken The token returned by the previous request.
    * @opt_param int maxResults The maximum number of category resources to return
    * in the response, used for paging. For any response, the actual number of
    * category resources returned may be less than the specified maxResults.
-   * @opt_param string pageToken The token returned by the previous request.
+   * @opt_param string language The preferred language to use for strings returned
+   * by this method.
    * @return Google_Service_Games_CategoryListResponse
    */
   public function listCategoriesByPlayer($playerId, $collection, $optParams = array())
@@ -1491,12 +1464,12 @@ class Google_Service_Games_Players_Resource extends Google_Service_Resource
    * @param string $collection Collection of players being retrieved
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string language The preferred language to use for strings returned
-   * by this method.
+   * @opt_param string pageToken The token returned by the previous request.
    * @opt_param int maxResults The maximum number of player resources to return in
    * the response, used for paging. For any response, the actual number of player
    * resources returned may be less than the specified maxResults.
-   * @opt_param string pageToken The token returned by the previous request.
+   * @opt_param string language The preferred language to use for strings returned
+   * by this method.
    * @return Google_Service_Games_PlayerListResponse
    */
   public function listPlayers($collection, $optParams = array())
@@ -1615,13 +1588,13 @@ class Google_Service_Games_Quests_Resource extends Google_Service_Resource
    * the authenticated player's ID.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string language The preferred language to use for strings returned
-   * by this method.
+   * @opt_param string pageToken The token returned by the previous request.
    * @opt_param int maxResults The maximum number of quest resources to return in
    * the response, used for paging. For any response, the actual number of quest
    * resources returned may be less than the specified maxResults. Acceptable
    * values are 1 to 50, inclusive. (Default: 50).
-   * @opt_param string pageToken The token returned by the previous request.
+   * @opt_param string language The preferred language to use for strings returned
+   * by this method.
    * @return Google_Service_Games_QuestListResponse
    */
   public function listQuests($playerId, $optParams = array())
@@ -1783,12 +1756,12 @@ class Google_Service_Games_Rooms_Resource extends Google_Service_Resource
    *
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string language The preferred language to use for strings returned
-   * by this method.
+   * @opt_param string pageToken The token returned by the previous request.
    * @opt_param int maxResults The maximum number of rooms to return in the
    * response, used for paging. For any response, the actual number of rooms to
    * return may be less than the specified maxResults.
-   * @opt_param string pageToken The token returned by the previous request.
+   * @opt_param string language The preferred language to use for strings returned
+   * by this method.
    * @return Google_Service_Games_RoomList
    */
   public function listRooms($optParams = array())
@@ -1898,16 +1871,16 @@ class Google_Service_Games_Scores_Resource extends Google_Service_Resource
    *
    * @opt_param string language The preferred language to use for strings returned
    * by this method.
-   * @opt_param int maxResults The maximum number of leaderboard scores to return
-   * in the response. For any response, the actual number of leaderboard scores
-   * returned may be less than the specified maxResults.
-   * @opt_param string pageToken The token returned by the previous request.
+   * @opt_param bool returnTopIfAbsent True if the top scores should be returned
+   * when the player is not in the leaderboard. Defaults to true.
    * @opt_param int resultsAbove The preferred number of scores to return above
    * the player's score. More scores may be returned if the player is at the
    * bottom of the leaderboard; fewer may be returned if the player is at the top.
    * Must be less than or equal to maxResults.
-   * @opt_param bool returnTopIfAbsent True if the top scores should be returned
-   * when the player is not in the leaderboard. Defaults to true.
+   * @opt_param int maxResults The maximum number of leaderboard scores to return
+   * in the response. For any response, the actual number of leaderboard scores
+   * returned may be less than the specified maxResults.
+   * @opt_param string pageToken The token returned by the previous request.
    * @return Google_Service_Games_LeaderboardScores
    */
   public function listWindow($leaderboardId, $collection, $timeSpan, $optParams = array())
@@ -1997,12 +1970,12 @@ class Google_Service_Games_Snapshots_Resource extends Google_Service_Resource
    * the authenticated player's ID.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string language The preferred language to use for strings returned
-   * by this method.
+   * @opt_param string pageToken The token returned by the previous request.
    * @opt_param int maxResults The maximum number of snapshot resources to return
    * in the response, used for paging. For any response, the actual number of
    * snapshot resources returned may be less than the specified maxResults.
-   * @opt_param string pageToken The token returned by the previous request.
+   * @opt_param string language The preferred language to use for strings returned
+   * by this method.
    * @return Google_Service_Games_SnapshotListResponse
    */
   public function listSnapshots($playerId, $optParams = array())
@@ -2112,9 +2085,9 @@ class Google_Service_Games_TurnBasedMatches_Resource extends Google_Service_Reso
    * @param string $matchId The ID of the match.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param bool includeMatchData Get match data along with metadata.
    * @opt_param string language The preferred language to use for strings returned
    * by this method.
+   * @opt_param bool includeMatchData Get match data along with metadata.
    * @return Google_Service_Games_TurnBasedMatch
    */
   public function get($matchId, $optParams = array())
@@ -2188,20 +2161,20 @@ class Google_Service_Games_TurnBasedMatches_Resource extends Google_Service_Reso
    *
    * @param array $optParams Optional parameters.
    *
-   * @opt_param bool includeMatchData True if match data should be returned in the
-   * response. Note that not all data will necessarily be returned if
-   * include_match_data is true; the server may decide to only return data for
-   * some of the matches to limit download size for the client. The remainder of
-   * the data for these matches will be retrievable on request.
-   * @opt_param string language The preferred language to use for strings returned
-   * by this method.
+   * @opt_param string pageToken The token returned by the previous request.
    * @opt_param int maxCompletedMatches The maximum number of completed or
    * canceled matches to return in the response. If not set, all matches returned
    * could be completed or canceled.
    * @opt_param int maxResults The maximum number of matches to return in the
    * response, used for paging. For any response, the actual number of matches to
    * return may be less than the specified maxResults.
-   * @opt_param string pageToken The token returned by the previous request.
+   * @opt_param string language The preferred language to use for strings returned
+   * by this method.
+   * @opt_param bool includeMatchData True if match data should be returned in the
+   * response. Note that not all data will necessarily be returned if
+   * include_match_data is true; the server may decide to only return data for
+   * some of the matches to limit download size for the client. The remainder of
+   * the data for these matches will be retrievable on request.
    * @return Google_Service_Games_TurnBasedMatchList
    */
   public function listTurnBasedMatches($optParams = array())
@@ -2220,11 +2193,11 @@ class Google_Service_Games_TurnBasedMatches_Resource extends Google_Service_Reso
    * @param string $matchId The ID of the match.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string language The preferred language to use for strings returned
-   * by this method.
    * @opt_param string requestId A randomly generated numeric ID for each request
    * specified by the caller. This number is used at the server to ensure that the
    * request is handled correctly across retries.
+   * @opt_param string language The preferred language to use for strings returned
+   * by this method.
    * @return Google_Service_Games_TurnBasedMatchRematch
    */
   public function rematch($matchId, $optParams = array())
@@ -2242,20 +2215,20 @@ class Google_Service_Games_TurnBasedMatches_Resource extends Google_Service_Reso
    *
    * @param array $optParams Optional parameters.
    *
-   * @opt_param bool includeMatchData True if match data should be returned in the
-   * response. Note that not all data will necessarily be returned if
-   * include_match_data is true; the server may decide to only return data for
-   * some of the matches to limit download size for the client. The remainder of
-   * the data for these matches will be retrievable on request.
-   * @opt_param string language The preferred language to use for strings returned
-   * by this method.
+   * @opt_param string pageToken The token returned by the previous request.
    * @opt_param int maxCompletedMatches The maximum number of completed or
    * canceled matches to return in the response. If not set, all matches returned
    * could be completed or canceled.
    * @opt_param int maxResults The maximum number of matches to return in the
    * response, used for paging. For any response, the actual number of matches to
    * return may be less than the specified maxResults.
-   * @opt_param string pageToken The token returned by the previous request.
+   * @opt_param string language The preferred language to use for strings returned
+   * by this method.
+   * @opt_param bool includeMatchData True if match data should be returned in the
+   * response. Note that not all data will necessarily be returned if
+   * include_match_data is true; the server may decide to only return data for
+   * some of the matches to limit download size for the client. The remainder of
+   * the data for these matches will be retrievable on request.
    * @return Google_Service_Games_TurnBasedMatchSync
    */
   public function sync($optParams = array())
@@ -2995,33 +2968,6 @@ class Google_Service_Games_ApplicationCategory extends Google_Model
   public function getSecondary()
   {
     return $this->secondary;
-  }
-}
-
-class Google_Service_Games_ApplicationVerifyResponse extends Google_Model
-{
-  protected $internal_gapi_mappings = array(
-        "playerId" => "player_id",
-  );
-  public $kind;
-  public $playerId;
-
-
-  public function setKind($kind)
-  {
-    $this->kind = $kind;
-  }
-  public function getKind()
-  {
-    return $this->kind;
-  }
-  public function setPlayerId($playerId)
-  {
-    $this->playerId = $playerId;
-  }
-  public function getPlayerId()
-  {
-    return $this->playerId;
   }
 }
 
@@ -4518,7 +4464,6 @@ class Google_Service_Games_Player extends Google_Model
   protected $lastPlayedWithDataType = '';
   protected $nameType = 'Google_Service_Games_PlayerName';
   protected $nameDataType = '';
-  public $originalPlayerId;
   public $playerId;
   public $title;
 
@@ -4586,14 +4531,6 @@ class Google_Service_Games_Player extends Google_Model
   public function getName()
   {
     return $this->name;
-  }
-  public function setOriginalPlayerId($originalPlayerId)
-  {
-    $this->originalPlayerId = $originalPlayerId;
-  }
-  public function getOriginalPlayerId()
-  {
-    return $this->originalPlayerId;
   }
   public function setPlayerId($playerId)
   {

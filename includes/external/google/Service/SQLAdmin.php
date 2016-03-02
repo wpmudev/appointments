@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2016 Google Inc.
+ * Copyright 2010 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -382,13 +382,13 @@ class Google_Service_SQLAdmin extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
+                ),
+                'maxResults' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
                 ),
               ),
             ),'patch' => array(
@@ -1132,10 +1132,10 @@ class Google_Service_SQLAdmin_Instances_Resource extends Google_Service_Resource
    * instances.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string maxResults The maximum number of results to return per
-   * response.
    * @opt_param string pageToken A previously-returned page token representing
    * part of the larger set of results to view.
+   * @opt_param string maxResults The maximum number of results to return per
+   * response.
    * @return Google_Service_SQLAdmin_InstancesListResponse
    */
   public function listInstances($project, $optParams = array())
@@ -1963,8 +1963,6 @@ class Google_Service_SQLAdmin_DatabaseInstance extends Google_Collection
   public $currentDiskSize;
   public $databaseVersion;
   public $etag;
-  protected $failoverReplicaType = 'Google_Service_SQLAdmin_DatabaseInstanceFailoverReplica';
-  protected $failoverReplicaDataType = '';
   public $instanceType;
   protected $ipAddressesType = 'Google_Service_SQLAdmin_IpMapping';
   protected $ipAddressesDataType = 'array';
@@ -2012,14 +2010,6 @@ class Google_Service_SQLAdmin_DatabaseInstance extends Google_Collection
   public function getEtag()
   {
     return $this->etag;
-  }
-  public function setFailoverReplica(Google_Service_SQLAdmin_DatabaseInstanceFailoverReplica $failoverReplica)
-  {
-    $this->failoverReplica = $failoverReplica;
-  }
-  public function getFailoverReplica()
-  {
-    return $this->failoverReplica;
   }
   public function setInstanceType($instanceType)
   {
@@ -2156,32 +2146,6 @@ class Google_Service_SQLAdmin_DatabaseInstance extends Google_Collection
   public function getState()
   {
     return $this->state;
-  }
-}
-
-class Google_Service_SQLAdmin_DatabaseInstanceFailoverReplica extends Google_Model
-{
-  protected $internal_gapi_mappings = array(
-  );
-  public $available;
-  public $name;
-
-
-  public function setAvailable($available)
-  {
-    $this->available = $available;
-  }
-  public function getAvailable()
-  {
-    return $this->available;
-  }
-  public function setName($name)
-  {
-    $this->name = $name;
-  }
-  public function getName()
-  {
-    return $this->name;
   }
 }
 
@@ -2359,7 +2323,6 @@ class Google_Service_SQLAdmin_Flag extends Google_Collection
   public $maxValue;
   public $minValue;
   public $name;
-  public $requiresRestart;
   public $type;
 
 
@@ -2410,14 +2373,6 @@ class Google_Service_SQLAdmin_Flag extends Google_Collection
   public function getName()
   {
     return $this->name;
-  }
-  public function setRequiresRestart($requiresRestart)
-  {
-    $this->requiresRestart = $requiresRestart;
-  }
-  public function getRequiresRestart()
-  {
-    return $this->requiresRestart;
   }
   public function setType($type)
   {
@@ -2760,50 +2715,6 @@ class Google_Service_SQLAdmin_LocationPreference extends Google_Model
   public function getZone()
   {
     return $this->zone;
-  }
-}
-
-class Google_Service_SQLAdmin_MaintenanceWindow extends Google_Model
-{
-  protected $internal_gapi_mappings = array(
-  );
-  public $day;
-  public $hour;
-  public $kind;
-  public $updateTrack;
-
-
-  public function setDay($day)
-  {
-    $this->day = $day;
-  }
-  public function getDay()
-  {
-    return $this->day;
-  }
-  public function setHour($hour)
-  {
-    $this->hour = $hour;
-  }
-  public function getHour()
-  {
-    return $this->hour;
-  }
-  public function setKind($kind)
-  {
-    $this->kind = $kind;
-  }
-  public function getKind()
-  {
-    return $this->kind;
-  }
-  public function setUpdateTrack($updateTrack)
-  {
-    $this->updateTrack = $updateTrack;
-  }
-  public function getUpdateTrack()
-  {
-    return $this->updateTrack;
   }
 }
 
@@ -3268,7 +3179,6 @@ class Google_Service_SQLAdmin_Settings extends Google_Collection
   protected $backupConfigurationDataType = '';
   public $crashSafeReplicationEnabled;
   public $dataDiskSizeGb;
-  public $dataDiskType;
   protected $databaseFlagsType = 'Google_Service_SQLAdmin_DatabaseFlags';
   protected $databaseFlagsDataType = 'array';
   public $databaseReplicationEnabled;
@@ -3277,8 +3187,6 @@ class Google_Service_SQLAdmin_Settings extends Google_Collection
   public $kind;
   protected $locationPreferenceType = 'Google_Service_SQLAdmin_LocationPreference';
   protected $locationPreferenceDataType = '';
-  protected $maintenanceWindowType = 'Google_Service_SQLAdmin_MaintenanceWindow';
-  protected $maintenanceWindowDataType = '';
   public $pricingPlan;
   public $replicationType;
   public $settingsVersion;
@@ -3325,14 +3233,6 @@ class Google_Service_SQLAdmin_Settings extends Google_Collection
   {
     return $this->dataDiskSizeGb;
   }
-  public function setDataDiskType($dataDiskType)
-  {
-    $this->dataDiskType = $dataDiskType;
-  }
-  public function getDataDiskType()
-  {
-    return $this->dataDiskType;
-  }
   public function setDatabaseFlags($databaseFlags)
   {
     $this->databaseFlags = $databaseFlags;
@@ -3372,14 +3272,6 @@ class Google_Service_SQLAdmin_Settings extends Google_Collection
   public function getLocationPreference()
   {
     return $this->locationPreference;
-  }
-  public function setMaintenanceWindow(Google_Service_SQLAdmin_MaintenanceWindow $maintenanceWindow)
-  {
-    $this->maintenanceWindow = $maintenanceWindow;
-  }
-  public function getMaintenanceWindow()
-  {
-    return $this->maintenanceWindow;
   }
   public function setPricingPlan($pricingPlan)
   {
