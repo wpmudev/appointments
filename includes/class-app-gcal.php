@@ -25,6 +25,7 @@ class Appointments_Google_Calendar {
 	}
 
 	public function init() {
+		return;
 		$options = appointments_get_options();
 		include_once( 'external/google/autoload.php' );
 
@@ -34,7 +35,7 @@ class Appointments_Google_Calendar {
 		try {
 			$credentials = new Google_Auth_AssertionCredentials(
 				$options['gcal_service_account'],
-				array( 'https://www.googleapis.com/auth/sqlservice.admin' ),
+				array( 'https://www.googleapis.com/auth/calendar' ),
 				$this->get_key_file_contents()
 			);
 
