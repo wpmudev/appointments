@@ -60,7 +60,7 @@ class AppointmentsGcal {
 		else
 			$this->uploads_dir 	= WP_CONTENT_DIR . "/uploads/";
 
-		add_action( 'wpmudev_appointments_update_appointment_status', array( $this, 'update_appointment_status' ), 10, 2 );
+		//add_action( 'wpmudev_appointments_update_appointment_status', array( $this, 'update_appointment_status' ), 10, 2 );
 	}
 
 	/**

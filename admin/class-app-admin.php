@@ -29,14 +29,6 @@ class Appointments_Admin {
 	function save_profile( $profileuser_id ) {
 		global $current_user, $wpdb, $appointments;
 
-		// Copy key file to uploads folder
-		if ( is_object( $appointments->gcal_api ) ) {
-			$kff = $appointments->gcal_api->key_file_folder( ); // Key file folder
-			$kfn = $appointments->gcal_api->get_key_file( $profileuser_id ). '.p12'; // Key file name
-			if ( $kfn && is_dir( $kff ) && !file_exists( $kff . $kfn ) && file_exists( $appointments->plugin_dir . '/includes/gcal/key/' . $kfn ) )
-				copy( $appointments->plugin_dir . '/includes/gcal/key/' . $kfn, $kff . $kfn );
-		}
-
 		// Only user himself can save his data
 		if ( $current_user->ID != $profileuser_id )
 			return;
@@ -82,14 +74,9 @@ class Appointments_Admin {
 		if ( isset( $appointments->options['allow_cancel'] ) && 'yes' == $appointments->options['allow_cancel'] &&
 		     isset( $_POST['app_cancel'] ) && is_array( $_POST['app_cancel'] ) && !empty( $_POST['app_cancel'] ) ) {
 			foreach ( $_POST['app_cancel'] as $app_id=>$value ) {
-				if ( $appointments->change_status( 'removed', $app_id ) ) {
+				if ( appointments_update_appointment_status( $app_id, 'removed' ) ) {
 					$appointments->log( sprintf( __('Client %s cancelled appointment with ID: %s','appointments'), $appointments->get_client_name( $app_id ), $app_id ) );
 					$appointments->send_notification( $app_id, true );
-
-					if (!empty($appointments->gcal_api) && is_object($appointments->gcal_api)) $appointments->gcal_api->delete($app_id); // Drop the cancelled appointment
-					else if (!defined('APP_GCAL_DISABLE')) $appointments->log("Unable to issue a remote call to delete the remote appointment.");
-
-					// Do we also do_action app-appointments-appointment_cancelled?
 				}
 			}
 		}
@@ -101,7 +88,7 @@ class Appointments_Admin {
 		// Confirm an appointment using profile page
 		if ( isset( $_POST['app_confirm'] ) && is_array( $_POST['app_confirm'] ) && !empty( $_POST['app_confirm'] ) ) {
 			foreach ( $_POST['app_confirm'] as $app_id=>$value ) {
-				if ( $appointments->change_status( 'confirmed', $app_id ) ) {
+				if ( appointments_update_appointment_status( $app_id, 'confirmed' ) ) {
 					$appointments->log( sprintf( __('Service Provider %s manually confirmed appointment with ID: %s','appointments'), appointments_get_worker_name( $current_user->ID ), $app_id ) );
 					$appointments->send_confirmation( $app_id );
 				}
@@ -933,31 +920,22 @@ class Appointments_Admin {
 			}
 
 			if ( $result ) {
+
+				if ( 'removed' == $new_status ) {
+					foreach ( $_POST["app"] as $app_id ) {
+						$appointments->send_removal_notification( $app_id );
+					}
+				}
+				elseif ( ! empty( $appointments->options["send_confirmation"] ) && 'yes' == $appointments->options["send_confirmation"] ) {
+					appointments_send_confirmation( $app_id );
+				}
+
 				$userdata = get_userdata( get_current_user_id() );
 				add_action( 'admin_notices', array ( &$appointments, 'updated' ) );
 				do_action( 'app_bulk_status_change',  $_POST["app"] );
 
 				$appointments->log( sprintf( __('Status of Appointment(s) with id(s):%s changed to %s by user:%s', 'appointments' ),  implode( ', ', $_POST["app"] ), $new_status, $userdata->user_login ) );
 
-				if ( is_object( $appointments->gcal_api ) ) {
-					// If deleted, remove these from GCal too
-					if ( 'removed' == $new_status ) {
-						foreach ( $_POST["app"] as $app_id ) {
-							$appointments->gcal_api->delete( $app_id );
-							$appointments->send_removal_notification($app_id);
-						}
-					}
-					// If confirmed or paid, add these to GCal
-					else if (is_object($appointments->gcal_api) && $appointments->gcal_api->is_syncable_status($new_status)) {
-						foreach ( $_POST["app"] as $app_id ) {
-							$appointments->gcal_api->update( $app_id );
-							// Also send out an email
-							if (!empty($appointments->options["send_confirmation"]) && 'yes' == $appointments->options["send_confirmation"]) {
-								appointments_send_confirmation( $app_id );
-							}
-						}
-					}
-				}
 			}
 		}
 

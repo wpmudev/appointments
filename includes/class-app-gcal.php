@@ -8,15 +8,18 @@
 
 class Appointments_Google_Calendar {
 
-	private $client = false;
-
-	private $calendar = false;
-
-	private $service = false;
-
 	public $api_manager = false;
 
 	public $errors = array();
+
+	private $api_mode = 'none';
+
+	/**
+	 * Checks if we are set to a worker calendar
+	 *
+	 * @var bool
+	 */
+	private $worker_calendar = false;
 
 	public function __construct() {
 		$appointments = appointments();
@@ -26,35 +29,181 @@ class Appointments_Google_Calendar {
 			$appointments->log( __( 'Session could not be started. This may indicate a theme issue.', 'appointments' ) );
 		}
 
-		// Create the folder in case it does not exist yet
-		$this->create_key_file_folder();
-
 		add_action( 'admin_init', array( &$this, 'save_settings' ), 12 );
 		add_action( 'admin_init', array( &$this, 'reset_settings' ), 12 );
 
-		//add_action( 'init', array( &$this, 'init' ), 12 );
-
 		$options = appointments_get_options();
+
+		if ( isset( $options['gcal_api_mode'] ) ) {
+			$this->api_mode = $options['gcal_api_mode'];
+		}
 
 		include_once( 'class-app-gcal-api-manager.php' );
 		$this->api_manager = new Appointments_Google_Calendar_API_Manager();
 
+		$default_creds = array();
 		if ( ! empty( $options['gcal_client_id'] ) && ! empty( $options['gcal_client_secret'] ) ) {
+			$default_creds['client_id'] = $options['gcal_client_id'];
+			$default_creds['client_secret'] = $options['gcal_client_secret'];
 			$this->api_manager->set_client_id_and_secret( $options['gcal_client_id'], $options['gcal_client_secret'] );
 		}
 
 		if ( ! empty( $options['gcal_token'] ) ) {
+			$default_creds['token'] = $options['gcal_token'];
 			$result = $this->api_manager->set_access_token( $options['gcal_token'] );
 			if ( is_wp_error( $result ) ) {
 				$this->errors[] = array( 'message' => sprintf( __( 'Error validating the access token: %s', 'appointments' ), $result->get_error_message() ) );
 			}
 		}
 
+		if ( ! empty( $options['gcal_access_code'] ) ) {
+			$default_creds['access_code'] = $options['gcal_access_code'];
+		}
+
 		if ( ! empty( $options['gcal_selected_calendar'] ) ) {
+			$default_creds['calendar_id'] = $options['gcal_selected_calendar'];
 			$this->api_manager->set_calendar( $options['gcal_selected_calendar'] );
 		}
 
+		$this->api_manager->set_default_credentials( $default_creds );
+
 		add_action( 'shutdown', array( $this, 'save_new_token' ) );
+
+		// Appointments Hooks
+		$this->add_appointments_hooks();
+	}
+
+	public function add_appointments_hooks() {
+		if ( ! $this->is_connected() ) {
+			return false;
+		}
+
+		add_action( 'wpmudev_appointments_insert_appointment', array( $this, 'insert_event' ) );
+		add_action( 'wpmudev_appointments_update_appointment_status', array( $this, 'on_update_appointment' ) );
+		add_action( 'wpmudev_appointments_update_appointment', array( $this, 'on_update_appointment' ) );
+		add_action( 'appointments_delete_appointment', array( $this, 'delete_event' ) );
+	}
+
+	public function remove_appointments_hooks() {
+		remove_action( 'wpmudev_appointments_insert_appointment', array( $this, 'insert_event' ) );
+		remove_action( 'wpmudev_appointments_update_appointment_status', array( $this, 'on_update_appointment' ) );
+		remove_action( 'wpmudev_appointments_update_appointment', array( $this, 'on_update_appointment' ) );
+		remove_action( 'appointments_delete_appointment', array( $this, 'delete_event' ) );
+	}
+
+	public function is_connected() {
+		if ( ! $this->api_manager->get_access_token() ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Cast an Appointments_Appointment to a Google Event format
+	 *
+	 * @param $app_id
+	 *
+	 * @return Google_Service_Calendar_Event|bool
+	 */
+	public function appointment_to_gcal_event( $app_id ) {
+		global $appointments;
+
+		$app = appointments_get_appointment( $app_id );
+		if ( ! $app ) {
+			return false;
+		}
+
+		$event = new Google_Service_Calendar_Event();
+
+		$options = appointments_get_options();
+
+		// Event summary
+		$summary = apply_filters(
+			'app-gcal-set_summary',
+			$appointments->_replace(
+				self::get_summary( $app->worker ),
+				$app->name,
+				$appointments->get_service_name( $app->service ),
+				appointments_get_worker_name( $app->worker ),
+				$app->start,
+				$app->price,
+				$appointments->get_deposit( $app->price ),
+				$app->phone,
+				$app->note,
+				$app->address,
+				$app->email,
+				$app->city
+			),
+			$app
+		);
+
+		// Event description
+		$description = apply_filters(
+			'app-gcal-set_description',
+			$appointments->_replace(
+				self::get_description( $app->worker ),
+				$app->name,
+				$appointments->get_service_name($app->service),
+				appointments_get_worker_name($app->worker),
+				$app->start,
+				$app->price,
+				$appointments->get_deposit( $app->price ),
+				$app->phone,
+				$app->note,
+				$app->address,
+				$app->email,
+				$app->city
+			),
+			$app
+		);
+
+		// Location
+		if ( isset( $options["gcal_location"] ) && '' != trim( $options["gcal_location"] ) ) {
+			$location = str_replace( array( 'ADDRESS', 'CITY' ), array(
+				$app->address,
+				$app->city
+			), $options["gcal_location"] );
+		} else {
+			$location = get_bloginfo( 'description' );
+		}
+
+		// Dates
+		$start = new Google_Service_Calendar_EventDateTime();
+		$start->setDateTime( $app->get_start_gmt_date( "Y-m-d\TH:i:s\Z" ) );
+		$end = new Google_Service_Calendar_EventDateTime();
+		$end->setDateTime( $app->get_end_gmt_date( "Y-m-d\TH:i:s\Z" ) );
+
+		// Email
+		$email = $app->get_email();
+
+		// The first atendee will be the one with this email
+		$attendee1 = new Google_Service_Calendar_EventAttendee();
+		$attendee1->setEmail( $email );
+		$attendees = array( $attendee1 );
+
+		$event->setSummary( $summary );
+		$event->setAttendees( $attendees );
+		$event->setLocation( $location );
+		$event->setStart( $start );
+		$event->setEnd( $end );
+		$event->setDescription( $description );
+
+		// Alright, now deal with event sequencing
+		if ( ! empty( $app->gcal_ID ) ) {
+			$tmp = $this->api_manager->get_event( $app->gcal_ID );
+
+			if ( ! is_wp_error( $tmp ) ) {
+				if ( is_object( $tmp ) && ! empty( $tmp->sequence ) ) {
+					$event->setSequence( $tmp->sequence );
+				}
+				elseif ( is_array( $tmp ) && ! empty( $tmp['sequence'] ) ) {
+					$event->setSequence( $tmp['sequence'] );
+				}
+			}
+		}
+
+		return $event;
 	}
 
 	/**
@@ -74,6 +223,9 @@ class Appointments_Google_Calendar {
 		}
 	}
 
+	/**
+	 * Revoke access and reset Google Calendar settings
+	 */
 	public function reset_settings() {
 		if ( ! isset( $_POST['app-reset-gcalendar'] ) ) {
 			return;
@@ -141,7 +293,7 @@ class Appointments_Google_Calendar {
 
 			$options['gcal_selected_calendar'] = $calendar_id;
 			appointments_update_options( $options );
-			$calendar = $this->get_selected_calendar( 'all' );
+			$calendar = $this->api_manager->get_calendar();
 
 			if ( is_wp_error( $calendar ) ) {
 				add_settings_error( 'app-gcalendar', 'calendar-not-exist', __( 'The selecter calendar does not exist', 'appointments' ) );
@@ -277,118 +429,263 @@ class Appointments_Google_Calendar {
 		}
 	}
 
-	public function get_calendar_service() {
-		if ( ! $this->service && $this->client ) {
-			$this->service = new Google_Service_Calendar( $this->client );
-		}
-
-		return $this->service;
-	}
-
-
-	/**
-	 * Return the selected calendar
-	 *
-	 * @param string $field id|all
-	 *
-	 * @return bool|Google_Client
-	 */
-	public function get_selected_calendar( $field = 'id' ) {
-		$options = appointments_get_options();
-		if ( empty( $options['gcal_selected_calendar'] ) ) {
-			return false;
-		}
-
-		if ( $field === 'id' ) {
-			return $options['gcal_selected_calendar'];
-		}
-
-		$service = $this->get_calendar_service();
-		try {
-			$calendar = $service->calendarList->get( $options['gcal_selected_calendar'] );
-		}
-		catch ( Exception $e ) {
-			return new WP_Error( $e->getCode(), $e->getMessage() );
-		}
-
-	}
-
 
 	/**
 	 * Return GCal API mode (none, app2gcal or sync )
 	 *
-	 * @param integer $worker_id Optional worker ID whose data will be restored
 	 * @return string
 	 */
-	function get_api_mode( $worker_id = 0 ) {
+	function get_api_mode() {
+		return $this->api_mode;
+	}
 
-		if ( ! $worker_id ) {
-			$options = appointments_get_options();
-			if ( isset( $options['gcal_api_mode'] ) ) {
-				return $options['gcal_api_mode'];
-			} else {
-				return 'none';
-			}
+	private function _is_writable_mode() {
+		$mode = $this->get_api_mode();
+		return ! in_array( $mode, array( 'gcal2app', 'none' ) );
+	}
+
+	private function _get_syncable_status () {
+		return apply_filters( 'app-gcal-syncable_status', array( 'paid', 'confirmed' ) );
+	}
+
+	public function is_syncable_status( $status ) {
+		$syncable_status = $this->_get_syncable_status();
+		return in_array( $status, $syncable_status );
+	}
+
+	public function switch_to_worker( $worker_id ) {
+		$worker = appointments_get_worker( $worker_id );
+		if ( ! $worker ) {
+			return false;
+		}
+
+		$worker_api_mode = get_user_meta( $worker_id, 'app_api_mode', true );
+		if ( ! $worker_api_mode ) {
+			$worker_api_mode = 'none';
+		}
+
+		// Set the API Mode
+		$this->api_mode = $worker_api_mode;
+		$this->api_manager->switch_to_worker( $worker_id );
+
+		$this->worker_calendar = true;
+
+		return true;
+	}
+
+	public function restore_to_default() {
+		$options = appointments_get_options();
+
+		// Set the API Mode
+		$this->api_mode = $options['gcal_api_mode'];
+		$this->api_manager->restore_to_default();
+
+		$this->worker_calendar = false;
+
+		return true;
+	}
+
+
+	/**
+	 * Return GCal Summary (name of Event)
+	 *
+	 * @since 1.2.1
+	 *
+	 * @param integer $worker_id Optional worker ID whose data will be restored
+	 *
+	 * @return string
+	 */
+	public static function get_summary( $worker_id = 0 ) {
+		$options = appointments_get_options();
+		$text = '';
+		if ( $worker_id ) {
+			$text = get_user_meta( $worker_id, 'app_gcal_summary', true );
+		}
+		if ( empty( $text ) ) {
+			$text = ! empty( $options['gcal_summary'] )
+				? $options['gcal_summary']
+				: '';
+		}
+
+		return $text;
+	}
+
+	/**
+	 * Return GCal description
+	 *
+	 * @since 1.2.1
+	 *
+	 * @param integer $worker_id Optional worker ID whose data will be restored
+	 *
+	 * @return string
+	 */
+	public static function get_description( $worker_id = 0 ) {
+		$options = appointments_get_options();
+
+		$text = '';
+		if ( $worker_id && ! empty( $options['gcal_api_allow_worker'] ) && 'yes' == $options['gcal_api_allow_worker'] ) {
+			$text = get_user_meta( $worker_id, 'app_gcal_description', true );
+		}
+		if ( empty( $text ) ) {
+			$text = ! empty( $options['gcal_description'] )
+				? $options['gcal_description']
+				: '';
+		}
+
+		return $text;
+	}
+
+	// Appointments Hooks
+	public function on_update_appointment( $app_id ) {
+		$app = appointments_get_appointment( $app_id );
+
+		if ( ( 'pending' == $app->status || 'removed' == $app->status || 'completed' == $app->status ) ) {
+			$this->delete_event( $app_id );
 		}
 		else {
-			$meta = get_user_meta( $worker_id, 'app_api_mode', true );
-			if ( $meta ) {
-				return $meta;
-			} else {
-				return 'none';
-			}
+			$this->update_event( $app_id );
 		}
 	}
 
-	/**
-	 * Try to create an encrypted key file folder
-	 * @return string
-	 * @since 1.2.2
-	 */
-	function create_key_file_folder( ) {
-		if ( $this->is_key_file_folder_created() ) {
-			//return;
-		}
 
-		$path = $this->get_key_file_folder();
-		@mkdir( $path );
-		@copy( appointments_plugin_dir() . 'includes/gcal/key/index.php', $this->get_key_file_folder() . 'index.php' );
-
-	}
-
-	/**
-	 * Return key file folder name
-	 * @return string
-	 * @since 1.2.2
-	 */
-	function get_key_file_folder() {
-		$uploads = wp_upload_dir();
-		$base = trailingslashit( $uploads["basedir"] );
-		if ( defined( 'AUTH_KEY' ) ) {
-			$kff = $base . md5( 'AUTH_KEY' ) . '/' ;
-			if ( is_dir( $kff ) ) {
-				return $kff;
-			}
-
-		}
-		return $base . '__app/';
-	}
-
-	function is_key_file_folder_created() {
-		return is_dir( $this->get_key_file_folder() );
-	}
-
-	function get_key_file_contents() {
-		$options = appointments_get_options();
-		if ( ! isset( $options['gcal_key_file'] ) ) {
+	// CRED functions
+	public function get_event( $app_id ) {
+		$app = appointments_get_appointment( $app_id );
+		if ( ! $app ) {
 			return false;
 		}
 
-		$file = $this->get_key_file_folder() . $options['gcal_key_file'] . '.p12';
-		if ( ! is_readable( $file ) ) {
+		$event_id = $app->gcal_ID;
+		if ( ! $event_id ) {
 			return false;
 		}
 
-		return file_get_contents( $file );
+		$event = $this->api_manager->get_event( $event_id );
+
+		if ( is_wp_error( $event ) ) {
+			return false;
+		}
+
+		return $event;
 	}
+
+	public function insert_event( $app_id ) {
+		$app = appointments_get_appointment( $app_id );
+		if ( ! $app ) {
+			return false;
+		}
+
+		if ( ! $this->_is_writable_mode() ) {
+			// We don't need to insert events on this mode
+			return false;
+		}
+
+		if ( ! $this->is_syncable_status( $app->status ) ) {
+			return false;
+		}
+
+		$event = $this->appointment_to_gcal_event( $app );
+
+		$result = $this->api_manager->insert_event( $event );
+
+		if ( is_wp_error( $result ) ) {
+			return false;
+		}
+		else {
+			$args = array( 'gcal_updated' => current_time( 'mysql' ), 'gcal_ID' => $result );
+			$this->remove_appointments_hooks();
+			appointments_update_appointment( $app_id, $args );
+			$this->add_appointments_hooks();
+		}
+
+		return $result;
+	}
+
+	public function delete_event( $app_id ) {
+		$app = appointments_get_appointment( $app_id );
+		if ( ! $app ) {
+			return false;
+		}
+
+		if ( ! $this->_is_writable_mode() ) {
+			// We don't need to insert events on this mode
+			return false;
+		}
+
+		$event_id = $app->gcal_ID;
+		if ( ! $event_id ) {
+			return false;
+		}
+
+		$this->api_manager->delete_event( $event_id );
+
+		return true;
+
+	}
+
+	public function update_event( $app_id ) {
+		$app = appointments_get_appointment( $app_id );
+		if ( ! $app ) {
+			return false;
+		}
+
+		if ( ! $this->_is_writable_mode() ) {
+			// We don't need to insert events on this mode
+			return false;
+		}
+
+		if ( ! $this->is_syncable_status( $app->status ) ) {
+			return false;
+		}
+
+		$event_id = $app->gcal_ID;
+		if ( ! $event_id ) {
+			// Insert it!
+			$result = $this->insert_event( $app_id );
+			if ( ! $result ) {
+				return false;
+			}
+
+			return true;
+		}
+
+		$event = $this->appointment_to_gcal_event( $app );
+		$result = $this->api_manager->update_event( $event_id, $event );
+
+		if ( is_wp_error( $result ) ) {
+			return false;
+		}
+		else {
+			$args = array( 'gcal_updated' => current_time( 'mysql' ) );
+			$this->remove_appointments_hooks();
+			appointments_update_appointment( $app_id, $args );
+			$this->add_appointments_hooks();
+		}
+
+		return true;
+	}
+
+	public function get_events_list() {
+		global $appointments;
+
+		$current_time = current_time( 'timestamp' );
+		$args = array(
+			'timeMin'      => apply_filters( 'app_gcal_time_min', date( "c", $current_time ) ),
+			'timeMax'      => apply_filters( 'app_gcal_time_max', date( "c", $current_time + ( 3600 * 24 * $appointments->get_app_limit() ) ) ),
+			'singleEvents' => apply_filters( 'app_gcal_single_events', true ),
+			'maxResults'   => apply_filters( 'app_gcal_max_results', APP_GCAL_MAX_RESULTS_LIMIT ),
+			'orderBy'      => apply_filters( 'app_gcal_orderby', 'startTime' ),
+		);
+
+		$result = $this->api_manager->get_events_list( $args );
+
+		if ( is_wp_error( $result ) ) {
+			return array();
+		}
+
+		return $events;
+
+
+	}
+
 }

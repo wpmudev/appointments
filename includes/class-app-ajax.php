@@ -83,14 +83,6 @@ class Appointments_AJAX {
 		if ( $app ) {
 			// Update
 			$update_result = appointments_update_appointment( $app_id, $data );
-			if ( $update_result ) {
-				if ( ( 'pending' == $data['status'] || 'removed' == $data['status'] || 'completed' == $data['status'] ) && is_object( $appointments->gcal_api ) ) {
-					$appointments->gcal_api->delete( $app_id );
-				} else if (is_object($appointments->gcal_api) && $appointments->gcal_api->is_syncable_status($data['status'])) {
-					$appointments->gcal_api->update( $app_id ); // This also checks for event insert
-				}
-			}
-
 			if ( $resend && 'removed' != $data['status'] ) {
 				appointments_send_confirmation( $app_id );
 			}
@@ -115,10 +107,6 @@ class Appointments_AJAX {
 			$update_result = false;
 		}
 
-		// Move mail sending here so the fields can expand
-		if ( $insert_result && is_object($appointments->gcal_api) && $appointments->gcal_api->is_syncable_status($data['status'])) {
-			$appointments->gcal_api->insert( $app->ID );
-		}
 
 		if ( $update_result ) {
 			// Log change of status
@@ -646,11 +634,6 @@ class Appointments_AJAX {
 		// Send confirmation if we forced it
 		if ('confirmed' == $status && isset($appointments->options["send_confirmation"]) && 'yes' == $appointments->options["send_confirmation"]) {
 			$appointments->send_confirmation( $insert_id );
-		}
-
-		// Add to GCal API
-		if (is_object($appointments->gcal_api) && $appointments->gcal_api->is_syncable_status($status)) {
-			$appointments->gcal_api->insert( $insert_id );
 		}
 
 		// GCal button

@@ -14,6 +14,22 @@ class Appointments_Google_Calendar_API_Manager {
 	private $service = false;
 
 	/**
+	 * Default credentials
+	 *
+	 * useful when we need to swtich to worker credentials and
+	 * then set the defaults back
+	 *
+	 * @var array
+	 */
+	private $default_creds = array(
+		'client_id' => '',
+		'client_secret' => '',
+		'token' => '',
+		'access_code' => '',
+		'calendar_id' => ''
+	);
+
+	/**
 	 * Calendar ID
 	 *
 	 * @var string
@@ -59,6 +75,18 @@ class Appointments_Google_Calendar_API_Manager {
 	}
 
 	/**
+	 * Save the default credentials
+	 *
+	 * useful when we need to swtich to worker credentials and
+	 * then set the defaults back
+	 *
+	 * @param array $args
+	 */
+	public function set_default_credentials( $args = array() ) {
+		$this->default_creds = wp_parse_args( $args, $this->default_creds );
+	}
+
+	/**
 	 * Sets the Client ID and Client Secret for this session
 	 *
 	 * @param string $client_id
@@ -97,21 +125,6 @@ class Appointments_Google_Calendar_API_Manager {
 		return $this->client->getAccessToken();
 	}
 
-	/**
-	 * Check if the current token is valid
-	 *
-	 * @return bool|WP_Error
-	 */
-	public function verify_token() {
-		try {
-			$this->client->verifyIdToken();
-		}
-		catch ( Exception $e ) {
-			return new WP_Error( $e->getCode(), $e->getMessage() );
-		}
-
-		return true;
-	}
 
 	/**
 	 * Revoke the current session token
@@ -208,9 +221,107 @@ class Appointments_Google_Calendar_API_Manager {
 		return $details;
 	}
 
-	public function insert_event( $args = array() ) {
-		$mandatory = array( 'start', 'end' );
+	/**
+	 * Get a Google Event
+	 *
+	 * @param string $event_id
+	 *
+	 * @return Google_Service_Calendar_Event|WP_Error
+	 */
+	public function get_event( $event_id ) {
+		try {
+			$event = $this->service->events->get( $this->get_calendar(), $event_id );
+		}
+		catch ( Exception $e ) {
+			return new WP_Error( $e->getCode(), $e->getMessage() );
+		}
+
+		return $event;
 	}
+
+	/**
+	 * Insert a new event
+	 *
+	 * @param $event
+	 *
+	 * @return WP_Error|string
+	 */
+	public function insert_event( $event ) {
+		try {
+			$created_event = $this->service->events->insert( $this->get_calendar(), $event );
+			return $created_event->getId();
+		}
+		catch ( Exception $e ) {
+			return new WP_Error( $e->getCode(), $e->getMessage() );
+		}
+	}
+
+	/**
+	 * Update an event
+	 *
+	 * @param string $event_id
+	 * @param Google_Service_Calendar_Event $event
+	 *
+	 * @return WP_Error|string
+	 */
+	public function update_event( $event_id, $event ) {
+		try {
+			$updated_event = $this->service->events->update( $this->get_calendar(), $event_id, $event );
+			return $updated_event->getId();
+		}
+		catch ( Exception $e ) {
+			return new WP_Error( $e->getCode(), $e->getMessage() );
+		}
+	}
+
+	/**
+	 * Update an event
+	 *
+	 * @param $event
+	 *
+	 * @return WP_Error|string
+	 */
+	public function delete_event( $event_id ) {
+		try {
+			$this->service->events->delete( $this->get_calendar(), $event_id );
+			return true;
+		}
+		catch ( Exception $e ) {
+			return new WP_Error( $e->getCode(), $e->getMessage() );
+		}
+	}
+
+	public function get_events_list( $args ) {
+		try {
+			$events = $this->service->events->listEvents( $this->get_calendar(), $args );
+			return $events->getItems();
+		}
+		catch ( Exception $e ) {
+			return new WP_Error( $e->getCode(), $e->getMessage() );
+		}
+	}
+
+	public function switch_to_worker( $worker_id ) {
+		$worker = appointments_get_worker( $worker_id );
+		if ( ! $worker ) {
+			return false;
+		}
+
+		$worker_calendar_id = 0;
+		$worker_client_id = '';
+		$worker_secret_id = '';
+		$worker_token = '';
+		$this->set_calendar( $worker_calendar_id );
+		$this->set_client_id_and_secret( $worker_client_id, $worker_secret_id );
+		$this->set_access_token( $worker_token );
+	}
+
+	public function restore_to_default() {
+		$this->set_calendar( $this->default_creds['calendar_id'] );
+		$this->set_client_id_and_secret( $this->default_creds['client_id'], $this->default_creds['client_secret'] );
+		$this->set_access_token( $this->default_creds['token'] );
+	}
+
 
 
 }

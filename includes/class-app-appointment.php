@@ -72,6 +72,28 @@ class Appointments_Appointment {
 		return explode( ':', $sent_hours );
 	}
 
+	public function get_start_gmt_date( $format = 'Y-m-d H:i:s' ) {
+		return get_gmt_from_date( $this->start, $format );
+	}
+
+	public function get_end_gmt_date( $format = 'Y-m-d H:i:s' ) {
+		return get_gmt_from_date( $this->end, $format );
+	}
+
+	public function get_email() {
+		global $appointments;
+
+		if ( is_email( $this->email ) ) {
+			return $this->email;
+		}
+		elseif ( $this->worker ) {
+			return $appointments->get_worker_email( $this->worker );
+		}
+		else {
+			return $appointments->get_admin_email();
+		}
+	}
+
 
 }
 
@@ -1024,6 +1046,14 @@ function appointments_delete_appointment( $app_id ) {
 	$result = $wpdb->query( $wpdb->prepare( "DELETE FROM $table WHERE ID = %d", $app_id ) );
 
 	appointments_clear_appointment_cache( $app_id );
+
+	/**
+	 * Triggered after an appointment has been deleted
+	 *
+	 * @param Appointments_Appointment $app
+	 */
+	do_action( 'appointments_delete_appointment', $app );
+
 	return (bool)$result;
 }
 

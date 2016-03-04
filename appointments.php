@@ -44,6 +44,7 @@ class Appointments {
 	public $workers_table;
 	/** @var AppointmentsGcal|bool */
 	public $gcal_api = false;
+	/** @var bool|Appointments_Google_Calendar  */
 	public $gcal_api_new = false;
 	public $locale_error;
 	public $time_format;
@@ -1200,12 +1201,9 @@ class Appointments {
 				// Also the clicked link may belong to a formerly created and deleted appointment.
 				// Another irrelevant app may have been created after cancel link has been sent. So we will check creation date
 				if ( $in_allowed_stat && $_GET['app_nonce'] == md5( $_GET['app_id']. $appointments->salt . strtotime( $app->created ) ) ) {
-					if ( $appointments->change_status( 'removed', $app_id ) ) {
+					if ( appointments_update_appointment_status( $app_id, 'removed' ) ) {
 						$appointments->log( sprintf( __('Client %s cancelled appointment with ID: %s','appointments'), $appointments->get_client_name( $app_id ), $app_id ) );
 						$appointments->send_notification( $app_id, true );
-
-						if (!empty($appointments->gcal_api) && is_object($appointments->gcal_api)) $appointments->gcal_api->delete($app_id); // Drop the cancelled appointment
-						else if (!defined('APP_GCAL_DISABLE')) $appointments->log("Unable to issue a remote call to delete the remote appointment.");
 
 						do_action('app-appointments-appointment_cancelled', $app_id);
 						// If there is a header warning other plugins can do whatever they need
@@ -1252,12 +1250,9 @@ class Appointments {
 					die( json_encode( array('error'=>esc_js(__('There is an issue with this appointment. Please refresh the page and try again. If problem persists, please contact website admin.','appointments') ) ) ) );
 
 				// Now we can safely continue for cancel
-				if ( $appointments->change_status( 'removed', $app_id ) ) {
+				if ( appointments_update_appointment_status( $app_id, 'removed' ) ) {
 					$appointments->log( sprintf( __('Client %s cancelled appointment with ID: %s','appointments'), $appointments->get_client_name( $app_id ), $app_id ) );
 					$appointments->send_notification( $app_id, true );
-
-					if (!empty($appointments->gcal_api) && is_object($appointments->gcal_api)) $appointments->gcal_api->delete($app_id); // Drop the cancelled appointment
-					else if (!defined('APP_GCAL_DISABLE')) $appointments->log("Unable to issue a remote call to delete the remote appointment.");
 
 					do_action('app-appointments-appointment_cancelled', $app_id);
 					die( json_encode( array('success'=>1)));
