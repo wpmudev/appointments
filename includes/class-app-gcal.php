@@ -14,6 +14,10 @@ class Appointments_Google_Calendar {
 
 	private $service = false;
 
+	public $api_manager = false;
+
+	public $errors = array();
+
 	public function __construct() {
 		$appointments = appointments();
 
@@ -32,67 +36,42 @@ class Appointments_Google_Calendar {
 
 		$options = appointments_get_options();
 
-		include_once( 'external/google/autoload.php' );
-		$this->client = new Google_Client();
-		$this->client->setApplicationName( "Appointments +" );
-		$this->client->setScopes( 'https://www.googleapis.com/auth/calendar' );
-		$this->client->setAccessType( 'offline' );
-		$this->client->setRedirectUri( 'urn:ietf:wg:oauth:2.0:oob' );
+		include_once( 'class-app-gcal-api-manager.php' );
+		$this->api_manager = new Appointments_Google_Calendar_API_Manager();
 
 		if ( ! empty( $options['gcal_client_id'] ) && ! empty( $options['gcal_client_secret'] ) ) {
-			$this->client->setClientId( $options['gcal_client_id'] );
-			$this->client->setClientSecret( $options['gcal_client_secret'] );
+			$this->api_manager->set_client_id_and_secret( $options['gcal_client_id'], $options['gcal_client_secret'] );
 		}
 
 		if ( ! empty( $options['gcal_token'] ) ) {
-			try {
-				$this->client->setAccessToken( $options['gcal_token'] );
+			$result = $this->api_manager->set_access_token( $options['gcal_token'] );
+			if ( is_wp_error( $result ) ) {
+				$this->errors[] = array( 'message' => sprintf( __( 'Error validating the access token: %s', 'appointments' ), $result->get_error_message() ) );
 			}
-			catch ( Exception $e ) {
-
-			}
-
 		}
 
 		if ( ! empty( $options['gcal_selected_calendar'] ) ) {
-			$this->calendar = $options['gcal_selected_calendar'];
+			$this->api_manager->set_calendar( $options['gcal_selected_calendar'] );
 		}
+
+		add_action( 'shutdown', array( $this, 'save_new_token' ) );
 	}
 
-	public function reset_auth() {
+	/**
+	 * Sometimes Google will refresh the token.
+	 * If so, we'll save it
+	 */
+	public function save_new_token() {
+		$current_token = $this->api_manager->get_access_token();
+		if ( ! $current_token ) {
+			return;
+		}
 
-	}
-
-	public function init() {
-		return;
 		$options = appointments_get_options();
-		include_once( 'external/google/autoload.php' );
-
-		$worker_id = 0;
-		$calendar_id = $options['gcal_selected_calendar'];
-
-		try {
-			$credentials = new Google_Auth_AssertionCredentials(
-				$options['gcal_service_account'],
-				array( 'https://www.googleapis.com/auth/calendar' ),
-				$this->get_key_file_contents()
-			);
-
-			$client = new Google_Client();
-			$client->setApplicationName( "Appointments+" );
-			$client->setAssertionCredentials( $credentials );
-
-			if ( $client->getAuth()->isAccessTokenExpired() ) {
-				$client->getAuth()->refreshTokenWithAssertion();
-			}
-
-			$service = new Google_Service_Calendar( $client );
-			$calendars = $service->events->listEvents( $calendar_id );
+		if ( $options['gcal_token'] != $current_token ) {
+			$options['gcal_token'] = $current_token;
+			appointments_update_options( $options );
 		}
-		catch ( Exception $e ) {
-			$message = $e->getMessage();
-		}
-
 	}
 
 	public function reset_settings() {
@@ -101,13 +80,21 @@ class Appointments_Google_Calendar {
 		}
 
 		check_admin_referer( 'app-submit-gcalendar' );
-		$options = appointments_get_options();
-		$options['gcal_client_id'] = '';
-		$options['gcal_client_secret'] = '';
-		$options['gcal_accesss_code'] = '';
-		$options['gcal_token'] = '';
-		$options['gcal_selected_calendar'] = '';
-		appointments_update_options( $options );
+
+		$result = $this->api_manager->revoke_token();
+		if ( ! is_wp_error( $result ) ) {
+			$options = appointments_get_options();
+			$options['gcal_client_id'] = '';
+			$options['gcal_client_secret'] = '';
+			$options['gcal_accesss_code'] = '';
+			$options['gcal_selected_calendar'] = '';
+			$options['gcal_token'] = '';
+			appointments_update_options( $options );
+		}
+		else {
+			add_settings_error( 'app-gcalendar', $result->get_error_code(), $result->get_error_message() );
+		}
+
 	}
 
 	public function save_settings() {
@@ -127,8 +114,7 @@ class Appointments_Google_Calendar {
 
 			$options['gcal_client_id'] = $_POST['client_id'];
 			$options['gcal_client_secret'] = $_POST['client_secret'];
-			$this->client->setClientId( $options['gcal_client_id'] );
-			$this->client->setClientSecret( $options['gcal_client_secret'] );
+			$this->api_manager->set_client_id_and_secret( $options['gcal_client_id'], $options['gcal_client_secret'] );
 			appointments_update_options( $options );
 		}
 		elseif ( 'step-2' === $action ) {
@@ -137,17 +123,14 @@ class Appointments_Google_Calendar {
 				return;
 			}
 
-			try {
-				$this->client->authenticate( $_POST['access_code'] );
-				$token = $this->client->getAccessToken();
-			}
-			catch ( Exception $e ) {
-				add_settings_error( 'app-gcalendar', 'auth-failed', sprintf( __( 'Authentication failed: %s', 'appointments' ), $e->getMessage() ) );
+			$result = $this->api_manager->authenticate( $_POST['access_code'] );
+			if ( is_wp_error( $result ) ) {
+				add_settings_error( 'app-gcalendar', $result->get_error_code(), sprintf( __( 'Authentication failed: %s', 'appointments' ), $result->get_error_message() ) );
 				return;
 			}
 
 			$options['gcal_access_code'] = $_POST['access_code'];
-			$options['gcal_token'] = $token;
+			$options['gcal_token'] = $this->api_manager->get_access_token();
 			appointments_update_options( $options );
 		}
 		elseif ( 'step-3' === $action ) {
@@ -174,8 +157,8 @@ class Appointments_Google_Calendar {
 		$options = appointments_get_options();
 		$client_id = isset( $options['gcal_client_id'] ) ? $options['gcal_client_id'] : '';
 		$client_secret = isset( $options['gcal_client_secret'] ) ? $options['gcal_client_secret'] : '';
-		$errors = get_settings_errors( 'app-gcalendar' );
-		$token = $this->client->getAccessToken();
+		$errors = array_merge( get_settings_errors( 'app-gcalendar' ), $this->errors );
+		$token = $this->api_manager->get_access_token();
 		if ( ! empty( $errors ) ) {
 			?>
 			<div class="error">
@@ -228,13 +211,12 @@ class Appointments_Google_Calendar {
 			<?php
 		}
 		elseif ( $client_id && $client_secret && ! $token ) {
-			$auth_url = $this->client->createAuthUrl();
 			// No token yet
 			?>
 			<form name="input" action="" method="post">
 				<h3>Authorize access to your Google Application</h3>
 				<ol>
-					<li><a href="<?php echo esc_url( $auth_url ); ?>" target="_blank"><?php _e( 'Generate your access code', 'appointments' ); ?></a></li>
+					<li><a href="<?php echo esc_url( $this->api_manager->create_auth_url() ); ?>" target="_blank"><?php _e( 'Generate your access code', 'appointments' ); ?></a></li>
 					<li><?php _e( 'Fill the form below', 'appointments' ); ?></li>
 				</ol>
 
@@ -259,10 +241,8 @@ class Appointments_Google_Calendar {
 			<?php
 		}
 		else {
-			$service = $this->get_calendar_service();
-			$calendars = $service->calendarList->listCalendarList();
-			$calendars->getItems();
-			$selected_calendar = $options['gcal_selected_calendar'];
+			$calendars = $this->api_manager->get_calendars_list();
+			$selected_calendar = $this->api_manager->get_calendar();
 			?>
 			<form name="input" action="" method="post">
 				<h3>Select Your Calendar</h3>
@@ -305,9 +285,6 @@ class Appointments_Google_Calendar {
 		return $this->service;
 	}
 
-	public function get_client() {
-		return $this->client;
-	}
 
 	/**
 	 * Return the selected calendar
