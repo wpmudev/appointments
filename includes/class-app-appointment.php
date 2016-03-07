@@ -139,6 +139,31 @@ function appointments_get_appointment( $app_id ) {
 }
 
 /**
+ * Get an Appointment based on GCal ID
+ *
+ * @param string $gcal_id
+ *
+ * @return Appointments_Appointment|bool
+ */
+function appointments_get_appointment_by_gcal_id( $gcal_id ) {
+	global $wpdb;
+
+	$table = appointments_get_table( 'appointments' );
+	$app = $wpdb->get_row(
+		$wpdb->prepare(
+			"SELECT * FROM $table WHERE gcal_ID = %d",
+			$gcal_id
+		)
+	);
+
+	if ( ! $app ) {
+		return false;
+	}
+
+	return appointments_get_appointment( $app );
+}
+
+/**
  * Insert a new Appointment
  *
  * @param array $args

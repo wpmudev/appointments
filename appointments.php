@@ -3103,9 +3103,6 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		$this->remove_appointments();
 		$this->send_reminder();
 		$this->send_reminder_worker();
-		// Update Google API imports
-		if ( is_object( $this->gcal_api ) )
-			$this->gcal_api->import_and_update();
 
 	}
 

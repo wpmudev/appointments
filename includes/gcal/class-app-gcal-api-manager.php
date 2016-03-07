@@ -37,7 +37,7 @@ class Appointments_Google_Calendar_API_Manager {
 	private $calendar = '';
 
 	public function __construct() {
-		include_once( 'external/google/autoload.php' );
+		include_once( appointments_plugin_dir() . 'includes/external/google/autoload.php' );
 		$this->client = new Google_Client();
 		$this->client->setApplicationName( "Appointments +" );
 		$this->client->setScopes( 'https://www.googleapis.com/auth/calendar' );
@@ -300,6 +300,7 @@ class Appointments_Google_Calendar_API_Manager {
 			return new WP_Error( $e->getCode(), $e->getMessage() );
 		}
 	}
+
 
 	public function switch_to_worker( $worker_id ) {
 		$worker = appointments_get_worker( $worker_id );

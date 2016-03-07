@@ -32,13 +32,16 @@ class Appointments_Google_Calendar {
 		add_action( 'admin_init', array( &$this, 'save_settings' ), 12 );
 		add_action( 'admin_init', array( &$this, 'reset_settings' ), 12 );
 
+		add_action( 'wp_ajax_app_gcal_export', array( $this, 'export_batch' ) );
+		add_action( 'wp_ajax_app_gcal_import', array( $this, 'import' ) );
+
 		$options = appointments_get_options();
 
 		if ( isset( $options['gcal_api_mode'] ) ) {
 			$this->api_mode = $options['gcal_api_mode'];
 		}
 
-		include_once( 'class-app-gcal-api-manager.php' );
+		include_once( 'gcal/class-app-gcal-api-manager.php' );
 		$this->api_manager = new Appointments_Google_Calendar_API_Manager();
 
 		$default_creds = array();
@@ -93,6 +96,10 @@ class Appointments_Google_Calendar {
 
 	public function is_connected() {
 		if ( ! $this->api_manager->get_access_token() ) {
+			return false;
+		}
+
+		if ( 'none' === $this->get_api_mode() ) {
 			return false;
 		}
 
@@ -287,21 +294,11 @@ class Appointments_Google_Calendar {
 		}
 		elseif ( 'step-3' === $action ) {
 			$calendar_id = ! empty( $_POST['gcal_selected_calendar'] ) ? $_POST['gcal_selected_calendar'] : '';
-			if ( ! $calendar_id ) {
-				return;
-			}
-
 			$options['gcal_selected_calendar'] = $calendar_id;
+			$this->api_manager->set_calendar( $calendar_id );
+			$options['gcal_api_mode'] = $_POST['gcal_api_mode'];
+			$this->api_mode = $options['gcal_api_mode'];
 			appointments_update_options( $options );
-			$calendar = $this->api_manager->get_calendar();
-
-			if ( is_wp_error( $calendar ) ) {
-				add_settings_error( 'app-gcalendar', 'calendar-not-exist', __( 'The selecter calendar does not exist', 'appointments' ) );
-				$options['gcal_selected_calendar'] = '';
-				appointments_update_options( $options );
-			}
-
-
 		}
 	}
 
@@ -311,6 +308,7 @@ class Appointments_Google_Calendar {
 		$client_secret = isset( $options['gcal_client_secret'] ) ? $options['gcal_client_secret'] : '';
 		$errors = array_merge( get_settings_errors( 'app-gcalendar' ), $this->errors );
 		$token = $this->api_manager->get_access_token();
+
 		if ( ! empty( $errors ) ) {
 			?>
 			<div class="error">
@@ -324,110 +322,68 @@ class Appointments_Google_Calendar {
 		}
 
 		if ( empty( $client_id ) || empty( $client_secret ) ) {
-			?>
-			<form name="input" action="" method="post">
-				<h3>Create a new Google Application</h3>
-				<ol>
-					<li>Go to <a target=_blank" href="https://console.developers.google.com/project">Google Developer Console Projects</a> and create a new project. i.e. "Appointments APP"</li>
-					<li>Once in Dashboard, click on Enable and manage APIs, click on Calendar API and then, enable.</li>
-					<li>On the left side, click on Credentials and then OAuth consent screen tab</li>
-					<li>Choose a product name shown to users, i.e. "Appointments +"</li>
-					<li>click on Credentials tab > Create Credentials > OAuth Client ID</li>
-					<li>Select "Other" Application type with any name</li>
-					<li>Take note of the client ID and client secret and fill the form below</li>
-				</ol>
-
-				<table class="form-table">
-					<tr>
-						<th scope="row">
-							<label for="app-client-id"><?php _e( 'Client ID', 'appointments' ); ?></label>
-						</th>
-						<td>
-							<input type="text" class="widefat" name="client_id" id="app-client-id" value="">
-						</td>
-					</tr>
-					<tr>
-						<th scope="row">
-							<label for="app-client-secret"><?php _e( 'Client Secret', 'appointments' ); ?></label>
-						</th>
-						<td>
-							<input type="text" name="client_secret" class="widefat" id="app-client-secret" value="">
-						</td>
-					</tr>
-				</table>
-
-				<?php wp_nonce_field( 'app-submit-gcalendar' ); ?>
-				<input type="hidden" name="action" value="step-1">
-				<?php submit_button( __( 'Submit', 'appointments' ), 'primary', 'app-submit-gcalendar' ); ?>
-			</form>
-			<?php
+			include_once( 'gcal/views/settings-gcal-step-1.php' );
 		}
 		elseif ( $client_id && $client_secret && ! $token ) {
 			// No token yet
-			?>
-			<form name="input" action="" method="post">
-				<h3>Authorize access to your Google Application</h3>
-				<ol>
-					<li><a href="<?php echo esc_url( $this->api_manager->create_auth_url() ); ?>" target="_blank"><?php _e( 'Generate your access code', 'appointments' ); ?></a></li>
-					<li><?php _e( 'Fill the form below', 'appointments' ); ?></li>
-				</ol>
-
-				<table class="form-table">
-					<tr>
-						<th scope="row">
-							<label for="app-access-code"><?php _e( 'Access code', 'appointments' ); ?></label>
-						</th>
-						<td>
-							<input type="text" class="widefat" name="access_code" id="app-access-code" value="">
-						</td>
-					</tr>
-				</table>
-
-				<?php wp_nonce_field( 'app-submit-gcalendar' ); ?>
-				<input type="hidden" name="action" value="step-2">
-				<p class="submit">
-					<?php submit_button( __( 'Submit', 'appointments' ), 'primary', 'app-submit-gcalendar', false ); ?>
-					<?php submit_button( __( 'Reset', 'appointments' ), 'secondary', 'app-reset-gcalendar', false ); ?>
-				</p>
-			</form>
-			<?php
+			$auth_url = $this->api_manager->create_auth_url();
+			include_once( 'gcal/views/settings-gcal-step-2.php' );
 		}
 		else {
 			$calendars = $this->api_manager->get_calendars_list();
 			$selected_calendar = $this->api_manager->get_calendar();
-			?>
-			<form name="input" action="" method="post">
-				<h3>Select Your Calendar</h3>
-				<p><?php _e( 'Select the Calendar you want to work with Appointments', 'appointments' ); ?></p>
-
-				<table class="form-table">
-					<tr>
-						<th scope="row">
-							<label for="app-calendar"><?php _e( 'Calendar', 'appointments' ); ?></label>
-						</th>
-						<td>
-							<select name="gcal_selected_calendar" id="app-calendar">
-								<option value=""><?php _e( '-- Select a Calendar --', 'appointments' ); ?></option>
-								<?php foreach ( $calendars as $calendar ): ?>
-									<option value="<?php echo esc_attr( $calendar['id'] ); ?>" <?php selected( $selected_calendar, $calendar['id'] ); ?>>
-										<?php echo $calendar['summary']; ?>
-									</option>
-								<?php endforeach; ?>
-							</select>
-						</td>
-					</tr>
-				</table>
-
-				<?php wp_nonce_field( 'app-submit-gcalendar' ); ?>
-				<input type="hidden" name="action" value="step-3">
-				<p class="submit">
-					<?php submit_button( __( 'Submit', 'appointments' ), 'primary', 'app-submit-gcalendar', false ); ?>
-					<?php submit_button( __( 'Reset', 'appointments' ), 'secondary', 'app-reset-gcalendar', false ); ?>
-				</p>
-			</form>
-			<?php
+			$api_mode = $this->get_api_mode();
+			$apps_count = $this->get_apps_to_export_count();
+			include_once( 'gcal/views/settings-gcal-step-3.php' );
 		}
 	}
+
+	public function export_batch() {
+		$importer = new Appointments_Google_Calendar_Importer( $this );
+		$offset = absint( $_POST['offset'] );
+		$offset = $importer->export( $offset );
+
+		if ( false === $offset ) {
+			// Finished
+			wp_send_json_success();
+		}
+
+		wp_send_json_error( array( 'offset' => $offset ) );
+	}
+
+	public function import() {
+		if ( 'sync' != $this->get_api_mode() ) {
+			wp_send_json( array( 'message' => 'Error' ) );
+		}
+
+		include_once( 'gcal/class-app-gcal-importer.php' );
+		$importer = new Appointments_Google_Calendar_Importer( $this );
+		$this->remove_appointments_hooks();
+		$results = $importer->import();
+		$this->add_appointments_hooks();
+
+		if ( is_wp_error( $results ) ) {
+			wp_send_json( array( 'message' => $results->get_error_message() ) );
+		}
+
+		wp_send_json( array( 'message' => sprintf( __( '%d updated, %d new inserted and %d deleted', 'appointments' ), $results['updated'], $results['inserted'], $results['deleted'] ) ) );
+		// @TODO: Import every worker too
+	}
+
+
+
+
+	function get_apps_to_export_count() {
+		$apps_count = appointments_count_appointments();
+		$count = 0;
+		foreach ( $this->get_syncable_status() as $status ) {
+			$count += $apps_count[ $status ];
+		}
+
+		return $count;
+	}
+
+
 
 
 	/**
@@ -444,12 +400,12 @@ class Appointments_Google_Calendar {
 		return ! in_array( $mode, array( 'gcal2app', 'none' ) );
 	}
 
-	private function _get_syncable_status () {
+	public function get_syncable_status () {
 		return apply_filters( 'app-gcal-syncable_status', array( 'paid', 'confirmed' ) );
 	}
 
 	public function is_syncable_status( $status ) {
-		$syncable_status = $this->_get_syncable_status();
+		$syncable_status = $this->get_syncable_status();
 		return in_array( $status, $syncable_status );
 	}
 
@@ -665,6 +621,7 @@ class Appointments_Google_Calendar {
 		return true;
 	}
 
+
 	public function get_events_list() {
 		global $appointments;
 
@@ -677,15 +634,11 @@ class Appointments_Google_Calendar {
 			'orderBy'      => apply_filters( 'app_gcal_orderby', 'startTime' ),
 		);
 
-		$result = $this->api_manager->get_events_list( $args );
-
-		if ( is_wp_error( $result ) ) {
-			return array();
-		}
+		$events = $this->api_manager->get_events_list( $args );
 
 		return $events;
-
-
 	}
+
+
 
 }
