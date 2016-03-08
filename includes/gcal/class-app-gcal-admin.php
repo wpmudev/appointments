@@ -165,7 +165,7 @@ class Appointments_Google_Calendar_Admin {
 	}
 
 	public function save_profile( $user_id ) {
-		$switched = $this->gcal_api->switch_to_worker( $user_id );
+		$switched = $this->gcal_api->switch_to_worker( $user_id, false );
 		if ( ! $switched ) {
 			return;
 		}
@@ -208,7 +208,7 @@ class Appointments_Google_Calendar_Admin {
 			return;
 		}
 
-		$switched = $this->gcal_api->switch_to_worker( $profileuser->ID );
+		$switched = $this->gcal_api->switch_to_worker( $profileuser->ID, false );
 		if ( ! $switched ) {
 			return;
 		}

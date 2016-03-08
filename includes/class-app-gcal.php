@@ -362,7 +362,7 @@ class Appointments_Google_Calendar {
 		return in_array( $status, $syncable_status );
 	}
 
-	public function switch_to_worker( $worker_id ) {
+	public function switch_to_worker( $worker_id, $check_connection = true ) {
 		if ( ! $this->workers_allowed() ) {
 			return false;
 		}
@@ -394,7 +394,7 @@ class Appointments_Google_Calendar {
 		$this->api_mode = $worker_api_mode;
 		$this->api_manager->switch_to_worker( $worker_id );
 
-		if ( ! $this->is_connected() ) {
+		if ( $check_connection && ! $this->is_connected() ) {
 			$this->restore_to_default();
 			return false;
 		}
