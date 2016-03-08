@@ -15,7 +15,9 @@ class Appointments_Google_Calendar_Importer {
 	function export( $offset ) {
 		$per_page = 2;
 
-		$apps = appointments_get_appointments( array( 'status' => $this->get_syncable_status() ) );
+		$args = array( 'status' => $this->get_syncable_status() );
+		// @TODO Not exporting workers right now
+		$apps = appointments_get_appointments( $args );
 		$counter = 0;
 		while ( $counter < $offset ) {
 			array_shift( $apps );
@@ -45,8 +47,16 @@ class Appointments_Google_Calendar_Importer {
 	/**
 	 * @return array|WP_Error
 	 */
-	function import() {
+	function import( $worker_id = false ) {
 		global $wpdb;
+
+		if ( $worker_id && ! appointments_get_worker( $worker_id ) ) {
+			return array(
+				'inserted' => 0,
+				'updated' => 0,
+				'deleted' => 0
+			);
+		}
 
 		$current_gmt_time = current_time( 'timestamp', true );
 
@@ -56,7 +66,12 @@ class Appointments_Google_Calendar_Importer {
 		}
 
 		$table = appointments_get_table( 'appointments' );
-		$current_gcal_event_ids = $wpdb->get_col( "SELECT gcal_ID FROM $table WHERE gcal_ID IS NOT NULL" );
+		$query = "SELECT gcal_ID FROM $table WHERE gcal_ID IS NOT NULL";
+		if ( $worker_id ) {
+			$query .= $wpdb->prepare( " AND worker = %d", $worker_id );
+		}
+		$current_gcal_event_ids = $wpdb->get_col( $query );
+
 		if ( ! $current_gcal_event_ids ) {
 			$current_gcal_event_ids = array();
 		}
@@ -93,7 +108,7 @@ class Appointments_Google_Calendar_Importer {
 				// We can add it
 				$args = array(
 					'service' => $service_id,
-					// @TODO Worker ID 'worker' => $worker_id,
+					'worker' => $worker_id ? $worker_id : false,
 					'date' => strtotime( $event_start_date ),
 					'duration' => $duration,
 					'status' => 'reserved',
@@ -124,6 +139,7 @@ class Appointments_Google_Calendar_Importer {
 				$deleted[] = $gcal_event_id;
 			}
 		}
+
 
 		return array_map( 'count', compact( 'inserted', 'updated', 'deleted' ) );
 	}

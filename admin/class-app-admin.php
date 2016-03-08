@@ -45,30 +45,6 @@ class Appointments_Admin {
 		if ( isset( $_POST['app_city'] ) )
 			update_user_meta( $profileuser_id, 'app_city', $_POST['app_city'] );
 
-		// Save Google API settings
-		if ( isset( $_POST['gcal_api_mode'] ) )
-			update_user_meta( $profileuser_id, 'app_api_mode', $_POST['gcal_api_mode'] );
-		if ( isset( $_POST['gcal_service_account'] ) )
-			update_user_meta( $profileuser_id, 'app_service_account', trim( $_POST['gcal_service_account'] ) );
-		if ( isset( $_POST['gcal_key_file'] ) )
-			update_user_meta( $profileuser_id, 'app_key_file', trim( str_replace( '.p12', '', $_POST['gcal_key_file'] ) ) );
-		if ( isset( $_POST['gcal_selected_calendar'] ) )
-			update_user_meta( $profileuser_id, 'app_selected_calendar', trim( $_POST['gcal_selected_calendar'] ) );
-		if ( isset( $_POST['gcal_summary'] ) ) {
-			if ( !trim( $_POST['gcal_summary'] ) )
-				$summary = __('SERVICE Appointment','appointments');
-			else
-				$summary = $_POST['gcal_summary'];
-			update_user_meta( $profileuser_id, 'app_gcal_summary', $summary );
-		}
-		if ( isset( $_POST['gcal_description'] ) ) {
-			if ( !trim( $_POST['gcal_description'] ) ) {
-				$gcal_description = __("Client Name: CLIENT\nService Name: SERVICE\nService Provider Name: SERVICE_PROVIDER\n", "appointments");
-			} else {
-				$gcal_description = $_POST['gcal_description'];
-			}
-			update_user_meta( $profileuser_id, 'app_gcal_description', $gcal_description );
-		}
 
 		// Cancel appointment
 		if ( isset( $appointments->options['allow_cancel'] ) && 'yes' == $appointments->options['allow_cancel'] &&
@@ -321,23 +297,6 @@ class Appointments_Admin {
 				</script>
 			<?php } ?>
 			<?php } ?>
-			<?php if ( isset($appointments->options["gcal_api_allow_worker"]) && 'yes' == $appointments->options["gcal_api_allow_worker"] && appointments_is_worker( $profileuser->ID ) ) { ?>
-				<tr>
-					<th><label><?php _e("Appointments+ Google Calendar API", 'appointments'); ?></label></th>
-					<td>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<?php
-						if ( is_object( $appointments->gcal_api ) )
-							$appointments->gcal_api->display_nag( $profileuser->ID ); ?>
-					</td>
-				</tr>
-				<?php
-				if ( is_object( $appointments->gcal_api ) )
-					$appointments->gcal_api->display_settings( $profileuser->ID );
-			} ?>
 		</table>
 		<?php
 	}

@@ -22,8 +22,6 @@ class Appointments_Google_Calendar_API_Manager {
 	 * @var array
 	 */
 	private $default_creds = array(
-		'client_id' => '',
-		'client_secret' => '',
 		'token' => '',
 		'access_code' => '',
 		'calendar_id' => ''
@@ -96,6 +94,7 @@ class Appointments_Google_Calendar_API_Manager {
 		$this->client->setClientId( $client_id );
 		$this->client->setClientSecret( $client_secret );
 	}
+
 
 	/**
 	 * Sets the access token for this session
@@ -308,13 +307,21 @@ class Appointments_Google_Calendar_API_Manager {
 			return false;
 		}
 
-		$worker_calendar_id = 0;
-		$worker_client_id = '';
-		$worker_secret_id = '';
-		$worker_token = '';
+		$worker_calendar_id = get_user_meta( $worker_id, 'app_selected_calendar', true );
+		$worker_token = get_user_meta( $worker_id, 'app_gcal_token', true );
+		if ( ! $worker_token ) {
+			$worker_token = '{"access_token":0}';
+		}
 		$this->set_calendar( $worker_calendar_id );
-		$this->set_client_id_and_secret( $worker_client_id, $worker_secret_id );
 		$this->set_access_token( $worker_token );
+
+		if ( $this->is_token_expired() ) {
+			// Renew token. Make any action and save the token
+			$calendars = $this->get_calendars_list();
+			$token = $this->get_access_token();
+			$this->set_access_token( $token );
+			update_user_meta( $worker_id, 'app_gcal_token', $token );
+		}
 	}
 
 	public function restore_to_default() {
