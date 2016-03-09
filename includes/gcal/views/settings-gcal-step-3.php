@@ -7,14 +7,18 @@
 			<label for="app-calendar"><?php _e( 'Calendar', 'appointments' ); ?></label>
 		</th>
 		<td>
-			<select name="gcal_selected_calendar" id="app-calendar">
-				<option value=""><?php _e( '-- Select a Calendar --', 'appointments' ); ?></option>
-				<?php foreach ( $calendars as $calendar ): ?>
-					<option value="<?php echo esc_attr( $calendar['id'] ); ?>" <?php selected( $selected_calendar, $calendar['id'] ); ?>>
-						<?php echo $calendar['summary']; ?>
-					</option>
-				<?php endforeach; ?>
-			</select>
+			<?php if ( is_array( $calendars ) ): ?>
+				<select name="gcal_selected_calendar" id="app-calendar">
+					<option value=""><?php _e( '-- Select a Calendar --', 'appointments' ); ?></option>
+					<?php foreach ( $calendars as $calendar ): ?>
+						<option value="<?php echo esc_attr( $calendar['id'] ); ?>" <?php selected( $selected_calendar, $calendar['id'] ); ?>>
+							<?php echo $calendar['summary']; ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
+			<?php else: ?>
+				<p style="color:#dc3232"><?php _e( 'There was an error loading your calendars.', 'appointments' ); ?></p>
+			<?php endif; ?>
 		</td>
 	</tr>
 	<tr>

@@ -233,8 +233,6 @@ class Appointments_Google_Calendar_Admin {
 
 		$this->gcal_api->restore_to_default();
 
-
-
 	}
 
 

@@ -36,11 +36,13 @@ class Appointments_Google_Calendar_API_Manager {
 
 	public function __construct() {
 		include_once( appointments_plugin_dir() . 'includes/external/google/autoload.php' );
+		include_once( 'class-app-gcal-logger.php' );
 		$this->client = new Google_Client();
 		$this->client->setApplicationName( "Appointments +" );
 		$this->client->setScopes( 'https://www.googleapis.com/auth/calendar' );
 		$this->client->setAccessType( 'offline' );
 		$this->client->setRedirectUri( 'urn:ietf:wg:oauth:2.0:oob' );
+		$this->client->setLogger( new Appointments_Google_Calendar_Logger( $this->client ) );
 
 		$this->service = new Google_Service_Calendar( $this->client );
 	}
@@ -317,11 +319,13 @@ class Appointments_Google_Calendar_API_Manager {
 
 		if ( $this->is_token_expired() ) {
 			// Renew token. Make any action and save the token
-			$calendars = $this->get_calendars_list();
+			$this->get_calendars_list();
 			$token = $this->get_access_token();
 			$this->set_access_token( $token );
 			update_user_meta( $worker_id, 'app_gcal_token', $token );
 		}
+
+		return true;
 	}
 
 	public function restore_to_default() {
@@ -329,7 +333,6 @@ class Appointments_Google_Calendar_API_Manager {
 		$this->set_client_id_and_secret( $this->default_creds['client_id'], $this->default_creds['client_secret'] );
 		$this->set_access_token( $this->default_creds['token'] );
 	}
-
 
 
 }
