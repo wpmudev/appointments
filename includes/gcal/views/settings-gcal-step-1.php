@@ -1,7 +1,8 @@
 <h3><?php _e( 'Google Calendar API: Create a new Google Application', 'appointments' ); ?></h3>
 <ol>
 	<li><?php printf( __( 'Go to %s and create a new project. i.e. "Appointments APP", then click "Save"', 'appointments' ), sprintf( '<a target=_blank" href="https://console.developers.google.com/project">%s</a>', __( 'Google Developer Console Projects', 'appointments' ) ) ); ?></li>
-	<li><?php _e( 'Once in Dashboard, click on Enable and manage APIs, click on Calendar API and then, enable.', 'appointments' ); ?></li>
+	<li><?php _e( 'Once in Dashboard, click on Enable and manage APIs.', 'appointments' ); ?></li>
+	<li><?php _e( 'Click on Calendar API and then, enable.', 'appointments' ); ?></li>
 	<li><?php _e( 'On the left side, click on Credentials and then OAuth consent screen tab', 'appointments' ); ?></li>
 	<li><?php _e( 'Choose a product name shown to users, i.e. "Appointments +"', 'appointments' ); ?></li>
 	<li><?php _e( 'click on Credentials tab > Create Credentials > OAuth Client ID', 'appointments' ); ?></li>

@@ -226,6 +226,8 @@ class App_Installer {
 	public static function uninstall () {
 		global $wpdb;
 
+		wp_unschedule_event( current_time( 'timestamp' ), 'appointments_gcal_sync' );
+
 		delete_option( 'appointments_options' );
 		delete_option( 'app_last_update' );
 		delete_option( 'app_db_version' );

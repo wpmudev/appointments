@@ -15,7 +15,7 @@ class Appointments_Google_Calendar_Importer {
 	function export( $offset ) {
 		$per_page = 2;
 
-		$args = array( 'status' => $this->get_syncable_status() );
+		$args = array( 'status' => $this->gcal_api->get_syncable_status() );
 		// @TODO Not exporting workers right now
 		$apps = appointments_get_appointments( $args );
 		$counter = 0;
@@ -34,7 +34,22 @@ class Appointments_Google_Calendar_Importer {
 				break;
 			}
 
+			$worker_id = $app->worker;
+			if ( ! appointments_get_worker( $worker_id ) ) {
+				$worker_id = false;
+			}
+
+			// Update the General calendar
 			$this->gcal_api->update_event( $app->ID );
+
+			if ( $worker_id ) {
+				// Update the worker calendar
+				$switched = $this->gcal_api->switch_to_worker( $worker_id );
+				if ( $switched ) {
+					$this->gcal_api->update_event( $app->ID );
+					$this->gcal_api->restore_to_default();
+				}
+			}
 			$counter++;
 		}
 
@@ -58,8 +73,6 @@ class Appointments_Google_Calendar_Importer {
 			);
 		}
 
-		$current_gmt_time = current_time( 'timestamp', true );
-
 		$events = $this->gcal_api->get_events_list();
 		if ( is_wp_error( $events ) ) {
 			return $events;
@@ -80,53 +93,15 @@ class Appointments_Google_Calendar_Importer {
 		$inserted = array();
 		$deleted = array();
 
-		// Service ID is not important as we will use this record for blocking our time slots only
-		$service_id = appointments_get_services_min_id();
-
 		// Create a list of event_id's
 		/** @var Google_Service_Calendar_Event $event */
 		foreach ( $events as $event ) {
-			$event_id = $event->getId();
-			$app = appointments_get_appointment_by_gcal_id( $event_id );
-
-			$event_start = $event->getStart();
-			$event_start_gmt_date = gmdate( 'Y-m-d H:i:s', strtotime( $event_start->dateTime ) );
-			$event_start_gmt_timestamp = strtotime( $event_start_gmt_date );
-			$event_start_date = get_date_from_gmt( $event_start_gmt_date );
-
-			$event_end = $event->getEnd();
-			$event_end_gmt_date = gmdate( 'Y-m-d H:i:s', strtotime( $event_end->dateTime ) );
-			$event_end_gmt_timestamp = strtotime( $event_end_gmt_date );
-
-			$event_updated = $event->getUpdated();
-			$event_updated_gmt_date = gmdate( 'Y-m-d H:i:s', strtotime( $event_updated ) );
-			$event_updated_date = get_date_from_gmt( $event_updated_gmt_date );
-
-			$duration = ( strtotime( $event_end_gmt_date ) - strtotime( $event_start_gmt_date ) ) / 60;
-
-			if ( $event_start_gmt_timestamp > $current_gmt_time && $event_end_gmt_timestamp > $current_gmt_time ) {
-				// We can add it
-				$args = array(
-					'service' => $service_id,
-					'worker' => $worker_id ? $worker_id : false,
-					'date' => strtotime( $event_start_date ),
-					'duration' => $duration,
-					'status' => 'reserved',
-					'gcal_ID' => $event_id,
-					'gcal_updated' => $event_updated_date,
-					'note' => $event->getSummary()
-				);
-
-				if ( ! $app ) {
-					// New Appointment
-					appointments_insert_appointment( $args );
-					$inserted[] = $event_id;
-				}
-				else {
-					// Update Appointment
-					appointments_update_appointment( $app->ID, $args );
-					$updated[] = $event_id;
-				}
+			$result = $this->import_event( $event, $worker_id );
+			if ( 'updated' === $result ) {
+				$updated[] = $event->getId();
+			}
+			elseif ( 'inserted' === $result ) {
+				$inserted[] = $event->getId();
 			}
 		}
 
@@ -135,13 +110,73 @@ class Appointments_Google_Calendar_Importer {
 			if ( ! in_array( $gcal_event_id, $processed ) ) {
 				// The event is no longer in the calendar, let's delete it locally
 				$app = appointments_get_appointment_by_gcal_id( $gcal_event_id );
-				appointments_delete_appointment( $app->ID );
-				$deleted[] = $gcal_event_id;
+				if ( 'reserved' === $status ) {
+					appointments_delete_appointment( $app->ID );
+					$deleted[] = $gcal_event_id;
+				}
 			}
 		}
 
 
 		return array_map( 'count', compact( 'inserted', 'updated', 'deleted' ) );
+	}
+
+	/**
+	 * @param Google_Service_Calendar_Event $event
+	 *
+	 * @return bool|string
+	 */
+	public function import_event( $event, $worker_id = 0 ) {
+		// Service ID is not important as we will use this record for blocking our time slots only
+		$service_id = appointments_get_services_min_id();
+
+		$current_gmt_time = current_time( 'timestamp', true );
+
+		$event_id = $event->getId();
+		$app = appointments_get_appointment_by_gcal_id( $event_id );
+
+		$event_start = $event->getStart();
+		$event_start_gmt_date = gmdate( 'Y-m-d H:i:s', strtotime( $event_start->dateTime ) );
+		$event_start_gmt_timestamp = strtotime( $event_start_gmt_date );
+		$event_start_date = get_date_from_gmt( $event_start_gmt_date );
+
+		$event_end = $event->getEnd();
+		$event_end_gmt_date = gmdate( 'Y-m-d H:i:s', strtotime( $event_end->dateTime ) );
+		$event_end_gmt_timestamp = strtotime( $event_end_gmt_date );
+
+		$event_updated = $event->getUpdated();
+		$event_updated_gmt_date = gmdate( 'Y-m-d H:i:s', strtotime( $event_updated ) );
+		$event_updated_date = get_date_from_gmt( $event_updated_gmt_date );
+
+		$duration = ( strtotime( $event_end_gmt_date ) - strtotime( $event_start_gmt_date ) ) / 60;
+
+		if ( $event_start_gmt_timestamp > $current_gmt_time && $event_end_gmt_timestamp > $current_gmt_time ) {
+			// We can add it
+			$args = array(
+				'service' => $service_id,
+				'worker' => $worker_id ? $worker_id : false,
+				'date' => strtotime( $event_start_date ),
+				'duration' => $duration,
+				'status' => 'reserved',
+				'gcal_ID' => $event_id,
+				'gcal_updated' => $event_updated_date,
+				'note' => $event->getSummary()
+			);
+
+			if ( ! $app ) {
+				// New Appointment
+				appointments_insert_appointment( $args );
+				return 'inserted';
+			}
+			else {
+				// Update Appointment
+				appointments_update_appointment( $app->ID, $args );
+				return 'updated';
+			}
+		}
+
+		return false;
+
 	}
 
 }

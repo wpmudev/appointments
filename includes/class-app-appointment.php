@@ -513,11 +513,12 @@ function appointments_update_appointment( $app_id, $args ) {
 	$updated_status = false;
 	if ( ! empty( $args['status'] ) ) {
 		// Yeah, maybe change status
-		$updated_status = appointments_update_appointment_status( $app_id, $args['status'] );
+		$update['status'] = $args['status'];
+		$update_wildcards[] = '%s';
 	}
 
 
-	if ( empty( $update ) && empty( $updated_status ) )
+	if ( empty( $update ) )
 		return false;
 
 	$result = false;
@@ -575,13 +576,7 @@ function appointments_update_appointment_status( $app_id, $new_status ) {
 
 	$table = appointments_get_table( 'appointments' );
 
-	$result = $wpdb->update(
-		$table,
-		array( 'status' => $new_status ),
-		array( 'ID' => $app_id ),
-		array( '%s' ),
-		array( '%d' )
-	);
+	$result = appointments_update_appointment( $app->ID, array( 'status' => $new_status ) );
 
 	if ( $result ) {
 		if ( 'removed' == $new_status ) {

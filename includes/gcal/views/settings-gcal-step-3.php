@@ -180,7 +180,7 @@
 		importButton.click( function( e ) {
 			e.preventDefault();
 
-			if ( confirm( '<?php _e( "Are you sure? Appointments in Appointments > Reserved by GCal that do not exist anymore in your calendar will be deleted.", "appointments" ); ?>' ) ) {
+			if ( confirm( '<?php _e( "Are you sure? Appointments in Appointments > Reserved by GCal that do not exist anymore in your calendar will be deleted (Only those with \'Reserved by GCal\' status)", "appointments" ); ?>' ) ) {
 				import_apps();
 			}
 
