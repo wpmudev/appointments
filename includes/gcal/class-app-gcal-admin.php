@@ -208,16 +208,20 @@ class Appointments_Google_Calendar_Admin {
 			return;
 		}
 
+		$general_is_connected = $this->gcal_api->is_connected();
+
 		$switched = $this->gcal_api->switch_to_worker( $profileuser->ID, false );
 		if ( ! $switched ) {
 			return;
 		}
 
+		$worker_is_connected = $this->gcal_api->is_connected();
+
 		?>
 		<h3><?php _e( 'Appointments+ Google Calendar API', 'appointments' ); ?></h3>
 		<?php
 
-		if ( ! $this->gcal_api->is_connected() ) {
+		if ( ! $general_is_connected || ! $worker_is_connected ) {
 			$auth_url = $this->gcal_api->api_manager->create_auth_url();
 			include_once( 'views/profile-gcal-not-connected.php' );
 		}

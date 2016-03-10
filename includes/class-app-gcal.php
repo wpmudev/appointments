@@ -266,6 +266,25 @@ class Appointments_Google_Calendar {
 			return false;
 		}
 
+		$options = appointments_get_options();
+
+		if ( ! $this->worker_id && empty( $options['gcal_access_code'] ) ) {
+			$options['gcal_access_code'] = '';
+			appointments_update_options( $options );
+			return false;
+		}
+
+		if ( empty( $options['gcal_client_id'] ) || empty( $options['gcal_client_secret'] ) ) {
+			// No client secret and no client ID, why do we have a token then?
+			$this->api_manager->set_access_token('{"access_token":0}');
+			$options['gcal_token'] = '';
+			$options['gcal_client_id'] = '';
+			$options['gcal_client_secret'] = '';
+			$options['gcal_access_code'] = '';
+			appointments_update_options( $options );
+			return false;
+		}
+
 		if ( ( ! isset( $access_token->access_token ) ) || ( isset( $access_token->access_token ) && ! $access_token->access_token ) ) {
 			return false;
 		}
