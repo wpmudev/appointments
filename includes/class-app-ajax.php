@@ -529,10 +529,14 @@ class Appointments_AJAX {
 		$name_check = apply_filters( "app_name_check", true, $name );
 		if (!$name_check) $appointments->json_die( 'name' );
 
-		$email = !empty($_POST['app_email']) && is_email($_POST['app_email'])
-			? $_POST['app_email']
-			: $user_email
-		;
+		$email = $user_email;
+		if ( ! empty( $_POST['app_email'] ) ) {
+			$_email = sanitize_email( $_POST['app_email'] );
+			if ( is_email( $_email ) ) {
+				$email = $_email;
+			}
+		}
+
 		if ($appointments->options["ask_email"] && !is_email($email)) $appointments->json_die( 'email' );
 
 		$phone = !empty($_POST['app_phone'])
