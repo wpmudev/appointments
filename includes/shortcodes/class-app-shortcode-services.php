@@ -185,7 +185,12 @@ class App_Shortcode_Services extends App_Shortcode {
 
 		// First remove these parameters and add them again to make wcalendar appear before js variable
 		$href = add_query_arg( array( "wcalendar"=>false, "app_provider_id" => false, "app_service_id" => false ) );
-		$href = apply_filters( 'app_service_href', add_query_arg( array( "wcalendar"=>$wcalendar, "app_service_id" => "__selected_service__" ), $href ) );
+		$href = add_query_arg( array( "wcalendar"=>$wcalendar, "app_service_id" => "__selected_service__" ), $href );
+		if ( isset( $_GET['app_provider_id'] ) ) {
+			$href = add_query_arg( "app_provider_id", $_GET['app_provider_id'], $href );
+		}
+
+		$href = apply_filters( 'app_service_href', $href );
 		$href = $this->_js_esc_url( $href ) . '#app_services_dropdown_title';
 
 
