@@ -1,3 +1,25 @@
+2016-03-11 - 1.7
+-------------------------------
+- Fix: Plugin was redirecting to Thank You Page even if the appointment reservation failed
+- Fix: Parse error:  T_PAAMAYIM_NEKUDOTAYIM
+- Fix: app_services shortcode not selecting the default service
+- Fix: app_my_appointments shortcode colspan issue
+- Fix: When making an Appointment, emails with a blank space at the end were not validated
+- Fix: Location shown in select box keeps defaulting to first option
+- Fix: Conflict with Google Analytics Dashboard for WP 
+- Fix: fatal error when GCal cannot delete an appointment
+- Fix: Fixed warning in monthly calendar widget
+- More case insensitive variable fixes for HipHop systmes
+- Other minor fixes
+- Enhancement: Google Calendar API Integration remade from scratch
+- Enhancement: Some little admin styles improvements.
+- Enhancement: Some improvements in appointments functions (insert, update and get) to allow more and better arguments
+- New: appointments_get_service_capacity() function
+- New: appointments_is_busy() function
+- New: appointments_get_month_appointments() function
+- New filter: appointments_insert_appointment_args
+- Some code refactoring
+
 2016-02-12 - 1.6
 -------------------------------
 - New: New setting to redirect to a Thank You page after appointment confirmation
