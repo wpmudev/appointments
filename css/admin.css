@@ -88,3 +88,16 @@ a.app-remove_break, a.app-remove_break:hover, a.app-remove_break:active { color:
 #dashboard_right_now a.app-pending:before {
 	color: #ffa26d;
 }
+
+.app-notice .app-dismiss {
+	color: #dc3232;
+	text-decoration: none;
+	float:right;
+}
+.app-notice .app-dismiss:hover {
+	color:red;
+}
+
+.app-notice .dashicons-dismiss {
+	font-size: 18px;
+}

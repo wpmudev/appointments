@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	public $version = "1.6";
+	public $version = "1.7";
 	public $db_version;
 
 	public $timetables = array();
@@ -207,13 +207,17 @@ class Appointments {
 			$this->flush_cache();
 		}
 
-		if ( $this->db_version == $this->version ) {
+		$db_version = get_option( 'app_db_version' );
+
+		if ( $db_version == $this->version ) {
 			return;
 		}
 
-		if ( $this->db_version != $this->version ) {
-			appointments_clear_cache();
-		}
+		appointments_clear_cache();
+
+		include_once( 'includes/class-app-upgrader.php' );
+		$upgrader = new Appointments_Upgrader( $this->version );
+		$upgrader->upgrade( $this->version );
 
 		update_option( 'app_db_version', $this->version );
 	}

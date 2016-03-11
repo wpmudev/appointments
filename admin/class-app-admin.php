@@ -15,12 +15,89 @@ class Appointments_Admin {
 		add_action( 'personal_options_update', array( $this, 'save_profile') );
 		add_action( 'edit_user_profile_update', array( $this, 'save_profile') );
 
+		add_action( 'admin_notices', array( $this, 'admin_notices_new' ) );
+
+		add_action( 'wp_ajax_appointments_dismiss_notice', array( $this, 'dismiss_notice' ) );
+
 		new Appointments_Admin_Dashboard_Widget();
-		//include( APP_PLUGIN_DIR . '/admin/admin-helpers.php' );
+		include( APP_PLUGIN_DIR . '/admin/admin-helpers.php' );
 	}
 
 	private function includes() {
 		include_once( appointments_plugin_dir() . 'admin/widgets/class-app-dashboard-widget.php' );
+	}
+
+	public function admin_notices_new() {
+		$notices = _appointments_get_admin_notices();
+		$noticed = false;
+		foreach ( $notices as $notice_slug => $notice ) {
+			if ( ! current_user_can( $notice['cap'] ) ) {
+				continue;
+			}
+
+			$user_dismissed_notices = _appointments_get_user_dismissed_notices( get_current_user_id() );
+
+			if ( $notice_text = _appointments_get_admin_notice( $notice_slug ) ) {
+				if ( in_array( $notice_slug, $user_dismissed_notices ) ) {
+					continue;
+				}
+
+				$noticed = true;
+				?>
+				<div class="error app-notice">
+					<p>
+						<strong>Appointments +:</strong> <?php echo $notice_text; ?>
+						<a class="app-dismiss" data-dismiss="<?php echo $notice_slug; ?>" href="#" title="<?php esc_attr_e( 'Dismiss notice', 'appointments' ); ?>"> <?php esc_html_e( 'Dismiss', 'appointments' ); ?><span class="dashicons dashicons-dismiss"></span></a>
+					</p>
+				</div>
+				<?php
+			}
+		}
+		if ( $noticed ) {
+			?>
+			<script>
+				jQuery( document).ready( function( $ ) {
+					function app_dismiss_notice( slug ) {
+						$.ajax({
+							url: ajaxurl,
+							data: {
+								notice: slug,
+								_wpnonce: '<?php echo wp_create_nonce( 'app-dismiss-notice' ); ?>',
+								action: 'appointments_dismiss_notice'
+							}
+						})
+							.always( function( data ) {
+								console.log(data);
+							});
+
+					}
+
+					$('.app-dismiss').click( function( e ) {
+						e.preventDefault();
+						$(this).parent().parent().hide();
+						app_dismiss_notice( $(this).data( 'dismiss' ) );
+					});
+				}( jQuery ) );
+			</script>
+			<?php
+		}
+	}
+
+	public function dismiss_notice() {
+		check_ajax_referer( 'app-dismiss-notice' );
+
+		$user_id = get_current_user_id();
+		if ( $user_id ) {
+			$dismissed_notices = _appointments_get_user_dismissed_notices( $user_id );
+
+			$notice_slug = $_REQUEST['notice'];
+			if ( _appointments_get_admin_notice( $notice_slug ) && ! in_array( $notice_slug, $dismissed_notices ) ) {
+				$dismissed_notices[] = $notice_slug;
+				update_user_meta( $user_id, 'app_dismissed_notices', $dismissed_notices );
+			}
+
+		}
+		die();
 	}
 
 	/**
