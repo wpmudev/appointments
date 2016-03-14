@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.7
+Version: 1.7.1
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	public $version = "1.7";
+	public $version = "1.7.1";
 	public $db_version;
 
 	public $timetables = array();
@@ -136,7 +136,7 @@ class Appointments {
 		// Caching
 		if ( 'yes' == @$this->options['use_cache'] ) {
 			add_filter( 'the_content', array( &$this, 'pre_content' ), 8 );				// Check content before do_shortcode
-			add_filter( 'the_content', array( &$this, 'post_content' ), 100 );			// Serve this later than do_shortcode
+			add_filter( 'the_content', array( &$this, 'post_ceontent' ), 100 );			// Serve this later than do_shortcode
 			add_action( 'wp_footer', array( &$this, 'save_script' ), 8 );				// Save script to database
 			add_action( 'permalink_structure_changed', array( &$this, 'flush_cache' ) );// Clear cache in case permalink changed
 			add_action( 'save_post', array( &$this, 'save_post' ), 10, 2 ); 			// Clear cache if it has shortcodes
@@ -167,6 +167,9 @@ class Appointments {
 		$this->cache_table 			= $wpdb->prefix . "app_cache";
 		// DB version
 		$this->db_version 			= get_option( 'app_db_version' );
+
+		// Set meta tables
+		$wpdb->app_appointmentmeta = appointments_get_table( 'appmeta' );
 
 		// Set log file location
 		$uploads = wp_upload_dir();

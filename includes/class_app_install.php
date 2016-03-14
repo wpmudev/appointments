@@ -31,6 +31,23 @@ class App_Installer {
 
 		global $wpdb;
 
+		$charset_collate = $wpdb->get_charset_collate();
+
+		$max_index_length = 191;
+
+		$appmeta = "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}app_appointmentmeta` (
+  meta_id bigint(20) unsigned NOT NULL auto_increment,
+  app_appointment_id bigint(20) unsigned NOT NULL default '0',
+  meta_key varchar(255) default NULL,
+  meta_value longtext,
+  PRIMARY KEY  (meta_id),
+  KEY app_appointment_id (app_appointment_id),
+  KEY meta_key (meta_key($max_index_length))
+) $charset_collate;";
+
+		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+		$wpdb->query( $appmeta );
+
 		$sql = "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}app_appointments` (
 		`ID` bigint(20) unsigned NOT NULL auto_increment,
 		`created` datetime,
@@ -237,6 +254,7 @@ class App_Installer {
 		$wpdb->query( "DROP TABLE " . $wpdb->prefix . "app_services" );
 		$wpdb->query( "DROP TABLE " . $wpdb->prefix . "app_workers" );
 		$wpdb->query( "DROP TABLE " . $wpdb->prefix . "app_appointments" );
+		$wpdb->query( "DROP TABLE " . $wpdb->prefix . "app_appointmentmeta" );
 		$wpdb->query( "DROP TABLE " . $wpdb->prefix . "app_transactions" );
 		$wpdb->query( "DROP TABLE " . $wpdb->prefix . "app_cache" );
 

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Class App_Activate_Test
+ *
+ * @group activate
+ */
 class App_Activate_Test extends App_UnitTestCase {
 
 	function test_activate() {
@@ -7,6 +12,7 @@ class App_Activate_Test extends App_UnitTestCase {
 
 		$tables = array(
 			$wpdb->prefix . 'app_appointments',
+			$wpdb->prefix . 'app_appointmentmeta',
 			$wpdb->prefix . 'app_transactions',
 			$wpdb->prefix . 'app_working_hours',
 			$wpdb->prefix . 'app_exceptions',

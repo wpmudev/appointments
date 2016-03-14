@@ -1259,3 +1259,15 @@ function appointments_get_gcal_ids( $worker_id = false ) {
 
 	return $current_gcal_event_ids;
 }
+
+function appointments_get_appointment_meta( $app_id, $meta_key ) {
+	return get_metadata( 'app_appointment', $app_id, $meta_key, true );
+}
+
+function appointments_update_appointment_meta( $app_id, $meta_key, $meta_value ) {
+	return update_metadata( 'app_appointment', $app_id, $meta_key, $meta_value );
+}
+
+function appointments_delete_appointment_meta( $app_id, $meta_key ) {
+	return delete_metadata( 'app_appointment', $app_id, $meta_key );
+}
