@@ -149,18 +149,23 @@ function appointments_get_appointment_by_gcal_id( $gcal_id ) {
 	global $wpdb;
 
 	$table = appointments_get_table( 'appointments' );
-	$app = $wpdb->get_row(
-		$wpdb->prepare(
-			"SELECT * FROM $table WHERE gcal_ID = %d",
-			$gcal_id
-		)
-	);
 
-	if ( ! $app ) {
-		return false;
+	$_app = wp_cache_get( $gcal_id, 'app_appointments_by_gcal' );
+	if ( false === $_app ) {
+		$_app = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT * FROM $table WHERE gcal_ID = %s",
+				$gcal_id
+			)
+		);
+
+		if ( ! $_app ) {
+			return false;
+		}
 	}
 
-	return appointments_get_appointment( $app );
+	wp_cache_add( $gcal_id, $_app, 'app_appointments_by_gcal' );
+	return appointments_get_appointment( $_app );
 }
 
 /**
@@ -1013,12 +1018,16 @@ function appointments_clear_appointment_cache( $app_id = false ) {
 
 	if ( $app_id ) {
 		wp_cache_delete( $app_id, 'app_appointments' );
+		wp_cache_delete( $app_id, 'app_appointments_by_gcal' );
 	}
 	else {
 		$table = appointments_get_table( 'appointments' );
-		$ids = $wpdb->get_col( "SELECT ID FROM $table" );
-		foreach ( $ids as $id ) {
-			wp_cache_delete( $id, 'app_appointments' );
+		$apps = $wpdb->get_results( "SELECT ID, gcal_ID FROM $table" );
+		foreach ( $apps as $app ) {
+			wp_cache_delete( $app->ID, 'app_appointments' );
+			if ( $app->gcal_ID ) {
+				wp_cache_delete( $app->ID, 'app_appointments_by_gcal' );
+			}
 		}
 	}
 
@@ -1225,4 +1234,28 @@ function appointments_get_unsent_appointments( $hour, $type = 'user' ) {
 	}
 
 	return $apps;
+}
+
+/**
+ * Return a list of Google Calendar Event IDs saved on Database
+ *
+ * @param integer|boolean $worker_id Filter by Worker ID
+ *
+ * @return array
+ */
+function appointments_get_gcal_ids( $worker_id = false ) {
+	global $wpdb;
+
+	$table = appointments_get_table( 'appointments' );
+	$query = "SELECT gcal_ID FROM $table WHERE gcal_ID IS NOT NULL";
+	if ( false !== $worker_id ) {
+		$query .= $wpdb->prepare( " AND worker = %d", $worker_id );
+	}
+	$current_gcal_event_ids = $wpdb->get_col( $query );
+
+	if ( ! $current_gcal_event_ids ) {
+		$current_gcal_event_ids = array();
+	}
+
+	return $current_gcal_event_ids;
 }

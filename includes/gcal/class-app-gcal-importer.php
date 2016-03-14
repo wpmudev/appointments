@@ -63,8 +63,6 @@ class Appointments_Google_Calendar_Importer {
 	 * @return array|WP_Error
 	 */
 	function import( $worker_id = false ) {
-		global $wpdb;
-
 		if ( $worker_id && ! appointments_get_worker( $worker_id ) ) {
 			return array(
 				'inserted' => 0,
@@ -78,16 +76,7 @@ class Appointments_Google_Calendar_Importer {
 			return $events;
 		}
 
-		$table = appointments_get_table( 'appointments' );
-		$query = "SELECT gcal_ID FROM $table WHERE gcal_ID IS NOT NULL";
-		if ( $worker_id ) {
-			$query .= $wpdb->prepare( " AND worker = %d", $worker_id );
-		}
-		$current_gcal_event_ids = $wpdb->get_col( $query );
-
-		if ( ! $current_gcal_event_ids ) {
-			$current_gcal_event_ids = array();
-		}
+		$current_gcal_event_ids = appointments_get_gcal_ids( $worker_id );
 
 		$updated = array();
 		$inserted = array();
@@ -155,9 +144,8 @@ class Appointments_Google_Calendar_Importer {
 			$args = array(
 				'service' => $service_id,
 				'worker' => $worker_id ? $worker_id : false,
-				'date' => strtotime( $event_start_date ),
+				'datetime' => strtotime( $event_start_date ),
 				'duration' => $duration,
-				'status' => 'reserved',
 				'gcal_ID' => $event_id,
 				'gcal_updated' => $event_updated_date,
 				'note' => $event->getSummary()
@@ -165,6 +153,7 @@ class Appointments_Google_Calendar_Importer {
 
 			if ( ! $app ) {
 				// New Appointment
+				$args['status'] = 'reserved';
 				appointments_insert_appointment( $args );
 				return 'inserted';
 			}
