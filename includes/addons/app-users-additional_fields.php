@@ -159,8 +159,16 @@ class App_Users_AdditionalFields {
 
 			$form .= '<label>' . 
 				"<span class='title'>{$label}</span>" .
-				"<span class='input-text-wrap'><input type='text' class='widefat appointments-field-entry' data-name='{$name}' {$disabled} value='{$value}' /></span>" .
-			'</label>';
+				"<span class='input-text-wrap'>";
+
+			if ( 'checkbox' === $field['type'] ) {
+				$form .= "<input type='checkbox' class='appointments-field-entry' data-name='{$name}' {$disabled} " . checked( '1', $value, false ) . " />";
+			}
+			else {
+				$form .= "<input type='text' class='widefat appointments-field-entry' data-name='{$name}' {$disabled} value='{$value}' />";
+			}
+
+			$form .= '</span></label>';
 		}
 		if (!$is_editable) return $form;
 
