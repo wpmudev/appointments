@@ -71,7 +71,7 @@ class App_Shortcode_Services extends App_Shortcode {
 		if ( ! trim( $args['order_by'] ) ) {
 			$args['order_by'] = 'ID';
 		}
-		
+
 		if ( $args['worker'] && appointments_get_worker( $args['worker'] ) ) {
 			$services = appointments_get_worker_services( $args['worker'] );
 

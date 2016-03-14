@@ -64,6 +64,7 @@ $columns['date'] = __('Date/Time','appointments');
 $columns['service'] = __('Service','appointments');
 $columns['worker'] = __('Provider','appointments');
 $columns['status'] = __('Status','appointments');
+$columns = apply_filters( 'appointments_my_appointments_list_columns', $columns );
 
 $pag_args = array(
 	'base' => add_query_arg( 'paged', '%#%' ),
@@ -170,6 +171,7 @@ if ( true || isset( $_GET["type"] ) && 'removed' == $_GET["type"] ) {
 								}
 							?>
 						</td>
+						<?php do_action( 'appointments_my_appointments_list_row', $app ); ?>
 					</tr>
 					<?php
 
