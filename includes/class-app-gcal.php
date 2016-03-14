@@ -92,8 +92,6 @@ class Appointments_Google_Calendar {
 		$this->add_appointments_hooks();
 
 		$this->setup_cron();
-
-		add_action( 'shutdown', array( $this, 'maybe_sync' ) );
 	}
 
 	public function add_appointments_hooks() {
