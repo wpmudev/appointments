@@ -1,3 +1,15 @@
+2016-03-11 - 1.7.1
+-------------------------------
+- Fix: app_services shortcode: order_by attribute doesn't seem to take any effect
+- Fix: Custom checkbox field shows as a text field on backend
+- Fix: Google Calendar API was not deleting appointments that were deleted from GCal
+- Fix: Updating schedule in user profiles not working when the user editing was not the same than the edited one
+- Fix: Search client feature not returning any results
+- Enhance: Improved Appointments screen UX
+- New: Added new hooks in My APpointments list
+- New: Appointments meta table
+- New: Added get/delete/update appointments meta functions
+
 2016-03-11 - 1.7
 -------------------------------
 - Fix: Plugin was redirecting to Thank You Page even if the appointment reservation failed
