@@ -900,6 +900,7 @@ class App_Get_Appointments_Test extends App_UnitTestCase {
 	function test_get_appointments_search() {
 		$worker_id_1 = $this->factory->user->create_object( $this->factory->user->generate_args() );
 		$user_id = $this->factory->user->create_object( $this->factory->user->generate_args() );
+		$user_id_2 = $this->factory->user->create_object( $this->factory->user->generate_args() );
 
 		$service_args = array(
 			'name' => 'My Service',
@@ -935,6 +936,7 @@ class App_Get_Appointments_Test extends App_UnitTestCase {
 		$args = array(
 			'service' => $service_id_1,
 			'worker' => $worker_id_1,
+			'user' => $user_id_2,
 			'status' => 'pending',
 			'created' => '2016-02-11 23:00:00'
 		);
@@ -945,6 +947,11 @@ class App_Get_Appointments_Test extends App_UnitTestCase {
 		$this->assertCount( 1, $apps );
 		$apps = appointments_get_appointments( array( 's' => 'name' ) );
 		$this->assertCount( 2, $apps );
+
+		// Search by user
+		$user = get_userdata( $user_id_2 );
+		$apps = appointments_get_appointments( array( 's' => $user->user_login ) );
+		$this->assertCount( 1, $apps );
 	}
 
 	function test_get_appointments_order() {

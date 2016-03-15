@@ -782,7 +782,9 @@ function appointments_get_appointments( $args = array() ) {
 
 				$where_services[] = absint( $service_id );
 			}
-			$where[] = 'service IN (' . implode( ',', $where_services ) . ')';
+			if ( ! empty( $where_services ) ) {
+				$where[] = 'service IN (' . implode( ',', $where_services ) . ')';
+			}
 		}
 
 		if ( ! empty( $args['date_query'] ) && is_array( $args['date_query'] ) ) {
@@ -841,7 +843,10 @@ function appointments_get_appointments( $args = array() ) {
 			if ( $args['s'] ) {
 				// Search by user name
 				$where[] = $wpdb->prepare(
-					"name LIKE %s OR email LIKE %s OR ID IN ( SELECT ID FROM $wpdb->users WHERE user_login LIKE %s )",
+					"( name LIKE %s OR email LIKE %s OR user IN ( SELECT ID FROM $wpdb->users WHERE user_login LIKE %s OR user_nicename LIKE %s OR display_name LIKE %s OR user_email LIKE %s ) )",
+					'%' . $args['s'] . '%',
+					'%' . $args['s'] . '%',
+					'%' . $args['s'] . '%',
 					'%' . $args['s'] . '%',
 					'%' . $args['s'] . '%',
 					'%' . $args['s'] . '%'
@@ -1031,7 +1036,6 @@ function appointments_clear_appointment_cache( $app_id = false ) {
 		}
 	}
 
-	wp_cache_delete( 'app_count_appointments' );
 	wp_cache_delete( 'app_get_appointments_filtered_by_service' );
 	wp_cache_delete( 'app_get_appointments' );
 	wp_cache_delete( 'app_get_month_appointments' );
@@ -1172,23 +1176,18 @@ function _appointments_parse_date_query( $date_query = array() ) {
 	return $date_query;
 }
 
-
-function appointments_count_appointments() {
-	global $wpdb;
-
-	$counts = wp_cache_get( 'app_count_appointments' );
-
-	if ( false === $counts ) {
-		$table = appointments_get_table( 'appointments' );
-
-		$results = $wpdb->get_results( "SELECT status, COUNT(*) num_apps FROM $table GROUP BY status", ARRAY_A );
-		$counts = array_fill_keys( array_keys( appointments_get_statuses() ), 0 );
-
-		foreach ( $results as $row ) {
-			$counts[ $row['status'] ] = absint( $row['num_apps'] );
-		}
-
-		wp_cache_set( 'app_count_appointments', $counts );
+/**
+ * Return the number of Appointments for every status
+ *
+ * @param array $args See appointments_get_appointments()
+ *
+ * @return array
+ */
+function appointments_count_appointments( $args = array() ) {
+	$apps = appointments_get_appointments( $args );
+	$counts = array_fill_keys( array_keys( appointments_get_statuses() ), 0 );
+	foreach ( $apps as $app ) {
+		$counts[ $app->status ]++;
 	}
 
 
@@ -1199,7 +1198,7 @@ function appointments_count_appointments() {
 	 *
 	 * @param array $counts  An array containing the counts by status.
 	 */
-	return apply_filters( 'appointments_count_appontments', $counts );
+	return apply_filters( 'appointments_count_appointments', $counts, $args );
 }
 
 /**

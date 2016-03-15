@@ -6,30 +6,42 @@ wp_reset_vars( array('type') );
 if(empty($type)) $type = 'active';
 
 $filter = array();
+$args = array();
 
 if(isset($_GET['s'])) {
 	$s = stripslashes($_GET['s']);
 	$filter['s'] = $s;
+	$args['s'] = $s;
 } else {
 	$s = '';
 }
 
-if(isset($_GET['app_service_id']))
+if ( isset( $_GET['app_service_id'] ) ) {
 	$service_id = $_GET['app_service_id'];
-else
+	$args['service'] = $service_id;
+} else {
 	$service_id = '';
+}
 
-if(isset($_GET['app_provider_id']))
+if ( isset( $_GET['app_provider_id'] ) ) {
 	$worker_id = $_GET['app_provider_id'];
-else
+	if ( appointments_is_worker( $worker_id ) ) {
+		$args['worker'] = $worker_id;
+	}
+
+} else {
 	$worker_id = '';
+}
 
-if(isset($_GET['app_order_by']))
+if ( isset( $_GET['app_order_by'] ) ) {
 	$order_by = $_GET['app_order_by'];
-else
+} else {
 	$order_by = '';
+}
 
-$status_count = appointments_count_appointments();
+
+
+$status_count = appointments_count_appointments( $args );
 ?>
 <div id="wpbody-content">
 <div class='wrap'>
@@ -109,10 +121,11 @@ $status_count = appointments_count_appointments();
 	});
 	</script>
 
-	<div class="alignright">
+	<div class="alignleft">
 
-		<div class="alignleft actions">
-			<form method="get" action="<?php echo add_query_arg('page', 'appointments'); ?>" >
+		<form method="get" class="alignleft actions" action="<?php echo add_query_arg('page', 'appointments'); ?>" >
+			<div class="alignleft">
+
 				<input type="hidden" value="appointments" name="page" />
 				<input type="hidden" value="<?php echo $type?>" name="type" />
 				<input type="hidden" value="<?php echo $service_id?>" name="app_service_id" />
@@ -125,71 +138,66 @@ $status_count = appointments_count_appointments();
 					<option value="start_DESC" <?php selected( $order_by, 'start_DESC' ); ?>><?php _e('Appointment date (Closest last)','appointments'); ?></option>
 				</select>
 				<input type="submit" class="button" value="<?php _e('Sort','appointments'); ?>" />
-			</form>
-		</div>
 
-		<div class="alignleft actions">
-			<form method="get" action="<?php echo add_query_arg('page', 'appointments'); ?>" >
-				<input type="hidden" value="appointments" name="page" />
-				<input type="hidden" value="<?php echo $type?>" name="type" />
-				<input type="hidden" value="<?php echo $worker_id?>" name="app_provider_id" />
+			</div>
+		</form>
+
+		<form method="get" class="alignleft actions" action="<?php echo add_query_arg('page', 'appointments'); ?>" >
+			<input type="hidden" value="appointments" name="page" />
+			<input type="hidden" value="<?php echo $type?>" name="type" />
+			<input type="hidden" value="<?php echo $worker_id?>" name="app_provider_id" />
+			<input type="hidden" value="<?php echo $service_id?>" name="app_service_id" />
+
+			<div class="alignleft">
+
 				<select name="app_service_id" style='float:none;'>
 					<option value=""><?php _e('Filter by service','appointments'); ?></option>
-				<?php
-				$services = appointments_get_services();
-				if ( $services ) {
-					foreach ( $services as $service ) {
-						if ( $service_id == $service->ID )
-							$selected = " selected='selected' ";
-						else
-							$selected = "";
-						echo '<option '.$selected.' value="' . esc_attr($service->ID) . '">'. $appointments->get_service_name( $service->ID ) .'</option>';
+					<?php
+					$services = appointments_get_services();
+					if ( $services ) {
+						foreach ( $services as $service ) {
+							if ( $service_id == $service->ID )
+								$selected = " selected='selected' ";
+							else
+								$selected = "";
+							echo '<option '.$selected.' value="' . esc_attr($service->ID) . '">'. $appointments->get_service_name( $service->ID ) .'</option>';
+						}
 					}
-				}
-				?>
+					?>
 				</select>
-				<input type="submit" class="button" value="<?php _e('Filter','appointments'); ?>" />
-			</form>
-		</div>
-
-		<div class="alignleft actions">
-			<form method="get" action="<?php echo add_query_arg('page', 'appointments'); ?>" >
-				<input type="hidden" value="appointments" name="page" />
-				<input type="hidden" value="<?php echo $type?>" name="type" />
-				<input type="hidden" value="<?php echo $service_id?>" name="app_service_id" />
+			</div>
+			<div class="alignleft">
 				<select name="app_provider_id" style='float:none;'>
 					<option value=""><?php _e('Filter by service provider','appointments'); ?></option>
-				<?php
-				$workers = appointments_get_workers();
-				if ( $workers ) {
-					foreach ( $workers as $worker ) {
-						if ( $worker_id == $worker->ID )
-							$selected = " selected='selected' ";
-						else
-							$selected = "";
-						echo '<option '.$selected.' value="' . esc_attr($worker->ID) . '">'. appointments_get_worker_name( $worker->ID ) .'</option>';
+					<?php
+					$workers = appointments_get_workers();
+					if ( $workers ) {
+						foreach ( $workers as $worker ) {
+							if ( $worker_id == $worker->ID )
+								$selected = " selected='selected' ";
+							else
+								$selected = "";
+							echo '<option '.$selected.' value="' . esc_attr($worker->ID) . '">'. appointments_get_worker_name( $worker->ID ) .'</option>';
+						}
 					}
-				}
-				?>
+					?>
 				</select>
 				<input type="submit" class="button" value="<?php _e('Filter','appointments'); ?>" />
-			</form>
+			</div>
+		</form>
 
-		</div>
+		<form method="get" class="alignright actions" action="<?php echo add_query_arg('page', 'appointments'); ?>" >
+			<div class="alignright">
 
-		<div class="alignright actions">
-			<form method="get" action="<?php echo add_query_arg('page', 'appointments'); ?>" >
 				<input type="hidden" value="appointments" name="page" />
 				<input type="hidden" value="<?php echo $type?>" name="type" />
 				<input type="hidden" value="" name="app_service_id" />
 				<input type="hidden" value="" name="app_provider_id" />
 				<input type="hidden" value="" name="app_order_by" />
 				<input type="hidden" value="" name="s" />
-				<input type="submit" class="button" value="<?php _e('Reset sort order and filters','appointments'); ?>" />
-			</form>
-
-		</div>
-
+				<input type="submit" class="button" value="<?php _e('Reset filters','appointments'); ?>" />
+			</div>
+		</form>
 	</div>
 </div>
 
@@ -205,39 +213,39 @@ $status_count = appointments_count_appointments();
 		<input type="submit" id="app-export-selected" class="app-export_trigger button-secondary" value="<?php esc_attr_e(__('Export selected Appointments','appointments')); ?>" />
 		<input type="submit" id="app-export-type" class="app-export_trigger button-primary" value="<?php esc_attr_e(sprintf(__('Export %s Appointments','appointments'), App_Template::get_status_name($type))); ?>" data-type="<?php esc_attr_e($type); ?>" />
 		<input type="submit" id="app-export-all" class="app-export_trigger button-secondary" value="<?php _e('Export all Appointments','appointments') ?>" title="<?php _e('If you click this button a CSV file containing ALL appointment records will be saved on your PC','appointments') ?>" />
-<script>
-(function ($) {
-function toggle_selected_export () {
-	var $sel = $(".column-delete.app-check-column :checked");
-	if ($sel.length) $("#app-export-selected").show();
-	else $("#app-export-selected").hide();
-}
-$(document).on("click", ".app-export_trigger", function () {
-	var $me = $(this),
-		$form = $me.closest("form"),
-		$sel = $(".column-delete.app-check-column :checked"),
-		$type = $form.find("#app-export_type")
-	;
-	if ($me.is("#app-export-selected") && $sel.length) {
-		$sel.each(function () {
-			$form.append("<input type='hidden' name='app[]' value='" + $(this).val() + "' />");
+		<script>
+		(function ($) {
+		function toggle_selected_export () {
+			var $sel = $(".column-delete.app-check-column :checked");
+			if ($sel.length) $("#app-export-selected").show();
+			else $("#app-export-selected").hide();
+		}
+		$(document).on("click", ".app-export_trigger", function () {
+			var $me = $(this),
+				$form = $me.closest("form"),
+				$sel = $(".column-delete.app-check-column :checked"),
+				$type = $form.find("#app-export_type")
+			;
+			if ($me.is("#app-export-selected") && $sel.length) {
+				$sel.each(function () {
+					$form.append("<input type='hidden' name='app[]' value='" + $(this).val() + "' />");
+				});
+				$type.val("selected");
+				return true;
+			} else if ($me.is("#app-export-type")) {
+				$form.append("<input type='hidden' name='status' value='" + $me.attr("data-type") + "' />");
+				$type.val("type");
+				return true;
+			} else if ($me.is("#app-export-all")) {
+				$type.val("all");
+				return true;
+			}
+			return false;
 		});
-		$type.val("selected");
-		return true;
-	} else if ($me.is("#app-export-type")) {
-		$form.append("<input type='hidden' name='status' value='" + $me.attr("data-type") + "' />");
-		$type.val("type");
-		return true;
-	} else if ($me.is("#app-export-all")) {
-		$type.val("all");
-		return true;
-	}
-	return false;
-});
-$(document).on("change", ".column-delete.app-check-column input, .app-column-delete input", toggle_selected_export);
-$(toggle_selected_export);
-})(jQuery);
-</script>
+		$(document).on("change", ".column-delete.app-check-column input, .app-column-delete input", toggle_selected_export);
+		$(toggle_selected_export);
+		})(jQuery);
+		</script>
 		<?php do_action('app-export-export_form_end'); ?>
 	</form>
 
