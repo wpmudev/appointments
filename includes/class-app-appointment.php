@@ -1074,6 +1074,13 @@ function appointments_delete_appointment( $app_id ) {
 	$table = appointments_get_table( 'appointments' );
 	$result = $wpdb->query( $wpdb->prepare( "DELETE FROM $table WHERE ID = %d", $app_id ) );
 
+	$meta_table = appointments_get_table( 'appmeta' );
+	$meta_ids = $wpdb->get_col( $wpdb->prepare( "SELECT meta_id FROM $meta_table WHERE app_appointment_id = %d ", $app_id ));
+	foreach ( $meta_ids as $mid ) {
+		delete_metadata_by_mid( 'app_appointment', $mid );
+	}
+
+
 	appointments_clear_appointment_cache( $app_id );
 
 	/**

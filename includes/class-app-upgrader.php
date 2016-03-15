@@ -50,5 +50,13 @@ class Appointments_Upgrader {
 
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 		$wpdb->query( $appmeta );
+
+		// Move the Apps data to meta
+		$data = get_option( 'appointments_data', array() );
+		foreach ( $data as $app_id => $additional_fields ) {
+			if ( appointments_get_appointment( $app_id ) ) {
+				appointments_update_appointment_meta( $app_id, 'additional_fields', $additional_fields );
+			}
+		}
 	}
 }

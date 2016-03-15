@@ -44,7 +44,7 @@ class App_Users_AdditionalFields {
 		add_action('wpmudev_appointments_update_appointment_status', array($this, 'manual_cleanup_data'), 10, 2);
 		add_action('app_bulk_status_change', array($this, 'bulk_cleanup_data'));
 		// Delete filters
-		add_action('app_deleted', array($this, 'permanently_deleted_cleanup'));
+		add_action('appointments_delete_appointment', array($this, 'permanently_deleted_cleanup'));
 
 		// Display additional notes
 		add_filter('app-appointments_list-edit-client', array($this, 'display_inline_data'), 10, 2);
@@ -513,23 +513,22 @@ $(function () {
 	}
 
 	private function _add_appointment_meta ($appointment_id, $data) {
-		$appointments_data = get_option('appointments_data', array());
-		if (!empty($appointment_id)) $appointments_data[$appointment_id] = $data;
-		return update_option("appointments_data", $appointments_data);
+		if ( ! empty( $appointment_id ) ) {
+			appointments_update_appointment_meta( $appointment_id, 'additional_fields', $data );
+		}
 	}
 
 	private function _remove_appointment_meta ($appointment_id) {
-		$appointments_data = get_option('appointments_data', array());
-		if (!empty($appointment_id) && !empty($appointments_data[$appointment_id])) unset($appointments_data[$appointment_id]);
-		update_option("appointments_data", $appointments_data);
+		appointments_delete_appointment_meta( $appointment_id, 'additional_fields' );
 	}
 
 	private function _get_appointment_meta ($appointment_id) {
-		$appointments_data = get_option('appointments_data', array());
-		return empty($appointments_data[$appointment_id])
-			? array()
-			: $appointments_data[$appointment_id]
-		;
+		$app_data = appointments_get_appointment_meta( $appointment_id, 'additional_fields' );
+		if ( empty( $app_data ) ) {
+			return array();
+		}
+
+		return $app_data;
 	}
 
 }
