@@ -218,7 +218,7 @@ class Appointments_Google_Calendar_Admin {
 		$worker_is_connected = $this->gcal_api->is_connected();
 
 		?>
-		<h3><?php _e( 'Appointments+ Google Calendar API', 'appointments' ); ?></h3>
+		<h3><?php _e( 'Appointments +: Google Calendar API', 'appointments' ); ?></h3>
 		<?php
 
 		if ( ! $general_is_connected || ! $worker_is_connected ) {
