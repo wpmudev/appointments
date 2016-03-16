@@ -217,10 +217,9 @@ class Appointments {
 		appointments_clear_cache();
 
 		include_once( 'includes/class-app-upgrader.php' );
-		$upgrader = new Appointments_Upgrader( $this->version );
-		$upgrader->upgrade( $this->version );
 
-		update_option( 'app_db_version', $this->version );
+		$upgrader = new Appointments_Upgrader( $this->version );
+		$upgrader->upgrade( $db_version, $this->version );
 	}
 
 

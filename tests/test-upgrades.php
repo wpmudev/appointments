@@ -7,6 +7,14 @@
  */
 class App_Upgrades_Test extends App_UnitTestCase {
 
+	function test_upgrade_1_7() {
+		update_option( 'app_db_version', '1.6.5' );
+		delete_option( 'app_admin_notices' );
+		appointments()->maybe_upgrade();
+		$this->assertArrayHasKey( '1-7-gcal', get_option( 'app_admin_notices' ) );
+		$this->assertEquals( get_option( 'app_db_version' ), appointments()->version );
+	}
+
 	function test_upgrade_1_7_1() {
 		update_option( 'app_db_version', '1.7' );
 
@@ -72,6 +80,8 @@ class App_Upgrades_Test extends App_UnitTestCase {
 		$this->assertEquals( $app_1_fields, $data[ $app_id_1 ] );
 		$this->assertEquals( $app_2_fields, $data[ $app_id_2 ] );
 		$this->assertEquals( $app_3_fields, '' );
+
+		$this->assertEquals( get_option( 'app_db_version' ), appointments()->version );
 	}
 
 	/**

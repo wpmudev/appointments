@@ -7,15 +7,18 @@
  */
 class Appointments_Upgrader {
 
-	public function __construct() {
+	public function upgrade( $saved_version, $new_version ) {
 
-	}
-
-	public function upgrade( $version ) {
-		$version_slug = str_replace( array( '.', '-' ), '_', $version );
-		if ( method_exists( $this, 'upgrade_' . $version_slug ) ) {
-			call_user_func( array( $this, 'upgrade_' . $version_slug ) );
+		if ( version_compare( $saved_version, '1.7', '<' ) ) {
+			$this->upgrade_1_7();
 		}
+
+		if ( version_compare( $saved_version, '1.7.1', '<' ) ) {
+			$this->upgrade_1_7_1();
+		}
+
+		update_option( 'app_db_version', $new_version );
+
 	}
 
 	private function upgrade_1_7() {
