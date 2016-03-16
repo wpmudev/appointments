@@ -116,7 +116,7 @@ class Appointments_Google_Calendar {
 		if ( 'sync' === $this->get_api_mode() ) {
 			$scheduled = wp_next_scheduled( 'appointments_gcal_sync' );
 			if ( ! $scheduled ) {
-				wp_schedule_event( current_time( 'timestamp' ), 'app-gcal', 'appointments_gcal_sync' );
+				wp_schedule_event( current_time( 'timestamp' ) + 600, 'app-gcal', 'appointments_gcal_sync' );
 			}
 		}
 		else {

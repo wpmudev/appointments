@@ -3094,6 +3094,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		//  Run this code not before 10 mins
 		if ( ( time() - get_option( "app_last_update" ) ) < apply_filters( 'app_update_time', 600 ) )
 			return;
+
 		$this->remove_appointments();
 		$this->send_reminder();
 		$this->send_reminder_worker();

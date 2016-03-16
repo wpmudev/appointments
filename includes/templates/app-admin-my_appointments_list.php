@@ -25,11 +25,11 @@ if ( isset( $_GET['app_provider_id'] ) && $_GET['app_provider_id'] ) {
 	$args['worker'] = $_GET['app_provider_id'];
 }
 
-$args['order']   = 'DESC';
 if ( isset( $_GET['app_order_by']) && $_GET['app_order_by'] ) {
 	$_orderby        = explode( '_', $_GET['app_order_by'] );
 	if ( count( $_orderby ) == 1 ) {
-		$args['order']   = $_orderby[0];
+		$args['orderby']   = $_orderby[0];
+		$args['order'] = 'ASC';
 	}
 	elseif ( count( $_orderby ) == 2 ) {
 		$args['order']   = $_orderby[1];
