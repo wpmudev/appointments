@@ -136,7 +136,7 @@ class Appointments {
 		// Caching
 		if ( 'yes' == @$this->options['use_cache'] ) {
 			add_filter( 'the_content', array( &$this, 'pre_content' ), 8 );				// Check content before do_shortcode
-			add_filter( 'the_content', array( &$this, 'post_ceontent' ), 100 );			// Serve this later than do_shortcode
+			add_filter( 'the_content', array( &$this, 'post_content' ), 100 );			// Serve this later than do_shortcode
 			add_action( 'wp_footer', array( &$this, 'save_script' ), 8 );				// Save script to database
 			add_action( 'permalink_structure_changed', array( &$this, 'flush_cache' ) );// Clear cache in case permalink changed
 			add_action( 'save_post', array( &$this, 'save_post' ), 10, 2 ); 			// Clear cache if it has shortcodes
