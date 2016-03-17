@@ -92,6 +92,10 @@ class Appointments_Google_Calendar {
 		$this->add_appointments_hooks();
 
 		$this->setup_cron();
+
+		if ( isset( $_GET['gcal-sync-now'] ) && is_admin() && App_Roles::current_user_can( 'manage_options', App_Roles::CTX_STAFF ) ) {
+			$this->maybe_sync();
+		}
 	}
 
 	public function add_appointments_hooks() {

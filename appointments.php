@@ -988,8 +988,10 @@ class Appointments {
 		if ( $message ) {
 			$to_put = '<b>['. date_i18n( $this->datetime_format, $this->local_time ) .']</b> '. $message;
 			// Prevent multiple messages with same text and same timestamp
-			if ( !file_exists( $this->log_file ) || strpos( @file_get_contents( $this->log_file ), $to_put ) === false )
+			if ( !file_exists( $this->log_file ) || strpos( @file_get_contents( $this->log_file ), $to_put ) === false ) {
 				@file_put_contents( $this->log_file, $to_put . chr(10). chr(13), FILE_APPEND );
+			}
+
 		}
 	}
 
