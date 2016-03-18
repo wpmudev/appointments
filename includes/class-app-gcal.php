@@ -38,6 +38,7 @@ class Appointments_Google_Calendar {
 
 		add_action( 'appointments_gcal_sync', array( $this, 'maybe_sync' ) );
 
+		add_filter( 'app-appointments_list-edit-client', array( $this, 'edit_inline_gcal_fields' ), 10, 2 );
 		$options = appointments_get_options();
 
 		if ( isset( $options['gcal_api_mode'] ) ) {
@@ -136,6 +137,38 @@ class Appointments_Google_Calendar {
 		return $schedules;
 	}
 
+	public function edit_inline_gcal_fields( $html, $app ) {
+		if ( ! $app->gcal_ID ) {
+			return $html;
+		}
+
+		$show = false;
+		$description = '';
+		if ( $app->worker && $this->switch_to_worker( $app->worker ) ) {
+			// Looks like it's in worker's calendar
+			$description = appointments_get_appointment_meta( $app->ID, 'gcal_description' );
+			if ( ! $description ) {
+				$description = '';
+			}
+			$show = true;
+		}
+		elseif ( $this->is_connected() && $this->api_manager->get_calendar() ) {
+			// General calendar
+			$show = true;
+			$description = appointments_get_appointment_meta( $app->ID, 'gcal_description' );
+			if ( ! $description ) {
+				$description = '';
+			}
+		}
+
+		if ( $show ) {
+			$html .= '<label class="title">'.__( 'Google Calendar Description', 'appointments' );
+			$html .= '<textarea class="widefat" rows="10" disabled="disabled">' . esc_textarea( $description ) . '</textarea>';
+			$html .= '</label>';
+		}
+		return $html;
+	}
+
 
 	public function maybe_sync() {
 		$appointments = appointments();
@@ -199,7 +232,12 @@ class Appointments_Google_Calendar {
 							$this->remove_appointments_hooks();
 							if ( $app = appointments_get_appointment_by_gcal_id( $gcal_id ) ) {
 								if ( ! in_array( $app->status, array( 'completed', 'pending' ) ) ) {
-									appointments_update_appointment_status( $app->ID, 'removed' );
+									appointments_update_appointment( $app->ID,
+										array(
+											'status' => 'removed',
+											'gcal_ID' => ''
+										)
+									);
 								}
 							}
 							$this->add_appointments_hooks();
@@ -870,7 +908,32 @@ class Appointments_Google_Calendar {
 			return true;
 		}
 
-		$event = $this->appointment_to_gcal_event( $app );
+		// Only update some of the fields
+		$event = $this->get_event( $app->ID );
+		if ( is_wp_error( $event ) ) {
+			return false;
+		}
+
+		$options = appointments_get_options();
+
+		// Location
+		if ( isset( $options["gcal_location"] ) && '' != trim( $options["gcal_location"] ) ) {
+			$location = str_replace( array( 'ADDRESS', 'CITY' ), array(
+				$app->address,
+				$app->city
+			), $options["gcal_location"] );
+		} else {
+			$location = get_bloginfo( 'description' );
+		}
+		$event->setLocation( $location );
+
+		$start = new Google_Service_Calendar_EventDateTime();
+		$start->setDateTime( $app->get_start_gmt_date( "Y-m-d\TH:i:s\Z" ) );
+		$end = new Google_Service_Calendar_EventDateTime();
+		$end->setDateTime( $app->get_end_gmt_date( "Y-m-d\TH:i:s\Z" ) );
+		$event->setStart( $start );
+		$event->setEnd( $end );
+
 		$result = $this->api_manager->update_event( $event_id, $event );
 
 

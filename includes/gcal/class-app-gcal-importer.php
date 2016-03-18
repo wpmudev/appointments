@@ -155,13 +155,20 @@ class Appointments_Google_Calendar_Importer {
 				// New Appointment
 				$args['status'] = 'reserved';
 				appointments_insert_appointment( $args );
-				return 'inserted';
+				$result = 'inserted';
 			}
 			else {
 				// Update Appointment
 				appointments_update_appointment( $app->ID, $args );
-				return 'updated';
+				$result = 'updated';
 			}
+
+			$description = $event->getDescription();
+			if ( $description ) {
+				appointments_update_appointment_meta( $app->ID, 'gcal_description', $description );
+			}
+
+			return $result;
 		}
 
 		return false;
