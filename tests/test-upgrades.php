@@ -84,6 +84,12 @@ class App_Upgrades_Test extends App_UnitTestCase {
 		$this->assertEquals( get_option( 'app_db_version' ), appointments()->version );
 	}
 
+	function test_upgrade_1_7_2_beta1() {
+		update_option( 'app_db_version', '1.7.1' );
+		appointments()->maybe_upgrade();
+		$this->assertEquals( get_option( 'app_db_version' ), appointments()->version );
+	}
+
 	/**
 	 * This is a function on app-users-additional_fields.php
 	 *

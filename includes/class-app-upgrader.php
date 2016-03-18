@@ -17,6 +17,10 @@ class Appointments_Upgrader {
 			$this->upgrade_1_7_1();
 		}
 
+		if ( version_compare( $saved_version, '1.7.2-beta1', '<' ) ) {
+			$this->upgrade_1_7_1();
+		}
+
 		update_option( 'app_db_version', $new_version );
 
 	}
@@ -61,5 +65,11 @@ class Appointments_Upgrader {
 				appointments_update_appointment_meta( $app_id, 'additional_fields', $additional_fields );
 			}
 		}
+	}
+
+	private function upgrade_1_7_2_beta1() {
+		$appointments = appointments();
+		$gcal_api = $appointments->get_gcal_api();
+		$gcal_api->maybe_sync();
 	}
 }
