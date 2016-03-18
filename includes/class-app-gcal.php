@@ -683,6 +683,7 @@ class Appointments_Google_Calendar {
 			return;
 		}
 
+
 		$old_worker_id = $old_app->worker;
 		$worker_id = $app->worker;
 		$worker = appointments_get_worker( $worker_id );
@@ -728,7 +729,7 @@ class Appointments_Google_Calendar {
 		}
 
 
-		if ( ( 'pending' == $app->status || 'removed' == $app->status || 'completed' == $app->status ) ) {
+		if ( 'removed' == $app->status ) {
 			if ( $worker ) {
 				// Delete from worker
 				if ( $this->switch_to_worker( $worker->ID ) ) {
@@ -741,6 +742,7 @@ class Appointments_Google_Calendar {
 			$this->delete_event( $app->gcal_ID );
 		}
 		else {
+
 			if ( ( ( 'all' === $this->get_api_scope() ) || ( 'no_preference' === $this->get_api_scope() && ! $worker ) ) && $saved_on === 'general' ) {
 				// Update general calendar
 				$this->update_event( $app->ID );
