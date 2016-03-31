@@ -32,12 +32,12 @@ class Appointments_Admin_Appointments_Page {
 		$app = appointments_get_appointment( $app_id );
 		?>
 			<div class="wrap">
-				<h1>Edit Appointmet</h1>
+				<h1><?php esc_html_e( 'Edit Appointment', 'appointments' ); ?></h1>
 				<div id="poststuff">
 					<div id="post-body" class="metabox-holder columns-1">
 						<div id="postbox-container-1">
 							<div class="postbox ">
-								<h2 class="hndle"><span>Appointment Details</span></h2>
+								<h2 class="hndle"><span><?php _e( 'Appointment Details', 'appointments' ); ?></span></h2>
 								<div class="inside">
 									<?php var_dump( $app ); ?>
 								</div>

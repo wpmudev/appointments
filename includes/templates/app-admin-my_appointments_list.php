@@ -37,6 +37,10 @@ if ( isset( $_GET['app_order_by']) && $_GET['app_order_by'] ) {
 	}
 
 }
+else {
+	$args['orderby']   = 'ID';
+	$args['order'] = 'DESC';
+}
 
 switch($type) {
 	case 'active':
