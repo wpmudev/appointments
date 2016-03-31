@@ -195,7 +195,7 @@ function appointments_insert_appointment( $args ) {
 		'status' => 'pending',
 		'location' => '',
 		'gcal_updated' => '',
-		'gcal_ID' => '',
+		'gcal_ID' => null,
 		'duration' => false
 	);
 
