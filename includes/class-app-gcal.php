@@ -514,7 +514,7 @@ class Appointments_Google_Calendar {
 				$switched = $this->switch_to_worker( $worker->ID );
 				if ( $switched ) {
 					$worker_results = $importer->import( $worker->ID );
-					if ( ! is_wp_error( $results ) ) {
+					if ( ! is_wp_error( $worker_results ) ) {
 						$results['inserted'] += $worker_results['inserted'];
 						$results['updated'] += $worker_results['updated'];
 						$results['deleted'] += $worker_results['deleted'];

@@ -3184,8 +3184,9 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 	 */
 	function send_notification( $app_id, $cancel=false ) {
 		// In case of cancellation, continue
-		if ( !$cancel && !isset( $this->options["send_notification"] ) || 'yes' != $this->options["send_notification"] )
+		if ( ! $cancel && ! isset( $this->options["send_notification"] ) || 'yes' != $this->options["send_notification"] ) {
 			return;
+		}
 		global $wpdb;
 		$r = appointments_get_appointment( $app_id );
 		if ( $r ) {

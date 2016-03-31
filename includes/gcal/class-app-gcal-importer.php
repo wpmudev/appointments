@@ -99,7 +99,7 @@ class Appointments_Google_Calendar_Importer {
 			if ( ! in_array( $gcal_event_id, $processed ) ) {
 				// The event is no longer in the calendar, let's delete it locally
 				$app = appointments_get_appointment_by_gcal_id( $gcal_event_id );
-				if ( 'reserved' === $status ) {
+				if ( $app && 'reserved' === $app->status ) {
 					appointments_delete_appointment( $app->ID );
 					$deleted[] = $gcal_event_id;
 				}
@@ -144,7 +144,6 @@ class Appointments_Google_Calendar_Importer {
 			$args = array(
 				'service' => $service_id,
 				'worker' => $worker_id ? $worker_id : false,
-				'datetime' => strtotime( $event_start_date ),
 				'duration' => $duration,
 				'gcal_ID' => $event_id,
 				'gcal_updated' => $event_updated_date,
@@ -153,12 +152,14 @@ class Appointments_Google_Calendar_Importer {
 
 			if ( ! $app ) {
 				// New Appointment
+				$args['date'] = strtotime( $event_start_date );
 				$args['status'] = 'reserved';
 				appointments_insert_appointment( $args );
 				$result = 'inserted';
 			}
 			else {
 				// Update Appointment
+				$args['datetime'] = strtotime( $event_start_date );
 				appointments_update_appointment( $app->ID, $args );
 				$result = 'updated';
 			}
