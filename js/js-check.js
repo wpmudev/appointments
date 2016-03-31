@@ -46,4 +46,5 @@ function app_cancel_location() {
 	if ( _appointments_data.cancel_url ) {
 		return _appointments_data.cancel_url;
 	}
+	return '';
 }
