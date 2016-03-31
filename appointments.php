@@ -3094,8 +3094,9 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		));
 
 		//  Run this code not before 10 mins
-		if ( ( time() - get_option( "app_last_update" ) ) < apply_filters( 'app_update_time', 600 ) )
+		if ( ( time() - get_option( "app_last_update" ) ) < apply_filters( 'app_update_time', 600 ) ) {
 			return;
+		}
 
 		$this->remove_appointments();
 		$this->send_reminder();
@@ -3354,8 +3355,9 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 	 *
 	 */
 	function send_reminder() {
-		if ( !isset( $this->options["reminder_time"] ) || !$this->options["reminder_time"] || 'yes' != $this->options["send_reminder"] )
+		if ( ! isset( $this->options["reminder_time"] ) || ! $this->options["reminder_time"] || 'yes' != $this->options["send_reminder"] ) {
 			return;
+		}
 
 		$hours = explode( "," , trim( $this->options["reminder_time"] ) );
 
@@ -3423,7 +3425,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 					$this->log( sprintf( __('Reminder message sent to %s for appointment ID:%s','appointments'), $message["to"], $message["ID"] ) );
 			}
 		}
-		return true;
+		return;
 	}
 
 	/**
@@ -3442,7 +3444,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 
 		$messages = array();
 		foreach ( $hours as $hour ) {
-			$results = appointments_get_unsent_appointments( $hour, 'user' );
+			$results = appointments_get_unsent_appointments( $hour, 'worker' );
 
 			$provider_add_text  = __('You are receiving this reminder message for your appointment as a provider. The below is a copy of what may have been sent to your client:', 'appointments');
 			$provider_add_text .= "\n\n\n";
