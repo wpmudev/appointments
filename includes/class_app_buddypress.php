@@ -68,7 +68,7 @@ class App_BuddyPress {
 			$this->_core->load_admin();
 		}
 
-		$this->_core->admin->save_profile( $user_id );
+		$this->_core->admin->user_profile->save_profile( $user_id );
 	}
 
 	/**

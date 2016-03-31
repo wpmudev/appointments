@@ -149,7 +149,7 @@ class Appointments_Admin_User_Profile {
 		global $current_user, $appointments;
 
 		// Only user or admin can see his data
-		if ( $current_user->ID != $profileuser->ID && ! App_Roles::current_user_can( 'list_users', CTX_STAFF ) ) {
+		if ( $current_user->ID != $profileuser->ID && ! App_Roles::current_user_can( 'list_users', 'staff' ) ) {
 			return;
 		}
 

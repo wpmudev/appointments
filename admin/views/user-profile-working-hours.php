@@ -15,13 +15,13 @@
 	<tr>
 		<th><label for="open_datepick"><?php _e("Exceptional Working Days", 'appointments'); ?></label></th>
 		<td>
-			<input class="datepick widefat" id="open_datepick" type="text" name="open[exceptional_days]" value="<?php if (isset($result["open"])) echo $result["open"]?>" />
+			<input class="datepick" id="open_datepick" type="text" name="open[exceptional_days]" value="<?php if (isset($result["open"])) echo $result["open"]?>" />
 		</td>
 	</tr>
 	<tr>
 		<th><label for="closed_datepick"><?php _e("Holidays", 'appointments'); ?></label></th>
 		<td>
-			<input class="datepick widefat" id="closed_datepick" type="text" name="closed[exceptional_days]" value="<?php if (isset($result["closed"])) echo $result["closed"]?>" />
+			<input class="datepick" id="closed_datepick" type="text" name="closed[exceptional_days]" value="<?php if (isset($result["closed"])) echo $result["closed"]?>" />
 		</td>
 	</tr>
 </table>

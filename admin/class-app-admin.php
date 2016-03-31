@@ -1,6 +1,10 @@
 <?php
 
 class Appointments_Admin {
+	/**
+	 * @var Appointments_Admin_User_Profile
+	 */
+	public $user_profile;
 
 	public function __construct() {
 		$this->includes();
@@ -15,7 +19,7 @@ class Appointments_Admin {
 		add_action( 'wp_ajax_appointments_dismiss_notice', array( $this, 'dismiss_notice' ) );
 
 		new Appointments_Admin_Dashboard_Widget();
-		new Appointments_Admin_User_Profile();
+		$this->user_profile = new Appointments_Admin_User_Profile();
 
 		include( APP_PLUGIN_DIR . '/admin/admin-helpers.php' );
 	}
@@ -130,13 +134,17 @@ class Appointments_Admin {
 
 		$allow_profile = !empty($appointments->options['allow_worker_wh']) && 'yes' == $appointments->options['allow_worker_wh'];
 
-		if (empty($screen->base) || (
-				!preg_match('/(^|\b|_)appointments($|\b|_)/', $screen->base)
-				&&
-				!preg_match('/(^|\b|_)' . preg_quote($title, '/') . '($|\b|_)/', $screen->base) // Super-weird admin screen base being translatable!!!
-				&&
-				(!$allow_profile || !preg_match('/profile/', $screen->base) || !(defined('IS_PROFILE_PAGE') && IS_PROFILE_PAGE))
-			)) return false;
+		if ( empty( $screen->base ) ) {
+			return false;
+		}
+		if (
+			! preg_match( '/(^|\b|_)appointments($|\b|_)/', $screen->base )
+			&& ! preg_match( '/(^|\b|_)' . preg_quote( $title, '/' ) . '($|\b|_)/', $screen->base ) // Super-weird admin screen base being translatable!!!
+			&& ( ! $allow_profile || ! preg_match( '/profile/', $screen->base ) || ! ( defined( 'IS_PROFILE_PAGE' ) && IS_PROFILE_PAGE ) )
+			&& 'user-edit' !== $screen->base
+		) {
+			return false;
+		}
 
 		wp_enqueue_script( 'jquery-colorpicker', $appointments->plugin_url . '/js/colorpicker.js', array('jquery'), $appointments->version);
 		wp_enqueue_script( 'jquery-datepick', $appointments->plugin_url . '/js/jquery.datepick.min.js', array('jquery'), $appointments->version);
