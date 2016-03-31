@@ -14,6 +14,9 @@ class App_Locations_ServiceLocations {
 	const STORAGE_PREFIX = 'app-service_location-';
 
 	private $_data;
+	/**
+	 * @var App_Locations_Model
+	 */
 	private $_locations;
 
 	private function __construct () {}
@@ -38,7 +41,7 @@ class App_Locations_ServiceLocations {
 		add_action('admin_notices', array($this, 'show_nags'));
 
 		// Record appointment location
-		add_action('app_new_appointment', array($this, 'record_appointment_location'), 20);
+		add_action('wpmudev_appointments_insert_appointment', array($this, 'record_appointment_location'), 20);
 	}
 
 	function show_nags () {
@@ -72,10 +75,14 @@ class App_Locations_ServiceLocations {
 
 	public function record_appointment_location ($appointment_id) {
 		$appointment = appointments_get_appointment( $appointment_id );
-		if (empty($appointment->service)) return false;
+		if ( empty( $appointment->service ) ) {
+			return false;
+		}
 
-		$location_id = self::service_to_location_id($appointment->service);
-		if (!$location_id) return false;
+		$location_id = self::service_to_location_id( $appointment->service );
+		if ( ! $location_id ) {
+			return false;
+		}
 
 		appointments_update_appointment( $appointment_id, array( 'location' => $location_id ) );
 	}

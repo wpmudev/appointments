@@ -1,3 +1,21 @@
+2016-03-31 - 1.7.2
+-------------------------------
+- Fix: Appointments dates were set to 12AM when importing manually
+- Fix: When no cancel Appointment page is set, the URL was malformed
+- Fix fatal error when saving a BuddyPress profile
+- Fix warning in user profile
+- Fix: Plugin was sending too many reminders to workers
+- Fix: In some cases, Appointments were not inserted if gcal_ID was an empty string
+- Fix: Appointments list are reversed ordered by default
+- Fix: Appointments GCal syncing was updating custom inserted data in Google Calendar
+- Fix: If an Appointment is set to completed or penmding do not delete it from Google Calendar
+- Fix: Typo in function name was preventing posts content to render if some of the A+ Settings were checked
+- Fix: Appointments were not properly sorted on admin list
+- Fix: JS Conflicts in Profile page
+- Enhance: Improved upgrader class
+- Other minor fixes and improvements
+
+
 2016-03-16 - 1.7.1
 -------------------------------
 - Fix: app_services shortcode: order_by attribute doesn't seem to take any effect

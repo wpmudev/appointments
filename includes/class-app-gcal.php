@@ -686,6 +686,15 @@ class Appointments_Google_Calendar {
 	public function on_insert_appointment( $app_id ) {
 
 		$app = appointments_get_appointment( $app_id );
+		if ( $app->gcal_ID ) {
+			// Prevent from creating the same appointment twice
+			$_app = appointments_get_appointment_by_gcal_id( $app->gcal_ID );
+			if ( $_app->ID == $app->ID ) {
+				$this->on_update_appointment( $app->ID, array(), $app );
+				return;
+			}
+
+		}
 		$worker = appointments_get_worker( $app->worker );
 
 		if ( ( 'all' === $this->get_api_scope() ) || ( 'no_preference' === $this->get_api_scope() && ! $worker ) ) {

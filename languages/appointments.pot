@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Appointments+ package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Appointments+ 1.7.1\n"
+"Project-Id-Version: Appointments+ 1.7.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/appointments\n"
-"POT-Creation-Date: 2016-03-15 11:39:20+00:00\n"
+"POT-Creation-Date: 2016-03-31 17:11:22+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -367,7 +367,7 @@ msgid ""
 "the same page. See %s tab for details."
 msgstr ""
 
-#: admin/app-faq.php:129 admin/class-app-admin.php:326
+#: admin/app-faq.php:129 admin/class-app-admin.php:334
 msgid "Shortcodes"
 msgstr ""
 
@@ -824,8 +824,8 @@ msgstr ""
 msgid "Select a question"
 msgstr ""
 
-#: admin/class-app-admin-user-profile.php:47 appointments.php:1200
-#: appointments.php:1249
+#: admin/class-app-admin-user-profile.php:47 appointments.php:1201
+#: appointments.php:1250
 msgid "Client %s cancelled appointment with ID: %s"
 msgstr ""
 
@@ -837,18 +837,18 @@ msgstr ""
 msgid "%s edited his working hours."
 msgstr ""
 
-#: admin/class-app-admin.php:48
+#: admin/class-app-admin.php:52
 msgid "Dismiss notice"
 msgstr ""
 
-#: admin/class-app-admin.php:48 admin/class-app-admin.php:235
-#: admin/class-app-admin.php:256 admin/class-app-admin.php:275
+#: admin/class-app-admin.php:52 admin/class-app-admin.php:243
+#: admin/class-app-admin.php:264 admin/class-app-admin.php:283
 #: includes/external/pointer-tutorials.php:429
 #: includes/external/pointer-tutorials.php:448
 msgid "Dismiss"
 msgstr ""
 
-#: admin/class-app-admin.php:106 admin/class-app-admin.php:129
+#: admin/class-app-admin.php:110 admin/class-app-admin.php:133
 #: admin/pages/class-admin-appointments-page.php:8
 #: admin/views/user-profile-my-appointments.php:4
 #: admin/views/user-profile-worker-appointments.php:4
@@ -859,141 +859,149 @@ msgstr ""
 msgid "Appointments"
 msgstr ""
 
-#: admin/class-app-admin.php:163
+#: admin/class-app-admin.php:171
 msgid "Preparing for export, please hold on..."
 msgstr ""
 
-#: admin/class-app-admin.php:177 admin/class-app-admin.php:181
-#: admin/class-app-admin.php:185
+#: admin/class-app-admin.php:185 admin/class-app-admin.php:189
+#: admin/class-app-admin.php:193
 msgid "Notice dismissed."
 msgstr ""
 
-#: admin/class-app-admin.php:201
+#: admin/class-app-admin.php:209
 msgid "<b>[Appointments+]</b> You must define at least once service."
 msgstr ""
 
-#: admin/class-app-admin.php:209
+#: admin/class-app-admin.php:217
 msgid ""
 "<b>[Appointments+]</b> One of your services has a duration smaller than time "
 "base. Please visit Services tab and after making your corrections save new "
 "settings."
 msgstr ""
 
-#: admin/class-app-admin.php:216
+#: admin/class-app-admin.php:224
 msgid ""
 "<b>[Appointments+]</b> One of your services is not divisible by the time "
 "base. Please visit Services tab and after making your corrections save new "
 "settings."
 msgstr ""
 
-#: admin/class-app-admin.php:223
+#: admin/class-app-admin.php:231
 msgid ""
 "<b>[Appointments+]</b> One of your services has a duration greater than 24 "
 "hours. Appointments+ does not support services exceeding 1440 minutes (24 "
 "hours). "
 msgstr ""
 
-#: admin/class-app-admin.php:234
+#: admin/class-app-admin.php:242
 msgid ""
 "<b>[Appointments+]</b> One of your services does not have a service provider "
 "assigned. Delete services you are not using."
 msgstr ""
 
-#: admin/class-app-admin.php:235 admin/class-app-admin.php:256
-#: admin/class-app-admin.php:275
+#: admin/class-app-admin.php:243 admin/class-app-admin.php:264
+#: admin/class-app-admin.php:283
 msgid "Dismiss this notice for this session"
 msgstr ""
 
-#: admin/class-app-admin.php:244
+#: admin/class-app-admin.php:252
 msgid ""
 "<b>[Appointments+]</b> Appointments+ database tables need to be updated. "
 "Please deactivate and reactivate the plugin (DO NOT DELETE the plugin). You "
 "will not lose any saved information."
 msgstr ""
 
-#: admin/class-app-admin.php:255
+#: admin/class-app-admin.php:263
 msgid ""
 "<b>[Appointments+]</b> Either php curl is not installed or HTTPS wrappers "
 "are not enabled. Login with Google+ will not work."
 msgstr ""
 
-#: admin/class-app-admin.php:263
+#: admin/class-app-admin.php:271
 msgid ""
 "<b>[Appointments+]</b> More than one instance of services, service "
 "providers, confirmation, Paypal or login shortcodes on the same page may "
 "cause problems.</p>"
 msgstr ""
 
-#: admin/class-app-admin.php:274
+#: admin/class-app-admin.php:282
 msgid ""
 "<b>[Appointments+]</b> Confirmation shortcode [app_confirmation] is always "
 "required to complete an appointment."
 msgstr ""
 
-#: admin/class-app-admin.php:293
+#: admin/class-app-admin.php:301
 msgid "Appointments+ Shortcodes"
 msgstr ""
 
-#: admin/class-app-admin.php:306
+#: admin/class-app-admin.php:314
 msgid "Appointments+ FAQ"
 msgstr ""
 
-#: admin/class-app-admin.php:324
+#: admin/class-app-admin.php:332
 #: includes/templates/app-admin-transactions_list.php:12
 msgid "Transactions"
 msgstr ""
 
-#: admin/class-app-admin.php:325
+#: admin/class-app-admin.php:333
 msgid "Settings"
 msgstr ""
 
-#: admin/class-app-admin.php:327
+#: admin/class-app-admin.php:335
 msgid "FAQ"
 msgstr ""
 
-#: admin/class-app-admin.php:664
+#: admin/class-app-admin.php:672
 msgid "Appointment(s) with id(s):%s deleted by user:%s"
 msgstr ""
 
-#: admin/class-app-admin.php:692
+#: admin/class-app-admin.php:700
 msgid "Status of Appointment(s) with id(s):%s changed to %s by user:%s"
 msgstr ""
 
-#: admin/class-app-admin.php:771
+#: admin/class-app-admin.php:779
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: admin/class-app-admin.php:782
+#: admin/class-app-admin.php:790
 msgid "Google Calendar"
 msgstr ""
 
-#: admin/class-app-admin.php:783 admin/views/user-profile-working-hours.php:4
+#: admin/class-app-admin.php:791 admin/views/user-profile-working-hours.php:4
 #: includes/templates/app-admin-settings-working_hours.php:37
 msgid "Working Hours"
 msgstr ""
 
-#: admin/class-app-admin.php:784
+#: admin/class-app-admin.php:792
 msgid "Exceptions"
 msgstr ""
 
-#: admin/class-app-admin.php:785
+#: admin/class-app-admin.php:793
 msgid "Services"
 msgstr ""
 
-#: admin/class-app-admin.php:786
+#: admin/class-app-admin.php:794
 msgid "Service Providers"
 msgstr ""
 
-#: admin/class-app-admin.php:788
+#: admin/class-app-admin.php:796
 msgid "Add-ons"
 msgstr ""
 
-#: admin/class-app-admin.php:789
+#: admin/class-app-admin.php:797
 msgid "Logs"
 msgstr ""
 
-#: admin/class-app-admin.php:799
+#: admin/class-app-admin.php:807
 msgid "General"
+msgstr ""
+
+#: admin/pages/class-admin-appointments-page.php:35
+msgid "Edit Appointment"
+msgstr ""
+
+#: admin/pages/class-admin-appointments-page.php:40
+msgid "Appointment Details"
 msgstr ""
 
 #: admin/views/user-profile-my-appointments.php:1
@@ -1065,165 +1073,165 @@ msgid_plural "%d Pending Appointments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: appointments.php:610 includes/class-app-worker.php:134
+#: appointments.php:609 includes/class-app-worker.php:134
 msgid "Our staff"
 msgstr ""
 
-#: appointments.php:612 includes/class-app-worker.php:137
+#: appointments.php:611 includes/class-app-worker.php:137
 msgid "A specialist"
 msgstr ""
 
-#: appointments.php:688 appointments.php:1116
+#: appointments.php:687 appointments.php:1117
 msgid "Not defined"
 msgstr ""
 
-#: appointments.php:1073 appointments.php:2019
+#: appointments.php:1074 appointments.php:2020
 msgid "Sunday"
 msgstr ""
 
-#: appointments.php:1074 appointments.php:2020
+#: appointments.php:1075 appointments.php:2021
 msgid "Monday"
 msgstr ""
 
-#: appointments.php:1075 appointments.php:2021
+#: appointments.php:1076 appointments.php:2022
 msgid "Tuesday"
 msgstr ""
 
-#: appointments.php:1076 appointments.php:2022
+#: appointments.php:1077 appointments.php:2023
 msgid "Wednesday"
 msgstr ""
 
-#: appointments.php:1077 appointments.php:2023
+#: appointments.php:1078 appointments.php:2024
 msgid "Thursday"
 msgstr ""
 
-#: appointments.php:1078 appointments.php:2024
+#: appointments.php:1079 appointments.php:2025
 msgid "Friday"
 msgstr ""
 
-#: appointments.php:1079 appointments.php:2025
+#: appointments.php:1080 appointments.php:2026
 msgid "Saturday"
 msgstr ""
 
-#: appointments.php:1103 includes/class-app-ajax.php:270
+#: appointments.php:1104 includes/class-app-ajax.php:270
 #: includes/class_app_addon_helper.php:122
 #: includes/templates/app-admin-settings-services.php:13
 msgid "Name"
 msgstr ""
 
-#: appointments.php:1104
+#: appointments.php:1105
 msgid "Email"
 msgstr ""
 
-#: appointments.php:1105
+#: appointments.php:1106
 msgid "Phone"
 msgstr ""
 
-#: appointments.php:1106 includes/addons/app-locations-location_support.php:71
+#: appointments.php:1107 includes/addons/app-locations-location_support.php:71
 msgid "Address"
 msgstr ""
 
-#: appointments.php:1107
+#: appointments.php:1108
 msgid "City"
 msgstr ""
 
-#: appointments.php:1108
+#: appointments.php:1109
 msgid "Note"
 msgstr ""
 
-#: appointments.php:1126
+#: appointments.php:1127
 msgid "Free"
 msgstr ""
 
-#: appointments.php:1127
+#: appointments.php:1128
 msgid "Busy"
 msgstr ""
 
-#: appointments.php:1128
+#: appointments.php:1129
 msgid "Not possible"
 msgstr ""
 
-#: appointments.php:1245
+#: appointments.php:1246
 msgid ""
 "There is an issue with this appointment. Please refresh the page and try "
 "again. If problem persists, please contact website admin."
 msgstr ""
 
-#: appointments.php:1256
+#: appointments.php:1257
 msgid ""
 "Appointment could not be cancelled. Please refresh the page and try again."
 msgstr ""
 
-#: appointments.php:1260
+#: appointments.php:1261
 msgid "Cancellation of appointments is disabled. Please contact website admin."
 msgstr ""
 
-#: appointments.php:1289
+#: appointments.php:1290
 msgid "More information <span class=\"meta-nav\">&rarr;</span>"
 msgstr ""
 
-#: appointments.php:1393
+#: appointments.php:1394
 msgid "%s Appointment"
 msgstr ""
 
-#: appointments.php:1424
+#: appointments.php:1425
 msgid "Something wrong about the submitted %s"
 msgstr ""
 
-#: appointments.php:2010 appointments.php:2012
+#: appointments.php:2011 appointments.php:2013
 msgid " "
 msgstr ""
 
-#: appointments.php:2031
+#: appointments.php:2032
 msgid "Su"
 msgstr ""
 
-#: appointments.php:2032
+#: appointments.php:2033
 msgid "Mo"
 msgstr ""
 
-#: appointments.php:2033
+#: appointments.php:2034
 msgid "Tu"
 msgstr ""
 
-#: appointments.php:2034
+#: appointments.php:2035
 msgid "We"
 msgstr ""
 
-#: appointments.php:2035
+#: appointments.php:2036
 msgid "Th"
 msgstr ""
 
-#: appointments.php:2036
+#: appointments.php:2037
 msgid "Fr"
 msgstr ""
 
-#: appointments.php:2037
+#: appointments.php:2038
 msgid "Sa"
 msgstr ""
 
-#: appointments.php:2935
+#: appointments.php:2936
 msgid "Login with Facebook"
 msgstr ""
 
-#: appointments.php:2936
+#: appointments.php:2937
 msgid "Login with Twitter"
 msgstr ""
 
-#: appointments.php:2937
+#: appointments.php:2938
 msgid "Login with Google+"
 msgstr ""
 
-#: appointments.php:2938
+#: appointments.php:2939
 msgid "Login with WordPress"
 msgstr ""
 
-#: appointments.php:2939 includes/gcal/views/settings-gcal-step-1.php:74
+#: appointments.php:2940 includes/gcal/views/settings-gcal-step-1.php:74
 #: includes/gcal/views/settings-gcal-step-2.php:22
 msgid "Submit"
 msgstr ""
 
-#: appointments.php:2940 includes/addons/app-locations-location_support.php:78
+#: appointments.php:2941 includes/addons/app-locations-location_support.php:78
 #: includes/class-app-ajax.php:417
 #: includes/shortcodes/class-app-shortcode-confirmation.php:196
 #: includes/support/class_app_tutorial.php:219
@@ -1231,166 +1239,166 @@ msgctxt "Drop current action"
 msgid "Cancel"
 msgstr ""
 
-#: appointments.php:2941
+#: appointments.php:2942
 msgid "Please, wait..."
 msgstr ""
 
-#: appointments.php:2942
+#: appointments.php:2943
 msgid "You are now logged in"
 msgstr ""
 
-#: appointments.php:2943
+#: appointments.php:2944
 msgid "Login error. Please try again."
 msgstr ""
 
-#: appointments.php:2947 includes/class_app_codec.php:444
+#: appointments.php:2948 includes/class_app_codec.php:444
 msgid "Register"
 msgstr ""
 
-#: appointments.php:3084
+#: appointments.php:3085
 msgid "Confirmation of your Appointment"
 msgstr ""
 
-#: appointments.php:3086
+#: appointments.php:3087
 msgid "Reminder for your Appointment"
 msgstr ""
 
-#: appointments.php:3146
+#: appointments.php:3149
 msgid "Confirmation message sent to %s for appointment ID:%s"
 msgstr ""
 
-#: appointments.php:3162
+#: appointments.php:3165
 msgid ""
 "A new appointment has been made on %s. Below please find a copy of what has "
 "been sent to your client:"
 msgstr ""
 
-#: appointments.php:3167
+#: appointments.php:3170
 msgid "New Appointment"
 msgstr ""
 
-#: appointments.php:3193
+#: appointments.php:3197
 msgid "An appointment has been cancelled"
 msgstr ""
 
-#: appointments.php:3194
+#: appointments.php:3198
 msgid ""
 "Appointment with ID %s has been cancelled by the client. You can see it "
 "clicking this link: %s"
 msgstr ""
 
-#: appointments.php:3197
+#: appointments.php:3201
 msgid "An appointment requires your confirmation"
 msgstr ""
 
-#: appointments.php:3198
+#: appointments.php:3202
 msgid ""
 "The new appointment has an ID %s and you can edit it clicking this link: %s"
 msgstr ""
 
-#: appointments.php:3220 appointments.php:3253
+#: appointments.php:3224 appointments.php:3257
 msgid "Notification message sent to %s for appointment ID:%s"
 msgstr ""
 
 #. Translators: First %s is for appointment ID and the second one is for date
 #. and time of the appointment
-#: appointments.php:3231
+#: appointments.php:3235
 msgid "Cancelled appointment has an ID %s for %s."
 msgstr ""
 
-#: appointments.php:3234
+#: appointments.php:3238
 msgid ""
 "The new appointment has an ID %s for %s and you can confirm it using your "
 "profile page."
 msgstr ""
 
-#: appointments.php:3278
+#: appointments.php:3282
 msgid ""
 "Unable to notify the client about the appointment ID:%s removal, stopping."
 msgstr ""
 
-#: appointments.php:3324
+#: appointments.php:3328
 msgid "Removal notification message sent to %s for appointment ID:%s"
 msgstr ""
 
-#: appointments.php:3336
+#: appointments.php:3340
 msgid ""
 "An appointment removal notification for %s has been sent to your client:"
 msgstr ""
 
-#: appointments.php:3341
+#: appointments.php:3345
 msgid "Removal notification"
 msgstr ""
 
-#: appointments.php:3421 appointments.php:3498
+#: appointments.php:3426 appointments.php:3503
 msgid "Reminder message sent to %s for appointment ID:%s"
 msgstr ""
 
-#: appointments.php:3445
+#: appointments.php:3450
 msgid ""
 "You are receiving this reminder message for your appointment as a provider. "
 "The below is a copy of what may have been sent to your client:"
 msgstr ""
 
-#: appointments.php:3914
+#: appointments.php:3919
 msgid "Cache cleared."
 msgstr ""
 
-#: appointments.php:3922
+#: appointments.php:3927
 msgid "Settings saved and cache cleared."
 msgstr ""
 
-#: appointments.php:3929
+#: appointments.php:3934
 msgid "Settings saved."
 msgstr ""
 
-#: appointments.php:3936
+#: appointments.php:3941
 msgid "Selected record(s) deleted."
 msgstr ""
 
-#: appointments.php:3943
+#: appointments.php:3948
 msgid "Selected record(s) updated."
 msgstr ""
 
-#: appointments.php:3950
+#: appointments.php:3955
 msgid "You are not authorised to do this."
 msgstr ""
 
-#: appointments.php:4003 appointments.php:4082
+#: appointments.php:4008 appointments.php:4087
 #: includes/templates/app-admin-settings-main.php:141
 msgid "None"
 msgstr ""
 
-#: appointments.php:4077 includes/templates/app-admin-settings-services.php:30
+#: appointments.php:4082 includes/templates/app-admin-settings-services.php:30
 msgid "No services defined"
 msgstr ""
 
-#: appointments.php:4127 appointments.php:4129
+#: appointments.php:4132 appointments.php:4134
 msgid "Day"
 msgstr ""
 
-#: appointments.php:4127
+#: appointments.php:4132
 msgid "Work?"
 msgstr ""
 
-#: appointments.php:4127 appointments.php:4129
+#: appointments.php:4132 appointments.php:4134
 #: includes/addons/app-admin-export_date_range.php:48
 #: includes/class-app-ajax.php:328
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:136
 msgid "Start"
 msgstr ""
 
-#: appointments.php:4127 appointments.php:4129
+#: appointments.php:4132 appointments.php:4134
 #: includes/addons/app-admin-export_date_range.php:49
 #: includes/class-app-ajax.php:363
 msgid "End"
 msgstr ""
 
-#: appointments.php:4129
+#: appointments.php:4134
 msgid "Give break?"
 msgstr ""
 
-#: appointments.php:4143 appointments.php:4192
+#: appointments.php:4148 appointments.php:4197
 #: includes/addons/app-users-additional_fields.php:398
 #: includes/addons/app-users-additional_fields.php:433
 #: includes/gcal/views/settings-gcal-button.php:7
@@ -1414,7 +1422,7 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: appointments.php:4144 appointments.php:4193
+#: appointments.php:4149 appointments.php:4198
 #: includes/addons/app-users-additional_fields.php:398
 #: includes/addons/app-users-additional_fields.php:433
 #: includes/gcal/views/settings-gcal-button.php:8
@@ -1438,7 +1446,7 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: appointments.php:4177 appointments.php:4226
+#: appointments.php:4182 appointments.php:4231
 msgid "Add break"
 msgstr ""
 
@@ -1654,39 +1662,39 @@ msgstr ""
 msgid "After All Appointments shortcode output"
 msgstr ""
 
-#: includes/addons/app-locations-service_locations.php:47
+#: includes/addons/app-locations-service_locations.php:50
 msgid ""
 "You'll need Locations add-on activated for Service Locations integration add-"
 "on to work"
 msgstr ""
 
-#: includes/addons/app-locations-service_locations.php:86
+#: includes/addons/app-locations-service_locations.php:93
 msgid "Service Locations Settings"
 msgstr ""
 
-#: includes/addons/app-locations-service_locations.php:90
+#: includes/addons/app-locations-service_locations.php:97
 msgid "Show service location"
 msgstr ""
 
-#: includes/addons/app-locations-service_locations.php:93
+#: includes/addons/app-locations-service_locations.php:100
 #: includes/addons/app-locations-worker_locations.php:98
 msgid "I will add location info manually, using shortcode"
 msgstr ""
 
-#: includes/addons/app-locations-service_locations.php:94
+#: includes/addons/app-locations-service_locations.php:101
 msgid "Automatic, before service description"
 msgstr ""
 
-#: includes/addons/app-locations-service_locations.php:95
+#: includes/addons/app-locations-service_locations.php:102
 msgid "Automatic, after service description"
 msgstr ""
 
-#: includes/addons/app-locations-service_locations.php:97
+#: includes/addons/app-locations-service_locations.php:104
 msgid ""
 "You can use the shortcode like this: <code>[app_service_location]</code>"
 msgstr ""
 
-#: includes/addons/app-locations-service_locations.php:140
+#: includes/addons/app-locations-service_locations.php:147
 #: includes/addons/app-locations-worker_locations.php:145
 msgid "Location:"
 msgstr ""
@@ -2105,7 +2113,7 @@ msgstr ""
 
 #: includes/class-app-ajax.php:286 includes/class_app_shortcodes.php:581
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:104
-#: includes/templates/app-admin-my_appointments_list.php:65
+#: includes/templates/app-admin-my_appointments_list.php:69
 msgid "Provider"
 msgstr ""
 
@@ -2131,7 +2139,7 @@ msgstr ""
 #: includes/class-app-ajax.php:380 includes/class_app_shortcodes.php:584
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:140
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:176
-#: includes/templates/app-admin-my_appointments_list.php:66
+#: includes/templates/app-admin-my_appointments_list.php:70
 #: includes/templates/app-admin-my_transactions_list.php:24
 msgid "Status"
 msgstr ""
@@ -2275,28 +2283,28 @@ msgstr ""
 msgid "Nothing to download!"
 msgstr ""
 
-#: includes/class-app-appointment.php:1054 includes/class_app_codec.php:23
+#: includes/class-app-appointment.php:1059 includes/class_app_codec.php:23
 msgid "Pending"
 msgstr ""
 
-#: includes/class-app-appointment.php:1055 includes/class_app_codec.php:24
+#: includes/class-app-appointment.php:1060 includes/class_app_codec.php:24
 msgid "Paid"
 msgstr ""
 
-#: includes/class-app-appointment.php:1056 includes/class_app_codec.php:25
+#: includes/class-app-appointment.php:1061 includes/class_app_codec.php:25
 msgid "Confirmed"
 msgstr ""
 
-#: includes/class-app-appointment.php:1057 includes/class_app_codec.php:26
+#: includes/class-app-appointment.php:1062 includes/class_app_codec.php:26
 msgid "Completed"
 msgstr ""
 
-#: includes/class-app-appointment.php:1058 includes/class_app_codec.php:27
+#: includes/class-app-appointment.php:1063 includes/class_app_codec.php:27
 #: includes/templates/app-admin-appointment_list.php:57
 msgid "Reserved by GCal"
 msgstr ""
 
-#: includes/class-app-appointment.php:1059 includes/class_app_codec.php:28
+#: includes/class-app-appointment.php:1064 includes/class_app_codec.php:28
 msgid "Removed"
 msgstr ""
 
@@ -2304,23 +2312,27 @@ msgstr ""
 msgid "Session could not be started. This may indicate a theme issue."
 msgstr ""
 
-#: includes/class-app-gcal.php:62
+#: includes/class-app-gcal.php:63
 msgid "Error validating the access token: %s"
 msgstr ""
 
-#: includes/class-app-gcal.php:131
+#: includes/class-app-gcal.php:136
 msgid "Every 10 minutes"
 msgstr ""
 
-#: includes/class-app-gcal.php:487
+#: includes/class-app-gcal.php:165
+msgid "Google Calendar Description"
+msgstr ""
+
+#: includes/class-app-gcal.php:529
 msgid "%d updated, %d new inserted and %d deleted"
 msgstr ""
 
-#: includes/class-app-gcal.php:612
+#: includes/class-app-gcal.php:654
 msgid "SERVICE Appointment"
 msgstr ""
 
-#: includes/class-app-gcal.php:631
+#: includes/class-app-gcal.php:673
 msgid ""
 "Client Name: CLIENT\n"
 "Service Name: SERVICE\n"
@@ -2936,7 +2948,7 @@ msgstr ""
 
 #: includes/class_app_shortcodes.php:580
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:173
-#: includes/templates/app-admin-my_appointments_list.php:64
+#: includes/templates/app-admin-my_appointments_list.php:68
 #: includes/templates/app-admin-my_transactions_list.php:21
 msgid "Service"
 msgstr ""
@@ -2944,7 +2956,7 @@ msgstr ""
 #: includes/class_app_shortcodes.php:582
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:142
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:138
-#: includes/templates/app-admin-my_appointments_list.php:62
+#: includes/templates/app-admin-my_appointments_list.php:66
 msgid "Client"
 msgstr ""
 
@@ -3719,7 +3731,7 @@ msgid ""
 "h4&gt;\"]</code>"
 msgstr ""
 
-#. #-#-#-#-#  appointments.pot (Appointments+ 1.7.1)  #-#-#-#-#
+#. #-#-#-#-#  appointments.pot (Appointments+ 1.7.2)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: includes/support/class_app_admin_help.php:33
 msgid "Appointments+"
@@ -4191,51 +4203,51 @@ msgid ""
 "be saved on your PC"
 msgstr ""
 
-#: includes/templates/app-admin-my_appointments_list.php:61
+#: includes/templates/app-admin-my_appointments_list.php:65
 #: includes/templates/app-admin-settings-services.php:12
 #: includes/templates/app-admin-settings-workers.php:13
 msgid "ID"
 msgstr ""
 
-#: includes/templates/app-admin-my_appointments_list.php:63
+#: includes/templates/app-admin-my_appointments_list.php:67
 #: includes/templates/app-admin-my_transactions_list.php:20
 msgid "Date/Time"
 msgstr ""
 
-#: includes/templates/app-admin-my_appointments_list.php:145
+#: includes/templates/app-admin-my_appointments_list.php:149
 msgid "See Details (Cannot be edited)"
 msgstr ""
 
-#: includes/templates/app-admin-my_appointments_list.php:145
+#: includes/templates/app-admin-my_appointments_list.php:149
 msgid "See Details and Edit"
 msgstr ""
 
-#: includes/templates/app-admin-my_appointments_list.php:170
+#: includes/templates/app-admin-my_appointments_list.php:174
 #: includes/templates/app-admin-my_transactions_list.php:109
 #: includes/templates/app-admin-my_transactions_list.php:118
 msgid "None yet"
 msgstr ""
 
-#: includes/templates/app-admin-my_appointments_list.php:184
+#: includes/templates/app-admin-my_appointments_list.php:188
 msgid "No appointments have been found."
 msgstr ""
 
-#: includes/templates/app-admin-my_appointments_list.php:197
+#: includes/templates/app-admin-my_appointments_list.php:201
 msgid "Permanently Delete Selected Records"
 msgstr ""
 
-#: includes/templates/app-admin-my_appointments_list.php:197
+#: includes/templates/app-admin-my_appointments_list.php:201
 #: includes/templates/app-admin-view_log.php:19
 msgid "Clicking this button deletes logs saved on the server"
 msgstr ""
 
-#: includes/templates/app-admin-my_appointments_list.php:215
+#: includes/templates/app-admin-my_appointments_list.php:219
 msgid "Are you sure to delete the selected record(s)?"
 msgstr ""
 
-#: includes/templates/app-admin-my_appointments_list.php:247
-#: includes/templates/app-admin-my_appointments_list.php:265
-#: includes/templates/app-admin-my_appointments_list.php:323
+#: includes/templates/app-admin-my_appointments_list.php:251
+#: includes/templates/app-admin-my_appointments_list.php:269
+#: includes/templates/app-admin-my_appointments_list.php:327
 msgid "Unexpected error"
 msgstr ""
 

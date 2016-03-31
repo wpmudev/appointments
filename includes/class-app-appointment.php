@@ -326,7 +326,7 @@ function appointments_insert_appointment( $args ) {
 
 	appointments_update_user_appointment_data( $app_id );
 
-	do_action( 'app_new_appointment', $app_id );
+	//do_action( 'app_new_appointment', $app_id );
 	do_action( 'wpmudev_appointments_insert_appointment', $app_id );
 
 	return $app_id;
@@ -520,6 +520,11 @@ function appointments_update_appointment( $app_id, $args ) {
 		// Yeah, maybe change status
 		$update['status'] = $args['status'];
 		$update_wildcards[] = '%s';
+	}
+
+	if ( isset( $update['gcal_ID'] ) && $update['gcal_ID'] === '' ) {
+		// Prevent duplicate gcal IDs
+		$update['gcal_ID'] = null;
 	}
 
 

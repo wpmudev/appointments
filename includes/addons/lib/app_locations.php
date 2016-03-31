@@ -15,6 +15,11 @@ abstract class App_Locations_Location {
 	abstract public function get_display_markup ($rich_content=true);
 	abstract public function get_admin_label ();
 
+	/**
+	 * @param $data
+	 *
+	 * @return App_Locations_Location
+	 */
 	public static function get_location ($data) {
 		$class = apply_filters('app-locations-location-model_instance_class', APP_LOCATIONS_LOCATION_DEFAULT_MODEL_INSTANCE);
 		$class = $class && class_exists($class) ? $class : APP_LOCATIONS_LOCATION_DEFAULT_MODEL_INSTANCE;
@@ -87,6 +92,10 @@ class App_Locations_Model {
 	const STORAGE_AREA = 'app_locations_data';
 
 	private $_data = array();
+
+	/**
+	 * @var App_Locations_Model
+	 */
 	private static $_instance;
 
 	private function __construct () {
