@@ -56,7 +56,9 @@ $status_count = appointments_count_appointments( $args );
 		<li><a href="<?php echo add_query_arg('type', 'completed'); ?>" class="rbutton <?php if($type == 'completed') echo 'current'; ?>"><?php  _e('Completed appointments', 'appointments'); ?></a> (<?php echo $status_count['completed']; ?>) | </li>
 		<li><a href="<?php echo add_query_arg('type', 'reserved'); ?>" class="rbutton <?php if($type == 'reserved') echo 'current'; ?>"><?php  _e('Reserved by GCal', 'appointments'); ?></a> (<?php echo $status_count['reserved']; ?>) | </li>
 		<li><a href="<?php echo add_query_arg('type', 'removed'); ?>" class="rbutton <?php if($type == 'removed') echo 'current'; ?>"><?php  _e('Removed appointments', 'appointments'); ?></a> (<?php echo $status_count['removed']; ?>)</li>
-		<li><a href="javascript:void(0)" class="info-button" title="<?php _e('Click to toggle information about statuses', 'appointments')?>"><img src="<?php echo $appointments->plugin_url . '/images/information.png'?>" alt="" /></a></li>
+		<li><a href="javascript:void(0)" class="info-button" title="<?php _e('Click to toggle information about statuses', 'appointments')?>">
+				<img src="<?php echo $appointments->plugin_url . '/images/information.png'?>" alt="" />
+			</a></li>
 	</ul>
 <br /><br />
 <span class="description status-description" style="display:none;">
