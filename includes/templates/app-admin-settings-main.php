@@ -857,6 +857,14 @@ $use_payments = ('yes' == $appointments->options['payment_required']);
 				<span class="description"><?php _e('Same as above, but valid for break hours. If you want to allow appointments exceeding break times, then select this as Yes.', 'appointments') ?></span>
 				</td>
 			</tr>
+
+			<tr valign="top">
+				<th scope="row" ><?php _e('Number of appointment records per page', 'appointments')?></th>
+				<td colspan="2">
+				<input type="text" style="width:50px" name="records_per_page" value="<?php if ( isset($appointments->options["records_per_page"]) ) echo $appointments->options["records_per_page"] ?>" />
+				<span class="description"><?php _e('Number of records to be displayed on admin appointments page. If left empty: 50', 'appointments') ?></span>
+				</td>
+			</tr>
 			<?php do_action('app-settings-advanced_settings'); ?>
 		</table>
 	</div>

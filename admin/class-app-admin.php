@@ -18,8 +18,6 @@ class Appointments_Admin {
 
 		add_action( 'wp_ajax_appointments_dismiss_notice', array( $this, 'dismiss_notice' ) );
 
-		add_filter( 'set-screen-option', array( $this, 'save_screen_options' ), 10, 3 );
-
 		new Appointments_Admin_Dashboard_Widget();
 		$this->user_profile = new Appointments_Admin_User_Profile();
 
@@ -30,15 +28,6 @@ class Appointments_Admin {
 		include_once( appointments_plugin_dir() . 'admin/widgets/class-app-dashboard-widget.php' );
 		include_once( appointments_plugin_dir() . 'admin/class-app-admin-user-profile.php' );
 	}
-
-	public function save_screen_options( $status, $option, $value ) {
-		if ( 'appointments_per_page' == $option ) {
-			return $value;
-		}
-
-		return $status;
-	}
-
 
 	public function admin_notices_new() {
 		$notices = _appointments_get_admin_notices();
@@ -443,6 +432,8 @@ class Appointments_Admin {
 			$appointments->options['allow_cancel'] 				= @$_POST['allow_cancel'];
 			$appointments->options['cancel_page'] 				= @$_POST['cancel_page'];
 			$appointments->options['thank_page'] 				= @$_POST['thank_page'];
+
+			$appointments->options["records_per_page"]			= (int)trim( @$_POST["records_per_page"] );
 
 			$appointments->options = apply_filters('app-options-before_save', $appointments->options);
 
