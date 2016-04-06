@@ -1,3 +1,10 @@
+2016-04-06 - 1.7.2.1
+-------------------------------
+- Fix: Additional fields addon not saving fields
+- Fix: Additional fields addon not showing up fields in admin
+- Fix: Double check for Google autoloader to prevent other plugins conflicts
+- Fix: When Service Locations Addon was active, GCal events were duplicated
+
 2016-03-31 - 1.7.2
 -------------------------------
 - Fix: Appointments dates were set to 12AM when importing manually
