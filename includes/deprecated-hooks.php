@@ -3,7 +3,8 @@
 global $appointments_deprecated_filters, $appointments_deprecated_actions;
 
 $appointments_deprecated_actions = array(
-	'wpmudev_appointments_update_appointment_status' => 'app_change_status'
+	'wpmudev_appointments_update_appointment_status' => 'app_change_status',
+	'app_new_appointment' => 'wpmudev_appointments_insert_appointment'
 );
 
 $appointments_deprecated_filters = array(

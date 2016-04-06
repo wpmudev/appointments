@@ -30,12 +30,12 @@ class App_Users_AdditionalFields {
 
 		// Field injection
 		add_filter('app_additional_fields', array($this, 'inject_additional_fields'));
-		add_filter('app-footer_scripts-after', array($this, 'inject_additional_fields_script'));
+		add_filter('app-footer_scripts-after', array($this, 'inject_additional_fields_script'), 900);
 		add_filter('app_get_field_name', array($this, 'field_names'));
 
 		// Values processing
 		add_action('app-additional_fields-validate', array($this, 'validate_submitted_fields'));
-		add_action('app_new_appointment', array($this, 'save_submitted_fields'));
+		add_action('wpmudev_appointments_insert_appointment', array($this, 'save_submitted_fields'));
 
 		// Auto-cleanup
 		add_action('app_remove_expired', array($this, 'cleanup_data'));
@@ -162,10 +162,10 @@ class App_Users_AdditionalFields {
 				"<span class='input-text-wrap'>";
 
 			if ( 'checkbox' === $field['type'] ) {
-				$form .= "<input type='checkbox' class='appointments-field-entry' data-name='{$name}' {$disabled} " . checked( '1', $value, false ) . " />";
+				$form .= "<input type='checkbox' class='appointments-field-entry additional_field' data-name='additional_fields[{$name}]' {$disabled} " . checked( '1', $value, false ) . " value='1' />";
 			}
 			else {
-				$form .= "<input type='text' class='widefat appointments-field-entry' data-name='{$name}' {$disabled} value='{$value}' />";
+				$form .= "<input type='text' class='widefat appointments-field-entry additional_field' data-name='additional_fields[{$name}]' {$disabled} value='{$value}' />";
 			}
 
 			$form .= '</span></label>';
@@ -188,6 +188,8 @@ class App_Users_AdditionalFields {
 					name = me.attr("data-name"),
 					value = me.is(":checkbox") ? (me.is(":checked") ? 1 : 0) : me.val()
 				;
+				console.log(name);
+				console.log(value);
 				settings.data += '&' + encodeURIComponent(name) + '=' + encodeURIComponent(value);
 			});
 		}
@@ -284,7 +286,9 @@ EO_ADMIN_JS;
 
 		foreach ($fields as $field) {
 			$name = $this->_to_clean_name($field['label']);
-			$data[$name] = !empty($raw[$name]) ? wp_strip_all_tags(rawurldecode($raw[$name])) : '';
+			if ( ! empty( $raw['additional_fields'][ $name ] ) ) {
+				$data[ $name ] = wp_strip_all_tags( rawurldecode( $raw['additional_fields'][ $name ] ) );
+			}
 		}
 		//$data['__fields__'] = $fields;
 
@@ -307,7 +311,7 @@ EO_ADMIN_JS;
             $value = $user_meta_value ? $user_meta_value : ('checkbox' == $type ? 1 : '');
             $form .= "<div class='appointments-field appointments-{$clean}-field'>" .
                 '<label for="' . $id . '"><span>' . $label . '</span></label>' .
-                "<input type='{$type}' id='{$id}' class='appointments-field-entry appointments-{$clean}-field-entry' data-name='{$clean}' value='{$value}' />" .
+                "<input type='{$type}' id='{$id}' class='appointments-field-entry appointments-{$clean}-field-entry' data-name='additional_fields[{$clean}]' value='{$value}' />" .
                 "</div>";
         }
         return $form;
@@ -514,8 +518,9 @@ $(function () {
 
 	private function _add_appointment_meta ($appointment_id, $data) {
 		if ( ! empty( $appointment_id ) ) {
-			appointments_update_appointment_meta( $appointment_id, 'additional_fields', $data );
+			return appointments_update_appointment_meta( $appointment_id, 'additional_fields', $data );
 		}
+		return false;
 	}
 
 	private function _remove_appointment_meta ($appointment_id) {
