@@ -35,7 +35,10 @@ class Appointments_Google_Calendar_API_Manager {
 	private $calendar = '';
 
 	public function __construct() {
-		include_once( appointments_plugin_dir() . 'includes/external/google/autoload.php' );
+		if ( ! function_exists( 'google_api_php_client_autoload' ) ){
+			include_once( appointments_plugin_dir() . 'includes/external/google/autoload.php' );
+		}
+
 		include_once( 'class-app-gcal-logger.php' );
 		$this->client = new Google_Client();
 		$this->client->setApplicationName( "Appointments +" );
