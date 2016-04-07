@@ -60,8 +60,7 @@ $total = appointments_get_appointments( $args );
 
 $columns = array();
 
-if ( true || isset( $_GET["type"] ) && 'removed' == $_GET["type"] )
-	$columns['delete'] = '<input type="checkbox" />';
+if ( true || isset( $_GET["type"] ) && 'removed' == $_GET["type"] )$columns['delete'] = '<input type="checkbox" />';
 $columns['app_ID'] = __('ID','appointments');
 $columns['user'] = __('Client','appointments');
 $columns['date'] = __('Date/Time','appointments');
@@ -223,7 +222,7 @@ if ( isset( $_GET["type"] ) && 'removed' == $_GET["type"] ) {
 			}
 		});
 		var th_sel = $("th.column-delete input:checkbox");
-		var td_sel = $("td.column-delete input:checkbox");
+		var td_sel = $("th.column-check input:checkbox");
 		th_sel.change( function() {
 			if ( $(this).is(':checked') ) {
 				td_sel.attr("checked","checked");

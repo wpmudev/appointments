@@ -80,6 +80,26 @@ class Appointments_Appointment {
 		return get_gmt_from_date( $this->end, $format );
 	}
 
+	public function get_formatted_start_date() {
+		$appointments = appointments();
+		return mysql2date( $appointments->datetime_format, $this->start );
+	}
+
+	public function get_formatted_created_date() {
+		$appointments = appointments();
+		return mysql2date( $appointments->datetime_format, $this->created );
+	}
+
+	public function get_service_name() {
+		$appointments = appointments();
+		return $appointments->get_service_name( $this->service );
+	}
+
+	public function get_client_name() {
+		$appointments = appointments();
+		return $appointments->get_client_name( $this->ID );
+	}
+
 	public function get_email() {
 		global $appointments;
 
@@ -1064,6 +1084,15 @@ function appointments_get_statuses() {
 			'removed'	=> __('Removed', 'appointments')
 		)
 	);
+}
+
+function appointments_get_status_name( $status ) {
+	$statuses = appointments_get_statuses();
+	if ( isset( $statuses[ $status ] ) ) {
+		return $statuses[ $status ];
+	}
+
+	return __( 'None yet', 'appointments' );
 }
 
 /**

@@ -217,7 +217,7 @@ EO_ADMIN_JS;
 	}
 
 	public function bulk_cleanup_data ($app_ids) {
-		$status = !empty($_POST["app_new_status"]) ? $_POST['app_new_status'] : false;
+		$status = !empty($_REQUEST["app_new_status"]) ? $_REQUEST['app_new_status'] : false;
 		if ('removed' != $status) return false;
 		$app_ids = !empty($app_ids) && is_array($app_ids) ? $app_ids : array();
 		foreach ($app_ids as $app_id) {

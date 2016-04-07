@@ -209,8 +209,9 @@ class Appointments_AJAX {
 		$html = '';
 		$html .= '<tr class="inline-edit-row inline-edit-row-post quick-edit-row-post">';
 
+		$columns = isset( $_POST['columns'] ) ? absint( $_POST['columns'] ) : absint( $_POST['col_len'] );
 		$html .= isset($_POST['col_len']) && is_numeric($_POST['col_len'])
-			? '<td colspan="' . (int)$_POST["col_len"] . '" class="colspanchange">'
+			? '<td colspan="' . $columns . '" class="colspanchange">'
 			: '<td colspan="6" class="colspanchange">'
 		;
 

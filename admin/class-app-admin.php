@@ -673,39 +673,10 @@ class Appointments_Admin {
 			}
 		}
 
-		// Bulk status change
-		if ( isset( $_POST["app_status_change"] ) && $_POST["app_new_status"] && isset( $_POST["app"] ) && is_array( $_POST["app"] ) ) {
-
-			$result = 0;
-			$new_status = $_POST["app_new_status"];
-			foreach ( $_POST["app"] as $app_id ) {
-				$result = $result + (int)appointments_update_appointment_status( absint( $app_id ), $new_status  );
-			}
-
-			if ( $result ) {
-
-				if ( 'removed' == $new_status ) {
-					foreach ( $_POST["app"] as $app_id ) {
-						$appointments->send_removal_notification( $app_id );
-					}
-				}
-				elseif ( ! empty( $appointments->options["send_confirmation"] ) && 'yes' == $appointments->options["send_confirmation"] ) {
-					appointments_send_confirmation( $app_id );
-				}
-
-				$userdata = get_userdata( get_current_user_id() );
-				add_action( 'admin_notices', array ( &$appointments, 'updated' ) );
-				do_action( 'app_bulk_status_change',  $_POST["app"] );
-
-				$appointments->log( sprintf( __('Status of Appointment(s) with id(s):%s changed to %s by user:%s', 'appointments' ),  implode( ', ', $_POST["app"] ), $new_status, $userdata->user_login ) );
-
-			}
-		}
 
 		// Determine if we shall flush cache
 		if ( ( isset( $_POST["action_app"] ) ) && ( $result || $updated || $inserted ) ||
-		     ( isset( $_POST["delete_removed"] ) && 'delete_removed' == $_POST["delete_removed"] ) ||
-		     ( isset( $_POST["app_status_change"] ) && $_POST["app_new_status"] ) )
+		     ( isset( $_POST["delete_removed"] ) && 'delete_removed' == $_POST["delete_removed"] ) )
 			// As it means any setting is saved, lets clear cache
 			$appointments->flush_cache();
 	}
