@@ -58,11 +58,15 @@ class Appointments {
 	/** @var Appointments_Admin  */
 	public $admin;
 
+	/** @var Appointments_Notifications */
+	public $notifications;
+
 	function __construct() {
 
 		include_once( 'includes/helpers.php' );
 		include_once( 'includes/helpers-settings.php' );
 		include_once( 'includes/deprecated-hooks.php' );
+		include_once( 'includes/class-app-notifications.php' );
 
 		$this->timetables = get_transient( 'app_timetables' );
 		if ( ! $this->timetables || ! is_array( $this->timetables ) ) {
@@ -196,6 +200,8 @@ class Appointments {
 		if ( isset( $this->options['payment_required'] ) && 'yes' == $this->options['payment_required'] && !empty($this->options['allow_free_autoconfirm'])) {
 			if (!defined('APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM')) define('APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM', true);
 		}
+
+		$this->notifications = new Appointments_Notifications();
 	}
 
 	public function load_admin() {
@@ -3110,71 +3116,13 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 
 	/**
 	 *	Send confirmation email
-	 *  @param app_id: ID of the app whose confirmation will be sent
+	 * @param app_id: ID of the app whose confirmation will be sent
+     * @return boolean
+     * @deprecated since 1.7.3
 	 */
 	function send_confirmation( $app_id ) {
-		if ( !isset( $this->options["send_confirmation"] ) || 'yes' != $this->options["send_confirmation"] )
-			return;
-		global $wpdb;
-		$r = appointments_get_appointment( $app_id );
-		if ( $r != null ) {
-
-			$_REQUEST["app_location_id"] = 0;
-			$_REQUEST["app_service_id"] = $r->service;
-			$_REQUEST["app_provider_id"] = $r->worker;
-
-			// Why oh why didn't we do this all along?
-			if (empty($r->email) && !empty($r->user) && (int)$r->user) {
-				$wp_user = get_user_by('id', (int)$r->user);
-				if ($wp_user && !empty($wp_user->user_email)) $r->email = $wp_user->user_email;
-			}
-
-			$body = apply_filters( 'app_confirmation_message', $this->add_cancel_link( $this->_replace( $this->options["confirmation_message"],
-					$r->name, $this->get_service_name( $r->service), appointments_get_worker_name( $r->worker), $r->start, $r->price,
-					$this->get_deposit($r->price), $r->phone, $r->note, $r->address, $r->email, $r->city ), $app_id ), $r, $app_id );
-
-			$mail_result = wp_mail(
-						$r->email,
-						$this->_replace( $this->options["confirmation_subject"], $r->name,
-							$this->get_service_name( $r->service), appointments_get_worker_name( $r->worker),
-							$r->start, $r->price, $this->get_deposit($r->price), $r->phone, $r->note, $r->address, $r->email, $r->city ),
-						$body,
-						$this->message_headers( ),
-						apply_filters( 'app_confirmation_email_attachments', '' )
-					);
-
-			if ( $r->email && $mail_result ) {
-				// Log only if it is set so
-				if ( isset( $this->options["log_emails"] ) && 'yes' == $this->options["log_emails"] )
-					$this->log( sprintf( __('Confirmation message sent to %s for appointment ID:%s','appointments'), $r->email, $app_id ) );
-
-				do_action( 'app_confirmation_sent', $body, $r, $app_id );
-
-				// Allow disabling of confirmation email to admin
-				$disable = apply_filters( 'app_confirmation_disable_admin', false, $r, $app_id );
-				if ( $disable )
-					return;
-
-				//  Send a copy to admin and service provider
-				$to = array( $this->get_admin_email( ) );
-
-				$worker_email = $this->get_worker_email( $r->worker );
-				if ( $worker_email )
-					$to[]= $worker_email;
-
-				$provider_add_text  = sprintf( __('A new appointment has been made on %s. Below please find a copy of what has been sent to your client:', 'appointments'), get_option( 'blogname' ) );
-				$provider_add_text .= "\n\n\n";
-
-				wp_mail(
-						$to,
-						$this->_replace( __('New Appointment','appointments'), $r->name, $this->get_service_name( $r->service), appointments_get_worker_name( $r->worker),
-							$r->start, $r->price, $this->get_deposit($r->price), $r->phone, $r->note, $r->address, $r->email, $r->city ),
-						$provider_add_text . $body,
-						$this->message_headers( )
-					);
-			}
-		}
-		return true;
+		_deprecated_function( __FUNCTION__, '1.7.3', 'appointments_send_confirmation()' );
+		return $this->notifications->send_confirmation( $app_id );
 	}
 
 	/**

@@ -114,6 +114,20 @@ class Appointments_Appointment {
 		}
 	}
 
+	public function get_customer_email() {
+		$email = '';
+		if ( empty( $this->email ) && $wp_user = get_user_by( 'id', absint( $this->user ) ) ) {
+			if ( $wp_user && ! empty( $wp_user->user_email ) ) {
+				$email = $wp_user->user_email;
+			}
+		}
+		elseif ( is_email( $this->email ) ) {
+			$email = $this->email;
+		}
+
+		return $email;
+	}
+
 
 }
 
@@ -357,26 +371,6 @@ function appointments_is_busy( $start, $end, $capacity ) {
 	return $appointments->is_busy( $start, $end, $capacity );
 }
 
-/**
- * Send a confirmation email fro this appointment
- *
- * @param $app_id
- */
-function appointments_send_confirmation( $app_id ) {
-	global $appointments;
-	$appointments->send_confirmation( $app_id );
-}
-
-/**
- * Send an email when an appointment has been removed
- *
- * @param $app_id
- */
-function appointments_send_removal_notification( $app_id ) {
-	global $appointments;
-	$appointments->send_removal_notification( $app_id );
-}
-
 
 /**
  * Legacy: Update a user address, city, name...
@@ -614,10 +608,6 @@ function appointments_update_appointment_status( $app_id, $new_status ) {
 		}
 
 		appointments_clear_appointment_cache( $app_id );
-
-		if ( 'removed' === $new_status ) {
-			appointments_send_removal_notification( $app_id );
-		}
 
 		/**
 		 * Fired when an Appointment changes its status

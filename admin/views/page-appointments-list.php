@@ -315,8 +315,6 @@
 		$(".app-change-status-btn").click(function(e){
 			var button = $(this);
 			var selection = $("th.app-check-column input:checkbox:checked");
-console.log(selection);
-
 			// var data = { 'app[]' : []};
 			selection.each(function() {
 				// data['app[]'].push($(this).val());

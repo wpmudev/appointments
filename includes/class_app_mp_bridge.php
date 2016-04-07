@@ -106,7 +106,6 @@ class App_MP_Bridge {
 			if (!$this->_core->change_status('paid', $aid)) continue;
 
 			do_action('app_mp_order_paid', $aid, $order);
-			if ($do_send) $this->_core->send_confirmation($aid);
 		}
 	}
 

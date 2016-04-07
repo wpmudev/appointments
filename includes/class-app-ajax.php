@@ -636,10 +636,7 @@ class Appointments_AJAX {
 			$appointments->send_notification( $insert_id );
 		}
 
-		// Send confirmation if we forced it
-		if ('confirmed' == $status && isset($appointments->options["send_confirmation"]) && 'yes' == $appointments->options["send_confirmation"]) {
-			$appointments->send_confirmation( $insert_id );
-		}
+
 
 		// GCal button
 		if (isset($appointments->options["gcal"]) && 'yes' == $appointments->options["gcal"] && $gcal) {
@@ -770,9 +767,7 @@ class Appointments_AJAX {
 					$currency = $_POST['mc_currency'];
 
 					$appointments->record_transaction($_POST['custom'], $amount, $currency, $timestamp, $_POST['txn_id'], $_POST['payment_status'], '');
-					if ( $appointments->change_status( 'paid', $_POST['custom'] ) )
-						$appointments->send_confirmation( $_POST['custom'] );
-					else {
+					if ( ! appointments_update_appointment_status( $_POST['custom'], 'paid' ) ) {
 						// Something wrong. Warn admin
 						$message = sprintf( __('Paypal confirmation arrived, but status could not be changed for some reason. Please check appointment with ID %s', 'appointments'), $_POST['custom'] );
 
