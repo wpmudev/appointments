@@ -273,7 +273,7 @@ EO_ADMIN_JS;
 		foreach ($fields as $field) {
 			if (empty($field['required'])) continue;
 			$name = $this->_to_clean_name($field['label']);
-			if (empty($_POST[$name])) $this->_core->json_die($name);
+			if (empty($_POST['additional_fields'][$name])) $this->_core->json_die($name);
 		}
 	}
 
