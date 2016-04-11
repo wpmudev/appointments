@@ -202,6 +202,7 @@
 					alert(response.error);
 				}
 				else if (response) {
+					$('.inline-edit-row').hide();
 					app_parent.hide();
 					app_parent.after(response.result);
 				}

@@ -45,7 +45,7 @@ class Appointments_Admin_User_Profile {
 				foreach ( $_POST['app_cancel'] as $app_id => $value ) {
 					if ( appointments_update_appointment_status( $app_id, 'removed' ) ) {
 						$appointments->log( sprintf( __( 'Client %s cancelled appointment with ID: %s', 'appointments' ), $appointments->get_client_name( $app_id ), $app_id ) );
-						$appointments->send_notification( $app_id, true );
+						appointments_send_cancel_notification( $app_id );
 					}
 				}
 			}

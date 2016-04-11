@@ -1,46 +1,16 @@
 <?php
-/**
- * Manage all notifications sent to admin/users/workers
- */
-class Appointments_Notifications {
 
-	public function __construct() {
-		$options = appointments_get_options();
-		
-		$log_emails = isset( $options["log_emails"] ) && 'yes' == $options["log_emails"];
 
-		add_action( 'wpmudev_appointments_update_appointment_status', array( $this, 'on_change_status' ), 10, 3 );
-		add_action( 'wpmudev_appointments_insert_appointment', array( $this, 'on_insert_appointment' ) );
-	}
-
-	public function on_change_status( $app_id, $new_status, $old_status ) {
-		$app = appointments_get_appointment( $app_id );
-		if ( ! $app ) {
-			return;
-		}
-
-		if ( ( 'confirmed' == $new_status || 'paid' == $new_status ) && $new_status != $old_status ) {
-			$this->send_confirmation( $app_id );
-		}
-
-		if ( 'removed' === $new_status && $new_status != $old_status ) {
-			appointments_send_removal_notification( $app_id );
-		}
-	}
-
-	public function on_insert_appointment( $app_id ) {
-		$app = appointments_get_appointment( $app_id );
-		if ( ! $app ) {
-			return;
-		}
-
-		// Send confirmation if we forced it
-		if ( 'confirmed' == $app->status || 'paid' == $app->status ) {
-			$this->send_confirmation( $app_id );
-		}
-	}
-
-	function send_confirmation( $app_id ) {
+class Appointments_Notifications_Confirmation extends Appointments_Notification {
+	
+	/**
+	 * Send confirmation email to customer, admin and worker
+	 *
+	 * @param integer $app_id Appointment ID
+	 *
+	 * @return bool True if emails were sent
+	 */
+	public function send( $app_id ) {
 		$appointments = appointments();
 
 		$app = appointments_get_appointment( $app_id );
@@ -57,36 +27,36 @@ class Appointments_Notifications {
 
 		$sent_to = array();
 		$customer_email = $app->get_customer_email();
-		$result = $this->customer_confirmation( $app_id, $customer_email );
+		$result = $this->customer( $app_id, $customer_email );
 
 		if ( $result ) {
 			$sent_to[] = $customer_email;
 			$admin_email = $appointments->get_admin_email();
-			if ( ! in_array( $admin_email, $sent_to ) && $this->admin_confirmation( $app_id, $admin_email ) ) {
+			if ( ! in_array( $admin_email, $sent_to ) && $this->admin( $app_id, $admin_email ) ) {
 				$sent_to[] = $admin_email;
 			}
 
 			$worker_email = $appointments->get_worker_email( $app->worker );
 			if ( ! in_array( $worker_email, $sent_to ) ) {
-				$this->admin_confirmation( $app_id, $worker_email );
+				$this->admin( $app_id, $worker_email );
 			}
 
 			return true;
 
 		}
 
-		return false;
+		return $result;
 	}
 
 	/**
-	 * Sends a confirmation email
+	 * Sends a confirmation email to the customer
 	 *
 	 * @param int $app_id Appointment ID
 	 * @param string $email Email to send to
 	 *
 	 * @return bool True if the email has been sent
 	 */
-	public function customer_confirmation( $app_id, $email ) {
+	public function customer( $app_id, $email ) {
 		$appointments = appointments();
 
 		$r = appointments_get_appointment( $app_id );
@@ -95,10 +65,11 @@ class Appointments_Notifications {
 		}
 
 		if ( ! is_email( $email ) ) {
+			$this->manager->log( sprintf( __( 'Unable to notify the client about the appointment ID:%s confirmation, stopping.', 'appointments' ), $app_id ) );
 			return false;
 		}
 
-		$template = $this->get_customer_confirmation_template( $app_id, $email );
+		$template = $this->get_customer_template( $app_id, $email );
 		if ( ! $template ) {
 			return false;
 		}
@@ -117,10 +88,7 @@ class Appointments_Notifications {
 			return false;
 		}
 
-		// Log only if it is set so
-		if ( isset( $options["log_emails"] ) && 'yes' == $options["log_emails"] ) {
-			$appointments->log( sprintf( __('Confirmation message sent to %s for appointment ID:%s','appointments'), $r->email, $app_id ) );
-		}
+		$this->manager->log( sprintf( __('Confirmation message sent to %s for appointment ID:%s','appointments'), $r->email, $app_id ) );
 
 		do_action( 'app_confirmation_sent', $template['body'], $r, $app_id, $email );
 
@@ -135,7 +103,7 @@ class Appointments_Notifications {
 	 *
 	 * @return bool|void
 	 */
-	public function admin_confirmation( $app_id, $admin_email ) {
+	public function admin( $app_id, $admin_email ) {
 		$appointments = appointments();
 
 		$r = appointments_get_appointment( $app_id );
@@ -152,8 +120,8 @@ class Appointments_Notifications {
 			return false;
 		}
 
-		$template = $this->get_admin_confirmation_template( $app_id );
-		
+		$template = $this->get_admin_template( $app_id );
+
 		if ( ! $template ) {
 			return false;
 		}
@@ -172,8 +140,7 @@ class Appointments_Notifications {
 		return $result;
 	}
 
-
-	private function get_admin_confirmation_template( $app_id ) {
+	private function get_admin_template( $app_id ) {
 		$appointments = appointments();
 
 		$r = appointments_get_appointment( $app_id );
@@ -204,7 +171,7 @@ class Appointments_Notifications {
 			$r->city
 		);
 
-		$body = $this->get_customer_confirmation_template( $app_id, $customer_email );
+		$body = $this->get_customer_template( $app_id, $customer_email );
 
 		return array(
 			'subject' => $subject,
@@ -212,7 +179,7 @@ class Appointments_Notifications {
 		);
 	}
 
-	private function get_customer_confirmation_template( $app_id, $email ) {
+	private function get_customer_template( $app_id, $email ) {
 		$appointments = appointments();
 
 		$r = appointments_get_appointment( $app_id );
@@ -262,27 +229,5 @@ class Appointments_Notifications {
 			'body' => $body
 		);
 	}
+
 }
-
-
-
-/**
- * Send a confirmation email fro this appointment
- *
- * @param $app_id
- */
-function appointments_send_confirmation( $app_id ) {
-	global $appointments;
-	$appointments->notifications->send_confirmation( $app_id );
-}
-
-/**
- * Send an email when an appointment has been removed
- *
- * @param $app_id
- */
-function appointments_send_removal_notification( $app_id ) {
-	global $appointments;
-	$appointments->send_removal_notification( $app_id );
-}
-

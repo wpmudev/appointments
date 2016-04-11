@@ -529,7 +529,6 @@ function appointments_update_appointment( $app_id, $args ) {
 	}
 
 	// Change status?
-	$updated_status = false;
 	if ( ! empty( $args['status'] ) ) {
 		// Yeah, maybe change status
 		$update['status'] = $args['status'];
@@ -559,7 +558,7 @@ function appointments_update_appointment( $app_id, $args ) {
 	}
 
 
-	if ( ! $result && ! $updated_status ) {
+	if ( ! $result ) {
 		// Nothing has changed
 		return false;
 	}
@@ -568,6 +567,35 @@ function appointments_update_appointment( $app_id, $args ) {
 	appointments_clear_appointment_cache( $app_id );
 
 	do_action( 'wpmudev_appointments_update_appointment', $app_id, $args, $old_appointment );
+
+	$new_app = appointments_get_appointment( $app_id );
+	$old_status = $old_appointment->status;
+	$new_status = $new_app->status;
+	if ( $old_status != $new_status ) {
+
+		if ( 'removed' == $new_status ) {
+			do_action( 'app_removed', $app_id );
+		}
+
+		appointments_clear_appointment_cache( $app_id );
+
+		/**
+		 * Fired when an Appointment changes its status
+		 *
+		 * @used-by AppointmentsGcal::app_change_status()
+		 * @used-by App_Users_AdditionalFields::manual_cleanup_data()
+		 */
+		do_action( 'wpmudev_appointments_update_appointment_status', $app_id, $new_status, $old_status );
+
+		/**
+		 * Fired when an Appointment changes its status
+		 *
+		 * @deprecated since 1.5.7.1
+		 */
+		do_action( 'app_change_status', $new_status, $app_id );
+
+		return true;
+	}
 
 	return true;
 }
@@ -602,32 +630,7 @@ function appointments_update_appointment_status( $app_id, $new_status ) {
 
 	$result = appointments_update_appointment( $app->ID, array( 'status' => $new_status ) );
 
-	if ( $result ) {
-		if ( 'removed' == $new_status ) {
-			do_action( 'app_removed', $app_id );
-		}
-
-		appointments_clear_appointment_cache( $app_id );
-
-		/**
-		 * Fired when an Appointment changes its status
-		 *
-		 * @used-by AppointmentsGcal::app_change_status()
-		 * @used-by App_Users_AdditionalFields::manual_cleanup_data()
-		 */
-		do_action( 'wpmudev_appointments_update_appointment_status', $app_id, $new_status, $old_status );
-
-		/**
-		 * Fired when an Appointment changes its status
-		 *
-		 * @deprecated since 1.5.7.1
-		 */
-		do_action( 'app_change_status', $new_status, $app_id );
-
-		return true;
-	}
-
-	return false;
+	return $result;
 }
 
 /**

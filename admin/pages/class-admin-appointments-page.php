@@ -44,15 +44,6 @@ class Appointments_Admin_Appointments_Page {
 
 			if ( $result ) {
 
-				if ( 'removed' == $new_status ) {
-					foreach ( $_REQUEST["app"] as $app_id ) {
-						$appointments->send_removal_notification( $app_id );
-					}
-				}
-				elseif ( ! empty( $appointments->options["send_confirmation"] ) && 'yes' == $appointments->options["send_confirmation"] ) {
-					appointments_send_confirmation( $app_id );
-				}
-
 				$userdata = get_userdata( get_current_user_id() );
 				add_action( 'admin_notices', array ( &$appointments, 'updated' ) );
 				do_action( 'app_bulk_status_change',  $_REQUEST["app"] );

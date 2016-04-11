@@ -87,7 +87,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		$stat = rtrim( $stat, "OR " );
 
 		// If this is a client shortcode
-		if ( !$provider ) {
+		if ( !$provider_id ) {
 			if ( $current_user->ID != $user_id ) {
 				$apps = wp_list_pluck( appointments_get_user_appointments( $user_id ), 'ID' );
 			}

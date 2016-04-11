@@ -656,5 +656,72 @@ class App_Appointments_Test extends App_UnitTestCase {
 		$this->assertEquals( new Appointments_Appointment( $cached_data ), $app );
 	}
 
+	/**
+	 * @group emails
+	 */
+	function test_get_appointment_emails() {
+		$worker_args = $this->factory->user->generate_args();
+		$worker_args['user_email'] = 'worker@email.dev';
+		$worker_id = $this->factory->user->create_object( $worker_args );
+
+		$user_args = $this->factory->user->generate_args();
+		$user_args['user_email'] = 'user@email.dev';
+		$user_id = $this->factory->user->create_object( $user_args );
+
+
+		$worker_args = array(
+			'ID' => $worker_id
+		);
+		appointments_insert_worker( $worker_args );
+
+		$args = array(
+			'user' => $user_id,
+			'worker' => $worker_id,
+			'status' => 'paid',
+			'name' => 'Cname',
+			'created' => '2015-11-11 10:00:00'
+		);
+		$app_id = appointments_insert_appointment( $args );
+
+		$app = appointments_get_appointment( $app_id );
+
+		$appointments = appointments();
+		$this->assertEquals( 'user@email.dev', $app->get_customer_email() );
+		$this->assertEquals( 'worker@email.dev', $appointments->get_worker_email( $app->worker ) );
+
+		// Unassigned customer appointment
+		$args = array(
+			'email' => 'customer@email.dev',
+			'worker' => $worker_id,
+			'status' => 'paid',
+			'name' => 'Cname',
+			'created' => '2015-11-11 10:00:00'
+		);
+		$app_id = appointments_insert_appointment( $args );
+
+		$app = appointments_get_appointment( $app_id );
+
+		$appointments = appointments();
+		$this->assertEquals( 'customer@email.dev', $app->get_customer_email() );
+		$this->assertEquals( 'worker@email.dev', $appointments->get_worker_email( $app->worker ) );
+
+		// Email overriden
+		$args = array(
+			'email' => 'customer@email.dev', // This email should override the user one
+			'user' => $user_id,
+			'worker' => $worker_id,
+			'status' => 'paid',
+			'name' => 'Cname',
+			'created' => '2015-11-11 10:00:00'
+		);
+		$app_id = appointments_insert_appointment( $args );
+
+		$app = appointments_get_appointment( $app_id );
+
+		$appointments = appointments();
+		$this->assertEquals( 'customer@email.dev', $app->get_customer_email() );
+		$this->assertEquals( 'worker@email.dev', $appointments->get_worker_email( $app->worker ) );
+	}
+
 
 }

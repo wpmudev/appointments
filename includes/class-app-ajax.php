@@ -633,7 +633,7 @@ class Appointments_AJAX {
 			'yes' == $appointments->options["send_notification"] &&
 			'pending' == $status
 		) {
-			$appointments->send_notification( $insert_id );
+			appointments_send_notification( $insert_id );
 		}
 
 

@@ -58,7 +58,7 @@ class Appointments {
 	/** @var Appointments_Admin  */
 	public $admin;
 
-	/** @var Appointments_Notifications */
+	/** @var Appointments_Notifications_Manager */
 	public $notifications;
 
 	function __construct() {
@@ -66,7 +66,7 @@ class Appointments {
 		include_once( 'includes/helpers.php' );
 		include_once( 'includes/helpers-settings.php' );
 		include_once( 'includes/deprecated-hooks.php' );
-		include_once( 'includes/class-app-notifications.php' );
+		include_once( 'includes/class-app-notifications-manager.php' );
 
 		$this->timetables = get_transient( 'app_timetables' );
 		if ( ! $this->timetables || ! is_array( $this->timetables ) ) {
@@ -201,7 +201,7 @@ class Appointments {
 			if (!defined('APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM')) define('APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM', true);
 		}
 
-		$this->notifications = new Appointments_Notifications();
+		$this->notifications = new Appointments_Notifications_Manager();
 	}
 
 	public function load_admin() {
@@ -1205,7 +1205,7 @@ class Appointments {
 				if ( $in_allowed_stat && $_GET['app_nonce'] == md5( $_GET['app_id']. $appointments->salt . strtotime( $app->created ) ) ) {
 					if ( appointments_update_appointment_status( $app_id, 'removed' ) ) {
 						$appointments->log( sprintf( __('Client %s cancelled appointment with ID: %s','appointments'), $appointments->get_client_name( $app_id ), $app_id ) );
-						$appointments->send_notification( $app_id, true );
+						appointments_send_cancel_notification( $app_id );
 
 						do_action('app-appointments-appointment_cancelled', $app_id);
 						// If there is a header warning other plugins can do whatever they need
@@ -1254,7 +1254,7 @@ class Appointments {
 				// Now we can safely continue for cancel
 				if ( appointments_update_appointment_status( $app_id, 'removed' ) ) {
 					$appointments->log( sprintf( __('Client %s cancelled appointment with ID: %s','appointments'), $appointments->get_client_name( $app_id ), $app_id ) );
-					$appointments->send_notification( $app_id, true );
+					appointments_send_cancel_notification( $app_id );
 
 					do_action('app-appointments-appointment_cancelled', $app_id);
 					die( json_encode( array('success'=>1)));
@@ -3099,14 +3099,14 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			'cancel_page'				=> 0
 		));
 
+		do_action( 'appointments_init', $this );
+
 		//  Run this code not before 10 mins
 		if ( ( time() - get_option( "app_last_update" ) ) < apply_filters( 'app_update_time', 600 ) ) {
 			return;
 		}
 
 		$this->remove_appointments();
-		$this->send_reminder();
-		$this->send_reminder_worker();
 
 	}
 
@@ -3122,353 +3122,42 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 	 */
 	function send_confirmation( $app_id ) {
 		_deprecated_function( __FUNCTION__, '1.7.3', 'appointments_send_confirmation()' );
-		return $this->notifications->send_confirmation( $app_id );
+		return appointments_send_confirmation( $app_id );
 	}
 
 	/**
 	 * Send notification email
 	 * @param cancel: If this is a cancellation
 	 * @since 1.0.2
+	 *
+	 * @deprecated since 1.7.3
+	 * 
+	 * @return bool
 	 */
 	function send_notification( $app_id, $cancel=false ) {
-		// In case of cancellation, continue
-		if ( ! $cancel && ! isset( $this->options["send_notification"] ) || 'yes' != $this->options["send_notification"] ) {
-			return;
-		}
-		global $wpdb;
-		$r = appointments_get_appointment( $app_id );
-		if ( $r ) {
-
-			$admin_email = apply_filters( 'app_notification_email', $this->get_admin_email( ), $r );
-
-			if ( $cancel ) {
-				$subject = __('An appointment has been cancelled', 'appointments');
-				$body = sprintf( __('Appointment with ID %s has been cancelled by the client. You can see it clicking this link: %s','appointments'), $app_id, admin_url("admin.php?page=appointments&type=removed") );
-			}
-			else {
-				$subject = __('An appointment requires your confirmation', 'appointments');
-				$body = sprintf( __('The new appointment has an ID %s and you can edit it clicking this link: %s','appointments'), $app_id, admin_url("admin.php?page=appointments&type=pending") );
-			}
-			$body = apply_filters('app_notification_message',
-				apply_filters(
-					'app-messages-' . ($cancel ? 'cancellation' : 'notification') . '-body',
-					$body, $r, $app_id
-				),
-				$r, $app_id
-			);
-			$subject = apply_filters(
-				'app-messages-' . ($cancel ? 'cancellation' : 'notification') . '-subject',
-				$subject, $r, $app_id
-			);
-
-			$mail_result = wp_mail(
-				$admin_email,
-				$subject,
-				$body,
-				$this->message_headers()
-			);
-
-			if ( $mail_result && isset( $this->options["log_emails"] ) && 'yes' == $this->options["log_emails"] ) {
-				$this->log( sprintf( __('Notification message sent to %s for appointment ID:%s','appointments'), $admin_email, $app_id ) );
-				do_action( 'app_notification_sent', $body, $r, $app_id );
-			}
-
-			// Also notify service provider if he is allowed to confirm it
-			// Note that message itself is different from that of the admin
-			// Don't send repeated email to admin if he is the provider
-			if ( $r->worker &&  $admin_email != $this->get_worker_email( $r->worker ) && isset( $this->options['allow_worker_confirm'] ) && 'yes' == $this->options['allow_worker_confirm'] ) {
-
-				if ( $cancel ) {
-				/* Translators: First %s is for appointment ID and the second one is for date and time of the appointment */
-					$body = sprintf(__('Cancelled appointment has an ID %s for %s.','appointments'), $app_id, date_i18n($this->datetime_format, strtotime($r->start)));
-				}
-				else {
-					$body = sprintf(__('The new appointment has an ID %s for %s and you can confirm it using your profile page.','appointments'), $app_id, date_i18n($this->datetime_format, strtotime($r->start)));
-				}
-				$body = apply_filters(
-					'app-messages-worker-' . ($cancel ? 'cancellation' : 'notification'),
-					$body, $r, $app_id
-				);
-				$subject = apply_filters(
-					'app-messages-worker-' . ($cancel ? 'cancellation' : 'notification') . '-subject',
-					$subject, $r, $app_id
-				);
-
-				$mail_result = wp_mail(
-					$this->get_worker_email($r->worker),
-					$subject,
-					$body,
-					$this->message_headers()
-				);
-
-				if ( $mail_result && isset( $this->options["log_emails"] ) && 'yes' == $this->options["log_emails"] ) {
-					$this->log( sprintf( __('Notification message sent to %s for appointment ID:%s','appointments'), $this->get_worker_email( $r->worker ), $app_id ) );
-					do_action( 'appointments_worker_notification_sent', $body, $r, $app_id );
-				}
-			}
-		}
-		return true;
+		_deprecated_function( __FUNCTION__, '1.7.3', 'Appointments_Notification_Manager::send_notification()' );
+		return $this->notifications->send_notification( $app_id, $cancel );
 	}
 
 	/**
 	 * Sends out a removal notification email.
 	 * This email is sent out only on admin status change, *not* on appointment cancellation by user.
 	 * The email will go out to the client and, perhaps, worker and admin.
+	 *
+	 * @deprecated since 1.7.3
 	 */
 	function send_removal_notification ($app_id) {
-		if ( !isset( $this->options["send_removal_notification"] ) || 'yes' != $this->options["send_removal_notification"] ) return false;
-		$app = appointments_get_appointment($app_id);
-		$log = isset($this->options["log_emails"]) && 'yes' == $this->options["log_emails"];
-		$email = !empty($app->email) ? $app->email : false;
-		if (empty($email) && !empty($app->user) && is_numeric($app->user)) {
-			// If we don't have an email, try getting one if user ID is set
-			$wp_user = get_user_by('id', (int)$app->user);
-			if ($wp_user && !empty($wp_user->user_email)) $email = $wp_user->user_email;
-		}
-		if (empty($email)) {
-			// No reason to carry on, we don't know how to notify the client
-			if ($log) $this->log(sprintf(__('Unable to notify the client about the appointment ID:%s removal, stopping.', 'appointments'), $app_id));
-			return false;
-		}
-
-		$subject = !empty($this->options['removal_notification_subject'])
-			? $this->options['removal_notification_subject']
-			: App_Template::get_default_removal_notification_subject()
-		;
-		$subject = $this->_replace($subject,
-			$app->name,
-			$this->get_service_name($app->service),
-			appointments_get_worker_name($app->worker),
-			$app->start,
-			$app->price,
-			$this->get_deposit($app->price),
-			$app->phone,
-			$app->note,
-			$app->address,
-			$app->email,
-			$app->city
-		);
-		$msg = !empty($this->options['removal_notification_message'])
-			? $this->options['removal_notification_message']
-			: App_Template::get_default_removal_notification_message()
-		;
-		$msg = $this->_replace($msg,
-			$app->name,
-			$this->get_service_name($app->service),
-			appointments_get_worker_name($app->worker),
-			$app->start,
-			$app->price,
-			$this->get_deposit($app->price),
-			$app->phone,
-			$app->note,
-			$app->address,
-			$app->email,
-			$app->city
-		);
-		$msg = apply_filters('app_removal_notification_message', $msg, $app, $app_id);
-		$result = wp_mail(
-			$email,
-			$subject,
-			$msg,
-			$this->message_headers()
-		);
-		if ($result && $log) {
-			$this->log(sprintf(__('Removal notification message sent to %s for appointment ID:%s', 'appointments'), $email, $app_id));
-		}
-
-		$disable = apply_filters( 'app_removal_notification_disable_admin', false, $app, $app_id );
-		if ($disable) return false;
-
-		//  Send a copy to admin and service provider
-		$to = array($this->get_admin_email());
-
-		$worker_email = $this->get_worker_email($app->worker);
-		if ($worker_email) $to[]= $worker_email;
-
-		$provider_add_text  = sprintf(__('An appointment removal notification for %s has been sent to your client:', 'appointments'), $app_id);
-		$provider_add_text .= "\n\n\n";
-
-		wp_mail(
-			$to,
-			__('Removal notification', 'appointments'),
-			$provider_add_text . $msg,
-			$this->message_headers()
-		);
-
-
-		return true;
+		_deprecated_function( __FUNCTION__, '1.7.3', 'appointments_send_removal_notification()' );
+		return appointments_send_removal_notification( $app_id );
 	}
 
 	/**
-	 *	Check and send reminders to clients for appointments
-	 *
+	 *	Check and send reminders to clients and workers for appointments
+	 * @deprecated since 1.7.3
 	 */
-	function send_reminder() {
-		if ( ! isset( $this->options["reminder_time"] ) || ! $this->options["reminder_time"] || 'yes' != $this->options["send_reminder"] ) {
-			return;
-		}
-
-		$hours = explode( "," , trim( $this->options["reminder_time"] ) );
-
-		if ( !is_array( $hours ) || empty( $hours ) )
-			return;
-
-		global $wpdb;
-
-		$messages = array();
-		foreach ( $hours as $hour ) {
-			$results = appointments_get_unsent_appointments( $hour, 'user' );
-
-			if ( $results ) {
-				foreach ( $results as $r ) {
-					$_REQUEST["app_location_id"] = 0;
-					$_REQUEST["app_service_id"] = $r->service;
-					$_REQUEST["app_provider_id"] = $r->worker;
-
-					$messages[] = array(
-						'ID' => $r->ID,
-						'to' => $r->email,
-						'subject' => $this->_replace(
-							$this->options["reminder_subject"], 
-							$r->name, 
-							$this->get_service_name($r->service),
-							appointments_get_worker_name($r->worker),
-							$r->start, 
-							$r->price, 
-							$this->get_deposit($r->price), 
-							$r->phone, 
-							$r->note, 
-							$r->address, 
-							$r->email, 
-							$r->city
-						),
-						'message' => apply_filters('app_reminder_message', $this->add_cancel_link(
-							$this->_replace( 
-								$this->options["reminder_message"],
-								$r->name, 
-								$this->get_service_name($r->service),
-								appointments_get_worker_name($r->worker),
-								$r->start,
-								$r->price, 
-								$this->get_deposit($r->price), 
-								$r->phone, 
-								$r->note, 
-								$r->address, 
-								$r->email, 
-								$r->city
-							), 
-							$r->ID), 
-						$r, $r->ID)
-					);
-					// Update "sent" field
-					appointments_update_appointment( $r->ID, array( 'sent' => rtrim($r->sent, ":") . ":" . trim($hour) . ":") );
-				}
-			}
-		}
-		// Remove duplicates
-		$messages = $this->array_unique_by_ID( $messages );
-		if ( is_array( $messages ) && !empty( $messages ) ) {
-			foreach ( $messages as $message ) {
-				$mail_result = wp_mail( $message["to"], $message["subject"], $message["message"], $this->message_headers(), apply_filters( 'app_reminder_email_attachments', '' ) );
-				if ( $mail_result && isset( $this->options["log_emails"] ) && 'yes' == $this->options["log_emails"] )
-					$this->log( sprintf( __('Reminder message sent to %s for appointment ID:%s','appointments'), $message["to"], $message["ID"] ) );
-			}
-		}
-		return;
-	}
-
-	/**
-	 *	Check and send reminders to worker for appointments
-	 */
-	function send_reminder_worker() {
-		if ( !isset( $this->options["reminder_time_worker"] ) || !$this->options["reminder_time_worker"] || 'yes' != $this->options["send_reminder_worker"] )
-			return;
-
-		$hours = explode( "," , $this->options["reminder_time_worker"] );
-
-		if ( !is_array( $hours ) || empty( $hours ) )
-			return;
-
-		global $wpdb;
-
-		$messages = array();
-		foreach ( $hours as $hour ) {
-			$results = appointments_get_unsent_appointments( $hour, 'worker' );
-
-			$provider_add_text  = __('You are receiving this reminder message for your appointment as a provider. The below is a copy of what may have been sent to your client:', 'appointments');
-			$provider_add_text .= "\n\n\n";
-
-			if ( $results ) {
-				foreach ( $results as $r ) {
-					$_REQUEST["app_location_id"] = 0;
-					$_REQUEST["app_service_id"] = $r->service;
-					$_REQUEST["app_provider_id"] = $r->worker;
-
-					$messages[] = array(
-						'ID' => $r->ID,
-						'to' => $this->get_worker_email( $r->worker ),
-						'subject' => $this->_replace(
-							$this->options["reminder_subject"],
-							$r->name,
-							$this->get_service_name($r->service),
-							appointments_get_worker_name($r->worker),
-							$r->start,
-							$r->price,
-							$this->get_deposit($r->price),
-							$r->phone,
-							$r->note,
-							$r->address,
-							$r->email
-						),
-						'message' => apply_filters('app_reminder_message', $provider_add_text . $this->add_cancel_link(
-								$this->_replace(
-									$this->options["reminder_message"],
-									$r->name,
-									$this->get_service_name($r->service),
-									appointments_get_worker_name($r->worker),
-									$r->start,
-									$r->price,
-									$this->get_deposit($r->price),
-									$r->phone,
-									$r->note,
-									$r->address,
-									$r->email
-								),
-								$r->ID),
-							$r, $r->ID),
-					);
-					// Update "sent" field
-					appointments_update_appointment( $r->ID, array( 'sent_worker' => rtrim($r->sent_worker, ":") . ":" . trim($hour) . ":") );
-				}
-			}
-		}
-		// Remove duplicates
-		$messages = $this->array_unique_by_ID( $messages );
-		if ( is_array( $messages ) && !empty( $messages ) ) {
-			foreach ( $messages as $message ) {
-				$mail_result = wp_mail( $message["to"], $message["subject"], $message["message"], $this->message_headers() );
-				if ( $mail_result && isset( $this->options["log_emails"] ) && 'yes' == $this->options["log_emails"] )
-					$this->log( sprintf( __('Reminder message sent to %s for appointment ID:%s','appointments'), $message["to"], $message["ID"] ) );
-			}
-		}
-	}
-
-	/**
-	 *	Remove duplicate messages by app ID
-	 */
-	function array_unique_by_ID( $messages ) {
-		if ( !is_array( $messages ) || empty( $messages ) )
-			return false;
-		$idlist = array();
-		// Save array to a temp area
-		$result = $messages;
-		foreach ( $messages as $key=>$message ) {
-			if ( in_array( $message['ID'], $idlist ) )
-				unset( $result[$key] );
-			else
-				$idlist[] = $message['ID'];
-		}
-		return $result;
+	function maybe_send_reminders() {
+		_deprecated_function( __FUNCTION__, '1.7.3', 'Appointments_Notification_Manager::maybe_send_reminders()' );
+		$this->notifications->maybe_send_reminders();
 	}
 
 	/**

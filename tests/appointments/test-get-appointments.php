@@ -1121,13 +1121,4 @@ class App_Get_Appointments_Test extends App_UnitTestCase {
 		$apps = appointments_get_appointments( array( 'count' => true, 'per_page' => 1, 'page' => 2 ) );
 		$this->assertEquals( 3, $apps );
 	}
-
-
-
-
-
-
-
-
-
 }
