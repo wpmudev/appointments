@@ -172,17 +172,20 @@ class Appointments_Google_Calendar_Admin {
 
 		$gcal_action = isset( $_POST['gcal_action'] ) ? $_POST['gcal_action'] : false;
 		if ( 'access-code' === $gcal_action ) {
-			$result = $this->gcal_api->api_manager->authenticate( $_POST['access_code'] );
-			if ( is_wp_error( $result ) ) {
-				$this->gcal_api->restore_to_default();
-				wp_die( sprintf( __( 'Authentication failed: %s', 'appointments' ), $result->get_error_message() ) );
-				return;
+			if ( ! empty( $_POST['access_code'] ) ) {
+				$result = $this->gcal_api->api_manager->authenticate( $_POST['access_code'] );
+				if ( is_wp_error( $result ) ) {
+					$this->gcal_api->restore_to_default();
+					wp_die( sprintf( __( 'Authentication failed: %s', 'appointments' ), $result->get_error_message() ) );
+					return;
+				}
+				else {
+					$token = $this->gcal_api->api_manager->get_access_token();
+					update_user_meta( $user_id, 'app_gcal_access_code', $_POST['access_code'] );
+					update_user_meta( $user_id, 'app_gcal_token', $token );
+				}
 			}
-			else {
-				$token = $this->gcal_api->api_manager->get_access_token();
-				update_user_meta( $user_id, 'app_gcal_access_code', $_POST['access_code'] );
-				update_user_meta( $user_id, 'app_gcal_token', $token );
-			}
+
 		}
 		elseif ( 'gcal-settings' === $gcal_action ) {
 			update_user_meta( $user_id, 'app_api_mode', $_POST['gcal_api_mode'] );
