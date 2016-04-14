@@ -56,6 +56,7 @@ abstract class App_Template {
 			'THB' => __('THB - Thai Baht', 'appointments'),
 			'TRY' => __('TRY - Turkish lira', 'appointments'),
 			'USD' => __('USD - U.S. Dollar', 'appointments'),
+			'RUB' => __('RUB - Russian Ruble', 'appointments')
 		));
 		return self::$_currencies;
 	}
@@ -87,6 +88,7 @@ abstract class App_Template {
 			'THB' => __('THB', 'appointments'),
 			'TRY' => __('TRY', 'appointments'),
 			'USD' => __('USD', 'appointments'),
+			'RUB' => __('RUB', 'appointments')
 		));
 		return !empty(self::$_currency_symbols[$currency])
 			? self::$_currency_symbols[$currency]

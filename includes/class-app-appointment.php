@@ -205,7 +205,30 @@ function appointments_get_appointment_by_gcal_id( $gcal_id ) {
 /**
  * Insert a new Appointment
  *
- * @param array $args
+ * @param array $args {
+ *      An array of elements that make up an appointment to insert.
+ *
+ *      @type int            $user           The user ID assigned to the Appointment. 0 = no user,
+ *                                           Default 0
+ *      @type string         $email          The email of the user. Default empty.
+ *      @type string         $name           Name of the user. Default empty.
+ *      @type string         $phone          Phone of the user. Default empty.
+ *      @type string         $address        Address of the user. Default empty.
+ *      @type string         $city           City of the user. Default empty.
+ *      @type string         $note           Notes for the appointments. Default empty.
+ *      @type int|string     $service        Service ID assigned to the Appointment,
+ *                                           Default empty string.
+ *      @type int|string     $worker         Worker ID assigned to the Appointment,
+ *                                           Default empty string.
+ *      @type float|string   $price          Price of the Appointment. Default empty string.
+ *      @type int            $date           Timestamp of the date of the appointment. Default empty.
+ *      @type string         $created        Date when the appointment was created. Default current time.
+ *      @type string         $status         Status of the appointment. Default 'pending'
+ *      @type string         $location       Appointment location. Default empty.
+ *      @type string         $gcal_updated   Date when the GCal Event was updated. Default empty.
+ *      @type string         $gcal_ID        Gcal ID. Default empty.
+ *      @type int            $duration       Duration of the appointment.
+ * }
  *
  * @return bool|int
  */
@@ -222,8 +245,8 @@ function appointments_insert_appointment( $args ) {
 		'service' => '',
 		'worker' => '',
 		'price' => '',
-		'date' => '',
-		'time' => '',
+		'date' => '', // Set this always as integer
+		'time' => '', // Do not use this one
 		'created' => current_time( 'mysql' ),
 		'note' => '',
 		'status' => 'pending',
@@ -1143,7 +1166,7 @@ function appointments_get_expired_appointments( $pending_seconds = 0 ) {
 		$wpdb->prepare(
 			"SELECT * FROM $table
 			WHERE start < %s
-			AND status NOT IN ('completed', 'removed')",
+			AND status NOT IN ( 'completed', 'removed' )",
 			date( 'Y-m-d H:i:s', $current_time )
 		)
 	);
