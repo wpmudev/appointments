@@ -430,9 +430,33 @@ function appointments_update_user_appointment_data( $app_id ) {
 /**
  * Update an appointment data
  *
- * @param $app_id
- * @param $args
- * @param bool $resend
+ * @param int $app_id
+ * @param array $args {
+ *      An array of elements that make up an appointment to insert.
+ *
+ *      @type int            $user           The user ID assigned to the Appointment. 0 = no user,
+ *                                           Default 0
+ *      @type string         $email          The email of the user. Default empty.
+ *      @type string         $name           Name of the user. Default empty.
+ *      @type string         $phone          Phone of the user. Default empty.
+ *      @type string         $address        Address of the user. Default empty.
+ *      @type string         $city           City of the user. Default empty.
+ *      @type string         $note           Notes for the appointments. Default empty.
+ *      @type int|string     $service        Service ID assigned to the Appointment,
+ *                                           Default empty string.
+ *      @type int|string     $worker         Worker ID assigned to the Appointment,
+ *                                           Default empty string.
+ *      @type float|string   $price          Price of the Appointment. Default empty string.
+ *      @type int            $date           Timestamp of the date of the appointment. Default empty.
+ *      @type string         $created        Date when the appointment was created. Default current time.
+ *      @type string         $status         Status of the appointment. Default 'pending'
+ *      @type string         $location       Appointment location. Default empty.
+ *      @type string         $gcal_updated   Date when the GCal Event was updated. Default empty.
+ *      @type string         $gcal_ID        Gcal ID. Default empty.
+ *      @type int            $duration       Duration of the appointment.
+ *      @type string         $sent_worker    Notification times sent to worker
+ *      @type string         $sent           Notification times sent to user
+ * }
  *
  * @return bool True in case of success
  */
@@ -761,6 +785,11 @@ function appointments_get_appointments_filtered_by_services( $args = array() ) {
 }
 
 
+/**
+ * @param array $args
+ *
+ * @return array|mixed|null|object|string
+ */
 function appointments_get_appointments( $args = array() ) {
 	global $wpdb;
 

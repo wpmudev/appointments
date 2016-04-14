@@ -19,6 +19,9 @@ class App_UnitTestCase extends WP_UnitTestCase {
 
 	function setUp() {
 		parent::setUp();
+		$this->factory->appointment = new WP_UnitTest_Factory_For_Appointment( $this->factory );
+		$this->factory->worker = new WP_UnitTest_Factory_For_Worker( $this->factory );
+		$this->factory->service = new WP_UnitTest_Factory_For_Service( $this->factory );
 		appointments_activate();
 	}
 
@@ -37,6 +40,84 @@ class App_UnitTestCase extends WP_UnitTestCase {
 		add_action( 'deprecated_function_run', array( $this, 'deprecated_function_run' ) );
 		add_action( 'deprecated_argument_run', array( $this, 'deprecated_function_run' ) );
 		add_action( 'doing_it_wrong_run', array( $this, 'doing_it_wrong_run' ) );
+	}
+}
+
+
+class WP_UnitTest_Factory_For_Appointment extends WP_UnitTest_Factory_For_Thing {
+
+	function __construct( $factory = null ) {
+		parent::__construct( $factory );
+
+		$this->default_generation_definitions = array(
+			'name' => new WP_UnitTest_Generator_Sequence( 'Name %s' ),
+			'note' => new WP_UnitTest_Generator_Sequence( 'Note %s' ),
+			'phone' => new WP_UnitTest_Generator_Sequence( 'Phone %s' ),
+			'address' => new WP_UnitTest_Generator_Sequence( 'Address %s' ),
+			'city' => new WP_UnitTest_Generator_Sequence( 'City %s' ),
+		);
+	}
+
+	function create_object( $args ) {
+		return appointments_insert_appointment( $args );
+	}
+
+	function update_object( $worker_id, $fields ) {
+		return appointments_update_appointment( $worker_id, $fields );
+	}
+
+	function get_object_by_id( $worker_id ) {
+		return appointments_get_appointment( $worker_id );
+	}
+}
+
+class WP_UnitTest_Factory_For_Worker extends WP_UnitTest_Factory_For_Thing {
+
+	function __construct( $factory = null ) {
+		parent::__construct( $factory );
+
+		$this->default_generation_definitions = array(
+			'user_email' => new WP_UnitTest_Generator_Sequence( 'worker_%s@email.dev' ),
+		);
+	}
+
+	function create_object( $args ) {
+		$user_args = $this->factory->user->generate_args();
+		$user_args['user_email'] = $args['user_email'];
+		$worker_id = $this->factory->user->create_object( $user_args );
+		$args['ID'] = $worker_id;
+		return appointments_insert_worker( $args );
+	}
+
+	function update_object( $worker_id, $fields ) {
+		return appointments_update_worker( $worker_id, $fields );
+	}
+
+	function get_object_by_id( $worker_id ) {
+		return appointments_get_worker( $worker_id );
+	}
+}
+
+class WP_UnitTest_Factory_For_Service extends WP_UnitTest_Factory_For_Thing {
+
+	function __construct( $factory = null ) {
+		parent::__construct( $factory );
+
+		$this->default_generation_definitions = array(
+			'name' => new WP_UnitTest_Generator_Sequence( 'Service %s' ),
+		);
+	}
+
+	function create_object( $args ) {
+		return appointments_insert_service( $args );
+	}
+
+	function update_object( $worker_id, $fields ) {
+		return appointments_update_worker( $worker_id, $fields );
+	}
+
+	function get_object_by_id( $worker_id ) {
+		return appointments_get_worker( $worker_id );
 	}
 }
 

@@ -723,5 +723,42 @@ class App_Appointments_Test extends App_UnitTestCase {
 		$this->assertEquals( 'worker@email.dev', $appointments->get_worker_email( $app->worker ) );
 	}
 
+	/**
+	 * @group cleanup
+	 */
+	function test_cleanup_off() {
+		var_dump($this->factory->appointment);
+		$appointments = appointments();
+		$options = appointments_get_options();
+		$options['clear_time'] = 0;
+		appointments_update_options( $options );
+
+
+		$time = current_time( 'timestamp' );
+
+		$args = $this->factory->appointment->generate_args();
+		$args['status'] = 'paid';
+		$args['date'] = $time - ( 24 * 60 * 60 ); // Yesterday;
+		$app_id_1 = $this->factory->appointment->create_object( $args );
+
+		$args = $this->factory->appointment->generate_args();
+		$args['status'] = 'paid';
+		$args['date'] = $time - 10; // 10 seconds ago
+		$app_id_2 = $this->factory->appointment->create_object( $args );
+
+		$args = $this->factory->appointment->generate_args();
+		$args['status'] = 'paid';
+		$args['date'] = $time - ( 24 * 60 * 60 * 7 ); // 1 week ago
+		$app_id_3 = $this->factory->appointment->create_object( $args );
+		$expired = appointments_get_expired_appointments(0);
+		var_dump($expired);
+		return;
+
+		$appointments->remove_appointments();
+
+		$apps = appointments_get_appointments();
+		var_dump($apps);
+	}
+
 
 }

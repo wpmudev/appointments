@@ -3259,7 +3259,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		if ( isset( $this->options["clear_time"] ) && $this->options["clear_time"] > 0 ) {
 			$clear_secs = $this->options["clear_time"] * 60;
 		}
-
+		
 		$expireds = appointments_get_expired_appointments( $clear_secs );
 
 		if ( $expireds && $process_expired ) {
