@@ -329,113 +329,146 @@ class App_Get_Appointments_Test extends App_UnitTestCase {
 		$this->assertContains( 'Tester', $name );
 
 	}
-
+	
 	function test_get_expired_appointments() {
-		global $appointments;
-
-		$worker_id_1 = $this->factory->user->create_object( $this->factory->user->generate_args() );
-		$user_id = $this->factory->user->create_object( $this->factory->user->generate_args() );
-
-		$service_args = array(
-			'name' => 'My Service',
-			'duration' => 90
-		);
-		$service_id_1 = appointments_insert_service( $service_args );
-
-
-		$worker_args = array(
-			'ID' => $worker_id_1,
-			'services_provided' => array( $service_id_1 )
-		);
-		appointments_insert_worker( $worker_args );
-
-		$args = array(
-			'service' => $service_id_1,
-			'worker' => $worker_id_1,
-			'status' => 'confirmed',
-			'date' => strtotime( '2016-01-01 10:00:00' ) // Past date
-		);
-		$app_id_1 = appointments_insert_appointment( $args );
-
-		$args = array(
-			'service' => $service_id_1,
-			'worker' => $worker_id_1,
-			'status' => 'paid',
-			'date' => strtotime( '2016-01-01 11:00:00' ) // Past date
-		);
-		$app_id_2 = appointments_insert_appointment( $args );
-
-		$args = array(
-			'service' => $service_id_1,
-			'worker' => $worker_id_1,
-			'status' => 'completed',
-			'date' => strtotime( '2016-01-01 11:00:00' ) // Past date but completed
-		);
-		$app_id_3 = appointments_insert_appointment( $args );
-
-		$args = array(
-			'service' => $service_id_1,
-			'worker' => $worker_id_1,
-			'status' => 'paid',
-			'date' => strtotime( '2030-01-01 11:00:00' ) // Future date
-		);
-		$app_id_4 = appointments_insert_appointment( $args );
-
-		$expired = appointments_get_expired_appointments();
-		$this->assertCount( 2, $expired );
-
-		$app_ids = wp_list_pluck( $expired, 'ID' );
-		sort( $app_ids );
-		$this->assertEquals( array( $app_id_1, $app_id_2 ), $app_ids );
-
-		// Check the cache
-		$cached_data_app_1 = wp_cache_get( $app_id_1, 'app_appointments' );
-		$this->assertEquals( new Appointments_Appointment( $cached_data_app_1 ), $expired[0] );
-
-		// Now insert a pending appointment that is too old
-		// And another one that is not too old
 		$current_time = current_time( 'timestamp' );
-		$args = array(
-			'service' => $service_id_1,
-			'worker' => $worker_id_1,
-			'status' => 'pending',
-			'date' => strtotime( '2030-01-01 11:00:00' ), // Future date
-			'created' => date( 'Y-m-d H:i:s', $current_time - 10 ) // Only 10 seconds old
+		$app_dates    = array(
+			array( 'Past and pending', '2016-01-01 11:00:00', 'pending' ), // Past and pending
+			array( 'Future and pending', '2030-01-01 11:00:00', 'pending' ), // Future and pending
+			array( 'Past and confirmed', '2016-01-01 11:00:00', 'confirmed' ), // Past and confirmed
+			array( 'Future and confirmed', '2030-01-01 11:00:00', 'confirmed' ), // Future and confirmed
+			array( 'Past and paid', '2016-01-01 11:00:00', 'paid' ), // Past and paid
+			array( 'Future and paid', '2030-01-01 11:00:00', 'paid' ), // Future and paid
+			array( 'Past and completed', '2016-01-01 11:00:00', 'completed' ), // Past and completed
+			array( 'Future and completed', '2030-01-01 11:00:00', 'completed' ), // Future and completed
+			array( 'Past and reserved by GCal', '2016-01-01 11:00:00', 'reserved' ), // Past and reserved by GCal
+			array( 'Future and reserved by GCal', '2030-01-01 11:00:00', 'reserved' ), // Future and reserved by GCal
+			array( 'Past and removed', '2016-01-01 11:00:00', 'removed' ), // Past and removed
+			array( 'Future and removed', '2030-01-01 11:00:00', 'removed' ), // Future and removed
+			array( 'Future and pending, created 2 days ago', '2030-01-01 11:00:00', 'pending', $current_time - ( 2 * 24 * 60 * 60 ) ), // Future and pending, created 2 days ago
+			array( 'Future and pending, created 10 seconds ago', '2030-01-01 11:00:00', 'pending', $current_time - 10 ), // Future and pending, created 10 seconds ago
 		);
-		$app_id_5 = appointments_insert_appointment( $args );
 
-		$args = array(
-			'service' => $service_id_1,
-			'worker' => $worker_id_1,
-			'status' => 'pending',
-			'date' => strtotime( '2030-01-01 11:00:00' ), // Future date
-			'created' => date( 'Y-m-d H:i:s', $current_time - ( 80 * 60 ) ) // 80 minutes old
+
+		$app_ids = array();
+
+		foreach ( $app_dates as $app_date ) {
+			$app_args           = $this->factory->appointment->generate_args();
+			$app_args['status'] = $app_date[2];
+			$app_args['name'] = $app_date[0];
+			$app_args['date']   = strtotime( $app_date[1] );
+			if ( isset( $app_date[3] ) ) {
+				$app_args['created'] = date( 'Y-m-d H:i:s', $app_date[3] );
+			}
+			$app_ids[ $this->factory->appointment->create_object( $app_args ) ] = $app_date;
+		}
+
+		$options               = appointments_get_options();
+		$options['clear_time'] = 0;
+		appointments_update_options( $options );
+
+		// Should get expired
+		$expired = appointments_get_expired_appointments();
+		$this->assertCount( 4, $expired );
+
+		// This names should not be on the list
+		$shouldnt_be = array(
+			'Future and pending',
+			'Future and confirmed',
+			'Future and paid',
+			'Future and completed',
+			'Past and completed',
+			'Future and reserved by GCal',
+			'Past and removed',
+			'Future and removed',
+			'Future and pending, created 2 days ago',
+			'Future and pending, created 10 seconds ago'
 		);
-		$app_id_6 = appointments_insert_appointment( $args );
+		// This names should be on the list
+		$should_be = array(
+			'Past and pending',
+			'Past and confirmed',
+			'Past and paid',
+			'Past and reserved by GCal'
+		);
+		$names = wp_list_pluck( $expired, 'name' );
+		foreach ( $expired as $exp ) {
+			$this->assertFalse( in_array( $exp->name, $shouldnt_be ) );
+			$this->asserttrue( in_array( $exp->name, $should_be ) );
+		}
+	}
 
-		// Search also for pending with more than 60 minutes old
-		$expired = appointments_get_expired_appointments( 60 * 60 );
-		$this->assertCount( 3, $expired );
 
-		$app_ids = wp_list_pluck( $expired, 'ID' );
-		sort( $app_ids );
-		$this->assertEquals( array( $app_id_1, $app_id_2, $app_id_6 ), $app_ids );
+	function test_get_expired_appointments_with_pending_seconds() {
+		$current_time = current_time( 'timestamp' );
+		$app_dates    = array(
+			array( 'Past and pending', '2016-01-01 11:00:00', 'pending' ), // Past and pending
+			array( 'Future and pending', '2030-01-01 11:00:00', 'pending' ), // Future and pending
+			array( 'Past and confirmed', '2016-01-01 11:00:00', 'confirmed' ), // Past and confirmed
+			array( 'Future and confirmed', '2030-01-01 11:00:00', 'confirmed' ), // Future and confirmed
+			array( 'Past and paid', '2016-01-01 11:00:00', 'paid' ), // Past and paid
+			array( 'Future and paid', '2030-01-01 11:00:00', 'paid' ), // Future and paid
+			array( 'Past and completed', '2016-01-01 11:00:00', 'completed' ), // Past and completed
+			array( 'Future and completed', '2030-01-01 11:00:00', 'completed' ), // Future and completed
+			array( 'Past and reserved by GCal', '2016-01-01 11:00:00', 'reserved' ), // Past and reserved by GCal
+			array( 'Future and reserved by GCal', '2030-01-01 11:00:00', 'reserved' ), // Future and reserved by GCal
+			array( 'Past and removed', '2016-01-01 11:00:00', 'removed' ), // Past and removed
+			array( 'Future and removed', '2030-01-01 11:00:00', 'removed' ), // Future and removed
+			array( 'Future and pending, created 2 days ago', '2030-01-01 11:00:00', 'pending', $current_time - ( 2 * 24 * 60 * 60 ) ), // Future and pending, created 2 days ago
+			array( 'Future and pending, created 10 seconds ago', '2030-01-01 11:00:00', 'pending', $current_time - 10 ), // Future and pending, created 10 seconds ago
+		);
 
-		// Test the old function
-		$appointments->options["clear_time"] = 60;
-		$appointments->local_time = $current_time;
-		$appointments->remove_appointments();
 
-		$expired = appointments_get_expired_appointments( 60 * 60 );
-		$this->assertEmpty( $expired );
-		// Check that we haven't deleted others
-		$this->assertInstanceOf( 'Appointments_Appointment', appointments_get_appointment( $app_id_3 ) );
+		$app_ids = array();
 
-		$this->assertEquals( 'completed', appointments_get_appointment( $app_id_1 )->status );
-		$this->assertEquals( 'completed', appointments_get_appointment( $app_id_2 )->status );
-		$this->assertEquals( 'removed', appointments_get_appointment( $app_id_6 )->status );
+		foreach ( $app_dates as $app_date ) {
+			$app_args           = $this->factory->appointment->generate_args();
+			$app_args['status'] = $app_date[2];
+			$app_args['name'] = $app_date[0];
+			$app_args['date']   = strtotime( $app_date[1] );
+			if ( isset( $app_date[3] ) ) {
+				$app_args['created'] = date( 'Y-m-d H:i:s', $app_date[3] );
+			}
+			$app_ids[ $this->factory->appointment->create_object( $app_args ) ] = $app_date;
+		}
+
+		$options               = appointments_get_options();
+		$options['clear_time'] = 60;
+		appointments_update_options( $options );
+
+		// Should get expired + pendings that have been created more than 60 minutes ago
+		$expired = appointments_get_expired_appointments( $options['clear_time'] * 60 );
+		$this->assertCount( 5, $expired );
+
+		// This names should not be on the list
+		$shouldnt_be = array(
+			'Future and pending',
+			'Future and confirmed',
+			'Future and paid',
+			'Future and completed',
+			'Past and completed',
+			'Future and reserved by GCal',
+			'Past and removed',
+			'Future and removed',
+			'Future and pending, created 10 seconds ago'
+		);
+		// This names should be on the list
+		$should_be = array(
+			'Past and pending',
+			'Past and confirmed',
+			'Past and paid',
+			'Past and reserved by GCal',
+			'Future and pending, created 2 days ago',
+		);
+		$names = wp_list_pluck( $expired, 'name' );
+		foreach ( $expired as $exp ) {
+			$this->assertFalse( in_array( $exp->name, $shouldnt_be ) );
+			$this->asserttrue( in_array( $exp->name, $should_be ) );
+		}
 
 	}
+
+
 
 	function test_count_appointments() {
 		$worker_id_1 = $this->factory->user->create_object( $this->factory->user->generate_args() );

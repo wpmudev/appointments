@@ -19,8 +19,11 @@ class App_UnitTestCase extends WP_UnitTestCase {
 
 	function setUp() {
 		parent::setUp();
+		/** @var WP_UnitTest_Factory_For_Appointment appointment */
 		$this->factory->appointment = new WP_UnitTest_Factory_For_Appointment( $this->factory );
+		/** @var WP_UnitTest_Factory_For_Worker worker */
 		$this->factory->worker = new WP_UnitTest_Factory_For_Worker( $this->factory );
+		/** @var WP_UnitTest_Factory_For_Service service */
 		$this->factory->service = new WP_UnitTest_Factory_For_Service( $this->factory );
 		appointments_activate();
 	}
@@ -86,7 +89,8 @@ class WP_UnitTest_Factory_For_Worker extends WP_UnitTest_Factory_For_Thing {
 		$user_args['user_email'] = $args['user_email'];
 		$worker_id = $this->factory->user->create_object( $user_args );
 		$args['ID'] = $worker_id;
-		return appointments_insert_worker( $args );
+		appointments_insert_worker( $args );
+		return $worker_id;
 	}
 
 	function update_object( $worker_id, $fields ) {

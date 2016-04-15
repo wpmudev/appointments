@@ -726,38 +726,331 @@ class App_Appointments_Test extends App_UnitTestCase {
 	/**
 	 * @group cleanup
 	 */
-	function test_cleanup_off() {
-		var_dump($this->factory->appointment);
+	function test_cleanup_appointments_off() {
 		$appointments = appointments();
+
+		$current_time = current_time( 'timestamp' );
+		$app_dates    = array(
+			array( 'Past and pending', '2016-01-01 11:00:00', 'pending' ), // Past and pending
+			array( 'Future and pending', '2030-01-01 11:00:00', 'pending' ), // Future and pending
+			array( 'Past and confirmed', '2016-01-01 11:00:00', 'confirmed' ), // Past and confirmed
+			array( 'Future and confirmed', '2030-01-01 11:00:00', 'confirmed' ), // Future and confirmed
+			array( 'Past and paid', '2016-01-01 11:00:00', 'paid' ), // Past and paid
+			array( 'Future and paid', '2030-01-01 11:00:00', 'paid' ), // Future and paid
+			array( 'Past and completed', '2016-01-01 11:00:00', 'completed' ), // Past and completed
+			array( 'Future and completed', '2030-01-01 11:00:00', 'completed' ), // Future and completed
+			array( 'Past and reserved by GCal', '2016-01-01 11:00:00', 'reserved' ), // Past and reserved by GCal
+			array( 'Past, ended and reserved by GCal', date( 'Y-m-d H:i:s', $current_time - 1800 ), 'reserved', $current_time, 15 ),
+			array( 'Past, not ended and reserved by GCal', date( 'Y-m-d H:i:s', $current_time - 1800 ), 'reserved', $current_time, 60 ),
+			array( 'Future and reserved by GCal', '2030-01-01 11:00:00', 'reserved' ), // Future and reserved by GCal
+			array( 'Past and removed', '2016-01-01 11:00:00', 'removed' ), // Past and removed
+			array( 'Future and removed', '2030-01-01 11:00:00', 'removed' ), // Future and removed
+			array( 'Future and pending, created 2 days ago', '2030-01-01 11:00:00', 'pending', $current_time - ( 2 * 24 * 60 * 60 ) ), // Future and pending, created 2 days ago
+			array( 'Future and pending, created 10 seconds ago', '2030-01-01 11:00:00', 'pending', $current_time - 10 ), // Future and pending, created 10 seconds ago
+		);
+
+
+		$app_ids = array();
+
+		foreach ( $app_dates as $app_date ) {
+			$app_args           = $this->factory->appointment->generate_args();
+			$app_args['status'] = $app_date[2];
+			$app_args['name'] = $app_date[0];
+			$app_args['date']   = strtotime( $app_date[1] );
+			if ( isset( $app_date[3] ) ) {
+				$app_args['created'] = date( 'Y-m-d H:i:s', $app_date[3] );
+			}
+			if ( isset( $app_date[4] ) ) {
+				// Set duration
+				$app_args['duration'] = $app_date[4];
+			}
+			$app_ids[ $this->factory->appointment->create_object( $app_args ) ] = $app_date;
+		}
+
 		$options = appointments_get_options();
+		// IT'S OFF
 		$options['clear_time'] = 0;
 		appointments_update_options( $options );
 
-
-		$time = current_time( 'timestamp' );
-
-		$args = $this->factory->appointment->generate_args();
-		$args['status'] = 'paid';
-		$args['date'] = $time - ( 24 * 60 * 60 ); // Yesterday;
-		$app_id_1 = $this->factory->appointment->create_object( $args );
-
-		$args = $this->factory->appointment->generate_args();
-		$args['status'] = 'paid';
-		$args['date'] = $time - 10; // 10 seconds ago
-		$app_id_2 = $this->factory->appointment->create_object( $args );
-
-		$args = $this->factory->appointment->generate_args();
-		$args['status'] = 'paid';
-		$args['date'] = $time - ( 24 * 60 * 60 * 7 ); // 1 week ago
-		$app_id_3 = $this->factory->appointment->create_object( $args );
-		$expired = appointments_get_expired_appointments(0);
-		var_dump($expired);
-		return;
-
 		$appointments->remove_appointments();
+		//$this->_old_cleanup_expired_appointments();
 
 		$apps = appointments_get_appointments();
-		var_dump($apps);
+		foreach ( $apps  as $app ) {
+			switch ( $app->name ) {
+				case "Past and pending": {
+					$this->assertEquals( "removed", $app->status );
+					break;
+				}
+
+				case "Future and pending": {
+					$this->assertEquals( "pending", $app->status );
+					break;
+				}
+
+				case "Past and confirmed": {
+					$this->assertEquals( "completed", $app->status );
+					break;
+				}
+
+				case "Future and confirmed": {
+					$this->assertEquals( "confirmed", $app->status );
+					break;
+				}
+
+				case "Past and paid": {
+					$this->assertEquals( "completed", $app->status );
+					break;
+				}
+
+				case "Future and paid": {
+					$this->assertEquals( "paid", $app->status );
+					break;
+				}
+
+				case "Past and completed": {
+					$this->assertEquals( "completed", $app->status );
+					break;
+				}
+
+				case "Future and completed": {
+					$this->assertEquals( "completed", $app->status );
+					break;
+				}
+
+				case "Past and reserved by GCal": {
+					$this->assertEquals( "removed", $app->status );
+					break;
+				}
+
+				case "Past, ended and reserved by GCal": {
+					$this->assertEquals( "removed", $app->status );
+					break;
+				}
+
+				case "Past, not ended and reserved by GCal": {
+					$this->assertEquals( "reserved", $app->status );
+					break;
+				}
+
+				case "Future and reserved by GCal": {
+					$this->assertEquals( "reserved", $app->status );
+					break;
+				}
+
+				case "Past and removed": {
+					$this->assertEquals( "removed", $app->status );
+					break;
+				}
+
+				case "Future and removed": {
+					$this->assertEquals( "removed", $app->status );
+					break;
+				}
+
+				case "Future and pending, created 2 days ago": {
+					$this->assertEquals( "pending", $app->status );
+					break;
+				}
+
+				case "Future and pending, created 10 seconds ago": {
+					$this->assertEquals( "pending", $app->status );
+					break;
+				}
+			}
+		}
+
+	}
+
+	/**
+	 * @group cleanup
+	 */
+	function test_cleanup_appointments_on() {
+		$appointments = appointments();
+
+		$current_time = current_time( 'timestamp' );
+		$app_dates    = array(
+			array( 'Past and pending', '2016-01-01 11:00:00', 'pending' ), // Past and pending
+			array( 'Future and pending', '2030-01-01 11:00:00', 'pending' ), // Future and pending
+			array( 'Past and confirmed', '2016-01-01 11:00:00', 'confirmed' ), // Past and confirmed
+			array( 'Future and confirmed', '2030-01-01 11:00:00', 'confirmed' ), // Future and confirmed
+			array( 'Past and paid', '2016-01-01 11:00:00', 'paid' ), // Past and paid
+			array( 'Future and paid', '2030-01-01 11:00:00', 'paid' ), // Future and paid
+			array( 'Past and completed', '2016-01-01 11:00:00', 'completed' ), // Past and completed
+			array( 'Future and completed', '2030-01-01 11:00:00', 'completed' ), // Future and completed
+			array( 'Past and reserved by GCal', '2016-01-01 11:00:00', 'reserved' ), // Past and reserved by GCal
+			array( 'Past, ended and reserved by GCal', date( 'Y-m-d H:i:s', $current_time - 1800 ), 'reserved', $current_time, 15 ),
+			array( 'Past, not ended and reserved by GCal', date( 'Y-m-d H:i:s', $current_time - 1800 ), 'reserved', $current_time, 60 ),
+			array( 'Future and reserved by GCal', '2030-01-01 11:00:00', 'reserved' ), // Future and reserved by GCal
+			array( 'Past and removed', '2016-01-01 11:00:00', 'removed' ), // Past and removed
+			array( 'Future and removed', '2030-01-01 11:00:00', 'removed' ), // Future and removed
+			array( 'Future and pending, created 2 days ago', '2030-01-01 11:00:00', 'pending', $current_time - ( 2 * 24 * 60 * 60 ) ), // Future and pending, created 2 days ago
+			array( 'Future and pending, created 10 seconds ago', '2030-01-01 11:00:00', 'pending', $current_time - 10 ), // Future and pending, created 10 seconds ago
+		);
+
+
+		$app_ids = array();
+
+		foreach ( $app_dates as $app_date ) {
+			$app_args           = $this->factory->appointment->generate_args();
+			$app_args['status'] = $app_date[2];
+			$app_args['name'] = $app_date[0];
+			$app_args['date']   = strtotime( $app_date[1] );
+			if ( isset( $app_date[3] ) ) {
+				$app_args['created'] = date( 'Y-m-d H:i:s', $app_date[3] );
+			}
+			if ( isset( $app_date[4] ) ) {
+				// Set duration
+				$app_args['duration'] = $app_date[4];
+			}
+			$app_ids[ $this->factory->appointment->create_object( $app_args ) ] = $app_date;
+		}
+
+		$options = appointments_get_options();
+		// IT'S ON
+		$options['clear_time'] = 60;
+		appointments_update_options( $options );
+
+		$appointments->remove_appointments();
+		//$this->_old_cleanup_expired_appointments();
+
+		$apps = appointments_get_appointments();
+		foreach ( $apps  as $app ) {
+			switch ( $app->name ) {
+				case "Past and pending": {
+					$this->assertEquals( "removed", $app->status );
+					break;
+				}
+
+				case "Future and pending": {
+					$this->assertEquals( "pending", $app->status );
+					break;
+				}
+
+				case "Past and confirmed": {
+					$this->assertEquals( "completed", $app->status );
+					break;
+				}
+
+				case "Future and confirmed": {
+					$this->assertEquals( "confirmed", $app->status );
+					break;
+				}
+
+				case "Past and paid": {
+					$this->assertEquals( "completed", $app->status );
+					break;
+				}
+
+				case "Future and paid": {
+					$this->assertEquals( "paid", $app->status );
+					break;
+				}
+
+				case "Past and completed": {
+					$this->assertEquals( "completed", $app->status );
+					break;
+				}
+
+				case "Future and completed": {
+					$this->assertEquals( "completed", $app->status );
+					break;
+				}
+
+				case "Past and reserved by GCal": {
+					$this->assertEquals( "removed", $app->status );
+					break;
+				}
+
+				case "Past, ended and reserved by GCal": {
+					$this->assertEquals( "removed", $app->status );
+					break;
+				}
+
+				case "Past, not ended and reserved by GCal": {
+					$this->assertEquals( "reserved", $app->status );
+					break;
+				}
+
+				case "Future and reserved by GCal": {
+					$this->assertEquals( "reserved", $app->status );
+					break;
+				}
+
+				case "Past and removed": {
+					$this->assertEquals( "removed", $app->status );
+					break;
+				}
+
+				case "Future and removed": {
+					$this->assertEquals( "removed", $app->status );
+					break;
+				}
+
+				case "Future and pending, created 2 days ago": {
+					$this->assertEquals( "removed", $app->status );
+					break;
+				}
+
+				case "Future and pending, created 10 seconds ago": {
+					$this->assertEquals( "pending", $app->status );
+					break;
+				}
+			}
+		}
+
+	}
+
+	function _old_cleanup_expired_appointments() {
+		global $wpdb;
+		$table = appointments_get_table( 'appointments' );
+		$options = appointments_get_options();
+
+		$results = array();
+		$process_expired = true;
+
+		$expireds = $wpdb->get_results( $wpdb->prepare("SELECT * FROM {$table} WHERE start<%s AND status NOT IN ('completed', 'removed')", current_time( 'mysql' ) ) );
+		if ( $expireds && $process_expired ) {
+			foreach ( $expireds as $expired ) {
+				if ( 'pending' == $expired->status || 'reserved' == $expired->status ) {
+					if ( 'reserved' == $expired->status && strtotime( $expired->end ) > current_time( 'timestamp') ) {
+						$new_status = $expired->status;
+					} // Don't shift the GCal apps until they actually expire (end time in past)
+					else {
+						$new_status = 'removed';
+					}
+				} else if ( 'confirmed' == $expired->status || 'paid' == $expired->status ) {
+					$new_status = 'completed';
+				} else {
+					$new_status = $expired->status; // Do nothing ??
+				}
+
+				$results[] = array(
+					'app' => $expired,
+					'new_status' => $new_status
+				);
+			}
+		}
+
+		// Clear appointments that are staying in pending status long enough
+		if ( isset( $options["clear_time"] ) && $options["clear_time"] > 0 ) {
+			$clear_secs = $options["clear_time"] * 60;
+			$expireds = $wpdb->get_results( $wpdb->prepare("SELECT * FROM {$table} WHERE status='pending' AND created<%s", date("Y-m-d H:i:s", current_time( 'timestamp' ) - $clear_secs)) );
+			if ( $expireds ) {
+				foreach ( $expireds as $expired ) {
+					$results[] = array(
+						'app' => $expired,
+						'new_status' => 'removed'
+					);
+				}
+			}
+		}
+
+		foreach ( $results as $row ) {
+			appointments_update_appointment_status( $row['app']->ID, $row['new_status'] );
+		}
+
+		return $results;
 	}
 
 
