@@ -48,7 +48,7 @@ class App_Users_AdditionalFields {
 
 		// Display additional notes
 		add_filter('app-appointments_list-edit-client', array($this, 'display_inline_data'), 10, 2);
-		add_action('app-appointment-inline_edit-before_response', array($this, 'save_admin_submitted_data'), 10, 2);
+		add_action( 'appointments_inline_edit', array( $this, 'save_admin_submitted_data' ), 10, 2 );
 
 		// Email filters
 		add_filter('app_notification_message', array($this, 'expand_email_macros'), 10, 3);

@@ -78,6 +78,7 @@ class Appointments_AJAX {
 		$resend = $_POST["resend"];
 
 		$data = apply_filters('app-appointment-inline_edit-save_data', $data);
+		do_action( 'appointments_inline_edit', $app_id, $data );
 
 		$update_result = $insert_result = false;
 		if ( $app ) {
