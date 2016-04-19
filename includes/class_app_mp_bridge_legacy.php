@@ -216,7 +216,7 @@ class App_MP_Bridge_Legacy {
 	function mp_product_list_meta( $meta, $post_id) {
 
 		if ( in_array( $post_id, $this->mp_posts ) )
-			return '<a class="mp_link_buynow" href="' . get_permalink($post_id) . '">' . __('Choose Option &raquo;', 'mp') . '</a>';
+			return '<a class="mp_link_buynow" href="' . get_permalink($post_id) . '">' . __('Choose Option &raquo;', 'appointments') . '</a>';
 		else
 			return	$meta;
 	}

@@ -723,6 +723,7 @@ class App_Appointments_Test extends App_UnitTestCase {
 		$this->assertEquals( 'worker@email.dev', $appointments->get_worker_email( $app->worker ) );
 	}
 
+
 	/**
 	 * @group cleanup
 	 */
@@ -912,7 +913,7 @@ class App_Appointments_Test extends App_UnitTestCase {
 		appointments_update_options( $options );
 
 		$appointments->remove_appointments();
-		//$this->_old_cleanup_expired_appointments();
+
 
 		$apps = appointments_get_appointments();
 		foreach ( $apps  as $app ) {
@@ -1001,7 +1002,7 @@ class App_Appointments_Test extends App_UnitTestCase {
 
 	}
 
-	function _old_cleanup_expired_appointments() {
+	function _old_get_expired_appointments() {
 		global $wpdb;
 		$table = appointments_get_table( 'appointments' );
 		$options = appointments_get_options();
@@ -1045,6 +1046,12 @@ class App_Appointments_Test extends App_UnitTestCase {
 				}
 			}
 		}
+
+		return $results;
+	}
+
+	function _old_cleanup_expired_appointments() {
+		$results = $this->_old_get_expired_appointments();
 
 		foreach ( $results as $row ) {
 			appointments_update_appointment_status( $row['app']->ID, $row['new_status'] );

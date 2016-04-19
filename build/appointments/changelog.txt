@@ -1,0 +1,615 @@
+2016-04-11 - 1.7.2.2
+-------------------------------
+- Fix: Workers were unable to save their profile if GCall Access Code was empty
+- Fix: Additional Fields - Mandatory text field was not processed
+
+2016-04-06 - 1.7.2.1
+-------------------------------
+- Fix: Additional fields addon not saving fields
+- Fix: Additional fields addon not showing up fields in admin
+- Fix: Double check for Google autoloader to prevent other plugins conflicts
+- Fix: When Service Locations Addon was active, GCal events were duplicated
+
+2016-03-31 - 1.7.2
+-------------------------------
+- Fix: Appointments dates were set to 12AM when importing manually
+- Fix: When no cancel Appointment page is set, the URL was malformed
+- Fix fatal error when saving a BuddyPress profile
+- Fix warning in user profile
+- Fix: Plugin was sending too many reminders to workers
+- Fix: In some cases, Appointments were not inserted if gcal_ID was an empty string
+- Fix: Appointments list are reversed ordered by default
+- Fix: Appointments GCal syncing was updating custom inserted data in Google Calendar
+- Fix: If an Appointment is set to completed or penmding do not delete it from Google Calendar
+- Fix: Typo in function name was preventing posts content to render if some of the A+ Settings were checked
+- Fix: Appointments were not properly sorted on admin list
+- Fix: JS Conflicts in Profile page
+- Enhance: Improved upgrader class
+- Other minor fixes and improvements
+
+
+2016-03-16 - 1.7.1
+-------------------------------
+- Fix: app_services shortcode: order_by attribute doesn't seem to take any effect
+- Fix: Custom checkbox field shows as a text field on backend
+- Fix: Google Calendar API was not deleting appointments that were deleted from GCal
+- Fix: Updating schedule in user profiles not working when the user editing was not the same than the edited one
+- Fix: Search client feature not returning any results
+- Enhance: Improved Appointments screen UX
+- New: Added new hooks in My APpointments list
+- New: Appointments meta table
+- New: Added get/delete/update appointments meta functions
+
+2016-03-11 - 1.7
+-------------------------------
+- Fix: Plugin was redirecting to Thank You Page even if the appointment reservation failed
+- Fix: Parse error:  T_PAAMAYIM_NEKUDOTAYIM
+- Fix: app_services shortcode not selecting the default service
+- Fix: app_my_appointments shortcode colspan issue
+- Fix: When making an Appointment, emails with a blank space at the end were not validated
+- Fix: Location shown in select box keeps defaulting to first option
+- Fix: Conflict with Google Analytics Dashboard for WP 
+- Fix: fatal error when GCal cannot delete an appointment
+- Fix: Fixed warning in monthly calendar widget
+- More case insensitive variable fixes for HipHop systmes
+- Other minor fixes
+- Enhancement: Google Calendar API Integration remade from scratch
+- Enhancement: Some little admin styles improvements.
+- Enhancement: Some improvements in appointments functions (insert, update and get) to allow more and better arguments
+- New: appointments_get_service_capacity() function
+- New: appointments_is_busy() function
+- New: appointments_get_month_appointments() function
+- New filter: appointments_insert_appointment_args
+- Some code refactoring
+
+2016-02-12 - 1.6
+-------------------------------
+- New: New setting to redirect to a Thank You page after appointment confirmation
+- New: appointments_worker_notification_sent action
+- Fixed: Add Google Calendar Button dates
+- Fixed: Error when editing a profile in BuddyPress
+- Fixed: Customer Notes field not showing up in confirmation form
+- Fixed: FAQ questions were not correctly indexed in admin page
+- Fixed: Appointments durations timetables calculations issue when Services had different durations
+- Fixed: Headers already sent error when updating pages in some cases (AJAX Search Pro Plugin conflict)
+- Fixed: When admin edit a user profile, admin appointments were displayed instead of the user's
+- Fixed: case insensitive variables/constants for HipHop environments
+- Enhance: Timetables regeneration takes less time now
+- Enhancement: appointments_get_appointments() function allows now an array of arguments
+- Enhancement: appointments_insert_appointment() allows now a timestamp date
+- Enhancement: [app_worker_monthly_calendar] ordering by start ASC date by default
+- Enhancement: Some other minor improvements
+- Deprecated: Appointments::get_reserve_apps()
+- Deprecated: Appointments::get_reserve_apps_by_service()
+- Deprecated: Appointments::is_worker()
+- Deprecated: Appointments::change_status()
+- Deprecated: Appointments::get_service()
+- Deprecated: Appointments::get_app()
+- Deprecated: Appointments::get_services()
+- Deprecated: Appointments::is_worker()
+- Deprecated: Appointments::get_workers()
+- Deprecated: Appointments::get_first_service_id()
+- Deprecated: Appointments::get_statuses()
+- Deprecated: Appointments::is_single_worker()
+- Deprecated: Appointments::get_workers_by_service()
+- Deprecated: Appointments::get_worker_name()
+- Deprecated: app_change_status Action
+
+2016-01-28 - 1.5.7
+-------------------------------
+- Fixed: Timetables cache issue when services had different durations
+- Fixed: Some language domains
+- Enhancement: Added some love to FAQ screen
+- Enhancement: Improved some admin styles
+- Deprecated: Deprecated some old functions
+
+2016-01-18 - 1.5.6
+-------------------------------
+- Enhancement: Clearing cache properly when upgrading version
+- Enhancement: Added capacity cache
+- Enhancement: Added CSS classes in every time in timetables
+- Enhancement: Appointments and Workers cache are now much faster when processing timetables
+- Enhancement: Saving timetables cache at shutdown to avoid more queries
+- Fixed Locations Add-on: Warnings in Locations screen
+- Fixed Locations Add-on: Locations were not saved in Services Providers screen
+- Fixed Paddings Add-on: Paddings were not being saved in Service Providers screen
+- Fixed GCal bug: Timetables were not being updated when importing events
+- Fixed minor performance issues when Durations add-on was active
+- Fixed: Worker is not selected automatically by default and timetable displays wrong times in some rare cases
+- Fixed: order by parameter not working when orderby = name in get_workers function
+
+2016-01-13 - 1.5.5.1
+-------------------------------
+- Fixed: Week days were not translatable
+- Fixed: Timetables were selecting wrong service in some cases
+
+2016-01-11 - 1.5.5
+-------------------------------
+- Fixed: Exporting Appointments was throwing a fatal error
+- Fixed: Loader GIF not showing on confirmation
+- Fixed: GCal was not appearing on confirmation
+- Fixed: error with MarketPress integration
+- Fixed: Deprecated/Warnings in some parts of the code
+- Fixed: Errors when processing Appointments by AJAX
+- Fixed: Confirmation fields were not appearing in Confirmation Shortcode
+- Fixed: Confirmation emails were not sent
+- Fixed: Some cache issues
+- Enhancement: Timetables code bottleneck
+- Enhancement: Timetables are now  cached for 24h
+- Enhancement: Services Shortcode markup and JS
+- Enhancement: Reduced number of queries in monthly shortcode
+- Enhancement: Many performance improvements
+- Improved Confirmation Shortcode Javascript
+- New: many new functions to interact with workers, appointments and services in an easier way
+- New: Classes for workers, services and appointments with better error handlings
+- New: Unit Tests
+
+
+2015-11-25 - 1.5.4
+-------------------------------
+- Fixed: Appointments were not appearing in calendar due to cache system
+
+2015-11-19 - 1.5.3
+-------------------------------
+- Fixed: some cache system issues
+- Fixed: Timeshift with daylight savings issue.
+- Fixed: warnings/notices
+
+v1.5.2
+- Fix work hours array filtering.
+- Fix ampersand escapes in JS redirection URL filtering.
+- Fix numeric requests overflowing the integer value.
+- Fix selected service in filtered list.
+- Fix macro expansion in worker reminder emails.
+- Fix WP_Widget constructor calls.
+- Add MarketPress 3.0 compatibility.
+- Add extra parameters to scheduling hours filter hook signatures.
+
+v1.5.1
+- Fix underscore templating conflict issue on certain configurations.
+- Add a bit more elaborate logging and exception handling.
+- Fix Google configuration override API so traditional hook works.
+- Fix paddings issue applied on appointments creation admin-side.
+- Fix schema updates on network environments.
+- Fix page reloads on login required in certain scenarios.
+
+v1.5
+- Deprecate the old Google API client library and update to v1.1.4.
+- Fix style helpers conflict.
+- Fix reapplied appointment ordering.
+- Fix Twitter login popup initial redirect.
+- Fix time format values for adding appointments back end.
+- Fix type casting in price boolean checks.
+- Fix logic error in client name resolution fallback.
+- Add cancel link to worker reminder emails.
+
+v1.4.7
+- Expose removal notification message body for filtering and expand additional fields e-mail macros.
+- Fix slashes escaping in user-added CSS.
+- Fix HTML output in locations and pointer tutorial issues.
+- Fix appointment period calculus to respect the overall settings in "show scheduled users" add-on.
+- Add email and GCal export support for appointment location macro expansion.
+- Fix the appointments table price column being an integer.
+- Add zero-priced appointments auto-confirm flag as an option.
+- Fix errors on installs with disabled Heartbeat API.
+- Fix for race condition conflicts with appointment IDs.
+- Fix for misleading supported type toggle.
+- Fix for iOS ignoring focus offset.
+- Fix for double date opening bug on Windows.
+
+v1.4.6
+- Fix for admin side javascript globals.
+- Fix for global format reordering, and allowing for both local and global reordering.
+- Added appointments GCal manual export option.
+
+v1.4.5
+- Fix for issues with searching appointments.
+- Fix for markup filtering breaking the shortcode arguments.
+- Fix for Service name being truncated if it contains a dollar sign (props Jose). 
+- Fix for long-running GCal appointments display issue.
+- Added automatic completion for additional fields (props Jose).
+- Added worker and service expansion in schedule titles.
+- Added Google+ login support.
+- Added removal notification email.
+
+v1.4.4
+- Fix for editable fields toggling.
+- Fix for relying on JS injection, using replacement instead.
+- Fix for quoting and macro escaping issue.
+- Fix for numeric GET parameters.
+- Fix for currency symbol l10n issues.
+- Fix for multiplied display of unique locations.
+- Fix for profile cancellation GCal integration issue.
+- Added worker montly calendar paging support.
+- Added the Default Service add-on.
+- Added the Pending Appointments count notification add-on.
+
+v1.4.3.1
+- Fix for date/time parsing problem with inital formatting.
+
+v1.4.3
+- Fix for emails on bulk status changes.
+- Fix for filtering the worker names in the widget.
+- Fix for date/time parsing problem with certain locales.
+- Added reordering worker services by requested order.
+- Added the registration URL to list of supported actions.
+
+v1.4.2
+- Fix for quotes escaping issue with injected javascript.
+- Fix for permissions issue with bbpress/buddypress pages registration.
+- Fix for colorpicker localized dependencies loading issue.
+- Added "strict" shortcode argument to app_my_appointments shortcode.
+
+v1.4.1
+- Fix for confirmation emails sent on purchase via MarketPress integration.
+- Fix for services with different durations not properly allocating free times.
+- Fix for BuddyPress redirects.
+- Fix for GCal synchronisation on non-immediate actions.
+- Fix for GCal exception handling.
+- Fix for page creation issue with concurrent settings change.
+- Fix for Additional Fields add-on deletion when there's only one field.
+- Fix for administrative permissions (props Ash).
+- Added additional fields placeholders for GCal sync.
+- Added the import-only GCal integration mode.
+- Fixed overlaps in time selections.
+- Added service paddings add-on.
+- Added stackable break times option to durations add-on.
+- Added shared resources add-on.
+- Improved MarketPress integration for new appointments.
+- Refactored install and uninstall routines.
+
+v1.4
+- Allowing for optional Google SDK dependencies loading.
+- Lowering the case of exported column names to prevent Excel bug from triggering (http://support.microsoft.com/kb/215591)
+- Fix for the "only one service and only one provider per time slot" condition
+- Adding the explicit ordering to prevent race conditioning
+- Normalizing the variation implementation on appointment confirmation.
+- Preventing the autocompletion on working hours forms and dropping the meridiam designator.
+- Moving locations saving action.
+- Appointments within an enclosed timeframe will mark the timeframe as busy.
+- Differentiating durations and boundaries logic in add-on.
+- Allowing for toggling between exact (legacy) matching and overlap detection.
+- Deprecating the userdata overwrites.
+- Making the admin data overrides legacy and optional.
+- Exposing a new flag for free auto-confirmation in paid environment.
+- Fetching a list of already present appointments to prevent duplicates on GCal sync.
+- Bugfix for email macro expansion.
+- Keying weekdays by their translation names.
+- Dropping the old reserved GCals if the DB version is under threshold.
+- Added the product cart add-on.
+- Added export scoping.
+- Added user-supplied custom fields add-on.
+
+v1.3.1
+- Optional fix for Google SDK file caching paths and open_basedir clash.
+- Fix for l10n issues and local js file paths loading.
+- Fix for context roles default settings.
+- Fix for GCal user columns trumping over all the new ones.
+- Added duration calculus settings add-on.
+
+v1.3
+- Fix for service providers name display.
+- Fix for sessions initialization issue.
+- Fix for service interval render on front-end.
+- Fix for anchorless page reloads.
+- Added support for multiple break times.
+- Introduced the add-on system.
+- Added biography and description custom post type support.
+- Added appointment locations support.
+- Added services and workers locations support.
+- Added Google Maps integration support.
+- Added administrative permissions editing support.
+- Added selective worker name display.
+- Added the login services limitation add-on.
+- Added worker calendar shortcode.
+- Adding saner fallback for worker/service summary getting and GCal event description fallback.
+- Calculating balance (price - deposit).
+- Profiling and performance improvements.
+- Refactoring the FAQ and shortcodes help pages.
+- Refactoring all tutorial content to a separate file.
+- Refactoring all the shortcodes to a new API.
+- Adding contextual help base class and shortcodes help in contextual help dropdown.
+- Introducing a switch to allow user domain population for BuddyPress (if present).
+- Populating and caching status names.
+
+V1.2.8:
+- New: Users page custom column to display GCal method of service providers at a glance
+- Enhancement: More sanitization and safety measures
+- Enhancement: ADDRESS and CITY placeholders can be used in GCal location field
+- Change: If there is a connection error with Google server for GCal, error message is logged now instead of throwing an exception
+- Change: GCal button can now be disabled from either settings or from the my_appointments shortcode
+- Change: Now accepting 20 minutes of token time difference while it was 30 seconds before
+- Fix: Description template for GCal for service providers' own settings was not being used, but website template was being used
+- Fix: Updating of GCal event when appointment belongs to a specific service provider and edited on the admin side
+- Fix: Overwriting of Event Summary of Note field during GCal update
+
+V1.2.7:
+- New shortcode app_all_appointments to list all upcoming appointments
+- Fixed CANCEL link in reminder message and related "Catchable fatal error" message
+- Confirmation shortcode lacking warning message is now limited to pages those actually having schedule shortcodes
+- New filters for emails
+- Tested with WordPress V3.6 Beta 1, no incompatibilities found
+
+V1.2.6:
+- Client can be allowed to cancel his appointments using links in confirmation or reminder emails, my appointments table or using his profile page
+- Schedules can be forced to start from a selected date using shortcode parameter "date"
+- CITY placeholder can be used in emails
+- A minor improvement of how ID's recorded to the log file
+- Fixed a minor markup issue in monthly calendar when last day of the month is also last day of the week
+- GCal exception errors are saved in log file if they are not possible to be displayed because headers were sent
+- Session start errors after GCal submission are handled more gracefully
+- New FAQ's added
+
+V1.2.5.1;
+- Fixed calendar widget not correctly showing completely booked days
+- Notification message to service provider includes appointment date and time now
+
+V1.2.5:
+- New dismissable admin notice if confirmation shortcode is lacking on an appointment page
+- In MarketPress integration, product button for appointments in product list page is changed as Choose Option
+- Fixed a javascript issue when paypal shortcode is not used, although payment required is set as Yes
+- Improvements in user profile settings for GCal API
+- Prevented deleting of a service provider's imported GCal events when removing those of another one
+- Improvements for translation of pagination texts
+- Filters for reducing time base smaller than 10 minutes and appointment upper limit are now effective
+- Selectable service durations are increased to 24 items, but limited to 24 hours
+
+V1.2.4.1:
+- Bulk status changes are applied to GCal
+- For logged in users, email and user display names are pre populated in the confirmation form
+- Fix for special characters (like &) in email headers
+- Fix for more conflicts with Google+ plugin
+
+V1.2.4:
+- Prevented auto increment value in appointments table going too high after GCal imports
+- Fix for BuddyPress working hours being reset issue when provider confirms his appointments using his navigation tab
+- GCal API setting fields are no more shown in profile page of a non service provider member
+- Private key files for service providers are correctly duplicated to uploads folder now
+- Prevented conflict with Google+ plugin and other possible plugins using Google API by renaming $apiConfig variable
+- Some UI improvements to display selected currency and clarify GCal usage. Also new FAQ's added
+- During uninstall, all traces of GCal are removed from file system and database
+- Fixed default settings not being loaded for new installations
+
+V1.2.3.3:
+- Fix for Export button not working on some areas
+- Permission to use cents in price fields which was accidentally disabled in the previous update
+- Fixed issues when GCal API test connection and manual imports are started from user profile page
+
+V1.2.3.2:
+- Empty spaces used in reminder times are deleted now
+- New filter to define special prices for MarketPress integration
+- Updated jquery datepick and fixed conflict with WooCommerce
+- Fix for special characters in emails
+- Reserved appointments (related to events imported from GCal) are no more editable as they are supposed to be
+- Wrong non-numerical value settings in capacity, service and service provider prices are not allowed any more
+
+V1.2.3:
+- worker and service parameters added to services and providers shortcodes, respectively
+- Appointments lower limit setting to block appointments from current time added
+- More css classes added to time slots for further custom styling
+- Services and service providers dropdowns are not displayed at all when there is nothing to be displayed
+- Optimized queries to be used even for large number of active appointments (Tested with 1000 active+reserved appointments)
+- Number of imported events for GCal sync increased to 500
+- New hooks to modify services and providers shortcode items
+- In multi site installation, records of a provider removed from a blog are correctly deleted now
+
+v1.2.2:
+- Bulk status changes of records on admin side are now possible
+- New setting for appointment records per page
+- Individual provider working hours and breaks are taken into account now instead of business working hours even when no provider is selected and there are more than one providers giving the same service
+- GCal imports are now limited by appointment upper day limit setting, database query optimized, and nearest events imported first
+- Private key files are now also saved in the uploads directory with an encrypted name to prevent overwriting with plugin updates
+- Working hours can be selected with steps based on admin side time base
+- Reserved appointments are also removed after their expiration
+- Fixed javascript error in Firefox happening while browsing on the next months/weeks when a provider is selected
+- New hooks added
+- Added APP_GCAL_DISABLE constant to disable GCal API at wp-config.php for unexpected cases
+- Database structure changed so that GCal ID can only be unique
+
+V1.2.1:
+- Google Calendar event description and summary can be set
+- Recurring instances of GCal are also imported
+- Added measures to prevent conflict with other plugins using Google API
+- Fixed time zone issue in GCal
+- Fixed time selection issue which happens while manually editing an appointment record
+
+V1.2:
+- Google Calendar API Integration (Beta) including synchronization added
+- A safe date format is now being used while editing Appointment records
+- Selected date is not reset now if service or service provider is changed in next weeks/months
+- Added missing esc_js functions which may break javascript in translated versions
+
+V1.1.9.1:
+- Fixed issue about gcal class call
+
+V1.1.9:
+- Search, filter, sort functionality added to appointment records
+- My appointments, services and service providers shortcodes can be sorted by database column names from admin side
+- My appointments table can also be sorted dynamically from front end with limited date/time format support
+- My appointments shortcode now outputs the table even if no appointments found
+- Additional check if service and provider really exist for services and service providers shortcodes
+- Added missing echo to the sample file
+- Exceptional days are sorted while saving
+- Prevented and fixed duplicate loading of footer scripts for unknown reasons
+- jQuery multiselect is now being used for services provided selections on Service Providers tab
+- css conflict with WPML plugin fixed
+- Pages with hash (#) are now correctly refreshed
+- Any Appointments+ shortcodes in bio and description pages are stripped for description=content case
+- New FAQ's added
+- New hooks added
+
+V1.1.8:
+- Database table collation settings are now correctly set even if database was not set correctly
+- Service providers can confirm their appointments from their BuddyPress profiles
+- Fixed a typo in example codes
+- CLIENT_EMAIL placeholder is changed as EMAIL
+- New hooks added
+- Error message of Google+ Openid when curl is not installed and front end logins enabled is no more
+- Around the clock case is now working for php 5.2 and older versions too
+- Stripslashes added while saving email subject and content
+- Translation base file is now presented as appointments.pot
+- In Marketpress Integration, email field is auto filled if not already set
+
+V1.1.7:
+- Appointments around the clock case extended also for multiple providers case
+- CLIENT_EMAIL placeholder can be used in emails
+- New hooks added
+- New advanced FAQ's added
+- For additional time base, divisible by 10 or 15 rule removed
+- New dismissable admin warning if no service provider is assigned to a service
+- New admin warning if any service is not divisible by the time base
+- New admin warning if duration of any service exceeds 24 hours
+- Some wording corrections
+- Now page refreshes after a confirmed appointment, even if GCal button is enabled
+- New setting to open Google Calendar in the same window
+- Selectable service durations increased to 10
+- WordPress 3.5 compatibility checked, no problems found
+
+V1.1.6:
+- Appointments up to midnight and working hours exceeding the other day and thus around the clock appointments are now possible
+- Handling of wp_mail function for confirmation was changed. Blind carbon copy (bcc) is not being used any more as it creates problems in some php installations
+- Fixed incorrect order limit warning in MarketPress Integration
+- Fixed 1970 issue when date format has a period
+- More fields are translatable now
+
+V1.1.5.1:
+- Fixed the capacity issue of the below functionality that was introduced in V1.1.5
+
+V1.1.5:
+- While selecting service A with no preference of service provider, appointments made for service B are now taken into consideration for providers who can give both services
+- In Monthly Calendar view, if all the time slots are busy, the day itself also becomes busy now
+- ADDRESS placeholder can now be used in emails
+
+V1.1.4:
+- To prevent W3T breaking javascript codes, DONOTMINIFY constant is added
+- Prevented redundant loading of style lines to the header due to the Monthly Calendar widget
+- Add !important to the legend color style settings
+- Confirmation message is not sent if appointment is removed even if send confirmation checkbox is checked
+- Emails are now correctly sent to admin instead of network admin
+- Transaction date/time corrected
+
+V1.1.3:
+- Service providers can now be allowed to confirm appointments from their profile pages
+- Auto confirm option added
+- In no preference case, appointments of namely selected providers were not reducing available workforce. Corrected
+- In case service duration is greater than base time, GCal ending time was calculated incorrectly. Fixed
+- New hooks added
+- Admin UI rearranged
+
+V1.1.2:
+- Users who are not service providers can save their user data too
+- PHONE and NOTE placeholders can also be used in emails now
+- After selecting a non-default service and browsing forward or back, Show button was not refreshing the page. Fixed
+- New hooks added
+
+V1.1.1:
+- Autorefresh parameter for service and service provider dropdowns added
+- If there is only one provider for the service, his schedule is displayed as default now
+- Logged in users' data are now stored in user meta and editable by himself
+- Admin (or authorized users) can now display logged in user data on user's profile page
+- Admin can now edit logged in user data using Appointments records
+- In no preference case, break hours of individual providers were not being taken into account. Corrected
+- If no service providers defined, slot was incorrectly available although there is an appointment for another service on that time slot. Corrected
+
+V1.1.0:
+- For single provider websites, appointments of providers are now shown in admin's account
+- If selected, service provider is also displayed in confirmation area now
+- New hooks added
+- While changing break hour tables, WP database cache was not being flushed. Fixed
+- In my appointments list, appointments were not displayed unless there was a saved cookie. Fixed
+- Logged in users were incorrectly regarded as service provider. Fixed
+- Service names in Transaction pages are now correctly displayed
+
+V1.0.9:
+- Appointment export function added
+- Admin side UI improved
+
+V1.0.8:
+- Fixed sending of confirmation email if status manually changed
+- Fixed 1970 issues in manual edit and creation due to comma in date format when php version is 5.2 or older
+- Service prices are now automatically selected in manual appointment creation and edit
+- PRICE and DEPOSIT placeholders can now be used in emails
+
+V1.0.7:
+- Compatibility with IE8/IE7
+- Javascript issue when selecting service after service provider fixed
+- Datepick localization issue fixed
+- When a description page was not available, current page content was being incorrectly displayed. Corrected
+- Legend area css corrected
+
+V1.0.6.2:
+- IE9 styling issue fixed
+- Combination of different working hours on different days of the week issue fixed
+- If end of day does not end with a plain hour, the last time slot was incorrectly selectable. This issue fixed
+- If an appointment is forced externally using a hook, now confirmation email is sent automatically
+- First exceptional day not being taken into account issue fixed
+
+V1.0.6.1
+- Database update note fixed
+- Display of bio page content fixed
+- If there is only one service provider, his bio info is shown as default
+- If datepick localization file month names do not match those of WordPress, datepick uses English now
+
+V1.0.6:
+- Corrections in wording
+- Anchor app_schedule attribute changed from name to id for HTML5 compliance
+- Fixed the issue in case of display name having single quotation mark
+- Service provider dropdown is not displayed any more if there are no providers
+- Corrections in localizations where month is formatted in full or short textual representation
+- Local language and date format support for datepick
+- Extra minutes are now taken into account for start and end times of the working day
+- Combination of providers having different working schedules are now correctly evaluated
+- Dummy field added to the database
+- Now dummy service providers (imaginary users attached to a user, e.g to admin) are supported
+- Fixed redirection to wp_login_url in case of front end logins disabled
+
+V1.0.5:
+- New admin notice in case of duplicate shortcodes on the same page
+- Date format in emails fixed
+- Complication in European and US date formats during manual edit fixed
+- New hooks added
+- Better readability for FAQ
+
+V1.0.4.3:
+- Fix for mixed carts (Appointments + normal products) in MarketPress integration
+
+V1.0.4.2:
+- Support for non standard date formats to be used in datepick
+- Added new filters
+
+V1.0.4.1:
+- ajax_url fixed
+
+V1.0.4:
+- Datepicker js warning fixed
+- Adding new service after deleting all services issue fixed
+- Now database cache is correctly flushed after editing a service or provider
+- Records for worker are also deleted when user is deleted. His existing appointments are assigned to general staff.
+- Javascript error tracking function disabled until a future release
+- Support for older php versions (<5.3): January 1970 issues in monthly schedules fixed
+- Cache usage default setting is set to No
+
+V1.0.3.1:
+- Just some typo corrections
+
+V1.0.3:
+- Custom time formats are now supported
+- Javascript error tracking function added
+- Service and providers names in emails are fixed
+
+V1.0.2:
+- New hooks added
+- Creating tables for sub blogs in multisite mode fixed
+- Conflict between caching and wpautop resolved
+- New setting: Send notification email in case a new appointment is taken that requires confirmation
+- New settings: Additional base time and admin base time which let better customizations
+
+V1.0.1:
+- Integration with MarketPress
+- php warning after save post is fixed
+- Styling corrected for Monthly Calendar widget
+- Service provider display name corrected
+- Google Calendar location can now be set from settings
+
+V1.0.0:
+- Initial release
