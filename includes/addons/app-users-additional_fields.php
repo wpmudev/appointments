@@ -453,11 +453,11 @@ function parse_template (str, data) {
 		interpolate : /\{\{([\s\S]+?)\}\}/g
 	};
 
-	t = _.template(str, data);
+	var compiled = _.template(str);
 
 	_.templateSettings = orig_settings;
 
-	return t;
+	return compiled(data);
 }
 
 function add_new_field () {
