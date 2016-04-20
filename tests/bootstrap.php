@@ -44,6 +44,14 @@ class App_UnitTestCase extends WP_UnitTestCase {
 		add_action( 'deprecated_argument_run', array( $this, 'deprecated_function_run' ) );
 		add_action( 'doing_it_wrong_run', array( $this, 'doing_it_wrong_run' ) );
 	}
+
+	protected function load_addon( $name ) {
+		$addons_loaded = get_option( 'app_activated_plugins', array() );
+		$addons_loaded[] = $name;
+		update_option( 'app_activated_plugins', array_unique( $addons_loaded ) );
+		$loader = new App_AddonHandler();
+		$loader->_load_active_plugins();
+	}
 }
 
 

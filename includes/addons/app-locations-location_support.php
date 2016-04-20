@@ -38,12 +38,52 @@ class App_Locations_LocationsWorker {
 		// Appointments list
 		add_filter('app-appointments_list-edit-services', array($this, 'show_appointment_location'), 10, 2);
 		add_filter('app-appointment-inline_edit-save_data', array($this, 'save_appointment_location'));
+
+		add_filter( 'appointments_notification_replacements', array( $this, 'add_notifications_replacements' ), 10, 4 );
+	}
+
+	/**
+	 * Add a replacement for LOCATION in every notification
+	 *
+	 * @param $replacement
+	 * @param $notification_type
+	 * @param $text
+	 * @param $object
+	 *
+	 * @since 1.8
+	 *
+	 * @return mixed
+	 */
+	public function add_notifications_replacements( $replacement, $notification_type, $text, $object ) {
+		$replacement['/(?:^|\b)LOCATION(?:\b|$)/'] = '';
+		$replacement['/(?:^|\b)LOCATION_ADDRESS(?:\b|$)/'] = '';
+
+		if ( empty( $object->location ) ) {
+			return $replacement;
+		}
+
+		$location = $this->_locations->find_by('id', $object->location);
+		if ( empty( $location ) ) {
+			return $replacement;
+		}
+
+		$filter = App_Macro_Codec::FILTER_BODY == false;
+		$name = $location->get_display_markup( $filter );
+		$address = $location->get_address();
+
+		$replacement['/(?:^|\b)LOCATION(?:\b|$)/'] = $name;
+		$replacement['/(?:^|\b)LOCATION_ADDRESS(?:\b|$)/'] = $address;
+
+		return $replacement;
 	}
 
 	public function save_appointment_location ($data) {
-		if (empty($data) || !is_array($data)) return $data;
-		$location_id = !empty($_POST['location']) ? $_POST['location'] : false;
+		if ( empty( $data ) || ! is_array( $data ) ) {
+			return $data;
+		}
+		$location_id      = ! empty( $_POST['location'] ) ? $_POST['location'] : false;
 		$data['location'] = $location_id;
+
 		return $data;
 	}
 
@@ -230,16 +270,6 @@ class App_Locations_LocationsWorker {
 		add_filter('app-codec-macros', array($this, 'add_to_macro_list'));
 		add_filter('app-codec-macro_default-replace_location', array($this, 'expand_location_macro'), 10, 3);
 		add_filter('app-codec-macro_default-replace_location_address', array($this, 'expand_location_address_macro'), 10, 2);
-
-		// Email filters
-		add_filter('app_notification_message', array($this, 'expand_location_macro'), 10, 2);
-		add_filter('app_notification_message', array($this, 'expand_location_address_macro'), 10, 2);
-		add_filter('app_confirmation_message', array($this, 'expand_location_macro'), 10, 2);
-		add_filter('app_confirmation_message', array($this, 'expand_location_address_macro'), 10, 2);
-		add_filter('app_reminder_message', array($this, 'expand_location_macro'), 10, 2);
-		add_filter('app_reminder_message', array($this, 'expand_location_address_macro'), 10, 2);
-		add_filter('app_removal_notification_message', array($this, 'expand_location_macro'), 10, 2);
-		add_filter('app_removal_notification_message', array($this, 'expand_location_address_macro'), 10, 2);
 
 		// GCal expansion filters
 		add_filter('app-gcal-set_summary', array($this, 'expand_location_macro'), 10, 2);

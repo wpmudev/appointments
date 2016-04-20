@@ -156,20 +156,7 @@ class Appointments_Notifications_Confirmation extends Appointments_Notification 
 		$provider_add_text  = sprintf( __('A new appointment has been made on %s. Below please find a copy of what has been sent to your client:', 'appointments'), get_option( 'blogname' ) );
 		$provider_add_text .= "\n\n\n";
 
-		$subject = $appointments->_replace(
-			__('New Appointment','appointments'),
-			$r->name,
-			$appointments->get_service_name( $r->service),
-			appointments_get_worker_name( $r->worker),
-			$r->start,
-			$r->price,
-			$appointments->get_deposit($r->price),
-			$r->phone,
-			$r->note,
-			$r->address,
-			$customer_email,
-			$r->city
-		);
+		$subject = __('New Appointment','appointments');
 
 		$body = $this->get_customer_template( $app_id, $customer_email );
 
@@ -190,39 +177,27 @@ class Appointments_Notifications_Confirmation extends Appointments_Notification 
 		$options = appointments_get_options();
 		$body = $options['confirmation_message'];
 
-		$body = $appointments->_replace(
-			$body,
-			$r->name,
-			$appointments->get_service_name( $r->service ),
-			appointments_get_worker_name( $r->worker ),
-			$r->start,
-			$r->price,
-			$appointments->get_deposit( $r->price ),
-			$r->phone,
-			$r->note,
-			$r->address,
-			$email,
-			$r->city
+		$args = array(
+			'user'     => $r->name,
+			'service'  => $appointments->get_service_name( $r->service ),
+			'worker'   => appointments_get_worker_name( $r->worker ),
+			'datetime' => $r->start,
+			'price'    => $r->price,
+			'deposit'  => $appointments->get_deposit( $r->price ),
+			'phone'    => $r->phone,
+			'note'     => $r->note,
+			'address'  => $r->address,
+			'email'    => $email,
+			'city'     => $r->city
 		);
+
+		$body = $this->replace_placeholders( $body, $args, 'confirmation-body', $r );
 
 		$body = $appointments->add_cancel_link( $body, $app_id );
 		$body = apply_filters( 'app_confirmation_message', $body, $r, $app_id );
 
 		$subject = $options["confirmation_subject"];
-		$subject = $appointments->_replace(
-			$subject,
-			$r->name,
-			$appointments->get_service_name( $r->service ),
-			appointments_get_worker_name( $r->worker),
-			$r->start,
-			$r->price,
-			$appointments->get_deposit($r->price),
-			$r->phone,
-			$r->note,
-			$r->address,
-			$email,
-			$r->city
-		);
+		$subject = $this->replace_placeholders( $subject, $args, 'confirmation-subject', $r );
 
 		return array(
 			'subject' => $subject,

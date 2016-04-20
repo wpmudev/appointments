@@ -1,3 +1,13 @@
+????? - 1.8
+-------------------------------
+- Enhance: Better UX for Appointments admin page
+- Enhance: Better notification system, now more extensible
+- Fix: Javascript error when adding additional fields
+- Fix: Addtional fields being processed after an appointment is already updated was causing to send confirmation emails twice
+- Fix: Locations in confirmation email not parsed
+- Fix: Appointments set to removed status when it was completed in some cases
+- Fix: Some strings textdomains
+
 2016-04-11 - 1.7.2.2
 -------------------------------
 - Fix: Workers were unable to save their profile if GCall Access Code was empty

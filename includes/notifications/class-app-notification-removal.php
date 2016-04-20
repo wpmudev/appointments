@@ -174,37 +174,26 @@ class Appointments_Notifications_Removal extends Appointments_Notification {
 
 		$body = ! empty( $options['removal_notification_message'] ) ? $options['removal_notification_message'] : $body = $this->get_default_customer_body();
 
-		$body = $appointments->_replace(
-			$body,
-			$app->name,
-			$appointments->get_service_name( $app->service ),
-			appointments_get_worker_name( $app->worker ),
-			$app->start,
-			$app->price,
-			$appointments->get_deposit( $app->price ),
-			$app->phone,
-			$app->note,
-			$app->address,
-			$email,
-			$app->city
+		$args = array(
+			'user'     => $app->name,
+			'service'  => $appointments->get_service_name( $app->service ),
+			'worker'   => appointments_get_worker_name( $app->worker ),
+			'datetime' => $app->start,
+			'price'    => $app->price,
+			'deposit'  => $appointments->get_deposit( $app->price ),
+			'phone'    => $app->phone,
+			'note'     => $app->note,
+			'address'  => $app->address,
+			'email'    => $email,
+			'city'     => $app->city
 		);
+
+		$body = $this->replace_placeholders( $body, $args, 'removal-body', $app );
+
 		$body = apply_filters( 'app_removal_notification_message', $body, $app, $app_id );
 
 		$subject = ! empty( $options['removal_notification_subject'] ) ? $options['removal_notification_subject'] : __( 'Appointment has been removed', 'appointments' );
-
-		$subject = $appointments->_replace($subject,
-			$app->name,
-			$appointments->get_service_name($app->service),
-			appointments_get_worker_name($app->worker),
-			$app->start,
-			$app->price,
-			$appointments->get_deposit($app->price),
-			$app->phone,
-			$app->note,
-			$app->address,
-			$email,
-			$app->city
-		);
+		$subject = $this->replace_placeholders( $subject, $args, 'removal-subject', $app );
 
 		return array(
 			'subject' => $subject,

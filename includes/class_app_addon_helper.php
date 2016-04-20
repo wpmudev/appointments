@@ -2,8 +2,10 @@
 
 class App_AddonHandler {
 	
-	private function __construct () {
-		define('APP_PLUGIN_ADDONS_DIR', APP_PLUGIN_DIR . '/includes/addons');
+	public function __construct () {
+		if ( ! defined( 'APP_PLUGIN_ADDONS_DIR' ) ) {
+			define('APP_PLUGIN_ADDONS_DIR', APP_PLUGIN_DIR . '/includes/addons');
+		}
 		$this->_load_active_plugins();
 	}
 	
@@ -17,9 +19,8 @@ class App_AddonHandler {
 		add_action('wp_ajax_app_deactivate_plugin', array($this, 'json_deactivate_plugin'));
 	}
 	
-	private function _load_active_plugins () {
+	public function _load_active_plugins () {
 		$active = $this->get_active_plugins();
-
 		foreach ($active as $plugin) {
 			$path = self::plugin_to_path($plugin);
 			if (!file_exists($path)) continue;
@@ -46,7 +47,6 @@ class App_AddonHandler {
 	public static function get_active_plugins () {
 		$active = get_option('app_activated_plugins');
 		$active = $active ? $active : array();
-
 		return $active;
 	}
 	

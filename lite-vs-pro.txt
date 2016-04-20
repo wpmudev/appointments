@@ -1,0 +1,5 @@
+Free:
+- Limit user to two services and one provider
+- No addons
+- No MP integration
+- Probably GCal only works one way

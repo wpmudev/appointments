@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.7.2.2
+Version: 1.8-beta1
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -3195,7 +3195,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			'SITE_NAME' => wp_specialchars_decode(get_option('blogname'), ENT_QUOTES),
 			'CLIENT' => $user,
 			'SERVICE_PROVIDER' => $worker,
-			'SERVICE' => $this->escape_backreference($service),
+			'SERVICE' => preg_replace('/\$(\d)/', '\\\$$1', $service),
 			'DATE_TIME' => mysql2date($this->datetime_format, $datetime),
 			'PRICE' => $price,
 			'DEPOSIT' => $deposit,
@@ -3211,15 +3211,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		}
 		return $text;
 	}
-
-	/**
-     *	Avoid back-reference collisions.
-     *  http://us1.php.net/manual/en/function.preg-replace.php#103985
-     */
-    function escape_backreference($x)
-    {
-        return preg_replace('/\$(\d)/', '\\\$$1', $x);
-    }
+	
 
 	/**
 	 *	Email message headers

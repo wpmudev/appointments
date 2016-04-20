@@ -14,18 +14,18 @@ class Appointments_Notifications_Reminder extends Appointments_Notification {
 
 		if ( ! is_email( $customer_email ) ) {
 			$this->manager->log( sprintf( __( 'Unable to send client reminder about the appointment ID:%s.', 'appointments' ), $app_id ) );
+
 			return false;
 		}
 
-		$options = appointments_get_options();
-
 		$this->customer( $app_id, $customer_email );
-		$this->manager->log( sprintf( __('Reminder message sent to %s for appointment ID:%s','appointments'), $customer_email, $app_id ) );
+		$this->manager->log( sprintf( __( 'Reminder message sent to %s for appointment ID:%s', 'appointments' ), $customer_email, $app_id ) );
 
 		$worker_email = $appointments->get_worker_email( $r->worker );
 
 		if ( ! is_email( $worker_email ) ) {
 			$this->manager->log( sprintf( __( 'Unable to send worker reminder about the appointment ID:%s.', 'appointments' ), $app_id ) );
+
 			return true;
 		}
 
@@ -46,7 +46,7 @@ class Appointments_Notifications_Reminder extends Appointments_Notification {
 			return false;
 		}
 
-		$template = $this->get_customer_template(  $app_id, $email );
+		$template = $this->get_customer_template( $app_id, $email );
 		if ( ! $template ) {
 			return false;
 		}
@@ -81,7 +81,7 @@ class Appointments_Notifications_Reminder extends Appointments_Notification {
 			return false;
 		}
 
-		$template = $this->get_worker_template(  $app_id, $email );
+		$template = $this->get_worker_template( $app_id, $email );
 		if ( ! $template ) {
 			return false;
 		}
@@ -113,43 +113,31 @@ class Appointments_Notifications_Reminder extends Appointments_Notification {
 
 		$subject = $options["reminder_subject"];
 
-		$subject = $appointments->_replace(
-			$subject,
-			$r->name,
-			$appointments->get_service_name( $r->service ),
-			appointments_get_worker_name( $r->worker ),
-			$r->start,
-			$r->price,
-			$appointments->get_deposit( $r->price ),
-			$r->phone,
-			$r->note,
-			$r->address,
-			$email,
-			$r->city
+		$args = array(
+			'user'     => $r->name,
+			'service'  => $appointments->get_service_name( $r->service ),
+			'worker'   => appointments_get_worker_name( $r->worker ),
+			'datetime' => $r->start,
+			'price'    => $r->price,
+			'deposit'  => $appointments->get_deposit( $r->price ),
+			'phone'    => $r->phone,
+			'note'     => $r->note,
+			'address'  => $r->address,
+			'email'    => $email,
+			'city'     => $r->city
 		);
 
+		$subject = $this->replace_placeholders(	$subject, $args, 'reminder-subject', $r );
+
 		$body = $options["reminder_message"];
-		$body = $appointments->_replace(
-			$body,
-			$r->name,
-			$appointments->get_service_name( $r->service ),
-			appointments_get_worker_name( $r->worker ),
-			$r->start,
-			$r->price,
-			$appointments->get_deposit( $r->price ),
-			$r->phone,
-			$r->note,
-			$r->address,
-			$email,
-			$r->city
-		);
+		$body = $this->replace_placeholders( $body, $args, 'reminder-body', $r );
 
 		$body = $appointments->add_cancel_link( $body, $app_id );
 		$body = apply_filters( 'app_reminder_message', $body, $r, $r->ID );
 
 		return array(
 			'subject' => $subject,
-			'body' => $body
+			'body'    => $body
 		);
 	}
 
@@ -166,10 +154,10 @@ class Appointments_Notifications_Reminder extends Appointments_Notification {
 
 		$subject = $customer_template['subject'];
 		$body    = $provider_add_text . $customer_template['body'];
-		
+
 		return array(
 			'subject' => $subject,
-			'body' => $body
+			'body'    => $body
 		);
 	}
 }
