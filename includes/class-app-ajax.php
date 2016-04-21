@@ -94,6 +94,7 @@ class Appointments_AJAX {
 				add_filter( 'appointments_send_confirmation', '__return_false' );
 			}
 			$app_id = appointments_insert_appointment( $data );
+			$insert_result = true;
 		}
 
 		do_action('app-appointment-inline_edit-after_save', $app_id, $data);

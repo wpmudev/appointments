@@ -1,12 +1,16 @@
-????? - 1.8
+2016-04-21 - 1.8
 -------------------------------
 - Enhance: Better UX for Appointments admin page
 - Enhance: Better notification system, now more extensible
+- Fix: GCal import was setting services and service providers back to default
+- Fix: Confirmation emails were always being sent even if option was unchecked
 - Fix: Javascript error when adding additional fields
 - Fix: Addtional fields being processed after an appointment is already updated was causing to send confirmation emails twice
 - Fix: Locations in confirmation email not parsed
 - Fix: Appointments set to removed status when it was completed in some cases
 - Fix: Some strings textdomains
+
+
 
 2016-04-11 - 1.7.2.2
 -------------------------------

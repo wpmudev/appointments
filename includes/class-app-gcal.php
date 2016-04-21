@@ -281,7 +281,7 @@ class Appointments_Google_Calendar {
 						continue;
 					}
 
-					if ( ! in_array( $app->status, array( 'completed', 'pending' ) ) ) {
+					if ( ! in_array( $app->status, array( 'completed', 'pending', 'removed' ) ) ) {
 						appointments_update_appointment_status( $app->ID, 'removed' );
 					}
 				}
@@ -963,7 +963,7 @@ class Appointments_Google_Calendar {
 	public function get_events_list() {
 		global $appointments;
 
-		$current_time = current_time( 'timestamp' );
+		$current_time = current_time( 'timestamp' ) - ( 3600 * 5 ); // Let's get also appointments that were 5 hours ago
 		$args = array(
 			'timeMin'      => apply_filters( 'app_gcal_time_min', date( "c", $current_time ) ),
 			'timeMax'      => apply_filters( 'app_gcal_time_max', date( "c", $current_time + ( 3600 * 24 * $appointments->get_app_limit() ) ) ),

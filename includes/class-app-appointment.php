@@ -630,7 +630,6 @@ function appointments_update_appointment( $app_id, $args ) {
 		 * Fired when an Appointment changes its status
 		 *
 		 * @used-by AppointmentsGcal::app_change_status()
-		 * @used-by App_Users_AdditionalFields::manual_cleanup_data()
 		 */
 		do_action( 'wpmudev_appointments_update_appointment_status', $app_id, $new_status, $old_status );
 
