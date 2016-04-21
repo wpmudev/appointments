@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Appointments+ package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Appointments+ 1.7.2.2\n"
+"Project-Id-Version: Appointments+ 1.8-beta2\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2016-04-20 13:52:01+00:00\n"
+"POT-Creation-Date: 2016-04-20 15:54:00+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1416,7 +1416,7 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
-#: appointments.php:1113 includes/addons/app-locations-location_support.php:71
+#: appointments.php:1113 includes/addons/app-locations-location_support.php:111
 msgid "Address"
 msgstr ""
 
@@ -1543,65 +1543,65 @@ msgstr ""
 msgid "Reminder for your Appointment"
 msgstr ""
 
-#: appointments.php:3558
+#: appointments.php:3550
 msgid "Cache cleared."
 msgstr ""
 
-#: appointments.php:3566
+#: appointments.php:3558
 msgid "Settings saved and cache cleared."
 msgstr ""
 
-#: appointments.php:3573
+#: appointments.php:3565
 msgid "Settings saved."
 msgstr ""
 
-#: appointments.php:3580
+#: appointments.php:3572
 msgid "Selected record(s) deleted."
 msgstr ""
 
-#: appointments.php:3587
+#: appointments.php:3579
 msgid "Selected record(s) updated."
 msgstr ""
 
-#: appointments.php:3594
+#: appointments.php:3586
 msgid "You are not authorised to do this."
 msgstr ""
 
-#: appointments.php:3647 appointments.php:3726
+#: appointments.php:3639 appointments.php:3718
 #: includes/templates/app-admin-settings-main.php:141
 msgid "None"
 msgstr ""
 
-#: appointments.php:3721 includes/templates/app-admin-settings-services.php:30
+#: appointments.php:3713 includes/templates/app-admin-settings-services.php:30
 msgid "No services defined"
 msgstr ""
 
-#: appointments.php:3771 appointments.php:3773
+#: appointments.php:3763 appointments.php:3765
 msgid "Day"
 msgstr ""
 
-#: appointments.php:3771
+#: appointments.php:3763
 msgid "Work?"
 msgstr ""
 
-#: appointments.php:3771 appointments.php:3773
+#: appointments.php:3763 appointments.php:3765
 #: includes/addons/app-admin-export_date_range.php:48
 #: includes/class-app-ajax.php:330
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:136
 msgid "Start"
 msgstr ""
 
-#: appointments.php:3771 appointments.php:3773
+#: appointments.php:3763 appointments.php:3765
 #: includes/addons/app-admin-export_date_range.php:49
 #: includes/class-app-ajax.php:365
 msgid "End"
 msgstr ""
 
-#: appointments.php:3773
+#: appointments.php:3765
 msgid "Give break?"
 msgstr ""
 
-#: appointments.php:3787 appointments.php:3836
+#: appointments.php:3779 appointments.php:3828
 #: includes/addons/app-users-additional_fields.php:402
 #: includes/addons/app-users-additional_fields.php:437
 #: includes/gcal/views/settings-gcal-button.php:7
@@ -1625,7 +1625,7 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: appointments.php:3788 appointments.php:3837
+#: appointments.php:3780 appointments.php:3829
 #: includes/addons/app-users-additional_fields.php:402
 #: includes/addons/app-users-additional_fields.php:437
 #: includes/gcal/views/settings-gcal-button.php:8
@@ -1649,7 +1649,7 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: appointments.php:3821 appointments.php:3870
+#: appointments.php:3813 appointments.php:3862
 msgid "Add break"
 msgstr ""
 
@@ -1674,83 +1674,83 @@ msgid ""
 "properly because of this."
 msgstr ""
 
-#: includes/addons/app-locations-location_support.php:53
-#: includes/addons/app-locations-location_support.php:287
-#: includes/addons/app-locations-location_support.php:310
+#: includes/addons/app-locations-location_support.php:93
+#: includes/addons/app-locations-location_support.php:317
+#: includes/addons/app-locations-location_support.php:340
 msgid "Location"
 msgstr ""
 
-#: includes/addons/app-locations-location_support.php:74
+#: includes/addons/app-locations-location_support.php:114
 #: includes/addons/app-users-additional_fields.php:429
 msgid "Add"
 msgstr ""
 
-#: includes/addons/app-locations-location_support.php:75
+#: includes/addons/app-locations-location_support.php:115
 msgid "Save"
 msgstr ""
 
-#: includes/addons/app-locations-location_support.php:76
+#: includes/addons/app-locations-location_support.php:116
 msgid "Create a New Location"
 msgstr ""
 
-#: includes/addons/app-locations-location_support.php:77
+#: includes/addons/app-locations-location_support.php:117
 msgid "Edit Location"
 msgstr ""
 
-#: includes/addons/app-locations-location_support.php:93
+#: includes/addons/app-locations-location_support.php:133
 msgid "Locations"
 msgstr ""
 
-#: includes/addons/app-locations-location_support.php:106
+#: includes/addons/app-locations-location_support.php:146
 msgid "Add location"
 msgstr ""
 
-#: includes/addons/app-locations-location_support.php:111
+#: includes/addons/app-locations-location_support.php:151
 msgid "Locations List"
 msgstr ""
 
-#: includes/addons/app-locations-location_support.php:119
+#: includes/addons/app-locations-location_support.php:159
 #: includes/sample-appointments-page.php:38
 msgid "Edit"
 msgstr ""
 
-#: includes/addons/app-locations-location_support.php:120
+#: includes/addons/app-locations-location_support.php:160
 msgid "Delete"
 msgstr ""
 
-#: includes/addons/app-locations-location_support.php:132
+#: includes/addons/app-locations-location_support.php:172
 msgid "Locations Settings"
 msgstr ""
 
-#: includes/addons/app-locations-location_support.php:136
+#: includes/addons/app-locations-location_support.php:176
 msgid "Show my appointments location"
 msgstr ""
 
-#: includes/addons/app-locations-location_support.php:140
-#: includes/addons/app-locations-location_support.php:152
+#: includes/addons/app-locations-location_support.php:180
+#: includes/addons/app-locations-location_support.php:192
 msgid "Automatic, after service"
 msgstr ""
 
-#: includes/addons/app-locations-location_support.php:141
-#: includes/addons/app-locations-location_support.php:153
+#: includes/addons/app-locations-location_support.php:181
+#: includes/addons/app-locations-location_support.php:193
 msgid "Automatic, after provider"
 msgstr ""
 
-#: includes/addons/app-locations-location_support.php:142
-#: includes/addons/app-locations-location_support.php:155
+#: includes/addons/app-locations-location_support.php:182
+#: includes/addons/app-locations-location_support.php:195
 msgid "Automatic, after date/time"
 msgstr ""
 
-#: includes/addons/app-locations-location_support.php:143
-#: includes/addons/app-locations-location_support.php:156
+#: includes/addons/app-locations-location_support.php:183
+#: includes/addons/app-locations-location_support.php:196
 msgid "Automatic, after status"
 msgstr ""
 
-#: includes/addons/app-locations-location_support.php:148
+#: includes/addons/app-locations-location_support.php:188
 msgid "Show all appointments location"
 msgstr ""
 
-#: includes/addons/app-locations-location_support.php:154
+#: includes/addons/app-locations-location_support.php:194
 msgid "Automatic, after client"
 msgstr ""
 
@@ -2780,7 +2780,7 @@ msgid "RUB"
 msgstr ""
 
 #: includes/class_app_codec.php:146
-#: includes/notifications/class-app-notification-removal.php:193
+#: includes/notifications/class-app-notification-removal.php:195
 msgid "Appointment has been removed"
 msgstr ""
 
@@ -3633,7 +3633,7 @@ msgid ""
 "been sent to your client:"
 msgstr ""
 
-#: includes/notifications/class-app-notification-confirmation.php:160
+#: includes/notifications/class-app-notification-confirmation.php:159
 msgid "New Appointment"
 msgstr ""
 
@@ -3649,15 +3649,15 @@ msgstr ""
 msgid "Unable to send client reminder about the appointment ID:%s."
 msgstr ""
 
-#: includes/notifications/class-app-notification-reminder.php:23
+#: includes/notifications/class-app-notification-reminder.php:22
 msgid "Reminder message sent to %s for appointment ID:%s"
 msgstr ""
 
-#: includes/notifications/class-app-notification-reminder.php:28
+#: includes/notifications/class-app-notification-reminder.php:27
 msgid "Unable to send worker reminder about the appointment ID:%s."
 msgstr ""
 
-#: includes/notifications/class-app-notification-reminder.php:162
+#: includes/notifications/class-app-notification-reminder.php:150
 msgid ""
 "You are receiving this reminder message for your appointment as a provider. "
 "The below is a copy of what may have been sent to your client:"
@@ -5421,7 +5421,7 @@ msgctxt "paging"
 msgid "%1$s of %2$s"
 msgstr ""
 
-#: appointments.php:2947 includes/addons/app-locations-location_support.php:78
+#: appointments.php:2947 includes/addons/app-locations-location_support.php:118
 #: includes/class-app-ajax.php:419
 #: includes/shortcodes/class-app-shortcode-confirmation.php:196
 #: includes/support/class_app_tutorial.php:219

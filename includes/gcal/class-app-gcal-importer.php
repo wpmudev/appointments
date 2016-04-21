@@ -131,6 +131,13 @@ class Appointments_Google_Calendar_Importer {
 			}
 		}
 
+		if ( $app ) {
+			$service = appointments_get_service( $app->service );
+			if ( $service ) {
+				$service_id = $service->ID;
+			}
+		}
+
 		$event_start = $event->getStart();
 		$event_start_gmt_date = gmdate( 'Y-m-d H:i:s', strtotime( $event_start->dateTime ) );
 		$event_start_gmt_timestamp = strtotime( $event_start_gmt_date );

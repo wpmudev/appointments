@@ -90,13 +90,10 @@ class Appointments_AJAX {
 
 		} else {
 			// Insert
-			$app_id = appointments_insert_appointment( $data );
-			if ( $app_id ) {
-				$insert_result = true;
-				if ( $resend ) {
-					appointments_send_confirmation( $app_id );
-				}
+			if ( ! $resend ) {
+				add_filter( 'appointments_send_confirmation', '__return_false' );
 			}
+			$app_id = appointments_insert_appointment( $data );
 		}
 
 		do_action('app-appointment-inline_edit-after_save', $app_id, $data);
