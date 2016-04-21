@@ -10,8 +10,6 @@
 - Fix: Appointments set to removed status when it was completed in some cases
 - Fix: Some strings textdomains
 
-
-
 2016-04-11 - 1.7.2.2
 -------------------------------
 - Fix: Workers were unable to save their profile if GCall Access Code was empty

@@ -86,7 +86,7 @@ module.exports = function(grunt) {
         },
 
         clean: {
-            main: ['build/<%= pkg.name %>']
+            main: ['build/*']
         },
 
         compress: {
@@ -100,6 +100,13 @@ module.exports = function(grunt) {
                 src: ['**/*'],
                 dest: '<%= pkg.name %>/'
             }
+        },
+
+        open: {
+            dev : {
+                path: '<%= pkg.projectEditUrl %>',
+                app: 'Google Chrome'
+            }
         }
     });
 
@@ -109,6 +116,7 @@ module.exports = function(grunt) {
         'checktextdomain',
         'makepot',
         'copy',
-        'compress'
+        'compress',
+        'open'
     ]);
 };

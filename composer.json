@@ -1,0 +1,13 @@
+{
+    "name": "incsub/appointments",
+    "description": "Appoointments",
+    "require": {
+        "phpunit/phpunit": "5.8.24"
+    },
+    "authors": [
+        {
+            "name": "WPMU DEV",
+            "email": "contact@wpmudev.org"
+        }
+    ]
+}

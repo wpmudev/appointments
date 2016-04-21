@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Appointments+ package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Appointments+ 1.8-beta2\n"
+"Project-Id-Version: Appointments+ 1.8\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2016-04-20 15:54:00+00:00\n"
+"POT-Creation-Date: 2016-04-21 08:37:58+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1011,7 +1011,7 @@ msgstr ""
 
 #: admin/pages/class-admin-appointments-page.php:84
 #: admin/views/page-appointments-status-filter.php:6
-#: includes/class-app-appointment.php:1128 includes/class_app_codec.php:27
+#: includes/class-app-appointment.php:1127 includes/class_app_codec.php:27
 #: includes/templates/app-admin-appointment_list.php:57
 msgid "Reserved by GCal"
 msgstr ""
@@ -1049,7 +1049,7 @@ msgid "Service"
 msgstr ""
 
 #: admin/pages/class-admin-appointments-page.php:199
-#: includes/class-app-ajax.php:288 includes/class_app_shortcodes.php:581
+#: includes/class-app-ajax.php:286 includes/class_app_shortcodes.php:581
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:104
 #: includes/templates/app-admin-my_appointments_list.php:68
 msgid "Provider"
@@ -1060,7 +1060,7 @@ msgid "Created on"
 msgstr ""
 
 #: admin/pages/class-admin-appointments-page.php:201
-#: includes/class-app-ajax.php:382 includes/class_app_shortcodes.php:584
+#: includes/class-app-ajax.php:380 includes/class_app_shortcodes.php:584
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:140
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:176
 #: includes/templates/app-admin-my_appointments_list.php:69
@@ -1219,17 +1219,17 @@ msgid "Active"
 msgstr ""
 
 #: admin/views/page-appointments-status-filter.php:4
-#: includes/class-app-appointment.php:1124 includes/class_app_codec.php:23
+#: includes/class-app-appointment.php:1123 includes/class_app_codec.php:23
 msgid "Pending"
 msgstr ""
 
 #: admin/views/page-appointments-status-filter.php:5
-#: includes/class-app-appointment.php:1127 includes/class_app_codec.php:26
+#: includes/class-app-appointment.php:1126 includes/class_app_codec.php:26
 msgid "Completed"
 msgstr ""
 
 #: admin/views/page-appointments-status-filter.php:7
-#: includes/class-app-appointment.php:1129 includes/class_app_codec.php:28
+#: includes/class-app-appointment.php:1128 includes/class_app_codec.php:28
 msgid "Removed"
 msgstr ""
 
@@ -1402,7 +1402,7 @@ msgstr ""
 msgid "Saturday"
 msgstr ""
 
-#: appointments.php:1110 includes/class-app-ajax.php:272
+#: appointments.php:1110 includes/class-app-ajax.php:270
 #: includes/class_app_addon_helper.php:122
 #: includes/templates/app-admin-settings-services.php:13
 msgid "Name"
@@ -1586,14 +1586,14 @@ msgstr ""
 
 #: appointments.php:3763 appointments.php:3765
 #: includes/addons/app-admin-export_date_range.php:48
-#: includes/class-app-ajax.php:330
+#: includes/class-app-ajax.php:328
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:136
 msgid "Start"
 msgstr ""
 
 #: appointments.php:3763 appointments.php:3765
 #: includes/addons/app-admin-export_date_range.php:49
-#: includes/class-app-ajax.php:365
+#: includes/class-app-ajax.php:363
 msgid "End"
 msgstr ""
 
@@ -1602,8 +1602,8 @@ msgid "Give break?"
 msgstr ""
 
 #: appointments.php:3779 appointments.php:3828
-#: includes/addons/app-users-additional_fields.php:402
-#: includes/addons/app-users-additional_fields.php:437
+#: includes/addons/app-users-additional_fields.php:356
+#: includes/addons/app-users-additional_fields.php:391
 #: includes/gcal/views/settings-gcal-button.php:7
 #: includes/gcal/views/settings-gcal-step-3.php:50
 #: includes/templates/app-admin-settings-main.php:80
@@ -1626,8 +1626,8 @@ msgid "No"
 msgstr ""
 
 #: appointments.php:3780 appointments.php:3829
-#: includes/addons/app-users-additional_fields.php:402
-#: includes/addons/app-users-additional_fields.php:437
+#: includes/addons/app-users-additional_fields.php:356
+#: includes/addons/app-users-additional_fields.php:391
 #: includes/gcal/views/settings-gcal-button.php:8
 #: includes/gcal/views/settings-gcal-step-3.php:51
 #: includes/templates/app-admin-settings-main.php:81
@@ -1681,7 +1681,7 @@ msgid "Location"
 msgstr ""
 
 #: includes/addons/app-locations-location_support.php:114
-#: includes/addons/app-users-additional_fields.php:429
+#: includes/addons/app-users-additional_fields.php:383
 msgid "Add"
 msgstr ""
 
@@ -2112,64 +2112,64 @@ msgstr ""
 msgid "Shares resources with"
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:215
-#: includes/class-app-ajax.php:119 includes/class-app-ajax.php:124
+#: includes/addons/app-users-additional_fields.php:207
+#: includes/class-app-ajax.php:117 includes/class-app-ajax.php:122
 msgid "<span style=\"color:green;font-weight:bold\">Changes saved.</span>"
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:367
+#: includes/addons/app-users-additional_fields.php:321
 msgid "Text"
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:368
+#: includes/addons/app-users-additional_fields.php:322
 msgid "Checkbox"
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:375
+#: includes/addons/app-users-additional_fields.php:329
 msgid "Additional fields"
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:382
+#: includes/addons/app-users-additional_fields.php:336
 msgid "Cleanup saved data for removed appointments"
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:385
+#: includes/addons/app-users-additional_fields.php:339
 msgid ""
 "This setting controls whether your additional fields data will be kept "
 "around when appointments change state to &quot;removed&quot;"
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:391
+#: includes/addons/app-users-additional_fields.php:345
 msgid "Allow admin-side fields editing"
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:394
+#: includes/addons/app-users-additional_fields.php:348
 msgid ""
 "Enabling this setting will allow you to manually add/edit additional fields "
 "for your appointments."
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:404
+#: includes/addons/app-users-additional_fields.php:358
 msgid "E-mail macro:"
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:405
+#: includes/addons/app-users-additional_fields.php:359
 msgid "This is the placeholder you can use in your emails."
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:412
+#: includes/addons/app-users-additional_fields.php:366
 msgid "Add new field"
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:414
+#: includes/addons/app-users-additional_fields.php:368
 msgid "Field label:"
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:418
+#: includes/addons/app-users-additional_fields.php:372
 msgid "Field type:"
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:427
+#: includes/addons/app-users-additional_fields.php:381
 msgid "Required?"
 msgstr ""
 
@@ -2281,202 +2281,202 @@ msgid ""
 "converted to a provider list once a location has been chosen."
 msgstr ""
 
-#: includes/class-app-ajax.php:115
+#: includes/class-app-ajax.php:113
 msgid "Status changed from %s to %s by %s for appointment ID:%d"
 msgstr ""
 
-#: includes/class-app-ajax.php:128
+#: includes/class-app-ajax.php:126
 msgid "Confirmation message (re)sent"
 msgstr ""
 
-#: includes/class-app-ajax.php:129
+#: includes/class-app-ajax.php:127
 msgid "Record could not be saved OR you did not make any changes!"
 msgstr ""
 
-#: includes/class-app-ajax.php:221
+#: includes/class-app-ajax.php:219
 msgid "CLIENT"
 msgstr ""
 
-#: includes/class-app-ajax.php:224
+#: includes/class-app-ajax.php:222
 #: includes/templates/app-admin-my_transactions_list.php:19
 msgid "User"
 msgstr ""
 
-#: includes/class-app-ajax.php:225
+#: includes/class-app-ajax.php:223
 msgid "Not registered user"
 msgstr ""
 
-#: includes/class-app-ajax.php:268
+#: includes/class-app-ajax.php:266
 msgid "SERVICE"
 msgstr ""
 
-#: includes/class-app-ajax.php:291
+#: includes/class-app-ajax.php:289
 #: includes/templates/app-admin-settings-exceptions.php:16
 #: includes/templates/app-admin-settings-working_hours.php:12
 msgid "No specific provider"
 msgstr ""
 
-#: includes/class-app-ajax.php:306
+#: includes/class-app-ajax.php:304
 #: includes/templates/app-admin-settings-services.php:16
 msgid "Price"
 msgstr ""
 
-#: includes/class-app-ajax.php:318
+#: includes/class-app-ajax.php:316
 msgid "APPOINTMENT"
 msgstr ""
 
-#: includes/class-app-ajax.php:322
+#: includes/class-app-ajax.php:320
 msgid "Created"
 msgstr ""
 
-#: includes/class-app-ajax.php:401
+#: includes/class-app-ajax.php:399
 msgid "(Re)send confirmation email"
 msgstr ""
 
-#: includes/class-app-ajax.php:405
+#: includes/class-app-ajax.php:403
 msgid "Send confirmation email"
 msgstr ""
 
-#: includes/class-app-ajax.php:409
+#: includes/class-app-ajax.php:407
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:179
 msgid "Confirm"
 msgstr ""
 
-#: includes/class-app-ajax.php:422
+#: includes/class-app-ajax.php:420
 msgid ""
 "GCal reserved appointments cannot be edited here. Edit them in your Google "
 "calendar."
 msgstr ""
 
-#: includes/class-app-ajax.php:426
+#: includes/class-app-ajax.php:424
 msgid "Click to save or update"
 msgstr ""
 
-#: includes/class-app-ajax.php:428
+#: includes/class-app-ajax.php:426
 msgid "Save / Update"
 msgstr ""
 
-#: includes/class-app-ajax.php:446
+#: includes/class-app-ajax.php:444
 msgid "Log file could not be deleted"
 msgstr ""
 
-#: includes/class-app-ajax.php:462
+#: includes/class-app-ajax.php:460
 msgid ""
 "You have already applied for an appointment. Please wait until you hear "
 "from us."
 msgstr ""
 
-#: includes/class-app-ajax.php:592 includes/class-app-ajax.php:882
+#: includes/class-app-ajax.php:590 includes/class-app-ajax.php:880
 msgid ""
 "We are sorry, but this time slot is no longer available. Please refresh the "
 "page and try another time slot. Thank you."
 msgstr ""
 
-#: includes/class-app-ajax.php:622
+#: includes/class-app-ajax.php:620
 msgid "Appointment could not be saved. Please contact website admin."
 msgstr ""
 
-#: includes/class-app-ajax.php:773
+#: includes/class-app-ajax.php:771
 msgid ""
 "Paypal confirmation arrived, but status could not be changed for some "
 "reason. Please check appointment with ID %s"
 msgstr ""
 
-#: includes/class-app-ajax.php:775
+#: includes/class-app-ajax.php:773
 msgid "Appointment status could not be changed"
 msgstr ""
 
-#: includes/class-app-ajax.php:781
+#: includes/class-app-ajax.php:779
 msgid ""
 "Last transaction has been reversed. Reason: Payment has been reversed "
 "(charge back)"
 msgstr ""
 
-#: includes/class-app-ajax.php:790
+#: includes/class-app-ajax.php:788
 msgid "Last transaction has been reversed. Reason: Payment has been refunded"
 msgstr ""
 
-#: includes/class-app-ajax.php:799
+#: includes/class-app-ajax.php:797
 msgid "Last transaction has been reversed. Reason: Payment Denied"
 msgstr ""
 
-#: includes/class-app-ajax.php:810
+#: includes/class-app-ajax.php:808
 msgid "Customer did not include a confirmed shipping address"
 msgstr ""
 
-#: includes/class-app-ajax.php:811
+#: includes/class-app-ajax.php:809
 msgid "Funds not captured yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:812
+#: includes/class-app-ajax.php:810
 msgid "eCheck that has not cleared yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:813
+#: includes/class-app-ajax.php:811
 msgid "Payment waiting for aproval by service provider"
 msgstr ""
 
-#: includes/class-app-ajax.php:814
+#: includes/class-app-ajax.php:812
 msgid "Payment waiting for service provider to handle multi-currency process"
 msgstr ""
 
-#: includes/class-app-ajax.php:815
+#: includes/class-app-ajax.php:813
 msgid "Customer did not register or confirm his/her email yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:816
+#: includes/class-app-ajax.php:814
 msgid "Waiting for service provider to upgrade the PayPal account"
 msgstr ""
 
-#: includes/class-app-ajax.php:817
+#: includes/class-app-ajax.php:815
 msgid "Waiting for service provider to verify his/her PayPal account"
 msgstr ""
 
-#: includes/class-app-ajax.php:821
+#: includes/class-app-ajax.php:819
 msgid "Last transaction is pending. Reason: "
 msgstr ""
 
-#: includes/class-app-ajax.php:863
+#: includes/class-app-ajax.php:861
 msgid "You need to login to make an appointment."
 msgstr ""
 
-#: includes/class-app-ajax.php:888
+#: includes/class-app-ajax.php:886
 msgid "Service name: "
 msgstr ""
 
-#: includes/class-app-ajax.php:889
+#: includes/class-app-ajax.php:887
 msgid "Date and time: "
 msgstr ""
 
-#: includes/class-app-ajax.php:890
+#: includes/class-app-ajax.php:888
 msgid "Lasts (approx): "
 msgstr ""
 
-#: includes/class-app-ajax.php:890
+#: includes/class-app-ajax.php:888
 msgid "minutes"
 msgstr ""
 
-#: includes/class-app-ajax.php:893
+#: includes/class-app-ajax.php:891
 msgid "Price: "
 msgstr ""
 
-#: includes/class-app-ajax.php:898
+#: includes/class-app-ajax.php:896
 msgid "Service provider: "
 msgstr ""
 
-#: includes/class-app-ajax.php:978 includes/class-app-ajax.php:982
+#: includes/class-app-ajax.php:976 includes/class-app-ajax.php:980
 msgid "Nothing to download!"
 msgstr ""
 
-#: includes/class-app-appointment.php:1125 includes/class_app_codec.php:24
+#: includes/class-app-appointment.php:1124 includes/class_app_codec.php:24
 msgid "Paid"
 msgstr ""
 
-#: includes/class-app-appointment.php:1126 includes/class_app_codec.php:25
+#: includes/class-app-appointment.php:1125 includes/class_app_codec.php:25
 msgid "Confirmed"
 msgstr ""
 
-#: includes/class-app-appointment.php:1140
+#: includes/class-app-appointment.php:1139
 #: includes/templates/app-admin-my_appointments_list.php:173
 #: includes/templates/app-admin-my_transactions_list.php:109
 #: includes/templates/app-admin-my_transactions_list.php:118
@@ -3617,23 +3617,23 @@ msgid ""
 "clicking this link: %s"
 msgstr ""
 
-#: includes/notifications/class-app-notification-confirmation.php:68
+#: includes/notifications/class-app-notification-confirmation.php:69
 msgid ""
 "Unable to notify the client about the appointment ID:%s confirmation, "
 "stopping."
 msgstr ""
 
-#: includes/notifications/class-app-notification-confirmation.php:91
+#: includes/notifications/class-app-notification-confirmation.php:92
 msgid "Confirmation message sent to %s for appointment ID:%s"
 msgstr ""
 
-#: includes/notifications/class-app-notification-confirmation.php:156
+#: includes/notifications/class-app-notification-confirmation.php:157
 msgid ""
 "A new appointment has been made on %s. Below please find a copy of what has "
 "been sent to your client:"
 msgstr ""
 
-#: includes/notifications/class-app-notification-confirmation.php:159
+#: includes/notifications/class-app-notification-confirmation.php:160
 msgid "New Appointment"
 msgstr ""
 
@@ -5422,7 +5422,7 @@ msgid "%1$s of %2$s"
 msgstr ""
 
 #: appointments.php:2947 includes/addons/app-locations-location_support.php:118
-#: includes/class-app-ajax.php:419
+#: includes/class-app-ajax.php:417
 #: includes/shortcodes/class-app-shortcode-confirmation.php:196
 #: includes/support/class_app_tutorial.php:219
 msgctxt "Drop current action"
