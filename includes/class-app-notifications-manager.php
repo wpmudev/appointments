@@ -11,10 +11,6 @@ class Appointments_Notifications_Manager {
 	public $removal;
 
 	public function __construct() {
-		$options = appointments_get_options();
-
-		$log_emails = isset( $options["log_emails"] ) && 'yes' == $options["log_emails"];
-
 		add_action( 'wpmudev_appointments_update_appointment_status', array( $this, 'on_change_status' ), 10, 3 );
 		add_action( 'wpmudev_appointments_insert_appointment', array( $this, 'on_insert_appointment' ) );
 		add_action( 'appointments_init', array( $this, 'on_init' ) );
@@ -37,40 +33,10 @@ class Appointments_Notifications_Manager {
 		if ( ( time() - get_option( "app_last_update" ) ) < apply_filters( 'app_update_time', 600 ) ) {
 			return;
 		}
-		
-		$this->maybe_send_reminders();
+
+		$this->reminder->send( false );
 	}
 
-	public function maybe_send_reminders() {
-		$options = appointments_get_options();
-		$reminder_time = isset( $options["reminder_time"] ) ? $options["reminder_time"] : false;
-		if ( ! $reminder_time ) {
-			return;
-		}
-
-		$hours = explode( "," , trim( $options["reminder_time"] ) );
-
-		if ( ! is_array( $hours ) || empty( $hours ) ) {
-			return;
-		}
-
-		$sent = array();
-
-		foreach ( $hours as $hour ) {
-			$results = appointments_get_unsent_appointments( $hour, 'user' );
-			foreach ( $results as $r ) {
-				if ( ! in_array( $r->ID, $sent ) ) {
-					appointments_send_reminder_notification( $r->ID );
-					$sent[] = $r->ID;
-				}
-
-				appointments_update_appointment( $r->ID, array( 'sent' => rtrim( $r->sent, ":" ) . ":" . trim( $hour ) . ":" ) );
-				appointments_update_appointment( $r->ID, array( 'sent_worker' => rtrim( $r->sent_worker, ":" ) . ":" . trim( $hour ) . ":" ) );
-			}
-
-		}
-	}
-	
 	public function send_notification( $app_id, $cancel = false ) {
 		$options = appointments_get_options();
 		if ( ! $cancel && ! isset( $options["send_notification"] ) || 'yes' != $options["send_notification"] ) {
@@ -145,17 +111,6 @@ function appointments_send_removal_notification( $app_id ) {
 	return $appointments->notifications->removal->send( $app_id );
 }
 
-/**
- * Send a reminder notification for a given appointment
- *
- * @param $app_id
- *
- * @return bool
- */
-function appointments_send_reminder_notification( $app_id ) {
-	$appointments = appointments();
-	return $appointments->notifications->reminder->send( $app_id );
-}
 
 /**
  * Send a cancel notification for a given appointment
@@ -178,5 +133,5 @@ function appointments_send_cancel_notification( $app_id ) {
  */
 function appointments_send_notification( $app_id ) {
 	$appointments = appointments();
-	return $appointments->notifications->cancel->send( $app_id );
+	return $appointments->notifications->notification->send( $app_id );
 }

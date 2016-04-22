@@ -963,10 +963,10 @@ class Appointments_Google_Calendar {
 	public function get_events_list() {
 		global $appointments;
 
-		$current_time = current_time( 'timestamp' ) - ( 3600 * 5 ); // Let's get also appointments that were 5 hours ago
+		$current_time = current_time( 'timestamp' ) - ( 3600 * 1 ); // Let's get also appointments that were 1 hours ago
 		$args = array(
-			'timeMin'      => apply_filters( 'app_gcal_time_min', date( "c", $current_time ) ),
-			'timeMax'      => apply_filters( 'app_gcal_time_max', date( "c", $current_time + ( 3600 * 24 * $appointments->get_app_limit() ) ) ),
+			'timeMin' => apply_filters( 'app_gcal_time_min', date_i18n( DATE_ATOM, $current_time ) ),
+			'timeMax' => apply_filters( 'app_gcal_time_max', date_i18n( DATE_ATOM, $current_time + ( 3600 * 24 * $appointments->get_app_limit() ) ) ),
 			'singleEvents' => apply_filters( 'app_gcal_single_events', true ),
 			'maxResults'   => apply_filters( 'app_gcal_max_results', APP_GCAL_MAX_RESULTS_LIMIT ),
 			'orderBy'      => apply_filters( 'app_gcal_orderby', 'startTime' ),

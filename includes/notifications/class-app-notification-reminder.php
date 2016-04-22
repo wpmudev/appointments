@@ -2,36 +2,118 @@
 
 class Appointments_Notifications_Reminder extends Appointments_Notification {
 
+	/**
+	 * @TODO Bad design, in this case we don't need $app_id
+	 * @param $app_id
+	 *
+	 * @return bool
+	 */
 	public function send( $app_id ) {
-		$appointments = appointments();
+		$options = appointments_get_options();
 
-		$r = appointments_get_appointment( $app_id );
-		if ( ! $r ) {
-			return false;
+		if ( isset( $options['send_reminder'] ) && 'yes' == $options['send_reminder'] ) {
+			$this->send_customer();
 		}
 
-		$customer_email = $r->get_customer_email();
-
-		if ( ! is_email( $customer_email ) ) {
-			$this->manager->log( sprintf( __( 'Unable to send client reminder about the appointment ID:%s.', 'appointments' ), $app_id ) );
-
-			return false;
+		if ( isset( $options['send_reminder_worker'] ) && 'yes' == $options['send_reminder_worker'] ) {
+			$this->send_worker();
 		}
 
-		$this->customer( $app_id, $customer_email );
-		$this->manager->log( sprintf( __( 'Reminder message sent to %s for appointment ID:%s', 'appointments' ), $customer_email, $app_id ) );
-
-		$worker_email = $appointments->get_worker_email( $r->worker );
-
-		if ( ! is_email( $worker_email ) ) {
-			$this->manager->log( sprintf( __( 'Unable to send worker reminder about the appointment ID:%s.', 'appointments' ), $app_id ) );
-
-			return true;
-		}
-
-		$this->worker( $app_id, $worker_email );
 
 		return true;
+	}
+
+	/**
+	 * Try to send a reminder for a customer
+	 *
+	 * @param Appointments_Appointment $r
+	 *
+	 * @return bool
+	 */
+	private function send_customer() {
+		$options = appointments_get_options();
+		$reminder_time = isset( $options["reminder_time"] ) ? $options["reminder_time"] : false;
+		if ( ! $reminder_time ) {
+			return false;
+		}
+
+		$hours = explode( "," , trim( $options["reminder_time"] ) );
+
+		if ( ! is_array( $hours ) || empty( $hours ) ) {
+			return false;
+		}
+
+		$sent = array();
+
+		foreach ( $hours as $hour ) {
+			$results = appointments_get_unsent_appointments( $hour, 'user' );
+			foreach ( $results as $r ) {
+				/** @var Appointments_Appointment $customer_email */
+				$customer_email = $r->get_customer_email();
+				if ( ! is_email( $customer_email ) ) {
+					$this->manager->log( sprintf( __( 'Unable to send client reminder about the appointment ID:%s.', 'appointments' ), $r->ID ) );
+					continue;
+				}
+
+				if ( ! in_array( $r->ID, $sent ) ) {
+					$this->customer( $r->ID, $customer_email );
+					$this->manager->log( sprintf( __( 'Reminder message sent to %s for appointment ID:%s', 'appointments' ), $customer_email, $r->ID ) );
+					$sent[] = $r->ID;
+				}
+				appointments_update_appointment( $r->ID, array( 'sent' => rtrim( $r->sent, ":" ) . ":" . trim( $hour ) . ":" ) );
+			}
+
+		}
+
+		return true;
+
+	}
+
+	/**
+	 * Try to send a reminder for a worker
+	 *
+	 * @param Appointments_Appointment $r
+	 *
+	 * @return bool
+	 */
+	private function send_worker() {
+		$appointments = appointments();
+		$options = appointments_get_options();
+		$reminder_time = isset( $options["reminder_time_worker"] ) ? $options["reminder_time_worker"] : false;
+		if ( ! $reminder_time ) {
+			return false;
+		}
+
+		$hours = explode( "," , trim( $options["reminder_time_worker"] ) );
+
+		if ( ! is_array( $hours ) || empty( $hours ) ) {
+			return false;
+		}
+
+		$sent = array();
+
+		foreach ( $hours as $hour ) {
+			$results = appointments_get_unsent_appointments( $hour, 'worker' );
+			foreach ( $results as $r ) {
+				$worker_email = $appointments->get_worker_email( $r->worker );
+
+				if ( ! is_email( $worker_email ) ) {
+					$this->manager->log( sprintf( __( 'Unable to send worker reminder about the appointment ID:%s.', 'appointments' ), $r->ID ) );
+					continue;
+				}
+
+				if ( ! in_array( $r->ID, $sent ) ) {
+					$this->worker( $r->ID, $worker_email );
+					$this->manager->log( sprintf( __( 'Reminder message sent to %s for appointment ID:%s', 'appointments' ), $worker_email, $r->ID ) );
+					$sent[] = $r->ID;
+				}
+				appointments_update_appointment( $r->ID, array( 'sent_worker' => rtrim( $r->sent_worker, ":" ) . ":" . trim( $hour ) . ":" ) );
+			}
+
+		}
+
+		return true;
+
 	}
 
 	private function customer( $app_id, $email ) {

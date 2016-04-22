@@ -655,8 +655,6 @@ function appointments_update_appointment( $app_id, $args ) {
  * @return bool True in case of success
  */
 function appointments_update_appointment_status( $app_id, $new_status ) {
-	global $wpdb;
-
 	$app = appointments_get_appointment( $app_id );
 	if ( ! $app ) {
 		return false;
@@ -671,8 +669,6 @@ function appointments_update_appointment_status( $app_id, $new_status ) {
 	if ( ! array_key_exists( $new_status, $allowed_status ) ) {
 		return false;
 	}
-
-	$table = appointments_get_table( 'appointments' );
 
 	$result = appointments_update_appointment( $app->ID, array( 'status' => $new_status ) );
 
