@@ -57,6 +57,8 @@ module.exports = function(grunt) {
                     '!**/package.json',
                     '!**/README.md',
                     '!lite-vs-pro.txt',
+                    '!composer.json',
+                    '!vendor/**',
                     '!**/*~'
                 ],
                 dest: 'build/<%= pkg.name %>/'

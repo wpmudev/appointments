@@ -1,3 +1,8 @@
+2016-04-21 - 1.8.1
+-------------------------------
+- Fixed: Google Calendar time query was not propery parsed
+- Fixed: Some notifications were sent even if they were disabled in settings
+
 2016-04-21 - 1.8
 -------------------------------
 - Enhance: Better UX for Appointments admin page
