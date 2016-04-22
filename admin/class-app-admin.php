@@ -328,9 +328,12 @@ class Appointments_Admin {
 			@session_start();
 
 		include_once( APP_PLUGIN_DIR . '/admin/pages/class-admin-appointments-page.php' );
+		include_once( APP_PLUGIN_DIR . '/admin/pages/class-admin-settings-page.php' );
 		$appointments_page = new Appointments_Admin_Appointments_Page();
+		$appointments_page = new Appointments_Admin_Settings_Page();
+		
 		add_submenu_page('appointments', __('Transactions','appointments'), __('Transactions','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_TRANSACTIONS), "app_transactions", array(&$this,'transactions'));
-		add_submenu_page('appointments', __('Settings','appointments'), __('Settings','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_SETTINGS), "app_settings", array(&$this,'settings'));
+		
 		add_submenu_page('appointments', __('Shortcodes','appointments'), __('Shortcodes','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_SHORTCODES), "app_shortcodes", array(&$this,'shortcodes_page'));
 		add_submenu_page('appointments', __('FAQ','appointments'), __('FAQ','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_FAQ), "app_faq", array(&$this,'faq_page'));
 		// Add datepicker to appointments page
@@ -741,54 +744,6 @@ class Appointments_Admin {
 		return ':'. implode( ':', array_filter( $input ) ) . ':';
 	}
 
-	/**
-	 * Admin settings HTML code
-	 */
-	function settings() {
-		global $appointments;
-		if (!App_Roles::current_user_can('manage_options', App_Roles::CTX_PAGE_SETTINGS)) {
-			wp_die( __('You do not have sufficient permissions to access this page.','appointments') );
-		}
-		$appointments->get_lsw();
-		?>
-		<div class="wrap">
-			<div class="icon32" style="margin:10px 0 0 0"><img src="<?php echo $appointments->plugin_url . '/images/general.png'; ?>" /></div>
-			<h2 class="nav-tab-wrapper">
-				<?php
-				$tab = ( !empty($_GET['tab']) ) ? $_GET['tab'] : 'main';
-
-				$tabs = array(
-						'gcal'			=> __('Google Calendar', 'appointments'),
-						'working_hours'	=> __('Working Hours', 'appointments'),
-						'exceptions'	=> __('Exceptions', 'appointments'),
-						'services'      => __('Services', 'appointments'),
-						'workers' 	    => __('Service Providers', 'appointments'),
-					//'shortcodes'    => __('Shortcodes', 'appointments'),
-						'addons'		=> __('Add-ons', 'appointments'),
-						'log'    		=> __('Logs', 'appointments'),
-					//'faq'    		=> __('FAQ', 'appointments'),
-				);
-
-				$tabhtml = array();
-
-				// If someone wants to remove or add a tab
-				$tabs = apply_filters( 'appointments_tabs', $tabs );
-
-				$class = ( 'main' == $tab ) ? ' nav-tab-active' : '';
-				$tabhtml[] = '	<a href="' . admin_url( 'admin.php?page=app_settings' ) . '" class="nav-tab'.$class.'">' . __('General', 'appointments') . '</a>';
-
-				foreach ( $tabs as $stub => $title ) {
-					$class = ( $stub == $tab ) ? ' nav-tab-active' : '';
-					$tabhtml[] = '	<a href="' . admin_url( 'admin.php?page=app_settings&amp;tab=' . $stub ) . '" class="nav-tab'.$class.'" id="app_tab_'.$stub.'">'.$title.'</a>';
-				}
-
-				echo implode( "\n", $tabhtml );
-				?>
-			</h2>
-			<div class="clear"></div>
-			<?php App_Template::admin_settings_tab($tab); ?>
-		</div>
-		<?php
-	}
+	
 
 }

@@ -301,8 +301,6 @@ $(document).ajaxSend(function(e, xhr, opts) {
 	}
 
 	public function save_settings ($options) {
-		if (isset($_POST['app-additional_fields-cleanup'])) $options['additional_fields-cleanup'] = (int)$_POST['app-additional_fields-cleanup'];
-		if (isset($_POST['app-additional_fields-admin_edit'])) $options['additional_fields-admin_edit'] = (int)$_POST['app-additional_fields-admin_edit'];
 		//if (empty($_POST['app-additional_fields'])) return $options; // Allow additional fields cleaning up
 		if (empty($_POST['app-additional_fields'])) $_POST['app-additional_fields'] = array();
 		$data = stripslashes_deep($_POST['app-additional_fields']);
@@ -322,32 +320,11 @@ $(document).ajaxSend(function(e, xhr, opts) {
 			'checkbox' => __('Checkbox', 'appointments'),
 		);
 		$fields = !empty($this->_data['additional_fields']) ? $this->_data['additional_fields'] : array();
-		$cleanup = !isset($this->_data['additional_fields-cleanup']) || !empty($this->_data['additional_fields-cleanup']) ? 'checked="checked"' : '';
 		$admin_edit = !empty($this->_data['additional_fields-admin_edit']) ? 'checked="checked"' : '';
 		?>
 <tr valign="top" class="api_detail" <?php echo $style?>>
 	<th scope="row" ><?php _e('Additional fields', 'appointments')?></th>
 	<td colspan="2">
-		<div id="app-additional_fields-settings">
-			<p>
-				<label for="app-additional_fields-cleanup">
-					<input type="hidden" name="app-additional_fields-cleanup" value="" />
-					<input type="checkbox" name="app-additional_fields-cleanup" id="app-additional_fields-cleanup" value="1" <?php echo $cleanup; ?> />
-					<?php echo esc_html(__('Cleanup saved data for removed appointments', 'appointments')); ?>
-				</label>
-				<br />
-				<span class="description"><?php _e('This setting controls whether your additional fields data will be kept around when appointments change state to &quot;removed&quot;', 'appointments'); ?></span>
-			</p>
-			<p>
-				<label for="app-additional_fields-admin_edit">
-					<input type="hidden" name="app-additional_fields-admin_edit" value="" />
-					<input type="checkbox" name="app-additional_fields-admin_edit" id="app-additional_fields-admin_edit" value="1" <?php echo $admin_edit; ?> />
-					<?php echo esc_html(__('Allow admin-side fields editing', 'appointments')); ?>
-				</label>
-				<br />
-				<span class="description"><?php _e('Enabling this setting will allow you to manually add/edit additional fields for your appointments.', 'appointments'); ?></span>
-			</p>
-		</div>
 		<div id="app-additional_fields">
 		<?php foreach ($fields as $field) { ?>
 			<div class="app-field">

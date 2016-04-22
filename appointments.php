@@ -3442,53 +3442,7 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		}
 		return false;
 	}
-
 	
-
-	
-
-	
-
-	private function _create_pages () {
-		// Add an appointment page
-		if ( isset( $_POST["make_an_appointment"] ) ) {
-			$tpl = !empty($_POST['app_page_type']) ? $_POST['app_page_type'] : false;
-			wp_insert_post(
-					array(
-						'post_title'	=> 'Make an Appointment',
-						'post_status'	=> 'publish',
-						'post_type'		=> 'page',
-						'post_content'	=> App_Template::get_default_page_template($tpl)
-					)
-			);
-		}
-
-		// Add an appointment product page
-		if ( isset( $_POST["make_an_appointment_product"] ) && $this->marketpress_active ) {
-			$tpl = !empty($_POST['app_page_type_mp']) ? $_POST['app_page_type_mp'] : false;
-			$post_id = wp_insert_post(
-					array(
-						'post_title'	=> 'Appointment',
-						'post_status'	=> 'publish',
-						'post_type'		=> 'product',
-						'post_content'	=> App_Template::get_default_page_template($tpl)
-					)
-			);
-			if ( $post_id ) {
-				// Add a download link, so that app will be a digital product
-				$file = get_post_meta($post_id, 'mp_file', true);
-				if ( !$file ) add_post_meta( $post_id, 'mp_file', get_permalink( $post_id) );
-
-				// MP requires at least 2 variations, so we add a dummy one
-				add_post_meta( $post_id, 'mp_var_name', array( 0 ) );
-				add_post_meta( $post_id, 'mp_sku', array( 0 ) );
-				add_post_meta( $post_id, 'mp_price', array( 0 ) );
-			}
-		}
-	}
-
-
-
 	/**
 	 *	Sorts a comma delimited string
 	 *	@since 1.2

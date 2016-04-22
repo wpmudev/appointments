@@ -101,3 +101,13 @@ a.app-remove_break, a.app-remove_break:hover, a.app-remove_break:active { color:
 .app-notice .dashicons-dismiss {
 	font-size: 18px;
 }
+
+div.appointments-settings .subsubsub a:focus {
+	outline:none;
+}
+.app-settings-section {
+	display:none;
+}
+.app-settings-section.current {
+	display:block;
+}

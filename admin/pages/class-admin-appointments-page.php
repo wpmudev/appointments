@@ -353,5 +353,4 @@ class Appointments_Admin_Appointments_Page {
 
 		echo $output;
 	}
-
 }

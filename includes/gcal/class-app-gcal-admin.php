@@ -18,6 +18,7 @@ class Appointments_Google_Calendar_Admin {
 
 		add_action( 'personal_options_update', array( $this, 'save_profile') );
 		add_action( 'edit_user_profile_update', array( $this, 'save_profile') );
+
 	}
 
 	public function save_settings() {
@@ -117,6 +118,7 @@ class Appointments_Google_Calendar_Admin {
 			<?php
 		}
 	}
+
 
 	public function render_tab() {
 		$options = appointments_get_options();
