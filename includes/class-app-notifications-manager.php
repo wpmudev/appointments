@@ -12,7 +12,7 @@ class Appointments_Notifications_Manager {
 
 	public function __construct() {
 		$options = appointments_get_options();
-		
+
 		$log_emails = isset( $options["log_emails"] ) && 'yes' == $options["log_emails"];
 
 		add_action( 'wpmudev_appointments_update_appointment_status', array( $this, 'on_change_status' ), 10, 3 );
