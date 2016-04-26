@@ -9,7 +9,7 @@ class Appointments_Appointment {
 	public $phone = '';
 	public $address = '';
 	public $city = '';
-	public $location = '';
+	private $location = '';
 	public $service = '';
 	public $worker = '';
 	public $price = '';
@@ -26,6 +26,15 @@ class Appointments_Appointment {
 		foreach ( get_object_vars( $appointment ) as $key => $value ) {
 			$this->$key = $this->_sanitize_field( $key, $value );
 		}
+	}
+
+	public function __get( $name ) {
+		$value = false;
+		if ( isset( $this->$name ) ) {
+			$value = $this->$name;
+		}
+
+		return apply_filters( 'appointments_get_appointment_attribute', $value, $name );
 	}
 
 	private function _sanitize_field( $field, $value ) {

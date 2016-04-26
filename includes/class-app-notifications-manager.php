@@ -11,8 +11,8 @@ class Appointments_Notifications_Manager {
 	public $removal;
 
 	public function __construct() {
-		add_action( 'wpmudev_appointments_update_appointment_status', array( $this, 'on_change_status' ), 10, 3 );
-		add_action( 'wpmudev_appointments_insert_appointment', array( $this, 'on_insert_appointment' ) );
+		add_action( 'wpmudev_appointments_update_appointment_status', array( $this, 'on_change_status' ), 100, 3 );
+		add_action( 'wpmudev_appointments_insert_appointment', array( $this, 'on_insert_appointment' ), 100 );
 		add_action( 'appointments_init', array( $this, 'on_init' ) );
 
 		include_once( appointments_plugin_dir() . 'includes/notifications/abstract-app-notification.php' );

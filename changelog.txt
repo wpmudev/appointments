@@ -1,3 +1,9 @@
+2016-04-27 - 1.8.2
+-------------------------------
+- Fix: Cannot edit notes on appointments
+- Fix: Google Calendar is not sending appointment location properly
+- Fix: notification not sent when an appointment is manually removed
+
 2016-04-21 - 1.8.1
 -------------------------------
 - Fixed: Google Calendar time query was not propery parsed

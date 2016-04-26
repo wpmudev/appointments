@@ -35,12 +35,12 @@ class App_Users_AdditionalFields {
 
 		// Values processing
 		add_action('app-additional_fields-validate', array($this, 'validate_submitted_fields'));
-		add_action('wpmudev_appointments_insert_appointment', array($this, 'save_submitted_fields'));
+		add_action('wpmudev_appointments_insert_appointment', array($this, 'save_submitted_fields'), 5);
 
 
 		// Display additional notes
 		add_filter('app-appointments_list-edit-client', array($this, 'display_inline_data'), 10, 2);
-		add_action( 'appointments_inline_edit', array( $this, 'save_admin_submitted_data' ), 10, 2 );
+		add_action( 'appointments_inline_edit', array( $this, 'save_admin_submitted_data' ), 5, 2 );
 
 		// Email filters
 		add_filter('app_notification_message', array($this, 'expand_email_macros'), 10, 3);
@@ -482,11 +482,18 @@ $(function () {
 	}
 
 	private function _get_appointment_meta ($appointment_id) {
+		// Fill defaults with empty strings
+		$defaults = array();
+		foreach ( $this->_data['additional_fields'] as $field ) {
+			$defaults[ $this->_to_clean_name( $field['label'] ) ] = '';
+		}
 		$app_data = appointments_get_appointment_meta( $appointment_id, 'additional_fields' );
+
 		if ( empty( $app_data ) ) {
-			return array();
+			$app_data = array();
 		}
 
+		$app_data = wp_parse_args( $app_data, $defaults );
 		return $app_data;
 	}
 

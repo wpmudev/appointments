@@ -9,6 +9,8 @@ Requires: Locations add-on
 Author: WPMU DEV
 */
 
+// Add the Service Location attribute to the Appointments_Service Object
+
 class App_Locations_ServiceLocations {
 
 	const STORAGE_PREFIX = 'app-service_location-';
@@ -29,10 +31,10 @@ class App_Locations_ServiceLocations {
 	private function _add_hooks () {
 		// Init and dispatch post-init actions
 		add_action('app-locations-initialized', array($this, 'initialize'));
-		
+
 		// Augment service settings pages
 		add_filter('app-settings-services-service-name', array($this, 'add_service_selection'), 10, 2);
-		add_action('app-services-service-updated', array($this, 'save_service_location'));
+		//add_action('app-services-service-updated', array($this, 'save_service_location'));
 
 		// Add settings
 		add_action('app-locations-settings-after_locations_list', array($this, 'show_settings'));
@@ -41,8 +43,112 @@ class App_Locations_ServiceLocations {
 		add_action('admin_notices', array($this, 'show_nags'));
 
 		// Record appointment location
-		add_action('wpmudev_appointments_insert_appointment', array($this, 'record_appointment_location'), 20);
+		add_action('wpmudev_appointments_insert_appointment', array($this, 'record_appointment_location'), 5);
+
+		// Since 1.8.2
+		add_filter( 'appointments_get_service_attribute_location', array( $this, 'get_service_attribute' ), 10, 2 );
+		add_action('appointments_insert_service', array($this, 'save_service_location'));
+		add_action('appointments_delete_service', array($this, 'delete_service_location_relationship'));
+		add_action('wpmudev_appointments_update_service', array($this, 'save_service_location'));
 	}
+
+	/**
+	 * Return Service Location given a service_id as an attribute of Appointments_Service
+	 *
+	 * @param mixed $value Current value for 'location' attribute
+	 * @param int $service_id Service ID
+	 *
+	 * @return Appointments_Location|bool
+	 */
+	function get_service_attribute( $value, $service_id ) {
+		$location_id = get_option( 'app-service_location-' . $service_id, false );
+		return appointments_get_location( $location_id );
+	}
+
+	/**
+	 * Save a service location relationship or update it
+	 *
+	 * @param $service_id
+	 */
+	function save_service_location( $service_id ) {
+		$service = appointments_get_service( $service_id );
+		if ( ! $service ) {
+			return;
+		}
+
+		if ( ! isset( $_POST['service_location'][ $service_id ] ) ) {
+			return;
+		}
+
+		$old_location = $service->location;
+		$old_location_id = false;
+		if ( is_a( $old_location, 'Appointments_Location' ) ) {
+			$old_location_id = $old_location->id;
+		}
+
+		$key = self::STORAGE_PREFIX . $service_id;
+
+		$location_id = ! empty( $_POST['service_location'][ $service_id ] ) ? $_POST['service_location'][ $service_id ] : false;
+
+		$this->_update_appointment_locations( $service_id, $old_location_id, $location_id );
+
+		if ( $location_id === false ) {
+			delete_option( $key );
+		}
+		else {
+			update_option($key, $location_id);
+		}
+
+	}
+
+	/**
+	 * Display the location service selector in Services list page
+	 *
+	 * @param $out
+	 * @param $service_id
+	 *
+	 * @return string
+	 */
+	public function add_service_selection ($out, $service_id) {
+		if ( ! class_exists( 'App_Locations_Model' ) || ! $this->_locations ) {
+			return $out;
+		}
+
+		$locations = appointments_get_locations();
+		$service = appointments_get_service( $service_id );
+		if ( ! $service ) {
+			return $out;
+		}
+
+		$service_location = $service->location;
+		$service_location_id = false;
+		if ( is_a( $service_location, 'Appointments_Location' ) ) {
+			$service_location_id = $service_location->id;
+		}
+
+		ob_start();
+		?>
+		<label for="service_location-<?php echo $service_id; ?>"><?php _e( 'Location', 'appointments' ); ?></label>
+		<select name="service_location[<?php echo $service_id; ?>]" id="service_location-<?php echo $service_id; ?>">
+			<option value=""></option>
+			<?php foreach ( $locations as $location ): ?>
+				<option value="<?php echo $location->id; ?>" <?php selected( $location->id, $service_location_id ); ?>><?php echo esc_html( $location->address ); ?></option>
+			<?php endforeach; ?>
+		</select>
+		<?php
+		
+		return $out . ob_get_clean();
+	}
+
+	/**
+	 * Delete a service
+	 * @param $service_id
+	 */
+	public function delete_service_location_relationship( $service_id ) {
+		$key = self::STORAGE_PREFIX . $service_id;
+		delete_option( $key );
+	}
+
 
 	function show_nags () {
 		if (!class_exists('App_Locations_Location') || !$this->_locations) {
@@ -139,32 +245,8 @@ class App_Locations_ServiceLocations {
 		;
 	}
 
-	public function add_service_selection ($out, $service_id) {
-		if (!class_exists('App_Locations_Model') || !$this->_locations) return $out;
-		$locations = $this->_locations->get_all();
-		$markup = '';
 
-		$markup .= '<label>' . __('Location:', 'appointments') . '</label>&nbsp;';
-		$markup .= '<select name="service_location[' . $service_id . ']"><option value=""></option>';
-		foreach ($locations as $location) {
-			$checked = $location->get_id() == self::service_to_location_id($service_id) ? 'selected="selected"' : '';
-			$markup .= '<option value="' . $location->get_id() . '" ' . $checked . '>' . esc_html($location->get_admin_label()) . '</option>';
-		}
-		$markup .= '</select>';
-		return $out . $markup;
-	}
 
-	public function save_service_location ($service_id) {
-		if (!$service_id) return false;
-		$key = self::STORAGE_PREFIX . $service_id;
-
-		$old_location_id = self::service_to_location_id($service_id);
-		$location_id = !empty($_POST['service_location'][$service_id]) ? $_POST['service_location'][$service_id] : false;
-
-		if ($old_location_id != $location_id) $this->_update_appointment_locations($service_id, $old_location_id, $location_id);
-
-		return update_option($key, $location_id);
-	}
 
 	public static function service_to_location_id ($service_id) {
 		if (!$service_id) return false;

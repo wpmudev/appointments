@@ -24,6 +24,11 @@ class Appointments_Service {
 			return $value;
 	}
 
+	public function __get( $name ) {
+		$value = false;
+		return apply_filters( "appointments_get_service_attribute_{$name}", $value, $this->ID );
+	}
+
 }
 
 /**
@@ -108,6 +113,8 @@ function appointments_insert_service( $args = array() ) {
 	}
 
 	$r = $wpdb->insert( $table, $insert, $insert_wildcards );
+
+	do_action( 'appointments_insert_service', $ID, $args );
 
 	if ( $r ) {
 		appointments_delete_service_cache( $ID );
@@ -374,7 +381,8 @@ function appointments_get_services_min_price() {
 function appointments_delete_service( $service_id ) {
 	global $wpdb;
 
-	if ( ! appointments_get_service( $service_id ) )
+	$old_service = appointments_get_service( $service_id );
+	if ( ! $old_service )
 		return false;
 
 	$table = appointments_get_table( 'services' );
@@ -398,6 +406,7 @@ function appointments_delete_service( $service_id ) {
 	);
 
 	if ( $result ) {
+		do_action( 'appointments_delete_service', $service_id, $old_service );
 		appointments_delete_service_cache( $service_id );
 		appointments_delete_worker_cache();
 		return true;
