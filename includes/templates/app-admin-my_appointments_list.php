@@ -304,7 +304,7 @@ if ( isset( $_GET["type"] ) && 'removed' == $_GET["type"] ) {
 			var price = save_parent.find('input[name="price"]').val();
 			var date = save_parent.find('input[name="date"]').val();
 			var time = save_parent.find('select[name="time"] option:selected').val();
-			var note = save_parent.find('textarea').val();
+			var note = save_parent.find('textarea[name="note"]').val();
 			var status = save_parent.find('select[name="status"] option:selected').val();
 
 			var dt = save_parent.find('input[name="date"]').attr("data-timestamp");

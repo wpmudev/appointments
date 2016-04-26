@@ -369,7 +369,7 @@ class Appointments_AJAX {
 		/* Note */
 		$html .= '<label>';
 		$html .= '<span class="title">'.$appointments->get_field_name('note'). '</span>';
-		$html .= '<textarea cols="22" rows=1">';
+		$html .= '<textarea name="note" cols="22" rows=1">';
 		$html .= esc_textarea(stripslashes($app->note));
 		$html .= '</textarea>';
 		$html .= '</label>';
