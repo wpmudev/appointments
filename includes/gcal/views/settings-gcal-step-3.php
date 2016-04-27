@@ -87,7 +87,7 @@
 		</td>
 	</tr>
 
-	<?php if ( ( 'sync' == $api_mode ) && $selected_calendar ): ?>
+	<?php if ( ( 'sync' == $api_mode || 'gcal2app' == $api_mode ) && $selected_calendar ): ?>
 		<tr>
 			<th scope="row">
 				<?php _e( 'Import and Update', 'appointments' ); ?>
@@ -97,7 +97,8 @@
 				<span id="app-gcal-import-result"></span>
 			</td>
 		</tr>
-
+	<?php endif; ?>
+	<?php if ( ( 'sync' == $api_mode || 'app2gcal' == $api_mode ) && $selected_calendar ): ?>
 		<tr>
 			<th scope="row">
 				<?php _e( 'Export and Update', 'appointments' ); ?>

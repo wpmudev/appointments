@@ -81,7 +81,8 @@ class App_Locations_LocationsWorker {
 		$replacement['/(?:^|\b)LOCATION(?:\b|$)/'] = '';
 		$replacement['/(?:^|\b)LOCATION_ADDRESS(?:\b|$)/'] = '';
 
-		if ( empty( $object->location ) ) {
+		$app_location = $object->location;
+		if ( empty( $app_location ) ) {
 			return $replacement;
 		}
 

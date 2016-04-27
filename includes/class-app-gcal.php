@@ -8,7 +8,7 @@ class Appointments_Google_Calendar {
 
 	public $admin;
 
-	private $api_mode = 'none';
+	public $api_mode = 'none';
 
 	private $access_code;
 
@@ -110,8 +110,8 @@ class Appointments_Google_Calendar {
 	}
 
 	public function remove_appointments_hooks() {
-		remove_action( 'wpmudev_appointments_insert_appointment', array( $this, 'on_insert_appointment' ) );
-		remove_action( 'wpmudev_appointments_update_appointment', array( $this, 'on_update_appointment' ), 10, 3 );
+		remove_action( 'wpmudev_appointments_insert_appointment', array( $this, 'on_insert_appointment' ), 50 );
+		remove_action( 'wpmudev_appointments_update_appointment', array( $this, 'on_update_appointment' ), 50, 3 );
 		remove_action( 'appointments_delete_appointment', array( $this, 'on_delete_appointment' ) );
 	}
 

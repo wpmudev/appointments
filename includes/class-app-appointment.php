@@ -383,7 +383,7 @@ function appointments_insert_appointment( $args ) {
 
 	$table = appointments_get_table( 'appointments' );
 	$result = $wpdb->insert( $table, $insert, $insert_wildcards );
-
+	
 	if ( ! $result )
 		return false;
 
@@ -613,6 +613,8 @@ function appointments_update_appointment( $app_id, $args ) {
 		);
 	}
 
+
+	$result = apply_filters( 'wpmudev_appointments_update_appointment_result', $result, $app_id, $args, $old_appointment );
 
 	if ( ! $result ) {
 		// Nothing has changed
