@@ -9,7 +9,7 @@ class Appointments_Appointment {
 	public $phone = '';
 	public $address = '';
 	public $city = '';
-	public $location = '';
+	private $location = '';
 	public $service = '';
 	public $worker = '';
 	public $price = '';
@@ -26,6 +26,15 @@ class Appointments_Appointment {
 		foreach ( get_object_vars( $appointment ) as $key => $value ) {
 			$this->$key = $this->_sanitize_field( $key, $value );
 		}
+	}
+
+	public function __get( $name ) {
+		$value = false;
+		if ( isset( $this->$name ) ) {
+			$value = $this->$name;
+		}
+
+		return apply_filters( 'appointments_get_appointment_attribute', $value, $name );
 	}
 
 	private function _sanitize_field( $field, $value ) {
@@ -374,7 +383,7 @@ function appointments_insert_appointment( $args ) {
 
 	$table = appointments_get_table( 'appointments' );
 	$result = $wpdb->insert( $table, $insert, $insert_wildcards );
-
+	
 	if ( ! $result )
 		return false;
 
@@ -605,6 +614,8 @@ function appointments_update_appointment( $app_id, $args ) {
 	}
 
 
+	$result = apply_filters( 'wpmudev_appointments_update_appointment_result', $result, $app_id, $args, $old_appointment );
+
 	if ( ! $result ) {
 		// Nothing has changed
 		return false;
@@ -655,8 +666,6 @@ function appointments_update_appointment( $app_id, $args ) {
  * @return bool True in case of success
  */
 function appointments_update_appointment_status( $app_id, $new_status ) {
-	global $wpdb;
-
 	$app = appointments_get_appointment( $app_id );
 	if ( ! $app ) {
 		return false;
@@ -671,8 +680,6 @@ function appointments_update_appointment_status( $app_id, $new_status ) {
 	if ( ! array_key_exists( $new_status, $allowed_status ) ) {
 		return false;
 	}
-
-	$table = appointments_get_table( 'appointments' );
 
 	$result = appointments_update_appointment( $app->ID, array( 'status' => $new_status ) );
 

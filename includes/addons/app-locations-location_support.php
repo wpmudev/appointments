@@ -23,6 +23,7 @@ class App_Locations_LocationsWorker {
 	public static function serve () {
 		$me = new App_Locations_LocationsWorker;
 		$me->_add_hooks();
+		return $me;
 	}
 
 	private function _add_hooks () {
@@ -40,6 +41,28 @@ class App_Locations_LocationsWorker {
 		add_filter('app-appointment-inline_edit-save_data', array($this, 'save_appointment_location'));
 
 		add_filter( 'appointments_notification_replacements', array( $this, 'add_notifications_replacements' ), 10, 4 );
+
+		add_filter( 'appointments_gcal_event_location', array( $this, 'set_gcal_location' ), 10, 2 );
+	}
+
+	/**
+	 * Set Google Calendar Location
+	 *
+	 * @param $location
+	 * @param $app
+	 */
+	public function set_gcal_location( $location, $app ) {
+		if ( isset( $options["gcal_location"] ) && '' != trim( $options["gcal_location"] ) ) {
+			// Leave the current value if there's a location set in GCal options
+			return $location;
+		}
+
+		$app_location = appointments_get_location( $app->location );
+		if ( $app_location ) {
+			return $app_location->address;
+		}
+
+		return $location;
 	}
 
 	/**
@@ -58,7 +81,8 @@ class App_Locations_LocationsWorker {
 		$replacement['/(?:^|\b)LOCATION(?:\b|$)/'] = '';
 		$replacement['/(?:^|\b)LOCATION_ADDRESS(?:\b|$)/'] = '';
 
-		if ( empty( $object->location ) ) {
+		$app_location = $object->location;
+		if ( empty( $app_location ) ) {
 			return $replacement;
 		}
 

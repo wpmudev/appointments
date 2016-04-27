@@ -8,7 +8,7 @@ class Appointments_Google_Calendar {
 
 	public $admin;
 
-	private $api_mode = 'none';
+	public $api_mode = 'none';
 
 	private $access_code;
 
@@ -104,14 +104,14 @@ class Appointments_Google_Calendar {
 			return;
 		}
 
-		add_action( 'wpmudev_appointments_insert_appointment', array( $this, 'on_insert_appointment' ) );
-		add_action( 'wpmudev_appointments_update_appointment', array( $this, 'on_update_appointment' ), 10, 3 );
+		add_action( 'wpmudev_appointments_insert_appointment', array( $this, 'on_insert_appointment' ), 50 );
+		add_action( 'wpmudev_appointments_update_appointment', array( $this, 'on_update_appointment' ), 50, 3 );
 		add_action( 'appointments_delete_appointment', array( $this, 'on_delete_appointment' ) );
 	}
 
 	public function remove_appointments_hooks() {
-		remove_action( 'wpmudev_appointments_insert_appointment', array( $this, 'on_insert_appointment' ) );
-		remove_action( 'wpmudev_appointments_update_appointment', array( $this, 'on_update_appointment' ), 10, 3 );
+		remove_action( 'wpmudev_appointments_insert_appointment', array( $this, 'on_insert_appointment' ), 50 );
+		remove_action( 'wpmudev_appointments_update_appointment', array( $this, 'on_update_appointment' ), 50, 3 );
 		remove_action( 'appointments_delete_appointment', array( $this, 'on_delete_appointment' ) );
 	}
 
@@ -422,6 +422,8 @@ class Appointments_Google_Calendar {
 		} else {
 			$location = get_bloginfo( 'description' );
 		}
+
+		$location = apply_filters( 'appointments_gcal_event_location', $location, $app );
 
 		// Dates
 		$start = new Google_Service_Calendar_EventDateTime();
@@ -934,6 +936,9 @@ class Appointments_Google_Calendar {
 		} else {
 			$location = get_bloginfo( 'description' );
 		}
+
+		$location = apply_filters( 'appointments_gcal_event_location', $location, $app );
+
 		$event->setLocation( $location );
 
 		$start = new Google_Service_Calendar_EventDateTime();
@@ -963,10 +968,10 @@ class Appointments_Google_Calendar {
 	public function get_events_list() {
 		global $appointments;
 
-		$current_time = current_time( 'timestamp' ) - ( 3600 * 5 ); // Let's get also appointments that were 5 hours ago
+		$current_time = current_time( 'timestamp' ) - ( 3600 * 1 ); // Let's get also appointments that were 1 hours ago
 		$args = array(
-			'timeMin'      => apply_filters( 'app_gcal_time_min', date( "c", $current_time ) ),
-			'timeMax'      => apply_filters( 'app_gcal_time_max', date( "c", $current_time + ( 3600 * 24 * $appointments->get_app_limit() ) ) ),
+			'timeMin' => apply_filters( 'app_gcal_time_min', date_i18n( DATE_ATOM, $current_time ) ),
+			'timeMax' => apply_filters( 'app_gcal_time_max', date_i18n( DATE_ATOM, $current_time + ( 3600 * 24 * $appointments->get_app_limit() ) ) ),
 			'singleEvents' => apply_filters( 'app_gcal_single_events', true ),
 			'maxResults'   => apply_filters( 'app_gcal_max_results', APP_GCAL_MAX_RESULTS_LIMIT ),
 			'orderBy'      => apply_filters( 'app_gcal_orderby', 'startTime' ),

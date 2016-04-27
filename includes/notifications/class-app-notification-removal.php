@@ -19,7 +19,7 @@ class Appointments_Notifications_Removal extends Appointments_Notification {
 
 		$options = appointments_get_options();
 
-		$send_removal = isset( $options["send_removal_notification"] ) && 'yes' != $options["send_removal_notification"];
+		$send_removal = isset( $options["send_removal_notification"] ) && 'yes' == $options["send_removal_notification"];
 		if ( ! $send_removal ) {
 			return false;
 		}

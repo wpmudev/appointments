@@ -68,7 +68,7 @@ class Appointments_Google_Calendar_Admin {
 			$options['gcal_selected_calendar'] = $calendar_id;
 			$this->gcal_api->api_manager->set_calendar( $calendar_id );
 			$options['gcal_api_mode'] = $_POST['gcal_api_mode'];
-			$this->api_mode = $options['gcal_api_mode'];
+			$this->gcal_api->api_mode = $options['gcal_api_mode'];
 			$options['gcal_api_allow_worker'] = $_POST['gcal_api_allow_worker'];
 			$options['gcal_api_scope'] = $_POST['gcal_api_scope'];
 			$options['gcal_description'] = $_POST['gcal_description'];
@@ -77,6 +77,9 @@ class Appointments_Google_Calendar_Admin {
 			$this->gcal_api->set_summary( $options['gcal_summary'] );
 			appointments_update_options( $options );
 		}
+
+		wp_redirect( add_query_arg( 'updated', 'true' ) );
+		exit;
 	}
 
 	/**

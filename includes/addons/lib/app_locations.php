@@ -2,6 +2,152 @@
 
 if (!defined('APP_LOCATIONS_LOCATION_DEFAULT_MODEL_INSTANCE')) define('APP_LOCATIONS_LOCATION_DEFAULT_MODEL_INSTANCE', 'App_Locations_DefaultLocation', true);
 
+/**
+ * Class Appointments_Location
+ *
+ * Represent a Location entity
+ */
+class Appointments_Location {
+
+	public $id;
+	public $address;
+
+	public function __construct( $location ) {
+		$location = (array)$location;
+		$this->id = absint( $location['id'] );
+		$this->address = $location['address'];
+	}
+}
+
+/**
+ * Insert a new location
+ *
+ * @param array $args Array of arguments
+ *
+ * @return int ID of the new location
+ */
+function appointments_insert_location( $args ) {
+	$defaults = array(
+		'address' => ''
+	);
+	$args = wp_parse_args( $args, $defaults );
+
+	$id = rand( 0, 99 );
+	$appx = '';
+	$count = 0;
+	while ($count < 3) {
+		$appx .= sprintf('%04d', rand(0,99));
+		if (intval("{$id}{$appx}") + 5 >= PHP_INT_MAX) break;
+		$id .= $appx;
+		$count++;
+	}
+	$id = intval($id);
+
+	$locations = get_option( 'app_locations_data', array() );
+
+	$locations[] = array(
+		'id' => $id,
+		'address' => $args['address']
+	);
+
+	update_option( 'app_locations_data', $locations );
+
+	return $id;
+
+}
+
+/**
+ * Return a list of all locations
+ *
+ * @return array
+ */
+function appointments_get_locations() {
+	$locs = get_option( 'app_locations_data', array() );
+	$locations = array();
+	foreach ( $locs as $loc ) {
+		$locations[] = new Appointments_Location( $loc );
+	}
+	return $locations;
+}
+
+/**
+ * Get a location
+ *
+ * @param int $id ID of the location
+ *
+ * @return bool|Appointments_Location
+ */
+function appointments_get_location( $id ) {
+	$locations = appointments_get_locations();
+	$location = false;
+	foreach ( $locations as $loc ) {
+		if ( $loc->id == $id ) {
+			$location = $loc;
+			break;
+		}
+	}
+	return $location;
+}
+
+/**
+ * Delete a location
+ *
+ * @param int $id ID of the location to delete
+ */
+function appointments_delete_location( $id ) {
+	$locs = get_option( 'app_locations_data', array() );
+	foreach ( $locs as $key => $loc ) {
+		if ( $loc['id'] == $id ) {
+			unset( $locs[ $key ] );
+			break;
+		}
+	}
+
+	$locs = array_values( $locs );
+	update_option( 'app_locations_data', $locs );
+}
+
+/**
+ * Update a location
+ *
+ * @param int $id ID of the location to update
+ * @param array $args list of new attributes for the location
+ *
+ * @return bool True if the location was updated
+ */
+function appointments_update_location( $id, $args ) {
+	$location = appointments_get_location( $id );
+	if ( ! $location ) {
+		return false;
+	}
+
+	$defaults = array(
+		'address' => $location->address
+	);
+	$args = wp_parse_args( $args, $defaults );
+
+	$locs = get_option( 'app_locations_data', array() );
+	$location = false;
+	foreach ( $locs as $key => $loc ) {
+		if ( $loc['id'] == $id ) {
+			$location = $key;
+			break;
+		}
+	}
+
+	if ( $location ) {
+		foreach ( $args as $arg => $value ) {
+			$locs[ $location ][ $arg ] = $value;
+		}
+
+		update_option( 'app_locations_data', $locs );
+		return true;
+	}
+
+	return false;
+
+}
+
 abstract class App_Locations_Location {
 
 	const KEY_ID = 'id';

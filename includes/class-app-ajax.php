@@ -78,7 +78,26 @@ class Appointments_AJAX {
 		$resend = $_POST["resend"];
 
 		$data = apply_filters('app-appointment-inline_edit-save_data', $data);
+
+		$error = apply_filters( 'appointments_inline_edit_error', false, $data, $_REQUEST );
+		if ( is_wp_error( $error ) ) {
+			$result = array(
+				'app_id' => $app_id,
+				'message' => '<strong style="color:red;">' . _x( 'Error', 'Error while editing an appointment', 'appointments' ) . ': ' . $error->get_error_message() . '</strong>'
+			);
+			wp_send_json( $result );
+		}
+		elseif ( true === $error ) {
+			// Unknown error
+			$result = array(
+				'app_id' => $app_id,
+				'message' => '<strong style="color:red;">' . _x( 'Error', 'Error while editing an appointment', 'appointments' ) . ': ' . __( 'Record could not be saved OR you did not make any changes!', 'appointments' ) . '</strong>'
+			);
+			wp_send_json( $result );
+		}
+
 		do_action( 'appointments_inline_edit', $app_id, $data );
+
 
 		$update_result = $insert_result = false;
 		if ( $app ) {
@@ -91,7 +110,7 @@ class Appointments_AJAX {
 		} else {
 			// Insert
 			if ( ! $resend ) {
-				add_filter( 'appointments_send_confirmation', '__return_false' );
+				add_filter( 'appointments_send_confirmation', '__return_false', 50 );
 			}
 			$app_id = appointments_insert_appointment( $data );
 			$insert_result = true;
@@ -369,7 +388,7 @@ class Appointments_AJAX {
 		/* Note */
 		$html .= '<label>';
 		$html .= '<span class="title">'.$appointments->get_field_name('note'). '</span>';
-		$html .= '<textarea cols="22" rows=1">';
+		$html .= '<textarea name="note" cols="22" rows=1">';
 		$html .= esc_textarea(stripslashes($app->note));
 		$html .= '</textarea>';
 		$html .= '</label>';
@@ -610,6 +629,15 @@ class Appointments_AJAX {
 			'note'     => $note,
 			'duration' => $duration
 		);
+
+		$error = apply_filters( 'appointments_post_confirmation_error', false, $args, $_REQUEST );
+		if ( is_wp_error( $error ) ) {
+			wp_send_json( array( 'error' => $error->get_error_message() ) );
+		}
+		elseif ( true === $error ) {
+			// Unknown error
+			wp_send_json( array( 'error' => __( 'Appointment could not be saved. Please contact website admin.', 'appointments') ) );
+		}
 
 		$insert_id = appointments_insert_appointment( $args );
 
