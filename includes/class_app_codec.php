@@ -115,7 +115,7 @@ SITE_NAME
 	public static function get_default_reminder_message () {
 		return "Dear CLIENT,
 
-We would like to remind your appointment with SITE_NAME.
+We would like to remind you of your appointment with SITE_NAME.
 
 Here are your appointment details:
 Requested service: SERVICE

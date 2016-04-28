@@ -6,6 +6,8 @@
 - Fix: If custom field is added and client doesn't enter anything the email will send field placeholder instead.
 - Fix: Appointments sending cancelled email instead of confirmation depending on settings combination
 - Fix: Locations in confirmation email not being parsed properly
+- Fix: Typo in default email reminder template
+- Fix: Emails were not being logged
 - Some othe minor improvements
 
 2016-04-21 - 1.8.1
