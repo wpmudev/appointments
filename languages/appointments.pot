@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments+ 1.8.2\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2016-04-27 13:50:32+00:00\n"
+"POT-Creation-Date: 2016-04-28 08:22:56+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1602,8 +1602,8 @@ msgid "Give break?"
 msgstr ""
 
 #: appointments.php:3779 appointments.php:3828
-#: includes/addons/app-users-additional_fields.php:479
-#: includes/addons/app-users-additional_fields.php:514
+#: includes/addons/app-users-additional_fields.php:480
+#: includes/addons/app-users-additional_fields.php:515
 #: includes/gcal/views/settings-gcal-button.php:7
 #: includes/gcal/views/settings-gcal-step-3.php:50
 #: includes/templates/app-admin-settings-main.php:80
@@ -1626,8 +1626,8 @@ msgid "No"
 msgstr ""
 
 #: appointments.php:3780 appointments.php:3829
-#: includes/addons/app-users-additional_fields.php:479
-#: includes/addons/app-users-additional_fields.php:514
+#: includes/addons/app-users-additional_fields.php:480
+#: includes/addons/app-users-additional_fields.php:515
 #: includes/gcal/views/settings-gcal-button.php:8
 #: includes/gcal/views/settings-gcal-step-3.php:51
 #: includes/templates/app-admin-settings-main.php:81
@@ -1682,7 +1682,7 @@ msgid "Location"
 msgstr ""
 
 #: includes/addons/app-locations-location_support.php:138
-#: includes/addons/app-users-additional_fields.php:506
+#: includes/addons/app-users-additional_fields.php:507
 msgid "Add"
 msgstr ""
 
@@ -2116,64 +2116,64 @@ msgstr ""
 msgid "The field %s is required"
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:358
+#: includes/addons/app-users-additional_fields.php:359
 #: includes/class-app-ajax.php:136 includes/class-app-ajax.php:141
 msgid "<span style=\"color:green;font-weight:bold\">Changes saved.</span>"
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:444
+#: includes/addons/app-users-additional_fields.php:445
 msgid "Text"
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:445
+#: includes/addons/app-users-additional_fields.php:446
 msgid "Checkbox"
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:452
+#: includes/addons/app-users-additional_fields.php:453
 msgid "Additional fields"
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:459
+#: includes/addons/app-users-additional_fields.php:460
 msgid "Cleanup saved data for removed appointments"
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:462
+#: includes/addons/app-users-additional_fields.php:463
 msgid ""
 "This setting controls whether your additional fields data will be kept "
 "around when appointments change state to &quot;removed&quot;"
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:468
+#: includes/addons/app-users-additional_fields.php:469
 msgid "Allow admin-side fields editing"
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:471
+#: includes/addons/app-users-additional_fields.php:472
 msgid ""
 "Enabling this setting will allow you to manually add/edit additional fields "
 "for your appointments."
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:481
+#: includes/addons/app-users-additional_fields.php:482
 msgid "E-mail macro:"
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:482
+#: includes/addons/app-users-additional_fields.php:483
 msgid "This is the placeholder you can use in your emails."
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:489
+#: includes/addons/app-users-additional_fields.php:490
 msgid "Add new field"
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:491
+#: includes/addons/app-users-additional_fields.php:492
 msgid "Field label:"
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:495
+#: includes/addons/app-users-additional_fields.php:496
 msgid "Field type:"
 msgstr ""
 
-#: includes/addons/app-users-additional_fields.php:504
+#: includes/addons/app-users-additional_fields.php:505
 msgid "Required?"
 msgstr ""
 

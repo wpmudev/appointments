@@ -79,6 +79,7 @@ class Appointments_Notifications_Manager {
 
 	public function log( $message ) {
 		$appointments = appointments();
+		$options = appointments_get_options();
 		if ( isset( $options["log_emails"] ) && 'yes' == $options["log_emails"] ) {
 			$appointments->log( $message );
 		}

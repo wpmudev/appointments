@@ -250,6 +250,7 @@ class App_Users_AdditionalFields {
 					<?php endif; ?>
 				</span>
 			</label>
+			<br class="clear">
 			<?php
 			$form = $form . ob_get_clean();
 		}
