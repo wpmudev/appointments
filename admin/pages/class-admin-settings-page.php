@@ -57,13 +57,13 @@ class Appointments_Admin_Settings_Page {
 	}
 
 	/**
-	 * Get the sections for the current tab
+	 * Get the sections HTML for the current tab
 	 *
 	 * @param $tab
 	 *
 	 * @return array
 	 */
-	public function tab_sections( $tab ) {
+	public function tab_sections_markup( $tab ) {
 		$sections = $this->get_sections();
 
 		if ( isset( $sections[ $tab ] ) ) {
@@ -76,10 +76,41 @@ class Appointments_Admin_Settings_Page {
 			$content .= '</ul>';
 
 			wp_enqueue_script( 'app-settings-sections', appointments_plugin_url() . 'admin/js/admin-settings-sections.js', array( 'jquery' ), appointments_get_db_version(), true );
+			wp_enqueue_script( 'app-settings', appointments_plugin_url() . 'admin/js/admin-settings.js', array( 'jquery' ), appointments_get_db_version(), true );
+
+			$appointments = appointments();
+			$classes = $appointments->get_classes();
+			$presets = array();
+			foreach ( $classes as $class => $name ) {
+				$presets[ $class ] = array();
+				for ( $k = 1; $k <= 3; $k ++ ) {
+					$presets[ $class ][ $k ] = $appointments->get_preset( $class, $k );
+				}
+			}
+			wp_localize_script( 'app-settings', 'app_i10n', array(
+				'classes' => $classes,
+				'presets' => $presets
+			));
 			return $content;
 		}
 
 		return '';
+	}
+
+	/**
+	 * Return the sections for a tab
+	 *
+	 * @param $tab
+	 *
+	 * @return array
+	 */
+	public function get_tab_sections( $tab ) {
+		$sections = $this->get_sections();
+		if ( isset( $sections[ $tab ] ) ) {
+			return $sections[ $tab ];
+		}
+
+		return array();
 	}
 
 	/**
@@ -131,13 +162,14 @@ class Appointments_Admin_Settings_Page {
 
 	public function admin_settings_tab( $tab ) {
 
-		$sections = $this->tab_sections( $tab );
+		$sections_markup = $this->tab_sections_markup( $tab );
+		$sections = $this->get_tab_sections( $tab );
 
 		$callback_tabs = array(
 			'addons' => array('App_AddonHandler', 'create_addon_settings'),
 		);
 
-		echo $sections;
+		echo $sections_markup;
 		echo '<br class="clear">';
 
 		$file = appointments_plugin_dir() . 'admin/views/page-settings-tab-' . $tab . '.php';
