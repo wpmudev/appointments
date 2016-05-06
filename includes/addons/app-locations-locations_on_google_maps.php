@@ -5,7 +5,7 @@ Description: Allows you to bind locations to your services.
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
 Version: 1.0
 AddonType: Locations
-Requires: Google Maps plugin, Locations add-on
+Requires: Locations,<a href="https://premium.wpmudev.org/project/wordpress-google-maps-plugin/">Google Maps Plugin</a>
 Author: WPMU DEV
 */
 

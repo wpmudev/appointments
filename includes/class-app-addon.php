@@ -10,12 +10,19 @@ class Appointments_Addon {
 		'PluginURI' => 'Plugin URI',
 		'Version' => 'Version',
 		'AddonType' => 'AddonType',
-		'Author' => 'Author'
+		'Author' => 'Author',
+		'Requires' => 'Requires'
 	);
+
+	public $slug = '';
 
 	public $addon_file;
 
+	public $is_beta = false;
+
 	public $error = false;
+
+	public $active = false;
 
 	public function __construct( $addon_file ) {
 		if ( ! is_readable( $addon_file ) ) {
@@ -24,15 +31,110 @@ class Appointments_Addon {
 		}
 
 		$this->addon_file = $addon_file;
+		$this->slug = basename( $addon_file, '.php' );
 
 		$this->headers = get_file_data( $this->addon_file, self::$default_headers );
+
+		$active = self::get_active_addons();
+		$this->active = in_array( $this->slug, $active );
 	}
 
 	public function __get( $name ) {
 		if ( isset( $this->headers[ $name ] ) ) {
-			return $this->headers[ $name ];
+			if ( 'Requires' == $name ) {
+				if ( ! strlen( trim( $this->headers[ $name ] ) ) ) {
+					return array();
+				}
+				$requires = explode( ',', trim( $this->headers[ $name ] ) );
+				if ( ! is_array( $requires ) ) {
+					return array();
+				}
+				else {
+					return $requires;
+				}
+			}
+			else {
+				return $this->headers[ $name ];
+			}
+
 		}
 
 		return '';
 	}
+
+	public static function activate_addon( $slug ) {
+		$addon  = self::get_addon( $slug );
+		$active = self::get_active_addons();
+		if ( $addon && ! in_array( $slug, $active ) ) {
+			$active[] = $addon->slug;
+
+			// Activate dependencies too
+			if ( $addon->Requires ) {
+				$requires = $addon->Requires;
+				foreach ( $requires as $required ) {
+					$required_addon = self::get_addon_by_name( $required );
+					if ( $required_addon && ! $required_addon->active ) {
+						$active[] = $required_addon->slug;
+					}
+				}
+			}
+			appointments_clear_cache();
+			update_option( 'app_activated_plugins', $active );
+		}
+	}
+
+	public static function deactivate_addon( $slug ) {
+		$addon  = self::get_addon( $slug );
+		$active = self::get_active_addons();
+		if ( $addon && in_array( $slug, $active ) ) {
+			$key = array_search( $slug, $active );
+			unset( $active[ $key ] );
+			appointments_clear_cache();
+
+			update_option( 'app_activated_plugins', $active );
+		}
+	}
+
+	public static function get_active_addons() {
+		return get_option('app_activated_plugins', array());
+	}
+
+	public static function get_addons() {
+		$all = glob( APP_PLUGIN_ADDONS_DIR . '/*.php' );
+		$addons = array();
+		foreach ( $all as $addon_file ) {
+			$addon = new self( $addon_file );
+			if ( ! $addon->error ) {
+				$addons[ $addon_file ] = $addon;
+			}
+
+		}
+		return $addons;
+	}
+
+
+	public static function get_addon( $slug ) {
+		$all = self::get_addons();
+		$filtered = wp_list_filter( $all, array( 'slug' => $slug ) );
+		if ( $filtered ) {
+			$addon = current( $filtered );
+			if ( ! $addon->error ) {
+				return $addon;
+			}
+		}
+
+		return false;
+	}
+
+	public static function get_addon_by_name( $name ) {
+		$all = self::get_addons();
+		foreach ( $all as $addon ) {
+			if ( $addon->PluginName === $name ) {
+				return $addon;
+			}
+		}
+		return false;
+	}
+
+
 }

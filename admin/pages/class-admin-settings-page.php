@@ -18,7 +18,43 @@ class Appointments_Admin_Settings_Page {
 	}
 
 	public function on_load() {
+		$action = isset( $_REQUEST['action'] ) ? $_REQUEST['action'] : '';
+		if ( ! $action ) {
+			return;
+		}
 
+		if ( 'activate' === $action && isset( $_REQUEST['addon'] ) ) {
+			// Activate addon/s
+			if ( ! is_array( $_REQUEST['addon'] ) ) {
+				check_admin_referer( 'activate-addon' );
+				Appointments_Addon::activate_addon( $_REQUEST['addon'] );
+			}
+			else {
+				check_admin_referer( 'bulk-addons' );
+				foreach ( $_REQUEST['addon'] as $slug ) {
+					Appointments_Addon::activate_addon( $slug );
+				}
+			}
+
+			wp_redirect( remove_query_arg( array( 'addon', '_wpnonce', 'action' ) ) );
+			exit;
+		}
+
+		if ( 'deactivate' === $action && isset( $_REQUEST['addon'] ) ) {
+			// Activate addon/s
+			if ( ! is_array( $_REQUEST['addon'] ) ) {
+				check_admin_referer( 'deactivate-addon' );
+				Appointments_Addon::deactivate_addon( $_REQUEST['addon'] );
+			}
+			else {
+				check_admin_referer( 'bulk-addons' );
+				foreach ( $_REQUEST['addon'] as $slug ) {
+					Appointments_Addon::deactivate_addon( $slug );
+				}
+			}
+			wp_redirect( remove_query_arg( array( 'addon', '_wpnonce', 'action' ) ) );
+			exit;
+		}
 	}
 
 	/**
