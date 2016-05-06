@@ -10,15 +10,44 @@ class Appointments_Google_Calendar_Admin {
 	public function __construct( $gcal_api ) {
 		$this->gcal_api = $gcal_api;
 
-		add_action( 'admin_init', array( $this, 'save_settings' ), 12 );
-		add_action( 'admin_init', array( $this, 'reset_settings' ), 12 );
-
+		// Profile screen
 		add_action( 'show_user_profile', array( $this, 'show_profile') );
 		add_action( 'edit_user_profile', array( $this, 'show_profile') );
-
 		add_action( 'personal_options_update', array( $this, 'save_profile') );
 		add_action( 'edit_user_profile_update', array( $this, 'save_profile') );
 
+		// Settings screen
+		add_filter( 'appointments_tabs', array( $this, 'add_setting_tab' ) );
+		add_filter( 'appointments_get_settings_tab_view-gcal', array( $this, 'setting_tab_view' ) );
+		add_action( 'admin_init', array( $this, 'save_settings' ), 12 );
+		add_action( 'admin_init', array( $this, 'reset_settings' ), 12 );
+
+	}
+
+	/**
+	 * Add the tab to the settings screen
+	 *
+	 * @param array $tabs
+	 *
+	 * @return array
+	 */
+	public function add_setting_tab( $tabs ) {
+		// Set the tab in second place
+		$_tabs_1 = array_slice( $tabs, 0, 1 );
+		$_tabs_2 = array_slice( $tabs, 1 );
+		$_tabs_1['gcal'] = __( 'Google Calendar', 'appointments' );
+		return array_merge( $_tabs_1, $_tabs_2 );
+	}
+
+	/**
+	 * Set the view for Calendar Settings
+	 *
+	 * @param string|bool $file
+	 *
+	 * @return string
+	 */
+	public function setting_tab_view( $file ) {
+		return appointments_plugin_dir() . 'includes/gcal/views/page-settings-tab-gcal.php';
 	}
 
 	public function save_settings() {

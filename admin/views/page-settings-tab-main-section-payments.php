@@ -165,15 +165,3 @@ $use_payments = ( 'yes' == $options['payment_required'] );
 	?>
 
 </table>
-<script type="text/javascript">
-	jQuery(document).ready(function ($) {
-		$('select[name="payment_required"]').change(function () {
-			if ($('select[name="payment_required"]').val() == "yes") {
-				$(".payment_row").show();
-			}
-			else {
-				$(".payment_row").hide();
-			}
-		});
-	});
-</script>

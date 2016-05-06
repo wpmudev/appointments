@@ -67,6 +67,7 @@ class Appointments {
 		include_once( 'includes/helpers-settings.php' );
 		include_once( 'includes/deprecated-hooks.php' );
 		include_once( 'includes/class-app-notifications-manager.php' );
+		include_once( 'includes/class-app-addon.php' );
 
 		$this->timetables = get_transient( 'app_timetables' );
 		if ( ! $this->timetables || ! is_array( $this->timetables ) ) {
@@ -1129,12 +1130,12 @@ class Appointments {
 	 */
 	function get_classes() {
 		return apply_filters( 'app_box_class_names',
-							array(
-								'free'			=> __('Free', 'appointments'),
-								'busy'			=> __('Busy', 'appointments'),
-								'notpossible'	=> __('Not possible', 'appointments')
-								)
-				);
+			array(
+				'free'        => __( 'Free', 'appointments' ),
+				'busy'        => __( 'Busy', 'appointments' ),
+				'notpossible' => __( 'Not possible', 'appointments' )
+			)
+		);
 	}
 
 	/**

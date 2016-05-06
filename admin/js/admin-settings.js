@@ -65,5 +65,17 @@ jQuery( document ).ready( function( $ ) {
         }
     });
 
+    // PAYMENT REQUIRED (Payments)
+    jQuery(document).ready(function ($) {
+        $('select[name="payment_required"]').change(function () {
+            if ($('select[name="payment_required"]').val() == "yes") {
+                $(".payment_row").show();
+            }
+            else {
+                $(".payment_row").hide();
+            }
+        });
+    });
+
 
 });

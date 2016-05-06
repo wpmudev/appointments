@@ -29,7 +29,6 @@ class Appointments_Admin_Settings_Page {
 	public function get_tabs() {
 		$tabs = array(
 			'main'          => __( 'General', 'appointments' ),
-			'gcal'          => __( 'Google Calendar', 'appointments' ),
 			'working_hours' => __( 'Working Hours', 'appointments' ),
 			'exceptions'    => __( 'Exceptions', 'appointments' ),
 			'services'      => __( 'Services', 'appointments' ),
@@ -172,9 +171,9 @@ class Appointments_Admin_Settings_Page {
 		echo $sections_markup;
 		echo '<br class="clear">';
 
-		$file = appointments_plugin_dir() . 'admin/views/page-settings-tab-' . $tab . '.php';
+		$file = _appointments_get_settings_tab_view_file_path( $tab );
 
-		if ( file_exists( $file ) ) {
+		if ( $file ) {
 			require_once( $file );
 		}
 		else {

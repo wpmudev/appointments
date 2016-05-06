@@ -10,8 +10,8 @@ $min_time_setting = isset( $options["min_time"] ) ? $options["min_time"] : '';
 <form method="post" action="">
 
 	<?php foreach ( $sections as $section => $name ): ?>
-		<?php $section_file = apply_filters( 'appointments_settings_section_file', appointments_plugin_dir() . 'admin/views/page-settings-tab-main-section-' . $section . '.php', $tab ); ?>
-		<?php if ( is_file ( $section_file ) ): ?>
+		<?php $section_file = _appointments_get_settings_section_view_file_path( $tab, $section ); ?>
+		<?php if ( $section_file ): ?>
 			<div class="app-settings-section" id="app-settings-section-<?php echo $section; ?>">
 				<h3><?php printf( _x( '%s Settings', 'Settings section', 'appointments' ), $name ); ?></h3>
 				<?php include_once( $section_file ); ?>
