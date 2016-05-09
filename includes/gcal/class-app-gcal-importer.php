@@ -161,8 +161,12 @@ class Appointments_Google_Calendar_Importer {
 				'duration' => $duration,
 				'gcal_ID' => $event_id,
 				'gcal_updated' => $event_updated_date,
-				'note' => $event->getSummary()
 			);
+
+			if ( empty( $app->note ) ) {
+				// Override not only if is empty
+				$args['note'] = $event->getSummary();
+			}
 
 			if ( ! $app ) {
 				// New Appointment

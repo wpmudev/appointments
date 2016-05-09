@@ -86,7 +86,7 @@ class Appointments_Admin_Appointments_Page {
 
 	public function save_screen_options( $status, $option, $value ) {
 		if ( 'appointments_records_per_page' == $option ) {
-			return $value;
+			return absint( $value );
 		}
 
 		return $status;
