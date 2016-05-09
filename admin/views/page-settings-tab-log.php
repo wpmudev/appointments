@@ -13,32 +13,15 @@
 		?>
 	</div>
 </div>
-<table class="form-table">
-	<tr valign="top">
-		<th scope="row" >
-		<input type="button" id="log_clear_button" class="button-secondary" value="<?php esc_attr_e('Clear Log File', 'appointments') ?>" title="<?php esc_attr_e('Clicking this button deletes logs saved on the server', 'appointments') ?>" />
-		</th>
-	</tr>
-</table>
+
+<form action="" method="post" id="clear-log-form">
+	<?php _appointments_settings_submit_block( $tab, __( 'Clear log file', 'appointments' ), 'secondary' ); ?>
+</form>
+
 <script type="text/javascript">
-(function ($) {
-$(function () {
-	$('#log_clear_button').click(function() {
-		if ( !confirm('<?php echo esc_js( __("Are you sure to clear the log file?","appointments") ) ?>') ) {return false;}
-		else{
-			$('.add-new-waiting').show();
-			var data = {action: 'delete_log', nonce: '<?php echo wp_create_nonce() ?>'};
-			$.post(ajaxurl, data, function(response) {
-				$('.add-new-waiting').hide();
-				if ( response && response.error ) {
-					alert(response.error);
-				}
-				else{
-					$("#app_log").html('<?php echo esc_js( __("Log file cleared...","appointments") ) ?>');
-				}
-			},'json');
-		}
+jQuery(document).ready(function ($) {
+	$('#clear-log-form').submit(function (e) {
+		return confirm('<?php _e( "Are you sure to clear the log file?", "appointments" ); ?>');
 	});
 });
-})(jQuery);
 </script>

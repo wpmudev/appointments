@@ -25,7 +25,7 @@ class App_Users_AdditionalFields {
 		add_action('plugins_loaded', array($this, 'initialize'));
 
 		// Settings
-		add_action('app-settings-display_settings', array($this, 'show_settings'));
+		add_action('appointments_settings_tab-main-section-display', array($this, 'show_settings'));
 		add_filter('app-options-before_save', array($this, 'save_settings'));
 
 		// Field injection
@@ -446,118 +446,122 @@ $(document).ajaxSend(function(e, xhr, opts) {
 		$fields = !empty($this->_data['additional_fields']) ? $this->_data['additional_fields'] : array();
 		$admin_edit = !empty($this->_data['additional_fields-admin_edit']) ? 'checked="checked"' : '';
 		?>
-<tr valign="top" class="api_detail" <?php echo $style?>>
-	<th scope="row" ><?php _e('Additional fields', 'appointments')?></th>
-	<td colspan="2">
-		<div id="app-additional_fields">
-		<?php foreach ($fields as $field) { ?>
+		<h3><?php _e( 'Additional Fields', 'appointments' ); ?></h3>
+		<table class="form-table">
+			<tr valign="top" class="api_detail" <?php echo $style?>>
+				<th scope="row" ><?php _e('Additional fields', 'appointments')?></th>
+				<td colspan="2">
+					<div id="app-additional_fields">
+						<?php foreach ($fields as $field) { ?>
+							<div class="app-field">
+								<b><?php echo esc_html($field['label']); ?></b> <em><small>(<?php echo esc_html($field['type']); ?>)</small></em>
+								<br />
+								<?php echo esc_html('Required', 'appointments'); ?>: <b><?php echo esc_html(($field['required'] ? __('Yes', 'appointments') : __('No', 'appointments'))); ?></b>
+								<br />
+								<?php _e('E-mail macro:', 'appointments'); ?> <code><?php echo esc_html($this->_to_email_macro($field['label'])); ?></code>
+								<span class="description"><?php _e('This is the placeholder you can use in your emails.', 'appointments'); ?></span>
+								<input type="hidden" name="app-additional_fields[]" value="<?php echo rawurlencode(json_encode($field)); ?>" />
+								<a href="#remove" class="app-additional_fields-remove"><?php echo esc_html('Remove', 'appointments'); ?></a>
+							</div>
+						<?php } ?>
+					</div>
+					<div id="app-new_additional_field">
+						<h4><?php _e('Add new field', 'appointments'); ?></h4>
+						<label for="app-new_additional_field-label">
+							<?php _e('Field label:', 'appointments'); ?>
+							<input type="text" value="" id="app-new_additional_field-label" />
+						</label>
+						<label for="app-new_additional_field-type">
+							<?php _e('Field type:', 'appointments'); ?>
+							<select id="app-new_additional_field-type">
+								<?php foreach ($_types as $type => $label) { ?>
+									<option value="<?php esc_attr_e($type); ?>"><?php echo esc_html($label); ?></option>
+								<?php } ?>
+							</select>
+						</label>
+						<label for="app-new_additional_field-required">
+							<input type="checkbox" value="" id="app-new_additional_field-required" />
+							<?php _e('Required?', 'appointments'); ?>
+						</label>
+						<button type="button" class="button-secondary" id="app-new_additional_field-add"><?php _e('Add', 'appointments'); ?></button>
+					</div>
+				</td>
+			</tr>
+		</table>
+
+		<script id="app-additional_fields-template" type="text/template">
 			<div class="app-field">
-				<b><?php echo esc_html($field['label']); ?></b> <em><small>(<?php echo esc_html($field['type']); ?>)</small></em>
+				<b>{{ label }}</b> <em><small>({{ type }})</small></em>
 				<br />
-				<?php echo esc_html('Required', 'appointments'); ?>: <b><?php echo esc_html(($field['required'] ? __('Yes', 'appointments') : __('No', 'appointments'))); ?></b>
-				<br />
-				<?php _e('E-mail macro:', 'appointments'); ?> <code><?php echo esc_html($this->_to_email_macro($field['label'])); ?></code>
-				<span class="description"><?php _e('This is the placeholder you can use in your emails.', 'appointments'); ?></span>
-				<input type="hidden" name="app-additional_fields[]" value="<?php echo rawurlencode(json_encode($field)); ?>" />
+				<?php echo esc_html('Required', 'appointments'); ?>: <b>{{ required ? '<?php echo esc_js(__("Yes", "appointments")); ?>' : '<?php echo esc_js(__("No", "appointments")); ?>' }}</b>
+				<input type="hidden" name="app-additional_fields[]" value="{{ encodeURIComponent(_value) }}" />
 				<a href="#remove" class="app-additional_fields-remove"><?php echo esc_html('Remove', 'appointments'); ?></a>
 			</div>
-		<?php } ?>
-		</div>
-		<div id="app-new_additional_field">
-			<h4><?php _e('Add new field', 'appointments'); ?></h4>
-			<label for="app-new_additional_field-label">
-				<?php _e('Field label:', 'appointments'); ?>
-				<input type="text" value="" id="app-new_additional_field-label" />
-			</label>
-			<label for="app-new_additional_field-type">
-				<?php _e('Field type:', 'appointments'); ?>
-				<select id="app-new_additional_field-type">
-				<?php foreach ($_types as $type => $label) { ?>
-					<option value="<?php esc_attr_e($type); ?>"><?php echo esc_html($label); ?></option>
-				<?php } ?>
-				</select>
-			</label>
-			<label for="app-new_additional_field-required">
-				<input type="checkbox" value="" id="app-new_additional_field-required" />
-				<?php _e('Required?', 'appointments'); ?>
-			</label>
-			<button type="button" class="button-secondary" id="app-new_additional_field-add"><?php _e('Add', 'appointments'); ?></button>
-		</div>
-	</td>
-</tr>
-<script id="app-additional_fields-template" type="text/template">
-	<div class="app-field">
-		<b>{{ label }}</b> <em><small>({{ type }})</small></em>
-		<br />
-		<?php echo esc_html('Required', 'appointments'); ?>: <b>{{ required ? '<?php echo esc_js(__("Yes", "appointments")); ?>' : '<?php echo esc_js(__("No", "appointments")); ?>' }}</b>
-		<input type="hidden" name="app-additional_fields[]" value="{{ encodeURIComponent(_value) }}" />
-		<a href="#remove" class="app-additional_fields-remove"><?php echo esc_html('Remove', 'appointments'); ?></a>
-	</div>
-</script>
-<script>
-(function ($) {
+		</script>
+		<script>
+			(function ($) {
 
-var tpl = $("#app-additional_fields-template").html();
+			var tpl = $("#app-additional_fields-template").html();
 
-function parse_template (str, data) {
-	var orig_settings = _.templateSettings,
-		t = false
-	;
-	_.templateSettings = {
-		evaluate : /\{\[([\s\S]+?)\]\}/g,
-		interpolate : /\{\{([\s\S]+?)\}\}/g
-	};
+			function parse_template (str, data) {
+				var orig_settings = _.templateSettings,
+					t = false
+				;
+				_.templateSettings = {
+					evaluate : /\{\[([\s\S]+?)\]\}/g,
+					interpolate : /\{\{([\s\S]+?)\}\}/g
+				};
 
-	var compiled = _.template(str);
+				var compiled = _.template(str);
 
-	_.templateSettings = orig_settings;
+				_.templateSettings = orig_settings;
 
-	return compiled(data);
-}
+				return compiled(data);
+			}
 
-function add_new_field () {
-	var $new_fields = $("#app-new_additional_field").find("input,select"),
-		$root = $("#app-additional_fields"),
-		data = {}
-	;
-	$new_fields.each(function () {
-		var $me = $(this),
-			name = $me.attr("id").replace(/app-new_additional_field-/, ''),
-			value = $me.is(":checkbox") ? $me.is(":checked") : $me.val()
-		;
-		data[name] = value;
-	});
-	data._value = JSON.stringify(data);
-	$root.append(parse_template(tpl, data));
-	return false;
-}
+			function add_new_field () {
+				var $new_fields = $("#app-new_additional_field").find("input,select"),
+					$root = $("#app-additional_fields"),
+					data = {}
+				;
+				$new_fields.each(function () {
+					var $me = $(this),
+						name = $me.attr("id").replace(/app-new_additional_field-/, ''),
+						value = $me.is(":checkbox") ? $me.is(":checked") : $me.val()
+					;
+					data[name] = value;
+				});
+				data._value = JSON.stringify(data);
+				$root.append(parse_template(tpl, data));
+				return false;
+			}
 
-function remove_field () {
-	var $me = $(this);
-	$me.closest(".app-field").remove();
-	return false;
-}
+			function remove_field () {
+				var $me = $(this);
+				$me.closest(".app-field").remove();
+				return false;
+			}
 
-$(function () {
-	$(document).on("click", "#app-new_additional_field-add", add_new_field);
-	$(document).on("click", ".app-additional_fields-remove", remove_field);
-});
+			$(function () {
+				$(document).on("click", "#app-new_additional_field-add", add_new_field);
+				$(document).on("click", ".app-additional_fields-remove", remove_field);
+			});
 
-})(jQuery);
-</script>
-<style>
-.app-field {
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	padding: 1em;
-	margin-bottom: 1em;
-	width: 40%;
-}
-.app-field .app-additional_fields-remove {
-	display: block;
-	float: right;
-}
-</style>
+			})(jQuery);
+		</script>
+		<style>
+			.app-field {
+				border: 1px solid #ccc;
+				border-radius: 3px;
+				padding: 1em;
+				margin-bottom: 1em;
+				width: 40%;
+			}
+			.app-field .app-additional_fields-remove {
+				display: block;
+				float: right;
+			}
+		</style>
 		<?php
 	}
 

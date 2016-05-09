@@ -40,9 +40,7 @@
 
 	<div class='submit' id='div_save_workers' <?php if (!$max_id) echo 'style="display:none"' ?>>
 	<input type="hidden" name="number_of_workers" id="number_of_workers" value="<?php echo $max_id;?>" />
-	<input type="hidden" name="action_app" value="save_workers" />
-	<?php wp_nonce_field( 'update_app_settings', 'app_nonce' ); ?>
-	<input class='button-primary' type='submit' value='<?php _e( 'Save Service Providers', 'appointments' ) ?>' />
+	<?php _appointments_settings_submit_block( $tab ); ?>
 	&nbsp;&nbsp;
 	<?php _e( '<i>Tip: To remove a service provider, uncheck all "Services Provided" selections and save.</i>', 'appointments' ); ?>
 	</div>

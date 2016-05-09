@@ -53,6 +53,23 @@ class Appointments_Admin_Appointments_Page {
 			}
 		}
 
+		// Delete removed app records
+		if ( isset($_POST["delete_removed"]) && 'delete_removed' == $_POST["delete_removed"]
+		     && isset( $_POST["app"] ) && is_array( $_POST["app"] ) ) {
+			$result = 0;
+			foreach ( $_POST["app"] as $app_id ) {
+				$result = $result + appointments_delete_appointment( $app_id );
+			}
+
+			if ( $result ) {
+				global $current_user;
+				$userdata = get_userdata( $current_user->ID );
+				add_action( 'admin_notices', array ( &$appointments, 'deleted' ) );
+				do_action( 'app_deleted',  $_POST["app"] );
+				$appointments->log( sprintf( __('Appointment(s) with id(s):%s deleted by user:%s', 'appointments' ),  implode( ', ', $_POST["app"] ), $userdata->user_login ) );
+			}
+		}
+
 	}
 
 	private function maybe_reset_filters() {

@@ -23,7 +23,5 @@ $min_time_setting = isset( $options["min_time"] ) ? $options["min_time"] : '';
 	<?php do_action( 'app-settings-after_advanced_settings' ); ?>
 	<?php do_action( "appointments_settings-$tab" ); ?>
 
-	<input type="hidden" name="action_app" value="save_general"/>
-	<?php wp_nonce_field( 'update_app_settings', 'app_nonce' ); ?>
-	<?php submit_button( __( 'Save Settings', 'appointments' ) ); ?>
+	<?php _appointments_settings_submit_block( $tab ); ?>
 </form>

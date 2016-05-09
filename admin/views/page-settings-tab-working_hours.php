@@ -48,10 +48,6 @@ jQuery(document).ready(function($){
 
 	<input type="hidden" name="worker" value="0" />
 	<input type="hidden" name="location" value="0" />
-	<input type="hidden" name="action_app" value="save_working_hours" />
-	<?php wp_nonce_field( 'update_app_settings', 'app_nonce' ); ?>
-	<p class="submit">
-	<input type="submit" class="button-primary" value="<?php _e('Save Working Hours', 'appointments') ?>" />
-	</p>
+	<?php _appointments_settings_submit_block( $tab ); ?>
 
 </form>

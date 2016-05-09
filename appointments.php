@@ -58,8 +58,12 @@ class Appointments {
 	/** @var Appointments_Admin  */
 	public $admin;
 
+	/** @var  Appointments_Addons_Loader */
+	public $addons_loader;
+
 	/** @var Appointments_Notifications_Manager */
 	public $notifications;
+
 
 	function __construct() {
 
@@ -67,7 +71,7 @@ class Appointments {
 		include_once( 'includes/helpers-settings.php' );
 		include_once( 'includes/deprecated-hooks.php' );
 		include_once( 'includes/class-app-notifications-manager.php' );
-		include_once( 'includes/class-app-addon.php' );
+
 
 		$this->timetables = get_transient( 'app_timetables' );
 		if ( ! $this->timetables || ! is_array( $this->timetables ) ) {
@@ -203,6 +207,10 @@ class Appointments {
 		}
 
 		$this->notifications = new Appointments_Notifications_Manager();
+	}
+
+	public function get_addon_instance() {
+
 	}
 
 	public function load_admin() {
@@ -3457,24 +3465,6 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 	}
 
 	/**
-	 *	Packs an array into a string with : as glue
-	 */
-	function _implode( $input ) {
-		if ( !is_array( $input ) || empty( $input ) )
-			return false;
-		return ':'. implode( ':', array_filter( $input ) ) . ':';
-	}
-
-	/**
-	 *	Packs a string into an array assuming : as glue
-	 */
-	function _explode( $input ){
-		if ( !is_string( $input ) )
-			return false;
-		return array_filter( explode( ':' , ltrim( $input , ":") ) );
-	}
-
-	/**
 	 * Deletes a worker's database records in case he is deleted
 	 * @since 1.0.4
 	 */
@@ -4038,15 +4028,23 @@ require_once APP_PLUGIN_DIR . '/includes/class_app_timed_abstractions.php';
 require_once APP_PLUGIN_DIR . '/includes/class_app_roles.php';
 require_once APP_PLUGIN_DIR . '/includes/class_app_codec.php';
 require_once APP_PLUGIN_DIR . '/includes/class_app_shortcodes.php';
-require_once APP_PLUGIN_DIR . '/includes/class_app_addon_helper.php';
 
 App_Installer::serve();
 
-App_AddonHandler::serve();
 App_Shortcodes::serve();
 
 global $appointments;
 $appointments = new Appointments();
+
+// Load addons
+include_once( 'includes/class-app-addon.php' );
+include_once( 'includes/class-app-addons-loader.php' );
+if ( ! defined( 'APP_PLUGIN_ADDONS_DIR' ) ) {
+	define('APP_PLUGIN_ADDONS_DIR', APP_PLUGIN_DIR . '/includes/addons');
+}
+$appointments->addons_loader = Appointments_Addons_Loader::get_instance();
+$appointments->addons_loader->load_active_addons();
+
 
 if (is_admin()) {
 	require_once APP_PLUGIN_DIR . '/includes/support/class_app_tutorial.php';

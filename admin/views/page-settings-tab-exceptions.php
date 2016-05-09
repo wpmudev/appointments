@@ -59,11 +59,7 @@ if ( $workers ) {
 	</table>
 
 	<input type="hidden" name="location" value="0" />
-	<input type="hidden" name="action_app" value="save_exceptions" />
-	<?php wp_nonce_field( 'update_app_settings', 'app_nonce' ); ?>
-	<p class="submit">
-	<input type="submit" class="button-primary" value="<?php _e('Save Exceptional Days', 'appointments') ?>" />
-	</p>
+	<?php _appointments_settings_submit_block( $tab );_ ?>
 
 </form>
 <script type="text/javascript">

@@ -80,7 +80,8 @@ class Appointments_Addons_Admin_List_Table extends WP_List_Table {
 	}
 
 	public function prepare_items() {
-		$addons = Appointments_Addon::get_addons();
+		$appointments = appointments();
+		$addons = $appointments->addons_loader->get_addons();
 		uasort( $addons, array( $this, '_sort_addons' ) );
 		$this->items = $addons;
 

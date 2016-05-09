@@ -35,8 +35,8 @@ class Appointments_Addon {
 
 		$this->headers = get_file_data( $this->addon_file, self::$default_headers );
 
-		$active = self::get_active_addons();
-		$this->active = in_array( $this->slug, $active );
+		$appointments = appointments();
+		$this->active = in_array( $this->slug, $appointments->addons_loader->get_active_addons() );
 	}
 
 	public function __get( $name ) {
@@ -63,8 +63,9 @@ class Appointments_Addon {
 	}
 
 	public static function activate_addon( $slug ) {
+		$appointments = appointments();
 		$addon  = self::get_addon( $slug );
-		$active = self::get_active_addons();
+		$active = $appointments->addons_loader->get_active_addons();
 		if ( $addon && ! in_array( $slug, $active ) ) {
 			$active[] = $addon->slug;
 
@@ -84,8 +85,9 @@ class Appointments_Addon {
 	}
 
 	public static function deactivate_addon( $slug ) {
+		$appointments = appointments();
 		$addon  = self::get_addon( $slug );
-		$active = self::get_active_addons();
+		$active = $appointments->addons_loader->get_active_addons();
 		if ( $addon && in_array( $slug, $active ) ) {
 			$key = array_search( $slug, $active );
 			unset( $active[ $key ] );
@@ -95,26 +97,14 @@ class Appointments_Addon {
 		}
 	}
 
-	public static function get_active_addons() {
-		return get_option('app_activated_plugins', array());
-	}
-
-	public static function get_addons() {
-		$all = glob( APP_PLUGIN_ADDONS_DIR . '/*.php' );
-		$addons = array();
-		foreach ( $all as $addon_file ) {
-			$addon = new self( $addon_file );
-			if ( ! $addon->error ) {
-				$addons[ $addon_file ] = $addon;
-			}
-
-		}
-		return $addons;
-	}
-
-
+	/**
+	 * @param $slug
+	 *
+	 * @return bool|Appointments_Addon
+	 */
 	public static function get_addon( $slug ) {
-		$all = self::get_addons();
+		$appointments = appointments();
+		$all = $appointments->addons_loader->get_addons();
 		$filtered = wp_list_filter( $all, array( 'slug' => $slug ) );
 		if ( $filtered ) {
 			$addon = current( $filtered );
@@ -127,7 +117,8 @@ class Appointments_Addon {
 	}
 
 	public static function get_addon_by_name( $name ) {
-		$all = self::get_addons();
+		$appointments = appointments();
+		$all = $appointments->addons_loader->get_addons();
 		foreach ( $all as $addon ) {
 			if ( $addon->PluginName === $name ) {
 				return $addon;

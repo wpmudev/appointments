@@ -10,7 +10,6 @@ class Appointments_AJAX {
 		global $appointments;
 		add_action( 'wp_ajax_nopriv_app_paypal_ipn', array(&$this, 'handle_paypal_return')); // Send Paypal to IPN function
 
-		add_action( 'wp_ajax_delete_log', array( &$this, 'delete_log' ) ); 				// Clear log
 		add_action( 'wp_ajax_inline_edit', array( &$this, 'inline_edit' ) ); 			// Add/edit appointments
 		add_action( 'wp_ajax_inline_edit_save', array( &$this, 'inline_edit_save' ) ); 	// Save edits
 		add_action( 'wp_ajax_js_error', array( &$this, 'js_error' ) ); 					// Track js errors
@@ -455,16 +454,6 @@ class Appointments_AJAX {
 		die( json_encode( array( 'result'=>$html)));
 
 	}
-
-	function delete_log(){
-		global $appointments;
-		// check_ajax_referer( );
-		if ( !unlink( $appointments->log_file ) )
-			die( json_encode( array('error' => esc_js( __('Log file could not be deleted','appointments')))));
-		die();
-	}
-
-
 
 
 	/**

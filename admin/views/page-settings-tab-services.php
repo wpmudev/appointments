@@ -35,9 +35,7 @@
 
 	<div class='submit' id='div_save_services' <?php if ($max_id==null) echo 'style="display:none"' ?>>
 	<input type="hidden" name="number_of_services" id="number_of_services" value="<?php echo $max_id;?>" />
-	<input type="hidden" name="action_app" value="save_services" />
-	<?php wp_nonce_field( 'update_app_settings', 'app_nonce' ); ?>
-	<input class='button-primary' type='submit' value='<?php _e( 'Save Services', 'appointments' ) ?>' />
+		<?php _appointments_settings_submit_block( $tab ); ?>
 	&nbsp;&nbsp;
 	<?php _e( '<i>Tip: To delete a service, just clear its name and save.</i>', 'appointments' ); ?>
 	</div>
