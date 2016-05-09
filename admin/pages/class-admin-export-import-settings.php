@@ -97,7 +97,11 @@ class Appointments_Admin_Import_Export_Settings_Page {
 			foreach ( $data['workers'] as $worker ) {
 				$user = get_user_by( 'login', $worker['user']['user_login'] );
 				if ( ! $user ) {
-					$user_id = wp_insert_user( array( 'user_login' => $worker['user']['user_login'] ) );
+					$args = array( 'user_login' => $worker['user']['user_login'] );
+					if ( ! is_multisite() ) {
+						$args['role'] = $worker['user']['role'];
+					}
+					$user_id = wp_insert_user( $args );
 				}
 				else {
 					$user_id = $user->ID;
