@@ -361,8 +361,6 @@ class Appointments_Admin_Settings_Page {
 		$options['cancel_page'] 				= @$_POST['cancel_page'];
 		$options['thank_page'] 				= @$_POST['thank_page'];
 
-		$options["records_per_page"]			= (int)trim( @$_POST["records_per_page"] );
-
 		$options = apply_filters('app-options-before_save', $options);
 
 		appointments_update_options( $options );

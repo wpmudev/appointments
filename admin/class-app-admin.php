@@ -9,6 +9,8 @@ class Appointments_Admin {
 	public function __construct() {
 		$this->includes();
 
+		add_filter( 'set-screen-option', array( $this, 'save_screen_options' ), 10, 3 );
+
 		add_action( 'admin_menu', array( $this, 'admin_init' ) ); 						// Creates admin settings window
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) ); 				// Warns admin
 		add_action( 'admin_print_scripts', array( $this, 'admin_scripts') );			// Load scripts
@@ -27,6 +29,14 @@ class Appointments_Admin {
 	private function includes() {
 		include_once( appointments_plugin_dir() . 'admin/widgets/class-app-dashboard-widget.php' );
 		include_once( appointments_plugin_dir() . 'admin/class-app-admin-user-profile.php' );
+	}
+
+	public function save_screen_options( $status, $option, $value ) {
+		if ( 'appointments_records_per_page' == $option ) {
+			return $value;
+		}
+
+		return $status;
 	}
 
 	public function admin_notices_new() {

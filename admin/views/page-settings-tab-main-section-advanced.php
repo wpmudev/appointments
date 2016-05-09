@@ -54,15 +54,6 @@
 		</td>
 	</tr>
 
-	<tr valign="top">
-		<th scope="row"><?php _e( 'Number of appointment records per page', 'appointments' ) ?></th>
-		<td colspan="2">
-			<input type="text" style="width:50px" name="records_per_page"
-			       value="<?php if ( isset( $options["records_per_page"] ) )
-				       echo $options["records_per_page"] ?>"/>
-					<span
-						class="description"><?php _e( 'Number of records to be displayed on admin appointments page. If left empty: 50', 'appointments' ) ?></span>
-		</td>
-	</tr>
+	
 	<?php do_action( 'app-settings-advanced_settings' ); ?>
 </table>
