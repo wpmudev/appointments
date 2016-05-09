@@ -358,6 +358,7 @@ class Appointments_Admin {
 
 		include_once( APP_PLUGIN_DIR . '/admin/pages/class-admin-appointments-page.php' );
 		include_once( APP_PLUGIN_DIR . '/admin/pages/class-admin-settings-page.php' );
+		include_once( APP_PLUGIN_DIR . '/admin/pages/class-admin-export-import-settings.php' );
 		$appointments_page = new Appointments_Admin_Appointments_Page();
 		$appointments_pages[ $appointments_page->page_id ] = $appointments_page;
 		$appointments_pages[] = new Appointments_Admin_Settings_Page();
@@ -370,6 +371,9 @@ class Appointments_Admin {
 
 
 		do_action('app-admin-admin_pages_added', $appointments_pages[0]->page_id );
+
+
+		new Appointments_Admin_Import_Export_Settings_Page();
 
 		// Read Location, Service, Worker
 		$appointments->get_lsw();

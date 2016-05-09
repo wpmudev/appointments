@@ -59,9 +59,9 @@ class App_Shortcodes_AjaxCombo {
 			$shortcodes = $this->_default_shortcodes;
 		}
 		foreach ($shortcodes as $code) {
-			if (!$code) continue;
-			remove_shortcode($code);
-			add_shortcode($code, array($this, 'cache_shortcode_data_' . $code));
+			if (!trim( $code )) continue;
+			remove_shortcode(trim( $code ));
+			add_shortcode(trim( $code ), array($this, 'cache_shortcode_data_' . $code));
 		}
 		do_shortcode($content);
 		$data = $this->_get_cached_data();

@@ -192,6 +192,11 @@ class Appointments_Admin_Settings_Page {
 	 * Save the settings
 	 */
 	public function on_load() {
+		// Hidden feature to import/export settings
+		if ( current_user_can( 'manage_options' ) && isset( $_GET['app-export-settings'] ) ) {
+			$this->export_settings();
+		}
+
 		$addons_action = isset( $_REQUEST['action'] ) ? $_REQUEST['action'] : '';
 		if ( $addons_action ) {
 			$this->_save_addons( $addons_action );
@@ -602,6 +607,14 @@ class Appointments_Admin_Settings_Page {
 		$temp = explode( ',', $input );
 		sort( $temp );
 		return implode( ',', $temp );
+	}
+
+	private function export_settings() {
+		$options = maybe_serialize( appointments_get_options() );
+		$services = appointments_get_services();
+		$workers = appointments_get_workers();
+		
+
 	}
 
 }
