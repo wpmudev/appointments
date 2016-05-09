@@ -654,7 +654,6 @@ function appointments_delete_worker( $worker_id ) {
 	global $wpdb;
 
 	if ( ! appointments_get_worker( $worker_id ) ) {
-		var_dump("NOT A WORKER");
 		return false;
 	}
 

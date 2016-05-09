@@ -11,6 +11,10 @@ class Appointments_Admin {
 
 		add_filter( 'set-screen-option', array( $this, 'save_screen_options' ), 10, 3 );
 
+		// Add a column in users list to show if it's a service provider
+		add_filter( 'manage_users_custom_column', array( $this, 'render_provider_user_column' ), 10, 3 );
+		add_filter( 'manage_users_columns', array( $this, 'add_users_columns' ) );
+
 		add_action( 'admin_menu', array( $this, 'admin_init' ) ); 						// Creates admin settings window
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) ); 				// Warns admin
 		add_action( 'admin_print_scripts', array( $this, 'admin_scripts') );			// Load scripts
@@ -37,6 +41,21 @@ class Appointments_Admin {
 		}
 
 		return $status;
+	}
+
+	public function add_users_columns( $columns ) {
+		$columns['provider'] = __( 'Appointments Provider', 'appointments' );
+		return $columns;
+	}
+
+	public function render_provider_user_column( $content, $column, $user_id ) {
+		if ( 'provider' === $column && appointments_is_worker( $user_id ) && App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_SHORTCODES) ) {
+			$link = admin_url( 'admin.php?page=app_settings&tab=workers' );
+			$content = '<a href="' . esc_url( $link ) . '"><span class="dashicons dashicons-businessman"></span> ' . __( 'Edit', 'appointments' ) . '</a>';
+		}
+
+		return $content;
+
 	}
 
 	public function admin_notices_new() {
