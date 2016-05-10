@@ -49,8 +49,7 @@ class App_UnitTestCase extends WP_UnitTestCase {
 		$addons_loaded = get_option( 'app_activated_plugins', array() );
 		$addons_loaded[] = $name;
 		update_option( 'app_activated_plugins', array_unique( $addons_loaded ) );
-		$loader = new App_AddonHandler();
-		$loader->_load_active_plugins();
+		appointments()->addons_loader->load_active_addons();
 	}
 }
 

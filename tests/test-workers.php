@@ -481,31 +481,25 @@ class App_Workers_Test extends App_UnitTestCase {
 		appointments_insert_worker( $args );
 
 		$this->remove_deprecated_filters();
-		$this->assertEquals( 'Display Name', $appointments->_old_get_worker_name( $user_id_1 ) );
 		$this->assertEquals( 'Display Name', appointments_get_worker_name( $user_id_1 ) );
 		$this->assertEquals( 'Display Name', $appointments->get_worker_name( $user_id_1 ) );
 
-		$this->assertEquals( 'userlogin', $appointments->_old_get_worker_name( $user_id_1, false ) );
 		$this->assertEquals( 'userlogin', appointments_get_worker_name( $user_id_1, 'user_login' ) );
 		$this->assertEquals( 'userlogin', $appointments->get_worker_name( $user_id_1, false ) );
 
-		$this->assertEquals( 'A specialist', $appointments->_old_get_worker_name( 0 ) );
 		$this->assertEquals( 'A specialist', appointments_get_worker_name( 0 ) );
 		$this->assertEquals( 'A specialist', $appointments->get_worker_name( 0 ) );
 
 		// Log in the worker
 		wp_set_current_user( $user_id_1 );
-		$this->assertEquals( 'Our staff', $appointments->_old_get_worker_name( 0 ) );
 		$this->assertEquals( 'Our staff', appointments_get_worker_name( 0 ) );
 		$this->assertEquals( 'Our staff', $appointments->get_worker_name( 0 ) );
 
 		// If there's a user meta set, it will return it no matter what we pass to the second argument
 		update_user_meta( $user_id_1, 'app_name', 'Meta Name' );
 
-		$this->assertEquals( 'Our staff', $appointments->_old_get_worker_name( 0 ) );
 		$this->assertEquals( 'Our staff', appointments_get_worker_name( 0 ) );
 		$this->assertEquals( 'Our staff', $appointments->get_worker_name( 0 ) );
-		$this->assertEquals( 'Meta Name', $appointments->_old_get_worker_name( $user_id_1 ) );
 		$this->assertEquals( 'Meta Name', appointments_get_worker_name( $user_id_1 ) );
 		$this->assertEquals( 'Meta Name', $appointments->get_worker_name( $user_id_1 ) );
 
