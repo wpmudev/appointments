@@ -50,7 +50,7 @@ module.exports = function(grunt) {
                     '!.gitignore',
                     '!.gitmodules',
                     '!sourceMap.map',
-                    '!phpunit.xml',
+                    '!phpunit.xml.dist',
                     '!travis.yml',
                     '!tests/**',
                     '!**/Gruntfile.js',
@@ -59,6 +59,7 @@ module.exports = function(grunt) {
                     '!lite-vs-pro.txt',
                     '!composer.json',
                     '!vendor/**',
+                    '!tmp/**',
                     '!**/*~'
                 ],
                 dest: 'build/<%= pkg.name %>/'
@@ -104,6 +105,35 @@ module.exports = function(grunt) {
             }
         },
 
+        search: {
+            files: {
+                src: ['<%= pkg.main %>']
+            },
+            options: {
+                logFile: 'tmp/log-search.log',
+                searchString: /^[ \t\/*#@]*Version:(.*)$/mig,
+                onMatch: function(match) {
+                    var regExp = /^[ \t\/*#@]*Version:(.*)$/mig;
+                    var groupedMatches = regExp.exec( match.match );
+                    var versionFound = groupedMatches[1].trim();
+                    if ( versionFound != grunt.file.readJSON('package.json').version ) {
+                        grunt.fail.fatal("Plugin version does not match with package.json version. Please, fix.");
+                    }
+                },
+                onComplete: function( matches ) {
+                    if ( ! matches.numMatches ) {
+                        if ( ! grunt.file.readJSON('package.json').main ) {
+                            grunt.fail.fatal("main field is not defined in package.json. Please, add the plugin main file on that field.");
+                        }
+                        else {
+                            grunt.fail.fatal("Version Plugin header not found in " + grunt.file.readJSON('package.json').main + " file or the file does not exist" );
+                        }
+
+                    }
+                }
+            }
+        },
+
         open: {
             dev : {
                 path: '<%= pkg.projectEditUrl %>',
@@ -112,13 +142,26 @@ module.exports = function(grunt) {
         }
     });
 
+    grunt.loadNpmTasks('grunt-search');
+
+    grunt.registerTask('version-compare', [ 'search' ] );
 
     grunt.registerTask('build', [
+        'version-compare',
         'clean',
         'checktextdomain',
         'makepot',
         'copy',
         'compress',
         'open'
+    ]);
+
+    grunt.registerTask('build:beta', [
+        'version-compare',
+        'clean',
+        'checktextdomain',
+        'makepot',
+        'copy',
+        'compress'
     ]);
 };
