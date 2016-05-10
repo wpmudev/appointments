@@ -70,7 +70,8 @@ class Appointments_Admin_Import_Export_Settings_Page {
 			die();
 		}
 
-		if ( isset( $_POST['app_import'] ) ) {
+		if ( isset( $_POST['app_import'] ) && defined( 'APP_IMPORT' ) && APP_IMPORT ) {
+			check_admin_referer( 'app_export_import_settings' );
 			$data = json_decode( stripslashes_deep( $_POST['import'] ), true );
 			if ( ! is_array( $data ) || empty( $data ) ) {
 				wp_die( "NOT A JSON STRING." );
@@ -142,22 +143,27 @@ class Appointments_Admin_Import_Export_Settings_Page {
 		?>
 		<div class="wrap">
 			It will not export any sensible data like emails, passwords, Google Calendar settings...
+			<p></p>
 			<form action="" method="post">
 				<input type="hidden" name="app_export">
 				<?php wp_nonce_field( 'app_export_import_settings' ); ?>
 				<?php submit_button( 'Export Settings' ); ?>
 			</form>
 
-			<form action="" method="post">
-				<p>Paste your JSON here</p>
+			<?php if ( defined( 'APP_IMPORT' ) && APP_IMPORT ): ?>
+				<form action="" method="post">
+					<p>Paste your JSON here</p>
 
-				<p>Make sure that there's no new lines at the beggining/end of the string</p>
-				<p style="color:red">This will delete ALL services and settings. It could create some workers too.</p>
-				<input type="hidden" name="app_import">
-				<textarea name="import" id="import" cols="30" rows="10" class="widefat"></textarea>
-				<?php wp_nonce_field( 'app_export_import_settings' ); ?>
-				<?php submit_button( 'Import Settings' ); ?>
-			</form>
+					<p>Make sure that there's no new lines at the beggining/end of the string</p>
+					<p style="color:red">This will delete ALL services and settings. It could create some workers too.</p>
+					<input type="hidden" name="app_import">
+					<textarea name="import" id="import" cols="30" rows="10" class="widefat"></textarea>
+					<?php wp_nonce_field( 'app_export_import_settings' ); ?>
+					<?php submit_button( 'Import Settings' ); ?>
+				</form>
+			<?php else: ?>
+				<p>For extra security reasons, import form will only appear by adding <code>define( 'APP_IMPORT', true );</code> to your <code>wp-config.php</code> file</p>
+			<?php endif; ?>
 		</div>
 		<?php
 	}
