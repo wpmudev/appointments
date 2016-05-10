@@ -138,7 +138,7 @@
 			<input type="checkbox" id="accept_api_logins" name="accept_api_logins"
 			       value="true" <?php if ( isset( $options["accept_api_logins"] ) && $options["accept_api_logins"] )
 				echo "checked='checked'" ?>>
-			<p class="description"><?php _e( 'Enables login to website from front end using Facebook, Twitter, Google+ or Wordpress.', 'appointments' ) ?></p>
+			<p class="description"><?php _e( 'Enables login to website from front end using Facebook, Twitter, Google+ or WordPress.', 'appointments' ) ?></p>
 		</td>
 	</tr>
 

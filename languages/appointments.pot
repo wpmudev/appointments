@@ -444,7 +444,7 @@ msgstr ""
 
 #: admin/app-faq.php:158
 msgid ""
-"Appointments+ follows Wordpress date and time settings. If you change them "
+"Appointments+ follows WordPress date and time settings. If you change them "
 "from %s page, plugin will automatically adapt them."
 msgstr ""
 
@@ -4586,7 +4586,7 @@ msgstr ""
 #: includes/templates/app-admin-settings-main.php:175
 msgid ""
 "Enables login to website from front end using Facebook, Twitter, Google+ or "
-"Wordpress."
+"WordPress."
 msgstr ""
 
 #: includes/templates/app-admin-settings-main.php:180
