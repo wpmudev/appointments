@@ -66,8 +66,17 @@ class Appointments_Admin_Import_Export_Settings_Page {
 				'working_hours' => $working_hours
 			);
 
-			echo wp_json_encode( $all );
-			die();
+			$json = wp_json_encode( $all );
+			header('Content-Description: File Transfer');
+			header('Content-Type: application/json');
+			header('Content-Disposition: attachment; filename="app-export.json"');
+			header('Content-Transfer-Encoding: binary');
+			header('Expires: 0');
+			header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+			header('Pragma: public');
+			//$output = $output . "\xEF\xBB\xBF"; // UTF-8 BOM
+			header('Content-Length: ' . strlen($json));
+			die( $json );
 		}
 
 		if ( isset( $_POST['app_import'] ) && defined( 'APP_IMPORT' ) && APP_IMPORT ) {
@@ -136,21 +145,38 @@ class Appointments_Admin_Import_Export_Settings_Page {
 			}
 			appointments_clear_cache();
 
+			wp_redirect( add_query_arg( 'updated', 'true' ) );
+
 		}
 	}
 
 	public function render() {
+		$allow_import = false;
+		if ( defined( 'APP_IMPORT' ) && APP_IMPORT ) {
+			if ( is_integer( APP_IMPORT ) && is_multisite() ) {
+				if ( APP_IMPORT === get_current_blog_id() ) {
+					$allow_import = true;
+				}
+			}
+			else {
+				$allow_import = true;
+			}
+		}
 		?>
 		<div class="wrap">
+			<?php if ( isset( $_GET['updated'] ) ): ?>
+				<div class="updated">
+					<p>All good</p>
+				</div>
+			<?php endif; ?>
 			It will not export any sensible data like emails, passwords, Google Calendar settings...
-			<p></p>
 			<form action="" method="post">
 				<input type="hidden" name="app_export">
 				<?php wp_nonce_field( 'app_export_import_settings' ); ?>
 				<?php submit_button( 'Export Settings' ); ?>
 			</form>
 
-			<?php if ( defined( 'APP_IMPORT' ) && APP_IMPORT ): ?>
+			<?php if ( $allow_import ): ?>
 				<form action="" method="post">
 					<p>Paste your JSON here</p>
 
@@ -163,6 +189,7 @@ class Appointments_Admin_Import_Export_Settings_Page {
 				</form>
 			<?php else: ?>
 				<p>For extra security reasons, import form will only appear by adding <code>define( 'APP_IMPORT', true );</code> to your <code>wp-config.php</code> file</p>
+				<p>You can restrict the import to a blog in a multisite by using the code <code>define( 'APP_IMPORT', [BLOG_ID] ); ?></code></p>
 			<?php endif; ?>
 		</div>
 		<?php

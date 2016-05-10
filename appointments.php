@@ -72,7 +72,6 @@ class Appointments {
 		include_once( 'includes/deprecated-hooks.php' );
 		include_once( 'includes/class-app-notifications-manager.php' );
 
-
 		$this->timetables = get_transient( 'app_timetables' );
 		if ( ! $this->timetables || ! is_array( $this->timetables ) ) {
 			$this->timetables = array();
@@ -209,9 +208,6 @@ class Appointments {
 		$this->notifications = new Appointments_Notifications_Manager();
 	}
 
-	public function get_addon_instance() {
-
-	}
 
 	public function load_admin() {
 		include_once( 'admin/class-app-admin.php' );
@@ -541,7 +537,7 @@ class Appointments {
 	 * @return array of objects
 	 */
 	function get_reserve_apps_by_service( $l, $s, $week=0 ) {
-		_deprecated_function( __FUNCTION__, '1.6', 'appointments_get_appointments()' );
+		_deprecated_function( __FUNCTION__, '1.6', 'appointments_get_appointments_filtered_by_services()' );
 		$args = array(
 			'location' => $l,
 			'service' => $s,
@@ -612,43 +608,6 @@ class Appointments {
 		return appointments_get_worker_name( $worker, $field );
 	}
 
-	/**
-	 * Only for Unit Testing purposes, do not use
-	 */
-	function _old_get_worker_name( $worker=0, $php = true ) {
-		global $current_user;
-		$user_name = '';
-		if ( 0 == $worker ) {
-			// Show different text to authorized people
-			if ( is_admin() || App_Roles::current_user_can( 'manage_options', App_Roles::CTX_STAFF ) || appointments_is_worker( $current_user->ID ) )
-				$user_name = __('Our staff', 'appointments');
-			else
-				$user_name = __('A specialist', 'appointments');
-		}
-		else {
-			$userdata = get_userdata( $worker );
-			if (is_object($userdata) && !empty($userdata->app_name)) {
-				$user_name = $userdata->app_name;
-			}
-			if (empty($user_name)) {
-				if ( !$php ) {
-					$user_name = $userdata->user_login;
-				}
-				else {
-					$user_name = $userdata->display_name;
-				}
-
-				if ( !$user_name ){
-					$first_name = get_user_meta($worker, 'first_name', true);
-					$last_name = get_user_meta($worker, 'last_name', true);
-					$user_name = $first_name . " " . $last_name;
-				}
-				if ( "" == trim( $user_name ) )
-					$user_name = $userdata->user_login;
-			}
-		}
-		return apply_filters( 'app_get_worker_name', $user_name, $worker );
-	}
 
 	/**
 	 * Find worker email given his ID

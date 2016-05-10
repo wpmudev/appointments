@@ -1049,7 +1049,10 @@ class Appointments_AJAX {
 	function setup_api_logins () {
 		global $appointments;
 
-		if (!@$this->options['accept_api_logins']) return false;
+		$options = appointments_get_options();
+		if ( ! @$options['accept_api_logins'] ) {
+			return false;
+		}
 
 		add_action('wp_ajax_nopriv_app_facebook_login', array($this, 'handle_facebook_login'));
 		add_action('wp_ajax_nopriv_app_get_twitter_auth_url', array($this, 'handle_get_twitter_auth_url'));
@@ -1096,40 +1099,63 @@ class Appointments_AJAX {
 	 */
 	function handle_facebook_login () {
 		header("Content-type: application/json");
+
 		$resp = array(
 			"status" => 0,
 		);
 		$fb_uid = @$_POST['user_id'];
 		$token = @$_POST['token'];
 		if (!$token) die(json_encode($resp));
+		
+		$fb_uid = @$_POST['user_id'];
+		$token = @$_POST['token'];
 
-		$request = new WP_Http;
-		$result = $request->request(
-			'https://graph.facebook.com/me?oauth_token=' . $token,
-			array('sslverify' => false) // SSL certificate issue workaround
-		);
-		if (200 != $result['response']['code']) die(json_encode($resp)); // Couldn't fetch info
+		$url = "https://graph.facebook.com/v2.4/me?fields=id,name,first_name,last_name,email,age_range,link,gender,picture,locale,verified&access_token=".$token;
+		
+		$curl = curl_init();
+		curl_setopt( $curl, CURLOPT_URL, $url );
+		curl_setopt( $curl, CURLOPT_RETURNTRANSFER, 1 );
+		curl_setopt( $curl, CURLOPT_SSL_VERIFYPEER, false );
+		$response = curl_exec( $curl );
+		curl_close( $curl );
 
-		$data = json_decode($result['body']);
-		if (!$data->email) die(json_encode($resp)); // No email, can't go further
+		$access_data = json_decode($response, true);
 
-		$email = is_email($data->email);
+		$email = is_email($access_data["email"]);
 		if (!$email) die(json_encode($resp)); // Wrong email
 
+
+		
 		$wp_user = get_user_by('email', $email);
+
+
 
 		if (!$wp_user) { // Not an existing user, let's create a new one
 			$password = wp_generate_password(12, false);
-			$username = @$data->name
-				? preg_replace('/[^_0-9a-z]/i', '_', strtolower($data->name))
-				: preg_replace('/[^_0-9a-z]/i', '_', strtolower($data->first_name)) . '_' . preg_replace('/[^_0-9a-z]/i', '_', strtolower($data->last_name))
-			;
+			
+			$username = '';
+
+
+			if(!empty($access_data['name'])) {
+					$username = strtolower($access_data['name']);
+			}
+			else if (!empty($access_data['first_name']) && !empty($access_data['last_name'])) {
+				$username = strtolower( $access_data['first_name'].'_'.$access_data['last_name'] );
+			}
+			else {
+				$user_emailname = explode('@', $access_data['email']);
+				$username = strtolower( $user_emailname[0] );
+			}
+
+
+			$username = preg_replace('/[^_0-9a-z]/i', '_', strtolower($username));
 
 			$wp_user = wp_create_user($username, $password, $email);
 			if (is_wp_error($wp_user)) die(json_encode($resp)); // Failure creating user
 		} else {
 			$wp_user = $wp_user->ID;
 		}
+
 
 		$user = get_userdata($wp_user);
 
@@ -1139,9 +1165,12 @@ class Appointments_AJAX {
 
 		die(json_encode(array(
 			"status" => 1,
-			"user_id"=>$user->ID
+			"user_id"=>(int)$user->ID
 		)));
+
+
 	}
+
 
 	/**
 	 * Get OAuth request URL and token.
@@ -1161,14 +1190,15 @@ class Appointments_AJAX {
 	 * Spawn a TwitterOAuth object.
 	 */
 	function _get_twitter_object ($token=null, $secret=null) {
+		$options = appointments_get_options();
 		// Make sure options are loaded and fresh
-		if ( !$this->options['twitter-app_id'] )
-			$this->options = get_option( 'appointments_options' );
+		if ( @!$options['twitter-app_id'] )
+			$options = get_option( 'appointments_options' );
 		if (!class_exists('TwitterOAuth'))
 			include WP_PLUGIN_DIR . '/appointments/includes/external/twitteroauth/twitteroauth.php';
 		$twitter = new TwitterOAuth(
-			$this->options['twitter-app_id'],
-			$this->options['twitter-app_secret'],
+			$options['twitter-app_id'],
+			$options['twitter-app_secret'],
 			$token, $secret
 		);
 		return $twitter;
@@ -1253,10 +1283,13 @@ class Appointments_AJAX {
 	 */
 	function handle_gplus_login () {
 		header("Content-type: application/json");
+		$options = appointments_get_options();
 		$resp = array(
 			"status" => 0,
 		);
-		if (empty($this->options['google-client_id'])) die(json_encode($resp)); // Yeah, we're not equipped to deal with this
+		if ( empty( $options['google-client_id'] ) ) {
+			die( json_encode( $resp ) );
+		} // Yeah, we're not equipped to deal with this
 
 		$data = stripslashes_deep($_POST);
 		$token = !empty($data['token']) ? $data['token'] : false;
