@@ -104,14 +104,14 @@ class Appointments_Google_Calendar {
 			return;
 		}
 
-		add_action( 'wpmudev_appointments_insert_appointment', array( $this, 'on_insert_appointment' ), 50 );
-		add_action( 'wpmudev_appointments_update_appointment', array( $this, 'on_update_appointment' ), 50, 3 );
+		add_action( 'wpmudev_appointments_insert_appointment', array( $this, 'on_insert_appointment' ), 200 );
+		add_action( 'wpmudev_appointments_update_appointment', array( $this, 'on_update_appointment' ), 200, 3 );
 		add_action( 'appointments_delete_appointment', array( $this, 'on_delete_appointment' ) );
 	}
 
 	public function remove_appointments_hooks() {
-		remove_action( 'wpmudev_appointments_insert_appointment', array( $this, 'on_insert_appointment' ), 50 );
-		remove_action( 'wpmudev_appointments_update_appointment', array( $this, 'on_update_appointment' ), 50, 3 );
+		remove_action( 'wpmudev_appointments_insert_appointment', array( $this, 'on_insert_appointment' ), 200 );
+		remove_action( 'wpmudev_appointments_update_appointment', array( $this, 'on_update_appointment' ), 200, 3 );
 		remove_action( 'appointments_delete_appointment', array( $this, 'on_delete_appointment' ) );
 	}
 
