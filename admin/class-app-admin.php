@@ -282,18 +282,7 @@ class Appointments_Admin {
 			     '</p></div>';
 			$r = true;
 		}
-		// Warn if Openid is not loaded
-		$dismissed_g = false;
-		$dismiss_id_g = get_user_meta( $current_user->ID, 'app_dismiss_google', true );
-		if ( $dismiss_id_g )
-			$dismissed_g = true;
-		if ( @$appointments->options['accept_api_logins'] && !@$appointments->openid && !$dismissed_g ) {
-			echo '<div class="error"><p>' .
-			     __('<b>[Appointments+]</b> Either php curl is not installed or HTTPS wrappers are not enabled. Login with Google+ will not work.', 'appointments') .
-			     '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a title="'.__('Dismiss this notice for this session', 'appointments').'" href="' . $_SERVER['REQUEST_URI'] . '&app_dismiss_google=1"><small>'.__('Dismiss', 'appointments').'</small></a>'.
-			     '</p></div>';
-			$r = true;
-		}
+		
 		// Check for duplicate shortcodes for a visited page
 		if ( isset( $_GET['post'] ) && $_GET['post'] && $appointments->has_duplicate_shortcode( $_GET['post'] ) ) {
 			echo '<div class="error"><p>' .

@@ -64,6 +64,8 @@ class Appointments {
 	/** @var Appointments_Notifications_Manager */
 	public $notifications;
 
+	public $pro = false;
+
 
 	function __construct() {
 
@@ -71,6 +73,13 @@ class Appointments {
 		include_once( 'includes/helpers-settings.php' );
 		include_once( 'includes/deprecated-hooks.php' );
 		include_once( 'includes/class-app-notifications-manager.php' );
+		include_once( 'includes/class-app-api-logins.php' );
+
+		// Load premium features
+		if ( is_readable( appointments_plugin_dir() . 'includes/pro/class-app-pro.php' ) ) {
+			include_once( appointments_plugin_dir() . 'includes/pro/class-app-pro.php' );
+			$this->pro = new Appointments_Pro();
+		}
 
 		$this->timetables = get_transient( 'app_timetables' );
 		if ( ! $this->timetables || ! is_array( $this->timetables ) ) {
@@ -2918,7 +2927,6 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 				'error' => __('Login error. Please try again.', 'appointments'),
 				'_can_use_twitter' => (!empty($this->options['twitter-app_id']) && !empty($this->options['twitter-app_secret'])),
 				'show_login_button' => $show_login_button,
-				'gg_client_id' => $this->options['google-client_id'],
 				'register' => ($do_register ? __('Register', 'appointments') : ''),
 				'registration_url' => ($do_register ? wp_registration_url() : ''),
 			)));
@@ -2951,6 +2959,11 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			}
 			do_action('app-scripts-api');
 		}
+
+		/**
+		 * Fired when scripts/styles have been loaded
+		 */
+		do_action( 'appointments_scripts_loaded' );
 	}
 
 	/**
@@ -2979,9 +2992,6 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			echo 'td.'.$class.',div.'.$class.' {background: #'. $color .' !important;}';
 		}
 
-		// Don't show Google+ button if openid is not enabled
-		if ( !@$this->openid )
-			echo '.appointments-login_link-google{display:none !important;}';
 		?>
 		</style>
 		<?php
