@@ -16,6 +16,7 @@ class Appointments_Google_Login {
 		// Settings
 		add_filter( 'appointments_default_options', array( $this, 'add_default_options' ) );
 		add_action( 'appointments_settings_tab-main-section-accesibility', array( $this, 'add_accesibility_settings' ) );
+		add_action( 'appointments_save_settings', array( $this, 'save_settings' ) );
 
 		// Script localization
 		add_filter( 'app-scripts-api_l10n', array( $this, 'localize_script' ) );
@@ -129,6 +130,21 @@ class Appointments_Google_Login {
 			});
 		</script>
 		<?php
+	}
+
+	/**
+	 * Save the settings
+	 *
+	 * @param array $options Current options list
+	 * @return array
+	 */
+	public function save_settings( $action ) {
+		if ( 'save_main' === $action && isset( $_POST['google-client_id'] ) ) {
+			$options = appointments_get_options();
+			$options['google-client_id'] = trim( $_POST['google-client_id'] );
+			appointments_update_options( $options );
+		}
+
 	}
 
 	public function admin_notices() {

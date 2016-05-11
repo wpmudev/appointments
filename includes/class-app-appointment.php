@@ -1064,29 +1064,18 @@ function appointments_get_month_appointments( $args ) {
  * @return array
  */
 function appointments_get_user_appointments( $user_id ) {
-	global $wpdb;
-
 	$user_id = absint( $user_id );
 	$user = get_userdata( $user_id );
 	if ( ! $user ) {
 		return array();
 	}
 
-	$table = appointments_get_table( 'appointments' );
-	$statuses_in = array( 'paid', 'confirmed' );
-	$where = "WHERE status IN ( '" . implode( "','", $statuses_in ) . "' ) AND user = $user_id";
-	$results = $wpdb->get_results( "SELECT * FROM $table $where" );
-
-	if ( ! $results ) {
-		return array();
-	}
-
-	$appointments = array();
-	foreach ( $results as $row ) {
-		$appointments[] = new Appointments_Appointment( $row );
-	}
-
-	return $appointments;
+	return appointments_get_appointments(
+		array(
+			'user' => $user_id,
+			'status' => array( 'paid', 'confirmed' )
+		)
+	);
 }
 
 /**

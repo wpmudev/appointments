@@ -34,8 +34,13 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 			),
 			'order_by' => array(
 				'value' => 'ID',
-				'help' => __('Sort order of the appointments. Possible values: ID, start. Optionally DESC (descending) can be used, e.g. "start DESC" will reverse the order. Default: "ID". Note: This is the sort order as page loads. Table can be dynamically sorted by any field from front end (Some date formats may not be sorted correctly).', 'appointments'),
+				'help' => __('Sort order of the appointments. Possible values: ID, start.', 'appointments'),
 				'example' => 'ID',
+			),
+			'order' => array(
+				'value' => 'ID',
+				'help' => __('Sort order of the appointments. Possible values: asc (ascendant order), desc (descendant order).', 'appointments'),
+				'example' => 'asc',
 			),
 			'allow_cancel' => array(
 				'value' => 0,
@@ -59,7 +64,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 	}
 
 	public function process_shortcode ($args=array(), $content='') {
-		extract(wp_parse_args($args, $this->_defaults_to_args()));
+		$args = wp_parse_args($args, $this->_defaults_to_args());
 
 		global $wpdb, $current_user, $bp, $appointments;
 
@@ -70,13 +75,15 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 			$user_id = $current_user->ID;
 		}
 
-		$statuses = explode( ',', $status );
+		$statuses = explode( ',', $args['status'] );
 
-		if ( !is_array( $statuses ) || empty( $statuses ) )
+		if ( ! is_array( $statuses ) || empty( $statuses ) ) {
 			return '';
+		}
 
-		if ( !trim( $order_by ) )
-			$order_by = 'ID';
+		if ( ! trim( $args['order_by'] ) ) {
+			$args['order_by'] = 'ID';
+		}
 
 		$stat = '';
 		foreach ( $statuses as $s ) {
@@ -87,24 +94,23 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		$stat = rtrim( $stat, "OR " );
 
 		// If this is a client shortcode
-		if ( !$provider_id ) {
-			if ( $current_user->ID != $user_id ) {
+		if ( !$args['provider'] ) {
+			$apps = array();
+			if ( $user_id ) {
 				$apps = wp_list_pluck( appointments_get_user_appointments( $user_id ), 'ID' );
 			}
-			elseif ( isset( $_COOKIE["wpmudev_appointments"] ) ) {
-				$apps = unserialize( stripslashes( $_COOKIE["wpmudev_appointments"] ) );
-			}
-			else {
-				$apps = array();
+			elseif ( isset( $_COOKIE['wpmudev_appointments'] ) ) {
+				$apps = maybe_unserialize( $_COOKIE['wpmudev_appointments'] );
 			}
 
-			if ( !is_array( $apps) )
+			if ( ! $apps ) {
 				return '';
+			}
 
 			$provider_or_client = __('Provider', 'appointments' );
 
 			$q = '';
-			if ($strict) {
+			if ($args['strict']) {
 				// Strict matching
 				if (is_user_logged_in()) {
 					$q = "user={$user_id}"; // If the user is logged in, show just those apps
@@ -130,33 +136,58 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 			if ( $q && $stat ) {
 				$results = $wpdb->get_results(
 					"SELECT * FROM " . $appointments->app_table .
-					" WHERE (".$q.") AND (".$stat.") ORDER BY " . $appointments->sanitize_order_by( $order_by )
+					" WHERE (".$q.") AND (".$stat.") ORDER BY " . $appointments->sanitize_order_by( $args['order_by'] )
 				);
 			} else $results = false;
 		}
 		else {
 			$provider_or_client = __('Client', 'appointments' );
+
+			$query_args = array();
+
 			// If no id is given, get current user
-			if ( !$provider_id )
-				$provider_id = $user_id;
+			if ( ! $args['provider_id'] ) {
+				$query_args['worker'] = $user_id;
+			}
+
 			// Special case: If this is a single provider website, show staff appointments in his schedule too
 			$workers = appointments_get_workers();
-			if ( App_Roles::current_user_can('manage_options', App_Roles::CTX_STAFF) && ( ( $workers && count( $workers ) == 1 ) || !$workers ) )
-				$provider_id .= ' OR worker=0';
-			$results = $wpdb->get_results("SELECT * FROM " . $appointments->app_table . " WHERE (worker=".$provider_id.") AND (".$stat.") ORDER BY ".$order_by." " );
+			if ( App_Roles::current_user_can( 'manage_options', App_Roles::CTX_STAFF ) && ( ( $workers && count( $workers ) == 1 ) || ! $workers ) ) {
+				$query_args['worker'] = false;
+			}
+
+			if ( $statuses ) {
+				$args['status'] = $statuses;
+			}
+
+			if ( $args['order_by'] ) {
+				// Backward compatibility
+				$orderby_list = explode( ' ', $args['order_by'] );
+				if ( is_array( $orderby_list ) && count( $orderby_list ) == 2 ) {
+					$query_args['orderby'] = $orderby_list[0];
+					$query_args['order'] = $orderby_list[1];
+				}
+				else {
+					$query_args['orderby'] = $args['order_by'];
+				}
+			}
+
+			$results = appointments_get_appointments( $query_args );
 		}
 
 		// Can worker confirm pending appointments?
-		if ( $_allow_confirm && appointments_is_worker( $user_id ) && isset( $appointments->options['allow_worker_confirm'] ) && 'yes' == $appointments->options['allow_worker_confirm'] )
+		if ( $args['_allow_confirm'] && appointments_is_worker( $user_id ) && isset( $appointments->options['allow_worker_confirm'] ) && 'yes' == $appointments->options['allow_worker_confirm'] ) {
 			$allow_confirm = true;
-		else
+		} else {
 			$allow_confirm = false;
+		}
 
 		// Can client cancel appointments?
-		if ( $allow_cancel && !$provider && isset( $appointments->options['allow_cancel'] ) && 'yes' == $appointments->options['allow_cancel'] )
+		if ( $args['allow_cancel'] && ! $args['provider'] && isset( $appointments->options['allow_cancel'] ) && 'yes' == $appointments->options['allow_cancel'] ) {
 			$a_cancel = true;
-		else
+		} else {
 			$a_cancel = false;
+		}
 
 		$ret  = '';
 		$ret .= '<div class="appointments-my-appointments">';
@@ -166,7 +197,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 			$ret .= '<form method="post">';
 		}
 
-		$ret .= $title;
+		$ret .= $args['title'];
 		$ret  = apply_filters( 'app_my_appointments_before_table', $ret );
 		$ret .= '<table class="my-appointments tablesorter"><thead>';
 		$ret .= apply_filters( 'app_my_appointments_column_name',
@@ -181,7 +212,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		if ( $a_cancel ) {
 			$ret .= '<th class="my-appointments-cancel">'. _x('Cancel', 'Discard existing info', 'appointments') . '</th>';
 		}
-		if ( $gcal && 'yes' == $appointments->options['gcal'] ) {
+		if ( $args['gcal'] && 'yes' == $appointments->options['gcal'] ) {
 			$ret .= '<th class="my-appointments-gcal">&nbsp;</th>';
 		}
         
@@ -195,7 +226,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 				$ret .= apply_filters('app-shortcode-my_appointments-after_service', '', $r);
 				$ret .= '<td>';
 
-				if ( !$provider )
+				if ( !$args['provider'] )
 					$ret .= appointments_get_worker_name( $r->worker ) . '</td>';
 				else
 					$ret .= $appointments->get_client_name( $r->ID ) . '</td>';
@@ -233,7 +264,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 					$ret .= '<td><input class="app-my-appointments-cancel" type="checkbox" name="app_cancel['.$r->ID.']" '.$is_readonly.' /></td>';
 				}
 
-				if ( $gcal && 'yes' == $appointments->options['gcal'] ) {
+				if ( $args['gcal'] && 'yes' == $appointments->options['gcal'] ) {
 					if ( isset( $appointments->options["gcal_same_window"] ) && $appointments->options["gcal_same_window"] )
 						$target = '_self';
 					else
@@ -276,7 +307,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		}
 
 		// Sort table from front end
-		if ( $_tablesorter && file_exists( $appointments->plugin_dir . '/js/jquery.tablesorter.min.js' ) )
+		if ( $args['_tablesorter'] && file_exists( $appointments->plugin_dir . '/js/jquery.tablesorter.min.js' ) )
 			$appointments->add2footer( '
 				$(".my-appointments").tablesorter({
 					dateFormat: "'.$dateformat.'",

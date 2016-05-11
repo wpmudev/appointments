@@ -279,7 +279,6 @@ class Appointments_Admin_Appointments_Page {
 			<?php include_once( appointments_plugin_dir() . 'admin/views/page-appointments-status-filter.php' ); ?>
 			<?php include_once( appointments_plugin_dir() . 'admin/views/page-appointments-nav-filter.php' ); ?>
 			<?php include_once( appointments_plugin_dir() . 'admin/views/page-appointments-list.php' ); ?>
-			<?php include_once( appointments_plugin_dir() . 'admin/views/page-appointments-exports.php' ); ?>
 
 		</div> <!-- wrap -->
 		<?php

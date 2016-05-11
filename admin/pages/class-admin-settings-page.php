@@ -237,7 +237,7 @@ class Appointments_Admin_Settings_Page {
 				$this->_delete_logs();
 			}
 		}
-
+		
 		do_action( 'appointments_save_settings', $action );
 
 		// Redirecting when saving options
@@ -301,7 +301,6 @@ class Appointments_Admin_Settings_Page {
 		$options['facebook-app_id']			= trim( $_POST['facebook-app_id'] );
 		$options['twitter-app_id']			= trim( $_POST['twitter-app_id'] );
 		$options['twitter-app_secret']		= trim( $_POST['twitter-app_secret'] );
-		$options['google-client_id']			= trim( $_POST['google-client_id'] );
 
 		$options["app_page_type"]				= $_POST["app_page_type"];
 		$options["show_legend"]				= $_POST["show_legend"];
