@@ -5,6 +5,7 @@
 - Fix: Undefined error when attempting to login with Twitter, FB or Google
 - Fix: If Auto confirm is set to yes, confirmation emails are not sent
 - Fix: If custom field is added and client doesn't enter anything the email will send additional field macro instead.
+- Fix: Confirmation notification email to workers contains cancelled appointment text
 - Enhance: Added subsections to Settings page
 - Enhance: Better addons screen
 - Enhance: Added Service Provider column in users list

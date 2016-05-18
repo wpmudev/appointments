@@ -1,0 +1,4 @@
+[submodule "includes/external/wpmudev-dash"]
+	path = includes/external/wpmudev-dash
+	url = git@bitbucket.org:incsub/wpmudev-dashboard-notification.git
+	branch = master
