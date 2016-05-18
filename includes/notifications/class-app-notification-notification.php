@@ -68,7 +68,7 @@ class Appointments_Notifications_Notification extends Appointments_Notification 
 		$admin_template = $this->get_admin_template( $app_id, $email );
 
 		/* Translators: First %s is for appointment ID and the second one is for date and time of the appointment */
-		$body    = sprintf( __( 'Cancelled appointment has an ID %s for %s.', 'appointments' ), $app_id, date_i18n( $appointments->datetime_format, strtotime( $r->start ) ) );
+		$body    = sprintf( __('The new appointment has an ID %s and you can edit it clicking this link: %s','appointments'), $app_id, admin_url("admin.php?page=appointments&type=pending") );
 		$body    = apply_filters( 'app-messages-worker-notification', $body, $r, $app_id );
 		$subject = apply_filters( 'app-messages-worker-notification-subject', $admin_template['subject'], $r, $app_id );
 
