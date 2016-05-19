@@ -32,7 +32,7 @@ class App_Locations_WorkerLocations {
 		add_action('app-workers-worker-updated', array($this, 'save_worker_location'));
 
 		// Add settings
-		add_action('app-locations-settings-after_locations_list', array($this, 'show_settings'));
+		add_action('appointments_locations_settings_section_settings', array($this, 'show_settings'));
 		add_filter('app-locations-before_save', array($this, 'save_settings'));
 
 		add_action('admin_notices', array($this, 'show_nags'));
@@ -87,24 +87,20 @@ class App_Locations_WorkerLocations {
 
 	public function show_settings () {
 		?>
-<div class="postbox">
-	<h3 class='hndle'><span><?php _e('Worker Locations Settings', 'appointments') ?></span></h3>
-	<div class="inside">
-		<table class="form-table">
-			<tr valign="top">
-				<th scope="row"><?php _e('Show worker location', 'appointments')?></th>
-				<td>
-					<select name="worker_locations[insert]">
-						<option value="manual" <?php selected($this->_data['worker_locations']['insert'], 'manual'); ?> ><?php _e('I will add location info manually, using shortcode', 'appointments'); ?></option>
-						<option value="before" <?php selected($this->_data['worker_locations']['insert'], 'before'); ?> ><?php _e('Automatic, before worker description', 'appointments'); ?></option>
-						<option value="after" <?php selected($this->_data['worker_locations']['insert'], 'after'); ?> ><?php _e('Automatic, after worker description', 'appointments'); ?></option>
-					</select>
-					<p><small><?php _e('You can use the shortcode like this: <code>[app_worker_location]</code>', 'appointments'); ?></small></p>
-				</td>
-			</tr>
-		</table>
-	</div>
-</div>
+				<h3><?php _e('Worker Locations Settings', 'appointments') ?></h3>
+				<table class="form-table">
+					<tr>
+						<th scope="row"><label for="worker_locations-insert"><?php _e('Show worker location', 'appointments')?></label></th>
+						<td>
+							<select id="worker_locations-insert" name="worker_locations[insert]">
+								<option value="manual" <?php selected($this->_data['worker_locations']['insert'], 'manual'); ?> ><?php _e('I will add location info manually, using shortcode', 'appointments'); ?></option>
+								<option value="before" <?php selected($this->_data['worker_locations']['insert'], 'before'); ?> ><?php _e('Automatic, before worker description', 'appointments'); ?></option>
+								<option value="after" <?php selected($this->_data['worker_locations']['insert'], 'after'); ?> ><?php _e('Automatic, after worker description', 'appointments'); ?></option>
+							</select>
+							<p class="description"><?php _e('You can use the shortcode like this: <code>[app_worker_location]</code>', 'appointments'); ?></p>
+						</td>
+					</tr>
+				</table>
 		<?php
 	}
 

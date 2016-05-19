@@ -184,7 +184,8 @@ class Appointments_Admin_Settings_Page {
 			require_once( $file );
 		}
 		else {
-			do_action( 'app-settings-tabs', $tab );
+			do_action( 'app-settings-tabs', $tab, $sections );
+			do_action( "appointments-settings-tab-{$tab}", $sections );
 		}
 	}
 

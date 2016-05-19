@@ -37,7 +37,7 @@ class App_Locations_ServiceLocations {
 		//add_action('app-services-service-updated', array($this, 'save_service_location'));
 
 		// Add settings
-		add_action('app-locations-settings-after_locations_list', array($this, 'show_settings'));
+		add_action('appointments_locations_settings_section_settings', array($this, 'show_settings'));
 		add_filter('app-locations-before_save', array($this, 'save_settings'));
 
 		add_action('admin_notices', array($this, 'show_nags'));
@@ -195,24 +195,20 @@ class App_Locations_ServiceLocations {
 
 	public function show_settings () {
 		?>
-<div class="postbox">
-	<h3 class='hndle'><span><?php _e('Service Locations Settings', 'appointments') ?></span></h3>
-	<div class="inside">
-		<table class="form-table">
-			<tr valign="top">
-				<th scope="row"><?php _e('Show service location', 'appointments')?></th>
-				<td>
-					<select name="service_locations[insert]">
-						<option value="manual" <?php selected($this->_data['service_locations']['insert'], 'manual'); ?> ><?php _e('I will add location info manually, using shortcode', 'appointments'); ?></option>
-						<option value="before" <?php selected($this->_data['service_locations']['insert'], 'before'); ?> ><?php _e('Automatic, before service description', 'appointments'); ?></option>
-						<option value="after" <?php selected($this->_data['service_locations']['insert'], 'after'); ?> ><?php _e('Automatic, after service description', 'appointments'); ?></option>
-					</select>
-					<p><small><?php _e('You can use the shortcode like this: <code>[app_service_location]</code>', 'appointments'); ?></small></p>
-				</td>
-			</tr>
-		</table>
-	</div>
-</div>
+			<h3><?php _e('Service Locations Settings', 'appointments') ?></h3>
+			<table class="form-table">
+				<tr>
+					<th scope="row"><label for="service_locations-insert"><?php _e('Show service location', 'appointments')?></label></th>
+					<td>
+						<select id="service_locations-insert" name="service_locations[insert]">
+							<option value="manual" <?php selected($this->_data['service_locations']['insert'], 'manual'); ?> ><?php _e('I will add location info manually, using shortcode', 'appointments'); ?></option>
+							<option value="before" <?php selected($this->_data['service_locations']['insert'], 'before'); ?> ><?php _e('Automatic, before service description', 'appointments'); ?></option>
+							<option value="after" <?php selected($this->_data['service_locations']['insert'], 'after'); ?> ><?php _e('Automatic, after service description', 'appointments'); ?></option>
+						</select>
+						<p><small><?php _e('You can use the shortcode like this: <code>[app_service_location]</code>', 'appointments'); ?></small></p>
+					</td>
+				</tr>
+			</table>
 		<?php
 	}
 
