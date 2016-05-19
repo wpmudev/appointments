@@ -236,6 +236,10 @@ class App_Locations_LocationsWorker {
 									editForm.find( '#location-id' ).val( $(this).data('location-id' ) );
 									editForm.find( '#location-edit' ).val( $(this).data('location-name' ) );
 								});
+
+								$('.delete-location').click( function( e ) {
+									return confirm( '<?php _e( "Are you sure that you want to delete this location?", "appointments" ); ?>');
+								});
 							});
 						</script>
 
