@@ -319,6 +319,22 @@ class App_Services_Test extends App_UnitTestCase {
 
 	}
 
+	function test_get_service_by_name() {
+		$args = $this->factory->service->generate_args();
+		$service_id = $this->factory->service->create_object( $args );
+
+		$service = appointments_get_service_by_name( $args['name'] );
+		$this->assertEquals( $service_id, $service->ID );
+
+		// Let's try with rare characters
+		$args = $this->factory->service->generate_args();
+		$args['name'] = 'Massage / PT / Gymintro (Ange i kommentar vilken tjänst du vill boka)';
+		$service_id = $this->factory->service->create_object( $args );
+
+		$service = appointments_get_service_by_name( $args['name'] );
+		$this->assertEquals( $service_id, $service->ID );
+	}
+
 
 }
 

@@ -24,7 +24,7 @@ class App_PostTypes_ServiceDescription {
 		add_action('plugins_loaded', array($this, 'initialize'));
 		add_filter('app-service_description_pages-get_list', array($this, 'get_descriptions'));
 
-		add_action('app-settings-advanced_settings', array($this, 'show_settings'));
+		add_action('appointments_settings_tab-main-section-advanced', array($this, 'show_settings'));
 		add_filter('app-options-before_save', array($this, 'save_settings'));
 	}
 
@@ -53,19 +53,22 @@ class App_PostTypes_ServiceDescription {
 		), 'objects');
 		$bio = $this->_get_post_type();
 		?>
-		<tr valign="top">
-			<th scope="row" ><?php _e('Service Description post type', 'appointments')?></th>
-			<td colspan="2">
-				<select name="service_description_post_type">
-				<?php foreach ($post_types as $type => $obj) { ?>
-					<option value="<?php esc_attr_e($type); ?>" <?php selected($type, $bio); ?> >
-						<?php echo $obj->labels->singular_name; ?>
-					</option>
-				<?php } ?>
-				</select>
-				<span class="description"><?php _e('This is the post type that will be used as descriptions for your services.', 'appointments') ?></span>
-			</td>
-		</tr>
+		<h3><?php _e( 'Service Description post type Settings', 'appointments' ); ?></h3>
+		<table class="form-table">
+			<tr valign="top">
+				<th scope="row" ><label for="service_description_post_type"><?php _e('Service Description post type', 'appointments')?></label></th>
+				<td>
+					<select name="service_description_post_type" id="service_description_post_type">
+					<?php foreach ($post_types as $type => $obj) { ?>
+						<option value="<?php esc_attr_e($type); ?>" <?php selected($type, $bio); ?> >
+							<?php echo $obj->labels->singular_name; ?>
+						</option>
+					<?php } ?>
+					</select>
+					<p class="description"><?php _e('This is the post type that will be used as descriptions for your services.', 'appointments') ?></p>
+				</td>
+			</tr>
+		</table>
 		<?php
 	}
 

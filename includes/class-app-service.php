@@ -210,6 +210,31 @@ function appointments_get_service( $service_id ) {
 }
 
 /**
+ * Get a single service with given name
+ *
+ * @param string $service_name Name of the service to be retrieved
+ * @return Appointments_Service
+ */
+function appointments_get_service_by_name( $service_name ) {
+	global $wpdb;
+
+	$table = appointments_get_table( 'services' );
+
+	$service = $wpdb->get_row(
+		$wpdb->prepare(
+			"SELECT * from $table WHERE name = %s",
+			$service_name
+		)
+	);
+
+	if ( $service ) {
+		return new Appointments_Service( $service );
+	}
+
+	return false;
+}
+
+/**
  * Get a list of services
  *
  * @param array $args {

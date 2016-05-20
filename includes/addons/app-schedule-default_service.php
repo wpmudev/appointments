@@ -25,7 +25,7 @@ class App_Schedule_DefaultService {
 		add_action('plugins_loaded', array($this, 'initialize'));
 		add_filter('app-services-first_service_id', array($this, 'apply_selection'));
 
-		add_action('app-settings-advanced_settings', array($this, 'show_settings'));
+		add_action('appointments_settings_tab-main-section-advanced', array($this, 'show_settings'));
 		add_filter('app-options-before_save', array($this, 'save_settings'));
 
 		add_filter( 'appointments_services_shortcode_selected_service', array( $this, 'services_shortcode_selected_service' ), 10, 3 );
@@ -73,20 +73,23 @@ class App_Schedule_DefaultService {
 		$services = appointments_get_services();
 		$replacement = $this->_get_replacement();
 		?>
-		<tr valign="top">
-			<th scope="row" ><?php _e('Default Service', 'appointments')?></th>
-			<td colspan="2">
-				<select name="default_service">
-					<option value=""><?php _e('Default', 'appointments'); ?></option>
-				<?php foreach ($services as $service) { ?>
-					<option value="<?php echo esc_attr($service->ID); ?>" <?php selected($service->ID, $replacement); ?> >
-						<?php echo $service->name; ?>
-					</option>
-				<?php } ?>
-				</select>
-				<span class="description"><?php _e('This is the service that will be used as the default one.', 'appointments') ?></span>
-			</td>
-		</tr>
+		<h3><?php _e( 'Default Service Settings', 'appointments' ); ?></h3>
+		<table class="form-table">
+			<tr valign="top">
+				<th scope="row" ><label for="default_service"><?php _e('Default Service', 'appointments')?></label></th>
+				<td colspan="row">
+					<select name="default_service" id="default_service">
+						<option value=""><?php _e('Default', 'appointments'); ?></option>
+					<?php foreach ($services as $service) { ?>
+						<option value="<?php echo esc_attr($service->ID); ?>" <?php selected($service->ID, $replacement); ?> >
+							<?php echo $service->name; ?>
+						</option>
+					<?php } ?>
+					</select>
+					<span class="description"><?php _e('This is the service that will be used as the default one.', 'appointments') ?></span>
+				</td>
+			</tr>
+		</table>
 		<?php
 	}
 

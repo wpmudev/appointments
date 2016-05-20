@@ -24,7 +24,7 @@ class App_PostTypes_ServiceProviderNames {
 		
 		add_filter('app_get_worker_name', array($this, 'filter_worker_names'), 10, 2);
 
-		add_action('app-settings-advanced_settings', array($this, 'show_settings'));
+		add_action('appointments_settings_tab-main-section-advanced', array($this, 'show_settings'));
 		add_filter('app-options-before_save', array($this, 'save_settings'));
 	}
 
@@ -110,33 +110,36 @@ class App_PostTypes_ServiceProviderNames {
 		$default = !empty($this->_data['worker_name_format']) ? $this->_data['worker_name_format'] : false;
 		$fallback = !empty($this->_data['worker_fallback_name_format']) ? $this->_data['worker_fallback_name_format'] : false;
 		?>
-		<tr valign="top">
-			<th scope="row" ><?php _e('Worker display names', 'appointments')?></th>
-			<td>
-				<h5><?php _e('Default', 'appointments'); ?></h5>
-				<select name="worker_name_format">
-				<?php foreach ($name_formats as $format => $label) { ?>
-					<option value="<?php esc_attr_e($format); ?>" <?php selected($format, $default); ?> >
-						<?php echo $label; ?>
-					</option>
-				<?php } ?>
-				</select>
-				<br />
-				<span class="description"><?php _e('This is the name format that will be used by default for your service providers.', 'appointments') ?></span>
-			</td>
-			<td>
-				<h5><?php _e('Fallback', 'appointments'); ?></h5>
-				<select name="worker_fallback_name_format">
-				<?php foreach ($name_formats as $format => $label) { ?>
-					<option value="<?php esc_attr_e($format); ?>" <?php selected($format, $fallback); ?> >
-						<?php echo $label; ?>
-					</option>
-				<?php } ?>
-				</select>
-				<br />
-				<span class="description"><?php _e('This is the name format that will be used as fallback, in case the default value is not set.', 'appointments') ?></span>
-			</td>
-		</tr>
+		<h3><?php _e( 'Worker display names', 'appointments' ); ?></h3>
+		<table class="form-table">
+			<tr>
+				<th scope="row" ><label for="worker_name_format"><?php _e('Default', 'appointments'); ?></label></th>
+				<td>
+					<select name="worker_name_format" id="worker_name_format">
+					<?php foreach ($name_formats as $format => $label) { ?>
+						<option value="<?php esc_attr_e($format); ?>" <?php selected($format, $default); ?> >
+							<?php echo $label; ?>
+						</option>
+					<?php } ?>
+					</select>
+					<p class="description"><?php _e('This is the name format that will be used by default for your service providers.', 'appointments') ?></p>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row" ><label for="worker_fallback_name_format"><?php _e('Fallback', 'appointments'); ?></label></th>
+				<td>
+					<select name="worker_fallback_name_format" id="worker_fallback_name_format">
+					<?php foreach ($name_formats as $format => $label) { ?>
+						<option value="<?php esc_attr_e($format); ?>" <?php selected($format, $fallback); ?> >
+							<?php echo $label; ?>
+						</option>
+					<?php } ?>
+					</select>
+					<p class="description"><?php _e('This is the name format that will be used as fallback, in case the default value is not set.', 'appointments') ?></p>
+				</td>
+			</tr>
+		</table>
+
 		<?php
 	}
 }

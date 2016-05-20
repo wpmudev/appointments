@@ -24,7 +24,7 @@ class App_PostTypes_Biography {
 		add_action('plugins_loaded', array($this, 'initialize'));
 		add_filter('app-biography_pages-get_list', array($this, 'get_biographies'));
 
-		add_action('app-settings-advanced_settings', array($this, 'show_settings'));
+		add_action('appointments_settings_tab-main-section-advanced', array($this, 'show_settings'));
 		add_filter('app-options-before_save', array($this, 'save_settings'));
 	}
 
@@ -53,19 +53,22 @@ class App_PostTypes_Biography {
 		), 'objects');
 		$bio = $this->_get_post_type();
 		?>
-		<tr valign="top">
-			<th scope="row" ><?php _e('Biography post type', 'appointments')?></th>
-			<td colspan="2">
-				<select name="biography_post_type">
-				<?php foreach ($post_types as $type => $obj) { ?>
-					<option value="<?php esc_attr_e($type); ?>" <?php selected($type, $bio); ?> >
-						<?php echo $obj->labels->singular_name; ?>
-					</option>
-				<?php } ?>
-				</select>
-				<span class="description"><?php _e('This is the post type that will be used as biographies for your service providers.', 'appointments') ?></span>
-			</td>
-		</tr>
+		<h3><?php _e( 'Biography post type settings', 'appointments' ); ?></h3>
+		<table class="form-table">
+			<tr>
+				<th scope="row" ><label for="biography_post_type"><?php _e('Biography post type', 'appointments')?></label></th>
+				<td>
+					<select id="biography_post_type" name="biography_post_type">
+					<?php foreach ($post_types as $type => $obj) { ?>
+						<option value="<?php esc_attr_e($type); ?>" <?php selected($type, $bio); ?> >
+							<?php echo $obj->labels->singular_name; ?>
+						</option>
+					<?php } ?>
+					</select>
+					<p class="description"><?php _e('This is the post type that will be used as biographies for your service providers.', 'appointments') ?></p>
+				</td>
+			</tr>
+		</table>
 		<?php
 	}
 

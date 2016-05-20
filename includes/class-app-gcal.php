@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Manages all related to Google Calendar integration,
+ * import, export and sync appointments
+ *
+ * Class Appointments_Google_Calendar
+ */
 class Appointments_Google_Calendar {
 
 	public $api_manager = false;

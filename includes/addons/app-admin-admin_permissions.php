@@ -22,7 +22,7 @@ class App_Users_AdminPermissions {
 	private function _add_hooks () {
 		add_action('plugins_loaded', array($this, 'initialize'));
 
-		add_action('app-settings-after_advanced_settings', array($this, 'show_settings'));
+		add_action('appointments_settings_tab-main-section-advanced', array($this, 'show_settings'), 100);
 		add_filter('app-options-before_save', array($this, 'save_settings'));
 
 		// Do the job
@@ -54,20 +54,16 @@ class App_Users_AdminPermissions {
 	public function show_settings () {
 		$roles = App_Roles::get_all_wp_roles();
 		$contexts = App_Roles::get_all_contexts();
-		$count = 1;
 		?>
-<div class="postbox">
-	<h3 class='hndle'><span><?php _e('Appointments role access', 'appointments') ?></span></h3>
-	<div class="inside">
-		<table class="form-table"><tr>
-		<?php foreach($contexts as $ctx => $ctx_label) { ?>
-			<?php if (App_Roles::CTX_GLOBAL == $ctx) continue; ?>
-			<?php $context_roles = !empty($this->_data['roles'][$ctx]) ? $this->_data['roles'][$ctx] : array(); ?>
-			<td>
-				<table class="widefat">
-					<thead><tr><th><?php echo $ctx_label; ?></th></tr></thead>
-					<tbody><tr><td>
-						<select name="roles[<?php esc_attr_e($ctx);?>][]" multiple="multiple">
+		<h3><?php _e('Appointments role access', 'appointments') ?></h3>
+		<table class="form-table">
+			<?php foreach($contexts as $ctx => $ctx_label): ?>
+				<?php if (App_Roles::CTX_GLOBAL == $ctx) continue; ?>
+				<tr>
+					<?php $context_roles = !empty($this->_data['roles'][$ctx]) ? $this->_data['roles'][$ctx] : array(); ?>
+					<th><label for="roles-<?php esc_attr_e($ctx);?>"><?php echo $ctx_label; ?></label></th>
+					<td scope="row">
+						<select id="roles-<?php esc_attr_e($ctx);?>" name="roles[<?php esc_attr_e($ctx);?>][]" multiple="multiple">
 							<option value="" <?php echo (empty($context_roles) ? 'selected="selected"' : ''); ?> ><?php _e('Default', 'appointments'); ?></option>
 						<?php foreach ($roles as $role => $label) { ?>
 							<option value="<?php esc_attr_e($role); ?>"
@@ -75,20 +71,10 @@ class App_Users_AdminPermissions {
 							><?php echo $label; ?></option>
 						<?php } ?>
 						</select>
-					</td></tr></tbody>
-				</table>
-			</td>
-			<?php
-				if ($count == 2) {
-					echo '</tr><tr>';
-					$count = 0;
-				}
-				$count++;
-			?>
-		<?php } ?>
-		</tr></table>
-	</div>
-</div>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+		</table>
 		<?php
 	}
 }
