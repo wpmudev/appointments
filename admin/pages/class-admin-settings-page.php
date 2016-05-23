@@ -14,6 +14,7 @@ class Appointments_Admin_Settings_Page {
 			"app_settings",
 			array( &$this, 'render' )
 		);
+
 		add_action( 'load-' . $this->page_id, array( $this, 'on_load' ) );
 	}
 
@@ -246,7 +247,7 @@ class Appointments_Admin_Settings_Page {
 		die;
 	}
 
-	private function _save_addons( $action ) {
+	public function _save_addons( $action ) {
 		if ( 'activate' === $action && isset( $_REQUEST['addon'] ) ) {
 			// Activate addon/s
 			if ( ! is_array( $_REQUEST['addon'] ) ) {

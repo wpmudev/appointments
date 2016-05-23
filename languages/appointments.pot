@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Appointments+ package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Appointments+ 1.9-beta3\n"
+"Project-Id-Version: Appointments+ 1.9-beta4\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2016-05-19 12:46:15+00:00\n"
+"POT-Creation-Date: 2016-05-20 12:06:40+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2501,13 +2501,13 @@ msgstr ""
 msgid "Add break"
 msgstr ""
 
-#: includes/addons/app-admin-admin_permissions.php:60
+#: includes/addons/app-admin-admin_permissions.php:58
 msgid "Appointments role access"
 msgstr ""
 
-#: includes/addons/app-admin-admin_permissions.php:71
+#: includes/addons/app-admin-admin_permissions.php:67
 #: includes/addons/app-post_types-worker_names.php:116
-#: includes/addons/app-schedule-default_service.php:80
+#: includes/addons/app-schedule-default_service.php:82
 msgid "Default"
 msgstr ""
 
@@ -2790,21 +2790,29 @@ msgstr ""
 msgid "Auto-add appointments into cart"
 msgstr ""
 
-#: includes/addons/app-post_types-biography.php:57
+#: includes/addons/app-post_types-biography.php:56
+msgid "Biography post type settings"
+msgstr ""
+
+#: includes/addons/app-post_types-biography.php:59
 msgid "Biography post type"
 msgstr ""
 
-#: includes/addons/app-post_types-biography.php:66
+#: includes/addons/app-post_types-biography.php:68
 msgid ""
 "This is the post type that will be used as biographies for your service "
 "providers."
 msgstr ""
 
-#: includes/addons/app-post_types-service_description.php:57
+#: includes/addons/app-post_types-service_description.php:56
+msgid "Service Description post type Settings"
+msgstr ""
+
+#: includes/addons/app-post_types-service_description.php:59
 msgid "Service Description post type"
 msgstr ""
 
-#: includes/addons/app-post_types-service_description.php:66
+#: includes/addons/app-post_types-service_description.php:68
 msgid "This is the post type that will be used as descriptions for your services."
 msgstr ""
 
@@ -2836,7 +2844,7 @@ msgstr ""
 msgid "Last name, followed by first name, comma-separated"
 msgstr ""
 
-#: includes/addons/app-post_types-worker_names.php:114
+#: includes/addons/app-post_types-worker_names.php:113
 msgid "Worker display names"
 msgstr ""
 
@@ -2846,21 +2854,25 @@ msgid ""
 "providers."
 msgstr ""
 
-#: includes/addons/app-post_types-worker_names.php:128
+#: includes/addons/app-post_types-worker_names.php:129
 msgid "Fallback"
 msgstr ""
 
-#: includes/addons/app-post_types-worker_names.php:137
+#: includes/addons/app-post_types-worker_names.php:138
 msgid ""
 "This is the name format that will be used as fallback, in case the default "
 "value is not set."
 msgstr ""
 
-#: includes/addons/app-schedule-default_service.php:77
+#: includes/addons/app-schedule-default_service.php:76
+msgid "Default Service Settings"
+msgstr ""
+
+#: includes/addons/app-schedule-default_service.php:79
 msgid "Default Service"
 msgstr ""
 
-#: includes/addons/app-schedule-default_service.php:87
+#: includes/addons/app-schedule-default_service.php:89
 msgid "This is the service that will be used as the default one."
 msgstr ""
 
@@ -3311,31 +3323,31 @@ msgstr ""
 msgid "None yet"
 msgstr ""
 
-#: includes/class-app-gcal.php:26
+#: includes/class-app-gcal.php:32
 msgid "Session could not be started. This may indicate a theme issue."
 msgstr ""
 
-#: includes/class-app-gcal.php:63
+#: includes/class-app-gcal.php:69
 msgid "Error validating the access token: %s"
 msgstr ""
 
-#: includes/class-app-gcal.php:136
+#: includes/class-app-gcal.php:142
 msgid "Every 10 minutes"
 msgstr ""
 
-#: includes/class-app-gcal.php:165
+#: includes/class-app-gcal.php:171
 msgid "Google Calendar Description"
 msgstr ""
 
-#: includes/class-app-gcal.php:531
+#: includes/class-app-gcal.php:537
 msgid "%d updated, %d new inserted and %d deleted"
 msgstr ""
 
-#: includes/class-app-gcal.php:656
+#: includes/class-app-gcal.php:662
 msgid "SERVICE Appointment"
 msgstr ""
 
-#: includes/class-app-gcal.php:675
+#: includes/class-app-gcal.php:681
 msgid ""
 "Client Name: CLIENT\n"
 "Service Name: SERVICE\n"

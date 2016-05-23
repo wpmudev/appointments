@@ -6,6 +6,8 @@ class Appointments_Admin {
 	 */
 	public $user_profile;
 
+	public $pages = array();
+
 	public function __construct() {
 		$this->includes();
 
@@ -349,9 +351,9 @@ class Appointments_Admin {
 		include_once( APP_PLUGIN_DIR . '/admin/pages/class-admin-settings-page.php' );
 		include_once( APP_PLUGIN_DIR . '/admin/pages/class-admin-export-import-settings.php' );
 		$appointments_page = new Appointments_Admin_Appointments_Page();
-		$appointments_pages[ $appointments_page->page_id ] = $appointments_page;
-		$appointments_pages[] = new Appointments_Admin_Settings_Page();
-		$appointments_pages[ $appointments_page->page_id ] = $appointments_page;
+		$appointments_pages['appointments'] = $appointments_page;
+		$appointments_page = new Appointments_Admin_Settings_Page();
+		$appointments_pages['settings'] = $appointments_page;
 		
 		add_submenu_page('appointments', __('Transactions','appointments'), __('Transactions','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_TRANSACTIONS), "app_transactions", array(&$this,'transactions'));
 		add_submenu_page('appointments', __('Shortcodes','appointments'), __('Shortcodes','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_SHORTCODES), "app_shortcodes", array(&$this,'shortcodes_page'));
@@ -359,10 +361,12 @@ class Appointments_Admin {
 		// Add datepicker to appointments page
 
 
-		do_action('app-admin-admin_pages_added', $appointments_pages[0]->page_id );
+		do_action('app-admin-admin_pages_added', $appointments_pages['appointments']->page_id );
 
 
 		new Appointments_Admin_Import_Export_Settings_Page();
+
+		$this->pages = $appointments_pages;
 
 		// Read Location, Service, Worker
 		$appointments->get_lsw();
