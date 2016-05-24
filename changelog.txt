@@ -1,4 +1,4 @@
-2016-05-?? - 1.9
+2016-05-24 - 1.9
 -------------------------------
 - Fix: Note on site gets overridden by GCal sync
 - Fix: removed var_dump code added by mistake that was preventing to delete users that are not workers providers
@@ -6,11 +6,14 @@
 - Fix: If Auto confirm is set to yes, confirmation emails are not sent
 - Fix: If custom field is added and client doesn't enter anything the email will send additional field macro instead.
 - Fix: Confirmation notification email to workers contains cancelled appointment text
+- Fix: Confirmation notification email to users did not parse location
+- Enhance: GCal API improvements to avoid conflicts with other plugins
 - Enhance: Added subsections to Settings page
 - Enhance: Better addons screen
 - Enhance: Added Service Provider column in users list
 - Enhance: Moved "Records per page" setting to screen option in Appointments list screen
 - Enhance: Better Addons Loader that wastes less resources from server
+- Enhance: New filters on GCal API to customize the way an event is imported/synced
 - Other minor fixes and improvements
 
 2016-04-28 - 1.8.2
