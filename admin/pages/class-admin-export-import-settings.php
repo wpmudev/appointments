@@ -146,6 +146,7 @@ class Appointments_Admin_Import_Export_Settings_Page {
 			appointments_clear_cache();
 
 			wp_redirect( add_query_arg( 'updated', 'true' ) );
+			exit;
 
 		}
 	}

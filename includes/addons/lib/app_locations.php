@@ -135,7 +135,7 @@ function appointments_update_location( $id, $args ) {
 		}
 	}
 
-	if ( $location ) {
+	if ( $location !== false ) {
 		foreach ( $args as $arg => $value ) {
 			$locs[ $location ][ $arg ] = $value;
 		}

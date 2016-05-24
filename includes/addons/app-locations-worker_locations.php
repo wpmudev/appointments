@@ -38,7 +38,7 @@ class App_Locations_WorkerLocations {
 		add_action('admin_notices', array($this, 'show_nags'));
 
 		// Record appointment location
-		add_action('app_new_appointment', array($this, 'record_appointment_location'), 40);
+		add_action('wpmudev_appointments_insert_appointment', array($this, 'record_appointment_location'), 40);
 	}
 
 	function show_nags () {

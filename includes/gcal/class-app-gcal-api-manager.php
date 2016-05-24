@@ -40,14 +40,7 @@ class Appointments_Google_Calendar_API_Manager {
 		}
 
 		include_once( 'class-app-gcal-logger.php' );
-		$this->client = new Google_Client();
-		$this->client->setApplicationName( "Appointments +" );
-		$this->client->setScopes( 'https://www.googleapis.com/auth/calendar' );
-		$this->client->setAccessType( 'offline' );
-		$this->client->setRedirectUri( 'urn:ietf:wg:oauth:2.0:oob' );
-		$this->client->setLogger( new Appointments_Google_Calendar_Logger( $this->client ) );
-
-		$this->service = new Google_Service_Calendar( $this->client );
+		$this->service = new Google_Service_Calendar( $this->get_client() );
 	}
 
 	/**
@@ -56,6 +49,15 @@ class Appointments_Google_Calendar_API_Manager {
 	 * @return Google_Client
 	 */
 	public function get_client() {
+		if ( ! $this->client ) {
+			$this->client = new Google_Client();
+			$this->client->setApplicationName( "Appointments +" );
+			$this->client->setScopes( 'https://www.googleapis.com/auth/calendar' );
+			$this->client->setAccessType( 'offline' );
+			$this->client->setRedirectUri( 'urn:ietf:wg:oauth:2.0:oob' );
+			$this->client->setLogger( new Appointments_Google_Calendar_Logger( $this->client ) );
+		}
+
 		return $this->client;
 	}
 
@@ -96,8 +98,9 @@ class Appointments_Google_Calendar_API_Manager {
 	 * @param string $client_secret
 	 */
 	public function set_client_id_and_secret( $client_id, $client_secret ) {
-		$this->client->setClientId( $client_id );
-		$this->client->setClientSecret( $client_secret );
+		$client = $this->get_client();
+		$client->setClientId( $client_id );
+		$client->setClientSecret( $client_secret );
 	}
 
 
@@ -109,8 +112,9 @@ class Appointments_Google_Calendar_API_Manager {
 	 * @return bool|WP_Error
 	 */
 	public function set_access_token( $token ) {
+		$client = $this->get_client();
 		try {
-			$this->client->setAccessToken( $token );
+			$client->setAccessToken( $token );
 		}
 		catch ( Exception $e ) {
 			return new WP_Error( 'app-gcal-set-token', $e->getMessage() );
@@ -126,7 +130,8 @@ class Appointments_Google_Calendar_API_Manager {
 	 * @return string JSON string
 	 */
 	public function get_access_token() {
-		return $this->client->getAccessToken();
+		$client = $this->get_client();
+		return $client->getAccessToken();
 	}
 
 
@@ -136,9 +141,10 @@ class Appointments_Google_Calendar_API_Manager {
 	 * @return bool|WP_Error
 	 */
 	public function revoke_token() {
-		if ( $this->client->getAccessToken() ) {
+		$client = $this->get_client();
+		if ( $client->getAccessToken() ) {
 			try {
-				$this->client->revokeToken();
+				$client->revokeToken();
 			}
 			catch ( Exception $e ) {
 				return new WP_Error( $e->getCode(), $e->getMessage() );
@@ -149,7 +155,8 @@ class Appointments_Google_Calendar_API_Manager {
 	}
 
 	public function is_token_expired() {
-		return $this->client->isAccessTokenExpired();
+		$client = $this->get_client();
+		return $client->isAccessTokenExpired();
 	}
 
 	/**
@@ -160,8 +167,9 @@ class Appointments_Google_Calendar_API_Manager {
 	 * @return bool|WP_Error
 	 */
 	public function authenticate( $access_code ) {
+		$client = $this->get_client();
 		try {
-			$this->client->authenticate( $access_code );
+			$client->authenticate( $access_code );
 		}
 		catch ( Exception $e ) {
 			return new WP_Error( $e->getCode(), $e->getMessage() );
@@ -185,7 +193,8 @@ class Appointments_Google_Calendar_API_Manager {
 	 * @return string|WP_Error
 	 */
 	public function create_auth_url() {
-		return $this->client->createAuthUrl();
+		$client = $this->get_client();
+		return $client->createAuthUrl();
 	}
 
 	/**

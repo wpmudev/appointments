@@ -288,7 +288,17 @@ class Appointments_Google_Calendar {
 					}
 
 					if ( ! in_array( $app->status, array( 'completed', 'pending', 'removed' ) ) ) {
-						appointments_update_appointment_status( $app->ID, 'removed' );
+						// So the event is not in our list but is it on GCal?
+						// Maybe the time has passed
+						$event = $this->get_event( $app->ID );
+						if ( $event ) {
+							// The event is in GCal but the time has passed
+							// Let's move it to completed
+							appointments_update_appointment_status( $app->ID, apply_filters( 'appointments_gcal_change_status_on_completed_event', 'completed' ) );
+						}
+						else {
+							appointments_update_appointment_status( $app->ID, 'removed' );
+						}
 					}
 				}
 				$this->add_appointments_hooks();
