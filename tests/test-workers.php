@@ -489,7 +489,6 @@ class App_Workers_Test extends App_UnitTestCase {
 
 		$this->assertEquals( 'A specialist', appointments_get_worker_name( 0 ) );
 		$this->assertEquals( 'A specialist', $appointments->get_worker_name( 0 ) );
-
 		// Log in the worker
 		wp_set_current_user( $user_id_1 );
 		$this->assertEquals( 'Our staff', appointments_get_worker_name( 0 ) );

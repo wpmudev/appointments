@@ -411,35 +411,10 @@ class Appointments_Admin_Settings_Page {
 
 	private function _save_working_hours() {
 		// Save Working Hours
-		global $wpdb;
 		$appointments = appointments();
 		$location = (int)$_POST['location'];
 		foreach ( array( 'closed', 'open' ) as $stat ) {
-			$query = $wpdb->prepare(
-				"SELECT COUNT(*) FROM {$appointments->wh_table} WHERE location=%d AND worker=%d AND status=%s",
-				$location, $appointments->worker, $stat
-			);
-
-			$count = $wpdb->get_var($query);
-
-			if ( $count > 0 ) {
-				$r = $wpdb->update( $appointments->wh_table,
-					array( 'hours'=>serialize($_POST[$stat]), 'status'=>$stat ),
-					array( 'location'=>$location, 'worker'=>$appointments->worker, 'status'=>$stat ),
-					array( '%s', '%s' ),
-					array( '%d', '%d', '%s' )
-				);
-			}
-			else {
-				$r = $wpdb->insert( $appointments->wh_table,
-					array( 'location'=>$location, 'worker'=>$appointments->worker, 'hours'=>serialize($_POST[$stat]), 'status'=>$stat ),
-					array( '%d', '%d', '%s', '%s' )
-				);
-
-			}
-
-			appointments_delete_work_breaks_cache( $location, $appointments->worker );
-			appointments_delete_timetables_cache();
+			appointments_update_worker_working_hours( $appointments->worker, $_POST[ $stat ], $stat, $location );
 		}
 	}
 
@@ -614,8 +589,6 @@ class Appointments_Admin_Settings_Page {
 		$options = maybe_serialize( appointments_get_options() );
 		$services = appointments_get_services();
 		$workers = appointments_get_workers();
-		
-
 	}
 
 }

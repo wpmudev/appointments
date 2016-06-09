@@ -13,9 +13,7 @@ require $_tests_dir . '/includes/bootstrap.php';
 
 
 class App_UnitTestCase extends WP_UnitTestCase {
-
-	public $factory_app;
-
+	
 	function setUp() {
 		parent::setUp();
 		/** @var WP_UnitTest_Factory_For_Appointment appointment */

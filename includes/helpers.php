@@ -1,14 +1,5 @@
 <?php
 
-function appointments_delete_workers_cache() {
-	wp_cache_delete( 'appointments_workers_orderby', 'appointments_workers' );
-	wp_cache_delete( 'appointments_workers_results', 'appointments_workers' );
-}
-
-function appointments_delete_work_breaks_cache( $l, $w ) {
-	$cache_key = 'appointments_work_breaks-' . $l . '-' . $w;
-	wp_cache_delete( $cache_key );
-}
 
 function appointments_delete_exceptions_cache( $l, $w ) {
 	$cache_key = 'exceptions-' . $l . '-' . $w;

@@ -28,11 +28,8 @@ class Appointments_Worker {
 
 	public function get_working_hours() {
 		global $wpdb;
-
 		$table = appointments_get_table( 'wh' );
-
 		return $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table WHERE worker = %d", $this->ID ) );
-
 	}
 
 	public function get_exceptions() {
@@ -234,14 +231,9 @@ function appointments_insert_worker( $args = array() ) {
 
 		// Insert the default working hours and holidays to the worker's working hours
 		foreach ( array( 'open', 'closed' ) as $stat ) {
-			$result_wh = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $wh_table WHERE location=0 AND service=0 AND status=%s", $stat ), ARRAY_A );
-			if ( $result_wh != null ) {
-				unset( $result_wh["ID"] );
-				$result_wh["worker"] = $args['ID'];
-				$wpdb->insert(
-					$wh_table,
-					$result_wh
-				);
+			$result_wh = appointments_get_worker_working_hours( $stat, 0, 0 );
+			if ( $result_wh ) {
+				appointments_update_worker_working_hours( $ID, $result_wh->hours, $stat );
 			}
 
 			$result_ex = $wpdb->get_row( $wpdb->prepare("SELECT * FROM $ex_table WHERE location=0 AND service=0 AND status=%s", $stat ), ARRAY_A );
@@ -698,14 +690,6 @@ function appointments_get_worker_services( $worker_id ) {
 	return array();
 }
 
-function appointments_delete_worker_working_hours( $worker_id ) {
-	global $wpdb;
-
-	$table = appointments_get_table( 'wh' );
-
-	$wpdb->query( $wpdb->prepare( "DELETE FROM $table WHERE worker = %d", $worker_id ) );
-}
-
 function appointments_delete_worker_exceptions( $worker_id ) {
 	global $wpdb;
 
@@ -732,12 +716,104 @@ function appointments_get_all_workers() {
 	return $workers;
 }
 
+function appointments_update_worker_working_hours( $worker_id, $wh, $status, $location = 0 ) {
+	global $wpdb;
+
+	$table = appointments_get_table( 'wh' );
+
+	$wh = maybe_serialize( $wh );
+
+	if ( appointments_get_worker_working_hours( $status, $worker_id, $location ) ) {
+		$result = $wpdb->update(
+			$table,
+			array(
+				'hours'  => $wh,
+				'status' => $status
+			),
+			array(
+				'location' => $location,
+				'worker'   => $worker_id,
+				'status'   => $status
+			),
+			array( '%s', '%s' ),
+			array( '%d', '%d', '%s' )
+		);
+	}
+	else {
+		$result = $wpdb->insert(
+			$table,
+			array(
+				'location' => $location,
+				'worker'   => $worker_id,
+				'hours'    => $wh,
+				'status'   => $status
+			),
+			array( '%d', '%d', '%s', '%s' )
+		);
+	}
+
+	appointments_delete_work_breaks_cache( $location, $worker_id );
+	appointments_delete_timetables_cache();
+	wp_cache_delete( 'app_working_hours' );
+
+	return $result;
+
+}
+
+function appointments_get_worker_working_hours( $status, $worker_id = 0, $location = 0 ) {
+	global $wpdb;
+
+	$table = appointments_get_table( 'wh' );
+
+	$cached = wp_cache_get( 'app_working_hours' );
+	$cache_key = 'working_hours_' . $location . '_' . $worker_id . '_' . $status;
+	if ( ! is_array( $cached ) ) {
+		$cached = array();
+	}
+
+	$work_breaks = isset( $cached[ $cache_key ] ) ? $cached[ $cache_key ] : false;
+
+	if ( false === $work_breaks ) {
+		$work_breaks = $wpdb->get_row( $wpdb->prepare("SELECT * FROM $table WHERE worker=%d AND location=%d AND status = %s", $worker_id, $location, $status ) );
+		if ( $work_breaks ) {
+			$work_breaks->hours = maybe_unserialize( $work_breaks->hours );
+		}
+		else {
+			$work_breaks = false;
+		}
+
+		$cached[ $cache_key ] = $work_breaks;
+		wp_cache_set( 'app_working_hours', $cached );
+	}
+
+	return $work_breaks;
+}
+
+function appointments_delete_worker_working_hours( $worker_id ) {
+	global $wpdb;
+
+	$table = appointments_get_table( 'wh' );
+
+	$wpdb->query( $wpdb->prepare( "DELETE FROM $table WHERE worker = %d", $worker_id ) );
+
+	wp_cache_delete( 'app_working_hours' );
+	appointments_delete_timetables_cache();
+	appointments_delete_work_breaks_cache( 0, $worker_id );
+
+}
+
 function appointments_delete_worker_cache( $worker_id = 0 ) {
 	wp_cache_delete( $worker_id, 'app_workers' );
 	wp_cache_delete( 'app_get_workers' );
 	wp_cache_delete( 'app_count_workers' );
 	wp_cache_delete( 'app_all_workers' );
 	wp_cache_delete( 'app_workers_by_service' );
+	wp_cache_delete( 'app_working_hours' );
 	//@ TODO: Delete capacity_ cache
 	appointments_delete_timetables_cache();
+}
+
+function appointments_delete_work_breaks_cache( $l, $w ) {
+	$cache_key = 'appointments_work_breaks-' . $l . '-' . $w;
+	wp_cache_delete( $cache_key );
 }

@@ -434,22 +434,17 @@ class Appointments {
 	 * @return object
 	 */
 	function get_work_break( $l, $w, $stat ) {
-		$work_break = null;
-		$cache_key = 'appointments_work_breaks-' . $l . '-' . $w;
-		$work_breaks = wp_cache_get( $cache_key );
-		if ( false === $work_breaks ) {
-			$work_breaks = $this->db->get_results( $this->db->prepare("SELECT * FROM {$this->wh_table} WHERE worker=%d AND location=%d", $w, $l) );
-			wp_cache_set( $cache_key, $work_breaks );
+		_deprecated_function( __FUNCTION__, '2.0', 'appointments_get_worker_working_hours()' );
+
+		$work_break = appointments_get_worker_working_hours( $stat, $w, $l );
+
+		if ( false === $work_break ) {
+			return null;
 		}
 
-		if ( $work_breaks ) {
-			foreach ( $work_breaks as $wb ) {
-				if ( $wb->status == $stat ) {
-					$work_break = $wb;
-					break;
-				}
-			}
-		}
+		// Backward compatibility
+		$work_break->hours = maybe_serialize( $work_break->hours );
+
 		return $work_break;
 	}
 
@@ -3665,11 +3660,14 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 
 		$min_secs = 60 * apply_filters( 'app_admin_min_time', $min_time );
 
-		$wb = $this->get_work_break( $this->location, $this->worker, $status );
-		if ( $wb )
-			$whours = maybe_unserialize( $wb->hours );
-		else
+		$wb = appointments_get_worker_working_hours( $status, $this->worker, $this->location );
+		if ( ! $wb ) {
 			$whours = array();
+		}
+		else {
+			$whours = $wb->hours;
+		}
+
 
 		$form = '';
 		$form .= '<table class="app-working_hours-workhour_form">';
