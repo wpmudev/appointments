@@ -70,29 +70,8 @@ class Appointments_Admin_User_Profile {
 				$result   = $result2 = false;
 				$location = 0;
 				foreach ( array( 'closed', 'open' ) as $stat ) {
-					$count = $wpdb->get_var( $wpdb->prepare(
-						"SELECT COUNT(*) FROM {$appointments->wh_table} WHERE location=%d AND worker=%d AND status=%s",
-						$location, $profileuser_id, $stat
-					) );
-
-					if ( $count > 0 ) {
-						$result = $wpdb->update( $appointments->wh_table,
-							array( 'hours' => serialize( $_POST[ $stat ] ), 'status' => $stat ),
-							array( 'location' => $location, 'worker' => $profileuser_id, 'status' => $stat ),
-							array( '%s', '%s' ),
-							array( '%d', '%d', '%s' )
-						);
-					} else {
-						$result = $wpdb->insert( $appointments->wh_table,
-							array(
-								'location' => $location,
-								'worker'   => $profileuser_id,
-								'hours'    => serialize( $_POST[ $stat ] ),
-								'status'   => $stat
-							),
-							array( '%d', '%d', '%s', '%s' )
-						);
-					}
+					appointments_update_worker_working_hours( $profileuser_id, $_POST[ $stat ], $stat, $location );
+					
 					// Save exceptions
 					$count2 = $wpdb->get_var( $wpdb->prepare(
 						"SELECT COUNT(*) FROM {$appointments->exceptions_table} WHERE location=%d AND worker=%d AND status=%s",

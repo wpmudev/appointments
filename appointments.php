@@ -1444,7 +1444,7 @@ class Appointments {
 		return true;
 	}
 
-	
+
 
 	/**
 	 * Find timestamp of first day of month for a given time
@@ -1658,14 +1658,18 @@ class Appointments {
 			$step = (!empty($service->duration) ? $service->duration : $min_step_time) * 60; // Timestamp increase interval to one cell ahead
 		}
 
-		if (!(defined('APP_USE_LEGACY_DURATION_CALCULUS') && APP_USE_LEGACY_DURATION_CALCULUS)) {
-			$start_result = $this->get_work_break( $this->location, $this->worker, 'open' );
-			if (!empty($start_result->hours)) $start_unpacked_days = maybe_unserialize($start_result->hours);
-		} else $start_unpacked_days = array();
-		if (defined('APP_BREAK_TIMES_PADDING_CALCULUS') && APP_BREAK_TIMES_PADDING_CALCULUS) {
-			$break_result = $this->get_work_break($this->location, $this->worker, 'closed');
-			if (!empty($break_result->hours)) $break_times = maybe_unserialize($break_result->hours);
-		} else $break_times = array();
+		if ( ! ( defined( 'APP_USE_LEGACY_DURATION_CALCULUS' ) && APP_USE_LEGACY_DURATION_CALCULUS ) ) {
+			$start_result = appointments_get_worker_working_hours( 'open', $this->worker, $this->location );
+			$start_unpacked_days = $start_result->hours;
+		} else {
+			$start_unpacked_days = array();
+		}
+		if ( defined( 'APP_BREAK_TIMES_PADDING_CALCULUS' ) && APP_BREAK_TIMES_PADDING_CALCULUS ) {
+			$break_result = appointments_get_worker_working_hours( 'closed', $this->worker, $this->location );
+			$break_times = $break_result->hours;
+		} else {
+			$break_times = array();
+		}
 
 		// Allow direct step increment manipulation,
 		// mainly for service duration based calculus start/stop times
@@ -1679,7 +1683,7 @@ class Appointments {
 			$style = '';
 		else
 			$style = ' style="display:none"';
-		
+
 		if ( isset( $this->timetables[ $timetable_key ] ) ) {
 			$data =  $this->timetables[ $timetable_key ];
 		}
@@ -2071,11 +2075,10 @@ class Appointments {
 	 * @return array (may be empty)
 	 */
 	function get_working_days( $worker=0, $location=0 ) {
-		global $wpdb;
 		$working_days = array();
-		$result = $this->get_work_break( $location, $worker, 'open' );
+		$result = appointments_get_worker_working_hours( 'open', $worker,  $location );
 		if ( $result !== null ) {
-			$days = maybe_unserialize( $result->hours );
+			$days = $result->hours;
 			if ( is_array( $days ) ) {
 				foreach ( $days as $day_name=>$day ) {
 					if ( isset( $day["active"] ) && 'yes' == $day["active"] ) {
@@ -2136,9 +2139,13 @@ class Appointments {
 		if (!$days) {
 			// Preprocess and cache workhours
 			// Look where our working hour ends
-			$result_days = $this->get_work_break($this->location, $w, 'closed');
-			if ($result_days && is_object($result_days) && !empty($result_days->hours)) $days = maybe_unserialize($result_days->hours);
-			if ($days) wp_cache_set('app-break_times-for-' . $w, $days);
+			$result_days = appointments_get_worker_working_hours( 'closed', $w, $this->location );
+			if ( $result_days && is_object( $result_days ) && ! empty( $result_days->hours ) ) {
+				$days = $result_days->hours;
+			}
+			if ( $days ) {
+				wp_cache_set( 'app-break_times-for-' . $w, $days );
+			}
 		}
 		if (!is_array($days) || empty($days)) return false;
 
@@ -2253,9 +2260,13 @@ class Appointments {
 			if (!$days) {
 				// Preprocess and cache workhours
 				// Look where our working hour ends
-				$result_days = $this->get_work_break($this->location, $this->worker, 'open');
-				if ($result_days && is_object($result_days) && !empty($result_days->hours)) $days = maybe_unserialize($result_days->hours);
-				if ($days) wp_cache_set('app-open_times-for-' . $this->worker, $days);
+				$result_days = appointments_get_worker_working_hours( 'open', $this->worker, $this->location );
+				if ( $result_days && is_object( $result_days ) && ! empty( $result_days->hours ) ) {
+					$days = $result_days->hours;
+				}
+				if ( $days ) {
+					wp_cache_set( 'app-open_times-for-' . $this->worker, $days );
+				}
 			}
 			if (!is_array($days) || empty($days)) return true;
 
@@ -2329,9 +2340,13 @@ class Appointments {
 			if (!$days) {
 				// Preprocess and cache workhours
 				// Look where our working hour ends
-				$result_days = $this->get_work_break($this->location, $worker->ID, 'open');
-				if ($result_days && is_object($result_days) && !empty($result_days->hours)) $days = maybe_unserialize($result_days->hours);
-				if ($days) wp_cache_set('app-open_times-for-' . $worker->ID, $days);
+				$result_days = appointments_get_worker_working_hours( 'open', $worker->ID, $this->location );
+				if ( $result_days && is_object( $result_days ) && ! empty( $result_days->hours ) ) {
+					$days = $result_days->hours;
+				}
+				if ( $days ) {
+					wp_cache_set( 'app-open_times-for-' . $worker->ID, $days );
+				}
 			}
 			if (!is_array($days) || empty($days)) continue;
 
@@ -2490,9 +2505,10 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 	 */
 	function min_max_wh( $worker=0, $location=0 ) {
 		$this->get_lsw();
-		$result = $this->get_work_break( $this->location, $this->worker, 'open' );
+
+		$result = appointments_get_worker_working_hours( 'open', $this->worker, $this->location );
 		if ( $result !== null ) {
-			$days = maybe_unserialize( $result->hours );
+			$days = $result->hours;
 			$days = array_filter($days);
 			if ( is_array( $days ) ) {
 				$min = 24; $max = 0;

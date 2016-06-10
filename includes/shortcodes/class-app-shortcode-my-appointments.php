@@ -149,6 +149,9 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 			if ( ! $args['provider_id'] ) {
 				$query_args['worker'] = $user_id;
 			}
+			else {
+				$query_args['worker'] = $args['provider_id'];
+			}
 
 			// Special case: If this is a single provider website, show staff appointments in his schedule too
 			$workers = appointments_get_workers();
@@ -157,7 +160,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 			}
 
 			if ( $statuses ) {
-				$args['status'] = $statuses;
+				$query_args['status'] = $statuses;
 			}
 
 			if ( $args['order_by'] ) {

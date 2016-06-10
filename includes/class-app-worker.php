@@ -781,7 +781,7 @@ function appointments_get_worker_working_hours( $status, $worker_id = 0, $locati
 		else {
 			$work_breaks = false;
 		}
-
+		
 		$cached[ $cache_key ] = $work_breaks;
 		wp_cache_set( 'app_working_hours', $cached );
 	}

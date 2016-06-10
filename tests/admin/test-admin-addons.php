@@ -39,7 +39,7 @@ class App_Admin_Addons_Test extends App_UnitTestCase {
 		$this->assertContains( 'app-admin-export_date_range', $appointments->addons_loader->get_active_addons() );
 		$this->assertContains( 'app-admin-admin_permissions', $appointments->addons_loader->get_active_addons() );
 
-
-
+		global $current_screen;
+		$current_screen = null;
 	}
 }
