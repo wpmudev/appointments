@@ -72,7 +72,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 			$user_id = absint( $args['client_id'] );
 		}
 		else {
-			$user_id = $current_user->ID;
+			$user_id = get_current_user_id();
 		}
 
 		$statuses = explode( ',', $args['status'] );
@@ -93,8 +93,21 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		}
 		$stat = rtrim( $stat, "OR " );
 
+		if ( $args['order_by'] ) {
+			// Backward compatibility
+			$orderby_list = explode( ' ', $args['order_by'] );
+			if ( is_array( $orderby_list ) && count( $orderby_list ) == 2 ) {
+				$query_args['orderby'] = $orderby_list[0];
+				$query_args['order'] = $orderby_list[1];
+			}
+			else {
+				$query_args['orderby'] = $args['order_by'];
+			}
+		}
+
 		// If this is a client shortcode
 		if ( !$args['provider'] ) {
+
 			$apps = array();
 			if ( $user_id ) {
 				$apps = wp_list_pluck( appointments_get_user_appointments( $user_id ), 'ID' );
@@ -107,38 +120,50 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 				return '';
 			}
 
+			$query_args = array(
+				'status' => $statuses
+			);
+
 			$provider_or_client = __('Provider', 'appointments' );
 
-			$q = '';
-			if ($args['strict']) {
+			if ( $args['strict'] ) {
 				// Strict matching
-				if (is_user_logged_in()) {
-					$q = "user={$user_id}"; // If the user is logged in, show just those apps
+				if ( is_user_logged_in() ) {
+					$query_args['user'] = $user_id;
 				} else {
 					// Otherwise, deal with the cookie-cached ones
-					$apps = array_values(array_filter(array_map('intval', $apps)));
-					if (!empty($apps)) $q = "ID IN(" . join(',', $apps) . ")";
+					$apps = array_values( array_filter( array_map( 'intval', $apps ) ) );
+					if ( ! empty( $apps ) ) {
+						$query_args['app_id'] = $apps;
+					}
 				}
+
+				$results = appointments_get_appointments( $query_args );
 			} else {
 				// Non-strict matching
-				foreach ( $apps as $app_id ) {
-					if ( is_numeric( $app_id ) )
-						$q .= " ID=".$app_id." OR ";
-				}
-				$q = rtrim( $q, "OR " );
-
+				$filter_by_app_id = false;
 				// But he may as well has appointments added manually (requires being registered user)
-				if ( is_user_logged_in() ) {
-					$q .= " OR user=".$user_id;
-					$q = ltrim( $q, " OR" );
+				$filter_by_user = is_user_logged_in();
+
+				$apps = array_map( 'absint', $apps );
+
+				if ( ( $filter_by_app_id || $filter_by_user ) && $query_args['status'] ) {
+					$r = appointments_get_appointments( $query_args );
+					$results = array();
+					foreach ( $r as $app ) {
+						if (
+							( $filter_by_app_id && in_array( $app->ID, $apps ) )
+							|| ( $filter_by_user && $app->user == $user_id )
+						) {
+							$results[] = $app;
+						}
+					}
+				}
+				else {
+					$results = false;
 				}
 			}
-			if ( $q && $stat ) {
-				$results = $wpdb->get_results(
-					"SELECT * FROM " . $appointments->app_table .
-					" WHERE (".$q.") AND (".$stat.") ORDER BY " . $appointments->sanitize_order_by( $args['order_by'] )
-				);
-			} else $results = false;
+
 		}
 		else {
 			$provider_or_client = __('Client', 'appointments' );
@@ -157,22 +182,6 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 			$workers = appointments_get_workers();
 			if ( App_Roles::current_user_can( 'manage_options', App_Roles::CTX_STAFF ) && ( ( $workers && count( $workers ) == 1 ) || ! $workers ) ) {
 				$query_args['worker'] = false;
-			}
-
-			if ( $statuses ) {
-				$query_args['status'] = $statuses;
-			}
-
-			if ( $args['order_by'] ) {
-				// Backward compatibility
-				$orderby_list = explode( ' ', $args['order_by'] );
-				if ( is_array( $orderby_list ) && count( $orderby_list ) == 2 ) {
-					$query_args['orderby'] = $orderby_list[0];
-					$query_args['order'] = $orderby_list[1];
-				}
-				else {
-					$query_args['orderby'] = $args['order_by'];
-				}
 			}
 
 			$results = appointments_get_appointments( $query_args );

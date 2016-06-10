@@ -84,6 +84,10 @@ class Appointments_Worker {
 
 function appointments_get_worker( $worker_id ) {
 	global $wpdb;
+	
+	if ( ! $worker_id ) {
+		return false;
+	}
 
 	$table = appointments_get_table( 'workers' );
 
@@ -97,8 +101,7 @@ function appointments_get_worker( $worker_id ) {
 			)
 		);
 
-		if ( $worker )
-			wp_cache_add( $worker->ID, $worker, 'app_workers' );
+		wp_cache_add( $worker->ID, $worker, 'app_workers' );
 	}
 
 
@@ -781,7 +784,7 @@ function appointments_get_worker_working_hours( $status, $worker_id = 0, $locati
 		else {
 			$work_breaks = false;
 		}
-		
+
 		$cached[ $cache_key ] = $work_breaks;
 		wp_cache_set( 'app_working_hours', $cached );
 	}
