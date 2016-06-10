@@ -550,26 +550,25 @@ class App_Shortcode_AllAppointments extends App_Shortcode {
 	}
 
 	public function process_shortcode ($args=array(), $content='') {
-		global $wpdb, $appointments;
+		global $appointments;
 		extract(wp_parse_args($args, $this->_defaults_to_args()));
 
 		$statuses = explode( ',', $status );
 
-		if ( !is_array( $statuses ) || empty( $statuses ) )
-			return;
-
-		if ( !trim( $order_by ) )
-			$order_by = 'start';
-
-		$stat = '';
-		foreach ( $statuses as $s ) {
-			// Allow only defined stats
-			if ( array_key_exists( trim( $s ), App_Template::get_status_names() ) )
-				$stat .= " status='". trim( $s ) ."' OR ";
+		if ( ! is_array( $statuses ) || empty( $statuses ) ) {
+			return '';
 		}
-		$stat = rtrim( $stat, "OR " );
 
-		$results = $wpdb->get_results( "SELECT * FROM " . $appointments->app_table . " WHERE (".$stat.") ORDER BY ".$appointments->sanitize_order_by( $order_by )." " );
+		if ( ! trim( $order_by ) ) {
+			$order_by = 'start';
+		}
+
+
+		$query_args = array(
+			'status' => $statuses,
+			'orderby' => $order_by
+		);
+		$results = appointments_get_appointments( $query_args );
 
 		$ret  = '';
 		$ret .= '<div class="appointments-all-appointments">';
