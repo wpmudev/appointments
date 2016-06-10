@@ -126,14 +126,30 @@ class App_Schedule_SharedResources {
 	 * @return int
 	 */
 	private function _get_booked_appointments_for_period ($service_ids, $period) {
-		$start = date('Y-m-d H:i:s', $period->get_start());
-		$end = date('Y-m-d H:i:s', $period->get_end());
-		$services = join(',', array_filter(array_map('intval', $service_ids)));
+		$start    = date( 'Y-m-d H:i:s', $period->get_start() );
+		$end      = date( 'Y-m-d H:i:s', $period->get_end() );
+		$services = join( ',', array_filter( array_map( 'intval', $service_ids ) ) );
 		
-		$sql = "SELECT COUNT(*) FROM {$this->_core->app_table} WHERE service IN ({$services}) AND end > '{$start}' AND start < '{$end}' AND status IN ('paid', 'confirmed')";
-		$cnt = (int)$this->_core->db->get_var($sql);
-
-		return $cnt;
+		$args = array(
+			'service' => $services,
+			'date_query' => array(
+				array(
+					'field' => 'end',
+					'compare' => '>',
+					'value' => $start
+				),
+				array(
+					'field' => 'start',
+					'compare' => '<',
+					'value' => $end
+				),
+				'condition' => 'AND'
+			),
+			'status' => array( 'paid', 'confirmed' ),
+			'count' => true
+		);
+		
+		return appointments_get_appointments( $args );
 	}
 
 }

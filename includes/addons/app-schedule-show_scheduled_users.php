@@ -21,9 +21,8 @@ class App_Schedule_ShowUsers {
 	}
 
 	private function _add_hooks () {
-		add_action('plugins_loaded', array($this, 'initialize'));
-
-		add_filter('app-schedule_cell-title', array($this, 'process_cell_title'), 10, 5);
+		add_action( 'plugins_loaded', array( $this, 'initialize' ) );
+		add_filter( 'app-schedule_cell-title', array( $this, 'process_cell_title' ), 10, 5 );
 	}
 
 	public function initialize () {
