@@ -300,24 +300,32 @@ EO_ADMIN_JS;
 		return $cols;
 	}
 
-	public function inject_additional_properties ($app) {
-		if (empty($app['ID'])) return $app;
+	public function inject_additional_properties( $app ) {
+		if ( empty( $app->ID ) ) {
+			return $app;
+		}
 
-		$fields = !empty($this->_data['additional_fields']) ? $this->_data['additional_fields'] : array();
-		if (empty($fields)) return $app;
+		$fields = ! empty( $this->_data['additional_fields'] ) ? $this->_data['additional_fields'] : array();
+		if ( empty( $fields ) ) {
+			return $app;
+		}
 
-		$app_meta = $this->_get_appointment_meta($app['ID']);
-		if (empty($app_meta)) return $app;
+		$app_meta = $this->_get_appointment_meta( $app->ID );
+		if ( empty( $app_meta ) ) {
+			return $app;
+		}
 
-		foreach ($fields as $field) {
-			$label = esc_html($field['label']);
-			$name = $this->_to_clean_name($label);
-			$key = strtolower('field_' .
-				preg_replace('/[^_a-z]/i', '', $label) .
-				preg_replace('/[^0-9]/', '', $label)
+		foreach ( $fields as $field ) {
+			$label = esc_html( $field['label'] );
+			$name  = $this->_to_clean_name( $label );
+			$key   = strtolower( 'field_' .
+			                     preg_replace( '/[^_a-z]/i', '', $label ) .
+			                     preg_replace( '/[^0-9]/', '', $label )
 			);
-			$value = !empty($app_meta[$name]) ? esc_html($app_meta[$name]) : '';
-			if (empty($app[$key])) $app[$key] = $value;
+			$value = ! empty( $app_meta[ $name ] ) ? esc_html( $app_meta[ $name ] ) : '';
+			if ( empty( $app->$key ) ) {
+				$app->$key = $value;
+			}
 		}
 
 		return $app;

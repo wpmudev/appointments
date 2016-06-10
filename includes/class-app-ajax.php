@@ -974,35 +974,41 @@ class Appointments_AJAX {
 	function export(){
 		global $appointments;
 
-		$sql = false;
-		$type = !empty($_POST['export_type']) ? $_POST['export_type'] : 'all';
-		if ('selected' == $type && !empty($_POST['app'])) {
+		$type = ! empty( $_POST['export_type'] ) ? $_POST['export_type'] : 'all';
+		$apps = array();
+		if ( 'selected' == $type && ! empty( $_POST['app'] ) ) {
 			// selected appointments
-			$ids = array_filter(array_map('intval', $_POST['app']));
-			if ($ids) $sql = "SELECT * FROM {$appointments->app_table} WHERE ID IN(" . join(',', $ids) . ") ORDER BY ID";
-		} else if ('type' == $type) {
-			$status = !empty($_POST['status']) ? $_POST['status'] : false;
-			if ('active' === $status) $sql = $appointments->db->prepare("SELECT * FROM {$appointments->app_table} WHERE status IN('confirmed','paid') ORDER BY ID", $status);
-			else if ($status) $sql = $appointments->db->prepare("SELECT * FROM {$appointments->app_table} WHERE status=%s ORDER BY ID", $status);
-		} else if ('all' == $type) {
-			$sql = "SELECT * FROM {$appointments->app_table} ORDER BY ID";
+			if ( $_POST['app'] ) {
+				$apps = appointments_get_appointments( array( 'app_id' => array_map( 'absint', $_POST['app'] ) ) );
+			}
+		} else if ( 'type' == $type ) {
+			$status = ! empty( $_POST['status'] ) ? $_POST['status'] : false;
+			if ( 'active' === $status ) {
+				$apps = appointments_get_appointments( array( 'status' => array( 'confirmed', 'paid' ) ) );
+			} else if ( $status ) {
+				$apps = appointments_get_appointments( array( 'status' => $status ) );
+			}
+		} else if ( 'all' == $type ) {
+			$apps = appointments_get_appointments();
 		}
-		if (!$sql) wp_die(__('Nothing to download!','appointments'));
 
-		$apps = $appointments->db->get_results($sql, ARRAY_A);
-
-		if ( !is_array( $apps ) || empty( $apps ) ) wp_die(__('Nothing to download!','appointments'));
+		if ( empty( $apps ) || ! is_array( $apps ) ) {
+			die( __( 'Nothing to download!', 'appointments' ) );
+		}
 
 		$file = fopen('php://temp/maxmemory:'. (12*1024*1024), 'r+');
+
 		// Add field names to the file
-		$columns = array_map('strtolower', apply_filters('app-export-columns', $appointments->db->get_col_info()));
+		$columns = array_map( 'strtolower', apply_filters( 'app-export-columns', $appointments->db->get_col_info() ) );
 		fputcsv( $file,  $columns );
 
 		foreach ( $apps as $app ) {
 			$raw = $app;
-			array_walk( $app, array(&$this, 'export_helper') );
-			$app = apply_filters('app-export-appointment', $app, $raw);
-			if (!empty($app)) fputcsv( $file, $app );
+			array_walk( $app, array( &$this, 'export_helper' ) );
+			$app = apply_filters( 'app-export-appointment', $app, $raw );
+			if ( ! empty( $app ) ) {
+				fputcsv( $file, (array)$app );
+			}
 		}
 
 		$filename = "appointments_".date('F')."_".date('d')."_".date('Y').".csv";
