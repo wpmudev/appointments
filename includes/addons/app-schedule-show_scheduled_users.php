@@ -52,30 +52,38 @@ class App_Schedule_ShowUsers {
 		return $ret;
 	}
 
-	private function _get_appointments_for_scheduled_interval ($schedule_key) {
-		$data = explode('x', $schedule_key);
-		if (count($data) != 2) {
-			$interval_start = current_time('timestamp');
-			$interval_end = strtotime('next month', $interval_start);
+	private function _get_appointments_for_scheduled_interval( $schedule_key ) {
+		$data = explode( 'x', $schedule_key );
+		if ( count( $data ) != 2 ) {
+			$interval_start = current_time( 'timestamp' );
+			$interval_end   = strtotime( 'next month', $interval_start );
 		} else {
 			$interval_start = $data[0];
-			$interval_end = $data[1];
+			$interval_end   = $data[1];
 		}
 
-		global $appointments, $wpdb;
-		$table = $appointments->app_table;
-		$where = "AND (status='pending' OR status='paid' OR status='confirmed' OR status='reserved')";
+		$appointments = appointments();
+		$args         = array(
+			'status' => array( 'pending', 'paid', 'confirmed', 'reserved' )
+		);
 
-		if ($appointments->service) {
-			$where .= " AND service={$appointments->service}";
+		if ( $appointments->service ) {
+			$args['service'] = $appointments->service;
 		}
-		if ($appointments->worker) {
-			$where .= " AND worker={$appointments->worker}";
+		if ( $appointments->worker ) {
+			$args['worker'] = $appointments->service;
 		}
 
-		$sql = "SELECT name,user,start,end FROM {$table} WHERE UNIX_TIMESTAMP(start)>'{$interval_start}' AND UNIX_TIMESTAMP(end)<'{$interval_end}' {$where}";
-		$res = $wpdb->get_results($sql);
-		wp_cache_set('app-show_users-' . $schedule_key, $res);
+		$apps = appointments_get_appointments( $args );
+		$res  = array();
+		foreach ( $apps as $app ) {
+			if ( strtotime( $app->start ) > $interval_start && strtotime( $app->end ) < $interval_end ) {
+				$res[] = $app;
+			}
+		}
+
+		wp_cache_set( 'app-show_users-' . $schedule_key, $res );
+
 		return $res;
 	}
 
