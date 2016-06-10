@@ -27,5 +27,6 @@ class App_Activate_Test extends App_UnitTestCase {
 		}
 
 	}
+
 }
 

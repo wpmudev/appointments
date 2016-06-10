@@ -58,3 +58,4 @@ function appointments_clear_cache() {
 	wp_cache_flush();
 	appointments_delete_timetables_cache();
 }
+

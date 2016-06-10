@@ -105,12 +105,6 @@ class App_Installer {
 		)
 		DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 
-		// TODO: Make this WP time format free
-		$sql21 = "INSERT INTO {$wpdb->prefix}app_working_hours (ID, location, worker,  `status`, hours, note) VALUES
-		(NULL, 0, 0, 'open', 'a:7:{s:6:\"Sunday\";a:3:{s:6:\"active\";s:2:\"no\";s:5:\"start\";s:7:\"8:00 am\";s:3:\"end\";s:7:\"1:00 pm\";}s:6:\"Monday\";a:3:{s:6:\"active\";s:3:\"yes\";s:5:\"start\";s:7:\"8:00 am\";s:3:\"end\";s:7:\"5:00 pm\";}s:7:\"Tuesday\";a:3:{s:6:\"active\";s:3:\"yes\";s:5:\"start\";s:7:\"8:00 am\";s:3:\"end\";s:7:\"5:00 pm\";}s:9:\"Wednesday\";a:3:{s:6:\"active\";s:3:\"yes\";s:5:\"start\";s:7:\"8:00 am\";s:3:\"end\";s:7:\"5:00 pm\";}s:8:\"Thursday\";a:3:{s:6:\"active\";s:3:\"yes\";s:5:\"start\";s:7:\"8:00 am\";s:3:\"end\";s:7:\"5:00 pm\";}s:6:\"Friday\";a:3:{s:6:\"active\";s:3:\"yes\";s:5:\"start\";s:7:\"8:00 am\";s:3:\"end\";s:7:\"5:00 pm\";}s:8:\"Saturday\";a:3:{s:6:\"active\";s:2:\"no\";s:5:\"start\";s:7:\"8:00 am\";s:3:\"end\";s:7:\"1:00 pm\";}}', NULL),
-		(NULL, 0, 0, 'closed', 'a:7:{s:6:\"Sunday\";a:3:{s:6:\"active\";s:2:\"no\";s:5:\"start\";s:8:\"12:00 pm\";s:3:\"end\";s:7:\"1:00 pm\";}s:6:\"Monday\";a:3:{s:6:\"active\";s:2:\"no\";s:5:\"start\";s:8:\"12:00 pm\";s:3:\"end\";s:7:\"1:00 pm\";}s:7:\"Tuesday\";a:3:{s:6:\"active\";s:2:\"no\";s:5:\"start\";s:8:\"12:00 pm\";s:3:\"end\";s:7:\"1:00 pm\";}s:9:\"Wednesday\";a:3:{s:6:\"active\";s:2:\"no\";s:5:\"start\";s:8:\"12:00 pm\";s:3:\"end\";s:7:\"1:00 pm\";}s:8:\"Thursday\";a:3:{s:6:\"active\";s:2:\"no\";s:5:\"start\";s:8:\"12:00 pm\";s:3:\"end\";s:7:\"1:00 pm\";}s:6:\"Friday\";a:3:{s:6:\"active\";s:2:\"no\";s:5:\"start\";s:8:\"12:00 pm\";s:3:\"end\";s:7:\"1:00 pm\";}s:8:\"Saturday\";a:3:{s:6:\"active\";s:2:\"no\";s:5:\"start\";s:8:\"12:00 pm\";s:3:\"end\";s:7:\"1:00 pm\";}}', NULL);	 	 	 	 	   		 	 			
-		";
-
 		$sql3 = "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}app_exceptions` (
 		`ID` bigint(20) unsigned NOT NULL auto_increment,
 		`location` bigint(20) NOT NULL default '0',
@@ -165,9 +159,10 @@ class App_Installer {
 		$wpdb->query($sql1);
 		// Add default working hours
 		$wpdb->query($sql2);
-		$count = $wpdb->get_var( "SELECT COUNT(ID) FROM " . $wpdb->prefix . "app_working_hours " );
-		if ( !$count )
-			$wpdb->query($sql21);
+
+		// TODO: Make this WP time format free
+		$this->insert_default_working_hours();
+
 		$wpdb->query($sql3);
 		// Add default service
 		$wpdb->query($sql4);
@@ -224,6 +219,115 @@ class App_Installer {
 
 		$this->_upgrade_to_124();
 
+	}
+
+	private function insert_default_working_hours() {
+		global $wpdb;
+
+		$wh = array(
+			'open'   => array(
+				'Sunday'    =>
+					array(
+						'active' => 'no',
+						'start'  => '8:00 am',
+						'end'    => '1:00 pm',
+					),
+				'Monday'    =>
+					array(
+						'active' => 'yes',
+						'start'  => '8:00 am',
+						'end'    => '5:00 pm',
+					),
+				'Tuesday'   =>
+					array(
+						'active' => 'yes',
+						'start'  => '8:00 am',
+						'end'    => '5:00 pm',
+					),
+				'Wednesday' =>
+					array(
+						'active' => 'yes',
+						'start'  => '8:00 am',
+						'end'    => '5:00 pm',
+					),
+				'Thursday'  =>
+					array(
+						'active' => 'yes',
+						'start'  => '8:00 am',
+						'end'    => '5:00 pm',
+					),
+				'Friday'    =>
+					array(
+						'active' => 'yes',
+						'start'  => '8:00 am',
+						'end'    => '5:00 pm',
+					),
+				'Saturday'  =>
+					array(
+						'active' => 'no',
+						'start'  => '8:00 am',
+						'end'    => '1:00 pm',
+					),
+			),
+			'closed' => array(
+				'Sunday'    =>
+					array(
+						'active' => 'no',
+						'start'  => '12:00 pm',
+						'end'    => '1:00 pm',
+					),
+				'Monday'    =>
+					array(
+						'active' => 'no',
+						'start'  => '12:00 pm',
+						'end'    => '1:00 pm',
+					),
+				'Tuesday'   =>
+					array(
+						'active' => 'no',
+						'start'  => '12:00 pm',
+						'end'    => '1:00 pm',
+					),
+				'Wednesday' =>
+					array(
+						'active' => 'no',
+						'start'  => '12:00 pm',
+						'end'    => '1:00 pm',
+					),
+				'Thursday'  =>
+					array(
+						'active' => 'no',
+						'start'  => '12:00 pm',
+						'end'    => '1:00 pm',
+					),
+				'Friday'    =>
+					array(
+						'active' => 'no',
+						'start'  => '12:00 pm',
+						'end'    => '1:00 pm',
+					),
+				'Saturday'  =>
+					array(
+						'active' => 'no',
+						'start'  => '12:00 pm',
+						'end'    => '1:00 pm',
+					),
+			)
+		);
+
+		$table = $wpdb->prefix . "app_working_hours";
+		if ( ! $wpdb->get_var( "SELECT COUNT(ID) FROM $table" ) ) {
+			foreach ( $wh as $status => $hours ) {
+				$wpdb->insert(
+					$table,
+					array(
+						'status' => $status,
+						'hours'  => maybe_serialize( $hours )
+					),
+					array( '%s', '%s' )
+				);
+			}
+		}
 	}
 
 	/**

@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 /**
  * Class App_Appointments_Test

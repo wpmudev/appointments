@@ -8,6 +8,14 @@
  */
 class App_Working_Hours_Test extends App_UnitTestCase {
 
+	function test_default_working_hours() {
+		$open = appointments_get_worker_working_hours( 'open', 0, 0 );
+		$closed = appointments_get_worker_working_hours( 'closed', 0, 0 );
+
+		$this->assertNotEmpty( $open );
+		$this->assertNotEmpty( $closed );
+	}
+
 	function test_update_worker_working_hours() {
 		$worker_id = $this->factory->worker->create_object( $this->factory->worker->generate_args() );
 		$result = appointments_update_worker_working_hours( $worker_id, $this->get_open_wh(), 'open' );
