@@ -66,7 +66,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 	public function process_shortcode ($args=array(), $content='') {
 		$args = wp_parse_args($args, $this->_defaults_to_args());
 
-		global $wpdb, $current_user, $bp, $appointments;
+		global $bp, $appointments;
 
 		if ( isset( $args['client_id'] ) && get_userdata( $args['client_id'] ) ) {
 			$user_id = absint( $args['client_id'] );
@@ -84,14 +84,6 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		if ( ! trim( $args['order_by'] ) ) {
 			$args['order_by'] = 'ID';
 		}
-
-		$stat = '';
-		foreach ( $statuses as $s ) {
-			// Allow only defined stats
-			if ( array_key_exists( trim( $s ), App_Template::get_status_names() ) )
-				$stat .= " status='".trim( $s )."' OR ";
-		}
-		$stat = rtrim( $stat, "OR " );
 
 		if ( $args['order_by'] ) {
 			// Backward compatibility
@@ -168,7 +160,9 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		else {
 			$provider_or_client = __('Client', 'appointments' );
 
-			$query_args = array();
+			$query_args = array(
+				'status' => $statuses
+			);
 
 			// If no id is given, get current user
 			if ( ! $args['provider_id'] ) {

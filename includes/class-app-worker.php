@@ -84,7 +84,7 @@ class Appointments_Worker {
 
 function appointments_get_worker( $worker_id ) {
 	global $wpdb;
-	
+
 	if ( ! $worker_id ) {
 		return false;
 	}
@@ -101,7 +101,10 @@ function appointments_get_worker( $worker_id ) {
 			)
 		);
 
-		wp_cache_add( $worker->ID, $worker, 'app_workers' );
+		if ( $worker ) {
+			wp_cache_add( $worker->ID, $worker, 'app_workers' );
+		}
+
 	}
 
 
