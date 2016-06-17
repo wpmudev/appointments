@@ -281,10 +281,10 @@ jQuery(document).ready(function($){
 		<p> <?php _e('Please note that Appointments+ is designed for one-to-one appointments, that is, one service provider serving a single client at a time and to manage available workforce. Capacity field is for limiting the workforce, not for increasing it. You have two alternatives to achieve this: a) Use dummy service providers b) Add these codes in functions.php and modify as required:', 'appointments');?></p>
 
 	<pre>
-	function increase_capacity( $capacity, $service_id, $worker_id ) {
+	function increase_capacity( $capacity, $service_id ) {
 		return 10;
 	}
-	add_filter( 'app_get_capacity', 'increase_capacity', 10, 3 );
+	add_filter( 'app_get_capacity', 'increase_capacity', 10, 2 );
 	</pre>
 
 		<?php _e('This filter will NOT work if there is a single provider giving the selected service. Please also note that this is a kind of "hack" and when you have more than one service provider, this function may not work as expected in regards to working hours, as "virtual" providers will not be bound to working hours of existing providers. ', 'appointments');?>

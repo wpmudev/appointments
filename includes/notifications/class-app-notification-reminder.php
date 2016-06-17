@@ -48,10 +48,11 @@ class Appointments_Notifications_Reminder extends Appointments_Notification {
 		foreach ( $hours as $hour ) {
 			$results = appointments_get_unsent_appointments( $hour, 'user' );
 			foreach ( $results as $r ) {
-				/** @var Appointments_Appointment $customer_email */
+				/** @var Appointments_Appointment $r */
 				$customer_email = $r->get_customer_email();
 				if ( ! is_email( $customer_email ) ) {
 					$this->manager->log( sprintf( __( 'Unable to send client reminder about the appointment ID:%s.', 'appointments' ), $r->ID ) );
+					appointments_update_appointment( $r->ID, array( 'sent' => rtrim( $r->sent, ":" ) . ":" . trim( $hour ) . ":" ) );
 					continue;
 				}
 
@@ -60,6 +61,7 @@ class Appointments_Notifications_Reminder extends Appointments_Notification {
 					$this->manager->log( sprintf( __( 'Reminder message sent to %s for appointment ID:%s', 'appointments' ), $customer_email, $r->ID ) );
 					$sent[] = $r->ID;
 				}
+
 				appointments_update_appointment( $r->ID, array( 'sent' => rtrim( $r->sent, ":" ) . ":" . trim( $hour ) . ":" ) );
 			}
 
@@ -99,6 +101,7 @@ class Appointments_Notifications_Reminder extends Appointments_Notification {
 
 				if ( ! is_email( $worker_email ) ) {
 					$this->manager->log( sprintf( __( 'Unable to send worker reminder about the appointment ID:%s.', 'appointments' ), $r->ID ) );
+					appointments_update_appointment( $r->ID, array( 'sent_worker' => rtrim( $r->sent_worker, ":" ) . ":" . trim( $hour ) . ":" ) );
 					continue;
 				}
 

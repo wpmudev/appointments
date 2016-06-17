@@ -478,7 +478,7 @@ function appointments_get_service_capacity( $service_id ) {
 		wp_cache_set( 'capacity_'. $service_id, $capacity );
 	}
 
-	return apply_filters( 'app_get_capacity', $capacity, $service_id );
+	return apply_filters( 'app_get_capacity', $capacity, $service_id, null );
 }
 
 
