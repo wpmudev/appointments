@@ -45,6 +45,9 @@ class Appointments_Notifications_Reminder extends Appointments_Notification {
 
 		$sent = array();
 
+		// We only want to send one reminder at once
+		$sent_once = false;
+
 		foreach ( $hours as $hour ) {
 			$results = appointments_get_unsent_appointments( $hour, 'user' );
 			foreach ( $results as $r ) {
@@ -57,9 +60,12 @@ class Appointments_Notifications_Reminder extends Appointments_Notification {
 				}
 
 				if ( ! in_array( $r->ID, $sent ) ) {
-					$this->customer( $r->ID, $customer_email );
+					if ( ! $sent_once ) {
+						$this->customer( $r->ID, $customer_email );
+					}
 					$this->manager->log( sprintf( __( 'Reminder message sent to %s for appointment ID:%s', 'appointments' ), $customer_email, $r->ID ) );
 					$sent[] = $r->ID;
+					$sent_once = true;
 				}
 
 				appointments_update_appointment( $r->ID, array( 'sent' => rtrim( $r->sent, ":" ) . ":" . trim( $hour ) . ":" ) );

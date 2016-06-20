@@ -3091,11 +3091,14 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		do_action( 'appointments_init', $this );
 
 		//  Run this code not before 10 mins
+
 		if ( ( time() - get_option( "app_last_update" ) ) < apply_filters( 'app_update_time', 600 ) ) {
 			return;
 		}
 
 		$this->remove_appointments();
+
+		update_option( "app_last_update", time() );
 
 	}
 
@@ -3248,11 +3251,11 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 		if ( $expireds && $process_expired ) {
 			foreach ( $expireds as $expired ) {
 				if ( 'pending' == $expired->status || 'reserved' == $expired->status ) {
-					if ('reserved' == $expired->status && strtotime($expired->end) > $this->local_time) {
+					if ('reserved' == $expired->status && strtotime($expired->end) > current_time( 'timestamp' ) ) {
 						$new_status = $expired->status; // Don't shift the GCal apps until they actually expire (end time in past)
 					}
 					else {
-						$new_status = 'removed';
+						$new_status = 'completed';
 					}
 				} else if ( 'confirmed' == $expired->status || 'paid' == $expired->status ) {
 					$new_status = 'completed';

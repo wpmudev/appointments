@@ -35,8 +35,6 @@ class Appointments_Notifications_Manager {
 		}
 
 		$this->reminder->send( false );
-
-		update_option( "app_last_update", time() );
 	}
 
 	public function send_notification( $app_id, $cancel = false ) {
@@ -66,6 +64,7 @@ class Appointments_Notifications_Manager {
 			$this->removal->send( $app_id );
 		}
 	}
+
 
 	public function insert_appointment( $app_id ) {
 		$app = appointments_get_appointment( $app_id );

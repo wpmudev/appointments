@@ -195,6 +195,8 @@ class Appointments_Google_Calendar_Importer {
 				appointments_update_appointment_meta( $app->ID, 'gcal_description', $description );
 			}
 
+			do_action( 'appointments_gcal_import_event', $app, $result, $event );
+
 			return $result;
 		}
 
