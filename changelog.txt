@@ -1,9 +1,9 @@
-2016-06-20 - 1.9.1
+2016-06-22 - 1.9.1
 -------------------------------
 - Fix: Google Calendar appointments were remove instead of been set to completed status when time passed by
 - Fix: Improvements on reminder notifications
-- Added new action when an event is imported from Google Calendar
-
+- Fix: app_my_appointments shortcode does not filter by status
+- Enhance: Added new hooks before a GCal event is updated/inserted/imported
 
 2016-05-24 - 1.9
 -------------------------------

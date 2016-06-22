@@ -873,6 +873,19 @@ class Appointments_Google_Calendar {
 
 		$event = $this->appointment_to_gcal_event( $app );
 
+		/**
+		 * Allow filtering a Google_Service_Calendar_Event object before being updated
+		 * on GCal
+		 *
+		 * Google_Service_Calendar_Event $event
+		 * Appointments_Appointment $app The related appointment to this event
+		 */
+		$event = apply_filters( 'appointments_gcal_insert_event', $event, $app );
+
+		if ( ! $event ) {
+			return false;
+		}
+
 		$result = $this->api_manager->insert_event( $event );
 
 		if ( is_wp_error( $result ) ) {
@@ -962,6 +975,19 @@ class Appointments_Google_Calendar {
 		$end->setDateTime( $app->get_end_gmt_date( "Y-m-d\TH:i:s\Z" ) );
 		$event->setStart( $start );
 		$event->setEnd( $end );
+
+		/**
+		 * Allow filtering a Google_Service_Calendar_Event object before being updated
+		 * on GCal
+		 *
+		 * Google_Service_Calendar_Event $event
+		 * Appointments_Appointment $app The related appointment to this event
+		 */
+		$event = apply_filters( 'appointments_gcal_update_event', $event, $app );
+
+		if ( ! $event ) {
+			return false;
+		}
 
 		$result = $this->api_manager->update_event( $event_id, $event );
 
