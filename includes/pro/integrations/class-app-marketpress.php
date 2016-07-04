@@ -3,10 +3,18 @@
 class Appointments_Integrations_MarketPress {
 
 	public function __construct() {
-
 		if ( ! $this->is_mp_active() ) {
 			return;
 		}
+
+		if ( defined( 'MP_VERSION' ) && version_compare( MP_VERSION, '3.0', '>=' ) ) {
+			require_once( 'marketpress/class_app_mp_bridge.php' );
+			App_MP_Bridge::serve();
+		} else {
+			require_once( 'marketpress/class_app_mp_bridge_legacy.php' );
+			App_MP_Bridge_Legacy::serve();
+		}
+
 		// Add MP Default options
 		add_filter( 'appointments_default_options', array( $this, 'default_options' ) );
 
