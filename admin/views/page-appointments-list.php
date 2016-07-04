@@ -154,6 +154,8 @@
 	}
 	?>
 	jQuery(document).ready(function($){
+		var $current_app_editing;
+
 		$("#delete_removed").click( function() {
 			if ( !confirm('<?php echo esc_js( __("Are you sure to delete the selected record(s)?","appointments") ) ?>') )
 			{return false;}
@@ -203,6 +205,10 @@
 				}
 				else if (response) {
 					$('.inline-edit-row').hide();
+					if ( $current_app_editing ) {
+						$current_app_editing.show();
+					}
+					$current_app_editing = app_parent;
 					app_parent.hide();
 					app_parent.after(response.result);
 				}
