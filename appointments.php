@@ -165,10 +165,6 @@ class Appointments {
 		$this->membership_active = false;
 		add_action( 'plugins_loaded', array( &$this, 'check_membership_plugin') );
 
-		// Marketpress integration
-		$this->marketpress_active = $this->mp = false;
-		$this->mp_posts = array();
-		add_action( 'plugins_loaded', array( &$this, 'check_marketpress_plugin') );
 
 		add_action('init', array($this, 'get_gcal_api'), 10);
 
@@ -1013,7 +1009,8 @@ class Appointments {
 	 */
 	function time_base() {
 		$default = array( 10,15,30,60,90,120 );
-		$a = $this->options["additional_min_time"];
+		$options = appointments_get_options();
+		$a = $options["additional_min_time"];
 		// Additional time bases
 		if ( isset( $a ) && $a && is_numeric( $a ) )
 			$default[] = $a;
@@ -2743,25 +2740,12 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 	/**
 	 * Check if Marketpress plugin is active
 	 * @Since 1.0.1
+	 *
+	 * @deprecated
 	 */
 	function check_marketpress_plugin() {
 		global $mp;
-		if ( class_exists('MarketPress') && is_object( $mp ) ) {
-			$this->marketpress_active = true;
-			// Also check if it is activated
-			if ( isset( $this->options["use_mp"] ) && $this->options["use_mp"] ) {
-				$this->mp = true;
-				if (defined('MP_VERSION') && version_compare(MP_VERSION, '3.0', '>=')) {
-					require_once('includes/class_app_mp_bridge.php');
-					App_MP_Bridge::serve();
-				} else {
-					require_once('includes/class_app_mp_bridge_legacy.php');
-					App_MP_Bridge_Legacy::serve();
-				}
-				return true;
-			}
-		}
-		return false;
+		return class_exists('MarketPress') && is_object( $mp );
 	}
 
 
@@ -3083,7 +3067,6 @@ if ($this->worker && $this->service && ($app->service != $this->service)) {
 			'reminder_message'			=> $reminder_message,
 			'log_emails'				=> 'yes',
 			'use_cache'					=> 'no',
-			'use_mp'					=> false,
 			'allow_cancel'				=> 'no',
 			'cancel_page'				=> 0
 		));

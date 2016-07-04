@@ -360,9 +360,6 @@ class Appointments_Admin_Settings_Page {
 		$options['disable_js_check_admin']	= isset( $_POST['disable_js_check_admin'] );
 		$options['disable_js_check_frontend']	= isset( $_POST['disable_js_check_frontend'] );
 
-		$options['use_mp']	 				= isset( $_POST['use_mp'] );
-		$options["app_page_type_mp"]			= @$_POST["app_page_type_mp"];
-
 		$options['allow_cancel'] 				= @$_POST['allow_cancel'];
 		$options['cancel_page'] 				= @$_POST['cancel_page'];
 		$options['thank_page'] 				= @$_POST['thank_page'];
@@ -384,28 +381,6 @@ class Appointments_Admin_Settings_Page {
 					'post_content'	=> App_Template::get_default_page_template($tpl)
 				)
 			);
-		}
-
-		if ( isset( $_POST['make_an_appointment_product'] ) ) {
-			$tpl = !empty($_POST['app_page_type_mp']) ? $_POST['app_page_type_mp'] : false;
-			$post_id = wp_insert_post(
-				array(
-					'post_title'	=> 'Appointment',
-					'post_status'	=> 'publish',
-					'post_type'		=> 'product',
-					'post_content'	=> App_Template::get_default_page_template($tpl)
-				)
-			);
-			if ( $post_id ) {
-				// Add a download link, so that app will be a digital product
-				$file = get_post_meta($post_id, 'mp_file', true);
-				if ( !$file ) add_post_meta( $post_id, 'mp_file', get_permalink( $post_id) );
-
-				// MP requires at least 2 variations, so we add a dummy one
-				add_post_meta( $post_id, 'mp_var_name', array( 0 ) );
-				add_post_meta( $post_id, 'mp_sku', array( 0 ) );
-				add_post_meta( $post_id, 'mp_price', array( 0 ) );
-			}
 		}
 	}
 

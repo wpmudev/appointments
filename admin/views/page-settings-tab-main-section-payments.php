@@ -86,76 +86,7 @@ $use_payments = ( 'yes' == $options['payment_required'] );
 			<p class="description"><?php _e( 'Allow auto-confirm for zero-priced appointments in a paid environment.', 'appointments' ) ?></p>
 		</td>
 	</tr>
-
-	<tr class="payment_row" style="<?php if ( ! $use_payments ) { echo 'display:none;'; } ?>border-top: 1px solid lightgrey;">
-		<th scope="row">&nbsp;</th>
-		<td>
-			<p class="description"><?php printf( __( 'The below fields require %s plugin. ', 'appointments' ), '<a href="http://premium.wpmudev.org/project/e-commerce/" target="_blank">MarketPress</a>' ) ?></p>
-		</td>
-	</tr>
-
-	<tr class="payment_row" <?php if ( ! $use_payments ) {
-		echo 'style="display:none"';
-	} ?>>
-		<th scope="row"><?php _e( 'Integrate with MarketPress', 'appointments' ) ?></th>
-		<td colspan="2">
-			<input type="checkbox"
-			       name="use_mp" <?php if ( isset( $options["use_mp"] ) && $options["use_mp"] )
-				echo 'checked="checked"' ?> />
-		<span
-			class="description"><?php _e( 'Appointments can be set as products. Any appointment shortcode added to a product page will make that page an "Appointment Product Page". For details, please see FAQ.', 'appointments' ) ?>
-			<?php if ( ! $appointments->marketpress_active ) {
-				echo '<br />';
-				_e( 'Note: MarketPress is not actived on this website', 'appointments' );
-			} ?>
-		</span>
-		</td>
-	</tr>
-
-	<?php do_action( 'app-settings-payment_settings-marketpress' ); ?>
-
-	<tr class="payment_row" <?php if ( ! $use_payments ) {
-		echo 'style="display:none"';
-	} ?>>
-		<th scope="row"><?php _e( 'Create an Appointment Product Page', 'appointments' ) ?></th>
-		<td colspan="2">
-			<input type="checkbox"
-			       name="make_an_appointment_product" <?php if ( isset( $options["make_an_appointment_product"] ) && $options["make_an_appointment_product"] )
-				echo 'checked="checked"' ?> />
-			&nbsp;<?php _e( 'with', 'appointments' ) ?>&nbsp;
-			<select name="app_page_type_mp">
-				<option
-					value="one_month"><?php _e( 'current month\'s schedule', 'appointments' ) ?></option>
-				<option
-					value="two_months" <?php if ( 'two_months' == @$options["app_page_type_mp"] )
-					echo 'selected="selected"' ?>><?php _e( 'current and next month\'s schedules', 'appointments' ) ?></option>
-				<option
-					value="one_week" <?php if ( 'one_week' == @$options["app_page_type_mp"] )
-					echo 'selected="selected"' ?>><?php _e( 'current week\'s schedule', 'appointments' ) ?></option>
-				<option
-					value="two_weeks" <?php if ( 'two_weeks' == @$options["app_page_type_mp"] )
-					echo 'selected="selected"' ?>><?php _e( 'current and next week\'s schedules', 'appointments' ) ?></option>
-			</select>
-			<br/>
-						<span
-							class="description"><?php _e( 'Same as the above "Create an Appointment Page", but this time appointment shortcodes will be inserted in a new Product page and page title will be "Appointment". This is also the product name.', 'appointments' ) ?></span>
-			<?php
-			$page_id = $wpdb->get_var( "SELECT ID FROM " . $wpdb->posts . " WHERE post_title = 'Appointment' AND post_type='product' " );
-			if ( $page_id ) { ?>
-				<br/><span
-					class="description"><?php _e( '<b>Note:</b> You already have such a page. If you check this checkbox, another page with the same title will be created. To edit existing page: ', 'appointments' ) ?>
-					<a href="<?php echo admin_url( 'post.php?post=' . $page_id . '&action=edit' ) ?>"
-					   target="_blank"><?php _e( 'Click here', 'appointments' ) ?></a>
-		&nbsp;
-					<?php _e( 'To view the page:', 'appointments' ) ?>
-					<a href="<?php echo get_permalink( $page_id ) ?>"
-					   target="_blank"><?php _e( 'Click here', 'appointments' ) ?></a>
-	</span>
-			<?php }
-			?>
-		</td>
-	</tr>
-
+	
 	<?php
 	/**
 	 * Integrations or add-ons can use this action to add their own payment
