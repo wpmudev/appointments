@@ -13,7 +13,6 @@ class App_Mp_ProductCartDisplay {
 
 	/** @var  Appointments */
 	private $_core;
-	private $_data = array();
 	private $_has_marketpress = false;
 
 	private function __construct () {}
@@ -27,6 +26,22 @@ class App_Mp_ProductCartDisplay {
 		add_action('plugins_loaded', array($this, 'initialize'));
 
 		add_filter('app_mp_product_name_in_cart', array($this, 'apply_changes'), 10, 5);
+		add_action( 'app-settings-payment_settings-marketpress', array( $this, 'show_settings' ) );
+	}
+
+	/**
+	 * Add default MP options to Appointments options
+	 *
+	 * @param array $options
+	 *
+	 * @return array
+	 */
+	public function default_options( $options ) {
+		$mp_options = array(
+			'cart_name_format' => '',
+			'auto_add_to_cart' => false,
+		);
+		return array_merge( $options, $mp_options );
 	}
 
 	public function apply_changes ($name, $service, $worker, $start, $app) {
@@ -67,6 +82,28 @@ $(document).on("app-confirmation-response_received", function (e, response) {
 				add_action( 'wp_footer', array( $this, 'auto_add_to_cart' ) );
 			}
 		}
+	}
+
+	public function show_settings() {
+		$options = appointments_get_options();
+		$codec  = new App_Macro_Codec;
+		$macros = join( '</code>, <code>', $codec->get_macros() );
+		?>
+		<tr>
+			<th scope="row"><label for="app-cart_name_format"><?php _e('Appointment in shopping cart format', 'appointments'); ?></label></th>
+			<td colspan="2">
+				<input type="text" class="widefat" name="cart_name_format" id="app-cart_name_format" value="<?php echo esc_attr( $options['cart_name_format'] ); ?>" />
+				<span class="description"><?php printf(__('You can use these macros: <code>%s</code>', 'appointments'), $macros); ?></span>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row"><label for="app-auto_add_to_cart"><?php _e('Auto-add appointments into cart', 'appointments'); ?></label></th>
+			<td colspan="2">
+				<input type="hidden" name="auto_add_to_cart" value="" />
+				<input type="checkbox" name="auto_add_to_cart" id="app-auto_add_to_cart" value="1" <?php checked( $options['auto_add_to_cart'] ); ?> />
+			</td>
+		</tr>
+		<?php
 	}
 
 }

@@ -23,54 +23,66 @@ class App_MP_Bridge {
 	}
 
 	public function filter_product ($html, $product_id) {
-		if (!$this->_is_app_mp_page($product_id)) return $html;
+		if ( ! $this->_is_app_mp_page( $product_id ) ) {
+			return $html;
+		}
 
-		$product = get_post($product_id);
+		$product = get_post( $product_id );
 		$this->_add_footer_script();
 
-		return apply_filters('the_content', $product->post_content);
+		return apply_filters( 'the_content', $product->post_content );
 	}
 
 	public function filter_cart_column ($html, $column, $product) {
-		if ('title' !== $column) return $html;
-		if (MP_Product::get_variations_post_type() !== $product->post_type) return $html;
-		if (!$this->_is_app_mp_page($product->post_parent)) return $html;
+		if ( 'title' !== $column ) {
+			return $html;
+		}
+		if ( MP_Product::get_variations_post_type() !== $product->post_type ) {
+			return $html;
+		}
+		if ( ! $this->_is_app_mp_page( $product->post_parent ) ) {
+			return $html;
+		}
 
-		$app_id = MP_Product::get_variation_meta($product->ID, 'name');
-		$app = appointments_get_appointment($app_id);
-		if ($app) {
-			$name = get_the_title($product->ID) . " (". date_i18n($this->_core->datetime_format, strtotime($app->start)) . ")";
+		$app_id = MP_Product::get_variation_meta( $product->ID, 'name' );
+		$app    = appointments_get_appointment( $app_id );
+		if ( $app ) {
+			$name = get_the_title( $product->ID ) . " (" . date_i18n( $this->_core->datetime_format, strtotime( $app->start ) ) . ")";
 			$name = apply_filters(
-				'app_mp_product_name_in_cart', 
-				$name, 
-				$this->_core->get_service_name($app->service), 
-				appointments_get_worker_name($app->worker),
-				$app->start, 
+				'app_mp_product_name_in_cart',
+				$name,
+				$this->_core->get_service_name( $app->service ),
+				appointments_get_worker_name( $app->worker ),
+				$app->start,
 				$app
 			);
 			$html = '<h2 class="mp_cart_item_title">' .
-				'<a href="' . esc_url(get_permalink($product->post_parent)) . '">' .
-					$name .
-				'</a>' .
-			'<h2>';
+			        '<a href="' . esc_url( get_permalink( $product->post_parent ) ) . '">' .
+			        $name .
+			        '</a>' .
+			        '<h2>';
 		}
 
 		return $html;
 	}
 
 	public function appointment_created ($additional, $insert_id, $post_id, $service, $worker, $start, $end) {
-		if (!$this->_is_app_mp_page($post_id)) return $additional;
-
-		$variation = $this->_add_variation($insert_id, $post_id, $service, $worker, $start, $end);
-		if (empty($variation)) return $additional;
-
-		$cart = MP_Cart::get_instance();
-		$items = $cart->get_items();
-		if (is_array($items) && false === array_search($variation, array_keys($items))) {
-			// Only add once, not if it's already in the cart
-			$cart->add_item($variation);
+		if ( ! $this->_is_app_mp_page( $post_id ) ) {
+			return $additional;
 		}
-		$additional['mp'] = 1;
+
+		$variation = $this->_add_variation( $insert_id, $post_id, $service, $worker, $start, $end );
+		if ( empty( $variation ) ) {
+			return $additional;
+		}
+
+		$cart  = MP_Cart::get_instance();
+		$items = $cart->get_items();
+		if ( is_array( $items ) && false === array_search( $variation, array_keys( $items ) ) ) {
+			// Only add once, not if it's already in the cart
+			$cart->add_item( $variation );
+		}
+		$additional['mp']        = 1;
 		$additional['variation'] = $variation;
 
 		return $additional;

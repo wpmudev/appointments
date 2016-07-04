@@ -18,6 +18,7 @@ class Appointments_Integrations_MarketPress {
 		// Add MP Default options
 		add_filter( 'appointments_default_options', array( $this, 'default_options' ) );
 
+		// Add settings section
 		add_action( 'appointments_settings_tab-main-section-payments', array( $this, 'show_settings' ) );
 		add_filter( 'app-options-before_save', array( $this, 'save_settings' ) );
 	}
@@ -44,8 +45,6 @@ class Appointments_Integrations_MarketPress {
 	 */
 	public function default_options( $options ) {
 		$mp_options = array(
-			'cart_name_format' => '',
-			'auto_add_to_cart' => false,
 			'use_mp' => false,
 			'make_an_appointment_product' => false,
 			'app_page_type_mp' => 'one_month'
@@ -56,8 +55,6 @@ class Appointments_Integrations_MarketPress {
 	public function show_settings() {
 		$options = appointments_get_options();
 		$product_page = get_page_by_title( 'Appointment', OBJECT, 'product' );
-		$codec  = new App_Macro_Codec;
-		$macros = join( '</code>, <code>', $codec->get_macros() );
 
 		?>
 		<h3 class="mp-integration"><?php _e( 'MarketPress Integration', 'appointments' ); ?></h3>
@@ -67,21 +64,6 @@ class Appointments_Integrations_MarketPress {
 				<td>
 					<input type="checkbox" name="use_mp" id="use_mp" <?php checked( $options["use_mp"] ); ?> />
 					<p class="description"><?php _e( 'Appointments can be set as products. Any appointment shortcode added to a product page will make that page an "Appointment Product Page". For details, please see FAQ.', 'appointments' ) ?></p>
-				</td>
-			</tr>
-
-			<tr>
-				<th scope="row"><?php _e('Appointment in shopping cart format', 'appointments'); ?></th>
-				<td colspan="2">
-					<input type="text" class="widefat" name="cart_name_format" id="app-cart_name_format" value="<?php echo esc_attr( $options['cart_name_format'] ); ?>" />
-					<span class="description"><?php printf(__('You can use these macros: <code>%s</code>', 'appointments'), $macros); ?></span>
-				</td>
-			</tr>
-			<tr>
-				<th scope="row"><?php _e('Auto-add appointments into cart', 'appointments'); ?></th>
-				<td colspan="2">
-					<input type="hidden" name="auto_add_to_cart" value="" />
-					<input type="checkbox" name="auto_add_to_cart" id="app-auto_add_to_cart" value="1" <?php checked( $options['auto_add_to_cart'] ); ?> />
 				</td>
 			</tr>
 
