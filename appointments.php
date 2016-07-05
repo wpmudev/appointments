@@ -718,7 +718,11 @@ class Appointments {
 		else
 			$worker_price = 0;
 
-		$price = $service_obj->price + $worker_price;
+		$price = 0;
+		if ( $service_obj ) {
+			$price = $service_obj->price + $worker_price;
+		}
+
 
 		/**
 		 * Filter allows other plugins or integrations to apply a discount to
