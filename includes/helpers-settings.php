@@ -31,6 +31,7 @@ function appointments_get_default_options() {
 		'show_legend'				=> 'yes',
 		'gcal'						=> 'yes',
 		'gcal_location'				=> '',
+		'gcal_overwrite'			=> false,
 		'color_set'					=> 1,
 		'free_color'				=> '48c048',
 		'busy_color'				=> 'ffffff',

@@ -954,6 +954,7 @@ class Appointments_Google_Calendar {
 		}
 
 		$options = appointments_get_options();
+		$gcal_overwrite = $options['gcal_overwrite'];
 
 		// Location
 		if ( isset( $options["gcal_location"] ) && '' != trim( $options["gcal_location"] ) ) {
@@ -967,14 +968,20 @@ class Appointments_Google_Calendar {
 
 		$location = apply_filters( 'appointments_gcal_event_location', $location, $app );
 
-		$event->setLocation( $location );
+		if ( $gcal_overwrite ) {
+			// Overwrite title and description
+			$event = $this->appointment_to_gcal_event( $app );
+		}
+		else {
+			$start = new Google_Service_Calendar_EventDateTime();
+			$start->setDateTime( $app->get_start_gmt_date( "Y-m-d\TH:i:s\Z" ) );
+			$end = new Google_Service_Calendar_EventDateTime();
+			$end->setDateTime( $app->get_end_gmt_date( "Y-m-d\TH:i:s\Z" ) );
+			$event->setStart( $start );
+			$event->setEnd( $end );
+		}
 
-		$start = new Google_Service_Calendar_EventDateTime();
-		$start->setDateTime( $app->get_start_gmt_date( "Y-m-d\TH:i:s\Z" ) );
-		$end = new Google_Service_Calendar_EventDateTime();
-		$end->setDateTime( $app->get_end_gmt_date( "Y-m-d\TH:i:s\Z" ) );
-		$event->setStart( $start );
-		$event->setEnd( $end );
+		$event->setLocation( $location );
 
 		/**
 		 * Allow filtering a Google_Service_Calendar_Event object before being updated

@@ -102,6 +102,7 @@ class Appointments_Google_Calendar_Admin {
 			$options['gcal_api_scope'] = $_POST['gcal_api_scope'];
 			$options['gcal_description'] = $_POST['gcal_description'];
 			$options['gcal_summary'] = $_POST['gcal_summary'];
+			$options['gcal_overwrite'] = isset( $_POST['app-gcal-overwrite'] );
 			$this->gcal_api->set_description( $options['gcal_description'] );
 			$this->gcal_api->set_summary( $options['gcal_summary'] );
 			appointments_update_options( $options );
@@ -189,6 +190,9 @@ class Appointments_Google_Calendar_Admin {
 			$api_scope = $this->gcal_api->get_api_scope();
 			$gcal_description = $this->gcal_api->get_description();
 			$gcal_summary = $this->gcal_api->get_summary();
+
+			$options = appointments_get_options();
+			$gcal_overwrite = $options['gcal_overwrite'];
 
 			include_once( 'views/settings-gcal-step-3.php' );
 		}
