@@ -17,7 +17,7 @@ class Appointments_Admin_User_Profile {
 		global $current_user, $wpdb, $appointments;
 
 		// Only user himself can save his data
-		if ( ( $current_user->ID == $profileuser_id ) || ( $current_user->ID != $profileuser_id && App_Roles::current_user_can( 'list_users', CTX_STAFF ) ) ) {
+		if ( ( $current_user->ID == $profileuser_id ) || ( $current_user->ID != $profileuser_id && App_Roles::current_user_can( 'list_users', App_Roles::CTX_STAFF ) ) ) {
 
 
 			// Save user meta
