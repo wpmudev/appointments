@@ -121,7 +121,6 @@ class Appointments_Google_Calendar_Importer {
 		$event_id = $event->getId();
 		$app = appointments_get_appointment_by_gcal_id( $event_id );
 
-		$worker_id = false;
 		if ( $app && ! $worker_id ) {
 			$worker = appointments_get_worker( $app->worker );
 			if ( $worker ) {

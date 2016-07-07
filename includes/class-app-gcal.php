@@ -185,21 +185,6 @@ class Appointments_Google_Calendar {
 
 		$start_time = current_time( 'timestamp' );
 		$end_time = $start_time + ( 3600 * 24 * $appointments->get_app_limit() );
-		$args = array(
-			'status' => array_merge( $this->get_syncable_status(), array( 'reserved', 'removed' ) ),
-			'date_query' => array(
-				array(
-					'field' => 'start',
-					'compare' => '>=',
-					'value' => date( 'Y-m-d H:i:s', $start_time )
-				),
-				array(
-					'field' => 'end',
-					'compare' => '<=',
-					'value' => date( 'Y-m-d H:i:s', $end_time )
-				)
-			)
-		);
 
 		// First, let's sync worker's calendars
 		if ( $this->workers_allowed() ) {
@@ -213,9 +198,7 @@ class Appointments_Google_Calendar {
 						continue;
 					}
 
-					$args['worker'] = $worker->ID;
 					$events = $this->get_events_list();
-					unset( $args['worker'] );
 					if ( is_wp_error( $events ) ) {
 						continue;
 					}
@@ -758,7 +741,7 @@ class Appointments_Google_Calendar {
 		if ( ! $event ) {
 			// Not in the general calendar
 			// Maybe any worker?
-			if ( $this->switch_to_worker( $worker->ID ) ) {
+			if ( $worker && $this->switch_to_worker( $worker->ID ) ) {
 				// Check in the current worker
 				$event = $this->get_event( $app->ID );
 				$this->restore_to_default();
@@ -779,6 +762,9 @@ class Appointments_Google_Calendar {
 
 			if ( $event ) {
 				$saved_on = 'worker';
+			}
+			else {
+				$saved_on = 'general';
 			}
 		}
 		else {
