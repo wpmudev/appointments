@@ -1259,7 +1259,10 @@ class Appointments {
 		if ( !$page )
 			return $text;
 
-		$text = $page->post_content;
+		$text = get_the_excerpt( $page_id );
+		if ( empty( $text ) ) {
+			$text = $page->post_content;
+		}
 
 		$text = strip_shortcodes( $text );
 
