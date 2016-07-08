@@ -152,16 +152,6 @@ module.exports = function(grunt) {
         'checktextdomain',
         'makepot',
         'copy',
-        'compress',
-        'open'
-    ]);
-
-    grunt.registerTask('build:beta', [
-        'version-compare',
-        'clean',
-        'checktextdomain',
-        'makepot',
-        'copy',
         'compress'
     ]);
 };

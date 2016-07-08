@@ -2406,15 +2406,19 @@ class Appointments {
 			if ( $apps ) {
 				foreach ( $apps as $app ) {
 					//if ( $start >= strtotime( $app->start ) && $end <= strtotime( $app->end ) ) return true;
-					if ($period->contains($app->start, $app->end)) return true;
+					if ( $period->contains( $app->start, $app->end ) ) {
+						return true;
+					}
 				}
 			}
 		}
 
 		// If we're here, no worker is set or (s)he's not busy by default. Let's go for quick filter trip.
 		$is_busy = apply_filters('app-is_busy', false, $period, $capacity);
-		if ($is_busy) return true;
-
+		if ( $is_busy ) {
+			return true;
+		}
+			
 		// If we are here, no preference is selected (provider_id=0) or selected provider is not busy. There are 2 cases here:
 		// 1) There are several providers: Look for reserve apps for the workers giving this service.
 		// 2) No provider defined: Look for reserve apps for worker=0, because he will carry out all services
@@ -2448,25 +2452,29 @@ class Appointments {
 				// Remove duplicates
 				$apps = $this->array_unique_object_by_ID( $apps );
 			}
-		}
-		else
+		} else {
 			$apps = $this->get_reserve_apps_by_worker( $this->location, 0, $week );
+		}
+
+
 
 		$n = 0;
 		foreach ( $apps as $app ) {
-// @FIX: this will allow for "only one service and only one provider per time slot"
-if ($this->worker && $this->service && ($app->service != $this->service)) {
-	continue;
-	// This is for the following scenario:
-	// 1) any number of providers per service
-	// 2) any number of services
-	// 3) only one service and only one provider per time slot:
-	// 	- selecting one provider+service makes this provider and selected service unavailable in a time slot
-	// 	- other providers are unaffected, other services are available
-}
-// End @FIX
+			// @FIX: this will allow for "only one service and only one provider per time slot"
+			if ($this->worker && $this->service && ($app->service != $this->service)) {
+				continue;
+				// This is for the following scenario:
+				// 1) any number of providers per service
+				// 2) any number of services
+				// 3) only one service and only one provider per time slot:
+				// 	- selecting one provider+service makes this provider and selected service unavailable in a time slot
+				// 	- other providers are unaffected, other services are available
+			}
+			// End @FIX
 			//if ( $start >= strtotime( $app->start ) && $end <= strtotime( $app->end ) ) $n++;
-			if ($period->contains($app->start, $app->end)) $n++;
+			if ( $period->contains( $app->start, $app->end ) ) {
+				$n ++;
+			}
 		}
 
 		if ( $n >= $this->available_workers( $start, $end ) )

@@ -704,7 +704,7 @@ class App_Appointments_Test extends App_UnitTestCase {
 		foreach ( $apps  as $app ) {
 			switch ( $app->name ) {
 				case "Past and pending": {
-					$this->assertEquals( "removed", $app->status );
+					$this->assertEquals( "completed", $app->status );
 					break;
 				}
 
@@ -744,12 +744,12 @@ class App_Appointments_Test extends App_UnitTestCase {
 				}
 
 				case "Past and reserved by GCal": {
-					$this->assertEquals( "removed", $app->status );
+					$this->assertEquals( "completed", $app->status );
 					break;
 				}
 
 				case "Past, ended and reserved by GCal": {
-					$this->assertEquals( "removed", $app->status );
+					$this->assertEquals( "completed", $app->status );
 					break;
 				}
 
@@ -789,6 +789,7 @@ class App_Appointments_Test extends App_UnitTestCase {
 
 	/**
 	 * @group cleanup
+	 * @group cleanup-on
 	 */
 	function test_cleanup_appointments_on() {
 		$appointments = appointments();
@@ -843,7 +844,7 @@ class App_Appointments_Test extends App_UnitTestCase {
 		foreach ( $apps  as $app ) {
 			switch ( $app->name ) {
 				case "Past and pending": {
-					$this->assertEquals( "removed", $app->status );
+					$this->assertEquals( "completed", $app->status );
 					break;
 				}
 
@@ -883,12 +884,12 @@ class App_Appointments_Test extends App_UnitTestCase {
 				}
 
 				case "Past and reserved by GCal": {
-					$this->assertEquals( "removed", $app->status );
+					$this->assertEquals( "completed", $app->status );
 					break;
 				}
 
 				case "Past, ended and reserved by GCal": {
-					$this->assertEquals( "removed", $app->status );
+					$this->assertEquals( "completed", $app->status );
 					break;
 				}
 
@@ -913,7 +914,7 @@ class App_Appointments_Test extends App_UnitTestCase {
 				}
 
 				case "Future and pending, created 2 days ago": {
-					$this->assertEquals( "removed", $app->status );
+					$this->assertEquals( "completed", $app->status );
 					break;
 				}
 

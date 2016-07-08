@@ -199,4 +199,80 @@ class App_Timetables_Test extends App_UnitTestCase {
 
 	}
 
+
+	/**
+	 * @group is-busy
+	 */
+	function test_is_busy() {
+		$next_monday = strtotime( 'next monday', time() );
+
+		$service_id = $this->factory->service->create_object($this->factory->service->generate_args());
+
+		$worker_args = $this->factory->worker->generate_args();
+		$worker_args['services_provided'] = array( $service_id );
+		$worker_id = $this->factory->worker->create_object( $worker_args );
+
+		$app_args           = $this->factory->appointment->generate_args();
+		$app_args['status'] = 'reserved';
+		$app_args['name'] = 'Holidays';
+		$app_args['date']   = strtotime( date( 'Y-m-d', $next_monday ) . ' 12:00:00' );
+		$app_args['duration'] = 60;
+		$app_args['worker'] = $worker_id;
+		$app_args['service'] = $service_id;
+		$app_id = $this->factory->appointment->create_object( $app_args );
+
+		$appointments = appointments();
+		$appointments->worker = $worker_id;
+		$appointments->service = $service_id;
+
+		$from = strtotime( date( 'Y-m-d', $next_monday ) . ' 12:00:00' );
+		$to = strtotime( date( 'Y-m-d', $next_monday ) . ' 12:15:00' );
+
+		$busy = $appointments->is_busy( $from, $to, 1 );
+		$this->assertTrue( $busy );
+
+		$from = strtotime( date( 'Y-m-d', $next_monday ) . ' 10:00:00' );
+		$to = strtotime( date( 'Y-m-d', $next_monday ) . ' 10:15:00' );
+
+		$busy = $appointments->is_busy( $from, $to, 1 );
+		$this->assertFalse( $busy );
+	}
+
+	/**
+	 * @group test
+	 */
+	function test_undefined_service_should_be_busy_for_worker() {
+		$next_monday = strtotime( 'next monday', time() );
+
+		$service_id = $this->factory->service->create_object($this->factory->service->generate_args());
+
+		$worker_args = $this->factory->worker->generate_args();
+		$worker_args['services_provided'] = array( $service_id );
+		$worker_id = $this->factory->worker->create_object( $worker_args );
+
+		$app_args           = $this->factory->appointment->generate_args();
+		$app_args['status'] = 'reserved';
+		$app_args['name'] = 'Holidays';
+		$app_args['date']   = strtotime( date( 'Y-m-d', $next_monday ) . ' 12:00:00' );
+		$app_args['duration'] = 60;
+		$app_args['worker'] = $worker_id;
+		$app_id = $this->factory->appointment->create_object( $app_args );
+
+		$appointments = appointments();
+		$appointments->worker = $worker_id;
+		$appointments->service = $service_id;
+
+		$from = strtotime( date( 'Y-m-d', $next_monday ) . ' 12:00:00' );
+		$to = strtotime( date( 'Y-m-d', $next_monday ) . ' 12:15:00' );
+
+		$busy = $appointments->is_busy( $from, $to, 1 );
+		$this->assertTrue( $busy );
+
+		$from = strtotime( date( 'Y-m-d', $next_monday ) . ' 10:00:00' );
+		$to = strtotime( date( 'Y-m-d', $next_monday ) . ' 10:15:00' );
+
+		$busy = $appointments->is_busy( $from, $to, 1 );
+		$this->assertFalse( $busy );
+	}
+
 }

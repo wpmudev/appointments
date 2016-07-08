@@ -286,11 +286,7 @@ class Appointments_AJAX {
 		$html .= '<select name="service">';
 		if ( $services ) {
 			foreach ( $services as $service ) {
-				if ( $app->service == $service->ID )
-					$sel = ' selected="selected"';
-				else
-					$sel = '';
-				$html .= '<option value="' . esc_attr($service->ID) . '"'.$sel.'>'. stripslashes( $service->name ) . '</option>';
+				$html .= '<option value="' . esc_attr($service->ID) . '"'.selected( $app->service, $service->ID, false ).'>'. stripslashes( $service->name ) . '</option>';
 			}
 		}
 		$html .= '</select>';
