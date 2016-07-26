@@ -33,6 +33,9 @@ class App_Mp_ProductCartDisplay {
 
 		add_action( 'wp_ajax_mp_update_cart', array( $this, 'update_apps_on_cart_change' ) );
 		add_action( 'wp_ajax_nopriv_mp_update_cart', array( $this, 'update_apps_on_cart_change' ) );
+
+		add_action( 'app_remove_expired', array( $this, 'remove_app_from_cart_when_expired' ), 10, 2 );
+
 	}
 
 	public function apply_changes ($name, $service, $worker, $start, $app) {
@@ -128,6 +131,26 @@ $(document).on("app-confirmation-response_received", function (e, response) {
 		switch ( $cart_action ){
 			case 'remove_item': appointments_update_appointment_status( $app_id, 'removed' ); break;
 			case 'undo_remove_item': appointments_update_appointment_status( $app_id, 'pending' ); break;
+
+		}
+
+	}
+
+
+	public function remove_app_from_cart_when_expired( $appointment, $new_status ){
+
+		if( !class_exists('Marketpress') ) return;
+
+		//Check if appointment exists in cart		
+		$cart_products = mp_cart()->get_items_as_objects();
+
+		foreach( $cart_products as $product ){
+
+			if( get_post_meta( $product->ID, 'name', true ) == $appointment->ID ){
+
+				mp_cart()->remove_item( $product->ID );
+
+			}
 
 		}
 
