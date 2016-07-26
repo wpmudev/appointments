@@ -36,6 +36,8 @@ class App_Mp_ProductCartDisplay {
 
 		add_action( 'app_remove_expired', array( $this, 'remove_app_from_cart_when_expired' ), 10, 2 );
 
+		add_filter( 'mp_product/title', array( $this, 'mp_product_title' ), 2, 2 );
+
 	}
 
 	public function apply_changes ($name, $service, $worker, $start, $app) {
@@ -154,6 +156,34 @@ $(document).on("app-confirmation-response_received", function (e, response) {
 
 		}
 
+	}
+
+
+	public function mp_product_title( $title, MP_Product $product ) {
+		if ( $product->is_variation() ) {
+			//$product might fail if no post_parent. To be sure get_post
+			$post = get_post($product->ID);
+			$parent = get_post( $post->post_parent );
+			if ( strpos( $parent->post_content, '[app_' ) !== false ) {
+				//this is appointments variant
+				$app_id = (int)get_post_meta( $product->ID, 'name', true );
+
+				if( $app = appointments_get_appointment( $app_id ) ){
+					
+					global $appointments;
+
+					$date_string = "(" . date_i18n( $appointments->datetime_format, strtotime( $app->start ) ) . ")";				
+					$title = $appointments->get_service_name( $app->service ) . ' ' . $date_string;
+
+					return $title;
+					
+				}
+
+				return $post->post_title;
+			}
+		}
+
+		return $title;
 	}
 
 }
