@@ -166,20 +166,14 @@ $(document).on("app-confirmation-response_received", function (e, response) {
 			$parent = get_post( $post->post_parent );
 			if ( strpos( $parent->post_content, '[app_' ) !== false ) {
 				//this is appointments variant
+
 				$app_id = (int)get_post_meta( $product->ID, 'name', true );
-
 				if( $app = appointments_get_appointment( $app_id ) ){
-					
-					global $appointments;
 
-					$date_string = "(" . date_i18n( $appointments->datetime_format, strtotime( $app->start ) ) . ")";				
-					$title = $appointments->get_service_name( $app->service ) . ' ' . $date_string;
-
-					return $title;
+					return $this->apply_changes ($title, $app->service, $app->worker, $app->start, $app);
 					
 				}
 
-				return $post->post_title;
 			}
 		}
 
