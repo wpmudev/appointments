@@ -33,6 +33,7 @@ class Appointments_Admin {
 	}
 
 	private function includes() {
+		include_once( appointments_plugin_dir() . 'admin/class-app-list-table.php' );
 		include_once( appointments_plugin_dir() . 'admin/widgets/class-app-dashboard-widget.php' );
 		include_once( appointments_plugin_dir() . 'admin/class-app-admin-user-profile.php' );
 	}

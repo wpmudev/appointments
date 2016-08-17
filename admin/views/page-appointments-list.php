@@ -11,7 +11,7 @@
 						</td>
 					<?php else: ?>
 						<?php
-							$class = $key === 'date' ? 'column-primary ' : '';
+							$class = '';
 							$is_sortable = false;
 							if ( array_key_exists( $key , $sortables ) ) {
 								$is_sortable = true;
@@ -47,7 +47,7 @@
 		<tfoot>
 			<tr>
 				<?php foreach ( $columns as $key => $title ): ?>
-					<?php $primary = $key === 'date' ? 'column-primary' : ''; ?>
+					<?php $primary = ''; ?>
 					<?php if ( $key === 'cb' ): ?>
 						<td id="cb" class="manage-column column-cb check-column">
 							<label class="screen-reader-text" for="cb-select-all-2"><?php _e( 'Select All', 'appointments' ); ?></label>
@@ -382,4 +382,25 @@
 	th.asc a:focus span.sorting-indicator, th.asc:hover span.sorting-indicator, th.desc a:focus span.sorting-indicator, th.desc:hover span.sorting-indicator, th.sorted .sorting-indicator {
 		visibility: visible;
 	}
+
+	@media screen and (max-width: 782px) {
+		.wp-list-table tr:not(.inline-edit-row):not(.no-items) td:not(.check-column) {
+			display: table-cell;
+		}
+
+		.wp-list-table th.column-app_ID,
+		.wp-list-table td.column-app_ID,
+		.wp-list-table th.column-created,
+		.wp-list-table td.column-created,
+		.wp-list-table th.column-status,
+		.wp-list-table td.column-status{
+			display:none !important;
+		}
+
+		.wp-list-table th.column-user,
+		.wp-list-table td.column-user{
+			width:30px;
+		}
+	}
+
 </style>
