@@ -440,24 +440,12 @@ class Appointments {
 
 	/**
 	 * Return a row from exceptions table, i.e. days we are working or having holiday
+	 * @deprecated since 1.9.2
 	 * @return object
 	 */
 	function get_exception( $l, $w, $stat ) {
-		$exception = null;
-		$exceptions = wp_cache_get( 'exceptions_'. $l . '_' . $w );
-		if ( false === $exceptions ) {
-			$exceptions = $this->db->get_results( $this->db->prepare("SELECT * FROM {$this->exceptions_table} WHERE worker=%d AND location=%d", $w, $l) );
-			wp_cache_set( 'exceptions_'. $l . '_' . $w, $exceptions );
-		}
-		if ( $exceptions ) {
-			foreach ( $exceptions as $e ) {
-				if ( $e->status == $stat ) {
-					$exception = $e;
-					break;
-				}
-			}
-		}
-		return $exception;
+		_deprecated_function( __FUNCTION__, '1.9.2', 'appointments_get_worker_exceptions()' );
+		return appointments_get_worker_exceptions( $w, $s );
 	}
 
 	/**
@@ -2098,7 +2086,7 @@ class Appointments {
 		if ( !$w )
 			$w = $this->worker;
 		$is_working_day = false;
-		$result = $this->get_exception( $this->location, $w, 'open' );
+		$result = appointments_get_worker_exceptions( $this->location, $w, 'open' );
 		if ( $result != null  && strpos( $result->days, date( 'Y-m-d', $ccs ) ) !== false )
 			$is_working_day = true;
 
@@ -3309,7 +3297,7 @@ class Appointments {
 	}
 */
 	// Enqueue css for all admin pages
-	
+
 
 	// Return datepick locale file if it exists
 	// Since 1.0.6

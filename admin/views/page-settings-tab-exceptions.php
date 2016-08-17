@@ -59,7 +59,7 @@ if ( $workers ) {
 	</table>
 
 	<input type="hidden" name="location" value="0" />
-	<?php _appointments_settings_submit_block( $tab );_ ?>
+	<?php _appointments_settings_submit_block( 'exceptions' );_ ?>
 
 </form>
 <script type="text/javascript">
