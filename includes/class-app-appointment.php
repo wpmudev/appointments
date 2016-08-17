@@ -9,7 +9,6 @@ class Appointments_Appointment {
 	public $phone = '';
 	public $address = '';
 	public $city = '';
-	private $location = '';
 	public $service = '';
 	public $worker = '';
 	public $price = '';
@@ -34,7 +33,8 @@ class Appointments_Appointment {
 			$value = $this->$name;
 		}
 
-		return apply_filters( 'appointments_get_appointment_attribute', $value, $name );
+		$value = apply_filters( 'appointments_get_appointment_attribute', $value, $name );
+		return $value;
 	}
 
 	private function _sanitize_field( $field, $value ) {

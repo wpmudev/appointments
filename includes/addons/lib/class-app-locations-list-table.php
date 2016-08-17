@@ -26,7 +26,7 @@ class Appointments_Locations_List_Table extends WP_List_Table {
 		return $item->get_id();
 	}
 
-	function display_tablenav() {}
+	protected function display_tablenav( $which ) {}
 
 	function get_columns(){
 		return array(

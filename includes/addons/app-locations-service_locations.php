@@ -50,6 +50,14 @@ class App_Locations_ServiceLocations {
 		add_action('appointments_insert_service', array($this, 'save_service_location'));
 		add_action('appointments_delete_service', array($this, 'delete_service_location_relationship'));
 		add_action('wpmudev_appointments_update_service', array($this, 'save_service_location'));
+
+		add_filter( 'appointments_default_options', array( $this, 'default_options' ) );
+	}
+
+	public function default_options( $options ) {
+		$options['service_locations'] = array();
+		$options['service_locations']['insert'] = 'manual';
+		return $options;
 	}
 
 	/**
@@ -159,13 +167,14 @@ class App_Locations_ServiceLocations {
 	}
 
 	public function initialize () {
-		if (!class_exists('App_Locations_Model')) return false;
-		global $appointments;
-		$this->_data = $appointments->options;
-		if (empty($this->_data['service_locations'])) $this->_data['service_locations'] = array();
+		if ( ! class_exists( 'App_Locations_Model' ) ) {
+			return false;
+		}
+		$this->_data = appointments_get_options();;
+		$options = appointments_get_options();;
 		$this->_locations = App_Locations_Model::get_instance();
 
-		if (empty($this->_data['service_locations']['insert']) || 'manual' == $this->_data['service_locations']['insert']) {
+		if ( 'manual' == $options['service_locations']['insert'] ) {
 			add_shortcode('app_service_location', array($this, 'process_shortcode'));
 		} else {
 			add_shortcode('app_service_location', '__return_false');
@@ -194,6 +203,7 @@ class App_Locations_ServiceLocations {
 	}
 
 	public function show_settings () {
+		$settings = appointments_get_options();
 		?>
 			<h3><?php _e('Service Locations Settings', 'appointments') ?></h3>
 			<table class="form-table">
@@ -201,9 +211,9 @@ class App_Locations_ServiceLocations {
 					<th scope="row"><label for="service_locations-insert"><?php _e('Show service location', 'appointments')?></label></th>
 					<td>
 						<select id="service_locations-insert" name="service_locations[insert]">
-							<option value="manual" <?php selected($this->_data['service_locations']['insert'], 'manual'); ?> ><?php _e('I will add location info manually, using shortcode', 'appointments'); ?></option>
-							<option value="before" <?php selected($this->_data['service_locations']['insert'], 'before'); ?> ><?php _e('Automatic, before service description', 'appointments'); ?></option>
-							<option value="after" <?php selected($this->_data['service_locations']['insert'], 'after'); ?> ><?php _e('Automatic, after service description', 'appointments'); ?></option>
+							<option value="manual" <?php selected($settings['service_locations']['insert'], 'manual'); ?> ><?php _e('I will add location info manually, using shortcode', 'appointments'); ?></option>
+							<option value="before" <?php selected($settings['service_locations']['insert'], 'before'); ?> ><?php _e('Automatic, before service description', 'appointments'); ?></option>
+							<option value="after" <?php selected($settings['service_locations']['insert'], 'after'); ?> ><?php _e('Automatic, after service description', 'appointments'); ?></option>
 						</select>
 						<p><small><?php _e('You can use the shortcode like this: <code>[app_service_location]</code>', 'appointments'); ?></small></p>
 					</td>
@@ -235,7 +245,8 @@ class App_Locations_ServiceLocations {
 	public function inject_location_markup ($markup, $service, $description) {
 		if (!$service || empty($service->ID)) return $markup;
 		$out = $this->_get_service_location_markup($service->ID, '', ('content' == $description));
-		return ('before' == $this->_data['service_locations']['insert'])
+		$options = appointments_get_options();
+		return ('before' == $options['service_locations']['insert'])
 			? $out . $markup
 			: $markup . $out 
 		;

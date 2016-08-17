@@ -45,7 +45,17 @@ class App_Locations_LocationsWorker {
 		add_filter( 'appointments_notification_replacements', array( $this, 'add_notifications_replacements' ), 10, 4 );
 
 		add_filter( 'appointments_gcal_event_location', array( $this, 'set_gcal_location' ), 10, 2 );
+
+		add_filter( 'appointments_default_options', array( $this, 'default_options' ) );
 	}
+
+	public function default_options( $options ) {
+		$options['locations_settings'] = array();
+		$options['locations_settings']['all_appointments'] = '';
+		$options['locations_settings']['my_appointments'] = '';
+		return $options;
+	}
+
 
 	/**
 	 * Set Google Calendar Location
@@ -357,8 +367,7 @@ class App_Locations_LocationsWorker {
 	}
 
 	public function initialize () {
-		global $appointments;
-		$this->_data = $appointments->options;
+		$this->_data = appointments_get_options();
 
 		if (!class_exists('App_Locations_Model')) require_once(dirname(__FILE__) . '/lib/app_locations.php');
 		$this->_locations = App_Locations_Model::get_instance();
@@ -436,7 +445,9 @@ class App_Locations_LocationsWorker {
 	}
 
 	public function my_appointments_address ($out, $appointment) {
-		if (empty($appointment->location)) return $out . '<td>&nbsp;</td>';
+		if ( empty( $appointment->location ) ) {
+			return $out . '<td>&nbsp;</td>';
+		}
 		$out .= '<td>';
 		$location = $this->_locations->find_by('id', $appointment->location);
 		if ($location) {
