@@ -38,10 +38,7 @@ class Appointments {
 	public $timetables = array();
 
 	public $local_time;
-	public $wh_table;
 	public $exceptions_table;
-	public $app_table;
-	public $workers_table;
 	/** @var bool|Appointments_Google_Calendar  */
 	public $gcal_api = false;
 	public $locale_error;
@@ -49,7 +46,6 @@ class Appointments {
 	public $datetime_format;
 	public $log_file;
 	public $salt;
-	public $plugin_dir;
 	public $worker;
 	public $location;
 	public $service;
@@ -86,7 +82,6 @@ class Appointments {
 			$this->timetables = array();
 		}
 
-		$this->plugin_dir = plugin_dir_path(__FILE__);
 		$this->plugin_url = plugins_url(basename(dirname(__FILE__)));
 
 		// Read all options at once
@@ -137,15 +132,17 @@ class Appointments {
 		}
 
 		// Widgets
-		require_once( $this->plugin_dir . '/includes/widgets.php' );
+		require_once( appointments_plugin_dir() . 'includes/widgets.php' );
 		add_action( 'widgets_init', array( &$this, 'widgets_init' ) );
 
 		// Buddypress
-		require_once($this->plugin_dir . '/includes/class_app_buddypress.php');
-		if (class_exists('App_BuddyPress')) App_BuddyPress::serve();
+		require_once( appointments_plugin_dir() . 'includes/class_app_buddypress.php');
+		if ( class_exists( 'App_BuddyPress' ) ) {
+			App_BuddyPress::serve();
+		}
 
 		// Membership2 Integration
-		$m2_integration = $this->plugin_dir . '/includes/class_app_membership2.php';
+		$m2_integration = appointments_plugin_dir() . 'includes/class_app_membership2.php';
 		if ( file_exists( $m2_integration ) ) {
 			require_once $m2_integration;
 		}
@@ -171,11 +168,8 @@ class Appointments {
 		// Database variables
 		global $wpdb;
 		$this->db 					= &$wpdb;
-		$this->wh_table 			= $wpdb->prefix . "app_working_hours";
 		$this->exceptions_table 	= $wpdb->prefix . "app_exceptions";
 		$this->services_table 		= $wpdb->prefix . "app_services";
-		$this->workers_table 		= $wpdb->prefix . "app_workers";
-		$this->app_table 			= $wpdb->prefix . "app_appointments";
 		$this->transaction_table 	= $wpdb->prefix . "app_transactions";
 		$this->cache_table 			= $wpdb->prefix . "app_cache";
 		// DB version
@@ -241,7 +235,7 @@ class Appointments {
 
 	function get_gcal_api() {
 		if ( false === $this->gcal_api && ! defined( 'APP_GCAL_DISABLE' ) ) {
-			require_once $this->plugin_dir . '/includes/class-app-gcal.php';
+			require_once appointments_plugin_dir() . 'includes/class-app-gcal.php';
 			$this->gcal_api = new Appointments_Google_Calendar();
 		}
 		return $this->gcal_api;
@@ -3325,16 +3319,19 @@ class Appointments {
 
 		if (function_exists('glob') && !(defined('APP_FLAG_NO_GLOB') && APP_FLAG_NO_GLOB)) {
 			$filename = false;
-			$all = glob("{$this->plugin_dir}/js/jquery.datepick-*.js");
+			$dir = appointments_plugin_dir() . 'js/';
+			$all = glob("{$dir}jquery.datepick-*.js");
 			$full_match = preg_quote("{$locale}.js", '/');
 			$partial_match = false;
 			if (substr_count($locale, '-')) {
 				list($main_locale, $rest) = explode('-', $locale, 2);
-				if (!empty($main_locale)) $partial_match = preg_quote("{$main_locale}.js", '/');
+				if ( ! empty( $main_locale ) ) {
+					$partial_match = preg_quote( "{$main_locale}.js", '/' );
+				}
 			}
 
 			foreach ($all as $file) {
-				if (preg_match('/' . $full_match . '$/', $file)) {
+				if ( preg_match( '/' . $full_match . '$/', $file ) ) {
 					$filename = $file;
 					break;
 				} else if ($partial_match && preg_match('/' . $partial_match . '$/', $file)) {
@@ -3346,16 +3343,19 @@ class Appointments {
 				: false
 			;
 		} else {
-			$file = '/js/jquery.datepick-'.$locale.'.js';
-			if ( file_exists( $this->plugin_dir . $file ) )
-				return $file;
+			$dir = appointments_plugin_dir() . 'js/';
+			$file = 'jquery.datepick-'.$locale.'.js';
+			if ( file_exists( $dir . $file ) ) {
+				return '/js/' . $file;
+			}
 
 			if ( substr_count( $locale, '-' ) ) {
 				$l = explode( '-', $locale );
 				$locale = $l[0];
-				$file = '/js/jquery.datepick-'.$locale.'.js';
-				if ( file_exists( $this->plugin_dir . $file ) )
-					return $file;
+				$file = 'jquery.datepick-'.$locale.'.js';
+				$dir = appointments_plugin_dir() . 'js/';
+				if ( file_exists( $dir . $file ) )
+					return '/js/' . $file;
 			}
 		}
 
@@ -3365,11 +3365,13 @@ class Appointments {
 	// Read and return local month names from datepick
 	// Since 1.0.6.1
 	function datepick_local_months() {
-		if ( !$file = $this->datepick_localfile() )
+		if ( ! $file = $this->datepick_localfile() ) {
 			return false;
+		}
 
-		if ( !$file_content = @file_get_contents(  $this->plugin_dir . $file ) )
+		if ( ! $file_content = @file_get_contents( appointments_plugin_dir() . $file ) ) {
 			return false;
+		}
 
 		$file_content = str_replace( array("\r","\n","\t"), '', $file_content );
 
@@ -3387,7 +3389,7 @@ class Appointments {
 		if ( !$file = $this->datepick_localfile() )
 			return false;
 
-		if ( !$file_content = @file_get_contents(  $this->plugin_dir . $file ) )
+		if ( !$file_content = @file_get_contents( appointments_plugin_dir() . $file ) )
 			return false;
 
 		$file_content = str_replace( array("\r","\n","\t"), '', $file_content );
@@ -4084,7 +4086,6 @@ function appointments_plugin_url() {
 }
 
 function appointments_plugin_dir() {
-	global $appointments;
 	return trailingslashit( plugin_dir_path( __FILE__ ) );
 }
 

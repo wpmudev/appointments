@@ -688,7 +688,7 @@ class App_Appointments_Old_Queries_Test extends App_UnitTestCase {
 	 * See App_Shortcode_WorkerMonthlyCalendar::_get_worker_appointments()
 	 */
 	private function _old_get_worker_appointments ($worker_id, $status, $start_at) {
-		global $appointments, $wpdb;
+		global $wpdb;
 
 		$services = appointments_get_worker_services($worker_id);
 		$service_ids = !empty($services)
@@ -706,8 +706,9 @@ class App_Appointments_Old_Queries_Test extends App_UnitTestCase {
 		$first = strtotime(date('Y-m-01', $start_at));
 		$last = ($first + (date('t', $first) * 86400 )) - 1;
 
+		$table = appointments_get_table( 'appointments' );
 		$sql = $wpdb->prepare(
-			"SELECT * FROM {$appointments->app_table} WHERE {$worker_sql} {$status_sql} AND UNIX_TIMESTAMP(start)>%d AND UNIX_TIMESTAMP(end)<%d ORDER BY start ASC",
+			"SELECT * FROM {$table} WHERE {$worker_sql} {$status_sql} AND UNIX_TIMESTAMP(start)>%d AND UNIX_TIMESTAMP(end)<%d ORDER BY start ASC",
 			$first, $last
 		);
 
