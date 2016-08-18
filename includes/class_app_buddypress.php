@@ -204,11 +204,11 @@ class App_BuddyPress {
 			$this->_core->get_lsw();
 
 			$result = array();
-			$result_open = $this->_core->get_exception($this->_core->location, $this->_core->worker, 'open');
+			$result_open = appointments_get_worker_exceptions( $this->_core->worker, 'open', $this->_core->location );
 			if ($result_open) $result["open"] = $result_open->days;
 			else $result["open"] = null;
 
-			$result_closed = $this->_core->get_exception($this->_core->location, $this->_core->worker, 'closed');
+			$result_closed = appointments_get_worker_exceptions( $this->_core->worker, 'closed', $this->_core->location );
 			if ($result_closed) $result["closed"] = $result_closed->days;
 			else $result["closed"] = null;
 

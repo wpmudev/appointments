@@ -64,47 +64,19 @@ class Appointments_Admin_User_Profile {
 				}
 			}
 
+
+			$options = appointments_get_options();
 			// Save working hours table
 			// Do not save these if we are coming from BuddyPress confirmation tab
-			if ( isset( $appointments->options["allow_worker_wh"] ) && 'yes' == $appointments->options["allow_worker_wh"] && isset( $_POST['open'] ) && isset( $_POST['closed'] ) ) {
+			if ( isset( $options["allow_worker_wh"] ) && 'yes' == $options["allow_worker_wh"] && isset( $_POST['open'] ) && isset( $_POST['closed'] ) ) {
 				$result   = $result2 = false;
 				$location = 0;
+				$worker_id = absint( $_REQUEST['worker_id'] );
+
+				check_admin_referer( 'app_exceptions-' . $worker_id, 'app_exceptions_nonce' );
 				foreach ( array( 'closed', 'open' ) as $stat ) {
-					appointments_update_worker_working_hours( $profileuser_id, $_POST[ $stat ], $stat, $location );
-					
-					// Save exceptions
-					$count2 = $wpdb->get_var( $wpdb->prepare(
-						"SELECT COUNT(*) FROM {$appointments->exceptions_table} WHERE location=%d AND worker=%d AND status=%s",
-						$location, $profileuser_id, $stat
-					) );
-
-					if ( $count2 > 0 ) {
-						$result2 = $wpdb->update( $appointments->exceptions_table,
-							array(
-								'days'   => $_POST[ $stat ]["exceptional_days"],
-								'status' => $stat
-							),
-							array(
-								'location' => $location,
-								'worker'   => $profileuser_id,
-								'status'   => $stat
-							),
-							array( '%s', '%s' ),
-							array( '%d', '%d', '%s' )
-						);
-					} else {
-						$result2 = $wpdb->insert( $appointments->exceptions_table,
-							array(
-								'location' => $location,
-								'worker'   => $profileuser_id,
-								'days'     => $_POST[ $stat ]["exceptional_days"],
-								'status'   => $stat
-							),
-							array( '%d', '%d', '%s', '%s' )
-						);
-					}
-
-
+					$result = $result || appointments_update_worker_working_hours( $profileuser_id, $_POST[ $stat ], $stat, $location );
+					$result2 = $result2 || appointments_update_worker_exceptions( $profileuser_id, $stat, $_POST[ $stat ]["exceptional_days"] );
 				}
 				if ( $result || $result2 ) {
 					$message = sprintf( __( '%s edited his working hours.', 'appointments' ), appointments_get_worker_name( $profileuser_id ) );
@@ -190,25 +162,27 @@ class Appointments_Admin_User_Profile {
 	private function my_working_hours( $profileuser ) {
 		$appointments = appointments();
 
+		$worker_id = $profileuser->ID;
+
 		// A little trick to pass correct lsw variables to the related function
 		$_REQUEST["app_location_id"] = 0;
-		$_REQUEST["app_provider_id"] = $profileuser->ID;
+		$_REQUEST["app_provider_id"] = $worker_id;
 
 		$appointments->get_lsw();
 
 		$result = array();
-		$result_open = $appointments->get_exception( $appointments->location, $appointments->worker, 'open' );
+		$result_open = appointments_get_worker_exceptions( $worker_id, 'open' );
 		if ( $result_open ) {
 			$result["open"] = $result_open->days;
 		} else {
-			$result["open"] = null;
+			$result["open"] = '';
 		}
 
-		$result_closed = $appointments->get_exception( $appointments->location, $appointments->worker, 'closed' );
+		$result_closed = appointments_get_worker_exceptions( $worker_id, 'closed' );
 		if ( $result_closed ) {
 			$result["closed"] = $result_closed->days;
 		} else {
-			$result["closed"] = null;
+			$result["closed"] = '';
 		}
 
 		include_once( appointments_plugin_dir() . 'admin/views/user-profile-working-hours.php' );

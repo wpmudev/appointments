@@ -32,70 +32,12 @@ class Appointments_Worker {
 		return $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table WHERE worker = %d", $this->ID ) );
 	}
 
-	public function get_exceptions( $status ) {
-		global $wpdb;
-		$exception = null;
-		$exceptions = wp_cache_get( 'app_worker_exceptions_' . $this->ID );
-		if ( false === $exceptions ) {
-			$table = appointments_get_table( 'exceptions' );
-			$exceptions = $wpdb->get_results( $wpdb->prepare("SELECT * FROM {$table} WHERE worker=%d AND location=0", $this->ID ) );
-			wp_cache_set( 'app_worker_exceptions_' . $this->ID, $exceptions );
-		}
-
-		if ( $exceptions ) {
-			foreach ( $exceptions as $e ) {
-				if ( $e->status == $status ) {
-					$exception = $e;
-					break;
-				}
-			}
-		}
-
-		return $exception;
+	public function get_exceptions( $status, $location = 0 ) {
+		return appointments_get_worker_exceptions( $this->ID, $status, $location );
 	}
 
-	public function update_exceptions( $status, $days ) {
-		global $wpdb;
-
-		if ( ! in_array( $status, array( 'open', 'closed' ) ) ) {
-			return false;
-		}
-
-		$current_days = appointments_get_worker_exceptions( $this->ID, $status );
-		$table = appointments_get_table( 'exceptions' );
-
-		if ( ! $days ) {
-			$days = '';
-		}
-
-		wp_cache_delete( 'app_worker_exceptions_' . $this->ID );
-		if ( is_null( $current_days ) ) {
-			$wpdb->insert(
-				$table,
-				array(
-					'worker'   => $this->ID,
-					'days'     => $days,
-					'status'   => $status
-				),
-				array( '%d', '%s', '%s' )
-			);
-
-			return $wpdb->insert_id;
-		}
-		else {
-			return $wpdb->update( $table,
-				array(
-					'days'   => $days
-				),
-				array(
-					'worker'   => $this->ID,
-					'location' => 0,
-					'status'   => $status
-				),
-				array( '%s', '%s' ),
-				array( '%d', '%d', '%s' )
-			);
-		}
+	public function update_exceptions( $status, $days, $location = 0 ) {
+		return appointments_update_worker_exceptions( $this->ID, $status, $days, $location );
 	}
 
 	public function get_services() {
@@ -872,24 +814,85 @@ function appointments_delete_worker_working_hours( $worker_id ) {
  * @param int $worker_id
  * @param int $status
  *
- * @return null
+ * @return null|object
  */
-function appointments_get_worker_exceptions( $worker_id, $status ) {
-	$worker = appointments_get_worker( $worker_id );
-	if ( ! $worker ) {
-		return null;
+function appointments_get_worker_exceptions( $worker_id, $status, $location = 0 ) {
+	global $wpdb;
+
+	$worker_id = absint( $worker_id );
+	if ( $worker_id && ! appointments_is_worker( $worker_id ) ) {
+		return false;
 	}
 
-	return $worker->get_exceptions( $status );
+	$exception = null;
+	$exceptions = wp_cache_get( 'app_worker_exceptions-' . $location . '-' . $worker_id );
+
+	if ( false === $exceptions ) {
+		$table = appointments_get_table( 'exceptions' );
+		$exceptions = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$table} WHERE worker=%d AND location=%d", $worker_id, $location ) );
+		wp_cache_set( 'app_worker_exceptions-' . $location . '-' . $worker_id, $exceptions );
+	}
+
+	if ( $exceptions ) {
+		foreach ( $exceptions as $e ) {
+			if ( $e->status == $status ) {
+				$exception = $e;
+				break;
+			}
+		}
+	}
+
+	return $exception;
 }
 
-function appointments_update_worker_exceptions( $worker_id, $status, $days ) {
-	$worker = appointments_get_worker( $worker_id );
-	if ( ! $worker ) {
-		return null;
+function appointments_update_worker_exceptions( $worker_id, $status, $days, $location = 0 ) {
+	global $wpdb;
+
+	$worker_id = absint( $worker_id );
+	if ( $worker_id && ! appointments_is_worker( $worker_id ) ) {
+		return false;
 	}
 
-	return $worker->update_exceptions( $status, $days );
+	if ( ! in_array( $status, array( 'open', 'closed' ) ) ) {
+		return false;
+	}
+
+	$current_days = appointments_get_worker_exceptions( $worker_id, $status );
+	$table = appointments_get_table( 'exceptions' );
+
+	if ( ! $days ) {
+		$days = '';
+	}
+
+	appointments_delete_worker_exceptions_cache( absint( $location ), $worker_id );
+	if ( is_null( $current_days ) ) {
+		$wpdb->insert(
+			$table,
+			array(
+				'worker'   => $worker_id,
+				'days'     => $days,
+				'status'   => $status,
+				'location'   => $location
+			),
+			array( '%d', '%s', '%s', '%d' )
+		);
+
+		return $wpdb->insert_id;
+	}
+	else {
+		return $wpdb->update( $table,
+			array(
+				'days'   => $days
+			),
+			array(
+				'worker'   => $worker_id,
+				'status'   => $status,
+				'location'   => $location
+			),
+			array( '%s', '%s' ),
+			array( '%d', '%s', '%d' )
+		);
+	}
 }
 
 
@@ -900,12 +903,16 @@ function appointments_delete_worker_cache( $worker_id = 0 ) {
 	wp_cache_delete( 'app_all_workers' );
 	wp_cache_delete( 'app_workers_by_service' );
 	wp_cache_delete( 'app_working_hours' );
-	wp_cache_delete( 'app_worker_exceptions_' . $worker_id );
 	//@ TODO: Delete capacity_ cache
 	appointments_delete_timetables_cache();
 }
 
 function appointments_delete_work_breaks_cache( $l, $w ) {
 	$cache_key = 'appointments_work_breaks-' . $l . '-' . $w;
+	wp_cache_delete( $cache_key );
+}
+
+function appointments_delete_worker_exceptions_cache( $location, $worker_id ) {
+	$cache_key = 'app_worker_exceptions-' . $location . '-' . $worker_id;
 	wp_cache_delete( $cache_key );
 }

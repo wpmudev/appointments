@@ -734,5 +734,33 @@ class App_Workers_Test extends App_UnitTestCase {
 
 	}
 
+	/**
+	 * @group exceptions
+	 */
+	public function test_should_save_null_worker_exceptions() {
+		$data = array(
+			array(
+				'worker' => 0,
+				'status' => 'closed',
+				'value' => '2016-09-15,2016-09-21,2016-09-22'
+			),
+			array(
+				'worker' => 0,
+				'status' => 'open',
+				'value' => '2016-08-18,2016-08-19,2016-08-20,2016-08-25'
+			)
+		);
+
+		foreach ( $data as $row ) {
+			appointments_update_worker_exceptions( $row['worker'], $row['status'], $row['value'] );
+		}
+
+		$open = appointments_get_worker_exceptions( 0, 'open' );
+		$closed = appointments_get_worker_exceptions( 0, 'closed' );
+
+		$this->assertEquals( $data[1]['value'], $open->days );
+		$this->assertEquals( $data[0]['value'], $closed->days );
+	}
+
 
 }

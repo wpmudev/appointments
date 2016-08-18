@@ -395,41 +395,13 @@ class Appointments_Admin_Settings_Page {
 
 	private function _save_exceptions() {
 		// Save Exceptions
-		global $wpdb;
-		$appointments = appointments();
 		$location = (int)$_POST['location'];
+		$worker_id = absint( $_POST['worker_id'] );
+		check_admin_referer( 'app_settings_exceptions-' . $worker_id, 'app_exceptions_nonce' );
+
 		foreach ( array( 'closed', 'open' ) as $stat ) {
-			$count = $wpdb->get_var($wpdb->prepare(
-				"SELECT COUNT(*) FROM {$appointments->exceptions_table} WHERE location=%d AND worker=%d AND status=%s",
-				$location, $appointments->worker, $stat
-			));
-
-			if ( $count > 0 ) {
-				$r = $wpdb->update( $appointments->exceptions_table,
-					array(
-						'days'		=> $this->_sort( $_POST[$stat]["exceptional_days"] ),
-						'status'	=> $stat
-					),
-					array(
-						'location'	=> $location,
-						'worker'	=> $appointments->worker,
-						'status'	=> $stat ),
-					array( '%s', '%s' ),
-					array( '%d', '%d', '%s' )
-				);
-			}
-			else {
-				$r = $wpdb->insert( $appointments->exceptions_table,
-					array( 'location'	=> $location,
-					       'worker'	=> $appointments->worker,
-					       'days'		=> $this->_sort( $_POST[$stat]["exceptional_days"] ),
-					       'status'	=> $stat
-					),
-					array( '%d', '%d', '%s', '%s' )
-				);
-			}
-
-			appointments_delete_exceptions_cache( $location, $appointments->worker );
+			$exceptions = $this->_sort( $_POST[$stat]["exceptional_days"] );
+			appointments_update_worker_exceptions( $worker_id, $stat, $exceptions, $location );
 		}
 	}
 

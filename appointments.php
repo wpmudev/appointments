@@ -38,7 +38,6 @@ class Appointments {
 	public $timetables = array();
 
 	public $local_time;
-	public $exceptions_table;
 	/** @var bool|Appointments_Google_Calendar  */
 	public $gcal_api = false;
 	public $locale_error;
@@ -168,7 +167,6 @@ class Appointments {
 		// Database variables
 		global $wpdb;
 		$this->db 					= &$wpdb;
-		$this->exceptions_table 	= $wpdb->prefix . "app_exceptions";
 		$this->services_table 		= $wpdb->prefix . "app_services";
 		$this->transaction_table 	= $wpdb->prefix . "app_transactions";
 		$this->cache_table 			= $wpdb->prefix . "app_cache";
@@ -445,7 +443,7 @@ class Appointments {
 	 */
 	function get_exception( $l, $w, $stat ) {
 		_deprecated_function( __FUNCTION__, '1.9.2', 'appointments_get_worker_exceptions()' );
-		return appointments_get_worker_exceptions( $w, $s );
+		return appointments_get_worker_exceptions( $w, $stat, $l );
 	}
 
 	/**
@@ -2086,7 +2084,7 @@ class Appointments {
 		if ( !$w )
 			$w = $this->worker;
 		$is_working_day = false;
-		$result = appointments_get_worker_exceptions( $this->location, $w, 'open' );
+		$result = appointments_get_worker_exceptions( $w, 'open', $this->location );
 		if ( $result != null  && strpos( $result->days, date( 'Y-m-d', $ccs ) ) !== false )
 			$is_working_day = true;
 
@@ -2103,7 +2101,7 @@ class Appointments {
 		if ( !$w )
 			$w = $this->worker;
 		$is_holiday = false;
-		$result = $this->get_exception( $this->location, $w, 'closed' );
+		$result = appointments_get_worker_exceptions( $w, 'closed', $this->location );
 		if ( $result != null  && strpos( $result->days, date( 'Y-m-d', $ccs ) ) !== false )
 			$is_holiday = true;
 
