@@ -30,6 +30,12 @@ class App_Mp_ProductCartDisplay {
 
 		add_action('app-settings-payment_settings-marketpress', array($this, 'show_settings'));
 		add_filter('app-options-before_save', array($this, 'save_settings'));
+
+		add_action( 'wp_ajax_mp_update_cart', array( $this, 'update_apps_on_cart_change' ) );
+		add_action( 'wp_ajax_nopriv_mp_update_cart', array( $this, 'update_apps_on_cart_change' ) );
+
+		add_action( 'app_remove_expired', array( $this, 'remove_app_from_cart_when_expired' ), 10, 2 );
+
 	}
 
 	public function apply_changes ($name, $service, $worker, $start, $app) {
@@ -54,7 +60,7 @@ $(document).on("app-confirmation-response_received", function (e, response) {
 </script>
 		<?php
 	}
-	
+
 	public function initialize () {
 		global $appointments;
 		$this->_core = $appointments;
@@ -96,5 +102,59 @@ $(document).on("app-confirmation-response_received", function (e, response) {
 			<?php
 		}
 	}
+
+
+	public function update_apps_on_cart_change(){
+
+		if( mp_get_post_value( 'cart_action' ) != 'remove_item' && mp_get_post_value( 'cart_action' ) != 'undo_remove_item' ) return;
+
+		$product_id = mp_get_post_value( 'product', null );
+			
+		if ( mp_get_post_value( 'cart_action' ) != 'empty_cart' && is_null( $product_id ) ) {
+			wp_send_json_error();
+		}
+
+
+		if ( is_array( $product_id ) ) {
+			
+			$product_id = mp_arr_get_value( 'product_id', $product_id );
+
+		}
+
+
+		$app_id = get_post_meta( $product_id, 'name', true );
+
+		if( !is_numeric( $app_id ) ) return;
+
+		$cart_action = mp_get_post_value( 'cart_action' );
+
+		switch ( $cart_action ){
+			case 'remove_item': appointments_update_appointment_status( $app_id, 'removed' ); break;
+			case 'undo_remove_item': appointments_update_appointment_status( $app_id, 'pending' ); break;
+
+		}
+
+	}
+
+
+	public function remove_app_from_cart_when_expired( $appointment, $new_status ){
+
+		if( !class_exists('Marketpress') ) return;
+
+		//Check if appointment exists in cart		
+		$cart_products = mp_cart()->get_items_as_objects();
+
+		foreach( $cart_products as $product ){
+
+			if( get_post_meta( $product->ID, 'name', true ) == $appointment->ID ){
+
+				mp_cart()->remove_item( $product->ID );
+
+			}
+
+		}
+
+	}
+
 }
 App_Mp_ProductCartDisplay::serve();
