@@ -963,11 +963,12 @@ class Appointments {
 
 	/**
 	 * Converts number of seconds to hours:mins acc to the WP time format setting
-	 * @param integer secs Seconds
-	 * @param string $forced_format Forcing the return timestamp format
-	 * @return string
+	 * @param integer $secs Seconds
+	 * @param bool $forced_format
+	 * @param bool $do_i18n
+	 * @return bool|int|string
 	 */
-	function secs2hours( $secs, $forced_format=false ) {
+	function secs2hours( $secs, $forced_format=false, $do_i18n = true ) {
 		$min = (int)($secs / 60);
 		$hours = "00";
 		if ( $min < 60 )
@@ -981,8 +982,14 @@ class Appointments {
 				$mins = "0" . $mins;
 			$hours_min = $hours . ":" . $mins;
 		}
-		if (!empty($forced_format)) $hours_min = date_i18n($forced_format, strtotime($hours_min . ":00"));
-		else if ($this->time_format) $hours_min = date_i18n($this->time_format, strtotime($hours_min . ":00")); // @TODO: TEST THIS THOROUGHLY!!!!
+		if (!empty($forced_format)) $hours_min = strtotime($hours_min . ":00");
+		else if ($this->time_format) $hours_min = strtotime($hours_min . ":00"); // @TODO: TEST THIS THOROUGHLY!!!!
+
+		if( $do_i18n ){
+			$hours_min = date_i18n( $this->time_format, $hours_min );
+		} else {
+			$hours_min = date( $this->time_format, $hours_min );
+		}
 
 		return $hours_min;
 	}
@@ -3700,7 +3707,7 @@ class Appointments {
 					$form .= '<td>';
 					$form .= '<select name="'.$status.'['.$day.'][start][' . $idx . ']">';
 					for ( $t=0; $t<3600*24; $t=$t+$min_secs ) {
-						$dhours = esc_attr($this->secs2hours($t, $_required_format)); // Hours in 08:30 format - escape, because they're values now.
+						$dhours = esc_attr($this->secs2hours( $t, $_required_format, false )); // Hours in 08:30 format - escape, because they're values now.
 						$shours = $this->secs2hours($t);
 						if ( isset($whours[$day]['start'][$idx]) && strtotime($dhours) == strtotime($whours[$day]['start'][$idx]) )
 							$s = "selected='selected'";
@@ -3716,7 +3723,7 @@ class Appointments {
 					$form .= '<td>';
 					$form .= '<select name="'.$status.'['.$day.'][end][' . $idx . ']" autocomplete="off">';
 					for ( $t=$min_secs; $t<=3600*24; $t=$t+$min_secs ) {
-						$dhours = esc_attr($this->secs2hours($t, $_required_format)); // Hours in 08:30 format - escape, because they're values now.
+						$dhours = esc_attr($this->secs2hours( $t, $_required_format, false )); // Hours in 08:30 format - escape, because they're values now.
 						$shours = $this->secs2hours($t);
 						if ( isset($whours[$day]['end'][$idx]) && strtotime($dhours) == strtotime($whours[$day]['end'][$idx]) )
 							$s = "selected='selected'";
@@ -3749,7 +3756,7 @@ class Appointments {
 				$form .= '<td>';
 				$form .= '<select name="'.$status.'['.$day.'][start]" autocomplete="off">';
 				for ( $t=0; $t<3600*24; $t=$t+$min_secs ) {
-					$dhours = esc_attr($this->secs2hours($t, $_required_format)); // Hours in 08:30 format - escape, because they're values now.
+					$dhours = esc_attr($this->secs2hours( $t, $_required_format, false )); // Hours in 08:30 format - escape, because they're values now.
 					$shours = $this->secs2hours($t);
 					if ( isset($whours[$day]['start']) && strtotime($dhours) == strtotime($whours[$day]['start']) )
 						$s = "selected='selected'";
@@ -3765,7 +3772,7 @@ class Appointments {
 				$form .= '<td>';
 				$form .= '<select name="'.$status.'['.$day.'][end]" autocomplete="off">';
 				for ( $t=$min_secs; $t<=3600*24; $t=$t+$min_secs ) {
-					$dhours = esc_attr($this->secs2hours($t, $_required_format)); // Hours in 08:30 format - escape, because they're values now.
+					$dhours = esc_attr($this->secs2hours( $t, $_required_format, false )); // Hours in 08:30 format - escape, because they're values now.
 					$shours = $this->secs2hours($t);
 					if ( isset($whours[$day]['end']) && strtotime($dhours) == strtotime($whours[$day]['end']) )
 						$s = " selected='selected'";
