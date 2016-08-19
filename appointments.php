@@ -3239,11 +3239,17 @@ class Appointments {
 		if ( $expireds && $process_expired ) {
 			foreach ( $expireds as $expired ) {
 				if ( 'pending' == $expired->status || 'reserved' == $expired->status ) {
-					if ('reserved' == $expired->status && strtotime($expired->end) > current_time( 'timestamp' ) ) {
-						$new_status = $expired->status; // Don't shift the GCal apps until they actually expire (end time in past)
+					if ( 'reserved' == $expired->status ) {
+						if ( 'reserved' == $expired->status && strtotime($expired->end) > current_time( 'timestamp' ) ) {
+							$new_status = $expired->status; // Don't shift the GCal apps until they actually expire (end time in past)
+						}
+						else {
+							$new_status = 'completed';
+						}
 					}
 					else {
-						$new_status = 'completed';
+						// Pending
+						$new_status = 'removed';
 					}
 				} else if ( 'confirmed' == $expired->status || 'paid' == $expired->status ) {
 					$new_status = 'completed';

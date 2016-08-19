@@ -1,3 +1,15 @@
+2016-??? - 1.9.2
+-------------------------------
+- New: GCal setting: Overwrite Google Calendar Title and Description
+- Fix: Service Providers excerpt pulling post content
+- Fix: Editing booked appointment hides the one currently opened
+- Fix: Location data missing in Confirmation Table
+- Fix: Sorting and ordering appointments in app_my_appointments shortcode
+- Fix: Responsive issues in Appointments list
+- Fix: [MarketPress] Remove an Appointment from shopping cart when appointment status changes
+- Fix: Pending appointments changing to completed when they expires
+
+
 2016-06-22 - 1.9.1
 -------------------------------
 - Fix: Google Calendar appointments were remove instead of been set to completed status when time passed by
