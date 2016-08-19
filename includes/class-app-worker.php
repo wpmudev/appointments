@@ -910,9 +910,11 @@ function appointments_delete_worker_cache( $worker_id = 0 ) {
 function appointments_delete_work_breaks_cache( $l, $w ) {
 	$cache_key = 'appointments_work_breaks-' . $l . '-' . $w;
 	wp_cache_delete( $cache_key );
+	appointments_delete_timetables_cache();
 }
 
 function appointments_delete_worker_exceptions_cache( $location, $worker_id ) {
 	$cache_key = 'app_worker_exceptions-' . $location . '-' . $worker_id;
 	wp_cache_delete( $cache_key );
+	appointments_delete_timetables_cache();
 }

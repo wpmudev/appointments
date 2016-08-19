@@ -2180,12 +2180,15 @@ class Appointments {
 	 * @since 1.2.2
 	 */
 	function is_working( $ccs, $cse, $w ) {
-		if ( $this->is_exceptional_working_day( $ccs, $cse, $w ) )
+		if ( $this->is_exceptional_working_day( $ccs, $cse, $w ) ) {
 			return true;
-		if ( $this->is_holiday( $ccs, $cse, $w ) )
+		}
+		if ( $this->is_holiday( $ccs, $cse, $w ) ) {
 			return false;
-		if ( $this->is_break( $ccs, $cse, $w ) )
+		}
+		if ( $this->is_break( $ccs, $cse, $w ) ) {
 			return false;
+		}
 
 		return true;
 	}
