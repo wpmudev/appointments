@@ -17,7 +17,9 @@ class App_Tutorial {
 	function tutorial1() {
 		global $appointments;
 		//load the file
-		if (!class_exists('Pointer_Tutorial')) require_once( appointments_plugin_dir() . 'includes/external/pointer-tutorials.php' );
+		if ( ! class_exists( 'Pointer_Tutorial' ) ) {
+			require_once( appointments_plugin_dir() . 'includes/external/pointer-tutorials.php' );
+		}
 
 		//create our tutorial, with default redirect prefs
 		$tutorial = new Pointer_Tutorial('app_tutorial1', true, false);
@@ -43,52 +45,47 @@ class App_Tutorial {
 		    'position' => array( 'edge' => 'left', 'align' => 'center' ),
 		));
 
-		$tutorial->add_step($settings, $title . '_page_app_settings', 'input:checkbox[name="make_an_appointment"]', __('Creating a functional front end appointment page', 'appointments'), array(
+		$tutorial->add_step($settings . '&step=1#section-display', $title . '_page_app_settings', 'input:checkbox[name="make_an_appointment"]', __('Creating a functional front end appointment page', 'appointments'), array(
 		    'content'  => '<p>' . esc_js(__('Appointments+ provides an easy way of creating an appointment page. Check this checkbox to include all shortcodes in a full functional page. You can later edit this page.', 'appointments' )).'</p>',
 		    'position' => array( 'edge' => 'left', 'align' => 'center' ),
 		));
 
-		$tutorial->add_step($settings, $title . '_page_app_settings', 'select[name="app_page_type"]', __('Creating a functional front end appointment page', 'appointments'), array(
+		$tutorial->add_step($settings. '&step=1#section-display', $title . '_page_app_settings', 'select[name="app_page_type"]', __('Creating a functional front end appointment page', 'appointments'), array(
 		    'content'  => '<p>' . esc_js(__('You can select a schedule type from the list. To see how they look, you can also create more than one page, one by one and then delete unused ones.', 'appointments' )).'</p>',
 		    'position' => array( 'edge' => 'right', 'align' => 'center' ),
 		));
 
-		$tutorial->add_step($settings, $title . '_page_app_settings', 'select[name="color_set"]', __('Selecting a Color Set to Match Your Theme', 'appointments'), array(
+		$tutorial->add_step($settings . '&step=1#section-display', $title . '_page_app_settings', 'select[name="color_set"]', __('Selecting a Color Set to Match Your Theme', 'appointments'), array(
 		    'content'  => '<p>' . esc_js(__('It is possible to select color sets for your schedule tables from predefined sets, or customize them. When you select Custom, you will be able to set your own colors for different statuses (Busy, free, not possible/not working).', 'appointments' )).'</p>',
 		    'position' => array( 'edge' => 'right', 'align' => 'center' ),
 		));
 
-		$tutorial->add_step($settings, $title . '_page_app_settings', 'select[name="login_required"]', __('Do you require login?', 'appointments'), array(
+		$tutorial->add_step($settings . '#section-accesibility', $title . '_page_app_settings', 'select[name="login_required"]', __('Do you require login?', 'appointments'), array(
 		    'content'  => '<p>' . esc_js(__('You can set whether client is required to log into the website to apply for an appointment. When you select this setting as Yes, you will see additional settings.', 'appointments' )).'</p>',
 		    'position' => array( 'edge' => 'left', 'align' => 'center' ),
 		));
 
-		$tutorial->add_step($settings, $title . '_page_app_settings', 'input:checkbox[name="ask_name"]', __('Requiring information from client', 'appointments'), array(
+		$tutorial->add_step($settings . '&step=1#section-display', $title . '_page_app_settings', 'input:checkbox[name="ask_name"]', __('Requiring information from client', 'appointments'), array(
 		    'content'  => '<p>' . esc_js(__('You may ask the client to fill some selectable fields so that they may not need to register on your website.', 'appointments' )).'</p>',
 		    'position' => array( 'edge' => 'right', 'align' => 'center' ),
 		));
 
-		$tutorial->add_step($settings, $title . '_page_app_settings', 'select[name="payment_required"]', __('Do you require payment?', 'appointments'), array(
+		$tutorial->add_step($settings . '#section-payments', $title . '_page_app_settings', 'select[name="payment_required"]', __('Do you require payment?', 'appointments'), array(
 		    'content'  => '<p>' . esc_js(__('You can set whether client is asked for a payment to accept his appointment. If this setting is selected as Yes, appointment will be in pending status until a succesful Paypal payment is completed. After you select this, you will see additional fields for your Paypal account, deposits and integration with Membership plugin.', 'appointments' )).'</p>',
 		    'position' => array( 'edge' => 'left', 'align' => 'center' ),
 		));
 
-		$tutorial->add_step($settings, $title . '_page_app_settings', '.notification_settings', __('Email notifications', 'appointments'), array(
+		$tutorial->add_step($settings . '&step=1#section-notifications', $title . '_page_app_settings', '#app-settings-section-notifications', __('Email notifications', 'appointments'), array(
 		    'content'  => '<p>' . esc_js(__('There are several notification settings. Using these, you can confirm and remind your clients and also your service providers.', 'appointments' )).'</p>',
 		    'position' => array( 'edge' => 'left', 'align' => 'center' ),
 		));
 
-		$tutorial->add_step($settings, $title . '_page_app_settings', 'select[name="use_cache"]', __('Built-in Cache', 'appointments'), array(
-		    'content'  => '<p>' . esc_js(__('Appointments+ comes with a built-in specific cache. It functions only on appointment pages and caches the content part of the page only. It is recommended to enable it especially if you have a high traffic appointment page. You can continue to use other general purpose caching plugins like W3T, WP Super Cache, Quick Cache.', 'appointments' )).'</p>',
-		    'position' => array( 'edge' => 'left', 'align' => 'center' ),
-		));
-
-		$tutorial->add_step($settings, $title . '_page_app_settings', '.button-primary', __('Save settings', 'appointments'), array(
+		$tutorial->add_step($settings . '&step=1#section-notifications', $title . '_page_app_settings', '.button-primary', __('Save settings', 'appointments'), array(
 		    'content'  => '<p>' . esc_js(__('Do not forget to save your settings.', 'appointments' )).'</p>',
 		    'position' => array( 'edge' => 'left', 'align' => 'center' ),
 		));
 
-		$tutorial->add_step($settings, $title . '_page_app_settings', '#app_tab_working_hours', __('Setting your business hours', 'appointments'), array(
+		$tutorial->add_step($settings . '&step=1#section-notifications', $title . '_page_app_settings', '#app_tab_working_hours', __('Setting your business hours', 'appointments'), array(
 		    'content'  => '<p>' . esc_js(__('Now you should set your business working hours. Click Working Hours tab and then click Next.', 'appointments' )).'</p>',
 		    'position' => array( 'edge' => 'left', 'align' => 'center' ),
 		));
@@ -150,8 +147,9 @@ class App_Tutorial {
 		));
 
 
-		if ( isset( $_GET["tutorial"] ) && 'restart1' == $_GET["tutorial"] )
+		if ( isset( $_GET["tutorial"] ) && 'restart1' == $_GET["tutorial"] ) {
 			$tutorial->restart();
+		}
 
 		//start the tutorial
 		$tutorial->initialize();

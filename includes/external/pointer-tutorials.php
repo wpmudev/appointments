@@ -154,9 +154,10 @@ if ( !class_exists( 'Pointer_Tutorial' ) ) {
 				$args['content'] = '<h3>' . esc_js($title) . '</h3>' . $args['content'];
 			
 			//if urls are incomplete calculate them
-			if ( strpos( $url, '://' ) === false )
+			if ( strpos( $url, '://' ) === false ) {
 				$url = is_network_admin() ? network_admin_url($url) : admin_url($url);
-			
+			}
+
 			//register the pointer	
 			$this->registered_pointers[] = array( 'url' => $url, 'hook' => $hook, 'selector' => $selector, 'title' => $title, 'args' => $args );
 		}
@@ -421,6 +422,10 @@ if ( !class_exists( 'Pointer_Tutorial' ) ) {
 					$next_link = ", function() { window.location = '$next_url'; }";
 					$next_title = $this->registered_pointers[$pointer_id+1]['title'];
 				} else if ( isset($this->page_pointers[$pointer_id+1]) ) {
+					$next_url = $this->registered_pointers[$pointer_id+1]['url'];
+					if ( $this->registered_pointers[$pointer_id+1]['url'] != $this->registered_pointers[$pointer_id]['url'] ) {
+						$next_link = ", function() { window.location = '$next_url'; }";
+					}
 					$next_pointer = $this->page_pointers[$pointer_id+1]['selector'];
 					$next_pointer_id = $pointer_id + 1;
 					$next_pointer = "$('$next_pointer').pointer( options$next_pointer_id ).pointer('open').focus();";
@@ -443,6 +448,10 @@ if ( !class_exists( 'Pointer_Tutorial' ) ) {
 					$prev_pointer_id = $pointer_id - 1;
 					$prev_pointer = "$('$prev_pointer').pointer( options$prev_pointer_id ).pointer('open').focus();";
 					$prev_title = $this->page_pointers[$pointer_id-1]['title'];
+					$prev_url = $this->registered_pointers[$pointer_id-1]['url'];
+					if ( $this->registered_pointers[$pointer_id-1]['url'] != $this->registered_pointers[$pointer_id]['url'] ) {
+						$prev_link = ", function() { window.location = '$prev_url'; }";
+					}
 				}
 				
 				$close_name = __('Dismiss', $this->textdomain);
