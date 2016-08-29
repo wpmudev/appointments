@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments+ 1.9.2\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2016-08-19 10:37:38+00:00\n"
+"POT-Creation-Date: 2016-08-22 10:27:08+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -900,8 +900,7 @@ msgstr ""
 #: admin/views/user-profile-my-appointments.php:4
 #: admin/views/user-profile-worker-appointments.php:4
 #: admin/widgets/class-app-dashboard-widget.php:11
-#: includes/class_app_buddypress.php:121
-#: includes/support/class_app_tutorial.php:33
+#: includes/class-app-tutorial.php:35 includes/class_app_buddypress.php:121
 #: includes/templates/app-admin-appointment_list.php:49
 msgid "Appointments"
 msgstr ""
@@ -3381,6 +3380,296 @@ msgid ""
 "Service Provider Name: SERVICE_PROVIDER\n"
 msgstr ""
 
+#: includes/class-app-tutorial.php:38
+msgid "Appointments+ Tutorial"
+msgstr ""
+
+#: includes/class-app-tutorial.php:39
+msgid ""
+"Welcome to Appointments+ plugin. This tutorial will hopefully help you to "
+"make a quick start by adjusting the most important settings to your needs. "
+"You can restart this tutorial any time clicking the link on the FAQ page."
+msgstr ""
+
+#: includes/class-app-tutorial.php:43
+msgid "Time Base"
+msgstr ""
+
+#: includes/class-app-tutorial.php:44
+msgid ""
+"Time Base is the most important parameter of Appointments+. It is the "
+"minimum time that you can select for your appointments. If you set it too "
+"high then you may not be possible to optimize your appointments. If you set "
+"it too low, your schedule will be too crowded and you may have difficulty "
+"in managing your appointments. You should enter here the duration of the "
+"shortest service you are providing."
+msgstr ""
+
+#: includes/class-app-tutorial.php:48 includes/class-app-tutorial.php:53
+msgid "Creating a functional front end appointment page"
+msgstr ""
+
+#: includes/class-app-tutorial.php:49
+msgid ""
+"Appointments+ provides an easy way of creating an appointment page. Check "
+"this checkbox to include all shortcodes in a full functional page. You can "
+"later edit this page."
+msgstr ""
+
+#: includes/class-app-tutorial.php:54
+msgid ""
+"You can select a schedule type from the list. To see how they look, you can "
+"also create more than one page, one by one and then delete unused ones."
+msgstr ""
+
+#: includes/class-app-tutorial.php:58
+msgid "Selecting a Color Set to Match Your Theme"
+msgstr ""
+
+#: includes/class-app-tutorial.php:59
+msgid ""
+"It is possible to select color sets for your schedule tables from "
+"predefined sets, or customize them. When you select Custom, you will be "
+"able to set your own colors for different statuses (Busy, free, not "
+"possible/not working)."
+msgstr ""
+
+#: includes/class-app-tutorial.php:63
+msgid "Do you require login?"
+msgstr ""
+
+#: includes/class-app-tutorial.php:64
+msgid ""
+"You can set whether client is required to log into the website to apply for "
+"an appointment. When you select this setting as Yes, you will see "
+"additional settings."
+msgstr ""
+
+#: includes/class-app-tutorial.php:68
+msgid "Requiring information from client"
+msgstr ""
+
+#: includes/class-app-tutorial.php:69
+msgid ""
+"You may ask the client to fill some selectable fields so that they may not "
+"need to register on your website."
+msgstr ""
+
+#: includes/class-app-tutorial.php:73
+msgid "Do you require payment?"
+msgstr ""
+
+#: includes/class-app-tutorial.php:74
+msgid ""
+"You can set whether client is asked for a payment to accept his "
+"appointment. If this setting is selected as Yes, appointment will be in "
+"pending status until a succesful Paypal payment is completed. After you "
+"select this, you will see additional fields for your Paypal account, "
+"deposits and integration with Membership plugin."
+msgstr ""
+
+#: includes/class-app-tutorial.php:78
+msgid "Email notifications"
+msgstr ""
+
+#: includes/class-app-tutorial.php:79
+msgid ""
+"There are several notification settings. Using these, you can confirm and "
+"remind your clients and also your service providers."
+msgstr ""
+
+#: includes/class-app-tutorial.php:83 includes/class-app-tutorial.php:98
+#: includes/class-app-tutorial.php:123
+msgid "Save settings"
+msgstr ""
+
+#: includes/class-app-tutorial.php:84 includes/class-app-tutorial.php:99
+msgid "Do not forget to save your settings."
+msgstr ""
+
+#: includes/class-app-tutorial.php:88 includes/class-app-tutorial.php:93
+msgid "Setting your business hours"
+msgstr ""
+
+#: includes/class-app-tutorial.php:89
+msgid ""
+"Now you should set your business working hours. Click Working Hours tab and "
+"then click Next."
+msgstr ""
+
+#: includes/class-app-tutorial.php:94
+msgid ""
+"Below you will see two tables, one for your working hours and the other for "
+"your break hours during the day. The second one is optional. On the left "
+"you will see no selection options yet. But as you add new services "
+"providers, you can set their working and break hours by selecting from this "
+"dropdown menu. This is only necessary if their working hours are different "
+"from those of your business."
+msgstr ""
+
+#: includes/class-app-tutorial.php:103
+msgid "Entering your holidays"
+msgstr ""
+
+#: includes/class-app-tutorial.php:104
+msgid "Click the Exceptions tab to define your holidays and then click Next."
+msgstr ""
+
+#: includes/class-app-tutorial.php:108
+msgid "Setting exceptional days"
+msgstr ""
+
+#: includes/class-app-tutorial.php:109
+msgid ""
+"Below you can define your holidays and exceptional working days, for "
+"example a specific Sunday you want to work on. These dates will override "
+"your weekly working schedule for that day only. Note that you will be able "
+"to set these exceptional days for each service provider individually, when "
+"you define them."
+msgstr ""
+
+#: includes/class-app-tutorial.php:113 includes/class-app-tutorial.php:118
+msgid "Setting your services"
+msgstr ""
+
+#: includes/class-app-tutorial.php:114
+msgid "Click the Services tab to set your services and then click Next."
+msgstr ""
+
+#: includes/class-app-tutorial.php:119
+msgid ""
+"You can add new service by clicking this button. A default service should "
+"have been installed during installation. You can edit and even delete that "
+"too, but you should have at least one service in this table."
+msgstr ""
+
+#: includes/class-app-tutorial.php:124
+msgid ""
+"Do not forget to save your settings. Clicking Add New Service button does "
+"NOT save it to the database until you click the Save button."
+msgstr ""
+
+#: includes/class-app-tutorial.php:128
+msgid "Adding and setting your service providers"
+msgstr ""
+
+#: includes/class-app-tutorial.php:129
+msgid ""
+"Click the Service Providers tab to set your service providers and then "
+"click Next."
+msgstr ""
+
+#: includes/class-app-tutorial.php:133
+msgid "Adding service providers"
+msgstr ""
+
+#: includes/class-app-tutorial.php:134
+msgid ""
+"Adding service providers is optional. You may need this if the working "
+"schedule of your service providers are different or you want the client to "
+"pick a provider by his name. You can add new service provider by clicking "
+"this button. "
+msgstr ""
+
+#: includes/class-app-tutorial.php:139
+msgid "Additional Information"
+msgstr ""
+
+#: includes/class-app-tutorial.php:140
+msgid ""
+"You can find detailed information about shortcode parameters on the "
+"Shortcodes page and answers to common questions on the FAQ page. Of course "
+"we will be glad to help you on our Community pages too."
+msgstr ""
+
+#: includes/class-app-tutorial.php:144 includes/class-app-tutorial.php:177
+msgid "Appointment List"
+msgstr ""
+
+#: includes/class-app-tutorial.php:145
+msgid ""
+"As you start receiving appointments, you will see them here. Click on the "
+"Appointments menu item to start the other tutorial, if you have not seen it "
+"yet."
+msgstr ""
+
+#: includes/class-app-tutorial.php:178
+msgid ""
+"Appointment records are grouped by their statuses. You can see these "
+"groupings by clicking the Info icon."
+msgstr ""
+
+#: includes/class-app-tutorial.php:182
+msgid "Entering a Manual Appointment"
+msgstr ""
+
+#: includes/class-app-tutorial.php:183
+msgid ""
+"When you received appointments from your clients, they will be added to "
+"this page automatically. But you can always add a new appointment manually. "
+"Please click ADD NEW link and then click Next."
+msgstr ""
+
+#: includes/class-app-tutorial.php:187 includes/class-app-tutorial.php:197
+#: includes/class-app-tutorial.php:202
+msgid "Entering Data for the New Appointment"
+msgstr ""
+
+#: includes/class-app-tutorial.php:188
+msgid ""
+"As you can see, you can enter all parameters here. Enter some random values "
+"and select status as PENDING, for this example. Then click Next"
+msgstr ""
+
+#: includes/class-app-tutorial.php:192
+msgid "Sending Confirmation emails Manually"
+msgstr ""
+
+#: includes/class-app-tutorial.php:193
+msgid ""
+"If you require payment, confirmation email is automatically sent after a "
+"Paypal payment. However if you are confirming appointments manually, you "
+"should check this checkbox for a confirmation email to be sent. You can "
+"also use this option for resending the confirmation email, e.g. after "
+"rescheduling an appointment."
+msgstr ""
+
+#: includes/class-app-tutorial.php:198
+msgid "Save and then click Next."
+msgstr ""
+
+#: includes/class-app-tutorial.php:203
+msgid ""
+"The result is shown here. Normally you should get a success message. "
+"Otherwise it means that you have a javascript problem on admin side."
+msgstr ""
+
+#: includes/class-app-tutorial.php:207
+msgid "Save New Appointment"
+msgstr ""
+
+#: includes/class-app-tutorial.php:208
+msgid ""
+"As we added this appointment as \"Pending\" we will see it under Pending "
+"appointments. Click Pending appointments and then click Next."
+msgstr ""
+
+#: includes/class-app-tutorial.php:212
+msgid "Editing an Appointment"
+msgstr ""
+
+#: includes/class-app-tutorial.php:213
+msgid ""
+"You can edit any appointment record. Just hover on the record and then "
+"click See Details and Edit"
+msgstr ""
+
+#: includes/class-app-tutorial.php:218
+msgid ""
+"It is always possible to Cancel. Please note that these records are NOT "
+"saved until you click the Save button. Thanks for using Appointments+"
+msgstr ""
+
 #: includes/class-app-worker.php:137
 msgid "Our staff"
 msgstr ""
@@ -4996,316 +5285,6 @@ msgstr ""
 msgid "Appointments shortcodes"
 msgstr ""
 
-#: includes/support/class_app_tutorial.php:36
-msgid "Appointments+ Tutorial"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:37
-msgid ""
-"Welcome to Appointments+ plugin. This tutorial will hopefully help you to "
-"make a quick start by adjusting the most important settings to your needs. "
-"You can restart this tutorial any time clicking the link on the FAQ page."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:41
-msgid "Time Base"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:42
-msgid ""
-"Time Base is the most important parameter of Appointments+. It is the "
-"minimum time that you can select for your appointments. If you set it too "
-"high then you may not be possible to optimize your appointments. If you set "
-"it too low, your schedule will be too crowded and you may have difficulty "
-"in managing your appointments. You should enter here the duration of the "
-"shortest service you are providing."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:46
-#: includes/support/class_app_tutorial.php:51
-msgid "Creating a functional front end appointment page"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:47
-msgid ""
-"Appointments+ provides an easy way of creating an appointment page. Check "
-"this checkbox to include all shortcodes in a full functional page. You can "
-"later edit this page."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:52
-msgid ""
-"You can select a schedule type from the list. To see how they look, you can "
-"also create more than one page, one by one and then delete unused ones."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:56
-msgid "Selecting a Color Set to Match Your Theme"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:57
-msgid ""
-"It is possible to select color sets for your schedule tables from "
-"predefined sets, or customize them. When you select Custom, you will be "
-"able to set your own colors for different statuses (Busy, free, not "
-"possible/not working)."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:61
-msgid "Do you require login?"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:62
-msgid ""
-"You can set whether client is required to log into the website to apply for "
-"an appointment. When you select this setting as Yes, you will see "
-"additional settings."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:66
-msgid "Requiring information from client"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:67
-msgid ""
-"You may ask the client to fill some selectable fields so that they may not "
-"need to register on your website."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:71
-msgid "Do you require payment?"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:72
-msgid ""
-"You can set whether client is asked for a payment to accept his "
-"appointment. If this setting is selected as Yes, appointment will be in "
-"pending status until a succesful Paypal payment is completed. After you "
-"select this, you will see additional fields for your Paypal account, "
-"deposits and integration with Membership plugin."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:76
-msgid "Email notifications"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:77
-msgid ""
-"There are several notification settings. Using these, you can confirm and "
-"remind your clients and also your service providers."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:81
-msgid "Built-in Cache"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:82
-msgid ""
-"Appointments+ comes with a built-in specific cache. It functions only on "
-"appointment pages and caches the content part of the page only. It is "
-"recommended to enable it especially if you have a high traffic appointment "
-"page. You can continue to use other general purpose caching plugins like "
-"W3T, WP Super Cache, Quick Cache."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:86
-#: includes/support/class_app_tutorial.php:101
-#: includes/support/class_app_tutorial.php:126
-msgid "Save settings"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:87
-#: includes/support/class_app_tutorial.php:102
-msgid "Do not forget to save your settings."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:91
-#: includes/support/class_app_tutorial.php:96
-msgid "Setting your business hours"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:92
-msgid ""
-"Now you should set your business working hours. Click Working Hours tab and "
-"then click Next."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:97
-msgid ""
-"Below you will see two tables, one for your working hours and the other for "
-"your break hours during the day. The second one is optional. On the left "
-"you will see no selection options yet. But as you add new services "
-"providers, you can set their working and break hours by selecting from this "
-"dropdown menu. This is only necessary if their working hours are different "
-"from those of your business."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:106
-msgid "Entering your holidays"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:107
-msgid "Click the Exceptions tab to define your holidays and then click Next."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:111
-msgid "Setting exceptional days"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:112
-msgid ""
-"Below you can define your holidays and exceptional working days, for "
-"example a specific Sunday you want to work on. These dates will override "
-"your weekly working schedule for that day only. Note that you will be able "
-"to set these exceptional days for each service provider individually, when "
-"you define them."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:116
-#: includes/support/class_app_tutorial.php:121
-msgid "Setting your services"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:117
-msgid "Click the Services tab to set your services and then click Next."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:122
-msgid ""
-"You can add new service by clicking this button. A default service should "
-"have been installed during installation. You can edit and even delete that "
-"too, but you should have at least one service in this table."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:127
-msgid ""
-"Do not forget to save your settings. Clicking Add New Service button does "
-"NOT save it to the database until you click the Save button."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:131
-msgid "Adding and setting your service providers"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:132
-msgid ""
-"Click the Service Providers tab to set your service providers and then "
-"click Next."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:136
-msgid "Adding service providers"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:137
-msgid ""
-"Adding service providers is optional. You may need this if the working "
-"schedule of your service providers are different or you want the client to "
-"pick a provider by his name. You can add new service provider by clicking "
-"this button. "
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:142
-msgid "Additional Information"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:143
-msgid ""
-"You can find detailed information about shortcode parameters on the "
-"Shortcodes page and answers to common questions on the FAQ page. Of course "
-"we will be glad to help you on our Community pages too."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:147
-#: includes/support/class_app_tutorial.php:179
-msgid "Appointment List"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:148
-msgid ""
-"As you start receiving appointments, you will see them here. Click on the "
-"Appointments menu item to start the other tutorial, if you have not seen it "
-"yet."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:180
-msgid ""
-"Appointment records are grouped by their statuses. You can see these "
-"groupings by clicking the Info icon."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:184
-msgid "Entering a Manual Appointment"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:185
-msgid ""
-"When you received appointments from your clients, they will be added to "
-"this page automatically. But you can always add a new appointment manually. "
-"Please click ADD NEW link and then click Next."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:189
-#: includes/support/class_app_tutorial.php:199
-#: includes/support/class_app_tutorial.php:204
-msgid "Entering Data for the New Appointment"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:190
-msgid ""
-"As you can see, you can enter all parameters here. Enter some random values "
-"and select status as PENDING, for this example. Then click Next"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:194
-msgid "Sending Confirmation emails Manually"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:195
-msgid ""
-"If you require payment, confirmation email is automatically sent after a "
-"Paypal payment. However if you are confirming appointments manually, you "
-"should check this checkbox for a confirmation email to be sent. You can "
-"also use this option for resending the confirmation email, e.g. after "
-"rescheduling an appointment."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:200
-msgid "Save and then click Next."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:205
-msgid ""
-"The result is shown here. Normally you should get a success message. "
-"Otherwise it means that you have a javascript problem on admin side."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:209
-msgid "Save New Appointment"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:210
-msgid ""
-"As we added this appointment as \"Pending\" we will see it under Pending "
-"appointments. Click Pending appointments and then click Next."
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:214
-msgid "Editing an Appointment"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:215
-msgid ""
-"You can edit any appointment record. Just hover on the record and then "
-"click See Details and Edit"
-msgstr ""
-
-#: includes/support/class_app_tutorial.php:220
-msgid ""
-"It is always possible to Cancel. Please note that these records are NOT "
-"saved until you click the Save button. Thanks for using Appointments+"
-msgstr ""
-
 #: includes/templates/app-admin-appointment_list.php:134
 msgid "Sort by"
 msgstr ""
@@ -5452,9 +5431,8 @@ msgid "%s Settings"
 msgstr ""
 
 #: appointments.php:2924 includes/addons/app-locations-location_support.php:154
-#: includes/class-app-ajax.php:428
+#: includes/class-app-ajax.php:428 includes/class-app-tutorial.php:217
 #: includes/shortcodes/class-app-shortcode-confirmation.php:196
-#: includes/support/class_app_tutorial.php:219
 msgctxt "Drop current action"
 msgid "Cancel"
 msgstr ""
