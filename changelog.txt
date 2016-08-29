@@ -1,4 +1,4 @@
-2016-??? - 1.9.2
+2016-08-29 - 1.9.2
 -------------------------------
 - New: GCal setting: Overwrite Google Calendar Title and Description
 - Fix: Service Providers excerpt pulling post content
@@ -8,7 +8,6 @@
 - Fix: Responsive issues in Appointments list
 - Fix: [MarketPress] Remove an Appointment from shopping cart when appointment status changes
 - Fix: Pending appointments changing to completed when they expires
-
 
 2016-06-22 - 1.9.1
 -------------------------------
