@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Appointments+ package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Appointments+ 1.9.2\n"
+"Project-Id-Version: Appointments+ 1.9.3\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2016-08-29 13:53:27+00:00\n"
+"POT-Creation-Date: 2016-08-30 06:25:18+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2814,6 +2814,18 @@ msgstr ""
 
 #: includes/addons/app-locations-worker_locations.php:141
 msgid "Location:"
+msgstr ""
+
+#: includes/addons/app-mp-product_cart_appointments.php:86
+msgid "Appointment in shopping cart format"
+msgstr ""
+
+#: includes/addons/app-mp-product_cart_appointments.php:89
+msgid "You can use these macros: <code>%s</code>"
+msgstr ""
+
+#: includes/addons/app-mp-product_cart_appointments.php:93
+msgid "Auto-add appointments into cart"
 msgstr ""
 
 #: includes/addons/app-post_types-biography.php:56
