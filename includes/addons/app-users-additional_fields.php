@@ -25,7 +25,7 @@ class App_Users_AdditionalFields {
 		add_action('plugins_loaded', array($this, 'initialize'));
 
 		// Settings
-		add_action('appointments_settings_tab-main-section-display', array($this, 'show_settings'));
+		add_action('appointments_settings_tab-main-section-accesibility', array($this, 'show_settings'));
 		add_filter('app-options-before_save', array($this, 'save_settings'));
 
 		// Field injection
@@ -454,48 +454,50 @@ $(document).ajaxSend(function(e, xhr, opts) {
 		$fields = !empty($this->_data['additional_fields']) ? $this->_data['additional_fields'] : array();
 		$admin_edit = !empty($this->_data['additional_fields-admin_edit']) ? 'checked="checked"' : '';
 		?>
-		<h3><?php _e( 'Additional Fields', 'appointments' ); ?></h3>
-		<table class="form-table">
-			<tr valign="top" class="api_detail" <?php echo $style?>>
-				<th scope="row" ><?php _e('Additional fields', 'appointments')?></th>
-				<td colspan="2">
-					<div id="app-additional_fields">
-						<?php foreach ($fields as $field) { ?>
-							<div class="app-field">
-								<b><?php echo esc_html($field['label']); ?></b> <em><small>(<?php echo esc_html($field['type']); ?>)</small></em>
-								<br />
-								<?php echo esc_html('Required', 'appointments'); ?>: <b><?php echo esc_html(($field['required'] ? __('Yes', 'appointments') : __('No', 'appointments'))); ?></b>
-								<br />
-								<?php _e('E-mail macro:', 'appointments'); ?> <code><?php echo esc_html($this->_to_email_macro($field['label'])); ?></code>
-								<span class="description"><?php _e('This is the placeholder you can use in your emails.', 'appointments'); ?></span>
-								<input type="hidden" name="app-additional_fields[]" value="<?php echo rawurlencode(json_encode($field)); ?>" />
-								<a href="#remove" class="app-additional_fields-remove"><?php echo esc_html('Remove', 'appointments'); ?></a>
-							</div>
-						<?php } ?>
-					</div>
-					<div id="app-new_additional_field">
-						<h4><?php _e('Add new field', 'appointments'); ?></h4>
-						<label for="app-new_additional_field-label">
-							<?php _e('Field label:', 'appointments'); ?>
-							<input type="text" value="" id="app-new_additional_field-label" />
-						</label>
-						<label for="app-new_additional_field-type">
-							<?php _e('Field type:', 'appointments'); ?>
-							<select id="app-new_additional_field-type">
-								<?php foreach ($_types as $type => $label) { ?>
-									<option value="<?php esc_attr_e($type); ?>"><?php echo esc_html($label); ?></option>
-								<?php } ?>
-							</select>
-						</label>
-						<label for="app-new_additional_field-required">
-							<input type="checkbox" value="" id="app-new_additional_field-required" />
-							<?php _e('Required?', 'appointments'); ?>
-						</label>
-						<button type="button" class="button-secondary" id="app-new_additional_field-add"><?php _e('Add', 'appointments'); ?></button>
-					</div>
-				</td>
-			</tr>
-		</table>
+		<div class="api_detail">
+			<h3><?php _e( 'Additional Fields', 'appointments' ); ?></h3>
+			<table class="form-table">
+				<tr valign="top" class="api_detail" <?php echo $style?>>
+					<th scope="row" ><?php _e('Additional fields', 'appointments')?></th>
+					<td colspan="2">
+						<div id="app-additional_fields">
+							<?php foreach ($fields as $field) { ?>
+								<div class="app-field">
+									<b><?php echo esc_html($field['label']); ?></b> <em><small>(<?php echo esc_html($field['type']); ?>)</small></em>
+									<br />
+									<?php echo esc_html('Required', 'appointments'); ?>: <b><?php echo esc_html(($field['required'] ? __('Yes', 'appointments') : __('No', 'appointments'))); ?></b>
+									<br />
+									<?php _e('E-mail macro:', 'appointments'); ?> <code><?php echo esc_html($this->_to_email_macro($field['label'])); ?></code>
+									<span class="description"><?php _e('This is the placeholder you can use in your emails.', 'appointments'); ?></span>
+									<input type="hidden" name="app-additional_fields[]" value="<?php echo rawurlencode(json_encode($field)); ?>" />
+									<a href="#remove" class="app-additional_fields-remove"><?php echo esc_html('Remove', 'appointments'); ?></a>
+								</div>
+							<?php } ?>
+						</div>
+						<div id="app-new_additional_field">
+							<h4><?php _e('Add new field', 'appointments'); ?></h4>
+							<label for="app-new_additional_field-label">
+								<?php _e('Field label:', 'appointments'); ?>
+								<input type="text" value="" id="app-new_additional_field-label" />
+							</label>
+							<label for="app-new_additional_field-type">
+								<?php _e('Field type:', 'appointments'); ?>
+								<select id="app-new_additional_field-type">
+									<?php foreach ($_types as $type => $label) { ?>
+										<option value="<?php esc_attr_e($type); ?>"><?php echo esc_html($label); ?></option>
+									<?php } ?>
+								</select>
+							</label>
+							<label for="app-new_additional_field-required">
+								<input type="checkbox" value="" id="app-new_additional_field-required" />
+								<?php _e('Required?', 'appointments'); ?>
+							</label>
+							<button type="button" class="button-secondary" id="app-new_additional_field-add"><?php _e('Add', 'appointments'); ?></button>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
 
 		<script id="app-additional_fields-template" type="text/template">
 			<div class="app-field">

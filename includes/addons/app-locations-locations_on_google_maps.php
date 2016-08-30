@@ -25,6 +25,7 @@ class App_GoogleMaps_MyAppointmentsShortcode extends App_Shortcode {
 				'example' => '32',
 			),
 		);
+
 	}
 
 	public function process_shortcode ($args=array(), $content='') {
@@ -117,7 +118,27 @@ class App_Locations_GoogleMaps {
 
 		// Register shortcode
 		add_filter('app-shortcodes-register', array($this, 'register_shortcode'));
+
+		add_filter( 'appointments_default_options', array( $this, 'default_options' ) );
 	}
+
+	public function default_options( $defaults ) {
+		$defaults['google_maps'] = array(
+			'overrides' => array(
+				'width'  => '',
+				'height' => '',
+				'zoom'   => '',
+				'map_type' => 'ROADMAP',
+				'units' => 'METRIC',
+				'show_images' => 0
+			),
+			'my_appointments' => 0,
+			'all_appointments' => 0,
+
+		);
+		return $defaults;
+	}
+
 
 	public function register_shortcode ($instances) {
 		$instances['app_my_appointments_map'] = 'App_GoogleMaps_MyAppointmentsShortcode';
@@ -242,7 +263,7 @@ class App_Locations_GoogleMaps {
 
 	public function initialize () {
 		global $appointments;
-		$this->_data = $appointments->options;
+		$this->_data = appointments_get_options();
 
 		if (!class_exists('App_Locations_Model')) require_once(dirname(__FILE__) . '/lib/app_locations.php');
 		$this->_locations = App_Locations_Model::get_instance();

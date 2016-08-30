@@ -79,15 +79,16 @@ class Appointments_Addons_Loader {
 				}
 
 			}
-			$this->addons = $addons;
+
+			/**
+			 * Filter the list of found addons (active or not)
+			 *
+			 * @param array $addons
+			 */
+			$this->addons = apply_filters( 'appointments_addons', $addons );
 		}
 
-		/**
-		 * Filter the list of found addons (active or not)
-		 *
-		 * @param array $addons
-		 */
-		return apply_filters( 'appointments_addons', $this->addons );
+		return $this->addons;
 	}
 
 	/**

@@ -56,14 +56,20 @@ jQuery( document ).ready( function( $ ) {
 
     // LOGIN REQUIRED SETTING (Accesibility)
     var apiDetail = $(".api_detail");
-    $('select[name="login_required"]').change(function () {
-        if ($(this).val() == 'yes') {
+    console.log(apiDetail);
+    var loginRequiredSelect = $('select[name="login_required"]');
+    function toggleApiDetail() {
+        if (loginRequiredSelect.val() == 'yes') {
             apiDetail.show();
         }
         else {
             apiDetail.hide();
         }
-    });
+    }
+    toggleApiDetail();
+    loginRequiredSelect.change( function() {
+        toggleApiDetail();
+    } );
 
     // PAYMENT REQUIRED (Payments)
     jQuery(document).ready(function ($) {
