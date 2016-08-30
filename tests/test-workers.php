@@ -726,12 +726,6 @@ class App_Workers_Test extends App_UnitTestCase {
 		$closed = appointments_get_worker_exceptions( $user_id_1, 'closed' );
 
 		$this->assertEquals( $current_queries, $wpdb->num_queries );
-
-		appointments_update_worker_exceptions( $user_id_1, 'closed', '' );
-		$this->assertEquals( ++$current_queries, $wpdb->num_queries );
-		$closed = appointments_get_worker_exceptions( $user_id_1, 'closed' );
-		$this->assertEquals( ++$current_queries, $wpdb->num_queries );
-
 	}
 
 	/**

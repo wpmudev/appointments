@@ -21,6 +21,8 @@ class Appointments_Pro {
 
 		add_filter( 'appointments_addons', array( $this, 'load_extra_addons' ) );
 
+		add_filter( 'appointments_before_insert_service', '__return_true' );
+
 	}
 
 	private function includes() {
@@ -47,9 +49,8 @@ class Appointments_Pro {
 		foreach ( $all as $addon_file ) {
 			$addon = new Appointments_Addon( $addon_file );
 			if ( ! $addon->error ) {
-				$addons[ $addon_file ] = $addon;
+				$addons[ $addon->slug ] = $addon;
 			}
-
 		}
 		return $addons;
 	}

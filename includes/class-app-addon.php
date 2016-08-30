@@ -11,7 +11,8 @@ class Appointments_Addon {
 		'Version' => 'Version',
 		'AddonType' => 'AddonType',
 		'Author' => 'Author',
-		'Requires' => 'Requires'
+		'Requires' => 'Requires',
+		'Free' => 'Free'
 	);
 
 	public $slug = '';
@@ -65,6 +66,9 @@ class Appointments_Addon {
 	public static function activate_addon( $slug ) {
 		$appointments = appointments();
 		$addon  = self::get_addon( $slug );
+		if ( $addon->Free ) {
+			return;
+		}
 		$active = $appointments->addons_loader->get_active_addons();
 		if ( $addon && ! in_array( $slug, $active ) ) {
 			$active[] = $addon->slug;

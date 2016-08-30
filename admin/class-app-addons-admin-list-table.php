@@ -25,19 +25,25 @@ class Appointments_Addons_Admin_List_Table extends WP_List_Table {
 
 	function column_name( $item ) {
 		$actions = array();
-		if ( ! $item->active ) {
-			$link = add_query_arg( array( 'action' => 'activate', 'addon' => $item->slug ) );
-			$link = wp_nonce_url( $link, 'activate-addon' );
-			$actions['activate'] = '<a href="' . $link . '">' . __( 'Activate', 'appointments' ) . '</a>';
+		if ( strtolower( $item->Free ) === 'true' ) {
+			$actions['activate'] = '<a href="http://premium.wpmudev.org/project/appointments-plus/">' . __( 'Upgrade to Appointments+ to activate', 'appointments' ) . '</a>';
 		}
 		else {
-			$link = add_query_arg( array( 'action' => 'deactivate', 'addon' => $item->slug ) );
-			$link = wp_nonce_url( $link, 'deactivate-addon' );
-			$actions['deactivate'] = '<a href="' . $link . '">' . __( 'Deactivate', 'appointments' ) . '</a>';
+			if ( ! $item->active ) {
+				$link = add_query_arg( array( 'action' => 'activate', 'addon' => $item->slug ) );
+				$link = wp_nonce_url( $link, 'activate-addon' );
+				$actions['activate'] = '<a href="' . $link . '">' . __( 'Activate', 'appointments' ) . '</a>';
+			}
+			else {
+				$link = add_query_arg( array( 'action' => 'deactivate', 'addon' => $item->slug ) );
+				$link = wp_nonce_url( $link, 'deactivate-addon' );
+				$actions['deactivate'] = '<a href="' . $link . '">' . __( 'Deactivate', 'appointments' ) . '</a>';
+			}
 		}
 
 		$name = $item->active ? '<strong>' . $item->PluginName . '</strong>' : $item->PluginName;
 		return $name . $this->row_actions( $actions );
+
 	}
 
 	function column_description( $item ) {

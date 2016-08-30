@@ -704,7 +704,7 @@ class App_Appointments_Test extends App_UnitTestCase {
 		foreach ( $apps  as $app ) {
 			switch ( $app->name ) {
 				case "Past and pending": {
-					$this->assertEquals( "completed", $app->status );
+					$this->assertEquals( "removed", $app->status );
 					break;
 				}
 
@@ -844,7 +844,7 @@ class App_Appointments_Test extends App_UnitTestCase {
 		foreach ( $apps  as $app ) {
 			switch ( $app->name ) {
 				case "Past and pending": {
-					$this->assertEquals( "completed", $app->status );
+					$this->assertEquals( "removed", $app->status );
 					break;
 				}
 
@@ -914,7 +914,7 @@ class App_Appointments_Test extends App_UnitTestCase {
 				}
 
 				case "Future and pending, created 2 days ago": {
-					$this->assertEquals( "completed", $app->status );
+					$this->assertEquals( "removed", $app->status );
 					break;
 				}
 

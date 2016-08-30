@@ -75,7 +75,7 @@ class Appointments_Addons_Loader {
 			foreach ( $all as $addon_file ) {
 				$addon = new Appointments_Addon( $addon_file );
 				if ( ! $addon->error ) {
-					$addons[ $addon_file ] = $addon;
+					$addons[ $addon->slug ] = $addon;
 				}
 
 			}

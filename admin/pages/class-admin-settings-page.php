@@ -437,7 +437,10 @@ class Appointments_Admin_Settings_Page {
 						'price'		=> $service["price"],
 						'page'		=> $service["page"]
 					);
-					appointments_insert_service( $args );
+					$result = appointments_insert_service( $args );
+					if ( is_wp_error( $result ) ) {
+						wp_die( $result->get_error_message() );
+					}
 				}
 
 				do_action('app-services-service-updated', $ID);

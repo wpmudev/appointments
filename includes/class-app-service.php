@@ -36,7 +36,7 @@ class Appointments_Service {
  *
  * @param array $args
  *
- * @return bool
+ * @return bool|WP_Error
  */
 function appointments_insert_service( $args = array() ) {
 	global $wpdb;
@@ -53,6 +53,15 @@ function appointments_insert_service( $args = array() ) {
 	);
 
 	$args = wp_parse_args( $args, $defaults );
+
+	$count = appointments_count_services();
+	/**
+	 * @internal
+	 */
+	$insert = apply_filters( 'appointments_before_insert_service', $count >= 2 ? false : true, $args );
+	if ( ! $insert ) {
+		return new WP_Error( 'reached-limit', sprintf( __( 'You have reached the limit for the free version. <a href="%s">Upgrade to Appointments+ for unlimited services</a>', 'appointments' ), 'http://premium.wpmudev.org/project/appointments-plus/' ) );
+	}
 
 	$insert = array();
 	$insert_wildcards = array();
@@ -181,7 +190,7 @@ function appointments_update_service( $service_id, $args ) {
  * Get a single service with given ID
  *
  * @param ID: Id of the service to be retrieved
- * @return Appointments_Service
+ * @return bool|Appointments_Service
  */
 function appointments_get_service( $service_id ) {
 	global $wpdb;
@@ -198,13 +207,15 @@ function appointments_get_service( $service_id ) {
 			)
 		);
 
-		if ( $service )
+		if ( $service ) {
 			wp_cache_add( $service->ID, $service, 'app_services' );
+		}
 	}
 
 
-	if ( $service )
+	if ( $service ) {
 		return new Appointments_Service( $service );
+	}
 
 	return false;
 }
@@ -293,10 +304,11 @@ function appointments_get_services( $args = array() ) {
 		else
 			$get_col = false;
 
-		if ( $get_col )
+		if ( $get_col ) {
 			$query = "SELECT $field FROM $table s $where $order_query";
-		else
+		} else {
 			$query = "SELECT * FROM $table s $where $order_query";
+		}
 
 		$cache_key = md5( $query . '-' . 'app_get_services' );
 
@@ -306,10 +318,11 @@ function appointments_get_services( $args = array() ) {
 
 		if ( ! isset( $cached_queries[ $cache_key ] ) ) {
 
-			if ( $get_col )
+			if ( $get_col ) {
 				$results = $wpdb->get_col( $query );
-			else
+			} else {
 				$results = $wpdb->get_results( $query );
+			}
 
 			if ( ! empty( $results ) ) {
 				$cached_queries[ $cache_key ] = $results;
