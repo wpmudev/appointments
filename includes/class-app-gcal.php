@@ -697,21 +697,15 @@ class Appointments_Google_Calendar {
 		}
 		$worker = appointments_get_worker( $app->worker );
 
-		if ( ( 'all' === $this->get_api_scope() ) || ( 'no_preference' === $this->get_api_scope() && ! $worker ) ) {
+		if ( $this->workers_allowed() && $worker && $this->switch_to_worker( $worker->ID ) ) {
+			// The worker has a calendar assigned, let's insert
+			$this->insert_event( $app_id );
+			$this->restore_to_default();
+		}
+		elseif ( ( 'all' === $this->get_api_scope() ) || ( 'no_preference' === $this->get_api_scope() && ! $worker ) ) {
 			// Insert in general calendar
 			$this->insert_event( $app->ID );
 		}
-
-		if ( $this->workers_allowed() && $worker ) {
-			// Maybe insert into worker calendar too
-			$switched = $this->switch_to_worker( $worker->ID );
-			if ( $switched ) {
-				// The worker has a calendar assigned, let's insert
-				$this->insert_event( $app_id );
-				$this->restore_to_default();
-			}
-		}
-
 
 	}
 
@@ -730,93 +724,106 @@ class Appointments_Google_Calendar {
 			return;
 		}
 
-
-		$old_worker_id = $old_app->worker;
-		$worker_id = $app->worker;
-		$worker = appointments_get_worker( $worker_id );
-
-		// Let's see first in which calendar is the event saved
-		$saved_on = false;
-		$event = $this->get_event( $app->ID );
-		if ( ! $event ) {
-			// Not in the general calendar
-			// Maybe any worker?
-			if ( $worker && $this->switch_to_worker( $worker->ID ) ) {
-				// Check in the current worker
-				$event = $this->get_event( $app->ID );
-				$this->restore_to_default();
-			}
-
-
-			if ( ! $event && $worker_id != $old_worker_id && $this->switch_to_worker( $old_worker_id ) ) {
-				// No? Then it must be in the old worker calendar
-				// Let's delete it
-				$saved_on = 'old-worker';
-				$this->delete_event( $app->gcal_ID );
-				$this->restore_to_default();
-			}
-			elseif ( ! $event && $worker_id != $old_worker_id ) {
-				// remove from general calendar
-				$this->delete_event( $app->gcal_ID );
-			}
-
-			if ( $event ) {
-				$saved_on = 'worker';
-			}
-			else {
-				$saved_on = 'general';
-			}
-		}
-		else {
-			$saved_on = 'general';
-		}
-
-		if ( ! $saved_on ) {
-			// Is not saved anywhere
-			// Let's insert it
-			$this->on_insert_appointment( $app->ID );
+		if ( ! $this->workers_allowed() ) {
+			// Just the general calendar
+			$this->update_event( $app_id );
 			return;
 		}
 
 
-		if ( 'removed' == $app->status ) {
-			if ( $worker ) {
-				// Delete from worker
-				if ( $this->switch_to_worker( $worker->ID ) ) {
-					$this->delete_event( $app->gcal_ID );
-					$this->restore_to_default();
+		$old_worker_id = $old_app->worker;
+		$worker_id = $app->worker;
+		$worker_has_changed = ( absint( $app->worker ) != absint( $old_app->worker ) );
+
+		if ( $worker_has_changed ) {
+			// The worker has changed
+
+			if ( $this->switch_to_worker( $old_worker_id ) ) {
+				$event = $this->get_event( $app_id );
+				if ( $event ) {
+					// Remove the event from the previous worker
+					$this->delete_event( $app->ID );
 				}
-			}
-
-			// And from general, why not try?
-			$this->delete_event( $app->gcal_ID );
-		}
-		else {
-
-			if ( ( ( 'all' === $this->get_api_scope() ) || ( 'no_preference' === $this->get_api_scope() && ! $worker ) ) && $saved_on === 'general' ) {
-				// Update general calendar
-				$this->update_event( $app->ID );
-			}
-
-			// Try to update worker calendar too
-			if ( $worker && $this->switch_to_worker( $worker->ID ) ) {
-				$old_app_gcal_ID = $app->gcal_ID;
-				if ( ! $this->get_event( $app->ID ) ) {
-					$this->insert_event( $app->ID );
-					$this->restore_to_default();
-
-					// Delete from general calendar
-					$this->delete_event( $old_app_gcal_ID );
-					return;
-				}
-
-				$this->update_event( $app_id );
 				$this->restore_to_default();
 
-				// Delete from general calendar
-				$this->delete_event( $old_app_gcal_ID );
+				if ( $this->switch_to_worker( $worker_id ) ) {
+					$event = $this->get_event( $app_id );
+					if ( $event ) {
+						// Update event in new worker
+						$this->update_event( $app->ID );
+					}
+					else {
+						// Insert in new worker
+						$this->insert_event( $app_id );
+					}
+					$this->restore_to_default();
+					return;
+				}
+				else {
+					$event = $this->get_event( $app_id );
+					if ( $event ) {
+						// Update event in general calendar
+						$this->update_event( $app->ID );
+					}
+					else {
+						// Insert in general calendar
+						$this->insert_event( $app_id );
+					}
+					return;
+				}
 			}
-
+			else {
+				if ( $this->switch_to_worker( $worker_id ) ) {
+					$event = $this->get_event( $app_id );
+					if ( $event ) {
+						// Update event in new worker
+						$this->update_event( $app->ID );
+					}
+					else {
+						// Insert in new worker
+						$this->insert_event( $app_id );
+					}
+					$this->restore_to_default();
+					return;
+				}
+				else {
+					$event = $this->get_event( $app_id );
+					if ( $event ) {
+						// Update event in general calendar
+						$this->update_event( $app->ID );
+					}
+					else {
+						// Insert in general calendar
+						$this->insert_event( $app_id );
+					}
+					return;
+				}
+			}
+		}
+		else {
+			if ( $this->switch_to_worker( $worker_id ) ) {
+				$event = $this->get_event( $app_id );
+				if ( $event ) {
+					// Update event in new worker
+					$this->update_event( $app->ID );
+				}
+				else {
+					// Insert in new worker
+					$this->insert_event( $app_id );
+				}
+				$this->restore_to_default();
+			}
+			else {
+				$event = $this->get_event( $app_id );
+				if ( $event ) {
+					// Update event in general calendar
+					$this->update_event( $app->ID );
+				}
+				else {
+					// Insert in general calendar
+					$this->insert_event( $app_id );
+				}
+			}
 		}
 	}
 

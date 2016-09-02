@@ -66,7 +66,8 @@ function appointments_get_default_options() {
 		'use_cache'					=> 'no',
 		'use_mp'					=> false,
 		'allow_cancel'				=> 'no',
-		'cancel_page'				=> 0
+		'cancel_page'				=> 0,
+		'thank_page'				=> 0
 	) );
 }
 

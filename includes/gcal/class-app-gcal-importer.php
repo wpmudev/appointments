@@ -39,16 +39,14 @@ class Appointments_Google_Calendar_Importer {
 				$worker_id = false;
 			}
 
-			// Update the General calendar
-			$this->gcal_api->update_event( $app->ID );
-
-			if ( $worker_id ) {
+			if ( $worker_id && $this->gcal_api->switch_to_worker( $worker_id ) ) {
 				// Update the worker calendar
-				$switched = $this->gcal_api->switch_to_worker( $worker_id );
-				if ( $switched ) {
-					$this->gcal_api->update_event( $app->ID );
-					$this->gcal_api->restore_to_default();
-				}
+				$this->gcal_api->update_event( $app->ID );
+				$this->gcal_api->restore_to_default();
+			}
+			else {
+				// Update the General calendar
+				$this->gcal_api->update_event( $app->ID );
 			}
 			$counter++;
 		}
