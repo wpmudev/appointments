@@ -1,3 +1,7 @@
+2016-09-13 - 1.9.4
+-------------------------------
+- Fix: Working hours were saved with wrong time format
+
 2016-08-30 - 1.9.3
 -------------------------------
 - Fix: Error when MarketPress is installed

@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Appointments+ package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Appointments+ 1.9.3\n"
+"Project-Id-Version: Appointments+ 1.9.4\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2016-08-30 06:25:18+00:00\n"
+"POT-Creation-Date: 2016-09-13 12:28:12+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -828,41 +828,45 @@ msgstr ""
 msgid "Select a question"
 msgstr ""
 
-#: admin/class-app-addons-admin-list-table.php:31
-#: admin/class-app-addons-admin-list-table.php:76
+#: admin/class-app-addons-admin-list-table.php:29
+msgid "Upgrade to Appointments+ to activate"
+msgstr ""
+
+#: admin/class-app-addons-admin-list-table.php:35
+#: admin/class-app-addons-admin-list-table.php:82
 msgid "Activate"
 msgstr ""
 
-#: admin/class-app-addons-admin-list-table.php:36
-#: admin/class-app-addons-admin-list-table.php:77
+#: admin/class-app-addons-admin-list-table.php:40
+#: admin/class-app-addons-admin-list-table.php:83
 msgid "Deactivate"
 msgstr ""
 
-#: admin/class-app-addons-admin-list-table.php:48
+#: admin/class-app-addons-admin-list-table.php:54
 msgid "Version: %s"
 msgstr ""
 
-#: admin/class-app-addons-admin-list-table.php:49
+#: admin/class-app-addons-admin-list-table.php:55
 msgid "by %s"
 msgstr ""
 
-#: admin/class-app-addons-admin-list-table.php:51
+#: admin/class-app-addons-admin-list-table.php:57
 msgid "<strong>Requires</strong>: %s"
 msgstr ""
 
-#: admin/class-app-addons-admin-list-table.php:61
-#: admin/views/page-settings-tab-services.php:13 appointments.php:1070
+#: admin/class-app-addons-admin-list-table.php:67
+#: admin/views/page-settings-tab-services.php:13 appointments.php:1074
 #: includes/class-app-ajax.php:285
 msgid "Name"
 msgstr ""
 
-#: admin/class-app-addons-admin-list-table.php:62
+#: admin/class-app-addons-admin-list-table.php:68
 #: includes/class_app_codec.php:318
 msgid "Description"
 msgstr ""
 
-#: admin/class-app-admin-user-profile.php:47 appointments.php:1167
-#: appointments.php:1216
+#: admin/class-app-admin-user-profile.php:47 appointments.php:1171
+#: appointments.php:1220
 msgid "Client %s cancelled appointment with ID: %s"
 msgstr ""
 
@@ -879,7 +883,7 @@ msgid "Appointments Provider"
 msgstr ""
 
 #: admin/class-app-admin.php:57
-#: includes/addons/lib/class-app-locations-list-table.php:18
+#: includes/pro/includes/addons/lib/class-app-locations-list-table.php:18
 #: includes/sample-appointments-page.php:38
 msgid "Edit"
 msgstr ""
@@ -1198,7 +1202,7 @@ msgid "Appointments Settings"
 msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:12
-#: includes/addons/app-locations-location_support.php:168
+#: includes/pro/includes/addons/app-locations-location_support.php:168
 msgid "Settings"
 msgstr ""
 
@@ -1258,6 +1262,86 @@ msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:154
 msgid "Settings updated"
+msgstr ""
+
+#: admin/views/form-working-hours.php:31
+msgid "Day"
+msgstr ""
+
+#: admin/views/form-working-hours.php:33
+msgid "Work?"
+msgstr ""
+
+#: admin/views/form-working-hours.php:35
+msgid "Give break?"
+msgstr ""
+
+#: admin/views/form-working-hours.php:37 includes/class-app-ajax.php:339
+#: includes/pro/includes/addons/app-admin-export_date_range.php:48
+#: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:136
+msgid "Start"
+msgstr ""
+
+#: admin/views/form-working-hours.php:38 includes/class-app-ajax.php:374
+#: includes/pro/includes/addons/app-admin-export_date_range.php:49
+msgid "End"
+msgstr ""
+
+#: admin/views/form-working-hours.php:50 admin/views/form-working-hours.php:80
+msgid "Work on %s?"
+msgstr ""
+
+#: admin/views/form-working-hours.php:52 admin/views/form-working-hours.php:82
+#: admin/views/page-settings-tab-main-section-accesibility.php:8
+#: admin/views/page-settings-tab-main-section-accesibility.php:23
+#: admin/views/page-settings-tab-main-section-accesibility.php:68
+#: admin/views/page-settings-tab-main-section-accesibility.php:84
+#: admin/views/page-settings-tab-main-section-accesibility.php:117
+#: admin/views/page-settings-tab-main-section-advanced.php:8
+#: admin/views/page-settings-tab-main-section-advanced.php:33
+#: admin/views/page-settings-tab-main-section-advanced.php:47
+#: admin/views/page-settings-tab-main-section-display.php:21
+#: admin/views/page-settings-tab-main-section-notifications.php:8
+#: admin/views/page-settings-tab-main-section-notifications.php:22
+#: admin/views/page-settings-tab-main-section-notifications.php:52
+#: admin/views/page-settings-tab-main-section-notifications.php:77
+#: admin/views/page-settings-tab-main-section-notifications.php:120
+#: admin/views/page-settings-tab-main-section-notifications.php:164
+#: admin/views/page-settings-tab-main-section-payments.php:13
+#: includes/gcal/views/settings-gcal-button.php:7
+#: includes/gcal/views/settings-gcal-step-3.php:60
+#: includes/pro/includes/addons/app-users-additional_fields.php:468
+#: includes/pro/includes/addons/app-users-additional_fields.php:506
+msgid "No"
+msgstr ""
+
+#: admin/views/form-working-hours.php:53 admin/views/form-working-hours.php:83
+#: admin/views/page-settings-tab-main-section-accesibility.php:10
+#: admin/views/page-settings-tab-main-section-accesibility.php:25
+#: admin/views/page-settings-tab-main-section-accesibility.php:70
+#: admin/views/page-settings-tab-main-section-accesibility.php:87
+#: admin/views/page-settings-tab-main-section-accesibility.php:119
+#: admin/views/page-settings-tab-main-section-advanced.php:10
+#: admin/views/page-settings-tab-main-section-advanced.php:35
+#: admin/views/page-settings-tab-main-section-advanced.php:50
+#: admin/views/page-settings-tab-main-section-display.php:22
+#: admin/views/page-settings-tab-main-section-notifications.php:10
+#: admin/views/page-settings-tab-main-section-notifications.php:24
+#: admin/views/page-settings-tab-main-section-notifications.php:54
+#: admin/views/page-settings-tab-main-section-notifications.php:80
+#: admin/views/page-settings-tab-main-section-notifications.php:123
+#: admin/views/page-settings-tab-main-section-notifications.php:166
+#: admin/views/page-settings-tab-main-section-payments.php:14
+#: includes/gcal/views/settings-gcal-button.php:8
+#: includes/gcal/views/settings-gcal-step-3.php:61
+#: includes/pro/includes/addons/app-users-additional_fields.php:468
+#: includes/pro/includes/addons/app-users-additional_fields.php:506
+msgid "Yes"
+msgstr ""
+
+#: admin/views/form-working-hours.php:69 admin/views/form-working-hours.php:70
+#: admin/views/form-working-hours.php:99 admin/views/form-working-hours.php:100
+msgid "Add break"
 msgstr ""
 
 #: admin/views/page-appointments-list.php:2
@@ -1502,54 +1586,6 @@ msgstr ""
 msgid "Auto confirm"
 msgstr ""
 
-#: admin/views/page-settings-tab-main-section-accesibility.php:8
-#: admin/views/page-settings-tab-main-section-accesibility.php:23
-#: admin/views/page-settings-tab-main-section-accesibility.php:68
-#: admin/views/page-settings-tab-main-section-accesibility.php:84
-#: admin/views/page-settings-tab-main-section-accesibility.php:117
-#: admin/views/page-settings-tab-main-section-advanced.php:8
-#: admin/views/page-settings-tab-main-section-advanced.php:33
-#: admin/views/page-settings-tab-main-section-advanced.php:47
-#: admin/views/page-settings-tab-main-section-display.php:21
-#: admin/views/page-settings-tab-main-section-notifications.php:8
-#: admin/views/page-settings-tab-main-section-notifications.php:22
-#: admin/views/page-settings-tab-main-section-notifications.php:52
-#: admin/views/page-settings-tab-main-section-notifications.php:77
-#: admin/views/page-settings-tab-main-section-notifications.php:120
-#: admin/views/page-settings-tab-main-section-notifications.php:164
-#: admin/views/page-settings-tab-main-section-payments.php:13
-#: appointments.php:3712 appointments.php:3761
-#: includes/addons/app-users-additional_fields.php:467
-#: includes/addons/app-users-additional_fields.php:504
-#: includes/gcal/views/settings-gcal-button.php:7
-#: includes/gcal/views/settings-gcal-step-3.php:60
-msgid "No"
-msgstr ""
-
-#: admin/views/page-settings-tab-main-section-accesibility.php:10
-#: admin/views/page-settings-tab-main-section-accesibility.php:25
-#: admin/views/page-settings-tab-main-section-accesibility.php:70
-#: admin/views/page-settings-tab-main-section-accesibility.php:87
-#: admin/views/page-settings-tab-main-section-accesibility.php:119
-#: admin/views/page-settings-tab-main-section-advanced.php:10
-#: admin/views/page-settings-tab-main-section-advanced.php:35
-#: admin/views/page-settings-tab-main-section-advanced.php:50
-#: admin/views/page-settings-tab-main-section-display.php:22
-#: admin/views/page-settings-tab-main-section-notifications.php:10
-#: admin/views/page-settings-tab-main-section-notifications.php:24
-#: admin/views/page-settings-tab-main-section-notifications.php:54
-#: admin/views/page-settings-tab-main-section-notifications.php:80
-#: admin/views/page-settings-tab-main-section-notifications.php:123
-#: admin/views/page-settings-tab-main-section-notifications.php:166
-#: admin/views/page-settings-tab-main-section-payments.php:14
-#: appointments.php:3713 appointments.php:3762
-#: includes/addons/app-users-additional_fields.php:467
-#: includes/addons/app-users-additional_fields.php:504
-#: includes/gcal/views/settings-gcal-button.php:8
-#: includes/gcal/views/settings-gcal-step-3.php:61
-msgid "Yes"
-msgstr ""
-
 #: admin/views/page-settings-tab-main-section-accesibility.php:13
 msgid ""
 "Setting this as Yes will automatically confirm all appointment applications "
@@ -1625,7 +1661,7 @@ msgid "Assign dummy service providers to"
 msgstr ""
 
 #: admin/views/page-settings-tab-main-section-accesibility.php:101
-#: appointments.php:3569 appointments.php:3648
+#: appointments.php:3573 appointments.php:3652
 msgid "None"
 msgstr ""
 
@@ -2161,7 +2197,7 @@ msgstr ""
 msgid "Description page"
 msgstr ""
 
-#: admin/views/page-settings-tab-services.php:30 appointments.php:3643
+#: admin/views/page-settings-tab-services.php:30 appointments.php:3647
 msgid "No services defined"
 msgstr ""
 
@@ -2317,861 +2353,198 @@ msgid_plural "%d Pending Appointments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: appointments.php:641 appointments.php:1083
+#: appointments.php:641 appointments.php:1087
 msgid "Not defined"
 msgstr ""
 
-#: appointments.php:1040 appointments.php:1993
+#: appointments.php:1044 appointments.php:1997
 msgid "Sunday"
 msgstr ""
 
-#: appointments.php:1041 appointments.php:1994
+#: appointments.php:1045 appointments.php:1998
 msgid "Monday"
 msgstr ""
 
-#: appointments.php:1042 appointments.php:1995
+#: appointments.php:1046 appointments.php:1999
 msgid "Tuesday"
 msgstr ""
 
-#: appointments.php:1043 appointments.php:1996
+#: appointments.php:1047 appointments.php:2000
 msgid "Wednesday"
 msgstr ""
 
-#: appointments.php:1044 appointments.php:1997
+#: appointments.php:1048 appointments.php:2001
 msgid "Thursday"
 msgstr ""
 
-#: appointments.php:1045 appointments.php:1998
+#: appointments.php:1049 appointments.php:2002
 msgid "Friday"
 msgstr ""
 
-#: appointments.php:1046 appointments.php:1999
+#: appointments.php:1050 appointments.php:2003
 msgid "Saturday"
 msgstr ""
 
-#: appointments.php:1071
+#: appointments.php:1075
 msgid "Email"
 msgstr ""
 
-#: appointments.php:1072
+#: appointments.php:1076
 msgid "Phone"
 msgstr ""
 
-#: appointments.php:1073 includes/addons/app-locations-location_support.php:147
-#: includes/addons/app-locations-location_support.php:219
-#: includes/addons/app-locations-location_support.php:230
+#: appointments.php:1077
+#: includes/pro/includes/addons/app-locations-location_support.php:147
+#: includes/pro/includes/addons/app-locations-location_support.php:219
+#: includes/pro/includes/addons/app-locations-location_support.php:230
 msgid "Address"
 msgstr ""
 
-#: appointments.php:1074
+#: appointments.php:1078
 msgid "City"
 msgstr ""
 
-#: appointments.php:1075
+#: appointments.php:1079
 msgid "Note"
 msgstr ""
 
-#: appointments.php:1093
+#: appointments.php:1097
 msgid "Free"
 msgstr ""
 
-#: appointments.php:1094
+#: appointments.php:1098
 msgid "Busy"
 msgstr ""
 
-#: appointments.php:1095
+#: appointments.php:1099
 msgid "Not possible"
 msgstr ""
 
-#: appointments.php:1212
+#: appointments.php:1216
 msgid ""
 "There is an issue with this appointment. Please refresh the page and try "
 "again. If problem persists, please contact website admin."
 msgstr ""
 
-#: appointments.php:1223
+#: appointments.php:1227
 msgid "Appointment could not be cancelled. Please refresh the page and try again."
 msgstr ""
 
-#: appointments.php:1227
+#: appointments.php:1231
 msgid "Cancellation of appointments is disabled. Please contact website admin."
 msgstr ""
 
-#: appointments.php:1259
+#: appointments.php:1263
 msgid "More information <span class=\"meta-nav\">&rarr;</span>"
 msgstr ""
 
-#: appointments.php:1363
+#: appointments.php:1367
 msgid "%s Appointment"
 msgstr ""
 
-#: appointments.php:1394
+#: appointments.php:1398
 msgid "Something wrong about the submitted %s"
 msgstr ""
 
-#: appointments.php:1984 appointments.php:1986
+#: appointments.php:1988 appointments.php:1990
 msgid " "
 msgstr ""
 
-#: appointments.php:2005
+#: appointments.php:2009
 msgid "Su"
 msgstr ""
 
-#: appointments.php:2006
+#: appointments.php:2010
 msgid "Mo"
 msgstr ""
 
-#: appointments.php:2007
+#: appointments.php:2011
 msgid "Tu"
 msgstr ""
 
-#: appointments.php:2008
+#: appointments.php:2012
 msgid "We"
 msgstr ""
 
-#: appointments.php:2009
+#: appointments.php:2013
 msgid "Th"
 msgstr ""
 
-#: appointments.php:2010
+#: appointments.php:2014
 msgid "Fr"
 msgstr ""
 
-#: appointments.php:2011
+#: appointments.php:2015
 msgid "Sa"
 msgstr ""
 
-#: appointments.php:2919
+#: appointments.php:2923
 msgid "Login with Facebook"
 msgstr ""
 
-#: appointments.php:2920
+#: appointments.php:2924
 msgid "Login with Twitter"
 msgstr ""
 
-#: appointments.php:2921
+#: appointments.php:2925
 msgid "Login with Google+"
 msgstr ""
 
-#: appointments.php:2922
+#: appointments.php:2926
 msgid "Login with WordPress"
 msgstr ""
 
-#: appointments.php:2923 includes/gcal/views/settings-gcal-step-1.php:74
+#: appointments.php:2927 includes/gcal/views/settings-gcal-step-1.php:74
 #: includes/gcal/views/settings-gcal-step-2.php:22
 msgid "Submit"
 msgstr ""
 
-#: appointments.php:2925
+#: appointments.php:2929
 msgid "Please, wait..."
 msgstr ""
 
-#: appointments.php:2926
+#: appointments.php:2930
 msgid "You are now logged in"
 msgstr ""
 
-#: appointments.php:2927
+#: appointments.php:2931
 msgid "Login error. Please try again."
 msgstr ""
 
-#: appointments.php:2930 includes/class_app_codec.php:446
+#: appointments.php:2934 includes/class_app_codec.php:446
 msgid "Register"
 msgstr ""
 
-#: appointments.php:3069 includes/helpers-settings.php:61
+#: appointments.php:3073 includes/helpers-settings.php:61
 msgid "Confirmation of your Appointment"
 msgstr ""
 
-#: appointments.php:3071 includes/helpers-settings.php:63
+#: appointments.php:3075 includes/helpers-settings.php:63
 msgid "Reminder for your Appointment"
 msgstr ""
 
-#: appointments.php:3480
+#: appointments.php:3484
 msgid "Cache cleared."
 msgstr ""
 
-#: appointments.php:3488
+#: appointments.php:3492
 msgid "Settings saved and cache cleared."
 msgstr ""
 
-#: appointments.php:3495
+#: appointments.php:3499
 msgid "Settings saved."
 msgstr ""
 
-#: appointments.php:3502
+#: appointments.php:3506
 msgid "Selected record(s) deleted."
 msgstr ""
 
-#: appointments.php:3509
+#: appointments.php:3513
 msgid "Selected record(s) updated."
 msgstr ""
 
-#: appointments.php:3516
+#: appointments.php:3520
 msgid "You are not authorised to do this."
-msgstr ""
-
-#: appointments.php:3696 appointments.php:3698
-msgid "Day"
-msgstr ""
-
-#: appointments.php:3696
-msgid "Work?"
-msgstr ""
-
-#: appointments.php:3696 appointments.php:3698
-#: includes/addons/app-admin-export_date_range.php:48
-#: includes/class-app-ajax.php:339
-#: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:136
-msgid "Start"
-msgstr ""
-
-#: appointments.php:3696 appointments.php:3698
-#: includes/addons/app-admin-export_date_range.php:49
-#: includes/class-app-ajax.php:374
-msgid "End"
-msgstr ""
-
-#: appointments.php:3698
-msgid "Give break?"
-msgstr ""
-
-#: appointments.php:3746 appointments.php:3795
-msgid "Add break"
-msgstr ""
-
-#: includes/addons/app-admin-admin_permissions.php:58
-msgid "Appointments role access"
-msgstr ""
-
-#: includes/addons/app-admin-admin_permissions.php:67
-#: includes/addons/app-post_types-worker_names.php:116
-#: includes/addons/app-schedule-default_service.php:82
-msgid "Default"
-msgstr ""
-
-#: includes/addons/app-admin-export_date_range.php:47
-msgid "Only include appointments between"
-msgstr ""
-
-#: includes/addons/app-admin-pending_count.php:41
-msgid ""
-"There seems to be something wrong with the WP Heartbeat API state. The "
-"&quot;Pending Appointments count notification&quot; add-on might not work "
-"properly because of this."
-msgstr ""
-
-#: includes/addons/app-locations-location_support.php:129
-#: includes/addons/app-locations-location_support.php:443
-#: includes/addons/app-locations-location_support.php:468
-#: includes/addons/app-locations-service_locations.php:139
-#: includes/addons/lib/class-app-locations-list-table.php:34
-msgid "Location"
-msgstr ""
-
-#: includes/addons/app-locations-location_support.php:150
-#: includes/addons/app-users-additional_fields.php:494
-msgid "Add"
-msgstr ""
-
-#: includes/addons/app-locations-location_support.php:151
-msgid "Save"
-msgstr ""
-
-#: includes/addons/app-locations-location_support.php:152
-msgid "Create a New Location"
-msgstr ""
-
-#: includes/addons/app-locations-location_support.php:153
-#: includes/addons/app-locations-location_support.php:227
-#: includes/addons/app-locations-location_support.php:235
-msgid "Edit Location"
-msgstr ""
-
-#: includes/addons/app-locations-location_support.php:167
-msgid "Edit Locations"
-msgstr ""
-
-#: includes/addons/app-locations-location_support.php:175
-#: includes/addons/app-locations-location_support.php:183
-msgid "Locations"
-msgstr ""
-
-#: includes/addons/app-locations-location_support.php:212
-msgid "Address cannot be empty"
-msgstr ""
-
-#: includes/addons/app-locations-location_support.php:216
-msgid "Add new Location"
-msgstr ""
-
-#: includes/addons/app-locations-location_support.php:223
-msgid "Add Location"
-msgstr ""
-
-#: includes/addons/app-locations-location_support.php:251
-msgid "Are you sure that you want to delete this location?"
-msgstr ""
-
-#: includes/addons/app-locations-location_support.php:269
-msgid "Show my appointments location"
-msgstr ""
-
-#: includes/addons/app-locations-location_support.php:273
-#: includes/addons/app-locations-location_support.php:285
-msgid "Automatic, after service"
-msgstr ""
-
-#: includes/addons/app-locations-location_support.php:274
-#: includes/addons/app-locations-location_support.php:286
-msgid "Automatic, after provider"
-msgstr ""
-
-#: includes/addons/app-locations-location_support.php:275
-#: includes/addons/app-locations-location_support.php:288
-msgid "Automatic, after date/time"
-msgstr ""
-
-#: includes/addons/app-locations-location_support.php:276
-#: includes/addons/app-locations-location_support.php:289
-msgid "Automatic, after status"
-msgstr ""
-
-#: includes/addons/app-locations-location_support.php:281
-msgid "Show all appointments location"
-msgstr ""
-
-#: includes/addons/app-locations-location_support.php:287
-msgid "Automatic, after client"
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:18
-#: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:11
-msgid "Show Appointments with this status (comma-separated list)"
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:24
-msgid "Show Appointments for this user ID"
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:89
-msgid "Renders a map of appointments"
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:130
-msgid ""
-"You'll need Locations add-on activated for Google Maps Locations "
-"integration add-on to work"
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:135
-msgid ""
-"You'll need Google Maps plugin installed and activated for Google Maps "
-"Locations integration add-on to work"
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:154
-msgid "ROADMAP"
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:155
-msgid "SATELLITE"
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:156
-msgid "HYBRID"
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:157
-msgid "TERRAIN"
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:160
-msgid "Metric"
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:161
-msgid "Imperial"
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:164
-msgid "Google Maps Settings"
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:165
-msgid ""
-"Any setting you leave empty here will be inherited from the default Google "
-"Maps plugin settings."
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:168
-msgid "Map size"
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:171
-msgid "Width:"
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:176
-msgid "Height:"
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:182
-msgid "Map appearance"
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:185
-msgid "Zoom:"
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:187
-msgid "Numeric value"
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:191
-msgid "Type:"
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:203
-msgid "Units:"
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:217
-msgid "Show images"
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:222
-msgid "Automatic map overlays"
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:224
-msgid "Automatically insert maps..."
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:228
-msgid "After My Appointments shortcode output"
-msgstr ""
-
-#: includes/addons/app-locations-locations_on_google_maps.php:234
-msgid "After All Appointments shortcode output"
-msgstr ""
-
-#: includes/addons/app-locations-service_locations.php:164
-msgid ""
-"You'll need Locations add-on activated for Service Locations integration "
-"add-on to work"
-msgstr ""
-
-#: includes/addons/app-locations-service_locations.php:208
-msgid "Service Locations Settings"
-msgstr ""
-
-#: includes/addons/app-locations-service_locations.php:211
-msgid "Show service location"
-msgstr ""
-
-#: includes/addons/app-locations-service_locations.php:214
-#: includes/addons/app-locations-worker_locations.php:96
-msgid "I will add location info manually, using shortcode"
-msgstr ""
-
-#: includes/addons/app-locations-service_locations.php:215
-msgid "Automatic, before service description"
-msgstr ""
-
-#: includes/addons/app-locations-service_locations.php:216
-msgid "Automatic, after service description"
-msgstr ""
-
-#: includes/addons/app-locations-service_locations.php:218
-msgid "You can use the shortcode like this: <code>[app_service_location]</code>"
-msgstr ""
-
-#: includes/addons/app-locations-worker_locations.php:47
-msgid ""
-"You'll need Locations add-on activated for Worker Locations integration "
-"add-on to work"
-msgstr ""
-
-#: includes/addons/app-locations-worker_locations.php:90
-msgid "Worker Locations Settings"
-msgstr ""
-
-#: includes/addons/app-locations-worker_locations.php:93
-msgid "Show worker location"
-msgstr ""
-
-#: includes/addons/app-locations-worker_locations.php:97
-msgid "Automatic, before worker description"
-msgstr ""
-
-#: includes/addons/app-locations-worker_locations.php:98
-msgid "Automatic, after worker description"
-msgstr ""
-
-#: includes/addons/app-locations-worker_locations.php:100
-msgid "You can use the shortcode like this: <code>[app_worker_location]</code>"
-msgstr ""
-
-#: includes/addons/app-locations-worker_locations.php:141
-msgid "Location:"
-msgstr ""
-
-#: includes/addons/app-mp-product_cart_appointments.php:86
-msgid "Appointment in shopping cart format"
-msgstr ""
-
-#: includes/addons/app-mp-product_cart_appointments.php:89
-msgid "You can use these macros: <code>%s</code>"
-msgstr ""
-
-#: includes/addons/app-mp-product_cart_appointments.php:93
-msgid "Auto-add appointments into cart"
-msgstr ""
-
-#: includes/addons/app-post_types-biography.php:56
-msgid "Biography post type settings"
-msgstr ""
-
-#: includes/addons/app-post_types-biography.php:59
-msgid "Biography post type"
-msgstr ""
-
-#: includes/addons/app-post_types-biography.php:68
-msgid ""
-"This is the post type that will be used as biographies for your service "
-"providers."
-msgstr ""
-
-#: includes/addons/app-post_types-service_description.php:56
-msgid "Service Description post type Settings"
-msgstr ""
-
-#: includes/addons/app-post_types-service_description.php:59
-msgid "Service Description post type"
-msgstr ""
-
-#: includes/addons/app-post_types-service_description.php:68
-msgid "This is the post type that will be used as descriptions for your services."
-msgstr ""
-
-#: includes/addons/app-post_types-worker_names.php:102
-msgid "As set in Appointments+ settings in profile (default)"
-msgstr ""
-
-#: includes/addons/app-post_types-worker_names.php:103
-msgid "User display name"
-msgstr ""
-
-#: includes/addons/app-post_types-worker_names.php:104
-msgid "Nickname"
-msgstr ""
-
-#: includes/addons/app-post_types-worker_names.php:105
-msgid "First name, followed by last name, space-separated"
-msgstr ""
-
-#: includes/addons/app-post_types-worker_names.php:106
-msgid "First name, followed by last name, comma-separated"
-msgstr ""
-
-#: includes/addons/app-post_types-worker_names.php:107
-msgid "Last name, followed by first name, space-separated"
-msgstr ""
-
-#: includes/addons/app-post_types-worker_names.php:108
-msgid "Last name, followed by first name, comma-separated"
-msgstr ""
-
-#: includes/addons/app-post_types-worker_names.php:113
-msgid "Worker display names"
-msgstr ""
-
-#: includes/addons/app-post_types-worker_names.php:125
-msgid ""
-"This is the name format that will be used by default for your service "
-"providers."
-msgstr ""
-
-#: includes/addons/app-post_types-worker_names.php:129
-msgid "Fallback"
-msgstr ""
-
-#: includes/addons/app-post_types-worker_names.php:138
-msgid ""
-"This is the name format that will be used as fallback, in case the default "
-"value is not set."
-msgstr ""
-
-#: includes/addons/app-schedule-default_service.php:76
-msgid "Default Service Settings"
-msgstr ""
-
-#: includes/addons/app-schedule-default_service.php:79
-msgid "Default Service"
-msgstr ""
-
-#: includes/addons/app-schedule-default_service.php:89
-msgid "This is the service that will be used as the default one."
-msgstr ""
-
-#: includes/addons/app-schedule-durations.php:71
-msgid "Time slot calculus method"
-msgstr ""
-
-#: includes/addons/app-schedule-durations.php:78
-msgid "Your duration calculus will be determined by the define value."
-msgstr ""
-
-#: includes/addons/app-schedule-durations.php:82
-msgid "Minimum time based appointment duration calculus <em>(legacy)</em>"
-msgstr ""
-
-#: includes/addons/app-schedule-durations.php:83
-msgid "Service duration based calculus"
-msgstr ""
-
-#: includes/addons/app-schedule-durations.php:95
-msgid "Boundaries detection"
-msgstr ""
-
-#: includes/addons/app-schedule-durations.php:98
-msgid "Your boundaries calculus will be determined by the define value."
-msgstr ""
-
-#: includes/addons/app-schedule-durations.php:102
-msgid "Exact period matching <em>(legacy)</em>"
-msgstr ""
-
-#: includes/addons/app-schedule-durations.php:103
-msgid "Detect overlap"
-msgstr ""
-
-#: includes/addons/app-schedule-durations.php:115
-msgid "Break times calculus"
-msgstr ""
-
-#: includes/addons/app-schedule-durations.php:118
-msgid "Your break times calculus will be determined by the define value."
-msgstr ""
-
-#: includes/addons/app-schedule-durations.php:122
-msgid "Invalidate enclosed offsets <em>(legacy)</em>"
-msgstr ""
-
-#: includes/addons/app-schedule-durations.php:123
-msgid "Shift next period"
-msgstr ""
-
-#: includes/addons/app-schedule-paddings.php:30
-msgid "Cumulative"
-msgstr ""
-
-#: includes/addons/app-schedule-paddings.php:31
-msgid "Largest"
-msgstr ""
-
-#: includes/addons/app-schedule-paddings.php:32
-msgid "Smallest"
-msgstr ""
-
-#: includes/addons/app-schedule-paddings.php:35
-msgid "Before"
-msgstr ""
-
-#: includes/addons/app-schedule-paddings.php:36
-msgid "After"
-msgstr ""
-
-#: includes/addons/app-schedule-paddings.php:94
-msgid "... applying the smaller padding of the two"
-msgstr ""
-
-#: includes/addons/app-schedule-paddings.php:95
-msgid "... applying the larger padding of the two"
-msgstr ""
-
-#: includes/addons/app-schedule-paddings.php:96
-msgid "... adding the two together and applying the result"
-msgstr ""
-
-#: includes/addons/app-schedule-paddings.php:100
-msgid "Padding resolution type"
-msgstr ""
-
-#: includes/addons/app-schedule-paddings.php:102
-msgid ""
-"When both the current service and the current service provider have "
-"paddings assigned, resolve them by..."
-msgstr ""
-
-#: includes/addons/app-schedule-paddings.php:123
-#: includes/addons/app-schedule-paddings.php:152
-msgid "Padding times"
-msgstr ""
-
-#: includes/addons/app-schedule-shared_resources.php:46
-msgid "Shares resources with"
-msgstr ""
-
-#: includes/addons/app-users-additional_fields.php:107
-msgid "The field %s is required"
-msgstr ""
-
-#: includes/addons/app-users-additional_fields.php:367
-#: includes/class-app-ajax.php:132 includes/class-app-ajax.php:137
-msgid "<span style=\"color:green;font-weight:bold\">Changes saved.</span>"
-msgstr ""
-
-#: includes/addons/app-users-additional_fields.php:451
-msgid "Text"
-msgstr ""
-
-#: includes/addons/app-users-additional_fields.php:452
-msgid "Checkbox"
-msgstr ""
-
-#: includes/addons/app-users-additional_fields.php:457
-msgid "Additional Fields"
-msgstr ""
-
-#: includes/addons/app-users-additional_fields.php:460
-msgid "Additional fields"
-msgstr ""
-
-#: includes/addons/app-users-additional_fields.php:469
-msgid "E-mail macro:"
-msgstr ""
-
-#: includes/addons/app-users-additional_fields.php:470
-msgid "This is the placeholder you can use in your emails."
-msgstr ""
-
-#: includes/addons/app-users-additional_fields.php:477
-msgid "Add new field"
-msgstr ""
-
-#: includes/addons/app-users-additional_fields.php:479
-msgid "Field label:"
-msgstr ""
-
-#: includes/addons/app-users-additional_fields.php:483
-msgid "Field type:"
-msgstr ""
-
-#: includes/addons/app-users-additional_fields.php:492
-msgid "Required?"
-msgstr ""
-
-#: includes/addons/app-users-limit_services_login.php:38
-msgid "Login with %s"
-msgstr ""
-
-#: includes/addons/app-users-limit_services_login.php:40
-msgid "Register with %s"
-msgstr ""
-
-#: includes/addons/app-users-limit_services_login.php:65
-msgid "Show login buttons"
-msgstr ""
-
-#: includes/addons/app-users-limit_services_login.php:76
-msgid "Use %s name for login button"
-msgstr ""
-
-#: includes/addons/app-users-limit_services_login.php:76
-msgid "network"
-msgstr ""
-
-#: includes/addons/app-users-limit_services_login.php:76
-msgid "site"
-msgstr ""
-
-#: includes/addons/lib/app_service_locations_shortcode.php:15
-#: includes/addons/lib/app_service_locations_shortcode.php:17
-msgid "Please select a service location:"
-msgstr ""
-
-#: includes/addons/lib/app_service_locations_shortcode.php:16
-msgid "Text above the select menu. Default: \"Please select a service location\""
-msgstr ""
-
-#: includes/addons/lib/app_service_locations_shortcode.php:20
-#: includes/addons/lib/app_service_locations_shortcode.php:22
-msgid "Show available services"
-msgstr ""
-
-#: includes/addons/lib/app_service_locations_shortcode.php:21
-msgid ""
-"Button text to show the results for the selected. Default: \"Show available "
-"services\""
-msgstr ""
-
-#: includes/addons/lib/app_service_locations_shortcode.php:26
-#: includes/addons/lib/app_worker_locations_shortcode.php:26
-#: includes/shortcodes/class-app-shortcode-service-providers.php:41
-msgid ""
-"If set as 1, Show button will not be displayed and page will be "
-"automatically refreshed as client changes selection. Note: Client cannot "
-"browse through the selections and thus check descriptions on the fly "
-"(without the page is refreshed). Default: \"0\" (disabled)"
-msgstr ""
-
-#: includes/addons/lib/app_service_locations_shortcode.php:31
-msgid ""
-"Sort order, by service. Possible values: ID, name, duration, price. "
-"Optionally DESC (descending) can be used, e.g. \"name DESC\" will reverse "
-"the order. Default: \"ID\""
-msgstr ""
-
-#: includes/addons/lib/app_service_locations_shortcode.php:123
-msgid "Creates a dropdown menu of available service locations."
-msgstr ""
-
-#: includes/addons/lib/app_service_locations_shortcode.php:137
-msgid ""
-"Creates a dropdown menu of available service locations which will be "
-"converted to a service list once a location has been chosen."
-msgstr ""
-
-#: includes/addons/lib/app_worker_locations_shortcode.php:15
-#: includes/addons/lib/app_worker_locations_shortcode.php:17
-msgid "Please select a provider location:"
-msgstr ""
-
-#: includes/addons/lib/app_worker_locations_shortcode.php:16
-msgid "Text above the select menu. Default: \"Please select a provider location\""
-msgstr ""
-
-#: includes/addons/lib/app_worker_locations_shortcode.php:20
-#: includes/addons/lib/app_worker_locations_shortcode.php:22
-msgid "Show available providers"
-msgstr ""
-
-#: includes/addons/lib/app_worker_locations_shortcode.php:21
-msgid ""
-"Button text to show the results for the selected. Default: \"Show available "
-"providers\""
-msgstr ""
-
-#: includes/addons/lib/app_worker_locations_shortcode.php:31
-msgid ""
-"Sort order, by service providers. Possible values: ID, name. Optionally "
-"DESC (descending) can be used, e.g. \"name DESC\" will reverse the order. "
-"Default: \"ID\""
-msgstr ""
-
-#: includes/addons/lib/app_worker_locations_shortcode.php:118
-msgid "Creates a dropdown menu of available provider locations."
-msgstr ""
-
-#: includes/addons/lib/app_worker_locations_shortcode.php:132
-msgid ""
-"Creates a dropdown menu of available provider locations which will be "
-"converted to a provider list once a location has been chosen."
-msgstr ""
-
-#: includes/addons/lib/class-app-locations-list-table.php:19
-msgid "Delete"
 msgstr ""
 
 #: includes/class-app-ajax.php:90 includes/class-app-ajax.php:142
@@ -3180,6 +2553,11 @@ msgstr ""
 
 #: includes/class-app-ajax.php:128
 msgid "Status changed from %s to %s by %s for appointment ID:%d"
+msgstr ""
+
+#: includes/class-app-ajax.php:132 includes/class-app-ajax.php:137
+#: includes/pro/includes/addons/app-users-additional_fields.php:367
+msgid "<span style=\"color:green;font-weight:bold\">Changes saved.</span>"
 msgstr ""
 
 #: includes/class-app-ajax.php:141
@@ -3390,6 +2768,12 @@ msgid ""
 "Client Name: CLIENT\n"
 "Service Name: SERVICE\n"
 "Service Provider Name: SERVICE_PROVIDER\n"
+msgstr ""
+
+#: includes/class-app-service.php:63
+msgid ""
+"You have reached the limit for the free version. <a href=\"%s\">Upgrade to "
+"Appointments+ for unlimited services</a>"
 msgstr ""
 
 #: includes/class-app-tutorial.php:38
@@ -4706,6 +4090,640 @@ msgstr ""
 msgid "Removal notification"
 msgstr ""
 
+#: includes/pro/includes/addons/app-admin-admin_permissions.php:58
+msgid "Appointments role access"
+msgstr ""
+
+#: includes/pro/includes/addons/app-admin-admin_permissions.php:67
+#: includes/pro/includes/addons/app-post_types-worker_names.php:116
+#: includes/pro/includes/addons/app-schedule-default_service.php:82
+msgid "Default"
+msgstr ""
+
+#: includes/pro/includes/addons/app-admin-export_date_range.php:47
+msgid "Only include appointments between"
+msgstr ""
+
+#: includes/pro/includes/addons/app-admin-pending_count.php:41
+msgid ""
+"There seems to be something wrong with the WP Heartbeat API state. The "
+"&quot;Pending Appointments count notification&quot; add-on might not work "
+"properly because of this."
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-location_support.php:129
+#: includes/pro/includes/addons/app-locations-location_support.php:443
+#: includes/pro/includes/addons/app-locations-location_support.php:468
+#: includes/pro/includes/addons/app-locations-service_locations.php:139
+#: includes/pro/includes/addons/lib/class-app-locations-list-table.php:34
+msgid "Location"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-location_support.php:150
+#: includes/pro/includes/addons/app-users-additional_fields.php:495
+msgid "Add"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-location_support.php:151
+msgid "Save"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-location_support.php:152
+msgid "Create a New Location"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-location_support.php:153
+#: includes/pro/includes/addons/app-locations-location_support.php:227
+#: includes/pro/includes/addons/app-locations-location_support.php:235
+msgid "Edit Location"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-location_support.php:167
+msgid "Edit Locations"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-location_support.php:175
+#: includes/pro/includes/addons/app-locations-location_support.php:183
+msgid "Locations"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-location_support.php:212
+msgid "Address cannot be empty"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-location_support.php:216
+msgid "Add new Location"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-location_support.php:223
+msgid "Add Location"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-location_support.php:251
+msgid "Are you sure that you want to delete this location?"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-location_support.php:269
+msgid "Show my appointments location"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-location_support.php:273
+#: includes/pro/includes/addons/app-locations-location_support.php:285
+msgid "Automatic, after service"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-location_support.php:274
+#: includes/pro/includes/addons/app-locations-location_support.php:286
+msgid "Automatic, after provider"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-location_support.php:275
+#: includes/pro/includes/addons/app-locations-location_support.php:288
+msgid "Automatic, after date/time"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-location_support.php:276
+#: includes/pro/includes/addons/app-locations-location_support.php:289
+msgid "Automatic, after status"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-location_support.php:281
+msgid "Show all appointments location"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-location_support.php:287
+msgid "Automatic, after client"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:18
+#: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:11
+msgid "Show Appointments with this status (comma-separated list)"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:24
+msgid "Show Appointments for this user ID"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:90
+msgid "Renders a map of appointments"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:151
+msgid ""
+"You'll need Locations add-on activated for Google Maps Locations "
+"integration add-on to work"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:156
+msgid ""
+"You'll need Google Maps plugin installed and activated for Google Maps "
+"Locations integration add-on to work"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:175
+msgid "ROADMAP"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:176
+msgid "SATELLITE"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:177
+msgid "HYBRID"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:178
+msgid "TERRAIN"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:181
+msgid "Metric"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:182
+msgid "Imperial"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:185
+msgid "Google Maps Settings"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:186
+msgid ""
+"Any setting you leave empty here will be inherited from the default Google "
+"Maps plugin settings."
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:189
+msgid "Map size"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:192
+msgid "Width:"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:197
+msgid "Height:"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:203
+msgid "Map appearance"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:206
+msgid "Zoom:"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:208
+msgid "Numeric value"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:212
+msgid "Type:"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:224
+msgid "Units:"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:238
+msgid "Show images"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:243
+msgid "Automatic map overlays"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:245
+msgid "Automatically insert maps..."
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:249
+msgid "After My Appointments shortcode output"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:255
+msgid "After All Appointments shortcode output"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-service_locations.php:164
+msgid ""
+"You'll need Locations add-on activated for Service Locations integration "
+"add-on to work"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-service_locations.php:208
+msgid "Service Locations Settings"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-service_locations.php:211
+msgid "Show service location"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-service_locations.php:214
+#: includes/pro/includes/addons/app-locations-worker_locations.php:96
+msgid "I will add location info manually, using shortcode"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-service_locations.php:215
+msgid "Automatic, before service description"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-service_locations.php:216
+msgid "Automatic, after service description"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-service_locations.php:218
+msgid "You can use the shortcode like this: <code>[app_service_location]</code>"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-worker_locations.php:47
+msgid ""
+"You'll need Locations add-on activated for Worker Locations integration "
+"add-on to work"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-worker_locations.php:90
+msgid "Worker Locations Settings"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-worker_locations.php:93
+msgid "Show worker location"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-worker_locations.php:97
+msgid "Automatic, before worker description"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-worker_locations.php:98
+msgid "Automatic, after worker description"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-worker_locations.php:100
+msgid "You can use the shortcode like this: <code>[app_worker_location]</code>"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-worker_locations.php:141
+msgid "Location:"
+msgstr ""
+
+#: includes/pro/includes/addons/app-mp-product_cart_appointments.php:86
+msgid "Appointment in shopping cart format"
+msgstr ""
+
+#: includes/pro/includes/addons/app-mp-product_cart_appointments.php:89
+msgid "You can use these macros: <code>%s</code>"
+msgstr ""
+
+#: includes/pro/includes/addons/app-mp-product_cart_appointments.php:93
+msgid "Auto-add appointments into cart"
+msgstr ""
+
+#: includes/pro/includes/addons/app-post_types-biography.php:56
+msgid "Biography post type settings"
+msgstr ""
+
+#: includes/pro/includes/addons/app-post_types-biography.php:59
+msgid "Biography post type"
+msgstr ""
+
+#: includes/pro/includes/addons/app-post_types-biography.php:68
+msgid ""
+"This is the post type that will be used as biographies for your service "
+"providers."
+msgstr ""
+
+#: includes/pro/includes/addons/app-post_types-service_description.php:56
+msgid "Service Description post type Settings"
+msgstr ""
+
+#: includes/pro/includes/addons/app-post_types-service_description.php:59
+msgid "Service Description post type"
+msgstr ""
+
+#: includes/pro/includes/addons/app-post_types-service_description.php:68
+msgid "This is the post type that will be used as descriptions for your services."
+msgstr ""
+
+#: includes/pro/includes/addons/app-post_types-worker_names.php:102
+msgid "As set in Appointments+ settings in profile (default)"
+msgstr ""
+
+#: includes/pro/includes/addons/app-post_types-worker_names.php:103
+msgid "User display name"
+msgstr ""
+
+#: includes/pro/includes/addons/app-post_types-worker_names.php:104
+msgid "Nickname"
+msgstr ""
+
+#: includes/pro/includes/addons/app-post_types-worker_names.php:105
+msgid "First name, followed by last name, space-separated"
+msgstr ""
+
+#: includes/pro/includes/addons/app-post_types-worker_names.php:106
+msgid "First name, followed by last name, comma-separated"
+msgstr ""
+
+#: includes/pro/includes/addons/app-post_types-worker_names.php:107
+msgid "Last name, followed by first name, space-separated"
+msgstr ""
+
+#: includes/pro/includes/addons/app-post_types-worker_names.php:108
+msgid "Last name, followed by first name, comma-separated"
+msgstr ""
+
+#: includes/pro/includes/addons/app-post_types-worker_names.php:113
+msgid "Worker display names"
+msgstr ""
+
+#: includes/pro/includes/addons/app-post_types-worker_names.php:125
+msgid ""
+"This is the name format that will be used by default for your service "
+"providers."
+msgstr ""
+
+#: includes/pro/includes/addons/app-post_types-worker_names.php:129
+msgid "Fallback"
+msgstr ""
+
+#: includes/pro/includes/addons/app-post_types-worker_names.php:138
+msgid ""
+"This is the name format that will be used as fallback, in case the default "
+"value is not set."
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-default_service.php:76
+msgid "Default Service Settings"
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-default_service.php:79
+msgid "Default Service"
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-default_service.php:89
+msgid "This is the service that will be used as the default one."
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-durations.php:71
+msgid "Time slot calculus method"
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-durations.php:78
+msgid "Your duration calculus will be determined by the define value."
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-durations.php:82
+msgid "Minimum time based appointment duration calculus <em>(legacy)</em>"
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-durations.php:83
+msgid "Service duration based calculus"
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-durations.php:95
+msgid "Boundaries detection"
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-durations.php:98
+msgid "Your boundaries calculus will be determined by the define value."
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-durations.php:102
+msgid "Exact period matching <em>(legacy)</em>"
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-durations.php:103
+msgid "Detect overlap"
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-durations.php:115
+msgid "Break times calculus"
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-durations.php:118
+msgid "Your break times calculus will be determined by the define value."
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-durations.php:122
+msgid "Invalidate enclosed offsets <em>(legacy)</em>"
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-durations.php:123
+msgid "Shift next period"
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-paddings.php:30
+msgid "Cumulative"
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-paddings.php:31
+msgid "Largest"
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-paddings.php:32
+msgid "Smallest"
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-paddings.php:35
+msgid "Before"
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-paddings.php:36
+msgid "After"
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-paddings.php:94
+msgid "... applying the smaller padding of the two"
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-paddings.php:95
+msgid "... applying the larger padding of the two"
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-paddings.php:96
+msgid "... adding the two together and applying the result"
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-paddings.php:100
+msgid "Padding resolution type"
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-paddings.php:102
+msgid ""
+"When both the current service and the current service provider have "
+"paddings assigned, resolve them by..."
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-paddings.php:123
+#: includes/pro/includes/addons/app-schedule-paddings.php:152
+msgid "Padding times"
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-shared_resources.php:46
+msgid "Shares resources with"
+msgstr ""
+
+#: includes/pro/includes/addons/app-users-additional_fields.php:107
+msgid "The field %s is required"
+msgstr ""
+
+#: includes/pro/includes/addons/app-users-additional_fields.php:451
+msgid "Text"
+msgstr ""
+
+#: includes/pro/includes/addons/app-users-additional_fields.php:452
+msgid "Checkbox"
+msgstr ""
+
+#: includes/pro/includes/addons/app-users-additional_fields.php:458
+msgid "Additional Fields"
+msgstr ""
+
+#: includes/pro/includes/addons/app-users-additional_fields.php:461
+msgid "Additional fields"
+msgstr ""
+
+#: includes/pro/includes/addons/app-users-additional_fields.php:470
+msgid "E-mail macro:"
+msgstr ""
+
+#: includes/pro/includes/addons/app-users-additional_fields.php:471
+msgid "This is the placeholder you can use in your emails."
+msgstr ""
+
+#: includes/pro/includes/addons/app-users-additional_fields.php:478
+msgid "Add new field"
+msgstr ""
+
+#: includes/pro/includes/addons/app-users-additional_fields.php:480
+msgid "Field label:"
+msgstr ""
+
+#: includes/pro/includes/addons/app-users-additional_fields.php:484
+msgid "Field type:"
+msgstr ""
+
+#: includes/pro/includes/addons/app-users-additional_fields.php:493
+msgid "Required?"
+msgstr ""
+
+#: includes/pro/includes/addons/app-users-limit_services_login.php:42
+msgid "Login with %s"
+msgstr ""
+
+#: includes/pro/includes/addons/app-users-limit_services_login.php:44
+msgid "Register with %s"
+msgstr ""
+
+#: includes/pro/includes/addons/app-users-limit_services_login.php:66
+msgid "Limit Services Login"
+msgstr ""
+
+#: includes/pro/includes/addons/app-users-limit_services_login.php:69
+msgid "Show login buttons"
+msgstr ""
+
+#: includes/pro/includes/addons/app-users-limit_services_login.php:80
+msgid "Use %s name for login button"
+msgstr ""
+
+#: includes/pro/includes/addons/app-users-limit_services_login.php:80
+msgid "network"
+msgstr ""
+
+#: includes/pro/includes/addons/app-users-limit_services_login.php:80
+msgid "site"
+msgstr ""
+
+#: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:15
+#: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:17
+msgid "Please select a service location:"
+msgstr ""
+
+#: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:16
+msgid "Text above the select menu. Default: \"Please select a service location\""
+msgstr ""
+
+#: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:20
+#: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:22
+msgid "Show available services"
+msgstr ""
+
+#: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:21
+msgid ""
+"Button text to show the results for the selected. Default: \"Show available "
+"services\""
+msgstr ""
+
+#: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:26
+#: includes/pro/includes/addons/lib/app_worker_locations_shortcode.php:26
+#: includes/shortcodes/class-app-shortcode-service-providers.php:41
+msgid ""
+"If set as 1, Show button will not be displayed and page will be "
+"automatically refreshed as client changes selection. Note: Client cannot "
+"browse through the selections and thus check descriptions on the fly "
+"(without the page is refreshed). Default: \"0\" (disabled)"
+msgstr ""
+
+#: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:31
+msgid ""
+"Sort order, by service. Possible values: ID, name, duration, price. "
+"Optionally DESC (descending) can be used, e.g. \"name DESC\" will reverse "
+"the order. Default: \"ID\""
+msgstr ""
+
+#: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:123
+msgid "Creates a dropdown menu of available service locations."
+msgstr ""
+
+#: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:137
+msgid ""
+"Creates a dropdown menu of available service locations which will be "
+"converted to a service list once a location has been chosen."
+msgstr ""
+
+#: includes/pro/includes/addons/lib/app_worker_locations_shortcode.php:15
+#: includes/pro/includes/addons/lib/app_worker_locations_shortcode.php:17
+msgid "Please select a provider location:"
+msgstr ""
+
+#: includes/pro/includes/addons/lib/app_worker_locations_shortcode.php:16
+msgid "Text above the select menu. Default: \"Please select a provider location\""
+msgstr ""
+
+#: includes/pro/includes/addons/lib/app_worker_locations_shortcode.php:20
+#: includes/pro/includes/addons/lib/app_worker_locations_shortcode.php:22
+msgid "Show available providers"
+msgstr ""
+
+#: includes/pro/includes/addons/lib/app_worker_locations_shortcode.php:21
+msgid ""
+"Button text to show the results for the selected. Default: \"Show available "
+"providers\""
+msgstr ""
+
+#: includes/pro/includes/addons/lib/app_worker_locations_shortcode.php:31
+msgid ""
+"Sort order, by service providers. Possible values: ID, name. Optionally "
+"DESC (descending) can be used, e.g. \"name DESC\" will reverse the order. "
+"Default: \"ID\""
+msgstr ""
+
+#: includes/pro/includes/addons/lib/app_worker_locations_shortcode.php:118
+msgid "Creates a dropdown menu of available provider locations."
+msgstr ""
+
+#: includes/pro/includes/addons/lib/app_worker_locations_shortcode.php:132
+msgid ""
+"Creates a dropdown menu of available provider locations which will be "
+"converted to a provider list once a location has been chosen."
+msgstr ""
+
+#: includes/pro/includes/addons/lib/class-app-locations-list-table.php:19
+msgid "Delete"
+msgstr ""
+
 #: includes/pro/includes/class-app-google-login.php:78
 msgid "Login with Google"
 msgstr ""
@@ -5442,8 +5460,9 @@ msgctxt "Settings section"
 msgid "%s Settings"
 msgstr ""
 
-#: appointments.php:2924 includes/addons/app-locations-location_support.php:154
-#: includes/class-app-ajax.php:428 includes/class-app-tutorial.php:217
+#: appointments.php:2928 includes/class-app-ajax.php:428
+#: includes/class-app-tutorial.php:217
+#: includes/pro/includes/addons/app-locations-location_support.php:154
 #: includes/shortcodes/class-app-shortcode-confirmation.php:196
 msgctxt "Drop current action"
 msgid "Cancel"
