@@ -83,19 +83,71 @@ class Appointments_Upgrader {
 		$table = appointments_get_table( 'wh' );
 
 		$rows = $wpdb->get_results( "SELECT * FROM {$table}" );
+		foreach ( $rows as $key => $row ) {
+			$rows[ $key ]->hours = maybe_unserialize( $row->hours );
+		}
+
 		$time_format = get_option( 'time_format' );
 		foreach ( $rows as $key => $row ) {
-			$hours = maybe_unserialize( $row->hours );
-			if ( ! is_array( $hours ) ) {
+			if ( ! is_array( $row->hours ) ) {
 				continue;
 			}
-			foreach ( $hours as $day_of_week => $values ) {
-				$start = strtotime( $values['start'] );
-				$end = strtotime( $values['end'] );
-				var_dump( $values['start'] );
-				var_dump( date( 'H:i', $start ) );
+
+			foreach ( $row->hours as $day_of_week => $values ) {
+				$start = $values['start'];
+				$end = $values['end'];
+				if ( is_array( $start ) ) {
+					foreach ( $start as $idx => $start_value ) {
+						$start_value = date( 'H:i', strtotime( $start_value ) );
+						if ( strlen( $start_value ) != 5 ) {
+							// Wrong conversion
+						}
+						else {
+							// All good!
+							$rows[ $key ]->hours[ $day_of_week ]['start'][ $idx ] = $start_value;
+						}
+					}
+				}
+
+				if ( is_array( $end ) ) {
+					foreach ( $end as $idx => $end_value ) {
+						$end_value = date( 'H:i', strtotime( $end_value ) );
+						if ( strlen( $end_value ) != 5 ) {
+							// Wrong conversion
+						}
+						else {
+							// All good!
+							$rows[ $key ]->hours[ $day_of_week ]['end'][ $idx ] = $end_value;
+						}
+					}
+				}
+
+				if ( ! is_array( $start ) && ! is_array( $end ) ) {
+					$start = date( 'H:i', strtotime( $start ) );
+					$end = date( 'H:i', strtotime( $end ) );
+					if ( strlen( $start ) != 5 || strlen( $end ) != 5 ) {
+						// Wrong conversion
+					}
+					else {
+						// All good!
+						$rows[ $key ]->hours[ $day_of_week ]['start'] = $start;
+						$rows[ $key ]->hours[ $day_of_week ]['end'] = $end;
+					}
+				}
 			}
 		}
-		//appointments_get_worker_working_hours();
+
+		foreach ( $rows as $key => $row ) {
+			$hours = maybe_serialize( $row->hours );
+			$wpdb->update(
+				$table,
+				array( 'hours' => $hours ),
+				array( 'ID' => $row->ID ),
+				array( '%s' ),
+				array( '%d' )
+			);
+		}
+
+		appointments_clear_cache();
 	}
 }

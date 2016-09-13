@@ -95,71 +95,238 @@ class App_Upgrades_Test extends App_UnitTestCase {
 	 *
 	 * @group upgrade-1.9.4
 	 */
-	function test_upgrade_1_9_4() {
-		global $wpdb;
-		$table = $wpdb->prefix . 'app_working_hours';
+	function test_upgrade_1_9_4_format1() {
+		$open = $this->_get_working_hours('g:i A', 'open');
+		$closed = $this->_get_working_hours('g:i A', 'closed');
 
-		$time_formats = array(
-			'H:i',
-			'g:i A',
-			'g:i a'
-		);
+		appointments_update_worker_working_hours( 0, $open, 'open', 0 );
+		appointments_update_worker_working_hours( 0, $closed, 'closed', 0 );
 
-		$rows = array (
-			array(
-				'worker' => 0,
-				'hours' => array(
-					'open'   => array(
-						'Sunday'    => array( 'active' => 'no', 'start' => '10:00 am', 'end' => '11:00 pm', ),
-						'Monday'    => array( 'active' => 'no', 'start' => '10:00 pm', 'end' => '11:00 pm', ),
-						'Tuesday'   => array( 'active' => 'no', 'start' => '7:00 am', 'end' => '12:00 am', ),
-						'Wednesday' => array( 'active' => 'yes', 'start' => '1:00 pm', 'end' => '10:00 pm', ),
-						'Thursday'  => array( 'active' => 'yes', 'start' => '12:00 am', 'end' => '8:00 pm', ),
-						'Friday'    => array( 'active' => 'yes', 'start' => '9:00 am', 'end' => '9:00 pm', ),
-						'Saturday'  => array( 'active' => 'yes', 'start' => '12:00 am', 'end' => '8:00 pm', )
-					),
-					'closed' => array(
-						'Sunday'    => array( 'active' => 'no', 'start' => '12:00 am', 'end' => '12:00 am', ),
-						'Monday'    => array(
-							'active' => array( 0 => 'yes', ),
-							'start'  => array( 0 => '12:00 pm', ),
-							'end'    => array( 0 => '6:00 pm', ),
-						),
-						'Tuesday'   => array( 'active' => 'no', 'start' => '12:00 pm', 'end' => '1:00 pm', ),
-						'Wednesday' => array( 'active' => 'no', 'start' => '12:00 pm', 'end' => '1:00 pm', ),
-						'Thursday'  => array( 'active' => 'no', 'start' => '12:00 pm', 'end' => '1:00 pm', ),
-						'Friday'    => array( 'active' => 'no', 'start' => '12:00 pm', 'end' => '1:00 pm', ),
-						'Saturday'  => array( 'active' => 'no', 'start' => '12:00 pm', 'end' => '1:00 pm', ),
-					)
-				)
-			)
-		);
-
-		foreach ( $rows as $row ) {
-			$worker = $row['worker'];
-			foreach ( $row['hours'] as $status => $hours ) {
-				$hours = maybe_serialize( $hours );
-				$sql = "
-				INSERT INTO $table
-				(location, service, worker, status, hours)
-				VALUES ( 0, 0, $worker, '$status', '$hours' )";
-				$wpdb->insert(
-					$table,
-					array(
-						'location' => 0,
-						'service' => 0,
-						'worker' => $worker,
-						'status' => $status,
-						'hours' => $hours
-					),
-					array( '%d', '%d', '%d', '%s', '%s' )
-				);
-			}
-		}
+		$worker_id = $this->factory->worker->create_object( array( 'user_email' => 'test@test.com' ) );
+		appointments_update_worker_working_hours( 0, $open, 'open', $worker_id );
+		appointments_update_worker_working_hours( 0, $closed, 'closed', $worker_id );
 
 		update_option( 'app_db_version', '1.9.3' );
 		appointments()->maybe_upgrade();
 		$this->assertEquals( get_option( 'app_db_version' ), appointments()->version );
+
+		$this->_test_upgrade_1_9_4_single_time_format( 0 );
+		$this->_test_upgrade_1_9_4_single_time_format( $worker_id );
+
+	}
+
+	/**
+	 * It should fix a bug that was inserting working hours in the wrong format
+	 *
+	 * @group upgrade-1.9.4
+	 */
+	function test_upgrade_1_9_4_format2() {
+		$open = $this->_get_working_hours('g:i a', 'open');
+		$closed = $this->_get_working_hours('g:i a', 'closed');
+
+		appointments_update_worker_working_hours( 0, $open, 'open', 0 );
+		appointments_update_worker_working_hours( 0, $closed, 'closed', 0 );
+
+		$worker_id = $this->factory->worker->create_object( array( 'user_email' => 'test@test.com' ) );
+		appointments_update_worker_working_hours( 0, $open, 'open', $worker_id );
+		appointments_update_worker_working_hours( 0, $closed, 'closed', $worker_id );
+
+		update_option( 'app_db_version', '1.9.3' );
+		appointments()->maybe_upgrade();
+		$this->assertEquals( get_option( 'app_db_version' ), appointments()->version );
+
+		$this->_test_upgrade_1_9_4_single_time_format( 0 );
+		$this->_test_upgrade_1_9_4_single_time_format( $worker_id );
+
+	}
+
+	/**
+	 * It should fix a bug that was inserting working hours in the wrong format
+	 *
+	 * @group upgrade-1.9.4
+	 */
+	function test_upgrade_1_9_4_format3() {
+		$open = $this->_get_working_hours('H:i', 'open');
+		$closed = $this->_get_working_hours('H:i', 'closed');
+
+		appointments_update_worker_working_hours( 0, $open, 'open', 0 );
+		appointments_update_worker_working_hours( 0, $closed, 'closed', 0 );
+
+		$worker_id = $this->factory->worker->create_object( array( 'user_email' => 'test@test.com' ) );
+		appointments_update_worker_working_hours( 0, $open, 'open', $worker_id );
+		appointments_update_worker_working_hours( 0, $closed, 'closed', $worker_id );
+
+		update_option( 'app_db_version', '1.9.3' );
+		appointments()->maybe_upgrade();
+		$this->assertEquals( get_option( 'app_db_version' ), appointments()->version );
+
+		$this->_test_upgrade_1_9_4_single_time_format( 0 );
+		$this->_test_upgrade_1_9_4_single_time_format( $worker_id );
+
+	}
+
+	/**
+	 * It should fix a bug that was inserting working hours in the wrong format
+	 *
+	 * @group upgrade-1.9.4
+	 */
+	function test_upgrade_1_9_4_format4() {
+		$open = $this->_get_working_hours('G:i', 'open');
+		$closed = $this->_get_working_hours('G:i', 'closed');
+
+		appointments_update_worker_working_hours( 0, $open, 'open', 0 );
+		appointments_update_worker_working_hours( 0, $closed, 'closed', 0 );
+
+		$worker_id = $this->factory->worker->create_object( array( 'user_email' => 'test@test.com' ) );
+		appointments_update_worker_working_hours( 0, $open, 'open', $worker_id );
+		appointments_update_worker_working_hours( 0, $closed, 'closed', $worker_id );
+
+		update_option( 'app_db_version', '1.9.3' );
+		appointments()->maybe_upgrade();
+		$this->assertEquals( get_option( 'app_db_version' ), appointments()->version );
+
+		$this->_test_upgrade_1_9_4_single_time_format( 0 );
+		$this->_test_upgrade_1_9_4_single_time_format( $worker_id );
+	}
+
+	/**
+	 * It should fix a bug that was inserting working hours in the wrong format
+	 *
+	 * @group upgrade-1.9.4
+	 */
+	function test_upgrade_1_9_4_format5() {
+		$open = $this->_get_working_hours('G:i:s', 'open');
+		$closed = $this->_get_working_hours('G:i:s', 'closed');
+
+		appointments_update_worker_working_hours( 0, $open, 'open', 0 );
+		appointments_update_worker_working_hours( 0, $closed, 'closed', 0 );
+
+		$worker_id = $this->factory->worker->create_object( array( 'user_email' => 'test@test.com' ) );
+		appointments_update_worker_working_hours( 0, $open, 'open', $worker_id );
+		appointments_update_worker_working_hours( 0, $closed, 'closed', $worker_id );
+
+		update_option( 'app_db_version', '1.9.3' );
+		appointments()->maybe_upgrade();
+		$this->assertEquals( get_option( 'app_db_version' ), appointments()->version );
+
+		$this->_test_upgrade_1_9_4_single_time_format( 0 );
+		$this->_test_upgrade_1_9_4_single_time_format( $worker_id );
+	}
+
+	/**
+	 * It should fix a bug that was inserting working hours in the wrong format
+	 *
+	 * @group upgrade-1.9.4
+	 */
+	function test_upgrade_1_9_4_format6() {
+		$open = $this->_get_working_hours('g:i:s a', 'open');
+		$closed = $this->_get_working_hours('g:i:s a', 'closed');
+
+		appointments_update_worker_working_hours( 0, $open, 'open', 0 );
+		appointments_update_worker_working_hours( 0, $closed, 'closed', 0 );
+
+		$worker_id = $this->factory->worker->create_object( array( 'user_email' => 'test@test.com' ) );
+		appointments_update_worker_working_hours( 0, $open, 'open', $worker_id );
+		appointments_update_worker_working_hours( 0, $closed, 'closed', $worker_id );
+
+		update_option( 'app_db_version', '1.9.3' );
+		appointments()->maybe_upgrade();
+		$this->assertEquals( get_option( 'app_db_version' ), appointments()->version );
+
+		$this->_test_upgrade_1_9_4_single_time_format( 0 );
+		$this->_test_upgrade_1_9_4_single_time_format( $worker_id );
+	}
+
+	/**
+	 * It should fix a bug that was inserting working hours in the wrong format
+	 *
+	 * @group upgrade-1.9.4
+	 */
+	function test_upgrade_1_9_4_format7() {
+		$open = $this->_get_working_hours('G:i T', 'open');
+		$closed = $this->_get_working_hours('G:i T', 'closed');
+
+		appointments_update_worker_working_hours( 0, $open, 'open', 0 );
+		appointments_update_worker_working_hours( 0, $closed, 'closed', 0 );
+
+		$worker_id = $this->factory->worker->create_object( array( 'user_email' => 'test@test.com' ) );
+		appointments_update_worker_working_hours( 0, $open, 'open', $worker_id );
+		appointments_update_worker_working_hours( 0, $closed, 'closed', $worker_id );
+
+		update_option( 'app_db_version', '1.9.3' );
+		appointments()->maybe_upgrade();
+		$this->assertEquals( get_option( 'app_db_version' ), appointments()->version );
+
+		$this->_test_upgrade_1_9_4_single_time_format( 0 );
+		$this->_test_upgrade_1_9_4_single_time_format( $worker_id );
+	}
+
+	private function _get_working_hours( $format, $status ) {
+		$_10_am = date( $format, strtotime( '10:00' ) );
+		$_10_pm = date( $format, strtotime( '22:00' ) );
+		$_7_am  = date( $format, strtotime( '07:00' ) );
+		$_1_pm  = date( $format, strtotime( '13:00' ) );
+		$_9_am  = date( $format, strtotime( '09:00' ) );
+		$_12_am = date( $format, strtotime( '00:00' ) );
+		$_12_pm = date( $format, strtotime( '12:00' ) );
+		$_3_pm  = date( $format, strtotime( '15:00' ) );
+		$_6_pm  = date( $format, strtotime( '18:00' ) );
+		$_9_pm  = date( $format, strtotime( '21:00' ) );
+		$_11_pm = date( $format, strtotime( '23:00' ) );
+		$_8_pm  = date( $format, strtotime( '20:00' ) );
+
+		if ( 'open' == $status ) {
+			return array(
+				'Sunday'    => array( 'active' => 'no', 'start' => $_10_am, 'end' => $_11_pm, ),
+				'Monday'    => array( 'active' => 'no', 'start' => $_10_pm, 'end' => $_11_pm, ),
+				'Tuesday'   => array( 'active' => 'no', 'start' => $_7_am, 'end' => $_12_am, ),
+				'Wednesday' => array( 'active' => 'yes', 'start' => $_1_pm, 'end' => $_10_pm, ),
+				'Thursday'  => array( 'active' => 'yes', 'start' => $_12_am, 'end' => $_8_pm, ),
+				'Friday'    => array( 'active' => 'yes', 'start' => $_9_am, 'end' => $_9_pm, ),
+				'Saturday'  => array( 'active' => 'yes', 'start' => $_12_am, 'end' => $_8_pm, )
+			);
+		}
+		else {
+			return array(
+				'Sunday'    => array( 'active' => 'no', 'start' => $_12_am, 'end' => $_12_am, ),
+				'Monday'    =>array (
+					'active' => array( 0 => 'yes', 1 => 'yes', ),
+					'start' => array( 0 => $_12_pm, 1 => $_3_pm, ),
+					'end' => array( 0 => $_6_pm, 1 => $_9_pm, ),
+				),
+				'Tuesday'   => array( 'active' => 'no', 'start' => $_12_pm, 'end' => $_1_pm, ),
+				'Wednesday' => array( 'active' => 'no', 'start' => $_12_pm, 'end' => $_1_pm, ),
+				'Thursday'  => array( 'active' => 'no', 'start' => $_12_pm, 'end' => $_1_pm, ),
+				'Friday'    => array( 'active' => 'no', 'start' => $_12_pm, 'end' => $_1_pm, ),
+				'Saturday'  => array( 'active' => 'no', 'start' => $_12_pm, 'end' => $_1_pm, ),
+			);
+		}
+	}
+
+	private function _test_upgrade_1_9_4_single_time_format( $worker_id ) {
+		// Test open status
+		$new_hours = appointments_get_worker_working_hours( 'open', $worker_id, 0 );
+		$this->assertEquals( array( 'active' => 'no', 'start' => '10:00', 'end' => '23:00' ), $new_hours->hours['Sunday'] );
+		$this->assertEquals( array( 'active' => 'no', 'start' => '22:00', 'end' => '23:00' ), $new_hours->hours['Monday'] );
+		$this->assertEquals( array( 'active' => 'no', 'start' => '07:00', 'end' => '00:00' ), $new_hours->hours['Tuesday'] );
+		$this->assertEquals( array( 'active' => 'yes', 'start' => '13:00', 'end' => '22:00' ), $new_hours->hours['Wednesday'] );
+		$this->assertEquals( array( 'active' => 'yes', 'start' => '00:00', 'end' => '20:00' ), $new_hours->hours['Thursday'] );
+		$this->assertEquals( array( 'active' => 'yes', 'start' => '09:00', 'end' => '21:00' ), $new_hours->hours['Friday'] );
+		$this->assertEquals( array( 'active' => 'yes', 'start' => '00:00', 'end' => '20:00' ), $new_hours->hours['Saturday'] );
+
+		// Test closed status
+		$new_hours = appointments_get_worker_working_hours( 'closed', $worker_id, 0 );
+		$this->assertEquals( array( 'active' => 'no', 'start' => '00:00', 'end' => '00:00', ), $new_hours->hours['Sunday'] );
+		$this->assertEquals( array( 'active' => 'no', 'start' => '12:00', 'end' => '13:00', ), $new_hours->hours['Tuesday'] );
+		$this->assertEquals( array( 'active' => 'no', 'start' => '12:00', 'end' => '13:00', ), $new_hours->hours['Wednesday'] );
+		$this->assertEquals( array( 'active' => 'no', 'start' => '12:00', 'end' => '13:00', ), $new_hours->hours['Thursday'] );
+		$this->assertEquals( array( 'active' => 'no', 'start' => '12:00', 'end' => '13:00', ), $new_hours->hours['Friday'] );
+		$this->assertEquals( array( 'active' => 'no', 'start' => '12:00', 'end' => '13:00', ), $new_hours->hours['Saturday'] );
+
+		// Monday is special
+		$this->assertEquals( array( 0 => 'yes', 1 => 'yes', ), $new_hours->hours['Monday']['active'] );
+		$this->assertEquals( array( 0 => '12:00', 1 => '15:00', ), $new_hours->hours['Monday']['start'] );
+		$this->assertEquals( array( 0 => '18:00', 1 => '21:00', ), $new_hours->hours['Monday']['end'] );
 	}
 
 	/**
