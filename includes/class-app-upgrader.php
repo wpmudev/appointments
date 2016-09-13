@@ -78,6 +78,24 @@ class Appointments_Upgrader {
 	}
 
 	private function upgrade_1_9_4() {
+		global $wpdb;
+		// Fixes a bug with working hours format
+		$table = appointments_get_table( 'wh' );
 
+		$rows = $wpdb->get_results( "SELECT * FROM {$table}" );
+		$time_format = get_option( 'time_format' );
+		foreach ( $rows as $key => $row ) {
+			$hours = maybe_unserialize( $row->hours );
+			if ( ! is_array( $hours ) ) {
+				continue;
+			}
+			foreach ( $hours as $day_of_week => $values ) {
+				$start = strtotime( $values['start'] );
+				$end = strtotime( $values['end'] );
+				var_dump( $values['start'] );
+				var_dump( date( 'H:i', $start ) );
+			}
+		}
+		//appointments_get_worker_working_hours();
 	}
 }

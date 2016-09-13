@@ -92,9 +92,72 @@ class App_Upgrades_Test extends App_UnitTestCase {
 
 	/**
 	 * It should fix a bug that was inserting working hours in the wrong format
+	 *
+	 * @group upgrade-1.9.4
 	 */
 	function test_upgrade_1_9_4() {
-		update_option( 'app_db_version', '1.9.4' );
+		global $wpdb;
+		$table = $wpdb->prefix . 'app_working_hours';
+
+		$time_formats = array(
+			'H:i',
+			'g:i A',
+			'g:i a'
+		);
+
+		$rows = array (
+			array(
+				'worker' => 0,
+				'hours' => array(
+					'open'   => array(
+						'Sunday'    => array( 'active' => 'no', 'start' => '10:00 am', 'end' => '11:00 pm', ),
+						'Monday'    => array( 'active' => 'no', 'start' => '10:00 pm', 'end' => '11:00 pm', ),
+						'Tuesday'   => array( 'active' => 'no', 'start' => '7:00 am', 'end' => '12:00 am', ),
+						'Wednesday' => array( 'active' => 'yes', 'start' => '1:00 pm', 'end' => '10:00 pm', ),
+						'Thursday'  => array( 'active' => 'yes', 'start' => '12:00 am', 'end' => '8:00 pm', ),
+						'Friday'    => array( 'active' => 'yes', 'start' => '9:00 am', 'end' => '9:00 pm', ),
+						'Saturday'  => array( 'active' => 'yes', 'start' => '12:00 am', 'end' => '8:00 pm', )
+					),
+					'closed' => array(
+						'Sunday'    => array( 'active' => 'no', 'start' => '12:00 am', 'end' => '12:00 am', ),
+						'Monday'    => array(
+							'active' => array( 0 => 'yes', ),
+							'start'  => array( 0 => '12:00 pm', ),
+							'end'    => array( 0 => '6:00 pm', ),
+						),
+						'Tuesday'   => array( 'active' => 'no', 'start' => '12:00 pm', 'end' => '1:00 pm', ),
+						'Wednesday' => array( 'active' => 'no', 'start' => '12:00 pm', 'end' => '1:00 pm', ),
+						'Thursday'  => array( 'active' => 'no', 'start' => '12:00 pm', 'end' => '1:00 pm', ),
+						'Friday'    => array( 'active' => 'no', 'start' => '12:00 pm', 'end' => '1:00 pm', ),
+						'Saturday'  => array( 'active' => 'no', 'start' => '12:00 pm', 'end' => '1:00 pm', ),
+					)
+				)
+			)
+		);
+
+		foreach ( $rows as $row ) {
+			$worker = $row['worker'];
+			foreach ( $row['hours'] as $status => $hours ) {
+				$hours = maybe_serialize( $hours );
+				$sql = "
+				INSERT INTO $table
+				(location, service, worker, status, hours)
+				VALUES ( 0, 0, $worker, '$status', '$hours' )";
+				$wpdb->insert(
+					$table,
+					array(
+						'location' => 0,
+						'service' => 0,
+						'worker' => $worker,
+						'status' => $status,
+						'hours' => $hours
+					),
+					array( '%d', '%d', '%d', '%s', '%s' )
+				);
+			}
+		}
+
+		update_option( 'app_db_version', '1.9.3' );
 		appointments()->maybe_upgrade();
 		$this->assertEquals( get_option( 'app_db_version' ), appointments()->version );
 	}
