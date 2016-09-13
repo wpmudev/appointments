@@ -985,9 +985,13 @@ class Appointments {
 		if (!empty($forced_format)) $hours_min = strtotime($hours_min . ":00");
 		else if ($this->time_format) $hours_min = strtotime($hours_min . ":00"); // @TODO: TEST THIS THOROUGHLY!!!!
 
-		if( $do_i18n ){
+		if( $do_i18n ) {
 			$hours_min = date_i18n( $this->time_format, $hours_min );
-		} else {
+		}
+		elseif ( $forced_format ) {
+			$hours_min = date( $forced_format, $hours_min );
+		}
+		else {
 			$hours_min = date( $this->time_format, $hours_min );
 		}
 
@@ -3668,142 +3672,35 @@ class Appointments {
 	 *  @param status: Open (working hours) or close (break hours)
 	 */
 	function working_hour_form( $status='open' ) {
-		//$_old_time_format = $this->time_format;
-		//$this->time_format = "H:i";
-		$_required_format = "H:i";
-
-		$this->get_lsw();
-
-		if ( isset( $this->options["admin_min_time"] ) && $this->options["admin_min_time"] )
-			$min_time = $this->options["admin_min_time"];
-		else
-			$min_time = $this->get_min_time();
-
-		$min_secs = 60 * apply_filters( 'app_admin_min_time', $min_time );
-
-		$wb = appointments_get_worker_working_hours( $status, $this->worker, $this->location );
-		if ( ! $wb ) {
-			$whours = array();
+		$path = _appointments_get_view_path( 'form-working-hours' );
+		if ( is_file( $path ) ) {
+			include $path;
 		}
-		else {
-			$whours = $wb->hours;
-		}
+	}
 
+	/**
+	 * @internal
+	 * @param $name
+	 * @param $min_secs
+	 * @param string $selected
+	 *
+	 * @return string
+	 */
+	public function _time_selector( $name, $min_secs, $selected = '' ) {
+		ob_start();
+		?>
+			<select name="<?php echo esc_attr( $name ); ?>" autocomplete="off">
+				<?php for ( $t = 0; $t < 3600 * 24; $t = $t + $min_secs ): ?>
+					<?php
 
-		$form = '';
-		$form .= '<table class="app-working_hours-workhour_form">';
-		if ( 'open' == $status )
-			$form .= '<tr><th>'.__('Day', 'appointments').'</th><th>'.__('Work?', 'appointments' ).'</th><th>'.__('Start', 'appointments').'</th><th>'.__('End', 'appointments').'</th></tr>';
-		else
-			$form .= '<tr><th>'.__('Day', 'appointments').'</th><th>'.__('Give break?','appointments').'</th><th>'.__('Start','appointments').'</th><th>'.__('End','appointments').'</th></tr>';
-		foreach ( $this->weekdays() as $day_label => $day ) {
-			if (!empty($whours[$day]['active']) && is_array($whours[$day]['active'])) {
-				$total_whour_segments = count($whours[$day]['active']) - 1;
-				// We have multiple breaks for today.
-				foreach ($whours[$day]['active'] as $idx => $active) {
-					$form .= '<tr ' . ($idx > 0 ? 'class="app-repeated"' : '') . '><td>';
-					if (0 == $idx) $form .= $day_label;
-					$form .= '</td>';
-					$form .= '<td>';
-					$form .= '<select name="'.$status.'['.$day.'][active][' . $idx . ']" autocomplete="off">';
-					if ( 'yes' == $active )
-						$s = " selected='selected'";
-					else $s = '';
-					$form .= '<option value="no">'.__('No', 'appointments').'</option>';
-					$form .= '<option value="yes"'.$s.'>'.__('Yes', 'appointments').'</option>';
-					$form .= '</select>';
-					$form .= '</td>';
-					$form .= '<td>';
-					$form .= '<select name="'.$status.'['.$day.'][start][' . $idx . ']">';
-					for ( $t=0; $t<3600*24; $t=$t+$min_secs ) {
-						$dhours = esc_attr($this->secs2hours( $t, $_required_format, false )); // Hours in 08:30 format - escape, because they're values now.
+						$dhours = $this->secs2hours( $t, 'H:i', false ); // Hours in 08:30 format - escape, because they're values now.
 						$shours = $this->secs2hours($t);
-						if ( isset($whours[$day]['start'][$idx]) && strtotime($dhours) == strtotime($whours[$day]['start'][$idx]) )
-							$s = "selected='selected'";
-						else $s = '';
-
-						$form .= "<option {$s} value='{$dhours}'>";
-						$form .= $shours;
-						$form .= '</option>';
-					}
-					$form .= '</select>';
-					$form .= '</td>';
-
-					$form .= '<td>';
-					$form .= '<select name="'.$status.'['.$day.'][end][' . $idx . ']" autocomplete="off">';
-					for ( $t=$min_secs; $t<=3600*24; $t=$t+$min_secs ) {
-						$dhours = esc_attr($this->secs2hours( $t, $_required_format, false )); // Hours in 08:30 format - escape, because they're values now.
-						$shours = $this->secs2hours($t);
-						if ( isset($whours[$day]['end'][$idx]) && strtotime($dhours) == strtotime($whours[$day]['end'][$idx]) )
-							$s = "selected='selected'";
-						else $s = '';
-
-						$form .= "<option {$s} value='{$dhours}'>";
-						$form .= $shours;
-						$form .= '</option>';
-					}
-					$form .= '</select>';
-					if ('closed' == $status && $idx == 0 && 'yes' == $active) $form .= '&nbsp;<a href="#add_break" class="app-add_break" title="' . esc_attr(__('Add break', 'appointments')) . '"><span>' . __('Add break', 'appointments') . '</span></a>';
-					$form .= '</td>';
-
-					$form .= '</tr>';
-				}
-			} else {
-				// Oh, it's just one break.
-				$form .= '<tr><td>';
-				$form .= $day_label;
-				$form .= '</td>';
-				$form .= '<td>';
-				$form .= '<select name="'.$status.'['.$day.'][active]" autocomplete="off">';
-				if ( isset($whours[$day]['active']) && 'yes' == $whours[$day]['active'] )
-					$s = " selected='selected'";
-				else $s = '';
-				$form .= '<option value="no">'.__('No', 'appointments').'</option>';
-				$form .= '<option value="yes"'.$s.'>'.__('Yes', 'appointments').'</option>';
-				$form .= '</select>';
-				$form .= '</td>';
-				$form .= '<td>';
-				$form .= '<select name="'.$status.'['.$day.'][start]" autocomplete="off">';
-				for ( $t=0; $t<3600*24; $t=$t+$min_secs ) {
-					$dhours = esc_attr($this->secs2hours( $t, $_required_format, false )); // Hours in 08:30 format - escape, because they're values now.
-					$shours = $this->secs2hours($t);
-					if ( isset($whours[$day]['start']) && strtotime($dhours) == strtotime($whours[$day]['start']) )
-						$s = "selected='selected'";
-					else $s = '';
-
-					$form .= "<option {$s} value='{$dhours}'>";
-					$form .= $shours;
-					$form .= '</option>';
-				}
-				$form .= '</select>';
-				$form .= '</td>';
-
-				$form .= '<td>';
-				$form .= '<select name="'.$status.'['.$day.'][end]" autocomplete="off">';
-				for ( $t=$min_secs; $t<=3600*24; $t=$t+$min_secs ) {
-					$dhours = esc_attr($this->secs2hours( $t, $_required_format, false )); // Hours in 08:30 format - escape, because they're values now.
-					$shours = $this->secs2hours($t);
-					if ( isset($whours[$day]['end']) && strtotime($dhours) == strtotime($whours[$day]['end']) )
-						$s = " selected='selected'";
-					else $s = '';
-
-					$form .= "<option {$s} value='{$dhours}'>";
-					$form .= $shours;
-					$form .= '</option>';
-				}
-				$form .= '</select>';
-				if ('closed' == $status && isset($whours[$day]['active']) && 'yes' == $whours[$day]['active']) $form .= '&nbsp;<a href="#add_break" class="app-add_break" title="' . esc_attr(__('Add break', 'appointments')) . '"><span>' . __('Add break', 'appointments') . '</span></a>';
-				$form .= '</td>';
-
-				$form .= '</tr>';
-			}
-		}
-
-		$form .= '</table>';
-
-		//$this->time_format = $_old_time_format;
-
-		return $form;
+					?>
+					<option <?php selected( $selected, strtotime( $dhours ) ); ?> value="<?php echo esc_attr( $dhours ); ?>"><?php echo $shours; ?></option>
+				<?php endfor; ?>
+			</select>
+		<?php
+		return ob_get_clean();
 	}
 
 

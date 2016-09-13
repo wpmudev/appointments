@@ -91,6 +91,15 @@ class App_Upgrades_Test extends App_UnitTestCase {
 	}
 
 	/**
+	 * It should fix a bug that was inserting working hours in the wrong format
+	 */
+	function test_upgrade_1_9_4() {
+		update_option( 'app_db_version', '1.9.4' );
+		appointments()->maybe_upgrade();
+		$this->assertEquals( get_option( 'app_db_version' ), appointments()->version );
+	}
+
+	/**
 	 * This is a function on app-users-additional_fields.php
 	 *
 	 * @param $label

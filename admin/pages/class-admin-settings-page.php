@@ -181,6 +181,7 @@ class Appointments_Admin_Settings_Page {
 
 		$file = _appointments_get_settings_tab_view_file_path( $tab );
 
+		echo '<div class="appointments-settings-tab-' . $tab . '">';
 		if ( $file ) {
 			require_once( $file );
 		}
@@ -188,6 +189,7 @@ class Appointments_Admin_Settings_Page {
 			do_action( 'app-settings-tabs', $tab, $sections );
 			do_action( "appointments-settings-tab-{$tab}", $sections );
 		}
+		echo '</div>';
 	}
 
 	/**

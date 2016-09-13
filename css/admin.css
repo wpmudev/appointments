@@ -111,3 +111,13 @@ div.appointments-settings .subsubsub a:focus {
 .app-settings-section.current {
 	display:block;
 }
+
+/** WORKING HOURS PAGE **/
+body.appointments_page_app_settings .appointments-settings-tab-working_hours table.widefat {
+	background:transparent;
+	border:none;
+}
+
+body.appointments_page_app_settings .appointments-settings-tab-working_hours table.widefat th {
+	font-weight:bold;
+}
