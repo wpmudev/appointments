@@ -6,7 +6,7 @@
  * New Settings displayed in the Appointments Plus Payment settings form where
  * a special discount can be selected for Members of certain Memberships.
  */
-class App_Membership2 {
+class Appointments_Integration_Membership2 {
 
 	/**
 	 * A reference to the Membership2 API instance.
@@ -25,7 +25,7 @@ class App_Membership2 {
 		static $Inst = null;
 
 		if ( null === $Inst ) {
-			$Inst = new App_Membership2();
+			$Inst = new Appointments_Integration_Membership2();
 		}
 	}
 
@@ -336,4 +336,4 @@ class App_Membership2 {
 
 }
 
-App_Membership2::setup();
+Appointments_Integration_Membership2::setup();

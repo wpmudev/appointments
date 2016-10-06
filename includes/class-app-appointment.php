@@ -473,8 +473,10 @@ function appointments_update_appointment( $app_id, $args ) {
 	global $wpdb, $appointments;
 
 	$old_appointment = appointments_get_appointment( $app_id );
-	if ( ! $old_appointment )
+	if ( ! $old_appointment ) {
 		return false;
+	}
+
 
 	$fields = array(
 		'user' => '%d',

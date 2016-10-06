@@ -287,7 +287,7 @@ class Appointments_Admin {
 		}
 		
 		// Check for duplicate shortcodes for a visited page
-		if ( isset( $_GET['post'] ) && $_GET['post'] && $appointments->has_duplicate_shortcode( $_GET['post'] ) ) {
+		if ( isset( $_GET['post'] ) && $_GET['post'] && $this->has_duplicate_shortcode( $_GET['post'] ) ) {
 			echo '<div class="error"><p>' .
 			     __('<b>[Appointments+]</b> More than one instance of services, service providers, confirmation, Paypal or login shortcodes on the same page may cause problems.</p>', 'appointments' ).
 			     '</div>';
@@ -298,7 +298,7 @@ class Appointments_Admin {
 		$dismiss_id_c = get_user_meta( $current_user->ID, 'app_dismiss_confirmation_lacking', true );
 		if ( $dismiss_id_c )
 			$dismissed_c = true;
-		if ( !$dismissed_c && isset( $_GET['post'] ) && $_GET['post'] && $appointments->confirmation_shortcode_missing( $_GET['post'] ) ) {
+		if ( !$dismissed_c && isset( $_GET['post'] ) && $_GET['post'] && $this->confirmation_shortcode_missing( $_GET['post'] ) ) {
 			echo '<div class="error"><p>' .
 			     __('<b>[Appointments+]</b> Confirmation shortcode [app_confirmation] is always required to complete an appointment.', 'appointments') .
 			     '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a title="'.__('Dismiss this notice for this session', 'appointments').'" href="' . $_SERVER['REQUEST_URI'] . '&app_dismiss_confirmation_lacking=1"><small>'.__('Dismiss', 'appointments').'</small></a>'.
@@ -357,6 +357,38 @@ class Appointments_Admin {
 
 		// Read Location, Service, Worker
 		$appointments->get_lsw();
+	}
+
+	/**
+	 * Check if there are more than one shortcodes for certain shortcode types
+	 * @since 1.0.5
+	 * @return bool
+	 */
+	function has_duplicate_shortcode( $post_id ) {
+		$post = get_post( $post_id );
+		if ( is_object( $post) && $post && strpos( $post->post_content, '[app_' ) !== false ) {
+			if ( substr_count( $post->post_content, '[app_services' ) > 1 || substr_count( $post->post_content, '[app_service_providers' ) > 1
+			     || substr_count( $post->post_content, '[app_confirmation' ) > 1 || substr_count( $post->post_content, '[app_paypal' ) > 1
+			     || substr_count( $post->post_content, '[app_login' ) > 1 ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Check if confirmation shortcode missing
+	 * @since 1.2.5
+	 * @return bool
+	 */
+	function confirmation_shortcode_missing( $post_id ) {
+		$post = get_post( $post_id );
+		if ( is_object( $post) && $post && strpos( $post->post_content, '[app_' ) !== false ) {
+			if ( !substr_count( $post->post_content, '[app_confirmation' )
+			     && ( substr_count( $post->post_content, '[app_monthly' ) || substr_count( $post->post_content, '[app_schedule' ) ) )
+				return true;
+		}
+		return false;
 	}
 	
 }

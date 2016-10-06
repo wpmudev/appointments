@@ -47,7 +47,7 @@ class Appointments_Admin_Appointments_Page {
 			if ( $result ) {
 
 				$userdata = get_userdata( get_current_user_id() );
-				add_action( 'admin_notices', array ( &$appointments, 'updated' ) );
+				add_action( 'admin_notices', array ( $this, 'updated' ) );
 				do_action( 'app_bulk_status_change',  $_REQUEST["app"] );
 
 				$appointments->log( sprintf( __('Status of Appointment(s) with id(s):%s changed to %s by user:%s', 'appointments' ),  implode( ', ', $_REQUEST["app"] ), $new_status, $userdata->user_login ) );
@@ -66,7 +66,7 @@ class Appointments_Admin_Appointments_Page {
 			if ( $result ) {
 				global $current_user;
 				$userdata = get_userdata( $current_user->ID );
-				add_action( 'admin_notices', array ( &$appointments, 'deleted' ) );
+				add_action( 'admin_notices', array ( $this, 'deleted' ) );
 				do_action( 'app_deleted',  $_POST["app"] );
 				$appointments->log( sprintf( __('Appointment(s) with id(s):%s deleted by user:%s', 'appointments' ),  implode( ', ', $_POST["app"] ), $userdata->user_login ) );
 			}
@@ -387,5 +387,19 @@ class Appointments_Admin_Appointments_Page {
 		$output = "<div class='tablenav-pages{$page_class}'>$output</div>";
 
 		echo $output;
+	}
+
+	/**
+	 * Prints "deleted" message on top of Admin page
+	 */
+	function deleted( ) {
+		echo '<div class="updated fade"><p><b>[Appointments+]</b> '. __('Selected record(s) deleted.','appointments').'</p></div>';
+	}
+
+	/**
+	 * Prints "updated" message on top of Admin page
+	 */
+	function updated( ) {
+		echo '<div class="updated fade"><p><b>[Appointments+]</b> '. __('Selected record(s) updated.','appointments').'</p></div>';
 	}
 }

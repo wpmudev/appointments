@@ -1,6 +1,6 @@
 <?php
 
-class App_BuddyPress {
+class Appointments_Integration_BuddyPress {
 
 	private $_bp = false;
 	private $_bp_script = '';
@@ -244,3 +244,5 @@ class App_BuddyPress {
 		}
 	}
 }
+
+Appointments_Integration_BuddyPress::serve();

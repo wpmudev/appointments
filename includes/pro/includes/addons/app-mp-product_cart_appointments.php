@@ -43,7 +43,16 @@ class App_Mp_ProductCartDisplay {
 
 	public function auto_add_to_cart () {
 		global $post;
-		if (!$this->_core->is_app_mp_page($post)) return false;
+
+		$is_app_mp_page = false;
+		if ( is_object( $post ) && strpos( $post->post_content, '[app_' ) !== false ) {
+			$is_app_mp_page = true;
+		}
+		// Maybe required for templates
+		if ( ! apply_filters( 'app_is_mp_page', $is_app_mp_page, $post ) ) {
+			return false;
+		};
+
 		?>
 		<script>
 			(function ($) {

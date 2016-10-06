@@ -404,7 +404,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 
 		if (!is_user_logged_in()) return false; // Logged out users aren't being shown editable stuff, ever.
 
-		$bp_ready = class_exists('App_BuddyPress') && App_BuddyPress::is_ready();
+		$bp_ready = class_exists( 'Appointments_Integration_BuddyPress' ) && Appointments_Integration_BuddyPress::is_ready();
 		$allow_current_user = bp_displayed_user_id() === bp_loggedin_user_id();
 
 		return $bp_ready && $allow_current_user;
