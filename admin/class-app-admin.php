@@ -314,19 +314,6 @@ class Appointments_Admin {
 		App_Template::admin_transactions_list();
 	}
 
-	function shortcodes_page () {
-		global $appointments;
-		?>
-		<div class="wrap">
-			<div class="icon32" style="margin:10px 0 0 0"><img src="<?php echo $appointments->plugin_url . '/images/general.png'; ?>" /></div>
-			<h2><?php echo __('Appointments+ Shortcodes','appointments'); ?></h2>
-			<div class="metabox-holder columns-2">
-				<?php if (file_exists(APP_PLUGIN_DIR . '/includes/support/app-shortcodes.php')) include(APP_PLUGIN_DIR . '/includes/support/app-shortcodes.php'); ?>
-			</div>
-		</div>
-		<?php
-	}
-
 	function faq_page () {
 		global $appointments;
 		?>
@@ -357,7 +344,6 @@ class Appointments_Admin {
 		$appointments_pages['settings'] = $appointments_page;
 		
 		add_submenu_page('appointments', __('Transactions','appointments'), __('Transactions','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_TRANSACTIONS), "app_transactions", array(&$this,'transactions'));
-		add_submenu_page('appointments', __('Shortcodes','appointments'), __('Shortcodes','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_SHORTCODES), "app_shortcodes", array(&$this,'shortcodes_page'));
 		add_submenu_page('appointments', __('FAQ','appointments'), __('FAQ','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_FAQ), "app_faq", array(&$this,'faq_page'));
 		// Add datepicker to appointments page
 
