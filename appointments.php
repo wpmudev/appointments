@@ -3912,7 +3912,8 @@ require_once APP_PLUGIN_DIR . '/includes/class_app_install.php';
 require_once APP_PLUGIN_DIR . '/includes/class_app_timed_abstractions.php';
 require_once APP_PLUGIN_DIR . '/includes/class_app_roles.php';
 require_once APP_PLUGIN_DIR . '/includes/class_app_codec.php';
-require_once APP_PLUGIN_DIR . '/includes/class_app_shortcodes.php';
+require_once APP_PLUGIN_DIR . '/includes/shortcodes/abstract-app-shortcode.php';
+require_once APP_PLUGIN_DIR . '/includes/shortcodes.php';
 
 App_Installer::serve();
 
