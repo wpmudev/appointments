@@ -15,7 +15,10 @@ if ( ! class_exists( 'App_Shortcode_Login' ) ) {
 	class App_Shortcode_Login extends App_Shortcode {
 		public function __construct () {
 			$this->name = _x( 'Login', 'Login Shortcode', 'appointments' );
-			$this->_defaults = array(
+		}
+
+		public function get_defaults() {
+			return array(
 				'login_text' => array(
 					'type' => 'text',
 					'name' => __( 'Login text', 'appointments' ),

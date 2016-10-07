@@ -16,7 +16,10 @@ if ( ! class_exists( 'App_Shortcode_Paypal' ) ) {
 	class App_Shortcode_Paypal extends App_Shortcode {
 		public function __construct() {
 			$this->name = __( 'Paypal', 'appointments' );
-			$this->_defaults = array(
+		}
+
+		public function get_defaults() {
+			return array(
 				'item_name'   => array(
 					'type' => 'text',
 					'name' => __( 'Item Name', 'appointments' ),

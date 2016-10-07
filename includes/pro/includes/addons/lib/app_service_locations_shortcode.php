@@ -4,35 +4,9 @@ class App_Shortcode_ServiceLocationsShortcode extends App_Shortcode {
 
 	protected $_requested_location_id;
 
-	public static function serve () {
-		$me = new self;
-		$me->register('app_service_locations');
-	}
 
-	protected function __construct () {
-		$this->_defaults = array(
-			'select' => array(
-				'value' => __('Please select a service location:', 'appointments'),
-				'help' => __('Text above the select menu. Default: "Please select a service location"', 'appointments'),
-				'example' => __('Please select a service location:', 'appointments'),
-			),
-			'show' => array(
-				'value' => __('Show available services', 'appointments'),
-				'help' => __('Button text to show the results for the selected. Default: "Show available services"', 'appointments'),
-				'example' => __('Show available services', 'appointments'),
-			),
-			'autorefresh' => array(
-				'value' => 0,
-				'help' => __('If set as 1, Show button will not be displayed and page will be automatically refreshed as client changes selection. Note: Client cannot browse through the selections and thus check descriptions on the fly (without the page is refreshed). Default: "0" (disabled)', 'appointments'),
-				'example' => '1',
-			),
-			'order_by' => array(
-				'value' => 'ID',
-				'help' => __('Sort order, by service. Possible values: ID, name, duration, price. Optionally DESC (descending) can be used, e.g. "name DESC" will reverse the order. Default: "ID"', 'appointments'),
-				'example' => 'ID',
-			),
-		);
-
+	public function __construct () {
+		$this->name = __( 'Service Locations', 'appointments' );
 		if (!empty($_REQUEST['app_service_location']) && is_numeric($_REQUEST['app_service_location'])) {
 			$this->_requested_location_id = (float)$_REQUEST['app_service_location'];
 		}
@@ -40,6 +14,46 @@ class App_Shortcode_ServiceLocationsShortcode extends App_Shortcode {
 		if (!is_admin() && !empty($this->_requested_location_id)) {
 			add_filter('app_services', array($this, 'filter_services'));
 		}
+	}
+
+	public function get_defaults() {
+		return array(
+			'select' => array(
+				'type' => 'text',
+				'name' => __( 'Title', 'appointments' ),
+				'value' => __('Please select a service location:', 'appointments'),
+				'help' => __('Text above the select menu. Default: "Please select a service location"', 'appointments'),
+				'example' => __('Please select a service location:', 'appointments'),
+			),
+			'show' => array(
+				'type' => 'text',
+				'name' => __( 'Button text', 'appointments' ),
+				'value' => __('Show available services', 'appointments'),
+				'help' => __('Button text to show the results for the selected. Default: "Show available services"', 'appointments'),
+			),
+			'autorefresh' => array(
+				'type' => 'checkbox',
+				'name' => __( 'Autorefresh', 'appointments' ),
+				'value' => 0,
+				'help' => __('If checked, Show button will not be displayed and page will be automatically refreshed as client changes selection. Note: Client cannot browse through the selections and thus check descriptions on the fly (without the page is refreshed). Default: disabled', 'appointments'),
+			),
+			'order_by' => array(
+				'type' => 'select',
+				'name' => __( 'Order By', 'appointments' ),
+				'options' => array(
+					array( 'text' => 'ID', 'value' => 'ID' ),
+					array( 'text' => 'ID DESC', 'value' => 'ID DESC' ),
+					array( 'text' => 'name', 'value' => 'name' ),
+					array( 'text' => 'name DESC', 'value' => 'name DESC' ),
+					array( 'text' => 'duration', 'value' => 'duration' ),
+					array( 'text' => 'duration DESC', 'value' => 'duration DESC' ),
+					array( 'text' => 'price', 'value' => 'price' ),
+					array( 'text' => 'price DESC', 'value' => 'price DESC' ),
+				),
+				'value' => 'ID',
+				'help' => __('Sort order, by service. Possible values: ID, name, duration, price. Optionally DESC (descending) can be used, e.g. "name DESC" will reverse the order. Default: "ID"', 'appointments'),
+			),
+		);
 	}
 
 	public function filter_services ($services) {
@@ -128,9 +142,9 @@ EO_SELECTION_JAVASCRIPT;
 
 class App_Shortcode_RequiredServiceLocationsShortcode extends App_Shortcode_ServiceLocationsShortcode {
 
-	public static function serve () {
-		$me = new self;
-		$me->register('app_required_service_locations');
+	public function __construct() {
+		parent::__construct();
+		$this->name = __( 'Required Service Locations', 'appointments' );
 	}
 	
 	public function get_usage_info () {

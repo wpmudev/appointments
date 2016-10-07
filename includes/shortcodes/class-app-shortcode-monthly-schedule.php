@@ -16,7 +16,9 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 
 		public function __construct () {
 			$this->name = __( 'Monthly Schedule', 'appointments' );
+		}
 
+		public function get_defaults() {
 			$_workers = appointments_get_workers();
 			$workers = array(
 				array( 'text' => __( 'Any provider', 'appointments' ), 'value' => '' )
@@ -35,7 +37,7 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 				$services[] = array( 'text' => $service->name, 'value' => $service->ID );
 			}
 
-			$this->_defaults = array(
+			return array(
 				'title' => array(
 					'type' => 'text',
 					'name' => __( 'Title', 'appointments' ),

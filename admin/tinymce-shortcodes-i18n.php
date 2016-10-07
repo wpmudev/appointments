@@ -1,20 +1,8 @@
 <?php
 
 $strings = new stdClass();
-$registered_shortcodes = array(
-	'app_worker_montly_calendar',
-	'app_worker_monthly_calendar',
-	'app_schedule',
-	'app_monthly_schedule',
-	'app_pagination',
-	'app_all_appointments',
-	'app_my_appointments',
-	'app_services',
-	'app_service_providers',
-	'app_login',
-	'app_paypal',
-	'app_confirmation',
-);
+$appointments = appointments();
+$registered_shortcodes = array_keys($appointments->shortcodes );
 
 $strings->label = esc_js( __( 'Appointments', 'pubman' ) );
 $strings->shortcodes = new stdClass();
@@ -22,7 +10,7 @@ foreach ( $registered_shortcodes as $shortcode ) {
 	$instance = App_Shortcodes::get_shortcode_instance( $shortcode );
 	if ( $instance && $instance->name ) {
 		$strings->shortcodes->$shortcode = new stdClass();
-		$strings->shortcodes->$shortcode->defaults = $instance->_defaults;
+		$strings->shortcodes->$shortcode->defaults = $instance->get_defaults();
 		$strings->shortcodes->$shortcode->name = $instance->name;
 		$strings->shortcodes->$shortcode->shortcode = $shortcode;
 	}

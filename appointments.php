@@ -61,6 +61,8 @@ class Appointments {
 
 	public $pro = false;
 
+	public $shortcodes = array();
+
 
 	function __construct() {
 

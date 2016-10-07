@@ -12,20 +12,24 @@ Author: WPMU DEV
 class App_GoogleMaps_MyAppointmentsShortcode extends App_Shortcode {
 
 	public function __construct () {
-		$this->_defaults = array(
+		$this->name = __( 'Locations on Google Maps', 'appointments' );
+	}
+
+	public function get_defaults() {
+		return array(
 			'status' => array(
+				'type' => 'text',
+				'name' => __( 'Status', 'appointments' ),
 				'value' => 'paid,confirmed',
 				'help' => __('Show Appointments with this status (comma-separated list)', 'appointments'),
-				'allowed_values' => array('paid', 'confirmed', 'service'),
-				'example' => 'paid,confirmed',
 			),
 			'user_id' => array(
-				'value' => false,
-				'help' => __('Show Appointments for this user ID', 'appointments'),
-				'example' => '32',
-			),
+				'type' => 'text',
+				'name' => __( 'User ID', 'appointments' ),
+				'value' => '',
+				'help' => __('Show Appointments for this user ID', 'appointments')
+			)
 		);
-
 	}
 
 	public function process_shortcode ($args=array(), $content='') {

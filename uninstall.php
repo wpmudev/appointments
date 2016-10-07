@@ -11,6 +11,7 @@ $wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}app_exceptions" );
 $wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}app_services" );
 $wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}app_workers" );
 $wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}app_appointments" );
+$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}app_appointmentmeta" );
 $wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}app_transactions" );
 $wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}app_cache" );
 $wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}app_appointmentmeta" );
@@ -60,3 +61,5 @@ $user_metas = $wpdb->get_col( "SELECT meta_key FROM $wpdb->usermeta WHERE meta_k
 foreach ( $user_metas as $meta ) {
 	$wpdb->delete( $wpdb->usermeta, array( 'meta_key' => $meta ), array( '%s' ) );
 }
+
+wp_unschedule_event( current_time( 'timestamp' ), 'appointments_gcal_sync' );

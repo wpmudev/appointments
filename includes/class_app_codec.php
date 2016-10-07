@@ -306,9 +306,16 @@ class App_Shortcodes extends App_Codec {
 
 	public function do_register () {
 		$this->_instances = apply_filters('app-shortcodes-register', array());
+		$appointments = appointments();
+		$appointments->shortcodes = array_merge( $appointments->shortcodes, $this->_instances );
 		$this->_register();
 	}
 
+	/**
+	 * @param $key
+	 *
+	 * @return App_Shortcode|bool
+	 */
 	public static function get_shortcode_instance ($key) {
 		if (empty(self::$_me)) return false;
 		return !empty(self::$_me->_running[$key])

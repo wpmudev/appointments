@@ -3,7 +3,10 @@
 class App_Shortcode_Confirmation extends App_Shortcode {
 	public function __construct () {
 		$this->name = __( 'Confirmation', 'appointments' );
-		$this->_defaults = array(
+	}
+
+	public function get_defaults() {
+		return array(
 			'title' => array(
 				'type' => 'text',
 				'name' => __( 'Title', 'appointments' ),

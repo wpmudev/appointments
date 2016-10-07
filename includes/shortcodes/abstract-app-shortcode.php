@@ -12,12 +12,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'App_Shortcode' ) ) {
 	abstract class App_Shortcode extends App_Codec_Instance {
 
-		public $_defaults = array();
+		private $_defaults = array();
 		protected $_key;
 		public $name;
 
 		abstract public function process_shortcode ($args=array(), $content='');
 		abstract public function get_usage_info ();
+
+		abstract public function get_defaults();
 
 		public function register ($key) {
 			$this->_key = $key;
@@ -67,7 +69,7 @@ if ( ! class_exists( 'App_Shortcode' ) ) {
 
 		protected function _defaults_to_args () {
 			$ret = array();
-			foreach ($this->_defaults as $key => $item) {
+			foreach ($this->get_defaults() as $key => $item) {
 				$ret[$key] = $item['value'];
 			}
 			return $ret;
@@ -76,7 +78,7 @@ if ( ! class_exists( 'App_Shortcode' ) ) {
 
 		protected function _defaults_to_help () {
 			$ret = array();
-			foreach ($this->_defaults as $key => $item) {
+			foreach ($this->get_defaults() as $key => $item) {
 				$help = $this->_to_help_string($key, $item);
 				if (!empty($help)) $ret[$key] = $help;
 			}

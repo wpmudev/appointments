@@ -5,6 +5,10 @@
 class App_Shortcode_WorkerMonthlyCalendar extends App_Shortcode {
 
 	public function __construct () {
+		$this->name = __( 'Worker Monthly Calendar', 'appointments' );
+	}
+
+	public function get_defaults() {
 		$_workers = appointments_get_workers();
 		$workers = array(
 			array( 'text' => __( 'Any provider', 'appointments' ), 'value' => '' )
@@ -14,8 +18,7 @@ class App_Shortcode_WorkerMonthlyCalendar extends App_Shortcode {
 			$workers[] = array( 'text' => $worker->get_name(), 'value' => $worker->ID );
 		}
 
-		$this->name = __( 'Worker Monthly Calendar', 'appointments' );
-		$this->_defaults = array(
+		return array(
 			'status' => array(
 				'name' => _x( 'Status', 'Worker Monthly Calendar Shortcode status field', 'appointments' ),
 				'value' => 'paid,confirmed',

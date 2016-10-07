@@ -16,7 +16,10 @@ if ( ! class_exists( 'App_Shortcode_Pagination' ) ) {
 
 		public function __construct() {
 			$this->name = __( 'Appointments Pagination', 'appointments' );
-			$this->_defaults = array(
+		}
+
+		public function get_defaults() {
+			return array(
 				'step'    => array(
 					'type' => 'text',
 					'name' => __( 'Weeks/Months No.', 'appointments' ),

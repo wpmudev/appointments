@@ -7,6 +7,9 @@
 class App_Shortcode_Services extends App_Shortcode {
 	public function __construct () {
 		$this->name = __( 'Services', 'appointments' );
+	}
+
+	public function get_defaults() {
 		$_workers = appointments_get_workers();
 		$workers = array(
 			array( 'text' => __( 'Any provider', 'appointments' ), 'value' => 0 )
@@ -16,7 +19,7 @@ class App_Shortcode_Services extends App_Shortcode {
 			$workers[] = array( 'text' => $worker->get_name(), 'value' => $worker->ID );
 		}
 
-		$this->_defaults = array(
+		return array(
 			'select' => array(
 				'type' => 'text',
 				'name' => __( 'Title', 'appointments' ),

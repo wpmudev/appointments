@@ -15,7 +15,10 @@ if ( ! class_exists( 'App_Shortcode_All_Appointments' ) ) {
 	class App_Shortcode_All_Appointments extends App_Shortcode {
 		public function __construct() {
 			$this->name      = __( 'All Appointments', 'appointments' );
-			$this->_defaults = array(
+		}
+
+		public function get_defaults() {
+			return array(
 				'title'        => array(
 					'type'  => 'text',
 					'name'  => __( 'Title', 'appointments' ),
