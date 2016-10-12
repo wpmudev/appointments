@@ -279,8 +279,8 @@ if ( isset( $_GET["type"] ) && 'removed' == $_GET["type"] ) {
 			$me.attr("data-timestamp", '');
 			if( $me.data('focused')!='yes' ) {
 				var php_date_format = "<?php echo $appointments->safe_date_format() ?>";
-				var js_date_format = php_date_format.replace("F","MM").replace("j","dd").replace("Y","yyyy").replace("y","yy");
-				$(".datepicker").datepick({
+				var js_date_format = php_date_format.replace("F","MM").replace("j","dd").replace("Y","yy");
+				$(".datepicker").datepicker({
 					dateFormat: js_date_format,
 					onClose: function (dates) {
 						if (!dates.length || !dates[0] || !dates[0].getFullYear) return;

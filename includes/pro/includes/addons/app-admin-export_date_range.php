@@ -76,8 +76,8 @@ class App_Export_DateRange {
 
 	function show () {
 		$root
-			.find(":text").datepick({
-				dateFormat: "yyyy-mm-dd"
+			.find(":text").datepicker({
+				dateFormat: "yy-mm-dd"
 			})
 			.end()
 		.show();

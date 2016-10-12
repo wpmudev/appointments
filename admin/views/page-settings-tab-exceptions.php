@@ -46,9 +46,8 @@ $workers = appointments_get_workers();
 		</tr>
 		<tr>
 			<td>
-				<input class="datepick" id="open_datepick" type="text" style="width:100%" name="open[exceptional_days]"
-				       value="<?php if ( isset( $result["open"] ) )
-					       echo $result["open"] ?>"/>
+				<div class="app-datepick" data-rel="#open_datepick"></div>
+				<input class="datepick" id="open_datepick" type="hidden" name="open[exceptional_days]" value="<?php if ( isset( $result["open"] ) ) echo $result["open"] ?>"/>
 			</td>
 		</tr>
 
@@ -59,17 +58,11 @@ $workers = appointments_get_workers();
 		</tr>
 		<tr>
 			<td>
-				<input class="datepick" id="closed_datepick" type="text" style="width:100%"
-				       name="closed[exceptional_days]" value="<?php if ( isset( $result["closed"] ) )
-					echo $result["closed"] ?>"/>
+				<div class="app-datepick" data-rel="#closed_datepick"></div>
+				<input class="text" id="closed_datepick" type="hidden" name="closed[exceptional_days]" value="<?php if ( isset( $result["closed"] ) ) echo $result["closed"] ?>"/>
 			</td>
 		</tr>
 
-		<tr>
-			<td>
-				<span class="description"><?php _e( 'Please enter each date using YYYY-MM-DD format (e.g. 2012-08-13) and separate each day with a comma. Datepick will allow entering multiple dates. ', 'appointments' ) ?></span>
-			</td>
-		</tr>
 	</table>
 
 	<input type="hidden" name="location" value="0" />
@@ -80,11 +73,12 @@ $workers = appointments_get_workers();
 </form>
 <script type="text/javascript">
 jQuery(document).ready(function($){
+	$('.app-datepick').each( function() {
+		new AppDatepicker( $(this) );
+	});
 	$('#app_provider_id').change(function(){
 		var app_provider_id = $('#app_provider_id option:selected').val();
 		window.location.href = "<?php echo admin_url('admin.php?page=app_settings&tab=exceptions')?>" + "&app_provider_id=" + app_provider_id;
 	});
-	$("#open_datepick").datepick({dateFormat: 'yyyy-mm-dd',multiSelect: 999, monthsToShow: 2});
-	$("#closed_datepick").datepick({dateFormat: 'yyyy-mm-dd',multiSelect: 999, monthsToShow: 2});
 });
 </script>

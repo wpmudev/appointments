@@ -89,7 +89,7 @@ class Appointments_Integration_BuddyPress {
 			$this->_bp_script ='$("#open_datepick").datepick({dateFormat: "yyyy-mm-dd",multiSelect: 999, monthsToShow: 2});
 				$("#closed_datepick").datepick({dateFormat: "yyyy-mm-dd",multiSelect: 999, monthsToShow: 2});';
 
-			wp_enqueue_script('jquery-datepick', $this->_core->plugin_url . '/js/jquery.datepick.min.js', array('jquery'), $this->_core->version);
+			wp_enqueue_script( 'jquery-ui-datepicker' );
 			wp_enqueue_style("jquery-datepick", $this->_core->plugin_url . "/css/jquery.datepick.css", false, $this->_core->version);
 			wp_enqueue_script("appointments-admin", $this->_core->plugin_url . "/js/admin.js", array('jquery'), $this->_core->version);
 		}
