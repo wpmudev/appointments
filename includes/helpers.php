@@ -54,3 +54,24 @@ function appointments_clear_cache() {
 	appointments_delete_timetables_cache();
 }
 
+/**
+ * Return Filename
+ *
+ * @param string $name Filename
+ *
+ * @param boolean $from_front If called from front end and want to use in hook
+ *
+ * @return mixed
+ */
+
+function appointments_get_view_path( $name, $from_front = false ){
+
+	$file = appointments_plugin_dir() . 'admin/views/' . $name . '.php';
+	$file = apply_filters( 'appointments_admin_view_path', $file, $from_front );
+	if ( is_file( $file ) ) {
+		return $file;
+	}
+
+	return false;
+
+}
