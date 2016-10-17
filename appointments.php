@@ -3747,7 +3747,8 @@ class Appointments {
 
 
 	function mytransactions ($type = 'past') {
-		App_Template::admin_my_transactions_list($type);
+		_deprecated_function( __FUNCTION__, '2.0' );
+		//App_Template::admin_my_transactions_list($type);
 	}
 
 	function reached_ceiling () {

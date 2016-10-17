@@ -494,6 +494,25 @@ function appointments_get_service_capacity( $service_id ) {
 	return apply_filters( 'app_get_capacity', $capacity, $service_id, null );
 }
 
+/**
+ * Return the Service name for a given Service ID
+ *
+ * @param int|Appointments_Service $service_id
+ *
+ * @return string
+ */
+function appointments_get_service_name( $service_id ) {
+	// Safe text if we delete a service
+	$name = __('Not defined', 'appointments');
+	$result = appointments_get_service( $service_id );
+	if ( $result ) {
+		$name = $result->name;
+	}
+
+	$name = apply_filters( 'app_get_service_name', $name, $service_id );
+
+	return stripslashes( $name );
+}
 
 function appointments_delete_service_cache( $service_id ) {
 	wp_cache_delete( $service_id, 'app_services' );

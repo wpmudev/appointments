@@ -50,6 +50,34 @@ if ( ! class_exists( 'Appointments_Transaction' ) ) {
 		public function get_appointment() {
 			return appointments_get_appointment( $this->transaction_app_ID );
 		}
+
+		/**
+		 * Return the user name for this transaction
+		 *
+		 * @return string
+		 */
+		public function get_client_name() {
+			$appointments = appointments();
+			return $appointments->get_client_name( $this->transaction_app_ID );
+		}
+
+		public function get_service() {
+			$app = appointments_get_appointment( $this->transaction_app_ID );
+			if ( $app ) {
+				return $app->get_service();
+			}
+			return false;
+		}
+
+		/**
+		 * Return the formatted total amount for this transaction
+		 *
+		 * @return float
+		 */
+		public function get_total_amount() {
+			$amount = $this->transaction_total_amount / 100;
+			return number_format($amount, 2, '.', ',');
+		}
 	}
 }
 
@@ -176,6 +204,7 @@ function appointments_get_transaction( $id ) {
 
 	return new Appointments_Transaction( $result );
 }
+
 
 /**
  * Insert a new Transaction

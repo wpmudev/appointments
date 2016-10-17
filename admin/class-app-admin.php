@@ -312,11 +312,6 @@ class Appointments_Admin {
 	}
 
 
-
-	function transactions () {
-		App_Template::admin_transactions_list();
-	}
-
 	function faq_page () {
 		global $appointments;
 		?>
@@ -340,13 +335,12 @@ class Appointments_Admin {
 
 		include_once( APP_PLUGIN_DIR . '/admin/pages/class-admin-appointments-page.php' );
 		include_once( APP_PLUGIN_DIR . '/admin/pages/class-admin-settings-page.php' );
+		include_once( APP_PLUGIN_DIR . '/admin/pages/class-admin-transactions-page.php' );
 		include_once( APP_PLUGIN_DIR . '/admin/pages/class-admin-export-import-settings.php' );
-		$appointments_page = new Appointments_Admin_Appointments_Page();
-		$appointments_pages['appointments'] = $appointments_page;
-		$appointments_page = new Appointments_Admin_Settings_Page();
-		$appointments_pages['settings'] = $appointments_page;
-		
-		add_submenu_page('appointments', __('Transactions','appointments'), __('Transactions','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_TRANSACTIONS), "app_transactions", array(&$this,'transactions'));
+		$appointments_pages['appointments'] = new Appointments_Admin_Appointments_Page();
+		$appointments_pages['settings'] = new Appointments_Admin_Settings_Page();
+		$appointments_pages['transactions'] = new Appointments_Admin_Transactions_Page();
+
 		add_submenu_page('appointments', __('FAQ','appointments'), __('FAQ','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_FAQ), "app_faq", array(&$this,'faq_page'));
 		// Add datepicker to appointments page
 

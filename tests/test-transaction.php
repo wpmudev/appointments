@@ -158,5 +158,45 @@ class App_Transactions_Test extends App_UnitTestCase {
 		$this->assertEquals( array( $id_1, $id_2 ), wp_list_pluck($transactions, 'transaction_ID' ) );
 	}
 
+	function test_get_client_name() {
+		$user_id = $user = $this->factory()->user->create();
+		$args = $this->factory->appointment->generate_args();
+		$args['user'] = $user_id;
+		$app_id = $this->factory->appointment->create_object( $args );
+		$args = array(
+			'app_ID' => $app_id,
+			'paypal_ID' => 'ABC',
+			'stamp' => 123,
+			'total_amount' => 1233,
+			'currency' => 'EUR',
+			'status' => 'pending',
+			'note' => 'A Note',
+		);
+		$id_1 = appointments_insert_transaction( $args );
+		$transaction = appointments_get_transaction($id_1);
+		$this->assertContains( appointments_get_appointment( $app_id )->name, $transaction->get_client_name() );
+	}
+
+	function test_get_service() {
+		$service_id = $this->factory->service->create_object( $this->factory->service->generate_args() );
+		$args = $this->factory->appointment->generate_args();
+		$args['service'] = $service_id;
+		$app_id = $this->factory->appointment->create_object( $args );
+
+		$args = array(
+			'app_ID' => $app_id,
+			'paypal_ID' => 'ABC',
+			'stamp' => 123,
+			'total_amount' => 1233,
+			'currency' => 'EUR',
+			'status' => 'pending',
+			'note' => 'A Note',
+		);
+		$id_1 = appointments_insert_transaction( $args );
+
+		$transaction = appointments_get_transaction($id_1);
+		$this->assertEquals( appointments_get_service( $service_id ), $transaction->get_service() );
+	}
+
 
 }

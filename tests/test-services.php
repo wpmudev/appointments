@@ -335,6 +335,13 @@ class App_Services_Test extends App_UnitTestCase {
 		$this->assertEquals( $service_id, $service->ID );
 	}
 
+	function test_get_service_name() {
+		$args = $this->factory->service->generate_args();
+		$service_id = $this->factory->service->create_object( $args );
+		$name = appointments_get_service_name( $service_id );
+		$this->assertEquals( $args['name'], $name );
+	}
+
 
 }
 
