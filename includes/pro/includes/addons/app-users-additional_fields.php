@@ -120,6 +120,7 @@ class App_Users_AdditionalFields {
 	 */
 	private function _are_editable() {
 		$options = appointments_get_options();
+                if( is_super_admin() ) return true;
 		return ! empty( $options['additional_fields-admin_edit'] );
 	}
 
