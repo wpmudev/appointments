@@ -147,7 +147,7 @@ class Appointments_Integrations_MarketPress {
 				add_post_meta( $post_id, 'mp_price', array( 0 ) );
 
                                 // Set a meta to define this is an app mp product
-                                add_post_meta( $post_id, 'mp_app_product', 1 );
+                                update_post_meta( $post_id, 'mp_app_product', 1 );
 			}
 		}
 
