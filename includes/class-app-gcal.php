@@ -145,7 +145,7 @@ class Appointments_Google_Calendar {
 	}
 
 	public function edit_inline_gcal_fields( $html, $app ) {
-		if ( ! $app->gcal_ID ) {
+		if ( ! isset( $app->gcal_ID ) || ! $app->gcal_ID ) {
 			return $html;
 		}
 
