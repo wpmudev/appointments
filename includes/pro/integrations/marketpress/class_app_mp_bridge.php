@@ -102,6 +102,12 @@ class App_MP_Bridge {
 			? $order->get_cart()->get_items()
 			: (isset($order->mp_cart_info) ? $order->mp_cart_info : array())
 		;
+
+		if( !is_object( $cart_info ) || epmty( $cart_info ) ){
+			global $mp_cart;
+			$cart_info = $mp_cart->get_items();
+		}
+
 		$variation_type = MP_Product::get_variations_post_type();
 		$appointment_ids = array();
 
