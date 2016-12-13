@@ -40,6 +40,11 @@ if ( ! class_exists( 'App_Shortcode_All_Appointments' ) ) {
 				'_tablesorter' => array(
 					'value' => 1,
 				),
+				'public' => array(
+					'value' => 0,
+					'help' => __('Allow visitors to view list, default is 0, only logged in users can view list.', 'appointments'),
+					'example' => '1',
+				)
 			);
 		}
 
@@ -50,6 +55,10 @@ if ( ! class_exists( 'App_Shortcode_All_Appointments' ) ) {
 		public function process_shortcode( $args = array(), $content = '' ) {
 			global $appointments;
 			extract( wp_parse_args( $args, $this->_defaults_to_args() ) );
+
+			if ( ! $public && ! apply_filters( 'app_all_appointments_shortcode_public', is_user_logged_in() ) ) {
+				return '';
+			}
 
 			$statuses = explode( ',', $status );
 
@@ -80,7 +89,7 @@ if ( ! class_exists( 'App_Shortcode_All_Appointments' ) ) {
 				. '</th><th class="all-appointments-date">' . __( 'Date/time', 'appointments' )
 				. '</th><th class="all-appointments-status">' . __( 'Status', 'appointments' ) . '</th>'
 			);
-			$colspan = 5;
+			$colspan = substr_count($ret, '<th');
 
 			$ret .= '</thead><tbody>';
 

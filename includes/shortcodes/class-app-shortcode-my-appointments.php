@@ -86,7 +86,11 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 
 			'_allow_confirm' => array('value' => 0),
 			'_tablesorter' => array('value' => 1),
-
+			'public' => array(
+				'value' => 0,
+				'help' => __('Allow visitors to view list, default is 0, only logged in users can view list.', 'appointments'),
+				'example' => '1',
+			),
 		);
 	}
 
@@ -98,6 +102,10 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		$args = wp_parse_args($args, $this->_defaults_to_args());
 
 		global $bp, $appointments;
+
+		if ( ! $args['public'] && ! apply_filters( 'app_my_appointments_shortcode_public', is_user_logged_in() ) ) {
+			return '';
+		}
 
 		if ( isset( $args['client_id'] ) && get_userdata( $args['client_id'] ) ) {
 			$user_id = absint( $args['client_id'] );

@@ -141,7 +141,7 @@ function appointments_get_worker_name( $worker_id, $field = 'display_name' ) {
 		}
 	}
 
-	return apply_filters( 'app_get_worker_name', $name, $worker_id );;
+	return apply_filters( 'app_get_worker_name', $name, $worker_id );
 }
 
 function appointments_is_worker( $id ) {
