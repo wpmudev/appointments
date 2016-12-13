@@ -156,6 +156,8 @@ class Appointments_Notifications_Reminder extends Appointments_Notification {
 			return false;
 		}
 
+		do_action( 'app_reminder_sent', $email, $app_id, $template['body'], $template['subject'] );
+
 		return true;
 
 	}
@@ -187,6 +189,8 @@ class Appointments_Notifications_Reminder extends Appointments_Notification {
 		if ( ! $mail_result ) {
 			return false;
 		}
+
+		do_action( 'app_reminder_admin_sent', $email, $app_id, $template['body'], $template['subject'] );
 
 		return true;
 
