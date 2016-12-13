@@ -43,6 +43,7 @@ class Appointments_Google_Calendar {
 		add_action( 'wp_ajax_app_gcal_import', array( $this, 'import' ) );
 
 		add_action( 'appointments_gcal_sync', array( $this, 'maybe_sync' ) );
+		add_action( 'wp_ajax_appointments_gcal_sync', array( $this, 'maybe_sync' ) );
 
 		add_filter( 'app-appointments_list-edit-client', array( $this, 'edit_inline_gcal_fields' ), 10, 2 );
 		$options = appointments_get_options();
@@ -240,13 +241,17 @@ class Appointments_Google_Calendar {
 
 		$api_mode = $this->get_api_mode();
 		if ( 'sync' != $api_mode || ! $this->is_connected() || ! $this->api_manager->get_calendar() ) {
-			return;
+			wp_send_json_error();
+			exit;
+			//return;
 		}
 
 		$current_gcal_ids = appointments_get_gcal_ids();
 		$events = $this->get_events_list();
 		if ( is_wp_error( $events ) ) {
-			return;
+			wp_send_json_error();
+			exit;
+			//return;
 		}
 
 		$events_ids = array_map( array( $this, '_get_event_id' ), $events );
@@ -274,9 +279,14 @@ class Appointments_Google_Calendar {
 						// Maybe the time has passed
 						$event = $this->get_event( $app->ID );
 						if ( $event ) {
-							// The event is in GCal but the time has passed
-							// Let's move it to completed
-							appointments_update_appointment_status( $app->ID, apply_filters( 'appointments_gcal_change_status_on_completed_event', 'completed' ) );
+							if( $event->status == 'cancelled' ) {
+								appointments_update_appointment_status( $app->ID, 'removed' );
+							}
+							else{
+								// The event is in GCal but the time has passed
+								// Let's move it to completed
+								appointments_update_appointment_status( $app->ID, apply_filters( 'appointments_gcal_change_status_on_completed_event', 'completed' ) );
+							}
 						}
 						else {
 							appointments_update_appointment_status( $app->ID, 'removed' );
@@ -286,6 +296,11 @@ class Appointments_Google_Calendar {
 				$this->add_appointments_hooks();
 			}
 		}
+		if( isset( $_POST['return_result'] ) && $_POST['return_result'] == 'yes' ){
+			wp_send_json_success();
+			exit;
+		}
+		return;
 	}
 
 	/**

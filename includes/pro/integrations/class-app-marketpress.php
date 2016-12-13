@@ -145,6 +145,9 @@ class Appointments_Integrations_MarketPress {
 				add_post_meta( $post_id, 'mp_var_name', array( 0 ) );
 				add_post_meta( $post_id, 'mp_sku', array( 0 ) );
 				add_post_meta( $post_id, 'mp_price', array( 0 ) );
+
+                                // Set a meta to define this is an app mp product
+                                update_post_meta( $post_id, 'mp_app_product', 1 );
 			}
 		}
 
