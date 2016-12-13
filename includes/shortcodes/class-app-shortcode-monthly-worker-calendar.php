@@ -5,22 +5,38 @@
 class App_Shortcode_WorkerMonthlyCalendar extends App_Shortcode {
 
 	public function __construct () {
-		$this->_defaults = array(
+		$this->name = __( 'Worker Monthly Calendar', 'appointments' );
+	}
+
+	public function get_defaults() {
+		$_workers = appointments_get_workers();
+		$workers = array(
+			array( 'text' => __( 'Any provider', 'appointments' ), 'value' => '' )
+		);
+		foreach ( $_workers as $worker ) {
+			/** @var Appointments_Worker $worker */
+			$workers[] = array( 'text' => $worker->get_name(), 'value' => $worker->ID );
+		}
+
+		return array(
 			'status' => array(
+				'name' => _x( 'Status', 'Worker Monthly Calendar Shortcode status field', 'appointments' ),
 				'value' => 'paid,confirmed',
-				'help' => __('Show Appointments with this status (comma-separated list)', 'appointments'),
-				'allowed_values' => array('paid', 'confirmed', 'pending', 'completed'),
-				'example' => 'paid,confirmed',
+				'help' => __( 'Which status(es) will be included. Possible values: paid, confirmed, completed, pending, removed, reserved or combinations of them separated with comma.', 'appointments' ),
+				'type' => 'text'
 			),
 			'worker_id' => array(
-				'value' => false,
+				'name' => __( 'Provider', 'appointments' ),
+				'value' => '',
 				'help' => __('Show Appointments calendar for service provider with this user ID', 'appointments'),
-				'example' => '32',
+				'type' => 'select',
+				'options' => $workers,
 			),
 			'start_at' => array(
-				'value' => false,
-				'help' => __('Show Appointments calendar for this month. Defaults to current month.', 'appointments'),
-				'example' => '2013-07-01',
+				'name' => __( 'Start At', 'appointments' ),
+				'value' => '',
+				'help' => sprintf( __('Show Appointments calendar for this month. Defaults to current month. Example: %s', 'appointments'), date( 'Y-m-01', current_time( 'timestamp' ) ) ),
+				'type' => 'text',
 			)
 		);
 	}
@@ -189,6 +205,7 @@ $(".app-scheduled_appointment")
 // Special-case shortcode for typo handling
 class App_Shortcode_WorkerMontlyCalendar extends App_Shortcode_WorkerMonthlyCalendar {
 	public function register ($key) {
+		$this->name = '';
 		$this->_key = $key;
 		add_shortcode($key, array($this, "process_shortcode"));
 	}

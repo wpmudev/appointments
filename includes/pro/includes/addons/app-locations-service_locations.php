@@ -52,6 +52,8 @@ class App_Locations_ServiceLocations {
 		add_action('wpmudev_appointments_update_service', array($this, 'save_service_location'));
 
 		add_filter( 'appointments_default_options', array( $this, 'default_options' ) );
+
+		add_filter( 'app-shortcodes-register', array( $this, 'register_shortcodes' ) );
 	}
 
 	public function default_options( $options ) {
@@ -180,12 +182,13 @@ class App_Locations_ServiceLocations {
 			add_shortcode('app_service_location', '__return_false');
 			add_filter('app-services-service_description', array($this, 'inject_location_markup'), 10, 3);
 		}
+	}
 
-		if (!class_exists('App_Shortcode_ServiceLocationsShortcode')) {
-			require_once(dirname(__FILE__) . '/lib/app_service_locations_shortcode.php');
-			App_Shortcode_ServiceLocationsShortcode::serve();
-			App_Shortcode_RequiredServiceLocationsShortcode::serve();
-		}
+	public function register_shortcodes( $shortcodes ) {
+		include_once( 'lib/app_service_locations_shortcode.php' );
+		$shortcodes['app_service_locations'] = 'App_Shortcode_ServiceLocationsShortcode';
+		$shortcodes['app_required_service_locations'] = 'App_Shortcode_RequiredServiceLocationsShortcode';
+		return $shortcodes;
 	}
 
 	public function record_appointment_location ($appointment_id) {

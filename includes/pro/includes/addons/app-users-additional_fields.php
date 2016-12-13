@@ -119,9 +119,7 @@ class App_Users_AdditionalFields {
 	 * @return bool
 	 */
 	private function _are_editable() {
-		$options = appointments_get_options();
-                if( is_super_admin() ) return true;
-		return ! empty( $options['additional_fields-admin_edit'] );
+		return true;
 	}
 
 
@@ -629,4 +627,20 @@ if (!function_exists('app_additional_fields_expand')) {
 			: $text
 		;
 	}
+}
+
+/**
+ * Get an appointment additional fields values
+ *
+ * @param int $app_id
+ *
+ * @return array|mixed
+ */
+function appointments_get_app_additional_fields( $app_id ) {
+	$fields = appointments_get_appointment_meta( $app_id, 'additional_fields' );
+	if ( empty( $fields ) || ! is_array( $fields ) ) {
+		return array();
+	}
+
+	return $fields;
 }

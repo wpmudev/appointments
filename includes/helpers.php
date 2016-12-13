@@ -26,6 +26,7 @@ function appointments_get_table( $table ) {
 		'exceptions' => $wpdb->prefix . 'app_exceptions',
 		'appointments' => $wpdb->prefix . 'app_appointments',
 		'appmeta' => $wpdb->prefix . 'app_appointmentmeta',
+		'transactions' => $wpdb->prefix . 'app_transactions',
 	);
 
 	return isset ( $tables[ $table ] ) ? $tables[ $table ] : false;

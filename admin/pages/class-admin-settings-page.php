@@ -42,7 +42,7 @@ class Appointments_Admin_Settings_Page {
 		$sections = array(
 			'main' => array(
 				'time' => __( 'Time', 'appointments' ),
-				'accesibility' => __( 'Accesibility', 'appointments' ),
+				'accesibility' => __( 'Accessibility', 'appointments' ),
 				'display' => __( 'Display', 'appointments' ),
 				'payments' => __( 'Payments', 'appointments' ),
 				'notifications' => __( 'Notifications', 'appointments' ),

@@ -777,7 +777,24 @@ class Appointments_AJAX {
 					$amount = $_POST['mc_gross'];
 					$currency = $_POST['mc_currency'];
 
-					$appointments->record_transaction($_POST['custom'], $amount, $currency, $timestamp, $_POST['txn_id'], $_POST['payment_status'], '');
+
+					$args = array(
+						'paypal_ID' => $_POST['txn_id'],
+						'stamp' => $timestamp,
+						'total_amount' => $amount,
+						'currency' => $currency,
+						'status' => $_POST['payment_status'],
+						'note' => '',
+					);
+
+					$transaction = appointments_get_transaction( $_POST['custom'] );
+					if ( ! $transaction ) {
+						appointments_update_transaction( $_POST['custom'], $args );
+					}
+					else {
+						appointments_insert_transaction( $args );
+					}
+
 					if ( ! appointments_update_appointment_status( $_POST['custom'], 'paid' ) ) {
 						// Something wrong. Warn admin
 						$message = sprintf( __('Paypal confirmation arrived, but status could not be changed for some reason. Please check appointment with ID %s', 'appointments'), $_POST['custom'] );
@@ -792,7 +809,22 @@ class Appointments_AJAX {
 					$amount = $_POST['mc_gross'];
 					$currency = $_POST['mc_currency'];
 
-					$appointments->record_transaction($_POST['custom'], $amount, $currency, $timestamp, $_POST['txn_id'], $_POST['payment_status'], $note);
+					$args = array(
+						'paypal_ID' => $_POST['txn_id'],
+						'stamp' => $timestamp,
+						'total_amount' => $amount,
+						'currency' => $currency,
+						'status' => $_POST['payment_status'],
+						'note' => $note,
+					);
+
+					$transaction = appointments_get_transaction( $_POST['custom'] );
+					if ( ! $transaction ) {
+						appointments_update_transaction( $_POST['custom'], $args );
+					}
+					else {
+						appointments_insert_transaction( $args );
+					}
 					break;
 
 				case 'Refunded':
@@ -801,7 +833,22 @@ class Appointments_AJAX {
 					$amount = $_POST['mc_gross'];
 					$currency = $_POST['mc_currency'];
 
-					$appointments->record_transaction($_POST['custom'], $amount, $currency, $timestamp, $_POST['txn_id'], $_POST['payment_status'], $note);
+					$args = array(
+						'paypal_ID' => $_POST['txn_id'],
+						'stamp' => $timestamp,
+						'total_amount' => $amount,
+						'currency' => $currency,
+						'status' => $_POST['payment_status'],
+						'note' => $note,
+					);
+
+					$transaction = appointments_get_transaction( $_POST['custom'] );
+					if ( ! $transaction ) {
+						appointments_update_transaction( $_POST['custom'], $args );
+					}
+					else {
+						appointments_insert_transaction( $args );
+					}
 					break;
 
 				case 'Denied':
@@ -810,7 +857,22 @@ class Appointments_AJAX {
 					$amount = $_POST['mc_gross'];
 					$currency = $_POST['mc_currency'];
 
-					$appointments->record_transaction($_POST['custom'], $amount, $currency, $timestamp, $_POST['txn_id'], $_POST['payment_status'], $note);
+					$args = array(
+						'paypal_ID' => $_POST['txn_id'],
+						'stamp' => $timestamp,
+						'total_amount' => $amount,
+						'currency' => $currency,
+						'status' => $_POST['payment_status'],
+						'note' => $note,
+					);
+
+					$transaction = appointments_get_transaction( $_POST['custom'] );
+					if ( ! $transaction ) {
+						appointments_update_transaction( $_POST['custom'], $args );
+					}
+					else {
+						appointments_insert_transaction( $args );
+					}
 
 					break;
 
@@ -832,8 +894,22 @@ class Appointments_AJAX {
 					$amount = $_POST['mc_gross'];
 					$currency = $_POST['mc_currency'];
 
-					// Save transaction.
-					$appointments->record_transaction($_POST['custom'], $amount, $currency, $timestamp, $_POST['txn_id'], $_POST['payment_status'], $note);
+					$args = array(
+						'paypal_ID' => $_POST['txn_id'],
+						'stamp' => $timestamp,
+						'total_amount' => $amount,
+						'currency' => $currency,
+						'status' => $_POST['payment_status'],
+						'note' => $note,
+					);
+
+					$transaction = appointments_get_transaction( $_POST['custom'] );
+					if ( ! $transaction ) {
+						appointments_update_transaction( $_POST['custom'], $args );
+					}
+					else {
+						appointments_insert_transaction( $args );
+					}
 
 					break;
 

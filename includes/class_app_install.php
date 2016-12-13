@@ -14,7 +14,6 @@ class App_Installer {
 
 	private function _add_hooks () {
 		register_activation_hook(APP_PLUGIN_FILE, array($this, 'install'));
-		register_uninstall_hook(APP_PLUGIN_FILE, array('App_Installer', 'uninstall'));
 
 		add_action('wpmu_new_blog', array($this, 'new_blog'), 10, 6); // Install database tables for a new blog
 		add_action('delete_blog', array($this, 'delete_blog'), 10, 2); // Uninstall tables for a deleted blog
@@ -345,34 +344,7 @@ class App_Installer {
 	}
 
 	public static function uninstall () {
-		global $wpdb;
 
-		wp_unschedule_event( current_time( 'timestamp' ), 'appointments_gcal_sync' );
-
-		delete_option( 'appointments_options' );
-		delete_option( 'app_last_update' );
-		delete_option( 'app_db_version' );
-
-		$wpdb->query( "DROP TABLE " . $wpdb->prefix . "app_working_hours" );
-		$wpdb->query( "DROP TABLE " . $wpdb->prefix . "app_exceptions" );
-		$wpdb->query( "DROP TABLE " . $wpdb->prefix . "app_services" );
-		$wpdb->query( "DROP TABLE " . $wpdb->prefix . "app_workers" );
-		$wpdb->query( "DROP TABLE " . $wpdb->prefix . "app_appointments" );
-		$wpdb->query( "DROP TABLE " . $wpdb->prefix . "app_appointmentmeta" );
-		$wpdb->query( "DROP TABLE " . $wpdb->prefix . "app_transactions" );
-		$wpdb->query( "DROP TABLE " . $wpdb->prefix . "app_cache" );
-
-		// Delete user metas
-		$wpdb->query( "DELETE FROM " . $wpdb->usermeta . " WHERE meta_key='app_api_mode' OR meta_key='app_service_account'
-			OR meta_key='app_key_file' OR meta_key='app_selected_calendar' OR meta_key='app_gcal_summary' OR meta_key='app_gcal_description' OR meta_key LIKE 'app_dismiss%' " );
-
-		// Remove all possible folders with their contents
-		$uploads = wp_upload_dir();
-		if (isset($uploads["basedir"])) $uploads_dir = $uploads["basedir"] . "/";
-		else $uploads_dir = WP_CONTENT_DIR . "/uploads/";
-
-		self::_rmdir_p( $uploads_dir . '__app/' );
-		if (defined('AUTH_KEY')) self::_rmdir_p( $uploads_dir . md5( 'AUTH_KEY' ) . '/' );
 	}
 
 	public function new_blog ($blog_id, $user_id, $domain, $path, $site_id, $meta) {

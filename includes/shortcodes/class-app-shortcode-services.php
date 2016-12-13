@@ -6,52 +6,88 @@
  */
 class App_Shortcode_Services extends App_Shortcode {
 	public function __construct () {
-		$this->_defaults = array(
+		$this->name = __( 'Services', 'appointments' );
+	}
+
+	public function get_defaults() {
+		$_workers = appointments_get_workers();
+		$workers = array(
+			array( 'text' => __( 'Any provider', 'appointments' ), 'value' => 0 )
+		);
+		foreach ( $_workers as $worker ) {
+			/** @var Appointments_Worker $worker */
+			$workers[] = array( 'text' => $worker->get_name(), 'value' => $worker->ID );
+		}
+
+		return array(
 			'select' => array(
+				'type' => 'text',
+				'name' => __( 'Title', 'appointments' ),
 				'value' => __('Please select a service:', 'appointments'),
 				'help' => __('Text above the select menu. Default: "Please select a service"', 'appointments'),
-				'example' => __('Please select a service:', 'appointments'),
 			),
 			'show' => array(
+				'type' => 'text',
+				'name' => __( 'Show Button Text', 'appointments' ),
 				'value' => __('Show available times', 'appointments'),
 				'help' => __('Button text to show the results for the selected. Default: "Show available times"', 'appointments'),
 				'example' => __('Show available times', 'appointments'),
 			),
 			'description' => array(
+				'type' => 'select',
+				'name' => __( 'Description', 'appointments' ),
 				'value' => 'excerpt',
-				'help' => __('WSelects which part of the description page will be displayed under the dropdown menu when a service is selected . Selectable values are "none", "excerpt", "content". Default: "excerpt"', 'appointments'),
-				'allowed_values' => array('none', 'excerpt', 'content',),
-				'example' => 'content',
+				'help' => __('Selects which part of the description page will be displayed under the dropdown menu when a service is selected . Selectable values are "none", "excerpt", "content". Default: "excerpt"', 'appointments'),
+				'options' => array(
+					array( 'text' => 'Excerpt', 'value' => 'excerpt' ),
+					array( 'text' => 'None', 'value' => ''),
+					array( 'text' => 'Content', 'value' => 'content' ),
+				)
 			),
 			'thumb_size' => array(
+				'type' => 'text',
+				'name' => __( 'Thumbnail Size', 'appointments' ),
 				'value' => '96,96',
 				'help' => __('Inserts the post thumbnail if page has a featured image. Selectable values are "none", "thumbnail", "medium", "full" or a 2 numbers separated by comma representing width and height in pixels, e.g. 32,32. Default: "96,96"', 'appointments'),
-				'example' => 'thumbnail',
 			),
 			'thumb_class' => array(
+				'type' => 'text',
+				'name' => __( 'Thumbnail Class', 'appointments' ),
 				'value' => 'alignleft',
-				'help' => __('css class that will be applied to the thumbnail. Default: "alignleft"', 'appointments'),
-				'example' => 'my-class',
+				'help' => __('CSS class that will be applied to the thumbnail. Default: "alignleft"', 'appointments'),
 			),
 			'autorefresh' => array(
+				'type' => 'checkbox',
+				'name' => __( 'Autorefresh', 'appointments' ),
 				'value' => 0,
-				'help' => __('If set as 1, Show button will not be displayed and page will be automatically refreshed as client changes selection. Note: Client cannot browse through the selections and thus check descriptions on the fly (without the page is refreshed). Default: "0" (disabled). Recommended for sites with a large number of services.', 'appointments'),
-				'example' => '1',
+				'help' => __('If checked, Show button will not be displayed and page will be automatically refreshed as client changes selection. Note: Client cannot browse through the selections and thus check descriptions on the fly (without the page is refreshed). Default: disabled', 'appointments'),
 			),
 			'order_by' => array(
+				'type' => 'select',
+				'name' => __( 'Order By', 'appointments' ),
 				'value' => 'ID',
+				'options' => array(
+					array( 'text' => 'ID', 'value' => 'ID' ),
+					array( 'text' => 'ID DESC', 'value' => 'ID ASC' ),
+					array( 'text' => 'name', 'value' => 'name'),
+					array( 'text' => 'name DESC', 'value' => 'name DESC'),
+					array( 'text' => 'duration', 'value' => 'duration'),
+					array( 'text' => 'duration DESC', 'value' => 'duration DESC'),
+				),
 				'help' => __('Sort order of the services. Possible values: ID, name, duration, price. Optionally DESC (descending) can be used, e.g. "name DESC" will reverse the order. Default: "ID"', 'appointments'),
-				'example' => 'ID',
 			),
 			'worker' => array(
+				'type' => 'select',
+				'name' => __( 'Provider', 'appointments' ),
 				'value' => 0,
+				'options' => $workers,
 				'help' => __('In some cases, you may want to display services which are given only by a certain provider. In that case enter provider ID here. Default: "0" (all defined services). Note: Multiple selections are not allowed.', 'appointments'),
-				'example' => '12',
 			),
 			'ajax' => array(
+				'type' => 'checkbox',
+				'name' => __( 'AJAX', 'appointments' ),
 				'value' => 0,
-				'help' => __( 'If set as 1, Services thumbnails and descriptions will be loaded by AJAX. Recommended for sites with many services', 'appointments' ),
-				'example' => '1'
+				'help' => __( 'If checked, Services thumbnails and descriptions will be loaded by AJAX. Recommended for sites with many services', 'appointments' )
 			),
 			'_noscript' => array('value' => 0),
 

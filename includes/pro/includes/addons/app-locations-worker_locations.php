@@ -39,6 +39,8 @@ class App_Locations_WorkerLocations {
 
 		// Record appointment location
 		add_action('wpmudev_appointments_insert_appointment', array($this, 'record_appointment_location'), 40);
+
+		add_filter( 'app-shortcodes-register', array( $this, 'register_shortcodes' ) );
 	}
 
 	function show_nags () {
@@ -63,15 +65,16 @@ class App_Locations_WorkerLocations {
 			add_filter('app-workers-worker_description', array($this, 'inject_location_markup'), 10, 3);
 		}
 
-		if (!class_exists('App_Shortcode_WorkerLocationsShortcode')) {
-			require_once(dirname(__FILE__) . '/lib/app_worker_locations_shortcode.php');
-			App_Shortcode_WorkerLocationsShortcode::serve();
-			App_Shortcode_RequiredWorkerLocationsShortcode::serve();
-		}
-
 		if ( empty( $this->_data['worker_locations']['insert'] ) ) {
 			$this->_data['worker_locations']['insert'] = '';
 		}
+	}
+
+	public function register_shortcodes( $shortcodes ) {
+		include_once( 'lib/app_worker_locations_shortcode.php' );
+		$shortcodes['app_provider_locations'] = 'App_Shortcode_WorkerLocationsShortcode';
+		$shortcodes['app_required_provider_locations'] = 'App_Shortcode_RequiredWorkerLocationsShortcode';
+		return $shortcodes;
 	}
 
 	public function record_appointment_location ($appointment_id) {

@@ -188,7 +188,7 @@ class App_Locations_LocationsWorker {
 	}
 
 	public function locations_settings_section() {
-		include_once( appointments_plugin_dir() . 'includes/addons/lib/class-app-locations-list-table.php' );
+		include_once( appointments_plugin_dir() . 'includes/pro/includes/addons/lib/class-app-locations-list-table.php' );
 		$table = new Appointments_Locations_List_Table();
 
 		$locations = $this->_locations->get_all();

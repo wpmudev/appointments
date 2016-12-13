@@ -61,6 +61,8 @@ class Appointments {
 
 	public $pro = false;
 
+	public $shortcodes = array();
+
 
 	function __construct() {
 
@@ -112,6 +114,7 @@ class Appointments {
 		include_once( 'includes/class-app-service.php' );
 		include_once( 'includes/class-app-worker.php' );
 		include_once( 'includes/class-app-appointment.php' );
+		include_once( 'includes/class-app-transaction.php' );
 
 		if ( is_admin() ) {
 			$this->load_admin();
@@ -134,17 +137,8 @@ class Appointments {
 		require_once( appointments_plugin_dir() . 'includes/widgets.php' );
 		add_action( 'widgets_init', array( &$this, 'widgets_init' ) );
 
-		// Buddypress
-		require_once( appointments_plugin_dir() . 'includes/class_app_buddypress.php');
-		if ( class_exists( 'App_BuddyPress' ) ) {
-			App_BuddyPress::serve();
-		}
-
-		// Membership2 Integration
-		$m2_integration = appointments_plugin_dir() . 'includes/class_app_membership2.php';
-		if ( file_exists( $m2_integration ) ) {
-			require_once $m2_integration;
-		}
+		// Integration with other plugins/Themes
+		include_once( appointments_plugin_dir() . 'includes/integration/integration.php' );
 
 		// Caching
 		if ( 'yes' == @$this->options['use_cache'] ) {
@@ -2766,29 +2760,6 @@ class Appointments {
 */
 
 	/**
-     * Find blogs and install tables for each of them
-	 * @since 1.0.2
-	 * @until 1.4.1 - omg no, please let's never do this again
-     */
-	function install() { do_action('app-core-doing_it_wrong', __METHOD__); }
-	/**
-     * Install database tables
-     */
-	function _install() { do_action('app-core-doing_it_wrong', __METHOD__); }
-	/**
-	 * Install tables for new blog
-	 * @since 1.0.2
-	 * @until 1.4.1
-	 */
-	function new_blog($blog_id, $user_id, $domain, $path, $site_id, $meta ) { do_action('app-core-doing_it_wrong', __METHOD__); }
-	/**
-	 * Remove tables for a deleted blog
-	 * @since 1.0.2
-	 * @until 1.4.1
-	 */
-	function delete_blog( $blog_id, $drop )  { do_action('app-core-doing_it_wrong', __METHOD__); }
-
-	/**
 	 * Initialize widgets
 	 */
 	function widgets_init() {
@@ -3145,22 +3116,6 @@ class Appointments {
 	}
 
 	/**
-	 * Determine if a page is A+ Product page from the shortcodes used
-	 * @param WP_Post $product custom post object
-	 * @return bool
-	 * @Since 1.0.1
-	 */
-	function is_app_mp_page( $product ) {
-		$result = false;
-		if ( is_object( $product ) && strpos( $product->post_content, '[app_' ) !== false )
-			$result = true;
-		// Maybe required for templates
-		return apply_filters( 'app_is_mp_page', $result, $product );
-	}
-
-
-
-	/**
 	 *	Replace placeholders with real values for email subject and content
 	 */
 	function _replace( $text, $user, $service, $worker, $datetime, $price, $deposit, $phone='', $note='', $address='', $email='', $city='' ) {
@@ -3407,62 +3362,12 @@ class Appointments {
 		return false;
 	}
 
-	
-
-	/**
-	 * Check if there are more than one shortcodes for certain shortcode types
-	 * @since 1.0.5
-	 * @return bool
-	 */
-	function has_duplicate_shortcode( $post_id ) {
-		$post = get_post( $post_id );
-		if ( is_object( $post) && $post && strpos( $post->post_content, '[app_' ) !== false ) {
-			if ( substr_count( $post->post_content, '[app_services' ) > 1 || substr_count( $post->post_content, '[app_service_providers' ) > 1
-				|| substr_count( $post->post_content, '[app_confirmation' ) > 1 || substr_count( $post->post_content, '[app_paypal' ) > 1
-				|| substr_count( $post->post_content, '[app_login' ) > 1 ) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	/**
-	 * Check if confirmation shortcode missing
-	 * @since 1.2.5
-	 * @return bool
-	 */
-	function confirmation_shortcode_missing( $post_id ) {
-		$post = get_post( $post_id );
-		if ( is_object( $post) && $post && strpos( $post->post_content, '[app_' ) !== false ) {
-			if ( !substr_count( $post->post_content, '[app_confirmation' )
-				&& ( substr_count( $post->post_content, '[app_monthly' ) || substr_count( $post->post_content, '[app_schedule' ) ) )
-				return true;
-		}
-		return false;
-	}
-	
-	/**
-	 *	Sorts a comma delimited string
-	 *	@since 1.2
-	 */
-	function _sort( $input ) {
-		if ( strpos( $input, ',') === false )
-			return $input;
-		$temp = explode( ',', $input );
-		sort( $temp );
-		return implode( ',', $temp );
-	}
-
 	/**
 	 * Deletes a worker's database records in case he is deleted
 	 * @since 1.0.4
 	 */
 	function delete_user( $ID ) {
-		if ( !$ID )
-			return;
-
-		global $wpdb;
-		$r1 = appointments_delete_worker( $ID );
+		appointments_delete_worker( $ID );
 	}
 
 	/**
@@ -3476,50 +3381,6 @@ class Appointments {
 		appointments_delete_worker( $ID );
 		restore_current_blog();
 	}
-
-	/**
-	 * Prints "Cache cleared" message on top of Admin page
-	 */
-	function cleared( ) {
-		echo '<div class="updated fade"><p><b>[Appointments+]</b> '. __('Cache cleared.','appointments').'</p></div>';
-	}
-
-	/**
-	 * Prints "settings saved and cache cleared" message on top of Admin page
-	 * @since 1.1.7
-	 */
-	function saved_cleared( ) {
-		echo '<div class="updated fade"><p><b>[Appointments+]</b> '. __('Settings saved and cache cleared.','appointments').'</p></div>';
-	}
-
-	/**
-	 * Prints "saved" message on top of Admin page
-	 */
-	function saved( ) {
-		echo '<div class="updated fade"><p><b>[Appointments+]</b> '. __('Settings saved.','appointments').'</p></div>';
-	}
-
-	/**
-	 * Prints "deleted" message on top of Admin page
-	 */
-	function deleted( ) {
-		echo '<div class="updated fade"><p><b>[Appointments+]</b> '. __('Selected record(s) deleted.','appointments').'</p></div>';
-	}
-
-	/**
-	 * Prints "updated" message on top of Admin page
-	 */
-	function updated( ) {
-		echo '<div class="updated fade"><p><b>[Appointments+]</b> '. __('Selected record(s) updated.','appointments').'</p></div>';
-	}
-
-	/**
-	 * Prints warning message on top of Admin page
-	 */
-	function warning( ) {
-		echo '<div class="updated fade"><p><b>[Appointments+] '. __('You are not authorised to do this.','appointments').'</b></p></div>';
-	}
-
 
 
 	
@@ -3826,69 +3687,62 @@ class Appointments {
 	/**
 	 *	Get transaction records
 	 *  Modified from Membership plugin by Barry
+	 *
+	 * @deprecated since 2.0
 	 */
 	function get_transactions($type, $startat, $num) {
-
-		switch($type) {
-
-			case 'past':
-						$sql = $this->db->prepare( "SELECT SQL_CALC_FOUND_ROWS * FROM {$this->transaction_table} WHERE transaction_status NOT IN ('Pending', 'Future') ORDER BY transaction_ID DESC  LIMIT %d, %d", $startat, $num );
-						break;
-			case 'pending':
-						$sql = $this->db->prepare( "SELECT SQL_CALC_FOUND_ROWS * FROM {$this->transaction_table} WHERE transaction_status IN ('Pending') ORDER BY transaction_ID DESC LIMIT %d, %d", $startat, $num );
-						break;
-			case 'future':
-						$sql = $this->db->prepare( "SELECT SQL_CALC_FOUND_ROWS * FROM {$this->transaction_table} WHERE transaction_status IN ('Future') ORDER BY transaction_ID DESC LIMIT %d, %d", $startat, $num );
-						break;
-
-		}
-
-		return $this->db->get_results( $sql );
-
+		_deprecated_function( __FUNCTION__, '2.0', 'appointments_get_transactions()' );
+		$args = array(
+			'type' => $type,
+			'offset' => $startat,
+			'per_page' => $num
+		);
+		return appointments_get_transactions( $args );
 	}
 
 	/**
-	 *	Find if a Paypal transaction is duplicate or not
+	 * Find if a Paypal transaction is duplicate or not
+	 *
+	 * @deprecated since 2.0
 	 */
 	function duplicate_transaction($app_id, $amount, $currency, $timestamp, $paypal_ID, $status, $note,$content=0) {
-		$sql = $this->db->prepare( "SELECT transaction_ID FROM {$this->transaction_table} WHERE transaction_app_ID = %d AND transaction_paypal_ID = %s AND transaction_stamp = %d LIMIT 1 ", $app_id, $paypal_ID, $timestamp );
+		_deprecated_function( __FUNCTION__, '2.0', 'appointments_is_transaction_duplicated()' );
+		return appointments_is_transaction_duplicated( $app_id, $timestamp, $paypal_ID );
+	}
 
-		$trans = $this->db->get_var( $sql );
-		if(!empty($trans)) {
-			return true;
-		} else {
-			return false;
+	/**
+	 * Save a Paypal transaction to the database
+	 *
+	 * @deprecated since 2.0
+	 */
+	function record_transaction($app_id, $amount, $currency, $timestamp, $paypal_id, $status, $note) {
+		_deprecated_function( __FUNCTION__, '2.0', 'appointments_update_transaction() or appointments_insert_transaction()' );
+		$args = array(
+			'app_ID' => $app_id,
+			'paypal_ID' => $paypal_id,
+			'stamp' => $timestamp,
+			'currency' => $currency,
+			'status' => $status,
+			'total_amount' => (int) round($amount * 100),
+			'note' => $note
+		);
+
+		if ( $transaction = appointments_get_transaction_by_paypal_id( $paypal_id ) ) {
+			// Update
+			appointments_update_transaction( $transaction->transaction_ID, $args );
+		}
+		else {
+			// Insert
+			appointments_insert_transaction( $args );
 		}
 	}
 
 	/**
-	 *	Save a Paypal transaction to the database
+	 * @deprecated since 2.0
 	 */
-	function record_transaction($app_id, $amount, $currency, $timestamp, $paypal_id, $status, $note) {
-
-		$data = array();
-		$data['transaction_app_ID'] = $app_id;
-		$data['transaction_paypal_ID'] = $paypal_id;
-		$data['transaction_stamp'] = $timestamp;
-		$data['transaction_currency'] = $currency;
-		$data['transaction_status'] = $status;
-		$data['transaction_total_amount'] = (int) round($amount * 100);
-		$data['transaction_note'] = $note;
-
-		$existing_id = $this->db->get_var( $this->db->prepare( "SELECT transaction_ID FROM {$this->transaction_table} WHERE transaction_paypal_ID = %s LIMIT 1", $paypal_id ) );
-
-		if(!empty($existing_id)) {
-			// Update
-			$this->db->update( $this->transaction_table, $data, array('transaction_ID' => $existing_id) );
-		} else {
-			// Insert
-			$this->db->insert( $this->transaction_table, $data );
-		}
-
-	}
-
 	function get_total() {
-		return $this->db->get_var( "SELECT FOUND_ROWS();" );
+		_deprecated_function( __FUNCTION__, '2.0' );
+		//return $this->db->get_var( "SELECT FOUND_ROWS();" );
 	}
 
 
@@ -3912,7 +3766,8 @@ require_once APP_PLUGIN_DIR . '/includes/class_app_install.php';
 require_once APP_PLUGIN_DIR . '/includes/class_app_timed_abstractions.php';
 require_once APP_PLUGIN_DIR . '/includes/class_app_roles.php';
 require_once APP_PLUGIN_DIR . '/includes/class_app_codec.php';
-require_once APP_PLUGIN_DIR . '/includes/class_app_shortcodes.php';
+require_once APP_PLUGIN_DIR . '/includes/shortcodes/abstract-app-shortcode.php';
+require_once APP_PLUGIN_DIR . '/includes/shortcodes.php';
 
 App_Installer::serve();
 

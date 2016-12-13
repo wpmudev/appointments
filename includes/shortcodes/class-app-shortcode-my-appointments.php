@@ -5,52 +5,83 @@
  */
 class App_Shortcode_MyAppointments extends App_Shortcode {
 	public function __construct () {
-		$this->_defaults = array(
+		$this->name = __( 'My Appointments', 'appointments' );
+	}
+
+	public function get_defaults() {
+		$_workers = appointments_get_workers();
+		$workers = array(
+			array( 'text' => __( 'Any provider', 'appointments' ), 'value' => '' )
+		);
+		foreach ( $_workers as $worker ) {
+			/** @var Appointments_Worker $worker */
+			$workers[] = array( 'text' => $worker->get_name(), 'value' => $worker->ID );
+		}
+
+		return array(
 			'provider' => array(
+				'type' => 'checkbox',
+				'name' => __( 'Is Provider', 'appointments' ),
 				'value' => 0,
-				'help' => __('Enter 1 if this appointment list belongs to a service provider. Default: "0" (client)', 'appointments'),
-				'example' => '1',
+				'help' => __('Check if this appointment list belongs to a service provider. Default: "0" (client)', 'appointments'),
 			),
 			'provider_id' => array(
-				'value' => 0,
+				'type' => 'select',
+				'name' => __( 'Provider', 'appointments' ),
+				'options' => $workers,
+				'value' => '',
 				'help' => __('Enter the user ID of the provider whose list will be displayed. If ommitted, current service provider will be displayed. Default: "0" (current service provider)', 'appointments'),
-				'example' => '12',
 			),
 			'title' => array(
+				'type' => 'text',
+				'name' => __( 'Title', 'appointments' ),
 				'value' => __('<h3>My Appointments</h3>', 'appointments'),
 				'help' => __('Title text.', 'appointments'),
-				'example' => __('My Appointments', 'appointments'),
 			),
 			'status' => array(
+				'type' => 'text',
+				'name' => __( 'Status', 'appointments' ),
 				'value' => 'paid,confirmed',
 				'help' => __('Which status(es) will be included. Possible values: paid, confirmed, completed, pending, removed, reserved or combinations of them separated with comma.', 'appointments'),
-				'allowed_values' => array('paid', 'confirmed', 'pending', 'completed', 'removed', 'reserved'),
-				'example' => 'paid,confirmed',
 			),
 			'gcal' => array(
+				'type' => 'checkbox',
+				'name' => __( 'Google Calendar Button', 'appointments' ),
 				'value' => 1,
-				'help' => __('Enter 0 to disable Google Calendar button by which clients can add appointments to their Google Calendar after booking the appointment. Default: "1" (enabled - provided that "Add Google Calendar Button" setting is set as Yes)', 'appointments'),
+				'help' => __('Uncheck to disable Google Calendar button by which clients can add appointments to their Google Calendar after booking the appointment. Default: enabled - provided that "Add Google Calendar Button" setting is set as Yes', 'appointments'),
 				'example' => '0',
 			),
 			'order_by' => array(
+				'type' => 'select',
+				'name' => __( 'Order By', 'appointments' ),
+				'options' => array(
+					array( 'text' => 'ID', 'value' => 'ID' ),
+					array( 'text' => 'start', 'value' => 'start' ),
+				),
 				'value' => 'ID',
 				'help' => __('Sort order of the appointments. Possible values: ID, start.', 'appointments'),
-				'example' => 'ID',
 			),
 			'order' => array(
-				'value' => 'ID',
+				'type' => 'select',
+				'name' => __( 'Order', 'appointments' ),
+				'options' => array(
+					array( 'text' => 'Ascendant', 'value' => 'asc' ),
+					array( 'text' => 'Descendant', 'value' => 'desc' ),
+				),
+				'value' => 'asc',
 				'help' => __('Sort order of the appointments. Possible values: asc (ascendant order), desc (descendant order).', 'appointments'),
-				'example' => 'asc',
 			),
 			'allow_cancel' => array(
+				'type' => 'checkbox',
+				'name' => __( 'Allow Cancellation', 'appointments' ),
 				'value' => 0,
-				'help' => __('Enter 1 if you want to allow cancellation of appointments by the client using this table. "Allow client cancel own appointments" setting must also be set as Yes. Default: "0" (Cancellation is not allowed).', 'appointments'),
-				'example' => '1',
+				'help' => __('Check if you want to allow cancellation of appointments by the client using this table. "Allow client cancel own appointments" setting must also be set as Yes. Default: Cancellation is not allowed.', 'appointments'),
 			),
 			'strict' => array(
+				'type' => 'checkbox',
+				'name' => __( 'Strict', 'appointments' ),
 				'value' => 0,
 				'help' => __('Ensure strict matching when searching for appointments to display. The shortcode will, by default, use the widest possible match.', 'appointments'),
-				'example' => '1',
 			),
 
 			'_allow_confirm' => array('value' => 0),
@@ -375,7 +406,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 
 		if (!is_user_logged_in()) return false; // Logged out users aren't being shown editable stuff, ever.
 
-		$bp_ready = class_exists('App_BuddyPress') && App_BuddyPress::is_ready();
+		$bp_ready = class_exists( 'Appointments_Integration_BuddyPress' ) && Appointments_Integration_BuddyPress::is_ready();
 		$allow_current_user = bp_displayed_user_id() === bp_loggedin_user_id();
 
 		return $bp_ready && $allow_current_user;

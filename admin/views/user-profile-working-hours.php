@@ -15,13 +15,15 @@
 	<tr>
 		<th><label for="open_datepick"><?php _e("Exceptional Working Days", 'appointments'); ?></label></th>
 		<td>
-			<input class="datepick widefat" id="open_datepick" type="text" name="open[exceptional_days]" value="<?php echo $result['open']; ?>" />
+			<div class="app-datepick" data-rel="#open_datepick"></div>
+			<input type="hidden" class="widefat" id="open_datepick" name="open[exceptional_days]" value="<?php echo $result['open']; ?>">
 		</td>
 	</tr>
 	<tr>
 		<th><label for="closed_datepick"><?php _e("Holidays", 'appointments'); ?></label></th>
 		<td>
-			<input class="datepick widefat" id="closed_datepick" type="text" name="closed[exceptional_days]" value="<?php echo $result['closed']; ?>" />
+			<div class="app-datepick" data-rel="#closed_datepick"></div>
+			<input type="hidden" class="widefat" id="closed_datepick" name="closed[exceptional_days]" value="<?php echo $result['closed']; ?>">
 		</td>
 	</tr>
 </table>
@@ -29,7 +31,8 @@
 <input type="hidden" name="worker_id" value="<?php echo $worker_id; ?>">
 <script type="text/javascript">
 	jQuery(document).ready(function($){
-		$("#open_datepick").datepick({dateFormat: 'yyyy-mm-dd',multiSelect: 999, monthsToShow: 2});
-		$("#closed_datepick").datepick({dateFormat: 'yyyy-mm-dd',multiSelect: 999, monthsToShow: 2});
+		$('.app-datepick').each( function() {
+			new AppDatepicker( $(this) );
+		});
 	});
 </script>

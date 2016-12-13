@@ -10,8 +10,8 @@ if(empty($_GET['paged'])) {
 
 $startat = ($paged - 1) * 50;
 
-$transactions = $appointments->get_transactions($type, $startat, 50);
-$total = $appointments->get_total();
+$transactions = appointments_get_transactions(array( 'type' => $type, 'offset' => $startat, 'per_page' => 50 ) );
+$total = appointments_get_transactions(array( 'type' => $type, 'offset' => $startat, 'per_page' => 50, 'count' => true ) );
 
 $columns = array();
 

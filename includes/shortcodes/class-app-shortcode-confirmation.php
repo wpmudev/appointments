@@ -2,61 +2,76 @@
 
 class App_Shortcode_Confirmation extends App_Shortcode {
 	public function __construct () {
-		$this->_defaults = array(
+		$this->name = __( 'Confirmation', 'appointments' );
+	}
+
+	public function get_defaults() {
+		return array(
 			'title' => array(
+				'type' => 'text',
+				'name' => __( 'Title', 'appointments' ),
 				'value' => __('<h3>Please check the appointment details below and confirm:</h3>', 'appointments'),
 				'help' => __('Text above fields. Default: "Please check the appointment details below and confirm:"', 'appointments'),
-				'example' => __('Please check the appointment details below and confirm:', 'appointments'),
 			),
 			'button_text' => array(
+				'type' => 'text',
+				'name' => __( 'Button text', 'appointments' ),
 				'value' => __('Please click here to confirm this appointment', 'appointments'),
 				'help' => __('Text of the button that asks client to confirm the appointment. Default: "Please click here to confirm this appointment"', 'appointments'),
-				'example' => __('Please click here to confirm this appointment', 'appointments'),
 			),
 			'confirm_text' => array(
+				'type' => 'text',
+				'name' => __( 'Confim text', 'appointments' ),
 				'value' => __('We have received your appointment. Thanks!', 'appointments'),
 				'help' => __('Javascript text that will be displayed after receiving of the appointment. This will only be displayed if you do not require payment. Default: "We have received your appointment. Thanks!"', 'appointments'),
-				'example' => __('We have received your appointment. Thanks!', 'appointments'),
 			),
 			'warning_text' => array(
+				'type' => 'text',
+				'name' => __( 'Warning text', 'appointments' ),
 				'value' => __('Please fill in the requested field','appointments'),
 				'help' => __(' Javascript text displayed if client does not fill a required field. Default: "Please fill in the requested field"', 'appointments'),
-				'example' => __('Please fill in the requested field','appointments'),
 			),
 			'name' => array(
+				'type' => 'text',
+				'name' => __( 'Name label', 'appointments' ),
 				'value' => __('Your name:','appointments'),
 				'help' => __('Descriptive title of the field.', 'appointments'),
-				'example' => __('Your name:','appointments'),
 			),
 			'email' => array(
+				'type' => 'text',
+				'name' => __( 'Email label', 'appointments' ),
 				'value' => __('Your email:','appointments'),
 				'help' => __('Descriptive title of the field.', 'appointments'),
-				'example' => __('Your email:','appointments'),
 			),
 			'phone' => array(
+				'type' => 'text',
+				'name' => __( 'Phone label', 'appointments' ),
 				'value' => __('Your phone:','appointments'),
 				'help' => __('Descriptive title of the field.', 'appointments'),
-				'example' => __('Your phone:','appointments'),
 			),
 			'address' => array(
+				'type' => 'text',
+				'name' => __( 'Address label', 'appointments' ),
 				'value' => __('Your address:','appointments'),
 				'help' => __('Descriptive title of the field.', 'appointments'),
-				'example' => __('Your address:','appointments'),
 			),
 			'city' => array(
+				'type' => 'text',
+				'name' => __( 'City label', 'appointments' ),
 				'value' => __('City:','appointments'),
 				'help' => __('Descriptive title of the field.', 'appointments'),
-				'example' => __('City:','appointments'),
 			),
 			'note' => array(
+				'type' => 'text',
+				'name' => __( 'Notes label', 'appointments' ),
 				'value' => __('Your notes:','appointments'),
 				'help' => __('Descriptive title of the field.', 'appointments'),
-				'example' => __('Your notes:','appointments'),
 			),
 			'gcal' => array(
+				'type' => 'text',
+				'name' => __( 'Google Cal label', 'appointments' ),
 				'value' => __('Access Google Calendar and submit appointment','appointments'),
 				'help' => __('Text that will be displayed beside Google Calendar checkbox. Default: "Open Google Calendar and submit appointment"', 'appointments'),
-				'example' => __('Access Google Calendar and submit appointment','appointments'),
 			),
 		);
 	}
