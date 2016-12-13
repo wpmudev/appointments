@@ -26,6 +26,8 @@ class Appointments_AJAX {
 
 		add_action( 'wp_ajax_services_load_thumbnail', array( $this, 'load_service_thumbnail' ) );
 		add_action( 'wp_ajax_nopriv_services_load_thumbnail', array( $this, 'load_service_thumbnail' ) );
+
+		add_filter( 'app-export-columns', array( $this, 'app_export_columns' ) );
 	}
 
 	public function load_service_thumbnail() {
@@ -1121,6 +1123,21 @@ class Appointments_AJAX {
 			$value = appointments_get_worker_name( $value );
 	}
 
+	/**
+	 * Control csv columns
+	 * @since 1.9.4.1
+	 */
+	function app_export_columns( $cols ){
 
+		// Do not include the Location column in the export CSV if the add-on is not active
+		if( !class_exists( 'App_Locations_LocationsWorker' ) ){
+			foreach( $cols as $key => $col ) {
+				if( $col == 'location' ) unset( $cols[ $key ] );
+			}
+		}
+
+		return $cols;
+
+	}
 
 }
