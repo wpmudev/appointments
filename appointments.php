@@ -992,6 +992,24 @@ class Appointments {
 		return $hours_min;
 	}
 
+	function secs_to_24h( $secs ) {
+		$min = (int)($secs / 60);
+		$hours = "00";
+		if ( $min < 60 )
+			$hours_min = $hours . ":" . $min;
+		else {
+			$hours = (int)($min / 60);
+			if ( $hours < 10 )
+				$hours = "0" . $hours;
+			$mins = $min - $hours * 60;
+			if ( $mins < 10 )
+				$mins = "0" . $mins;
+			$hours_min = $hours . ":" . $mins;
+		}
+
+		return date( 'H:i', strtotime( $hours_min ) );
+    }
+
 	/**
 	 * Return an array of preset base times, so that strange values are not set
 	 * @return array

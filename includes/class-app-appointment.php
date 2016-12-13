@@ -109,6 +109,24 @@ class Appointments_Appointment {
 		return $appointments->get_client_name( $this->ID );
 	}
 
+	public function get_start_date() {
+		if ( ! $this->start ) {
+			return '';
+		}
+		return date( 'Y-m-d', strtotime( $this->start ) );
+	}
+
+	public function get_start_time() {
+		if ( ! $this->start ) {
+			return '';
+		}
+		return date( 'H:i', strtotime( $this->start ) );
+	}
+
+	public function get_start_timestamp() {
+		return strtotime( $this->start );
+	}
+
 	public function get_email() {
 		global $appointments;
 

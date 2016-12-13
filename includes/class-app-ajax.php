@@ -98,6 +98,7 @@ class Appointments_AJAX {
 
 
 		$update_result = $insert_result = false;
+		$data['datetime'] = strtotime( $data['date'] . ' ' . $data['time'] . ':00' );
 		if ( $app ) {
 			// Update
 			$update_result = appointments_update_appointment( $app_id, $data );
@@ -332,7 +333,7 @@ class Appointments_AJAX {
 			$html .= '<label>';
 			$html .= '<span class="title">'.__('Created', 'appointments'). '</span>';
 			$html .= '<span class="input-text-wrap" style="height:26px;padding-top:4px;">';
-			$html .= date_i18n( $appointments->datetime_format, strtotime($app->created) );
+			$html .= $app->get_start_date();
 			$html .= '</span>';
 			$html .= '</label>';
 		}
@@ -340,27 +341,29 @@ class Appointments_AJAX {
 		$html .= '<label style="float:left;width:65%">';
 		$html .= '<span class="title">'.__('Start', 'appointments'). '</span>';
 		$html .= '<span class="input-text-wrap" >';
-		$html .= '<input type="text" name="date" class="datepicker" size="12" value="' . esc_attr($start_date) . '" data-timestamp="' . esc_attr($start_date_timestamp) . '"  />';
+		$html .= '<input type="text" name="date" class="datepicker" size="12" placeholder="YYYY-MM-DD" value="' . esc_attr($start_date_timestamp) . '"  />';
 		$html .= '</label>';
 		$html .= '<label style="float:left;width:30%; padding-left:5px;">';
 
 		// Check if an admin min time (time base) is set. @since 1.0.2
-		if ( isset( $appointments->options["admin_min_time"] ) && $appointments->options["admin_min_time"] )
+		if ( isset( $appointments->options["admin_min_time"] ) && $appointments->options["admin_min_time"] ) {
 			$min_time = $appointments->options["admin_min_time"];
-		else
+		} else {
 			$min_time = $appointments->get_min_time();
+		}
 
 		$min_secs = 60 * apply_filters( 'app_admin_min_time', $min_time );
 		$html .= '<select name="time" >';
 		for ( $t=0; $t<3600*24; $t=$t+$min_secs ) {
 			$s = array();
 			$dhours = $appointments->secs2hours( $t ); // Hours in 08:30 format
+			$dhours_value = $appointments->secs_to_24h( $t ); // Hours in 08:30 format
 
-			$s[] = $dhours == $start_time
+			$s[] = $dhours_value == $app->get_start_time()
 				? 'selected="selected"'
 				: ''
 			;
-			$s[] = 'value="' . esc_attr($appointments->secs2hours($t, 'H:i')) . '"';
+			$s[] = 'value="' . esc_attr($dhours_value) . '"';
 
 			$html .= '<option ' . join(' ', array_values(array_filter($s))) . '>';
 			$html .= $dhours;
@@ -436,7 +439,7 @@ class Appointments_AJAX {
 			$js = 'href="javascript:void(0)"';
 			$title = __('Click to save or update', 'appointments');
 		}
-		$html .= '<a '.$js.' title="' . esc_attr($title) . '" class="button-primary save alignright">'.__('Save / Update','appointments').'</a>';
+		$html .= '<a '.$js.' title="' . esc_attr($title) . '" class="button-primary save alignright" data-app-id="' . $app->ID . '">'.__('Save / Update','appointments').'</a>';
 		$html .= '<img class="waiting" style="display:none;" src="'.admin_url('images/wpspin_light.gif').'" alt="">';
 		$html .= '<input type="hidden" name="app_id" value="' . esc_attr($app->ID) . '">';
 		$html .= '<span class="error" style="display:none"></span>';
