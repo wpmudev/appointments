@@ -73,7 +73,10 @@ class Appointments_Admin_User_Profile {
 				$location = 0;
 				$worker_id = absint( $_REQUEST['worker_id'] );
 
-				check_admin_referer( 'app_exceptions-' . $worker_id, 'app_exceptions_nonce' );
+				if ( ! wp_verify_nonce( $_REQUEST['app_bp_settings_submit'], 'app_bp_settings_submit' ) ) {
+					check_admin_referer( 'app_exceptions-' . $worker_id, 'app_exceptions_nonce' );
+				}
+
 				foreach ( array( 'closed', 'open' ) as $stat ) {
 					$result = $result || appointments_update_worker_working_hours( $profileuser_id, $_POST[ $stat ], $stat, $location );
 					$result2 = $result2 || appointments_update_worker_exceptions( $profileuser_id, $stat, $_POST[ $stat ]["exceptional_days"] );
