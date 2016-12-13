@@ -739,6 +739,21 @@ class Appointments_Google_Calendar {
 			return;
 		}
 
+		//Update GCal on status change
+		$old_status = $old_app->status;
+		$new_status = $args['status'];
+
+		if ( $old_status != $new_status ) {
+
+			if ( $new_status == 'removed' || $new_status == 'pending' ) {
+				$this->delete_event( $app->gcal_ID );
+			}
+
+			if ( $old_status == 'removed' && $new_status != 'pending' ) {
+				$this->insert_event( $app_id );
+			}
+		}
+
 		if ( ! $this->workers_allowed() ) {
 			// Just the general calendar
 			$this->update_event( $app_id );
