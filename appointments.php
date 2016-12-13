@@ -3533,7 +3533,7 @@ class Appointments {
 	 *  @param status: Open (working hours) or close (break hours)
 	 */
 	function working_hour_form( $status='open' ) {
-		$path = _appointments_get_view_path( 'form-working-hours' );
+		$path = appointments_get_view_path( 'form-working-hours' );
 		if ( is_file( $path ) ) {
 			include $path;
 		}
