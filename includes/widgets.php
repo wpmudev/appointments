@@ -45,7 +45,7 @@ class Appointments_Widget_Services extends Appointments_Widget_Helper {
 		'number' => 5
 	);
 
-	function Appointments_Widget_Services() {
+	function __construct() {
 		$widget_ops = array(
 			'description' => __( 'List of services and links to their description pages', 'appointments'),
 		);
@@ -101,7 +101,7 @@ class Appointments_Widget_Service_Providers extends Appointments_Widget_Helper {
 		'number' => 5
 	);
 
-	function Appointments_Widget_Service_Providers() {
+	function __construct() {
 		$widget_ops = array(
 			'description' => __( 'List of service providers and links to their bio pages', 'appointments'),
 		);
@@ -173,7 +173,7 @@ class Appointments_Widget_Monthly_Calendar extends Appointments_Widget_Helper {
 		'page_id'	=> 0
 	);
 
-	function Appointments_Widget_Monthly_Calendar() {
+	function __construct() {
 		add_action('wp_enqueue_scripts', array($this, 'wp_enqueue_scripts'));
 		add_action('wp_print_styles', array($this, 'wp_print_styles'));
 		add_action('wp_footer', array($this, 'wp_footer'));
