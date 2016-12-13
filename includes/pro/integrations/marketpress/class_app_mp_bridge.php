@@ -140,9 +140,13 @@ class App_MP_Bridge {
 			$price = str_replace(',', '', $raw_price);
 		}
 
+        $thumbnail_id = apply_filters('app_variation_thumbnail', false, $service);
 		update_post_meta($variation_id, 'name', $app_id);
 		update_post_meta($variation_id, 'sku', $this->_core->service);
 		update_post_meta($variation_id, 'regular_price', $price);
+		if ( $thumbnail_id ) {
+			update_post_meta( $variation_id, '_thumbnail_id', $thumbnail_id );
+		}
 
 		return $variation_id;
 	}
