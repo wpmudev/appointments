@@ -154,6 +154,15 @@ class App_MP_Bridge {
 			update_post_meta( $variation_id, '_thumbnail_id', $thumbnail_id );
 		}
 
+		if ( class_exists( 'MP_Product' ) ) {
+			$product = new MP_Product( $post_id );
+			if ( $product->is_download() ) {
+				$file_url = $product->get_meta( 'file_url' );
+
+				update_post_meta( $variation_id, 'file_url', $file_url );
+			}
+		}
+
 		return $variation_id;
 	}
 
