@@ -453,10 +453,10 @@ $(document).ajaxSend(function(e, xhr, opts) {
 		$fields = !empty($this->_data['additional_fields']) ? $this->_data['additional_fields'] : array();
 		$admin_edit = !empty($this->_data['additional_fields-admin_edit']) ? 'checked="checked"' : '';
 		?>
-		<div class="api_detail">
+		<div class="">
 			<h3><?php _e( 'Additional Fields', 'appointments' ); ?></h3>
 			<table class="form-table">
-				<tr valign="top" class="api_detail" <?php echo $style?>>
+				<tr valign="top" class="" <?php echo $style?>>
 					<th scope="row" ><?php _e('Additional fields', 'appointments')?></th>
 					<td colspan="2">
 						<div id="app-additional_fields">
