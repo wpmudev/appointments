@@ -306,7 +306,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 					else
 						$is_readonly = ' readonly="readonly"';
 
-					$ret .= '<td><input class="app-my-appointments-cancel" type="checkbox" name="app_cancel['.$r->ID.']" '.$is_readonly.' /></td>';
+					$ret .= '<td><input id="cancel-' . $r->ID . '" data-app-id="' . $r->ID . '" class="app-my-appointments-cancel" type="checkbox" name="app_cancel['.$r->ID.']" '.$is_readonly.' /></td>';
 				}
 
 				if ( $args['gcal'] && 'yes' == $appointments->options['gcal'] ) {
@@ -343,61 +343,28 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 
 		$ret .= '</div>';
 
-		$sorter = 'usLongDate';
-		$dateformat = 'us';
-		// Search for formats where day is at the beginning
-		if ( stripos( str_replace( array('/','-'), '', $appointments->date_format ), 'dmY') !== false ) {
-			$sorter = 'shortDate';
-			$dateformat = 'uk';
-		}
+		wp_enqueue_script( 'app-my-appointments', appointments_plugin_url() . 'js/my-appointments.js', array( 'jquery' ), '', true );
+		wp_localize_script( 'app-my-appointments', 'appMyAppointmentsStrings', array(
+			'aysCancel' => esc_js( __( "Are you sure you want to cancel the selected appointment?", "appointments" ) ),
+			'cancelled' => esc_js( __("Selected appointment cancelled.","appointments") ),
+			'connectionError' => esc_js( __("A connection error occurred.","appointments") ),
+			'nonce' => wp_create_nonce( 'cancel-appointment-' . get_current_user_id() ),
+			'ajaxurl' => admin_url( 'admin-ajax.php' )
+		) );
 
-		// Sort table from front end
-		if ( $args['_tablesorter'] && file_exists( appointments_plugin_dir() . 'js/jquery.tablesorter.min.js' ) )
-			$appointments->add2footer( '
-				$(".my-appointments").tablesorter({
-					dateFormat: "'.$dateformat.'",
-					headers: {
-						2: {
-							sorter:"'.$sorter.'"
-						}
-					}
-				});
-				$("th.my-appointments-gcal,th.my-appointments-confirm,th.my-appointments-cancel").removeClass("header");
-
-				$(".app-my-appointments-cancel").change( function() {
-					if ( $(this).is(":checked") ) {
-						var cancel_box = $(this);
-						if ( !confirm("'. esc_js( __("Are you sure you want to cancel the selected appointment?","appointments") ) .'") ) {
-							cancel_box.attr("checked", false);
-							return false;
-						}
-						else{
-							var cancel_id = $(this).attr("name").replace("app_cancel[","").replace("]","");
-							if (cancel_id) {
-								var cancel_data = {action: "cancel_app", app_id: cancel_id, cancel_nonce: "'. wp_create_nonce() .'"};
-								$.post(_appointments_data.ajax_url, cancel_data, function(response) {
-									if (response && response.error ) {
-										cancel_box.attr("disabled",true);
-										alert(response.error);
-									}
-									else if (response && response.success) {
-										alert("'.esc_js( __("Selected appointment cancelled.","appointments") ).'");
-										cancel_box.closest("tr").css("opacity","0.3");
-										cancel_box.attr("disabled",true);
-									}
-									else {
-										cancel_box.attr("disabled",true);
-										alert("'.esc_js( __("A connection error occurred.","appointments") ).'");
-									}
-								}, "json");
-							}
-						}
-					}
-
-				});'
-			);
-
+		add_action( 'wp_footer', array( $this, 'footer_scripts' ), 100 );
 		return $ret;
+	}
+
+	public function footer_scripts() {
+		?>
+		<script>
+			"use strict"
+			jQuery(document).ready( function() {
+                Appointments.myAppointments();
+			});
+		</script>
+		<?php
 	}
 
 	/**

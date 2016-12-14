@@ -106,7 +106,6 @@ class Appointments {
 
 		add_action( 'plugins_loaded', array(&$this, 'localization') );		// Localize the plugin
 		add_action( 'init', array( &$this, 'init' ), 20 ); 						// Initial stuff
-		add_action( 'init', array( &$this, 'cancel' ), 19 ); 				// Check cancellation of an appointment
 		add_filter( 'the_posts', array(&$this, 'load_styles') );			// Determine if we use shortcodes on the page
 
 		add_action( 'admin_init', array( $this, 'maybe_upgrade' ) );
@@ -1155,96 +1154,6 @@ class Appointments {
 	function change_status( $stat, $app_id ) {
 		_deprecated_function( __FUNCTION__, '1.6', 'appointments_update_appointment_status()' );
 		return appointments_update_appointment_status( $app_id, $stat );
-	}
-
-	/**
-	 * Handle cancellation of an appointment by the client
-	 * @since 1.2.6
-	 */
-	function cancel() {
-		global $appointments;
-
-		if ( isset( $this->options['allow_cancel'] ) && 'yes' == $this->options['allow_cancel'] ) {
-
-			/* Cancel by the link in email */
-			// We don't want to break any other plugin's init, so these conditions are very strict
-			if ( isset( $_GET['app_cancel'] ) && isset( $_GET['app_id'] ) && isset( $_GET['app_nonce'] ) ) {
-				$app_id = $_GET['app_id'];
-				$app = appointments_get_appointment( $app_id );
-
-				if( isset( $app->status ) )
-					$stat = $app->status;
-				else
-					$stat = '';
-
-				// Addons may want to add or omit some stats, but as default we don't want completed appointments to be cancelled
-				$in_allowed_stat = apply_filters( 'app_cancel_allowed_status', ('pending' == $stat || 'confirmed' == $stat || 'paid' == $stat), $stat, $app_id );
-
-				// Also the clicked link may belong to a formerly created and deleted appointment.
-				// Another irrelevant app may have been created after cancel link has been sent. So we will check creation date
-				if ( $in_allowed_stat && $_GET['app_nonce'] == md5( $_GET['app_id']. $appointments->salt . strtotime( $app->created ) ) ) {
-					if ( appointments_update_appointment_status( $app_id, 'removed' ) ) {
-						$appointments->log( sprintf( __('Client %s cancelled appointment with ID: %s','appointments'), $appointments->get_client_name( $app_id ), $app_id ) );
-						appointments_send_cancel_notification( $app_id );
-
-						do_action('app-appointments-appointment_cancelled', $app_id);
-						// If there is a header warning other plugins can do whatever they need
-						if ( !headers_sent() ) {
-							if ( isset( $appointments->options['cancel_page'] ) &&  $appointments->options['cancel_page'] ) {
-								wp_redirect( get_permalink( $appointments->options['cancel_page'] ) );
-								exit;
-							}
-							else {
-								wp_redirect( home_url() );
-								exit;
-							}
-						}
-					}
-					// Gracefully go to home page if appointment has already been cancelled, or do something here
-					do_action( 'app_cancel_failed', $app_id );
-				}
-			}
-
-			/* Cancel from my appointments table by ajax */
-			if ( isset( $_POST['app_id'] ) && isset( $_POST['cancel_nonce'] ) ) {
-				$app_id = $_POST['app_id'];
-
-				// Check if user is the real owner of this appointment to prevent malicious attempts
-				$owner = false;
-				// First try to find from database
-				if ( is_user_logged_in() ) {
-					global $current_user;
-					$app = appointments_get_appointment( $app_id );
-					if ( $app->user && $app->user == $current_user->ID )
-						$owner = true;
-				}
-				// Then check cookie. Check is not so strict here, as he couldn't be seeing that cancel checkbox in the first place
-				if ( !$owner && isset( $_COOKIE["wpmudev_appointments"] ) ) {
-					$apps = unserialize( stripslashes( $_COOKIE["wpmudev_appointments"] ) );
-					if ( is_array( $apps ) && in_array( $app_id, $apps ) )
-						$owner = true;
-				}
-				// Addons may want to do something here
-				$owner = apply_filters( 'app_cancellation_owner', $owner, $app_id );
-
-				// He is the wrong guy, or he may have cleared his cookies while he is on the page
-				if ( !$owner )
-					die( json_encode( array('error'=>esc_js(__('There is an issue with this appointment. Please refresh the page and try again. If problem persists, please contact website admin.','appointments') ) ) ) );
-
-				// Now we can safely continue for cancel
-				if ( appointments_update_appointment_status( $app_id, 'removed' ) ) {
-					$appointments->log( sprintf( __('Client %s cancelled appointment with ID: %s','appointments'), $appointments->get_client_name( $app_id ), $app_id ) );
-					appointments_send_cancel_notification( $app_id );
-
-					do_action('app-appointments-appointment_cancelled', $app_id);
-					die( json_encode( array('success'=>1)));
-				}
-				else
-					die( json_encode( array('error'=>esc_js(__('Appointment could not be cancelled. Please refresh the page and try again.','appointments') ) ) ) );
-			}
-		}
-		else if ( isset( $_POST['app_id'] ) && isset( $_POST['cancel_nonce'] ) )
-			die( json_encode( array('error'=>esc_js(__('Cancellation of appointments is disabled. Please contact website admin.','appointments') ) ) ) );
 	}
 
 
@@ -3145,23 +3054,11 @@ class Appointments {
 
 	/**
 	 * Replace CANCEL placeholder with its link
-	 * @param text: email text
-	 * @param app_id: ID of the appointment to be cancelled
-	 * @since 1.2.6
+	 * Removed due to security issues
 	 */
 	function add_cancel_link( $text, $app_id ) {
-		if ( isset( $this->options['allow_cancel'] ) && 'yes' == $this->options['allow_cancel'] && $app_id ) {
-
-			$app = appointments_get_appointment( $app_id );
-			// The link to be clicked may belong to a formerly created and deleted appointment.
-			// Another irrelevant app may have been created after cancel link has been sent. So we will add creation date for check
-			if ( $app )
-				return str_replace( 'CANCEL', add_query_arg( array( 'app_cancel'=>1, 'app_id'=>$app_id, 'app_nonce'=>md5( $app_id . $this->salt . strtotime( $app->created ) ) ), home_url() ), $text);
-			else
-				return str_replace( 'CANCEL', '', $text );
-		}
-		else
-			return str_replace( 'CANCEL', '', $text );
+	    // Removed due to security issues
+		return str_replace( 'CANCEL', '', $text );
 	}
 
 /*******************************

@@ -21,8 +21,8 @@ class Appointments_AJAX {
 		add_action( 'wp_ajax_post_confirmation', array( &$this, 'post_confirmation' ) ); 		// Do after final confirmation
 		add_action( 'wp_ajax_nopriv_post_confirmation', array( &$this, 'post_confirmation' ) ); // Do after final confirmation
 
-		add_action( 'wp_ajax_cancel_app', array( $appointments, 'cancel' ) ); 							// Cancel appointment from my appointments
-		add_action( 'wp_ajax_nopriv_cancel_app', array( $appointments, 'cancel' ) );
+		add_action( 'wp_ajax_cancel_user_app', array( $this, 'cancel_user_app' ) );
+		add_action( 'wp_ajax_nopriv_cancel_user_app', array( $this, 'cancel_user_app' ) );
 
 		add_action( 'wp_ajax_services_load_thumbnail', array( $this, 'load_service_thumbnail' ) );
 		add_action( 'wp_ajax_nopriv_services_load_thumbnail', array( $this, 'load_service_thumbnail' ) );
@@ -32,6 +32,58 @@ class Appointments_AJAX {
 
 	public function load_service_thumbnail() {
 		wp_send_json_success( array( 'hello' ) );
+	}
+
+	public function cancel_user_app() {
+		$user_id = get_current_user_id();
+		$options = appointments_get_options();
+		$app_id = absint( $_POST['app_id'] );
+		check_ajax_referer( 'cancel-appointment-' . $user_id, 'cancel_nonce' );
+
+		if ( 'yes' != $options['allow_cancel'] ) {
+			wp_send_json_error( esc_js(__('Cancellation of appointments is disabled. Please contact website admin.','appointments') ) );
+		}
+
+		$app = appointments_get_appointment( $app_id );
+		if ( ! $app ) {
+			die();
+		}
+
+		// Check if user is the real owner of this appointment to prevent malicious attempts
+		$owner = false;
+
+		// First try to find from database
+		if ( $user_id ) {
+			// User is logged in
+			if ( $app->user && $app->user == $user_id ) {
+				$owner = true;
+			}
+		}
+
+		// Then check cookie. Check is not so strict here, as he couldn't be seeing that cancel checkbox in the first place
+		if ( ! $owner && isset( $_COOKIE["wpmudev_appointments"] ) ) {
+			$apps = unserialize( stripslashes( $_COOKIE["wpmudev_appointments"] ) );
+			if ( is_array( $apps ) && in_array( $app_id, $apps ) ) {
+				$owner = true;
+			}
+		}
+
+		// Addons may want to do something here
+		$owner = apply_filters( 'app_cancellation_owner', $owner, $app_id );
+
+		if ( !$owner ) {
+			wp_send_json_error( esc_js(__('There is an issue with this appointment. Please refresh the page and try again. If problem persists, please contact website admin.','appointments') ) );
+		}
+
+		$appointments = appointments();
+		if ( appointments_update_appointment_status( $app_id, 'removed' ) ) {
+			$appointments->log( sprintf( __('Client %s cancelled appointment with ID: %s','appointments'), $appointments->get_client_name( $app_id ), $app_id ) );
+			appointments_send_cancel_notification( $app_id );
+			do_action('app-appointments-appointment_cancelled', $app_id);
+			wp_send_json_success();
+		}
+
+		wp_send_json_error( esc_js(__('Appointment could not be cancelled. Please refresh the page and try again.','appointments') ) );
 	}
 
 	/**

@@ -40,7 +40,7 @@
          * @returns {boolean}
          */
         function appointments_shortcode_field( id, definition ) {
-            var field = false;
+            var field = {};
             switch ( definition.type ) {
                 case 'text': {
                     field = {
