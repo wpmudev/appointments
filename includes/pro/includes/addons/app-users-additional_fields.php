@@ -572,7 +572,7 @@ $(document).ajaxSend(function(e, xhr, opts) {
 				border-radius: 3px;
 				padding: 1em;
 				margin-bottom: 1em;
-				width: 40%;
+				width: 98%;
 			}
 			.app-field .app-additional_fields-remove {
 				display: block;
