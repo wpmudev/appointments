@@ -963,6 +963,7 @@ function appointments_get_available_workers_for_interval( $start, $end, $service
 	}
 
 	$capacity_available = 0;
+	$available_workers = array();
 
 	foreach( $workers as $worker ) {
 		if ( appointments_is_worker_holiday( $worker->ID, $start, $end, $location ) ) {

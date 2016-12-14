@@ -537,7 +537,9 @@ class Appointments_AJAX {
 			: $user_name
 		;
 		$name_check = apply_filters( "app_name_check", true, $name );
-		if (!$name_check) $appointments->json_die( 'name' );
+		if ( ! $name_check ) {
+			$appointments->json_die( 'name' );
+		}
 
 		$email = $user_email;
 		if ( ! empty( $_POST['app_email'] ) ) {
@@ -547,28 +549,36 @@ class Appointments_AJAX {
 			}
 		}
 
-		if ($appointments->options["ask_email"] && !is_email($email)) $appointments->json_die( 'email' );
+		if ( $appointments->options["ask_email"] && ! is_email( $email ) ) {
+			$appointments->json_die( 'email' );
+		}
 
 		$phone = !empty($_POST['app_phone'])
 			? sanitize_text_field($_POST["app_phone"])
 			: ''
 		;
 		$phone_check = apply_filters("app_phone_check", true, $phone);
-		if (!$phone_check) $appointments->json_die('phone');
+		if ( ! $phone_check ) {
+			$appointments->json_die( 'phone' );
+		}
 
 		$address = !empty($_POST['app_address'])
 			? sanitize_text_field($_POST["app_address"])
 			: ''
 		;
 		$address_check = apply_filters("app_address_check", true, $address);
-		if (!$address_check) $appointments->json_die('address');
+		if ( ! $address_check ) {
+			$appointments->json_die( 'address' );
+		}
 
 		$city = !empty($_POST['app_city'])
 			? sanitize_text_field($_POST["app_city"])
 			: ''
 		;
 		$city_check = apply_filters("app_city_check", true, $city);
-		if (!$city_check) $appointments->json_die( 'city' );
+		if ( ! $city_check ) {
+			$appointments->json_die( 'city' );
+		}
 
 		$note = !empty($_POST['app_note'])
 			? sanitize_text_field($_POST["app_note"])
@@ -588,8 +598,13 @@ class Appointments_AJAX {
 		$service_result = appointments_get_service( $service );
 
 		$duration = false;
-		if ($service_result !== null) $duration = $service_result->duration;
-		if (!$duration) $duration = $appointments->get_min_time(); // In minutes
+		if ( $service_result !== null ) {
+			$duration = $service_result->duration;
+		}
+		if ( ! $duration ) {
+			// In minutes
+			$duration = $appointments->get_min_time();
+		}
 
 		$duration = apply_filters( 'app_post_confirmation_duration', $duration, $service, $worker, $user_id );
 
@@ -602,7 +617,7 @@ class Appointments_AJAX {
 			)));
 		}
 
-		$status = apply_filters('app_post_confirmation_status', $status, $price, $service, $worker, $user_id);
+		$status = apply_filters('app_post_confirmation_status', $status, $price, $service, $worker, $user_id );
 
 		$args = array(
 			'user'     => $user_id,
@@ -621,6 +636,26 @@ class Appointments_AJAX {
 			'duration' => $duration
 		);
 
+		/**
+		 * Allow to filter arguments that will be passed to appointment insertion
+		 *
+		 * Return WP_Error or true to avoid appointment insert
+		 *
+		 * @param bool
+		 * @param array $args List of arguments that will be used to insert the appointment
+		 * @param array $_REQUEST Request list coming from form screen
+		 */
+		$args = apply_filters( 'appointments_post_confirmation_args', $args );
+
+		/**
+		 * Allow to filter errors in confirmation form right before the appointment is added
+		 *
+		 * Return WP_Error or true to avoid appointment insert
+		 *
+		 * @param bool
+		 * @param array $args List of arguments that will be used to insert the appointment
+		 * @param array $_REQUEST Request list coming from form screen
+		 */
 		$error = apply_filters( 'appointments_post_confirmation_error', false, $args, $_REQUEST );
 		if ( is_wp_error( $error ) ) {
 			wp_send_json( array( 'error' => $error->get_error_message() ) );
@@ -654,8 +689,6 @@ class Appointments_AJAX {
 			appointments_send_notification( $insert_id );
 		}
 
-
-
 		// GCal button
 		if (isset($appointments->options["gcal"]) && 'yes' == $appointments->options["gcal"] && $gcal) {
 			$gcal_url = $appointments->gcal( $service, $start, $start + ($duration * 60 ), false, $address, $city );
@@ -668,10 +701,10 @@ class Appointments_AJAX {
 			'variation' => null,
 		);
 		$additional = apply_filters('app-appointment-appointment_created', $additional, $insert_id, $post_id, $service, $worker, $start, $end);
-		$mp = isset($additional['mp']) ? $additional['mp'] : 0;
-		$variation = isset($additional['variation']) ? $additional['variation'] : 0;
+		$mp = isset( $additional['mp'] ) ? $additional['mp'] : 0;
+		$variation = isset( $additional['variation'] ) ? $additional['variation'] : 0;
 
-		$gcal_same_window = !empty($appointments->options["gcal_same_window"]) ? 1 : 0;
+		$gcal_same_window = ! empty( $appointments->options["gcal_same_window"] ) ? 1 : 0;
 
 		if (isset( $appointments->options["payment_required"] ) && 'yes' == $appointments->options["payment_required"]) {
 			die(json_encode(array(
