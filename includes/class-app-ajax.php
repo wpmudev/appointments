@@ -354,12 +354,16 @@ class Appointments_AJAX {
 
 		$min_secs = 60 * apply_filters( 'app_admin_min_time', $min_time );
 		$html .= '<select name="time" >';
+		$_start_time = '';
+		if ( $app_id ) {
+			$_start_time = $app->get_start_time();
+		}
 		for ( $t=0; $t<3600*24; $t=$t+$min_secs ) {
 			$s = array();
 			$dhours = $appointments->secs2hours( $t ); // Hours in 08:30 format
 			$dhours_value = $appointments->secs_to_24h( $t ); // Hours in 08:30 format
 
-			$s[] = $dhours_value == $app->get_start_time()
+			$s[] = $dhours_value == $_start_time
 				? 'selected="selected"'
 				: ''
 			;
