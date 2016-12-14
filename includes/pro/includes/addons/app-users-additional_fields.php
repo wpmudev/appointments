@@ -68,7 +68,15 @@ class App_Users_AdditionalFields {
 
 		// This will be triggered once the appointment is updated
 		add_action( 'wpmudev_appointments_update_appointment_result', array( $this, 'update_additional_fields' ), 2, 2 );
+
+		// Add default options
+        add_action( 'appointments_default_options', array( $this, 'default_options' ) );
 	}
+
+	public function default_options( $defaults ) {
+		$defaults['additional_fields'] = array();
+		return $defaults;
+    }
 
 	/**
 	 * Validate the submitted additional fields but do not save them

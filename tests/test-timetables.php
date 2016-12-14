@@ -238,6 +238,126 @@ class App_Timetables_Test extends App_UnitTestCase {
 		$this->assertFalse( $busy );
 	}
 
+	/**
+	 * @group temp
+	 */
+	function test_get_available_workers() {
+		$options = appointments_get_options();
+		$options['min_time'] = 60;
+		appointments_update_options( $options );
+		$service_id = $this->factory->service->create_object($this->factory->service->generate_args());
+		$worker_args = $this->factory->worker->generate_args();
+		$worker_args['services_provided'] = array( $service_id );
+		$worker_id_1 = $this->factory->worker->create_object( $worker_args );
+
+		$worker_args = $this->factory->worker->generate_args();
+		$worker_args['services_provided'] = array( $service_id );
+		$worker_id_2 = $this->factory->worker->create_object( $worker_args );
+
+		// Let's put worker 1 on holiday on 2016-12-28
+		appointments_update_worker_exceptions( $worker_id_1, 'closed', '2016-12-28' );
+
+		// Appointment for worker 2 on 2016-12-28
+		$app_id = appointments_insert_appointment(
+			array(
+				'service'  => $service_id,
+				'worker' => $worker_id_2,
+				'status'   => 'confirmed',
+				'date'     => strtotime( '2016-12-28 11:00:00' ),
+				'duration' => 480
+			)
+		);
+
+		appointments()->service = $service_id;
+
+		// Now there should not be any worker available on 2016-12-28 from 11:00 to 19:00
+		$available = appointments()->available_workers(
+			strtotime( '2016-12-28 11:00:00' ), // From
+			strtotime( '2016-12-28 12:00:00' ) // To
+		);
+
+		// Though worker 2 has an appointment, this function does not check that
+		$this->assertEquals( 1, $available );
+
+		$available = appointments()->available_workers(
+			strtotime( '2016-12-29 11:00:00' ), // From
+			strtotime( '2016-12-29 12:00:00' ) // To
+		);
+		$this->assertEquals( 2, $available );
+
+		// Now set a capacity for the service
+		appointments_update_service( $service_id, array( 'capacity' => 1 ) );
+
+		// Now it should return just one
+		$available = appointments()->available_workers(
+			strtotime( '2016-12-29 11:00:00' ), // From
+			strtotime( '2016-12-29 12:00:00' ) // To
+		);
+		$this->assertEquals( 1, $available );
+	}
+
+
+	function test_is_break() {
+		$service_id = $this->factory->service->create_object($this->factory->service->generate_args());
+		$worker_args = $this->factory->worker->generate_args();
+		$worker_args['services_provided'] = array( $service_id );
+		$worker_id_1 = $this->factory->worker->create_object( $worker_args );
+
+		$wh = appointments_get_worker_working_hours( 'closed', $worker_id_1 )->hours;
+		$wh['Tuesday']['active'] = 'yes';
+		$wh['Tuesday']['start'] = '10:00';
+		$wh['Tuesday']['end'] = '18:00';
+		appointments_update_worker_working_hours( $worker_id_1, $wh, 'closed' );
+
+		$next_tuesday = date( 'Y-m-d', strtotime( 'next Tuesday' ) );
+		$this->assertTrue(
+			appointments()->is_break(
+				strtotime( "$next_tuesday 11:00" ),
+				strtotime( "$next_tuesday 12:00" ),
+				$worker_id_1
+			)
+		);
+
+		$this->assertFalse(
+			appointments()->is_break(
+				strtotime( "$next_tuesday 08:00" ),
+				strtotime( "$next_tuesday 12:00" ),
+				$worker_id_1
+			)
+		);
+
+		$this->assertTrue(
+			appointments()->is_break(
+				strtotime( "$next_tuesday 10:00" ),
+				strtotime( "$next_tuesday 18:00" ),
+				$worker_id_1
+			)
+		);
+
+		// Edge case
+		$wh = appointments_get_worker_working_hours( 'closed', $worker_id_1 )->hours;
+		$wh['Tuesday']['active'] = 'yes';
+		$wh['Tuesday']['start'] = '00:00';
+		$wh['Tuesday']['end'] = '00:00';
+		appointments_update_worker_working_hours( $worker_id_1, $wh, 'closed' );
+
+		$this->assertTrue(
+			appointments()->is_break(
+				strtotime( "$next_tuesday 00:00" ),
+				strtotime( "$next_tuesday 23:59" ),
+				$worker_id_1
+			)
+		);
+
+		$this->assertTrue(
+			appointments()->is_break(
+				strtotime( "$next_tuesday 10:00" ),
+				strtotime( "$next_tuesday 12:00" ),
+				$worker_id_1
+			)
+		);
+	}
+
 	function test_undefined_service_should_be_busy_for_worker() {
 //		$next_monday = strtotime( 'next monday', time() );
 //

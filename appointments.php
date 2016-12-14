@@ -2125,14 +2125,11 @@ class Appointments {
 	 */
 	function is_holiday( $ccs, $cce, $w=0 ) {
 		// A worker can be forced
-		if ( !$w )
+		if ( ! $w ) {
 			$w = $this->worker;
-		$is_holiday = false;
-		$result = appointments_get_worker_exceptions( $w, 'closed', $this->location );
-		if ( $result != null  && strpos( $result->days, date( 'Y-m-d', $ccs ) ) !== false )
-			$is_holiday = true;
+		}
 
-		return apply_filters( 'app_is_holiday', $is_holiday, $ccs, $cce, $this->service, $w );
+		return appointments_is_worker_holiday( $w, $ccs, $cce );
 	}
 
 	/**
@@ -2142,56 +2139,11 @@ class Appointments {
 	 */
 	function is_break( $ccs, $cce, $w=0 ) {
 		// A worker can be forced
-		if ( !$w )
+		if ( ! $w ) {
 			$w = $this->worker;
-
-		// Try getting cached preprocessed hours
-		$days = wp_cache_get('app-break_times-for-' . $w);
-		if (!$days) {
-			// Preprocess and cache workhours
-			// Look where our working hour ends
-			$result_days = appointments_get_worker_working_hours( 'closed', $w, $this->location );
-			if ( $result_days && is_object( $result_days ) && ! empty( $result_days->hours ) ) {
-				$days = $result_days->hours;
-			}
-			if ( $days ) {
-				wp_cache_set( 'app-break_times-for-' . $w, $days );
-			}
 		}
-		if (!is_array($days) || empty($days)) return false;
 
-		// What is the name of this day?
-		$this_days_name = date("l", $ccs );
-		// This days midnight
-		$this_day = date("d F Y", $ccs );
-
-		foreach( $days as $day_name=>$day ) {
-			if ( $day_name == $this_days_name && isset( $day["active"] ) && 'yes' == $day["active"] ) {
-				$end = $this->to_military( $day["end"] );
-				// Special case: End is 00:00
-				if ( '00:00' == $end )
-					$end = '24:00';
-				if ( $ccs >= strtotime( $this_day. " ". $this->to_military( $day["start"] ), $this->local_time ) &&
-					$cce <= $this->str2time( $this_day, $end ) ) {
-					return true;
-				}
-			} else if ($day_name == $this_days_name && isset($day["active"]) && is_array($day["active"])) {
-				foreach ($day["active"] as $idx => $active) {
-					$end = $this->to_military( $day["end"][$idx] );
-					// Special case: End is 00:00
-					if ('00:00' == $end) $end = '24:00';
-
-					if (
-						$ccs >= strtotime( $this_day. " ". $this->to_military( $day["start"][$idx] ), $this->local_time )
-						&&
-						$cce <= $this->str2time( $this_day, $end )
-					) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
+		return appointments_is_interval_break( $ccs, $cce, $w, $this->location );
 	}
 
 	/**
@@ -2339,70 +2291,7 @@ class Appointments {
 		if ( $this->worker )
 			return $this->get_capacity();
 
-		// Dont proceed further if capacity is forced
-		if ( has_filter( 'app_get_capacity' ) )
-			return apply_filters( 'app_get_capacity', 1, $this->service, $this->worker );
-
-		$n = 0;
-		$workers = appointments_get_workers_by_service( $this->service );
-		if (!$workers) return $this->get_capacity(); // If there are no workers for this service, apply the service capacity
-
-		foreach( $workers as $worker ) {
-
-			// Try getting cached preprocessed hours
-			$days = wp_cache_get('app-open_times-for-' . $worker->ID);
-			if (!$days) {
-				// Preprocess and cache workhours
-				// Look where our working hour ends
-				$result_days = appointments_get_worker_working_hours( 'open', $worker->ID, $this->location );
-				if ( $result_days && is_object( $result_days ) && ! empty( $result_days->hours ) ) {
-					$days = $result_days->hours;
-				}
-				if ( $days ) {
-					wp_cache_set( 'app-open_times-for-' . $worker->ID, $days );
-				}
-			}
-			if (!is_array($days) || empty($days)) continue;
-
-
-			if ( is_array( $days ) ) {
-				// What is the name of this day?
-				$this_days_name = date("l", $ccs );
-				// This days midnight
-				$this_day = date("d F Y", $ccs );
-
-				foreach( $days as $day_name=>$day ) {
-					if ( $day_name == $this_days_name && isset( $day["active"] ) && 'yes' == $day["active"] ) {
-						$end = $this->to_military( $day["end"] );
-						// Special case: End is 00:00
-						if ( '00:00' == $end )
-							$end = '24:00';
-						if (
-							$ccs >= strtotime( $this_day. " ". $this->to_military( $day["start"] ), $this->local_time )
-							&&
-							$cce <= $this->str2time( $this_day, $end )
-							&&
-							!$this->is_break( $ccs, $cce, $worker->ID )
-						) $n++;
-					}
-				}
-			}
-
-		}
-
-		// We have to check service capacity too
-		$service = appointments_get_service( $this->service );
-		if ( $service != null ) {
-			if ( !$service->capacity ) {
-				$capacity = $n; // No service capacity limit
-			}
-			else
-				$capacity = min( $service->capacity, $n ); // Return whichever smaller
-		}
-		else
-			$capacity = 1; // No service ?? - Not possible but let's be safe
-
-		return $capacity;
+		return appointments_get_available_workers_for_interval( $ccs, $cce, $this->service, $this->location );
 	}
 
 	/**

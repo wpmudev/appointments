@@ -109,6 +109,11 @@ class Appointments_Appointment {
 		return $appointments->get_client_name( $this->ID );
 	}
 
+	/**
+	 * Return start date in YYYY-MM-DD format
+	 *
+	 * @return false|string
+	 */
 	public function get_start_date() {
 		if ( ! $this->start ) {
 			return '';
@@ -116,11 +121,40 @@ class Appointments_Appointment {
 		return date( 'Y-m-d', strtotime( $this->start ) );
 	}
 
+	/**
+	 * Return start time in HH:MM format
+	 *
+	 * @return false|string
+	 */
 	public function get_start_time() {
 		if ( ! $this->start ) {
 			return '';
 		}
 		return date( 'H:i', strtotime( $this->start ) );
+	}
+
+	/**
+	 * Return end date in YYYY-MM-DD format
+	 *
+	 * @return false|string
+	 */
+	public function get_end_date() {
+		if ( ! $this->end ) {
+			return '';
+		}
+		return date( 'Y-m-d', strtotime( $this->end ) );
+	}
+
+	/**
+	 * Return end time in HH:MM format
+	 *
+	 * @return false|string
+	 */
+	public function get_end_time() {
+		if ( ! $this->end ) {
+			return '';
+		}
+		return date( 'H:i', strtotime( $this->end ) );
 	}
 
 	public function get_start_timestamp() {

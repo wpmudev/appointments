@@ -228,43 +228,43 @@ class App_Installer {
 				'Sunday'    =>
 					array(
 						'active' => 'no',
-						'start'  => '8:00 am',
-						'end'    => '1:00 pm',
+						'start'  => '08:00',
+						'end'    => '13:00',
 					),
 				'Monday'    =>
 					array(
 						'active' => 'yes',
-						'start'  => '8:00 am',
-						'end'    => '5:00 pm',
+						'start'  => '08:00',
+						'end'    => '17:00',
 					),
 				'Tuesday'   =>
 					array(
 						'active' => 'yes',
-						'start'  => '8:00 am',
-						'end'    => '5:00 pm',
+						'start'  => '08:00',
+						'end'    => '17:00',
 					),
 				'Wednesday' =>
 					array(
 						'active' => 'yes',
-						'start'  => '8:00 am',
-						'end'    => '5:00 pm',
+						'start'  => '08:00',
+						'end'    => '17:00',
 					),
 				'Thursday'  =>
 					array(
 						'active' => 'yes',
-						'start'  => '8:00 am',
-						'end'    => '5:00 pm',
+						'start'  => '08:00',
+						'end'    => '17:00',
 					),
 				'Friday'    =>
 					array(
 						'active' => 'yes',
-						'start'  => '8:00 am',
-						'end'    => '5:00 pm',
+						'start'  => '08:00',
+						'end'    => '17:00',
 					),
 				'Saturday'  =>
 					array(
 						'active' => 'no',
-						'start'  => '8:00 am',
+						'start'  => '08:00',
 						'end'    => '1:00 pm',
 					),
 			),
@@ -272,44 +272,44 @@ class App_Installer {
 				'Sunday'    =>
 					array(
 						'active' => 'no',
-						'start'  => '12:00 pm',
-						'end'    => '1:00 pm',
+						'start'  => '12:00',
+						'end'    => '13:00',
 					),
 				'Monday'    =>
 					array(
 						'active' => 'no',
-						'start'  => '12:00 pm',
-						'end'    => '1:00 pm',
+						'start'  => '12:00',
+						'end'    => '13:00',
 					),
 				'Tuesday'   =>
 					array(
 						'active' => 'no',
-						'start'  => '12:00 pm',
-						'end'    => '1:00 pm',
+						'start'  => '12:00',
+						'end'    => '13:00',
 					),
 				'Wednesday' =>
 					array(
 						'active' => 'no',
-						'start'  => '12:00 pm',
-						'end'    => '1:00 pm',
+						'start'  => '12:00',
+						'end'    => '13:00',
 					),
 				'Thursday'  =>
 					array(
 						'active' => 'no',
-						'start'  => '12:00 pm',
-						'end'    => '1:00 pm',
+						'start'  => '12:00',
+						'end'    => '13:00',
 					),
 				'Friday'    =>
 					array(
 						'active' => 'no',
-						'start'  => '12:00 pm',
-						'end'    => '1:00 pm',
+						'start'  => '12:00',
+						'end'    => '13:00',
 					),
 				'Saturday'  =>
 					array(
 						'active' => 'no',
-						'start'  => '12:00 pm',
-						'end'    => '1:00 pm',
+						'start'  => '12:00',
+						'end'    => '13:00',
 					),
 			)
 		);
