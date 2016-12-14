@@ -935,7 +935,10 @@ function appointments_get_appointments( $args = array() ) {
 			}
 
 			// Parse every Date query
-			foreach ( $date_queries as $date_query ) {
+			foreach ( $date_queries as $key => $date_query ) {
+				if ( 'condition' === $key ) {
+					continue;
+				}
 				$date_query = _appointments_parse_date_query( $date_query );
 				if ( $date_query ) {
 					$date_query_where[] = $wpdb->prepare( $date_query['field'] . $date_query['compare'] . "%s", $date_query['value'] );
