@@ -17,10 +17,6 @@ class Appointments_Upgrader {
 			$this->upgrade_1_7_1();
 		}
 
-		if ( version_compare( $saved_version, '1.7.2-beta1', '<' ) ) {
-			$this->upgrade_1_7_2_beta1();
-		}
-
 		if ( version_compare( $saved_version, '1.9.4', '<' ) ) {
 			$this->upgrade_1_9_4();
 		}
@@ -71,11 +67,6 @@ class Appointments_Upgrader {
 		}
 	}
 
-	private function upgrade_1_7_2_beta1() {
-		$appointments = appointments();
-		$gcal_api = $appointments->get_gcal_api();
-		$gcal_api->maybe_sync();
-	}
 
 	private function upgrade_1_9_4() {
 		global $wpdb;

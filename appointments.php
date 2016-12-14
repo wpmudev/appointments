@@ -216,6 +216,10 @@ class Appointments {
 			return;
 		}
 
+		if ( false === $db_version ) {
+		    appointments_activate();
+        }
+
 		appointments_clear_cache();
 
 		include_once( 'includes/class-app-upgrader.php' );
