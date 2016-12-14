@@ -21,6 +21,10 @@ class Appointments_Upgrader {
 			$this->upgrade_1_9_4();
 		}
 
+		if ( version_compare( $saved_version, '1.9.4.1', '<' ) ) {
+			$this->upgrade_1_9_4();
+		}
+
 		update_option( 'app_db_version', $new_version );
 
 	}
