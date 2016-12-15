@@ -127,7 +127,11 @@ class App_Users_AdditionalFields {
 	 * @return bool
 	 */
 	private function _are_editable() {
-		return true;
+		$options = appointments_get_options();
+		if ( is_multisite() && is_super_admin() ) {
+			return true;
+		}
+		return ! empty( $options['additional_fields-admin_edit'] );
 	}
 
 
