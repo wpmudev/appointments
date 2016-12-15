@@ -123,8 +123,9 @@ class App_Locations_LocationsWorker {
 		return $data;
 	}
 
-	public function show_appointment_location ($out, $appointment) {
+	public function show_appointment_location ($deprecated, $appointment) {
 		$editable = '';
+		$out = '';
 		$all = $this->_locations->get_all();
 		$editable .= '<span class="title">' . __('Location', 'appointments') . '</span>';
 		$editable .= '<select name="location"><option value=""></option>';
@@ -135,7 +136,7 @@ class App_Locations_LocationsWorker {
 		}
 		$editable .= '</select>';
 
-		return $out . "<label>{$editable}</label>";
+		echo $out . "<label>{$editable}</label>";
 	}
 
 	public function include_scripts () {

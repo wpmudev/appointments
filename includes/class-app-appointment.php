@@ -22,6 +22,9 @@ class Appointments_Appointment {
 	public $gcal_updated = '';
 
 	public function __construct( $appointment ) {
+		if ( is_array( $appointment ) ) {
+			$appointment = (object) $appointment;
+		}
 		foreach ( get_object_vars( $appointment ) as $key => $value ) {
 			$this->$key = $this->_sanitize_field( $key, $value );
 		}
@@ -188,7 +191,6 @@ class Appointments_Appointment {
 
 		return $email;
 	}
-
 
 }
 

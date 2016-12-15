@@ -45,7 +45,7 @@ class Appointments_Google_Calendar {
 		add_action( 'appointments_gcal_sync', array( $this, 'maybe_sync' ) );
 		add_action( 'wp_ajax_appointments_gcal_sync', array( $this, 'maybe_sync' ) );
 
-		add_filter( 'app-appointments_list-edit-client', array( $this, 'edit_inline_gcal_fields' ), 10, 2 );
+		add_action( 'app-appointments_list-edit-client', array( $this, 'edit_inline_gcal_fields' ), 10, 2 );
 		$options = appointments_get_options();
 
 		if ( isset( $options['gcal_api_mode'] ) ) {
@@ -144,11 +144,12 @@ class Appointments_Google_Calendar {
 		return $schedules;
 	}
 
-	public function edit_inline_gcal_fields( $html, $app ) {
+	public function edit_inline_gcal_fields( $deprecated, $app ) {
 		if ( ! isset( $app->gcal_ID ) || ! $app->gcal_ID ) {
-			return $html;
+			return;
 		}
 
+		$html = '';
 		$show = false;
 		$description = '';
 		if ( $app->worker && $this->switch_to_worker( $app->worker ) ) {
@@ -173,7 +174,7 @@ class Appointments_Google_Calendar {
 			$html .= '<textarea class="widefat" rows="10" disabled="disabled">' . esc_textarea( $description ) . '</textarea>';
 			$html .= '</label>';
 		}
-		return $html;
+		echo $html;
 	}
 
 

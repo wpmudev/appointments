@@ -481,7 +481,6 @@ function appointments_get_workers( $args = array() ) {
 		//'ID DESC', 'name DESC', 'start DESC', 'end DESC', 'duration DESC', 'price DESC', 'RAND()', 'name ASC', 'name DESC' ) );
 
 	$order_by = apply_filters( 'app_get_workers_orderby', $order_by );
-	$order_query = "";
 	$order_query = "ORDER BY $order_by $order";
 
 	$limit_query = '';

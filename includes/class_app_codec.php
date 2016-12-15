@@ -19,15 +19,7 @@ abstract class App_Template {
 	}
 
 	public static function get_status_names () {
-		if (!self::$_status_names) self::$_status_names = apply_filters('app-template-status_names', apply_filters( 'app_statuses', array(
-			'pending' => __('Pending', 'appointments'),
-			'paid' => __('Paid', 'appointments'),
-			'confirmed' => __('Confirmed', 'appointments'),
-			'completed' => __('Completed', 'appointments'),
-			'reserved' => __('Reserved by GCal', 'appointments'),
-			'removed' => __('Removed', 'appointments'),
-		)));
-		return self::$_status_names;
+		return appointments_get_statuses();
 	}
 
 	public static function get_currencies () {

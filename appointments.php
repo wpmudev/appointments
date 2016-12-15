@@ -964,20 +964,21 @@ class Appointments {
 	function get_field_name( $key ) {
 
 		$field_names = array(
-						'name'		=> __('Name', 'appointments'),
-						'email'		=> __('Email', 'appointments'),
-						'phone'		=> __('Phone', 'appointments'),
-						'address'	=> __('Address', 'appointments'),
-						'city'		=> __('City', 'appointments'),
-						'note'		=> __('Note', 'appointments')
-					);
+            'name'		=> __('Name', 'appointments'),
+            'email'		=> __('Email', 'appointments'),
+            'phone'		=> __('Phone', 'appointments'),
+            'address'	=> __('Address', 'appointments'),
+            'city'		=> __('City', 'appointments'),
+            'note'		=> __('Note', 'appointments')
+        );
 
 		$field_names = apply_filters( 'app_get_field_name', $field_names );
 
-		if ( array_key_exists( $key, $field_names ) )
-			return $field_names[$key];
-		else
+		if ( array_key_exists( $key, $field_names ) ) {
+			return $field_names[ $key ];
+		} else {
 			return __( 'Not defined', 'appointments' );
+		}
 	}
 
 	/**

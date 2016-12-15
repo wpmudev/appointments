@@ -209,303 +209,203 @@ class Appointments_AJAX {
 	// Edit or create appointments
 	function inline_edit() {
 		global $appointments;
-		$safe_date_format = $appointments->safe_date_format();
-		// Make a locale check to update locale_error flag
-		$date_check = $appointments->to_us( date_i18n( $safe_date_format, strtotime('today') ) );
 
-		global $wpdb;
-		$app_id = $_POST["app_id"];
-		$end_datetime = '';
+		$app_id = absint( $_POST["app_id"] );
+		$app = false;
 		if ( $app_id ) {
 			$app = appointments_get_appointment( $app_id );
-			$start_date_timestamp = date("Y-m-d", strtotime($app->start));
-			if ( $appointments->locale_error ) {
-				$start_date = date( $safe_date_format, strtotime( $app->start ) );
-			} else {
-				$start_date = date_i18n( $safe_date_format, strtotime( $app->start ) );
-			}
+		}
 
-			$start_time = date_i18n( $appointments->time_format, strtotime( $app->start ) );
+		if ( $app ) {
+			$start_date_timestamp = date( "Y-m-d", $app->get_start_timestamp() );
 			$end_datetime = date_i18n( $appointments->datetime_format, strtotime( $app->end ) );
+
 			// Is this a registered user?
 			if ( $app->user ) {
-				$name = get_user_meta( $app->user, 'app_name', true );
-				if ( $name )
-					$app->name = $app->name && !(defined('APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES') && APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES) ? $app->name : $name;
+				$fields = array( 'name', 'email', 'phone', 'address', 'city' );
 
-				$email = get_user_meta( $app->user, 'app_email', true );
-				if ( $email )
-					$app->email = $app->email && !(defined('APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES') && APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES) ? $app->email : $email;
-
-				$phone = get_user_meta( $app->user, 'app_phone', true );
-				if ( $phone )
-					$app->phone = $app->phone && !(defined('APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES') && APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES) ? $app->phone : $phone;
-
-				$address = get_user_meta( $app->user, 'app_address', true );
-				if ( $address )
-					$app->address = $app->address && !(defined('APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES') && APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES) ? $app->address : $address;
-
-				$city = get_user_meta( $app->user, 'app_city', true );
-				if ( $city )
-					$app->city = $app->city && !(defined('APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES') && APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES) ? $app->city : $city;
+				// Fill up the fields
+				foreach ( $fields as $field ) {
+					$value = get_user_meta( $app->user, 'app_' . $field, true );
+					if ( $value ) {
+						$app->$field = $value;
+					}
+				}
 			}
 		} else {
-			$app = new stdClass(); // This means insert a new app object
-			$app->ID = 0;
-			// Set other fields to default so that we don't get notice messages
-			$app->user = $app->location = $app->worker = 0;
-			$app->created = $app->end = $app->name = $app->email = $app->phone = $app->address = $app->city = $app->status = $app->sent = $app->sent_worker = $app->note = '';
+			$app = array(
+				'ID' => 0,
+				'user' => 0,
+				'worker' => 0,
+				'location' => 0,
+				'service' => appointments_get_services_min_id(),
+				'price' => $appointments->get_price()
+			);
 
+			// @TODO Remove this shit
 			// Get first service and its price
-			$app->service = appointments_get_services_min_id();
-			$_REQUEST['app_service_id'] = $app->service;
+			$_REQUEST['app_service_id'] = $app['service'];
 			$_REQUEST['app_provider_id'] = 0;
-			$app->price = $appointments->get_price( );
+			
+			$app = new Appointments_Appointment( $app );
 
-			// Select time as next 1 hour
-			$start_time = date_i18n( $appointments->time_format, intval(($appointments->local_time + 60*$appointments->get_min_time())/3600)*3600 );
-
-			$start_date_timestamp = date("Y-m-d", $appointments->local_time + 60*$appointments->get_min_time());
 			// Set start date as now + 60 minutes.
-			if ( $appointments->locale_error ) {
-				$start_date = date( $safe_date_format, $appointments->local_time + 60*$appointments->get_min_time() );
-			}
-			else {
-				$start_date = date_i18n( $safe_date_format, $appointments->local_time + 60*$appointments->get_min_time() );
-			}
+			$current_time = current_time( 'timestamp' );
+			$start_date_timestamp = date( "Y-m-d", $current_time + 60 * $appointments->get_min_time() );
+			$end_datetime = '';
 		}
 
-		$html = '';
-		$html .= '<tr class="inline-edit-row inline-edit-row-post quick-edit-row-post">';
-
-		$columns = isset( $_POST['columns'] ) ? absint( $_POST['columns'] ) : absint( $_POST['col_len'] );
-		$html .= isset($_POST['col_len']) && is_numeric($_POST['col_len'])
-			? '<td colspan="' . $columns . '" class="colspanchange">'
-			: '<td colspan="6" class="colspanchange">'
-		;
-
-		$html .= '<fieldset class="inline-edit-col-left" style="width:33%">';
-		$html .= '<div class="inline-edit-col">';
-		$html .= '<h4>'.__('CLIENT', 'appointments').'</h4>';
-		/* user */
-		$html .= '<label>';
-		$html .= '<span class="title">'.__('User', 'appointments'). '</span>';
-		$html .= wp_dropdown_users( array( 'show_option_all'=>__('Not registered user','appointments'), 'show'=>'user_login', 'echo'=>0, 'selected' => $app->user, 'name'=>'user' ) );
-		$html .= '</label>';
-		/* Client name */
-		$html .= '<label>';
-		$html .= '<span class="title">'.$appointments->get_field_name('name'). '</span>';
-		$html .= '<span class="input-text-wrap">';
-		$html .= '<input type="text" name="cname" class="ptitle" value="' . esc_attr(stripslashes($app->name)) . '" />';
-		$html .= '</span>';
-		$html .= '</label>';
-		/* Client email */
-		$html .= '<label>';
-		$html .= '<span class="title">'.$appointments->get_field_name('email'). '</span>';
-		$html .= '<span class="input-text-wrap">';
-		$html .= '<input type="text" name="email" class="ptitle" value="' . esc_attr($app->email) . '" />';
-		$html .= '</span>';
-		$html .= '</label>';
-		/* Client Phone */
-		$html .= '<label>';
-		$html .= '<span class="title">'.$appointments->get_field_name('phone'). '</span>';
-		$html .= '<span class="input-text-wrap">';
-		$html .= '<input type="text" name="phone" class="ptitle" value="' . esc_attr(stripslashes($app->phone)) . '" />';
-		$html .= '</span>';
-		$html .= '</label>';
-		/* Client Address */
-		$html .= '<label>';
-		$html .= '<span class="title">'.$appointments->get_field_name('address'). '</span>';
-		$html .= '<span class="input-text-wrap">';
-		$html .= '<input type="text" name="address" class="ptitle" value="' . esc_attr(stripslashes($app->address)) . '" />';
-		$html .= '</span>';
-		$html .= '</label>';
-		/* Client City */
-		$html .= '<label>';
-		$html .= '<span class="title">'.$appointments->get_field_name('city'). '</span>';
-		$html .= '<span class="input-text-wrap">';
-		$html .= '<input type="text" name="city" class="ptitle" value="' . esc_attr(stripslashes($app->city)) . '" />';
-		$html .= '</span>';
-		$html .= '</label>';
-		$html .= apply_filters('app-appointments_list-edit-client', '', $app);
-		$html .= '</div>';
-		$html .= '</fieldset>';
-
-		$html .= '<fieldset class="inline-edit-col-center" style="width:28%">';
-		$html .= '<div class="inline-edit-col">';
-		$html .= '<h4>'.__('SERVICE', 'appointments').'</h4>';
-		/* Services */
-		$services = appointments_get_services();
-		$html .= '<label>';
-		$html .= '<span class="title">'.__('Name', 'appointments'). '</span>';
-		$html .= '<select name="service">';
-		if ( $services ) {
-			foreach ( $services as $service ) {
-				$html .= '<option value="' . esc_attr($service->ID) . '"'.selected( $app->service, $service->ID, false ).'>'. stripslashes( $service->name ) . '</option>';
-			}
-		}
-		$html .= '</select>';
-		$html .= '</label>';
-		/* Workers */
+		$column_length = isset( $_POST['col_len'] ) && is_numeric( $_POST['col_len'] ) ? absint( $_POST['col_len'] ) : 6;
+		$columns = isset( $_POST['columns'] ) ? absint( $_POST['columns'] ) : $column_length;
+		$dropdown_users = wp_dropdown_users( array(
+			'show_option_all' => __( 'Not registered user', 'appointments' ),
+			'show'            => 'user_login',
+			'echo'            => 0,
+			'selected'        => $app->user,
+			'name'            => 'user'
+		) );
 		$workers = appointments_get_workers();
-		$html .= '<label>';
-		$html .= '<span class="title">'.__('Provider', 'appointments'). '</span>';
-		$html .= '<select name="worker">';
-		// Always add an "Our staff" field
-		$html .= '<option value="0">'. __('No specific provider', 'appointments') . '</option>';
-		if ( $workers ) {
-			foreach ( $workers as $worker ) {
-				if ( $app->worker == $worker->ID ) {
-					$sel = ' selected="selected"';
-				}
-				else
-					$sel = '';
-				$html .= '<option value="' . esc_attr($worker->ID) . '"'.$sel.'>'. appointments_get_worker_name( $worker->ID, false ) . '</option>';
-			}
-		}
-		$html .= '</select>';
-		$html .= '</label>';
-		/* Price */
-		$html .= '<label>';
-		$html .= '<span class="title">'.__('Price', 'appointments'). '</span>';
-		$html .= '<span class="input-text-wrap">';
-		$html .= '<input type="text" name="price" style="width:50%" class="ptitle" value="' . esc_attr($app->price) . '" />';
-		$html .= '</span>';
-		$html .= '</label>';
-		$html .= '</label>';
-		$html .= apply_filters('app-appointments_list-edit-services', '', $app);
-		$html .= '</div>';
-		$html .= '</fieldset>';
 
-		$html .= '<fieldset class="inline-edit-col-right" style="width:38%">';
-		$html .= '<div class="inline-edit-col">';
-		$html .= '<h4>'.__('APPOINTMENT', 'appointments').'</h4>';
-		/* Created - Don't show for a new app */
-		if ( $app_id ) {
-			$html .= '<label>';
-			$html .= '<span class="title">'.__('Created', 'appointments'). '</span>';
-			$html .= '<span class="input-text-wrap" style="height:26px;padding-top:4px;">';
-			$html .= $app->get_start_date();
-			$html .= '</span>';
-			$html .= '</label>';
-		}
-		/* Start */
-		$html .= '<label style="float:left;width:65%">';
-		$html .= '<span class="title">'.__('Start', 'appointments'). '</span>';
-		$html .= '<span class="input-text-wrap" >';
-		$html .= '<input type="text" name="date" class="datepicker" size="12" placeholder="YYYY-MM-DD" value="' . esc_attr($start_date_timestamp) . '"  />';
-		$html .= '</label>';
-		$html .= '<label style="float:left;width:30%; padding-left:5px;">';
+		$user_fields = array( 'name', 'email', 'phone', 'address', 'city' );
+
+		$options = appointments_get_options();
 
 		// Check if an admin min time (time base) is set. @since 1.0.2
-		if ( isset( $appointments->options["admin_min_time"] ) && $appointments->options["admin_min_time"] ) {
-			$min_time = $appointments->options["admin_min_time"];
-		} else {
-			$min_time = $appointments->get_min_time();
-		}
-
+		$min_time = $options["admin_min_time"] ? $options["admin_min_time"] : $appointments->get_min_time();
 		$min_secs = 60 * apply_filters( 'app_admin_min_time', $min_time );
-		$html .= '<select name="time" >';
-		$_start_time = '';
-		if ( $app_id ) {
-			$_start_time = $app->get_start_time();
-		}
-		for ( $t=0; $t<3600*24; $t=$t+$min_secs ) {
-			$s = array();
-			$dhours = $appointments->secs2hours( $t ); // Hours in 08:30 format
-			$dhours_value = $appointments->secs_to_24h( $t ); // Hours in 08:30 format
 
-			$s[] = $dhours_value == $_start_time
-				? 'selected="selected"'
-				: ''
-			;
-			$s[] = 'value="' . esc_attr($dhours_value) . '"';
+		$services = appointments_get_services();
 
-			$html .= '<option ' . join(' ', array_values(array_filter($s))) . '>';
-			$html .= $dhours;
-			$html .= '</option>';
-		}
-		$html .= '</select>';
-		$html .= '</span>';
-		$html .= '</label>';
-		$html .= '<div style="clear:both; height:0"></div>';
-		/* End - Don't show for a new app */
-		if ( $app_id ) {
-			$html .= '<label style="margin-top:8px">';
-			$html .= '<span class="title">'.__('End', 'appointments'). '</span>';
-			$html .= '<span class="input-text-wrap" style="height:26px;padding-top:4px;">';
-			$html .= $end_datetime;
-			$html .= '</span>';
-			$html .= '</label>';
-		}
-		/* Note */
-		$html .= '<label>';
-		$html .= '<span class="title">'.$appointments->get_field_name('note'). '</span>';
-		$html .= '<textarea name="note" cols="22" rows=1">';
-		$html .= esc_textarea(stripslashes($app->note));
-		$html .= '</textarea>';
-		$html .= '</label>';
-		/* Status */
-		//$statuses = $this->get_statuses();
-		$statuses = App_Template::get_status_names();
-		$html .= '<label>';
-		$html .= '<span class="title">'.__('Status', 'appointments'). '</span>';
-		$html .= '<span class="input-text-wrap">';
-		$html .= '<select name="status">';
-		if ( $statuses ) {
-			foreach ( $statuses as $status => $status_name ) {
-				if ( $app->status == $status )
-					$sel = ' selected="selected"';
-				else
-					$sel = '';
-				$html .= '<option value="'.$status.'"'.$sel.'>'. $status_name . '</option>';
-			}
-		}
-		$html .= '</select>';
-		$html .= '</span>';
-		$html .= '</label>';
-		/* Confirmation email */
-		// Default is "checked" for a new appointment
-		if ( $app_id ) {
-			$c = '';
-			$text = __('(Re)send confirmation email', 'appointments');
-		}
-		else {
-			$c = ' checked="checked"';
-			$text = __('Send confirmation email', 'appointments');
-		}
-
-		$html .= '<label>';
-		$html .= '<span class="title">'.__('Confirm','appointments').'</span>';
-		$html .= '<span class="input-text-wrap">';
-		$html .= '<input type="checkbox" name="resend" value="1" '.$c.' />&nbsp;' .$text;
-		$html .= '</span>';
-		$html .= '</label>';
-
-		$html .= '</div>';
-		$html .= '</fieldset>';
-		/* General fields required for save and cancel */
-		$html .= '<p class="submit inline-edit-save">';
-		$html .= '<a href="javascript:void(0)" title="'._x('Cancel', 'Drop current action', 'appointments').'" class="button-secondary cancel alignleft">'._x('Cancel', 'Drop current action', 'appointments').'</a>';
-		if ( 'reserved' == $app->status ) {
-			$js = 'style="display:none"';
-			$title = __('GCal reserved appointments cannot be edited here. Edit them in your Google calendar.', 'appointments');
-		}
-		else {
-			$js = 'href="javascript:void(0)"';
-			$title = __('Click to save or update', 'appointments');
-		}
-		$html .= '<a '.$js.' title="' . esc_attr($title) . '" class="button-primary save alignright" data-app-id="' . $app->ID . '">'.__('Save / Update','appointments').'</a>';
-		$html .= '<img class="waiting" style="display:none;" src="'.admin_url('images/wpspin_light.gif').'" alt="">';
-		$html .= '<input type="hidden" name="app_id" value="' . esc_attr($app->ID) . '">';
-		$html .= '<span class="error" style="display:none"></span>';
-		$html .= '<br class="clear">';
-		$html .= '</p>';
-
-		$html .= '</td>';
-		$html .= '</tr>';
-
-		die( json_encode( array( 'result'=>$html)));
+		ob_start();
+		?>
+		<tr class="inline-edit-row inline-edit-row-post quick-edit-row-post">
+			<td colspan="<?php echo $columns; ?>" class="colspanchange">
+				<fieldset class="inline-edit-col-left" style="width:33%">
+					<div class="inline-edit-col">
+						<h4><?php esc_html_e( 'CLIENT', 'appointments' ); ?></h4>
+						<label>
+							<span class="title"><?php esc_html_e('User', 'appointments'); ?></span>
+							<?php echo $dropdown_users; ?>
+						</label>
+						<?php foreach ( $user_fields as $field ): ?>
+							<?php $name = 'name' === $field ? 'cname' : $field; ?>
+							<label>
+								<span class="title"><?php echo $appointments->get_field_name($name); ?></span>
+								<span class="input-text-wrap">
+									<input type="text" name="<?php echo esc_attr( $name ); ?>" class="ptitle" value="<?php echo esc_attr(stripslashes($app->$field)); ?>" />
+								</span>
+							</label>
+						<?php endforeach; ?>
+						<?php do_action( 'app-appointments_list-edit-client', '', $app ); ?>
+					</div>
+				</fieldset>
+				<fieldset class="inline-edit-col-center" style="width:28%">
+					<div class="inline-edit-col">
+						<h4><?php esc_html_e('SERVICE', 'appointments'); ?></h4>
+						<label>
+							<span class="title"><?php esc_html_e('Name', 'appointments'); ?></span>
+							<select name="service">
+								<?php foreach ( $services as $service ): ?>
+									<option value="<?php echo $service->ID; ?>" <?php selected( $app->service, $service->ID ); ?>><?php echo esc_html( $service->name ); ?></option>
+								<?php endforeach; ?>
+							</select>
+						</label>
+						<label>
+							<span class="title"><?php esc_html_e('Provider', 'appointments'); ?></span>
+							<select name="worker">
+								<option value="0"><?php esc_html_e('No specific provider', 'appointments'); ?></option>
+								<?php foreach ( $workers as $worker ): ?>
+									<option value="<?php echo $worker->ID; ?>" <?php selected( $app->worker, $worker->ID ); ?>><?php echo esc_html( appointments_get_worker_name( $worker->ID, false ) ); ?></option>
+								<?php endforeach; ?>
+							</select>
+						</label>
+						<label>
+							<span class="title"><?php esc_html_e('Price', 'appointments'); ?></span>
+							<span class="input-text-wrap">
+								<input type="text" name="price" style="width:50%" class="ptitle" value="<?php echo esc_attr($app->price); ?>" />
+							</span>
+						</label>
+						<?php do_action('app-appointments_list-edit-services', '', $app); ?>
+					</div>
+				</fieldset>
+				<fieldset class="inline-edit-col-right" style="width:38%">
+					<div class="inline-edit-col">
+						<h4><?php esc_html_e('APPOINTMENT', 'appointments'); ?></h4>
+						<?php if ( $app_id ): ?>
+							<label>
+								<span class="title"><?php esc_html_e('Created', 'appointments'); ?></span>
+								<span class="input-text-wrap" style="height:26px;padding-top:4px;">
+									<?php echo $app->get_start_date(); ?>
+								</span>
+							</label>
+						<?php endif; ?>
+						<label style="float:left;width:65%">
+							<span class="title"><?php esc_html_e('Start', 'appointments'); ?></span>
+							<span class="input-text-wrap" >
+								<input type="text" name="date" class="datepicker" size="12" placeholder="YYYY-MM-DD" value="<?php echo esc_attr( $start_date_timestamp ); ?>"  />
+							</span>
+						</label>
+						<label style="float:left;width:30%; padding-left:5px;">
+							<select name="time" >
+								<?php
+									$_start_time = $app_id ? $app->get_start_time() : '';
+									for ( $t = 0; $t < 3600 * 24; $t = $t + $min_secs ): ?>
+										<?php $dhours_value = $appointments->secs_to_24h( $t ); // Hours in 08:30 format ?>
+											<option value="<?php echo esc_attr($dhours_value); ?>" <?php selected( $dhours_value, $_start_time ); ?>><?php echo $appointments->secs2hours( $t ); ?></option>
+									<?php endfor; ?>
+							</select>
+						</label>
+						<div style="clear:both; height:0"></div>
+						<?php if ( $app_id ): ?>
+							<label style="margin-top:8px">
+								<span class="title"><?php  esc_html_e('End', 'appointments'); ?></span>
+								<span class="input-text-wrap" style="height:26px;padding-top:4px;">
+									<?php echo $end_datetime; ?>
+								</span>
+							</label>
+						<?php endif; ?>
+						<label>
+							<span class="title"><?php echo $appointments->get_field_name('note'); ?></span>
+							<textarea name="note" cols="22" rows=1"><?php echo esc_textarea( stripslashes( $app->note ) ); ?></textarea>
+						</label>
+						<label>
+							<span class="title"><?php esc_html_e( 'Status', 'appointments'); ?></span>
+							<span class="input-text-wrap">
+								<select name="status">
+									<?php foreach ( appointments_get_statuses() as $status => $status_name ): ?>
+										<option value="<?php echo esc_attr( $status ); ?>" <?php selected( $app->status, $status ); ?>><?php echo esc_html( $status_name ); ?></option>
+									<?php endforeach; ?>
+								</select>
+							</span>
+						</label>
+						<label>
+							<span class="title"><?php esc_html_e( 'Confirm', 'appointments' ); ?></span>
+							<span class="input-text-wrap">
+								<?php if ( $app_id ): ?>
+									<input type="checkbox" name="resend" value="1" />&nbsp;<?php esc_html_e('(Re)send confirmation email', 'appointments' ); ?>
+								<?php else: ?>
+									<input type="checkbox" name="resend" value="1" checked="checked" />&nbsp;<?php esc_html_e('Send confirmation email', 'appointments' ); ?>
+								<?php endif; ?>
+							</span>
+						</label>
+					</div>
+				</fieldset>
+				<p class="submit inline-edit-save">
+					<a href="javascript:void(0)" title="<?php echo esc_attr_x('Cancel', 'Drop current action', 'appointments'); ?>" class="button-secondary cancel alignleft"><?php echo esc_html_x('Cancel', 'Drop current action', 'appointments'); ?></a>
+					<?php if ( 'reserved' == $app->status ): ?>
+						<a style="display:none" title="<?php esc_attr_e('GCal reserved appointments cannot be edited here. Edit them in your Google calendar.', 'appointments'); ?>" class="button-primary save alignright" data-app-id="<?php echo $app->ID; ?>"><?php esc_html_e('Save / Update','appointments'); ?></a>
+					<?php else: ?>
+						<a href="javascript:void(0)" title="<?php esc_attr_e('Click to save or update', 'appointments'); ?>" class="button-primary save alignright" data-app-id="<?php echo $app->ID; ?>"><?php esc_html_e('Save / Update','appointments'); ?></a>
+					<?php endif; ?>
+					<img class="waiting" style="display:none;" src="<?php echo esc_url( admin_url('images/spinner.gif') ); ?>" alt="">
+					<input type="hidden" name="app_id" value="<?php echo esc_attr($app->ID); ?>">
+					<span class="error" style="display:none"></span>
+					<br class="clear">
+				</p>
+			</td>
+		</tr>
+		<?php
+		wp_send_json( array( 'result' => ob_get_clean() ) );
 
 	}
 

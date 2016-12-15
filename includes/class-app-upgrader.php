@@ -93,6 +93,9 @@ class Appointments_Upgrader {
 			}
 
 			foreach ( $row->hours as $day_of_week => $values ) {
+				if ( ! isset( $value['start'] ) ) {
+					continue;
+				}
 				$start = $values['start'];
 				$end = $values['end'];
 				if ( is_array( $start ) ) {

@@ -35,7 +35,7 @@ class App_Users_AdditionalFields {
 
 
 		// Display additional notes
-		add_filter('app-appointments_list-edit-client', array($this, 'display_inline_data'), 10, 2);
+		add_action('app-appointments_list-edit-client', array($this, 'display_inline_data'), 10, 2);
 
 
 		// Email filters
@@ -237,16 +237,17 @@ class App_Users_AdditionalFields {
 	 *
 	 * @return string
 	 */
-	public function display_inline_data( $form, $app ) {
+	public function display_inline_data( $deprecated, $app ) {
 		$fields = $this->_get_additional_fields();
 		if ( empty( $fields ) ) {
-			return $form;
+			return;
 		}
 
 		$disabled = disabled( $this->_are_editable(), false, false );
 
 		$app_meta = $this->_get_appointment_meta( $app->ID );
 
+		$form = '';
 		foreach ( $fields as $field ) {
 			$value = ! empty( $app_meta[ $field->name ] ) ? esc_attr( $app_meta[ $field->name ] ) : '';
 
@@ -267,7 +268,7 @@ class App_Users_AdditionalFields {
 		}
 
 		if ( ! $this->_are_editable() ) {
-			return $form;
+			echo $form;
 		}
 
 		$form .=<<<EO_ADMIN_JS
@@ -293,7 +294,7 @@ class App_Users_AdditionalFields {
 })(jQuery);
 </script>
 EO_ADMIN_JS;
-		return $form;
+		echo $form;
 	}
 
 	public function inject_additional_columns ($cols) {
