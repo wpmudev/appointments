@@ -20,7 +20,7 @@ class Appointments_Notifications_Confirmation extends Appointments_Notification 
 
 		$options = appointments_get_options();
 
-		$send_confirmation = isset( $options["send_confirmation"] ) && 'yes' == $options["send_confirmation"];
+		$send_confirmation = 'yes' === $options["send_confirmation"];
 		$send_confirmation = apply_filters( 'appointments_send_confirmation', $send_confirmation, $app_id );
 		if ( ! $send_confirmation ) {
 			return false;
