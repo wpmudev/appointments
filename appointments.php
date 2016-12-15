@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 1.9.4.1
+Version: 1.9.4.2
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	public $version = "1.9.4.1";
+	public $version = "1.9.4.2";
 	public $db_version;
 
 	public $timetables = array();
@@ -139,21 +139,8 @@ class Appointments {
 		// Integration with other plugins/Themes
 		include_once( appointments_plugin_dir() . 'includes/integration/integration.php' );
 
-		// Caching
-		if ( 'yes' == @$this->options['use_cache'] ) {
-			add_filter( 'the_content', array( &$this, 'pre_content' ), 8 );				// Check content before do_shortcode
-			add_filter( 'the_content', array( &$this, 'post_content' ), 100 );			// Serve this later than do_shortcode
-			add_action( 'wp_footer', array( &$this, 'save_script' ), 8 );				// Save script to database
-			add_action( 'permalink_structure_changed', array( &$this, 'flush_cache' ) );// Clear cache in case permalink changed
-			add_action( 'save_post', array( &$this, 'save_post' ), 10, 2 ); 			// Clear cache if it has shortcodes
-		}
 		$this->pages_to_be_cached = array();
 		$this->had_filter = false; // There can be a wpautop filter. We will check this later on.
-
-		// Membership integration
-		$this->membership_active = false;
-		add_action( 'plugins_loaded', array( &$this, 'check_membership_plugin') );
-
 
 		add_action('init', array($this, 'get_gcal_api'), 10);
 
@@ -380,8 +367,8 @@ class Appointments {
 	 * @deprecated Deprecated since version 1.6
 	 *
 	 * @param ID: Id of the service to be retrieved
-	 * @param order_by: ORDER BY clause for mysql
-	 * @return array of objects
+	 * @param string $order_by ORDER BY clause for mysql
+	 * @return array|false array of objects
 	 */
 	function get_workers_by_service( $ID, $order_by = "ID" ) {
 		_deprecated_function( __FUNCTION__, '1.6', 'appointments_get_workers_by_service()' );
@@ -788,104 +775,6 @@ class Appointments {
 **************************************
 */
 
-	/**
-	 * Check if plugin should use cache
-	 * Available for visitors for the moment
-	 * TODO: extend this for logged in users too
-	 * @since 1.0.2
-	 */
-	function use_cache() {
-		if ( 'yes' == $this->options["use_cache"] && !is_user_logged_in() )
-			return true;
-
-		return false;
-	}
-
-	/**
-	 * Add a post ID to the array to be cached
-	 *
-	 */
-	function add_to_cache( $post_id ) {
-		if ( $this->use_cache() )
-			$this->pages_to_be_cached[] = $post_id;
-	}
-
-	/**
-	 * Serve content from cache DB if is available and post is supposed to be cached
-	 * This is called before do_shortcode (this method's priority: 8)
-	 * @return string (the content)
-	 */
-	function pre_content( $content ) {
-		global $post;
-		// Check if this page is to be cached
-		if ( !in_array( $post->ID, $this->pages_to_be_cached ) )
-			return $content;
-
-		// Get uri and mark it for other functions too
-		// The other functions are called after this (content with priority 100 and the other with footer hook)
-		$this->uri = $this->get_uri();
-
-		$result = $this->db->get_row( $this->db->prepare("SELECT * FROM {$this->cache_table} WHERE uri=%s", $this->uri) );
-		if ( $result != null ) {
-			// Clear uri so other functions do not deal with update/insert
-			$this->uri = false;
-			// We need to serve the scripts too
-			$this->script = $result->script;
-
-			// If wpautop had filter, it is almost certain that it was removed
-			if ( $this->had_filter )
-				$new_content = $result->content;
-			else
-				$new_content = wpautop( $result->content );
-
-			return $new_content . '<!-- Served from WPMU DEV Appointments+ Cache '. $result->created .' -->';
-		}
-		// If cache is empty return content
-		// If wpautop had filter, it is almost certain that it was removed
-		if ( $this->had_filter )
-			return $content;
-		else
-			return wpautop( $content ); // Add wpautop which we removed before
-	}
-
-	/**
-	 * Save newly created content to cache DB
-	 * @return string (the content)
-	 */
-	function post_content( $content ) {
-		// Check if this page is to be cached.
-		if ( !$this->uri )
-			return $content;
-		// Also don't save empty content
-		if ( !trim( $content ) ) {
-			$this->uri = '';
-			return $content;
-		}
-		// At this point it means there is no such a row, so we can safely insert
-		$this->db->insert( $this->cache_table,
-					array(
-						'uri' 		=> $this->uri,
-						'created' 	=> date ("Y-m-d H:i:s", $this->local_time ),
-						'content'	=> $content
-					)
-			);
-		return $content;
-	}
-
-	/**
-	 * Save newly created scripts at wp footer location
-	 * @return none
-	 */
-	function save_script() {
-		// Check if this page is to be cached
-		if ( !$this->uri || !trim( $this->script ) )
-			return;
-		// There must be already such a row
-		$this->db->update( $this->cache_table,
-			array( 'script'	=> $this->script ),
-			array( 'uri' 	=> $this->uri )
-		);
-	}
 
 	/**
 	 * Get request uri
@@ -904,23 +793,12 @@ class Appointments {
 	}
 
 	/**
-	 * Clear cache in case saved post has our shortcodes
-	 * @return none
-	 */
-	function save_post( $post_id, $post ) {
-		if ( strpos( $post->post_content, '[app_' ) !== false )
-			$this->flush_cache();
-	}
-
-	/**
 	 * Flush both database and object caches
 	 *
 	 */
 	function flush_cache( ) {
 		wp_cache_flush();
 		appointments_clear_cache();
-		if ( 'yes' == @$this->options["use_cache"] )
-			$result = $this->db->query( "TRUNCATE TABLE {$this->cache_table} " );
 	}
 
 /****************
@@ -1121,27 +999,24 @@ class Appointments {
 	 * @return string
 	 */
 	function get_preset( $class, $set ) {
-		if ( 1 == $set )
-			switch ( $class ) {
-				case 'free'			:	return '48c048'; break;
-				case 'busy'			:	return 'ffffff'; break;
-				case 'notpossible'	:	return 'ffffff'; break;
-				default				:	return '111111'; break;
-			}
-		else if ( 2 == $set )
-			switch ( $class ) {
-				case 'free'			:	return '73ac39'; break;
-				case 'busy'			:	return '616b6b'; break;
-				case 'notpossible'	:	return '8f99a3'; break;
-				default				:	return '111111'; break;
-			}
-		else if ( 3 == $set )
-			switch ( $class ) {
-				case 'free'			:	return '40BF40'; break;
-				case 'busy'			:	return '454C54'; break;
-				case 'notpossible'	:	return '454C54'; break;
-				default				:	return '111111'; break;
-			}
+	    $presets = array(
+            1 => array(
+                'free' => '48c048',
+                'busy' => 'ffffff',
+                'notpossible' => 'ffffff'
+            ),
+            2 => array(
+	            'free' => '73ac39',
+	            'busy' => '616b6b',
+	            'notpossible' => '8f99a3'
+            ),
+            3 => array(
+	            'free' => '40BF40',
+	            'busy' => '454C54',
+	            'notpossible' => '454C54'
+            )
+        );
+	    return isset( $presets[ $set ][ $class ] ) ? $presets[ $set ][ $class ] : '111111';
 	}
 
 	/**
@@ -1221,7 +1096,7 @@ class Appointments {
 		}
 
 
-		$app_content = apply_filters( 'app_pre_content', wpautop( $this->strip_app_shortcodes( $page->post_content ), $page_id, $worker_id ) );
+		$app_content = apply_filters( 'app_pre_content', wpautop( $this->strip_app_shortcodes( $page->post_content ), true ) );
 
 		return apply_filters( 'app_content', $thumb. $app_content, $page_id, $worker_id );
 	}
@@ -1317,7 +1192,8 @@ class Appointments {
 
 	/**
 	 * Die showing which field has a problem
-	 * @return json object
+     *
+     * @param string $field_name
 	 */
 	function json_die( $field_name ) {
 		die( json_encode( array("error"=>sprintf( __( 'Something wrong about the submitted %s', 'appointments'), $this->get_field_name($field_name)))));
@@ -2321,7 +2197,7 @@ class Appointments {
 
 	/**
 	 * Get the maximum and minimum working hour
-	 * @return array
+	 * @return array|false
 	 */
 	function min_max_wh( $worker=0, $location=0 ) {
 		$this->get_lsw();
@@ -2488,7 +2364,10 @@ class Appointments {
 	 * Make sure we clean up cookies after logging out.
 	 */
 	public function drop_cookies_on_logout () {
-		if (empty($this->options['login_required']) || 'yes' !== $this->options['login_required']) return false;
+	    $options = appointments_get_options();
+		if ( 'yes' !== $options['login_required'] ) {
+			return;
+		}
 
 		$path = defined('COOKIEPATH')
 			? COOKIEPATH
@@ -2524,20 +2403,14 @@ class Appointments {
 *****************************************
 */
 
-	/**
-	 * Check if Membership plugin is active
-	 */
-	function check_membership_plugin() {
-		if( ( is_admin() && class_exists('membershipadmin') ) || ( !is_admin() && class_exists('membershippublic') ) )
-			$this->membership_active = true;
-	}
 
 	/**
 	* Finds if user is Membership member with sufficient level
 	* @return bool
 	*/
 	function is_member( ) {
-		if ( $this->membership_active && isset( $this->options["members"] ) ) {
+	    $membership_active = ( is_admin() && class_exists('membershipadmin') ) || ( !is_admin() && class_exists('membershippublic') );
+		if ( $membership_active && isset( $this->options["members"] ) ) {
 			global $current_user;
 			$meta = maybe_unserialize( $this->options["members"] );
 			$member = new M_Membership($current_user->ID);
@@ -2638,8 +2511,7 @@ class Appointments {
 		foreach ( $posts as $post ) {
 			if ( is_object( $post ) && stripos( $post->post_content, '[app_' ) !== false ) {
 				$this->shortcode_found = true;
-				$this->add_to_cache( $post->ID );
-				
+
 				do_action('app-shortcodes-shortcode_found', $post);
 			}
 		}
@@ -2676,15 +2548,6 @@ class Appointments {
 		if ( !current_theme_supports( 'appointments_style' ) ) {
 			wp_enqueue_style( "appointments", $this->plugin_url. "/css/front.css", array(), $this->version );
 			add_action( 'wp_head', array( &$this, 'wp_head' ) );
-		}
-
-		// wpautop does strange things to cache content, so remove it first and add to output
-		if ( $this->use_cache() ) {
-			if ( has_filter( 'wpautop' ) ) {
-				$this->had_filter = true;
-			}
-			remove_filter( 'the_content', 'wpautop' );
-			remove_filter( 'the_excerpt', 'wpautop' );
 		}
 
 		do_action('app-scripts-general');
@@ -2866,7 +2729,6 @@ class Appointments {
 			'reminder_subject'			=> __('Reminder for your Appointment','appointments'),
 			'reminder_message'			=> $reminder_message,
 			'log_emails'				=> 'yes',
-			'use_cache'					=> 'no',
 			'allow_cancel'				=> 'no',
 			'cancel_page'				=> 0
 		));
@@ -2931,8 +2793,7 @@ class Appointments {
 	 * @deprecated since 1.7.3
 	 */
 	function maybe_send_reminders() {
-		_deprecated_function( __FUNCTION__, '1.7.3', 'Appointments_Notification_Manager::maybe_send_reminders()' );
-		$this->notifications->maybe_send_reminders();
+		_deprecated_function( __FUNCTION__, '1.7.3' );
 	}
 
 	/**
@@ -3193,9 +3054,12 @@ class Appointments {
 
 	
 	/**
-	 *	Add a service
-	 *  @param php: True if this will be used in first call, false if this is js
-	 *  @param service: Service object that will be displayed (only when php is true)
+	 *	Add a service markup
+     *
+     * @param bool $php True if this will be used in first call, false if this is js
+     * @param mixed $service Service object that will be displayed (only when php is true)
+     *
+     * @return string
 	 */
 	function add_service( $php=false, $service='' ) {
 		if ( $php ) {
@@ -3204,14 +3068,14 @@ class Appointments {
 				$name = $service->name;
 				$capacity = $service->capacity;
 				$price = $service->price;
-			 }
-			 else return;
-		}
-		else {
-			$n = "'+n+'";
-			$name = '';
+			 } else {
+				return '';
+			}
+		} else {
+			$n        = "'+n+'";
+			$name     = '';
 			$capacity = '0';
-			$price = '';
+			$price    = '';
 		}
 
 		$min_time = $this->get_min_time();
@@ -3257,9 +3121,12 @@ class Appointments {
 	}
 
 	/**
-	 *	Add a worker
-	 *  @param php: True if this will be used in first call, false if this is js
-	 *  @param worker: Worker object that will be displayed (only when php is true)
+	 * Add a worker markup
+     *
+	 * @param bool $php True if this will be used in first call, false if this is js
+	 * @param string|Appointments_Worker $worker Worker object that will be displayed (only when php is true)
+     *
+     * @return string
 	 */
 	function add_worker( $php=false, $worker='' ) {
 		if ( $php ) {
@@ -3271,8 +3138,9 @@ class Appointments {
 					$dummy = "";
 				$price = $worker->price;
 				$workers = wp_dropdown_users( array( 'echo'=>0, 'show'=>'user_login', 'selected' => $worker->ID, 'name'=>'workers['.$k.'][user]', 'exclude'=>apply_filters('app_filter_providers', null) ) );
+			} else {
+				return '';
 			}
-			 else return;
 		}
 		else {
 			$k = "'+k+'";
@@ -3280,7 +3148,6 @@ class Appointments {
 			$dummy = '';
 			$workers =str_replace( array("\t","\n","\r"), "", str_replace( array("'", "&#039;"), array('"', "'"), wp_dropdown_users( array ( 'echo'=>0, 'show'=>'user_login', 'include'=>0, 'name'=>'workers['.$k.'][user]', 'exclude'=>apply_filters('app_filter_providers', null)) ) ) );
 		}
-		global $wpdb;
 
 		$html = '';
 		$html .= '<tr><td>';

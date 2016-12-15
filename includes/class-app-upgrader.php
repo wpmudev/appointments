@@ -25,6 +25,10 @@ class Appointments_Upgrader {
 			$this->upgrade_1_9_4();
 		}
 
+		if ( version_compare( $saved_version, '1.9.4.2', '<' ) ) {
+			$this->upgrade_1_9_4_2();
+		}
+
 		update_option( 'app_db_version', $new_version );
 
 	}
@@ -144,5 +148,12 @@ class Appointments_Upgrader {
 		}
 
 		appointments_clear_cache();
+	}
+
+	private function upgrade_1_9_4_2() {
+		// Delete cache table
+		global $wpdb;
+		$table = $wpdb->prefix . 'app_cache';
+		$wpdb->query( "DROP TABLE IF EXISTS $table" );
 	}
 }

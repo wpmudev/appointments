@@ -63,7 +63,6 @@ function appointments_get_default_options() {
 		'reminder_subject'			=> __('Reminder for your Appointment','appointments'),
 		'reminder_message'			=> $reminder_message,
 		'log_emails'				=> 'yes',
-		'use_cache'					=> 'no',
 		'use_mp'					=> false,
 		'allow_cancel'				=> 'no',
 		'cancel_page'				=> 0,
