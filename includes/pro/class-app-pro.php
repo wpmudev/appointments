@@ -14,6 +14,7 @@ class Appointments_Pro {
 	public function __construct() {
 		$this->includes();
 
+
 		// Login with Google
 		$this->google_login = new Appointments_Google_Login();
 
