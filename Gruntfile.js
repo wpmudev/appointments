@@ -60,7 +60,8 @@ module.exports = function(grunt) {
                     '!composer.json',
                     '!vendor/**',
                     '!tmp/**',
-                    '!**/*~'
+                    '!**/*~',
+                    '!README.md'
                 ],
                 dest: 'build/<%= pkg.name %>/'
             }
