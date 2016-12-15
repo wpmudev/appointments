@@ -1650,10 +1650,11 @@ class Appointments {
 	}
 
 	function _get_table_meta_row_monthly ($which, $long) {
-		if ( !$long )
+		if ( ! $long ) {
 			$day_names_array = $this->arrange( $this->get_short_day_names(), false );
-		else
+		} else {
 			$day_names_array = $this->arrange( $this->get_day_names(), false );
+		}
 		$cells = '<th>' . join('</th><th>', $day_names_array) . '</th>';
 		return "<{$which}><tr>{$cells}</tr></{$which}>";
 	}
@@ -1782,36 +1783,23 @@ class Appointments {
 	}
 
 	function _get_table_meta_row ($which, $long) {
-		if ( !$long )
-			$day_names_array = $this->arrange( $this->get_short_day_names(), __(' ', 'appointments') );
-		else
-			$day_names_array = $this->arrange( $this->get_day_names(), __(' ', 'appointments') );
+		if ( ! $long ) {
+			$day_names_array = $this->arrange( $this->get_short_day_names(), __( ' ', 'appointments' ) );
+		} else {
+			$day_names_array = $this->arrange( $this->get_day_names(), __( ' ', 'appointments' ) );
+		}
 		$cells = '<th class="hourmin_column">&nbsp;' . join('</th><th>', $day_names_array) . '</th>';
 		return "<{$which}><tr>{$cells}</tr></{$which}>";
 	}
 
-	function get_day_names () {
-		return array(
-			__('Sunday', 'appointments'),
-			__('Monday', 'appointments'),
-			__('Tuesday', 'appointments'),
-			__('Wednesday', 'appointments'),
-			__('Thursday', 'appointments'),
-			__('Friday', 'appointments'),
-			__('Saturday', 'appointments'),
-		);
+	function get_day_names() {
+	    global $wp_locale;
+	    return $wp_locale->weekday;
 	}
 
 	function get_short_day_names () {
-		return array(
-			__('Su', 'appointments'),
-			__('Mo', 'appointments'),
-			__('Tu', 'appointments'),
-			__('We', 'appointments'),
-			__('Th', 'appointments'),
-			__('Fr', 'appointments'),
-			__('Sa', 'appointments'),
-		);
+	    global $wp_locale;
+		return array_values( $wp_locale->weekday_initial );
 	}
 
 	/**
@@ -1820,7 +1808,6 @@ class Appointments {
 	 * @return integer (timestamp)
 	 */
 	function sunday( $timestamp=false ) {
-
 		$date = $timestamp ? $timestamp : $this->local_time;
 		// Return today's timestamp if today is sunday and start of the week is set as Sunday
 		if ( "Sunday" == date( "l", $date ) && 0 == $this->start_of_week )
