@@ -39,7 +39,7 @@
 	<tr>
 		<th scope="row"><?php _e( 'Confirmation email Message', 'appointments' ) ?></th>
 		<td>
-						<textarea cols="90"
+						<textarea cols="90" rows="6"
 						          name="confirmation_message"><?php echo esc_textarea( $options['confirmation_message'] ); ?></textarea>
 		</td>
 	</tr>
@@ -61,7 +61,7 @@
 	<tr>
 		<th scope="row"><?php _e( 'Reminder email Sending Time for the Client (hours)', 'appointments' ) ?></th>
 		<td>
-			<input value="<?php echo esc_attr( $options['reminder_time'] ); ?>" size="90"
+			<input value="<?php echo esc_attr( $options['reminder_time'] ); ?>"
 			       name="reminder_time" type="text"/>
 			<br/>
 						<span
@@ -106,7 +106,7 @@
 	<tr>
 		<th scope="row"><?php _e( 'Reminder email Message', 'appointments' ) ?></th>
 		<td>
-						<textarea cols="90"
+						<textarea cols="90" rows="6"
 						          name="reminder_message"><?php echo esc_textarea( $options['reminder_message'] ); ?></textarea>
 		</td>
 	</tr>
@@ -151,7 +151,7 @@
 				? $options['removal_notification_message']
 				: App_Template::get_default_removal_notification_message();
 			?>
-			<textarea cols="90"
+			<textarea cols="90" rows="6"
 			          name="removal_notification_message"><?php echo esc_textarea( $rn_msg ); ?></textarea>
 		</td>
 	</tr>
