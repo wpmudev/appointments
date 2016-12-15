@@ -186,15 +186,6 @@ class Appointments_Admin {
 		wp_enqueue_script( 'jquery-multiselect', $appointments->plugin_url . '/js/jquery.multiselect.min.js', array('jquery-ui-core','jquery-ui-widget', 'jquery-ui-position'), $appointments->version);
 		// Make a locale check to update locale_error flag
 
-		// Localize datepick only if not defined otherwise
-		if (
-			!(defined('APP_FLAG_SKIP_DATEPICKER_L10N') && APP_FLAG_SKIP_DATEPICKER_L10N)
-			&&
-			$file = $appointments->datepick_localfile()
-		) {
-			//if ( !$this->locale_error ) wp_enqueue_script( 'jquery-datepick-local', $this->plugin_url . $file, array('jquery'), $this->version);
-			wp_enqueue_script( 'jquery-datepick-local', $appointments->plugin_url . $file, array('jquery'), $appointments->version);
-		}
 		if ( empty($appointments->options["disable_js_check_admin"]) )
 			wp_enqueue_script( 'app-js-check', $appointments->plugin_url . '/js/js-check.js', array('jquery'), $appointments->version);
 

@@ -238,9 +238,6 @@ class App_Timetables_Test extends App_UnitTestCase {
 		$this->assertFalse( $busy );
 	}
 
-	/**
-	 * @group temp
-	 */
 	function test_get_available_workers() {
 		$options = appointments_get_options();
 		$options['min_time'] = 60;
@@ -269,6 +266,7 @@ class App_Timetables_Test extends App_UnitTestCase {
 		);
 
 		appointments()->service = $service_id;
+		appointments()->worker = 0;
 
 		// Now there should not be any worker available on 2016-12-28 from 11:00 to 19:00
 		$available = appointments()->available_workers(

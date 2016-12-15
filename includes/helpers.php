@@ -76,3 +76,27 @@ function appointments_get_view_path( $name, $from_front = false ){
 	return false;
 
 }
+
+/**
+ * Returns the date and time format.
+ *
+ * If $type = 'full' it will return date + time format
+ *
+ * @param string $type full|time|date
+ *
+ * @return string
+ */
+function appointments_get_date_format( $type = 'full' ) {
+	$date_format = get_option( 'date_format' );
+	$date_format = empty( $date_format ) ? 'Y-m-d' : $date_format;
+	$time_format = get_option('time_format');
+	$time_format = empty( $time_format ) ? 'H:i' : $time_format;
+	if ( 'date' === $type ) {
+		return $date_format;
+	}
+	elseif ( 'time' === $type ) {
+		return $time_format;
+	}
+
+	return $date_format . ' ' . $time_format;
+}

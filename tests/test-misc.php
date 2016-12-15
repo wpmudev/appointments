@@ -7,30 +7,6 @@
  */
 class App_Misc_Test extends App_UnitTestCase {
 
-	public function test_datepick_localfile() {
-		add_filter( 'locale', function() {
-			return 'ca';
-		});
-		$file = appointments()->datepick_localfile();
-		$this->assertEquals('/js/jquery.datepick-ca.js', $file);
-
-		add_filter( 'locale', function() {
-			return 'es_ES';
-		});
-		$file = appointments()->datepick_localfile();
-		$this->assertEquals('/js/jquery.datepick-es.js', $file);
-
-
-		add_filter( 'locale', function() {
-			return 'ca';
-		});
-		define( 'APP_FLAG_NO_GLOB', true );
-		$file = appointments()->datepick_localfile();
-		$this->assertEquals('/js/jquery.datepick-ca.js', $file);
-
-
-	}
-
 	public function test_datepick_local_months() {
 		add_filter( 'locale', function() {
 			return 'es_ES';

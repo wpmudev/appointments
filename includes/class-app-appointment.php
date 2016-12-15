@@ -93,13 +93,11 @@ class Appointments_Appointment {
 	}
 
 	public function get_formatted_start_date() {
-		$appointments = appointments();
-		return mysql2date( $appointments->datetime_format, $this->start );
+		return mysql2date( appointments_get_date_format( 'full' ), $this->start );
 	}
 
 	public function get_formatted_created_date() {
-		$appointments = appointments();
-		return mysql2date( $appointments->datetime_format, $this->created );
+		return mysql2date( appointments_get_date_format( 'full' ), $this->created );
 	}
 
 	public function get_service_name() {

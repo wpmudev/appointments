@@ -97,42 +97,49 @@ class App_Working_Hours_Test extends App_UnitTestCase {
 					'active' => 'yes',
 					'start'  => '07:00',
 					'end'    => '20:00',
+					'weekday_number' => 7
 				),
 			'Monday'    =>
 				array(
 					'active' => 'yes',
 					'start'  => '10:30',
 					'end'    => '20:00',
+					'weekday_number' => 1
 				),
 			'Tuesday'   =>
 				array(
 					'active' => 'yes',
 					'start'  => '10:30',
 					'end'    => '20:00',
+					'weekday_number' => 2
 				),
 			'Wednesday' =>
 				array(
 					'active' => 'yes',
 					'start'  => '10:30',
 					'end'    => '20:00',
+					'weekday_number' => 3
 				),
 			'Thursday'  =>
 				array(
 					'active' => 'yes',
 					'start'  => '10:30',
 					'end'    => '20:00',
+					'weekday_number' => 4
 				),
 			'Friday'    =>
 				array(
 					'active' => 'yes',
 					'start'  => '10:30',
 					'end'    => '20:00',
+					'weekday_number' => 5
 				),
 			'Saturday'  =>
 				array(
 					'active' => 'yes',
 					'start'  => '10:30',
 					'end'    => '20:00',
+					'weekday_number' => 6
 				)
 		);
 	}
@@ -143,44 +150,51 @@ class App_Working_Hours_Test extends App_UnitTestCase {
 			'Sunday'    =>
 				array(
 					'active' => 'no',
-					'start'  => '12:00',
+					'start'  => '11:00',
 					'end'    => '13:00',
+					'weekday_number' => 7
 				),
 			'Monday'    =>
 				array(
 					'active' => 'no',
 					'start'  => '12:00',
 					'end'    => '13:00',
+					'weekday_number' => 1
 				),
 			'Tuesday'   =>
 				array(
 					'active' => 'no',
 					'start'  => '12:00',
 					'end'    => '13:00',
+					'weekday_number' => 2
 				),
 			'Wednesday' =>
 				array(
 					'active' => 'no',
 					'start'  => '12:00',
 					'end'    => '13:00',
+					'weekday_number' => 3
 				),
 			'Thursday'  =>
 				array(
 					'active' => 'no',
 					'start'  => '12:00',
 					'end'    => '13:00',
+					'weekday_number' => 4
 				),
 			'Friday'    =>
 				array(
 					'active' => 'no',
 					'start'  => '12:00',
 					'end'    => '13:00',
+					'weekday_number' => 5
 				),
 			'Saturday'  =>
 				array(
 					'active' => 'no',
 					'start'  => '12:00',
 					'end'    => '13:00',
+					'weekday_number' => 6
 				)
 		);
 	}

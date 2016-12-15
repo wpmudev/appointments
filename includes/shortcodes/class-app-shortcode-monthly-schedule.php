@@ -125,17 +125,19 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 		}
 
 		public function process_shortcode ($args=array(), $content='') {
-			global $current_user, $appointments;
+			global $appointments;
 
-			extract(wp_parse_args($args, $this->_defaults_to_args()));
+			$args = wp_parse_args($args, $this->_defaults_to_args());
+			extract( $args );
 
 
 			// Force service
-			if ( $service ) {
+			if ( $args['service'] ) {
 				// Check if such a service exists
-				if ( !appointments_get_service( $service ) )
-					return;
-				$_REQUEST["app_service_id"] = $service;
+				if ( ! appointments_get_service( $args['service'] ) ) {
+					return '';
+				}
+				$_REQUEST["app_service_id"] = $args['service'];
 			}
 
 			$appointments->get_lsw(); // This should come after Force service
@@ -148,28 +150,30 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 			}
 
 			// Force worker or pick up the single worker
-			if ( $worker ) {
+			if ( $args['worker'] ) {
 				// Check if such a worker exists
-				if (! appointments_is_worker($worker)) return;
-				$_REQUEST["app_provider_id"] = $worker;
+				if ( ! appointments_is_worker( $args['worker'] ) ) {
+					return '';
+				}
+				$_REQUEST["app_provider_id"] = $args['worker'];
 			}
 			else if ( $single_worker ) {
 				// Select the only provider if that is the case
 				$_REQUEST["app_provider_id"] = $single_worker;
-				$worker = $single_worker;
+				$args['worker'] = $single_worker;
 			}
 
 			// Force a date
-			if ( $date && !isset( $_GET["wcalendar"] ) ) {
-				$time = $appointments->first_of_month( strtotime( $date, $appointments->local_time ), $add );
+			if ( $args['date'] && !isset( $_GET["wcalendar"] ) ) {
+				$time = $appointments->first_of_month( strtotime( $args['date'], $appointments->local_time ), $args['add'] );
 				$_GET["wcalendar"] = $time;
 			}
 			else {
 				if (!empty($_GET['wcalendar_human'])) $_GET['wcalendar'] = strtotime($_GET['wcalendar_human']);
 				if ( isset( $_GET["wcalendar"] ) && (int)$_GET['wcalendar'] )
-					$time = $appointments->first_of_month( (int)$_GET["wcalendar"], $add  );
+					$time = $appointments->first_of_month( (int)$_GET["wcalendar"], $args['add']  );
 				else
-					$time = $appointments->first_of_month( $appointments->local_time, $add  );
+					$time = $appointments->first_of_month( $appointments->local_time, $args['add']  );
 			}
 
 			$year = date("Y", $time);
@@ -193,7 +197,7 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 				$title = '';
 			}
 
-			$has_worker = !empty($appointments->worker) || !empty($worker);
+			$has_worker = !empty($appointments->worker) || !empty($args['worker']);
 
 			$has_service = !empty($require_service) ? $_REQUEST["app_service_id"] : false;
 
@@ -216,16 +220,16 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 				$c .= apply_filters('app-shortcodes-monthly_schedule-title', $title, $args);
 
 				if ( is_user_logged_in() || 'yes' != $appointments->options["login_required"] ) {
-					$c .= $logged ? "<div class='appointments-instructions'>{$logged}</div>" : '';
+					$c .= $args['logged'] ? "<div class='appointments-instructions'>{$args['logged']}</div>" : '';
 				} else {
 					$codec = new App_Macro_GeneralCodec;
 					if ( !@$appointments->options["accept_api_logins"] ) {
-						//$c .= str_replace( 'LOGIN_PAGE', '<a class="appointments-login_show_login" href="'.site_url( 'wp-login.php').'">'. __('Login','appointments'). '</a>', $notlogged );
-						$c .= $codec->expand($notlogged, App_Macro_GeneralCodec::FILTER_BODY);
+						//$c .= str_replace( 'LOGIN_PAGE', '<a class="appointments-login_show_login" href="'.site_url( 'wp-login.php').'">'. __('Login','appointments'). '</a>', $args['notlogged'] );
+						$c .= $codec->expand($args['notlogged'], App_Macro_GeneralCodec::FILTER_BODY);
 					} else {
 						$c .= '<div class="appointments-login">';
-						//$c .= str_replace( 'LOGIN_PAGE', '<a class="appointments-login_show_login" href="javascript:void(0)">'. __('Login','appointments'). '</a>', $notlogged );
-						$c .= $codec->expand($notlogged, App_Macro_GeneralCodec::FILTER_BODY);
+						//$c .= str_replace( 'LOGIN_PAGE', '<a class="appointments-login_show_login" href="javascript:void(0)">'. __('Login','appointments'). '</a>', $args['notlogged'] );
+						$c .= $codec->expand($args['notlogged'], App_Macro_GeneralCodec::FILTER_BODY);
 						$c .= '<div class="appointments-login_inner">';
 						$c .= '</div>';
 						$c .= '</div>';
@@ -233,7 +237,7 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 				}
 
 				$c .= '<div class="appointments-list">';
-				$c .= $appointments->get_monthly_calendar($time, $class, $long, $widget);
+				$c .= $appointments->get_monthly_calendar($time, $args['class'], $args['long'], $args['widget']);
 				$c .= '</div>';
 
 			}

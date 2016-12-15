@@ -119,6 +119,7 @@ class App_Upgrades_Test extends App_UnitTestCase {
 	 * It should fix a bug that was inserting working hours in the wrong format
 	 *
 	 * @group upgrade-1.9.4
+	 * @group temp
 	 */
 	function test_upgrade_1_9_4_format2() {
 		$open = $this->_get_working_hours('g:i a', 'open');
@@ -306,22 +307,22 @@ class App_Upgrades_Test extends App_UnitTestCase {
 	private function _test_upgrade_1_9_4_single_time_format( $worker_id ) {
 		// Test open status
 		$new_hours = appointments_get_worker_working_hours( 'open', $worker_id, 0 );
-		$this->assertEquals( array( 'active' => 'no', 'start' => '10:00', 'end' => '23:00' ), $new_hours->hours['Sunday'] );
-		$this->assertEquals( array( 'active' => 'no', 'start' => '22:00', 'end' => '23:00' ), $new_hours->hours['Monday'] );
-		$this->assertEquals( array( 'active' => 'no', 'start' => '07:00', 'end' => '00:00' ), $new_hours->hours['Tuesday'] );
-		$this->assertEquals( array( 'active' => 'yes', 'start' => '13:00', 'end' => '22:00' ), $new_hours->hours['Wednesday'] );
-		$this->assertEquals( array( 'active' => 'yes', 'start' => '00:00', 'end' => '20:00' ), $new_hours->hours['Thursday'] );
-		$this->assertEquals( array( 'active' => 'yes', 'start' => '09:00', 'end' => '21:00' ), $new_hours->hours['Friday'] );
-		$this->assertEquals( array( 'active' => 'yes', 'start' => '00:00', 'end' => '20:00' ), $new_hours->hours['Saturday'] );
+		$this->assertEquals( array( 'active' => 'no', 'start' => '10:00', 'end' => '23:00' , 'weekday_number' => 7 ), $new_hours->hours['Sunday'] );
+		$this->assertEquals( array( 'active' => 'no', 'start' => '22:00', 'end' => '23:00' , 'weekday_number' => 1 ), $new_hours->hours['Monday'] );
+		$this->assertEquals( array( 'active' => 'no', 'start' => '07:00', 'end' => '00:00' , 'weekday_number' => 2 ), $new_hours->hours['Tuesday'] );
+		$this->assertEquals( array( 'active' => 'yes', 'start' => '13:00', 'end' => '22:00', 'weekday_number' => 3  ), $new_hours->hours['Wednesday'] );
+		$this->assertEquals( array( 'active' => 'yes', 'start' => '00:00', 'end' => '20:00', 'weekday_number' => 4 ), $new_hours->hours['Thursday'] );
+		$this->assertEquals( array( 'active' => 'yes', 'start' => '09:00', 'end' => '21:00', 'weekday_number' => 5  ), $new_hours->hours['Friday'] );
+		$this->assertEquals( array( 'active' => 'yes', 'start' => '00:00', 'end' => '20:00', 'weekday_number' => 6  ), $new_hours->hours['Saturday'] );
 
 		// Test closed status
 		$new_hours = appointments_get_worker_working_hours( 'closed', $worker_id, 0 );
-		$this->assertEquals( array( 'active' => 'no', 'start' => '00:00', 'end' => '00:00', ), $new_hours->hours['Sunday'] );
-		$this->assertEquals( array( 'active' => 'no', 'start' => '12:00', 'end' => '13:00', ), $new_hours->hours['Tuesday'] );
-		$this->assertEquals( array( 'active' => 'no', 'start' => '12:00', 'end' => '13:00', ), $new_hours->hours['Wednesday'] );
-		$this->assertEquals( array( 'active' => 'no', 'start' => '12:00', 'end' => '13:00', ), $new_hours->hours['Thursday'] );
-		$this->assertEquals( array( 'active' => 'no', 'start' => '12:00', 'end' => '13:00', ), $new_hours->hours['Friday'] );
-		$this->assertEquals( array( 'active' => 'no', 'start' => '12:00', 'end' => '13:00', ), $new_hours->hours['Saturday'] );
+		$this->assertEquals( array( 'active' => 'no', 'start' => '00:00', 'end' => '00:00', 'weekday_number' => 7 ), $new_hours->hours['Sunday'] );
+		$this->assertEquals( array( 'active' => 'no', 'start' => '12:00', 'end' => '13:00', 'weekday_number' => 2 ), $new_hours->hours['Tuesday'] );
+		$this->assertEquals( array( 'active' => 'no', 'start' => '12:00', 'end' => '13:00', 'weekday_number' => 3 ), $new_hours->hours['Wednesday'] );
+		$this->assertEquals( array( 'active' => 'no', 'start' => '12:00', 'end' => '13:00', 'weekday_number' => 4 ), $new_hours->hours['Thursday'] );
+		$this->assertEquals( array( 'active' => 'no', 'start' => '12:00', 'end' => '13:00', 'weekday_number' => 5 ), $new_hours->hours['Friday'] );
+		$this->assertEquals( array( 'active' => 'no', 'start' => '12:00', 'end' => '13:00', 'weekday_number' => 6 ), $new_hours->hours['Saturday'] );
 
 		// Monday is special
 		$this->assertEquals( array( 0 => 'yes', 1 => 'yes', ), $new_hours->hours['Monday']['active'] );

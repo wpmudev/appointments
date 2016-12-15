@@ -18,6 +18,9 @@ AppointmentsAdmin = window.AppointmentsAdmin || {};
 
         this.isEditing = false;
 
+        // Export button
+        this.$exportButton = $('.app-export_trigger');
+
         // Add new appointment button
         this.$addNew = $(".add-new-h2");
         this.$addNewSpinner = $(".add-new-waiting");
@@ -75,6 +78,55 @@ AppointmentsAdmin = window.AppointmentsAdmin || {};
         }.bind(this));
 
         this.$table.on( 'click', '.save', this.saveEditor.bind(this) );
+
+        // @TODO Refactor
+        this.$exportButton.click( function(e) {
+            var button = $(e.target),
+                $form = button.closest("form"),
+                checkedApps = $(".column-delete.app-check-column :checked"),
+                type = $form.find("#app-export_type");
+
+            if (button.is("#app-export-selected") && checkedApps.length) {
+                checkedApps.each(function () {
+                    $form.append("<input type='hidden' name='app[]' value='" + button.val() + "' />");
+                });
+                type.val("selected");
+                return true;
+            } else if (button.is("#app-export-type")) {
+                $form.append("<input type='hidden' name='status' value='" + button.attr("data-type") + "' />");
+                type.val("type");
+                return true;
+            } else if (button.is("#app-export-all")) {
+                type.val("all");
+                return true;
+            }
+            return false;
+        });
+
+        $(".app-change-status-btn").click(function(e){
+            var button = $(this);
+            var selection = $("th.app-check-column input:checkbox:checked");
+            // var data = { 'app[]' : []};
+            selection.each(function() {
+                // data['app[]'].push($(this).val());
+                button.after('<input type="hidden" name="app[]" value="'+$(this).val()+'"/>');
+            });
+
+            return true;
+        });
+
+        $(".info-button").click(function(){
+            $(".status-description").toggle('fast');
+        });
+
+        function toggle_selected_export () {
+            var $sel = $("#the-list .check-column :checked");
+            if ($sel.length) $("#app-export-selected").show();
+            else $("#app-export-selected").hide();
+        }
+
+        $(document).on("change", ".check-column input, .app-column-cb input", toggle_selected_export);
+        $(toggle_selected_export);
 
 
         return this;

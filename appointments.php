@@ -92,13 +92,9 @@ class Appointments {
 		$this->local_time = current_time('timestamp');
 		if ( !$this->start_of_week = get_option('start_of_week') ) $this->start_of_week = 0;
 
-		$this->time_format = get_option('time_format');
-		if (empty($this->time_format)) $this->time_format = "H:i";
-
-		$this->date_format = get_option('date_format');
-		if (empty($this->date_format)) $this->date_format = "Y-m-d";
-
-		$this->datetime_format = $this->date_format . " " . $this->time_format;
+		$this->time_format = appointments_get_date_format( 'time' );
+		$this->date_format = appointments_get_date_format( 'date' );
+		$this->datetime_format = appointments_get_date_format( 'full' );
 
 		add_action( 'delete_user', 'appointments_delete_worker' );		// Modify database in case a user is deleted
 		add_action( 'wpmu_delete_user', 'appointments_delete_worker' );	// Same as above
@@ -2945,71 +2941,12 @@ class Appointments {
 	// Return datepick locale file if it exists
 	// Since 1.0.6
 	function datepick_localfile() {
-		$locale = preg_replace('/_/', '-', get_locale());
-		$locale = apply_filters( 'app_locale', $locale );
-
-		if (function_exists('glob') && !(defined('APP_FLAG_NO_GLOB') && APP_FLAG_NO_GLOB)) {
-			$filename = false;
-			$dir = appointments_plugin_dir() . 'js/';
-			$all = glob("{$dir}jquery.datepick-*.js");
-			$full_match = preg_quote("{$locale}.js", '/');
-			$partial_match = false;
-			if (substr_count($locale, '-')) {
-				list($main_locale, $rest) = explode('-', $locale, 2);
-				if ( ! empty( $main_locale ) ) {
-					$partial_match = preg_quote( "{$main_locale}.js", '/' );
-				}
-			}
-
-			foreach ($all as $file) {
-				if ( preg_match( '/' . $full_match . '$/', $file ) ) {
-					$filename = $file;
-					break;
-				} else if ($partial_match && preg_match('/' . $partial_match . '$/', $file)) {
-					$filename = $file;
-				}
-			}
-			return !empty($filename)
-				? "/js/" . basename($filename)
-				: false
-			;
-		} else {
-			$dir = appointments_plugin_dir() . 'js/';
-			$file = 'jquery.datepick-'.$locale.'.js';
-			if ( file_exists( $dir . $file ) ) {
-				return '/js/' . $file;
-			}
-
-			if ( substr_count( $locale, '-' ) ) {
-				$l = explode( '-', $locale );
-				$locale = $l[0];
-				$file = 'jquery.datepick-'.$locale.'.js';
-				$dir = appointments_plugin_dir() . 'js/';
-				if ( file_exists( $dir . $file ) )
-					return '/js/' . $file;
-			}
-		}
-
 		return false;
 	}
 
 	// Read and return local month names from datepick
 	// Since 1.0.6.1
 	function datepick_local_months() {
-		if ( ! $file = $this->datepick_localfile() ) {
-			return false;
-		}
-
-		if ( ! $file_content = @file_get_contents( appointments_plugin_dir() . $file ) ) {
-			return false;
-		}
-
-		$file_content = str_replace( array("\r","\n","\t"), '', $file_content );
-
-		if ( preg_match( '/monthNames:(.*?)]/s', $file_content, $matches ) ) {
-			$months = str_replace( array('[',']',"'",'"'), '', $matches[1] );
-			return explode( ',', $months );
-		}
 		return false;
 	}
 
@@ -3269,6 +3206,11 @@ class Appointments {
 	 * Change d/m/y to d-m-y so that strtotime can behave correctly
 	 * Also change local dates to m/d/y format
 	 * @return string
+     *
+     * @deprecated This function is deprecated and it will dissapear in following versions but in order
+     * to keep backwards compatibility, is not really marked as deprecated cause can be used in another functions
+     * see appointments_insert_appointment() and appointments_update_appointment()
+     *
 	 * @since 1.0.4.2
 	 */
 	function to_us( $date ) {

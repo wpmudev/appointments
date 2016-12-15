@@ -169,62 +169,6 @@ $options = wp_json_encode( $options );
     });
 </script>
 
-<script>
-	(function ($) {
-		function toggle_selected_export () {
-			var $sel = $("#the-list .check-column :checked");
-			if ($sel.length) $("#app-export-selected").show();
-			else $("#app-export-selected").hide();
-		}
-		$(document).on("click", ".app-export_trigger", function () {
-			var $me = $(this),
-				$form = $me.closest("form"),
-				$sel = $(".column-delete.app-check-column :checked"),
-				$type = $form.find("#app-export_type")
-				;
-
-			if ($me.is("#app-export-selected") && $sel.length) {
-				$sel.each(function () {
-					$form.append("<input type='hidden' name='app[]' value='" + $(this).val() + "' />");
-				});
-				$type.val("selected");
-				return true;
-			} else if ($me.is("#app-export-type")) {
-				$form.append("<input type='hidden' name='status' value='" + $me.attr("data-type") + "' />");
-				$type.val("type");
-				return true;
-			} else if ($me.is("#app-export-all")) {
-				$type.val("all");
-				return true;
-			}
-			return false;
-		});
-		$(document).on("change", ".check-column input, .app-column-cb input", toggle_selected_export);
-		$(toggle_selected_export);
-	})(jQuery);
-
-	jQuery(document).ready(function($){
-		$(".app-change-status-btn").click(function(e){
-			var button = $(this);
-			var selection = $("th.app-check-column input:checkbox:checked");
-			// var data = { 'app[]' : []};
-			selection.each(function() {
-				// data['app[]'].push($(this).val());
-				button.after('<input type="hidden" name="app[]" value="'+$(this).val()+'"/>');
-			});
-
-			return true;
-
-
-		});
-	});
-
-	jQuery(document).ready(function($){
-		$(".info-button").click(function(){
-			$(".status-description").toggle('fast');
-		});
-	});
-</script>
 <style>
 	a.info-button {
 		line-height: 1;

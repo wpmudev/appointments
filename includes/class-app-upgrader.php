@@ -86,16 +86,16 @@ class Appointments_Upgrader {
 			$rows[ $key ]->hours = maybe_unserialize( $row->hours );
 		}
 
-		$time_format = get_option( 'time_format' );
 		foreach ( $rows as $key => $row ) {
 			if ( ! is_array( $row->hours ) ) {
 				continue;
 			}
 
 			foreach ( $row->hours as $day_of_week => $values ) {
-				if ( ! isset( $value['start'] ) ) {
+				if ( ! isset( $values['start'] ) ) {
 					continue;
 				}
+
 				$start = $values['start'];
 				$end = $values['end'];
 				if ( is_array( $start ) ) {
