@@ -56,4 +56,8 @@ class App_Misc_Test extends App_UnitTestCase {
 			$months
 		);
 	}
+
+	public function test_weekly_schedule_slots() {
+
+	}
 }

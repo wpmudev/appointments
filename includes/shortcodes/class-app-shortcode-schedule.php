@@ -115,10 +115,23 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 		);
 	}
 
-	public function process_shortcode ($args=array(), $content='') {
+	public function process_shortcode( $args = array(), $content = '' ) {
 		$appointments = appointments();
 
+		$current_time = current_time( 'timestamp' );
+		$options = appointments_get_options();
 		$args = wp_parse_args( $args, $this->_defaults_to_args() );
+
+		$service_id = isset( $_REQUEST["app_service_id"] ) ? absint( $_REQUEST["app_service_id"] ) : 0;
+		if ( appointments_get_services_min_id() ) {
+			$service_id = appointments_get_services_min_id();
+		}
+
+		$worker_id = isset( $_REQUEST["app_provider_id"] ) ? absint( $_REQUEST["app_provider_id"] ) : 0;
+		if ( ! $worker_id ) {
+			$worker_id = isset( $_REQUEST["app_worker_id"] ) ? absint( $_REQUEST["app_worker_id"] ) : 0;
+		}
+		$location_id = isset( $_REQUEST["app_location_id"] ) ? absint( $_REQUEST["app_location_id"] ) : 0;
 
 		// Force service
 		if ( $args['service'] ) {
@@ -126,11 +139,12 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 			if ( ! appointments_get_service( $args['service'] ) ) {
 				return '';
 			}
+			$service_id = absint( $args['service'] );
 			$_REQUEST["app_service_id"] = $args['service'];
 		}
 
-		$appointments->get_lsw(); // This should come after Force service
-		$workers_by_service = appointments_get_workers_by_service( $appointments->service );
+
+		$workers_by_service = appointments_get_workers_by_service( $service_id );
 		$single_worker = false;
 		if ( 1 === count( $workers_by_service ) ) {
 			$single_worker = $workers_by_service[0]->ID;
@@ -141,43 +155,49 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 			if ( ! appointments_is_worker( $args['worker'] ) ) {
 				return '';
 			}
+			$worker_id = absint( $args['worker'] );
 			$_REQUEST["app_provider_id"] = $args['worker'];
 		} else if ( $single_worker ) {
 			// Select the only provider if that is the case
 			$_REQUEST["app_provider_id"] = $single_worker;
 			$args['worker']              = $single_worker;
+			$worker_id = absint( $args['worker'] );
 		}
 
 		// Force a date
 		if ( $args['date'] && ! isset( $_GET["wcalendar"] ) ) {
-			$time              = strtotime( $args['date'], $appointments->local_time ) + ( $args['add'] * 7 * 86400 );
+			$time              = strtotime( $args['date'], $current_time ) + ( $args['add'] * 7 * 86400 );
 			$_GET["wcalendar"] = $time;
 		} else {
 			if ( isset( $_GET["wcalendar"] ) && (int) $_GET['wcalendar'] ) {
 				$time = (int) $_GET["wcalendar"] + ( $args['add'] * 7 * 86400 );
 			} else {
-				$time = $appointments->local_time + ( $args['add'] * 7 * 86400 );
+				$time = $current_time + ( $args['add'] * 7 * 86400 );
 			}
 		}
 
-		$start_of_calendar = $appointments->sunday( $time ) + $appointments->start_of_week * 86400;
+		$slots = appointments_get_weekly_schedule_slots( $time );
 
-		if ( '' != $args['title'] )
+		if ( '' != $args['title'] ) {
+			$start_day = current( $slots['the_week'] );
+			end( $slots['the_week'] );
+			$end_day = current( $slots['the_week'] );
+			reset( $slots['the_week'] );
 			$args['title'] = str_replace(
 				array( "START", "END" ),
 				array(
-					date_i18n($appointments->date_format, $start_of_calendar ),
-					date_i18n($appointments->date_format, $start_of_calendar + 6*86400 )
+					date_i18n( appointments_get_date_format( 'date' ), strtotime( $start_day ) ),
+					date_i18n( appointments_get_date_format( 'date' ), strtotime( $end_day ) )
 				),
 				$args['title']
 			);
+		}
 		else {
 			$args['title'] = '';
 		}
 
-		$has_worker = ! empty( $appointments->worker ) || ! empty( $args['worker'] );
-
-		$has_service = ! empty( $require_service ) ? $_REQUEST["app_service_id"] : false;
+		$has_worker = ! empty( $worker_id );
+		$has_service = ! empty( $args['require_service'] ) ? $service_id : false;
 
 		$c = '';
 		$c .= '<div class="appointments-wrapper">';
@@ -193,11 +213,11 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 		} else {
 			$c .= $args['title'];
 
-			if ( is_user_logged_in() || 'yes' != $appointments->options["login_required"] ) {
+			if ( is_user_logged_in() || 'yes' != $options["login_required"] ) {
 				$c .= $args['logged'] ? "<div class='appointments-instructions'>{$args['logged']}</div>" : '';
 			} else {
 				$codec = new App_Macro_GeneralCodec;
-				if ( ! @$appointments->options["accept_api_logins"] ) {
+				if ( ! $options["accept_api_logins"] ) {
 					//$c .= str_replace( 'LOGIN_PAGE', '<a class="appointments-login_show_login" href="'.site_url( 'wp-login.php').'">'. __('Login','appointments'). '</a>', $notlogged );
 					$c .= $codec->expand( $args['notlogged'], App_Macro_GeneralCodec::FILTER_BODY );
 				} else {
@@ -211,7 +231,17 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 			}
 
 			$c .= '<div class="appointments-list">';
-			$c .= $appointments->get_weekly_calendar( $time, $args['class'], $args['long'] );
+
+			$current_time = current_time( 'timestamp' );
+			$date = $time ? $time : $current_time;
+			$c .= appointments_weekly_calendar( $date, array(
+				'worker_id' => $worker_id,
+				'service_id' => $service_id,
+				'location_id' => $location_id,
+				'long' => $args['long'],
+				'class' => $args['class'],
+				'echo' => false
+			));
 
 			$c .= '</div>';
 		}

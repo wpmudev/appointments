@@ -89,6 +89,79 @@ class App_Working_Hours_Test extends App_UnitTestCase {
 		$this->add_deprecated_filters();
 	}
 
+	public function test_get_working_hours_range() {
+		$worker_id = $this->factory->worker->create_object( $this->factory->worker->generate_args() );
+		$open_hours = $this->get_open_wh();
+		appointments_update_worker_working_hours( $worker_id, $open_hours, 'open' );
+		$range = appointments_get_working_hours_range($worker_id);
+		$this->assertEquals( array( 'min' => 7, 'max' => 20 ), $range );
+
+		// Test edge case
+		$open_hours['Monday']['start'] = '00:00';
+		appointments_update_worker_working_hours( $worker_id, $open_hours, 'open' );
+		$range = appointments_get_working_hours_range($worker_id);
+		$this->assertEquals( array( 'min' => 0, 'max' => 20 ), $range );
+
+		$open_hours['Monday']['start'] = '00:00';
+		$open_hours['Monday']['end'] = '00:00';
+		appointments_update_worker_working_hours( $worker_id, $open_hours, 'open' );
+		$range = appointments_get_working_hours_range($worker_id);
+		$this->assertEquals( array( 'min' => 0, 'max' => 24 ), $range );
+
+		$open_hours['Monday']['start'] = '06:12';
+		$open_hours['Monday']['end'] = '20:15';
+		appointments_update_worker_working_hours( $worker_id, $open_hours, 'open' );
+		$range = appointments_get_working_hours_range($worker_id);
+		var_dump(appointments()->min_max_wh($worker_id));
+		$this->assertEquals( array( 'min' => 6, 'max' => 21 ), $range );
+	}
+
+	/**
+	 * @group temp
+	 */
+	public function test_get_weekly_schedule_slots() {
+		$worker_id = $this->factory->worker->create_object( $this->factory->worker->generate_args() );
+		$open_hours = $this->get_open_wh();
+		appointments_update_worker_working_hours( $worker_id, $open_hours, 'open' );
+
+		// Set saturday as week start
+		update_option( 'start_of_week', 6 );
+
+		// Test monday
+		$today = strtotime( '2016-12-12' );
+		$slots = appointments_get_weekly_schedule_slots( $today );
+		$this->assertCount( 18, $slots['time_slots'] );
+		$this->assertEquals(
+			array(
+				'2016-12-10',
+				'2016-12-11',
+				'2016-12-12',
+				'2016-12-13',
+				'2016-12-14',
+				'2016-12-15',
+				'2016-12-16'
+			),
+			$slots['the_week']
+		);
+
+		// Test saturday
+		$today = strtotime( '2016-12-17' );
+		$slots = appointments_get_weekly_schedule_slots( $today );
+		$this->assertCount( 18, $slots['time_slots'] );
+		$this->assertEquals(
+			array(
+				'2016-12-17',
+				'2016-12-18',
+				'2016-12-19',
+				'2016-12-20',
+				'2016-12-21',
+				'2016-12-22',
+				'2016-12-23'
+			),
+			$slots['the_week']
+		);
+	}
+
 
 	function get_open_wh() {
 		return array(

@@ -119,7 +119,6 @@ class App_Upgrades_Test extends App_UnitTestCase {
 	 * It should fix a bug that was inserting working hours in the wrong format
 	 *
 	 * @group upgrade-1.9.4
-	 * @group temp
 	 */
 	function test_upgrade_1_9_4_format2() {
 		$open = $this->_get_working_hours('g:i a', 'open');

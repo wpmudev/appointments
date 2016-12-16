@@ -90,7 +90,7 @@ class Appointments {
 
 		// To follow WP Start of week, time, date settings
 		$this->local_time = current_time('timestamp');
-		if ( !$this->start_of_week = get_option('start_of_week') ) $this->start_of_week = 0;
+		$this->start_of_week = appointments_week_start() - 1;
 
 		$this->time_format = appointments_get_date_format( 'time' );
 		$this->date_format = appointments_get_date_format( 'date' );
@@ -904,13 +904,17 @@ class Appointments {
 	/**
 	 *	Return minimum set interval time
 	 *  If not set, return a safe time.
+     *
 	 *	@return integer
 	 */
-	function get_min_time(){
-		if ( isset( $this->options["min_time"] ) && $this->options["min_time"] && $this->options["min_time"]>apply_filters( 'app_safe_min_time', 9 ) )
-			return apply_filters('app-time-min_time', (int)$this->options["min_time"]);
-		else
-			return apply_filters('app-time-min_time', apply_filters( 'app_safe_time', 10 ));
+	function get_min_time() {
+	    $options = appointments_get_options();
+	    $min_time = $options['min_time'];
+		if ( $min_time && $min_time > apply_filters( 'app_safe_min_time', 9 ) ) {
+			return apply_filters( 'app-time-min_time', absint( $min_time ) );
+		} else {
+			return apply_filters( 'app-time-min_time', apply_filters( 'app_safe_time', 10 ) );
+		}
 	}
 
 	/**
@@ -918,10 +922,13 @@ class Appointments {
 	 *	@return integer
 	 */
 	function get_app_limit() {
-		if ( isset( $this->options["app_limit"] ) && $this->options["app_limit"] )
-			return apply_filters( 'app_limit', (int)$this->options["app_limit"] );
-		else
+		$options = appointments_get_options();
+		$app_limit = $options['app_limit'];
+		if ( $app_limit ) {
+			return apply_filters( 'app_limit', absint( $app_limit ) );
+		} else {
 			return apply_filters( 'app_limit', 365 );
+		}
 	}
 
 	/**
@@ -1662,134 +1669,21 @@ class Appointments {
 	/**
 	 * Helper function to create a weekly schedule
 	 */
-	function get_weekly_calendar( $timestamp=false, $class='', $long ) {
-		global $wpdb;
+	function get_weekly_calendar( $timestamp=false, $class='', $long = false ) {
 
 		$this->get_lsw();
 
-		$price = $this->get_price( );
+		$current_time = current_time( 'timestamp' );
+		$date = $timestamp ? $timestamp : $current_time;
+		return appointments_weekly_calendar( $date, array(
+            'worker_id' => $this->worker,
+            'service_id' => $this->service,
+            'location_id' => $this->location,
+            'long' => $long,
+            'class' => $class,
+            'echo' => false
+        ));
 
-		$year = date("Y", $this->local_time);
-		$month = date("m",  $this->local_time);
-
-		$date = $timestamp ? $timestamp : $this->local_time;
-
-		$sunday = $this->sunday( $date ); // Timestamp of first Sunday of any date
-
-		$start = $end = 0;
-		if ( $min_max = $this->min_max_wh( 0, 0 ) ) {
-			$start = $min_max["min"];
-			$end = $min_max["max"];
-		}
-		if ( $start >= $end ) {
-			$start = 8;
-			$end = 18;
-		}
-		$start = apply_filters( 'app_schedule_starting_hour', $start, $date, 'week' );
-		$end = apply_filters( 'app_schedule_ending_hour', $end, $date, 'week' );
-
-		$first = $start *3600 + $sunday; // Timestamp of the first cell of first Sunday
-		$last = $end *3600 + $sunday; // Timestamp of the last cell of first Sunday
-		$schedule_key = sprintf("%sx%s", $date, $date+(7*86400));
-
-		if (defined('APP_USE_LEGACY_DURATION_CALCULUS') && APP_USE_LEGACY_DURATION_CALCULUS) {
-			$step = $this->get_min_time() * 60; // Timestamp increase interval to one cell below
-		} else {
-			$service = appointments_get_service($this->service);
-			$step = (!empty($service->duration) ? $service->duration : $this->get_min_time()) * 60; // Timestamp increase interval to one cell below
-		}
-
-		$days = $this->arrange( array(0,1,2,3,4,5,6), -1, true ); // Arrange days acc. to start of week
-
-		$tbl_class = $class;
-		$tbl_class = $tbl_class ? "class='{$tbl_class}'" : '';
-
-		$ret = '';
-		$ret .= '<a name="app_schedule">&nbsp;</a>';
-		$ret = apply_filters( 'app_schedule_before_table', $ret );
-		$ret .= "<table width='100%' {$tbl_class}>";
-		$ret .= $this->_get_table_meta_row('thead', $long);
-		$ret .= '<tbody>';
-
-		$ret = apply_filters( 'app_schedule_before_first_row', $ret );
-
-		$todays_no = date("w", $this->local_time ); // Number of today
-		$working_days = $this->get_working_days( $this->worker, $this->location ); // Get an array of working days
-		$capacity = $this->get_capacity();
-
-		// Allow direct step increment manipulation,
-		// mainly for service duration based calculus start/stop times
-		$step = apply_filters('app-timetable-step_increment', $step);
-
-		for ( $t=$first; $t<$last; $t=$t+$step ) {
-			foreach ( $days as $key=>$i ) {
-				if ( $i == -1 ) {
-					$from = apply_filters( 'app_weekly_calendar_from', $this->secs2hours( $t - $sunday ), $t );
-					$to = apply_filters( 'app_weekly_calendar_to', $this->secs2hours( $t - $sunday + $step ), $t );
-					$ret .= "<td class='appointments-weekly-calendar-hours-mins'>".$from." &#45; ".$to."</td>";
-				}
-				else {
-					$ccs = apply_filters('app_ccs', $t + $i * 86400); // Current cell starts
-					$cce = apply_filters('app_cce', $ccs + $step); // Current cell ends
-
-					$class_name = '';
-					$is_busy = $this->is_busy( $ccs, $cce, $capacity );
-					$title = apply_filters('app-schedule_cell-title', date_i18n($this->datetime_format, $ccs), $is_busy, $ccs, $cce, $schedule_key);
-
-					// Also mark now
-					if ( $this->local_time > $ccs && $this->local_time < $cce )
-						$class_name = 'notpossible now';
-					// Mark passed hours
-					else if ( $this->local_time > $ccs )
-						$class_name = 'notpossible app_past';
-					// Then check if this time is blocked
-					else if ( isset( $this->options["app_lower_limit"] ) && $this->options["app_lower_limit"]
-						&&( $this->local_time + $this->options["app_lower_limit"] * 3600) > $cce )
-						$class_name = 'notpossible app_blocked';
-					// Check today is holiday
-					else if ( $this->is_holiday( $ccs, $cce ) )
-						$class_name = 'notpossible app_holiday';
-					// Check if we are working today
-					else if ( !in_array( date("l", $ccs ), $working_days ) && !$this->is_exceptional_working_day( $ccs, $cce ) )
-						$class_name = 'notpossible notworking';
-					// Check if this is break
-					else if ( $this->is_break( $ccs, $cce ) )
-						$class_name = 'notpossible app_break';
-					// Then look for appointments
-					else if ( $is_busy )
-						$class_name = 'busy';
-					// Then check if we have enough time to fulfill this app
-					else if ( !$this->is_service_possible( $ccs, $cce, $capacity ) )
-						$class_name = 'notpossible service_notpossible';
-					// If nothing else, then it must be free
-					else
-						$class_name = 'free';
-
-					$class_name = apply_filters( 'app_class_name', $class_name, $ccs, $cce );
-
-					$ret .= '<td class="'.$class_name.'" title="'.esc_attr($title).'">
-					<input type="hidden" class="appointments_take_appointment" value="'.$this->pack( $ccs, $cce ).'" /></td>';
-				}
-			}
-			$ret .= '</tr><tr>'; // Close the last day of the week
-		}
-		$ret = apply_filters( 'app_schedule_after_last_row', $ret );
-		$ret .= '</tbody>';
-		$ret .= $this->_get_table_meta_row('tfoot', $long);
-		$ret .= '</table>';
-		$ret = apply_filters( 'app_schedule_after_table', $ret );
-
-		return $ret;
-	}
-
-	function _get_table_meta_row ($which, $long) {
-		if ( ! $long ) {
-			$day_names_array = $this->arrange( $this->get_short_day_names(), __( ' ', 'appointments' ) );
-		} else {
-			$day_names_array = $this->arrange( $this->get_day_names(), __( ' ', 'appointments' ) );
-		}
-		$cells = '<th class="hourmin_column">&nbsp;' . join('</th><th>', $day_names_array) . '</th>';
-		return "<{$which}><tr>{$cells}</tr></{$which}>";
 	}
 
 	function get_day_names() {
