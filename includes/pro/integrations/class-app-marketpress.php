@@ -37,7 +37,7 @@ class Appointments_Integrations_MarketPress {
 
 	private function is_integration_active() {
 		$options = appointments_get_options();
-		return $this->is_mp_active() && $options['use_mp'] && $options['payment_required'];
+		return $this->is_mp_active() && $options['use_mp'] && $options['payment_required'] === 'yes';
 	}
 
 
