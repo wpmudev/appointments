@@ -5,6 +5,11 @@ function appointments_get_options() {
 	return wp_parse_args( $options, appointments_get_default_options() );
 }
 
+function appointments_get_option( $name ) {
+	$options = appointments_get_options();
+	return isset( $options[ $name ] ) ? $options[ $name ] : false;
+}
+
 function appointments_get_default_options() {
 	$confirmation_message = App_Template::get_default_confirmation_message();
 	$reminder_message = App_Template::get_default_reminder_message();
@@ -63,7 +68,6 @@ function appointments_get_default_options() {
 		'reminder_subject'			=> __('Reminder for your Appointment','appointments'),
 		'reminder_message'			=> $reminder_message,
 		'log_emails'				=> 'yes',
-		'use_mp'					=> false,
 		'allow_cancel'				=> 'no',
 		'cancel_page'				=> 0,
 		'thank_page'				=> 0

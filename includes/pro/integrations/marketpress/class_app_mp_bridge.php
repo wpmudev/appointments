@@ -14,12 +14,12 @@ class App_MP_Bridge {
 	}
 
 	private function _add_hooks () {
-		add_filter('mp_product', array($this, 'filter_product'), 10, 2);
-		add_filter('app-appointment-appointment_created', array($this, 'appointment_created'), 10, 7);
-		add_action('app_remove_pending', array($this, 'remove_from_cart'));
+		add_filter( 'mp_product', array( $this, 'filter_product' ), 10, 2 );
+		add_filter( 'app-appointment-appointment_created', array( $this, 'appointment_created' ), 10, 7 );
+		add_action( 'app_remove_expired', array( $this, 'remove_from_cart' ), 10, 2 );
 
-		add_action('mp_order_order_paid', array($this, 'mp_product_order_paid'));
-		add_filter('mp_cart/column_html', array($this, 'filter_cart_column'), 10, 4);
+		add_action( 'mp_order_order_paid', array( $this, 'mp_product_order_paid' ) );
+		add_filter( 'mp_cart/column_html', array( $this, 'filter_cart_column' ), 10, 4 );
 	}
 
 	public function filter_product ($html, $product_id) {
@@ -88,19 +88,21 @@ class App_MP_Bridge {
 		return $additional;
 	}
 
-	public function remove_from_cart ($expired_app) {
-		$cart = MP_Cart::get_instance();
+	public function remove_from_cart( $expired_app, $new_status ) {
+		$cart  = MP_Cart::get_instance();
 		$items = $cart->get_items();
-		foreach ($items as $variation => $amount) {
-			$app_id = MP_Product::get_variation_meta($variation, 'name');
-			if ($app_id == $expired_app->ID) $cart->remove_item($variation);
+		foreach ( $items as $variation => $amount ) {
+			$app_id = MP_Product::get_variation_meta( $variation, 'name' );
+			if ( $app_id == $expired_app->ID ) {
+				$cart->remove_item( $variation );
+			}
 		}
 	}
 
 	public function mp_product_order_paid ($order) {
-		$cart_info = is_object($order) && is_callable(array($order, 'get_cart'))
+		$cart_info = is_object( $order ) && is_callable( array( $order, 'get_cart' ) )
 			? $order->get_cart()->get_items()
-			: (isset($order->mp_cart_info) ? $order->mp_cart_info : array())
+			: ( isset( $order->mp_cart_info ) ? $order->mp_cart_info : array() )
 		;
 
 		if( !is_object( $cart_info ) || epmty( $cart_info ) ){
@@ -111,18 +113,22 @@ class App_MP_Bridge {
 		$variation_type = MP_Product::get_variations_post_type();
 		$appointment_ids = array();
 
-		if (is_array($cart_info) && count($cart_info)) foreach ($cart_info as $cart_id => $count) {
-			$variation = get_post($cart_id);
-			if (!empty($variation->post_type) && $variation_type === $variation->post_type && $this->_is_app_mp_page($variation->post_parent)) {
-				$app_id = MP_Product::get_variation_meta($variation->ID, 'name');
-				if (is_numeric($app_id)) $appointment_ids[] = $app_id;
+		if ( is_array( $cart_info ) && count( $cart_info ) ) {
+			foreach ( $cart_info as $cart_id => $count ) {
+				$variation = get_post( $cart_id );
+				if ( ! empty( $variation->post_type ) && $variation_type === $variation->post_type && $this->_is_app_mp_page( $variation->post_parent ) ) {
+					$app_id = MP_Product::get_variation_meta( $variation->ID, 'name' );
+					if ( is_numeric( $app_id ) ) {
+						$appointment_ids[] = $app_id;
+					}
+				}
 			}
 		}
 		
-		$do_send = !empty($this->_core->options["send_confirmation"]) && 'yes' == $this->_core->options["send_confirmation"];
 		foreach ($appointment_ids as $aid) {
-			if (!$this->_core->change_status('paid', $aid)) continue;
-
+			if ( ! appointments_update_appointment_status( $aid, 'paid' ) ) {
+				continue;
+			}
 			do_action('app_mp_order_paid', $aid, $order);
 		}
 	}
