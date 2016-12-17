@@ -263,6 +263,114 @@ function appointments_use_legacy_duration_calculus() {
 	return defined( 'APP_USE_LEGACY_DURATION_CALCULUS' ) && APP_USE_LEGACY_DURATION_CALCULUS;
 }
 
+/**
+ * Check if a slot is not available
+ *
+ * @param $start
+ * @param $end
+ * @param array $args
+ *
+ * @return bool
+ */
+function apppointments_is_range_busy( $start, $end, $args = array() ) {
+    $appointments = appointments();
+
+    $defaults = array(
+        'worker_id' => 0,
+        'service_id' => 0,
+        'location_id' => 0
+    );
+	$args = wp_parse_args( $args, $defaults );
+
+	$week   = date( "W", $start );
+	$period = new App_Period( $start, $end );
+
+	// If a specific worker is selected, we will look at his schedule first.
+	if ( 0 != $args['worker_id'] ) {
+		$apps = $appointments->get_reserve_apps_by_worker( $args['location_id'], $args['worker_id'], $week );
+		if ( $apps ) {
+			foreach ( $apps as $app ) {
+				//if ( $start >= strtotime( $app->start ) && $end <= strtotime( $app->end ) ) return true;
+				if ( $period->contains( $app->start, $app->end ) ) {
+					return true;
+				}
+			}
+		}
+	}
+
+	// If we're here, no worker is set or (s)he's not busy by default. Let's go for quick filter trip.
+	$is_busy = apply_filters( 'app-is_busy', false, $period );
+	if ( $is_busy ) {
+		return true;
+	}
+
+	// If we are here, no preference is selected (provider_id=0) or selected provider is not busy. There are 2 cases here:
+	// 1) There are several providers: Look for reserve apps for the workers giving this service.
+	// 2) No provider defined: Look for reserve apps for worker=0, because he will carry out all services
+	if ( appointments_get_all_workers() ) {
+		$workers = appointments_get_workers_by_service( $args['service_id'] );
+		$apps    = array();
+		if ( $workers ) {
+			foreach ( $workers as $worker ) {
+				/** @var Appointments_Worker $worker * */
+				if ( $appointments->is_working( $start, $end, $worker->ID ) ) {
+					$app_worker = $appointments->get_reserve_apps_by_worker( $args['location_id'], $worker->ID, $week );
+					if ( $app_worker && is_array( $app_worker ) ) {
+						$apps = array_merge( $apps, $app_worker );
+					}
+
+					// Also include appointments by general staff for services that can be given by this worker
+					$services_provided = $worker->services_provided;
+					if ( $services_provided && is_array( $services_provided ) && ! empty( $services_provided ) ) {
+						foreach ( $services_provided as $service_ID ) {
+							$_args           = array(
+								'location' => $args['location_id'],
+								'service'  => $service_ID,
+								'week'     => $week
+							);
+							$apps_service_0 = appointments_get_appointments_filtered_by_services( $_args );
+							if ( $apps_service_0 && is_array( $apps_service_0 ) ) {
+								$apps = array_merge( $apps, $apps_service_0 );
+							}
+						}
+					}
+				}
+			}
+			// Remove duplicates
+			$apps = $appointments->array_unique_object_by_ID( $apps );
+		}
+	} else {
+		$apps = $appointments->get_reserve_apps_by_worker( $args['location_id'], 0, $week );
+	}
+
+
+	$n = 0;
+	foreach ( $apps as $app ) {
+		// @FIX: this will allow for "only one service and only one provider per time slot"
+		if ( $args['location_id'] && $args['service_id'] && ( $app->service != $args['service_id'] ) ) {
+			continue;
+			// This is for the following scenario:
+			// 1) any number of providers per service
+			// 2) any number of services
+			// 3) only one service and only one provider per time slot:
+			// 	- selecting one provider+service makes this provider and selected service unavailable in a time slot
+			// 	- other providers are unaffected, other services are available
+		}
+		// End @FIX
+		//if ( $start >= strtotime( $app->start ) && $end <= strtotime( $app->end ) ) $n++;
+		if ( $period->contains( $app->start, $app->end ) ) {
+			$n ++;
+		}
+	}
+
+	if ( $n >= $appointments->available_workers( $start, $end ) ) {
+		return true;
+	}
+
+	// Nothing found, so this time slot is not busy
+	return false;
+}
+
 
 /**
  * Display the weekly calendar

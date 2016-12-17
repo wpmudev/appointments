@@ -297,7 +297,7 @@ class Appointments_AJAX {
 			)));
 		}
 
-		global $wpdb, $current_user;
+		global $current_user;
 
 		$values = explode( ":", $_POST["value"] );
 		$location = $values[0];
@@ -433,14 +433,33 @@ class Appointments_AJAX {
 
 		$duration = apply_filters( 'app_post_confirmation_duration', $duration, $service, $worker, $user_id );
 
-		if ($appointments->is_busy($start,  $start + ($duration * 60), $appointments->get_capacity())) {
-			die(json_encode(array(
+		$args = array(
+			'worker_id' => $worker,
+			'service_id' => $service,
+			'location_id' => $location
+		);
+		$is_busy = apppointments_is_range_busy( $start, $start + ( $duration * 60 ), $args );
+		if ( $is_busy ) {
+			die( json_encode( array(
 				"error" => apply_filters(
 					'app_booked_message',
-					__('We are sorry, but this time slot is no longer available. Please refresh the page and try another time slot. Thank you.', 'appointments')
+					__( 'We are sorry, but this time slot is no longer available. Please refresh the page and try another time slot. Thank you.', 'appointments' )
 				),
-			)));
+			) ) );
 		}
+
+		// Try to assign to first worker available
+		$workers = appointments_get_all_workers();
+		foreach ( $workers as $worker ) {
+			$args['worker_id'] = $worker->ID;
+			$is_busy = apppointments_is_range_busy( $start, $start + ( $duration * 60 ), $args );
+			if ( ! $is_busy ) {
+				$worker = $worker->ID;
+			}
+		}
+
+
+		unset( $args );
 
 		$status = apply_filters('app_post_confirmation_status', $status, $price, $service, $worker, $user_id );
 

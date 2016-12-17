@@ -1,7 +1,5 @@
 <?php
 
-global $appointments, $wpdb;
-
 $worker_id = isset( $_REQUEST['app_provider_id'] ) ? absint( $_REQUEST['app_provider_id'] ) : 0;
 $result = array();
 foreach ( array( 'open', 'closed' ) as $stat ) {

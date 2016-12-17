@@ -1962,91 +1962,12 @@ class Appointments {
 	 * @return bool
 	 */
 	function is_busy( $start, $end, $capacity ) {
-		$week= date( "W", $start );
-		$period = new App_Period($start, $end);
-
-		// If a specific worker is selected, we will look at his schedule first.
-		if ( 0 != $this->worker ) {
-			$apps = $this->get_reserve_apps_by_worker( $this->location, $this->worker, $week );
-			if ( $apps ) {
-				foreach ( $apps as $app ) {
-					//if ( $start >= strtotime( $app->start ) && $end <= strtotime( $app->end ) ) return true;
-					if ( $period->contains( $app->start, $app->end ) ) {
-						return true;
-					}
-				}
-			}
-		}
-
-		// If we're here, no worker is set or (s)he's not busy by default. Let's go for quick filter trip.
-		$is_busy = apply_filters('app-is_busy', false, $period, $capacity);
-		if ( $is_busy ) {
-			return true;
-		}
-			
-		// If we are here, no preference is selected (provider_id=0) or selected provider is not busy. There are 2 cases here:
-		// 1) There are several providers: Look for reserve apps for the workers giving this service.
-		// 2) No provider defined: Look for reserve apps for worker=0, because he will carry out all services
-		if ( appointments_get_all_workers() ) {
-			$workers = appointments_get_workers_by_service( $this->service );
-			$apps = array();
-			if ( $workers ) {
-				foreach( $workers as $worker ) {
-					/** @var Appointments_Worker $worker **/
-					if ( $this->is_working( $start, $end, $worker->ID ) ) {
-						$app_worker = $this->get_reserve_apps_by_worker( $this->location, $worker->ID, $week );
-						if ( $app_worker && is_array( $app_worker ) )
-							$apps = array_merge( $apps, $app_worker );
-
-						// Also include appointments by general staff for services that can be given by this worker
-						$services_provided = $worker->services_provided;
-						if ( $services_provided && is_array( $services_provided ) && !empty( $services_provided ) ) {
-							foreach ( $services_provided as $service_ID ) {
-								$args = array(
-									'location' => $this->location,
-									'service' => $service_ID,
-									'week' => $week
-								);
-								$apps_service_0 = appointments_get_appointments_filtered_by_services( $args );
-								if ( $apps_service_0 && is_array( $apps_service_0 ) )
-									$apps = array_merge( $apps, $apps_service_0 );
-							}
-						}
-					}
-				}
-				// Remove duplicates
-				$apps = $this->array_unique_object_by_ID( $apps );
-			}
-		} else {
-			$apps = $this->get_reserve_apps_by_worker( $this->location, 0, $week );
-		}
-
-
-
-		$n = 0;
-		foreach ( $apps as $app ) {
-			// @FIX: this will allow for "only one service and only one provider per time slot"
-			if ($this->worker && $this->service && ($app->service != $this->service)) {
-				continue;
-				// This is for the following scenario:
-				// 1) any number of providers per service
-				// 2) any number of services
-				// 3) only one service and only one provider per time slot:
-				// 	- selecting one provider+service makes this provider and selected service unavailable in a time slot
-				// 	- other providers are unaffected, other services are available
-			}
-			// End @FIX
-			//if ( $start >= strtotime( $app->start ) && $end <= strtotime( $app->end ) ) $n++;
-			if ( $period->contains( $app->start, $app->end ) ) {
-				$n ++;
-			}
-		}
-
-		if ( $n >= $this->available_workers( $start, $end ) )
-			return true;
-
-		// Nothing found, so this time slot is not busy
-		return false;
+	    $args = array(
+            'location_id' => $this->location,
+            'service_id' => $this->service,
+            'worker_id' => $this->worker
+        );
+		return apppointments_is_range_busy( $start, $end, $args );
 	}
 
 
