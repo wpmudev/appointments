@@ -346,7 +346,7 @@ class App_Upgrades_Test extends App_UnitTestCase {
 		appointments()->maybe_upgrade();
 
 		$options = appointments_get_options();
-		$this->assertEquals( $paddings, $options['service_paddings'] );
+		$this->assertEquals( $paddings, $options['service_padding'] );
 	}
 
 	/**
