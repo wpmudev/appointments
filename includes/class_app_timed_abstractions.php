@@ -13,7 +13,7 @@ class App_Period {
 	public function contains ($start, $end) {
 		$start = is_numeric($start) ? $start : strtotime($start);
 		$end = is_numeric($end) ? $end : strtotime($end);
-		return defined('APP_USE_LEGACY_BOUNDARIES_CALCULUS') && APP_USE_LEGACY_BOUNDARIES_CALCULUS
+		return appointments_use_legacy_boundaries_calculus()
 			? $this->_contains_exact($start, $end)
 			: $this->_contains_boundaries($start, $end)
 		;

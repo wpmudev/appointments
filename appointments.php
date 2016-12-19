@@ -1451,20 +1451,20 @@ class Appointments {
 		$last = $end *3600 + $day_start; // Timestamp of the last cell
 		$min_step_time = $this->get_min_time() * 60; // Cache min step increment
 
-		if (defined('APP_USE_LEGACY_DURATION_CALCULUS') && APP_USE_LEGACY_DURATION_CALCULUS) {
+		if (appointments_use_legacy_duration_calculus()) {
 			$step = $min_step_time; // Timestamp increase interval to one cell ahead
 		} else {
 			$service = appointments_get_service($this->service);
 			$step = (!empty($service->duration) ? $service->duration : $min_step_time) * 60; // Timestamp increase interval to one cell ahead
 		}
 
-		if ( ! ( defined( 'APP_USE_LEGACY_DURATION_CALCULUS' ) && APP_USE_LEGACY_DURATION_CALCULUS ) ) {
+		if ( ! appointments_use_legacy_duration_calculus() ) {
 			$start_result = appointments_get_worker_working_hours( 'open', $this->worker, $this->location );
 			$start_unpacked_days = $start_result->hours;
 		} else {
 			$start_unpacked_days = array();
 		}
-		if ( defined( 'APP_BREAK_TIMES_PADDING_CALCULUS' ) && APP_BREAK_TIMES_PADDING_CALCULUS ) {
+		if ( appointments_use_break_times_padding_calculus() ) {
 			$break_result = appointments_get_worker_working_hours( 'closed', $this->worker, $this->location );
 			$break_times = $break_result->hours;
 		} else {
@@ -1473,7 +1473,12 @@ class Appointments {
 
 		// Allow direct step increment manipulation,
 		// mainly for service duration based calculus start/stop times
-		$step = apply_filters('app-timetable-step_increment', $step);
+		$step = apply_filters('app-timetable-step_increment', $step, 'timetable' );
+
+		if ( empty( $step ) || ! is_numeric( $step ) ) {
+		    // If step is null/0 etc we can end up with problems
+            return '';
+        }
 
 		$timetable_key .= '-' . $step . '-' . $this->service;
 
@@ -1496,7 +1501,7 @@ class Appointments {
 // Fix for service durations calculus and workhours start conflict with different duration services
 // Example: http://premium.wpmudev.org/forums/topic/problem-with-time-slots-not-properly-allocating-free-time
 				$this_day_key = date('l', $t);
-				if (!empty($start_unpacked_days) && !(defined('APP_USE_LEGACY_DURATION_CALCULUS') && APP_USE_LEGACY_DURATION_CALCULUS)) {
+				if (!empty($start_unpacked_days) && ! appointments_use_legacy_duration_calculus() ) {
 					if (!empty($start_unpacked_days[$this_day_key])) {
 						// Check slot start vs opening start
 						$this_day_opening_timestamp = strtotime(date('Y-m-d ' . $start_unpacked_days[$this_day_key]['start'], $ccs));
@@ -1513,7 +1518,7 @@ class Appointments {
 				}
 // Breaks are not behaving like paddings, which is to be expected.
 // This fix (2) will force them to behave more like paddings
-				if (!empty($break_times[$this_day_key]['active']) && defined('APP_BREAK_TIMES_PADDING_CALCULUS') && APP_BREAK_TIMES_PADDING_CALCULUS) {
+				if (!empty($break_times[$this_day_key]['active']) && appointments_use_break_times_padding_calculus() ) {
 					$active = $break_times[$this_day_key]['active'];
 					$break_starts = $break_times[$this_day_key]['start'];
 					$break_ends = $break_times[$this_day_key]['end'];

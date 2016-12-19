@@ -21,44 +21,71 @@ class App_Schedule_Durations {
 	}
 
 	private function _add_hooks () {
-		add_action('plugins_loaded', array($this, 'initialize'));
-
 		add_filter('init', array($this, 'apply_duration_calculus'), 99);
 
 		add_action('app-settings-time_settings', array($this, 'show_settings'));
 		add_filter('app-options-before_save', array($this, 'save_settings'));
+
+		add_action( 'appointments_default_options', array( $this, 'default_options' ) );
 	}
 
-	public function initialize () {
-		global $appointments;
-		$this->_data = $appointments->options;
+
+	/**
+	 * Add default options to Appointments+ options
+	 *
+	 * @param array $defaults
+	 *
+	 * @return array
+	 */
+	public function default_options( $defaults ) {
+		$defaults['duration_calculus'] = 'legacy';
+		$defaults['boundaries_calculus'] = 'legacy';
+		$defaults['breaks_calculus'] = 'legacy';
+		return $defaults;
 	}
 
 	public function apply_duration_calculus () {
-		if (!defined('APP_USE_LEGACY_DURATION_CALCULUS')) {
-			if (!empty($this->_data['duration_calculus']) && 'legacy' == $this->_data['duration_calculus']) {
-				define('APP_USE_LEGACY_DURATION_CALCULUS', true, true);
+		$options = appointments_get_options();
+
+		if ( ! defined( 'APP_USE_LEGACY_DURATION_CALCULUS' ) ) {
+			if ( 'legacy' === $options['duration_calculus'] ) {
+				define( 'APP_USE_LEGACY_DURATION_CALCULUS', true, true );
 				$this->_duration_flag_changes_applied = true;
 			}
 		}
-		if (!defined('APP_USE_LEGACY_BOUNDARIES_CALCULUS')) {
-			if (!empty($this->_data['boundaries_calculus']) && 'legacy' == $this->_data['boundaries_calculus']) {
-				define('APP_USE_LEGACY_BOUNDARIES_CALCULUS', true, true);
+		if ( ! defined( 'APP_USE_LEGACY_BOUNDARIES_CALCULUS' ) ) {
+			if ( 'legacy' === $options['boundaries_calculus'] ) {
+				define( 'APP_USE_LEGACY_BOUNDARIES_CALCULUS', true, true );
 				$this->_boundaries_flag_changes_applied = true;
 			}
 		}
-		if (!defined('APP_BREAK_TIMES_PADDING_CALCULUS')) {
-			if (!empty($this->_data['breaks_calculus']) && 'legacy' != $this->_data['breaks_calculus']) {
-				define('APP_BREAK_TIMES_PADDING_CALCULUS', true, true);
+		if ( ! defined( 'APP_BREAK_TIMES_PADDING_CALCULUS' ) ) {
+			if ( 'legacy' != $options['breaks_calculus'] ) {
+				define( 'APP_BREAK_TIMES_PADDING_CALCULUS', true, true );
 				$this->_breaks_flag_changes_applied = true;
 			}
 		}
 	}
 
 	public function save_settings ($options) {
-		if (!empty($_POST['duration_calculus'])) $options['duration_calculus'] = $_POST['duration_calculus'];
-		if (!empty($_POST['boundaries_calculus'])) $options['boundaries_calculus'] = $_POST['boundaries_calculus'];
-		if (!empty($_POST['breaks_calculus'])) $options['breaks_calculus'] = $_POST['breaks_calculus'];
+		if ( ! empty( $_POST['duration_calculus'] ) ) {
+			$allowed = array( 'legacy', 'service' );
+			if ( in_array( $_POST['duration_calculus'], $allowed ) ) {
+				$options['duration_calculus'] = $_POST['duration_calculus'];
+			}
+		}
+		if ( ! empty( $_POST['boundaries_calculus'] ) ) {
+			$allowed = array( 'legacy', 'detect_overlap' );
+			if ( in_array( $_POST['boundaries_calculus'], $allowed ) ) {
+				$options['boundaries_calculus'] = $_POST['boundaries_calculus'];
+			}
+		}
+		if ( ! empty( $_POST['breaks_calculus'] ) ) {
+			$allowed = array( 'legacy', 'pad' );
+			if ( in_array( $_POST['breaks_calculus'], $allowed ) ) {
+				$options['breaks_calculus'] = $_POST['breaks_calculus'];
+			}
+		}
 		return $options;
 	}
 
@@ -67,6 +94,7 @@ class App_Schedule_Durations {
 	}
 
 	private function _show_legacy_duration_settings () {
+		$options = appointments_get_options();
 		echo '<tr valign="top">' .
 			'<th scope="row" >' . __('Time slot calculus method', 'appointments') . '</th>' .
 		'';
@@ -82,7 +110,7 @@ class App_Schedule_Durations {
 				'legacy' => __('Minimum time based appointment duration calculus <em>(legacy)</em>', 'appointments'),
 				'service' => __('Service duration based calculus', 'appointments'),
 			);
-			$method = !empty($this->_data['duration_calculus']) ? $this->_data['duration_calculus'] : 'service';
+			$method = !empty($options['duration_calculus']) ? $options['duration_calculus'] : 'service';
 			foreach ($durations as $key => $label) {
 				$checked = checked($key, $method, false);
 				echo "<input type='radio' name='duration_calculus' id='app-duration_calculus-{$key}' value='{$key}' {$checked} />" .
@@ -102,7 +130,7 @@ class App_Schedule_Durations {
 				'legacy' => __('Exact period matching <em>(legacy)</em>', 'appointments'),
 				'detect_overlap' => __('Detect overlap', 'appointments'),
 			);
-			$method = !empty($this->_data['boundaries_calculus']) ? $this->_data['boundaries_calculus'] : 'detect_overlap';
+			$method = !empty($options['boundaries_calculus']) ? $options['boundaries_calculus'] : 'detect_overlap';
 			foreach ($boundaries as $key => $label) {
 				$checked = checked($key, $method, false);
 				echo "<input type='radio' name='boundaries_calculus' id='app-boundaries_calculus-{$key}' value='{$key}' {$checked} />" .
@@ -122,7 +150,7 @@ class App_Schedule_Durations {
 				'legacy' => __('Invalidate enclosed offsets <em>(legacy)</em>', 'appointments'),
 				'pad' => __('Shift next period', 'appointments'),
 			);
-			$method = !empty($this->_data['breaks_calculus']) ? $this->_data['breaks_calculus'] : 'legacy';
+			$method = !empty($options['breaks_calculus']) ? $options['breaks_calculus'] : 'legacy';
 			foreach ($breaks as $key => $label) {
 				$checked = checked($key, $method, false);
 				echo "<input type='radio' name='breaks_calculus' id='app-breaks_calculus-{$key}' value='{$key}' {$checked} />" .

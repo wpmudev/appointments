@@ -164,9 +164,10 @@ function appointments_get_weekly_schedule_slots( $now = false, $service_id = 0, 
 			$step = $service->duration * 60;
 		}
 	}
+
 	// Allow direct step increment manipulation,
 	// mainly for service duration based calculus start/stop times
-	$step = apply_filters( 'app-timetable-step_increment', $step );
+	$step = apply_filters( 'app-timetable-step_increment', $step, 'week' );
 
 	// Get the last day that was a start of week. We'll start from there
 	$week_start = appointments_week_start();
@@ -261,6 +262,14 @@ function appointments_get_working_hours_range( $worker = false, $location = fals
 
 function appointments_use_legacy_duration_calculus() {
 	return defined( 'APP_USE_LEGACY_DURATION_CALCULUS' ) && APP_USE_LEGACY_DURATION_CALCULUS;
+}
+
+function appointments_use_break_times_padding_calculus() {
+    return defined( 'APP_BREAK_TIMES_PADDING_CALCULUS' ) && APP_BREAK_TIMES_PADDING_CALCULUS;
+}
+
+function appointments_use_legacy_boundaries_calculus() {
+    return defined('APP_USE_LEGACY_BOUNDARIES_CALCULUS') && APP_USE_LEGACY_BOUNDARIES_CALCULUS;
 }
 
 /**
