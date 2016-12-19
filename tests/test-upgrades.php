@@ -329,7 +329,7 @@ class App_Upgrades_Test extends App_UnitTestCase {
 		$this->assertEquals( array( 0 => '18:00', 1 => '21:00', ), $new_hours->hours['Monday']['end'] );
 	}
 
-	private function test_upgrade_1_9_4_3() {
+	public function test_upgrade_1_9_4_3() {
 		$args = $this->factory->service->generate_args();
 		$service_id_1 = $this->factory->service->create_object( $args );
 
