@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	public $version = "1.9.4.2";
+	public $version = "1.9.4.3";
 	public $db_version;
 
 	public $timetables = array();

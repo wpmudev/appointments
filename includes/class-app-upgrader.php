@@ -29,6 +29,10 @@ class Appointments_Upgrader {
 			$this->upgrade_1_9_4_2();
 		}
 
+		if ( version_compare( $saved_version, '1.9.4.3', '<' ) ) {
+			$this->upgrade_1_9_4_3();
+		}
+
 		update_option( 'app_db_version', $new_version );
 
 	}
@@ -158,5 +162,21 @@ class Appointments_Upgrader {
 		global $wpdb;
 		$table = $wpdb->prefix . 'app_cache';
 		$wpdb->query( "DROP TABLE IF EXISTS $table" );
+	}
+
+	private function upgrade_1_9_4_3() {
+		// Move paddings to general options
+		$service_paddings = get_option( 'appointments_services_padding', array() );
+		$options = appointments_get_options();
+		if ( ! empty( $service_paddings ) ) {
+			$options['service_padding'] = $service_paddings;
+		}
+
+		$worker_paddings = get_option( 'appointments_workers_padding', array() );
+		if ( ! empty( $worker_paddings ) ) {
+			$options['worker_padding'] = $worker_paddings;
+		}
+
+		appointments_update_options( $options );
 	}
 }

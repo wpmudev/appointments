@@ -329,6 +329,26 @@ class App_Upgrades_Test extends App_UnitTestCase {
 		$this->assertEquals( array( 0 => '18:00', 1 => '21:00', ), $new_hours->hours['Monday']['end'] );
 	}
 
+	private function test_upgrade_1_9_4_3() {
+		$args = $this->factory->service->generate_args();
+		$service_id_1 = $this->factory->service->create_object( $args );
+
+		$args = $this->factory->service->generate_args();
+		$service_id_2 = $this->factory->service->create_object( $args );
+
+		$paddings = array(
+			$service_id_1 => array( 'before' => 5, 'after' => 15 ),
+			$service_id_2 => array( 'before' => 1, 'after' => 3 )
+		);
+		update_option( 'appointments_services_padding', $paddings );
+
+		update_option( 'app_db_version', '1.9.4.2' );
+		appointments()->maybe_upgrade();
+
+		$options = appointments_get_options();
+		$this->assertEquals( $paddings, $options['service_paddings'] );
+	}
+
 	/**
 	 * This is a function on app-users-additional_fields.php
 	 *
