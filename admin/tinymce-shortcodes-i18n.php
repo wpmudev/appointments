@@ -4,7 +4,7 @@ $strings = new stdClass();
 $appointments = appointments();
 $registered_shortcodes = array_keys($appointments->shortcodes );
 
-$strings->label = esc_js( __( 'Appointments', 'pubman' ) );
+$strings->label = esc_js( __( 'Appointments', 'appointments' ) );
 $strings->shortcodes = new stdClass();
 foreach ( $registered_shortcodes as $shortcode ) {
 	$instance = App_Shortcodes::get_shortcode_instance( $shortcode );
