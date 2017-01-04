@@ -1,3 +1,30 @@
+2017-01-04 - 2.0
+-------------------------------
+- Fixed: Stripe does not set appointments to confirmed after payment received
+- Fixed: Columns offset from the table head when exported to csv
+- Fixed: Sometimes Google Calendar event status was not updated
+- Fixed: Nonce error when saving Appointments Settings with BuddyPress activated
+- Fixed: Additional fields were hidden in settings menu if there were no additional fields set.
+- Fixed: Working hour exceptions not applying in very rare cases
+- Fixed: Email headers when blogname included some HTML in it.
+- Fixed Shared Resources Addon: Shared resources were not working properly in some cases
+- Fixed: Notification emails were not being sent to admin/service provider
+- Fixed: When Saturday was set to start of the week, weekly calendar was starting on Sunday
+- Fixed MarketPress integration: Appointment showing even if it's free
+- Fixed: Timeslot available when providers aren't available and "No preference" provider option is selected
+- New: Added new Shortcodes UI in WP Editor
+- New: new hooks for  abetter extensibility
+- Enhance: Performance improvements
+- Enhance: Better dates localization
+- Enhance: Some styles fixes and improvements in settings menu
+- Enhance: Improvements in dates and times calculations
+- Enhance: Paddings options have been moved to general options
+- Removed: Built in cache feature. A+ now uses WordPress Cache API
+- Removed: Cancel link from emails due to possible exploit
+- Removed: AJAX Shortcode addon
+- Removed: Removed shortcodes submenu
+- Some other minor fixes.
+
 2016-09-13 - 1.9.4
 -------------------------------
 - Fix: Working hours were saved with wrong time format
