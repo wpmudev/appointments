@@ -34,7 +34,7 @@ class App_Locations_ServiceLocations {
 
 		// Augment service settings pages
 		add_filter('app-settings-services-service-name', array($this, 'add_service_selection'), 10, 2);
-		//add_action('app-services-service-updated', array($this, 'save_service_location'));
+		add_action( 'appointments_add_new_service_form', array( $this, 'add_new_service_selection' ) );
 
 		// Add settings
 		add_action('appointments_locations_settings_section_settings', array($this, 'show_settings'));
@@ -86,7 +86,14 @@ class App_Locations_ServiceLocations {
 			return;
 		}
 
-		if ( ! isset( $_POST['service_location'][ $service_id ] ) ) {
+		$location = false;
+		if ( isset( $_POST['service_location'][ $service_id ] ) ) {
+			$location = $_POST['service_location'][ $service_id ];
+		}
+		elseif ( isset( $_POST['service_location'] ) ) {
+			$location = $_POST['service_location'];
+		}
+		else {
 			return;
 		}
 
@@ -98,15 +105,17 @@ class App_Locations_ServiceLocations {
 
 		$key = self::STORAGE_PREFIX . $service_id;
 
-		$location_id = ! empty( $_POST['service_location'][ $service_id ] ) ? $_POST['service_location'][ $service_id ] : false;
+		if ( ! $location ) {
+			$location = 0;
+		}
 
-		$this->_update_appointment_locations( $service_id, $old_location_id, $location_id );
+		$this->_update_appointment_locations( $service_id, $old_location_id, $location );
 
-		if ( $location_id === false ) {
+		if ( $location === false ) {
 			delete_option( $key );
 		}
 		else {
-			update_option($key, $location_id);
+			update_option($key, $location);
 		}
 
 	}
@@ -148,6 +157,33 @@ class App_Locations_ServiceLocations {
 		<?php
 		
 		return $out . ob_get_clean();
+	}
+
+	/**
+	 * Display the location service selector fields in new Service form
+	 */
+	public function add_new_service_selection() {
+		if ( ! class_exists( 'App_Locations_Model' ) || ! $this->_locations ) {
+			return;
+		}
+
+		$locations = appointments_get_locations();
+
+		?>
+		<tr>
+			<th scope="row">
+				<label for="service_location"><?php _e( 'Location', 'appointments' ); ?></label>
+			</th>
+			<td>
+				<select name="service_location" id="service_location">
+					<option value=""></option>
+					<?php foreach ( $locations as $location ): ?>
+						<option value="<?php echo $location->id; ?>"><?php echo esc_html( $location->address ); ?></option>
+					<?php endforeach; ?>
+				</select>
+			</td>
+		</tr>
+		<?php
 	}
 
 	/**
