@@ -47,6 +47,10 @@ class Appointments_Admin_Settings_Page {
 				'payments' => __( 'Payments', 'appointments' ),
 				'notifications' => __( 'Notifications', 'appointments' ),
 				'advanced' => __( 'Advanced', 'appointments' )
+			),
+			'services' => array(
+				'services' => __( 'Services', 'appointments' ),
+				'new-service' => __( 'Add new Service', 'appointments' )
 			)
 		);
 
@@ -130,7 +134,7 @@ class Appointments_Admin_Settings_Page {
 
 	private function _get_tab_link( $tab ) {
 		$url = add_query_arg( 'tab', $tab );
-		$url = remove_query_arg( 'updated', $url );
+		$url = remove_query_arg( array( 'updated', 'added' ), $url );
 		return $url;
 	}
 
@@ -196,6 +200,7 @@ class Appointments_Admin_Settings_Page {
 	 * Save the settings
 	 */
 	public function on_load() {
+
 		// Hidden feature to import/export settings
 		if ( current_user_can( 'manage_options' ) && isset( $_GET['app-export-settings'] ) ) {
 			$this->export_settings();
@@ -216,6 +221,7 @@ class Appointments_Admin_Settings_Page {
 
 		check_admin_referer( 'update_app_settings', 'app_nonce' );
 
+		$redirect_to = false;
 		switch ( $action ) {
 			case 'save_main': {
 				$this->_save_general_settings();
@@ -233,6 +239,10 @@ class Appointments_Admin_Settings_Page {
 				$this->_save_services();
 				break;
 			}
+			case 'add_new_service': {
+				$redirect_to = $this->_add_service();
+				break;
+			}
 			case 'save_workers': {
 				$this->_save_workers();
 				break;
@@ -244,10 +254,12 @@ class Appointments_Admin_Settings_Page {
 		
 		do_action( 'appointments_save_settings', $action );
 
+		$redirect_to = $redirect_to ? $redirect_to : add_query_arg( 'updated', 1 );
 		// Redirecting when saving options
-		wp_redirect( add_query_arg( 'updated', 1 ) );
+		wp_redirect( $redirect_to );
 		die;
 	}
+
 
 	public function _save_addons( $action ) {
 		if ( 'activate' === $action && isset( $_REQUEST['addon'] ) ) {
@@ -452,6 +464,23 @@ class Appointments_Admin_Settings_Page {
 			}
 		}
 
+	}
+
+	private function _add_service() {
+		$args = array(
+			'name' => sanitize_text_field( $_POST['service_name'] ),
+			'capacity' => absint( $_POST['service_capacity'] ),
+			'duration' => absint( $_POST['service_duration'] ),
+			'price' => sanitize_text_field( $_POST['service_price']),
+			'page' => absint( $_POST['service_page'] )
+		);
+		$app_id = appointments_insert_service( $args );
+
+		if ( ! $app_id ) {
+			return false;
+		}
+
+		return admin_url( 'admin.php?page=app_settings&tab=services&added=true#section-services' );
 	}
 
 	private function _save_workers() {
