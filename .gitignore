@@ -4,3 +4,4 @@ build/
 /vendor/
 tmp/
 .idea
+npm-debug.log
