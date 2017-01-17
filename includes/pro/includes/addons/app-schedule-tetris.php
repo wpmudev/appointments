@@ -75,7 +75,7 @@ class App_Schedule_Tetris {
         $days = wp_cache_get('app-break_times-for-' . $w);
         if (!$days) {
             // Preprocess and cache workinghours.
-            $result_days = $appointments->appointments_get_worker_working_hours( 'closed', $w, $appointments->location );
+            $result_days = appointments_get_worker_working_hours( 'closed', $w, $appointments->location );
             if ( $result_days && is_object( $result_days ) && ! empty( $result_days->hours ) ) {
                 $days = $result_days->hours;
             }
