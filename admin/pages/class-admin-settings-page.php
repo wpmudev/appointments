@@ -51,6 +51,10 @@ class Appointments_Admin_Settings_Page {
 			'services' => array(
 				'services' => __( 'Services', 'appointments' ),
 				'new-service' => __( 'Add new Service', 'appointments' )
+			),
+			'workers' => array(
+				'workers' => __( 'Service Providers', 'appointments' ),
+				'new-worker' => __( 'Add new Service Provider', 'appointments' )
 			)
 		);
 
@@ -241,6 +245,10 @@ class Appointments_Admin_Settings_Page {
 			}
 			case 'add_new_service': {
 				$redirect_to = $this->_add_service();
+				break;
+			}
+			case 'add_new_worker': {
+				$redirect_to = $this->_add_worker();
 				break;
 			}
 			case 'save_workers': {
@@ -483,6 +491,28 @@ class Appointments_Admin_Settings_Page {
 		return admin_url( 'admin.php?page=app_settings&tab=services&added=true#section-services' );
 	}
 
+	private function _add_worker() {
+		if ( empty(  $_POST["services_provided"] ) ) {
+			return false;
+		}
+
+		// Insert
+		$args = array(
+			'ID'				=> $_POST["user"],
+			'price'				=> sanitize_text_field( $_POST['price']),
+			'services_provided'	=> $_POST["services_provided"],
+			'page'				=> absint( $_POST["worker_page"] ),
+			'dummy'				=> isset ( $_POST["dummy"] )
+		);
+		$worker_id = appointments_insert_worker( $args );
+
+		if ( ! $worker_id ) {
+			return false;
+		}
+
+		return admin_url( 'admin.php?page=app_settings&tab=workers&added=true#section-workers' );
+	}
+
 	private function _save_workers() {
 		// Save Workers
 		if ( ! is_array( $_POST["workers"] ) ) {
@@ -493,9 +523,7 @@ class Appointments_Admin_Settings_Page {
 			$new_worker_id = absint( $worker["user"] );
 			$worker_id = absint( $worker_id );
 
-			$worker_exists = appointments_get_worker( $worker_id );
-
-			if ( $worker_exists ) {
+			if ( appointments_is_worker( $worker_id ) ) {
 				// Update
 				if ( ( $new_worker_id != $worker_id ) && ! empty ( $worker["services_provided"] ) ) {
 					// We are trying to chage the user ID
@@ -530,19 +558,7 @@ class Appointments_Admin_Settings_Page {
 
 				do_action( 'app-workers-worker-updated', $worker_id );
 			}
-			elseif ( ! $worker_exists && ! empty( $worker["services_provided"] ) ) {
-				// Insert
-				$args = array(
-					'ID'				=> $worker["user"],
-					'price'				=> $worker["price"],
-					'services_provided'	=> $worker["services_provided"],
-					'page'				=> $worker["page"],
-					'dummy'				=> isset ( $worker["dummy"] )
-				);
-				appointments_insert_worker( $args );
 
-				do_action( 'app-workers-worker-updated', $worker_id );
-			}
 
 		}
 	}

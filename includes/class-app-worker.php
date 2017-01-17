@@ -233,10 +233,8 @@ function appointments_insert_worker( $args = array() ) {
 	$r = $wpdb->insert( $table, $insert, $insert_wildcards );
 
 	if ( $r ) {
-		appointments_delete_worker_cache( $ID );
 
 		// Set default working hours
-		$wh_table = appointments_get_table( 'wh' );
 		$ex_table = appointments_get_table( 'exceptions' );
 
 		// Insert the default working hours and holidays to the worker's working hours
@@ -256,6 +254,10 @@ function appointments_insert_worker( $args = array() ) {
 				);
 			}
 		}
+
+		appointments_delete_worker_cache( $ID );
+
+		do_action( 'appointments_insert_worker', $ID );
 
 		return true;
 	}
@@ -682,6 +684,8 @@ function appointments_delete_worker( $worker_id ) {
 
 	if ( $result ) {
 		appointments_delete_worker_cache( $worker_id );
+
+		do_action( 'appointments_delete_worker', $worker_id );
 		return true;
 	}
 

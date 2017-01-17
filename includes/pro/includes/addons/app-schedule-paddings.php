@@ -62,9 +62,13 @@ class App_Schedule_Paddings {
 		add_action( 'appointments_insert_service', array( $this, 'save_service_padding' ) );
 		add_action( 'wpmudev_appointments_update_service', array( $this, 'save_service_padding' ) );
 
-		// Save worker paddings
+		// Augment worker settings pages
 		add_filter( 'app-settings-workers-worker-name', array( $this, 'add_worker_selection' ), 10, 2 );
-		add_action( 'app-workers-worker-updated', array( $this, 'save_worker_padding' ) );
+		add_action( 'appointments_add_new_worker_form', array( $this, 'add_new_worker_selection' ) );
+
+		// Save worker paddings
+		add_action( 'wpmudev_appointments_update_worker', array( $this, 'save_worker_padding' ) );
+		add_action( 'appointments_insert_worker', array( $this, 'save_worker_padding' ) );
 
 		add_filter( 'appointments_default_options', array( $this, 'default_options' ) );
 	}
@@ -231,8 +235,44 @@ class App_Schedule_Paddings {
 		return ob_get_clean();
 	}
 
+	public function add_new_worker_selection() {
+		$paddings = array( self::PADDING_BEFORE => 0, self::PADDING_AFTER => 0 );
+		$range = range(0, 180, 5);
+
+		?>
+		<tr>
+			<th scope="row"><?php esc_html_e('Padding times', 'appointments'); ?></th>
+			<td>
+				<label for="worker_padding_before">
+					<?php echo $this->_allowed_positions[self::PADDING_BEFORE]; ?>&nbsp;
+					<select id="worker_padding_before" name="worker_padding_before">
+						<?php foreach ($range as $value): ?>
+							<option value="<?php echo esc_attr( $value ); ?>" <?php selected($paddings[self::PADDING_BEFORE], $value  ); ?>><?php echo esc_html( $value ); ?></option>
+						<?php endforeach; ?>
+					</select>
+				</label>
+				<label for="worker_padding_after">
+					<?php echo $this->_allowed_positions[self::PADDING_AFTER]; ?>&nbsp;
+					<select id="worker_padding_after" name="worker_padding_after">
+						<?php foreach ($range as $value): ?>
+							<option value="<?php echo esc_attr( $value ); ?>" <?php selected($paddings[self::PADDING_AFTER], $value  ); ?>><?php echo esc_html( $value ); ?></option>
+						<?php endforeach; ?>
+					</select>
+				</label>
+			</td>
+		</tr>
+		<?php
+	}
+
 	public function save_service_padding ($service_id) {
-		if ( isset( $_POST['service_padding_before'][ $service_id ] ) && isset( $_POST['service_padding_after'][ $service_id ] ) ) {
+		if (
+				is_array( $_POST['service_padding_before'] )
+				&& isset( $_POST['service_padding_before'] )
+				&& isset( $_POST['service_padding_before'][ $service_id ] )
+				&& is_array( $_POST['service_padding_after'] )
+				&& isset( $_POST['service_padding_after'] )
+				&& isset( $_POST['service_padding_after'][ $service_id ] )
+		) {
 			$before = absint( $_POST['service_padding_before'][ $service_id ] );
 			$after = absint( $_POST['service_padding_after'][ $service_id ] );
 		}
@@ -273,17 +313,25 @@ class App_Schedule_Paddings {
 	}
 
 	public function save_worker_padding ($worker_id) {
-		if ( ! isset( $_POST['worker_padding_before'][ $worker_id ] ) || ! isset( $_POST['worker_padding_after'][ $worker_id ] ) ) {
+		if (
+				isset( $_POST['worker_padding_before'] )
+				&& is_array( $_POST['worker_padding_before'] )
+				&& isset( $_POST['worker_padding_before'][ $worker_id ] )
+				&& isset( $_POST['worker_padding_after'] )
+				&& is_array( $_POST['worker_padding_after'] )
+				&& isset( $_POST['worker_padding_after'][ $worker_id ] )
+		) {
+			$before = absint( $_POST['worker_padding_before'][ $worker_id ] );
+			$after = absint( $_POST['worker_padding_after'][ $worker_id ] );
+		}
+		elseif ( isset( $_POST['worker_padding_before'] ) && isset( $_POST['worker_padding_after'] ) ) {
+			$before = absint( $_POST['worker_padding_before'] );
+			$after = absint( $_POST['worker_padding_after'] );
+		}
+		else {
 			return;
 		}
-		$before = isset($_POST['worker_padding_before'][$worker_id])
-			? (int)$_POST['worker_padding_before'][$worker_id]
-			: 0
-		;
-		$after = isset($_POST['worker_padding_after'][$worker_id])
-			? (int)$_POST['worker_padding_after'][$worker_id]
-			: 0
-		;
+
 		$workers_padding = get_option('appointments_workers_padding', array());
 		$workers_padding[$worker_id] = array(
 			self::PADDING_BEFORE => $before,
