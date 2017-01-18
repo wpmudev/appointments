@@ -521,7 +521,9 @@ function _appointments_get_table_meta_row( $the_week, $long = false ) {
 		if ( 7 == $weekday_number ) {
 			$weekday_number = 0;
 		}
-		$list[] = $days[ $weekday_number ];
+
+		$title = apply_filters( 'appointments_week_schedule_table_head_day', $days[ $weekday_number ], strtotime( $date ) );
+		$list[] = $title;
 	}
 
 	$cells = '<th>' . join( '</th><th>', $list ) . '</th>';
