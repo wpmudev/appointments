@@ -415,129 +415,141 @@ function appointments_monthly_calendar( $timestamp = false, $args = array() ) {
 
 	$schedule_key = sprintf( '%sx%s', strtotime( date( 'Y-m-01', $time ) ), strtotime( date( 'Y-m-' . $days, $time ) ) );
 
-	$start_of_week = appointments_week_start() - 1;
+	$start_of_week = appointments_week_start();
 
 	$tbl_class = $args['class'];
 	$tbl_class = $tbl_class ? "class='{$tbl_class}'" : '';
 
-	$ret = '';
-	$ret .= '<div class="app_monthly_schedule_wrapper">';
-
-	$ret .= '<a id="app_schedule">&nbsp;</a>';
-
-	$ret = apply_filters( 'app_monthly_schedule_before_table', $ret );
-	$ret .= "<table width='100%' {$tbl_class}>";
-	$ret .= _appointments_get_table_meta_row_monthly( 'thead', $args['long'] );
-	$ret .= '<tbody>';
-
-	$ret = apply_filters( 'app_monthly_schedule_before_first_row', $ret );
-
-	if ( $first > $start_of_week ) {
-		$ret .= '<tr><td class="no-left-border" colspan="' . ( $first - $start_of_week ) . '">&nbsp;</td>';
-	} else if ( $first < $start_of_week ) {
-		$ret .= '<tr><td class="no-left-border" colspan="' . ( 7 + $first - $start_of_week ) . '">&nbsp;</td>';
-	} else {
-		$ret .= '<tr>';
-	}
-
 	$working_days = $appointments->get_working_days( $args['worker_id'], $args['location_id'] ); // Get an array of working days
 	$capacity = appointments_get_service_capacity( $args['service_id'] );
+
 	$time_table = '';
 
-	for ($i=1; $i<=$days; $i++) {
-		$date = date('Y-m-' . sprintf("%02d", $i), $time);
-		$dow = (int)date('w', strtotime($date));
-		$ccs = strtotime("{$date} 00:00");
-		$cce = strtotime("{$date} 23:59");
-		if ( $start_of_week == $dow ) {
-			$ret .= '</tr><tr>';
-		}
+	ob_start();
+	?>
+	<div class="app_monthly_schedule_wrapper">
+		<a id="app_schedule">&nbsp;</a>
 
-		// First mark passed days
-		if ( $current_time > $cce ) {
-			$class_name = 'notpossible app_past';
-		}
-		// Then check if this time is blocked
-		elseif (
-			isset( $options["app_lower_limit"] ) && $options["app_lower_limit"]
-			&&( $current_time + $options["app_lower_limit"] * 3600) > $cce )
-		{
-			$class_name = 'notpossible app_blocked';
-		}
-		// Check today is holiday
-		elseif ( appointments_is_worker_holiday( $args['worker_id'], $ccs, $cce ) ) {
-			$class_name = 'notpossible app_holiday';
-		}
-		// Check if we are working today
-		elseif ( ! in_array( date( "l", $ccs ), $working_days ) && ! $appointments->is_exceptional_working_day( $ccs, $cce, $args['worker_id'] ) ) {
-			$class_name = 'notpossible notworking';
-		}
-		// Check if we are exceeding app limit at the end of day
-		elseif ( $cce > $current_time + ( $appointments->get_app_limit() + 1 )*86400 ) {
-			$class_name = 'notpossible';
-		}
-		// If nothing else, then it must be free unless all time slots are taken
-		else {
-			// At first assume all cells are busy
-			$appointments->is_a_timetable_cell_free = false;
+		<?php do_action( 'appointments_monthly_schedule_before_table', '' ); ?>
 
-			$time_table .= appointments_get_timetable( $ccs, $capacity, $schedule_key );
+		<table width='100%' <?php echo $tbl_class; ?>>
+			<?php echo _appointments_get_table_meta_row_monthly( 'thead', $args['long'] ); ?>
+			<tbody>
+			<?php do_action( 'appointments_monthly_schedule_before_first_row', '' ); ?>
 
-			// Look if we have at least one cell free from get_timetable function
-			if ( $appointments->is_a_timetable_cell_free ) {
-				$class_name = 'free';
-			} else {
-				$class_name = 'busy';
-			}
-			// Clear time table for widget
-			if ( $args['widget'] ) {
-				$time_table = '';
-			}
-		}
+			<tr>
+				<?php if ( $first > $start_of_week ): ?>
+					<td class="no-left-border" colspan="<?php echo ( $first - $start_of_week ); ?>">&nbsp;</td>
+				<?php elseif ( $first < $start_of_week ): ?>
+					<td class="no-left-border" colspan="<?php echo ( 7 + $first - $start_of_week ); ?>">&nbsp;</td>
+				<?php endif; ?>
 
+				<?php for ( $i = 1; $i <= $days; $i ++ ): ?>
+					<?php
+					$date = date( 'Y-m-' . sprintf( "%02d", $i ), $time );
+					$dow  = (int) date( 'w', strtotime( $date ) );
+					$ccs  = strtotime( "{$date} 00:00" );
+					$cce  = strtotime( "{$date} 23:59" );
+					?>
+					<?php if ( $start_of_week == $dow ): ?>
+						</tr>
+						<tr>
+					<?php endif; ?>
 
+					<?php
+						// First mark passed days
+						if ( $current_time > $cce ) {
+							$class_name = 'notpossible app_past';
+						}
+						// Then check if this time is blocked
+						elseif ( isset( $options["app_lower_limit"] ) && $options["app_lower_limit"] && ( $current_time + $options["app_lower_limit"] * 3600) > $cce ) {
+							$class_name = 'notpossible app_blocked';
+						}
+						// Check today is holiday
+						elseif ( appointments_is_worker_holiday( $args['worker_id'], $ccs, $cce ) ) {
+							$class_name = 'notpossible app_holiday';
+						}
+						// Check if we are working today
+						elseif ( ! in_array( date( "l", $ccs ), $working_days ) && ! $appointments->is_exceptional_working_day( $ccs, $cce, $args['worker_id'] ) ) {
+							$class_name = 'notpossible notworking';
+						}
+						// Check if we are exceeding app limit at the end of day
+						elseif ( $cce > $current_time + ( $appointments->get_app_limit() + 1 )*86400 ) {
+							$class_name = 'notpossible';
+						}
+						// If nothing else, then it must be free unless all time slots are taken
+						else {
+							// At first assume all cells are busy
+							$appointments->is_a_timetable_cell_free = false;
 
-		// Check for today
-		if ( $current_time > $ccs && $current_time < $cce )
-			$class_name = $class_name . ' today';
+							if ( ! $args['widget'] ) {
+								$time_table .= appointments_get_timetable( $ccs, $capacity, $schedule_key );
+							}
 
-		$ret .= '<td class="'.$class_name.'" title="'.date_i18n( appointments_get_date_format( 'date' ), $ccs).'"><p>'.$i.'</p>
-			<input type="hidden" class="appointments_select_time" value="'.$ccs .'" /></td>';
+							// Look if we have at least one cell free from get_timetable function
+							if ( $appointments->is_a_timetable_cell_free ) {
+								$class_name = 'free';
+							} else {
+								$class_name = 'busy';
+							}
+						}
 
-	}
+						// Check for today
+						if ( $current_time > $ccs && $current_time < $cce ) {
+							$class_name = $class_name . ' today';
+						}
 
-	if ( 0 == (6 - $last + $start_of_week) )
-		$ret .= '</tr>';
-	else if ( $last > $start_of_week )
-		$ret .= '<td class="no-right-border" colspan="' . (6 - $last + $start_of_week) . '">&nbsp;</td></tr>';
-	else if ( $last + 1 == $start_of_week )
-		$ret .= '</tr>';
-	else
-		$ret .= '<td class="no-right-border" colspan="' . (6 + $last - $start_of_week) . '">&nbsp;</td></tr>';
+						?>
+						<td class="<?php echo esc_attr( $class_name ); ?>" title="<?php echo esc_attr( date_i18n( appointments_get_date_format( 'date' ), $ccs) ); ?>">
+							<p><?php echo $i; ?></p>
+							<input type="hidden" class="appointments_select_time" value="<?php echo esc_attr( $ccs ); ?>" />
+						</td>
+						<?php
+					?>
+				<?php endfor; ?>
 
-	$ret = apply_filters( 'app_monthly_schedule_after_last_row', $ret );
-	$ret .= '</tbody>';
-	$ret .= _appointments_get_table_meta_row_monthly( 'tfoot', $args['long'] );
-	$ret .= '</table>';
-	$ret  = apply_filters( 'app_monthly_schedule_after_table', $ret );
-	$ret .= '</div>';
+				<?php if ( 0 == ( 6 - $last + $start_of_week ) ): ?>
+					</tr>
+				<?php elseif ( $last > $start_of_week ): ?>
+						<td class="no-right-border" colspan="<?php echo (6 - $last + $start_of_week); ?>">&nbsp;</td>
+					</tr>
+				<?php elseif ( $last + 1 == $start_of_week ): ?>
+					</tr>
+				<?php else: ?>
+						<td class="no-right-border" colspan="<?php echo ( 6 + $last - $start_of_week ); ?>">&nbsp;</td>
+					</tr>
+				<?php endif; ?>
 
-	$ret .= '<div class="app_timetable_wrapper">';
-	$ret .= $time_table;
-	$ret .= '</div>';
+				<?php do_action( 'appointments_monthly_schedule_after_last_row', '' ); ?>
+			</tbody>
+			<?php echo _appointments_get_table_meta_row_monthly( 'tfoot', $args['long'] ); ?>
+		</table>
+		<?php do_action( 'appointments_monthly_schedule_after_table', '' ); ?>
+	</div>
 
-	$ret .= '<div style="clear:both"></div>';
+	<div class="app_timetable_wrapper">
+		<?php echo $time_table; ?>
+	</div>
 
-	$script  = '';
-	$script .= 'var selector = ".app_monthly_schedule_wrapper table td.free", callback = function (e) {';
-	$script .= '$(selector).off("click", callback);';
-	$script .= 'var selected_timetable=$(".app_timetable_"+$(this).find(".appointments_select_time").val());';
-	$script .= '$(".app_timetable:not(selected_timetable)").hide();';
-	$script .= 'selected_timetable.show("slow", function () { $(selector).on("click", callback); });';
-	$script .= '};';
-	$script .= '$(selector).on("click", callback);';
+	<div style="clear:both"></div>
 
-	$appointments->add2footer( $script );
+	<script>
+		jQuery( document ).ready( function( $ ) {
+            var selector = ".app_monthly_schedule_wrapper table td.free",
+				callback = function (e) {
+					$( selector ).off( "click", callback );
+					var selected_timetable = $( ".app_timetable_" + $( this ).find( ".appointments_select_time" ).val() );
+					$( ".app_timetable:not(selected_timetable)" ).hide();
+					selected_timetable.show( "slow", function() {
+						$( selector ).on( "click", callback );
+					} );
+            	};
+
+            $( selector ).on( "click", callback );
+		});
+	</script>
+	<?php
+	$ret = ob_get_clean();
 
 	if ( $args['echo'] ) {
 		echo $ret;
@@ -706,11 +718,16 @@ function _appointments_get_table_meta_row( $the_week, $long = false ) {
  */
 function _appointments_get_table_meta_row_monthly( $which, $long ) {
 	$appointments = appointments();
+	$start_of_week = appointments_week_start();
 	if ( ! $long ) {
-		$day_names_array = $appointments->arrange( $appointments->get_short_day_names(), false );
+		$day_names_array = $appointments->get_short_day_names();
 	} else {
-		$day_names_array = $appointments->arrange( $appointments->get_day_names(), false );
+		$day_names_array = $appointments->get_day_names();
 	}
+
+	$extracted = array_splice( $day_names_array, 0, $start_of_week );
+	$day_names_array = array_merge( $day_names_array, $extracted );
+
 	$cells = '<th>' . join('</th><th>', $day_names_array) . '</th>';
 	return "<{$which}><tr>{$cells}</tr></{$which}>";
 }
