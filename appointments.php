@@ -670,19 +670,8 @@ class Appointments {
 	function get_price( $paypal=false ) {
 		global $current_user;
 		$this->get_lsw();
-		$service_obj = appointments_get_service( $this->service );
-		$worker_obj = appointments_get_worker( $this->worker );
 
-		if ( $worker_obj && $worker_obj->price )
-			$worker_price = $worker_obj->price;
-		else
-			$worker_price = 0;
-
-		$price = 0;
-		if ( $service_obj ) {
-			$price = $service_obj->price + $worker_price;
-		}
-
+		$price = appointments_get_price( $this->service, $this->worker );
 
 		/**
 		 * Filter allows other plugins or integrations to apply a discount to
@@ -1401,7 +1390,13 @@ class Appointments {
 		$this->add2footer( $script );
 		return $ret;
 	}
-	
+
+	function console_log( $start, $desc = '' ) {
+		$finish = microtime( true );
+		?>
+		<script>console.log('<?php echo $desc . ' - ' . ( $finish - $start ); ?>');</script>
+		<?php
+	}
 
 	/**
 	 * Helper function to create a time table for monthly schedule

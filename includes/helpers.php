@@ -380,6 +380,163 @@ function apppointments_is_range_busy( $start, $end, $args = array() ) {
 	return false;
 }
 
+/**
+ *
+ * @param bool $timestamp Any timestamp inside the month we want to display
+ * @param array $args List of arguments
+ *
+ * @return mixed|string|void
+ */
+function appointments_monthly_calendar( $timestamp = false, $args = array() ) {
+	$appointments = appointments();
+
+
+	$defaults = array(
+		'service_id' => 0,
+		'worker_id' => 0,
+		'location_id' => 0,
+		'class' => '',
+		'long' => false,
+		'echo' => true
+	);
+	$args = wp_parse_args( $args, $defaults );
+
+	$price = $this->get_price();
+
+	$current_time = current_time( 'timestamp' );
+	$date = $timestamp ? $timestamp : $current_time;
+
+	$year = date("Y", $date);
+	$month = date("m",  $date);
+	$time = strtotime("{$year}-{$month}-01");
+
+	$days = (int)date('t', $time);
+	$first = (int)date('w', strtotime(date('Y-m-01', $time)));
+	$last = (int)date('w', strtotime(date('Y-m-' . $days, $time)));
+
+	$schedule_key = sprintf('%sx%s', strtotime(date('Y-m-01', $time)), strtotime(date('Y-m-' . $days, $time)));
+
+	$tbl_class = $class;
+	$tbl_class = $tbl_class ? "class='{$tbl_class}'" : '';
+
+	$ret = '';
+	$ret .= '<div class="app_monthly_schedule_wrapper">';
+
+	$ret .= '<a id="app_schedule">&nbsp;</a>';
+	$ret  = apply_filters( 'app_monthly_schedule_before_table', $ret );
+	$ret .= "<table width='100%' {$tbl_class}>";
+	$ret .= $this->_get_table_meta_row_monthly('thead', $long);
+	$ret .= '<tbody>';
+
+	$ret = apply_filters( 'app_monthly_schedule_before_first_row', $ret );
+
+	if ( $first > $this->start_of_week )
+		$ret .= '<tr><td class="no-left-border" colspan="' . ($first - $this->start_of_week) . '">&nbsp;</td>';
+	else if ( $first < $this->start_of_week )
+		$ret .= '<tr><td class="no-left-border" colspan="' . (7 + $first - $this->start_of_week) . '">&nbsp;</td>';
+	else
+		$ret .= '<tr>';
+
+	$todays_no = date("w", $this->local_time ); // Number of today
+	$working_days = $this->get_working_days( $this->worker, $this->location ); // Get an array of working days
+	$capacity = $this->get_capacity();
+	$time_table = '';
+
+
+	for ($i=1; $i<=$days; $i++) {
+		$date = date('Y-m-' . sprintf("%02d", $i), $time);
+		$dow = (int)date('w', strtotime($date));
+		$ccs = strtotime("{$date} 00:00");
+		$cce = strtotime("{$date} 23:59");
+		if ($this->start_of_week == $dow)
+			$ret .= '</tr><tr>';
+
+		$init_time = time();
+
+		$class_name = '';
+		// First mark passed days
+		if ( $this->local_time > $cce ) {
+			$class_name = 'notpossible app_past';
+		}
+		// Then check if this time is blocked
+		else if ( isset( $this->options["app_lower_limit"] ) && $this->options["app_lower_limit"]
+		          &&( $this->local_time + $this->options["app_lower_limit"] * 3600) > $cce ) {
+			$class_name = 'notpossible app_blocked';
+		}
+		// Check today is holiday
+		else if ( $this->is_holiday( $ccs, $cce ) ) {
+			$class_name = 'notpossible app_holiday';
+		}
+		// Check if we are working today
+		else if ( !in_array( date("l", $ccs ), $working_days ) && !$this->is_exceptional_working_day( $ccs, $cce ) ) {
+			$class_name = 'notpossible notworking';
+		}
+		// Check if we are exceeding app limit at the end of day
+		else if ( $cce > $this->local_time + ( $this->get_app_limit() + 1 )*86400 ) {
+			$class_name = 'notpossible';
+		}
+		// If nothing else, then it must be free unless all time slots are taken
+		else {
+			// At first assume all cells are busy
+			$this->is_a_timetable_cell_free = false;
+
+			$time_table .= $this->get_timetable( $ccs, $capacity, $schedule_key );
+
+			// Look if we have at least one cell free from get_timetable function
+			if ( $this->is_a_timetable_cell_free )
+				$class_name = 'free';
+			else
+				$class_name = 'busy';
+			// Clear time table for widget
+			if ( $widget )
+				$time_table = '';
+		}
+
+
+
+		// Check for today
+		if ( $this->local_time > $ccs && $this->local_time < $cce )
+			$class_name = $class_name . ' today';
+
+		$ret .= '<td class="'.$class_name.'" title="'.date_i18n($this->date_format, $ccs).'"><p>'.$i.'</p>
+			<input type="hidden" class="appointments_select_time" value="'.$ccs .'" /></td>';
+
+	}
+
+	if ( 0 == (6 - $last + $this->start_of_week) )
+		$ret .= '</tr>';
+	else if ( $last > $this->start_of_week )
+		$ret .= '<td class="no-right-border" colspan="' . (6 - $last + $this->start_of_week) . '">&nbsp;</td></tr>';
+	else if ( $last + 1 == $this->start_of_week )
+		$ret .= '</tr>';
+	else
+		$ret .= '<td class="no-right-border" colspan="' . (6 + $last - $this->start_of_week) . '">&nbsp;</td></tr>';
+
+	$ret = apply_filters( 'app_monthly_schedule_after_last_row', $ret );
+	$ret .= '</tbody>';
+	$ret .= $this->_get_table_meta_row_monthly('tfoot', $long);
+	$ret .= '</table>';
+	$ret  = apply_filters( 'app_monthly_schedule_after_table', $ret );
+	$ret .= '</div>';
+
+	$ret .= '<div class="app_timetable_wrapper">';
+	$ret .= $time_table;
+	$ret .= '</div>';
+
+	$ret .= '<div style="clear:both"></div>';
+
+	$script  = '';
+	$script .= 'var selector = ".app_monthly_schedule_wrapper table td.free", callback = function (e) {';
+	$script .= '$(selector).off("click", callback);';
+	$script .= 'var selected_timetable=$(".app_timetable_"+$(this).find(".appointments_select_time").val());';
+	$script .= '$(".app_timetable:not(selected_timetable)").hide();';
+	$script .= 'selected_timetable.show("slow", function () { $(selector).on("click", callback); });';
+	$script .= '};';
+	$script .= '$(selector).on("click", callback);';
+
+	$this->add2footer( $script );
+	return $ret;
+}
 
 /**
  * Display the weekly calendar
@@ -528,4 +685,25 @@ function _appointments_get_table_meta_row( $the_week, $long = false ) {
 
 	$cells = '<th>' . join( '</th><th>', $list ) . '</th>';
 	return "{$cells}";
+}
+
+
+/**
+ * Return the price for a given service and worker
+ *
+ * @param $service_id
+ * @param $worker_id
+ *
+ * @return mixed
+ */
+function appointments_get_price( $service_id, $worker_id ) {
+	$service = appointments_get_service( $service_id );
+	$worker = appointments_get_worker( $worker_id );
+
+	if ( ! $service ) {
+		return 0;
+	}
+
+	$worker_price = ( $worker && $worker->price ) ? $worker->price : 0;
+	return $service->price + $worker_price;
 }
