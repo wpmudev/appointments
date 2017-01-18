@@ -1401,13 +1401,7 @@ class Appointments {
 		$this->add2footer( $script );
 		return $ret;
 	}
-
-	function console_log( $start, $desc = '' ) {
-		$finish = microtime( true );
-		?>
-		<script>console.log('<?php echo $desc . ' - ' . ( $finish - $start ); ?>');</script>
-		<?php
-	}
+	
 
 	/**
 	 * Helper function to create a time table for monthly schedule
