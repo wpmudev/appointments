@@ -479,12 +479,12 @@ function appointments_monthly_calendar( $timestamp = false, $args = array() ) {
 		// If nothing else, then it must be free unless all time slots are taken
 		else {
 			// At first assume all cells are busy
-			$is_a_timetable_cell_free = false;
+			$appointments->is_a_timetable_cell_free = false;
 
 			$time_table .= appointments_get_timetable( $ccs, $capacity, $schedule_key );
 
 			// Look if we have at least one cell free from get_timetable function
-			if ( $is_a_timetable_cell_free ) {
+			if ( $appointments->is_a_timetable_cell_free ) {
 				$class_name = 'free';
 			} else {
 				$class_name = 'busy';
