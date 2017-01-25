@@ -86,8 +86,7 @@ class App_Locations_ServiceLocations {
 			return;
 		}
 
-		$location = false;
-		if ( isset( $_POST['service_location'][ $service_id ] ) ) {
+		if ( isset( $_POST['service_location'] ) && is_array( $_POST['service_location'] ) && isset( $_POST['service_location'][ $service_id ] ) ) {
 			$location = $_POST['service_location'][ $service_id ];
 		}
 		elseif ( isset( $_POST['service_location'] ) ) {
