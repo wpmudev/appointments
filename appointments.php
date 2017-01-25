@@ -1327,7 +1327,7 @@ class Appointments {
 
 		if ( ! appointments_use_legacy_duration_calculus() ) {
 			$start_result = appointments_get_worker_working_hours( 'open', $this->worker, $this->location );
-			$start_unpacked_days = $start_result->hours;
+			$start_unpacked_days = isset( $start_result->hours ) ? $start_result->hours : array();
 		} else {
 			$start_unpacked_days = array();
 		}
@@ -1874,7 +1874,7 @@ class Appointments {
 		$this->get_lsw();
 
 		$result = appointments_get_worker_working_hours( 'open', $this->worker, $this->location );
-		if ( $result !== null ) {
+		if ( $result ) {
 			$days = $result->hours;
 			$days = array_filter($days);
 			if ( is_array( $days ) ) {
