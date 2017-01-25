@@ -1,6 +1,6 @@
 {
   "name": "appointments",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "appointments.php",
   "projectEditUrl": "https://premium.wpmudev.org/wp-admin/edit.php?post_type=project&page=projects-manage&manage_files=679841",
   "description": "",
