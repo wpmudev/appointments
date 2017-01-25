@@ -60,9 +60,9 @@ class Appointments_AJAX {
 		}
 
 		// Then check cookie. Check is not so strict here, as he couldn't be seeing that cancel checkbox in the first place
-		if ( ! $owner && isset( $_COOKIE["wpmudev_appointments"] ) ) {
-			$apps = unserialize( stripslashes( $_COOKIE["wpmudev_appointments"] ) );
-			if ( is_array( $apps ) && in_array( $app_id, $apps ) ) {
+		if ( ! $owner ) {
+			$apps = Appointments_Sessions::get_current_visitor_appointments();
+			if ( in_array( $app_id, $apps ) ) {
 				$owner = true;
 			}
 		}
@@ -521,7 +521,38 @@ class Appointments_AJAX {
 
 		// A new appointment is accepted, so clear cache
 		$appointments->flush_cache();
-		$appointments->save_cookie( $insert_id, $name, $email, $phone, $address, $city, $gcal );
+
+		$apps = Appointments_Sessions::get_current_visitor_appointments();
+		$apps[] = $insert_id;
+		Appointments_Sessions::set_visitor_appointments( $apps );
+		Appointments_Sessions::set_visitor_personal_data( array(
+			"n" => $name,
+			"e" => $email,
+			"p" => $phone,
+			"a" => $address,
+			"c" => $city,
+			"g" => $gcal
+		) );
+
+		// May be required to clean up or modify userdata cookie
+		do_action( 'app_save_cookie', $insert_id, $apps );
+
+		// Save user data too
+		if ( is_user_logged_in() && defined('APP_USE_LEGACY_USERDATA_OVERWRITING') && APP_USE_LEGACY_USERDATA_OVERWRITING ) {
+			global $current_user;
+			if ( $name )
+				update_user_meta( $current_user->ID, 'app_name', $name );
+			if ( $email )
+				update_user_meta( $current_user->ID, 'app_email', $email );
+			if ( $phone )
+				update_user_meta( $current_user->ID, 'app_phone', $phone );
+			if ( $address )
+				update_user_meta( $current_user->ID, 'app_address', $address );
+			if ( $city )
+				update_user_meta( $current_user->ID, 'app_city', $city );
+
+			do_action( 'app_save_user_meta', $current_user->ID, array( 'name'=>$name, 'email'=>$email, 'phone'=>$phone, 'address'=>$address, 'city'=>$city ) );
+		}
 
 		// Send confirmation for pending, payment not required cases, if selected so
 		if (

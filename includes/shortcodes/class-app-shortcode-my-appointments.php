@@ -88,6 +88,8 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 			'_tablesorter' => array('value' => 1),
 			'public' => array(
 				'value' => 0,
+				'type' => 'checkbox',
+				'name' => __( 'Public', 'appointments' ),
 				'help' => __('Allow visitors to view list, default is 0, only logged in users can view list.', 'appointments'),
 				'example' => '1',
 			),
@@ -139,12 +141,11 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		// If this is a client shortcode
 		if ( !$args['provider'] ) {
 
-			$apps = array();
 			if ( $user_id ) {
 				$apps = wp_list_pluck( appointments_get_user_appointments( $user_id ), 'ID' );
 			}
-			elseif ( isset( $_COOKIE['wpmudev_appointments'] ) ) {
-				$apps = maybe_unserialize( $_COOKIE['wpmudev_appointments'] );
+			else {
+				$apps = Appointments_Sessions::get_current_visitor_appointments();
 			}
 
 			if ( ! $apps ) {

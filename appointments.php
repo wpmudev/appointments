@@ -71,6 +71,7 @@ class Appointments {
 		include_once( 'includes/deprecated-hooks.php' );
 		include_once( 'includes/class-app-notifications-manager.php' );
 		include_once( 'includes/class-app-api-logins.php' );
+		include_once( 'includes/class-app-sessions.php' );
 
 		// Load premium features
 		if ( is_readable( appointments_plugin_dir() . 'includes/pro/class-app-pro.php' ) ) {
@@ -1198,22 +1199,25 @@ class Appointments {
 	 * @return bool
 	 */
 	function check_spam() {
-		if ( ! isset( $this->options["spam_time"] ) || ! $this->options["spam_time"] ||
-		     ! isset( $_COOKIE["wpmudev_appointments"] )
+		$options = appointments_get_options();
+		if (
+				! isset( $options["spam_time"] )
+				|| ! $options["spam_time"]
+				|| ! Appointments_Sessions::is_visitor_appointments_cookie_set()
 		) {
 			return true;
 		}
 
-		$apps = unserialize( stripslashes( $_COOKIE["wpmudev_appointments"] ) );
+		$apps = Appointments_Sessions::get_current_visitor_appointments();
 
-		if ( ! is_array( $apps ) || empty( $apps ) ) {
+		if ( empty( $apps ) ) {
 			return true;
 		}
 
-		$checkdate = date( 'Y-m-d H:i:s', $this->local_time - $this->options["spam_time"] );
+		$checkdate = date( 'Y-m-d H:i:s', $this->local_time - $options["spam_time"] );
 
 		$results = appointments_get_appointments( array(
-			'app_id'     => maybe_unserialize( $_COOKIE["wpmudev_appointments"] ),
+			'app_id'     => $apps,
 			'status'     => 'pending',
 			'date_query' => array(
 				array(
@@ -1972,62 +1976,6 @@ class Appointments {
 	}
 
 	/**
-	 * Save a cookie so that user can see his appointments
-	 */
-	function save_cookie( $app_id, $name, $email, $phone, $address, $city, $gcal ) {
-		if ( isset( $_COOKIE["wpmudev_appointments"] ) )
-			$apps = unserialize( stripslashes( $_COOKIE["wpmudev_appointments"] ) );
-		else
-			$apps = array();
-
-		$apps[] = $app_id;
-
-		// Prevent duplicates
-		$apps = array_unique( $apps );
-		// Add 365 days grace time
-		$expire = $this->local_time + 3600 * 24 * ( $this->options["app_limit"] + 365 );
-
-		$expire = apply_filters( 'app_cookie_time', $expire );
-
-		if ( defined('COOKIEPATH') ) $cookiepath = COOKIEPATH;
-		else $cookiepath = "/";
-		if ( defined('COOKIEDOMAIN') ) $cookiedomain = COOKIEDOMAIN;
-		else $cookiedomain = '';
-
-		@setcookie("wpmudev_appointments", serialize($apps), $expire, $cookiepath, $cookiedomain);
-
-		$data = array(
-					"n"	=> $name,
-					"e"	=> $email,
-					"p"	=> $phone,
-					"a"	=> $address,
-					"c"	=> $city,
-					"g"	=> $gcal
-					);
-		@setcookie("wpmudev_appointments_userdata", serialize($data), $expire, $cookiepath, $cookiedomain);
-
-		// May be required to clean up or modify userdata cookie
-		do_action( 'app_save_cookie', $app_id, $apps );
-
-		// Save user data too
-		if ( is_user_logged_in() && defined('APP_USE_LEGACY_USERDATA_OVERWRITING') && APP_USE_LEGACY_USERDATA_OVERWRITING ) {
-			global $current_user;
-			if ( $name )
-				update_user_meta( $current_user->ID, 'app_name', $name );
-			if ( $email )
-				update_user_meta( $current_user->ID, 'app_email', $email );
-			if ( $phone )
-				update_user_meta( $current_user->ID, 'app_phone', $phone );
-			if ( $address )
-				update_user_meta( $current_user->ID, 'app_address', $address );
-			if ( $city )
-				update_user_meta( $current_user->ID, 'app_city', $city );
-
-			do_action( 'app_save_user_meta', $current_user->ID, array( 'name'=>$name, 'email'=>$email, 'phone'=>$phone, 'address'=>$address, 'city'=>$city ) );
-		}
-	}
-
-	/**
 	 * Make sure we clean up cookies after logging out.
 	 */
 	public function drop_cookies_on_logout () {
@@ -2035,19 +1983,7 @@ class Appointments {
 		if ( 'yes' !== $options['login_required'] ) {
 			return;
 		}
-
-		$path = defined('COOKIEPATH')
-			? COOKIEPATH
-			: '/'
-		;
-		$domain = defined('COOKIEDOMAIN')
-			? COOKIEDOMAIN
-			: ''
-		;
-		$drop = $this->local_time - 3600;
-
-		@setcookie("wpmudev_appointments", "", $drop, $path, $domain);
-		@setcookie("wpmudev_appointments_userdata", "", $drop, $path, $domain);
+		Appointments_Sessions::clear_visitor_data();
 	}
 
 

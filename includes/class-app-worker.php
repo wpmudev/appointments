@@ -93,6 +93,10 @@ function appointments_get_worker( $worker_id ) {
 		return false;
 	}
 
+	if ( is_a( $worker_id, 'Appointments_Worker' ) ) {
+		$worker_id = $worker_id->ID;
+	}
+
 	$table = appointments_get_table( 'workers' );
 
 	$worker = wp_cache_get( $worker_id, 'app_workers' );
