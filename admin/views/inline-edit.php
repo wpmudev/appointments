@@ -25,7 +25,7 @@
 				<label>
 					<span class="title"><?php esc_html_e('Name', 'appointments'); ?></span>
 					<select name="service">
-						<?php foreach ( $workers as $service ): ?>
+						<?php foreach ( $services as $service ): ?>
 							<option value="<?php echo $service->ID; ?>" <?php selected( $app->service, $service->ID ); ?>><?php echo esc_html( $service->name ); ?></option>
 						<?php endforeach; ?>
 					</select>
