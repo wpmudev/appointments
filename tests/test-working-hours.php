@@ -112,14 +112,12 @@ class App_Working_Hours_Test extends App_UnitTestCase {
 		$open_hours['Monday']['end'] = '20:15';
 		appointments_update_worker_working_hours( $worker_id, $open_hours, 'open' );
 		$range = appointments_get_working_hours_range($worker_id);
-		var_dump(appointments()->min_max_wh($worker_id));
 		$this->assertEquals( array( 'min' => 6, 'max' => 21 ), $range );
 	}
 
-	/**
-	 * @group temp
-	 */
+
 	public function test_get_weekly_schedule_slots() {
+		$options = appointments_get_options();
 		$worker_id = $this->factory->worker->create_object( $this->factory->worker->generate_args() );
 		$open_hours = $this->get_open_wh();
 		appointments_update_worker_working_hours( $worker_id, $open_hours, 'open' );
@@ -128,18 +126,18 @@ class App_Working_Hours_Test extends App_UnitTestCase {
 		update_option( 'start_of_week', 6 );
 
 		// Test monday
-		$today = strtotime( '2016-12-12' );
-		$slots = appointments_get_weekly_schedule_slots( $today );
-		$this->assertCount( 18, $slots['time_slots'] );
+		$next_monday = strtotime( 'next monday' );
+		$slots = appointments_get_weekly_schedule_slots( $next_monday );
+		$this->assertCount( 20, $slots['time_slots'] );
 		$this->assertEquals(
 			array(
-				'2016-12-10',
-				'2016-12-11',
-				'2016-12-12',
-				'2016-12-13',
-				'2016-12-14',
-				'2016-12-15',
-				'2016-12-16'
+				date( 'Y-m-d', $next_monday ),
+				date( 'Y-m-d', $next_monday + ( 24 * 3600 * 1 ) ),
+				date( 'Y-m-d', $next_monday + ( 24 * 3600 * 2 ) ),
+				date( 'Y-m-d', $next_monday + ( 24 * 3600 * 3 ) ),
+				date( 'Y-m-d', $next_monday + ( 24 * 3600 * 4 ) ),
+				date( 'Y-m-d', $next_monday + ( 24 * 3600 * 5 ) ),
+				date( 'Y-m-d', $next_monday + ( 24 * 3600 * 6 ) ),
 			),
 			$slots['the_week']
 		);
