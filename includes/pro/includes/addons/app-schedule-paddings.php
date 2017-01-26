@@ -169,7 +169,7 @@ class App_Schedule_Paddings {
             </label>
         </div>
         <?php
-        return ob_get_clean();
+        return $out . ob_get_clean();
 	}
 
 	public function add_new_service_selection() {
@@ -232,7 +232,7 @@ class App_Schedule_Paddings {
             </label>
         </div>
 		<?php
-		return ob_get_clean();
+		return $out . ob_get_clean();
 	}
 
 	public function add_new_worker_selection() {

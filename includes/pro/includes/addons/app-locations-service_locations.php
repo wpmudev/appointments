@@ -154,7 +154,7 @@ class App_Locations_ServiceLocations {
 			<?php endforeach; ?>
 		</select>
 		<?php
-		
+
 		return $out . ob_get_clean();
 	}
 
