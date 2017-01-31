@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 2.0.0
+Version: 2.0.1
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -71,6 +71,7 @@ class Appointments {
 		include_once( 'includes/deprecated-hooks.php' );
 		include_once( 'includes/class-app-notifications-manager.php' );
 		include_once( 'includes/class-app-api-logins.php' );
+		include_once( 'includes/class-app-sessions.php' );
 
 		// Load premium features
 		if ( is_readable( appointments_plugin_dir() . 'includes/pro/class-app-pro.php' ) ) {
@@ -670,19 +671,8 @@ class Appointments {
 	function get_price( $paypal=false ) {
 		global $current_user;
 		$this->get_lsw();
-		$service_obj = appointments_get_service( $this->service );
-		$worker_obj = appointments_get_worker( $this->worker );
 
-		if ( $worker_obj && $worker_obj->price )
-			$worker_price = $worker_obj->price;
-		else
-			$worker_price = 0;
-
-		$price = 0;
-		if ( $service_obj ) {
-			$price = $service_obj->price + $worker_price;
-		}
-
+		$price = appointments_get_price( $this->service, $this->worker );
 
 		/**
 		 * Filter allows other plugins or integrations to apply a discount to
@@ -1209,22 +1199,25 @@ class Appointments {
 	 * @return bool
 	 */
 	function check_spam() {
-		if ( ! isset( $this->options["spam_time"] ) || ! $this->options["spam_time"] ||
-		     ! isset( $_COOKIE["wpmudev_appointments"] )
+		$options = appointments_get_options();
+		if (
+				! isset( $options["spam_time"] )
+				|| ! $options["spam_time"]
+				|| ! Appointments_Sessions::is_visitor_appointments_cookie_set()
 		) {
 			return true;
 		}
 
-		$apps = unserialize( stripslashes( $_COOKIE["wpmudev_appointments"] ) );
+		$apps = Appointments_Sessions::get_current_visitor_appointments();
 
-		if ( ! is_array( $apps ) || empty( $apps ) ) {
+		if ( empty( $apps ) ) {
 			return true;
 		}
 
-		$checkdate = date( 'Y-m-d H:i:s', $this->local_time - $this->options["spam_time"] );
+		$checkdate = date( 'Y-m-d H:i:s', $this->local_time - $options["spam_time"] );
 
 		$results = appointments_get_appointments( array(
-			'app_id'     => maybe_unserialize( $_COOKIE["wpmudev_appointments"] ),
+			'app_id'     => $apps,
 			'status'     => 'pending',
 			'date_query' => array(
 				array(
@@ -1264,142 +1257,16 @@ class Appointments {
 	 * Helper function to create a monthly schedule
 	 */
 	function get_monthly_calendar( $timestamp=false, $class='', $long, $widget ) {
-		$this->get_lsw();
-
-		$price = $this->get_price( );
-
-		$date = $timestamp ? $timestamp : $this->local_time;
-
-		$year = date("Y", $date);
-		$month = date("m",  $date);
-		$time = strtotime("{$year}-{$month}-01");
-
-		$days = (int)date('t', $time);
-		$first = (int)date('w', strtotime(date('Y-m-01', $time)));
-		$last = (int)date('w', strtotime(date('Y-m-' . $days, $time)));
-
-		$schedule_key = sprintf('%sx%s', strtotime(date('Y-m-01', $time)), strtotime(date('Y-m-' . $days, $time)));
-
-		$tbl_class = $class;
-		$tbl_class = $tbl_class ? "class='{$tbl_class}'" : '';
-
-		$ret = '';
-		$ret .= '<div class="app_monthly_schedule_wrapper">';
-
-		$ret .= '<a id="app_schedule">&nbsp;</a>';
-		$ret  = apply_filters( 'app_monthly_schedule_before_table', $ret );
-		$ret .= "<table width='100%' {$tbl_class}>";
-		$ret .= $this->_get_table_meta_row_monthly('thead', $long);
-		$ret .= '<tbody>';
-
-		$ret = apply_filters( 'app_monthly_schedule_before_first_row', $ret );
-
-		if ( $first > $this->start_of_week )
-			$ret .= '<tr><td class="no-left-border" colspan="' . ($first - $this->start_of_week) . '">&nbsp;</td>';
-		else if ( $first < $this->start_of_week )
-			$ret .= '<tr><td class="no-left-border" colspan="' . (7 + $first - $this->start_of_week) . '">&nbsp;</td>';
-		else
-			$ret .= '<tr>';
-
-		$todays_no = date("w", $this->local_time ); // Number of today
-		$working_days = $this->get_working_days( $this->worker, $this->location ); // Get an array of working days
-		$capacity = $this->get_capacity();
-		$time_table = '';
-
-
-		for ($i=1; $i<=$days; $i++) {
-			$date = date('Y-m-' . sprintf("%02d", $i), $time);
-			$dow = (int)date('w', strtotime($date));
-			$ccs = strtotime("{$date} 00:00");
-			$cce = strtotime("{$date} 23:59");
-			if ($this->start_of_week == $dow)
-				$ret .= '</tr><tr>';
-
-			$init_time = time();
-
-			$class_name = '';
-			// First mark passed days
-			if ( $this->local_time > $cce ) {
-				$class_name = 'notpossible app_past';
-			}
-			// Then check if this time is blocked
-			else if ( isset( $this->options["app_lower_limit"] ) && $this->options["app_lower_limit"]
-				&&( $this->local_time + $this->options["app_lower_limit"] * 3600) > $cce ) {
-				$class_name = 'notpossible app_blocked';
-			}
-			// Check today is holiday
-			else if ( $this->is_holiday( $ccs, $cce ) ) {
-				$class_name = 'notpossible app_holiday';
-			}
-			// Check if we are working today
-			else if ( !in_array( date("l", $ccs ), $working_days ) && !$this->is_exceptional_working_day( $ccs, $cce ) ) {
-				$class_name = 'notpossible notworking';
-			}
-			// Check if we are exceeding app limit at the end of day
-			else if ( $cce > $this->local_time + ( $this->get_app_limit() + 1 )*86400 ) {
-				$class_name = 'notpossible';
-			}
-			// If nothing else, then it must be free unless all time slots are taken
-			else {
-				// At first assume all cells are busy
-				$this->is_a_timetable_cell_free = false;
-
-				$time_table .= $this->get_timetable( $ccs, $capacity, $schedule_key );
-
-				// Look if we have at least one cell free from get_timetable function
-				if ( $this->is_a_timetable_cell_free )
-					$class_name = 'free';
-				else
-					$class_name = 'busy';
-				// Clear time table for widget
-				if ( $widget )
-					$time_table = '';
-			}
-
-
-
-			// Check for today
-			if ( $this->local_time > $ccs && $this->local_time < $cce )
-				$class_name = $class_name . ' today';
-
-			$ret .= '<td class="'.$class_name.'" title="'.date_i18n($this->date_format, $ccs).'"><p>'.$i.'</p>
-			<input type="hidden" class="appointments_select_time" value="'.$ccs .'" /></td>';
-
-		}
-
-		if ( 0 == (6 - $last + $this->start_of_week) )
-			$ret .= '</tr>';
-		else if ( $last > $this->start_of_week )
-			$ret .= '<td class="no-right-border" colspan="' . (6 - $last + $this->start_of_week) . '">&nbsp;</td></tr>';
-		else if ( $last + 1 == $this->start_of_week )
-			$ret .= '</tr>';
-		else
-			$ret .= '<td class="no-right-border" colspan="' . (6 + $last - $this->start_of_week) . '">&nbsp;</td></tr>';
-
-		$ret = apply_filters( 'app_monthly_schedule_after_last_row', $ret );
-		$ret .= '</tbody>';
-		$ret .= $this->_get_table_meta_row_monthly('tfoot', $long);
-		$ret .= '</table>';
-		$ret  = apply_filters( 'app_monthly_schedule_after_table', $ret );
-		$ret .= '</div>';
-
-		$ret .= '<div class="app_timetable_wrapper">';
-		$ret .= $time_table;
-		$ret .= '</div>';
-
-		$ret .= '<div style="clear:both"></div>';
-
-		$script  = '';
-		$script .= 'var selector = ".app_monthly_schedule_wrapper table td.free", callback = function (e) {';
-			$script .= '$(selector).off("click", callback);';
-			$script .= 'var selected_timetable=$(".app_timetable_"+$(this).find(".appointments_select_time").val());';
-			$script .= '$(".app_timetable:not(selected_timetable)").hide();';
-			$script .= 'selected_timetable.show("slow", function () { $(selector).on("click", callback); });';
-		$script .= '};';
-		$script .= '$(selector).on("click", callback);';
-
-		$this->add2footer( $script );
-		return $ret;
+		$args = array(
+			'service_id' => $this->service,
+			'worker_id' => $this->worker,
+			'location_id' => $this->location,
+			'class' => $class,
+			'long' => $long,
+			'echo' => false,
+			'widget' => $widget
+		);
+		return appointments_monthly_calendar( $timestamp, $args );
 	}
 
 	function console_log( $start, $desc = '' ) {
@@ -1460,7 +1327,7 @@ class Appointments {
 
 		if ( ! appointments_use_legacy_duration_calculus() ) {
 			$start_result = appointments_get_worker_working_hours( 'open', $this->worker, $this->location );
-			$start_unpacked_days = $start_result->hours;
+			$start_unpacked_days = isset( $start_result->hours ) ? $start_result->hours : array();
 		} else {
 			$start_unpacked_days = array();
 		}
@@ -2007,7 +1874,7 @@ class Appointments {
 		$this->get_lsw();
 
 		$result = appointments_get_worker_working_hours( 'open', $this->worker, $this->location );
-		if ( $result !== null ) {
+		if ( $result ) {
 			$days = $result->hours;
 			$days = array_filter($days);
 			if ( is_array( $days ) ) {
@@ -2109,62 +1976,6 @@ class Appointments {
 	}
 
 	/**
-	 * Save a cookie so that user can see his appointments
-	 */
-	function save_cookie( $app_id, $name, $email, $phone, $address, $city, $gcal ) {
-		if ( isset( $_COOKIE["wpmudev_appointments"] ) )
-			$apps = unserialize( stripslashes( $_COOKIE["wpmudev_appointments"] ) );
-		else
-			$apps = array();
-
-		$apps[] = $app_id;
-
-		// Prevent duplicates
-		$apps = array_unique( $apps );
-		// Add 365 days grace time
-		$expire = $this->local_time + 3600 * 24 * ( $this->options["app_limit"] + 365 );
-
-		$expire = apply_filters( 'app_cookie_time', $expire );
-
-		if ( defined('COOKIEPATH') ) $cookiepath = COOKIEPATH;
-		else $cookiepath = "/";
-		if ( defined('COOKIEDOMAIN') ) $cookiedomain = COOKIEDOMAIN;
-		else $cookiedomain = '';
-
-		@setcookie("wpmudev_appointments", serialize($apps), $expire, $cookiepath, $cookiedomain);
-
-		$data = array(
-					"n"	=> $name,
-					"e"	=> $email,
-					"p"	=> $phone,
-					"a"	=> $address,
-					"c"	=> $city,
-					"g"	=> $gcal
-					);
-		@setcookie("wpmudev_appointments_userdata", serialize($data), $expire, $cookiepath, $cookiedomain);
-
-		// May be required to clean up or modify userdata cookie
-		do_action( 'app_save_cookie', $app_id, $apps );
-
-		// Save user data too
-		if ( is_user_logged_in() && defined('APP_USE_LEGACY_USERDATA_OVERWRITING') && APP_USE_LEGACY_USERDATA_OVERWRITING ) {
-			global $current_user;
-			if ( $name )
-				update_user_meta( $current_user->ID, 'app_name', $name );
-			if ( $email )
-				update_user_meta( $current_user->ID, 'app_email', $email );
-			if ( $phone )
-				update_user_meta( $current_user->ID, 'app_phone', $phone );
-			if ( $address )
-				update_user_meta( $current_user->ID, 'app_address', $address );
-			if ( $city )
-				update_user_meta( $current_user->ID, 'app_city', $city );
-
-			do_action( 'app_save_user_meta', $current_user->ID, array( 'name'=>$name, 'email'=>$email, 'phone'=>$phone, 'address'=>$address, 'city'=>$city ) );
-		}
-	}
-
-	/**
 	 * Make sure we clean up cookies after logging out.
 	 */
 	public function drop_cookies_on_logout () {
@@ -2172,19 +1983,7 @@ class Appointments {
 		if ( 'yes' !== $options['login_required'] ) {
 			return;
 		}
-
-		$path = defined('COOKIEPATH')
-			? COOKIEPATH
-			: '/'
-		;
-		$domain = defined('COOKIEDOMAIN')
-			? COOKIEDOMAIN
-			: ''
-		;
-		$drop = $this->local_time - 3600;
-
-		@setcookie("wpmudev_appointments", "", $drop, $path, $domain);
-		@setcookie("wpmudev_appointments_userdata", "", $drop, $path, $domain);
+		Appointments_Sessions::clear_visitor_data();
 	}
 
 
@@ -2794,157 +2593,6 @@ class Appointments {
 		switch_to_blog( $blog_id );
 		appointments_delete_worker( $ID );
 		restore_current_blog();
-	}
-
-
-	
-	/**
-	 *	Add a service markup
-     *
-     * @param bool $php True if this will be used in first call, false if this is js
-     * @param mixed $service Service object that will be displayed (only when php is true)
-     *
-     * @return string
-	 */
-	function add_service( $php=false, $service='' ) {
-		if ( $php ) {
-			if ( is_object($service)) {
-				$n = $service->ID;
-				$name = $service->name;
-				$capacity = $service->capacity;
-				$price = $service->price;
-			 } else {
-				return '';
-			}
-		} else {
-			$n        = "'+n+'";
-			$name     = '';
-			$capacity = '0';
-			$price    = '';
-		}
-
-		$min_time = $this->get_min_time();
-
-		$html = '';
-		$html .= '<tr><td>';
-		$html .= $n;
-		$html .= '</td><td>';
-		$html .= '<input style="width:100%" type="text" name="services['.$n.'][name]" value="'.stripslashes( $name ).'" />' . apply_filters('app-settings-services-service-name', '', $n);
-		$html .= '</td><td>';
-		$html .= '<input style="width:90%" type="text" name="services['.$n.'][capacity]" value="'.$capacity.'" />';
-		$html .= '</td><td>';
-		$html .= '<select name="services['.$n.'][duration]" >';
-		$k_max = apply_filters( 'app_selectable_durations', min( 24, (int)(1440/$min_time) ) );
-		for ( $k=1; $k<=$k_max; $k++ ) {
-			if ( $php && is_object( $service ) && $k * $min_time == $service->duration )
-				$html .= '<option selected="selected">'. ($k * $min_time) . '</option>';
-			else
-				$html .= '<option>'. ($k * $min_time) . '</option>';
-		}
-		$html .= '</select>';
-		$html .= '</td><td>';
-		$html .= '<input style="width:90%" type="text" name="services['.$n.'][price]" value="'.$price.'" />';
-		$html .= '</td><td>';
-		$pages = apply_filters('app-service_description_pages-get_list', array());
-		if (empty($pages)) $pages = get_pages( apply_filters('app_pages_filter',array() ) );
-		$html .= '<select name="services['.$n.'][page]" >';
-		$html .= '<option value="0">'. __('None','appointments') .'</option>';
-		foreach( $pages as $page ) {
-			if ( $php )
-				$title = esc_attr( $page->post_title );
-			else
-				$title = esc_js( $page->post_title );
-
-			if ( $php && is_object( $service ) && $service->page == $page->ID )
-				$html .= '<option value="'.$page->ID.'" selected="selected">'. $title . '</option>';
-			else
-				$html .= '<option value="'.$page->ID.'">'. $title . '</option>';
-		}
-		$html .= '</select>';
-		$html .= '</td></tr>';
-		return $html;
-	}
-
-	/**
-	 * Add a worker markup
-     *
-	 * @param bool $php True if this will be used in first call, false if this is js
-	 * @param string|Appointments_Worker $worker Worker object that will be displayed (only when php is true)
-     *
-     * @return string
-	 */
-	function add_worker( $php=false, $worker='' ) {
-		if ( $php ) {
-			if ( is_object($worker)) {
-				$k = $worker->ID;
-				if ( $this->is_dummy( $worker->ID ) )
-					$dummy = ' checked="checked"';
-				else
-					$dummy = "";
-				$price = $worker->price;
-				$workers = wp_dropdown_users( array( 'echo'=>0, 'show'=>'user_login', 'selected' => $worker->ID, 'name'=>'workers['.$k.'][user]', 'exclude'=>apply_filters('app_filter_providers', null) ) );
-			} else {
-				return '';
-			}
-		}
-		else {
-			$k = "'+k+'";
-			$price = '';
-			$dummy = '';
-			$workers =str_replace( array("\t","\n","\r"), "", str_replace( array("'", "&#039;"), array('"', "'"), wp_dropdown_users( array ( 'echo'=>0, 'show'=>'user_login', 'include'=>0, 'name'=>'workers['.$k.'][user]', 'exclude'=>apply_filters('app_filter_providers', null)) ) ) );
-		}
-
-		$html = '';
-		$html .= '<tr><td>';
-		$html .= $k;
-		$html .= '</td><td>';
-		$html .= $workers  . apply_filters('app-settings-workers-worker-name', '', (is_object($worker) ? $worker->ID : false), $worker);
-		$html .= '</td><td>';
-		$html .= '<input type="checkbox" name="workers['.$k.'][dummy]" '.$dummy.' />';
-		$html .= '</td><td>';
-		$html .= '<input type="text" name="workers['.$k.'][price]" style="width:80%" value="'.$price.'" />';
-		$html .= '</td><td>';
-		$services = appointments_get_services();
-		if ( $services ) {
-			if ( $php && is_object( $worker ) )
-				$services_provided = $worker->services_provided;
-			else
-				$services_provided = false;
-			$html .= '<select class="add_worker_multiple" style="width:280px" multiple="multiple" name="workers['.$k.'][services_provided][]" >';
-			foreach ( $services as $service ) {
-				if ( $php )
-					$title = stripslashes( $service->name );
-				else
-					$title = esc_js( $service->name );
-
-				if ( is_array( $services_provided ) && in_array( $service->ID, $services_provided ) )
-					$html .= '<option value="'. $service->ID . '" selected="selected">'. $title . '</option>';
-				else
-					$html .= '<option value="'. $service->ID . '">'. $title . '</option>';
-			}
-			$html .= '</select>';
-		}
-		else
-			$html .= __( 'No services defined', 'appointments' );
-		$html .= '</td><td>';
-		$pages = apply_filters('app-biography_pages-get_list', array());
-		if (empty($pages)) $pages = get_pages( apply_filters('app_pages_filter',array() ) );
-		$html .= '<select name="workers['.$k.'][page]" >';
-		$html .= '<option value="0">'. __('None','appointments') .'</option>';
-		foreach( $pages as $page ) {
-			if ( $php )
-				$title = esc_attr( $page->post_title );
-			else
-				$title = esc_js( $page->post_title );
-
-			if ( $php && is_object( $worker ) && $worker->page == $page->ID )
-				$html .= '<option value="'.$page->ID.'" selected="selected">'. $title . '</option>';
-			else
-				$html .= '<option value="'.$page->ID.'">'. $title . '</option>';
-		}
-		$html .= '</select>';
-		$html .= '</td></tr>';
-		return $html;
 	}
 
 	/**

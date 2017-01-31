@@ -26,6 +26,8 @@ class App_PostTypes_ServiceDescription {
 
 		add_action('appointments_settings_tab-main-section-advanced', array($this, 'show_settings'));
 		add_filter('app-options-before_save', array($this, 'save_settings'));
+
+		add_filter( 'appointments_service_page_post_types_allowed', array( $this, 'allow_post_type_in_services' ) );
 	}
 
 	public function initialize () {
@@ -40,6 +42,10 @@ class App_PostTypes_ServiceDescription {
 			'posts_per_page' => -1,
 		));
 		return $query->posts;
+	}
+
+	public function allow_post_type_in_services( $allowed ) {
+		return array_merge( array( $this->_get_post_type() ), $allowed );
 	}
 
 	public function save_settings ($options) {

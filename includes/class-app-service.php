@@ -116,7 +116,8 @@ function appointments_insert_service( $args = array() ) {
 	// Page
 	$page_id = absint( $args['page'] );
 	$page = get_post( $page_id );
-	if ( $page && $page->post_type == 'page' ) {
+	$post_types_allowed = apply_filters( 'appointments_service_page_post_types_allowed', array( 'page' ) );
+	if ( $page && in_array( $page->post_type, $post_types_allowed ) ) {
 		$insert['page'] = $page_id;
 		$insert_wildcards[] = '%d';
 	}

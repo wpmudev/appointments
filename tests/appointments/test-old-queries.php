@@ -8,7 +8,9 @@ class App_Appointments_Old_Queries_Test extends App_UnitTestCase {
 	function test_check_spam() {
 		global $appointments;
 
-		$appointments->options["spam_time"] = 20;
+		$options = appointments_get_options();
+		$options["spam_time"] = 20;
+		appointments_update_options( $options );
 
 		$worker_id_1 = $this->factory->user->create_object( $this->factory->user->generate_args() );
 		$user_id = $this->factory->user->create_object( $this->factory->user->generate_args() );
@@ -48,7 +50,6 @@ class App_Appointments_Old_Queries_Test extends App_UnitTestCase {
 		$app_id_3 = appointments_insert_appointment( $args );
 
 		$_COOKIE["wpmudev_appointments"] = maybe_serialize( array( $app_id_1, $app_id_2, $app_id_3 ) );
-
 		$this->assertFalse( $appointments->check_spam() );
 
 		appointments_delete_appointment( $app_id_1 );

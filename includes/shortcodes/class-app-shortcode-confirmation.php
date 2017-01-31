@@ -91,10 +91,7 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 		global $appointments;
 
 		// Get user form data from his cookie
-		if ( isset( $_COOKIE["wpmudev_appointments_userdata"] ) )
-			$data = unserialize( stripslashes( $_COOKIE["wpmudev_appointments_userdata"] ) );
-		else
-			$data = array();
+		$data = Appointments_Sessions::get_visitor_personal_data();
 
 		$n = isset( $data["n"] ) ? sanitize_text_field( $data["n"] ) : ''; // Name
 		$e = isset( $data["e"] ) ? sanitize_text_field( $data["e"] ) : ''; // Email

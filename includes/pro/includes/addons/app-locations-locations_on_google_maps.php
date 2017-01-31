@@ -48,10 +48,7 @@ class App_GoogleMaps_MyAppointmentsShortcode extends App_Shortcode {
 				$user               = wp_get_current_user();
 				$query_args['user'] = $user->ID;
 			} else {
-				$apps = ! empty( $_COOKIE["wpmudev_appointments"] )
-					? unserialize( stripslashes( $_COOKIE["wpmudev_appointments"] ) )
-					: array();
-
+				$apps = Appointments_Sessions::get_current_visitor_appointments();
 				if ( ! empty( $apps ) ) {
 					$query_args['app_id'] = $apps;
 				}

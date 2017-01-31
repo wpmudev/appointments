@@ -28,7 +28,10 @@ class App_Schedule_SharedResources {
 
 		// Augment service settings pages
 		add_filter('app-settings-services-service-name', array($this, 'add_service_selection'), 10, 2);
-		add_action('app-services-service-updated', array($this, 'save_service_shared_resources'));
+		add_action( 'appointments_add_new_service_form', array( $this, 'add_new_service_selection' ) );
+
+		add_action( 'appointments_insert_service', array( $this, 'save_service_shared_resources' ) );
+		add_action( 'wpmudev_appointments_update_service', array( $this, 'save_service_shared_resources' ) );
 	}
 
 	public function initialize () {
@@ -59,14 +62,49 @@ class App_Schedule_SharedResources {
 		return strtr($out, "'", '"'); // We have to escape this, because of the way the JS injection works on the services page (wtf really o.0)
 	}
 
-	public function save_service_shared_resources ($service_id) {
-		$shared = isset($_POST['shared_resources'][$service_id])
-			? array_values(array_filter(array_map('intval', $_POST['shared_resources'][$service_id])))
-			: array()
-		;
-		$all_resources = get_option('appointments_services_shared_resources', array());
-		$all_resources[$service_id] = $shared;
-		update_option('appointments_services_shared_resources', $all_resources);
+	public function add_new_service_selection() {
+		$shared_ids = $this->_get_resource_sharing_services( 0 );
+		$direct_ids = $this->_get_resource_sharing_services( 0, true );
+		$all        = appointments_get_services();
+
+		?>
+			<th scope="row"><?php _e('Shares resources with', 'appointments'); ?></th>
+			<td>
+				<?php foreach ( $all as $service ): ?>
+					<?php
+						if ( empty( $service->ID ) ) {
+							continue;
+						} // Don't include empty hits or current service
+
+						$disabled = in_array($service->ID, $shared_ids) && !in_array($service->ID, $direct_ids) ? 'disabled="disabled"' : '';
+					?>
+					<label for='app-shared_service-<?php echo $service->ID; ?>'>
+
+						<input type="checkbox" id="app-shared_service-<?php echo $service->ID; ?>"
+						       value="<?php echo $service->ID; ?>" name='shared_resources[]'
+						       <?php echo $disabled; ?>
+						/>&nbsp;<?php echo $service->name; ?>
+					</label><br />
+				<?php endforeach; ?>
+			</td>
+		<?php
+	}
+
+	public function save_service_shared_resources( $service_id ) {
+
+		if ( isset( $_POST['shared_resources'][$service_id] ) ) {
+			$shared = array_values( array_filter( array_map( 'intval', $_POST['shared_resources'][ $service_id ] ) ) );
+		}
+		elseif ( isset( $_POST['shared_resources'] ) ) {
+			$shared = array_values( array_filter( array_map( 'intval', $_POST['shared_resources'] ) ) );
+		}
+		else {
+			return;
+		}
+
+		$all_resources = get_option( 'appointments_services_shared_resources', array() );
+		$all_resources[ $service_id ] = $shared;
+		update_option( 'appointments_services_shared_resources', $all_resources );
 	}
 
 	public function check_shared_resources ($is_busy, $period) {

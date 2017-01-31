@@ -742,7 +742,7 @@ class Appointments_Google_Calendar {
 
 		//Update GCal on status change
 		$old_status = $old_app->status;
-		$new_status = $args['status'];
+		$new_status = isset( $args['status'] ) ? $args['status'] : $old_status;
 
 		if ( $old_status != $new_status ) {
 

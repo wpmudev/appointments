@@ -29,7 +29,12 @@ class App_Locations_WorkerLocations {
 		
 		// Augment worker settings pages
 		add_filter('app-settings-workers-worker-name', array($this, 'add_worker_selection'), 10, 2);
-		add_action('app-workers-worker-updated', array($this, 'save_worker_location'));
+		add_action( 'appointments_add_new_worker_form', array( $this, 'add_new_worker_selection' ) );
+
+		// Save settings page
+		add_action( 'appointments_insert_worker', array( $this, 'save_worker_location' ) );
+		add_action( 'wpmudev_appointments_update_worker', array( $this, 'save_worker_location' ) );
+		add_action( 'appointments_delete_worker', array( $this, 'delete_worker_location' ) );
 
 		// Add settings
 		add_action('appointments_locations_settings_section_settings', array($this, 'show_settings'));
@@ -137,31 +142,80 @@ class App_Locations_WorkerLocations {
 	}
 
 	public function add_worker_selection ($out, $worker_id) {
-		if (!class_exists('App_Locations_Model') || !$this->_locations) return $out;
-		$locations = $this->_locations->get_all();
-		$markup = '';
+		if ( ! class_exists( 'App_Locations_Model' ) || ! $this->_locations ) {
+			return $out;
+		}
 
-		$markup .= '<label>' . __('Location:', 'appointments') . '</label>&nbsp;';
+		$locations = $this->_locations->get_all();
+		$markup    = '';
+
+		$markup .= '<label>' . __( 'Location:', 'appointments' ) . '</label>&nbsp;';
 		$markup .= '<select name="worker_location[' . $worker_id . ']"><option value=""></option>';
-		foreach ($locations as $location) {
-			$checked = $location->get_id() == self::worker_to_location_id($worker_id) ? 'selected="selected"' : '';
-			$markup .= '<option value="' . $location->get_id() . '" ' . $checked . '>' . esc_html($location->get_admin_label()) . '</option>';
+		foreach ( $locations as $location ) {
+			$checked = $location->get_id() == self::worker_to_location_id( $worker_id ) ? 'selected="selected"' : '';
+			$markup .= '<option value="' . $location->get_id() . '" ' . $checked . '>' . esc_html( $location->get_admin_label() ) . '</option>';
 		}
 		$markup .= '</select>';
+
 		return $out . $markup;
 	}
 
-	public function save_worker_location ($worker_id) {
-		if (!$worker_id) return false;
-		$key = self::STORAGE_PREFIX . $worker_id;
+	public function add_new_worker_selection() {
+		if ( ! class_exists( 'App_Locations_Model' ) || ! $this->_locations ) {
+			return;
+		}
 
-		$old_location_id = self::worker_to_location_id($worker_id);
-		$location_id = !empty($_POST['worker_location'][$worker_id]) ? $_POST['worker_location'][$worker_id] : false;
+		$locations = $this->_locations->get_all();
 
-		if ($old_location_id != $location_id) $this->_update_appointment_locations($worker_id, $old_location_id, $location_id);
-
-		return update_option($key, $location_id);
+		?>
+		<tr>
+			<th scope="row">
+				<label for="worker_location"><?php _e( 'Location', 'appointments' ); ?></label>
+			</th>
+			<td>
+				<select name="worker_location" id="worker_location">
+					<option value=""></option>
+					<?php foreach ( $locations as $location ): ?>
+						<option value="<?php echo $location->get_id(); ?>"><?php echo esc_html( $location->get_admin_label() ); ?></option>
+					<?php endforeach; ?>
+				</select>
+			</td>
+		</tr>
+		<?php
 	}
+
+	public function save_worker_location( $worker_id ) {
+		if ( isset( $_POST['worker_location'] ) && is_array( $_POST['worker_location'] ) && isset( $_POST['worker_location'][ $worker_id ] ) ) {
+			// Saving existing worker
+			$location_id = $_POST['worker_location'][ $worker_id ];
+		}
+		elseif ( isset( $_POST['worker_location'] ) ) {
+			$location_id = $_POST['worker_location'];
+		}
+		else {
+			return false;
+		}
+
+
+		$key = self::STORAGE_PREFIX . $worker_id;
+		$old_location_id = self::worker_to_location_id( $worker_id );
+
+		if ( $old_location_id != $location_id ) {
+			$this->_update_appointment_locations( $worker_id, $old_location_id, $location_id );
+		}
+
+		if ( empty( $location_id ) ) {
+			return delete_option( $key );
+		}
+
+		return update_option( $key, $location_id );
+	}
+
+	public function delete_worker_location( $worker_id ) {
+		$key = self::STORAGE_PREFIX . $worker_id;
+		delete_option( $key );
+	}
+
 
 	public static function worker_to_location_id ($worker_id) {
 		if (!$worker_id) return false;
