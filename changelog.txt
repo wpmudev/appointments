@@ -8,6 +8,7 @@
 - Fixed: Services were not saved when some of the addons were activated
 - Fixed: Warning when getting working hours
 - Fixed: Fatal error in Tetris addon
+- Fixed: Locations selector was not displayed when Paddings Add-on was active
 - Enhance: Better cookies management
 - Enhance: Workers/Services admin screen UX
 
