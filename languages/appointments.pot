@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Appointments+ package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Appointments+ 2.0.0\n"
+"Project-Id-Version: Appointments+ 2.0.1\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2017-01-25 09:40:13+00:00\n"
+"POT-Creation-Date: 2017-01-26 12:04:24+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -3839,8 +3839,8 @@ msgstr ""
 #: includes/pro/includes/addons/app-locations-location_support.php:130
 #: includes/pro/includes/addons/app-locations-location_support.php:444
 #: includes/pro/includes/addons/app-locations-location_support.php:469
-#: includes/pro/includes/addons/app-locations-service_locations.php:150
-#: includes/pro/includes/addons/app-locations-service_locations.php:175
+#: includes/pro/includes/addons/app-locations-service_locations.php:149
+#: includes/pro/includes/addons/app-locations-service_locations.php:174
 #: includes/pro/includes/addons/app-locations-worker_locations.php:173
 #: includes/pro/includes/addons/lib/class-app-locations-list-table.php:34
 msgid "Location"
@@ -4040,34 +4040,34 @@ msgstr ""
 msgid "After All Appointments shortcode output"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:202
+#: includes/pro/includes/addons/app-locations-service_locations.php:201
 msgid ""
 "You'll need Locations add-on activated for Service Locations integration "
 "add-on to work"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:247
+#: includes/pro/includes/addons/app-locations-service_locations.php:246
 msgid "Service Locations Settings"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:250
+#: includes/pro/includes/addons/app-locations-service_locations.php:249
 msgid "Show service location"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:253
+#: includes/pro/includes/addons/app-locations-service_locations.php:252
 #: includes/pro/includes/addons/app-locations-worker_locations.php:104
 msgid "I will add location info manually, using shortcode"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:254
+#: includes/pro/includes/addons/app-locations-service_locations.php:253
 msgid "Automatic, before service description"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:255
+#: includes/pro/includes/addons/app-locations-service_locations.php:254
 msgid "Automatic, after service description"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:257
+#: includes/pro/includes/addons/app-locations-service_locations.php:256
 msgid "You can use the shortcode like this: <code>[app_service_location]</code>"
 msgstr ""
 

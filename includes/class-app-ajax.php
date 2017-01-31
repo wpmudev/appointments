@@ -448,15 +448,18 @@ class Appointments_AJAX {
 			) ) );
 		}
 
-		// Try to assign to first worker available
-		$workers = appointments_get_all_workers();
-		foreach ( $workers as $worker ) {
-			$args['worker_id'] = $worker->ID;
-			$is_busy = apppointments_is_range_busy( $start, $start + ( $duration * 60 ), $args );
-			if ( ! $is_busy ) {
-				$worker = $worker->ID;
+		if ( ! $worker ) {
+			// Try to assign to first worker available
+			$workers = appointments_get_all_workers();
+			foreach ( $workers as $worker ) {
+				$args['worker_id'] = $worker->ID;
+				$is_busy = apppointments_is_range_busy( $start, $start + ( $duration * 60 ), $args );
+				if ( ! $is_busy ) {
+					$worker = $worker->ID;
+				}
 			}
 		}
+
 
 
 		unset( $args );
