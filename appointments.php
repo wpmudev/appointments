@@ -1898,6 +1898,9 @@ class Appointments {
 							$max = 24;
 					}
 					*/
+					if ( ! isset( $day['start'] ) || ! isset( $day['end'] ) ) {
+						continue;
+					}
 					$start = date( "G", strtotime( $this->to_military( $day["start"] ) ) );
 	                $end_timestamp = strtotime( $this->to_military( $day["end"] ) );
 	                $end = date( "G", $end_timestamp );
