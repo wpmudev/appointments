@@ -1257,6 +1257,7 @@ class Appointments {
 	 * Helper function to create a monthly schedule
 	 */
 	function get_monthly_calendar( $timestamp=false, $class='', $long, $widget ) {
+		$this->get_lsw();
 		$args = array(
 			'service_id' => $this->service,
 			'worker_id' => $this->worker,
