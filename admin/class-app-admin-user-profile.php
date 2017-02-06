@@ -73,7 +73,8 @@ class Appointments_Admin_User_Profile {
 				$location = 0;
 				$worker_id = absint( $_REQUEST['worker_id'] );
 
-				if ( ! wp_verify_nonce( $_REQUEST['app_bp_settings_submit'], 'app_bp_settings_submit' ) ) {
+				$bp_settings_submit = isset( $_REQUEST['app_bp_settings_submit'] ) ? $_REQUEST['app_bp_settings_submit'] : false;
+				if ( ! wp_verify_nonce( $bp_settings_submit, 'app_bp_settings_submit' ) ) {
 					check_admin_referer( 'app_exceptions-' . $worker_id, 'app_exceptions_nonce' );
 				}
 
