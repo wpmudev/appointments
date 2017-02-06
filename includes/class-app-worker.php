@@ -1119,6 +1119,7 @@ function appointments_is_worker_holiday( $worker_id, $start, $end, $location = f
 	if ( ! $worker ) {
 		$worker_exceptions = array();
 		$exceptions = appointments_get_worker_exceptions( $worker, 'closed', $location );
+
 		if ( is_object( $exceptions ) ) {
 			$worker_exceptions = explode( ',', $exceptions->days );
 		}

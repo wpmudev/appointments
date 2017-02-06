@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 2.0.1
+Version: 2.0.2
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	public $version = "2.0";
+	public $version = "2.0.2";
 	public $db_version;
 
 	public $timetables = array();
@@ -1257,6 +1257,7 @@ class Appointments {
 	 * Helper function to create a monthly schedule
 	 */
 	function get_monthly_calendar( $timestamp=false, $class='', $long, $widget ) {
+		$this->get_lsw();
 		$args = array(
 			'service_id' => $this->service,
 			'worker_id' => $this->worker,
@@ -1898,6 +1899,9 @@ class Appointments {
 							$max = 24;
 					}
 					*/
+					if ( ! isset( $day['start'] ) || ! isset( $day['end'] ) ) {
+						continue;
+					}
 					$start = date( "G", strtotime( $this->to_military( $day["start"] ) ) );
 	                $end_timestamp = strtotime( $this->to_military( $day["end"] ) );
 	                $end = date( "G", $end_timestamp );

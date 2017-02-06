@@ -1,3 +1,9 @@
+2017-02-06 - 2.0.2
+-------------------------------
+- Fixed: Monthly calendar was displaying as available worker holidays
+- Fixed: Working hours in user profile was not properly saved, giving warnings in front
+- Fixed: Appointment worker was not properly set on front end
+
 2017-01-25 - 2.0.1
 -------------------------------
 - New: Filter for weekly schedule headers
