@@ -789,45 +789,47 @@ function appointments_get_worker_working_hours( $status, $worker_id = 0, $locati
 
 	$table = appointments_get_table( 'wh' );
 
-	$cached = wp_cache_get( 'app_working_hours' );
-	$cache_key = 'working_hours_' . $location . '_' . $worker_id . '_' . $status;
-	if ( ! is_array( $cached ) ) {
-		$cached = array();
+	$working_hours = wp_cache_get( 'app_working_hours' );
+
+	if ( false === $working_hours ) {
+		$_working_hours = $wpdb->get_results( "SELECT * FROM $table" );
+		$working_hours = array();
+		foreach ( $_working_hours as $key => $row ) {
+			$row->hours = maybe_unserialize( $row->hours );
+			$working_hours[ $key ] = $row;
+		}
+		wp_cache_set( 'app_working_hours', $working_hours );
 	}
 
-	$work_breaks = isset( $cached[ $cache_key ] ) ? $cached[ $cache_key ] : false;
+	$working_hours = wp_list_filter( $working_hours, array( 'location' => $location, 'worker' => $worker_id, 'status' => $status ) );
+	if ( $working_hours ) {
+		$working_hours = current( $working_hours );
+	}
 
-	if ( false === $work_breaks ) {
-		$work_breaks = $wpdb->get_row( $wpdb->prepare("SELECT * FROM $table WHERE worker=%d AND location=%d AND status = %s", $worker_id, $location, $status ) );
-		if ( $work_breaks ) {
-			$work_breaks->hours = maybe_unserialize( $work_breaks->hours );
-			if ( is_array( $work_breaks->hours ) ) {
-				foreach ( $work_breaks->hours as $weekday => $hour ) {
-					// Transform weekday to weekday number for a better handling later
-					$weekday_number = '';
-					switch ( $weekday ) {
-						case 'Monday': { $weekday_number = 1; break; }
-						case 'Tuesday': { $weekday_number = 2; break; }
-						case 'Wednesday': { $weekday_number = 3; break; }
-						case 'Thursday': { $weekday_number = 4; break; }
-						case 'Friday': { $weekday_number = 5; break; }
-						case 'Saturday': { $weekday_number = 6; break; }
-						case 'Sunday': { $weekday_number = 7; break; }
-						default: { continue; }
-					}
-					$work_breaks->hours[ $weekday ]['weekday_number'] = $weekday_number;
+	if ( $working_hours ) {
+		if ( is_array( $working_hours->hours ) ) {
+			foreach ( $working_hours->hours as $weekday => $hour ) {
+				// Transform weekday to weekday number for a better handling later
+				$weekday_number = '';
+				switch ( $weekday ) {
+					case 'Monday': { $weekday_number = 1; break; }
+					case 'Tuesday': { $weekday_number = 2; break; }
+					case 'Wednesday': { $weekday_number = 3; break; }
+					case 'Thursday': { $weekday_number = 4; break; }
+					case 'Friday': { $weekday_number = 5; break; }
+					case 'Saturday': { $weekday_number = 6; break; }
+					case 'Sunday': { $weekday_number = 7; break; }
+					default: { continue; }
 				}
+				$working_hours->hours[ $weekday ]['weekday_number'] = $weekday_number;
 			}
 		}
-		else {
-			$work_breaks = false;
-		}
-
-		$cached[ $cache_key ] = $work_breaks;
-		wp_cache_set( 'app_working_hours', $cached );
+	}
+	else {
+		$working_hours = false;
 	}
 
-	return $work_breaks;
+	return $working_hours;
 }
 
 function appointments_delete_worker_working_hours( $worker_id ) {
@@ -1069,35 +1071,63 @@ function appointments_is_interval_break( $start, $end, $worker_id = 0, $location
 		$weekday_number = date( "N", $start );
 
 		foreach ( $days as $weekday => $day ) {
-			$start_break_datetime = strtotime( date( 'Y-m-d', $start ) . ' ' . $day['start'] . ':00' );
-			if ( $day['end'] === '00:00' ) {
-				// This means that the end time is on the next day
-				$end_break_datetime = strtotime( date( 'Y-m-d 00:00:00', strtotime( '+1 day', $start ) ) );
-			}
-			else {
-				$end_break_datetime   = strtotime( date( 'Y-m-d', $start ) . ' ' . $day['end'] . ':00' );
-			}
-
-
-			if ( absint( $weekday_number ) === absint( $day['weekday_number'] ) && 'yes' === $day['active'] ) {
-				// The weekday we're looking for and the break time is active
-				if (
-					$start >= $start_break_datetime // The start time is greater than the break day start time
-					&& $end <= $end_break_datetime // The end time is less than the break day end time. At this point we know that the searched dates are inside the interval)
-				) {
-					return true;
+			if ( ! is_array( $day['start'] ) ) {
+				$start_break_datetime = strtotime( date( 'Y-m-d', $start ) . ' ' . $day['start'] . ':00' );
+				if ( $day['end'] === '00:00' ) {
+					// This means that the end time is on the next day
+					$end_break_datetime = strtotime( date( 'Y-m-d 00:00:00', strtotime( '+1 day', $start ) ) );
 				}
-			} elseif ( absint( $weekday_number ) === absint( $day['weekday_number'] ) && is_array( $day['active'] ) ) {
-				// The weekday we're looking for and the break day is composed by several times
-				foreach ( $day["active"] as $idx => $active ) {
+				else {
+					$end_break_datetime   = strtotime( date( 'Y-m-d', $start ) . ' ' . $day['end'] . ':00' );
+				}
+
+
+				if ( absint( $weekday_number ) === absint( $day['weekday_number'] ) && 'yes' === $day['active'] ) {
+					// The weekday we're looking for and the break time is active
 					if (
 						$start >= $start_break_datetime // The start time is greater than the break day start time
 						&& $end <= $end_break_datetime // The end time is less than the break day end time. At this point we know that the searched dates are inside the interval)
 					) {
 						return true;
 					}
+				} elseif ( absint( $weekday_number ) === absint( $day['weekday_number'] ) && is_array( $day['active'] ) ) {
+					// The weekday we're looking for and the break day is composed by several times
+					foreach ( $day["active"] as $idx => $is_active ) {
+						if (
+							$start >= $start_break_datetime // The start time is greater than the break day start time
+							&& $end <= $end_break_datetime // The end time is less than the break day end time. At this point we know that the searched dates are inside the interval)
+						) {
+							return true;
+						}
+					}
 				}
 			}
+			else {
+				foreach ( $day['start'] as $key => $day_start ) {
+					$day_end = $day['end'][ $key ];
+					$is_active = $day['active'][ $key ];
+					$start_break_datetime = strtotime( date( 'Y-m-d', $start ) . ' ' . $day_start . ':00' );
+					if ( $day_end === '00:00' ) {
+						// This means that the end time is on the next day
+						$end_break_datetime = strtotime( date( 'Y-m-d 00:00:00', strtotime( '+1 day', $start ) ) );
+					}
+					else {
+						$end_break_datetime   = strtotime( date( 'Y-m-d', $start ) . ' ' . $day_end . ':00' );
+					}
+
+
+					if ( absint( $weekday_number ) === absint( $day['weekday_number'] ) && 'yes' === $is_active ) {
+						// The weekday we're looking for and the break time is active
+						if (
+							$start >= $start_break_datetime // The start time is greater than the break day start time
+							&& $end <= $end_break_datetime // The end time is less than the break day end time. At this point we know that the searched dates are inside the interval)
+						) {
+							return true;
+						}
+					}
+				}
+			}
+
 		}
 	}
 
