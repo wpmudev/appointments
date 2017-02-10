@@ -250,7 +250,7 @@ jQuery(document).ready(function($){
 	<li class="faq-answer" id='q38'>
 		<p> <?php _e('First of all, you must set "Allow client cancel own appointments" setting as Yes. Then:', 'appointments');?> </p>
 		<p><?php _e('A logged in client can cancel his appointments using his profile page.', 'appointments');?> </p>
-		<p> <?php _e('Any client can cancel his own appointment using links in confirmation and/or reminder emails if you use CANCEL placeholder in your email bodies.', 'appointments');?> </p>
+		<p style="display: none;"> <?php _e('Any client can cancel his own appointment using links in confirmation and/or reminder emails if you use CANCEL placeholder in your email bodies.', 'appointments');?> </p>
 		<p> <?php _e('Any client can cancel his own appointment using the checkbox in my appointments table if you set allow_cancel="1" in my_appointments shortcode.', 'appointments');?> </p>
 	</li>
 
