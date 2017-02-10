@@ -1282,6 +1282,7 @@ class Appointments {
 	 */
 	function get_timetable( $day_start, $capacity, $schedule_key=false ) {
 		$timetable_key = $day_start . '-' . $capacity;
+		$local_time = current_time( 'timestamp' );
 
 		if ( ! $schedule_key ) {
 			$timetable_key .= '-0';
@@ -1296,7 +1297,7 @@ class Appointments {
 			$time = (int)$_GET["wcalendar"];
 		}
 		else {
-			$time = $this->local_time;
+			$time = $local_time;
 		}
 
 		$timetable_key .= '-' . $this->worker;
@@ -1422,14 +1423,14 @@ class Appointments {
 
 				$class_name = '';
 				// Mark now
-				if ( $this->local_time > $ccs && $this->local_time < $cce )
+				if ( $local_time > $ccs && $local_time < $cce )
 					$class_name = 'notpossible now';
 				// Mark passed hours
-				else if ( $this->local_time > $ccs )
+				else if ( $local_time > $ccs )
 					$class_name = 'notpossible app_past';
 				// Then check if this time is blocked
 				else if ( isset( $this->options["app_lower_limit"] ) && $this->options["app_lower_limit"]
-				          &&( $this->local_time + $this->options["app_lower_limit"] * 3600) > $cce )
+				          &&( $local_time + $this->options["app_lower_limit"] * 3600) > $cce )
 					$class_name = 'notpossible app_blocked';
 				// Check if this is break
 				else if ( $this->is_break( $ccs, $cce ) )
