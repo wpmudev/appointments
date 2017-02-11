@@ -8,6 +8,9 @@
  */
 class App_Working_Hours_Test extends App_UnitTestCase {
 
+	/**
+	 * @group tmp
+	 */
 	function test_default_working_hours() {
 		$open = appointments_get_worker_working_hours( 'open', 0, 0 );
 		$closed = appointments_get_worker_working_hours( 'closed', 0, 0 );
@@ -61,8 +64,8 @@ class App_Working_Hours_Test extends App_UnitTestCase {
 		$this->assertEquals( $num_queries, $wpdb->num_queries );
 
 		$cached = wp_cache_get( 'app_working_hours' );
-		$cache_key = 'working_hours_0_' . $worker_id . '_open';
-		$this->assertEquals( $open, $cached[ $cache_key ] );
+		var_dump($cached);
+		$this->assertCount( 4, $cached );
 
 	}
 
