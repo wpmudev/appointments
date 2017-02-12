@@ -138,7 +138,12 @@ class Appointments_Google_Calendar_Importer {
 
 		if ( ! $service_id ) {
 			// Service ID is not important as we will use this record for blocking our time slots only
-			$service_id = apply_filters( 'appointments_import_gcal_event_service_id', appointments_get_services_min_id(), $event );
+			// Try to at least to use a Service that is provided by current user
+			$service_id = apply_filters( 'appointments_import_gcal_event_service_id', appointments_get_worker_first_service( $worker_id ), $event, $worker_id );
+			//If things have gone terribly wrong
+			if( ! $service_id ){
+				$service_id = appointments_get_services_min_id();
+			}
 		}
 
 

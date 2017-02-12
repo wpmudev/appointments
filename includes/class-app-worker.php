@@ -707,6 +707,23 @@ function appointments_get_worker_services( $worker_id ) {
 	return array();
 }
 
+function appointments_get_worker_first_service( $worker_id, $return_att = false ){
+	$worker_services = appointments_get_worker_services( $worker_id );
+
+	if( ! is_array( $worker_services ) || empty( $worker_services ) || ! is_object( $worker_services[0] ) ){
+		return false;
+	}
+
+	$first_service = (array) $worker_services[0];
+
+	if($return_att && isset( $first_service[ $return_att ] ) ){
+		return $first_service[ $return_att ];
+	}
+
+	return $first_service;
+
+}
+
 function appointments_delete_worker_exceptions( $worker_id ) {
 	global $wpdb;
 
