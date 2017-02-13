@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments+ 2.0.1\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2017-01-26 12:04:24+00:00\n"
+"POT-Creation-Date: 2017-01-31 14:36:14+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2657,105 +2657,105 @@ msgid ""
 "from us."
 msgstr ""
 
-#: includes/class-app-ajax.php:446 includes/class-app-ajax.php:883
+#: includes/class-app-ajax.php:446 includes/class-app-ajax.php:886
 msgid ""
 "We are sorry, but this time slot is no longer available. Please refresh the "
 "page and try another time slot. Thank you."
 msgstr ""
 
-#: includes/class-app-ajax.php:509 includes/class-app-ajax.php:518
+#: includes/class-app-ajax.php:512 includes/class-app-ajax.php:521
 msgid "Appointment could not be saved. Please contact website admin."
 msgstr ""
 
-#: includes/class-app-ajax.php:715
+#: includes/class-app-ajax.php:718
 msgid ""
 "Paypal confirmation arrived, but status could not be changed for some "
 "reason. Please check appointment with ID %s"
 msgstr ""
 
-#: includes/class-app-ajax.php:717
+#: includes/class-app-ajax.php:720
 msgid "Appointment status could not be changed"
 msgstr ""
 
-#: includes/class-app-ajax.php:723
+#: includes/class-app-ajax.php:726
 msgid ""
 "Last transaction has been reversed. Reason: Payment has been reversed "
 "(charge back)"
 msgstr ""
 
-#: includes/class-app-ajax.php:747
+#: includes/class-app-ajax.php:750
 msgid "Last transaction has been reversed. Reason: Payment has been refunded"
 msgstr ""
 
-#: includes/class-app-ajax.php:771
+#: includes/class-app-ajax.php:774
 msgid "Last transaction has been reversed. Reason: Payment Denied"
 msgstr ""
 
-#: includes/class-app-ajax.php:797
+#: includes/class-app-ajax.php:800
 msgid "Customer did not include a confirmed shipping address"
 msgstr ""
 
-#: includes/class-app-ajax.php:798
+#: includes/class-app-ajax.php:801
 msgid "Funds not captured yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:799
+#: includes/class-app-ajax.php:802
 msgid "eCheck that has not cleared yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:800
+#: includes/class-app-ajax.php:803
 msgid "Payment waiting for aproval by service provider"
 msgstr ""
 
-#: includes/class-app-ajax.php:801
+#: includes/class-app-ajax.php:804
 msgid "Payment waiting for service provider to handle multi-currency process"
 msgstr ""
 
-#: includes/class-app-ajax.php:802
+#: includes/class-app-ajax.php:805
 msgid "Customer did not register or confirm his/her email yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:803
+#: includes/class-app-ajax.php:806
 msgid "Waiting for service provider to upgrade the PayPal account"
 msgstr ""
 
-#: includes/class-app-ajax.php:804
+#: includes/class-app-ajax.php:807
 msgid "Waiting for service provider to verify his/her PayPal account"
 msgstr ""
 
-#: includes/class-app-ajax.php:808
+#: includes/class-app-ajax.php:811
 msgid "Last transaction is pending. Reason: "
 msgstr ""
 
-#: includes/class-app-ajax.php:864
+#: includes/class-app-ajax.php:867
 msgid "You need to login to make an appointment."
 msgstr ""
 
-#: includes/class-app-ajax.php:889
+#: includes/class-app-ajax.php:892
 msgid "Service name: "
 msgstr ""
 
-#: includes/class-app-ajax.php:890
+#: includes/class-app-ajax.php:893
 msgid "Date and time: "
 msgstr ""
 
-#: includes/class-app-ajax.php:891
+#: includes/class-app-ajax.php:894
 msgid "Lasts (approx): "
 msgstr ""
 
-#: includes/class-app-ajax.php:891
+#: includes/class-app-ajax.php:894
 msgid "minutes"
 msgstr ""
 
-#: includes/class-app-ajax.php:894
+#: includes/class-app-ajax.php:897
 msgid "Price: "
 msgstr ""
 
-#: includes/class-app-ajax.php:899
+#: includes/class-app-ajax.php:902
 msgid "Service provider: "
 msgstr ""
 
-#: includes/class-app-ajax.php:985
+#: includes/class-app-ajax.php:988
 msgid "Nothing to download!"
 msgstr ""
 
