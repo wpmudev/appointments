@@ -450,12 +450,18 @@ class Appointments_AJAX {
 
 		if ( ! $worker ) {
 			// Try to assign to first worker available
-			$workers = appointments_get_all_workers();
+			if( $service ){
+				$workers = appointments_get_workers_by_service( $service );
+			}
+			else{
+				$workers = appointments_get_all_workers();
+			}
 			foreach ( $workers as $worker ) {
 				$args['worker_id'] = $worker->ID;
 				$is_busy = apppointments_is_range_busy( $start, $start + ( $duration * 60 ), $args );
 				if ( ! $is_busy ) {
 					$worker = $worker->ID;
+					break;
 				}
 			}
 		}
