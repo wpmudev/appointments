@@ -66,7 +66,6 @@ function appointments_is_interval_break( $start, $end, $worker_id = 0, $location
 		$days = $result_days->hours;
 	}
 
-
 	if ( ! is_array( $days ) || empty( $days ) ) {
 		return false;
 	}

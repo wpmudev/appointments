@@ -68,6 +68,7 @@ class Appointments {
 
 		include_once( 'includes/helpers.php' );
 		include_once( 'includes/helpers-settings.php' );
+		include_once( 'includes/helpers-timetables.php' );
 		include_once( 'includes/deprecated-hooks.php' );
 		include_once( 'includes/class-app-notifications-manager.php' );
 		include_once( 'includes/class-app-api-logins.php' );

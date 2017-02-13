@@ -7,10 +7,90 @@
  */
 class App_Timetables_Test extends App_UnitTestCase {
 
+
+	function test_get_available_workers_for_interval() {
+		$options = appointments_get_options();
+		$options['min_time'] = 30;
+		$options['additional_min_time'] = '';
+		$options['admin_min_time'] = '';
+		$options['allow_overwork'] = 'no';
+		appointments_update_options( $options );
+
+		update_option( 'date_format', 'Y-m-d' );
+		update_option( 'time_format', 'H:i' );
+		appointments()->time_format = appointments_get_date_format( 'time' );
+		appointments()->date_format = appointments_get_date_format( 'date' );
+		appointments()->datetime_format = appointments_get_date_format( 'full' );
+
+		$service_id = $this->factory->service->create_object( array( 'duration' => 60, 'name' => 'A service' ) );
+		$worker_id_1 = $this->factory->worker->create_object( array( 'services_provided' => array( $service_id ) ) );
+
+		$this->_generate_working_hours( 0 );
+		$this->_generate_working_hours( $worker_id_1 );
+
+		$next_sunday = strtotime( 'next Sunday', current_time( 'timestamp' ) );
+		$next_monday = strtotime( 'next Monday', current_time( 'timestamp' ) );
+		$next_tuesday = strtotime( 'next Tuesday', current_time( 'timestamp' ) );
+
+
+		$start = strtotime( date( 'Y-m-d 10:00:00', $next_sunday ) );
+		$end = strtotime( date( 'Y-m-d 10:30:00', $next_sunday ) );
+		$result = appointments_get_available_workers_for_interval( $start, $end, $service_id );
+		$this->assertEquals( 0, $result );
+
+		$start = strtotime( date( 'Y-m-d 10:00:00', $next_monday ) );
+		$end = strtotime( date( 'Y-m-d 10:30:00', $next_monday ) );
+		$result = appointments_get_available_workers_for_interval( $start, $end, $service_id );
+		$this->assertEquals( 1, $result );
+
+		$start = strtotime( date( 'Y-m-d 20:00:00', $next_monday ) );
+		$end = strtotime( date( 'Y-m-d 20:30:00', $next_monday ) );
+		$result = appointments_get_available_workers_for_interval( $start, $end, $service_id );
+		$this->assertEquals( 0, $result );
+
+		$start = strtotime( date( 'Y-m-d 12:00:00', $next_tuesday ) );
+		$end = strtotime( date( 'Y-m-d 12:30:00', $next_tuesday ) );
+		$result = appointments_get_available_workers_for_interval( $start, $end, $service_id );
+		$this->assertEquals( 1, $result );
+
+
+		$worker_id_2 = $this->factory->worker->create_object( array( 'services_provided' => array( $service_id ) ) );
+		$worker_wh = array(
+			'open' => array(
+				'Monday'    => array(
+					'active' => 'no',
+					'start'  => '08:00',
+					'end'    => '18:00'
+				),
+			)
+		);
+		$this->_generate_working_hours( $worker_id_2, $worker_wh );
+
+		$start = strtotime( date( 'Y-m-d 10:00:00', $next_sunday ) );
+		$end = strtotime( date( 'Y-m-d 10:30:00', $next_sunday ) );
+		$result = appointments_get_available_workers_for_interval( $start, $end, $service_id );
+		$this->assertEquals( 0, $result );
+
+		$start = strtotime( date( 'Y-m-d 10:00:00', $next_monday ) );
+		$end = strtotime( date( 'Y-m-d 10:30:00', $next_monday ) );
+		$result = appointments_get_available_workers_for_interval( $start, $end, $service_id );
+		$this->assertEquals( 1, $result );
+
+		$start = strtotime( date( 'Y-m-d 20:00:00', $next_monday ) );
+		$end = strtotime( date( 'Y-m-d 20:30:00', $next_monday ) );
+		$result = appointments_get_available_workers_for_interval( $start, $end, $service_id );
+		$this->assertEquals( 0, $result );
+
+		$start = strtotime( date( 'Y-m-d 12:00:00', $next_tuesday ) );
+		$end = strtotime( date( 'Y-m-d 12:30:00', $next_tuesday ) );
+		$result = appointments_get_available_workers_for_interval( $start, $end, $service_id );
+		$this->assertEquals( 2, $result );
+	}
+
 	/**
 	 * @group temp
 	 */
-	function test_timetables() {
+	function test_is_interval_break() {
 		$options = appointments_get_options();
 		$options['min_time'] = 30;
 		$options['additional_min_time'] = '';
@@ -28,34 +108,43 @@ class App_Timetables_Test extends App_UnitTestCase {
 		$worker_id = $this->factory->worker->create_object( array( 'services_provided' => array( $service_id ) ) );
 
 		$this->_generate_working_hours( 0 );
-		$this->_generate_working_hours( $worker_id );
 
-		$site_wh = appointments_get_worker_working_hours( 'open', 0 );
-		$worker_wh = appointments_get_worker_working_hours( 'open', $worker_id );
+		$worker_wh = array(
+			'closed' => array(
+				'Monday' =>
+					array(
+						'active' => 'yes',
+						'start'  => '12:00',
+						'end'    => '15:00',
+					)
+			)
+		);
+		$this->_generate_working_hours( $worker_id, $worker_wh );
 
 		$next_monday = strtotime( 'next Monday', current_time( 'timestamp' ) );
 		$next_sunday = strtotime( 'next Sunday', current_time( 'timestamp' ) );
 
-
 		$start = strtotime( date( 'Y-m-d 10:00:00', $next_sunday ) );
 		$end = strtotime( date( 'Y-m-d 10:30:00', $next_sunday ) );
-		var_dump("------------------NOW");
-		$result = appointments()->is_busy( $start, $end );
-		var_dump($result);
+		$result = appointments_is_interval_break( $start, $end, $worker_id );
+		$this->assertFalse( $result );
 
-		//appointments_get_timetable( $next_monday, 0 );
-		$timetables = appointments()->timetables;
-		$timetable = current( $timetables );
+		$start = strtotime( date( 'Y-m-d 10:00:00', $next_monday ) );
+		$end = strtotime( date( 'Y-m-d 10:30:00', $next_monday ) );
+		$result = appointments_is_interval_break( $start, $end, $worker_id );
+		$this->assertFalse( $result );
 
-		//var_dump("-------------------------------------------NOW");
-		//var_dump(appointments()->available_workers( ));
-		$next_monday_date = date( 'Y-m-d' );
-		// Count
+		$start = strtotime( date( 'Y-m-d 20:00:00', $next_monday ) );
+		$end = strtotime( date( 'Y-m-d 20:30:00', $next_monday ) );
+		$result = appointments_is_interval_break( $start, $end, $worker_id );
+		$this->assertFalse( $result );
+
+		$start = strtotime( date( 'Y-m-d 14:00:00', $next_monday ) );
+		$end = strtotime( date( 'Y-m-d 14:30:00', $next_monday ) );
+		$result = appointments_is_interval_break( $start, $end, $worker_id );
+		$this->assertTrue( $result );
 	}
 
-	function test_timetables_worker_without_working_hours() {
-
-	}
 
 	function _generate_working_hours( $worker_id = 0, $custom = array() ) {
 		$defaults = array(
@@ -108,7 +197,7 @@ class App_Timetables_Test extends App_UnitTestCase {
 			),
 		);
 
-		$working_hours = array_merge( $custom, $defaults );
+		$working_hours = wp_parse_args( $custom, $defaults );
 		appointments_update_worker_working_hours( $worker_id, $working_hours, 'open' );
 	}
 
@@ -159,7 +248,7 @@ class App_Timetables_Test extends App_UnitTestCase {
 				),
 		);
 
-		$closing_hours = array_merge( $custom, $defaults );
+		$closing_hours = wp_parse_args( $custom, $defaults );
 		appointments_update_worker_working_hours( $worker_id, $closing_hours, 'closed' );
 	}
 
