@@ -6,6 +6,10 @@
 class Appointments_Widget_Helper extends WP_Widget {
 	var $default_instance = array();
 
+	public function __construct( $id_base, $name, $widget_options = array(), $control_options = array() ) {
+		parent::__construct( $id_base, $name, $widget_options, $control_options );
+	}
+
 	function parse_instance( $instance ) {
 		return wp_parse_args( $instance, $this->default_instance );
 	}

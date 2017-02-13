@@ -90,7 +90,10 @@ class WP_UnitTest_Factory_For_Worker extends WP_UnitTest_Factory_For_Thing {
 
 	function create_object( $args ) {
 		$user_args = $this->factory->user->generate_args();
-		$user_args['user_email'] = $args['user_email'];
+
+		if ( isset( $args['user_email'] ) ) {
+			$user_args['user_email'] = $args['user_email'];
+		}
 		$worker_id = $this->factory->user->create_object( $user_args );
 		$args['ID'] = $worker_id;
 		appointments_insert_worker( $args );

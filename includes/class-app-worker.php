@@ -789,44 +789,47 @@ function appointments_get_worker_working_hours( $status, $worker_id = 0, $locati
 
 	$table = appointments_get_table( 'wh' );
 
-	$cached = wp_cache_get( 'app_working_hours' );
-	$cache_key = 'working_hours_' . $location . '_' . $worker_id . '_' . $status;
-	if ( ! is_array( $cached ) ) {
-		$cached = array();
+	$working_hours = wp_cache_get( 'app_working_hours' );
+
+	if ( false === $working_hours ) {
+		$_working_hours = $wpdb->get_results( "SELECT * FROM $table" );
+		$working_hours = array();
+		foreach ( $_working_hours as $key => $row ) {
+			$row->hours = maybe_unserialize( $row->hours );
+			$working_hours[ $key ] = $row;
+		}
+		wp_cache_set( 'app_working_hours', $working_hours );
 	}
 
-	$work_breaks = isset( $cached[ $cache_key ] ) ? $cached[ $cache_key ] : false;
+	$working_hours = wp_list_filter( $working_hours, array( 'location' => $location, 'worker' => $worker_id, 'status' => $status ) );
+	if ( $working_hours ) {
+		$working_hours = current( $working_hours );
+	}
 
-	if ( false === $work_breaks ) {
-		$work_breaks = $wpdb->get_row( $wpdb->prepare("SELECT * FROM $table WHERE worker=%d AND location=%d AND status = %s", $worker_id, $location, $status ) );
-		if ( $work_breaks ) {
-			$work_breaks->hours = maybe_unserialize( $work_breaks->hours );
-			if ( is_array( $work_breaks->hours ) ) {
-				foreach ( $work_breaks->hours as $weekday => $hour ) {
-					// Transform weekday to weekday number for a better handling later
-					$weekday_number = '';
-					switch ( $weekday ) {
-						case 'Monday': { $weekday_number = 1; break; }
-						case 'Tuesday': { $weekday_number = 2; break; }
-						case 'Wednesday': { $weekday_number = 3; break; }
-						case 'Thursday': { $weekday_number = 4; break; }
-						case 'Friday': { $weekday_number = 5; break; }
-						case 'Saturday': { $weekday_number = 6; break; }
-						case 'Sunday': { $weekday_number = 7; break; }
-					}
-					$work_breaks->hours[ $weekday ]['weekday_number'] = $weekday_number;
+	if ( $working_hours ) {
+		if ( is_array( $working_hours->hours ) ) {
+			foreach ( $working_hours->hours as $weekday => $hour ) {
+				// Transform weekday to weekday number for a better handling later
+				$weekday_number = '';
+				switch ( $weekday ) {
+					case 'Monday': { $weekday_number = 1; break; }
+					case 'Tuesday': { $weekday_number = 2; break; }
+					case 'Wednesday': { $weekday_number = 3; break; }
+					case 'Thursday': { $weekday_number = 4; break; }
+					case 'Friday': { $weekday_number = 5; break; }
+					case 'Saturday': { $weekday_number = 6; break; }
+					case 'Sunday': { $weekday_number = 7; break; }
+					default: { continue; }
 				}
+				$working_hours->hours[ $weekday ]['weekday_number'] = $weekday_number;
 			}
 		}
-		else {
-			$work_breaks = false;
-		}
-
-		$cached[ $cache_key ] = $work_breaks;
-		wp_cache_set( 'app_working_hours', $cached );
+	}
+	else {
+		$working_hours = false;
 	}
 
-	return $work_breaks;
+	return $working_hours;
 }
 
 function appointments_delete_worker_working_hours( $worker_id ) {
@@ -938,205 +941,9 @@ function appointments_update_worker_exceptions( $worker_id, $status, $days, $loc
 }
 
 
-/**
- * Return the number of workers available for a given service during a interval of time
- *
- * Note: This function does not check agains worker's appointments
- *
- * @param int $start
- * @param int $end
- * @param int $service_id
- * @param bool|int $location
- *
- * @return int
- */
-function appointments_get_available_workers_for_interval( $start, $end, $service_id, $location = false ) {
-	$capacity = apply_filters( 'app_get_capacity', false, $service_id, null );
-	if ( false !== $capacity ) {
-		// Dont proceed further if capacity is forced
-		return $capacity;
-	}
-
-	$service = appointments_get_service( $service_id );
-	if ( ! $service ) {
-		// This will mostly happen when Appointments->service = 0
-		return 1;
-	}
-
-	$workers = appointments_get_workers_by_service( $service_id );
-	if ( ! $workers ) {
-		// If there are no workers for this service, apply the service capacity
-		return appointments_get_capacity();
-	}
-
-	$capacity_available = 0;
-	$available_workers = array();
-
-	foreach( $workers as $worker ) {
-		if ( appointments_is_worker_holiday( $worker->ID, $start, $end, $location ) ) {
-			// If it's a worker exception, do not account this worker
-			continue;
-		}
-
-		if ( appointments_is_interval_break( $start, $end, $worker->ID, $location ) ) {
-			// Break for the worker, do not account
-			continue;
-		}
-
-		// Try getting cached preprocessed hours
-		$days = array();
-		$result_days = appointments_get_worker_working_hours( 'open', $worker->ID, $location );
-		if ( $result_days && is_object( $result_days ) && ! empty( $result_days->hours ) ) {
-			$days = $result_days->hours;
-		}
-
-		if ( ! is_array( $days ) || empty( $days ) ) {
-			continue;
-		}
 
 
-		if ( is_array( $days ) ) {
-			// Filter days. Just get the correspondant weekday and if it's active
-			$active_day = wp_list_filter(
-				$days,
-				array(
-					'weekday_number' => date( "N", $start ),
-					'active'         => 'yes'
-				)
-			);
-			if ( ! empty( $active_day ) ) {
-				// Results must only contain one result, let's get that result
-				$active_day = current( $active_day );
 
-				// The worker is working this weekday. Let's check the interval
-				$start_active_datetime = strtotime( date( 'Y-m-d', $start ) . ' ' . $active_day['start'] . ':00' );
-				if ( $active_day['end'] === '00:00' ) {
-					// This means that the end time is on the next day
-					$end_active_datetime = strtotime( date( 'Y-m-d 00:00:00', strtotime( '+1 day', $start ) ) );
-				}
-				else {
-					$end_active_datetime   = strtotime( date( 'Y-m-d', $start ) . ' ' . $active_day['end'] . ':00' );
-				}
-
-				if (
-					$start >= $start_active_datetime // The start time is greater than the active day start time
-					&& $end <= $end_active_datetime // The end time is less than the active day end time. At this point we know that the searched dates are inside the interval
-				) {
-					$capacity_available++;
-				}
-			}
-			unset( $active_day );
-		}
-	}
-
-	// We have to check service capacity too
-	if ( ! $service->capacity ) {
-		// No service capacity limit
-		return $capacity_available;
-	}
-
-	// Return whichever smaller
-	return min( $service->capacity, $capacity_available );
-}
-
-
-/**
- * Check if an interval is a break
- *
- * @param $start
- * @param $end
- * @param int $worker_id Worker ID or 0 to check agains the main working days
- *
- * @return bool
- */
-function appointments_is_interval_break( $start, $end, $worker_id = 0, $location = 0 ) {
-	// Try getting cached preprocessed hours
-	$days = array();
-
-	// Preprocess and cache workhours
-	// Look where our working hour ends
-	$result_days = appointments_get_worker_working_hours( 'closed', $worker_id, $location );
-	if ( $result_days && is_object( $result_days ) && ! empty( $result_days->hours ) ) {
-		$days = $result_days->hours;
-	}
-
-	if ( ! is_array( $days ) || empty( $days ) ) {
-		return false;
-	}
-
-	if ( is_array( $days ) ) {
-		$weekday_number = date( "N", $start );
-
-		foreach ( $days as $weekday => $day ) {
-			$start_break_datetime = strtotime( date( 'Y-m-d', $start ) . ' ' . $day['start'] . ':00' );
-			if ( $day['end'] === '00:00' ) {
-				// This means that the end time is on the next day
-				$end_break_datetime = strtotime( date( 'Y-m-d 00:00:00', strtotime( '+1 day', $start ) ) );
-			}
-			else {
-				$end_break_datetime   = strtotime( date( 'Y-m-d', $start ) . ' ' . $day['end'] . ':00' );
-			}
-
-
-			if ( absint( $weekday_number ) === absint( $day['weekday_number'] ) && 'yes' === $day['active'] ) {
-				// The weekday we're looking for and the break time is active
-				if (
-					$start >= $start_break_datetime // The start time is greater than the break day start time
-					&& $end <= $end_break_datetime // The end time is less than the break day end time. At this point we know that the searched dates are inside the interval)
-				) {
-					return true;
-				}
-			} elseif ( absint( $weekday_number ) === absint( $day['weekday_number'] ) && is_array( $day['active'] ) ) {
-				// The weekday we're looking for and the break day is composed by several times
-				foreach ( $day["active"] as $idx => $active ) {
-					if (
-						$start >= $start_break_datetime // The start time is greater than the break day start time
-						&& $end <= $end_break_datetime // The end time is less than the break day end time. At this point we know that the searched dates are inside the interval)
-					) {
-						return true;
-					}
-				}
-			}
-		}
-	}
-
-	return false;
-}
-
-/**
- * Check if an interval is a holiday for a worker
- *
- * @param $worker_id
- * @param $start
- * @param $end
- *
- * @return bool
- */
-function appointments_is_worker_holiday( $worker_id, $start, $end, $location = false ) {
-	$is_holiday = false;
-
-	$worker = appointments_get_worker( $worker_id );
-	if ( ! $worker ) {
-		$worker_exceptions = array();
-		$exceptions = appointments_get_worker_exceptions( $worker, 'closed', $location );
-
-		if ( is_object( $exceptions ) ) {
-			$worker_exceptions = explode( ',', $exceptions->days );
-		}
-	}
-	else {
-		$worker_exceptions = $worker->get_exceptions( 'closed' );
-	}
-
-	if (
-		in_array( date( 'Y-m-d', $start ), $worker_exceptions )
-		|| in_array( date( 'Y-m-d', $end ), $worker_exceptions )
-	) {
-		return true;
-	}
-
-	return apply_filters( 'app_is_holiday', $is_holiday, $start, $end, null, $worker_id );
-}
 
 
 function appointments_delete_worker_cache( $worker_id = 0 ) {
