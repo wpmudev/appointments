@@ -87,10 +87,8 @@ function appointments_is_interval_break( $start, $end, $worker_id = 0, $location
 
 				if ( absint( $weekday_number ) === absint( $day['weekday_number'] ) && 'yes' === $day['active'] ) {
 					// The weekday we're looking for and the break time is active
-					if (
-						$start >= $start_break_datetime // The start time is greater than the break day start time
-						&& $end <= $end_break_datetime // The end time is less than the break day end time. At this point we know that the searched dates are inside the interval)
-					) {
+					$period = new App_Period( $start, $end );
+					if ( $period->contains( $start_break_datetime, $end_break_datetime ) ) { // The end time is less than the break day end time. At this point we know that the searched dates are inside the interval) ) {
 						return true;
 					}
 				} elseif ( absint( $weekday_number ) === absint( $day['weekday_number'] ) && is_array( $day['active'] ) ) {
@@ -120,11 +118,9 @@ function appointments_is_interval_break( $start, $end, $worker_id = 0, $location
 
 
 					if ( absint( $weekday_number ) === absint( $day['weekday_number'] ) && 'yes' === $is_active ) {
+						$period = new App_Period( $start, $end );
 						// The weekday we're looking for and the break time is active
-						if (
-							$start >= $start_break_datetime // The start time is greater than the break day start time
-							&& $end <= $end_break_datetime // The end time is less than the break day end time. At this point we know that the searched dates are inside the interval)
-						) {
+						if ( $period->contains( $start_break_datetime, $end_break_datetime ) ) {
 							return true;
 						}
 					}

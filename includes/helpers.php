@@ -636,13 +636,13 @@ function appointments_weekly_calendar( $date = false, $args = array() ) {
 							) {
 								$class_name = 'notpossible app_blocked';
 							} // Check today is holiday
-							else if ( $appointments->is_holiday( $datetime_start, $datetime_end ) ) {
+							else if ( appointments_is_worker_holiday( $args['worker_id'], $datetime_start, $datetime_end ) ) {
 								$class_name = 'notpossible app_holiday';
 							} // Check if we are working today
 							else if ( ! in_array( date( "l", $datetime_start ), $working_days ) && ! $appointments->is_exceptional_working_day( $datetime_start, $datetime_end ) ) {
 								$class_name = 'notpossible notworking';
 							} // Check if this is break
-							else if ( $appointments->is_break( $datetime_start, $datetime_end ) ) {
+							else if ( appointments_is_interval_break( $datetime_start, $datetime_end, $args['worker_id'] ) ) {
 								$class_name = 'notpossible app_break';
 							} // Then look for appointments
 							else if ( $is_busy ) {
