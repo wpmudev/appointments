@@ -73,13 +73,23 @@ class Appointments_Admin_User_Profile {
 				$location = 0;
 				$worker_id = absint( $_REQUEST['worker_id'] );
 
-				if ( ! wp_verify_nonce( $_REQUEST['app_bp_settings_submit'], 'app_bp_settings_submit' ) ) {
+				$bp_settings_submit = isset( $_REQUEST['app_bp_settings_submit'] ) ? $_REQUEST['app_bp_settings_submit'] : false;
+				if ( ! wp_verify_nonce( $bp_settings_submit, 'app_bp_settings_submit' ) ) {
 					check_admin_referer( 'app_exceptions-' . $worker_id, 'app_exceptions_nonce' );
 				}
 
 				foreach ( array( 'closed', 'open' ) as $stat ) {
-					$result = $result || appointments_update_worker_working_hours( $profileuser_id, $_POST[ $stat ], $stat, $location );
-					$result2 = $result2 || appointments_update_worker_exceptions( $profileuser_id, $stat, $_POST[ $stat ]["exceptional_days"] );
+					$working_hours = $_POST[ $stat ];
+					if ( isset( $working_hours[ 'exceptional_days'] ) ) {
+						$exceptional_days = $working_hours[ 'exceptional_days'];
+						unset( $working_hours[ 'exceptional_days'] );
+					}
+					else {
+						$exceptional_days = array();
+					}
+
+					$result = $result || appointments_update_worker_working_hours( $profileuser_id, $working_hours, $stat, $location );
+					$result2 = $result2 || appointments_update_worker_exceptions( $profileuser_id, $stat, $exceptional_days );
 				}
 				if ( $result || $result2 ) {
 					$message = sprintf( __( '%s edited his working hours.', 'appointments' ), appointments_get_worker_name( $profileuser_id ) );

@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Appointments+ package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Appointments+ 2.0.0\n"
+"Project-Id-Version: Appointments+ 2.0.3\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2017-01-25 09:40:13+00:00\n"
+"POT-Creation-Date: 2017-02-13 12:35:15+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -857,7 +857,7 @@ msgstr ""
 #: admin/class-app-addons-admin-list-table.php:67
 #: admin/views/inline-edit.php:26
 #: admin/views/page-settings-tab-services-section-services.php:24
-#: appointments.php:960
+#: appointments.php:961
 msgid "Name"
 msgstr ""
 
@@ -876,7 +876,7 @@ msgstr ""
 msgid "Service Provider %s manually confirmed appointment with ID: %s"
 msgstr ""
 
-#: admin/class-app-admin-user-profile.php:85
+#: admin/class-app-admin-user-profile.php:95
 msgid "%s edited his working hours."
 msgstr ""
 
@@ -2492,127 +2492,127 @@ msgid_plural "%d Pending Appointments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: appointments.php:622 appointments.php:973 includes/class-app-service.php:507
+#: appointments.php:623 appointments.php:974 includes/class-app-service.php:507
 msgid "Not defined"
 msgstr ""
 
-#: appointments.php:930
+#: appointments.php:931
 msgid "Sunday"
 msgstr ""
 
-#: appointments.php:931
+#: appointments.php:932
 msgid "Monday"
 msgstr ""
 
-#: appointments.php:932
+#: appointments.php:933
 msgid "Tuesday"
 msgstr ""
 
-#: appointments.php:933
+#: appointments.php:934
 msgid "Wednesday"
 msgstr ""
 
-#: appointments.php:934
+#: appointments.php:935
 msgid "Thursday"
 msgstr ""
 
-#: appointments.php:935
+#: appointments.php:936
 msgid "Friday"
 msgstr ""
 
-#: appointments.php:936
+#: appointments.php:937
 msgid "Saturday"
 msgstr ""
 
-#: appointments.php:961
+#: appointments.php:962
 msgid "Email"
 msgstr ""
 
-#: appointments.php:962
+#: appointments.php:963
 msgid "Phone"
 msgstr ""
 
-#: appointments.php:963
+#: appointments.php:964
 #: includes/pro/includes/addons/app-locations-location_support.php:148
 #: includes/pro/includes/addons/app-locations-location_support.php:220
 #: includes/pro/includes/addons/app-locations-location_support.php:231
 msgid "Address"
 msgstr ""
 
-#: appointments.php:964
+#: appointments.php:965
 msgid "City"
 msgstr ""
 
-#: appointments.php:965
+#: appointments.php:966
 msgid "Note"
 msgstr ""
 
-#: appointments.php:984
+#: appointments.php:985
 msgid "Free"
 msgstr ""
 
-#: appointments.php:985
+#: appointments.php:986
 msgid "Busy"
 msgstr ""
 
-#: appointments.php:986
+#: appointments.php:987
 msgid "Not possible"
 msgstr ""
 
-#: appointments.php:1057
+#: appointments.php:1058
 msgid "More information <span class=\"meta-nav\">&rarr;</span>"
 msgstr ""
 
-#: appointments.php:1161
+#: appointments.php:1162
 msgid "%s Appointment"
 msgstr ""
 
-#: appointments.php:1193
+#: appointments.php:1194
 msgid "Something wrong about the submitted %s"
 msgstr ""
 
-#: appointments.php:2180
+#: appointments.php:2187
 msgid "Login with Facebook"
 msgstr ""
 
-#: appointments.php:2181
+#: appointments.php:2188
 msgid "Login with Twitter"
 msgstr ""
 
-#: appointments.php:2182
+#: appointments.php:2189
 msgid "Login with Google+"
 msgstr ""
 
-#: appointments.php:2183
+#: appointments.php:2190
 msgid "Login with WordPress"
 msgstr ""
 
-#: appointments.php:2184 includes/gcal/views/settings-gcal-step-1.php:74
+#: appointments.php:2191 includes/gcal/views/settings-gcal-step-1.php:74
 #: includes/gcal/views/settings-gcal-step-2.php:22
 msgid "Submit"
 msgstr ""
 
-#: appointments.php:2186
+#: appointments.php:2193
 msgid "Please, wait..."
 msgstr ""
 
-#: appointments.php:2187
+#: appointments.php:2194
 msgid "You are now logged in"
 msgstr ""
 
-#: appointments.php:2188
+#: appointments.php:2195
 msgid "Login error. Please try again."
 msgstr ""
 
-#: appointments.php:2191 includes/class_app_codec.php:358
+#: appointments.php:2198 includes/class_app_codec.php:358
 msgid "Register"
 msgstr ""
 
-#: appointments.php:2330 includes/helpers-settings.php:66
+#: appointments.php:2337 includes/helpers-settings.php:66
 msgid "Confirmation of your Appointment"
 msgstr ""
 
-#: appointments.php:2332 includes/helpers-settings.php:68
+#: appointments.php:2339 includes/helpers-settings.php:68
 msgid "Reminder for your Appointment"
 msgstr ""
 
@@ -2657,105 +2657,105 @@ msgid ""
 "from us."
 msgstr ""
 
-#: includes/class-app-ajax.php:446 includes/class-app-ajax.php:883
+#: includes/class-app-ajax.php:446 includes/class-app-ajax.php:886
 msgid ""
 "We are sorry, but this time slot is no longer available. Please refresh the "
 "page and try another time slot. Thank you."
 msgstr ""
 
-#: includes/class-app-ajax.php:509 includes/class-app-ajax.php:518
+#: includes/class-app-ajax.php:512 includes/class-app-ajax.php:521
 msgid "Appointment could not be saved. Please contact website admin."
 msgstr ""
 
-#: includes/class-app-ajax.php:715
+#: includes/class-app-ajax.php:718
 msgid ""
 "Paypal confirmation arrived, but status could not be changed for some "
 "reason. Please check appointment with ID %s"
 msgstr ""
 
-#: includes/class-app-ajax.php:717
+#: includes/class-app-ajax.php:720
 msgid "Appointment status could not be changed"
 msgstr ""
 
-#: includes/class-app-ajax.php:723
+#: includes/class-app-ajax.php:726
 msgid ""
 "Last transaction has been reversed. Reason: Payment has been reversed "
 "(charge back)"
 msgstr ""
 
-#: includes/class-app-ajax.php:747
+#: includes/class-app-ajax.php:750
 msgid "Last transaction has been reversed. Reason: Payment has been refunded"
 msgstr ""
 
-#: includes/class-app-ajax.php:771
+#: includes/class-app-ajax.php:774
 msgid "Last transaction has been reversed. Reason: Payment Denied"
 msgstr ""
 
-#: includes/class-app-ajax.php:797
+#: includes/class-app-ajax.php:800
 msgid "Customer did not include a confirmed shipping address"
 msgstr ""
 
-#: includes/class-app-ajax.php:798
+#: includes/class-app-ajax.php:801
 msgid "Funds not captured yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:799
+#: includes/class-app-ajax.php:802
 msgid "eCheck that has not cleared yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:800
+#: includes/class-app-ajax.php:803
 msgid "Payment waiting for aproval by service provider"
 msgstr ""
 
-#: includes/class-app-ajax.php:801
+#: includes/class-app-ajax.php:804
 msgid "Payment waiting for service provider to handle multi-currency process"
 msgstr ""
 
-#: includes/class-app-ajax.php:802
+#: includes/class-app-ajax.php:805
 msgid "Customer did not register or confirm his/her email yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:803
+#: includes/class-app-ajax.php:806
 msgid "Waiting for service provider to upgrade the PayPal account"
 msgstr ""
 
-#: includes/class-app-ajax.php:804
+#: includes/class-app-ajax.php:807
 msgid "Waiting for service provider to verify his/her PayPal account"
 msgstr ""
 
-#: includes/class-app-ajax.php:808
+#: includes/class-app-ajax.php:811
 msgid "Last transaction is pending. Reason: "
 msgstr ""
 
-#: includes/class-app-ajax.php:864
+#: includes/class-app-ajax.php:867
 msgid "You need to login to make an appointment."
 msgstr ""
 
-#: includes/class-app-ajax.php:889
+#: includes/class-app-ajax.php:892
 msgid "Service name: "
 msgstr ""
 
-#: includes/class-app-ajax.php:890
+#: includes/class-app-ajax.php:893
 msgid "Date and time: "
 msgstr ""
 
-#: includes/class-app-ajax.php:891
+#: includes/class-app-ajax.php:894
 msgid "Lasts (approx): "
 msgstr ""
 
-#: includes/class-app-ajax.php:891
+#: includes/class-app-ajax.php:894
 msgid "minutes"
 msgstr ""
 
-#: includes/class-app-ajax.php:894
+#: includes/class-app-ajax.php:897
 msgid "Price: "
 msgstr ""
 
-#: includes/class-app-ajax.php:899
+#: includes/class-app-ajax.php:902
 msgid "Service provider: "
 msgstr ""
 
-#: includes/class-app-ajax.php:985
+#: includes/class-app-ajax.php:988
 msgid "Nothing to download!"
 msgstr ""
 
@@ -3839,8 +3839,8 @@ msgstr ""
 #: includes/pro/includes/addons/app-locations-location_support.php:130
 #: includes/pro/includes/addons/app-locations-location_support.php:444
 #: includes/pro/includes/addons/app-locations-location_support.php:469
-#: includes/pro/includes/addons/app-locations-service_locations.php:150
-#: includes/pro/includes/addons/app-locations-service_locations.php:175
+#: includes/pro/includes/addons/app-locations-service_locations.php:149
+#: includes/pro/includes/addons/app-locations-service_locations.php:174
 #: includes/pro/includes/addons/app-locations-worker_locations.php:173
 #: includes/pro/includes/addons/lib/class-app-locations-list-table.php:34
 msgid "Location"
@@ -4040,34 +4040,34 @@ msgstr ""
 msgid "After All Appointments shortcode output"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:202
+#: includes/pro/includes/addons/app-locations-service_locations.php:201
 msgid ""
 "You'll need Locations add-on activated for Service Locations integration "
 "add-on to work"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:247
+#: includes/pro/includes/addons/app-locations-service_locations.php:246
 msgid "Service Locations Settings"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:250
+#: includes/pro/includes/addons/app-locations-service_locations.php:249
 msgid "Show service location"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:253
+#: includes/pro/includes/addons/app-locations-service_locations.php:252
 #: includes/pro/includes/addons/app-locations-worker_locations.php:104
 msgid "I will add location info manually, using shortcode"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:254
+#: includes/pro/includes/addons/app-locations-service_locations.php:253
 msgid "Automatic, before service description"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:255
+#: includes/pro/includes/addons/app-locations-service_locations.php:254
 msgid "Automatic, after service description"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:257
+#: includes/pro/includes/addons/app-locations-service_locations.php:256
 msgid "You can use the shortcode like this: <code>[app_service_location]</code>"
 msgstr ""
 
@@ -5588,39 +5588,39 @@ msgstr ""
 msgid "Sort"
 msgstr ""
 
-#: includes/widgets.php:33
+#: includes/widgets.php:37
 msgid "Title:"
 msgstr ""
 
-#: includes/widgets.php:50
+#: includes/widgets.php:54
 msgid "List of services and links to their description pages"
 msgstr ""
 
-#: includes/widgets.php:52
+#: includes/widgets.php:56
 msgid "Appointments+ Services"
 msgstr ""
 
-#: includes/widgets.php:81
+#: includes/widgets.php:85
 msgid "Number of services to show:"
 msgstr ""
 
-#: includes/widgets.php:106
+#: includes/widgets.php:110
 msgid "List of service providers and links to their bio pages"
 msgstr ""
 
-#: includes/widgets.php:108
+#: includes/widgets.php:112
 msgid "Appointments+ Service Providers"
 msgstr ""
 
-#: includes/widgets.php:148
+#: includes/widgets.php:152
 msgid "Number of service providers to show:"
 msgstr ""
 
-#: includes/widgets.php:153
+#: includes/widgets.php:157
 msgid "Show service providers without biographies"
 msgstr ""
 
-#: includes/widgets.php:181
+#: includes/widgets.php:185
 msgid ""
 "A monthly calendar that redirects user to the selected appointment page "
 "when a free day is clicked. Use several instances to show several months "
@@ -5628,15 +5628,15 @@ msgid ""
 "first instance, 1 for the second one, and so on."
 msgstr ""
 
-#: includes/widgets.php:183
+#: includes/widgets.php:187
 msgid "Appointments+ Monthly Calendar"
 msgstr ""
 
-#: includes/widgets.php:246
+#: includes/widgets.php:250
 msgid "Appointment page:"
 msgstr ""
 
-#: includes/widgets.php:256
+#: includes/widgets.php:260
 msgid "Months to add to current month:"
 msgstr ""
 
@@ -5671,7 +5671,7 @@ msgctxt "paging"
 msgid "%1$s of %2$s"
 msgstr ""
 
-#: admin/views/inline-edit.php:114 appointments.php:2185
+#: admin/views/inline-edit.php:114 appointments.php:2192
 #: includes/class-app-tutorial.php:217
 #: includes/pro/includes/addons/app-locations-location_support.php:155
 #: includes/shortcodes/class-app-shortcode-confirmation.php:208

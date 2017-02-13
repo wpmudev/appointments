@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 2.0.1
+Version: 2.0.3
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	public $version = "2.0";
+	public $version = "2.0.3";
 	public $db_version;
 
 	public $timetables = array();
@@ -68,6 +68,7 @@ class Appointments {
 
 		include_once( 'includes/helpers.php' );
 		include_once( 'includes/helpers-settings.php' );
+		include_once( 'includes/helpers-timetables.php' );
 		include_once( 'includes/deprecated-hooks.php' );
 		include_once( 'includes/class-app-notifications-manager.php' );
 		include_once( 'includes/class-app-api-logins.php' );
@@ -1257,6 +1258,7 @@ class Appointments {
 	 * Helper function to create a monthly schedule
 	 */
 	function get_monthly_calendar( $timestamp=false, $class='', $long, $widget ) {
+		$this->get_lsw();
 		$args = array(
 			'service_id' => $this->service,
 			'worker_id' => $this->worker,
@@ -1281,6 +1283,7 @@ class Appointments {
 	 */
 	function get_timetable( $day_start, $capacity, $schedule_key=false ) {
 		$timetable_key = $day_start . '-' . $capacity;
+		$local_time = current_time( 'timestamp' );
 
 		if ( ! $schedule_key ) {
 			$timetable_key .= '-0';
@@ -1295,7 +1298,7 @@ class Appointments {
 			$time = (int)$_GET["wcalendar"];
 		}
 		else {
-			$time = $this->local_time;
+			$time = $local_time;
 		}
 
 		$timetable_key .= '-' . $this->worker;
@@ -1421,14 +1424,14 @@ class Appointments {
 
 				$class_name = '';
 				// Mark now
-				if ( $this->local_time > $ccs && $this->local_time < $cce )
+				if ( $local_time > $ccs && $local_time < $cce )
 					$class_name = 'notpossible now';
 				// Mark passed hours
-				else if ( $this->local_time > $ccs )
+				else if ( $local_time > $ccs )
 					$class_name = 'notpossible app_past';
 				// Then check if this time is blocked
 				else if ( isset( $this->options["app_lower_limit"] ) && $this->options["app_lower_limit"]
-				          &&( $this->local_time + $this->options["app_lower_limit"] * 3600) > $cce )
+				          &&( $local_time + $this->options["app_lower_limit"] * 3600) > $cce )
 					$class_name = 'notpossible app_blocked';
 				// Check if this is break
 				else if ( $this->is_break( $ccs, $cce ) )
@@ -1837,7 +1840,8 @@ class Appointments {
 	    $args = array(
             'location_id' => $this->location,
             'service_id' => $this->service,
-            'worker_id' => $this->worker
+            'worker_id' => $this->worker,
+			'capacity' => $capacity
         );
 		return apppointments_is_range_busy( $start, $end, $args );
 	}
@@ -1898,6 +1902,9 @@ class Appointments {
 							$max = 24;
 					}
 					*/
+					if ( ! isset( $day['start'] ) || ! isset( $day['end'] ) ) {
+						continue;
+					}
 					$start = date( "G", strtotime( $this->to_military( $day["start"] ) ) );
 	                $end_timestamp = strtotime( $this->to_military( $day["end"] ) );
 	                $end = date( "G", $end_timestamp );
