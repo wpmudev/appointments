@@ -285,9 +285,10 @@ function apppointments_is_range_busy( $start, $end, $args = array() ) {
     $appointments = appointments();
 
     $defaults = array(
-        'worker_id' => 0,
-        'service_id' => 0,
-        'location_id' => 0
+	    'worker_id'   => 0,
+	    'service_id'  => 0,
+	    'location_id' => 0,
+	    'capacity'    => 0
     );
 	$args = wp_parse_args( $args, $defaults );
 

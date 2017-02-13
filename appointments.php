@@ -1839,7 +1839,8 @@ class Appointments {
 	    $args = array(
             'location_id' => $this->location,
             'service_id' => $this->service,
-            'worker_id' => $this->worker
+            'worker_id' => $this->worker,
+			'capacity' => $capacity
         );
 		return apppointments_is_range_busy( $start, $end, $args );
 	}
