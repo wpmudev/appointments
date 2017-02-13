@@ -543,67 +543,6 @@ class App_Timetables_Test extends App_UnitTestCase {
 	}
 
 
-	function test_is_break() {
-		$service_id = $this->factory->service->create_object($this->factory->service->generate_args());
-		$worker_args = $this->factory->worker->generate_args();
-		$worker_args['services_provided'] = array( $service_id );
-		$worker_id_1 = $this->factory->worker->create_object( $worker_args );
-
-		$wh = appointments_get_worker_working_hours( 'closed', $worker_id_1 )->hours;
-		$wh['Tuesday']['active'] = 'yes';
-		$wh['Tuesday']['start'] = '10:00';
-		$wh['Tuesday']['end'] = '18:00';
-		appointments_update_worker_working_hours( $worker_id_1, $wh, 'closed' );
-
-		$next_tuesday = date( 'Y-m-d', strtotime( 'next Tuesday' ) );
-		$this->assertTrue(
-			appointments()->is_break(
-				strtotime( "$next_tuesday 11:00" ),
-				strtotime( "$next_tuesday 12:00" ),
-				$worker_id_1
-			)
-		);
-
-		$this->assertFalse(
-			appointments()->is_break(
-				strtotime( "$next_tuesday 08:00" ),
-				strtotime( "$next_tuesday 12:00" ),
-				$worker_id_1
-			)
-		);
-
-		$this->assertTrue(
-			appointments()->is_break(
-				strtotime( "$next_tuesday 10:00" ),
-				strtotime( "$next_tuesday 18:00" ),
-				$worker_id_1
-			)
-		);
-
-		// Edge case
-		$wh = appointments_get_worker_working_hours( 'closed', $worker_id_1 )->hours;
-		$wh['Tuesday']['active'] = 'yes';
-		$wh['Tuesday']['start'] = '00:00';
-		$wh['Tuesday']['end'] = '00:00';
-		appointments_update_worker_working_hours( $worker_id_1, $wh, 'closed' );
-
-		$this->assertTrue(
-			appointments()->is_break(
-				strtotime( "$next_tuesday 00:00" ),
-				strtotime( "$next_tuesday 23:59" ),
-				$worker_id_1
-			)
-		);
-
-		$this->assertTrue(
-			appointments()->is_break(
-				strtotime( "$next_tuesday 10:00" ),
-				strtotime( "$next_tuesday 12:00" ),
-				$worker_id_1
-			)
-		);
-	}
-
 	function test_undefined_service_should_be_busy_for_worker() {
 //		$next_monday = strtotime( 'next monday', time() );
 //

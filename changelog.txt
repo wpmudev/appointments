@@ -1,3 +1,10 @@
+2017-02-13 - 2.0.3
+-------------------------------
+- Fix: Service was not properly to a worker set when an appointment was imported from GCal
+- Fix: Break hours wrong due to a cache collission
+- Fix: widgets deprecated notice
+- Fix: warnings when generating timetables
+
 2017-02-06 - 2.0.2
 -------------------------------
 - Fixed: Monthly calendar was displaying as available worker holidays

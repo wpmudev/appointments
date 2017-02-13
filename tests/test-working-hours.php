@@ -64,7 +64,6 @@ class App_Working_Hours_Test extends App_UnitTestCase {
 		$this->assertEquals( $num_queries, $wpdb->num_queries );
 
 		$cached = wp_cache_get( 'app_working_hours' );
-		var_dump($cached);
 		$this->assertCount( 4, $cached );
 
 	}
