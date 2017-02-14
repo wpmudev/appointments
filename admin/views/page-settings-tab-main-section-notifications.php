@@ -179,7 +179,7 @@
 		&nbsp;SITE_NAME, CLIENT, SERVICE, SERVICE_PROVIDER, DATE_TIME, PRICE, DEPOSIT, <span
 			class="app-has_explanation"
 			title="(PRICE - DEPOSIT)">BALANCE</span>, PHONE, NOTE, ADDRESS, CITY, EMAIL <?php _e( "(Client's email)", "appointments" ) ?>
-		, CANCEL <?php _e( "(Adds a cancellation link to the email body)", "appointments" ) ?>
+		<span style="display: none;">, CANCEL <?php _e( "(Adds a cancellation link to the email body)", "appointments" ) ?></span>
 	</span>
 		</td>
 	</tr>
