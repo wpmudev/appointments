@@ -4,6 +4,10 @@
 - Fix: Break hours wrong due to a cache collission
 - Fix: widgets deprecated notice
 - Fix: warnings when generating timetables
+- Fix: Widget shows all dates busy
+- Fix: Wrong provider when no one is selected in appointments page
+- Removed CANCEL placeholder from notifications template
+
 
 2017-02-06 - 2.0.2
 -------------------------------
