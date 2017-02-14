@@ -61,6 +61,7 @@ module.exports = function(grunt) {
                     '!vendor/**',
                     '!tmp/**',
                     '!**/*~',
+                    '.distignore',
                     '!README.md'
                 ],
                 dest: 'build/<%= pkg.name %>/'
