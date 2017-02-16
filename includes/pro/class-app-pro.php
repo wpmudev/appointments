@@ -22,6 +22,7 @@ class Appointments_Pro {
 		add_filter( 'appointments_addons', array( $this, 'load_extra_addons' ) );
 
 		add_filter( 'appointments_before_insert_service', '__return_true' );
+		add_filter( 'appointments_before_insert_worker', '__return_true' );
 
 	}
 
