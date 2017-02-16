@@ -449,20 +449,6 @@ class Appointments_Admin_Settings_Page {
 
 					appointments_update_service( $ID, $args );
 				}
-				else {
-					$args = array(
-						'ID'		=> $ID,
-						'name'		=> $service["name"],
-						'capacity'	=> (int)$service["capacity"],
-						'duration'	=> $service["duration"],
-						'price'		=> $service["price"],
-						'page'		=> $service["page"]
-					);
-					$result = appointments_insert_service( $args );
-					if ( is_wp_error( $result ) ) {
-						wp_die( $result->get_error_message() );
-					}
-				}
 
 				do_action('app-services-service-updated', $ID);
 			}
@@ -483,6 +469,9 @@ class Appointments_Admin_Settings_Page {
 			'page' => absint( $_POST['service_page'] )
 		);
 		$app_id = appointments_insert_service( $args );
+		if ( is_wp_error( $app_id ) ) {
+			wp_die( $app_id->get_error_message() );
+		}
 
 		if ( ! $app_id ) {
 			return false;
@@ -493,7 +482,7 @@ class Appointments_Admin_Settings_Page {
 
 	private function _add_worker() {
 		if ( empty(  $_POST["services_provided"] ) ) {
-			return false;
+			wp_die( __( 'Please, select at least one service provided', 'appointments' ) );
 		}
 
 		// Insert
@@ -505,6 +494,9 @@ class Appointments_Admin_Settings_Page {
 			'dummy'				=> isset ( $_POST["dummy"] )
 		);
 		$worker_id = appointments_insert_worker( $args );
+		if ( is_wp_error( $worker_id ) ) {
+			wp_die( $worker_id->get_error_message() );
+		}
 
 		if ( ! $worker_id ) {
 			return false;
