@@ -494,9 +494,6 @@ class Appointments_Admin_Settings_Page {
 			'dummy'				=> isset ( $_POST["dummy"] )
 		);
 		$worker_id = appointments_insert_worker( $args );
-		if ( is_wp_error( $worker_id ) ) {
-			wp_die( $worker_id->get_error_message() );
-		}
 
 		if ( ! $worker_id ) {
 			return false;

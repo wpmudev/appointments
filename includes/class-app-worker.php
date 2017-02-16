@@ -186,15 +186,7 @@ function appointments_insert_worker( $args = array() ) {
 		return false;
 
 	$workers = appointments_get_all_workers();
-
-	/**
-	 * @internal
-	 */
-	$allow = apply_filters( 'appointments_before_insert_worker', count( $workers ) >= 1 ? false : true, $args );
-	if ( ! $allow ) {
-		return new WP_Error( 'reached-limit', sprintf( __( 'You have reached the limit for the free version. <a href="%s">Upgrade to Appointments+ for unlimited service provided</a>', 'appointments' ), 'http://premium.wpmudev.org/project/appointments-plus/' ) );
-	}
-
+	
 	$insert['ID'] = $ID;
 	$insert_wildcards[] = '%d';
 
