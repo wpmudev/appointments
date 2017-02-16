@@ -35,7 +35,6 @@ class Appointments_Pro {
 
 	public function load_integrations() {
 		// Integrations
-		$this->integrations['marketpress'] = new Appointments_Integrations_MarketPress();
 	}
 
 	/**

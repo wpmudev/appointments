@@ -2038,24 +2038,6 @@ class Appointments {
 		return false;
 	}
 
-/*****************************************
-* Methods for integration with Marketpress
-******************************************
-*/
-
-	/**
-	 * Check if Marketpress plugin is active
-	 * @Since 1.0.1
-	 *
-	 * @deprecated
-	 */
-	function check_marketpress_plugin() {
-		global $mp;
-		return class_exists('MarketPress') && is_object( $mp );
-	}
-
-
-
 
 /*******************************
 * Methods for inits, styles, js

@@ -161,3 +161,5 @@ class Appointments_Integrations_MarketPress {
 
 
 }
+
+new Appointments_Integrations_MarketPress();
