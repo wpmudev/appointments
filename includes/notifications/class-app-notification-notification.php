@@ -15,16 +15,26 @@ class Appointments_Notifications_Notification extends Appointments_Notification 
 		$admin_email = apply_filters( 'app_notification_email', $appointments->get_admin_email(), $r );
 
 		$template = $this->get_admin_template( $app_id, $admin_email );
+		
+		$skip_admin_email = false;
+		if (
+			'yes' != $appointments->options["payment_required"] &&
+			isset($appointments->options["send_notification"]) &&
+			'yes' == $appointments->options["send_notification"] &&
+			'pending' == $r->status
+			) {		
+			$skip_admin_email = true;
 
-		$mail_result = wp_mail(
-			$admin_email,
-			$template['subject'],
-			$template['body'],
-			$appointments->message_headers()
-		);
+			$mail_result = wp_mail(
+				$admin_email,
+				$template['subject'],
+				$template['body'],
+				$appointments->message_headers()
+			);
+		}
 
 		$sent_to = array();
-		if ( $mail_result ) {
+		if ( $mail_result || $skip_admin_email ) {
 			$sent_to[] = $admin_email;
 			$this->manager->log( sprintf( __('Notification message sent to %s for appointment ID:%s','appointments'), $admin_email, $app_id ) );
 			do_action( 'app_notification_sent', $template['body'], $r, $app_id );
