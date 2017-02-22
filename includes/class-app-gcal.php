@@ -510,7 +510,9 @@ class Appointments_Google_Calendar {
 	}
 
 	public function import() {
-		if ( 'sync' != $this->get_api_mode() ) {
+		$import_modes = array( 'sync', 'gcal2app' );
+
+		if ( ! in_array( $this->get_api_mode(), $import_modes ) ) {
 			wp_send_json( array( 'message' => 'Error' ) );
 		}
 
@@ -747,7 +749,7 @@ class Appointments_Google_Calendar {
 		if ( $old_status != $new_status ) {
 
 			if ( $new_status == 'removed' || $new_status == 'pending' ) {
-				$this->delete_event( $app->gcal_ID );
+				$this->delete_event( $app->gcal_ID, $app_id );
 			}
 
 			if ( $old_status == 'removed' && $new_status != 'pending' ) {
@@ -925,10 +927,15 @@ class Appointments_Google_Calendar {
 		return $result;
 	}
 
-	public function delete_event( $event_id ) {
+	public function delete_event( $event_id, $app_id = false ) {
 		if ( ! $this->_is_writable_mode() ) {
 			// We don't need to delete events on this mode
 			return false;
+		}
+
+		if( $app_id ){
+			$app = appointments_get_appointment( $app_id );
+			$this->api_manager->switch_to_worker( $app->worker ); 
 		}
 
 		$this->api_manager->delete_event( $event_id );

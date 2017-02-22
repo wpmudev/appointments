@@ -344,7 +344,7 @@ class App_MP_Bridge_Legacy {
 
 				// Set email to SESSION variables if not set before
 				if ( !isset( $_SESSION['mp_shipping_info']['email'] ) && Appointments_Sessions::is_visitor_personal_data_cookie_set() ) {
-					$data = Appointments_Sessions::get_visitor_personal_data()
+					$data = Appointments_Sessions::get_visitor_personal_data();
 					if ( isset( $data["e"] ) ) {
 						@$_SESSION['mp_shipping_info']['email'] = $data["e"];
 					}

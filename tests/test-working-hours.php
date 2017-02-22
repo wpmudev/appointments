@@ -131,7 +131,7 @@ class App_Working_Hours_Test extends App_UnitTestCase {
 		$next_saturday = strtotime( 'next saturday' );
 		$slots = appointments_get_weekly_schedule_slots( $next_saturday );
 
-		$this->assertCount( 18, $slots['time_slots'] );
+		$this->assertCount( 20, $slots['time_slots'] );
 		$this->assertEquals(
 			array(
 				date( 'Y-m-d', $next_saturday ),

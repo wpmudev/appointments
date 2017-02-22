@@ -185,6 +185,8 @@ function appointments_insert_worker( $args = array() ) {
 	if ( $worker )
 		return false;
 
+	$workers = appointments_get_all_workers();
+	
 	$insert['ID'] = $ID;
 	$insert_wildcards[] = '%d';
 

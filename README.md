@@ -28,4 +28,6 @@ This way, you won't need to check differences between both versions and workflow
 - Work on `development`
 - Merge into `master` and build
 - Merge master into `wporg-master` and remove `pro` folder if it appears again. Then build
+- Copy what's inside the build folder to wp.org SVN repo.
+- Make sure that free version plugin name is Appointments Lite
 - Release both versions.
