@@ -112,7 +112,7 @@ class Appointments_Notifications_Confirmation extends Appointments_Notification 
 			return false;
 		}
 
-		$disable = apply_filters( 'app_confirmation_disable_admin', false, $r, $app_id );
+		$disable = apply_filters( 'app_confirmation_disable_admin', false, $r, $app_id, $admin_email );
 		if ( $disable ) {
 			return true;
 		}
