@@ -510,7 +510,9 @@ class Appointments_Google_Calendar {
 	}
 
 	public function import() {
-		if ( 'sync' != $this->get_api_mode() ) {
+		$import_modes = array( 'sync', 'gcal2app' );
+
+		if ( ! in_array( $this->get_api_mode(), $import_modes ) ) {
 			wp_send_json( array( 'message' => 'Error' ) );
 		}
 
