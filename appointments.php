@@ -290,11 +290,21 @@ class Appointments {
 	 * @return integer
 	 */
 	function get_worker_id() {
-		if ( isset( $_REQUEST["app_provider_id"] ) )
-			return (int)$_REQUEST["app_provider_id"];
+		if( ! is_admin() ){
+			if( isset( $_GET["app_provider_id"] ) ){
+				return (int)$_GET["app_provider_id"];
+			}
 
-		if ( isset( $_REQUEST["app_worker_id"] ) )
+		    return 0;
+		}
+
+		if ( isset( $_REQUEST["app_provider_id"] ) ){
+			return (int)$_REQUEST["app_provider_id"];
+		}
+
+		if ( isset( $_REQUEST["app_worker_id"] ) ){
 			return (int)$_REQUEST["app_worker_id"];
+		}
 
 		return 0;
 	}
