@@ -290,11 +290,21 @@ class Appointments {
 	 * @return integer
 	 */
 	function get_worker_id() {
-		if ( isset( $_REQUEST["app_provider_id"] ) )
-			return (int)$_REQUEST["app_provider_id"];
+		if( ! is_admin() ){
+			if( isset( $_GET["app_provider_id"] ) ){
+				return (int)$_GET["app_provider_id"];
+			}
 
-		if ( isset( $_REQUEST["app_worker_id"] ) )
+		    return 0;
+		}
+
+		if ( isset( $_REQUEST["app_provider_id"] ) ){
+			return (int)$_REQUEST["app_provider_id"];
+		}
+
+		if ( isset( $_REQUEST["app_worker_id"] ) ){
 			return (int)$_REQUEST["app_worker_id"];
+		}
 
 		return 0;
 	}
@@ -2037,24 +2047,6 @@ class Appointments {
 		}
 		return false;
 	}
-
-/*****************************************
-* Methods for integration with Marketpress
-******************************************
-*/
-
-	/**
-	 * Check if Marketpress plugin is active
-	 * @Since 1.0.1
-	 *
-	 * @deprecated
-	 */
-	function check_marketpress_plugin() {
-		global $mp;
-		return class_exists('MarketPress') && is_object( $mp );
-	}
-
-
 
 
 /*******************************

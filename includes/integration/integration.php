@@ -10,7 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $integrations = array(
 	'buddypress',
-	'membership2'
+	'membership2',
+	'marketpress'
 );
 foreach ( $integrations as $integration ) {
 	include_once( appointments_plugin_dir() . 'includes/integration/class-app-' . $integration . '.php' );

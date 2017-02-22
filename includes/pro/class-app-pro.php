@@ -28,14 +28,10 @@ class Appointments_Pro {
 
 	private function includes() {
 		include_once( appointments_plugin_dir() . 'includes/pro/includes/class-app-google-login.php' );
-
-		// Other plugins/themes integrations
-		include_once( appointments_plugin_dir() . 'includes/pro/integrations/class-app-marketpress.php' );
 	}
 
 	public function load_integrations() {
 		// Integrations
-		$this->integrations['marketpress'] = new Appointments_Integrations_MarketPress();
 	}
 
 	/**
