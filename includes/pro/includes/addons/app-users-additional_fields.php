@@ -75,6 +75,7 @@ class App_Users_AdditionalFields {
 
 	public function default_options( $defaults ) {
 		$defaults['additional_fields'] = array();
+		$defaults['additional_fields-admin_edit'] = false;
 		return $defaults;
     }
 
@@ -232,7 +233,7 @@ class App_Users_AdditionalFields {
 	/**
 	 * Display additional fields when editing an appointment
 	 *
-	 * @param string $form Form markup
+	 * @param string $deprecated Form markup
 	 * @param Appointments_Appointment $app Edited appointment
 	 *
 	 * @return string
@@ -298,8 +299,11 @@ EO_ADMIN_JS;
 	}
 
 	public function inject_additional_columns ($cols) {
-		$fields = !empty($this->_data['additional_fields']) ? $this->_data['additional_fields'] : array();
-		if (empty($fields)) return $cols;
+		$options = appointments_get_options();
+		$fields = $options['additional_fields'];
+		if ( empty( $fields ) ) {
+			return $cols;
+		}
 
 		foreach ($fields as $field) {
 			$name = 'field_' .
@@ -317,7 +321,8 @@ EO_ADMIN_JS;
 			return $app;
 		}
 
-		$fields = ! empty( $this->_data['additional_fields'] ) ? $this->_data['additional_fields'] : array();
+		$options = appointments_get_options();
+		$fields = $options['additional_fields'];
 		if ( empty( $fields ) ) {
 			return $app;
 		}
@@ -344,23 +349,32 @@ EO_ADMIN_JS;
 	}
 
 	public function expand_general_fields ($text, $app_id) {
-		if (empty($text) || empty($app_id) || !is_numeric($app_id)) return $text;
+		if ( empty( $text ) || empty( $app_id ) || ! is_numeric( $app_id ) ) {
+			return $text;
+		}
 		return $this->expand_email_macros($text, null, $app_id);
 	}
 
 	public function expand_gcal_macros ($body, $app) {
-		$app_id = !empty($app->ID) ? $app->ID : false;
-		if (empty($app_id)) return $body;
+		$app_id = ! empty( $app->ID ) ? $app->ID : false;
+		if ( empty( $app_id ) ) {
+			return $body;
+		}
 
 		return $this->expand_email_macros($body, $app, $app_id);
 	}
 
 	public function expand_email_macros ($body, $app, $app_id) {
-		$fields = !empty($this->_data['additional_fields']) ? $this->_data['additional_fields'] : array();
-		if (empty($fields)) return $body;
+		$options = appointments_get_options();
+		$fields = $options['additional_fields'];
+		if ( empty( $fields ) ) {
+			return $body;
+		}
 
 		$app_meta = $this->_get_appointment_meta($app_id);
-		if (empty($app_meta)) return $body;
+		if ( empty( $app_meta ) ) {
+			return $body;
+		}
 
 		foreach ($fields as $field) {
 			$label = esc_html($field['label']);
@@ -382,7 +396,8 @@ EO_ADMIN_JS;
 
 
 	public function field_names ($map) {
-		$fields = !empty($this->_data['additional_fields']) ? $this->_data['additional_fields'] : array();
+		$options = appointments_get_options();
+		$fields = $options['additional_fields'];
 		if (empty($fields)) return $map;
 
 		foreach ($fields as $field) {
@@ -395,46 +410,76 @@ EO_ADMIN_JS;
 
 
     public function inject_additional_fields ($form) {
-        global $current_user;
+	    global $current_user;
 
-        $fields = !empty($this->_data['additional_fields']) ? $this->_data['additional_fields'] : array();
-        if (empty($fields)) return $form;
+	    $options = appointments_get_options();
 
-        foreach ($fields as $field) {
-            $label = esc_html($field['label']);
-            $clean = $this->_to_clean_name($field['label']);
-            $id = "appointments-{$clean}" . md5(serialize($field));
-            $type = esc_attr($field['type']);
-            $user_meta_value = get_user_meta( $current_user->ID, 'app_' . $clean, true );
-            $value = $user_meta_value ? $user_meta_value : ('checkbox' == $type ? 1 : '');
-            $form .= "<div class='appointments-field appointments-{$clean}-field'>" .
-                '<label for="' . $id . '"><span>' . $label . '</span></label>' .
-                "<input type='{$type}' id='{$id}' class='appointments-field-entry appointments-{$clean}-field-entry' data-name='additional_fields[{$clean}]' value='{$value}' />" .
-                "</div>";
-        }
-        return $form;
+	    $fields = $options['additional_fields'];
+	    if ( ! is_array( $fields ) ) {
+	    	$fields = array();
+		}
+
+	    if ( empty( $fields ) ) {
+		    return $form;
+	    }
+
+	    ob_start();
+	    foreach ( $fields as $field ) {
+		    $clean           = $this->_to_clean_name( $field['label'] );
+		    $id              = "appointments-{$clean}" . md5( serialize( $field ) );
+		    $user_meta_value = get_user_meta( $current_user->ID, 'app_' . $clean, true );
+		    $value           = $user_meta_value ? $user_meta_value : ( 'checkbox' == $field['type'] ? 1 : '' );
+
+		    /**
+		     * Filters the additional field value in frontend
+			 *
+			 * @param string $value Current value of the field
+			 * @param array $field Field attributes
+		     */
+		    $value = apply_filters( 'appointments_additional_fields_field_value', $value, $field );
+
+		    ?>
+				<div class="appointments-field appointments-<?php echo esc_attr( $clean ); ?>-field">
+					<label for="<?php echo esc_attr( $id ); ?>"><span><?php echo esc_html( $field['label'] ); ?></span></label>
+					<input
+							type="<?php echo esc_attr( $field['type'] ); ?>"
+							id="<?php echo esc_attr( $id ); ?>"
+							class="appointments-field-entry appointments-<?php echo esc_attr( $clean ); ?>-field-entry"
+							data-name="additional_fields[<?php echo esc_attr( $clean ); ?>]"
+							value="<?php echo esc_attr( $value ); ?>"
+					/>
+				</div>
+			<?php
+	    }
+	    return $form . ob_get_clean();
     }
 
 	public function inject_additional_fields_script () {
-		if (empty($this->_data['additional_fields'])) return false;
+		$options = appointments_get_options();
+		if ( empty( $options['additional_fields'] ) ) {
+			return;
+		}
 		?>
-<script type="text/javascript">
-(function ($) {
-$(document).ajaxSend(function(e, xhr, opts) {
-	if (!opts.data) return true;
-	if (!opts.data.match(/action=post_confirmation/)) return true;
-	
-	var $fields = $(".appointments-field-entry");
-	$fields.each(function () {
-		var $me = $(this),
-			name = $me.attr("data-name"),
-			value = $me.is(":checkbox") ? ($me.is(":checked") ? 1 : 0) : $me.val()
-		;
-		opts.data += '&' + encodeURIComponent(name) + '=' + encodeURIComponent(value);
-	});
-});
-})(jQuery);
-</script>
+		<script type="text/javascript">
+            (function( $ ) {
+                $( document ).ajaxSend( function( e, xhr, opts ) {
+                    if ( ! opts.data ) {
+                        return true;
+                    }
+                    if ( ! opts.data.match( /action=post_confirmation/ ) ) {
+                        return true;
+                    }
+
+                    var $fields = $( ".appointments-field-entry" );
+                    $fields.each( function() {
+                        var $me = $( this ),
+                            name = $me.attr( "data-name" ),
+                            value = $me.is( ":checkbox" ) ? ($me.is( ":checked" ) ? 1 : 0) : $me.val();
+                        opts.data += '&' + encodeURIComponent( name ) + '=' + encodeURIComponent( value );
+                    } );
+                } );
+            })( jQuery );
+		</script>
 		<?php
 	}
 
@@ -463,8 +508,8 @@ $(document).ajaxSend(function(e, xhr, opts) {
 			'text' => __('Text', 'appointments'),
 			'checkbox' => __('Checkbox', 'appointments'),
 		);
-		$fields = !empty($this->_data['additional_fields']) ? $this->_data['additional_fields'] : array();
-		$admin_edit = !empty($this->_data['additional_fields-admin_edit']) ? 'checked="checked"' : '';
+		$options = appointments_get_options();
+		$fields = $options['additional_fields'];
 		?>
 		<div class="">
 			<h3><?php _e( 'Additional Fields', 'appointments' ); ?></h3>
@@ -477,12 +522,12 @@ $(document).ajaxSend(function(e, xhr, opts) {
 								<div class="app-field">
 									<b><?php echo esc_html($field['label']); ?></b> <em><small>(<?php echo esc_html($field['type']); ?>)</small></em>
 									<br />
-									<?php echo esc_html('Required', 'appointments'); ?>: <b><?php echo esc_html(($field['required'] ? __('Yes', 'appointments') : __('No', 'appointments'))); ?></b>
+									<?php esc_html_e('Required', 'appointments'); ?>: <b><?php echo esc_html(($field['required'] ? __('Yes', 'appointments') : __('No', 'appointments'))); ?></b>
 									<br />
 									<?php _e('E-mail macro:', 'appointments'); ?> <code><?php echo esc_html($this->_to_email_macro($field['label'])); ?></code>
 									<span class="description"><?php _e('This is the placeholder you can use in your emails.', 'appointments'); ?></span>
 									<input type="hidden" name="app-additional_fields[]" value="<?php echo rawurlencode(json_encode($field)); ?>" />
-									<a href="#remove" class="app-additional_fields-remove"><?php echo esc_html('Remove', 'appointments'); ?></a>
+									<a href="#remove" class="app-additional_fields-remove"><?php esc_html_e('Remove', 'appointments'); ?></a>
 								</div>
 							<?php } ?>
 						</div>
@@ -515,9 +560,9 @@ $(document).ajaxSend(function(e, xhr, opts) {
 			<div class="app-field">
 				<b>{{ label }}</b> <em><small>({{ type }})</small></em>
 				<br />
-				<?php echo esc_html('Required', 'appointments'); ?>: <b>{{ required ? '<?php echo esc_js(__("Yes", "appointments")); ?>' : '<?php echo esc_js(__("No", "appointments")); ?>' }}</b>
+				<?php esc_html_e('Required', 'appointments'); ?>: <b>{{ required ? '<?php echo esc_js(__("Yes", "appointments")); ?>' : '<?php echo esc_js(__("No", "appointments")); ?>' }}</b>
 				<input type="hidden" name="app-additional_fields[]" value="{{ encodeURIComponent(_value) }}" />
-				<a href="#remove" class="app-additional_fields-remove"><?php echo esc_html('Remove', 'appointments'); ?></a>
+				<a href="#remove" class="app-additional_fields-remove"><?php esc_html_e('Remove', 'appointments'); ?></a>
 			</div>
 		</script>
 		<script>
