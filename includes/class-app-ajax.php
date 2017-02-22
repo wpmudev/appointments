@@ -566,8 +566,8 @@ class Appointments_AJAX {
 		// Send confirmation for pending, payment not required cases, if selected so
 		if (
 			'yes' != $appointments->options["payment_required"] &&
-			isset($appointments->options["send_confirmation"]) &&
-			'yes' == $appointments->options["send_confirmation"] &&
+			isset($appointments->options["send_notification"]) &&
+			'yes' == $appointments->options["send_notification"] &&
 			'pending' == $status
 		) {
 			appointments_send_notification( $insert_id );
