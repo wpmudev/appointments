@@ -19,6 +19,7 @@ class App_Users_AdditionalFields {
 	public static function serve () {
 		$me = new App_Users_AdditionalFields;
 		$me->_add_hooks();
+		return $me;
 	}
 
 	private function _add_hooks () {
@@ -75,7 +76,6 @@ class App_Users_AdditionalFields {
 
 	public function default_options( $defaults ) {
 		$defaults['additional_fields'] = array();
-		$defaults['additional_fields-admin_edit'] = false;
 		return $defaults;
     }
 
@@ -127,12 +127,15 @@ class App_Users_AdditionalFields {
 	 *
 	 * @return bool
 	 */
-	private function _are_editable() {
+	public function _are_editable() {
 		$options = appointments_get_options();
-		if ( is_multisite() && is_super_admin() ) {
-			return true;
+		if ( isset( $options['additional_fields-admin_edit'] ) ) {
+			$is_editable = (bool)$options['additional_fields-admin_edit'];
 		}
-		return ! empty( $options['additional_fields-admin_edit'] );
+		else {
+			$is_editable = true;
+		}
+		return apply_filters( 'appointments_additional_fields_are_editable', $is_editable );
 	}
 
 
