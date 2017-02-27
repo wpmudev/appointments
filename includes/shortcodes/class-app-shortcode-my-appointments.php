@@ -126,6 +126,10 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 			$args['order_by'] = 'ID';
 		}
 
+		$query_args = array(
+			'status' => $statuses
+		);
+
 		if ( $args['order_by'] ) {
 			// Backward compatibility
 			$orderby_list = explode( ' ', $args['order_by'] );
@@ -136,6 +140,10 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 			else {
 				$query_args['orderby'] = $args['order_by'];
 			}
+		}
+
+		if ( isset( $args['order'] ) ) {
+			$query_args['order'] = $args['order'];
 		}
 
 		// If this is a client shortcode
@@ -151,10 +159,6 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 			if ( ! $apps ) {
 				return '';
 			}
-
-			$query_args = array(
-				'status' => $statuses
-			);
 
 			$provider_or_client = __('Provider', 'appointments' );
 
@@ -199,10 +203,6 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		}
 		else {
 			$provider_or_client = __('Client', 'appointments' );
-
-			$query_args = array(
-				'status' => $statuses
-			);
 
 			// If no id is given, get current user
 			if ( ! $args['provider_id'] ) {
