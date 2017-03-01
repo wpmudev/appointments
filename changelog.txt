@@ -1,3 +1,11 @@
+2017-03-01 - 2.0.4
+-------------------------------
+- Fix: GCal sync was overriding the appointments service
+- Fix: Appointments Shortcode orderby attribute not working
+- Fix: Events not removed from Provider's GCal, when Allow Service Providers for Google Calendar API Integration selected
+- Fix: TinyMCE shortcodes UI: Pagination date was a checkbox instead of a text box
+- Fix: No error message was displayed when service/workers limit was reached in free version
+
 2017-02-13 - 2.0.3
 -------------------------------
 - Fix: Service was not properly to a worker set when an appointment was imported from GCal
