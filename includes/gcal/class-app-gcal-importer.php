@@ -137,7 +137,7 @@ class Appointments_Google_Calendar_Importer {
 		}
 
 		$worker = appointments_get_worker( $worker_id );
-		if ( $worker && $services = $worker->get_services() ) {
+		if ( ! $service_id && $worker && $services = $worker->get_services() ) {
 			// Get the min service ID for this worker
 			$default_service = current( $services );
 			$service_id = $default_service->ID;

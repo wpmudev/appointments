@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 2.0.3
+Version: 2.0.4
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	public $version = "2.0.3";
+	public $version = "2.0.4";
 	public $db_version;
 
 	public $timetables = array();
@@ -290,11 +290,21 @@ class Appointments {
 	 * @return integer
 	 */
 	function get_worker_id() {
-		if ( isset( $_REQUEST["app_provider_id"] ) )
-			return (int)$_REQUEST["app_provider_id"];
+		if( ! is_admin() ){
+			if( isset( $_GET["app_provider_id"] ) ){
+				return (int)$_GET["app_provider_id"];
+			}
 
-		if ( isset( $_REQUEST["app_worker_id"] ) )
+		    return 0;
+		}
+
+		if ( isset( $_REQUEST["app_provider_id"] ) ){
+			return (int)$_REQUEST["app_provider_id"];
+		}
+
+		if ( isset( $_REQUEST["app_worker_id"] ) ){
 			return (int)$_REQUEST["app_worker_id"];
+		}
 
 		return 0;
 	}
@@ -2037,24 +2047,6 @@ class Appointments {
 		}
 		return false;
 	}
-
-/*****************************************
-* Methods for integration with Marketpress
-******************************************
-*/
-
-	/**
-	 * Check if Marketpress plugin is active
-	 * @Since 1.0.1
-	 *
-	 * @deprecated
-	 */
-	function check_marketpress_plugin() {
-		global $mp;
-		return class_exists('MarketPress') && is_object( $mp );
-	}
-
-
 
 
 /*******************************

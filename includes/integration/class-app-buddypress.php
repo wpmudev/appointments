@@ -109,7 +109,8 @@ class Appointments_Integration_BuddyPress {
 			$script .= "});</script>";
 		}
 
-		echo $this->_core->esc_rn( $script );
+		$appointments = appointments();
+		echo $appointments->esc_rn( $script );
 	}
 
 	/**
