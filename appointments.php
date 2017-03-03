@@ -1316,9 +1316,13 @@ class Appointments {
 
 		$this->get_lsw();
 
+		$worker_id = $this->worker;
+		$location_id = $this->location;
+		$service_id = $this->service;
+
 		// Calculate step
 		$start = $end = 0;
-		if ( $min_max = appointments_get_min_max_working_hours( $this->worker, $this->location ) ) {
+		if ( $min_max = appointments_get_min_max_working_hours( $worker_id, $location_id ) ) {
 			$start = $min_max["min"];
 			$end = $min_max["max"];
 		}
@@ -1336,18 +1340,18 @@ class Appointments {
 		if ( appointments_use_legacy_duration_calculus() ) {
 			$step = $min_step_time; // Timestamp increase interval to one cell ahead
 		} else {
-			$service = appointments_get_service( $this->service );
+			$service = appointments_get_service( $service_id );
 			$step    = ( ! empty( $service->duration ) ? $service->duration : $min_step_time ) * 60; // Timestamp increase interval to one cell ahead
 		}
 
 		if ( ! appointments_use_legacy_duration_calculus() ) {
-			$start_result        = appointments_get_worker_working_hours( 'open', $this->worker, $this->location );
+			$start_result        = appointments_get_worker_working_hours( 'open', $worker_id, $location_id );
 			$start_unpacked_days = isset( $start_result->hours ) ? $start_result->hours : array();
 		} else {
 			$start_unpacked_days = array();
 		}
 		if ( appointments_use_break_times_padding_calculus() ) {
-			$break_result = appointments_get_worker_working_hours( 'closed', $this->worker, $this->location );
+			$break_result = appointments_get_worker_working_hours( 'closed', $worker_id, $location_id );
 			$break_times  = $break_result->hours;
 		} else {
 			$break_times = array();
@@ -1362,7 +1366,7 @@ class Appointments {
             return '';
         }
 
-		$timetable_key .= '-' . $step . '-' . $this->service;
+		$timetable_key .= '-' . $step . '-' . $service_id;
 
 		// Are we looking to today?
 		// If today is a working day, shows its free times by default
@@ -1433,9 +1437,9 @@ class Appointments {
 				
 // End fixes area
 				$args = array(
-					'location_id' => $this->location,
-					'service_id' => $this->service,
-					'worker_id' => $this->worker,
+					'location_id' => $location_id,
+					'service_id' => $service_id,
+					'worker_id' => $worker_id,
 					'capacity' => $capacity
 				);
 				$is_busy = apppointments_is_range_busy( $start, $end, $args );
