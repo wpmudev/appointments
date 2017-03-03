@@ -1440,29 +1440,30 @@ class Appointments {
 				);
 				$is_busy = apppointments_is_range_busy( $start, $end, $args );
 
-				$title = apply_filters('app-schedule_cell-title', date_i18n($this->datetime_format, $ccs), $is_busy, $ccs, $cce, $schedule_key);
+				$title = apply_filters('app-schedule_cell-title', date_i18n( appointments_get_date_format( 'full' ), $ccs), $is_busy, $ccs, $cce, $schedule_key);
 
 				$class_name = '';
 				// Mark now
-				if ( $local_time > $ccs && $local_time < $cce )
+				if ( $local_time > $ccs && $local_time < $cce ) {
 					$class_name = 'notpossible now';
-				// Mark passed hours
-				else if ( $local_time > $ccs )
+				} // Mark passed hours
+				else if ( $local_time > $ccs ) {
 					$class_name = 'notpossible app_past';
-				// Then check if this time is blocked
+				} // Then check if this time is blocked
 				else if ( isset( $this->options["app_lower_limit"] ) && $this->options["app_lower_limit"]
-				          &&( $local_time + $this->options["app_lower_limit"] * 3600) > $cce )
+				          && ( $local_time + $this->options["app_lower_limit"] * 3600 ) > $cce
+				) {
 					$class_name = 'notpossible app_blocked';
-				// Check if this is break
-				else if ( $this->is_break( $ccs, $cce ) )
+				} // Check if this is break
+				else if ( $this->is_break( $ccs, $cce ) ) {
 					$class_name = 'notpossible app_break';
-				// Then look for appointments
-				else if ( $is_busy )
+				} // Then look for appointments
+				else if ( $is_busy ) {
 					$class_name = 'busy';
-				// Then check if we have enough time to fulfill this app
-				else if ( !$this->is_service_possible( $ccs, $cce, $capacity ) )
+				} // Then check if we have enough time to fulfill this app
+				else if ( ! $this->is_service_possible( $ccs, $cce, $capacity ) ) {
 					$class_name = 'notpossible service_notpossible';
-				// If nothing else, then it must be free
+				} // If nothing else, then it must be free
 				else {
 					$class_name = 'free';
 					// We found at least one timetable cell to be free
