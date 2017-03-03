@@ -1333,22 +1333,22 @@ class Appointments {
 		$last = $end *3600 + $day_start; // Timestamp of the last cell
 		$min_step_time = $this->get_min_time() * 60; // Cache min step increment
 
-		if (appointments_use_legacy_duration_calculus()) {
+		if ( appointments_use_legacy_duration_calculus() ) {
 			$step = $min_step_time; // Timestamp increase interval to one cell ahead
 		} else {
-			$service = appointments_get_service($this->service);
-			$step = (!empty($service->duration) ? $service->duration : $min_step_time) * 60; // Timestamp increase interval to one cell ahead
+			$service = appointments_get_service( $this->service );
+			$step    = ( ! empty( $service->duration ) ? $service->duration : $min_step_time ) * 60; // Timestamp increase interval to one cell ahead
 		}
 
 		if ( ! appointments_use_legacy_duration_calculus() ) {
-			$start_result = appointments_get_worker_working_hours( 'open', $this->worker, $this->location );
+			$start_result        = appointments_get_worker_working_hours( 'open', $this->worker, $this->location );
 			$start_unpacked_days = isset( $start_result->hours ) ? $start_result->hours : array();
 		} else {
 			$start_unpacked_days = array();
 		}
 		if ( appointments_use_break_times_padding_calculus() ) {
 			$break_result = appointments_get_worker_working_hours( 'closed', $this->worker, $this->location );
-			$break_times = $break_result->hours;
+			$break_times  = $break_result->hours;
 		} else {
 			$break_times = array();
 		}
@@ -1366,10 +1366,11 @@ class Appointments {
 
 		// Are we looking to today?
 		// If today is a working day, shows its free times by default
-		if ( date( 'Ymd', $day_start ) == date( 'Ymd', $time ) )
+		if ( date( 'Ymd', $day_start ) == date( 'Ymd', $time ) ) {
 			$style = '';
-		else
+		} else {
 			$style = ' style="display:none"';
+		}
 
 		if ( isset( $this->timetables[ $timetable_key ] ) ) {
 			$data =  $this->timetables[ $timetable_key ];
@@ -1382,14 +1383,14 @@ class Appointments {
 
 // Fix for service durations calculus and workhours start conflict with different duration services
 // Example: http://premium.wpmudev.org/forums/topic/problem-with-time-slots-not-properly-allocating-free-time
-				$this_day_key = date('l', $t);
-				if (!empty($start_unpacked_days) && ! appointments_use_legacy_duration_calculus() ) {
-					if (!empty($start_unpacked_days[$this_day_key])) {
+				$this_day_key = date( 'l', $t );
+				if ( ! empty( $start_unpacked_days ) && ! appointments_use_legacy_duration_calculus() ) {
+					if ( ! empty( $start_unpacked_days[ $this_day_key ] ) ) {
 						// Check slot start vs opening start
-						$this_day_opening_timestamp = strtotime(date('Y-m-d ' . $start_unpacked_days[$this_day_key]['start'], $ccs));
-						if ($t < $this_day_opening_timestamp) {
-							$t = ($t - $step) + (apply_filters('app_safe_time', 1) * 60);
-							$t = apply_filters('app_next_time_step', $t+$step, $ccs, $step); //Allows dynamic/variable step increment.
+						$this_day_opening_timestamp = strtotime( date( 'Y-m-d ' . $start_unpacked_days[ $this_day_key ]['start'], $ccs ) );
+						if ( $t < $this_day_opening_timestamp ) {
+							$t = ( $t - $step ) + ( apply_filters( 'app_safe_time', 1 ) * 60 );
+							$t = apply_filters( 'app_next_time_step', $t + $step, $ccs, $step ); //Allows dynamic/variable step increment.
 							continue;
 						}
 
@@ -1400,35 +1401,36 @@ class Appointments {
 				}
 // Breaks are not behaving like paddings, which is to be expected.
 // This fix (2) will force them to behave more like paddings
-				if (!empty($break_times[$this_day_key]['active']) && appointments_use_break_times_padding_calculus() ) {
-					$active = $break_times[$this_day_key]['active'];
-					$break_starts = $break_times[$this_day_key]['start'];
-					$break_ends = $break_times[$this_day_key]['end'];
-					if (!is_array($active) && 'no' !== $active) {
-						$break_start_ts = strtotime(date('Y-m-d ' . $break_starts, $ccs));
-						$break_end_ts = strtotime(date('Y-m-d ' . $break_ends, $ccs));
-						if ($t == $break_start_ts) {
-							$t += ($break_end_ts - $break_start_ts) - $step;
-							$t = apply_filters('app_next_time_step', $t+$step, $ccs, $step); //Allows dynamic/variable step increment.
+				if ( ! empty( $break_times[ $this_day_key ]['active'] ) && appointments_use_break_times_padding_calculus() ) {
+					$active       = $break_times[ $this_day_key ]['active'];
+					$break_starts = $break_times[ $this_day_key ]['start'];
+					$break_ends   = $break_times[ $this_day_key ]['end'];
+					if ( ! is_array( $active ) && 'no' !== $active ) {
+						$break_start_ts = strtotime( date( 'Y-m-d ' . $break_starts, $ccs ) );
+						$break_end_ts   = strtotime( date( 'Y-m-d ' . $break_ends, $ccs ) );
+						if ( $t == $break_start_ts ) {
+							$t += ( $break_end_ts - $break_start_ts ) - $step;
+							$t = apply_filters( 'app_next_time_step', $t + $step, $ccs, $step ); //Allows dynamic/variable step increment.
 							continue;
 						}
-					} else if (is_array($active) && in_array('yes', array_values($active))) {
+					} else if ( is_array( $active ) && in_array( 'yes', array_values( $active ) ) ) {
 						$has_break_time = false;
-						for ($idx=0; $idx<count($break_starts); $idx++) {
-							$break_start_ts = strtotime(date('Y-m-d ' . $break_starts[$idx], $ccs));
-							$break_end_ts = strtotime(date('Y-m-d ' . $break_ends[$idx], $ccs));
-							if ($t == $break_start_ts) {
+						for ( $idx = 0; $idx < count( $break_starts ); $idx ++ ) {
+							$break_start_ts = strtotime( date( 'Y-m-d ' . $break_starts[ $idx ], $ccs ) );
+							$break_end_ts   = strtotime( date( 'Y-m-d ' . $break_ends[ $idx ], $ccs ) );
+							if ( $t == $break_start_ts ) {
 								$has_break_time = $break_end_ts - $break_start_ts;
 								break;
 							}
 						}
-						if ($has_break_time) {
-							$t += ($has_break_time - $step);
-							$t = apply_filters('app_next_time_step', $t+$step, $ccs, $step); //Allows dynamic/variable step increment.
+						if ( $has_break_time ) {
+							$t += ( $has_break_time - $step );
+							$t = apply_filters( 'app_next_time_step', $t + $step, $ccs, $step ); //Allows dynamic/variable step increment.
 							continue;
 						}
 					}
 				}
+				
 // End fixes area
 				$args = array(
 					'location_id' => $this->location,
