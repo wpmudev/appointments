@@ -1481,7 +1481,7 @@ class Appointments {
 
 		}
 
-		
+
 		$this->timetables[ $timetable_key ] = $data;
 
 		// Save timetables only once at the end of the execution
