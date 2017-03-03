@@ -144,7 +144,9 @@ function appointments_get_weekly_schedule_slots( $now = false, $service_id = 0, 
 	// Get the start/end hours
 	$hour_start = 8;
 	$hour_end = 18;
-	if ( $min_max = $appointments->min_max_wh() ) {
+
+	$appointments->get_lsw();
+	if ( $min_max = appointments_get_min_max_working_hours( $appointments->worker, $appointments->location ) ) {
 		$hour_start = $min_max["min"];
 		$hour_end = $min_max["max"];
 	}

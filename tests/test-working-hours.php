@@ -181,6 +181,31 @@ class App_Working_Hours_Test extends App_UnitTestCase {
 		$this->assertTrue( appointments_is_worker_holiday( $worker_id, $check_date_from, $check_date_to ) );
 	}
 
+	/**
+	 * @group temp
+	 */
+	function test_appointments_get_min_max_working_hours() {
+		$worker_id = $this->factory->worker->create_object( $this->factory->worker->generate_args() );
+		$open_hours = $this->get_open_wh();
+		appointments_update_worker_working_hours( $worker_id, $open_hours, 'open' );
+
+		$result = appointments_get_min_max_working_hours( $worker_id );
+		$this->assertEquals( '7', $result['min'] );
+		$this->assertEquals( '20', $result['max'] );
+
+		// Edge cases
+		$open_hours['Tuesday'] = array(
+			'active' => 'yes',
+			'start'  => '00:00',
+			'end'    => '00:00',
+			'weekday_number' => 2
+		);
+		appointments_update_worker_working_hours( $worker_id, $open_hours, 'open' );
+		$result = appointments_get_min_max_working_hours( $worker_id );
+		$this->assertEquals( '0', $result['min'] );
+		$this->assertEquals( '24', $result['max'] );
+	}
+
 
 	function get_open_wh() {
 		return array(

@@ -1314,9 +1314,11 @@ class Appointments {
 		$timetable_key .= '-' . $this->worker;
 		$timetable_key .= '-' . date( 'Ym', $time );
 
+		$this->get_lsw();
+
 		// Calculate step
 		$start = $end = 0;
-		if ( $min_max = $this->min_max_wh( 0, 0 ) ) {
+		if ( $min_max = appointments_get_min_max_working_hours( $this->worker, $this->location ) ) {
 			$start = $min_max["min"];
 			$end = $min_max["max"];
 		}
@@ -1878,61 +1880,6 @@ class Appointments {
 			}
 		}
 		return $result;
-	}
-
-	/**
-	 * Get the maximum and minimum working hour
-	 * @return array|false
-	 */
-	function min_max_wh( $worker=0, $location=0 ) {
-		$this->get_lsw();
-
-		$result = appointments_get_worker_working_hours( 'open', $this->worker, $this->location );
-		if ( $result ) {
-			$days = $result->hours;
-			$days = array_filter($days);
-			if ( is_array( $days ) ) {
-				$min = 24; $max = 0;
-				foreach ( $days as $day ) {
-					// Jose's fix pt2 (c19c7d65bb860a265ceb7f6a6075ae668bd60100)
-					/*
-					if ( isset( $day["active"] ) && 'yes' == $day["active"] ) {
-						$start = date( "G", strtotime( $this->to_military( $day["start"] ) ) );
-						$end_timestamp = strtotime( $this->to_military( $day["end"] ) );
-						$end = date( "G", $end_timestamp );
-						// Add 1 hour if there are some minutes left. e.g. for 10:10pm, make max as 23
-						if ( '00' != date( "i", $end_timestamp ) && $end != 24 )
-							$end = $end + 1;
-						if ( $start < $min )
-							$min = $start;
-						if ( $end > $max )
-							$max = $end;
-						// Special case: If end is 0:00, regard it as 24
-						if ( 0 == $end && '00' == date( "i", $end_timestamp ) )
-							$max = 24;
-					}
-					*/
-					if ( ! isset( $day['start'] ) || ! isset( $day['end'] ) ) {
-						continue;
-					}
-					$start = date( "G", strtotime( $this->to_military( $day["start"] ) ) );
-	                $end_timestamp = strtotime( $this->to_military( $day["end"] ) );
-	                $end = date( "G", $end_timestamp );
-	                // Add 1 hour if there are some minutes left. e.g. for 10:10pm, make max as 23
-	                if ( '00' != date( "i", $end_timestamp ) && $end != 24 )
-	                    $end = $end + 1;
-	                if ( $start < $min )
-	                    $min = $start;
-	                if ( $end > $max )
-	                    $max = $end;
-	                // Special case: If end is 0:00, regard it as 24
-	                if ( 0 == $end && '00' == date( "i", $end_timestamp ) )
-	                    $max = 24;
-				}
-				return array( "min"=>$min, "max"=>$max );
-			}
-		}
-		return false;
 	}
 
 	/**

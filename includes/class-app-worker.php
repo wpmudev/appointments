@@ -774,6 +774,7 @@ function appointments_update_worker_working_hours( $worker_id, $wh, $status, $lo
 	appointments_delete_work_breaks_cache( $location, $worker_id );
 	appointments_delete_timetables_cache();
 	wp_cache_delete( 'app_working_hours' );
+	wp_cache_delete( 'app_max_min_working_hours' );
 
 	return $result;
 
@@ -842,6 +843,7 @@ function appointments_delete_worker_working_hours( $worker_id ) {
 	$wpdb->query( $wpdb->prepare( "DELETE FROM $table WHERE worker = %d", $worker_id ) );
 
 	wp_cache_delete( 'app_working_hours' );
+	wp_cache_delete( 'app_max_min_working_hours' );
 	appointments_delete_timetables_cache();
 	appointments_delete_work_breaks_cache( 0, $worker_id );
 
@@ -955,6 +957,7 @@ function appointments_delete_worker_cache( $worker_id = 0 ) {
 	wp_cache_delete( 'app_all_workers' );
 	wp_cache_delete( 'app_workers_by_service' );
 	wp_cache_delete( 'app_working_hours' );
+	wp_cache_delete( 'app_max_min_working_hours' );
 	//@ TODO: Delete capacity_ cache
 	appointments_delete_timetables_cache();
 }
@@ -963,6 +966,7 @@ function appointments_delete_work_breaks_cache( $l, $w ) {
 	$cache_key = 'appointments_work_breaks-' . $l . '-' . $w;
 	wp_cache_delete( $cache_key );
 	appointments_delete_timetables_cache();
+	wp_cache_delete( 'app_max_min_working_hours' );
 }
 
 function appointments_delete_worker_exceptions_cache( $location, $worker_id ) {

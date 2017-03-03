@@ -234,3 +234,64 @@ function appointments_get_available_workers_for_interval( $start, $end, $service
 	// Return whichever smaller
 	return min( $service->capacity, $capacity_available );
 }
+
+
+/**
+ * Get the min and max working hours for a week given a worker and location
+ *
+ * @param int $worker_id
+ * @param int $location_id
+ *
+ * @return array|bool|mixed
+ */
+function appointments_get_min_max_working_hours( $worker_id = 0, $location_id = 0 ) {
+
+	$cached = wp_cache_get( 'app_max_min_working_hours' );
+	if ( ! is_array( $cached ) ) {
+		$cached = array();
+	}
+
+	$cache_key = $worker_id . '-' . $location_id;
+	if ( isset( $cached[ $cache_key ] ) ) {
+		return $cached[ $cache_key ];
+	}
+
+	$result = appointments_get_worker_working_hours( 'open', $worker_id, $location_id );
+	if ( $result ) {
+		$days = $result->hours;
+		$days = array_filter( $days );
+		if ( is_array( $days ) ) {
+			$min = 24;
+			$max = 0;
+			foreach ( $days as $day ) {
+				if ( ! isset( $day['start'] ) || ! isset( $day['end'] ) ) {
+					continue;
+				}
+
+				$start         = date( "G", strtotime( $day['start'] ) );
+				$end_timestamp = strtotime( $day['end'] );
+				$end           = date( "G", $end_timestamp );
+				// Add 1 hour if there are some minutes left. e.g. for 10:10pm, make max as 23
+				if ( '00' != date( "i", $end_timestamp ) && $end != 24 ) {
+					$end = $end + 1;
+				}
+				if ( $start < $min ) {
+					$min = $start;
+				}
+				if ( $end > $max ) {
+					$max = $end;
+				}
+				// Special case: If end is 0:00, regard it as 24
+				if ( 0 == $end && '00' == date( "i", $end_timestamp ) ) {
+					$max = 24;
+				}
+			}
+
+			$min_max = array( "min" => absint( $min ), "max" => absint( $max ) );
+			$cached[ $cache_key ] = $min_max;
+			wp_cache_set( 'app_max_min_working_hours', $cached );
+			return $min_max;
+		}
+	}
+	return false;
+}
