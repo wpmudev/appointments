@@ -181,9 +181,6 @@ class App_Working_Hours_Test extends App_UnitTestCase {
 		$this->assertTrue( appointments_is_worker_holiday( $worker_id, $check_date_from, $check_date_to ) );
 	}
 
-	/**
-	 * @group temp
-	 */
 	function test_appointments_get_min_max_working_hours() {
 		$worker_id = $this->factory->worker->create_object( $this->factory->worker->generate_args() );
 		$open_hours = $this->get_open_wh();

@@ -909,13 +909,7 @@ class Appointments {
 	 *	@return integer
 	 */
 	function get_min_time() {
-	    $options = appointments_get_options();
-	    $min_time = $options['min_time'];
-		if ( $min_time && $min_time > apply_filters( 'app_safe_min_time', 9 ) ) {
-			return apply_filters( 'app-time-min_time', absint( $min_time ) );
-		} else {
-			return apply_filters( 'app-time-min_time', apply_filters( 'app_safe_time', 10 ) );
-		}
+	    return appointments_get_min_time_interval();
 	}
 
 	/**
