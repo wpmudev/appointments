@@ -1430,7 +1430,13 @@ class Appointments {
 					}
 				}
 // End fixes area
-				$is_busy = $this->is_busy( $ccs, $cce, $capacity );
+				$args = array(
+					'location_id' => $this->location,
+					'service_id' => $this->service,
+					'worker_id' => $this->worker,
+					'capacity' => $capacity
+				);
+				$is_busy = apppointments_is_range_busy( $start, $end, $args );
 
 				$title = apply_filters('app-schedule_cell-title', date_i18n($this->datetime_format, $ccs), $is_busy, $ccs, $cce, $schedule_key);
 
