@@ -1329,7 +1329,7 @@ class Appointments {
 
 		$first = $start *3600 + $day_start; // Timestamp of the first cell
 		$last = $end *3600 + $day_start; // Timestamp of the last cell
-		$min_step_time = $this->get_min_time() * 60; // Cache min step increment
+		$min_step_time = appointments_get_min_time_interval() * 60; // Cache min step increment
 
 		if ( appointments_use_legacy_duration_calculus() ) {
 			$step = $min_step_time; // Timestamp increase interval to one cell ahead
@@ -1453,7 +1453,7 @@ class Appointments {
 				) {
 					$class_name = 'notpossible app_blocked';
 				} // Check if this is break
-				else if ( $this->is_break( $ccs, $cce ) ) {
+				else if ( appointments_is_interval_break( $ccs, $cce, $worker_id, $location_id ) ) {
 					$class_name = 'notpossible app_break';
 				} // Then look for appointments
 				else if ( $is_busy ) {
@@ -1481,41 +1481,32 @@ class Appointments {
 
 		}
 
-
-
-
+		
 		$this->timetables[ $timetable_key ] = $data;
 
 		// Save timetables only once at the end of the execution
 		//add_action( 'shutdown', array( $this, 'regenerate_timetables' ) );
 		add_action( 'shutdown', array( $this, 'save_timetables' ) );
 
-
-		$ret  = '';
-		$ret .= '<div class="app_timetable app_timetable_'.$day_start.'"'.$style.'>';
-		$ret .= '<div class="app_timetable_title">';
-		$ret .= date_i18n( $this->date_format, $day_start );
-		$ret .= '</div>';
-
-		foreach ( $data as $row ) {
-			if ( 'free' == $row['class'] ) {
-				// We found at least a cell free
-				$this->is_a_timetable_cell_free = true;
-			}
-
-			$ret .= '<div class="app_timetable_cell app_timetable_cell-' . date( 'H-i', $row['ccs'] ) . '  '.$row['class'].'" title="'.esc_attr($row['title']).'">'.
-			        $row['hours']. '<input type="hidden" class="appointments_take_appointment" value="' . $this->pack( $row['ccs'], $row['cce'] ) . '" />';
-
-			$ret .= '</div>';
-		}
-		$ret .= '<div style="clear:both"></div>';
-
-		$ret .= '</div>';
-
-
-
-		return $ret;
-
+		ob_start();
+		?>
+		<div class="app_timetable app_timetable_<?php echo $day_start; ?>" <?php echo $style; ?>>
+			<div class="app_timetable_title">
+				<?php echo date_i18n( appointments_get_date_format( 'date' ), $day_start ); ?>
+			</div>
+			<?php foreach ( $data as $row ): ?>
+				<?php if ( 'free' == $row['class'] ): ?>
+					<?php $this->is_a_timetable_cell_free = true; ?>
+				<?php endif; ?>
+				<div class="app_timetable_cell app_timetable_cell-<?php echo date( 'H-i', $row['ccs'] ); ?> <?php echo $row['class']; ?>" title="<?php echo esc_attr( $row['title'] ); ?>">
+					<?php echo $row['hours']; ?>
+					<input type="hidden" class="appointments_take_appointment" value="<?php echo $this->pack( $row['ccs'], $row['cce'] ); ?>" />
+				</div>
+			<?php endforeach; ?>
+			<div style="clear:both"></div>
+		</div>
+		<?php
+		return ob_get_clean();
 	}
 
 	/**
