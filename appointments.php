@@ -1430,15 +1430,14 @@ class Appointments {
 				}
 				
 // End fixes area
-				$args = array(
+				$busy_args = array(
 					'location_id' => $location_id,
 					'service_id' => $service_id,
 					'worker_id' => $worker_id,
 					'capacity' => $capacity
 				);
-				$is_busy = apppointments_is_range_busy( $start, $end, $args );
 
-				$title = apply_filters('app-schedule_cell-title', date_i18n( appointments_get_date_format( 'full' ), $ccs), $is_busy, $ccs, $cce, $schedule_key);
+				$is_busy = false;
 
 				$class_name = '';
 				// Mark now
@@ -1456,7 +1455,7 @@ class Appointments {
 				else if ( appointments_is_interval_break( $ccs, $cce, $worker_id, $location_id ) ) {
 					$class_name = 'notpossible app_break';
 				} // Then look for appointments
-				else if ( $is_busy ) {
+				else if ( $is_busy = apppointments_is_range_busy( $start, $end, $busy_args ) ) {
 					$class_name = 'busy';
 				} // Then check if we have enough time to fulfill this app
 				else if ( ! $this->is_service_possible( $ccs, $cce, $capacity ) ) {
@@ -1467,6 +1466,7 @@ class Appointments {
 					// We found at least one timetable cell to be free
 				}
 				$class_name = apply_filters( 'app_class_name', $class_name, $ccs, $cce );
+				$title = apply_filters('app-schedule_cell-title', date_i18n( appointments_get_date_format( 'full' ), $ccs), $is_busy, $ccs, $cce, $schedule_key);
 
 				$data[] = array(
 					'class' => $class_name,
