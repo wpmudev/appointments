@@ -131,7 +131,7 @@ class Appointments_Google_Calendar_API_Manager {
 	 */
 	public function get_access_token() {
 		$client = $this->get_client();
-		return $client->getAccessToken();
+		return apply_filters( 'appointments_gcal_access_token', $client->getAccessToken() );
 	}
 
 
