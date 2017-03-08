@@ -40,6 +40,7 @@ class App_Schedule_Paddings {
 	public static function serve () {
 		$me = new App_Schedule_Paddings;
 		$me->_add_hooks();
+		return $me;
 	}
 
 	private function _add_hooks () {
@@ -266,11 +267,11 @@ class App_Schedule_Paddings {
 
 	public function save_service_padding ($service_id) {
 		if (
-				is_array( $_POST['service_padding_before'] )
-				&& isset( $_POST['service_padding_before'] )
+				isset( $_POST['service_padding_before'] )
+				&& is_array( $_POST['service_padding_before'] )
 				&& isset( $_POST['service_padding_before'][ $service_id ] )
-				&& is_array( $_POST['service_padding_after'] )
 				&& isset( $_POST['service_padding_after'] )
+				&& is_array( $_POST['service_padding_after'] )
 				&& isset( $_POST['service_padding_after'][ $service_id ] )
 		) {
 			$before = absint( $_POST['service_padding_before'][ $service_id ] );
