@@ -960,6 +960,8 @@ class Appointments_Google_Calendar {
 			$this->add_appointments_hooks();
 		}
 
+		$this->restore_to_default();
+
 		return true;
 
 	}
