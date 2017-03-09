@@ -265,7 +265,7 @@ class App_Installer {
 					array(
 						'active' => 'no',
 						'start'  => '08:00',
-						'end'    => '1:00 pm',
+						'end'    => '13:00',
 					),
 			),
 			'closed' => array(
