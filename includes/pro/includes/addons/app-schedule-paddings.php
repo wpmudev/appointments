@@ -76,6 +76,8 @@ class App_Schedule_Paddings {
 
 	public function default_options( $defaults ) {
 	    $defaults['schedule_padding'] = array( 'type' => self::PADDING_TYPE_LARGEST );
+	    $defaults['service_padding'] = array();
+	    $defaults['worker_padding'] = array();
 	    return $defaults;
     }
 
