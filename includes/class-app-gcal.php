@@ -180,6 +180,7 @@ class Appointments_Google_Calendar {
 
 	public function maybe_sync() {
 		$appointments = appointments();
+		$doing_ajax = defined( 'DOING_AJAX' ) && DOING_AJAX;
 
 		include_once( 'gcal/class-app-gcal-importer.php' );
 
@@ -197,11 +198,13 @@ class Appointments_Google_Calendar {
 				if ( $switched ) {
 					$api_mode = $this->get_api_mode();
 					if ( 'sync' != $api_mode ) {
+						$this->restore_to_default();
 						continue;
 					}
 
 					$events = $this->get_events_list();
 					if ( is_wp_error( $events ) ) {
+						$this->restore_to_default();
 						continue;
 					}
 
@@ -242,17 +245,23 @@ class Appointments_Google_Calendar {
 
 		$api_mode = $this->get_api_mode();
 		if ( 'sync' != $api_mode || ! $this->is_connected() || ! $this->api_manager->get_calendar() ) {
-			wp_send_json_error();
-			exit;
-			//return;
+			if ( $doing_ajax ) {
+				wp_send_json_error();
+			}
+			else {
+				return;
+			}
 		}
 
 		$current_gcal_ids = appointments_get_gcal_ids();
 		$events = $this->get_events_list();
 		if ( is_wp_error( $events ) ) {
-			wp_send_json_error();
-			exit;
-			//return;
+			if ( $doing_ajax ) {
+				wp_send_json_error();
+			}
+			else {
+				return;
+			}
 		}
 
 		$events_ids = array_map( array( $this, '_get_event_id' ), $events );
@@ -298,8 +307,12 @@ class Appointments_Google_Calendar {
 			}
 		}
 		if( isset( $_POST['return_result'] ) && $_POST['return_result'] == 'yes' ){
-			wp_send_json_success();
-			exit;
+			if ( $doing_ajax ) {
+				wp_send_json_success();
+			}
+			else {
+				return;
+			}
 		}
 		return;
 	}

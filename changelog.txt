@@ -1,3 +1,10 @@
+2017-03-10 - 2.0.5
+-------------------------------
+- Fix: app_monthly_schedule not showing properly working hours when a provider is set as parameter
+- Fix: Wrong working hour on Saturdays when A+ is just activated
+- Fix: GCal sync issues when providers have selected a calendar
+- Some other minor fixes
+
 2017-03-01 - 2.0.4
 -------------------------------
 - Fix: GCal sync was overriding the appointments service
