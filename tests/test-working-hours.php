@@ -148,7 +148,7 @@ class App_Working_Hours_Test extends App_UnitTestCase {
 		// Test saturday
 		$today = strtotime( '2016-12-17' );
 		$slots = appointments_get_weekly_schedule_slots( $today );
-		$this->assertCount( 18, $slots['time_slots'] );
+		$this->assertCount( 20, $slots['time_slots'] );
 		$this->assertEquals(
 			array(
 				'2016-12-17',

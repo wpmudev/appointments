@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments+ 2.0.4\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2017-03-08 17:44:31+00:00\n"
+"POT-Creation-Date: 2017-03-09 16:06:20+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4328,35 +4328,35 @@ msgstr ""
 msgid "After"
 msgstr ""
 
-#: includes/pro/includes/addons/app-schedule-paddings.php:119
+#: includes/pro/includes/addons/app-schedule-paddings.php:122
 msgid "... applying the smaller padding of the two"
 msgstr ""
 
-#: includes/pro/includes/addons/app-schedule-paddings.php:120
+#: includes/pro/includes/addons/app-schedule-paddings.php:123
 msgid "... applying the larger padding of the two"
 msgstr ""
 
-#: includes/pro/includes/addons/app-schedule-paddings.php:121
+#: includes/pro/includes/addons/app-schedule-paddings.php:124
 msgid "... adding the two together and applying the result"
 msgstr ""
 
-#: includes/pro/includes/addons/app-schedule-paddings.php:125
+#: includes/pro/includes/addons/app-schedule-paddings.php:128
 msgid "Padding resolution type"
 msgstr ""
 
-#: includes/pro/includes/addons/app-schedule-paddings.php:127
+#: includes/pro/includes/addons/app-schedule-paddings.php:130
 msgid ""
 "When both the current service and the current service provider have "
 "paddings assigned, resolve them by..."
 msgstr ""
 
-#: includes/pro/includes/addons/app-schedule-paddings.php:153
-#: includes/pro/includes/addons/app-schedule-paddings.php:216
-#: includes/pro/includes/addons/app-schedule-paddings.php:244
+#: includes/pro/includes/addons/app-schedule-paddings.php:156
+#: includes/pro/includes/addons/app-schedule-paddings.php:219
+#: includes/pro/includes/addons/app-schedule-paddings.php:247
 msgid "Padding times"
 msgstr ""
 
-#: includes/pro/includes/addons/app-schedule-paddings.php:181
+#: includes/pro/includes/addons/app-schedule-paddings.php:184
 msgid "Paddings"
 msgstr ""
 
