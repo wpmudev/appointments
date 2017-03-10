@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	public $version = "2.0.4";
+	public $version = "2.0.4.2";
 	public $db_version;
 
 	public $timetables = array();
@@ -290,12 +290,10 @@ class Appointments {
 	 * @return integer
 	 */
 	function get_worker_id() {
-		if( ! is_admin() ){
-			if( isset( $_GET["app_provider_id"] ) ){
-				return (int)$_GET["app_provider_id"];
+		if( ! is_admin() ) {
+			if ( isset( $_GET["app_provider_id"] ) ) {
+				return (int) $_GET["app_provider_id"];
 			}
-
-		    return 0;
 		}
 
 		if ( isset( $_REQUEST["app_provider_id"] ) ){
@@ -1294,6 +1292,8 @@ class Appointments {
 	function get_timetable( $day_start, $capacity, $schedule_key=false ) {
 		$timetable_key = $day_start . '-' . $capacity;
 		$local_time = current_time( 'timestamp' );
+
+		$this->get_lsw();
 
 		if ( ! $schedule_key ) {
 			$timetable_key .= '-0';
