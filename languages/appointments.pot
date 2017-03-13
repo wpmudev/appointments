@@ -4,7 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments+ 2.0.5\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
+<<<<<<< HEAD
 "POT-Creation-Date: 2017-03-10 08:17:12+00:00\n"
+=======
+<<<<<<< HEAD
+"POT-Creation-Date: 2017-03-09 16:06:20+00:00\n"
+=======
+"POT-Creation-Date: 2017-03-01 09:16:34+00:00\n"
+>>>>>>> b2b37cf5f4495533266464b4224e7564486af14a
+>>>>>>> development
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
