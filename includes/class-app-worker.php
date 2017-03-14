@@ -19,7 +19,7 @@ class Appointments_Worker {
 		$array_fields = array( 'services_provided' );
 
 		if ( in_array( $field, $int_fields ) )
-			return absint( $value );
+			return intval( $value );
 		elseif ( in_array( $field, $array_fields ) )
 			return array_filter( explode( ':' , ltrim( $value , ":") ) );
 		else
@@ -791,50 +791,56 @@ function appointments_get_worker_working_hours( $status, $worker_id = 0, $locati
 
 	$table = appointments_get_table( 'wh' );
 
-	$working_hours = wp_cache_get( 'app_working_hours' );
+	$cache_key = $worker_id . '-' . $location . '-' . $status;
+	$cached_working_hours = wp_cache_get( 'app_working_hours' );
+	if ( false === $cached_working_hours ) {
+		$cached_working_hours = array();
+	}
 
-	if ( false === $working_hours ) {
+	if ( ! isset( $cached_working_hours[ $cache_key ] ) ) {
 		$_working_hours = $wpdb->get_results( "SELECT * FROM $table" );
 		$working_hours = array();
 		foreach ( $_working_hours as $key => $row ) {
 			$row->hours = maybe_unserialize( $row->hours );
 			$working_hours[ $key ] = $row;
 		}
-		wp_cache_set( 'app_working_hours', $working_hours );
-	}
 
-	$working_hours = wp_list_filter( $working_hours, array( 'location' => $location, 'worker' => $worker_id, 'status' => $status ) );
-	if ( $working_hours ) {
-		$working_hours = current( $working_hours );
-	}
+		$working_hours = wp_list_filter( $working_hours, array( 'location' => $location, 'worker' => $worker_id, 'status' => $status ) );
+		if ( $working_hours ) {
+			$working_hours = current( $working_hours );
+		}
 
-	if ( $working_hours ) {
-		if ( is_array( $working_hours->hours ) ) {
-			foreach ( $working_hours->hours as $weekday => $hour ) {
-				// Transform weekday to weekday number for a better handling later
-				$weekday_number = '';
-				switch ( $weekday ) {
-					case 'Monday': { $weekday_number = 1; break; }
-					case 'Tuesday': { $weekday_number = 2; break; }
-					case 'Wednesday': { $weekday_number = 3; break; }
-					case 'Thursday': { $weekday_number = 4; break; }
-					case 'Friday': { $weekday_number = 5; break; }
-					case 'Saturday': { $weekday_number = 6; break; }
-					case 'Sunday': { $weekday_number = 7; break; }
-					default: { continue; }
+		if ( $working_hours ) {
+			if ( is_array( $working_hours->hours ) ) {
+				foreach ( $working_hours->hours as $weekday => $hour ) {
+					// Transform weekday to weekday number for a better handling later
+					$weekday_number = '';
+					switch ( $weekday ) {
+						case 'Monday': { $weekday_number = 1; break; }
+						case 'Tuesday': { $weekday_number = 2; break; }
+						case 'Wednesday': { $weekday_number = 3; break; }
+						case 'Thursday': { $weekday_number = 4; break; }
+						case 'Friday': { $weekday_number = 5; break; }
+						case 'Saturday': { $weekday_number = 6; break; }
+						case 'Sunday': { $weekday_number = 7; break; }
+						default: { continue; }
+					}
+					if ( ! isset( $working_hours->hours[ $weekday ] ) ) {
+						$working_hours->hours[ $weekday ] = array();
+					}
+					$working_hours->hours[ $weekday ]['weekday_number'] = $weekday_number;
 				}
-				if ( ! isset( $working_hours->hours[ $weekday ] ) ) {
-					$working_hours->hours[ $weekday ] = array();
-				}
-				$working_hours->hours[ $weekday ]['weekday_number'] = $weekday_number;
 			}
 		}
-	}
-	else {
-		$working_hours = false;
+		else {
+			return false;
+		}
+
+		$cached_working_hours[ $cache_key ] = $working_hours;
+		wp_cache_set( 'app_working_hours', $cached_working_hours );
 	}
 
-	return $working_hours;
+	return $cached_working_hours[ $cache_key ];
 }
 
 function appointments_delete_worker_working_hours( $worker_id ) {
