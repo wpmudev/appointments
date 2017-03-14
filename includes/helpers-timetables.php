@@ -71,27 +71,31 @@ function appointments_is_interval_break( $start, $end, $worker_id = 0, $location
 	}
 
 	if ( is_array( $days ) ) {
-		$weekday_number = date( "N", $start );
+		$weekday_number = absint( date( "N", $start ) );
+		$date_start = date( 'Y-m-d', $start );
+		$full_date_start = date( 'Y-m-d 00:00:00', strtotime( '+1 day', $start ) );
+
 
 		foreach ( $days as $weekday => $day ) {
+			$day_weekday_number = absint( $day['weekday_number'] );
 			if ( ! is_array( $day['start'] ) ) {
-				$start_break_datetime = strtotime( date( 'Y-m-d', $start ) . ' ' . $day['start'] . ':00' );
+				$start_break_datetime = strtotime( $date_start . ' ' . $day['start'] . ':00' );
 				if ( $day['end'] === '00:00' ) {
 					// This means that the end time is on the next day
-					$end_break_datetime = strtotime( date( 'Y-m-d 00:00:00', strtotime( '+1 day', $start ) ) );
+					$end_break_datetime = strtotime( $full_date_start );
 				}
 				else {
-					$end_break_datetime   = strtotime( date( 'Y-m-d', $start ) . ' ' . $day['end'] . ':00' );
+					$end_break_datetime   = strtotime( $date_start . ' ' . $day['end'] . ':00' );
 				}
 
 
-				if ( absint( $weekday_number ) === absint( $day['weekday_number'] ) && 'yes' === $day['active'] ) {
+				if ( $weekday_number === $day_weekday_number && 'yes' === $day['active'] ) {
 					// The weekday we're looking for and the break time is active
 					$period = new App_Period( $start, $end );
 					if ( $period->contains( $start_break_datetime, $end_break_datetime ) ) { // The end time is less than the break day end time. At this point we know that the searched dates are inside the interval) ) {
 						return true;
 					}
-				} elseif ( absint( $weekday_number ) === absint( $day['weekday_number'] ) && is_array( $day['active'] ) ) {
+				} elseif ( $weekday_number === $day_weekday_number && is_array( $day['active'] ) ) {
 					// The weekday we're looking for and the break day is composed by several times
 					foreach ( $day["active"] as $idx => $is_active ) {
 						if (
@@ -107,17 +111,17 @@ function appointments_is_interval_break( $start, $end, $worker_id = 0, $location
 				foreach ( $day['start'] as $key => $day_start ) {
 					$day_end = $day['end'][ $key ];
 					$is_active = $day['active'][ $key ];
-					$start_break_datetime = strtotime( date( 'Y-m-d', $start ) . ' ' . $day_start . ':00' );
+					$start_break_datetime = strtotime( $date_start . ' ' . $day_start . ':00' );
 					if ( $day_end === '00:00' ) {
 						// This means that the end time is on the next day
-						$end_break_datetime = strtotime( date( 'Y-m-d 00:00:00', strtotime( '+1 day', $start ) ) );
+						$end_break_datetime = strtotime( $full_date_start );
 					}
 					else {
-						$end_break_datetime   = strtotime( date( 'Y-m-d', $start ) . ' ' . $day_end . ':00' );
+						$end_break_datetime   = strtotime( $date_start . ' ' . $day_end . ':00' );
 					}
 
 
-					if ( absint( $weekday_number ) === absint( $day['weekday_number'] ) && 'yes' === $is_active ) {
+					if ( $weekday_number === $day_weekday_number && 'yes' === $is_active ) {
 						$period = new App_Period( $start, $end );
 						// The weekday we're looking for and the break time is active
 						if ( $period->contains( $start_break_datetime, $end_break_datetime ) ) {
