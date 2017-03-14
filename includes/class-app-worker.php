@@ -861,7 +861,6 @@ function appointments_delete_worker_working_hours( $worker_id ) {
 function appointments_get_worker_exceptions( $worker_id, $status, $location = 0 ) {
 	global $wpdb;
 
-	$worker_id = absint( $worker_id );
 	if ( $worker_id && ! appointments_is_worker( $worker_id ) ) {
 		return false;
 	}
