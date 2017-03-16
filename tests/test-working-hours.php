@@ -64,7 +64,13 @@ class App_Working_Hours_Test extends App_UnitTestCase {
 		$this->assertEquals( $num_queries, $wpdb->num_queries );
 
 		$cached = wp_cache_get( 'app_working_hours' );
-		$this->assertCount( 4, $cached );
+		$this->assertCount( 1, $cached );
+
+		$open = appointments_get_worker_working_hours( 'closed', $worker_id, 0 );
+		$this->assertEquals( ++$num_queries, $wpdb->num_queries );
+
+		$cached = wp_cache_get( 'app_working_hours' );
+		$this->assertCount( 2, $cached );
 
 	}
 
