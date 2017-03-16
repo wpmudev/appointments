@@ -31,5 +31,7 @@ class App_Misc_Test extends App_UnitTestCase {
 		$_REQUEST["app_service_id"] = 123123123;
 		$_REQUEST["app_worker_id"] = 123123;
 		$this->assertEquals( 0, $appointments->get_price() );
+		unset( $_REQUEST["app_service_id"] );
+		unset( $_REQUEST["app_worker_id"] );
 	}
 }
