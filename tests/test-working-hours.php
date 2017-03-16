@@ -125,7 +125,7 @@ class App_Working_Hours_Test extends App_UnitTestCase {
 
 
 	public function test_get_weekly_schedule_slots() {
-		$options = appointments_get_options();
+		$_GET['app_provider_id'] = 0;
 		$worker_id = $this->factory->worker->create_object( $this->factory->worker->generate_args() );
 		$open_hours = $this->get_open_wh();
 		appointments_update_worker_working_hours( $worker_id, $open_hours, 'open' );
@@ -137,7 +137,7 @@ class App_Working_Hours_Test extends App_UnitTestCase {
 		$next_saturday = strtotime( 'next saturday' );
 		$slots = appointments_get_weekly_schedule_slots( $next_saturday );
 
-		$this->assertCount( 20, $slots['time_slots'] );
+		$this->assertCount( 18, $slots['time_slots'] );
 		$this->assertEquals(
 			array(
 				date( 'Y-m-d', $next_saturday ),
@@ -154,7 +154,7 @@ class App_Working_Hours_Test extends App_UnitTestCase {
 		// Test saturday
 		$today = strtotime( '2016-12-17' );
 		$slots = appointments_get_weekly_schedule_slots( $today );
-		$this->assertCount( 20, $slots['time_slots'] );
+		$this->assertCount( 18, $slots['time_slots'] );
 		$this->assertEquals(
 			array(
 				'2016-12-17',
