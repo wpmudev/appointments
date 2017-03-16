@@ -1161,6 +1161,7 @@ function appointments_clear_appointment_cache( $app_id = false ) {
 	wp_cache_delete( 'app_get_appointments_filtered_by_service' );
 	wp_cache_delete( 'app_get_appointments' );
 	wp_cache_delete( 'app_get_month_appointments' );
+	wp_cache_delete( 'app_working_hours' );
 	//@ TODO: Delete capacity_ cache
 	appointments_delete_timetables_cache();
 }
