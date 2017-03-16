@@ -475,11 +475,16 @@ class Appointments {
 	 * @return array of objects
 	 */
 	function get_reserve_apps_by_worker( $l, $w, $week=0 ) {
-		$apps = wp_cache_get( 'reserve_apps_by_worker_'. $l . '_' . $w . '_' . $week );
-		if ( false === $apps ) {
+		$cache_key = $l . '_' . $w . '_' . $week;
+		$cached = wp_cache_get( 'reserve_apps_by_worker' );
+		if ( false === $cached ) {
+			$cached = array();
+		}
+
+		if ( ! isset( $cached[ $cache_key ] ) ) {
 			$services = appointments_get_services();
+			$apps = array();
 			if ( $services ) {
-				$apps = array();
 				foreach ( $services as $service ) {
 					$args = array(
 						'location' => $l,
@@ -492,8 +497,14 @@ class Appointments {
 						$apps = array_merge( $apps, $apps_worker );
 				}
 			}
-			wp_cache_set( 'reserve_apps_by_worker_'. $l . '_' . $w . '_' . $week, $apps );
+
+			$cached[ $cache_key ] = $apps;
+			wp_cache_set( 'reserve_apps_by_worker', $cached );
 		}
+		else {
+			$apps = $cached[ $cache_key ];
+		}
+
 		return $apps;
 	}
 
@@ -1407,7 +1418,6 @@ class Appointments {
 		// Allow direct step increment manipulation,
 		// mainly for service duration based calculus start/stop times
 		$step = apply_filters('app-timetable-step_increment', $step, 'timetable' );
-
 		if ( empty( $step ) || ! is_numeric( $step ) ) {
 			// If step is null/0 etc we can end up with problems
 			return '';

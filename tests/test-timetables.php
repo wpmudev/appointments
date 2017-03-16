@@ -543,24 +543,99 @@ class App_Timetables_Test extends App_UnitTestCase {
 	}
 
 	function test_get_timetable_slots() {
+		$options = appointments_get_options();
+		$options['min_time'] = 60;
+		appointments_update_options( $options );
 		$appointments = appointments();
-		$date_start = strtotime( date( 'Y-m-d 00:00:00', strtotime( 'next Monday', current_time( 'timestamp' ) ) ) );
+		$next_monday = strtotime( date( 'Y-m-d 00:00:00', strtotime( 'next Monday', current_time( 'timestamp' ) ) ) );
+		$next_tuesday = strtotime( date( 'Y-m-d 00:00:00', strtotime( 'next Tuesday', current_time( 'timestamp' ) ) ) );
+		$next_wednesday = strtotime( date( 'Y-m-d 00:00:00', strtotime( 'next Wednesday', current_time( 'timestamp' ) ) ) );
+		$next_thursday = strtotime( date( 'Y-m-d 00:00:00', strtotime( 'next Thursday', current_time( 'timestamp' ) ) ) );
 
 		$args = $this->factory->service->generate_args();
+		$args['duration'] = 60;
 		$service_id = $this->factory->service->create_object( $args );
-
-		$worker_args = $this->factory->worker->generate_args();
-		$worker_args['services_provided'] = array( $service_id );
-
-		$worker_id = $this->factory->worker->create_object( $worker_args );
+		// Delete default service
+		foreach ( appointments_get_services() as $service ) {
+			if ( $service->ID != $service_id ) {
+				appointments_delete_service( $service->ID );
+			}
+		}
 
 		$open_hours = $this->get_open_wh();
-		appointments_update_worker_working_hours( $worker_id, $open_hours, 'open' );
+		$closed_hours = $this->get_closed_wh();
+		appointments_update_worker_working_hours( 0, $open_hours, 'open' );
+		appointments_update_worker_working_hours( 0, $closed_hours, 'closed' );
 
-		$slots = $appointments->_get_timetable_slots( $date_start, appointments_get_service_capacity( $service_id ) );
-		var_dump($slots);
-//		$is_busy = $appointments->is_busy( 1490007600, 1490009400, appointments_get_service_capacity( $service_id ) );
-//		var_dump($is_busy);
+		// Monday slots
+		$next_monday_slots = $appointments->_get_timetable_slots( $next_monday,1 );
+		$expected_timeslots = $this->_get_expected_slots( 'Monday', $next_monday );
+		$this->_test_expected_timeslots( $expected_timeslots, $next_monday_slots );
+		foreach ( $next_monday_slots as $slot ) {
+			if ( '19:30' === $slot['hours'] ) {
+				// The service is not possible because it would end at 20:30 but Monday is opened until 20:00
+				$this->assertEquals( 'notpossible service_notpossible', $slot['class'] );
+			}
+			else {
+				$this->assertEquals( 'free', $slot['class'] );
+			}
+		}
+
+		// Tuesday slots
+		$next_tuesday_slots = $appointments->_get_timetable_slots( $next_tuesday,1 );
+		$expected_timeslots = $this->_get_expected_slots( 'Tuesday', $next_tuesday );
+		$this->_test_expected_timeslots( $expected_timeslots, $next_tuesday_slots );
+		foreach ( $next_tuesday_slots as $slot ) {
+			if ( $slot['hours'] >= '14:30' ) {
+				// The service is not possible because it would end at 15:30 but Tuesday is opened until 15:00
+				$this->assertEquals( 'notpossible service_notpossible', $slot['class'] );
+			}
+			else {
+				$this->assertEquals( 'free', $slot['class'] );
+			}
+		}
+
+		// Wednesday slots
+		// Insert an appointment on Wednesday of 90 minutes
+		$app_id = appointments_insert_appointment( array(
+			'service' => $service_id,
+			'date' => strtotime( date( 'Y-m-d 12:00:00', $next_wednesday ) ),
+			'duration' => 90,
+			'status' => 'confirmed'
+		) );
+
+		$next_wednesday_slots = $appointments->_get_timetable_slots( $next_wednesday, 1 );
+		$expected_timeslots = $this->_get_expected_slots( 'Wednesday', $next_wednesday );
+		$this->_test_expected_timeslots( $expected_timeslots, $next_wednesday_slots );
+		foreach ( $next_wednesday_slots as $slot ) {
+			if ( $slot['hours'] >= '11:30' && $slot['hours'] < '13:30' ) {
+				// Busy by the appointment
+				$this->assertEquals( 'busy', $slot['class'] );
+			}
+			elseif ( $slot['hours'] === '19:30' ) {
+				$this->assertEquals( 'notpossible service_notpossible', $slot['class'] );
+			}
+			else {
+				$this->assertEquals( 'free', $slot['class'] );
+			}
+		}
+
+		// Thursday
+		$next_thursday_slots = $appointments->_get_timetable_slots( $next_thursday, 1 );
+		$expected_timeslots = $this->_get_expected_slots( 'Thursday', $next_thursday );
+		$this->_test_expected_timeslots( $expected_timeslots, $next_thursday_slots );
+		foreach ( $next_thursday_slots as $slot ) {
+			if ( $slot['hours'] >= '11:30' && $slot['hours'] <= '12:30' ) {
+				// The service is not possible because it would end at 15:30 but Tuesday is opened until 15:00
+				$this->assertEquals( 'notpossible app_break', $slot['class'] );
+			}
+			elseif ( $slot['hours'] === '19:30' ) {
+				$this->assertEquals( 'notpossible service_notpossible', $slot['class'] );
+			}
+			else {
+				$this->assertEquals( 'free', $slot['class'] );
+			}
+		}
 	}
 
 
@@ -598,11 +673,46 @@ class App_Timetables_Test extends App_UnitTestCase {
 //		$this->assertFalse( $busy );
 	}
 
+	function _test_expected_timeslots( $expected_timeslots, $day_slots ) {
+		$this->assertCount( count( $expected_timeslots ), $day_slots );
+		foreach ( $expected_timeslots as $key => $expected ) {
+			$this->assertEquals( $expected['hours'], $day_slots[ $key ]['hours'] );
+			$this->assertEquals( $expected['title'], $day_slots[ $key ]['title'] );
+			$this->assertEquals( $expected['ccs'], $day_slots[ $key ]['ccs'] );
+			$this->assertEquals( $expected['cce'], $day_slots[ $key ]['cce'] );
+		}
+	}
+
+	function _get_expected_slots( $day, $start_date ) {
+		$options = appointments_get_options();
+		$open_hours = $this->get_open_wh();
+
+		$open_max_hour = max( wp_list_pluck( wp_list_filter( $open_hours, array( 'active' => 'yes' ) ), 'end' ) );
+
+		$expected_timeslots = array();
+		$opened_wh = $open_hours[ $day ];
+		$step = $options['min_time'] * 60;
+		$start_time = strtotime( date( 'Y-m-d ' . $opened_wh['start'], $start_date ) );
+		$end_time = strtotime( date( 'Y-m-d ' . $open_max_hour, $start_date ) );
+		$time = $start_time;
+		while ( $time <= $end_time ) {
+			$expected_timeslot = array(
+				'title' => date( 'Y-m-d H:i', $time ),
+				'hours' => date( 'H:i', $time ),
+				'ccs' => $time,
+				'cce' => $time + $step
+			);
+			$expected_timeslots[] = $expected_timeslot;
+			$time = $time + $step;
+		}
+		return $expected_timeslots;
+	}
+
 	function get_open_wh() {
 		return array(
 			'Sunday'    =>
 				array(
-					'active' => 'yes',
+					'active' => 'no',
 					'start'  => '07:00',
 					'end'    => '20:00',
 					'weekday_number' => 7
@@ -617,8 +727,8 @@ class App_Timetables_Test extends App_UnitTestCase {
 			'Tuesday'   =>
 				array(
 					'active' => 'yes',
-					'start'  => '10:30',
-					'end'    => '20:00',
+					'start'  => '12:30',
+					'end'    => '15:00',
 					'weekday_number' => 2
 				),
 			'Wednesday' =>
@@ -685,7 +795,7 @@ class App_Timetables_Test extends App_UnitTestCase {
 				),
 			'Thursday'  =>
 				array(
-					'active' => 'no',
+					'active' => 'yes',
 					'start'  => '12:00',
 					'end'    => '13:00',
 					'weekday_number' => 4
