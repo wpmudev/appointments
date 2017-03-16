@@ -1290,6 +1290,58 @@ class Appointments {
 	 * Helper function to create a time table for monthly schedule
 	 */
 	function get_timetable( $day_start, $capacity, $schedule_key=false ) {
+		$local_time = current_time( 'timestamp' );
+
+		$data = $this->_get_timetable_slots( $day_start, $capacity, $schedule_key );
+
+		// We need this only for the first timetable
+		// Otherwise $time will be calculated from $day_start
+		if ( isset( $_GET["wcalendar"] ) && (int)$_GET['wcalendar'] ) {
+			$time = (int)$_GET["wcalendar"];
+		}
+		else {
+			$time = $local_time;
+		}
+
+		// Are we looking to today?
+		// If today is a working day, shows its free times by default
+		if ( date( 'Ymd', $day_start ) == date( 'Ymd', $time ) )
+			$style = '';
+		else
+			$style = ' style="display:none"';
+
+		$ret  = '';
+		$ret .= '<div class="app_timetable app_timetable_'.$day_start.'"'.$style.'>';
+		$ret .= '<div class="app_timetable_title">';
+		$ret .= date_i18n( $this->date_format, $day_start );
+		$ret .= '</div>';
+
+		foreach ( $data as $row ) {
+			if ( 'free' == $row['class'] ) {
+				// We found at least a cell free
+				$this->is_a_timetable_cell_free = true;
+			}
+
+			$ret .= '<div class="app_timetable_cell app_timetable_cell-' . date( 'H-i', $row['ccs'] ) . '  '.$row['class'].'" title="'.esc_attr($row['title']).'">'.
+			        $row['hours']. '<input type="hidden" class="appointments_take_appointment" value="' . $this->pack( $row['ccs'], $row['cce'] ) . '" />';
+
+			$ret .= '</div>';
+		}
+		$ret .= '<div style="clear:both"></div>';
+
+		$ret .= '</div>';
+
+
+
+		return $ret;
+
+	}
+
+	/**
+	 * This function tries to separate logic from presentation in Appointments::get_timetables()
+	 * It's a first step to move this function to another place so do not use it
+	 */
+	public function _get_timetable_slots( $day_start, $capacity, $schedule_key=false ) {
 		$timetable_key = $day_start . '-' . $capacity;
 		$local_time = current_time( 'timestamp' );
 
@@ -1356,18 +1408,11 @@ class Appointments {
 		$step = apply_filters('app-timetable-step_increment', $step, 'timetable' );
 
 		if ( empty( $step ) || ! is_numeric( $step ) ) {
-		    // If step is null/0 etc we can end up with problems
-            return '';
-        }
+			// If step is null/0 etc we can end up with problems
+			return '';
+		}
 
 		$timetable_key .= '-' . $step . '-' . $this->service;
-
-		// Are we looking to today?
-		// If today is a working day, shows its free times by default
-		if ( date( 'Ymd', $day_start ) == date( 'Ymd', $time ) )
-			$style = '';
-		else
-			$style = ' style="display:none"';
 
 		if ( isset( $this->timetables[ $timetable_key ] ) ) {
 			$data =  $this->timetables[ $timetable_key ];
@@ -1473,40 +1518,13 @@ class Appointments {
 		}
 
 
-
-
 		$this->timetables[ $timetable_key ] = $data;
 
 		// Save timetables only once at the end of the execution
 		//add_action( 'shutdown', array( $this, 'regenerate_timetables' ) );
 		add_action( 'shutdown', array( $this, 'save_timetables' ) );
 
-
-		$ret  = '';
-		$ret .= '<div class="app_timetable app_timetable_'.$day_start.'"'.$style.'>';
-		$ret .= '<div class="app_timetable_title">';
-		$ret .= date_i18n( $this->date_format, $day_start );
-		$ret .= '</div>';
-
-		foreach ( $data as $row ) {
-			if ( 'free' == $row['class'] ) {
-				// We found at least a cell free
-				$this->is_a_timetable_cell_free = true;
-			}
-
-			$ret .= '<div class="app_timetable_cell app_timetable_cell-' . date( 'H-i', $row['ccs'] ) . '  '.$row['class'].'" title="'.esc_attr($row['title']).'">'.
-			        $row['hours']. '<input type="hidden" class="appointments_take_appointment" value="' . $this->pack( $row['ccs'], $row['cce'] ) . '" />';
-
-			$ret .= '</div>';
-		}
-		$ret .= '<div style="clear:both"></div>';
-
-		$ret .= '</div>';
-
-
-
-		return $ret;
-
+		return $data;
 	}
 
 	/**
