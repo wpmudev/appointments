@@ -542,6 +542,27 @@ class App_Timetables_Test extends App_UnitTestCase {
 		$this->assertEquals( 1, $available );
 	}
 
+	function test_get_timetable_slots() {
+		$appointments = appointments();
+		$date_start = strtotime( date( 'Y-m-d 00:00:00', strtotime( 'next Monday', current_time( 'timestamp' ) ) ) );
+
+		$args = $this->factory->service->generate_args();
+		$service_id = $this->factory->service->create_object( $args );
+
+		$worker_args = $this->factory->worker->generate_args();
+		$worker_args['services_provided'] = array( $service_id );
+
+		$worker_id = $this->factory->worker->create_object( $worker_args );
+
+		$open_hours = $this->get_open_wh();
+		appointments_update_worker_working_hours( $worker_id, $open_hours, 'open' );
+
+		$slots = $appointments->_get_timetable_slots( $date_start, appointments_get_service_capacity( $service_id ) );
+		var_dump($slots);
+//		$is_busy = $appointments->is_busy( 1490007600, 1490009400, appointments_get_service_capacity( $service_id ) );
+//		var_dump($is_busy);
+	}
+
 
 	function test_undefined_service_should_be_busy_for_worker() {
 //		$next_monday = strtotime( 'next monday', time() );
@@ -575,6 +596,115 @@ class App_Timetables_Test extends App_UnitTestCase {
 //
 //		$busy = $appointments->is_busy( $from, $to, 1 );
 //		$this->assertFalse( $busy );
+	}
+
+	function get_open_wh() {
+		return array(
+			'Sunday'    =>
+				array(
+					'active' => 'yes',
+					'start'  => '07:00',
+					'end'    => '20:00',
+					'weekday_number' => 7
+				),
+			'Monday'    =>
+				array(
+					'active' => 'yes',
+					'start'  => '10:30',
+					'end'    => '20:00',
+					'weekday_number' => 1
+				),
+			'Tuesday'   =>
+				array(
+					'active' => 'yes',
+					'start'  => '10:30',
+					'end'    => '20:00',
+					'weekday_number' => 2
+				),
+			'Wednesday' =>
+				array(
+					'active' => 'yes',
+					'start'  => '10:30',
+					'end'    => '20:00',
+					'weekday_number' => 3
+				),
+			'Thursday'  =>
+				array(
+					'active' => 'yes',
+					'start'  => '10:30',
+					'end'    => '20:00',
+					'weekday_number' => 4
+				),
+			'Friday'    =>
+				array(
+					'active' => 'yes',
+					'start'  => '10:30',
+					'end'    => '20:00',
+					'weekday_number' => 5
+				),
+			'Saturday'  =>
+				array(
+					'active' => 'yes',
+					'start'  => '10:30',
+					'end'    => '20:00',
+					'weekday_number' => 6
+				)
+		);
+	}
+
+	function get_closed_wh() {
+
+		return array(
+			'Sunday'    =>
+				array(
+					'active' => 'no',
+					'start'  => '11:00',
+					'end'    => '13:00',
+					'weekday_number' => 7
+				),
+			'Monday'    =>
+				array(
+					'active' => 'no',
+					'start'  => '12:00',
+					'end'    => '13:00',
+					'weekday_number' => 1
+				),
+			'Tuesday'   =>
+				array(
+					'active' => 'no',
+					'start'  => '12:00',
+					'end'    => '13:00',
+					'weekday_number' => 2
+				),
+			'Wednesday' =>
+				array(
+					'active' => 'no',
+					'start'  => '12:00',
+					'end'    => '13:00',
+					'weekday_number' => 3
+				),
+			'Thursday'  =>
+				array(
+					'active' => 'no',
+					'start'  => '12:00',
+					'end'    => '13:00',
+					'weekday_number' => 4
+				),
+			'Friday'    =>
+				array(
+					'active' => 'no',
+					'start'  => '12:00',
+					'end'    => '13:00',
+					'weekday_number' => 5
+				),
+			'Saturday'  =>
+				array(
+					'active' => 'no',
+					'start'  => '12:00',
+					'end'    => '13:00',
+					'weekday_number' => 6
+				)
+		);
 	}
 
 }
