@@ -288,7 +288,7 @@ function appointments_get_appointment_by_gcal_id( $gcal_id ) {
  *      @type string         $location       Appointment location. Default empty.
  *      @type string         $gcal_updated   Date when the GCal Event was updated. Default empty.
  *      @type string         $gcal_ID        Gcal ID. Default empty.
- *      @type int            $duration       Duration of the appointment.
+ *      @type int            $duration       Duration of the appointment in minutes.
  * }
  *
  * @return bool|int
@@ -1143,12 +1143,12 @@ function appointments_get_user_appointments( $user_id ) {
 function appointments_clear_appointment_cache( $app_id = false ) {
 	global $wpdb;
 
+	$table = appointments_get_table( 'appointments' );
 	if ( $app_id ) {
 		wp_cache_delete( $app_id, 'app_appointments' );
 		wp_cache_delete( $app_id, 'app_appointments_by_gcal' );
 	}
 	else {
-		$table = appointments_get_table( 'appointments' );
 		$apps = $wpdb->get_results( "SELECT ID, gcal_ID FROM $table" );
 		foreach ( $apps as $app ) {
 			wp_cache_delete( $app->ID, 'app_appointments' );
@@ -1162,6 +1162,7 @@ function appointments_clear_appointment_cache( $app_id = false ) {
 	wp_cache_delete( 'app_get_appointments' );
 	wp_cache_delete( 'app_get_month_appointments' );
 	wp_cache_delete( 'app_working_hours' );
+	wp_cache_delete( 'reserve_apps_by_worker' );
 	//@ TODO: Delete capacity_ cache
 	appointments_delete_timetables_cache();
 }
