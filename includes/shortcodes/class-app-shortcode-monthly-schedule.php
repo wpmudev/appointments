@@ -168,6 +168,9 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 				$args['worker'] = $single_worker;
 				$worker_id = $single_worker;
 			}
+			elseif ( $require_provider && $appointments->worker ) {
+				$worker_id = $appointments->worker;
+			}
 
 			// Force a date
 			if ( $args['date'] && !isset( $_GET["wcalendar"] ) ) {
