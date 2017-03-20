@@ -124,8 +124,9 @@ class Appointments_Google_Calendar {
 
 	public function setup_cron() {
 		add_filter( 'cron_schedules', array( $this, 'cron_schedules' ) );
-
-		if ( 'sync' === $this->get_api_mode() ) {
+		
+		$sync_modes = array( 'sync', 'gcal2app' );
+		if ( in_array( $this->get_api_mode(), $sync_modes ) ) {
 			$scheduled = wp_next_scheduled( 'appointments_gcal_sync' );
 			if ( ! $scheduled ) {
 				wp_schedule_event( current_time( 'timestamp' ) + 600, 'app-gcal', 'appointments_gcal_sync' );
@@ -244,7 +245,8 @@ class Appointments_Google_Calendar {
 		}
 
 		$api_mode = $this->get_api_mode();
-		if ( 'sync' != $api_mode || ! $this->is_connected() || ! $this->api_manager->get_calendar() ) {
+		$sync_modes = array( 'sync', 'gcal2app' );
+		if ( ! in_array( $api_mode, $sync_modes ) || ! $this->is_connected() || ! $this->api_manager->get_calendar() ) {
 			if ( $doing_ajax ) {
 				wp_send_json_error();
 			}
