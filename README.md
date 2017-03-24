@@ -39,3 +39,4 @@ In order to execute tests you'll need to install PHP Unit and MySQL + PHP instal
 2. Execute all tests by using `phpunit`
 
 3. Execute a group tests by using `phpunit --group [group-name]` for example `phpunit --group timetables`
+
