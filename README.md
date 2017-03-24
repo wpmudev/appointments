@@ -36,9 +36,4 @@ All tests are under `tests` folder. It's a good idea to add a test for any refac
 In order to execute tests you'll need to install PHP Unit and MySQL + PHP installed and running. A Vagrant like Varying Vagrant Vagrant box would be the best way to execute the tests 
 1. Execute the script that will download the latest WordPress version and the WordPress Unit Tests Bootstrap `./bin/install-wp-tests.sh [database_name] [database_user] [database_password] localhost latest` 
  
-2. Execute all tests by using `phpunit` 
- 
-3. Execute a group tests by using `phpunit --group [group-name]` for example `phpunit --group timetables` 
-
-
-### Code safe
+2. Execute all tests by using `phpunit` or execute a group tests by using `phpunit --group [group-name]` for example `phpunit --group timetables` 
