@@ -149,20 +149,20 @@ class Appointments_Google_Calendar_Importer {
 		}
 
 
-		$event_start = $event->getStart();
-		$event_start_gmt_date = gmdate( 'Y-m-d H:i:s', strtotime( $event_start->dateTime ) );
-		$event_start_gmt_timestamp = strtotime( $event_start_gmt_date );
-		$event_start_date = get_date_from_gmt( $event_start_gmt_date );
+		$event_start               = $event->getStart();
+		$event_start_datetime      = $event_start->getDateTime();
+		$event_start_gmt_timestamp = strtotime( $event_start->getDateTime() );
+		$event_start_date = get_date_from_gmt( $event_start_datetime );
+
 
 		$event_end = $event->getEnd();
-		$event_end_gmt_date = gmdate( 'Y-m-d H:i:s', strtotime( $event_end->dateTime ) );
-		$event_end_gmt_timestamp = strtotime( $event_end_gmt_date );
+		$event_end_gmt_timestamp = strtotime( $event_end->getDateTime() );
 
 		$event_updated = $event->getUpdated();
 		$event_updated_gmt_date = gmdate( 'Y-m-d H:i:s', strtotime( $event_updated ) );
 		$event_updated_date = get_date_from_gmt( $event_updated_gmt_date );
 
-		$duration = ( strtotime( $event_end_gmt_date ) - strtotime( $event_start_gmt_date ) ) / 60;
+		$duration = ( $event_end_gmt_timestamp - $event_start_gmt_timestamp ) / 60;
 
 		if ( $event_start_gmt_timestamp > $current_gmt_time && $event_end_gmt_timestamp > $current_gmt_time ) {
 			// We can add it

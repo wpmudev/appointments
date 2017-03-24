@@ -1069,6 +1069,7 @@ class Appointments_Google_Calendar {
 			'singleEvents' => apply_filters( 'app_gcal_single_events', true ),
 			'maxResults'   => apply_filters( 'app_gcal_max_results', APP_GCAL_MAX_RESULTS_LIMIT ),
 			'orderBy'      => apply_filters( 'app_gcal_orderby', 'startTime' ),
+			'timeZone' => 'GMT'
 		);
 
 		$events = $this->api_manager->get_events_list( $args );
