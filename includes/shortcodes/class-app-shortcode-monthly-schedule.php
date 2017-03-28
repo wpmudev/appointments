@@ -124,140 +124,146 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 			);
 		}
 
-		public function process_shortcode ($args=array(), $content='') {
-			$appointments = appointments();
-			$options = appointments_get_options();
-
+		public function get_parameters( $args ) {
 			$args = wp_parse_args($args, $this->_defaults_to_args());
-			extract( $args );
 
+			$appointments = appointments();
+
+			$params = array();
 
 			// Force service
-			$service_id = null;
 			if ( $args['service'] ) {
 				// Check if such a service exists
 				if ( ! appointments_get_service( $args['service'] ) ) {
-					return '';
+					return false;
 				}
-				$service_id = $args['service'];
 				$_REQUEST["app_service_id"] = $args['service'];
 			}
 
 			$appointments->get_lsw(); // This should come after Force service
 
-
-			$workers_by_service = appointments_get_workers_by_service( $service_id );
-			$single_worker = false;
+			$workers_by_service = appointments_get_workers_by_service( $appointments->service );
+			$params['single_worker'] = false;
 			if ( 1 === count( $workers_by_service ) ) {
-				$single_worker = $workers_by_service[0]->ID;
+				$params['single_worker'] = $workers_by_service[0]->ID;
 			}
 
 			// Force worker or pick up the single worker
-			$worker_id = 0;
+			$params['worker_id'] = 0;
 			if ( $args['worker'] ) {
 				// Check if such a worker exists
 				if ( ! appointments_is_worker( $args['worker'] ) ) {
 					return '';
 				}
 				$_REQUEST["app_provider_id"] = $args['worker'];
-				$worker_id = $args['worker'];
+				$params['worker_id'] = $args['worker'];
 			}
-			else if ( $single_worker ) {
+			else if ( $params['single_worker'] ) {
 				// Select the only provider if that is the case
-				$_REQUEST["app_provider_id"] = $single_worker;
-				$args['worker'] = $single_worker;
-				$worker_id = $single_worker;
+				$_REQUEST["app_provider_id"] = $params['single_worker'];
+				$args['worker'] = $params['single_worker'];
+				$params['worker_id'] = $params['single_worker'];
 			}
-			elseif ( $require_provider && $appointments->worker ) {
-				$worker_id = $appointments->worker;
+			elseif ( $args['require_provider'] && $appointments->worker ) {
+				$params['worker_id'] = $appointments->worker;
 			}
 
 			// Force a date
 			if ( $args['date'] && !isset( $_GET["wcalendar"] ) ) {
-				$time = $appointments->first_of_month( strtotime( $args['date'], $appointments->local_time ), $args['add'] );
-				$_GET["wcalendar"] = $time;
+				$params['time'] = $appointments->first_of_month( strtotime( $args['date'], $appointments->local_time ), $args['add'] );
+				$_GET["wcalendar"] = $params['time'];
 			}
 			else {
-				if (!empty($_GET['wcalendar_human'])) $_GET['wcalendar'] = strtotime($_GET['wcalendar_human']);
-				if ( isset( $_GET["wcalendar"] ) && (int)$_GET['wcalendar'] )
-					$time = $appointments->first_of_month( (int)$_GET["wcalendar"], $args['add']  );
-				else
-					$time = $appointments->first_of_month( $appointments->local_time, $args['add']  );
+				if ( ! empty( $_GET['wcalendar_human'] ) ) {
+					$_GET['wcalendar'] = strtotime( $_GET['wcalendar_human'] );
+				}
+				if ( isset( $_GET["wcalendar"] ) && (int) $_GET['wcalendar'] ) {
+					$params['time'] = $appointments->first_of_month( (int) $_GET["wcalendar"], $args['add'] );
+				} else {
+					$params['time'] = $appointments->first_of_month( $appointments->local_time, $args['add'] );
+				}
 			}
 
-			$year = date("Y", $time);
-			$month = date("m",  $time);
+			$params['year'] = date("Y", $params['time']);
+			$params['month'] = date("m",  $params['time']);
 
-			if (!empty($title)) {
+			if ( ! empty( $args['title'] ) ) {
 				$replacements = array(
-					date_i18n("F Y",  strtotime("{$year}-{$month}-01")), // START
-					appointments_get_worker_name( $service_id ),
-					$appointments->get_service_name( $service_id ),
+					date_i18n("F Y",  strtotime("{$params['year']}-{$params['month']}-01")), // START
+					appointments_get_worker_name( ( ! empty($_REQUEST['app_provider_id']) ? $_REQUEST['app_provider_id'] : null ) ),
+					$appointments->get_service_name( ( ! empty($_REQUEST['app_service_id']) ? $_REQUEST['app_service_id'] : null ) ),
 				);
-				$title = str_replace(
+				$params['title'] = str_replace(
 					array("START", "WORKER", "SERVICE"),
 					$replacements,
-					$title);
-			} else {
-				$title = '';
-			}
-
-			$has_worker = ! empty( $worker_id );
-			$has_service = ! empty( $require_service ) ? $service_id : false;
-
-
-			$c  = '';
-			$c .= '<div class="appointments-wrapper">';
-
-			if (!$has_worker && !empty($require_provider)) {
-				$c .= !empty($required_message)
-					? $required_message
-					: __('Please, select a service provider.', 'appointments')
-				;
-			} elseif (!$has_service && !empty($require_service)) {
-				$c .= !empty($required_service_message)
-					? $required_service_message
-					: __('Please, select a service.', 'appointments')
-				;
-			} else {
-				$c .= apply_filters('app-shortcodes-monthly_schedule-title', $title, $args);
-
-				if ( is_user_logged_in() || 'yes' != $options["login_required"] ) {
-					$c .= $args['logged'] ? "<div class='appointments-instructions'>{$args['logged']}</div>" : '';
-				} else {
-					$codec = new App_Macro_GeneralCodec;
-					if ( ! $options["accept_api_logins"] ) {
-						//$c .= str_replace( 'LOGIN_PAGE', '<a class="appointments-login_show_login" href="'.site_url( 'wp-login.php').'">'. __('Login','appointments'). '</a>', $args['notlogged'] );
-						$c .= $codec->expand($args['notlogged'], App_Macro_GeneralCodec::FILTER_BODY);
-					} else {
-						$c .= '<div class="appointments-login">';
-						//$c .= str_replace( 'LOGIN_PAGE', '<a class="appointments-login_show_login" href="javascript:void(0)">'. __('Login','appointments'). '</a>', $args['notlogged'] );
-						$c .= $codec->expand($args['notlogged'], App_Macro_GeneralCodec::FILTER_BODY);
-						$c .= '<div class="appointments-login_inner">';
-						$c .= '</div>';
-						$c .= '</div>';
-					}
-				}
-
-				$c .= '<div class="appointments-list">';
-				$cal_args = array(
-					'service_id' => $service_id,
-					'worker_id' => $worker_id,
-					'class' => $args['class'],
-					'long' => $args['long'],
-					'echo' => false,
-					'widget' => $args['widget']
+					$args['title']
 				);
-				$c .= appointments_monthly_calendar( $time, $cal_args );
-				$c .= '</div>';
-
+			} else {
+				$params['title'] = '';
 			}
-			$c .= '</div>'; // .appointments-wrapper
-			$script = '';
 
-			$appointments->add2footer( $script );
+			$params['class'] = $args['class'];
+			$params['long'] = $args['long'];
+			$params['widget'] = $args['widget'];
+			$params['notlogged'] = $args['notlogged'];
+			$params['logged'] = $args['logged'];
+			$params['has_worker'] = ! empty( $params['worker_id'] );
+			$params['has_service'] = ! empty( $require_service ) ? $_REQUEST["app_service_id"] : false;
+			$params['service_id'] = $params['has_service'];
 
-			return $c;
+			return $params;
+		}
+
+		public function process_shortcode ($args=array(), $content='') {
+			$options = appointments_get_options();
+
+			$params = $this->get_parameters( $args );
+			if ( ! $params ) {
+				return '';
+			}
+
+			$codec = new App_Macro_GeneralCodec;
+
+			$cal_args = array(
+				'service_id' => $params['service_id'],
+				'worker_id'  => $params['worker_id'],
+				'class'      => $params['class'],
+				'long'       => $params['long'],
+				'echo'       => false,
+				'widget'     => $params['widget']
+			);
+
+			ob_start();
+			?>
+			<div class="appointments-wrapper">
+				<?php if ( ! $params['has_worker'] && ! empty( $params['require_provider'] ) ): ?>
+					<?php echo ! empty( $params['required_message'] ) ? $params['required_message'] : __( 'Please, select a service provider.', 'appointments' ); ?>
+				<?php elseif ( ! $params['has_service'] && ! empty( $params['require_service'] ) ): ?>
+					<?php echo ! empty( $params['required_service_message'] ) ? $params['required_service_message'] : __( 'Please, select a service.', 'appointments' ); ?>
+				<?php else: ?>
+					<?php echo apply_filters( 'app-shortcodes-monthly_schedule-title', $params['title'], $args ); ?>
+					<?php if ( is_user_logged_in() || 'yes' != $options["login_required"] ): ?>
+						<?php if ( $params['logged'] ): ?>
+							<div class='appointments-instructions'><?php echo $params['logged']; ?></div>
+						<?php endif; ?>
+					<?php else: ?>
+						<?php if ( ! $options["accept_api_logins"] ): ?>
+							<?php echo $codec->expand( $params['notlogged'], App_Macro_GeneralCodec::FILTER_BODY ); ?>
+						<?php else: ?>
+							<div class="appointments-login">
+								<?php echo $codec->expand( $params['notlogged'], App_Macro_GeneralCodec::FILTER_BODY ); ?>
+								<div class="appointments-login_inner">
+								</div>
+							</div>
+						<?php endif; ?>
+					<?php endif; ?>
+					<div class="appointments-list">
+						<?php echo appointments_monthly_calendar( $params['time'], $cal_args ); ?>
+					</div>
+				<?php endif; ?>
+			<?php
+
+			return ob_get_clean();
 		}
 
 		public function get_usage_info () {
