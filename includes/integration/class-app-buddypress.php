@@ -5,18 +5,12 @@ class Appointments_Integration_BuddyPress {
 	private $_bp = false;
 	private $_bp_script = '';
 
-	/**
-	 * @var bool|Appointments
-	 */
-	private $_core = false;
-
 	private static $_bp_ready = false;
 
 	private function __construct () {}
 
 	public function initialize () {
 		global $appointments;
-		$this->_core = $appointments;
 		//add_action('bp_init', array($this->_core, 'cancel'), 99); // Check cancellation of an appointment // Don't double up on this, we're already doing it on init
 	}
 
@@ -42,6 +36,9 @@ class Appointments_Integration_BuddyPress {
      */
 	function bp_init () {
 
+		$options = appointments_get_options();
+		$appointments = appointments();
+
 		$this->_bp = true;
 		self::$_bp_ready = true;
 
@@ -57,18 +54,18 @@ class Appointments_Integration_BuddyPress {
 
 		if (
 				!$user_id || !wp_verify_nonce($_POST['app_bp_settings_submit'],'app_bp_settings_submit')
-				|| $user_id != $_POST["app_bp_settings_user"] || !$this->_core->is_worker($user_id)
-				|| !isset($this->_core->options["allow_worker_wh"]) || 'yes' != $this->_core->options["allow_worker_wh"]
+				|| $user_id != $_POST["app_bp_settings_user"] || !appointments_is_worker($user_id)
+				|| !isset($options["allow_worker_wh"]) || 'yes' != $options["allow_worker_wh"]
 		) {
 			wp_die('You don\'t have the authority to do this.', 'appointments');
 			exit;
 		}
 		// Checks are ok, let's save settings.
-		if ( ! is_object( $this->_core->admin ) ) {
-			$this->_core->load_admin();
+		if ( ! is_object( $appointments->admin ) ) {
+			$appointments->load_admin();
 		}
 
-		$this->_core->admin->user_profile->save_profile( $user_id );
+		$appointments->admin->user_profile->save_profile( $user_id );
 	}
 
 	/**
@@ -77,6 +74,9 @@ class Appointments_Integration_BuddyPress {
      */
 	function bp_template_redirect () {
 		global $bp;
+
+		$appointments = appointments();
+
 		if (!is_object($bp)) return;
 
 		$scheme = is_ssl() ? 'https://' : 'http://';
@@ -90,8 +90,8 @@ class Appointments_Integration_BuddyPress {
 				$("#closed_datepick").datepick({dateFormat: "yyyy-mm-dd",multiSelect: 999, monthsToShow: 2});';
 
 			wp_enqueue_script( 'jquery-ui-datepicker' );
-			wp_enqueue_style("jquery-datepick", $this->_core->plugin_url . "/css/jquery.datepick.css", false, $this->_core->version);
-			wp_enqueue_script("appointments-admin", $this->_core->plugin_url . "/js/admin.js", array('jquery'), $this->_core->version);
+			wp_enqueue_style("jquery-datepick", $appointments->plugin_url . "/css/jquery.datepick.css", false, $appointments->version);
+			wp_enqueue_script("appointments-admin", $appointments->plugin_url . "/js/admin.js", array('jquery'), $appointments->version);
 		}
 	}
 
@@ -118,6 +118,9 @@ class Appointments_Integration_BuddyPress {
      */
 	function setup_nav () {
 		global $bp;
+
+		$options = appointments_get_options();
+
 		bp_core_new_nav_item(array(
 			'name' => __('Appointments', 'appointments'),
 			'slug' => 'appointments',
@@ -141,7 +144,7 @@ class Appointments_Integration_BuddyPress {
 		));
 
 		// Generate this tab only if allowed
-		if (appointments_is_worker($user_id) && isset($this->_core->options["allow_worker_wh"]) && 'yes' == $this->_core->options["allow_worker_wh"]) {
+		if (appointments_is_worker($user_id) && isset($options["allow_worker_wh"]) && 'yes' == $options["allow_worker_wh"]) {
 			bp_core_new_subnav_item(array(
 				'name' => __( 'Appointments Settings', 'appointments' ),
 				'slug' => 'appointment-settings',
@@ -173,7 +176,8 @@ class Appointments_Integration_BuddyPress {
      * Generate content for my apps
      */
 	function screen_content_my_app () {
-		if (isset($this->_core->options["gcal"] ) && 'yes' == $this->_core->options["gcal"]) $gcal = ''; // Default is already enabled
+		$options = appointments_get_options();
+		if (isset($options["gcal"] ) && 'yes' == $options["gcal"]) $gcal = ''; // Default is already enabled
 		else $gcal = ' gcal="0"';
 
 		$user_id = bp_loggedin_user_id();
@@ -191,6 +195,9 @@ class Appointments_Integration_BuddyPress {
      * Generate content for app settings
      */
 	function screen_content_app_settings () {
+		$options = appointments_get_options();
+		$appointments = appointments();
+
 		// In the future we may use this function without BP too
 		if (function_exists('bp_loggedin_user_id')) $user_id = bp_loggedin_user_id();
 		else {
@@ -198,19 +205,19 @@ class Appointments_Integration_BuddyPress {
 			$user_id = $current_user->ID;
 		}
 
-		if ($this->_core->is_worker( $user_id ) && isset($this->_core->options["allow_worker_wh"]) && 'yes' == $this->_core->options["allow_worker_wh"]) {
+		if (appointments_is_worker( $user_id ) && isset($options["allow_worker_wh"]) && 'yes' == $options["allow_worker_wh"]) {
 			// A little trick to pass correct lsw variables to the related function
 			$_REQUEST["app_location_id"] = 0;
 			$_REQUEST["app_provider_id"] = $user_id;
 
-			$this->_core->get_lsw();
+			$appointments->get_lsw();
 
 			$result = array();
-			$result_open = appointments_get_worker_exceptions( $this->_core->worker, 'open', $this->_core->location );
+			$result_open = appointments_get_worker_exceptions( $appointments->worker, 'open', $appointments->location );
 			if ($result_open) $result["open"] = $result_open->days;
 			else $result["open"] = null;
 
-			$result_closed = appointments_get_worker_exceptions( $this->_core->worker, 'closed', $this->_core->location );
+			$result_closed = appointments_get_worker_exceptions( $appointments->worker, 'closed', $appointments->location );
 			if ($result_closed) $result["closed"] = $result_closed->days;
 			else $result["closed"] = null;
 
@@ -220,9 +227,9 @@ class Appointments_Integration_BuddyPress {
 			<div class="standard-form">
 				<form method="post">
 					<h4><?php _e('My Working Hours', 'appointments'); ?></h4>
-					<?php $this->_core->working_hour_form('open'); ?>
+					<?php $appointments->working_hour_form('open'); ?>
 					<h4><?php _e('My Break Hours', 'appointments'); ?></h4>
-					<?php $this->_core->working_hour_form('closed'); ?>
+					<?php $appointments->working_hour_form('closed'); ?>
 
 					<h4><?php _e('My Exceptional Working Days', 'appointments'); ?></h4>
 
