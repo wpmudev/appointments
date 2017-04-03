@@ -102,7 +102,7 @@ class Appointments_Notifications_Confirmation extends Appointments_Notification 
 	 * @param $app_id
 	 * @param $admin_email
 	 *
-	 * @return bool|void
+	 * @return bool
 	 */
 	public function admin( $app_id, $admin_email ) {
 		$appointments = appointments();
@@ -141,7 +141,7 @@ class Appointments_Notifications_Confirmation extends Appointments_Notification 
 		return $result;
 	}
 
-	private function get_admin_template( $app_id ) {
+	public function get_admin_template( $app_id ) {
 		$appointments = appointments();
 
 		$r = appointments_get_appointment( $app_id );
@@ -167,7 +167,7 @@ class Appointments_Notifications_Confirmation extends Appointments_Notification 
 		);
 	}
 
-	private function get_customer_template( $app_id, $email ) {
+	public function get_customer_template( $app_id, $email ) {
 		$appointments = appointments();
 
 		$r = appointments_get_appointment( $app_id );

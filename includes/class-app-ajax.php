@@ -74,15 +74,12 @@ class Appointments_AJAX {
 			wp_send_json_error( esc_js(__('There is an issue with this appointment. Please refresh the page and try again. If problem persists, please contact website admin.','appointments') ) );
 		}
 
-		$appointments = appointments();
-		if ( appointments_update_appointment_status( $app_id, 'removed' ) ) {
-			$appointments->log( sprintf( __('Client %s cancelled appointment with ID: %s','appointments'), $appointments->get_client_name( $app_id ), $app_id ) );
-			appointments_send_cancel_notification( $app_id );
-			do_action('app-appointments-appointment_cancelled', $app_id);
-			wp_send_json_success();
-		}
 
-		wp_send_json_error( esc_js(__('Appointment could not be cancelled. Please refresh the page and try again.','appointments') ) );
+		$result = appointments_cancel_appointment( $app_id );
+		if ( is_wp_error( $result ) ) {
+			wp_send_json_error( esc_js(__('Appointment could not be cancelled. Please refresh the page and try again.','appointments') ) );
+		}
+		wp_send_json_success();
 	}
 
 	/**

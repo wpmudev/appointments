@@ -190,6 +190,28 @@ class Appointments_Appointment {
 		return $email;
 	}
 
+	/**
+	 * Return the cancellation token
+	 */
+	public function get_cancel_token() {
+		$cancel_token = appointments_get_appointment_meta( $this->ID, '_cancel_token' );
+		if ( ! $cancel_token ) {
+			$cancel_token = $this->_generate_cancel_token();
+			appointments_update_appointment_meta( $this->ID, '_cancel_token', $cancel_token );
+		}
+		return $cancel_token;
+	}
+
+	/**
+	 * Generate a unique cancel token
+	 */
+	private function _generate_cancel_token() {
+		$time = microtime();
+		$rand = rand( 0, 256 );
+		$hash = wp_hash( "appointment-$rand-$time" );
+		return $hash;
+	}
+
 }
 
 /**
@@ -1416,4 +1438,56 @@ function appointments_update_appointment_meta( $app_id, $meta_key, $meta_value )
 
 function appointments_delete_appointment_meta( $app_id, $meta_key ) {
 	return delete_metadata( 'app_appointment', $app_id, $meta_key );
+}
+
+/**
+ * Return the cancellation URL
+ *
+ * @param int $app_id
+ *
+ * @return string
+ */
+function appointments_get_cancel_link_url( $app_id ) {
+	$app = appointments_get_appointment( $app_id );
+	if ( ! $app ) {
+		return '';
+	}
+
+	$url = add_query_arg(
+		array(
+			't' => rawurlencode( $app->get_cancel_token() ),
+			'id' => $app_id,
+			'action' => 'cancel-app'
+		),
+		get_home_url()
+	);
+	return $url;
+}
+
+/**
+ * Try to cancel an appointment
+ *
+ * @param $app_id
+ *
+ * @return bool|WP_Error
+ */
+function appointments_cancel_appointment( $app_id ) {
+	$app = appointments_get_appointment( $app_id );
+	if ( ! $app ) {
+		return new WP_Error( 'app-does-not-exist', __( 'The appointment does not exist', 'appointments' ) );
+	}
+
+	if ( 'removed' === $app->status ) {
+		return new WP_Error( 'app-cancelled', __( 'The appointment has been already cancelled', 'appointments' ) );
+	}
+
+	appointments_update_appointment_status( $app_id, 'removed' );
+	appointments_delete_appointment_meta( $app_id, '_cancel_token' );
+
+	$appointments = appointments();
+	$appointments->log( sprintf( __( 'Client %s cancelled appointment with ID: %s', 'appointments' ), $appointments->get_client_name( $app_id ), $app_id ) );
+	appointments_send_cancel_notification( $app_id );
+	do_action( 'app-appointments-appointment_cancelled', $app_id );
+
+	return true;
 }

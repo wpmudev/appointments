@@ -105,3 +105,37 @@ if (!(defined('APP_USE_LEGACY_MP_INTEGRATION') && APP_USE_LEGACY_MP_INTEGRATION)
 	}
 	add_filter('app_mp_order_paid', '_app_mp_record_appointment_order_info', 10, 2);
 }
+
+
+/**
+ * Triggered when a user cancels an appointment from email link
+ */
+function appointments_maybe_cancel_appointment() {
+	if ( isset( $_GET['action'] ) && 'cancel-app' === $_GET['action'] ) {
+		$app_id = absint( $_GET['id'] );
+		$token = rawurldecode( $_GET['t'] );
+
+		$app = appointments_get_appointment( $app_id );
+
+		if ( ! $app ) {
+			wp_die( __( 'The appointment does not exist', 'appointments' ), __( 'Error', 'appointments' ) );
+		}
+
+		if ( $token != $app->get_cancel_token() ) {
+			wp_die( __( 'You are not allowed to perform this action', 'appointments' ) );
+		}
+
+		$options = appointments_get_options();
+		appointments_cancel_appointment( $app_id );
+
+		$url = get_permalink( $options['cancel_page'] );
+		if ( $url ) {
+			wp_redirect( $url );
+			exit;
+		}
+		else {
+			wp_die( __( 'Your appointment has been cancelled', 'appointments' ), __( 'Appointment cancelled', 'appointments' ) );
+		}
+	}
+}
+add_action( 'init', 'appointments_maybe_cancel_appointment' );

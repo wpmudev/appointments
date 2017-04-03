@@ -2547,7 +2547,7 @@ class Appointments {
 	 */
 	function add_cancel_link( $text, $app_id ) {
 	    // Removed due to security issues
-		return str_replace( 'CANCEL', '', $text );
+		return str_replace( 'CANCEL', appointments_get_cancel_link_url( $app_id ), $text );
 	}
 
 /*******************************

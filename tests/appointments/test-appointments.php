@@ -551,6 +551,53 @@ class App_Appointments_Test extends App_UnitTestCase {
 
 	}
 
+	function test_appointments_cancel_token() {
+		$app_id = $this->factory->appointment->create_object( $this->factory->appointment->generate_args() );
+
+		$token1 = appointments_get_appointment( $app_id )->get_cancel_token();
+
+		// it should not be generated twice
+		$token2 = appointments_get_appointment( $app_id )->get_cancel_token();
+		$this->assertEquals( $token1, $token2 );
+	}
+
+	function test_appointments_cancel_appointment() {
+		$app_id = $this->factory->appointment->create_object( $this->factory->appointment->generate_args() );
+		$token1 = appointments_get_appointment( $app_id )->get_cancel_token();
+		appointments_update_appointment_status( $app_id, 'active' );
+
+		appointments_cancel_appointment( $app_id );
+		$app = appointments_get_appointment( $app_id );
+		$this->assertEquals( 'removed', $app->status );
+		$this->assertEquals( '', appointments_get_appointment_meta( $app_id, '_cancel_token') );
+	}
+
+	function test_appointments_maybe_cancel_appointment() {
+		$app_id = $this->factory->appointment->create_object( $this->factory->appointment->generate_args() );
+
+		// Let's try weird characters
+		appointments_update_appointment_meta( $app_id, '_cancel_token', 'foo @+%/' );
+
+		$_GET['t'] = rawurlencode( 'foo @+%/' );
+		$_GET['id'] = $app_id;
+		$_GET['action'] = 'cancel-app';
+
+		try {
+			appointments_maybe_cancel_appointment();
+		}
+		catch ( Exception $e ) {
+			$message = $e->getMessage();
+		}
+
+		$app = appointments_get_appointment( $app_id );
+		$this->assertEquals( 'Your appointment has been cancelled', $message );
+		$this->assertEquals( 'removed', $app->status );
+
+		unset( $_GET['t'] );
+		unset( $_GET['id'] );
+		unset( $_GET['action'] );
+	}
+
 	function test_appointments_cache() {
 		$worker_id_1 = $this->factory->user->create_object( $this->factory->user->generate_args() );
 		$user_id = $this->factory->user->create_object( $this->factory->user->generate_args() );
