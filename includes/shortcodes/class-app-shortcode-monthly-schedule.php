@@ -143,6 +143,7 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 			$appointments->get_lsw(); // This should come after Force service
 
 			$workers_by_service = appointments_get_workers_by_service( $appointments->service );
+			$workers_ids = array_map( function( $w ) { return $w->ID; }, $workers_by_service );
 			$params['single_worker'] = false;
 			if ( 1 === count( $workers_by_service ) ) {
 				$params['single_worker'] = $workers_by_service[0]->ID;
@@ -163,10 +164,20 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 				$_REQUEST["app_provider_id"] = $params['single_worker'];
 				$args['worker'] = $params['single_worker'];
 				$params['worker_id'] = $params['single_worker'];
+			}			
+			elseif( isset( $_REQUEST["app_provider_id"] ) && in_array( $_REQUEST["app_provider_id"], $workers_ids ) ){				
+				$params['worker_id'] = (int)$_REQUEST["app_provider_id"];
+				$args['worker'] = $params['worker_id'];				
 			}
-			elseif ( $args['require_provider'] && $appointments->worker ) {
-				$params['worker_id'] = $appointments->worker;
-			}
+			else{
+				if( is_array( $workers_by_service ) && ! empty( $workers_by_service ) ){
+					$params['worker_id'] = $workers_by_service[0]->ID;
+
+					if( isset( $_REQUEST["app_provider_id"] ) ){
+						$_REQUEST["app_provider_id"] = $_GET["app_provider_id"] = $params['worker_id'];
+					}
+				}	
+ 			}
 
 			// Force a date
 			if ( $args['date'] && !isset( $_GET["wcalendar"] ) ) {
