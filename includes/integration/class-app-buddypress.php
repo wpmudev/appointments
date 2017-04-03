@@ -180,7 +180,8 @@ class Appointments_Integration_BuddyPress {
 
 		do_action('app_before_bp_my_appointments', $user_id);
 
-		if (!$this->_core->is_worker($user_id)) echo do_shortcode("[app_my_appointments ".$gcal."]");
+		if ( ! appointments_is_worker( $user_id ) )
+			echo do_shortcode( "[app_my_appointments " . $gcal . "]" );
 		else echo do_shortcode('[app_my_appointments status="paid,confirmed,pending" _allow_confirm=1 provider=1 '.$gcal.']');
 
 		do_action('app_after_bp_my_appointments', $user_id);
@@ -219,9 +220,9 @@ class Appointments_Integration_BuddyPress {
 			<div class="standard-form">
 				<form method="post">
 					<h4><?php _e('My Working Hours', 'appointments'); ?></h4>
-					<?php echo $this->_core->working_hour_form('open'); ?>
+					<?php $this->_core->working_hour_form('open'); ?>
 					<h4><?php _e('My Break Hours', 'appointments'); ?></h4>
-					<?php echo $this->_core->working_hour_form('closed'); ?>
+					<?php $this->_core->working_hour_form('closed'); ?>
 
 					<h4><?php _e('My Exceptional Working Days', 'appointments'); ?></h4>
 
