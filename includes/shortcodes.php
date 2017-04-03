@@ -82,6 +82,8 @@ add_action( 'admin_head', 'appointments_add_shortcode_button' );
  */
 function appointments_add_shortcode_tinymce_plugin( $plugins ) {
 	$plugins['appointments_shortcodes'] = appointments_plugin_url() . 'admin/js/editor-shortcodes.js';
+	wp_enqueue_script( 'jquery-ui-datepicker' );
+	wp_enqueue_style( 'app-jquery-ui', appointments_plugin_url() . 'admin/css/jquery-ui/jquery-ui.min.css', array(), appointments_get_db_version() );
 	return $plugins;
 }
 

@@ -3,6 +3,8 @@
 
     tinymce.PluginManager.add( 'appointments_shortcodes', function ( editor ) {
 
+        var datepickers = [];
+
         /**
          * Generate the content for a shortcode popup
          *
@@ -48,6 +50,34 @@
                         name: id,
                         label: definition.name,
                         value: definition.value
+                    };
+                    break;
+                }
+                case 'datepicker': {
+                    field = {
+                        type: 'textbox',
+                        name: id,
+                        label: definition.name,
+                        value: definition.value,
+                        onclick: function() {
+                            var id = this._id;
+                            var element = jQuery( '#' + id );
+                            if ( datepickers.indexOf( id ) < 0 ) {
+                                // Initialize Datepicker
+                                datepickers.push( id );
+                                if ( ! element.length || typeof element.datepicker === 'undefined' ) {
+                                    return;
+                                }
+
+                                element.datepicker();
+                                element.datepicker( "option", "dateFormat", 'yy-mm-dd' );
+                            }
+
+                            if ( typeof element.datepicker === 'function' ) {
+                                element.datepicker( 'show' );
+                            }
+
+                        }
                     };
                     break;
                 }

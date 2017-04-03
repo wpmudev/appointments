@@ -33,7 +33,7 @@ if ( ! class_exists( 'App_Shortcode_Pagination' ) ) {
 					'help'    => __( 'If checked, step parameter will mean month, otherwise week. In short, check for monthly schedule.', 'appointments' ),
 				),
 				'date'    => array(
-					'type' => 'text',
+					'type' => 'datepicker',
 					'name' => __( 'Date (YYYY-MM-DD format)', 'appointments' ),
 					'value'   => '',
 					'help'    => __( 'This is only required if this shortcode resides above any schedule shortcodes. Otherwise it will follow date settings of the schedule shortcodes. Default: Current week or month', 'appointments' ),
