@@ -94,3 +94,15 @@ function _appointments_settings_submit_block( $tab, $text = '', $class = 'primar
 		<?php submit_button( $text, $class ); ?>
 	<?php
 }
+
+
+function _appointments_enqueue_jquery_ui_datepicker() {
+	wp_enqueue_script( 'jquery-ui-datepicker' );
+	wp_enqueue_style( 'app-jquery-ui', appointments_plugin_url() . 'admin/css/jquery-ui/jquery-ui.min.css', array(), appointments_get_db_version() );
+	wp_add_inline_style( 'app-jquery-ui', '.ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a {background:#333;color:#FFF}');
+
+	$i18n = array(
+		'weekStart' => appointments_week_start()
+	);
+	wp_localize_script( 'jquery-ui-datepicker', 'AppointmentsDateSettings', $i18n );
+}

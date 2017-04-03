@@ -71,6 +71,7 @@
 
                                 element.datepicker();
                                 element.datepicker( "option", "dateFormat", 'yy-mm-dd' );
+                                element.datepicker( "option", "firstDay", AppointmentsDateSettings.weekStart );
                             }
 
                             if ( typeof element.datepicker === 'function' ) {
