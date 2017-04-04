@@ -188,17 +188,18 @@ EO_MP_JS;
 	}
 
 	/**
-	 * Determine if a page is A+ Product page from the shortcodes used
+	 * Determine if a page is A+ Product page from the product meta
 	 * @param mixed $product Custom post object or ID
 	 * @return bool
 	 */
-	private function _is_app_mp_page ($product) {
-		$product = get_post($product);
-		$result = is_object( $product ) && strpos( $product->post_content, '[app_' ) !== false
-			? true
-			: false
-		;
-		// Maybe required for templates
-		return apply_filters( 'app_is_mp_page', $result, $product );
+	private function _is_app_mp_page ( $product ) {
+
+		if( is_numeric( $product ) ){
+			$product = new MP_Product( $product );
+		}
+
+		//Meta value set in Appointments_Integrations_MarketPress::save_settings()
+		return apply_filters( 'app_is_mp_page', $product->get_meta( 'mp_app_product', false ), $product );
+
 	}
 }
