@@ -90,12 +90,6 @@ class App_Shortcode_ServiceProviders extends App_Shortcode {
 				'value' => 0,
 				'help' => __('Checking this argument means a timetable will not be rendered unless a service has been previously selected.', 'appointments'),
 			),
-			'show_all_by_default' => array(
-				'type'	=> 'checkbox',
-				'name'	=> __('Show all providers by default', 'appointments'),
-				'value'	=> 0,
-				'help'	=> __( 'When no servive selected, show all providers instead of the providers of first service', 'appointments')
-			),			
 			'_noscript' => array('value' => 0),
 
 		);
@@ -108,77 +102,29 @@ class App_Shortcode_ServiceProviders extends App_Shortcode {
 	public function process_shortcode ($args=array(), $content='') {
 		extract(wp_parse_args($args, $this->_defaults_to_args()));
 
-		global $wpdb, $appointments;	
+		if (!empty($require_service) && empty($service) && empty($_REQUEST['app_service_id'])) return $content;
 
-		$workers = array();
-		$selected_worker_id = isset( $_REQUEST['app_provider_id'] ) ? (int)$_REQUEST['app_provider_id'] : false;	
-
-		if( ! $service ){
-			$service = null;
-			if( isset( $_REQUEST["app_service_id"] ) ){
-				$service = (int)$_REQUEST["app_service_id"];
-				if ( ! appointments_get_service( $service ) ) {
-					return '';
-				}
-			}
-		}
-		
+		global $wpdb, $appointments;
 		$appointments->get_lsw();
 
-		if ( ! empty( $require_service ) && empty( $service ) ){
-			//If service required for provider, make sure the calendar doesn't display.
-			//Differently we will end up having an available calendar, but instead of the service provider dropdown it will ask to select a service
-			$_REQUEST["app_service_id"] = $_GET["app_service_id"] = 0;
-			$_REQUEST["app_provider_id"] = $_GET["app_provider_id"] = 0;			
-
-			return !empty($required_message)
-				? $required_message
-				: __('Please, select a service first.', 'appointments')
-			;			
-		}
-
-		if ( !trim( $order_by ) ){
+		if ( !trim( $order_by ) )
 			$order_by = 'ID';
-		}
 
 
 		if ( !$service ) {
-			if ( isset( $_REQUEST["app_service_id"] ) ){
-				$service = (int) $_REQUEST['app_service_id'];
-				$workers = appointments_get_workers_by_service( $service, $order_by ); // Select only providers that can give this service
-			}
-			else{
-
-				if( ! empty( $show_all_by_default ) ){
-					$workers = appointments_get_workers( array( 'orderby' => $order_by ) );	
-					$service = 0;
-				}
-				else{
-					$service = appointments_get_services_min_id();
-					$workers = appointments_get_workers_by_service( $service, $order_by );					
-				}
-
-				if( $selected_worker_id ){
-					$selected_worker_services = appointments_get_worker_services( $selected_worker_id );
-					if( is_array( $selected_worker_services ) && ! empty( $selected_worker_services ) ){
-						$service = $selected_worker_services[0]->ID;
-						$_REQUEST["app_service_id"] = $service;
-					}
-				}
-			}
+			if ( 0 == $appointments->service )
+				$workers = appointments_get_workers( array( 'orderby' => $order_by ) );
+			else
+				$workers = appointments_get_workers_by_service( $appointments->service, $order_by ); // Select only providers that can give this service
 		}
-		else{
+		else
 			$workers = appointments_get_workers_by_service( $service, $order_by );
-		}
 
 		$workers = apply_filters( 'app_workers', $workers );
 
 		// If there are no workers do nothing
-		if ( !$workers || empty( $workers) ){
+		if ( !$workers || empty( $workers) )
 			return;
-		}
-
-		//$selected_worker_id = $appointments->worker ? $appointments->worker : $workers[0]->ID;		
 
 		$script ='';
 		$s = $e = '';
@@ -191,13 +137,12 @@ class App_Shortcode_ServiceProviders extends App_Shortcode {
 		$s .= '<div class="app_workers_dropdown_select">';
 		$s .= '<select name="app_select_workers" class="app_select_workers">';
 		// Do not show "Anyone" if there is only ONE provider
-		if ( 1 != count( $workers ) ){
+		if ( 1 != count( $workers ) )
 			$s .= '<option value="0">'. $empty_option . '</option>';
-		}
 
 		foreach ( $workers as $worker ) {
 			$worker_description = '';
-			if ( $selected_worker_id == $worker->ID || 1 == count( $workers ) ) {
+			if ( $appointments->worker == $worker->ID || 1 == count( $workers ) ) {
 				$d = '';
 				$sel = ' selected="selected"';
 			}
@@ -263,5 +208,3 @@ class App_Shortcode_ServiceProviders extends App_Shortcode {
 		return $s;
 	}
 }
-
-
