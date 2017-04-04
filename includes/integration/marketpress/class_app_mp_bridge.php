@@ -20,6 +20,9 @@ class App_MP_Bridge {
 
 		add_action( 'mp_order_order_paid', array( $this, 'mp_product_order_paid' ) );
 		add_filter( 'mp_cart/column_html', array( $this, 'filter_cart_column' ), 10, 4 );
+
+		add_filter( 'mp_buy_button_tag', array( $this, 'display_buy_now_button' ), 10, 5 );
+		add_filter( 'mp_product/display_price', array( $this, 'display_price' ), 10, 3 );
 	}
 
 	public function filter_product ($html, $product_id) {
@@ -131,6 +134,46 @@ class App_MP_Bridge {
 			}
 			do_action('app_mp_order_paid', $aid, $order);
 		}
+	}
+
+	public function display_buy_now_button( $button, $product_id, $context, $selected_atts, $no_single ){
+
+		if( ! $this->_is_app_mp_page( $product_id ) ){
+			return $button;
+		}
+
+		if( ! $no_single ){
+			return;
+		}
+
+		$button = '<a class="mp_button mp_button-buynow" href="' . get_permalink( $product_id ) . '">' . __( 'Details', 'appointments' ) . '</a>';
+
+		$display_buy_now_button = apply_filters( 'app_product/display_buy_now_button', true, $button, $product_id, $no_single );
+
+		if( $display_buy_now_button ){
+			return $button;
+		}
+
+		return '';
+
+	}
+
+	public function display_price( $snippet, $price, $product_id ){
+
+		if( ! $this->_is_app_mp_page( $product_id ) ){
+			return $snippet;
+		}
+
+		$display_price = ( isset( $price['lowest'] ) && $price['lowest'] > 0 ) ? true : false;
+
+		$display_price = apply_filters( 'app_product/dipsplay_price', $display_price, $product_id, $price );
+
+		if( $display_price ){
+			return $snippet;
+		}
+
+		return '';
+
 	}
 
 	private function _add_variation ($app_id, $post_id, $service, $worker, $start, $end) {
