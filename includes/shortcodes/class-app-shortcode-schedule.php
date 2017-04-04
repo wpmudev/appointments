@@ -202,12 +202,12 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 		$c = '';
 		$c .= '<div class="appointments-wrapper">';
 
-		if ( ! $has_worker && ! empty( $require_provider ) ) {
+		if ( ! $has_worker && ! empty( $args['require_provider'] ) ) {
 			$c .= ! empty( $required_message )
 				? $required_message
 				: __( 'Please, select a service provider.', 'appointments' );
-		} elseif ( ! $has_service && ! empty( $require_service ) ) {
-			$c .= ! empty( $required_service_message )
+		} elseif ( ! $has_service && ! empty( $args['require_service'] ) ) {
+			$c .= ! empty( $args['required_service_message'] )
 				? $required_service_message
 				: __( 'Please, select a service.', 'appointments' );
 		} else {
