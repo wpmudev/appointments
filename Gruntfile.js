@@ -42,6 +42,7 @@ module.exports = function(grunt) {
                     '**',
                     '!npm-debug.log',
                     '!node_modules/**',
+                    '!bower.json',
                     '!build/**',
                     '!bin/**',
                     '!.git/**',

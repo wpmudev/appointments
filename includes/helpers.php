@@ -308,6 +308,8 @@ function apppointments_is_range_busy( $start, $end, $args = array() ) {
 		}
 	}
 
+
+
 	// If we're here, no worker is set or (s)he's not busy by default. Let's go for quick filter trip.
 	$is_busy = apply_filters( 'app-is_busy', false, $period );
 	if ( $is_busy ) {

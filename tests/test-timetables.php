@@ -638,6 +638,71 @@ class App_Timetables_Test extends App_UnitTestCase {
 		}
 	}
 
+	/**
+	 * Bug: https://app.asana.com/0/211855939023775/297025427731612
+	 *
+	 * @group 211855939023775
+	 */
+	function test_211855939023775_297025427731612() {
+		$options = appointments_get_options();
+		$options['min_time'] = 60;
+		appointments_update_options( $options );
+		$appointments = appointments();
+
+		$args = $this->factory->service->generate_args();
+		$args['duration'] = 60;
+		$args['capacity'] = 2;
+		$service_id = $this->factory->service->create_object( $args );
+		// Delete default service
+		foreach ( appointments_get_services() as $service ) {
+			if ( $service->ID != $service_id ) {
+				appointments_delete_service( $service->ID );
+			}
+		}
+
+		$args = $this->factory->worker->generate_args();
+		$args['services_provided'] = array( $service_id );
+		$worker_id_1 = $this->factory->worker->create_object( $args );
+
+		$args = $this->factory->worker->generate_args();
+		$args['services_provided'] = array( $service_id );
+		$worker_id_2 = $this->factory->worker->create_object( $args );
+
+		$open_hours = $this->get_open_wh();
+		$closed_hours = $this->get_closed_wh();
+		appointments_update_worker_working_hours( 0, $open_hours, 'open' );
+		appointments_update_worker_working_hours( 0, $closed_hours, 'closed' );
+
+		$next_monday = strtotime( date( 'Y-m-d 00:00:00', strtotime( 'next Monday', current_time( 'timestamp' ) ) ) );
+		$next_moday_at_1130 = strtotime( date( 'Y-m-d 11:30:00', $next_monday ) );
+
+		$appointment_args = $this->factory->appointment->generate_args();
+		$appointment_args['status'] = 'confirmed';
+		$appointment_args['service'] = $service_id;
+		$appointment_args['worker'] = $worker_id_1;
+		$appointment_args['date'] = $next_moday_at_1130;
+		$app_id_1 = $this->factory->appointment->create_object( $appointment_args );
+
+		// As service capacity is 2, the slot should still be free
+//		$next_monday_slots = $appointments->_get_timetable_slots( $next_monday,1 );
+//		$next_monday_at_1130_slot = wp_list_filter( $next_monday_slots, array( 'ccs' => $appointment_args['date'] ) );
+//		$next_monday_at_1130_slot = current( $next_monday_at_1130_slot );
+//		$this->assertEquals( 'free', $next_monday_at_1130_slot['class'] );
+
+		$appointment_args['worker'] = $worker_id_2;
+		$app_id_2 = $this->factory->appointment->create_object( $appointment_args );
+
+		$is_busy = apppointments_is_range_busy( $appointment_args['date'] , $appointment_args['date'] + 3600 );
+		var_dump($is_busy );
+
+		// Another appointment for that time should put the slot as busy
+//		$next_monday_slots = $appointments->_get_timetable_slots( $next_monday,1 );
+////		var_dump($next_monday_slots);
+//		$next_monday_at_1130_slot = wp_list_filter( $next_monday_slots, array( 'ccs' => $appointment_args['date'] ) );
+//		$next_monday_at_1130_slot = current( $next_monday_at_1130_slot );
+//		$this->assertEquals( 'busy', $next_monday_at_1130_slot['class'] );
+	}
+
 
 	function test_undefined_service_should_be_busy_for_worker() {
 //		$next_monday = strtotime( 'next monday', time() );
