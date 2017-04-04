@@ -4,8 +4,12 @@
   "main": "appointments.php",
   "projectEditUrl": "https://premium.wpmudev.org/wp-admin/edit.php?post_type=project&page=projects-manage&manage_files=679841",
   "description": "",
+  "scripts": {
+    "postinstall": "bower update"
+  },
   "dependencies": {},
   "devDependencies": {
+    "bower": "^1.8.0",
     "grunt": "~0.4.5",
     "grunt-checktextdomain": "^0.1.1",
     "grunt-contrib-clean": "~0.5.0",

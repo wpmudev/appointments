@@ -1,7 +1,7 @@
 # Appointments +
 
 ## Install
-You need Composer and nodejs + npm installed
+You need nodejs + npm installed
 - `npm install`
 
 ## Branches

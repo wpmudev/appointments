@@ -1195,7 +1195,7 @@ class Appointments {
 			'text' => $text,
 			'dates' => $gmt_start . "/" . $gmt_end,
 			'sprop' => 'website:' . home_url(),
-			'location' => $location
+			'location' => rawurlencode( $location )
 		);
 
 		return add_query_arg(

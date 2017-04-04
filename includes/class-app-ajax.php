@@ -285,7 +285,8 @@ class Appointments_AJAX {
 	 */
 	function post_confirmation() {
 		global $appointments;
-		if (!$appointments->check_spam()) {
+		$check_spam = $appointments->check_spam();
+		if (! $check_spam) {
 			die(json_encode(array(
 				"error" => apply_filters(
 					'app_spam_message',
@@ -882,7 +883,8 @@ class Appointments_AJAX {
 			: App_Template::get_currency_symbol('USD')
 		;
 
-		if ($appointments->is_busy($start,  $end, $appointments->get_capacity())) {
+		$is_busy = $appointments->is_busy($start,  $end, $appointments->get_capacity());
+		if ( $is_busy ) {
 			die(json_encode(array(
 				"error" => apply_filters(
 					'app_booked_message',

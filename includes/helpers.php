@@ -757,3 +757,14 @@ function appointments_get_price( $service_id, $worker_id ) {
 	$worker_price = ( $worker && $worker->price ) ? $worker->price : 0;
 	return $service->price + $worker_price;
 }
+
+
+/**
+ * Enqueue SweetAlert styles/scripts
+ *
+ * @internal
+ */
+function _appointments_enqueue_sweetalert() {
+	wp_enqueue_style( 'app-sweetalert', appointments_plugin_url() . 'bower_components/sweetalert/dist/sweetalert.css' );
+	wp_enqueue_script( 'app-sweetalert', appointments_plugin_url() . 'bower_components/sweetalert/dist/sweetalert.min.js' );
+}

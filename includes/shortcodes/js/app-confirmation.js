@@ -5,7 +5,6 @@ Appointments.shortcodes = Appointments.shortcodes || {};
 
 
 jQuery( document).ready( function( $ ) {
-
     Appointments.shortcodes.confirmation = {
         init: function() {
             this.strings = AppShortcodeConfirmation;
@@ -61,7 +60,7 @@ jQuery( document).ready( function( $ ) {
                 $(".wait_img").remove();
 
                 if ( response && response.error ) {
-                    alert(response.error);
+                    swal(AppShortcodeConfirmation.errorTitle, response.error, 'error');
                 }
                 else {
                     self.$confirmationWrapper.show();
@@ -144,36 +143,41 @@ jQuery( document).ready( function( $ ) {
 
             if ( AppShortcodeConfirmation.askName ) {
                 if ($(".appointments-name-field-entry").val() == "") {
-                    alert(app_warning_text);
+                    swal(AppShortcodeConfirmation.errorTitle, app_warning_text, 'error' );
                     $(".appointments-name-field-entry").focus();
+                    $(".wait_img").remove();
                     return false;
                 }
             }
             if ( AppShortcodeConfirmation.askEmail ) {
                 if ($(".appointments-email-field-entry").val() == "") {
-                    alert(app_warning_text);
+                    swal(AppShortcodeConfirmation.errorTitle, app_warning_text, 'error' );
                     $(".appointments-email-field-entry").focus();
+                    $(".wait_img").remove();
                     return false;
                 }
             }
             if ( AppShortcodeConfirmation.askPhone ) {
                 if ($(".appointments-phone-field-entry").val() == "") {
-                    alert(app_warning_text);
+                    swal(AppShortcodeConfirmation.errorTitle, app_warning_text, 'error' );
                     $(".appointments-phone-field-entry").focus();
+                    $(".wait_img").remove();
                     return false;
                 }
             }
             if ( AppShortcodeConfirmation.askAddress ) {
                 if ($(".appointments-address-field-entry").val() == "") {
-                    alert(app_warning_text);
+                    swal(AppShortcodeConfirmation.errorTitle, app_warning_text, 'error' );
                     $(".appointments-address-field-entry").focus();
+                    $(".wait_img").remove();
                     return false;
                 }
             }
             if ( AppShortcodeConfirmation.askCity ) {
                 if ($(".appointments-city-field-entry").val() == "") {
-                    alert(app_warning_text);
+                    swal(AppShortcodeConfirmation.errorTitle, app_warning_text, 'error' );
                     $(".appointments-city-field-entry").focus();
+                    $(".wait_img").remove();
                     return false;
                 }
             }
@@ -181,22 +185,36 @@ jQuery( document).ready( function( $ ) {
             $.post(AppShortcodeConfirmation.ajaxurl, post_data, function(response) {
                 $(".wait_img").hide();
                 if ( response && response.error ) {
-                    alert(response.error);
+                    swal({
+                        title:AppShortcodeConfirmation.errorTitle,
+                        text: response.error,
+                        type: 'error'
+                    }, function() {
+                        $(document).trigger("app-confirmation-response_received", [response]);
+                    });
                 }
                 else if ( response && ( response.refresh=="1" || response.price==0 ) ) {
-                    alert(app_confirmation_text);
-                    if ( response.gcal_url != "" ) {
-                        if ( response.gcal_same_window ) {
-                            window.open(response.gcal_url,"_self");
+                    swal({
+                        title: app_confirmation_text,
+                        type: 'success'
+                    }, function() {
+                        debugger;
+                        if ( response.gcal_url != "" ) {
+                            if ( response.gcal_same_window ) {
+                                window.open(response.gcal_url,"_self");
+                            }
+                            else {
+                                window.open(response.gcal_url,"_blank");
+                                window.location.href=app_location();
+                            }
                         }
                         else {
-                            window.open(response.gcal_url,"_blank");
                             window.location.href=app_location();
                         }
-                    }
-                    else {
-                        window.location.href=app_location();
-                    }
+                        $(document).trigger("app-confirmation-response_received", [response]);
+                    });
+
+
                 }
                 else if ( response ) {
                     $(".appointments-paypal").find(".app_amount").val(response.price);
@@ -224,11 +242,19 @@ jQuery( document).ready( function( $ ) {
                     else {
                         $(".appointments-paypal").show();
                     }
+                    $(document).trigger("app-confirmation-response_received", [response]);
                 }
                 else{
-                    alert( self.strings.connectionErrorText );
+                    swal({
+                        title:AppShortcodeConfirmation.errorTitle,
+                        text: self.strings.connectionErrorText,
+                        type: 'error'
+                    }, function() {
+                        $(document).trigger("app-confirmation-response_received", [response]);
+                    });
+
                 }
-                $(document).trigger("app-confirmation-response_received", [response]);
+
             },"json");
         }
     };

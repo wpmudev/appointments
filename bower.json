@@ -1,0 +1,20 @@
+{
+  "name": "appointments",
+  "description": "",
+  "main": "appointments.php",
+  "authors": [
+    "WPMU DEV"
+  ],
+  "license": "GPLv2",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "sweetalert": "^1.1.3"
+  }
+}

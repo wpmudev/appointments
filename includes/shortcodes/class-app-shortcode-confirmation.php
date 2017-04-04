@@ -215,7 +215,8 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 		$ret_confirmation_fields = apply_filters( 'app_confirmation_fields', $ret_confirmation_fields );
 		$ret = $ret . $ret_confirmation_fields;
 
-		wp_enqueue_script( 'app-shortcode-confirmation', appointments_plugin_url() . 'includes/shortcodes/js/app-confirmation.js', array( 'jquery' ) );
+		_appointments_enqueue_sweetalert();
+		wp_enqueue_script( 'app-shortcode-confirmation', appointments_plugin_url() . 'includes/shortcodes/js/app-confirmation.js', array( 'jquery', 'app-sweetalert' ) );
 
 		$i10n = array(
 			'waitingGif' => appointments_plugin_url() . 'images/waiting.gif',
@@ -232,7 +233,8 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 			'askGCal' => isset( $appointments->options["gcal"] ) && 'yes' == $appointments->options["gcal"],
 			'warningText' => esc_js( $args['warning_text'] ),
 			'confirmationText' => esc_js( $args['confirm_text'] ),
-			'connectionErrorText' => esc_js( __('A connection problem occurred. Please try again.','appointments') )
+			'connectionErrorText' => esc_js( __('A connection problem occurred. Please try again.','appointments') ),
+			'errorTitle' => esc_js( __( 'Error', 'appointments' ) )
 		);
 		wp_localize_script( 'app-shortcode-confirmation', 'AppShortcodeConfirmation', $i10n );
 
