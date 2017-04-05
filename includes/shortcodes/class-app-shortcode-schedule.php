@@ -145,6 +145,7 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 
 
 		$workers_by_service = appointments_get_workers_by_service( $service_id );
+		$workers_ids = array_map( function( $w ) { return $w->ID; }, $workers_by_service );
 		$single_worker = false;
 		if ( 1 === count( $workers_by_service ) ) {
 			$single_worker = $workers_by_service[0]->ID;
@@ -157,11 +158,24 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 			}
 			$worker_id = absint( $args['worker'] );
 			$_REQUEST["app_provider_id"] = $args['worker'];
-		} else if ( $single_worker ) {
+		}
+		elseif ( $single_worker ) {
 			// Select the only provider if that is the case
 			$_REQUEST["app_provider_id"] = $single_worker;
 			$args['worker']              = $single_worker;
 			$worker_id = absint( $args['worker'] );
+		}
+		elseif( isset( $_REQUEST["app_provider_id"] ) && in_array( $_REQUEST["app_provider_id"], $workers_ids ) ){
+			$worker_id = (int)$_REQUEST["app_provider_id"];
+			$args['worker'] = $worker_id;
+		}
+		else{
+			if( is_array( $workers_by_service ) && ! empty( $workers_by_service ) ){
+				$worker_id = $workers_by_service[0]->ID;
+				if( isset( $_REQUEST["app_provider_id"] ) ){
+					$_REQUEST["app_provider_id"] = $_GET["app_provider_id"] = $worker_id;
+				}
+			}
 		}
 
 		// Force a date
