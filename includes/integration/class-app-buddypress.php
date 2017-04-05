@@ -55,7 +55,7 @@ class Appointments_Integration_BuddyPress {
 		if (
 				!$user_id || !wp_verify_nonce($_POST['app_bp_settings_submit'],'app_bp_settings_submit')
 				|| $user_id != $_POST["app_bp_settings_user"] || !appointments_is_worker($user_id)
-				|| !isset($options["allow_worker_wh"]) || 'yes' != $options["allow_worker_wh"]
+				|| !isset($options["allow_worker_confirm"]) || 'yes' != $options["allow_worker_confirm"]
 		) {
 			wp_die('You don\'t have the authority to do this.', 'appointments');
 			exit;
