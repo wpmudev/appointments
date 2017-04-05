@@ -25,6 +25,9 @@ class Appointments_Google_Calendar {
 	public $worker_id = false;
 
 	public function __construct() {
+		if ( ! apply_filters( 'appointments_load_gcal', true ) ) {
+			return;
+		}
 		$appointments = appointments();
 
 		// Try to start a session. If cannot, log it.
