@@ -683,24 +683,23 @@ class App_Timetables_Test extends App_UnitTestCase {
 		$appointment_args['date'] = $next_moday_at_1130;
 		$app_id_1 = $this->factory->appointment->create_object( $appointment_args );
 
+		$_GET['service'] = $service_id;
+		$_REQUEST["app_service_id"] = $service_id;
+
 		// As service capacity is 2, the slot should still be free
-//		$next_monday_slots = $appointments->_get_timetable_slots( $next_monday,1 );
-//		$next_monday_at_1130_slot = wp_list_filter( $next_monday_slots, array( 'ccs' => $appointment_args['date'] ) );
-//		$next_monday_at_1130_slot = current( $next_monday_at_1130_slot );
-//		$this->assertEquals( 'free', $next_monday_at_1130_slot['class'] );
+		$next_monday_slots = $appointments->_get_timetable_slots( $next_monday,1 );
+		$next_monday_at_1130_slot = wp_list_filter( $next_monday_slots, array( 'ccs' => $appointment_args['date'] ) );
+		$next_monday_at_1130_slot = current( $next_monday_at_1130_slot );
+		$this->assertEquals( 'free', $next_monday_at_1130_slot['class'] );
 
 		$appointment_args['worker'] = $worker_id_2;
 		$app_id_2 = $this->factory->appointment->create_object( $appointment_args );
 
-		$is_busy = apppointments_is_range_busy( $appointment_args['date'] , $appointment_args['date'] + 3600 );
-		var_dump($is_busy );
-
 		// Another appointment for that time should put the slot as busy
-//		$next_monday_slots = $appointments->_get_timetable_slots( $next_monday,1 );
-////		var_dump($next_monday_slots);
-//		$next_monday_at_1130_slot = wp_list_filter( $next_monday_slots, array( 'ccs' => $appointment_args['date'] ) );
-//		$next_monday_at_1130_slot = current( $next_monday_at_1130_slot );
-//		$this->assertEquals( 'busy', $next_monday_at_1130_slot['class'] );
+		$next_monday_slots = $appointments->_get_timetable_slots( $next_monday,1 );
+		$next_monday_at_1130_slot = wp_list_filter( $next_monday_slots, array( 'ccs' => $appointment_args['date'] ) );
+		$next_monday_at_1130_slot = current( $next_monday_at_1130_slot );
+		$this->assertEquals( 'busy', $next_monday_at_1130_slot['class'] );
 	}
 
 

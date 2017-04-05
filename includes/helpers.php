@@ -37,6 +37,8 @@ function appointments_get_db_version() {
 }
 
 function appointments_delete_timetables_cache() {
+	$appointments = appointments();
+	$appointments->timetables = array();
 	delete_transient( 'app_timetables' );
 }
 
