@@ -27,6 +27,34 @@ class App_Schedule_Durations {
 		add_filter('app-options-before_save', array($this, 'save_settings'));
 
 		add_action( 'appointments_default_options', array( $this, 'default_options' ) );
+
+		add_filter( 'appointments_use_legacy_duration_calculus', array( $this, 'apply_use_legacy_duration' ), 1 );
+		add_filter( 'appointments_use_legacy_break_times_padding_calculus', array( $this, 'apply_use_break_times_padding_calculus' ), 1 );
+		add_filter( 'appointments_use_legacy_boundaries_padding_calculus', array( $this, 'apply_use_boundaries_padding_calculus' ), 1 );
+	}
+
+	public function apply_use_legacy_duration( $value ) {
+		$options = appointments_get_options();
+		if ( 'legacy' === $options['duration_calculus'] ) {
+			return true;
+		}
+		return $value;
+	}
+
+	public function apply_use_break_times_padding_calculus( $value ) {
+		$options = appointments_get_options();
+		if ( 'legacy' != $options['breaks_calculus'] ) {
+			return true;
+		}
+		return $value;
+	}
+
+	public function apply_use_boundaries_padding_calculus( $value ) {
+		$options = appointments_get_options();
+		if ( 'legacy' === $options['boundaries_calculus'] ) {
+			return true;
+		}
+		return $value;
 	}
 
 
@@ -49,19 +77,16 @@ class App_Schedule_Durations {
 
 		if ( ! defined( 'APP_USE_LEGACY_DURATION_CALCULUS' ) ) {
 			if ( 'legacy' === $options['duration_calculus'] ) {
-				define( 'APP_USE_LEGACY_DURATION_CALCULUS', true, true );
 				$this->_duration_flag_changes_applied = true;
 			}
 		}
 		if ( ! defined( 'APP_USE_LEGACY_BOUNDARIES_CALCULUS' ) ) {
 			if ( 'legacy' === $options['boundaries_calculus'] ) {
-				define( 'APP_USE_LEGACY_BOUNDARIES_CALCULUS', true, true );
 				$this->_boundaries_flag_changes_applied = true;
 			}
 		}
 		if ( ! defined( 'APP_BREAK_TIMES_PADDING_CALCULUS' ) ) {
 			if ( 'legacy' != $options['breaks_calculus'] ) {
-				define( 'APP_BREAK_TIMES_PADDING_CALCULUS', true, true );
 				$this->_breaks_flag_changes_applied = true;
 			}
 		}
@@ -101,7 +126,8 @@ class App_Schedule_Durations {
 		echo '<td colspan="2">';
 		
 		// Duration
-		if (defined('APP_USE_LEGACY_DURATION_CALCULUS') && !$this->_duration_flag_changes_applied) {
+		if (defined('APP_USE_LEGACY_DURATION_CALCULUS')) {
+			// User defined
 			echo '<div class="error below-h2">' .
 				'<p>' . __('Your duration calculus will be determined by the define value.', 'appointments') . '</p>' .
 			'</div>';
@@ -121,7 +147,7 @@ class App_Schedule_Durations {
 		}
 		// Boundaries
 		echo '<h4>' . __('Boundaries detection', 'appointments') . '</h4>';
-		if (defined('APP_USE_LEGACY_BOUNDARIES_CALCULUS') && !$this->_boundaries_flag_changes_applied) {
+		if (defined('APP_USE_LEGACY_BOUNDARIES_CALCULUS')) {
 			echo '<div class="error below-h2">' .
 				'<p>' . __('Your boundaries calculus will be determined by the define value.', 'appointments') . '</p>' .
 			'</div>';
@@ -141,7 +167,8 @@ class App_Schedule_Durations {
 		}
 		// Break times
 		echo '<h4>' . __('Break times calculus', 'appointments') . '</h4>';
-		if (defined('APP_BREAK_TIMES_PADDING_CALCULUS') && !$this->_breaks_flag_changes_applied) {
+		if (defined('APP_BREAK_TIMES_PADDING_CALCULUS')) {
+			// User defined
 			echo '<div class="error below-h2">' .
 				'<p>' . __('Your break times calculus will be determined by the define value.', 'appointments') . '</p>' .
 			'</div>';

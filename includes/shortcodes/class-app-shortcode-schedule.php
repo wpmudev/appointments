@@ -123,7 +123,7 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 		$args = wp_parse_args( $args, $this->_defaults_to_args() );
 
 		$service_id = isset( $_REQUEST["app_service_id"] ) ? absint( $_REQUEST["app_service_id"] ) : 0;
-		if ( appointments_get_services_min_id() ) {
+		if ( appointments_get_services_min_id() && ! $service_id ) {
 			$service_id = appointments_get_services_min_id();
 		}
 
@@ -176,7 +176,7 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 			}
 		}
 
-		$slots = appointments_get_weekly_schedule_slots( $time );
+		$slots = appointments_get_weekly_schedule_slots( $time, $service_id, $worker_id, $location_id );
 
 		if ( '' != $args['title'] ) {
 			$start_day = current( $slots['the_week'] );

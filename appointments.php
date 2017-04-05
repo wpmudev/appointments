@@ -1408,7 +1408,7 @@ class Appointments {
 		} else {
 			$start_unpacked_days = array();
 		}
-		if ( appointments_use_break_times_padding_calculus() ) {
+		if ( appointments_use_legacy_break_times_padding_calculus() ) {
 			$break_result = appointments_get_worker_working_hours( 'closed', $this->worker, $this->location );
 			$break_times = $break_result->hours;
 		} else {
@@ -1454,7 +1454,7 @@ class Appointments {
 				}
 // Breaks are not behaving like paddings, which is to be expected.
 // This fix (2) will force them to behave more like paddings
-				if (!empty($break_times[$this_day_key]['active']) && appointments_use_break_times_padding_calculus() ) {
+				if ( !empty($break_times[$this_day_key]['active']) && appointments_use_legacy_break_times_padding_calculus() ) {
 					$active = $break_times[$this_day_key]['active'];
 					$break_starts = $break_times[$this_day_key]['start'];
 					$break_ends = $break_times[$this_day_key]['end'];

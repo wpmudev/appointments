@@ -76,4 +76,5 @@ function appointments_get_default_options() {
 
 function appointments_update_options( $new_options ) {
 	update_option( 'appointments_options', $new_options );
+	appointments_delete_timetables_cache();
 }

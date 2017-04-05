@@ -700,6 +700,9 @@ class App_Timetables_Test extends App_UnitTestCase {
 		$next_monday_at_1130_slot = wp_list_filter( $next_monday_slots, array( 'ccs' => $appointment_args['date'] ) );
 		$next_monday_at_1130_slot = current( $next_monday_at_1130_slot );
 		$this->assertEquals( 'busy', $next_monday_at_1130_slot['class'] );
+
+		$_GET['service'] = null;
+		$_REQUEST["app_service_id"] = null;
 	}
 
 

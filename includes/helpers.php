@@ -263,15 +263,27 @@ function appointments_get_working_hours_range( $worker = false, $location = fals
 
 
 function appointments_use_legacy_duration_calculus() {
-	return defined( 'APP_USE_LEGACY_DURATION_CALCULUS' ) && APP_USE_LEGACY_DURATION_CALCULUS;
+	if ( defined( 'APP_USE_LEGACY_DURATION_CALCULUS' ) && APP_USE_LEGACY_DURATION_CALCULUS ) {
+		// Defined by user, use this value
+		return ( APP_USE_LEGACY_DURATION_CALCULUS === 'legacy' );
+	}
+	return apply_filters( 'appointments_use_legacy_duration_calculus', false );
 }
 
-function appointments_use_break_times_padding_calculus() {
-    return defined( 'APP_BREAK_TIMES_PADDING_CALCULUS' ) && APP_BREAK_TIMES_PADDING_CALCULUS;
+function appointments_use_legacy_break_times_padding_calculus() {
+	if ( defined( 'APP_BREAK_TIMES_PADDING_CALCULUS' ) && APP_BREAK_TIMES_PADDING_CALCULUS ) {
+		// Defined by user, use this value
+		return ( APP_BREAK_TIMES_PADDING_CALCULUS != 'legacy' );
+	}
+	return apply_filters( 'appointments_use_legacy_break_times_padding_calculus', false );
 }
 
 function appointments_use_legacy_boundaries_calculus() {
-    return defined('APP_USE_LEGACY_BOUNDARIES_CALCULUS') && APP_USE_LEGACY_BOUNDARIES_CALCULUS;
+	if ( defined( 'APP_USE_LEGACY_BOUNDARIES_CALCULUS' ) && APP_USE_LEGACY_BOUNDARIES_CALCULUS ) {
+		// Defined by user, use this value
+		return ( APP_USE_LEGACY_BOUNDARIES_CALCULUS === 'legacy' );
+	}
+	return apply_filters( 'appointments_use_legacy_boundaries_padding_calculus', false );
 }
 
 /**
