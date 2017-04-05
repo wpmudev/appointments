@@ -948,7 +948,7 @@ class Appointments_Google_Calendar {
 			return false;
 		}
 
-		if( $app_id ){
+		if( $app_id && $this->workers_allowed() ){
 			$app = appointments_get_appointment( $app_id );
 			$this->api_manager->switch_to_worker( $app->worker ); 
 		}
