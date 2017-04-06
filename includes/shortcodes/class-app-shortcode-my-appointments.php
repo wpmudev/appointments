@@ -344,13 +344,15 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 
 		$ret .= '</div>';
 
-		wp_enqueue_script( 'app-my-appointments', appointments_plugin_url() . 'js/my-appointments.js', array( 'jquery' ), '', true );
+		wp_enqueue_script( 'app-my-appointments', appointments_plugin_url() . 'includes/shortcodes/js/my-appointments.js', array( 'jquery' ), '', true );
 		wp_localize_script( 'app-my-appointments', 'appMyAppointmentsStrings', array(
 			'aysCancel' => esc_js( __( "Are you sure you want to cancel the selected appointment?", "appointments" ) ),
 			'cancelled' => esc_js( __("Selected appointment cancelled.","appointments") ),
 			'connectionError' => esc_js( __("A connection error occurred.","appointments") ),
 			'nonce' => wp_create_nonce( 'cancel-appointment-' . get_current_user_id() ),
-			'ajaxurl' => admin_url( 'admin-ajax.php' )
+			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+			'yes' => esc_js( __( 'Yes', 'appointments' ) ),
+			'no' => esc_js( __( 'No', 'appointments' ) )
 		) );
 
 		add_action( 'wp_footer', array( $this, 'footer_scripts' ), 100 );

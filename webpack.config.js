@@ -5,7 +5,8 @@ var shortcodesConfig = Object.assign( {}, {
     name: "admin",
     entry: {
         'app-confirmation': './includes/shortcodes/js/app-confirmation.dev.js',
-        'app-services': './includes/shortcodes/js/app-services.dev.js'
+        'app-services': './includes/shortcodes/js/app-services.dev.js',
+        'my-appointments': './includes/shortcodes/js/my-appointments.dev.js'
     },
     output: {
         filename: "[name].js",

@@ -13,14 +13,26 @@ Appointments = window.Appointments || {};
     function MyAppointments( options ) {
         $(".app-my-appointments-cancel").change( function(e) {
             var $target = $( e.target );
+            var cancelAppointment = this.cancelAppointment;
             if ( $target.is( ':checked' ) ) {
-                if ( ! confirm( strings.aysCancel ) ) {
-                    $target.attr("checked", false);
-                    return false;
-                }
-                else {
-                    this.cancelAppointment( $target.data( 'app-id' ) );
-                }
+                swal({
+                        title: strings.aysCancel,
+                        text: "",
+                        type: "warning",
+                        showCancelButton: true,
+                        cancelButtonText: strings.no,
+                        confirmButtonText: strings.yes,
+                        closeOnConfirm: true
+                    },
+                    function( isConfirm ){
+                        if ( ! isConfirm ) {
+                            $target.attr("checked", false);
+                        }
+                        else {
+                            cancelAppointment( $target.data( 'app-id' ) );
+                        }
+                    });
+
             }
         }.bind( this ));
         return this;
@@ -35,20 +47,19 @@ Appointments = window.Appointments || {};
 
         $.post(strings.ajaxurl, data, function(response) {
             var cancel_box = $('input#cancel-' + appId );
-
             if ( typeof response.success === 'undefined' ) {
                 cancel_box.attr("disabled",true);
-                alert(strings.connectionError);
+                swal( strings.connectionError, '', 'error' );
                 return;
             }
 
             if ( response.success ) {
-                alert( strings.cancelled );
+                swal( strings.cancelled, '', 'success' );
                 cancel_box.closest("tr").css("opacity","0.3");
                 cancel_box.attr("disabled",true);
             }
             else {
-                alert(response.data);
+                swal(response.data);
             }
         }, "json");
     };
