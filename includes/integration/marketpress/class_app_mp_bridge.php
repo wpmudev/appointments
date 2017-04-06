@@ -23,6 +23,7 @@ class App_MP_Bridge {
 
 		add_filter( 'mp_buy_button_tag', array( $this, 'display_buy_now_button' ), 10, 5 );
 		add_filter( 'mp_product/display_price', array( $this, 'display_price' ), 10, 3 );
+		add_filter( 'mp_cart/is_product_downloadable', array( $this, 'hide_checkout_shipping' ), 10, 2 );
 	}
 
 	public function filter_product ($html, $product_id) {
@@ -176,6 +177,13 @@ class App_MP_Bridge {
 
 	}
 
+	public function hide_checkout_shipping( $is_downloadable, $product ){
+		if( $this->_is_app_mp_page( $product->ID ) ){
+			return true;
+		}
+		return $is_downloadable;
+	}
+
 	private function _add_variation ($app_id, $post_id, $service, $worker, $start, $end) {
 		// Yeah, let's just go off with creating the variations
 		$variation_id = wp_insert_post(array(
@@ -237,12 +245,13 @@ EO_MP_JS;
 	 */
 	private function _is_app_mp_page ( $product ) {
 
-		if( is_numeric( $product ) ){
-			$product = new MP_Product( $product );
-		}
-
-		//Meta value set in Appointments_Integrations_MarketPress::save_settings()
-		return apply_filters( 'app_is_mp_page', $product->get_meta( 'mp_app_product', false ), $product );
+		$product = get_post($product);
+		$result = is_object( $product ) && strpos( $product->post_content, '[app_' ) !== false
+			? true
+			: false
+		;
+		// Maybe required for templates
+		return apply_filters( 'app_is_mp_page', $result, $product );
 
 	}
 }
