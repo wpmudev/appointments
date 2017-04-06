@@ -214,23 +214,11 @@ class App_Get_Appointments_Test extends App_UnitTestCase {
 		$apps = appointments_get_appointments_filtered_by_services( $args );
 		$this->assertCount( 2, $apps );
 
-		// Test deprecated function
-		$this->remove_deprecated_filters();
-		$deprecated_apps = $appointments->get_reserve_apps( 0, $service_id_1, $worker_id_1 );
-		$this->add_deprecated_filters();
-		$this->assertCount( 2, $deprecated_apps );
-
 		$args = array(
 			'worker' => $worker_id_1
 		);
 		$apps = appointments_get_appointments_filtered_by_services( $args );
 		$this->assertCount( 0, $apps );
-
-		// Test deprecated function
-		$this->remove_deprecated_filters();
-		$deprecated_apps = $appointments->get_reserve_apps( 0, 0, $worker_id_1 );
-		$this->add_deprecated_filters();
-		$this->assertCount( 0, $deprecated_apps );
 
 		$apps = appointments_get_appointments_filtered_by_services();
 		$this->assertCount( 0, $apps );
@@ -242,24 +230,12 @@ class App_Get_Appointments_Test extends App_UnitTestCase {
 		$apps = appointments_get_appointments_filtered_by_services( $args );
 		$this->assertCount( 1, $apps );
 
-		// Test deprecated function
-		$this->remove_deprecated_filters();
-		$deprecated_apps = $appointments->get_reserve_apps( 0, $service_id_1, $worker_id_2 );
-		$this->add_deprecated_filters();
-		$this->assertCount( 1, $deprecated_apps );
-
 		$args = array(
 			'worker' => $worker_id_3,
 			'service' => $service_id_2
 		);
 		$apps = appointments_get_appointments_filtered_by_services( $args );
 		$this->assertCount( 1, $apps );
-
-		// Test deprecated function
-		$this->remove_deprecated_filters();
-		$deprecated_apps = $appointments->get_reserve_apps( 0, $service_id_2, $worker_id_3 );
-		$this->add_deprecated_filters();
-		$this->assertCount( 1, $deprecated_apps );
 
 		$args = array(
 			'service' => $service_id_1,
@@ -269,24 +245,11 @@ class App_Get_Appointments_Test extends App_UnitTestCase {
 		$apps = appointments_get_appointments_filtered_by_services( $args );
 		$this->assertCount( 1, $apps );
 
-		// Test deprecated function
-		$this->remove_deprecated_filters();
-		$deprecated_apps = $appointments->get_reserve_apps( 0, $service_id_1, $worker_id_1, $week_app_1 );
-		$this->add_deprecated_filters();
-		$this->assertCount( 1, $deprecated_apps );
-
 		$args = array(
 			'service' => $service_id_1
 		);
 		$apps = appointments_get_appointments_filtered_by_services( $args );
 		$this->assertCount( 1, $apps );
-
-		// Test deprecated function
-		$this->remove_deprecated_filters();
-		$deprecated_apps = $appointments->get_reserve_apps_by_service( 0, $service_id_1 );
-		$this->add_deprecated_filters();
-		$this->assertCount( 1, $deprecated_apps );
-
 	}
 
 	function test_get_client_name() {

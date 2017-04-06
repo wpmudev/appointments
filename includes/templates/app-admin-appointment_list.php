@@ -201,10 +201,7 @@ $status_count = appointments_count_appointments( $args );
 	</div>
 </div>
 
-	<?php
-		$appointments->myapps($type);
-
-	?>
+	<?php App_Template::admin_my_appointments_list($type); ?>
 	<br />
 	<br />
 	<form action="<?php echo admin_url('admin-ajax.php?action=app_export'); ?>" method="post">

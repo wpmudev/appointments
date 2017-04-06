@@ -191,7 +191,7 @@ class Appointments {
 
 	function maybe_upgrade() {
 		if ( isset( $_GET['app-clear'] ) && current_user_can( 'manage_options' ) ) {
-			$this->flush_cache();
+			appointments_clear_cache();
 		}
 
 		$db_version = get_option( 'app_db_version' );
@@ -258,20 +258,6 @@ class Appointments {
 	}
 
 	/**
-	 * Get smallest service ID
-	 * We assume total number of services is not too high, which is the practical case.
-	 * Otherwise this method might be expensive
-	 *
-	 * @deprecated since 1.6
-	 *
-	 * @return integer
-	 */
-	function get_first_service_id() {
-		_deprecated_function( __FUNCTION__, '1.6', 'appointments_get_services_min_id()' );
-		return appointments_get_services_min_id();
-	}
-
-	/**
 	 * Get service ID from front end
 	 * @return integer
 	 */
@@ -307,167 +293,6 @@ class Appointments {
 		return 0;
 	}
 
-
-
-	 /**
-	 * Allow only certain order_by clauses
-	 * @since 1.2.8
-	 */
-	function sanitize_order_by( $order_by="ID" ) {
-		$whitelist = apply_filters( 'app_order_by_whitelist', array( 'ID', 'name', 'start', 'end', 'duration', 'price',
-					'ID DESC', 'name DESC', 'start DESC', 'end DESC', 'duration DESC', 'price DESC', 'RAND()' ) );
-		if ( in_array( $order_by, $whitelist ) )
-			return $order_by;
-		else
-			return 'ID';
-	}
-
-	/**
-	 * Get a single service with given ID
-	 *
-	 * @deprecated Deprecated since version 1.6
-	 *
-	 * @param ID: Id of the service to be retrieved
-	 * @return object
-	 */
-	function get_service( $ID ) {
-		_deprecated_function( __FUNCTION__, '1.6', 'appointments_get_service()' );
-		return appointments_get_service( $ID );
-	}
-
-
-	/**
-	 * Get all workers
-	 *
-	 * @deprecated Deprecated since version 1.6
-	 *
-	 * @param order_by: ORDER BY clause for mysql
-	 * @return array of objects
-	 */
-	function get_workers( $order_by="ID" ) {
-		_deprecated_function( __FUNCTION__, '1.6', 'appointments_get_workers()' );
-		$args = array(
-			'orderby' => $order_by
-		);
-		return appointments_get_workers( $args );
-	}
-
-	/**
-	 * Get all services
-	 * @param order_by: ORDER BY clause for mysql
-	 * @deprecated Deprecated since version 1.6
-	 * @return array of objects
-	 */
-	function get_services( $order_by="ID" ) {
-		_deprecated_function( __FUNCTION__, '1.6', 'appointments_get_services()' );
-		$args = array( 'orderby'=> $order_by );
-		return appointments_get_services( $args );
-	}
-
-
-	/**
-	 * Get workers giving a specific service (by its ID)
- 	 * We assume total number of workers is not too high, which is the practical case.
-	 * Otherwise this method would be expensive
-	 *
-	 * @deprecated Deprecated since version 1.6
-	 *
-	 * @param ID: Id of the service to be retrieved
-	 * @param string $order_by ORDER BY clause for mysql
-	 * @return array|false array of objects
-	 */
-	function get_workers_by_service( $ID, $order_by = "ID" ) {
-		_deprecated_function( __FUNCTION__, '1.6', 'appointments_get_workers_by_service()' );
-		$workers = appointments_get_workers_by_service( $ID, $order_by );
-
-		if ( empty( $workers ) )
-			return false;
-
-		return $workers;
-	}
-
-	/**
-	 * Check if there is only one worker giving the selected service
-	 *
-	 * @deprecated since 1.6
-	 *
-	 * @param service: Id of the service for which check will be done
- 	 * @since 1.1.1
-	 * @return int|boolean (worker ID if there is one, otherwise false)
-	 */
-	function is_single_worker( $service_id ) {
-		_deprecated_function( __FUNCTION__, '1.6' );
-
-		$workers = appointments_get_workers_by_service( $service_id );
-		if ( 1 === count( $workers ) ) {
-			return $workers[0]->ID;
-		}
-
-		return false;
-	}
-
-	/**
-	 * Return a row from working hours table, i.e. days/hours we are working or we have break
-	 * @param stat: open (works), or closed (breaks).
-	 * @return object
-	 */
-	function get_work_break( $l, $w, $stat ) {
-		_deprecated_function( __FUNCTION__, '2.0', 'appointments_get_worker_working_hours()' );
-
-		$work_break = appointments_get_worker_working_hours( $stat, $w, $l );
-
-		if ( false === $work_break ) {
-			return null;
-		}
-
-		// Backward compatibility
-		$work_break->hours = maybe_serialize( $work_break->hours );
-
-		return $work_break;
-	}
-
-	/**
-	 * Return a row from exceptions table, i.e. days we are working or having holiday
-	 * @deprecated since 1.9.2
-	 * @return object
-	 */
-	function get_exception( $l, $w, $stat ) {
-		_deprecated_function( __FUNCTION__, '1.9.2', 'appointments_get_worker_exceptions()' );
-		return appointments_get_worker_exceptions( $w, $stat, $l );
-	}
-
-	/**
-	 * Return an appointment given its ID
-	 *
-	 * @deprecated since 1.6
-	 *
-	 * @param app_id: ID of the appointment to be retreived from database
-	 * @since 1.1.8
-	 * @return object
-	 */
-	function get_app( $app_id ) {
-		_deprecated_function( __FUNCTION__, '1.6', 'appointments_get_appointment()' );
-		return appointments_get_appointment( $app_id );
-	}
-
-	/**
-	 * Return all reserve appointments (i.e. pending, paid, confirmed or reserved by GCal)
-	 * @param week: Optionally appointments only in the number of week in ISO 8601 format (since 1.2.3).
-	 * Weekly gives much better results in RAM usage compared to monthly, with a tolerable, slight increase in number of queries
-	 * @return array of objects
-	 *
-	 * @deprecated since 1.6
-	 */
-	function get_reserve_apps( $l, $s, $w, $week=0 ) {
-		_deprecated_function( __FUNCTION__, '1.6', 'appointments_get_appointments()' );
-		$args = array(
-			'location' => $l,
-			'service' => $s,
-			'week' => $week,
-			'worker' => $w
-		);
-		return appointments_get_appointments_filtered_by_services( $args );
-	}
 
 	/**
 	 * Return all reserve appointments by worker ID
@@ -508,85 +333,28 @@ class Appointments {
 		return $apps;
 	}
 
-	/**
-	 * Return reserve appointments by service ID
-	 *
-	 * @deprecated since 1.6
-	 *
-	 * @param week: Optionally appointments only in the number of week in ISO 8601 format (since 1.2.3)
-	 * @since 1.1.3
-	 * @return array of objects
-	 */
-	function get_reserve_apps_by_service( $l, $s, $week=0 ) {
-		_deprecated_function( __FUNCTION__, '1.6', 'appointments_get_appointments_filtered_by_services()' );
-		$args = array(
-			'location' => $l,
-			'service' => $s,
-			'week' => $week
-		);
-		return appointments_get_appointments_filtered_by_services( $args );
-	}
-
 
 	/**
 	 * Find if a user is dummy
 	 * @param user_id: Id of the user who will be checked if he is dummy
 	 * since 1.0.6
+	 *
+	 * @deprecated since 2.1
+	 *
 	 * @return bool
 	 */
 	function is_dummy( $user_id=0 ) {
-		global $wpdb, $current_user;
-		if ( !$user_id )
-			$user_id = $current_user->ID;
-
-		// A dummy should be a worker
-		$result = appointments_get_worker( $user_id );
-		if ( ! $result )
-			return false;
-
-		// This is only supported after V1.0.6 and if DB is altered
-		if ( !$this->db_version )
-			return false;
-
-		if ( $result->dummy )
-			return true;
-
-		return false;
-	}
-
-
-	/**
-	 *
-	 * @deprecated since 1.6
-	 *
-	 * @param $worker_id
-	 *
-	 * @return bool
-	 */
-	public function is_worker( $worker_id ) {
-		_deprecated_function( __FUNCTION__, '1.6', 'appointments_is_worker()' );
-		return appointments_is_worker( $worker_id );
-	}
-
-
-	/**
-	 * Find worker name given his ID
-	 *
-	 * @deprecated since 1.6
-	 *
-	 * @return string
-	 */
-	function get_worker_name( $worker=0, $field = true ) {
-		_deprecated_function( __FUNCTION__, '1.6', 'appointments_get_worker_name()' );
-
-		if ( $field ) {
-			$field = 'default';
-		}
-		else {
-			$field = 'user_login';
+		_deprecated_function( __FUNCTION__, '2.1', 'Appointments_Worker::is_dummy' );
+		if ( ! $user_id ) {
+			$user_id = get_current_user_id();
 		}
 
-		return appointments_get_worker_name( $worker, $field );
+		$worker = appointments_get_worker( $user_id );
+		if ( ! $worker ) {
+			return false;
+		}
+
+		return $worker->is_dummy();
 	}
 
 
@@ -597,7 +365,12 @@ class Appointments {
 	 */
 	function get_worker_email( $worker=0 ) {
 		// Real person
-		if ( !$this->is_dummy( $worker ) ) {
+		$worker_obj = appointments_get_worker( $worker );
+		if ( ! $worker_obj ) {
+			return '';
+		}
+
+		if ( !$worker_obj->is_dummy() ) {
 			$worker_data = get_userdata( $worker );
 			if ( $worker_data )
 				$worker_email = $worker_data->user_email;
@@ -774,51 +547,10 @@ class Appointments {
 		return appointments_get_service_capacity( $service_id );
 	}
 
-/**
-**************************************
-* Methods for Specific Content Caching
-* Developed especially for this plugin
-**************************************
-*/
-
-
-	/**
-	 * Get request uri
-	 * @return string
-	 */
-	function get_uri() {
-		// Get rid of # part
-		if ( strpos( $_SERVER['REQUEST_URI'], '#' ) !== false ) {
-			$uri_arr = explode( '#', $_SERVER['REQUEST_URI'] );
-			$uri = $uri_arr[0];
-		}
-		else
-			$uri = $_SERVER['REQUEST_URI'];
-
-		return $uri;
-	}
-
-	/**
-	 * Flush both database and object caches
-	 *
-	 */
-	function flush_cache( ) {
-		wp_cache_flush();
-		appointments_clear_cache();
-	}
-
 /****************
 * General methods
 *****************
 */
-
-	/**
-     * Provide options if asked outside the class
- 	 * @return array
-     */
-	function get_options() {
-		return $this->options;
-	}
 
 	/**
 	 * Save a message to the log file
@@ -958,19 +690,6 @@ class Appointments {
 	}
 
 	/**
-	 * Return all available statuses
-	 *
-	 * @deprecated Since version 1.6
-	 *
-	 * @return array
-	 */
-	function get_statuses() {
-		_deprecated_function( __FUNCTION__, '1.6', 'appointments_get_statuses()' );
-		return appointments_get_statuses();
-	}
-
-
-	/**
 	 * Return a selected field name to further customize them and make translation easier
 	 * @return string (name of the field)
 	 */
@@ -1031,18 +750,6 @@ class Appointments {
             )
         );
 	    return isset( $presets[ $set ][ $class ] ) ? $presets[ $set ][ $class ] : '111111';
-	}
-
-	/**
-	 * Change status for a given app ID
-	 *
-	 * @deprecated since 1.6
-	 *
-	 * @return bool
-	 */
-	function change_status( $stat, $app_id ) {
-		_deprecated_function( __FUNCTION__, '1.6', 'appointments_update_appointment_status()' );
-		return appointments_update_appointment_status( $app_id, $stat );
 	}
 
 
@@ -1275,8 +982,11 @@ class Appointments {
 
 	/**
 	 * Helper function to create a monthly schedule
+	 *
+	 * @deprecated 2.0.6
 	 */
 	function get_monthly_calendar( $timestamp=false, $class='', $long, $widget ) {
+		_deprecated_function( __FUNCTION__, '2.1', 'appointments_monthly_calendar' );
 		$this->get_lsw();
 		$args = array(
 			'service_id' => $this->service,
@@ -1288,13 +998,6 @@ class Appointments {
 			'widget' => $widget
 		);
 		return appointments_monthly_calendar( $timestamp, $args );
-	}
-
-	function console_log( $start, $desc = '' ) {
-		$finish = microtime( true );
-		?>
-		<script>console.log('<?php echo $desc . ' - ' . ( $finish - $start ); ?>');</script>
-		<?php
 	}
 
 	/**
@@ -1529,38 +1232,9 @@ class Appointments {
 		$this->timetables[ $timetable_key ] = $data;
 
 		// Save timetables only once at the end of the execution
-		//add_action( 'shutdown', array( $this, 'regenerate_timetables' ) );
 		add_action( 'shutdown', array( $this, 'save_timetables' ) );
 
 		return $data;
-	}
-
-	/**
-	 * Regenerate most used timetables so users do not wait too long
-	 * when viewing calendars
-	 */
-	public function regenerate_timetables() {
-		// @TODO: Regenerate based on use stats instead. This is too random.
-		global $wpdb;
-
-		$services = appointments_get_services();
-		$workers = appointments_get_workers();
-
-		$durations = wp_list_pluck( $services, 'duration' );
-		$durations = array_unique( $durations );
-
-		$capacities = wp_list_pluck( $services, 'capacity' );
-		$capacities = array_unique( $capacities );
-
-		$month = date( 'm', current_time( 'timestamp' ) );
-		$day_start = strtotime( date( 'Y-' . $month . '-01 00:00:00' ) ); // First day of this month
-		// But do not regenerate more than 6 timetables
-		for ( $i = 0; $i <= 3 && $i < count( $durations ); $i++ ) {
-			// @TODO if it's cached, don't count this one
-			for ( $j = 0; $j <= 2 && $j < count( $capacities ); $j++ ) {
-				$this->get_timetable( $durations[ $i ], $capacities[ $j ] );
-			}
-		}
 	}
 
 	public function save_timetables() {
@@ -1579,9 +1253,11 @@ class Appointments {
 
 	/**
 	 * Helper function to create a weekly schedule
+	 *
+	 * @deprecated since 2.1
 	 */
 	function get_weekly_calendar( $timestamp=false, $class='', $long = false ) {
-
+		_deprecated_function( __FUNCTION__, '2.1', 'appointments_weekly_calendar' );
 		$this->get_lsw();
 
 		$current_time = current_time( 'timestamp' );
@@ -1611,8 +1287,11 @@ class Appointments {
 	 * Returns the timestamp of Sunday of the current time or selected date
 	 * @param timestamp: Timestamp of the selected date or false for current time
 	 * @return integer (timestamp)
+	 *
+	 * @deprecated since 2.1
 	 */
 	function sunday( $timestamp=false ) {
+		_deprecated_function( __FUNCTION__, '2.1' );
 		$date = $timestamp ? $timestamp : $this->local_time;
 		// Return today's timestamp if today is sunday and start of the week is set as Sunday
 		if ( "Sunday" == date( "l", $date ) && 0 == $this->start_of_week )
@@ -1696,8 +1375,12 @@ class Appointments {
 	 * Check if today is holiday
 	 * Optionally a worker is selectable ( $w != 0 )
 	 * @return bool
+	 *
+	 * @deprecated since 2.1
 	 */
 	function is_holiday( $ccs, $cce, $w=0 ) {
+		_deprecated_function( __FUNCTION__, '2.0.6', 'appointments_is_worker_holiday' );
+
 		// A worker can be forced
 		if ( ! $w ) {
 			$w = $this->worker;
@@ -1729,7 +1412,7 @@ class Appointments {
 		if ( $this->is_exceptional_working_day( $ccs, $cse, $w ) ) {
 			return true;
 		}
-		if ( $this->is_holiday( $ccs, $cse, $w ) ) {
+		if ( appointments_is_worker_holiday( $ccs, $cse, $w ) ) {
 			return false;
 		}
 		if ( $this->is_break( $ccs, $cse, $w ) ) {
@@ -2028,20 +1711,6 @@ class Appointments {
 		}
 		Appointments_Sessions::clear_visitor_data();
 	}
-
-
-/*******************************
-* Methods for frontend login API
-********************************
-*/
-
-
-/*******************************
-* User methods
-********************************
-*/
-	
-
 	
 
 /****************************************
@@ -2380,51 +2049,6 @@ class Appointments {
 ********************************
 
 	/**
-	 *	Send confirmation email
-	 * @param app_id: ID of the app whose confirmation will be sent
-     * @return boolean
-     * @deprecated since 1.7.3
-	 */
-	function send_confirmation( $app_id ) {
-		_deprecated_function( __FUNCTION__, '1.7.3', 'appointments_send_confirmation()' );
-		return appointments_send_confirmation( $app_id );
-	}
-
-	/**
-	 * Send notification email
-	 * @param cancel: If this is a cancellation
-	 * @since 1.0.2
-	 *
-	 * @deprecated since 1.7.3
-	 * 
-	 * @return bool
-	 */
-	function send_notification( $app_id, $cancel=false ) {
-		_deprecated_function( __FUNCTION__, '1.7.3', 'Appointments_Notification_Manager::send_notification()' );
-		return $this->notifications->send_notification( $app_id, $cancel );
-	}
-
-	/**
-	 * Sends out a removal notification email.
-	 * This email is sent out only on admin status change, *not* on appointment cancellation by user.
-	 * The email will go out to the client and, perhaps, worker and admin.
-	 *
-	 * @deprecated since 1.7.3
-	 */
-	function send_removal_notification ($app_id) {
-		_deprecated_function( __FUNCTION__, '1.7.3', 'appointments_send_removal_notification()' );
-		return appointments_send_removal_notification( $app_id );
-	}
-
-	/**
-	 *	Check and send reminders to clients and workers for appointments
-	 * @deprecated since 1.7.3
-	 */
-	function maybe_send_reminders() {
-		_deprecated_function( __FUNCTION__, '1.7.3' );
-	}
-
-	/**
 	 *	Replace placeholders with real values for email subject and content
 	 */
 	function _replace( $text, $user, $service, $worker, $datetime, $price, $deposit, $phone='', $note='', $address='', $email='', $city='' ) {
@@ -2536,7 +2160,7 @@ class Appointments {
 		// Appointment status probably changed, so clear cache.
 		// Anyway it is good to clear the cache in certain intervals.
 		// This can be removed for pages with very heavy visitor traffic, but little appointments
-		$this->flush_cache();
+		appointments_clear_cache();
 	}
 
 	
@@ -2556,55 +2180,15 @@ class Appointments {
 */
 	
 
-	
-	// Enqueue css on settings page
-	/**
-	 * @deprecated since v1.4.2-BETA-2
-	 */
-/*
-	function admin_css_settings() {
-		wp_enqueue_style( 'jquery-colorpicker-css', $this->plugin_url . '/css/colorpicker.css', false, $this->version);
-	}
-*/
-	// Enqueue css for all admin pages
-
-
-	// Return datepick locale file if it exists
-	// Since 1.0.6
-	function datepick_localfile() {
-		return false;
-	}
-
-	// Read and return local month names from datepick
-	// Since 1.0.6.1
-	function datepick_local_months() {
-		return false;
-	}
-
-
-	// Read and return abbrevated local month names from datepick
-	// Since 1.0.6.3
-	function datepick_abb_local_months() {
-		if ( !$file = $this->datepick_localfile() )
-			return false;
-
-		if ( !$file_content = @file_get_contents( appointments_plugin_dir() . $file ) )
-			return false;
-
-		$file_content = str_replace( array("\r","\n","\t"), '', $file_content );
-
-		if ( preg_match( '/monthNamesShort:(.*?)]/s', $file_content, $matches ) ) {
-			$months = str_replace( array('[',']',"'",'"'), '', $matches[1] );
-			return explode( ',', $months );
-		}
-		return false;
-	}
-
 	/**
 	 * Deletes a worker's database records in case he is deleted
+	 *
+	 * @deprecated since 2.1
+	 *
 	 * @since 1.0.4
 	 */
 	function delete_user( $ID ) {
+		_deprecated_function( __FUNCTION__, '2.1', 'appointments_delete_worker' );
 		appointments_delete_worker( $ID );
 	}
 
@@ -2657,15 +2241,6 @@ class Appointments {
 		return ob_get_clean();
 	}
 
-
-	/**
-	 * Helper function for displaying appointments
-	 *
-	 */
-	function myapps($type = 'active') {
-		App_Template::admin_my_appointments_list($type);
-	}
-
 	/**
 	 * Return a safe date format that datepick can use
 	 * @return string
@@ -2709,8 +2284,8 @@ class Appointments {
 			return $date;
 		}
 
-		$datepick_local_months = $this->datepick_local_months();
-		$datepick_abb_local_months = $this->datepick_abb_local_months();
+		$datepick_local_months = false;
+		$datepick_abb_local_months = false;
 
 		$months = array( 'January'=>'01','February'=>'02','March'=>'03','April'=>'04','May'=>'05','June'=>'06',
 						'July'=>'07','August'=>'08','September'=>'09','October'=>'10','November'=>'11','December'=>'12' );
@@ -2774,14 +2349,6 @@ class Appointments {
 		return $date;
 	}
 
-	
-
-	
-
-	 // For future use
-	function reports() {
-	}
-
 	/**
 	 *	Get transaction records
 	 *  Modified from Membership plugin by Barry
@@ -2834,25 +2401,6 @@ class Appointments {
 			appointments_insert_transaction( $args );
 		}
 	}
-
-	/**
-	 * @deprecated since 2.0
-	 */
-	function get_total() {
-		_deprecated_function( __FUNCTION__, '2.0' );
-		//return $this->db->get_var( "SELECT FOUND_ROWS();" );
-	}
-
-
-	function mytransactions ($type = 'past') {
-		_deprecated_function( __FUNCTION__, '2.0' );
-		//App_Template::admin_my_transactions_list($type);
-	}
-
-	function reached_ceiling () {
-		return false;
-	}
-
 }
 }
 

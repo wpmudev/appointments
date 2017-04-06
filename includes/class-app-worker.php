@@ -84,6 +84,11 @@ class Appointments_Worker {
 
 	}
 
+	public function is_dummy() {
+		return (bool)$this->dummy;
+	}
+
+
 }
 
 function appointments_get_worker( $worker_id ) {
@@ -292,11 +297,11 @@ function appointments_update_worker( $worker_id, $args = array() ) {
 	if ( isset( $update['price'] ) )
 		$update['price'] = $price = preg_replace( "/[^0-9,.]/", "", $update['price'] );
 
-	if ( isset( $insert['dummy'] ) && $insert['dummy'] ) {
-		$insert['dummy'] = true;
+	if ( isset( $update['dummy'] ) && $update['dummy'] ) {
+		$update['dummy'] = true;
 	}
-	elseif ( isset( $insert['dummy'] ) && ! $insert['dummy'] ) {
-		$insert['dummy'] = '';
+	elseif ( isset( $update['dummy'] ) && ! $update['dummy'] ) {
+		$update['dummy'] = '';
 	}
 
 	if ( isset( $update['services_provided'] ) ) {

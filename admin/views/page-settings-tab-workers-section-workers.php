@@ -51,7 +51,7 @@ if ( empty( $pages ) ) {
 					</td>
 					<td>
 						<label for="workers-<?php echo $worker->ID; ?>-dummy" class="screen-reader-text"><?php _e( 'Dummy?', 'appointments' ); ?></label>
-						<input type="checkbox" id="workers-<?php echo $worker->ID; ?>-dummy" name="workers[<?php echo $worker->ID; ?>][dummy]" <?php checked( $appointments->is_dummy( $worker->ID ) ); ?> />
+						<input type="checkbox" id="workers-<?php echo $worker->ID; ?>-dummy" name="workers[<?php echo $worker->ID; ?>][dummy]" <?php checked( $worker->is_dummy() ); ?> />
 					</td>
 					<td>
 						<label for="worker-<?php echo $worker->ID; ?>-price" class="screen-reader-text"><?php _e( 'Additional Price', 'appointments' ); ?></label>

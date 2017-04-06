@@ -190,16 +190,6 @@ class App_Appointments_Test extends App_UnitTestCase {
 
 		$appointment = appointments_get_appointment( $app_id );
 		$this->assertInstanceOf( 'Appointments_Appointment', $appointment );
-
-		// Test deprecated function
-		$this->remove_deprecated_filters();
-		$deprecated_app = $appointments->get_app( $app_id );
-		$this->assertInstanceOf( 'Appointments_Appointment', $deprecated_app );
-
-		$this->assertEquals( get_object_vars( $appointment ), get_object_vars( $deprecated_app ) );
-		$this->add_deprecated_filters();
-
-
 	}
 
 	function test_update_appointment() {
@@ -415,34 +405,7 @@ class App_Appointments_Test extends App_UnitTestCase {
 		// Wrong status name
 		$result = appointments_update_appointment_status( $app_id, 'fake-status' );
 		$this->assertFalse( $result );
-
-		// Test deprecated function
-		global $appointments;
-		$this->remove_deprecated_filters();
-		$result = $appointments->change_status( 'paid', $app_id );
-		$this->add_deprecated_filters();
-
-		$this->assertTrue( $result );
-
-		$appointment = appointments_get_appointment( $app_id );
-		$this->assertEquals( $appointment->status, 'paid' );
-
 	}
-
-	function test_get_statuses() {
-		global $appointments;
-
-		// Test deprecated function
-		$statuses = appointments_get_statuses();
-
-		$this->remove_deprecated_filters();
-		$deprecated_statuses = $appointments->get_statuses();
-		$this->add_deprecated_filters();
-
-		$this->assertEquals( $statuses, $deprecated_statuses );
-
-	}
-
 
 	function test_delete_worker_with_appointments() {
 		global $appointments;
@@ -498,7 +461,10 @@ class App_Appointments_Test extends App_UnitTestCase {
 		$this->assertEquals( appointments_get_appointment( $app_id_1 )->worker, $worker_id_1 );
 		$this->assertEquals( appointments_get_appointment( $app_id_2 )->worker, $worker_id_1 );
 
+		// Test deprecated function
+		$this->remove_deprecated_filters();
 		$appointments->delete_user( $worker_id_1 );
+		$this->add_deprecated_filters();
 
 		$this->assertEquals( appointments_get_appointment( $app_id_1 )->worker, 0 );
 		$this->assertEquals( appointments_get_appointment( $app_id_2 )->worker, 0 );

@@ -97,7 +97,7 @@ class Appointments_Admin_User_Profile {
 					// Employer can be noticed here
 					do_action( "app_working_hour_update", $message, $profileuser_id );
 					// Also clear cache
-					$appointments->flush_cache();
+					appointments_clear_cache();
 				}
 			}
 		}

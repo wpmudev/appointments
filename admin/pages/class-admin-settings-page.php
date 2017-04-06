@@ -317,7 +317,10 @@ class Appointments_Admin_Settings_Page {
 		$options["allow_worker_confirm"]		= $_POST["allow_worker_confirm"];
 		$options["allow_overwork"]			= $_POST["allow_overwork"];
 		$options["allow_overwork_break"]		= $_POST["allow_overwork_break"];
-		$options["dummy_assigned_to"]			= !$appointments->is_dummy( @$_POST["dummy_assigned_to"] ) ? @$_POST["dummy_assigned_to"] : 0;
+
+		$assigned_to = isset( $_POST["dummy_assigned_to"] ) ? $_POST["dummy_assigned_to"] : 0;
+		$worker = appointments_get_worker( $assigned_to );
+		$options["dummy_assigned_to"]			= ! $worker->is_dummy() ? $assigned_to : 0;
 
 		$options["login_required"]			= $_POST["login_required"];
 		$options["accept_api_logins"]			= isset( $_POST["accept_api_logins"] );

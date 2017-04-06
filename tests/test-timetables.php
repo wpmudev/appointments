@@ -87,9 +87,6 @@ class App_Timetables_Test extends App_UnitTestCase {
 		$this->assertEquals( 2, $result );
 	}
 
-	/**
-	 * @group temp
-	 */
 	function test_is_interval_break() {
 		$options = appointments_get_options();
 		$options['min_time'] = 30;

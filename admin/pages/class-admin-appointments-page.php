@@ -51,7 +51,7 @@ class Appointments_Admin_Appointments_Page {
 				do_action( 'app_bulk_status_change',  $_REQUEST["app"] );
 
 				$appointments->log( sprintf( __('Status of Appointment(s) with id(s):%s changed to %s by user:%s', 'appointments' ),  implode( ', ', $_REQUEST["app"] ), $new_status, $userdata->user_login ) );
-				$appointments->flush_cache();
+				appointments_clear_cache();
 			}
 		}
 

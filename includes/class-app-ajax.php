@@ -527,7 +527,7 @@ class Appointments_AJAX {
 		}
 
 		// A new appointment is accepted, so clear cache
-		$appointments->flush_cache();
+		appointments_clear_cache();
 
 		$apps = Appointments_Sessions::get_current_visitor_appointments();
 		$apps[] = $insert_id;

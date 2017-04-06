@@ -175,14 +175,6 @@ class App_Workers_Test extends App_UnitTestCase {
 
 		$workers = appointments_get_workers( array( 'with_page' => true ) );
 		$this->assertCount( 1, $workers );
-
-		// Test the deprecated function
-		$this->remove_deprecated_filters();
-		global $appointments;
-		$this->assertEquals( $appointments->get_workers(), appointments_get_workers() );
-		$this->assertEquals( $appointments->get_workers( 'name ASC' ), appointments_get_workers( array( 'orderby' => 'name ASC' )) );
-		$this->add_deprecated_filters();
-
 	}
 
 	function test_get_all_workers() {
@@ -388,11 +380,6 @@ class App_Workers_Test extends App_UnitTestCase {
 			'services_provided' => array( $service_id_2 ),
 		);
 		appointments_insert_worker( $args );
-
-		$this->remove_deprecated_filters();
-		$this->assertEquals( $appointments->is_single_worker( $service_id_1 ), $user_id_1 );
-		$this->assertFalse( $appointments->is_single_worker( $service_id_2 ) );
-		$this->add_deprecated_filters();
 	}
 
 	function test_get_workers_by_service() {
@@ -428,14 +415,6 @@ class App_Workers_Test extends App_UnitTestCase {
 		$this->assertCount( 1, $workers );
 
 		$this->assertCount( 2, wp_cache_get( 'app_workers_by_service' ) );
-
-		// Test the deprecated function
-		$this->remove_deprecated_filters();
-		global $appointments;
-		$this->assertEquals( $appointments->get_workers_by_service( $service_id_1 ), appointments_get_workers_by_service( $service_id_1 ) );
-		$this->assertEquals( $appointments->get_workers_by_service( $service_id_2 ), appointments_get_workers_by_service( $service_id_2 ) );
-		$this->add_deprecated_filters();
-
 	}
 
 	function test_appointments_is_worker() {
@@ -455,13 +434,6 @@ class App_Workers_Test extends App_UnitTestCase {
 
 		$this->assertTrue( appointments_is_worker( $user_id_1 ) );
 		$this->assertFalse( appointments_is_worker( $user_id_2 ) );
-
-		// Test deprecated function
-		global $appointments;
-		$this->remove_deprecated_filters();
-		$this->assertTrue( $appointments->is_worker( $user_id_1 ) );
-		$this->assertFalse( $appointments->is_worker( $user_id_2 ) );
-		$this->add_deprecated_filters();
 	}
 
 	function test_get_worker_name() {
@@ -482,25 +454,19 @@ class App_Workers_Test extends App_UnitTestCase {
 
 		$this->remove_deprecated_filters();
 		$this->assertEquals( 'Display Name', appointments_get_worker_name( $user_id_1 ) );
-		$this->assertEquals( 'Display Name', $appointments->get_worker_name( $user_id_1 ) );
 
 		$this->assertEquals( 'userlogin', appointments_get_worker_name( $user_id_1, 'user_login' ) );
-		$this->assertEquals( 'userlogin', $appointments->get_worker_name( $user_id_1, false ) );
 
 		$this->assertEquals( 'A specialist', appointments_get_worker_name( 0 ) );
-		$this->assertEquals( 'A specialist', $appointments->get_worker_name( 0 ) );
 		// Log in the worker
 		wp_set_current_user( $user_id_1 );
 		$this->assertEquals( 'Our staff', appointments_get_worker_name( 0 ) );
-		$this->assertEquals( 'Our staff', $appointments->get_worker_name( 0 ) );
 
 		// If there's a user meta set, it will return it no matter what we pass to the second argument
 		update_user_meta( $user_id_1, 'app_name', 'Meta Name' );
 
 		$this->assertEquals( 'Our staff', appointments_get_worker_name( 0 ) );
-		$this->assertEquals( 'Our staff', $appointments->get_worker_name( 0 ) );
 		$this->assertEquals( 'Meta Name', appointments_get_worker_name( $user_id_1 ) );
-		$this->assertEquals( 'Meta Name', $appointments->get_worker_name( $user_id_1 ) );
 
 		$this->add_deprecated_filters();
 
@@ -754,6 +720,21 @@ class App_Workers_Test extends App_UnitTestCase {
 
 		$this->assertEquals( $data[1]['value'], $open->days );
 		$this->assertEquals( $data[0]['value'], $closed->days );
+	}
+
+	public function test_is_dummy() {
+		$worker_id = $this->factory->worker->create();
+		$worker = appointments_get_worker( $worker_id );
+		$this->assertFalse( $worker->is_dummy() );
+
+		appointments_update_worker( $worker_id, array( 'dummy' => true ) );
+		$worker = appointments_get_worker( $worker_id );
+		$this->assertTrue( $worker->is_dummy() );
+
+		$worker_id = $this->factory->worker->create( array( 'dummy' => true ) );
+		$worker = appointments_get_worker( $worker_id );
+		$this->assertTrue( $worker->is_dummy() );
+
 	}
 
 

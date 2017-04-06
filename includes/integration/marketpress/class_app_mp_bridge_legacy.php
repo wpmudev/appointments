@@ -177,7 +177,7 @@ class App_MP_Bridge_Legacy {
 					if ( isset( $var['name'] ) && isset( $var['download'] ) ) {
 						list( $product_name, $app_id ) = split( ':', $var['name'] );
 						$app_id = (int)trim( $app_id );
-						if ( $this->_core->change_status( 'paid', $app_id ) ) {
+						if ( appointments_update_appointment_status( $app_id, 'paid' ) ) {
 							do_action( 'app_mp_order_paid', $app_id, $order ); // FIRST do the action
 						}
 					}

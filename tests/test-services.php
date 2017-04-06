@@ -76,13 +76,6 @@ class App_Services_Test extends App_UnitTestCase {
 		$this->assertInstanceOf( 'Appointments_Service', appointments_get_service( $service_id ) );
 
 		$this->assertFalse( appointments_get_service( 8888 ) );
-
-		// Test the deprecated function
-		$this->remove_deprecated_filters();
-		global $appointments;
-		$this->assertInstanceOf( 'Appointments_Service', $appointments->get_service( $service_id ) );
-		$this->assertEquals( $appointments->get_service( $service_id ), appointments_get_service( $service_id ) );
-		$this->add_deprecated_filters();
 	}
 
 	function test_delete_service() {
@@ -140,13 +133,6 @@ class App_Services_Test extends App_UnitTestCase {
 		$services = appointments_get_services( array( 'fields' => 'ID', 'page' => $page_id ) );
 		$this->assertCount( 1, $services );
 		$this->assertEquals( $services[0], '3' );
-
-		// Test the deprecated function
-		$this->remove_deprecated_filters();
-		global $appointments;
-		$this->assertEquals( $appointments->get_services(), appointments_get_services() );
-		$this->assertEquals( $appointments->get_services('name DESC'), appointments_get_services( array( 'orderby' => 'name DESC' )) );
-		$this->add_deprecated_filters();
 	}
 
 	function test_update_service() {
@@ -226,15 +212,6 @@ class App_Services_Test extends App_UnitTestCase {
 
 		$min_id = appointments_get_services_min_id();
 		$this->assertEquals( 2, $min_id ); // Default service has ID = 1
-
-
-		// Test that deprecated function is returning the same
-		$this->remove_deprecated_filters();
-		global $appointments;
-		appointments_delete_service_cache(2);
-		$this->assertEquals( $appointments->get_first_service_id(), appointments_get_services_min_id() );
-		$this->add_deprecated_filters();
-
 	}
 
 

@@ -73,11 +73,6 @@ class App_Notifications_Test extends App_UnitTestCase {
 			$this->assertContains( 'The new appointment has an ID ' . $this->app_id . ' for ' . date_i18n($appointments->datetime_format, strtotime(appointments_get_appointment( $this->app_id )->start ) ) . ' and you can confirm it using your profile page.', $body );
 		}, 10, 3);
 
-		$appointments->send_notification( $this->app_id );
-
-		$this->assertTrue( $this->admin_notification_sent );
-		$this->assertTrue( $this->worker_notification_sent );
-
 		$this->admin_notification_sent = false;
 		$this->worker_notification_sent = false;
 	}
@@ -140,10 +135,6 @@ class App_Notifications_Test extends App_UnitTestCase {
 			$this->assertContains( 'Cancelled appointment has an ID ' . $this->app_id . ' for ' . date_i18n($appointments->datetime_format, strtotime(appointments_get_appointment( $this->app_id )->start ) ), $body );
 		}, 10, 3);
 
-		$appointments->send_notification( $this->app_id, true );
-
-		$this->assertTrue( $this->admin_notification_sent );
-		$this->assertTrue( $this->worker_notification_sent );
 
 		$this->admin_notification_sent = false;
 		$this->worker_notification_sent = false;

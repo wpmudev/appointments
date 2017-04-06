@@ -80,18 +80,8 @@ class App_Working_Hours_Test extends App_UnitTestCase {
 		$worker_id = $this->factory->worker->create_object( $this->factory->worker->generate_args() );
 		appointments_update_worker_working_hours( $worker_id, $this->get_open_wh(), 'open' );
 
-		$open = appointments()->get_work_break( 0, $worker_id, 'open' );
-		$open_new = appointments_get_worker_working_hours( 'open', $worker_id, 0 );
-
-		$this->assertTrue( is_string( $open->hours ) );
-		$open->hours = maybe_unserialize( $open->hours );
-		$this->assertTrue( is_array( $open->hours ) );
-		$this->assertEquals( $open, $open_new );
-
 		appointments_delete_worker_working_hours( $worker_id );
-		$open = appointments()->get_work_break( 0, $worker_id, 'open' );
 		$open_new = appointments_get_worker_working_hours( 'open', $worker_id, 0 );
-		$this->assertNull( $open );
 		$this->assertFalse( $open_new );
 
 		$this->add_deprecated_filters();
