@@ -11,8 +11,9 @@ You need nodejs + npm installed
 
 ## npm tasks
 Everything (except unit tests) should be handled by npm. Note that you don't need to interact with Grunt in a direct way.
-- **`npm run watch`**: Start watching JS files. At the moment not all JS files are watched. Continue reading for more information.
-- **`npm run build`**: Run the build process. This is generate po files, compress JS files (with Webpack) and compress the plugin zip among some other little tasks made by Grunt.
+
+* **`npm run watch`**: Start watching JS files. At the moment not all JS files are watched. Continue reading for more information.
+* **`npm run build`**: Run the build process. This is generate po files, compress JS files (with Webpack) and compress the plugin zip among some other little tasks made by Grunt.
 
 ## JavaScript
 At this moment **only shortcodes JS files are managed by Webpack**
