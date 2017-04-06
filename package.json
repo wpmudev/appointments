@@ -5,7 +5,9 @@
   "projectEditUrl": "https://premium.wpmudev.org/wp-admin/edit.php?post_type=project&page=projects-manage&manage_files=679841",
   "description": "",
   "scripts": {
-    "postinstall": "bower update"
+    "postinstall": "bower update && webpack -p",
+    "watch": "webpack --watch -p",
+    "build": "webpack -p && grunt build"
   },
   "dependencies": {},
   "devDependencies": {
@@ -24,7 +26,8 @@
     "grunt-potomo": "~2.1.0",
     "grunt-search": "^0.1.8",
     "grunt-wp-i18n": "~0.5.0",
-    "load-grunt-tasks": "~0.2.0"
+    "load-grunt-tasks": "~0.2.0",
+    "webpack": "^2.3.3"
   },
   "author": "WPMU DEV",
   "license": "GPLv2"

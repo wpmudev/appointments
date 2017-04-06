@@ -63,7 +63,8 @@ module.exports = function(grunt) {
                     '!tmp/**',
                     '!**/*~',
                     '.distignore',
-                    '!README.md'
+                    '!README.md',
+                    '!webpack.conf.js'
                 ],
                 dest: 'build/<%= pkg.name %>/'
             }
@@ -141,6 +142,11 @@ module.exports = function(grunt) {
             dev : {
                 path: '<%= pkg.projectEditUrl %>',
                 app: 'Google Chrome'
+            }
+        },
+        run: {
+            commands: {
+                exec: './npm run build'
             }
         }
     });
