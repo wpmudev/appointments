@@ -80,7 +80,6 @@ class Appointments_Admin_Settings_Page {
 			$content .= implode( ' | ', $links );
 			$content .= '</ul>';
 
-			wp_enqueue_script( 'app-settings-sections', appointments_plugin_url() . 'admin/js/admin-settings-sections.js', array( 'jquery' ), appointments_get_db_version(), true );
 			wp_enqueue_script( 'app-settings', appointments_plugin_url() . 'admin/js/admin-settings.js', array( 'jquery' ), appointments_get_db_version(), true );
 
 			$appointments = appointments();

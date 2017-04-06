@@ -15,14 +15,16 @@ Everything (except unit tests) should be handled by npm. Note that you don't nee
 * **`npm run watch`**: Start watching JS files. At the moment not all JS files are watched. Continue reading for more information.
 * **`npm run build`**: Run the build process. This is generate po files, compress JS files (with Webpack) and compress the plugin zip among some other little tasks made by Grunt.
 
-## JavaScript
-At this moment **only shortcodes JS files are managed by Webpack**
+## JavaScript and Stylesheets
+All JS files that are processed by Webpack are located at `_src` folder.
 
 `webpack.config.js` includes the setup to watch and process JS files.
 
 Run `npm run watch` to start watching files. You only need to modify `.dev.js` files and Webpack will do the rest by processing them in `.js`.
 
-For instance: `includes/shortcodes/js/app-confirmation.dev.js` will be processed to `includes/shortcodes/js/app-confirmation.js` automatically when Webpack is watching.
+For instance: `_src/shortcodes/js/app-confirmation.dev.js` will be processed to `includes/shortcodes/js/app-confirmation.js` automatically when Webpack is watching.
+
+Stylesheets are slightly different. At the moment only `_src/admin/css/unslider` is processed by Webpack. But Webpack only understands JS so `_src/admin/css/unslider.js` will load css files, then Webpack processes that JS and converti it to CSS. Please, take a look at `webpack.config.js` file comments. 
 
 ### JavaScript Source Maps
 Webpack always compress files so it's impossible to debug. Fortunately Webpack will generate source maps for you as `.js.map` files.

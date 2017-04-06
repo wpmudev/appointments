@@ -91,7 +91,7 @@ class Appointments_Integration_BuddyPress {
 
 			wp_enqueue_script( 'jquery-ui-datepicker' );
 			wp_enqueue_style("jquery-datepick", $appointments->plugin_url . "/css/jquery.datepick.css", false, $appointments->version);
-			wp_enqueue_script("appointments-admin", $appointments->plugin_url . "/js/admin.js", array('jquery'), $appointments->version);
+			wp_enqueue_script("appointments-admin", $appointments->plugin_url . "/admin/js/admin.js", array('jquery'), $appointments->version);
 		}
 	}
 

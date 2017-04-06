@@ -24,10 +24,10 @@
   border-radius: 5px;
   overflow: hidden;
   text-indent: -999em;
-  border: 2px solid #333;
+  border: 2px solid #fff;
   cursor: pointer;
 }
 .unslider-nav ol li.unslider-active {
-  background: #333;
+  background: #fff;
   cursor: default;
 }
