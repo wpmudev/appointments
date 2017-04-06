@@ -1,0 +1,15 @@
+{
+  "name": "jquery-ui-multiselect-widget",
+  "homepage": "https://github.com/ehynds/jquery-ui-multiselect-widget",
+  "version": "2.0.1",
+  "_release": "2.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.0.1",
+    "commit": "a5f3e0cffa6cc1d9fcd75c5977e3185b4bd5d635"
+  },
+  "_source": "https://github.com/ehynds/jquery-ui-multiselect-widget.git",
+  "_target": "^2.0.1",
+  "_originalSource": "jquery-ui-multiselect-widget",
+  "_direct": true
+}

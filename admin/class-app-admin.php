@@ -190,7 +190,7 @@ class Appointments_Admin {
 		wp_enqueue_script( 'jquery-colorpicker', $appointments->plugin_url . '/js/colorpicker.js', array('jquery'), $appointments->version);
 		wp_enqueue_script( 'app-multi-datepicker', appointments_plugin_url() . 'admin/js/admin-multidatepicker.js', array( 'jquery-ui-datepicker' ), appointments_get_db_version(), true );
 
-		wp_enqueue_script( 'jquery-multiselect', $appointments->plugin_url . '/js/jquery.multiselect.min.js', array('jquery-ui-core','jquery-ui-widget', 'jquery-ui-position'), $appointments->version);
+		wp_enqueue_script( 'jquery-multiselect', $appointments->plugin_url . '/bower_components/jquery-ui-multiselect-widget/src/jquery.multiselect.min.js', array('jquery-ui-core','jquery-ui-widget', 'jquery-ui-position'), $appointments->version);
 		// Make a locale check to update locale_error flag
 
 		if ( empty($appointments->options["disable_js_check_admin"]) )
