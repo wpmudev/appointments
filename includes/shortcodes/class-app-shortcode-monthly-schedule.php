@@ -161,7 +161,7 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 			}
 			else if ( $params['single_worker'] ) {
 				// Select the only provider if that is the case
-				$_REQUEST["app_provider_id"] = $params['single_worker'];
+				$_REQUEST["app_provider_id"] = $_GET["app_provider_id"] = $params['single_worker'];
 				$args['worker'] = $params['single_worker'];
 				$params['worker_id'] = $params['single_worker'];
 			}			
