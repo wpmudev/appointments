@@ -143,7 +143,7 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 			$appointments->get_lsw(); // This should come after Force service
 
 			$workers_by_service = appointments_get_workers_by_service( $appointments->service );
-			$workers_ids = array_map( function( $w ) { return $w->ID; }, $workers_by_service );
+			$workers_ids = wp_list_pluck( $workers_by_service, 'ID' );
 			$params['single_worker'] = false;
 			if ( 1 === count( $workers_by_service ) ) {
 				$params['single_worker'] = $workers_by_service[0]->ID;
