@@ -1,0 +1,13 @@
+{
+    "name": "wpmudev/appointments",
+    "authors": [
+        {
+            "name": "WPMU DEV",
+            "email": "contact@wpmudev.org"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "codeception/codeception": "^2.2"
+    }
+}

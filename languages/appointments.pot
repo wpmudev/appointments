@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments+ 2.0.5\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2017-04-06 10:01:56+00:00\n"
+"POT-Creation-Date: 2017-04-06 16:19:07+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1302,11 +1302,11 @@ msgstr ""
 msgid "Add new Service Provider"
 msgstr ""
 
-#: admin/pages/class-admin-settings-page.php:162
+#: admin/pages/class-admin-settings-page.php:161
 msgid "Settings updated"
 msgstr ""
 
-#: admin/pages/class-admin-settings-page.php:489
+#: admin/pages/class-admin-settings-page.php:488
 msgid "Please, select at least one service provided"
 msgstr ""
 
@@ -1385,6 +1385,7 @@ msgstr ""
 #: includes/gcal/views/settings-gcal-step-3.php:60
 #: includes/pro/includes/addons/app-users-additional_fields.php:528
 #: includes/pro/includes/addons/app-users-additional_fields.php:566
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:355
 msgid "No"
 msgstr ""
 
@@ -1408,6 +1409,7 @@ msgstr ""
 #: includes/gcal/views/settings-gcal-step-3.php:61
 #: includes/pro/includes/addons/app-users-additional_fields.php:528
 #: includes/pro/includes/addons/app-users-additional_fields.php:566
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:354
 msgid "Yes"
 msgstr ""
 
@@ -2589,7 +2591,7 @@ msgstr ""
 msgid "Login with WordPress"
 msgstr ""
 
-#: appointments.php:1878 includes/gcal/views/settings-gcal-step-1.php:74
+#: appointments.php:1878 includes/gcal/views/settings-gcal-step-1.php:75
 #: includes/gcal/views/settings-gcal-step-2.php:22
 msgid "Submit"
 msgstr ""
@@ -3546,63 +3548,63 @@ msgid ""
 "ADDRESS and CITY placeholders which will be replaced by their real values."
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:5
+#: includes/gcal/views/settings-gcal-step-1.php:6
 msgid "Google Calendar API: Create a new Google Application"
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:12
+#: includes/gcal/views/settings-gcal-step-1.php:13
 msgid ""
 "Go to %s and create a new project. i.e. \"Appointments APP\", then click "
 "\"Create\""
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:12
+#: includes/gcal/views/settings-gcal-step-1.php:13
 msgid "Google Developer Console Projects"
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:16
+#: includes/gcal/views/settings-gcal-step-1.php:17
 msgid "Once in Dashboard, click on \"Enable and manage APIs\"."
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:20
+#: includes/gcal/views/settings-gcal-step-1.php:21
 msgid "Click on \"Calendar API\"."
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:24
+#: includes/gcal/views/settings-gcal-step-1.php:25
 msgid "Enable the Calendar API\""
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:28
+#: includes/gcal/views/settings-gcal-step-1.php:29
 msgid "On the left side, click on \"Credentials\"..."
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:32
+#: includes/gcal/views/settings-gcal-step-1.php:33
 msgid ""
 "... and then \"OAuth consent screen\" tab. Choose a product name shown to "
 "users, i.e. \"Appointments +\""
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:36
+#: includes/gcal/views/settings-gcal-step-1.php:37
 msgid "Click again on \"Credentials\" tab and then Create Credentials"
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:40
+#: includes/gcal/views/settings-gcal-step-1.php:41
 msgid "Select the \"Oauth client ID\" option"
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:44
+#: includes/gcal/views/settings-gcal-step-1.php:45
 msgid "Select \"Other\" Application type with any name, the name is not important."
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:48
+#: includes/gcal/views/settings-gcal-step-1.php:49
 msgid "Take note of the client ID and client secret and fill the form below"
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:56
+#: includes/gcal/views/settings-gcal-step-1.php:57
 msgid "Client ID"
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:64
+#: includes/gcal/views/settings-gcal-step-1.php:65
 msgid "Client Secret"
 msgstr ""
 
