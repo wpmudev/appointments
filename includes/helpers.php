@@ -677,7 +677,7 @@ function appointments_weekly_calendar( $date = false, $args = array() ) {
 
 							$class_name = apply_filters( 'app_class_name', $class_name, $datetime_start, $datetime_end );
 						?>
-						<td class="<?php echo esc_attr( $class_name ); ?>" title="<?php echo esc_attr( $title ); ?>">
+						<td class="app_week_timetable_cell <?php echo esc_attr( $class_name ); ?>" title="<?php echo esc_attr( $title ); ?>">
 							<input type="hidden" class="appointments_take_appointment" value="<?php echo $appointments->pack( $datetime_start, $datetime_end ); ?>" />
 						</td>
 					<?php endforeach; ?>

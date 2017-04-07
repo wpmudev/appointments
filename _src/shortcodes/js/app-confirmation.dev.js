@@ -24,7 +24,7 @@ jQuery( document).ready( function( $ ) {
             var self = this;
 
             var $body = $('body');
-            $body.on( 'click', '.app_timetable_cell.free', function() {
+            $body.on( 'click', '.app_timetable_cell.free, .app_week_timetable_cell.free', function() {
                 self.preConfirmation.apply( self, [ $(this) ] );
             } );
 
