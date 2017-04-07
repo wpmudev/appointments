@@ -165,6 +165,11 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 			$args['worker']              = $single_worker;
 			$worker_id = absint( $args['worker'] );
 		}
+		elseif( isset( $args['require_provider'] ) && 
+			$args['require_provider'] == 1 && 
+			( ( ! isset( $_REQUEST["app_provider_id"] ) || ! in_array( $_REQUEST["app_provider_id"], $workers_ids ) ) || ! isset( $args['worker'] ) ) ){
+			$worker_id = 0;
+		}
 		elseif( isset( $_REQUEST["app_provider_id"] ) && in_array( $_REQUEST["app_provider_id"], $workers_ids ) ){
 			$worker_id = (int)$_REQUEST["app_provider_id"];
 			$args['worker'] = $worker_id;
