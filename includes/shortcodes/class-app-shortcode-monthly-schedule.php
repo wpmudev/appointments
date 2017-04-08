@@ -159,12 +159,17 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 				$_REQUEST["app_provider_id"] = $args['worker'];
 				$params['worker_id'] = $args['worker'];
 			}
-			else if ( $params['single_worker'] ) {
+			elseif ( $params['single_worker'] ) {
 				// Select the only provider if that is the case
 				$_REQUEST["app_provider_id"] = $_GET["app_provider_id"] = $params['single_worker'];
 				$args['worker'] = $params['single_worker'];
 				$params['worker_id'] = $params['single_worker'];
-			}			
+			}
+			elseif( isset( $args['require_provider'] ) && 
+					$args['require_provider'] == 1 && 
+					( ( ! isset( $_REQUEST["app_provider_id"] ) || ! in_array( $_REQUEST["app_provider_id"], $workers_ids ) ) || ! isset( $args['worker'] ) ) ){
+				$params['worker_id'] = 0;
+			}
 			elseif( isset( $_REQUEST["app_provider_id"] ) && in_array( $_REQUEST["app_provider_id"], $workers_ids ) ){				
 				$params['worker_id'] = (int)$_REQUEST["app_provider_id"];
 				$args['worker'] = $params['worker_id'];				
@@ -221,6 +226,8 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 			$params['has_worker'] = ! empty( $params['worker_id'] );
 			$params['has_service'] = ! empty( $require_service ) ? $_REQUEST["app_service_id"] : false;
 			$params['service_id'] = $params['has_service'];
+			$params['require_provider'] = $args['require_provider'];
+			$params['require_service'] = $args['require_service'];
 
 			return $params;
 		}
