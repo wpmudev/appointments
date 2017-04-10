@@ -152,7 +152,8 @@ class Appointments_Google_Calendar_Importer {
 		$event_start               = $event->getStart();
 		$event_start_datetime      = $event_start->getDateTime();
 		$event_start_gmt_timestamp = strtotime( $event_start->getDateTime() );
-		$event_start_date = get_date_from_gmt( $event_start_datetime );
+		$event_start_date_gmt = gmdate('Y-m-d H:i:s', $event_start_gmt_timestamp );
+		$event_start_date = get_date_from_gmt( $event_start_date_gmt );
 
 
 		$event_end = $event->getEnd();
