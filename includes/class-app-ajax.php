@@ -106,6 +106,7 @@ class Appointments_AJAX {
 
 		$app_id = absint( $_POST["app_id"] );
 		$app = appointments_get_appointment( $app_id );
+		$app_orig_status = $app->status;
 		$data = array();
 
 		$data['user'] = $_POST['user'];
@@ -176,8 +177,8 @@ class Appointments_AJAX {
 
 		if ( $update_result ) {
 			// Log change of status
-			if ( $data['status'] != $app->status ) {
-				$appointments->log( sprintf( __('Status changed from %s to %s by %s for appointment ID:%d','appointments'), $app->status, $data["status"], $current_user->user_login, $app->ID ) );
+			if ( $data['status'] != $app_orig_status ) {
+				$appointments->log( sprintf( __('Status changed from %s to %s by %s for appointment ID:%d','appointments'), $app_orig_status, $data["status"], $current_user->user_login, $app->ID ) );
 			}
 			$result = array(
 				'app_id' => $app->ID,
