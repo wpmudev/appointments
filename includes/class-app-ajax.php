@@ -104,25 +104,27 @@ class Appointments_AJAX {
 	function inline_edit_save() {
 		global $appointments, $wpdb, $current_user;
 
+		check_ajax_referer( 'app-edit-appointment', 'nonce' );
+
 		$app_id = absint( $_POST["app_id"] );
 		$app = appointments_get_appointment( $app_id );
 		$app_orig_status = $app->status;
 		$data = array();
 
-		$data['user'] = $_POST['user'];
+		$data['user'] = absint( $_POST['user'] );
 		$data['email'] = !empty($_POST['email']) && is_email($_POST['email']) ? $_POST['email'] : '';
-		$data['name'] = $_POST['name'];
-		$data['phone'] = $_POST['phone'];
-		$data['address'] = $_POST['address'];
-		$data['city'] = $_POST['city'];
-		$data['service'] = $_POST['service'];
-		$data['worker'] = $_POST['worker'];
+		$data['name'] = sanitize_text_field( $_POST['name'] );
+		$data['phone'] = sanitize_text_field( $_POST['phone'] );
+		$data['address'] = sanitize_text_field( $_POST['address'] );
+		$data['city'] = sanitize_text_field( $_POST['city'] );
+		$data['service'] = absint( $_POST['service'] );
+		$data['worker'] = absint( $_POST['worker'] );
 		$data['price'] = $_POST['price'];
 		$data['note'] = $_POST['note'];
 		$data['status'] = $_POST['status'];
 		$data['date'] = $_POST['date'];
 		$data['time'] = $_POST['time'];
-		$resend = $_POST["resend"];
+		$resend = (bool)$_POST["resend"];
 
 		$data = apply_filters('app-appointment-inline_edit-save_data', $data);
 
@@ -207,6 +209,8 @@ class Appointments_AJAX {
 	// Edit or create appointments
 	function inline_edit() {
 		$appointments = appointments();
+
+		check_ajax_referer( 'app-add-new', 'nonce' );
 
 		$app_id = absint( $_POST["app_id"] );
 		$app = false;

@@ -218,7 +218,7 @@ AppointmentsAdmin = window.AppointmentsAdmin || {};
         var app_id = $button.data('app-id');
         data.app_id = app_id;
         data.resend = target.find('input[name="resend"]').is(':checked') ? 1 : 0;
-        data.nonce = this.options.nonces.addNew;
+        data.nonce = this.options.nonces.editApp;
         data.action = 'inline_edit_save';
         $(document).trigger('app-appointment-inline_edit-save_data', [data, target]);
 

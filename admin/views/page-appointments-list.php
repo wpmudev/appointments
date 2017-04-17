@@ -154,7 +154,8 @@ $options = array(
     'lenght' => count( $apps ),
     'columns' => count( $columns ),
     'nonces' => array(
-        'addNew' => wp_create_nonce()
+        'addNew' => wp_create_nonce( 'app-add-new' ),
+		'editApp' => wp_create_nonce( 'app-edit-appointment' ),
     )
 );
 
