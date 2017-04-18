@@ -1,3 +1,7 @@
+2017-04-18 - 2.1.0.1
+-------------------------------
+- Fixed: Only load dashbaord class in premium version
+
 2017-04-18 - 2.1
 -------------------------------
 - New: Cancel link is back
