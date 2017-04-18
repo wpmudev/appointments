@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Appointments+ package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Appointments+ 2.0.5\n"
+"Project-Id-Version: Appointments+ 2.1.0\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2017-04-18 06:53:32+00:00\n"
+"POT-Creation-Date: 2017-04-18 09:57:05+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -881,27 +881,27 @@ msgstr ""
 msgid "%s edited his working hours."
 msgstr ""
 
-#: admin/class-app-admin.php:51
+#: admin/class-app-admin.php:54
 msgid "Appointments Provider"
 msgstr ""
 
-#: admin/class-app-admin.php:58
+#: admin/class-app-admin.php:61
 #: includes/pro/includes/addons/lib/class-app-locations-list-table.php:18
 #: includes/sample-appointments-page.php:38
 msgid "Edit"
 msgstr ""
 
-#: admin/class-app-admin.php:85
+#: admin/class-app-admin.php:88
 msgid "Dismiss notice"
 msgstr ""
 
-#: admin/class-app-admin.php:85 admin/class-app-admin.php:275
-#: admin/class-app-admin.php:304
+#: admin/class-app-admin.php:88 admin/class-app-admin.php:278
+#: admin/class-app-admin.php:307
 #: includes/pro/includes/class-app-google-login.php:165
 msgid "Dismiss"
 msgstr ""
 
-#: admin/class-app-admin.php:143 admin/class-app-admin.php:173
+#: admin/class-app-admin.php:146 admin/class-app-admin.php:176
 #: admin/pages/class-admin-appointments-page.php:26
 #: admin/pages/class-admin-appointments-page.php:284
 #: admin/tinymce-shortcodes-i18n.php:7
@@ -914,77 +914,82 @@ msgstr ""
 msgid "Appointments"
 msgstr ""
 
-#: admin/class-app-admin.php:203
+#: admin/class-app-admin.php:206
 msgid "Preparing for export, please hold on..."
 msgstr ""
 
-#: admin/class-app-admin.php:217 admin/class-app-admin.php:221
-#: admin/class-app-admin.php:225
+#: admin/class-app-admin.php:220 admin/class-app-admin.php:224
+#: admin/class-app-admin.php:228
 msgid "Notice dismissed."
 msgstr ""
 
-#: admin/class-app-admin.php:241
+#: admin/class-app-admin.php:244
 msgid "<b>[Appointments+]</b> You must define at least once service."
 msgstr ""
 
-#: admin/class-app-admin.php:249
+#: admin/class-app-admin.php:252
 msgid ""
 "<b>[Appointments+]</b> One of your services has a duration smaller than "
 "time base. Please visit Services tab and after making your corrections save "
 "new settings."
 msgstr ""
 
-#: admin/class-app-admin.php:256
+#: admin/class-app-admin.php:259
 msgid ""
 "<b>[Appointments+]</b> One of your services is not divisible by the time "
 "base. Please visit Services tab and after making your corrections save new "
 "settings."
 msgstr ""
 
-#: admin/class-app-admin.php:263
+#: admin/class-app-admin.php:266
 msgid ""
 "<b>[Appointments+]</b> One of your services has a duration greater than 24 "
 "hours. Appointments+ does not support services exceeding 1440 minutes (24 "
 "hours). "
 msgstr ""
 
-#: admin/class-app-admin.php:274
+#: admin/class-app-admin.php:277
 msgid ""
 "<b>[Appointments+]</b> One of your services does not have a service "
 "provider assigned. Delete services you are not using."
 msgstr ""
 
-#: admin/class-app-admin.php:275 admin/class-app-admin.php:304
+#: admin/class-app-admin.php:278 admin/class-app-admin.php:307
 #: includes/pro/includes/class-app-google-login.php:165
 msgid "Dismiss this notice for this session"
 msgstr ""
 
-#: admin/class-app-admin.php:284
+#: admin/class-app-admin.php:287
 msgid ""
 "<b>[Appointments+]</b> Appointments+ database tables need to be updated. "
 "Please deactivate and reactivate the plugin (DO NOT DELETE the plugin). You "
 "will not lose any saved information."
 msgstr ""
 
-#: admin/class-app-admin.php:292
+#: admin/class-app-admin.php:295
 msgid ""
 "<b>[Appointments+]</b> More than one instance of services, service "
 "providers, confirmation, Paypal or login shortcodes on the same page may "
 "cause problems.</p>"
 msgstr ""
 
-#: admin/class-app-admin.php:303
+#: admin/class-app-admin.php:306
 msgid ""
 "<b>[Appointments+]</b> Confirmation shortcode [app_confirmation] is always "
 "required to complete an appointment."
 msgstr ""
 
-#: admin/class-app-admin.php:317
+#: admin/class-app-admin.php:320
 msgid "Appointments+ FAQ"
 msgstr ""
 
-#: admin/class-app-admin.php:341
+#: admin/class-app-admin.php:344
 msgid "FAQ"
+msgstr ""
+
+#: admin/class-app-admin.php:401 admin/pages/class-admin-settings-page.php:12
+#: includes/pro/includes/addons/app-locations-location_support.php:169
+msgid "Settings"
 msgstr ""
 
 #: admin/class-app-list-table.php:155
@@ -1228,11 +1233,6 @@ msgstr ""
 #: admin/pages/class-admin-settings-page.php:11
 #: includes/integration/class-app-buddypress.php:149
 msgid "Appointments Settings"
-msgstr ""
-
-#: admin/pages/class-admin-settings-page.php:12
-#: includes/pro/includes/addons/app-locations-location_support.php:169
-msgid "Settings"
 msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:29
@@ -1700,10 +1700,13 @@ msgstr ""
 
 #: admin/views/page-settings-tab-main-section-accesibility.php:28
 msgid ""
-"Allow clients to cancel their appointments using the appointments table or "
-"backend profile while logged in. For appointments table, you must add the "
-"\"allow_cancel=\"1\" parameter to the shortcode. ie. [app_my_appointments "
-"allow_cancel=\"1\"]."
+"Whether to allow clients cancel their appointments using the link in "
+"confirmation and reminder emails or using my appointments table or for "
+"logged in users, using check boxes in their profile pages. For the email "
+"case, you will also need to add CANCEL placeholder to the email message "
+"settings below. For my appointments table, you will need to add parameter "
+"allow_cancel=\"1\" to the shortcode. Note: Admin and service provider will "
+"always get a notification email."
 msgstr ""
 
 #: admin/views/page-settings-tab-main-section-accesibility.php:33
