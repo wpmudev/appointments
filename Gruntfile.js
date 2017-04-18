@@ -166,6 +166,13 @@ module.exports = function(grunt) {
         grunt.log.writeln('----------');
     });
 
+    grunt.registerTask( 'git', function() {
+        var git = require( 'simple-git' )(__dirname);
+        git.checkoutBranch( 'master', function() {
+            console.log("HOLA");
+        });
+    });
+
     grunt.registerTask('build', [
         'version-compare',
         'clean',
