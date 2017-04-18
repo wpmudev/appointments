@@ -25,7 +25,7 @@
 					echo "selected='selected'" ?>><?php _e( 'Yes', 'appointments' ) ?></option>
 			</select>
 			<br>
-			<p class="description"><?php _e( 'Allow clients to cancel their appointments using the appointments table or backend profile while logged in. For appointments table, you must add the "allow_cancel="1" parameter to the shortcode. ie. [app_my_appointments allow_cancel="1"].', 'appointments' ) ?></p>
+			<p class="description"><?php _e( 'Whether to allow clients cancel their appointments using the link in confirmation and reminder emails or using my appointments table or for logged in users, using check boxes in their profile pages. For the email case, you will also need to add CANCEL placeholder to the email message settings below. For my appointments table, you will need to add parameter allow_cancel="1" to the shortcode. Note: Admin and service provider will always get a notification email.', 'appointments' ) ?></p>
 		</td>
 	</tr>
 

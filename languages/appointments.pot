@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments+ 2.0.5\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2017-04-08 07:31:21+00:00\n"
+"POT-Creation-Date: 2017-04-18 06:53:32+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2634,132 +2634,132 @@ msgstr ""
 msgid "Appointment could not be cancelled. Please refresh the page and try again."
 msgstr ""
 
-#: includes/class-app-ajax.php:140 includes/class-app-ajax.php:194
+#: includes/class-app-ajax.php:143 includes/class-app-ajax.php:197
 msgid "Record could not be saved OR you did not make any changes!"
 msgstr ""
 
-#: includes/class-app-ajax.php:180
+#: includes/class-app-ajax.php:183
 msgid "Status changed from %s to %s by %s for appointment ID:%d"
 msgstr ""
 
-#: includes/class-app-ajax.php:184 includes/class-app-ajax.php:189
+#: includes/class-app-ajax.php:187 includes/class-app-ajax.php:192
 #: includes/pro/includes/addons/app-users-additional_fields.php:396
 msgid "<span style=\"color:green;font-weight:bold\">Changes saved.</span>"
 msgstr ""
 
-#: includes/class-app-ajax.php:193
+#: includes/class-app-ajax.php:196
 msgid "Confirmation message (re)sent"
 msgstr ""
 
-#: includes/class-app-ajax.php:258
+#: includes/class-app-ajax.php:263
 msgid "Not registered user"
 msgstr ""
 
-#: includes/class-app-ajax.php:293
+#: includes/class-app-ajax.php:298
 msgid ""
 "You have already applied for an appointment. Please wait until you hear "
 "from us."
 msgstr ""
 
-#: includes/class-app-ajax.php:444 includes/class-app-ajax.php:891
+#: includes/class-app-ajax.php:449 includes/class-app-ajax.php:896
 msgid ""
 "We are sorry, but this time slot is no longer available. Please refresh the "
 "page and try another time slot. Thank you."
 msgstr ""
 
-#: includes/class-app-ajax.php:516 includes/class-app-ajax.php:525
+#: includes/class-app-ajax.php:521 includes/class-app-ajax.php:530
 msgid "Appointment could not be saved. Please contact website admin."
 msgstr ""
 
-#: includes/class-app-ajax.php:722
+#: includes/class-app-ajax.php:727
 msgid ""
 "Paypal confirmation arrived, but status could not be changed for some "
 "reason. Please check appointment with ID %s"
 msgstr ""
 
-#: includes/class-app-ajax.php:724
+#: includes/class-app-ajax.php:729
 msgid "Appointment status could not be changed"
 msgstr ""
 
-#: includes/class-app-ajax.php:730
+#: includes/class-app-ajax.php:735
 msgid ""
 "Last transaction has been reversed. Reason: Payment has been reversed "
 "(charge back)"
 msgstr ""
 
-#: includes/class-app-ajax.php:754
+#: includes/class-app-ajax.php:759
 msgid "Last transaction has been reversed. Reason: Payment has been refunded"
 msgstr ""
 
-#: includes/class-app-ajax.php:778
+#: includes/class-app-ajax.php:783
 msgid "Last transaction has been reversed. Reason: Payment Denied"
 msgstr ""
 
-#: includes/class-app-ajax.php:804
+#: includes/class-app-ajax.php:809
 msgid "Customer did not include a confirmed shipping address"
 msgstr ""
 
-#: includes/class-app-ajax.php:805
+#: includes/class-app-ajax.php:810
 msgid "Funds not captured yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:806
+#: includes/class-app-ajax.php:811
 msgid "eCheck that has not cleared yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:807
+#: includes/class-app-ajax.php:812
 msgid "Payment waiting for aproval by service provider"
 msgstr ""
 
-#: includes/class-app-ajax.php:808
+#: includes/class-app-ajax.php:813
 msgid "Payment waiting for service provider to handle multi-currency process"
 msgstr ""
 
-#: includes/class-app-ajax.php:809
+#: includes/class-app-ajax.php:814
 msgid "Customer did not register or confirm his/her email yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:810
+#: includes/class-app-ajax.php:815
 msgid "Waiting for service provider to upgrade the PayPal account"
 msgstr ""
 
-#: includes/class-app-ajax.php:811
+#: includes/class-app-ajax.php:816
 msgid "Waiting for service provider to verify his/her PayPal account"
 msgstr ""
 
-#: includes/class-app-ajax.php:815
+#: includes/class-app-ajax.php:820
 msgid "Last transaction is pending. Reason: "
 msgstr ""
 
-#: includes/class-app-ajax.php:871
+#: includes/class-app-ajax.php:876
 msgid "You need to login to make an appointment."
 msgstr ""
 
-#: includes/class-app-ajax.php:897
+#: includes/class-app-ajax.php:902
 msgid "Service name: "
 msgstr ""
 
-#: includes/class-app-ajax.php:898
+#: includes/class-app-ajax.php:903
 msgid "Date and time: "
 msgstr ""
 
-#: includes/class-app-ajax.php:899
+#: includes/class-app-ajax.php:904
 msgid "Lasts (approx): "
 msgstr ""
 
-#: includes/class-app-ajax.php:899
+#: includes/class-app-ajax.php:904
 msgid "minutes"
 msgstr ""
 
-#: includes/class-app-ajax.php:902
+#: includes/class-app-ajax.php:907
 msgid "Price: "
 msgstr ""
 
-#: includes/class-app-ajax.php:907
+#: includes/class-app-ajax.php:912
 msgid "Service provider: "
 msgstr ""
 
-#: includes/class-app-ajax.php:993
+#: includes/class-app-ajax.php:998
 msgid "Nothing to download!"
 msgstr ""
 
@@ -5730,7 +5730,7 @@ msgctxt "Settings section"
 msgid "%s Settings"
 msgstr ""
 
-#: includes/class-app-ajax.php:132 includes/class-app-ajax.php:140
+#: includes/class-app-ajax.php:135 includes/class-app-ajax.php:143
 msgctxt "Error while editing an appointment"
 msgid "Error"
 msgstr ""

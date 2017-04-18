@@ -1,3 +1,28 @@
+2017-04-18 - 2.1
+-------------------------------
+- New: Cancel link is back
+- New: Better alerts in bookings pages
+- Enhance: Lots of performance improvements
+- Enhance: JavaScript files are now compressed
+- Enhance: Removed deprecated functions since 1.6
+- Security: Fixed XSS vulnerability
+- Fixed: Wrong provider when single-worker and provider_id set on url for wrong service_id
+- Fixed: Shortcodes were not working when Hustle was activated
+- Fixed: require_provider attribute in monthly calendar was not working
+- Fixed: Some datepickers were not respecting start of the week
+- Fixed: Weekly calendar was not properly calculating capacities.
+- Fixed: Users could not confirm appointments from BuddyPress profile page
+- Fixed: Google Calendar settings were reset when a worker cancels an appointment
+- Fixed: Weekly calendar was showing 1970 as next week in some cases
+- Fixed: Unavailable times are showing as "busy" instead of "Not possible"
+- Fixed: Firefox was preventing new tab for Google Calendar button
+- Fixed: JavaScript error when using an Upfront theme
+- Fixed: Correct provider is not selected with autorefresh attribute in shortcodes.
+- Fixed: Google Calendar sync fixes
+- Fixed: All services display largest time slot when service duration addon was activated
+- Fixed: MarketPress integration fixes
+- Some other minor fixes
+
 2017-03-10 - 2.0.5
 -------------------------------
 - Fix: app_monthly_schedule not showing properly working hours when a provider is set as parameter

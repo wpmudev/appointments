@@ -1,12 +1,12 @@
 {
   "name": "appointments",
-  "version": "2.0.5",
+  "version": "2.1.0",
   "main": "appointments.php",
-  "projectEditUrl": "https://premium.wpmudev.org/wp-admin/edit.php?post_type=project&page=projects-manage&manage_files=679841",
+  "projectEditUrl": "https://premium.wpmudev.org/wp-admin/edit.php?post_type=project&page=projects-manage&manage_files=679841#file",
   "description": "",
   "scripts": {
     "postinstall": "bower update && webpack -p",
-    "watch": "webpack --watch -p",
+    "watch": "bower update && webpack --watch -p",
     "build": "webpack -p && grunt build"
   },
   "dependencies": {},

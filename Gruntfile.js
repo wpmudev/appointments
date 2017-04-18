@@ -161,6 +161,7 @@ module.exports = function(grunt) {
         'checktextdomain',
         'makepot',
         'copy',
-        'compress'
+        'compress',
+        'open'
     ]);
 };

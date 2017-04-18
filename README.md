@@ -44,9 +44,16 @@ whenever `development` or `master` are merged into `wporg-master`, this folder c
 which is bad because is important that this folder is not released along with Appointments Lite.
 
 ## How to release pro and free versions then?
+- Update all submodules by using `git submodule update --remote`
 - Once you have your `development` branch ready, merge into `master` and also in `wporg-master`
-- Now execute `npm run build` in `master` and `wporg-master`. zip files will be generated in `build` folder
-- Notice that `wporg-master` won't include `pro` folder in the build. You just need these files for SVN WordPress repository.
+- Checkout `master` branch and merge `development` into this one (`git merge development`)
+- Execute `npm run build`. zip files will be generated in `build` folder. This zip file is the one that you'll need to upload to WPMU DEV.
+- Checkout `wporg-master` and merge `development` into this one (`git merge development`)
+- Delete `pro` folder (if it's present after the merge).
+- Execute `npm run build` in `wporg-master`. You need to upload `build/appointments` folder to WordPress.org repository.
+- Don't forget to tag the new version: 
+   * `git tag -a $VERSION -m "$CHANGELOG"`
+   * `git push origin $VERSION`
 
 ## What's the deal with pro folder?
 The `pro` folder is code that is exclusive for WPMU DEV version. The `pro` folder must always extend the Lite version with WordPress hooks.
