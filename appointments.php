@@ -107,8 +107,6 @@ class Appointments {
 		add_filter( 'the_posts', array(&$this, 'load_styles') );			// Determine if we use shortcodes on the page
 
 		add_action( 'admin_init', array( $this, 'maybe_upgrade' ) );
-		// Add quick link to plugin settings from plugins list page.
-		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( &$this, 'add_settings_link' ) );
 
 		include_once( 'includes/class-app-service.php' );
 		include_once( 'includes/class-app-worker.php' );
@@ -221,22 +219,6 @@ class Appointments {
 			$this->gcal_api = new Appointments_Google_Calendar();
 		}
 		return $this->gcal_api;
-	}
-
-	/**
-	 * Add quick link to plugin settings page.
-	 *
-	 * @param $links Links array.
-	 *
-	 * @return array
-	 */
-	public function add_settings_link( $links ) {
-
-		$plugin_links = array(
-			'<a href="' . admin_url( 'admin.php?page=app_settings' ) . '">' . __( "Settings", "appointments" ) . '</a>',
-		);
-
-		return array_merge( $plugin_links, $links );
 	}
 
 
