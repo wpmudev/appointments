@@ -27,6 +27,9 @@ class Appointments_Admin {
 
 		add_action( 'wp_ajax_appointments_dismiss_notice', array( $this, 'dismiss_notice' ) );
 
+		// Add quick link to plugin settings from plugins list page.
+		add_filter( 'plugin_action_links_' . plugin_basename( APP_PLUGIN_FILE ), array( $this, 'add_settings_link' ) );
+
 		new Appointments_Admin_Dashboard_Widget();
 		$this->user_profile = new Appointments_Admin_User_Profile();
 
@@ -383,6 +386,22 @@ class Appointments_Admin {
 				return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Add quick link to plugin settings page.
+	 *
+	 * @param $links Links array.
+	 *
+	 * @return array
+	 */
+	public function add_settings_link( $links ) {
+
+		$plugin_links = array(
+			'<a href="' . admin_url( 'admin.php?page=app_settings' ) . '">' . __( "Settings", "appointments" ) . '</a>',
+		);
+
+		return array_merge( $plugin_links, $links );
 	}
 	
 }
