@@ -9,7 +9,7 @@
     "watch": "bower update && webpack --watch -p",
     "build:main": "grunt clean && webpack -p && grunt build",
     "build:wporg": "grunt clean && webpack -p && grunt build:wporg",
-    "release": "git submodule update --remote && git-branch-is development && grunt clean && webpack -p && grunt build:main && grunt build:wporg && grunt finish"
+    "release": "git submodule update --remote && git-branch-is master && grunt clean && webpack -p && grunt build:main && grunt build:wporg && grunt finish"
   },
   "dependencies": {},
   "devDependencies": {
