@@ -219,8 +219,18 @@ module.exports = function(grunt) {
         'clean',
         'checktextdomain',
         'makepot',
-        'copy',
-        'compress',
+        'copy:main',
+        'compress:main',
+        'finish'
+    ]);
+
+    grunt.registerTask('build:wporg', [
+        'version-compare',
+        'clean',
+        'checktextdomain',
+        'makepot',
+        'copy:wporg',
+        'compress:wporg',
         'finish'
     ]);
 };

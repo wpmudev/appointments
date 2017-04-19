@@ -8,7 +8,8 @@
     "postinstall": "bower update && webpack -p",
     "watch": "bower update && webpack --watch -p",
     "build": "webpack -p && grunt build",
-    "release": "git-branch-is development && git checkout wporg-master"
+    "release": "git-branch-is development && git checkout wporg-master && git checkout development",
+    "build:wporg": "git-branch-is wporg-master && git merge --strategy-option theirs development && webpack -p && grunt build:wporg"
   },
   "dependencies": {},
   "devDependencies": {
