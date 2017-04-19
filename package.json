@@ -9,9 +9,7 @@
     "watch": "bower update && webpack --watch -p",
     "build": "webpack -p && grunt build"
   },
-  "dependencies": {
-    "gulp-git": "^2.1.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "bower": "^1.8.0",
     "css-loader": "^0.28.0",
@@ -30,9 +28,7 @@
     "grunt-potomo": "~2.1.0",
     "grunt-search": "^0.1.8",
     "grunt-wp-i18n": "~0.5.0",
-    "gulp": "^3.9.1",
     "load-grunt-tasks": "~0.2.0",
-    "simple-git": "^1.70.0",
     "webpack": "^2.3.3"
   },
   "author": "WPMU DEV",
