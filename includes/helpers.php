@@ -784,3 +784,14 @@ function _appointments_enqueue_sweetalert() {
 	wp_enqueue_style( 'app-sweetalert', appointments_plugin_url() . 'bower_components/sweetalert/dist/sweetalert.css' );
 	wp_enqueue_script( 'app-sweetalert', appointments_plugin_url() . 'bower_components/sweetalert/dist/sweetalert.min.js' );
 }
+
+/**
+ * Return if the version of Appointments is the premium version
+ *
+ * @internal
+ *
+ * @return bool
+ */
+function _appointments_is_pro() {
+	return is_readable( appointments_plugin_dir() . 'includes/pro/class-app-pro.php' );
+}

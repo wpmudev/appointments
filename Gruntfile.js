@@ -57,7 +57,8 @@ module.exports = function(grunt) {
         '.distignore',
         '!README.md',
         '!webpack.conf.js',
-        '!includes/pro'
+        '!includes/pro/**',
+        '!includes/external/wpmudev-dash/**'
     ];
 
     grunt.initConfig({
@@ -90,7 +91,8 @@ module.exports = function(grunt) {
                     '!node_modules/**', // Exclude node_modules/
                     '!tests/**', // Exclude tests/
                     '!admin/assets/shared-ui/**', // Exclude WPMU DEV Shared UI
-                    '!includes/external/**'
+                    '!includes/external/**',
+                    '!build/**'
                 ],
                 expand: true
             }
@@ -144,16 +146,6 @@ module.exports = function(grunt) {
                 cwd: 'build/<%= pkg.name %>/',
                 src: ['**/*'],
                 dest: '<%= pkg.name %>/'
-            },
-            wporg: {
-                options: {
-                    mode: 'zip',
-                    archive: './build/<%= pkg.name %>-<%= pkg.version %>-wporg.zip'
-                },
-                expand: true,
-                cwd: 'build/<%= pkg.name %>-wporg/',
-                src: ['**/*'],
-                dest: '<%= pkg.name %>-wporg/'
             }
         },
 
@@ -216,8 +208,10 @@ module.exports = function(grunt) {
     grunt.registerTask( 'finish', function() {
         var json = grunt.file.readJSON('package.json');
         var file = './build/' + json.name + '-' + json.version + '.zip';
+        var orgFiles = './build/appointments-wporg';
         grunt.log.writeln( 'Process finished. Browse now to: ' + json.projectEditUrl['green'].bold );
         grunt.log.writeln( 'And upload the zip file under: ' + file['green'].bold);
+        grunt.log.writeln( 'To make wp.org release, grab all the files in ' + orgFiles['green'].bold + ' and upload them via svn: ' + file['green'].bold);
         grunt.log.writeln('----------');
         grunt.log.writeln('');
         grunt.log.writeln( 'Remember to tag this new version:' );
@@ -242,7 +236,6 @@ module.exports = function(grunt) {
         'checktextdomain',
         'makepot',
         'copy:wporg',
-        'replace',
-        'compress:wporg'
+        'replace'
     ]);
 };

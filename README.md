@@ -12,8 +12,14 @@ You need nodejs + npm installed
 ## npm tasks
 Everything (except unit tests) should be handled by npm. Note that you don't need to interact with Grunt in a direct way.
 
-* **`npm run watch`**: Start watching JS files. At the moment not all JS files are watched. Continue reading for more information.
-* **`npm run build`**: Run the build process. This is generate po files, compress JS files (with Webpack) and compress the plugin zip among some other little tasks made by Grunt.
+* **`npm run watch`**: Start watching JS files.
+* **`npm run release`**: Package everything to be released (DEV and wp.org version, both, yeah!). **note**: You must be on `master` branch to use this command.
+
+There are some other commands that allows you to manually generate wp.org or DEV packages. These are: 
+* **`npm run build:main`**: Generates the pro version.
+* **`npm run build:wporg`**: Generates the wp.org version.
+
+You don't need to be in any specific branch to execute these. Useful if you need to generate betas.
 
 ## JavaScript and Stylesheets
 All JS files that are processed by Webpack are located at `_src` folder.
@@ -34,36 +40,18 @@ If you need to set a breakpoint by using browser developer tools do not search t
 ## Branches
 - `development`: Use this branch to develop things
 - `master`: Merge `development` into this one when a new version is ready
-- `wporg-master`: Use this one to release Appointments Lite but do not change things here, just merge into this branch.
-
-**IMPORTANT**: Never, ever, ever, merge `wporg-master` into `development` or `master`.
-Always use `development` to develop things and then merge this one into `wporg-master`.
-
-The difference between `wporg-master` and the rest is the folder `includes/pro`. Due to Git limitations,
-whenever `development` or `master` are merged into `wporg-master`, this folder could appear again in `wporg-master`
-which is bad because is important that this folder is not released along with Appointments Lite.
 
 ## How to release pro and free versions then?
-- Update all submodules by using `git submodule update --remote`
-- Once you have your `development` branch ready, merge into `master` and also in `wporg-master`
-- Checkout `master` branch and merge `development` into this one (`git merge development`)
-- Execute `npm run build`. zip files will be generated in `build` folder. This zip file is the one that you'll need to upload to WPMU DEV.
-- Checkout `wporg-master` and merge `development` into this one (`git merge development`)
-- Delete `pro` folder (if it's present after the merge).
-- Execute `npm run build` in `wporg-master`. You need to upload `build/appointments` folder to WordPress.org repository.
-- Don't forget to tag the new version: 
-   * `git tag -a $VERSION -m "$CHANGELOG"`
-   * `git push origin $VERSION`
+The release process always must start on `master` branch. Once latest changes are merged into it, with just a command you'll be able to grab all the files and make the releases.
 
-## What's the deal with pro folder?
-The `pro` folder is code that is exclusive for WPMU DEV version. The `pro` folder must always extend the Lite version with WordPress hooks.
-This way, you won't need to check differences between both versions and workflow is easier:
-- Work on `development`
-- Merge into `master` and build
-- Merge master into `wporg-master` and remove `pro` folder if it appears again. Then build
-- Copy what's inside the build folder to wp.org SVN repo.
-- Make sure that free version plugin name is Appointments Lite
-- Release both versions.
+wp.org and DEV versions are exactly the same butwp.org does not include `includes/pro` nor `includes/externals/wpmudev-dash` folders.
+
+** So why are both versions in the same branch **: When you execute `npm run release` or `npm run build:wporg`, Grunt will remove those folders and also change Appointments+ for Appointments in the plugin name. That's the only difference!
+
+Follow these steps to make the release:
+- Once you have your `development` branch ready, merge into `master`. Do not forget to update the version number. Always with format X.X.X. You'll need to update in `appointments.php` and also `package.json`
+- Execute `npm run release`. zips and files will be generated in `build` folder.
+- At the end of the process some instructions will be displayed. Follow them to gat the version and upload to DEV
 
 ## Unit Tests
 All tests are under `tests` folder. It's a good idea to add a test for any refactoring task or for any bug found that you fix. Unit Testing is not always possible but try it.
