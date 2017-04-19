@@ -191,6 +191,21 @@ module.exports = function(grunt) {
                 path: '<%= pkg.projectEditUrl %>',
                 app: 'Google Chrome'
             }
+        },
+        replace: {
+            dist: {
+                options: {
+                    patterns: [
+                        {
+                            match: /Plugin Name\: Appointments\+/g,
+                            replacement: 'Plugin Name: Appointments'
+                        }
+                    ]
+                },
+                files: [
+                    {expand: true, flatten: true, src: ['./build/appointments-wporg/appointments.php'], dest: 'build/appointments-wporg'}
+                ]
+            }
         }
     });
 
@@ -216,21 +231,18 @@ module.exports = function(grunt) {
 
     grunt.registerTask('build', [
         'version-compare',
-        'clean',
         'checktextdomain',
         'makepot',
         'copy:main',
-        'compress:main',
-        'finish'
+        'compress:main'
     ]);
 
     grunt.registerTask('build:wporg', [
         'version-compare',
-        'clean',
         'checktextdomain',
         'makepot',
         'copy:wporg',
-        'compress:wporg',
-        'finish'
+        'replace',
+        'compress:wporg'
     ]);
 };

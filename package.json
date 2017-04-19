@@ -9,9 +9,7 @@
     "watch": "bower update && webpack --watch -p",
     "build": "webpack -p && grunt build",
     "status": "git status",
-    "release": "git-branch-is development && git checkout wporg-master && npm run build:wporg && git checkout master && npm run build:main && git checkout development",
-    "build:wporg": "git-branch-is wporg-master && git merge --strategy-option theirs development && webpack -p && grunt build:wporg",
-    "build:main": "git-branch-is master && git merge development && webpack -p && grunt build:wporg"
+    "release": "git-branch-is development && grunt clean && webpack -p && grunt build:main && grunt build:wporg && grunt finish"
   },
   "dependencies": {},
   "devDependencies": {
@@ -32,6 +30,7 @@
     "grunt-open": "^0.2.3",
     "grunt-phpunit": "^0.3.6",
     "grunt-potomo": "~2.1.0",
+    "grunt-replace": "^1.0.1",
     "grunt-search": "^0.1.8",
     "grunt-wp-i18n": "~0.5.0",
     "load-grunt-tasks": "~0.2.0",
