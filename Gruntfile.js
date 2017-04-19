@@ -1,5 +1,65 @@
 module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
+
+    var excludeCopyFiles = [
+        '**',
+        '!npm-debug.log',
+        '!node_modules/**',
+        '!bower.json',
+        '!build/**',
+        '!bin/**',
+        '!.git/**',
+        '!Gruntfile.js',
+        '!package.json',
+        '!.gitignore',
+        '!.gitmodules',
+        '!sourceMap.map',
+        '!phpunit.xml.dist',
+        '!travis.yml',
+        '!tests/**',
+        '!**/Gruntfile.js',
+        '!**/package.json',
+        '!**/README.md',
+        '!lite-vs-pro.txt',
+        '!composer.json',
+        '!vendor/**',
+        '!tmp/**',
+        '!**/*~',
+        '.distignore',
+        '!README.md',
+        '!webpack.conf.js'
+    ];
+
+    var excludeCopyFilesWPorg = [
+        '**',
+        '!npm-debug.log',
+        '!node_modules/**',
+        '!bower.json',
+        '!build/**',
+        '!bin/**',
+        '!.git/**',
+        '!Gruntfile.js',
+        '!package.json',
+        '!.gitignore',
+        '!.gitmodules',
+        '!sourceMap.map',
+        '!phpunit.xml.dist',
+        '!travis.yml',
+        '!tests/**',
+        '!**/Gruntfile.js',
+        '!**/package.json',
+        '!**/README.md',
+        '!lite-vs-pro.txt',
+        '!composer.json',
+        '!vendor/**',
+        '!tmp/**',
+        '!**/*~',
+        '.distignore',
+        '!README.md',
+        '!webpack.conf.js',
+        '!includes/pro'
+    ];
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
@@ -38,35 +98,12 @@ module.exports = function(grunt) {
 
         copy: {
             main: {
-                src:  [
-                    '**',
-                    '!npm-debug.log',
-                    '!node_modules/**',
-                    '!bower.json',
-                    '!build/**',
-                    '!bin/**',
-                    '!.git/**',
-                    '!Gruntfile.js',
-                    '!package.json',
-                    '!.gitignore',
-                    '!.gitmodules',
-                    '!sourceMap.map',
-                    '!phpunit.xml.dist',
-                    '!travis.yml',
-                    '!tests/**',
-                    '!**/Gruntfile.js',
-                    '!**/package.json',
-                    '!**/README.md',
-                    '!lite-vs-pro.txt',
-                    '!composer.json',
-                    '!vendor/**',
-                    '!tmp/**',
-                    '!**/*~',
-                    '.distignore',
-                    '!README.md',
-                    '!webpack.conf.js'
-                ],
+                src:  excludeCopyFiles,
                 dest: 'build/<%= pkg.name %>/'
+            },
+            wporg: {
+                src:  excludeCopyFilesWPorg,
+                dest: 'build/<%= pkg.name %>-wporg/'
             }
         },
 
@@ -86,7 +123,8 @@ module.exports = function(grunt) {
                     exclude: [
                         'tests/.*',
                         'node_modules/.*',
-                        'includes/external/*'
+                        'includes/external/*',
+                        'build/*'
                     ]
                 }
             }
@@ -106,6 +144,16 @@ module.exports = function(grunt) {
                 cwd: 'build/<%= pkg.name %>/',
                 src: ['**/*'],
                 dest: '<%= pkg.name %>/'
+            },
+            wporg: {
+                options: {
+                    mode: 'zip',
+                    archive: './build/<%= pkg.name %>-<%= pkg.version %>-wporg.zip'
+                },
+                expand: true,
+                cwd: 'build/<%= pkg.name %>-wporg/',
+                src: ['**/*'],
+                dest: '<%= pkg.name %>-wporg/'
             }
         },
 

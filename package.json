@@ -7,13 +7,15 @@
   "scripts": {
     "postinstall": "bower update && webpack -p",
     "watch": "bower update && webpack --watch -p",
-    "build": "webpack -p && grunt build"
+    "build": "webpack -p && grunt build",
+    "release": "git-branch-is development && git checkout wporg-master"
   },
   "dependencies": {},
   "devDependencies": {
     "bower": "^1.8.0",
     "css-loader": "^0.28.0",
     "extract-text-webpack-plugin": "^2.1.0",
+    "git-branch-is": "^0.1.0",
     "grunt": "~0.4.5",
     "grunt-checktextdomain": "^0.1.1",
     "grunt-contrib-clean": "~0.5.0",
