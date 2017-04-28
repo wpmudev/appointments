@@ -95,6 +95,10 @@ function _appointments_settings_submit_block( $tab, $text = '', $class = 'primar
 	<?php
 }
 
+function _appointments_init_multidatepicker() {
+	wp_add_inline_script( 'app-multi-datepicker', 'jQuery( document ).ready( function( $ ) { $( ".app-datepick" ).each( function() { new AppDatepicker( $(this) ); } ); } );' );
+}
+
 
 function _appointments_enqueue_jquery_ui_datepicker() {
 	wp_enqueue_script( 'jquery-ui-datepicker' );

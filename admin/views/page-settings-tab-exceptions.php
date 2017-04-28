@@ -69,11 +69,10 @@ $workers = appointments_get_workers();
 	<?php _appointments_settings_submit_block( 'exceptions' ); ?>
 
 </form>
+
+<?php add_action( 'admin_footer', '_appointments_init_multidatepicker', 1000 ); ?>
 <script type="text/javascript">
 jQuery(document).ready(function($){
-	$('.app-datepick').each( function() {
-		new AppDatepicker( $(this) );
-	});
 	$('#app_provider_id').change(function(){
 		var app_provider_id = $('#app_provider_id option:selected').val();
 		window.location.href = "<?php echo admin_url('admin.php?page=app_settings&tab=exceptions')?>" + "&app_provider_id=" + app_provider_id;

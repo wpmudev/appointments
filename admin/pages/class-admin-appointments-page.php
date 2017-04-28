@@ -24,7 +24,6 @@ class Appointments_Admin_Appointments_Page {
 
 	public function __construct() {
 		$this->page_id = add_menu_page('Appointments', __('Appointments','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_APPOINTMENTS),  'appointments', array(&$this,'appointment_list'),'dashicons-clock');
-		add_action( "admin_print_scripts-" . $this->page_id, array( &$this, 'admin_scripts' ) );
 		add_action( 'load-' . $this->page_id, array( $this, 'on_load' ) );
 		add_action( 'load-' . $this->page_id, array( $this, 'set_screen_options' ) );
 
@@ -33,6 +32,7 @@ class Appointments_Admin_Appointments_Page {
 
 	public function on_load() {
 
+		add_action( "admin_enqueue_scripts", array( &$this, 'admin_scripts' ) );
 		$appointments = appointments();
 
 		// Bulk status change

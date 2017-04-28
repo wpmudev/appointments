@@ -19,7 +19,7 @@ class Appointments_Admin {
 
 		add_action( 'admin_menu', array( $this, 'admin_init' ) ); 						// Creates admin settings window
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) ); 				// Warns admin
-		add_action( 'admin_print_scripts', array( $this, 'admin_scripts') );			// Load scripts
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts') );			// Load scripts
 		add_action( 'admin_enqueue_scripts', array( $this, 'edit_posts_scripts' ) );
 		add_action( 'admin_print_styles', array( $this, 'admin_css') );
 
@@ -158,7 +158,6 @@ class Appointments_Admin {
 		wp_enqueue_style( 'jquery-colorpicker-css', $appointments->plugin_url . '/css/colorpicker.css', false, $appointments->version);
 		wp_enqueue_style( "jquery-datepick", $appointments->plugin_url . "/css/jquery.datepick.css", false, $appointments->version );
 		wp_enqueue_style( "jquery-multiselect", $appointments->plugin_url . "/css/jquery.multiselect.css", false, $appointments->version );
-		wp_enqueue_style( "jquery-ui-smoothness", $appointments->plugin_url . "/css/smoothness/jquery-ui-1.8.16.custom.css", false, $appointments->version );
 		do_action('app-admin-admin_styles');
 	}
 
