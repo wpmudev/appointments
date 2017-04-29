@@ -21,7 +21,11 @@ class App_Locations_ServiceLocations {
 	 */
 	private $_locations;
 
-	private function __construct () {}
+	private $_services_locations_option;
+
+	private function __construct () {
+		$this->_services_locations_option = 'app-services-locations';
+	}
 
 	public static function serve () {
 		$me = new App_Locations_ServiceLocations;
@@ -54,6 +58,8 @@ class App_Locations_ServiceLocations {
 		add_filter( 'appointments_default_options', array( $this, 'default_options' ) );
 
 		add_filter( 'app-shortcodes-register', array( $this, 'register_shortcodes' ) );
+
+		add_filter( 'app-services-first_service_id', array( $this, 'get_services_min_id' ), 10 );
 	}
 
 	public function default_options( $options ) {
@@ -110,12 +116,23 @@ class App_Locations_ServiceLocations {
 
 		$this->_update_appointment_locations( $service_id, $old_location_id, $location );
 
+		$services_locations = get_option( $this->_services_locations_option );
+		if( ! is_array( $services_locations ) ){
+			$services_locations = array();
+		}
+
 		if ( $location === false ) {
 			delete_option( $key );
+			if( isset( $services_locations[ $service_id ] ) ){
+				unset( $services_locations[ $service_id ] );
+			}			
 		}
 		else {
 			update_option($key, $location);
+			$services_locations[ $service_id ] = $location;			
 		}
+
+		update_option( $this->_services_locations_option, $services_locations );
 
 	}
 
@@ -337,6 +354,35 @@ class App_Locations_ServiceLocations {
 			return $services[0];
 
 		return '';
+	}
+
+	public function get_services_min_id( $min_service_id ){
+
+		$current_services_location = $this->get_current_services_location();
+		if( is_numeric( $current_services_location ) ){
+			
+			$services_locations = get_option( $this->_services_locations_option );
+			ksort( $services_locations );
+			$location_services = array_search( $current_services_location, $services_locations );
+
+			if( $location_services ){
+				return $location_services;
+			}
+		}
+
+		return $min_service_id;
+
+	}
+
+	public function get_current_services_location(){
+
+		if( isset( $_REQUEST[ "app_service_location" ] ) ){
+			return (int)$_REQUEST[ "app_service_location" ];
+		}
+		if ( isset( $_REQUEST["app_location_id"] ) ){
+			return (int)$_REQUEST["app_location_id"];
+		}			
+		return false;
 	}
 }
 App_Locations_ServiceLocations::serve();
