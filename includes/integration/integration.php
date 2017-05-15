@@ -13,7 +13,8 @@ function appointments_load_integrations() {
 	$integrations = array(
 		'buddypress',
 		'membership2',
-		'marketpress'
+		'marketpress',
+        'divi'
 	);
 	foreach ( $integrations as $integration ) {
 		include_once( appointments_plugin_dir() . 'includes/integration/class-app-' . $integration . '.php' );
