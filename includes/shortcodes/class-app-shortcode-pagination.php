@@ -53,81 +53,90 @@ if ( ! class_exists( 'App_Shortcode_Pagination' ) ) {
 
 		public function process_shortcode( $args = array(), $content = '' ) {
 			global $appointments;
-			extract( wp_parse_args( $args, $this->_defaults_to_args() ) );
+
+			$options      = appointments_get_options();
+			$current_time = current_time( 'timestamp' );
+			$args         = wp_parse_args( $args, $this->_defaults_to_args() );
 
 			// Force a date
-			if ( $date && ! isset( $_GET["wcalendar"] ) ) {
-				$time              = strtotime( $date, $appointments->local_time );
+			if ( $args['date'] && ! isset( $_GET["wcalendar"] ) ) {
+				$time              = strtotime( $args['date'], $current_time );
 				$_GET["wcalendar"] = $time;
 			} else {
 				if ( isset( $_GET["wcalendar"] ) && (int) $_GET['wcalendar'] ) {
 					$time = (int) $_GET["wcalendar"];
 				} else {
-					$time = $appointments->local_time;
+					$time = $current_time;
 				}
 			}
 
-			$c      = '';
-			$script = '';
-			// Legends
-			if ( isset( $appointments->options['show_legend'] ) && 'yes' == $appointments->options['show_legend'] ) {
-				$c .= '<div class="appointments-legend">';
-				$c .= '<table class="appointments-legend-table">';
-				$n = 0;
-				$c .= '<tr>';
-				foreach ( $appointments->get_classes() as $class => $name ) {
-					$c .= '<td class="class-name">' . $name . '</td>';
-					$c .= '<td class="' . $class . '">&nbsp;</td>';
-					$n ++;
-					if ( 3 == $n ) {
-						$c .= '</tr><tr>';
-					}
-				}
-				$c .= '</tr>';
-				$c .= '</table>';
-				$c .= '</div>';
-				// Do not let clicking box inside legend area
-				$script .= '$("table.appointments-legend-table td.free").click(false);';
-			}
-
-			// Pagination
-			$c .= '<div class="appointments-pagination">';
-			if ( ! $month ) {
-				$prev                = $time - ( $step * 7 * 86400 );
-				$next                = $time + ( $step * 7 * 86400 );
-				$prev_min            = $appointments->local_time - $step * 7 * 86400;
-				$next_max            = $appointments->local_time + ( $appointments->get_app_limit() + 7 * $step ) * 86400;
+			if ( ! $args['month'] ) {
+				$prev                = $time - ( $args['step'] * 7 * 86400 );
+				$next                = $time + ( $args['step'] * 7 * 86400 );
+				$prev_min            = $current_time - $args['step'] * 7 * 86400;
+				$next_max            = $current_time + ( $appointments->get_app_limit() + 7 * $args['step'] ) * 86400;
 				$month_week_next     = __( 'Next Week', 'appointments' );
 				$month_week_previous = __( 'Previous Week', 'appointments' );
 			} else {
-				$prev                = $appointments->first_of_month( $time, - 1 * $step );
-				$next                = $appointments->first_of_month( $time, $step );
-				$prev_min            = $appointments->first_of_month( $appointments->local_time, - 1 * $step );
-				$next_max            = $appointments->first_of_month( $appointments->local_time, $step ) + $appointments->get_app_limit() * 86400;
+				$prev                = $appointments->first_of_month( $time, - 1 * $args['step'] );
+				$next                = $appointments->first_of_month( $time, $args['step'] );
+				$prev_min            = $appointments->first_of_month( $current_time, - 1 * $args['step'] );
+				$next_max            = $appointments->first_of_month( $current_time, $args['step'] ) + $appointments->get_app_limit() * 86400;
 				$month_week_next     = __( 'Next Month', 'appointments' );
 				$month_week_previous = __( 'Previous Month', 'appointments' );
 			}
 
-			$hash = ! empty( $anchors ) && (int) $anchors
+			$hash = ! empty( $args['anchors'] ) && (int) $args['anchors']
 				? '#app_schedule'
 				: '';
 
-			if ( $prev > $prev_min ) {
-				$c .= '<div class="previous">';
-				$c .= '<a href="' . add_query_arg( "wcalendar", $prev ) . $hash . '">&laquo; ' . $month_week_previous . '</a>';
-				$c .= '</div>';
-			}
-			if ( $next < $next_max ) {
-				$c .= '<div class="next">';
-				$c .= '<a href="' . add_query_arg( "wcalendar", $next ) . $hash . '">' . $month_week_next . ' &raquo;</a>';
-				$c .= '</div>';
-			}
-			$c .= '<div style="clear:both"></div>';
-			$c .= '</div>';
+			ob_start();
 
-			$appointments->add2footer( $script );
+			// Legends
+			if ( 'yes' == $options['show_legend'] ) {
+				$n = 0;
+				?>
+				<div class="appointments-legend">
+					<table class="appointments-legend-table">
+						<tr>
+							<?php foreach ( $appointments->get_classes() as $class => $name ): ?>
+								<td class="class-name"><?php echo esc_html( $name ); ?></td>
+								<td class="<?php echo esc_attr( $class ); ?>">&nbsp;</td>
+								<?php $n ++; ?>
+								<?php if ( 0 === $n % 3 ): ?>
+									</tr>
+									<tr>
+								<?php endif; ?>
+							<?php endforeach; ?>
+						</tr>
+					</table>
+				</div>
 
-			return $c;
+				<?php
+				// Do not let clicking box inside legend area
+				$appointments->add2footer( '$("table.appointments-legend-table td.free").click(false);' );
+			}
+
+			// Pagination
+			?>
+			<div class="appointments-pagination">
+				<?php if ( $prev > $prev_min ): ?>
+					<div class="<?php echo apply_filters( 'appointments_pagination_shortcode_previous_class', 'previous' ); ?>">
+						<a href="<?php echo esc_url( add_query_arg( "wcalendar", $prev ) . $hash ); ?>">&laquo; <?php echo $month_week_previous; ?></a>
+					</div>
+				<?php endif; ?>
+				<?php if ( $next < $next_max ): ?>
+					<div class="<?php echo apply_filters( 'appointments_pagination_shortcode_next_class', 'next' ); ?>">
+						<a href="<?php echo esc_url( add_query_arg( "wcalendar", $next ) . $hash ); ?>"><?php echo $month_week_next; ?> &raquo;</a>
+					</div>
+				<?php endif; ?>
+				<div style="clear:both"></div>
+			</div>
+			<?php
+
+
+
+			return ob_get_clean();
 		}
 	}
 }
