@@ -279,6 +279,7 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 						<?php echo appointments_monthly_calendar( $params['time'], $cal_args ); ?>
 					</div>
 				<?php endif; ?>
+			</div>
 			<?php
 
 			return ob_get_clean();
