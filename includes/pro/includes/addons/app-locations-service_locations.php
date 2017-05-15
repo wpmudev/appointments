@@ -270,7 +270,7 @@ class App_Locations_ServiceLocations {
 							<option value="before" <?php selected($settings['service_locations']['insert'], 'before'); ?> ><?php _e('Automatic, before service description', 'appointments'); ?></option>
 							<option value="after" <?php selected($settings['service_locations']['insert'], 'after'); ?> ><?php _e('Automatic, after service description', 'appointments'); ?></option>
 						</select>
-						<p><small><?php _e('You can use the shortcode like this: <code>[app_service_location]</code>', 'appointments'); ?></small></p>
+						<p class="description"><?php _e('You can use the shortcode like this: <code>[app_service_locations]</code>', 'appointments'); ?></p>
 					</td>
 				</tr>
 			</table>

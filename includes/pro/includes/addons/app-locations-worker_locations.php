@@ -105,7 +105,7 @@ class App_Locations_WorkerLocations {
 								<option value="before" <?php selected($this->_data['worker_locations']['insert'], 'before'); ?> ><?php _e('Automatic, before worker description', 'appointments'); ?></option>
 								<option value="after" <?php selected($this->_data['worker_locations']['insert'], 'after'); ?> ><?php _e('Automatic, after worker description', 'appointments'); ?></option>
 							</select>
-							<p class="description"><?php _e('You can use the shortcode like this: <code>[app_worker_location]</code>', 'appointments'); ?></p>
+							<p class="description"><?php _e('You can use the shortcode like this: <code>[app_provider_locations]</code>', 'appointments'); ?></p>
 						</td>
 					</tr>
 				</table>
