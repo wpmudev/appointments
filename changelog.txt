@@ -1,3 +1,5 @@
+- Added JavaScript alert on the "Add new Service Provider" screen to avoid error screen.
+
 2017-04-18 - 2.1.0.1
 -------------------------------
 - Fixed: Only load dashbaord class in premium version

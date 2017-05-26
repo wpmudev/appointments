@@ -83,5 +83,15 @@ jQuery( document ).ready( function( $ ) {
         });
     });
 
+    /**
+     * Check Services Provided on Appointments Settings page
+     */
+    jQuery('#app-settings-section-new-worker form.add-new-service-provider').on( "submit", function() {
+        var form = jQuery(this);
+        if( null == jQuery("#services_provided", form).val()) {
+            alert( app_i10n.messages.select_service_provider);
+            return false;
+        }
+    });
 
 });
