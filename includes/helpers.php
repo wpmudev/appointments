@@ -793,5 +793,5 @@ function _appointments_enqueue_sweetalert() {
  * @return bool
  */
 function _appointments_is_pro() {
-	return is_readable( appointments_plugin_dir() . 'includes/pro/class-app-pro.php' );
+	return apply_filters( 'appointments_is_pro', is_readable( appointments_plugin_dir() . 'includes/pro/class-app-pro.php' ) );
 }
