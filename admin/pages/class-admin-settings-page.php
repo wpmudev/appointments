@@ -316,7 +316,7 @@ class Appointments_Admin_Settings_Page {
 		$options["allow_worker_confirm"]		= $_POST["allow_worker_confirm"];
 		$options["allow_overwork"]			= $_POST["allow_overwork"];
 		$options["allow_overwork_break"]		= $_POST["allow_overwork_break"];
-        $options["keep_options_on_uninstall"]	= isset( $_POST["keep_options_on_uninstall"] ) ? $_POST["keep_options_on_uninstall"] : 0;
+        $options["keep_options_on_uninstall"]	= isset( $_POST["keep_options_on_uninstall"] );
 
 		$assigned_to = isset( $_POST["dummy_assigned_to"] ) ? $_POST["dummy_assigned_to"] : 0;
 		$worker = appointments_get_worker( $assigned_to );
