@@ -1139,10 +1139,11 @@ function appointments_get_month_appointments( $args ) {
 
 /**
  * @param $user_id
+ * @param $statuses paid, confirmed, reserved, pending etc
  *
  * @return array
  */
-function appointments_get_user_appointments( $user_id ) {
+function appointments_get_user_appointments( $user_id, $statuses = array( 'paid', 'confirmed' ) ) {
 	$user_id = absint( $user_id );
 	$user = get_userdata( $user_id );
 	if ( ! $user ) {
@@ -1152,7 +1153,7 @@ function appointments_get_user_appointments( $user_id ) {
 	return appointments_get_appointments(
 		array(
 			'user' => $user_id,
-			'status' => array( 'paid', 'confirmed' )
+			'status' => $statuses
 		)
 	);
 }
