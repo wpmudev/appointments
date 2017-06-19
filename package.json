@@ -10,7 +10,8 @@
     "build": "grunt clean:main && webpack -p --progress && grunt build:main && grunt build:wporg",
     "build:main": "grunt clean && webpack -p --progress && grunt build",
     "build:wporg": "grunt clean && webpack -p --progress && grunt build:wporg",
-    "release": "grunt version-compare && git-branch-is master && git submodule update --remote && grunt clean:main && webpack -p && grunt build:main && grunt build:wporg && git add . && git commit -m 'Auto commit: New build' && git push && git checkout development && git merge master && git checkout master && grunt finish",
+    "release": "grunt version-compare && git-branch-is master && git submodule update --remote && grunt clean:main && webpack -p && grunt build:main && grunt build:wporg",
+    "git": "git add . && git commit -m 'Auto commit: New build' && git push && git checkout development && git merge master && git checkout master && grunt finish",
     "deploy-svn": "grunt copy:wporgAssets && ./tools/deploy-to-svn.sh",
     "log": " ./tools/generate-changelog.sh"
   },
