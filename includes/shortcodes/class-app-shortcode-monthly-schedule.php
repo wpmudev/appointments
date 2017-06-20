@@ -218,13 +218,14 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 				$params['title'] = '';
 			}
 
+
 			$params['class'] = $args['class'];
 			$params['long'] = $args['long'];
 			$params['widget'] = $args['widget'];
 			$params['notlogged'] = $args['notlogged'];
 			$params['logged'] = $args['logged'];
 			$params['has_worker'] = ! empty( $params['worker_id'] );
-			$params['has_service'] = ! empty( $require_service ) ? $_REQUEST["app_service_id"] : false;
+			$params['has_service'] = ! empty( $_REQUEST['app_service_id'] ) ? $_REQUEST["app_service_id"] : false;
 			$params['service_id'] = $params['has_service'];
 			$params['require_provider'] = $args['require_provider'];
 			$params['require_service'] = $args['require_service'];

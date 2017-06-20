@@ -117,6 +117,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		}
 
 		$statuses = explode( ',', $args['status'] );
+		$statuses = array_map( 'trim', $statuses );
 
 		if ( ! is_array( $statuses ) || empty( $statuses ) ) {
 			return '';

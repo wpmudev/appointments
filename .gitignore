@@ -6,3 +6,4 @@ tmp/
 .idea
 npm-debug.log
 /languages/
+log.log
