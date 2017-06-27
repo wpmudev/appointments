@@ -1007,6 +1007,7 @@ class Appointments_AJAX {
 		foreach ( $apps as $app ) {
 			$raw = $app;
 			array_walk( $app, array( &$this, 'export_helper' ) );
+            $app = $this->sort_app_columns( $app, $columns );
 			$app = apply_filters( 'app-export-appointment', $app, $raw );
 			if ( ! empty( $app ) ) {
 				fputcsv( $file, (array)$app );
@@ -1031,6 +1032,31 @@ class Appointments_AJAX {
 		fclose($file);
 		die($output);
 	}
+    
+    /**
+    * Sorting the appointment columns so they match the csv columns. Usefull when locations addon enabled
+    * @since 2.2.1
+    */
+    function sort_app_columns( $app, $columns ){
+        
+        $sorted_app = array();
+        $app_array = array_change_key_case( (array)$app, CASE_LOWER );
+        
+        foreach( $columns as $column ){
+            
+            if( isset( $app_array[ $column ] ) ){
+                $sorted_app[ $column ] = $app_array[ $column ];
+            }
+            else{                
+                $sorted_app[ $column ] = '';
+            }
+            
+        }
+        
+        return $sorted_app;
+        
+    }
+    
 
 	/**
 	 * Helper function for export
