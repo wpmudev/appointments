@@ -19,7 +19,7 @@ $workers_dropdown = wp_dropdown_users( array(
 ) );
 
 ?>
-<form action="" method="post">
+<form action="" method="post" class="add-new-service-provider">
 	<table class="form-table">
 		<tr>
 			<th scope="row">

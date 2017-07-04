@@ -93,7 +93,10 @@ class Appointments_Admin_Settings_Page {
 			}
 			wp_localize_script( 'app-settings', 'app_i10n', array(
 				'classes' => $classes,
-				'presets' => $presets
+				'presets' => $presets,
+				'messages' => array(
+					'select_service_provider' => __('Please, select at least one service provided', 'appointments' ),
+				),
 			));
 			return $content;
 		}
