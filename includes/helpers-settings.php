@@ -70,7 +70,8 @@ function appointments_get_default_options() {
 		'log_emails'				=> 'yes',
 		'allow_cancel'				=> 'no',
 		'cancel_page'				=> 0,
-		'thank_page'				=> 0
+		'thank_page'				=> 0,
+		'keep_options_on_uninstall' => true
 	) );
 }
 

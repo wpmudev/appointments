@@ -38,6 +38,16 @@
 						class="description"><?php _e( 'Same as above, but valid for break hours. If you want to allow appointments exceeding break times, then select this as Yes.', 'appointments' ) ?></span>
 		</td>
 	</tr>
+    
+    <tr valign="top">
+		<th scope="row"><label for="keep_options_on_uninstall"><?php _e( 'Keep options on unintall', 'appointments' ) ?></label></th>
+		<td colspan="2">		
+			<input type="checkbox" name="keep_options_on_uninstall" id="keep_options_on_uninstall" <?php checked( $options['keep_options_on_uninstall'] ); ?> />
+            <span class="description">
+                <?php _e( 'By enabling this option you can keep your appointments and settings when deleting plugin.', 'appointments' ); ?>
+            </span>
+		</td>
+	</tr>
 
 	
 	<?php do_action( 'app-settings-advanced_settings' ); ?>

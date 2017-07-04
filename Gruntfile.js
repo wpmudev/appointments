@@ -27,39 +27,16 @@ module.exports = function(grunt) {
         '!**/*~',
         '.distignore',
         '!README.md',
-        '!webpack.conf.js'
+        '!webpack.config.js',
+        '!wporg-assets/**',
+        '!log.log'
     ];
 
-    var excludeCopyFilesWPorg = [
-        '**',
-        '!npm-debug.log',
-        '!node_modules/**',
-        '!bower.json',
-        '!build/**',
-        '!bin/**',
-        '!.git/**',
-        '!Gruntfile.js',
-        '!package.json',
-        '!.gitignore',
-        '!.gitmodules',
-        '!sourceMap.map',
-        '!phpunit.xml.dist',
-        '!travis.yml',
-        '!tests/**',
-        '!**/Gruntfile.js',
-        '!**/package.json',
-        '!**/README.md',
-        '!lite-vs-pro.txt',
-        '!composer.json',
-        '!vendor/**',
-        '!tmp/**',
-        '!**/*~',
-        '.distignore',
-        '!README.md',
-        '!webpack.conf.js',
-        '!includes/pro/**',
-        '!includes/external/wpmudev-dash/**'
-    ];
+    var excludeCopyFilesDEV = excludeCopyFiles.slice(0).concat( [
+        '!readme.txt'
+    ] );
+
+    var excludeCopyFilesWPorg = excludeCopyFiles.slice(0).concat( [ '!includes/pro/**', '!includes/external/wpmudev-dash/**' ] );
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -100,12 +77,16 @@ module.exports = function(grunt) {
 
         copy: {
             main: {
-                src:  excludeCopyFiles,
+                src:  excludeCopyFilesDEV,
                 dest: 'build/<%= pkg.name %>/'
             },
             wporg: {
                 src:  excludeCopyFilesWPorg,
                 dest: 'build/<%= pkg.name %>-wporg/'
+            },
+            wporgAssets: {
+                src:  './wporg-assets/**',
+                dest: 'build/'
             }
         },
 
@@ -146,6 +127,16 @@ module.exports = function(grunt) {
                 cwd: 'build/<%= pkg.name %>/',
                 src: ['**/*'],
                 dest: '<%= pkg.name %>/'
+            },
+            wporg: {
+                options: {
+                    mode: 'zip',
+                    archive: './build/<%= pkg.name %>-wporg-<%= pkg.version %>.zip'
+                },
+                expand: true,
+                cwd: 'build/<%= pkg.name %>-wporg/',
+                src: ['**/*'],
+                dest: '<%= pkg.name %>-wporg/'
             }
         },
 
@@ -184,8 +175,22 @@ module.exports = function(grunt) {
                 app: 'Google Chrome'
             }
         },
+
         replace: {
-            dist: {
+            wpid: {
+                options: {
+                    patterns: [
+                        {
+                            match: /WDP ID\: 679841/g,
+                            replacement: ''
+                        }
+                    ]
+                },
+                files: [
+                    {expand: true, flatten: true, src: ['./build/appointments-wporg/appointments.php'], dest: './build/appointments-wporg'}
+                ]
+            },
+            pluginName: {
                 options: {
                     patterns: [
                         {
@@ -208,14 +213,13 @@ module.exports = function(grunt) {
     grunt.registerTask( 'finish', function() {
         var json = grunt.file.readJSON('package.json');
         var file = './build/' + json.name + '-' + json.version + '.zip';
-        var orgFiles = './build/appointments-wporg';
         grunt.log.writeln( 'Process finished. Browse now to: ' + json.projectEditUrl['green'].bold );
         grunt.log.writeln( 'And upload the zip file under: ' + file['green'].bold);
-        grunt.log.writeln( 'To make wp.org release, grab all the files in ' + orgFiles['green'].bold + ' and upload them via svn: ' + file['green'].bold);
+        grunt.log.writeln( 'To make wp.org release, execute ' + 'npm run deploy-svn'['green'].bold + ' and follow instructions');
         grunt.log.writeln('----------');
         grunt.log.writeln('');
         grunt.log.writeln( 'Remember to tag this new version:' );
-        
+
         var tagMessage = 'git tag -a ' + json.version + ' -m "$CHANGELOG"';
         var pushMessage = 'git push -u origin ' + json.version;
         grunt.log.writeln( tagMessage['green'] );
@@ -224,7 +228,6 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('build', [
-        'version-compare',
         'checktextdomain',
         'makepot',
         'copy:main',
@@ -232,10 +235,10 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('build:wporg', [
-        'version-compare',
         'checktextdomain',
         'makepot',
         'copy:wporg',
-        'replace'
+        'replace:wpid',
+        'replace:pluginName'
     ]);
 };

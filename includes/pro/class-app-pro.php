@@ -24,6 +24,21 @@ class Appointments_Pro {
 		add_filter( 'appointments_before_insert_service', '__return_true' );
 		add_filter( 'appointments_before_insert_worker', '__return_true' );
 
+		add_filter( 'appointments_default_options', array( $this, 'appointments_default_options' ) );
+
+	}
+
+	/**
+	 * Por version default options
+	 *
+	 * @param array $options
+	 *
+	 * @return array
+	 */
+	public function appointments_default_options( $options ) {
+		// In PRO version we don't want to keep the data in case of plugin uninstall by default
+		$options['keep_options_on_uninstall'] = false;
+		return $options;
 	}
 
 	private function includes() {

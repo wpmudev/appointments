@@ -117,6 +117,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		}
 
 		$statuses = explode( ',', $args['status'] );
+		$statuses = array_map( 'trim', $statuses );
 
 		if ( ! is_array( $statuses ) || empty( $statuses ) ) {
 			return '';
@@ -150,7 +151,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		if ( !$args['provider'] ) {
 
 			if ( $user_id ) {
-				$apps = wp_list_pluck( appointments_get_user_appointments( $user_id ), 'ID' );
+				$apps = wp_list_pluck( appointments_get_user_appointments( $user_id, $statuses ), 'ID' );
 			}
 			else {
 				$apps = Appointments_Sessions::get_current_visitor_appointments();
@@ -344,6 +345,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 
 		$ret .= '</div>';
 
+		_appointments_enqueue_sweetalert();
 		wp_enqueue_script( 'app-my-appointments', appointments_plugin_url() . 'includes/shortcodes/js/my-appointments.js', array( 'jquery' ), '', true );
 		wp_localize_script( 'app-my-appointments', 'appMyAppointmentsStrings', array(
 			'aysCancel' => esc_js( __( "Are you sure you want to cancel the selected appointment?", "appointments" ) ),
