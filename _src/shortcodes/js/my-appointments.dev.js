@@ -76,4 +76,29 @@ Appointments = window.Appointments || {};
         return new MyAppointments( options );
     };
 
+
+	$('body').on( 'click', '.appointments-paid-button', function() {
+		var appointment_data = $(this).data('appointment');
+		if ( !appointment_data || !appointment_data.ID || !appointment_data.price || !appointment_data.service_name )
+			return false;
+		var post_data = {
+			price: appointment_data.price,
+			app_id: appointment_data.ID,
+			service_name: appointment_data.service_name
+		};
+		$(".appointments-paypal").find(".app_amount").val(post_data.price);
+		$(".appointments-paypal").find(".app_custom").val(post_data.app_id);
+		var old_val = $(".appointments-paypal").find(".app_submit_btn").val();
+		if ( old_val ) {
+			var new_val = old_val.replace("PRICE",post_data.price).replace("SERVICE",post_data.service_name);
+			$(".appointments-paypal").find(".app_submit_btn").val(new_val);
+			var old_val2 = $(".appointments-paypal").find(".app_item_name").val();
+			var new_val2 = old_val2.replace("SERVICE",post_data.service_name);
+			$(".appointments-paypal").find(".app_item_name").val(new_val2);
+			$(".appointments-paypal .app_submit_btn").focus();
+		}
+
+		$(".appointments-paypal").find("form").submit();
+	});
+
 })( Appointments, appMyAppointmentsStrings, jQuery );

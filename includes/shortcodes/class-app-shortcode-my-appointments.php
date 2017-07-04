@@ -285,6 +285,11 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 
 				$ret .= '<td>';
 				$ret .= App_Template::get_status_name($r->status);
+				if ( 'pending' == $r->status ) {
+					$r->service_name = $appointments->get_service_name( $r->service );
+					$ret .= '<input type="submit" data-appointment="' . htmlspecialchars( json_encode( $r ), ENT_QUOTES) . '" value="' . __('Pay','appointments') . '"'
+							. ' class="appointments-paid-button">';
+				}
 				$ret .= '</td>';
 				$ret .= apply_filters('app-shortcode-my_appointments-after_status', '', $r);
 
