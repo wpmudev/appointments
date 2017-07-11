@@ -114,7 +114,7 @@ function appointments_is_available_time( $start, $end, $worker_id = 0, $location
  * @return bool
  */
 function appointments_is_working( $start, $end, $worker_id, $location = 0 ) {
-	if ( $this->is_exceptional_working_day( $start, $end, $worker_id ) ) {
+	if ( appointments_is_exceptional_working_day( $start, $end, $worker_id ) ) {
 		return true;
 	}
 	if ( appointments_is_worker_holiday( $start, $end, $worker_id ) ) {
