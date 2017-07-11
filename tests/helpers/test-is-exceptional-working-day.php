@@ -3,15 +3,15 @@
 /**
  * Class App_Appointments_Test
  *
- * Tests for appointments_is_available_time() function
+ * Tests for appointments_is_exceptional_working_day() function
  *
  * @group timetables
  * @group helpers
- * @group available-time
+ * @group is-exceptional-working-day
  */
-class App_Available_Time_Test extends App_UnitTestCase {
+class App_Is_Exceptional_Working_Day_Test extends App_UnitTestCase {
 
-	function test_appointments_is_available_time() {
+	function test_appointments_is_exceptional_working_day() {
 		$options = appointments_get_options();
 		$options['min_time'] = 60;
 		appointments_update_options( $options );
@@ -55,51 +55,35 @@ class App_Available_Time_Test extends App_UnitTestCase {
 		appointments_update_worker_working_hours( $worker_id_1, $open_hours, 'open' );
 		appointments_update_worker_working_hours( $worker_id_1, $closed_hours, 'closed' );
 
-		$next_monday_at_18_30 = strtotime( date( 'Y-m-d 18:30:00', strtotime( 'Next Monday' ) ) );
-		$next_monday_at_19_00 = strtotime( date( 'Y-m-d 19:00:00', strtotime( 'Next Monday' ) ) );
-		$next_monday_at_19_30 = strtotime( date( 'Y-m-d 19:30:00', strtotime( 'Next Monday' ) ) );
-		$next_monday_at_20_00 = strtotime( date( 'Y-m-d 20:00:00', strtotime( 'Next Monday' ) ) );
-		$next_monday_at_21_00 = strtotime( date( 'Y-m-d 21:00:00', strtotime( 'Next Monday' ) ) );
-		$next_monday_at_22_00 = strtotime( date( 'Y-m-d 22:00:00', strtotime( 'Next Monday' ) ) );
+		$next_sunday =  strtotime( 'Next Sunday' );
+		$next_sunday_at_19_00 = strtotime( date( 'Y-m-d 19:00:00', $next_sunday ) );
+		$next_sunday_at_19_30 = strtotime( date( 'Y-m-d 19:30:00', $next_sunday ) );
 
-		// Out of office
-		$this->assertFalse( appointments_is_available_time( $next_monday_at_18_30, $next_monday_at_19_30, $worker_id_1 ) );
-		$this->assertFalse( appointments_is_available_time( $next_monday_at_18_30, $next_monday_at_20_00, $worker_id_1 ) );
-		$this->assertFalse( appointments_is_available_time( $next_monday_at_19_00, $next_monday_at_21_00, $worker_id_1 ) );
-		$this->assertFalse( appointments_is_available_time( $next_monday_at_21_00, $next_monday_at_22_00, $worker_id_1 ) );
+		$next_2_sunday =  strtotime( 'Next Sunday' ) + ( 7 * 24 * 3600 );
+		$next_2_sunday_at_19_00 = strtotime( date( 'Y-m-d 19:00:00', $next_2_sunday ) );
+		$next_2_sunday_at_19_30 = strtotime( date( 'Y-m-d 19:30:00', $next_2_sunday ) );
 
-		// Working
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_19_00, $next_monday_at_19_30, $worker_id_1 ) );
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_19_30, $next_monday_at_20_00, $worker_id_1 ) );
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_19_00, $next_monday_at_20_00, $worker_id_1 ) );
+		$next_3_sunday =  strtotime( 'Next Sunday' ) + ( 14 * 24 * 3600 );
+		$next_3_sunday_at_19_00 = strtotime( date( 'Y-m-d 19:00:00', $next_3_sunday ) );
+		$next_3_sunday_at_19_30 = strtotime( date( 'Y-m-d 19:30:00', $next_3_sunday ) );
 
-		// Start = End
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_19_00, $next_monday_at_19_00, $worker_id_1 ) );
+		// Work on next sunday
+		appointments_update_worker_exceptions( $worker_id_1, 'open', date( 'Y-m-d', $next_sunday ) );
 
-		// Start > End
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_20_00, $next_monday_at_19_00, $worker_id_1 ) );
-		$this->assertFalse( appointments_is_available_time( $next_monday_at_22_00, $next_monday_at_21_00, $worker_id_1 ) );
-		$this->assertFalse( appointments_is_available_time( $next_monday_at_20_00, $next_monday_at_18_30, $worker_id_1 ) );
+		// Store open in 3 sundays
+		appointments_update_worker_exceptions( 0, 'open', date( 'Y-m-d', $next_3_sunday ) );
 
-		// Available time for the whole store
-		// Out of office
-		$this->assertFalse( appointments_is_available_time( $next_monday_at_19_00, $next_monday_at_21_00, 0 ) );
-		$this->assertFalse( appointments_is_available_time( $next_monday_at_21_00, $next_monday_at_22_00, 0 ) );
+		// Sunday that works
+		$this->assertTrue( appointments_is_exceptional_working_day( $next_sunday_at_19_00, $next_sunday_at_19_30, $worker_id_1 ) );
+		$this->assertFalse( appointments_is_exceptional_working_day( $next_sunday_at_19_00, $next_sunday_at_19_30, 0 ) );
 
-		// Working
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_18_30, $next_monday_at_19_30, 0 ) );
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_18_30, $next_monday_at_20_00, 0 ) );
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_19_00, $next_monday_at_19_30, 0 ) );
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_19_30, $next_monday_at_20_00, 0 ) );
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_19_00, $next_monday_at_20_00, 0 ) );
+		// Sunday that does not work
+		$this->assertFalse( appointments_is_exceptional_working_day( $next_2_sunday_at_19_00, $next_2_sunday_at_19_30, $worker_id_1 ) );
+		$this->assertFalse( appointments_is_exceptional_working_day( $next_2_sunday_at_19_00, $next_2_sunday_at_19_30, 0 ) );
 
-		// Start = End
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_19_00, $next_monday_at_19_00, 0 ) );
-
-		// Start > End
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_20_00, $next_monday_at_19_00, 0 ) );
-		$this->assertFalse( appointments_is_available_time( $next_monday_at_22_00, $next_monday_at_21_00, 0 ) );
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_20_00, $next_monday_at_18_30, 0 ) );
+		// Sunday that the store opens
+		$this->assertTrue( appointments_is_exceptional_working_day( $next_3_sunday_at_19_00, $next_3_sunday_at_19_30, 0 ) );
+		$this->assertFalse( appointments_is_exceptional_working_day( $next_3_sunday_at_19_00, $next_3_sunday_at_19_30, $worker_id_1 ) );
 	}
 
 	function get_open_wh() {

@@ -3,15 +3,15 @@
 /**
  * Class App_Appointments_Test
  *
- * Tests for appointments_is_available_time() function
+ * Tests for appointments_is_interval_break() function
  *
  * @group timetables
  * @group helpers
- * @group available-time
+ * @group is-interval-break
  */
-class App_Available_Time_Test extends App_UnitTestCase {
+class App_Is_Interval_Break_Test extends App_UnitTestCase {
 
-	function test_appointments_is_available_time() {
+	function test_appointments_is_interval_break() {
 		$options = appointments_get_options();
 		$options['min_time'] = 60;
 		appointments_update_options( $options );
@@ -52,54 +52,52 @@ class App_Available_Time_Test extends App_UnitTestCase {
 			'weekday_number' => 2
 		);
 
+		$closed_hours['Tuesday'] = array(
+			'active'         => 'yes',
+			'start'          => '19:00',
+			'end'            => '20:00',
+			'weekday_number' => 2
+		);
+
 		appointments_update_worker_working_hours( $worker_id_1, $open_hours, 'open' );
 		appointments_update_worker_working_hours( $worker_id_1, $closed_hours, 'closed' );
 
-		$next_monday_at_18_30 = strtotime( date( 'Y-m-d 18:30:00', strtotime( 'Next Monday' ) ) );
-		$next_monday_at_19_00 = strtotime( date( 'Y-m-d 19:00:00', strtotime( 'Next Monday' ) ) );
-		$next_monday_at_19_30 = strtotime( date( 'Y-m-d 19:30:00', strtotime( 'Next Monday' ) ) );
-		$next_monday_at_20_00 = strtotime( date( 'Y-m-d 20:00:00', strtotime( 'Next Monday' ) ) );
-		$next_monday_at_21_00 = strtotime( date( 'Y-m-d 21:00:00', strtotime( 'Next Monday' ) ) );
-		$next_monday_at_22_00 = strtotime( date( 'Y-m-d 22:00:00', strtotime( 'Next Monday' ) ) );
+		$next_monday = strtotime( 'Next Monday' );
+		$next_monday_at_18_30 = strtotime( date( 'Y-m-d 18:30:00', $next_monday ) );
+		$next_monday_at_19_00 = strtotime( date( 'Y-m-d 19:00:00', $next_monday ) );
+		$next_monday_at_19_30 = strtotime( date( 'Y-m-d 19:30:00', $next_monday ) );
+		$next_monday_at_20_00 = strtotime( date( 'Y-m-d 20:00:00', $next_monday ) );
+		$next_monday_at_21_00 = strtotime( date( 'Y-m-d 21:00:00', $next_monday ) );
+		$next_monday_at_22_00 = strtotime( date( 'Y-m-d 22:00:00', $next_monday ) );
 
-		// Out of office
-		$this->assertFalse( appointments_is_available_time( $next_monday_at_18_30, $next_monday_at_19_30, $worker_id_1 ) );
-		$this->assertFalse( appointments_is_available_time( $next_monday_at_18_30, $next_monday_at_20_00, $worker_id_1 ) );
-		$this->assertFalse( appointments_is_available_time( $next_monday_at_19_00, $next_monday_at_21_00, $worker_id_1 ) );
-		$this->assertFalse( appointments_is_available_time( $next_monday_at_21_00, $next_monday_at_22_00, $worker_id_1 ) );
+		$next_tuesday = strtotime( 'Next Tuesday' );
+		$next_tuesday_at_16_30 = strtotime( date( 'Y-m-d 16:30:00', $next_tuesday ) );
+		$next_tuesday_at_17_30 = strtotime( date( 'Y-m-d 17:30:00', $next_tuesday ) );
+		$next_tuesday_at_18_00 = strtotime( date( 'Y-m-d 18:00:00', $next_tuesday ) );
+		$next_tuesday_at_19_00 = strtotime( date( 'Y-m-d 19:00:00', $next_tuesday ) );
+		$next_tuesday_at_19_30 = strtotime( date( 'Y-m-d 19:30:00', $next_tuesday ) );
+		$next_tuesday_at_20_00 = strtotime( date( 'Y-m-d 20:00:00', $next_tuesday ) );
+		$next_tuesday_at_21_00 = strtotime( date( 'Y-m-d 21:00:00', $next_tuesday ) );
+		$next_tuesday_at_22_00 = strtotime( date( 'Y-m-d 22:00:00', $next_tuesday ) );
 
-		// Working
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_19_00, $next_monday_at_19_30, $worker_id_1 ) );
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_19_30, $next_monday_at_20_00, $worker_id_1 ) );
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_19_00, $next_monday_at_20_00, $worker_id_1 ) );
+		// -- Worker tests
 
-		// Start = End
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_19_00, $next_monday_at_19_00, $worker_id_1 ) );
+		// Not a break (monday)
+		$this->assertFalse( appointments_is_interval_break( $next_monday_at_18_30, $next_monday_at_19_30, $worker_id_1 ) );
+		$this->assertFalse( appointments_is_interval_break( $next_monday_at_18_30, $next_monday_at_20_00, $worker_id_1 ) );
+		$this->assertFalse( appointments_is_interval_break( $next_monday_at_19_00, $next_monday_at_21_00, $worker_id_1 ) );
+		$this->assertFalse( appointments_is_interval_break( $next_monday_at_21_00, $next_monday_at_22_00, $worker_id_1 ) );
 
-		// Start > End
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_20_00, $next_monday_at_19_00, $worker_id_1 ) );
-		$this->assertFalse( appointments_is_available_time( $next_monday_at_22_00, $next_monday_at_21_00, $worker_id_1 ) );
-		$this->assertFalse( appointments_is_available_time( $next_monday_at_20_00, $next_monday_at_18_30, $worker_id_1 ) );
+		// Not a break (tuesday)
+		$this->assertFalse( appointments_is_interval_break( $next_tuesday_at_16_30, $next_tuesday_at_17_30, $worker_id_1 ) );
+		$this->assertFalse( appointments_is_interval_break( $next_tuesday_at_18_00, $next_tuesday_at_19_00, $worker_id_1 ) );
+		$this->assertFalse( appointments_is_interval_break( $next_tuesday_at_20_00, $next_tuesday_at_21_00, $worker_id_1 ) );
+		$this->assertFalse( appointments_is_interval_break( $next_tuesday_at_21_00, $next_tuesday_at_22_00, $worker_id_1 ) );
 
-		// Available time for the whole store
-		// Out of office
-		$this->assertFalse( appointments_is_available_time( $next_monday_at_19_00, $next_monday_at_21_00, 0 ) );
-		$this->assertFalse( appointments_is_available_time( $next_monday_at_21_00, $next_monday_at_22_00, 0 ) );
-
-		// Working
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_18_30, $next_monday_at_19_30, 0 ) );
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_18_30, $next_monday_at_20_00, 0 ) );
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_19_00, $next_monday_at_19_30, 0 ) );
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_19_30, $next_monday_at_20_00, 0 ) );
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_19_00, $next_monday_at_20_00, 0 ) );
-
-		// Start = End
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_19_00, $next_monday_at_19_00, 0 ) );
-
-		// Start > End
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_20_00, $next_monday_at_19_00, 0 ) );
-		$this->assertFalse( appointments_is_available_time( $next_monday_at_22_00, $next_monday_at_21_00, 0 ) );
-		$this->assertTrue( appointments_is_available_time( $next_monday_at_20_00, $next_monday_at_18_30, 0 ) );
+		// Break (tuesday)
+		$this->assertTrue( appointments_is_interval_break( $next_tuesday_at_18_00, $next_tuesday_at_19_30, $worker_id_1 ) );
+		$this->assertTrue( appointments_is_interval_break( $next_tuesday_at_19_30, $next_tuesday_at_21_00, $worker_id_1 ) );
+		$this->assertTrue( appointments_is_interval_break( $next_tuesday_at_19_30, $next_tuesday_at_20_00, $worker_id_1 ) );
 	}
 
 	function get_open_wh() {
