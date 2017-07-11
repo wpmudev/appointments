@@ -1404,6 +1404,20 @@ class Appointments {
 	}
 
 	/**
+	 * Check if it is available time
+	 * Optionally a worker is selectable ( $w != 0 )
+	 * @return bool
+	 */
+	function is_available_time( $ccs, $cce, $w=0 ) {
+		// A worker can be forced
+		if ( ! $w ) {
+			$w = $this->worker;
+		}
+
+		return appointments_is_available_time( $ccs, $cce, $w, $this->location );
+	}
+
+	/**
 	 * Check if a specific worker is working at this time slot
 	 * @return bool
 	 * @since 1.2.2
@@ -1418,8 +1432,11 @@ class Appointments {
 		if ( $this->is_break( $ccs, $cse, $w ) ) {
 			return false;
 		}
+		if ( $this->is_available_time( $ccs, $cse, $w ) ) {
+			return true;
+		}
 
-		return true;
+		return false;
 	}
 
 	/**
