@@ -320,6 +320,9 @@ function apppointments_is_range_busy( $start, $end, $args = array() ) {
 				}
 			}
 		}
+		if ( !$appointments->is_working( $start, $end, $args['worker_id'] ) ) {
+			return true;
+		}
 	}
 
 
