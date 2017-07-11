@@ -1357,18 +1357,20 @@ class Appointments {
 	/**
 	 * Check if this is an exceptional working day
 	 * Optionally a worker is selectable ( $w != 0 )
+	 *
+	 * @deprecated since 2.2
+	 *
 	 * @return bool
 	 */
 	function is_exceptional_working_day( $ccs, $cce, $w=0 ) {
-		// A worker can be forced
-		if ( !$w )
-			$w = $this->worker;
-		$is_working_day = false;
-		$result = appointments_get_worker_exceptions( $w, 'open', $this->location );
-		if ( $result != null  && strpos( $result->days, date( 'Y-m-d', $ccs ) ) !== false )
-			$is_working_day = true;
+		_deprecated_function( __FUNCTION__, '2.2', 'appointments_is_exceptional_working_day' );
 
-		return apply_filters( 'app_is_exceptional_working_day', $is_working_day, $ccs, $cce, $this->service, $w );
+		// A worker can be forced
+		if ( !$w ) {
+			$w = $this->worker;
+		}
+
+		return appointments_is_exceptional_working_day( $ccs, $cce, $w );
 	}
 
 	/**
@@ -1389,6 +1391,8 @@ class Appointments {
 	 * Check if a specific worker is working at this time slot
 	 * @return bool
 	 * @since 1.2.2
+	 *
+	 * @deprecated since 2.2
 	 */
 	function is_working( $ccs, $cse, $w ) {
 		_deprecated_function( __FUNCTION__, '2.2', 'appointments_is_working' );

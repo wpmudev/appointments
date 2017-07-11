@@ -131,6 +131,27 @@ function appointments_is_working( $start, $end, $worker_id, $location = 0 ) {
 	return false;
 }
 
+/**
+ * Check if this is an exceptional working day
+ * Optionally a worker is selectable ( $w != 0 )
+ *
+ * @param int $start
+ * @param int $end
+ * @param int $worker_id
+ * @param int $location
+ *
+ * @return bool
+ */
+function appointments_is_exceptional_working_day( $start, $end, $worker_id = 0, $location = 0 ) {
+	$is_working_day = false;
+	$result = appointments_get_worker_exceptions( $worker_id, 'open', $location );
+	if ( $result != null && strpos( $result->days, date( 'Y-m-d', $start ) ) !== false ) {
+		$is_working_day = true;
+	}
+
+	return apply_filters( 'app_is_exceptional_working_day', $is_working_day, $start, $end, 0, $worker_id );
+}
+
 
 /**
  * Check if an interval is a break

@@ -320,7 +320,7 @@ function apppointments_is_range_busy( $start, $end, $args = array() ) {
 				}
 			}
 		}
-		if ( !$appointments->is_working( $start, $end, $args['worker_id'] ) ) {
+		if ( ! appointments_is_working( $start, $end, $args['worker_id'] ) ) {
 			return true;
 		}
 	}
@@ -342,7 +342,7 @@ function apppointments_is_range_busy( $start, $end, $args = array() ) {
 		if ( $workers ) {
 			foreach ( $workers as $worker ) {
 				/** @var Appointments_Worker $worker * */
-				if ( $appointments->is_working( $start, $end, $worker->ID ) ) {
+				if ( appointments_is_working( $start, $end, $worker->ID ) ) {
 					$app_worker = $appointments->get_reserve_apps_by_worker( $args['location_id'], $worker->ID, $week );
 					if ( $app_worker && is_array( $app_worker ) ) {
 						$apps = array_merge( $apps, $app_worker );
@@ -490,7 +490,7 @@ function appointments_monthly_calendar( $timestamp = false, $args = array() ) {
 							$class_name = 'notpossible app_holiday';
 						}
 						// Check if we are working today
-						elseif ( ! in_array( date( "l", $ccs ), $working_days ) && ! $appointments->is_exceptional_working_day( $ccs, $cce, $args['worker_id'] ) ) {
+						elseif ( ! in_array( date( "l", $ccs ), $working_days ) && ! appointments_is_exceptional_working_day( $ccs, $cce, $args['worker_id'], $appointments->location ) ) {
 							$class_name = 'notpossible notworking';
 						}
 						// Check if we are exceeding app limit at the end of day
@@ -662,7 +662,7 @@ function appointments_weekly_calendar( $date = false, $args = array() ) {
 							else if ( appointments_is_worker_holiday( $args['worker_id'], $datetime_start, $datetime_end ) ) {
 								$class_name = 'notpossible app_holiday';
 							} // Check if we are working today
-							else if ( ! in_array( date( "l", $datetime_start ), $working_days ) && ! $appointments->is_exceptional_working_day( $datetime_start, $datetime_end ) ) {
+							else if ( ! in_array( date( "l", $datetime_start ), $working_days ) && ! appointments_is_exceptional_working_day( $datetime_start, $datetime_end, $appointments->worker, $appointments->location ) ) {
 								$class_name = 'notpossible notworking';
 							} // Check if this is break
 							else if ( appointments_is_interval_break( $datetime_start, $datetime_end, $args['worker_id'] ) ) {
