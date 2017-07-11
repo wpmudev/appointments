@@ -1372,24 +1372,6 @@ class Appointments {
 	}
 
 	/**
-	 * Check if today is holiday
-	 * Optionally a worker is selectable ( $w != 0 )
-	 * @return bool
-	 *
-	 * @deprecated since 2.1
-	 */
-	function is_holiday( $ccs, $cce, $w=0 ) {
-		_deprecated_function( __FUNCTION__, '2.0.6', 'appointments_is_worker_holiday' );
-
-		// A worker can be forced
-		if ( ! $w ) {
-			$w = $this->worker;
-		}
-
-		return appointments_is_worker_holiday( $w, $ccs, $cce );
-	}
-
-	/**
 	 * Check if it is break time
 	 * Optionally a worker is selectable ( $w != 0 )
 	 * @return bool
@@ -2357,58 +2339,7 @@ class Appointments {
 		return $date;
 	}
 
-	/**
-	 *	Get transaction records
-	 *  Modified from Membership plugin by Barry
-	 *
-	 * @deprecated since 2.0
-	 */
-	function get_transactions($type, $startat, $num) {
-		_deprecated_function( __FUNCTION__, '2.0', 'appointments_get_transactions()' );
-		$args = array(
-			'type' => $type,
-			'offset' => $startat,
-			'per_page' => $num
-		);
-		return appointments_get_transactions( $args );
-	}
 
-	/**
-	 * Find if a Paypal transaction is duplicate or not
-	 *
-	 * @deprecated since 2.0
-	 */
-	function duplicate_transaction($app_id, $amount, $currency, $timestamp, $paypal_ID, $status, $note,$content=0) {
-		_deprecated_function( __FUNCTION__, '2.0', 'appointments_is_transaction_duplicated()' );
-		return appointments_is_transaction_duplicated( $app_id, $timestamp, $paypal_ID );
-	}
-
-	/**
-	 * Save a Paypal transaction to the database
-	 *
-	 * @deprecated since 2.0
-	 */
-	function record_transaction($app_id, $amount, $currency, $timestamp, $paypal_id, $status, $note) {
-		_deprecated_function( __FUNCTION__, '2.0', 'appointments_update_transaction() or appointments_insert_transaction()' );
-		$args = array(
-			'app_ID' => $app_id,
-			'paypal_ID' => $paypal_id,
-			'stamp' => $timestamp,
-			'currency' => $currency,
-			'status' => $status,
-			'total_amount' => (int) round($amount * 100),
-			'note' => $note
-		);
-
-		if ( $transaction = appointments_get_transaction_by_paypal_id( $paypal_id ) ) {
-			// Update
-			appointments_update_transaction( $transaction->transaction_ID, $args );
-		}
-		else {
-			// Insert
-			appointments_insert_transaction( $args );
-		}
-	}
 }
 }
 
