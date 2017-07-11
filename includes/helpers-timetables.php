@@ -57,6 +57,12 @@ function appointments_is_worker_holiday( $worker_id, $start, $end, $location = f
  */
 function appointments_is_available_time( $start, $end, $worker_id = 0, $location = 0 ) {
 	$days = array();
+
+	if ( $start > $end ) {
+		// Swap variables
+		$start ^= $end ^= $start ^= $end;
+	}
+
 	$result_days = appointments_get_worker_working_hours( 'open', $worker_id, $location );
 	if ( $result_days && is_object( $result_days ) && ! empty( $result_days->hours ) ) {
 		$days = $result_days->hours;
