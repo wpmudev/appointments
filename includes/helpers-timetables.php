@@ -104,6 +104,33 @@ function appointments_is_available_time( $start, $end, $worker_id = 0, $location
 	return false;
 }
 
+/**
+ * Check if a specific worker is working at this time slot
+ *
+ * @param int $start
+ * @param int $end
+ * @param int $worker_id
+ *
+ * @return bool
+ */
+function appointments_is_working( $start, $end, $worker_id, $location = 0 ) {
+	if ( $this->is_exceptional_working_day( $start, $end, $worker_id ) ) {
+		return true;
+	}
+	if ( appointments_is_worker_holiday( $start, $end, $worker_id ) ) {
+		return false;
+	}
+	if ( $this->is_break( $start, $end, $worker_id ) ) {
+		return false;
+	}
+
+	if ( appointments_is_available_time( $start, $end, $worker_id, $location ) ) {
+		return true;
+	}
+
+	return false;
+}
+
 
 /**
  * Check if an interval is a break
