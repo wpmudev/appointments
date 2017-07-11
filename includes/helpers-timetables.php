@@ -110,17 +110,19 @@ function appointments_is_available_time( $start, $end, $worker_id = 0, $location
  * @param int $start
  * @param int $end
  * @param int $worker_id
+ * @param mixed $location
  *
  * @return bool
  */
 function appointments_is_working( $start, $end, $worker_id, $location = 0 ) {
+	
 	if ( appointments_is_exceptional_working_day( $start, $end, $worker_id ) ) {
 		return true;
 	}
-	if ( appointments_is_worker_holiday( $start, $end, $worker_id ) ) {
+	if ( appointments_is_worker_holiday( $worker_id, $start, $end, $location ) ) {
 		return false;
 	}
-	if ( $this->is_break( $start, $end, $worker_id ) ) {
+	if ( appointments_is_interval_break( $start, $end, $worker_id, $location ) ) {
 		return false;
 	}
 
