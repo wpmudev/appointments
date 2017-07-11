@@ -702,7 +702,6 @@ class App_Timetables_Test extends App_UnitTestCase {
 		$_REQUEST["app_service_id"] = null;
 	}
 
-
 	function test_undefined_service_should_be_busy_for_worker() {
 //		$next_monday = strtotime( 'next monday', time() );
 //
