@@ -68,12 +68,7 @@ function appointments_is_available_time( $start, $end, $worker_id = 0, $location
 		$days = $result_days->hours;
 	}
 
-	if ( ! is_array( $days ) || empty( $days ) ) {
-		return false;
-	}
-
-
-	if ( is_array( $days ) ) {
+	if ( is_array( $days ) && ! empty( $days ) ) {
 		// Filter days. Just get the correspondant weekday and if it's active
 		$active_day = wp_list_filter(
 			$days,
@@ -104,8 +99,9 @@ function appointments_is_available_time( $start, $end, $worker_id = 0, $location
 		) {
 			return true;
 		}
-		return false;
 	}
+
+	return false;
 }
 
 
