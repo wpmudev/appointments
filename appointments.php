@@ -1391,25 +1391,12 @@ class Appointments {
 	 * @since 1.2.2
 	 */
 	function is_working( $ccs, $cse, $w ) {
-		if ( $this->is_exceptional_working_day( $ccs, $cse, $w ) ) {
-			return true;
-		}
-		if ( appointments_is_worker_holiday( $ccs, $cse, $w ) ) {
-			return false;
-		}
-		if ( $this->is_break( $ccs, $cse, $w ) ) {
-			return false;
-		}
-
+		_deprecated_function( __FUNCTION__, '2.2', 'appointments_is_working' );
 		if ( ! $w ) {
 			$w = $this->worker;
 		}
 
-		if ( appointments_is_available_time( $ccs, $cse, $w, $this->location ) ) {
-			return true;
-		}
-
-		return false;
+		return appointments_is_working( $ccs, $cse, $w, $this->location );
 	}
 
 	/**
