@@ -2,7 +2,7 @@
 Contributors: wpmudev, wpmudev-support1, wpmudev-support2, wpmudev-support4, wpmudev-support6
 Tags: Appointment,Booking,Calendar,Reservation,Scheduling,google calendar,
 Requires at least: 4.2
-Tested up to: 4.7.3
+Tested up to: 4.8
 Stable tag: trunk
 License: GPL2
 

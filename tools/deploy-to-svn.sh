@@ -64,6 +64,8 @@ svn cp trunk tags/$VERSION
 perl -pi -e "s/Stable tag: .*/Stable tag: $VERSION/" tags/$VERSION/readme.txt
 # svn ci
 
+svn add --force .
+
 echo -e "${INFO_COLOR}Good! I have finished but I haven't committed anything to SVN, I'm too scared so please, here's a checklist to review:"
 echo -e "- Check that ${BLACK_COLOR}./build/appointments-svn/tags/$VERSION${INFO_COLOR} is the correct tag generated"
 echo -e "- ${BLACK_COLOR}./build/appointments-svn/trunk/readme.txt${INFO_COLOR} Stable tag field has been updated and is correct"
