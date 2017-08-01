@@ -128,6 +128,22 @@ class App_MP_Bridge {
 				}
 			}
 		}
+        else{
+			$cart_items = $order->get_cart()->get_items_as_objects();
+			if( ! empty( $cart_items ) ){
+				foreach( $cart_items as $item ){
+					$variation = get_post( $item->ID );
+					if( $item instanceof MP_Product && $item->is_variation() && $this->_is_app_mp_page( $variation->post_parent ) ){
+						$app_id = MP_Product::get_variation_meta( $item->ID, 'name' );
+						if ( is_numeric( $app_id ) ) {
+							$appointment_ids[] = $app_id;
+						}
+					}
+					
+				}
+			}
+
+		}
 		
 		foreach ($appointment_ids as $aid) {
 			if ( ! appointments_update_appointment_status( $aid, 'paid' ) ) {
