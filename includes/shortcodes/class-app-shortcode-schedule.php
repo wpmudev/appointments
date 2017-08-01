@@ -215,21 +215,24 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 			$args['title'] = '';
 		}
 
-		$has_worker = ! empty( $worker_id );
-		$has_service = ! empty( $args['require_service'] ) ? $service_id : false;
+		$has_worker = ! empty( $args['require_provider'] ) ? ( isset( $_GET['app_provider_id'] ) && is_numeric( $_GET['app_provider_id'] ) ) : ! empty( $worker_id );
+		$has_service = ! empty( $args['require_service'] ) ? ( isset( $_GET['app_service_id'] ) && is_numeric( $_GET['app_service_id'] ) ) : ! empty( $service_id );
+        $defaults = $this->get_defaults();
 
 		$c = '';
 		$c .= '<div class="appointments-wrapper">';
 
-		if ( ! $has_worker && ! empty( $args['require_provider'] ) ) {
-			$c .= ! empty( $required_message )
-				? $required_message
-				: __( 'Please, select a service provider.', 'appointments' );
-		} elseif ( ! $has_service && ! empty( $args['require_service'] ) ) {
+		if ( ! $has_service && ! empty( $args['require_service'] ) ) {
 			$c .= ! empty( $args['required_service_message'] )
-				? $required_service_message
-				: __( 'Please, select a service.', 'appointments' );
-		} else {
+				? $args['required_service_message']
+				: $defaults['required_service_message'];
+		}
+		elseif ( ! $has_worker && ! empty( $args['require_provider'] ) ) {
+			$c .= ! empty( $args['required_message'] )
+				? $args['required_message']
+				: $defaults['required_message'];
+		}
+        else {
 			$c .= $args['title'];
 
 			if ( is_user_logged_in() || 'yes' != $options["login_required"] ) {
