@@ -228,7 +228,9 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 			$params['has_service'] = ! empty( $_REQUEST['app_service_id'] ) ? $_REQUEST["app_service_id"] : false;
 			$params['service_id'] = $params['has_service'];
 			$params['require_provider'] = $args['require_provider'];
+            $params['required_message'] = $args['required_message'];
 			$params['require_service'] = $args['require_service'];
+            $params['required_service_message'] = $args['required_service_message'];
 
 			return $params;
 		}
