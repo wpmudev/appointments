@@ -244,6 +244,7 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 			}
 
 			$codec = new App_Macro_GeneralCodec;
+			$services = new App_Shortcode_Services;
 
 			$cal_args = array(
 				'service_id' => $params['service_id'],
@@ -260,7 +261,10 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 				<?php if ( ! $params['has_worker'] && ! empty( $params['require_provider'] ) ): ?>
 					<?php echo ! empty( $params['required_message'] ) ? $params['required_message'] : __( 'Please, select a service provider.', 'appointments' ); ?>
 				<?php elseif ( ! $params['has_service'] && ! empty( $params['require_service'] ) ): ?>
-					<?php echo ! empty( $params['required_service_message'] ) ? $params['required_service_message'] : __( 'Please, select a service.', 'appointments' ); ?>
+					<?php $required_service_message = ! empty( $params['required_service_message'] ) ? $params['required_service_message'] : __( 'Please, select a service.', 'appointments' ); ?>
+					<?php echo $services->process_shortcode( array(
+					        'select'    => $required_service_message
+                    ) ) ?>
 				<?php else: ?>
 					<?php echo apply_filters( 'app-shortcodes-monthly_schedule-title', $params['title'], $args ); ?>
 					<?php if ( is_user_logged_in() || 'yes' != $options["login_required"] ): ?>
