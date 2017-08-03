@@ -56,6 +56,12 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 					'value' => __('You need to login to make an appointment. Please click here to register/login: LOGIN_PAGE', 'appointments'),
 					'help' => __('Text that will be displayed after the title only to the clients who are not logged in and you require a login. <code>LOGIN_PAGE</code> will be replaced with your website\'s login page, while <code>REGISTRATION_PAGE</code> will be replaced with your website\'s registration page.', 'appointments'),
 				),
+				'hide_today_times' => array(
+					'type' => 'checkbox',
+					'name' => __( 'Hide today\'s times', 'appointments' ),
+					'value' => 0,
+					'help' => __('Checking this argument will hide the available appointment times until the user selects a day.', 'appointments'),
+				),
 				'service' => array(
 					'type' => 'select',
 					'name' => __( 'Service', 'appointments' ),
@@ -231,6 +237,7 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
             $params['required_message'] = $args['required_message'];
 			$params['require_service'] = $args['require_service'];
             $params['required_service_message'] = $args['required_service_message'];
+            $params['hide_today_times'] = $args['hide_today_times'];
 
 			return $params;
 		}
@@ -247,12 +254,13 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 			$services = new App_Shortcode_Services;
 
 			$cal_args = array(
-				'service_id' => $params['service_id'],
-				'worker_id'  => $params['worker_id'],
-				'class'      => $params['class'],
-				'long'       => $params['long'],
-				'echo'       => false,
-				'widget'     => $params['widget']
+				'service_id'            => $params['service_id'],
+				'worker_id'             => $params['worker_id'],
+				'class'                 => $params['class'],
+				'long'                  => $params['long'],
+				'echo'                  => false,
+				'widget'                => $params['widget'],
+				'hide_today_times'      => $params['hide_today_times']
 			);
 
 			ob_start();
@@ -263,7 +271,7 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 				<?php elseif ( ! $params['has_service'] && ! empty( $params['require_service'] ) ): ?>
 					<?php $required_service_message = ! empty( $params['required_service_message'] ) ? $params['required_service_message'] : __( 'Please, select a service.', 'appointments' ); ?>
 					<?php echo $services->process_shortcode( array(
-					        'select'    => $required_service_message
+					        'select'            => $required_service_message
                     ) ) ?>
 				<?php else: ?>
 					<?php echo apply_filters( 'app-shortcodes-monthly_schedule-title', $params['title'], $args ); ?>
