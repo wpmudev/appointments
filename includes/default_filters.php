@@ -117,6 +117,11 @@ function appointments_maybe_cancel_appointment() {
 
 		$app = appointments_get_appointment( $app_id );
 
+		$appointments = new Appointments;
+		$gcal = $appointments->get_gcal_api();
+		$args['status'] = 'removed';
+		$gcal->on_update_appointment( $app_id, $args, $app );
+
 		if ( ! $app ) {
 			wp_die( __( 'The appointment does not exist', 'appointments' ), __( 'Error', 'appointments' ) );
 		}
