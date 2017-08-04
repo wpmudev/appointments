@@ -117,10 +117,6 @@ function appointments_maybe_cancel_appointment() {
 
 		$app = appointments_get_appointment( $app_id );
 
-		$appointments = new Appointments;
-		$gcal = $appointments->get_gcal_api();
-		$args['status'] = 'removed';
-		$gcal->on_update_appointment( $app_id, $args, $app );
 
 		if ( ! $app ) {
 			wp_die( __( 'The appointment does not exist', 'appointments' ), __( 'Error', 'appointments' ) );
@@ -132,6 +128,12 @@ function appointments_maybe_cancel_appointment() {
 
 		$options = appointments_get_options();
 		appointments_cancel_appointment( $app_id );
+
+		// Remove the gcal appointment
+		$appointments = new Appointments;
+		$gcal = $appointments->get_gcal_api();
+		$args['status'] = 'removed';
+		$gcal->on_update_appointment( $app_id, $args, $app );
 
 		$url = get_permalink( $options['cancel_page'] );
 		if ( $url ) {
