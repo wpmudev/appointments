@@ -1442,14 +1442,22 @@ class Appointments {
 			else
 				$allow_overwork_break = false;
 
+			// The same for break time
+			if ( isset( $this->options["allow_overwork"] ) && 'yes' == $this->options["allow_overwork"] )
+				$allow_overwork = true;
+			else
+				$allow_overwork = false;
+
 			// Check for further appointments or breaks on this day, if this is a lasting appointment
 			if ( $duration > $this->get_min_time() ) {
 				$step = ceil( $duration/$this->get_min_time() );
 				$min_secs = $this->get_min_time() *60;
 				if ( $step < 20 ) { // Let's not exaggerate !
 					for ( $n =1; $n < $step; $n++ ) {
-						if ( $this->is_busy( $ccs + $n * $min_secs, $ccs + ($n+1) * $min_secs, $capacity ) )
-							return false; // There is an appointment in the predeeding times
+						if ( !$allow_overwork) {
+							if ( $this->is_busy( $ccs + $n * $min_secs, $ccs + ($n+1) * $min_secs, $capacity ) )
+								return false; // There is an appointment in the predeeding times
+						}
 						// We can check breaks here too
 						if ( !$allow_overwork_break ) {
 							if ( $this->is_break( $ccs + $n * $min_secs, $ccs + ($n+1) * $min_secs ) )
@@ -1474,11 +1482,6 @@ class Appointments {
 			}
 			if (!is_array($days) || empty($days)) return true;
 
-			// If overwork is allowed, lets mark this
-			if ( isset( $this->options["allow_overwork"] ) && 'yes' == $this->options["allow_overwork"] )
-				$allow_overwork = true;
-			else
-				$allow_overwork = false;
 
 			// What is the name of this day?
 			$this_days_name = date("l", $ccs );
