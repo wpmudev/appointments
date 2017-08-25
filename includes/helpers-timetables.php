@@ -101,9 +101,7 @@ function appointments_is_available_time( $start, $end, $worker_id = 0, $location
 
 		$options = get_option( 'appointments_options' );
 		if ( isset( $options['allow_overwork'] ) && 'yes' === $options['allow_overwork'] ) {
-
 			if ( ! $end <= $end_active_datetime && $start >= $start_active_datetime ) {
-
 				return true;
 			}
 		}

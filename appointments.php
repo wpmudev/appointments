@@ -1455,8 +1455,9 @@ class Appointments {
 				if ( $step < 20 ) { // Let's not exaggerate !
 					for ( $n =1; $n < $step; $n++ ) {
 						if ( !$allow_overwork) {
-							if ( $this->is_busy( $ccs + $n * $min_secs, $ccs + ($n+1) * $min_secs, $capacity ) )
+							if ( $this->is_busy( $ccs + $n * $min_secs, $ccs + ($n+1) * $min_secs, $capacity ) ) {
 								return false; // There is an appointment in the predeeding times
+							}
 						}
 						// We can check breaks here too
 						if ( !$allow_overwork_break ) {
@@ -1480,8 +1481,9 @@ class Appointments {
 					wp_cache_set( 'app-open_times-for-' . $this->worker, $days );
 				}
 			}
-			if (!is_array($days) || empty($days)) return true;
-
+			if (!is_array($days) || empty($days)) {
+				return true;
+			}
 
 			// What is the name of this day?
 			$this_days_name = date("l", $ccs );
@@ -1494,27 +1496,26 @@ class Appointments {
 				// // Jose's fix pt1 (c19c7d65bb860a265ceb7f6a6075ae668bd60100)
 				//if ( $day_name == $this_days_name && isset( $day["active"] ) && 'yes' == $day["active"] ) {
 				if ( $day_name == $this_days_name ) {
-
 					// Special case: End time is 00:00
 					$end_mil = $this->to_military( $day["end"] );
-					if ( '00:00' == $end_mil )
+					if ( '00:00' == $end_mil ) {
 						$end_mil = '24:00';
-
+					}
 					if ( $allow_overwork ) {
-						if ( $ccs >= $this->str2time( $this_day, $end_mil ) )
+						if ( $ccs >= $this->str2time( $this_day, $end_mil ) ) {
 							return false;
+						}
 					}
 					else {
-						if (  $css_plus_duration > $this->str2time( $this_day, $end_mil ) )
+						if (  $css_plus_duration > $this->str2time( $this_day, $end_mil ) ) {
 							return false;
+						}
 					}
-
 					// We need to check a special case where schedule starts on eg 4pm, but our work starts on 4:30pm.
 					if ( $ccs < strtotime( $this_day . " " . $this->to_military( $day["start"] ) , $this->local_time ) )
 						return false;
 				}
 			}
-
 		}
 		return true;
 	}
