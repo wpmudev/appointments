@@ -80,24 +80,32 @@ function appointments_is_available_time( $start, $end, $worker_id = 0, $location
 		if ( empty( $active_day ) ) {
 			return false;
 		}
-		// Results must only contain one result, let's get that result
+		// Results must only contain one result, let's get that result.
 		$active_day = current( $active_day );
 
-		// The worker is working this weekday. Let's check the interval
+		// The worker is working this weekday. Let's check the interval.
 		$start_active_datetime = strtotime( date( 'Y-m-d', $start ) . ' ' . $active_day['start'] . ':00' );
 		if ( $active_day['end'] === '00:00' ) {
-			// This means that the end time is on the next day
+			// This means that the end time is on the next day.
 			$end_active_datetime = strtotime( date( 'Y-m-d 00:00:00', strtotime( '+1 day', $start ) ) );
-		}
-		else {
-			$end_active_datetime   = strtotime( date( 'Y-m-d', $start ) . ' ' . $active_day['end'] . ':00' );
+		} else {
+			$end_active_datetime = strtotime( date( 'Y-m-d', $start ) . ' ' . $active_day['end'] . ':00' );
 		}
 
 		if (
 			$start >= $start_active_datetime // The start time is greater than the active day start time
-			&& $end <= $end_active_datetime // The end time is less than the active day end time. At this point we know that the searched dates are inside the interval
+			&& $end <= $end_active_datetime // The end time is less than the active day end time. At this point we know that the searched dates are inside the interval.
 		) {
 			return true;
+		}
+
+		$options = get_option( 'appointments_options' );
+		if ( isset( $options['allow_overwork'] ) && 'yes' === $options['allow_overwork'] ) {
+
+			if ( ! $end <= $end_active_datetime && $start >= $start_active_datetime ) {
+
+				return true;
+			}
 		}
 	}
 
