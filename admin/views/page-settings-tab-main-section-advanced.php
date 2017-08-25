@@ -40,7 +40,7 @@
 	</tr>
     
     <tr valign="top">
-		<th scope="row"><label for="keep_options_on_uninstall"><?php _e( 'Keep options on unintall', 'appointments' ) ?></label></th>
+		<th scope="row"><label for="keep_options_on_uninstall"><?php _e( 'Keep options on uninstall', 'appointments' ) ?></label></th>
 		<td colspan="2">		
 			<input type="checkbox" name="keep_options_on_uninstall" id="keep_options_on_uninstall" <?php checked( $options['keep_options_on_uninstall'] ); ?> />
             <span class="description">
