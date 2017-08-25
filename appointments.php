@@ -771,7 +771,7 @@ class Appointments {
 		if ( !$page )
 			return $text;
 
-		$text = get_the_excerpt( $page_id );
+		$text = $page->post_excerpt;
 		if ( empty( $text ) ) {
 			$text = $page->post_content;
 		}
