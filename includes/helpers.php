@@ -42,6 +42,9 @@ function appointments_delete_timetables_cache() {
 	delete_transient( 'app_timetables' );
 }
 
+/**
+ * @since 2.2.1 Added `hide_today` argument.
+ */
 function appointments_get_timetable( $day_start, $capacity, $schedule_key=false, $hide_today = false ) {
 	global $appointments;
 	return $appointments->get_timetable( $day_start, $capacity, $schedule_key, $hide_today );

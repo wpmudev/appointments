@@ -1002,12 +1002,12 @@ class Appointments {
 
 	/**
 	 * Helper function to create a time table for monthly schedule
+	 *
+	 * @since 2.2.1 Added `hide_today` argument.
 	 */
 	function get_timetable( $day_start, $capacity, $schedule_key=false, $hide_today = false ) {
 		$local_time = current_time( 'timestamp' );
-
 		$data = $this->_get_timetable_slots( $day_start, $capacity, $schedule_key );
-
 		// We need this only for the first timetable
 		// Otherwise $time will be calculated from $day_start
 		if ( isset( $_GET["wcalendar"] ) && (int)$_GET['wcalendar'] ) {
@@ -1016,13 +1016,11 @@ class Appointments {
 		else {
 			$time = $local_time;
 		}
-
 		// Are we looking to today?
 		// If today is a working day, shows its free times by default unless user hides it
+		$style = ' style="display:none"';
 		if ( date( 'Ymd', $day_start ) == date( 'Ymd', $time ) && ! $hide_today ) {
 			$style = '';
-		} else {
-			$style = ' style="display:none"';
 		}
 
 		$ret  = '';
