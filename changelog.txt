@@ -2,6 +2,8 @@
 - Fix: Client cancellation was not synced to Google Calendar.
 - Fix: Auto reload of appointment status totals when status is changed.
 - Fix: Check for allow overwork.
+- Fix: Required messages at monthly calendar not working.
+- Fix; Required messages not working in weekly calendar.
 
 
 2017-06-20 - 2.2.0
