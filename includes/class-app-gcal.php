@@ -126,15 +126,36 @@ class Appointments_Google_Calendar {
 
 	public function setup_cron() {
 		add_filter( 'cron_schedules', array( $this, 'cron_schedules' ) );
-		
+
 		$sync_modes = array( 'sync', 'gcal2app' );
+		// Schedule a cron.
 		if ( in_array( $this->get_api_mode(), $sync_modes ) ) {
 			$scheduled = wp_next_scheduled( 'appointments_gcal_sync' );
 			if ( ! $scheduled ) {
 				wp_schedule_event( current_time( 'timestamp' ) + 600, 'app-gcal', 'appointments_gcal_sync' );
 			}
-		}
-		else {
+		} elseif ( $this->workers_allowed() ) { // Schedule cron if admin has allowed workers to set up gcal sync.
+			$workers = appointments_get_workers();
+
+			foreach ( $workers as $worker ) {
+				$switched = $this->switch_to_worker( $worker->ID );
+				if ( $switched ) {
+					if ( in_array( $this->get_api_mode(), $sync_modes ) ) {
+						$scheduled = wp_next_scheduled( 'appointments_gcal_sync' );
+						if ( ! $scheduled ) {
+							wp_schedule_event( current_time( 'timestamp' ) + 600, 'app-gcal', 'appointments_gcal_sync' );
+							$this->restore_to_default();
+							return;
+						} else {
+							// Don't need to keep looping through workers if cron already scheduled.
+							$this->restore_to_default();
+							return;
+						}
+					}
+					$this->restore_to_default();
+				}
+			}
+		} else {
 			$scheduled = wp_next_scheduled( 'appointments_gcal_sync' );
 			if ( $scheduled ) {
 				wp_unschedule_event( $scheduled, 'appointments_gcal_sync' );

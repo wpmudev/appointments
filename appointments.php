@@ -1003,7 +1003,7 @@ class Appointments {
 	/**
 	 * Helper function to create a time table for monthly schedule
 	 */
-	function get_timetable( $day_start, $capacity, $schedule_key=false ) {
+	function get_timetable( $day_start, $capacity, $schedule_key=false, $hide_today = false ) {
 		$local_time = current_time( 'timestamp' );
 
 		$data = $this->_get_timetable_slots( $day_start, $capacity, $schedule_key );
@@ -1018,8 +1018,8 @@ class Appointments {
 		}
 
 		// Are we looking to today?
-		// If today is a working day, shows its free times by default
-		if ( date( 'Ymd', $day_start ) == date( 'Ymd', $time ) ) {
+		// If today is a working day, shows its free times by default unless user hides it
+		if ( date( 'Ymd', $day_start ) == date( 'Ymd', $time ) && ! $hide_today ) {
 			$style = '';
 		} else {
 			$style = ' style="display:none"';

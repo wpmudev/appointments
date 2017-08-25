@@ -42,9 +42,9 @@ function appointments_delete_timetables_cache() {
 	delete_transient( 'app_timetables' );
 }
 
-function appointments_get_timetable( $day_start, $capacity, $schedule_key=false ) {
+function appointments_get_timetable( $day_start, $capacity, $schedule_key=false, $hide_today = false ) {
 	global $appointments;
-	return $appointments->get_timetable( $day_start, $capacity, $schedule_key );
+	return $appointments->get_timetable( $day_start, $capacity, $schedule_key, $hide_today );
 }
 
 function appointments_get_capacity() {
@@ -418,7 +418,8 @@ function appointments_monthly_calendar( $timestamp = false, $args = array() ) {
 		'class' => '',
 		'long' => false,
 		'echo' => true,
-		'widget' => false
+		'widget' => false,
+        'hide_today_times' => false
 	);
 	$args = wp_parse_args( $args, $defaults );
 
@@ -504,10 +505,10 @@ function appointments_monthly_calendar( $timestamp = false, $args = array() ) {
 							
 							//Do not include the timetable in the widget, but run the appointments_get_timetable to check if free or busy
 							if ( ! $args['widget'] ) {
-								$time_table .= appointments_get_timetable( $ccs, $capacity, $schedule_key );
+								$time_table .= appointments_get_timetable( $ccs, $capacity, $schedule_key, $args['hide_today_times'] );
 							}
 							else{
-								appointments_get_timetable( $ccs, $capacity, $schedule_key );
+								appointments_get_timetable( $ccs, $capacity, $schedule_key, $args['hide_today_times'] );
 							}
 
 							// Look if we have at least one cell free from get_timetable function
