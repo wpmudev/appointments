@@ -216,6 +216,7 @@ AppointmentsAdmin = window.AppointmentsAdmin || {};
         });
 
         var app_id = $button.data('app-id');
+        var cancel_button = target.find('.cancel');
         data.app_id = app_id;
         data.resend = target.find('input[name="resend"]').is(':checked') ? 1 : 0;
         data.nonce = this.options.nonces.editApp;
@@ -240,6 +241,11 @@ AppointmentsAdmin = window.AppointmentsAdmin || {};
             else {
                 // this.removeActiveEditorForms();
             }
+
+            if ( response.reload ){
+                location.reload();
+            }
+            cancel_button[0].innerHTML = 'Close';
         }.bind(this),'json');
     };
 

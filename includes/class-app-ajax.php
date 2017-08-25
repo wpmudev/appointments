@@ -178,14 +178,17 @@ class Appointments_AJAX {
 
 
 		if ( $update_result ) {
-			// Log change of status
-			if ( $data['status'] != $app_orig_status ) {
-				$appointments->log( sprintf( __('Status changed from %s to %s by %s for appointment ID:%d','appointments'), $app_orig_status, $data["status"], $current_user->user_login, $app->ID ) );
-			}
 			$result = array(
 				'app_id' => $app->ID,
 				'message' => __('<span style="color:green;font-weight:bold">Changes saved.</span>', 'appointments'),
 			);
+			// Log change of status
+			if ( $data['status'] != $app_orig_status ) {
+				$appointments->log( sprintf( __('Status changed from %s to %s by %s for appointment ID:%d','appointments'), $app_orig_status, $data["status"], $current_user->user_login, $app->ID ) );
+				// Result includes reload of page to show updated statuses.
+				$result[ 'reload' ] = true;
+			}
+
 		} else if ( $insert_result ) {
 			$result = array(
 				'app_id' => $app->ID,
