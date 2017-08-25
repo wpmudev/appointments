@@ -5,6 +5,7 @@
 - Fix: Required messages at monthly calendar not working.
 - Fix: Required messages not working in weekly calendar.
 - Fix: Time Slot showing up without selecting a certain date in a calendar.
+- Enhance: Allow currency option to be visible even if payments are disabled.
 
 2017-06-20 - 2.2.0
 -------------------------------
