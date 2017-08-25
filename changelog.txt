@@ -1,5 +1,7 @@
 - Added JavaScript alert on the "Add new Service Provider" screen to avoid error screen.
 - Fix: Client cancellation was not synced to Google Calendar
+- Fix: Auto reload of appointment status totals when status is changed
+
 
 2017-06-20 - 2.2.0
 -------------------------------
