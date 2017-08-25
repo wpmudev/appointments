@@ -3,8 +3,8 @@
 - Fix: Auto reload of appointment status totals when status is changed.
 - Fix: Check for allow overwork.
 - Fix: Required messages at monthly calendar not working.
-- Fix; Required messages not working in weekly calendar.
-
+- Fix: Required messages not working in weekly calendar.
+- Fix: Time Slot showing up without selecting a certain date in a calendar.
 
 2017-06-20 - 2.2.0
 -------------------------------
