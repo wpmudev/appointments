@@ -1,12 +1,14 @@
+2017-09-xx - 2.2.1
+-------------------------------
 - Added JavaScript alert on the "Add new Service Provider" screen to avoid error screen.
-- Fix: Client cancellation was not synced to Google Calendar.
+- Enhance: Allow currency option to be visible even if payments are disabled.
 - Fix: Auto reload of appointment status totals when status is changed.
 - Fix: Check for allowing overwork.
+- Fix: Client cancellation was not synced to Google Calendar.
+- Fix: Replace get_the_excertop() by local $post excerpt to avoid showing current entry excerpt instead id event excerpt.
 - Fix: Required messages at monthly calendar not working.
 - Fix: Required messages not working in weekly calendar.
 - Fix: Time Slot showing up without selecting a certain date in a calendar.
-- Enhance: Allow currency option to be visible even if payments are disabled.
-- Fix: Replace get_the_excertop() by local $post excerpt to avoid showing current entry excerpt instead id event excerpt.
 
 2017-06-20 - 2.2.0
 -------------------------------
