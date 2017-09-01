@@ -1,14 +1,25 @@
-2017-09-xx - 2.2.1
--------------------------------
-- Added JavaScript alert on the "Add new Service Provider" screen to avoid error screen.
-- Enhance: Allow currency option to be visible even if payments are disabled.
-- Fix: Auto reload of appointment status totals when status is changed.
-- Fix: Check for allowing overwork.
-- Fix: Client cancellation was not synced to Google Calendar.
-- Fix: Replace get_the_excertop() by local $post excerpt to avoid showing current entry excerpt instead id event excerpt.
-- Fix: Required messages at monthly calendar not working.
-- Fix: Required messages not working in weekly calendar.
-- Fix: Time Slot showing up without selecting a certain date in a calendar.
+2017-08-31 - 2.2.1
+
+- Added new function: appointments_is_working().
+- Added shortcode option in app_monthly_schedule to give user option to hide today's times and force a user to click on a date before showing times.
+- Added sort CSV columns for appointments export.
+- Added timetables helpers tests.
+- Allow currency option to be visible even if payments are disabled.
+- appointments_is_available_time was not always returning a value.
+- Appointments don't get active after Stripe payment from MarketPress.
+- Fixed appointments_is_worker_holiday parameters.
+- Fixed auto reload of appointment status totals when status is changed.
+- Fixed client cancellation not synced to Google Calendar.
+- Fixed cron not being set for Google Calendar sync for service providers.
+- Fixed for checking the available time of worker.
+- Fixed required messages at a monthly calendar.
+- Fixed required messages at a weekly calendar.
+- Fixed require_service in app_monthly_schedule shortcode not showing dropdown.
+- Fixed to check for allow overwork.
+- Load GCal only when needed.
+- Removed Appointments::is_available_time().
+- Swap start/end if start > end in appointments_is_available_time.
+- Try to avoid collateral effects due to Appointments class attributes.
 
 2017-06-20 - 2.2.0
 -------------------------------

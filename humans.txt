@@ -8,3 +8,8 @@
 	Contact: ve [at] incsub [dot] com
 	Twitter: @vebailovity
 	Location: Zrenjanin, Serbia
+
+	Developer: Marcin Pietrzak
+	Contact: marcin [at] incsub [dot] com
+	Twitter: 
+	Location: Poland
