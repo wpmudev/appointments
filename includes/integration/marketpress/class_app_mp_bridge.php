@@ -203,7 +203,16 @@ class App_MP_Bridge {
 			$price = str_replace(',', '', $raw_price);
 		}
 
-        $thumbnail_id = apply_filters('app_variation_thumbnail', false, $service);
+        $table = appointments_get_table( 'services' );
+        global $wpdb;
+        
+        $page_id = $wpdb->get_var("SELECT 'page' from $table WHERE ID = $service");
+        $thumb_id = false;
+        if($page_id) {
+            $thumb_id = isset(get_post_thumbnail_id($page_id)) ? get_post_thumbnail_id($page_id) : false;
+        }
+
+        $thumbnail_id = apply_filters('app_variation_thumbnail', $thumb_id, $service);
 		update_post_meta($variation_id, 'name', $app_id);
 		update_post_meta($variation_id, 'sku', $this->_core->service);
 		update_post_meta($variation_id, 'regular_price', $price);
