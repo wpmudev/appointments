@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Appointments+ package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Appointments+ 2.2.1\n"
+"Project-Id-Version: Appointments+ 2.2.2\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2017-09-01 05:39:26+00:00\n"
+"POT-Creation-Date: 2017-09-20 16:35:39+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -895,13 +895,13 @@ msgstr ""
 msgid "Dismiss notice"
 msgstr ""
 
-#: admin/class-app-admin.php:88 admin/class-app-admin.php:277
-#: admin/class-app-admin.php:306
+#: admin/class-app-admin.php:88 admin/class-app-admin.php:270
+#: admin/class-app-admin.php:299 admin/class-app-admin.php:312
 #: includes/pro/includes/class-app-google-login.php:165
 msgid "Dismiss"
 msgstr ""
 
-#: admin/class-app-admin.php:146 admin/class-app-admin.php:175
+#: admin/class-app-admin.php:145 admin/class-app-admin.php:174
 #: admin/pages/class-admin-appointments-page.php:26
 #: admin/pages/class-admin-appointments-page.php:284
 #: admin/tinymce-shortcodes-i18n.php:7
@@ -914,80 +914,86 @@ msgstr ""
 msgid "Appointments"
 msgstr ""
 
-#: admin/class-app-admin.php:205
+#: admin/class-app-admin.php:204
 msgid "Preparing for export, please hold on..."
 msgstr ""
 
-#: admin/class-app-admin.php:219 admin/class-app-admin.php:223
-#: admin/class-app-admin.php:227
+#: admin/class-app-admin.php:220
 msgid "Notice dismissed."
 msgstr ""
 
-#: admin/class-app-admin.php:243
+#: admin/class-app-admin.php:237
 msgid "<b>[Appointments+]</b> You must define at least once service."
 msgstr ""
 
-#: admin/class-app-admin.php:251
+#: admin/class-app-admin.php:244
 msgid ""
 "<b>[Appointments+]</b> One of your services has a duration smaller than "
 "time base. Please visit Services tab and after making your corrections save "
 "new settings."
 msgstr ""
 
-#: admin/class-app-admin.php:258
+#: admin/class-app-admin.php:251
 msgid ""
 "<b>[Appointments+]</b> One of your services is not divisible by the time "
 "base. Please visit Services tab and after making your corrections save new "
 "settings."
 msgstr ""
 
-#: admin/class-app-admin.php:265
+#: admin/class-app-admin.php:258
 msgid ""
 "<b>[Appointments+]</b> One of your services has a duration greater than 24 "
 "hours. Appointments+ does not support services exceeding 1440 minutes (24 "
 "hours). "
 msgstr ""
 
-#: admin/class-app-admin.php:276
+#: admin/class-app-admin.php:269
 msgid ""
 "<b>[Appointments+]</b> One of your services does not have a service "
 "provider assigned. Delete services you are not using."
 msgstr ""
 
-#: admin/class-app-admin.php:277 admin/class-app-admin.php:306
+#: admin/class-app-admin.php:270 admin/class-app-admin.php:299
+#: admin/class-app-admin.php:312
 #: includes/pro/includes/class-app-google-login.php:165
 msgid "Dismiss this notice for this session"
 msgstr ""
 
-#: admin/class-app-admin.php:286
+#: admin/class-app-admin.php:279
 msgid ""
 "<b>[Appointments+]</b> Appointments+ database tables need to be updated. "
 "Please deactivate and reactivate the plugin (DO NOT DELETE the plugin). You "
 "will not lose any saved information."
 msgstr ""
 
-#: admin/class-app-admin.php:294
+#: admin/class-app-admin.php:287
 msgid ""
 "<b>[Appointments+]</b> More than one instance of services, service "
 "providers, confirmation, Paypal or login shortcodes on the same page may "
 "cause problems.</p>"
 msgstr ""
 
-#: admin/class-app-admin.php:305
+#: admin/class-app-admin.php:298
 msgid ""
 "<b>[Appointments+]</b> Confirmation shortcode [app_confirmation] is always "
 "required to complete an appointment."
 msgstr ""
 
-#: admin/class-app-admin.php:319
+#: admin/class-app-admin.php:311
+msgid ""
+"<b>[Appointments+]</b> Paypal shortcode [app_paypal] is always required to "
+"complete an appointment with <b>pending</b> status."
+msgstr ""
+
+#: admin/class-app-admin.php:325
 msgid "Appointments+ FAQ"
 msgstr ""
 
-#: admin/class-app-admin.php:343
+#: admin/class-app-admin.php:349
 msgid "FAQ"
 msgstr ""
 
-#: admin/class-app-admin.php:400 admin/pages/class-admin-settings-page.php:12
+#: admin/class-app-admin.php:419 admin/pages/class-admin-settings-page.php:12
 #: includes/pro/includes/addons/app-locations-location_support.php:169
 msgid "Settings"
 msgstr ""
@@ -1167,7 +1173,7 @@ msgstr ""
 #: admin/pages/class-admin-appointments-page.php:242
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:88
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:158
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:206
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:200
 #: includes/templates/app-admin-my_appointments_list.php:65
 msgid "Client"
 msgstr ""
@@ -1176,7 +1182,7 @@ msgstr ""
 #: admin/pages/class-admin-transactions-page.php:56
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:86
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:67
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:251
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:244
 #: includes/shortcodes/class-app-shortcode-schedule.php:52
 #: includes/shortcodes/class-app-shortcode-service-providers.php:82
 #: includes/templates/app-admin-my_appointments_list.php:67
@@ -1189,7 +1195,7 @@ msgstr ""
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:74
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:29
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:30
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:164
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:161
 #: includes/shortcodes/class-app-shortcode-schedule.php:59
 #: includes/shortcodes/class-app-shortcode-services.php:81
 #: includes/templates/app-admin-my_appointments_list.php:68
@@ -1208,7 +1214,7 @@ msgstr ""
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:90
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:156
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:43
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:254
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:247
 #: includes/templates/app-admin-my_appointments_list.php:69
 msgid "Status"
 msgstr ""
@@ -1386,7 +1392,7 @@ msgstr ""
 #: includes/gcal/views/settings-gcal-step-3.php:60
 #: includes/pro/includes/addons/app-users-additional_fields.php:528
 #: includes/pro/includes/addons/app-users-additional_fields.php:566
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:357
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:346
 msgid "No"
 msgstr ""
 
@@ -1410,7 +1416,7 @@ msgstr ""
 #: includes/gcal/views/settings-gcal-step-3.php:61
 #: includes/pro/includes/addons/app-users-additional_fields.php:528
 #: includes/pro/includes/addons/app-users-additional_fields.php:566
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:356
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:345
 msgid "Yes"
 msgstr ""
 
@@ -1447,7 +1453,7 @@ msgid "Created"
 msgstr ""
 
 #: admin/views/inline-edit.php:102
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:257
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:250
 msgid "Confirm"
 msgstr ""
 
@@ -3813,11 +3819,11 @@ msgstr ""
 msgid "No advance payment"
 msgstr ""
 
-#: includes/integration/marketpress/class_app_mp_bridge.php:166
+#: includes/integration/marketpress/class_app_mp_bridge.php:163
 msgid "Details"
 msgstr ""
 
-#: includes/integration/marketpress/class_app_mp_bridge.php:244
+#: includes/integration/marketpress/class_app_mp_bridge.php:241
 msgid "Please, proceed to checkout."
 msgstr ""
 
@@ -4792,12 +4798,12 @@ msgid "Inserts a table that displays all upcoming appointments."
 msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:89
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:253
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:246
 msgid "Date/time"
 msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:123
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:330
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:320
 msgid "No appointments"
 msgstr ""
 
@@ -5289,23 +5295,27 @@ msgid ""
 "appointments."
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:319
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:281
+msgid "Pay"
+msgstr ""
+
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:309
 msgid "Click to submit this appointment to your Google Calendar account"
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:339
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:328
 msgid "Submit Confirm"
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:351
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:340
 msgid "Are you sure you want to cancel the selected appointment?"
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:352
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:341
 msgid "Selected appointment cancelled."
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:353
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:342
 msgid "A connection error occurred."
 msgstr ""
 
@@ -5763,7 +5773,7 @@ msgctxt "Worker Monthly Calendar Shortcode status field"
 msgid "Status"
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:260
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:253
 msgctxt "Discard existing info"
 msgid "Cancel"
 msgstr ""
