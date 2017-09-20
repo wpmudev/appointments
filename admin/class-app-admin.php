@@ -214,17 +214,12 @@ class Appointments_Admin {
 	 */
 	function dismiss() {
 		global $current_user;
-		if ( isset( $_REQUEST['app_dismiss'] ) ) {
-			update_user_meta( $current_user->ID, 'app_dismiss', true );
-			?><div class="updated fade"><p><?php _e('Notice dismissed.', 'appointments'); ?></p></div><?php
-		}
-		if ( isset( $_REQUEST['app_dismiss_google'] ) ) {
-			update_user_meta( $current_user->ID, 'app_dismiss_google', true );
-			?><div class="updated fade"><p><?php _e('Notice dismissed.', 'appointments'); ?></p></div><?php
-		}
-		if ( isset( $_REQUEST['app_dismiss_confirmation_lacking'] ) ) {
-			update_user_meta( $current_user->ID, 'app_dismiss_confirmation_lacking', true );
-			?><div class="updated fade"><p><?php _e('Notice dismissed.', 'appointments'); ?></p></div><?php
+		$keys = array( 'app_dismiss', 'app_dismiss_google', 'app_dismiss_confirmation_lacking', 'app_dismiss_app_paypal_lacking' );
+		foreach ( $keys as $key ) {
+			if ( isset( $_REQUEST[ $key ] ) ) {
+				update_user_meta( $current_user->ID, $key, true );
+				?><div class="updated fade"><p><?php _e('Notice dismissed.', 'appointments'); ?></p></div><?php
+			}
 		}
 	}
 
@@ -307,6 +302,19 @@ class Appointments_Admin {
 			     '</p></div>';
 			$r = true;
 		}
+
+		// Check for missing app_paypal shortcode
+		$dismissed_p = false;
+		$dismiss_id_p = get_user_meta( $current_user->ID, 'app_dismiss_app_paypal_lacking', true );
+		if ( $dismiss_id_p )
+			$dismiss_id_p = true;
+		if ( !$dismiss_id_p && isset( $_GET['post'] ) && $_GET['post'] && $this->app_paypal_shortcode_missing( $_GET['post'] ) ) {
+			echo '<div class="error"><p>' .
+			     __('<b>[Appointments+]</b> Paypal shortcode [app_paypal] is always required to complete an appointment with <b>pending</b> status.', 'appointments') .
+			     '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a title="'.__('Dismiss this notice for this session', 'appointments').'" href="' . $_SERVER['REQUEST_URI'] . '&app_dismiss_app_paypal_lacking=1"><small>'.__('Dismiss', 'appointments').'</small></a>'.
+			     '</p></div>';
+			$r = true;
+		}
 		return $r;
 	}
 
@@ -382,6 +390,21 @@ class Appointments_Admin {
 		if ( is_object( $post) && $post && strpos( $post->post_content, '[app_' ) !== false ) {
 			if ( !substr_count( $post->post_content, '[app_confirmation' )
 			     && ( substr_count( $post->post_content, '[app_monthly' ) || substr_count( $post->post_content, '[app_schedule' ) ) )
+				return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Check if app_paypal shortcode missing
+	 * @since 1.2.5
+	 * @return bool
+	 */
+	function app_paypal_shortcode_missing( $post_id ) {
+		$post = get_post( $post_id );
+		if ( is_object( $post) && $post && strpos( $post->post_content, '[app_' ) !== false ) {
+			if ( !substr_count( $post->post_content, '[app_paypal' )
+			     && preg_match( '/\[app_my_appointments[^\]]+status[^\]]+pending/', $post->post_content ) )
 				return true;
 		}
 		return false;
