@@ -4,7 +4,7 @@
 - Fixed a problem with the abandoned orders in admin.
 - Fixed issue with comma as thousand separators when using PayPal.
 - Fixed problem with duplicated page description.
-- Fixed security issue (vulnerability) with data stored on a browser.
+- Fixed security issue (vulnerability) with data stored on a browser. Thanks to Matt Barry @ Wordfence
 - Fixed weekly calendar hours for a worker.
 
 2017-09-01 - 2.2.1
