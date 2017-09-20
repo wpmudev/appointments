@@ -3,13 +3,32 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
 /**
  * Class Appointments_Sessions
  *
  * Manages session data for users
  */
 class Appointments_Sessions {
+
+	public static function get_current_visitor_key() {
+		$key = $set_cookie = false;
+		$length = 64;
+		if ( ! self::is_visitor_appointments_cookie_set() ) {
+			$key = wp_generate_password( $length, false, false );
+				$set_cookie = true;
+		}
+		if ( false === $key ) {
+			$key = $_COOKIE['wpmudev_appointments'];
+			if ( $length != strlen( $key ) ) {
+				$key = wp_generate_password( $length, false, false );
+				$set_cookie = true;
+			}
+		}
+		if ( $set_cookie ) {
+			@setcookie( 'wpmudev_appointments', $key, self::get_cookie_expiration_time(), self::get_cookie_path(), self::get_cookie_domain() );
+		}
+		return $key;
+	}
 
 	/**
 	 * Get the appointments IDs for the current visitor
@@ -19,12 +38,8 @@ class Appointments_Sessions {
 	 * @return array
 	 */
 	public static function get_current_visitor_appointments() {
-
-		if ( ! self::is_visitor_appointments_cookie_set() ) {
-			return array();
-		}
-
-		$apps = maybe_unserialize( stripslashes( $_COOKIE['wpmudev_appointments'] ) );
+		$key = 'appointments_'.self::get_current_visitor_key();
+		$apps = get_transient( $key );
 		if ( ! is_array( $apps ) ) {
 			return array();
 		}
@@ -38,6 +53,9 @@ class Appointments_Sessions {
 	 * @return bool
 	 */
 	public static function is_visitor_appointments_cookie_set() {
+		if ( isset( $_COOKIE['wpmudev_appointments_userdata'] ) ) {
+			@setcookie( 'wpmudev_appointments_userdata', null, -1, self::get_cookie_path(), self::get_cookie_domain() );
+		}
 		return isset( $_COOKIE['wpmudev_appointments'] );
 	}
 
@@ -50,11 +68,10 @@ class Appointments_Sessions {
 		if ( ! is_array( $apps ) ) {
 			return;
 		}
-
+		$key = 'appointments_'.self::get_current_visitor_key();
 		// Prevent duplicates
 		$apps = array_unique( $apps );
-
-		@setcookie("wpmudev_appointments", maybe_serialize( $apps ), self::get_cookie_expiration_time(), self::get_cookie_path(), self::get_cookie_domain() );
+		set_transient( $key, $apps, self::get_cookie_expiration_time() );
 	}
 
 	/**
@@ -66,8 +83,8 @@ class Appointments_Sessions {
 		if ( ! is_array( $data ) ) {
 			return;
 		}
-
-		@setcookie("wpmudev_appointments_userdata", maybe_serialize( $data ), self::get_cookie_expiration_time(), self::get_cookie_path(), self::get_cookie_domain() );
+		$key = 'userdata_'.self::get_current_visitor_key();
+		set_transient( $key, $data, self::get_cookie_expiration_time() );
 	}
 
 	/**
@@ -76,34 +93,19 @@ class Appointments_Sessions {
 	 * @return array
 	 */
 	public static function get_visitor_personal_data() {
-		if ( ! self::is_visitor_personal_data_cookie_set() ) {
-			return array();
-		}
-
-		$data = maybe_unserialize( stripslashes( $_COOKIE['wpmudev_appointments_userdata'] ) );
+		$key = 'userdata_'.self::get_current_visitor_key();
+		$data = get_transient( $key );
 		if ( ! is_array( $data ) ) {
 			return array();
 		}
-
 		return $data;
-	}
-
-	/**
-	 * Check if the personal data cookie is set for the visitor
-	 *
-	 * @return bool
-	 */
-	public static function is_visitor_personal_data_cookie_set() {
-		return isset( $_COOKIE['wpmudev_appointments_userdata'] );
 	}
 
 	/**
 	 * Clear visitor appointments list and personal data cookies
 	 */
 	public static function clear_visitor_data() {
-		$drop = current_time( 'timestamp' ) - 3600;
-		@setcookie("wpmudev_appointments", "", $drop, self::get_cookie_path(), self::get_cookie_domain());
-		@setcookie( "wpmudev_appointments_userdata", "", $drop, self::get_cookie_path(), self::get_cookie_domain() );
+		@setcookie( 'wpmudev_appointments', null, -1, self::get_cookie_path(), self::get_cookie_domain() );
 	}
 
 
@@ -114,7 +116,7 @@ class Appointments_Sessions {
 	 */
 	public static function get_cookie_expiration_time() {
 		// 365 days by default
-		$expire = current_time( 'timestamp' ) + 3600 * 24 * ( appointments_get_option( 'app_limit' ) + 365 );
+		$expire = current_time( 'timestamp' ) + DAY_IN_SECONDS * ( appointments_get_option( 'app_limit' ) + 365 );
 		return apply_filters( 'app_cookie_time', $expire );
 	}
 
@@ -131,5 +133,4 @@ class Appointments_Sessions {
 	public static function get_cookie_path() {
 		return defined( 'COOKIEPATH' ) ? COOKIEPATH : '/';
 	}
-
 }
