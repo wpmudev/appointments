@@ -1,5 +1,6 @@
 2017-09-20 - 2.2.2
 -------------------------------
+- Allow Service Description Page featured imaged to be used as Product variation thumbnail (MarketPress integration).
 - Fixed a problem with the abandoned orders in admin.
 - Fixed issue with comma as thousand separators when using PayPal.
 - Fixed problem with duplicated page description.
