@@ -203,7 +203,7 @@ class App_MP_Bridge {
 			$price = str_replace(',', '', $raw_price);
 		}
 
-        $thumbnail_id = apply_filters('app_variation_thumbnail', false, $service);
+        $thumbnail_id = $this->_get_service_page_thumbnail_id($service);
 		update_post_meta($variation_id, 'name', $app_id);
 		update_post_meta($variation_id, 'sku', $this->_core->service);
 		update_post_meta($variation_id, 'regular_price', $price);
@@ -254,4 +254,22 @@ EO_MP_JS;
 		return apply_filters( 'app_is_mp_page', $result, $product );
 
 	}
+    
+    private function _get_service_page_thumbnail_id($service) {
+        global $wpdb;
+        
+        if(!$service) {
+            return false;
+        }
+        
+        $thumbnail_id = false;        
+        $table = appointments_get_table( 'services' );
+        $page_id = $wpdb->get_var("SELECT 'page' from $table WHERE ID = $service");
+
+        if($page_id) {
+            $thumbnail_id = (isset(get_post_thumbnail_id($page_id)) ? get_post_thumbnail_id($page_id) : false);
+        }
+        
+        return apply_filters('app_variation_thumbnail', $thumbnail_id, $service);
+    }
 }
