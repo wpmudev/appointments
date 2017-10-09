@@ -1,4 +1,5 @@
 - Prevent process if user do not exits.
+- Fixed export additional appointment fields (only PRO version).
 
 2017-10-05 - 2.2.2.1
 - Fixed missing JavaScript scripts.
