@@ -18,12 +18,9 @@ class Appointments_Worker {
 		$int_fields = array( 'ID', 'page' );
 		$array_fields = array( 'services_provided' );
 
-		if ( in_array( $field, $int_fields ) )
-			return intval( $value );
-		elseif ( in_array( $field, $array_fields ) )
-			return array_filter( explode( ':' , ltrim( $value , ":") ) );
-		else
-			return $value;
+		if ( in_array( $field, $int_fields ) ) {
+			return intval( $value ); } elseif ( in_array( $field, $array_fields ) ) {
+			return array_filter( explode( ':' , ltrim( $value , ':' ) ) ); } else { 			return $value; }
 	}
 
 	public function get_working_hours() {
@@ -45,8 +42,8 @@ class Appointments_Worker {
 	}
 
 	public function get_services() {
-		if ( empty( $this->services_provided ) )
-			return array();
+		if ( empty( $this->services_provided ) ) {
+			return array(); }
 
 		return array_map( 'appointments_get_service', $this->services_provided );
 	}
@@ -54,6 +51,13 @@ class Appointments_Worker {
 	public function get_name( $field = 'default' ) {
 		$userdata = get_userdata( $this->ID );
 		$name = '';
+
+		/**
+		 * Prevent to precess if user do not exists.
+		 */
+		if ( ! is_a( $userdata, 'WP_User' ) ) {
+			return $name;
+		}
 
 		if ( ! empty( $userdata->app_name ) ) {
 			// If app_name meta exists, use it
@@ -64,18 +68,17 @@ class Appointments_Worker {
 
 			if ( 'default' == $field || 'display_name' == $field ) {
 				$name = $userdata->display_name;
-			}
-			else {
+			} else {
 				$name = $userdata->user_login;
 			}
 
 			if ( empty( $name ) ) {
 				$first_name = get_user_meta( $this->ID, 'first_name', true );
 				$last_name = get_user_meta( $this->ID, 'last_name', true );
-				$name = $first_name . " " . $last_name;
+				$name = $first_name . ' ' . $last_name;
 			}
 
-			if ( "" == trim( $name ) ) {
+			if ( '' == trim( $name ) ) {
 				$name = $userdata->user_login;
 			}
 		}
@@ -85,10 +88,8 @@ class Appointments_Worker {
 	}
 
 	public function is_dummy() {
-		return (bool)$this->dummy;
+		return (bool) $this->dummy;
 	}
-
-
 }
 
 function appointments_get_worker( $worker_id ) {
@@ -117,12 +118,10 @@ function appointments_get_worker( $worker_id ) {
 		if ( $worker ) {
 			wp_cache_add( $worker->ID, $worker, 'app_workers' );
 		}
-
 	}
 
-
-	if ( $worker )
-		return new Appointments_Worker( $worker );
+	if ( $worker ) {
+		return new Appointments_Worker( $worker ); }
 
 	return false;
 }
@@ -147,10 +146,9 @@ function appointments_get_worker_name( $worker_id, $field = 'display_name' ) {
 		// @TODO Take this code out from this function responsibility
 		$current_user_id = get_current_user_id();
 		if ( is_admin() || App_Roles::current_user_can( 'manage_options', App_Roles::CTX_STAFF ) || appointments_is_worker( $current_user_id ) ) {
-			$name = __('Our staff', 'appointments');
-		}
-		else {
-			$name = __('A specialist', 'appointments');
+			$name = __( 'Our staff', 'appointments' );
+		} else {
+			$name = __( 'A specialist', 'appointments' );
 		}
 	}
 
@@ -170,7 +168,7 @@ function appointments_insert_worker( $args = array() ) {
 		'ID' => false,
 		'price' => '',
 		'services_provided' => array(),
-		'page' => 0
+		'page' => 0,
 	);
 
 	$args = wp_parse_args( $args, $defaults );
@@ -182,44 +180,41 @@ function appointments_insert_worker( $args = array() ) {
 	$ID = absint( $args['ID'] );
 	$user = get_userdata( $ID );
 
-	if ( ! $user )
-		return false;
+	if ( ! $user ) {
+		return false; }
 
 	// Check if the user is already in workers table
 	$worker = appointments_get_worker( $ID );
-	if ( $worker )
-		return false;
+	if ( $worker ) {
+		return false; }
 
 	$workers = appointments_get_all_workers();
-	
+
 	$insert['ID'] = $ID;
 	$insert_wildcards[] = '%d';
 
-
 	// Price
-	$price = preg_replace( "/[^0-9,.]/", "", $args['price'] );
+	$price = preg_replace( '/[^0-9,.]/', '', $args['price'] );
 	if ( $price !== '' ) {
-		if ( ! $price )
-			$price = '';
+		if ( ! $price ) {
+			$price = ''; }
 	}
 	$insert['price'] = $price;
 	$insert_wildcards[] = '%s';
 
-
 	// Services provided
 	$_services_provided = $args['services_provided'];
-	if ( ! is_array( $_services_provided ) || empty( $_services_provided ) )
-		$_services_provided = false;
+	if ( ! is_array( $_services_provided ) || empty( $_services_provided ) ) {
+		$_services_provided = false; }
 
 	if ( $_services_provided ) {
 		$services_provided = array();
 		foreach ( $_services_provided as $service_id ) {
-			if ( appointments_get_service( $service_id ) )
-				$services_provided[] = $service_id;
+			if ( appointments_get_service( $service_id ) ) {
+				$services_provided[] = $service_id; }
 		}
 		$insert['services_provided'] = ':'. implode( ':', array_filter( $services_provided ) ) . ':';
-	}
-	else {
+	} else {
 		$insert['services_provided'] = '::';
 	}
 
@@ -255,10 +250,10 @@ function appointments_insert_worker( $args = array() ) {
 				appointments_update_worker_working_hours( $ID, $result_wh->hours, $stat );
 			}
 
-			$result_ex = $wpdb->get_row( $wpdb->prepare("SELECT * FROM $ex_table WHERE location=0 AND service=0 AND status=%s", $stat ), ARRAY_A );
+			$result_ex = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $ex_table WHERE location=0 AND service=0 AND status=%s", $stat ), ARRAY_A );
 			if ( $result_ex != null ) {
-				unset( $result_ex["ID"] );
-				$result_ex["worker"] = $args['ID'];
+				unset( $result_ex['ID'] );
+				$result_ex['worker'] = $args['ID'];
 				$wpdb->insert(
 					$ex_table,
 					$result_ex
@@ -280,8 +275,8 @@ function appointments_update_worker( $worker_id, $args = array() ) {
 	global $wpdb;
 
 	$old_worker = appointments_get_worker( $worker_id );
-	if ( ! $old_worker )
-		return false;
+	if ( ! $old_worker ) {
+		return false; }
 
 	$fields = array( 'services_provided' => '%s', 'dummy' => '%s', 'price' => '%s', 'page' => '%d', 'ID' => '%d' );
 
@@ -294,13 +289,12 @@ function appointments_update_worker( $worker_id, $args = array() ) {
 		}
 	}
 
-	if ( isset( $update['price'] ) )
-		$update['price'] = $price = preg_replace( "/[^0-9,.]/", "", $update['price'] );
+	if ( isset( $update['price'] ) ) {
+		$update['price'] = $price = preg_replace( '/[^0-9,.]/', '', $update['price'] ); }
 
 	if ( isset( $update['dummy'] ) && $update['dummy'] ) {
 		$update['dummy'] = true;
-	}
-	elseif ( isset( $update['dummy'] ) && ! $update['dummy'] ) {
+	} elseif ( isset( $update['dummy'] ) && ! $update['dummy'] ) {
 		$update['dummy'] = '';
 	}
 
@@ -311,26 +305,26 @@ function appointments_update_worker( $worker_id, $args = array() ) {
 
 		$services_provided = array();
 		foreach ( $update['services_provided'] as $service_id ) {
-			if ( appointments_get_service( $service_id ) )
-				$services_provided[] = $service_id;
+			if ( appointments_get_service( $service_id ) ) {
+				$services_provided[] = $service_id; }
 		}
 
-		if ( empty( $services_provided ) )
-			return false;
+		if ( empty( $services_provided ) ) {
+			return false; }
 
 		$update['services_provided'] = ':'. implode( ':', array_filter( $services_provided ) ) . ':';
 	}
 
 	if ( isset( $update['ID'] ) ) {
 		$user_id = absint( $update['ID'] );
-		if ( ! get_userdata( $user_id ) )
-			return false;
+		if ( ! get_userdata( $user_id ) ) {
+			return false; }
 
 		$update['ID'] = $user_id;
 	}
 
-	if ( empty( $update ) )
-		return false;
+	if ( empty( $update ) ) {
+		return false; }
 
 	$table = appointments_get_table( 'workers' );
 
@@ -344,8 +338,8 @@ function appointments_update_worker( $worker_id, $args = array() ) {
 
 	if ( $result ) {
 		appointments_delete_worker_cache( $worker_id );
-		if ( isset( $update['ID'] ) )
-			appointments_delete_worker_cache( $update['ID'] );
+		if ( isset( $update['ID'] ) ) {
+			appointments_delete_worker_cache( $update['ID'] ); }
 
 		// Update working hours and exceptions if we have changed the ID
 		if ( isset( $update['ID'] ) ) {
@@ -368,12 +362,11 @@ function appointments_update_worker( $worker_id, $args = array() ) {
 				array( '%d' )
 			);
 		}
-
 	}
 
 	do_action( 'wpmudev_appointments_update_worker', $worker_id, $args, $old_worker );
 
-	return (bool)$result;
+	return (bool) $result;
 }
 
 /**
@@ -405,7 +398,7 @@ function appointments_get_workers( $args = array() ) {
 		'fields' => false,
 		'service' => false, // Filter by service
 		'with_page' => false, // Only pages IDs > 0
-		'limit' => false
+		'limit' => false,
 	);
 
 	$args = wp_parse_args( $args, $defaults );
@@ -426,20 +419,20 @@ function appointments_get_workers( $args = array() ) {
 	$where = array();
 	$page_id = absint( $args['page'] );
 
-	if ( $page_id )
-		$where[] = $wpdb->prepare( "w.page = %d", $page_id );
+	if ( $page_id ) {
+		$where[] = $wpdb->prepare( 'w.page = %d', $page_id ); }
 
 	$service_id = absint( $args['service'] );
 	if ( $service_id ) {
-		$where[] = $wpdb->prepare( "w.services_provided LIKE %s", '%:' . $service_id . ':%' );
+		$where[] = $wpdb->prepare( 'w.services_provided LIKE %s', '%:' . $service_id . ':%' );
 	}
 
 	$user_id = absint( $args['user_id'] );
-	if ( $user_id )
-		$where[] = $wpdb->prepare( "w.ID = %d", $user_id );
+	if ( $user_id ) {
+		$where[] = $wpdb->prepare( 'w.ID = %d', $user_id ); }
 
 	if ( $args['with_page'] ) {
-		$where[] = "w.page > 0";
+		$where[] = 'w.page > 0';
 	}
 
 	// @TODO: We need to move this to somewhere else
@@ -451,11 +444,9 @@ function appointments_get_workers( $args = array() ) {
 			// orderby is like "ID ASC"
 			$order = strtoupper( $order_by[1] );
 			$order_by = $order_by[0];
-		}
-		elseif ( is_array( $order_by ) && count( $order_by ) == 1 ) {
+		} elseif ( is_array( $order_by ) && count( $order_by ) == 1 ) {
 			$order_by = $order_by[0];
-		}
-		else {
+		} else {
 			$order_by = $args['orderby'];
 		}
 	}
@@ -481,7 +472,7 @@ function appointments_get_workers( $args = array() ) {
 		//'ID DESC', 'name DESC', 'start DESC', 'end DESC', 'duration DESC', 'price DESC', 'RAND()', 'name ASC', 'name DESC' ) );
 
 	$order_by = apply_filters( 'app_get_workers_orderby', $order_by );
-	$order_query = "";
+	$order_query = '';
 	if ( in_array( $args['orderby'], $allowed_orderby ) ) {
 		$order_query = "ORDER BY $order_by $order";
 	}
@@ -499,29 +490,24 @@ function appointments_get_workers( $args = array() ) {
 	$limit_query = '';
 	$limit = absint( $args['limit'] );
 	if ( $limit ) {
-		$limit_query = $wpdb->prepare( "LIMIT %d", $limit );
+		$limit_query = $wpdb->prepare( 'LIMIT %d', $limit );
 	}
 
-	if ( $where )
-		$where = "WHERE " . implode( ' AND ', $where );
-	else
-		$where = "";
+	if ( $where ) {
+		$where = 'WHERE ' . implode( ' AND ', $where ); } else { 		$where = ''; }
 
 	if ( ! $args['count'] ) {
 
 		$allowed_fields = array( 'ID' );
 		$field = $args['fields'];
-		if ( $field && in_array( $field, $allowed_fields ) )
-			$get_col = true;
-		else
-			$get_col = false;
+		if ( $field && in_array( $field, $allowed_fields ) ) {
+			$get_col = true; } else { 			$get_col = false; }
 
 		if ( $get_col ) {
 			$query = "SELECT $field FROM $table w $where $order_query $limit_query";
 		} else {
 			$query = "SELECT * FROM $table w $where $order_query $limit_query";
 		}
-
 
 		if ( $get_col ) {
 			$results = $wpdb->get_col( $query );
@@ -535,8 +521,7 @@ function appointments_get_workers( $args = array() ) {
 				wp_cache_add( $result->ID, $result, 'app_workers' );
 				$workers[] = new Appointments_Worker( $result );
 			}
-		}
-		else {
+		} else {
 			$workers = $results;
 		}
 
@@ -550,11 +535,9 @@ function appointments_get_workers( $args = array() ) {
 				// orderby is like "ID ASC"
 				$order = strtoupper( $order_by[1] );
 				$order_by = $order_by[0];
-			}
-			elseif ( is_array( $order_by ) && count( $order_by ) == 1 ) {
+			} elseif ( is_array( $order_by ) && count( $order_by ) == 1 ) {
 				$order_by = $order_by[0];
-			}
-			else {
+			} else {
 				$order_by = $args['orderby'];
 			}
 		}
@@ -570,40 +553,35 @@ function appointments_get_workers( $args = array() ) {
 		if ( in_array( $order_by, $allowed_orderby ) ) {
 			if ( 'DESC' === $order ) {
 				@usort( $workers, '_appointments_get_workers_desc' );
-			}
-			else {
+			} else {
 				@usort( $workers, '_appointments_get_workers_asc' );
 			}
 		}
 
-
 		if ( ! empty( $workers ) ) {
 			$cached_queries[ $cache_key ] = $workers;
-			wp_cache_set( 'app_get_workers', $cached_queries  );
+			wp_cache_set( 'app_get_workers', $cached_queries );
 		}
 
 		return $workers;
 
-	}
-	else {
+	} else {
 		$query = "SELECT COUNT(ID) FROM $table s $where";
 
 		$cache_key = md5( $query . '-' . 'app_count_workers' );
 		$cached_queries = wp_cache_get( 'app_count_workers' );
 
-		if ( ! is_array( $cached_queries ) )
-			$cached_queries = array();
+		if ( ! is_array( $cached_queries ) ) {
+			$cached_queries = array(); }
 
 		if ( ! isset( $cached_queries[ $cache_key ] ) ) {
 			$result = $wpdb->get_var( $query );
 			$result = absint( $result );
 			$cached_queries[ $cache_key ] = absint( $result );
 			wp_cache_set( 'app_count_workers', $cached_queries );
-		}
-		else {
+		} else {
 			$result = $cached_queries[ $cache_key ];
 		}
-
 
 		return $result;
 	}
@@ -710,7 +688,6 @@ function appointments_get_worker_services( $worker_id ) {
 		return $worker->get_services();
 	}
 
-
 	return array();
 }
 
@@ -752,25 +729,24 @@ function appointments_update_worker_working_hours( $worker_id, $wh, $status, $lo
 			$table,
 			array(
 				'hours'  => $wh,
-				'status' => $status
+				'status' => $status,
 			),
 			array(
 				'location' => $location,
 				'worker'   => $worker_id,
-				'status'   => $status
+				'status'   => $status,
 			),
 			array( '%s', '%s' ),
 			array( '%d', '%d', '%s' )
 		);
-	}
-	else {
+	} else {
 		$result = $wpdb->insert(
 			$table,
 			array(
 				'location' => $location,
 				'worker'   => $worker_id,
 				'hours'    => $wh,
-				'status'   => $status
+				'status'   => $status,
 			),
 			array( '%d', '%d', '%s', '%s' )
 		);
@@ -836,8 +812,7 @@ function appointments_get_worker_working_hours( $status, $worker_id = 0, $locati
 					$working_hours->hours[ $weekday ]['weekday_number'] = $weekday_number;
 				}
 			}
-		}
-		else {
+		} else {
 			return false;
 		}
 
@@ -932,22 +907,21 @@ function appointments_update_worker_exceptions( $worker_id, $status, $days, $loc
 				'worker'   => $worker_id,
 				'days'     => $days,
 				'status'   => $status,
-				'location'   => $location
+				'location'   => $location,
 			),
 			array( '%d', '%s', '%s', '%d' )
 		);
 
 		return $wpdb->insert_id;
-	}
-	else {
+	} else {
 		return $wpdb->update( $table,
 			array(
-				'days'   => $days
+				'days'   => $days,
 			),
 			array(
 				'worker'   => $worker_id,
 				'status'   => $status,
-				'location'   => $location
+				'location'   => $location,
 			),
 			array( '%s', '%s' ),
 			array( '%d', '%s', '%d' )
