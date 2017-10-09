@@ -157,5 +157,138 @@ We provide comprehensive and guaranteed support on the <a href='http://premium.w
 
 == Changelog ==
 
-[See changelog](http://plugins.svn.wordpress.org/appointments/trunk/changelog.txt).
+= 2.2.2 =
+* Allow Service Description Page featured imaged to be used as Product variation thumbnail (MarketPress integration).
+* Fixed a problem with the abandoned orders in admin.
+* Fixed issue with comma as thousand separators when using PayPal.
+* Fixed problem with duplicated page description.
+* Fixed security issue (vulnerability) with data stored on a browser. Thanks to Matt Barry @ Wordfence
+* Fixed weekly calendar hours for a worker.
 
+= 2.2.1 =
+* Added new function: appointments_is_working().
+* Added shortcode option in app_monthly_schedule to give user option to hide today's times and force a user to click on a date before showing times.
+* Added sort CSV columns for appointments export.
+* Added timetables helpers tests.
+* Allow currency option to be visible even if payments are disabled.
+* appointments_is_available_time was not always returning a value.
+* Appointments don't get active after Stripe payment from MarketPress.
+* Fixed appointments_is_worker_holiday parameters.
+* Fixed auto reload of appointment status totals when status is changed.
+* Fixed client cancellation not synced to Google Calendar.
+* Fixed cron not being set for Google Calendar sync for service providers.
+* Fixed for checking the available time of worker.
+* Fixed required messages at a monthly calendar.
+* Fixed required messages at a weekly calendar.
+* Fixed require_service in app_monthly_schedule shortcode not showing dropdown.
+* Fixed to check for allow overwork.
+* Load GCal only when needed.
+* Removed Appointments::is_available_time().
+* Swap start/end if start > end in appointments_is_available_time.
+* Try to avoid collateral effects due to Appointments class attributes.
+
+= 2.2.0 =
+* New: option to keep settings on uninstall
+* Fix: Trim spaces in status attribute of app_my_appointments shortcode
+* Fix: Scheduling calender not showing on appointment page
+* Fix: Divi inegration for pagination with smooth scroll
+* Fix: Upfront Editor breaks because of A+ calendar widget
+* Fix: Set min service when no service selected and location has been set
+* Fix: Datpicker was not localized in Exceptions screen
+* Other minor fixes/improvements
+
+= 2.1.0.1 =
+* Fixed: Only load dashbaord class in premium version
+
+= 2.1 =
+* New: Cancel link is back
+* New: Better alerts in bookings pages
+* Enhance: Lots of performance improvements
+* Enhance: JavaScript files are now compressed
+* Enhance: Removed deprecated functions since 1.6
+* Security: Fixed XSS vulnerability
+* Fixed: Wrong provider when single-worker and provider_id set on url for wrong service_id
+* Fixed: Shortcodes were not working when Hustle was activated
+* Fixed: require_provider attribute in monthly calendar was not working
+* Fixed: Some datepickers were not respecting start of the week
+* Fixed: Weekly calendar was not properly calculating capacities.
+* Fixed: Users could not confirm appointments from BuddyPress profile page
+* Fixed: Google Calendar settings were reset when a worker cancels an appointment
+* Fixed: Weekly calendar was showing 1970 as next week in some cases
+* Fixed: Unavailable times are showing as "busy" instead of "Not possible"
+* Fixed: Firefox was preventing new tab for Google Calendar button
+* Fixed: JavaScript error when using an Upfront theme
+* Fixed: Correct provider is not selected with autorefresh attribute in shortcodes.
+* Fixed: Google Calendar sync fixes
+* Fixed: All services display largest time slot when service duration addon was activated
+* Fixed: MarketPress integration fixes
+* Some other minor fixes
+
+= 2.0.5 =
+* Fix: app_monthly_schedule not showing properly working hours when a provider is set as parameter
+* Fix: Wrong working hour on Saturdays when A+ is just activated
+* Fix: GCal sync issues when providers have selected a calendar
+* Some other minor fixes
+
+= 2.0.4 =
+* Fix: GCal sync was overriding the appointments service
+* Fix: Appointments Shortcode orderby attribute not working
+* Fix: Events not removed from Provider's GCal, when Allow Service Providers for Google Calendar API Integration selected
+* Fix: TinyMCE shortcodes UI: Pagination date was a checkbox instead of a text box
+* Fix: No error message was displayed when service/workers limit was reached in free version
+
+= 2.0.3 =
+* Fix: Service was not properly to a worker set when an appointment was imported from GCal
+* Fix: Break hours wrong due to a cache collission
+* Fix: widgets deprecated notice
+* Fix: warnings when generating timetables
+* Fix: Widget shows all dates busy
+* Fix: Wrong provider when no one is selected in appointments page
+* Removed CANCEL placeholder from notifications template
+
+
+= 2.0.2 =
+* Fixed: Monthly calendar was displaying as available worker holidays
+* Fixed: Working hours in user profile was not properly saved, giving warnings in front
+* Fixed: Appointment worker was not properly set on front end
+
+= 2.0.1 =
+* New: Filter for weekly schedule headers
+* Fixed: When week started in Sunday, monthly calendar was wrongly displayed
+* Fixed: All monthly calendar slots appeared as busy in some cases
+* Fixed: Warning when updating an appointment and status was not changed
+* Fixed: A post could not be assigned to a Service when Services Description addon was activated
+* Fixed: Services were not saved when some of the addons were activated
+* Fixed: Warning when getting working hours
+* Fixed: Fatal error in Tetris addon
+* Fixed: Locations selector was not displayed when Paddings Add-on was active
+* Enhance: Better cookies management
+* Enhance: Workers/Services admin screen UX
+
+= 2.0 =
+* Fixed: Stripe does not set appointments to confirmed after payment received
+* Fixed: Columns offset from the table head when exported to csv
+* Fixed: Sometimes Google Calendar event status was not updated
+* Fixed: Nonce error when saving Appointments Settings with BuddyPress activated
+* Fixed: Additional fields were hidden in settings menu if there were no additional fields set.
+* Fixed: Working hour exceptions not applying in very rare cases
+* Fixed: Email headers when blogname included some HTML in it.
+* Fixed Shared Resources Addon: Shared resources were not working properly in some cases
+* Fixed: Notification emails were not being sent to admin/service provider
+* Fixed: When Saturday was set to start of the week, weekly calendar was starting on Sunday
+* Fixed MarketPress integration: Appointment showing even if it's free
+* Fixed: Timeslot available when providers aren't available and "No preference" provider option is selected
+* New: Added new Shortcodes UI in WP Editor
+* New: new hooks for  abetter extensibility
+* Enhance: Performance improvements
+* Enhance: Better dates localization
+* Enhance: Some styles fixes and improvements in settings menu
+* Enhance: Improvements in dates and times calculations
+* Enhance: Paddings options have been moved to general options
+* Removed: Built in cache feature. A+ now uses WordPress Cache API
+* Removed: Cancel link from emails due to possible exploit
+* Removed: AJAX Shortcode addon
+* Removed: Removed shortcodes submenu
+* Some other minor fixes.
+
+[See full changelog](http://plugins.svn.wordpress.org/appointments/trunk/changelog.txt).
