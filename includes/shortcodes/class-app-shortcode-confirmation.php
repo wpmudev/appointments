@@ -223,7 +223,7 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 			'isUserLoggedIn' => is_user_logged_in(),
 			'loginRequired' => $appointments->options["login_required"],
 			'ajaxurl' => admin_url( 'admin-ajax.php' ),
-			'nonce' => wp_create_nonce(),
+			'nonce' => wp_create_nonce( 'AppShortcodeConfirmation' ),
 			'askName' => $appointments->options["ask_name"],
 			'askEmail' => $appointments->options["ask_email"],
 			'askPhone' => $appointments->options["ask_phone"],

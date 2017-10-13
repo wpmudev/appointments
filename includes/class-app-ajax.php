@@ -301,7 +301,11 @@ class Appointments_AJAX {
 					__( 'You have already applied for an appointment. Please wait until you hear from us.', 'appointments')
 				),
 			)));
-		}
+        }
+        /**
+         * Check nonce
+         */
+        $this->security_check_die( 'AppShortcodeConfirmation' );
 
 		global $current_user;
 
@@ -860,6 +864,12 @@ class Appointments_AJAX {
 	function pre_confirmation () {
 		global $appointments;
 
+        /**
+         * Check nonce
+         */
+        $this->security_check_die( 'AppShortcodeConfirmation' );
+
+
 		$values = explode( ":", $_POST["value"] );
 		$location = $values[0];
 		$service = $values[1];
@@ -1085,16 +1095,32 @@ class Appointments_AJAX {
 	 * @since 1.9.4.1
 	 */
 	function app_export_columns( $cols ){
-
 		// Do not include the Location column in the export CSV if the add-on is not active
 		if( !class_exists( 'App_Locations_LocationsWorker' ) ){
 			foreach( $cols as $key => $col ) {
 				if( $col == 'location' ) unset( $cols[ $key ] );
 			}
 		}
-
 		return $cols;
+    }
 
-	}
+    /**
+     * return security message, when checks fails
+     * @since 2.2.2.1
+     */
+    private function security_check_die( $action, $query_arg = 'nonce' ) {
+        $check = check_ajax_referer( $action, $query_arg, false );
+        if ( false !== $check ) {
+            return;
+        }
+        $data = array(
+            "error" => apply_filters(
+                'app_spam_message',
+                __( 'Sorry, there was a problem with your request!', 'appointments')
+            ),
+        );
+        $data = json_encode( $data );
+        die( $data );
+    }
 
 }
