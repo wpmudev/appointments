@@ -1,8 +1,6 @@
-- Prevent process if user do not exits.
-
-2017-10-13 - 2.2.2.2
+2017-10-16 - 2.2.2.2
 -------------------------------
-- Fixed security issue (vulnerability) with appointments actions.
+- Fixed security issue (vulnerability) with appointments actions. Props Rolf Allard van Hagen.
 
 2017-10-05 - 2.2.2.1
 -------------------------------

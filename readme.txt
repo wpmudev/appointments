@@ -157,6 +157,12 @@ We provide comprehensive and guaranteed support on the <a href='http://premium.w
 
 == Changelog ==
 
+= 2.2.2.2 =
+* Fixed security issue (vulnerability) with appointments actions. Props for Rolf Allard van Hagen.
+
+= 2.2.2.1 =
+* Fixed missing JavaScript scripts.
+
 = 2.2.2 =
 * Allow Service Description Page featured imaged to be used as Product variation thumbnail (MarketPress integration).
 * Fixed a problem with the abandoned orders in admin.
