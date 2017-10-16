@@ -1,6 +1,6 @@
 2017-10-16 - 2.2.2.2
 -------------------------------
-- Fixed security issue (vulnerability) with appointments actions. Props Rolf Allard van Hagen.
+- Fixed security issue (vulnerability) with appointments actions. Props for Rolf Allard van Hagen.
 
 2017-10-05 - 2.2.2.1
 -------------------------------
