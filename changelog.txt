@@ -1,3 +1,6 @@
+- Moved external sources into one parent directory.
+- Updated unislider to version 2.0.3.
+
 2017-10-16 - 2.2.2.2
 -------------------------------
 - Fixed security issue (vulnerability) with appointments actions. Props for Rolf Allard van Hagen.

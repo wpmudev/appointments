@@ -851,8 +851,9 @@ function appointments_get_price( $service_id, $worker_id ) {
  * @internal
  */
 function _appointments_enqueue_sweetalert() {
-	wp_enqueue_style( 'app-sweetalert', appointments_plugin_url() . 'bower_components/sweetalert/dist/sweetalert.css' );
-	wp_enqueue_script( 'app-sweetalert', appointments_plugin_url() . 'bower_components/sweetalert/dist/sweetalert.min.js' );
+    $version = '1.1.3';
+	wp_enqueue_style( 'app-sweetalert', appointments_plugin_url() . 'includes/external/sweetalert/sweetalert.css', array(), $version );
+	wp_enqueue_script( 'app-sweetalert', appointments_plugin_url() . 'includes/external/sweetalert/sweetalert.min.js', array(), $version, true );
 }
 
 /**

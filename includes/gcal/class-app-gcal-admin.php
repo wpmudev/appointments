@@ -174,6 +174,11 @@ class Appointments_Google_Calendar_Admin {
 		include_once( 'views/settings-gcal-button.php' );
 
 		if ( empty( $client_id ) || empty( $client_secret ) ) {
+			$version = '2.0.3';
+			wp_register_script( 'unslider', appointments_plugin_url() . 'includes/external/unslider/js/unslider-min.js', array( 'jquery' ), $version, true );
+			wp_enqueue_script( 'app-gcal', appointments_plugin_url() . 'admin/js/admin-gcal.js', array( 'unslider' ), false, true );
+			wp_enqueue_style( 'unslider', appointments_plugin_url() . 'includes/external/unslider/css/unslider.css', array(), $version );
+			wp_enqueue_style( 'app-gcal-slider-admin', appointments_plugin_url() . 'admin/css/unslider.css', array(), false );
 			include_once( 'views/settings-gcal-step-1.php' );
 		}
 		elseif ( $client_id && $client_secret && ! $this->gcal_api->is_connected() ) {
