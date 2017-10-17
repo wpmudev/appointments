@@ -1,5 +1,6 @@
 - Moved external sources into one parent directory.
 - Updated unislider to version 2.0.3.
+- Removed wp_enqueue_* functions from views.
 
 2017-10-16 - 2.2.2.2
 -------------------------------
