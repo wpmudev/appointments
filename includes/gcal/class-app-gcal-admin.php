@@ -11,10 +11,10 @@ class Appointments_Google_Calendar_Admin {
 		$this->gcal_api = $gcal_api;
 
 		// Profile screen
-		add_action( 'show_user_profile', array( $this, 'show_profile') );
-		add_action( 'edit_user_profile', array( $this, 'show_profile') );
-		add_action( 'personal_options_update', array( $this, 'save_profile') );
-		add_action( 'edit_user_profile_update', array( $this, 'save_profile') );
+		add_action( 'show_user_profile', array( $this, 'show_profile' ) );
+		add_action( 'edit_user_profile', array( $this, 'show_profile' ) );
+		add_action( 'personal_options_update', array( $this, 'save_profile' ) );
+		add_action( 'edit_user_profile_update', array( $this, 'save_profile' ) );
 
 		// Settings screen
 		add_filter( 'appointments_tabs', array( $this, 'add_setting_tab' ) );
@@ -75,8 +75,7 @@ class Appointments_Google_Calendar_Admin {
 			$options['gcal_client_secret'] = $_POST['client_secret'];
 			$this->gcal_api->api_manager->set_client_id_and_secret( $options['gcal_client_id'], $options['gcal_client_secret'] );
 			appointments_update_options( $options );
-		}
-		elseif ( 'step-2' === $action ) {
+		} elseif ( 'step-2' === $action ) {
 			if ( empty( $_POST['access_code'] ) ) {
 				add_settings_error( 'app-gcalendar', 'empty-fields', __( 'All fields are mandatory', 'appointments' ) );
 				return;
@@ -91,8 +90,7 @@ class Appointments_Google_Calendar_Admin {
 			$options['gcal_access_code'] = $_POST['access_code'];
 			$options['gcal_token'] = $this->gcal_api->api_manager->get_access_token();
 			appointments_update_options( $options );
-		}
-		elseif ( 'step-3' === $action ) {
+		} elseif ( 'step-3' === $action ) {
 			$calendar_id = ! empty( $_POST['gcal_selected_calendar'] ) ? $_POST['gcal_selected_calendar'] : '';
 			$options['gcal_selected_calendar'] = $calendar_id;
 			$this->gcal_api->api_manager->set_calendar( $calendar_id );
@@ -131,8 +129,7 @@ class Appointments_Google_Calendar_Admin {
 			$options['gcal_selected_calendar'] = '';
 			$options['gcal_token'] = '';
 			appointments_update_options( $options );
-		}
-		else {
+		} else {
 			add_settings_error( 'app-gcalendar', $result->get_error_code(), $result->get_error_message() );
 		}
 
@@ -143,7 +140,7 @@ class Appointments_Google_Calendar_Admin {
 			?>
 			<div class="error">
 				<ul>
-					<?php foreach ( $errors as $error ): ?>
+					<?php foreach ( $errors as $error ) :  ?>
 						<li><?php echo $error['message']; ?></li>
 					<?php endforeach; ?>
 				</ul>
@@ -180,13 +177,11 @@ class Appointments_Google_Calendar_Admin {
 			wp_enqueue_style( 'unslider', appointments_plugin_url() . 'includes/external/unslider/css/unslider.css', array(), $version );
 			wp_enqueue_style( 'app-gcal-slider-admin', appointments_plugin_url() . 'admin/css/unslider.css', array(), false );
 			include_once( 'views/settings-gcal-step-1.php' );
-		}
-		elseif ( $client_id && $client_secret && ! $this->gcal_api->is_connected() ) {
+		} elseif ( $client_id && $client_secret && ! $this->gcal_api->is_connected() ) {
 			// No token yet
 			$auth_url = $this->gcal_api->api_manager->create_auth_url();
 			include_once( 'views/settings-gcal-step-2.php' );
-		}
-		else {
+		} else {
 			$calendars = $this->gcal_api->api_manager->get_calendars_list();
 			$selected_calendar = $this->gcal_api->api_manager->get_calendar();
 			$api_mode = $this->gcal_api->get_api_mode();
@@ -221,16 +216,13 @@ class Appointments_Google_Calendar_Admin {
 					$this->gcal_api->restore_to_default();
 					wp_die( sprintf( __( 'Authentication failed: %s', 'appointments' ), $result->get_error_message() ) );
 					return;
-				}
-				else {
+				} else {
 					$token = $this->gcal_api->api_manager->get_access_token();
 					update_user_meta( $user_id, 'app_gcal_access_code', $_POST['access_code'] );
 					update_user_meta( $user_id, 'app_gcal_token', $token );
 				}
 			}
-
-		}
-		elseif ( 'gcal-settings' === $gcal_action ) {
+		} elseif ( 'gcal-settings' === $gcal_action ) {
 			update_user_meta( $user_id, 'app_api_mode', $_POST['gcal_api_mode'] );
 			update_user_meta( $user_id, 'app_selected_calendar', $_POST['gcal_selected_calendar'] );
 			update_user_meta( $user_id, 'app_gcal_summary', sanitize_text_field( $_POST['gcal_summary'] ) );
@@ -270,8 +262,7 @@ class Appointments_Google_Calendar_Admin {
 		if ( ! $general_is_connected || ! $worker_is_connected ) {
 			$auth_url = $this->gcal_api->api_manager->create_auth_url();
 			include_once( 'views/profile-gcal-not-connected.php' );
-		}
-		else {
+		} else {
 			$calendars = $this->gcal_api->api_manager->get_calendars_list();
 			$selected_calendar = $this->gcal_api->api_manager->get_calendar();
 			$api_mode = $this->gcal_api->get_api_mode();
@@ -284,6 +275,4 @@ class Appointments_Google_Calendar_Admin {
 		$this->gcal_api->restore_to_default();
 
 	}
-
-
 }
