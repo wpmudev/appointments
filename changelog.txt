@@ -1,6 +1,8 @@
 - Moved external sources into one parent directory.
 - Updated Unslider to version 2.0.3.
 - Removed wp_enqueue_* functions from views.
+- Prevent process if user do not exits.
+- Fixed export additional appointment fields (only PRO version).
 
 2017-10-16 - 2.2.2.2
 -------------------------------

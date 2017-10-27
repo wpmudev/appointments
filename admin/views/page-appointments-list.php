@@ -100,7 +100,7 @@
 								</td>
 							<?php endif; ?>
 
-							<?php do_action( 'appointments_my_appointments_list_row', $app ); ?>
+							<?php do_action( 'appointments_my_appointments_list_row', $app, $key, $value ); ?>
 
 						<?php endforeach; ?>
 					</tr>
