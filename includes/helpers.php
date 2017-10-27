@@ -200,22 +200,33 @@ function appointments_get_weekly_schedule_slots( $now = false, $service_id = 0, 
 
 	// These are the time slots for every day in the week
 	$time_slots = $start_hours = array();
-
+	
 	if ( $worker_id && appointments_is_worker( $worker_id ) ) {
-
 		$start_hours = appointments_get_worker_weekly_start_hours( $service_id, $worker_id, $location_id );
-
 	} else {
 
+		$workers = array();
 		if ( $service_id ) {
 			$workers = appointments_get_workers_by_service( $service_id );
 		} else {
 			$workers = appointments_get_all_workers();
 		}
 
-		foreach ( $workers as $worker ) {
-			$start_hours = array_merge( $time_slots , appointments_get_worker_weekly_start_hours( $service_id, $worker_id, $location_id ) );
+		if( empty( $workers ) ){
+
+			for ( $time = $day_start_timestamp; $time < $day_end_timestamp; $time = $time + $step ) {
+				$time_slots[] = array(
+					'from' => date( 'H:i', $time ),
+					'to' => date( 'H:i', $time + $step )
+				);
+			}
 		}
+		else{
+			foreach ( $workers as $worker ) {
+				$start_hours = array_merge( $time_slots , appointments_get_worker_weekly_start_hours( $service_id, $worker_id, $location_id ) );
+			}
+		}
+		
 	}
 
 	if ( ! empty( $start_hours ) ) {
@@ -267,6 +278,11 @@ function appointments_get_worker_weekly_start_hours( $service_id = 0, $worker_id
 	$worker_working_hours = appointments_get_worker_working_hours( 'open', $worker_id, $location_id );
 	$service = appointments_get_service( $service_id );
 
+	if( $service ){
+		$duration = $service->duration * MINUTE_IN_SECONDS;
+	}
+
+	$service = appointments_get_service( $service_id );
 	if( $service ){
 		$duration = $service->duration * MINUTE_IN_SECONDS;
 	}
