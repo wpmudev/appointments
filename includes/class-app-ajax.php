@@ -151,9 +151,18 @@ class Appointments_AJAX {
 		$update_result = $insert_result = false;
 		if ( $app ) {
 			// Update
+
+			if ( ! $resend ) {
+				// The appointments_update_appointment() will try send confirmation email. 
+				// Avoid sending if not requested
+				add_filter( 'appointments_send_confirmation', '__return_false', 40 );
+			}
+
 			$data['datetime'] = strtotime( $data['date'] . ' ' . $data['time'] . ':00' );
 			$update_result = appointments_update_appointment( $app_id, $data );
-			if ( $resend && 'removed' != $data['status'] ) {
+			
+			// Confirmed or Paid have been already sent by "wpmudev_appointments_insert_appointment" action
+			if ( $resend && 'removed' != $data['status'] && 'confirmed' != $data['status'] && 'paid' != $data['status'] ) {
 				appointments_send_confirmation( $app_id );
 			}
 
