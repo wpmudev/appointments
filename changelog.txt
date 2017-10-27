@@ -1,8 +1,16 @@
-- Moved external sources into one parent directory.
-- Updated Unslider to version 2.0.3.
-- Removed wp_enqueue_* functions from views.
-- Prevent process if user do not exits.
+2017-10-xx - 2.2.3
+-------------------------------
 - Fixed export additional appointment fields (only PRO version).
+- Fixed problem with bower_components directory.
+- Fixed problem with extra information displayed in the wrong column.
+- Fixed problem with no visible slots.
+- Fixed problem with too many emails.
+- Fixed problem with worker shortcode.
+- Fixed URL building for dismissing a message.
+- Moved external sources into one parent directory.
+- Prevent process if a user does not exist.
+- Removed wp_enqueue_* functions from views.
+- Updated Unslider to version 2.0.3.
 
 2017-10-16 - 2.2.2.2
 -------------------------------
