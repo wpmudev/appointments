@@ -267,7 +267,7 @@ class Appointments_Admin {
 				if ( appointments_get_workers() && ! appointments_get_workers_by_service( $result->ID ) && ! $dismissed ) {
 					echo '<div class="error"><p>' .
 					     __( '<b>[Appointments+]</b> One of your services does not have a service provider assigned. Delete services you are not using.', 'appointments' ) .
-					     '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a title="'.__( 'Dismiss this notice for this session', 'appointments' ).'" href="' . $_SERVER['REQUEST_URI'] . '&app_dismiss=1"><small>'.__( 'Dismiss', 'appointments' ).'</small></a>'.
+					     '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a title="'.__( 'Dismiss this notice for this session', 'appointments' ).'" href="' . esc_url( add_query_arg( 'app_dismiss', '1' ) ) . '"><small>'.__( 'Dismiss', 'appointments' ).'</small></a>'.
 					     '</p></div>';
 					$r = true;
 					break;

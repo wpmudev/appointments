@@ -3,7 +3,7 @@ Contributors: wpmudev, wpmudev-support1, wpmudev-support2, wpmudev-support4, wpm
 Tags: Appointment,Booking,Calendar,Reservation,Scheduling,google calendar,
 Requires at least: 4.2
 Tested up to: 4.8.2
-Stable tag: trunk
+Stable tag: 2.2.2.2
 License: GPL2
 
 The most powerful, flexible and feature-rich bookings plugin available for WordPress. Appointments does it all.
@@ -156,6 +156,12 @@ We provide comprehensive and guaranteed support on the <a href='http://premium.w
 5. Google Calendar integration
 
 == Changelog ==
+
+= 2.2.2.2 =
+* Fixed security issue (vulnerability) with appointments actions. Props for Rolf Allard van Hagen.
+
+= 2.2.2.1 =
+* Fixed missing JavaScript scripts.
 
 = 2.2.2 =
 * Allow Service Description Page featured imaged to be used as Product variation thumbnail (MarketPress integration).
