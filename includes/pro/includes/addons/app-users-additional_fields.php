@@ -51,7 +51,7 @@ class App_Users_AdditionalFields {
 
 		// Export filtering
 		add_filter('app-export-columns', array($this, 'inject_additional_columns'));
-		add_filter('app-export-appointment', array($this, 'inject_additional_properties'));
+		add_filter('app-export-appointment', array($this, 'inject_additional_properties'), 10, 2 );
 
 		// General fields substitution
 		add_filter('app-internal-additional_fields-expand', array($this, 'expand_general_fields'), 10, 2);
@@ -319,8 +319,8 @@ EO_ADMIN_JS;
 		return $cols;
 	}
 
-	public function inject_additional_properties( $app ) {
-		if ( empty( $app->ID ) ) {
+	public function inject_additional_properties( $app, $raw ) {
+		if ( empty( $raw->ID ) ) {
 			return $app;
 		}
 
@@ -330,7 +330,7 @@ EO_ADMIN_JS;
 			return $app;
 		}
 
-		$app_meta = $this->_get_appointment_meta( $app->ID );
+		$app_meta = $this->_get_appointment_meta( $raw->ID );
 		if ( empty( $app_meta ) ) {
 			return $app;
 		}
@@ -343,8 +343,14 @@ EO_ADMIN_JS;
 			                     preg_replace( '/[^0-9]/', '', $label )
 			);
 			$value = ! empty( $app_meta[ $name ] ) ? esc_html( $app_meta[ $name ] ) : '';
-			if ( empty( $app->$key ) ) {
-				$app->$key = $value;
+			if ( is_array( $app ) ) {
+				if ( empty( $app[$key] ) ) {
+					$app[$key] = $value;
+				}
+			} else if ( is_object( $app ) ) {
+				if ( empty( $app->$key ) ) {
+					$app->$key = $value;
+				}
 			}
 		}
 

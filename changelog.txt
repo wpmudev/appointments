@@ -1,3 +1,6 @@
+- Prevent process if user do not exits.
+- Fixed export additional appointment fields (only PRO version).
+
 2017-10-16 - 2.2.2.2
 -------------------------------
 - Fixed security issue (vulnerability) with appointments actions. Props for Rolf Allard van Hagen.
