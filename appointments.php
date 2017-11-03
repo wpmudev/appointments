@@ -1989,7 +1989,7 @@ class Appointments {
 			'ask_address'				=> '',
 			'ask_city'					=> '',
 			'ask_note'					=> '',
-			'additional_css'			=> '.entry-content td{border:none;width:50%}',
+			'additional_css'			=> '.appointments-list td{ border:none; width:50%; }',
 			'payment_required'			=> 'no',
 			'percent_deposit'			=> '',
 			'fixed_deposit'				=> '',

@@ -1,3 +1,5 @@
+- Changed default additional CSS to avoid interaction with default classes.
+
 2017-10-xx - 2.2.3
 -------------------------------
 - Fixed export additional appointment fields (only PRO version).
