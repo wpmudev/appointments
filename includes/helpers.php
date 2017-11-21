@@ -161,11 +161,11 @@ function appointments_get_weekly_schedule_slots( $now = false, $service_id = 0, 
 	$hour_start = apply_filters( 'app_schedule_starting_hour', $hour_start, $now, 'week' );
 	$hour_end = apply_filters( 'app_schedule_ending_hour', $hour_end, $now, 'week' );
 
-	$step = $appointments->get_min_time() * 60; // Timestamp increase interval to one cell below
+	$step = $appointments->get_min_time() * MINUTE_IN_SECONDS; // Timestamp increase interval to one cell below
 	if ( ! appointments_use_legacy_duration_calculus() ) {
 		$service = appointments_get_service( $service_id );
 		if ( $service ) {
-			$step = $service->duration * 60;
+			$step = $service->duration * MINUTE_IN_SECONDS;
 		}
 	}
 
@@ -200,22 +200,33 @@ function appointments_get_weekly_schedule_slots( $now = false, $service_id = 0, 
 
 	// These are the time slots for every day in the week
 	$time_slots = $start_hours = array();
-
+	
 	if ( $worker_id && appointments_is_worker( $worker_id ) ) {
-
 		$start_hours = appointments_get_worker_weekly_start_hours( $service_id, $worker_id, $location_id );
-
 	} else {
 
+		$workers = array();
 		if ( $service_id ) {
 			$workers = appointments_get_workers_by_service( $service_id );
 		} else {
 			$workers = appointments_get_all_workers();
 		}
 
-		foreach ( $workers as $worker ) {
-			$start_hours = array_merge( $time_slots , appointments_get_worker_weekly_start_hours( $service_id, $worker_id, $location_id ) );
+		if( empty( $workers ) ){
+
+			for ( $time = $day_start_timestamp; $time < $day_end_timestamp; $time = $time + $step ) {
+				$time_slots[] = array(
+					'from' => date( 'H:i', $time ),
+					'to' => date( 'H:i', $time + $step )
+				);
+			}
 		}
+		else{
+			foreach ( $workers as $worker ) {
+				$start_hours = array_merge( $time_slots , appointments_get_worker_weekly_start_hours( $service_id, $worker_id, $location_id ) );
+			}
+		}
+		
 	}
 
 	if ( ! empty( $start_hours ) ) {
@@ -262,25 +273,39 @@ function appointments_get_worker_weekly_start_hours( $service_id = 0, $worker_id
 	}
 
 	$appointments = appointments();
-
+	$step = $duration = $appointments->get_min_time() * MINUTE_IN_SECONDS;
 	$worker = appointments_get_worker( $worker_id );
-
 	$worker_working_hours = appointments_get_worker_working_hours( 'open', $worker_id, $location_id );
+	$service = appointments_get_service( $service_id );
+
+	if( $service ){
+		$duration = $service->duration * MINUTE_IN_SECONDS;
+	}
+
+	$service = appointments_get_service( $service_id );
+	if( $service ){
+		$duration = $service->duration * MINUTE_IN_SECONDS;
+	}
 
 	if ( ! empty( $worker_working_hours ) && isset( $worker_working_hours->hours ) && ! empty( $worker_working_hours->hours ) ) {
 
 		$slot_starts = array();
+		//The starting hours set in Working Hours settings page
 		foreach ( $worker_working_hours->hours as $dayname => $open_hours ) {
 
 			if ( $open_hours['active'] != 'yes' ) {
 				continue;
 			}
 
-			$start_time = $open_hours['start'];
+			for( $start_time = $open_hours['start']; $start_time < $open_hours['end']; $start_time = date("H:i", strtotime('+' . $step . ' seconds', strtotime( $start_time ) ) ) ){
+				$end_slot = date("H:i", strtotime('+' . $duration . ' seconds', strtotime( $start_time ) ) );
+				if( $end_slot > $open_hours['end'] ){
+					break;
+				}
 
-			if ( ! in_array( $start_time, $slot_starts ) ) {
-
-				$slot_starts[] = $start_time;
+				if( ! in_array( $start_time, $slot_starts ) ){
+					$slot_starts[] = $start_time;
+				}
 			}
 		}
 
@@ -851,8 +876,9 @@ function appointments_get_price( $service_id, $worker_id ) {
  * @internal
  */
 function _appointments_enqueue_sweetalert() {
-	wp_enqueue_style( 'app-sweetalert', appointments_plugin_url() . 'bower_components/sweetalert/dist/sweetalert.css' );
-	wp_enqueue_script( 'app-sweetalert', appointments_plugin_url() . 'bower_components/sweetalert/dist/sweetalert.min.js' );
+	$version = '1.1.3';
+	wp_enqueue_style( 'app-sweetalert', appointments_plugin_url() . 'includes/external/sweetalert/sweetalert.css', array(), $version );
+	wp_enqueue_script( 'app-sweetalert', appointments_plugin_url() . 'includes/external/sweetalert/sweetalert.min.js', array(), $version, true );
 }
 
 /**

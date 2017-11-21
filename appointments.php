@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 2.2.2.2
+Version: PLUGIN_VERSION
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	public $version = "2.2.2.2";
+	public $version = 'PLUGIN_VERSION';
 	public $db_version;
 
 	public $timetables = array();
@@ -1989,7 +1989,7 @@ class Appointments {
 			'ask_address'				=> '',
 			'ask_city'					=> '',
 			'ask_note'					=> '',
-			'additional_css'			=> '.entry-content td{border:none;width:50%}',
+			'additional_css'			=> '.appointments-list td{ border:none; width:50%; }',
 			'payment_required'			=> 'no',
 			'percent_deposit'			=> '',
 			'fixed_deposit'				=> '',

@@ -1,9 +1,9 @@
 === Appointments  ===
 Contributors: wpmudev, wpmudev-support1, wpmudev-support2, wpmudev-support4, wpmudev-support6
 Tags: Appointment,Booking,Calendar,Reservation,Scheduling,google calendar,
-Requires at least: 4.2
-Tested up to: 4.8.2
-Stable tag: 2.2.2.2
+Requires at least: 4.6
+Tested up to: 4.9
+Stable tag: 2.2.3
 License: GPL2
 
 The most powerful, flexible and feature-rich bookings plugin available for WordPress. Appointments does it all.
@@ -156,6 +156,18 @@ We provide comprehensive and guaranteed support on the <a href='http://premium.w
 5. Google Calendar integration
 
 == Changelog ==
+
+= 2.2.3 =
+* Fixed problem with bower_components directory.
+* Fixed problem with extra information displayed in the wrong column.
+* Fixed problem with no visible slots on Monthly view.
+* Fixed problem with too many emails.
+* Fixed problem with worker shortcode.
+* Fixed URL building for dismissing a message.
+* Moved external sources into one parent directory.
+* Prevent process if a user does not exist.
+* Removed wp_enqueue_* functions from views.
+* Updated Unslider to version 2.0.3.
 
 = 2.2.2.2 =
 * Fixed security issue (vulnerability) with appointments actions. Props for Rolf Allard van Hagen.

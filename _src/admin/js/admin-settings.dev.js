@@ -56,7 +56,6 @@ jQuery( document ).ready( function( $ ) {
 
     // LOGIN REQUIRED SETTING (Accesibility)
     var apiDetail = $(".api_detail");
-    console.log(apiDetail);
     var loginRequiredSelect = $('select[name="login_required"]');
     function toggleApiDetail() {
         if (loginRequiredSelect.val() == 'yes') {
