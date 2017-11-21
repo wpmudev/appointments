@@ -1,11 +1,11 @@
 - Changed default additional CSS to avoid interaction with default classes.
 
-2017-10-xx - 2.2.3
+2017-11-21 - 2.2.3
 -------------------------------
 - Fixed export additional appointment fields (only PRO version).
 - Fixed problem with bower_components directory.
 - Fixed problem with extra information displayed in the wrong column.
-- Fixed problem with no visible slots.
+- Fixed problem with no visible slots on Monthly view.
 - Fixed problem with too many emails.
 - Fixed problem with worker shortcode.
 - Fixed URL building for dismissing a message.
