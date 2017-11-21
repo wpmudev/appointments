@@ -204,16 +204,13 @@ function appointments_get_weekly_schedule_slots( $now = false, $service_id = 0, 
 	if ( $worker_id && appointments_is_worker( $worker_id ) ) {
 		$start_hours = appointments_get_worker_weekly_start_hours( $service_id, $worker_id, $location_id );
 	} else {
-
 		$workers = array();
 		if ( $service_id ) {
 			$workers = appointments_get_workers_by_service( $service_id );
 		} else {
 			$workers = appointments_get_all_workers();
 		}
-
 		if ( empty( $workers ) ) {
-
 			for ( $time = $day_start_timestamp; $time < $day_end_timestamp; $time = $time + $step ) {
 				$time_slots[] = array(
 					'from' => date( 'H:i', $time ),
@@ -295,7 +292,7 @@ function appointments_get_worker_weekly_start_hours( $service_id = 0, $worker_id
 				continue;
 			}
 
-			for ( $start_time = $open_hours['start']; $start_time < $open_hours['end']; $start_time = date( 'H:i', strtotime( '+' . $step . ' seconds', strtotime( $start_time ) ) ) ) {
+			for ( $start_time = $open_hours['start']; $start_time < $open_hours['end']; $start_time = date( 'H:i', strtotime( '+' . $duration . ' seconds', strtotime( $start_time ) ) ) ) {
 				$end_slot = date( 'H:i', strtotime( '+' . $duration . ' seconds', strtotime( $start_time ) ) );
 				if ( $end_slot > $open_hours['end'] ) {
 					break;
