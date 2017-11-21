@@ -1,9 +1,9 @@
 === Appointments  ===
 Contributors: wpmudev, wpmudev-support1, wpmudev-support2, wpmudev-support4, wpmudev-support6
 Tags: Appointment,Booking,Calendar,Reservation,Scheduling,google calendar,
-Requires at least: 4.2
+Requires at least: 4.6
 Tested up to: 4.9
-Stable tag: 2.2.2.2
+Stable tag: 2.2.3
 License: GPL2
 
 The most powerful, flexible and feature-rich bookings plugin available for WordPress. Appointments does it all.

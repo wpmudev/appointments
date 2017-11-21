@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Appointments+ package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Appointments+ 2.2.2\n"
+"Project-Id-Version: Appointments+ PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2017-10-16 13:12:06+00:00\n"
+"POT-Creation-Date: 2017-11-21 06:15:09+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,7 +17,7 @@ msgstr ""
 msgid "Google Calendar Settings"
 msgstr ""
 
-#: admin/admin-helpers.php:88 includes/gcal/views/settings-gcal-step-3.php:206
+#: admin/admin-helpers.php:88 includes/gcal/views/settings-gcal-step-3.php:205
 #: includes/integration/class-app-buddypress.php:244
 msgid "Save Changes"
 msgstr ""
@@ -1390,8 +1390,8 @@ msgstr ""
 #: admin/views/page-settings-tab-main-section-payments.php:13
 #: includes/gcal/views/settings-gcal-button.php:7
 #: includes/gcal/views/settings-gcal-step-3.php:60
-#: includes/pro/includes/addons/app-users-additional_fields.php:528
-#: includes/pro/includes/addons/app-users-additional_fields.php:566
+#: includes/pro/includes/addons/app-users-additional_fields.php:534
+#: includes/pro/includes/addons/app-users-additional_fields.php:572
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:346
 msgid "No"
 msgstr ""
@@ -1414,8 +1414,8 @@ msgstr ""
 #: admin/views/page-settings-tab-main-section-payments.php:14
 #: includes/gcal/views/settings-gcal-button.php:8
 #: includes/gcal/views/settings-gcal-step-3.php:61
-#: includes/pro/includes/addons/app-users-additional_fields.php:528
-#: includes/pro/includes/addons/app-users-additional_fields.php:566
+#: includes/pro/includes/addons/app-users-additional_fields.php:534
+#: includes/pro/includes/addons/app-users-additional_fields.php:572
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:345
 msgid "Yes"
 msgstr ""
@@ -2611,7 +2611,7 @@ msgstr ""
 msgid "Login with WordPress"
 msgstr ""
 
-#: appointments.php:1861 includes/gcal/views/settings-gcal-step-1.php:75
+#: appointments.php:1861 includes/gcal/views/settings-gcal-step-1.php:70
 #: includes/gcal/views/settings-gcal-step-2.php:22
 msgid "Submit"
 msgstr ""
@@ -2654,136 +2654,136 @@ msgstr ""
 msgid "Appointment could not be cancelled. Please refresh the page and try again."
 msgstr ""
 
-#: includes/class-app-ajax.php:143 includes/class-app-ajax.php:200
+#: includes/class-app-ajax.php:143 includes/class-app-ajax.php:209
 msgid "Record could not be saved OR you did not make any changes!"
 msgstr ""
 
-#: includes/class-app-ajax.php:183 includes/class-app-ajax.php:195
-#: includes/pro/includes/addons/app-users-additional_fields.php:396
+#: includes/class-app-ajax.php:192 includes/class-app-ajax.php:204
+#: includes/pro/includes/addons/app-users-additional_fields.php:402
 msgid "<span style=\"color:green;font-weight:bold\">Changes saved.</span>"
 msgstr ""
 
-#: includes/class-app-ajax.php:187
+#: includes/class-app-ajax.php:196
 msgid "Status changed from %s to %s by %s for appointment ID:%d"
 msgstr ""
 
-#: includes/class-app-ajax.php:199
+#: includes/class-app-ajax.php:208
 msgid "Confirmation message (re)sent"
 msgstr ""
 
-#: includes/class-app-ajax.php:266
+#: includes/class-app-ajax.php:275
 msgid "Not registered user"
 msgstr ""
 
-#: includes/class-app-ajax.php:301
+#: includes/class-app-ajax.php:310
 msgid ""
 "You have already applied for an appointment. Please wait until you hear "
 "from us."
 msgstr ""
 
-#: includes/class-app-ajax.php:456 includes/class-app-ajax.php:909
+#: includes/class-app-ajax.php:465 includes/class-app-ajax.php:918
 msgid ""
 "We are sorry, but this time slot is no longer available. Please refresh the "
 "page and try another time slot. Thank you."
 msgstr ""
 
-#: includes/class-app-ajax.php:528 includes/class-app-ajax.php:537
+#: includes/class-app-ajax.php:537 includes/class-app-ajax.php:546
 msgid "Appointment could not be saved. Please contact website admin."
 msgstr ""
 
-#: includes/class-app-ajax.php:734
+#: includes/class-app-ajax.php:743
 msgid ""
 "Paypal confirmation arrived, but status could not be changed for some "
 "reason. Please check appointment with ID %s"
 msgstr ""
 
-#: includes/class-app-ajax.php:736
+#: includes/class-app-ajax.php:745
 msgid "Appointment status could not be changed"
 msgstr ""
 
-#: includes/class-app-ajax.php:742
+#: includes/class-app-ajax.php:751
 msgid ""
 "Last transaction has been reversed. Reason: Payment has been reversed "
 "(charge back)"
 msgstr ""
 
-#: includes/class-app-ajax.php:766
+#: includes/class-app-ajax.php:775
 msgid "Last transaction has been reversed. Reason: Payment has been refunded"
 msgstr ""
 
-#: includes/class-app-ajax.php:790
+#: includes/class-app-ajax.php:799
 msgid "Last transaction has been reversed. Reason: Payment Denied"
 msgstr ""
 
-#: includes/class-app-ajax.php:816
+#: includes/class-app-ajax.php:825
 msgid "Customer did not include a confirmed shipping address"
 msgstr ""
 
-#: includes/class-app-ajax.php:817
+#: includes/class-app-ajax.php:826
 msgid "Funds not captured yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:818
+#: includes/class-app-ajax.php:827
 msgid "eCheck that has not cleared yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:819
+#: includes/class-app-ajax.php:828
 msgid "Payment waiting for aproval by service provider"
 msgstr ""
 
-#: includes/class-app-ajax.php:820
+#: includes/class-app-ajax.php:829
 msgid "Payment waiting for service provider to handle multi-currency process"
 msgstr ""
 
-#: includes/class-app-ajax.php:821
+#: includes/class-app-ajax.php:830
 msgid "Customer did not register or confirm his/her email yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:822
+#: includes/class-app-ajax.php:831
 msgid "Waiting for service provider to upgrade the PayPal account"
 msgstr ""
 
-#: includes/class-app-ajax.php:823
+#: includes/class-app-ajax.php:832
 msgid "Waiting for service provider to verify his/her PayPal account"
 msgstr ""
 
-#: includes/class-app-ajax.php:827
+#: includes/class-app-ajax.php:836
 msgid "Last transaction is pending. Reason: "
 msgstr ""
 
-#: includes/class-app-ajax.php:889
+#: includes/class-app-ajax.php:898
 msgid "You need to login to make an appointment."
 msgstr ""
 
-#: includes/class-app-ajax.php:915
+#: includes/class-app-ajax.php:924
 msgid "Service name: "
 msgstr ""
 
-#: includes/class-app-ajax.php:916
+#: includes/class-app-ajax.php:925
 msgid "Date and time: "
 msgstr ""
 
-#: includes/class-app-ajax.php:917
+#: includes/class-app-ajax.php:926
 msgid "Lasts (approx): "
 msgstr ""
 
-#: includes/class-app-ajax.php:917
+#: includes/class-app-ajax.php:926
 msgid "minutes"
 msgstr ""
 
-#: includes/class-app-ajax.php:920
+#: includes/class-app-ajax.php:929
 msgid "Price: "
 msgstr ""
 
-#: includes/class-app-ajax.php:925
+#: includes/class-app-ajax.php:934
 msgid "Service provider: "
 msgstr ""
 
-#: includes/class-app-ajax.php:1011
+#: includes/class-app-ajax.php:1020
 msgid "Nothing to download!"
 msgstr ""
 
-#: includes/class-app-ajax.php:1119
+#: includes/class-app-ajax.php:1128
 msgid "Sorry, there was a problem with your request!"
 msgstr ""
 
@@ -3406,16 +3406,16 @@ msgid "Google Calendar"
 msgstr ""
 
 #: includes/gcal/class-app-gcal-admin.php:70
-#: includes/gcal/class-app-gcal-admin.php:81
+#: includes/gcal/class-app-gcal-admin.php:80
 msgid "All fields are mandatory"
 msgstr ""
 
-#: includes/gcal/class-app-gcal-admin.php:87
+#: includes/gcal/class-app-gcal-admin.php:86
 #: includes/gcal/class-app-gcal-admin.php:217
 msgid "Authentication failed: %s"
 msgstr ""
 
-#: includes/gcal/class-app-gcal-admin.php:262
+#: includes/gcal/class-app-gcal-admin.php:259
 msgid "Appointments +: Google Calendar API"
 msgstr ""
 
@@ -3568,63 +3568,63 @@ msgid ""
 "ADDRESS and CITY placeholders which will be replaced by their real values."
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:6
+#: includes/gcal/views/settings-gcal-step-1.php:1
 msgid "Google Calendar API: Create a new Google Application"
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:13
+#: includes/gcal/views/settings-gcal-step-1.php:8
 msgid ""
 "Go to %s and create a new project. i.e. \"Appointments APP\", then click "
 "\"Create\""
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:13
+#: includes/gcal/views/settings-gcal-step-1.php:8
 msgid "Google Developer Console Projects"
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:17
+#: includes/gcal/views/settings-gcal-step-1.php:12
 msgid "Once in Dashboard, click on \"Enable and manage APIs\"."
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:21
+#: includes/gcal/views/settings-gcal-step-1.php:16
 msgid "Click on \"Calendar API\"."
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:25
+#: includes/gcal/views/settings-gcal-step-1.php:20
 msgid "Enable the Calendar API\""
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:29
+#: includes/gcal/views/settings-gcal-step-1.php:24
 msgid "On the left side, click on \"Credentials\"..."
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:33
+#: includes/gcal/views/settings-gcal-step-1.php:28
 msgid ""
 "... and then \"OAuth consent screen\" tab. Choose a product name shown to "
 "users, i.e. \"Appointments +\""
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:37
+#: includes/gcal/views/settings-gcal-step-1.php:32
 msgid "Click again on \"Credentials\" tab and then Create Credentials"
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:41
+#: includes/gcal/views/settings-gcal-step-1.php:36
 msgid "Select the \"Oauth client ID\" option"
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:45
+#: includes/gcal/views/settings-gcal-step-1.php:40
 msgid "Select \"Other\" Application type with any name, the name is not important."
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:49
+#: includes/gcal/views/settings-gcal-step-1.php:44
 msgid "Take note of the client ID and client secret and fill the form below"
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:57
+#: includes/gcal/views/settings-gcal-step-1.php:52
 msgid "Client ID"
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-1.php:65
+#: includes/gcal/views/settings-gcal-step-1.php:60
 msgid "Client Secret"
 msgstr ""
 
@@ -3703,18 +3703,18 @@ msgstr ""
 msgid "Export and Update Events to GCal"
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-3.php:171
+#: includes/gcal/views/settings-gcal-step-3.php:170
 msgid "Importing Appointments..."
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-3.php:194
+#: includes/gcal/views/settings-gcal-step-3.php:193
 msgid ""
 "Are you sure? Appointments in Appointments > Reserved by GCal that do not "
 "exist anymore in your calendar will be deleted (Only those with \\'Reserved "
 "by GCal\\' status)"
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-3.php:205
+#: includes/gcal/views/settings-gcal-step-3.php:204
 msgid "Reset API Credentials"
 msgstr ""
 
@@ -3957,7 +3957,7 @@ msgid "Location"
 msgstr ""
 
 #: includes/pro/includes/addons/app-locations-location_support.php:151
-#: includes/pro/includes/addons/app-users-additional_fields.php:555
+#: includes/pro/includes/addons/app-users-additional_fields.php:561
 msgid "Add"
 msgstr ""
 
@@ -4418,53 +4418,53 @@ msgstr ""
 msgid "The field %s is required"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:511
+#: includes/pro/includes/addons/app-users-additional_fields.php:517
 msgid "Text"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:512
+#: includes/pro/includes/addons/app-users-additional_fields.php:518
 msgid "Checkbox"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:518
+#: includes/pro/includes/addons/app-users-additional_fields.php:524
 msgid "Additional Fields"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:521
+#: includes/pro/includes/addons/app-users-additional_fields.php:527
 msgid "Additional fields"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:528
-#: includes/pro/includes/addons/app-users-additional_fields.php:566
+#: includes/pro/includes/addons/app-users-additional_fields.php:534
+#: includes/pro/includes/addons/app-users-additional_fields.php:572
 msgid "Required"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:530
+#: includes/pro/includes/addons/app-users-additional_fields.php:536
 msgid "E-mail macro:"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:531
+#: includes/pro/includes/addons/app-users-additional_fields.php:537
 msgid "This is the placeholder you can use in your emails."
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:533
-#: includes/pro/includes/addons/app-users-additional_fields.php:568
+#: includes/pro/includes/addons/app-users-additional_fields.php:539
+#: includes/pro/includes/addons/app-users-additional_fields.php:574
 msgid "Remove"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:538
+#: includes/pro/includes/addons/app-users-additional_fields.php:544
 msgid "Add new field"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:540
+#: includes/pro/includes/addons/app-users-additional_fields.php:546
 msgid "Field label:"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:544
+#: includes/pro/includes/addons/app-users-additional_fields.php:550
 msgid "Field type:"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:553
+#: includes/pro/includes/addons/app-users-additional_fields.php:559
 msgid "Required?"
 msgstr ""
 
@@ -5137,7 +5137,7 @@ msgid "Required Message"
 msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:115
-#: includes/shortcodes/class-app-shortcode-monthly-schedule.php:269
+#: includes/shortcodes/class-app-shortcode-monthly-schedule.php:271
 #: includes/shortcodes/class-app-shortcode-schedule.php:100
 msgid "Please, select a service provider."
 msgstr ""
@@ -5167,7 +5167,7 @@ msgid "Required Service Message"
 msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:127
-#: includes/shortcodes/class-app-shortcode-monthly-schedule.php:271
+#: includes/shortcodes/class-app-shortcode-monthly-schedule.php:273
 #: includes/shortcodes/class-app-shortcode-schedule.php:112
 msgid "Please, select a service."
 msgstr ""
@@ -5177,7 +5177,7 @@ msgstr ""
 msgid "The message that will be shown if services are required."
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-monthly-schedule.php:303
+#: includes/shortcodes/class-app-shortcode-monthly-schedule.php:305
 msgid ""
 "Creates a monthly calendar plus time tables whose free time slots are "
 "clickable to apply for an appointment."
