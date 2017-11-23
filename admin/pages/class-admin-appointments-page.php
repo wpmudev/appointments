@@ -9,66 +9,93 @@ class Appointments_Admin_Appointments_Page {
 		'worker_id' => false,
 		'service_id' => false,
 		'type' => 'active',
-		'status' => array( 'confirmed', 'paid' )
+		'status' => array( 'confirmed', 'paid' ),
 	);
 
 	private $sorting = array(
 		'orderby' => 'ID',
-		'order' => 'DESC'
+		'order' => 'DESC',
 	);
 
 	private $pagination_args = array(
 		'per_page' => 50,
-		'page' => 1
+		'page' => 1,
 	);
 
 	public function __construct() {
-		$this->page_id = add_menu_page('Appointments', __('Appointments','appointments'), App_Roles::get_capability('manage_options', App_Roles::CTX_PAGE_APPOINTMENTS),  'appointments', array(&$this,'appointment_list'),'dashicons-clock');
+		$this->page_id = add_menu_page( 'Appointments', __( 'Appointments','appointments' ), App_Roles::get_capability( 'manage_options', App_Roles::CTX_PAGE_APPOINTMENTS ),  'appointments', array( &$this, 'appointment_list' ),'dashicons-clock' );
 		add_action( 'load-' . $this->page_id, array( $this, 'on_load' ) );
 		add_action( 'load-' . $this->page_id, array( $this, 'set_screen_options' ) );
-
+		add_action( 'load-' . $this->page_id, array( $this, 'add_help' ) );
 		$this->maybe_reset_filters();
+	}
+
+	public function add_help() {
+		$content = '';
+		$content .= '<ul>';
+		$content .= '<li>'. __( '<b>Completed:</b> Appointment became overdue after it is confirmed or paid', 'appointments' ) .'</li>';
+		$content .= '<li>'. __( '<b>Removed:</b> Appointment was not paid for or was not confirmed manually in the allowed time', 'appointments' ) .'</li>';
+		$content .= '<li>'. __( '<b>Reserved by GCal:</b> If you import appointments from Google Calender using Google Calendar API, that is, synchronize your calendar with Appointments+, events in your Google Calendar will be regarded as appointments and they will be shown here. These records cannot be edited here. Use your Google Calendar instead. They will be automatically updated in A+ too.', 'appointments' ) .'</li>';
+		$content .= '</ul>';
+		$content .= '<h3>'. __( 'If you require payment:', 'appointments' ) .'</h3>';
+		$content .= '<ul>';
+		$content .= '<li>'. __( '<b>Active/Paid:</b> Paid and confirmed by Paypal', 'appointments' ) .'</li>';
+		$content .= '<li>'. __( '<b>Pending:</b> Client applied for the appointment, but not yet paid.', 'appointments' ) .'</li>';
+		$content .= '</ul>';
+		$content .= '<h3>'. __( 'If you do not require payment:', 'appointments' ) .'</h3>';
+		$content .= '<ul>';
+		$content .= '<li>'. __( '<b>Active/Confirmed:</b> Manually confirmed', 'appointments' ) .'</li>';
+		$content .= '<li>'. __( '<b>Pending:</b> Client applied for the appointment, but it is not manually confirmed.', 'appointments' ) .'</li>';
+		$content .= '</ul>';
+		$screen = get_current_screen();
+		$screen->add_help_tab(
+			array(
+				'id'       => 'appointment',
+				'title'    => __( 'Appointments' ),
+				'content'  => $content,
+			)
+		);
 	}
 
 	public function on_load() {
 
-		add_action( "admin_enqueue_scripts", array( &$this, 'admin_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( &$this, 'admin_scripts' ) );
 		$appointments = appointments();
 
 		// Bulk status change
-		if ( isset( $_REQUEST["bulk_status"] ) && $_REQUEST["app_new_status"] && isset( $_REQUEST["app"] ) && is_array( $_REQUEST["app"] ) ) {
+		if ( isset( $_REQUEST['bulk_status'] ) && $_REQUEST['app_new_status'] && isset( $_REQUEST['app'] ) && is_array( $_REQUEST['app'] ) ) {
 
 			$result = 0;
-			$new_status = $_REQUEST["app_new_status"];
-			foreach ( $_REQUEST["app"] as $app_id ) {
-				$result = $result + (int)appointments_update_appointment_status( absint( $app_id ), $new_status  );
+			$new_status = $_REQUEST['app_new_status'];
+			foreach ( $_REQUEST['app'] as $app_id ) {
+				$result = $result + (int) appointments_update_appointment_status( absint( $app_id ), $new_status );
 			}
 
 			if ( $result ) {
 
 				$userdata = get_userdata( get_current_user_id() );
-				add_action( 'admin_notices', array ( $this, 'updated' ) );
-				do_action( 'app_bulk_status_change',  $_REQUEST["app"] );
+				add_action( 'admin_notices', array( $this, 'updated' ) );
+				do_action( 'app_bulk_status_change',  $_REQUEST['app'] );
 
-				$appointments->log( sprintf( __('Status of Appointment(s) with id(s):%s changed to %s by user:%s', 'appointments' ),  implode( ', ', $_REQUEST["app"] ), $new_status, $userdata->user_login ) );
+				$appointments->log( sprintf( __( 'Status of Appointment(s) with id(s):%s changed to %s by user:%s', 'appointments' ),  implode( ', ', $_REQUEST['app'] ), $new_status, $userdata->user_login ) );
 				appointments_clear_cache();
 			}
 		}
 
 		// Delete removed app records
-		if ( isset($_POST["delete_removed"]) && 'delete_removed' == $_POST["delete_removed"]
-		     && isset( $_POST["app"] ) && is_array( $_POST["app"] ) ) {
+		if ( isset( $_POST['delete_removed'] ) && 'delete_removed' == $_POST['delete_removed']
+		     && isset( $_POST['app'] ) && is_array( $_POST['app'] ) ) {
 			$result = 0;
-			foreach ( $_POST["app"] as $app_id ) {
+			foreach ( $_POST['app'] as $app_id ) {
 				$result = $result + appointments_delete_appointment( $app_id );
 			}
 
 			if ( $result ) {
 				global $current_user;
 				$userdata = get_userdata( $current_user->ID );
-				add_action( 'admin_notices', array ( $this, 'deleted' ) );
-				do_action( 'app_deleted',  $_POST["app"] );
-				$appointments->log( sprintf( __('Appointment(s) with id(s):%s deleted by user:%s', 'appointments' ),  implode( ', ', $_POST["app"] ), $userdata->user_login ) );
+				add_action( 'admin_notices', array( $this, 'deleted' ) );
+				do_action( 'app_deleted',  $_POST['app'] );
+				$appointments->log( sprintf( __( 'Appointment(s) with id(s):%s deleted by user:%s', 'appointments' ),  implode( ', ', $_POST['app'] ), $userdata->user_login ) );
 			}
 		}
 
@@ -94,13 +121,13 @@ class Appointments_Admin_Appointments_Page {
 
 	private function maybe_reset_filters() {
 		if ( isset( $_GET['filter_reset_action'] ) ) {
-			$remove =  array(
+			$remove = array(
 				'app_service_id',
 				'app_provider_id',
 				'app_new_status',
 				's',
 				'order',
-				'orderby'
+				'orderby',
 			);
 			$remove[] = 'filter_reset_action';
 			wp_safe_redirect( remove_query_arg( $remove ) );
@@ -117,25 +144,25 @@ class Appointments_Admin_Appointments_Page {
 		$date_format = $appointments->safe_date_format();
 		wp_localize_script( 'appointments-admin-appointments', 'Appi18n', array(
 			'deleteRecordsConfirm' => esc_js( __( 'Are you sure to delete the selected record(s)?', 'appointments' ) ),
-			'unexpectedError' => esc_js( __('Unexpected error','appointments') ),
-            'dateFormat' => $date_format
-        ) );
+			'unexpectedError' => esc_js( __( 'Unexpected error','appointments' ) ),
+			'dateFormat' => $date_format,
+		) );
 	}
 
 	public function get_types() {
 		return apply_filters( 'appointments_list_types', array(
-			'active' => __('Active appointments', 'appointments'),
-			'pending' => __('Pending appointments', 'appointments'),
-			'completed' => __('Completed appointments', 'appointments'),
-			'reserved' => __('Reserved by GCal', 'appointments'),
-			'removed' => __('Removed appointments', 'appointments')
+			'active' => __( 'Active appointments', 'appointments' ),
+			'pending' => __( 'Pending appointments', 'appointments' ),
+			'completed' => __( 'Completed appointments', 'appointments' ),
+			'reserved' => __( 'Reserved by GCal', 'appointments' ),
+			'removed' => __( 'Removed appointments', 'appointments' ),
 		));
 	}
 
 	private function parse_sorting() {
 		$defaults = array(
 			'orderby' => 'ID',
-			'order' => 'DESC'
+			'order' => 'DESC',
 		);
 
 		if ( isset( $_GET['orderby'] ) && $_GET['orderby'] ) {
@@ -152,7 +179,7 @@ class Appointments_Admin_Appointments_Page {
 		if ( isset( $_GET['s'] ) ) {
 			$s = stripslashes( $_GET['s'] );
 			if ( $s ) {
-				$this->filters['s'] =  $s;
+				$this->filters['s'] = $s;
 			}
 		}
 
@@ -184,7 +211,7 @@ class Appointments_Admin_Appointments_Page {
 		$current_screen = get_current_screen();
 		$screen_option = $current_screen->get_option( 'per_page', 'option' );
 		$rpp = get_user_meta( get_current_user_id(), $screen_option, true );
-		if ( empty ( $rpp ) || $rpp < 1 ) {
+		if ( empty( $rpp ) || $rpp < 1 ) {
 			$rpp = $current_screen->get_option( 'per_page', 'default' );
 		}
 
@@ -217,7 +244,7 @@ class Appointments_Admin_Appointments_Page {
 		$args = array(
 			's' => $s,
 			'worker' => $worker_id,
-			'service' => $service_id
+			'service' => $service_id,
 		);
 
 		$status_count = appointments_count_appointments( $args );
@@ -237,13 +264,13 @@ class Appointments_Admin_Appointments_Page {
 
 		$columns = array(
 			'cb' => '<input type="checkbox" />',
-			'app_ID' => __('ID','appointments'),
-			'date' => __('Appointment Date','appointments'),
-			'user' => __('Client','appointments'),
-			'service' => __('Service','appointments'),
-			'worker' => __('Provider','appointments'),
-			'created' => __('Created on','appointments'),
-			'status' => __('Status','appointments')
+			'app_ID' => __( 'ID','appointments' ),
+			'date' => __( 'Appointment Date','appointments' ),
+			'user' => __( 'Client','appointments' ),
+			'service' => __( 'Service','appointments' ),
+			'worker' => __( 'Provider','appointments' ),
+			'created' => __( 'Created on','appointments' ),
+			'status' => __( 'Status','appointments' ),
 		);
 
 		$default_columns = $columns;
@@ -257,8 +284,7 @@ class Appointments_Admin_Appointments_Page {
 			if ( $this->sorting['orderby'] === $field ) {
 				$sortables[ $col ]['order'] = 'ASC' === $this->sorting['order'] ? 'ASC' : 'DESC';
 				$sortables[ $col ]['sorting'] = true;
-			}
-			else {
+			} else {
 				$sortables[ $col ]['order'] = 'ASC';
 				$sortables[ $col ]['sorting'] = false;
 			}
@@ -267,22 +293,22 @@ class Appointments_Admin_Appointments_Page {
 		$pag_args = array(
 			'base' => add_query_arg( 'paged', '%#%' ),
 			'format' => '',
-			'total' => ceil($total / $rpp),
+			'total' => ceil( $total / $rpp ),
 			'current' => $paged,
-			'type' => 'array'
+			'type' => 'array',
 		);
 		$trans_navigation = paginate_links( $pag_args );
 
 		$pagination_args = array(
 			'total' => $total,
 			'total_pages' => ceil( $total / $rpp ),
-			'current' => $paged
+			'current' => $paged,
 		);
 
 		?>
 		<div class='wrap'>
-			<h1><?php echo __('Appointments','appointments'); ?><a href="javascript:void(0)" class="add-new-h2"><?php _e('Add New', 'appointments')?></a>
-				<img class="add-new-waiting" style="display:none;" src="<?php echo admin_url('images/spinner.gif')?>" alt="">
+			<h1><?php echo __( 'Appointments','appointments' ); ?><a href="javascript:void(0)" class="add-new-h2"><?php _e( 'Add New', 'appointments' )?></a>
+				<img class="add-new-waiting" style="display:none;" src="<?php echo admin_url( 'images/spinner.gif' )?>" alt="">
 			</h1>
 
 			<?php include_once( appointments_plugin_dir() . 'admin/views/page-appointments-status-filter.php' ); ?>
@@ -346,7 +372,7 @@ class Appointments_Admin_Appointments_Page {
 			$page_links[] = '<span class="tablenav-pages-navspan" aria-hidden="true">&lsaquo;</span>';
 		} else {
 			$page_links[] = sprintf( "<a class='prev-page' href='%s'><span class='screen-reader-text'>%s</span><span aria-hidden='true'>%s</span></a>",
-				esc_url( add_query_arg( 'paged', max( 1, $current-1 ), $current_url ) ),
+				esc_url( add_query_arg( 'paged', max( 1, $current -1 ), $current_url ) ),
 				__( 'Previous page' ),
 				'&lsaquo;'
 			);
@@ -369,7 +395,7 @@ class Appointments_Admin_Appointments_Page {
 			$page_links[] = '<span class="tablenav-pages-navspan" aria-hidden="true">&rsaquo;</span>';
 		} else {
 			$page_links[] = sprintf( "<a class='next-page' href='%s'><span class='screen-reader-text'>%s</span><span aria-hidden='true'>%s</span></a>",
-				esc_url( add_query_arg( 'paged', min( $total_pages, $current+1 ), $current_url ) ),
+				esc_url( add_query_arg( 'paged', min( $total_pages, $current + 1 ), $current_url ) ),
 				__( 'Next page' ),
 				'&rsaquo;'
 			);
@@ -401,14 +427,14 @@ class Appointments_Admin_Appointments_Page {
 	/**
 	 * Prints "deleted" message on top of Admin page
 	 */
-	function deleted( ) {
-		echo '<div class="updated fade"><p><b>[Appointments+]</b> '. __('Selected record(s) deleted.','appointments').'</p></div>';
+	function deleted() {
+		echo '<div class="updated fade"><p><b>[Appointments+]</b> '. __( 'Selected record(s) deleted.','appointments' ).'</p></div>';
 	}
 
 	/**
 	 * Prints "updated" message on top of Admin page
 	 */
-	function updated( ) {
-		echo '<div class="updated fade"><p><b>[Appointments+]</b> '. __('Selected record(s) updated.','appointments').'</p></div>';
+	function updated() {
+		echo '<div class="updated fade"><p><b>[Appointments+]</b> '. __( 'Selected record(s) updated.','appointments' ).'</p></div>';
 	}
 }
