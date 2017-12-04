@@ -457,7 +457,7 @@ class Appointments_AJAX {
 			'service_id' => $service,
 			'location_id' => $location
 		);
-		$is_busy = apppointments_is_range_busy( $start, $start + ( $duration * 60 ), $args );
+		$is_busy = apppointments_is_range_busy( $start, $start + ( $duration * MINUTE_IN_SECONDS ), $args );
 		if ( $is_busy ) {
 			die( json_encode( array(
 				"error" => apply_filters(
