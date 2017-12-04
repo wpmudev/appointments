@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments+ PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2017-11-21 06:15:09+00:00\n"
+"POT-Creation-Date: 2017-12-04 14:36:52+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -881,121 +881,137 @@ msgstr ""
 msgid "%s edited his working hours."
 msgstr ""
 
-#: admin/class-app-admin.php:54
+#: admin/class-app-admin.php:58
 msgid "Appointments Provider"
 msgstr ""
 
-#: admin/class-app-admin.php:61
+#: admin/class-app-admin.php:65
 #: includes/pro/includes/addons/lib/class-app-locations-list-table.php:18
 #: includes/sample-appointments-page.php:38
 msgid "Edit"
 msgstr ""
 
-#: admin/class-app-admin.php:88
+#: admin/class-app-admin.php:92
 msgid "Dismiss notice"
 msgstr ""
 
-#: admin/class-app-admin.php:88 admin/class-app-admin.php:270
-#: admin/class-app-admin.php:299 admin/class-app-admin.php:312
+#: admin/class-app-admin.php:92 admin/class-app-admin.php:274
+#: admin/class-app-admin.php:303 admin/class-app-admin.php:316
 #: includes/pro/includes/class-app-google-login.php:165
 msgid "Dismiss"
 msgstr ""
 
-#: admin/class-app-admin.php:145 admin/class-app-admin.php:174
+#: admin/class-app-admin.php:149 admin/class-app-admin.php:178
 #: admin/pages/class-admin-appointments-page.php:26
-#: admin/pages/class-admin-appointments-page.php:284
+#: admin/pages/class-admin-appointments-page.php:54
+#: admin/pages/class-admin-appointments-page.php:310
 #: admin/tinymce-shortcodes-i18n.php:7
 #: admin/views/user-profile-my-appointments.php:4
 #: admin/views/user-profile-worker-appointments.php:4
 #: admin/widgets/class-app-dashboard-widget.php:11
 #: includes/class-app-tutorial.php:35
 #: includes/integration/class-app-buddypress.php:125
-#: includes/templates/app-admin-appointment_list.php:49
 msgid "Appointments"
 msgstr ""
 
-#: admin/class-app-admin.php:204
+#: admin/class-app-admin.php:208
 msgid "Preparing for export, please hold on..."
 msgstr ""
 
-#: admin/class-app-admin.php:220
+#: admin/class-app-admin.php:224
 msgid "Notice dismissed."
 msgstr ""
 
-#: admin/class-app-admin.php:237
+#: admin/class-app-admin.php:241
 msgid "<b>[Appointments+]</b> You must define at least once service."
 msgstr ""
 
-#: admin/class-app-admin.php:244
+#: admin/class-app-admin.php:248
 msgid ""
 "<b>[Appointments+]</b> One of your services has a duration smaller than "
 "time base. Please visit Services tab and after making your corrections save "
 "new settings."
 msgstr ""
 
-#: admin/class-app-admin.php:251
+#: admin/class-app-admin.php:255
 msgid ""
 "<b>[Appointments+]</b> One of your services is not divisible by the time "
 "base. Please visit Services tab and after making your corrections save new "
 "settings."
 msgstr ""
 
-#: admin/class-app-admin.php:258
+#: admin/class-app-admin.php:262
 msgid ""
 "<b>[Appointments+]</b> One of your services has a duration greater than 24 "
 "hours. Appointments+ does not support services exceeding 1440 minutes (24 "
 "hours). "
 msgstr ""
 
-#: admin/class-app-admin.php:269
+#: admin/class-app-admin.php:273
 msgid ""
 "<b>[Appointments+]</b> One of your services does not have a service "
 "provider assigned. Delete services you are not using."
 msgstr ""
 
-#: admin/class-app-admin.php:270 admin/class-app-admin.php:299
-#: admin/class-app-admin.php:312
+#: admin/class-app-admin.php:274 admin/class-app-admin.php:303
+#: admin/class-app-admin.php:316
 #: includes/pro/includes/class-app-google-login.php:165
 msgid "Dismiss this notice for this session"
 msgstr ""
 
-#: admin/class-app-admin.php:279
+#: admin/class-app-admin.php:283
 msgid ""
 "<b>[Appointments+]</b> Appointments+ database tables need to be updated. "
 "Please deactivate and reactivate the plugin (DO NOT DELETE the plugin). You "
 "will not lose any saved information."
 msgstr ""
 
-#: admin/class-app-admin.php:287
+#: admin/class-app-admin.php:291
 msgid ""
 "<b>[Appointments+]</b> More than one instance of services, service "
 "providers, confirmation, Paypal or login shortcodes on the same page may "
 "cause problems.</p>"
 msgstr ""
 
-#: admin/class-app-admin.php:298
+#: admin/class-app-admin.php:302
 msgid ""
 "<b>[Appointments+]</b> Confirmation shortcode [app_confirmation] is always "
 "required to complete an appointment."
 msgstr ""
 
-#: admin/class-app-admin.php:311
+#: admin/class-app-admin.php:315
 msgid ""
 "<b>[Appointments+]</b> Paypal shortcode [app_paypal] is always required to "
 "complete an appointment with <b>pending</b> status."
 msgstr ""
 
-#: admin/class-app-admin.php:325
+#: admin/class-app-admin.php:329
 msgid "Appointments+ FAQ"
 msgstr ""
 
-#: admin/class-app-admin.php:349
+#: admin/class-app-admin.php:353
 msgid "FAQ"
 msgstr ""
 
-#: admin/class-app-admin.php:419 admin/pages/class-admin-settings-page.php:12
+#: admin/class-app-admin.php:423 admin/pages/class-admin-settings-page.php:12
 #: includes/pro/includes/addons/app-locations-location_support.php:169
 msgid "Settings"
+msgstr ""
+
+#: admin/class-app-admin.php:437
+msgid "Something went wrong!"
+msgstr ""
+
+#: admin/class-app-admin.php:449
+msgid "Make an Appointment"
+msgstr ""
+
+#: admin/class-app-admin.php:458
+msgid "Page was created successfuly: %s"
+msgstr ""
+
+#: admin/class-app-admin.php:462
+msgid "View page"
 msgstr ""
 
 #: admin/class-app-list-table.php:155
@@ -1071,35 +1087,35 @@ msgid "No pending comments"
 msgstr ""
 
 #: admin/class-app-list-table.php:756 admin/class-app-list-table.php:1342
-#: admin/pages/class-admin-appointments-page.php:305
+#: admin/pages/class-admin-appointments-page.php:331
 msgid "%s item"
 msgid_plural "%s items"
 msgstr[0] ""
 msgstr[1] ""
 
 #: admin/class-app-list-table.php:791
-#: admin/pages/class-admin-appointments-page.php:340
+#: admin/pages/class-admin-appointments-page.php:366
 msgid "First page"
 msgstr ""
 
 #: admin/class-app-list-table.php:801
-#: admin/pages/class-admin-appointments-page.php:350
+#: admin/pages/class-admin-appointments-page.php:376
 msgid "Previous page"
 msgstr ""
 
 #: admin/class-app-list-table.php:808 admin/class-app-list-table.php:811
-#: admin/pages/class-admin-appointments-page.php:357
-#: admin/pages/class-admin-appointments-page.php:360
+#: admin/pages/class-admin-appointments-page.php:383
+#: admin/pages/class-admin-appointments-page.php:386
 msgid "Current Page"
 msgstr ""
 
 #: admin/class-app-list-table.php:824
-#: admin/pages/class-admin-appointments-page.php:373
+#: admin/pages/class-admin-appointments-page.php:399
 msgid "Next page"
 msgstr ""
 
 #: admin/class-app-list-table.php:834
-#: admin/pages/class-admin-appointments-page.php:383
+#: admin/pages/class-admin-appointments-page.php:409
 msgid "Last page"
 msgstr ""
 
@@ -1108,88 +1124,122 @@ msgstr ""
 msgid "Select All"
 msgstr ""
 
-#: admin/pages/class-admin-appointments-page.php:53
+#: admin/pages/class-admin-appointments-page.php:36
+msgid "<b>Completed:</b> Appointment became overdue after it is confirmed or paid"
+msgstr ""
+
+#: admin/pages/class-admin-appointments-page.php:37
+msgid ""
+"<b>Removed:</b> Appointment was not paid for or was not confirmed manually "
+"in the allowed time"
+msgstr ""
+
+#: admin/pages/class-admin-appointments-page.php:38
+msgid ""
+"<b>Reserved by GCal:</b> If you import appointments from Google Calender "
+"using Google Calendar API, that is, synchronize your calendar with "
+"Appointments+, events in your Google Calendar will be regarded as "
+"appointments and they will be shown here. These records cannot be edited "
+"here. Use your Google Calendar instead. They will be automatically updated "
+"in A+ too."
+msgstr ""
+
+#: admin/pages/class-admin-appointments-page.php:40
+msgid "If you require payment:"
+msgstr ""
+
+#: admin/pages/class-admin-appointments-page.php:42
+msgid "<b>Active/Paid:</b> Paid and confirmed by Paypal"
+msgstr ""
+
+#: admin/pages/class-admin-appointments-page.php:43
+msgid "<b>Pending:</b> Client applied for the appointment, but not yet paid."
+msgstr ""
+
+#: admin/pages/class-admin-appointments-page.php:45
+msgid "If you do not require payment:"
+msgstr ""
+
+#: admin/pages/class-admin-appointments-page.php:47
+msgid "<b>Active/Confirmed:</b> Manually confirmed"
+msgstr ""
+
+#: admin/pages/class-admin-appointments-page.php:48
+msgid ""
+"<b>Pending:</b> Client applied for the appointment, but it is not manually "
+"confirmed."
+msgstr ""
+
+#: admin/pages/class-admin-appointments-page.php:80
 msgid "Status of Appointment(s) with id(s):%s changed to %s by user:%s"
 msgstr ""
 
-#: admin/pages/class-admin-appointments-page.php:71
+#: admin/pages/class-admin-appointments-page.php:98
 msgid "Appointment(s) with id(s):%s deleted by user:%s"
 msgstr ""
 
-#: admin/pages/class-admin-appointments-page.php:84
+#: admin/pages/class-admin-appointments-page.php:111
 msgid "Queue items per page"
 msgstr ""
 
-#: admin/pages/class-admin-appointments-page.php:119
-#: includes/templates/app-admin-my_appointments_list.php:218
+#: admin/pages/class-admin-appointments-page.php:146
 msgid "Are you sure to delete the selected record(s)?"
 msgstr ""
 
-#: admin/pages/class-admin-appointments-page.php:120
-#: includes/templates/app-admin-my_appointments_list.php:250
-#: includes/templates/app-admin-my_appointments_list.php:268
-#: includes/templates/app-admin-my_appointments_list.php:326
+#: admin/pages/class-admin-appointments-page.php:147
 msgid "Unexpected error"
 msgstr ""
 
-#: admin/pages/class-admin-appointments-page.php:127
-#: includes/templates/app-admin-appointment_list.php:54
+#: admin/pages/class-admin-appointments-page.php:154
 msgid "Active appointments"
 msgstr ""
 
-#: admin/pages/class-admin-appointments-page.php:128
-#: includes/templates/app-admin-appointment_list.php:55
+#: admin/pages/class-admin-appointments-page.php:155
 msgid "Pending appointments"
 msgstr ""
 
-#: admin/pages/class-admin-appointments-page.php:129
-#: includes/templates/app-admin-appointment_list.php:56
+#: admin/pages/class-admin-appointments-page.php:156
 msgid "Completed appointments"
 msgstr ""
 
-#: admin/pages/class-admin-appointments-page.php:130
+#: admin/pages/class-admin-appointments-page.php:157
 #: admin/views/page-appointments-status-filter.php:6
 #: includes/class-app-appointment.php:1205
-#: includes/templates/app-admin-appointment_list.php:57
 msgid "Reserved by GCal"
 msgstr ""
 
-#: admin/pages/class-admin-appointments-page.php:131
-#: includes/templates/app-admin-appointment_list.php:58
+#: admin/pages/class-admin-appointments-page.php:158
 msgid "Removed appointments"
 msgstr ""
 
-#: admin/pages/class-admin-appointments-page.php:240
+#: admin/pages/class-admin-appointments-page.php:267
 #: admin/views/page-settings-tab-services-section-services.php:23
 #: admin/views/page-settings-tab-workers-section-workers.php:22
-#: includes/templates/app-admin-my_appointments_list.php:64
 msgid "ID"
 msgstr ""
 
-#: admin/pages/class-admin-appointments-page.php:241
+#: admin/pages/class-admin-appointments-page.php:268
 msgid "Appointment Date"
 msgstr ""
 
-#: admin/pages/class-admin-appointments-page.php:242
+#: admin/pages/class-admin-appointments-page.php:269
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:88
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:158
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:200
-#: includes/templates/app-admin-my_appointments_list.php:65
 msgid "Client"
 msgstr ""
 
-#: admin/pages/class-admin-appointments-page.php:243
+#: admin/pages/class-admin-appointments-page.php:270
 #: admin/pages/class-admin-transactions-page.php:56
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:86
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:67
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:244
 #: includes/shortcodes/class-app-shortcode-schedule.php:52
 #: includes/shortcodes/class-app-shortcode-service-providers.php:82
-#: includes/templates/app-admin-my_appointments_list.php:67
 msgid "Service"
 msgstr ""
 
-#: admin/pages/class-admin-appointments-page.php:244
+#: admin/pages/class-admin-appointments-page.php:271
 #: admin/views/inline-edit.php:34
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:87
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:74
@@ -1198,15 +1248,14 @@ msgstr ""
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:161
 #: includes/shortcodes/class-app-shortcode-schedule.php:59
 #: includes/shortcodes/class-app-shortcode-services.php:81
-#: includes/templates/app-admin-my_appointments_list.php:68
 msgid "Provider"
 msgstr ""
 
-#: admin/pages/class-admin-appointments-page.php:245
+#: admin/pages/class-admin-appointments-page.php:272
 msgid "Created on"
 msgstr ""
 
-#: admin/pages/class-admin-appointments-page.php:246
+#: admin/pages/class-admin-appointments-page.php:273
 #: admin/pages/class-admin-transactions-page.php:59
 #: admin/views/inline-edit.php:92
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:22
@@ -1215,24 +1264,22 @@ msgstr ""
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:156
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:43
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:247
-#: includes/templates/app-admin-my_appointments_list.php:69
 msgid "Status"
 msgstr ""
 
-#: admin/pages/class-admin-appointments-page.php:284
-#: includes/templates/app-admin-appointment_list.php:49
+#: admin/pages/class-admin-appointments-page.php:310
 msgid "Add New"
 msgstr ""
 
-#: admin/pages/class-admin-appointments-page.php:302
+#: admin/pages/class-admin-appointments-page.php:328
 msgid "Appointments list navigation"
 msgstr ""
 
-#: admin/pages/class-admin-appointments-page.php:405
+#: admin/pages/class-admin-appointments-page.php:431
 msgid "Selected record(s) deleted."
 msgstr ""
 
-#: admin/pages/class-admin-appointments-page.php:412
+#: admin/pages/class-admin-appointments-page.php:438
 msgid "Selected record(s) updated."
 msgstr ""
 
@@ -1309,7 +1356,7 @@ msgid "Add new Service Provider"
 msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:98
-#: admin/pages/class-admin-settings-page.php:492
+#: admin/pages/class-admin-settings-page.php:474
 msgid "Please, select at least one service provided"
 msgstr ""
 
@@ -1333,7 +1380,6 @@ msgid "User"
 msgstr ""
 
 #: admin/pages/class-admin-transactions-page.php:55
-#: includes/templates/app-admin-my_appointments_list.php:66
 msgid "Date/Time"
 msgstr ""
 
@@ -1488,37 +1534,30 @@ msgid "Select Appointment %d on %s"
 msgstr ""
 
 #: admin/views/page-appointments-list.php:86
-#: includes/templates/app-admin-my_appointments_list.php:148
 msgid "See Details (Cannot be edited)"
 msgstr ""
 
 #: admin/views/page-appointments-list.php:86
-#: includes/templates/app-admin-my_appointments_list.php:148
 msgid "See Details and Edit"
 msgstr ""
 
 #: admin/views/page-appointments-list.php:111
-#: includes/templates/app-admin-my_appointments_list.php:187
 msgid "No appointments have been found."
 msgstr ""
 
 #: admin/views/page-appointments-list.php:122
-#: includes/templates/app-admin-my_appointments_list.php:200
 msgid "Permanently Delete Selected Records"
 msgstr ""
 
 #: admin/views/page-appointments-list.php:122
-#: includes/templates/app-admin-my_appointments_list.php:200
 msgid "Clicking this button deletes logs saved on the server"
 msgstr ""
 
 #: admin/views/page-appointments-list.php:137
-#: includes/templates/app-admin-appointment_list.php:212
 msgid "Export all Appointments"
 msgstr ""
 
 #: admin/views/page-appointments-list.php:137
-#: includes/templates/app-admin-appointment_list.php:212
 msgid ""
 "If you click this button a CSV file containing ALL appointment records will "
 "be saved on your PC"
@@ -1526,41 +1565,33 @@ msgstr ""
 
 #: admin/views/page-appointments-nav-filter.php:19
 #: admin/views/page-appointments-nav-filter.php:21
-#: includes/templates/app-admin-appointment_list.php:80
-#: includes/templates/app-admin-appointment_list.php:86
 msgid "Search Client"
 msgstr ""
 
 #: admin/views/page-appointments-nav-filter.php:29
 #: admin/views/page-appointments-nav-filter.php:31
-#: includes/templates/app-admin-appointment_list.php:99
 msgid "Bulk status change"
 msgstr ""
 
 #: admin/views/page-appointments-nav-filter.php:36
-#: includes/templates/app-admin-appointment_list.php:104
 msgid "Change Status"
 msgstr ""
 
 #: admin/views/page-appointments-nav-filter.php:41
 #: admin/views/page-appointments-nav-filter.php:43
-#: includes/templates/app-admin-appointment_list.php:154
 msgid "Filter by service"
 msgstr ""
 
 #: admin/views/page-appointments-nav-filter.php:48
 #: admin/views/page-appointments-nav-filter.php:50
-#: includes/templates/app-admin-appointment_list.php:171
 msgid "Filter by service provider"
 msgstr ""
 
 #: admin/views/page-appointments-nav-filter.php:55
-#: includes/templates/app-admin-appointment_list.php:185
 msgid "Filter"
 msgstr ""
 
 #: admin/views/page-appointments-nav-filter.php:56
-#: includes/templates/app-admin-appointment_list.php:198
 msgid "Reset filters"
 msgstr ""
 
@@ -1586,66 +1617,6 @@ msgstr ""
 #: admin/views/page-appointments-status-filter.php:7
 #: includes/class-app-appointment.php:1206
 msgid "Removed"
-msgstr ""
-
-#: admin/views/page-appointments-status-filter.php:8
-#: includes/templates/app-admin-appointment_list.php:59
-msgid "Click to toggle information about statuses"
-msgstr ""
-
-#: admin/views/page-appointments-status-filter.php:13
-#: includes/templates/app-admin-appointment_list.php:64
-msgid "<b>Completed:</b> Appointment became overdue after it is confirmed or paid"
-msgstr ""
-
-#: admin/views/page-appointments-status-filter.php:14
-#: includes/templates/app-admin-appointment_list.php:65
-msgid ""
-"<b>Removed:</b> Appointment was not paid for or was not confirmed manually "
-"in the allowed time"
-msgstr ""
-
-#: admin/views/page-appointments-status-filter.php:15
-#: includes/templates/app-admin-appointment_list.php:66
-msgid ""
-"<b>Reserved by GCal:</b> If you import appointments from Google Calender "
-"using Google Calendar API, that is, synchronize your calendar with "
-"Appointments+, events in your Google Calendar will be regarded as "
-"appointments and they will be shown here. These records cannot be edited "
-"here. Use your Google Calendar instead. They will be automatically updated "
-"in A+ too."
-msgstr ""
-
-#: admin/views/page-appointments-status-filter.php:16
-#: includes/templates/app-admin-appointment_list.php:67
-msgid "If you require payment:"
-msgstr ""
-
-#: admin/views/page-appointments-status-filter.php:17
-#: includes/templates/app-admin-appointment_list.php:68
-msgid "<b>Active/Paid:</b> Paid and confirmed by Paypal"
-msgstr ""
-
-#: admin/views/page-appointments-status-filter.php:18
-#: includes/templates/app-admin-appointment_list.php:69
-msgid "<b>Pending:</b> Client applied for the appointment, but not yet paid."
-msgstr ""
-
-#: admin/views/page-appointments-status-filter.php:21
-#: includes/templates/app-admin-appointment_list.php:72
-msgid "If you do not require payment:"
-msgstr ""
-
-#: admin/views/page-appointments-status-filter.php:22
-#: includes/templates/app-admin-appointment_list.php:73
-msgid "<b>Active/Confirmed:</b> Manually confirmed"
-msgstr ""
-
-#: admin/views/page-appointments-status-filter.php:23
-#: includes/templates/app-admin-appointment_list.php:74
-msgid ""
-"<b>Pending:</b> Client applied for the appointment, but it is not manually "
-"confirmed."
 msgstr ""
 
 #: admin/views/page-settings-tab-exceptions.php:19
@@ -1893,32 +1864,36 @@ msgstr ""
 msgid "Create an Appointment Page"
 msgstr ""
 
-#: admin/views/page-settings-tab-main-section-display.php:6
+#: admin/views/page-settings-tab-main-section-display.php:5
 msgid "with"
 msgstr ""
 
-#: admin/views/page-settings-tab-main-section-display.php:7
+#: admin/views/page-settings-tab-main-section-display.php:6
 msgid "Create an appointments date with this format"
 msgstr ""
 
-#: admin/views/page-settings-tab-main-section-display.php:9
+#: admin/views/page-settings-tab-main-section-display.php:8
 #: includes/integration/class-app-marketpress.php:85
 msgid "current month's schedule"
 msgstr ""
 
-#: admin/views/page-settings-tab-main-section-display.php:10
+#: admin/views/page-settings-tab-main-section-display.php:9
 #: includes/integration/class-app-marketpress.php:86
 msgid "current and next month's schedules"
 msgstr ""
 
-#: admin/views/page-settings-tab-main-section-display.php:11
+#: admin/views/page-settings-tab-main-section-display.php:10
 #: includes/integration/class-app-marketpress.php:87
 msgid "current week's schedule"
 msgstr ""
 
-#: admin/views/page-settings-tab-main-section-display.php:12
+#: admin/views/page-settings-tab-main-section-display.php:11
 #: includes/integration/class-app-marketpress.php:88
 msgid "current and next week's schedules"
+msgstr ""
+
+#: admin/views/page-settings-tab-main-section-display.php:13
+msgid "Create page!"
 msgstr ""
 
 #: admin/views/page-settings-tab-main-section-display.php:18
@@ -2442,13 +2417,12 @@ msgstr ""
 msgid "Future transactions"
 msgstr ""
 
-#: admin/views/page-transactions.php:46 admin/views/page-transactions.php:49
+#: admin/views/page-transactions.php:60 admin/views/page-transactions.php:63
 #: includes/class-app-appointment.php:1217
-#: includes/templates/app-admin-my_appointments_list.php:173
 msgid "None yet"
 msgstr ""
 
-#: admin/views/page-transactions.php:55
+#: admin/views/page-transactions.php:69
 msgid "No Transactions have been found, patience is a virtue."
 msgstr ""
 
@@ -2681,7 +2655,7 @@ msgid ""
 "from us."
 msgstr ""
 
-#: includes/class-app-ajax.php:465 includes/class-app-ajax.php:918
+#: includes/class-app-ajax.php:465 includes/class-app-ajax.php:923
 msgid ""
 "We are sorry, but this time slot is no longer available. Please refresh the "
 "page and try another time slot. Thank you."
@@ -2691,99 +2665,99 @@ msgstr ""
 msgid "Appointment could not be saved. Please contact website admin."
 msgstr ""
 
-#: includes/class-app-ajax.php:743
+#: includes/class-app-ajax.php:744
 msgid ""
 "Paypal confirmation arrived, but status could not be changed for some "
 "reason. Please check appointment with ID %s"
 msgstr ""
 
-#: includes/class-app-ajax.php:745
+#: includes/class-app-ajax.php:746
 msgid "Appointment status could not be changed"
 msgstr ""
 
-#: includes/class-app-ajax.php:751
+#: includes/class-app-ajax.php:752
 msgid ""
 "Last transaction has been reversed. Reason: Payment has been reversed "
 "(charge back)"
 msgstr ""
 
-#: includes/class-app-ajax.php:775
+#: includes/class-app-ajax.php:777
 msgid "Last transaction has been reversed. Reason: Payment has been refunded"
 msgstr ""
 
-#: includes/class-app-ajax.php:799
+#: includes/class-app-ajax.php:802
 msgid "Last transaction has been reversed. Reason: Payment Denied"
 msgstr ""
 
-#: includes/class-app-ajax.php:825
+#: includes/class-app-ajax.php:829
 msgid "Customer did not include a confirmed shipping address"
 msgstr ""
 
-#: includes/class-app-ajax.php:826
+#: includes/class-app-ajax.php:830
 msgid "Funds not captured yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:827
+#: includes/class-app-ajax.php:831
 msgid "eCheck that has not cleared yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:828
+#: includes/class-app-ajax.php:832
 msgid "Payment waiting for aproval by service provider"
 msgstr ""
 
-#: includes/class-app-ajax.php:829
+#: includes/class-app-ajax.php:833
 msgid "Payment waiting for service provider to handle multi-currency process"
 msgstr ""
 
-#: includes/class-app-ajax.php:830
+#: includes/class-app-ajax.php:834
 msgid "Customer did not register or confirm his/her email yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:831
+#: includes/class-app-ajax.php:835
 msgid "Waiting for service provider to upgrade the PayPal account"
 msgstr ""
 
-#: includes/class-app-ajax.php:832
+#: includes/class-app-ajax.php:836
 msgid "Waiting for service provider to verify his/her PayPal account"
 msgstr ""
 
-#: includes/class-app-ajax.php:836
+#: includes/class-app-ajax.php:840
 msgid "Last transaction is pending. Reason: "
 msgstr ""
 
-#: includes/class-app-ajax.php:898
+#: includes/class-app-ajax.php:903
 msgid "You need to login to make an appointment."
 msgstr ""
 
-#: includes/class-app-ajax.php:924
+#: includes/class-app-ajax.php:929
 msgid "Service name: "
 msgstr ""
 
-#: includes/class-app-ajax.php:925
+#: includes/class-app-ajax.php:930
 msgid "Date and time: "
 msgstr ""
 
-#: includes/class-app-ajax.php:926
+#: includes/class-app-ajax.php:931
 msgid "Lasts (approx): "
 msgstr ""
 
-#: includes/class-app-ajax.php:926
+#: includes/class-app-ajax.php:931
 msgid "minutes"
 msgstr ""
 
-#: includes/class-app-ajax.php:929
+#: includes/class-app-ajax.php:934
 msgid "Price: "
 msgstr ""
 
-#: includes/class-app-ajax.php:934
+#: includes/class-app-ajax.php:939
 msgid "Service provider: "
 msgstr ""
 
-#: includes/class-app-ajax.php:1020
+#: includes/class-app-ajax.php:1025
 msgid "Nothing to download!"
 msgstr ""
 
-#: includes/class-app-ajax.php:1128
+#: includes/class-app-ajax.php:1133
 msgid "Sorry, there was a problem with your request!"
 msgstr ""
 
@@ -5477,7 +5451,7 @@ msgid ""
 "dropdown."
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-schedule.php:282
+#: includes/shortcodes/class-app-shortcode-schedule.php:290
 msgid ""
 "Creates a weekly table whose cells are clickable to apply for an "
 "appointment."
@@ -5642,30 +5616,6 @@ msgstr ""
 msgid "Appointments shortcodes"
 msgstr ""
 
-#: includes/templates/app-admin-appointment_list.php:134
-msgid "Sort by"
-msgstr ""
-
-#: includes/templates/app-admin-appointment_list.php:135
-msgid "Creation date (Oldest to newest)"
-msgstr ""
-
-#: includes/templates/app-admin-appointment_list.php:136
-msgid "Creation date (Newest to oldest)"
-msgstr ""
-
-#: includes/templates/app-admin-appointment_list.php:137
-msgid "Appointment date (Closest first)"
-msgstr ""
-
-#: includes/templates/app-admin-appointment_list.php:138
-msgid "Appointment date (Closest last)"
-msgstr ""
-
-#: includes/templates/app-admin-appointment_list.php:140
-msgid "Sort"
-msgstr ""
-
 #: includes/widgets.php:37
 msgid "Title:"
 msgstr ""
@@ -5744,7 +5694,7 @@ msgid ""
 msgstr ""
 
 #: admin/class-app-list-table.php:817
-#: admin/pages/class-admin-appointments-page.php:366
+#: admin/pages/class-admin-appointments-page.php:392
 msgctxt "paging"
 msgid "%1$s of %2$s"
 msgstr ""
