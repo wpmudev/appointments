@@ -1092,9 +1092,9 @@ class Appointments {
 		$start = apply_filters( 'app_schedule_starting_hour', $start, $day_start, 'day' );
 		$end = apply_filters( 'app_schedule_ending_hour', $end, $day_start, 'day' );
 
-		$first = $start *3600 + $day_start; // Timestamp of the first cell
-		$last = $end *3600 + $day_start; // Timestamp of the last cell
-		$min_step_time = $this->get_min_time() * 60; // Cache min step increment
+		$first = $start * HOUR_IN_SECONDS + $day_start; // Timestamp of the first cell
+		$last = $end * HOUR_IN_SECONDS + $day_start; // Timestamp of the last cell
+		$min_step_time = $this->get_min_time() * MINUTE_IN_SECONDS; // Cache min step increment
 
 		if (appointments_use_legacy_duration_calculus()) {
 			$step = $min_step_time; // Timestamp increase interval to one cell ahead
