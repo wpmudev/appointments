@@ -1,16 +1,16 @@
 <table class="form-table">
-	<tr>
+	<tr class="appointment-create-page">
 		<th scope="row"><label for="make_an_appointment"><?php _e( 'Create an Appointment Page', 'appointments' ) ?></label></th>
 		<td>
-			<input type="checkbox" id="make_an_appointment" name="make_an_appointment" <?php checked( isset( $options["make_an_appointment"] ) && $options["make_an_appointment"] ); ?> />
 			&nbsp;<?php _e( 'with', 'appointments' ) ?>&nbsp;
 			<label for="app_page_type" class="screen-reader-text"><?php _e( 'Create an appointments date with this format', 'appointments' ); ?></label>
 			<select name="app_page_type" id="app_page_type">
 				<option value="one_month"><?php _e( 'current month\'s schedule', 'appointments' ) ?></option>
-				<option value="two_months" <?php selected( 'two_months' == @$options["app_page_type"] ); ?>><?php _e( 'current and next month\'s schedules', 'appointments' ) ?></option>
-				<option value="one_week" <?php selected( 'one_week' == @$options["app_page_type"] ); ?>><?php _e( 'current week\'s schedule', 'appointments' ) ?></option>
-				<option value="two_weeks" <?php selected( 'two_weeks' == @$options["app_page_type"] ); ?>><?php _e( 'current and next week\'s schedules', 'appointments' ) ?></option>
-			</select>
+				<option value="two_months" <?php selected( 'two_months' == @$options['app_page_type'] ); ?>><?php _e( 'current and next month\'s schedules', 'appointments' ) ?></option>
+				<option value="one_week" <?php selected( 'one_week' == @$options['app_page_type'] ); ?>><?php _e( 'current week\'s schedule', 'appointments' ) ?></option>
+				<option value="two_weeks" <?php selected( 'two_weeks' == @$options['app_page_type'] ); ?>><?php _e( 'current and next week\'s schedules', 'appointments' ) ?></option>
+            </select>
+            <a href="#" class="button" data-nonce="<?php echo wp_create_nonce( 'appointment-create-page' ); ?>"><?php esc_html_e( 'Create page!', 'appointments' ); ?></a>
 		</td>
 	</tr>
 
@@ -35,13 +35,13 @@
 				<option value="0" <?php selected( @$options['color_set'] == 0 ); ?>><?php _e( 'Custom', 'appointments' ) ?></option>
 			</select>
 
-			<p class="preset_samples" <?php if ( @$options['color_set'] == 0 ) echo 'style="display:none"' ?>>
-				<?php foreach ( $appointments->get_classes() as $class => $name ): ?>
+			<p class="preset_samples" <?php if ( @$options['color_set'] == 0 ) { echo 'style="display:none"'; } ?>>
+				<?php foreach ( $appointments->get_classes() as $class => $name ) :  ?>
 					<label>
 						<span> <?php echo $name ?>: </span>
 								<span>
-									<a href="javascript:void(0)" class="pickcolor <?php echo $class ?> hide-if-no-js" <?php if ( @$options['color_set'] != 0 )
-										echo 'style="background-color:#' . $appointments->get_preset( $class, $options['color_set'] ) . '"' ?>>
+									<a href="javascript:void(0)" class="pickcolor <?php echo $class ?> hide-if-no-js" <?php if ( @$options['color_set'] != 0 ) {
+										echo 'style="background-color:#' . $appointments->get_preset( $class, $options['color_set'] ) . '"'; } ?>>
 									</a>
 								</span>
 					</label>
@@ -51,15 +51,15 @@
 	</tr>
 
 
-	<tr class="custom_color_row" <?php if ( @$options['color_set'] != 0 ) echo 'style="display:none"' ?>>
+	<tr class="custom_color_row" <?php if ( @$options['color_set'] != 0 ) { echo 'style="display:none"'; } ?>>
 		<th scope="row"><?php _e( 'Custom Color Set', 'appointments' ) ?></th>
 		<td colspan="2">
-			<?php foreach ( $appointments->get_classes() as $class => $name ): ?>
+			<?php foreach ( $appointments->get_classes() as $class => $name ) :  ?>
 				<label style="width:31%;display:block;float:left;">
 					<span style="float:left"><?php echo $name ?>:</span>
 							<span style="float:left;margin-right:8px;">
-								<a href="javascript:void(0)" class="pickcolor hide-if-no-js" <?php if ( isset( $options[ $class . "_color" ] ) ) echo 'style="background-color:#' . $options[ $class . "_color" ] . '"' ?>></a>
-								<input style="width:50px" type="text" class="colorpicker_input" maxlength="6" name="<?php echo $class ?>_color" id="<?php echo $class ?>_color" value="<?php if ( isset( $options[ $class . "_color" ] ) ) echo $options[ $class . "_color" ] ?>"/>
+								<a href="javascript:void(0)" class="pickcolor hide-if-no-js" <?php if ( isset( $options[ $class . '_color' ] ) ) { echo 'style="background-color:#' . $options[ $class . '_color' ] . '"'; } ?>></a>
+								<input style="width:50px" type="text" class="colorpicker_input" maxlength="6" name="<?php echo $class ?>_color" id="<?php echo $class ?>_color" value="<?php if ( isset( $options[ $class . '_color' ] ) ) { echo $options[ $class . '_color' ]; } ?>"/>
 							</span>
 				</label>
 			<?php endforeach; ?>
@@ -71,17 +71,17 @@
 	<tr valign="top">
 		<th scope="row"><?php _e( 'Require these from the client:', 'appointments' ) ?></th>
 		<td colspan="2">
-			<input type="checkbox" id="ask_name" name="ask_name" <?php if ( isset( $options["ask_name"] ) && $options["ask_name"] ) echo 'checked="checked"' ?> />&nbsp;<label for="ask_name"><?php echo $appointments->get_field_name( 'name' ) ?></label>
+			<input type="checkbox" id="ask_name" name="ask_name" <?php if ( isset( $options['ask_name'] ) && $options['ask_name'] ) { echo 'checked="checked"'; } ?> />&nbsp;<label for="ask_name"><?php echo $appointments->get_field_name( 'name' ) ?></label>
 			&nbsp;&nbsp;&nbsp;
-			<input type="checkbox" id="ask_email" name="ask_email" <?php if ( isset( $options["ask_email"] ) && $options["ask_email"] ) echo 'checked="checked"' ?> />&nbsp;<label for="ask_email"><?php echo $appointments->get_field_name( 'email' ) ?></label>
+			<input type="checkbox" id="ask_email" name="ask_email" <?php if ( isset( $options['ask_email'] ) && $options['ask_email'] ) { echo 'checked="checked"'; } ?> />&nbsp;<label for="ask_email"><?php echo $appointments->get_field_name( 'email' ) ?></label>
 			&nbsp;&nbsp;&nbsp;
-			<input type="checkbox" id="ask_phone" name="ask_phone" <?php if ( isset( $options["ask_phone"] ) && $options["ask_phone"] ) echo 'checked="checked"' ?> />&nbsp;<label for="ask_phone"><?php echo $appointments->get_field_name( 'phone' ) ?></label>
+			<input type="checkbox" id="ask_phone" name="ask_phone" <?php if ( isset( $options['ask_phone'] ) && $options['ask_phone'] ) { echo 'checked="checked"'; } ?> />&nbsp;<label for="ask_phone"><?php echo $appointments->get_field_name( 'phone' ) ?></label>
 			&nbsp;&nbsp;&nbsp;
-			<input type="checkbox" id="ask_address" name="ask_address" <?php if ( isset( $options["ask_address"] ) && $options["ask_address"] ) echo 'checked="checked"' ?> />&nbsp;<label for="ask_address"><?php echo $appointments->get_field_name( 'address' ) ?></label>
+			<input type="checkbox" id="ask_address" name="ask_address" <?php if ( isset( $options['ask_address'] ) && $options['ask_address'] ) { echo 'checked="checked"'; } ?> />&nbsp;<label for="ask_address"><?php echo $appointments->get_field_name( 'address' ) ?></label>
 			&nbsp;&nbsp;&nbsp;
-			<input type="checkbox" id="ask_city" name="ask_city" <?php if ( isset( $options["ask_city"] ) && $options["ask_city"] ) echo 'checked="checked"' ?> />&nbsp;<label for="ask_city"><?php echo $appointments->get_field_name( 'city' ) ?></label>
+			<input type="checkbox" id="ask_city" name="ask_city" <?php if ( isset( $options['ask_city'] ) && $options['ask_city'] ) { echo 'checked="checked"'; } ?> />&nbsp;<label for="ask_city"><?php echo $appointments->get_field_name( 'city' ) ?></label>
 			&nbsp;&nbsp;&nbsp;
-			<input type="checkbox" id="ask_note" name="ask_note" <?php if ( isset( $options["ask_note"] ) && $options["ask_note"] ) echo 'checked="checked"' ?> />&nbsp;<label for="ask_note"><?php echo $appointments->get_field_name( 'note' ) ?></label>
+			<input type="checkbox" id="ask_note" name="ask_note" <?php if ( isset( $options['ask_note'] ) && $options['ask_note'] ) { echo 'checked="checked"'; } ?> />&nbsp;<label for="ask_note"><?php echo $appointments->get_field_name( 'note' ) ?></label>
 			&nbsp;&nbsp;&nbsp;
 			<br/>
 			<p class="description"><?php _e( 'The selected fields will be available in the confirmation area and they will be asked from the client. If selected, filling of them is mandatory (except note field).', 'appointments' ) ?></p>

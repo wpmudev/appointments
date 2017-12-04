@@ -34,6 +34,10 @@ class Appointments_Admin {
 		$this->user_profile = new Appointments_Admin_User_Profile();
 
 		include( APP_PLUGIN_DIR . '/admin/admin-helpers.php' );
+		/**
+		 * Add page with shortcode.
+		 */
+		add_action( 'wp_ajax_make_an_appointment_page', array( $this, 'make_an_appointment_page' ) );
 	}
 
 	private function includes() {
@@ -420,5 +424,47 @@ class Appointments_Admin {
 		);
 
 		return array_merge( $plugin_links, $links );
+	}
+
+
+	/**
+	 * make an Appointment page
+	 *
+	 * @since 2.2.4
+	 */
+	public function make_an_appointment_page() {
+		$data = array(
+			'message' => __( 'Something went wrong!', 'appointments' ),
+		);
+		if (
+			! isset( $_POST['_wpnonce'] )
+			|| ! isset( $_POST['app_page_type'] )
+			|| ! wp_verify_nonce( $_POST['_wpnonce'], 'appointment-create-page' )
+		) {
+			wp_send_json_error( $data );
+		}
+		$tpl = ! empty( $_POST['app_page_type'] ) ? $_POST['app_page_type'] : false;
+		$page_id = wp_insert_post(
+			array(
+				'post_title'	=> __( 'Make an Appointment', 'appointments' ),
+				'post_status'	=> 'publish',
+				'post_type'		=> 'page',
+				'post_content'	=> App_Template::get_default_page_template( $tpl ),
+			)
+		);
+		if ( $page_id ) {
+			$data = array(
+				'message' => sprintf(
+					__( 'Page was created successfuly: %s', 'appointments' ),
+					sprintf(
+						'<a href="%s">%s</a>',
+						esc_url( get_page_link( $page_id ) ),
+						esc_html__( 'View page', 'appointments' )
+					)
+				),
+			);
+			wp_send_json_success( $data );
+		}
+		wp_send_json_error( $data );
 	}
 }
