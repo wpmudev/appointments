@@ -200,33 +200,28 @@ function appointments_get_weekly_schedule_slots( $now = false, $service_id = 0, 
 
 	// These are the time slots for every day in the week
 	$time_slots = $start_hours = array();
-	
+
 	if ( $worker_id && appointments_is_worker( $worker_id ) ) {
 		$start_hours = appointments_get_worker_weekly_start_hours( $service_id, $worker_id, $location_id );
 	} else {
-
 		$workers = array();
 		if ( $service_id ) {
 			$workers = appointments_get_workers_by_service( $service_id );
 		} else {
 			$workers = appointments_get_all_workers();
 		}
-
-		if( empty( $workers ) ){
-
+		if ( empty( $workers ) ) {
 			for ( $time = $day_start_timestamp; $time < $day_end_timestamp; $time = $time + $step ) {
 				$time_slots[] = array(
 					'from' => date( 'H:i', $time ),
-					'to' => date( 'H:i', $time + $step )
+					'to' => date( 'H:i', $time + $step ),
 				);
 			}
-		}
-		else{
+		} else {
 			foreach ( $workers as $worker ) {
 				$start_hours = array_merge( $time_slots , appointments_get_worker_weekly_start_hours( $service_id, $worker_id, $location_id ) );
 			}
 		}
-		
 	}
 
 	if ( ! empty( $start_hours ) ) {
@@ -278,12 +273,12 @@ function appointments_get_worker_weekly_start_hours( $service_id = 0, $worker_id
 	$worker_working_hours = appointments_get_worker_working_hours( 'open', $worker_id, $location_id );
 	$service = appointments_get_service( $service_id );
 
-	if( $service ){
+	if ( $service ) {
 		$duration = $service->duration * MINUTE_IN_SECONDS;
 	}
 
 	$service = appointments_get_service( $service_id );
-	if( $service ){
+	if ( $service ) {
 		$duration = $service->duration * MINUTE_IN_SECONDS;
 	}
 
@@ -297,13 +292,13 @@ function appointments_get_worker_weekly_start_hours( $service_id = 0, $worker_id
 				continue;
 			}
 
-			for( $start_time = $open_hours['start']; $start_time < $open_hours['end']; $start_time = date("H:i", strtotime('+' . $step . ' seconds', strtotime( $start_time ) ) ) ){
-				$end_slot = date("H:i", strtotime('+' . $duration . ' seconds', strtotime( $start_time ) ) );
-				if( $end_slot > $open_hours['end'] ){
+			for ( $start_time = $open_hours['start']; $start_time < $open_hours['end']; $start_time = date( 'H:i', strtotime( '+' . $duration . ' seconds', strtotime( $start_time ) ) ) ) {
+				$end_slot = date( 'H:i', strtotime( '+' . $duration . ' seconds', strtotime( $start_time ) ) );
+				if ( $end_slot > $open_hours['end'] ) {
 					break;
 				}
 
-				if( ! in_array( $start_time, $slot_starts ) ){
+				if ( ! in_array( $start_time, $slot_starts ) ) {
 					$slot_starts[] = $start_time;
 				}
 			}
@@ -685,7 +680,7 @@ function appointments_weekly_calendar( $date = false, $args = array() ) {
 	$current_time = current_time( 'timestamp' );
 	$defaults = array(
 		'service_id' => 0,
-		'worker_id' => 0,
+		'workers' => array(),
 		'location_id' => 0,
 		'class' => '',
 		'long' => false,
@@ -693,13 +688,15 @@ function appointments_weekly_calendar( $date = false, $args = array() ) {
 	);
 	$args = wp_parse_args( $args, $defaults );
 
+	$args['worker_id'] = $args['workers'][0];
+
 	$schedule_key = sprintf( '%sx%s', $date, $date + ( 7 * 86400 ) );
 
 	$tbl_class = esc_attr( $args['class'] );
-	$tbl_class = $tbl_class ? "class='{$tbl_class}'" : '';
 
 	$slots = appointments_get_weekly_schedule_slots( $date, $args['service_id'], $args['worker_id'], $args['location_id'] );
 	$working_days = $appointments->get_working_days( $args['worker_id'], $args['location_id'] ); // Get an array of working days
+
 	$capacity = $appointments->get_capacity();
 	$options = appointments_get_options();
 
@@ -707,7 +704,7 @@ function appointments_weekly_calendar( $date = false, $args = array() ) {
 	?>
 	<a name="app_schedule">&nbsp;</a>
 	<?php do_action( 'app_schedule_before_table', '' ); ?>
-	<table width='100%' <?php echo $tbl_class; ?>>
+	<table width="100%" class="appointments-weekly-calendar-table <?php echo $tbl_class; ?>">
 		<thead>
 			<tr>
 				<th class="hourmin_column">&nbsp;</th>
@@ -740,6 +737,8 @@ function appointments_weekly_calendar( $date = false, $args = array() ) {
 								$schedule_key
 							);
 
+							$class_name = 'free';
+
 							if ( $current_time > $datetime_start && $current_time < $datetime_end ) {
 								$class_name = 'notpossible now';
 							} // Mark passed hours
@@ -752,25 +751,49 @@ function appointments_weekly_calendar( $date = false, $args = array() ) {
 							) {
 								$class_name = 'notpossible app_blocked';
 							} // Check today is holiday
-							else if ( appointments_is_worker_holiday( $args['worker_id'], $datetime_start, $datetime_end ) ) {
-								$class_name = 'notpossible app_holiday';
-							} // Check if we are working today
-							else if ( ! in_array( date( 'l', $datetime_start ), $working_days ) && ! appointments_is_exceptional_working_day( $datetime_start, $datetime_end, $args['worker_id'],$args['location_id'] ) ) {
-								$class_name = 'notpossible notworking';
-							} // Check if this is break
-							else if ( appointments_is_interval_break( $datetime_start, $datetime_end, $args['worker_id'] ) ) {
-								$class_name = 'notpossible app_break';
-							} // Then look for appointments
-							else if ( $is_busy ) {
-								$class_name = 'busy';
-							} // Then check if we have enough time to fulfill this app
-							else if ( ! $appointments->is_service_possible( $datetime_start, $datetime_end, $capacity ) ) {
-								$class_name = 'notpossible service_notpossible';
-							} // If nothing else, then it must be free
 							else {
-								$class_name = 'free';
+								$is_working_day = false;
+								foreach ( $args['workers'] as $worker_id ) {
+									if ( $is_working_day ) {
+										continue;
+									}
+									$is_holiday = appointments_is_worker_holiday( $worker_id, $datetime_start, $datetime_end );
+									$is_working_day = ! $is_holiday;
+								}
+								if ( ! $is_working_day ) {
+									$class_name = 'notpossible app_holiday';
+								} // Check if we are working today
+								else {
+									$somebody_work = false;
+									foreach ( $args['workers'] as $worker_id ) {
+										if ( $somebody_work ) {
+											continue;
+										}
+										$somebody_work = appointments_is_exceptional_working_day( $datetime_start, $datetime_end, $worker_id, $args['location_id'] );
+									}
+									if ( ! in_array( date( 'l', $datetime_start ), $working_days ) && $somebody_work ) {
+										$class_name = 'notpossible notworking';
+									} // Check if this is break
+									else {
+										$somebody_work = false;
+										foreach ( $args['workers'] as $worker_id ) {
+											if ( $somebody_work ) {
+												continue;
+											}
+											$somebody_work = ! appointments_is_interval_break( $datetime_start, $datetime_end, $worker_id );
+										}
+										if ( ! $somebody_work ) {
+											$class_name = 'notpossible app_break';
+										} // Then look for appointments
+										else if ( $is_busy ) {
+											$class_name = 'busy';
+										} // Then check if we have enough time to fulfill this app
+										else if ( ! $appointments->is_service_possible( $datetime_start, $datetime_end, $capacity ) ) {
+											$class_name = 'notpossible service_notpossible';
+										} // If nothing else, then it must be free
+									}
+								}
 							}
-
 							$class_name = apply_filters( 'app_class_name', $class_name, $datetime_start, $datetime_end );
 						?>
 						<td class="app_week_timetable_cell <?php echo esc_attr( $class_name ); ?>" title="<?php echo esc_attr( $title ); ?>">
