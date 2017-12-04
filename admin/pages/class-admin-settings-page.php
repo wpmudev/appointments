@@ -11,7 +11,7 @@ class Appointments_Admin_Settings_Page {
 			__( 'Appointments Settings', 'appointments' ),
 			__( 'Settings', 'appointments' ),
 			App_Roles::get_capability( 'manage_options', App_Roles::CTX_PAGE_SETTINGS ),
-			"app_settings",
+			'app_settings',
 			array( &$this, 'render' )
 		);
 
@@ -46,16 +46,16 @@ class Appointments_Admin_Settings_Page {
 				'display' => __( 'Display', 'appointments' ),
 				'payments' => __( 'Payments', 'appointments' ),
 				'notifications' => __( 'Notifications', 'appointments' ),
-				'advanced' => __( 'Advanced', 'appointments' )
+				'advanced' => __( 'Advanced', 'appointments' ),
 			),
 			'services' => array(
 				'services' => __( 'Services', 'appointments' ),
-				'new-service' => __( 'Add new Service', 'appointments' )
+				'new-service' => __( 'Add new Service', 'appointments' ),
 			),
 			'workers' => array(
 				'workers' => __( 'Service Providers', 'appointments' ),
-				'new-worker' => __( 'Add new Service Provider', 'appointments' )
-			)
+				'new-worker' => __( 'Add new Service Provider', 'appointments' ),
+			),
 		);
 
 		return apply_filters( 'appointments_settings_sections', $sections );
@@ -95,7 +95,7 @@ class Appointments_Admin_Settings_Page {
 				'classes' => $classes,
 				'presets' => $presets,
 				'messages' => array(
-					'select_service_provider' => __('Please, select at least one service provided', 'appointments' ),
+					'select_service_provider' => __( 'Please, select at least one service provided', 'appointments' ),
 				),
 			));
 			return $content;
@@ -160,18 +160,18 @@ class Appointments_Admin_Settings_Page {
 		<div class="wrap appointments-settings">
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 
-			<?php if ( isset( $_GET['updated'] ) ): ?>
+			<?php if ( isset( $_GET['updated'] ) ) :  ?>
 				<div class="updated"><p><?php _e( 'Settings updated', 'appointments' ); ?></p></div>
 			<?php endif; ?>
 			<h2 class="nav-tab-wrapper">
-				<?php foreach ( $tabs as $stub => $title ): ?>
+				<?php foreach ( $tabs as $stub => $title ) :  ?>
 					<a href="<?php echo esc_url( $this->_get_tab_link( $stub ) ); ?>" class="nav-tab <?php echo $stub == $tab ? 'nav-tab-active' : ''; ?>" id="app_tab_<?php echo $stub; ?>">
 						<?php echo esc_html( $title ); ?>
 					</a>
 				<?php endforeach; ?>
 			</h2>
 
-			<?php $this->admin_settings_tab($tab); ?>
+			<?php $this->admin_settings_tab( $tab ); ?>
 
 		</div>
 		<?php
@@ -183,7 +183,7 @@ class Appointments_Admin_Settings_Page {
 		$sections = $this->get_tab_sections( $tab );
 
 		$callback_tabs = array(
-			'addons' => array('App_AddonHandler', 'create_addon_settings'),
+			'addons' => array( 'App_AddonHandler', 'create_addon_settings' ),
 		);
 
 		echo $sections_markup;
@@ -194,8 +194,7 @@ class Appointments_Admin_Settings_Page {
 		echo '<div class="appointments-settings-tab-' . $tab . '">';
 		if ( $file ) {
 			require_once( $file );
-		}
-		else {
+		} else {
 			do_action( 'app-settings-tabs', $tab, $sections );
 			do_action( "appointments-settings-tab-{$tab}", $sections );
 		}
@@ -218,7 +217,6 @@ class Appointments_Admin_Settings_Page {
 			wp_redirect( remove_query_arg( array( 'addon', '_wpnonce', 'action' ) ) );
 			exit;
 		}
-
 
 		$action = isset( $_REQUEST['action_app'] ) ? $_REQUEST['action_app'] : false;
 		if ( ! $action ) {
@@ -260,14 +258,14 @@ class Appointments_Admin_Settings_Page {
 			case 'save_log': {
 				$this->_delete_logs();
 			}
-		}
-		
-		do_action( 'appointments_save_settings', $action );
+			}
 
-		$redirect_to = $redirect_to ? $redirect_to : add_query_arg( 'updated', 1 );
-		// Redirecting when saving options
-		wp_redirect( $redirect_to );
-		die;
+			do_action( 'appointments_save_settings', $action );
+
+			$redirect_to = $redirect_to ? $redirect_to : add_query_arg( 'updated', 1 );
+			// Redirecting when saving options
+			wp_redirect( $redirect_to );
+			die;
 	}
 
 
@@ -277,14 +275,12 @@ class Appointments_Admin_Settings_Page {
 			if ( ! is_array( $_REQUEST['addon'] ) ) {
 				check_admin_referer( 'activate-addon' );
 				Appointments_Addon::activate_addon( $_REQUEST['addon'] );
-			}
-			else {
+			} else {
 				check_admin_referer( 'bulk-addons' );
 				foreach ( $_REQUEST['addon'] as $slug ) {
 					Appointments_Addon::activate_addon( $slug );
 				}
 			}
-
 		}
 
 		if ( 'deactivate' === $action && isset( $_REQUEST['addon'] ) ) {
@@ -292,14 +288,12 @@ class Appointments_Admin_Settings_Page {
 			if ( ! is_array( $_REQUEST['addon'] ) ) {
 				check_admin_referer( 'deactivate-addon' );
 				Appointments_Addon::deactivate_addon( $_REQUEST['addon'] );
-			}
-			else {
+			} else {
 				check_admin_referer( 'bulk-addons' );
 				foreach ( $_REQUEST['addon'] as $slug ) {
 					Appointments_Addon::deactivate_addon( $slug );
 				}
 			}
-
 		}
 	}
 
@@ -307,50 +301,50 @@ class Appointments_Admin_Settings_Page {
 		$options = appointments_get_options();
 		$appointments = appointments();
 
-		$options["min_time"]					= $_POST["min_time"];
-		$options["additional_min_time"]		= trim( $_POST["additional_min_time"] );
-		$options["admin_min_time"]			= $_POST["admin_min_time"];
-		$options["app_lower_limit"]			= trim( $_POST["app_lower_limit"] );
-		$options["app_limit"]					= trim( $_POST["app_limit"] );
-		$options["clear_time"]				= trim( $_POST["clear_time"] );
-		$options["spam_time"]					= trim( $_POST["spam_time"] );
-		$options["auto_confirm"]				= $_POST["auto_confirm"];
-		$options["allow_worker_wh"]			= $_POST["allow_worker_wh"];
-		$options["allow_worker_confirm"]		= $_POST["allow_worker_confirm"];
-		$options["allow_overwork"]			= $_POST["allow_overwork"];
-		$options["allow_overwork_break"]		= $_POST["allow_overwork_break"];
-        $options["keep_options_on_uninstall"]	= isset( $_POST["keep_options_on_uninstall"] );
+		$options['min_time']					= $_POST['min_time'];
+		$options['additional_min_time']		= trim( $_POST['additional_min_time'] );
+		$options['admin_min_time']			= $_POST['admin_min_time'];
+		$options['app_lower_limit']			= trim( $_POST['app_lower_limit'] );
+		$options['app_limit']					= trim( $_POST['app_limit'] );
+		$options['clear_time']				= trim( $_POST['clear_time'] );
+		$options['spam_time']					= trim( $_POST['spam_time'] );
+		$options['auto_confirm']				= $_POST['auto_confirm'];
+		$options['allow_worker_wh']			= $_POST['allow_worker_wh'];
+		$options['allow_worker_confirm']		= $_POST['allow_worker_confirm'];
+		$options['allow_overwork']			= $_POST['allow_overwork'];
+		$options['allow_overwork_break']		= $_POST['allow_overwork_break'];
+		$options['keep_options_on_uninstall']	= isset( $_POST['keep_options_on_uninstall'] );
 
-		$assigned_to = isset( $_POST["dummy_assigned_to"] ) ? $_POST["dummy_assigned_to"] : 0;
+		$assigned_to = isset( $_POST['dummy_assigned_to'] ) ? $_POST['dummy_assigned_to'] : 0;
 		$worker = appointments_get_worker( $assigned_to );
 		$is_dummy = is_a( 'Appointments_Worker', $worker ) && $worker->is_dummy();
-		$options["dummy_assigned_to"]			= ! $is_dummy ? $assigned_to : 0;
+		$options['dummy_assigned_to']			= ! $is_dummy ? $assigned_to : 0;
 
-		$options["login_required"]			= $_POST["login_required"];
-		$options["accept_api_logins"]			= isset( $_POST["accept_api_logins"] );
-		$options["facebook-no_init"]			= isset( $_POST["facebook-no_init"] );
+		$options['login_required']			= $_POST['login_required'];
+		$options['accept_api_logins']			= isset( $_POST['accept_api_logins'] );
+		$options['facebook-no_init']			= isset( $_POST['facebook-no_init'] );
 		$options['facebook-app_id']			= trim( $_POST['facebook-app_id'] );
 		$options['twitter-app_id']			= trim( $_POST['twitter-app_id'] );
 		$options['twitter-app_secret']		= trim( $_POST['twitter-app_secret'] );
 
-		$options["app_page_type"]				= $_POST["app_page_type"];
-		$options["show_legend"]				= $_POST["show_legend"];
-		$options["color_set"]					= $_POST["color_set"];
-		foreach ( $appointments->get_classes() as $class=>$name ) {
-			$options[$class."_color"]			= $_POST[$class."_color"];
+		$options['app_page_type']				= $_POST['app_page_type'];
+		$options['show_legend']				= $_POST['show_legend'];
+		$options['color_set']					= $_POST['color_set'];
+		foreach ( $appointments->get_classes() as $class => $name ) {
+			$options[ $class.'_color' ]			= $_POST[ $class.'_color' ];
 		}
-		$options["ask_name"]					= isset( $_POST["ask_name"] );
-		$options["ask_email"]					= isset( $_POST["ask_email"] );
-		$options["ask_phone"]					= isset( $_POST["ask_phone"] );
-		$options["ask_phone"]					= isset( $_POST["ask_phone"] );
-		$options["ask_address"]				= isset( $_POST["ask_address"] );
-		$options["ask_city"]					= isset( $_POST["ask_city"] );
-		$options["ask_note"]					= isset( $_POST["ask_note"] );
-		$options["additional_css"]			= trim( stripslashes_deep($_POST["additional_css"]) );
+		$options['ask_name']					= isset( $_POST['ask_name'] );
+		$options['ask_email']					= isset( $_POST['ask_email'] );
+		$options['ask_phone']					= isset( $_POST['ask_phone'] );
+		$options['ask_phone']					= isset( $_POST['ask_phone'] );
+		$options['ask_address']				= isset( $_POST['ask_address'] );
+		$options['ask_city']					= isset( $_POST['ask_city'] );
+		$options['ask_note']					= isset( $_POST['ask_note'] );
+		$options['additional_css']			= trim( stripslashes_deep( $_POST['additional_css'] ) );
 
-		$options["payment_required"]			= $_POST["payment_required"];
-		$options["percent_deposit"]			= trim( str_replace( '%', '', $_POST["percent_deposit"] ) );
-		$options["fixed_deposit"]				= trim( str_replace( $options["currency"], '', $_POST["fixed_deposit"] ) );
+		$options['payment_required']			= $_POST['payment_required'];
+		$options['percent_deposit']			= trim( str_replace( '%', '', $_POST['percent_deposit'] ) );
+		$options['fixed_deposit']				= trim( str_replace( $options['currency'], '', $_POST['fixed_deposit'] ) );
 
 		/*
 		 * Membership plugin is replaced by Membership2. Old options are
@@ -359,31 +353,31 @@ class Appointments_Admin_Settings_Page {
 		if ( class_exists( 'M_Membership' ) ) {
 			$options['members_no_payment']	= isset( $_POST['members_no_payment'] ); // not used??
 			$options['members_discount']		= trim( str_replace( '%', '', $_POST['members_discount'] ) );
-			$options['members']				= maybe_serialize( @$_POST["members"] );
+			$options['members']				= maybe_serialize( @$_POST['members'] );
 		}
 
 		$options['currency'] 					= $_POST['currency'];
 		$options['mode'] 						= $_POST['mode'];
 		$options['merchant_email'] 			= trim( $_POST['merchant_email'] );
 		$options['return'] 					= $_POST['return'];
-		$options['allow_free_autoconfirm'] 	= !empty($_POST['allow_free_autoconfirm']);
+		$options['allow_free_autoconfirm'] 	= ! empty( $_POST['allow_free_autoconfirm'] );
 
-		$options["send_confirmation"]			= $_POST["send_confirmation"];
-		$options["send_notification"]			= @$_POST["send_notification"];
-		$options["confirmation_subject"]		= stripslashes_deep( $_POST["confirmation_subject"] );
-		$options["confirmation_message"]		= stripslashes_deep( $_POST["confirmation_message"] );
-		$options["send_reminder"]				= $_POST["send_reminder"];
-		$options["reminder_time"]				= str_replace( " ", "", $_POST["reminder_time"] );
-		$options["send_reminder_worker"]		= $_POST["send_reminder_worker"];
-		$options["reminder_time_worker"]		= str_replace( " ", "", $_POST["reminder_time_worker"] );
-		$options["reminder_subject"]			= stripslashes_deep( $_POST["reminder_subject"] );
-		$options["reminder_message"]			= stripslashes_deep( $_POST["reminder_message"] );
+		$options['send_confirmation']			= $_POST['send_confirmation'];
+		$options['send_notification']			= @$_POST['send_notification'];
+		$options['confirmation_subject']		= stripslashes_deep( $_POST['confirmation_subject'] );
+		$options['confirmation_message']		= stripslashes_deep( $_POST['confirmation_message'] );
+		$options['send_reminder']				= $_POST['send_reminder'];
+		$options['reminder_time']				= str_replace( ' ', '', $_POST['reminder_time'] );
+		$options['send_reminder_worker']		= $_POST['send_reminder_worker'];
+		$options['reminder_time_worker']		= str_replace( ' ', '', $_POST['reminder_time_worker'] );
+		$options['reminder_subject']			= stripslashes_deep( $_POST['reminder_subject'] );
+		$options['reminder_message']			= stripslashes_deep( $_POST['reminder_message'] );
 
-		$options["send_removal_notification"] = $_POST["send_removal_notification"];
-		$options["removal_notification_subject"] = stripslashes_deep( $_POST["removal_notification_subject"] );
-		$options["removal_notification_message"] = stripslashes_deep( $_POST["removal_notification_message"] );
+		$options['send_removal_notification'] = $_POST['send_removal_notification'];
+		$options['removal_notification_subject'] = stripslashes_deep( $_POST['removal_notification_subject'] );
+		$options['removal_notification_message'] = stripslashes_deep( $_POST['removal_notification_message'] );
 
-		$options["log_emails"]				= $_POST["log_emails"];
+		$options['log_emails']				= $_POST['log_emails'];
 
 		$options['disable_js_check_admin']	= isset( $_POST['disable_js_check_admin'] );
 		$options['disable_js_check_frontend']	= isset( $_POST['disable_js_check_frontend'] );
@@ -392,30 +386,19 @@ class Appointments_Admin_Settings_Page {
 		$options['cancel_page'] 				= @$_POST['cancel_page'];
 		$options['thank_page'] 				= @$_POST['thank_page'];
 
-		$options = apply_filters('app-options-before_save', $options);
+		$options = apply_filters( 'app-options-before_save', $options );
 
 		appointments_update_options( $options );
 
 		// Flush cache
 		appointments_clear_cache();
 
-		if ( isset( $_POST['make_an_appointment'] ) ) {
-			$tpl = !empty($_POST['app_page_type']) ? $_POST['app_page_type'] : false;
-			wp_insert_post(
-				array(
-					'post_title'	=> 'Make an Appointment',
-					'post_status'	=> 'publish',
-					'post_type'		=> 'page',
-					'post_content'	=> App_Template::get_default_page_template($tpl)
-				)
-			);
-		}
 	}
 
 	private function _save_working_hours() {
 		// Save Working Hours
 		$appointments = appointments();
-		$location = (int)$_POST['location'];
+		$location = (int) $_POST['location'];
 		foreach ( array( 'closed', 'open' ) as $stat ) {
 			appointments_update_worker_working_hours( $appointments->worker, $_POST[ $stat ], $stat, $location );
 		}
@@ -423,12 +406,12 @@ class Appointments_Admin_Settings_Page {
 
 	private function _save_exceptions() {
 		// Save Exceptions
-		$location = (int)$_POST['location'];
+		$location = (int) $_POST['location'];
 		$worker_id = absint( $_POST['worker_id'] );
 		check_admin_referer( 'app_settings_exceptions-' . $worker_id, 'app_exceptions_nonce' );
 
 		foreach ( array( 'closed', 'open' ) as $stat ) {
-			$exceptions = $this->_sort( $_POST[$stat]["exceptional_days"] );
+			$exceptions = $this->_sort( $_POST[ $stat ]['exceptional_days'] );
 			appointments_update_worker_exceptions( $worker_id, $stat, $exceptions, $location );
 		}
 	}
@@ -439,27 +422,26 @@ class Appointments_Admin_Settings_Page {
 			return;
 		}
 
-		do_action('app-services-before_save');
+		do_action( 'app-services-before_save' );
 
-		foreach ( $_POST["services"] as $ID => $service ) {
-			if ( '' != trim( $service["name"] ) ) {
+		foreach ( $_POST['services'] as $ID => $service ) {
+			if ( '' != trim( $service['name'] ) ) {
 				// Update or insert?
 				$_service = appointments_get_service( $ID );
 				if ( $_service ) {
 					$args = array(
-						'name'		=> $service["name"],
-						'capacity'	=> (int)$service["capacity"],
-						'duration'	=> $service["duration"],
-						'price'		=> $service["price"],
-						'page'		=> $service["page"]
+						'name'		=> $service['name'],
+						'capacity'	=> (int) $service['capacity'],
+						'duration'	=> $service['duration'],
+						'price'		=> $service['price'],
+						'page'		=> $service['page'],
 					);
 
 					appointments_update_service( $ID, $args );
 				}
 
-				do_action('app-services-service-updated', $ID);
-			}
-			else {
+				do_action( 'app-services-service-updated', $ID );
+			} else {
 				// Entering an empty name means deleting of a service
 				appointments_delete_service( $ID );
 			}
@@ -472,8 +454,8 @@ class Appointments_Admin_Settings_Page {
 			'name' => sanitize_text_field( $_POST['service_name'] ),
 			'capacity' => absint( $_POST['service_capacity'] ),
 			'duration' => absint( $_POST['service_duration'] ),
-			'price' => sanitize_text_field( $_POST['service_price']),
-			'page' => absint( $_POST['service_page'] )
+			'price' => sanitize_text_field( $_POST['service_price'] ),
+			'page' => absint( $_POST['service_page'] ),
 		);
 		$app_id = appointments_insert_service( $args );
 		if ( is_wp_error( $app_id ) ) {
@@ -488,17 +470,17 @@ class Appointments_Admin_Settings_Page {
 	}
 
 	private function _add_worker() {
-		if ( empty(  $_POST["services_provided"] ) ) {
+		if ( empty( $_POST['services_provided'] ) ) {
 			wp_die( __( 'Please, select at least one service provided', 'appointments' ) );
 		}
 
 		// Insert
 		$args = array(
-			'ID'				=> $_POST["user"],
-			'price'				=> sanitize_text_field( $_POST['price']),
-			'services_provided'	=> $_POST["services_provided"],
-			'page'				=> absint( $_POST["worker_page"] ),
-			'dummy'				=> isset ( $_POST["dummy"] )
+			'ID'				=> $_POST['user'],
+			'price'				=> sanitize_text_field( $_POST['price'] ),
+			'services_provided'	=> $_POST['services_provided'],
+			'page'				=> absint( $_POST['worker_page'] ),
+			'dummy'				=> isset( $_POST['dummy'] ),
 		);
 		$worker_id = appointments_insert_worker( $args );
 
@@ -511,17 +493,17 @@ class Appointments_Admin_Settings_Page {
 
 	private function _save_workers() {
 		// Save Workers
-		if ( ! is_array( $_POST["workers"] ) ) {
+		if ( ! is_array( $_POST['workers'] ) ) {
 			return;
 		}
 
-		foreach ( $_POST["workers"] as $worker_id => $worker ) {
-			$new_worker_id = absint( $worker["user"] );
+		foreach ( $_POST['workers'] as $worker_id => $worker ) {
+			$new_worker_id = absint( $worker['user'] );
 			$worker_id = absint( $worker_id );
 
 			if ( appointments_is_worker( $worker_id ) ) {
 				// Update
-				if ( ( $new_worker_id != $worker_id ) && ! empty ( $worker["services_provided"] ) ) {
+				if ( ( $new_worker_id != $worker_id ) && ! empty( $worker['services_provided'] ) ) {
 					// We are trying to chage the user ID
 					$count = appointments_get_worker( $new_worker_id );
 
@@ -530,36 +512,32 @@ class Appointments_Admin_Settings_Page {
 						// Otherwise, change the ID
 						$args = array(
 							'ID' => $new_worker_id,
-							'price' => $worker["price"],
-							'services_provided' => $worker["services_provided"],
-							'dummy' => isset( $worker["dummy"] ),
-							'page' => $worker['page']
+							'price' => $worker['price'],
+							'services_provided' => $worker['services_provided'],
+							'dummy' => isset( $worker['dummy'] ),
+							'page' => $worker['page'],
 						);
 						appointments_update_worker( $worker_id, $args );
 					}
-				}
-				elseif ( ( $new_worker_id == $worker_id ) && ! empty ( $worker["services_provided"] ) ) {
+				} elseif ( ( $new_worker_id == $worker_id ) && ! empty( $worker['services_provided'] ) ) {
 					// Do not change user ID but update
 					$args = array(
-						'price' => $worker["price"],
-						'services_provided' => $worker["services_provided"],
-						'dummy' => isset( $worker["dummy"] ),
-						'page' => $worker['page']
+						'price' => $worker['price'],
+						'services_provided' => $worker['services_provided'],
+						'dummy' => isset( $worker['dummy'] ),
+						'page' => $worker['page'],
 					);
 					appointments_update_worker( $worker_id, $args );
-				}
-				elseif ( empty( $worker["services_provided"] ) ) {
+				} elseif ( empty( $worker['services_provided'] ) ) {
 					appointments_delete_worker( $worker_id );
 				}
 
 				do_action( 'app-workers-worker-updated', $worker_id );
 			}
-
-
 		}
 	}
 
-	private function _delete_logs(){
+	private function _delete_logs() {
 		$appointments = appointments();
 		@unlink( $appointments->log_file );
 	}
@@ -570,8 +548,8 @@ class Appointments_Admin_Settings_Page {
 	 *	@since 1.2
 	 */
 	function _sort( $input ) {
-		if ( strpos( $input, ',') === false )
-			return $input;
+		if ( strpos( $input, ',' ) === false ) {
+			return $input; }
 		$temp = explode( ',', $input );
 		sort( $temp );
 		return implode( ',', $temp );
@@ -582,5 +560,4 @@ class Appointments_Admin_Settings_Page {
 		$services = appointments_get_services();
 		$workers = appointments_get_workers();
 	}
-
 }
