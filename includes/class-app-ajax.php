@@ -722,6 +722,7 @@ class Appointments_AJAX {
 
 
 					$args = array(
+						'app_ID' => $_POST['custom'],
 						'paypal_ID' => $_POST['txn_id'],
 						'stamp' => $timestamp,
 						'total_amount' => $amount,
@@ -731,7 +732,7 @@ class Appointments_AJAX {
 					);
 
 					$transaction = appointments_get_transaction( $_POST['custom'] );
-					if ( ! $transaction ) {
+					if ( $transaction ) {
 						appointments_update_transaction( $_POST['custom'], $args );
 					}
 					else {
@@ -753,6 +754,7 @@ class Appointments_AJAX {
 					$currency = $_POST['mc_currency'];
 
 					$args = array(
+						'app_ID' => $_POST['custom'],
 						'paypal_ID' => $_POST['txn_id'],
 						'stamp' => $timestamp,
 						'total_amount' => $amount,
@@ -762,7 +764,7 @@ class Appointments_AJAX {
 					);
 
 					$transaction = appointments_get_transaction( $_POST['custom'] );
-					if ( ! $transaction ) {
+					if ( $transaction ) {
 						appointments_update_transaction( $_POST['custom'], $args );
 					}
 					else {
@@ -777,6 +779,7 @@ class Appointments_AJAX {
 					$currency = $_POST['mc_currency'];
 
 					$args = array(
+						'app_ID' => $_POST['custom'],
 						'paypal_ID' => $_POST['txn_id'],
 						'stamp' => $timestamp,
 						'total_amount' => $amount,
@@ -786,7 +789,7 @@ class Appointments_AJAX {
 					);
 
 					$transaction = appointments_get_transaction( $_POST['custom'] );
-					if ( ! $transaction ) {
+					if ( $transaction ) {
 						appointments_update_transaction( $_POST['custom'], $args );
 					}
 					else {
@@ -801,6 +804,7 @@ class Appointments_AJAX {
 					$currency = $_POST['mc_currency'];
 
 					$args = array(
+						'app_ID' => $_POST['custom'],
 						'paypal_ID' => $_POST['txn_id'],
 						'stamp' => $timestamp,
 						'total_amount' => $amount,
@@ -810,7 +814,7 @@ class Appointments_AJAX {
 					);
 
 					$transaction = appointments_get_transaction( $_POST['custom'] );
-					if ( ! $transaction ) {
+					if ( $transaction ) {
 						appointments_update_transaction( $_POST['custom'], $args );
 					}
 					else {
@@ -838,6 +842,7 @@ class Appointments_AJAX {
 					$currency = $_POST['mc_currency'];
 
 					$args = array(
+						'app_ID' => $_POST['custom'],
 						'paypal_ID' => $_POST['txn_id'],
 						'stamp' => $timestamp,
 						'total_amount' => $amount,

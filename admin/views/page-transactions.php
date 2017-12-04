@@ -36,11 +36,25 @@
 
 				<?php foreach($transactions as $key => $transaction): ?>
 				<?php /** @var Appointments_Transaction $transaction */ ?>
+
+				<?php
+					$service = $transaction->get_service();
+					$service_name = '';
+
+					//Chose instanceof as it seems to be faster: http://dev.airve.com/demo/speed_tests/php/is_a_is_object.php
+					if( $service instanceof Appointments_Service ){
+						$service_name = appointments_get_service_name( $service->ID );
+					}
+					else{
+						$service_name = appointments_get_service_name( null );
+					}
+				?>
+
 					<tr valign="middle" class="alternate">
 						<td class="column-subscription"><?php echo $transaction->transaction_app_ID; ?></td>
 						<td class="column-user"><?php echo $transaction->get_client_name(); ?></td>
 						<td class="column-date"><?php echo date_i18n($appointments->datetime_format, $transaction->transaction_stamp); ?></td>
-						<td class="column-service"><?php echo appointments_get_service_name( $transaction->get_service() ); ?></td>
+						<td class="column-service"><?php echo $service_name; ?></td>
 						<td class="column-amount"> <?php echo $transaction->transaction_currency . " " . $transaction->get_total_amount(); ?></td>
 						<td class="column-transid">
 							<?php echo ! empty( $transaction->transaction_paypal_ID ) ? $transaction->transaction_paypal_ID : __('None yet','appointments'); ?>
