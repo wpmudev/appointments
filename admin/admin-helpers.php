@@ -18,7 +18,7 @@ function _appointments_get_admin_notice( $slug ) {
 		'1-7-gcal' => sprintf(
 			_x( '%s have changed on version 1.7. If you have been using Google Calendar prior to 1.7 please review your settings.', 'Google Calendar Settings admin notice fo 1.7 upgrade.', 'appointments' ),
 			'<a href="' . esc_url( $gcal_tab_url ) . '">' . __( 'Google Calendar Settings', 'appointments' ) . '</a>'
-		)
+		),
 	);
 
 	return isset( $notices[ $slug ] ) ? $notices[ $slug ] : false;
@@ -49,9 +49,9 @@ function _appointments_get_user_dismissed_notices( $user_id ) {
  * @internal
  * @return bool|string
  */
-function _appointments_get_view_path( $name ) {	
-	if( !function_exists('appointments_get_view_path') )
-	include_once( appointments_plugin_dir() . 'includes/helpers.php' );
+function _appointments_get_view_path( $name ) {
+	if ( ! function_exists( 'appointments_get_view_path' ) ) {
+		include_once( appointments_plugin_dir() . 'includes/helpers.php' ); }
 
 	return appointments_get_view_path( $name );
 }
@@ -84,7 +84,7 @@ function _appointments_get_settings_section_view_file_path( $tab, $section ) {
  * @param string $class primary|secondary
  */
 function _appointments_settings_submit_block( $tab, $text = '', $class = 'primary' ) {
-	if (  ! $text ) {
+	if ( ! $text ) {
 		$text = __( 'Save Changes', 'appointments' );
 	}
 
@@ -103,10 +103,37 @@ function _appointments_init_multidatepicker() {
 function _appointments_enqueue_jquery_ui_datepicker() {
 	wp_enqueue_script( 'jquery-ui-datepicker' );
 	wp_enqueue_style( 'app-jquery-ui', appointments_plugin_url() . 'admin/css/jquery-ui/jquery-ui.min.css', array(), appointments_get_db_version() );
-	wp_add_inline_style( 'app-jquery-ui', '.ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a {background:#333;color:#FFF}');
+	wp_add_inline_style( 'app-jquery-ui', '.ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a {background:#333;color:#FFF}' );
 
 	$i18n = array(
-		'weekStart' => appointments_week_start()
+		'weekStart' => appointments_week_start(),
 	);
 	wp_localize_script( 'jquery-ui-datepicker', 'AppointmentsDateSettings', $i18n );
 }
+
+/**
+ * Produce checkbox.switch-button
+ *
+ * @since 2.2.5
+ *
+ * @param array $options Options.
+ * @param string $name Ooption name.
+ * @param string $slave Class of slaves.
+ */
+function _appointments_html_chceckbox( $options, $name, $slave = '' ) {
+	$value = isset( $options[ $name ] )? $options[ $name ]:false;
+	if ( 'yes' === $value ) {
+		$value = true;
+	}
+	$checked = checked( $value, true, false );
+	printf(
+		'<input type="checkbox" name="%s" value="%s" class="switch-button" data-on="%s" data-off="%s" data-slave="%s" %s />',
+		esc_attr( $name ),
+		esc_attr( 'yes' ),
+		esc_attr__( 'Yes', 'appointments' ),
+		esc_attr__( 'No', 'appointments' ),
+		esc_attr( $slave ),
+		$checked
+	);
+}
+

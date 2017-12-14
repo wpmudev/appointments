@@ -61,7 +61,7 @@ class Appointments_Google_Calendar_Admin {
 
 		$options['gcal_location'] = sanitize_text_field( $_POST['gcal_location'] );
 		$options['gcal_same_window'] = isset( $_POST['gcal_same_window'] );
-		$options['gcal'] = $_POST['gcal'] === 'yes';
+		$options['gcal'] = isset( $_POST['gcal'] ) && $_POST['gcal'] === 'yes';
 		appointments_update_options( $options );
 
 		$action = $_POST['action'];

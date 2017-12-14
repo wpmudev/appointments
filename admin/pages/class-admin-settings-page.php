@@ -308,11 +308,30 @@ class Appointments_Admin_Settings_Page {
 		$options['app_limit']					= trim( $_POST['app_limit'] );
 		$options['clear_time']				= trim( $_POST['clear_time'] );
 		$options['spam_time']					= trim( $_POST['spam_time'] );
-		$options['auto_confirm']				= $_POST['auto_confirm'];
-		$options['allow_worker_wh']			= $_POST['allow_worker_wh'];
-		$options['allow_worker_confirm']		= $_POST['allow_worker_confirm'];
-		$options['allow_overwork']			= $_POST['allow_overwork'];
-		$options['allow_overwork_break']		= $_POST['allow_overwork_break'];
+
+		/**
+		 * yes/no options
+		 */
+		$options_names = array(
+			'allow_overwork',
+			'allow_overwork_break',
+			'allow_worker_confirm',
+			'allow_worker_wh',
+			'auto_confirm',
+			'login_required',
+			'payment_required',
+			'send_confirmation',
+			'send_notification',
+			'send_reminder',
+			'send_reminder_worker',
+			'send_removal_notification',
+			'show_legend',
+			'log_emails',
+		);
+		foreach ( $options_names as $name ) {
+			$options[ $name ] = isset( $_POST[ $name ] )? $_POST[ $name ]:'no';
+		}
+
 		$options['keep_options_on_uninstall']	= isset( $_POST['keep_options_on_uninstall'] );
 
 		$assigned_to = isset( $_POST['dummy_assigned_to'] ) ? $_POST['dummy_assigned_to'] : 0;
@@ -320,7 +339,6 @@ class Appointments_Admin_Settings_Page {
 		$is_dummy = is_a( 'Appointments_Worker', $worker ) && $worker->is_dummy();
 		$options['dummy_assigned_to']			= ! $is_dummy ? $assigned_to : 0;
 
-		$options['login_required']			= $_POST['login_required'];
 		$options['accept_api_logins']			= isset( $_POST['accept_api_logins'] );
 		$options['facebook-no_init']			= isset( $_POST['facebook-no_init'] );
 		$options['facebook-app_id']			= trim( $_POST['facebook-app_id'] );
@@ -328,7 +346,6 @@ class Appointments_Admin_Settings_Page {
 		$options['twitter-app_secret']		= trim( $_POST['twitter-app_secret'] );
 
 		$options['app_page_type']				= $_POST['app_page_type'];
-		$options['show_legend']				= $_POST['show_legend'];
 		$options['color_set']					= $_POST['color_set'];
 		foreach ( $appointments->get_classes() as $class => $name ) {
 			$options[ $class.'_color' ]			= $_POST[ $class.'_color' ];
@@ -342,7 +359,6 @@ class Appointments_Admin_Settings_Page {
 		$options['ask_note']					= isset( $_POST['ask_note'] );
 		$options['additional_css']			= trim( stripslashes_deep( $_POST['additional_css'] ) );
 
-		$options['payment_required']			= $_POST['payment_required'];
 		$options['percent_deposit']			= trim( str_replace( '%', '', $_POST['percent_deposit'] ) );
 		$options['fixed_deposit']				= trim( str_replace( $options['currency'], '', $_POST['fixed_deposit'] ) );
 
@@ -362,22 +378,15 @@ class Appointments_Admin_Settings_Page {
 		$options['return'] 					= $_POST['return'];
 		$options['allow_free_autoconfirm'] 	= ! empty( $_POST['allow_free_autoconfirm'] );
 
-		$options['send_confirmation']			= $_POST['send_confirmation'];
-		$options['send_notification']			= @$_POST['send_notification'];
 		$options['confirmation_subject']		= stripslashes_deep( $_POST['confirmation_subject'] );
 		$options['confirmation_message']		= stripslashes_deep( $_POST['confirmation_message'] );
-		$options['send_reminder']				= $_POST['send_reminder'];
 		$options['reminder_time']				= str_replace( ' ', '', $_POST['reminder_time'] );
-		$options['send_reminder_worker']		= $_POST['send_reminder_worker'];
 		$options['reminder_time_worker']		= str_replace( ' ', '', $_POST['reminder_time_worker'] );
 		$options['reminder_subject']			= stripslashes_deep( $_POST['reminder_subject'] );
 		$options['reminder_message']			= stripslashes_deep( $_POST['reminder_message'] );
 
-		$options['send_removal_notification'] = $_POST['send_removal_notification'];
 		$options['removal_notification_subject'] = stripslashes_deep( $_POST['removal_notification_subject'] );
 		$options['removal_notification_message'] = stripslashes_deep( $_POST['removal_notification_message'] );
-
-		$options['log_emails']				= $_POST['log_emails'];
 
 		$options['disable_js_check_admin']	= isset( $_POST['disable_js_check_admin'] );
 		$options['disable_js_check_frontend']	= isset( $_POST['disable_js_check_frontend'] );
