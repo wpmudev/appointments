@@ -179,7 +179,8 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 			elseif( isset( $_REQUEST["app_provider_id"] ) && in_array( $_REQUEST["app_provider_id"], $workers_ids ) ){				
 				$params['worker_id'] = (int)$_REQUEST["app_provider_id"];
 				$args['worker'] = $params['worker_id'];				
-			}
+            }
+            /*
 			else{
 				if( is_array( $workers_by_service ) && ! empty( $workers_by_service ) ){
 					$params['worker_id'] = $workers_by_service[0]->ID;
@@ -188,7 +189,8 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 						$_REQUEST["app_provider_id"] = $_GET["app_provider_id"] = $params['worker_id'];
 					}
 				}	
- 			}
+            }
+             */
 
 			// Force a date
 			if ( $args['date'] && !isset( $_GET["wcalendar"] ) ) {

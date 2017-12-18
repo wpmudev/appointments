@@ -3,7 +3,7 @@
 Plugin Name: Appointments+
 Description: Lets you accept appointments from front end and manage or create them from admin side
 Plugin URI: http://premium.wpmudev.org/project/appointments-plus/
-Version: 2.2.1
+Version: PLUGIN_VERSION
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
@@ -32,7 +32,7 @@ if ( !class_exists( 'Appointments' ) ) {
 
 class Appointments {
 
-	public $version = "2.2.1";
+	public $version = 'PLUGIN_VERSION';
 	public $db_version;
 
 	public $timetables = array();
@@ -1092,9 +1092,9 @@ class Appointments {
 		$start = apply_filters( 'app_schedule_starting_hour', $start, $day_start, 'day' );
 		$end = apply_filters( 'app_schedule_ending_hour', $end, $day_start, 'day' );
 
-		$first = $start *3600 + $day_start; // Timestamp of the first cell
-		$last = $end *3600 + $day_start; // Timestamp of the last cell
-		$min_step_time = $this->get_min_time() * 60; // Cache min step increment
+		$first = $start * HOUR_IN_SECONDS + $day_start; // Timestamp of the first cell
+		$last = $end * HOUR_IN_SECONDS + $day_start; // Timestamp of the last cell
+		$min_step_time = $this->get_min_time() * MINUTE_IN_SECONDS; // Cache min step increment
 
 		if (appointments_use_legacy_duration_calculus()) {
 			$step = $min_step_time; // Timestamp increase interval to one cell ahead
@@ -1989,7 +1989,7 @@ class Appointments {
 			'ask_address'				=> '',
 			'ask_city'					=> '',
 			'ask_note'					=> '',
-			'additional_css'			=> '.entry-content td{border:none;width:50%}',
+			'additional_css'			=> '.appointments-list td{ border:none; width:50%; }',
 			'payment_required'			=> 'no',
 			'percent_deposit'			=> '',
 			'fixed_deposit'				=> '',

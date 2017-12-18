@@ -151,9 +151,18 @@ class Appointments_AJAX {
 		$update_result = $insert_result = false;
 		if ( $app ) {
 			// Update
+
+			if ( ! $resend ) {
+				// The appointments_update_appointment() will try send confirmation email. 
+				// Avoid sending if not requested
+				add_filter( 'appointments_send_confirmation', '__return_false', 40 );
+			}
+
 			$data['datetime'] = strtotime( $data['date'] . ' ' . $data['time'] . ':00' );
 			$update_result = appointments_update_appointment( $app_id, $data );
-			if ( $resend && 'removed' != $data['status'] ) {
+			
+			// Confirmed or Paid have been already sent by "wpmudev_appointments_insert_appointment" action
+			if ( $resend && 'removed' != $data['status'] && 'confirmed' != $data['status'] && 'paid' != $data['status'] ) {
 				appointments_send_confirmation( $app_id );
 			}
 
@@ -251,7 +260,7 @@ class Appointments_AJAX {
 			// Get first service and its price
 			$_REQUEST['app_service_id'] = $app['service'];
 			$_REQUEST['app_provider_id'] = 0;
-			
+
 			$app = new Appointments_Appointment( $app );
 
 			// Set start date as now + 60 minutes.
@@ -301,7 +310,11 @@ class Appointments_AJAX {
 					__( 'You have already applied for an appointment. Please wait until you hear from us.', 'appointments')
 				),
 			)));
-		}
+        }
+        /**
+         * Check nonce
+         */
+        $this->security_check_die( 'AppShortcodeConfirmation' );
 
 		global $current_user;
 
@@ -347,7 +360,7 @@ class Appointments_AJAX {
 		$price = $appointments->get_price();
 		$price = apply_filters('app_post_confirmation_price', $price, $service, $worker, $start, $end);
 		$paypal_price = $appointments->get_price(true);
-		$paypal_price = apply_filters('app_post_confirmation_paypal_price', $paypal_price, $service, $worker, $start, $end);
+		$paypal_price = apply_filters('app_post_confirmation_paypal_price', number_format( str_replace( ',', '', $paypal_price ), 2, ".", "" ), $service, $worker, $start, $end);
 
 		// Break here - is the appointment free and, if so, shall we auto-confirm?
 		if (
@@ -444,7 +457,7 @@ class Appointments_AJAX {
 			'service_id' => $service,
 			'location_id' => $location
 		);
-		$is_busy = apppointments_is_range_busy( $start, $start + ( $duration * 60 ), $args );
+		$is_busy = apppointments_is_range_busy( $start, $start + ( $duration * MINUTE_IN_SECONDS ), $args );
 		if ( $is_busy ) {
 			die( json_encode( array(
 				"error" => apply_filters(
@@ -709,6 +722,7 @@ class Appointments_AJAX {
 
 
 					$args = array(
+						'app_ID' => $_POST['custom'],
 						'paypal_ID' => $_POST['txn_id'],
 						'stamp' => $timestamp,
 						'total_amount' => $amount,
@@ -718,7 +732,7 @@ class Appointments_AJAX {
 					);
 
 					$transaction = appointments_get_transaction( $_POST['custom'] );
-					if ( ! $transaction ) {
+					if ( $transaction ) {
 						appointments_update_transaction( $_POST['custom'], $args );
 					}
 					else {
@@ -740,6 +754,7 @@ class Appointments_AJAX {
 					$currency = $_POST['mc_currency'];
 
 					$args = array(
+						'app_ID' => $_POST['custom'],
 						'paypal_ID' => $_POST['txn_id'],
 						'stamp' => $timestamp,
 						'total_amount' => $amount,
@@ -749,7 +764,7 @@ class Appointments_AJAX {
 					);
 
 					$transaction = appointments_get_transaction( $_POST['custom'] );
-					if ( ! $transaction ) {
+					if ( $transaction ) {
 						appointments_update_transaction( $_POST['custom'], $args );
 					}
 					else {
@@ -764,6 +779,7 @@ class Appointments_AJAX {
 					$currency = $_POST['mc_currency'];
 
 					$args = array(
+						'app_ID' => $_POST['custom'],
 						'paypal_ID' => $_POST['txn_id'],
 						'stamp' => $timestamp,
 						'total_amount' => $amount,
@@ -773,7 +789,7 @@ class Appointments_AJAX {
 					);
 
 					$transaction = appointments_get_transaction( $_POST['custom'] );
-					if ( ! $transaction ) {
+					if ( $transaction ) {
 						appointments_update_transaction( $_POST['custom'], $args );
 					}
 					else {
@@ -788,6 +804,7 @@ class Appointments_AJAX {
 					$currency = $_POST['mc_currency'];
 
 					$args = array(
+						'app_ID' => $_POST['custom'],
 						'paypal_ID' => $_POST['txn_id'],
 						'stamp' => $timestamp,
 						'total_amount' => $amount,
@@ -797,7 +814,7 @@ class Appointments_AJAX {
 					);
 
 					$transaction = appointments_get_transaction( $_POST['custom'] );
-					if ( ! $transaction ) {
+					if ( $transaction ) {
 						appointments_update_transaction( $_POST['custom'], $args );
 					}
 					else {
@@ -825,6 +842,7 @@ class Appointments_AJAX {
 					$currency = $_POST['mc_currency'];
 
 					$args = array(
+						'app_ID' => $_POST['custom'],
 						'paypal_ID' => $_POST['txn_id'],
 						'stamp' => $timestamp,
 						'total_amount' => $amount,
@@ -859,6 +877,12 @@ class Appointments_AJAX {
 	 */
 	function pre_confirmation () {
 		global $appointments;
+
+        /**
+         * Check nonce
+         */
+        $this->security_check_die( 'AppShortcodeConfirmation' );
+
 
 		$values = explode( ":", $_POST["value"] );
 		$location = $values[0];
@@ -1035,31 +1059,31 @@ class Appointments_AJAX {
 		fclose($file);
 		die($output);
 	}
-    
+
     /**
     * Sorting the appointment columns so they match the csv columns. Usefull when locations addon enabled
     * @since 2.2.1
     */
     function sort_app_columns( $app, $columns ){
-        
+
         $sorted_app = array();
         $app_array = array_change_key_case( (array)$app, CASE_LOWER );
-        
+
         foreach( $columns as $column ){
-            
+
             if( isset( $app_array[ $column ] ) ){
                 $sorted_app[ $column ] = $app_array[ $column ];
             }
-            else{                
+            else{
                 $sorted_app[ $column ] = '';
             }
-            
+
         }
-        
+
         return $sorted_app;
-        
+
     }
-    
+
 
 	/**
 	 * Helper function for export
@@ -1085,16 +1109,32 @@ class Appointments_AJAX {
 	 * @since 1.9.4.1
 	 */
 	function app_export_columns( $cols ){
-
 		// Do not include the Location column in the export CSV if the add-on is not active
 		if( !class_exists( 'App_Locations_LocationsWorker' ) ){
 			foreach( $cols as $key => $col ) {
 				if( $col == 'location' ) unset( $cols[ $key ] );
 			}
 		}
-
 		return $cols;
+    }
 
-	}
+    /**
+     * return security message, when checks fails
+     * @since 2.2.2.1
+     */
+    private function security_check_die( $action, $query_arg = 'nonce' ) {
+        $check = check_ajax_referer( $action, $query_arg, false );
+        if ( false !== $check ) {
+            return;
+        }
+        $data = array(
+            "error" => apply_filters(
+                'app_spam_message',
+                __( 'Sorry, there was a problem with your request!', 'appointments')
+            ),
+        );
+        $data = json_encode( $data );
+        die( $data );
+    }
 
 }

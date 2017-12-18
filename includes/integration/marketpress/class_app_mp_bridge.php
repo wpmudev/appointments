@@ -3,17 +3,17 @@
 class App_MP_Bridge {
 	private $_core;
 
-	private function __construct () {
+	private function __construct() {
 		global $appointments;
 		$this->_core = $appointments;
 	}
 
-	public static function serve () {
+	public static function serve() {
 		$me = new self;
 		$me->_add_hooks();
 	}
 
-	private function _add_hooks () {
+	private function _add_hooks() {
 		add_filter( 'mp_product', array( $this, 'filter_product' ), 10, 2 );
 		add_filter( 'app-appointment-appointment_created', array( $this, 'appointment_created' ), 10, 7 );
 		add_action( 'app_remove_expired', array( $this, 'remove_from_cart' ), 10, 2 );
@@ -26,7 +26,7 @@ class App_MP_Bridge {
 		add_filter( 'mp_cart/is_product_downloadable', array( $this, 'hide_checkout_shipping' ), 10, 2 );
 	}
 
-	public function filter_product ($html, $product_id) {
+	public function filter_product( $html, $product_id ) {
 		if ( ! $this->_is_app_mp_page( $product_id ) ) {
 			return $html;
 		}
@@ -37,7 +37,7 @@ class App_MP_Bridge {
 		return apply_filters( 'the_content', $product->post_content );
 	}
 
-	public function filter_cart_column ($html, $column, $product) {
+	public function filter_cart_column( $html, $column, $product ) {
 		if ( 'title' !== $column ) {
 			return $html;
 		}
@@ -51,7 +51,7 @@ class App_MP_Bridge {
 		$app_id = MP_Product::get_variation_meta( $product->ID, 'name' );
 		$app    = appointments_get_appointment( $app_id );
 		if ( $app ) {
-			$name = get_the_title( $product->ID ) . " (" . date_i18n( $this->_core->datetime_format, strtotime( $app->start ) ) . ")";
+			$name = get_the_title( $product->ID ) . ' (' . date_i18n( $this->_core->datetime_format, strtotime( $app->start ) ) . ')';
 			$name = apply_filters(
 				'app_mp_product_name_in_cart',
 				$name,
@@ -70,7 +70,7 @@ class App_MP_Bridge {
 		return $html;
 	}
 
-	public function appointment_created ($additional, $insert_id, $post_id, $service, $worker, $start, $end) {
+	public function appointment_created( $additional, $insert_id, $post_id, $service, $worker, $start, $end ) {
 		if ( ! $this->_is_app_mp_page( $post_id ) ) {
 			return $additional;
 		}
@@ -103,13 +103,13 @@ class App_MP_Bridge {
 		}
 	}
 
-	public function mp_product_order_paid ($order) {
+	public function mp_product_order_paid( $order ) {
 		$cart_info = is_object( $order ) && is_callable( array( $order, 'get_cart' ) )
 			? $order->get_cart()->get_items()
 			: ( isset( $order->mp_cart_info ) ? $order->mp_cart_info : array() )
 		;
 
-		if( !is_object( $cart_info ) || epmty( $cart_info ) ){
+		if ( ! is_object( $cart_info ) || epmty( $cart_info ) ) {
 			global $mp_cart;
 			$cart_info = $mp_cart->get_items();
 		}
@@ -127,39 +127,36 @@ class App_MP_Bridge {
 					}
 				}
 			}
-		}
-        else{
+		} else {
 			$cart_items = $order->get_cart()->get_items_as_objects();
-			if( ! empty( $cart_items ) ){
-				foreach( $cart_items as $item ){
+			if ( ! empty( $cart_items ) ) {
+				foreach ( $cart_items as $item ) {
 					$variation = get_post( $item->ID );
-					if( $item instanceof MP_Product && $item->is_variation() && $this->_is_app_mp_page( $variation->post_parent ) ){
+					if ( $item instanceof MP_Product && $item->is_variation() && $this->_is_app_mp_page( $variation->post_parent ) ) {
 						$app_id = MP_Product::get_variation_meta( $item->ID, 'name' );
 						if ( is_numeric( $app_id ) ) {
 							$appointment_ids[] = $app_id;
 						}
 					}
-					
 				}
 			}
-
 		}
-		
-		foreach ($appointment_ids as $aid) {
+
+		foreach ( $appointment_ids as $aid ) {
 			if ( ! appointments_update_appointment_status( $aid, 'paid' ) ) {
 				continue;
 			}
-			do_action('app_mp_order_paid', $aid, $order);
+			do_action( 'app_mp_order_paid', $aid, $order );
 		}
 	}
 
-	public function display_buy_now_button( $button, $product_id, $context, $selected_atts, $no_single ){
+	public function display_buy_now_button( $button, $product_id, $context, $selected_atts, $no_single ) {
 
-		if( ! $this->_is_app_mp_page( $product_id ) ){
+		if ( ! $this->_is_app_mp_page( $product_id ) ) {
 			return $button;
 		}
 
-		if( ! $no_single ){
+		if ( ! $no_single ) {
 			return;
 		}
 
@@ -167,7 +164,7 @@ class App_MP_Bridge {
 
 		$display_buy_now_button = apply_filters( 'app_product/display_buy_now_button', true, $button, $product_id, $no_single );
 
-		if( $display_buy_now_button ){
+		if ( $display_buy_now_button ) {
 			return $button;
 		}
 
@@ -175,9 +172,9 @@ class App_MP_Bridge {
 
 	}
 
-	public function display_price( $snippet, $price, $product_id ){
+	public function display_price( $snippet, $price, $product_id ) {
 
-		if( ! $this->_is_app_mp_page( $product_id ) ){
+		if ( ! $this->_is_app_mp_page( $product_id ) ) {
 			return $snippet;
 		}
 
@@ -185,7 +182,7 @@ class App_MP_Bridge {
 
 		$display_price = apply_filters( 'app_product/dipsplay_price', $display_price, $product_id, $price );
 
-		if( $display_price ){
+		if ( $display_price ) {
 			return $snippet;
 		}
 
@@ -193,36 +190,36 @@ class App_MP_Bridge {
 
 	}
 
-	public function hide_checkout_shipping( $is_downloadable, $product ){
-		if( $this->_is_app_mp_page( $product->ID ) ){
+	public function hide_checkout_shipping( $is_downloadable, $product ) {
+		if ( $this->_is_app_mp_page( $product->ID ) ) {
 			return true;
 		}
 		return $is_downloadable;
 	}
 
-	private function _add_variation ($app_id, $post_id, $service, $worker, $start, $end) {
+	private function _add_variation( $app_id, $post_id, $service, $worker, $start, $end ) {
 		// Yeah, let's just go off with creating the variations
 		$variation_id = wp_insert_post(array(
 			'post_parent' => $post_id,
-			'post_title' => get_the_title($post_id),
+			'post_title' => get_the_title( $post_id ),
 			'post_status' => 'publish',
 			'post_type' => MP_Product::get_variations_post_type(),
 		), false);
-		if (empty($variation_id)) return false;
+		if ( empty( $variation_id ) ) { return false; }
 
 		$price = false;
-		$raw_price = apply_filters('app_mp_price', $this->_core->get_price( true ), $service, $worker, $start, $end); // Filter added at V1.2.3.1
-		if (function_exists('filter_var') && defined('FILTER_VALIDATE_FLOAT') && defined('FILTER_FLAG_ALLOW_THOUSAND')) {
-			$price = filter_var($raw_price, FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_THOUSAND); // Undo the problematic number formatting issue
+		$raw_price = apply_filters( 'app_mp_price', $this->_core->get_price( true ), $service, $worker, $start, $end ); // Filter added at V1.2.3.1
+		if ( function_exists( 'filter_var' ) && defined( 'FILTER_VALIDATE_FLOAT' ) && defined( 'FILTER_FLAG_ALLOW_THOUSAND' ) ) {
+			$price = filter_var( $raw_price, FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_THOUSAND ); // Undo the problematic number formatting issue
 		}
-		if (false === $price) {
-			$price = str_replace(',', '', $raw_price);
+		if ( false === $price ) {
+			$price = str_replace( ',', '', $raw_price );
 		}
 
-        $thumbnail_id = apply_filters('app_variation_thumbnail', false, $service);
-		update_post_meta($variation_id, 'name', $app_id);
-		update_post_meta($variation_id, 'sku', $this->_core->service);
-		update_post_meta($variation_id, 'regular_price', $price);
+		$thumbnail_id = $this->_get_service_page_thumbnail_id( $service );
+		update_post_meta( $variation_id, 'name', $app_id );
+		update_post_meta( $variation_id, 'sku', $this->_core->service );
+		update_post_meta( $variation_id, 'regular_price', $price );
 		if ( $thumbnail_id ) {
 			update_post_meta( $variation_id, '_thumbnail_id', $thumbnail_id );
 		}
@@ -239,9 +236,9 @@ class App_MP_Bridge {
 		return $variation_id;
 	}
 
-	private function _add_footer_script () {
-		$href = esc_url(mp_cart_link(false, true));
-		$message = esc_js(__('Please, proceed to checkout.', 'appointments'));
+	private function _add_footer_script() {
+		$href = esc_url( mp_cart_link( false, true ) );
+		$message = esc_js( __( 'Please, proceed to checkout.', 'appointments' ) );
 		$js = <<<EO_MP_JS
 ;(function ($) {
 	$(document).on('app-confirmation-response_received', function (e, response) {
@@ -251,7 +248,7 @@ class App_MP_Bridge {
 	});
 })(jQuery);
 EO_MP_JS;
-		$this->_core->add2footer($js);
+		$this->_core->add2footer( $js );
 	}
 
 	/**
@@ -259,9 +256,9 @@ EO_MP_JS;
 	 * @param mixed $product Custom post object or ID
 	 * @return bool
 	 */
-	private function _is_app_mp_page ( $product ) {
+	private function _is_app_mp_page( $product ) {
 
-		$product = get_post($product);
+		$product = get_post( $product );
 		$result = is_object( $product ) && strpos( $product->post_content, '[app_' ) !== false
 			? true
 			: false
@@ -269,5 +266,24 @@ EO_MP_JS;
 		// Maybe required for templates
 		return apply_filters( 'app_is_mp_page', $result, $product );
 
+	}
+
+	private function _get_service_page_thumbnail_id( $service ) {
+		global $wpdb;
+
+		if ( ! $service ) {
+			return false;
+		}
+
+		$thumbnail_id = false;
+		$table = appointments_get_table( 'services' );
+		$page_id = $wpdb->get_var( "SELECT 'page' from $table WHERE ID = $service" );
+
+		if ( $page_id ) {
+			$t = get_post_thumbnail_id( $page_id );
+			$thumbnail_id = $t? $t:false;
+		}
+
+		return apply_filters( 'app_variation_thumbnail', $thumbnail_id, $service );
 	}
 }

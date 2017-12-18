@@ -3,33 +3,36 @@ module.exports = function(grunt) {
 
     var excludeCopyFiles = [
         '**',
-        '!npm-debug.log',
-        '!node_modules/**',
+        '!**/*~',
+        '!bin/**',
+        '!bitbucket-pipelines.yml',
+        '!bower_components/**',
         '!bower.json',
         '!build/**',
-        '!bin/**',
+        '!composer.json',
+        '!.distignore',
         '!.git/**',
-        '!Gruntfile.js',
-        '!package.json',
         '!.gitignore',
         '!.gitmodules',
-        '!sourceMap.map',
-        '!phpunit.xml.dist',
-        '!travis.yml',
-        '!tests/**',
         '!**/Gruntfile.js',
-        '!**/package.json',
-        '!**/README.md',
+        '!Gruntfile.js',
         '!lite-vs-pro.txt',
-        '!composer.json',
-        '!vendor/**',
-        '!tmp/**',
-        '!**/*~',
-        '.distignore',
+        '!log.log',
+        '!node_modules/**',
+        '!npm-debug.log',
+        '!**/package.json',
+        '!package.json',
+        '!phpunit.xml.dist',
+        '!**/README.md',
         '!README.md',
+        '!sourceMap.map',
+        '!tests/**',
+        '!tools/**',
+        '!tmp/**',
+        '!travis.yml',
+        '!vendor/**',
         '!webpack.config.js',
-        '!wporg-assets/**',
-        '!log.log'
+        '!wporg-assets/**'
     ];
 
     var excludeCopyFilesDEV = excludeCopyFiles.slice(0).concat( [
@@ -180,10 +183,7 @@ module.exports = function(grunt) {
             wpid: {
                 options: {
                     patterns: [
-                        {
-                            match: /WDP ID\: 679841/g,
-                            replacement: ''
-                        }
+                        { match: /WDP ID\: 679841/g, replacement: '' }
                     ]
                 },
                 files: [
@@ -193,14 +193,22 @@ module.exports = function(grunt) {
             pluginName: {
                 options: {
                     patterns: [
-                        {
-                            match: /Plugin Name\: Appointments\+/g,
-                            replacement: 'Plugin Name: Appointments'
-                        }
+                        { match: /Plugin Name\: Appointments\+/g, replacement: 'Plugin Name: Appointments' },
+                        { match: /PLUGIN_VERSION/g, replace: '<%= pkg.version %>' },
                     ]
                 },
                 files: [
                     {expand: true, flatten: true, src: ['./build/appointments-wporg/appointments.php'], dest: 'build/appointments-wporg'}
+                ]
+            },
+            pluginVersion: {
+                options: {
+                    patterns: [
+                        { match: /PLUGIN_VERSION/g, replace: '<%= pkg.version %>' },
+                    ]
+                },
+                files: [
+                    {expand: true, flatten: true, src: ['./build/appointments/appointments.php'], dest: 'build/appointments'}
                 ]
             }
         }
@@ -231,7 +239,8 @@ module.exports = function(grunt) {
         'checktextdomain',
         'makepot',
         'copy:main',
-        'compress:main'
+        'replace:pluginVersion',
+        'compress:main',
     ]);
 
     grunt.registerTask('build:wporg', [
@@ -239,6 +248,6 @@ module.exports = function(grunt) {
         'makepot',
         'copy:wporg',
         'replace:wpid',
-        'replace:pluginName'
+        'replace:pluginName',
     ]);
 };

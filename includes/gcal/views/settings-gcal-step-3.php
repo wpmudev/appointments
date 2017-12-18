@@ -155,7 +155,6 @@
 					}
 				})
 				.always( function( data ) {
-					console.log(data);
 					if ( ! data.success ) {
 						export_apps( data.data.offset );
 					}

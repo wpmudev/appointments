@@ -56,7 +56,6 @@ jQuery( document ).ready( function( $ ) {
 
     // LOGIN REQUIRED SETTING (Accesibility)
     var apiDetail = $(".api_detail");
-    console.log(apiDetail);
     var loginRequiredSelect = $('select[name="login_required"]');
     function toggleApiDetail() {
         if (loginRequiredSelect.val() == 'yes') {
@@ -72,26 +71,39 @@ jQuery( document ).ready( function( $ ) {
     } );
 
     // PAYMENT REQUIRED (Payments)
-    jQuery(document).ready(function ($) {
-        $('select[name="payment_required"]').change(function () {
-            if ($('select[name="payment_required"]').val() == "yes") {
-                $(".payment_row").show();
-            }
-            else {
-                $(".payment_row").hide();
-            }
-        });
+    $('select[name="payment_required"]').change(function () {
+        if ($('select[name="payment_required"]').val() == "yes") {
+            $(".payment_row").show();
+        }
+        else {
+            $(".payment_row").hide();
+        }
     });
 
     /**
      * Check Services Provided on Appointments Settings page
      */
-    jQuery('#app-settings-section-new-worker form.add-new-service-provider').on( "submit", function() {
-        var form = jQuery(this);
-        if( null == jQuery("#services_provided", form).val()) {
+    $('#app-settings-section-new-worker form.add-new-service-provider').on( "submit", function() {
+        var form = $(this);
+        if( null == $("#services_provided", form).val()) {
             alert( app_i10n.messages.select_service_provider);
             return false;
         }
     });
-
+    /**
+     * Create a page
+     */
+    $('.appointment-create-page a.button').on( 'click', function() {
+        var value = $('select', $(this).closest('td') ).val();
+        var data = {
+            action: 'make_an_appointment_page',
+            _wpnonce: $(this).data('nonce'),
+            app_page_type: value
+        };
+        $.post(ajaxurl, data, function(response) {
+            var html = '<div class="notice '+(response.success? 'updated':'error')+'"><p>'+response.data.message+'</p></div>';
+            $('.appointments-settings h1').after(html);
+        });
+        return false;
+    });
 });

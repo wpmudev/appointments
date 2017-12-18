@@ -1,5 +1,46 @@
-2017-08-31 - 2.2.1
+2017-XX-XX - 2.2.4
+-------------------------------
+- Fixed a problem with export single appointment.
+- Fixed a problem with no visible slots on Weekly Calendar view.
+- Fixed a problem with viewing PayPal transaction.
+- Fixed potential vulnerabilities on appointments list.
+- Improved "Create an Appointment Page" UX.
+- Improved default additional CSS to avoid interaction with default classes.
+- Improved help tab, now we use WordPress build-in help tab.
 
+2017-11-21 - 2.2.3
+-------------------------------
+- Fixed export additional appointment fields (only PRO version).
+- Fixed problem with bower_components directory.
+- Fixed problem with extra information displayed in the wrong column.
+- Fixed problem with no visible slots on Monthly view.
+- Fixed problem with too many emails.
+- Fixed problem with worker shortcode.
+- Fixed URL building for dismissing a message.
+- Moved external sources into one parent directory.
+- Prevent process if a user does not exist.
+- Removed wp_enqueue_* functions from views.
+- Updated Unslider to version 2.0.3.
+
+2017-10-16 - 2.2.2.2
+-------------------------------
+- Fixed security issue (vulnerability) with appointments actions. Props for Rolf Allard van Hagen.
+
+2017-10-05 - 2.2.2.1
+-------------------------------
+- Fixed missing JavaScript scripts.
+
+2017-09-20 - 2.2.2
+-------------------------------
+- Allow Service Description Page featured imaged to be used as Product variation thumbnail (MarketPress integration).
+- Fixed a problem with the abandoned orders in admin.
+- Fixed issue with comma as thousand separators when using PayPal.
+- Fixed problem with duplicated page description.
+- Fixed security issue (vulnerability) with data stored on a browser. Thanks to Matt Barry @ Wordfence
+- Fixed weekly calendar hours for a worker.
+
+2017-09-01 - 2.2.1
+-------------------------------
 - Added new function: appointments_is_working().
 - Added shortcode option in app_monthly_schedule to give user option to hide today's times and force a user to click on a date before showing times.
 - Added sort CSV columns for appointments export.

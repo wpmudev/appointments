@@ -1,8 +1,3 @@
-<?php wp_enqueue_script( 'app-gcal-slider', appointments_plugin_url() . 'bower_components/unslider/dist/js/unslider-min.js', array( 'jquery' ), false, true ); ?>
-<?php wp_enqueue_script( 'app-gcal', appointments_plugin_url() . 'admin/js/admin-gcal.js', array( 'app-gcal-slider' ), false, true ); ?>
-<?php wp_enqueue_style( 'app-gcal-slider', appointments_plugin_url() . 'bower_components/unslider/dist/css/unslider.css', array(), false ); ?>
-<?php wp_enqueue_style( 'app-gcal-slider-admin', appointments_plugin_url() . 'admin/css/unslider.css', array(), false ); ?>
-
 <h3><?php _e( 'Google Calendar API: Create a new Google Application', 'appointments' ); ?></h3>
 <h4>Instructions:</h4>
 

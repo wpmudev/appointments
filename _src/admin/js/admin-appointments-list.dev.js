@@ -88,7 +88,7 @@ AppointmentsAdmin = window.AppointmentsAdmin || {};
 
             if (button.is("#app-export-selected") && checkedApps.length) {
                 checkedApps.each(function () {
-                    $form.append("<input type='hidden' name='app[]' value='" + button.val() + "' />");
+                    $form.append("<input type='hidden' name='app[]' value='" + $(this).val() + "' />");
                 });
                 type.val("selected");
                 return true;
