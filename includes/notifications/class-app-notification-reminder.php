@@ -62,9 +62,9 @@ class Appointments_Notifications_Reminder extends Appointments_Notification {
 				if ( ! in_array( $r->ID, $sent ) ) {
 					if ( ! $sent_once ) {
 						$this->customer( $r->ID, $customer_email );
+						$this->manager->log( sprintf( __( 'Reminder message sent to %s for appointment ID:%s', 'appointments' ), $customer_email, $r->ID ) );
+						$sent[] = $r->ID;
 					}
-					$this->manager->log( sprintf( __( 'Reminder message sent to %s for appointment ID:%s', 'appointments' ), $customer_email, $r->ID ) );
-					$sent[] = $r->ID;
 					$sent_once = true;
 				}
 
