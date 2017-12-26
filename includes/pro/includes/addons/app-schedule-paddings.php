@@ -72,6 +72,8 @@ class App_Schedule_Paddings {
 		add_action( 'appointments_insert_worker', array( $this, 'save_worker_padding' ) );
 
 		add_filter( 'appointments_default_options', array( $this, 'default_options' ) );
+
+		add_filter( 'app-properties-for-calendar', array( $this, 'apointments_properties_for_calendar' ), 10, 3 );
 	}
 
 	public function default_options( $defaults ) {
@@ -483,6 +485,39 @@ class App_Schedule_Paddings {
 		}
 	
 		return false;
+	}
+
+	// Include paddings of booked appointments in calendar
+	public function apointments_properties_for_calendar( $app_properties, $app, $args ){
+
+		$appoitment_paddings = 0;
+		$options = appointments_get_options();
+		$service = $app->service;
+		$worker = $app->worker;
+
+		if( isset( $options['service_padding'][$service] ) && ! empty( $options['service_padding'][$service] ) ){
+
+			foreach( $options['service_padding'][$service] as $key => $padding ){
+				if( is_numeric( $padding ) ){
+					$appoitment_paddings += (int) $padding;
+				}
+			}
+
+		}
+		
+		if( isset( $options['worker_padding'][$worker] ) && ! empty( $options['worker_padding'][$worker] ) ){
+
+			foreach( $options['worker_padding'][$worker] as $key => $padding ){
+				if( is_numeric( $padding ) ){
+					$appoitment_paddings += (int) $padding;
+				}
+			}
+		}
+
+		$end_timestamp = strtotime( $app_properties['end'] . ' + ' . $appoitment_paddings . ' minute');
+		$app_properties['end'] = date('Y-m-d H:i:s', $end_timestamp);
+
+		return $app_properties;
 	}
 
 }
