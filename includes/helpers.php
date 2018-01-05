@@ -712,96 +712,92 @@ function appointments_weekly_calendar( $date = false, $args = array() ) {
 			</tr>
 		</thead>
 		<tbody>
-			<?php do_action( 'app_schedule_before_first_row', '' ); ?>
+            <?php
+			do_action( 'app_schedule_before_first_row', '' );
+			foreach ( $slots['time_slots'] as $time_slot ) {
+				$from_time = date( appointments_get_date_format( 'time' ), strtotime( $time_slot['from'] ) );
+				$to_time = date( appointments_get_date_format( 'time' ), strtotime( $time_slot['to'] ) );
+		?>
+                <tr>
+                <td class='appointments-weekly-calendar-hours-mins'><?php echo $from_time . ' &#45; ' . $to_time; ?></td><?php
+				foreach ( $slots['the_week'] as $weekday_date ) {
+					$date_start = $weekday_date . ' ' . $time_slot['from'];
+					$date_end = $weekday_date . ' ' . $time_slot['to'];
+					$datetime_start = apply_filters( 'app_ccs', strtotime( $date_start ) ); // Current cell starts
+					$datetime_end = apply_filters( 'app_cce', strtotime( $date_end ) ); // Current cell ends
+					$is_busy = $appointments->is_busy( $datetime_start, $datetime_end, $capacity );
+					$title = apply_filters(
+						'app-schedule_cell-title',
+						date_i18n( appointments_get_date_format( 'full' ), $datetime_start ),
+						$is_busy,
+						$datetime_start,
+						$datetime_end,
+						$schedule_key
+					);
 
-			<?php foreach ( $slots['time_slots'] as $time_slot ) :  ?>
-				<?php
-					$from_time = date( appointments_get_date_format( 'time' ), strtotime( $time_slot['from'] ) );
-					$to_time = date( appointments_get_date_format( 'time' ), strtotime( $time_slot['to'] ) );
-				?>
-				<tr>
-					<td class='appointments-weekly-calendar-hours-mins'><?php echo $from_time . ' &#45; ' . $to_time; ?></td>
-					<?php foreach ( $slots['the_week'] as $weekday_date ) :  ?>
-						<?php
-							$date_start = $weekday_date . ' ' . $time_slot['from'];
-							$date_end = $weekday_date . ' ' . $time_slot['to'];
-							$datetime_start = apply_filters( 'app_ccs', strtotime( $date_start ) ); // Current cell starts
-							$datetime_end = apply_filters( 'app_cce', strtotime( $date_end ) ); // Current cell ends
-							$is_busy = $appointments->is_busy( $datetime_start, $datetime_end, $capacity );
-							$title = apply_filters(
-								'app-schedule_cell-title',
-								date_i18n( appointments_get_date_format( 'full' ), $datetime_start ),
-								$is_busy,
-								$datetime_start,
-								$datetime_end,
-								$schedule_key
-							);
-
-							$class_name = 'free';
-
-							if ( $current_time > $datetime_start && $current_time < $datetime_end ) {
-								$class_name = 'notpossible now';
-							} // Mark passed hours
-							else if ( $current_time > $datetime_start ) {
-								$class_name = 'notpossible app_past';
-							} // Then check if this time is blocked
-							else if (
-								isset( $options['app_lower_limit'] ) && $options['app_lower_limit']
-								&& ( $current_time + $options['app_lower_limit'] * 3600 ) > $datetime_end
-							) {
-								$class_name = 'notpossible app_blocked';
-							} // Check today is holiday
+					$class_name = 'free';
+					$is_working_day = false;
+					if ( $current_time > $datetime_start && $current_time < $datetime_end ) {
+						$class_name = 'notpossible now';
+					} // Mark passed hours
+					else if ( $current_time > $datetime_start ) {
+						$class_name = 'notpossible app_past';
+					} // Then check if this time is blocked
+					else if (
+						isset( $options['app_lower_limit'] ) && $options['app_lower_limit']
+						&& ( $current_time + $options['app_lower_limit'] * 3600 ) > $datetime_end
+					) {
+						$class_name = 'notpossible app_blocked';
+					} // Check today is holiday
+					else {
+						foreach ( $args['workers'] as $worker_id ) {
+							if ( $is_working_day ) {
+								continue;
+							}
+							$is_holiday = appointments_is_worker_holiday( $worker_id, $datetime_start, $datetime_end );
+							$is_working_day = ! $is_holiday;
+						}
+						if ( ! $is_working_day ) {
+							$class_name = 'notpossible app_holiday';
+						} // Check if we are working today
+						else {
+							$somebody_work = false;
+							foreach ( $args['workers'] as $worker_id ) {
+								if ( $somebody_work ) {
+									continue;
+								}
+								$somebody_work = appointments_is_exceptional_working_day( $datetime_start, $datetime_end, $worker_id, $args['location_id'] );
+							}
+							if ( ! in_array( date( 'l', $datetime_start ), $working_days ) && ! $somebody_work ) {
+								$class_name = 'notpossible notworking';
+							} // Check if this is break
 							else {
-								$is_working_day = false;
+								$somebody_work = false;
 								foreach ( $args['workers'] as $worker_id ) {
-									if ( $is_working_day ) {
+									if ( $somebody_work ) {
 										continue;
 									}
-									$is_holiday = appointments_is_worker_holiday( $worker_id, $datetime_start, $datetime_end );
-									$is_working_day = ! $is_holiday;
+									$somebody_work = ! appointments_is_interval_break( $datetime_start, $datetime_end, $worker_id );
 								}
-								if ( ! $is_working_day ) {
-									$class_name = 'notpossible app_holiday';
-								} // Check if we are working today
-								else {
-									$somebody_work = false;
-									foreach ( $args['workers'] as $worker_id ) {
-										if ( $somebody_work ) {
-											continue;
-										}
-										$somebody_work = appointments_is_exceptional_working_day( $datetime_start, $datetime_end, $worker_id, $args['location_id'] );
-									}
-									if ( ! in_array( date( 'l', $datetime_start ), $working_days ) && $somebody_work ) {
-										$class_name = 'notpossible notworking';
-									} // Check if this is break
-									else {
-										$somebody_work = false;
-										foreach ( $args['workers'] as $worker_id ) {
-											if ( $somebody_work ) {
-												continue;
-											}
-											$somebody_work = ! appointments_is_interval_break( $datetime_start, $datetime_end, $worker_id );
-										}
-										if ( ! $somebody_work ) {
-											$class_name = 'notpossible app_break';
-										} // Then look for appointments
-										else if ( $is_busy ) {
-											$class_name = 'busy';
-										} // Then check if we have enough time to fulfill this app
-										else if ( ! $appointments->is_service_possible( $datetime_start, $datetime_end, $capacity ) ) {
-											$class_name = 'notpossible service_notpossible';
-										} // If nothing else, then it must be free
-									}
-								}
+								if ( ! $somebody_work ) {
+									$class_name = 'notpossible app_break';
+								} // Then look for appointments
+								else if ( $is_busy ) {
+									$class_name = 'busy';
+								} // Then check if we have enough time to fulfill this app
+								else if ( ! $appointments->is_service_possible( $datetime_start, $datetime_end, $capacity ) ) {
+									$class_name = 'notpossible service_notpossible';
+								} // If nothing else, then it must be free
 							}
-							$class_name = apply_filters( 'app_class_name', $class_name, $datetime_start, $datetime_end );
-						?>
-						<td class="app_week_timetable_cell <?php echo esc_attr( $class_name ); ?>" title="<?php echo esc_attr( $title ); ?>">
-							<input type="hidden" class="appointments_take_appointment" value="<?php echo $appointments->pack( $datetime_start, $datetime_end ); ?>" />
-						</td>
-					<?php endforeach; ?>
-				</tr>
-			<?php endforeach; ?>
+						}
+					}
+					$class_name = apply_filters( 'app_class_name', $class_name, $datetime_start, $datetime_end );
+?>
+                        <td class="app_week_timetable_cell <?php echo esc_attr( $class_name ); ?>" title="<?php echo esc_attr( $title ); ?>">
+                            <input type="hidden" class="appointments_take_appointment" value="<?php echo $appointments->pack( $datetime_start, $datetime_end ); ?>" />
+                        </td>
+                    <?php } ?></tr>
+            <?php } ?>
 		</tbody>
 		<?php do_action( 'app_schedule_after_table', '' ); ?>
 		<tfoot>
@@ -813,13 +809,11 @@ function appointments_weekly_calendar( $date = false, $args = array() ) {
 	</table>
 	<?php
 	$ret = ob_get_clean();
-
 	if ( ! $args['echo'] ) {
 		return $ret;
 	}
 	echo $ret;
 }
-
 
 /**
  * @internal
