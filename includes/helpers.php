@@ -695,7 +695,15 @@ function appointments_weekly_calendar( $date = false, $args = array() ) {
 	$tbl_class = esc_attr( $args['class'] );
 
 	$slots = appointments_get_weekly_schedule_slots( $date, $args['service_id'], $args['worker_id'], $args['location_id'] );
-	$working_days = $appointments->get_working_days( $args['worker_id'], $args['location_id'] ); // Get an array of working days
+
+	/**
+	 * Get an array of working days, by all worksers.
+	 */
+	$working_days = array();
+	foreach ( $args['workers'] as $worker_id ) {
+		$working_days = array_merge( $working_days, $appointments->get_working_days( $worker_id, $args['location_id'] ) );
+	}
+	$working_days = array_unique( $working_days );
 
 	$capacity = $appointments->get_capacity();
 	$options = appointments_get_options();
