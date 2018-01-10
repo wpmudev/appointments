@@ -173,23 +173,19 @@ function appointments_is_exceptional_working_day( $start, $end, $worker_id = 0, 
 function appointments_is_interval_break( $start, $end, $worker_id = 0, $location = 0 ) {
 	// Try getting cached preprocessed hours
 	$days = array();
-
 	// Preprocess and cache workhours
 	// Look where our working hour ends
 	$result_days = appointments_get_worker_working_hours( 'closed', $worker_id, $location );
 	if ( $result_days && is_object( $result_days ) && ! empty( $result_days->hours ) ) {
 		$days = $result_days->hours;
 	}
-
 	if ( ! is_array( $days ) || empty( $days ) ) {
 		return false;
 	}
-
 	if ( is_array( $days ) ) {
 		$weekday_number = absint( date( 'N', $start ) );
 		$date_start = date( 'Y-m-d', $start );
 		$full_date_start = date( 'Y-m-d 00:00:00', strtotime( '+1 day', $start ) );
-
 		foreach ( $days as $weekday => $day ) {
 			$day_weekday_number = absint( $day['weekday_number'] );
 			if ( ! is_array( $day['start'] ) ) {
@@ -200,11 +196,10 @@ function appointments_is_interval_break( $start, $end, $worker_id = 0, $location
 				} else {
 					$end_break_datetime   = strtotime( $date_start . ' ' . $day['end'] . ':00' );
 				}
-
 				if ( $weekday_number === $day_weekday_number && 'yes' === $day['active'] ) {
 					// The weekday we're looking for and the break time is active
 					$period = new App_Period( $start, $end );
-					if ( $period->contains( $start_break_datetime, $end_break_datetime ) ) { // The end time is less than the break day end time. At this point we know that the searched dates are inside the interval) ) {
+					if ( $period->contains( $start_break_datetime, $end_break_datetime, true ) ) { // The end time is less than the break day end time. At this point we know that the searched dates are inside the interval) ) {
 						return true;
 					}
 				} elseif ( $weekday_number === $day_weekday_number && is_array( $day['active'] ) ) {
@@ -229,7 +224,6 @@ function appointments_is_interval_break( $start, $end, $worker_id = 0, $location
 					} else {
 						$end_break_datetime   = strtotime( $date_start . ' ' . $day_end . ':00' );
 					}
-
 					if ( $weekday_number === $day_weekday_number && 'yes' === $is_active ) {
 						$period = new App_Period( $start, $end );
 						// The weekday we're looking for and the break time is active
@@ -241,10 +235,8 @@ function appointments_is_interval_break( $start, $end, $worker_id = 0, $location
 			}
 		}
 	}
-
 	return false;
 }
-
 
 /**
  * Return the number of workers available for a given service during a interval of time

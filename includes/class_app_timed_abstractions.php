@@ -10,12 +10,22 @@ class App_Period {
 		$this->_end = is_numeric( $end ) ? $end : strtotime( $end );
 	}
 
-	public function contains( $start, $end ) {
+	/**
+	 * check perion contain
+	 *
+	 * @since 2.2.4 added `$use_bundaries` argument.
+	 *
+	 * @param integer $start Start date to check.
+	 * @param integer $end end date to check.
+	 * @param boolean $use_bundaries Force to use boundaries, instead exac match.
+	 */
+	public function contains( $start, $end, $use_bundaries = false ) {
 		$start = is_numeric( $start ) ? $start : strtotime( $start );
 		$end = is_numeric( $end ) ? $end : strtotime( $end );
-		return appointments_use_legacy_boundaries_calculus()
-			? $this->_contains_boundaries( $start, $end )
-			: $this->_contains_exact( $start, $end );
+		if ( $use_bundaries || appointments_use_legacy_boundaries_calculus() ) {
+			return $this->_contains_boundaries( $start, $end );
+		}
+		return $this->_contains_exact( $start, $end );
 	}
 
 	public function get_start() {
