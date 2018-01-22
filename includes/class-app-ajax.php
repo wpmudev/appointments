@@ -163,7 +163,12 @@ class Appointments_AJAX {
 			
 			// Send confirmation email if requested in update (only for confirmed or similar statuses)
 			$unconfirmable_statuses = array( 'removed', 'pending', 'completed' );
-			if ( $resend && ! in_array( $data['status'], $unconfirmable_statuses ) ) {
+
+			if( $app_orig_status != $data['status'] || in_array( $data['status'], $unconfirmable_statuses ) ){
+				$resend = false;
+			}
+
+			if ( $resend ) {
 				appointments_send_confirmation( $app_id );
 			}
 
