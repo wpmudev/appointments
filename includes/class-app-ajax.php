@@ -160,6 +160,17 @@ class Appointments_AJAX {
 
 			$data['datetime'] = strtotime( $data['date'] . ' ' . $data['time'] . ':00' );
 			$update_result = appointments_update_appointment( $app_id, $data );
+			
+			// Send confirmation email if requested in update (only for confirmed or similar statuses)
+			$unconfirmable_statuses = array( 'removed', 'pending', 'completed' );
+
+			if( $app_orig_status != $data['status'] || in_array( $data['status'], $unconfirmable_statuses ) ){
+				$resend = false;
+			}
+
+			if ( $resend ) {
+				appointments_send_confirmation( $app_id );
+			}
 
 		} else {
 			// Insert
