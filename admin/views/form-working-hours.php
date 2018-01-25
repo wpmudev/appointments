@@ -56,13 +56,13 @@ else {
 					<td>
 						<?php
 							$selected = isset( $whours[ $day ]['start'][ $idx ] ) ? strtotime( $whours[ $day ]['start'][ $idx ] ) : '';
-							echo $appointments->_time_selector( "{$status}[{$day}][start][{$idx}]", $min_secs, $selected );
+							echo $appointments->_time_selector( "{$status}[{$day}][start][{$idx}]", $min_secs, $selected, $appointments->worker );
 						?>
 					</td>
 					<td>
 						<?php
 						$selected = isset( $whours[ $day ]['end'][ $idx ] ) ? strtotime( $whours[ $day ]['end'][ $idx ] ) : '';
-						echo $appointments->_time_selector( "{$status}[{$day}][end][{$idx}]", $min_secs, $selected );
+						echo $appointments->_time_selector( "{$status}[{$day}][end][{$idx}]", $min_secs, $selected, $appointments->worker );
 						?>
 						<?php if ( 'closed' == $status && $idx == 0 && 'yes' == $active ): ?>
 							&nbsp;
@@ -86,13 +86,13 @@ else {
 				<td>
 					<?php
 						$selected = isset( $whours[ $day ]['start'] ) ? strtotime( $whours[ $day ]['start'] ) : '';
-						echo $appointments->_time_selector( "{$status}[{$day}][start]", $min_secs, $selected );
+						echo $appointments->_time_selector( "{$status}[{$day}][start]", $min_secs, $selected, $appointments->worker );
 					?>
 				</td>
 				<td>
 					<?php
 						$selected = isset( $whours[ $day ]['end'] ) ? strtotime( $whours[ $day ]['end'] ) : '';
-						echo $appointments->_time_selector( "{$status}[{$day}][end]", $min_secs, $selected );
+						echo $appointments->_time_selector( "{$status}[{$day}][end]", $min_secs, $selected, $appointments->worker );
 					?>
 					<?php if ( 'closed' == $status && isset( $whours[ $day ]['active'] ) && 'yes' == $whours[ $day ]['active'] ): ?>
 						&nbsp;
