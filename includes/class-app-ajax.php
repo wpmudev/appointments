@@ -1005,21 +1005,25 @@ class Appointments_AJAX {
 
 		$type = ! empty( $_POST['export_type'] ) ? $_POST['export_type'] : 'all';
 		$apps = array();
+
+		$args = array();
+
 		if ( 'selected' == $type && ! empty( $_POST['app'] ) ) {
 			// selected appointments
 			if ( $_POST['app'] ) {
-				$apps = appointments_get_appointments( array( 'app_id' => array_map( 'absint', $_POST['app'] ) ) );
+				$args = array( 'app_id' => array_map( 'absint', $_POST['app'] ) );
 			}
 		} else if ( 'type' == $type ) {
 			$status = ! empty( $_POST['status'] ) ? $_POST['status'] : false;
 			if ( 'active' === $status ) {
-				$apps = appointments_get_appointments( array( 'status' => array( 'confirmed', 'paid' ) ) );
+				$args = array( 'status' => array( 'confirmed', 'paid' ) );
 			} else if ( $status ) {
-				$apps = appointments_get_appointments( array( 'status' => $status ) );
+				$args = array( 'status' => $status );
 			}
-		} else if ( 'all' == $type ) {
-			$apps = appointments_get_appointments();
 		}
+
+		$args = apply_filters( 'app-export-appointment-args', $args );
+		$apps = appointments_get_appointments( $args );
 
 		if ( empty( $apps ) || ! is_array( $apps ) ) {
 			die( __( 'Nothing to download!', 'appointments' ) );
