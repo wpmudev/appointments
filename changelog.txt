@@ -1,3 +1,6 @@
+2018-xx-xx - 2.2.5
+-------------------------------
+
 2018-01-29 - 2.2.4
 -------------------------------
 - Fixed a problem with the export of single appointment.
