@@ -210,8 +210,8 @@ class Appointments_Admin {
 		wp_enqueue_script( 'custom-ligin-screen-jquery-switch-button', $appointments->plugin_url.'/assets/js/vendor/jquery.switch_button.js', array( 'jquery', 'jquery-effects-core' ), '1.12.1', true );
 		$i18n = array(
 			'labels' => array(
-				'label_on' => __( 'on', 'ub' ),
-				'label_off' => __( 'off', 'ub' ),
+				'label_on' => __( 'on', 'appointments' ),
+				'label_off' => __( 'off', 'appointments' ),
 			),
 		);
 		wp_localize_script( 'custom-ligin-screen-jquery-switch-button', 'switch_button', $i18n );
