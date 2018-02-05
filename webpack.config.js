@@ -22,7 +22,8 @@ var adminConfig = Object.assign( {}, {
         'admin-appointments-list': './_src/admin/js/admin-appointments-list.dev.js',
         'admin-gcal': './_src/admin/js/admin-gcal.dev.js',
         'admin-multidatepicker': './_src/admin/js/admin-multidatepicker.dev.js',
-        'editor-shortcodes': './_src/admin/js/editor-shortcodes.dev.js'
+        'editor-shortcodes': './_src/admin/js/editor-shortcodes.dev.js',
+        'switch-button': './_src/admin/js/switch-button.dev.js'
     },
     output: {
         filename: "[name].js",

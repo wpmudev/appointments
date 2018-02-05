@@ -17,10 +17,7 @@
 	<tr>
 		<th scope="row"><label for="show_legend"><?php _e( 'Show Legend', 'appointments' ) ?></label></th>
 		<td>
-			<select name="show_legend" id="show_legend">
-				<option value="no" <?php selected( @$options['show_legend'] <> 'yes' ); ?>><?php _e( 'No', 'appointments' ) ?></option>
-				<option value="yes" <?php selected( @$options['show_legend'] == 'yes' ); ?>><?php _e( 'Yes', 'appointments' ) ?></option>
-			</select>
+            <?php _appointments_html_chceckbox( $options, 'show_legend' ) ?>
 			<p class="description"><?php _e( 'Whether to display description fields above the pagination area.', 'appointments' ) ?></p>
 		</td>
 	</tr>

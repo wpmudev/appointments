@@ -3,6 +3,10 @@
 
 2018-01-29 - 2.2.4
 -------------------------------
+- Improved Yes/No choice on appointments configuration screen.
+
+2017-XX-XX - 2.2.4
+-------------------------------
 - Fixed a problem with the export of single appointment.
 - Fixed a problem with no visible slots on Weekly Calendar view.
 - Fixed a problem with viewing PayPal transaction.

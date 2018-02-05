@@ -2,59 +2,39 @@
 
 	<tr valign="top">
 		<th scope="row"><?php _e( 'Send Confirmation email', 'appointments' ) ?></th>
-		<td colspan="2">
-			<select name="send_confirmation">
-				<option value="no" <?php if ( @$options['send_confirmation'] <> 'yes' )
-					echo "selected='selected'" ?>><?php _e( 'No', 'appointments' ) ?></option>
-				<option value="yes" <?php if ( @$options['send_confirmation'] == 'yes' )
-					echo "selected='selected'" ?>><?php _e( 'Yes', 'appointments' ) ?></option>
-			</select>
-						<span
-							class="description"><?php _e( 'Whether to send an email after confirmation of the appointment. Note: Admin and service provider will also get a copy as separate emails.', 'appointments' ) ?></span>
+        <td colspan="2">
+            <?php _appointments_html_chceckbox( $options, 'send_confirmation' ) ?>
+            <p class="description"><?php _e( 'Whether to send an email after confirmation of the appointment. Note: Admin and service provider will also get a copy as separate emails.', 'appointments' ) ?></p>
 		</td>
 	</tr>
 
 	<tr valign="top">
 		<th scope="row"><?php _e( 'Send Notification to admin if confirmation is required', 'appointments' ) ?></th>
 		<td colspan="2">
-			<select name="send_notification">
-				<option value="no" <?php if ( @$options['send_notification'] <> 'yes' )
-					echo "selected='selected'" ?>><?php _e( 'No', 'appointments' ) ?></option>
-				<option value="yes" <?php if ( @$options['send_notification'] == 'yes' )
-					echo "selected='selected'" ?>><?php _e( 'Yes', 'appointments' ) ?></option>
-			</select>
-						<span
-							class="description"><?php _e( 'You may want to receive a notification email whenever a new appointment is made from front end in pending status. This email is only sent if you do not require a payment, that is, if your approval is required. Note: Notification email is also sent to the service provider, if a provider is namely selected by the client, and "Allow Service Provider Confirm Own Appointments" is set as Yes.', 'appointments' ) ?></span>
+            <?php _appointments_html_chceckbox( $options, 'send_notification' ) ?>
+            <p class="description"><?php _e( 'You may want to receive a notification email whenever a new appointment is made from front end in pending status. This email is only sent if you do not require a payment, that is, if your approval is required. Note: Notification email is also sent to the service provider, if a provider is namely selected by the client, and "Allow Service Provider Confirm Own Appointments" is set as Yes.', 'appointments' ) ?></p>
 		</td>
 	</tr>
 
 	<tr>
 		<th scope="row"><?php _e( 'Confirmation Email Subject', 'appointments' ) ?></th>
 		<td>
-			<input value="<?php echo esc_attr( $options['confirmation_subject'] ); ?>"
-			       size="90" name="confirmation_subject" type="text"/>
+			<input value="<?php echo esc_attr( $options['confirmation_subject'] ); ?>" size="90" name="confirmation_subject" type="text"/>
 		</td>
 	</tr>
 
 	<tr>
 		<th scope="row"><?php _e( 'Confirmation email Message', 'appointments' ) ?></th>
 		<td>
-						<textarea cols="90" rows="6"
-						          name="confirmation_message"><?php echo esc_textarea( $options['confirmation_message'] ); ?></textarea>
+			<textarea cols="90" rows="6" name="confirmation_message"><?php echo esc_textarea( $options['confirmation_message'] ); ?></textarea>
 		</td>
 	</tr>
 
 	<tr valign="top">
 		<th scope="row"><?php _e( 'Send Reminder email to the Client', 'appointments' ) ?></th>
 		<td colspan="2">
-			<select name="send_reminder">
-				<option value="no" <?php if ( @$options['send_reminder'] <> 'yes' )
-					echo "selected='selected'" ?>><?php _e( 'No', 'appointments' ) ?></option>
-				<option value="yes" <?php if ( @$options['send_reminder'] == 'yes' )
-					echo "selected='selected'" ?>><?php _e( 'Yes', 'appointments' ) ?></option>
-			</select>
-						<span
-							class="description"><?php _e( 'Whether to send reminder email(s) to the client before the appointment.', 'appointments' ) ?></span>
+            <?php _appointments_html_chceckbox( $options, 'send_reminder' ) ?>
+			<p class="description"><?php _e( 'Whether to send reminder email(s) to the client before the appointment.', 'appointments' ) ?></p>
 		</td>
 	</tr>
 
@@ -72,15 +52,8 @@
 	<tr valign="top">
 		<th scope="row"><?php _e( 'Send Reminder email to the Provider', 'appointments' ) ?></th>
 		<td colspan="2">
-			<select name="send_reminder_worker">
-				<option value="no" <?php if ( @$options['send_reminder_worker'] <> 'yes' )
-					echo "selected='selected'" ?>><?php _e( 'No', 'appointments' ) ?></option>
-				<option
-					value="yes" <?php if ( @$options['send_reminder_worker'] == 'yes' )
-					echo "selected='selected'" ?>><?php _e( 'Yes', 'appointments' ) ?></option>
-			</select>
-						<span
-							class="description"><?php _e( 'Whether to send reminder email(s) to the service provider before the appointment.', 'appointments' ) ?></span>
+            <?php _appointments_html_chceckbox( $options, 'send_reminder_worker' ) ?>
+			<p class="description"><?php _e( 'Whether to send reminder email(s) to the service provider before the appointment.', 'appointments' ) ?></p>
 		</td>
 	</tr>
 
@@ -114,19 +87,9 @@
 	<tr>
 		<th scope="row"><?php _e( 'Send notification email on appointment removal', 'appointments' ) ?></th>
 		<td colspan="2">
-			<select name="send_removal_notification">
-				<option
-					value="no" <?php if ( @$options['send_removal_notification'] <> 'yes' )
-					echo "selected='selected'" ?>><?php _e( 'No', 'appointments' ) ?></option>
-				<option
-					value="yes" <?php if ( @$options['send_removal_notification'] == 'yes' )
-					echo "selected='selected'" ?>><?php _e( 'Yes', 'appointments' ) ?></option>
-			</select>
-			<span class="description">
-				<?php _e( 'Send out an email to appropriate clients and providers when an appointment has been removed.', 'appointments' ) ?>
-				<br/>
-				<?php _e( '<b>Note:</b> This email will only be sent for explicitly removed appointments only. The appointments that get removed due to expiration will not be affected.', 'appointments' ) ?>
-			</span>
+            <?php _appointments_html_chceckbox( $options, 'send_removal_notification' ) ?>
+			<p class="description"><?php _e( 'Send out an email to appropriate clients and providers when an appointment has been removed.', 'appointments' ) ?><br/><?php _e( '<b>Note:</b> This email will only be sent for explicitly removed appointments only. The appointments that get removed due to expiration will not be affected.', 'appointments' ) ?>
+			</p>
 		</td>
 	</tr>
 
@@ -159,14 +122,8 @@
 	<tr valign="top">
 		<th scope="row"><?php _e( 'Log Sent email Records', 'appointments' ) ?></th>
 		<td colspan="2">
-			<select name="log_emails">
-				<option value="no" <?php if ( @$options['log_emails'] <> 'yes' )
-					echo "selected='selected'" ?>><?php _e( 'No', 'appointments' ) ?></option>
-				<option value="yes" <?php if ( @$options['log_emails'] == 'yes' )
-					echo "selected='selected'" ?>><?php _e( 'Yes', 'appointments' ) ?></option>
-			</select>
-						<span
-							class="description"><?php _e( 'Whether to log confirmation and reminder email records (Not the emails themselves).', 'appointments' ) ?></span>
+            <?php _appointments_html_chceckbox( $options, 'log_emails' ) ?>
+			<p class="description"><?php _e( 'Whether to log confirmation and reminder email records (Not the emails themselves).', 'appointments' ) ?></p>
 		</td>
 	</tr>
 	<tr>
@@ -178,8 +135,8 @@
 	<?php _e( 'For the above email subject and message contents, you can use the following placeholders which will be replaced by their real values:', 'appointments' ) ?>
 		&nbsp;SITE_NAME, CLIENT, SERVICE, SERVICE_PROVIDER, DATE_TIME, PRICE, DEPOSIT, <span
 			class="app-has_explanation"
-			title="(PRICE - DEPOSIT)">BALANCE</span>, PHONE, NOTE, ADDRESS, CITY, EMAIL <?php _e( "(Client's email)", "appointments" ) ?>
-		<span style="display: none;">, CANCEL <?php _e( "(Adds a cancellation link to the email body)", "appointments" ) ?></span>
+			title="(PRICE - DEPOSIT)">BALANCE</span>, PHONE, NOTE, ADDRESS, CITY, EMAIL <?php _e( "(Client's email)", 'appointments' ) ?>
+		<span style="display: none;">, CANCEL <?php _e( '(Adds a cancellation link to the email body)', 'appointments' ) ?></span>
 	</span>
 		</td>
 	</tr>
