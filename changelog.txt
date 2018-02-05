@@ -1,11 +1,14 @@
 2018-xx-xx - 2.2.5
 -------------------------------
+- Added filter 'app-export-appointment-args' which allows changing export arguments eg. sorting field.
+- Fixed incompatibilities with Divi Builder.
+- Fixed missing sortings on the frontend.
+- Fixed problems with changing the custom time for slots.
+- Fixed problem with paddings.
+- Fixed re-send confirmation emails.
+- Improved Yes/No choice used on appointments configuration screen.
 
 2018-01-29 - 2.2.4
--------------------------------
-- Improved Yes/No choice on appointments configuration screen.
-
-2017-XX-XX - 2.2.4
 -------------------------------
 - Fixed a problem with the export of single appointment.
 - Fixed a problem with no visible slots on Weekly Calendar view.
