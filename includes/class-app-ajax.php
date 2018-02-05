@@ -108,7 +108,7 @@ class Appointments_AJAX {
 
 		$app_id = absint( $_POST["app_id"] );
 		$app = appointments_get_appointment( $app_id );
-		$app_orig_status = $app->status;
+		$app_orig_status = isset( $app->status ) ? $app->status : '';
 		$data = array();
 
 		$data['user'] = absint( $_POST['user'] );
@@ -161,8 +161,14 @@ class Appointments_AJAX {
 			$data['datetime'] = strtotime( $data['date'] . ' ' . $data['time'] . ':00' );
 			$update_result = appointments_update_appointment( $app_id, $data );
 			
-			// Confirmed or Paid have been already sent by "wpmudev_appointments_insert_appointment" action
-			if ( $resend && 'removed' != $data['status'] && 'confirmed' != $data['status'] && 'paid' != $data['status'] ) {
+			// Send confirmation email if requested in update (only for confirmed or similar statuses)
+			$unconfirmable_statuses = array( 'removed', 'pending', 'completed' );
+
+			if( $app_orig_status != $data['status'] || in_array( $data['status'], $unconfirmable_statuses ) ){
+				$resend = false;
+			}
+
+			if ( $resend ) {
 				appointments_send_confirmation( $app_id );
 			}
 
