@@ -1,6 +1,6 @@
 {
     "name": "appointments",
-    "version": "2.2.4",
+    "version": "2.2.5-beta.1",
     "main": "appointments.php",
     "projectEditUrl": "https://premium.wpmudev.org/wp-admin/edit.php?post_type=project&page=projects-manage&manage_files=679841#file",
     "description": "Simply manage your studio, salon or clinic’s calendar in WordPress and let clients book appointments online - whether you’re a private practice or large team spread across multiple locations.",
@@ -42,8 +42,20 @@
     "author": "WPMU DEV",
     "contributors": [
         {
+            "name": "Ivan Svyrskyi",
+            "email": "ioannup@gmail.com"
+        },
+        {
+            "name": "James Morris",
+            "email": "wpmudev@pkbcs.com"
+        },
+        {
             "name": "Marcin Pietrzak",
             "email": "marcin@incsub.com"
+        },
+        {
+            "name": "Panos Lyraki",
+            "email": "panos.lyrakis@gmail.com"
         }
     ],
     "homepage": "https://premium.wpmudev.org/project/appointments-plus/",
