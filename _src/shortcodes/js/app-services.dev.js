@@ -1,6 +1,9 @@
 jQuery( document).ready( function( $ ) {
     "use strict";
 
+    window.Appointments = window.Appointments || {};
+    Appointments.shortcodes = Appointments.shortcodes || {};
+
     Appointments.shortcodes.services = {
         thumbnailsCache: [],
         strings: null,

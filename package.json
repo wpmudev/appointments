@@ -63,5 +63,5 @@
         "type": "git",
         "url": "git@bitbucket.org:incsub/appointments.git"
     },
-  "license": "GPL-2.0"
+    "license": "GPL-2.0"
 }
