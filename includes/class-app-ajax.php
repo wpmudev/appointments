@@ -193,6 +193,7 @@ class Appointments_AJAX {
 
 
 		if ( $update_result ) {
+			$app_orig_status = $app->status;
 			$result = array(
 				'app_id' => $app->ID,
 				'message' => __('<span style="color:green;font-weight:bold">Changes saved.</span>', 'appointments'),
