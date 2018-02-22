@@ -68,5 +68,8 @@ if( $delete_options_on_uninstall ){
     }
 
     wp_unschedule_event( current_time( 'timestamp' ), 'appointments_gcal_sync' );
-   
+	if ( $timestamp = wp_next_scheduled( 'appointments_send_reminders' ) ) {
+		wp_unschedule_event( $timestamp, 'appointments_send_reminders' );
+	}
+
 }
