@@ -40,6 +40,8 @@ class Appointments_Notifications_Removal extends Appointments_Notification {
 				$this->admin( $app_id, $worker_email );
 			}
 
+			self::record_sent( $app_id, 'removal' );
+
 			return true;
 
 		}

@@ -12,6 +12,32 @@ abstract class Appointments_Notification {
 	abstract function send( $app_id );
 
 	/**
+	 * Update appointment's meta that notification has been sent
+	 *
+	 * @param integer $app_id The apointment's ID
+	 * @param string $type Notification type
+	 *
+	 * @return bool
+	 */
+	public static function record_sent( $app_id = false, $type = false ) {
+
+		if( ! $app_id || ! $type ){
+			return false;
+		}
+
+		$meta_key = '_notifications_sent';
+		$notifications_sent = appointments_get_appointment_meta( $app_id, $meta_key );
+
+		if( ! is_array( $notifications_sent ) ){
+			$notifications_sent = array();
+		}
+
+		$notifications_sent[ $type ] = true;
+		return appointments_update_appointment_meta( $app_id, $meta_key, $notifications_sent );
+
+	}
+
+	/**
 	 * Replace placeholders with real values for email subject and content
 	 *
 	 * @param string $text Text to apply the replacements
