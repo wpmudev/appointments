@@ -50,6 +50,8 @@ class Appointments_Notifications_Cancel extends Appointments_Notification {
 				do_action( 'appointments_worker_notification_sent', $worker_template['body'], $r, $app_id );
 			}
 		}
+
+		self::record_sent( $app_id, 'cancel' );
 		return true;
 	}
 
