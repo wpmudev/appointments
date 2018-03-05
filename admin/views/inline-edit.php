@@ -101,7 +101,7 @@
 				<label>
 					<span class="title"><?php esc_html_e( 'Confirm', 'appointments' ); ?></span>
 					<span class="input-text-wrap">
-								<?php if ( $app_id ): ?>
+								<?php if ( $app_id && $confirmation_sent ): ?>
 									<input type="checkbox" name="resend" value="1" />&nbsp;<?php esc_html_e('(Re)send confirmation email', 'appointments' ); ?>
 								<?php else: ?>
 									<input type="checkbox" name="resend" value="1" checked="checked" />&nbsp;<?php esc_html_e('Send confirmation email', 'appointments' ); ?>

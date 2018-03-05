@@ -18,8 +18,8 @@ class Appointments_Notifications_Reminder extends Appointments_Notification {
 		if ( isset( $options['send_reminder_worker'] ) && 'yes' == $options['send_reminder_worker'] ) {
 			$this->send_worker();
 		}
-
-
+		
+		self::record_sent( $app_id, 'reminder' );
 		return true;
 	}
 

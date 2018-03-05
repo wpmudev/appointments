@@ -296,6 +296,8 @@ class Appointments_AJAX {
 		$min_secs = 60 * apply_filters( 'app_admin_min_time', $min_time );
 
 		$services = appointments_get_services();
+		$notifications_sent = appointments_get_appointment_meta( $app_id, '_notifications_sent' );
+		$confirmation_sent = ( is_array( $notifications_sent ) && isset( $notifications_sent['confirmation'] ) && $notifications_sent['confirmation'] );
 
 		ob_start();
 		include( appointments_plugin_dir() . 'admin/views/inline-edit.php' );
