@@ -407,19 +407,25 @@ function apppointments_is_range_busy( $start, $end, $args = array() ) {
 
 	// If a specific worker is selected, we will look at his schedule first.
 	if ( 0 != $args['worker_id'] ) {
-		$apps = $appointments->get_reserve_apps_by_worker( $args['location_id'], $args['worker_id'], $week );
-		if ( $apps ) {
-			foreach ( $apps as $app ) {
-				//if ( $start >= strtotime( $app->start ) && $end <= strtotime( $app->end ) ) return true;
-				$app_properties = apply_filters( 'app-properties-for-calendar', array( 'start' => $app->start, 'end' => $app->end ), $app, $args );
-				
-				if ( $period->contains( $app_properties['start'], $app_properties['end'] ) ) {
-					return true;
-				}
-			}
-		}
+
 		if ( ! appointments_is_working( $start, $end, $args['worker_id'], $args['location_id'] ) ) {
 			return true;
+		}
+
+		$apps = $appointments->get_reserve_apps_by_worker( $args['location_id'], $args['worker_id'], $week );
+	}
+	else{
+		$apps = appointments_get_appointments( $args );
+	}
+
+	if ( $apps ) {
+		foreach ( $apps as $app ) {
+			//if ( $start >= strtotime( $app->start ) && $end <= strtotime( $app->end ) ) return true;
+			$app_properties = apply_filters( 'app-properties-for-calendar', array( 'start' => $app->start, 'end' => $app->end ), $app, $args );
+			
+			if ( $period->contains( $app_properties['start'], $app_properties['end'], true ) ) {
+				return true;
+			}
 		}
 	}
 
