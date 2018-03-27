@@ -2,8 +2,8 @@
 Contributors: wpmudev, wpmudev-support1, wpmudev-support2, wpmudev-support4, wpmudev-support6
 Tags: Appointment,Booking,Calendar,Reservation,Scheduling,google calendar,
 Requires at least: 4.6
-Tested up to: 4.9
-Stable tag: 2.2.3
+Tested up to: 4.9.4
+Stable tag: 2.2.5
 License: GPL2
 
 The most powerful, flexible and feature-rich bookings plugin available for WordPress. Appointments does it all.
@@ -156,6 +156,24 @@ We provide comprehensive and guaranteed support on the <a href='http://premium.w
 5. Google Calendar integration
 
 == Changelog ==
+
+= 2.2.5 =
+* Added filter 'app-export-appointment-args' which allows changing export arguments eg. sorting field.
+* Fixed incompatibilities with Divi Builder.
+* Fixed missing sortings on the frontend.
+* Fixed problems with changing the custom time for slots.
+* Fixed problem with paddings.
+* Fixed re-send confirmation emails.
+* Improved Yes/No choice used on appointments configuration screen.
+
+= 2.2.4 =
+* Fixed a problem with the export of single appointment.
+* Fixed a problem with no visible slots on Weekly Calendar view.
+* Fixed a problem with viewing PayPal transaction.
+* Fixed potential vulnerabilities in appointments list.
+* Improved "Create an Appointment Page" UX.
+* Improved default additional CSS to avoid interaction with default classes.
+* Improved help tab, now we use WordPress built-in help tab.
 
 = 2.2.3 =
 * Fixed problem with bower_components directory.
