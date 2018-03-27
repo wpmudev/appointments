@@ -42,6 +42,7 @@ class Appointments_Notifications_Confirmation extends Appointments_Notification 
 				$this->admin( $app_id, $worker_email );
 			}
 
+			self::record_sent( $app_id, 'confirmation' );
 			return true;
 
 		}
