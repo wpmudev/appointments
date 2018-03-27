@@ -13,7 +13,10 @@ class Appointments_Notifications_Manager {
 	public function __construct() {
 		add_action( 'wpmudev_appointments_update_appointment_status', array( $this, 'change_status' ), 100, 3 );
 		add_action( 'wpmudev_appointments_insert_appointment', array( $this, 'insert_appointment' ), 100 );
-		add_action( 'appointments_init', array( $this, 'on_init' ) );
+		add_action( 'appointments_send_reminders', array( $this, 'appointments_send_reminders' ) );
+		add_filter( 'cron_schedules', array( $this, 'cron_schedules' ) );
+
+		$this->setup_cron();
 
 		include_once( appointments_plugin_dir() . 'includes/notifications/abstract-app-notification.php' );
 		include_once( appointments_plugin_dir() . 'includes/notifications/class-app-notification-confirmation.php' );
@@ -29,13 +32,19 @@ class Appointments_Notifications_Manager {
 		$this->cancel = new Appointments_Notifications_Cancel( $this );
 	}
 
-	public function on_init( $appointments ) {
-		if ( ( time() - get_option( "app_last_update" ) ) < apply_filters( 'app_update_time', 600 ) ) {
-			return;
+	public function setup_cron() {
+		$scheduled = wp_next_scheduled( 'appointments_send_reminders' );
+		if ( ! $scheduled ) {
+			wp_schedule_event( time(), 'app-reminders', 'appointments_send_reminders' );
 		}
+	}
 
-		update_option( 'app_last_update', time() );
+	public function cron_schedules( $schedules ) {
+		$schedules['app-reminders'] = array( 'interval' => apply_filters( 'app_update_time', HOUR_IN_SECONDS / 6 ),    'display' => __( 'Every 10 minutes or you can filter it with the app_update_time filter', 'appointments' ) );
+		return $schedules;
+	}
 
+	public function appointments_send_reminders() {
 		$this->reminder->send( false );
 	}
 
