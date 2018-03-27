@@ -1954,9 +1954,9 @@ if ( ! class_exists( 'Appointments' ) ) {
 				return;
 			}
 
-			$this->remove_appointments();
-
 			update_option( 'app_last_update', time() );
+
+			$this->remove_appointments();
 
 		}
 
@@ -2068,8 +2068,6 @@ if ( ! class_exists( 'Appointments' ) ) {
 					}
 				}
 			}
-
-			update_option( 'app_last_update', time() );
 
 			// Appointment status probably changed, so clear cache.
 			// Anyway it is good to clear the cache in certain intervals.

@@ -34,6 +34,8 @@ class Appointments_Notifications_Manager {
 			return;
 		}
 
+		update_option( 'app_last_update', time() );
+
 		$this->reminder->send( false );
 	}
 
