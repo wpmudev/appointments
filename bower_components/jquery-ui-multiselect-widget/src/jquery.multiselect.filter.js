@@ -1,6 +1,6 @@
 /* jshint forin:true, noarg:true, noempty:true, eqeqeq:true, boss:true, undef:true, curly:true, browser:true, jquery:true */
 /*
- * jQuery MultiSelect UI Widget Filtering Plugin 2.0.0
+ * jQuery MultiSelect UI Widget Filtering Plugin 2.0.1
  * Copyright (c) 2012 Eric Hynds
  *
  * http://www.erichynds.com/jquery/jquery-ui-multiselect-widget/
@@ -175,7 +175,9 @@
       // show/hide optgroups
       $groups.each(function() {
         var $this = $(this);
-        if(!$this.children("li:visible").length) {
+        // check with a function on display:none css instead of using :visible selector because newly created
+        // (on refresh) items are by default not (yet) visible but not hidden on purpose with the display:none.
+        if(!$this.children('li').filter(function () { return $.css(this, "display") !== 'none' }).length) {
           $this.hide();
         }
       });
