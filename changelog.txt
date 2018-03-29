@@ -1,3 +1,8 @@
+2018-xx-xx - 2.2.6
+-------------------------------
+- Fixed a problem with double send reminders.
+- Fixed a problem with Appointments settings on BuddyPress profile.
+
 2018-03-27 - 2.2.5
 -------------------------------
 - Added filter 'app-export-appointment-args' which allows changing export arguments eg. sorting field.

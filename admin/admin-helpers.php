@@ -99,18 +99,6 @@ function _appointments_init_multidatepicker() {
 	wp_add_inline_script( 'app-multi-datepicker', 'jQuery( document ).ready( function( $ ) { $( ".app-datepick" ).each( function() { new AppDatepicker( $(this) ); } ); } );' );
 }
 
-
-function _appointments_enqueue_jquery_ui_datepicker() {
-	wp_enqueue_script( 'jquery-ui-datepicker' );
-	wp_enqueue_style( 'app-jquery-ui', appointments_plugin_url() . 'admin/css/jquery-ui/jquery-ui.min.css', array(), appointments_get_db_version() );
-	wp_add_inline_style( 'app-jquery-ui', '.ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a {background:#333;color:#FFF}' );
-
-	$i18n = array(
-		'weekStart' => appointments_week_start(),
-	);
-	wp_localize_script( 'jquery-ui-datepicker', 'AppointmentsDateSettings', $i18n );
-}
-
 /**
  * Produce checkbox.switch-button
  *
