@@ -176,16 +176,17 @@ class Appointments_Integration_BuddyPress {
 	 */
 	function screen_content_my_app() {
 		$options = appointments_get_options();
-		if ( sset( $options['gcal'] ) && 'yes' == $options['gcal'] ) { $gcal = ''; // Default is already enabled
-		} else { $gcal = ' gcal="0"'; }
-
+		$gcal = ' gcal="0"';
+		if ( isset( $options['gcal'] ) && 'yes' == $options['gcal'] ) {
+			$gcal = ''; // Default is already enabled
+		}
 		$user_id = bp_loggedin_user_id();
-
 		do_action( 'app_before_bp_my_appointments', $user_id );
-
 		if ( ! appointments_is_worker( $user_id ) ) {
-			echo do_shortcode( '[app_my_appointments ' . $gcal . ']' ); } else { echo do_shortcode( '[app_my_appointments status="paid,confirmed,pending" _allow_confirm=1 provider=1 '.$gcal.']' ); }
-
+			echo do_shortcode( '[app_my_appointments ' . $gcal . ']' );
+		} else {
+			echo do_shortcode( '[app_my_appointments status="paid,confirmed,pending" _allow_confirm=1 provider=1 '.$gcal.']' );
+		}
 		do_action( 'app_after_bp_my_appointments', $user_id );
 	}
 
