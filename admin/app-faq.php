@@ -285,9 +285,10 @@ jQuery(document).ready(function($){
 		return 10;
 	}
 	add_filter( 'app_get_capacity', 'increase_capacity', 10, 2 );
+	add_filter( 'app-is_busy', '__return_false', 11 );
 	</pre>
 
-		<?php _e('This filter will NOT work if there is a single provider giving the selected service. Please also note that this is a kind of "hack" and when you have more than one service provider, this function may not work as expected in regards to working hours, as "virtual" providers will not be bound to working hours of existing providers. ', 'appointments');?>
+		<?php _e('Please note that this is a kind of "hack" and when you have more than one service provider, this function may not work as expected in regards to working hours, as "virtual" providers will not be bound to working hours of existing providers.', 'appointments');?>
 
 	</li>
 
