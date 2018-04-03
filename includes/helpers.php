@@ -418,19 +418,20 @@ function apppointments_is_range_busy( $start, $end, $args = array() ) {
 		$apps = appointments_get_appointments( $args );
 	}
 
+	$is_busy = false;
 	if ( $apps ) {
 		foreach ( $apps as $app ) {
 			//if ( $start >= strtotime( $app->start ) && $end <= strtotime( $app->end ) ) return true;
 			$app_properties = apply_filters( 'app-properties-for-calendar', array( 'start' => $app->start, 'end' => $app->end ), $app, $args );
-			
+
 			if ( $period->contains( $app_properties['start'], $app_properties['end'], true ) ) {
-				return true;
+				$is_busy = true;
 			}
 		}
 	}
 
 	// If we're here, no worker is set or (s)he's not busy by default. Let's go for quick filter trip.
-	$is_busy = apply_filters( 'app-is_busy', false, $period );
+	$is_busy = apply_filters( 'app-is_busy', $is_busy, $period );
 	if ( $is_busy ) {
 		return true;
 	}
