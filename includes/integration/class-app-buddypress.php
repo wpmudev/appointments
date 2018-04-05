@@ -50,11 +50,10 @@ class Appointments_Integration_BuddyPress {
 			global $current_user;
 			$user_id = $current_user->ID;
 			}
-
 			if (
 				! $user_id || ! wp_verify_nonce( $_POST['app_bp_settings_submit'],'app_bp_settings_submit' )
 				|| $user_id != $_POST['app_bp_settings_user'] || ! appointments_is_worker( $user_id )
-				|| ! isset( $options['allow_worker_confirm'] ) || 'yes' != $options['allow_worker_confirm']
+				|| ! isset( $options['allow_worker_wh'] ) || 'yes' != $options['allow_worker_wh']
 			) {
 				wp_die( 'You don\'t have the authority to do this.', 'appointments' );
 				exit;
@@ -238,6 +237,7 @@ class Appointments_Integration_BuddyPress {
 					<div class="submit">
 						<input type="submit" name="app_bp_settings_submit" value="<?php _e( 'Save Changes', 'appointments' )?>" class="auto">
 						<input type="hidden" name="app_bp_settings_user" value="<?php echo $user_id ?>">
+						<input type="hidden" name="worker_id" value="<?php echo $user_id ?>">
 						<?php wp_nonce_field( 'app_bp_settings_submit','app_bp_settings_submit' ); ?>
 					</div>
 				</form>
