@@ -413,8 +413,7 @@ function apppointments_is_range_busy( $start, $end, $args = array() ) {
 		}
 
 		$apps = $appointments->get_reserve_apps_by_worker( $args['location_id'], $args['worker_id'], $week );
-	}
-	else{
+	} else {
 		$apps = appointments_get_appointments( $args );
 	}
 
@@ -924,4 +923,22 @@ function _appointments_enqueue_sweetalert() {
  */
 function _appointments_is_pro() {
 	return apply_filters( 'appointments_is_pro', is_readable( appointments_plugin_dir() . 'includes/pro/class-app-pro.php' ) );
+}
+
+function _appointments_enqueue_jquery_ui_datepicker() {
+	wp_enqueue_script( 'jquery-ui-datepicker' );
+	wp_enqueue_style( 'app-jquery-ui', appointments_plugin_url() . 'admin/css/jquery-ui/jquery-ui.min.css', array(), appointments_get_db_version() );
+
+	/**
+ * add some inline styles
+ */
+	$style = '';
+	$style .= '.ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a {background:#333;color:#fff}';
+	$style .= '.app-datepick .ui-datepicker-inline .ui-datepicker-group .ui-datepicker-calendar td { padding: 0; }';
+	wp_add_inline_style( 'app-jquery-ui', $style );
+
+	$i18n = array(
+		'weekStart' => appointments_week_start(),
+	);
+	wp_localize_script( 'jquery-ui-datepicker', 'AppointmentsDateSettings', $i18n );
 }
