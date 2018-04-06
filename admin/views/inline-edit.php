@@ -66,13 +66,20 @@
 							</span>
 				</label>
 				<label style="float:left;width:30%; padding-left:5px;">
-					<select name="time" >
-						<?php
+                    <select name="time" >
+                        <option><?php esc_html_e( 'Unknown', 'appointments' ); ?></option>
+<?php
 						$_start_time = $app_id ? $app->get_start_time() : '';
-						for ( $t = 0; $t < 3600 * 24; $t = $t + $min_secs ): ?>
-							<?php $dhours_value = $appointments->secs_to_24h( $t ); // Hours in 08:30 format ?>
-							<option value="<?php echo esc_attr($dhours_value); ?>" <?php selected( $dhours_value, $_start_time ); ?>><?php echo $appointments->secs2hours( $t ); ?></option>
-						<?php endfor; ?>
+$slots = $appointments->_get_timetable_slots( $app->start, 0 );
+foreach( $slots as $slot ) {
+    printf(
+        '<option value="%s" %s>%s</option>',
+        esc_attr( $slot['hours'] ),
+        selected( $_start_time, $slot['hours'], false ),
+        esc_html( $slot['hours'] )
+    );
+}
+?>
 					</select>
 				</label>
 				<div style="clear:both; height:0"></div>
