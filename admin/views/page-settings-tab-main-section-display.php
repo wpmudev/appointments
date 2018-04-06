@@ -10,7 +10,7 @@
 				<option value="one_week" <?php selected( 'one_week' == @$options['app_page_type'] ); ?>><?php _e( 'current week\'s schedule', 'appointments' ) ?></option>
 				<option value="two_weeks" <?php selected( 'two_weeks' == @$options['app_page_type'] ); ?>><?php _e( 'current and next week\'s schedules', 'appointments' ) ?></option>
             </select>
-            <a href="#" class="button" data-nonce="<?php echo wp_create_nonce( 'appointment-create-page' ); ?>"><?php esc_html_e( 'Create page!', 'appointments' ); ?></a>
+            <a href="#" id="app_create_page_button" class="button" data-nonce="<?php echo wp_create_nonce( 'appointment-create-page' ); ?>"><?php esc_html_e( 'Create page!', 'appointments' ); ?></a>
 		</td>
 	</tr>
 

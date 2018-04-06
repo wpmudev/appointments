@@ -8,7 +8,7 @@ $use_payments = ( 'yes' == $options['payment_required'] );
 
 	<tr>
 		<th scope="row"><label for="payment_required"><?php _e( 'Payment required', 'appointments' ) ?></label></th>
-		<td>
+		<td class="app_payment_required">
             <?php _appointments_html_chceckbox( $options, 'payment_required', 'payment_row' ) ?>
 			<p class="description"><?php printf( __( 'Whether you require a payment to accept appointments. If selected Yes, client is asked to pay through Paypal and the appointment will be in pending status until the payment is confirmed by Paypal IPN. If selected No, appointment will be in pending status until you manually approve it using the %s unless Auto Confirm is not set as Yes.', 'appointments' ), '<a href="' . admin_url( 'admin.php?page=appointments' ) . '">' . __( 'Appointments page', 'appointments' ) . '</a>' ) ?></p>
 		</td>

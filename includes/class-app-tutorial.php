@@ -51,14 +51,14 @@ class App_Tutorial {
 		    'position' => array( 'edge' => 'left', 'align' => 'center' ),
 		));
 
-		$tutorial->add_step($settings . '&step=1#section-display', $title . '_page_app_settings', 'input:checkbox[name="make_an_appointment"]', __( 'Creating a functional front end appointment page', 'appointments' ), array(
-		    'content'  => '<p>' . esc_js( __( 'Appointments+ provides an easy way of creating an appointment page. Check this checkbox to include all shortcodes in a full functional page. You can later edit this page.', 'appointments' ) ).'</p>',
-		    'position' => array( 'edge' => 'left', 'align' => 'center' ),
-		));
-
 		$tutorial->add_step($settings. '&step=1#section-display', $title . '_page_app_settings', 'select[name="app_page_type"]', __( 'Creating a functional front end appointment page', 'appointments' ), array(
 		    'content'  => '<p>' . esc_js( __( 'You can select a schedule type from the list. To see how they look, you can also create more than one page, one by one and then delete unused ones.', 'appointments' ) ).'</p>',
 		    'position' => array( 'edge' => 'right', 'align' => 'center' ),
+		));
+
+		$tutorial->add_step($settings. '&step=1#section-display', $title . '_page_app_settings', '#app_create_page_button', __( 'Creating a functional front end appointment page', 'appointments' ), array(
+		    'content'  => '<p>' . esc_js( __( 'Push "Create page!" button to include all shortcodes in a full functional page. You can later edit this page.', 'appointments' ) ).'</p>',
+		    'position' => array( 'edge' => 'left', 'align' => 'center' ),
 		));
 
 		$tutorial->add_step($settings . '&step=1#section-display', $title . '_page_app_settings', 'select[name="color_set"]', __( 'Selecting a Color Set to Match Your Theme', 'appointments' ), array(
@@ -66,7 +66,7 @@ class App_Tutorial {
 		    'position' => array( 'edge' => 'right', 'align' => 'center' ),
 		));
 
-		$tutorial->add_step($settings . '#section-accesibility', $title . '_page_app_settings', 'select[name="login_required"]', __( 'Do you require login?', 'appointments' ), array(
+		$tutorial->add_step($settings . '#section-accesibility', $title . '_page_app_settings', '.app_login_required span.off', __( 'Do you require login?', 'appointments' ), array(
 		    'content'  => '<p>' . esc_js( __( 'You can set whether client is required to log into the website to apply for an appointment. When you select this setting as Yes, you will see additional settings.', 'appointments' ) ).'</p>',
 		    'position' => array( 'edge' => 'left', 'align' => 'center' ),
 		));
@@ -76,12 +76,12 @@ class App_Tutorial {
 		    'position' => array( 'edge' => 'right', 'align' => 'center' ),
 		));
 
-		$tutorial->add_step($settings . '#section-payments', $title . '_page_app_settings', 'select[name="payment_required"]', __( 'Do you require payment?', 'appointments' ), array(
+		$tutorial->add_step($settings . '#section-payments', $title . '_page_app_settings', '.app_payment_required span.off', __( 'Do you require payment?', 'appointments' ), array(
 		    'content'  => '<p>' . esc_js( __( 'You can set whether client is asked for a payment to accept his appointment. If this setting is selected as Yes, appointment will be in pending status until a succesful Paypal payment is completed. After you select this, you will see additional fields for your Paypal account, deposits and integration with Membership plugin.', 'appointments' ) ).'</p>',
 		    'position' => array( 'edge' => 'left', 'align' => 'center' ),
 		));
 
-		$tutorial->add_step($settings . '&step=1#section-notifications', $title . '_page_app_settings', '#app-settings-section-notifications', __( 'Email notifications', 'appointments' ), array(
+		$tutorial->add_step($settings . '&step=1#section-notifications', $title . '_page_app_settings', '.subsubsub .current', __( 'Email notifications', 'appointments' ), array(
 		    'content'  => '<p>' . esc_js( __( 'There are several notification settings. Using these, you can confirm and remind your clients and also your service providers.', 'appointments' ) ).'</p>',
 		    'position' => array( 'edge' => 'left', 'align' => 'center' ),
 		));
@@ -121,7 +121,7 @@ class App_Tutorial {
 		    'position' => array( 'edge' => 'left', 'align' => 'center' ),
 		));
 
-		$tutorial->add_step($settings . '&tab=services', $title . '_page_app_settings', '#add_service', __( 'Setting your services', 'appointments' ), array(
+		$tutorial->add_step($settings . '&tab=services', $title . '_page_app_settings', '.services-new-service', __( 'Setting your services', 'appointments' ), array(
 		    'content'  => '<p>' . esc_js( __( 'You can add new service by clicking this button. A default service should have been installed during installation. You can edit and even delete that too, but you should have at least one service in this table.', 'appointments' ) ).'</p>',
 		    'position' => array( 'edge' => 'left', 'align' => 'center' ),
 		));
@@ -136,15 +136,17 @@ class App_Tutorial {
 		    'position' => array( 'edge' => 'right', 'align' => 'center' ),
 		));
 
-		$tutorial->add_step($settings . '&tab=workers', $title . '_page_app_settings', '#add_worker', __( 'Adding service providers', 'appointments' ), array(
+		$tutorial->add_step($settings . '&tab=workers', $title . '_page_app_settings', '.workers-new-worker', __( 'Adding service providers', 'appointments' ), array(
 		    'content'  => '<p>' . esc_js( __( 'Adding service providers is optional. You may need this if the working schedule of your service providers are different or you want the client to pick a provider by his name. You can add new service provider by clicking this button. ', 'appointments' ) ).'</p>',
 		    'position' => array( 'edge' => 'left', 'align' => 'center' ),
 		));
 
+		/*
 		$tutorial->add_step($settings . '&tab=workers', $title . '_page_app_settings', '#app_tab_shortcodes', __( 'Additional Information', 'appointments' ), array(
 		    'content'  => '<p>' . esc_js( __( 'You can find detailed information about shortcode parameters on the Shortcodes page and answers to common questions on the FAQ page. Of course we will be glad to help you on our Community pages too.', 'appointments' ) ).'</p>',
 		    'position' => array( 'edge' => 'right', 'align' => 'center' ),
-		));
+        ));
+         */
 
 		$tutorial->add_step($settings . '&tab=workers', $title . '_page_app_settings', 'a.wp-first-item:contains("Appointments")', __( 'Appointment List', 'appointments' ), array(
 		    'content'  => '<p>' . esc_js( __( 'As you start receiving appointments, you will see them here. Click on the Appointments menu item to start the other tutorial, if you have not seen it yet.', 'appointments' ) ).'</p>',

@@ -86,7 +86,7 @@
 
 	<tr>
 		<th scope="row"><label for="login_required"><?php _e( 'Login required', 'appointments' ) ?></label></th>
-		<td colspan="2">
+		<td colspan="2" class="app_login_required">
             <?php _appointments_html_chceckbox( $options, 'login_required', 'api_detail' ) ?>
 			<p class="description"><?php _e( 'Whether you require the client to login to the website to apply for an appointment. Plugin lets front end logins, without the need for leaving the front end appointment page.', 'appointments' ) ?></p>
 		</td>

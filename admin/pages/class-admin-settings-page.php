@@ -75,7 +75,7 @@ class Appointments_Admin_Settings_Page {
 			$content = '<ul class="subsubsub">';
 			$links = array();
 			foreach ( $sections[ $tab ] as $section_stub => $label ) {
-				$links[] = '<li><a href="#section-' . esc_attr( $section_stub ) . '" data-section="section-' . esc_attr( $section_stub ) . '">' . esc_html( $label ) . '</a></li>';
+				$links[] = '<li><a href="#section-' . esc_attr( $section_stub ) . '" data-section="section-' . esc_attr( $section_stub ) . '" class="'.esc_attr( $tab.'-'.$section_stub ).'">' . esc_html( $label ) . '</a></li>';
 			}
 			$content .= implode( ' | ', $links );
 			$content .= '</ul>';
