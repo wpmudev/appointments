@@ -668,9 +668,9 @@ if ( ! class_exists( 'Appointments' ) ) {
 			 * Set first week day from WP settings
 			 */
 			$shift = intval( get_option( 'start_of_week' ) );
-			while ( 0 < $shift-- ) {
-				$a = array_shift( $days );
-				array_push( $days, $a );
+			if ( 0 < $shift ) {
+				$a = array_splice( $days, 0, $shift );
+				$days += $a;
 			}
 			return $days;
 		}
