@@ -106,4 +106,26 @@ jQuery( document ).ready( function( $ ) {
         });
         return false;
     });
+
+    /**
+     * handlw delete service provider
+     */
+    $(document).on('click', '#workers-table .delete a', function() {
+        if ( window.confirm( app_i10n.messages.workers.delete_confirmation ) ) {
+            var data = {
+                'action': 'delete_worker',
+                'nonce': $(this).data('nonce'),
+                'id': $(this).data('id')
+            };
+            $.post( ajaxurl, data, function( response ) {
+                if ( response.success ) {
+                    $('tr#app-tr-worker-'+data.id).detach();
+                }
+                var html = '<div class="notice notice-'+(response.success? 'success':'error')+' is-dismissible"><p>'+response.data.message+'</p></div>';
+                $('.appointments-settings h1').after(html);
+            }
+            );
+        }
+    });
+
 });

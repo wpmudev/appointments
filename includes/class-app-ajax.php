@@ -27,7 +27,8 @@ class Appointments_AJAX {
 		add_action( 'wp_ajax_nopriv_services_load_thumbnail', array( $this, 'load_service_thumbnail' ) );
 
 		add_filter( 'app-export-columns', array( $this, 'app_export_columns' ) );
-	}
+        add_action( 'wp_ajax_delete_worker', array( $this, 'delete_worker' ) );
+    }
 
 	public function load_service_thumbnail() {
 		wp_send_json_success( array( 'hello' ) );
@@ -1154,6 +1155,32 @@ class Appointments_AJAX {
         );
         $data = json_encode( $data );
         die( $data );
+    }
+
+    /**
+     * Delete worker
+     *
+     * @since 2.2.6
+     */
+    public function delete_worker() {
+        $data = array( 'message' => __( 'Sorry, there was a problem with your request!', 'appointments') );
+        if ( ! isset( $_POST['id'] ) || ! isset( $_POST['nonce'] ) ) {
+            wp_send_json_error( $data );
+        }
+        $worker_id = filter_input( INPUT_POST, 'id', FILTER_VALIDATE_INT );
+        $nonce = sprintf( 'worker-%d', $worker_id );
+        if ( ! wp_verify_nonce( $_POST['nonce'], $nonce ) ) {
+            wp_send_json_error( $data );
+        }
+        $result = appointments_delete_worker( $worker_id );
+        if ( $result ) {
+            $data = array(
+                'message' => __( 'Service Provider was successfuly deleted.', 'appointments' ),
+                'id' => $worker_id,
+            );
+            wp_send_json_success( $data );
+        }
+        wp_send_json_error();
     }
 
 }

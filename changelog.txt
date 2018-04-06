@@ -8,6 +8,7 @@
 - Fixed a problem with appointments details, the start hour of appointment is now depend of settings.
 - Fixed a problem with tutorial restart.
 - Added asterix to required fields label on appointment form.
+- Added ability to delete "Service Provider".
 
 2018-03-27 - 2.2.5
 -------------------------------

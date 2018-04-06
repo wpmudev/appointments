@@ -96,6 +96,9 @@ class Appointments_Admin_Settings_Page {
 				'presets' => $presets,
 				'messages' => array(
 					'select_service_provider' => __( 'Please, select at least one service provided', 'appointments' ),
+					'workers' => array(
+						'delete_confirmation' => __( 'Are you sure to delete this Service Provider?', 'appointments' ),
+					),
 				),
 			));
 			return $content;

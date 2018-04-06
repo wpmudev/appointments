@@ -12,35 +12,36 @@ if ( empty( $pages ) ) {
 }
 ?>
 
-<p><?php _e( '<i>Here you should define your workers for which your client will be making appointments. <b>There must be at least one service defined.</b> Capacity is the number of customers that can take the service at the same time. Enter 0 for no specific limit (Limited to number of service providers, or to 1 if no service provider is defined for that service). Price is only required if you request payment to accept appointments. You can define a description page for the service you are providing.</i>', 'appointments') ?></p>
+<p><?php _e( '<i>Here you should define your workers for which your client will be making appointments. <b>There must be at least one service defined.</b> Capacity is the number of customers that can take the service at the same time. Enter 0 for no specific limit (Limited to number of service providers, or to 1 if no service provider is defined for that service). Price is only required if you request payment to accept appointments. You can define a description page for the service you are providing.</i>', 'appointments' ) ?></p>
 
 
 <form method="post" action="">
 
 	<table class="widefat fixed" id="workers-table" >
 		<tr>
-			<th style="width:5%"><?php _e( 'ID', 'appointments') ?></th>
-			<th style="width:25%"><?php _e( 'Service Provider', 'appointments') ?></th>
-			<th style="width:10%"><?php _e( 'Dummy?', 'appointments') ?></th>
-			<th style="width:10%"><?php  echo __( 'Additional Price', 'appointments') . ' ('. $appointments->options['currency']. ')' ?></th>
-			<th style="width:25%"><?php _e( 'Services Provided*', 'appointments') ?></th>
-			<th style="width:25%"><?php _e( 'Bio page', 'appointments') ?></th>
+			<th style="width:5%"><?php _e( 'ID', 'appointments' ) ?></th>
+			<th style="width:25%"><?php _e( 'Service Provider', 'appointments' ) ?></th>
+			<th style="width:10%"><?php _e( 'Dummy?', 'appointments' ) ?></th>
+			<th style="width:10%"><?php  echo __( 'Additional Price', 'appointments' ) . ' ('. $appointments->options['currency']. ')' ?></th>
+			<th style="width:23%"><?php _e( 'Services Provided*', 'appointments' ) ?></th>
+            <th style="width:23%"><?php _e( 'Bio page', 'appointments' ) ?></th>
+            <th style="width:4%"><?php _e( 'Delete', 'appointments' ) ?></th>
 		</tr>
 		<tr>
-			<td colspan="6">
-				<span class="description" style="font-size:11px"><?php _e('* <b>You must select at least one service, otherwise provider will not be saved!</b>', 'appointments') ?></span>
+			<td colspan="7">
+				<span class="description" style="font-size:11px"><?php _e( '* <b>You must select at least one service, otherwise provider will not be saved!</b>', 'appointments' ) ?></span>
 			</td>
 		</tr>
-		<?php if ( $workers ): ?>
-			<?php foreach ( $workers as $worker ): ?>
+		<?php if ( $workers ) :  ?>
+			<?php foreach ( $workers as $worker ) :  ?>
 				<?php $workers_dropdown = wp_dropdown_users( array(
 					'echo'     => 0,
 					'show'     => 'user_login',
 					'selected' => $worker->ID,
 					'name'     => 'workers[' . $worker->ID . '][user]',
-					'exclude'  => apply_filters( 'app_filter_providers', null )
+					'exclude'  => apply_filters( 'app_filter_providers', null ),
 				) ); ?>
-				<tr>
+				<tr id="app-tr-worker-<?php echo esc_attr( $worker->ID ); ?>">
 					<td>
 						<?php echo $worker->ID; ?>
 					</td>
@@ -58,10 +59,10 @@ if ( empty( $pages ) ) {
 						<input id="worker-<?php echo $worker->ID; ?>-price" class="widefat" type="text" name="workers[<?php echo $worker->ID; ?>][price]" value="<?php echo esc_attr( $worker->price ); ?>" />
 					</td>
 					<td>
-						<?php if ( $services ): ?>
+						<?php if ( $services ) :  ?>
 							<label for="workers-<?php echo $worker->ID; ?>-services_provided" class="screen-reader-text"><?php _e( 'Services Provided', 'appointments' ); ?></label>
 							<select class="add_worker_multiple" style="width:280px" multiple="multiple" name="workers[<?php echo $worker->ID; ?>][services_provided][]" id="workers-<?php echo $worker->ID; ?>-services_provided">
-								<?php foreach ( $services as $service ): ?>
+								<?php foreach ( $services as $service ) :  ?>
 									<?php
 										$services_provided = $worker->services_provided;
 										$title = stripslashes( $service->name );
@@ -69,7 +70,7 @@ if ( empty( $pages ) ) {
 									<option value="<?php echo $service->ID; ?>" <?php selected( in_array( $service->ID, $services_provided ) ); ?>><?php echo esc_html( $title ); ?></option>
 								<?php endforeach; ?>
 							</select>
-						<?php else: ?>
+						<?php else : ?>
 							<?php _e( 'No services defined', 'appointments' ); ?>
 						<?php endif; ?>
 					</td>
@@ -77,22 +78,23 @@ if ( empty( $pages ) ) {
 						<label for="worker-<?php echo $worker->ID; ?>-page" class="screen-reader-text"><?php _e( 'Description Page', 'appointments' ); ?></label>
 						<select id="worker-<?php echo $worker->ID; ?>-page" name="workers[<?php echo $worker->ID; ?>][page]">
 							<option value="0"><?php esc_html_e( 'None', 'appointments' ); ?></option>
-							<?php foreach( $pages as $page ): ?>
+							<?php foreach ( $pages as $page ) :  ?>
 								<option value="<?php echo $page->ID; ?>" <?php selected( $worker->page == $page->ID ); ?>><?php echo esc_html( $page->post_title ); ?></option>
 							<?php endforeach; ?>
 						</select>
-					</td>
+                    </td>
+                    <td class="delete aligncenter"><a data-id="<?php echo esc_attr( $worker->ID ); ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( 'worker-'.$worker->ID ) ); ?>"><span class="dashicons dashicons-trash"></span></a></td>
 				</tr>
 			<?php endforeach; ?>
-		<?php else: ?>
+		<?php else : ?>
 			<tr class="no_workers_defined"><td colspan="4"><?php _e( 'No service providers defined', 'appointments' ); ?></td></tr>
 		<?php endif; ?>
 
 	</table>
 
-	<?php _e( '<i>Tip: To remove a service provider, uncheck all "Services Provided" selections and save.</i>', 'appointments' ); ?>
+	<i><?php _e( 'Tip: When you uncheck all "Services Provided" selections and save, this service provider will be deleted.', 'appointments' ); ?></i>
 
-	<?php if ( $workers ): ?>
+	<?php if ( $workers ) :  ?>
 		<?php _appointments_settings_submit_block( $tab ); ?>
 	<?php endif; ?>
 
