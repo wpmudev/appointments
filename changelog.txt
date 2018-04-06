@@ -6,6 +6,7 @@
 - Fixed a warning message for ob_end_flush() in older version of PHP.
 - Improved appointments calendars, now starts on day set in WordPress options.
 - Fixed a problem with appointments details, the start hour of appointment is now depend of settings.
+- Fixed a problem with tutorial restart.
 
 2018-03-27 - 2.2.5
 -------------------------------
