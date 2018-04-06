@@ -162,7 +162,7 @@ function appointments_get_weekly_schedule_slots( $now = false, $service_id = 0, 
 	$hour_end = apply_filters( 'app_schedule_ending_hour', $hour_end, $now, 'week' );
 
 	$step = $appointments->get_min_time() * MINUTE_IN_SECONDS; // Timestamp increase interval to one cell below
-	if ( ! appointments_use_legacy_duration_calculus() ) {
+	if( ! apply_filters( 'appointments_use_legacy_duration_end_time', false ) ){
 		$service = appointments_get_service( $service_id );
 		if ( $service ) {
 			$step = $service->duration * MINUTE_IN_SECONDS;
@@ -271,16 +271,14 @@ function appointments_get_worker_weekly_start_hours( $service_id = 0, $worker_id
 	$step = $duration = $appointments->get_min_time() * MINUTE_IN_SECONDS;
 	$worker = appointments_get_worker( $worker_id );
 	$worker_working_hours = appointments_get_worker_working_hours( 'open', $worker_id, $location_id );
-	$service = appointments_get_service( $service_id );
 
-	if ( $service ) {
-		$duration = $service->duration * MINUTE_IN_SECONDS;
+	if ( ! appointments_use_legacy_duration_calculus() ) {
+		$service = appointments_get_service( $service_id );
+		if ( $service ) {
+			$duration = $service->duration * MINUTE_IN_SECONDS;
+		}
 	}
 
-	$service = appointments_get_service( $service_id );
-	if ( $service ) {
-		$duration = $service->duration * MINUTE_IN_SECONDS;
-	}
 
 	if ( ! empty( $worker_working_hours ) && isset( $worker_working_hours->hours ) && ! empty( $worker_working_hours->hours ) ) {
 
