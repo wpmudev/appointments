@@ -153,19 +153,19 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 
 				<div class="appointments-name-field" style="display:none">
 					<label>
-						<span><?php echo $args['name']; ?></span>
+						<span><?php echo $args['name']; ?><b class="required">*</b></span>
 						<input type="text" class="appointments-name-field-entry" id="<?php echo esc_attr(apply_filters('app-shortcode-confirmation-name_field_id', 'appointments-field-customer_name')); ?>" value="<?php echo esc_attr( $n ); ?>" />
 					</label>
 				</div>
 				<div class="appointments-email-field" style="display:none">
 					<label>
-						<span><?php echo $args['email']; ?></span>
+						<span><?php echo $args['email']; ?><b class="required">*</b></span>
 						<input type="text" class="appointments-email-field-entry" id="<?php echo esc_attr(apply_filters('app-shortcode-confirmation-email_field_id', 'appointments-field-customer_email')); ?>" value="<?php echo esc_attr( $e ); ?>" />
 					</label>
 				</div>
 				<div class="appointments-phone-field" style="display:none">
 					<label>
-						<span><?php echo $args['phone']; ?></span>
+						<span><?php echo $args['phone']; ?><b class="required">*</b></span>
 						<input type="text" class="appointments-phone-field-entry" id="<?php echo esc_attr(apply_filters('app-shortcode-confirmation-phone_field_id', 'appointments-field-customer_phone')); ?>" value="<?php echo esc_attr( $p ); ?>" />
 					</label>
 				</div>
