@@ -655,15 +655,24 @@ if ( ! class_exists( 'Appointments' ) ) {
 	 * @return array
 	 */
 		function weekdays() {
-			return array(
-			__( 'Sunday', 'appointments' ) => 'Sunday',
-			__( 'Monday', 'appointments' ) => 'Monday',
-			__( 'Tuesday', 'appointments' ) => 'Tuesday',
-			__( 'Wednesday', 'appointments' ) => 'Wednesday',
-			__( 'Thursday', 'appointments' ) => 'Thursday',
-			__( 'Friday', 'appointments' ) => 'Friday',
-			__( 'Saturday', 'appointments' ) => 'Saturday',
+			$days = array(
+				__( 'Sunday', 'appointments' ) => 'Sunday',
+				__( 'Monday', 'appointments' ) => 'Monday',
+				__( 'Tuesday', 'appointments' ) => 'Tuesday',
+				__( 'Wednesday', 'appointments' ) => 'Wednesday',
+				__( 'Thursday', 'appointments' ) => 'Thursday',
+				__( 'Friday', 'appointments' ) => 'Friday',
+				__( 'Saturday', 'appointments' ) => 'Saturday',
 			);
+			/**
+			 * Set first week day from WP settings
+			 */
+			$shift = intval( get_option( 'start_of_week' ) );
+			while ( 0 < $shift-- ) {
+				$a = array_shift( $days );
+				array_push( $days, $a );
+			}
+			return $days;
 		}
 
 		/**
