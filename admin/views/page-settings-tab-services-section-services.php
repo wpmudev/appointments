@@ -13,23 +13,25 @@ if ( empty( $pages ) ) {
 }
 ?>
 
-<p><?php _e( '<i>Here you should define your services for which your client will be making appointments. <b>There must be at least one service defined.</b> Capacity is the number of customers that can take the service at the same time. Enter 0 for no specific limit (Limited to number of service providers, or to 1 if no service provider is defined for that service). Price is only required if you request payment to accept appointments. You can define a description page for the service you are providing.</i>', 'appointments') ?></p>
+<p><?php _e( '<i>Here you should define your services for which your client will be making appointments. <b>There must be at least one service defined.</b> Capacity is the number of customers that can take the service at the same time. Enter 0 for no specific limit (Limited to number of service providers, or to 1 if no service provider is defined for that service). Price is only required if you request payment to accept appointments. You can define a description page for the service you are providing.</i>', 'appointments' ) ?></p>
 
 
 <form method="post" action="">
 
 	<table class="widefat fixed" id="services-table" >
 		<tr>
-			<th style="width:5%"><?php _e( 'ID', 'appointments') ?></th>
-			<th style="width:35%"><?php _e( 'Name', 'appointments') ?></th>
-			<th style="width:10%"><?php _e( 'Capacity', 'appointments') ?></th>
-			<th style="width:15%"><?php _e( 'Duration (mins)', 'appointments') ?></th>
-			<th style="width:10%"><?php echo __( 'Price', 'appointments') . ' ('. $currency. ')' ?></th>
-			<th style="width:25%"><?php _e( 'Description page', 'appointments') ?></th>
+			<th style="width:5%"><?php _e( 'ID', 'appointments' ) ?></th>
+			<th style="width:34%"><?php _e( 'Name', 'appointments' ) ?></th>
+			<th style="width:10%"><?php _e( 'Capacity', 'appointments' ) ?></th>
+			<th style="width:14%"><?php _e( 'Duration (mins)', 'appointments' ) ?></th>
+			<th style="width:9%"><?php echo __( 'Price', 'appointments' ) . ' ('. $currency. ')' ?></th>
+			<th style="width:24%"><?php _e( 'Description page', 'appointments' ) ?></th>
+            <th style="width:4%"><?php _e( 'Delete', 'appointments' ) ?></th>
 		</tr>
-		<?php if ( $services ): ?>
-			<?php foreach ( $services as $service ): ?>
-				<tr>
+        <?php if ( $services ) :  ?>
+            <tbody class="services">
+			<?php foreach ( $services as $service ) :  ?>
+				<tr id="app-tr-service-<?php echo esc_attr( $service->ID ); ?>">
 					<td>
 						<?php echo $service->ID; ?>
 					</td>
@@ -45,7 +47,7 @@ if ( empty( $pages ) ) {
 					<td>
 						<label for="service-<?php echo $service->ID; ?>-duration" class="screen-reader-text"><?php _e( 'Service Duration', 'appointments' ); ?></label>
 						<select id="service-<?php echo $service->ID; ?>-duration" name="services[<?php echo $service->ID; ?>][duration]">
-							<?php for ( $k=1; $k<=$k_max; $k++ ): ?>
+							<?php for ( $k = 1; $k <= $k_max; $k++ ) :  ?>
 								<option <?php selected( ( $k * $min_time ) == $service->duration ); ?>><?php echo $k * $min_time; ?></option>
 							<?php endfor; ?>
 						</select>
@@ -58,22 +60,24 @@ if ( empty( $pages ) ) {
 						<label for="service-<?php echo $service->ID; ?>-page" class="screen-reader-text"><?php _e( 'Description Page', 'appointments' ); ?></label>
 						<select id="service-<?php echo $service->ID; ?>-page" name="services[<?php echo $service->ID; ?>][page]">
 							<option value="0"><?php esc_html_e( 'None', 'appointments' ); ?></option>
-							<?php foreach( $pages as $page ): ?>
+							<?php foreach ( $pages as $page ) :  ?>
 								<option value="<?php echo $page->ID; ?>" <?php selected( $service->page == $page->ID ); ?>><?php echo esc_html( $page->post_title ); ?></option>
 							<?php endforeach; ?>
 						</select>
 					</td>
+                    <td class="delete"><a data-id="<?php echo esc_attr( $service->ID ); ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( 'service-'.$service->ID ) ); ?>"><span class="dashicons dashicons-trash"></span></a></td>
 				</tr>
-			<?php endforeach; ?>
-		<?php else: ?>
-			<tr class="no_services_defined"><td colspan="4"><?php _e( 'No services defined', 'appointments' ); ?></td></tr>
+            <?php endforeach; ?>
+</tbody>
 		<?php endif; ?>
-
+        <tbody class="no <?php echo $services? 'hidden':''; ?>">
+            <tr class="no_services_defined"><td colspan="7"><?php _e( 'No services defined', 'appointments' ); ?></td></tr>
+        </tbody>
 	</table>
 
-	<p><?php _e( '<i>Tip: To delete a service, just clear its name and save.</i>', 'appointments' ); ?></p>
+	<p><?php _e( '<i>Tip: When you clear service name and save changes, this service will be deleted.</i>', 'appointments' ); ?></p>
 
-	<?php if ( $services ): ?>
+	<?php if ( $services ) :  ?>
 		<?php _appointments_settings_submit_block( $tab ); ?>
 	<?php endif; ?>
 

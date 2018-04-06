@@ -99,6 +99,9 @@ class Appointments_Admin_Settings_Page {
 					'workers' => array(
 						'delete_confirmation' => __( 'Are you sure to delete this Service Provider?', 'appointments' ),
 					),
+					'services' => array(
+						'delete_confirmation' => __( 'Are you sure to delete this Service?', 'appointments' ),
+					),
 				),
 			));
 			return $content;

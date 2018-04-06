@@ -121,3 +121,8 @@ body.appointments_page_app_settings .appointments-settings-tab-working_hours tab
 body.appointments_page_app_settings .appointments-settings-tab-working_hours table.widefat th {
 	font-weight:bold;
 }
+
+#services-table .delete a,
+#workers-table .delete a {
+    cursor: pointer;
+}

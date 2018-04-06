@@ -1,14 +1,15 @@
 2018-xx-xx - 2.2.6
 -------------------------------
-- Fixed a problem with double send reminders.
+- Added ability to delete "Service".
+- Added ability to delete "Service Provider".
+- Added asterix to required fields label on appointment form.
+- Fixed a problem with appointments details, the start hour of appointment is now depend of settings.
 - Fixed a problem with Appointments settings on BuddyPress profile.
 - Fixed a problem with BuddyPress profile integration.
+- Fixed a problem with double send reminders.
+- Fixed a problem with tutorial restart.
 - Fixed a warning message for ob_end_flush() in older version of PHP.
 - Improved appointments calendars, now starts on day set in WordPress options.
-- Fixed a problem with appointments details, the start hour of appointment is now depend of settings.
-- Fixed a problem with tutorial restart.
-- Added asterix to required fields label on appointment form.
-- Added ability to delete "Service Provider".
 
 2018-03-27 - 2.2.5
 -------------------------------

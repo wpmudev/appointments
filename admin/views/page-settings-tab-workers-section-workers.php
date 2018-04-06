@@ -32,7 +32,8 @@ if ( empty( $pages ) ) {
 				<span class="description" style="font-size:11px"><?php _e( '* <b>You must select at least one service, otherwise provider will not be saved!</b>', 'appointments' ) ?></span>
 			</td>
 		</tr>
-		<?php if ( $workers ) :  ?>
+        <?php if ( $workers ) :  ?>
+            <tbody class="workers">
 			<?php foreach ( $workers as $worker ) :  ?>
 				<?php $workers_dropdown = wp_dropdown_users( array(
 					'echo'     => 0,
@@ -82,14 +83,15 @@ if ( empty( $pages ) ) {
 								<option value="<?php echo $page->ID; ?>" <?php selected( $worker->page == $page->ID ); ?>><?php echo esc_html( $page->post_title ); ?></option>
 							<?php endforeach; ?>
 						</select>
-                    </td>
-                    <td class="delete aligncenter"><a data-id="<?php echo esc_attr( $worker->ID ); ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( 'worker-'.$worker->ID ) ); ?>"><span class="dashicons dashicons-trash"></span></a></td>
+					</td>
+					<td class="delete"><a data-id="<?php echo esc_attr( $worker->ID ); ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( 'worker-'.$worker->ID ) ); ?>"><span class="dashicons dashicons-trash"></span></a></td>
 				</tr>
-			<?php endforeach; ?>
-		<?php else : ?>
-			<tr class="no_workers_defined"><td colspan="4"><?php _e( 'No service providers defined', 'appointments' ); ?></td></tr>
+            <?php endforeach; ?>
+        </tbody>
 		<?php endif; ?>
-
+        <tbody class="no <?php echo $workers? 'hidden':''; ?>">
+			<tr class="no_workers_defined"><td colspan="7"><?php _e( 'No service providers defined', 'appointments' ); ?></td></tr>
+        </tbody>
 	</table>
 
 	<i><?php _e( 'Tip: When you uncheck all "Services Provided" selections and save, this service provider will be deleted.', 'appointments' ); ?></i>
