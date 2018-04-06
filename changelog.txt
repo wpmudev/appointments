@@ -3,6 +3,7 @@
 - Fixed a problem with double send reminders.
 - Fixed a problem with Appointments settings on BuddyPress profile.
 - Fixed a problem with BuddyPress profile integration.
+- FIxed a warning message for ob_end_flush() in older version of PHP.
 
 2018-03-27 - 2.2.5
 -------------------------------

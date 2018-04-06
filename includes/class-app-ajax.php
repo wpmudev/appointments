@@ -1057,8 +1057,14 @@ class Appointments_AJAX {
 		$filename = "appointments_".date('F')."_".date('d')."_".date('Y').".csv";
 
 		//serve the file
-		rewind($file);
-		ob_end_clean(); //kills any buffers set by other plugins
+        rewind($file);
+        /**
+         * Check buffers
+         */
+        $list = ob_list_handlers();
+        if ( ! empty( $list ) ) {
+            ob_end_clean(); //kills any buffers set by other plugins
+        }
 		header('Content-Description: File Transfer');
 		header('Content-Type: text/csv');
 		header('Content-Disposition: attachment; filename="'.$filename.'"');
