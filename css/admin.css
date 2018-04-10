@@ -126,3 +126,11 @@ body.appointments_page_app_settings .appointments-settings-tab-working_hours tab
 #workers-table .delete a {
     cursor: pointer;
 }
+
+#app-export-date_range {
+    margin-top: 1em;
+}
+#app-export-date_range label {
+    display: block;
+}
+
