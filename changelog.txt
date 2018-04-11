@@ -3,6 +3,7 @@
 - Changed default appointments sorting to "Appointment Date".
 - Fixed export problem for date range.
 - Fixed export problem for additional fields with html entites in name.
+- Fixed a problem with booking, when site is on HTTP but admin force HTTPS usage.
 
 2018-xx-xx - 2.2.6
 -------------------------------
