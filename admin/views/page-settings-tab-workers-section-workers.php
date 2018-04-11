@@ -25,7 +25,7 @@ if ( empty( $pages ) ) {
 			<th style="width:10%"><?php  echo __( 'Additional Price', 'appointments' ) . ' ('. $appointments->options['currency']. ')' ?></th>
 			<th style="width:23%"><?php _e( 'Services Provided*', 'appointments' ) ?></th>
             <th style="width:23%"><?php _e( 'Bio page', 'appointments' ) ?></th>
-            <th style="width:4%"><?php _e( 'Delete', 'appointments' ) ?></th>
+            <th style="width:4%;word-wrap:normal;"><?php _e( 'Delete', 'appointments' ) ?></th>
 		</tr>
 		<tr>
 			<td colspan="7">
