@@ -980,7 +980,9 @@ if ( ! class_exists( 'Appointments' ) ) {
 	 */
 		function get_timetable( $day_start, $capacity, $schedule_key = false, $hide_today = false ) {
 			$local_time = current_time( 'timestamp' );
-			$data = $this->_get_timetable_slots( $day_start, $capacity, $schedule_key );
+            $data = $this->_get_timetable_slots( $day_start, $capacity, $schedule_key );
+if ( '2018-04-21' == date( 'Y-m-d', $day_start ) ) l($data);
+
 			// We need this only for the first timetable
 			// Otherwise $time will be calculated from $day_start
 			if ( isset( $_GET['wcalendar'] ) && (int) $_GET['wcalendar'] ) {

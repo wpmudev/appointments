@@ -391,7 +391,6 @@ function appointments_use_legacy_boundaries_calculus() {
  */
 function apppointments_is_range_busy( $start, $end, $args = array() ) {
 	$appointments = appointments();
-
 	$defaults = array(
 	    'worker_id'   => 0,
 	    'service_id'  => 0,
@@ -405,16 +404,13 @@ function apppointments_is_range_busy( $start, $end, $args = array() ) {
 
 	// If a specific worker is selected, we will look at his schedule first.
 	if ( 0 != $args['worker_id'] ) {
-
 		if ( ! appointments_is_working( $start, $end, $args['worker_id'], $args['location_id'] ) ) {
 			return true;
 		}
-
 		$apps = $appointments->get_reserve_apps_by_worker( $args['location_id'], $args['worker_id'], $week );
 	} else {
 		$apps = appointments_get_appointments( $args );
 	}
-
 	$is_busy = false;
 	if ( $apps ) {
 		foreach ( $apps as $app ) {
@@ -603,7 +599,6 @@ function appointments_monthly_calendar( $timestamp = false, $args = array() ) {
 						} else {
 							appointments_get_timetable( $ccs, $capacity, $schedule_key, $args['hide_today_times'] );
 						}
-
 						// Look if we have at least one cell free from get_timetable function
 						if ( $appointments->is_a_timetable_cell_free ) {
 							$class_name = 'free';
