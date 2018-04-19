@@ -2961,7 +2961,7 @@ msgid ""
 "Client Name: CLIENT\n"
 "Service Name: SERVICE\n"
 "Service Provider Name: SERVICE_PROVIDER\n"
-msgstr "\n"
+msgstr ""
 
 #: includes/class-app-notifications-manager.php:43
 msgid "Every 10 minutes or you can filter it with the app_update_time filter"
