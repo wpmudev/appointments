@@ -42,8 +42,8 @@ module.exports = function(grunt) {
     var excludeCopyFilesWPorg = excludeCopyFiles.slice(0).concat( [
         '!includes/pro/**',
         '!includes/external/wpmudev-dash/**',
-        '!includes/languages/*.po',
-        '!includes/languages/*.mo',
+        '!languages/*.po',
+        '!languages/*.mo',
         ] );
 
     grunt.initConfig({
