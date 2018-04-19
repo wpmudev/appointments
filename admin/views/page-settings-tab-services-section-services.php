@@ -26,7 +26,7 @@ if ( empty( $pages ) ) {
 			<th style="width:14%"><?php _e( 'Duration (mins)', 'appointments' ) ?></th>
 			<th style="width:9%"><?php echo __( 'Price', 'appointments' ) . ' ('. $currency. ')' ?></th>
 			<th style="width:24%"><?php _e( 'Description page', 'appointments' ) ?></th>
-            <th style="width:4%"><?php _e( 'Delete', 'appointments' ) ?></th>
+            <th style="width:4%;word-wrap:normal;"><?php _e( 'Delete', 'appointments' ) ?></th>
 		</tr>
         <?php if ( $services ) :  ?>
             <tbody class="services">
