@@ -30,6 +30,9 @@ a.pickcolor {
 	padding: 4px 14px;
 }
 
+td.delete {
+    text-align: center;
+}
 
 .app-add_break span {
 	display: none;

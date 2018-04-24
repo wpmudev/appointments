@@ -19,7 +19,7 @@ if ( empty( $pages ) ) {
 				<label for="service-name"><?php _e( 'Service Name', 'appointments' ); ?></label>
 			</th>
 			<td>
-				<input id="service-name" class="widefat" type="text" name="service_name" value=""/>
+				<input id="service-name" class="widefat" type="text" name="service_name" value="" required="required" />
 			</td>
 		</tr>
 		<tr>

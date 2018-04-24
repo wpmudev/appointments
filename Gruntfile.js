@@ -39,7 +39,12 @@ module.exports = function(grunt) {
         '!readme.txt'
     ] );
 
-    var excludeCopyFilesWPorg = excludeCopyFiles.slice(0).concat( [ '!includes/pro/**', '!includes/external/wpmudev-dash/**' ] );
+    var excludeCopyFilesWPorg = excludeCopyFiles.slice(0).concat( [
+        '!includes/pro/**',
+        '!includes/external/wpmudev-dash/**',
+        '!languages/*.po',
+        '!languages/*.mo',
+        ] );
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -101,7 +106,10 @@ module.exports = function(grunt) {
                 potHeaders: {
                     'report-msgid-bugs-to': 'https://wpmudev.org',
                     'language-team': 'LANGUAGE <EMAIL@ADDRESS>'
-                }
+                },
+                type: 'wp-plugin',
+                updateTimestamp: true,
+                updatePoFiles: true
             },
             dist: {
                 options: {
@@ -115,6 +123,24 @@ module.exports = function(grunt) {
                 }
             }
         },
+        /**
+         * update mo files
+         */
+		potomo: {
+			dist: {
+				options: {
+					poDel: false
+				},
+				files: [{
+					expand: true,
+					cwd: 'languages',
+					src: ['*.po'],
+					dest: 'languages',
+					ext: '.mo',
+					nonull: true
+				}]
+			}
+		},
 
         clean: {
             main: ['build/*']
