@@ -1,5 +1,6 @@
 2018-xx-xx - 2.2.7
 -------------------------------
+- Changed default appointments sorting to "Appointment Date".
 
 2018-04-24 - 2.2.6
 -------------------------------

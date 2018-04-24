@@ -13,8 +13,8 @@ class Appointments_Admin_Appointments_Page {
 	);
 
 	private $sorting = array(
-		'orderby' => 'ID',
-		'order' => 'DESC',
+		'orderby' => 'start',
+		'order' => 'ASC',
 	);
 
 	private $pagination_args = array(
@@ -161,8 +161,8 @@ class Appointments_Admin_Appointments_Page {
 
 	private function parse_sorting() {
 		$defaults = array(
-			'orderby' => 'ID',
-			'order' => 'DESC',
+			'orderby' => 'start',
+			'order' => 'ASC',
 		);
 
 		if ( isset( $_GET['orderby'] ) && $_GET['orderby'] ) {
