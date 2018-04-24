@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-04-19 05:31:16+00:00\n"
-"PO-Revision-Date: 2017-08-10 10:42:19+0000\n"
+"POT-Creation-Date: 2018-04-24 06:58:36+00:00\n"
+"PO-Revision-Date: 2018-04-21 12:11:32+0000\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2267,7 +2267,7 @@ msgstr ""
 
 #: admin/views/page-settings-tab-main-section-advanced.php:30
 msgid "Keep options on uninstall"
-msgstr ""
+msgstr "Einstellungen speichern nach Deinstallation"
 
 #: admin/views/page-settings-tab-main-section-advanced.php:34
 msgid ""
@@ -4889,6 +4889,7 @@ msgstr "Automatisch, nach Servicebeschreibung"
 msgid ""
 "You can use the shortcode like this: <code>[app_service_locations]</code>"
 msgstr ""
+"Sie können Shortcodes wie diesen nutzen: <code>[app_worker_location]</code>"
 
 #: includes/pro/includes/addons/app-locations-worker_locations.php:54
 msgid ""
@@ -4918,6 +4919,7 @@ msgstr "Automatisch, nach Mitarbeiterbeschreibung"
 msgid ""
 "You can use the shortcode like this: <code>[app_provider_locations]</code>"
 msgstr ""
+"Du kannst Shortcodes wie diesen nutzen: <code>[app_service_location]</code>"
 
 #: includes/pro/includes/addons/app-locations-worker_locations.php:152
 msgid "Location:"
