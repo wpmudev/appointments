@@ -1,6 +1,5 @@
 <?php
 
-
 class Appointments_AJAX {
 
 	public $options = array();
@@ -91,15 +90,15 @@ class Appointments_AJAX {
 	function js_error() {
 
 		// @TODO: Activate this again in future releases
-//		if  ( false && isset( $_POST['url'] ) ) {
-//			$this->error_url = $_POST['url'];
-//			$appointments->log( __('Javascript error on : ', 'appointments') . $this->error_url );
-//			die( json_encode( array( 'message'	=> '<div class="error"><p>' .
-//			                                         sprintf( __('<b>[Appointments+]</b> You have at least one javascript error on %s.<br />Error message: %s<br />File: %s<br />Line: %s', 'appointments'), $this->error_url, @$_POST['errorMessage'], @$_POST['file'], @$_POST['lineNumber']) .
-//			                                         '</p></div>')
-//			)
-//			);
-//		}
+		//		if  ( false && isset( $_POST['url'] ) ) {
+		//			$this->error_url = $_POST['url'];
+		//			$appointments->log( __('Javascript error on : ', 'appointments') . $this->error_url );
+		//			die( json_encode( array( 'message'	=> '<div class="error"><p>' .
+		//			                                         sprintf( __('<b>[Appointments+]</b> You have at least one javascript error on %s.<br />Error message: %s<br />File: %s<br />Line: %s', 'appointments'), $this->error_url, @$_POST['errorMessage'], @$_POST['file'], @$_POST['lineNumber']) .
+		//			                                         '</p></div>')
+		//			)
+		//			);
+		//		}
 		die();
 	}
 
@@ -162,7 +161,7 @@ class Appointments_AJAX {
 
 			$data['datetime'] = strtotime( $data['date'] . ' ' . $data['time'] . ':00' );
 			$update_result = appointments_update_appointment( $app_id, $data );
-			
+
 			// Send confirmation email if requested in update (only for confirmed or similar statuses)
 			$unconfirmable_statuses = array( 'removed', 'pending', 'completed' );
 
@@ -216,7 +215,7 @@ class Appointments_AJAX {
 			$message = $resend && !empty($data['status']) && 'removed' != $data['status']
 				? sprintf('<span style="color:green;font-weight:bold">%s</span>', __('Confirmation message (re)sent', 'appointments'))
 				: sprintf('<span style="color:red;font-weight:bold">%s</span>', __('Record could not be saved OR you did not make any changes!', 'appointments'))
-			;
+				;
 			$result = array(
 				'app_id' => $app_id,
 				'message' => $message,
@@ -321,11 +320,11 @@ class Appointments_AJAX {
 					__( 'You have already applied for an appointment. Please wait until you hear from us.', 'appointments')
 				),
 			)));
-        }
-        /**
-         * Check nonce
-         */
-        $this->security_check_die( 'AppShortcodeConfirmation' );
+		}
+		/**
+		 * Check nonce
+		 */
+		$this->security_check_die( 'AppShortcodeConfirmation' );
 
 		global $current_user;
 
@@ -384,13 +383,13 @@ class Appointments_AJAX {
 			$status = defined('APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM') && APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM
 				? 'confirmed'
 				: $status
-			;
+				;
 		}
 
 		$name = !empty($_POST['app_name'])
 			? sanitize_text_field($_POST["app_name"])
 			: $user_name
-		;
+			;
 		$name_check = apply_filters( "app_name_check", true, $name );
 		if ( ! $name_check ) {
 			$appointments->json_die( 'name' );
@@ -411,7 +410,7 @@ class Appointments_AJAX {
 		$phone = !empty($_POST['app_phone'])
 			? sanitize_text_field($_POST["app_phone"])
 			: ''
-		;
+			;
 		$phone_check = apply_filters("app_phone_check", true, $phone);
 		if ( ! $phone_check ) {
 			$appointments->json_die( 'phone' );
@@ -420,7 +419,7 @@ class Appointments_AJAX {
 		$address = !empty($_POST['app_address'])
 			? sanitize_text_field($_POST["app_address"])
 			: ''
-		;
+			;
 		$address_check = apply_filters("app_address_check", true, $address);
 		if ( ! $address_check ) {
 			$appointments->json_die( 'address' );
@@ -429,7 +428,7 @@ class Appointments_AJAX {
 		$city = !empty($_POST['app_city'])
 			? sanitize_text_field($_POST["app_city"])
 			: ''
-		;
+			;
 		$city_check = apply_filters("app_city_check", true, $city);
 		if ( ! $city_check ) {
 			$appointments->json_die( 'city' );
@@ -438,12 +437,12 @@ class Appointments_AJAX {
 		$note = !empty($_POST['app_note'])
 			? sanitize_text_field($_POST["app_note"])
 			: ''
-		;
+			;
 
 		$gcal = !empty($_POST['app_gcal'])
 			? $_POST['app_gcal']
 			: ''
-		;
+			;
 
 		do_action('app-additional_fields-validate');
 
@@ -668,9 +667,9 @@ class Appointments_AJAX {
 			}
 
 			$header = 'POST /cgi-bin/webscr HTTP/1.0' . "\r\n"
-			          . 'Content-Type: application/x-www-form-urlencoded' . "\r\n"
-			          . 'Content-Length: ' . strlen($req) . "\r\n"
-			          . "\r\n";
+				. 'Content-Type: application/x-www-form-urlencoded' . "\r\n"
+				. 'Content-Length: ' . strlen($req) . "\r\n"
+				. "\r\n";
 
 			@set_time_limit(60);
 			if ($conn = @fsockopen($domain, 80, $errno, $errstr, 30)) {
@@ -719,161 +718,161 @@ class Appointments_AJAX {
 
 			// process PayPal response
 			switch ($_POST['payment_status']) {
-				case 'Partially-Refunded':
-					break;
+			case 'Partially-Refunded':
+				break;
 
-				case 'In-Progress':
-					break;
+			case 'In-Progress':
+				break;
 
-				case 'Completed':
-				case 'Processed':
-					// case: successful payment
-					$amount = $_POST['mc_gross'];
-					$currency = $_POST['mc_currency'];
+			case 'Completed':
+			case 'Processed':
+				// case: successful payment
+				$amount = $_POST['mc_gross'];
+				$currency = $_POST['mc_currency'];
 
 
-					$args = array(
-						'app_ID' => $_POST['custom'],
-						'paypal_ID' => $_POST['txn_id'],
-						'stamp' => $timestamp,
-						'total_amount' => $amount,
-						'currency' => $currency,
-						'status' => $_POST['payment_status'],
-						'note' => '',
-					);
+				$args = array(
+					'app_ID' => $_POST['custom'],
+					'paypal_ID' => $_POST['txn_id'],
+					'stamp' => $timestamp,
+					'total_amount' => $amount,
+					'currency' => $currency,
+					'status' => $_POST['payment_status'],
+					'note' => '',
+				);
 
-					$transaction = appointments_get_transaction( $_POST['custom'] );
-					if ( $transaction ) {
-						appointments_update_transaction( $_POST['custom'], $args );
-					}
-					else {
-						appointments_insert_transaction( $args );
-					}
+				$transaction = appointments_get_transaction( $_POST['custom'] );
+				if ( $transaction ) {
+					appointments_update_transaction( $_POST['custom'], $args );
+				}
+				else {
+					appointments_insert_transaction( $args );
+				}
 
-					if ( ! appointments_update_appointment_status( $_POST['custom'], 'paid' ) ) {
-						// Something wrong. Warn admin
-						$message = sprintf( __('Paypal confirmation arrived, but status could not be changed for some reason. Please check appointment with ID %s', 'appointments'), $_POST['custom'] );
+				if ( ! appointments_update_appointment_status( $_POST['custom'], 'paid' ) ) {
+					// Something wrong. Warn admin
+					$message = sprintf( __('Paypal confirmation arrived, but status could not be changed for some reason. Please check appointment with ID %s', 'appointments'), $_POST['custom'] );
 
-						wp_mail( $appointments->get_admin_email( ), __('Appointment status could not be changed','appointments'), $message, $appointments->message_headers() );
-					}
-					break;
+					wp_mail( $appointments->get_admin_email( ), __('Appointment status could not be changed','appointments'), $message, $appointments->message_headers() );
+				}
+				break;
 
-				case 'Reversed':
-					// case: charge back
-					$note = __('Last transaction has been reversed. Reason: Payment has been reversed (charge back)', 'appointments');
-					$amount = $_POST['mc_gross'];
-					$currency = $_POST['mc_currency'];
+			case 'Reversed':
+				// case: charge back
+				$note = __('Last transaction has been reversed. Reason: Payment has been reversed (charge back)', 'appointments');
+				$amount = $_POST['mc_gross'];
+				$currency = $_POST['mc_currency'];
 
-					$args = array(
-						'app_ID' => $_POST['custom'],
-						'paypal_ID' => $_POST['txn_id'],
-						'stamp' => $timestamp,
-						'total_amount' => $amount,
-						'currency' => $currency,
-						'status' => $_POST['payment_status'],
-						'note' => $note,
-					);
+				$args = array(
+					'app_ID' => $_POST['custom'],
+					'paypal_ID' => $_POST['txn_id'],
+					'stamp' => $timestamp,
+					'total_amount' => $amount,
+					'currency' => $currency,
+					'status' => $_POST['payment_status'],
+					'note' => $note,
+				);
 
-					$transaction = appointments_get_transaction( $_POST['custom'] );
-					if ( $transaction ) {
-						appointments_update_transaction( $_POST['custom'], $args );
-					}
-					else {
-						appointments_insert_transaction( $args );
-					}
-					break;
+				$transaction = appointments_get_transaction( $_POST['custom'] );
+				if ( $transaction ) {
+					appointments_update_transaction( $_POST['custom'], $args );
+				}
+				else {
+					appointments_insert_transaction( $args );
+				}
+				break;
 
-				case 'Refunded':
-					// case: refund
-					$note = __('Last transaction has been reversed. Reason: Payment has been refunded', 'appointments');
-					$amount = $_POST['mc_gross'];
-					$currency = $_POST['mc_currency'];
+			case 'Refunded':
+				// case: refund
+				$note = __('Last transaction has been reversed. Reason: Payment has been refunded', 'appointments');
+				$amount = $_POST['mc_gross'];
+				$currency = $_POST['mc_currency'];
 
-					$args = array(
-						'app_ID' => $_POST['custom'],
-						'paypal_ID' => $_POST['txn_id'],
-						'stamp' => $timestamp,
-						'total_amount' => $amount,
-						'currency' => $currency,
-						'status' => $_POST['payment_status'],
-						'note' => $note,
-					);
+				$args = array(
+					'app_ID' => $_POST['custom'],
+					'paypal_ID' => $_POST['txn_id'],
+					'stamp' => $timestamp,
+					'total_amount' => $amount,
+					'currency' => $currency,
+					'status' => $_POST['payment_status'],
+					'note' => $note,
+				);
 
-					$transaction = appointments_get_transaction( $_POST['custom'] );
-					if ( $transaction ) {
-						appointments_update_transaction( $_POST['custom'], $args );
-					}
-					else {
-						appointments_insert_transaction( $args );
-					}
-					break;
+				$transaction = appointments_get_transaction( $_POST['custom'] );
+				if ( $transaction ) {
+					appointments_update_transaction( $_POST['custom'], $args );
+				}
+				else {
+					appointments_insert_transaction( $args );
+				}
+				break;
 
-				case 'Denied':
-					// case: denied
-					$note = __('Last transaction has been reversed. Reason: Payment Denied', 'appointments');
-					$amount = $_POST['mc_gross'];
-					$currency = $_POST['mc_currency'];
+			case 'Denied':
+				// case: denied
+				$note = __('Last transaction has been reversed. Reason: Payment Denied', 'appointments');
+				$amount = $_POST['mc_gross'];
+				$currency = $_POST['mc_currency'];
 
-					$args = array(
-						'app_ID' => $_POST['custom'],
-						'paypal_ID' => $_POST['txn_id'],
-						'stamp' => $timestamp,
-						'total_amount' => $amount,
-						'currency' => $currency,
-						'status' => $_POST['payment_status'],
-						'note' => $note,
-					);
+				$args = array(
+					'app_ID' => $_POST['custom'],
+					'paypal_ID' => $_POST['txn_id'],
+					'stamp' => $timestamp,
+					'total_amount' => $amount,
+					'currency' => $currency,
+					'status' => $_POST['payment_status'],
+					'note' => $note,
+				);
 
-					$transaction = appointments_get_transaction( $_POST['custom'] );
-					if ( $transaction ) {
-						appointments_update_transaction( $_POST['custom'], $args );
-					}
-					else {
-						appointments_insert_transaction( $args );
-					}
+				$transaction = appointments_get_transaction( $_POST['custom'] );
+				if ( $transaction ) {
+					appointments_update_transaction( $_POST['custom'], $args );
+				}
+				else {
+					appointments_insert_transaction( $args );
+				}
 
-					break;
+				break;
 
-				case 'Pending':
-					// case: payment is pending
-					$pending_str = array(
-						'address' => __('Customer did not include a confirmed shipping address', 'appointments'),
-						'authorization' => __('Funds not captured yet', 'appointments'),
-						'echeck' => __('eCheck that has not cleared yet', 'appointments'),
-						'intl' => __('Payment waiting for aproval by service provider', 'appointments'),
-						'multi-currency' => __('Payment waiting for service provider to handle multi-currency process', 'appointments'),
-						'unilateral' => __('Customer did not register or confirm his/her email yet', 'appointments'),
-						'upgrade' => __('Waiting for service provider to upgrade the PayPal account', 'appointments'),
-						'verify' => __('Waiting for service provider to verify his/her PayPal account', 'appointments'),
-						'*' => ''
-					);
-					$reason = @$_POST['pending_reason'];
-					$note = __('Last transaction is pending. Reason: ', 'appointments') . (isset($pending_str[$reason]) ? $pending_str[$reason] : $pending_str['*']);
-					$amount = $_POST['mc_gross'];
-					$currency = $_POST['mc_currency'];
+			case 'Pending':
+				// case: payment is pending
+				$pending_str = array(
+					'address' => __('Customer did not include a confirmed shipping address', 'appointments'),
+					'authorization' => __('Funds not captured yet', 'appointments'),
+					'echeck' => __('eCheck that has not cleared yet', 'appointments'),
+					'intl' => __('Payment waiting for aproval by service provider', 'appointments'),
+					'multi-currency' => __('Payment waiting for service provider to handle multi-currency process', 'appointments'),
+					'unilateral' => __('Customer did not register or confirm his/her email yet', 'appointments'),
+					'upgrade' => __('Waiting for service provider to upgrade the PayPal account', 'appointments'),
+					'verify' => __('Waiting for service provider to verify his/her PayPal account', 'appointments'),
+					'*' => ''
+				);
+				$reason = @$_POST['pending_reason'];
+				$note = __('Last transaction is pending. Reason: ', 'appointments') . (isset($pending_str[$reason]) ? $pending_str[$reason] : $pending_str['*']);
+				$amount = $_POST['mc_gross'];
+				$currency = $_POST['mc_currency'];
 
-					$args = array(
-						'app_ID' => $_POST['custom'],
-						'paypal_ID' => $_POST['txn_id'],
-						'stamp' => $timestamp,
-						'total_amount' => $amount,
-						'currency' => $currency,
-						'status' => $_POST['payment_status'],
-						'note' => $note,
-					);
+				$args = array(
+					'app_ID' => $_POST['custom'],
+					'paypal_ID' => $_POST['txn_id'],
+					'stamp' => $timestamp,
+					'total_amount' => $amount,
+					'currency' => $currency,
+					'status' => $_POST['payment_status'],
+					'note' => $note,
+				);
 
-					$transaction = appointments_get_transaction( $_POST['custom'] );
-					if ( ! $transaction ) {
-						appointments_update_transaction( $_POST['custom'], $args );
-					}
-					else {
-						appointments_insert_transaction( $args );
-					}
+				$transaction = appointments_get_transaction( $_POST['custom'] );
+				if ( ! $transaction ) {
+					appointments_update_transaction( $_POST['custom'], $args );
+				}
+				else {
+					appointments_insert_transaction( $args );
+				}
 
-					break;
+				break;
 
-				default:
-					// case: various error cases
+			default:
+				// case: various error cases
 			}
 		} else {
 			// Did not find expected POST variables. Possible access attempt from a non PayPal site.
@@ -889,10 +888,10 @@ class Appointments_AJAX {
 	function pre_confirmation () {
 		global $appointments;
 
-        /**
-         * Check nonce
-         */
-        $this->security_check_die( 'AppShortcodeConfirmation' );
+		/**
+		 * Check nonce
+		 */
+		$this->security_check_die( 'AppShortcodeConfirmation' );
 
 
 		$values = explode( ":", $_POST["value"] );
@@ -924,7 +923,7 @@ class Appointments_AJAX {
 		$display_currency = !empty($appointments->options["currency"])
 			? App_Template::get_currency_symbol($appointments->options["currency"])
 			: App_Template::get_currency_symbol('USD')
-		;
+			;
 
 		$is_busy = $appointments->is_busy($start,  $end, $appointments->get_capacity());
 		if ( $is_busy ) {
@@ -944,47 +943,47 @@ class Appointments_AJAX {
 		$price = $price > 0
 			? '<label><span>' . __('Price: ', 'appointments') .  '</span>'. apply_filters('app_confirmation_price', $price . " " . $display_currency, $price) . '</label>'
 			: 0
-		;
+			;
 
 		$worker = !empty($worker)
 			? '<label><span>' . __('Service provider: ', 'appointments' ) . '</span>'. apply_filters('app_confirmation_worker', stripslashes(appointments_get_worker_name($worker)), $worker) . '</label>'
 			: ''
-		;
+			;
 
 		$ask_name = !empty($appointments->options['ask_name'])
 			? 'ask'
 			: ''
-		;
+			;
 
 		$ask_email = !empty($appointments->options['ask_email'])
 			? 'ask'
 			: ''
-		;
+			;
 
 		$ask_phone = !empty($appointments->options['ask_phone'])
 			? 'ask'
 			: ''
-		;
+			;
 
 		$ask_address = !empty($appointments->options['ask_address'])
 			? 'ask'
 			: ''
-		;
+			;
 
 		$ask_city = !empty($appointments->options['ask_city'])
 			? 'ask'
 			: ''
-		;
+			;
 
 		$ask_note = !empty($appointments->options['ask_note'])
 			? 'ask'
 			: ''
-		;
+			;
 
 		$ask_gcal = isset( $appointments->options["gcal"] ) && 'yes' == $appointments->options["gcal"]
 			? 'ask'
 			: ''
-		;
+			;
 
 		$reply_array = array(
 			'service'	=> $service,
@@ -1012,16 +1011,10 @@ class Appointments_AJAX {
 	 * @since 1.0.9
 	 */
 	function export(){
-        global $appointments;
-
-
-        l($_POST);
-
+		global $appointments;
 		$type = ! empty( $_POST['export_type'] ) ? $_POST['export_type'] : 'all';
 		$apps = array();
-
 		$args = array();
-
 		if ( 'selected' == $type && ! empty( $_POST['app'] ) ) {
 			// selected appointments
 			if ( $_POST['app'] ) {
@@ -1035,44 +1028,35 @@ class Appointments_AJAX {
 				$args = array( 'status' => $status );
 			}
 		}
-
 		$args = apply_filters( 'app-export-appointment-args', $args );
-        $apps = appointments_get_appointments( $args );
-
-l($args);
-
+		$apps = appointments_get_appointments( $args );
 
 		if ( empty( $apps ) || ! is_array( $apps ) ) {
 			die( __( 'Nothing to download!', 'appointments' ) );
 		}
-
 		$file = fopen('php://temp/maxmemory:'. (12*1024*1024), 'r+');
-
 		// Add field names to the file
 		$columns = array_map( 'strtolower', apply_filters( 'app-export-columns', $appointments->db->get_col_info() ) );
 		fputcsv( $file,  $columns );
-
 		foreach ( $apps as $app ) {
 			$raw = $app;
 			array_walk( $app, array( &$this, 'export_helper' ) );
-            $app = $this->sort_app_columns( $app, $columns );
+			$app = $this->sort_app_columns( $app, $columns );
 			$app = apply_filters( 'app-export-appointment', $app, $raw );
 			if ( ! empty( $app ) ) {
 				fputcsv( $file, (array)$app );
 			}
 		}
-
 		$filename = "appointments_".date('F')."_".date('d')."_".date('Y').".csv";
-
 		//serve the file
-        rewind($file);
-        /**
-         * Check buffers
-         */
-        $list = ob_list_handlers();
-        if ( ! empty( $list ) ) {
-            ob_end_clean(); //kills any buffers set by other plugins
-        }
+		rewind($file);
+		/**
+		 * Check buffers
+		 */
+		$list = ob_list_handlers();
+		if ( ! empty( $list ) ) {
+			ob_end_clean(); //kills any buffers set by other plugins
+		}
 		header('Content-Description: File Transfer');
 		header('Content-Type: text/csv');
 		header('Content-Disposition: attachment; filename="'.$filename.'"');
@@ -1087,29 +1071,29 @@ l($args);
 		die($output);
 	}
 
-    /**
-    * Sorting the appointment columns so they match the csv columns. Usefull when locations addon enabled
-    * @since 2.2.1
-    */
-    function sort_app_columns( $app, $columns ){
+	/**
+	 * Sorting the appointment columns so they match the csv columns. Usefull when locations addon enabled
+	 * @since 2.2.1
+	 */
+	function sort_app_columns( $app, $columns ){
 
-        $sorted_app = array();
-        $app_array = array_change_key_case( (array)$app, CASE_LOWER );
+		$sorted_app = array();
+		$app_array = array_change_key_case( (array)$app, CASE_LOWER );
 
-        foreach( $columns as $column ){
+		foreach( $columns as $column ){
 
-            if( isset( $app_array[ $column ] ) ){
-                $sorted_app[ $column ] = $app_array[ $column ];
-            }
-            else{
-                $sorted_app[ $column ] = '';
-            }
+			if( isset( $app_array[ $column ] ) ){
+				$sorted_app[ $column ] = $app_array[ $column ];
+			}
+			else{
+				$sorted_app[ $column ] = '';
+			}
 
-        }
+		}
 
-        return $sorted_app;
+		return $sorted_app;
 
-    }
+	}
 
 
 	/**
