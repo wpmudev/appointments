@@ -1012,7 +1012,10 @@ class Appointments_AJAX {
 	 * @since 1.0.9
 	 */
 	function export(){
-		global $appointments;
+        global $appointments;
+
+
+        l($_POST);
 
 		$type = ! empty( $_POST['export_type'] ) ? $_POST['export_type'] : 'all';
 		$apps = array();
@@ -1034,7 +1037,10 @@ class Appointments_AJAX {
 		}
 
 		$args = apply_filters( 'app-export-appointment-args', $args );
-		$apps = appointments_get_appointments( $args );
+        $apps = appointments_get_appointments( $args );
+
+l($args);
+
 
 		if ( empty( $apps ) || ! is_array( $apps ) ) {
 			die( __( 'Nothing to download!', 'appointments' ) );

@@ -171,19 +171,19 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 				</div>
 				<div class="appointments-address-field" style="display:none">
 					<label>
-						<span><?php echo $args['address']; ?></span>
+						<span><?php echo $args['address']; ?><b class="required">*</b></span>
 						<input type="text" class="appointments-address-field-entry" id="<?php echo esc_attr(apply_filters('app-shortcode-confirmation-address_field_id', 'appointments-field-customer_address')); ?>" value="<?php echo esc_attr( $a ); ?>" />
 					</label>
 				</div>
 				<div class="appointments-city-field" style="display:none">
 					<label>
-						<span><?php echo $args['city']; ?></span>
+						<span><?php echo $args['city']; ?><b class="required">*</b></span>
 						<input type="text" class="appointments-city-field-entry" id="<?php echo esc_attr(apply_filters('app-shortcode-confirmation-city_field_id', 'appointments-field-customer_city')); ?>" value="<?php echo esc_attr( $c ); ?>" />
 					</label>
 				</div>
 				<div class="appointments-note-field" style="display:none">
 					<label>
-						<span><?php echo $args['note']; ?></span>
+						<span><?php echo $args['note']; ?><b class="required">*</b></span>
 						<input type="text" class="appointments-note-field-entry" id="<?php echo esc_attr(apply_filters('app-shortcode-confirmation-note_field_id', 'appointments-field-customer_note')); ?>" />
 					</label>
 				</div>
