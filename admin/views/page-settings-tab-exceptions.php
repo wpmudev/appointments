@@ -16,9 +16,7 @@ foreach ( array( 'open', 'closed' ) as $stat ) {
 $workers = appointments_get_workers();
 ?>
 
-<?php _e( '<i>Here you can define exceptional working or non working days for your business and for your service providers. You should enter holidays here. You can also define a normally non working week day (e.g. a specific Sunday) as a working day. When you add new service providers, their expections will be set to the default schedule.</i>', 'appointments'); ?>
-<br />
-<br />
+<p class="description"><?php _e( 'Here you can define exceptional working or non working days for your business and for your service providers. You should enter holidays here. You can also define a normally non working week day (e.g. a specific Sunday) as a working day. When you add new service providers, their expections will be set to the default schedule.', 'appointments'); ?></p>
 
 <?php _e('List for:', 'appointments')?>
 &nbsp;

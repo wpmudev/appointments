@@ -1,12 +1,10 @@
 <?php global $appointments, $wpdb; ?>
 
-<?php _e( '<i>Here you can define working hours and breaks for your business. When you add new service providers, their working and break hours will be set to the default schedule. Then you can edit their schedule by selecting their names from the dropdown menu below.</i>', 'appointments'); ?>
-<br />
-<br />
+<p class="description"><?php _e( 'Here you can define working hours and breaks for your business. When you add new service providers, their working and break hours will be set to the default schedule. Then you can edit their schedule by selecting their names from the dropdown menu below.', 'appointments'); ?></p>
 <?php
 $workers = appointments_get_workers();
+_e('List for:', 'appointments');
 ?>
-<?php _e('List for:', 'appointments')?>
 &nbsp;
 <select id="app_provider_id" name="app_provider_id">
 <option value="0"><?php _e('No specific provider', 'appointments')?></option>
