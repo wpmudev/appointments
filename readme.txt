@@ -157,6 +157,18 @@ We provide comprehensive and guaranteed support on the <a href='http://premium.w
 
 == Changelog ==
 
+= 2.2.6 =
+* Added ability to delete "Service".
+* Added ability to delete "Service Provider".
+* Added asterisk to required fields label on appointment form.
+* Fixed a problem with appointments details, the start hour of appointment is now depended on settings.
+* Fixed a problem with Appointments settings on the BuddyPress profile.
+* Fixed a problem with BuddyPress profile integration.
+* Fixed a problem with double send reminders.
+* Fixed a problem with the tutorial restart.
+* Fixed a warning message for ob_end_flush() in an older version of PHP.
+* Improved appointments calendars, now start on the day set in WordPress options.
+
 = 2.2.5 =
 * Added filter 'app-export-appointment-args' which allows changing export arguments eg. sorting field.
 * Fixed incompatibilities with Divi Builder.
