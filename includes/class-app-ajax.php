@@ -159,7 +159,7 @@ class Appointments_AJAX {
 				add_filter( 'appointments_send_confirmation', '__return_false', 40 );
 			}
 
-			$data['datetime'] = strtotime( $data['date'] . ' ' . $data['time'] . ':00' );
+			$data['datetime'] = strtotime( $data['date'] . ' ' . $data['time'] );
 			$update_result = appointments_update_appointment( $app_id, $data );
 
 			// Send confirmation email if requested in update (only for confirmed or similar statuses)
@@ -174,11 +174,11 @@ class Appointments_AJAX {
 			}
 
 		} else {
-			// Insert
-			$data['date'] = strtotime( $data['date'] . ' ' . $data['time'] . ':00' );
+            // Insert
+			$data['date'] = strtotime( $data['date'] . ' ' . $data['time'] );
 			if ( ! $resend ) {
 				add_filter( 'appointments_send_confirmation', '__return_false', 50 );
-			}
+            }
 			$app_id = appointments_insert_appointment( $data );
 			$insert_result = true;
 		}

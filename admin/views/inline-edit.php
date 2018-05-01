@@ -67,7 +67,7 @@
 				</label>
 				<label style="float:left;width:30%; padding-left:5px;">
                     <select name="time" >
-                        <option><?php esc_html_e( 'Unknown', 'appointments' ); ?></option>
+                        <option value=""><?php esc_html_e( 'Unknown', 'appointments' ); ?></option>
 <?php
 $_start_time = $app_id ? strtotime( $app->get_start_time() ): '';
 $slots = $appointments->_get_timetable_slots( $app->start, 0 );

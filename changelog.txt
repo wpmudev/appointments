@@ -3,6 +3,7 @@
 - Fixed a problem with autoconfirmation free appointment.
 - Fixed a problem with paddings on the weekly booking calendar.
 - Fixed a problem with an appointment create time, it shown "Unknown" for Time Formats: "g:i a" and "g:i A".
+- Fixed a problem with an appointment date when we add appointment on admin area.
 
 2018-xx-xx - 2.2.7
 -------------------------------
