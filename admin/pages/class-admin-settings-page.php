@@ -216,8 +216,16 @@ class Appointments_Admin_Settings_Page {
 		if ( current_user_can( 'manage_options' ) && isset( $_GET['app-export-settings'] ) ) {
 			$this->export_settings();
 		}
-
-		$addons_action = isset( $_REQUEST['action'] ) ? $_REQUEST['action'] : '';
+		/**
+		 * get current action
+		 */
+		$addons_action = '';
+		if ( isset( $_REQUEST['action'] ) ) {
+			$addons_action = $_REQUEST['action'];
+		}
+		if ( '-1' == $addons_action && isset( $_REQUEST['action2'] ) ) {
+			$addons_action = $_REQUEST['action2'];
+		}
 		if ( $addons_action ) {
 			$this->_save_addons( $addons_action );
 			wp_redirect( remove_query_arg( array( 'addon', '_wpnonce', 'action' ) ) );
