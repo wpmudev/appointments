@@ -6,6 +6,7 @@
 - Fixed a problem with an appointment date when we add appointment on admin area.
 - Fixed a problem with bottom bulk action on "Add-ons" tab.
 - Fixed a problem with double cancellation emails.
+- Improved the "app_my_appointments" shortcode and added message when we have no appointments.
 
 2018-xx-xx - 2.2.7
 -------------------------------
