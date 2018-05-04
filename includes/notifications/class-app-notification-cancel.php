@@ -1,7 +1,7 @@
 <?php
 
 class Appointments_Notifications_Cancel extends Appointments_Notification {
-	
+
 	public function send( $app_id ) {
 		$appointments = appointments();
 
@@ -26,7 +26,7 @@ class Appointments_Notifications_Cancel extends Appointments_Notification {
 		$sent_to = array();
 		if ( $mail_result ) {
 			$sent_to[] = $admin_email;
-			$this->manager->log( sprintf( __('Notification message sent to %s for appointment ID:%s','appointments'), $admin_email, $app_id ) );
+			$this->manager->log( sprintf( __( 'Notification message sent to %s for appointment ID: %s','appointments' ), $admin_email, $app_id ) );
 			do_action( 'app_notification_sent', $template['body'], $r, $app_id );
 		}
 
@@ -46,7 +46,7 @@ class Appointments_Notifications_Cancel extends Appointments_Notification {
 			);
 
 			if ( $mail_result ) {
-				$this->manager->log( sprintf( __('Notification message sent to %s for appointment ID:%s','appointments'), $worker_email, $app_id ) );
+				$this->manager->log( sprintf( __( 'Notification message sent to %s for appointment ID: %s','appointments' ), $worker_email, $app_id ) );
 				do_action( 'appointments_worker_notification_sent', $worker_template['body'], $r, $app_id );
 			}
 		}
@@ -76,7 +76,7 @@ class Appointments_Notifications_Cancel extends Appointments_Notification {
 
 		return array(
 			'body' => $body,
-			'subject' => $subject
+			'subject' => $subject,
 		);
 
 	}
@@ -91,8 +91,8 @@ class Appointments_Notifications_Cancel extends Appointments_Notification {
 			return false;
 		}
 
-		$subject = __('An appointment has been cancelled', 'appointments');
-		$body = sprintf( __('Appointment with ID %s has been cancelled by the client. You can see it clicking this link: %s','appointments'), $app_id, admin_url("admin.php?page=appointments&type=removed") );
+		$subject = __( 'An appointment has been cancelled', 'appointments' );
+		$body = sprintf( __( 'Appointment with ID %s has been cancelled by the client. You can see it clicking this link: %s','appointments' ), $app_id, admin_url( 'admin.php?page=appointments&type=removed' ) );
 
 		$body = apply_filters( 'app-messages-cancellation-body', $body, $r, $app_id );
 		$body = apply_filters( 'app_notification_message', $body, $r, $app_id );
@@ -101,10 +101,8 @@ class Appointments_Notifications_Cancel extends Appointments_Notification {
 
 		return array(
 			'body' => $body,
-			'subject' => $subject
+			'subject' => $subject,
 		);
 
 	}
-
-
 }

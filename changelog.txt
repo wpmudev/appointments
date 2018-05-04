@@ -4,6 +4,7 @@
 - Fixed a problem with paddings on the weekly booking calendar.
 - Fixed a problem with an appointment create time, it shown "Unknown" for Time Formats: "g:i a" and "g:i A".
 - Fixed a problem with an appointment date when we add appointment on admin area.
+- Fixed a problem with bottom bulk action on "Add-ons" tab.
 
 2018-05-07 - 2.2.7
 -------------------------------
