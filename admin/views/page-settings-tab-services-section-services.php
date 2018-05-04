@@ -13,7 +13,7 @@ if ( empty( $pages ) ) {
 }
 ?>
 
-<p><?php _e( '<i>Here you should define your services for which your client will be making appointments. <b>There must be at least one service defined.</b> Capacity is the number of customers that can take the service at the same time. Enter 0 for no specific limit (Limited to number of service providers, or to 1 if no service provider is defined for that service). Price is only required if you request payment to accept appointments. You can define a description page for the service you are providing.</i>', 'appointments' ) ?></p>
+<p class="description"><?php _e( 'Here you should define your services for which your client will be making appointments. <b>There must be at least one service defined.</b> Capacity is the number of customers that can take the service at the same time. Enter 0 for no specific limit (Limited to number of service providers, or to 1 if no service provider is defined for that service). Price is only required if you request payment to accept appointments. You can define a description page for the service you are providing.', 'appointments' ) ?></p>
 
 
 <form method="post" action="">
@@ -75,7 +75,7 @@ if ( empty( $pages ) ) {
         </tbody>
 	</table>
 
-	<p><?php _e( '<i>Tip: When you clear service name and save changes, this service will be deleted.</i>', 'appointments' ); ?></p>
+	<p class="description"><?php _e( 'Tip: When you clear service name and save changes, this service will be deleted.', 'appointments' ); ?></p>
 
 	<?php if ( $services ) :  ?>
 		<?php _appointments_settings_submit_block( $tab ); ?>

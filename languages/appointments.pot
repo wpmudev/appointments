@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments+ PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-04-30 06:21:36+00:00\n"
+"POT-Creation-Date: 2018-05-04 10:04:34+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,8 +25,8 @@ msgstr ""
 #: admin/admin-helpers.php:121 admin/views/form-working-hours.php:53
 #: admin/views/form-working-hours.php:83
 #: includes/gcal/views/settings-gcal-step-3.php:61
-#: includes/pro/includes/addons/app-users-additional_fields.php:534
-#: includes/pro/includes/addons/app-users-additional_fields.php:572
+#: includes/pro/includes/addons/app-users-additional_fields.php:526
+#: includes/pro/includes/addons/app-users-additional_fields.php:564
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:345
 msgid "Yes"
 msgstr ""
@@ -34,8 +34,8 @@ msgstr ""
 #: admin/admin-helpers.php:122 admin/views/form-working-hours.php:52
 #: admin/views/form-working-hours.php:82
 #: includes/gcal/views/settings-gcal-step-3.php:60
-#: includes/pro/includes/addons/app-users-additional_fields.php:534
-#: includes/pro/includes/addons/app-users-additional_fields.php:572
+#: includes/pro/includes/addons/app-users-additional_fields.php:526
+#: includes/pro/includes/addons/app-users-additional_fields.php:564
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:346
 msgid "No"
 msgstr ""
@@ -1318,7 +1318,7 @@ msgid "General"
 msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:30
-#: admin/views/page-settings-tab-working_hours.php:37
+#: admin/views/page-settings-tab-working_hours.php:35
 #: admin/views/user-profile-working-hours.php:4
 msgid "Working Hours"
 msgstr ""
@@ -1437,13 +1437,13 @@ msgid "Give break?"
 msgstr ""
 
 #: admin/views/form-working-hours.php:37 admin/views/inline-edit.php:63
-#: includes/pro/includes/addons/app-admin-export_date_range.php:54
+#: includes/pro/includes/addons/app-admin-export_date_range.php:49
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:152
 msgid "Start"
 msgstr ""
 
 #: admin/views/form-working-hours.php:38 admin/views/inline-edit.php:88
-#: includes/pro/includes/addons/app-admin-export_date_range.php:55
+#: includes/pro/includes/addons/app-admin-export_date_range.php:50
 msgid "End"
 msgstr ""
 
@@ -1465,8 +1465,8 @@ msgid "SERVICE"
 msgstr ""
 
 #: admin/views/inline-edit.php:36
-#: admin/views/page-settings-tab-exceptions.php:27
-#: admin/views/page-settings-tab-working_hours.php:12
+#: admin/views/page-settings-tab-exceptions.php:25
+#: admin/views/page-settings-tab-working_hours.php:10
 msgid "No specific provider"
 msgstr ""
 
@@ -1610,27 +1610,27 @@ msgstr ""
 
 #: admin/views/page-settings-tab-exceptions.php:19
 msgid ""
-"<i>Here you can define exceptional working or non working days for your "
+"Here you can define exceptional working or non working days for your "
 "business and for your service providers. You should enter holidays here. "
 "You can also define a normally non working week day (e.g. a specific "
 "Sunday) as a working day. When you add new service providers, their "
-"expections will be set to the default schedule.</i>"
+"expections will be set to the default schedule."
 msgstr ""
 
-#: admin/views/page-settings-tab-exceptions.php:23
-#: admin/views/page-settings-tab-working_hours.php:9
+#: admin/views/page-settings-tab-exceptions.php:21
+#: admin/views/page-settings-tab-working_hours.php:6
 msgid "List for:"
 msgstr ""
 
-#: admin/views/page-settings-tab-exceptions.php:25
+#: admin/views/page-settings-tab-exceptions.php:23
 msgid "Select provider"
 msgstr ""
 
-#: admin/views/page-settings-tab-exceptions.php:42
+#: admin/views/page-settings-tab-exceptions.php:40
 msgid "Exceptional working days, e.g. a specific Sunday you decided to work:"
 msgstr ""
 
-#: admin/views/page-settings-tab-exceptions.php:54
+#: admin/views/page-settings-tab-exceptions.php:52
 msgid "Exceptional NON working days, e.g. holidays:"
 msgstr ""
 
@@ -1862,22 +1862,22 @@ msgid "Create an appointments date with this format"
 msgstr ""
 
 #: admin/views/page-settings-tab-main-section-display.php:8
-#: includes/integration/class-app-marketpress.php:85
+#: includes/integration/class-app-marketpress.php:75
 msgid "current month's schedule"
 msgstr ""
 
 #: admin/views/page-settings-tab-main-section-display.php:9
-#: includes/integration/class-app-marketpress.php:86
+#: includes/integration/class-app-marketpress.php:76
 msgid "current and next month's schedules"
 msgstr ""
 
 #: admin/views/page-settings-tab-main-section-display.php:10
-#: includes/integration/class-app-marketpress.php:87
+#: includes/integration/class-app-marketpress.php:77
 msgid "current week's schedule"
 msgstr ""
 
 #: admin/views/page-settings-tab-main-section-display.php:11
-#: includes/integration/class-app-marketpress.php:88
+#: includes/integration/class-app-marketpress.php:78
 msgid "current and next week's schedules"
 msgstr ""
 
@@ -2267,13 +2267,13 @@ msgstr ""
 
 #: admin/views/page-settings-tab-services-section-services.php:16
 msgid ""
-"<i>Here you should define your services for which your client will be "
-"making appointments. <b>There must be at least one service defined.</b> "
-"Capacity is the number of customers that can take the service at the same "
-"time. Enter 0 for no specific limit (Limited to number of service "
-"providers, or to 1 if no service provider is defined for that service). "
-"Price is only required if you request payment to accept appointments. You "
-"can define a description page for the service you are providing.</i>"
+"Here you should define your services for which your client will be making "
+"appointments. <b>There must be at least one service defined.</b> Capacity "
+"is the number of customers that can take the service at the same time. "
+"Enter 0 for no specific limit (Limited to number of service providers, or "
+"to 1 if no service provider is defined for that service). Price is only "
+"required if you request payment to accept appointments. You can define a "
+"description page for the service you are providing."
 msgstr ""
 
 #: admin/views/page-settings-tab-services-section-services.php:25
@@ -2302,8 +2302,8 @@ msgstr ""
 
 #: admin/views/page-settings-tab-services-section-services.php:78
 msgid ""
-"<i>Tip: When you clear service name and save changes, this service will be "
-"deleted.</i>"
+"Tip: When you clear service name and save changes, this service will be "
+"deleted."
 msgstr ""
 
 #: admin/views/page-settings-tab-services.php:7
@@ -2336,13 +2336,13 @@ msgstr ""
 
 #: admin/views/page-settings-tab-workers-section-workers.php:15
 msgid ""
-"<i>Here you should define your workers for which your client will be making "
+"Here you should define your workers for which your client will be making "
 "appointments. <b>There must be at least one service defined.</b> Capacity "
 "is the number of customers that can take the service at the same time. "
 "Enter 0 for no specific limit (Limited to number of service providers, or "
 "to 1 if no service provider is defined for that service). Price is only "
 "required if you request payment to accept appointments. You can define a "
-"description page for the service you are providing.</i>"
+"description page for the service you are providing."
 msgstr ""
 
 #: admin/views/page-settings-tab-workers-section-workers.php:26
@@ -2391,13 +2391,13 @@ msgstr ""
 
 #: admin/views/page-settings-tab-working_hours.php:3
 msgid ""
-"<i>Here you can define working hours and breaks for your business. When you "
+"Here you can define working hours and breaks for your business. When you "
 "add new service providers, their working and break hours will be set to the "
 "default schedule. Then you can edit their schedule by selecting their names "
-"from the dropdown menu below.</i>"
+"from the dropdown menu below."
 msgstr ""
 
-#: admin/views/page-settings-tab-working_hours.php:38
+#: admin/views/page-settings-tab-working_hours.php:36
 #: admin/views/user-profile-working-hours.php:10
 msgid "Break Hours"
 msgstr ""
@@ -2611,155 +2611,155 @@ msgstr ""
 msgid "Reminder for your Appointment"
 msgstr ""
 
-#: includes/class-app-ajax.php:45
+#: includes/class-app-ajax.php:44
 msgid "Cancellation of appointments is disabled. Please contact website admin."
 msgstr ""
 
-#: includes/class-app-ajax.php:76
+#: includes/class-app-ajax.php:75
 msgid ""
 "There is an issue with this appointment. Please refresh the page and try "
 "again. If problem persists, please contact website admin."
 msgstr ""
 
-#: includes/class-app-ajax.php:82
+#: includes/class-app-ajax.php:81
 msgid "Appointment could not be cancelled. Please refresh the page and try again."
 msgstr ""
 
-#: includes/class-app-ajax.php:145 includes/class-app-ajax.php:218
+#: includes/class-app-ajax.php:144 includes/class-app-ajax.php:217
 msgid "Record could not be saved OR you did not make any changes!"
 msgstr ""
 
-#: includes/class-app-ajax.php:201 includes/class-app-ajax.php:213
-#: includes/pro/includes/addons/app-users-additional_fields.php:402
+#: includes/class-app-ajax.php:200 includes/class-app-ajax.php:212
+#: includes/pro/includes/addons/app-users-additional_fields.php:394
 msgid "<span style=\"color:green;font-weight:bold\">Changes saved.</span>"
 msgstr ""
 
-#: includes/class-app-ajax.php:205
+#: includes/class-app-ajax.php:204
 msgid "Status changed from %s to %s by %s for appointment ID:%d"
 msgstr ""
 
-#: includes/class-app-ajax.php:217
+#: includes/class-app-ajax.php:216
 msgid "Confirmation message (re)sent"
 msgstr ""
 
-#: includes/class-app-ajax.php:284
+#: includes/class-app-ajax.php:283
 msgid "Not registered user"
 msgstr ""
 
-#: includes/class-app-ajax.php:321
+#: includes/class-app-ajax.php:320
 msgid ""
 "You have already applied for an appointment. Please wait until you hear "
 "from us."
 msgstr ""
 
-#: includes/class-app-ajax.php:476 includes/class-app-ajax.php:934
+#: includes/class-app-ajax.php:475 includes/class-app-ajax.php:933
 msgid ""
 "We are sorry, but this time slot is no longer available. Please refresh the "
 "page and try another time slot. Thank you."
 msgstr ""
 
-#: includes/class-app-ajax.php:548 includes/class-app-ajax.php:557
+#: includes/class-app-ajax.php:547 includes/class-app-ajax.php:556
 msgid "Appointment could not be saved. Please contact website admin."
 msgstr ""
 
-#: includes/class-app-ajax.php:755
+#: includes/class-app-ajax.php:754
 msgid ""
 "Paypal confirmation arrived, but status could not be changed for some "
 "reason. Please check appointment with ID %s"
 msgstr ""
 
-#: includes/class-app-ajax.php:757
+#: includes/class-app-ajax.php:756
 msgid "Appointment status could not be changed"
 msgstr ""
 
-#: includes/class-app-ajax.php:763
+#: includes/class-app-ajax.php:762
 msgid ""
 "Last transaction has been reversed. Reason: Payment has been reversed "
 "(charge back)"
 msgstr ""
 
-#: includes/class-app-ajax.php:788
+#: includes/class-app-ajax.php:787
 msgid "Last transaction has been reversed. Reason: Payment has been refunded"
 msgstr ""
 
-#: includes/class-app-ajax.php:813
+#: includes/class-app-ajax.php:812
 msgid "Last transaction has been reversed. Reason: Payment Denied"
 msgstr ""
 
-#: includes/class-app-ajax.php:840
+#: includes/class-app-ajax.php:839
 msgid "Customer did not include a confirmed shipping address"
 msgstr ""
 
-#: includes/class-app-ajax.php:841
+#: includes/class-app-ajax.php:840
 msgid "Funds not captured yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:842
+#: includes/class-app-ajax.php:841
 msgid "eCheck that has not cleared yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:843
+#: includes/class-app-ajax.php:842
 msgid "Payment waiting for aproval by service provider"
 msgstr ""
 
-#: includes/class-app-ajax.php:844
+#: includes/class-app-ajax.php:843
 msgid "Payment waiting for service provider to handle multi-currency process"
 msgstr ""
 
-#: includes/class-app-ajax.php:845
+#: includes/class-app-ajax.php:844
 msgid "Customer did not register or confirm his/her email yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:846
+#: includes/class-app-ajax.php:845
 msgid "Waiting for service provider to upgrade the PayPal account"
 msgstr ""
 
-#: includes/class-app-ajax.php:847
+#: includes/class-app-ajax.php:846
 msgid "Waiting for service provider to verify his/her PayPal account"
 msgstr ""
 
-#: includes/class-app-ajax.php:851
+#: includes/class-app-ajax.php:850
 msgid "Last transaction is pending. Reason: "
 msgstr ""
 
-#: includes/class-app-ajax.php:914
+#: includes/class-app-ajax.php:913
 msgid "You need to login to make an appointment."
 msgstr ""
 
-#: includes/class-app-ajax.php:940
+#: includes/class-app-ajax.php:939
 msgid "Service name: "
 msgstr ""
 
-#: includes/class-app-ajax.php:941
+#: includes/class-app-ajax.php:940
 msgid "Date and time: "
 msgstr ""
 
-#: includes/class-app-ajax.php:942
+#: includes/class-app-ajax.php:941
 msgid "Lasts (approx): "
 msgstr ""
 
-#: includes/class-app-ajax.php:942
+#: includes/class-app-ajax.php:941
 msgid "minutes"
 msgstr ""
 
-#: includes/class-app-ajax.php:945
+#: includes/class-app-ajax.php:944
 msgid "Price: "
 msgstr ""
 
-#: includes/class-app-ajax.php:950
+#: includes/class-app-ajax.php:949
 msgid "Service provider: "
 msgstr ""
 
-#: includes/class-app-ajax.php:1040
+#: includes/class-app-ajax.php:1035
 msgid "Nothing to download!"
 msgstr ""
 
-#: includes/class-app-ajax.php:1154 includes/class-app-ajax.php:1167
-#: includes/class-app-ajax.php:1193
+#: includes/class-app-ajax.php:1144 includes/class-app-ajax.php:1157
+#: includes/class-app-ajax.php:1183
 msgid "Sorry, there was a problem with your request!"
 msgstr ""
 
-#: includes/class-app-ajax.php:1179 includes/class-app-ajax.php:1205
+#: includes/class-app-ajax.php:1169 includes/class-app-ajax.php:1195
 msgid "Service Provider was successfuly deleted."
 msgstr ""
 
@@ -3353,7 +3353,7 @@ msgid "Less Info"
 msgstr ""
 
 #: includes/default_filters.php:122
-#: includes/shortcodes/class-app-shortcode-confirmation.php:237
+#: includes/shortcodes/class-app-shortcode-confirmation.php:231
 msgid "Error"
 msgstr ""
 
@@ -3711,51 +3711,51 @@ msgstr ""
 msgid "My Holidays"
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:65
+#: includes/integration/class-app-marketpress.php:58
 msgid "MarketPress Integration"
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:68
+#: includes/integration/class-app-marketpress.php:61
 msgid "Activate MarketPress integration"
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:71
+#: includes/integration/class-app-marketpress.php:64
 msgid ""
 "Appointments can be set as products. Any appointment shortcode added to a "
 "product page will make that page an \"Appointment Product Page\". For "
 "details, please see FAQ."
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:78
+#: includes/integration/class-app-marketpress.php:69
 msgid "Product Page"
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:81
+#: includes/integration/class-app-marketpress.php:72
 msgid "Create an Appointment Product Page with"
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:83
+#: includes/integration/class-app-marketpress.php:73
 msgid "Select Product Page Type"
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:90
+#: includes/integration/class-app-marketpress.php:80
 msgid ""
 "Same as the above \"Create an Appointment Page\", but this time appointment "
 "shortcodes will be inserted in a new Product page and page title will be "
 "\"Appointment\". This is also the product name."
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:93
+#: includes/integration/class-app-marketpress.php:82
 msgid ""
 "<b>Note:</b> You already have such a page. If you check this checkbox, "
 "another page with the same title will be created. "
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:94
+#: includes/integration/class-app-marketpress.php:83
 msgid "Edit Page"
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:95
+#: includes/integration/class-app-marketpress.php:84
 msgid "View Page"
 msgstr ""
 
@@ -3903,7 +3903,7 @@ msgstr ""
 msgid "Default"
 msgstr ""
 
-#: includes/pro/includes/addons/app-admin-export_date_range.php:53
+#: includes/pro/includes/addons/app-admin-export_date_range.php:48
 msgid "Only include appointments between"
 msgstr ""
 
@@ -3925,7 +3925,7 @@ msgid "Location"
 msgstr ""
 
 #: includes/pro/includes/addons/app-locations-location_support.php:151
-#: includes/pro/includes/addons/app-users-additional_fields.php:561
+#: includes/pro/includes/addons/app-users-additional_fields.php:553
 msgid "Add"
 msgstr ""
 
@@ -4382,57 +4382,57 @@ msgstr ""
 msgid "Shares resources with"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:116
+#: includes/pro/includes/addons/app-users-additional_fields.php:114
 msgid "The field %s is required"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:517
+#: includes/pro/includes/addons/app-users-additional_fields.php:509
 msgid "Text"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:518
+#: includes/pro/includes/addons/app-users-additional_fields.php:510
 msgid "Checkbox"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:524
+#: includes/pro/includes/addons/app-users-additional_fields.php:516
 msgid "Additional Fields"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:527
+#: includes/pro/includes/addons/app-users-additional_fields.php:519
 msgid "Additional fields"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:534
-#: includes/pro/includes/addons/app-users-additional_fields.php:572
+#: includes/pro/includes/addons/app-users-additional_fields.php:526
+#: includes/pro/includes/addons/app-users-additional_fields.php:564
 msgid "Required"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:536
+#: includes/pro/includes/addons/app-users-additional_fields.php:528
 msgid "E-mail macro:"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:537
+#: includes/pro/includes/addons/app-users-additional_fields.php:529
 msgid "This is the placeholder you can use in your emails."
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:539
-#: includes/pro/includes/addons/app-users-additional_fields.php:574
+#: includes/pro/includes/addons/app-users-additional_fields.php:531
+#: includes/pro/includes/addons/app-users-additional_fields.php:566
 msgid "Remove"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:544
+#: includes/pro/includes/addons/app-users-additional_fields.php:536
 msgid "Add new field"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:546
+#: includes/pro/includes/addons/app-users-additional_fields.php:538
 msgid "Field label:"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:550
+#: includes/pro/includes/addons/app-users-additional_fields.php:542
 msgid "Field type:"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:559
+#: includes/pro/includes/addons/app-users-additional_fields.php:551
 msgid "Required?"
 msgstr ""
 
@@ -4909,7 +4909,7 @@ msgstr ""
 msgid "<b>This shortcode is always required to complete an appointment.</b>"
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-confirmation.php:236
+#: includes/shortcodes/class-app-shortcode-confirmation.php:230
 msgid "A connection problem occurred. Please try again."
 msgstr ""
 
@@ -5689,7 +5689,7 @@ msgstr ""
 #: admin/views/inline-edit.php:121 appointments.php:1809
 #: includes/class-app-tutorial.php:225
 #: includes/pro/includes/addons/app-locations-location_support.php:155
-#: includes/shortcodes/class-app-shortcode-confirmation.php:208
+#: includes/shortcodes/class-app-shortcode-confirmation.php:202
 msgctxt "Drop current action"
 msgid "Cancel"
 msgstr ""
@@ -5699,7 +5699,7 @@ msgctxt "Settings section"
 msgid "%s Settings"
 msgstr ""
 
-#: includes/class-app-ajax.php:137 includes/class-app-ajax.php:145
+#: includes/class-app-ajax.php:136 includes/class-app-ajax.php:144
 msgctxt "Error while editing an appointment"
 msgid "Error"
 msgstr ""

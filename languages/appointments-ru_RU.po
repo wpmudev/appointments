@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-04-24 06:58:36+00:00\n"
+"POT-Creation-Date: 2018-05-04 10:04:34+00:00\n"
 "PO-Revision-Date: 2017-12-10 12:07:18+0000\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -26,8 +26,8 @@ msgstr "Сохранить изменения"
 #: admin/admin-helpers.php:121 admin/views/form-working-hours.php:53
 #: admin/views/form-working-hours.php:83
 #: includes/gcal/views/settings-gcal-step-3.php:61
-#: includes/pro/includes/addons/app-users-additional_fields.php:534
-#: includes/pro/includes/addons/app-users-additional_fields.php:572
+#: includes/pro/includes/addons/app-users-additional_fields.php:526
+#: includes/pro/includes/addons/app-users-additional_fields.php:564
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:345
 msgid "Yes"
 msgstr "Да"
@@ -35,8 +35,8 @@ msgstr "Да"
 #: admin/admin-helpers.php:122 admin/views/form-working-hours.php:52
 #: admin/views/form-working-hours.php:82
 #: includes/gcal/views/settings-gcal-step-3.php:60
-#: includes/pro/includes/addons/app-users-additional_fields.php:534
-#: includes/pro/includes/addons/app-users-additional_fields.php:572
+#: includes/pro/includes/addons/app-users-additional_fields.php:526
+#: includes/pro/includes/addons/app-users-additional_fields.php:564
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:346
 msgid "No"
 msgstr "Нет"
@@ -1596,7 +1596,7 @@ msgid "General"
 msgstr "Основные"
 
 #: admin/pages/class-admin-settings-page.php:30
-#: admin/views/page-settings-tab-working_hours.php:37
+#: admin/views/page-settings-tab-working_hours.php:35
 #: admin/views/user-profile-working-hours.php:4
 msgid "Working Hours"
 msgstr "График работы"
@@ -1715,13 +1715,13 @@ msgid "Give break?"
 msgstr "Дайте перерыв?"
 
 #: admin/views/form-working-hours.php:37 admin/views/inline-edit.php:63
-#: includes/pro/includes/addons/app-admin-export_date_range.php:54
+#: includes/pro/includes/addons/app-admin-export_date_range.php:49
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:152
 msgid "Start"
 msgstr "Начало"
 
 #: admin/views/form-working-hours.php:38 admin/views/inline-edit.php:88
-#: includes/pro/includes/addons/app-admin-export_date_range.php:55
+#: includes/pro/includes/addons/app-admin-export_date_range.php:50
 msgid "End"
 msgstr "Конец"
 
@@ -1743,8 +1743,8 @@ msgid "SERVICE"
 msgstr "УСЛУГИ"
 
 #: admin/views/inline-edit.php:36
-#: admin/views/page-settings-tab-exceptions.php:27
-#: admin/views/page-settings-tab-working_hours.php:12
+#: admin/views/page-settings-tab-exceptions.php:25
+#: admin/views/page-settings-tab-working_hours.php:10
 msgid "No specific provider"
 msgstr "Нет конкретного поставщика"
 
@@ -1891,12 +1891,13 @@ msgid "Removed"
 msgstr "Удалено"
 
 #: admin/views/page-settings-tab-exceptions.php:19
+#, fuzzy
 msgid ""
-"<i>Here you can define exceptional working or non working days for your "
+"Here you can define exceptional working or non working days for your "
 "business and for your service providers. You should enter holidays here. You "
 "can also define a normally non working week day (e.g. a specific Sunday) as "
 "a working day. When you add new service providers, their expections will be "
-"set to the default schedule.</i>"
+"set to the default schedule."
 msgstr ""
 "<i> Здесь вы можете определить исключительный рабочем или нерабочем дня для "
 "вашего бизнеса и ваших поставщиков услуг. Вы должны ввести отпуск здесь. Вы "
@@ -1904,22 +1905,22 @@ msgstr ""
 "воскресенье) в качестве рабочего дня. При добавлении новых поставщиков "
 "услуг, их ожиданиях будет установлен с расписанием по умолчанию. </ I>"
 
-#: admin/views/page-settings-tab-exceptions.php:23
-#: admin/views/page-settings-tab-working_hours.php:9
+#: admin/views/page-settings-tab-exceptions.php:21
+#: admin/views/page-settings-tab-working_hours.php:6
 msgid "List for:"
 msgstr "Список для:"
 
-#: admin/views/page-settings-tab-exceptions.php:25
+#: admin/views/page-settings-tab-exceptions.php:23
 msgid "Select provider"
 msgstr ""
 
-#: admin/views/page-settings-tab-exceptions.php:42
+#: admin/views/page-settings-tab-exceptions.php:40
 msgid "Exceptional working days, e.g. a specific Sunday you decided to work:"
 msgstr ""
 "Исключительные рабочих дней, например, конкретного воскресенье вы решили "
 "работать:"
 
-#: admin/views/page-settings-tab-exceptions.php:54
+#: admin/views/page-settings-tab-exceptions.php:52
 msgid "Exceptional NON working days, e.g. holidays:"
 msgstr "Исключительные NON рабочие дни, например дни:"
 
@@ -2197,22 +2198,22 @@ msgid "Create an appointments date with this format"
 msgstr ""
 
 #: admin/views/page-settings-tab-main-section-display.php:8
-#: includes/integration/class-app-marketpress.php:85
+#: includes/integration/class-app-marketpress.php:75
 msgid "current month's schedule"
 msgstr "График текущего месяца"
 
 #: admin/views/page-settings-tab-main-section-display.php:9
-#: includes/integration/class-app-marketpress.php:86
+#: includes/integration/class-app-marketpress.php:76
 msgid "current and next month's schedules"
 msgstr "расписание текущий и следующий месяца"
 
 #: admin/views/page-settings-tab-main-section-display.php:10
-#: includes/integration/class-app-marketpress.php:87
+#: includes/integration/class-app-marketpress.php:77
 msgid "current week's schedule"
 msgstr "расписание текущей недели"
 
 #: admin/views/page-settings-tab-main-section-display.php:11
-#: includes/integration/class-app-marketpress.php:88
+#: includes/integration/class-app-marketpress.php:78
 msgid "current and next week's schedules"
 msgstr "расписание текущий и следующей неделе"
 
@@ -2677,14 +2678,15 @@ msgid "Description Page"
 msgstr ""
 
 #: admin/views/page-settings-tab-services-section-services.php:16
+#, fuzzy
 msgid ""
-"<i>Here you should define your services for which your client will be making "
+"Here you should define your services for which your client will be making "
 "appointments. <b>There must be at least one service defined.</b> Capacity is "
 "the number of customers that can take the service at the same time. Enter 0 "
 "for no specific limit (Limited to number of service providers, or to 1 if no "
 "service provider is defined for that service). Price is only required if you "
 "request payment to accept appointments. You can define a description page "
-"for the service you are providing.</i>"
+"for the service you are providing."
 msgstr ""
 "<i> Здесь вы должны определить свои услуги, за которые ваш клиент будет "
 "назначениях. <b> Там должно быть по крайней мере одна служба определены. </ "
@@ -2720,8 +2722,8 @@ msgstr "Нет услуги, определенные"
 
 #: admin/views/page-settings-tab-services-section-services.php:78
 msgid ""
-"<i>Tip: When you clear service name and save changes, this service will be "
-"deleted.</i>"
+"Tip: When you clear service name and save changes, this service will be "
+"deleted."
 msgstr ""
 
 #: admin/views/page-settings-tab-services.php:7
@@ -2753,15 +2755,23 @@ msgid "Services Provided"
 msgstr ""
 
 #: admin/views/page-settings-tab-workers-section-workers.php:15
+#, fuzzy
 msgid ""
-"<i>Here you should define your workers for which your client will be making "
+"Here you should define your workers for which your client will be making "
 "appointments. <b>There must be at least one service defined.</b> Capacity is "
 "the number of customers that can take the service at the same time. Enter 0 "
 "for no specific limit (Limited to number of service providers, or to 1 if no "
 "service provider is defined for that service). Price is only required if you "
 "request payment to accept appointments. You can define a description page "
-"for the service you are providing.</i>"
+"for the service you are providing."
 msgstr ""
+"<i> Здесь вы должны определить свои услуги, за которые ваш клиент будет "
+"назначениях. <b> Там должно быть по крайней мере одна служба определены. </ "
+"B> Емкость является количество клиентов, которые могут принять службу в то "
+"же время. Введите 0 при отсутствии определенного срока (не более числа "
+"поставщиков услуг, или в 1, если не поставщик услуг не определен для этой "
+"службы). Цена требуется только, если вы просите оплату принять назначений. "
+"Вы можете определить страницу описания для службы вы предоставляете. </ I>"
 
 #: admin/views/page-settings-tab-workers-section-workers.php:26
 msgid "Services Provided*"
@@ -2810,18 +2820,19 @@ msgid "# selected"
 msgstr "# Выбран"
 
 #: admin/views/page-settings-tab-working_hours.php:3
+#, fuzzy
 msgid ""
-"<i>Here you can define working hours and breaks for your business. When you "
-"add new service providers, their working and break hours will be set to the "
+"Here you can define working hours and breaks for your business. When you add "
+"new service providers, their working and break hours will be set to the "
 "default schedule. Then you can edit their schedule by selecting their names "
-"from the dropdown menu below.</i>"
+"from the dropdown menu below."
 msgstr ""
 "<i> Здесь вы можете определить рабочие часы и перерывы для вашего бизнеса. "
 "При добавлении новых поставщиков услуг, условий их труда и сломать часов "
 "будет установлен с расписанием по умолчанию. После этого вы можете "
 "редактировать свой график, выбрав их имена из выпадающего меню ниже. </ I>"
 
-#: admin/views/page-settings-tab-working_hours.php:38
+#: admin/views/page-settings-tab-working_hours.php:36
 #: admin/views/user-profile-working-hours.php:10
 msgid "Break Hours"
 msgstr "Перерыв"
@@ -3037,12 +3048,12 @@ msgstr "Подтверждение вашего назначения"
 msgid "Reminder for your Appointment"
 msgstr "Напоминание для вашего назначения"
 
-#: includes/class-app-ajax.php:45
+#: includes/class-app-ajax.php:44
 msgid "Cancellation of appointments is disabled. Please contact website admin."
 msgstr ""
 "Отмена назначений отключена. Пожалуйста, свяжитесь с администратору сайта."
 
-#: includes/class-app-ajax.php:76
+#: includes/class-app-ajax.php:75
 msgid ""
 "There is an issue with this appointment. Please refresh the page and try "
 "again. If problem persists, please contact website admin."
@@ -3051,35 +3062,35 @@ msgstr ""
 "раз. Если проблема не устраняется, пожалуйста, свяжитесь с администратору "
 "сайта."
 
-#: includes/class-app-ajax.php:82
+#: includes/class-app-ajax.php:81
 msgid ""
 "Appointment could not be cancelled. Please refresh the page and try again."
 msgstr ""
 "Назначение не может быть отменен. Обновите страницу и попробуйте еще раз."
 
-#: includes/class-app-ajax.php:145 includes/class-app-ajax.php:218
+#: includes/class-app-ajax.php:144 includes/class-app-ajax.php:217
 msgid "Record could not be saved OR you did not make any changes!"
 msgstr "Запись не может быть сохранен или вы не вносите никаких изменений!"
 
-#: includes/class-app-ajax.php:201 includes/class-app-ajax.php:213
-#: includes/pro/includes/addons/app-users-additional_fields.php:402
+#: includes/class-app-ajax.php:200 includes/class-app-ajax.php:212
+#: includes/pro/includes/addons/app-users-additional_fields.php:394
 msgid "<span style=\"color:green;font-weight:bold\">Changes saved.</span>"
 msgstr ""
 "<span style=\"color:green;font-weight:bold\"> Изменения сохранены. </ span>"
 
-#: includes/class-app-ajax.php:205
+#: includes/class-app-ajax.php:204
 msgid "Status changed from %s to %s by %s for appointment ID:%d"
 msgstr "Статус изменился с %s в %s помощью %s для назначения ID: %d"
 
-#: includes/class-app-ajax.php:217
+#: includes/class-app-ajax.php:216
 msgid "Confirmation message (re)sent"
 msgstr "Сообщение с подтверждением (ре) отправлено"
 
-#: includes/class-app-ajax.php:284
+#: includes/class-app-ajax.php:283
 msgid "Not registered user"
 msgstr "Без регистрации"
 
-#: includes/class-app-ajax.php:321
+#: includes/class-app-ajax.php:320
 msgid ""
 "You have already applied for an appointment. Please wait until you hear from "
 "us."
@@ -3087,7 +3098,7 @@ msgstr ""
 "Вы уже подали заявку на бронирование. Пожалуйста, подождите от нас "
 "подтверждения."
 
-#: includes/class-app-ajax.php:476 includes/class-app-ajax.php:934
+#: includes/class-app-ajax.php:475 includes/class-app-ajax.php:933
 msgid ""
 "We are sorry, but this time slot is no longer available. Please refresh the "
 "page and try another time slot. Thank you."
@@ -3095,13 +3106,13 @@ msgstr ""
 "К сожалению, это время больше недоступно. Обновите страницу и выберите "
 "другое время. Спасибо."
 
-#: includes/class-app-ajax.php:548 includes/class-app-ajax.php:557
+#: includes/class-app-ajax.php:547 includes/class-app-ajax.php:556
 msgid "Appointment could not be saved. Please contact website admin."
 msgstr ""
 "Бронирование не может быть сохранено. Пожалуйста, обратитесь к "
 "администратору сайта."
 
-#: includes/class-app-ajax.php:755
+#: includes/class-app-ajax.php:754
 msgid ""
 "Paypal confirmation arrived, but status could not be changed for some "
 "reason. Please check appointment with ID %s"
@@ -3109,11 +3120,11 @@ msgstr ""
 "Прибыл подтверждение Paypal, но статус не может быть изменен по некоторым "
 "причинам. Пожалуйста, проверьте назначение с ID %s"
 
-#: includes/class-app-ajax.php:757
+#: includes/class-app-ajax.php:756
 msgid "Appointment status could not be changed"
 msgstr "Статус бронирования не может быть изменен"
 
-#: includes/class-app-ajax.php:763
+#: includes/class-app-ajax.php:762
 msgid ""
 "Last transaction has been reversed. Reason: Payment has been reversed "
 "(charge back)"
@@ -3121,90 +3132,90 @@ msgstr ""
 "Последняя сделка была обращена вспять. Причина: Оплата была обращена вспять "
 "(плата назад)"
 
-#: includes/class-app-ajax.php:788
+#: includes/class-app-ajax.php:787
 msgid "Last transaction has been reversed. Reason: Payment has been refunded"
 msgstr "Последняя сделка была обращена вспять. Причина: Оплата была возвращена"
 
-#: includes/class-app-ajax.php:813
+#: includes/class-app-ajax.php:812
 msgid "Last transaction has been reversed. Reason: Payment Denied"
 msgstr "Последняя сделка была обращена вспять. Причина: Оплата Denied"
 
-#: includes/class-app-ajax.php:840
+#: includes/class-app-ajax.php:839
 msgid "Customer did not include a confirmed shipping address"
 msgstr "Клиент не включает подтвержденный адрес доставки"
 
-#: includes/class-app-ajax.php:841
+#: includes/class-app-ajax.php:840
 msgid "Funds not captured yet"
 msgstr "Средства еще не захватили"
 
-#: includes/class-app-ajax.php:842
+#: includes/class-app-ajax.php:841
 msgid "eCheck that has not cleared yet"
 msgstr "Echeck, что до сих пор не очищены"
 
-#: includes/class-app-ajax.php:843
+#: includes/class-app-ajax.php:842
 msgid "Payment waiting for aproval by service provider"
 msgstr "Оплата ждет aproval от поставщика услуг"
 
-#: includes/class-app-ajax.php:844
+#: includes/class-app-ajax.php:843
 msgid "Payment waiting for service provider to handle multi-currency process"
 msgstr ""
 "Оплата ожидания для поставщика услуг, чтобы справиться мультивалютный процесс"
 
-#: includes/class-app-ajax.php:845
+#: includes/class-app-ajax.php:844
 msgid "Customer did not register or confirm his/her email yet"
 msgstr ""
 "Клиент не зарегистрироваться или подтвердить его / ее электронной почты еще"
 
-#: includes/class-app-ajax.php:846
+#: includes/class-app-ajax.php:845
 msgid "Waiting for service provider to upgrade the PayPal account"
 msgstr "В ожидании поставщика услуг обновить учетную запись PayPal"
 
-#: includes/class-app-ajax.php:847
+#: includes/class-app-ajax.php:846
 msgid "Waiting for service provider to verify his/her PayPal account"
 msgstr "В ожидании поставщика услуг, чтобы проверить его / ее счет PayPal"
 
-#: includes/class-app-ajax.php:851
+#: includes/class-app-ajax.php:850
 msgid "Last transaction is pending. Reason: "
 msgstr "Последняя сделка находится на рассмотрении. Причина: "
 
-#: includes/class-app-ajax.php:914
+#: includes/class-app-ajax.php:913
 msgid "You need to login to make an appointment."
 msgstr "Вы должны войти, чтобы записаться на прием."
 
-#: includes/class-app-ajax.php:940
+#: includes/class-app-ajax.php:939
 msgid "Service name: "
 msgstr "Услуга:"
 
-#: includes/class-app-ajax.php:941
+#: includes/class-app-ajax.php:940
 msgid "Date and time: "
 msgstr "Время и дата:"
 
-#: includes/class-app-ajax.php:942
+#: includes/class-app-ajax.php:941
 msgid "Lasts (approx): "
 msgstr "Длится (приблизительно): "
 
-#: includes/class-app-ajax.php:942
+#: includes/class-app-ajax.php:941
 msgid "minutes"
 msgstr "минуты"
 
-#: includes/class-app-ajax.php:945
+#: includes/class-app-ajax.php:944
 msgid "Price: "
 msgstr "Цена:"
 
-#: includes/class-app-ajax.php:950
+#: includes/class-app-ajax.php:949
 msgid "Service provider: "
 msgstr "Сотрудник:"
 
-#: includes/class-app-ajax.php:1040
+#: includes/class-app-ajax.php:1035
 msgid "Nothing to download!"
 msgstr "Ничего для загрузки!"
 
-#: includes/class-app-ajax.php:1154 includes/class-app-ajax.php:1167
-#: includes/class-app-ajax.php:1193
+#: includes/class-app-ajax.php:1144 includes/class-app-ajax.php:1157
+#: includes/class-app-ajax.php:1183
 msgid "Sorry, there was a problem with your request!"
 msgstr ""
 
-#: includes/class-app-ajax.php:1179 includes/class-app-ajax.php:1205
+#: includes/class-app-ajax.php:1169 includes/class-app-ajax.php:1195
 msgid "Service Provider was successfuly deleted."
 msgstr ""
 
@@ -3217,12 +3228,14 @@ msgid "Confirmed"
 msgstr "Подтверждено"
 
 #: includes/class-app-appointment.php:1478 includes/default_filters.php:122
+#, fuzzy
 msgid "The appointment does not exist"
-msgstr ""
+msgstr "Показать мои встречи местоположение"
 
 #: includes/class-app-appointment.php:1482
+#, fuzzy
 msgid "The appointment has been already cancelled"
-msgstr ""
+msgstr "Бронирование было отменено"
 
 #: includes/class-app-gcal.php:85
 msgid "Error validating the access token: %s"
@@ -3886,7 +3899,7 @@ msgid "Less Info"
 msgstr "Менее информация"
 
 #: includes/default_filters.php:122
-#: includes/shortcodes/class-app-shortcode-confirmation.php:237
+#: includes/shortcodes/class-app-shortcode-confirmation.php:231
 msgid "Error"
 msgstr ""
 
@@ -3895,8 +3908,9 @@ msgid "You are not allowed to perform this action"
 msgstr ""
 
 #: includes/default_filters.php:146
+#, fuzzy
 msgid "Your appointment has been cancelled"
-msgstr ""
+msgstr "Бронирование было отменено"
 
 #: includes/default_filters.php:146
 msgid "Appointment cancelled"
@@ -4264,15 +4278,15 @@ msgstr "Мой Исключительные рабочих дней"
 msgid "My Holidays"
 msgstr "Мои Праздники"
 
-#: includes/integration/class-app-marketpress.php:65
+#: includes/integration/class-app-marketpress.php:58
 msgid "MarketPress Integration"
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:68
+#: includes/integration/class-app-marketpress.php:61
 msgid "Activate MarketPress integration"
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:71
+#: includes/integration/class-app-marketpress.php:64
 msgid ""
 "Appointments can be set as products. Any appointment shortcode added to a "
 "product page will make that page an \"Appointment Product Page\". For "
@@ -4283,19 +4297,19 @@ msgstr ""
 "Назначение продукта \". Для получения дополнительной информации, пожалуйста, "
 "см. справку."
 
-#: includes/integration/class-app-marketpress.php:78
+#: includes/integration/class-app-marketpress.php:69
 msgid "Product Page"
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:81
+#: includes/integration/class-app-marketpress.php:72
 msgid "Create an Appointment Product Page with"
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:83
+#: includes/integration/class-app-marketpress.php:73
 msgid "Select Product Page Type"
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:90
+#: includes/integration/class-app-marketpress.php:80
 msgid ""
 "Same as the above \"Create an Appointment Page\", but this time appointment "
 "shortcodes will be inserted in a new Product page and page title will be "
@@ -4305,17 +4319,17 @@ msgstr ""
 "шорткоды будет вставлен в новом страницу продукта и заголовок страницы "
 "будет  \"Назначение \". Это также название продукта."
 
-#: includes/integration/class-app-marketpress.php:93
+#: includes/integration/class-app-marketpress.php:82
 msgid ""
 "<b>Note:</b> You already have such a page. If you check this checkbox, "
 "another page with the same title will be created. "
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:94
+#: includes/integration/class-app-marketpress.php:83
 msgid "Edit Page"
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:95
+#: includes/integration/class-app-marketpress.php:84
 msgid "View Page"
 msgstr ""
 
@@ -4477,7 +4491,7 @@ msgstr "Доступ Назначения роль"
 msgid "Default"
 msgstr "По умолчанию"
 
-#: includes/pro/includes/addons/app-admin-export_date_range.php:53
+#: includes/pro/includes/addons/app-admin-export_date_range.php:48
 msgid "Only include appointments between"
 msgstr "Только включают встречи между"
 
@@ -4499,7 +4513,7 @@ msgid "Location"
 msgstr "Местоположение"
 
 #: includes/pro/includes/addons/app-locations-location_support.php:151
-#: includes/pro/includes/addons/app-users-additional_fields.php:561
+#: includes/pro/includes/addons/app-users-additional_fields.php:553
 msgid "Add"
 msgstr "Добавить"
 
@@ -4981,57 +4995,57 @@ msgstr ""
 msgid "Shares resources with"
 msgstr "Акции ресурсов с"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:116
+#: includes/pro/includes/addons/app-users-additional_fields.php:114
 msgid "The field %s is required"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:517
+#: includes/pro/includes/addons/app-users-additional_fields.php:509
 msgid "Text"
 msgstr "Текст"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:518
+#: includes/pro/includes/addons/app-users-additional_fields.php:510
 msgid "Checkbox"
 msgstr "Чекбокс"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:524
+#: includes/pro/includes/addons/app-users-additional_fields.php:516
 msgid "Additional Fields"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:527
+#: includes/pro/includes/addons/app-users-additional_fields.php:519
 msgid "Additional fields"
 msgstr "Дополнительные поля"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:534
-#: includes/pro/includes/addons/app-users-additional_fields.php:572
+#: includes/pro/includes/addons/app-users-additional_fields.php:526
+#: includes/pro/includes/addons/app-users-additional_fields.php:564
 msgid "Required"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:536
+#: includes/pro/includes/addons/app-users-additional_fields.php:528
 msgid "E-mail macro:"
 msgstr "Email макроc:"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:537
+#: includes/pro/includes/addons/app-users-additional_fields.php:529
 msgid "This is the placeholder you can use in your emails."
 msgstr "Это заполнитель можно использовать в свои сообщения электронной почты."
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:539
-#: includes/pro/includes/addons/app-users-additional_fields.php:574
+#: includes/pro/includes/addons/app-users-additional_fields.php:531
+#: includes/pro/includes/addons/app-users-additional_fields.php:566
 msgid "Remove"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:544
+#: includes/pro/includes/addons/app-users-additional_fields.php:536
 msgid "Add new field"
 msgstr "Добавить новое поле"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:546
+#: includes/pro/includes/addons/app-users-additional_fields.php:538
 msgid "Field label:"
 msgstr "Поле этикетки:"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:550
+#: includes/pro/includes/addons/app-users-additional_fields.php:542
 msgid "Field type:"
 msgstr "Тип поля:"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:559
+#: includes/pro/includes/addons/app-users-additional_fields.php:551
 msgid "Required?"
 msgstr "Обязательный?"
 
@@ -5558,7 +5572,7 @@ msgstr ""
 msgid "<b>This shortcode is always required to complete an appointment.</b>"
 msgstr "<b> Это шорткод всегда требуется, чтобы завершить встречу. </ B>"
 
-#: includes/shortcodes/class-app-shortcode-confirmation.php:236
+#: includes/shortcodes/class-app-shortcode-confirmation.php:230
 msgid "A connection problem occurred. Please try again."
 msgstr "Возникла проблема связи. Пожалуйста, попробуйте еще раз."
 
@@ -6417,7 +6431,7 @@ msgstr ""
 #: admin/views/inline-edit.php:121 appointments.php:1809
 #: includes/class-app-tutorial.php:225
 #: includes/pro/includes/addons/app-locations-location_support.php:155
-#: includes/shortcodes/class-app-shortcode-confirmation.php:208
+#: includes/shortcodes/class-app-shortcode-confirmation.php:202
 msgctxt "Drop current action"
 msgid "Cancel"
 msgstr "Отменить"
@@ -6427,7 +6441,7 @@ msgctxt "Settings section"
 msgid "%s Settings"
 msgstr ""
 
-#: includes/class-app-ajax.php:137 includes/class-app-ajax.php:145
+#: includes/class-app-ajax.php:136 includes/class-app-ajax.php:144
 msgctxt "Error while editing an appointment"
 msgid "Error"
 msgstr ""

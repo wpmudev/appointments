@@ -157,6 +157,14 @@ We provide comprehensive and guaranteed support on the <a href='http://premium.w
 
 == Changelog ==
 
+= 2.2.7 =
+* Added check for service name it can be empty.
+* Changed default appointments sorting to "Appointment Date".
+* Fixed an export problem for additional fields with HTML entities in a name.
+* Fixed an export problem for the date range.
+* Fixed an integration problem with MarketPress plugin.
+* Fixed a problem with booking, when the site is on HTTP but admin force HTTPS usage.
+
 = 2.2.6 =
 * Added ability to delete "Service".
 * Added ability to delete "Service Provider".
