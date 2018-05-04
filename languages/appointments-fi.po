@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-04-19 05:31:16+00:00\n"
+"POT-Creation-Date: 2018-05-04 10:24:58+00:00\n"
 "PO-Revision-Date: 2016-02-07 18:23:16+0000\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -25,18 +25,18 @@ msgstr "Tallenna muutokset"
 #: admin/admin-helpers.php:121 admin/views/form-working-hours.php:53
 #: admin/views/form-working-hours.php:83
 #: includes/gcal/views/settings-gcal-step-3.php:61
-#: includes/pro/includes/addons/app-users-additional_fields.php:534
-#: includes/pro/includes/addons/app-users-additional_fields.php:572
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:345
+#: includes/pro/includes/addons/app-users-additional_fields.php:526
+#: includes/pro/includes/addons/app-users-additional_fields.php:564
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:331
 msgid "Yes"
 msgstr "Kyllä"
 
 #: admin/admin-helpers.php:122 admin/views/form-working-hours.php:52
 #: admin/views/form-working-hours.php:82
 #: includes/gcal/views/settings-gcal-step-3.php:60
-#: includes/pro/includes/addons/app-users-additional_fields.php:534
-#: includes/pro/includes/addons/app-users-additional_fields.php:572
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:346
+#: includes/pro/includes/addons/app-users-additional_fields.php:526
+#: includes/pro/includes/addons/app-users-additional_fields.php:564
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:332
 msgid "No"
 msgstr "Ei"
 
@@ -894,7 +894,7 @@ msgid "Description"
 msgstr "Kuvaus"
 
 #: admin/class-app-admin-user-profile.php:47
-#: includes/class-app-appointment.php:1489
+#: includes/class-app-appointment.php:1463
 msgid "Client %s cancelled appointment with ID: %s"
 msgstr "Asiakas %s peruutti varauksen tunnuksella ID: %s"
 
@@ -1258,7 +1258,7 @@ msgstr "Toteutuneet varaukset"
 
 #: admin/pages/class-admin-appointments-page.php:157
 #: admin/views/page-appointments-status-filter.php:6
-#: includes/class-app-appointment.php:1205
+#: includes/class-app-appointment.php:1184
 msgid "Reserved by GCal"
 msgstr "GKalenterin varaama"
 
@@ -1279,7 +1279,7 @@ msgstr ""
 #: admin/pages/class-admin-appointments-page.php:269
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:88
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:158
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:200
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:196
 msgid "Client"
 msgstr "Asiakas"
 
@@ -1287,7 +1287,7 @@ msgstr "Asiakas"
 #: admin/pages/class-admin-transactions-page.php:56
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:86
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:67
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:244
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:240
 #: includes/shortcodes/class-app-shortcode-schedule.php:52
 #: includes/shortcodes/class-app-shortcode-service-providers.php:82
 msgid "Service"
@@ -1298,8 +1298,8 @@ msgstr "Palvelu"
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:87
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:74
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:29
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:30
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:161
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:29
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:158
 #: includes/shortcodes/class-app-shortcode-schedule.php:59
 #: includes/shortcodes/class-app-shortcode-services.php:81
 msgid "Provider"
@@ -1311,13 +1311,13 @@ msgstr ""
 
 #: admin/pages/class-admin-appointments-page.php:273
 #: admin/pages/class-admin-transactions-page.php:59
-#: admin/views/inline-edit.php:99
+#: admin/views/inline-edit.php:100
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:22
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:30
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:90
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:156
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:43
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:247
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:42
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:243
 msgid "Status"
 msgstr "Tila"
 
@@ -1347,7 +1347,7 @@ msgid "General"
 msgstr "Yleiset"
 
 #: admin/pages/class-admin-settings-page.php:30
-#: admin/views/page-settings-tab-working_hours.php:37
+#: admin/views/page-settings-tab-working_hours.php:35
 #: admin/views/user-profile-working-hours.php:4
 msgid "Working Hours"
 msgstr "Aukioloajat"
@@ -1410,7 +1410,7 @@ msgid "Add new Service Provider"
 msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:98
-#: admin/pages/class-admin-settings-page.php:489
+#: admin/pages/class-admin-settings-page.php:497
 msgid "Please, select at least one service provided"
 msgstr ""
 
@@ -1466,13 +1466,13 @@ msgid "Give break?"
 msgstr "Anna tauko?"
 
 #: admin/views/form-working-hours.php:37 admin/views/inline-edit.php:63
-#: includes/pro/includes/addons/app-admin-export_date_range.php:54
+#: includes/pro/includes/addons/app-admin-export_date_range.php:49
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:152
 msgid "Start"
 msgstr "Alku"
 
-#: admin/views/form-working-hours.php:38 admin/views/inline-edit.php:88
-#: includes/pro/includes/addons/app-admin-export_date_range.php:55
+#: admin/views/form-working-hours.php:38 admin/views/inline-edit.php:89
+#: includes/pro/includes/addons/app-admin-export_date_range.php:50
 msgid "End"
 msgstr "Loppu"
 
@@ -1494,8 +1494,8 @@ msgid "SERVICE"
 msgstr ""
 
 #: admin/views/inline-edit.php:36
-#: admin/views/page-settings-tab-exceptions.php:27
-#: admin/views/page-settings-tab-working_hours.php:12
+#: admin/views/page-settings-tab-exceptions.php:25
+#: admin/views/page-settings-tab-working_hours.php:10
 msgid "No specific provider"
 msgstr "Ei määriteltyä palveluntarjoajaa"
 
@@ -1516,20 +1516,20 @@ msgstr "Luotu"
 msgid "Unknown"
 msgstr ""
 
-#: admin/views/inline-edit.php:109
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:250
+#: admin/views/inline-edit.php:110
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:245
 msgid "Confirm"
 msgstr "Varmista"
 
-#: admin/views/inline-edit.php:112
+#: admin/views/inline-edit.php:113
 msgid "(Re)send confirmation email"
 msgstr "(Uudelleen)lähetä vahvistussähköposti"
 
-#: admin/views/inline-edit.php:114
+#: admin/views/inline-edit.php:115
 msgid "Send confirmation email"
 msgstr "Lähetä vahvistussähköposti"
 
-#: admin/views/inline-edit.php:123
+#: admin/views/inline-edit.php:124
 msgid ""
 "GCal reserved appointments cannot be edited here. Edit them in your Google "
 "calendar."
@@ -1537,11 +1537,11 @@ msgstr ""
 "GKalenterissa varattuja varauksia ei voi muokata tässä. Muokkaa niitä Google "
 "Kalenterissasi."
 
-#: admin/views/inline-edit.php:123 admin/views/inline-edit.php:125
+#: admin/views/inline-edit.php:124 admin/views/inline-edit.php:126
 msgid "Save / Update"
 msgstr "Tallenna / Päivitä"
 
-#: admin/views/inline-edit.php:125
+#: admin/views/inline-edit.php:126
 msgid "Click to save or update"
 msgstr "Klikkaa tallentaaksesi tai päivittääksesi"
 
@@ -1628,27 +1628,28 @@ msgid "Active"
 msgstr "Aktiiviset"
 
 #: admin/views/page-appointments-status-filter.php:4
-#: includes/class-app-appointment.php:1201
+#: includes/class-app-appointment.php:1180
 msgid "Pending"
 msgstr "Odottaa"
 
 #: admin/views/page-appointments-status-filter.php:5
-#: includes/class-app-appointment.php:1204
+#: includes/class-app-appointment.php:1183
 msgid "Completed"
 msgstr "Valmistunut"
 
 #: admin/views/page-appointments-status-filter.php:7
-#: includes/class-app-appointment.php:1206
+#: includes/class-app-appointment.php:1185
 msgid "Removed"
 msgstr "Poistettu"
 
 #: admin/views/page-settings-tab-exceptions.php:19
+#, fuzzy
 msgid ""
-"<i>Here you can define exceptional working or non working days for your "
+"Here you can define exceptional working or non working days for your "
 "business and for your service providers. You should enter holidays here. You "
 "can also define a normally non working week day (e.g. a specific Sunday) as "
 "a working day. When you add new service providers, their expections will be "
-"set to the default schedule.</i>"
+"set to the default schedule."
 msgstr ""
 "<i>Tähän voit määritellä poikkeukselliset aukioloajat ja pyhäpäivät "
 "yrityksellesi ja palveluntuottajillesi. Myös lomat tulisi kirjata tänne. "
@@ -1656,22 +1657,22 @@ msgstr ""
 "erityisen sunnuntain) työpäiväksi. Kun määrittelet uuden palveluntarjoajan, "
 "heidän oletusarvokseen määräytyy oletustyöjärjestys.</i>"
 
-#: admin/views/page-settings-tab-exceptions.php:23
-#: admin/views/page-settings-tab-working_hours.php:9
+#: admin/views/page-settings-tab-exceptions.php:21
+#: admin/views/page-settings-tab-working_hours.php:6
 msgid "List for:"
 msgstr "Listaa:"
 
-#: admin/views/page-settings-tab-exceptions.php:25
+#: admin/views/page-settings-tab-exceptions.php:23
 msgid "Select provider"
 msgstr ""
 
-#: admin/views/page-settings-tab-exceptions.php:42
+#: admin/views/page-settings-tab-exceptions.php:40
 msgid "Exceptional working days, e.g. a specific Sunday you decided to work:"
 msgstr ""
 "Poikkeukselliset työpäivät, esim. erityiset sunnuntait, jolloin olet "
 "päättänyt työskennellä:"
 
-#: admin/views/page-settings-tab-exceptions.php:54
+#: admin/views/page-settings-tab-exceptions.php:52
 msgid "Exceptional NON working days, e.g. holidays:"
 msgstr "Poikkeukselliset EI-työpäivät, esim. arkipyhät:"
 
@@ -1934,22 +1935,22 @@ msgid "Create an appointments date with this format"
 msgstr ""
 
 #: admin/views/page-settings-tab-main-section-display.php:8
-#: includes/integration/class-app-marketpress.php:85
+#: includes/integration/class-app-marketpress.php:75
 msgid "current month's schedule"
 msgstr "kuluvan kuukauden kalenteri"
 
 #: admin/views/page-settings-tab-main-section-display.php:9
-#: includes/integration/class-app-marketpress.php:86
+#: includes/integration/class-app-marketpress.php:76
 msgid "current and next month's schedules"
 msgstr "tämän ja ensi kuukauden aikataulut"
 
 #: admin/views/page-settings-tab-main-section-display.php:10
-#: includes/integration/class-app-marketpress.php:87
+#: includes/integration/class-app-marketpress.php:77
 msgid "current week's schedule"
 msgstr "tämän viikon aikataulu"
 
 #: admin/views/page-settings-tab-main-section-display.php:11
-#: includes/integration/class-app-marketpress.php:88
+#: includes/integration/class-app-marketpress.php:78
 msgid "current and next week's schedules"
 msgstr "tämän ja ensi viikon aikataulut"
 
@@ -2397,14 +2398,15 @@ msgid "Description Page"
 msgstr ""
 
 #: admin/views/page-settings-tab-services-section-services.php:16
+#, fuzzy
 msgid ""
-"<i>Here you should define your services for which your client will be making "
+"Here you should define your services for which your client will be making "
 "appointments. <b>There must be at least one service defined.</b> Capacity is "
 "the number of customers that can take the service at the same time. Enter 0 "
 "for no specific limit (Limited to number of service providers, or to 1 if no "
 "service provider is defined for that service). Price is only required if you "
 "request payment to accept appointments. You can define a description page "
-"for the service you are providing.</i>"
+"for the service you are providing."
 msgstr ""
 "<i>Tänne sinun tulee määritellä ne palvelut, joita asiakkaasi voivat varata."
 "<b>Vähintään yhden palvelun tulee olla määriteltynä.</b> Kapasiteetti on se "
@@ -2441,8 +2443,8 @@ msgstr "Palvelua ei valittuna"
 
 #: admin/views/page-settings-tab-services-section-services.php:78
 msgid ""
-"<i>Tip: When you clear service name and save changes, this service will be "
-"deleted.</i>"
+"Tip: When you clear service name and save changes, this service will be "
+"deleted."
 msgstr ""
 
 #: admin/views/page-settings-tab-services.php:7
@@ -2474,15 +2476,24 @@ msgid "Services Provided"
 msgstr ""
 
 #: admin/views/page-settings-tab-workers-section-workers.php:15
+#, fuzzy
 msgid ""
-"<i>Here you should define your workers for which your client will be making "
+"Here you should define your workers for which your client will be making "
 "appointments. <b>There must be at least one service defined.</b> Capacity is "
 "the number of customers that can take the service at the same time. Enter 0 "
 "for no specific limit (Limited to number of service providers, or to 1 if no "
 "service provider is defined for that service). Price is only required if you "
 "request payment to accept appointments. You can define a description page "
-"for the service you are providing.</i>"
+"for the service you are providing."
 msgstr ""
+"<i>Tänne sinun tulee määritellä ne palvelut, joita asiakkaasi voivat varata."
+"<b>Vähintään yhden palvelun tulee olla määriteltynä.</b> Kapasiteetti on se "
+"määrä, joka määrä asiakkaita voidaan palvella samaan aikaan. Aseta arvoksi "
+"0, jos erityistä rajaa ei ole, jolloin palveluntarjoajien määrä määrittää "
+"enimmäismäärän. Asettamalla arvoksi 1 vain yksi palveluntarjoaja voi tarjota "
+"kyseistä palvelua tuona aikana. Hinta on vaadittu vain, jos edellytät "
+"ennakkomaksun varausten vahvistamiseksi. Halutessasi voit määritellä sivun, "
+"josta palvelun tarkempi kuvaus löytyy.</i>"
 
 #: admin/views/page-settings-tab-workers-section-workers.php:26
 msgid "Services Provided*"
@@ -2531,18 +2542,19 @@ msgid "# selected"
 msgstr "# valitut"
 
 #: admin/views/page-settings-tab-working_hours.php:3
+#, fuzzy
 msgid ""
-"<i>Here you can define working hours and breaks for your business. When you "
-"add new service providers, their working and break hours will be set to the "
+"Here you can define working hours and breaks for your business. When you add "
+"new service providers, their working and break hours will be set to the "
 "default schedule. Then you can edit their schedule by selecting their names "
-"from the dropdown menu below.</i>"
+"from the dropdown menu below."
 msgstr ""
 "<i>Täällä voit määritellä yrityksesi työ- ja taukoajat. Uusia "
 "palveluntarjoajia lisätessäsi asetetaan heidän työ- ja taukoaikansa "
 "yrityksen oletusajan mukaan. Voit mukata heidän henkilökohtaisia työaikojaan "
 "valitsemalla heidät alla olevasta pudotusvalikosta.</i>"
 
-#: admin/views/page-settings-tab-working_hours.php:38
+#: admin/views/page-settings-tab-working_hours.php:36
 #: admin/views/user-profile-working-hours.php:10
 msgid "Break Hours"
 msgstr "Tauot"
@@ -2560,7 +2572,7 @@ msgid "Future transactions"
 msgstr "Tulevat myynnit"
 
 #: admin/views/page-transactions.php:60 admin/views/page-transactions.php:63
-#: includes/class-app-appointment.php:1217
+#: includes/class-app-appointment.php:1196
 msgid "None yet"
 msgstr "Ei ketään vielä"
 
@@ -2756,13 +2768,13 @@ msgstr "Ajanvarauksesi vahvistus"
 msgid "Reminder for your Appointment"
 msgstr "Muistutus varaamastasi ajasta"
 
-#: includes/class-app-ajax.php:45
+#: includes/class-app-ajax.php:44
 msgid "Cancellation of appointments is disabled. Please contact website admin."
 msgstr ""
 "Ajanvarausten peruuttaminen on estetty. Ole hyvä ja ota yhteyttä "
 "verkkosivuston ylläpitäjään."
 
-#: includes/class-app-ajax.php:76
+#: includes/class-app-ajax.php:75
 msgid ""
 "There is an issue with this appointment. Please refresh the page and try "
 "again. If problem persists, please contact website admin."
@@ -2770,42 +2782,42 @@ msgstr ""
 "Ajanarauksessa on ongelmia. Ole hyvä ja päivitä verkkosivu ja yritä "
 "uudelleen. Jos ongelma jatkuu, ota yhteyttä verkkosivuston ylläpitäjään."
 
-#: includes/class-app-ajax.php:82
+#: includes/class-app-ajax.php:81
 msgid ""
 "Appointment could not be cancelled. Please refresh the page and try again."
 msgstr ""
 "Ajanvarausta ei voitu peruuttaa. Ole hyvä ja päivitä verkkosivu ja yritä "
 "uudelleen."
 
-#: includes/class-app-ajax.php:145 includes/class-app-ajax.php:218
+#: includes/class-app-ajax.php:144 includes/class-app-ajax.php:217
 msgid "Record could not be saved OR you did not make any changes!"
 msgstr "Taltiota ei voitu tallentaa TAI et tehnyt mitään muutoksia!"
 
-#: includes/class-app-ajax.php:201 includes/class-app-ajax.php:213
-#: includes/pro/includes/addons/app-users-additional_fields.php:402
+#: includes/class-app-ajax.php:200 includes/class-app-ajax.php:212
+#: includes/pro/includes/addons/app-users-additional_fields.php:394
 msgid "<span style=\"color:green;font-weight:bold\">Changes saved.</span>"
 msgstr ""
 
-#: includes/class-app-ajax.php:205
+#: includes/class-app-ajax.php:204
 msgid "Status changed from %s to %s by %s for appointment ID:%d"
 msgstr ""
 
-#: includes/class-app-ajax.php:217
+#: includes/class-app-ajax.php:216
 msgid "Confirmation message (re)sent"
 msgstr "Varausvahvistusviesti (uudelleen)lähetetty"
 
-#: includes/class-app-ajax.php:284
+#: includes/class-app-ajax.php:283
 msgid "Not registered user"
 msgstr "Käyttäjää ei ole rekisteröity "
 
-#: includes/class-app-ajax.php:321
+#: includes/class-app-ajax.php:320
 msgid ""
 "You have already applied for an appointment. Please wait until you hear from "
 "us."
 msgstr ""
 "Olet jo jättänyt ajanvarauspyynnön. Ole hyvä ja odota kunnes kuulet meistä."
 
-#: includes/class-app-ajax.php:476 includes/class-app-ajax.php:934
+#: includes/class-app-ajax.php:474 includes/class-app-ajax.php:932
 msgid ""
 "We are sorry, but this time slot is no longer available. Please refresh the "
 "page and try another time slot. Thank you."
@@ -2813,127 +2825,129 @@ msgstr ""
 "Tämä aika ei ole vapaana, pahoittelumme. Päivitä verkkosivu uudelleen ja "
 "yritä jotain muuta aikaa. Kiitos."
 
-#: includes/class-app-ajax.php:548 includes/class-app-ajax.php:557
+#: includes/class-app-ajax.php:546 includes/class-app-ajax.php:555
 msgid "Appointment could not be saved. Please contact website admin."
 msgstr ""
 "Varausta ei voitu tallentaa. Ole hyvä ja ota yhteyttä sivuston ylläpitäjään."
 
-#: includes/class-app-ajax.php:755
+#: includes/class-app-ajax.php:753
 msgid ""
 "Paypal confirmation arrived, but status could not be changed for some "
 "reason. Please check appointment with ID %s"
 msgstr ""
 
-#: includes/class-app-ajax.php:757
+#: includes/class-app-ajax.php:755
 msgid "Appointment status could not be changed"
 msgstr "Varauksen tilaa ei voitu muuttaa"
 
-#: includes/class-app-ajax.php:763
+#: includes/class-app-ajax.php:761
 msgid ""
 "Last transaction has been reversed. Reason: Payment has been reversed "
 "(charge back)"
 msgstr ""
 
-#: includes/class-app-ajax.php:788
+#: includes/class-app-ajax.php:786
 msgid "Last transaction has been reversed. Reason: Payment has been refunded"
 msgstr ""
 
-#: includes/class-app-ajax.php:813
+#: includes/class-app-ajax.php:811
 msgid "Last transaction has been reversed. Reason: Payment Denied"
 msgstr ""
 
-#: includes/class-app-ajax.php:840
+#: includes/class-app-ajax.php:838
 msgid "Customer did not include a confirmed shipping address"
 msgstr ""
 
-#: includes/class-app-ajax.php:841
+#: includes/class-app-ajax.php:839
 msgid "Funds not captured yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:842
+#: includes/class-app-ajax.php:840
 msgid "eCheck that has not cleared yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:843
+#: includes/class-app-ajax.php:841
 msgid "Payment waiting for aproval by service provider"
 msgstr "Maksu odottaa vahvistusta palveluntarjoajalta"
 
-#: includes/class-app-ajax.php:844
+#: includes/class-app-ajax.php:842
 msgid "Payment waiting for service provider to handle multi-currency process"
 msgstr ""
 
-#: includes/class-app-ajax.php:845
+#: includes/class-app-ajax.php:843
 msgid "Customer did not register or confirm his/her email yet"
 msgstr "Asiakas ei rekisteröinyt tai vahvistanut sähköpostiosoitettaan vielä"
 
-#: includes/class-app-ajax.php:846
+#: includes/class-app-ajax.php:844
 msgid "Waiting for service provider to upgrade the PayPal account"
 msgstr ""
 
-#: includes/class-app-ajax.php:847
+#: includes/class-app-ajax.php:845
 msgid "Waiting for service provider to verify his/her PayPal account"
 msgstr "Odottaa palveluntarjoajan varmistavan PayPal tilinsä"
 
-#: includes/class-app-ajax.php:851
+#: includes/class-app-ajax.php:849
 msgid "Last transaction is pending. Reason: "
 msgstr ""
 
-#: includes/class-app-ajax.php:914
+#: includes/class-app-ajax.php:912
 msgid "You need to login to make an appointment."
 msgstr "Sinun täytyy kirjautua varataksesi ajan."
 
-#: includes/class-app-ajax.php:940
+#: includes/class-app-ajax.php:938
 msgid "Service name: "
 msgstr "Palvelu:"
 
-#: includes/class-app-ajax.php:941
+#: includes/class-app-ajax.php:939
 msgid "Date and time: "
 msgstr "Päivä ja aika:"
 
-#: includes/class-app-ajax.php:942
+#: includes/class-app-ajax.php:940
 msgid "Lasts (approx): "
 msgstr "Kesto (palvelu+15 min):"
 
-#: includes/class-app-ajax.php:942
+#: includes/class-app-ajax.php:940
 msgid "minutes"
 msgstr "minuuttia"
 
-#: includes/class-app-ajax.php:945
+#: includes/class-app-ajax.php:943
 msgid "Price: "
 msgstr "Hinta:"
 
-#: includes/class-app-ajax.php:950
+#: includes/class-app-ajax.php:948
 msgid "Service provider: "
 msgstr "Palveluntarjoaja:"
 
-#: includes/class-app-ajax.php:1040
+#: includes/class-app-ajax.php:1034
 msgid "Nothing to download!"
 msgstr "Ei löytynyt mitään ladattavaa!"
 
-#: includes/class-app-ajax.php:1154 includes/class-app-ajax.php:1167
-#: includes/class-app-ajax.php:1193
+#: includes/class-app-ajax.php:1143 includes/class-app-ajax.php:1156
+#: includes/class-app-ajax.php:1182
 msgid "Sorry, there was a problem with your request!"
 msgstr ""
 
-#: includes/class-app-ajax.php:1179 includes/class-app-ajax.php:1205
+#: includes/class-app-ajax.php:1168 includes/class-app-ajax.php:1194
 msgid "Service Provider was successfuly deleted."
 msgstr ""
 
-#: includes/class-app-appointment.php:1202
+#: includes/class-app-appointment.php:1181
 msgid "Paid"
 msgstr "Maksettu"
 
-#: includes/class-app-appointment.php:1203
+#: includes/class-app-appointment.php:1182
 msgid "Confirmed"
 msgstr "Vahvistettu"
 
-#: includes/class-app-appointment.php:1478 includes/default_filters.php:122
-msgid "The appointment does not exist"
-msgstr ""
+#: includes/class-app-appointment.php:1452 includes/default_filters.php:121
+#, fuzzy
+msgid "The appointment does not exist."
+msgstr "Näytä varauksieni sijainnit"
 
-#: includes/class-app-appointment.php:1482
-msgid "The appointment has been already cancelled"
-msgstr ""
+#: includes/class-app-appointment.php:1456
+#, fuzzy
+msgid "The appointment has been already cancelled."
+msgstr "Varaus on peruutettu"
 
 #: includes/class-app-gcal.php:85
 msgid "Error validating the access token: %s"
@@ -2960,10 +2974,6 @@ msgid ""
 "Client Name: CLIENT\n"
 "Service Name: SERVICE\n"
 "Service Provider Name: SERVICE_PROVIDER\n"
-msgstr ""
-
-#: includes/class-app-notifications-manager.php:43
-msgid "Every 10 minutes or you can filter it with the app_update_time filter"
 msgstr ""
 
 #: includes/class-app-service.php:63
@@ -3513,20 +3523,21 @@ msgstr "Lisätietoja"
 msgid "Less Info"
 msgstr "Näytä vähemmän"
 
-#: includes/default_filters.php:122
-#: includes/shortcodes/class-app-shortcode-confirmation.php:237
+#: includes/default_filters.php:121 includes/default_filters.php:124
+#: includes/shortcodes/class-app-shortcode-confirmation.php:231
 msgid "Error"
 msgstr ""
 
-#: includes/default_filters.php:126
-msgid "You are not allowed to perform this action"
+#: includes/default_filters.php:124
+msgid "You are not allowed to perform this action."
 msgstr ""
 
-#: includes/default_filters.php:146
-msgid "Your appointment has been cancelled"
-msgstr ""
+#: includes/default_filters.php:138
+#, fuzzy
+msgid "Your appointment has been cancelled!"
+msgstr "Varaus on peruutettu"
 
-#: includes/default_filters.php:146
+#: includes/default_filters.php:138
 msgid "Appointment cancelled"
 msgstr ""
 
@@ -3873,15 +3884,15 @@ msgstr "Poikkeukselliset työpäiväni"
 msgid "My Holidays"
 msgstr "Lomani"
 
-#: includes/integration/class-app-marketpress.php:65
+#: includes/integration/class-app-marketpress.php:58
 msgid "MarketPress Integration"
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:68
+#: includes/integration/class-app-marketpress.php:61
 msgid "Activate MarketPress integration"
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:71
+#: includes/integration/class-app-marketpress.php:64
 msgid ""
 "Appointments can be set as products. Any appointment shortcode added to a "
 "product page will make that page an \"Appointment Product Page\". For "
@@ -3891,19 +3902,19 @@ msgstr ""
 "lyhytkoodi yhdistettynä tuotesivuun tekee tästä sivusta \"Ajanvarauksen "
 "tuotesivun\". Lisätietoja saat UKK:sta (usein kysytyt kysymykset)."
 
-#: includes/integration/class-app-marketpress.php:78
+#: includes/integration/class-app-marketpress.php:69
 msgid "Product Page"
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:81
+#: includes/integration/class-app-marketpress.php:72
 msgid "Create an Appointment Product Page with"
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:83
+#: includes/integration/class-app-marketpress.php:73
 msgid "Select Product Page Type"
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:90
+#: includes/integration/class-app-marketpress.php:80
 msgid ""
 "Same as the above \"Create an Appointment Page\", but this time appointment "
 "shortcodes will be inserted in a new Product page and page title will be "
@@ -3913,17 +3924,17 @@ msgstr ""
 "ajanvarauksen lyhytkoodit lisätään Uusi tuote -sivulle ja sivu otsikoidaan "
 "\"Ajanvaraus\". Tämä on myös uuden tuotteen nimi."
 
-#: includes/integration/class-app-marketpress.php:93
+#: includes/integration/class-app-marketpress.php:82
 msgid ""
 "<b>Note:</b> You already have such a page. If you check this checkbox, "
 "another page with the same title will be created. "
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:94
+#: includes/integration/class-app-marketpress.php:83
 msgid "Edit Page"
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:95
+#: includes/integration/class-app-marketpress.php:84
 msgid "View Page"
 msgstr ""
 
@@ -3974,10 +3985,9 @@ msgstr "Valitse vaihtoehto &raquo;"
 
 #: includes/notifications/class-app-notification-cancel.php:29
 #: includes/notifications/class-app-notification-cancel.php:49
-#: includes/notifications/class-app-notification-notification.php:29
-#: includes/notifications/class-app-notification-notification.php:49
-msgid "Notification message sent to %s for appointment ID:%s"
-msgstr ""
+#, fuzzy
+msgid "Notification message sent to %s for appointment ID: %s"
+msgstr "Vahvistusviesti lähetetty henkilölle %s varauksesta ID:%s"
 
 #. Translators: First %s is for appointment ID and the second one is for date
 #. and time of the appointment
@@ -4014,6 +4024,11 @@ msgstr ""
 #: includes/notifications/class-app-notification-confirmation.php:161
 msgid "New Appointment"
 msgstr "Uusi varaus"
+
+#: includes/notifications/class-app-notification-notification.php:29
+#: includes/notifications/class-app-notification-notification.php:49
+msgid "Notification message sent to %s for appointment ID:%s"
+msgstr ""
 
 #. Translators: First %s is for appointment ID and the second one is for date
 #. and time of the appointment
@@ -4078,7 +4093,7 @@ msgstr ""
 msgid "Default"
 msgstr "Oletus"
 
-#: includes/pro/includes/addons/app-admin-export_date_range.php:53
+#: includes/pro/includes/addons/app-admin-export_date_range.php:48
 msgid "Only include appointments between"
 msgstr "Huomioi vain ajanvaraukset aikavälillä"
 
@@ -4100,7 +4115,7 @@ msgid "Location"
 msgstr "Sijainti"
 
 #: includes/pro/includes/addons/app-locations-location_support.php:151
-#: includes/pro/includes/addons/app-users-additional_fields.php:561
+#: includes/pro/includes/addons/app-users-additional_fields.php:553
 msgid "Add"
 msgstr "Lisää"
 
@@ -4563,57 +4578,57 @@ msgstr ""
 msgid "Shares resources with"
 msgstr "Jaa resursseja"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:116
+#: includes/pro/includes/addons/app-users-additional_fields.php:114
 msgid "The field %s is required"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:517
+#: includes/pro/includes/addons/app-users-additional_fields.php:509
 msgid "Text"
 msgstr "Teksti"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:518
+#: includes/pro/includes/addons/app-users-additional_fields.php:510
 msgid "Checkbox"
 msgstr "Valintaruutu"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:524
+#: includes/pro/includes/addons/app-users-additional_fields.php:516
 msgid "Additional Fields"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:527
+#: includes/pro/includes/addons/app-users-additional_fields.php:519
 msgid "Additional fields"
 msgstr "Lisäkentät"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:534
-#: includes/pro/includes/addons/app-users-additional_fields.php:572
+#: includes/pro/includes/addons/app-users-additional_fields.php:526
+#: includes/pro/includes/addons/app-users-additional_fields.php:564
 msgid "Required"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:536
+#: includes/pro/includes/addons/app-users-additional_fields.php:528
 msgid "E-mail macro:"
 msgstr "Sähköposti makro:"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:537
+#: includes/pro/includes/addons/app-users-additional_fields.php:529
 msgid "This is the placeholder you can use in your emails."
 msgstr "Tätä tilaa voit käyttää sähköposteissasi"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:539
-#: includes/pro/includes/addons/app-users-additional_fields.php:574
+#: includes/pro/includes/addons/app-users-additional_fields.php:531
+#: includes/pro/includes/addons/app-users-additional_fields.php:566
 msgid "Remove"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:544
+#: includes/pro/includes/addons/app-users-additional_fields.php:536
 msgid "Add new field"
 msgstr "Lisää uusi kenttä"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:546
+#: includes/pro/includes/addons/app-users-additional_fields.php:538
 msgid "Field label:"
 msgstr "Kentän otsikko:"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:550
+#: includes/pro/includes/addons/app-users-additional_fields.php:542
 msgid "Field type:"
 msgstr "Kentän tyyppi:"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:559
+#: includes/pro/includes/addons/app-users-additional_fields.php:551
 msgid "Required?"
 msgstr "Pakotettu?"
 
@@ -4654,7 +4669,7 @@ msgstr ""
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:24
 #: includes/shortcodes/class-app-shortcode-confirmation.php:12
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:43
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:37
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:36
 #: includes/shortcodes/class-app-shortcode-schedule.php:32
 #: includes/shortcodes/class-app-shortcode-service-providers.php:23
 #: includes/shortcodes/class-app-shortcode-services.php:25
@@ -4697,7 +4712,6 @@ msgstr ""
 #: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:38
 #: includes/pro/includes/addons/lib/app_worker_locations_shortcode.php:36
 #: includes/shortcodes/class-app-shortcode-service-providers.php:66
-#: includes/shortcodes/class-app-shortcode-services.php:63
 msgid ""
 "If checked, Show button will not be displayed and page will be automatically "
 "refreshed as client changes selection. Note: Client cannot browse through "
@@ -4707,7 +4721,7 @@ msgstr ""
 
 #: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:42
 #: includes/pro/includes/addons/lib/app_worker_locations_shortcode.php:40
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:56
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:55
 #: includes/shortcodes/class-app-shortcode-service-providers.php:70
 #: includes/shortcodes/class-app-shortcode-services.php:67
 msgid "Order By"
@@ -4913,13 +4927,13 @@ msgid "<h3>All Appointments</h3>"
 msgstr "<h3>Kaikki ajanvaraukset</h3>"
 
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:26
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:39
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:38
 msgid "Title text."
 msgstr "Otsikkoteksti."
 
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:32
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:25
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:45
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:44
 msgid ""
 "Which status(es) will be included. Possible values: paid, confirmed, "
 "completed, pending, removed, reserved or combinations of them separated with "
@@ -4943,7 +4957,7 @@ msgid ""
 msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:45
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:93
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:91
 msgid ""
 "Allow visitors to view list, default is 0, only logged in users can view "
 "list."
@@ -4954,12 +4968,12 @@ msgid "Inserts a table that displays all upcoming appointments."
 msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:89
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:246
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:242
 msgid "Date/time"
 msgstr "Päivä / Aika"
 
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:123
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:320
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:306
 msgid "No appointments"
 msgstr "Ei ajanvarauksia"
 
@@ -5109,7 +5123,7 @@ msgstr ""
 msgid "<b>This shortcode is always required to complete an appointment.</b>"
 msgstr "<b>Tämä lyhytkoodi on aina vaadittu varauksen tekemiseksi.</b>"
 
-#: includes/shortcodes/class-app-shortcode-confirmation.php:236
+#: includes/shortcodes/class-app-shortcode-confirmation.php:230
 msgid "A connection problem occurred. Please try again."
 msgstr "Yhteysvirhe. ole hyvä ja yritä uudelleen."
 
@@ -5409,32 +5423,32 @@ msgstr ""
 msgid "Duration"
 msgstr "Kesto"
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:24
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:23
 msgid "Is Provider"
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:26
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:25
 msgid ""
 "Check if this appointment list belongs to a service provider. Default: "
 "\"0\" (client)"
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:33
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:32
 msgid ""
 "Enter the user ID of the provider whose list will be displayed. If ommitted, "
 "current service provider will be displayed. Default: \"0\" (current service "
 "provider)"
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:38
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:37
 msgid "<h3>My Appointments</h3>"
 msgstr "<h3>Omat varaukseni</h3>"
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:49
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:48
 msgid "Google Calendar Button"
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:51
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:50
 msgid ""
 "Uncheck to disable Google Calendar button by which clients can add "
 "appointments to their Google Calendar after booking the appointment. "
@@ -5442,76 +5456,82 @@ msgid ""
 "set as Yes"
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:62
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:61
 msgid "Sort order of the appointments. Possible values: ID, start."
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:66
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:65
 msgid "Order"
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:72
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:71
 msgid ""
 "Sort order of the appointments. Possible values: asc (ascendant order), desc "
 "(descendant order)."
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:76
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:75
 msgid "Allow Cancellation"
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:78
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:77
 msgid ""
 "Check if you want to allow cancellation of appointments by the client using "
 "this table. \"Allow client cancel own appointments\" setting must also be "
 "set as Yes. Default: Cancellation is not allowed."
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:82
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:81
 msgid "Strict"
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:84
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:83
 msgid ""
 "Ensure strict matching when searching for appointments to display. The "
 "shortcode will, by default, use the widest possible match."
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:92
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:90
 msgid "Public"
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:100
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:98
 msgid ""
 "Inserts a table where client or service provider can see his upcoming "
 "appointments."
 msgstr ""
 "Lisää taulukon, josta asiakas tai palveluntarjoaja näkee tulevat varauksensa."
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:281
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:122
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:156
+#, fuzzy
+msgid "Currently you have no appointments."
+msgstr "Sinun täytyy kirjautua varataksesi ajan."
+
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:271
 msgid "Pay"
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:309
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:295
 msgid "Click to submit this appointment to your Google Calendar account"
 msgstr "Klikkaa lähettääksesi tämä varaus Google Kalenteriisi"
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:328
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:314
 msgid "Submit Confirm"
 msgstr "Lähetä vahvistus"
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:340
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:375
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:326
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:361
 msgid "Are you sure you want to cancel the selected appointment?"
 msgstr "Haluatko varmasti peruuttaa valitsemasi tapaamisen?"
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:341
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:389
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:327
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:375
 msgid "Selected appointment cancelled."
 msgstr "Valittu varaus on peruutettu."
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:342
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:395
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:328
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:381
 msgid "A connection error occurred."
 msgstr "Yhteysvirhe."
 
@@ -5687,7 +5707,6 @@ msgid "Please choose a service provider:"
 msgstr "Valitse palvelun tarjoaja"
 
 #: includes/shortcodes/class-app-shortcode-service-providers.php:25
-#: includes/shortcodes/class-app-shortcode-services.php:27
 msgid "Text above the select menu. Default: \"Please select a service\""
 msgstr "Teksti valikon yläpuolella. Oletus: \"Valitse palvelu\""
 
@@ -5714,7 +5733,6 @@ msgid "Show available times"
 msgstr "Näytä vapaana olevat ajat"
 
 #: includes/shortcodes/class-app-shortcode-service-providers.php:37
-#: includes/shortcodes/class-app-shortcode-services.php:33
 msgid ""
 "Button text to show the results for the selected. Default: \"Show available "
 "times\""
@@ -5735,7 +5753,6 @@ msgid "Thumbnail Size"
 msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-service-providers.php:54
-#: includes/shortcodes/class-app-shortcode-services.php:51
 msgid ""
 "Inserts the post thumbnail if page has a featured image. Selectable values "
 "are \"none\", \"thumbnail\", \"medium\", \"full\" or a 2 numbers separated "
@@ -5749,7 +5766,6 @@ msgid "Thumbnail Class"
 msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-service-providers.php:60
-#: includes/shortcodes/class-app-shortcode-services.php:57
 msgid "CSS class that will be applied to the thumbnail. Default: \"alignleft\""
 msgstr ""
 
@@ -5774,22 +5790,57 @@ msgstr "Luo pudotusvalikon saatavilla olevista palveluntarjoajista."
 msgid "Please select a service:"
 msgstr "Ole hyvä ja valitse palvelu:"
 
+#: includes/shortcodes/class-app-shortcode-services.php:27
+#, fuzzy
+msgid "Text above the select menu. Default: \"Please select a service\"."
+msgstr "Teksti valikon yläpuolella. Oletus: \"Valitse palvelu\""
+
 #: includes/shortcodes/class-app-shortcode-services.php:31
 msgid "Show Button Text"
 msgstr ""
+
+#: includes/shortcodes/class-app-shortcode-services.php:33
+#, fuzzy
+msgid ""
+"Button text to show the results for the selected. Default: \"Show available "
+"times\"."
+msgstr ""
+"Painikkeen teksi, joka näyttää valinnan tulokset. Oletus: \"Näytä vapaat ajat"
+"\""
 
 #: includes/shortcodes/class-app-shortcode-services.php:40
 msgid ""
 "Selects which part of the description page will be displayed under the "
 "dropdown menu when a service is selected . Selectable values are \"none\", "
-"\"excerpt\", \"content\". Default: \"excerpt\""
+"\"excerpt\", \"content\". Default: \"excerpt\"."
+msgstr ""
+
+#: includes/shortcodes/class-app-shortcode-services.php:51
+msgid ""
+"Inserts the post thumbnail if page has a featured image. Selectable values "
+"are \"none\", \"thumbnail\", \"medium\", \"full\" or a 2 numbers separated "
+"by comma representing width and height in pixels, e.g. 32,32. Default: "
+"\"96,96\"."
+msgstr ""
+
+#: includes/shortcodes/class-app-shortcode-services.php:57
+msgid ""
+"CSS class that will be applied to the thumbnail. Default: \"alignleft\"."
+msgstr ""
+
+#: includes/shortcodes/class-app-shortcode-services.php:63
+msgid ""
+"If checked, Show button will not be displayed and page will be automatically "
+"refreshed as client changes selection. Note: Client cannot browse through "
+"the selections and thus check descriptions on the fly (without the page is "
+"refreshed). Default: disabled."
 msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-services.php:77
 msgid ""
 "Sort order of the services. Possible values: ID, name, duration, price. "
 "Optionally DESC (descending) can be used, e.g. \"name DESC\" will reverse "
-"the order. Default: \"ID\""
+"the order. Default: \"ID\"."
 msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-services.php:84
@@ -5806,7 +5857,7 @@ msgstr ""
 #: includes/shortcodes/class-app-shortcode-services.php:90
 msgid ""
 "If checked, Services thumbnails and descriptions will be loaded by AJAX. "
-"Recommended for sites with many services"
+"Recommended for sites with many services."
 msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-services.php:98
@@ -5916,10 +5967,10 @@ msgctxt "paging"
 msgid "%1$s of %2$s"
 msgstr ""
 
-#: admin/views/inline-edit.php:121 appointments.php:1809
+#: admin/views/inline-edit.php:122 appointments.php:1809
 #: includes/class-app-tutorial.php:225
 #: includes/pro/includes/addons/app-locations-location_support.php:155
-#: includes/shortcodes/class-app-shortcode-confirmation.php:208
+#: includes/shortcodes/class-app-shortcode-confirmation.php:202
 msgctxt "Drop current action"
 msgid "Cancel"
 msgstr ""
@@ -5929,9 +5980,14 @@ msgctxt "Settings section"
 msgid "%s Settings"
 msgstr ""
 
-#: includes/class-app-ajax.php:137 includes/class-app-ajax.php:145
+#: includes/class-app-ajax.php:136 includes/class-app-ajax.php:144
 msgctxt "Error while editing an appointment"
 msgid "Error"
+msgstr ""
+
+#: includes/class-app-notifications-manager.php:46
+msgctxt "%s contains filter name in pre tag"
+msgid "Every 10 minutes or you can filter it with the %s filter."
 msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-login.php:17
@@ -5944,7 +6000,25 @@ msgctxt "Worker Monthly Calendar Shortcode status field"
 msgid "Status"
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:253
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:109
+#, fuzzy
+msgctxt "%s is a login link"
+msgid "Please %s to see your appointments."
+msgstr "Klikkaa tästä vahvistaaksesi varauksen"
+
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:110
+#, fuzzy
+msgctxt "login link title"
+msgid "Login"
+msgstr "Kirjaudu"
+
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:110
+#, fuzzy
+msgctxt "login link value"
+msgid "login"
+msgstr "Kirjaudu"
+
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:248
 msgctxt "Discard existing info"
 msgid "Cancel"
 msgstr ""
