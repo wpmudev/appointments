@@ -1,3 +1,7 @@
+2018-xx-xx - 2.2.8
+-------------------------------
+- Fixed a problem with autoconfirmation free appointment.
+
 2018-05-07 - 2.2.7
 -------------------------------
 - Added check for service name it can be empty.

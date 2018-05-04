@@ -361,7 +361,9 @@ class Appointments_AJAX {
 		$appointments->get_lsw();
 
 		// Default status
-		$status = 'pending';
+        $status = 'pending';
+
+
 		if ('yes' != $appointments->options["payment_required"] && isset($appointments->options["auto_confirm"]) && 'yes' == $appointments->options["auto_confirm"]) {
 			$status = 'confirmed';
 		}
@@ -373,19 +375,16 @@ class Appointments_AJAX {
 		$paypal_price = apply_filters('app_post_confirmation_paypal_price', number_format( str_replace( ',', '', $paypal_price ), 2, ".", "" ), $service, $worker, $start, $end);
 
 		// Break here - is the appointment free and, if so, shall we auto-confirm?
-		if (
-			!(float)$price && !(float)$paypal_price // Free appointment ...
-			&&
-			'pending' === $status && "yes" === $appointments->options["payment_required"] // ... in a paid environment ...
-			&&
-			(!empty($appointments->options["auto_confirm"]) && "yes" === $appointments->options["auto_confirm"]) // ... with auto-confirm activated
-		) {
-			$status = defined('APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM') && APP_CONFIRMATION_ALLOW_FREE_AUTOCONFIRM
-				? 'confirmed'
-				: $status
-				;
-		}
-
+        if (
+            0 == 100 * $price
+            && 'pending' === $status
+            && 'yes' === $appointments->options['payment_required']
+			&& isset($appointments->options['auto_confirm']) && 'yes' === $appointments->options['auto_confirm']
+			&& isset($appointments->options['allow_free_autoconfirm'])
+            && $appointments->options['allow_free_autoconfirm']
+        ) {
+            $status = 'confirmed';
+        }
 		$name = !empty($_POST['app_name'])
 			? sanitize_text_field($_POST["app_name"])
 			: $user_name
