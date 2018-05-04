@@ -2,10 +2,10 @@
 -------------------------------
 - Added check for service name it can be empty.
 - Changed default appointments sorting to "Appointment Date".
-- Fixed an export problem for the date range.
 - Fixed an export problem for additional fields with HTML entities in a name.
-- Fixed a problem with booking, when the site is on HTTP but admin force HTTPS usage.
+- Fixed an export problem for the date range.
 - Fixed an integration problem with MarketPress plugin.
+- Fixed a problem with booking, when the site is on HTTP but admin force HTTPS usage.
 
 2018-04-24 - 2.2.6
 -------------------------------
