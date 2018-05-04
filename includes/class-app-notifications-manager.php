@@ -40,7 +40,13 @@ class Appointments_Notifications_Manager {
 	}
 
 	public function cron_schedules( $schedules ) {
-		$schedules['app-reminders'] = array( 'interval' => apply_filters( 'app_update_time', HOUR_IN_SECONDS / 6 ),    'display' => __( 'Every 10 minutes or you can filter it with the app_update_time filter', 'appointments' ) );
+		$schedules['app-reminders'] = array(
+			'interval' => apply_filters( 'app_update_time', HOUR_IN_SECONDS / 6 ),
+			'display' => sprintf(
+				_x( 'Every 10 minutes or you can filter it with the %s filter.', '%s contains filter name in pre tag', 'appointments' ),
+				'<pre>app_update_time</pre>'
+			),
+		);
 		return $schedules;
 	}
 
@@ -50,10 +56,9 @@ class Appointments_Notifications_Manager {
 
 	public function send_notification( $app_id, $cancel = false ) {
 		$options = appointments_get_options();
-		if ( ! $cancel && ! isset( $options["send_notification"] ) || 'yes' != $options["send_notification"] ) {
+		if ( ! $cancel && ! isset( $options['send_notification'] ) || 'yes' != $options['send_notification'] ) {
 			return appointments_send_notification( $app_id );
-		}
-		elseif ( $cancel ) {
+		} elseif ( $cancel ) {
 			return appointments_send_cancel_notification( $app_id );
 		}
 
@@ -92,7 +97,7 @@ class Appointments_Notifications_Manager {
 	public function log( $message ) {
 		$appointments = appointments();
 		$options = appointments_get_options();
-		if ( isset( $options["log_emails"] ) && 'yes' == $options["log_emails"] ) {
+		if ( isset( $options['log_emails'] ) && 'yes' == $options['log_emails'] ) {
 			$appointments->log( $message );
 		}
 	}
