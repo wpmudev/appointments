@@ -23,25 +23,25 @@ class App_Export_DateRange {
 	}
 
 	public function check_appointment_for_inclusion( $src, $app ) {
-		if ( empty( $_POST['app-export-start'] ) && empty( $_POST['app-export-end'] ) ) { return $src; // Not applicable
-		}		if ( empty( $src ) || empty( $app->start ) ) { return $src; }
-		$wp_date_format = get_option( 'date_format' );
-		$wp_time_format = get_option( 'time_format' );
-		$app_start = DateTime::createFromFormat( $wp_date_format . ' ' . $wp_time_format, $app->start );
-		$app_end = DateTime::createFromFormat( $wp_date_format . ' ' . $wp_time_format, $app->end );
-		$start = strtotime( $app_start->format( 'Y-m-d H:i:s' ) );
-		$end = strtotime( $app_end->format( 'Y-m-d H:i:s' ) );
+		if ( empty( $_POST['app-export-start'] ) && empty( $_POST['app-export-end'] ) ) {
+			return $src; // Not applicable
+		}
+		if ( empty( $src ) || empty( $app->start ) ) {
+			return $src;
+		}
+		$start = strtotime( $app->start );
+		$end = strtotime( $app->end );
 		$earliest = ! empty( $_POST['app-export-start'] )
 			? strtotime( $_POST['app-export-start'].' 00:00:00' ) - 1
 			: 0
-		;
+			;
 		$latest = ! empty( $_POST['app-export-end'] )
 			? strtotime( $_POST['app-export-end'].' 00:00:00' ) + DAY_IN_SECONDS
 			: time();
 		return $start < $latest && $end > $earliest
 			? $src
 			: false
-		;
+			;
 	}
 
 	public function inject_range_form() {
@@ -58,7 +58,6 @@ class App_Export_DateRange {
 		<?php echo $start; ?>
 		<input type="text" name="app-export-start" id="app-export-date_range-start" value="" />
 	</label>
-
 	<label for="app-export-date_range-end">
 		<?php echo $end; ?>
 		<input type="text" name="app-export-end" id="app-export-date_range-end" value="" />
@@ -66,9 +65,7 @@ class App_Export_DateRange {
 </div>
 <script type="text/javascript">
 (function ($) {
-
 	var $root;
-
 	function show () {
 		$root
 			.find(":text").datepicker({
@@ -77,11 +74,9 @@ class App_Export_DateRange {
 			.end()
 		.show();
 	}
-
 	function hide () {
 		$root.hide();
 	}
-
 	function init () {
 		$root = $("#app-export-date_range");
 		$("#app-export-date_range-toggle").change(function () {
@@ -90,7 +85,6 @@ class App_Export_DateRange {
 		});
 	}
 	$(init);
-
 })(jQuery);
 </script>
 		<?php
