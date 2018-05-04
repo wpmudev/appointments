@@ -106,8 +106,8 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		 */
 		if ( ! $args['public'] && ! apply_filters( 'app_my_appointments_shortcode_public', is_user_logged_in() ) ) {
 			$back = home_url( $wp->request );
-			$text = _x( 'Please %s to see your appointments.', '%s is a login link', 'ub' );
-			$link = sprintf( '<a href="%s" title="%s">%s</a>', wp_login_url( $back ), esc_attr_x( 'Login', 'login link title', 'ub' ), _x( 'login', 'login link value', 'ub' ) );
+			$text = _x( 'Please %s to see your appointments.', '%s is a login link', 'appointments' );
+			$link = sprintf( '<a href="%s" title="%s">%s</a>', wp_login_url( $back ), esc_attr_x( 'Login', 'login link title', 'appointments' ), _x( 'login', 'login link value', 'appointments' ) );
 			return wpautop( sprintf( $text, $link ) );
 		}
 		if ( isset( $args['client_id'] ) && get_userdata( $args['client_id'] ) ) {
@@ -119,7 +119,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		$statuses = array_map( 'trim', $statuses );
 
 		if ( ! is_array( $statuses ) || empty( $statuses ) ) {
-			return wpautop( __( 'Currently you have no appointments.', 'ub' ) );
+			return wpautop( __( 'Currently you have no appointments.', 'appointments' ) );
 		}
 
 		if ( ! trim( $args['order_by'] ) ) {
@@ -153,7 +153,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 				$apps = Appointments_Sessions::get_current_visitor_appointments();
 			}
 			if ( ! $apps ) {
-				return wpautop( __( 'Currently you have no appointments.', 'ub' ) );
+				return wpautop( __( 'Currently you have no appointments.', 'appointments' ) );
 			}
 			$provider_or_client = __( 'Provider', 'appointments' );
 			if ( $args['strict'] ) {
