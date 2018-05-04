@@ -51,8 +51,8 @@ function _appointments_get_user_dismissed_notices( $user_id ) {
  */
 function _appointments_get_view_path( $name ) {
 	if ( ! function_exists( 'appointments_get_view_path' ) ) {
-		include_once( appointments_plugin_dir() . 'includes/helpers.php' ); }
-
+		include_once( appointments_plugin_dir() . 'includes/helpers.php' );
+	}
 	return appointments_get_view_path( $name );
 }
 

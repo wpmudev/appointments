@@ -41,4 +41,27 @@ jQuery(document).ready( function( $ ) {
         activateSection( hash );
     }
 
+    $('.wp-list-table.services a.edit').on( 'click', function() {
+        var parent = $(this).closest('tr');
+        var sectionStub = 'section-edit-service';
+        var section = $('#app-settings-' + sectionStub );
+        var id = $(this).data('id');
+        sections[ sectionStub ] = {
+            $el: $(this),
+            $section: section
+        };
+        page = $('.column-page span', parent ).data('id');
+        if ( 'undefined' === typeof page ) {
+            page = 0;
+        }
+        $('#service-id', section ).val( id );
+        $('#service-name', section ).val( $('.column-name strong a', parent ).html() );
+        $('#service-capacity', section ).val( $('.column-capacity', parent ).html() );
+        $('#service-duration', section ).val( $('.column-duration', parent ).html() );
+        $('#service-page', section ).val( page );
+        $('#service-price', section ).val( $('.column-price', parent ).html() );
+        activateSection( sectionStub );
+    });
+
+
 });
