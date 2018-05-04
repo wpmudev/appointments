@@ -1,4 +1,4 @@
-2018-xx-xx - 2.2.7
+2018-05-07 - 2.2.7
 -------------------------------
 - Added check for service name it can be empty.
 - Changed default appointments sorting to "Appointment Date".
