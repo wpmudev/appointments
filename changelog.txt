@@ -1,12 +1,12 @@
 2018-xx-xx - 2.2.8
 -------------------------------
+- Fixed a problem with an appointment create time, it showed "Unknown" for Time Formats: "g:i a" and "g:i A".
+- Fixed a problem with an appointment date when we add an appointment on admin area.
 - Fixed a problem with autoconfirmation free appointment.
-- Fixed a problem with paddings on the weekly booking calendar.
-- Fixed a problem with an appointment create time, it shown "Unknown" for Time Formats: "g:i a" and "g:i A".
-- Fixed a problem with an appointment date when we add appointment on admin area.
 - Fixed a problem with bottom bulk action on "Add-ons" tab.
 - Fixed a problem with double cancellation emails.
-- Improved the "app_my_appointments" shortcode and added message when we have no appointments.
+- Fixed a problem with paddings on the weekly booking calendar.
+- Improved the "app_my_appointments" shortcode and added a message when we have no appointments.
 - Removed DateTime::createFromFormat() usage to be compatible with PHP 5.2
 
 2018-05-07 - 2.2.7
