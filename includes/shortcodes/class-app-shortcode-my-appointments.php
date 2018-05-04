@@ -17,7 +17,6 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 			/** @var Appointments_Worker $worker */
 			$workers[] = array( 'text' => $worker->get_name(), 'value' => $worker->ID );
 		}
-
 		return array(
 			'provider' => array(
 				'type' => 'checkbox',
@@ -83,7 +82,6 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 				'value' => 0,
 				'help' => __( 'Ensure strict matching when searching for appointments to display. The shortcode will, by default, use the widest possible match.', 'appointments' ),
 			),
-
 			'_allow_confirm' => array( 'value' => 0 ),
 			'_tablesorter' => array( 'value' => 1 ),
 			'public' => array(
@@ -102,24 +100,26 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 
 	public function process_shortcode( $args = array(), $content = '' ) {
 		$args = wp_parse_args( $args, $this->_defaults_to_args() );
-
-		global $bp, $appointments;
-
+		global $bp, $appointments, $wp;
+		/**
+		 * not logged, not public argument
+		 */
 		if ( ! $args['public'] && ! apply_filters( 'app_my_appointments_shortcode_public', is_user_logged_in() ) ) {
-			return '';
+			$back = home_url( $wp->request );
+			$text = _x( 'Please %s to see yours appointments.', '%s is a login link', 'ub' );
+			$link = sprintf( '<a href="%s" title="%s">%s</a>', wp_login_url( $back ), esc_attr_x( 'Login', 'login link title', 'ub' ), _x( 'login', 'login link value', 'ub' ) );
+			return wpautop( sprintf( $text, $link ) );
 		}
-
 		if ( isset( $args['client_id'] ) && get_userdata( $args['client_id'] ) ) {
 			$user_id = absint( $args['client_id'] );
 		} else {
 			$user_id = get_current_user_id();
 		}
-
 		$statuses = explode( ',', $args['status'] );
 		$statuses = array_map( 'trim', $statuses );
 
 		if ( ! is_array( $statuses ) || empty( $statuses ) ) {
-			return '';
+			return wpautop( __( 'Currently you have no appointments.', 'ub' ) );
 		}
 
 		if ( ! trim( $args['order_by'] ) ) {
@@ -147,19 +147,15 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 
 		// If this is a client shortcode
 		if ( ! $args['provider'] ) {
-
 			if ( $user_id ) {
 				$apps = wp_list_pluck( appointments_get_user_appointments( $user_id, $statuses ), 'ID' );
 			} else {
 				$apps = Appointments_Sessions::get_current_visitor_appointments();
 			}
-
 			if ( ! $apps ) {
-				return '';
+				return wpautop( __( 'Currently you have no appointments.', 'ub' ) );
 			}
-
 			$provider_or_client = __( 'Provider', 'appointments' );
-
 			if ( $args['strict'] ) {
 				// Strict matching
 				if ( is_user_logged_in() ) {
@@ -245,7 +241,6 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 			. '</th><th class="my-appointments-worker">' . $provider_or_client
 			. '</th><th class="my-appointments-date">' . __( 'Date/time', 'appointments' )
 		. '</th><th class="my-appointments-status">' . __( 'Status', 'appointments' ) . '</th>' );
-
 		if ( $allow_confirm ) {
 			$ret .= '<th class="my-appointments-confirm">'. __( 'Confirm', 'appointments' ) . '</th>';
 		}
@@ -255,25 +250,20 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		if ( $args['gcal'] && 'yes' == $appointments->options['gcal'] ) {
 			$ret .= '<th class="my-appointments-gcal">&nbsp;</th>';
 		}
-
 		$colspan = substr_count( $ret, '<th' );
 		$ret .= '</thead><tbody>';
-
 		if ( $results ) {
 			foreach ( $results as $r ) {
 				$ret .= '<tr><td>';
 				$ret .= $appointments->get_service_name( $r->service ) . '</td>';
 				$ret .= apply_filters( 'app-shortcode-my_appointments-after_service', '', $r );
 				$ret .= '<td>';
-
 				if ( ! $args['provider'] ) {
 					$ret .= appointments_get_worker_name( $r->worker ) . '</td>'; } else { 					$ret .= $appointments->get_client_name( $r->ID ) . '</td>'; }
 				$ret .= apply_filters( 'app-shortcode-my_appointments-after_worker', '', $r );
-
 				$ret .= '<td>';
 				$ret .= date_i18n( $appointments->datetime_format, strtotime( $r->start ) ) . '</td>';
 				$ret .= apply_filters( 'app-shortcode-my_appointments-after_date', '', $r );
-
 				$ret .= '<td>';
 				$ret .= App_Template::get_status_name( $r->status );
 				if ( 'pending' == $r->status ) {
@@ -283,15 +273,12 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 				}
 				$ret .= '</td>';
 				$ret .= apply_filters( 'app-shortcode-my_appointments-after_status', '', $r );
-
 				// If allowed so, a worker can confirm an appointment himself
 				if ( $allow_confirm ) {
 					if ( 'pending' == $r->status ) {
 						$is_readonly = ''; } else { 						$is_readonly = ' readonly="readonly"'; }
-
 					$ret .= '<td><input class="app-my-appointments-confirm" type="checkbox" name="app_confirm['.$r->ID.']" '.$is_readonly.' /></td>';
 				}
-
 				// If allowed so, a client can cancel an appointment
 				if ( $a_cancel ) {
 					// We don't want completed appointments to be cancelled
@@ -299,7 +286,6 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 					$in_allowed_stat = apply_filters( 'app_cancel_allowed_status', ('pending' == $stat || 'confirmed' == $stat || 'paid' == $stat), $stat, $r->ID );
 					if ( $in_allowed_stat ) {
 						$is_readonly = ''; } else { 						$is_readonly = ' readonly="readonly"'; }
-
 					$ret .= '<td><input id="cancel-' . $r->ID . '" data-app-id="' . $r->ID . '" class="app-my-appointments-cancel" type="checkbox" name="app_cancel['.$r->ID.']" '.$is_readonly.' /></td>';
 				}
 
@@ -351,13 +337,13 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		$sorter = 'usLongDate';
 		$dateformat = 'us';
 		// Search for formats where day is at the beginning
-		if ( stripos( str_replace( array('/','-'), '', $appointments->date_format ), 'dmY') !== false ) {
+		if ( stripos( str_replace( array( '/', '-' ), '', $appointments->date_format ), 'dmY' ) !== false ) {
 			$sorter = 'shortDate';
 			$dateformat = 'uk';
 		}
 
 		// Sort table from front end
-		if ( $args['_tablesorter'] && file_exists( appointments_plugin_dir() . 'js/jquery.tablesorter.min.js' ) )
+		if ( $args['_tablesorter'] && file_exists( appointments_plugin_dir() . 'js/jquery.tablesorter.min.js' ) ) {
 			$appointments->add2footer( '
 				$(".my-appointments").tablesorter({
 					dateFormat: "'.$dateformat.'",
@@ -372,7 +358,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 				$(".app-my-appointments-cancel").change( function() {
 					if ( $(this).is(":checked") ) {
 						var cancel_box = $(this);
-						if ( !confirm("'. esc_js( __("Are you sure you want to cancel the selected appointment?","appointments") ) .'") ) {
+						if ( !confirm("'. esc_js( __( 'Are you sure you want to cancel the selected appointment?','appointments' ) ) .'") ) {
 							cancel_box.attr("checked", false);
 							return false;
 						}
@@ -386,13 +372,13 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 										alert(response.error);
 									}
 									else if (response && response.success) {
-										alert("'.esc_js( __("Selected appointment cancelled.","appointments") ).'");
+										alert("'.esc_js( __( 'Selected appointment cancelled.','appointments' ) ).'");
 										cancel_box.closest("tr").css("opacity","0.3");
 										cancel_box.attr("disabled",true);
 									}
 									else {
 										cancel_box.attr("disabled",true);
-										alert("'.esc_js( __("A connection error occurred.","appointments") ).'");
+										alert("'.esc_js( __( 'A connection error occurred.','appointments' ) ).'");
 									}
 								}, "json");
 							}
@@ -400,7 +386,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 					}
 
 				});'
-			);
+			); }
 
 		return $ret;
 	}
