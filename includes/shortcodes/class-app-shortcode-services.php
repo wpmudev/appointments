@@ -24,20 +24,20 @@ class App_Shortcode_Services extends App_Shortcode {
 				'type' => 'text',
 				'name' => __( 'Title', 'appointments' ),
 				'value' => __('Please select a service:', 'appointments'),
-				'help' => __('Text above the select menu. Default: "Please select a service"', 'appointments'),
+				'help' => __('Text above the select menu. Default: "Please select a service".', 'appointments'),
 			),
 			'show' => array(
 				'type' => 'text',
 				'name' => __( 'Show Button Text', 'appointments' ),
 				'value' => __('Show available times', 'appointments'),
-				'help' => __('Button text to show the results for the selected. Default: "Show available times"', 'appointments'),
+				'help' => __('Button text to show the results for the selected. Default: "Show available times".', 'appointments'),
 				'example' => __('Show available times', 'appointments'),
 			),
 			'description' => array(
 				'type' => 'select',
 				'name' => __( 'Description', 'appointments' ),
 				'value' => 'excerpt',
-				'help' => __('Selects which part of the description page will be displayed under the dropdown menu when a service is selected . Selectable values are "none", "excerpt", "content". Default: "excerpt"', 'appointments'),
+				'help' => __('Selects which part of the description page will be displayed under the dropdown menu when a service is selected . Selectable values are "none", "excerpt", "content". Default: "excerpt".', 'appointments'),
 				'options' => array(
 					array( 'text' => 'Excerpt', 'value' => 'excerpt' ),
 					array( 'text' => 'None', 'value' => ''),
@@ -48,19 +48,19 @@ class App_Shortcode_Services extends App_Shortcode {
 				'type' => 'text',
 				'name' => __( 'Thumbnail Size', 'appointments' ),
 				'value' => '96,96',
-				'help' => __('Inserts the post thumbnail if page has a featured image. Selectable values are "none", "thumbnail", "medium", "full" or a 2 numbers separated by comma representing width and height in pixels, e.g. 32,32. Default: "96,96"', 'appointments'),
+				'help' => __('Inserts the post thumbnail if page has a featured image. Selectable values are "none", "thumbnail", "medium", "full" or a 2 numbers separated by comma representing width and height in pixels, e.g. 32,32. Default: "96,96".', 'appointments'),
 			),
 			'thumb_class' => array(
 				'type' => 'text',
 				'name' => __( 'Thumbnail Class', 'appointments' ),
 				'value' => 'alignleft',
-				'help' => __('CSS class that will be applied to the thumbnail. Default: "alignleft"', 'appointments'),
+				'help' => __('CSS class that will be applied to the thumbnail. Default: "alignleft".', 'appointments'),
 			),
 			'autorefresh' => array(
 				'type' => 'checkbox',
 				'name' => __( 'Autorefresh', 'appointments' ),
 				'value' => 0,
-				'help' => __('If checked, Show button will not be displayed and page will be automatically refreshed as client changes selection. Note: Client cannot browse through the selections and thus check descriptions on the fly (without the page is refreshed). Default: disabled', 'appointments'),
+				'help' => __('If checked, Show button will not be displayed and page will be automatically refreshed as client changes selection. Note: Client cannot browse through the selections and thus check descriptions on the fly (without the page is refreshed). Default: disabled.', 'appointments'),
 			),
 			'order_by' => array(
 				'type' => 'select',
@@ -74,7 +74,7 @@ class App_Shortcode_Services extends App_Shortcode {
 					array( 'text' => 'duration', 'value' => 'duration'),
 					array( 'text' => 'duration DESC', 'value' => 'duration DESC'),
 				),
-				'help' => __('Sort order of the services. Possible values: ID, name, duration, price. Optionally DESC (descending) can be used, e.g. "name DESC" will reverse the order. Default: "ID"', 'appointments'),
+				'help' => __('Sort order of the services. Possible values: ID, name, duration, price. Optionally DESC (descending) can be used, e.g. "name DESC" will reverse the order. Default: "ID".', 'appointments'),
 			),
 			'worker' => array(
 				'type' => 'select',
@@ -87,7 +87,7 @@ class App_Shortcode_Services extends App_Shortcode {
 				'type' => 'checkbox',
 				'name' => __( 'AJAX', 'appointments' ),
 				'value' => 0,
-				'help' => __( 'If checked, Services thumbnails and descriptions will be loaded by AJAX. Recommended for sites with many services', 'appointments' )
+				'help' => __( 'If checked, Services thumbnails and descriptions will be loaded by AJAX. Recommended for sites with many services.', 'appointments' )
 			),
 			'_noscript' => array('value' => 0),
 

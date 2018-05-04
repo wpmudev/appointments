@@ -106,7 +106,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		 */
 		if ( ! $args['public'] && ! apply_filters( 'app_my_appointments_shortcode_public', is_user_logged_in() ) ) {
 			$back = home_url( $wp->request );
-			$text = _x( 'Please %s to see yours appointments.', '%s is a login link', 'ub' );
+			$text = _x( 'Please %s to see your appointments.', '%s is a login link', 'ub' );
 			$link = sprintf( '<a href="%s" title="%s">%s</a>', wp_login_url( $back ), esc_attr_x( 'Login', 'login link title', 'ub' ), _x( 'login', 'login link value', 'ub' ) );
 			return wpautop( sprintf( $text, $link ) );
 		}
