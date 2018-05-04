@@ -8,6 +8,7 @@
 - Fixed a problem with double cancellation emails.
 - Improved the "app_my_appointments" shortcode and added message when we have no appointments.
 - Removed DateTime::createFromFormat() usage to be compatible with PHP 5.2
+- Fixed a problem with visibility "Currency" option - it was visible only when we turn on "Payment required" field.
 
 2018-xx-xx - 2.2.7
 -------------------------------

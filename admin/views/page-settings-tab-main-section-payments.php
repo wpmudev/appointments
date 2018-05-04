@@ -14,7 +14,7 @@ $use_payments = ( 'yes' == $options['payment_required'] );
 		</td>
 	</tr>
 
-	<tr class="payment_row">
+	<tr>
 		<th scope="row"><label for="currency"><?php _e( 'Currency', 'appointments' ) ?></label></th>
 		<td colspan="2">
 			<select name="currency" id="currency">
