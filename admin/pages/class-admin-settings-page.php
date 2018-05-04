@@ -51,6 +51,7 @@ class Appointments_Admin_Settings_Page {
 			'services' => array(
 				'services' => __( 'Services', 'appointments' ),
 				'new-service' => __( 'Add new Service', 'appointments' ),
+                'edit-service' => false,
 			),
 			'workers' => array(
 				'workers' => __( 'Service Providers', 'appointments' ),
@@ -74,7 +75,10 @@ class Appointments_Admin_Settings_Page {
 		if ( isset( $sections[ $tab ] ) ) {
 			$content = '<ul class="subsubsub">';
 			$links = array();
-			foreach ( $sections[ $tab ] as $section_stub => $label ) {
+            foreach ( $sections[ $tab ] as $section_stub => $label ) {
+                if ( empty( $label ) ) {
+                    continue;
+                }
 				$links[] = '<li><a href="#section-' . esc_attr( $section_stub ) . '" data-section="section-' . esc_attr( $section_stub ) . '" class="'.esc_attr( $tab.'-'.$section_stub ).'">' . esc_html( $label ) . '</a></li>';
 			}
 			$content .= implode( ' | ', $links );
@@ -195,7 +199,17 @@ class Appointments_Admin_Settings_Page {
 		echo $sections_markup;
 		echo '<br class="clear">';
 
-		$file = _appointments_get_settings_tab_view_file_path( $tab );
+        $file = _appointments_get_settings_tab_view_file_path( $tab );
+
+        /**
+         * Load table class
+         */
+        switch( $tab ) {
+        case 'services':
+            require_once dirname( dirname( __FILE__ ) ).'/class-app-list-table-services.php';
+            break;
+        }
+
 
 		echo '<div class="appointments-settings-tab-' . $tab . '">';
 		if ( $file ) {

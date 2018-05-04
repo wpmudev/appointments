@@ -1,3 +1,5 @@
+<p class="description"><?php _e( 'Here you should define your services for which your client will be making appointments. <b>There must be at least one service defined.</b> Capacity is the number of customers that can take the service at the same time. Enter 0 for no specific limit (Limited to number of service providers, or to 1 if no service provider is defined for that service). Price is only required if you request payment to accept appointments. You can define a description page for the service you are providing.', 'appointments' ) ?></p>
+<form method="post" action="">
 <?php
 global $wpdb;
 
@@ -7,16 +9,21 @@ $services     = appointments_get_services();
 $min_time     = $appointments->get_min_time();
 $k_max        = apply_filters( 'app_selectable_durations', min( 24, (int) ( 1440 / $min_time ) ) );
 
+$list = new Appointments_WP_List_Table_Services();
+			$list->prepare_items();
+			$list->search_box( __( 'Search', 'ub' ), __CLASS__ );
+			$list->views();
+			$list->display();
+
+
 $pages = apply_filters( 'app-service_description_pages-get_list', array() );
 if ( empty( $pages ) ) {
 	$pages = get_pages( apply_filters( 'app_pages_filter', array() ) );
 }
 ?>
 
-<p class="description"><?php _e( 'Here you should define your services for which your client will be making appointments. <b>There must be at least one service defined.</b> Capacity is the number of customers that can take the service at the same time. Enter 0 for no specific limit (Limited to number of service providers, or to 1 if no service provider is defined for that service). Price is only required if you request payment to accept appointments. You can define a description page for the service you are providing.', 'appointments' ) ?></p>
 
 
-<form method="post" action="">
 
 	<table class="widefat fixed" id="services-table" >
 		<tr>
