@@ -502,6 +502,7 @@ class Appointments_Admin_Settings_Page {
 		if ( false === $_service ) {
 			return false;
 		}
+		do_action( 'app-services-before_save' );
 		/**
 		 * update
 		 */
@@ -531,6 +532,7 @@ class Appointments_Admin_Settings_Page {
 			$args[ $k ] = $value;
 		}
 		appointments_update_service( $ID, $args );
+		do_action( 'app-services-service-updated', $ID );
 		return admin_url( 'admin.php?page=app_settings&tab=services&updated=true#section-services' );
 	}
 
