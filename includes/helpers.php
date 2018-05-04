@@ -162,16 +162,12 @@ function appointments_get_weekly_schedule_slots( $now = false, $service_id = 0, 
 	$hour_end = apply_filters( 'app_schedule_ending_hour', $hour_end, $now, 'week' );
 
 	$step = $appointments->get_min_time() * MINUTE_IN_SECONDS; // Timestamp increase interval to one cell below
-	if( ! apply_filters( 'appointments_use_legacy_duration_end_time', false ) ){
+	if ( ! apply_filters( 'appointments_use_legacy_duration_end_time', false ) ) {
 		$service = appointments_get_service( $service_id );
 		if ( $service ) {
 			$step = $service->duration * MINUTE_IN_SECONDS;
 		}
 	}
-
-	// Allow direct step increment manipulation,
-	// mainly for service duration based calculus start/stop times
-	$step = apply_filters( 'app-timetable-step_increment', $step, 'week' );
 
 	// Get the last day that was a start of week. We'll start from there
 	$week_start = appointments_week_start();
@@ -223,26 +219,22 @@ function appointments_get_weekly_schedule_slots( $now = false, $service_id = 0, 
 			}
 		}
 	}
-
 	if ( ! empty( $start_hours ) ) {
 		sort( $start_hours );
 		foreach ( $start_hours as $start_time ) {
 			$start_dt = strtotime( $start_time );
 			$end_time = date( 'H:i', strtotime( '+' . $step . ' seconds', $start_dt ) );
-
 			if ( apply_filters( 'appointments_get_weekly_schedule_slots/skip_after_midnight', true ) ) {
 				if ( $end_time < $start_time ) {
 					continue;
 				}
 			}
-
 			$time_slots[] = array(
 				'from' => $start_time,
 				'to' => $end_time,
 			);
 		}
 	}
-
 	/**
 	 * Allows to filter weekly schedule slots
 	 */
@@ -278,34 +270,28 @@ function appointments_get_worker_weekly_start_hours( $service_id = 0, $worker_id
 			$duration = $service->duration * MINUTE_IN_SECONDS;
 		}
 	}
-
-
+	// Allow direct step increment manipulation,
+	// mainly for service duration based calculus start/stop times
+	$duration = apply_filters( 'app-timetable-step_increment', $duration );
 	if ( ! empty( $worker_working_hours ) && isset( $worker_working_hours->hours ) && ! empty( $worker_working_hours->hours ) ) {
-
 		$slot_starts = array();
 		//The starting hours set in Working Hours settings page
 		foreach ( $worker_working_hours->hours as $dayname => $open_hours ) {
-
 			if ( $open_hours['active'] != 'yes' ) {
 				continue;
 			}
-
 			for ( $start_time = $open_hours['start']; $start_time < $open_hours['end']; $start_time = date( 'H:i', strtotime( '+' . $duration . ' seconds', strtotime( $start_time ) ) ) ) {
 				$end_slot = date( 'H:i', strtotime( '+' . $duration . ' seconds', strtotime( $start_time ) ) );
 				if ( $end_slot > $open_hours['end'] ) {
 					break;
 				}
-
 				if ( ! in_array( $start_time, $slot_starts ) ) {
 					$slot_starts[] = $start_time;
 				}
 			}
 		}
-
 		return $slot_starts;
-
 	}
-
 }
 
 /**
