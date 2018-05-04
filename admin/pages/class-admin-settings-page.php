@@ -103,8 +103,15 @@ class Appointments_Admin_Settings_Page {
 					'workers' => array(
 						'delete_confirmation' => __( 'Are you sure to delete this Service Provider?', 'appointments' ),
 					),
-					'services' => array(
+					'service' => array(
 						'delete_confirmation' => __( 'Are you sure to delete this Service?', 'appointments' ),
+					),
+					'services' => array(
+						'delete_confirmation' => __( 'Are you sure to delete selected Services?', 'appointments' ),
+					),
+					'bulk_actions' => array(
+						'no_items' => __( 'Please select some services first.', 'appointments' ),
+						'no_action' => __( 'Please select some action first.', 'appointments' ),
 					),
 				),
 			));
@@ -232,16 +239,20 @@ class Appointments_Admin_Settings_Page {
 		/**
 		 * get current action
 		 */
-		$addons_action = '';
+		$action = '';
 		if ( isset( $_REQUEST['action'] ) ) {
-			$addons_action = $_REQUEST['action'];
+			$action = $_REQUEST['action'];
 		}
-		if ( '-1' == $addons_action && isset( $_REQUEST['action2'] ) ) {
-			$addons_action = $_REQUEST['action2'];
+		if ( '-1' == $action && isset( $_REQUEST['action2'] ) ) {
+			$action = $_REQUEST['action2'];
 		}
-		if ( $addons_action ) {
-			$this->_save_addons( $addons_action );
-			wp_redirect( remove_query_arg( array( 'addon', '_wpnonce', 'action' ) ) );
+
+		/**
+		 * handle bulk action addon
+		 */
+		if ( $action && isset( $_REQUEST['addon'] ) ) {
+			$this->_save_addons( $action );
+			wp_safe_redirect( remove_query_arg( array( 'addon', '_wpnonce', 'action' ) ), 303 );
 			exit;
 		}
 
@@ -288,9 +299,6 @@ class Appointments_Admin_Settings_Page {
 			}
 
 			do_action( 'appointments_save_settings', $action );
-
-			l( $redirect_to );
-
 			$redirect_to = $redirect_to ? $redirect_to : add_query_arg( 'updated', 1 );
 			// Redirecting when saving options
 			wp_safe_redirect( $redirect_to, 303 );

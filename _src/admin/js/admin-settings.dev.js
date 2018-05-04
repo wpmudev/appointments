@@ -112,9 +112,9 @@ jQuery( document ).ready( function( $ ) {
      *
      * @since 2.2.6
      */
-    $(document).on('click', '#services-table .delete a', function() {
-        if ( window.confirm( app_i10n.messages.services.delete_confirmation ) ) {
-            var table = $('#services-table');
+    $(document).on('click', '.wp-list-table.services .delete a', function() {
+        if ( window.confirm( app_i10n.messages.service.delete_confirmation ) ) {
+            var parent = $(this).closest('tr');
             var data = {
                 'action': 'delete_service',
                 'nonce': $(this).data('nonce'),
@@ -122,13 +122,10 @@ jQuery( document ).ready( function( $ ) {
             };
             $.post( ajaxurl, data, function( response ) {
                 if ( response.success ) {
-                    $('tr#app-tr-service-'+data.id).detach();
+                    parent.detach();
                 }
                 var html = '<div class="notice notice-'+(response.success? 'success':'error')+' is-dismissible"><p>'+response.data.message+'</p></div>';
                 $('.appointments-settings h1').after(html);
-                if ( 0 === $('tbody.services tr', table ).length ) {
-                    $('tbody.no', table ).removeClass('hidden');
-                }
             }
             );
         }
@@ -158,6 +155,27 @@ jQuery( document ).ready( function( $ ) {
                 }
             }
             );
+        }
+    });
+    /**
+     * handle bulk action Services
+     *
+     * @since 2.2.8
+     */
+    $(document).on('click', '#app-settings-section-services input.action', function() {
+        var parent = $(this).closest('form');
+        var list = $('.check-column input:checked');
+        var action = $('select', $(this).parent() ).val();
+        if ( 0 === list.length ) {
+            window.alert( app_i10n.messages.bulk_actions.no_items );
+            return false;
+        }
+        if ( '-1' === action ) {
+            window.alert( app_i10n.messages.bulk_actions.no_action );
+            return false;
+        }
+        if ( !window.confirm( app_i10n.messages.services.delete_confirmation ) ) {
+            return false;
         }
     });
 

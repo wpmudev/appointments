@@ -110,8 +110,19 @@ class Appointments_WP_List_Table_Services extends WP_List_Table {
 	}
 
 	public function process_bulk_action() {
-		if ( 'delete' === $this->current_action() ) {
-			wp_die( 'Items deleted (or they would be if we had items to delete)!' );
+		$action = $this->current_action();
+		$singular = $this->_args['singular'];
+		if (
+			'delete' === $action
+			&& isset( $_POST['_wpnonce'] )
+			&& isset( $_POST[ $singular ] )
+			&& ! empty( $_POST[ $singular ] )
+			&& is_array( $_POST[ $singular ] )
+			&& wp_verify_nonce( $_POST['_wpnonce'], 'bulk-'.$this->_args['plural'] )
+		) {
+			foreach ( $_POST[ $singular ] as $ID ) {
+				appointments_delete_service( $ID );
+			}
 		}
 	}
 
