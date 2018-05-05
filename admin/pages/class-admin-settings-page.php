@@ -215,6 +215,9 @@ class Appointments_Admin_Settings_Page {
 			case 'services':
 				require_once dirname( dirname( __FILE__ ) ).'/class-app-list-table-services.php';
 			break;
+			case 'workers':
+				require_once dirname( dirname( __FILE__ ) ).'/class-app-list-table-workers.php';
+			break;
 		}
 
 		echo '<div class="appointments-settings-tab-' . $tab . '">';

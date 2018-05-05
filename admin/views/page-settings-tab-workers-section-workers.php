@@ -16,6 +16,13 @@ if ( empty( $pages ) ) {
 
 
 <form method="post" action="">
+<?php
+$list = new Appointments_WP_List_Table_Workers();
+$list->prepare_items();
+//$list->search_box( __( 'Search', 'appointments' ), __CLASS__ );
+//$list->views();
+$list->display();
+?>
 
 	<table class="widefat fixed" id="workers-table" >
 		<tr>
