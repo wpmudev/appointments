@@ -56,6 +56,7 @@ class Appointments_Admin_Settings_Page {
 			'workers' => array(
 				'workers' => __( 'Service Providers', 'appointments' ),
 				'new-worker' => __( 'Add new Service Provider', 'appointments' ),
+				'edit-worker' => false,
 			),
 		);
 
@@ -294,6 +295,10 @@ class Appointments_Admin_Settings_Page {
 			}
 			case 'save_workers': {
 				$this->_save_workers();
+				break;
+			}
+			case 'update_worker': {
+				$redirect_to = $this->_update_worker();
 				break;
 			}
 			case 'save_log': {
@@ -536,7 +541,15 @@ class Appointments_Admin_Settings_Page {
 		}
 		appointments_update_service( $ID, $args );
 		do_action( 'app-services-service-updated', $ID );
-		return admin_url( 'admin.php?page=app_settings&tab=services&updated=true#section-services' );
+		$url = add_query_arg(
+			array(
+				'page' => 'app_settings',
+				'tab' => 'services',
+				'updated' => true,
+			),
+			admin_url( 'admin.php' )
+		);
+		return $url.'#section-services';
 	}
 
 	private function _add_worker() {
@@ -605,6 +618,76 @@ class Appointments_Admin_Settings_Page {
 				do_action( 'app-workers-worker-updated', $worker_id );
 			}
 		}
+	}
+
+	/**
+	 * Update worker
+	 *
+	 * @since 2.2.9
+	 */
+	private function _update_worker() {
+		if ( ! isset( $_POST['app_nonce'] ) ) {
+			return false;
+		}
+		if ( ! wp_verify_nonce( $_POST['app_nonce'], 'update_app_settings' ) ) {
+			return false;
+		}
+		if ( ! isset( $_POST['worker_user'] ) ) {
+			return false;
+		}
+		$ID = filter_var( $_POST['worker_user'], FILTER_VALIDATE_INT );
+		$_worker = appointments_get_worker( $ID );
+		if ( false === $_worker ) {
+			return false;
+		}
+		do_action( 'app-workers-before_save' );
+		/**
+		 * update
+		 */
+		$args = array();
+		/**
+		 * values: integers
+		 */
+		$keys = array( 'page' );
+		foreach ( $keys as $k ) {
+			$key = 'worker_'.$k;
+			$value = 0;
+			if ( isset( $_POST[ $key ] ) ) {
+				$value = filter_var( $_POST[ $key ], FILTER_VALIDATE_INT );
+			}
+			$args[ $k ] = $value;
+		}
+		/**
+		 * values: strings
+		 */
+		$keys = array( 'price', 'dummy' );
+		foreach ( $keys as $k ) {
+			$key = 'worker_'.$k;
+			$value = '';
+			if ( isset( $_POST[ $key ] ) ) {
+				$value = filter_var( $_POST[ $key ], FILTER_SANITIZE_STRING );
+			}
+			$args[ $k ] = $value;
+		}
+		/**
+		 * check dummy
+		 */
+		$args['dummy'] = 'on' === $args['dummy'];
+		/**
+		 * services_provided
+		 */
+		$args['services_provided'] = isset( $_POST['services_provided'] )? $_POST['services_provided']:array();
+		appointments_update_worker( $ID, $args );
+		do_action( 'app-workers-worker-updated', $ID );
+		$url = add_query_arg(
+			array(
+				'page' => 'app_settings',
+				'tab' => 'workers',
+				'updated' => true,
+			),
+			admin_url( 'admin.php' )
+		);
+		return $url.'#section-workers';
 	}
 
 	private function _delete_logs() {

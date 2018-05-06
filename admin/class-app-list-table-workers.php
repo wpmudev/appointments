@@ -22,7 +22,12 @@ class Appointments_WP_List_Table_Workers extends WP_List_Table {
 	public function column_default( $item, $column_name ) {
 		switch ( $column_name ) {
 			case 'dummy':
-			return $item->is_dummy()? esc_html_x( 'Yes', 'dummy worker', 'appointments' ):esc_html_x( 'No', 'dummy worker', 'appointments' );
+				$is_dummy = $item->is_dummy();
+			return sprintf(
+				'<span data-state="%d">%s</span>',
+				esc_attr( $is_dummy ),
+				$is_dummy? esc_html_x( 'Yes', 'dummy worker', 'appointments' ):esc_html_x( 'No', 'dummy worker', 'appointments' )
+			);
 			case 'price':
 			return intval( $item->$column_name );
 		}
@@ -32,18 +37,23 @@ class Appointments_WP_List_Table_Workers extends WP_List_Table {
 		if ( empty( $item->services_provided ) ) {
 			return __( 'No Service Providers selected.', 'appointments' );
 		}
-		$content = '<ul>';
+		$content = '';
+		$ids = array();
 
 		foreach ( $item->services_provided as $id ) {
 			$value = $this->services[ $id ];
 			$name = sprintf( __( 'Missing service: %d.', 'appointments' ), $id );
 			if ( is_a( $value, 'Appointments_Service' ) ) {
 				$name = $value->name;
+				$ids[] = $id;
 			}
 			$content .= sprintf( '<li>%s</li>', $name );
 		}
-		$content .= '</ul>';
-		return $content;
+		return sprintf(
+			'<ul data-services="%s">%s</ul>',
+			implode( ',', $ids ),
+			$content
+		);
 	}
 
 	public function column_name( $item ) {
