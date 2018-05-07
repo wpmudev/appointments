@@ -2,7 +2,7 @@
 -------------------------------
 - Refactored "Services" screan and use WP_List_Table class for the list.
 - Refactored "Service Providers" screan and use WP_List_Table class for the list.
-- Improved "Working Hours" tab content on mobile devices.
+- Improved "Working Hours" and "Exceptions" tabs content on mobile devices.
 
 2018-xx-xx - 2.2.8
 -------------------------------

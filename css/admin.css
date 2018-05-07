@@ -144,4 +144,13 @@ body.appointments_page_app_settings .appointments-settings-tab-working_hours tab
 .appointments-settings-tab-working_hours .app-flex > div {
     min-width: 350px;
 }
+@media screen and (max-width : 550px) {
+    .ui-datepicker-inline {
+        max-width: 100%;
+    }
+    .app-datepick .ui-datepicker-group {
+        float: none;
+        width: auto;
+    }
+}
 
