@@ -137,3 +137,11 @@ body.appointments_page_app_settings .appointments-settings-tab-working_hours tab
     display: block;
 }
 
+.app-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+.appointments-settings-tab-working_hours .app-flex > div {
+    min-width: 350px;
+}
+
