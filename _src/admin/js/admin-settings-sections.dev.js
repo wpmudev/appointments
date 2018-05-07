@@ -89,11 +89,15 @@ jQuery(document).ready( function( $ ) {
          */
         $('input[name=multiselect_services_provided]', section ).prop( 'checked', false );
         $('#services_provided option', section ).prop( 'selected', false );
-        value = $('.column-services_provided ul', parent ).data('services').toString();
-        value = value.split(',');
-        $.each( value, function( index, val ) {
-            $('#services_provided option[value="'+val+'"]', section ).prop( 'selected', true );
-        });
+        var value = '';
+        var list = $('.column-services_provided ul', parent );
+        if ( 0 < list.length ) {
+            value = list.data('services').toString();
+            value = value.split(',');
+            $.each( value, function( index, val ) {
+                $('#services_provided option[value="'+val+'"]', section ).prop( 'selected', true );
+            });
+        }
         /**
          * update multiselect
          */
