@@ -33,9 +33,13 @@ if ( empty( $pages ) ) {
 			</th>
 			<td>
 				<select id="service-duration" name="service_duration">
-					<?php for ( $k = 1; $k <= $k_max; $k++ ) :  ?>
-						<option><?php echo $k * $min_time; ?></option>
-					<?php endfor; ?>
+<?php
+for ( $k = 1; $k <= $k_max; $k++ ) {
+	$value = $k * $min_time;
+	$label = appointment_convert_minutes_to_human_format( $value );
+	printf( '<option value="%d">%s</option>', esc_attr( $value ), esc_html( $label ) );
+}
+?>
 				</select>
 			</td>
 		</tr>

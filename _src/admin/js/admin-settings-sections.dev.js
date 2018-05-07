@@ -56,7 +56,7 @@ jQuery(document).ready( function( $ ) {
         $('#service-id', section ).val( id );
         $('#service-name', section ).val( $('.column-name strong a', parent ).html() );
         $('#service-capacity', section ).val( $('.column-capacity', parent ).html() );
-        $('#service-duration', section ).val( $('.column-duration', parent ).html() );
+        $('#service-duration', section ).val( $('.column-duration span', parent ).data('duration') );
         $('#service-page', section ).val( page );
         $('#service-price', section ).val( $('.column-price', parent ).html() );
         activateSection( sectionStub );

@@ -36,9 +36,13 @@ if ( empty( $pages ) ) {
 			</th>
 			<td>
 				<select id="service-duration" name="service_duration">
-					<?php for ( $k=1; $k<=$k_max; $k++ ): ?>
-						<option><?php echo $k * $min_time; ?></option>
-					<?php endfor; ?>
+<?php
+for ( $k = 1; $k <= $k_max; $k++ ) {
+	$value = $k * $min_time;
+	$label = appointment_convert_minutes_to_human_format( $value );
+	printf( '<option value="%d">%s</option>', esc_attr( $value ), esc_html( $label ) );
+}
+?>
 				</select>
 			</td>
 		</tr>
@@ -57,7 +61,7 @@ if ( empty( $pages ) ) {
 			<td>
 				<select id="service-page" name="service_page">
 					<option value="0"><?php esc_html_e( 'None', 'appointments' ); ?></option>
-					<?php foreach( $pages as $page ): ?>
+					<?php foreach ( $pages as $page ) :  ?>
 						<option value="<?php echo $page->ID; ?>"><?php echo esc_html( get_the_title( $page->ID ) ); ?></option>
 					<?php endforeach; ?>
 				</select>
