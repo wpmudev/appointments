@@ -146,6 +146,11 @@ class Appointments_WP_List_Table_Workers extends WP_List_Table {
 		return $actions;
 	}
 
+	/**
+	 * delete selected workers
+	 *
+	 * @since 2.3.0
+	 */
 	public function process_bulk_action() {
 		$action = $this->current_action();
 		$singular = $this->_args['singular'];
@@ -164,10 +169,9 @@ class Appointments_WP_List_Table_Workers extends WP_List_Table {
 	}
 
 	public function prepare_items() {
-		$per_page = 5;
+		$per_page = 20;
 		$columns = $this->get_columns();
 		$hidden = array();
-
 		/**
 		 * services
 		 */
@@ -178,10 +182,10 @@ class Appointments_WP_List_Table_Workers extends WP_List_Table {
 		$sortable = $this->get_sortable_columns();
 		$this->_column_headers = array( $columns, $hidden, $sortable );
 		$this->process_bulk_action();
-		$data = appointments_get_workers();
+		$total_items = appointments_get_workers( array( 'count' => true ) );;
 		$current_page = $this->get_pagenum();
-		$total_items = count( $data );
-		$data = appointments_get_workers( array( 'orderby' => 'name' ) );
+		$offset = ( $current_page - 1 ) * $per_page;
+		$data = appointments_get_workers( array( 'orderby' => 'name', 'offset' => $offset, 'limit' => $per_page ) );
 		$this->items = $data;
 		/**
 		 * REQUIRED. We also have to register our pagination options & calculations.

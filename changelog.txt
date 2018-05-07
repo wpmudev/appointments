@@ -1,4 +1,4 @@
-2018-xx-xx - 2.2.9
+2018-xx-xx - 2.3.0
 -------------------------------
 - Refactored "Services" screan and use WP_List_Table class for the list.
 - Refactored "Service Providers" screan and use WP_List_Table class for the list.

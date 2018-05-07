@@ -4,7 +4,6 @@ class Appointments_Admin_Settings_Page {
 
 	public $page_id = '';
 
-
 	public function __construct() {
 		$this->page_id = add_submenu_page(
 			'appointments',
@@ -14,10 +13,8 @@ class Appointments_Admin_Settings_Page {
 			'app_settings',
 			array( &$this, 'render' )
 		);
-
 		add_action( 'load-' . $this->page_id, array( $this, 'on_load' ) );
 	}
-
 
 	/**
 	 * Get the screen tabs
@@ -34,7 +31,6 @@ class Appointments_Admin_Settings_Page {
 			'addons'        => __( 'Add-ons', 'appointments' ),
 			'log'           => __( 'Logs', 'appointments' ),
 		);
-
 		return apply_filters( 'appointments_tabs', $tabs );
 	}
 
@@ -59,7 +55,6 @@ class Appointments_Admin_Settings_Page {
 				'edit-worker' => false,
 			),
 		);
-
 		return apply_filters( 'appointments_settings_sections', $sections );
 	}
 
@@ -72,7 +67,6 @@ class Appointments_Admin_Settings_Page {
 	 */
 	public function tab_sections_markup( $tab ) {
 		$sections = $this->get_sections();
-
 		if ( isset( $sections[ $tab ] ) ) {
 			$content = '<ul class="subsubsub">';
 			$links = array();
@@ -84,9 +78,7 @@ class Appointments_Admin_Settings_Page {
 			}
 			$content .= implode( ' | ', $links );
 			$content .= '</ul>';
-
 			wp_enqueue_script( 'app-settings', appointments_plugin_url() . 'admin/js/admin-settings.js', array( 'jquery' ), appointments_get_db_version(), true );
-
 			$appointments = appointments();
 			$classes = $appointments->get_classes();
 			$presets = array();
@@ -118,7 +110,6 @@ class Appointments_Admin_Settings_Page {
 			));
 			return $content;
 		}
-
 		return '';
 	}
 
@@ -134,7 +125,6 @@ class Appointments_Admin_Settings_Page {
 		if ( isset( $sections[ $tab ] ) ) {
 			return $sections[ $tab ];
 		}
-
 		return array();
 	}
 
@@ -148,32 +138,26 @@ class Appointments_Admin_Settings_Page {
 		if ( empty( $_GET['tab'] ) ) {
 			return key( $tabs );
 		}
-
 		if ( ! array_key_exists( $_GET['tab'], $tabs ) ) {
 			return key( $tabs );
 		}
-
 		return $_GET['tab'];
 	}
 
 	private function _get_tab_link( $tab ) {
 		$url = add_query_arg( 'tab', $tab );
-		$url = remove_query_arg( array( 'updated', 'added' ), $url );
+		$url = remove_query_arg( array( 'updated', 'added', 'paged' ), $url );
 		return $url;
 	}
-
 
 	/**
 	 *	Render the Settings page
 	 */
-	function render() {
+	public function render() {
 		$appointments = appointments();
-
 		$appointments->get_lsw();
-
 		$tabs = $this->get_tabs();
 		$tab = $this->get_current_tab();
-
 		?>
 		<div class="wrap appointments-settings">
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
@@ -493,7 +477,7 @@ class Appointments_Admin_Settings_Page {
 	/**
 	 * Update service
 	 *
-	 * @since 2.2.9
+	 * @since 2.3.0
 	 */
 	private function _update_service() {
 		if ( ! isset( $_POST['app_nonce'] ) ) {
@@ -623,7 +607,7 @@ class Appointments_Admin_Settings_Page {
 	/**
 	 * Update worker
 	 *
-	 * @since 2.2.9
+	 * @since 2.3.0
 	 */
 	private function _update_worker() {
 		if ( ! isset( $_POST['app_nonce'] ) ) {
@@ -700,7 +684,7 @@ class Appointments_Admin_Settings_Page {
 	 *	Sorts a comma delimited string
 	 *	@since 1.2
 	 */
-	function _sort( $input ) {
+	public function _sort( $input ) {
 		if ( strpos( $input, ',' ) === false ) {
 			return $input; }
 		$temp = explode( ',', $input );
