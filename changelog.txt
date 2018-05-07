@@ -14,6 +14,7 @@
 - Improved the "app_my_appointments" shortcode and added a message when we have no appointments.
 - Removed DateTime::createFromFormat() usage to be compatible with PHP 5.2
 - Fixed a problem with visibility "Currency" option - it was visible only when we turn on "Payment required" field.
+- Fixed incorrectly used `is_a()` function. Props for tw77.
 
 2018-05-07 - 2.2.7
 -------------------------------
