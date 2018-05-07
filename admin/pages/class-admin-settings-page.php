@@ -350,7 +350,7 @@ class Appointments_Admin_Settings_Page {
 
 		$assigned_to = isset( $_POST['dummy_assigned_to'] ) ? $_POST['dummy_assigned_to'] : 0;
 		$worker = appointments_get_worker( $assigned_to );
-		$is_dummy = is_a( 'Appointments_Worker', $worker ) && $worker->is_dummy();
+		$is_dummy = is_a( $worker, 'Appointments_Worker' ) && $worker->is_dummy();
 		$options['dummy_assigned_to']			= ! $is_dummy ? $assigned_to : 0;
 
 		$options['accept_api_logins']			= isset( $_POST['accept_api_logins'] );
