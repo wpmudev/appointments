@@ -94,19 +94,14 @@ class Appointments_Worker {
 
 function appointments_get_worker( $worker_id ) {
 	global $wpdb;
-
 	if ( ! $worker_id ) {
 		return false;
 	}
-
 	if ( is_a( $worker_id, 'Appointments_Worker' ) ) {
 		$worker_id = $worker_id->ID;
 	}
-
 	$table = appointments_get_table( 'workers' );
-
 	$worker = wp_cache_get( $worker_id, 'app_workers' );
-
 	if ( ! $worker ) {
 		$worker = $wpdb->get_row(
 			$wpdb->prepare(
@@ -114,15 +109,19 @@ function appointments_get_worker( $worker_id ) {
 				$worker_id
 			)
 		);
-
+		/**
+		 * Allow to modify service data
+		 *
+		 * @since 2.3.0
+		 */
+		$worker = apply_filters( 'appointments_get_worker', $worker );
 		if ( $worker ) {
 			wp_cache_add( $worker->ID, $worker, 'app_workers' );
 		}
 	}
-
 	if ( $worker ) {
-		return new Appointments_Worker( $worker ); }
-
+		return new Appointments_Worker( $worker );
+	}
 	return false;
 }
 
