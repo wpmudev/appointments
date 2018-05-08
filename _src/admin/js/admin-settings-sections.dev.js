@@ -45,21 +45,75 @@ jQuery(document).ready( function( $ ) {
         var sectionStub = 'section-edit-service';
         var section = $('#app-settings-' + sectionStub );
         var id = $(this).data('id');
+        var id = $(this).data('id');
+        var data = {
+            action: 'appointment_get_service',
+            id: $(this).data('id'),
+            _wpnonce: $(this).data('nonce')
+        };
         sections[ sectionStub ] = {
             $el: $(this),
             $section: section
         };
-        page = $('.column-page span', parent ).data('id');
-        if ( 'undefined' === typeof page ) {
-            page = 0;
-        }
-        $('#service-id', section ).val( id );
-        $('#service-name', section ).val( $('.column-name strong a', parent ).html() );
-        $('#service-capacity', section ).val( $('.column-capacity', parent ).html() );
-        $('#service-duration', section ).val( $('.column-duration', parent ).html() );
-        $('#service-page', section ).val( page );
-        $('#service-price', section ).val( $('.column-price', parent ).html() );
-        activateSection( sectionStub );
+        $.post( ajaxurl, data, function(response) {
+            if ( response.success ) {
+                $('#service-price', section ).val( response.data.price );
+                $('#service-name', section ).val( response.data.name );
+                $('#service-id', section ).val( response.data.ID );
+                $('#service-duration', section ).val( response.data.duration );
+                $('#service-page', section ).val( response.data.page );
+                $('#service-capacity', section ).val( response.data.capacity );
+                /**
+                 * PRO: service_padding
+                 */
+                if ( 'undefined' !== typeof response.data.service_padding ) {
+                    if ( 'undefined' !== typeof response.data.service_padding.before ) {
+                        $('#service_padding_before', section ).val( response.data.service_padding.before );
+                    }
+                    if ( 'undefined' !== typeof response.data.service_padding.after ) {
+                        $('#service_padding_after', section ).val( response.data.service_padding.after );
+                    }
+                }
+                /**
+                 * PRO: service_location
+                 */
+                if ( 'undefined' !== typeof response.data.service_location ) {
+                    $('#service_location', section ).val( response.data.service_location );
+                }
+                /**
+                 * PRO: shared_resources
+                 */
+                if ( 'undefined' !== typeof response.data.shared_resources ) {
+                    $('.app-shared_service label').show();
+                    $('.app-shared_service input[type=checkbox]').each( function() {
+                        value = parseInt( $(this).val() );
+                        /**
+                         * reset
+                         */
+                        $(this).prop( 'checked', false ).prop( 'disabled', false );
+                        /**
+                         * disable itself
+                         */
+                        if ( parseInt( response.data.ID ) === value ) {
+                            $(this).prop( 'checked', false ).prop( 'disabled', true );
+                            $(this).closest('label').hide();
+                        } else {
+                            if ( 'undefined' !== typeof response.data.shared_resources.shared_ids ) {
+                                checked = response.data.shared_resources.shared_ids.indexOf( value );
+                                $(this).prop( 'checked', -1 < checked );
+                            }
+                            if ( 'undefined' !== typeof response.data.shared_resources.direct_ids ) {
+                                checked = response.data.shared_resources.direct_ids.indexOf( value );
+                                $(this).prop( 'disabled', -1 < checked );
+                            }
+                        }
+                    });
+                }
+                activateSection( sectionStub );
+            } else {
+                window.alert( response.message );
+            }
+        });
     });
 
     /**

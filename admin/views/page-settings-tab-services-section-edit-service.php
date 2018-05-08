@@ -60,7 +60,7 @@ if ( empty( $pages ) ) {
 				</select>
 			</td>
 		</tr>
-		<?php do_action( 'appointments_edit_service_form' ); ?>
+		<?php do_action( 'appointments_add_new_service_form' ); ?>
 	</table>
 
 	<input type="hidden" name="action_app" value="update_service">

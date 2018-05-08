@@ -196,13 +196,24 @@ function appointments_get_service( $service_id ) {
 
 	$service = wp_cache_get( $service_id, 'app_services' );
 
-	if ( ! $service ) {
+	if ( 1 || ! $service ) {
 		$service = $wpdb->get_row(
 			$wpdb->prepare(
 				"SELECT * from $table WHERE ID = %d",
 				$service_id
 			)
 		);
+
+		l( $service );
+
+		/**
+ * Allow to modify service data
+ *
+ * @since 2.3.0
+ */
+		$service = apply_filters( 'appointments_get_service', $service );
+
+		l( $service );
 
 		if ( $service ) {
 			wp_cache_add( $service->ID, $service, 'app_services' );
