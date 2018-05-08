@@ -33,7 +33,7 @@ if ( empty( $pages ) ) {
 			</th>
 			<td>
 				<select id="service-duration" name="service_duration">
-					<?php for ( $k=1; $k<=$k_max; $k++ ): ?>
+					<?php for ( $k = 1; $k <= $k_max; $k++ ) :  ?>
 						<option><?php echo $k * $min_time; ?></option>
 					<?php endfor; ?>
 				</select>
@@ -54,13 +54,13 @@ if ( empty( $pages ) ) {
 			<td>
 				<select id="service-page" name="service_page">
 					<option value="0"><?php esc_html_e( 'None', 'appointments' ); ?></option>
-					<?php foreach( $pages as $page ): ?>
+					<?php foreach ( $pages as $page ) :  ?>
 						<option value="<?php echo $page->ID; ?>"><?php echo esc_html( get_the_title( $page->ID ) ); ?></option>
 					<?php endforeach; ?>
 				</select>
 			</td>
 		</tr>
-		<?php do_action( 'appointments_edit_service_form' ); ?>
+		<?php do_action( 'appointments_add_new_service_form' ); ?>
 	</table>
 
 	<input type="hidden" name="action_app" value="update_service">

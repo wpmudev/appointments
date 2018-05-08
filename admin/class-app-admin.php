@@ -29,6 +29,12 @@ class Appointments_Admin {
 
 		// Add quick link to plugin settings from plugins list page.
 		add_filter( 'plugin_action_links_' . plugin_basename( APP_PLUGIN_FILE ), array( $this, 'add_settings_link' ) );
+		/**
+		 * Get service data
+		 *
+		 * @since 2.3.0
+		 */
+		add_action( 'wp_ajax_appointment_get_service', array( $this, 'get_service' ) );
 
 		new Appointments_Admin_Dashboard_Widget();
 		$this->user_profile = new Appointments_Admin_User_Profile();
@@ -479,6 +485,26 @@ class Appointments_Admin {
 				),
 			);
 			wp_send_json_success( $data );
+		}
+		wp_send_json_error( $data );
+	}
+
+	/**
+	 * get service
+	 *
+	 * @since 2.3.0
+	 */
+	public function get_service() {
+		$data = array(
+			'message' => __( 'Something went wrong!', 'appointments' ),
+		);
+		if (
+			isset( $_POST['_wpnonce'] )
+			&& isset( $_POST['id'] )
+			&& wp_verify_nonce( $_POST['_wpnonce'], 'service-'.$_POST['id'] )
+		) {
+			$service = appointments_get_service( $_POST['id'] );
+			wp_send_json_success( $service );
 		}
 		wp_send_json_error( $data );
 	}

@@ -25,25 +25,25 @@ class App_Schedule_Paddings {
 	private $_allowed_paddings = array();
 	private $_allowed_positions = array();
 
-	private function __construct () {
+	private function __construct() {
 		$this->_allowed_paddings = array(
-			self::PADDING_TYPE_CUMULATIVE => __('Cumulative', 'appointments'),
-			self::PADDING_TYPE_LARGEST => __('Largest', 'appointments'),
-			self::PADDING_TYPE_SMALLEST => __('Smallest', 'appointments'),
+			self::PADDING_TYPE_CUMULATIVE => __( 'Cumulative', 'appointments' ),
+			self::PADDING_TYPE_LARGEST => __( 'Largest', 'appointments' ),
+			self::PADDING_TYPE_SMALLEST => __( 'Smallest', 'appointments' ),
 		);
 		$this->_allowed_positions = array(
-			self::PADDING_BEFORE => __('Before', 'appointments'),
-			self::PADDING_AFTER => __('After', 'appointments'),
+			self::PADDING_BEFORE => __( 'Before', 'appointments' ),
+			self::PADDING_AFTER => __( 'After', 'appointments' ),
 		);
 	}
 
-	public static function serve () {
+	public static function serve() {
 		$me = new App_Schedule_Paddings;
 		$me->_add_hooks();
 		return $me;
 	}
 
-	private function _add_hooks () {
+	private function _add_hooks() {
 		add_action( 'plugins_loaded', array( $this, 'initialize' ) );
 
 		//Apply padding to front-end timetable.
@@ -58,6 +58,7 @@ class App_Schedule_Paddings {
 		// Augment service settings pages
 		add_filter( 'app-settings-services-service-name', array( $this, 'add_service_selection' ), 10, 2 );
 		add_action( 'appointments_add_new_service_form', array( $this, 'add_new_service_selection' ) );
+		add_filter( 'appointments_get_service', array( $this, 'add_service_padding' ) );
 
 		// Save Service paddings
 		add_action( 'appointments_insert_service', array( $this, 'save_service_padding' ) );
@@ -81,24 +82,24 @@ class App_Schedule_Paddings {
 	    $defaults['service_padding'] = array();
 	    $defaults['worker_padding'] = array();
 	    return $defaults;
-    }
+	}
 
 	/**
-     * Get this extension options
-     *
+	 * Get this extension options
+	 *
 	 * @return array
 	 */
-    public function get_options() {
-        $options = appointments_get_options();
+	public function get_options() {
+		$options = appointments_get_options();
 
-        return array(
+		return array(
 	        'schedule_padding' => $options['schedule_padding'],
 	        'service_padding' => $options['service_padding'],
 	        'worker_padding' => $options['worker_padding'],
-        );
-    }
+		);
+	}
 
-	public function initialize () {
+	public function initialize() {
 		global $appointments;
 		$this->_core = $appointments;
 
@@ -108,32 +109,32 @@ class App_Schedule_Paddings {
 		$this->_data = $options;
 	}
 
-	public function save_settings ($options) {
+	public function save_settings( $options ) {
 		if ( ! empty( $_POST['schedule_padding'] ) && in_array( $_POST['schedule_padding'], array_keys( $this->_allowed_paddings ) ) ) {
 			$options['schedule_padding'] = array( 'type' => $_POST['schedule_padding'] );
 		}
 		return $options;
 	}
 
-	public function show_settings () {
+	public function show_settings() {
 		$options = appointments_get_options();
 
 		$saved = $options['schedule_padding']['type'];
 
 		$type_help = array(
-			self::PADDING_TYPE_SMALLEST => __('... applying the smaller padding of the two', 'appointments'),
-			self::PADDING_TYPE_LARGEST => __('... applying the larger padding of the two', 'appointments'),
-			self::PADDING_TYPE_CUMULATIVE => __('... adding the two together and applying the result', 'appointments'),
+			self::PADDING_TYPE_SMALLEST => __( '... applying the smaller padding of the two', 'appointments' ),
+			self::PADDING_TYPE_LARGEST => __( '... applying the larger padding of the two', 'appointments' ),
+			self::PADDING_TYPE_CUMULATIVE => __( '... adding the two together and applying the result', 'appointments' ),
 		);
 		?>
         <tr valign="top">
-            <th scope="row"><?php _e('Padding resolution type', 'appointments'); ?></th>
+            <th scope="row"><?php _e( 'Padding resolution type', 'appointments' ); ?></th>
             <td>
-                <p><?php _e('When both the current service and the current service provider have paddings assigned, resolve them by...', 'appointments'); ?></p>
-                <?php foreach ($this->_allowed_paddings as $padding => $name): ?>
+                <p><?php _e( 'When both the current service and the current service provider have paddings assigned, resolve them by...', 'appointments' ); ?></p>
+                <?php foreach ( $this->_allowed_paddings as $padding => $name ) :  ?>
                     <p>
-                        <label for="app-padding-<?php echo esc_attr($padding); ?>">
-                            <input type="radio" id="app-padding-<?php echo esc_attr($padding); ?>" name="schedule_padding" value="<?php echo esc_attr($padding); ?>" <?php checked($saved, $padding); ?> />
+                        <label for="app-padding-<?php echo esc_attr( $padding ); ?>">
+                            <input type="radio" id="app-padding-<?php echo esc_attr( $padding ); ?>" name="schedule_padding" value="<?php echo esc_attr( $padding ); ?>" <?php checked( $saved, $padding ); ?> />
                             <?php echo $name; ?>
                         </label><br>
                         <span class="description"><?php echo $type_help[ $padding ]; ?></span>
@@ -144,61 +145,61 @@ class App_Schedule_Paddings {
 		<?php
 	}
 
-	public function add_service_selection ($out, $service_id) {
-        $options = appointments_get_options();
+	public function add_service_selection( $out, $service_id ) {
+		$options = appointments_get_options();
 		$paddings = array( self::PADDING_BEFORE => 0, self::PADDING_AFTER => 0 );
-        if ( isset( $options['service_padding'][ $service_id ] ) ) {
-            $paddings = $options['service_padding'][ $service_id ];
-        }
-		$range = range(0, 180, 5);
+		if ( isset( $options['service_padding'][ $service_id ] ) ) {
+			$paddings = $options['service_padding'][ $service_id ];
+		}
+		$range = range( 0, 180, 5 );
 
-        ob_start();
-        ?>
+		ob_start();
+		?>
         <div class="app-service_padding">
-            <h4><?php esc_html_e('Padding times', 'appointments'); ?></h4>
+            <h4><?php esc_html_e( 'Padding times', 'appointments' ); ?></h4>
             <label for="service_padding_before-<?php echo esc_attr( $service_id ); ?>">
-                <?php echo $this->_allowed_positions[self::PADDING_BEFORE]; ?>&nbsp;
+                <?php echo $this->_allowed_positions[ self::PADDING_BEFORE ]; ?>&nbsp;
                 <select id="service_padding_before-<?php echo esc_attr( $service_id ); ?>" name="service_padding_before[<?php echo esc_attr( $service_id ); ?>]">
-                    <?php foreach ($range as $value): ?>
-                        <option value="<?php echo esc_attr( $value ); ?>" <?php selected($paddings[self::PADDING_BEFORE], $value  ); ?>><?php echo esc_html( $value ); ?></option>
+                    <?php foreach ( $range as $value ) :  ?>
+                        <option value="<?php echo esc_attr( $value ); ?>" <?php selected( $paddings[ self::PADDING_BEFORE ], $value ); ?>><?php echo esc_html( $value ); ?></option>
                     <?php endforeach; ?>
                 </select>
             </label>
             <label for="service_padding_after-<?php echo esc_attr( $service_id ); ?>">
-		        <?php echo $this->_allowed_positions[self::PADDING_AFTER]; ?>&nbsp;
+		        <?php echo $this->_allowed_positions[ self::PADDING_AFTER ]; ?>&nbsp;
                 <select id="service_padding_after-<?php echo esc_attr( $service_id ); ?>" name="service_padding_after[<?php echo esc_attr( $service_id ); ?>]">
-			        <?php foreach ($range as $value): ?>
-                        <option value="<?php echo esc_attr( $value ); ?>" <?php selected($paddings[self::PADDING_AFTER], $value  ); ?>><?php echo esc_html( $value ); ?></option>
+			        <?php foreach ( $range as $value ) :  ?>
+                        <option value="<?php echo esc_attr( $value ); ?>" <?php selected( $paddings[ self::PADDING_AFTER ], $value ); ?>><?php echo esc_html( $value ); ?></option>
 			        <?php endforeach; ?>
                 </select>
             </label>
         </div>
         <?php
-        return $out . ob_get_clean();
+		return $out . ob_get_clean();
 	}
 
 	public function add_new_service_selection() {
 		$paddings = array( self::PADDING_BEFORE => 0, self::PADDING_AFTER => 0 );
-		$range = range(0, 180, 5);
-    	?>
+		$range = range( 0, 180, 5 );
+		?>
 		<tr>
 			<th scope="row">
 				<?php _e( 'Paddings', 'appointments' ); ?>
 			</th>
 			<td>
 				<label for="service_padding_before">
-					<?php echo $this->_allowed_positions[self::PADDING_BEFORE]; ?>&nbsp;
+					<?php echo $this->_allowed_positions[ self::PADDING_BEFORE ]; ?>&nbsp;
 					<select id="service_padding_before" name="service_padding_before">
-						<?php foreach ($range as $value): ?>
-							<option value="<?php echo esc_attr( $value ); ?>" <?php selected($paddings[self::PADDING_BEFORE], $value  ); ?>><?php echo esc_html( $value ); ?></option>
+						<?php foreach ( $range as $value ) :  ?>
+							<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $paddings[ self::PADDING_BEFORE ], $value ); ?>><?php echo esc_html( $value ); ?></option>
 						<?php endforeach; ?>
 					</select>
 				</label>
 				<label for="service_padding_after">
-					<?php echo $this->_allowed_positions[self::PADDING_AFTER]; ?>&nbsp;
+					<?php echo $this->_allowed_positions[ self::PADDING_AFTER ]; ?>&nbsp;
 					<select id="service_padding_after" name="service_padding_after">
-						<?php foreach ($range as $value): ?>
-							<option value="<?php echo esc_attr( $value ); ?>" <?php selected($paddings[self::PADDING_AFTER], $value  ); ?>><?php echo esc_html( $value ); ?></option>
+						<?php foreach ( $range as $value ) :  ?>
+							<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $paddings[ self::PADDING_AFTER ], $value ); ?>><?php echo esc_html( $value ); ?></option>
 						<?php endforeach; ?>
 					</select>
 				</label>
@@ -207,31 +208,31 @@ class App_Schedule_Paddings {
 		<?php
 	}
 
-	public function add_worker_selection ($out, $worker_id) {
+	public function add_worker_selection( $out, $worker_id ) {
 		$options = appointments_get_options();
 		$paddings = array( self::PADDING_BEFORE => 0, self::PADDING_AFTER => 0 );
 		if ( isset( $options['worker_padding'][ $worker_id ] ) ) {
 			$paddings = $options['worker_padding'][ $worker_id ];
 		}
-		$range = range(0, 180, 5);
+		$range = range( 0, 180, 5 );
 
 		ob_start();
 		?>
         <div class="app-worker_padding">
-            <h4><?php esc_html_e('Padding times', 'appointments'); ?></h4>
+            <h4><?php esc_html_e( 'Padding times', 'appointments' ); ?></h4>
             <label for="worker_padding_before-<?php echo esc_attr( $worker_id ); ?>">
-				<?php echo $this->_allowed_positions[self::PADDING_BEFORE]; ?>&nbsp;
+				<?php echo $this->_allowed_positions[ self::PADDING_BEFORE ]; ?>&nbsp;
                 <select id="worker_padding_before-<?php echo esc_attr( $worker_id ); ?>" name="worker_padding_before[<?php echo esc_attr( $worker_id ); ?>]">
-					<?php foreach ($range as $value): ?>
-                        <option value="<?php echo esc_attr( $value ); ?>" <?php selected($paddings[self::PADDING_BEFORE], $value  ); ?>><?php echo esc_html( $value ); ?></option>
+					<?php foreach ( $range as $value ) :  ?>
+                        <option value="<?php echo esc_attr( $value ); ?>" <?php selected( $paddings[ self::PADDING_BEFORE ], $value ); ?>><?php echo esc_html( $value ); ?></option>
 					<?php endforeach; ?>
                 </select>
             </label>
             <label for="worker_padding_after-<?php echo esc_attr( $worker_id ); ?>">
-				<?php echo $this->_allowed_positions[self::PADDING_AFTER]; ?>&nbsp;
+				<?php echo $this->_allowed_positions[ self::PADDING_AFTER ]; ?>&nbsp;
                 <select id="worker_padding_after-<?php echo esc_attr( $worker_id ); ?>" name="worker_padding_after[<?php echo esc_attr( $worker_id ); ?>]">
-					<?php foreach ($range as $value): ?>
-                        <option value="<?php echo esc_attr( $value ); ?>" <?php selected($paddings[self::PADDING_AFTER], $value  ); ?>><?php echo esc_html( $value ); ?></option>
+					<?php foreach ( $range as $value ) :  ?>
+                        <option value="<?php echo esc_attr( $value ); ?>" <?php selected( $paddings[ self::PADDING_AFTER ], $value ); ?>><?php echo esc_html( $value ); ?></option>
 					<?php endforeach; ?>
                 </select>
             </label>
@@ -242,25 +243,25 @@ class App_Schedule_Paddings {
 
 	public function add_new_worker_selection() {
 		$paddings = array( self::PADDING_BEFORE => 0, self::PADDING_AFTER => 0 );
-		$range = range(0, 180, 5);
+		$range = range( 0, 180, 5 );
 
 		?>
 		<tr>
-			<th scope="row"><?php esc_html_e('Padding times', 'appointments'); ?></th>
+			<th scope="row"><?php esc_html_e( 'Padding times', 'appointments' ); ?></th>
 			<td>
 				<label for="worker_padding_before">
-					<?php echo $this->_allowed_positions[self::PADDING_BEFORE]; ?>&nbsp;
+					<?php echo $this->_allowed_positions[ self::PADDING_BEFORE ]; ?>&nbsp;
 					<select id="worker_padding_before" name="worker_padding_before">
-						<?php foreach ($range as $value): ?>
-							<option value="<?php echo esc_attr( $value ); ?>" <?php selected($paddings[self::PADDING_BEFORE], $value  ); ?>><?php echo esc_html( $value ); ?></option>
+						<?php foreach ( $range as $value ) :  ?>
+							<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $paddings[ self::PADDING_BEFORE ], $value ); ?>><?php echo esc_html( $value ); ?></option>
 						<?php endforeach; ?>
 					</select>
 				</label>
 				<label for="worker_padding_after">
-					<?php echo $this->_allowed_positions[self::PADDING_AFTER]; ?>&nbsp;
+					<?php echo $this->_allowed_positions[ self::PADDING_AFTER ]; ?>&nbsp;
 					<select id="worker_padding_after" name="worker_padding_after">
-						<?php foreach ($range as $value): ?>
-							<option value="<?php echo esc_attr( $value ); ?>" <?php selected($paddings[self::PADDING_AFTER], $value  ); ?>><?php echo esc_html( $value ); ?></option>
+						<?php foreach ( $range as $value ) :  ?>
+							<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $paddings[ self::PADDING_AFTER ], $value ); ?>><?php echo esc_html( $value ); ?></option>
 						<?php endforeach; ?>
 					</select>
 				</label>
@@ -269,7 +270,7 @@ class App_Schedule_Paddings {
 		<?php
 	}
 
-	public function save_service_padding ($service_id) {
+	public function save_service_padding( $service_id ) {
 		if (
 				isset( $_POST['service_padding_before'] )
 				&& is_array( $_POST['service_padding_before'] )
@@ -280,24 +281,22 @@ class App_Schedule_Paddings {
 		) {
 			$before = absint( $_POST['service_padding_before'][ $service_id ] );
 			$after = absint( $_POST['service_padding_after'][ $service_id ] );
-		}
-		elseif ( isset( $_POST['service_padding_before'] ) && isset( $_POST['service_padding_after'] ) ) {
+		} elseif ( isset( $_POST['service_padding_before'] ) && isset( $_POST['service_padding_after'] ) ) {
 			$before = absint( $_POST['service_padding_before'] );
 			$after = absint( $_POST['service_padding_after'] );
-		}
-		else {
+		} else {
 			return;
 		}
 
-		$services_padding = get_option('appointments_services_padding', array());
-		$services_padding[$service_id] = array(
+		$services_padding = get_option( 'appointments_services_padding', array() );
+		$services_padding[ $service_id ] = array(
 			self::PADDING_BEFORE => $before,
 			self::PADDING_AFTER => $after,
 		);
-		update_option('appointments_services_padding', $services_padding);
+		update_option( 'appointments_services_padding', $services_padding );
 
 		$options = appointments_get_options();
-		$options['service_padding'][$service_id] = array( 'before' => $before, 'after' => $after );
+		$options['service_padding'][ $service_id ] = array( 'before' => $before, 'after' => $after );
 		appointments_update_options( $options );
 	}
 
@@ -307,7 +306,7 @@ class App_Schedule_Paddings {
 
 		$services_padding = get_option( 'appointments_services_padding', array() );
 
-		$services_padding[$service_id] = array(
+		$services_padding[ $service_id ] = array(
 			self::PADDING_BEFORE => $before,
 			self::PADDING_AFTER => $after,
 		);
@@ -317,7 +316,7 @@ class App_Schedule_Paddings {
 		appointments_update_options( $options );
 	}
 
-	public function save_worker_padding ($worker_id) {
+	public function save_worker_padding( $worker_id ) {
 		if (
 				isset( $_POST['worker_padding_before'] )
 				&& is_array( $_POST['worker_padding_before'] )
@@ -328,23 +327,21 @@ class App_Schedule_Paddings {
 		) {
 			$before = absint( $_POST['worker_padding_before'][ $worker_id ] );
 			$after = absint( $_POST['worker_padding_after'][ $worker_id ] );
-		}
-		elseif ( isset( $_POST['worker_padding_before'] ) && isset( $_POST['worker_padding_after'] ) ) {
+		} elseif ( isset( $_POST['worker_padding_before'] ) && isset( $_POST['worker_padding_after'] ) ) {
 			$before = absint( $_POST['worker_padding_before'] );
 			$after = absint( $_POST['worker_padding_after'] );
-		}
-		else {
+		} else {
 			return;
 		}
 
-		$workers_padding = get_option('appointments_workers_padding', array());
-		$workers_padding[$worker_id] = array(
+		$workers_padding = get_option( 'appointments_workers_padding', array() );
+		$workers_padding[ $worker_id ] = array(
 			self::PADDING_BEFORE => $before,
 			self::PADDING_AFTER => $after,
 		);
-		update_option('appointments_workers_padding', $workers_padding);
+		update_option( 'appointments_workers_padding', $workers_padding );
 		$options = appointments_get_options();
-		$options['worker_padding'][$worker_id] = array( 'before' => $before, 'after' => $after );
+		$options['worker_padding'][ $worker_id ] = array( 'before' => $before, 'after' => $after );
 		appointments_update_options( $options );
 	}
 
@@ -352,7 +349,7 @@ class App_Schedule_Paddings {
 	 * Set up the padding increment on both ends
 	 * and dispatch start time tweak.
 	 */
-	public function apply_step_increment_padding ($step) {
+	public function apply_step_increment_padding( $step ) {
 		$before = $this->_get_padding_before();
 		$after = $this->_get_padding_after();
 
@@ -363,26 +360,26 @@ class App_Schedule_Paddings {
 		return $before + $step + $after;
 	}
 
-	public function apply_service_padding_before ($ccs) {
+	public function apply_service_padding_before( $ccs ) {
 		$before = $this->_get_padding_before();
-		return $ccs + (int)$before;
+		return $ccs + (int) $before;
 	}
 
-	private function _get_padding_before () {
+	private function _get_padding_before() {
 		$service_padding = $this->_get_current_service_padding();
 		$worker_padding = $this->_get_current_worker_padding();
 
-		$service_time = !empty($service_padding[self::PADDING_BEFORE])
-			? (int)$service_padding[self::PADDING_BEFORE]
+		$service_time = ! empty( $service_padding[ self::PADDING_BEFORE ] )
+			? (int) $service_padding[ self::PADDING_BEFORE ]
 			: 0
 		;
-		$worker_time = !empty($worker_padding[self::PADDING_BEFORE])
-			? (int)$worker_padding[self::PADDING_BEFORE]
+		$worker_time = ! empty( $worker_padding[ self::PADDING_BEFORE ] )
+			? (int) $worker_padding[ self::PADDING_BEFORE ]
 			: 0
 		;
 		$additive = 0;
 		$options = appointments_get_options();
-		switch ($options['schedule_padding']['type']) {
+		switch ( $options['schedule_padding']['type'] ) {
 			case self::PADDING_TYPE_CUMULATIVE:
 				$additive = $service_time + $worker_time;
 				break;
@@ -394,24 +391,24 @@ class App_Schedule_Paddings {
 				$additive = $service_time > $worker_time ? $service_time : $worker_time;
 				break;
 		}
-		return $additive*60;
+		return $additive * 60;
 	}
 
-	public function _get_padding_after () {
+	public function _get_padding_after() {
 		$service_padding = $this->_get_current_service_padding();
 		$worker_padding = $this->_get_current_worker_padding();
 
-		$service_time = !empty($service_padding[self::PADDING_AFTER])
-			? (int)$service_padding[self::PADDING_AFTER]
+		$service_time = ! empty( $service_padding[ self::PADDING_AFTER ] )
+			? (int) $service_padding[ self::PADDING_AFTER ]
 			: 0
 		;
-		$worker_time = !empty($worker_padding[self::PADDING_AFTER])
-			? (int)$worker_padding[self::PADDING_AFTER]
+		$worker_time = ! empty( $worker_padding[ self::PADDING_AFTER ] )
+			? (int) $worker_padding[ self::PADDING_AFTER ]
 			: 0
 		;
 		$additive = 0;
 		$options = appointments_get_options();
-		switch ($options['schedule_padding']['type']) {
+		switch ( $options['schedule_padding']['type'] ) {
 			case self::PADDING_TYPE_CUMULATIVE:
 				$additive = $service_time + $worker_time;
 				break;
@@ -423,102 +420,118 @@ class App_Schedule_Paddings {
 				$additive = $service_time > $worker_time ? $service_time : $worker_time;
 				break;
 		}
-		return $additive*60;
+		return $additive * 60;
 	}
 
-	private function _get_current_worker_padding () {
+	private function _get_current_worker_padding() {
 	    $options = appointments_get_options();
-		if ($this->_core->worker && !empty($this->_data['worker_padding'][$this->_core->worker])) {
+		if ( $this->_core->worker && ! empty( $this->_data['worker_padding'][ $this->_core->worker ] ) ) {
 			// Determine the service padding
-			return $options['worker_padding'][$this->_core->worker];
+			return $options['worker_padding'][ $this->_core->worker ];
 		}
 		return false;
 	}
 
-	private function _get_current_service_padding () {
+	private function _get_current_service_padding() {
 		global $current_screen;
-		if( is_admin() && !empty($current_screen) && $current_screen->id == 'appointments_page_app_settings'){
-			if( !empty($_REQUEST['tab']) && $_REQUEST['tab'] == 'working_hours' ){
+		if ( is_admin() && ! empty( $current_screen ) && $current_screen->id == 'appointments_page_app_settings' ) {
+			if ( ! empty( $_REQUEST['tab'] ) && $_REQUEST['tab'] == 'working_hours' ) {
 				$service = 0;
-				if( $this->_core->worker ){
-					$service = $this->resolve_service_id($this->_core->worker);
+				if ( $this->_core->worker ) {
+					$service = $this->resolve_service_id( $this->_core->worker );
 				} else {
 					$service = $this->resolve_service_id();
 				}
-	
+
 				$this->_core->service = $service ? $service : $this->_core->service;
 			}
 		} else if ( is_admin() && DOING_AJAX ) {
 			//Get service ID for the current appointment when using inline edit.
-			if($_REQUEST['action'] == 'inline_edit' && !empty($_REQUEST['app_id'])){
-				$app = appointments_get_appointment($_REQUEST['app_id']);
+			if ( $_REQUEST['action'] == 'inline_edit' && ! empty( $_REQUEST['app_id'] ) ) {
+				$app = appointments_get_appointment( $_REQUEST['app_id'] );
 				$this->_core->service = $app->service;
 			}
 		}
 		$options = appointments_get_options();
-		if ($this->_core->service && !empty($options['service_padding'][$this->_core->service])) {
+		if ( $this->_core->service && ! empty( $options['service_padding'][ $this->_core->service ] ) ) {
 			// Determine the service padding
-			return $options['service_padding'][$this->_core->service];
+			return $options['service_padding'][ $this->_core->service ];
 		}
 		return false;
 	}
-	
-	public function apply_admin_min_time_padding($time){
+
+	public function apply_admin_min_time_padding( $time ) {
 		return $time;
 	}
-	
-	private function resolve_service_id ($worker = false){
+
+	private function resolve_service_id( $worker = false ) {
 		//Try to guess the service ID related to the working hours.
 		//This would be accurate only for specific providers providing a single service.
 		$services = array();
-		if($worker){
+		if ( $worker ) {
 			$services = appointments_get_worker_services( $worker );
 		} else {
 			$services = appointments_get_services();
 		}
 
 		$options = appointments_get_options();
-		foreach( $services as $key => $service ){
-			if ($options['service_padding'][$service->ID][self::PADDING_BEFORE] || $options['service_padding'][$service->ID][self::PADDING_AFTER] ){
+		foreach ( $services as $key => $service ) {
+			if ( $options['service_padding'][ $service->ID ][ self::PADDING_BEFORE ] || $options['service_padding'][ $service->ID ][ self::PADDING_AFTER ] ) {
 				return $service->ID;
 			}
 		}
-	
+
 		return false;
 	}
 
 	// Include paddings of booked appointments in calendar
-	public function apointments_properties_for_calendar( $app_properties, $app, $args ){
+	public function apointments_properties_for_calendar( $app_properties, $app, $args ) {
 
 		$appoitment_paddings = 0;
 		$options = appointments_get_options();
 		$service = $app->service;
 		$worker = $app->worker;
 
-		if( isset( $options['service_padding'][$service] ) && ! empty( $options['service_padding'][$service] ) ){
+		if ( isset( $options['service_padding'][ $service ] ) && ! empty( $options['service_padding'][ $service ] ) ) {
 
-			foreach( $options['service_padding'][$service] as $key => $padding ){
-				if( is_numeric( $padding ) ){
-					$appoitment_paddings += (int) $padding;
-				}
-			}
-
-		}
-		
-		if( isset( $options['worker_padding'][$worker] ) && ! empty( $options['worker_padding'][$worker] ) ){
-
-			foreach( $options['worker_padding'][$worker] as $key => $padding ){
-				if( is_numeric( $padding ) ){
+			foreach ( $options['service_padding'][ $service ] as $key => $padding ) {
+				if ( is_numeric( $padding ) ) {
 					$appoitment_paddings += (int) $padding;
 				}
 			}
 		}
 
-		$end_timestamp = strtotime( $app_properties['end'] . ' + ' . $appoitment_paddings . ' minute');
-		$app_properties['end'] = date('Y-m-d H:i:s', $end_timestamp);
+		if ( isset( $options['worker_padding'][ $worker ] ) && ! empty( $options['worker_padding'][ $worker ] ) ) {
+
+			foreach ( $options['worker_padding'][ $worker ] as $key => $padding ) {
+				if ( is_numeric( $padding ) ) {
+					$appoitment_paddings += (int) $padding;
+				}
+			}
+		}
+
+		$end_timestamp = strtotime( $app_properties['end'] . ' + ' . $appoitment_paddings . ' minute' );
+		$app_properties['end'] = date( 'Y-m-d H:i:s', $end_timestamp );
 
 		return $app_properties;
 	}
 
+	/**
+	 * Add service_padding to $service Object
+	 *
+	 * @since 2.3.0
+	 */
+	public function add_service_padding( $service ) {
+		$service->service_padding = false;
+		if ( is_object( $service ) && isset( $service->ID ) ) {
+			$options = appointments_get_options();
+			$paddings = array( self::PADDING_BEFORE => 0, self::PADDING_AFTER => 0 );
+			if ( isset( $options['service_padding'][ $service->ID ] ) ) {
+				$paddings = $options['service_padding'][ $service->ID ];
+			}
+			$service->service_padding = $paddings;
+		}
+		return $service;
+	}
 }
 App_Schedule_Paddings::serve();
