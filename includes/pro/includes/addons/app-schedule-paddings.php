@@ -161,16 +161,20 @@ class App_Schedule_Paddings {
             <label for="service_padding_before-<?php echo esc_attr( $service_id ); ?>">
                 <?php echo $this->_allowed_positions[ self::PADDING_BEFORE ]; ?>&nbsp;
                 <select id="service_padding_before-<?php echo esc_attr( $service_id ); ?>" name="service_padding_before[<?php echo esc_attr( $service_id ); ?>]">
-                    <?php foreach ( $range as $value ) :  ?>
-                        <option value="<?php echo esc_attr( $value ); ?>" <?php selected( $paddings[ self::PADDING_BEFORE ], $value ); ?>><?php echo esc_html( $value ); ?></option>
+                    <?php foreach ( $range as $value ) :
+						$label = appointment_convert_minutes_to_human_format( $value );
+?>
+                        <option value="<?php echo esc_attr( $value ); ?>" <?php selected( $paddings[ self::PADDING_BEFORE ], $value ); ?>><?php echo esc_html( $label ); ?></option>
                     <?php endforeach; ?>
                 </select>
             </label>
             <label for="service_padding_after-<?php echo esc_attr( $service_id ); ?>">
 		        <?php echo $this->_allowed_positions[ self::PADDING_AFTER ]; ?>&nbsp;
                 <select id="service_padding_after-<?php echo esc_attr( $service_id ); ?>" name="service_padding_after[<?php echo esc_attr( $service_id ); ?>]">
-			        <?php foreach ( $range as $value ) :  ?>
-                        <option value="<?php echo esc_attr( $value ); ?>" <?php selected( $paddings[ self::PADDING_AFTER ], $value ); ?>><?php echo esc_html( $value ); ?></option>
+                    <?php foreach ( $range as $value ) :
+						$label = appointment_convert_minutes_to_human_format( $value );
+?>
+                        <option value="<?php echo esc_attr( $value ); ?>" <?php selected( $paddings[ self::PADDING_AFTER ], $value ); ?>><?php echo esc_html( $label ); ?></option>
 			        <?php endforeach; ?>
                 </select>
             </label>
@@ -191,16 +195,20 @@ class App_Schedule_Paddings {
 				<label for="service_padding_before">
 					<?php echo $this->_allowed_positions[ self::PADDING_BEFORE ]; ?>&nbsp;
 					<select id="service_padding_before" name="service_padding_before">
-						<?php foreach ( $range as $value ) :  ?>
-							<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $paddings[ self::PADDING_BEFORE ], $value ); ?>><?php echo esc_html( $value ); ?></option>
+                        <?php foreach ( $range as $value ) :
+							$label = appointment_convert_minutes_to_human_format( $value );
+	?>
+							<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $paddings[ self::PADDING_BEFORE ], $value ); ?>><?php echo esc_html( $label ); ?></option>
 						<?php endforeach; ?>
 					</select>
 				</label>
 				<label for="service_padding_after">
 					<?php echo $this->_allowed_positions[ self::PADDING_AFTER ]; ?>&nbsp;
 					<select id="service_padding_after" name="service_padding_after">
-						<?php foreach ( $range as $value ) :  ?>
-							<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $paddings[ self::PADDING_AFTER ], $value ); ?>><?php echo esc_html( $value ); ?></option>
+                        <?php foreach ( $range as $value ) :
+							$label = appointment_convert_minutes_to_human_format( $value );
+?>
+							<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $paddings[ self::PADDING_AFTER ], $value ); ?>><?php echo esc_html( $label ); ?></option>
 						<?php endforeach; ?>
 					</select>
 				</label>
@@ -224,16 +232,20 @@ class App_Schedule_Paddings {
             <label for="worker_padding_before-<?php echo esc_attr( $worker_id ); ?>">
 				<?php echo $this->_allowed_positions[ self::PADDING_BEFORE ]; ?>&nbsp;
                 <select id="worker_padding_before-<?php echo esc_attr( $worker_id ); ?>" name="worker_padding_before[<?php echo esc_attr( $worker_id ); ?>]">
-					<?php foreach ( $range as $value ) :  ?>
-                        <option value="<?php echo esc_attr( $value ); ?>" <?php selected( $paddings[ self::PADDING_BEFORE ], $value ); ?>><?php echo esc_html( $value ); ?></option>
+                    <?php foreach ( $range as $value ) :
+						$label = appointment_convert_minutes_to_human_format( $value );
+	?>
+                        <option value="<?php echo esc_attr( $value ); ?>" <?php selected( $paddings[ self::PADDING_BEFORE ], $value ); ?>><?php echo esc_html( $label ); ?></option>
 					<?php endforeach; ?>
                 </select>
             </label>
             <label for="worker_padding_after-<?php echo esc_attr( $worker_id ); ?>">
 				<?php echo $this->_allowed_positions[ self::PADDING_AFTER ]; ?>&nbsp;
                 <select id="worker_padding_after-<?php echo esc_attr( $worker_id ); ?>" name="worker_padding_after[<?php echo esc_attr( $worker_id ); ?>]">
-					<?php foreach ( $range as $value ) :  ?>
-                        <option value="<?php echo esc_attr( $value ); ?>" <?php selected( $paddings[ self::PADDING_AFTER ], $value ); ?>><?php echo esc_html( $value ); ?></option>
+                    <?php foreach ( $range as $value ) :
+						$label = appointment_convert_minutes_to_human_format( $value );
+	?>
+                        <option value="<?php echo esc_attr( $value ); ?>" <?php selected( $paddings[ self::PADDING_AFTER ], $value ); ?>><?php echo esc_html( $label ); ?></option>
 					<?php endforeach; ?>
                 </select>
             </label>
@@ -253,16 +265,20 @@ class App_Schedule_Paddings {
 				<label for="worker_padding_before">
 					<?php echo $this->_allowed_positions[ self::PADDING_BEFORE ]; ?>&nbsp;
 					<select id="worker_padding_before" name="worker_padding_before">
-						<?php foreach ( $range as $value ) :  ?>
-							<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $paddings[ self::PADDING_BEFORE ], $value ); ?>><?php echo esc_html( $value ); ?></option>
+                        <?php foreach ( $range as $value ) :
+							$label = appointment_convert_minutes_to_human_format( $value );
+	?>
+							<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $paddings[ self::PADDING_BEFORE ], $value ); ?>><?php echo esc_html( $label ); ?></option>
 						<?php endforeach; ?>
 					</select>
 				</label>
 				<label for="worker_padding_after">
 					<?php echo $this->_allowed_positions[ self::PADDING_AFTER ]; ?>&nbsp;
 					<select id="worker_padding_after" name="worker_padding_after">
-						<?php foreach ( $range as $value ) :  ?>
-							<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $paddings[ self::PADDING_AFTER ], $value ); ?>><?php echo esc_html( $value ); ?></option>
+                        <?php foreach ( $range as $value ) :
+							$label = appointment_convert_minutes_to_human_format( $value );
+	?>
+							<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $paddings[ self::PADDING_AFTER ], $value ); ?>><?php echo esc_html( $label ); ?></option>
 						<?php endforeach; ?>
 					</select>
 				</label>
