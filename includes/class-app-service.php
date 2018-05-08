@@ -191,11 +191,8 @@ function appointments_update_service( $service_id, $args ) {
  */
 function appointments_get_service( $service_id ) {
 	global $wpdb;
-
 	$table = appointments_get_table( 'services' );
-
 	$service = wp_cache_get( $service_id, 'app_services' );
-
 	if ( ! $service ) {
 		$service = $wpdb->get_row(
 			$wpdb->prepare(
@@ -203,16 +200,19 @@ function appointments_get_service( $service_id ) {
 				$service_id
 			)
 		);
-
+		/**
+		 * Allow to modify service data
+		 *
+		 * @since 2.3.0
+		 */
+		$service = apply_filters( 'appointments_get_service', $service );
 		if ( $service ) {
 			wp_cache_add( $service->ID, $service, 'app_services' );
 		}
 	}
-
 	if ( $service ) {
 		return new Appointments_Service( $service );
 	}
-
 	return false;
 }
 

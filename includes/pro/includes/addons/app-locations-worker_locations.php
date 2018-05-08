@@ -16,20 +16,21 @@ class App_Locations_WorkerLocations {
 	private $_data;
 	private $_locations;
 
-	private function __construct () {}
+	private function __construct() {}
 
-	public static function serve () {
+	public static function serve() {
 		$me = new App_Locations_WorkerLocations;
 		$me->_add_hooks();
 	}
 
-	private function _add_hooks () {
+	private function _add_hooks() {
 		// Init and dispatch post-init actions
-		add_action('app-locations-initialized', array($this, 'initialize'));
-		
+		add_action( 'app-locations-initialized', array( $this, 'initialize' ) );
+
 		// Augment worker settings pages
-		add_filter('app-settings-workers-worker-name', array($this, 'add_worker_selection'), 10, 2);
+		add_filter( 'app-settings-workers-worker-name', array( $this, 'add_worker_selection' ), 10, 2 );
 		add_action( 'appointments_add_new_worker_form', array( $this, 'add_new_worker_selection' ) );
+		add_filter( 'appointments_get_worker', array( $this, 'add_worker_location' ) );
 
 		// Save settings page
 		add_action( 'appointments_insert_worker', array( $this, 'save_worker_location' ) );
@@ -37,37 +38,37 @@ class App_Locations_WorkerLocations {
 		add_action( 'appointments_delete_worker', array( $this, 'delete_worker_location' ) );
 
 		// Add settings
-		add_action('appointments_locations_settings_section_settings', array($this, 'show_settings'));
-		add_filter('app-locations-before_save', array($this, 'save_settings'));
+		add_action( 'appointments_locations_settings_section_settings', array( $this, 'show_settings' ) );
+		add_filter( 'app-locations-before_save', array( $this, 'save_settings' ) );
 
-		add_action('admin_notices', array($this, 'show_nags'));
+		add_action( 'admin_notices', array( $this, 'show_nags' ) );
 
 		// Record appointment location
-		add_action('wpmudev_appointments_insert_appointment', array($this, 'record_appointment_location'), 40);
+		add_action( 'wpmudev_appointments_insert_appointment', array( $this, 'record_appointment_location' ), 40 );
 
 		add_filter( 'app-shortcodes-register', array( $this, 'register_shortcodes' ) );
 	}
 
-	function show_nags () {
-		if (!class_exists('App_Locations_Location') || !$this->_locations) {
+	function show_nags() {
+		if ( ! class_exists( 'App_Locations_Location' ) || ! $this->_locations ) {
 			echo '<div class="error"><p>' .
-				__("You'll need Locations add-on activated for Worker Locations integration add-on to work", 'appointments') .
+				__( "You'll need Locations add-on activated for Worker Locations integration add-on to work", 'appointments' ) .
 			'</p></div>';
 		}
 	}
 
-	public function initialize () {
-		if (!class_exists('App_Locations_Model')) return false;
+	public function initialize() {
+		if ( ! class_exists( 'App_Locations_Model' ) ) { return false; }
 		global $appointments;
 		$this->_data = $appointments->options;
-		if (empty($this->_data['worker_locations'])) $this->_data['worker_locations'] = array();
+		if ( empty( $this->_data['worker_locations'] ) ) { $this->_data['worker_locations'] = array(); }
 		$this->_locations = App_Locations_Model::get_instance();
 
-		if (empty($this->_data['worker_locations']['insert']) || 'manual' == $this->_data['worker_locations']['insert']) {
-			add_shortcode('app_worker_location', array($this, 'process_shortcode'));
+		if ( empty( $this->_data['worker_locations']['insert'] ) || 'manual' == $this->_data['worker_locations']['insert'] ) {
+			add_shortcode( 'app_worker_location', array( $this, 'process_shortcode' ) );
 		} else {
-			add_shortcode('app_worker_location', '__return_false');
-			add_filter('app-workers-worker_description', array($this, 'inject_location_markup'), 10, 3);
+			add_shortcode( 'app_worker_location', '__return_false' );
+			add_filter( 'app-workers-worker_description', array( $this, 'inject_location_markup' ), 10, 3 );
 		}
 
 		if ( empty( $this->_data['worker_locations']['insert'] ) ) {
@@ -82,66 +83,66 @@ class App_Locations_WorkerLocations {
 		return $shortcodes;
 	}
 
-	public function record_appointment_location ($appointment_id) {
+	public function record_appointment_location( $appointment_id ) {
 		global $wpdb, $appointments;
-		$appointment = appointments_get_appointment($appointment_id);
-		if (empty($appointment->worker)) return false;
+		$appointment = appointments_get_appointment( $appointment_id );
+		if ( empty( $appointment->worker ) ) { return false; }
 
-		$location_id = self::worker_to_location_id($appointment->worker);
-		if (!$location_id) return false;
+		$location_id = self::worker_to_location_id( $appointment->worker );
+		if ( ! $location_id ) { return false; }
 
-		appointments_update_appointment( $appointment_id, array('location' => $location_id) );
+		appointments_update_appointment( $appointment_id, array( 'location' => $location_id ) );
 	}
 
-	public function show_settings () {
+	public function show_settings() {
 		?>
-				<h3><?php _e('Worker Locations Settings', 'appointments') ?></h3>
+				<h3><?php _e( 'Worker Locations Settings', 'appointments' ) ?></h3>
 				<table class="form-table">
 					<tr>
-						<th scope="row"><label for="worker_locations-insert"><?php _e('Show worker location', 'appointments')?></label></th>
+						<th scope="row"><label for="worker_locations-insert"><?php _e( 'Show worker location', 'appointments' )?></label></th>
 						<td>
 							<select id="worker_locations-insert" name="worker_locations[insert]">
-								<option value="manual" <?php selected($this->_data['worker_locations']['insert'], 'manual'); ?> ><?php _e('I will add location info manually, using shortcode', 'appointments'); ?></option>
-								<option value="before" <?php selected($this->_data['worker_locations']['insert'], 'before'); ?> ><?php _e('Automatic, before worker description', 'appointments'); ?></option>
-								<option value="after" <?php selected($this->_data['worker_locations']['insert'], 'after'); ?> ><?php _e('Automatic, after worker description', 'appointments'); ?></option>
+								<option value="manual" <?php selected( $this->_data['worker_locations']['insert'], 'manual' ); ?> ><?php _e( 'I will add location info manually, using shortcode', 'appointments' ); ?></option>
+								<option value="before" <?php selected( $this->_data['worker_locations']['insert'], 'before' ); ?> ><?php _e( 'Automatic, before worker description', 'appointments' ); ?></option>
+								<option value="after" <?php selected( $this->_data['worker_locations']['insert'], 'after' ); ?> ><?php _e( 'Automatic, after worker description', 'appointments' ); ?></option>
 							</select>
-							<p class="description"><?php _e('You can use the shortcode like this: <code>[app_provider_locations]</code>', 'appointments'); ?></p>
+							<p class="description"><?php _e( 'You can use the shortcode like this: <code>[app_provider_locations]</code>', 'appointments' ); ?></p>
 						</td>
 					</tr>
 				</table>
 		<?php
 	}
 
-	public function save_settings ($options) {
-		if (empty($_POST['worker_locations'])) return $options;
+	public function save_settings( $options ) {
+		if ( empty( $_POST['worker_locations'] ) ) { return $options; }
 
-		$data = stripslashes_deep($_POST['worker_locations']);
-		$options['worker_locations']['insert'] = !empty($data['insert']) ? $data['insert'] : false;
+		$data = stripslashes_deep( $_POST['worker_locations'] );
+		$options['worker_locations']['insert'] = ! empty( $data['insert'] ) ? $data['insert'] : false;
 
 		return $options;
 	}
 
-	public function process_shortcode ($args=array(), $content='') {
-		$worker_id = !empty($args['worker_id']) ? $args['worker_id'] : false;
-		if (!$worker_id) {
+	public function process_shortcode( $args = array(), $content = '' ) {
+		$worker_id = ! empty( $args['worker_id'] ) ? $args['worker_id'] : false;
+		if ( ! $worker_id ) {
 			$post_id = get_queried_object_id();
-			$worker_id = $this->_map_description_post_to_worker_id($post_id);
+			$worker_id = $this->_map_description_post_to_worker_id( $post_id );
 		}
 
-		if (!$worker_id) return $content;
-		return $this->_get_worker_location_markup($worker_id, $content);
+		if ( ! $worker_id ) { return $content; }
+		return $this->_get_worker_location_markup( $worker_id, $content );
 	}
 
-	public function inject_location_markup ($markup, $worker, $description) {
-		if (!$worker || empty($worker->ID)) return $markup;
-		$out = $this->_get_worker_location_markup($worker->ID, '', ('content' == $description));
+	public function inject_location_markup( $markup, $worker, $description ) {
+		if ( ! $worker || empty( $worker->ID ) ) { return $markup; }
+		$out = $this->_get_worker_location_markup( $worker->ID, '', ('content' == $description) );
 		return ('before' == $this->_data['worker_locations']['insert'])
 			? $out . $markup
-			: $markup . $out 
+			: $markup . $out
 		;
 	}
 
-	public function add_worker_selection ($out, $worker_id) {
+	public function add_worker_selection( $out, $worker_id ) {
 		if ( ! class_exists( 'App_Locations_Model' ) || ! $this->_locations ) {
 			return $out;
 		}
@@ -175,7 +176,7 @@ class App_Locations_WorkerLocations {
 			<td>
 				<select name="worker_location" id="worker_location">
 					<option value=""></option>
-					<?php foreach ( $locations as $location ): ?>
+					<?php foreach ( $locations as $location ) :  ?>
 						<option value="<?php echo $location->get_id(); ?>"><?php echo esc_html( $location->get_admin_label() ); ?></option>
 					<?php endforeach; ?>
 				</select>
@@ -188,14 +189,11 @@ class App_Locations_WorkerLocations {
 		if ( isset( $_POST['worker_location'] ) && is_array( $_POST['worker_location'] ) && isset( $_POST['worker_location'][ $worker_id ] ) ) {
 			// Saving existing worker
 			$location_id = $_POST['worker_location'][ $worker_id ];
-		}
-		elseif ( isset( $_POST['worker_location'] ) ) {
+		} elseif ( isset( $_POST['worker_location'] ) ) {
 			$location_id = $_POST['worker_location'];
-		}
-		else {
+		} else {
 			return false;
 		}
-
 
 		$key = self::STORAGE_PREFIX . $worker_id;
 		$old_location_id = self::worker_to_location_id( $worker_id );
@@ -216,21 +214,19 @@ class App_Locations_WorkerLocations {
 		delete_option( $key );
 	}
 
-
-	public static function worker_to_location_id ($worker_id) {
-		if (!$worker_id) return false;
+	public static function worker_to_location_id( $worker_id ) {
+		if ( ! $worker_id ) { return false; }
 		$key = self::STORAGE_PREFIX . $worker_id;
-
-		return get_option($key, false);
-	}
-	
-	private function _worker_to_location ($worker_id) {
-		if (!$this->_locations) return false;
-		$location_id = self::worker_to_location_id($worker_id);
-		return $this->_locations->find_by('id', $location_id);
+		return get_option( $key, false );
 	}
 
-	private function _update_appointment_locations ($worker_id, $old_location_id, $location_id) {
+	private function _worker_to_location( $worker_id ) {
+		if ( ! $this->_locations ) { return false; }
+		$location_id = self::worker_to_location_id( $worker_id );
+		return $this->_locations->find_by( 'id', $location_id );
+	}
+
+	private function _update_appointment_locations( $worker_id, $old_location_id, $location_id ) {
 		if ( $old_location_id == $location_id ) {
 			return;
 		}
@@ -241,26 +237,39 @@ class App_Locations_WorkerLocations {
 		}
 	}
 
-	private function _get_worker_location_markup ($worker_id, $fallback='', $rich_content=true) {
-		$location = $this->_worker_to_location($worker_id);
-		if (!$location) return $fallback;
-		return $this->_get_location_markup($location, $rich_content);
+	private function _get_worker_location_markup( $worker_id, $fallback = '', $rich_content = true ) {
+		$location = $this->_worker_to_location( $worker_id );
+		if ( ! $location ) { return $fallback; }
+		return $this->_get_location_markup( $location, $rich_content );
 	}
 
-	private function _get_location_markup ($location, $rich_content=true) {
+	private function _get_location_markup( $location, $rich_content = true ) {
 		$lid = $location->get_id();
-		return '<div class="app-worker_description-location" id="app-worker_description-location-' . esc_attr($lid) . '">' .
-			apply_filters('app-locations-location_output', $location->get_display_markup($rich_content), $lid, $location) .
+		return '<div class="app-worker_description-location" id="app-worker_description-location-' . esc_attr( $lid ) . '">' .
+			apply_filters( 'app-locations-location_output', $location->get_display_markup( $rich_content ), $lid, $location ) .
 		'</div>';
 	}
 
-	private function _map_description_post_to_worker_id ($post_id) {
+	private function _map_description_post_to_worker_id( $post_id ) {
 		global $appointments, $wpdb;
 		$workers = appointments_get_workers( array( 'page' => $post_id ) );
-		if ( ! empty( $workers ) )
+		if ( ! empty( $workers ) ) {
 			return $workers[0]->ID;
-
+		}
 		return false;
+	}
+
+	/**
+	 * Add service_location to $service Object
+	 *
+	 * @since 2.3.0
+	 */
+	public function add_worker_location( $worker ) {
+		$worker->worker_location = false;
+		if ( is_object( $worker ) && isset( $worker->ID ) ) {
+			$worker->worker_location = self::worker_to_location_id( $worker->ID );
+		}
+		return $worker;
 	}
 }
 App_Locations_WorkerLocations::serve();
