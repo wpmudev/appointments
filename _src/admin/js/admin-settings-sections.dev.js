@@ -141,6 +141,7 @@ jQuery(document).ready( function( $ ) {
                 $('#worker-page',  section ).val( response.data.page );
                 $('#worker-price', section ).val( response.data.price );
                 $('#worker-user',  section ).val( response.data.ID );
+                $('#worker-user-display-name',  section ).html( response.data.display_name );
                 /**
                  * services_provided
                  */
