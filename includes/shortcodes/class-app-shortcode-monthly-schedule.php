@@ -41,7 +41,7 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 				'title' => array(
 					'type' => 'text',
 					'name' => __( 'Title', 'appointments' ),
-					'value' => __('<h3>Our schedule for START</h3>', 'appointments'),
+					'value' => sprintf( '<h3>%s</h3>', esc_html__('Our schedule for START', 'appointments') ),
 					'help' => __('Text that will be displayed as the schedule title. Placeholders START, WORKER and SERVICE will be automatically replaced by their real values.', 'appointments'),
 				),
 				'logged' => array(
@@ -58,7 +58,7 @@ if ( ! class_exists( 'App_Shortcode_Monthly_Schedule' ) ) {
 				),
 				'hide_today_times' => array(
 					'type' => 'checkbox',
-					'name' => __( 'Hide today\'s times', 'appointments' ),
+					'name' => __( "Hide today's times", 'appointments' ),
 					'value' => 0,
 					'help' => __('Checking this argument will hide the available appointment times until the user selects a day.', 'appointments'),
 				),

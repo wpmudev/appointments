@@ -4,6 +4,7 @@
 - Refactored "Service Providers" screan and use WP_List_Table class for the list.
 - Improved "Working Hours" and "Exceptions" tabs content on mobile devices.
 - Convert "Time base" on "Time Settings" to human readable. Props for David @ BBS.
+- Improved few translation strings.
 
 2018-xx-xx - 2.2.8
 -------------------------------

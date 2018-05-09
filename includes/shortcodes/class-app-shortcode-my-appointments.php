@@ -34,7 +34,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 			'title' => array(
 				'type' => 'text',
 				'name' => __( 'Title', 'appointments' ),
-				'value' => __( '<h3>My Appointments</h3>', 'appointments' ),
+				'value' => sprintf( '<h3>%s</h3>', esc_html__( 'My Appointments', 'appointments' ) ),
 				'help' => __( 'Title text.', 'appointments' ),
 			),
 			'status' => array(
