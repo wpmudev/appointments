@@ -136,6 +136,7 @@ body.appointments_page_app_settings .appointments-settings-tab-working_hours tab
 #app-export-date_range label,
 .app-shared_service label {
     display: block;
+    margin-bottom: .5em;
 }
 .app-flex {
     display: flex;
