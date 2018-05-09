@@ -190,6 +190,9 @@ function appointments_update_service( $service_id, $args ) {
  * @return bool|Appointments_Service
  */
 function appointments_get_service( $service_id ) {
+	if ( empty( $service_id ) ) {
+		return false;
+	}
 	global $wpdb;
 	$table = appointments_get_table( 'services' );
 	$service = wp_cache_get( $service_id, 'app_services' );
