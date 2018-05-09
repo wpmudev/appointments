@@ -30,7 +30,7 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 			'title' => array(
 				'type' => 'text',
 				'name' => __( 'Title', 'appointments' ),
-				'value' => sprintf( '<h3>%s</h3>', esc_html__ 'Our schedule from START to END', 'appointments' ) ),
+				'value' => sprintf( '<h3>%s</h3>', esc_html__( 'Our schedule from START to END', 'appointments' ) ),
 				'help' => __( 'Text that will be displayed as the schedule title. Placeholders START and END will be automatically replaced by their real values.', 'appointments' ),
 			),
 			'logged' => array(
