@@ -116,29 +116,29 @@ function appointments_is_available_time( $start, $end, $worker_id = 0, $location
  * @return bool
  */
 function appointments_is_working( $start, $end, $worker_id, $location = 0 ) {
-    /**
-     * check exceptional persolnal working days
-     */
-    if ( appointments_is_exceptional_working_day( $start, $end, $worker_id )) {
-        return true;
-    }
-    /**
-     * Persolnal holiday, but company work day
-     */
-    if ( appointments_is_worker_holiday( $worker_id, $start, $end, $location ) ) {
-        return false;
-    } else if ( appointments_is_exceptional_working_day( $start, $end ) ) {
-        return true;
-    }
-    if ( appointments_is_interval_break( $start, $end, $worker_id, $location ) ) {
-        return false;
-    }
+	/**
+	 * check exceptional persolnal working days
+	 */
+	if ( appointments_is_exceptional_working_day( $start, $end, $worker_id ) ) {
+		return true;
+	}
+	/**
+	 * Persolnal holiday, but company work day
+	 */
+	if ( appointments_is_worker_holiday( $worker_id, $start, $end, $location ) ) {
+		return false;
+	} else if ( appointments_is_exceptional_working_day( $start, $end ) ) {
+		return true;
+	}
+	if ( appointments_is_interval_break( $start, $end, $worker_id, $location ) ) {
+		return false;
+	}
 
-    if ( appointments_is_available_time( $start, $end, $worker_id, $location ) ) {
-        return true;
-    }
+	if ( appointments_is_available_time( $start, $end, $worker_id, $location ) ) {
+		return true;
+	}
 
-    return false;
+	return false;
 }
 
 /**
@@ -153,24 +153,24 @@ function appointments_is_working( $start, $end, $worker_id, $location = 0 ) {
  * @return bool
  */
 function appointments_is_exceptional_working_day( $start, $end, $worker_id = 0, $location = 0 ) {
-    $is_working_day = false;
-    $worker = appointments_get_worker( $worker_id );
+	$is_working_day = false;
+	$worker = appointments_get_worker( $worker_id );
 	$worker_exceptions = array();
-    if ( ! $worker ) {
-        $exceptions = appointments_get_worker_exceptions( $worker, 'open', $location );
+	if ( ! $worker ) {
+		$exceptions = appointments_get_worker_exceptions( $worker, 'open', $location );
 		if ( is_object( $exceptions ) ) {
 			$worker_exceptions = explode( ',', $exceptions->days );
 		}
-    } else {
-        $worker_exceptions = $worker->get_exceptions( 'open' );
-    }
-    if (
-        in_array( date( 'Y-m-d', $start ), $worker_exceptions )
-        || in_array( date( 'Y-m-d', $end ), $worker_exceptions )
-    ) {
-        $is_working_day = true;
-    }
-    return apply_filters( 'app_is_exceptional_working_day', $is_working_day, $start, $end, 0, $worker_id );
+	} else {
+		$worker_exceptions = $worker->get_exceptions( 'open' );
+	}
+	if (
+		in_array( date( 'Y-m-d', $start ), $worker_exceptions )
+		|| in_array( date( 'Y-m-d', $end ), $worker_exceptions )
+	) {
+		$is_working_day = true;
+	}
+	return apply_filters( 'app_is_exceptional_working_day', $is_working_day, $start, $end, 0, $worker_id );
 }
 
 

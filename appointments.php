@@ -1021,9 +1021,9 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * This function tries to separate logic from presentation in Appointments::get_timetables()
-	 * It's a first step to move this function to another place so do not use it
-	 */
+		 * This function tries to separate logic from presentation in Appointments::get_timetables()
+		 * It's a first step to move this function to another place so do not use it
+		 */
 		public function _get_timetable_slots( $day_start, $capacity, $schedule_key = false ) {
 			$timetable_key = $day_start . '-' . $capacity;
 			$local_time = current_time( 'timestamp' );
@@ -1084,6 +1084,7 @@ if ( ! class_exists( 'Appointments' ) ) {
 				$break_times = array();
 			}
 
+			$base_step = $step;
 			// Allow direct step increment manipulation,
 			// mainly for service duration based calculus start/stop times
 			$step = apply_filters( 'app-timetable-step_increment', $step, 'timetable' );
@@ -1100,7 +1101,7 @@ if ( ! class_exists( 'Appointments' ) ) {
 				$data = array();
 				for ( $t = $first; $t < $last; ) {
 					$ccs = apply_filters( 'app_ccs', $t ); 				// Current cell starts
-					$cce = apply_filters( 'app_cce', $ccs + $step );		// Current cell ends
+					$cce = apply_filters( 'app_cce', $ccs + $base_step );		// Current cell ends
 
 					// Fix for service durations calculus and workhours start conflict with different duration services
 					// Example: http://premium.wpmudev.org/forums/topic/problem-with-time-slots-not-properly-allocating-free-time
@@ -1344,7 +1345,6 @@ if ( ! class_exists( 'Appointments' ) ) {
 			if ( ! $w ) {
 				$w = $this->worker;
 			}
-
 			return appointments_is_interval_break( $ccs, $cce, $w, $this->location );
 		}
 
@@ -1505,8 +1505,6 @@ if ( ! class_exists( 'Appointments' ) ) {
 			);
 			return apppointments_is_range_busy( $start, $end, $args );
 		}
-
-
 
 		/**
 	 * Remove duplicate appointment objects by app ID

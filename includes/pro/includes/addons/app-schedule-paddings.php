@@ -369,11 +369,9 @@ class App_Schedule_Paddings {
 	public function apply_step_increment_padding( $step ) {
 		$before = $this->_get_padding_before();
 		$after = $this->_get_padding_after();
-
 		if ( ! empty( $before ) ) {
 			add_filter( 'app_ccs', array( $this, 'apply_service_padding_before' ) );
 		}
-
 		return $before + $step + $after;
 	}
 

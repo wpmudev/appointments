@@ -70,7 +70,8 @@
                         <option value=""><?php esc_html_e( 'Unknown', 'appointments' ); ?></option>
 <?php
 $_start_time = $app_id ? strtotime( $app->get_start_time() ): '';
-$slots = $appointments->_get_timetable_slots( $app->start, 0 );
+$day_start = strtotime( $app->start );
+$slots = $appointments->_get_timetable_slots( $day_start, 0 );
 foreach ( $slots as $slot ) {
 	$h = strtotime( $slot['hours'] );
 	printf(
