@@ -1024,11 +1024,14 @@ if ( ! class_exists( 'Appointments' ) ) {
 		 * This function tries to separate logic from presentation in Appointments::get_timetables()
 		 * It's a first step to move this function to another place so do not use it
 		 */
-		public function _get_timetable_slots( $day_start, $capacity, $schedule_key = false ) {
+		public function _get_timetable_slots( $day_start, $capacity, $schedule_key = false, $worker_id = 0 ) {
 			$timetable_key = $day_start . '-' . $capacity;
 			$local_time = current_time( 'timestamp' );
 
 			$this->get_lsw();
+			if ( ! empty( $worker_id ) ) {
+				$this->worker = $worker_id;
+			}
 
 			if ( ! $schedule_key ) {
 				$timetable_key .= '-0';
@@ -1047,6 +1050,7 @@ if ( ! class_exists( 'Appointments' ) ) {
 			$timetable_key .= '-' . $this->worker;
 			$timetable_key .= '-' . date( 'Ym', $time );
 
+			l( array( $day_start, date( 'c', $day_start ), $capacity, $timetable_key, $local_time, $this->service, $this->worker ) );
 			// Calculate step
 			$start = $end = 0;
 			if ( $min_max = $this->min_max_wh( 0, 0 ) ) {
@@ -1057,8 +1061,12 @@ if ( ! class_exists( 'Appointments' ) ) {
 				$start = 8;
 				$end = 18;
 			}
+
+			l( array( $start, $end ) );
+
 			$start = apply_filters( 'app_schedule_starting_hour', $start, $day_start, 'day' );
 			$end = apply_filters( 'app_schedule_ending_hour', $end, $day_start, 'day' );
+			l( array( $start, $end ) );
 
 			$first = $start * HOUR_IN_SECONDS + $day_start; // Timestamp of the first cell
 			$last = $end * HOUR_IN_SECONDS + $day_start; // Timestamp of the last cell

@@ -71,14 +71,24 @@
 <?php
 $_start_time = $app_id ? strtotime( $app->get_start_time() ): '';
 $day_start = strtotime( $app->start );
-$slots = $appointments->_get_timetable_slots( $day_start, 0 );
-foreach ( $slots as $slot ) {
-	$h = strtotime( $slot['hours'] );
+//$slots = $appointments->_get_timetable_slots( $day_start, 0, false, $app->worker );
+$slots = $appointments->_get_timetable_slots( $_start_time, 0, false, $app->worker );
+
+//$slots = $appointments->get_timetable_slots_by_date( $_start_time, $app->service, $app->worker );
+
+
+l( $slots );
+
+$a = appointments_get_worker_weekly_start_hours( $app->service, $app->worker, $app->location );
+l( $a );
+
+foreach ( $a as $slot ) {
+	$h = strtotime( $slot );
 	printf(
 		'<option value="%s" %s>%s</option>',
-		esc_attr( $slot['hours'] ),
+		esc_attr( $slot ),
 		selected( $_start_time, $h, false ),
-		esc_html( $slot['hours'] )
+		esc_html( $slot )
 	);
 }
 ?>
