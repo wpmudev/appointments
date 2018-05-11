@@ -110,7 +110,7 @@ class Appointments_Notifications_Removal extends Appointments_Notification {
 		}
 
 		if ( ! is_email( $email ) ) {
-			$this->manager->log( sprintf( __( 'Unable to notify the client about the appointment ID:%s removal, stopping.', 'appointments' ), $app_id ) );
+			$this->manager->log( sprintf( __( 'Unable to notify the client about the appointment ID: %s removal, stopping.', 'appointments' ), $app_id ) );
 			return false;
 		}
 
@@ -130,7 +130,7 @@ class Appointments_Notifications_Removal extends Appointments_Notification {
 			return false;
 		}
 
-		$this->manager->log( sprintf( __('Removal message sent to %s for appointment ID:%s','appointments'), $app->email, $app_id ) );
+		$this->manager->log( sprintf( __('Removal message sent to %s for appointment ID: %s','appointments'), $app->email, $app_id ) );
 
 		do_action( 'app_removal_sent', $template['body'], $app, $app_id, $email );
 
