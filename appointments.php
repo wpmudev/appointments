@@ -1103,6 +1103,11 @@ if ( ! class_exists( 'Appointments' ) ) {
 				$data = $this->timetables[ $timetable_key ];
 			} else {
 				$data = array();
+				$range_args = array(
+					'service_id' => $this->service,
+					'location_id' => $this->location,
+					'capacity' => $capacity,
+				);
 				for ( $t = $first; $t < $last; ) {
 					$ccs = apply_filters( 'app_ccs', $t ); 				// Current cell starts
 					$cce = apply_filters( 'app_cce', $ccs + $base_step );		// Current cell ends
@@ -1158,6 +1163,13 @@ if ( ! class_exists( 'Appointments' ) ) {
 					}
 					// End fixes area
 					$is_busy = false;
+					if ( 0 < $capacity && 0 == $worker_id ) {
+						add_filter( 'app-is_busy', '__return_false' );
+						$is_busy = apppointments_is_range_busy( $ccs, $cce, $range_args );
+						remove_filter( 'app-is_busy', '__return_false' );
+					} else {
+						$is_busy = $this->is_busy( $ccs, $cce, $capacity );
+					}
 					// Mark now
 					if ( $local_time > $ccs && $local_time < $cce ) {
 						$class_name = 'notpossible now';
@@ -1173,7 +1185,7 @@ if ( ! class_exists( 'Appointments' ) ) {
 					else if ( $this->is_break( $ccs, $cce ) ) {
 						$class_name = 'notpossible app_break';
 					} // Then look for appointments
-					else if ( $is_busy = $this->is_busy( $ccs, $cce, $capacity ) ) {
+					else if ( $is_busy  ) {
 						$class_name = 'busy';
 					} // Then check if we have enough time to fulfill this app
 					else if ( ! $this->is_service_possible( $ccs, $cce, $capacity ) ) {

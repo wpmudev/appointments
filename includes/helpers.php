@@ -716,7 +716,7 @@ function appointments_weekly_calendar( $date = false, $args = array() ) {
 		'location_id' => $args['location_id'],
 		'capacity' => $capacity,
 	);
-			do_action( 'app_schedule_before_first_row', '' );
+	do_action( 'app_schedule_before_first_row', '' );
 	foreach ( $slots['time_slots'] as $time_slot ) {
 		$from_time = date( appointments_get_date_format( 'time' ), strtotime( $time_slot['from'] ) );
 		$to_time = date( appointments_get_date_format( 'time' ), strtotime( $time_slot['to'] ) );
@@ -794,7 +794,7 @@ function appointments_weekly_calendar( $date = false, $args = array() ) {
 							$class_name = 'notpossible app_break';
 						} // Then look for appointments
 						else if ( $is_busy ) {
-							$class_name = 'busy aaa';
+							$class_name = 'busy';
 						} // Then check if we have enough time to fulfill this app
 						else if ( ! $appointments->is_service_possible( $datetime_start, $datetime_end, $capacity ) ) {
 							$class_name = 'notpossible service_notpossible';

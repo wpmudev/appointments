@@ -6,6 +6,7 @@
 - Convert "Time base" on "Time Settings" to human readable. Props for David @ BBS.
 - Improved few translation strings.
 - Added limit for "Service Capacity" on a service add and edit screen to the number of defined workers.
+- Fixed problem with more than one Service Provider on schedule table, when first is already busy, but secound is not.
 
 2018-xx-xx - 2.2.8
 -------------------------------

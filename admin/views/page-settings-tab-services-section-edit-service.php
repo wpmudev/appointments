@@ -2,7 +2,7 @@
 
 $min_time     = $appointments->get_min_time();
 $k_max        = apply_filters( 'app_selectable_durations', min( 24, (int) ( 1440 / $min_time ) ) );
-$number_of_workers = appointments_get_workers( array( 'count' => true, ) );
+$number_of_workers = appointments_get_workers( array( 'count' => true ) );
 
 $pages = apply_filters( 'app-service_description_pages-get_list', array() );
 if ( empty( $pages ) ) {
@@ -26,6 +26,7 @@ if ( empty( $pages ) ) {
 			</th>
 			<td>
 				<input id="service-capacity" type="number" name="service_capacity" value="" min="0" max="<?php echo esc_attr( $number_of_workers ); ?>" />
+                <p class="description"><?php esc_html_e( 'When you set up "Service Capacity" to "0" it will be limited only by the number of available Service Providers.', 'appointments' ); ?></p>
 			</td>
 		</tr>
 		<tr>
