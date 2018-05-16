@@ -13,7 +13,6 @@ $use_payments = ( 'yes' == $options['payment_required'] );
 			<p class="description"><?php printf( __( 'Whether you require a payment to accept appointments. If selected Yes, client is asked to pay through Paypal and the appointment will be in pending status until the payment is confirmed by Paypal IPN. If selected No, appointment will be in pending status until you manually approve it using the %s unless Auto Confirm is not set as Yes.', 'appointments' ), '<a href="' . admin_url( 'admin.php?page=appointments' ) . '">' . __( 'Appointments page', 'appointments' ) . '</a>' ) ?></p>
 		</td>
 	</tr>
-
 	<tr>
 		<th scope="row"><label for="currency"><?php _e( 'Currency', 'appointments' ) ?></label></th>
 		<td colspan="2">
@@ -21,7 +20,6 @@ $use_payments = ( 'yes' == $options['payment_required'] );
 				<?php
 				$sel_currency = ( $options['currency'] ) ? $options['currency'] : $options['currency'];
 				$currencies   = App_Template::get_currencies();
-
 				foreach ( $currencies as $k => $v ) {
 					echo '<option value="' . $k . '"' . ( $k == $sel_currency ? ' selected' : '' ) . '>' . esc_html( $v, true ) . '</option>' . "\n";
 				}
@@ -78,8 +76,8 @@ $use_payments = ( 'yes' == $options['payment_required'] );
 
 	<tr class="payment_row" <?php if ( ! $use_payments ) { echo 'style="display:none"'; } ?>>
 		<th scope="row"><label for="allow_free_autoconfirm"><?php _e( 'Allow zero-priced appointments auto-confirm', 'appointments' ) ?></label></th>
-		<td colspan="2">
-			<input value="1" <?php checked( true, @$options['allow_free_autoconfirm'] ); ?> name="allow_free_autoconfirm" id="allow_free_autoconfirm" type="checkbox"/>
+        <td colspan="2">
+            <?php _appointments_html_chceckbox( $options, 'allow_free_autoconfirm' ); ?>
 			<p class="description"><?php _e( 'Allow auto-confirm for zero-priced appointments in a paid environment.', 'appointments' ) ?></p>
 		</td>
 	</tr>
