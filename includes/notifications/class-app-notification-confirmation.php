@@ -67,7 +67,7 @@ class Appointments_Notifications_Confirmation extends Appointments_Notification 
 		}
 
 		if ( ! is_email( $email ) ) {
-			$this->manager->log( sprintf( __( 'Unable to notify the client about the appointment ID:%s confirmation, stopping.', 'appointments' ), $app_id ) );
+			$this->manager->log( sprintf( __( 'Unable to notify the client about the appointment ID: %s confirmation, stopping.', 'appointments' ), $app_id ) );
 			return false;
 		}
 
@@ -90,7 +90,7 @@ class Appointments_Notifications_Confirmation extends Appointments_Notification 
 			return false;
 		}
 
-		$this->manager->log( sprintf( __('Confirmation message sent to %s for appointment ID:%s','appointments'), $r->email, $app_id ) );
+		$this->manager->log( sprintf( __('Confirmation message sent to %s for appointment ID: %s','appointments'), $r->email, $app_id ) );
 
 		do_action( 'app_confirmation_sent', $template['body'], $r, $app_id, $email );
 

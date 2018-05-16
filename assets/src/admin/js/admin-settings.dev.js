@@ -96,7 +96,7 @@ jQuery( document ).ready( function( $ ) {
     $('.appointment-create-page a.button').on( 'click', function() {
         var value = $('select', $(this).closest('td') ).val();
         var data = {
-            action: 'make_an_appointment_page',
+            action: $(this).data('action'),
             _wpnonce: $(this).data('nonce'),
             app_page_type: value
         };

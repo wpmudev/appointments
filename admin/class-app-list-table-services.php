@@ -20,10 +20,21 @@ class Appointments_WP_List_Table_Services extends WP_List_Table {
 
 	public function column_default( $item, $column_name ) {
 		switch ( $column_name ) {
-			case 'capacity':
 			case 'price':
 				return $item->$column_name;
 		}
+	}
+
+	/**
+	 * Column capacity.
+	 *
+	 * @since 2.3.0
+	 */
+	public function column_capacity( $item ) {
+		if ( 0 === $item->capacity ) {
+			return __( 'Limited by number of Service Providers', 'appointments' );
+		}
+		return $item->capacity;
 	}
 
 	/**

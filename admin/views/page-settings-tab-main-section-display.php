@@ -4,13 +4,13 @@
 		<td>
 			&nbsp;<?php _e( 'with', 'appointments' ) ?>&nbsp;
 			<label for="app_page_type" class="screen-reader-text"><?php _e( 'Create an appointments date with this format', 'appointments' ); ?></label>
-			<select name="app_page_type" id="app_page_type">
+			<select>
 				<option value="one_month"><?php _e( 'current month\'s schedule', 'appointments' ) ?></option>
 				<option value="two_months" <?php selected( 'two_months' == @$options['app_page_type'] ); ?>><?php _e( 'current and next month\'s schedules', 'appointments' ) ?></option>
 				<option value="one_week" <?php selected( 'one_week' == @$options['app_page_type'] ); ?>><?php _e( 'current week\'s schedule', 'appointments' ) ?></option>
 				<option value="two_weeks" <?php selected( 'two_weeks' == @$options['app_page_type'] ); ?>><?php _e( 'current and next week\'s schedules', 'appointments' ) ?></option>
             </select>
-            <a href="#" id="app_create_page_button" class="button" data-nonce="<?php echo wp_create_nonce( 'appointment-create-page' ); ?>"><?php esc_html_e( 'Create page!', 'appointments' ); ?></a>
+            <a href="#" data-action="make_an_appointment_page" class="button" data-nonce="<?php echo wp_create_nonce( 'appointment-create-page' ); ?>"><?php esc_html_e( 'Create page!', 'appointments' ); ?></a>
 		</td>
 	</tr>
 
