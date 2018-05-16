@@ -54,32 +54,6 @@ jQuery( document ).ready( function( $ ) {
             $(this).parent().find('a.pickcolor').css('background-color', '#' + a);
     });
 
-    // LOGIN REQUIRED SETTING (Accesibility)
-    var apiDetail = $(".api_detail");
-    var loginRequiredSelect = $('select[name="login_required"]');
-    function toggleApiDetail() {
-        if (loginRequiredSelect.val() == 'yes') {
-            apiDetail.show();
-        }
-        else {
-            apiDetail.hide();
-        }
-    }
-    toggleApiDetail();
-    loginRequiredSelect.change( function() {
-        toggleApiDetail();
-    } );
-
-    // PAYMENT REQUIRED (Payments)
-    $('select[name="payment_required"]').change(function () {
-        if ($('select[name="payment_required"]').val() == "yes") {
-            $(".payment_row").show();
-        }
-        else {
-            $(".payment_row").hide();
-        }
-    });
-
     /**
      * Check Services Provided on Appointments Settings page
      */

@@ -374,7 +374,6 @@ class Appointments_Admin_Settings_Page {
 		$options['twitter-app_id']			= trim( $_POST['twitter-app_id'] );
 		$options['twitter-app_secret']		= trim( $_POST['twitter-app_secret'] );
 
-		$options['app_page_type']				= $_POST['app_page_type'];
 		$options['color_set']					= $_POST['color_set'];
 		foreach ( $appointments->get_classes() as $class => $name ) {
 			$options[ $class.'_color' ]			= $_POST[ $class.'_color' ];
