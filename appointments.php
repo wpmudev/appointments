@@ -60,6 +60,13 @@ if ( ! class_exists( 'Appointments' ) ) {
 		/** @var Appointments_Notifications_Manager */
 		public $notifications;
 
+		/**
+		 * @var Appointments_WP_Cron
+		 *
+		 * @since 2.3.0
+		 */
+		public $cron;
+
 		public $pro = false;
 
 		public $shortcodes = array();
@@ -74,6 +81,7 @@ if ( ! class_exists( 'Appointments' ) ) {
 			include_once( 'includes/class-app-notifications-manager.php' );
 			include_once( 'includes/class-app-api-logins.php' );
 			include_once( 'includes/class-app-sessions.php' );
+			include_once( 'includes/class-app-wp-cron.php' );
 
 			// Load premium features
 			if ( _appointments_is_pro() ) {
@@ -179,6 +187,7 @@ if ( ! class_exists( 'Appointments' ) ) {
 			}
 
 			$this->notifications = new Appointments_Notifications_Manager();
+			$this->cron = new Appointments_WP_Cron;
 		}
 
 

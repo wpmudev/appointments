@@ -1,3 +1,4 @@
+<p class="description"><?php _e( 'The General Data Protection Regulation (GDPR) (EU) 2016/679 is a regulation in EU law on data protection and privacy for all individuals within the European Union. It also addresses the export of personal data outside the EU. The GDPR aims primarily to give control to citizens and residents over their personal data and to simplify the regulatory environment for international business by unifying the regulation within the EU.'. 'appointments' ); ?></p>
 <table class="form-table">
 	<tr valign="top">
 		<th scope="row"><label for="gdpr_delete"><?php _e( 'Delete Appointments', 'appointments' ) ?></label></th>

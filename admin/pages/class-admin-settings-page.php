@@ -356,8 +356,8 @@ class Appointments_Admin_Settings_Page {
 			'send_reminder_worker',
 			'send_removal_notification',
 			'show_legend',
-            'log_emails',
-            'gdpr_delete',
+			'log_emails',
+			'gdpr_delete',
 		);
 		foreach ( $options_names as $name ) {
 			$options[ $name ] = isset( $_POST[ $name ] )? $_POST[ $name ]:'no';
@@ -424,6 +424,11 @@ class Appointments_Admin_Settings_Page {
 		$options['allow_cancel'] 				= @$_POST['allow_cancel'];
 		$options['cancel_page'] 				= @$_POST['cancel_page'];
 		$options['thank_page'] 				= @$_POST['thank_page'];
+
+		/**
+		 * GDPR
+		 */
+		$options['gdpr_number_of_days'] = filter_input( INPUT_POST, 'gdpr_number_of_days', FILTER_VALIDATE_INT );
 
 		$options = apply_filters( 'app-options-before_save', $options );
 

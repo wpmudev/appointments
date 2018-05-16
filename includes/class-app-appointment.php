@@ -19,34 +19,16 @@ class Appointments_Appointment {
 	public $sent_worker = '';
 	public $note = '';
 	public $gcal_ID = '';
-    public $gcal_updated = '';
-
-    /**
-     * GDPR wp_cron event name
-     */
-    private $gdpr_delete = 'appointments_gdpr_wp_cron';
+	public $gcal_updated = '';
 
 	public function __construct( $appointment ) {
-        if ( is_array( $appointment ) ) {
-            $appointment = (object) $appointment;
+		if ( is_array( $appointment ) ) {
+			$appointment = (object) $appointment;
 		}
 		foreach ( get_object_vars( $appointment ) as $key => $value ) {
 			$this->$key = $this->_sanitize_field( $key, $value );
-        }
-        /**
-         * GDPR - delete
-         */
-        if ( ! wp_next_scheduled( $this->gdpr_delete ) ) {
-              wp_schedule_event( time(), 'hourly', $this->gdpr_delete );
-        }
-
-        add_action( $this->gdpr_delete, array( $this, 'gdpr_check_and_delete' ) );
-    }
-
-    public function gdpr_check_and_delete() {
-        $value = appointments_get_option( 'gdpr_delete' );
-        l($value);
-    }
+		}
+	}
 
 	public function __get( $name ) {
 		$value = false;
