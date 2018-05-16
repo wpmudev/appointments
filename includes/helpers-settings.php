@@ -71,7 +71,9 @@ function appointments_get_default_options() {
 		'allow_cancel'				=> 'no',
 		'cancel_page'				=> 0,
 		'thank_page'				=> 0,
-		'keep_options_on_uninstall' => true
+        'keep_options_on_uninstall' => true,
+        'gdpr_delete'               => 'no',
+        'gdpr_number_of_days'       => 28,
 	) );
 }
 

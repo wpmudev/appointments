@@ -43,6 +43,7 @@ class Appointments_Admin_Settings_Page {
 				'payments' => __( 'Payments', 'appointments' ),
 				'notifications' => __( 'Notifications', 'appointments' ),
 				'advanced' => __( 'Advanced', 'appointments' ),
+				'gdpr' => __( 'GDPR', 'appointments' ),
 			),
 			'services' => array(
 				'services' => __( 'Services', 'appointments' ),
@@ -355,7 +356,8 @@ class Appointments_Admin_Settings_Page {
 			'send_reminder_worker',
 			'send_removal_notification',
 			'show_legend',
-			'log_emails',
+            'log_emails',
+            'gdpr_delete',
 		);
 		foreach ( $options_names as $name ) {
 			$options[ $name ] = isset( $_POST[ $name ] )? $_POST[ $name ]:'no';
