@@ -358,6 +358,7 @@ class Appointments_Admin_Settings_Page {
 			'show_legend',
 			'log_emails',
 			'gdpr_delete',
+			'gdpr_checkbox_show',
 		);
 		foreach ( $options_names as $name ) {
 			$options[ $name ] = isset( $_POST[ $name ] )? $_POST[ $name ]:'no';
@@ -429,6 +430,8 @@ class Appointments_Admin_Settings_Page {
 		 * GDPR
 		 */
 		$options['gdpr_number_of_days'] = filter_input( INPUT_POST, 'gdpr_number_of_days', FILTER_VALIDATE_INT );
+		$options['gdpr_checkbox_text'] = filter_input( INPUT_POST, 'gdpr_checkbox_text', FILTER_SANITIZE_STRING );
+		$options['gdpr_checkbox_alert'] = filter_input( INPUT_POST, 'gdpr_checkbox_alert', FILTER_SANITIZE_STRING );
 
 		$options = apply_filters( 'app-options-before_save', $options );
 

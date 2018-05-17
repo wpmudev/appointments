@@ -10,6 +10,7 @@
 - Fixed a problem with not available calendars on Service Provider profile.
 - Improved UX on "Payments" tab for MarketPress integration.
 - GDPR: Added ability to delete older appointments. You can setup how long presents appointments should be stored in database.
+- GDPR: Added checkbox with agreement to process personal data.
 
 2018-xx-xx - 2.2.8
 -------------------------------

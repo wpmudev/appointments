@@ -546,7 +546,14 @@ class Appointments_AJAX {
 			wp_send_json( array( 'error' => __( 'Appointment could not be saved. Please contact website admin.', 'appointments') ) );
 		}
 
-		$insert_id = appointments_insert_appointment( $args );
+        $insert_id = appointments_insert_appointment( $args );
+
+        /**
+         * GDPR
+         */
+        if ( isset( $_REQUEST['app_gdpr'] ) && $_REQUEST['app_gdpr'] )  {
+            appointments_update_appointment_meta( $insert_id, 'gdpr_agree', time() );
+        }
 
 		appointments_clear_appointment_cache();
 
