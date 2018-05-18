@@ -79,6 +79,7 @@ function appointments_get_default_options() {
 		'keep_options_on_uninstall' => true,
 		'gdpr_delete'               => 'no',
 		'gdpr_number_of_days'       => 28,
+		'gdpr_number_of_days_user_erease' => 28,
 		'gdpr_checkbox_show'        => $gdpr_show,
 		'gdpr_checkbox_text'        => __( 'By using this form you agree with the storage and handling of your data by this website.', 'appointments' ),
 		'gdpr_checkbox_alert'       => __( 'Please accept the privacy checkbox.', 'appointments' ),

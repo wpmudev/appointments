@@ -883,6 +883,10 @@ function appointments_get_appointments( $args = array() ) {
 		'orderby' => 'ID',
 		'order' => 'ASC',
 		'count' => false,// Will return only the number of rows found
+		/**
+		 * since 2.3.0
+		 */
+		'email' => false,
 	);
 
 	$args = wp_parse_args( $args, $defaults );
@@ -908,6 +912,10 @@ function appointments_get_appointments( $args = array() ) {
 
 		if ( false !== $args['user'] ) {
 			$where[] = $wpdb->prepare( 'user = %d', $args['user'] );
+		}
+
+		if ( false !== $args['email'] ) {
+			$where[] = $wpdb->prepare( 'email = %s', $args['email'] );
 		}
 
 		if ( false !== $args['service'] && ! is_array( $args['service'] ) ) {
