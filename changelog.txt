@@ -11,7 +11,7 @@
 - Improved UX on "Payments" tab for MarketPress integration.
 - GDPR: Added ability to delete older appointments. You can setup how long presents appointments should be stored in database.
 - GDPR: Added checkbox with agreement to process personal data.
-- GDPR: Added plugin informations to default "Private Policy" page during autocreation of this page.
+- GDPR: Added plugin information to default "Private Policy" page during auto-creation of this page.
 
 2018-xx-xx - 2.2.8
 -------------------------------
