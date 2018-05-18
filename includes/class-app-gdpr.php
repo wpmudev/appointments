@@ -54,7 +54,7 @@ class Appointments_GDPR {
 	 */
 	private function get_plugin_friendly_name() {
 		$name = _x( 'Appointments Plugin', 'Free plugin name in personal data exporter.', 'appointments' );
-		$is_pro = apply_filters( 'appointments_is_pro'. false );
+		$is_pro = apply_filters( 'appointments_is_pro', false );
 		if ( $is_pro ) {
 			$name = _x( 'Appointments+ Plugin', 'Pro plugin name in personal data exporter.', 'appointments' );
 		}
