@@ -69,7 +69,7 @@ class Appointments_GDPR {
 		$content .= '<h3>' . __( 'Plugin: Appointments', 'appointments' ) . '</h3>';
 		$content .=
 			'<p>' . $suggested_text . __( 'When visitors book an appointment on the site we collect the data shown in the appointments form to allow future contact with a client.' ) . '</p>' .
-			'<p>' . __( 'All collected data is not shown publicly but we can send itto our workers or contractors who will perform ordered services.', 'appointments' ) . '</p>';
+			'<p>' . __( 'All collected data is not shown publicly but we can send it to our workers or contractors who will perform ordered services.', 'appointments' ) . '</p>';
 
 		$days = $this->get_number_of_days();
 		if ( 0 < $days ) {
