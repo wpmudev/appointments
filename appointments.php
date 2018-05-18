@@ -61,11 +61,11 @@ if ( ! class_exists( 'Appointments' ) ) {
 		public $notifications;
 
 		/**
-		 * @var Appointments_WP_Cron
+		 * @var Appointments_GDPR
 		 *
 		 * @since 2.3.0
 		 */
-		public $cron;
+		public $gdpr;
 
 		public $pro = false;
 
@@ -81,7 +81,7 @@ if ( ! class_exists( 'Appointments' ) ) {
 			include_once( 'includes/class-app-notifications-manager.php' );
 			include_once( 'includes/class-app-api-logins.php' );
 			include_once( 'includes/class-app-sessions.php' );
-			include_once( 'includes/class-app-wp-cron.php' );
+			include_once( 'includes/class-app-gdpr.php' );
 
 			// Load premium features
 			if ( _appointments_is_pro() ) {
@@ -187,9 +187,8 @@ if ( ! class_exists( 'Appointments' ) ) {
 			}
 
 			$this->notifications = new Appointments_Notifications_Manager();
-			$this->cron = new Appointments_WP_Cron;
+			$this->gdpr = new Appointments_GDPR;
 		}
-
 
 		public function load_admin() {
 			include_once( 'admin/class-app-admin.php' );
