@@ -1,3 +1,6 @@
+2018-xx-xx - 2.3.0
+-------------------------------
+
 2018-05-21 - 2.2.8
 -------------------------------
 - Fixed a problem with an appointment create time, it showed "Unknown" for Time Formats: "g:i a" and "g:i A".
