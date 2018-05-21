@@ -105,7 +105,7 @@ module.exports = function(grunt) {
                 domainPath: 'languages',
                 potHeaders: {
                     'report-msgid-bugs-to': 'https://wpmudev.org',
-                    'language-team': 'LANGUAGE <EMAIL@ADDRESS>'
+                    'language-team': 'WPMU DEV <support@wpmudev.org>'
                 },
                 type: 'wp-plugin',
                 updateTimestamp: true,
@@ -123,9 +123,6 @@ module.exports = function(grunt) {
                 }
             }
         },
-        /**
-         * update mo files
-         */
 		potomo: {
 			dist: {
 				options: {

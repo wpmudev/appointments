@@ -70,6 +70,12 @@ class App_Users_AdditionalFields {
 
 		// Add default options
 		add_action( 'appointments_default_options', array( $this, 'default_options' ) );
+
+		/**
+		 * GDPR export data
+		 * @since 2.3.0
+		 */
+		add_filter( 'appointments_gdpr_export', array( $this, 'gdpr_add_data_to_export' ), 10, 3 );
 	}
 
 	public function default_options( $defaults ) {
@@ -674,6 +680,40 @@ EO_ADMIN_JS;
 
 		$app_data = wp_parse_args( $app_data, $defaults );
 		return $app_data;
+	}
+
+	/**
+	 * Add additional fields data to GDPR export.
+	 *
+	 * @since 2.3.0
+	 *
+	 * @param array $item Export data for appointment.
+	 * @param string $email Appointment email.
+	 * @param object $appointment Single appointment data object.
+	 */
+	public function gdpr_add_data_to_export( $item, $email, $appointment ) {
+		$fields = $this->_get_additional_fields();
+		$meta = $this->_get_appointment_meta( $appointment->ID );
+		if ( empty( $meta ) ) {
+			return $item;
+		}
+		foreach ( $meta as $key => $value ) {
+			$name = $key;
+			$value = $value;
+			foreach ( $fields as $field ) {
+				if ( $field->name === $key ) {
+					$name = $field->label;
+					if ( 'checkbox' === $field->type ) {
+						$value = $value? __( 'checked', 'appointments' ):__( 'not checked', 'appointments' );
+					}
+				}
+			}
+			$item['data'][] = array(
+				'name' => $name,
+				'value' => $value,
+			);
+		}
+		return $item;
 	}
 }
 App_Users_AdditionalFields::serve();

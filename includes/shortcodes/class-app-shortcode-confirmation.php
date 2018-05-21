@@ -132,12 +132,15 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 							$c = $city_meta; }
 		}
 		$ret = '';
-
+		/**
+		 * GDPR
+		 */
+		$gdpr_checkbox_show = appointments_get_option( 'gdpr_checkbox_show' );
+		$gdpr_checkbox_show = 'yes' === $gdpr_checkbox_show;
 		ob_start();
-
 		?>
 		<div class="appointments-confirmation-wrapper">
-			<fieldset>
+			<fieldset class="<?php echo esc_attr( $gdpr_checkbox_show? 'check-gdpr-agree':'' ); ?>">
 				<legend><?php echo $args['title']; ?></legend>
 				<div class="appointments-confirmation-service"></div>
 				<div class="appointments-confirmation-worker" style="display:none"></div>
@@ -193,9 +196,14 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 					$ret = apply_filters( 'app_additional_fields', $ret );
 					ob_start();
 				?>
-
 				<div style="clear:both"></div>
-
+<?php if ( $gdpr_checkbox_show ) { ?>
+				<div class="appointments-gdpr-confirmation">
+					<label data-alert="<?php echo esc_attr( appointments_get_option( 'gdpr_checkbox_alert' ) ); ?>">
+						<input type="checkbox" class="appointments-gdpr-agree" id="<?php echo esc_attr( apply_filters( 'app-shortcode-confirmation-gdpr_field_id', 'appointments-field-gdpr-agree' ) ); ?>" />&nbsp;<?php echo esc_html( appointments_get_option( 'gdpr_checkbox_text' ) ); ?>
+					</label>
+				</div>
+<?php } ?>
 				<div class="appointments-confirmation-buttons">
 					<input type="hidden" class="appointments-confirmation-final-value" />
 					<input type="button" class="appointments-confirmation-button" value="<?php echo esc_attr( $button_text ); ?>" />
@@ -224,14 +232,16 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 			'askAddress' => $appointments->options['ask_address'],
 			'askCity' => $appointments->options['ask_city'],
 			'askNote' => $appointments->options['ask_note'],
+			'askGDPR' => $appointments->options['ask_note'],
 			'askGCal' => isset( $appointments->options['gcal'] ) && 'yes' == $appointments->options['gcal'],
+			'askGDPR' => isset( $appointments->options['gdpr_checkbox_show'] ) && 'yes' == $appointments->options['gdpr_checkbox_show'],
 			'warningText' => esc_js( $args['warning_text'] ),
 			'confirmationText' => esc_js( $args['confirm_text'] ),
 			'connectionErrorText' => esc_js( __( 'A connection problem occurred. Please try again.','appointments' ) ),
+			'GDPRmissingText' => esc_js( $appointments->options['gdpr_checkbox_alert'] ),
 			'errorTitle' => esc_js( __( 'Error', 'appointments' ) ),
 		);
 		wp_localize_script( 'app-shortcode-confirmation', 'AppShortcodeConfirmation', $i10n );
-
 		return $ret;
 	}
 }
