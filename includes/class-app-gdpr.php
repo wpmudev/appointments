@@ -29,11 +29,11 @@ class Appointments_GDPR {
 		/**
 		 * Adding the Personal Data Exporter
 		 */
-		add_filter( 'wp_privacy_personal_data_exporters', array( $this, 'register_plugin_exporter' ) );
+		add_filter( 'wp_privacy_personal_data_exporters', array( $this, 'register_plugin_exporter' ), 10 );
 		/**
 		 * Adding the Personal Data Eraser
 		 */
-		add_filter( 'wp_privacy_personal_data_erasers', array( $this, 'register_plugin_eraser' ) );
+		add_filter( 'wp_privacy_personal_data_erasers', array( $this, 'register_plugin_eraser' ), 10 );
 	}
 
 	/**
@@ -61,7 +61,6 @@ class Appointments_GDPR {
 		return $name;
 	}
 
-
 	/**
 	 * Register plugin exporter.
 	 *
@@ -85,18 +84,66 @@ class Appointments_GDPR {
 		$export_items = array();
 		if ( count( $appointments ) ) {
 			foreach ( $appointments as $appointment ) {
-				$export_items[] = array(
-					'address' => $appointment->address,
-					'city' => $appointment->city,
-					'name' => $appointment->name,
-					'phone' => $appointment->phone,
+				$item = array(
+					'group_id' => 'appointments',
+					'group_label' => $this->get_plugin_friendly_name(),
+					'item_id' => 'appointments-'.$appointment->ID,
+					'data' => array(
+						array(
+							'name' => __( 'Name', 'appointments' ),
+							'value' => $appointment->name,
+						),
+						array(
+							'name' => __( 'Email', 'appointments' ),
+							'value' => $appointment->email,
+						),
+						array(
+							'name' => __( 'Phone', 'appointments' ),
+							'value' => $appointment->phone,
+						),
+						array(
+							'name' => __( 'Address', 'appointments' ),
+							'value' => $appointment->address,
+						),
+						array(
+							'name' => __( 'City', 'appointments' ),
+							'value' => $appointment->city,
+						),
+						array(
+							'name' => __( 'Note', 'appointments' ),
+							'value' => $appointment->notes,
+						),
+						array(
+							'name' => __( 'Create date', 'appointments' ),
+							'value' => $appointment->created,
+						),
+						array(
+							'name' => __( 'Start date', 'appointments' ),
+							'value' => $appointment->start,
+						),
+						array(
+							'name' => __( 'End date', 'appointments' ),
+							'value' => $appointment->end,
+						),
+					),
 				);
+				/**
+				 * Export single appointment row.
+				 *
+				 * @since 2.3.0
+				 *
+				 * @param array $item Export data for appointment.
+				 * @param string $email Appointment email.
+				 * @param object $appointment Single appointment data object.
+				 */
+				$export_items[] = apply_filters( 'appointments_gdpr_export', $item, $email, $appointment );
 			}
 		}
-		return array(
+		$export = array(
 			'data' => $export_items,
 			'done' => true,
 		);
+		return $export;
 	}
 
 	/**
@@ -118,17 +165,52 @@ class Appointments_GDPR {
 	 * @since 2.3.0
 	 */
 	public function plugin_eraser( $email, $page = 1 ) {
+		global $wpdb;
 		$days = intval( appointments_get_option( 'gdpr_number_of_days_user_erease' ) );
 		if ( 1 > $days ) {
 			return;
 		}
+		$messages = array();
 		$table = appointments_get_table( 'appointments' );
+		/**
+		 * count days
+		 */
+		$days = sprintf( '-%d day', $days );
 		$date = date( 'Y-m-d H:i', strtotime( $days ) );
-		$sql = $wpdb->prepare( "select ID from {$table} where start < %s", $date );
+		/**
+		 * delete
+		 */
+		$sql = $wpdb->prepare( "select ID from {$table} where email = %s and start < %s", $email, $date );
 		$results = $wpdb->get_col( $sql );
+		$count = 0;
 		foreach ( $results as $id ) {
-			appointments_delete_appointment( $id );
+			$result = appointments_delete_appointment( $id );
+			if ( $result ) {
+				$count++;
+			}
 		}
+		if ( 0 < $count ) {
+			$messages[] = sprintf( _n( 'We deleted %d appointment.', 'We deleted %d appointments', $count, 'appointments' ), $count );
+		} else {
+			$messages[] = __( 'We do not deleted any appointments.', 'appointments' );
+		}
+		/**
+		 * check how much left
+		 */
+		$sql = $wpdb->prepare( "select count(ID) from {$table} where email = %s", $email );
+		$items_retained = $wpdb->get_var( $sql );
+		if ( 0 < $items_retained ) {
+			$messages[] = sprintf( _n( 'We do not deleted %d appointment.', 'We do not deleted %d appointments', $count, 'appointments' ), $count );
+		}
+		/**
+		 * return
+		 */
+		return array(
+			'items_removed' => $count,
+			'items_retained' => $items_retained,
+			'messages' => $messages,
+			'done' => true,
+		);
 	}
 
 	/**
@@ -162,7 +244,6 @@ class Appointments_GDPR {
 		$content .=
 			'<p>'.__( 'When visitors book an appointment on the site we collect the data shown in the appointments form to allow future contact with a client.' ) . '</p>' .
 			'<p>' . __( 'All collected data is not shown publicly but we can send it to our workers or contractors who will perform ordered services.', 'appointments' ) . '</p>';
-
 		$days = $this->get_number_of_days();
 		if ( 0 < $days ) {
 			$days_desc = sprintf( _nx( '%d day', '%d days', $days, 'policy page days string', 'appointments' ), $days );
