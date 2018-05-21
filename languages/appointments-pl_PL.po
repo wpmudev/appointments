@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-05-21 09:13:13+00:00\n"
-"PO-Revision-Date: 2018-05-04 06:31:53+0000\n"
+"POT-Creation-Date: 2018-05-21 10:01:40+00:00\n"
+"PO-Revision-Date: 2018-05-21 09:58:28+0000\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,25 +18,25 @@ msgstr ""
 msgid "Google Calendar Settings"
 msgstr "Ustawienia Kalendarza Google"
 
-#: admin/admin-helpers.php:88 includes/gcal/views/settings-gcal-step-3.php:205
+#: admin/admin-helpers.php:88 includes/gcal/views/settings-gcal-step-3.php:208
 #: includes/integration/class-app-buddypress.php:238
 msgid "Save Changes"
 msgstr "Zapisz zmiany"
 
 #: admin/admin-helpers.php:121 admin/views/form-working-hours.php:53
 #: admin/views/form-working-hours.php:83
-#: includes/gcal/views/settings-gcal-step-3.php:61
-#: includes/pro/includes/addons/app-users-additional_fields.php:526
-#: includes/pro/includes/addons/app-users-additional_fields.php:564
+#: includes/gcal/views/settings-gcal-step-3.php:64
+#: includes/pro/includes/addons/app-users-additional_fields.php:532
+#: includes/pro/includes/addons/app-users-additional_fields.php:570
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:331
 msgid "Yes"
 msgstr "Tak"
 
 #: admin/admin-helpers.php:122 admin/views/form-working-hours.php:52
 #: admin/views/form-working-hours.php:82
-#: includes/gcal/views/settings-gcal-step-3.php:60
-#: includes/pro/includes/addons/app-users-additional_fields.php:526
-#: includes/pro/includes/addons/app-users-additional_fields.php:564
+#: includes/gcal/views/settings-gcal-step-3.php:63
+#: includes/pro/includes/addons/app-users-additional_fields.php:532
+#: includes/pro/includes/addons/app-users-additional_fields.php:570
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:332
 msgid "No"
 msgstr "Nie"
@@ -144,13 +144,15 @@ msgstr ""
 
 #: admin/app-faq.php:23
 msgid "What does service capacity mean? Can you give an example?"
-msgstr ""
+msgstr "Co oznacza pojemność usługi? Czy mogę dostać przykład?"
 
 #: admin/app-faq.php:24
 msgid ""
 "I have defined several services and service providers. For a particular "
 "service, there is no provider assigned. What happens?"
 msgstr ""
+"Zdefiniowano wiele usług i usługodawców. Dla poszczególnej usługi nie ma "
+"przypisanego usługodawcy. Co się stanie?"
 
 #: admin/app-faq.php:25
 msgid ""
@@ -170,6 +172,8 @@ msgid ""
 "What happens if a client was applying for an appointment but at the same "
 "time another client booked the same time slot?"
 msgstr ""
+"Co się dzieje jeżeli klient próbuje zarezerwować wizytę, ale w tym samym "
+"czasie inny klient zarezerwował ten sam termin?"
 
 #: admin/app-faq.php:28
 msgid "What does the Built-in Cache do? Can I still use other caching plugins?"
@@ -193,7 +197,7 @@ msgstr ""
 msgid ""
 "How does integration with Membership work? Are there any special "
 "considerations?"
-msgstr ""
+msgstr "Jak działa integracja z Membership? Czy coś wymaga specjalnej uwagi?"
 
 #: admin/app-faq.php:33
 msgid "What does DUMMY service provider mean? How can I get use of it?"
@@ -226,6 +230,8 @@ msgid ""
 "But I am using another application which does not need Google Calendar API "
 "key file. How does that application work then?"
 msgstr ""
+"Ale używam innej aplikacji, która nie wymaga do pliku klucza Kalendarz "
+"Google API. Jak to działa wtedy aplikacja?"
 
 #: admin/app-faq.php:39
 msgid ""
@@ -254,6 +260,8 @@ msgstr ""
 #: admin/app-faq.php:44
 msgid "Is it possible not to ask payment or deposit for certain users?"
 msgstr ""
+"Czy to możliwe, aby nie żądać zapłaty lub depozytu dla niektórych "
+"użytkowników?"
 
 #: admin/app-faq.php:45
 msgid ""
@@ -282,6 +290,8 @@ msgid ""
 "How can I show hours instead of minutes in the front end when my services "
 "last more than an hour?"
 msgstr ""
+"Jak można wyświetlać godziny przed minutami, gdy  usługi trwają dłużej niż "
+"godzinę?"
 
 #: admin/app-faq.php:83
 msgid "To restart tutorial about settings click here:"
@@ -427,6 +437,12 @@ msgid ""
 "Appointments and Schedule shortcodes, only one instance of a shortcode is "
 "allowed on the same page."
 msgstr ""
+"Niektóre shortcode'y mają tylko znaczenie jeżeli są używane w kombinacji z "
+"innymi. na przykład shortcode \"services\" nie będzie miał znaczenia chyba "
+"że użyto \"schedule\" na tej samej stronie. Są one zdefiniowane jako osobne "
+"shortcode'y więc można je dostosować na swoich stronach. Z wyjątkiem "
+"shortcode'ów \"my appointments\" i \"schedule\", dozwolone jest tylko jedno "
+"użycie  shortcode'a na tej samej stronie."
 
 #: admin/app-faq.php:129
 msgid ""
@@ -459,6 +475,11 @@ msgid ""
 "confirmation can be done manually, or automatically depending on Auto "
 "Confirm setting."
 msgstr ""
+"Jeśli wybrano pole <i>Płatność wymagana</i> jako Tak, wizyta zostanie "
+"automatycznie potwierdzona po udanej płatności PayPal i potwierdzeniu IPN "
+"Paypal. Jeśli wybrano Płatność wymaganą jako Nie, potwierdzenie może zostać "
+"wykonane ręcznie lub automatycznie w zależności od ustawienia automatycznego "
+"potwierdzania."
 
 #: admin/app-faq.php:138
 msgid ""
@@ -467,6 +488,10 @@ msgid ""
 "be visible only after you take the cursor over the record. Please also note "
 "that you can edit all the appointment data here."
 msgstr ""
+"Używając %s, szukaj wizyty w oparciu i nazwę użytkownika oraz zmieniaj "
+"status po kliknięciu linku <i>Zobacz szczegóły i edytuj</i>. Proszę "
+"zauważyć, że ten link będzie widoczny tylko po tym jak kursor znajdzie się "
+"nad wierszem. Można tutaj edytować wszystkie dane wizyty."
 
 #: admin/app-faq.php:138 admin/app-faq.php:141 admin/app-faq.php:172
 msgid "Appointments admin page"
@@ -580,6 +605,12 @@ msgid ""
 "checks are done in real time by ajax calls, so duplicate appointments are "
 "not possible."
 msgstr ""
+"Appointments+ sprawdzają dostępność wizyty dwukrotnie: Pierwszy raz kiedy  "
+"klient klika wolny termin i potem w czasie potwierdzenia. Jeżeli w "
+"międzyczasie termin wizyty zostanie zajęty przez innego klienta, zostanie "
+"wyświetlone powiadomienie, że ten termin nie jest dostępny. Sprawdzanie "
+"odbywa się w czasie rzeczywistym używając zapytań asynchronicznych, dlatego "
+"duplikowanie spotkań nie jest możliwe. "
 
 #: admin/app-faq.php:180
 msgid ""
@@ -735,9 +766,12 @@ msgstr ""
 
 #: admin/app-faq.php:207
 msgid ""
-"If Manual Payment gateway is activated and client uses that method, "
+"If Manual Payment gateway is activated and the client uses that method, the "
 "appointment will be in \"pending\" status until you manually confirm it."
 msgstr ""
+"Jeśli aktywowana jest bramka płatności manualnych i klient korzysta z tej "
+"metody, wizta będzie w stanie \"oczekujący\", dopóki nie zostanie ręcznie "
+"potwierdzona."
 
 #: admin/app-faq.php:211
 msgid ""
@@ -774,6 +808,11 @@ msgid ""
 "in order to upload the private key file. This file cannot be uploaded using "
 "WordPress media upload function."
 msgstr ""
+"Do korzystania z interfejsu API Kalendarza Google wymagane są wersje PHP w "
+"wersji 5.3 lub nowszej, posiadającej rozszerzenie JSON oraz "
+"http_build_query. Należy również mieć dostęp do FTP w celu przesłania pliku "
+"klucza prywatnego. Tego pliku nie można załadować za pomocą funkcji "
+"przesyłania mediów WordPress."
 
 #: admin/app-faq.php:227
 msgid ""
@@ -796,6 +835,13 @@ msgid ""
 "who wants to synchronize his/her appointments with Google Calendar should "
 "carry out the required setup steps."
 msgstr ""
+"Takie aplikacje powodują synchronizację, gdy jesteś online. Otrzymanie zgody "
+"jest łatwe, gdy jesteś online. Twoje zalogowanie jest wystarczające, ale "
+"konieczne. Potrzebujemy twojej zgody, a więc podpisu elektronicznego, nawet "
+"jeśli jesteś offline, aby spotkania mogły być przesyłane do twojego "
+"Kalendarza Google w dowolnym momencie. Z tego samego powodu każdy "
+"usługodawca, który chce zsynchronizować wiztę z Kalendarzem Google, musi "
+"prawidłow skonfigurować usługę."
 
 #: admin/app-faq.php:236
 msgid ""
@@ -939,7 +985,7 @@ msgstr "Wybierz pytanie"
 
 #: admin/class-app-addons-admin-list-table.php:29
 msgid "Upgrade to Appointments+ to activate"
-msgstr ""
+msgstr "W celu aktywacji ulepsz do Appointments+"
 
 #: admin/class-app-addons-admin-list-table.php:35
 #: admin/class-app-addons-admin-list-table.php:82
@@ -964,9 +1010,8 @@ msgid "<strong>Requires</strong>: %s"
 msgstr "<strong>Wymagane</strong>: %s"
 
 #: admin/class-app-addons-admin-list-table.php:67
-#: admin/views/inline-edit.php:26
-#: admin/views/page-settings-tab-services-section-services.php:24
-#: appointments.php:686
+#: admin/class-app-list-table-services.php:120 admin/views/inline-edit.php:26
+#: appointments.php:694 includes/class-app-gdpr.php:93
 msgid "Name"
 msgstr "Nazwa"
 
@@ -978,7 +1023,7 @@ msgid "Description"
 msgstr "Opis"
 
 #: admin/class-app-admin-user-profile.php:47
-#: includes/class-app-appointment.php:1463
+#: includes/class-app-appointment.php:1489
 msgid "Client %s cancelled appointment with ID: %s"
 msgstr "Klient %s anulował rezerwację z numerem ID: %s"
 
@@ -990,27 +1035,28 @@ msgstr "Wykonawca %s ręcznie potwierdził rezerwację nr ID: %s"
 msgid "%s edited his working hours."
 msgstr "%s edytował swoje godziny pracy"
 
-#: admin/class-app-admin.php:58
+#: admin/class-app-admin.php:70
 msgid "Appointments Provider"
 msgstr ""
 
-#: admin/class-app-admin.php:65
+#: admin/class-app-admin.php:77 admin/class-app-list-table-services.php:62
+#: admin/class-app-list-table-workers.php:68
 #: includes/pro/includes/addons/lib/class-app-locations-list-table.php:18
 #: includes/sample-appointments-page.php:38
 msgid "Edit"
 msgstr "Edytuj"
 
-#: admin/class-app-admin.php:92
+#: admin/class-app-admin.php:104
 msgid "Dismiss notice"
 msgstr "Odrzuć zawiadomienie"
 
-#: admin/class-app-admin.php:92 admin/class-app-admin.php:289
-#: admin/class-app-admin.php:318 admin/class-app-admin.php:331
+#: admin/class-app-admin.php:104 admin/class-app-admin.php:301
+#: admin/class-app-admin.php:330 admin/class-app-admin.php:343
 #: includes/pro/includes/class-app-google-login.php:165
 msgid "Dismiss"
 msgstr "Zrezygnuj"
 
-#: admin/class-app-admin.php:149 admin/class-app-admin.php:180
+#: admin/class-app-admin.php:161 admin/class-app-admin.php:192
 #: admin/pages/class-admin-appointments-page.php:26
 #: admin/pages/class-admin-appointments-page.php:54
 #: admin/pages/class-admin-appointments-page.php:310
@@ -1023,27 +1069,27 @@ msgstr "Zrezygnuj"
 msgid "Appointments"
 msgstr "Rezerwacje"
 
-#: admin/class-app-admin.php:213
+#: admin/class-app-admin.php:225
 msgid "on"
 msgstr "włącz"
 
-#: admin/class-app-admin.php:214
+#: admin/class-app-admin.php:226
 msgid "off"
 msgstr "wyłącz"
 
-#: admin/class-app-admin.php:223
+#: admin/class-app-admin.php:235
 msgid "Preparing for export, please hold on..."
 msgstr "Przygotowanie do eksportu, proszę czekaj..."
 
-#: admin/class-app-admin.php:239
+#: admin/class-app-admin.php:251
 msgid "Notice dismissed."
 msgstr "Wiadomość odrzucona"
 
-#: admin/class-app-admin.php:256
+#: admin/class-app-admin.php:268
 msgid "<b>[Appointments+]</b> You must define at least once service."
 msgstr "<b>[Appointments+]</b> Należy zdefiniować przynajmniej jedną usługę"
 
-#: admin/class-app-admin.php:263
+#: admin/class-app-admin.php:275
 msgid ""
 "<b>[Appointments+]</b> One of your services has a duration smaller than time "
 "base. Please visit Services tab and after making your corrections save new "
@@ -1052,7 +1098,7 @@ msgstr ""
 "<b>[Appointments+]</b> Jedna z usług ma czas trwania, krószy niż podstawowa "
 "jednostka czasu. Należy dokonać zmiany w zakładce Usługi i zachować zmiany."
 
-#: admin/class-app-admin.php:270
+#: admin/class-app-admin.php:282
 msgid ""
 "<b>[Appointments+]</b> One of your services is not divisible by the time "
 "base. Please visit Services tab and after making your corrections save new "
@@ -1062,7 +1108,7 @@ msgstr ""
 "podstawowej jednostki czasu. Należy dokonać zmiany w zakładce Usługi i "
 "zachować zmiany."
 
-#: admin/class-app-admin.php:277
+#: admin/class-app-admin.php:289
 msgid ""
 "<b>[Appointments+]</b> One of your services has a duration greater than 24 "
 "hours. Appointments+ does not support services exceeding 1440 minutes (24 "
@@ -1071,7 +1117,7 @@ msgstr ""
 "<b>[Appointments+]</b> Jedna z usług ma długość większą niż 24 godziny. "
 "Appointments+ nie obsługuje usług dłuższych niż 1440 minut (24 godziny). "
 
-#: admin/class-app-admin.php:288
+#: admin/class-app-admin.php:300
 msgid ""
 "<b>[Appointments+]</b> One of your services does not have a service provider "
 "assigned. Delete services you are not using."
@@ -1079,13 +1125,13 @@ msgstr ""
 "<b>[Appointments+]</b> Jedna z usług nie ma przypisanego wykonawcy. Usuń "
 "niepotrzebne usługi."
 
-#: admin/class-app-admin.php:289 admin/class-app-admin.php:318
-#: admin/class-app-admin.php:331
+#: admin/class-app-admin.php:301 admin/class-app-admin.php:330
+#: admin/class-app-admin.php:343
 #: includes/pro/includes/class-app-google-login.php:165
 msgid "Dismiss this notice for this session"
 msgstr "Anuluj wiadomość na czas trwania obecnej sesji"
 
-#: admin/class-app-admin.php:298
+#: admin/class-app-admin.php:310
 msgid ""
 "<b>[Appointments+]</b> Appointments+ database tables need to be updated. "
 "Please deactivate and reactivate the plugin (DO NOT DELETE the plugin). You "
@@ -1095,7 +1141,7 @@ msgstr ""
 "aktualizacji. Należy wyłączyć a następnie włączyć wtyczkę (UWAGA! Nie usuwać "
 "wtyczki!). Wszystkie informacje zostaną zachowane."
 
-#: admin/class-app-admin.php:306
+#: admin/class-app-admin.php:318
 msgid ""
 "<b>[Appointments+]</b> More than one instance of services, service "
 "providers, confirmation, Paypal or login shortcodes on the same page may "
@@ -1105,7 +1151,7 @@ msgstr ""
 "stronie może powodować konflikty. Dotyczy: usług, wykonawców usług, "
 "potwierdzeń, logowania i PayPala.</p>"
 
-#: admin/class-app-admin.php:317
+#: admin/class-app-admin.php:329
 msgid ""
 "<b>[Appointments+]</b> Confirmation shortcode [app_confirmation] is always "
 "required to complete an appointment."
@@ -1113,40 +1159,103 @@ msgstr ""
 "<b>[Appointments+]</b> Short kod potwierdzenia [app_confirmation] jest "
 "wymagany do zatwierdzenia rezerwacji."
 
-#: admin/class-app-admin.php:330
+#: admin/class-app-admin.php:342
 msgid ""
 "<b>[Appointments+]</b> Paypal shortcode [app_paypal] is always required to "
 "complete an appointment with <b>pending</b> status."
 msgstr ""
+"<b>[Appointments+]</b> Kody PayPal [app_paypal] są zawsze wymagane, aby "
+"ukończyć spotkanie o statusie <b>oczekującym</b>."
 
-#: admin/class-app-admin.php:344
+#: admin/class-app-admin.php:356
 msgid "Appointments+ FAQ"
 msgstr "Appointments+ FAQ"
 
-#: admin/class-app-admin.php:368
+#: admin/class-app-admin.php:380
 msgid "FAQ"
 msgstr "FAQ"
 
-#: admin/class-app-admin.php:438 admin/pages/class-admin-settings-page.php:12
+#: admin/class-app-admin.php:450 admin/pages/class-admin-settings-page.php:11
 #: includes/pro/includes/addons/app-locations-location_support.php:169
 msgid "Settings"
 msgstr "Ustawienia"
 
-#: admin/class-app-admin.php:452
+#: admin/class-app-admin.php:464 admin/class-app-admin.php:505
+#: admin/class-app-admin.php:525
+#: includes/integration/class-app-marketpress.php:127
 msgid "Something went wrong!"
 msgstr "Coś poszło nie tak!"
 
-#: admin/class-app-admin.php:464
-msgid "Make an Appointment"
-msgstr "Dodaj termin"
-
-#: admin/class-app-admin.php:473
+#: admin/class-app-admin.php:485
+#: includes/integration/class-app-marketpress.php:155
 msgid "Page was created successfuly: %s"
 msgstr "Strona została utworzona poprawnie: %s"
 
-#: admin/class-app-admin.php:477
+#: admin/class-app-admin.php:489 admin/class-app-list-table-services.php:99
+#: admin/class-app-list-table-services.php:105
+#: admin/class-app-list-table-workers.php:112
+#: admin/class-app-list-table-workers.php:118
+#: includes/integration/class-app-marketpress.php:159
 msgid "View page"
 msgstr "Zobacz stronę"
+
+#: admin/class-app-list-table-services.php:35
+msgid "Limited by number of Service Providers"
+msgstr "Limit ustalony przez liczbę usługodawców"
+
+#: admin/class-app-list-table-services.php:67
+#: admin/class-app-list-table-workers.php:73
+#: includes/pro/includes/addons/lib/class-app-locations-list-table.php:19
+msgid "Delete"
+msgstr "Usuń"
+
+#: admin/class-app-list-table-services.php:121
+msgid "Capacity"
+msgstr "Pojemność"
+
+#: admin/class-app-list-table-services.php:122
+#: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:154
+msgid "Duration"
+msgstr "Długość trwania"
+
+#: admin/class-app-list-table-services.php:123
+msgid "Price (%s)"
+msgstr "Cena (%s)"
+
+#: admin/class-app-list-table-services.php:124
+#: admin/class-app-list-table-workers.php:137
+msgid "Description page"
+msgstr "Strona z opisem"
+
+#: admin/class-app-list-table-workers.php:38
+msgid "No Service Providers selected."
+msgstr "Nie wybrano usługodawcy."
+
+#: admin/class-app-list-table-workers.php:45
+msgid "Missing service: %d."
+msgstr "Brak usługi: %d."
+
+#: admin/class-app-list-table-workers.php:87
+msgid "[wrong user]"
+msgstr "[nieprawidłowy użytkownik]"
+
+#: admin/class-app-list-table-workers.php:133
+#: admin/views/page-settings-tab-workers-section-edit-worker.php:14
+#: admin/views/page-settings-tab-workers-section-new-worker.php:30
+msgid "Service Provider"
+msgstr "Wykonawca"
+
+#: admin/class-app-list-table-workers.php:134
+msgid "Dummy"
+msgstr ""
+
+#: admin/class-app-list-table-workers.php:135
+msgid "Additional Price (%s)"
+msgstr "Dodatkowa cena (%s)"
+
+#: admin/class-app-list-table-workers.php:136
+msgid "Services Provided*"
+msgstr "Usługie wykonywane przez*"
 
 #: admin/class-app-list-table.php:155
 msgid "List View"
@@ -1356,7 +1465,7 @@ msgstr "Zatwierdzone rezerwacje"
 
 #: admin/pages/class-admin-appointments-page.php:157
 #: admin/views/page-appointments-status-filter.php:6
-#: includes/class-app-appointment.php:1184
+#: includes/class-app-appointment.php:1210
 msgid "Reserved by GCal"
 msgstr "Rezerwacje z GCal"
 
@@ -1365,8 +1474,6 @@ msgid "Removed appointments"
 msgstr "Usunięte rezerwacje"
 
 #: admin/pages/class-admin-appointments-page.php:267
-#: admin/views/page-settings-tab-services-section-services.php:23
-#: admin/views/page-settings-tab-workers-section-workers.php:22
 msgid "ID"
 msgstr "ID"
 
@@ -1409,7 +1516,7 @@ msgstr "Stworzono"
 
 #: admin/pages/class-admin-appointments-page.php:273
 #: admin/pages/class-admin-transactions-page.php:59
-#: admin/views/inline-edit.php:100
+#: admin/views/inline-edit.php:101
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:22
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:30
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:90
@@ -1435,92 +1542,108 @@ msgstr "Wybrane rekordy usunięte"
 msgid "Selected record(s) updated."
 msgstr "Wybrane rekordy zaktualizowane"
 
-#: admin/pages/class-admin-settings-page.php:11
+#: admin/pages/class-admin-settings-page.php:10
 #: includes/integration/class-app-buddypress.php:147
 msgid "Appointments Settings"
 msgstr "Ustawienia rezerwacji"
 
-#: admin/pages/class-admin-settings-page.php:29
+#: admin/pages/class-admin-settings-page.php:26
 msgid "General"
 msgstr "Główne"
 
-#: admin/pages/class-admin-settings-page.php:30
-#: admin/views/page-settings-tab-working_hours.php:35
+#: admin/pages/class-admin-settings-page.php:27
+#: admin/views/page-settings-tab-working_hours.php:33
 #: admin/views/user-profile-working-hours.php:4
 msgid "Working Hours"
 msgstr "Godziny pracy"
 
-#: admin/pages/class-admin-settings-page.php:31
+#: admin/pages/class-admin-settings-page.php:28
 msgid "Exceptions"
 msgstr "Wyjątki"
 
-#: admin/pages/class-admin-settings-page.php:32
-#: admin/pages/class-admin-settings-page.php:52
+#: admin/pages/class-admin-settings-page.php:29
+#: admin/pages/class-admin-settings-page.php:49
 #: includes/shortcodes/class-app-shortcode-services.php:9
 msgid "Services"
 msgstr "Usługi"
 
-#: admin/pages/class-admin-settings-page.php:33
-#: admin/pages/class-admin-settings-page.php:56
+#: admin/pages/class-admin-settings-page.php:30
+#: admin/pages/class-admin-settings-page.php:54
 msgid "Service Providers"
 msgstr "Wykonawcy"
 
-#: admin/pages/class-admin-settings-page.php:34
+#: admin/pages/class-admin-settings-page.php:31
 msgid "Add-ons"
 msgstr "Dodatki"
 
-#: admin/pages/class-admin-settings-page.php:35
+#: admin/pages/class-admin-settings-page.php:32
 msgid "Logs"
 msgstr "Logi"
 
-#: admin/pages/class-admin-settings-page.php:44
+#: admin/pages/class-admin-settings-page.php:40
 msgid "Time"
 msgstr "Czas"
 
-#: admin/pages/class-admin-settings-page.php:45
+#: admin/pages/class-admin-settings-page.php:41
 msgid "Accessibility"
 msgstr "Dostępność"
 
-#: admin/pages/class-admin-settings-page.php:46
+#: admin/pages/class-admin-settings-page.php:42
 msgid "Display"
 msgstr ""
 
-#: admin/pages/class-admin-settings-page.php:47
+#: admin/pages/class-admin-settings-page.php:43
 msgid "Payments"
-msgstr ""
+msgstr "Płatności"
 
-#: admin/pages/class-admin-settings-page.php:48
+#: admin/pages/class-admin-settings-page.php:44
 msgid "Notifications"
 msgstr "Powiadomienia"
 
-#: admin/pages/class-admin-settings-page.php:49
+#: admin/pages/class-admin-settings-page.php:45
 msgid "Advanced"
 msgstr "Zaawansowane"
 
-#: admin/pages/class-admin-settings-page.php:53
-#: admin/views/page-settings-tab-services-section-new-service.php:71
+#: admin/pages/class-admin-settings-page.php:46
+msgid "GDPR"
+msgstr "GDPR"
+
+#: admin/pages/class-admin-settings-page.php:50
+#: admin/views/page-settings-tab-services-section-new-service.php:77
 msgid "Add new Service"
 msgstr "Dodaj usługę"
 
-#: admin/pages/class-admin-settings-page.php:57
-#: admin/views/page-settings-tab-workers-section-new-worker.php:84
+#: admin/pages/class-admin-settings-page.php:55
+#: admin/views/page-settings-tab-workers-section-new-worker.php:88
 msgid "Add new Service Provider"
 msgstr "Nowy wykonawca"
 
-#: admin/pages/class-admin-settings-page.php:98
-#: admin/pages/class-admin-settings-page.php:497
+#: admin/pages/class-admin-settings-page.php:96
+#: admin/pages/class-admin-settings-page.php:551
 msgid "Please, select at least one service provided"
 msgstr "Proszę wybrać przynajmniej jednego dostawcę usługi"
 
-#: admin/pages/class-admin-settings-page.php:100
+#: admin/pages/class-admin-settings-page.php:98
 msgid "Are you sure to delete this Service Provider?"
 msgstr "Czy na pewno usunąć wykonawcę?"
 
-#: admin/pages/class-admin-settings-page.php:103
+#: admin/pages/class-admin-settings-page.php:101
 msgid "Are you sure to delete this Service?"
 msgstr "Czy na pewno usunąć usługę?"
 
-#: admin/pages/class-admin-settings-page.php:170
+#: admin/pages/class-admin-settings-page.php:104
+msgid "Are you sure to delete selected Services?"
+msgstr "Czy na pewnoe skasować wybrane usługi?"
+
+#: admin/pages/class-admin-settings-page.php:107
+msgid "Please select some services first."
+msgstr "Proszę wybrać jakieś usługi."
+
+#: admin/pages/class-admin-settings-page.php:108
+msgid "Please select some action first."
+msgstr "Proszę wybrać jakąś akcję."
+
+#: admin/pages/class-admin-settings-page.php:167
 msgid "Settings updated"
 msgstr "Ustawienia zostały zaktualizowane"
 
@@ -1569,7 +1692,7 @@ msgstr "Dodać przerwę?"
 msgid "Start"
 msgstr "Start"
 
-#: admin/views/form-working-hours.php:38 admin/views/inline-edit.php:89
+#: admin/views/form-working-hours.php:38 admin/views/inline-edit.php:90
 #: includes/pro/includes/addons/app-admin-export_date_range.php:50
 msgid "End"
 msgstr "Koniec"
@@ -1598,7 +1721,6 @@ msgid "No specific provider"
 msgstr "Wszyscy wykonawcy"
 
 #: admin/views/inline-edit.php:43
-#: admin/views/page-settings-tab-services-section-services.php:27
 msgid "Price"
 msgstr "Cena"
 
@@ -1614,40 +1736,40 @@ msgstr "Utworzone"
 msgid "Unknown"
 msgstr "Nieznany"
 
-#: admin/views/inline-edit.php:110
+#: admin/views/inline-edit.php:111
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:245
 msgid "Confirm"
 msgstr "Potwierdź"
 
-#: admin/views/inline-edit.php:113
+#: admin/views/inline-edit.php:114
 msgid "(Re)send confirmation email"
 msgstr "Ponownie wyślij email z potwierdzeniem"
 
-#: admin/views/inline-edit.php:115
+#: admin/views/inline-edit.php:116
 msgid "Send confirmation email"
 msgstr "Wyślij email z potwierdzeniem"
 
-#: admin/views/inline-edit.php:124
+#: admin/views/inline-edit.php:125
 msgid ""
 "GCal reserved appointments cannot be edited here. Edit them in your Google "
 "calendar."
 msgstr "Rezerwacje z Kalendarza Google nie są edytowalne. Popraw je w GCal."
 
-#: admin/views/inline-edit.php:124 admin/views/inline-edit.php:126
+#: admin/views/inline-edit.php:125 admin/views/inline-edit.php:127
 msgid "Save / Update"
 msgstr "Zapisz / aktualizuj"
 
-#: admin/views/inline-edit.php:126
+#: admin/views/inline-edit.php:127
 msgid "Click to save or update"
 msgstr "Zapisz lub aktualizuj"
 
 #: admin/views/page-appointments-list.php:2
 msgid "Appointments list"
-msgstr ""
+msgstr "Lista wizyt"
 
 #: admin/views/page-appointments-list.php:73
 msgid "Select Appointment %d on %s"
-msgstr ""
+msgstr "Wybierz wizyty %d na %s"
 
 #: admin/views/page-appointments-list.php:86
 msgid "See Details (Cannot be edited)"
@@ -1713,7 +1835,7 @@ msgstr "Resetuj filtry"
 
 #: admin/views/page-appointments-status-filter.php:1
 msgid "Filter Appointments List"
-msgstr ""
+msgstr "Filtruj listę wizyt"
 
 #: admin/views/page-appointments-status-filter.php:3
 #: includes/class_app_codec.php:12
@@ -1721,17 +1843,17 @@ msgid "Active"
 msgstr "Aktywny"
 
 #: admin/views/page-appointments-status-filter.php:4
-#: includes/class-app-appointment.php:1180
+#: includes/class-app-appointment.php:1206
 msgid "Pending"
 msgstr "Oczekujące"
 
 #: admin/views/page-appointments-status-filter.php:5
-#: includes/class-app-appointment.php:1183
+#: includes/class-app-appointment.php:1209
 msgid "Completed"
 msgstr "Kompletne"
 
 #: admin/views/page-appointments-status-filter.php:7
-#: includes/class-app-appointment.php:1185
+#: includes/class-app-appointment.php:1211
 msgid "Removed"
 msgstr "Usunięte"
 
@@ -1751,7 +1873,7 @@ msgstr "Lista dla:"
 
 #: admin/views/page-settings-tab-exceptions.php:23
 msgid "Select provider"
-msgstr ""
+msgstr "Wybierz usługodawcę"
 
 #: admin/views/page-settings-tab-exceptions.php:40
 msgid "Exceptional working days, e.g. a specific Sunday you decided to work:"
@@ -1819,7 +1941,7 @@ msgid "Appointment cancelled page"
 msgstr "Strona wyświetlana po anulowaniu rezerwacji"
 
 #: admin/views/page-settings-tab-main-section-accesibility.php:25
-#: admin/views/page-settings-tab-main-section-payments.php:54
+#: admin/views/page-settings-tab-main-section-payments.php:52
 msgid "Home page"
 msgstr "Strona główna"
 
@@ -1873,10 +1995,10 @@ msgid "Assign dummy service providers to"
 msgstr "Przypisz Wirtualnych usługodawców do"
 
 #: admin/views/page-settings-tab-main-section-accesibility.php:76
-#: admin/views/page-settings-tab-services-section-new-service.php:59
-#: admin/views/page-settings-tab-services-section-services.php:62
-#: admin/views/page-settings-tab-workers-section-new-worker.php:72
-#: admin/views/page-settings-tab-workers-section-workers.php:81
+#: admin/views/page-settings-tab-services-section-edit-service.php:62
+#: admin/views/page-settings-tab-services-section-new-service.php:65
+#: admin/views/page-settings-tab-workers-section-edit-worker.php:58
+#: admin/views/page-settings-tab-workers-section-new-worker.php:76
 msgid "None"
 msgstr "Żaden"
 
@@ -1910,7 +2032,7 @@ msgstr ""
 msgid "Accept login from front end"
 msgstr "Akceptuj logowanie na froncie"
 
-#: admin/views/page-settings-tab-main-section-accesibility.php:110
+#: admin/views/page-settings-tab-main-section-accesibility.php:108
 msgid ""
 "Enables login to website from front end using Facebook, Twitter, Google+ or "
 "WordPress."
@@ -1918,11 +2040,11 @@ msgstr ""
 "Umożliwia logowanie do strony poprzez Facebooka, Twittera Google+ lub "
 "WordPressa."
 
-#: admin/views/page-settings-tab-main-section-accesibility.php:116
+#: admin/views/page-settings-tab-main-section-accesibility.php:114
 msgid "My website already uses Facebook"
 msgstr "Moja strona korzysta z Facebook'a"
 
-#: admin/views/page-settings-tab-main-section-accesibility.php:121
+#: admin/views/page-settings-tab-main-section-accesibility.php:117
 msgid ""
 "By default, Facebook script will be loaded by the plugin. If you are already "
 "running Facebook scripts, to prevent any conflict, check this option."
@@ -1931,39 +2053,41 @@ msgstr ""
 "wtyczki ładujące te skrypty, proszę zaznaczyć opcję w celu uniknięcia "
 "konfliktów."
 
-#: admin/views/page-settings-tab-main-section-accesibility.php:126
+#: admin/views/page-settings-tab-main-section-accesibility.php:122
 msgid "Facebook App ID"
 msgstr "Facebook App ID"
 
-#: admin/views/page-settings-tab-main-section-accesibility.php:132
+#: admin/views/page-settings-tab-main-section-accesibility.php:128
 msgid ""
 "Enter your App ID number here. If you don't have a Facebook App yet, you "
 "will need to create one <a href='%s'>here</a>"
 msgstr ""
+"Wpisz swój identyfikator aplikacji. Jeśli nie masz jeszcze aplikacji na "
+"Facebooku, to należy utworzyć ją <a href='%s'>tutaj</a>"
 
-#: admin/views/page-settings-tab-main-section-accesibility.php:137
+#: admin/views/page-settings-tab-main-section-accesibility.php:133
 msgid "Twitter Consumer Key"
 msgstr "Klucz klienta Twittera"
 
-#: admin/views/page-settings-tab-main-section-accesibility.php:143
+#: admin/views/page-settings-tab-main-section-accesibility.php:139
 msgid ""
 "Enter your Twitter App ID number here. If you don't have a Twitter App yet, "
 "you will need to create one <a href=\"%s\">here</a>"
 msgstr ""
 
-#: admin/views/page-settings-tab-main-section-accesibility.php:148
+#: admin/views/page-settings-tab-main-section-accesibility.php:144
 msgid "Twitter Consumer Secret"
 msgstr ""
 
-#: admin/views/page-settings-tab-main-section-accesibility.php:155
+#: admin/views/page-settings-tab-main-section-accesibility.php:151
 msgid "Enter your Twitter App ID Secret here."
-msgstr ""
+msgstr "Wpisz swój sekretny identyfikator aplikacji Twittera."
 
-#: admin/views/page-settings-tab-main-section-advanced.php:4
+#: admin/views/page-settings-tab-main-section-advanced.php:3
 msgid "Clear Cache"
 msgstr "Wyczyść bufor"
 
-#: admin/views/page-settings-tab-main-section-advanced.php:8
+#: admin/views/page-settings-tab-main-section-advanced.php:6
 msgid ""
 "Cache is automatically cleared at regular intervals (Default: 10 minutes) or "
 "when you change a setting. To clear it manually check this checkbox."
@@ -1971,11 +2095,11 @@ msgstr ""
 "Bufor jest czyszczony automatycznie co 10 minut lub gdy wprowadzasz zmiany. "
 "By oczyścić go ręcznie zaznacz tę opcję."
 
-#: admin/views/page-settings-tab-main-section-advanced.php:14
+#: admin/views/page-settings-tab-main-section-advanced.php:10
 msgid "Allow Overwork (end of day)"
 msgstr "Pozwalaj na nadgodziny (koniec dnia)"
 
-#: admin/views/page-settings-tab-main-section-advanced.php:17
+#: admin/views/page-settings-tab-main-section-advanced.php:13
 msgid ""
 "Whether you accept appointments exceeding working hours for the end of day. "
 "For example, if you are working until 6pm, and a client asks an appointment "
@@ -1987,21 +2111,21 @@ msgstr ""
 "Jeżeli akceptujesz rezerwację w godzinach nadliczbowych na koniec dnia "
 "należy wybrać TAK aby pozwolić na taką czynność."
 
-#: admin/views/page-settings-tab-main-section-advanced.php:22
+#: admin/views/page-settings-tab-main-section-advanced.php:17
 msgid "Allow Overwork (break hours)"
 msgstr "Pozwalaj na nadgodziny (godziny przerw)"
 
-#: admin/views/page-settings-tab-main-section-advanced.php:25
+#: admin/views/page-settings-tab-main-section-advanced.php:20
 msgid ""
 "Same as above, but valid for break hours. If you want to allow appointments "
 "exceeding break times, then select this as Yes."
 msgstr "Jak wyżej ale ustawienie odnosi się do pracy w czasie przerw."
 
-#: admin/views/page-settings-tab-main-section-advanced.php:30
+#: admin/views/page-settings-tab-main-section-advanced.php:24
 msgid "Keep options on uninstall"
 msgstr "Zachowaj ustawienia przy odinstalowaniu"
 
-#: admin/views/page-settings-tab-main-section-advanced.php:34
+#: admin/views/page-settings-tab-main-section-advanced.php:27
 msgid ""
 "By enabling this option you can keep your appointments and settings when "
 "deleting plugin."
@@ -2014,6 +2138,7 @@ msgid "Create an Appointment Page"
 msgstr "Utwórz stronę do robienia rezerwacji"
 
 #: admin/views/page-settings-tab-main-section-display.php:5
+#: includes/integration/class-app-marketpress.php:73
 msgid "with"
 msgstr "z"
 
@@ -2022,26 +2147,27 @@ msgid "Create an appointments date with this format"
 msgstr "Ustaw datę wizyty w tym formacie"
 
 #: admin/views/page-settings-tab-main-section-display.php:8
-#: includes/integration/class-app-marketpress.php:75
+#: includes/integration/class-app-marketpress.php:76
 msgid "current month's schedule"
 msgstr "grafik na aktualny miesiąc"
 
 #: admin/views/page-settings-tab-main-section-display.php:9
-#: includes/integration/class-app-marketpress.php:76
+#: includes/integration/class-app-marketpress.php:77
 msgid "current and next month's schedules"
 msgstr "harmonogram na ten i kolejny miesiąc"
 
 #: admin/views/page-settings-tab-main-section-display.php:10
-#: includes/integration/class-app-marketpress.php:77
+#: includes/integration/class-app-marketpress.php:78
 msgid "current week's schedule"
 msgstr "harmonogram na ten tydzień"
 
 #: admin/views/page-settings-tab-main-section-display.php:11
-#: includes/integration/class-app-marketpress.php:78
+#: includes/integration/class-app-marketpress.php:79
 msgid "current and next week's schedules"
 msgstr "harmonogram na ten i kolejny tydzień"
 
 #: admin/views/page-settings-tab-main-section-display.php:13
+#: includes/integration/class-app-marketpress.php:81
 msgid "Create page!"
 msgstr "Utwórz stronę!"
 
@@ -2112,6 +2238,62 @@ msgstr ""
 "Można dodać własne ustawienia CSS w celu personalizowania wyglądu. "
 "Ustawienia te zostaną dodane tylko do strony z formularzem do dokonywania "
 "rezerwacji"
+
+#: admin/views/page-settings-tab-main-section-gdpr.php:4
+msgid "User can erase after"
+msgstr "Uzytkownik może usunąć po"
+
+#: admin/views/page-settings-tab-main-section-gdpr.php:6
+#: admin/views/page-settings-tab-main-section-gdpr.php:20
+msgid "days"
+msgstr "dni"
+
+#: admin/views/page-settings-tab-main-section-gdpr.php:7
+msgid ""
+"Completed appointments will be allowed to erase by user after selected "
+"number of days after appointment."
+msgstr ""
+"Ukończone wizyty będą mogły zostać wymazane przez użytkownika po wybranej "
+"liczbie dni po wizycie."
+
+#: admin/views/page-settings-tab-main-section-gdpr.php:11
+msgid "Erase Appointments"
+msgstr "Usuwanie wizyt"
+
+#: admin/views/page-settings-tab-main-section-gdpr.php:14
+msgid "You can force to delete completed appointments."
+msgstr "Można wymusić usunięcie ukończonych wizyt."
+
+#: admin/views/page-settings-tab-main-section-gdpr.php:18
+msgid "Auto erase after"
+msgstr "Automatycznie kasuj po"
+
+#: admin/views/page-settings-tab-main-section-gdpr.php:21
+msgid "Completed appointments will be deleted after ."
+msgstr "Strasze wizyty mogą być usuwane."
+
+#: admin/views/page-settings-tab-main-section-gdpr.php:25
+#: includes/class-app-appointment.php:224
+msgid "Agreement"
+msgstr "Zgoda"
+
+#: admin/views/page-settings-tab-main-section-gdpr.php:28
+msgid ""
+"Add a checkbox specifically asking the user of the form if they consent to "
+"you storing and using their personal information to get back in touch with "
+"them."
+msgstr ""
+"Dodaj pole wyboru prosząc użytkownika formularza, jeśli zgadza się na "
+"przechowywanie i wykorzystywanie swoich danych osobowych w celu uzyskania z "
+"nimi kontaktu."
+
+#: admin/views/page-settings-tab-main-section-gdpr.php:32
+msgid "Checkbox text"
+msgstr "Treść pola"
+
+#: admin/views/page-settings-tab-main-section-gdpr.php:36
+msgid "Error message"
+msgstr "Wiadomość błędu"
 
 #: admin/views/page-settings-tab-main-section-notifications.php:4
 msgid "Send Confirmation email"
@@ -2250,8 +2432,8 @@ msgstr ""
 "wprowadzą odpowiedni tekst do wiadomości:"
 
 #: admin/views/page-settings-tab-main-section-notifications.php:138
-#: includes/gcal/views/profile-gcal-connected.php:53
-#: includes/gcal/views/settings-gcal-step-3.php:93
+#: includes/gcal/views/profile-gcal-connected.php:59
+#: includes/gcal/views/settings-gcal-step-3.php:96
 msgid "(Client's email)"
 msgstr "(email klienta)"
 
@@ -2284,74 +2466,74 @@ msgstr ""
 msgid "Appointments page"
 msgstr "Strona z rezerwacjami"
 
-#: admin/views/page-settings-tab-main-section-payments.php:18
+#: admin/views/page-settings-tab-main-section-payments.php:17
 msgid "Currency"
 msgstr "Waluta"
 
-#: admin/views/page-settings-tab-main-section-payments.php:33
+#: admin/views/page-settings-tab-main-section-payments.php:31
 msgid "PayPal Mode"
 msgstr "Tryb PayPal"
 
-#: admin/views/page-settings-tab-main-section-payments.php:36
+#: admin/views/page-settings-tab-main-section-payments.php:34
 msgid "Sandbox"
 msgstr "Tryb testowy"
 
-#: admin/views/page-settings-tab-main-section-payments.php:37
+#: admin/views/page-settings-tab-main-section-payments.php:35
 msgid "Live"
 msgstr ""
 
-#: admin/views/page-settings-tab-main-section-payments.php:43
+#: admin/views/page-settings-tab-main-section-payments.php:41
 msgid "PayPal Merchant E-mail"
 msgstr ""
 
-#: admin/views/page-settings-tab-main-section-payments.php:46
+#: admin/views/page-settings-tab-main-section-payments.php:44
 msgid ""
 "Just for your information, your IPN link is: <b>%s </b>. You may need this "
 "information in some cases."
 msgstr ""
 
-#: admin/views/page-settings-tab-main-section-payments.php:51
+#: admin/views/page-settings-tab-main-section-payments.php:49
 msgid "Thank You Page"
 msgstr "Strona z podziękowaniami"
 
-#: admin/views/page-settings-tab-main-section-payments.php:59
+#: admin/views/page-settings-tab-main-section-payments.php:57
 msgid ""
 "The page that client will be returned when he clicks the return link on "
 "Paypal website."
 msgstr ""
 
-#: admin/views/page-settings-tab-main-section-payments.php:64
+#: admin/views/page-settings-tab-main-section-payments.php:62
 msgid "Deposit (%)"
 msgstr "Kaucja (%)"
 
-#: admin/views/page-settings-tab-main-section-payments.php:67
+#: admin/views/page-settings-tab-main-section-payments.php:65
 msgid ""
 "You may want to ask a certain percentage of the service price as deposit, e."
 "g. 25. Leave this field empty to ask for full price."
 msgstr ""
 
-#: admin/views/page-settings-tab-main-section-payments.php:72
+#: admin/views/page-settings-tab-main-section-payments.php:70
 msgid "Deposit (fixed)"
 msgstr "Kaucja (stała wartość)"
 
-#: admin/views/page-settings-tab-main-section-payments.php:75
+#: admin/views/page-settings-tab-main-section-payments.php:73
 msgid ""
 "Same as above, but a fixed deposit will be asked from the client per "
 "appointment. If both fields are filled, only the fixed deposit will be taken "
 "into account."
 msgstr ""
 
-#: admin/views/page-settings-tab-main-section-payments.php:80
+#: admin/views/page-settings-tab-main-section-payments.php:78
 msgid "Allow zero-priced appointments auto-confirm"
 msgstr ""
 
-#: admin/views/page-settings-tab-main-section-payments.php:83
+#: admin/views/page-settings-tab-main-section-payments.php:81
 msgid "Allow auto-confirm for zero-priced appointments in a paid environment."
 msgstr ""
 
 #: admin/views/page-settings-tab-main-section-time.php:3
-msgid "Time base (minutes)"
-msgstr "Jednostka czasu (minuty)"
+msgid "Time base"
+msgstr "Bazując na czasie"
 
 #: admin/views/page-settings-tab-main-section-time.php:11
 msgid ""
@@ -2458,35 +2640,49 @@ msgstr ""
 "zablokować możliwść niepożądanego blokowania kalendarza). Odnosi się tylko "
 "do rezerwacji oczekujących."
 
-#: admin/views/page-settings-tab-services-section-new-service.php:19
-#: admin/views/page-settings-tab-services-section-services.php:39
+#: admin/views/page-settings-tab-services-section-edit-service.php:17
+#: admin/views/page-settings-tab-services-section-new-service.php:20
 msgid "Service Name"
 msgstr "Nazwa usługi"
 
-#: admin/views/page-settings-tab-services-section-new-service.php:27
-#: admin/views/page-settings-tab-services-section-services.php:44
+#: admin/views/page-settings-tab-services-section-edit-service.php:25
+#: admin/views/page-settings-tab-services-section-new-service.php:28
 msgid "Service Capacity"
 msgstr "Pojemność usługi"
 
-#: admin/views/page-settings-tab-services-section-new-service.php:35
-#: admin/views/page-settings-tab-services-section-services.php:48
+#: admin/views/page-settings-tab-services-section-edit-service.php:29
+#: admin/views/page-settings-tab-services-section-new-service.php:32
+msgid ""
+"When you set up \"Service Capacity\" to \"0\" it will be limited only by the "
+"number of available Service Providers."
+msgstr ""
+"Po ustawieniu \"Pojemność usługi\" na \"0\" będzie ona ograniczona tylko "
+"przez liczbę dostępnych usługodawców."
+
+#: admin/views/page-settings-tab-services-section-edit-service.php:34
+#: admin/views/page-settings-tab-services-section-new-service.php:37
 msgid "Service Duration"
 msgstr "Czas trwania usługi"
 
-#: admin/views/page-settings-tab-services-section-new-service.php:47
-#: admin/views/page-settings-tab-services-section-services.php:56
+#: admin/views/page-settings-tab-services-section-edit-service.php:50
+#: admin/views/page-settings-tab-services-section-new-service.php:53
 msgid "Service Price"
 msgstr "Cena usługi"
 
-#: admin/views/page-settings-tab-services-section-new-service.php:55
-#: admin/views/page-settings-tab-services-section-services.php:60
-#: admin/views/page-settings-tab-workers-section-new-worker.php:68
-#: admin/views/page-settings-tab-workers-section-workers.php:79
+#: admin/views/page-settings-tab-services-section-edit-service.php:58
+#: admin/views/page-settings-tab-services-section-new-service.php:61
+#: admin/views/page-settings-tab-workers-section-edit-worker.php:54
+#: admin/views/page-settings-tab-workers-section-new-worker.php:72
 msgid "Description Page"
 msgstr "Strona z opisem"
 
-#: admin/views/page-settings-tab-services-section-services.php:16
-#, fuzzy
+#: admin/views/page-settings-tab-services-section-edit-service.php:74
+#: admin/views/page-settings-tab-workers-section-edit-worker.php:70
+#: includes/pro/includes/addons/app-locations-location_support.php:152
+msgid "Save"
+msgstr "Zapisz"
+
+#: admin/views/page-settings-tab-services-section-services.php:1
 msgid ""
 "Here you should define your services for which your client will be making "
 "appointments. <b>There must be at least one service defined.</b> Capacity is "
@@ -2496,77 +2692,41 @@ msgid ""
 "request payment to accept appointments. You can define a description page "
 "for the service you are providing."
 msgstr ""
-"<i>Należy zdefiniować swoje usługi, na które klient będzie umawiał "
-"spotkania. <b>Musi być co najmniej zdefiniowana jedna usługa</b>. Pojemność "
-"to liczba klientów, którzy mogą rezerwować daną usługę w tym samym czasie. "
-"Wprowadź 0 dla braku limitu (ograniczone do liczby usługodawców, lub 1, "
-"jeżeli żaden z usługodawców nie jest przypisany dla tej usługi). Cena jest "
-"wymagane tylko w przypadku żądania zapłaty do przyjęcia rezerwacji. Można "
-"zdefiniować stronę opisu dla usługi.</i>"
-
-#: admin/views/page-settings-tab-services-section-services.php:25
-msgid "Capacity"
-msgstr "Pojemność"
-
-#: admin/views/page-settings-tab-services-section-services.php:26
-msgid "Duration (mins)"
-msgstr "Długość trwania (min)"
-
-#: admin/views/page-settings-tab-services-section-services.php:28
-msgid "Description page"
-msgstr "Strona z opisem"
-
-#: admin/views/page-settings-tab-services-section-services.php:29
-#: admin/views/page-settings-tab-workers-section-workers.php:28
-#: includes/pro/includes/addons/lib/class-app-locations-list-table.php:19
-msgid "Delete"
-msgstr "Usuń"
-
-#: admin/views/page-settings-tab-services-section-services.php:74
-#: admin/views/page-settings-tab-workers-section-new-worker.php:62
-#: admin/views/page-settings-tab-workers-section-workers.php:75
-msgid "No services defined"
-msgstr "Nie zdefiniowano usługi"
-
-#: admin/views/page-settings-tab-services-section-services.php:78
-#, fuzzy
-msgid ""
-"Tip: When you clear service name and save changes, this service will be "
-"deleted."
-msgstr ""
-"Podpowiedź: jeżeli dla danego wykonawcy nie zostanie wybrana żadna usługa, "
-"to zostanie on usunięty."
+"Należy zdefiniować swoje usługi, na które klient będzie umawiał spotkania. "
+"<b>Musi być co najmniej zdefiniowana jedna usługa</b>. Pojemność to liczba "
+"klientów, którzy mogą rezerwować daną usługę w tym samym czasie. Wprowadź 0 "
+"dla braku limitu (ograniczone do liczby usługodawców, lub 1, jeżeli żaden z "
+"usługodawców nie jest przypisany dla tej usługi). Cena jest wymagane tylko w "
+"przypadku żądania zapłaty do przyjęcia rezerwacji. Można zdefiniować stronę "
+"opisu dla usługi."
 
 #: admin/views/page-settings-tab-services.php:7
 msgid "Service Added"
 msgstr "Usługa dodana"
 
-#: admin/views/page-settings-tab-workers-section-new-worker.php:26
-#: admin/views/page-settings-tab-workers-section-workers.php:23
-#: admin/views/page-settings-tab-workers-section-workers.php:50
-msgid "Service Provider"
-msgstr "Wykonawca"
-
-#: admin/views/page-settings-tab-workers-section-new-worker.php:34
-#: admin/views/page-settings-tab-workers-section-workers.php:24
-#: admin/views/page-settings-tab-workers-section-workers.php:55
+#: admin/views/page-settings-tab-workers-section-edit-worker.php:20
+#: admin/views/page-settings-tab-workers-section-new-worker.php:38
 msgid "Dummy?"
 msgstr "Atrapa?"
 
-#: admin/views/page-settings-tab-workers-section-new-worker.php:42
-#: admin/views/page-settings-tab-workers-section-workers.php:25
-#: admin/views/page-settings-tab-workers-section-workers.php:59
+#: admin/views/page-settings-tab-workers-section-edit-worker.php:28
+#: admin/views/page-settings-tab-workers-section-new-worker.php:46
 msgid "Additional Price"
 msgstr "Dodatkowa cena"
 
-#: admin/views/page-settings-tab-workers-section-new-worker.php:50
+#: admin/views/page-settings-tab-workers-section-edit-worker.php:36
+#: admin/views/page-settings-tab-workers-section-edit-worker.php:40
 #: admin/views/page-settings-tab-workers-section-new-worker.php:54
-#: admin/views/page-settings-tab-workers-section-workers.php:64
+#: admin/views/page-settings-tab-workers-section-new-worker.php:58
 msgid "Services Provided"
 msgstr "Usługi zapewnione"
 
-#: admin/views/page-settings-tab-workers-section-workers.php:15
-#, fuzzy
+#: admin/views/page-settings-tab-workers-section-edit-worker.php:48
+#: admin/views/page-settings-tab-workers-section-new-worker.php:66
+msgid "No services defined"
+msgstr "Nie zdefiniowano usługi"
+
+#: admin/views/page-settings-tab-workers-section-workers.php:1
 msgid ""
 "Here you should define your workers for which your client will be making "
 "appointments. <b>There must be at least one service defined.</b> Capacity is "
@@ -2576,41 +2736,13 @@ msgid ""
 "request payment to accept appointments. You can define a description page "
 "for the service you are providing."
 msgstr ""
-"<i>Należy zdefiniować swoje usługi, na które klient będzie umawiał "
-"spotkania. <b>Musi być co najmniej zdefiniowana jedna usługa</b>. Pojemność "
-"to liczba klientów, którzy mogą rezerwować daną usługę w tym samym czasie. "
-"Wprowadź 0 dla braku limitu (ograniczone do liczby usługodawców, lub 1, "
-"jeżeli żaden z usługodawców nie jest przypisany dla tej usługi). Cena jest "
-"wymagane tylko w przypadku żądania zapłaty do przyjęcia rezerwacji. Można "
-"zdefiniować stronę opisu dla usługi.</i>"
-
-#: admin/views/page-settings-tab-workers-section-workers.php:26
-msgid "Services Provided*"
-msgstr "Usługie wykonywane przez*"
-
-#: admin/views/page-settings-tab-workers-section-workers.php:27
-msgid "Bio page"
-msgstr "Bio"
-
-#: admin/views/page-settings-tab-workers-section-workers.php:32
-msgid ""
-"* <b>You must select at least one service, otherwise provider will not be "
-"saved!</b>"
-msgstr ""
-"* <b>Musisz wybrać przynajmniej jedną usługę, w przeciwnym razie wykonawca "
-"nie zostanie zapisany!</b>"
-
-#: admin/views/page-settings-tab-workers-section-workers.php:93
-msgid "No service providers defined"
-msgstr "Brak zdefiniowanych wykonawców"
-
-#: admin/views/page-settings-tab-workers-section-workers.php:97
-msgid ""
-"Tip: When you uncheck all \"Services Provided\" selections and save, this "
-"service provider will be deleted."
-msgstr ""
-"Podpowiedź: jeżeli dla danego wykonawcy nie zostanie wybrana żadna usługa, "
-"to zostanie on usunięty."
+"Tutaj należy zdefiniować swoich pracowników, dla których klient będzie mógł "
+"się umówić na spotkanie. <b>Musi być zdefiniowana co najmniej jedna usługa.</"
+"b> Pojemność to liczba klientów, którzy mogą korzystać z usługi w tym samym "
+"czasie. Wpisz 0, aby nie było określonego limitu (Ograniczona do liczby "
+"usługodawców lub do 1, jeśli nie zdefiniowano żadnego dostawcy usług dla tej "
+"usługi). Cena jest wymagana tylko w przypadku, gdy żądasz zapłaty za "
+"zaakceptowanie wizyty. Można zdefiniować stronę z opisem oferowanej usługi."
 
 #: admin/views/page-settings-tab-workers.php:7
 msgid "Service Provider Added"
@@ -2633,19 +2765,18 @@ msgid "# selected"
 msgstr "# zaznaczone"
 
 #: admin/views/page-settings-tab-working_hours.php:3
-#, fuzzy
 msgid ""
 "Here you can define working hours and breaks for your business. When you add "
 "new service providers, their working and break hours will be set to the "
 "default schedule. Then you can edit their schedule by selecting their names "
 "from the dropdown menu below."
 msgstr ""
-"<i>Tutaj można zdefiniować godziny i przerwy w pracy. Przy dodawaniu nowych "
+"Tutaj można zdefiniować godziny i przerwy w pracy. Przy dodawaniu nowych "
 "usługodawców, ich czas pracy i przerwa zostanie ustawionyzgodnie z "
 "harmonogramem domyślnym. Następnie można edytować ich harmonogram, "
-"wybierając ich nazwy z rozwijanego menu poniżej.</i>"
+"wybierając ich nazwy z rozwijanego menu poniżej."
 
-#: admin/views/page-settings-tab-working_hours.php:36
+#: admin/views/page-settings-tab-working_hours.php:37
 #: admin/views/user-profile-working-hours.php:10
 msgid "Break Hours"
 msgstr "Przerwy"
@@ -2663,7 +2794,7 @@ msgid "Future transactions"
 msgstr "Przyszłe transakcje"
 
 #: admin/views/page-transactions.php:60 admin/views/page-transactions.php:63
-#: includes/class-app-appointment.php:1196
+#: includes/class-app-appointment.php:1222
 msgid "None yet"
 msgstr "Nic do wyświetlenia"
 
@@ -2733,131 +2864,131 @@ msgstr[2] "%d aktywnych rezerwacji"
 #: admin/widgets/class-app-dashboard-widget.php:32
 msgid "%d Pending Appointment"
 msgid_plural "%d Pending Appointments"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d oczekująca wizyta"
+msgstr[1] "%d oczekujące wizyty"
+msgstr[2] "%d oczekujących wizyt"
 
-#: appointments.php:407 appointments.php:699 includes/class-app-service.php:507
+#: appointments.php:415 appointments.php:707 includes/class-app-service.php:502
 msgid "Not defined"
 msgstr "Brak zdefiniowania"
 
-#: appointments.php:660
+#: appointments.php:668
 msgid "Sunday"
 msgstr "Niedziela"
 
-#: appointments.php:661
+#: appointments.php:669
 msgid "Monday"
 msgstr "Poniedziałek"
 
-#: appointments.php:662
+#: appointments.php:670
 msgid "Tuesday"
 msgstr "Wtorek"
 
-#: appointments.php:663
+#: appointments.php:671
 msgid "Wednesday"
 msgstr "Środa"
 
-#: appointments.php:664
+#: appointments.php:672
 msgid "Thursday"
 msgstr "Czwartek"
 
-#: appointments.php:665
+#: appointments.php:673
 msgid "Friday"
 msgstr "Piątek"
 
-#: appointments.php:666
+#: appointments.php:674
 msgid "Saturday"
 msgstr "Sobota"
 
-#: appointments.php:687
+#: appointments.php:695 includes/class-app-gdpr.php:97
 msgid "Email"
 msgstr "Email"
 
-#: appointments.php:688
+#: appointments.php:696 includes/class-app-gdpr.php:101
 msgid "Phone"
 msgstr "Telefon"
 
-#: appointments.php:689
+#: appointments.php:697 includes/class-app-gdpr.php:105
 #: includes/pro/includes/addons/app-locations-location_support.php:148
 #: includes/pro/includes/addons/app-locations-location_support.php:220
 #: includes/pro/includes/addons/app-locations-location_support.php:231
 msgid "Address"
 msgstr "Adres"
 
-#: appointments.php:690
+#: appointments.php:698 includes/class-app-gdpr.php:109
 msgid "City"
 msgstr "Miasto"
 
-#: appointments.php:691
+#: appointments.php:699 includes/class-app-gdpr.php:113
 msgid "Note"
 msgstr "Notatki"
 
-#: appointments.php:710
+#: appointments.php:718
 msgid "Free"
 msgstr "Wolny"
 
-#: appointments.php:711
+#: appointments.php:719
 msgid "Busy"
 msgstr "Zajęty"
 
-#: appointments.php:712
+#: appointments.php:720
 msgid "Not possible"
 msgstr "Brak"
 
-#: appointments.php:771
+#: appointments.php:779
 msgid "More information <span class=\"meta-nav\">&rarr;</span>"
 msgstr "Więcej informacji <span class=\"meta-nav\">&rarr;</span>"
 
-#: appointments.php:862
+#: appointments.php:870
 msgid "%s Appointment"
 msgstr ""
 
-#: appointments.php:893
+#: appointments.php:901
 msgid "Something wrong about the submitted %s"
 msgstr "Podane dane są błędne %s"
 
-#: appointments.php:1804
+#: appointments.php:1826
 msgid "Login with Facebook"
 msgstr "Logowanie za pomocą konta Facebook"
 
-#: appointments.php:1805
+#: appointments.php:1827
 msgid "Login with Twitter"
 msgstr "Logowanie za pomocą konta Twitter"
 
-#: appointments.php:1806
+#: appointments.php:1828
 msgid "Login with Google+"
 msgstr "Logowanie za pomocą konta Google+"
 
-#: appointments.php:1807
+#: appointments.php:1829
 msgid "Login with WordPress"
 msgstr "Logowanie za pomocą konta WordPress"
 
-#: appointments.php:1808 includes/gcal/views/settings-gcal-step-1.php:70
+#: appointments.php:1830 includes/gcal/views/settings-gcal-step-1.php:70
 #: includes/gcal/views/settings-gcal-step-2.php:22
 msgid "Submit"
 msgstr "Wyślij"
 
-#: appointments.php:1810
+#: appointments.php:1832
 msgid "Please, wait..."
 msgstr "Proszę czekać ..."
 
-#: appointments.php:1811
+#: appointments.php:1833
 msgid "You are now logged in"
 msgstr "Jesteś zalogowany / zalogowana"
 
-#: appointments.php:1812
+#: appointments.php:1834
 msgid "Login error. Please try again."
 msgstr "Błąd logowania. Proszę spróbować ponownie"
 
-#: appointments.php:1815 includes/class_app_codec.php:369
+#: appointments.php:1837 includes/class_app_codec.php:369
 msgid "Register"
 msgstr "Zarejestruj"
 
-#: appointments.php:1950 includes/helpers-settings.php:66
+#: appointments.php:1972 includes/helpers-settings.php:71
 msgid "Confirmation of your Appointment"
 msgstr "Potwierdź rezerwację"
 
-#: appointments.php:1952 includes/helpers-settings.php:68
+#: appointments.php:1974 includes/helpers-settings.php:73
 msgid "Reminder for your Appointment"
 msgstr "Przypomnienie rezerwacji"
 
@@ -2885,7 +3016,7 @@ msgid "Record could not be saved OR you did not make any changes!"
 msgstr "Wpis nie mógł zostać zachowany LUB nie dokonałeś żadnych zmian"
 
 #: includes/class-app-ajax.php:200 includes/class-app-ajax.php:212
-#: includes/pro/includes/addons/app-users-additional_fields.php:394
+#: includes/pro/includes/addons/app-users-additional_fields.php:400
 msgid "<span style=\"color:green;font-weight:bold\">Changes saved.</span>"
 msgstr "<span style=\"color:green;font-weight:bold\">Zmiany zapisane.</span>"
 
@@ -2909,7 +3040,7 @@ msgstr ""
 "Dokonałeś już rezerwacji we wskazanym terminie. Proszę czekać na "
 "potwierdzenie."
 
-#: includes/class-app-ajax.php:474 includes/class-app-ajax.php:932
+#: includes/class-app-ajax.php:474 includes/class-app-ajax.php:939
 msgid ""
 "We are sorry, but this time slot is no longer available. Please refresh the "
 "page and try another time slot. Thank you."
@@ -2917,11 +3048,11 @@ msgstr ""
 "Przykro nam, ale ten termin nie jest już dostępny. Proszę odświerzyć stronę "
 "i zapisać się na inny wolny termin. Dziękujemy."
 
-#: includes/class-app-ajax.php:546 includes/class-app-ajax.php:555
+#: includes/class-app-ajax.php:546 includes/class-app-ajax.php:562
 msgid "Appointment could not be saved. Please contact website admin."
 msgstr "Rezerwacja nie może zostać zapisana. Proszę skontaktować się z obsługą"
 
-#: includes/class-app-ajax.php:753
+#: includes/class-app-ajax.php:760
 msgid ""
 "Paypal confirmation arrived, but status could not be changed for some "
 "reason. Please check appointment with ID %s"
@@ -2929,11 +3060,11 @@ msgstr ""
 "Paypal potwierdził dokonanie płatności, ale status nie może zostać "
 "zmieniony. Prosz sprawdzić rezerwacje z ID %s"
 
-#: includes/class-app-ajax.php:755
+#: includes/class-app-ajax.php:762
 msgid "Appointment status could not be changed"
 msgstr "Status rezerwacji nie może zostać zmieniony"
 
-#: includes/class-app-ajax.php:761
+#: includes/class-app-ajax.php:768
 msgid ""
 "Last transaction has been reversed. Reason: Payment has been reversed "
 "(charge back)"
@@ -2941,111 +3072,109 @@ msgstr ""
 "Ostatnia transakcja została odrzucona. Powód: płatność została zwrócona "
 "(charge back)"
 
-#: includes/class-app-ajax.php:786
+#: includes/class-app-ajax.php:793
 msgid "Last transaction has been reversed. Reason: Payment has been refunded"
 msgstr ""
 "Ostatnia transakcja została odrzucona. Powód: płatność została zwrócona "
 "(charge back)"
 
-#: includes/class-app-ajax.php:811
+#: includes/class-app-ajax.php:818
 msgid "Last transaction has been reversed. Reason: Payment Denied"
 msgstr ""
 "Ostatnia transakcja została odrzucona. Powód: transakcja odrzucona (payment "
 "denied)"
 
-#: includes/class-app-ajax.php:838
+#: includes/class-app-ajax.php:845
 msgid "Customer did not include a confirmed shipping address"
 msgstr ""
 
-#: includes/class-app-ajax.php:839
+#: includes/class-app-ajax.php:846
 msgid "Funds not captured yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:840
+#: includes/class-app-ajax.php:847
 msgid "eCheck that has not cleared yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:841
+#: includes/class-app-ajax.php:848
 msgid "Payment waiting for aproval by service provider"
 msgstr "Płatność oczekuje na potwierdzenie przez usługodawcę"
 
-#: includes/class-app-ajax.php:842
+#: includes/class-app-ajax.php:849
 msgid "Payment waiting for service provider to handle multi-currency process"
 msgstr ""
 
-#: includes/class-app-ajax.php:843
+#: includes/class-app-ajax.php:850
 msgid "Customer did not register or confirm his/her email yet"
 msgstr ""
 "Klient nie zarejestrował jeszcze ani nie potwierdził swojego adresu e-mail"
 
-#: includes/class-app-ajax.php:844
+#: includes/class-app-ajax.php:851
 msgid "Waiting for service provider to upgrade the PayPal account"
 msgstr ""
 
-#: includes/class-app-ajax.php:845
+#: includes/class-app-ajax.php:852
 msgid "Waiting for service provider to verify his/her PayPal account"
 msgstr ""
 
-#: includes/class-app-ajax.php:849
+#: includes/class-app-ajax.php:856
 msgid "Last transaction is pending. Reason: "
 msgstr ""
 
-#: includes/class-app-ajax.php:912
+#: includes/class-app-ajax.php:919
 msgid "You need to login to make an appointment."
-msgstr ""
+msgstr "Aby dokonać rezerwacji wizyty należy się zalogować."
 
-#: includes/class-app-ajax.php:938
+#: includes/class-app-ajax.php:945
 msgid "Service name: "
 msgstr "Rodzaj usługi:"
 
-#: includes/class-app-ajax.php:939
+#: includes/class-app-ajax.php:946
 msgid "Date and time: "
 msgstr "Data i godzina:"
 
-#: includes/class-app-ajax.php:940
+#: includes/class-app-ajax.php:947
 msgid "Lasts (approx): "
 msgstr "Czas trwania:"
 
-#: includes/class-app-ajax.php:940
+#: includes/class-app-ajax.php:947
 msgid "minutes"
 msgstr "minut"
 
-#: includes/class-app-ajax.php:943
+#: includes/class-app-ajax.php:950
 msgid "Price: "
 msgstr "Cena:"
 
-#: includes/class-app-ajax.php:948
+#: includes/class-app-ajax.php:955
 msgid "Service provider: "
 msgstr "Wykonawca:"
 
-#: includes/class-app-ajax.php:1034
+#: includes/class-app-ajax.php:1041
 msgid "Nothing to download!"
 msgstr "Nie ma nic do pobrania"
 
-#: includes/class-app-ajax.php:1143 includes/class-app-ajax.php:1156
-#: includes/class-app-ajax.php:1182
+#: includes/class-app-ajax.php:1150 includes/class-app-ajax.php:1163
+#: includes/class-app-ajax.php:1189
 msgid "Sorry, there was a problem with your request!"
 msgstr "Przykro nam, ale wystąpił problem z obługą zapytania!"
 
-#: includes/class-app-ajax.php:1168 includes/class-app-ajax.php:1194
+#: includes/class-app-ajax.php:1175 includes/class-app-ajax.php:1201
 msgid "Service Provider was successfuly deleted."
 msgstr "Wykonawca został skasowany."
 
-#: includes/class-app-appointment.php:1181
+#: includes/class-app-appointment.php:1207
 msgid "Paid"
 msgstr "Zapłacone"
 
-#: includes/class-app-appointment.php:1182
+#: includes/class-app-appointment.php:1208
 msgid "Confirmed"
 msgstr "Potwierdzone"
 
-#: includes/class-app-appointment.php:1452 includes/default_filters.php:121
-#, fuzzy
+#: includes/class-app-appointment.php:1478 includes/default_filters.php:121
 msgid "The appointment does not exist."
 msgstr "Wybrana wizyta nie istnieje."
 
-#: includes/class-app-appointment.php:1456
-#, fuzzy
+#: includes/class-app-appointment.php:1482
 msgid "The appointment has been already cancelled."
 msgstr "Wizyta został już anulowana."
 
@@ -3079,7 +3208,64 @@ msgstr ""
 "Nazwa serwisu: SERVICE\n"
 "Nazwa dostawcy serwisu: SERVICE_PROVIDER\n"
 
-#: includes/class-app-service.php:63
+#: includes/class-app-gdpr.php:117
+msgid "Create date"
+msgstr "Data utworzenia"
+
+#: includes/class-app-gdpr.php:121
+msgid "Start date"
+msgstr "Data rozpoczęcia"
+
+#: includes/class-app-gdpr.php:125
+msgid "End date"
+msgstr "Data zakończenia"
+
+#: includes/class-app-gdpr.php:193
+msgid "We deleted %d appointment."
+msgid_plural "We deleted %d appointments"
+msgstr[0] "Skasowano %d wizytę."
+msgstr[1] "Skasowano %d wizyty."
+msgstr[2] "Skasowano %d wizyt."
+
+#: includes/class-app-gdpr.php:195
+msgid "We do not deleted any appointments."
+msgstr "Nie skasowano żadnej wizyty."
+
+#: includes/class-app-gdpr.php:203
+msgid "We do not deleted %d appointment."
+msgid_plural "We do not deleted %d appointments"
+msgstr[0] "Nie skasowano %d wizyty."
+msgstr[1] "Nie skasowano %d wizyt."
+msgstr[2] "Nie skasowano %d wizyt."
+
+#: includes/class-app-gdpr.php:243
+msgid "Plugin: Appointments"
+msgstr "Wtyczka: Appointments"
+
+#: includes/class-app-gdpr.php:245
+msgid ""
+"When visitors book an appointment on the site we collect the data shown in "
+"the appointments form to allow future contact with a client."
+msgstr ""
+"Kiedy odwiedzający rezerwują wizytę w witrynie, zbieramy dane pokazane w "
+"formularzu spotkań, aby umożliwić przyszły kontakt z klientem."
+
+#: includes/class-app-gdpr.php:246
+msgid ""
+"All collected data is not shown publicly but we can send it to our workers "
+"or contractors who will perform ordered services."
+msgstr ""
+"Żadna z zebranych informacji nie jest prezentowanea publicznie, ale możemy "
+"je przesłać naszym pracownikom lub kontrahentom, którzy wykonają zamówione "
+"usługi."
+
+#: includes/class-app-gdpr.php:250
+msgid ""
+"All collected data will be automatically erased %s after appointment date."
+msgstr ""
+"Wszystkie zebrane dane zostaną automatycznie usunięte %s po dacie wizyty."
+
+#: includes/class-app-service.php:60
 msgid ""
 "You have reached the limit for the free version. <a href=\"%s\">Upgrade to "
 "Appointments+ for unlimited services</a>"
@@ -3221,7 +3407,7 @@ msgstr ""
 
 #: includes/class-app-tutorial.php:109
 msgid "Entering your holidays"
-msgstr ""
+msgstr "Wprowadzanie terminów świąt"
 
 #: includes/class-app-tutorial.php:110
 msgid "Click the Exceptions tab to define your holidays and then click Next."
@@ -3229,7 +3415,7 @@ msgstr ""
 
 #: includes/class-app-tutorial.php:114
 msgid "Setting exceptional days"
-msgstr ""
+msgstr "Ustawianie wyjątków dla dni"
 
 #: includes/class-app-tutorial.php:115
 msgid ""
@@ -3254,6 +3440,9 @@ msgid ""
 "have been installed during installation. You can edit and even delete that "
 "too, but you should have at least one service in this table."
 msgstr ""
+"Można dodać usługę, klikając ten przycisk. Domyślna usługa powinna zostać "
+"utworzona podczas instalacji. Można edytować, a nawet usuwać, ale należy "
+"mieć zdefiniowaną przynajmniej jedną usługę."
 
 #: includes/class-app-tutorial.php:130
 msgid ""
@@ -3404,11 +3593,11 @@ msgstr ""
 "zapisane dopóki nie zostanie kliknięty przycisk zapisz. Dzięki za używanie "
 "Appointments+."
 
-#: includes/class-app-worker.php:149
+#: includes/class-app-worker.php:148
 msgid "Our staff"
 msgstr "Nasi pracownicy"
 
-#: includes/class-app-worker.php:151
+#: includes/class-app-worker.php:150
 msgid "A specialist"
 msgstr "Specjalista"
 
@@ -3510,7 +3699,7 @@ msgstr "Dolar amerykański"
 
 #: includes/class_app_codec.php:51
 msgid "RUB - Russian Ruble"
-msgstr ""
+msgstr "RUB - Rubel rosyjski"
 
 #: includes/class_app_codec.php:59
 msgid "AUD"
@@ -3574,7 +3763,7 @@ msgstr "NOK"
 
 #: includes/class_app_codec.php:74
 msgid "NZD"
-msgstr ""
+msgstr "NZD"
 
 #: includes/class_app_codec.php:75
 msgid "PHP"
@@ -3582,7 +3771,7 @@ msgstr "PHP"
 
 #: includes/class_app_codec.php:76
 msgid "PLN"
-msgstr ""
+msgstr "PLN"
 
 #: includes/class_app_codec.php:77
 msgid "SEK"
@@ -3590,19 +3779,19 @@ msgstr "SEK"
 
 #: includes/class_app_codec.php:78
 msgid "SGD"
-msgstr ""
+msgstr "SGD"
 
 #: includes/class_app_codec.php:79
 msgid "TWD"
-msgstr ""
+msgstr "TWD"
 
 #: includes/class_app_codec.php:80
 msgid "THB"
-msgstr ""
+msgstr "THB"
 
 #: includes/class_app_codec.php:81
 msgid "TRY"
-msgstr ""
+msgstr "WYPRÓBUJ"
 
 #: includes/class_app_codec.php:82
 msgid "USD"
@@ -3610,7 +3799,7 @@ msgstr "USD"
 
 #: includes/class_app_codec.php:83
 msgid "RUB"
-msgstr ""
+msgstr "RUB"
 
 #: includes/class_app_codec.php:138
 #: includes/notifications/class-app-notification-removal.php:195
@@ -3663,17 +3852,15 @@ msgid "Less Info"
 msgstr "Mniej informacji"
 
 #: includes/default_filters.php:121 includes/default_filters.php:124
-#: includes/shortcodes/class-app-shortcode-confirmation.php:231
+#: includes/shortcodes/class-app-shortcode-confirmation.php:242
 msgid "Error"
 msgstr "Błąd"
 
 #: includes/default_filters.php:124
-#, fuzzy
 msgid "You are not allowed to perform this action."
 msgstr "Nie masz uprawnień, żeby wykonać wybraną akcję."
 
 #: includes/default_filters.php:138
-#, fuzzy
 msgid "Your appointment has been cancelled!"
 msgstr "Twoja wizyta został anulowana!"
 
@@ -3712,38 +3899,43 @@ msgstr "Wybierz Calendarz który ma pracować z modłem."
 msgid "Calendar"
 msgstr "Kalendarz"
 
-#: includes/gcal/views/profile-gcal-connected.php:10
+#: includes/gcal/views/profile-gcal-connected.php:11
 #: includes/gcal/views/settings-gcal-step-3.php:12
 msgid "-- Select a Calendar --"
 msgstr "-- Wybierz Kalendarz --"
 
-#: includes/gcal/views/profile-gcal-connected.php:21
-#: includes/gcal/views/settings-gcal-step-3.php:26
+#: includes/gcal/views/profile-gcal-connected.php:20
+#: includes/gcal/views/settings-gcal-step-3.php:21
+msgid "There was an error loading your calendars."
+msgstr "Błąd podczas ładowania twoich kalendarzy."
+
+#: includes/gcal/views/profile-gcal-connected.php:27
+#: includes/gcal/views/settings-gcal-step-3.php:28
 msgid "API Mode"
 msgstr "Tryb API"
 
-#: includes/gcal/views/profile-gcal-connected.php:25
-#: includes/gcal/views/settings-gcal-step-3.php:30
-msgid "Integration disabled"
-msgstr ""
-
-#: includes/gcal/views/profile-gcal-connected.php:27
+#: includes/gcal/views/profile-gcal-connected.php:31
 #: includes/gcal/views/settings-gcal-step-3.php:32
+msgid "Integration disabled"
+msgstr "Wyłączono integrację"
+
+#: includes/gcal/views/profile-gcal-connected.php:33
+#: includes/gcal/views/settings-gcal-step-3.php:34
 msgid "A+ <- GCal (Only import appointments)"
 msgstr "A+ <- GCal (Tylko importuj)"
 
-#: includes/gcal/views/profile-gcal-connected.php:30
-#: includes/gcal/views/settings-gcal-step-3.php:35
+#: includes/gcal/views/profile-gcal-connected.php:36
+#: includes/gcal/views/settings-gcal-step-3.php:37
 msgid "A+ -> GCal (Only export appointments)"
 msgstr "A+ -> GCal (tylko eksport rezerwacji)"
 
-#: includes/gcal/views/profile-gcal-connected.php:33
-#: includes/gcal/views/settings-gcal-step-3.php:38
+#: includes/gcal/views/profile-gcal-connected.php:39
+#: includes/gcal/views/settings-gcal-step-3.php:40
 msgid "A+ <-> GCal (Synchronization)"
 msgstr "A+ <-> GCal (synchronizacja)"
 
-#: includes/gcal/views/profile-gcal-connected.php:37
-#: includes/gcal/views/settings-gcal-step-3.php:42
+#: includes/gcal/views/profile-gcal-connected.php:43
+#: includes/gcal/views/settings-gcal-step-3.php:44
 msgid ""
 "Select method of integration. A+ -> GCal setting sends appointments to your "
 "selected Google calendar, but events in your Google Calendar account are not "
@@ -3755,33 +3947,33 @@ msgstr ""
 "nie są importowane do modułu, a tym samym nie rezerwują dostępnego czasu "
 "pracy. A + <->  ustawienie Gcal działa w obu kierunkach."
 
-#: includes/gcal/views/profile-gcal-connected.php:41
-#: includes/gcal/views/settings-gcal-step-3.php:81
+#: includes/gcal/views/profile-gcal-connected.php:47
+#: includes/gcal/views/settings-gcal-step-3.php:84
 msgid "Event summary (name)"
 msgstr "Podsumowanie wydarzenia"
 
-#: includes/gcal/views/profile-gcal-connected.php:48
-#: includes/gcal/views/settings-gcal-step-3.php:88
+#: includes/gcal/views/profile-gcal-connected.php:54
+#: includes/gcal/views/settings-gcal-step-3.php:91
 msgid "Event description"
 msgstr "Opis wydarzenia"
 
-#: includes/gcal/views/profile-gcal-connected.php:53
-#: includes/gcal/views/settings-gcal-step-3.php:93
+#: includes/gcal/views/profile-gcal-connected.php:59
+#: includes/gcal/views/settings-gcal-step-3.php:96
 msgid ""
 "For the above 2 fields, you can use the following placeholders which will be "
 "replaced by their real values:"
 msgstr ""
 
-#: includes/gcal/views/profile-gcal-connected.php:55
-#: includes/gcal/views/settings-gcal-step-3.php:95
+#: includes/gcal/views/profile-gcal-connected.php:61
+#: includes/gcal/views/settings-gcal-step-3.php:98
 msgid "Please be careful about privacy if your calendar is public."
-msgstr ""
+msgstr "Zachowaj ostrożność, jeśli twój kalendarz jest widoczny publicznie."
 
-#: includes/gcal/views/profile-gcal-connected.php:62
+#: includes/gcal/views/profile-gcal-connected.php:68
 msgid "Reset Calendar Credentials"
 msgstr "Resetuj poświadczenia Kalendarza"
 
-#: includes/gcal/views/profile-gcal-connected.php:65
+#: includes/gcal/views/profile-gcal-connected.php:71
 #: includes/gcal/views/settings-gcal-step-2.php:23
 msgid "Reset"
 msgstr "Resetuj"
@@ -3827,11 +4019,11 @@ msgstr ""
 "Calendar button. Button is inserted in the confirmation area, as well as My "
 "Appointments shortcode and user page/tab if applicable."
 
-#: includes/gcal/views/settings-gcal-button.php:12
+#: includes/gcal/views/settings-gcal-button.php:11
 msgid "Open Google Calendar in the Same Window"
 msgstr "Otwórz Kalendarz Google w tym samym oknie"
 
-#: includes/gcal/views/settings-gcal-button.php:15
+#: includes/gcal/views/settings-gcal-button.php:14
 msgid ""
 "As default, Google Calendar is opened in a new tab or window. If you check "
 "this option, user will be redirected to Google Calendar from the appointment "
@@ -3862,11 +4054,17 @@ msgstr ""
 msgid "Google Calendar API: Create a new Google Application"
 msgstr "Kalendarz Google API: Stwórz nową aplikację Google"
 
+#: includes/gcal/views/settings-gcal-step-1.php:2
+msgid "Instructions:"
+msgstr "Instrukcje:"
+
 #: includes/gcal/views/settings-gcal-step-1.php:8
 msgid ""
 "Go to %s and create a new project. i.e. \"Appointments APP\", then click "
-"\"Create\""
+"\"Create\"."
 msgstr ""
+"Przejdź do %s i utwórz nowy projekt. np. \"Aplikacja spotkań\", a następnie "
+"kliknij \"Utwórz\"."
 
 #: includes/gcal/views/settings-gcal-step-1.php:8
 msgid "Google Developer Console Projects"
@@ -3882,7 +4080,7 @@ msgstr ""
 
 #: includes/gcal/views/settings-gcal-step-1.php:20
 msgid "Enable the \"Calendar API\"."
-msgstr ""
+msgstr "Włącz \"API kalendarza\"."
 
 #: includes/gcal/views/settings-gcal-step-1.php:24
 msgid "On the left side, click on \"Credentials\"..."
@@ -3895,7 +4093,7 @@ msgid ""
 msgstr ""
 
 #: includes/gcal/views/settings-gcal-step-1.php:32
-msgid "Click again on \"Credentials\" tab and then Create Credentials"
+msgid "Click again on \"Credentials\" tab and then Create Credentials."
 msgstr ""
 
 #: includes/gcal/views/settings-gcal-step-1.php:36
@@ -3921,7 +4119,7 @@ msgstr ""
 
 #: includes/gcal/views/settings-gcal-step-2.php:2
 msgid "Google Calendar API: Authorize access to your Google Application"
-msgstr ""
+msgstr "Google Calendar API: autoryzuj dostęp do aplikacji Google"
 
 #: includes/gcal/views/settings-gcal-step-3.php:1
 msgid "Google Calendar API: Select Your Calendar"
@@ -3934,83 +4132,98 @@ msgid ""
 "Profile Settings."
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-3.php:20
-msgid "There was an error loading your calendars."
-msgstr "Błąd podczas ładowania twoich kalendarzy."
-
-#: includes/gcal/views/settings-gcal-step-3.php:48
+#: includes/gcal/views/settings-gcal-step-3.php:50
 msgid "Overwrite Google Calendar Title and Description"
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-3.php:52
+#: includes/gcal/views/settings-gcal-step-3.php:55
 msgid ""
 "With this option checked, whenever a Google Calendar Event is updated, title "
 "and description will be updated too. Otherwise, Google Calendar title and "
 "description will show."
 msgstr ""
+"Po zaznaczeniu tej opcji za każdym razem, gdy wydarzenie w Kalendarzu Google "
+"zostanie zaktualizowane, tytuł i opis również zostaną zaktualizowane. W "
+"przeciwnym razie pojawi się tytuł i opis z Kalendarza Google."
 
-#: includes/gcal/views/settings-gcal-step-3.php:57
+#: includes/gcal/views/settings-gcal-step-3.php:60
 msgid "Allow Service Providers for Google Calendar API Integration"
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-3.php:64
+#: includes/gcal/views/settings-gcal-step-3.php:67
 msgid ""
 "Whether you let your service providers to integrate with their own Google "
 "Calendar account using their profile page."
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-3.php:69
-msgid "Appointments will be sent to Google Calendar for"
-msgstr ""
-
 #: includes/gcal/views/settings-gcal-step-3.php:72
+msgid "Appointments will be sent to Google Calendar for"
+msgstr "Appointments będzie wysyłać Kalendarza Google dla"
+
+#: includes/gcal/views/settings-gcal-step-3.php:75
 msgid "All"
 msgstr "Wszystko"
 
-#: includes/gcal/views/settings-gcal-step-3.php:73
+#: includes/gcal/views/settings-gcal-step-3.php:76
 msgid "No preference case"
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-3.php:76
+#: includes/gcal/views/settings-gcal-step-3.php:79
 msgid ""
 "If you select \"All\", any appointment made from this website will be sent "
 "to the selected calendar. If you select \"No preference case\", only "
 "appointments which do not have an assigned service provider will be sent."
 msgstr ""
 
-#: includes/gcal/views/settings-gcal-step-3.php:103
-msgid "Import and Update"
-msgstr ""
-
 #: includes/gcal/views/settings-gcal-step-3.php:106
+msgid "Import and Update"
+msgstr "Importuj i aktualizuj"
+
+#: includes/gcal/views/settings-gcal-step-3.php:109
 msgid "Import and Update Events from GCal"
 msgstr "Import i aktualizacja Wydarzeń z GCal"
 
-#: includes/gcal/views/settings-gcal-step-3.php:114
+#: includes/gcal/views/settings-gcal-step-3.php:117
 msgid "Export and Update"
 msgstr "Eksport i aktualizacja"
 
-#: includes/gcal/views/settings-gcal-step-3.php:117
+#: includes/gcal/views/settings-gcal-step-3.php:120
 msgid "Export and Update Events to GCal"
 msgstr "Eksport i aktualizacja Wydarzeń z GCal "
 
-#: includes/gcal/views/settings-gcal-step-3.php:170
+#: includes/gcal/views/settings-gcal-step-3.php:173
 msgid "Importing Appointments..."
-msgstr ""
+msgstr "Importowanie wizyt..."
 
-#: includes/gcal/views/settings-gcal-step-3.php:193
+#: includes/gcal/views/settings-gcal-step-3.php:196
 msgid ""
 "Are you sure? Appointments in Appointments > Reserved by GCal that do not "
 "exist anymore in your calendar will be deleted (Only those with \\'Reserved "
 "by GCal\\' status)"
 msgstr ""
+"Czy na pewno? Wizyty w Appointments > Zarezerwowane przez GCal, których już "
+"nie ma w twoim kalendarzu, zostaną usunięte (tylko te ze statusem  "
+"\"Zarezerwowanym przez GCal\""
 
-#: includes/gcal/views/settings-gcal-step-3.php:204
+#: includes/gcal/views/settings-gcal-step-3.php:207
 msgid "Reset API Credentials"
+msgstr "Resetuj dane dostępowe API"
+
+#: includes/helpers-settings.php:84
+msgid ""
+"By using this form you agree with the storage and handling of your data by "
+"this website."
 msgstr ""
+"Korzystając z formularza zgadzam się na przechowywanie i przetwarzenie moich "
+"danych na tej witrynie."
+
+#: includes/helpers-settings.php:85
+msgid "Please accept the privacy checkbox."
+msgstr "Proszę zaakceptować politykę prywatności."
 
 #: includes/integration/class-app-buddypress.php:134
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:8
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:37
 msgid "My Appointments"
 msgstr "Moje rezerwacje"
 
@@ -4034,51 +4247,47 @@ msgstr "Moje nietypowe dni pracy"
 msgid "My Holidays"
 msgstr "Moje dni wolne od pracy"
 
-#: includes/integration/class-app-marketpress.php:58
+#: includes/integration/class-app-marketpress.php:60
 msgid "MarketPress Integration"
 msgstr "Integracja z MarketPressem"
 
-#: includes/integration/class-app-marketpress.php:61
-msgid "Activate MarketPress integration"
-msgstr ""
+#: includes/integration/class-app-marketpress.php:63
+msgid "Activate integration"
+msgstr "Włącz integrację"
 
-#: includes/integration/class-app-marketpress.php:64
+#: includes/integration/class-app-marketpress.php:66
 msgid ""
 "Appointments can be set as products. Any appointment shortcode added to a "
 "product page will make that page an \"Appointment Product Page\". For "
 "details, please see FAQ."
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:69
-msgid "Product Page"
-msgstr "Strona produktu"
+#: includes/integration/class-app-marketpress.php:71
+msgid "Create Product Page"
+msgstr "Utwórz stronę produktu"
 
-#: includes/integration/class-app-marketpress.php:72
-msgid "Create an Appointment Product Page with"
-msgstr ""
-
-#: includes/integration/class-app-marketpress.php:73
+#: includes/integration/class-app-marketpress.php:74
 msgid "Select Product Page Type"
-msgstr ""
+msgstr "Wybierz typ strony produktowej"
 
-#: includes/integration/class-app-marketpress.php:80
+#: includes/integration/class-app-marketpress.php:82
 msgid ""
 "Same as the above \"Create an Appointment Page\", but this time appointment "
 "shortcodes will be inserted in a new Product page and page title will be "
 "\"Appointment\". This is also the product name."
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:82
+#: includes/integration/class-app-marketpress.php:84
 msgid ""
 "<b>Note:</b> You already have such a page. If you check this checkbox, "
 "another page with the same title will be created. "
 msgstr ""
 
-#: includes/integration/class-app-marketpress.php:83
+#: includes/integration/class-app-marketpress.php:85
 msgid "Edit Page"
 msgstr "Edytuj stronę"
 
-#: includes/integration/class-app-marketpress.php:84
+#: includes/integration/class-app-marketpress.php:86
 msgid "View Page"
 msgstr "Zobacz stronę"
 
@@ -4108,11 +4317,11 @@ msgstr ""
 
 #: includes/integration/class-app-membership2.php:233
 msgid "Requires advance payment"
-msgstr ""
+msgstr "Wymagana zaawansowana płatność"
 
 #: includes/integration/class-app-membership2.php:234
 msgid "No advance payment"
-msgstr ""
+msgstr "Brak zaawansowanych płatności"
 
 #: includes/integration/marketpress/class_app_mp_bridge.php:163
 msgid "Details"
@@ -4129,9 +4338,10 @@ msgstr "Wybierz opcję &raquo;"
 
 #: includes/notifications/class-app-notification-cancel.php:29
 #: includes/notifications/class-app-notification-cancel.php:49
-#, fuzzy
+#: includes/notifications/class-app-notification-notification.php:29
+#: includes/notifications/class-app-notification-notification.php:49
 msgid "Notification message sent to %s for appointment ID: %s"
-msgstr "Powiadomienie przesłane do %s w związku z rezerwacją ID:%s"
+msgstr ""
 
 #. Translators: First %s is for appointment ID and the second one is for date
 #. and time of the appointment
@@ -4152,13 +4362,15 @@ msgstr ""
 
 #: includes/notifications/class-app-notification-confirmation.php:70
 msgid ""
-"Unable to notify the client about the appointment ID:%s confirmation, "
+"Unable to notify the client about the appointment ID: %s confirmation, "
 "stopping."
 msgstr ""
+"Nie można wysłać do klienta potwierdzenia  o wizycie (identyfikator: %s). "
+"Zatrzymanie procesu."
 
 #: includes/notifications/class-app-notification-confirmation.php:93
-msgid "Confirmation message sent to %s for appointment ID:%s"
-msgstr "Potwierdzenie wysłane do %s w związku z rezerwacją ID:%s"
+msgid "Confirmation message sent to %s for appointment ID: %s"
+msgstr "Potwierdzenie wysłane do %s w związku z rezerwacją identyfikator: %s"
 
 #: includes/notifications/class-app-notification-confirmation.php:158
 msgid ""
@@ -4171,11 +4383,6 @@ msgstr ""
 #: includes/notifications/class-app-notification-confirmation.php:161
 msgid "New Appointment"
 msgstr "Nowa rezerwacja"
-
-#: includes/notifications/class-app-notification-notification.php:29
-#: includes/notifications/class-app-notification-notification.php:49
-msgid "Notification message sent to %s for appointment ID:%s"
-msgstr "Powiadomienie przesłane do %s w związku z rezerwacją ID:%s"
 
 #. Translators: First %s is for appointment ID and the second one is for date
 #. and time of the appointment
@@ -4190,16 +4397,16 @@ msgid "An appointment requires your confirmation"
 msgstr "Rezewacja wymaga potwierdzenia"
 
 #: includes/notifications/class-app-notification-reminder.php:54
-msgid "Unable to send client reminder about the appointment ID:%s."
+msgid "Unable to send client reminder about the appointment ID: %s."
 msgstr ""
 
 #: includes/notifications/class-app-notification-reminder.php:61
 #: includes/notifications/class-app-notification-reminder.php:110
-msgid "Reminder message sent to %s for appointment ID:%s"
-msgstr "Przypomnienie wysłane do %s w związku z rezerwacją ID:%s"
+msgid "Reminder message sent to %s for appointment ID: %s"
+msgstr "Przypomnienie wysłane do %s w związku z rezerwacją identyfikator: %s"
 
 #: includes/notifications/class-app-notification-reminder.php:103
-msgid "Unable to send worker reminder about the appointment ID:%s."
+msgid "Unable to send worker reminder about the appointment ID: %s."
 msgstr ""
 
 #: includes/notifications/class-app-notification-reminder.php:239
@@ -4212,11 +4419,11 @@ msgstr ""
 
 #: includes/notifications/class-app-notification-removal.php:113
 msgid ""
-"Unable to notify the client about the appointment ID:%s removal, stopping."
+"Unable to notify the client about the appointment ID: %s removal, stopping."
 msgstr ""
 
 #: includes/notifications/class-app-notification-removal.php:133
-msgid "Removal message sent to %s for appointment ID:%s"
+msgid "Removal message sent to %s for appointment ID: %s"
 msgstr ""
 
 #: includes/notifications/class-app-notification-removal.php:152
@@ -4252,21 +4459,17 @@ msgstr ""
 #: includes/pro/includes/addons/app-locations-location_support.php:130
 #: includes/pro/includes/addons/app-locations-location_support.php:444
 #: includes/pro/includes/addons/app-locations-location_support.php:469
+#: includes/pro/includes/addons/app-locations-service_locations.php:144
 #: includes/pro/includes/addons/app-locations-service_locations.php:166
-#: includes/pro/includes/addons/app-locations-service_locations.php:191
-#: includes/pro/includes/addons/app-locations-worker_locations.php:173
+#: includes/pro/includes/addons/app-locations-worker_locations.php:174
 #: includes/pro/includes/addons/lib/class-app-locations-list-table.php:34
 msgid "Location"
 msgstr "Lokalizacja"
 
 #: includes/pro/includes/addons/app-locations-location_support.php:151
-#: includes/pro/includes/addons/app-users-additional_fields.php:553
+#: includes/pro/includes/addons/app-users-additional_fields.php:559
 msgid "Add"
 msgstr "Dodaj"
-
-#: includes/pro/includes/addons/app-locations-location_support.php:152
-msgid "Save"
-msgstr "Zapisz"
 
 #: includes/pro/includes/addons/app-locations-location_support.php:153
 msgid "Create a New Location"
@@ -4455,79 +4658,79 @@ msgstr ""
 msgid "After All Appointments shortcode output"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:218
+#: includes/pro/includes/addons/app-locations-service_locations.php:192
 msgid ""
 "You'll need Locations add-on activated for Service Locations integration add-"
 "on to work"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:263
+#: includes/pro/includes/addons/app-locations-service_locations.php:234
 msgid "Service Locations Settings"
 msgstr "Ustawienia lokalizacji usługi"
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:266
+#: includes/pro/includes/addons/app-locations-service_locations.php:237
 msgid "Show service location"
 msgstr "Pokaż lokalizację usługi"
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:269
-#: includes/pro/includes/addons/app-locations-worker_locations.php:104
+#: includes/pro/includes/addons/app-locations-service_locations.php:240
+#: includes/pro/includes/addons/app-locations-worker_locations.php:105
 msgid "I will add location info manually, using shortcode"
 msgstr "Dodam info o lokalizacji ręcznie, używając shortcode"
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:270
+#: includes/pro/includes/addons/app-locations-service_locations.php:241
 msgid "Automatic, before service description"
 msgstr "Automatycznie, przed opisem usługi"
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:271
+#: includes/pro/includes/addons/app-locations-service_locations.php:242
 msgid "Automatic, after service description"
 msgstr "Automatycznie, po opisie usługi"
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:273
+#: includes/pro/includes/addons/app-locations-service_locations.php:244
 msgid ""
 "You can use the shortcode like this: <code>[app_service_locations]</code>"
 msgstr ""
 "Można użyć shortcodea po prostu tak: <code>[app_service_locations]</code>"
 
-#: includes/pro/includes/addons/app-locations-worker_locations.php:54
+#: includes/pro/includes/addons/app-locations-worker_locations.php:55
 msgid ""
 "You'll need Locations add-on activated for Worker Locations integration add-"
 "on to work"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-worker_locations.php:98
+#: includes/pro/includes/addons/app-locations-worker_locations.php:99
 msgid "Worker Locations Settings"
 msgstr "Ustawienia lokalizacji pracowników"
 
-#: includes/pro/includes/addons/app-locations-worker_locations.php:101
+#: includes/pro/includes/addons/app-locations-worker_locations.php:102
 msgid "Show worker location"
 msgstr "Pokaż lokalizację pracownika"
 
-#: includes/pro/includes/addons/app-locations-worker_locations.php:105
+#: includes/pro/includes/addons/app-locations-worker_locations.php:106
 msgid "Automatic, before worker description"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-worker_locations.php:106
+#: includes/pro/includes/addons/app-locations-worker_locations.php:107
 msgid "Automatic, after worker description"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-worker_locations.php:108
+#: includes/pro/includes/addons/app-locations-worker_locations.php:109
 msgid ""
 "You can use the shortcode like this: <code>[app_provider_locations]</code>"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-worker_locations.php:152
+#: includes/pro/includes/addons/app-locations-worker_locations.php:153
 msgid "Location:"
 msgstr "Lokalizacja:"
 
-#: includes/pro/includes/addons/app-mp-product_cart_appointments.php:95
+#: includes/pro/includes/addons/app-mp-product_cart_appointments.php:86
 msgid "Appointment in shopping cart format"
 msgstr ""
 
-#: includes/pro/includes/addons/app-mp-product_cart_appointments.php:98
+#: includes/pro/includes/addons/app-mp-product_cart_appointments.php:89
 msgid "You can use these macros: <code>%s</code>"
 msgstr "Możesz użyć tych makr: <code>%s</code>"
 
-#: includes/pro/includes/addons/app-mp-product_cart_appointments.php:102
+#: includes/pro/includes/addons/app-mp-product_cart_appointments.php:93
 msgid "Auto-add appointments into cart"
 msgstr "Automatycznie dodaj spotkania do koszyka"
 
@@ -4612,7 +4815,7 @@ msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-default_service.php:79
 msgid "Default Service"
-msgstr ""
+msgstr "Usługa domyślna"
 
 #: includes/pro/includes/addons/app-schedule-default_service.php:89
 msgid "This is the service that will be used as the default one."
@@ -4620,7 +4823,7 @@ msgstr "Usługa będzie używana jako domyślna."
 
 #: includes/pro/includes/addons/app-schedule-durations.php:124
 msgid "Time slot calculus method"
-msgstr ""
+msgstr "Metoda liczenia godzin wizyt."
 
 #: includes/pro/includes/addons/app-schedule-durations.php:132
 msgid "Your duration calculus will be determined by the define value."
@@ -4686,96 +4889,104 @@ msgstr "Przed"
 msgid "After"
 msgstr "Po"
 
-#: includes/pro/includes/addons/app-schedule-paddings.php:124
+#: includes/pro/includes/addons/app-schedule-paddings.php:126
 msgid "... applying the smaller padding of the two"
 msgstr ""
 
-#: includes/pro/includes/addons/app-schedule-paddings.php:125
+#: includes/pro/includes/addons/app-schedule-paddings.php:127
 msgid "... applying the larger padding of the two"
 msgstr ""
 
-#: includes/pro/includes/addons/app-schedule-paddings.php:126
+#: includes/pro/includes/addons/app-schedule-paddings.php:128
 msgid "... adding the two together and applying the result"
 msgstr ""
 
-#: includes/pro/includes/addons/app-schedule-paddings.php:130
+#: includes/pro/includes/addons/app-schedule-paddings.php:132
 msgid "Padding resolution type"
 msgstr ""
 
-#: includes/pro/includes/addons/app-schedule-paddings.php:132
+#: includes/pro/includes/addons/app-schedule-paddings.php:134
 msgid ""
 "When both the current service and the current service provider have paddings "
 "assigned, resolve them by..."
 msgstr ""
 
-#: includes/pro/includes/addons/app-schedule-paddings.php:158
-#: includes/pro/includes/addons/app-schedule-paddings.php:221
-#: includes/pro/includes/addons/app-schedule-paddings.php:249
+#: includes/pro/includes/addons/app-schedule-paddings.php:160
+#: includes/pro/includes/addons/app-schedule-paddings.php:231
+#: includes/pro/includes/addons/app-schedule-paddings.php:263
 msgid "Padding times"
 msgstr ""
 
-#: includes/pro/includes/addons/app-schedule-paddings.php:186
+#: includes/pro/includes/addons/app-schedule-paddings.php:192
 msgid "Paddings"
-msgstr ""
+msgstr "Przerwy techniczne"
 
-#: includes/pro/includes/addons/app-schedule-shared_resources.php:49
-#: includes/pro/includes/addons/app-schedule-shared_resources.php:71
+#: includes/pro/includes/addons/app-schedule-shared_resources.php:46
+#: includes/pro/includes/addons/app-schedule-shared_resources.php:66
 msgid "Shares resources with"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:114
+#: includes/pro/includes/addons/app-users-additional_fields.php:120
 msgid "The field %s is required"
 msgstr "Pole %s jest wymagane"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:509
+#: includes/pro/includes/addons/app-users-additional_fields.php:515
 msgid "Text"
 msgstr "Tekst"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:510
+#: includes/pro/includes/addons/app-users-additional_fields.php:516
 msgid "Checkbox"
 msgstr "Pole zaznaczenia"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:516
+#: includes/pro/includes/addons/app-users-additional_fields.php:522
 msgid "Additional Fields"
 msgstr "Dodatkowe pola"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:519
+#: includes/pro/includes/addons/app-users-additional_fields.php:525
 msgid "Additional fields"
 msgstr "Dodatkowe pola"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:526
-#: includes/pro/includes/addons/app-users-additional_fields.php:564
+#: includes/pro/includes/addons/app-users-additional_fields.php:532
+#: includes/pro/includes/addons/app-users-additional_fields.php:570
 msgid "Required"
 msgstr "Wymagane"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:528
+#: includes/pro/includes/addons/app-users-additional_fields.php:534
 msgid "E-mail macro:"
 msgstr "Makro emaila:"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:529
+#: includes/pro/includes/addons/app-users-additional_fields.php:535
 msgid "This is the placeholder you can use in your emails."
-msgstr ""
+msgstr "Szablon który można użyć w mailach."
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:531
-#: includes/pro/includes/addons/app-users-additional_fields.php:566
+#: includes/pro/includes/addons/app-users-additional_fields.php:537
+#: includes/pro/includes/addons/app-users-additional_fields.php:572
 msgid "Remove"
 msgstr "Usuń"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:536
+#: includes/pro/includes/addons/app-users-additional_fields.php:542
 msgid "Add new field"
 msgstr "Dodaj nowe pole:"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:538
+#: includes/pro/includes/addons/app-users-additional_fields.php:544
 msgid "Field label:"
 msgstr "Etykieta pola:"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:542
+#: includes/pro/includes/addons/app-users-additional_fields.php:548
 msgid "Field type:"
 msgstr "Typ pola:"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:551
+#: includes/pro/includes/addons/app-users-additional_fields.php:557
 msgid "Required?"
 msgstr "Wymagane?"
+
+#: includes/pro/includes/addons/app-users-additional_fields.php:707
+msgid "checked"
+msgstr "zaznaczono"
+
+#: includes/pro/includes/addons/app-users-additional_fields.php:707
+msgid "not checked"
+msgstr "nie zaznaczono"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:42
 msgid "Login with %s"
@@ -4839,7 +5050,7 @@ msgstr "Tekst przycisku"
 
 #: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:31
 msgid "Show available services"
-msgstr ""
+msgstr "Pokaż dostępne usługi"
 
 #: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:32
 msgid ""
@@ -4870,7 +5081,7 @@ msgstr ""
 #: includes/shortcodes/class-app-shortcode-service-providers.php:70
 #: includes/shortcodes/class-app-shortcode-services.php:67
 msgid "Order By"
-msgstr ""
+msgstr "Kolejność"
 
 #: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:54
 msgid ""
@@ -4908,13 +5119,15 @@ msgstr ""
 
 #: includes/pro/includes/addons/lib/app_worker_locations_shortcode.php:29
 msgid "Show available providers"
-msgstr ""
+msgstr "Pokaż dostępnych usługodawców"
 
 #: includes/pro/includes/addons/lib/app_worker_locations_shortcode.php:30
 msgid ""
 "Button text to show the results for the selected. Default: \"Show available "
 "providers\""
 msgstr ""
+"Tekst przycisku, który wyświetla wyniki dla wybranego. Domyślnie: \"Pokaż "
+"dostępnych usługodawców\""
 
 #: includes/pro/includes/addons/lib/app_worker_locations_shortcode.php:48
 msgid ""
@@ -4925,7 +5138,7 @@ msgstr ""
 
 #: includes/pro/includes/addons/lib/app_worker_locations_shortcode.php:126
 msgid "Creates a dropdown menu of available provider locations."
-msgstr ""
+msgstr "Tworzy menu wyboru z dostępnymi lojacajmi usługodawców."
 
 #: includes/pro/includes/addons/lib/app_worker_locations_shortcode.php:136
 msgid "Required Provider Locations"
@@ -4945,7 +5158,7 @@ msgstr "Zaloguj przez Google"
 
 #: includes/pro/includes/class-app-google-login.php:83
 msgid "Google Client ID"
-msgstr ""
+msgstr "Identyfikator klienta Google"
 
 #: includes/pro/includes/class-app-google-login.php:89
 msgid ""
@@ -5029,7 +5242,7 @@ msgstr ""
 
 #: includes/pro/includes/class-app-google-login.php:110
 msgid "Select <em>Create Client ID</em>."
-msgstr ""
+msgstr "Wybierz <em>Utwórz identyfikator klienta</em>."
 
 #: includes/pro/includes/class-app-google-login.php:111
 msgid ""
@@ -5070,12 +5283,9 @@ msgid "Example:"
 msgstr "Przykład:"
 
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:17
+#: includes/shortcodes/class-app-shortcode-all-appointments.php:25
 msgid "All Appointments"
 msgstr "Wszystkie rezerwacje"
-
-#: includes/shortcodes/class-app-shortcode-all-appointments.php:25
-msgid "<h3>All Appointments</h3>"
-msgstr "<h3>Wszystkie rezerwacje</h3>"
 
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:26
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:38
@@ -5130,9 +5340,8 @@ msgid "Confirmation"
 msgstr "Potwierdzenie"
 
 #: includes/shortcodes/class-app-shortcode-confirmation.php:13
-msgid "<h3>Please check the appointment details below and confirm:</h3>"
-msgstr ""
-"<h3>Proszę sprawdzić poprawność wprowadzonych danych i potwierdzić:</h3>"
+msgid "Please check the appointment details below and confirm:"
+msgstr "Proszę sprawdzić szczegóły rezerwacji i potwierdzić:"
 
 #: includes/shortcodes/class-app-shortcode-confirmation.php:14
 msgid ""
@@ -5156,7 +5365,7 @@ msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-confirmation.php:24
 msgid "Confim text"
-msgstr ""
+msgstr "Tekst potwierdzenia"
 
 #: includes/shortcodes/class-app-shortcode-confirmation.php:25
 msgid "We have received your appointment. Thanks!"
@@ -5174,7 +5383,7 @@ msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-confirmation.php:30
 msgid "Warning text"
-msgstr ""
+msgstr "Tekst ostrzeżenia"
 
 #: includes/shortcodes/class-app-shortcode-confirmation.php:31
 msgid "Please fill in the requested field"
@@ -5190,7 +5399,7 @@ msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-confirmation.php:36
 msgid "Name label"
-msgstr ""
+msgstr "Etykieta imienia i nazwiska"
 
 #: includes/shortcodes/class-app-shortcode-confirmation.php:37
 msgid "Your name:"
@@ -5207,7 +5416,7 @@ msgstr "Opisowy tytuł dla pola"
 
 #: includes/shortcodes/class-app-shortcode-confirmation.php:42
 msgid "Email label"
-msgstr ""
+msgstr "Etykieta maila"
 
 #: includes/shortcodes/class-app-shortcode-confirmation.php:43
 msgid "Your email:"
@@ -5215,7 +5424,7 @@ msgstr "Twój adres email:"
 
 #: includes/shortcodes/class-app-shortcode-confirmation.php:48
 msgid "Phone label"
-msgstr ""
+msgstr "Etykieta telefonu"
 
 #: includes/shortcodes/class-app-shortcode-confirmation.php:49
 msgid "Your phone:"
@@ -5223,7 +5432,7 @@ msgstr "Twój nr tel:"
 
 #: includes/shortcodes/class-app-shortcode-confirmation.php:54
 msgid "Address label"
-msgstr ""
+msgstr "Etykieta adresu"
 
 #: includes/shortcodes/class-app-shortcode-confirmation.php:55
 msgid "Your address:"
@@ -5231,7 +5440,7 @@ msgstr "Twój adres:"
 
 #: includes/shortcodes/class-app-shortcode-confirmation.php:60
 msgid "City label"
-msgstr ""
+msgstr "Etykieta miasta"
 
 #: includes/shortcodes/class-app-shortcode-confirmation.php:61
 msgid "City:"
@@ -5239,7 +5448,7 @@ msgstr "Miasto:"
 
 #: includes/shortcodes/class-app-shortcode-confirmation.php:66
 msgid "Notes label"
-msgstr ""
+msgstr "Etykieta notatek"
 
 #: includes/shortcodes/class-app-shortcode-confirmation.php:67
 msgid "Your notes:"
@@ -5273,7 +5482,7 @@ msgstr ""
 msgid "<b>This shortcode is always required to complete an appointment.</b>"
 msgstr "<b>ten shortcode jest zawsze wymagany aby zakończyć  spotkanie.</b>"
 
-#: includes/shortcodes/class-app-shortcode-confirmation.php:230
+#: includes/shortcodes/class-app-shortcode-confirmation.php:240
 msgid "A connection problem occurred. Please try again."
 msgstr "Problem z łącznością. Proszę powtórzyć"
 
@@ -5319,7 +5528,7 @@ msgstr "Wstawia przyciski logowania dla Facebooka, Twittera i WordPressa."
 
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:18
 msgid "Monthly Schedule"
-msgstr ""
+msgstr "Kalendarz miesięczny"
 
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:24
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:14
@@ -5327,17 +5536,17 @@ msgstr ""
 #: includes/shortcodes/class-app-shortcode-schedule.php:13
 #: includes/shortcodes/class-app-shortcode-services.php:15
 msgid "Any provider"
-msgstr ""
+msgstr "Dowolny usługodawca"
 
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:33
 #: includes/shortcodes/class-app-shortcode-schedule.php:22
 #: includes/shortcodes/class-app-shortcode-service-providers.php:13
 msgid "Any service"
-msgstr ""
+msgstr "Dowolna usługa"
 
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:44
-msgid "<h3>Our schedule for START</h3>"
-msgstr "<h3>Nasz grafik dla START</h3>"
+msgid "Our schedule for START"
+msgstr "Harmonogram dla  START"
 
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:45
 msgid ""
@@ -5366,7 +5575,7 @@ msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:55
 msgid "Not logged text"
-msgstr ""
+msgstr "Tekst dla niezalogowanego użytkownika"
 
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:56
 #: includes/shortcodes/class-app-shortcode-schedule.php:46
@@ -5389,13 +5598,15 @@ msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:61
 msgid "Hide today's times"
-msgstr ""
+msgstr "Ukryj dostępne spotkania"
 
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:63
 msgid ""
 "Checking this argument will hide the available appointment times until the "
 "user selects a day."
 msgstr ""
+"Zaznaczenie tego argumentu spowoduje ukrycie dostępnych spotkań, dopóki "
+"użytkownik nie wybierze dnia."
 
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:70
 msgid ""
@@ -5434,7 +5645,7 @@ msgstr ""
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:93
 #: includes/shortcodes/class-app-shortcode-schedule.php:78
 msgid "Number of months added"
-msgstr ""
+msgstr "Liczba dodanych miesięcy"
 
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:95
 #: includes/shortcodes/class-app-shortcode-schedule.php:80
@@ -5462,7 +5673,7 @@ msgstr ""
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:108
 #: includes/shortcodes/class-app-shortcode-schedule.php:93
 msgid "Require Provider"
-msgstr ""
+msgstr "Wymagany usługodawca"
 
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:110
 #: includes/shortcodes/class-app-shortcode-schedule.php:95
@@ -5474,13 +5685,13 @@ msgstr ""
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:114
 #: includes/shortcodes/class-app-shortcode-schedule.php:99
 msgid "Required Message"
-msgstr ""
+msgstr "Wymagana wiadomość"
 
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:115
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:271
 #: includes/shortcodes/class-app-shortcode-schedule.php:100
 msgid "Please, select a service provider."
-msgstr ""
+msgstr "Proszę wybrać dostawcę."
 
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:116
 #: includes/shortcodes/class-app-shortcode-schedule.php:101
@@ -5491,7 +5702,7 @@ msgstr "Wiadomość będzie pokazana jeżeli będzie wymagany wykonawca."
 #: includes/shortcodes/class-app-shortcode-schedule.php:105
 #: includes/shortcodes/class-app-shortcode-service-providers.php:89
 msgid "Require Service"
-msgstr ""
+msgstr "Wymagana usługa"
 
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:122
 #: includes/shortcodes/class-app-shortcode-schedule.php:107
@@ -5522,10 +5733,12 @@ msgid ""
 "Creates a monthly calendar plus time tables whose free time slots are "
 "clickable to apply for an appointment."
 msgstr ""
+"Tworzy miesięczny kalendarz oraz tabele z godzinamii, w której można "
+"klikalnąć wolny termin w celu rezerwacji."
 
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:8
 msgid "Worker Monthly Calendar"
-msgstr ""
+msgstr "Miesiączy kalendarz usługodawcy"
 
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:31
 msgid "Show Appointments calendar for service provider with this user ID"
@@ -5540,6 +5753,8 @@ msgid ""
 "Show Appointments calendar for this month. Defaults to current month. "
 "Example: %s"
 msgstr ""
+"Pokaż kalendarz Appointments calendar dla  miesiąca. Domyślnie jest to "
+"aktualny miesiąc. Przykład: %s"
 
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:79
 msgid "Renders a calendar with appointments assigned to a service provider."
@@ -5556,10 +5771,6 @@ msgstr "%.1fhr"
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:144
 msgid "%dhr"
 msgstr "%dhr"
-
-#: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:154
-msgid "Duration"
-msgstr "Długość trwania"
 
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:23
 msgid "Is Provider"
@@ -5580,13 +5791,9 @@ msgstr ""
 "Wprowadź ID wykonawcy, którego listy będą wyświetlone. Domyślenie (brak): "
 "\"0\" (aktualny wykonawca)"
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:37
-msgid "<h3>My Appointments</h3>"
-msgstr "<h3>Moje rezerwacje</h3>"
-
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:48
 msgid "Google Calendar Button"
-msgstr ""
+msgstr "Przycisk kalendarza Google"
 
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:50
 msgid ""
@@ -5595,6 +5802,10 @@ msgid ""
 "Default: enabled - provided that \"Add Google Calendar Button\" setting is "
 "set as Yes"
 msgstr ""
+"Usuń zaznaczenie, aby wyłączyć przycisk Kalendarza Google, za pomocą którego "
+"klienci mogą dodawać wizyty do swojego Kalendarza Google po zarezerwowaniu "
+"spotkania. Domyślnie: włączone - pod warunkiem, że ustawienie \"Dodaj "
+"przycisk kalendarza Google\" ma wartość Tak."
 
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:61
 msgid "Sort order of the appointments. Possible values: ID, start."
@@ -5620,10 +5831,14 @@ msgid ""
 "this table. \"Allow client cancel own appointments\" setting must also be "
 "set as Yes. Default: Cancellation is not allowed."
 msgstr ""
+"Proszę sprawdzić, czy zezwolić na anulowanie spotkań przez klienta za pomocą "
+"tej tabeli. Ustawienie \"Zezwól klientowi na anulowanie własnych spotkań\" "
+"również musi być ustawione jako Tak. Domyślnie: Anulowanie nie jest "
+"dozwolone."
 
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:81
 msgid "Strict"
-msgstr ""
+msgstr "Ściśle"
 
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:83
 msgid ""
@@ -5700,6 +5915,8 @@ msgid ""
 "If checked, step parameter will mean month, otherwise week. In short, check "
 "for monthly schedule."
 msgstr ""
+"Jeśli zaznaczone, parametr kroku będzie oznaczać miesiąc, nie tydzień. "
+"Krótko mówiąc, proszę sprawdzić harmonogram miesięczny."
 
 #: includes/shortcodes/class-app-shortcode-pagination.php:37
 msgid "Date (YYYY-MM-DD format)"
@@ -5711,16 +5928,21 @@ msgid ""
 "shortcodes. Otherwise it will follow date settings of the schedule "
 "shortcodes. Default: Current week or month"
 msgstr ""
+"Wymagane tylko wtedy, gdy shortcode znajduje się powyżej jakichkolwiek "
+"schortcode'ów terminarza. W przeciwnym razie będzie on śledził ustawienia "
+"daty z shortcode'u terminarza. Domyślnie: Bieżący tydzień lub miesiąc."
 
 #: includes/shortcodes/class-app-shortcode-pagination.php:43
 msgid "Anchors"
-msgstr ""
+msgstr "Kotwice"
 
 #: includes/shortcodes/class-app-shortcode-pagination.php:45
 msgid ""
 "Unchecking this argument to will prevent pagination links from adding "
 "schedule hash anchors."
 msgstr ""
+"Usunięcie zaznaczenia tego argumentu uniemożliwi stronom powiązanym "
+"dodawanie odnośników z ktowicami do harmonogramu."
 
 #: includes/shortcodes/class-app-shortcode-pagination.php:51
 msgid ""
@@ -5750,7 +5972,7 @@ msgstr "PayPal"
 
 #: includes/shortcodes/class-app-shortcode-paypal.php:25
 msgid "Item Name"
-msgstr ""
+msgstr "Nazwa elementu"
 
 #: includes/shortcodes/class-app-shortcode-paypal.php:26
 msgid "Payment for SERVICE"
@@ -5802,8 +6024,8 @@ msgid "Weekly Schedule"
 msgstr "Harmonogram tygodniowy"
 
 #: includes/shortcodes/class-app-shortcode-schedule.php:33
-msgid "<h3>Our schedule from START to END</h3>"
-msgstr "<h3>Nasz grafik od START do END</h3>"
+msgid "Our schedule from START to END"
+msgstr "Nasz grafik od START do END"
 
 #: includes/shortcodes/class-app-shortcode-schedule.php:34
 msgid ""
@@ -5831,6 +6053,8 @@ msgid ""
 "Select service only if you want to force the table display the service with "
 "entered ID. Default: Service is selected by dropdown."
 msgstr ""
+"Proszę wybrać usługę tylko, gdy ma zostać wyświetlona tabela z wybraną "
+"usługą. Domyślnie: usługa może zostać wybrana z rozwijanego menu."
 
 #: includes/shortcodes/class-app-shortcode-schedule.php:62
 msgid ""
@@ -5838,6 +6062,9 @@ msgid ""
 "service provider with entered ID. Default: Service provider is selected by "
 "dropdown."
 msgstr ""
+"Proszę wybrać usługodawcę tylko wtedy, gdy ma zostać wyświetlona tabela z "
+"dostępnością wybranego usługodawcy. Domyślnie: Usługodawcę można wybrać z "
+"rozwijanego menu."
 
 #: includes/shortcodes/class-app-shortcode-schedule.php:290
 msgid ""
@@ -5846,7 +6073,7 @@ msgstr "Tworzy tabelę tygodniową, której komórki są aktywne dla rezerwacji"
 
 #: includes/shortcodes/class-app-shortcode-service-providers.php:7
 msgid "Providers"
-msgstr ""
+msgstr "Usługodawcy"
 
 #: includes/shortcodes/class-app-shortcode-service-providers.php:24
 msgid "Please choose a service provider:"
@@ -5866,7 +6093,7 @@ msgstr "Bez znaczenia"
 
 #: includes/shortcodes/class-app-shortcode-service-providers.php:31
 msgid "Empty option label for the selection"
-msgstr ""
+msgstr "Pusta etykieta opcji dla wyboru"
 
 #: includes/shortcodes/class-app-shortcode-service-providers.php:35
 msgid "Show button Text"
@@ -5912,7 +6139,7 @@ msgstr "Klasa css miniatury"
 
 #: includes/shortcodes/class-app-shortcode-service-providers.php:60
 msgid "CSS class that will be applied to the thumbnail. Default: \"alignleft\""
-msgstr ""
+msgstr "Klasa CSS dołączona do miniaturki. domyślnie: \"alignleft\""
 
 #: includes/shortcodes/class-app-shortcode-service-providers.php:78
 msgid ""
@@ -5926,6 +6153,8 @@ msgid ""
 "In some cases, you may want to force to display providers who give only a "
 "certain service. In that case enter service ID here."
 msgstr ""
+"Czasami można chcieć wyświetlić dostawców, którzy oferują tylko określoną "
+"usługę. W takim przypadku należy tutaj wpisać identyfikator usługi."
 
 #: includes/shortcodes/class-app-shortcode-service-providers.php:99
 msgid "Creates a dropdown menu of available service providers."
@@ -5936,24 +6165,22 @@ msgid "Please select a service:"
 msgstr "Proszę wybrać rodzaj usługi:"
 
 #: includes/shortcodes/class-app-shortcode-services.php:27
-#, fuzzy
 msgid "Text above the select menu. Default: \"Please select a service\"."
-msgstr "Tekst powyżej menu z wyborem. Domyślnie: \"Proszę wybrać usługę\""
+msgstr "Treść nad polem wyboru. domyślnie: \"Proszę wybrać usługę\"."
 
 #: includes/shortcodes/class-app-shortcode-services.php:31
 msgid "Show Button Text"
 msgstr "Tekst klawisz pokaż"
 
 #: includes/shortcodes/class-app-shortcode-services.php:33
-#, fuzzy
 msgid ""
 "Button text to show the results for the selected. Default: \"Show available "
 "times\"."
 msgstr ""
-"Tekst przycisku do pokazania wyboru. Domyślnie: \"Pokaż dostępne czasy\""
+"Tekst przycisku, wyświetlającego wyniki dla wybranych. Domyślnie: \"Pokaż "
+"dostępne terminy\"."
 
 #: includes/shortcodes/class-app-shortcode-services.php:40
-#, fuzzy
 msgid ""
 "Selects which part of the description page will be displayed under the "
 "dropdown menu when a service is selected . Selectable values are \"none\", "
@@ -5961,7 +6188,7 @@ msgid ""
 msgstr ""
 "Określa, która część strony opisu będzie wyświetlana w menu rozwijanym po "
 "wybraniu usługi. Dostępne wartości to \"none\", \"excerpt\", \"content\". "
-"Domyślnie: \"excerpt\""
+"Domyślnie: \"excerpt\"."
 
 #: includes/shortcodes/class-app-shortcode-services.php:51
 msgid ""
@@ -5970,11 +6197,16 @@ msgid ""
 "by comma representing width and height in pixels, e.g. 32,32. Default: "
 "\"96,96\"."
 msgstr ""
+"Wstawia miniaturę wpisu, jeśli posiada on obrazek wyróżniający. Dostępne do "
+"wyboru wartości to \"none\", \"thumbnail\", \"medium\", \"full\" lub 2 "
+"liczby rozdzielone przecinkami przedstawiającymi szerokość i wysokość w "
+"pikselach, np. 32,32. Domyślnie: \"96,96\"."
 
 #: includes/shortcodes/class-app-shortcode-services.php:57
 msgid ""
 "CSS class that will be applied to the thumbnail. Default: \"alignleft\"."
 msgstr ""
+"Klasa css, która będzie zastosowana do miniaturek. Domyślnie: \"alignleft\"."
 
 #: includes/shortcodes/class-app-shortcode-services.php:63
 msgid ""
@@ -6003,7 +6235,6 @@ msgid "AJAX"
 msgstr "AJAX"
 
 #: includes/shortcodes/class-app-shortcode-services.php:90
-#, fuzzy
 msgid ""
 "If checked, Services thumbnails and descriptions will be loaded by AJAX. "
 "Recommended for sites with many services."
@@ -6027,7 +6258,7 @@ msgstr ""
 
 #: includes/support/class_app_admin_help.php:38
 msgid "Project page"
-msgstr ""
+msgstr "Strona projektu"
 
 #: includes/support/class_app_admin_help.php:39
 msgid "Installation and instructions page"
@@ -6119,16 +6350,36 @@ msgstr ""
 "%s zostały zmienione przy wersji 1.7. Jeżeli używałeś Kalendarza Google "
 "przed wersją 1.7. przejdź do konfiguracji."
 
+#: admin/class-app-admin.php:476
+msgctxt "Default page title for Appointments calandars."
+msgid "Make an Appointment"
+msgstr "Potwierdź wizytę"
+
+#: admin/class-app-list-table-workers.php:29
+msgctxt "dummy worker"
+msgid "Yes"
+msgstr "Tak"
+
+#: admin/class-app-list-table-workers.php:29
+msgctxt "dummy worker"
+msgid "No"
+msgstr "Nie"
+
+#: admin/class-app-list-table-workers.php:80
+msgctxt "user pfofile link on Service Providers screen"
+msgid "Profile"
+msgstr "Profil"
+
 #: admin/class-app-list-table.php:817
 #: admin/pages/class-admin-appointments-page.php:392
 msgctxt "paging"
 msgid "%1$s of %2$s"
 msgstr "%1$s z %2$s"
 
-#: admin/views/inline-edit.php:122 appointments.php:1809
+#: admin/views/inline-edit.php:123 appointments.php:1831
 #: includes/class-app-tutorial.php:225
 #: includes/pro/includes/addons/app-locations-location_support.php:155
-#: includes/shortcodes/class-app-shortcode-confirmation.php:202
+#: includes/shortcodes/class-app-shortcode-confirmation.php:210
 msgctxt "Drop current action"
 msgid "Cancel"
 msgstr "Anuluj"
@@ -6143,11 +6394,59 @@ msgctxt "Error while editing an appointment"
 msgid "Error"
 msgstr "Błąd"
 
+#: includes/class-app-gdpr.php:56
+msgctxt "Free plugin name in personal data exporter."
+msgid "Appointments Plugin"
+msgstr "Wtyczka Appointments"
+
+#: includes/class-app-gdpr.php:59
+msgctxt "Pro plugin name in personal data exporter."
+msgid "Appointments+ Plugin"
+msgstr "Wtyczka Appointments+"
+
+#: includes/class-app-gdpr.php:249
+msgctxt "policy page days string"
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] "%d dzień"
+msgstr[1] "%d dni"
+msgstr[2] "%d dni"
+
 #: includes/class-app-notifications-manager.php:46
-#, fuzzy
 msgctxt "%s contains filter name in pre tag"
 msgid "Every 10 minutes or you can filter it with the %s filter."
-msgstr "Co 10 minut. Można zmienić za pomocą filtra app_update_time"
+msgstr "Co 10 minut lub mozna zmienić to za pomocą filtra %s."
+
+#: includes/helpers-settings.php:17
+msgctxt "Enter \"yes\" for the European Union countries."
+msgid "no"
+msgstr "yes"
+
+#: includes/helpers.php:949
+msgctxt "less than 60 minut"
+msgid "%d minutes"
+msgstr "%d minut"
+
+#: includes/helpers.php:953
+msgctxt "more than 60 minuts, hours"
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d godzina"
+msgstr[1] "%d godziny"
+msgstr[2] "%d godzin"
+
+#: includes/helpers.php:960
+msgctxt "more than 60 minuts, minutes"
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d minuta"
+msgstr[1] "%d minuty"
+msgstr[2] "%d minut"
+
+#: includes/integration/class-app-marketpress.php:139
+msgctxt "Default page name for MarketPress integration."
+msgid "Appointment"
+msgstr "Wizyta"
 
 #: includes/shortcodes/class-app-shortcode-login.php:17
 msgctxt "Login Shortcode"
@@ -6160,7 +6459,6 @@ msgid "Status"
 msgstr "Status"
 
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:109
-#, fuzzy
 msgctxt "%s is a login link"
 msgid "Please %s to see your appointments."
 msgstr "Proszę %s żeby zobaczyć swoje rezerwacje wizyt."
