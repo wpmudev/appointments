@@ -87,7 +87,7 @@
 	<tr>
 		<th scope="row"><label for="login_required"><?php _e( 'Login required', 'appointments' ) ?></label></th>
 		<td colspan="2" class="app_login_required">
-            <?php _appointments_html_chceckbox( $options, 'login_required', 'api_detail' ) ?>
+            <?php _appointments_html_chceckbox( $options, 'login_required', 'api_detail' ); ?>
 			<p class="description"><?php _e( 'Whether you require the client to login to the website to apply for an appointment. Plugin lets front end logins, without the need for leaving the front end appointment page.', 'appointments' ) ?></p>
 		</td>
 	</tr>
@@ -104,9 +104,7 @@
 		<th scope="row"><label
 				for="accept_api_logins"><?php _e( 'Accept login from front end', 'appointments' ) ?></label></th>
 		<td>
-			<input type="checkbox" id="accept_api_logins" name="accept_api_logins"
-			       value="true" <?php if ( isset( $options['accept_api_logins'] ) && $options['accept_api_logins'] ) {
-						echo "checked='checked'"; } ?>>
+            <?php _appointments_html_chceckbox( $options, 'accept_api_logins' ); ?>
 			<p class="description"><?php _e( 'Enables login to website from front end using Facebook, Twitter, Google+ or WordPress.', 'appointments' ) ?></p>
 		</td>
 	</tr>
@@ -115,9 +113,7 @@
 		<th scope="row"><label
 				for="facebook-no_init"><?php _e( 'My website already uses Facebook', 'appointments' ) ?></label></th>
 		<td>
-			<input type="checkbox" name="facebook-no_init" id="facebook-no_init"
-			       value="true" <?php if ( isset( $options['facebook-no_init'] ) && $options['facebook-no_init'] ) {
-						echo "checked='checked'"; } ?>>
+            <?php _appointments_html_chceckbox( $options, 'facebook-no_init' ); ?>
 			<p class="description"><?php _e( 'By default, Facebook script will be loaded by the plugin. If you are already running Facebook scripts, to prevent any conflict, check this option.', 'appointments' ) ?></p>
 		</td>
 	</tr>
