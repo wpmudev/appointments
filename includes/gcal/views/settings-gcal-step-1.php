@@ -17,7 +17,7 @@
 		</li>
 		<li>
 			<img src="<?php echo appointments_plugin_url() . 'images/gcal-instructions-04.png'; ?>" alt="">
-			<p>4. <?php _e( 'Enable the Calendar API".', 'appointments' ); ?></p>
+			<p>4. <?php _e( 'Enable the "Calendar API".', 'appointments' ); ?></p>
 		</li>
 		<li>
 			<img src="<?php echo appointments_plugin_url() . 'images/gcal-instructions-05.png'; ?>" alt="">
@@ -25,7 +25,7 @@
 		</li>
 		<li>
 			<img src="<?php echo appointments_plugin_url() . 'images/gcal-instructions-06.png'; ?>" alt="">
-			<p>6. <?php _e( '... and then "OAuth consent screen" tab. Choose a product name shown to users, i.e. "Appointments +".', 'appointments' ); ?></p>
+			<p>6. <?php _e( '... and then "OAuth consent screen" tab. Choose a product name shown to users, i.e. "Appointments+"', 'appointments' ); ?></p>
 		</li>
 		<li>
 			<img src="<?php echo appointments_plugin_url() . 'images/gcal-instructions-07.png'; ?>" alt="">
