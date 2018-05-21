@@ -10,12 +10,16 @@ if ( empty( $pages ) ) {
 	$pages = get_pages( apply_filters( 'app_pages_filter', array() ) );
 }
 
+$exclude = array();
+foreach( $workers as $worker ) {
+    $exclude[] = $worker->ID;
+}
 $workers_dropdown = wp_dropdown_users( array(
 	'echo'    => 0,
 	'show'    => 'user_login',
 	'name'    => 'user',
 	'id'      => 'worker-user',
-	'exclude' => apply_filters( 'app_filter_providers', null )
+	'exclude' => apply_filters( 'app_filter_providers', $exclude )
 ) );
 
 ?>
