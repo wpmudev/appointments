@@ -51,14 +51,14 @@ class Appointments_Notifications_Reminder extends Appointments_Notification {
 				/** @var Appointments_Appointment $r */
 				$customer_email = $r->get_customer_email();
 				if ( ! is_email( $customer_email ) ) {
-					$this->manager->log( sprintf( __( 'Unable to send client reminder about the appointment ID:%s.', 'appointments' ), $r->ID ) );
+					$this->manager->log( sprintf( __( 'Unable to send client reminder about the appointment ID: %s.', 'appointments' ), $r->ID ) );
 					appointments_update_appointment( $r->ID, array( 'sent' => rtrim( $r->sent, ":" ) . ":" . trim( $hour ) . ":" ) );
 					continue;
 				}
 
 				if ( ! in_array( $r->ID, $sent ) ) {
 					$this->customer( $r->ID, $customer_email );
-					$this->manager->log( sprintf( __( 'Reminder message sent to %s for appointment ID:%s', 'appointments' ), $customer_email, $r->ID ) );
+					$this->manager->log( sprintf( __( 'Reminder message sent to %s for appointment ID: %s', 'appointments' ), $customer_email, $r->ID ) );
 					$sent[] = $r->ID;
 				}
 
@@ -100,14 +100,14 @@ class Appointments_Notifications_Reminder extends Appointments_Notification {
 				$worker_email = $appointments->get_worker_email( $r->worker );
 
 				if ( ! is_email( $worker_email ) ) {
-					$this->manager->log( sprintf( __( 'Unable to send worker reminder about the appointment ID:%s.', 'appointments' ), $r->ID ) );
+					$this->manager->log( sprintf( __( 'Unable to send worker reminder about the appointment ID: %s.', 'appointments' ), $r->ID ) );
 					appointments_update_appointment( $r->ID, array( 'sent_worker' => rtrim( $r->sent_worker, ":" ) . ":" . trim( $hour ) . ":" ) );
 					continue;
 				}
 
 				if ( ! in_array( $r->ID, $sent ) ) {
 					$this->worker( $r->ID, $worker_email );
-					$this->manager->log( sprintf( __( 'Reminder message sent to %s for appointment ID:%s', 'appointments' ), $worker_email, $r->ID ) );
+					$this->manager->log( sprintf( __( 'Reminder message sent to %s for appointment ID: %s', 'appointments' ), $worker_email, $r->ID ) );
 					$sent[] = $r->ID;
 				}
 				appointments_update_appointment( $r->ID, array( 'sent_worker' => rtrim( $r->sent_worker, ":" ) . ":" . trim( $hour ) . ":" ) );

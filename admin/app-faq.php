@@ -204,7 +204,7 @@ jQuery(document).ready(function($){
 		<p> <?php _e('If this happens while client is paying and client does pay, however, that appointment will be taken out from removed status and it will be marked as paid.', 'appointments');?> </p>
 		<p> <?php _e('On the admin product management page if it is an Appointments+ Product, variations, SKU, price column fields will display "-".', 'appointments');?> </p>
 		<p> <?php _e('Transactions are shown in MarketPress, but related appointment record is updated, that is, status is changed to "paid".', 'appointments');?> </p>
-		<p> <?php _e('If Manual Payment gateway is activated and client uses that method, appointment will be in "pending" status until you manually confirm it.', 'appointments');?> </p>
+		<p> <?php _e('If Manual Payment gateway is activated and the client uses that method, the appointment will be in "pending" status until you manually confirm it.', 'appointments');?> </p>
 	</li>
 
 	<li class="faq-answer" id='q30'>

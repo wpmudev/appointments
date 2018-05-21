@@ -219,6 +219,7 @@ function appointments_get_weekly_schedule_slots( $now = false, $service_id = 0, 
 			}
 		}
 	}
+
 	if ( ! empty( $start_hours ) ) {
 		sort( $start_hours );
 		foreach ( $start_hours as $start_time ) {
@@ -235,13 +236,15 @@ function appointments_get_weekly_schedule_slots( $now = false, $service_id = 0, 
 			);
 		}
 	}
+	$slots = array(
+		'the_week' => $the_week,
+		'time_slots' => $time_slots,
+	);
 	/**
 	 * Allows to filter weekly schedule slots
 	 */
-	return apply_filters( 'appointments_get_weekly_schedule_slots', array(
-		'the_week' => $the_week,
-		'time_slots' => $time_slots,
-	), $now, $service_id, $worker_id, $location_id );
+	$slots = apply_filters( 'appointments_get_weekly_schedule_slots', $slots, $now, $service_id, $worker_id, $location_id );
+	return $slots;
 }
 
 /**
@@ -285,8 +288,9 @@ function appointments_get_worker_weekly_start_hours( $service_id = 0, $worker_id
 				if ( $end_slot > $open_hours['end'] ) {
 					break;
 				}
-				if ( ! in_array( $start_time, $slot_starts ) ) {
-					$slot_starts[] = $start_time;
+				$ccs = date( 'H:i', apply_filters( 'app_ccs', strtotime( $start_time ) ) );
+				if ( ! in_array( $ccs, $slot_starts ) ) {
+					$slot_starts[] = $ccs;
 				}
 			}
 		}
@@ -718,8 +722,8 @@ function appointments_weekly_calendar( $date = false, $args = array() ) {
 				foreach ( $slots['the_week'] as $weekday_date ) {
 					$date_start = $weekday_date . ' ' . $time_slot['from'];
 					$date_end = $weekday_date . ' ' . $time_slot['to'];
-					$datetime_start = apply_filters( 'app_ccs', strtotime( $date_start ) ); // Current cell starts
-					$datetime_end = apply_filters( 'app_cce', strtotime( $date_end ) ); // Current cell ends
+					$datetime_start = strtotime( $date_start ); // Current cell starts
+					$datetime_end = strtotime( $date_end ); // Current cell ends
 					$is_busy = $appointments->is_busy( $datetime_start, $datetime_end, $capacity );
 					$title = apply_filters(
 						'app-schedule_cell-title',

@@ -70,14 +70,15 @@
                         <option value=""><?php esc_html_e( 'Unknown', 'appointments' ); ?></option>
 <?php
 $_start_time = $app_id ? strtotime( $app->get_start_time() ): '';
-$slots = $appointments->_get_timetable_slots( $app->start, 0 );
+$day_start = strtotime( $app->start );
+$slots = appointments_get_worker_weekly_start_hours( $app->service, $app->worker, $app->location );
 foreach ( $slots as $slot ) {
-	$h = strtotime( $slot['hours'] );
+	$h = strtotime( $slot );
 	printf(
 		'<option value="%s" %s>%s</option>',
-		esc_attr( $slot['hours'] ),
+		esc_attr( $slot ),
 		selected( $_start_time, $h, false ),
-		esc_html( $slot['hours'] )
+		esc_html( $slot )
 	);
 }
 ?>
