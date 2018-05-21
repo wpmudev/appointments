@@ -1,5 +1,6 @@
 2018-xx-xx - 2.3.0
 -------------------------------
+- Refactored "Services" screan and use WP_List_Table class for the list.
 
 2018-05-21 - 2.2.8
 -------------------------------
@@ -11,6 +12,7 @@
 - Fixed a problem with paddings on the weekly booking calendar.
 - Improved the "app_my_appointments" shortcode and added a message when we have no appointments.
 - Removed DateTime::createFromFormat() usage to be compatible with PHP 5.2
+- Fixed a problem with visibility "Currency" option - it was visible only when we turn on "Payment required" field.
 
 2018-05-07 - 2.2.7
 -------------------------------

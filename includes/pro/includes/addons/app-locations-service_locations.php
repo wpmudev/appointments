@@ -23,37 +23,38 @@ class App_Locations_ServiceLocations {
 
 	private $_services_locations_option;
 
-	private function __construct () {
+	private function __construct() {
 		$this->_services_locations_option = 'app-services-locations';
 	}
 
-	public static function serve () {
+	public static function serve() {
 		$me = new App_Locations_ServiceLocations;
 		$me->_add_hooks();
 	}
 
-	private function _add_hooks () {
+	private function _add_hooks() {
 		// Init and dispatch post-init actions
-		add_action('app-locations-initialized', array($this, 'initialize'));
+		add_action( 'app-locations-initialized', array( $this, 'initialize' ) );
 
 		// Augment service settings pages
-		add_filter('app-settings-services-service-name', array($this, 'add_service_selection'), 10, 2);
+		add_filter( 'app-settings-services-service-name', array( $this, 'add_service_selection' ), 10, 2 );
 		add_action( 'appointments_add_new_service_form', array( $this, 'add_new_service_selection' ) );
+		add_filter( 'appointments_get_service', array( $this, 'add_service_location' ) );
 
 		// Add settings
-		add_action('appointments_locations_settings_section_settings', array($this, 'show_settings'));
-		add_filter('app-locations-before_save', array($this, 'save_settings'));
+		add_action( 'appointments_locations_settings_section_settings', array( $this, 'show_settings' ) );
+		add_filter( 'app-locations-before_save', array( $this, 'save_settings' ) );
 
-		add_action('admin_notices', array($this, 'show_nags'));
+		add_action( 'admin_notices', array( $this, 'show_nags' ) );
 
 		// Record appointment location
-		add_action('wpmudev_appointments_insert_appointment', array($this, 'record_appointment_location'), 5);
+		add_action( 'wpmudev_appointments_insert_appointment', array( $this, 'record_appointment_location' ), 5 );
 
 		// Since 1.8.2
 		add_filter( 'appointments_get_service_attribute_location', array( $this, 'get_service_attribute' ), 10, 2 );
-		add_action('appointments_insert_service', array($this, 'save_service_location'));
-		add_action('appointments_delete_service', array($this, 'delete_service_location_relationship'));
-		add_action('wpmudev_appointments_update_service', array($this, 'save_service_location'));
+		add_action( 'appointments_insert_service', array( $this, 'save_service_location' ) );
+		add_action( 'appointments_delete_service', array( $this, 'delete_service_location_relationship' ) );
+		add_action( 'wpmudev_appointments_update_service', array( $this, 'save_service_location' ) );
 
 		add_filter( 'appointments_default_options', array( $this, 'default_options' ) );
 
@@ -94,11 +95,9 @@ class App_Locations_ServiceLocations {
 
 		if ( isset( $_POST['service_location'] ) && is_array( $_POST['service_location'] ) && isset( $_POST['service_location'][ $service_id ] ) ) {
 			$location = $_POST['service_location'][ $service_id ];
-		}
-		elseif ( isset( $_POST['service_location'] ) ) {
+		} elseif ( isset( $_POST['service_location'] ) ) {
 			$location = $_POST['service_location'];
-		}
-		else {
+		} else {
 			return;
 		}
 
@@ -117,19 +116,18 @@ class App_Locations_ServiceLocations {
 		$this->_update_appointment_locations( $service_id, $old_location_id, $location );
 
 		$services_locations = get_option( $this->_services_locations_option );
-		if( ! is_array( $services_locations ) ){
+		if ( ! is_array( $services_locations ) ) {
 			$services_locations = array();
 		}
 
 		if ( $location === false ) {
 			delete_option( $key );
-			if( isset( $services_locations[ $service_id ] ) ){
+			if ( isset( $services_locations[ $service_id ] ) ) {
 				unset( $services_locations[ $service_id ] );
-			}			
-		}
-		else {
-			update_option($key, $location);
-			$services_locations[ $service_id ] = $location;			
+			}
+		} else {
+			update_option( $key, $location );
+			$services_locations[ $service_id ] = $location;
 		}
 
 		update_option( $this->_services_locations_option, $services_locations );
@@ -144,7 +142,7 @@ class App_Locations_ServiceLocations {
 	 *
 	 * @return string
 	 */
-	public function add_service_selection ($out, $service_id) {
+	public function add_service_selection( $out, $service_id ) {
 		if ( ! class_exists( 'App_Locations_Model' ) || ! $this->_locations ) {
 			return $out;
 		}
@@ -166,7 +164,7 @@ class App_Locations_ServiceLocations {
 		<label for="service_location-<?php echo $service_id; ?>"><?php _e( 'Location', 'appointments' ); ?></label>
 		<select name="service_location[<?php echo $service_id; ?>]" id="service_location-<?php echo $service_id; ?>">
 			<option value=""></option>
-			<?php foreach ( $locations as $location ): ?>
+			<?php foreach ( $locations as $location ) :  ?>
 				<option value="<?php echo $location->id; ?>" <?php selected( $location->id, $service_location_id ); ?>><?php echo esc_html( $location->address ); ?></option>
 			<?php endforeach; ?>
 		</select>
@@ -193,7 +191,7 @@ class App_Locations_ServiceLocations {
 			<td>
 				<select name="service_location" id="service_location">
 					<option value=""></option>
-					<?php foreach ( $locations as $location ): ?>
+					<?php foreach ( $locations as $location ) :  ?>
 						<option value="<?php echo $location->id; ?>"><?php echo esc_html( $location->address ); ?></option>
 					<?php endforeach; ?>
 				</select>
@@ -212,15 +210,15 @@ class App_Locations_ServiceLocations {
 	}
 
 
-	function show_nags () {
-		if (!class_exists('App_Locations_Location') || !$this->_locations) {
+	function show_nags() {
+		if ( ! class_exists( 'App_Locations_Location' ) || ! $this->_locations ) {
 			echo '<div class="error"><p>' .
-				__("You'll need Locations add-on activated for Service Locations integration add-on to work", 'appointments') .
+				__( "You'll need Locations add-on activated for Service Locations integration add-on to work", 'appointments' ) .
 			'</p></div>';
 		}
 	}
 
-	public function initialize () {
+	public function initialize() {
 		if ( ! class_exists( 'App_Locations_Model' ) ) {
 			return false;
 		}
@@ -229,10 +227,10 @@ class App_Locations_ServiceLocations {
 		$this->_locations = App_Locations_Model::get_instance();
 
 		if ( 'manual' == $options['service_locations']['insert'] ) {
-			add_shortcode('app_service_location', array($this, 'process_shortcode'));
+			add_shortcode( 'app_service_location', array( $this, 'process_shortcode' ) );
 		} else {
-			add_shortcode('app_service_location', '__return_false');
-			add_filter('app-services-service_description', array($this, 'inject_location_markup'), 10, 3);
+			add_shortcode( 'app_service_location', '__return_false' );
+			add_filter( 'app-services-service_description', array( $this, 'inject_location_markup' ), 10, 3 );
 		}
 	}
 
@@ -243,7 +241,7 @@ class App_Locations_ServiceLocations {
 		return $shortcodes;
 	}
 
-	public function record_appointment_location ($appointment_id) {
+	public function record_appointment_location( $appointment_id ) {
 		$appointment = appointments_get_appointment( $appointment_id );
 		if ( empty( $appointment->service ) ) {
 			return false;
@@ -257,73 +255,73 @@ class App_Locations_ServiceLocations {
 		appointments_update_appointment( $appointment_id, array( 'location' => $location_id ) );
 	}
 
-	public function show_settings () {
+	public function show_settings() {
 		$settings = appointments_get_options();
 		?>
-			<h3><?php _e('Service Locations Settings', 'appointments') ?></h3>
+			<h3><?php _e( 'Service Locations Settings', 'appointments' ) ?></h3>
 			<table class="form-table">
 				<tr>
-					<th scope="row"><label for="service_locations-insert"><?php _e('Show service location', 'appointments')?></label></th>
+					<th scope="row"><label for="service_locations-insert"><?php _e( 'Show service location', 'appointments' )?></label></th>
 					<td>
 						<select id="service_locations-insert" name="service_locations[insert]">
-							<option value="manual" <?php selected($settings['service_locations']['insert'], 'manual'); ?> ><?php _e('I will add location info manually, using shortcode', 'appointments'); ?></option>
-							<option value="before" <?php selected($settings['service_locations']['insert'], 'before'); ?> ><?php _e('Automatic, before service description', 'appointments'); ?></option>
-							<option value="after" <?php selected($settings['service_locations']['insert'], 'after'); ?> ><?php _e('Automatic, after service description', 'appointments'); ?></option>
+							<option value="manual" <?php selected( $settings['service_locations']['insert'], 'manual' ); ?> ><?php _e( 'I will add location info manually, using shortcode', 'appointments' ); ?></option>
+							<option value="before" <?php selected( $settings['service_locations']['insert'], 'before' ); ?> ><?php _e( 'Automatic, before service description', 'appointments' ); ?></option>
+							<option value="after" <?php selected( $settings['service_locations']['insert'], 'after' ); ?> ><?php _e( 'Automatic, after service description', 'appointments' ); ?></option>
 						</select>
-						<p class="description"><?php _e('You can use the shortcode like this: <code>[app_service_locations]</code>', 'appointments'); ?></p>
+						<p class="description"><?php _e( 'You can use the shortcode like this: <code>[app_service_locations]</code>', 'appointments' ); ?></p>
 					</td>
 				</tr>
 			</table>
 		<?php
 	}
 
-	public function save_settings ($options) {
-		if (empty($_POST['service_locations'])) return $options;
+	public function save_settings( $options ) {
+		if ( empty( $_POST['service_locations'] ) ) { return $options; }
 
-		$data = stripslashes_deep($_POST['service_locations']);
-		$options['service_locations']['insert'] = !empty($data['insert']) ? $data['insert'] : false;
+		$data = stripslashes_deep( $_POST['service_locations'] );
+		$options['service_locations']['insert'] = ! empty( $data['insert'] ) ? $data['insert'] : false;
 
 		return $options;
 	}
 
-	public function process_shortcode ($args=array(), $content='') {
-		$service_id = !empty($args['service_id']) ? $args['service_id'] : false;
-		if (!$service_id) {
+	public function process_shortcode( $args = array(), $content = '' ) {
+		$service_id = ! empty( $args['service_id'] ) ? $args['service_id'] : false;
+		if ( ! $service_id ) {
 			$post_id = get_queried_object_id();
-			$service_id = $this->_map_description_post_to_service_id($post_id);
+			$service_id = $this->_map_description_post_to_service_id( $post_id );
 		}
 
-		if (!$service_id) return $content;
-		return $this->_get_service_location_markup($service_id, $content);
+		if ( ! $service_id ) { return $content; }
+		return $this->_get_service_location_markup( $service_id, $content );
 	}
 
-	public function inject_location_markup ($markup, $service, $description) {
-		if (!$service || empty($service->ID)) return $markup;
-		$out = $this->_get_service_location_markup($service->ID, '', ('content' == $description));
+	public function inject_location_markup( $markup, $service, $description ) {
+		if ( ! $service || empty( $service->ID ) ) { return $markup; }
+		$out = $this->_get_service_location_markup( $service->ID, '', ('content' == $description) );
 		$options = appointments_get_options();
 		return ('before' == $options['service_locations']['insert'])
 			? $out . $markup
-			: $markup . $out 
+			: $markup . $out
 		;
 	}
 
 
 
 
-	public static function service_to_location_id ($service_id) {
-		if (!$service_id) return false;
+	public static function service_to_location_id( $service_id ) {
+		if ( ! $service_id ) { return false; }
 		$key = self::STORAGE_PREFIX . $service_id;
 
-		return get_option($key, false);
-	}
-	
-	private function _service_to_location ($service_id) {
-		if (!$this->_locations) return false;
-		$location_id = self::service_to_location_id($service_id);
-		return $this->_locations->find_by('id', $location_id);
+		return get_option( $key, false );
 	}
 
-	private function _update_appointment_locations ($service_id, $old_location_id, $location_id) {
+	private function _service_to_location( $service_id ) {
+		if ( ! $this->_locations ) { return false; }
+		$location_id = self::service_to_location_id( $service_id );
+		return $this->_locations->find_by( 'id', $location_id );
+	}
+
+	private function _update_appointment_locations( $service_id, $old_location_id, $location_id ) {
 		if ( $old_location_id == $location_id ) {
 			return;
 		}
@@ -335,37 +333,37 @@ class App_Locations_ServiceLocations {
 
 	}
 
-	private function _get_service_location_markup ($service_id, $fallback='', $rich_content=true) {
-		$location = $this->_service_to_location($service_id);
-		if (!$location) return $fallback;
-		return $this->_get_location_markup($location, $rich_content);
+	private function _get_service_location_markup( $service_id, $fallback = '', $rich_content = true ) {
+		$location = $this->_service_to_location( $service_id );
+		if ( ! $location ) { return $fallback; }
+		return $this->_get_location_markup( $location, $rich_content );
 	}
 
-	private function _get_location_markup ($location, $rich_content=true) {
+	private function _get_location_markup( $location, $rich_content = true ) {
 		$lid = $location->get_id();
-		return '<div class="app-service_description-location" id="app-service_description-location-' . esc_attr($lid) . '">' .
-			apply_filters('app-locations-location_output', $location->get_display_markup($rich_content), $lid, $location) .
+		return '<div class="app-service_description-location" id="app-service_description-location-' . esc_attr( $lid ) . '">' .
+			apply_filters( 'app-locations-location_output', $location->get_display_markup( $rich_content ), $lid, $location ) .
 		'</div>';
 	}
 
-	private function _map_description_post_to_service_id ($post_id) {
+	private function _map_description_post_to_service_id( $post_id ) {
 		$services = appointments_get_services( array( 'page' => $post_id, 'fields' => 'ID' ) );
-		if ( ! empty( $services ) )
-			return $services[0];
+		if ( ! empty( $services ) ) {
+			return $services[0]; }
 
 		return '';
 	}
 
-	public function get_services_min_id( $min_service_id ){
+	public function get_services_min_id( $min_service_id ) {
 
 		$current_services_location = $this->get_current_services_location();
-		if( is_numeric( $current_services_location ) ){
-			
+		if ( is_numeric( $current_services_location ) ) {
+
 			$services_locations = get_option( $this->_services_locations_option );
 			ksort( $services_locations );
 			$location_services = array_search( $current_services_location, $services_locations );
 
-			if( $location_services ){
+			if ( $location_services ) {
 				return $location_services;
 			}
 		}
@@ -374,15 +372,28 @@ class App_Locations_ServiceLocations {
 
 	}
 
-	public function get_current_services_location(){
+	public function get_current_services_location() {
 
-		if( isset( $_REQUEST[ "app_service_location" ] ) ){
-			return (int)$_REQUEST[ "app_service_location" ];
+		if ( isset( $_REQUEST['app_service_location'] ) ) {
+			return (int) $_REQUEST['app_service_location'];
 		}
-		if ( isset( $_REQUEST["app_location_id"] ) ){
-			return (int)$_REQUEST["app_location_id"];
-		}			
+		if ( isset( $_REQUEST['app_location_id'] ) ) {
+			return (int) $_REQUEST['app_location_id'];
+		}
 		return false;
+	}
+
+	/**
+	 * Add service_location to $service Object
+	 *
+	 * @since 2.3.0
+	 */
+	public function add_service_location( $service ) {
+		$service->service_location = false;
+		if ( is_object( $service ) && isset( $service->ID ) ) {
+			$service->service_location = get_option( 'app-service_location-' . $service->ID, false );
+		}
+		return $service;
 	}
 }
 App_Locations_ServiceLocations::serve();

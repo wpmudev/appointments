@@ -18,17 +18,14 @@ class Appointments_Service {
 	private function _sanitize_field( $field, $value ) {
 		$int_fields = array( 'ID', 'duration', 'page', 'capacity' );
 
-		if ( in_array( $field, $int_fields ) )
-			return absint( $value );
-		else
-			return $value;
+		if ( in_array( $field, $int_fields ) ) {
+			return absint( $value ); } else { 			return $value; }
 	}
 
 	public function __get( $name ) {
 		$value = false;
 		return apply_filters( "appointments_get_service_attribute_{$name}", $value, $this->ID );
 	}
-
 }
 
 /**
@@ -49,7 +46,7 @@ function appointments_insert_service( $args = array() ) {
 		'capacity' => 0,
 		'duration' => 0,
 		'price' => '',
-		'page' => 0
+		'page' => 0,
 	);
 
 	$args = wp_parse_args( $args, $defaults );
@@ -71,12 +68,11 @@ function appointments_insert_service( $args = array() ) {
 	if ( $ID ) {
 		$insert['ID'] = $ID;
 		$insert_wildcards[] = '%d';
-	}
-	else {
+	} else {
 		// No ID, insert the next ID
 		$ID = $wpdb->get_var( "SELECT MAX(ID) FROM $table" );
-		if ( ! $ID )
-			$ID = 1;
+		if ( ! $ID ) {
+			$ID = 1; }
 
 		$ID++;
 
@@ -86,8 +82,8 @@ function appointments_insert_service( $args = array() ) {
 
 	// Service name
 	$name = trim( $args['name'] );
-	if ( empty( $name ) )
-		return false;
+	if ( empty( $name ) ) {
+		return false; }
 
 	$insert['name'] = $name;
 	$insert_wildcards[] = '%s';
@@ -98,17 +94,17 @@ function appointments_insert_service( $args = array() ) {
 
 	// Duration
 	$duration = absint( $args['duration'] );
-	if ( ! $duration )
-		$duration = 30;
+	if ( ! $duration ) {
+		$duration = 30; }
 
 	$insert['duration'] = $duration;
 	$insert_wildcards[] = '%d';
 
 	// Price
-	$price = preg_replace( "/[^0-9,.]/", "", $args['price'] );
+	$price = preg_replace( '/[^0-9,.]/', '', $args['price'] );
 	if ( $price !== '' ) {
-		if ( ! $price )
-			$price = '';
+		if ( ! $price ) {
+			$price = ''; }
 	}
 	$insert['price'] = $price;
 	$insert_wildcards[] = '%s';
@@ -148,9 +144,9 @@ function appointments_update_service( $service_id, $args ) {
 	global $wpdb;
 
 	$old_service = appointments_get_service( $service_id );
-	if ( ! $old_service )
+	if ( ! $old_service ) {
 		return false;
-
+	}
 	$fields = array( 'ID' => '%d', 'name' => '%s', 'capacity' => '%d', 'duration' => '%d', 'price' => '%s', 'page' => '%d' );
 
 	$update = array();
@@ -162,12 +158,12 @@ function appointments_update_service( $service_id, $args ) {
 		}
 	}
 
-	if ( isset( $update['price'] ) )
-		$update['price'] = $price = preg_replace( "/[^0-9,.]/", "", $update['price'] );
-
-	if ( empty( $update ) )
+	if ( isset( $update['price'] ) ) {
+		$update['price'] = $price = preg_replace( '/[^0-9,.]/', '', $update['price'] );
+	}
+	if ( empty( $update ) ) {
 		return false;
-
+	}
 	$table = appointments_get_table( 'services' );
 
 	$result = $wpdb->update(
@@ -178,12 +174,12 @@ function appointments_update_service( $service_id, $args ) {
 		array( '%d' )
 	);
 
-	if ( $result )
-		appointments_delete_service_cache( $service_id );
+	if ( $result ) {
+		appointments_delete_service_cache( $service_id ); }
 
 	do_action( 'wpmudev_appointments_update_service', $service_id, $args, $old_service );
 
-	return (bool)$result;
+	return (bool) $result;
 }
 
 
@@ -200,7 +196,7 @@ function appointments_get_service( $service_id ) {
 
 	$service = wp_cache_get( $service_id, 'app_services' );
 
-	if ( ! $service ) {
+	if ( 1 || ! $service ) {
 		$service = $wpdb->get_row(
 			$wpdb->prepare(
 				"SELECT * from $table WHERE ID = %d",
@@ -208,11 +204,21 @@ function appointments_get_service( $service_id ) {
 			)
 		);
 
+		l( $service );
+
+		/**
+ * Allow to modify service data
+ *
+ * @since 2.3.0
+ */
+		$service = apply_filters( 'appointments_get_service', $service );
+
+		l( $service );
+
 		if ( $service ) {
 			wp_cache_add( $service->ID, $service, 'app_services' );
 		}
 	}
-
 
 	if ( $service ) {
 		return new Appointments_Service( $service );
@@ -267,7 +273,7 @@ function appointments_get_services( $args = array() ) {
 		'orderby' => 'ID',
 		'page' => false, // Filter by page ID
 		'count' => false,
-		'fields' => false
+		'fields' => false,
 	);
 
 	$args = wp_parse_args( $args, $defaults );
@@ -277,33 +283,42 @@ function appointments_get_services( $args = array() ) {
 	$where = array();
 	$page_id = absint( $args['page'] );
 
-	if ( $page_id )
-		$where[] = $wpdb->prepare( "s.page = %d", $page_id );
+	if ( $page_id ) {
+		$where[] = $wpdb->prepare( 's.page = %d', $page_id ); }
 
 	// @TODO: We need to move this to somewhere else
-	$allowed_orderby = $whitelist = apply_filters( 'app_order_by_whitelist', array( 'ID', 'name', 'start', 'end', 'duration', 'price',
-			'ID DESC', 'name DESC', 'start DESC', 'end DESC', 'duration DESC', 'price DESC', 'RAND()' ) );
+	$allowed_orderby = $whitelist = apply_filters( 'app_order_by_whitelist', array(
+		'ID',
+		'name',
+		'start',
+		'end',
+		'duration',
+		'price',
+		'ID DESC',
+		'name DESC',
+		'start DESC',
+		'end DESC',
+		'duration DESC',
+		'price DESC',
+		'RAND()',
+	) );
 
-	$order_query = "";
+	$order_query = '';
 
 	if ( in_array( $args['orderby'], $allowed_orderby ) ) {
 		$orderby = $args['orderby'];
 		$order_query = "ORDER BY $orderby";
 	}
 
-	if ( $where )
-		$where = "WHERE " . implode( ' AND ', $where );
-	else
-		$where = "";
+	if ( $where ) {
+		$where = 'WHERE ' . implode( ' AND ', $where ); } else { 		$where = ''; }
 
 	if ( ! $args['count'] ) {
 
 		$allowed_fields = array( 'ID' );
 		$field = $args['fields'];
-		if ( $field && in_array( $field, $allowed_fields ) )
-			$get_col = true;
-		else
-			$get_col = false;
+		if ( $field && in_array( $field, $allowed_fields ) ) {
+			$get_col = true; } else { 			$get_col = false; }
 
 		if ( $get_col ) {
 			$query = "SELECT $field FROM $table s $where $order_query";
@@ -314,8 +329,8 @@ function appointments_get_services( $args = array() ) {
 		$cache_key = md5( $query . '-' . 'app_get_services' );
 
 		$cached_queries = wp_cache_get( 'app_get_services' );
-		if ( ! is_array( $cached_queries ) )
-			$cached_queries = array();
+		if ( ! is_array( $cached_queries ) ) {
+			$cached_queries = array(); }
 
 		if ( ! isset( $cached_queries[ $cache_key ] ) ) {
 
@@ -329,9 +344,7 @@ function appointments_get_services( $args = array() ) {
 				$cached_queries[ $cache_key ] = $results;
 				wp_cache_set( 'app_get_services', $cached_queries );
 			}
-
-		}
-		else {
+		} else {
 			$results = $cached_queries[ $cache_key ];
 		}
 
@@ -341,33 +354,28 @@ function appointments_get_services( $args = array() ) {
 				wp_cache_add( $result->ID, $result, 'app_services' );
 				$services[] = new Appointments_Service( $result );
 			}
-		}
-		else {
+		} else {
 			$services = $results;
 		}
 
-
 		return $services;
 
-	}
-	else {
+	} else {
 		$query = "SELECT COUNT(ID) FROM $table s $where";
 		$cache_key = md5( $query . '-' . 'app_count_services' );
 
 		$cached_queries = wp_cache_get( 'app_count_services' );
-		if ( ! is_array( $cached_queries ) )
-			$cached_queries = array();
+		if ( ! is_array( $cached_queries ) ) {
+			$cached_queries = array(); }
 
 		if ( ! isset( $cached_queries[ $cache_key ] ) ) {
 			$result = $wpdb->get_var( $query );
 			$result = absint( $result );
 			$cached_queries[ $cache_key ] = absint( $result );
 			wp_cache_set( 'app_count_services', $cached_queries );
-		}
-		else {
+		} else {
 			$result = $cached_queries[ $cache_key ];
 		}
-
 
 		return $result;
 	}
@@ -385,7 +393,7 @@ function appointments_get_services_min_id() {
 	$min = wp_cache_get( 'min_service_id', 'appointments_services' );
 	if ( false === $min ) {
 		$table = appointments_get_table( 'services' );
-		$min = $wpdb->get_var( "SELECT MIN(ID) FROM $table");
+		$min = $wpdb->get_var( "SELECT MIN(ID) FROM $table" );
 		if ( ! $min ) {
 			$min = 0;
 		}
@@ -406,7 +414,7 @@ function appointments_get_services_min_price() {
 
 	$table = appointments_get_table( 'services' );
 
-	$result = $wpdb->get_var( "SELECT MIN(price) FROM $table WHERE price > 0");
+	$result = $wpdb->get_var( "SELECT MIN(price) FROM $table WHERE price > 0" );
 	return $result;
 }
 
@@ -421,8 +429,8 @@ function appointments_delete_service( $service_id ) {
 	global $wpdb;
 
 	$old_service = appointments_get_service( $service_id );
-	if ( ! $old_service )
-		return false;
+	if ( ! $old_service ) {
+		return false; }
 
 	$table = appointments_get_table( 'services' );
 
@@ -468,26 +476,21 @@ function appointments_get_service_capacity( $service_id ) {
 	if ( false === $capacity ) {
 		// If no worker is defined, capacity is always 1
 		$count = count( appointments_get_all_workers() );
-		if ( !$count ) {
+		if ( ! $count ) {
 			$capacity = 1;
-		}
-		else {
+		} else {
 			// Else, find number of workers giving that service and capacity of the service
 			$worker_count = count( appointments_get_workers_by_service( $service_id ) );
 			$service = appointments_get_service( $service_id );
 			if ( $service ) {
 				if ( ! $service->capacity ) {
 					$capacity = $worker_count; // No service capacity limit
-				}
-				else {
+				} else {
 					$capacity = min( $service->capacity, $worker_count ); // Return whichever smaller
 				}
-
-			}
-			else {
+			} else {
 				$capacity = 1; // No service ?? - Not possible but let's be safe
 			}
-
 		}
 		wp_cache_set( 'capacity_'. $service_id, $capacity );
 	}
@@ -504,7 +507,7 @@ function appointments_get_service_capacity( $service_id ) {
  */
 function appointments_get_service_name( $service_id ) {
 	// Safe text if we delete a service
-	$name = __('Not defined', 'appointments');
+	$name = __( 'Not defined', 'appointments' );
 	$result = appointments_get_service( $service_id );
 	if ( $result ) {
 		$name = $result->name;

@@ -51,6 +51,7 @@ class Appointments_Admin_Settings_Page {
 			'services' => array(
 				'services' => __( 'Services', 'appointments' ),
 				'new-service' => __( 'Add new Service', 'appointments' ),
+				'edit-service' => false,
 			),
 			'workers' => array(
 				'workers' => __( 'Service Providers', 'appointments' ),
@@ -75,6 +76,9 @@ class Appointments_Admin_Settings_Page {
 			$content = '<ul class="subsubsub">';
 			$links = array();
 			foreach ( $sections[ $tab ] as $section_stub => $label ) {
+				if ( empty( $label ) ) {
+					continue;
+				}
 				$links[] = '<li><a href="#section-' . esc_attr( $section_stub ) . '" data-section="section-' . esc_attr( $section_stub ) . '" class="'.esc_attr( $tab.'-'.$section_stub ).'">' . esc_html( $label ) . '</a></li>';
 			}
 			$content .= implode( ' | ', $links );
@@ -99,8 +103,15 @@ class Appointments_Admin_Settings_Page {
 					'workers' => array(
 						'delete_confirmation' => __( 'Are you sure to delete this Service Provider?', 'appointments' ),
 					),
-					'services' => array(
+					'service' => array(
 						'delete_confirmation' => __( 'Are you sure to delete this Service?', 'appointments' ),
+					),
+					'services' => array(
+						'delete_confirmation' => __( 'Are you sure to delete selected Services?', 'appointments' ),
+					),
+					'bulk_actions' => array(
+						'no_items' => __( 'Please select some services first.', 'appointments' ),
+						'no_action' => __( 'Please select some action first.', 'appointments' ),
 					),
 				),
 			));
@@ -197,6 +208,15 @@ class Appointments_Admin_Settings_Page {
 
 		$file = _appointments_get_settings_tab_view_file_path( $tab );
 
+		/**
+		 * Load table class
+		 */
+		switch ( $tab ) {
+			case 'services':
+				require_once dirname( dirname( __FILE__ ) ).'/class-app-list-table-services.php';
+			break;
+		}
+
 		echo '<div class="appointments-settings-tab-' . $tab . '">';
 		if ( $file ) {
 			require_once( $file );
@@ -219,16 +239,20 @@ class Appointments_Admin_Settings_Page {
 		/**
 		 * get current action
 		 */
-		$addons_action = '';
+		$action = '';
 		if ( isset( $_REQUEST['action'] ) ) {
-			$addons_action = $_REQUEST['action'];
+			$action = $_REQUEST['action'];
 		}
-		if ( '-1' == $addons_action && isset( $_REQUEST['action2'] ) ) {
-			$addons_action = $_REQUEST['action2'];
+		if ( '-1' == $action && isset( $_REQUEST['action2'] ) ) {
+			$action = $_REQUEST['action2'];
 		}
-		if ( $addons_action ) {
-			$this->_save_addons( $addons_action );
-			wp_redirect( remove_query_arg( array( 'addon', '_wpnonce', 'action' ) ) );
+
+		/**
+		 * handle bulk action addon
+		 */
+		if ( $action && isset( $_REQUEST['addon'] ) ) {
+			$this->_save_addons( $action );
+			wp_safe_redirect( remove_query_arg( array( 'addon', '_wpnonce', 'action' ) ), 303 );
 			exit;
 		}
 
@@ -253,12 +277,12 @@ class Appointments_Admin_Settings_Page {
 				$this->_save_exceptions();
 				break;
 			}
-			case 'save_services': {
-				$this->_save_services();
-				break;
-			}
 			case 'add_new_service': {
 				$redirect_to = $this->_add_service();
+				break;
+			}
+			case 'update_service': {
+				$redirect_to = $this->_update_service();
 				break;
 			}
 			case 'add_new_worker': {
@@ -275,10 +299,9 @@ class Appointments_Admin_Settings_Page {
 			}
 
 			do_action( 'appointments_save_settings', $action );
-
 			$redirect_to = $redirect_to ? $redirect_to : add_query_arg( 'updated', 1 );
 			// Redirecting when saving options
-			wp_redirect( $redirect_to );
+			wp_safe_redirect( $redirect_to, 303 );
 			die;
 	}
 
@@ -439,39 +462,6 @@ class Appointments_Admin_Settings_Page {
 		}
 	}
 
-	private function _save_services() {
-		// Save Services
-		if ( ! is_array( $_POST['services'] ) ) {
-			return;
-		}
-
-		do_action( 'app-services-before_save' );
-
-		foreach ( $_POST['services'] as $ID => $service ) {
-			if ( '' != trim( $service['name'] ) ) {
-				// Update or insert?
-				$_service = appointments_get_service( $ID );
-				if ( $_service ) {
-					$args = array(
-						'name'		=> $service['name'],
-						'capacity'	=> (int) $service['capacity'],
-						'duration'	=> $service['duration'],
-						'price'		=> $service['price'],
-						'page'		=> $service['page'],
-					);
-
-					appointments_update_service( $ID, $args );
-				}
-
-				do_action( 'app-services-service-updated', $ID );
-			} else {
-				// Entering an empty name means deleting of a service
-				appointments_delete_service( $ID );
-			}
-		}
-
-	}
-
 	private function _add_service() {
 		$args = array(
 			'name' => sanitize_text_field( $_POST['service_name'] ),
@@ -490,6 +480,60 @@ class Appointments_Admin_Settings_Page {
 		}
 
 		return admin_url( 'admin.php?page=app_settings&tab=services&added=true#section-services' );
+	}
+
+	/**
+	 * Update service
+	 *
+	 * @since 2.2.9
+	 */
+	private function _update_service() {
+		if ( ! isset( $_POST['app_nonce'] ) ) {
+			return false;
+		}
+		if ( ! wp_verify_nonce( $_POST['app_nonce'], 'update_app_settings' ) ) {
+			return false;
+		}
+		if ( ! isset( $_POST['id'] ) ) {
+			return false;
+		}
+		$ID = filter_var( $_POST['id'], FILTER_VALIDATE_INT );
+		$_service = appointments_get_service( $ID );
+		if ( false === $_service ) {
+			return false;
+		}
+		do_action( 'app-services-before_save' );
+		/**
+		 * update
+		 */
+		$args = array();
+		/**
+		 * values: integers
+		 */
+		$keys = array( 'duration', 'capacity', 'page' );
+		foreach ( $keys as $k ) {
+			$key = 'service_'.$k;
+			$value = 0;
+			if ( isset( $_POST[ $key ] ) ) {
+				$value = filter_var( $_POST[ $key ], FILTER_VALIDATE_INT );
+			}
+			$args[ $k ] = $value;
+		}
+		/**
+		 * values: strings
+		 */
+		$keys = array( 'name', 'price' );
+		foreach ( $keys as $k ) {
+			$key = 'service_'.$k;
+			$value = '';
+			if ( isset( $_POST[ $key ] ) ) {
+				$value = filter_var( $_POST[ $key ], FILTER_SANITIZE_STRING );
+			}
+			$args[ $k ] = $value;
+		}
+		appointments_update_service( $ID, $args );
+		do_action( 'app-services-service-updated', $ID );
+		return admin_url( 'admin.php?page=app_settings&tab=services&updated=true#section-services' );
 	}
 
 	private function _add_worker() {

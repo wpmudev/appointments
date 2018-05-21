@@ -1,0 +1,151 @@
+<?php
+
+if ( ! class_exists( 'WP_List_Table' ) ) {
+	require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
+}
+
+class Appointments_WP_List_Table_Services extends WP_List_Table {
+
+	private $currency;
+
+	public function __construct() {
+		//Set parent defaults
+		parent::__construct( array(
+			'singular'  => 'service',
+			'plural'    => 'services',
+			'ajax'      => false,
+		) );
+		$this->currency = appointments_get_option( 'currency' );
+	}
+
+	public function column_default( $item, $column_name ) {
+		switch ( $column_name ) {
+			case 'capacity':
+			case 'duration':
+			case 'price':
+				return $item->$column_name;
+		}
+	}
+
+	public function column_name( $item ) {
+		$edit_link = sprintf(
+			'<a href="#section-edit-service" data-id="%s" data-nonce="%s" class="edit">%%s</a>',
+			esc_attr( $item->ID ),
+			esc_attr( wp_create_nonce( 'service-'.$item->ID ) )
+		);
+		$actions = array(
+			'ID' => $item->ID,
+			'edit'    => sprintf( $edit_link, __( 'Edit', 'appointments' ) ),
+			'delete'    => sprintf(
+				'<a href="#" data-id="%s" data-nonce="%s" class="delete">%s</a>',
+				esc_attr( $item->ID ),
+				esc_attr( wp_create_nonce( 'service-'.$item->ID ) ),
+				__( 'Delete', 'appointments' )
+			),
+		);
+		$page = $this->get_service_page_link( $item, false );
+		if ( false !== $page ) {
+			$actions['page_view'] = $page;
+		}
+		$value = sprintf( $edit_link, esc_html( $item->name ) );
+		return sprintf( '<strong>%s</strong>%s', $value, $this->row_actions( $actions ) );
+	}
+
+	public function column_cb( $item ) {
+		return sprintf(
+			'<input type="checkbox" name="%1$s[]" value="%2$s" />',
+			/*$1%s*/ $this->_args['singular'],
+			/*$2%s*/ $item->ID
+		);
+	}
+
+	private function get_service_page_link( $item, $rich = true ) {
+		if ( empty( $item->page ) ) {
+			return false;
+		}
+		$page = get_page( $item->page );
+		if ( empty( $page ) ) {
+			return false;
+		}
+		if ( $rich ) {
+			return sprintf(
+				'%s<div class="row-actions"><a href="%s">%s</a></div>',
+				$page->post_title,
+				get_page_link( $page->ID ),
+				__( 'View page', 'appointments' )
+			);
+		}
+		return sprintf(
+			'<a href="%s">%s</a>',
+			get_page_link( $page->ID ),
+			__( 'View page', 'appointments' )
+		);
+	}
+
+	public function column_page( $item ) {
+		$page = $this->get_service_page_link( $item );
+		if ( empty( $page ) ) {
+			return '<span aria-hidden="true">&#8212;</span>';
+		}
+		return sprintf( '<span data-id="%d">%s</span>', $item->page, $page );
+	}
+
+	public function get_columns() {
+		$columns = array(
+			'cb'        => '<input type="checkbox" />', //Render a checkbox instead of text
+			'name' => __( 'Name', 'appointments' ),
+			'capacity' => __( 'Capacity', 'appointments' ),
+			'duration' => __( 'Duration (mins)', 'appointments' ),
+			'price' => sprintf( __( 'Price (%s)', 'appointments' ), $this->currency ),
+			'page' => __( 'Description page', 'appointments' ),
+		);
+		return $columns;
+	}
+
+	public function get_bulk_actions() {
+		$actions = array(
+			'delete'    => 'Delete',
+		);
+		return $actions;
+	}
+
+	public function process_bulk_action() {
+		$action = $this->current_action();
+		$singular = $this->_args['singular'];
+		if (
+			'delete' === $action
+			&& isset( $_POST['_wpnonce'] )
+			&& isset( $_POST[ $singular ] )
+			&& ! empty( $_POST[ $singular ] )
+			&& is_array( $_POST[ $singular ] )
+			&& wp_verify_nonce( $_POST['_wpnonce'], 'bulk-'.$this->_args['plural'] )
+		) {
+			foreach ( $_POST[ $singular ] as $ID ) {
+				appointments_delete_service( $ID );
+			}
+		}
+	}
+
+	public function prepare_items() {
+		$per_page = 5;
+		$columns = $this->get_columns();
+		$hidden = array();
+		$sortable = $this->get_sortable_columns();
+		$this->_column_headers = array( $columns, $hidden, $sortable );
+		$this->process_bulk_action();
+		$data = appointments_get_services();
+		$current_page = $this->get_pagenum();
+		$total_items = count( $data );
+		$data = appointments_get_services( array( 'orderby' => 'name' ) );
+		$this->items = $data;
+		/**
+		 * REQUIRED. We also have to register our pagination options & calculations.
+		 */
+		$this->set_pagination_args( array(
+			'total_items' => $total_items,
+			'per_page'    => $per_page,
+			'total_pages' => ceil( $total_items / $per_page ),
+		) );
+	}
+}
+
