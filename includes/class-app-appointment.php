@@ -28,6 +28,7 @@ class Appointments_Appointment {
 		foreach ( get_object_vars( $appointment ) as $key => $value ) {
 			$this->$key = $this->_sanitize_field( $key, $value );
 		}
+		add_action( 'app-appointments_list-edit-client', array( $this, 'gdpr_show_agree_date' ) );
 	}
 
 	public function __get( $name ) {
@@ -207,6 +208,23 @@ class Appointments_Appointment {
 		$rand = rand( 0, 256 );
 		$hash = wp_hash( "appointment-$rand-$time" );
 		return $hash;
+	}
+
+	/**
+	 * GDPR: add to inline edit information about date of agreement.
+	 *
+	 * @since 2.3.0
+	 */
+	public function gdpr_show_agree_date() {
+		$value = get_metadata( 'app_appointment', $this->ID, 'gdpr_agree', true );
+		if ( ! empty( $value ) ) {
+			$format = sprintf( '%s %s', get_option( 'date_format' ), get_option( 'time_format' ) );
+			$date = date_i18n( $format, $value );
+			echo '<label>';
+			printf( '<span class="title">%s</span>', esc_html__( 'Agreement', 'appointments' ) );
+			printf( '<span class="input-text-wrap">%s</span>', $date );
+			echo '</label>';
+		}
 	}
 }
 
@@ -865,6 +883,10 @@ function appointments_get_appointments( $args = array() ) {
 		'orderby' => 'ID',
 		'order' => 'ASC',
 		'count' => false,// Will return only the number of rows found
+		/**
+		 * since 2.3.0
+		 */
+		'email' => false,
 	);
 
 	$args = wp_parse_args( $args, $defaults );
@@ -890,6 +912,10 @@ function appointments_get_appointments( $args = array() ) {
 
 		if ( false !== $args['user'] ) {
 			$where[] = $wpdb->prepare( 'user = %d', $args['user'] );
+		}
+
+		if ( false !== $args['email'] ) {
+			$where[] = $wpdb->prepare( 'email = %s', $args['email'] );
 		}
 
 		if ( false !== $args['service'] && ! is_array( $args['service'] ) ) {

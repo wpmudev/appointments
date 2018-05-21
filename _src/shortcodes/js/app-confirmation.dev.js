@@ -126,6 +126,7 @@ jQuery( document).ready( function( $ ) {
             var app_gcal = "";
             var app_warning_text = AppShortcodeConfirmation.warningText;
             var app_confirmation_text = AppShortcodeConfirmation.confirmationText;
+            var app_gdpr = $('.appointments-gdpr-confirmation input[type=checkbox]');
 
             var self = this;
 
@@ -143,6 +144,7 @@ jQuery( document).ready( function( $ ) {
                 app_city: app_city,
                 app_note: app_note,
                 app_gcal: app_gcal,
+                app_gdpr: app_gdpr.is(':checked'),
                 nonce: AppShortcodeConfirmation.nonce
             };
 
@@ -185,6 +187,12 @@ jQuery( document).ready( function( $ ) {
                     $(".wait_img").remove();
                     return false;
                 }
+            }
+            if ( AppShortcodeConfirmation.askGDPR && ! app_gdpr.is(':checked')) {
+                swal(AppShortcodeConfirmation.errorTitle, AppShortcodeConfirmation.GDPRmissingText, 'error' );
+                app_gdpr.focus();
+                $(".wait_img").remove();
+                return false;
             }
 
             $.post(AppShortcodeConfirmation.ajaxurl, post_data, function(response) {
