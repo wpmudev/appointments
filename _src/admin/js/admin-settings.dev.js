@@ -18,7 +18,6 @@ jQuery( document ).ready( function( $ ) {
                     _class = [];
                     for ( k = 1; k <= 3; k++ ) {
                         _class[ k ] = app_i10n.presets[i][k];
-
                     }
                     presetSamples.find("a." + i).css("background-color", "#" + _class[n]);
                 }

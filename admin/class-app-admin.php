@@ -529,7 +529,8 @@ class Appointments_Admin {
 			&& isset( $_POST['id'] )
 			&& wp_verify_nonce( $_POST['_wpnonce'], 'worker-'.$_POST['id'] )
 		) {
-			$worker = appointments_get_worker( $_POST['id'] );
+            $worker = appointments_get_worker( $_POST['id'] );
+            $worker->display_name = $worker->get_name();
 			wp_send_json_success( $worker );
 		}
 		wp_send_json_error( $data );

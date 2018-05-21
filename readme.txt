@@ -2,8 +2,8 @@
 Contributors: wpmudev, wpmudev-support1, wpmudev-support2, wpmudev-support4, wpmudev-support6
 Tags: Appointment,Booking,Calendar,Reservation,Scheduling,google calendar,
 Requires at least: 4.6
-Tested up to: 4.9.5
-Stable tag: 2.2.6
+Tested up to: 4.9.6
+Stable tag: 2.2.8
 License: GPL2
 
 The most powerful, flexible and feature-rich bookings plugin available for WordPress. Appointments does it all.
@@ -156,6 +156,16 @@ We provide comprehensive and guaranteed support on the <a href='http://premium.w
 5. Google Calendar integration
 
 == Changelog ==
+
+= 2.2.8 =
+* Fixed a problem with an appointment create time, it showed "Unknown" for Time Formats: "g:i a" and "g:i A".
+* Fixed a problem with an appointment date when we add an appointment on admin area.
+* Fixed a problem with autoconfirmation free appointment.
+* Fixed a problem with bottom bulk action on "Add-ons" tab.
+* Fixed a problem with double cancellation emails.
+* Fixed a problem with paddings on the weekly booking calendar.
+* Improved the "app_my_appointments" shortcode and added a message when we have no appointments.
+* Removed DateTime::createFromFormat() usage to be compatible with PHP 5.2
 
 = 2.2.7 =
 * Added check for service name it can be empty.
