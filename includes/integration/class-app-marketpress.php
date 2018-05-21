@@ -136,7 +136,7 @@ class Appointments_Integrations_MarketPress {
 		$tpl = ! empty( $_POST['app_page_type'] ) ? $_POST['app_page_type'] : false;
 		$page_id = wp_insert_post(
 			array(
-				'post_title'   => _x( 'Appointment', 'Default page name for MarketPress integration.', 'appointment' ),
+				'post_title'   => _x( 'Appointment', 'Default page name for MarketPress integration.', 'appointments' ),
 				'post_status'  => 'publish',
 				'post_type'    => 'product',
 				'post_content' => App_Template::get_default_page_template( $tpl ),
