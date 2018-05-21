@@ -18,7 +18,6 @@ jQuery( document ).ready( function( $ ) {
                     _class = [];
                     for ( k = 1; k <= 3; k++ ) {
                         _class[ k ] = app_i10n.presets[i][k];
-
                     }
                     presetSamples.find("a." + i).css("background-color", "#" + _class[n]);
                 }
@@ -96,7 +95,7 @@ jQuery( document ).ready( function( $ ) {
     $('.appointment-create-page a.button').on( 'click', function() {
         var value = $('select', $(this).closest('td') ).val();
         var data = {
-            action: 'make_an_appointment_page',
+            action: $(this).data('action'),
             _wpnonce: $(this).data('nonce'),
             app_page_type: value
         };

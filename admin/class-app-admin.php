@@ -473,7 +473,7 @@ class Appointments_Admin {
 		$tpl = ! empty( $_POST['app_page_type'] ) ? $_POST['app_page_type'] : false;
 		$page_id = wp_insert_post(
 			array(
-				'post_title'	=> __( 'Make an Appointment', 'appointments' ),
+				'post_title'	=> _x( 'Make an Appointment', 'Default page title for Appointments calandars.', 'appointments' ),
 				'post_status'	=> 'publish',
 				'post_type'		=> 'page',
 				'post_content'	=> App_Template::get_default_page_template( $tpl ),

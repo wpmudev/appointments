@@ -7,17 +7,19 @@
 			<label for="app-calendar"><?php _e( 'Calendar', 'appointments' ); ?></label>
 		</th>
 		<td>
-			<?php if ( is_array( $calendars ) ): ?>
+			<?php if ( is_array( $calendars ) ) :  ?>
 				<select name="gcal_selected_calendar" id="app-calendar">
 					<option value=""><?php _e( '-- Select a Calendar --', 'appointments' ); ?></option>
-					<?php foreach ( $calendars as $calendar ): ?>
+					<?php foreach ( $calendars as $calendar ) :  ?>
 						<option value="<?php echo esc_attr( $calendar['id'] ); ?>" <?php selected( $selected_calendar, $calendar['id'] ); ?>>
 							<?php echo $calendar['summary']; ?>
 						</option>
 					<?php endforeach; ?>
 				</select>
-			<?php else: ?>
-				<p style="color:#dc3232"><?php _e( 'There was an error loading your calendars.', 'appointments' ); ?></p>
+			<?php else : ?>
+            <div class="notice notice-error inline">
+                <p><?php _e( 'There was an error loading your calendars.', 'appointments' ); ?></p>
+            </div>
 			<?php endif; ?>
 		</td>
 	</tr>
@@ -39,7 +41,7 @@
 				</option>
 			</select>
 			<br />
-			<span class="description"><?php _e('Select method of integration. A+ -> GCal setting sends appointments to your selected Google calendar, but events in your Google Calendar account are not imported to Appointments+ and thus they do not reserve your available working times. A+ <-> GCal setting works in both directions.', 'appointments') ?></span>
+			<span class="description"><?php _e( 'Select method of integration. A+ -> GCal setting sends appointments to your selected Google calendar, but events in your Google Calendar account are not imported to Appointments+ and thus they do not reserve your available working times. A+ <-> GCal setting works in both directions.', 'appointments' ) ?></span>
 		</td>
 	</tr>
 
@@ -49,55 +51,55 @@
 		</th>
 		<td>
 			<input type="checkbox" name="app-gcal-overwrite" id="app-gcal-overwrite" <?php checked( $gcal_overwrite ); ?>>
-			<p class="description"><?php _e( 'With this option checked, whenever a Google Calendar Event is updated, title and description will be updated too. Otherwise, Google Calendar title and description will show.', 'appointments') ?></p>
+			<p class="description"><?php _e( 'With this option checked, whenever a Google Calendar Event is updated, title and description will be updated too. Otherwise, Google Calendar title and description will show.', 'appointments' ) ?></p>
 		</td>
 	</tr>
 
 	<tr valign="top">
-		<th scope="row" ><label for="gcal_api_allow_worker"><?php _e('Allow Service Providers for Google Calendar API Integration', 'appointments')?></label></th>
+		<th scope="row" ><label for="gcal_api_allow_worker"><?php _e( 'Allow Service Providers for Google Calendar API Integration', 'appointments' )?></label></th>
 		<td colspan="2">
 			<select name="gcal_api_allow_worker" id="gcal_api_allow_worker">
-				<option value="no" <?php selected( $allow_worker, false ); ?>><?php _e('No', 'appointments')?></option>
-				<option value="yes" <?php selected( $allow_worker ); ?>><?php _e('Yes', 'appointments')?></option>
+				<option value="no" <?php selected( $allow_worker, false ); ?>><?php _e( 'No', 'appointments' )?></option>
+				<option value="yes" <?php selected( $allow_worker ); ?>><?php _e( 'Yes', 'appointments' )?></option>
 			</select>
 			<br />
-			<span class="description"><?php _e('Whether you let your service providers to integrate with their own Google Calendar account using their profile page.', 'appointments') ?></span>
+			<span class="description"><?php _e( 'Whether you let your service providers to integrate with their own Google Calendar account using their profile page.', 'appointments' ) ?></span>
 		</td>
 	</tr>
 
 	<tr valign="top">
-		<th scope="row" ><label for="gcal_api_scope"><?php _e('Appointments will be sent to Google Calendar for', 'appointments')?></label></th>
+		<th scope="row" ><label for="gcal_api_scope"><?php _e( 'Appointments will be sent to Google Calendar for', 'appointments' )?></label></th>
 		<td colspan="2">
 			<select name="gcal_api_scope">
-				<option value="all" <?php selected( $api_scope, 'all' ); ?>><?php _e('All', 'appointments')?></option>
-				<option value="no_preference" <?php echo ( $api_scope != 'all' ) ? "selected='selected'" : ''; ?>><?php _e('No preference case', 'appointments')?></option>
+				<option value="all" <?php selected( $api_scope, 'all' ); ?>><?php _e( 'All', 'appointments' )?></option>
+				<option value="no_preference" <?php echo ( $api_scope != 'all' ) ? "selected='selected'" : ''; ?>><?php _e( 'No preference case', 'appointments' )?></option>
 			</select>
 			<br />
-			<span class="description"><?php _e('If you select "All", any appointment made from this website will be sent to the selected calendar. If you select "No preference case", only appointments which do not have an assigned service provider will be sent.', 'appointments') ?></span>
+			<span class="description"><?php _e( 'If you select "All", any appointment made from this website will be sent to the selected calendar. If you select "No preference case", only appointments which do not have an assigned service provider will be sent.', 'appointments' ) ?></span>
 		</td>
 	</tr>
 
 	<tr>
-		<th scope="row"><label for="gcal_summary"><?php _e('Event summary (name)', 'appointments') ?></label></th>
+		<th scope="row"><label for="gcal_summary"><?php _e( 'Event summary (name)', 'appointments' ) ?></label></th>
 		<td>
 			<input id="gcal_summary" value="<?php echo esc_attr( $gcal_summary ); ?>" size="90" name="gcal_summary" type="text"/>
 		</td>
 	</tr>
 
 	<tr>
-		<th scope="row"><label for="gcal_description"><?php _e('Event description', 'appointments') ?></label></th>
+		<th scope="row"><label for="gcal_description"><?php _e( 'Event description', 'appointments' ) ?></label></th>
 		<td>
 			<textarea rows="6" cols="30" class="widefat" name="gcal_description" id="gcal_description"><?php echo esc_textarea( $gcal_description ); ?></textarea>
 			<br />
 			<span class="description">
-				<?php _e('For the above 2 fields, you can use the following placeholders which will be replaced by their real values:', 'appointments') ?>&nbsp;SITE_NAME, CLIENT, SERVICE, SERVICE_PROVIDER, DATE_TIME, PRICE, DEPOSIT, PHONE, NOTE, ADDRESS, EMAIL <?php _e("(Client's email)", "appointments")?>
+				<?php _e( 'For the above 2 fields, you can use the following placeholders which will be replaced by their real values:', 'appointments' ) ?>&nbsp;SITE_NAME, CLIENT, SERVICE, SERVICE_PROVIDER, DATE_TIME, PRICE, DEPOSIT, PHONE, NOTE, ADDRESS, EMAIL <?php _e( "(Client's email)", 'appointments' )?>
 				<br />
-				<?php _e('Please be careful about privacy if your calendar is public.', 'appointments'); ?>
+				<?php _e( 'Please be careful about privacy if your calendar is public.', 'appointments' ); ?>
 			</span>
 		</td>
 	</tr>
 
-	<?php if ( ( 'sync' == $api_mode || 'gcal2app' == $api_mode ) && $selected_calendar ): ?>
+	<?php if ( ( 'sync' == $api_mode || 'gcal2app' == $api_mode ) && $selected_calendar ) :  ?>
 		<tr>
 			<th scope="row">
 				<?php _e( 'Import and Update', 'appointments' ); ?>
@@ -108,7 +110,7 @@
 			</td>
 		</tr>
 	<?php endif; ?>
-	<?php if ( ( 'sync' == $api_mode || 'app2gcal' == $api_mode ) && $selected_calendar ): ?>
+	<?php if ( ( 'sync' == $api_mode || 'app2gcal' == $api_mode ) && $selected_calendar ) :  ?>
 		<tr>
 			<th scope="row">
 				<?php _e( 'Export and Update', 'appointments' ); ?>
@@ -167,7 +169,7 @@
 
 		function import_apps() {
 			importButton.attr( 'disabled', true );
-			importResult.text( '<?php _e( "Importing Appointments...", "appointments" ); ?>' );
+			importResult.text( '<?php _e( 'Importing Appointments...', 'appointments' ); ?>' );
 
 			$.ajax({
 					url: ajaxurl,
@@ -190,7 +192,7 @@
 		importButton.click( function( e ) {
 			e.preventDefault();
 
-			if ( confirm( '<?php _e( "Are you sure? Appointments in Appointments > Reserved by GCal that do not exist anymore in your calendar will be deleted (Only those with \'Reserved by GCal\' status)", "appointments" ); ?>' ) ) {
+			if ( confirm( '<?php _e( "Are you sure? Appointments in Appointments > Reserved by GCal that do not exist anymore in your calendar will be deleted (Only those with \'Reserved by GCal\' status)", 'appointments' ); ?>' ) ) {
 				import_apps();
 			}
 
