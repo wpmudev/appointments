@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-05-04 10:24:58+00:00\n"
+"POT-Creation-Date: 2018-05-21 09:13:13+00:00\n"
 "PO-Revision-Date: 2016-10-18 21:06:13+0000\n"
 "Language: no\n"
 "MIME-Version: 1.0\n"
@@ -3765,7 +3765,8 @@ msgid "Click on \"Calendar API\"."
 msgstr "Klikk på \"Kalender API\"."
 
 #: includes/gcal/views/settings-gcal-step-1.php:20
-msgid "Enable the Calendar API\""
+#, fuzzy
+msgid "Enable the \"Calendar API\"."
 msgstr "Aktiver API kalenderen \""
 
 #: includes/gcal/views/settings-gcal-step-1.php:24
@@ -3773,9 +3774,10 @@ msgid "On the left side, click on \"Credentials\"..."
 msgstr "På venstre side, klikk på \"Legitimasjons\" ..."
 
 #: includes/gcal/views/settings-gcal-step-1.php:28
+#, fuzzy
 msgid ""
 "... and then \"OAuth consent screen\" tab. Choose a product name shown to "
-"users, i.e. \"Appointments +\""
+"users, i.e. \"Appointments+\""
 msgstr ""
 "...og deretter \"OAuth samtykke\"-fanen. Velg et produktnavn som vises til "
 "brukerne, dvs. \"Avtaler\""
@@ -3787,7 +3789,8 @@ msgstr ""
 "påloggingsinformasjon"
 
 #: includes/gcal/views/settings-gcal-step-1.php:36
-msgid "Select the \"Oauth client ID\" option"
+#, fuzzy
+msgid "Select the \"Oauth client ID\" option."
 msgstr "Velg alternativet \"OAuth-klient-ID\""
 
 #: includes/gcal/views/settings-gcal-step-1.php:40
@@ -3796,7 +3799,8 @@ msgid ""
 msgstr "Velg \"Annen\" Applikasjonstype med et navn, navnet er ikke viktig."
 
 #: includes/gcal/views/settings-gcal-step-1.php:44
-msgid "Take note of the client ID and client secret and fill the form below"
+#, fuzzy
+msgid "Take note of the client ID and client secret and fill the form below."
 msgstr ""
 "Legg merke til klient-ID og Client hemmelighet og fyll ut skjemaet nedenfor"
 

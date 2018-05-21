@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-05-04 10:24:58+00:00\n"
+"POT-Creation-Date: 2018-05-21 09:13:13+00:00\n"
 "PO-Revision-Date: 2017-05-26 19:23:03+0000\n"
 "Language: es_MX\n"
 "MIME-Version: 1.0\n"
@@ -4085,7 +4085,8 @@ msgid "Click on \"Calendar API\"."
 msgstr "Da clic en \"Calendar API\"."
 
 #: includes/gcal/views/settings-gcal-step-1.php:20
-msgid "Enable the Calendar API\""
+#, fuzzy
+msgid "Enable the \"Calendar API\"."
 msgstr "Habilitar la API de Calendario"
 
 #: includes/gcal/views/settings-gcal-step-1.php:24
@@ -4093,9 +4094,10 @@ msgid "On the left side, click on \"Credentials\"..."
 msgstr "En el lado izquierdo, da clic en \"Credenciales\"..."
 
 #: includes/gcal/views/settings-gcal-step-1.php:28
+#, fuzzy
 msgid ""
 "... and then \"OAuth consent screen\" tab. Choose a product name shown to "
-"users, i.e. \"Appointments +\""
+"users, i.e. \"Appointments+\""
 msgstr ""
 "..- y luego en la pestaña \"OAuth consent screen\". Elige un nombre de "
 "producto para mostrar a los usuarios, Ej.: \"Citas +\""
@@ -4106,7 +4108,8 @@ msgstr ""
 "Da clic de nuevo en la pestaña \"Credenciales\" y luego Crear Credenciales"
 
 #: includes/gcal/views/settings-gcal-step-1.php:36
-msgid "Select the \"Oauth client ID\" option"
+#, fuzzy
+msgid "Select the \"Oauth client ID\" option."
 msgstr "Selecciona la opción \"Oauth client ID\" "
 
 #: includes/gcal/views/settings-gcal-step-1.php:40
@@ -4117,7 +4120,8 @@ msgstr ""
 "importante."
 
 #: includes/gcal/views/settings-gcal-step-1.php:44
-msgid "Take note of the client ID and client secret and fill the form below"
+#, fuzzy
+msgid "Take note of the client ID and client secret and fill the form below."
 msgstr ""
 "Toma nota del ID del cliente y secreto del cliente, y llena la forma de abajo"
 
