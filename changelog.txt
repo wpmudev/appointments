@@ -1,8 +1,8 @@
-2018-xx-xx - 2.2.9
+2018-xx-xx - 2.3.0
 -------------------------------
 - Refactored "Services" screan and use WP_List_Table class for the list.
 
-2018-xx-xx - 2.2.8
+2018-05-21 - 2.2.8
 -------------------------------
 - Fixed a problem with an appointment create time, it showed "Unknown" for Time Formats: "g:i a" and "g:i A".
 - Fixed a problem with an appointment date when we add an appointment on admin area.
