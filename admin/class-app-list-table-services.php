@@ -21,10 +21,23 @@ class Appointments_WP_List_Table_Services extends WP_List_Table {
 	public function column_default( $item, $column_name ) {
 		switch ( $column_name ) {
 			case 'capacity':
-			case 'duration':
 			case 'price':
 				return $item->$column_name;
 		}
+	}
+
+	/**
+	 * Column duration.
+	 *
+	 * @since 2.3.0
+	 */
+	public function column_duration( $item ) {
+		$label = appointment_convert_minutes_to_human_format( $item->duration );
+		return sprintf(
+			'<span data-duration="%d">%s</span>',
+			esc_attr( $item->duration ),
+			esc_html( $label )
+		);
 	}
 
 	public function column_name( $item ) {
@@ -95,7 +108,7 @@ class Appointments_WP_List_Table_Services extends WP_List_Table {
 			'cb'        => '<input type="checkbox" />', //Render a checkbox instead of text
 			'name' => __( 'Name', 'appointments' ),
 			'capacity' => __( 'Capacity', 'appointments' ),
-			'duration' => __( 'Duration (mins)', 'appointments' ),
+			'duration' => __( 'Duration', 'appointments' ),
 			'price' => sprintf( __( 'Price (%s)', 'appointments' ), $this->currency ),
 			'page' => __( 'Description page', 'appointments' ),
 		);

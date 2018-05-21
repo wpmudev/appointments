@@ -921,3 +921,30 @@ function _appointments_enqueue_jquery_ui_datepicker() {
 	);
 	wp_localize_script( 'jquery-ui-datepicker', 'AppointmentsDateSettings', $i18n );
 }
+
+/**
+ * Convert minutes to human readable format.
+ *
+ * @since 2.3.0
+ *
+ */
+function appointment_convert_minutes_to_human_format( $duration ) {
+	if ( 60 > $duration ) {
+		return sprintf( _x( '%d minutes', 'less than 60 minut', 'appointments' ), $duration );
+	}
+	$hours = floor( $duration / 60 );
+	$text = sprintf(
+		_nx( '%d hour', '%d hours', $hours, 'more than 60 minuts, hours', 'appointments' ),
+		$hours
+	);
+	$minutes = $duration - $hours * 60;
+	if ( 0 < $minutes ) {
+		$text .= ' ';
+		$text .= sprintf(
+			_nx( '%d minute', '%d minutes', $minutes, 'more than 60 minuts, minutes', 'appointments' ),
+			$minutes
+		);
+	}
+	return $text;
+}
+

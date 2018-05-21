@@ -22,7 +22,7 @@ if ( ! class_exists( 'App_Shortcode_All_Appointments' ) ) {
 				'title'        => array(
 					'type'  => 'text',
 					'name'  => __( 'Title', 'appointments' ),
-					'value' => __( '<h3>All Appointments</h3>', 'appointments' ),
+					'value' => sprintf( '<h3>%s</h3>', esc_html__( 'All Appointments', 'appointments' ) ),
 					'help'  => __( 'Title text.', 'appointments' ),
 				),
 				'status'       => array(

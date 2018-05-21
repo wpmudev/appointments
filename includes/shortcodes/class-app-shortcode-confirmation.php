@@ -10,7 +10,7 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 			'title' => array(
 				'type' => 'text',
 				'name' => __( 'Title', 'appointments' ),
-				'value' => __( '<h3>Please check the appointment details below and confirm:</h3>', 'appointments' ),
+				'value' => sprintf( '<h3>%s</h3>', esc_html__( 'Please check the appointment details below and confirm:', 'appointments' ) ),
 				'help' => __( 'Text above fields. Default: "Please check the appointment details below and confirm:"', 'appointments' ),
 			),
 			'button_text' => array(

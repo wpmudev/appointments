@@ -38,7 +38,7 @@ jQuery(document).ready( function( $ ) {
     /**
      * handle edit services
      *
-     * @since 2.2.8
+     * @since 2.3.0
      */
     $('.wp-list-table.services a.edit').on( 'click', function() {
         var parent = $(this).closest('tr');
@@ -120,7 +120,7 @@ jQuery(document).ready( function( $ ) {
     /**
      * handle edit workers
      *
-     * @since 2.2.8
+     * @since 2.3.0
      */
     $('.wp-list-table.workers a.edit').on( 'click', function() {
         var parent = $(this).closest('tr');

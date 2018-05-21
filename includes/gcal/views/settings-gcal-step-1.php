@@ -1,5 +1,5 @@
 <h3><?php _e( 'Google Calendar API: Create a new Google Application', 'appointments' ); ?></h3>
-<h4>Instructions:</h4>
+<h4><?php esc_html_e( 'Instructions:', 'appointments' ); ?></h4>
 
 <div class="gcal-slider">
 	<ul>
