@@ -1,33 +1,19 @@
 <?php
-global $wpdb;
-
-$appointments = appointments();
-$workers     = appointments_get_workers();
 $services     = appointments_get_services();
-
 $pages = apply_filters( 'app-biography_pages-get_list', array() );
 if ( empty( $pages ) ) {
 	$pages = get_pages( apply_filters( 'app_pages_filter', array() ) );
 }
 
-$workers_dropdown = wp_dropdown_users( array(
-	'echo'    => 0,
-	'show'    => 'user_login',
-	'name'    => 'worker_user',
-	'id'      => 'worker-user',
-	'exclude' => apply_filters( 'app_filter_providers', null ),
-) );
-
 ?>
 <form action="" method="post" class="add-new-service-provider">
+    <input type="hidden" name="worker_user" id="worker-user" value="" />
 	<table class="form-table">
 		<tr>
 			<th scope="row">
 				<label for="worker-user"><?php esc_html_e( 'Service Provider', 'appointments' ); ?></label>
 			</th>
-			<td>
-				<?php echo $workers_dropdown; ?>
-			</td>
+			<td id="worker-user-display-name"></td>
 		</tr>
 		<tr>
 			<th scope="row">
