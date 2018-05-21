@@ -5,7 +5,7 @@
 	<ul>
 		<li>
 			<img src="<?php echo appointments_plugin_url() . 'images/gcal-instructions-01.png'; ?>" alt="">
-			<p>1. <?php printf( __( 'Go to %s and create a new project. i.e. "Appointments APP", then click "Create"', 'appointments' ), sprintf( '<a target=_blank" href="https://console.developers.google.com/project">%s</a>', __( 'Google Developer Console Projects', 'appointments' ) ) ); ?></p>
+			<p>1. <?php printf( __( 'Go to %s and create a new project. i.e. "Appointments APP", then click "Create".', 'appointments' ), sprintf( '<a target=_blank" href="https://console.developers.google.com/project">%s</a>', __( 'Google Developer Console Projects', 'appointments' ) ) ); ?></p>
 		</li>
 		<li>
 			<img src="<?php echo appointments_plugin_url() . 'images/gcal-instructions-02.png'; ?>" alt="">
@@ -29,7 +29,7 @@
 		</li>
 		<li>
 			<img src="<?php echo appointments_plugin_url() . 'images/gcal-instructions-07.png'; ?>" alt="">
-			<p>7. <?php _e( 'Click again on "Credentials" tab and then Create Credentials', 'appointments' ); ?></p>
+			<p>7. <?php _e( 'Click again on "Credentials" tab and then Create Credentials.', 'appointments' ); ?></p>
 		</li>
 		<li>
 			<img src="<?php echo appointments_plugin_url() . 'images/gcal-instructions-08.png'; ?>" alt="">

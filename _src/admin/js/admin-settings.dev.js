@@ -108,6 +108,20 @@ jQuery( document ).ready( function( $ ) {
     });
 
     /**
+     * Delete helper
+     *
+     * @since 2.3.0
+     */
+    function appointments_delete_helper( data, parent ) {
+        $.post( ajaxurl, data, function( response ) {
+            if ( response.success ) {
+                parent.detach();
+            }
+            var html = '<div class="notice notice-'+(response.success? 'success':'error')+' is-dismissible"><p>'+response.data.message+'</p></div>';
+            $('.appointments-settings h1').after(html);
+        });
+    }
+    /**
      * handle delete services
      *
      * @since 2.2.6
@@ -120,47 +134,14 @@ jQuery( document ).ready( function( $ ) {
                 'nonce': $(this).data('nonce'),
                 'id': $(this).data('id')
             };
-            $.post( ajaxurl, data, function( response ) {
-                if ( response.success ) {
-                    parent.detach();
-                }
-                var html = '<div class="notice notice-'+(response.success? 'success':'error')+' is-dismissible"><p>'+response.data.message+'</p></div>';
-                $('.appointments-settings h1').after(html);
-            }
-            );
+            appointments_delete_helper( data, parent );
         }
     });
 
     /**
-     * handle delete service provider
-     *
-     * @since 2.2.6
-     */
-    $(document).on('click', '#workers-table .delete a', function() {
-        if ( window.confirm( app_i10n.messages.workers.delete_confirmation ) ) {
-            var table = $('#workers-table');
-            var data = {
-                'action': 'delete_worker',
-                'nonce': $(this).data('nonce'),
-                'id': $(this).data('id')
-            };
-            $.post( ajaxurl, data, function( response ) {
-                if ( response.success ) {
-                    $('tr#app-tr-worker-'+data.id).detach();
-                }
-                var html = '<div class="notice notice-'+(response.success? 'success':'error')+' is-dismissible"><p>'+response.data.message+'</p></div>';
-                $('.appointments-settings h1').after(html);
-                if ( 0 === $('tbody.services tr', table ).length ) {
-                    $('tbody.no', table ).removeClass('hidden');
-                }
-            }
-            );
-        }
-    });
-    /**
      * handle bulk action Services
      *
-     * @since 2.2.8
+     * @since 2.3.0
      */
     $(document).on('click', '#app-settings-section-services input.action', function() {
         var parent = $(this).closest('form');
@@ -175,6 +156,45 @@ jQuery( document ).ready( function( $ ) {
             return false;
         }
         if ( !window.confirm( app_i10n.messages.services.delete_confirmation ) ) {
+            return false;
+        }
+    });
+
+    /**
+     * handle delete service provider
+     *
+     * @since 2.2.6
+     */
+    $(document).on('click', '.wp-list-table.workers .delete a', function() {
+        if ( window.confirm( app_i10n.messages.workers.delete_confirmation ) ) {
+            var parent = $(this).closest('tr');
+            var data = {
+                'action': 'delete_worker',
+                'nonce': $(this).data('nonce'),
+                'id': $(this).data('id')
+            };
+            appointments_delete_helper( data, parent );
+        }
+    });
+
+    /**
+     * handle bulk action workers
+     *
+     * @since 2.3.0
+     */
+    $(document).on('click', '#app-settings-section-workers input.action', function() {
+        var parent = $(this).closest('form');
+        var list = $('.check-column input:checked');
+        var action = $('select', $(this).parent() ).val();
+        if ( 0 === list.length ) {
+            window.alert( app_i10n.messages.bulk_actions.no_items );
+            return false;
+        }
+        if ( '-1' === action ) {
+            window.alert( app_i10n.messages.bulk_actions.no_action );
+            return false;
+        }
+        if ( !window.confirm( app_i10n.messages.workers.delete_confirmation ) ) {
             return false;
         }
     });

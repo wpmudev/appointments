@@ -67,6 +67,7 @@ class App_Schedule_Paddings {
 		// Augment worker settings pages
 		add_filter( 'app-settings-workers-worker-name', array( $this, 'add_worker_selection' ), 10, 2 );
 		add_action( 'appointments_add_new_worker_form', array( $this, 'add_new_worker_selection' ) );
+		add_filter( 'appointments_get_worker', array( $this, 'add_worker_padding' ) );
 
 		// Save worker paddings
 		add_action( 'wpmudev_appointments_update_worker', array( $this, 'save_worker_padding' ) );
@@ -524,14 +525,33 @@ class App_Schedule_Paddings {
 	public function add_service_padding( $service ) {
 		$service->service_padding = false;
 		if ( is_object( $service ) && isset( $service->ID ) ) {
-			$options = appointments_get_options();
 			$paddings = array( self::PADDING_BEFORE => 0, self::PADDING_AFTER => 0 );
+			$options = appointments_get_options();
 			if ( isset( $options['service_padding'][ $service->ID ] ) ) {
 				$paddings = $options['service_padding'][ $service->ID ];
 			}
 			$service->service_padding = $paddings;
 		}
 		return $service;
+	}
+
+	/**
+	 * Add worker_padding to $worker Object
+	 *
+	 * @since 2.3.0
+	 */
+	public function add_worker_padding( $worker ) {
+		$options = appointments_get_options();
+		$paddings = array( self::PADDING_BEFORE => 0, self::PADDING_AFTER => 0 );
+		if ( is_object( $worker ) && isset( $worker->ID ) ) {
+			$paddings = array( self::PADDING_BEFORE => 0, self::PADDING_AFTER => 0 );
+			$options = appointments_get_options();
+			if ( isset( $options['worker_padding'][ $worker->ID ] ) ) {
+				$paddings = $options['worker_padding'][ $worker->ID ];
+			}
+			$worker->worker_padding = $paddings;
+		}
+		return $worker;
 	}
 }
 App_Schedule_Paddings::serve();

@@ -9,7 +9,7 @@ if ( empty( $pages ) ) {
 }
 ?>
 <form action="" method="post">
-    <input type=" hidden" name="id" value="" id="service-id" />
+    <input type="hidden" name="id" value="" id="service-id" />
 	<table class="form-table">
 		<tr>
 			<th scope="row">

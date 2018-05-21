@@ -94,19 +94,14 @@ class Appointments_Worker {
 
 function appointments_get_worker( $worker_id ) {
 	global $wpdb;
-
 	if ( ! $worker_id ) {
 		return false;
 	}
-
 	if ( is_a( $worker_id, 'Appointments_Worker' ) ) {
 		$worker_id = $worker_id->ID;
 	}
-
 	$table = appointments_get_table( 'workers' );
-
 	$worker = wp_cache_get( $worker_id, 'app_workers' );
-
 	if ( ! $worker ) {
 		$worker = $wpdb->get_row(
 			$wpdb->prepare(
@@ -114,15 +109,19 @@ function appointments_get_worker( $worker_id ) {
 				$worker_id
 			)
 		);
-
+		/**
+		 * Allow to modify service data
+		 *
+		 * @since 2.3.0
+		 */
+		$worker = apply_filters( 'appointments_get_worker', $worker );
 		if ( $worker ) {
 			wp_cache_add( $worker->ID, $worker, 'app_workers' );
 		}
 	}
-
 	if ( $worker ) {
-		return new Appointments_Worker( $worker ); }
-
+		return new Appointments_Worker( $worker );
+	}
 	return false;
 }
 
@@ -383,6 +382,8 @@ function appointments_update_worker( $worker_id, $args = array() ) {
  *     @type bool|int       $service          Filter by service ID. Default false.
  *     @type bool           $with_page        Retrieve only workers with page attached. Default false.
  *     @type bool|int       $limit            Max number of workers to return. If false will return all. Default false.
+ *     @since 2.3.0
+ *     @type bool|integer   $offset SQL offset.
  * }
  *
  * @return array of Appointments_Worker
@@ -399,10 +400,9 @@ function appointments_get_workers( $args = array() ) {
 		'service' => false, // Filter by service
 		'with_page' => false, // Only pages IDs > 0
 		'limit' => false,
+		'offset' => false,
 	);
-
 	$args = wp_parse_args( $args, $defaults );
-
 	$serialized_args = maybe_serialize( $args );
 	$cache_key = md5( $serialized_args );
 	$cached_queries = wp_cache_get( 'app_get_workers' );
@@ -454,7 +454,7 @@ function appointments_get_workers( $args = array() ) {
 	// We need to make this complex due to legacy stuff
 
 	// Allowed to add into the query itself
-	$allowed_orderby_in_query = array( 'ID' );
+	$allowed_orderby_in_query = array( 'ID', 'price' );
 
 	// This will be the order post-query
 	$allowed_orderby = array( 'name' );
@@ -467,10 +467,6 @@ function appointments_get_workers( $args = array() ) {
 	if ( ! in_array( $order_by, $allowed_orderby_in_query ) ) {
 		$order_by = 'ID';
 	}
-
-	//$allowed_orderby = $whitelist = apply_filters( 'app_order_by_whitelist', array( 'ID', 'name', 'start', 'end', 'duration', 'price',
-		//'ID DESC', 'name DESC', 'start DESC', 'end DESC', 'duration DESC', 'price DESC', 'RAND()', 'name ASC', 'name DESC' ) );
-
 	$order_by = apply_filters( 'app_get_workers_orderby', $order_by );
 	$order_query = '';
 	if ( in_array( $args['orderby'], $allowed_orderby ) ) {
@@ -480,35 +476,45 @@ function appointments_get_workers( $args = array() ) {
 	if ( ! in_array( $order_by, $allowed_orderby_in_query ) ) {
 		$order_by = 'ID';
 	}
-
-	//$allowed_orderby = $whitelist = apply_filters( 'app_order_by_whitelist', array( 'ID', 'name', 'start', 'end', 'duration', 'price',
-		//'ID DESC', 'name DESC', 'start DESC', 'end DESC', 'duration DESC', 'price DESC', 'RAND()', 'name ASC', 'name DESC' ) );
-
 	$order_by = apply_filters( 'app_get_workers_orderby', $order_by );
-	$order_query = "ORDER BY $order_by $order";
+		$order_query = "ORDER BY w.$order_by $order";
+	/**
+	 * sort by $wpdb->users.display_name
+	 */
+	if ( 'name' === $args['orderby'] ) {
+		$order_query = "ORDER BY u.display_name $order";
+	}
 
 	$limit_query = '';
 	$limit = absint( $args['limit'] );
 	if ( $limit ) {
-		$limit_query = $wpdb->prepare( 'LIMIT %d', $limit );
+		$limit_query = $wpdb->prepare( 'LIMIT %d ', $limit );
+	}
+	$offset = absint( $args['offset'] );
+	if ( $offset ) {
+		$limit_query .= $wpdb->prepare( 'OFFSET %d ', $offset );
 	}
 
 	if ( $where ) {
-		$where = 'WHERE ' . implode( ' AND ', $where ); } else { 		$where = ''; }
+		$where = 'WHERE ' . implode( ' AND ', $where );
+	} else {
+		$where = '';
+	}
 
 	if ( ! $args['count'] ) {
-
 		$allowed_fields = array( 'ID' );
 		$field = $args['fields'];
 		if ( $field && in_array( $field, $allowed_fields ) ) {
-			$get_col = true; } else { 			$get_col = false; }
-
+			$get_col = true;
+		} else {
+			$get_col = false;
+		}
+		$join_users = sprintf( ' left join %s u on u.id = w.id ', $wpdb->users );
 		if ( $get_col ) {
 			$query = "SELECT $field FROM $table w $where $order_query $limit_query";
 		} else {
-			$query = "SELECT * FROM $table w $where $order_query $limit_query";
+			$query = "SELECT w.* FROM $table w $join_users $where $order_query $limit_query";
 		}
-
 		if ( $get_col ) {
 			$results = $wpdb->get_col( $query );
 		} else {
