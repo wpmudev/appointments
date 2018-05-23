@@ -1,8 +1,11 @@
-2018-xx-xx - 2.3.0
+2018-xx-xx - 2.3.1
 -------------------------------
 - Added limit for "Service Capacity" on a service add and edit screen to the number of defined workers.
-- Convert "Time base" on "Time Settings" to human readable. Props for David @ BBS.
 - Fixed a problem with more than one Service Provider on schedule table, when first is already busy, but second is not.
+
+2018-xx-xx - 2.3.0
+-------------------------------
+- Convert "Time base" on "Time Settings" to human readable. Props for David @ BBS.
 - Fixed a problem with not available calendars on Service Provider profile.
 - GDPR: Added ability to delete older appointments. You can set up how long presents appointments should be stored in the database.
 - GDPR: Added ability to erase user personal data.
