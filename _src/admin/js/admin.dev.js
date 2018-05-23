@@ -109,4 +109,22 @@ $(function () {
 	$(document).on("click", ".app-info_trigger", toggle_target);
 });
 
+/**
+ * GDPR admin notice after change number of days
+ *
+ * @since 2.3.0
+ */
+window.console.log( 'zzz' );
+$(document).on('click', '#gdpr_number_of_days_user_erease a, #gdpr_number_of_days_user_erease button', function() {
+	window.console.log( 'aaa' );
+	var data = {
+		action: 'gdpr_number_of_days_user_erease',
+		url: ajaxurl,
+		user_id: $(this).closest( '.notice').data('user_id'),
+		nonce: $(this).closest( '.notice').data('nonce')
+	};
+	$.post( ajaxurl, data );
+	return true;
+});
+
 })(jQuery);

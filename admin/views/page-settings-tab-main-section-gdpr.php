@@ -1,4 +1,14 @@
 <p class="description"><?php _e( 'The General Data Protection Regulation (GDPR) (EU) 2016/679 is a regulation in EU law on data protection and privacy for all individuals within the European Union. It also addresses the export of personal data outside the EU. The GDPR aims primarily to give control to citizens and residents over their personal data and to simplify the regulatory environment for international business by unifying the regulation within the EU.', 'appointments' ); ?></p>
+<?php
+global $wp_version;
+$is_less_496 = version_compare( $wp_version, '4.9.6', '<' );
+if ( $is_less_496 ) {
+	echo '<div class="notice notice-error inline notice-app-wp-version">';
+	echo wpautop( __( 'GDPR settings are not available for WordPress version lower than 4.9.6. Please update your WordPress first.', 'appointments' ) );
+	echo '</div>';
+	return;
+}
+?>
 <table class="form-table">
 	<tr>
 		<th scope="row"><?php _e( 'User can erase after', 'appointments' ) ?></th>

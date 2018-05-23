@@ -14,7 +14,19 @@ class Appointments_GDPR {
 	 */
 	private $gdpr_delete = 'appointments_gdpr_wp_cron';
 
+	/**
+	 * GDPR admin notice when number of days was changed
+	 *
+	 * @since 2.3.0
+	 */
+	private $gdpr_admin_notice_name = 'appointments_gdpr_nod_was_changed';
+
 	public function __construct() {
+		global $wp_version;
+		$is_less_496 = version_compare( $wp_version, '4.9.6', '<' );
+		if ( $is_less_496 ) {
+			return;
+		}
 		/**
 		 * GDPR - delete
 		 */
@@ -34,6 +46,91 @@ class Appointments_GDPR {
 		 * Adding the Personal Data Eraser
 		 */
 		add_filter( 'wp_privacy_personal_data_erasers', array( $this, 'register_plugin_eraser' ), 10 );
+		/**
+		 * check changes
+		 */
+		add_filter( 'app-options-before_save', array( $this, 'check_options_changes' ) );
+		/**
+		 * show notice
+		 */
+		add_action( 'admin_notices', array( $this, 'show_notice_when_we_changed_numer_of_days' ) );
+		/**
+		 * save notice status
+		 */
+		add_action( 'wp_ajax_gdpr_number_of_days_user_erease', array( $this, 'delete_notice_when_we_changed_numer_of_days' ) );
+	}
+
+	/**
+	 * Delete user option after clic.
+	 *
+	 * @since 2.3.0
+	 */
+	public function delete_notice_when_we_changed_numer_of_days() {
+		if (
+			isset( $_POST['nonce'] )
+			&& wp_verify_nonce( $_POST['nonce'], $this->gdpr_admin_notice_name )
+			&& isset( $_POST['user_id'] )
+		) {
+			$user_id = filter_input( INPUT_POST, 'user_id', FILTER_VALIDATE_INT );
+			delete_user_option( $user_id, $this->gdpr_admin_notice_name );
+		}
+		wp_send_json_success();
+	}
+
+	/**
+	 * Check options changes to show admin notice
+	 *
+	 * @since 2.3.0
+	 */
+	public function check_options_changes( $options ) {
+		$current = appointments_get_option( 'gdpr_number_of_days_user_erease' );
+		/**
+		 * check changes in gdpr_number_of_days_user_erease
+		 */
+		$change = $current !== $options['gdpr_number_of_days_user_erease'];
+		if ( $change ) {
+			$user_id = get_current_user_id();
+			update_user_option( $user_id, $this->gdpr_admin_notice_name, 'show' );
+		}
+		return $options;
+	}
+
+	/**
+	 * Show admin notice
+	 *
+	 * @since 2.3.0
+	 */
+	public function show_notice_when_we_changed_numer_of_days() {
+		if ( ! function_exists( 'get_privacy_policy_url' ) ) {
+			return;
+		}
+		$policy_page = get_privacy_policy_url();
+		if ( empty( $policy_page ) ) {
+			return;
+		}
+		$screen = get_current_screen();
+		if ( ! is_a( $screen, 'WP_Screen' ) ) {
+			return;
+		}
+		if ( ! preg_match( '/appointments/', $screen->base ) ) {
+			return;
+		}
+		$user_id = get_current_user_id();
+		$show = get_user_option( $this->gdpr_admin_notice_name );
+		if ( 'show' === $show ) {
+			$link = sprintf(
+				'<a href="%s">%s</a>',
+				esc_attr( $policy_page ),
+				esc_html__( 'Privacy Policy page', 'appointments' )
+			);
+			printf(
+				'<div id="gdpr_number_of_days_user_erease" class="notice notice-success is-dismissible" data-nonce="%s" data-user_id="%s">',
+				wp_create_nonce( $this->gdpr_admin_notice_name ),
+				esc_attr( $user_id )
+			);
+			echo wpautop( sprintf( __( 'Appointments setting "User can erase after" was changed - please update your %s', 'appointments' ), $link ) );
+			echo '</div>';
+		}
 	}
 
 	/**
