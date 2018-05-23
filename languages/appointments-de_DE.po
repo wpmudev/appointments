@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-05-21 10:01:40+00:00\n"
+"POT-Creation-Date: 2018-05-23 09:47:38+00:00\n"
 "PO-Revision-Date: 2018-05-12 01:44:50+0000\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -1203,7 +1203,7 @@ msgstr "<strong>benötigt</strong>: %s"
 
 #: admin/class-app-addons-admin-list-table.php:67
 #: admin/class-app-list-table-services.php:120 admin/views/inline-edit.php:26
-#: appointments.php:694 includes/class-app-gdpr.php:93
+#: appointments.php:694 includes/class-app-gdpr.php:190
 msgid "Name"
 msgstr "Name"
 
@@ -2449,54 +2449,71 @@ msgstr ""
 "Sie können css hinzufügen, um das Styling anzupassen. Dieses wird nur auf "
 "der Termin-Front-End Seite wirksam."
 
-#: admin/views/page-settings-tab-main-section-gdpr.php:4
-msgid "User can erase after"
-msgstr ""
-
-#: admin/views/page-settings-tab-main-section-gdpr.php:6
-#: admin/views/page-settings-tab-main-section-gdpr.php:20
-msgid "days"
+#: admin/views/page-settings-tab-main-section-gdpr.php:1
+msgid ""
+"The General Data Protection Regulation (GDPR) (EU) 2016/679 is a regulation "
+"in EU law on data protection and privacy for all individuals within the "
+"European Union. It also addresses the export of personal data outside the "
+"EU. The GDPR aims primarily to give control to citizens and residents over "
+"their personal data and to simplify the regulatory environment for "
+"international business by unifying the regulation within the EU."
 msgstr ""
 
 #: admin/views/page-settings-tab-main-section-gdpr.php:7
 msgid ""
-"Completed appointments will be allowed to erase by user after selected "
-"number of days after appointment."
-msgstr ""
-
-#: admin/views/page-settings-tab-main-section-gdpr.php:11
-msgid "Erase Appointments"
+"GDPR settings are not available for WordPress version lower than 4.9.6. "
+"Please update your WordPress first."
 msgstr ""
 
 #: admin/views/page-settings-tab-main-section-gdpr.php:14
-msgid "You can force to delete completed appointments."
+msgid "User can erase after"
 msgstr ""
 
-#: admin/views/page-settings-tab-main-section-gdpr.php:18
-msgid "Auto erase after"
+#: admin/views/page-settings-tab-main-section-gdpr.php:16
+#: admin/views/page-settings-tab-main-section-gdpr.php:30
+msgid "days"
+msgstr ""
+
+#: admin/views/page-settings-tab-main-section-gdpr.php:17
+msgid ""
+"Completed appointments will be allowed to erase by user after selected "
+"number of days after an appointment date."
 msgstr ""
 
 #: admin/views/page-settings-tab-main-section-gdpr.php:21
-msgid "Completed appointments will be deleted after ."
+msgid "Erase Appointments"
 msgstr ""
 
-#: admin/views/page-settings-tab-main-section-gdpr.php:25
+#: admin/views/page-settings-tab-main-section-gdpr.php:24
+msgid "You can force to delete completed appointments."
+msgstr ""
+
+#: admin/views/page-settings-tab-main-section-gdpr.php:28
+msgid "Auto erase after"
+msgstr ""
+
+#: admin/views/page-settings-tab-main-section-gdpr.php:31
+#, fuzzy
+msgid "Completed appointments will be deleted after."
+msgstr "Abgeschlossene Termine"
+
+#: admin/views/page-settings-tab-main-section-gdpr.php:35
 #: includes/class-app-appointment.php:224
 msgid "Agreement"
 msgstr ""
 
-#: admin/views/page-settings-tab-main-section-gdpr.php:28
+#: admin/views/page-settings-tab-main-section-gdpr.php:38
 msgid ""
 "Add a checkbox specifically asking the user of the form if they consent to "
 "you storing and using their personal information to get back in touch with "
 "them."
 msgstr ""
 
-#: admin/views/page-settings-tab-main-section-gdpr.php:32
+#: admin/views/page-settings-tab-main-section-gdpr.php:42
 msgid "Checkbox text"
 msgstr ""
 
-#: admin/views/page-settings-tab-main-section-gdpr.php:36
+#: admin/views/page-settings-tab-main-section-gdpr.php:46
 msgid "Error message"
 msgstr ""
 
@@ -3107,26 +3124,26 @@ msgstr "Freitag"
 msgid "Saturday"
 msgstr "Samstag"
 
-#: appointments.php:695 includes/class-app-gdpr.php:97
+#: appointments.php:695 includes/class-app-gdpr.php:194
 msgid "Email"
 msgstr "Email"
 
-#: appointments.php:696 includes/class-app-gdpr.php:101
+#: appointments.php:696 includes/class-app-gdpr.php:198
 msgid "Phone"
 msgstr "Telefonnummer"
 
-#: appointments.php:697 includes/class-app-gdpr.php:105
+#: appointments.php:697 includes/class-app-gdpr.php:202
 #: includes/pro/includes/addons/app-locations-location_support.php:148
 #: includes/pro/includes/addons/app-locations-location_support.php:220
 #: includes/pro/includes/addons/app-locations-location_support.php:231
 msgid "Address"
 msgstr "Adresse"
 
-#: appointments.php:698 includes/class-app-gdpr.php:109
+#: appointments.php:698 includes/class-app-gdpr.php:206
 msgid "City"
 msgstr "Stadt"
 
-#: appointments.php:699 includes/class-app-gdpr.php:113
+#: appointments.php:699 includes/class-app-gdpr.php:210
 msgid "Note"
 msgstr "Notiz"
 
@@ -3420,51 +3437,61 @@ msgstr ""
 "Servicename: SERVICE\n"
 "Serviceprovidername: SERVICE_PROVIDER\n"
 
-#: includes/class-app-gdpr.php:117
+#: includes/class-app-gdpr.php:124
+msgid "Privacy Policy page"
+msgstr ""
+
+#: includes/class-app-gdpr.php:131
+msgid ""
+"Appointments setting \"User can erase after\" was changed - please update "
+"your %s"
+msgstr ""
+
+#: includes/class-app-gdpr.php:214
 msgid "Create date"
 msgstr ""
 
-#: includes/class-app-gdpr.php:121
+#: includes/class-app-gdpr.php:218
 msgid "Start date"
 msgstr ""
 
-#: includes/class-app-gdpr.php:125
+#: includes/class-app-gdpr.php:222
 msgid "End date"
 msgstr ""
 
-#: includes/class-app-gdpr.php:193
+#: includes/class-app-gdpr.php:290
 msgid "We deleted %d appointment."
 msgid_plural "We deleted %d appointments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-app-gdpr.php:195
+#: includes/class-app-gdpr.php:292
 msgid "We do not deleted any appointments."
 msgstr ""
 
-#: includes/class-app-gdpr.php:203
+#: includes/class-app-gdpr.php:300
 msgid "We do not deleted %d appointment."
 msgid_plural "We do not deleted %d appointments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-app-gdpr.php:243
+#: includes/class-app-gdpr.php:340
 msgid "Plugin: Appointments"
 msgstr ""
 
-#: includes/class-app-gdpr.php:245
+#: includes/class-app-gdpr.php:342
 msgid ""
 "When visitors book an appointment on the site we collect the data shown in "
 "the appointments form to allow future contact with a client."
 msgstr ""
 
-#: includes/class-app-gdpr.php:246
+#: includes/class-app-gdpr.php:343
 msgid ""
 "All collected data is not shown publicly but we can send it to our workers "
 "or contractors who will perform ordered services."
 msgstr ""
 
-#: includes/class-app-gdpr.php:250
+#: includes/class-app-gdpr.php:347
 msgid ""
 "All collected data will be automatically erased %s after appointment date."
 msgstr ""
@@ -6810,17 +6837,17 @@ msgctxt "Error while editing an appointment"
 msgid "Error"
 msgstr "Fehler [Fehler beim Editieren einer Zuweisung]"
 
-#: includes/class-app-gdpr.php:56
+#: includes/class-app-gdpr.php:153
 msgctxt "Free plugin name in personal data exporter."
 msgid "Appointments Plugin"
 msgstr ""
 
-#: includes/class-app-gdpr.php:59
+#: includes/class-app-gdpr.php:156
 msgctxt "Pro plugin name in personal data exporter."
 msgid "Appointments+ Plugin"
 msgstr ""
 
-#: includes/class-app-gdpr.php:249
+#: includes/class-app-gdpr.php:346
 msgctxt "policy page days string"
 msgid "%d day"
 msgid_plural "%d days"
