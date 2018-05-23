@@ -97,7 +97,7 @@ if ( ! class_exists( 'Appointments' ) ) {
 			$this->plugin_url = plugins_url( basename( dirname( __FILE__ ) ) );
 
 			// Read all options at once
-			$this->options = get_option( 'appointments_options' );
+			$this->options = appointments_get_options();
 
 			// To follow WP Start of week, time, date settings
 			$this->local_time = current_time( 'timestamp' );
@@ -2336,7 +2336,6 @@ if ( ! defined( 'APP_PLUGIN_ADDONS_DIR' ) ) {
 }
 $appointments->addons_loader = Appointments_Addons_Loader::get_instance();
 $appointments->addons_loader->load_active_addons();
-
 
 if ( is_admin() ) {
 	require_once APP_PLUGIN_DIR . '/includes/class-app-tutorial.php';
