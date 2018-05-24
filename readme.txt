@@ -159,26 +159,24 @@ We provide comprehensive and guaranteed support on the <a href='http://premium.w
 
 = 2.3.0 =
 * Convert "Time base" on "Time Settings" to human readable. Props for David @ BBS.
-* Fixed a problem with not available calendars on Service Provider profile.
-* GDPR: Added ability to delete older appointments. You can set up how long presents appointments should be stored in the database.
-* GDPR: Added ability to erase user personal data.
-* GDPR: Added ability to export user personal data.
-* GDPR: Added checkbox with the agreement to process personal data.
-* GDPR: Added plugin information to default "Private Policy" page during auto-creation of this page.
-* Improved few translation strings.
-* Improved UX on "Payments" tab for MarketPress integration.
-* Improved "Working Hours" and "Exceptions" tabs content on mobile devices.
-* Refactored "Services" screen and use WP_List_Table class for the list.
-* Refactored "Service Providers" screen and use WP_List_Table class for the list.
-
-= 2.2.8 =
 * Fixed a problem with an appointment create time, it showed "Unknown" for Time Formats: "g:i a" and "g:i A".
 * Fixed a problem with an appointment date when we add an appointment on admin area.
 * Fixed a problem with autoconfirmation free appointment.
 * Fixed a problem with bottom bulk action on "Add-ons" tab.
 * Fixed a problem with double cancellation emails.
+* Fixed a problem with not available calendars on Service Provider profile.
 * Fixed a problem with paddings on the weekly booking calendar.
+* GDPR: Added ability to delete older appointments. You can set up how long presents appointments should be stored in the database.
+* GDPR: Added ability to erase user personal data.
+* GDPR: Added ability to export user personal data.
+* GDPR: Added checkbox with the agreement to process personal data.
+* GDPR: Added plugin information to default "Private Policy" page during auto-creation of this page.
+* Improved "Working Hours" and "Exceptions" tabs content on mobile devices.
+* Improved UX on "Payments" tab for MarketPress integration.
+* Improved few translation strings.
 * Improved the "app_my_appointments" shortcode and added a message when we have no appointments.
+* Refactored "Service Providers" screen and use WP_List_Table class for the list.
+* Refactored "Services" screen and use WP_List_Table class for the list.
 * Removed DateTime::createFromFormat() usage to be compatible with PHP 5.2
 
 = 2.2.7 =
