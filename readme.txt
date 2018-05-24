@@ -1,9 +1,9 @@
 === Appointments  ===
 Contributors: wpmudev, wpmudev-support1, wpmudev-support2, wpmudev-support4, wpmudev-support6
-Tags: Appointment,Booking,Calendar,Reservation,Scheduling,google calendar,
+Tags: Appointment, Booking, Calendar, Reservation, Scheduling, google calendar
 Requires at least: 4.6
 Tested up to: 4.9.6
-Stable tag: 2.2.8
+Stable tag: 2.3.0
 License: GPL2
 
 The most powerful, flexible and feature-rich bookings plugin available for WordPress. Appointments does it all.
@@ -156,6 +156,20 @@ We provide comprehensive and guaranteed support on the <a href='http://premium.w
 5. Google Calendar integration
 
 == Changelog ==
+
+= 2.3.0 =
+* Convert "Time base" on "Time Settings" to human readable. Props for David @ BBS.
+* Fixed a problem with not available calendars on Service Provider profile.
+* GDPR: Added ability to delete older appointments. You can set up how long presents appointments should be stored in the database.
+* GDPR: Added ability to erase user personal data.
+* GDPR: Added ability to export user personal data.
+* GDPR: Added checkbox with the agreement to process personal data.
+* GDPR: Added plugin information to default "Private Policy" page during auto-creation of this page.
+* Improved few translation strings.
+* Improved UX on "Payments" tab for MarketPress integration.
+* Improved "Working Hours" and "Exceptions" tabs content on mobile devices.
+* Refactored "Services" screen and use WP_List_Table class for the list.
+* Refactored "Service Providers" screen and use WP_List_Table class for the list.
 
 = 2.2.8 =
 * Fixed a problem with an appointment create time, it showed "Unknown" for Time Formats: "g:i a" and "g:i A".
