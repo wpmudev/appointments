@@ -115,13 +115,13 @@ $(function () {
  * @since 2.3.0
  */
 window.console.log( 'zzz' );
-$(document).on('click', '#gdpr_number_of_days_user_erease a, #gdpr_number_of_days_user_erease button', function() {
-	window.console.log( 'aaa' );
+$(document).on('click', '.notice-app-gdpr a, .notice-app-gdpr button', function() {
+	var parent = $(this).closest( '.notice');
 	var data = {
-		action: 'gdpr_number_of_days_user_erease',
+		action: parent.attr('id'),
 		url: ajaxurl,
-		user_id: $(this).closest( '.notice').data('user_id'),
-		nonce: $(this).closest( '.notice').data('nonce')
+		user_id: parent.data('user_id'),
+		nonce: parent.data('nonce')
 	};
 	$.post( ajaxurl, data );
 	return true;

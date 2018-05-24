@@ -19,7 +19,10 @@ class Appointments_GDPR {
 	 *
 	 * @since 2.3.0
 	 */
-	private $gdpr_admin_notice_name = 'appointments_gdpr_nod_was_changed';
+	private $gdpr_admin_notice_names = array(
+		'user_erase' => 'appointments_gdpr_nod_was_changed',
+		'auto_erase' => 'appointments_gdpr_auto_erase_was_changed',
+	);
 
 	public function __construct() {
 		global $wp_version;
@@ -53,11 +56,12 @@ class Appointments_GDPR {
 		/**
 		 * show notice
 		 */
-		add_action( 'admin_notices', array( $this, 'show_notice_when_we_changed_numer_of_days' ) );
+		add_action( 'admin_notices', array( $this, 'show_notices' ) );
 		/**
 		 * save notice status
 		 */
-		add_action( 'wp_ajax_gdpr_number_of_days_user_erease', array( $this, 'delete_notice_when_we_changed_numer_of_days' ) );
+		add_action( 'wp_ajax_gdpr_number_of_days_user_erease', array( $this, 'delete_notice_when_we_changed_user_delete_number_of_days' ) );
+		add_action( 'wp_ajax_gdpr_number_of_days_auto_erease', array( $this, 'delete_notice_when_we_changed_auto_delete_number_of_days' ) );
 	}
 
 	/**
@@ -65,14 +69,31 @@ class Appointments_GDPR {
 	 *
 	 * @since 2.3.0
 	 */
-	public function delete_notice_when_we_changed_numer_of_days() {
+	public function delete_notice_when_we_changed_auto_delete_number_of_days() {
 		if (
 			isset( $_POST['nonce'] )
-			&& wp_verify_nonce( $_POST['nonce'], $this->gdpr_admin_notice_name )
+			&& wp_verify_nonce( $_POST['nonce'], $this->gdpr_admin_notice_names['auto_erase'] )
 			&& isset( $_POST['user_id'] )
 		) {
 			$user_id = filter_input( INPUT_POST, 'user_id', FILTER_VALIDATE_INT );
-			delete_user_option( $user_id, $this->gdpr_admin_notice_name );
+			delete_user_option( $user_id, $this->gdpr_admin_notice_names['auto_erase'] );
+		}
+		wp_send_json_success();
+	}
+
+	/**
+	 * Delete user option after clic.
+	 *
+	 * @since 2.3.0
+	 */
+	public function delete_notice_when_we_changed_user_delete_number_of_days() {
+		if (
+			isset( $_POST['nonce'] )
+			&& wp_verify_nonce( $_POST['nonce'], $this->gdpr_admin_notice_names['user_erase'] )
+			&& isset( $_POST['user_id'] )
+		) {
+			$user_id = filter_input( INPUT_POST, 'user_id', FILTER_VALIDATE_INT );
+			delete_user_option( $user_id, $this->gdpr_admin_notice_names['user_erase'] );
 		}
 		wp_send_json_success();
 	}
@@ -83,6 +104,9 @@ class Appointments_GDPR {
 	 * @since 2.3.0
 	 */
 	public function check_options_changes( $options ) {
+		/**
+		 * User can erase after
+		 */
 		$current = appointments_get_option( 'gdpr_number_of_days_user_erease' );
 		/**
 		 * check changes in gdpr_number_of_days_user_erease
@@ -90,17 +114,46 @@ class Appointments_GDPR {
 		$change = $current !== $options['gdpr_number_of_days_user_erease'];
 		if ( $change ) {
 			$user_id = get_current_user_id();
-			update_user_option( $user_id, $this->gdpr_admin_notice_name, 'show' );
+			update_user_option( $user_id, $this->gdpr_admin_notice_names['user_erase'], 'show' );
 		}
+		/**
+		 * Auto erase after
+		 */
+		/**
+		 * User can erase after
+		 */
+		$current = appointments_get_option( 'gdpr_number_of_days' );
+		/**
+		 * check changes in gdpr_number_of_days_user_erease
+		 */
+		$change = $current !== $options['gdpr_number_of_days'];
+		if ( $change ) {
+			$user_id = get_current_user_id();
+			update_user_option( $user_id, $this->gdpr_admin_notice_names['auto_erase'], 'show' );
+		}
+		/**
+		 * return
+		 */
 		return $options;
 	}
 
+	/**
+	 * Show admin notice - template
+	 *
+	 * @since 2.3.0
+	 */
+	private function notice_template() {
+		$content = '<div id="%s" class="notice notice-success is-dismissible notice-app-gdpr" data-nonce="%s" data-user_id="%s">';
+		$content .= wpautop( __( 'Appointments/GDPR setting "<strong>%s</strong>" was changed - please update your %s', 'appointments' ) );
+		$content .= '</div>';
+		return $content;
+	}
 	/**
 	 * Show admin notice
 	 *
 	 * @since 2.3.0
 	 */
-	public function show_notice_when_we_changed_numer_of_days() {
+	public function show_notices() {
 		if ( ! function_exists( 'get_privacy_policy_url' ) ) {
 			return;
 		}
@@ -116,21 +169,46 @@ class Appointments_GDPR {
 			return;
 		}
 		$user_id = get_current_user_id();
-		$show = get_user_option( $this->gdpr_admin_notice_name );
-		if ( 'show' === $show ) {
+		$template = $this->notice_template();
+		/**
+		 * Privacy Policy Page
+		 */
 			$link = sprintf(
 				'<a href="%s">%s</a>',
 				esc_attr( $policy_page ),
 				esc_html__( 'Privacy Policy page', 'appointments' )
 			);
-			printf(
-				'<div id="gdpr_number_of_days_user_erease" class="notice notice-success is-dismissible" data-nonce="%s" data-user_id="%s">',
-				wp_create_nonce( $this->gdpr_admin_notice_name ),
-				esc_attr( $user_id )
-			);
-			echo wpautop( sprintf( __( 'Appointments setting "User can erase after" was changed - please update your %s', 'appointments' ), $link ) );
-			echo '</div>';
-		}
+			/**
+		 * template
+		 */
+			/**
+		 * User can erase after
+		 */
+			$show = get_user_option( $this->gdpr_admin_notice_names['user_erase'] );
+			if ( 'show' === $show ) {
+				printf(
+					$template,
+					esc_attr( 'gdpr_number_of_days_user_erease' ),
+					wp_create_nonce( $this->gdpr_admin_notice_names['user_erase'] ),
+					esc_attr( $user_id ),
+					esc_attr__( 'User can erase after', 'appointments' ),
+					$link
+				);
+			}
+			/**
+		 * Auto erase after
+		 */
+			$show = get_user_option( $this->gdpr_admin_notice_names['auto_erase'] );
+			if ( 'show' === $show ) {
+				printf(
+					$template,
+					esc_attr( 'gdpr_number_of_days_auto_erease' ),
+					wp_create_nonce( $this->gdpr_admin_notice_names['auto_erase'] ),
+					esc_attr( $user_id ),
+					esc_attr__( 'Auto erase after', 'appointments' ),
+					$link
+				);
+			}
 	}
 
 	/**
