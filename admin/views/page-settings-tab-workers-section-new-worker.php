@@ -11,15 +11,15 @@ if ( empty( $pages ) ) {
 }
 
 $exclude = array();
-foreach( $workers as $worker ) {
-    $exclude[] = $worker->ID;
+foreach ( $workers as $worker ) {
+	$exclude[] = $worker->ID;
 }
 $workers_dropdown = wp_dropdown_users( array(
 	'echo'    => 0,
 	'show'    => 'user_login',
 	'name'    => 'user',
 	'id'      => 'worker-user',
-	'exclude' => apply_filters( 'app_filter_providers', $exclude )
+	'exclude' => apply_filters( 'app_filter_providers', $exclude ),
 ) );
 
 ?>
@@ -54,17 +54,27 @@ $workers_dropdown = wp_dropdown_users( array(
 				<label for="worker-services"><?php _e( 'Services Provided', 'appointments' ); ?></label>
 			</th>
 			<td>
-				<?php if ( $services ): ?>
-					<label for="services_provided" class="screen-reader-text"><?php _e( 'Services Provided', 'appointments' ); ?></label>
-					<select class="add_worker_multiple" style="width:280px" multiple="multiple" name="services_provided[]" id="services_provided">
-						<?php foreach ( $services as $service ): ?>
-							<?php $title = stripslashes( $service->name ); ?>
-							<option value="<?php echo $service->ID; ?>"><?php echo esc_html( $title ); ?></option>
-						<?php endforeach; ?>
-					</select>
-				<?php else: ?>
-					<?php _e( 'No services defined', 'appointments' ); ?>
-				<?php endif; ?>
+<?php
+if ( $services ) {
+?>
+                    <label for="services_provided" class="screen-reader-text"><?php _e( 'Services Provided', 'appointments' ); ?></label>
+                    <select class="add_worker_multiple" style="width:280px" multiple="multiple" name="services_provided[]" id="services_provided">
+<?php
+	$select_if_only_one = 1 === count( $services );
+foreach ( $services as $service ) {
+	$title = stripslashes( $service->name );
+	printf(
+		'<option value="%s"%s>%s</option>',
+		esc_attr( $service->ID ),
+		$select_if_only_one? ' selected="selected"':'',
+		esc_html( $title )
+	);
+}
+	echo '</select>';
+} else {
+	esc_html_e( 'No services defined', 'appointments' );
+}
+?>
 			</td>
 		</tr>
 		<tr>
@@ -74,7 +84,7 @@ $workers_dropdown = wp_dropdown_users( array(
 			<td>
 				<select id="worker-page" name="worker_page">
 					<option value="0"><?php esc_html_e( 'None', 'appointments' ); ?></option>
-					<?php foreach( $pages as $page ): ?>
+					<?php foreach ( $pages as $page ) :  ?>
 						<option value="<?php echo $page->ID; ?>"><?php echo esc_html( get_the_title( $page->ID ) ); ?></option>
 					<?php endforeach; ?>
 				</select>
