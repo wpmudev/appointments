@@ -458,14 +458,8 @@ class Appointments_AJAX {
 			// In minutes
 			$duration = $appointments->get_min_time();
 		}
-
         $duration = apply_filters( 'app_post_confirmation_duration', $duration, $service, $worker, $user_id );
-
         $end = $start + $duration * MINUTE_IN_SECONDS;
-
-l(array($start, $duration, $end, date('c', $start),date('c', $end) ));
-
-
 		$args = array(
 			'worker_id' => $worker,
 			'service_id' => $service,
@@ -492,22 +486,14 @@ l(array($start, $duration, $end, date('c', $start),date('c', $end) ));
 			foreach ( $workers as $worker ) {
 				$args['worker_id'] = $worker->ID;
                 $is_busy = apppointments_is_range_busy( $start, $end, $args );
-
-                l($is_busy);
-
 				if ( ! $is_busy ) {
 					$worker = $worker->ID;
 					break;
 				}
 			}
 		}
-
-
-
 		unset( $args );
-
 		$status = apply_filters('app_post_confirmation_status', $status, $price, $service, $worker, $user_id );
-
 		$args = array(
 			'user'     => $user_id,
 			'name'     => $name,
@@ -553,31 +539,21 @@ l(array($start, $duration, $end, date('c', $start),date('c', $end) ));
 			// Unknown error
 			wp_send_json( array( 'error' => __( 'Appointment could not be saved. Please contact website admin.', 'appointments') ) );
 		}
-
-
-l($args);
-
-
         $insert_id = appointments_insert_appointment( $args );
-
         /**
          * GDPR
          */
         if ( isset( $_REQUEST['app_gdpr'] ) && $_REQUEST['app_gdpr'] )  {
             appointments_update_appointment_meta( $insert_id, 'gdpr_agree', time() );
         }
-
 		appointments_clear_appointment_cache();
-
 		if (!$insert_id) {
 			die(json_encode(array(
 				"error" => __( 'Appointment could not be saved. Please contact website admin.', 'appointments'),
 			)));
 		}
-
 		// A new appointment is accepted, so clear cache
 		appointments_clear_cache();
-
 		$apps = Appointments_Sessions::get_current_visitor_appointments();
 		$apps[] = $insert_id;
 		Appointments_Sessions::set_visitor_appointments( $apps );
