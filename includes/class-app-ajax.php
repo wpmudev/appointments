@@ -459,14 +459,19 @@ class Appointments_AJAX {
 			$duration = $appointments->get_min_time();
 		}
 
-		$duration = apply_filters( 'app_post_confirmation_duration', $duration, $service, $worker, $user_id );
+        $duration = apply_filters( 'app_post_confirmation_duration', $duration, $service, $worker, $user_id );
+
+        $end = $start + $duration * MINUTE_IN_SECONDS;
+
+l(array($start, $duration, $end, date('c', $start),date('c', $end) ));
+
 
 		$args = array(
 			'worker_id' => $worker,
 			'service_id' => $service,
 			'location_id' => $location
 		);
-		$is_busy = apppointments_is_range_busy( $start, $start + ( $duration * MINUTE_IN_SECONDS ), $args );
+		$is_busy = apppointments_is_range_busy( $start, $end, $args );
 		if ( $is_busy ) {
 			die( json_encode( array(
 				"error" => apply_filters(
@@ -483,10 +488,13 @@ class Appointments_AJAX {
 			}
 			else{
 				$workers = appointments_get_all_workers();
-			}
+            }
 			foreach ( $workers as $worker ) {
 				$args['worker_id'] = $worker->ID;
-				$is_busy = apppointments_is_range_busy( $start, $start + ( $duration * 60 ), $args );
+                $is_busy = apppointments_is_range_busy( $start, $end, $args );
+
+                l($is_busy);
+
 				if ( ! $is_busy ) {
 					$worker = $worker->ID;
 					break;
@@ -545,6 +553,10 @@ class Appointments_AJAX {
 			// Unknown error
 			wp_send_json( array( 'error' => __( 'Appointment could not be saved. Please contact website admin.', 'appointments') ) );
 		}
+
+
+l($args);
+
 
         $insert_id = appointments_insert_appointment( $args );
 

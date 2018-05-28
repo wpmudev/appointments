@@ -40,9 +40,12 @@ class Appointments_WP_List_Table_Workers extends WP_List_Table {
 		$content = '';
 		$ids = array();
 
-		foreach ( $item->services_provided as $id ) {
-			$value = $this->services[ $id ];
+        foreach ( $item->services_provided as $id ) {
 			$name = sprintf( __( 'Missing service: %d.', 'appointments' ), $id );
+            $value = null;
+            if ( isset( $this->services[ $id ] ) ) {
+                $value = $this->services[ $id ];
+            }
 			if ( is_a( $value, 'Appointments_Service' ) ) {
 				$name = $value->name;
 				$ids[] = $id;
