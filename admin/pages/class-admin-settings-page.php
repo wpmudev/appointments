@@ -343,6 +343,7 @@ class Appointments_Admin_Settings_Page {
 		 * yes/no options
 		 */
 		$options_names = array(
+			'always_load_scripts',
 			'allow_overwork',
 			'allow_overwork_break',
 			'allow_worker_confirm',
