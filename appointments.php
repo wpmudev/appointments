@@ -1756,19 +1756,30 @@ if ( ! class_exists( 'Appointments' ) ) {
 		function load_styles( $posts ) {
 			if ( empty( $posts ) || is_admin() ) {
 				return $posts; }
+			
 
-			$this->shortcode_found = false; // use this flag to see if styles and scripts need to be enqueued
-			foreach ( $posts as $post ) {
-				if ( is_object( $post ) && stripos( $post->post_content, '[app_' ) !== false ) {
-					$this->shortcode_found = true;
+			// check for shortcodes only if "Always load scripts" option is disabled		
+			$options = appointments_get_options();
+			if ( 'yes' !== $options['always_load_scripts'] ) {	
 
-					do_action( 'app-shortcodes-shortcode_found', $post );
+				$this->shortcode_found = false; // use this flag to see if styles and scripts need to be enqueued
+				foreach ( $posts as $post ) {
+					if ( is_object( $post ) && stripos( $post->post_content, '[app_' ) !== false ) {
+						$this->shortcode_found = true;
+
+						do_action( 'app-shortcodes-shortcode_found', $post );
+					}
 				}
+				
+				if ( $this->shortcode_found ) {
+					$this->load_scripts_styles( ); 
+				}
+				
 			}
-
-			if ( $this->shortcode_found ) {
-				$this->load_scripts_styles( ); }
-
+			else {
+				$this->load_scripts_styles( ); 
+			}
+			
 			return $posts;
 		}
 

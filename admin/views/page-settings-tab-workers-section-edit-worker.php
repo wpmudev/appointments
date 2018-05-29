@@ -36,17 +36,25 @@ if ( empty( $pages ) ) {
 				<label for="worker-services"><?php esc_html_e( 'Services Provided', 'appointments' ); ?></label>
 			</th>
 			<td>
-				<?php if ( $services ) :  ?>
-					<label for="services_provided" class="screen-reader-text"><?php _e( 'Services Provided', 'appointments' ); ?></label>
-					<select class="add_worker_multiple" style="width:280px" multiple="multiple" name="services_provided[]" id="services_provided">
-						<?php foreach ( $services as $service ) :  ?>
-							<?php $title = stripslashes( $service->name ); ?>
-							<option value="<?php echo esc_attr( $service->ID ); ?>"><?php echo esc_html( $title ); ?></option>
-						<?php endforeach; ?>
-					</select>
-				<?php else : ?>
-					<?php esc_html_e( 'No services defined', 'appointments' ); ?>
-				<?php endif; ?>
+<?php
+if ( $services ) {
+?>
+                    <label for="services_provided" class="screen-reader-text"><?php _e( 'Services Provided', 'appointments' ); ?></label>
+                    <select class="add_worker_multiple" style="width:280px" multiple="multiple" name="services_provided[]" id="services_provided">
+<?php
+foreach ( $services as $service ) {
+	$title = stripslashes( $service->name );
+	printf(
+		'<option value="%s">%s</option>',
+		esc_attr( $service->ID ),
+		esc_html( $title )
+	);
+}
+	echo '</select>';
+} else {
+	esc_html_e( 'No services defined', 'appointments' );
+}
+?>
 			</td>
 		</tr>
 		<tr>

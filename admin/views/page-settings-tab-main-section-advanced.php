@@ -7,6 +7,13 @@
 		</td>
 	</tr>
 	<tr valign="top">
+		<th scope="row"><label for="always_load_scripts"><?php _e( 'Always load scripts', 'appointments' ) ?></label></th>
+		<td colspan="2">
+            <?php _appointments_html_chceckbox( $options, 'always_load_scripts' ); ?>
+            <p class="description"><?php _e( 'By default some scrtips are loaded only if booking shortcodes are detected. With some themes and if booking form is in popup it might be necessary to enable this option to force loading of these assets.', 'appointments' ) ?></p>
+		</td>
+	</tr>
+	<tr valign="top">
 		<th scope="row"><label for="allow_overwork"><?php _e( 'Allow Overwork (end of day)', 'appointments' ) ?></label></th>
 		<td colspan="2">
             <?php _appointments_html_chceckbox( $options, 'allow_overwork' ) ?>
