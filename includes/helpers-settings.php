@@ -83,6 +83,7 @@ function appointments_get_default_options() {
 		'gdpr_checkbox_show'        => $gdpr_show,
 		'gdpr_checkbox_text'        => __( 'By using this form you agree with the storage and handling of your data by this website.', 'appointments' ),
 		'gdpr_checkbox_alert'       => __( 'Please accept the privacy checkbox.', 'appointments' ),
+		'always_load_scripts'       => 'no',
 	) );
 }
 

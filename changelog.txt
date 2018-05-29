@@ -4,6 +4,7 @@
 - Fixed a problem with more than one Service Provider on schedule table, when first is already busy, but second is not.
 - Improved adding a new service provider, when is only one servive it will be checked by default.
 - Fixed problems with capacity.
+- Added an option to force load Appointment's scripts and styles.
 
 2018-05-24 - 2.3.0
 -------------------------------
