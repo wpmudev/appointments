@@ -1763,9 +1763,9 @@ if ( ! class_exists( 'Appointments' ) ) {
 			 * @since 2.3.1
 			 */
 			$always_load_scripts = appointments_get_option( 'always_load_scripts' );
-			if ( 'yes' === $always_load_scripts ) {
+			$load = 'yes' === $always_load_scripts;
+			if ( $load ) {
 				$this->load_scripts_styles( );
-				return $posts;
 			}
 			/**
 			 * No posts - do not check!
@@ -1781,7 +1781,7 @@ if ( ! class_exists( 'Appointments' ) ) {
 					do_action( 'app-shortcodes-shortcode_found', $post );
 				}
 			}
-			if ( $this->shortcode_found ) {
+			if ( ! $load && $this->shortcode_found ) {
 				$this->load_scripts_styles( );
 			}
 			return $posts;
