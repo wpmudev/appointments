@@ -114,7 +114,6 @@ $(function () {
  *
  * @since 2.3.0
  */
-window.console.log( 'zzz' );
 $(document).on('click', '.notice-app-gdpr a, .notice-app-gdpr button', function() {
 	var parent = $(this).closest( '.notice');
 	var data = {
