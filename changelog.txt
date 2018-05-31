@@ -1,4 +1,4 @@
-2018-xx-xx - 2.3.1
+2018-xx-xx - 2.3.2
 -------------------------------
 - Added limit for "Service Capacity" on a service add and edit screen to the number of defined workers.
 - Fixed a problem with more than one Service Provider on schedule table, when first is already busy, but second is not.
@@ -7,6 +7,10 @@
 - Fixed problem whit adding workers if "Worker Locations" addon is used..
 - Added an option to force load Appointment's scripts and styles.
 - Improved column "Price".
+
+2018-05-30 - 2.3.1
+-------------------------------
+- Fixed problem with adding workers if "Worker Locations" addon is active.
 
 2018-05-24 - 2.3.0
 -------------------------------
