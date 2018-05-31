@@ -4,11 +4,10 @@
 - Fixed a problem with more than one Service Provider on schedule table, when first is already busy, but second is not.
 - Improved adding a new service provider, when is only one servive it will be checked by default.
 - Fixed problems with capacity.
-- Fixed problem whit adding workers if "Worker Locations" addon is used..
 - Added an option to force load Appointment's scripts and styles.
 - Improved column "Price".
 
-2018-05-30 - 2.3.1
+2018-05-31 - 2.3.1
 -------------------------------
 - Fixed problem with adding workers if "Worker Locations" addon is active.
 
