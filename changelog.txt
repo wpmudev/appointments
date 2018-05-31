@@ -6,6 +6,7 @@
 - Fixed problems with capacity.
 - Added an option to force load Appointment's scripts and styles.
 - Improved column "Price".
+- Fixed a problem with service description when Service is not selected.
 
 2018-05-31 - 2.3.1
 -------------------------------
