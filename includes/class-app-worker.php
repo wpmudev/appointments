@@ -109,6 +109,9 @@ function appointments_get_worker( $worker_id ) {
 				$worker_id
 			)
 		);
+		if ( empty( $worker ) ) {
+			return false;
+		}
 		/**
 		 * Allow to modify service data
 		 *
