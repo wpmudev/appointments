@@ -62,6 +62,14 @@ jQuery(document).ready( function( $ ) {
                 $('#service-page',     section ).val( response.data.page );
                 $('#service-price',    section ).val( response.data.price );
                 /**
+                 * udpate slider
+                 *
+                 * @since 2.3.2
+                 */
+                if ( $.fn.slider ) {
+                    $('#service-capacity-slider-edit').slider( 'option', 'value', response.data.capacity );
+                }
+                /**
                  * PRO: service_padding
                  */
                 if ( 'undefined' !== typeof response.data.service_padding ) {

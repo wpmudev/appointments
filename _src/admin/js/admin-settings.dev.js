@@ -172,4 +172,29 @@ jQuery( document ).ready( function( $ ) {
         }
     });
 
+    /**
+     * Slider widget
+     *
+     * @since 2.3.2
+     */
+    if ( $.fn.slider ) {
+        $('div.app-ui-slider').each( function() {
+            var id = $(this).data('target-id');
+            if ( id ) {
+                var target = $('#'+id);
+                var value = target.val();
+                var max = $(this).data('max') || 100;
+                var min = $(this).data('min') || 0;
+                $(this).slider({
+                    value: value,
+                    min: min,
+                    max: max,
+                    slide: function( event, ui ) {
+                        target.val( ui.value );
+                    }
+                });
+            }
+        });
+    }
+
 });

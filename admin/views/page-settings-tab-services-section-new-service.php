@@ -25,10 +25,11 @@ if ( empty( $pages ) ) {
 		</tr>
 		<tr>
 			<th scope="row">
-				<label for="service-capacity"><?php _e( 'Service Capacity', 'appointments' ); ?></label>
+				<label for="service-capacity-new"><?php _e( 'Service Capacity', 'appointments' ); ?></label>
 			</th>
-			<td>
-                <input id="service-capacity" type="number" name="service_capacity" value="" min="0" max="<?php echo esc_attr( $number_of_workers ); ?>" />
+            <td>
+                <input id="service-capacity-new" type="number" name="service_capacity" value="" min="0" max="<?php echo esc_attr( $number_of_workers ); ?>" />
+                <div class="app-ui-slider" data-target-id="service-capacity-new" data-min="0" data-max="<?php echo esc_attr( $number_of_workers ); ?>"></div>
                 <p class="description"><?php esc_html_e( 'When you set up "Service Capacity" to "0" it will be limited only by the number of available Service Providers.', 'appointments' ); ?></p>
 			</td>
 		</tr>
