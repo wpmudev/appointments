@@ -18,11 +18,17 @@ class Appointments_WP_List_Table_Services extends WP_List_Table {
 		$this->currency = appointments_get_option( 'currency' );
 	}
 
-	public function column_default( $item, $column_name ) {
-		switch ( $column_name ) {
-			case 'price':
-				return $item->$column_name;
+	/**
+	 * Column price.
+	 *
+	 * @since 2.3.1
+	 */
+	public function column_price( $item ) {
+		$value = intval( $item->price );
+		if ( empty( $value ) ) {
+			return __( 'Free', 'appointments' );
 		}
+		return $value;
 	}
 
 	/**

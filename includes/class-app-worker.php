@@ -109,6 +109,9 @@ function appointments_get_worker( $worker_id ) {
 				$worker_id
 			)
 		);
+		if ( empty( $worker ) ) {
+			return false;
+		}
 		/**
 		 * Allow to modify service data
 		 *
@@ -160,38 +163,30 @@ function appointments_is_worker( $id ) {
 
 function appointments_insert_worker( $args = array() ) {
 	global $wpdb;
-
 	$table = appointments_get_table( 'workers' );
-
 	$defaults = array(
 		'ID' => false,
 		'price' => '',
 		'services_provided' => array(),
 		'page' => 0,
 	);
-
 	$args = wp_parse_args( $args, $defaults );
-
 	$insert = array();
 	$insert_wildcards = array();
-
 	// Worker ID
 	$ID = absint( $args['ID'] );
 	$user = get_userdata( $ID );
-
 	if ( ! $user ) {
-		return false; }
-
+		return false;
+	}
 	// Check if the user is already in workers table
 	$worker = appointments_get_worker( $ID );
 	if ( $worker ) {
-		return false; }
-
+		return false;
+	}
 	$workers = appointments_get_all_workers();
-
 	$insert['ID'] = $ID;
 	$insert_wildcards[] = '%d';
-
 	// Price
 	$price = preg_replace( '/[^0-9,.]/', '', $args['price'] );
 	if ( $price !== '' ) {
@@ -200,12 +195,10 @@ function appointments_insert_worker( $args = array() ) {
 	}
 	$insert['price'] = $price;
 	$insert_wildcards[] = '%s';
-
 	// Services provided
 	$_services_provided = $args['services_provided'];
 	if ( ! is_array( $_services_provided ) || empty( $_services_provided ) ) {
 		$_services_provided = false; }
-
 	if ( $_services_provided ) {
 		$services_provided = array();
 		foreach ( $_services_provided as $service_id ) {
@@ -216,9 +209,7 @@ function appointments_insert_worker( $args = array() ) {
 	} else {
 		$insert['services_provided'] = '::';
 	}
-
 	$insert_wildcards[] = '%s';
-
 	// Page
 	$page_id = absint( $args['page'] );
 	$page = get_post( $page_id );
@@ -275,7 +266,8 @@ function appointments_update_worker( $worker_id, $args = array() ) {
 
 	$old_worker = appointments_get_worker( $worker_id );
 	if ( ! $old_worker ) {
-		return false; }
+		return false;
+	}
 
 	$fields = array( 'services_provided' => '%s', 'dummy' => '%s', 'price' => '%s', 'page' => '%d', 'ID' => '%d' );
 

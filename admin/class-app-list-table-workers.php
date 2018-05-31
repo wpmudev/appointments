@@ -28,9 +28,20 @@ class Appointments_WP_List_Table_Workers extends WP_List_Table {
 				esc_attr( $is_dummy ),
 				$is_dummy? esc_html_x( 'Yes', 'dummy worker', 'appointments' ):esc_html_x( 'No', 'dummy worker', 'appointments' )
 			);
-			case 'price':
-			return intval( $item->$column_name );
 		}
+	}
+
+	/**
+	 * Column price.
+	 *
+	 * @since 2.3.1
+	 */
+	public function column_price( $item ) {
+		$value = intval( $item->price );
+		if ( empty( $value ) ) {
+			return __( 'Free', 'appointments' );
+		}
+		return $value;
 	}
 
 	public function column_services_provided( $item ) {
@@ -40,12 +51,12 @@ class Appointments_WP_List_Table_Workers extends WP_List_Table {
 		$content = '';
 		$ids = array();
 
-        foreach ( $item->services_provided as $id ) {
+		foreach ( $item->services_provided as $id ) {
 			$name = sprintf( __( 'Missing service: %d.', 'appointments' ), $id );
-            $value = null;
-            if ( isset( $this->services[ $id ] ) ) {
-                $value = $this->services[ $id ];
-            }
+			$value = null;
+			if ( isset( $this->services[ $id ] ) ) {
+				$value = $this->services[ $id ];
+			}
 			if ( is_a( $value, 'Appointments_Service' ) ) {
 				$name = $value->name;
 				$ids[] = $id;
@@ -136,7 +147,7 @@ class Appointments_WP_List_Table_Workers extends WP_List_Table {
 			'name' => __( 'Service Provider', 'appointments' ),
 			'dummy' => __( 'Dummy', 'appointments' ),
 			'price' => sprintf( __( 'Additional Price (%s)', 'appointments' ), $this->currency ),
-			'services_provided' => __( 'Services Provided*', 'appointments' ),
+			'services_provided' => __( 'Services Provided', 'appointments' ),
 			'page' => __( 'Description page', 'appointments' ),
 		);
 		return $columns;
