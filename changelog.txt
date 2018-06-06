@@ -9,6 +9,7 @@
 - Improved adding a new service provider, when is only one service it will be checked by default.
 - Improved column "Price".
 - Improved Service "Service Capacity" edit field.
+- Excluded "removed" and "completed" statuses from is_busy() calculations.
 
 2018-05-31 - 2.3.1
 -------------------------------

@@ -887,42 +887,52 @@ function appointments_get_appointments( $args = array() ) {
 		 * since 2.3.0
 		 */
 		'email' => false,
+		/**
+		 * since 2.3.2
+		 */
+		'status_exclude' => array(),
 	);
-
 	$args = wp_parse_args( $args, $defaults );
-
 	$cache_key = md5( maybe_serialize( $args ) );
 	$cached_queries = wp_cache_get( 'app_get_appointments' );
 	if ( ! is_array( $cached_queries ) ) {
 		$cached_queries = array();
 	}
-
 	if ( isset( $cached_queries[ $cache_key ] ) ) {
 		$results = $cached_queries[ $cache_key ];
 	} else {
 		$where = array();
-
+		/**
+		 * worker
+		 */
 		if ( false !== $args['worker'] && $worker = appointments_get_worker( $args['worker'] ) ) {
 			$where[] = $wpdb->prepare( 'worker = %d', $worker->ID );
 		}
-
+		/**
+		 * location
+		 */
 		if ( false !== $args['location'] ) {
 			$where[] = $wpdb->prepare( 'location = %d', $args['location'] );
 		}
-
+		/**
+		 * user
+		 */
 		if ( false !== $args['user'] ) {
 			$where[] = $wpdb->prepare( 'user = %d', $args['user'] );
 		}
-
+		/**
+		 * email
+		 */
 		if ( false !== $args['email'] ) {
 			$where[] = $wpdb->prepare( 'email = %s', $args['email'] );
 		}
-
+		/**
+		 * service
+		 */
 		if ( false !== $args['service'] && ! is_array( $args['service'] ) ) {
 			// Only one service, let's make it an array
 			$args['service'] = array( $args['service'] );
 		}
-
 		if ( ! empty( $args['service'] ) && is_array( $args['service'] ) ) {
 			$where_services = array();
 			foreach ( $args['service'] as $service_id ) {
@@ -930,18 +940,18 @@ function appointments_get_appointments( $args = array() ) {
 				if ( ! $service ) {
 					continue;
 				}
-
 				$where_services[] = absint( $service_id );
 			}
 			if ( ! empty( $where_services ) ) {
 				$where[] = 'service IN (' . implode( ',', $where_services ) . ')';
 			}
 		}
-
+		/**
+		 * date_query
+		 */
 		if ( ! empty( $args['date_query'] ) && is_array( $args['date_query'] ) ) {
 			$date_query_where = array();
 			$date_queries = $args['date_query'];
-
 			// Set the date queries conditions
 			$allowed_conditions = array( 'AND', 'OR' );
 			if ( ! isset( $args['date_query']['condition'] ) ) {
@@ -949,11 +959,9 @@ function appointments_get_appointments( $args = array() ) {
 			} else {
 				$condition = strtoupper( $args['date_query']['condition'] );
 			}
-
 			if ( ! in_array( $condition, $allowed_conditions ) ) {
 				$condition = 'AND';
 			}
-
 			// Parse every Date query
 			foreach ( $date_queries as $key => $date_query ) {
 				if ( 'condition' === $key ) {
@@ -964,17 +972,20 @@ function appointments_get_appointments( $args = array() ) {
 					$date_query_where[] = $wpdb->prepare( $date_query['field'] . $date_query['compare'] . '%s', $date_query['value'] );
 				}
 			}
-
 			if ( $date_query_where ) {
 				$where[] = '(' . implode( ' ' . $condition . ' ', $date_query_where ) . ')';
 			}
 		}
-
+		/**
+		 * app_id
+		 */
 		if ( ! empty( $args['app_id'] ) && is_array( $args['app_id'] ) ) {
 			$args['app_id'] = array_map( 'absint', $args['app_id'] );
 			$where[] = 'ID IN ( ' . implode( ',', $args['app_id'] ) .  ' )';
 		}
-
+		/**
+		 * status
+		 */
 		if ( $args['status'] ) {
 			$statuses = array();
 			if ( is_array( $args['status'] ) ) {
@@ -986,8 +997,25 @@ function appointments_get_appointments( $args = array() ) {
 			} elseif ( is_string( $args['status'] ) && array_key_exists( $args['status'], appointments_get_statuses() ) ) {
 				$statuses = array( $args['status'] );
 			}
-
 			$where[] = 'status IN ("' . implode( '","', $statuses ) . '")';
+		}
+		/**
+		 * Exclude status
+		 *
+		 * @since 2.3.2
+		 */
+		if ( $args['status_exclude'] ) {
+			$statuses = array();
+			if ( is_array( $args['status_exclude'] ) ) {
+				foreach ( $args['status_exclude'] as $status ) {
+					if ( array_key_exists( $status, appointments_get_statuses() ) ) {
+						$statuses[] = $status;
+					}
+				}
+			} elseif ( is_string( $args['status_exclude'] ) && array_key_exists( $args['status_exclude'], appointments_get_statuses() ) ) {
+				$statuses = array( $args['status_exclude'] );
+			}
+			$where[] = 'status NOT IN ("' . implode( '","', $statuses ) . '")';
 		}
 
 		if ( false !== $args['s'] ) {
@@ -1019,7 +1047,7 @@ function appointments_get_appointments( $args = array() ) {
 		'name',
 		'email',
 		'location',
-			'service',
+		'service',
 		'worker',
 		'price',
 		'status',
@@ -1044,14 +1072,11 @@ function appointments_get_appointments( $args = array() ) {
 		if ( $args['count'] ) {
 			$found_rows = 'SQL_CALC_FOUND_ROWS';
 		}
-
 		$query = "SELECT $found_rows * FROM $table $where $order_query $limit";
 		$results = $wpdb->get_results( $query );
-
 		if ( $args['count'] ) {
 			$results = $wpdb->get_var( 'SELECT FOUND_ROWS()' );
 		}
-
 		if ( $results && ! $args['count'] ) {
 			$cached_queries[ $cache_key ] = $results;
 			wp_cache_set( 'app_get_appointments', $cached_queries );

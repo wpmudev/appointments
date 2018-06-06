@@ -389,6 +389,7 @@ function apppointments_is_range_busy( $start, $end, $args = array() ) {
 	    'service_id'  => 0,
 	    'location_id' => 0,
 		'capacity'    => 0,
+		'status_exclude' => array( 'removed', 'completed' ),
 	);
 	$args = wp_parse_args( $args, $defaults );
 	$apps = array();
@@ -414,7 +415,6 @@ function apppointments_is_range_busy( $start, $end, $args = array() ) {
 		foreach ( $apps as $app ) {
 			//if ( $start >= strtotime( $app->start ) && $end <= strtotime( $app->end ) ) return true;
 			$app_properties = apply_filters( 'app-properties-for-calendar', array( 'start' => $app->start, 'end' => $app->end ), $app, $args );
-
 			if ( $period->contains( $app_properties['start'], $app_properties['end'], true ) ) {
 				$counter++;
 			}
@@ -428,7 +428,6 @@ function apppointments_is_range_busy( $start, $end, $args = array() ) {
 	if ( $is_busy ) {
 		return true;
 	}
-
 	// If we are here, no preference is selected (provider_id=0) or selected provider is not busy. There are 2 cases here:
 	// 1) There are several providers: Look for reserve apps for the workers giving this service.
 	// 2) No provider defined: Look for reserve apps for worker=0, because he will carry out all services
@@ -443,7 +442,6 @@ function apppointments_is_range_busy( $start, $end, $args = array() ) {
 					if ( $app_worker && is_array( $app_worker ) ) {
 						$apps = array_merge( $apps, $app_worker );
 					}
-
 					// Also include appointments by general staff for services that can be given by this worker
 					$services_provided = $worker->services_provided;
 					if ( $services_provided && is_array( $services_provided ) && ! empty( $services_provided ) ) {
@@ -467,7 +465,6 @@ function apppointments_is_range_busy( $start, $end, $args = array() ) {
 	} else {
 		$apps = $appointments->get_reserve_apps_by_worker( $args['location_id'], 0, $week );
 	}
-
 	$n = 0;
 	foreach ( $apps as $app ) {
 		// @FIX: this will allow for "only one service and only one provider per time slot"
@@ -504,7 +501,6 @@ function apppointments_is_range_busy( $start, $end, $args = array() ) {
 function appointments_monthly_calendar( $timestamp = false, $args = array() ) {
 	$appointments = appointments();
 	$options = appointments_get_options();
-
 	$defaults = array(
 		'service_id' => 0,
 		'worker_id' => 0,
@@ -516,10 +512,8 @@ function appointments_monthly_calendar( $timestamp = false, $args = array() ) {
 		'hide_today_times' => false,
 	);
 	$args = wp_parse_args( $args, $defaults );
-
 	$current_time = current_time( 'timestamp' );
 	$date = $timestamp ? $timestamp : $current_time;
-
 	$year  = date( 'Y', $date );
 	$month = date( 'm', $date );
 	$time  = strtotime( "{$year}-{$month}-01" );
