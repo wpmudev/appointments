@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-05-24 05:47:46+00:00\n"
+"POT-Creation-Date: 2018-06-06 10:30:31+00:00\n"
 "PO-Revision-Date: 2017-12-10 12:07:18+0000\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -1107,7 +1107,7 @@ msgid "<strong>Requires</strong>: %s"
 msgstr ""
 
 #: admin/class-app-addons-admin-list-table.php:67
-#: admin/class-app-list-table-services.php:120 admin/views/inline-edit.php:26
+#: admin/class-app-list-table-services.php:126 admin/views/inline-edit.php:26
 #: appointments.php:694 includes/class-app-gdpr.php:268
 msgid "Name"
 msgstr "Имя"
@@ -1136,8 +1136,8 @@ msgstr "%s изданием его рабочего времени."
 msgid "Appointments Provider"
 msgstr ""
 
-#: admin/class-app-admin.php:77 admin/class-app-list-table-services.php:62
-#: admin/class-app-list-table-workers.php:68
+#: admin/class-app-admin.php:77 admin/class-app-list-table-services.php:68
+#: admin/class-app-list-table-workers.php:82
 #: includes/pro/includes/addons/lib/class-app-locations-list-table.php:18
 #: includes/sample-appointments-page.php:38
 msgid "Edit"
@@ -1289,71 +1289,80 @@ msgstr ""
 msgid "Page was created successfuly: %s"
 msgstr ""
 
-#: admin/class-app-admin.php:489 admin/class-app-list-table-services.php:99
-#: admin/class-app-list-table-services.php:105
-#: admin/class-app-list-table-workers.php:112
-#: admin/class-app-list-table-workers.php:118
+#: admin/class-app-admin.php:489 admin/class-app-list-table-services.php:105
+#: admin/class-app-list-table-services.php:111
+#: admin/class-app-list-table-workers.php:126
+#: admin/class-app-list-table-workers.php:132
 #: includes/integration/class-app-marketpress.php:159
 msgid "View page"
 msgstr ""
 
-#: admin/class-app-list-table-services.php:35
+#: admin/class-app-list-table-services.php:29
+#: admin/class-app-list-table-workers.php:42 appointments.php:718
+msgid "Free"
+msgstr "Свободно"
+
+#: admin/class-app-list-table-services.php:41
 msgid "Limited by number of Service Providers"
 msgstr ""
 
-#: admin/class-app-list-table-services.php:67
-#: admin/class-app-list-table-workers.php:73
+#: admin/class-app-list-table-services.php:73
+#: admin/class-app-list-table-workers.php:87
 #: includes/pro/includes/addons/lib/class-app-locations-list-table.php:19
 msgid "Delete"
 msgstr "Удалить"
 
-#: admin/class-app-list-table-services.php:121
+#: admin/class-app-list-table-services.php:127
 msgid "Capacity"
 msgstr "Объём"
 
-#: admin/class-app-list-table-services.php:122
+#: admin/class-app-list-table-services.php:128
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:154
 msgid "Duration"
 msgstr "Длительность"
 
-#: admin/class-app-list-table-services.php:123
+#: admin/class-app-list-table-services.php:129
 msgid "Price (%s)"
 msgstr ""
 
-#: admin/class-app-list-table-services.php:124
-#: admin/class-app-list-table-workers.php:137
+#: admin/class-app-list-table-services.php:130
+#: admin/class-app-list-table-workers.php:151
 msgid "Description page"
 msgstr "Описание страницы"
 
-#: admin/class-app-list-table-workers.php:38
+#: admin/class-app-list-table-workers.php:49
 msgid "No Service Providers selected."
 msgstr ""
 
-#: admin/class-app-list-table-workers.php:45
+#: admin/class-app-list-table-workers.php:55
 msgid "Missing service: %d."
 msgstr ""
 
-#: admin/class-app-list-table-workers.php:87
+#: admin/class-app-list-table-workers.php:101
 msgid "[wrong user]"
 msgstr ""
 
-#: admin/class-app-list-table-workers.php:133
+#: admin/class-app-list-table-workers.php:147
 #: admin/views/page-settings-tab-workers-section-edit-worker.php:14
 #: admin/views/page-settings-tab-workers-section-new-worker.php:30
 msgid "Service Provider"
 msgstr "Оператор"
 
-#: admin/class-app-list-table-workers.php:134
+#: admin/class-app-list-table-workers.php:148
 msgid "Dummy"
 msgstr ""
 
-#: admin/class-app-list-table-workers.php:135
+#: admin/class-app-list-table-workers.php:149
 msgid "Additional Price (%s)"
 msgstr ""
 
-#: admin/class-app-list-table-workers.php:136
-msgid "Services Provided*"
-msgstr "Услуги, предоставляемые *"
+#: admin/class-app-list-table-workers.php:150
+#: admin/views/page-settings-tab-workers-section-edit-worker.php:36
+#: admin/views/page-settings-tab-workers-section-edit-worker.php:42
+#: admin/views/page-settings-tab-workers-section-new-worker.php:54
+#: admin/views/page-settings-tab-workers-section-new-worker.php:60
+msgid "Services Provided"
+msgstr ""
 
 #: admin/class-app-list-table.php:155
 msgid "List View"
@@ -1709,17 +1718,17 @@ msgid "GDPR"
 msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:50
-#: admin/views/page-settings-tab-services-section-new-service.php:77
+#: admin/views/page-settings-tab-services-section-new-service.php:78
 msgid "Add new Service"
 msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:55
-#: admin/views/page-settings-tab-workers-section-new-worker.php:88
+#: admin/views/page-settings-tab-workers-section-new-worker.php:98
 msgid "Add new Service Provider"
 msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:96
-#: admin/pages/class-admin-settings-page.php:551
+#: admin/pages/class-admin-settings-page.php:552
 msgid "Please, select at least one service provided"
 msgstr ""
 
@@ -2103,10 +2112,10 @@ msgid "Assign dummy service providers to"
 msgstr "Связать фиктивные сервис-провайдерам"
 
 #: admin/views/page-settings-tab-main-section-accesibility.php:76
-#: admin/views/page-settings-tab-services-section-edit-service.php:62
-#: admin/views/page-settings-tab-services-section-new-service.php:65
-#: admin/views/page-settings-tab-workers-section-edit-worker.php:58
-#: admin/views/page-settings-tab-workers-section-new-worker.php:76
+#: admin/views/page-settings-tab-services-section-edit-service.php:63
+#: admin/views/page-settings-tab-services-section-new-service.php:66
+#: admin/views/page-settings-tab-workers-section-edit-worker.php:66
+#: admin/views/page-settings-tab-workers-section-new-worker.php:86
 msgid "None"
 msgstr "Ничего"
 
@@ -2208,10 +2217,21 @@ msgstr ""
 "вручную этот флажок."
 
 #: admin/views/page-settings-tab-main-section-advanced.php:10
+msgid "Always load scripts"
+msgstr ""
+
+#: admin/views/page-settings-tab-main-section-advanced.php:13
+msgid ""
+"By default some scrtips are loaded only if booking shortcodes are detected. "
+"With some themes and if booking form is in popup it might be necessary to "
+"enable this option to force loading of these assets."
+msgstr ""
+
+#: admin/views/page-settings-tab-main-section-advanced.php:17
 msgid "Allow Overwork (end of day)"
 msgstr "Разрешить Переутомление (конец дня)"
 
-#: admin/views/page-settings-tab-main-section-advanced.php:13
+#: admin/views/page-settings-tab-main-section-advanced.php:20
 msgid ""
 "Whether you accept appointments exceeding working hours for the end of day. "
 "For example, if you are working until 6pm, and a client asks an appointment "
@@ -2228,11 +2248,11 @@ msgstr ""
 "Такие временные интервалы, помечаются как  \"не представляется возможным \" "
 "в расписании."
 
-#: admin/views/page-settings-tab-main-section-advanced.php:17
+#: admin/views/page-settings-tab-main-section-advanced.php:24
 msgid "Allow Overwork (break hours)"
 msgstr "Разрешить переработку (часов перерыв)"
 
-#: admin/views/page-settings-tab-main-section-advanced.php:20
+#: admin/views/page-settings-tab-main-section-advanced.php:27
 msgid ""
 "Same as above, but valid for break hours. If you want to allow appointments "
 "exceeding break times, then select this as Yes."
@@ -2240,11 +2260,11 @@ msgstr ""
 "То же самое, но действует в течение нескольких часов перерыва. Если вы "
 "хотите, чтобы назначения, превышающие раз перерыв, затем выберите это как Да."
 
-#: admin/views/page-settings-tab-main-section-advanced.php:24
+#: admin/views/page-settings-tab-main-section-advanced.php:31
 msgid "Keep options on uninstall"
 msgstr ""
 
-#: admin/views/page-settings-tab-main-section-advanced.php:27
+#: admin/views/page-settings-tab-main-section-advanced.php:34
 msgid ""
 "By enabling this option you can keep your appointments and settings when "
 "deleting plugin."
@@ -2797,32 +2817,32 @@ msgstr ""
 msgid "Service Capacity"
 msgstr ""
 
-#: admin/views/page-settings-tab-services-section-edit-service.php:29
-#: admin/views/page-settings-tab-services-section-new-service.php:32
+#: admin/views/page-settings-tab-services-section-edit-service.php:30
+#: admin/views/page-settings-tab-services-section-new-service.php:33
 msgid ""
 "When you set up \"Service Capacity\" to \"0\" it will be limited only by the "
 "number of available Service Providers."
 msgstr ""
 
-#: admin/views/page-settings-tab-services-section-edit-service.php:34
-#: admin/views/page-settings-tab-services-section-new-service.php:37
+#: admin/views/page-settings-tab-services-section-edit-service.php:35
+#: admin/views/page-settings-tab-services-section-new-service.php:38
 msgid "Service Duration"
 msgstr ""
 
-#: admin/views/page-settings-tab-services-section-edit-service.php:50
-#: admin/views/page-settings-tab-services-section-new-service.php:53
+#: admin/views/page-settings-tab-services-section-edit-service.php:51
+#: admin/views/page-settings-tab-services-section-new-service.php:54
 msgid "Service Price"
 msgstr ""
 
-#: admin/views/page-settings-tab-services-section-edit-service.php:58
-#: admin/views/page-settings-tab-services-section-new-service.php:61
-#: admin/views/page-settings-tab-workers-section-edit-worker.php:54
-#: admin/views/page-settings-tab-workers-section-new-worker.php:72
+#: admin/views/page-settings-tab-services-section-edit-service.php:59
+#: admin/views/page-settings-tab-services-section-new-service.php:62
+#: admin/views/page-settings-tab-workers-section-edit-worker.php:62
+#: admin/views/page-settings-tab-workers-section-new-worker.php:82
 msgid "Description Page"
 msgstr ""
 
-#: admin/views/page-settings-tab-services-section-edit-service.php:74
-#: admin/views/page-settings-tab-workers-section-edit-worker.php:70
+#: admin/views/page-settings-tab-services-section-edit-service.php:75
+#: admin/views/page-settings-tab-workers-section-edit-worker.php:78
 #: includes/pro/includes/addons/app-locations-location_support.php:152
 msgid "Save"
 msgstr "Сохранить"
@@ -2852,15 +2872,8 @@ msgstr "Манекен?"
 msgid "Additional Price"
 msgstr "Дополнительная цена"
 
-#: admin/views/page-settings-tab-workers-section-edit-worker.php:36
-#: admin/views/page-settings-tab-workers-section-edit-worker.php:40
-#: admin/views/page-settings-tab-workers-section-new-worker.php:54
-#: admin/views/page-settings-tab-workers-section-new-worker.php:58
-msgid "Services Provided"
-msgstr ""
-
-#: admin/views/page-settings-tab-workers-section-edit-worker.php:48
-#: admin/views/page-settings-tab-workers-section-new-worker.php:66
+#: admin/views/page-settings-tab-workers-section-edit-worker.php:55
+#: admin/views/page-settings-tab-workers-section-new-worker.php:75
 msgid "No services defined"
 msgstr "Нет услуги, определенные"
 
@@ -3050,10 +3063,6 @@ msgstr "Город"
 msgid "Note"
 msgstr "Примечание"
 
-#: appointments.php:718
-msgid "Free"
-msgstr "Свободно"
-
 #: appointments.php:719
 msgid "Busy"
 msgstr "Занято"
@@ -3074,48 +3083,48 @@ msgstr "%s Назначение"
 msgid "Something wrong about the submitted %s"
 msgstr "Что-то не так о представленном %s"
 
-#: appointments.php:1826
+#: appointments.php:1841
 msgid "Login with Facebook"
 msgstr "Войти с Facebook"
 
-#: appointments.php:1827
+#: appointments.php:1842
 msgid "Login with Twitter"
 msgstr "Войти Twitter"
 
-#: appointments.php:1828
+#: appointments.php:1843
 msgid "Login with Google+"
 msgstr "Войти Google+"
 
-#: appointments.php:1829
+#: appointments.php:1844
 msgid "Login with WordPress"
 msgstr "Войти WordPress"
 
-#: appointments.php:1830 includes/gcal/views/settings-gcal-step-1.php:70
+#: appointments.php:1845 includes/gcal/views/settings-gcal-step-1.php:70
 #: includes/gcal/views/settings-gcal-step-2.php:22
 msgid "Submit"
 msgstr "Отправить"
 
-#: appointments.php:1832
+#: appointments.php:1847
 msgid "Please, wait..."
 msgstr "Пожалуйста, подождите ..."
 
-#: appointments.php:1833
+#: appointments.php:1848
 msgid "You are now logged in"
 msgstr "Теперь Вы зарегистрированы в"
 
-#: appointments.php:1834
+#: appointments.php:1849
 msgid "Login error. Please try again."
 msgstr "Войти ошибка. Пожалуйста, попробуйте еще раз."
 
-#: appointments.php:1837 includes/class_app_codec.php:369
+#: appointments.php:1852 includes/class_app_codec.php:369
 msgid "Register"
 msgstr "Регистрация"
 
-#: appointments.php:1972 includes/helpers-settings.php:71
+#: appointments.php:1987 includes/helpers-settings.php:71
 msgid "Confirmation of your Appointment"
 msgstr "Подтверждение вашего назначения"
 
-#: appointments.php:1974 includes/helpers-settings.php:73
+#: appointments.php:1989 includes/helpers-settings.php:73
 msgid "Reminder for your Appointment"
 msgstr "Напоминание для вашего назначения"
 
@@ -3169,7 +3178,7 @@ msgstr ""
 "Вы уже подали заявку на бронирование. Пожалуйста, подождите от нас "
 "подтверждения."
 
-#: includes/class-app-ajax.php:474 includes/class-app-ajax.php:939
+#: includes/class-app-ajax.php:473 includes/class-app-ajax.php:927
 msgid ""
 "We are sorry, but this time slot is no longer available. Please refresh the "
 "page and try another time slot. Thank you."
@@ -3177,13 +3186,13 @@ msgstr ""
 "К сожалению, это время больше недоступно. Обновите страницу и выберите "
 "другое время. Спасибо."
 
-#: includes/class-app-ajax.php:546 includes/class-app-ajax.php:562
+#: includes/class-app-ajax.php:540 includes/class-app-ajax.php:552
 msgid "Appointment could not be saved. Please contact website admin."
 msgstr ""
 "Бронирование не может быть сохранено. Пожалуйста, обратитесь к "
 "администратору сайта."
 
-#: includes/class-app-ajax.php:760
+#: includes/class-app-ajax.php:748
 msgid ""
 "Paypal confirmation arrived, but status could not be changed for some "
 "reason. Please check appointment with ID %s"
@@ -3191,11 +3200,11 @@ msgstr ""
 "Прибыл подтверждение Paypal, но статус не может быть изменен по некоторым "
 "причинам. Пожалуйста, проверьте назначение с ID %s"
 
-#: includes/class-app-ajax.php:762
+#: includes/class-app-ajax.php:750
 msgid "Appointment status could not be changed"
 msgstr "Статус бронирования не может быть изменен"
 
-#: includes/class-app-ajax.php:768
+#: includes/class-app-ajax.php:756
 msgid ""
 "Last transaction has been reversed. Reason: Payment has been reversed "
 "(charge back)"
@@ -3203,90 +3212,90 @@ msgstr ""
 "Последняя сделка была обращена вспять. Причина: Оплата была обращена вспять "
 "(плата назад)"
 
-#: includes/class-app-ajax.php:793
+#: includes/class-app-ajax.php:781
 msgid "Last transaction has been reversed. Reason: Payment has been refunded"
 msgstr "Последняя сделка была обращена вспять. Причина: Оплата была возвращена"
 
-#: includes/class-app-ajax.php:818
+#: includes/class-app-ajax.php:806
 msgid "Last transaction has been reversed. Reason: Payment Denied"
 msgstr "Последняя сделка была обращена вспять. Причина: Оплата Denied"
 
-#: includes/class-app-ajax.php:845
+#: includes/class-app-ajax.php:833
 msgid "Customer did not include a confirmed shipping address"
 msgstr "Клиент не включает подтвержденный адрес доставки"
 
-#: includes/class-app-ajax.php:846
+#: includes/class-app-ajax.php:834
 msgid "Funds not captured yet"
 msgstr "Средства еще не захватили"
 
-#: includes/class-app-ajax.php:847
+#: includes/class-app-ajax.php:835
 msgid "eCheck that has not cleared yet"
 msgstr "Echeck, что до сих пор не очищены"
 
-#: includes/class-app-ajax.php:848
+#: includes/class-app-ajax.php:836
 msgid "Payment waiting for aproval by service provider"
 msgstr "Оплата ждет aproval от поставщика услуг"
 
-#: includes/class-app-ajax.php:849
+#: includes/class-app-ajax.php:837
 msgid "Payment waiting for service provider to handle multi-currency process"
 msgstr ""
 "Оплата ожидания для поставщика услуг, чтобы справиться мультивалютный процесс"
 
-#: includes/class-app-ajax.php:850
+#: includes/class-app-ajax.php:838
 msgid "Customer did not register or confirm his/her email yet"
 msgstr ""
 "Клиент не зарегистрироваться или подтвердить его / ее электронной почты еще"
 
-#: includes/class-app-ajax.php:851
+#: includes/class-app-ajax.php:839
 msgid "Waiting for service provider to upgrade the PayPal account"
 msgstr "В ожидании поставщика услуг обновить учетную запись PayPal"
 
-#: includes/class-app-ajax.php:852
+#: includes/class-app-ajax.php:840
 msgid "Waiting for service provider to verify his/her PayPal account"
 msgstr "В ожидании поставщика услуг, чтобы проверить его / ее счет PayPal"
 
-#: includes/class-app-ajax.php:856
+#: includes/class-app-ajax.php:844
 msgid "Last transaction is pending. Reason: "
 msgstr "Последняя сделка находится на рассмотрении. Причина: "
 
-#: includes/class-app-ajax.php:919
+#: includes/class-app-ajax.php:907
 msgid "You need to login to make an appointment."
 msgstr "Вы должны войти, чтобы записаться на прием."
 
-#: includes/class-app-ajax.php:945
+#: includes/class-app-ajax.php:933
 msgid "Service name: "
 msgstr "Услуга:"
 
-#: includes/class-app-ajax.php:946
+#: includes/class-app-ajax.php:934
 msgid "Date and time: "
 msgstr "Время и дата:"
 
-#: includes/class-app-ajax.php:947
+#: includes/class-app-ajax.php:935
 msgid "Lasts (approx): "
 msgstr "Длится (приблизительно): "
 
-#: includes/class-app-ajax.php:947
+#: includes/class-app-ajax.php:935
 msgid "minutes"
 msgstr "минуты"
 
-#: includes/class-app-ajax.php:950
+#: includes/class-app-ajax.php:938
 msgid "Price: "
 msgstr "Цена:"
 
-#: includes/class-app-ajax.php:955
+#: includes/class-app-ajax.php:943
 msgid "Service provider: "
 msgstr "Сотрудник:"
 
-#: includes/class-app-ajax.php:1041
+#: includes/class-app-ajax.php:1029
 msgid "Nothing to download!"
 msgstr "Ничего для загрузки!"
 
-#: includes/class-app-ajax.php:1150 includes/class-app-ajax.php:1163
-#: includes/class-app-ajax.php:1189
+#: includes/class-app-ajax.php:1138 includes/class-app-ajax.php:1151
+#: includes/class-app-ajax.php:1177
 msgid "Sorry, there was a problem with your request!"
 msgstr ""
 
-#: includes/class-app-ajax.php:1175 includes/class-app-ajax.php:1201
+#: includes/class-app-ajax.php:1163 includes/class-app-ajax.php:1189
 msgid "Service Provider was successfuly deleted."
 msgstr ""
 
@@ -3766,11 +3775,11 @@ msgstr ""
 "сохраняются пока вы не нажмете на кнопку Сохранить. Спасибо за использование "
 "Назначения +"
 
-#: includes/class-app-worker.php:148
+#: includes/class-app-worker.php:151
 msgid "Our staff"
 msgstr "Наш сотрудник"
 
-#: includes/class-app-worker.php:150
+#: includes/class-app-worker.php:153
 msgid "A specialist"
 msgstr "Специалист"
 
@@ -4616,11 +4625,11 @@ msgstr ""
 msgid "Removal notification"
 msgstr "Уведомление об отмене"
 
-#: includes/pro/includes/addons/app-admin-admin_permissions.php:58
+#: includes/pro/includes/addons/app-admin-admin_permissions.php:59
 msgid "Appointments role access"
 msgstr "Доступ Назначения роль"
 
-#: includes/pro/includes/addons/app-admin-admin_permissions.php:67
+#: includes/pro/includes/addons/app-admin-admin_permissions.php:68
 #: includes/pro/includes/addons/app-post_types-worker_names.php:116
 #: includes/pro/includes/addons/app-schedule-default_service.php:82
 msgid "Default"
@@ -6593,7 +6602,7 @@ msgctxt "dummy worker"
 msgid "No"
 msgstr ""
 
-#: admin/class-app-list-table-workers.php:80
+#: admin/class-app-list-table-workers.php:94
 msgctxt "user pfofile link on Service Providers screen"
 msgid "Profile"
 msgstr ""
@@ -6604,7 +6613,7 @@ msgctxt "paging"
 msgid "%1$s of %2$s"
 msgstr ""
 
-#: admin/views/inline-edit.php:123 appointments.php:1831
+#: admin/views/inline-edit.php:123 appointments.php:1846
 #: includes/class-app-tutorial.php:225
 #: includes/pro/includes/addons/app-locations-location_support.php:155
 #: includes/shortcodes/class-app-shortcode-confirmation.php:210
@@ -6650,12 +6659,12 @@ msgctxt "Enter \"yes\" for the European Union countries."
 msgid "no"
 msgstr ""
 
-#: includes/helpers.php:949
+#: includes/helpers.php:960
 msgctxt "less than 60 minut"
 msgid "%d minutes"
 msgstr ""
 
-#: includes/helpers.php:953
+#: includes/helpers.php:964
 msgctxt "more than 60 minuts, hours"
 msgid "%d hour"
 msgid_plural "%d hours"
@@ -6663,7 +6672,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: includes/helpers.php:960
+#: includes/helpers.php:971
 msgctxt "more than 60 minuts, minutes"
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -6705,3 +6714,6 @@ msgstr ""
 msgctxt "Discard existing info"
 msgid "Cancel"
 msgstr "Отменить"
+
+#~ msgid "Services Provided*"
+#~ msgstr "Услуги, предоставляемые *"

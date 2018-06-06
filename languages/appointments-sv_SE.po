@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-05-24 05:47:46+00:00\n"
+"POT-Creation-Date: 2018-06-06 10:30:31+00:00\n"
 "PO-Revision-Date: 2017-07-03 09:11:12+0000\n"
 "Language: sv_SE\n"
 "MIME-Version: 1.0\n"
@@ -910,7 +910,7 @@ msgid "<strong>Requires</strong>: %s"
 msgstr "<strong>Kräver</strong>: %s"
 
 #: admin/class-app-addons-admin-list-table.php:67
-#: admin/class-app-list-table-services.php:120 admin/views/inline-edit.php:26
+#: admin/class-app-list-table-services.php:126 admin/views/inline-edit.php:26
 #: appointments.php:694 includes/class-app-gdpr.php:268
 msgid "Name"
 msgstr "Namn"
@@ -939,8 +939,8 @@ msgstr "%s  redigera din arbetstid."
 msgid "Appointments Provider"
 msgstr ""
 
-#: admin/class-app-admin.php:77 admin/class-app-list-table-services.php:62
-#: admin/class-app-list-table-workers.php:68
+#: admin/class-app-admin.php:77 admin/class-app-list-table-services.php:68
+#: admin/class-app-list-table-workers.php:82
 #: includes/pro/includes/addons/lib/class-app-locations-list-table.php:18
 #: includes/sample-appointments-page.php:38
 msgid "Edit"
@@ -1080,71 +1080,80 @@ msgstr ""
 msgid "Page was created successfuly: %s"
 msgstr ""
 
-#: admin/class-app-admin.php:489 admin/class-app-list-table-services.php:99
-#: admin/class-app-list-table-services.php:105
-#: admin/class-app-list-table-workers.php:112
-#: admin/class-app-list-table-workers.php:118
+#: admin/class-app-admin.php:489 admin/class-app-list-table-services.php:105
+#: admin/class-app-list-table-services.php:111
+#: admin/class-app-list-table-workers.php:126
+#: admin/class-app-list-table-workers.php:132
 #: includes/integration/class-app-marketpress.php:159
 msgid "View page"
 msgstr ""
 
-#: admin/class-app-list-table-services.php:35
+#: admin/class-app-list-table-services.php:29
+#: admin/class-app-list-table-workers.php:42 appointments.php:718
+msgid "Free"
+msgstr "Ledig"
+
+#: admin/class-app-list-table-services.php:41
 msgid "Limited by number of Service Providers"
 msgstr ""
 
-#: admin/class-app-list-table-services.php:67
-#: admin/class-app-list-table-workers.php:73
+#: admin/class-app-list-table-services.php:73
+#: admin/class-app-list-table-workers.php:87
 #: includes/pro/includes/addons/lib/class-app-locations-list-table.php:19
 msgid "Delete"
 msgstr "Radera"
 
-#: admin/class-app-list-table-services.php:121
+#: admin/class-app-list-table-services.php:127
 msgid "Capacity"
 msgstr "Kapacitet"
 
-#: admin/class-app-list-table-services.php:122
+#: admin/class-app-list-table-services.php:128
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:154
 msgid "Duration"
 msgstr "Varaktighet"
 
-#: admin/class-app-list-table-services.php:123
+#: admin/class-app-list-table-services.php:129
 msgid "Price (%s)"
 msgstr ""
 
-#: admin/class-app-list-table-services.php:124
-#: admin/class-app-list-table-workers.php:137
+#: admin/class-app-list-table-services.php:130
+#: admin/class-app-list-table-workers.php:151
 msgid "Description page"
 msgstr "Beskrivningssida"
 
-#: admin/class-app-list-table-workers.php:38
+#: admin/class-app-list-table-workers.php:49
 msgid "No Service Providers selected."
 msgstr ""
 
-#: admin/class-app-list-table-workers.php:45
+#: admin/class-app-list-table-workers.php:55
 msgid "Missing service: %d."
 msgstr ""
 
-#: admin/class-app-list-table-workers.php:87
+#: admin/class-app-list-table-workers.php:101
 msgid "[wrong user]"
 msgstr ""
 
-#: admin/class-app-list-table-workers.php:133
+#: admin/class-app-list-table-workers.php:147
 #: admin/views/page-settings-tab-workers-section-edit-worker.php:14
 #: admin/views/page-settings-tab-workers-section-new-worker.php:30
 msgid "Service Provider"
 msgstr "Tjänsteutövare"
 
-#: admin/class-app-list-table-workers.php:134
+#: admin/class-app-list-table-workers.php:148
 msgid "Dummy"
 msgstr ""
 
-#: admin/class-app-list-table-workers.php:135
+#: admin/class-app-list-table-workers.php:149
 msgid "Additional Price (%s)"
 msgstr ""
 
-#: admin/class-app-list-table-workers.php:136
-msgid "Services Provided*"
-msgstr "Tjänst(er) som erhålls*"
+#: admin/class-app-list-table-workers.php:150
+#: admin/views/page-settings-tab-workers-section-edit-worker.php:36
+#: admin/views/page-settings-tab-workers-section-edit-worker.php:42
+#: admin/views/page-settings-tab-workers-section-new-worker.php:54
+#: admin/views/page-settings-tab-workers-section-new-worker.php:60
+msgid "Services Provided"
+msgstr "Tjänster som tillhandahålls"
 
 #: admin/class-app-list-table.php:155
 msgid "List View"
@@ -1483,17 +1492,17 @@ msgid "GDPR"
 msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:50
-#: admin/views/page-settings-tab-services-section-new-service.php:77
+#: admin/views/page-settings-tab-services-section-new-service.php:78
 msgid "Add new Service"
 msgstr "Lägg till ny tjänst"
 
 #: admin/pages/class-admin-settings-page.php:55
-#: admin/views/page-settings-tab-workers-section-new-worker.php:88
+#: admin/views/page-settings-tab-workers-section-new-worker.php:98
 msgid "Add new Service Provider"
 msgstr "Lägg till ny tjänsteleverantör"
 
 #: admin/pages/class-admin-settings-page.php:96
-#: admin/pages/class-admin-settings-page.php:551
+#: admin/pages/class-admin-settings-page.php:552
 msgid "Please, select at least one service provided"
 msgstr "Vänligen välj minst en tjänst som tillhandahålls"
 
@@ -1859,10 +1868,10 @@ msgid "Assign dummy service providers to"
 msgstr ""
 
 #: admin/views/page-settings-tab-main-section-accesibility.php:76
-#: admin/views/page-settings-tab-services-section-edit-service.php:62
-#: admin/views/page-settings-tab-services-section-new-service.php:65
-#: admin/views/page-settings-tab-workers-section-edit-worker.php:58
-#: admin/views/page-settings-tab-workers-section-new-worker.php:76
+#: admin/views/page-settings-tab-services-section-edit-service.php:63
+#: admin/views/page-settings-tab-services-section-new-service.php:66
+#: admin/views/page-settings-tab-workers-section-edit-worker.php:66
+#: admin/views/page-settings-tab-workers-section-new-worker.php:86
 msgid "None"
 msgstr "Ingen"
 
@@ -1959,10 +1968,21 @@ msgstr ""
 "inställning. För att tömma cachen manuellt, bocka i denna ruta."
 
 #: admin/views/page-settings-tab-main-section-advanced.php:10
+msgid "Always load scripts"
+msgstr ""
+
+#: admin/views/page-settings-tab-main-section-advanced.php:13
+msgid ""
+"By default some scrtips are loaded only if booking shortcodes are detected. "
+"With some themes and if booking form is in popup it might be necessary to "
+"enable this option to force loading of these assets."
+msgstr ""
+
+#: admin/views/page-settings-tab-main-section-advanced.php:17
 msgid "Allow Overwork (end of day)"
 msgstr "Tillåt övertid (slutet av dagen)"
 
-#: admin/views/page-settings-tab-main-section-advanced.php:13
+#: admin/views/page-settings-tab-main-section-advanced.php:20
 msgid ""
 "Whether you accept appointments exceeding working hours for the end of day. "
 "For example, if you are working until 6pm, and a client asks an appointment "
@@ -1978,11 +1998,11 @@ msgstr ""
 "valda tjänsten varar längre än bas tiden. Sådana tidsluckor är markerade som "
 "\\ \\\"inte är möjligt \" i schemat."
 
-#: admin/views/page-settings-tab-main-section-advanced.php:17
+#: admin/views/page-settings-tab-main-section-advanced.php:24
 msgid "Allow Overwork (break hours)"
 msgstr "Tillåt Övertid (ledig tid)"
 
-#: admin/views/page-settings-tab-main-section-advanced.php:20
+#: admin/views/page-settings-tab-main-section-advanced.php:27
 msgid ""
 "Same as above, but valid for break hours. If you want to allow appointments "
 "exceeding break times, then select this as Yes."
@@ -1990,11 +2010,11 @@ msgstr ""
 "Samma som ovan, men gäller Ledig tid. Om du vill tillåta bokningar över "
 "raster, välj detta som Ja."
 
-#: admin/views/page-settings-tab-main-section-advanced.php:24
+#: admin/views/page-settings-tab-main-section-advanced.php:31
 msgid "Keep options on uninstall"
 msgstr ""
 
-#: admin/views/page-settings-tab-main-section-advanced.php:27
+#: admin/views/page-settings-tab-main-section-advanced.php:34
 msgid ""
 "By enabling this option you can keep your appointments and settings when "
 "deleting plugin."
@@ -2522,32 +2542,32 @@ msgstr "Tjänst namn"
 msgid "Service Capacity"
 msgstr "Tjänst kapacitet"
 
-#: admin/views/page-settings-tab-services-section-edit-service.php:29
-#: admin/views/page-settings-tab-services-section-new-service.php:32
+#: admin/views/page-settings-tab-services-section-edit-service.php:30
+#: admin/views/page-settings-tab-services-section-new-service.php:33
 msgid ""
 "When you set up \"Service Capacity\" to \"0\" it will be limited only by the "
 "number of available Service Providers."
 msgstr ""
 
-#: admin/views/page-settings-tab-services-section-edit-service.php:34
-#: admin/views/page-settings-tab-services-section-new-service.php:37
+#: admin/views/page-settings-tab-services-section-edit-service.php:35
+#: admin/views/page-settings-tab-services-section-new-service.php:38
 msgid "Service Duration"
 msgstr "Tjänstens varaktighet"
 
-#: admin/views/page-settings-tab-services-section-edit-service.php:50
-#: admin/views/page-settings-tab-services-section-new-service.php:53
+#: admin/views/page-settings-tab-services-section-edit-service.php:51
+#: admin/views/page-settings-tab-services-section-new-service.php:54
 msgid "Service Price"
 msgstr "Tjänst Pris"
 
-#: admin/views/page-settings-tab-services-section-edit-service.php:58
-#: admin/views/page-settings-tab-services-section-new-service.php:61
-#: admin/views/page-settings-tab-workers-section-edit-worker.php:54
-#: admin/views/page-settings-tab-workers-section-new-worker.php:72
+#: admin/views/page-settings-tab-services-section-edit-service.php:59
+#: admin/views/page-settings-tab-services-section-new-service.php:62
+#: admin/views/page-settings-tab-workers-section-edit-worker.php:62
+#: admin/views/page-settings-tab-workers-section-new-worker.php:82
 msgid "Description Page"
 msgstr "Beskrivnings sida"
 
-#: admin/views/page-settings-tab-services-section-edit-service.php:74
-#: admin/views/page-settings-tab-workers-section-edit-worker.php:70
+#: admin/views/page-settings-tab-services-section-edit-service.php:75
+#: admin/views/page-settings-tab-workers-section-edit-worker.php:78
 #: includes/pro/includes/addons/app-locations-location_support.php:152
 msgid "Save"
 msgstr "Spara"
@@ -2577,15 +2597,8 @@ msgstr "Dummy?"
 msgid "Additional Price"
 msgstr "Annat pris?"
 
-#: admin/views/page-settings-tab-workers-section-edit-worker.php:36
-#: admin/views/page-settings-tab-workers-section-edit-worker.php:40
-#: admin/views/page-settings-tab-workers-section-new-worker.php:54
-#: admin/views/page-settings-tab-workers-section-new-worker.php:58
-msgid "Services Provided"
-msgstr "Tjänster som tillhandahålls"
-
-#: admin/views/page-settings-tab-workers-section-edit-worker.php:48
-#: admin/views/page-settings-tab-workers-section-new-worker.php:66
+#: admin/views/page-settings-tab-workers-section-edit-worker.php:55
+#: admin/views/page-settings-tab-workers-section-new-worker.php:75
 msgid "No services defined"
 msgstr "Inga tjänster definierade"
 
@@ -2773,10 +2786,6 @@ msgstr "Ort"
 msgid "Note"
 msgstr "Notera"
 
-#: appointments.php:718
-msgid "Free"
-msgstr "Ledig"
-
 #: appointments.php:719
 msgid "Busy"
 msgstr "Upptagen"
@@ -2797,48 +2806,48 @@ msgstr ""
 msgid "Something wrong about the submitted %s"
 msgstr "Något fel med dom inskickade"
 
-#: appointments.php:1826
+#: appointments.php:1841
 msgid "Login with Facebook"
 msgstr "Logga in med Facebook"
 
-#: appointments.php:1827
+#: appointments.php:1842
 msgid "Login with Twitter"
 msgstr "Logga in med Twitter"
 
-#: appointments.php:1828
+#: appointments.php:1843
 msgid "Login with Google+"
 msgstr "Logga in med Google+"
 
-#: appointments.php:1829
+#: appointments.php:1844
 msgid "Login with WordPress"
 msgstr "Logga in med WordPress"
 
-#: appointments.php:1830 includes/gcal/views/settings-gcal-step-1.php:70
+#: appointments.php:1845 includes/gcal/views/settings-gcal-step-1.php:70
 #: includes/gcal/views/settings-gcal-step-2.php:22
 msgid "Submit"
 msgstr "Skicka"
 
-#: appointments.php:1832
+#: appointments.php:1847
 msgid "Please, wait..."
 msgstr "Vänligen vänta ..."
 
-#: appointments.php:1833
+#: appointments.php:1848
 msgid "You are now logged in"
 msgstr "Du är nu inloggad"
 
-#: appointments.php:1834
+#: appointments.php:1849
 msgid "Login error. Please try again."
 msgstr "Inloggningsfel. Försök igen."
 
-#: appointments.php:1837 includes/class_app_codec.php:369
+#: appointments.php:1852 includes/class_app_codec.php:369
 msgid "Register"
 msgstr "Registrera"
 
-#: appointments.php:1972 includes/helpers-settings.php:71
+#: appointments.php:1987 includes/helpers-settings.php:71
 msgid "Confirmation of your Appointment"
 msgstr "Bekräftelse på din bokning"
 
-#: appointments.php:1974 includes/helpers-settings.php:73
+#: appointments.php:1989 includes/helpers-settings.php:73
 msgid "Reminder for your Appointment"
 msgstr "Påminnelse för din bokning"
 
@@ -2887,7 +2896,7 @@ msgid ""
 "us."
 msgstr "Du har redan ansökt om en tid. Vänta tills du hör från oss."
 
-#: includes/class-app-ajax.php:474 includes/class-app-ajax.php:939
+#: includes/class-app-ajax.php:473 includes/class-app-ajax.php:927
 msgid ""
 "We are sorry, but this time slot is no longer available. Please refresh the "
 "page and try another time slot. Thank you."
@@ -2895,11 +2904,11 @@ msgstr ""
 "Denna tid är inte längre tillgänglig. Uppdatera sidan och försök att boka en "
 "annan tid."
 
-#: includes/class-app-ajax.php:546 includes/class-app-ajax.php:562
+#: includes/class-app-ajax.php:540 includes/class-app-ajax.php:552
 msgid "Appointment could not be saved. Please contact website admin."
 msgstr "Tidsbokningen kunde inte sparas. Vänligen kontakta webbplats admin."
 
-#: includes/class-app-ajax.php:760
+#: includes/class-app-ajax.php:748
 msgid ""
 "Paypal confirmation arrived, but status could not be changed for some "
 "reason. Please check appointment with ID %s"
@@ -2907,11 +2916,11 @@ msgstr ""
 "Paypal bekräftelse kom, men statusen kan inte ändras av någon anledning. "
 "Kontrollera tidsbokning med ID %s"
 
-#: includes/class-app-ajax.php:762
+#: includes/class-app-ajax.php:750
 msgid "Appointment status could not be changed"
 msgstr "Tidsboknings status kunde inte ändras"
 
-#: includes/class-app-ajax.php:768
+#: includes/class-app-ajax.php:756
 msgid ""
 "Last transaction has been reversed. Reason: Payment has been reversed "
 "(charge back)"
@@ -2919,89 +2928,89 @@ msgstr ""
 "Sista transaktionen har återförts. Orsak: Betalning har återförts (betala "
 "tillbaka)"
 
-#: includes/class-app-ajax.php:793
+#: includes/class-app-ajax.php:781
 msgid "Last transaction has been reversed. Reason: Payment has been refunded"
 msgstr "Sista transaktionen har återförts. Orsak: Betalning har återbetalats"
 
-#: includes/class-app-ajax.php:818
+#: includes/class-app-ajax.php:806
 msgid "Last transaction has been reversed. Reason: Payment Denied"
 msgstr "Sista transaktionen har återförts. Orsak: Betalning nekad"
 
-#: includes/class-app-ajax.php:845
+#: includes/class-app-ajax.php:833
 msgid "Customer did not include a confirmed shipping address"
 msgstr "Kunden har inte inkludera en bekräftad leveransadress"
 
-#: includes/class-app-ajax.php:846
+#: includes/class-app-ajax.php:834
 msgid "Funds not captured yet"
 msgstr "Betalning ännu inte mottagen "
 
-#: includes/class-app-ajax.php:847
+#: includes/class-app-ajax.php:835
 msgid "eCheck that has not cleared yet"
 msgstr ""
 
-#: includes/class-app-ajax.php:848
+#: includes/class-app-ajax.php:836
 msgid "Payment waiting for aproval by service provider"
 msgstr "Betalning väntar på godkännande"
 
-#: includes/class-app-ajax.php:849
+#: includes/class-app-ajax.php:837
 msgid "Payment waiting for service provider to handle multi-currency process"
 msgstr ""
 "Betalning väntar tjänsteleverantör för att hantera flera valuta processer"
 
-#: includes/class-app-ajax.php:850
+#: includes/class-app-ajax.php:838
 msgid "Customer did not register or confirm his/her email yet"
 msgstr "Kunden har inte registrera eller bekräfta hans / hennes e-post ännu"
 
-#: includes/class-app-ajax.php:851
+#: includes/class-app-ajax.php:839
 msgid "Waiting for service provider to upgrade the PayPal account"
 msgstr "Väntar på tjänsteleverantören att uppgradera PayPal-konto"
 
-#: includes/class-app-ajax.php:852
+#: includes/class-app-ajax.php:840
 msgid "Waiting for service provider to verify his/her PayPal account"
 msgstr "Väntar på tjänsteleverantören att verifiera hans / hennes PayPal-konto"
 
-#: includes/class-app-ajax.php:856
+#: includes/class-app-ajax.php:844
 msgid "Last transaction is pending. Reason: "
 msgstr "Senaste transaktion pågår. anledning:"
 
-#: includes/class-app-ajax.php:919
+#: includes/class-app-ajax.php:907
 msgid "You need to login to make an appointment."
 msgstr "Du måste logga in för att göra en bokning."
 
-#: includes/class-app-ajax.php:945
+#: includes/class-app-ajax.php:933
 msgid "Service name: "
 msgstr "Tjänstens namn:"
 
-#: includes/class-app-ajax.php:946
+#: includes/class-app-ajax.php:934
 msgid "Date and time: "
 msgstr "Datum och tid:"
 
-#: includes/class-app-ajax.php:947
+#: includes/class-app-ajax.php:935
 msgid "Lasts (approx): "
 msgstr "Varar (ungefär):"
 
-#: includes/class-app-ajax.php:947
+#: includes/class-app-ajax.php:935
 msgid "minutes"
 msgstr "Minuter"
 
-#: includes/class-app-ajax.php:950
+#: includes/class-app-ajax.php:938
 msgid "Price: "
 msgstr "Pris:"
 
-#: includes/class-app-ajax.php:955
+#: includes/class-app-ajax.php:943
 msgid "Service provider: "
 msgstr "Tjänsteutövare:"
 
-#: includes/class-app-ajax.php:1041
+#: includes/class-app-ajax.php:1029
 msgid "Nothing to download!"
 msgstr "Inget finns att ladda ned!"
 
-#: includes/class-app-ajax.php:1150 includes/class-app-ajax.php:1163
-#: includes/class-app-ajax.php:1189
+#: includes/class-app-ajax.php:1138 includes/class-app-ajax.php:1151
+#: includes/class-app-ajax.php:1177
 msgid "Sorry, there was a problem with your request!"
 msgstr ""
 
-#: includes/class-app-ajax.php:1175 includes/class-app-ajax.php:1201
+#: includes/class-app-ajax.php:1163 includes/class-app-ajax.php:1189
 msgid "Service Provider was successfuly deleted."
 msgstr ""
 
@@ -3408,11 +3417,11 @@ msgid ""
 "saved until you click the Save button. Thanks for using Appointments+"
 msgstr ""
 
-#: includes/class-app-worker.php:148
+#: includes/class-app-worker.php:151
 msgid "Our staff"
 msgstr "Vår personal"
 
-#: includes/class-app-worker.php:150
+#: includes/class-app-worker.php:153
 msgid "A specialist"
 msgstr "En specialist"
 
@@ -4242,11 +4251,11 @@ msgstr ""
 msgid "Removal notification"
 msgstr "Bekräftelse på avbokning"
 
-#: includes/pro/includes/addons/app-admin-admin_permissions.php:58
+#: includes/pro/includes/addons/app-admin-admin_permissions.php:59
 msgid "Appointments role access"
 msgstr ""
 
-#: includes/pro/includes/addons/app-admin-admin_permissions.php:67
+#: includes/pro/includes/addons/app-admin-admin_permissions.php:68
 #: includes/pro/includes/addons/app-post_types-worker_names.php:116
 #: includes/pro/includes/addons/app-schedule-default_service.php:82
 msgid "Default"
@@ -6122,7 +6131,7 @@ msgctxt "dummy worker"
 msgid "No"
 msgstr ""
 
-#: admin/class-app-list-table-workers.php:80
+#: admin/class-app-list-table-workers.php:94
 msgctxt "user pfofile link on Service Providers screen"
 msgid "Profile"
 msgstr ""
@@ -6133,7 +6142,7 @@ msgctxt "paging"
 msgid "%1$s of %2$s"
 msgstr "%1$s av %2$s"
 
-#: admin/views/inline-edit.php:123 appointments.php:1831
+#: admin/views/inline-edit.php:123 appointments.php:1846
 #: includes/class-app-tutorial.php:225
 #: includes/pro/includes/addons/app-locations-location_support.php:155
 #: includes/shortcodes/class-app-shortcode-confirmation.php:210
@@ -6178,19 +6187,19 @@ msgctxt "Enter \"yes\" for the European Union countries."
 msgid "no"
 msgstr ""
 
-#: includes/helpers.php:949
+#: includes/helpers.php:960
 msgctxt "less than 60 minut"
 msgid "%d minutes"
 msgstr ""
 
-#: includes/helpers.php:953
+#: includes/helpers.php:964
 msgctxt "more than 60 minuts, hours"
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/helpers.php:960
+#: includes/helpers.php:971
 msgctxt "more than 60 minuts, minutes"
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -6231,3 +6240,6 @@ msgstr ""
 msgctxt "Discard existing info"
 msgid "Cancel"
 msgstr "Avbryt"
+
+#~ msgid "Services Provided*"
+#~ msgstr "Tjänst(er) som erhålls*"
