@@ -162,3 +162,8 @@ div.appointments-settings .notice-app-wp-version {
     margin: 1em 0;
     max-width: 100px;
 }
+.inline-edit-row .app-time {
+    float: left;
+    width: 30%;
+    padding-left:5px;
+}

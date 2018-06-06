@@ -253,13 +253,16 @@ function appointments_get_weekly_schedule_slots( $now = false, $service_id = 0, 
  * @param int $service_id
  * @param int $worker_id
  * @param int $location_id
+ * @param boolean $force Force to get hours.
  *
  * @return array
  */
-function appointments_get_worker_weekly_start_hours( $service_id = 0, $worker_id = 0, $location_id = 0 ) {
+function appointments_get_worker_weekly_start_hours( $service_id = 0, $worker_id = 0, $location_id = 0, $force = false ) {
 
-	if ( ! $worker_id || ! appointments_is_worker( $worker_id ) ) {
-		return array();
+	if ( ! $force ) {
+		if ( ! $worker_id || ! appointments_is_worker( $worker_id ) ) {
+			return array();
+		}
 	}
 
 	$appointments = appointments();

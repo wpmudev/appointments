@@ -65,13 +65,13 @@
 								<input type="text" name="date" class="datepicker" size="12" placeholder="YYYY-MM-DD" value="<?php echo esc_attr( $start_date_timestamp ); ?>"  />
 							</span>
 				</label>
-				<label style="float:left;width:30%; padding-left:5px;">
+                <label class="app-time">
                     <select name="time" >
                         <option value=""><?php esc_html_e( 'Unknown', 'appointments' ); ?></option>
 <?php
 $_start_time = $app_id ? strtotime( $app->get_start_time() ): '';
 $day_start = strtotime( $app->start );
-$slots = appointments_get_worker_weekly_start_hours( $app->service, $app->worker, $app->location );
+$slots = appointments_get_worker_weekly_start_hours( $app->service, $app->worker, $app->location, true );
 foreach ( $slots as $slot ) {
 	$h = strtotime( $slot );
 	printf(
