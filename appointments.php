@@ -985,10 +985,11 @@ if ( ! class_exists( 'Appointments' ) ) {
 	 * Helper function to create a time table for monthly schedule
 	 *
 	 * @since 2.2.1 Added `hide_today` argument.
+	 * @since 2.3.2 Added `worker_id` argument.
 	 */
-		function get_timetable( $day_start, $capacity, $schedule_key = false, $hide_today = false ) {
+		function get_timetable( $day_start, $capacity, $schedule_key = false, $hide_today = false, $worker_id = 0 ) {
 			$local_time = current_time( 'timestamp' );
-			$data = $this->_get_timetable_slots( $day_start, $capacity, $schedule_key );
+			$data = $this->_get_timetable_slots( $day_start, $capacity, $schedule_key, $worker_id );
 			// We need this only for the first timetable
 			// Otherwise $time will be calculated from $day_start
 			if ( isset( $_GET['wcalendar'] ) && (int) $_GET['wcalendar'] ) {

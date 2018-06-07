@@ -44,10 +44,11 @@ function appointments_delete_timetables_cache() {
 
 /**
  * @since 2.2.1 Added `hide_today` argument.
+ * @since 2.3.2 Added `worker_id` argument.
  */
-function appointments_get_timetable( $day_start, $capacity, $schedule_key = false, $hide_today = false ) {
+function appointments_get_timetable( $day_start, $capacity, $schedule_key = false, $hide_today = false, $worker_id = 0 ) {
 	global $appointments;
-	return $appointments->get_timetable( $day_start, $capacity, $schedule_key, $hide_today );
+	return $appointments->get_timetable( $day_start, $capacity, $schedule_key, $hide_today, $worker_id );
 }
 
 function appointments_get_capacity() {
@@ -588,9 +589,9 @@ function appointments_monthly_calendar( $timestamp = false, $args = array() ) {
 
 						//Do not include the timetable in the widget, but run the appointments_get_timetable to check if free or busy
 						if ( ! $args['widget'] ) {
-							$time_table .= appointments_get_timetable( $ccs, $capacity, $schedule_key, $args['hide_today_times'] );
+							$time_table .= appointments_get_timetable( $ccs, $capacity, $schedule_key, $args['hide_today_times'], $args['worker_id'] );
 						} else {
-							appointments_get_timetable( $ccs, $capacity, $schedule_key, $args['hide_today_times'] );
+							appointments_get_timetable( $ccs, $capacity, $schedule_key, $args['hide_today_times'], $args['worker_id'] );
 						}
 						// Look if we have at least one cell free from get_timetable function
 						if ( $appointments->is_a_timetable_cell_free ) {
