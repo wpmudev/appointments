@@ -28,9 +28,16 @@ if ( empty( $pages ) ) {
 				<label for="service-capacity-new"><?php _e( 'Service Capacity', 'appointments' ); ?></label>
 			</th>
             <td>
-                <input id="service-capacity-new" type="number" name="service_capacity" value="" min="0" max="<?php echo esc_attr( $number_of_workers ); ?>" />
+<?php if ( 0 === $number_of_workers ) { ?>
+<input type="hidden" name="service_capacity" value="0" />
+   <div class="notice notice-error inline">
+        <p><?php _e( 'To setup capacity add some workers first!', 'appointments' ); ?></p>
+    </div>
+<?php } else { ?>
+                <input id="service-capacity-new" type="number" name="service_capacity" value="0" min="0" max="<?php echo esc_attr( $number_of_workers ); ?>" />
                 <div class="app-ui-slider" data-target-id="service-capacity-new" data-min="0" data-max="<?php echo esc_attr( $number_of_workers ); ?>"></div>
                 <p class="description"><?php esc_html_e( 'When you set up "Service Capacity" to "0" it will be limited only by the number of available Service Providers.', 'appointments' ); ?></p>
+<?php } ?>
 			</td>
 		</tr>
 		<tr>
