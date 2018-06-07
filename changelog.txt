@@ -10,6 +10,7 @@
 - Improved column "Price".
 - Improved Service "Service Capacity" edit field.
 - Excluded "removed" and "completed" statuses from is_busy() calculations.
+- Added asterisk to GDPR checkbox label on appointment form.
 
 2018-05-31 - 2.3.1
 -------------------------------

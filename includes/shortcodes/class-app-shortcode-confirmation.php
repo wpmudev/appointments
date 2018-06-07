@@ -200,7 +200,7 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 <?php if ( $gdpr_checkbox_show ) { ?>
 				<div class="appointments-gdpr-confirmation">
 					<label data-alert="<?php echo esc_attr( appointments_get_option( 'gdpr_checkbox_alert' ) ); ?>">
-						<input type="checkbox" class="appointments-gdpr-agree" id="<?php echo esc_attr( apply_filters( 'app-shortcode-confirmation-gdpr_field_id', 'appointments-field-gdpr-agree' ) ); ?>" />&nbsp;<?php echo esc_html( appointments_get_option( 'gdpr_checkbox_text' ) ); ?>
+						<input type="checkbox" class="appointments-gdpr-agree" id="<?php echo esc_attr( apply_filters( 'app-shortcode-confirmation-gdpr_field_id', 'appointments-field-gdpr-agree' ) ); ?>" />&nbsp;<?php echo esc_html( appointments_get_option( 'gdpr_checkbox_text' ) ); ?><b class="required">*</b>
 					</label>
 				</div>
 <?php } ?>
