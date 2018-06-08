@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-06-06 10:30:31+00:00\n"
+"POT-Creation-Date: 2018-06-08 17:56:59+00:00\n"
 "PO-Revision-Date: 2018-05-05 07:38:59+0000\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
@@ -1228,7 +1228,7 @@ msgid "Description"
 msgstr "Descrição"
 
 #: admin/class-app-admin-user-profile.php:47
-#: includes/class-app-appointment.php:1489
+#: includes/class-app-appointment.php:1514
 msgid "Client %s cancelled appointment with ID: %s"
 msgstr "Cliente %s cancelou data marcada com ID: %s"
 
@@ -1675,7 +1675,7 @@ msgstr "Marcações realizadas"
 
 #: admin/pages/class-admin-appointments-page.php:157
 #: admin/views/page-appointments-status-filter.php:6
-#: includes/class-app-appointment.php:1210
+#: includes/class-app-appointment.php:1235
 msgid "Reserved by GCal"
 msgstr "Marcações feitas através do Calendário Google"
 
@@ -1819,7 +1819,7 @@ msgid "GDPR"
 msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:50
-#: admin/views/page-settings-tab-services-section-new-service.php:78
+#: admin/views/page-settings-tab-services-section-new-service.php:85
 msgid "Add new Service"
 msgstr "Adicionar nova Tarefa"
 
@@ -2057,17 +2057,17 @@ msgid "Active"
 msgstr "Activo"
 
 #: admin/views/page-appointments-status-filter.php:4
-#: includes/class-app-appointment.php:1206
+#: includes/class-app-appointment.php:1231
 msgid "Pending"
 msgstr "Pendente"
 
 #: admin/views/page-appointments-status-filter.php:5
-#: includes/class-app-appointment.php:1209
+#: includes/class-app-appointment.php:1234
 msgid "Completed"
 msgstr "Realizado"
 
 #: admin/views/page-appointments-status-filter.php:7
-#: includes/class-app-appointment.php:1211
+#: includes/class-app-appointment.php:1236
 msgid "Removed"
 msgstr "Eliminado"
 
@@ -2215,8 +2215,8 @@ msgid "Assign dummy service providers to"
 msgstr "Atribuir prestadores de serviços fictícios para"
 
 #: admin/views/page-settings-tab-main-section-accesibility.php:76
-#: admin/views/page-settings-tab-services-section-edit-service.php:63
-#: admin/views/page-settings-tab-services-section-new-service.php:66
+#: admin/views/page-settings-tab-services-section-edit-service.php:70
+#: admin/views/page-settings-tab-services-section-new-service.php:73
 #: admin/views/page-settings-tab-workers-section-edit-worker.php:66
 #: admin/views/page-settings-tab-workers-section-new-worker.php:86
 msgid "None"
@@ -2930,31 +2930,36 @@ msgstr "Nome das Tarefas"
 msgid "Service Capacity"
 msgstr "Capacidade de Tarefas"
 
-#: admin/views/page-settings-tab-services-section-edit-service.php:30
-#: admin/views/page-settings-tab-services-section-new-service.php:33
+#: admin/views/page-settings-tab-services-section-edit-service.php:31
+#: admin/views/page-settings-tab-services-section-new-service.php:34
+msgid "To setup capacity add some workers first!"
+msgstr ""
+
+#: admin/views/page-settings-tab-services-section-edit-service.php:36
+#: admin/views/page-settings-tab-services-section-new-service.php:39
 msgid ""
 "When you set up \"Service Capacity\" to \"0\" it will be limited only by the "
 "number of available Service Providers."
 msgstr ""
 
-#: admin/views/page-settings-tab-services-section-edit-service.php:35
-#: admin/views/page-settings-tab-services-section-new-service.php:38
+#: admin/views/page-settings-tab-services-section-edit-service.php:42
+#: admin/views/page-settings-tab-services-section-new-service.php:45
 msgid "Service Duration"
 msgstr "Duração das Tarefas"
 
-#: admin/views/page-settings-tab-services-section-edit-service.php:51
-#: admin/views/page-settings-tab-services-section-new-service.php:54
+#: admin/views/page-settings-tab-services-section-edit-service.php:58
+#: admin/views/page-settings-tab-services-section-new-service.php:61
 msgid "Service Price"
 msgstr "Preço de Tarefas"
 
-#: admin/views/page-settings-tab-services-section-edit-service.php:59
-#: admin/views/page-settings-tab-services-section-new-service.php:62
+#: admin/views/page-settings-tab-services-section-edit-service.php:66
+#: admin/views/page-settings-tab-services-section-new-service.php:69
 #: admin/views/page-settings-tab-workers-section-edit-worker.php:62
 #: admin/views/page-settings-tab-workers-section-new-worker.php:82
 msgid "Description Page"
 msgstr "Pagina Descriptiva"
 
-#: admin/views/page-settings-tab-services-section-edit-service.php:75
+#: admin/views/page-settings-tab-services-section-edit-service.php:82
 #: admin/views/page-settings-tab-workers-section-edit-worker.php:78
 #: includes/pro/includes/addons/app-locations-location_support.php:152
 msgid "Save"
@@ -3047,7 +3052,7 @@ msgid "Future transactions"
 msgstr "Futuras transações"
 
 #: admin/views/page-transactions.php:60 admin/views/page-transactions.php:63
-#: includes/class-app-appointment.php:1222
+#: includes/class-app-appointment.php:1247
 msgid "None yet"
 msgstr "Ainda nenhuma"
 
@@ -3194,48 +3199,48 @@ msgstr "%s Data Marcada"
 msgid "Something wrong about the submitted %s"
 msgstr "Algo errado com o %s enviado"
 
-#: appointments.php:1841
+#: appointments.php:1842
 msgid "Login with Facebook"
 msgstr "Conectar-se com Facebook"
 
-#: appointments.php:1842
+#: appointments.php:1843
 msgid "Login with Twitter"
 msgstr "Conectar-se com Twitter"
 
-#: appointments.php:1843
+#: appointments.php:1844
 msgid "Login with Google+"
 msgstr "Conectar-se com Google+"
 
-#: appointments.php:1844
+#: appointments.php:1845
 msgid "Login with WordPress"
 msgstr "Conectar-se com WordPress"
 
-#: appointments.php:1845 includes/gcal/views/settings-gcal-step-1.php:70
+#: appointments.php:1846 includes/gcal/views/settings-gcal-step-1.php:70
 #: includes/gcal/views/settings-gcal-step-2.php:22
 msgid "Submit"
 msgstr "Enviar"
 
-#: appointments.php:1847
+#: appointments.php:1848
 msgid "Please, wait..."
 msgstr "Por favor, aguardar..."
 
-#: appointments.php:1848
+#: appointments.php:1849
 msgid "You are now logged in"
 msgstr "Você está agora conectado"
 
-#: appointments.php:1849
+#: appointments.php:1850
 msgid "Login error. Please try again."
 msgstr "Erro de conexão. Por favor, tente novamente."
 
-#: appointments.php:1852 includes/class_app_codec.php:369
+#: appointments.php:1853 includes/class_app_codec.php:369
 msgid "Register"
 msgstr "Registração"
 
-#: appointments.php:1987 includes/helpers-settings.php:71
+#: appointments.php:1988 includes/helpers-settings.php:71
 msgid "Confirmation of your Appointment"
 msgstr "Confirmação da sua Data Marcada"
 
-#: appointments.php:1989 includes/helpers-settings.php:73
+#: appointments.php:1990 includes/helpers-settings.php:73
 msgid "Reminder for your Appointment"
 msgstr "Lembrete para a sua Data Marcada"
 
@@ -3405,19 +3410,19 @@ msgstr "Lamentamos; um problema ocorreu com o seu pedido!"
 msgid "Service Provider was successfuly deleted."
 msgstr "O Provedor de Tarefas foi suprimido com sucesso."
 
-#: includes/class-app-appointment.php:1207
+#: includes/class-app-appointment.php:1232
 msgid "Paid"
 msgstr "Pago"
 
-#: includes/class-app-appointment.php:1208
+#: includes/class-app-appointment.php:1233
 msgid "Confirmed"
 msgstr "Confirmado"
 
-#: includes/class-app-appointment.php:1478 includes/default_filters.php:121
+#: includes/class-app-appointment.php:1503 includes/default_filters.php:121
 msgid "The appointment does not exist."
 msgstr ""
 
-#: includes/class-app-appointment.php:1482
+#: includes/class-app-appointment.php:1507
 msgid "The appointment has been already cancelled."
 msgstr ""
 
@@ -6840,7 +6845,7 @@ msgctxt "paging"
 msgid "%1$s of %2$s"
 msgstr "%1$s of %2$s"
 
-#: admin/views/inline-edit.php:123 appointments.php:1846
+#: admin/views/inline-edit.php:123 appointments.php:1847
 #: includes/class-app-tutorial.php:225
 #: includes/pro/includes/addons/app-locations-location_support.php:155
 #: includes/shortcodes/class-app-shortcode-confirmation.php:210
@@ -6885,19 +6890,19 @@ msgctxt "Enter \"yes\" for the European Union countries."
 msgid "no"
 msgstr ""
 
-#: includes/helpers.php:960
+#: includes/helpers.php:955
 msgctxt "less than 60 minut"
 msgid "%d minutes"
 msgstr ""
 
-#: includes/helpers.php:964
+#: includes/helpers.php:959
 msgctxt "more than 60 minuts, hours"
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/helpers.php:971
+#: includes/helpers.php:966
 msgctxt "more than 60 minuts, minutes"
 msgid "%d minute"
 msgid_plural "%d minutes"
