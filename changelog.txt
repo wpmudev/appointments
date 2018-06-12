@@ -1,3 +1,7 @@
+2018-xx-xx - 2.3.3
+-------------------------------
+- Fixed time display format to selected in WordPress options.
+
 2018-06-12 - 2.3.2
 -------------------------------
 - Added an option to force load Appointment's scripts and styles.
