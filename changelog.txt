@@ -1,4 +1,4 @@
-2018-xx-xx - 2.3.2
+2018-06-12 - 2.3.2
 -------------------------------
 - Added an option to force load Appointment's scripts and styles.
 - Added a limit for "Service Capacity" on a service add and edit screen to the number of defined workers.
