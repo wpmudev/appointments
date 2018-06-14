@@ -201,14 +201,17 @@ class App_Locations_GoogleMaps {
 					</td>
 				</tr>
 				<tr>
-					<th scope="row"><?php _e('Map appearance', 'appointments')?></th>
+					<th scope="row" rowspan="4"><?php _e('Map appearance', 'appointments')?></th>
 					<td>
 						<label for="app-google_maps-zoom">
 							<?php _e('Zoom:', 'appointments'); ?>
 							<input type="text" size="4" id="app-google_maps-zoom" name="google_maps[overrides][zoom]" value="<?php esc_attr_e(@$this->_data['google_maps']['overrides']['zoom']); ?>" />
 							<em class="app-inline_help"><?php _e('Numeric value', 'appointments'); ?></em>
 						</label>
-						<br />
+					</td>
+				</tr>
+				<tr>
+					<td>
 						<label for="app-google_maps-type">
 							<?php _e('Type:', 'appointments'); ?>
 							<select name="google_maps[overrides][map_type]">
@@ -220,7 +223,10 @@ class App_Locations_GoogleMaps {
 							<?php } ?>
 							</select>
 						</label>
-						<br />
+					</td>
+				</tr>
+				<tr>
+					<td>
 						<label for="app-google_maps-units">
 							<?php _e('Units:', 'appointments'); ?>
 							<select name="google_maps[overrides][units]">
@@ -232,28 +238,35 @@ class App_Locations_GoogleMaps {
 							<?php } ?>
 							</select>
 						</label>
-						<br />
-						<label for="app-google_maps-show_images">
+					</td>
+				</tr>
+				<tr>
+					<td>
 							<input type="hidden" name="google_maps[overrides][show_images]" value="" />
-							<input type="checkbox" id="app-google_maps-show_images" name="google_maps[overrides][show_images]" value="1" <?php checked(1, @$this->_data['google_maps']['overrides']['show_images']); ?> />
-							<?php _e('Show images', 'appointments'); ?>
+<input type="checkbox" id="app-google_maps-show_images" name="google_maps[overrides][show_images]" value="1" <?php checked(1, @$this->_data['google_maps']['overrides']['show_images']); ?> class="switch-button" data-on="<?php esc_attr_e('Show images', 'appointments'); ?>"/>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row" rowspan="3"><?php _e('Automatic map overlays', 'appointments')?></th>
+					<td>
+						<p><?php _e('Automatically insert maps...', 'appointments'); ?></p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="app-google_maps-my_appointments">
+							<input type="hidden" name="google_maps[my_appointments]" value="" />
+                            <input type="checkbox" id="app-google_maps-my_appointments" name="google_maps[my_appointments]" value="1" <?php checked(1, $this->_data['google_maps']['my_appointments']); ?> class="switch-button" data-on="<?php esc_attr_e('After My Appointments shortcode output', 'appointments'); ?>" />
 						</label>
 					</td>
 				</tr>
 				<tr>
-					<th scope="row"><?php _e('Automatic map overlays', 'appointments')?></th>
 					<td>
-						<p><?php _e('Automatically insert maps...', 'appointments'); ?></p>
-						<label for="app-google_maps-my_appointments">
-							<input type="hidden" name="google_maps[my_appointments]" value="" />
-							<input type="checkbox" id="app-google_maps-my_appointments" name="google_maps[my_appointments]" value="1" <?php checked(1, $this->_data['google_maps']['my_appointments']); ?> />
-							<?php _e('After My Appointments shortcode output', 'appointments'); ?>
-						</label>
 						<br />
 						<label for="app-google_maps-all_appointments">
 							<input type="hidden" name="google_maps[all_appointments]" value="" />
-							<input type="checkbox" id="app-google_maps-all_appointments" name="google_maps[all_appointments]" value="1" <?php checked(1, $this->_data['google_maps']['all_appointments']); ?> />
-							<?php _e('After All Appointments shortcode output', 'appointments'); ?>
+                            <input type="checkbox" id="app-google_maps-all_appointments" name="google_maps[all_appointments]" value="1" <?php checked(1, $this->_data['google_maps']['all_appointments']); ?> 
+class="switch-button" data-on="<?php esc_attr_e('After All Appointments shortcode output', 'appointments'); ?>" />
 						</label>
 					</td>
 				</tr>
