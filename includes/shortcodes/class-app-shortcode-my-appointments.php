@@ -275,9 +275,18 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 				$ret .= apply_filters( 'app-shortcode-my_appointments-after_status', '', $r );
 				// If allowed so, a worker can confirm an appointment himself
 				if ( $allow_confirm ) {
-					if ( 'pending' == $r->status ) {
-						$is_readonly = ''; } else { 						$is_readonly = ' readonly="readonly"'; }
-					$ret .= '<td><input class="app-my-appointments-confirm" type="checkbox" name="app_confirm['.$r->ID.']" '.$is_readonly.' /></td>';
+					$is_readonly = '';
+					if ( 'pending' != $r->status ) {
+						$is_readonly = ' readonly="readonly" disabled="disabled"';
+					}
+					$ret .= '<td>';
+					if ( 'confirmed' === $r->status ) {
+						$ret .= '-';
+					} else {
+						$ret .= '<input class="app-my-appointments-confirm" type="checkbox" name="app_confirm['.$r->ID.']" '.$is_readonly.' />';
+					}
+
+					$ret .= '</td>';
 				}
 				// If allowed so, a client can cancel an appointment
 				if ( $a_cancel ) {
@@ -285,7 +294,10 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 					$stat = $r->status;
 					$in_allowed_stat = apply_filters( 'app_cancel_allowed_status', ('pending' == $stat || 'confirmed' == $stat || 'paid' == $stat), $stat, $r->ID );
 					if ( $in_allowed_stat ) {
-						$is_readonly = ''; } else { 						$is_readonly = ' readonly="readonly"'; }
+						$is_readonly = '';
+					} else {
+						$is_readonly = ' readonly="readonly"';
+					}
 					$ret .= '<td><input id="cancel-' . $r->ID . '" data-app-id="' . $r->ID . '" class="app-my-appointments-cancel" type="checkbox" name="app_cancel['.$r->ID.']" '.$is_readonly.' /></td>';
 				}
 

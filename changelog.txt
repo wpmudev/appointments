@@ -2,6 +2,7 @@
 -------------------------------
 - Fixed time display format to selected in WordPress options.
 - Improved Object Cache clear.
+- Improved "confirmation" checkbox on Service Provider Profile page.
 
 2018-06-12 - 2.3.2
 -------------------------------
