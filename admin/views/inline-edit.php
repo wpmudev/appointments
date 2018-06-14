@@ -73,14 +73,16 @@ $format = get_option( 'time_format' );
 $_start_time = $app_id ? strtotime( $app->get_start_time() ): '';
 $day_start = strtotime( $app->start );
 $slots = appointments_get_worker_weekly_start_hours( $app->service, $app->worker, $app->location, true );
-foreach ( $slots as $slot ) {
-	$h = strtotime( $slot );
-	printf(
-		'<option value="%s" %s>%s</option>',
-		esc_attr( $slot ),
-		selected( $_start_time, $h, false ),
-		esc_html( date( $format, strtotime( $slot ) ) )
-	);
+if ( is_array( $slots ) ) {
+	foreach ( $slots as $slot ) {
+		$h = strtotime( $slot );
+		printf(
+			'<option value="%s" %s>%s</option>',
+			esc_attr( $slot ),
+			selected( $_start_time, $h, false ),
+			esc_html( date( $format, strtotime( $slot ) ) )
+		);
+	}
 }
 ?>
 					</select>

@@ -1,7 +1,6 @@
 <?php
-
 abstract class Appointments_Notification {
-	
+
 	/** @var  Appointments_Notifications_Manager */
 	protected $manager;
 
@@ -20,22 +19,16 @@ abstract class Appointments_Notification {
 	 * @return bool
 	 */
 	public static function record_sent( $app_id = null, $type = null ) {
-
-		if( is_null( $app_id ) || is_null( $type ) ){
+		if ( is_null( $app_id ) || is_null( $type ) ) {
 			return false;
 		}
-
 		$meta_key = '_notifications_sent';
 		$notifications_sent = appointments_get_appointment_meta( $app_id, $meta_key );
-
-		if( ! is_array( $notifications_sent ) ){
+		if ( ! is_array( $notifications_sent ) ) {
 			$notifications_sent = array();
 		}
-
 		$notifications_sent[ $type ] = true;
-
 		return appointments_update_appointment_meta( $app_id, $meta_key, $notifications_sent );
-
 	}
 
 	/**
@@ -60,17 +53,14 @@ abstract class Appointments_Notification {
 			'note' => '',
 			'address' => '',
 			'email' => '',
-			'city' => ''
+			'city' => '',
 		);
-
 		$args = wp_parse_args( $args, $defaults );
-
 		if ( ! empty( $args['price'] ) && ! empty( $args['deposit'] ) ) {
 			$args['balance'] = (float) $args['price'] - (float) $args['deposit'];
 		} else {
 			$args['balance'] = ! empty( $args['price'] ) ? $args['price'] : 0.0;
 		}
-
 		$replacement = array(
 			'/\bSITE_NAME\b/U'        => wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES ),
 			'/\bCLIENT\b/U'           => $args['user'],
@@ -86,13 +76,10 @@ abstract class Appointments_Notification {
 			'/\bEMAIL\b/U'            => $args['email'],
 			'/\bCITY\b/U'             => $args['city'],
 		);
-
 		$replacement = apply_filters( 'appointments_notification_replacements', $replacement, $notification_type, $text, $object );
-
 		foreach ( $replacement as $macro => $repl ) {
 			$text = preg_replace( $macro, $repl, $text );
 		}
-
 		return $text;
 	}
 }

@@ -70,8 +70,20 @@ jQuery( document).ready( function( $ ) {
                 else {
                     $(".appointments-confirmation-wrapper").show();
                     $(".appointments-confirmation-service").html(response.service);
+                    /**
+                     * Service location
+                     */
+                    if (response.service_location){
+                        $(".appointments-confirmation-service_location").html(response.service_location).show();
+                    }
                     if (response.worker){
                         $(".appointments-confirmation-worker").html(response.worker).show();
+                    }
+                    /**
+                     * worker location
+                     */
+                    if (response.worker_location){
+                        $(".appointments-confirmation-worker_location").html(response.worker_location).show();
                     }
                     $(".appointments-confirmation-start").html(response.start);
                     $(".appointments-confirmation-end").html(response.end);

@@ -895,8 +895,8 @@ class Appointments_AJAX {
 
 		$values = explode( ":", $_POST["value"] );
 		$location = $values[0];
-		$service = $values[1];
-		$worker = $values[2];
+		$service_id = $service = $values[1];
+		$worker_id = $worker = $values[2];
 		$start = $values[3];
 		$end = $values[4];
 
@@ -934,7 +934,7 @@ class Appointments_AJAX {
 			)));
 		}
 
-		$service_obj = appointments_get_service($service);
+        $service_obj = appointments_get_service($service);
 		$service = '<label><span>' . __('Service name: ', 'appointments') .  '</span>'. apply_filters('app_confirmation_service', stripslashes($service_obj->name), $service_obj->name) . '</label>';
 		$start = '<label><span>' . __('Date and time: ', 'appointments') . '</span>'. apply_filters('app_confirmation_start', date_i18n($appointments->datetime_format, $start), $start) . '</label>';
 		$end = '<label><span>' . __('Lasts (approx): ', 'appointments') . '</span>'. apply_filters('app_confirmation_lasts', $service_obj->duration . " " . __('minutes', 'appointments'), $service_obj->duration) . '</label>';
@@ -943,12 +943,10 @@ class Appointments_AJAX {
 			? '<label><span>' . __('Price: ', 'appointments') .  '</span>'. apply_filters('app_confirmation_price', $price . " " . $display_currency, $price) . '</label>'
 			: 0
 			;
-
 		$worker = !empty($worker)
 			? '<label><span>' . __('Service provider: ', 'appointments' ) . '</span>'. apply_filters('app_confirmation_worker', stripslashes(appointments_get_worker_name($worker)), $worker) . '</label>'
 			: ''
-			;
-
+            ;
 		$ask_name = !empty($appointments->options['ask_name'])
 			? 'ask'
 			: ''
@@ -985,8 +983,10 @@ class Appointments_AJAX {
 			;
 
 		$reply_array = array(
+			'service_id'=> intval( $service_id ),
 			'service'	=> $service,
 			'worker'	=> $worker,
+			'worker_id' => intval( $worker_id ),
 			'start'		=> $start,
 			'end'		=> $end,
 			'price'		=> $price,

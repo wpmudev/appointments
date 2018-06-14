@@ -143,7 +143,9 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 			<fieldset class="<?php echo esc_attr( $gdpr_checkbox_show? 'check-gdpr-agree':'' ); ?>">
 				<legend><?php echo $args['title']; ?></legend>
 				<div class="appointments-confirmation-service"></div>
+				<div class="appointments-confirmation-service_location" style="display:none"></div>
 				<div class="appointments-confirmation-worker" style="display:none"></div>
+				<div class="appointments-confirmation-worker_location" style="display:none"></div>
 				<div class="appointments-confirmation-start"></div>
 				<div class="appointments-confirmation-end"></div>
 				<div class="appointments-confirmation-price" style="display:none"></div>

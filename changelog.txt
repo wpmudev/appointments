@@ -4,6 +4,8 @@
 - Improved Object Cache clear.
 - Improved "confirmation" checkbox on Service Provider Profile page.
 - Added asterisk to additional, required fields (pro only).
+- Added locations on appointment form.
+- Added SERVICE_LOCATION placeholder replaced by a service Location in email templates.
 
 2018-06-12 - 2.3.2
 -------------------------------
