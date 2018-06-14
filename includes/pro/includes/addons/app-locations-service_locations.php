@@ -165,13 +165,17 @@ class App_Locations_ServiceLocations {
 			<th scope="row">
 				<label for="service_location"><?php _e( 'Location', 'appointments' ); ?></label>
 			</th>
-			<td>
+            <td>
+<?php if ( empty( $locations ) ) {
+	_e( 'There is no locations to choose. Please add some first.', 'appointments' );
+} else { ?>
 				<select name="service_location" id="service_location">
 					<option value=""></option>
 					<?php foreach ( $locations as $location ) :  ?>
 						<option value="<?php echo $location->id; ?>"><?php echo esc_html( $location->address ); ?></option>
 					<?php endforeach; ?>
-				</select>
+                </select>
+<?php } ?>
 			</td>
 		</tr>
 		<?php

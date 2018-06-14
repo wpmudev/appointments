@@ -174,12 +174,17 @@ class App_Locations_WorkerLocations {
 				<label for="worker_location"><?php _e( 'Location', 'appointments' ); ?></label>
 			</th>
 			<td>
-				<select name="worker_location" id="worker_location">
-					<option value=""></option>
-					<?php foreach ( $locations as $location ) :  ?>
+<?php if ( empty( $locations ) ) {
+	_e( 'There is no locations to choose. Please add some first.', 'appointments' );
+} else {
+?>
+		<select name="worker_location" id="worker_location">
+			<option value=""></option>
+			<?php foreach ( $locations as $location ) :  ?>
 						<option value="<?php echo $location->get_id(); ?>"><?php echo esc_html( $location->get_admin_label() ); ?></option>
 					<?php endforeach; ?>
-				</select>
+		</select>
+<?php } ?>
 			</td>
 		</tr>
 		<?php

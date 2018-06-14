@@ -20,7 +20,7 @@ if ( empty( $pages ) ) {
 				<label for="worker-dummy"><?php esc_html_e( 'Dummy?', 'appointments' ); ?></label>
 			</th>
 			<td>
-				<input id="worker-dummy" class="widefat" type="checkbox" name="worker_dummy"/>
+            <input id="worker-dummy" class="switch-button" type="checkbox" name="worker_dummy" data-on="<?php esc_html_e( 'Yes', 'appointments' ); ?>" data-off="<?php esc_html_e( 'No', 'appointments' ); ?>" />
 			</td>
 		</tr>
 		<tr>

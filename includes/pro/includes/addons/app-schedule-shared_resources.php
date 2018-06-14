@@ -48,8 +48,9 @@ class App_Schedule_SharedResources {
 			if ( empty( $service->ID ) || $service->ID == $service_id ) { continue; // Don't include empty hits or current service
 			}			$checked = in_array( $service->ID, $shared_ids ) ? 'checked="checked"' : '';
 			$disabled = in_array( $service->ID, $shared_ids ) && ! in_array( $service->ID, $direct_ids ) ? 'disabled="disabled"' : '';
+			$data_on = esc_attr( sprintf( 'Share with %s', 'appointments' ), $service->name );
 			$out .= "<label for='app-shared_service-{$service_id}-{$service->ID}'>" .
-				"<input type='checkbox' id='app-shared_service-{$service_id}-{$service->ID}' value='{$service->ID}' name='shared_resources[{$service_id}][]' {$checked} {$disabled} />" .
+				"<input type='checkbox' id='app-shared_service-{$service_id}-{$service->ID}' value='{$service->ID}' name='shared_resources[{$service_id}][]' {$checked} {$disabled} class='switch-button' data-on='{$data_on}'/>" .
 				'&nbsp;' .
 				$service->name .
 			'</label><br />';
@@ -65,20 +66,18 @@ class App_Schedule_SharedResources {
 		?>
 			<th scope="row"><?php _e( 'Shares resources with', 'appointments' ); ?></th>
 			<td class="app-shared_service">
-				<?php foreach ( $all as $service ) :  ?>
-					<?php
-					if ( empty( $service->ID ) ) {
-						continue;
-					} // Don't include empty hits or current service
-						$disabled = in_array( $service->ID, $shared_ids ) && ! in_array( $service->ID, $direct_ids ) ? 'disabled="disabled"' : '';
-					?>
-					<label>
-						<input type="checkbox" id="app-shared_service-<?php echo esc_attr( $service->ID ); ?>"
-						       value="<?php echo esc_attr( $service->ID ); ?>" name='shared_resources[]'
-								<?php echo $disabled; ?>
-						/>&nbsp;<?php echo esc_html( $service->name ); ?>
-                    </label>
-				<?php endforeach; ?>
+<?php
+foreach ( $all as $service ) {
+	if ( empty( $service->ID ) ) {
+		continue;
+	} // Don't include empty hits or current service
+	$data_on = sprintf( __( 'Share with "%s"', 'appointments' ), $service->name );
+	$disabled = in_array( $service->ID, $shared_ids ) && ! in_array( $service->ID, $direct_ids ) ? 'disabled="disabled"' : '';
+?>
+<label><input type="checkbox" id="app-shared_service-<?php echo esc_attr( $service->ID ); ?>" value="<?php echo esc_attr( $service->ID ); ?>" name='shared_resources[]' <?php echo $disabled; ?> class="switch-button" data-on="<?php echo esc_attr( $data_on ); ?>" data-off="<?php esc_attr_e( 'Do not share', 'appointments' ); ?>" /></label>
+<?php
+}
+?>
 			</td>
 		<?php
 	}

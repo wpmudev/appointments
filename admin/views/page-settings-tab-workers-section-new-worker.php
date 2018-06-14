@@ -38,7 +38,7 @@ $workers_dropdown = wp_dropdown_users( array(
 				<label for="worker-dummy"><?php _e( 'Dummy?', 'appointments' ); ?></label>
 			</th>
 			<td>
-				<input id="worker-dummy" class="widefat" type="checkbox" name="dummy"/>
+				<input id="worker-dummy" class="switch-button" type="checkbox" name="dummy" data-on="<?php esc_html_e( 'Yes', 'appointments' ); ?>" data-off="<?php esc_html_e( 'No', 'appointments' ); ?>"/>
 			</td>
 		</tr>
 		<tr>
