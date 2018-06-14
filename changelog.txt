@@ -1,6 +1,7 @@
 2018-xx-xx - 2.3.3
 -------------------------------
 - Fixed time display format to selected in WordPress options.
+- Improved Object Cache clear.
 
 2018-06-12 - 2.3.2
 -------------------------------

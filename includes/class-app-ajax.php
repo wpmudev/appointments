@@ -541,18 +541,23 @@ class Appointments_AJAX {
 		}
         $insert_id = appointments_insert_appointment( $args );
         /**
+         * somthing went wrong!
+         */
+		if ( ! $insert_id ) {
+			die(json_encode(array(
+				"error" => __( 'Appointment could not be saved. Please contact website admin.', 'appointments'),
+			)));
+		}
+        /**
          * GDPR
          */
         if ( isset( $_REQUEST['app_gdpr'] ) && $_REQUEST['app_gdpr'] )  {
             appointments_update_appointment_meta( $insert_id, 'gdpr_agree', time() );
         }
-		appointments_clear_appointment_cache();
-		if (!$insert_id) {
-			die(json_encode(array(
-				"error" => __( 'Appointment could not be saved. Please contact website admin.', 'appointments'),
-			)));
-		}
-		// A new appointment is accepted, so clear cache
+        /**
+         * A new appointment is accepted, so clear cache.
+         */
+		appointments_clear_appointment_cache( $insert_id, $args );
 		appointments_clear_cache();
 		$apps = Appointments_Sessions::get_current_visitor_appointments();
 		$apps[] = $insert_id;

@@ -237,18 +237,14 @@ class Appointments_Appointment {
  */
 function appointments_get_appointment( $app_id ) {
 	global $wpdb;
-
 	if ( is_a( $app_id, 'Appointments_Appointment' ) ) {
 		return $app_id;
 	} elseif ( is_object( $app_id ) ) {
 		wp_cache_add( $app_id->ID, $app_id, 'app_appointments' );
 		return new Appointments_Appointment( $app_id );
 	}
-
 	$table = appointments_get_table( 'appointments' );
-
 	$app = wp_cache_get( $app_id, 'app_appointments' );
-
 	if ( ! $app ) {
 		$app = $wpdb->get_row(
 			$wpdb->prepare(
@@ -256,14 +252,11 @@ function appointments_get_appointment( $app_id ) {
 				$app_id
 			)
 		);
-
 		wp_cache_add( $app_id, $app, 'app_appointments' );
 	}
-
 	if ( $app ) {
 		return new Appointments_Appointment( $app );
 	}
-
 	return false;
 }
 
@@ -276,9 +269,7 @@ function appointments_get_appointment( $app_id ) {
  */
 function appointments_get_appointment_by_gcal_id( $gcal_id ) {
 	global $wpdb;
-
 	$table = appointments_get_table( 'appointments' );
-
 	$_app = wp_cache_get( $gcal_id, 'app_appointments_by_gcal' );
 	if ( false === $_app ) {
 		$_app = $wpdb->get_row(
@@ -287,12 +278,10 @@ function appointments_get_appointment_by_gcal_id( $gcal_id ) {
 				$gcal_id
 			)
 		);
-
 		if ( ! $_app ) {
 			return false;
 		}
 	}
-
 	wp_cache_add( $gcal_id, $_app, 'app_appointments_by_gcal' );
 	return appointments_get_appointment( $_app );
 }
@@ -1194,9 +1183,8 @@ function appointments_get_user_appointments( $user_id, $statuses = array( 'paid'
  *
  * @param bool $app_id
  */
-function appointments_clear_appointment_cache( $app_id = false ) {
+function appointments_clear_appointment_cache( $app_id = false, $args = array() ) {
 	global $wpdb;
-
 	$table = appointments_get_table( 'appointments' );
 	if ( $app_id ) {
 		wp_cache_delete( $app_id, 'app_appointments' );
@@ -1210,12 +1198,15 @@ function appointments_clear_appointment_cache( $app_id = false ) {
 			}
 		}
 	}
-
 	wp_cache_delete( 'app_get_appointments_filtered_by_service' );
 	wp_cache_delete( 'app_get_appointments' );
 	wp_cache_delete( 'app_get_month_appointments' );
 	wp_cache_delete( 'app_working_hours' );
 	wp_cache_delete( 'reserve_apps_by_worker' );
+	if ( isset( $args['worker'] ) ) {
+		wp_cache_delete( 'app-open_times-for-'.$args['worker'] );
+	}
+	delete_transient( 'app_timetables' );
 	//@ TODO: Delete capacity_ cache
 	appointments_delete_timetables_cache();
 }
