@@ -30,11 +30,18 @@ class App_Schedule_SharedResources {
 		add_filter( 'appointments_get_service', array( $this, 'add_service_shared_resources' ) );
 		add_action( 'appointments_insert_service', array( $this, 'save_service_shared_resources' ) );
 		add_action( 'wpmudev_appointments_update_service', array( $this, 'save_service_shared_resources' ) );
+		/**
+		 * Add service shared to columns
+		 *
+		 * @since 2.3.3
+		 */
+		add_filter( 'manage_appointments_service_columns', array( $this, 'add_columns' ) );
+		add_filter( 'default_hidden_columns', array( $this, 'add_default_hidden_columns' ), 10, 2 );
+		add_filter( 'appointments_list_column_shared', array( $this, 'get_column_shared' ), 10, 2 );
 	}
 
 	public function initialize() {
-		global $appointments;
-		$this->_core = $appointments;
+		$this->_core = appointments();
 		$this->_data = get_option( 'appointments_services_shared_resources', array() );
 	}
 
@@ -48,8 +55,9 @@ class App_Schedule_SharedResources {
 			if ( empty( $service->ID ) || $service->ID == $service_id ) { continue; // Don't include empty hits or current service
 			}			$checked = in_array( $service->ID, $shared_ids ) ? 'checked="checked"' : '';
 			$disabled = in_array( $service->ID, $shared_ids ) && ! in_array( $service->ID, $direct_ids ) ? 'disabled="disabled"' : '';
+			$data_on = esc_attr( sprintf( 'Share with %s', 'appointments' ), $service->name );
 			$out .= "<label for='app-shared_service-{$service_id}-{$service->ID}'>" .
-				"<input type='checkbox' id='app-shared_service-{$service_id}-{$service->ID}' value='{$service->ID}' name='shared_resources[{$service_id}][]' {$checked} {$disabled} />" .
+				"<input type='checkbox' id='app-shared_service-{$service_id}-{$service->ID}' value='{$service->ID}' name='shared_resources[{$service_id}][]' {$checked} {$disabled} class='switch-button' data-on='{$data_on}'/>" .
 				'&nbsp;' .
 				$service->name .
 			'</label><br />';
@@ -65,20 +73,18 @@ class App_Schedule_SharedResources {
 		?>
 			<th scope="row"><?php _e( 'Shares resources with', 'appointments' ); ?></th>
 			<td class="app-shared_service">
-				<?php foreach ( $all as $service ) :  ?>
-					<?php
-					if ( empty( $service->ID ) ) {
-						continue;
-					} // Don't include empty hits or current service
-						$disabled = in_array( $service->ID, $shared_ids ) && ! in_array( $service->ID, $direct_ids ) ? 'disabled="disabled"' : '';
-					?>
-					<label>
-						<input type="checkbox" id="app-shared_service-<?php echo esc_attr( $service->ID ); ?>"
-						       value="<?php echo esc_attr( $service->ID ); ?>" name='shared_resources[]'
-								<?php echo $disabled; ?>
-						/>&nbsp;<?php echo esc_html( $service->name ); ?>
-                    </label>
-				<?php endforeach; ?>
+<?php
+foreach ( $all as $service ) {
+	if ( empty( $service->ID ) ) {
+		continue;
+	} // Don't include empty hits or current service
+	$data_on = sprintf( __( 'Share with "%s"', 'appointments' ), $service->name );
+	$disabled = in_array( $service->ID, $shared_ids ) && ! in_array( $service->ID, $direct_ids ) ? 'disabled="disabled"' : '';
+?>
+<label><input type="checkbox" id="app-shared_service-<?php echo esc_attr( $service->ID ); ?>" value="<?php echo esc_attr( $service->ID ); ?>" name='shared_resources[]' <?php echo $disabled; ?> class="switch-button" data-on="<?php echo esc_attr( $data_on ); ?>" data-off="<?php esc_attr_e( 'Do not share', 'appointments' ); ?>" /></label>
+<?php
+}
+?>
 			</td>
 		<?php
 	}
@@ -191,6 +197,50 @@ class App_Schedule_SharedResources {
 			);
 		}
 		return $service;
+	}
+
+	/**
+	 * Add column "shared" to Services list
+	 *
+	 * @since 2.3.3
+	 */
+	public function add_columns( $columns ) {
+		$columns['shared'] = __( 'Shared resources', 'appointments' );
+		return $columns;
+	}
+
+	/**
+	 * Hide by default column "shared" to Services list
+	 *
+	 * @since 2.3.3
+	 */
+	public function add_default_hidden_columns( $hidden, $screen ) {
+		$hidden[] = 'shared';
+		return $hidden;
+	}
+
+	/**
+	 * Add column "shared" content to Services list
+	 *
+	 * @since 2.3.3
+	 */
+	public function get_column_shared( $content, $service ) {
+		$content = '';
+		$shared = $this->_get_resource_sharing_services( $service->ID, true );
+		if ( is_array( $shared ) ) {
+			foreach ( $shared as $service_id ) {
+				$content .= sprintf(
+					'<li>%s</li>',
+					$this->_core->get_service_name( $service_id )
+				);
+			}
+		}
+		if ( empty( $content ) ) {
+			$content = __( 'No shared resources', 'appointments' );
+		} else {
+			$content = sprintf( '<ul>%s</ul>', $content );
+		}
+		return $content;
 	}
 }
 App_Schedule_SharedResources::serve();

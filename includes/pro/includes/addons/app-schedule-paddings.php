@@ -76,6 +76,14 @@ class App_Schedule_Paddings {
 		add_filter( 'appointments_default_options', array( $this, 'default_options' ) );
 
 		add_filter( 'app-properties-for-calendar', array( $this, 'apointments_properties_for_calendar' ), 10, 3 );
+		/**
+		 * Add service paddings to columns
+		 *
+		 * @since 2.3.3
+		 */
+		add_filter( 'manage_appointments_service_columns', array( $this, 'add_columns' ) );
+		add_filter( 'default_hidden_columns', array( $this, 'add_default_hidden_columns' ), 10, 2 );
+		add_filter( 'appointments_list_column_paddings', array( $this, 'service_get_column_paddings' ), 10, 2 );
 	}
 
 	public function default_options( $defaults ) {
@@ -92,7 +100,6 @@ class App_Schedule_Paddings {
 	 */
 	public function get_options() {
 		$options = appointments_get_options();
-
 		return array(
 	        'schedule_padding' => $options['schedule_padding'],
 	        'service_padding' => $options['service_padding'],
@@ -103,9 +110,7 @@ class App_Schedule_Paddings {
 	public function initialize() {
 		global $appointments;
 		$this->_core = $appointments;
-
 		$options = appointments_get_options();
-
 		// Stubbing the model data
 		$this->_data = $options;
 	}
@@ -119,9 +124,7 @@ class App_Schedule_Paddings {
 
 	public function show_settings() {
 		$options = appointments_get_options();
-
 		$saved = $options['schedule_padding']['type'];
-
 		$type_help = array(
 			self::PADDING_TYPE_SMALLEST => __( '... applying the smaller padding of the two', 'appointments' ),
 			self::PADDING_TYPE_LARGEST => __( '... applying the larger padding of the two', 'appointments' ),
@@ -566,6 +569,67 @@ class App_Schedule_Paddings {
 			$worker->worker_padding = $paddings;
 		}
 		return $worker;
+	}
+
+	/**
+	 * Add column "paddings" to Services list
+	 *
+	 * @since 2.3.3
+	 */
+	public function add_columns( $columns ) {
+		$columns['paddings'] = __( 'Paddings', 'appointments' );
+		return $columns;
+	}
+
+	/**
+	 * Hide by default column "paddings" to Services list
+	 *
+	 * @since 2.3.3
+	 */
+	public function add_default_hidden_columns( $hidden, $screen ) {
+		$hidden[] = 'paddings';
+		return $hidden;
+	}
+
+	/**
+	 * Add column "paddings" content to Services list
+	 *
+	 * @since 2.3.3
+	 */
+	public function service_get_column_paddings( $content, $service ) {
+		$options = appointments_get_options();
+		$content = '';
+		if (
+			isset( $options['service_padding'] )
+			&& isset( $options['service_padding'][ $service->ID ] )
+		) {
+			if (
+				isset( $options['service_padding'][ $service->ID ]['before'] )
+				&& ! empty( $options['service_padding'][ $service->ID ]['before'] )
+			) {
+				$value = appointment_convert_minutes_to_human_format( $options['service_padding'][ $service->ID ]['before'] );
+				$content .= sprintf(
+					'<li class="before">%s</li>',
+					sprintf( __( 'Before: %s', 'appointments' ), $value )
+				);
+			}
+			if (
+				isset( $options['service_padding'][ $service->ID ]['after'] )
+				&& ! empty( $options['service_padding'][ $service->ID ]['after'] )
+			) {
+				$value = appointment_convert_minutes_to_human_format( $options['service_padding'][ $service->ID ]['after'] );
+				$content .= sprintf(
+					'<li class="after">%s</li>',
+					sprintf( __( 'After: %s', 'appointments' ), $value )
+				);
+			}
+		}
+		if ( empty( $content ) ) {
+			$content = __( 'No paddings', 'appointments' );
+		} else {
+			$content = sprintf( '<ul>%s</ul>', $content );
+		}
+		return $content;
 	}
 }
 App_Schedule_Paddings::serve();

@@ -458,15 +458,14 @@ class Appointments_AJAX {
 			// In minutes
 			$duration = $appointments->get_min_time();
 		}
-
-		$duration = apply_filters( 'app_post_confirmation_duration', $duration, $service, $worker, $user_id );
-
+        $duration = apply_filters( 'app_post_confirmation_duration', $duration, $service, $worker, $user_id );
+        $end = $start + $duration * MINUTE_IN_SECONDS;
 		$args = array(
 			'worker_id' => $worker,
 			'service_id' => $service,
 			'location_id' => $location
 		);
-		$is_busy = apppointments_is_range_busy( $start, $start + ( $duration * MINUTE_IN_SECONDS ), $args );
+		$is_busy = apppointments_is_range_busy( $start, $end, $args );
 		if ( $is_busy ) {
 			die( json_encode( array(
 				"error" => apply_filters(
@@ -483,23 +482,18 @@ class Appointments_AJAX {
 			}
 			else{
 				$workers = appointments_get_all_workers();
-			}
+            }
 			foreach ( $workers as $worker ) {
 				$args['worker_id'] = $worker->ID;
-				$is_busy = apppointments_is_range_busy( $start, $start + ( $duration * 60 ), $args );
+                $is_busy = apppointments_is_range_busy( $start, $end, $args );
 				if ( ! $is_busy ) {
 					$worker = $worker->ID;
 					break;
 				}
 			}
 		}
-
-
-
 		unset( $args );
-
 		$status = apply_filters('app_post_confirmation_status', $status, $price, $service, $worker, $user_id );
-
 		$args = array(
 			'user'     => $user_id,
 			'name'     => $name,
@@ -545,20 +539,26 @@ class Appointments_AJAX {
 			// Unknown error
 			wp_send_json( array( 'error' => __( 'Appointment could not be saved. Please contact website admin.', 'appointments') ) );
 		}
-
-		$insert_id = appointments_insert_appointment( $args );
-
-		appointments_clear_appointment_cache();
-
-		if (!$insert_id) {
+        $insert_id = appointments_insert_appointment( $args );
+        /**
+         * somthing went wrong!
+         */
+		if ( ! $insert_id ) {
 			die(json_encode(array(
 				"error" => __( 'Appointment could not be saved. Please contact website admin.', 'appointments'),
 			)));
 		}
-
-		// A new appointment is accepted, so clear cache
+        /**
+         * GDPR
+         */
+        if ( isset( $_REQUEST['app_gdpr'] ) && $_REQUEST['app_gdpr'] )  {
+            appointments_update_appointment_meta( $insert_id, 'gdpr_agree', time() );
+        }
+        /**
+         * A new appointment is accepted, so clear cache.
+         */
+		appointments_clear_appointment_cache( $insert_id, $args );
 		appointments_clear_cache();
-
 		$apps = Appointments_Sessions::get_current_visitor_appointments();
 		$apps[] = $insert_id;
 		Appointments_Sessions::set_visitor_appointments( $apps );
@@ -895,8 +895,8 @@ class Appointments_AJAX {
 
 		$values = explode( ":", $_POST["value"] );
 		$location = $values[0];
-		$service = $values[1];
-		$worker = $values[2];
+		$service_id = $service = $values[1];
+		$worker_id = $worker = $values[2];
 		$start = $values[3];
 		$end = $values[4];
 
@@ -934,7 +934,7 @@ class Appointments_AJAX {
 			)));
 		}
 
-		$service_obj = appointments_get_service($service);
+        $service_obj = appointments_get_service($service);
 		$service = '<label><span>' . __('Service name: ', 'appointments') .  '</span>'. apply_filters('app_confirmation_service', stripslashes($service_obj->name), $service_obj->name) . '</label>';
 		$start = '<label><span>' . __('Date and time: ', 'appointments') . '</span>'. apply_filters('app_confirmation_start', date_i18n($appointments->datetime_format, $start), $start) . '</label>';
 		$end = '<label><span>' . __('Lasts (approx): ', 'appointments') . '</span>'. apply_filters('app_confirmation_lasts', $service_obj->duration . " " . __('minutes', 'appointments'), $service_obj->duration) . '</label>';
@@ -943,12 +943,10 @@ class Appointments_AJAX {
 			? '<label><span>' . __('Price: ', 'appointments') .  '</span>'. apply_filters('app_confirmation_price', $price . " " . $display_currency, $price) . '</label>'
 			: 0
 			;
-
 		$worker = !empty($worker)
 			? '<label><span>' . __('Service provider: ', 'appointments' ) . '</span>'. apply_filters('app_confirmation_worker', stripslashes(appointments_get_worker_name($worker)), $worker) . '</label>'
 			: ''
-			;
-
+            ;
 		$ask_name = !empty($appointments->options['ask_name'])
 			? 'ask'
 			: ''
@@ -985,8 +983,10 @@ class Appointments_AJAX {
 			;
 
 		$reply_array = array(
+			'service_id'=> intval( $service_id ),
 			'service'	=> $service,
 			'worker'	=> $worker,
+			'worker_id' => intval( $worker_id ),
 			'start'		=> $start,
 			'end'		=> $end,
 			'price'		=> $price,

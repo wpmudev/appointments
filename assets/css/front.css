@@ -556,7 +556,10 @@ tr td.free.selected { border-top:none; border:2px solid #fff; opacity: 0.5; }
 a#app_schedule { height:0; padding: 0; width: 0; line-height: 0; font-size: 0; position: absolute; }
 
 .appointments-confirmation-wrapper fieldset { border:1px solid #999; padding: 20px; }
-.appointments-confirmation-wrapper fieldset div { margin:0 0 10px 0; }
+.appointments-confirmation-wrapper fieldset div {
+    clear: both;
+    margin:0 0 10px 0;
+}
 .app_worker_excerpts { margin:10px 0; }
 /* helpers */
 .app-clearfix:before,.app-clearfix:after{content:"\0020";display:block;height:0;overflow:hidden;}

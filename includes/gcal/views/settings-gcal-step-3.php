@@ -49,8 +49,9 @@
 		<th scope="row">
 			<label for="app-gcal-overwrite"><?php _e( 'Overwrite Google Calendar Title and Description', 'appointments' ); ?></label>
 		</th>
-		<td>
-			<input type="checkbox" name="app-gcal-overwrite" id="app-gcal-overwrite" <?php checked( $gcal_overwrite ); ?>>
+        <td>
+<?php $o = array( 'app-gcal-overwrite' => $gcal_overwrite ); ?>
+<?php _appointments_html_chceckbox( $o, 'app-gcal-overwrite' ); ?>
 			<p class="description"><?php _e( 'With this option checked, whenever a Google Calendar Event is updated, title and description will be updated too. Otherwise, Google Calendar title and description will show.', 'appointments' ) ?></p>
 		</td>
 	</tr>

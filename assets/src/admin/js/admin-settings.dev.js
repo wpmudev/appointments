@@ -18,7 +18,6 @@ jQuery( document ).ready( function( $ ) {
                     _class = [];
                     for ( k = 1; k <= 3; k++ ) {
                         _class[ k ] = app_i10n.presets[i][k];
-
                     }
                     presetSamples.find("a." + i).css("background-color", "#" + _class[n]);
                 }
@@ -52,32 +51,6 @@ jQuery( document ).ready( function( $ ) {
         a = a.replace(/[^a-fA-F0-9]/, '');
         if (a.length === 3 || a.length === 6)
             $(this).parent().find('a.pickcolor').css('background-color', '#' + a);
-    });
-
-    // LOGIN REQUIRED SETTING (Accesibility)
-    var apiDetail = $(".api_detail");
-    var loginRequiredSelect = $('select[name="login_required"]');
-    function toggleApiDetail() {
-        if (loginRequiredSelect.val() == 'yes') {
-            apiDetail.show();
-        }
-        else {
-            apiDetail.hide();
-        }
-    }
-    toggleApiDetail();
-    loginRequiredSelect.change( function() {
-        toggleApiDetail();
-    } );
-
-    // PAYMENT REQUIRED (Payments)
-    $('select[name="payment_required"]').change(function () {
-        if ($('select[name="payment_required"]').val() == "yes") {
-            $(".payment_row").show();
-        }
-        else {
-            $(".payment_row").hide();
-        }
     });
 
     /**
@@ -198,5 +171,30 @@ jQuery( document ).ready( function( $ ) {
             return false;
         }
     });
+
+    /**
+     * Slider widget
+     *
+     * @since 2.3.2
+     */
+    if ( $.fn.slider ) {
+        $('div.app-ui-slider').each( function() {
+            var id = $(this).data('target-id');
+            if ( id ) {
+                var target = $('#'+id);
+                var value = target.val();
+                var max = $(this).data('max') || 100;
+                var min = $(this).data('min') || 0;
+                $(this).slider({
+                    value: value,
+                    min: min,
+                    max: max,
+                    slide: function( event, ui ) {
+                        target.val( ui.value );
+                    }
+                });
+            }
+        });
+    }
 
 });

@@ -60,6 +60,13 @@ if ( ! class_exists( 'Appointments' ) ) {
 		/** @var Appointments_Notifications_Manager */
 		public $notifications;
 
+		/**
+		 * @var Appointments_GDPR
+		 *
+		 * @since 2.3.0
+		 */
+		public $gdpr;
+
 		public $pro = false;
 
 		public $shortcodes = array();
@@ -74,6 +81,7 @@ if ( ! class_exists( 'Appointments' ) ) {
 			include_once( 'includes/class-app-notifications-manager.php' );
 			include_once( 'includes/class-app-api-logins.php' );
 			include_once( 'includes/class-app-sessions.php' );
+			include_once( 'includes/class-app-gdpr.php' );
 
 			// Load premium features
 			if ( _appointments_is_pro() ) {
@@ -89,7 +97,7 @@ if ( ! class_exists( 'Appointments' ) ) {
 			$this->plugin_url = plugins_url( basename( dirname( __FILE__ ) ) );
 
 			// Read all options at once
-			$this->options = get_option( 'appointments_options' );
+			$this->options = appointments_get_options();
 
 			// To follow WP Start of week, time, date settings
 			$this->local_time = current_time( 'timestamp' );
@@ -179,8 +187,8 @@ if ( ! class_exists( 'Appointments' ) ) {
 			}
 
 			$this->notifications = new Appointments_Notifications_Manager();
+			$this->gdpr = new Appointments_GDPR;
 		}
-
 
 		public function load_admin() {
 			include_once( 'admin/class-app-admin.php' );
@@ -977,10 +985,11 @@ if ( ! class_exists( 'Appointments' ) ) {
 	 * Helper function to create a time table for monthly schedule
 	 *
 	 * @since 2.2.1 Added `hide_today` argument.
+	 * @since 2.3.2 Added `worker_id` argument.
 	 */
-		function get_timetable( $day_start, $capacity, $schedule_key = false, $hide_today = false ) {
+		function get_timetable( $day_start, $capacity, $schedule_key = false, $hide_today = false, $worker_id = 0 ) {
 			$local_time = current_time( 'timestamp' );
-			$data = $this->_get_timetable_slots( $day_start, $capacity, $schedule_key );
+			$data = $this->_get_timetable_slots( $day_start, $capacity, $schedule_key, $worker_id );
 			// We need this only for the first timetable
 			// Otherwise $time will be calculated from $day_start
 			if ( isset( $_GET['wcalendar'] ) && (int) $_GET['wcalendar'] ) {
@@ -1742,25 +1751,40 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Load style and script only when they are necessary
-	 * http://beerpla.net/2010/01/13/wordpress-plugin-development-how-to-include-css-and-javascript-conditionally-and-only-when-needed-by-the-posts/
-	 */
+		 * Load style and script only when they are necessary
+		 * http://beerpla.net/2010/01/13/wordpress-plugin-development-how-to-include-css-and-javascript-conditionally-and-only-when-needed-by-the-posts/
+		 */
 		function load_styles( $posts ) {
-			if ( empty( $posts ) || is_admin() ) {
-				return $posts; }
-
-			$this->shortcode_found = false; // use this flag to see if styles and scripts need to be enqueued
+			if ( is_admin() ) {
+				return $posts;
+			}
+			/**
+			 * check always option
+			 *
+			 * @since 2.3.1
+			 */
+			$always_load_scripts = appointments_get_option( 'always_load_scripts' );
+			$load = 'yes' === $always_load_scripts;
+			if ( $load ) {
+				$this->load_scripts_styles( );
+			}
+			/**
+			 * No posts - do not check!
+			 */
+			if ( empty( $posts ) ) {
+				return $posts;
+			}
+			// check for shortcodes only if "Always load scripts" option is disabled
+				$this->shortcode_found = false; // use this flag to see if styles and scripts need to be enqueued
 			foreach ( $posts as $post ) {
 				if ( is_object( $post ) && stripos( $post->post_content, '[app_' ) !== false ) {
 					$this->shortcode_found = true;
-
 					do_action( 'app-shortcodes-shortcode_found', $post );
 				}
 			}
-
-			if ( $this->shortcode_found ) {
-				$this->load_scripts_styles( ); }
-
+			if ( ! $load && $this->shortcode_found ) {
+				$this->load_scripts_styles( );
+			}
 			return $posts;
 		}
 
@@ -2328,7 +2352,6 @@ if ( ! defined( 'APP_PLUGIN_ADDONS_DIR' ) ) {
 }
 $appointments->addons_loader = Appointments_Addons_Loader::get_instance();
 $appointments->addons_loader->load_active_addons();
-
 
 if ( is_admin() ) {
 	require_once APP_PLUGIN_DIR . '/includes/class-app-tutorial.php';

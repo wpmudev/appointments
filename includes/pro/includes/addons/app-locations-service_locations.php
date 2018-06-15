@@ -53,6 +53,21 @@ class App_Locations_ServiceLocations {
 		add_filter( 'appointments_default_options', array( $this, 'default_options' ) );
 		add_filter( 'app-shortcodes-register', array( $this, 'register_shortcodes' ) );
 		add_filter( 'app-services-first_service_id', array( $this, 'get_services_min_id' ), 10 );
+		/**
+		 * Add service location
+		 *
+		 * @since 2.3.3
+		 */
+		add_filter( 'app_pre_confirmation_reply', array( $this, 'add_location_to_reply_array' ) );
+		add_filter( 'appointments_notification_replacements', array( $this, 'add_replacements' ), 10, 4 );
+		/**
+		 * Add service location to columns
+		 *
+		 * @since 2.3.3
+		 */
+		add_filter( 'manage_appointments_service_columns', array( $this, 'add_columns' ) );
+		add_filter( 'default_hidden_columns', array( $this, 'add_default_hidden_columns' ), 10, 2 );
+		add_filter( 'appointments_list_column_location', array( $this, 'get_column_location' ), 10, 2 );
 	}
 
 	public function default_options( $options ) {
@@ -165,13 +180,17 @@ class App_Locations_ServiceLocations {
 			<th scope="row">
 				<label for="service_location"><?php _e( 'Location', 'appointments' ); ?></label>
 			</th>
-			<td>
+            <td>
+<?php if ( empty( $locations ) ) {
+	_e( 'There is no locations to choose. Please add some first.', 'appointments' );
+} else { ?>
 				<select name="service_location" id="service_location">
 					<option value=""></option>
 					<?php foreach ( $locations as $location ) :  ?>
 						<option value="<?php echo $location->id; ?>"><?php echo esc_html( $location->address ); ?></option>
 					<?php endforeach; ?>
-				</select>
+                </select>
+<?php } ?>
 			</td>
 		</tr>
 		<?php
@@ -356,6 +375,73 @@ class App_Locations_ServiceLocations {
 			$service->service_location = get_option( 'app-service_location-' . $service->ID, false );
 		}
 		return $service;
+	}
+
+	/**
+	 * Add Service Location to reply array
+	 *
+	 * @since 2.3.3
+	 */
+	public function add_location_to_reply_array( $reply_array ) {
+		$location = $this->_service_to_location( $reply_array['service_id'] );
+		$content = $location->get_display_markup();
+		if ( ! empty( $content ) ) {
+			$reply_array['service_location'] = sprintf(
+				'<label class="app-service-location"><span>%s: </span>%s</label>',
+				esc_html__( 'Service Location', 'appointments' ),
+				$content
+			);
+		}
+		return $reply_array;
+	}
+
+	/**
+	 * Add replacements
+	 *
+	 * @since 2.3.3
+	 */
+	public function add_replacements( $replacement, $notification_type, $text, $object ) {
+		$location = $this->_service_to_location( $object->service );
+		$replacement['/\bSERVICE_LOCATION\b/U'] = $location->get_display_markup();
+		return $replacement;
+	}
+
+	/**
+	 * Add column "Location" to Services list
+	 *
+	 * @since 2.3.3
+	 */
+	public function add_columns( $columns ) {
+		$columns['location'] = __( 'Location', 'appointments' );
+		return $columns;
+	}
+
+	/**
+	 * Hide by default column "Location" to Services list
+	 *
+	 * @since 2.3.3
+	 */
+	public function add_default_hidden_columns( $hidden, $screen ) {
+		$hidden[] = 'location';
+		return $hidden;
+	}
+
+	/**
+	 * Add column "Location" content to Services list
+	 *
+	 * @since 2.3.3
+	 */
+	public function get_column_location( $content, $service ) {
+		$no = __( 'No Location', 'appointments' );
+		$location = $this->_service_to_location( $service->ID );
+		if ( empty( $location ) ) {
+			return $no;
+		}
+		$content = $location->get_display_markup();
+		if ( empty( $content ) ) {
+			return $no;
+		}
+		return $content;
 	}
 }
 App_Locations_ServiceLocations::serve();

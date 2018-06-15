@@ -109,4 +109,21 @@ $(function () {
 	$(document).on("click", ".app-info_trigger", toggle_target);
 });
 
+/**
+ * GDPR admin notice after change number of days
+ *
+ * @since 2.3.0
+ */
+$(document).on('click', '.notice-app-gdpr a, .notice-app-gdpr button', function() {
+	var parent = $(this).closest( '.notice');
+	var data = {
+		action: parent.attr('id'),
+		url: ajaxurl,
+		user_id: parent.data('user_id'),
+		nonce: parent.data('nonce')
+	};
+	$.post( ajaxurl, data );
+	return true;
+});
+
 })(jQuery);

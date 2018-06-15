@@ -47,6 +47,12 @@ class App_Locations_WorkerLocations {
 		add_action( 'wpmudev_appointments_insert_appointment', array( $this, 'record_appointment_location' ), 40 );
 
 		add_filter( 'app-shortcodes-register', array( $this, 'register_shortcodes' ) );
+		/**
+		 * Add service location
+		 *
+		 * @since 2.3.3
+		 */
+		add_filter( 'app_pre_confirmation_reply', array( $this, 'add_location_to_reply_array' ) );
 	}
 
 	function show_nags() {
@@ -174,12 +180,17 @@ class App_Locations_WorkerLocations {
 				<label for="worker_location"><?php _e( 'Location', 'appointments' ); ?></label>
 			</th>
 			<td>
-				<select name="worker_location" id="worker_location">
-					<option value=""></option>
-					<?php foreach ( $locations as $location ) :  ?>
+<?php if ( empty( $locations ) ) {
+	_e( 'There is no locations to choose. Please add some first.', 'appointments' );
+} else {
+?>
+		<select name="worker_location" id="worker_location">
+			<option value=""></option>
+			<?php foreach ( $locations as $location ) :  ?>
 						<option value="<?php echo $location->get_id(); ?>"><?php echo esc_html( $location->get_admin_label() ); ?></option>
 					<?php endforeach; ?>
-				</select>
+		</select>
+<?php } ?>
 			</td>
 		</tr>
 		<?php
@@ -270,6 +281,24 @@ class App_Locations_WorkerLocations {
 			$worker->worker_location = self::worker_to_location_id( $worker->ID );
 		}
 		return $worker;
+	}
+
+	/**
+	 * Add worker Location to reply array
+	 *
+	 * @since 2.3.3
+	 */
+	public function add_location_to_reply_array( $reply_array ) {
+		$location = $this->_worker_to_location( $reply_array['worker_id'] );
+		$content = $location->get_display_markup();
+		if ( ! empty( $content ) ) {
+			$reply_array['worker_location'] = sprintf(
+				'<label class="app-worker-location"><span>%s: </span>%s</label>',
+				esc_html__( 'Location', 'appointments' ),
+				$content
+			);
+		}
+		return $reply_array;
 	}
 }
 App_Locations_WorkerLocations::serve();

@@ -1,40 +1,26 @@
 <?php
-global $wpdb;
-
-$appointments = appointments();
-$workers     = appointments_get_workers();
 $services     = appointments_get_services();
-
 $pages = apply_filters( 'app-biography_pages-get_list', array() );
 if ( empty( $pages ) ) {
 	$pages = get_pages( apply_filters( 'app_pages_filter', array() ) );
 }
 
-$workers_dropdown = wp_dropdown_users( array(
-	'echo'    => 0,
-	'show'    => 'user_login',
-	'name'    => 'worker_user',
-	'id'      => 'worker-user',
-	'exclude' => apply_filters( 'app_filter_providers', null ),
-) );
-
 ?>
 <form action="" method="post" class="add-new-service-provider">
+    <input type="hidden" name="worker_user" id="worker-user" value="" />
 	<table class="form-table">
 		<tr>
 			<th scope="row">
 				<label for="worker-user"><?php esc_html_e( 'Service Provider', 'appointments' ); ?></label>
 			</th>
-			<td>
-				<?php echo $workers_dropdown; ?>
-			</td>
+			<td id="worker-user-display-name"></td>
 		</tr>
 		<tr>
 			<th scope="row">
 				<label for="worker-dummy"><?php esc_html_e( 'Dummy?', 'appointments' ); ?></label>
 			</th>
 			<td>
-				<input id="worker-dummy" class="widefat" type="checkbox" name="worker_dummy"/>
+            <input id="worker-dummy" class="switch-button" type="checkbox" name="worker_dummy" data-on="<?php esc_html_e( 'Yes', 'appointments' ); ?>" data-off="<?php esc_html_e( 'No', 'appointments' ); ?>" />
 			</td>
 		</tr>
 		<tr>
@@ -50,17 +36,25 @@ $workers_dropdown = wp_dropdown_users( array(
 				<label for="worker-services"><?php esc_html_e( 'Services Provided', 'appointments' ); ?></label>
 			</th>
 			<td>
-				<?php if ( $services ) :  ?>
-					<label for="services_provided" class="screen-reader-text"><?php _e( 'Services Provided', 'appointments' ); ?></label>
-					<select class="add_worker_multiple" style="width:280px" multiple="multiple" name="services_provided[]" id="services_provided">
-						<?php foreach ( $services as $service ) :  ?>
-							<?php $title = stripslashes( $service->name ); ?>
-							<option value="<?php echo esc_attr( $service->ID ); ?>"><?php echo esc_html( $title ); ?></option>
-						<?php endforeach; ?>
-					</select>
-				<?php else : ?>
-					<?php esc_html_e( 'No services defined', 'appointments' ); ?>
-				<?php endif; ?>
+<?php
+if ( $services ) {
+?>
+                    <label for="services_provided" class="screen-reader-text"><?php _e( 'Services Provided', 'appointments' ); ?></label>
+                    <select class="add_worker_multiple" style="width:280px" multiple="multiple" name="services_provided[]" id="services_provided">
+<?php
+foreach ( $services as $service ) {
+	$title = stripslashes( $service->name );
+	printf(
+		'<option value="%s">%s</option>',
+		esc_attr( $service->ID ),
+		esc_html( $title )
+	);
+}
+	echo '</select>';
+} else {
+	esc_html_e( 'No services defined', 'appointments' );
+}
+?>
 			</td>
 		</tr>
 		<tr>

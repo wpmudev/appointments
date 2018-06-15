@@ -62,6 +62,14 @@ jQuery(document).ready( function( $ ) {
                 $('#service-page',     section ).val( response.data.page );
                 $('#service-price',    section ).val( response.data.price );
                 /**
+                 * udpate slider
+                 *
+                 * @since 2.3.2
+                 */
+                if ( $.fn.slider ) {
+                    $('#service-capacity-slider-edit').slider( 'option', 'value', response.data.capacity );
+                }
+                /**
                  * PRO: service_padding
                  */
                 if ( 'undefined' !== typeof response.data.service_padding ) {
@@ -141,6 +149,7 @@ jQuery(document).ready( function( $ ) {
                 $('#worker-page',  section ).val( response.data.page );
                 $('#worker-price', section ).val( response.data.price );
                 $('#worker-user',  section ).val( response.data.ID );
+                $('#worker-user-display-name',  section ).html( response.data.display_name );
                 /**
                  * services_provided
                  */

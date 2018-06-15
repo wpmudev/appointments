@@ -154,4 +154,16 @@ body.appointments_page_app_settings .appointments-settings-tab-working_hours tab
         width: auto;
     }
 }
+div.appointments-settings .notice-app-wp-version {
+    margin-top: 2em;
+}
 
+.app-ui-slider {
+    margin: 1em 0;
+    max-width: 100px;
+}
+.inline-edit-row .app-time {
+    float: left;
+    width: 30%;
+    padding-left:5px;
+}

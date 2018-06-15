@@ -43,6 +43,7 @@ class Appointments_Admin_Settings_Page {
 				'payments' => __( 'Payments', 'appointments' ),
 				'notifications' => __( 'Notifications', 'appointments' ),
 				'advanced' => __( 'Advanced', 'appointments' ),
+				'gdpr' => __( 'GDPR', 'appointments' ),
 			),
 			'services' => array(
 				'services' => __( 'Services', 'appointments' ),
@@ -78,7 +79,7 @@ class Appointments_Admin_Settings_Page {
 			}
 			$content .= implode( ' | ', $links );
 			$content .= '</ul>';
-			wp_enqueue_script( 'app-settings', appointments_plugin_url() . 'admin/js/admin-settings.js', array( 'jquery' ), appointments_get_db_version(), true );
+			wp_enqueue_script( 'app-settings', appointments_plugin_url() . 'admin/js/admin-settings.js', array( 'jquery', 'jquery-ui-slider' ), appointments_get_db_version(), true );
 			$appointments = appointments();
 			$classes = $appointments->get_classes();
 			$presets = array();
@@ -198,7 +199,6 @@ class Appointments_Admin_Settings_Page {
 		 */
 		switch ( $tab ) {
 			case 'services':
-				require_once dirname( dirname( __FILE__ ) ).'/class-app-list-table-services.php';
 			break;
 			case 'workers':
 				require_once dirname( dirname( __FILE__ ) ).'/class-app-list-table-workers.php';
@@ -215,10 +215,40 @@ class Appointments_Admin_Settings_Page {
 		echo '</div>';
 	}
 
+	public function set_option( $status, $option, $value ) {
+		return $value;
+	}
+
 	/**
 	 * Save the settings
 	 */
 	public function on_load() {
+		/**
+		 * set screen options
+		 */
+		$tab = $this->get_current_tab();
+		switch ( $tab ) {
+			case 'services':
+				require_once dirname( dirname( __FILE__ ) ).'/class-app-list-table-services.php';
+				global $appointments_services_list;
+				$option = 'per_page';
+				$args = array(
+				'label' => __( 'Services', 'appointments' ),
+				'default' => 10,
+				'option' => 'app_services_per_page',
+				);
+				add_screen_option( $option, $args );
+				add_filter( 'set-screen-option', array( $this, 'set_option' ), 10, 3 );
+				if (
+					isset( $_POST['screenoptionnonce'] )
+					&& isset( $_POST['wp_screen_options'] )
+					&& isset( $_POST['wp_screen_options']['value'] )
+					&& isset( $_POST['wp_screen_options']['option'] )
+				) {
+				}
+				$appointments_services_list = new Appointments_WP_List_Table_Services;
+			break;
+		}
 
 		// Hidden feature to import/export settings
 		if ( current_user_can( 'manage_options' ) && isset( $_GET['app-export-settings'] ) ) {
@@ -234,7 +264,6 @@ class Appointments_Admin_Settings_Page {
 		if ( '-1' == $action && isset( $_REQUEST['action2'] ) ) {
 			$action = $_REQUEST['action2'];
 		}
-
 		/**
 		 * handle bulk action addon
 		 */
@@ -342,6 +371,7 @@ class Appointments_Admin_Settings_Page {
 		 * yes/no options
 		 */
 		$options_names = array(
+			'always_load_scripts',
 			'allow_overwork',
 			'allow_overwork_break',
 			'allow_worker_confirm',
@@ -356,6 +386,8 @@ class Appointments_Admin_Settings_Page {
 			'send_removal_notification',
 			'show_legend',
 			'log_emails',
+			'gdpr_delete',
+			'gdpr_checkbox_show',
 		);
 		foreach ( $options_names as $name ) {
 			$options[ $name ] = isset( $_POST[ $name ] )? $_POST[ $name ]:'no';
@@ -374,7 +406,6 @@ class Appointments_Admin_Settings_Page {
 		$options['twitter-app_id']			= trim( $_POST['twitter-app_id'] );
 		$options['twitter-app_secret']		= trim( $_POST['twitter-app_secret'] );
 
-		$options['app_page_type']				= $_POST['app_page_type'];
 		$options['color_set']					= $_POST['color_set'];
 		foreach ( $appointments->get_classes() as $class => $name ) {
 			$options[ $class.'_color' ]			= $_POST[ $class.'_color' ];
@@ -423,6 +454,14 @@ class Appointments_Admin_Settings_Page {
 		$options['allow_cancel'] 				= @$_POST['allow_cancel'];
 		$options['cancel_page'] 				= @$_POST['cancel_page'];
 		$options['thank_page'] 				= @$_POST['thank_page'];
+
+		/**
+		 * GDPR
+		 */
+		$options['gdpr_number_of_days'] = filter_input( INPUT_POST, 'gdpr_number_of_days', FILTER_VALIDATE_INT );
+		$options['gdpr_number_of_days_user_erease'] = filter_input( INPUT_POST, 'gdpr_number_of_days_user_erease', FILTER_VALIDATE_INT );
+		$options['gdpr_checkbox_text'] = filter_input( INPUT_POST, 'gdpr_checkbox_text', FILTER_SANITIZE_STRING );
+		$options['gdpr_checkbox_alert'] = filter_input( INPUT_POST, 'gdpr_checkbox_alert', FILTER_SANITIZE_STRING );
 
 		$options = apply_filters( 'app-options-before_save', $options );
 

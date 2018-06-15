@@ -44,10 +44,11 @@ function appointments_delete_timetables_cache() {
 
 /**
  * @since 2.2.1 Added `hide_today` argument.
+ * @since 2.3.2 Added `worker_id` argument.
  */
-function appointments_get_timetable( $day_start, $capacity, $schedule_key = false, $hide_today = false ) {
+function appointments_get_timetable( $day_start, $capacity, $schedule_key = false, $hide_today = false, $worker_id = 0 ) {
 	global $appointments;
-	return $appointments->get_timetable( $day_start, $capacity, $schedule_key, $hide_today );
+	return $appointments->get_timetable( $day_start, $capacity, $schedule_key, $hide_today, $worker_id );
 }
 
 function appointments_get_capacity() {
@@ -253,13 +254,16 @@ function appointments_get_weekly_schedule_slots( $now = false, $service_id = 0, 
  * @param int $service_id
  * @param int $worker_id
  * @param int $location_id
+ * @param boolean $force Force to get hours.
  *
  * @return array
  */
-function appointments_get_worker_weekly_start_hours( $service_id = 0, $worker_id = 0, $location_id = 0 ) {
+function appointments_get_worker_weekly_start_hours( $service_id = 0, $worker_id = 0, $location_id = 0, $force = false ) {
 
-	if ( ! $worker_id || ! appointments_is_worker( $worker_id ) ) {
-		return array();
+	if ( ! $force ) {
+		if ( ! $worker_id || ! appointments_is_worker( $worker_id ) ) {
+			return array();
+		}
 	}
 
 	$appointments = appointments();
@@ -386,38 +390,45 @@ function apppointments_is_range_busy( $start, $end, $args = array() ) {
 	    'service_id'  => 0,
 	    'location_id' => 0,
 		'capacity'    => 0,
+		'status_exclude' => array( 'removed', 'completed' ),
 	);
 	$args = wp_parse_args( $args, $defaults );
+	$apps = array();
 	$args['week'] = $week = date( 'W', $start );
 	$period = new App_Period( $start, $end );
 	// If a specific worker is selected, we will look at his schedule first.
-	if ( 0 != $args['worker_id'] ) {
+	if ( 0 == $args['worker_id'] ) {
+		$apps = appointments_get_appointments( $args );
+		if ( 0 === $args['capacity'] ) {
+			$workers = appointments_get_workers_by_service( $args['service_id'] );
+			$args['capacity'] = count( $workers );
+		}
+	} else {
 		if ( ! appointments_is_working( $start, $end, $args['worker_id'], $args['location_id'] ) ) {
 			return true;
 		}
 		$apps = $appointments->get_reserve_apps_by_worker( $args['location_id'], $args['worker_id'], $week );
-	} else {
-		$apps = appointments_get_appointments( $args );
+		$args['capacity'] = 1;
 	}
-
 	$is_busy = false;
-	if ( $apps ) {
+	if ( 0 !== $args['capacity'] && $apps ) {
+		$counter = 0;
 		foreach ( $apps as $app ) {
 			//if ( $start >= strtotime( $app->start ) && $end <= strtotime( $app->end ) ) return true;
 			$app_properties = apply_filters( 'app-properties-for-calendar', array( 'start' => $app->start, 'end' => $app->end ), $app, $args );
-
 			if ( $period->contains( $app_properties['start'], $app_properties['end'], true ) ) {
-				$is_busy = true;
+				$counter++;
 			}
 		}
+		if ( $counter >= $args['capacity'] ) {
+			$is_busy = true;
+		}
 	}
-
 	// If we're here, no worker is set or (s)he's not busy by default. Let's go for quick filter trip.
 	$is_busy = apply_filters( 'app-is_busy', $is_busy, $period );
 	if ( $is_busy ) {
 		return true;
 	}
-
 	// If we are here, no preference is selected (provider_id=0) or selected provider is not busy. There are 2 cases here:
 	// 1) There are several providers: Look for reserve apps for the workers giving this service.
 	// 2) No provider defined: Look for reserve apps for worker=0, because he will carry out all services
@@ -432,7 +443,6 @@ function apppointments_is_range_busy( $start, $end, $args = array() ) {
 					if ( $app_worker && is_array( $app_worker ) ) {
 						$apps = array_merge( $apps, $app_worker );
 					}
-
 					// Also include appointments by general staff for services that can be given by this worker
 					$services_provided = $worker->services_provided;
 					if ( $services_provided && is_array( $services_provided ) && ! empty( $services_provided ) ) {
@@ -456,7 +466,6 @@ function apppointments_is_range_busy( $start, $end, $args = array() ) {
 	} else {
 		$apps = $appointments->get_reserve_apps_by_worker( $args['location_id'], 0, $week );
 	}
-
 	$n = 0;
 	foreach ( $apps as $app ) {
 		// @FIX: this will allow for "only one service and only one provider per time slot"
@@ -493,7 +502,6 @@ function apppointments_is_range_busy( $start, $end, $args = array() ) {
 function appointments_monthly_calendar( $timestamp = false, $args = array() ) {
 	$appointments = appointments();
 	$options = appointments_get_options();
-
 	$defaults = array(
 		'service_id' => 0,
 		'worker_id' => 0,
@@ -505,10 +513,8 @@ function appointments_monthly_calendar( $timestamp = false, $args = array() ) {
 		'hide_today_times' => false,
 	);
 	$args = wp_parse_args( $args, $defaults );
-
 	$current_time = current_time( 'timestamp' );
 	$date = $timestamp ? $timestamp : $current_time;
-
 	$year  = date( 'Y', $date );
 	$month = date( 'm', $date );
 	$time  = strtotime( "{$year}-{$month}-01" );
@@ -583,9 +589,9 @@ function appointments_monthly_calendar( $timestamp = false, $args = array() ) {
 
 						//Do not include the timetable in the widget, but run the appointments_get_timetable to check if free or busy
 						if ( ! $args['widget'] ) {
-							$time_table .= appointments_get_timetable( $ccs, $capacity, $schedule_key, $args['hide_today_times'] );
+							$time_table .= appointments_get_timetable( $ccs, $capacity, $schedule_key, $args['hide_today_times'], $args['worker_id'] );
 						} else {
-							appointments_get_timetable( $ccs, $capacity, $schedule_key, $args['hide_today_times'] );
+							appointments_get_timetable( $ccs, $capacity, $schedule_key, $args['hide_today_times'], $args['worker_id'] );
 						}
 						// Look if we have at least one cell free from get_timetable function
 						if ( $appointments->is_a_timetable_cell_free ) {
