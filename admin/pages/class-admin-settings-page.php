@@ -199,7 +199,6 @@ class Appointments_Admin_Settings_Page {
 		 */
 		switch ( $tab ) {
 			case 'services':
-				require_once dirname( dirname( __FILE__ ) ).'/class-app-list-table-services.php';
 			break;
 			case 'workers':
 				require_once dirname( dirname( __FILE__ ) ).'/class-app-list-table-workers.php';
@@ -216,10 +215,40 @@ class Appointments_Admin_Settings_Page {
 		echo '</div>';
 	}
 
+	public function set_option( $status, $option, $value ) {
+		return $value;
+	}
+
 	/**
 	 * Save the settings
 	 */
 	public function on_load() {
+		/**
+		 * set screen options
+		 */
+		$tab = $this->get_current_tab();
+		switch ( $tab ) {
+			case 'services':
+				require_once dirname( dirname( __FILE__ ) ).'/class-app-list-table-services.php';
+				global $appointments_services_list;
+				$option = 'per_page';
+				$args = array(
+				'label' => __( 'Services', 'appointments' ),
+				'default' => 10,
+				'option' => 'app_services_per_page',
+				);
+				add_screen_option( $option, $args );
+				add_filter( 'set-screen-option', array( $this, 'set_option' ), 10, 3 );
+				if (
+					isset( $_POST['screenoptionnonce'] )
+					&& isset( $_POST['wp_screen_options'] )
+					&& isset( $_POST['wp_screen_options']['value'] )
+					&& isset( $_POST['wp_screen_options']['option'] )
+				) {
+				}
+				$appointments_services_list = new Appointments_WP_List_Table_Services;
+			break;
+		}
 
 		// Hidden feature to import/export settings
 		if ( current_user_can( 'manage_options' ) && isset( $_GET['app-export-settings'] ) ) {
@@ -235,7 +264,6 @@ class Appointments_Admin_Settings_Page {
 		if ( '-1' == $action && isset( $_REQUEST['action2'] ) ) {
 			$action = $_REQUEST['action2'];
 		}
-
 		/**
 		 * handle bulk action addon
 		 */
