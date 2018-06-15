@@ -19,6 +19,15 @@ class Appointments_WP_List_Table_Services extends WP_List_Table {
 	}
 
 	/**
+	 * Handle default column
+	 *
+	 * @since 2.3.3
+	 */
+	public function column_default( $item, $column_name ) {
+		return apply_filters( 'appointments_list_column_'.$column_name, '', $item );
+	}
+
+	/**
 	 * Column price.
 	 *
 	 * @since 2.3.1
@@ -129,7 +138,11 @@ class Appointments_WP_List_Table_Services extends WP_List_Table {
 			'price' => sprintf( __( 'Price (%s)', 'appointments' ), $this->currency ),
 			'page' => __( 'Description page', 'appointments' ),
 		);
-		return $columns;
+		return apply_filters( 'manage_appointments_service_columns', $columns );
+	}
+
+	public function get_hidden_columns() {
+		return array();
 	}
 
 	public function get_bulk_actions() {
@@ -157,9 +170,9 @@ class Appointments_WP_List_Table_Services extends WP_List_Table {
 	}
 
 	public function prepare_items() {
-		$per_page = 5;
+		$per_page = $this->get_items_per_page( 'app_services_per_page', 5 );;
 		$columns = $this->get_columns();
-		$hidden = array();
+		$hidden = get_hidden_columns( $this->screen );
 		$sortable = $this->get_sortable_columns();
 		$this->_column_headers = array( $columns, $hidden, $sortable );
 		$this->process_bulk_action();

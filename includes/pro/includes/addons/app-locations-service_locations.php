@@ -60,6 +60,14 @@ class App_Locations_ServiceLocations {
 		 */
 		add_filter( 'app_pre_confirmation_reply', array( $this, 'add_location_to_reply_array' ) );
 		add_filter( 'appointments_notification_replacements', array( $this, 'add_replacements' ), 10, 4 );
+		/**
+		 * Add service location to columns
+		 *
+		 * @since 2.3.3
+		 */
+		add_filter( 'manage_appointments_service_columns', array( $this, 'add_columns' ) );
+		add_filter( 'default_hidden_columns', array( $this, 'add_default_hidden_columns' ), 10, 2 );
+		add_filter( 'appointments_list_column_location', array( $this, 'get_column_location' ), 10, 2 );
 	}
 
 	public function default_options( $options ) {
@@ -396,6 +404,44 @@ class App_Locations_ServiceLocations {
 		$location = $this->_service_to_location( $object->service );
 		$replacement['/\bSERVICE_LOCATION\b/U'] = $location->get_display_markup();
 		return $replacement;
+	}
+
+	/**
+	 * Add column "Location" to Services list
+	 *
+	 * @since 2.3.3
+	 */
+	public function add_columns( $columns ) {
+		$columns['location'] = __( 'Location', 'appointments' );
+		return $columns;
+	}
+
+	/**
+	 * Hide by default column "Location" to Services list
+	 *
+	 * @since 2.3.3
+	 */
+	public function add_default_hidden_columns( $hidden, $screen ) {
+		$hidden[] = 'location';
+		return $hidden;
+	}
+
+	/**
+	 * Add column "Location" content to Services list
+	 *
+	 * @since 2.3.3
+	 */
+	public function get_column_location( $content, $service ) {
+		$no = __( 'No Location', 'appointments' );
+		$location = $this->_service_to_location( $service->ID );
+		if ( empty( $location ) ) {
+			return $no;
+		}
+		$content = $location->get_display_markup();
+		if ( empty( $content ) ) {
+			return $no;
+		}
+		return $content;
 	}
 }
 App_Locations_ServiceLocations::serve();
