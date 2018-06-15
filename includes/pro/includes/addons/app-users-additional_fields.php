@@ -215,7 +215,12 @@ class App_Users_AdditionalFields {
 			$value = ! empty( $app_meta[ $field->name ] ) ? esc_attr( $app_meta[ $field->name ] ) : '';
 			ob_start();
 ?>
-            <label for="additional_fields-<?php echo $field->name; ?>"><span class="title"><?php echo $field->label; ?></span>
+            <label for="additional_fields-<?php echo $field->name; ?>"><span class="title"><?php echo $field->label; 
+				if ( isset( $field->required ) && $field->required ) {
+					echo '<b class="required">*</b>';
+				}
+?>
+</span>
                 <span class='input-text-wrap'>
                     <?php if ( 'checkbox' === $field->type ) :  ?>
                         <input type="checkbox" class="appointments-field-entry additional_field" data-name="additional_fields[<?php echo $field->name; ?>]" id="additional_fields-<?php echo $field->name; ?>" <?php echo $disabled; ?> <?php checked( '1', $value ); ?> value="1" />
