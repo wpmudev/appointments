@@ -254,30 +254,30 @@ function appointments_get_service_by_name( $service_name ) {
  *     @type bool|int       $page             Filter by attached page to service. Default false
  *     @type bool           $count            If set to true, it will return the number of services found. Default false
  *     @type bool|string    $fields           Fields to be returned (false or 'ID'). If false it will return all fields. Default false.
+ *     @since 2.3.3
+ *     @type integer $offset SQL query offset
+ *     @type integer $limit SQL query limit
  * }
  *
  * @return array of Appointments_Service
  */
 function appointments_get_services( $args = array() ) {
 	global $wpdb;
-
 	$defaults = array(
 		'orderby' => 'ID',
 		'page' => false, // Filter by page ID
 		'count' => false,
 		'fields' => false,
+		'paged' => 0,
+		'limit' => -1,
 	);
-
 	$args = wp_parse_args( $args, $defaults );
-
 	$table = appointments_get_table( 'services' );
-
 	$where = array();
 	$page_id = absint( $args['page'] );
-
 	if ( $page_id ) {
-		$where[] = $wpdb->prepare( 's.page = %d', $page_id ); }
-
+		$where[] = $wpdb->prepare( 's.page = %d', $page_id );
+	}
 	// @TODO: We need to move this to somewhere else
 	$allowed_orderby = $whitelist = apply_filters( 'app_order_by_whitelist', array(
 		'ID',
@@ -294,72 +294,30 @@ function appointments_get_services( $args = array() ) {
 		'price DESC',
 		'RAND()',
 	) );
-
 	$order_query = '';
-
 	if ( in_array( $args['orderby'], $allowed_orderby ) ) {
 		$orderby = $args['orderby'];
 		$order_query = "ORDER BY $orderby";
 	}
-
+	/**
+	 * where
+	 */
 	if ( $where ) {
-		$where = 'WHERE ' . implode( ' AND ', $where ); } else { 		$where = ''; }
-
-	if ( ! $args['count'] ) {
-
-		$allowed_fields = array( 'ID' );
-		$field = $args['fields'];
-		if ( $field && in_array( $field, $allowed_fields ) ) {
-			$get_col = true; } else { 			$get_col = false; }
-
-		if ( $get_col ) {
-			$query = "SELECT $field FROM $table s $where $order_query";
-		} else {
-			$query = "SELECT * FROM $table s $where $order_query";
-		}
-
-		$cache_key = md5( $query . '-' . 'app_get_services' );
-
-		$cached_queries = wp_cache_get( 'app_get_services' );
-		if ( ! is_array( $cached_queries ) ) {
-			$cached_queries = array(); }
-
-		if ( ! isset( $cached_queries[ $cache_key ] ) ) {
-
-			if ( $get_col ) {
-				$results = $wpdb->get_col( $query );
-			} else {
-				$results = $wpdb->get_results( $query );
-			}
-
-			if ( ! empty( $results ) ) {
-				$cached_queries[ $cache_key ] = $results;
-				wp_cache_set( 'app_get_services', $cached_queries );
-			}
-		} else {
-			$results = $cached_queries[ $cache_key ];
-		}
-
-		$services = array();
-		if ( ! $get_col ) {
-			foreach ( $results as $result ) {
-				wp_cache_add( $result->ID, $result, 'app_services' );
-				$services[] = new Appointments_Service( $result );
-			}
-		} else {
-			$services = $results;
-		}
-
-		return $services;
-
+		$where = 'WHERE ' . implode( ' AND ', $where );
 	} else {
+		$where = '';
+	}
+	/**
+	 * Only count data
+	 */
+	if ( $args['count'] ) {
 		$query = "SELECT COUNT(ID) FROM $table s $where";
 		$cache_key = md5( $query . '-' . 'app_count_services' );
 
 		$cached_queries = wp_cache_get( 'app_count_services' );
 		if ( ! is_array( $cached_queries ) ) {
-			$cached_queries = array(); }
-
+			$cached_queries = array();
+		}
 		if ( ! isset( $cached_queries[ $cache_key ] ) ) {
 			$result = $wpdb->get_var( $query );
 			$result = absint( $result );
@@ -368,10 +326,66 @@ function appointments_get_services( $args = array() ) {
 		} else {
 			$result = $cached_queries[ $cache_key ];
 		}
-
 		return $result;
 	}
+	/**
+	 * select data
+	 */
+	$allowed_fields = array( 'ID' );
+	$field = $args['fields'];
+	if ( $field && in_array( $field, $allowed_fields ) ) {
+		$get_col = true;
+	} else {
+		$get_col = false;
+	}
+	if ( $get_col ) {
+		$query = "SELECT $field FROM $table s $where $order_query";
+	} else {
+		$query = "SELECT * FROM $table s $where $order_query";
+	}
+	/**
+	 * limit & offset
+	 */
+	$limit = intval( $args['limit'] );
+	$paged = intval( $args['paged'] );
+	if ( 0 < $limit ) {
+		$query .= $wpdb->prepare( ' limit %d', $limit );
+		if ( 0 < $paged ) {
+			$query .= $wpdb->prepare( ' offset %d', $limit * $paged );
+		}
+	}
+	/**
+	 * cache
+	 */
+	$cache_key = md5( $query . '-' . 'app_get_services' );
+	$cached_queries = wp_cache_get( 'app_get_services' );
+	if ( ! is_array( $cached_queries ) ) {
+		$cached_queries = array();
+	}
+	if ( ! isset( $cached_queries[ $cache_key ] ) ) {
+		if ( $get_col ) {
+			$results = $wpdb->get_col( $query );
+		} else {
+			$results = $wpdb->get_results( $query );
+		}
+		if ( ! empty( $results ) ) {
+			$cached_queries[ $cache_key ] = $results;
+			wp_cache_set( 'app_get_services', $cached_queries );
+		}
+	} else {
+		$results = $cached_queries[ $cache_key ];
+	}
 
+	$services = array();
+	if ( ! $get_col ) {
+		foreach ( $results as $result ) {
+			wp_cache_add( $result->ID, $result, 'app_services' );
+			$services[] = new Appointments_Service( $result );
+		}
+	} else {
+		$services = $results;
+	}
+	return $services;
 }
 
 /**

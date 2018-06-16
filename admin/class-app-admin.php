@@ -50,6 +50,10 @@ class Appointments_Admin {
 		 * Add page with shortcode.
 		 */
 		add_action( 'wp_ajax_make_an_appointment_page', array( $this, 'make_an_appointment_page' ) );
+		/**
+		 * save some options
+		 */
+		add_filter( 'set-screen-option', array( $this, 'set_screen_option' ), 10, 3 );
 	}
 
 	private function includes() {
@@ -529,10 +533,23 @@ class Appointments_Admin {
 			&& isset( $_POST['id'] )
 			&& wp_verify_nonce( $_POST['_wpnonce'], 'worker-'.$_POST['id'] )
 		) {
-            $worker = appointments_get_worker( $_POST['id'] );
-            $worker->display_name = $worker->get_name();
+			$worker = appointments_get_worker( $_POST['id'] );
+			$worker->display_name = $worker->get_name();
 			wp_send_json_success( $worker );
 		}
 		wp_send_json_error( $data );
+	}
+
+	/**
+	 * Allow to save selected options
+	 *
+	 * @since 2.3.3
+	 */
+	public function set_screen_option( $status, $option, $value ) {
+		switch ( $option ) {
+			case 'app_services_per_page':
+			return $value;
+		}
+		return $status;
 	}
 }

@@ -215,10 +215,6 @@ class Appointments_Admin_Settings_Page {
 		echo '</div>';
 	}
 
-	public function set_option( $status, $option, $value ) {
-		return $value;
-	}
-
 	/**
 	 * Save the settings
 	 */
@@ -233,12 +229,11 @@ class Appointments_Admin_Settings_Page {
 				global $appointments_services_list;
 				$option = 'per_page';
 				$args = array(
-				'label' => __( 'Services', 'appointments' ),
-				'default' => 10,
-				'option' => 'app_services_per_page',
+					'label' => __( 'Services', 'appointments' ),
+					'default' => get_user_option( 'app_services_per_page', 20 ),
+					'option' => 'app_services_per_page',
 				);
 				add_screen_option( $option, $args );
-				add_filter( 'set-screen-option', array( $this, 'set_option' ), 10, 3 );
 				if (
 					isset( $_POST['screenoptionnonce'] )
 					&& isset( $_POST['wp_screen_options'] )

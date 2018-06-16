@@ -170,16 +170,20 @@ class Appointments_WP_List_Table_Services extends WP_List_Table {
 	}
 
 	public function prepare_items() {
-		$per_page = $this->get_items_per_page( 'app_services_per_page', 5 );;
+		$per_page = $this->get_items_per_page( 'app_services_per_page', 20 );;
 		$columns = $this->get_columns();
 		$hidden = get_hidden_columns( $this->screen );
 		$sortable = $this->get_sortable_columns();
 		$this->_column_headers = array( $columns, $hidden, $sortable );
 		$this->process_bulk_action();
-		$data = appointments_get_services();
 		$current_page = $this->get_pagenum();
-		$total_items = count( $data );
-		$data = appointments_get_services( array( 'orderby' => 'name' ) );
+		$total_items = appointments_get_services( array( 'count' => true ) );
+		$args = array(
+			'orderby' => 'name',
+			'paged' => $this->get_pagenum() - 1,
+			'limit' => $per_page,
+		);
+		$data = appointments_get_services( $args );
 		$this->items = $data;
 		/**
 		 * REQUIRED. We also have to register our pagination options & calculations.
