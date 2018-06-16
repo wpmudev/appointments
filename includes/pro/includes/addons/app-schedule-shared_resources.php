@@ -33,7 +33,7 @@ class App_Schedule_SharedResources {
 		/**
 		 * Add service shared to columns
 		 *
-		 * @since 2.3.3
+		 * @since 2.4.0
 		 */
 		add_filter( 'manage_appointments_service_columns', array( $this, 'add_columns' ) );
 		add_filter( 'default_hidden_columns', array( $this, 'add_default_hidden_columns' ), 10, 2 );
@@ -202,7 +202,7 @@ foreach ( $all as $service ) {
 	/**
 	 * Add column "shared" to Services list
 	 *
-	 * @since 2.3.3
+	 * @since 2.4.0
 	 */
 	public function add_columns( $columns ) {
 		$columns['shared'] = __( 'Shared resources', 'appointments' );
@@ -212,7 +212,7 @@ foreach ( $all as $service ) {
 	/**
 	 * Hide by default column "shared" to Services list
 	 *
-	 * @since 2.3.3
+	 * @since 2.4.0
 	 */
 	public function add_default_hidden_columns( $hidden, $screen ) {
 		$hidden[] = 'shared';
@@ -222,7 +222,7 @@ foreach ( $all as $service ) {
 	/**
 	 * Add column "shared" content to Services list
 	 *
-	 * @since 2.3.3
+	 * @since 2.4.0
 	 */
 	public function get_column_shared( $content, $service ) {
 		$content = '';

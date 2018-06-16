@@ -50,7 +50,7 @@ class App_Locations_WorkerLocations {
 		/**
 		 * Add service location
 		 *
-		 * @since 2.3.3
+		 * @since 2.4.0
 		 */
 		add_filter( 'app_pre_confirmation_reply', array( $this, 'add_location_to_reply_array' ) );
 	}
@@ -286,7 +286,7 @@ class App_Locations_WorkerLocations {
 	/**
 	 * Add worker Location to reply array
 	 *
-	 * @since 2.3.3
+	 * @since 2.4.0
 	 */
 	public function add_location_to_reply_array( $reply_array ) {
 		$location = $this->_worker_to_location( $reply_array['worker_id'] );

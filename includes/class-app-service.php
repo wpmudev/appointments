@@ -254,7 +254,7 @@ function appointments_get_service_by_name( $service_name ) {
  *     @type bool|int       $page             Filter by attached page to service. Default false
  *     @type bool           $count            If set to true, it will return the number of services found. Default false
  *     @type bool|string    $fields           Fields to be returned (false or 'ID'). If false it will return all fields. Default false.
- *     @since 2.3.3
+ *     @since 2.4.0
  *     @type integer $offset SQL query offset
  *     @type integer $limit SQL query limit
  * }

@@ -79,7 +79,7 @@ class App_Schedule_Paddings {
 		/**
 		 * Add service paddings to columns
 		 *
-		 * @since 2.3.3
+		 * @since 2.4.0
 		 */
 		add_filter( 'manage_appointments_service_columns', array( $this, 'add_columns' ) );
 		add_filter( 'default_hidden_columns', array( $this, 'add_default_hidden_columns' ), 10, 2 );
@@ -574,7 +574,7 @@ class App_Schedule_Paddings {
 	/**
 	 * Add column "paddings" to Services list
 	 *
-	 * @since 2.3.3
+	 * @since 2.4.0
 	 */
 	public function add_columns( $columns ) {
 		$columns['paddings'] = __( 'Paddings', 'appointments' );
@@ -584,7 +584,7 @@ class App_Schedule_Paddings {
 	/**
 	 * Hide by default column "paddings" to Services list
 	 *
-	 * @since 2.3.3
+	 * @since 2.4.0
 	 */
 	public function add_default_hidden_columns( $hidden, $screen ) {
 		$hidden[] = 'paddings';
@@ -594,7 +594,7 @@ class App_Schedule_Paddings {
 	/**
 	 * Add column "paddings" content to Services list
 	 *
-	 * @since 2.3.3
+	 * @since 2.4.0
 	 */
 	public function service_get_column_paddings( $content, $service ) {
 		$options = appointments_get_options();

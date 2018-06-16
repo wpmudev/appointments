@@ -21,7 +21,7 @@ class Appointments_WP_List_Table_Services extends WP_List_Table {
 	/**
 	 * Handle default column
 	 *
-	 * @since 2.3.3
+	 * @since 2.4.0
 	 */
 	public function column_default( $item, $column_name ) {
 		return apply_filters( 'appointments_list_column_'.$column_name, '', $item );

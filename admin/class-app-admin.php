@@ -543,7 +543,7 @@ class Appointments_Admin {
 	/**
 	 * Allow to save selected options
 	 *
-	 * @since 2.3.3
+	 * @since 2.4.0
 	 */
 	public function set_screen_option( $status, $option, $value ) {
 		switch ( $option ) {

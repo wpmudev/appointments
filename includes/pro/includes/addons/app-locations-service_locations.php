@@ -56,14 +56,14 @@ class App_Locations_ServiceLocations {
 		/**
 		 * Add service location
 		 *
-		 * @since 2.3.3
+		 * @since 2.4.0
 		 */
 		add_filter( 'app_pre_confirmation_reply', array( $this, 'add_location_to_reply_array' ) );
 		add_filter( 'appointments_notification_replacements', array( $this, 'add_replacements' ), 10, 4 );
 		/**
 		 * Add service location to columns
 		 *
-		 * @since 2.3.3
+		 * @since 2.4.0
 		 */
 		add_filter( 'manage_appointments_service_columns', array( $this, 'add_columns' ) );
 		add_filter( 'default_hidden_columns', array( $this, 'add_default_hidden_columns' ), 10, 2 );
@@ -380,7 +380,7 @@ class App_Locations_ServiceLocations {
 	/**
 	 * Add Service Location to reply array
 	 *
-	 * @since 2.3.3
+	 * @since 2.4.0
 	 */
 	public function add_location_to_reply_array( $reply_array ) {
 		$location = $this->_service_to_location( $reply_array['service_id'] );
@@ -398,7 +398,7 @@ class App_Locations_ServiceLocations {
 	/**
 	 * Add replacements
 	 *
-	 * @since 2.3.3
+	 * @since 2.4.0
 	 */
 	public function add_replacements( $replacement, $notification_type, $text, $object ) {
 		$location = $this->_service_to_location( $object->service );
@@ -409,7 +409,7 @@ class App_Locations_ServiceLocations {
 	/**
 	 * Add column "Location" to Services list
 	 *
-	 * @since 2.3.3
+	 * @since 2.4.0
 	 */
 	public function add_columns( $columns ) {
 		$columns['location'] = __( 'Location', 'appointments' );
@@ -419,7 +419,7 @@ class App_Locations_ServiceLocations {
 	/**
 	 * Hide by default column "Location" to Services list
 	 *
-	 * @since 2.3.3
+	 * @since 2.4.0
 	 */
 	public function add_default_hidden_columns( $hidden, $screen ) {
 		$hidden[] = 'location';
@@ -429,7 +429,7 @@ class App_Locations_ServiceLocations {
 	/**
 	 * Add column "Location" content to Services list
 	 *
-	 * @since 2.3.3
+	 * @since 2.4.0
 	 */
 	public function get_column_location( $content, $service ) {
 		$no = __( 'No Location', 'appointments' );

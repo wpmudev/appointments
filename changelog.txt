@@ -1,4 +1,4 @@
-2018-xx-xx - 2.3.3
+2018-xx-xx - 2.4.0
 -------------------------------
 - Fixed time display format to selected in WordPress options.
 - Improved Object Cache clear.
@@ -709,7 +709,7 @@ V1.2.4:
 - During uninstall, all traces of GCal are removed from file system and database
 - Fixed default settings not being loaded for new installations
 
-V1.2.3.3:
+V1.2.4.0:
 - Fix for Export button not working on some areas
 - Permission to use cents in price fields which was accidentally disabled in the previous update
 - Fixed issues when GCal API test connection and manual imports are started from user profile page
