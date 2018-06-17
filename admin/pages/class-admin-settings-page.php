@@ -219,18 +219,18 @@ class Appointments_Admin_Settings_Page {
 	 */
 	public function on_load() {
 		/**
-         * set screen options
-         *
-         * @since 2.4.0
+		 * set screen options
+		 *
+		 * @since 2.4.0
 		 */
-        $tab = $this->get_current_tab();
+		$tab = $this->get_current_tab();
 		switch ( $tab ) {
 			case 'services':
 				require_once dirname( dirname( __FILE__ ) ).'/class-app-list-table-services.php';
 				global $appointments_services_list;
 				$option = 'per_page';
 				$args = array(
-					'label' => __( 'Services', 'appointments' ),
+					'label' => __( 'Services & Workers', 'appointments' ),
 					'default' => get_user_option( 'app_services_per_page', 20 ),
 					'option' => 'app_services_per_page',
 				);
@@ -242,7 +242,7 @@ class Appointments_Admin_Settings_Page {
 				global $appointments_workers_list;
 				$option = 'per_page';
 				$args = array(
-					'label' => __( 'Workers', 'appointments' ),
+					'label' => __( 'Services & Workers', 'appointments' ),
 					'default' => get_user_option( 'app_workers_per_page', 20 ),
 					'option' => 'app_workers_per_page',
 				);

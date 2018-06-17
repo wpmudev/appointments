@@ -197,4 +197,20 @@ jQuery( document ).ready( function( $ ) {
         });
     }
 
+    /**
+     * add tab to request "hidden-columns".
+     *
+     * @since 2.4.0
+     */
+    columns.saveManageColumnsState = function() {
+        var hidden = this.hidden();
+        $.post(ajaxurl, {
+            action: 'hidden-columns',
+            hidden: hidden,
+            screenoptionnonce: $('#screenoptionnonce').val(),
+            page: pagenow,
+            tab: $('input[name=app-current-tab]').val()
+        });
+    };
+
 });

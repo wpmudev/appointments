@@ -10,10 +10,10 @@ class Appointments_Admin {
 
 	public function __construct() {
 		$this->includes();
-        /**
-         * Allow to save selected options
-         *
-         */
+		/**
+		 * Allow to save selected options
+		 *
+		 */
 		add_filter( 'set-screen-option', array( $this, 'save_screen_options' ), 10, 3 );
 		// Add a column in users list to show if it's a service provider
 		add_filter( 'manage_users_custom_column', array( $this, 'render_provider_user_column' ), 10, 3 );
@@ -49,6 +49,13 @@ class Appointments_Admin {
 		 * Add page with shortcode.
 		 */
 		add_action( 'wp_ajax_make_an_appointment_page', array( $this, 'make_an_appointment_page' ) );
+		/**
+		 * save and read proper screen columns settings
+		 *
+		 * @since 2.4.0
+		 */
+		add_action( 'update_user_meta', array( $this, 'update_meta' ), 10, 4 );
+		add_filter( 'get_user_metadata', array( $this, 'get_meta' ), 10, 4 );
 	}
 
 	private function includes() {
@@ -57,19 +64,19 @@ class Appointments_Admin {
 		include_once( appointments_plugin_dir() . 'admin/class-app-admin-user-profile.php' );
 	}
 
-    /**
-     * Allow to save selected options
-     *
-     */
-    public function save_screen_options( $status, $option, $value ) {
-        switch ( $option ) {
-        case 'app_services_per_page':
-        case 'appointments_records_per_page':
-        case 'app_workers_per_page':
-            return $value;
-        }
-        return $status;
-    }
+	/**
+	 * Allow to save selected options
+	 *
+	 */
+	public function save_screen_options( $status, $option, $value ) {
+		switch ( $option ) {
+			case 'app_services_per_page':
+			case 'appointments_records_per_page':
+			case 'app_workers_per_page':
+			return $value;
+		}
+		return $status;
+	}
 
 	public function add_users_columns( $columns ) {
 		$columns['provider'] = __( 'Appointments Provider', 'appointments' );
@@ -541,4 +548,38 @@ class Appointments_Admin {
 		wp_send_json_error( $data );
 	}
 
+	/**
+	 * read proper screen columns settings
+	 *
+	 * @since 2.4.0
+	 */
+	public function get_meta( $value, $object_id, $meta_key, $single ) {
+		if ( 'manageappointments_page_app_settingscolumnshidden' === $meta_key ) {
+			$tab = filter_input( INPUT_GET, 'tab', FILTER_SANITIZE_STRING );
+			switch ( $tab ) {
+				case 'services':
+				case 'workers':
+				return get_user_meta( $object_id, 'appointments_columns_hidden_'.$tab );
+			}
+		}
+		return $value;
+	}
+
+	/**
+	 * save proper screen columns settings
+	 *
+	 * @since 2.4.0
+	 */
+	public function update_meta( $meta_id, $object_id, $meta_key, $_meta_value ) {
+		if ( 'manageappointments_page_app_settingscolumnshidden' === $meta_key ) {
+			if ( isset( $_POST['tab'] ) ) {
+				$tab = filter_input( INPUT_POST, 'tab', FILTER_SANITIZE_STRING );
+				switch ( $tab ) {
+					case 'services':
+					case 'workers':
+						update_user_meta( $object_id, 'appointments_columns_hidden_'.$tab, $_meta_value );
+				}
+			}
+		}
+	}
 }
