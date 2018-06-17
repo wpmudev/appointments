@@ -137,12 +137,12 @@ class Appointments_WP_List_Table_Services extends WP_List_Table {
 			'duration' => __( 'Duration', 'appointments' ),
 			'price' => sprintf( __( 'Price (%s)', 'appointments' ), $this->currency ),
 			'page' => __( 'Description page', 'appointments' ),
-        );
-        /**
-         * Allow to filter columns
-         *
-         * @since 2.4.0
-         */
+		);
+		/**
+		 * Allow to filter columns
+		 *
+		 * @since 2.4.0
+		 */
 		return apply_filters( 'manage_appointments_service_columns', $columns );
 	}
 
