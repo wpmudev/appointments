@@ -10,9 +10,11 @@ class Appointments_Admin {
 
 	public function __construct() {
 		$this->includes();
-
+        /**
+         * Allow to save selected options
+         *
+         */
 		add_filter( 'set-screen-option', array( $this, 'save_screen_options' ), 10, 3 );
-
 		// Add a column in users list to show if it's a service provider
 		add_filter( 'manage_users_custom_column', array( $this, 'render_provider_user_column' ), 10, 3 );
 		add_filter( 'manage_users_columns', array( $this, 'add_users_columns' ) );
@@ -22,11 +24,8 @@ class Appointments_Admin {
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );			// Load scripts
 		add_action( 'admin_enqueue_scripts', array( $this, 'edit_posts_scripts' ) );
 		add_action( 'admin_print_styles', array( $this, 'admin_css' ) );
-
 		add_action( 'admin_notices', array( $this, 'admin_notices_new' ) );
-
 		add_action( 'wp_ajax_appointments_dismiss_notice', array( $this, 'dismiss_notice' ) );
-
 		// Add quick link to plugin settings from plugins list page.
 		add_filter( 'plugin_action_links_' . plugin_basename( APP_PLUGIN_FILE ), array( $this, 'add_settings_link' ) );
 		/**
@@ -50,10 +49,6 @@ class Appointments_Admin {
 		 * Add page with shortcode.
 		 */
 		add_action( 'wp_ajax_make_an_appointment_page', array( $this, 'make_an_appointment_page' ) );
-		/**
-		 * save some options
-		 */
-		add_filter( 'set-screen-option', array( $this, 'set_screen_option' ), 10, 3 );
 	}
 
 	private function includes() {
@@ -62,13 +57,19 @@ class Appointments_Admin {
 		include_once( appointments_plugin_dir() . 'admin/class-app-admin-user-profile.php' );
 	}
 
-	public function save_screen_options( $status, $option, $value ) {
-		if ( 'appointments_records_per_page' == $option ) {
-			return $value;
-		}
-
-		return $status;
-	}
+    /**
+     * Allow to save selected options
+     *
+     */
+    public function save_screen_options( $status, $option, $value ) {
+        switch ( $option ) {
+        case 'app_services_per_page':
+        case 'appointments_records_per_page':
+        case 'app_workers_per_page':
+            return $value;
+        }
+        return $status;
+    }
 
 	public function add_users_columns( $columns ) {
 		$columns['provider'] = __( 'Appointments Provider', 'appointments' );
@@ -540,16 +541,4 @@ class Appointments_Admin {
 		wp_send_json_error( $data );
 	}
 
-	/**
-	 * Allow to save selected options
-	 *
-	 * @since 2.4.0
-	 */
-	public function set_screen_option( $status, $option, $value ) {
-		switch ( $option ) {
-			case 'app_services_per_page':
-			return $value;
-		}
-		return $status;
-	}
 }

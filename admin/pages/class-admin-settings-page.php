@@ -201,7 +201,6 @@ class Appointments_Admin_Settings_Page {
 			case 'services':
 			break;
 			case 'workers':
-				require_once dirname( dirname( __FILE__ ) ).'/class-app-list-table-workers.php';
 			break;
 		}
 
@@ -220,9 +219,11 @@ class Appointments_Admin_Settings_Page {
 	 */
 	public function on_load() {
 		/**
-		 * set screen options
+         * set screen options
+         *
+         * @since 2.4.0
 		 */
-		$tab = $this->get_current_tab();
+        $tab = $this->get_current_tab();
 		switch ( $tab ) {
 			case 'services':
 				require_once dirname( dirname( __FILE__ ) ).'/class-app-list-table-services.php';
@@ -234,14 +235,19 @@ class Appointments_Admin_Settings_Page {
 					'option' => 'app_services_per_page',
 				);
 				add_screen_option( $option, $args );
-				if (
-					isset( $_POST['screenoptionnonce'] )
-					&& isset( $_POST['wp_screen_options'] )
-					&& isset( $_POST['wp_screen_options']['value'] )
-					&& isset( $_POST['wp_screen_options']['option'] )
-				) {
-				}
 				$appointments_services_list = new Appointments_WP_List_Table_Services;
+			break;
+			case 'workers':
+				require_once dirname( dirname( __FILE__ ) ).'/class-app-list-table-workers.php';
+				global $appointments_workers_list;
+				$option = 'per_page';
+				$args = array(
+					'label' => __( 'Workers', 'appointments' ),
+					'default' => get_user_option( 'app_workers_per_page', 20 ),
+					'option' => 'app_workers_per_page',
+				);
+				add_screen_option( $option, $args );
+				$appointments_workers_list = new Appointments_WP_List_Table_Workers;
 			break;
 		}
 
