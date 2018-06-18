@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-06-08 17:56:59+00:00\n"
+"POT-Creation-Date: 2018-06-18 06:56:18+00:00\n"
 "PO-Revision-Date: 2017-12-10 12:07:18+0000\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -25,19 +25,23 @@ msgstr "Сохранить изменения"
 
 #: admin/admin-helpers.php:121 admin/views/form-working-hours.php:53
 #: admin/views/form-working-hours.php:83
+#: admin/views/page-settings-tab-workers-section-edit-worker.php:23
+#: admin/views/page-settings-tab-workers-section-new-worker.php:41
 #: includes/gcal/views/settings-gcal-step-3.php:64
-#: includes/pro/includes/addons/app-users-additional_fields.php:532
-#: includes/pro/includes/addons/app-users-additional_fields.php:570
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:331
+#: includes/pro/includes/addons/app-users-additional_fields.php:476
+#: includes/pro/includes/addons/app-users-additional_fields.php:513
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:343
 msgid "Yes"
 msgstr "Да"
 
 #: admin/admin-helpers.php:122 admin/views/form-working-hours.php:52
 #: admin/views/form-working-hours.php:82
+#: admin/views/page-settings-tab-workers-section-edit-worker.php:23
+#: admin/views/page-settings-tab-workers-section-new-worker.php:41
 #: includes/gcal/views/settings-gcal-step-3.php:63
-#: includes/pro/includes/addons/app-users-additional_fields.php:532
-#: includes/pro/includes/addons/app-users-additional_fields.php:570
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:332
+#: includes/pro/includes/addons/app-users-additional_fields.php:476
+#: includes/pro/includes/addons/app-users-additional_fields.php:513
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:344
 msgid "No"
 msgstr "Нет"
 
@@ -1107,7 +1111,7 @@ msgid "<strong>Requires</strong>: %s"
 msgstr ""
 
 #: admin/class-app-addons-admin-list-table.php:67
-#: admin/class-app-list-table-services.php:126 admin/views/inline-edit.php:26
+#: admin/class-app-list-table-services.php:135 admin/views/inline-edit.php:26
 #: appointments.php:694 includes/class-app-gdpr.php:268
 msgid "Name"
 msgstr "Имя"
@@ -1120,7 +1124,7 @@ msgid "Description"
 msgstr "Описание"
 
 #: admin/class-app-admin-user-profile.php:47
-#: includes/class-app-appointment.php:1514
+#: includes/class-app-appointment.php:1505
 msgid "Client %s cancelled appointment with ID: %s"
 msgstr "Client %s отменил встречу с ID: %s"
 
@@ -1132,28 +1136,28 @@ msgstr "Оператор %s вручную подтвердил встречу �
 msgid "%s edited his working hours."
 msgstr "%s изданием его рабочего времени."
 
-#: admin/class-app-admin.php:70
+#: admin/class-app-admin.php:82
 msgid "Appointments Provider"
 msgstr ""
 
-#: admin/class-app-admin.php:77 admin/class-app-list-table-services.php:68
-#: admin/class-app-list-table-workers.php:82
+#: admin/class-app-admin.php:89 admin/class-app-list-table-services.php:77
+#: admin/class-app-list-table-workers.php:93
 #: includes/pro/includes/addons/lib/class-app-locations-list-table.php:18
 #: includes/sample-appointments-page.php:38
 msgid "Edit"
 msgstr "Редактировать"
 
-#: admin/class-app-admin.php:104
+#: admin/class-app-admin.php:116
 msgid "Dismiss notice"
 msgstr ""
 
-#: admin/class-app-admin.php:104 admin/class-app-admin.php:301
-#: admin/class-app-admin.php:330 admin/class-app-admin.php:343
+#: admin/class-app-admin.php:116 admin/class-app-admin.php:313
+#: admin/class-app-admin.php:342 admin/class-app-admin.php:355
 #: includes/pro/includes/class-app-google-login.php:165
 msgid "Dismiss"
 msgstr "Закрыть"
 
-#: admin/class-app-admin.php:161 admin/class-app-admin.php:192
+#: admin/class-app-admin.php:173 admin/class-app-admin.php:204
 #: admin/pages/class-admin-appointments-page.php:26
 #: admin/pages/class-admin-appointments-page.php:54
 #: admin/pages/class-admin-appointments-page.php:310
@@ -1166,28 +1170,28 @@ msgstr "Закрыть"
 msgid "Appointments"
 msgstr "Бронирование"
 
-#: admin/class-app-admin.php:225
+#: admin/class-app-admin.php:237
 msgid "on"
 msgstr ""
 
-#: admin/class-app-admin.php:226
+#: admin/class-app-admin.php:238
 msgid "off"
 msgstr ""
 
-#: admin/class-app-admin.php:235
+#: admin/class-app-admin.php:247
 msgid "Preparing for export, please hold on..."
 msgstr "Экспорт подготавливается, пожалуйста, ожидайте"
 
-#: admin/class-app-admin.php:251
+#: admin/class-app-admin.php:263
 msgid "Notice dismissed."
 msgstr "Уведомление уволен."
 
-#: admin/class-app-admin.php:268
+#: admin/class-app-admin.php:280
 msgid "<b>[Appointments+]</b> You must define at least once service."
 msgstr ""
 "<b> [Назначения +] </ B> Необходимо определить хотя бы один раз обслуживание."
 
-#: admin/class-app-admin.php:275
+#: admin/class-app-admin.php:287
 msgid ""
 "<b>[Appointments+]</b> One of your services has a duration smaller than time "
 "base. Please visit Services tab and after making your corrections save new "
@@ -1197,7 +1201,7 @@ msgstr ""
 "чем временной базе. Пожалуйста, посетите вкладку Службы и после оформления "
 "исправления сохранить новые настройки."
 
-#: admin/class-app-admin.php:282
+#: admin/class-app-admin.php:294
 msgid ""
 "<b>[Appointments+]</b> One of your services is not divisible by the time "
 "base. Please visit Services tab and after making your corrections save new "
@@ -1207,7 +1211,7 @@ msgstr ""
 "Пожалуйста, посетите вкладку Службы и после оформления исправления сохранить "
 "новые настройки."
 
-#: admin/class-app-admin.php:289
+#: admin/class-app-admin.php:301
 msgid ""
 "<b>[Appointments+]</b> One of your services has a duration greater than 24 "
 "hours. Appointments+ does not support services exceeding 1440 minutes (24 "
@@ -1217,7 +1221,7 @@ msgstr ""
 "чем на 24 часа. Назначения + браузер не поддерживает услуги, превышающие "
 "1440 минут (24 часа). "
 
-#: admin/class-app-admin.php:300
+#: admin/class-app-admin.php:312
 msgid ""
 "<b>[Appointments+]</b> One of your services does not have a service provider "
 "assigned. Delete services you are not using."
@@ -1225,13 +1229,13 @@ msgstr ""
 "<b> [Назначения +] </ B> Один из ваших услугах не имеет поставщика услуг "
 "назначенного. Удалить услуги вы не используете."
 
-#: admin/class-app-admin.php:301 admin/class-app-admin.php:330
-#: admin/class-app-admin.php:343
+#: admin/class-app-admin.php:313 admin/class-app-admin.php:342
+#: admin/class-app-admin.php:355
 #: includes/pro/includes/class-app-google-login.php:165
 msgid "Dismiss this notice for this session"
 msgstr "Игнорировать это уведомление для этой сессии"
 
-#: admin/class-app-admin.php:310
+#: admin/class-app-admin.php:322
 msgid ""
 "<b>[Appointments+]</b> Appointments+ database tables need to be updated. "
 "Please deactivate and reactivate the plugin (DO NOT DELETE the plugin). You "
@@ -1241,7 +1245,7 @@ msgstr ""
 "обновлены. Пожалуйста, отключить и включить плагин (не удаляйте плагин). Вы "
 "не потеряете ни сохраненную информацию."
 
-#: admin/class-app-admin.php:318
+#: admin/class-app-admin.php:330
 msgid ""
 "<b>[Appointments+]</b> More than one instance of services, service "
 "providers, confirmation, Paypal or login shortcodes on the same page may "
@@ -1251,7 +1255,7 @@ msgstr ""
 "подтверждение, Paypal или войдите шорткоды на одной странице может вызвать "
 "проблемы. </ P>"
 
-#: admin/class-app-admin.php:329
+#: admin/class-app-admin.php:341
 msgid ""
 "<b>[Appointments+]</b> Confirmation shortcode [app_confirmation] is always "
 "required to complete an appointment."
@@ -1259,104 +1263,105 @@ msgstr ""
 "<b> [Назначения +] </ B> шорткод Подтверждение [app_confirmation] всегда "
 "требуется, чтобы завершить встречу."
 
-#: admin/class-app-admin.php:342
+#: admin/class-app-admin.php:354
 msgid ""
 "<b>[Appointments+]</b> Paypal shortcode [app_paypal] is always required to "
 "complete an appointment with <b>pending</b> status."
 msgstr ""
 
-#: admin/class-app-admin.php:356
+#: admin/class-app-admin.php:368
 msgid "Appointments+ FAQ"
 msgstr "Бронирования+ FAQ"
 
-#: admin/class-app-admin.php:380
+#: admin/class-app-admin.php:392
 msgid "FAQ"
 msgstr "ЧАВО"
 
-#: admin/class-app-admin.php:450 admin/pages/class-admin-settings-page.php:11
+#: admin/class-app-admin.php:462 admin/pages/class-admin-settings-page.php:11
 #: includes/pro/includes/addons/app-locations-location_support.php:169
 msgid "Settings"
 msgstr "Настройки"
 
-#: admin/class-app-admin.php:464 admin/class-app-admin.php:505
-#: admin/class-app-admin.php:525
+#: admin/class-app-admin.php:476 admin/class-app-admin.php:517
+#: admin/class-app-admin.php:537
 #: includes/integration/class-app-marketpress.php:127
 msgid "Something went wrong!"
 msgstr ""
 
-#: admin/class-app-admin.php:485
+#: admin/class-app-admin.php:497
 #: includes/integration/class-app-marketpress.php:155
 msgid "Page was created successfuly: %s"
 msgstr ""
 
-#: admin/class-app-admin.php:489 admin/class-app-list-table-services.php:105
-#: admin/class-app-list-table-services.php:111
-#: admin/class-app-list-table-workers.php:126
-#: admin/class-app-list-table-workers.php:132
+#: admin/class-app-admin.php:501 admin/class-app-list-table-services.php:114
+#: admin/class-app-list-table-services.php:120
+#: admin/class-app-list-table-workers.php:137
+#: admin/class-app-list-table-workers.php:143
 #: includes/integration/class-app-marketpress.php:159
 msgid "View page"
 msgstr ""
 
-#: admin/class-app-list-table-services.php:29
-#: admin/class-app-list-table-workers.php:42 appointments.php:718
+#: admin/class-app-list-table-services.php:38
+#: admin/class-app-list-table-workers.php:53 appointments.php:718
 msgid "Free"
 msgstr "Свободно"
 
-#: admin/class-app-list-table-services.php:41
+#: admin/class-app-list-table-services.php:50
 msgid "Limited by number of Service Providers"
 msgstr ""
 
-#: admin/class-app-list-table-services.php:73
-#: admin/class-app-list-table-workers.php:87
+#: admin/class-app-list-table-services.php:82
+#: admin/class-app-list-table-services.php:151
+#: admin/class-app-list-table-workers.php:98
 #: includes/pro/includes/addons/lib/class-app-locations-list-table.php:19
 msgid "Delete"
 msgstr "Удалить"
 
-#: admin/class-app-list-table-services.php:127
+#: admin/class-app-list-table-services.php:136
 msgid "Capacity"
 msgstr "Объём"
 
-#: admin/class-app-list-table-services.php:128
+#: admin/class-app-list-table-services.php:137
 #: includes/shortcodes/class-app-shortcode-monthly-worker-calendar.php:154
 msgid "Duration"
 msgstr "Длительность"
 
-#: admin/class-app-list-table-services.php:129
+#: admin/class-app-list-table-services.php:138
 msgid "Price (%s)"
 msgstr ""
 
-#: admin/class-app-list-table-services.php:130
-#: admin/class-app-list-table-workers.php:151
+#: admin/class-app-list-table-services.php:139
+#: admin/class-app-list-table-workers.php:162
 msgid "Description page"
 msgstr "Описание страницы"
 
-#: admin/class-app-list-table-workers.php:49
+#: admin/class-app-list-table-workers.php:60
 msgid "No Service Providers selected."
 msgstr ""
 
-#: admin/class-app-list-table-workers.php:55
+#: admin/class-app-list-table-workers.php:66
 msgid "Missing service: %d."
 msgstr ""
 
-#: admin/class-app-list-table-workers.php:101
+#: admin/class-app-list-table-workers.php:112
 msgid "[wrong user]"
 msgstr ""
 
-#: admin/class-app-list-table-workers.php:147
+#: admin/class-app-list-table-workers.php:158
 #: admin/views/page-settings-tab-workers-section-edit-worker.php:14
 #: admin/views/page-settings-tab-workers-section-new-worker.php:30
 msgid "Service Provider"
 msgstr "Оператор"
 
-#: admin/class-app-list-table-workers.php:148
+#: admin/class-app-list-table-workers.php:159
 msgid "Dummy"
 msgstr ""
 
-#: admin/class-app-list-table-workers.php:149
+#: admin/class-app-list-table-workers.php:160
 msgid "Additional Price (%s)"
 msgstr ""
 
-#: admin/class-app-list-table-workers.php:150
+#: admin/class-app-list-table-workers.php:161
 #: admin/views/page-settings-tab-workers-section-edit-worker.php:36
 #: admin/views/page-settings-tab-workers-section-edit-worker.php:42
 #: admin/views/page-settings-tab-workers-section-new-worker.php:54
@@ -1574,7 +1579,7 @@ msgstr "Завершенные"
 
 #: admin/pages/class-admin-appointments-page.php:157
 #: admin/views/page-appointments-status-filter.php:6
-#: includes/class-app-appointment.php:1235
+#: includes/class-app-appointment.php:1226
 msgid "Reserved by GCal"
 msgstr "Разерв GCal"
 
@@ -1625,7 +1630,7 @@ msgstr ""
 
 #: admin/pages/class-admin-appointments-page.php:273
 #: admin/pages/class-admin-transactions-page.php:59
-#: admin/views/inline-edit.php:101
+#: admin/views/inline-edit.php:104
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:22
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:30
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:90
@@ -1728,7 +1733,7 @@ msgid "Add new Service Provider"
 msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:96
-#: admin/pages/class-admin-settings-page.php:552
+#: admin/pages/class-admin-settings-page.php:581
 msgid "Please, select at least one service provided"
 msgstr ""
 
@@ -1755,6 +1760,12 @@ msgstr ""
 #: admin/pages/class-admin-settings-page.php:167
 msgid "Settings updated"
 msgstr ""
+
+#: admin/pages/class-admin-settings-page.php:233
+#: admin/pages/class-admin-settings-page.php:245
+#, fuzzy
+msgid "Services & Workers"
+msgstr "Операторы"
 
 #: admin/pages/class-admin-transactions-page.php:18
 #: admin/pages/class-admin-transactions-page.php:19
@@ -1801,7 +1812,7 @@ msgstr "Дайте перерыв?"
 msgid "Start"
 msgstr "Начало"
 
-#: admin/views/form-working-hours.php:38 admin/views/inline-edit.php:90
+#: admin/views/form-working-hours.php:38 admin/views/inline-edit.php:93
 #: includes/pro/includes/addons/app-admin-export_date_range.php:50
 msgid "End"
 msgstr "Конец"
@@ -1845,20 +1856,20 @@ msgstr "Создано"
 msgid "Unknown"
 msgstr ""
 
-#: admin/views/inline-edit.php:111
+#: admin/views/inline-edit.php:114
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:245
 msgid "Confirm"
 msgstr "Подтвердить"
 
-#: admin/views/inline-edit.php:114
+#: admin/views/inline-edit.php:117
 msgid "(Re)send confirmation email"
 msgstr "(Re) отправить электронное письмо с подтверждением"
 
-#: admin/views/inline-edit.php:116
+#: admin/views/inline-edit.php:119
 msgid "Send confirmation email"
 msgstr "Отправить электронное письмо с подтверждением"
 
-#: admin/views/inline-edit.php:125
+#: admin/views/inline-edit.php:128
 msgid ""
 "GCal reserved appointments cannot be edited here. Edit them in your Google "
 "calendar."
@@ -1866,11 +1877,11 @@ msgstr ""
 "Гкал защищены назначения не могут быть изменены здесь. Редактировать их в "
 "календаре Google."
 
-#: admin/views/inline-edit.php:125 admin/views/inline-edit.php:127
+#: admin/views/inline-edit.php:128 admin/views/inline-edit.php:130
 msgid "Save / Update"
 msgstr "Сохранить / Обновить"
 
-#: admin/views/inline-edit.php:127
+#: admin/views/inline-edit.php:130
 msgid "Click to save or update"
 msgstr "Нажмите, чтобы сохранить или обновить"
 
@@ -1956,17 +1967,17 @@ msgid "Active"
 msgstr "Активен"
 
 #: admin/views/page-appointments-status-filter.php:4
-#: includes/class-app-appointment.php:1231
+#: includes/class-app-appointment.php:1222
 msgid "Pending"
 msgstr "В ожидании"
 
 #: admin/views/page-appointments-status-filter.php:5
-#: includes/class-app-appointment.php:1234
+#: includes/class-app-appointment.php:1225
 msgid "Completed"
 msgstr "Завершено"
 
 #: admin/views/page-appointments-status-filter.php:7
-#: includes/class-app-appointment.php:1236
+#: includes/class-app-appointment.php:1227
 msgid "Removed"
 msgstr "Удалено"
 
@@ -2939,7 +2950,7 @@ msgid "Future transactions"
 msgstr "Будущие операции"
 
 #: admin/views/page-transactions.php:60 admin/views/page-transactions.php:63
-#: includes/class-app-appointment.php:1247
+#: includes/class-app-appointment.php:1238
 msgid "None yet"
 msgstr "Пока нет"
 
@@ -3013,7 +3024,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: appointments.php:415 appointments.php:707 includes/class-app-service.php:502
+#: appointments.php:415 appointments.php:707 includes/class-app-service.php:516
 msgid "Not defined"
 msgstr "Не определено"
 
@@ -3158,7 +3169,7 @@ msgid "Record could not be saved OR you did not make any changes!"
 msgstr "Запись не может быть сохранен или вы не вносите никаких изменений!"
 
 #: includes/class-app-ajax.php:200 includes/class-app-ajax.php:212
-#: includes/pro/includes/addons/app-users-additional_fields.php:400
+#: includes/pro/includes/addons/app-users-additional_fields.php:350
 msgid "<span style=\"color:green;font-weight:bold\">Changes saved.</span>"
 msgstr ""
 "<span style=\"color:green;font-weight:bold\"> Изменения сохранены. </ span>"
@@ -3183,7 +3194,7 @@ msgstr ""
 "Вы уже подали заявку на бронирование. Пожалуйста, подождите от нас "
 "подтверждения."
 
-#: includes/class-app-ajax.php:473 includes/class-app-ajax.php:927
+#: includes/class-app-ajax.php:473 includes/class-app-ajax.php:932
 msgid ""
 "We are sorry, but this time slot is no longer available. Please refresh the "
 "page and try another time slot. Thank you."
@@ -3191,13 +3202,13 @@ msgstr ""
 "К сожалению, это время больше недоступно. Обновите страницу и выберите "
 "другое время. Спасибо."
 
-#: includes/class-app-ajax.php:540 includes/class-app-ajax.php:552
+#: includes/class-app-ajax.php:540 includes/class-app-ajax.php:548
 msgid "Appointment could not be saved. Please contact website admin."
 msgstr ""
 "Бронирование не может быть сохранено. Пожалуйста, обратитесь к "
 "администратору сайта."
 
-#: includes/class-app-ajax.php:748
+#: includes/class-app-ajax.php:753
 msgid ""
 "Paypal confirmation arrived, but status could not be changed for some "
 "reason. Please check appointment with ID %s"
@@ -3205,11 +3216,11 @@ msgstr ""
 "Прибыл подтверждение Paypal, но статус не может быть изменен по некоторым "
 "причинам. Пожалуйста, проверьте назначение с ID %s"
 
-#: includes/class-app-ajax.php:750
+#: includes/class-app-ajax.php:755
 msgid "Appointment status could not be changed"
 msgstr "Статус бронирования не может быть изменен"
 
-#: includes/class-app-ajax.php:756
+#: includes/class-app-ajax.php:761
 msgid ""
 "Last transaction has been reversed. Reason: Payment has been reversed "
 "(charge back)"
@@ -3217,106 +3228,106 @@ msgstr ""
 "Последняя сделка была обращена вспять. Причина: Оплата была обращена вспять "
 "(плата назад)"
 
-#: includes/class-app-ajax.php:781
+#: includes/class-app-ajax.php:786
 msgid "Last transaction has been reversed. Reason: Payment has been refunded"
 msgstr "Последняя сделка была обращена вспять. Причина: Оплата была возвращена"
 
-#: includes/class-app-ajax.php:806
+#: includes/class-app-ajax.php:811
 msgid "Last transaction has been reversed. Reason: Payment Denied"
 msgstr "Последняя сделка была обращена вспять. Причина: Оплата Denied"
 
-#: includes/class-app-ajax.php:833
+#: includes/class-app-ajax.php:838
 msgid "Customer did not include a confirmed shipping address"
 msgstr "Клиент не включает подтвержденный адрес доставки"
 
-#: includes/class-app-ajax.php:834
+#: includes/class-app-ajax.php:839
 msgid "Funds not captured yet"
 msgstr "Средства еще не захватили"
 
-#: includes/class-app-ajax.php:835
+#: includes/class-app-ajax.php:840
 msgid "eCheck that has not cleared yet"
 msgstr "Echeck, что до сих пор не очищены"
 
-#: includes/class-app-ajax.php:836
+#: includes/class-app-ajax.php:841
 msgid "Payment waiting for aproval by service provider"
 msgstr "Оплата ждет aproval от поставщика услуг"
 
-#: includes/class-app-ajax.php:837
+#: includes/class-app-ajax.php:842
 msgid "Payment waiting for service provider to handle multi-currency process"
 msgstr ""
 "Оплата ожидания для поставщика услуг, чтобы справиться мультивалютный процесс"
 
-#: includes/class-app-ajax.php:838
+#: includes/class-app-ajax.php:843
 msgid "Customer did not register or confirm his/her email yet"
 msgstr ""
 "Клиент не зарегистрироваться или подтвердить его / ее электронной почты еще"
 
-#: includes/class-app-ajax.php:839
+#: includes/class-app-ajax.php:844
 msgid "Waiting for service provider to upgrade the PayPal account"
 msgstr "В ожидании поставщика услуг обновить учетную запись PayPal"
 
-#: includes/class-app-ajax.php:840
+#: includes/class-app-ajax.php:845
 msgid "Waiting for service provider to verify his/her PayPal account"
 msgstr "В ожидании поставщика услуг, чтобы проверить его / ее счет PayPal"
 
-#: includes/class-app-ajax.php:844
+#: includes/class-app-ajax.php:849
 msgid "Last transaction is pending. Reason: "
 msgstr "Последняя сделка находится на рассмотрении. Причина: "
 
-#: includes/class-app-ajax.php:907
+#: includes/class-app-ajax.php:912
 msgid "You need to login to make an appointment."
 msgstr "Вы должны войти, чтобы записаться на прием."
 
-#: includes/class-app-ajax.php:933
+#: includes/class-app-ajax.php:938
 msgid "Service name: "
 msgstr "Услуга:"
 
-#: includes/class-app-ajax.php:934
+#: includes/class-app-ajax.php:939
 msgid "Date and time: "
 msgstr "Время и дата:"
 
-#: includes/class-app-ajax.php:935
+#: includes/class-app-ajax.php:940
 msgid "Lasts (approx): "
 msgstr "Длится (приблизительно): "
 
-#: includes/class-app-ajax.php:935
+#: includes/class-app-ajax.php:940
 msgid "minutes"
 msgstr "минуты"
 
-#: includes/class-app-ajax.php:938
+#: includes/class-app-ajax.php:943
 msgid "Price: "
 msgstr "Цена:"
 
-#: includes/class-app-ajax.php:943
+#: includes/class-app-ajax.php:947
 msgid "Service provider: "
 msgstr "Сотрудник:"
 
-#: includes/class-app-ajax.php:1029
+#: includes/class-app-ajax.php:1034
 msgid "Nothing to download!"
 msgstr "Ничего для загрузки!"
 
-#: includes/class-app-ajax.php:1138 includes/class-app-ajax.php:1151
-#: includes/class-app-ajax.php:1177
+#: includes/class-app-ajax.php:1143 includes/class-app-ajax.php:1156
+#: includes/class-app-ajax.php:1182
 msgid "Sorry, there was a problem with your request!"
 msgstr ""
 
-#: includes/class-app-ajax.php:1163 includes/class-app-ajax.php:1189
+#: includes/class-app-ajax.php:1168 includes/class-app-ajax.php:1194
 msgid "Service Provider was successfuly deleted."
 msgstr ""
 
-#: includes/class-app-appointment.php:1232
+#: includes/class-app-appointment.php:1223
 msgid "Paid"
 msgstr "Оплачено"
 
-#: includes/class-app-appointment.php:1233
+#: includes/class-app-appointment.php:1224
 msgid "Confirmed"
 msgstr "Подтверждено"
 
-#: includes/class-app-appointment.php:1503 includes/default_filters.php:121
+#: includes/class-app-appointment.php:1494 includes/default_filters.php:121
 msgid "The appointment does not exist."
 msgstr ""
 
-#: includes/class-app-appointment.php:1507
+#: includes/class-app-appointment.php:1498
 msgid "The appointment has been already cancelled."
 msgstr ""
 
@@ -4039,7 +4050,7 @@ msgid "Less Info"
 msgstr "Менее информация"
 
 #: includes/default_filters.php:121 includes/default_filters.php:124
-#: includes/shortcodes/class-app-shortcode-confirmation.php:242
+#: includes/shortcodes/class-app-shortcode-confirmation.php:244
 msgid "Error"
 msgstr ""
 
@@ -4654,15 +4665,18 @@ msgstr ""
 #: includes/pro/includes/addons/app-locations-location_support.php:130
 #: includes/pro/includes/addons/app-locations-location_support.php:444
 #: includes/pro/includes/addons/app-locations-location_support.php:469
-#: includes/pro/includes/addons/app-locations-service_locations.php:144
-#: includes/pro/includes/addons/app-locations-service_locations.php:166
-#: includes/pro/includes/addons/app-locations-worker_locations.php:174
+#: includes/pro/includes/addons/app-locations-service_locations.php:159
+#: includes/pro/includes/addons/app-locations-service_locations.php:181
+#: includes/pro/includes/addons/app-locations-service_locations.php:415
+#: includes/pro/includes/addons/app-locations-worker_locations.php:188
+#: includes/pro/includes/addons/app-locations-worker_locations.php:305
+#: includes/pro/includes/addons/app-locations-worker_locations.php:318
 #: includes/pro/includes/addons/lib/class-app-locations-list-table.php:34
 msgid "Location"
 msgstr "Местоположение"
 
 #: includes/pro/includes/addons/app-locations-location_support.php:151
-#: includes/pro/includes/addons/app-users-additional_fields.php:559
+#: includes/pro/includes/addons/app-users-additional_fields.php:503
 msgid "Add"
 msgstr "Добавить"
 
@@ -4829,35 +4843,40 @@ msgstr "Zoom:"
 msgid "Numeric value"
 msgstr "Численное значение"
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:213
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:216
 msgid "Type:"
 msgstr "Тип: "
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:225
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:231
 msgid "Units:"
 msgstr "единиц:"
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:239
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:246
 msgid "Show images"
 msgstr "Просмотреть фотографии"
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:244
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:250
 msgid "Automatic map overlays"
 msgstr "Автоматические накладки карте"
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:246
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:252
 msgid "Automatically insert maps..."
 msgstr "Автоматическая вставка карты ..."
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:250
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:259
 msgid "After My Appointments shortcode output"
 msgstr "После Мой выход Назначения шорткод"
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:256
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:269
 msgid "After All Appointments shortcode output"
 msgstr "После Весь вывод Назначения шорткод"
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:192
+#: includes/pro/includes/addons/app-locations-service_locations.php:185
+#: includes/pro/includes/addons/app-locations-worker_locations.php:192
+msgid "There is no locations to choose. Please add some first."
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-service_locations.php:211
 msgid ""
 "You'll need Locations add-on activated for Service Locations integration add-"
 "on to work"
@@ -4865,34 +4884,45 @@ msgstr ""
 "Вы будете нуждаться Места дополнения активируется на обслуживание местах "
 "интеграция дополнения к работе"
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:234
+#: includes/pro/includes/addons/app-locations-service_locations.php:253
 msgid "Service Locations Settings"
 msgstr "Сервис Пункты Настройки"
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:237
+#: includes/pro/includes/addons/app-locations-service_locations.php:256
 msgid "Show service location"
 msgstr "Расположение Показать служба"
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:240
-#: includes/pro/includes/addons/app-locations-worker_locations.php:105
+#: includes/pro/includes/addons/app-locations-service_locations.php:259
+#: includes/pro/includes/addons/app-locations-worker_locations.php:119
 msgid "I will add location info manually, using shortcode"
 msgstr ""
 "Я буду добавлять географическую информацию вручную, используя короткий номер"
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:241
+#: includes/pro/includes/addons/app-locations-service_locations.php:260
 msgid "Automatic, before service description"
 msgstr "Автоматическая, до описания сервиса"
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:242
+#: includes/pro/includes/addons/app-locations-service_locations.php:261
 msgid "Automatic, after service description"
 msgstr "Автоматическая, после описания службы"
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:244
+#: includes/pro/includes/addons/app-locations-service_locations.php:263
 msgid ""
 "You can use the shortcode like this: <code>[app_service_locations]</code>"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-worker_locations.php:55
+#: includes/pro/includes/addons/app-locations-service_locations.php:391
+#, fuzzy
+msgid "Service Location"
+msgstr "Расположение Показать служба"
+
+#: includes/pro/includes/addons/app-locations-service_locations.php:438
+#: includes/pro/includes/addons/app-locations-worker_locations.php:341
+#, fuzzy
+msgid "No Location"
+msgstr "Местоположение"
+
+#: includes/pro/includes/addons/app-locations-worker_locations.php:69
 msgid ""
 "You'll need Locations add-on activated for Worker Locations integration add-"
 "on to work"
@@ -4900,28 +4930,28 @@ msgstr ""
 "Вы будете нуждаться Места дополнения активирован для рабочего Места "
 "интеграция дополнения к работе"
 
-#: includes/pro/includes/addons/app-locations-worker_locations.php:99
+#: includes/pro/includes/addons/app-locations-worker_locations.php:113
 msgid "Worker Locations Settings"
 msgstr "Рабочие Места Настройки"
 
-#: includes/pro/includes/addons/app-locations-worker_locations.php:102
+#: includes/pro/includes/addons/app-locations-worker_locations.php:116
 msgid "Show worker location"
 msgstr "Показать рабочий расположение"
 
-#: includes/pro/includes/addons/app-locations-worker_locations.php:106
+#: includes/pro/includes/addons/app-locations-worker_locations.php:120
 msgid "Automatic, before worker description"
 msgstr "Автоматическая, перед описанием работника"
 
-#: includes/pro/includes/addons/app-locations-worker_locations.php:107
+#: includes/pro/includes/addons/app-locations-worker_locations.php:121
 msgid "Automatic, after worker description"
 msgstr "Автоматическая, после описания работник"
 
-#: includes/pro/includes/addons/app-locations-worker_locations.php:109
+#: includes/pro/includes/addons/app-locations-worker_locations.php:123
 msgid ""
 "You can use the shortcode like this: <code>[app_provider_locations]</code>"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-worker_locations.php:153
+#: includes/pro/includes/addons/app-locations-worker_locations.php:167
 msgid "Location:"
 msgstr "Адрес:"
 
@@ -5103,102 +5133,135 @@ msgstr "Перед"
 msgid "After"
 msgstr "После"
 
-#: includes/pro/includes/addons/app-schedule-paddings.php:126
+#: includes/pro/includes/addons/app-schedule-paddings.php:130
 msgid "... applying the smaller padding of the two"
 msgstr ""
 
-#: includes/pro/includes/addons/app-schedule-paddings.php:127
+#: includes/pro/includes/addons/app-schedule-paddings.php:131
 msgid "... applying the larger padding of the two"
 msgstr ""
 
-#: includes/pro/includes/addons/app-schedule-paddings.php:128
+#: includes/pro/includes/addons/app-schedule-paddings.php:132
 msgid "... adding the two together and applying the result"
 msgstr ""
 
-#: includes/pro/includes/addons/app-schedule-paddings.php:132
+#: includes/pro/includes/addons/app-schedule-paddings.php:136
 msgid "Padding resolution type"
 msgstr "Тип разрешение Заполнение"
 
-#: includes/pro/includes/addons/app-schedule-paddings.php:134
+#: includes/pro/includes/addons/app-schedule-paddings.php:138
 msgid ""
 "When both the current service and the current service provider have paddings "
 "assigned, resolve them by..."
 msgstr ""
 
-#: includes/pro/includes/addons/app-schedule-paddings.php:160
-#: includes/pro/includes/addons/app-schedule-paddings.php:231
-#: includes/pro/includes/addons/app-schedule-paddings.php:263
+#: includes/pro/includes/addons/app-schedule-paddings.php:164
+#: includes/pro/includes/addons/app-schedule-paddings.php:235
+#: includes/pro/includes/addons/app-schedule-paddings.php:267
 msgid "Padding times"
 msgstr "Раз Записная"
 
-#: includes/pro/includes/addons/app-schedule-paddings.php:192
+#: includes/pro/includes/addons/app-schedule-paddings.php:196
+#: includes/pro/includes/addons/app-schedule-paddings.php:581
 msgid "Paddings"
 msgstr ""
 
-#: includes/pro/includes/addons/app-schedule-shared_resources.php:46
-#: includes/pro/includes/addons/app-schedule-shared_resources.php:66
+#: includes/pro/includes/addons/app-schedule-paddings.php:613
+#, fuzzy
+msgid "Before: %s"
+msgstr "Перед"
+
+#: includes/pro/includes/addons/app-schedule-paddings.php:623
+#, fuzzy
+msgid "After: %s"
+msgstr "После"
+
+#: includes/pro/includes/addons/app-schedule-paddings.php:643
+msgid "No paddings"
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-shared_resources.php:53
+#: includes/pro/includes/addons/app-schedule-shared_resources.php:74
 msgid "Shares resources with"
 msgstr "Акции ресурсов с"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:120
+#: includes/pro/includes/addons/app-schedule-shared_resources.php:81
+msgid "Share with \"%s\""
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-shared_resources.php:84
+msgid "Do not share"
+msgstr ""
+
+#: includes/pro/includes/addons/app-schedule-shared_resources.php:208
+#, fuzzy
+msgid "Shared resources"
+msgstr "Акции ресурсов с"
+
+#: includes/pro/includes/addons/app-schedule-shared_resources.php:239
+#, fuzzy
+msgid "No shared resources"
+msgstr "Акции ресурсов с"
+
+#: includes/pro/includes/addons/app-users-additional_fields.php:101
 msgid "The field %s is required"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:515
+#: includes/pro/includes/addons/app-users-additional_fields.php:459
 msgid "Text"
 msgstr "Текст"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:516
+#: includes/pro/includes/addons/app-users-additional_fields.php:460
 msgid "Checkbox"
 msgstr "Чекбокс"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:522
+#: includes/pro/includes/addons/app-users-additional_fields.php:466
 msgid "Additional Fields"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:525
+#: includes/pro/includes/addons/app-users-additional_fields.php:469
 msgid "Additional fields"
 msgstr "Дополнительные поля"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:532
-#: includes/pro/includes/addons/app-users-additional_fields.php:570
+#: includes/pro/includes/addons/app-users-additional_fields.php:476
+#: includes/pro/includes/addons/app-users-additional_fields.php:513
 msgid "Required"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:534
+#: includes/pro/includes/addons/app-users-additional_fields.php:478
 msgid "E-mail macro:"
 msgstr "Email макроc:"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:535
+#: includes/pro/includes/addons/app-users-additional_fields.php:479
 msgid "This is the placeholder you can use in your emails."
 msgstr "Это заполнитель можно использовать в свои сообщения электронной почты."
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:537
-#: includes/pro/includes/addons/app-users-additional_fields.php:572
+#: includes/pro/includes/addons/app-users-additional_fields.php:481
+#: includes/pro/includes/addons/app-users-additional_fields.php:515
 msgid "Remove"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:542
+#: includes/pro/includes/addons/app-users-additional_fields.php:486
 msgid "Add new field"
 msgstr "Добавить новое поле"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:544
+#: includes/pro/includes/addons/app-users-additional_fields.php:488
 msgid "Field label:"
 msgstr "Поле этикетки:"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:548
+#: includes/pro/includes/addons/app-users-additional_fields.php:492
 msgid "Field type:"
 msgstr "Тип поля:"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:557
+#: includes/pro/includes/addons/app-users-additional_fields.php:501
 msgid "Required?"
 msgstr "Обязательный?"
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:707
+#: includes/pro/includes/addons/app-users-additional_fields.php:641
 msgid "checked"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-additional_fields.php:707
+#: includes/pro/includes/addons/app-users-additional_fields.php:641
 msgid "not checked"
 msgstr ""
 
@@ -5211,24 +5274,61 @@ msgid "Register with %s"
 msgstr "Зарегистрироваться с %s"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:66
-msgid "Limit Services Login"
-msgstr ""
-
-#: includes/pro/includes/addons/app-users-limit_services_login.php:69
 msgid "Show login buttons"
 msgstr "Кнопки Показать входа"
 
-#: includes/pro/includes/addons/app-users-limit_services_login.php:80
+#: includes/pro/includes/addons/app-users-limit_services_login.php:72
+#, fuzzy
+msgid "Show %s login button"
+msgstr "Кнопки Показать входа"
+
+#: includes/pro/includes/addons/app-users-limit_services_login.php:78
+msgid "Show"
+msgstr ""
+
+#: includes/pro/includes/addons/app-users-limit_services_login.php:78
+msgid "Hide"
+msgstr ""
+
+#: includes/pro/includes/addons/app-users-limit_services_login.php:84
+#, fuzzy
+msgid "Name for login button"
+msgstr "Используйте %s имя для кнопки входа"
+
+#: includes/pro/includes/addons/app-users-limit_services_login.php:87
 msgid "Use %s name for login button"
 msgstr "Используйте %s имя для кнопки входа"
 
-#: includes/pro/includes/addons/app-users-limit_services_login.php:80
+#: includes/pro/includes/addons/app-users-limit_services_login.php:87
 msgid "network"
 msgstr "сеть"
 
-#: includes/pro/includes/addons/app-users-limit_services_login.php:80
+#: includes/pro/includes/addons/app-users-limit_services_login.php:87
 msgid "site"
 msgstr "сайт"
+
+#: includes/pro/includes/addons/app-users-limit_services_login.php:92
+#, fuzzy
+msgid "Use"
+msgstr "Пользователь"
+
+#: includes/pro/includes/addons/app-users-limit_services_login.php:104
+#, fuzzy
+msgid "Facebook"
+msgstr "Facebook App ID"
+
+#: includes/pro/includes/addons/app-users-limit_services_login.php:105
+msgid "Twitter"
+msgstr ""
+
+#: includes/pro/includes/addons/app-users-limit_services_login.php:106
+msgid "Google"
+msgstr ""
+
+#: includes/pro/includes/addons/app-users-limit_services_login.php:107
+#, fuzzy
+msgid "WordPress"
+msgstr "Ваш адрес:"
 
 #: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:9
 msgid "Service Locations"
@@ -5570,7 +5670,7 @@ msgid "Date/time"
 msgstr "Дата / время"
 
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:123
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:306
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:318
 msgid "No appointments"
 msgstr "Нет бронирований"
 
@@ -5721,7 +5821,7 @@ msgstr ""
 msgid "<b>This shortcode is always required to complete an appointment.</b>"
 msgstr "<b> Это шорткод всегда требуется, чтобы завершить встречу. </ B>"
 
-#: includes/shortcodes/class-app-shortcode-confirmation.php:240
+#: includes/shortcodes/class-app-shortcode-confirmation.php:242
 msgid "A connection problem occurred. Please try again."
 msgstr "Возникла проблема связи. Пожалуйста, попробуйте еще раз."
 
@@ -6113,26 +6213,26 @@ msgstr ""
 msgid "Pay"
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:295
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:307
 msgid "Click to submit this appointment to your Google Calendar account"
 msgstr "Нажмите, чтобы представить эту встречу в календаре счет Google"
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:314
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:326
 msgid "Submit Confirm"
 msgstr "Представьте Подтвердить"
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:326
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:361
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:338
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:373
 msgid "Are you sure you want to cancel the selected appointment?"
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:327
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:375
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:339
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:387
 msgid "Selected appointment cancelled."
 msgstr "Выбранный встречу отменили."
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:328
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:381
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:340
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:393
 msgid "A connection error occurred."
 msgstr "Произошла ошибка связи."
 
@@ -6592,22 +6692,22 @@ msgid ""
 "to 1.7 please review your settings."
 msgstr ""
 
-#: admin/class-app-admin.php:476
+#: admin/class-app-admin.php:488
 msgctxt "Default page title for Appointments calandars."
 msgid "Make an Appointment"
 msgstr ""
 
-#: admin/class-app-list-table-workers.php:29
+#: admin/class-app-list-table-workers.php:41
 msgctxt "dummy worker"
 msgid "Yes"
 msgstr ""
 
-#: admin/class-app-list-table-workers.php:29
+#: admin/class-app-list-table-workers.php:41
 msgctxt "dummy worker"
 msgid "No"
 msgstr ""
 
-#: admin/class-app-list-table-workers.php:94
+#: admin/class-app-list-table-workers.php:105
 msgctxt "user pfofile link on Service Providers screen"
 msgid "Profile"
 msgstr ""
@@ -6618,10 +6718,10 @@ msgctxt "paging"
 msgid "%1$s of %2$s"
 msgstr ""
 
-#: admin/views/inline-edit.php:123 appointments.php:1847
+#: admin/views/inline-edit.php:126 appointments.php:1847
 #: includes/class-app-tutorial.php:225
 #: includes/pro/includes/addons/app-locations-location_support.php:155
-#: includes/shortcodes/class-app-shortcode-confirmation.php:210
+#: includes/shortcodes/class-app-shortcode-confirmation.php:212
 msgctxt "Drop current action"
 msgid "Cancel"
 msgstr "Отменить"
