@@ -431,9 +431,12 @@ class App_Locations_ServiceLocations {
 	 *
 	 * @since 2.4.0
 	 */
-	public function get_column_location( $content, $service ) {
+	public function get_column_location( $content, $item ) {
+		if ( ! is_a( $item, 'Appointments_Service' ) ) {
+			return $content;
+		}
 		$no = __( 'No Location', 'appointments' );
-		$location = $this->_service_to_location( $service->ID );
+		$location = $this->_service_to_location( $item->ID );
 		if ( empty( $location ) ) {
 			return $no;
 		}

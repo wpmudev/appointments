@@ -1,13 +1,15 @@
 2018-xx-xx - 2.4.0
 -------------------------------
-- Fixed time display format to selected in WordPress options.
-- Improved Object Cache clear.
-- Improved "confirmation" checkbox on Service Provider Profile page.
+- Added ability to show/hode columns on "Services" settings screen.
+- Added ability to show/hode columns on "Service Provider" settings screen.
 - Added asterisk to additional, required fields (pro only).
+- Added columns "Paddings" and "Location" on "Service Providers" settings screen (pro only).
+- Added columns "Paddings", "Location" and "Shared resources" on "Services" settings screen (pro only).
 - Added locations on appointment form.
 - Added SERVICE_LOCATION placeholder replaced by a service Location in email templates.
-- Added columns "Paddings", "Location" and "Shared resources" on "Services" settings screen (pro only).
-- Added ability to show/hode columns on "Services" settings screen.
+- Fixed time display format to selected in WordPress options.
+- Improved "confirmation" checkbox on Service Provider Profile page.
+- Improved Object Cache clear.
 
 2018-06-12 - 2.3.2
 -------------------------------

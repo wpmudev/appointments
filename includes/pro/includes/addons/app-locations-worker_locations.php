@@ -53,6 +53,14 @@ class App_Locations_WorkerLocations {
 		 * @since 2.4.0
 		 */
 		add_filter( 'app_pre_confirmation_reply', array( $this, 'add_location_to_reply_array' ) );
+		/**
+		 * Add location to columns
+		 *
+		 * @since 2.4.0
+		 */
+		add_filter( 'manage_appointments_service_provider_columns', array( $this, 'add_columns' ) );
+		add_filter( 'default_hidden_columns', array( $this, 'add_default_hidden_columns' ), 10, 2 );
+		add_filter( 'appointments_list_column_location', array( $this, 'get_column_location' ), 10, 2 );
 	}
 
 	function show_nags() {
@@ -299,6 +307,47 @@ class App_Locations_WorkerLocations {
 			);
 		}
 		return $reply_array;
+	}
+
+	/**
+	 * Add column "Location" to Service Providers list
+	 *
+	 * @since 2.4.0
+	 */
+	public function add_columns( $columns ) {
+		$columns['location'] = __( 'Location', 'appointments' );
+		return $columns;
+	}
+
+	/**
+	 * Hide by default column "Location" to Service Providers list
+	 *
+	 * @since 2.4.0
+	 */
+	public function add_default_hidden_columns( $hidden, $screen ) {
+		$hidden[] = 'location';
+		return $hidden;
+	}
+
+	/**
+	 * Add column "Location" content to Service Providers list
+	 *
+	 * @since 2.4.0
+	 */
+	public function get_column_location( $content, $item ) {
+		if ( ! is_a( $item, 'Appointments_Worker' ) ) {
+			return $content;
+		}
+		$no = __( 'No Location', 'appointments' );
+		$location = $this->_worker_to_location( $item->ID );
+		if ( empty( $location ) ) {
+			return $no;
+		}
+		$content = $location->get_display_markup();
+		if ( empty( $content ) ) {
+			return $no;
+		}
+		return $content;
 	}
 }
 App_Locations_WorkerLocations::serve();
