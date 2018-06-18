@@ -157,6 +157,19 @@ We provide comprehensive and guaranteed support on the <a href='http://premium.w
 
 == Changelog ==
 
+= 2.3.2 =
+* Added an option to force load Appointment's scripts and styles.
+* Added a limit for "Service Capacity" on a service add and edit screen to the number of defined workers.
+* Fixed a problem with appointment hour when a worker was not selected.
+* Fixed a problem with more than one Service Provider on schedule table, when first is already busy, but second is not.
+* Fixed a problem with service description when Service is not selected.
+* Fixed problems with capacity.
+* Improved adding a new service provider, when is only one service it will be checked by default.
+* Improved column "Price".
+* Improved Service "Service Capacity" edit field.
+* Excluded "removed" and "completed" statuses from is_busy() calculations.
+* Added asterisk to GDPR checkbox label on appointment form.
+
 = 2.3.0 =
 * Convert "Time base" on "Time Settings" to human readable. Props for David @ BBS.
 * Fixed a problem with an appointment create time, it showed "Unknown" for Time Formats: "g:i a" and "g:i A".
