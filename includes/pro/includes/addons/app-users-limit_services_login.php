@@ -89,7 +89,7 @@ class App_Users_LimitServicesLogin {
 						<hr />
 						<div class="app-lsl-other_options">
 							<label for="app-use_blogname_for_login">
-                            <input type="checkbox" name="use_blogname_for_login" id="app-use_blogname_for_login" value="1" <?php checked( $options['use_blogname_for_login'], 1 ); ?> class="switch-button" data-on="<?php esc_attr_e( 'Use', 'appointments' ); ?>"/>
+                            <input type="checkbox" name="use_blogname_for_login" id="app-use_blogname_for_login" value="1" <?php checked( $options['use_blogname_for_login'], 1 ); ?> class="switch-button" data-on="<?php esc_attr_e( 'Use', 'appointments' ); ?>" data-off="<?php esc_attr_e( 'Do not use', 'appointments' ); ?>"/>
 							</label>
 						</div>
 					</td>
