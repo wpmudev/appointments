@@ -253,6 +253,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		$colspan = substr_count( $ret, '<th' );
 		$ret .= '</thead><tbody>';
 		if ( $results ) {
+			$show_submit_confirm_button = false;
 			foreach ( $results as $r ) {
 				$ret .= '<tr><td>';
 				$ret .= $appointments->get_service_name( $r->service ) . '</td>';
@@ -284,6 +285,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 						$ret .= '-';
 					} else {
 						$ret .= '<input class="app-my-appointments-confirm" type="checkbox" name="app_confirm['.$r->ID.']" '.$is_readonly.' />';
+						$show_submit_confirm_button = true;
 					}
 
 					$ret .= '</td>';
@@ -303,7 +305,10 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 
 				if ( $args['gcal'] && 'yes' == $appointments->options['gcal'] ) {
 					if ( isset( $appointments->options['gcal_same_window'] ) && $appointments->options['gcal_same_window'] ) {
-						$target = '_self'; } else { 						$target = '_blank'; }
+						$target = '_self';
+					} else {
+						$target = '_blank';
+					}
 					$ret .= '<td><a title="'.__( 'Click to submit this appointment to your Google Calendar account','appointments' )
 					        .'" href="'.$appointments->gcal( $r->service, strtotime( $r->start, $appointments->local_time ), strtotime( $r->end, $appointments->local_time ), true, $r->address, $r->city )
 					        .'" target="'.$target.'">'.$appointments->gcal_image.'</a></td>';
@@ -321,7 +326,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		$ret .= '</tbody></table>';
 		$ret  = apply_filters( 'app_my_appointments_after_table', $ret, $results );
 
-		if ( $this->_can_display_editable( $allow_confirm ) ) {
+		if ( $show_submit_confirm_button && $this->_can_display_editable( $allow_confirm ) ) {
 			$ret .= '<div class="submit">' .
 			       '<input type="submit" name="app_bp_settings_submit" value="' . esc_attr( __( 'Submit Confirm', 'appointments' ) ) . '" class="auto">' .
 			       '<input type="hidden" name="app_bp_settings_user" value="' . esc_attr( $bp->displayed_user->id ) . '">' .

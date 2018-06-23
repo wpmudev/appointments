@@ -1,7 +1,7 @@
 2018-xx-xx - 2.4.0
 -------------------------------
-- Added ability to show/hode columns on "Services" settings screen.
-- Added ability to show/hode columns on "Service Provider" settings screen.
+- Added ability to show/hide columns on "Services" settings screen.
+- Added ability to show/hide columns on "Service Provider" settings screen.
 - Added asterisk to additional, required fields (pro only).
 - Added columns "Paddings" and "Location" on "Service Providers" settings screen (pro only).
 - Added columns "Paddings", "Location" and "Shared resources" on "Services" settings screen (pro only).
