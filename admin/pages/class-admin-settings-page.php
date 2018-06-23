@@ -230,7 +230,7 @@ class Appointments_Admin_Settings_Page {
 				global $appointments_services_list;
 				$option = 'per_page';
 				$args = array(
-					'label' => __( 'Services & Workers', 'appointments' ),
+					'label' => __( 'Number of services per page', 'appointments' ),
 					'default' => get_user_option( 'app_services_per_page', 20 ),
 					'option' => 'app_services_per_page',
 				);
@@ -242,7 +242,7 @@ class Appointments_Admin_Settings_Page {
 				global $appointments_workers_list;
 				$option = 'per_page';
 				$args = array(
-					'label' => __( 'Services & Workers', 'appointments' ),
+					'label' => __( 'Number of service providers per page', 'appointments' ),
 					'default' => get_user_option( 'app_workers_per_page', 20 ),
 					'option' => 'app_workers_per_page',
 				);
