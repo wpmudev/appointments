@@ -103,8 +103,9 @@ class App_Locations_WorkerLocations {
 		if ( empty( $appointment->worker ) ) { return false; }
 
 		$location_id = self::worker_to_location_id( $appointment->worker );
-		if ( ! $location_id ) { return false; }
-
+		if ( ! $location_id ) {
+			return false;
+		}
 		appointments_update_appointment( $appointment_id, array( 'location' => $location_id ) );
 	}
 
@@ -298,6 +299,9 @@ class App_Locations_WorkerLocations {
 	 */
 	public function add_location_to_reply_array( $reply_array ) {
 		$location = $this->_worker_to_location( $reply_array['worker_id'] );
+		if ( false === $location ) {
+			return array();
+		}
 		$content = $location->get_display_markup();
 		if ( ! empty( $content ) ) {
 			$reply_array['worker_location'] = sprintf(

@@ -384,6 +384,9 @@ class App_Locations_ServiceLocations {
 	 */
 	public function add_location_to_reply_array( $reply_array ) {
 		$location = $this->_service_to_location( $reply_array['service_id'] );
+		if ( false === $location ) {
+			return array();
+		}
 		$content = $location->get_display_markup();
 		if ( ! empty( $content ) ) {
 			$reply_array['service_location'] = sprintf(
