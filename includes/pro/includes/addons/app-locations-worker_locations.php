@@ -298,9 +298,10 @@ class App_Locations_WorkerLocations {
 	 * @since 2.4.0
 	 */
 	public function add_location_to_reply_array( $reply_array ) {
-		$location = $this->_worker_to_location( $reply_array['worker_id'] );
+		$worker_id = isset( $reply_array['worker_id'] )? $reply_array['worker_id'] : 0;
+		$location = $this->_worker_to_location( $worker_id );
 		if ( false === $location ) {
-			return array();
+			return $reply_array;
 		}
 		$content = $location->get_display_markup();
 		if ( ! empty( $content ) ) {
