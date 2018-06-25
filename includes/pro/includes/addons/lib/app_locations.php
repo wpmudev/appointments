@@ -324,7 +324,6 @@ class App_Locations_MappedLocation extends App_Locations_Location {
 
 	public function to_map() {
 		$map_id = $this->get_var( self::KEY_GOOGLE_MAP_ID );
-
 		if ( ! $map_id ) {
 			$map_id = $this->_create_map();
 		}
@@ -352,16 +351,18 @@ class App_Locations_MappedLocation extends App_Locations_Location {
 
 	public function get_map() {
 		$map = $this->to_map();
-		if ( ! $map ) {
-			$this->set_var( self::KEY_GOOGLE_MAP_ID, false );
-			do_action( 'app-locations-location-model-item_updated' );
-			return $this->get_map(); // Map got deleted somehow, let's double up
-		} else {
+		if ( $map ) {
 			global $appointments;
 			$data = $appointments->options;
 			$overrides = ! empty( $data['google_maps']['overrides'] ) ? $data['google_maps']['overrides'] : array();
 			return $this->_maps_codec->create_tag( $map, $overrides );
 		}
+		if ( ! class_exists( 'AgmMapModel' ) ) {
+			return;
+		}
+		$this->set_var( self::KEY_GOOGLE_MAP_ID, false );
+		do_action( 'app-locations-location-model-item_updated' );
+		return $this->get_map(); // Map got deleted somehow, let's double up
 	}
 
 	private function _create_map() {
