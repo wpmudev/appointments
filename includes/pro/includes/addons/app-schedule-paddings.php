@@ -541,8 +541,8 @@ class App_Schedule_Paddings {
 	 * @since 2.3.0
 	 */
 	public function add_service_padding( $service ) {
-		$service->service_padding = false;
 		if ( is_object( $service ) && isset( $service->ID ) ) {
+			$service->service_padding = false;
 			$paddings = array( self::PADDING_BEFORE => 0, self::PADDING_AFTER => 0 );
 			$options = appointments_get_options();
 			if ( isset( $options['service_padding'][ $service->ID ] ) ) {
