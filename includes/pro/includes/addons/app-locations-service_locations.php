@@ -405,6 +405,9 @@ class App_Locations_ServiceLocations {
 	 */
 	public function add_replacements( $replacement, $notification_type, $text, $object ) {
 		$location = $this->_service_to_location( $object->service );
+		if ( empty( $location ) ) {
+			return $replacement;
+		}
 		$replacement['/\bSERVICE_LOCATION\b/U'] = $location->get_display_markup();
 		return $replacement;
 	}
