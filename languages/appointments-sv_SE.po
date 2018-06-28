@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-06-18 06:56:18+00:00\n"
+"POT-Creation-Date: 2018-06-28 06:32:48+00:00\n"
 "PO-Revision-Date: 2017-07-03 09:11:12+0000\n"
 "Language: sv_SE\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgstr "Spara ändringar"
 #: includes/gcal/views/settings-gcal-step-3.php:64
 #: includes/pro/includes/addons/app-users-additional_fields.php:476
 #: includes/pro/includes/addons/app-users-additional_fields.php:513
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:343
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:348
 msgid "Yes"
 msgstr "Ja"
 
@@ -40,7 +40,7 @@ msgstr "Ja"
 #: includes/gcal/views/settings-gcal-step-3.php:63
 #: includes/pro/includes/addons/app-users-additional_fields.php:476
 #: includes/pro/includes/addons/app-users-additional_fields.php:513
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:344
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:349
 msgid "No"
 msgstr "Nej"
 
@@ -1536,10 +1536,14 @@ msgid "Settings updated"
 msgstr "Inställningarna uppdaterade"
 
 #: admin/pages/class-admin-settings-page.php:233
+#, fuzzy
+msgid "Number of services per page"
+msgstr "Köposter per sida"
+
 #: admin/pages/class-admin-settings-page.php:245
 #, fuzzy
-msgid "Services & Workers"
-msgstr "Tjänsteutövare"
+msgid "Number of service providers per page"
+msgstr "Filtrera via tjänsteutövare"
 
 #: admin/pages/class-admin-transactions-page.php:18
 #: admin/pages/class-admin-transactions-page.php:19
@@ -2747,7 +2751,7 @@ msgid_plural "%d Pending Appointments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: appointments.php:415 appointments.php:707 includes/class-app-service.php:516
+#: appointments.php:415 appointments.php:707 includes/class-app-service.php:473
 msgid "Not defined"
 msgstr "Ej definierad"
 
@@ -3132,7 +3136,7 @@ msgid ""
 "All collected data will be automatically erased %s after appointment date."
 msgstr ""
 
-#: includes/class-app-service.php:60
+#: includes/class-app-service.php:56
 msgid ""
 "You have reached the limit for the free version. <a href=\"%s\">Upgrade to "
 "Appointments+ for unlimited services</a>"
@@ -4296,10 +4300,10 @@ msgstr ""
 #: includes/pro/includes/addons/app-locations-location_support.php:469
 #: includes/pro/includes/addons/app-locations-service_locations.php:159
 #: includes/pro/includes/addons/app-locations-service_locations.php:181
-#: includes/pro/includes/addons/app-locations-service_locations.php:415
-#: includes/pro/includes/addons/app-locations-worker_locations.php:188
-#: includes/pro/includes/addons/app-locations-worker_locations.php:305
-#: includes/pro/includes/addons/app-locations-worker_locations.php:318
+#: includes/pro/includes/addons/app-locations-service_locations.php:421
+#: includes/pro/includes/addons/app-locations-worker_locations.php:189
+#: includes/pro/includes/addons/app-locations-worker_locations.php:310
+#: includes/pro/includes/addons/app-locations-worker_locations.php:323
 #: includes/pro/includes/addons/lib/class-app-locations-list-table.php:34
 msgid "Location"
 msgstr "Plats"
@@ -4392,110 +4396,121 @@ msgstr ""
 msgid "Show Appointments for this user ID"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:91
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:84
 msgid "Renders a map of appointments"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:152
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:138
 msgid ""
 "You'll need Locations add-on activated for Google Maps Locations integration "
 "add-on to work"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:157
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:143
 msgid ""
 "You'll need Google Maps plugin installed and activated for Google Maps "
 "Locations integration add-on to work"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:176
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:164
 msgid "ROADMAP"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:177
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:165
 msgid "SATELLITE"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:178
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:166
 msgid "HYBRID"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:179
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:167
 msgid "TERRAIN"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:182
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:170
 msgid "Metric"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:183
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:171
 msgid "Imperial"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:186
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:174
 msgid "Google Maps Settings"
 msgstr "Google Maps inställningar"
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:187
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:175
 msgid ""
 "Any setting you leave empty here will be inherited from the default Google "
 "Maps plugin settings."
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:190
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:178
 msgid "Map size"
 msgstr "Kartstorlek"
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:193
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:181
 msgid "Width:"
 msgstr "Bredd: "
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:198
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:186
 msgid "Height:"
 msgstr "Höjd: "
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:204
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:192
 msgid "Map appearance"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:207
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:195
 msgid "Zoom:"
 msgstr "Zoom:"
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:209
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:197
 msgid "Numeric value"
 msgstr "Numeriskt värde"
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:216
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:204
 msgid "Type:"
 msgstr "Typ: "
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:231
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:219
 msgid "Units:"
 msgstr "Enheter:"
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:246
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:234
 msgid "Show images"
 msgstr "Visa bilder"
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:250
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:234
+#: includes/pro/includes/addons/app-users-limit_services_login.php:78
+msgid "Hide"
+msgstr ""
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:238
 msgid "Automatic map overlays"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:252
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:240
 msgid "Automatically insert maps..."
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:259
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:247
 msgid "After My Appointments shortcode output"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:269
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:247
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:257
+#, fuzzy
+msgid "Do not insert"
+msgstr "Omdirigera ej"
+
+#: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:257
 msgid "After All Appointments shortcode output"
 msgstr ""
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:185
-#: includes/pro/includes/addons/app-locations-worker_locations.php:192
+#: includes/pro/includes/addons/app-locations-worker_locations.php:193
 msgid "There is no locations to choose. Please add some first."
 msgstr ""
 
@@ -4514,7 +4529,7 @@ msgid "Show service location"
 msgstr ""
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:259
-#: includes/pro/includes/addons/app-locations-worker_locations.php:119
+#: includes/pro/includes/addons/app-locations-worker_locations.php:120
 msgid "I will add location info manually, using shortcode"
 msgstr ""
 
@@ -4531,13 +4546,13 @@ msgid ""
 "You can use the shortcode like this: <code>[app_service_locations]</code>"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:391
+#: includes/pro/includes/addons/app-locations-service_locations.php:394
 #, fuzzy
 msgid "Service Location"
 msgstr "Tjänstens varaktighet"
 
-#: includes/pro/includes/addons/app-locations-service_locations.php:438
-#: includes/pro/includes/addons/app-locations-worker_locations.php:341
+#: includes/pro/includes/addons/app-locations-service_locations.php:444
+#: includes/pro/includes/addons/app-locations-worker_locations.php:346
 #, fuzzy
 msgid "No Location"
 msgstr "Plats"
@@ -4548,28 +4563,28 @@ msgid ""
 "on to work"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-worker_locations.php:113
+#: includes/pro/includes/addons/app-locations-worker_locations.php:114
 msgid "Worker Locations Settings"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-worker_locations.php:116
+#: includes/pro/includes/addons/app-locations-worker_locations.php:117
 msgid "Show worker location"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-worker_locations.php:120
+#: includes/pro/includes/addons/app-locations-worker_locations.php:121
 msgid "Automatic, before worker description"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-worker_locations.php:121
+#: includes/pro/includes/addons/app-locations-worker_locations.php:122
 msgid "Automatic, after worker description"
 msgstr "Automatiskt, efter personalbeskrivning"
 
-#: includes/pro/includes/addons/app-locations-worker_locations.php:123
+#: includes/pro/includes/addons/app-locations-worker_locations.php:124
 msgid ""
 "You can use the shortcode like this: <code>[app_provider_locations]</code>"
 msgstr ""
 
-#: includes/pro/includes/addons/app-locations-worker_locations.php:167
+#: includes/pro/includes/addons/app-locations-worker_locations.php:168
 msgid "Location:"
 msgstr "Plats: "
 
@@ -4897,10 +4912,6 @@ msgstr "Använd %s för login-knappen"
 msgid "Show"
 msgstr ""
 
-#: includes/pro/includes/addons/app-users-limit_services_login.php:78
-msgid "Hide"
-msgstr ""
-
 #: includes/pro/includes/addons/app-users-limit_services_login.php:84
 #, fuzzy
 msgid "Name for login button"
@@ -4922,6 +4933,11 @@ msgstr "webbsida"
 #, fuzzy
 msgid "Use"
 msgstr "Användare"
+
+#: includes/pro/includes/addons/app-users-limit_services_login.php:92
+#, fuzzy
+msgid "Do not use"
+msgstr "Omdirigera ej"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:104
 #, fuzzy
@@ -5274,7 +5290,7 @@ msgid "Date/time"
 msgstr "Datum / tid"
 
 #: includes/shortcodes/class-app-shortcode-all-appointments.php:123
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:318
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:323
 msgid "No appointments"
 msgstr "Inga tidsbokningar"
 
@@ -5776,31 +5792,31 @@ msgstr ""
 msgid "Currently you have no appointments."
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:271
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:272
 msgid "Pay"
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:307
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:312
 msgid "Click to submit this appointment to your Google Calendar account"
 msgstr ""
 "Klicka här för att skicka Tidsbokningen till ditt Google Kalender-konto"
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:326
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:331
 msgid "Submit Confirm"
 msgstr ""
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:338
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:373
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:343
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:378
 msgid "Are you sure you want to cancel the selected appointment?"
 msgstr "Är du säker på att du vill avboka?"
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:339
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:387
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:344
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:392
 msgid "Selected appointment cancelled."
 msgstr "Vald bokning avbokad"
 
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:340
-#: includes/shortcodes/class-app-shortcode-my-appointments.php:393
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:345
+#: includes/shortcodes/class-app-shortcode-my-appointments.php:398
 msgid "A connection error occurred."
 msgstr "Ett kopplingsfel har inträffat."
 
@@ -6347,6 +6363,10 @@ msgstr ""
 msgctxt "Discard existing info"
 msgid "Cancel"
 msgstr "Avbryt"
+
+#, fuzzy
+#~ msgid "Services & Workers"
+#~ msgstr "Tjänsteutövare"
 
 #~ msgid "Services Provided*"
 #~ msgstr "Tjänst(er) som erhålls*"
