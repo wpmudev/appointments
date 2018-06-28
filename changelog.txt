@@ -1,4 +1,4 @@
-2018-xx-xx - 2.4.0
+2018-06-28 - 2.4.0
 -------------------------------
 - Added ability to show/hide columns on "Services" settings screen.
 - Added ability to show/hide columns on "Service Provider" settings screen.

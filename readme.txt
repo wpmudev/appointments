@@ -3,7 +3,7 @@ Contributors: wpmudev, wpmudev-support1, wpmudev-support2, wpmudev-support4, wpm
 Tags: Appointment, Booking, Calendar, Reservation, Scheduling, google calendar
 Requires at least: 4.6
 Tested up to: 4.9.6
-Stable tag: 2.3.2
+Stable tag: 2.4.0
 License: GPL2
 
 The most powerful, flexible and feature-rich bookings plugin available for WordPress. Appointments does it all.
@@ -156,6 +156,18 @@ We provide comprehensive and guaranteed support on the <a href='http://premium.w
 5. Google Calendar integration
 
 == Changelog ==
+
+= 2.4.0 =
+* Added ability to show/hide columns on "Services" settings screen.
+* Added ability to show/hide columns on "Service Provider" settings screen.
+* Added asterisk to additional, required fields (pro only).
+* Added columns "Paddings" and "Location" on "Service Providers" settings screen (pro only).
+* Added columns "Paddings", "Location" and "Shared resources" on "Services" settings screen (pro only).
+* Added locations on appointment form.
+* Added SERVICE_LOCATION placeholder replaced by a service Location in email templates.
+* Fixed time display format to selected in WordPress options.
+* Improved "confirmation" checkbox on Service Provider Profile page.
+* Improved Object Cache clear.
 
 = 2.3.2 =
 * Added an option to force load Appointment's scripts and styles.
