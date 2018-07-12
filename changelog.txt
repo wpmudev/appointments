@@ -1,3 +1,8 @@
+2018-xx-xx - 2.4.1
+-------------------------------
+- Fixed a problem with Service Provider shortcode param name.
+- Fixed a problem with start hour for specific configurations.
+
 2018-06-28 - 2.4.0
 -------------------------------
 - Added ability to show/hide columns on "Services" settings screen.
