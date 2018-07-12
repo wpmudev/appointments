@@ -673,17 +673,19 @@ function appointments_weekly_calendar( $date = false, $args = array() ) {
 	$appointments = appointments();
 
 	$current_time = current_time( 'timestamp' );
-	$defaults = array(
-		'service_id' => 0,
-		'workers' => array(),
+	$defaults     = array(
+		'service_id'  => 0,
+		'workers'     => array(),
 		'location_id' => 0,
-		'class' => '',
-		'long' => false,
-		'echo' => true,
+		'class'       => '',
+		'long'        => false,
+		'echo'        => true,
 	);
-	$args = wp_parse_args( $args, $defaults );
+	$args         = wp_parse_args( $args, $defaults );
 
-	$args['worker_id'] = $args['workers'][0];
+	if ( ! isset( $args['worker_id'] ) || empty( $args['worker_id'] ) ) {
+		$args['worker_id'] = $args['workers'][0];
+	}
 
 	$schedule_key = sprintf( '%sx%s', $date, $date + ( 7 * 86400 ) );
 
