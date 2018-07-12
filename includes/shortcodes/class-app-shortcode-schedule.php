@@ -263,14 +263,15 @@ class App_Shortcode_WeeklySchedule extends App_Shortcode {
 			$c .= '<div class="appointments-list">';
 
 			$current_time = current_time( 'timestamp' );
-			$date = $time ? $time : $current_time;
-			$c .= appointments_weekly_calendar( $date, array(
-				'workers' => $workers,
-				'service_id' => $service_id,
+			$date         = $time ? $time : $current_time;
+			$c           .= appointments_weekly_calendar( $date, array(
+				'workers'     => $workers,
+				'worker_id'   => $worker_id,
+				'service_id'  => $service_id,
 				'location_id' => $location_id,
-				'long' => $args['long'],
-				'class' => $args['class'],
-				'echo' => false,
+				'long'        => $args['long'],
+				'class'       => $args['class'],
+				'echo'        => false,
 			));
 
 			$c .= '</div>';
