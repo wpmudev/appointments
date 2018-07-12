@@ -44,7 +44,7 @@ class App_Shortcode_ServiceProviders extends App_Shortcode {
 				'options' => array(
 					array( 'text' => 'Excerpt', 'value' => 'excerpt' ),
 					array( 'text' => 'None', 'value' => ''),
-					array( 'text' => 'Content', 'value' => 'Content' ),
+					array( 'text' => 'Content', 'value' => 'content' ),
 				)
 			),
 			'thumb_size' => array(
