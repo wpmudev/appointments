@@ -3,8 +3,17 @@
  *   version 2.0
  *   by @idiot and friends
  */
- 
-(function($) {
+
+(function(factory) {
+	if (typeof module === 'object' && typeof module.exports === 'object') {
+		factory(require('jquery'));
+	} else if (typeof define === 'function' && define.amd) {
+	    // AMD. Register as an anonymous module.
+        define([], factory(window.jQuery));
+    } else {
+		factory(window.jQuery);
+	}
+}(function($) {
 	//  Don't throw any errors when jQuery
 	if(!$) {
 		return console.warn('Unslider needs jQuery');
@@ -34,7 +43,7 @@
 			//  An easing string to use. If you're using Velocity, use a
 			//  Velocity string otherwise you can use jQuery/jQ UI options.
 			easing: 'swing', // [.42, 0, .58, 1],
-			
+
 			//  Does it support keyboard arrows?
 			//  Can pass either true or false -
 			//  or an object with the keycodes, like so:
@@ -48,7 +57,7 @@
 				prev: 37,
 				next: 39
 			},
-			
+
 			//  Do you want to generate clickable navigation
 			//  to skip to each slide? Accepts boolean true/false or
 			//  a callback function per item to generate.
@@ -88,7 +97,10 @@
 			//  Have swipe support?
 			//  You can set this here with a boolean and always use
 			//  initSwipe/destroySwipe later on.
-			swipe: true
+			swipe: true,
+			// Swipe threshold -
+			// lower float for enabling short swipe
+			swipeThreshold: 0.2
 		};
 
 		//  Set defaults
@@ -103,7 +115,7 @@
 		self.$slides = null;
 		self.$nav = null;
 		self.$arrows = [];
-		
+
 		//  Set our indexes and totals
 		self.total = 0;
 		self.current = 0;
@@ -174,6 +186,9 @@
 		//  Set up the slide widths to animate with
 		//  so the box doesn't float over
 		self.calculateSlides = function() {
+			// update slides before recalculating the total
+			self.$slides = self.$container.children(self.options.selectors.slides);
+
 			self.total = self.$slides.length;
 
 			//  Set the total width
@@ -232,7 +247,7 @@
 				//  And add it to our navigation item
 				$nav.children('ol').append('<li data-slide="' + key + '">' + label + '</li>');
 			});
-			
+
 			//  Keep a copy of the nav everywhere so we can use it
 			self.$nav = $nav.insertAfter(self.$context);
 
@@ -289,33 +304,39 @@
 		self.initSwipe = function() {
 			var width = self.$slides.width();
 
-			self.$container.on({
-				swipeleft: self.next,
-				swiperight: self.prev,
-
-				movestart: function(e) {
-					//  If the movestart heads off in a upwards or downwards
-					//  direction, prevent it so that the browser scrolls normally.
-					if((e.distX > e.distY && e.distX < -e.distY) || (e.distX < e.distY && e.distX > -e.distY)) {
-						return !!e.preventDefault();
-					}
-
-					self.$container.css('position', 'relative');
-				}
-			});
-
 			//  We don't want to have a tactile swipe in the slider
 			//  in the fade animation, as it can cause some problems
 			//  with layout, so we'll just disable it.
 			if(self.options.animation !== 'fade') {
+
 				self.$container.on({
+
+					movestart: function(e) {
+						//  If the movestart heads off in a upwards or downwards
+						//  direction, prevent it so that the browser scrolls normally.
+						if((e.distX > e.distY && e.distX < -e.distY) || (e.distX < e.distY && e.distX > -e.distY)) {
+							return !!e.preventDefault();
+						}
+
+						self.$container.css('position', 'relative');
+					},
+
 					move: function(e) {
 						self.$container.css('left', -(100 * self.current) + (100 * e.distX / width) + '%');
 					},
 
 					moveend: function(e) {
-						if((Math.abs(e.distX) / width) < $.event.special.swipe.settings.threshold) {
-							return self._move(self.$container, {left: -(100 * self.current) + '%'}, false, 200);
+						// Check if swiped distance is greater than threshold.
+						// If yes slide to next/prev slide. If not animate to
+						// starting point.
+
+						if((Math.abs(e.distX) / width) > self.options.swipeThreshold) {
+
+							self[e.distX < 0 ? 'next' : 'prev']();
+						}
+						else {
+
+							self.$container.animate({left: -(100 * self.current) + '%' }, self.options.speed / 2 );
 						}
 					}
 				});
@@ -331,7 +352,7 @@
 			$.each(pos, function(index, item) {
 				self.$slides.push.apply(
 					self.$slides,
-					
+
 					//  Exclude all cloned slides and call .first() or .last()
 					//  depending on what `item` is.
 					self.$slides.filter(':not(".' + self._ + '-clone")')[item]()
@@ -354,7 +375,7 @@
 		//  Loop our array of arrows and use jQuery to remove
 		//  It'll unbind any event handlers for us
 		self.destroyArrows = function() {
-			$.each(self.$arrows, function($arrow) {
+			$.each(self.$arrows, function(i, $arrow) {
 				$arrow.remove();
 			});
 		};
@@ -366,7 +387,7 @@
 		};
 
 		//  Unset the keyboard navigation
-		//  Remove the handler 
+		//  Remove the handler
 		self.destroyKeys = function() {
 			//  Remove the event handler
 			$(document).off('keyup' + self.eventSuffix);
@@ -387,7 +408,7 @@
 
 			return self;
 		};
-		
+
 		//  Despite the name, this doesn't do any animation - since there's
 		//  now three different types of animation, we let this method delegate
 		//  to the right type, keeping the name for backwards compat.
@@ -415,7 +436,7 @@
 			self.$context.trigger(self._ + '.change', [to, self.$slides.eq(to)]);
 
 			//  Delegate the right method - everything's named consistently
-			//  so we can assume it'll be called "animate" + 
+			//  so we can assume it'll be called "animate" +
 			var fn = 'animate' + $._ucfirst(self.options.animation);
 
 			//  Make sure it's a valid animation method, otherwise we'll get
@@ -447,7 +468,7 @@
 		self.prev = function() {
 			return self.animate(self.current - 1, 'prev');
 		};
-		
+
 
 		//  Our default animation method, the old-school left-to-right
 		//  horizontal animation
@@ -492,9 +513,7 @@
 			//  If we want to change the height of the slider
 			//  to match the current slide, you can set
 			//  {animateHeight: true}
-			if(self.options.animateHeight) {
-				self._move(self.$context, {height: self.$slides.eq(to).outerHeight()}, false);
-			}
+			self.animateHeight(to);
 
 			//  For infinite sliding we add a dummy slide at the end and start
 			//  of each slider to give the appearance of being infinite
@@ -545,12 +564,27 @@
 
 
 		//  Fade between slides rather than, uh, sliding it
-		self.animateFade = function(to) {
+        self.animateFade = function(to) {
+			//  If we want to change the height of the slider
+			//  to match the current slide, you can set
+			//  {animateHeight: true}
+			self.animateHeight(to);
+
 			var $active = self.$slides.eq(to).addClass(self.options.activeClass);
 
 			//  Toggle our classes
 			self._move($active.siblings().removeClass(self.options.activeClass), {opacity: 0});
 			self._move($active, {opacity: 1}, false);
+		};
+
+		// Animate height of slider
+		self.animateHeight = function(to) {
+			//  If we want to change the height of the slider
+			//  to match the current slide, you can set
+			//  {animateHeight: true}
+			if (self.options.animateHeight) {
+				self._move(self.$context, {height: self.$slides.eq(to).outerHeight()}, false);
+			}
 		};
 
 		self._move = function($el, obj, callback, speed) {
@@ -613,5 +647,5 @@
 			return $this.data('unslider', new $.Unslider($this, opts));
 		});
 	};
-	
-})(window.jQuery);
+
+}));
