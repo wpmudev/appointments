@@ -2,6 +2,7 @@
 -------------------------------
 - Fixed a problem with Service Provider shortcode param name.
 - Fixed a problem with start hour for specific configurations.
+- Fixed a problem with appointments intervals.
 
 2018-06-28 - 2.4.0
 -------------------------------
