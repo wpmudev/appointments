@@ -78,6 +78,8 @@ AppointmentsAdmin = window.AppointmentsAdmin || {};
         }.bind(this));
 
         this.$table.on( 'click', '.save', this.saveEditor.bind(this) );
+        
+        this.$table.on( 'change', 'select[name=worker]', this.fetchWorkerHours.bind(this) );
 
         // @TODO Refactor
         this.$exportButton.click( function(e) {
@@ -181,6 +183,78 @@ AppointmentsAdmin = window.AppointmentsAdmin || {};
             firstDay: AppointmentsDateSettings.weekStart
         });
     };
+    
+    /**
+    * Fetches the working hours of the selected provider with ajax
+    */
+    AppointmentsList.prototype.fetchWorkerHours = function(e) {
+        
+        var $select             = $( e.target ),
+            $worker_id          = $select.val(),            
+            $parent             = $select.parents( ".inline-edit-row" ),
+            $app_id             = $parent.find( "select[name=service]" ).val(),
+            $location           = $parent.find( "select[name=location]" ),
+            $slots_list         = $parent.find( "select[name=time]" ),
+            $selected_slot      = $slots_list.val(),
+            $unknown_slot       = $slots_list.children('option:first'),
+            $spinner            = $parent.find( '.waiting' ),
+            data                = {};        
+
+        $spinner.show();
+
+        /**
+        * Set up ajax data
+        */
+        data.nonce          = this.options.nonces.editApp;
+        data.action         = 'inline_fetch_worker_slots';
+        data.worker_id      = $worker_id;
+        data.app_id         = $app_id;
+        data.selected_slot  = $selected_slot;
+
+        // @TODO: Check if date is set and include that too in ajax data
+
+        if ( typeof( $location ) != "undefined" ) {
+            data.location_id         = $location.val();
+        }
+
+        /**
+        * Handle ajax response
+        */
+        $.post(ajaxurl, data, function(response) {
+
+            $spinner.hide();
+
+            // When receiving an error message
+            if ( response && response.error ){
+                
+                var error_msg = $('<div />',{
+                    'class' : 'error'
+                }).html( response.error );
+
+                $select.after( error_msg );
+                error_msg.delay(10000).fadeOut('slow');
+
+                return;
+
+            } else if (response) {
+                // Received the new time slots for worker
+                 var slots = JSON.parse( response.message );
+
+                // Empty the old slots list and add the unknown option
+                $slots_list.empty().append( '<option value="' + $unknown_slot.val() + '">' + $unknown_slot.text() + '</option>' );
+
+                // Add the new timeslots
+                for ( var key in slots ) {
+                    $slots_list.append( slots[key] );
+                }
+            } else {
+                alert( strings.unexpectedError );
+                return;
+            }
+
+
+        }.bind(this),'json');
+    }
 
     AppointmentsList.prototype.saveEditor = function(e) {
         var $button = $(e.target);

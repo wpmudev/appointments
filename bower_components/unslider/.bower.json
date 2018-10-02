@@ -1,6 +1,5 @@
 {
   "name": "unslider",
-  "version": "2.0.3",
   "homepage": "http://unslider.com",
   "authors": [
     "Visual Idiot <iam@visualidiot.com>"
@@ -21,14 +20,13 @@
     "test",
     "tests"
   ],
-  "_release": "2.0.3",
+  "_release": "365b8e16da",
   "_resolution": {
-    "type": "version",
-    "tag": "v2.0.3",
-    "commit": "15887b688c438293e7b3e3ab98b3418aced52ca7"
+    "type": "branch",
+    "branch": "master",
+    "commit": "365b8e16daf57b0a1496fca1b18f008a52fd47eb"
   },
-  "_source": "https://github.com/idiot/unslider.git",
-  "_target": "^2.0.3",
-  "_originalSource": "https://github.com/idiot/unslider.git",
-  "_direct": true
+  "_source": "https://github.com/slventures/unslider.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/slventures/unslider.git"
 }
