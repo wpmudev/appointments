@@ -235,6 +235,7 @@ class Appointments_AJAX {
 
 		$app_id = absint( $_POST["app_id"] );
 		$app = false;
+		$workers = appointments_get_workers();
 		if ( $app_id ) {
 			$app = appointments_get_appointment( $app_id );
 		}
@@ -256,10 +257,15 @@ class Appointments_AJAX {
 				}
 			}
 		} else {
+			$worker_id = 0;
+			if ( ! empty( $workers ) && $workers[0] instanceof Appointments_Worker ) {
+				$worker_id =  $workers[0]->ID;
+			}
+			
 			$app = array(
 				'ID' => 0,
 				'user' => 0,
-				'worker' => 0,
+				'worker' => $worker_id,
 				'location' => 0,
 				'service' => appointments_get_services_min_id(),
 				'price' => $appointments->get_price()
@@ -287,7 +293,6 @@ class Appointments_AJAX {
 			'selected'        => $app->user,
 			'name'            => 'user'
 		) );
-		$workers = appointments_get_workers();
 
 		$user_fields = array( 'name', 'email', 'phone', 'address', 'city' );
 
