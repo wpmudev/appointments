@@ -459,9 +459,17 @@ class Appointments_Admin_Settings_Page {
 		/**
 		 * GDPR
 		 */
+		 $allowed_gdpr_tags = array(
+			'a' => array(
+				'href'   => array(),
+				'title'  => array(),
+				'target' => array(),
+			),
+		);
+
 		$options['gdpr_number_of_days'] = filter_input( INPUT_POST, 'gdpr_number_of_days', FILTER_VALIDATE_INT );
 		$options['gdpr_number_of_days_user_erease'] = filter_input( INPUT_POST, 'gdpr_number_of_days_user_erease', FILTER_VALIDATE_INT );
-		$options['gdpr_checkbox_text'] = filter_input( INPUT_POST, 'gdpr_checkbox_text', FILTER_SANITIZE_STRING );
+		$options['gdpr_checkbox_text'] = wp_kses( $_POST['gdpr_checkbox_text'], $allowed_gdpr_tags );
 		$options['gdpr_checkbox_alert'] = filter_input( INPUT_POST, 'gdpr_checkbox_alert', FILTER_SANITIZE_STRING );
 
 		$options = apply_filters( 'app-options-before_save', $options );
