@@ -477,6 +477,12 @@ class Appointments_Admin_Settings_Page {
 		// Save Working Hours
 		$appointments = appointments();
 		$location = (int) $_POST['location'];
+
+		if ( 0 == $location ) {
+			$worker = appointments_get_worker( $appointments->worker );
+			$location = isset( $worker->worker_location ) ? $worker->worker_location : $location;
+		}
+
 		foreach ( array( 'closed', 'open' ) as $stat ) {
 			appointments_update_worker_working_hours( $appointments->worker, $_POST[ $stat ], $stat, $location );
 		}
