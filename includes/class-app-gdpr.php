@@ -40,7 +40,7 @@ class Appointments_GDPR {
 		/**
 		 * Add information to privacy policy page (only during creation).
 		 */
-		add_filter( 'wp_get_default_privacy_policy_content', array( $this, 'add_policy' ) );
+		add_action( 'admin_init', array( $this, 'add_policy' ) );
 		/**
 		 * Adding the Personal Data Exporter
 		 */
@@ -415,16 +415,42 @@ class Appointments_GDPR {
 	 * @since 2.3.0
 	 */
 	public function add_policy( $content ) {
-		$content .= '<h3>' . __( 'Plugin: Appointments', 'appointments' ) . '</h3>';
-		$content .=
-			'<p>'.__( 'When visitors book an appointment on the site we collect the data shown in the appointments form to allow future contact with a client.' ) . '</p>' .
-			'<p>' . __( 'All collected data is not shown publicly but we can send it to our workers or contractors who will perform ordered services.', 'appointments' ) . '</p>';
-		$days = $this->get_number_of_days();
-		if ( 0 < $days ) {
-			$days_desc = sprintf( _nx( '%d day', '%d days', $days, 'policy page days string', 'appointments' ), $days );
-			$content .= sprintf( '<p>' . __( 'All collected data will be automatically erased %s after appointment date.', 'appointments' ) . '</p>', $days_desc );
-		}
-		return $content;
+
+		ob_start();
+		?>
+		<div class="wp-suggested-text">
+			<h2><?php esc_html_e( 'What personal data do we collect and why?', 'appointments' ); ?></h2>
+			<p class="privacy-policy-tutorial">
+				<?php esc_html_e( 'When visitors book an appointment on your site we collect the data shown in the appointments form to allow future contact with a client. If you use the Additional Fields addon make sure to update your privacy policy to reflect any additional information you have requested from your clients.', 'appointments' ); ?>
+			</p>
+			<p>
+				<strong class="privacy-policy-tutorial"><?php esc_html_e( 'Suggested text: ', 'appointments' ); ?></strong>
+				<?php esc_html_e( 'We collect your Name, E-Mail and Phone Number for your Appointments. These data are not shared and are deleted upon request.', 'appointments' );//wpcs : xss ok ?>
+			</p>
+			<h2><?php esc_html_e( 'How long we retain your data', 'appointments' ); ?></h2>
+			<p class="privacy-policy-tutorial">
+				<?php esc_html_e( 'Until there is an Erasure request or depending on the Appointments+ GDPR settings that you have set.', 'appointments' ); ?>
+			</p>
+			<p>
+				<strong class="privacy-policy-tutorial"><?php esc_html_e( 'Suggested text: ', 'appointments' ); ?></strong>
+				<?php esc_html_e( 'Your data will be automatically erased after 20 days.', 'appointments' );//wpcs : xss ok ?>
+			</p>
+			<h2><?php esc_html_e( 'Third Parties', 'appointments' ); ?></h2>
+			<p class="privacy-policy-tutorial">
+				<?php esc_html_e( 'If you choose to you can use Google Calendar to sync your appointments.', 'appointments' ); ?>
+			</p>
+			<p>
+				<strong class="privacy-policy-tutorial"><?php esc_html_e( 'Suggested text: ', 'appointments' ); ?></strong>
+				<?php esc_html_e( 'We are using Google Calendar to sync our appointments. Your Name, E-Mail, Phone will be synced with our private Google Calendar account. ', 'appointments' ); ?>
+			</p>
+		</div>
+		<?php
+		$content = ob_get_clean();
+
+		wp_add_privacy_policy_content(
+			'Appointments',
+			wp_kses_post( wpautop( $content, false ) )
+		);
 	}
 }
 
