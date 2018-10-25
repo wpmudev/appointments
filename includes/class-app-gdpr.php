@@ -421,34 +421,34 @@ class Appointments_GDPR {
 		<div class="wp-suggested-text">
 			<h2><?php esc_html_e( 'What personal data do we collect and why?', 'appointments' ); ?></h2>
 			<p class="privacy-policy-tutorial">
-				<?php esc_html_e( 'When visitors book an appointment on your site we collect the data shown in the appointments form to allow future contact with a client. If you use the Additional Fields addon make sure to update your privacy policy to reflect any additional information you have requested from your clients.', 'appointments' ); ?>
+				<?php esc_html_e( 'When visitors book an appointment on your site using Appointments+ the data is stored. If you use the Additional Fields add-on make sure to update your privacy policy to reflect any additional information you have requested from your clients.', 'appointments' ); ?>
 			</p>
 			<p>
 				<strong class="privacy-policy-tutorial"><?php esc_html_e( 'Suggested text: ', 'appointments' ); ?></strong>
-				<?php esc_html_e( 'We collect your Name, E-Mail and Phone Number for your Appointments. These data are not shared and are deleted upon request.', 'appointments' );//wpcs : xss ok ?>
+				<?php esc_html_e( 'We collect your Name, E-Mail and Phone Number for your Appointments. The information is not shared and will be deleted on request.', 'appointments' ); ?>
 			</p>
-			<h2><?php esc_html_e( 'How long we retain your data', 'appointments' ); ?></h2>
+			<h2><?php esc_html_e( 'How long Appointments+ retains your data', 'appointments' ); ?></h2>
 			<p class="privacy-policy-tutorial">
-				<?php esc_html_e( 'Until there is an Erasure request or depending on the Appointments+ GDPR settings that you have set.', 'appointments' ); ?>
+				<?php esc_html_e( 'Manually remove user information on an erasure request or use he Appointments+ GDPR settings to automatically delete information after an allotted time.', 'appointments' ); ?>
 			</p>
 			<p>
 				<strong class="privacy-policy-tutorial"><?php esc_html_e( 'Suggested text: ', 'appointments' ); ?></strong>
-				<?php esc_html_e( 'Your data will be automatically erased after 20 days.', 'appointments' );//wpcs : xss ok ?>
+				<?php esc_html_e( 'Your data will be automatically erased after 20 days.', 'appointments' ); ?>
 			</p>
 			<h2><?php esc_html_e( 'Third Parties', 'appointments' ); ?></h2>
 			<p class="privacy-policy-tutorial">
-				<?php esc_html_e( 'If you choose to you can use Google Calendar to sync your appointments.', 'appointments' ); ?>
+				<?php esc_html_e( 'If you choose to, you can sync Appointments+ with your Google Calendar.', 'appointments' ); ?>
 			</p>
 			<p>
 				<strong class="privacy-policy-tutorial"><?php esc_html_e( 'Suggested text: ', 'appointments' ); ?></strong>
-				<?php esc_html_e( 'We are using Google Calendar to sync our appointments. Your Name, E-Mail, Phone will be synced with our private Google Calendar account. ', 'appointments' ); ?>
+				<?php esc_html_e( 'We are using Google Calendar to sync our appointments. Your Name, E-Mail, Phone will be synced with our private Google Calendar account.', 'appointments' ); ?>
 			</p>
 		</div>
 		<?php
 		$content = ob_get_clean();
 
 		wp_add_privacy_policy_content(
-			'Appointments',
+			'Appointments+',
 			wp_kses_post( wpautop( $content, false ) )
 		);
 	}
