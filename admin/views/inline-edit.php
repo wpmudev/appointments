@@ -70,7 +70,7 @@
                         <option value=""><?php esc_html_e( 'Unknown', 'appointments' ); ?></option>
 <?php
 $format = get_option( 'time_format' );
-$_start_time = $app_id ? strtotime( $app->get_start_time() ): '';
+$_start_time = $app_id ? strtotime( $app->get_start_time() ): 0;
 $day_start = strtotime( $app->start );
 $slots = appointments_get_worker_weekly_start_hours( $app->service, $app->worker, $app->location, true );
 $admin_min_time = $options['admin_min_time'];
@@ -79,23 +79,21 @@ if ( is_array( $slots ) ) {
 
 	if ( ! empty( $admin_min_time ) ) {
 
-		$admin_min_time 	= $options['admin_min_time'];
 		$start_of_day 		= new DateTime( reset( $slots ) );
 		$end_of_day   		= new DateTime( end( $slots ) );
-		$interval 			= DateInterval::createFromDateString("{$admin_min_time} min");
-		$times    			= new DatePeriod($start_of_day, $interval, $end_of_day);
+		$interval 			= DateInterval::createFromDateString( "{$admin_min_time} min" );
+		$times    			= new DatePeriod( $start_of_day, $interval, $end_of_day );
+		$format = get_option( 'time_format' );
 
-	    foreach ($times as $time) {
+	    foreach ( $times as $time ) {
 	        printf(
 	            '<option value="%s" %s>%s</option>',
-	            esc_attr( $time->format('H:i') ),
-	            selected( date( 'H:i', $_start_time ), $time->format('H:i'), false ),
-	            esc_html( $time->format('H:i') )
+	            esc_attr( $time->format( 'H:i' ) ),
+	            selected( date( 'H:i', $_start_time ), $time->format( 'H:i' ), false ),
+	            esc_html( $time->format( $format ) )
 	        );
 	    }
-
-	}
-	else{
+	} else {
 		foreach ( $slots as $slot ) {
 			$h = strtotime( $slot );
 			printf(
@@ -106,7 +104,6 @@ if ( is_array( $slots ) ) {
 			);
 		}
 	}
-	
 }
 ?>
 					</select>

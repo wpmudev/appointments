@@ -315,51 +315,39 @@ class Appointments_AJAX {
 	/**
 	 * Fetch the working hours of a worker for inline edit time slots
 	 */
-	public function inline_fetch_worker_slots() {
-
-		global $appointments, $wpdb, $current_user;
-
-		check_ajax_referer( 'app-edit-appointment', 'nonce' );
-
-		$worker_id 			= absint( $_POST["worker_id"] );
-		$app_id 			= absint( $_POST["app_id"] );
-		$location_id 		= isset( $_POST['location_id'] ) ? absint( $_POST['location_id'] ) : 0;
-		$selected_slot 		= sanitize_text_field( $_POST['selected_slot'] );
-		$format = get_option( 'time_format' );
-
-		// @TODO: If date is set from js, we could check the day number to get time slots for that day
-		$slots = appointments_get_worker_weekly_start_hours( $app_id, $worker_id, $location_id, true );
-
-		if ( ! $slots ) {
-			$result = array(
-				'error' => '<strong style="color:red;">' . __( 'Error while fetching working hours.', 'appointments' ) . '</strong>'
-			);
-			wp_send_json( $worker_slots );
-		}
-
-		$worker_slots = array();
-
-		if ( is_array( $slots ) ) {
-			foreach ( $slots as $slot ) {
-
-				$h = strtotime( $slot );
-
-				$worker_slots[] = sprintf(
-					'<option value="%s" %s>%s</option>',
-					esc_attr( $slot ),
-					selected( $selected_slot, $slot, false ),
-					esc_html( date( $format, strtotime( $slot ) ) )
-				);
-			}
-		}
-
-		$result = array(
-			'message' => json_encode( $worker_slots )
-		);
-		wp_send_json( $result );
-
-	}
-
+    public function inline_fetch_worker_slots() {
+        global $appointments, $wpdb, $current_user;
+        check_ajax_referer( 'app-edit-appointment', 'nonce' );
+        $worker_id 			= absint( $_POST["worker_id"] );
+        $app_id 			= absint( $_POST["app_id"] );
+        $location_id 		= isset( $_POST['location_id'] ) ? absint( $_POST['location_id'] ) : 0;
+        $selected_slot 		= sanitize_text_field( $_POST['selected_slot'] );
+        $format             = get_option( 'time_format' );
+        // @TODO: If date is set from js, we could check the day number to get time slots for that day
+        $slots = appointments_get_worker_weekly_start_hours( $app_id, $worker_id, $location_id, true, 'admin_min_time' );
+        if ( ! $slots ) {
+            $result = array(
+                'error' => '<strong style="color:red;">' . __( 'Error while fetching working hours.', 'appointments' ) . '</strong>'
+            );
+            wp_send_json( $worker_slots );
+        }
+        $worker_slots = array();
+        if ( is_array( $slots ) ) {
+            foreach ( $slots as $slot ) {
+                $h = strtotime( $slot );
+                $worker_slots[] = sprintf(
+                    '<option value="%s" %s>%s</option>',
+                    esc_attr( $slot ),
+                    selected( $selected_slot, $slot, false ),
+                    esc_html( date( $format, strtotime( $slot ) ) )
+                );
+            }
+        }
+        $result = array(
+            'message' => json_encode( $worker_slots )
+        );
+        wp_send_json( $result );
+    }
 
 	/**
 	 * Make checks on submitted fields and save appointment
