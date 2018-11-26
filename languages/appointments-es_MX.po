@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-11-21 15:15:54+00:00\n"
-"PO-Revision-Date: 2017-05-26 19:23:03+0000\n"
+"POT-Creation-Date: 2018-11-26 06:56:13+00:00\n"
+"PO-Revision-Date: 2018-11-05 18:30:48+0000\n"
 "Language: es_MX\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1750,14 +1750,12 @@ msgid "Settings updated"
 msgstr "Ajustes actualizados"
 
 #: admin/pages/class-admin-settings-page.php:233
-#, fuzzy
 msgid "Number of services per page"
-msgstr "Número de servicios a mostrar:"
+msgstr "Número de servicios por página"
 
 #: admin/pages/class-admin-settings-page.php:245
-#, fuzzy
 msgid "Number of service providers per page"
-msgstr "Número de proveedores de servicios a mostrar:"
+msgstr "Numero de proveedores de servicios por página"
 
 #: admin/pages/class-admin-transactions-page.php:18
 #: admin/pages/class-admin-transactions-page.php:19
@@ -2215,7 +2213,7 @@ msgstr ""
 
 #: admin/views/page-settings-tab-main-section-advanced.php:10
 msgid "Always load scripts"
-msgstr ""
+msgstr "Siempre cargar scripts"
 
 #: admin/views/page-settings-tab-main-section-advanced.php:13
 msgid ""
@@ -2223,6 +2221,10 @@ msgid ""
 "With some themes and if booking form is in popup it might be necessary to "
 "enable this option to force loading of these assets."
 msgstr ""
+"Por default algunos scripts son cargados solo si los  booking shortcodes son "
+"detectados. Con algunos temas y si el formulario de citas es en un popup "
+"podría ser necesario habilitar esta opción para forzar la carga de estos "
+"recursos."
 
 #: admin/views/page-settings-tab-main-section-advanced.php:17
 msgid "Allow Overwork (end of day)"
@@ -2417,9 +2419,8 @@ msgid "Auto erase after"
 msgstr ""
 
 #: admin/views/page-settings-tab-main-section-gdpr.php:31
-#, fuzzy
 msgid "Completed appointments will be deleted after."
-msgstr "Citas completadas"
+msgstr ""
 
 #: admin/views/page-settings-tab-main-section-gdpr.php:35
 #: includes/class-app-appointment.php:224
@@ -2807,7 +2808,7 @@ msgstr "Capacidad del Servicio"
 #: admin/views/page-settings-tab-services-section-edit-service.php:31
 #: admin/views/page-settings-tab-services-section-new-service.php:34
 msgid "To setup capacity add some workers first!"
-msgstr ""
+msgstr "¡Para preparar la capacidad añade algunos trabajadores primero!"
 
 #: admin/views/page-settings-tab-services-section-edit-service.php:36
 #: admin/views/page-settings-tab-services-section-new-service.php:39
@@ -3162,9 +3163,8 @@ msgid "Not registered user"
 msgstr "No usuario registrado"
 
 #: includes/class-app-ajax.php:330
-#, fuzzy
 msgid "Error while fetching working hours."
-msgstr "%s editó sus horas de trabajo."
+msgstr ""
 
 #: includes/class-app-ajax.php:362
 msgid ""
@@ -3350,7 +3350,7 @@ msgstr ""
 
 #: includes/class-app-gdpr.php:179
 msgid "Privacy Policy page"
-msgstr ""
+msgstr "Página de Políticas de Privacidad"
 
 #: includes/class-app-gdpr.php:292
 msgid "Create date"
@@ -4835,7 +4835,7 @@ msgstr "Mostrar imágenes"
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:234
 #: includes/pro/includes/addons/app-users-limit_services_login.php:78
 msgid "Hide"
-msgstr ""
+msgstr "Ocultar"
 
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:238
 msgid "Automatic map overlays"
@@ -4851,9 +4851,8 @@ msgstr "Después de todas mis citas\"shortcode\" salgan"
 
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:247
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:257
-#, fuzzy
 msgid "Do not insert"
-msgstr "No redireccionar"
+msgstr "No Insertar"
 
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:257
 msgid "After All Appointments shortcode output"
@@ -4863,6 +4862,7 @@ msgstr "Después de todas las citas\"shortcode\" salgan"
 #: includes/pro/includes/addons/app-locations-worker_locations.php:193
 msgid "There is no locations to choose. Please add some first."
 msgstr ""
+"No hay ubicaciones disponibles para elegir. Por favor añade algunas primero"
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:211
 msgid ""
@@ -4899,15 +4899,13 @@ msgid ""
 msgstr ""
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:394
-#, fuzzy
 msgid "Service Location"
-msgstr "Duración del Servicio"
+msgstr "Ubicación del servicio"
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:444
 #: includes/pro/includes/addons/app-locations-worker_locations.php:346
-#, fuzzy
 msgid "No Location"
-msgstr "Localización"
+msgstr "Sin ubicación"
 
 #: includes/pro/includes/addons/app-locations-worker_locations.php:69
 msgid ""
@@ -5152,18 +5150,16 @@ msgid "Paddings"
 msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:613
-#, fuzzy
 msgid "Before: %s"
-msgstr "Antes"
+msgstr "Antes: %s"
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:623
-#, fuzzy
 msgid "After: %s"
-msgstr "Despues"
+msgstr "Después: %s"
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:643
 msgid "No paddings"
-msgstr ""
+msgstr "Sin rellenos"
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:53
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:74
@@ -5172,22 +5168,19 @@ msgstr "Compartir recursos con"
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:81
 msgid "Share with \"%s\""
-msgstr ""
+msgstr "Compartir con \"%s\""
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:84
-#, fuzzy
 msgid "Do not share"
-msgstr "No redireccionar"
+msgstr "No compartir"
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:208
-#, fuzzy
 msgid "Shared resources"
-msgstr "Compartir recursos con"
+msgstr "Recursos compartidos"
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:239
-#, fuzzy
 msgid "No shared resources"
-msgstr "Compartir recursos con"
+msgstr "Recursos no compartidos"
 
 #: includes/pro/includes/addons/app-users-additional_fields.php:101
 msgid "The field %s is required"
@@ -5265,18 +5258,16 @@ msgid "Show login buttons"
 msgstr "Mostrar botones de login"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:72
-#, fuzzy
 msgid "Show %s login button"
-msgstr "Mostrar botones de login"
+msgstr "Mostrar %s botón de inicio"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:78
 msgid "Show"
-msgstr ""
+msgstr "Mostrar"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:84
-#, fuzzy
 msgid "Name for login button"
-msgstr "Usar el nombre %s para el botón de inicio de sesión"
+msgstr "Nombre para el botón de inicio de sesión"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:87
 msgid "Use %s name for login button"
@@ -5291,32 +5282,28 @@ msgid "site"
 msgstr "sitio"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:92
-#, fuzzy
 msgid "Use"
-msgstr "Usuario"
+msgstr "Usar"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:92
-#, fuzzy
 msgid "Do not use"
-msgstr "No redireccionar"
+msgstr "No usar"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:104
-#, fuzzy
 msgid "Facebook"
-msgstr "ID Facebook App"
+msgstr "Facebook"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:105
 msgid "Twitter"
-msgstr ""
+msgstr "Twitter"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:106
 msgid "Google"
-msgstr ""
+msgstr "Google"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:107
-#, fuzzy
 msgid "WordPress"
-msgstr "Tu dirección"
+msgstr "WordPress"
 
 #: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:9
 msgid "Service Locations"
@@ -6850,10 +6837,3 @@ msgstr ""
 msgctxt "Discard existing info"
 msgid "Cancel"
 msgstr "Eliminar"
-
-#, fuzzy
-#~ msgid "Services & Workers"
-#~ msgstr "Proveedores"
-
-#~ msgid "Services Provided*"
-#~ msgstr "Servicios proveídos*"

@@ -3,7 +3,7 @@ Contributors: wpmudev, wpmudev-support1, wpmudev-support2, wpmudev-support4, wpm
 Tags: Appointment, Booking, Calendar, Reservation, Scheduling, google calendar
 Requires at least: 4.6
 Tested up to: 4.9.6
-Stable tag: 2.4.0
+Stable tag: 2.4.1
 License: GPL2
 
 The most powerful, flexible and feature-rich bookings plugin available for WordPress. Appointments does it all.
@@ -156,6 +156,13 @@ We provide comprehensive and guaranteed support on the <a href='http://premium.w
 5. Google Calendar integration
 
 == Changelog ==
+
+
+= 2.4.1 =
+* Fixed a problem with Service Provider shortcode param name.
+* Fixed a problem with start hour for specific configurations.
+* Fixed a problem with appointments intervals.
+* Fixed a problem with time slots when an appointment has no provider in inline-edit.
 
 = 2.4.0 =
 * Added ability to show/hide columns on "Services" settings screen.

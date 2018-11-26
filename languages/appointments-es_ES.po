@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-11-21 15:15:54+00:00\n"
-"PO-Revision-Date: 2018-06-04 16:07:22+0000\n"
+"POT-Creation-Date: 2018-11-26 06:56:13+00:00\n"
+"PO-Revision-Date: 2018-07-23 07:06:51+0000\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1841,11 +1841,11 @@ msgstr "Ajustes actualizados"
 
 #: admin/pages/class-admin-settings-page.php:233
 msgid "Number of services per page"
-msgstr ""
+msgstr "Número de servicios por página"
 
 #: admin/pages/class-admin-settings-page.php:245
 msgid "Number of service providers per page"
-msgstr ""
+msgstr "Número de proveedores de servicio por página"
 
 #: admin/pages/class-admin-transactions-page.php:18
 #: admin/pages/class-admin-transactions-page.php:19
@@ -2310,7 +2310,7 @@ msgstr ""
 
 #: admin/views/page-settings-tab-main-section-advanced.php:10
 msgid "Always load scripts"
-msgstr ""
+msgstr "Siempre cargar scripts"
 
 #: admin/views/page-settings-tab-main-section-advanced.php:13
 msgid ""
@@ -2915,7 +2915,7 @@ msgstr "Capacidad del Servicio"
 #: admin/views/page-settings-tab-services-section-edit-service.php:31
 #: admin/views/page-settings-tab-services-section-new-service.php:34
 msgid "To setup capacity add some workers first!"
-msgstr ""
+msgstr "Para configurar la capacidad agregue algunos empleados primero"
 
 #: admin/views/page-settings-tab-services-section-edit-service.php:36
 #: admin/views/page-settings-tab-services-section-new-service.php:39
@@ -3270,9 +3270,8 @@ msgid "Not registered user"
 msgstr "No usuario registrado"
 
 #: includes/class-app-ajax.php:330
-#, fuzzy
 msgid "Error while fetching working hours."
-msgstr "%s editó su horario laboral"
+msgstr ""
 
 #: includes/class-app-ajax.php:362
 msgid ""
@@ -4973,7 +4972,7 @@ msgstr "Mostrar imágenes"
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:234
 #: includes/pro/includes/addons/app-users-limit_services_login.php:78
 msgid "Hide"
-msgstr ""
+msgstr "Esconder"
 
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:238
 msgid "Automatic map overlays"
@@ -4990,7 +4989,7 @@ msgstr "Después de todas mis citas\"shortcode\" salgan"
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:247
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:257
 msgid "Do not insert"
-msgstr ""
+msgstr "No insertar"
 
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:257
 msgid "After All Appointments shortcode output"
@@ -4999,7 +4998,7 @@ msgstr "Después de todas las citas\"shortcode\" salgan"
 #: includes/pro/includes/addons/app-locations-service_locations.php:185
 #: includes/pro/includes/addons/app-locations-worker_locations.php:193
 msgid "There is no locations to choose. Please add some first."
-msgstr ""
+msgstr "No hay ubicaciones para escoger. Por favor agregue un primera."
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:211
 msgid ""
@@ -5037,12 +5036,12 @@ msgstr ""
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:394
 msgid "Service Location"
-msgstr ""
+msgstr "Ubicación del servicio"
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:444
 #: includes/pro/includes/addons/app-locations-worker_locations.php:346
 msgid "No Location"
-msgstr ""
+msgstr "Sin ubicación"
 
 #: includes/pro/includes/addons/app-locations-worker_locations.php:69
 msgid ""
@@ -5292,11 +5291,11 @@ msgstr "'Paddings'"
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:613
 msgid "Before: %s"
-msgstr ""
+msgstr "Antes: %s"
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:623
 msgid "After: %s"
-msgstr ""
+msgstr "Después: %s"
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:643
 msgid "No paddings"
@@ -5309,19 +5308,19 @@ msgstr "Compartir los recursos con"
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:81
 msgid "Share with \"%s\""
-msgstr ""
+msgstr "Compartir con \"%s\""
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:84
 msgid "Do not share"
-msgstr ""
+msgstr "No compartir"
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:208
 msgid "Shared resources"
-msgstr ""
+msgstr "Recursos compartidos"
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:239
 msgid "No shared resources"
-msgstr ""
+msgstr "No compartir recursos"
 
 #: includes/pro/includes/addons/app-users-additional_fields.php:101
 msgid "The field %s is required"
@@ -5403,7 +5402,7 @@ msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:78
 msgid "Show"
-msgstr ""
+msgstr "Mostrar"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:84
 msgid "Name for login button"
@@ -5423,27 +5422,27 @@ msgstr "sitio"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:92
 msgid "Use"
-msgstr ""
+msgstr "Usar"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:92
 msgid "Do not use"
-msgstr ""
+msgstr "No usar"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:104
 msgid "Facebook"
-msgstr ""
+msgstr "Facebook"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:105
 msgid "Twitter"
-msgstr ""
+msgstr "Twitter"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:106
 msgid "Google"
-msgstr ""
+msgstr "Google"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:107
 msgid "WordPress"
-msgstr ""
+msgstr "WordPress"
 
 #: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:9
 msgid "Service Locations"

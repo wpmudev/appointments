@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-11-21 15:15:54+00:00\n"
-"PO-Revision-Date: 2017-12-11 15:12:59+0000\n"
+"POT-Creation-Date: 2018-11-26 06:56:13+00:00\n"
+"PO-Revision-Date: 2018-06-10 13:34:58+0000\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1748,14 +1748,12 @@ msgid "Settings updated"
 msgstr "Instellingen bijgewerkt"
 
 #: admin/pages/class-admin-settings-page.php:233
-#, fuzzy
 msgid "Number of services per page"
-msgstr "Aantal te tonen diensten:"
+msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:245
-#, fuzzy
 msgid "Number of service providers per page"
-msgstr "Aantal te tonen dienstverleners:"
+msgstr ""
 
 #: admin/pages/class-admin-transactions-page.php:18
 #: admin/pages/class-admin-transactions-page.php:19
@@ -2411,9 +2409,8 @@ msgid "Auto erase after"
 msgstr ""
 
 #: admin/views/page-settings-tab-main-section-gdpr.php:31
-#, fuzzy
 msgid "Completed appointments will be deleted after."
-msgstr "Voltooide afspraken"
+msgstr ""
 
 #: admin/views/page-settings-tab-main-section-gdpr.php:35
 #: includes/class-app-appointment.php:224
@@ -3165,9 +3162,8 @@ msgid "Not registered user"
 msgstr "Niet geregistreerde gebruiker"
 
 #: includes/class-app-ajax.php:330
-#, fuzzy
 msgid "Error while fetching working hours."
-msgstr "%s heeft zijn werktijden aangepast"
+msgstr ""
 
 #: includes/class-app-ajax.php:362
 msgid ""
@@ -3346,7 +3342,7 @@ msgstr ""
 
 #: includes/class-app-gdpr.php:179
 msgid "Privacy Policy page"
-msgstr ""
+msgstr "Privacy Statement page"
 
 #: includes/class-app-gdpr.php:292
 msgid "Create date"
@@ -4845,9 +4841,8 @@ msgstr "Na \"Mijn Afspraken\" shortcode output"
 
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:247
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:257
-#, fuzzy
 msgid "Do not insert"
-msgstr "Niet redirecten"
+msgstr ""
 
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:257
 msgid "After All Appointments shortcode output"
@@ -4893,15 +4888,13 @@ msgid ""
 msgstr ""
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:394
-#, fuzzy
 msgid "Service Location"
-msgstr "Dienst duur"
+msgstr ""
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:444
 #: includes/pro/includes/addons/app-locations-worker_locations.php:346
-#, fuzzy
 msgid "No Location"
-msgstr "Locatie"
+msgstr ""
 
 #: includes/pro/includes/addons/app-locations-worker_locations.php:69
 msgid ""
@@ -5144,19 +5137,16 @@ msgid "Paddings"
 msgstr "Goot"
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:613
-#, fuzzy
 msgid "Before: %s"
-msgstr "Voor"
+msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:623
-#, fuzzy
 msgid "After: %s"
-msgstr "Na"
+msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:643
-#, fuzzy
 msgid "No paddings"
-msgstr "Goot"
+msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:53
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:74
@@ -5168,19 +5158,16 @@ msgid "Share with \"%s\""
 msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:84
-#, fuzzy
 msgid "Do not share"
-msgstr "Niet redirecten"
+msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:208
-#, fuzzy
 msgid "Shared resources"
-msgstr "Deel bronnen met"
+msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:239
-#, fuzzy
 msgid "No shared resources"
-msgstr "Deel bronnen met"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-additional_fields.php:101
 msgid "The field %s is required"
@@ -5257,18 +5244,16 @@ msgid "Show login buttons"
 msgstr "Toon login knoppen"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:72
-#, fuzzy
 msgid "Show %s login button"
-msgstr "Toon login knoppen"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:78
 msgid "Show"
 msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:84
-#, fuzzy
 msgid "Name for login button"
-msgstr "Gebruik %s naam voor de login knop"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:87
 msgid "Use %s name for login button"
@@ -5283,19 +5268,16 @@ msgid "site"
 msgstr "site"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:92
-#, fuzzy
 msgid "Use"
-msgstr "Gebruiker"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:92
-#, fuzzy
 msgid "Do not use"
-msgstr "Niet redirecten"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:104
-#, fuzzy
 msgid "Facebook"
-msgstr "Facebook App ID"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:105
 msgid "Twitter"
@@ -5306,9 +5288,8 @@ msgid "Google"
 msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:107
-#, fuzzy
 msgid "WordPress"
-msgstr "Uw adres:"
+msgstr ""
 
 #: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:9
 msgid "Service Locations"
@@ -6821,10 +6802,3 @@ msgstr ""
 msgctxt "Discard existing info"
 msgid "Cancel"
 msgstr "Annuleren"
-
-#, fuzzy
-#~ msgid "Services & Workers"
-#~ msgstr "Dienstverleners"
-
-#~ msgid "Services Provided*"
-#~ msgstr "Verleende diensten*"

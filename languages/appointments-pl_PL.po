@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-11-21 15:15:54+00:00\n"
-"PO-Revision-Date: 2018-06-28 06:46:27+0000\n"
+"POT-Creation-Date: 2018-11-26 06:56:13+00:00\n"
+"PO-Revision-Date: 2018-11-26 06:53:44+0000\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -119,6 +119,8 @@ msgid ""
 "I don't want front end appointments, I want to enter them only manually from "
 "admin side. What should I do?"
 msgstr ""
+"Nie chcę umawiania spotkań po stronie użytkownika, chcę wprowadzać je tylko "
+"ręcznie z panelu administratora. Co należy zrobić?"
 
 #: admin/app-faq.php:19
 msgid ""
@@ -518,6 +520,12 @@ msgid ""
 "Consider entering or checking appointments from the front end to prevent "
 "mistakes."
 msgstr ""
+"Tak. Można ręcznie dodawać spotkania np. przez telefon. Należy kliknij link "
+"<i>Dodaj nowe</i> na górze %s, wypełnić i zapisać. Proszę zauważyć, że nie "
+"ma niektórych pól wyboru (Czy te są dostępne zasoby? czy dzisiaj pracujemy? "
+"itd...) w czasie ręcznie wprowadzanego spotkanie. Proszę rozważyć "
+"wprowadzanie lub sprawdzanie spotkania ze strony głównej, tak aby zapobiec "
+"ewentualnym błędom."
 
 #: admin/app-faq.php:144
 msgid ""
@@ -526,6 +534,10 @@ msgid ""
 "use. But if you want your schedule to be seen publicly, then just use "
 "Schedule shortcode, but no other shortcodes else."
 msgstr ""
+"jeżeli nie chcemy, aby nasz kalendarz był widoczny, wtedy po prostu proszę "
+"nie dodawać shortcodu na swoich stronach, albo ustawić stronę jako \"prywatną"
+"\" dla użytku admina. Ale jeżeli kalendarz ma być widoczny publicznie, użyj "
+"shortcode'u terminarza, ale bez innych umożliwiających rezerwację terminuy"
 
 #: admin/app-faq.php:147
 msgid ""
@@ -546,6 +558,10 @@ msgid ""
 "no safe solution against this unless you require payment to accept an "
 "appointment."
 msgstr ""
+"Proszę wprowadzić dużą liczbę np. 10000000, w polu <i>Minimalny czas jaki "
+"musi upłynąć do umówienia następnego spotkania</i>.Proszę zauważyć, że nie "
+"jest to 100% bezpieczne i nie ma na to bezpiecznego rozwiązania chyba  że "
+"będzie ustawiona płatności za spotkanie."
 
 #: admin/app-faq.php:155
 msgid ""
@@ -557,6 +573,13 @@ msgid ""
 "service provider is added, his working schedule is set to the business "
 "working schedule. Thus, you only need to edit the variations of his schedule."
 msgstr ""
+"tak. Dla każdego dostawcy usługi można indywidualnie ustawić godziny pracy i "
+"przerwy i wyłączenia (urlop i dodatkowe dni pracy). Aby to zrobić należy "
+"przejść do zakładki  etykiet <i>Godziny Pracy</i> i <i>Wyłączenia</i>, "
+"wybrać dostawcę usługi, którego zmiana ma dotyczyć z rozwijanego menu "
+"dostawców usług, potem proszę wykonać zmiany i zapisać. Proszę zauważyć, że "
+"kiedy dostawca usługi jest dodany jego godziny pracy są ustawione do "
+"biznesowego terminarza. Więc należy tylko edytować zmiany jego terminarza."
 
 #: admin/app-faq.php:158
 msgid ""
@@ -585,6 +608,18 @@ msgid ""
 "section to increase your available workforce and thus number of available "
 "appointments per time slot."
 msgstr ""
+"Jest to liczba usług (np z powodów technicznych), niezależnie od liczby "
+"dostawców usług świadczących te usługi. Wyobraź sobie, klinikę dentystyczna "
+"z trzema pracującymi dentystami, z których każdy ma swój gabinet, ale jest "
+"tylko jeden roentgen. Zatem, usługa \"Roentgen\" ma liczbę 1, a usługa "
+"\"Badanie\" ma 3. Należy pamiętać, że należy definiować tylko liczbę usługi "
+"roentgen na 1. Do innych usług, których liczbę pozostawiono jako zero będzie "
+"automatycznie ograniczona do liczby dentystów świadczących tę konkretną "
+"usługę. Bo dla tych, ograniczenie pochodzi od dostawców usług, a nie z samej "
+"usługi. Pole liczba usługi służy do ograniczania siły roboczej, a nie "
+"zwiększania. Zapoznaj się z FAQ w sekcji Zaawansowane, aby zwiększyć "
+"dostępną liczbę wykonawców, a tym samym liczbę dostępnych terminów na "
+"przedziale czasowym."
 
 #: admin/app-faq.php:164
 msgid ""
@@ -2559,7 +2594,7 @@ msgstr ""
 
 #: admin/views/page-settings-tab-main-section-payments.php:41
 msgid "PayPal Merchant E-mail"
-msgstr ""
+msgstr "Adres mail handlowca PayPal"
 
 #: admin/views/page-settings-tab-main-section-payments.php:44
 msgid ""
@@ -2599,14 +2634,19 @@ msgid ""
 "appointment. If both fields are filled, only the fixed deposit will be taken "
 "into account."
 msgstr ""
+"To samo co powyżej, ale od klienta wymaga się stałego depozytu za każde "
+"spotkanie. Jeśli oba pola są wypełnione, brany będzie pod uwagę tylko stały "
+"depozyt."
 
 #: admin/views/page-settings-tab-main-section-payments.php:78
 msgid "Allow zero-priced appointments auto-confirm"
-msgstr ""
+msgstr "Zezwalaj na automatyczną akceptację wizyt płatnych zero"
 
 #: admin/views/page-settings-tab-main-section-payments.php:81
 msgid "Allow auto-confirm for zero-priced appointments in a paid environment."
 msgstr ""
+"Zezwalaj na automatyczną akceptację płatnych wizyt, których wartość wynosi "
+"zero."
 
 #: admin/views/page-settings-tab-main-section-time.php:3
 msgid "Time base"
@@ -3012,7 +3052,7 @@ msgstr "Więcej informacji <span class=\"meta-nav\">&rarr;</span>"
 
 #: appointments.php:870
 msgid "%s Appointment"
-msgstr ""
+msgstr "Wizyta %s"
 
 #: appointments.php:901
 msgid "Something wrong about the submitted %s"
@@ -3104,9 +3144,8 @@ msgid "Not registered user"
 msgstr "Niezarejestrowany użytkownik"
 
 #: includes/class-app-ajax.php:330
-#, fuzzy
 msgid "Error while fetching working hours."
-msgstr "%s edytował swoje godziny pracy"
+msgstr "Błąd w czasie pobierania godziń pracy."
 
 #: includes/class-app-ajax.php:362
 msgid ""
@@ -3166,7 +3205,7 @@ msgstr ""
 
 #: includes/class-app-ajax.php:881
 msgid "Funds not captured yet"
-msgstr ""
+msgstr "Płatność nie została jeszcze pobrana"
 
 #: includes/class-app-ajax.php:882
 msgid "eCheck that has not cleared yet"
@@ -3191,7 +3230,7 @@ msgstr ""
 
 #: includes/class-app-ajax.php:887
 msgid "Waiting for service provider to verify his/her PayPal account"
-msgstr ""
+msgstr "Oczekiwanie na weryfikację konta  PayPal usługodawcy"
 
 #: includes/class-app-ajax.php:891
 msgid "Last transaction is pending. Reason: "
@@ -3378,7 +3417,7 @@ msgstr ""
 
 #: includes/class-app-tutorial.php:49
 msgid "Time Base"
-msgstr ""
+msgstr "Podstawa czasu"
 
 #: includes/class-app-tutorial.php:50
 msgid ""
@@ -3410,7 +3449,7 @@ msgstr ""
 
 #: includes/class-app-tutorial.php:64
 msgid "Selecting a Color Set to Match Your Theme"
-msgstr ""
+msgstr "Wybór kolorów, aby dopasować do używanego motywu"
 
 #: includes/class-app-tutorial.php:65
 msgid ""
@@ -3520,7 +3559,7 @@ msgstr ""
 
 #: includes/class-app-tutorial.php:119 includes/class-app-tutorial.php:124
 msgid "Setting your services"
-msgstr ""
+msgstr "Ustawienia usług"
 
 #: includes/class-app-tutorial.php:120
 msgid "Click the Services tab to set your services and then click Next."
@@ -3896,7 +3935,7 @@ msgstr "RUB"
 #: includes/class_app_codec.php:138
 #: includes/notifications/class-app-notification-removal.php:195
 msgid "Appointment has been removed"
-msgstr ""
+msgstr "Wizyta została usunięta"
 
 #: includes/class_app_codec.php:366
 #: includes/shortcodes/class-app-shortcode-login.php:50
@@ -4168,7 +4207,7 @@ msgstr ""
 
 #: includes/gcal/views/settings-gcal-step-1.php:16
 msgid "Click on \"Calendar API\"."
-msgstr ""
+msgstr "Kliknij na \"API kalendarza\""
 
 #: includes/gcal/views/settings-gcal-step-1.php:20
 msgid "Enable the \"Calendar API\"."
@@ -4207,7 +4246,7 @@ msgstr "Identyfikator klienta"
 
 #: includes/gcal/views/settings-gcal-step-1.php:60
 msgid "Client Secret"
-msgstr ""
+msgstr "Klient - sekretne "
 
 #: includes/gcal/views/settings-gcal-step-2.php:2
 msgid "Google Calendar API: Authorize access to your Google Application"
@@ -4240,7 +4279,7 @@ msgstr ""
 
 #: includes/gcal/views/settings-gcal-step-3.php:60
 msgid "Allow Service Providers for Google Calendar API Integration"
-msgstr ""
+msgstr "Zezwalaj usługodawcom na integrację z API kalendarza Google"
 
 #: includes/gcal/views/settings-gcal-step-3.php:67
 msgid ""
@@ -4391,7 +4430,7 @@ msgstr "Poniższe pola wymagają wtyczki: %s."
 
 #: includes/integration/class-app-membership2.php:176
 msgid "Membership 2 Integration"
-msgstr ""
+msgstr "Integracja z Membership 2"
 
 #: includes/integration/class-app-membership2.php:181
 msgid "Membership"
@@ -4407,7 +4446,7 @@ msgstr "Brak zaawansowanej płatności"
 
 #: includes/integration/class-app-membership2.php:221
 msgid "fixed"
-msgstr ""
+msgstr "poprawiono"
 
 #: includes/integration/class-app-membership2.php:233
 msgid "Requires advance payment"
@@ -4423,7 +4462,7 @@ msgstr "Szczegóły"
 
 #: includes/integration/marketpress/class_app_mp_bridge.php:241
 msgid "Please, proceed to checkout."
-msgstr ""
+msgstr "Proszę kontynuować płatność."
 
 #: includes/integration/marketpress/class_app_mp_bridge_legacy.php:58
 #: includes/integration/marketpress/class_app_mp_bridge_legacy.php:219
@@ -4516,6 +4555,8 @@ msgstr ""
 msgid ""
 "Unable to notify the client about the appointment ID: %s removal, stopping."
 msgstr ""
+"Nie można powiadomić klienta o identyfikatorze spotkania: usunięcie %s, "
+"zatrzymanie."
 
 #: includes/notifications/class-app-notification-removal.php:133
 msgid "Removal message sent to %s for appointment ID: %s"
@@ -4525,10 +4566,12 @@ msgstr ""
 msgid ""
 "An appointment removal notification for ID %s has been sent to your client:"
 msgstr ""
+"Powiadomienie o usunięciu spotkania o identyfikatorz %s zostało wysłane do "
+"klienta:"
 
 #: includes/notifications/class-app-notification-removal.php:155
 msgid "Removal notification"
-msgstr ""
+msgstr "Powiadomienie o usunięciu"
 
 #: includes/pro/includes/addons/app-admin-admin_permissions.php:59
 msgid "Appointments role access"
@@ -4538,7 +4581,7 @@ msgstr ""
 #: includes/pro/includes/addons/app-post_types-worker_names.php:116
 #: includes/pro/includes/addons/app-schedule-default_service.php:82
 msgid "Default"
-msgstr "Domyślne"
+msgstr "Domyślny"
 
 #: includes/pro/includes/addons/app-admin-export_date_range.php:48
 msgid "Only include appointments between"
@@ -4747,7 +4790,7 @@ msgstr "Ukryj"
 
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:238
 msgid "Automatic map overlays"
-msgstr ""
+msgstr "Automatyczne nakładki map"
 
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:240
 msgid "Automatically insert maps..."
@@ -4833,7 +4876,7 @@ msgstr "Automatycznie, przed opisem usługodawcy"
 
 #: includes/pro/includes/addons/app-locations-worker_locations.php:122
 msgid "Automatic, after worker description"
-msgstr ""
+msgstr "Automatycznie, po opisie usługodawcy"
 
 #: includes/pro/includes/addons/app-locations-worker_locations.php:124
 msgid ""
@@ -4961,7 +5004,7 @@ msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-durations.php:149
 msgid "Boundaries detection"
-msgstr ""
+msgstr "Wykrywanie nakładania się"
 
 #: includes/pro/includes/addons/app-schedule-durations.php:152
 msgid "Your boundaries calculus will be determined by the define value."
@@ -5013,7 +5056,7 @@ msgstr "Po"
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:130
 msgid "... applying the smaller padding of the two"
-msgstr ""
+msgstr "... użyj mniejeszej z dwóch przerw"
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:131
 msgid "... applying the larger padding of the two"
@@ -5059,7 +5102,7 @@ msgstr "Brak przerw"
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:53
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:74
 msgid "Shares resources with"
-msgstr ""
+msgstr "Wspóldziel zasoby z"
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:81
 msgid "Share with \"%s\""

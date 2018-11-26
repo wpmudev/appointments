@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-11-21 15:15:54+00:00\n"
+"POT-Creation-Date: 2018-11-26 06:56:13+00:00\n"
 "PO-Revision-Date: 2015-03-08 03:52:27+0000\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -1730,14 +1730,12 @@ msgid "Settings updated"
 msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:233
-#, fuzzy
 msgid "Number of services per page"
-msgstr "Gösterilecek İşlerin sayısı:"
+msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:245
-#, fuzzy
 msgid "Number of service providers per page"
-msgstr "Göstermek için servis sağlayıcıların sayısı:"
+msgstr ""
 
 #: admin/pages/class-admin-transactions-page.php:18
 #: admin/pages/class-admin-transactions-page.php:19
@@ -2400,9 +2398,8 @@ msgid "Auto erase after"
 msgstr ""
 
 #: admin/views/page-settings-tab-main-section-gdpr.php:31
-#, fuzzy
 msgid "Completed appointments will be deleted after."
-msgstr "Tamamlanan Randevular"
+msgstr ""
 
 #: admin/views/page-settings-tab-main-section-gdpr.php:35
 #: includes/class-app-appointment.php:224
@@ -3142,9 +3139,8 @@ msgid "Not registered user"
 msgstr "Kayıt olmayan kullanıcı"
 
 #: includes/class-app-ajax.php:330
-#, fuzzy
 msgid "Error while fetching working hours."
-msgstr "%s onun çalışma saatleri düzenlenebilir."
+msgstr ""
 
 #: includes/class-app-ajax.php:362
 msgid ""
@@ -4863,15 +4859,13 @@ msgid ""
 msgstr ""
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:394
-#, fuzzy
 msgid "Service Location"
-msgstr "Hizmeti konumunu göster"
+msgstr ""
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:444
 #: includes/pro/includes/addons/app-locations-worker_locations.php:346
-#, fuzzy
 msgid "No Location"
-msgstr "Konum"
+msgstr ""
 
 #: includes/pro/includes/addons/app-locations-worker_locations.php:69
 msgid ""
@@ -5112,14 +5106,12 @@ msgid "Paddings"
 msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:613
-#, fuzzy
 msgid "Before: %s"
-msgstr "Önceki"
+msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:623
-#, fuzzy
 msgid "After: %s"
-msgstr "Sonra"
+msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:643
 msgid "No paddings"
@@ -5139,14 +5131,12 @@ msgid "Do not share"
 msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:208
-#, fuzzy
 msgid "Shared resources"
-msgstr "Kaynakları ile paylaşıyor"
+msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:239
-#, fuzzy
 msgid "No shared resources"
-msgstr "Kaynakları ile paylaşıyor"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-additional_fields.php:101
 msgid "The field %s is required"
@@ -5223,18 +5213,16 @@ msgid "Show login buttons"
 msgstr "Giriş düğmelerini göster"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:72
-#, fuzzy
 msgid "Show %s login button"
-msgstr "Giriş düğmelerini göster"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:78
 msgid "Show"
 msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:84
-#, fuzzy
 msgid "Name for login button"
-msgstr "%S adı için giriş düğmesini kullanın"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:87
 msgid "Use %s name for login button"
@@ -5249,18 +5237,16 @@ msgid "site"
 msgstr "Site"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:92
-#, fuzzy
 msgid "Use"
-msgstr "Kullanıcı"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:92
 msgid "Do not use"
 msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:104
-#, fuzzy
 msgid "Facebook"
-msgstr "Facebook Uygulaması Kimliği (App ID):"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:105
 msgid "Twitter"
@@ -5271,9 +5257,8 @@ msgid "Google"
 msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:107
-#, fuzzy
 msgid "WordPress"
-msgstr "Adresiniz:"
+msgstr ""
 
 #: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:9
 msgid "Service Locations"
@@ -6747,10 +6732,3 @@ msgstr ""
 msgctxt "Discard existing info"
 msgid "Cancel"
 msgstr "İptal"
-
-#, fuzzy
-#~ msgid "Services & Workers"
-#~ msgstr "Servis Sağlayıcılar"
-
-#~ msgid "Services Provided*"
-#~ msgstr "Hizmetler Sağlandı*"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-11-21 15:15:54+00:00\n"
+"POT-Creation-Date: 2018-11-26 06:56:13+00:00\n"
 "PO-Revision-Date: 2016-10-18 21:06:13+0000\n"
 "Language: no\n"
 "MIME-Version: 1.0\n"
@@ -1572,14 +1572,12 @@ msgid "Settings updated"
 msgstr "Innstillinger ble oppdatert"
 
 #: admin/pages/class-admin-settings-page.php:233
-#, fuzzy
 msgid "Number of services per page"
-msgstr "Antall tjenester:"
+msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:245
-#, fuzzy
 msgid "Number of service providers per page"
-msgstr "Antall tjenesteleverandører:"
+msgstr ""
 
 #: admin/pages/class-admin-transactions-page.php:18
 #: admin/pages/class-admin-transactions-page.php:19
@@ -2219,9 +2217,8 @@ msgid "Auto erase after"
 msgstr ""
 
 #: admin/views/page-settings-tab-main-section-gdpr.php:31
-#, fuzzy
 msgid "Completed appointments will be deleted after."
-msgstr "Ferdige avtaler"
+msgstr ""
 
 #: admin/views/page-settings-tab-main-section-gdpr.php:35
 #: includes/class-app-appointment.php:224
@@ -4523,9 +4520,8 @@ msgstr ""
 
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:247
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:257
-#, fuzzy
 msgid "Do not insert"
-msgstr "Ikke omdirigere"
+msgstr ""
 
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:257
 msgid "After All Appointments shortcode output"
@@ -4569,15 +4565,13 @@ msgid ""
 msgstr ""
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:394
-#, fuzzy
 msgid "Service Location"
-msgstr "Rediger sted"
+msgstr ""
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:444
 #: includes/pro/includes/addons/app-locations-worker_locations.php:346
-#, fuzzy
 msgid "No Location"
-msgstr "Sted"
+msgstr ""
 
 #: includes/pro/includes/addons/app-locations-worker_locations.php:69
 msgid ""
@@ -4813,14 +4807,12 @@ msgid "Paddings"
 msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:613
-#, fuzzy
 msgid "Before: %s"
-msgstr "Før"
+msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:623
-#, fuzzy
 msgid "After: %s"
-msgstr "Etter"
+msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:643
 msgid "No paddings"
@@ -4836,19 +4828,16 @@ msgid "Share with \"%s\""
 msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:84
-#, fuzzy
 msgid "Do not share"
-msgstr "Ikke omdirigere"
+msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:208
-#, fuzzy
 msgid "Shared resources"
-msgstr "Del ressurser med"
+msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:239
-#, fuzzy
 msgid "No shared resources"
-msgstr "Del ressurser med"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-additional_fields.php:101
 msgid "The field %s is required"
@@ -4925,18 +4914,16 @@ msgid "Show login buttons"
 msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:72
-#, fuzzy
 msgid "Show %s login button"
-msgstr "Bruk %s navn til login-knapp"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:78
 msgid "Show"
 msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:84
-#, fuzzy
 msgid "Name for login button"
-msgstr "Bruk %s navn til login-knapp"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:87
 msgid "Use %s name for login button"
@@ -4951,19 +4938,16 @@ msgid "site"
 msgstr "nettside"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:92
-#, fuzzy
 msgid "Use"
-msgstr "Bruker"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:92
-#, fuzzy
 msgid "Do not use"
-msgstr "Ikke omdirigere"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:104
-#, fuzzy
 msgid "Facebook"
-msgstr "Facebook App ID"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:105
 msgid "Twitter"
@@ -4974,9 +4958,8 @@ msgid "Google"
 msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:107
-#, fuzzy
 msgid "WordPress"
-msgstr "Din adresse:"
+msgstr ""
 
 #: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:9
 msgid "Service Locations"
@@ -6464,10 +6447,3 @@ msgstr ""
 msgctxt "Discard existing info"
 msgid "Cancel"
 msgstr "Forkast"
-
-#, fuzzy
-#~ msgid "Services & Workers"
-#~ msgstr "Tjenesteleverandører"
-
-#~ msgid "Services Provided*"
-#~ msgstr "Tjenester Tilbudt*"

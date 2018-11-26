@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-11-21 15:15:54+00:00\n"
+"POT-Creation-Date: 2018-11-26 06:56:13+00:00\n"
 "PO-Revision-Date: 2018-05-26 21:18:28+0000\n"
 "Language: en_ZA\n"
 "MIME-Version: 1.0\n"
@@ -3257,9 +3257,8 @@ msgid "Not registered user"
 msgstr "Not registered user"
 
 #: includes/class-app-ajax.php:330
-#, fuzzy
 msgid "Error while fetching working hours."
-msgstr "%s edited his working hours."
+msgstr ""
 
 #: includes/class-app-ajax.php:362
 msgid ""

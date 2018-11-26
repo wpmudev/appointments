@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-11-21 15:15:54+00:00\n"
-"PO-Revision-Date: 2018-06-18 14:53:37+0000\n"
+"POT-Creation-Date: 2018-11-26 06:56:13+00:00\n"
+"PO-Revision-Date: 2018-07-13 17:13:13+0000\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1842,11 +1842,11 @@ msgstr "Configurações atualizadas"
 
 #: admin/pages/class-admin-settings-page.php:233
 msgid "Number of services per page"
-msgstr ""
+msgstr "Número de serviços por página"
 
 #: admin/pages/class-admin-settings-page.php:245
 msgid "Number of service providers per page"
-msgstr ""
+msgstr "Número de provedores de serviço por página"
 
 #: admin/pages/class-admin-transactions-page.php:18
 #: admin/pages/class-admin-transactions-page.php:19
@@ -2070,6 +2070,12 @@ msgid ""
 "a working day. When you add new service providers, their expections will be "
 "set to the default schedule."
 msgstr ""
+"Aqui você pode definir dias de trabalho excepcionais ou não úteis para sua "
+"empresa e para seus prestadores de serviços. Você deve inserir feriados "
+"aqui. Você também pode definir um dia de semana normalmente não útil (por "
+"exemplo, um domingo específico) como um dia útil. Quando você adiciona novos "
+"provedores de serviços, suas expectativas são definidas como a programação "
+"padrão."
 
 #: admin/views/page-settings-tab-exceptions.php:21
 #: admin/views/page-settings-tab-working_hours.php:6
@@ -2982,6 +2988,13 @@ msgid ""
 "request payment to accept appointments. You can define a description page "
 "for the service you are providing."
 msgstr ""
+"Aqui você deve definir seus serviços para os quais seu cliente fará os "
+"compromissos. <b>Deve haver pelo menos um serviço definido.</b> Capacidade é "
+"o número de clientes que podem fazer o serviço ao mesmo tempo. Digite 0 para "
+"nenhum limite específico (limitado ao número de provedores de serviço ou a 1 "
+"se nenhum provedor de serviços estiver definido para esse serviço). O preço "
+"só é necessário se você solicitar o pagamento para aceitar compromissos. "
+"Você pode definir uma página de descrição para o serviço que está fornecendo."
 
 #: admin/views/page-settings-tab-services.php:7
 msgid "Service Added"
@@ -3048,6 +3061,10 @@ msgid ""
 "default schedule. Then you can edit their schedule by selecting their names "
 "from the dropdown menu below."
 msgstr ""
+"Aqui você pode definir horários de trabalho e intervalos para o seu negócio. "
+"Quando você adicionar novos provedores de serviços, suas horas de trabalho e "
+"intervalo serão definidas para o agendamento padrão. Em seguida, você pode "
+"editar a agenda deles selecionando seus nomes no menu suspenso abaixo."
 
 #: admin/views/page-settings-tab-working_hours.php:37
 #: admin/views/user-profile-working-hours.php:10
@@ -3303,9 +3320,8 @@ msgid "Not registered user"
 msgstr "Usuário não registrado"
 
 #: includes/class-app-ajax.php:330
-#, fuzzy
 msgid "Error while fetching working hours."
-msgstr "%s editou suas horas de trabalho."
+msgstr ""
 
 #: includes/class-app-ajax.php:362
 msgid ""
@@ -4395,7 +4411,7 @@ msgstr "API do Calendário Google: Crie um novo Aplicativo Google"
 
 #: includes/gcal/views/settings-gcal-step-1.php:2
 msgid "Instructions:"
-msgstr ""
+msgstr "Instruções:"
 
 #: includes/gcal/views/settings-gcal-step-1.php:8
 msgid ""
@@ -4430,6 +4446,8 @@ msgid ""
 "... and then \"OAuth consent screen\" tab. Choose a product name shown to "
 "users, i.e. \"Appointments+\""
 msgstr ""
+"... e depois a aba \"OAuth consent screen\". Escolha um nome de produto que "
+"será mostrado aos usuários, por exemplo, \"Compromissos\""
 
 #: includes/gcal/views/settings-gcal-step-1.php:32
 msgid "Click again on \"Credentials\" tab and then Create Credentials."
@@ -4438,7 +4456,7 @@ msgstr ""
 
 #: includes/gcal/views/settings-gcal-step-1.php:36
 msgid "Select the \"Oauth client ID\" option."
-msgstr ""
+msgstr "Selecione a opção \"Oauth client ID\"."
 
 #: includes/gcal/views/settings-gcal-step-1.php:40
 msgid ""
@@ -4450,6 +4468,7 @@ msgstr ""
 #: includes/gcal/views/settings-gcal-step-1.php:44
 msgid "Take note of the client ID and client secret and fill the form below."
 msgstr ""
+"Anote o ID do cliente e o segredo do cliente e preencha o formulário abaixo."
 
 #: includes/gcal/views/settings-gcal-step-1.php:52
 msgid "Client ID"
@@ -4701,7 +4720,7 @@ msgstr "Escolher Opção &raquo;"
 #: includes/notifications/class-app-notification-notification.php:29
 #: includes/notifications/class-app-notification-notification.php:49
 msgid "Notification message sent to %s for appointment ID: %s"
-msgstr ""
+msgstr "Mensagem de notificação enviada para %s para ID de compromisso: %s"
 
 #. Translators: First %s is for appointment ID and the second one is for date
 #. and time of the appointment
@@ -4731,7 +4750,7 @@ msgstr ""
 
 #: includes/notifications/class-app-notification-confirmation.php:93
 msgid "Confirmation message sent to %s for appointment ID: %s"
-msgstr ""
+msgstr "Mensagem de confirmação enviada para %s para ID de compromisso: %s"
 
 #: includes/notifications/class-app-notification-confirmation.php:158
 msgid ""
@@ -4766,7 +4785,7 @@ msgstr ""
 #: includes/notifications/class-app-notification-reminder.php:61
 #: includes/notifications/class-app-notification-reminder.php:110
 msgid "Reminder message sent to %s for appointment ID: %s"
-msgstr ""
+msgstr "Mensagem de lembrete enviada para %s para ID de compromisso: %s"
 
 #: includes/notifications/class-app-notification-reminder.php:103
 msgid "Unable to send worker reminder about the appointment ID: %s."
@@ -4786,6 +4805,8 @@ msgstr ""
 msgid ""
 "Unable to notify the client about the appointment ID: %s removal, stopping."
 msgstr ""
+"Não é possível notificar o cliente sobre o ID do compromisso: %s remoção, "
+"parando."
 
 #: includes/notifications/class-app-notification-removal.php:133
 msgid "Removal message sent to %s for appointment ID: %s"
@@ -5038,7 +5059,7 @@ msgstr "Após exibição do shortcode Meus Compromissos"
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:247
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:257
 msgid "Do not insert"
-msgstr ""
+msgstr "Não inserir"
 
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:257
 msgid "After All Appointments shortcode output"
@@ -5474,7 +5495,7 @@ msgstr "Usar"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:92
 msgid "Do not use"
-msgstr ""
+msgstr "Não usar"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:104
 msgid "Facebook"
@@ -6775,6 +6796,9 @@ msgid ""
 "dropdown menu when a service is selected . Selectable values are \"none\", "
 "\"excerpt\", \"content\". Default: \"excerpt\"."
 msgstr ""
+"Seleciona qual parte da página de descrição será exibida no menu suspenso "
+"quando um serviço for selecionado. Valores selecionáveis são \"nenhum\", "
+"\"trecho\", \"conteúdo\". Padrão: \"trecho\"."
 
 #: includes/shortcodes/class-app-shortcode-services.php:51
 msgid ""
@@ -6791,7 +6815,7 @@ msgstr ""
 #: includes/shortcodes/class-app-shortcode-services.php:57
 msgid ""
 "CSS class that will be applied to the thumbnail. Default: \"alignleft\"."
-msgstr ""
+msgstr "Classe CSS que será aplicada à miniatura. Padrão: \"alignleft\"."
 
 #: includes/shortcodes/class-app-shortcode-services.php:63
 msgid ""
@@ -6800,6 +6824,10 @@ msgid ""
 "the selections and thus check descriptions on the fly (without the page is "
 "refreshed). Default: disabled."
 msgstr ""
+"Se marcado, o botão Mostrar não será exibido e a página será atualizada "
+"automaticamente conforme a seleção de alterações do cliente. Nota: O cliente "
+"não pode navegar pelas seleções e, assim, verificar descrições na hora (sem "
+"atualizar a página). Padrão: desativado."
 
 #: includes/shortcodes/class-app-shortcode-services.php:77
 msgid ""
@@ -6831,6 +6859,8 @@ msgid ""
 "If checked, Services thumbnails and descriptions will be loaded by AJAX. "
 "Recommended for sites with many services."
 msgstr ""
+"Se marcado, as miniaturas e descrições dos Serviços serão carregadas pelo "
+"AJAX. Recomendado para sites com muitos serviços."
 
 #: includes/shortcodes/class-app-shortcode-services.php:98
 msgid "Creates a dropdown menu of available services."

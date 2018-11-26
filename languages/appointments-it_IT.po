@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-11-21 15:15:54+00:00\n"
+"POT-Creation-Date: 2018-11-26 06:56:13+00:00\n"
 "PO-Revision-Date: 2017-08-15 06:35:02+0000\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -1842,14 +1842,12 @@ msgid "Settings updated"
 msgstr "Configurazione aggiornate"
 
 #: admin/pages/class-admin-settings-page.php:233
-#, fuzzy
 msgid "Number of services per page"
-msgstr "Numero di servizi da mostrare:"
+msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:245
-#, fuzzy
 msgid "Number of service providers per page"
-msgstr "Numero di fornitori di servizi da mostrare:"
+msgstr ""
 
 #: admin/pages/class-admin-transactions-page.php:18
 #: admin/pages/class-admin-transactions-page.php:19
@@ -2519,9 +2517,8 @@ msgid "Auto erase after"
 msgstr ""
 
 #: admin/views/page-settings-tab-main-section-gdpr.php:31
-#, fuzzy
 msgid "Completed appointments will be deleted after."
-msgstr "Appuntamenti completati"
+msgstr ""
 
 #: admin/views/page-settings-tab-main-section-gdpr.php:35
 #: includes/class-app-appointment.php:224
@@ -3279,9 +3276,8 @@ msgid "Not registered user"
 msgstr "Utente non registrato"
 
 #: includes/class-app-ajax.php:330
-#, fuzzy
 msgid "Error while fetching working hours."
-msgstr "%s ha modificato il suo orario di lavoro."
+msgstr ""
 
 #: includes/class-app-ajax.php:362
 msgid ""
@@ -5004,9 +5000,8 @@ msgstr "Dopo l'outoput dello shortcode I miei appuntantamenti"
 
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:247
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:257
-#, fuzzy
 msgid "Do not insert"
-msgstr "Non reindirizzare"
+msgstr ""
 
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:257
 msgid "After All Appointments shortcode output"
@@ -5050,15 +5045,13 @@ msgid ""
 msgstr ""
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:394
-#, fuzzy
 msgid "Service Location"
-msgstr "Indirizzi dei Servizi"
+msgstr ""
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:444
 #: includes/pro/includes/addons/app-locations-worker_locations.php:346
-#, fuzzy
 msgid "No Location"
-msgstr "Ubicazione"
+msgstr ""
 
 #: includes/pro/includes/addons/app-locations-worker_locations.php:69
 msgid ""
@@ -5304,19 +5297,16 @@ msgid "Paddings"
 msgstr "Imbottiture ?"
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:613
-#, fuzzy
 msgid "Before: %s"
-msgstr "Prima"
+msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:623
-#, fuzzy
 msgid "After: %s"
-msgstr "dopo"
+msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:643
-#, fuzzy
 msgid "No paddings"
-msgstr "Imbottiture ?"
+msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:53
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:74
@@ -5328,19 +5318,16 @@ msgid "Share with \"%s\""
 msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:84
-#, fuzzy
 msgid "Do not share"
-msgstr "Non reindirizzare"
+msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:208
-#, fuzzy
 msgid "Shared resources"
-msgstr "Condividi le risorse con"
+msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:239
-#, fuzzy
 msgid "No shared resources"
-msgstr "Condividi le risorse con"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-additional_fields.php:101
 msgid "The field %s is required"
@@ -5417,18 +5404,16 @@ msgid "Show login buttons"
 msgstr "Mostra bottoni login"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:72
-#, fuzzy
 msgid "Show %s login button"
-msgstr "Mostra bottoni login"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:78
 msgid "Show"
 msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:84
-#, fuzzy
 msgid "Name for login button"
-msgstr "Utilizza %s per il pulsante di login"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:87
 msgid "Use %s name for login button"
@@ -5443,19 +5428,16 @@ msgid "site"
 msgstr "sito"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:92
-#, fuzzy
 msgid "Use"
-msgstr "Utente"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:92
-#, fuzzy
 msgid "Do not use"
-msgstr "Non reindirizzare"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:104
-#, fuzzy
 msgid "Facebook"
-msgstr "Facebook App ID"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:105
 msgid "Twitter"
@@ -5466,9 +5448,8 @@ msgid "Google"
 msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:107
-#, fuzzy
 msgid "WordPress"
-msgstr "Il tuo indirizzo:"
+msgstr ""
 
 #: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:9
 msgid "Service Locations"
@@ -7038,13 +7019,3 @@ msgstr ""
 msgctxt "Discard existing info"
 msgid "Cancel"
 msgstr "Annulla"
-
-#, fuzzy
-#~ msgid "Services & Workers"
-#~ msgstr "Fornitori di servizi"
-
-#~ msgid "Limit Services Login"
-#~ msgstr "Limitazioni dei Servizi di Accesso ?"
-
-#~ msgid "Services Provided*"
-#~ msgstr "Servizi forniti*"
