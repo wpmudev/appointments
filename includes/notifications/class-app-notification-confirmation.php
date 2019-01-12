@@ -158,7 +158,8 @@ class Appointments_Notifications_Confirmation extends Appointments_Notification 
 		$provider_add_text  = sprintf( __('A new appointment has been made on %s. Below please find a copy of what has been sent to your client:', 'appointments'), get_option( 'blogname' ) );
 		$provider_add_text .= "\n\n\n";
 
-		$subject = __('New Appointment','appointments');
+		$options = appointments_get_options();
+		$subject = $options['confirmation_subject'];
 
 		$body = $this->get_customer_template( $app_id, $customer_email );
 
