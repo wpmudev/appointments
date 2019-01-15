@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-11-26 06:56:13+00:00\n"
+"POT-Creation-Date: 2019-01-15 11:08:07+00:00\n"
 "PO-Revision-Date: 2017-12-10 12:07:18+0000\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -4588,10 +4588,6 @@ msgstr ""
 "Новое назначение было сделано на %s . Ниже Вы найдете копию того, что был "
 "отправлен к вашему клиенту:"
 
-#: includes/notifications/class-app-notification-confirmation.php:161
-msgid "New Appointment"
-msgstr "Новая Экскурсия"
-
 #. Translators: First %s is for appointment ID and the second one is for date
 #. and time of the appointment
 #: includes/notifications/class-app-notification-notification.php:71
@@ -6823,3 +6819,6 @@ msgstr ""
 msgctxt "Discard existing info"
 msgid "Cancel"
 msgstr "Отменить"
+
+#~ msgid "New Appointment"
+#~ msgstr "Новая Экскурсия"

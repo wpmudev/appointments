@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-11-26 06:56:13+00:00\n"
+"POT-Creation-Date: 2019-01-15 11:08:07+00:00\n"
 "PO-Revision-Date: 2018-05-26 21:18:28+0000\n"
 "Language: en_ZA\n"
 "MIME-Version: 1.0\n"
@@ -4673,10 +4673,6 @@ msgstr ""
 "A new appointment has been made on %s. Below please find a copy of what has "
 "been sent to your client:"
 
-#: includes/notifications/class-app-notification-confirmation.php:161
-msgid "New Appointment"
-msgstr "New Appointment"
-
 #. Translators: First %s is for appointment ID and the second one is for date
 #. and time of the appointment
 #: includes/notifications/class-app-notification-notification.php:71
@@ -6978,3 +6974,6 @@ msgstr "login"
 msgctxt "Discard existing info"
 msgid "Cancel"
 msgstr "Cancel"
+
+#~ msgid "New Appointment"
+#~ msgstr "New Appointment"

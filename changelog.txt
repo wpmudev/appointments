@@ -1,3 +1,7 @@
+2019-xx-xx - 2.4.2
+-------------------------------
+- Fixed a problem with custom confirmation email.
+
 2018-11-26 - 2.4.1
 -------------------------------
 - Fixed a problem with Service Provider shortcode param name.

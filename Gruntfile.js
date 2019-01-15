@@ -240,6 +240,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-search');
 
     grunt.registerTask('version-compare', [ 'search' ] );
+    grunt.registerTask( 'i18n', [ 'checktextdomain', 'makepot', 'potomo' ] );
 
     grunt.registerTask( 'finish', function() {
         var json = grunt.file.readJSON('package.json');
@@ -257,6 +258,8 @@ module.exports = function(grunt) {
         grunt.log.writeln( pushMessage['green'] );
         grunt.log.writeln('----------');
     });
+
+    grunt.registerTask( 'default', ['clean', 'i18n' ] );
 
     grunt.registerTask('build', [
         'checktextdomain',

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-11-21 15:15:54+00:00\n"
+"POT-Creation-Date: 2019-01-15 11:08:07+00:00\n"
 "PO-Revision-Date: 2016-10-23 10:18:54+0000\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -4433,10 +4433,6 @@ msgstr ""
 "Una nova cita s'ha realitzat en %s. Aquí sota pots veure la còpia que se li "
 "ha enviat al client:"
 
-#: includes/notifications/class-app-notification-confirmation.php:161
-msgid "New Appointment"
-msgstr "Nova cita"
-
 #. Translators: First %s is for appointment ID and the second one is for date
 #. and time of the appointment
 #: includes/notifications/class-app-notification-notification.php:71
@@ -6679,6 +6675,9 @@ msgstr ""
 msgctxt "Discard existing info"
 msgid "Cancel"
 msgstr "Descartar"
+
+#~ msgid "New Appointment"
+#~ msgstr "Nova cita"
 
 #, fuzzy
 #~ msgid "Services & Workers"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-11-21 15:15:54+00:00\n"
+"POT-Creation-Date: 2019-01-15 11:08:07+00:00\n"
 "PO-Revision-Date: 2017-07-03 09:11:12+0000\n"
 "Language: sv_SE\n"
 "MIME-Version: 1.0\n"
@@ -3080,7 +3080,7 @@ msgid ""
 "Client Name: CLIENT\n"
 "Service Name: SERVICE\n"
 "Service Provider Name: SERVICE_PROVIDER\n"
-msgstr "\n"
+msgstr ""
 
 #: includes/class-app-gdpr.php:147
 msgid ""
@@ -4219,10 +4219,6 @@ msgid ""
 "A new appointment has been made on %s. Below please find a copy of what has "
 "been sent to your client:"
 msgstr ""
-
-#: includes/notifications/class-app-notification-confirmation.php:161
-msgid "New Appointment"
-msgstr "Ny bokning"
 
 #. Translators: First %s is for appointment ID and the second one is for date
 #. and time of the appointment
@@ -6368,6 +6364,9 @@ msgstr ""
 msgctxt "Discard existing info"
 msgid "Cancel"
 msgstr "Avbryt"
+
+#~ msgid "New Appointment"
+#~ msgstr "Ny bokning"
 
 #, fuzzy
 #~ msgid "Services & Workers"
