@@ -427,7 +427,7 @@ function apppointments_is_range_busy( $start, $end, $args = array() ) {
 		foreach ( $apps as $app ) {
 			//if ( $start >= strtotime( $app->start ) && $end <= strtotime( $app->end ) ) return true;
 			$app_properties = apply_filters( 'app-properties-for-calendar', array( 'start' => $app->start, 'end' => $app->end ), $app, $args );
-			if ( $period->contains( $app_properties['start'], $app_properties['end'], true ) ) {
+			if ( $args['service_id'] === $app->service && $period->contains( $app_properties['start'], $app_properties['end'], true ) ) {
 				$counter++;
 			}
 		}
