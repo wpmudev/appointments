@@ -1,6 +1,8 @@
 2019-xx-xx - 2.4.2
 -------------------------------
 - Fixed a problem with custom confirmation email.
+- Fixed a problem with slot availability.
+- Added plugin specific text to privacy policy page (only during creation a policy page).
 
 2018-11-26 - 2.4.1
 -------------------------------

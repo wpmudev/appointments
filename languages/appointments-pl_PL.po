@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2019-01-15 11:08:07+00:00\n"
+"POT-Creation-Date: 2019-01-15 11:19:54+00:00\n"
 "PO-Revision-Date: 2018-11-26 06:53:44+0000\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -1681,7 +1681,7 @@ msgid "Add new Service Provider"
 msgstr "Nowy wykonawca"
 
 #: admin/pages/class-admin-settings-page.php:96
-#: admin/pages/class-admin-settings-page.php:587
+#: admin/pages/class-admin-settings-page.php:595
 msgid "Please, select at least one service provided"
 msgstr "Proszę wybrać przynajmniej jednego dostawcę usługi"
 
@@ -3365,32 +3365,61 @@ msgstr[0] "Nie skasowano %d wizyty."
 msgstr[1] "Nie skasowano %d wizyt."
 msgstr[2] "Nie skasowano %d wizyt."
 
-#: includes/class-app-gdpr.php:418
-msgid "Plugin: Appointments"
-msgstr "Wtyczka: Appointments"
-
-#: includes/class-app-gdpr.php:420
-msgid ""
-"When visitors book an appointment on the site we collect the data shown in "
-"the appointments form to allow future contact with a client."
+#: includes/class-app-gdpr.php:422
+msgid "What personal data do we collect and why?"
 msgstr ""
-"Kiedy odwiedzający rezerwują wizytę w witrynie, zbieramy dane pokazane w "
-"formularzu spotkań, aby umożliwić przyszły kontakt z klientem."
 
-#: includes/class-app-gdpr.php:421
+#: includes/class-app-gdpr.php:424
 msgid ""
-"All collected data is not shown publicly but we can send it to our workers "
-"or contractors who will perform ordered services."
+"When visitors book an appointment on your site using Appointments+ the data "
+"is stored. If you use the Additional Fields add-on make sure to update your "
+"privacy policy to reflect any additional information you have requested from "
+"your clients."
 msgstr ""
-"Żadna z zebranych informacji nie jest prezentowanea publicznie, ale możemy "
-"je przesłać naszym pracownikom lub kontrahentom, którzy wykonają zamówione "
-"usługi."
 
-#: includes/class-app-gdpr.php:425
+#: includes/class-app-gdpr.php:427 includes/class-app-gdpr.php:435
+#: includes/class-app-gdpr.php:443
+#, fuzzy
+msgid "Suggested text: "
+msgstr "Tekst po zalogowaniu się"
+
+#: includes/class-app-gdpr.php:428
 msgid ""
-"All collected data will be automatically erased %s after appointment date."
+"We collect your Name, E-Mail and Phone Number for your Appointments. The "
+"information is not shared and will be deleted on request."
+msgstr ""
+
+#: includes/class-app-gdpr.php:430
+#, fuzzy
+msgid "How long Appointments+ retains your data"
+msgstr "Pokaż terminy dla tego identyfikatora użytkownika"
+
+#: includes/class-app-gdpr.php:432
+msgid ""
+"Manually remove user information on an erasure request or use he Appointments"
+"+ GDPR settings to automatically delete information after an allotted time."
+msgstr ""
+
+#: includes/class-app-gdpr.php:436
+#, fuzzy
+msgid "Your data will be automatically erased after 20 days."
 msgstr ""
 "Wszystkie zebrane dane zostaną automatycznie usunięte %s po dacie wizyty."
+
+#: includes/class-app-gdpr.php:438
+msgid "Third Parties"
+msgstr ""
+
+#: includes/class-app-gdpr.php:440
+#, fuzzy
+msgid "If you choose to, you can sync Appointments+ with your Google Calendar."
+msgstr "Kliknij, aby zamieścić tą rezerwację w swoim kalendarzu Google"
+
+#: includes/class-app-gdpr.php:444
+msgid ""
+"We are using Google Calendar to sync our appointments. Your Name, E-Mail, "
+"Phone will be synced with our private Google Calendar account."
+msgstr ""
 
 #: includes/class-app-service.php:56
 msgid ""
@@ -6643,14 +6672,6 @@ msgctxt "Pro plugin name in personal data exporter."
 msgid "Appointments+ Plugin"
 msgstr "Wtyczka Appointments+"
 
-#: includes/class-app-gdpr.php:424
-msgctxt "policy page days string"
-msgid "%d day"
-msgid_plural "%d days"
-msgstr[0] "%d dzień"
-msgstr[1] "%d dni"
-msgstr[2] "%d dni"
-
 #: includes/class-app-notifications-manager.php:46
 msgctxt "%s contains filter name in pre tag"
 msgid "Every 10 minutes or you can filter it with the %s filter."
@@ -6716,6 +6737,31 @@ msgstr "zaloguj się"
 msgctxt "Discard existing info"
 msgid "Cancel"
 msgstr "Anuluj [nie zapisuj zmian]"
+
+#~ msgid "Plugin: Appointments"
+#~ msgstr "Wtyczka: Appointments"
+
+#~ msgid ""
+#~ "When visitors book an appointment on the site we collect the data shown "
+#~ "in the appointments form to allow future contact with a client."
+#~ msgstr ""
+#~ "Kiedy odwiedzający rezerwują wizytę w witrynie, zbieramy dane pokazane w "
+#~ "formularzu spotkań, aby umożliwić przyszły kontakt z klientem."
+
+#~ msgid ""
+#~ "All collected data is not shown publicly but we can send it to our "
+#~ "workers or contractors who will perform ordered services."
+#~ msgstr ""
+#~ "Żadna z zebranych informacji nie jest prezentowanea publicznie, ale "
+#~ "możemy je przesłać naszym pracownikom lub kontrahentom, którzy wykonają "
+#~ "zamówione usługi."
+
+#~ msgctxt "policy page days string"
+#~ msgid "%d day"
+#~ msgid_plural "%d days"
+#~ msgstr[0] "%d dzień"
+#~ msgstr[1] "%d dni"
+#~ msgstr[2] "%d dni"
 
 #~ msgid "New Appointment"
 #~ msgstr "Nowa rezerwacja"
