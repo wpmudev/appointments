@@ -1,6 +1,6 @@
 {
     "name": "appointments",
-    "version": "2.4.2-beta.2",
+    "version": "2.4.2",
     "main": "appointments.php",
     "projectEditUrl": "https://premium.wpmudev.org/wp-admin/edit.php?post_type=project&page=projects-manage&manage_files=679841#file",
     "description": "Simply manage your studio, salon or clinic’s calendar in WordPress and let clients book appointments online - whether you’re a private practice or large team spread across multiple locations.",

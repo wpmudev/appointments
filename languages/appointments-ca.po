@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2019-01-15 11:19:54+00:00\n"
+"POT-Creation-Date: 2019-03-18 08:13:04+00:00\n"
 "PO-Revision-Date: 2016-10-23 10:18:54+0000\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -1683,14 +1683,12 @@ msgid "Settings updated"
 msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:233
-#, fuzzy
 msgid "Number of services per page"
-msgstr "Nombre de serveis a mostrar:"
+msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:245
-#, fuzzy
 msgid "Number of service providers per page"
-msgstr "Nombre de proveïdors de serveis a mostrar: "
+msgstr ""
 
 #: admin/pages/class-admin-transactions-page.php:18
 #: admin/pages/class-admin-transactions-page.php:19
@@ -2356,9 +2354,8 @@ msgid "Auto erase after"
 msgstr ""
 
 #: admin/views/page-settings-tab-main-section-gdpr.php:31
-#, fuzzy
 msgid "Completed appointments will be deleted after."
-msgstr "Cites completades"
+msgstr ""
 
 #: admin/views/page-settings-tab-main-section-gdpr.php:35
 #: includes/class-app-appointment.php:224
@@ -3107,9 +3104,8 @@ msgid "Not registered user"
 msgstr "Usuari no registrat"
 
 #: includes/class-app-ajax.php:330
-#, fuzzy
 msgid "Error while fetching working hours."
-msgstr "%s ha editat el seu horari laboral."
+msgstr ""
 
 #: includes/class-app-ajax.php:362
 msgid ""
@@ -3349,9 +3345,8 @@ msgid ""
 msgstr ""
 
 #: includes/class-app-gdpr.php:430
-#, fuzzy
 msgid "How long Appointments+ retains your data"
-msgstr "Mostrar cites per a aquest ID d'usuari"
+msgstr ""
 
 #: includes/class-app-gdpr.php:432
 msgid ""
@@ -3368,9 +3363,8 @@ msgid "Third Parties"
 msgstr ""
 
 #: includes/class-app-gdpr.php:440
-#, fuzzy
 msgid "If you choose to, you can sync Appointments+ with your Google Calendar."
-msgstr "Clica per enviar aquesta cita al teu compte de Google Calendar"
+msgstr ""
 
 #: includes/class-app-gdpr.php:444
 msgid ""
@@ -4797,15 +4791,13 @@ msgid ""
 msgstr ""
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:394
-#, fuzzy
 msgid "Service Location"
-msgstr "Mostra servei de localització"
+msgstr ""
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:444
 #: includes/pro/includes/addons/app-locations-worker_locations.php:346
-#, fuzzy
 msgid "No Location"
-msgstr "Localització"
+msgstr ""
 
 #: includes/pro/includes/addons/app-locations-worker_locations.php:69
 msgid ""
@@ -5053,14 +5045,12 @@ msgid "Paddings"
 msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:613
-#, fuzzy
 msgid "Before: %s"
-msgstr "Anterior"
+msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:623
-#, fuzzy
 msgid "After: %s"
-msgstr "Posterior"
+msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:643
 msgid "No paddings"
@@ -5080,14 +5070,12 @@ msgid "Do not share"
 msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:208
-#, fuzzy
 msgid "Shared resources"
-msgstr "Compartir els recursos amb"
+msgstr ""
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:239
-#, fuzzy
 msgid "No shared resources"
-msgstr "Compartir els recursos amb"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-additional_fields.php:101
 msgid "The field %s is required"
@@ -5164,18 +5152,16 @@ msgid "Show login buttons"
 msgstr "Mostra botons d'inci de sessió"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:72
-#, fuzzy
 msgid "Show %s login button"
-msgstr "Mostra botons d'inci de sessió"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:78
 msgid "Show"
 msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:84
-#, fuzzy
 msgid "Name for login button"
-msgstr "Utilitza nom %s per al botó d'entrada o login"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:87
 msgid "Use %s name for login button"
@@ -5190,18 +5176,16 @@ msgid "site"
 msgstr "lloc web"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:92
-#, fuzzy
 msgid "Use"
-msgstr "Usuari"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:92
 msgid "Do not use"
 msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:104
-#, fuzzy
 msgid "Facebook"
-msgstr "App ID de Facebook "
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:105
 msgid "Twitter"
@@ -5212,9 +5196,8 @@ msgid "Google"
 msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:107
-#, fuzzy
 msgid "WordPress"
-msgstr "La teva adreça:"
+msgstr ""
 
 #: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:9
 msgid "Service Locations"
@@ -6700,13 +6683,3 @@ msgstr ""
 msgctxt "Discard existing info"
 msgid "Cancel"
 msgstr "Descartar"
-
-#~ msgid "New Appointment"
-#~ msgstr "Nova cita"
-
-#, fuzzy
-#~ msgid "Services & Workers"
-#~ msgstr "Proveidors de serveis"
-
-#~ msgid "Services Provided*"
-#~ msgstr "Serveis proveïts*"

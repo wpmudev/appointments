@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2019-01-15 11:19:54+00:00\n"
-"PO-Revision-Date: 2018-06-13 12:28:17+0000\n"
+"POT-Creation-Date: 2019-03-18 08:13:04+00:00\n"
+"PO-Revision-Date: 2019-01-21 06:14:26+0000\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -942,14 +942,13 @@ msgid ""
 "both. You may consider adding app_pagination and app_my_appointments "
 "shortcodes too."
 msgstr ""
-"Crie uma página privada ou protegida de uma senha, incluindo o horário "
-"codificado como segue: <pre>[app_mensual_horário do empregado=\"1\"]</"
-"pre>. \n"
-"[App_mês_horário do empregado= \"1\"] </ pre>. Substitua 1 pela ID do "
-"usuário que é o mesmo que o ID do empregado/provedor. Também pode usar "
-"app_codigo horário  para planejar semanalmente, ou pode também usar ambos. "
-"Pode também considerar a adicionar códigos de app_paginação e app_minhas "
-"datas marcadas_."
+"Criar uma página privada ou protegida de uma senha, incluindo o horário "
+"codificado seguinte <pre>[app_monthly_schedule worker=\"1\"]</pre>. "
+"Substitua 1 pela ID do usuário que é a mesma que o ID do empregado/provedor. "
+"Também pode usar app_codigo horário  para planejar semanalmente, ou pode "
+"também usar ambos. Pode também considerar a adicionar códigos de "
+"app_paginação e a app_minha  app_paginação app_''shortcodes''_minhas_datas "
+"marcadas appointments."
 
 #: admin/app-faq.php:219
 msgid ""
@@ -1530,8 +1529,8 @@ msgstr[1] "Plural: % s comentários"
 #: admin/class-app-list-table.php:648
 msgid "%s approved comment"
 msgid_plural "%s approved comments"
-msgstr[0] "Singular: % s comentário aprovado"
-msgstr[1] "Plural: % s comentários aprovados"
+msgstr[0] "Singular: %s comentário aprovado"
+msgstr[1] "Plural: %s comentários aprovados"
 
 #: admin/class-app-list-table.php:649
 msgid "%s pending comment"
@@ -1866,11 +1865,11 @@ msgstr "Configurações atualizadas"
 
 #: admin/pages/class-admin-settings-page.php:233
 msgid "Number of services per page"
-msgstr ""
+msgstr "Número de tarefas por página"
 
 #: admin/pages/class-admin-settings-page.php:245
 msgid "Number of service providers per page"
-msgstr ""
+msgstr "Número de provedores de tarefas por página"
 
 #: admin/pages/class-admin-transactions-page.php:18
 #: admin/pages/class-admin-transactions-page.php:19
@@ -2306,8 +2305,8 @@ msgid ""
 "Enter your App ID number here. If you don't have a Facebook App yet, you "
 "will need to create one <a href='%s'>here</a>"
 msgstr ""
-"Digite seu número de ID de App aqui. Se não tem um Facebook App ainda, você "
-"terá de criar um <a href = ' %s '> aqui </a>"
+"Digitar seu número de ID de ''App'' aqui. Se não tem uma ''App'' do Facebook "
+"ainda, terá que criar uma <a href='%s'>aqui</a>"
 
 #: admin/views/page-settings-tab-main-section-accesibility.php:133
 msgid "Twitter Consumer Key"
@@ -2318,9 +2317,8 @@ msgid ""
 "Enter your Twitter App ID number here. If you don't have a Twitter App yet, "
 "you will need to create one <a href=\"%s\">here</a>"
 msgstr ""
-"Digite o número do seu ID do Twitter App aqui. Se  não tem um Twitter App "
-"ainda, deverá criar um \n"
-"<a href =\" %s\"> aqui </a>"
+"Digitar seu número de ID de ''App'' do Twitter aqui. Se não tem uma ''App'' "
+"do Twitter ainda, terá que criar uma <a href=\"%s\">here</a>"
 
 #: admin/views/page-settings-tab-main-section-accesibility.php:144
 msgid "Twitter Consumer Secret"
@@ -3332,7 +3330,8 @@ msgstr "Registro não pôde ser salvo OU não fez nenhuma alteração!"
 #: includes/pro/includes/addons/app-users-additional_fields.php:350
 msgid "<span style=\"color:green;font-weight:bold\">Changes saved.</span>"
 msgstr ""
-"<span style=\"cor:verde;font-weight:bold\">Modificações gravadas.</span>"
+"<span style=\"color:green;font-weight:bold\">Alterações salvaguardadas.</"
+"span>"
 
 #: includes/class-app-ajax.php:205
 msgid "Status changed from %s to %s by %s for appointment ID:%d"
@@ -3348,7 +3347,7 @@ msgstr "Utilizador não registado"
 
 #: includes/class-app-ajax.php:330
 msgid "Error while fetching working hours."
-msgstr ""
+msgstr "Falhou ao angariar as horas de trabalho."
 
 #: includes/class-app-ajax.php:362
 msgid ""
@@ -3514,9 +3513,9 @@ msgid ""
 "Service Name: SERVICE\n"
 "Service Provider Name: SERVICE_PROVIDER\n"
 msgstr ""
-"NOME DO CLIENTE: CLIENTE\n"
-"NOME DA TAREFA: TAREFA\n"
-"NOME DO PROVEDOR DA TAREFA: PROVEDOR DA TAREFA\n"
+"Nome do Cliente: CLIENTE\n"
+"Nome das Tarefas: TAREFAS\n"
+"Nome do Provedor de Tarefas: PROVEDOR_ de TAREFAS\n"
 
 #: includes/class-app-gdpr.php:147
 msgid ""
@@ -3560,7 +3559,7 @@ msgstr[1] "Não apagamos as marcações %d"
 
 #: includes/class-app-gdpr.php:422
 msgid "What personal data do we collect and why?"
-msgstr ""
+msgstr "Que dados pessoais conservamos e porquê?"
 
 #: includes/class-app-gdpr.php:424
 msgid ""
@@ -3569,46 +3568,50 @@ msgid ""
 "privacy policy to reflect any additional information you have requested from "
 "your clients."
 msgstr ""
+"Quando os visitantes reservam uma data no seu site, usando 'Appointments+' "
+"os dados ficam armazenados. Se usar extras nos Campos Adicionais, não se "
+"esqueçam de atualizar sua política de privacidade para se conformar com "
+"qualquer informação adicional, que tenham solicitado de seus clientes."
 
 #: includes/class-app-gdpr.php:427 includes/class-app-gdpr.php:435
 #: includes/class-app-gdpr.php:443
-#, fuzzy
 msgid "Suggested text: "
-msgstr "Texto para ''Conectado''"
+msgstr "Texto sugerido:"
 
 #: includes/class-app-gdpr.php:428
 msgid ""
 "We collect your Name, E-Mail and Phone Number for your Appointments. The "
 "information is not shared and will be deleted on request."
 msgstr ""
+"Nós conservamos seu nome, e-mail e número de telefone para suas datas "
+"marcadas. As informações não serão compartilhadas e serão suprimidas "
+"mediante uma solicitação."
 
 #: includes/class-app-gdpr.php:430
-#, fuzzy
 msgid "How long Appointments+ retains your data"
-msgstr "Mostrar Datas Marcadas para este usuário ID"
+msgstr "Por quanto tempo 'Appointments+' conserva seus dados?"
 
 #: includes/class-app-gdpr.php:432
 msgid ""
 "Manually remove user information on an erasure request or use he Appointments"
 "+ GDPR settings to automatically delete information after an allotted time."
 msgstr ""
+"Suprimir manualmente as informações do usuário em caso de uma solicitação de "
+"eliminação; ou use as configurações Appointments+ GDPR para  excluir as "
+"informações após um certo tempo alocado, automaticamente."
 
 #: includes/class-app-gdpr.php:436
-#, fuzzy
 msgid "Your data will be automatically erased after 20 days."
-msgstr ""
-"Todos os dados obtidos serão automaticamente apagados após %s da data da "
-"marcação."
+msgstr "Seus dados serão automaticamente suprimidos  após 20 dias."
 
 #: includes/class-app-gdpr.php:438
 msgid "Third Parties"
-msgstr ""
+msgstr "Terceiros"
 
 #: includes/class-app-gdpr.php:440
-#, fuzzy
 msgid "If you choose to, you can sync Appointments+ with your Google Calendar."
 msgstr ""
-"'Clique' para enviar esta data marcada para a sua conta do clendário do "
+"Se assim preferir, pode sincronizar Appointments+ com o seu Calendário "
 "Google."
 
 #: includes/class-app-gdpr.php:444
@@ -3616,6 +3619,9 @@ msgid ""
 "We are using Google Calendar to sync our appointments. Your Name, E-Mail, "
 "Phone will be synced with our private Google Calendar account."
 msgstr ""
+"Estamos a usar o ‘’Google Calendar’’ para sincronizar as datas marcadas. Seu "
+"nome, e-mail e telefone serão sincronizados com a nossa conta particular do "
+"‘’Google Calendar’’."
 
 #: includes/class-app-service.php:56
 msgid ""
@@ -3699,7 +3705,7 @@ msgstr ""
 
 #: includes/class-app-tutorial.php:69
 msgid "Do you require login?"
-msgstr "Requer uma conexão?"
+msgstr "Desja fazer o ''login''?"
 
 #: includes/class-app-tutorial.php:70
 msgid ""
@@ -4210,7 +4216,7 @@ msgstr "A data marcada foi suprimida"
 #: includes/class_app_codec.php:366
 #: includes/shortcodes/class-app-shortcode-login.php:50
 msgid "Login"
-msgstr "'Login' (dados de acesso)"
+msgstr "'Login' "
 
 #: includes/class_app_roles.php:19
 msgid "Staff view options"
@@ -5099,7 +5105,7 @@ msgstr "Mostrar imagens"
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:234
 #: includes/pro/includes/addons/app-users-limit_services_login.php:78
 msgid "Hide"
-msgstr ""
+msgstr "Ocultar"
 
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:238
 msgid "Automatic map overlays"
@@ -5116,7 +5122,7 @@ msgstr "Após Datas Marcadas, resultado ''shortcode''"
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:247
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:257
 msgid "Do not insert"
-msgstr ""
+msgstr "Não insertar"
 
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:257
 msgid "After All Appointments shortcode output"
@@ -5125,7 +5131,7 @@ msgstr "Após Todas datas marcadas, resultado ''shortcode'' "
 #: includes/pro/includes/addons/app-locations-service_locations.php:185
 #: includes/pro/includes/addons/app-locations-worker_locations.php:193
 msgid "There is no locations to choose. Please add some first."
-msgstr ""
+msgstr "Não exitem locais a selecionar. Adicionar alguns primeiraments, p/f"
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:211
 msgid ""
@@ -5164,12 +5170,12 @@ msgstr ""
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:394
 msgid "Service Location"
-msgstr ""
+msgstr "Local das Tarefas"
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:444
 #: includes/pro/includes/addons/app-locations-worker_locations.php:346
 msgid "No Location"
-msgstr ""
+msgstr "Sem Localidade"
 
 #: includes/pro/includes/addons/app-locations-worker_locations.php:69
 msgid ""
@@ -5416,15 +5422,15 @@ msgstr "''Paddings''"
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:613
 msgid "Before: %s"
-msgstr ""
+msgstr "Antes: %s"
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:623
 msgid "After: %s"
-msgstr ""
+msgstr "Depois: %s"
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:643
 msgid "No paddings"
-msgstr ""
+msgstr "Sem ''padding'' "
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:53
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:74
@@ -5433,19 +5439,19 @@ msgstr "Partilha recursos com"
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:81
 msgid "Share with \"%s\""
-msgstr ""
+msgstr "Compartilhar com \"%s\""
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:84
 msgid "Do not share"
-msgstr ""
+msgstr "Não compartilhar"
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:208
 msgid "Shared resources"
-msgstr ""
+msgstr "Recursos compartilhados"
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:239
 msgid "No shared resources"
-msgstr ""
+msgstr "Nenhum recurso compartilhado"
 
 #: includes/pro/includes/addons/app-users-additional_fields.php:101
 msgid "The field %s is required"
@@ -5523,15 +5529,15 @@ msgstr "Mostrar botões de conexão"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:72
 msgid "Show %s login button"
-msgstr ""
+msgstr "Mostrar %s botão do ''login''"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:78
 msgid "Show"
-msgstr ""
+msgstr "Mostrar"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:84
 msgid "Name for login button"
-msgstr ""
+msgstr "Nome do botão do ''login''"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:87
 msgid "Use %s name for login button"
@@ -5547,27 +5553,27 @@ msgstr "site"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:92
 msgid "Use"
-msgstr ""
+msgstr "Utilizar"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:92
 msgid "Do not use"
-msgstr ""
+msgstr "Não utililzar"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:104
 msgid "Facebook"
-msgstr ""
+msgstr "Facebook"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:105
 msgid "Twitter"
-msgstr ""
+msgstr "Twitter"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:106
 msgid "Google"
-msgstr ""
+msgstr "Google"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:107
 msgid "WordPress"
-msgstr ""
+msgstr "WordPress"
 
 #: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:9
 msgid "Service Locations"
@@ -5838,9 +5844,9 @@ msgid ""
 "Copy the value of the field labeled <em>Client ID</em>, and enter it in the "
 "text field in plugin settings labeled <strong>Google Client ID</strong>"
 msgstr ""
-"Copie a entrada do campo <em> ID do cliente </ em> e insira-o no campo de "
-"texto das configurações do plugin nomeado <strong> ID do cliente do Google "
-"</ strong>"
+"Copiar a entrada do campo nomeado <em> ID Cliente</em>, e inseri-lo no campo "
+"de texto das configurações do ''plugin'' nomeado<strong>Google ID Cliente</"
+"strong>"
 
 #: includes/pro/includes/class-app-google-login.php:164
 msgid ""
@@ -6204,10 +6210,10 @@ msgid ""
 "replaced with your website's registration page."
 msgstr ""
 "Texto que será exibido após o título, que será apenas para os clientes que "
-"não estiverem conetados e  se uma coneção for requerida. <Codigo> "
-"PAGINA_CONEXÃO </codigo> será substituída pela página de conexão do seu "
-"site, e o <codigo> PÁGINA_REGISTRACÃO </ codigo> será substituída pela "
-"página de registro do seu site."
+"não estiverem conetados e  se uma coneção for requerida. <code> "
+"PAGINA_CONEXÃO </code> será substituída pela página de conexão do seu site, "
+"e o <code> PÁGINA_REGISTRACÃO </code> será substituída pela página de "
+"registro do seu site."
 
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:61
 msgid "Hide today's times"
@@ -6712,7 +6718,7 @@ msgid ""
 msgstr ""
 "Selecionar o provedor de tarefas só no caso de querer forçar que o gráfico "
 "exiba o provedor de tarefas com ID inserida. Padrão: Provedor de tarefas "
-"será selecionado na lista ''dropdown''.   "
+"será selecionado na ''dropdown''."
 
 #: includes/shortcodes/class-app-shortcode-schedule.php:291
 msgid ""
@@ -7146,31 +7152,3 @@ msgstr "''login''"
 msgctxt "Discard existing info"
 msgid "Cancel"
 msgstr "Cancelar"
-
-#~ msgid "Plugin: Appointments"
-#~ msgstr "Plugin: Appointments"
-
-#~ msgid ""
-#~ "When visitors book an appointment on the site we collect the data shown "
-#~ "in the appointments form to allow future contact with a client."
-#~ msgstr ""
-#~ "Quando os visitantes fazem uma marcação no site, vamos colectar os dados "
-#~ "mostrados no formulário de marcações para permitir futuros contactos com "
-#~ "o cliente."
-
-#~ msgid ""
-#~ "All collected data is not shown publicly but we can send it to our "
-#~ "workers or contractors who will perform ordered services."
-#~ msgstr ""
-#~ "Todos os dados obtidos não são exibidos publicamente, mas podemos enviá-"
-#~ "los para nossos funcionários ou para os contratados que irão realizar os "
-#~ "serviços solicitados."
-
-#~ msgctxt "policy page days string"
-#~ msgid "%d day"
-#~ msgid_plural "%d days"
-#~ msgstr[0] "%d dia"
-#~ msgstr[1] "%d dias"
-
-#~ msgid "New Appointment"
-#~ msgstr "Nova Data Marcada"

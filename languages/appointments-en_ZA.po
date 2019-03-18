@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2019-01-15 11:19:54+00:00\n"
+"POT-Creation-Date: 2019-03-18 08:13:04+00:00\n"
 "PO-Revision-Date: 2018-05-26 21:18:28+0000\n"
 "Language: en_ZA\n"
 "MIME-Version: 1.0\n"
@@ -3485,9 +3485,8 @@ msgstr ""
 
 #: includes/class-app-gdpr.php:427 includes/class-app-gdpr.php:435
 #: includes/class-app-gdpr.php:443
-#, fuzzy
 msgid "Suggested text: "
-msgstr "Logged in text"
+msgstr ""
 
 #: includes/class-app-gdpr.php:428
 msgid ""
@@ -3496,9 +3495,8 @@ msgid ""
 msgstr ""
 
 #: includes/class-app-gdpr.php:430
-#, fuzzy
 msgid "How long Appointments+ retains your data"
-msgstr "Show Appointments for this user ID"
+msgstr ""
 
 #: includes/class-app-gdpr.php:432
 msgid ""
@@ -3507,19 +3505,16 @@ msgid ""
 msgstr ""
 
 #: includes/class-app-gdpr.php:436
-#, fuzzy
 msgid "Your data will be automatically erased after 20 days."
 msgstr ""
-"All collected data will be automatically erased %s after appointment date."
 
 #: includes/class-app-gdpr.php:438
 msgid "Third Parties"
 msgstr ""
 
 #: includes/class-app-gdpr.php:440
-#, fuzzy
 msgid "If you choose to, you can sync Appointments+ with your Google Calendar."
-msgstr "Click to submit this appointment to your Google Calendar account"
+msgstr ""
 
 #: includes/class-app-gdpr.php:444
 msgid ""
@@ -6997,29 +6992,3 @@ msgstr "login"
 msgctxt "Discard existing info"
 msgid "Cancel"
 msgstr "Cancel"
-
-#~ msgid "Plugin: Appointments"
-#~ msgstr "Plugin: Appointments"
-
-#~ msgid ""
-#~ "When visitors book an appointment on the site we collect the data shown "
-#~ "in the appointments form to allow future contact with a client."
-#~ msgstr ""
-#~ "When visitors book an appointment on the site we collect the data shown "
-#~ "in the appointments form to allow future contact with a client."
-
-#~ msgid ""
-#~ "All collected data is not shown publicly but we can send it to our "
-#~ "workers or contractors who will perform ordered services."
-#~ msgstr ""
-#~ "All collected data is not shown publicly but we can send it to our "
-#~ "workers or contractors who will perform ordered services."
-
-#~ msgctxt "policy page days string"
-#~ msgid "%d day"
-#~ msgid_plural "%d days"
-#~ msgstr[0] "%d day"
-#~ msgstr[1] "%d days"
-
-#~ msgid "New Appointment"
-#~ msgstr "New Appointment"
