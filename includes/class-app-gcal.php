@@ -28,7 +28,7 @@ class Appointments_Google_Calendar {
 		}
 
 		if ( ! defined( 'APP_GCAL_MAX_RESULTS_LIMIT' ) ) {
-			define( 'APP_GCAL_MAX_RESULTS_LIMIT', 500, true );
+			define( 'APP_GCAL_MAX_RESULTS_LIMIT', 500 );
 		}
 
 		include_once( 'gcal/class-app-gcal-admin.php' );
@@ -69,7 +69,6 @@ class Appointments_Google_Calendar {
 		$options = appointments_get_options();
 		include_once( 'gcal/class-app-gcal-api-manager.php' );
 		$this->api_manager = new Appointments_Google_Calendar_API_Manager();
-
 
 		$default_creds = array();
 		if ( ! empty( $options['gcal_client_id'] ) && ! empty( $options['gcal_client_secret'] ) ) {
@@ -183,8 +182,7 @@ class Appointments_Google_Calendar {
 				$description = '';
 			}
 			$show = true;
-		}
-		elseif ( $this->is_connected() && $this->api_manager->get_calendar() ) {
+		} elseif ( $this->is_connected() && $this->api_manager->get_calendar() ) {
 			// General calendar
 			$show = true;
 			$description = appointments_get_appointment_meta( $app->ID, 'gcal_description' );
@@ -252,7 +250,7 @@ class Appointments_Google_Calendar {
 									appointments_update_appointment( $app->ID,
 										array(
 											'status' => 'removed',
-											'gcal_ID' => ''
+											'gcal_ID' => '',
 										)
 									);
 								}
@@ -264,7 +262,6 @@ class Appointments_Google_Calendar {
 					$this->restore_to_default();
 				}
 			}
-
 		}
 
 		$api_mode = $this->get_api_mode();
@@ -272,8 +269,7 @@ class Appointments_Google_Calendar {
 		if ( ! in_array( $api_mode, $sync_modes ) || ! $this->is_connected() || ! $this->api_manager->get_calendar() ) {
 			if ( $doing_ajax ) {
 				wp_send_json_error();
-			}
-			else {
+			} else {
 				return;
 			}
 		}
@@ -283,8 +279,7 @@ class Appointments_Google_Calendar {
 		if ( is_wp_error( $events ) ) {
 			if ( $doing_ajax ) {
 				wp_send_json_error();
-			}
-			else {
+			} else {
 				return;
 			}
 		}
@@ -314,16 +309,14 @@ class Appointments_Google_Calendar {
 						// Maybe the time has passed
 						$event = $this->get_event( $app->ID );
 						if ( $event ) {
-							if( $event->status == 'cancelled' ) {
+							if ( $event->status == 'cancelled' ) {
 								appointments_update_appointment_status( $app->ID, 'removed' );
-							}
-							else{
+							} else {
 								// The event is in GCal but the time has passed
 								// Let's move it to completed
 								appointments_update_appointment_status( $app->ID, apply_filters( 'appointments_gcal_change_status_on_completed_event', 'completed' ) );
 							}
-						}
-						else {
+						} else {
 							appointments_update_appointment_status( $app->ID, 'removed' );
 						}
 					}
@@ -331,11 +324,10 @@ class Appointments_Google_Calendar {
 				$this->add_appointments_hooks();
 			}
 		}
-		if( isset( $_POST['return_result'] ) && $_POST['return_result'] == 'yes' ){
+		if ( isset( $_POST['return_result'] ) && $_POST['return_result'] == 'yes' ) {
 			if ( $doing_ajax ) {
 				wp_send_json_success();
-			}
-			else {
+			} else {
 				return;
 			}
 		}
@@ -390,7 +382,7 @@ class Appointments_Google_Calendar {
 
 		if ( empty( $options['gcal_client_id'] ) || empty( $options['gcal_client_secret'] ) ) {
 			// No client secret and no client ID, why do we have a token then?
-			$this->api_manager->set_access_token('{"access_token":0}');
+			$this->api_manager->set_access_token( '{"access_token":0}' );
 			$options['gcal_token'] = '';
 			$options['gcal_client_id'] = '';
 			$options['gcal_client_secret'] = '';
@@ -451,8 +443,8 @@ class Appointments_Google_Calendar {
 			$appointments->_replace(
 				$this->get_description(),
 				$app->name,
-				$appointments->get_service_name($app->service),
-				appointments_get_worker_name($app->worker),
+				$appointments->get_service_name( $app->service ),
+				appointments_get_worker_name( $app->worker ),
 				$app->start,
 				$app->price,
 				$appointments->get_deposit( $app->price ),
@@ -466,11 +458,11 @@ class Appointments_Google_Calendar {
 		);
 
 		// Location
-		if ( isset( $options["gcal_location"] ) && '' != trim( $options["gcal_location"] ) ) {
+		if ( isset( $options['gcal_location'] ) && '' != trim( $options['gcal_location'] ) ) {
 			$location = str_replace( array( 'ADDRESS', 'CITY' ), array(
 				$app->address,
-				$app->city
-			), $options["gcal_location"] );
+				$app->city,
+			), $options['gcal_location'] );
 		} else {
 			$location = get_bloginfo( 'description' );
 		}
@@ -479,9 +471,9 @@ class Appointments_Google_Calendar {
 
 		// Dates
 		$start = new Google_Service_Calendar_EventDateTime();
-		$start->setDateTime( $app->get_start_gmt_date( "Y-m-d\TH:i:s\Z" ) );
+		$start->setDateTime( $app->get_start_gmt_date( 'Y-m-d\TH:i:s\Z' ) );
 		$end = new Google_Service_Calendar_EventDateTime();
-		$end->setDateTime( $app->get_end_gmt_date( "Y-m-d\TH:i:s\Z" ) );
+		$end->setDateTime( $app->get_end_gmt_date( 'Y-m-d\TH:i:s\Z' ) );
 
 		// Email
 		$email = $app->get_email();
@@ -505,8 +497,7 @@ class Appointments_Google_Calendar {
 			if ( ! is_wp_error( $tmp ) ) {
 				if ( is_object( $tmp ) && ! empty( $tmp->sequence ) ) {
 					$event->setSequence( $tmp->sequence );
-				}
-				elseif ( is_array( $tmp ) && ! empty( $tmp['sequence'] ) ) {
+				} elseif ( is_array( $tmp ) && ! empty( $tmp['sequence'] ) ) {
 					$event->setSequence( $tmp['sequence'] );
 				}
 			}
@@ -577,10 +568,8 @@ class Appointments_Google_Calendar {
 					}
 					$this->restore_to_default();
 				}
-
 			}
 		}
-
 
 		wp_send_json( array( 'message' => sprintf( __( '%d updated, %d new inserted and %d deleted', 'appointments' ), $results['updated'], $results['inserted'], $results['deleted'] ) ) );
 	}
@@ -634,7 +623,7 @@ class Appointments_Google_Calendar {
 		return ! in_array( $mode, array( 'gcal2app', 'none' ) );
 	}
 
-	public function get_syncable_status () {
+	public function get_syncable_status() {
 		return apply_filters( 'app-gcal-syncable_status', array( 'paid', 'confirmed', 'reserved' ) );
 	}
 
@@ -707,7 +696,7 @@ class Appointments_Google_Calendar {
 	 */
 	public function get_summary() {
 		if ( empty( $this->summary ) ) {
-			$this->summary = __('SERVICE Appointment','appointments');
+			$this->summary = __( 'SERVICE Appointment','appointments' );
 		}
 		return $this->summary;
 	}
@@ -726,7 +715,7 @@ class Appointments_Google_Calendar {
 	 */
 	public function get_description() {
 		if ( empty( $this->description ) ) {
-			$this->description = __("Client Name: CLIENT\nService Name: SERVICE\nService Provider Name: SERVICE_PROVIDER\n", "appointments");
+			$this->description = __( "Client Name: CLIENT\nService Name: SERVICE\nService Provider Name: SERVICE_PROVIDER\n", 'appointments' );
 		}
 
 		return $this->description;
@@ -752,7 +741,6 @@ class Appointments_Google_Calendar {
 				$this->on_update_appointment( $app->ID, array(), $app );
 				return;
 			}
-
 		}
 		$worker = appointments_get_worker( $app->worker );
 
@@ -760,8 +748,7 @@ class Appointments_Google_Calendar {
 			// The worker has a calendar assigned, let's insert
 			$this->insert_event( $app_id );
 			$this->restore_to_default();
-		}
-		elseif ( ( 'all' === $this->get_api_scope() ) || ( 'no_preference' === $this->get_api_scope() && ! $worker ) ) {
+		} elseif ( ( 'all' === $this->get_api_scope() ) || ( 'no_preference' === $this->get_api_scope() && ! $worker ) ) {
 			// Insert in general calendar
 			$this->insert_event( $app->ID );
 		}
@@ -812,7 +799,6 @@ class Appointments_Google_Calendar {
 			return;
 		}
 
-
 		$old_worker_id = $old_app->worker;
 		$worker_id = $app->worker;
 		$worker_has_changed = ( absint( $app->worker ) != absint( $old_app->worker ) );
@@ -833,75 +819,64 @@ class Appointments_Google_Calendar {
 					if ( $event ) {
 						// Update event in new worker
 						$this->update_event( $app->ID );
-					}
-					else {
+					} else {
 						// Insert in new worker
 						$this->insert_event( $app_id );
 					}
 					$this->restore_to_default();
 					return;
-				}
-				else {
+				} else {
 					$event = $this->get_event( $app_id );
 					if ( $event ) {
 						// Update event in general calendar
 						$this->update_event( $app->ID );
-					}
-					else {
+					} else {
 						// Insert in general calendar
 						$this->insert_event( $app_id );
 					}
 					return;
 				}
-			}
-			else {
+			} else {
 				if ( $this->switch_to_worker( $worker_id ) ) {
 					$event = $this->get_event( $app_id );
 					if ( $event ) {
 						// Update event in new worker
 						$this->update_event( $app->ID );
-					}
-					else {
+					} else {
 						// Insert in new worker
 						$this->insert_event( $app_id );
 					}
 					$this->restore_to_default();
 					return;
-				}
-				else {
+				} else {
 					$event = $this->get_event( $app_id );
 					if ( $event ) {
 						// Update event in general calendar
 						$this->update_event( $app->ID );
-					}
-					else {
+					} else {
 						// Insert in general calendar
 						$this->insert_event( $app_id );
 					}
 					return;
 				}
 			}
-		}
-		else {
+		} else {
 			if ( $this->switch_to_worker( $worker_id ) ) {
 				$event = $this->get_event( $app_id );
 				if ( $event ) {
 					// Update event in new worker
 					$this->update_event( $app->ID );
-				}
-				else {
+				} else {
 					// Insert in new worker
 					$this->insert_event( $app_id );
 				}
 				$this->restore_to_default();
-			}
-			else {
+			} else {
 				$event = $this->get_event( $app_id );
 				if ( $event ) {
 					// Update event in general calendar
 					$this->update_event( $app->ID );
-				}
-				else {
+				} else {
 					// Insert in general calendar
 					$this->insert_event( $app_id );
 				}
@@ -965,8 +940,7 @@ class Appointments_Google_Calendar {
 
 		if ( is_wp_error( $result ) ) {
 			return false;
-		}
-		else {
+		} else {
 			$args = array( 'gcal_updated' => current_time( 'mysql' ), 'gcal_ID' => $result );
 			$this->remove_appointments_hooks();
 			appointments_update_appointment( $app_id, $args );
@@ -982,9 +956,9 @@ class Appointments_Google_Calendar {
 			return false;
 		}
 
-		if( $app_id && $this->workers_allowed() ){
+		if ( $app_id && $this->workers_allowed() ) {
 			$app = appointments_get_appointment( $app_id );
-			$this->api_manager->switch_to_worker( $app->worker ); 
+			$this->api_manager->switch_to_worker( $app->worker );
 		}
 
 		$this->api_manager->delete_event( $event_id );
@@ -1039,11 +1013,11 @@ class Appointments_Google_Calendar {
 		$gcal_overwrite = $options['gcal_overwrite'];
 
 		// Location
-		if ( isset( $options["gcal_location"] ) && '' != trim( $options["gcal_location"] ) ) {
+		if ( isset( $options['gcal_location'] ) && '' != trim( $options['gcal_location'] ) ) {
 			$location = str_replace( array( 'ADDRESS', 'CITY' ), array(
 				$app->address,
-				$app->city
-			), $options["gcal_location"] );
+				$app->city,
+			), $options['gcal_location'] );
 		} else {
 			$location = get_bloginfo( 'description' );
 		}
@@ -1053,12 +1027,11 @@ class Appointments_Google_Calendar {
 		if ( $gcal_overwrite ) {
 			// Overwrite title and description
 			$event = $this->appointment_to_gcal_event( $app );
-		}
-		else {
+		} else {
 			$start = new Google_Service_Calendar_EventDateTime();
-			$start->setDateTime( $app->get_start_gmt_date( "Y-m-d\TH:i:s\Z" ) );
+			$start->setDateTime( $app->get_start_gmt_date( 'Y-m-d\TH:i:s\Z' ) );
 			$end = new Google_Service_Calendar_EventDateTime();
-			$end->setDateTime( $app->get_end_gmt_date( "Y-m-d\TH:i:s\Z" ) );
+			$end->setDateTime( $app->get_end_gmt_date( 'Y-m-d\TH:i:s\Z' ) );
 			$event->setStart( $start );
 			$event->setEnd( $end );
 		}
@@ -1080,11 +1053,9 @@ class Appointments_Google_Calendar {
 
 		$result = $this->api_manager->update_event( $event_id, $event );
 
-
 		if ( is_wp_error( $result ) ) {
 			return false;
-		}
-		else {
+		} else {
 			$args = array( 'gcal_updated' => current_time( 'mysql' ) );
 			$this->remove_appointments_hooks();
 			appointments_update_appointment( $app_id, $args );
@@ -1105,14 +1076,11 @@ class Appointments_Google_Calendar {
 			'singleEvents' => apply_filters( 'app_gcal_single_events', true ),
 			'maxResults'   => apply_filters( 'app_gcal_max_results', APP_GCAL_MAX_RESULTS_LIMIT ),
 			'orderBy'      => apply_filters( 'app_gcal_orderby', 'startTime' ),
-			'timeZone' => 'GMT'
+			'timeZone' => 'GMT',
 		);
 
 		$events = $this->api_manager->get_events_list( $args );
 
 		return $events;
 	}
-
-
-
 }
