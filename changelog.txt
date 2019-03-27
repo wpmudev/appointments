@@ -3,6 +3,7 @@
 - Fixed a problem with $service object.
 - Fixed a problem with Service Provider price.
 - Fixed few warnings during activated.
+- Fixed a problem with "Pay" button, when payments are not available on `app_my_appointments` shortcode.
 
 2019-03-18 - 2.4.2
 -------------------------------
