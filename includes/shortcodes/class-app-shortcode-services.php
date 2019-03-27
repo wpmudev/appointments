@@ -5,6 +5,14 @@
  * Services dropdown list shortcode.
  */
 class App_Shortcode_Services extends App_Shortcode {
+
+	/**
+	 * Sort BY
+	 *
+	 * @since 2.4.3
+	 */
+	private $sort_by = 'ID';
+
 	public function __construct() {
 		$this->name = __( 'Services', 'appointments' );
 	}
@@ -281,24 +289,40 @@ foreach ( $services as $service ) {
 	private function _reorder_services( $services, $order ) {
 		if ( empty( $services ) ) { return $services; }
 		list($by,$direction) = explode( ' ', trim( $order ), 2 );
-
 		$by = trim( $by ) ? trim( $by ) : 'ID';
 		$by = in_array( $by, array( 'ID', 'name', 'capacity', 'duration', 'price', 'page' ) )
 			? $by
 			: 'ID'
 		;
-
 		$direction = trim( $direction ) ? strtoupper( trim( $direction ) ) : 'ASC';
 		$direction = in_array( $direction, array( 'ASC', 'DESC' ) )
 			? $direction
 			: 'ASC'
-		;
-
-		$comparator = 'ASC' === $direction
-			? create_function( '$a, $b', "return strnatcasecmp(\$a->{$by}, \$b->{$by});" )
-			: create_function( '$a, $b', "return strnatcasecmp(\$b->{$by}, \$a->{$by});" );
-		usort( $services, $comparator );
-
+			;
+		$this->sort_by = $by;
+		if ( 'ASC' === $direction ) {
+			usort( $services, array( $this, 'sort_desc' ) );
+		} else {
+			usort( $services, array( $this, 'sort_asc' ) );
+		}
 		return $services;
+	}
+
+	/**
+	 * Sort ASC (usort helper)
+	 *
+	 * @since 2.4.3
+	 */
+	private function sort_asc( $a, $b ) {
+		return strnatcasecmp( $a->{$this->sort_by}, $b->{$this->sort_by} );
+	}
+
+	/**
+	 * Sort DESC (usort helper)
+	 *
+	 * @since 2.4.3
+	 */
+	private function sort_desc( $a, $b ) {
+		return strnatcasecmp( $b->{$this->sort_by}, $a->{$this->sort_by} );
 	}
 }

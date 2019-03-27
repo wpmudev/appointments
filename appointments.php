@@ -1856,28 +1856,7 @@ if ( ! class_exists( 'Appointments' ) ) {
 
 				if ( ! empty( $this->options['facebook-app_id'] ) ) {
 					if ( ! $this->options['facebook-no_init'] ) {
-						add_action('wp_footer', create_function('', "echo '" .
-							sprintf(
-								'<div id="fb-root"></div><script type="text/javascript">
-						window.fbAsyncInit = function() {
-							FB.init({
-							  appId: "%s",
-							  status: true,
-							  cookie: true,
-							  xfbml: true
-							});
-						};
-						// Load the FB SDK Asynchronously
-						(function(d){
-							var js, id = "facebook-jssdk"; if (d.getElementById(id)) {return;}
-							js = d.createElement("script"); js.id = id; js.async = true;
-							js.src = "//connect.facebook.net/en_US/all.js";
-							d.getElementsByTagName("head")[0].appendChild(js);
-						}(document));
-						</script>',
-								$this->options['facebook-app_id']
-							) .
-						"';"));
+						add_action( 'wp_footer', array( $this, 'add_facebook_fb_root_element' ) );
 					}
 				}
 				do_action( 'app-scripts-api' );
@@ -1887,6 +1866,15 @@ if ( ! class_exists( 'Appointments' ) ) {
 		 * Fired when scripts/styles have been loaded
 		 */
 			do_action( 'appointments_scripts_loaded' );
+		}
+
+		/**
+		 * Add Facebook fb-root elements
+		 */
+		public function add_facebook_fb_root_element() {
+			$template = 'front-end/elements/facebook/fb-root';
+			$args = array( 'app_id' => $this->options['facebook-app_id'] );
+			$this->render( $template, $args );
 		}
 
 		/**
@@ -2060,13 +2048,32 @@ if ( ! class_exists( 'Appointments' ) ) {
 				$message_headers = "From: {$blogname}" .  " <{$admin_email}>\n" . "Content-Type: {$content_type}; charset=\"" . get_option( 'blog_charset' ) . "\"\n";
 			} else {
 				$message_headers = "Content-Type: {$content_type}; charset=\"" . get_option( 'blog_charset' ) . "\"\n";
-				add_filter( 'wp_mail_from', create_function( '', "return '{$admin_email}';" ) );
-				add_filter( 'wp_mail_from_name', create_function( '', "return '{$blogname}';" ) );
+				add_filter( 'wp_mail_from', array( $this, 'return_admin_email' ) );
+				add_filter( 'wp_mail_from_name', array( $this, 'return_blogname' ) );
 			}
 			// Modify message headers
 			$message_headers = apply_filters( 'app_message_headers', $message_headers );
-
 			return $message_headers;
+		}
+
+		/**
+		 * Get admin mail
+		 *
+		 * @since 2.4.3
+		 */
+		public function return_admin_email( $email ) {
+			$admin_email = $this->get_admin_email();
+			return $admin_email;
+		}
+
+		/**
+		 * Get Blog Name
+		 *
+		 * @since 2.4.3
+		 */
+		public function return_blogname( $email ) {
+			$blogname = strip_tags( wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES ) );
+			return $blogname;
 		}
 
 		/**
@@ -2319,6 +2326,38 @@ if ( ! class_exists( 'Appointments' ) ) {
 
 			$this->locale_error = true;
 			return $date;
+		}
+
+		/**
+		 * Renders a view file
+		 *
+		 * @since 2.4.3
+		 *
+		 * @param $file
+		 * @param array $params
+		 * @param bool|false $return
+		 * @return string
+		 */
+		public function render( $file, $params = array(), $return = false ) {
+			$content = '';
+			if ( array_key_exists( 'this', $params ) ) {
+				unset( $params['this'] );
+			}
+			extract( $params, EXTR_OVERWRITE ); // phpcs:ignorei
+			$file = trim( $file, '/' );
+			$template_file = appointments_plugin_dir() . 'views/' . $file . '.php';
+
+			l( $template_file );
+
+			if ( file_exists( $template_file ) ) {
+				ob_start();
+				include $template_file;
+				$content = ob_get_clean();
+			}
+			if ( $return ) {
+				return $content;
+			}
+			echo $content;
 		}
 	}
 }
