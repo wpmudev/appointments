@@ -2346,9 +2346,6 @@ if ( ! class_exists( 'Appointments' ) ) {
 			extract( $params, EXTR_OVERWRITE ); // phpcs:ignorei
 			$file = trim( $file, '/' );
 			$template_file = appointments_plugin_dir() . 'views/' . $file . '.php';
-
-			l( $template_file );
-
 			if ( file_exists( $template_file ) ) {
 				ob_start();
 				include $template_file;
