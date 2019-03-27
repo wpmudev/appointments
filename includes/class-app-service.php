@@ -209,7 +209,7 @@ function appointments_get_service_by_name( $service_name ) {
 			$service_name
 		)
 	);
-	if ( $service ) {
+	if ( ! empty( $service ) ) {
 		return new Appointments_Service( $service );
 	}
 	return false;

@@ -1,3 +1,7 @@
+2019-xx-xx - 2.4.3
+-------------------------------
+- Fixed a problem with $service object.
+
 2019-03-18 - 2.4.2
 -------------------------------
 - Fixed a problem with custom confirmation email.
