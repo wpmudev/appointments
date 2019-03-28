@@ -15,6 +15,9 @@ module.exports = function(grunt) {
                 'assets/js/src/admin/admin-settings-sections.js',
                 'assets/js/src/admin/admin-settings.js'
             ],
+            'assets/js/appointments-locations.js': [
+                'assets/js/src/admin/admin-locations.js'
+            ],
             'assets/js/appointments-api.js': [
                 'assets/js/src/front-end/appointments-api.js',
             ],

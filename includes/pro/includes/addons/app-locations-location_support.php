@@ -140,7 +140,12 @@ class App_Locations_LocationsWorker {
 
 	public function include_scripts() {
 		global $appointments;
-		wp_enqueue_script( 'app-locations', $appointments->plugin_url . '/js/locations.js', array( 'jquery' ), $appointments->version );
+		wp_enqueue_script(
+			'app-locations',
+			$appointments->plugin_url . '/assets/js/appointments-locations.min.js',
+			array( 'jquery' ),
+			$appointments->version
+		);
 		wp_localize_script('app-locations', '_app_locations_data', apply_filters('app-locations-location_model_template', array(
 			'model' => array(
 				'fields' => array(
