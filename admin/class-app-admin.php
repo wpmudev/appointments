@@ -229,7 +229,7 @@ class Appointments_Admin {
 		// Make a locale check to update locale_error flag
 
 		if ( empty( $appointments->options['disable_js_check_admin'] ) ) {
-			wp_enqueue_script( 'app-js-check', $appointments->plugin_url . '/js/js-check.js', array( 'jquery' ), $appointments->version );
+			wp_enqueue_script( 'app-js-check', $appointments->plugin_url . '/assets/js/appointments-js-check.min.js', array( 'jquery' ), $appointments->version );
 		}
 
 		/**

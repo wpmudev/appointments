@@ -17,6 +17,9 @@ module.exports = function(grunt) {
             ],
             'assets/js/appointments-api.js': [
                 'assets/js/src/front-end/appointments-api.js',
+            ],
+            'assets/js/appointments-js-check.js': [
+                'assets/js/src/common/js-check.js',
             ]
         },
 

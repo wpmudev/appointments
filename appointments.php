@@ -1795,7 +1795,7 @@ if ( ! class_exists( 'Appointments' ) ) {
 			add_action( 'wp_footer', array( &$this, 'wp_footer' ) );	// Publish plugin specific scripts in the footer
 
 			// TODO: consider this
-			wp_enqueue_script( 'app-js-check', $this->plugin_url . '/js/js-check.js', array( 'jquery' ), $this->version );
+			wp_enqueue_script( 'app-js-check', $this->plugin_url . '/assets/js/appointments-js-check.min.js', array( 'jquery' ), $this->version );
 
 			$thank_page_id = ! empty( $this->options['thank_page'] ) ? absint( $this->options['thank_page'] ) : 0;
 			$cancel_page_id = ! empty( $this->options['cancel_page'] ) ? absint( $this->options['cancel_page'] ) : 0;
