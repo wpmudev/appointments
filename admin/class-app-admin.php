@@ -188,8 +188,8 @@ class Appointments_Admin {
 			) ) { return; }
 
 		wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_style( 'jquery-datepick', $appointments->plugin_url . '/css/jquery.datepick.css', false, $appointments->version );
-		wp_enqueue_style( 'jquery-multiselect', $appointments->plugin_url . '/css/jquery.multiselect.css', false, $appointments->version );
+		wp_enqueue_style( 'jquery-datepick', $appointments->plugin_url . '/assets/css/jquery.datepick.css', false, $appointments->version );
+		wp_enqueue_style( 'jquery-multiselect', $appointments->plugin_url . '/assets/css/jquery.multiselect.css', false, $appointments->version );
 
 		wp_enqueue_style( 'custom-ligin-screen-jquery-switch-button', $appointments->plugin_url . '/assets/css/vendor/jquery.switch_button.css', array(), '1.12.1' );
 		do_action( 'app-admin-admin_styles' );
@@ -376,7 +376,6 @@ class Appointments_Admin {
 		global $appointments;
 		?>
 		<div class="wrap">
-			<div class="icon32" style="margin:10px 0 0 0"><img src="<?php echo $appointments->plugin_url . '/images/general.png'; ?>" /></div>
 			<h2><?php echo __( 'Appointments+ FAQ','appointments' ); ?></h2>
 			<?php if ( file_exists( APP_ADMIN_PLUGIN_DIR . '/app-faq.php' ) ) { include( APP_ADMIN_PLUGIN_DIR . '/app-faq.php' ); } ?>
 		</div>

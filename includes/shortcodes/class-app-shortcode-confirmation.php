@@ -223,7 +223,7 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 		wp_enqueue_script( 'app-shortcode-confirmation', appointments_plugin_url() . 'includes/shortcodes/js/app-confirmation.js', array( 'jquery', 'app-sweetalert' ) );
 		$schema = is_ssl()? 'https':'http';
 		$i10n = array(
-			'waitingGif' => appointments_plugin_url() . 'images/waiting.gif',
+			'waitingGif' => appointments_plugin_url() . 'assets/images/waiting.gif',
 			'isUserLoggedIn' => is_user_logged_in(),
 			'loginRequired' => $appointments->options['login_required'],
 			'ajaxurl' => admin_url( 'admin-ajax.php', $schema ),

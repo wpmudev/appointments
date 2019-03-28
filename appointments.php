@@ -1802,7 +1802,7 @@ if ( ! class_exists( 'Appointments' ) ) {
 			wp_localize_script( 'app-js-check', '_appointments_data',
 				array(
 					'ajax_url' => admin_url( 'admin-ajax.php' ),
-					'root_url' => plugins_url( 'appointments/images/' ),
+					'root_url' => plugins_url( 'appointments/assets/images/' ),
 					'thank_page_url' => get_permalink( $thank_page_id ),
 					'cancel_url' => get_permalink( $cancel_page_id ),
 				)
