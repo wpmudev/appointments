@@ -18,7 +18,9 @@ module.exports = function(grunt) {
         },
 
         css_files_compile: {
-			'assets/css/front-end/appointments.css': 'assets/sass/front-end/appointments.scss'
+			'assets/css/admin/common.css': 'assets/sass/admin/common.scss',
+			'assets/css/front-end/appointments.css': 'assets/sass/front-end/appointments.scss',
+			'assets/css/front-end/locations.css': 'assets/sass/front-end/locations.scss'
         },
 
         plugin_dir: '',

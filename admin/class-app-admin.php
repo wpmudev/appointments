@@ -167,7 +167,12 @@ class Appointments_Admin {
 
 	function admin_css() {
 		global $appointments;
-		wp_enqueue_style( 'appointments-admin', $appointments->plugin_url . '/css/admin.css', false, $appointments->version );
+		wp_enqueue_style(
+			'appointments-admin',
+			$appointments->plugin_url . '/assets/css/appointments-admin.min.css',
+			false,
+			$appointments->version
+		);
 
 		$screen = get_current_screen();
 		$title = sanitize_title( __( 'Appointments', 'appointments' ) );
@@ -182,7 +187,7 @@ class Appointments_Admin {
 				( ! $allow_profile || ! preg_match( '/profile/', $screen->base ) || ! (defined( 'IS_PROFILE_PAGE' ) && IS_PROFILE_PAGE))
 			) ) { return; }
 
-        wp_enqueue_style( 'wp-color-picker' );
+		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_style( 'jquery-datepick', $appointments->plugin_url . '/css/jquery.datepick.css', false, $appointments->version );
 		wp_enqueue_style( 'jquery-multiselect', $appointments->plugin_url . '/css/jquery.multiselect.css', false, $appointments->version );
 
@@ -239,12 +244,12 @@ class Appointments_Admin {
 		);
 		wp_localize_script( 'custom-ligin-screen-jquery-switch-button', 'switch_button', $i18n );
 
-        wp_enqueue_script(
-            'appointments-admin',
-            $appointments->plugin_url . '/assets/js/appointments-admin.min.js',
-            array( 'jquery', 'wp-color-picker' ),
-            $appointments->version
-        );
+		wp_enqueue_script(
+			'appointments-admin',
+			$appointments->plugin_url . '/assets/js/appointments-admin.min.js',
+			array( 'jquery', 'wp-color-picker' ),
+			$appointments->version
+		);
 		wp_localize_script('appointments-admin', '_app_admin_data', array(
 			'ajax_url' => admin_url( 'admin-ajax.php' ),
 			'strings' => array(
