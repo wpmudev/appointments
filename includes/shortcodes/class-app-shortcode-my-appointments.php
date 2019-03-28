@@ -267,7 +267,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		}
 
 		// Sort table from front end
-		if ( $args['_tablesorter'] && file_exists( appointments_plugin_dir() . 'js/jquery.tablesorter.min.js' ) ) {
+		if ( $args['_tablesorter'] && file_exists( appointments_plugin_dir() . 'assets/js/vendor/jquery.tablesorter.min.js' ) ) {
 			$appointments->add2footer( '
 				$(".my-appointments").tablesorter({
 					dateFormat: "'.$dateformat.'",

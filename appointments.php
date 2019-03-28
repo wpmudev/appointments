@@ -1791,7 +1791,7 @@ if ( ! class_exists( 'Appointments' ) ) {
 		 */
 		function load_scripts_styles() {
 			wp_enqueue_script( 'jquery' );
-			wp_enqueue_script( 'jquery-tablesorter', $this->plugin_url . '/js/jquery.tablesorter.min.js', array( 'jquery' ), $this->version );
+			wp_enqueue_script( 'jquery-tablesorter', $this->plugin_url . '/assets/js/vendor/jquery.tablesorter.min.js', array( 'jquery' ), $this->version );
 			add_action( 'wp_footer', array( &$this, 'wp_footer' ) );	// Publish plugin specific scripts in the footer
 
 			// TODO: consider this
