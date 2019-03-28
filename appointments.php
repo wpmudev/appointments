@@ -1838,7 +1838,12 @@ if ( ! class_exists( 'Appointments' ) ) {
 
 			// Load the rest only if API use is selected
 			if ( @$this->options['accept_api_logins'] ) {
-				wp_enqueue_script( 'appointments_api_js', $this->plugin_url . '/js/appointments-api.js', array( 'jquery' ), $this->version );
+				wp_enqueue_script(
+					'appointments_api_js',
+					$this->plugin_url . '/assets/js/front-end/appointments-api.min.js',
+					array( 'jquery' ),
+					$this->version
+				);
 				wp_localize_script('appointments_api_js', 'l10nAppApi', apply_filters('app-scripts-api_l10n', array(
 					'facebook' => __( 'Login with Facebook', 'appointments' ),
 					'twitter' => __( 'Login with Twitter', 'appointments' ),

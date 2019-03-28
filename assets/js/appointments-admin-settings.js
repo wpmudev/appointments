@@ -1,4 +1,4 @@
-/*!  - v2.4.2
+/*!  - v2.4.3-beta.1
  * https://premium.wpmudev.org/project/appointments-plus/
  * Copyright (c) 2019; * Licensed GPLv2+ */
 jQuery(document).ready( function( $ ) {
