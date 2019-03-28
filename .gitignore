@@ -7,3 +7,4 @@ tmp/
 npm-debug.log
 log.log
 languages/*.mo
+.sass-cache

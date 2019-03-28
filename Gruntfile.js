@@ -9,15 +9,16 @@ module.exports = function(grunt) {
                 'assets/js/src/admin/admin-gcal.js',
                 'assets/js/src/admin/admin-multidatepicker.js',
                 'assets/js/src/admin/editor-shortcodes.js',
-                'assets/js/src/admin/switch-button.js',
+                'assets/js/src/admin/switch-button.js'
             ],
             'assets/js/appointments-admin-settings.js': [
                 'assets/js/src/admin/admin-settings-sections.js',
-                'assets/js/src/admin/admin-settings.js',
+                'assets/js/src/admin/admin-settings.js'
             ]
         },
 
         css_files_compile: {
+			'assets/css/front-end/appointments.css': 'assets/sass/front-end/appointments.scss'
         },
 
         plugin_dir: '',
@@ -273,16 +274,15 @@ module.exports = function(grunt) {
             }
         },
         watch:  {
-            // sass: {
-            // files: [
-            // 'assets/sass/**/*.scss',
-            // 'inc/modules/**/*.scss'
-            // ],
-            // tasks: ['sass', 'cssmin'],
-            // options: {
-            // debounceDelay: 500
-            // }
-            // },
+            sass: {
+                files: [
+                    'assets/sass/**/*.scss'
+                ],
+                tasks: [ 'sass', 'cssmin' ],
+                options: {
+                    debounceDelay: 500
+                }
+            },
             scripts: {
                 files: ['assets/js/src/**/*.js'],
                 // tasks: ['jshint', 'concat', 'uglify'],
@@ -352,6 +352,40 @@ module.exports = function(grunt) {
                 }
             }
         },
+
+		sass:   {
+			all: {
+				options: {
+					'sourcemap=none': true, // 'sourcemap': 'none' does not work...
+					unixNewlines: true,
+					style: 'expanded'
+				},
+				files: conf.css_files_compile
+			}
+		},
+
+		cssmin: {
+			options: {
+				banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
+				' * <%= pkg.homepage %>\n' +
+				' * Copyright (c) <%= grunt.template.today("yyyy") %>;' +
+				' * Licensed GPLv2+' +
+				' */\n',
+				mergeIntoShorthands: false
+			},
+			target: {
+				sourceMap: true,
+				expand: true,
+				files: {
+					'assets/css/appointments-admin.min.css': [
+	    				'assets/css/admin/*.css'
+					],
+					'assets/css/appointments.min.css': [
+	    				'assets/css/front-end/*.css'
+					]
+				},
+			},
+		},
     });
 
     grunt.loadNpmTasks('grunt-search');
