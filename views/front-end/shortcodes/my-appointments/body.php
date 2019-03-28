@@ -95,7 +95,7 @@ if ( $gcal && 'yes' == $appointments->options['gcal'] ) {
 		$target = '_blank';
 	}
 ?>
-<td><a title="<?php esc_attr_e( 'Click to submit this appointment to your Google Calendar account','appointments' ); ?>" href="<?php echo esc_url( $appointments->gcal( $r->service, strtotime( $r->start, $appointments->local_time ), strtotime( $r->end, $appointments->local_time ), true, $r->address, $r->city ) ); ?>" target="<?php echo esc_attr( $target ); ?>"><?php echo $appointments->gcal_image; ?></a></td>
+<td class="my-appointments-gcal"><a title="<?php esc_attr_e( 'Click to submit this appointment to your Google Calendar account','appointments' ); ?>" href="<?php echo esc_url( $appointments->gcal( $r->service, strtotime( $r->start, $appointments->local_time ), strtotime( $r->end, $appointments->local_time ), true, $r->address, $r->city ) ); ?>" target="<?php echo esc_attr( $target ); ?>"><?php echo $appointments->gcal_image; ?></a></td>
 <?php } ?>
 <?php echo apply_filters( 'app_my_appointments_add_cell', '', $r ); ?>
 </tr>

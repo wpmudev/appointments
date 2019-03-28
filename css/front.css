@@ -674,3 +674,18 @@ table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSo
         width: auto;
     }
 }
+/**
+ * Google calendar
+ */
+.appointments-my-appointments table th.my-appointments-gcal,
+.my-appointments-gcal {
+    min-width: 40px;
+    text-align: center;
+}
+span.appointments-google-calendar {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background: transparent url(../images/google-product-logos/logo_calendar_32px.png);
+}
+
