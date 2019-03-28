@@ -1,4 +1,13 @@
 <?php
+$is_pro = _appointments_is_pro();
+if ( ! $is_pro ) {
+	$workers = appointments_get_workers( array( 'count' => true ) );
+	if ( 0 < $workers ) { ?>
+<div class="add-new-service-provider"><p><?php esc_attr_e( 'There is no ability to add more workers!', 'appointments' ); ?></p></div>
+<?php
+		return;
+	}
+}
 global $wpdb;
 
 $appointments = appointments();
