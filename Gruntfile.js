@@ -1,6 +1,43 @@
 module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
 
+    var conf = {
+        js_files_concat: {
+            'assets/js/appointments-admin.js': [
+                'assets/js/src/admin/admin.js',
+                'assets/js/src/admin/admin-appointments-list.js',
+                'assets/js/src/admin/admin-gcal.js',
+                'assets/js/src/admin/admin-multidatepicker.js',
+                'assets/js/src/admin/editor-shortcodes.js',
+                'assets/js/src/admin/switch-button.js',
+            ],
+            'assets/js/appointments-admin-settings.js': [
+                'assets/js/src/admin/admin-settings-sections.js',
+                'assets/js/src/admin/admin-settings.js',
+            ]
+        },
+
+        css_files_compile: {
+        },
+
+        plugin_dir: '',
+        plugin_file: 'appointments.php',
+
+        // Regex patterns to exclude from transation.
+        translation: {
+            ignore_files: [
+                '.git*',
+                'node_modules/.*',
+                '(^.php)',		 // Ignore non-php files.
+                'release/.*',	  // Temp release files.
+                '.sass-cache/.*',
+                'tests/.*',		// Unit testing.
+            ],
+            pot_dir: 'languages/', // With trailing slash.
+            textdomain: 'appointments',
+        }
+    };
+
     var excludeCopyFiles = [
         '**',
         '!**/*~',
@@ -44,7 +81,7 @@ module.exports = function(grunt) {
         '!includes/external/wpmudev-dash/**',
         '!languages/*.po',
         '!languages/*.mo',
-        ] );
+    ] );
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -123,21 +160,21 @@ module.exports = function(grunt) {
                 }
             }
         },
-		potomo: {
-			dist: {
-				options: {
-					poDel: false
-				},
-				files: [{
-					expand: true,
-					cwd: 'languages',
-					src: ['*.po'],
-					dest: 'languages',
-					ext: '.mo',
-					nonull: true
-				}]
-			}
-		},
+        potomo: {
+            dist: {
+                options: {
+                    poDel: false
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'languages',
+                    src: ['*.po'],
+                    dest: 'languages',
+                    ext: '.mo',
+                    nonull: true
+                }]
+            }
+        },
 
         clean: {
             main: ['build/*']
@@ -234,7 +271,87 @@ module.exports = function(grunt) {
                     {expand: true, flatten: true, src: ['./build/appointments/appointments.php'], dest: 'build/appointments'}
                 ]
             }
-        }
+        },
+        watch:  {
+            // sass: {
+            // files: [
+            // 'assets/sass/**/*.scss',
+            // 'inc/modules/**/*.scss'
+            // ],
+            // tasks: ['sass', 'cssmin'],
+            // options: {
+            // debounceDelay: 500
+            // }
+            // },
+            scripts: {
+                files: ['assets/js/src/**/*.js'],
+                // tasks: ['jshint', 'concat', 'uglify'],
+                tasks: ['concat', 'uglify'],
+                options: {
+                    debounceDelay: 500
+                }
+            }
+        },
+        jshint: {
+            all: [
+                'Gruntfile.js',
+                'assets/js/src/**/*.js',
+                'assets/js/test/**/*.js'
+            ],
+            options: {
+                curly:   true,
+                eqeqeq:  true,
+                immed:   true,
+                latedef: true,
+                newcap:  true,
+                noarg:   true,
+                sub:	 true,
+                undef:   true,
+                boss:	true,
+                eqnull:  true,
+                globals: {
+                    exports: true,
+                    module:  false
+                }
+            }
+        },
+
+        concat: {
+            options: {
+                stripBanners: true,
+                banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
+                ' * <%= pkg.homepage %>\n' +
+                ' * Copyright (c) <%= grunt.template.today("yyyy") %>;' +
+                ' * Licensed GPLv2+' +
+                ' */\n'
+            },
+            scripts: {
+                files: conf.js_files_concat
+            }
+        },
+
+        uglify: {
+            all: {
+                files: [{
+                    expand: true,
+                    src: ['*.js', '!*.min.js', '!shared*' ],
+                    cwd: 'assets/js/',
+                    dest: 'assets/js/',
+                    ext: '.min.js',
+                    extDot: 'last'
+                }],
+                options: {
+                    banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
+                        ' * <%= pkg.homepage %>\n' +
+                        ' * Copyright (c) <%= grunt.template.today("yyyy") %>;' +
+                        ' * Licensed GPLv2+' +
+                        ' */\n',
+                    mangle: {
+                        reserved: ['jQuery']
+                    }
+                }
+            }
+        },
     });
 
     grunt.loadNpmTasks('grunt-search');
@@ -259,7 +376,10 @@ module.exports = function(grunt) {
         grunt.log.writeln('----------');
     });
 
-    grunt.registerTask( 'default', ['clean', 'i18n' ] );
+    grunt.registerTask( 'default', ['clean', 'concat', 'uglify', 'sass', 'cssmin', 'replace' ] );
+    grunt.registerTask( 'js', [ 'concat', 'uglify' ] );
+    grunt.registerTask( 'css', [ 'sass', 'cssmin' ] );
+    grunt.registerTask( 'i18n', [ 'checktextdomain', 'makepot', 'potomo' ] );
 
     grunt.registerTask('build', [
         'checktextdomain',
