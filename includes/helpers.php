@@ -946,7 +946,7 @@ function _appointments_is_pro() {
 
 function _appointments_enqueue_jquery_ui_datepicker() {
 	wp_enqueue_script( 'jquery-ui-datepicker' );
-	wp_enqueue_style( 'app-jquery-ui', appointments_plugin_url() . 'admin/css/jquery-ui/jquery-ui.min.css', array(), appointments_get_db_version() );
+	wp_enqueue_style( 'app-jquery-ui', appointments_plugin_url() . 'assets/vendor/jquery-ui/jquery-ui.min.css', array(), appointments_get_db_version() );
 
 	/**
  * add some inline styles

@@ -28,6 +28,7 @@ module.exports = function(grunt) {
 
         css_files_compile: {
 			'assets/css/admin/common.css': 'assets/sass/admin/common.scss',
+			'assets/css/admin/unslider.css': 'assets/sass/admin/unslider.scss',
 			'assets/css/front-end/appointments.css': 'assets/sass/front-end/appointments.scss',
 			'assets/css/front-end/locations.css': 'assets/sass/front-end/locations.scss'
         },

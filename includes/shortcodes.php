@@ -7,28 +7,29 @@
  * Non-default formatting reorder callback.
  * Bound to filter, will actually reorder default WP content formatting.
  */
-function app_core_late_map_global_formatting_reorder ($content) {
-	if (!preg_match('/\[app_/', $content)) return $content;
+function app_core_late_map_global_formatting_reorder( $content ) {
+	if ( ! preg_match( '/\[app_/', $content ) ) { return $content; }
 
-	remove_filter('the_content', 'wpautop');
-	add_filter('the_content', 'wpautop', 20);
-	add_filter('the_content', 'shortcode_unautop', 21);
+	remove_filter( 'the_content', 'wpautop' );
+	add_filter( 'the_content', 'wpautop', 20 );
+	add_filter( 'the_content', 'shortcode_unautop', 21 );
 
 	return $content;
 }
 
-function app_core_shortcodes_register ($shortcodes) {
+function app_core_shortcodes_register( $shortcodes ) {
 
 	// Unless manually enabled...
-	if (defined('APP_REORDER_DEFAULT_FORMATTING') && APP_REORDER_DEFAULT_FORMATTING) {
+	if ( defined( 'APP_REORDER_DEFAULT_FORMATTING' ) && APP_REORDER_DEFAULT_FORMATTING ) {
 		// ... or disabled by some code ...
-		if (has_action('the_content', 'wpautop')) {
-			if (defined('APP_DEFAULT_FORMATTING_GLOBAL_REORDER') && APP_DEFAULT_FORMATTING_GLOBAL_REORDER) { // If global define is in place, just do this
+		if ( has_action( 'the_content', 'wpautop' ) ) {
+			if ( defined( 'APP_DEFAULT_FORMATTING_GLOBAL_REORDER' ) && APP_DEFAULT_FORMATTING_GLOBAL_REORDER ) { // If global define is in place, just do this
 				// ... move the default formatting functions higher up the chain
-				remove_filter('the_content', 'wpautop');
-				add_filter('the_content', 'wpautop', 20);
-				add_filter('the_content', 'shortcode_unautop', 21);
-			} else add_filter('the_content', 'app_core_late_map_global_formatting_reorder', 0); // With no global formatting, do "the_content" filtering bits only. Note the "0"
+				remove_filter( 'the_content', 'wpautop' );
+				add_filter( 'the_content', 'wpautop', 20 );
+				add_filter( 'the_content', 'shortcode_unautop', 21 );
+			} else { add_filter( 'the_content', 'app_core_late_map_global_formatting_reorder', 0 ); // With no global formatting, do "the_content" filtering bits only. Note the "0"
+			}
 		}
 	}
 
@@ -58,7 +59,7 @@ function app_core_shortcodes_register ($shortcodes) {
 	$shortcodes['app_confirmation'] = 'App_Shortcode_Confirmation';
 	return $shortcodes;
 }
-add_filter('app-shortcodes-register', 'app_core_shortcodes_register', 1);
+add_filter( 'app-shortcodes-register', 'app_core_shortcodes_register', 1 );
 
 
 
@@ -83,7 +84,7 @@ add_action( 'admin_head', 'appointments_add_shortcode_button' );
 function appointments_add_shortcode_tinymce_plugin( $plugins ) {
 	$plugins['appointments_shortcodes'] = appointments_plugin_url() . 'admin/js/editor-shortcodes.js';
 	wp_enqueue_script( 'jquery-ui-datepicker' );
-	wp_enqueue_style( 'app-jquery-ui', appointments_plugin_url() . 'admin/css/jquery-ui/jquery-ui.min.css', array(), appointments_get_db_version() );
+	wp_enqueue_style( 'app-jquery-ui', appointments_plugin_url() . 'assets/vendor/jquery-ui/jquery-ui.min.css', array(), appointments_get_db_version() );
 	return $plugins;
 }
 
