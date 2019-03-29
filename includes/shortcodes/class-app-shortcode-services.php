@@ -241,7 +241,7 @@ foreach ( $services as $service ) {
 		$href = $this->_js_esc_url( $href ) . '#app_services_dropdown_title';
 
 		if ( ! $args['_noscript'] ) {
-			wp_enqueue_script( 'app-shortcode-services', appointments_plugin_url() . 'includes/shortcodes/js/app-services.js', array( 'jquery' ) );
+			wp_enqueue_script( 'app-shortcode-services', appointments_plugin_url() . 'assets/js/shortcodes-app-services.min.js', array( 'jquery' ), $appointments->version, true );
 
 			$ajax_url = admin_url( 'admin-ajax.php' );
 			if ( ! is_ssl() && force_ssl_admin() ) {

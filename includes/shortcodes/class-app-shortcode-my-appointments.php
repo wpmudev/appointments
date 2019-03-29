@@ -245,7 +245,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		$template = 'front-end/shortcodes/my-appointments/body';
 		$ret = $appointments->render( $template, $template_args, true );
 		_appointments_enqueue_sweetalert();
-		wp_enqueue_script( 'app-my-appointments', appointments_plugin_url() . 'includes/shortcodes/js/my-appointments.js', array( 'jquery' ), '', true );
+		wp_enqueue_script( 'app-my-appointments', appointments_plugin_url() . 'assets/js/shortcodes-my-appointments.min.js', array( 'jquery' ), $appointments->version, true );
 		wp_localize_script( 'app-my-appointments', 'appMyAppointmentsStrings', array(
 			'aysCancel' => esc_js( __( 'Are you sure you want to cancel the selected appointment?', 'appointments' ) ),
 			'cancelled' => esc_js( __( 'Selected appointment cancelled.','appointments' ) ),

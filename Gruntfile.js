@@ -23,6 +23,15 @@ module.exports = function(grunt) {
             ],
             'assets/js/appointments-js-check.js': [
                 'assets/js/src/common/js-check.js',
+            ],
+            'assets/js/shortcodes-app-confirmation.js': [
+                'assets/js/src/front-end/shortcodes/app-confirmation.js',
+            ],
+            'assets/js/shortcodes-app-services.js': [
+                'assets/js/src/front-end/shortcodes/app-services.js',
+            ],
+            'assets/js/shortcodes-my-appointments.js': [
+                'assets/js/src/front-end/shortcodes/my-appointments.js',
             ]
         },
 
