@@ -443,7 +443,7 @@ function apppointments_is_range_busy( $start, $end, $args = array() ) {
 	// If we are here, no preference is selected (provider_id=0) or selected provider is not busy. There are 2 cases here:
 	// 1) There are several providers: Look for reserve apps for the workers giving this service.
 	// 2) No provider defined: Look for reserve apps for worker=0, because he will carry out all services
-	if ( appointments_get_all_workers() ) {
+	if ( 0 == $args['worker_id'] && appointments_get_all_workers() ) {
 		$workers = appointments_get_workers_by_service( $args['service_id'] );
 		$apps    = array();
 		if ( $workers ) {
@@ -907,18 +907,13 @@ function _appointments_get_table_meta_row_monthly( $which, $long ) {
 function appointments_get_price( $service_id, $worker_id ) {
 	$service = appointments_get_service( $service_id );
 	$worker = appointments_get_worker( $worker_id );
+
 	if ( ! $service ) {
 		return 0;
 	}
+
 	$worker_price = ( $worker && $worker->price ) ? $worker->price : 0;
-	if (
-		isset( $service->price )
-		&& ! empty( $service->price )
-		&& is_numeric( $service->price )
-	) {
-		$worker_price += $service->price;
-	}
-	return $worker_price;
+	return $service->price + $worker_price;
 }
 
 
@@ -946,7 +941,7 @@ function _appointments_is_pro() {
 
 function _appointments_enqueue_jquery_ui_datepicker() {
 	wp_enqueue_script( 'jquery-ui-datepicker' );
-	wp_enqueue_style( 'app-jquery-ui', appointments_plugin_url() . 'assets/vendor/jquery-ui/jquery-ui.min.css', array(), appointments_get_db_version() );
+	wp_enqueue_style( 'app-jquery-ui', appointments_plugin_url() . 'admin/css/jquery-ui/jquery-ui.min.css', array(), appointments_get_db_version() );
 
 	/**
  * add some inline styles
