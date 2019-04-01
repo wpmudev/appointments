@@ -372,12 +372,16 @@ class Appointments_Admin_Settings_Page {
 		 * yes/no options
 		 */
 		$options_names = array(
-			'always_load_scripts',
 			'allow_overwork',
 			'allow_overwork_break',
 			'allow_worker_confirm',
 			'allow_worker_wh',
+			'always_load_scripts',
 			'auto_confirm',
+			'disable_logging',
+			'gdpr_checkbox_show',
+			'gdpr_delete',
+			'log_emails',
 			'login_required',
 			'payment_required',
 			'send_confirmation',
@@ -386,9 +390,6 @@ class Appointments_Admin_Settings_Page {
 			'send_reminder_worker',
 			'send_removal_notification',
 			'show_legend',
-			'log_emails',
-			'gdpr_delete',
-			'gdpr_checkbox_show',
 		);
 		foreach ( $options_names as $name ) {
 			$options[ $name ] = isset( $_POST[ $name ] )? $_POST[ $name ]:'no';
