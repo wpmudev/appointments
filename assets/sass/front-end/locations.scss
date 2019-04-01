@@ -1,0 +1,41 @@
+#app-locations-new_location {
+    width: 80%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 1em;
+    overflow: hidden;
+
+    -moz-box-shadow: 0 0 8px #aaa;
+    -webkit-box-shadow: 0 0 8px #aaa;
+    box-shadow: 0 0 8px #aaa;
+    label {
+        display: block;
+        margin-bottom: 1em;
+    }
+    input[type="text"] {
+        width: 100%;
+    }
+}
+
+#app-locations-create_location {
+    float: left;
+}
+#app-locations-cancel_location {
+    float: right;
+}
+
+#app-locations-list {
+    li {
+        padding: 5px 0;
+    }
+}
+
+/* Util */
+.app-hspacer {
+    padding: 0 1.5em;
+    color: #aaa;
+}
+.app-inline_help {
+    color: #999;
+    font-size: .75em;
+}

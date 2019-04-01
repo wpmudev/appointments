@@ -370,6 +370,9 @@ class App_Locations_ServiceLocations {
 	 * @since 2.3.0
 	 */
 	public function add_service_location( $service ) {
+		if ( empty( $service ) || ! is_object( $service ) ) {
+			$service = new stdClass();
+		}
 		$service->service_location = false;
 		if ( is_object( $service ) && isset( $service->ID ) ) {
 			$service->service_location = get_option( 'app-service_location-' . $service->ID, false );

@@ -18,29 +18,28 @@ class App_Locations_LocationsWorker {
 	/** @var  App_Locations_Model */
 	private $_locations;
 
-	private function __construct () {}
+	private function __construct() {}
 
-	public static function serve () {
+	public static function serve() {
 		$me = new App_Locations_LocationsWorker;
 		$me->_add_hooks();
 		return $me;
 	}
 
-	private function _add_hooks () {
-		add_action('plugins_loaded', array($this, 'initialize'));
-		
+	private function _add_hooks() {
+		add_action( 'plugins_loaded', array( $this, 'initialize' ) );
+
 		// Set up admin interface
-		add_filter('appointments_tabs', array($this, 'settings_tab_add'));
-		add_action('appointments-settings-tab-locations', array($this, 'settings_tab_create'));
+		add_filter( 'appointments_tabs', array( $this, 'settings_tab_add' ) );
+		add_action( 'appointments-settings-tab-locations', array( $this, 'settings_tab_create' ) );
 		add_filter( 'appointments_tabs', array( $this, 'add_settings_tab' ) );
 		add_filter( 'appointments_settings_sections', array( $this, 'add_settings_sections' ) );
-		add_filter('appointments_save_settings', array($this, 'save_settings'));
-		add_action('app-admin-admin_scripts', array($this, 'include_scripts'));
-		add_action('app-admin-admin_styles', array($this, 'include_styles'));
+		add_filter( 'appointments_save_settings', array( $this, 'save_settings' ) );
+		add_action( 'app-admin-admin_scripts', array( $this, 'include_scripts' ) );
 
 		// Appointments list
-		add_filter('app-appointments_list-edit-services', array($this, 'show_appointment_location'), 10, 2);
-		add_filter('app-appointment-inline_edit-save_data', array($this, 'save_appointment_location'));
+		add_filter( 'app-appointments_list-edit-services', array( $this, 'show_appointment_location' ), 10, 2 );
+		add_filter( 'app-appointment-inline_edit-save_data', array( $this, 'save_appointment_location' ) );
 
 		add_filter( 'appointments_notification_replacements', array( $this, 'add_notifications_replacements' ), 10, 4 );
 
@@ -64,7 +63,7 @@ class App_Locations_LocationsWorker {
 	 * @param $app
 	 */
 	public function set_gcal_location( $location, $app ) {
-		if ( isset( $options["gcal_location"] ) && '' != trim( $options["gcal_location"] ) ) {
+		if ( isset( $options['gcal_location'] ) && '' != trim( $options['gcal_location'] ) ) {
 			// Leave the current value if there's a location set in GCal options
 			return $location;
 		}
@@ -98,7 +97,7 @@ class App_Locations_LocationsWorker {
 			return $replacement;
 		}
 
-		$location = $this->_locations->find_by('id', $object->location);
+		$location = $this->_locations->find_by( 'id', $object->location );
 		if ( empty( $location ) ) {
 			return $replacement;
 		}
@@ -113,7 +112,7 @@ class App_Locations_LocationsWorker {
 		return $replacement;
 	}
 
-	public function save_appointment_location ($data) {
+	public function save_appointment_location( $data ) {
 		if ( empty( $data ) || ! is_array( $data ) ) {
 			return $data;
 		}
@@ -123,50 +122,50 @@ class App_Locations_LocationsWorker {
 		return $data;
 	}
 
-	public function show_appointment_location ($deprecated, $appointment) {
+	public function show_appointment_location( $deprecated, $appointment ) {
 		$editable = '';
 		$out = '';
 		$all = $this->_locations->get_all();
-		$editable .= '<span class="title">' . __('Location', 'appointments') . '</span>';
+		$editable .= '<span class="title">' . __( 'Location', 'appointments' ) . '</span>';
 		$editable .= '<select name="location"><option value=""></option>';
-		foreach ($all as $loc) {
+		foreach ( $all as $loc ) {
 			/** @var AppLocation $loc */
-			$sel = selected($loc->get_id(), $appointment->location, false);
-			$editable .= '<option value="' . esc_attr($loc->get_id()) . '" ' . $sel . '>' . $loc->get_admin_label() . '</option>';
+			$sel = selected( $loc->get_id(), $appointment->location, false );
+			$editable .= '<option value="' . esc_attr( $loc->get_id() ) . '" ' . $sel . '>' . $loc->get_admin_label() . '</option>';
 		}
 		$editable .= '</select>';
 
 		echo $out . "<label>{$editable}</label>";
 	}
 
-	public function include_scripts () {
+	public function include_scripts() {
 		global $appointments;
-		wp_enqueue_script("app-locations", $appointments->plugin_url . "/js/locations.js", array('jquery'), $appointments->version);
-		wp_localize_script("app-locations", '_app_locations_data', apply_filters('app-locations-location_model_template', array(
+		wp_enqueue_script(
+			'app-locations',
+			$appointments->plugin_url . '/assets/js/appointments-locations.min.js',
+			array( 'jquery' ),
+			$appointments->version
+		);
+		wp_localize_script('app-locations', '_app_locations_data', apply_filters('app-locations-location_model_template', array(
 			'model' => array(
 				'fields' => array(
-					'address' => __('Address', 'appointments'),
+					'address' => __( 'Address', 'appointments' ),
 				),
 				'labels' => array(
-					'add_location' => __('Add', 'appointments'),
-					'save_location' => __('Save', 'appointments'),
-					'new_location' => __('Create a New Location', 'appointments'),
-					'edit_location' => __('Edit Location', 'appointments'),
-					'cancel_editing' => _x('Cancel', 'Drop current action', 'appointments'),
+					'add_location' => __( 'Add', 'appointments' ),
+					'save_location' => __( 'Save', 'appointments' ),
+					'new_location' => __( 'Create a New Location', 'appointments' ),
+					'edit_location' => __( 'Edit Location', 'appointments' ),
+					'cancel_editing' => _x( 'Cancel', 'Drop current action', 'appointments' ),
 				),
 			),
 		)));
 	}
 
-	public function include_styles () {
-		global $appointments;
-		wp_enqueue_style("app-locations", $appointments->plugin_url . "/css/locations.css", false, $appointments->version);
-	}
-
 	public function add_settings_sections( $sections ) {
 		$sections['locations'] = array(
 			'locations' => __( 'Edit Locations', 'appointments' ),
-			'settings' => __( 'Settings', 'appointments' )
+			'settings' => __( 'Settings', 'appointments' ),
 		);
 
 		return $sections;
@@ -177,13 +176,13 @@ class App_Locations_LocationsWorker {
 		return $tabs;
 	}
 
-	public function settings_tab_add ($tabs) {
+	public function settings_tab_add( $tabs ) {
 		$ret = array();
-		foreach ($tabs as $key => $label) {
-			if ($key == self::INJECT_TAB_BEFORE) {
-				$ret[self::SETTINGS_TAB] = __('Locations', 'appointments');
+		foreach ( $tabs as $key => $label ) {
+			if ( $key == self::INJECT_TAB_BEFORE ) {
+				$ret[ self::SETTINGS_TAB ] = __( 'Locations', 'appointments' );
 			}
-			$ret[$key] = $label;
+			$ret[ $key ] = $label;
 		}
 		return $ret;
 	}
@@ -208,7 +207,7 @@ class App_Locations_LocationsWorker {
 				<div class="col-wrap">
 					<div class="form-wrap">
 						<form action="" method="post" id="add-location">
-							<?php if ( isset( $_GET['error'] ) ): ?>
+							<?php if ( isset( $_GET['error'] ) ) :  ?>
 								<div class="error">
 									<p><?php _e( 'Address cannot be empty', 'appointments' ); ?></p>
 								</div>
@@ -249,7 +248,7 @@ class App_Locations_LocationsWorker {
 								});
 
 								$('.delete-location').click( function( e ) {
-									return confirm( '<?php _e( "Are you sure that you want to delete this location?", "appointments" ); ?>');
+									return confirm( '<?php _e( 'Are you sure that you want to delete this location?', 'appointments' ); ?>');
 								});
 							});
 						</script>
@@ -259,7 +258,7 @@ class App_Locations_LocationsWorker {
 			</div><!-- col-wrap -->
 		</div><!-- col-container -->
 		<?php
-		do_action( "appointments_locations_settings_section_locations" );
+		do_action( 'appointments_locations_settings_section_locations' );
 	}
 
 	public function settings_settings_section() {
@@ -267,32 +266,32 @@ class App_Locations_LocationsWorker {
 		<form method="post" action="" >
 			<table class="form-table">
 				<tr>
-					<th scope="row"><label for="locations_settings-my-appointments"><?php _e('Show my appointments location', 'appointments')?></label></th>
+					<th scope="row"><label for="locations_settings-my-appointments"><?php _e( 'Show my appointments location', 'appointments' )?></label></th>
 					<td>
 						<select id="locations_settings-my-appointments" name="locations_settings[my_appointments]" autocomplete="off">
 							<option value=""></option>
-							<option value="after_service" <?php selected($this->_data['locations_settings']['my_appointments'], 'after_service'); ?> ><?php _e('Automatic, after service', 'appointments'); ?></option>
-							<option value="after_worker" <?php selected($this->_data['locations_settings']['my_appointments'], 'after_worker'); ?> ><?php _e('Automatic, after provider', 'appointments'); ?></option>
-							<option value="after_date" <?php selected($this->_data['locations_settings']['my_appointments'], 'after_date'); ?> ><?php _e('Automatic, after date/time', 'appointments'); ?></option>
-							<option value="after_status" <?php selected($this->_data['locations_settings']['my_appointments'], 'after_status'); ?> ><?php _e('Automatic, after status', 'appointments'); ?></option>
+							<option value="after_service" <?php selected( $this->_data['locations_settings']['my_appointments'], 'after_service' ); ?> ><?php _e( 'Automatic, after service', 'appointments' ); ?></option>
+							<option value="after_worker" <?php selected( $this->_data['locations_settings']['my_appointments'], 'after_worker' ); ?> ><?php _e( 'Automatic, after provider', 'appointments' ); ?></option>
+							<option value="after_date" <?php selected( $this->_data['locations_settings']['my_appointments'], 'after_date' ); ?> ><?php _e( 'Automatic, after date/time', 'appointments' ); ?></option>
+							<option value="after_status" <?php selected( $this->_data['locations_settings']['my_appointments'], 'after_status' ); ?> ><?php _e( 'Automatic, after status', 'appointments' ); ?></option>
 						</select>
 					</td>
 				</tr>
 				<tr valign="top">
-					<th scope="row"><label for="locations_settings-all-appointments"><?php _e('Show all appointments location', 'appointments')?></label></th>
+					<th scope="row"><label for="locations_settings-all-appointments"><?php _e( 'Show all appointments location', 'appointments' )?></label></th>
 					<td>
 						<select id="locations_settings-all-appointments" name="locations_settings[all_appointments]" autocomplete="off">
 							<option value=""></option>
-							<option value="after_service" <?php selected($this->_data['locations_settings']['all_appointments'], 'after_service'); ?> ><?php _e('Automatic, after service', 'appointments'); ?></option>
-							<option value="after_provider" <?php selected($this->_data['locations_settings']['all_appointments'], 'after_provider'); ?> ><?php _e('Automatic, after provider', 'appointments'); ?></option>
-							<option value="after_client" <?php selected($this->_data['locations_settings']['all_appointments'], 'after_client'); ?> ><?php _e('Automatic, after client', 'appointments'); ?></option>
-							<option value="after_date" <?php selected($this->_data['locations_settings']['all_appointments'], 'after_date'); ?> ><?php _e('Automatic, after date/time', 'appointments'); ?></option>
-							<option value="after_status" <?php selected($this->_data['locations_settings']['all_appointments'], 'after_status'); ?> ><?php _e('Automatic, after status', 'appointments'); ?></option>
+							<option value="after_service" <?php selected( $this->_data['locations_settings']['all_appointments'], 'after_service' ); ?> ><?php _e( 'Automatic, after service', 'appointments' ); ?></option>
+							<option value="after_provider" <?php selected( $this->_data['locations_settings']['all_appointments'], 'after_provider' ); ?> ><?php _e( 'Automatic, after provider', 'appointments' ); ?></option>
+							<option value="after_client" <?php selected( $this->_data['locations_settings']['all_appointments'], 'after_client' ); ?> ><?php _e( 'Automatic, after client', 'appointments' ); ?></option>
+							<option value="after_date" <?php selected( $this->_data['locations_settings']['all_appointments'], 'after_date' ); ?> ><?php _e( 'Automatic, after date/time', 'appointments' ); ?></option>
+							<option value="after_status" <?php selected( $this->_data['locations_settings']['all_appointments'], 'after_status' ); ?> ><?php _e( 'Automatic, after status', 'appointments' ); ?></option>
 						</select>
 					</td>
 				</tr>
 			</table>
-			<?php do_action( "appointments_locations_settings_section_settings" ); ?>
+			<?php do_action( 'appointments_locations_settings_section_settings' ); ?>
 			<?php _appointments_settings_submit_block( 'locations' ); ?>
 		</form>
 		<?php
@@ -301,9 +300,9 @@ class App_Locations_LocationsWorker {
 	public function settings_tab_create( $sections ) {
 
 		?>
-			<?php do_action('app-locations-settings-before_locations_list'); ?>
+			<?php do_action( 'app-locations-settings-before_locations_list' ); ?>
 
-			<?php foreach ( $sections as $section => $name ): ?>
+			<?php foreach ( $sections as $section => $name ) :  ?>
 				<div class="app-settings-section" id="app-settings-section-<?php echo $section; ?>">
 					<?php
 						$function_name = array( $this, str_replace( '-', '_', $section ) . '_settings_section' );
@@ -313,11 +312,11 @@ class App_Locations_LocationsWorker {
 				</div>
 			<?php endforeach; ?>
 
-			<?php do_action('app-locations-settings-after_locations_list'); ?>
+			<?php do_action( 'app-locations-settings-after_locations_list' ); ?>
 		<?php
 	}
 
-	public function save_settings ( $action ) {
+	public function save_settings( $action ) {
 
 		if ( ! App_Roles::current_user_can( 'manage_options', App_Roles::CTX_PAGE_SETTINGS ) ) {
 			return;
@@ -342,7 +341,6 @@ class App_Locations_LocationsWorker {
 			if ( appointments_get_location( $location_id ) ) {
 				appointments_update_location( $location_id, array( 'address' => stripslashes_deep( $_REQUEST['location'] ) ) );
 			}
-
 		}
 
 		if ( 'save_delete_locations' === $action ) {
@@ -357,33 +355,32 @@ class App_Locations_LocationsWorker {
 		}
 
 		if ( $action === 'save_locations' ) {
-			$options = get_option('appointments_options', array());
-			$settings = stripslashes_deep($_POST['locations_settings']);
-			$options['locations_settings'] = !empty($settings) ? $settings : array();
-			$options = apply_filters('app-locations-before_save', $options);
+			$options = get_option( 'appointments_options', array() );
+			$settings = stripslashes_deep( $_POST['locations_settings'] );
+			$options['locations_settings'] = ! empty( $settings ) ? $settings : array();
+			$options = apply_filters( 'app-locations-before_save', $options );
 			appointments_update_options( $options );
 		}
 
-
 	}
 
-	public function initialize () {
+	public function initialize() {
 		$this->_data = appointments_get_options();
 
-		if (!class_exists('App_Locations_Model')) require_once(dirname(__FILE__) . '/lib/app_locations.php');
+		if ( ! class_exists( 'App_Locations_Model' ) ) { require_once( dirname( __FILE__ ) . '/lib/app_locations.php' ); }
 		$this->_locations = App_Locations_Model::get_instance();
 
-		do_action('app-locations-initialized');
+		do_action( 'app-locations-initialized' );
 
-		if (!empty($this->_data['locations_settings']['my_appointments'])) {
+		if ( ! empty( $this->_data['locations_settings']['my_appointments'] ) ) {
 			$injection_point = $this->_data['locations_settings']['my_appointments'];
-			add_filter('app_my_appointments_column_name', array($this, 'my_appointments_headers'), 1);
-			add_filter('app-shortcode-my_appointments-' . $injection_point, array($this, 'my_appointments_address'), 1, 2);
+			add_filter( 'app_my_appointments_column_name', array( $this, 'my_appointments_headers' ), 1 );
+			add_filter( 'app-shortcode-my_appointments-' . $injection_point, array( $this, 'my_appointments_address' ), 1, 2 );
 		}
-		if (!empty($this->_data['locations_settings']['all_appointments'])) {
+		if ( ! empty( $this->_data['locations_settings']['all_appointments'] ) ) {
 			$injection_point = $this->_data['locations_settings']['all_appointments'];
-			add_filter('app_all_appointments_column_name', array($this, 'all_appointments_headers'), 1);
-			add_filter('app-shortcode-all_appointments-' . $injection_point, array($this, 'all_appointments_address'), 1, 2);
+			add_filter( 'app_all_appointments_column_name', array( $this, 'all_appointments_headers' ), 1 );
+			add_filter( 'app-shortcode-all_appointments-' . $injection_point, array( $this, 'all_appointments_address' ), 1, 2 );
 		}
 
 		if ( empty( $this->_data['locations_settings']['all_appointments'] ) ) {
@@ -394,93 +391,92 @@ class App_Locations_LocationsWorker {
 		}
 
 		// Add macro expansion filtering
-		add_filter('app-codec-macros', array($this, 'add_to_macro_list'));
-		add_filter('app-codec-macro_default-replace_location', array($this, 'expand_location_macro'), 10, 3);
-		add_filter('app-codec-macro_default-replace_location_address', array($this, 'expand_location_address_macro'), 10, 2);
+		add_filter( 'app-codec-macros', array( $this, 'add_to_macro_list' ) );
+		add_filter( 'app-codec-macro_default-replace_location', array( $this, 'expand_location_macro' ), 10, 3 );
+		add_filter( 'app-codec-macro_default-replace_location_address', array( $this, 'expand_location_address_macro' ), 10, 2 );
 
 		// GCal expansion filters
-		add_filter('app-gcal-set_summary', array($this, 'expand_location_macro'), 10, 2);
-		add_filter('app-gcal-set_summary', array($this, 'expand_location_address_macro'), 10, 2);
-		add_filter('app-gcal-set_description', array($this, 'expand_location_macro'), 10, 2);
-		add_filter('app-gcal-set_description', array($this, 'expand_location_address_macro'), 10, 2);
+		add_filter( 'app-gcal-set_summary', array( $this, 'expand_location_macro' ), 10, 2 );
+		add_filter( 'app-gcal-set_summary', array( $this, 'expand_location_address_macro' ), 10, 2 );
+		add_filter( 'app-gcal-set_description', array( $this, 'expand_location_macro' ), 10, 2 );
+		add_filter( 'app-gcal-set_description', array( $this, 'expand_location_address_macro' ), 10, 2 );
 	}
 
-	public function add_to_macro_list ($macros) {
+	public function add_to_macro_list( $macros ) {
 		$macros[] = 'LOCATION';
 		$macros[] = 'LOCATION_ADDRESS';
 		return $macros;
 	}
 
-	public function expand_location_address_macro ($content, $app) {
-		if (empty($app->location)) return $content;
-		
-		$location = $this->_locations->find_by('id', $app->location);
-		if (empty($location)) return $content;
+	public function expand_location_address_macro( $content, $app ) {
+		if ( empty( $app->location ) ) { return $content; }
+
+		$location = $this->_locations->find_by( 'id', $app->location );
+		if ( empty( $location ) ) { return $content; }
 
 		$address = $location->get_address();
-		return preg_replace('/(?:^|\b)LOCATION_ADDRESS(?:\b|$)/', $address, $content);
+		return preg_replace( '/(?:^|\b)LOCATION_ADDRESS(?:\b|$)/', $address, $content );
 	}
 
-	public function expand_location_macro ($content, $app, $filter=false) {
-		if (empty($app->location)) return $content;
-		
-		$location = $this->_locations->find_by('id', $app->location);
-		if (empty($location)) return $content;
+	public function expand_location_macro( $content, $app, $filter = false ) {
+		if ( empty( $app->location ) ) { return $content; }
+
+		$location = $this->_locations->find_by( 'id', $app->location );
+		if ( empty( $location ) ) { return $content; }
 
 		$address = $location->get_display_markup(
 			(App_Macro_Codec::FILTER_BODY == $filter)
 		);
-		return preg_replace('/(?:^|\b)LOCATION(?:\b|$)/', $address, $content);
+		return preg_replace( '/(?:^|\b)LOCATION(?:\b|$)/', $address, $content );
 	}
 
-	public function my_appointments_headers ($headers) {
-		$where = preg_replace('/^after_/', '', $this->_data['locations_settings']['my_appointments']);
-		if (!$where) return $headers;
+	public function my_appointments_headers( $headers ) {
+		$where = preg_replace( '/^after_/', '', $this->_data['locations_settings']['my_appointments'] );
+		if ( ! $where ) { return $headers; }
 		$rx = '(' .
-			preg_quote('<th class="my-appointments-' . $where . '">', '/') .
+			preg_quote( '<th class="my-appointments-' . $where . '">', '/' ) .
 			'.*?' .
-			preg_quote('</th>', '/') .
+			preg_quote( '</th>', '/' ) .
 		')';
-		$location = '<th class="my-appointments-location">' . __('Location', 'appointments') . '</th>';
-		return preg_replace("/{$rx}/", '\1' . $location, $headers);
+		$location = '<th class="my-appointments-location">' . __( 'Location', 'appointments' ) . '</th>';
+		return preg_replace( "/{$rx}/", '\1' . $location, $headers );
 	}
 
-	public function my_appointments_address ($out, $appointment) {
+	public function my_appointments_address( $out, $appointment ) {
 		if ( empty( $appointment->location ) ) {
 			return $out . '<td>&nbsp;</td>';
 		}
 		$out .= '<td>';
-		$location = $this->_locations->find_by('id', $appointment->location);
-		if ($location) {
-			$out .= $location->get_display_markup(false);
+		$location = $this->_locations->find_by( 'id', $appointment->location );
+		if ( $location ) {
+			$out .= $location->get_display_markup( false );
 		}
 		$out .= '</td>';
 		return $out;
 	}
 
-	public function all_appointments_headers ($headers) {
-		$where = preg_replace('/^after_/', '', $this->_data['locations_settings']['all_appointments']);
-		if (!$where) return $headers;
+	public function all_appointments_headers( $headers ) {
+		$where = preg_replace( '/^after_/', '', $this->_data['locations_settings']['all_appointments'] );
+		if ( ! $where ) { return $headers; }
 		$rx = '(' .
-			preg_quote('<th class="all-appointments-' . $where . '">', '/') .
+			preg_quote( '<th class="all-appointments-' . $where . '">', '/' ) .
 			'.*?' .
-			preg_quote('</th>', '/') .
+			preg_quote( '</th>', '/' ) .
 		')';
-		$location = '<th class="all-appointments-location">' . __('Location', 'appointments') . '</th>';
-		return preg_replace("/{$rx}/", '\1' . $location, $headers);
+		$location = '<th class="all-appointments-location">' . __( 'Location', 'appointments' ) . '</th>';
+		return preg_replace( "/{$rx}/", '\1' . $location, $headers );
 	}
 
-	public function all_appointments_address ($out, $appointment) {
-		if (empty($appointment->location)) return $out . '<td>&nbsp;</td>';
+	public function all_appointments_address( $out, $appointment ) {
+		if ( empty( $appointment->location ) ) { return $out . '<td>&nbsp;</td>'; }
 		$out .= '<td>';
-		$location = $this->_locations->find_by('id', $appointment->location);
-		if ($location) {
-			$out .= $location->get_display_markup(false);
+		$location = $this->_locations->find_by( 'id', $appointment->location );
+		if ( $location ) {
+			$out .= $location->get_display_markup( false );
 		}
 		$out .= '</td>';
 		return $out;
 	}
-
 }
 
 // Serve the main entry point

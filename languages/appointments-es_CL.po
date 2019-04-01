@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2019-01-15 11:19:54+00:00\n"
+"POT-Creation-Date: 2019-03-18 08:13:04+00:00\n"
 "PO-Revision-Date: 2016-11-03 23:38:14+0000\n"
 "Language: es_CL\n"
 "MIME-Version: 1.0\n"
@@ -1206,9 +1206,8 @@ msgid "Free"
 msgstr "Libre"
 
 #: admin/class-app-list-table-services.php:50
-#, fuzzy
 msgid "Limited by number of Service Providers"
-msgstr "Filtrar por proveedor de servicio"
+msgstr ""
 
 #: admin/class-app-list-table-services.php:82
 #: admin/class-app-list-table-services.php:151
@@ -1227,9 +1226,8 @@ msgid "Duration"
 msgstr "Duración"
 
 #: admin/class-app-list-table-services.php:138
-#, fuzzy
 msgid "Price (%s)"
-msgstr "Precio:"
+msgstr ""
 
 #: admin/class-app-list-table-services.php:139
 #: admin/class-app-list-table-workers.php:162
@@ -1237,9 +1235,8 @@ msgid "Description page"
 msgstr "Página de descripción"
 
 #: admin/class-app-list-table-workers.php:60
-#, fuzzy
 msgid "No Service Providers selected."
-msgstr "No hay proveedores de servicio definidos"
+msgstr ""
 
 #: admin/class-app-list-table-workers.php:66
 msgid "Missing service: %d."
@@ -1256,14 +1253,12 @@ msgid "Service Provider"
 msgstr "Proveedor de servicios"
 
 #: admin/class-app-list-table-workers.php:159
-#, fuzzy
 msgid "Dummy"
-msgstr "Ficticio?"
+msgstr ""
 
 #: admin/class-app-list-table-workers.php:160
-#, fuzzy
 msgid "Additional Price (%s)"
-msgstr "Precio adicional"
+msgstr ""
 
 #: admin/class-app-list-table-workers.php:161
 #: admin/views/page-settings-tab-workers-section-edit-worker.php:36
@@ -1644,33 +1639,28 @@ msgid "Are you sure to delete this Service?"
 msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:104
-#, fuzzy
 msgid "Are you sure to delete selected Services?"
-msgstr "Estas seguro de borrar las grabaciones seleccionadas?"
+msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:107
-#, fuzzy
 msgid "Please select some services first."
-msgstr "PASO 1: Selecciona un exámen."
+msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:108
-#, fuzzy
 msgid "Please select some action first."
-msgstr "PASO 1: Selecciona un exámen."
+msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:167
 msgid "Settings updated"
 msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:233
-#, fuzzy
 msgid "Number of services per page"
-msgstr "Número de servicios a mostrar:"
+msgstr ""
 
 #: admin/pages/class-admin-settings-page.php:245
-#, fuzzy
 msgid "Number of service providers per page"
-msgstr "Número de proveedores de servicios a mostrar:"
+msgstr ""
 
 #: admin/pages/class-admin-transactions-page.php:18
 #: admin/pages/class-admin-transactions-page.php:19
@@ -1887,7 +1877,6 @@ msgid "Removed"
 msgstr "Retirado"
 
 #: admin/views/page-settings-tab-exceptions.php:19
-#, fuzzy
 msgid ""
 "Here you can define exceptional working or non working days for your "
 "business and for your service providers. You should enter holidays here. You "
@@ -1895,12 +1884,6 @@ msgid ""
 "a working day. When you add new service providers, their expections will be "
 "set to the default schedule."
 msgstr ""
-"<i> Aquí puede definir de trabajo excepcional o días no laborales para su "
-"empresa y para sus proveedores de servicios. Debe introducir días de "
-"vacaciones aquí. También puede definir un día de semana  no laborable aquí "
-"(por ejemplo, un domingo específico) como un día de trabajo. Al agregar "
-"nuevos proveedores de servicios, sus expectativas se establecerán en el "
-"calendario predeterminado. </i>"
 
 #: admin/views/page-settings-tab-exceptions.php:21
 #: admin/views/page-settings-tab-working_hours.php:6
@@ -2321,14 +2304,12 @@ msgid ""
 msgstr ""
 
 #: admin/views/page-settings-tab-main-section-gdpr.php:21
-#, fuzzy
 msgid "Erase Appointments"
-msgstr "%s Citas"
+msgstr ""
 
 #: admin/views/page-settings-tab-main-section-gdpr.php:24
-#, fuzzy
 msgid "You can force to delete completed appointments."
-msgstr "¿Estas seguro de cancelar las cita(s) seleccionadas?"
+msgstr ""
 
 #: admin/views/page-settings-tab-main-section-gdpr.php:28
 #: includes/class-app-gdpr.php:208
@@ -2336,15 +2317,13 @@ msgid "Auto erase after"
 msgstr ""
 
 #: admin/views/page-settings-tab-main-section-gdpr.php:31
-#, fuzzy
 msgid "Completed appointments will be deleted after."
-msgstr "Citas completadas"
+msgstr ""
 
 #: admin/views/page-settings-tab-main-section-gdpr.php:35
 #: includes/class-app-appointment.php:224
-#, fuzzy
 msgid "Agreement"
-msgstr "Argumentos"
+msgstr ""
 
 #: admin/views/page-settings-tab-main-section-gdpr.php:38
 msgid ""
@@ -2354,9 +2333,8 @@ msgid ""
 msgstr ""
 
 #: admin/views/page-settings-tab-main-section-gdpr.php:42
-#, fuzzy
 msgid "Checkbox text"
-msgstr "Casilla de verificación"
+msgstr ""
 
 #: admin/views/page-settings-tab-main-section-gdpr.php:46
 msgid "Error message"
@@ -2608,9 +2586,8 @@ msgid "Allow auto-confirm for zero-priced appointments in a paid environment."
 msgstr ""
 
 #: admin/views/page-settings-tab-main-section-time.php:3
-#, fuzzy
 msgid "Time base"
-msgstr "Tiempo Base"
+msgstr ""
 
 #: admin/views/page-settings-tab-main-section-time.php:11
 msgid ""
@@ -2767,7 +2744,6 @@ msgid "Save"
 msgstr "Guardar"
 
 #: admin/views/page-settings-tab-services-section-services.php:1
-#, fuzzy
 msgid ""
 "Here you should define your services for which your client will be making "
 "appointments. <b>There must be at least one service defined.</b> Capacity is "
@@ -2777,14 +2753,6 @@ msgid ""
 "request payment to accept appointments. You can define a description page "
 "for the service you are providing."
 msgstr ""
-"<i> Aquí debe definir los servicios para los que su cliente va a hacer "
-"citas. <b> Debe haber por lo menos un servicio definido. </b> La capacidad "
-"es el número de clientes que pueden utilizar el servicio al mismo tiempo. "
-"Introduzca 0 para ningún límite específico (Limitado a varios proveedores de "
-"servicios, o en 1 si no se define un proveedor de servicios para  ese "
-"servicio). Precio sólo es necesario si usted solicita el pago para aceptar "
-"citas. Se puede definir una página de descripción del servicio que está "
-"proporcionando. </i>"
 
 #: admin/views/page-settings-tab-services.php:7
 msgid "Service Added"
@@ -2806,7 +2774,6 @@ msgid "No services defined"
 msgstr "No hay servicios definidos"
 
 #: admin/views/page-settings-tab-workers-section-workers.php:1
-#, fuzzy
 msgid ""
 "Here you should define your workers for which your client will be making "
 "appointments. <b>There must be at least one service defined.</b> Capacity is "
@@ -2816,14 +2783,6 @@ msgid ""
 "request payment to accept appointments. You can define a description page "
 "for the service you are providing."
 msgstr ""
-"<i> Aquí debe definir los servicios para los que su cliente va a hacer "
-"citas. <b> Debe haber por lo menos un servicio definido. </b> La capacidad "
-"es el número de clientes que pueden utilizar el servicio al mismo tiempo. "
-"Introduzca 0 para ningún límite específico (Limitado a varios proveedores de "
-"servicios, o en 1 si no se define un proveedor de servicios para  ese "
-"servicio). Precio sólo es necesario si usted solicita el pago para aceptar "
-"citas. Se puede definir una página de descripción del servicio que está "
-"proporcionando. </i>"
 
 #: admin/views/page-settings-tab-workers.php:7
 msgid "Service Provider Added"
@@ -2846,18 +2805,12 @@ msgid "# selected"
 msgstr "# seleccionado"
 
 #: admin/views/page-settings-tab-working_hours.php:3
-#, fuzzy
 msgid ""
 "Here you can define working hours and breaks for your business. When you add "
 "new service providers, their working and break hours will be set to the "
 "default schedule. Then you can edit their schedule by selecting their names "
 "from the dropdown menu below."
 msgstr ""
-"<i> Aquí puede definir las horas de trabajo y las pausas para su negocio. Al "
-"agregar nuevos proveedores de servicios, sus condiciones de trabajo y las "
-"horas de descanso se establecerá en el calendario predeterminado. A "
-"continuación, puede modificar su horario seleccionando sus nombres en el "
-"menú desplegable de abajo </i>"
 
 #: admin/views/page-settings-tab-working_hours.php:37
 #: admin/views/user-profile-working-hours.php:10
@@ -3237,14 +3190,12 @@ msgid "Confirmed"
 msgstr "Confirmado"
 
 #: includes/class-app-appointment.php:1494 includes/default_filters.php:121
-#, fuzzy
 msgid "The appointment does not exist."
-msgstr "Mostrar la localización de mi cita"
+msgstr ""
 
 #: includes/class-app-appointment.php:1498
-#, fuzzy
 msgid "The appointment has been already cancelled."
-msgstr "La hora fue eliminada."
+msgstr ""
 
 #: includes/class-app-gcal.php:85
 msgid "Error validating the access token: %s"
@@ -3287,37 +3238,32 @@ msgid "Privacy Policy page"
 msgstr ""
 
 #: includes/class-app-gdpr.php:292
-#, fuzzy
 msgid "Create date"
-msgstr "Creado"
+msgstr ""
 
 #: includes/class-app-gdpr.php:296
-#, fuzzy
 msgid "Start date"
-msgstr "Comenzar"
+msgstr ""
 
 #: includes/class-app-gdpr.php:300
 msgid "End date"
 msgstr ""
 
 #: includes/class-app-gdpr.php:368
-#, fuzzy
 msgid "We deleted %d appointment."
 msgid_plural "We deleted %d appointments"
-msgstr[0] "Citas completadas"
-msgstr[1] "Citas completadas"
+msgstr[0] ""
+msgstr[1] ""
 
 #: includes/class-app-gdpr.php:370
-#, fuzzy
 msgid "We do not deleted any appointments."
-msgstr "Citas completadas"
+msgstr ""
 
 #: includes/class-app-gdpr.php:378
-#, fuzzy
 msgid "We do not deleted %d appointment."
 msgid_plural "We do not deleted %d appointments"
-msgstr[0] "Citas completadas"
-msgstr[1] "Citas completadas"
+msgstr[0] ""
+msgstr[1] ""
 
 #: includes/class-app-gdpr.php:422
 msgid "What personal data do we collect and why?"
@@ -3343,9 +3289,8 @@ msgid ""
 msgstr ""
 
 #: includes/class-app-gdpr.php:430
-#, fuzzy
 msgid "How long Appointments+ retains your data"
-msgstr "Mostrar citas para este id de usuario"
+msgstr ""
 
 #: includes/class-app-gdpr.php:432
 msgid ""
@@ -3362,9 +3307,8 @@ msgid "Third Parties"
 msgstr ""
 
 #: includes/class-app-gdpr.php:440
-#, fuzzy
 msgid "If you choose to, you can sync Appointments+ with your Google Calendar."
-msgstr "Clica para enviar esta cita a tu cuenta del calendario de google"
+msgstr ""
 
 #: includes/class-app-gdpr.php:444
 msgid ""
@@ -3935,9 +3879,8 @@ msgid "You are not allowed to perform this action."
 msgstr ""
 
 #: includes/default_filters.php:138
-#, fuzzy
 msgid "Your appointment has been cancelled!"
-msgstr "La hora fue eliminada."
+msgstr ""
 
 #: includes/default_filters.php:138
 msgid "Appointment cancelled"
@@ -4134,9 +4077,8 @@ msgid "Google Calendar API: Create a new Google Application"
 msgstr ""
 
 #: includes/gcal/views/settings-gcal-step-1.php:2
-#, fuzzy
 msgid "Instructions:"
-msgstr "Transacciones"
+msgstr ""
 
 #: includes/gcal/views/settings-gcal-step-1.php:8
 msgid ""
@@ -4327,9 +4269,8 @@ msgid "MarketPress Integration"
 msgstr ""
 
 #: includes/integration/class-app-marketpress.php:63
-#, fuzzy
 msgid "Activate integration"
-msgstr "Citas activas"
+msgstr ""
 
 #: includes/integration/class-app-marketpress.php:66
 msgid ""
@@ -4343,9 +4284,8 @@ msgstr ""
 "frecuentes."
 
 #: includes/integration/class-app-marketpress.php:71
-#, fuzzy
 msgid "Create Product Page"
-msgstr "Crear una Página de Horas"
+msgstr ""
 
 #: includes/integration/class-app-marketpress.php:74
 msgid "Select Product Page Type"
@@ -4424,9 +4364,8 @@ msgstr "Elija opción &raquo;"
 #: includes/notifications/class-app-notification-cancel.php:49
 #: includes/notifications/class-app-notification-notification.php:29
 #: includes/notifications/class-app-notification-notification.php:49
-#, fuzzy
 msgid "Notification message sent to %s for appointment ID: %s"
-msgstr "Mensaje de recordatorio enviado a %s para cita ID:%s"
+msgstr ""
 
 #. Translators: First %s is for appointment ID and the second one is for date
 #. and time of the appointment
@@ -4451,9 +4390,8 @@ msgid ""
 msgstr ""
 
 #: includes/notifications/class-app-notification-confirmation.php:93
-#, fuzzy
 msgid "Confirmation message sent to %s for appointment ID: %s"
-msgstr "Mensaje de recordatorio enviado a %s para cita ID:%s"
+msgstr ""
 
 #: includes/notifications/class-app-notification-confirmation.php:158
 msgid ""
@@ -4479,9 +4417,8 @@ msgstr ""
 
 #: includes/notifications/class-app-notification-reminder.php:61
 #: includes/notifications/class-app-notification-reminder.php:110
-#, fuzzy
 msgid "Reminder message sent to %s for appointment ID: %s"
-msgstr "Mensaje de recordatorio enviado a %s para cita ID:%s"
+msgstr ""
 
 #: includes/notifications/class-app-notification-reminder.php:103
 msgid "Unable to send worker reminder about the appointment ID: %s."
@@ -4499,9 +4436,8 @@ msgid ""
 msgstr ""
 
 #: includes/notifications/class-app-notification-removal.php:133
-#, fuzzy
 msgid "Removal message sent to %s for appointment ID: %s"
-msgstr "Mensaje de recordatorio enviado a %s para cita ID:%s"
+msgstr ""
 
 #: includes/notifications/class-app-notification-removal.php:152
 msgid ""
@@ -4792,15 +4728,13 @@ msgid ""
 msgstr ""
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:394
-#, fuzzy
 msgid "Service Location"
-msgstr "Mostrar servicio de localización"
+msgstr ""
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:444
 #: includes/pro/includes/addons/app-locations-worker_locations.php:346
-#, fuzzy
 msgid "No Location"
-msgstr "Localización"
+msgstr ""
 
 #: includes/pro/includes/addons/app-locations-worker_locations.php:69
 msgid ""
@@ -5152,18 +5086,16 @@ msgid "Show login buttons"
 msgstr "Mostrar botones de login"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:72
-#, fuzzy
 msgid "Show %s login button"
-msgstr "Mostrar botones de login"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:78
 msgid "Show"
 msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:84
-#, fuzzy
 msgid "Name for login button"
-msgstr "Mostrar botones de login"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:87
 msgid "Use %s name for login button"
@@ -5178,9 +5110,8 @@ msgid "site"
 msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:92
-#, fuzzy
 msgid "Use"
-msgstr "Usuario"
+msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:92
 msgid "Do not use"
@@ -5199,9 +5130,8 @@ msgid "Google"
 msgstr ""
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:107
-#, fuzzy
 msgid "WordPress"
-msgstr "Tu dirección"
+msgstr ""
 
 #: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:9
 msgid "Service Locations"
@@ -5528,9 +5458,8 @@ msgid "Confirmation"
 msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-confirmation.php:13
-#, fuzzy
 msgid "Please check the appointment details below and confirm:"
-msgstr "<h3>Por favor revise los detalles de la cita y confírmela:</h3>"
+msgstr "Por favor revisa los detalles de la cita y confírmala:"
 
 #: includes/shortcodes/class-app-shortcode-confirmation.php:14
 msgid ""
@@ -5736,9 +5665,8 @@ msgid "Any service"
 msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:44
-#, fuzzy
 msgid "Our schedule for START"
-msgstr "<h3>Nuestro horario para COMENZAR</h3>"
+msgstr "Nuestro horario para COMENZAR"
 
 #: includes/shortcodes/class-app-shortcode-monthly-schedule.php:45
 msgid ""
@@ -6057,9 +5985,8 @@ msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:122
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:156
-#, fuzzy
 msgid "Currently you have no appointments."
-msgstr "Presentar un mapa de citas"
+msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:272
 msgid "Pay"
@@ -6221,9 +6148,8 @@ msgid "Weekly Schedule"
 msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-schedule.php:33
-#, fuzzy
 msgid "Our schedule from START to END"
-msgstr "<h3>Nuestro horario de PRINCIPIO a FIN</h3>"
+msgstr "Nuestro horario de PRINCIPIO a FIN"
 
 #: includes/shortcodes/class-app-shortcode-schedule.php:34
 msgid ""
@@ -6372,49 +6298,33 @@ msgid "Please select a service:"
 msgstr "PASO 1: Selecciona un exámen."
 
 #: includes/shortcodes/class-app-shortcode-services.php:27
-#, fuzzy
 msgid "Text above the select menu. Default: \"Please select a service\"."
 msgstr ""
-"El texto sobre el menú de selección. Por defecto:\" Por favor selecciona un "
-"servicio\""
 
 #: includes/shortcodes/class-app-shortcode-services.php:31
 msgid "Show Button Text"
 msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-services.php:33
-#, fuzzy
 msgid ""
 "Button text to show the results for the selected. Default: \"Show available "
 "times\"."
 msgstr ""
-"Texto del botón para mostrar los resultados  para el seleccionado. Por "
-"defecto: \"Mostrar las horas disponibles\""
 
 #: includes/shortcodes/class-app-shortcode-services.php:40
-#, fuzzy
 msgid ""
 "Selects which part of the description page will be displayed under the "
 "dropdown menu when a service is selected . Selectable values are \"none\", "
 "\"excerpt\", \"content\". Default: \"excerpt\"."
 msgstr ""
-"Selecciona qué parte de la página de biografía se mostrará en el menú "
-"desplegable al seleccionar un proveedor de servicios. Valores que puede "
-"seleccionar son \"ninguno\", \"extracto\", \"contenido\". Por defecto: "
-"\"extracto\""
 
 #: includes/shortcodes/class-app-shortcode-services.php:51
-#, fuzzy
 msgid ""
 "Inserts the post thumbnail if page has a featured image. Selectable values "
 "are \"none\", \"thumbnail\", \"medium\", \"full\" or a 2 numbers separated "
 "by comma representing width and height in pixels, e.g. 32,32. Default: "
 "\"96,96\"."
 msgstr ""
-"Inserta el mensaje en miniatura si la página tiene una imagen destacada. "
-"Valores que puede seleccionar son \"ninguno\", \"miniatura\", \"medio\", "
-"\"completol\" o 2 números separados por comas que representa la anchura y "
-"altura en píxeles, por ejemplo, 32,32. Por defecto: \"96,96\""
 
 #: includes/shortcodes/class-app-shortcode-services.php:57
 msgid ""
@@ -6430,15 +6340,11 @@ msgid ""
 msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-services.php:77
-#, fuzzy
 msgid ""
 "Sort order of the services. Possible values: ID, name, duration, price. "
 "Optionally DESC (descending) can be used, e.g. \"name DESC\" will reverse "
 "the order. Default: \"ID\"."
 msgstr ""
-"Modificar orden de los servicios. Valores posibles: ID, nombre, duración, "
-"precio. Opcionalmente DESC (descendente) se puede utilizar, por ejemplo, "
-"\"Nombre DESC\" se invertirá el orden. Por defecto: \"ID\""
 
 #: includes/shortcodes/class-app-shortcode-services.php:84
 msgid ""
@@ -6564,22 +6470,19 @@ msgid ""
 msgstr ""
 
 #: admin/class-app-admin.php:488
-#, fuzzy
 msgctxt "Default page title for Appointments calandars."
 msgid "Make an Appointment"
-msgstr "Mis citas"
+msgstr ""
 
 #: admin/class-app-list-table-workers.php:41
-#, fuzzy
 msgctxt "dummy worker"
 msgid "Yes"
-msgstr "Si"
+msgstr ""
 
 #: admin/class-app-list-table-workers.php:41
-#, fuzzy
 msgctxt "dummy worker"
 msgid "No"
-msgstr "No"
+msgstr ""
 
 #: admin/class-app-list-table-workers.php:105
 msgctxt "user pfofile link on Service Providers screen"
@@ -6611,16 +6514,14 @@ msgid "Error"
 msgstr ""
 
 #: includes/class-app-gdpr.php:231
-#, fuzzy
 msgctxt "Free plugin name in personal data exporter."
 msgid "Appointments Plugin"
-msgstr "Página de citas"
+msgstr ""
 
 #: includes/class-app-gdpr.php:234
-#, fuzzy
 msgctxt "Pro plugin name in personal data exporter."
 msgid "Appointments+ Plugin"
-msgstr "Horas Online"
+msgstr ""
 
 #: includes/class-app-notifications-manager.php:46
 msgctxt "%s contains filter name in pre tag"
@@ -6633,10 +6534,9 @@ msgid "no"
 msgstr ""
 
 #: includes/helpers.php:968
-#, fuzzy
 msgctxt "less than 60 minut"
 msgid "%d minutes"
-msgstr "minutos"
+msgstr ""
 
 #: includes/helpers.php:972
 msgctxt "more than 60 minuts, hours"
@@ -6646,18 +6546,16 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: includes/helpers.php:979
-#, fuzzy
 msgctxt "more than 60 minuts, minutes"
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] "minutos"
-msgstr[1] "minutos"
+msgstr[0] ""
+msgstr[1] ""
 
 #: includes/integration/class-app-marketpress.php:139
-#, fuzzy
 msgctxt "Default page name for MarketPress integration."
 msgid "Appointment"
-msgstr "Citas"
+msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-login.php:17
 msgctxt "Login Shortcode"
@@ -6670,57 +6568,21 @@ msgid "Status"
 msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:109
-#, fuzzy
 msgctxt "%s is a login link"
 msgid "Please %s to see your appointments."
-msgstr "Por favor clica aquí para confirmar esta cita"
+msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:110
-#, fuzzy
 msgctxt "login link title"
 msgid "Login"
-msgstr "Login"
+msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:110
-#, fuzzy
 msgctxt "login link value"
 msgid "login"
-msgstr "Login"
+msgstr ""
 
 #: includes/shortcodes/class-app-shortcode-my-appointments.php:248
 msgctxt "Discard existing info"
 msgid "Cancel"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Plugin: Appointments"
-#~ msgstr "Todas las citas"
-
-#, fuzzy
-#~ msgid "Services & Workers"
-#~ msgstr "Proveedores de Servicios"
-
-#~ msgid "Services Provided*"
-#~ msgstr "Servicios proveídos*"
-
-#~ msgid "Time base (minutes)"
-#~ msgstr "Tiempo base (minutos)"
-
-#~ msgid "Duration (mins)"
-#~ msgstr "Duración en minutos"
-
-#~ msgid "Bio page"
-#~ msgstr "Página BIO"
-
-#~ msgid ""
-#~ "* <b>You must select at least one service, otherwise provider will not be "
-#~ "saved!</b>"
-#~ msgstr ""
-#~ "* <b>¡Tu debes seleccionar al menos un servicio, de otro modo el "
-#~ "proveedor no será guardado!</b>"
-
-#~ msgid "<h3>All Appointments</h3>"
-#~ msgstr "<h3>Todas las citas</h3>"
-
-#~ msgid "<h3>My Appointments</h3>"
-#~ msgstr "<h3>Mis citas</h3>"

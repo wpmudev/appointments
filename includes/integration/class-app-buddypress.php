@@ -89,7 +89,7 @@ class Appointments_Integration_BuddyPress {
 			wp_enqueue_script( 'appointments-admin', appointments_plugin_url()  . '/admin/js/admin.js', array( 'jquery' ), $appointments->version );
 
 			wp_enqueue_script( 'app-multi-datepicker', appointments_plugin_url() . 'admin/js/admin-multidatepicker.js', array( 'jquery-ui-datepicker' ), appointments_get_db_version(), true );
-			wp_enqueue_style( 'app-jquery-ui', appointments_plugin_url() . 'admin/css/jquery-ui/jquery-ui.min.css', array(), appointments_get_db_version() );
+			wp_enqueue_style( 'app-jquery-ui', appointments_plugin_url() . 'assets/vendor/jquery-ui/jquery-ui.min.css', array(), appointments_get_db_version() );
 
 		}
 	}

@@ -36,7 +36,7 @@ class App_Tutorial {
 		//add the capability a user must have to view the tutorial
 		$tutorial->set_capability = App_Roles::get_capability( 'manage_options', App_Roles::CTX_TUTORIAL );
 
-		$tutorial->add_icon( $appointments->plugin_url . '/images/large-greyscale.png' );
+		$tutorial->add_icon( $appointments->plugin_url . '/assets/images/large-greyscale.png' );
 
 		$title = sanitize_title( __( 'Appointments', 'appointments' ) );
 		$settings = admin_url( 'admin.php?page=app_settings' );
@@ -179,7 +179,7 @@ class App_Tutorial {
 		//add the capability a user must have to view the tutorial
 		$tutorial->set_capability = App_Roles::get_capability( 'manage_options', App_Roles::CTX_TUTORIAL );
 
-		$tutorial->add_icon( $appointments->plugin_url . '/images/large-greyscale.png' );
+		$tutorial->add_icon( $appointments->plugin_url . '/assets/images/large-greyscale.png' );
 		$appointments_page = admin_url( 'admin.php?page=appointments' );
 
 		$tutorial->add_step($appointments_page, 'toplevel_page_appointments', '.info-button', __( 'Appointment List', 'appointments' ), array(

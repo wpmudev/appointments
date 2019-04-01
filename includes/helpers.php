@@ -907,13 +907,18 @@ function _appointments_get_table_meta_row_monthly( $which, $long ) {
 function appointments_get_price( $service_id, $worker_id ) {
 	$service = appointments_get_service( $service_id );
 	$worker = appointments_get_worker( $worker_id );
-
 	if ( ! $service ) {
 		return 0;
 	}
-
 	$worker_price = ( $worker && $worker->price ) ? $worker->price : 0;
-	return $service->price + $worker_price;
+	if (
+		isset( $service->price )
+		&& ! empty( $service->price )
+		&& is_numeric( $service->price )
+	) {
+		$worker_price += $service->price;
+	}
+	return $worker_price;
 }
 
 
@@ -941,7 +946,7 @@ function _appointments_is_pro() {
 
 function _appointments_enqueue_jquery_ui_datepicker() {
 	wp_enqueue_script( 'jquery-ui-datepicker' );
-	wp_enqueue_style( 'app-jquery-ui', appointments_plugin_url() . 'admin/css/jquery-ui/jquery-ui.min.css', array(), appointments_get_db_version() );
+	wp_enqueue_style( 'app-jquery-ui', appointments_plugin_url() . 'assets/vendor/jquery-ui/jquery-ui.min.css', array(), appointments_get_db_version() );
 
 	/**
  * add some inline styles

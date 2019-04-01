@@ -220,10 +220,10 @@ class App_Shortcode_Confirmation extends App_Shortcode {
 		$ret = $ret . $ret_confirmation_fields;
 
 		_appointments_enqueue_sweetalert();
-		wp_enqueue_script( 'app-shortcode-confirmation', appointments_plugin_url() . 'includes/shortcodes/js/app-confirmation.js', array( 'jquery', 'app-sweetalert' ) );
+		wp_enqueue_script( 'app-shortcode-confirmation', appointments_plugin_url() . 'assets/js/shortcodes-app-confirmation.min.js', array( 'jquery', 'app-sweetalert' ), $appointments->version, true );
 		$schema = is_ssl()? 'https':'http';
 		$i10n = array(
-			'waitingGif' => appointments_plugin_url() . 'images/waiting.gif',
+			'waitingGif' => appointments_plugin_url() . 'assets/images/waiting.gif',
 			'isUserLoggedIn' => is_user_logged_in(),
 			'loginRequired' => $appointments->options['login_required'],
 			'ajaxurl' => admin_url( 'admin-ajax.php', $schema ),

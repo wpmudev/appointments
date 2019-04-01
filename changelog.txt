@@ -1,4 +1,12 @@
-2019-xx-xx - 2.4.2
+2019-xx-xx - 2.4.3
+-------------------------------
+- Fixed a problem with $service object.
+- Fixed a problem with Service Provider price.
+- Fixed few warnings during activated.
+- Fixed a problem with "Pay" button, when payments are not available on `app_my_appointments` shortcode.
+- Updated Google Calendar icon.
+
+2019-03-18 - 2.4.2
 -------------------------------
 - Fixed a problem with custom confirmation email.
 - Fixed a problem with slot availability.

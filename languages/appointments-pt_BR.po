@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2019-01-15 11:19:54+00:00\n"
-"PO-Revision-Date: 2018-07-13 17:13:13+0000\n"
+"POT-Creation-Date: 2019-03-18 08:13:04+00:00\n"
+"PO-Revision-Date: 2019-01-28 04:53:50+0000\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3321,7 +3321,7 @@ msgstr "Usuário não registrado"
 
 #: includes/class-app-ajax.php:330
 msgid "Error while fetching working hours."
-msgstr ""
+msgstr "Erro ao listar horas de trabalho."
 
 #: includes/class-app-ajax.php:362
 msgid ""
@@ -3535,7 +3535,7 @@ msgstr[1] "Nós não excluímos %d agendamentos"
 
 #: includes/class-app-gdpr.php:422
 msgid "What personal data do we collect and why?"
-msgstr ""
+msgstr "Quais são os dados pessoais salvaguardados e por quê?"
 
 #: includes/class-app-gdpr.php:424
 msgid ""
@@ -3544,51 +3544,61 @@ msgid ""
 "privacy policy to reflect any additional information you have requested from "
 "your clients."
 msgstr ""
+"Sempre que seus visitantes reservam um compromisso no seu site, usando "
+"Appointments+ tais dados serão salvaguardados. Se você usar extras nos "
+"Campos Adicionais, não esqueça de atualizar sua política de privacidade, "
+"para poder refletir qualquer informação adicional, que você tenha solicitado "
+"de seus clientes."
 
 #: includes/class-app-gdpr.php:427 includes/class-app-gdpr.php:435
 #: includes/class-app-gdpr.php:443
-#, fuzzy
 msgid "Suggested text: "
-msgstr "Texto para logados"
+msgstr "Texto sugerido:"
 
 #: includes/class-app-gdpr.php:428
 msgid ""
 "We collect your Name, E-Mail and Phone Number for your Appointments. The "
 "information is not shared and will be deleted on request."
 msgstr ""
+"Salvaguardamos o seu nome, e-mail e número de telefone para seus "
+"Compromissos. As informações não serão compartilhadas e serão suprimidas "
+"mediante uma solicitação."
 
 #: includes/class-app-gdpr.php:430
-#, fuzzy
 msgid "How long Appointments+ retains your data"
-msgstr "Mostrar Compromissos para este ID de usuário"
+msgstr "Por quanto tempo ''Appointments+'' retém os seus dados?"
 
 #: includes/class-app-gdpr.php:432
 msgid ""
 "Manually remove user information on an erasure request or use he Appointments"
 "+ GDPR settings to automatically delete information after an allotted time."
 msgstr ""
+"Suprimir manualmente as informações do usuário em caso de uma solicitação de "
+"supressão de dados, ou usar as configurações de ''Appointments+ GDPR''  para "
+"elimar automaticamente essas informações, após o tempo devido."
 
 #: includes/class-app-gdpr.php:436
-#, fuzzy
 msgid "Your data will be automatically erased after 20 days."
-msgstr ""
-"Todos os dados coletados serão apagados automaticamente %s após a data de "
-"agendamento."
+msgstr "Seus dados serão suprimidos automaticamente, após os 20 dias."
 
 #: includes/class-app-gdpr.php:438
 msgid "Third Parties"
-msgstr ""
+msgstr "Terceiros"
 
 #: includes/class-app-gdpr.php:440
-#, fuzzy
 msgid "If you choose to, you can sync Appointments+ with your Google Calendar."
-msgstr "Enviar este compromisso para sua conta no Google Calendar"
+msgstr ""
+"Se optar por isso, pode sincronizar ''Appointments+''  com o seu Calendário "
+"Google."
 
 #: includes/class-app-gdpr.php:444
 msgid ""
 "We are using Google Calendar to sync our appointments. Your Name, E-Mail, "
 "Phone will be synced with our private Google Calendar account."
 msgstr ""
+"Estamos usando o Calendário Google para sincronizar nossos compromissos. Seu "
+"nome, e-mail e telefone, serão sincronizados com nossa conta particular do "
+"Calendário Google."
 
 #: includes/class-app-service.php:56
 msgid ""
@@ -7112,31 +7122,3 @@ msgstr "entrar"
 msgctxt "Discard existing info"
 msgid "Cancel"
 msgstr "Cancelar"
-
-#~ msgid "Plugin: Appointments"
-#~ msgstr "Plugin: Agendamentos"
-
-#~ msgid ""
-#~ "When visitors book an appointment on the site we collect the data shown "
-#~ "in the appointments form to allow future contact with a client."
-#~ msgstr ""
-#~ "Quando os visitantes reservam um horário no site, coletamos os dados "
-#~ "mostrados no formulário de agendamentos para permitir futuros contatos "
-#~ "com um cliente."
-
-#~ msgid ""
-#~ "All collected data is not shown publicly but we can send it to our "
-#~ "workers or contractors who will perform ordered services."
-#~ msgstr ""
-#~ "Todos os dados coletados não são exibidos publicamente, mas podemos enviá-"
-#~ "los para nossos funcionários ou contratados que realizarão serviços "
-#~ "solicitados."
-
-#~ msgctxt "policy page days string"
-#~ msgid "%d day"
-#~ msgid_plural "%d days"
-#~ msgstr[0] "%d dia"
-#~ msgstr[1] "%d dias"
-
-#~ msgid "New Appointment"
-#~ msgstr "Novo Agendamento"

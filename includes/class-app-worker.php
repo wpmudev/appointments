@@ -12,6 +12,12 @@ class Appointments_Worker {
 		foreach ( get_object_vars( $worker ) as $key => $value ) {
 			$this->$key = $this->_sanitize_field( $key, $value );
 		}
+		/**
+		 * Remove ability to add more workers for free version.
+		 *
+		 * @since 2.4.3
+		 */
+		add_filter( 'appointments_settings_sections', array( $this, 'sections_check_pro' ) );
 	}
 
 	private function _sanitize_field( $field, $value ) {
@@ -90,6 +96,23 @@ class Appointments_Worker {
 	public function is_dummy() {
 		return (bool) $this->dummy;
 	}
+
+	/**
+	 * Remove "add" from free version
+	 *
+	 * @since 2.4.3
+	 */
+	public function sections_check_pro( $sections ) {
+		$is_pro = _appointments_is_pro();
+		if ( $is_pro ) {
+			return $sections;
+		}
+		$workers = appointments_get_workers( array( 'count' => true ) );
+		if ( 0 < $workers ) {
+			unset( $sections['workers']['new-worker'] );
+		}
+		return $sections;
+	}
 }
 
 function appointments_get_worker( $worker_id ) {
@@ -162,6 +185,13 @@ function appointments_is_worker( $id ) {
 }
 
 function appointments_insert_worker( $args = array() ) {
+	$is_pro = _appointments_is_pro();
+	if ( ! $is_pro ) {
+		$workers = appointments_get_workers( array( 'count' => true ) );
+		if ( 0 < $workers ) {
+			die( __( 'You cannot add more workers!', 'appointments' ) );
+		}
+	}
 	global $wpdb;
 	$table = appointments_get_table( 'workers' );
 	$defaults = array(
@@ -802,7 +832,10 @@ function appointments_get_worker_working_hours( $status, $worker_id = 0, $locati
 						case 'Friday': { $weekday_number = 5; break; }
 						case 'Saturday': { $weekday_number = 6; break; }
 						case 'Sunday': { $weekday_number = 7; break; }
-						default: { continue; }
+						default: { break; }
+					}
+					if ( empty( $weekday_number ) ) {
+						continue;
 					}
 					if ( ! isset( $working_hours->hours[ $weekday ] ) ) {
 						$working_hours->hours[ $weekday ] = array();

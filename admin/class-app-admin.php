@@ -167,7 +167,12 @@ class Appointments_Admin {
 
 	function admin_css() {
 		global $appointments;
-		wp_enqueue_style( 'appointments-admin', $appointments->plugin_url . '/css/admin.css', false, $appointments->version );
+		wp_enqueue_style(
+			'appointments-admin',
+			$appointments->plugin_url . '/assets/css/appointments-admin.min.css',
+			false,
+			$appointments->version
+		);
 
 		$screen = get_current_screen();
 		$title = sanitize_title( __( 'Appointments', 'appointments' ) );
@@ -182,9 +187,9 @@ class Appointments_Admin {
 				( ! $allow_profile || ! preg_match( '/profile/', $screen->base ) || ! (defined( 'IS_PROFILE_PAGE' ) && IS_PROFILE_PAGE))
 			) ) { return; }
 
-		wp_enqueue_style( 'jquery-colorpicker-css', $appointments->plugin_url . '/css/colorpicker.css', false, $appointments->version );
-		wp_enqueue_style( 'jquery-datepick', $appointments->plugin_url . '/css/jquery.datepick.css', false, $appointments->version );
-		wp_enqueue_style( 'jquery-multiselect', $appointments->plugin_url . '/css/jquery.multiselect.css', false, $appointments->version );
+		wp_enqueue_style( 'wp-color-picker' );
+		wp_enqueue_style( 'jquery-datepick', $appointments->plugin_url . '/assets/css/jquery.datepick.css', false, $appointments->version );
+		wp_enqueue_style( 'jquery-multiselect', $appointments->plugin_url . '/assets/css/jquery.multiselect.css', false, $appointments->version );
 
 		wp_enqueue_style( 'custom-ligin-screen-jquery-switch-button', $appointments->plugin_url . '/assets/css/vendor/jquery.switch_button.css', array(), '1.12.1' );
 		do_action( 'app-admin-admin_styles' );
@@ -218,14 +223,13 @@ class Appointments_Admin {
 		}
 
 		_appointments_enqueue_jquery_ui_datepicker();
-		wp_enqueue_script( 'jquery-colorpicker', $appointments->plugin_url . '/js/colorpicker.js', array( 'jquery' ), $appointments->version );
 		wp_enqueue_script( 'app-multi-datepicker', appointments_plugin_url() . 'admin/js/admin-multidatepicker.js', array( 'jquery-ui-datepicker' ), appointments_get_db_version(), true );
 		wp_enqueue_script( 'app-switch-button', appointments_plugin_url() . 'admin/js/switch-button.js', array(), appointments_get_db_version(), true );
 		wp_enqueue_script( 'jquery-multiselect', $appointments->plugin_url . '/includes/external/jquery-ui-multiselect-widget/src/jquery.multiselect.min.js', array( 'jquery-ui-core', 'jquery-ui-widget', 'jquery-ui-position' ), '2.0.1' );
 		// Make a locale check to update locale_error flag
 
 		if ( empty( $appointments->options['disable_js_check_admin'] ) ) {
-			wp_enqueue_script( 'app-js-check', $appointments->plugin_url . '/js/js-check.js', array( 'jquery' ), $appointments->version );
+			wp_enqueue_script( 'app-js-check', $appointments->plugin_url . '/assets/js/appointments-js-check.min.js', array( 'jquery' ), $appointments->version );
 		}
 
 		/**
@@ -240,12 +244,20 @@ class Appointments_Admin {
 		);
 		wp_localize_script( 'custom-ligin-screen-jquery-switch-button', 'switch_button', $i18n );
 
-		wp_enqueue_script( 'appointments-admin', $appointments->plugin_url . '/admin/js/admin.js', array( 'jquery' ), $appointments->version );
+		wp_enqueue_script(
+			'appointments-admin',
+			$appointments->plugin_url . '/assets/js/appointments-admin.min.js',
+			array( 'jquery', 'wp-color-picker' ),
+			$appointments->version
+		);
 		wp_localize_script('appointments-admin', '_app_admin_data', array(
 			'ajax_url' => admin_url( 'admin-ajax.php' ),
 			'strings' => array(
 				'preparing_export' => __( 'Preparing for export, please hold on...', 'appointments' ),
 			),
+			'deleteRecordsConfirm' => esc_js( __( 'Are you sure to delete the selected record(s)?', 'appointments' ) ),
+			'unexpectedError' => esc_js( __( 'Unexpected error','appointments' ) ),
+			'dateFormat' => $appointments->safe_date_format(),
 		));
 		do_action( 'app-admin-admin_scripts' );
 	}
@@ -364,7 +376,6 @@ class Appointments_Admin {
 		global $appointments;
 		?>
 		<div class="wrap">
-			<div class="icon32" style="margin:10px 0 0 0"><img src="<?php echo $appointments->plugin_url . '/images/general.png'; ?>" /></div>
 			<h2><?php echo __( 'Appointments+ FAQ','appointments' ); ?></h2>
 			<?php if ( file_exists( APP_ADMIN_PLUGIN_DIR . '/app-faq.php' ) ) { include( APP_ADMIN_PLUGIN_DIR . '/app-faq.php' ); } ?>
 		</div>

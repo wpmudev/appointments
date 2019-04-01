@@ -224,121 +224,28 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		} else {
 			$a_cancel = false;
 		}
-
-		$ret  = '';
-		$ret .= '<div class="appointments-my-appointments">';
-
-		// Make this a form for BP if confirmation is allowed, but not on admin side user profile page
-		if ( $this->_can_display_editable( $allow_confirm ) ) {
-			$ret .= '<form method="post">';
+		$template_args = wp_parse_args(
+			array(
+				'_can_display_editable' => $this->_can_display_editable(),
+				'_can_display_editable_confirm' => $this->_can_display_editable( $allow_confirm ),
+				'allow_confirm' => $allow_confirm,
+				'provider_or_client' => $provider_or_client,
+				'a_cancel' => $a_cancel,
+				'options' => $appointments->options,
+				'payment_required' => isset( $appointments->options['payment_required'] ) && 'yes' === $appointments->options['payment_required'],
+				'results' => $results,
+				'appointments' => $appointments,
+				'show_submit_confirm_button' => $show_submit_confirm_button,
+			),
+			$args
+		);
+		if ( true || $show_submit_confirm_button && $this->_can_display_editable( $allow_confirm ) ) {
+			$template_args['bp'] = $bp;
 		}
-
-		$ret .= $args['title'];
-		$ret  = apply_filters( 'app_my_appointments_before_table', $ret );
-		$ret .= '<table class="my-appointments tablesorter"><thead>';
-		$ret .= apply_filters( 'app_my_appointments_column_name',
-			'<th class="my-appointments-service">'. __( 'Service', 'appointments' )
-			. '</th><th class="my-appointments-worker">' . $provider_or_client
-			. '</th><th class="my-appointments-date">' . __( 'Date/time', 'appointments' )
-		. '</th><th class="my-appointments-status">' . __( 'Status', 'appointments' ) . '</th>' );
-		if ( $allow_confirm ) {
-			$ret .= '<th class="my-appointments-confirm">'. __( 'Confirm', 'appointments' ) . '</th>';
-		}
-		if ( $a_cancel ) {
-			$ret .= '<th class="my-appointments-cancel">'. _x( 'Cancel', 'Discard existing info', 'appointments' ) . '</th>';
-		}
-		if ( $args['gcal'] && 'yes' == $appointments->options['gcal'] ) {
-			$ret .= '<th class="my-appointments-gcal">&nbsp;</th>';
-		}
-		$colspan = substr_count( $ret, '<th' );
-		$ret .= '</thead><tbody>';
-		if ( $results ) {
-			$show_submit_confirm_button = false;
-			foreach ( $results as $r ) {
-				$ret .= '<tr><td>';
-				$ret .= $appointments->get_service_name( $r->service ) . '</td>';
-				$ret .= apply_filters( 'app-shortcode-my_appointments-after_service', '', $r );
-				$ret .= '<td>';
-				if ( ! $args['provider'] ) {
-					$ret .= appointments_get_worker_name( $r->worker ) . '</td>'; } else { 					$ret .= $appointments->get_client_name( $r->ID ) . '</td>'; }
-				$ret .= apply_filters( 'app-shortcode-my_appointments-after_worker', '', $r );
-				$ret .= '<td>';
-				$ret .= date_i18n( $appointments->datetime_format, strtotime( $r->start ) ) . '</td>';
-				$ret .= apply_filters( 'app-shortcode-my_appointments-after_date', '', $r );
-				$ret .= '<td>';
-				$ret .= App_Template::get_status_name( $r->status );
-				if ( 'pending' == $r->status ) {
-					$r->service_name = $appointments->get_service_name( $r->service );
-					$ret .= '<input type="submit" data-appointment="' . htmlspecialchars( json_encode( $r ), ENT_QUOTES ) . '" value="' . __( 'Pay','appointments' ) . '"'
-							. ' class="appointments-paid-button">';
-				}
-				$ret .= '</td>';
-				$ret .= apply_filters( 'app-shortcode-my_appointments-after_status', '', $r );
-				// If allowed so, a worker can confirm an appointment himself
-				if ( $allow_confirm ) {
-					$is_readonly = '';
-					if ( 'pending' != $r->status ) {
-						$is_readonly = ' readonly="readonly" disabled="disabled"';
-					}
-					$ret .= '<td>';
-					if ( 'confirmed' === $r->status ) {
-						$ret .= '-';
-					} else {
-						$ret .= '<input class="app-my-appointments-confirm" type="checkbox" name="app_confirm['.$r->ID.']" '.$is_readonly.' />';
-						$show_submit_confirm_button = true;
-					}
-
-					$ret .= '</td>';
-				}
-				// If allowed so, a client can cancel an appointment
-				if ( $a_cancel ) {
-					// We don't want completed appointments to be cancelled
-					$stat = $r->status;
-					$in_allowed_stat = apply_filters( 'app_cancel_allowed_status', ('pending' == $stat || 'confirmed' == $stat || 'paid' == $stat), $stat, $r->ID );
-					if ( $in_allowed_stat ) {
-						$is_readonly = '';
-					} else {
-						$is_readonly = ' readonly="readonly"';
-					}
-					$ret .= '<td><input id="cancel-' . $r->ID . '" data-app-id="' . $r->ID . '" class="app-my-appointments-cancel" type="checkbox" name="app_cancel['.$r->ID.']" '.$is_readonly.' /></td>';
-				}
-
-				if ( $args['gcal'] && 'yes' == $appointments->options['gcal'] ) {
-					if ( isset( $appointments->options['gcal_same_window'] ) && $appointments->options['gcal_same_window'] ) {
-						$target = '_self';
-					} else {
-						$target = '_blank';
-					}
-					$ret .= '<td><a title="'.__( 'Click to submit this appointment to your Google Calendar account','appointments' )
-					        .'" href="'.$appointments->gcal( $r->service, strtotime( $r->start, $appointments->local_time ), strtotime( $r->end, $appointments->local_time ), true, $r->address, $r->city )
-					        .'" target="'.$target.'">'.$appointments->gcal_image.'</a></td>';
-				}
-
-				$ret .= apply_filters( 'app_my_appointments_add_cell', '', $r );
-
-				$ret .= '</tr>';
-
-			}
-		} else {
-			$ret .= '<tr><td colspan="'.$colspan.'">'. __( 'No appointments','appointments' ). '</td></tr>';
-		}
-
-		$ret .= '</tbody></table>';
-		$ret  = apply_filters( 'app_my_appointments_after_table', $ret, $results );
-
-		if ( $show_submit_confirm_button && $this->_can_display_editable( $allow_confirm ) ) {
-			$ret .= '<div class="submit">' .
-			       '<input type="submit" name="app_bp_settings_submit" value="' . esc_attr( __( 'Submit Confirm', 'appointments' ) ) . '" class="auto">' .
-			       '<input type="hidden" name="app_bp_settings_user" value="' . esc_attr( $bp->displayed_user->id ) . '">' .
-			       wp_nonce_field( 'app_bp_settings_submit', 'app_bp_settings_submit', true, false ) .
-			       '</div>';
-			$ret .= '</form>';
-		}
-
-		$ret .= '</div>';
-
+		$template = 'front-end/shortcodes/my-appointments/body';
+		$ret = $appointments->render( $template, $template_args, true );
 		_appointments_enqueue_sweetalert();
-		wp_enqueue_script( 'app-my-appointments', appointments_plugin_url() . 'includes/shortcodes/js/my-appointments.js', array( 'jquery' ), '', true );
+		wp_enqueue_script( 'app-my-appointments', appointments_plugin_url() . 'assets/js/shortcodes-my-appointments.min.js', array( 'jquery' ), $appointments->version, true );
 		wp_localize_script( 'app-my-appointments', 'appMyAppointmentsStrings', array(
 			'aysCancel' => esc_js( __( 'Are you sure you want to cancel the selected appointment?', 'appointments' ) ),
 			'cancelled' => esc_js( __( 'Selected appointment cancelled.','appointments' ) ),
@@ -360,7 +267,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		}
 
 		// Sort table from front end
-		if ( $args['_tablesorter'] && file_exists( appointments_plugin_dir() . 'js/jquery.tablesorter.min.js' ) ) {
+		if ( $args['_tablesorter'] && file_exists( appointments_plugin_dir() . 'assets/js/vendor/jquery.tablesorter.min.js' ) ) {
 			$appointments->add2footer( '
 				$(".my-appointments").tablesorter({
 					dateFormat: "'.$dateformat.'",

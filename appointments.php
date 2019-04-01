@@ -8,10 +8,10 @@ Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: appointments
 WDP ID: 679841
-*/
+ */
 
 /*
-Copyright 2007-2018 Incsub (http://incsub.com)
+Copyright 2007-2019 Incsub (http://incsub.com)
 Author - Hakan Evin <hakan@incsub.com>
 Contributor - Ve Bailovity (Incsub)
 Contributor - Marcin Pietrzak (Incsub)
@@ -27,7 +27,7 @@ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program; if not, write to the Free Software Foundation, Inc., 59 Temple
 Place, Suite 330, Boston, MA  02111-1307  USA
-*/
+ */
 
 if ( ! class_exists( 'Appointments' ) ) {
 
@@ -171,7 +171,7 @@ if ( ! class_exists( 'Appointments' ) ) {
 			// Other default settings
 			$this->script = $this->uri = $this->error_url = '';
 			$this->location = $this->service = $this->worker = 0;
-			$this->gcal_image = '<img src="' . $this->plugin_url . '/images/gc_button1.gif" />';
+			$this->gcal_image = '<span class="appointments-google-calendar"></span>';
 			$this->locale_errlocale_error = false;
 
 			// Create a salt, if it doesn't exist from the previous installation
@@ -230,23 +230,23 @@ if ( ! class_exists( 'Appointments' ) ) {
 
 
 		/**
-***************************************************************************************************************
-* Methods for optimization
-*
-* $l: location ID - For future use
-* $s: service ID
-* $w: worker ID
-* $stat: Status (open: working or closed: not working)
-* IMPORTANT: This plugin is NOT intended for hundreds of services or service providers,
-*  but it is intended to make database queries as cheap as possible with smaller number of services/providers.
-*  If you have lots of services and/or providers, codes will not scale and appointments pages will be VERY slow.
-*  If you need such an application, override some of the methods below with a child class.
-***************************************************************************************************************
-*/
+		 ***************************************************************************************************************
+		 * Methods for optimization
+		 *
+		 * $l: location ID - For future use
+		 * $s: service ID
+		 * $w: worker ID
+		 * $stat: Status (open: working or closed: not working)
+		 * IMPORTANT: This plugin is NOT intended for hundreds of services or service providers,
+		 *  but it is intended to make database queries as cheap as possible with smaller number of services/providers.
+		 *  If you have lots of services and/or providers, codes will not scale and appointments pages will be VERY slow.
+		 *  If you need such an application, override some of the methods below with a child class.
+		 ***************************************************************************************************************
+		 */
 
 		/**
-	 * Get location, service, worker
-	 */
+		 * Get location, service, worker
+		 */
 		function get_lsw() {
 			$this->location = $this->get_location_id();
 			$this->service = $this->get_service_id();
@@ -254,8 +254,8 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Get location ID for future use
-	 */
+		 * Get location ID for future use
+		 */
 		function get_location_id() {
 			if ( isset( $_REQUEST['app_location_id'] ) ) {
 				return (int) $_REQUEST['app_location_id']; }
@@ -264,9 +264,9 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Get service ID from front end
-	 * @return integer
-	 */
+		 * Get service ID from front end
+		 * @return integer
+		 */
 		function get_service_id() {
 			if ( isset( $_REQUEST['app_service_id'] ) ) {
 				return (int) $_REQUEST['app_service_id']; } else if ( ! $service_id = appointments_get_services_min_id() ) {
@@ -276,10 +276,10 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Get worker ID from front end
-	 * worker = provider
-	 * @return integer
-	 */
+		 * Get worker ID from front end
+		 * worker = provider
+		 * @return integer
+		 */
 		function get_worker_id() {
 			if ( ! is_admin() ) {
 				if ( isset( $_GET['app_provider_id'] ) ) {
@@ -300,10 +300,10 @@ if ( ! class_exists( 'Appointments' ) ) {
 
 
 		/**
-	 * Return all reserve appointments by worker ID
-	 * @param week: Optionally appointments only in the number of week in ISO 8601 format (since 1.2.3)
-	 * @return array of objects
-	 */
+		 * Return all reserve appointments by worker ID
+		 * @param week: Optionally appointments only in the number of week in ISO 8601 format (since 1.2.3)
+		 * @return array of objects
+		 */
 		function get_reserve_apps_by_worker( $l, $w, $week = 0 ) {
 			$cache_key = $l . '_' . $w . '_' . $week;
 			$cached = wp_cache_get( 'reserve_apps_by_worker' );
@@ -317,10 +317,10 @@ if ( ! class_exists( 'Appointments' ) ) {
 				if ( $services ) {
 					foreach ( $services as $service ) {
 						$args = array(
-						'location' => $l,
-						'service' => $service->ID,
-						'worker' => $w,
-						'week' => $week,
+							'location' => $l,
+							'service' => $service->ID,
+							'worker' => $w,
+							'week' => $week,
 						);
 						$apps_worker = appointments_get_appointments_filtered_by_services( $args );
 						if ( $apps_worker ) {
@@ -339,14 +339,14 @@ if ( ! class_exists( 'Appointments' ) ) {
 
 
 		/**
-	 * Find if a user is dummy
-	 * @param user_id: Id of the user who will be checked if he is dummy
-	 * since 1.0.6
-	 *
-	 * @deprecated since 2.1
-	 *
-	 * @return bool
-	 */
+		 * Find if a user is dummy
+		 * @param user_id: Id of the user who will be checked if he is dummy
+		 * since 1.0.6
+		 *
+		 * @deprecated since 2.1
+		 *
+		 * @return bool
+		 */
 		function is_dummy( $user_id = 0 ) {
 			_deprecated_function( __FUNCTION__, '2.1', 'Appointments_Worker::is_dummy' );
 			if ( ! $user_id ) {
@@ -363,10 +363,10 @@ if ( ! class_exists( 'Appointments' ) ) {
 
 
 		/**
-	 * Find worker email given his ID
-	 * since 1.0.6
-	 * @return string
-	 */
+		 * Find worker email given his ID
+		 * since 1.0.6
+		 * @return string
+		 */
 		function get_worker_email( $worker = 0 ) {
 			// Real person
 			$worker_obj = appointments_get_worker( $worker );
@@ -393,10 +393,10 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Return admin email
-	 * since 1.2.7
-	 * @return string
-	 */
+		 * Return admin email
+		 * since 1.2.7
+		 * @return string
+		 */
 		function get_admin_email() {
 			global $current_site;
 			$admin_email = get_option( 'admin_email' );
@@ -407,9 +407,9 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Find service name given its ID
-	 * @return string
-	 */
+		 * Find service name given its ID
+		 * @return string
+		 */
 		function get_service_name( $service = 0 ) {
 			// Safe text if we delete a service
 			$name = __( 'Not defined', 'appointments' );
@@ -423,9 +423,9 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Find client name given his appointment
-	 * @return string
-	 */
+		 * Find client name given his appointment
+		 * @return string
+		 */
 		function get_client_name( $app_id ) {
 			$name = '';
 			// This is only used on admin side, so an optimization is not required.
@@ -436,12 +436,12 @@ if ( ! class_exists( 'Appointments' ) ) {
 					$userdata = get_userdata( $result->user );
 					if ( $userdata ) {
 						$href = function_exists( 'bp_core_get_user_domain' ) && (defined( 'APP_BP_LINK_TO_PROFILE' ) && APP_BP_LINK_TO_PROFILE)
-						? bp_core_get_user_domain( $result->user )
-						: admin_url( 'user-edit.php?user_id=' ). $result->user
-						;
+							? bp_core_get_user_domain( $result->user )
+							: admin_url( 'user-edit.php?user_id=' ). $result->user
+							;
 						$name = '<a href="' . apply_filters( 'app_get_client_name-href', $href, $app_id, $result ) . '" target="_blank">' .
-						($result->name && ! (defined( 'APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES' ) && APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES) ? $result->name : $userdata->user_login) .
-						'</a>';
+							($result->name && ! (defined( 'APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES' ) && APP_USE_LEGACY_ADMIN_USERDATA_OVERRIDES) ? $result->name : $userdata->user_login) .
+							'</a>';
 					} else { 					$name = $result->name; }
 				} else {
 					$name = $result->name;
@@ -453,11 +453,11 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Get price for the current service and worker
-	 * If worker has additional price (optional), it is added to the service price
-	 * @param paypal: If set true, deposit price is calculated
-	 * @return string
-	 */
+		 * Get price for the current service and worker
+		 * If worker has additional price (optional), it is added to the service price
+		 * @param paypal: If set true, deposit price is calculated
+		 * @return string
+		 */
 		function get_price( $paypal = false ) {
 			global $current_user;
 			$this->get_lsw();
@@ -465,9 +465,9 @@ if ( ! class_exists( 'Appointments' ) ) {
 			$price = appointments_get_price( $this->service, $this->worker );
 
 			/**
-		 * Filter allows other plugins or integrations to apply a discount to
-		 * the price.
-		 */
+			 * Filter allows other plugins or integrations to apply a discount to
+			 * the price.
+			 */
 			$price = apply_filters( 'app_get_price_prepare', $price, $paypal, $this );
 
 			// Discount
@@ -496,12 +496,12 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Get deposit given price
-	 * This is required only for manual pricing
-	 * @param price: the full price
-	 * @since 1.0.8
-	 * @return string
-	 */
+		 * Get deposit given price
+		 * This is required only for manual pricing
+		 * @param price: the full price
+		 * @since 1.0.8
+		 * @return string
+		 */
 		function get_deposit( $price ) {
 
 			$deposit = 0;
@@ -527,9 +527,9 @@ if ( ! class_exists( 'Appointments' ) ) {
 
 
 		/**
-	 * Get the capacity of the current service
-	 * @return integer
-	 */
+		 * Get the capacity of the current service
+		 * @return integer
+		 */
 		function get_capacity( $service_id = false ) {
 			if ( $service_id && $service = appointments_get_service( $service_id ) ) {
 				$service_id = $service->ID;
@@ -540,13 +540,13 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/****************
-		* General methods
-		*****************
-		*/
+         * General methods
+         *****************
+         */
 
 		/**
-	 * Save a message to the log file
-	 */
+		 * Save a message to the log file
+		 */
 		function log( $message = '' ) {
 			if ( $message ) {
 				$to_put = '<b>['. date_i18n( $this->datetime_format, $this->local_time ) .']</b> '. $message;
@@ -558,20 +558,20 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Remove tabs and breaks
-	 */
+		 * Remove tabs and breaks
+		 */
 		function esc_rn( $text ) {
 			$text = str_replace( array( "\t", "\n", "\r" ), '', $text );
 			return $text;
 		}
 
 		/**
-	 * Converts number of seconds to hours:mins acc to the WP time format setting
-	 * @param integer $secs Seconds
-	 * @param bool $forced_format
-	 * @param bool $do_i18n
-	 * @return bool|int|string
-	 */
+		 * Converts number of seconds to hours:mins acc to the WP time format setting
+		 * @param integer $secs Seconds
+		 * @param bool $forced_format
+		 * @param bool $do_i18n
+		 * @return bool|int|string
+		 */
 		function secs2hours( $secs, $forced_format = false, $do_i18n = true ) {
 			$min = (int) ($secs / 60);
 			$hours = '00';
@@ -616,9 +616,9 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Return an array of preset base times, so that strange values are not set
-	 * @return array
-	 */
+		 * Return an array of preset base times, so that strange values are not set
+		 * @return array
+		 */
 		function time_base() {
 			$default = array( 10,15,30,60,90,120 );
 			$options = appointments_get_options();
@@ -630,11 +630,11 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 *	Return minimum set interval time
-	 *  If not set, return a safe time.
-	 *
-	 *	@return integer
-	 */
+		 *	Return minimum set interval time
+		 *  If not set, return a safe time.
+		 *
+		 *	@return integer
+		 */
 		function get_min_time() {
 			$options = appointments_get_options();
 			$min_time = $options['min_time'];
@@ -646,9 +646,9 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 *	Number of days that an appointment can be taken
-	 *	@return integer
-	 */
+		 *	Number of days that an appointment can be taken
+		 *	@return integer
+		 */
 		function get_app_limit() {
 			$options = appointments_get_options();
 			$app_limit = $options['app_limit'];
@@ -660,9 +660,9 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Return an array of weekdays
-	 * @return array
-	 */
+		 * Return an array of weekdays
+		 * @return array
+		 */
 		function weekdays() {
 			$days = array(
 				__( 'Sunday', 'appointments' ) => 'Sunday',
@@ -685,18 +685,18 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Return a selected field name to further customize them and make translation easier
-	 * @return string (name of the field)
-	 */
+		 * Return a selected field name to further customize them and make translation easier
+		 * @return string (name of the field)
+		 */
 		function get_field_name( $key ) {
 
 			$field_names = array(
-			'name'		=> __( 'Name', 'appointments' ),
-			'email'		=> __( 'Email', 'appointments' ),
-			'phone'		=> __( 'Phone', 'appointments' ),
-			'address'	=> __( 'Address', 'appointments' ),
-			'city'		=> __( 'City', 'appointments' ),
-			'note'		=> __( 'Note', 'appointments' ),
+				'name'		=> __( 'Name', 'appointments' ),
+				'email'		=> __( 'Email', 'appointments' ),
+				'phone'		=> __( 'Phone', 'appointments' ),
+				'address'	=> __( 'Address', 'appointments' ),
+				'city'		=> __( 'City', 'appointments' ),
+				'note'		=> __( 'Note', 'appointments' ),
 			);
 
 			$field_names = apply_filters( 'app_get_field_name', $field_names );
@@ -709,55 +709,55 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Return an array of all available front end box classes
-	 * @return array
-	 */
+		 * Return an array of all available front end box classes
+		 * @return array
+		 */
 		function get_classes() {
 			return apply_filters( 'app_box_class_names',
 				array(
-				'free'        => __( 'Free', 'appointments' ),
-				'busy'        => __( 'Busy', 'appointments' ),
-				'notpossible' => __( 'Not possible', 'appointments' ),
+					'free'        => __( 'Free', 'appointments' ),
+					'busy'        => __( 'Busy', 'appointments' ),
+					'notpossible' => __( 'Not possible', 'appointments' ),
 				)
 			);
 		}
 
 		/**
-	 * Return a default color for a selected box class
-	 * @return string
-	 */
+		 * Return a default color for a selected box class
+		 * @return string
+		 */
 		function get_preset( $class, $set ) {
 			$presets = array(
-			1 => array(
-				'free' => '48c048',
-				'busy' => 'ffffff',
-				'notpossible' => 'ffffff',
-			),
-			2 => array(
-	            'free' => '73ac39',
-	            'busy' => '616b6b',
-	            'notpossible' => '8f99a3',
-			),
-			3 => array(
-	            'free' => '40BF40',
-	            'busy' => '454C54',
-	            'notpossible' => '454C54',
-			),
+				1 => array(
+					'free' => '48c048',
+					'busy' => 'ffffff',
+					'notpossible' => 'ffffff',
+				),
+				2 => array(
+					'free' => '73ac39',
+					'busy' => '616b6b',
+					'notpossible' => '8f99a3',
+				),
+				3 => array(
+					'free' => '40BF40',
+					'busy' => '454C54',
+					'notpossible' => '454C54',
+				),
 			);
 			return isset( $presets[ $set ][ $class ] ) ? $presets[ $set ][ $class ] : '111111';
 		}
 
 
 		/************************************************************
-		* Methods for Shortcodes and those related to shortcodes only
-		*************************************************************
-		*/
+         * Methods for Shortcodes and those related to shortcodes only
+         *************************************************************
+         */
 
 
 		/**
-	 * Generate an excerpt from the selected service/worker page
-	 * Applies custom filter set instead of the default one.
-	 */
+		 * Generate an excerpt from the selected service/worker page
+		 * Applies custom filter set instead of the default one.
+		 */
 		function get_excerpt( $page_id, $thumb_size, $thumb_class, $worker_id = 0, $show_thumb_holder = false ) {
 			$text = '';
 			if ( ! $page_id ) {
@@ -790,9 +790,9 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Fetch content from the selected service/worker page.
-	 * Applies custom filter set instead of the default one.
-	 */
+		 * Fetch content from the selected service/worker page.
+		 * Applies custom filter set instead of the default one.
+		 */
 		function get_content( $page_id, $thumb_size, $thumb_class, $worker_id = 0, $show_thumb_holder = false ) {
 			$content = '';
 			if ( ! $page_id ) {
@@ -814,9 +814,9 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Clear app shortcodes
-	 * @since 1.1.9
-	 */
+		 * Clear app shortcodes
+		 * @since 1.1.9
+		 */
 		function strip_app_shortcodes( $content ) {
 			// Don't even try to touch a non string, just in case
 			if ( ! is_string( $content ) ) {
@@ -824,8 +824,8 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Get html code for thumbnail or avatar
-	 */
+		 * Get html code for thumbnail or avatar
+		 */
 		function get_thumbnail( $page_id, $thumb_size, $thumb_class, $worker_id ) {
 
 			if ( $thumb_size && 'none' != $thumb_size ) {
@@ -856,14 +856,14 @@ if ( ! class_exists( 'Appointments' ) ) {
 
 
 		/**
-	 * Build GCal url for GCal Button. It requires UTC time.
-	 * @param start: Timestamp of the start of the app
-	 * @param end: Timestamp of the end of the app
-	 * @param php: If this is called for php. If false, called for js
-	 * @param address: Address of the appointment
-	 * @param city: City of the appointment
-	 * @return string
-	 */
+		 * Build GCal url for GCal Button. It requires UTC time.
+		 * @param start: Timestamp of the start of the app
+		 * @param end: Timestamp of the end of the app
+		 * @param php: If this is called for php. If false, called for js
+		 * @param address: Address of the appointment
+		 * @param city: City of the appointment
+		 * @return string
+		 */
 		function gcal( $service, $start, $end, $php = false, $address, $city ) {
 			// Find time difference from Greenwich as GCal asks UTC
 
@@ -875,15 +875,15 @@ if ( ! class_exists( 'Appointments' ) ) {
 			$gmt_end = get_gmt_from_date( date( 'Y-m-d H:i:s', $end ), 'Ymd\THis\Z' );
 
 			$location = isset( $this->options['gcal_location'] ) && '' != trim( $this->options['gcal_location'] )
-			? esc_js( str_replace( array( 'ADDRESS', 'CITY' ), array( $address, $city ), $this->options['gcal_location'] ) )
-			: esc_js( get_bloginfo( 'description' ) );
+				? esc_js( str_replace( array( 'ADDRESS', 'CITY' ), array( $address, $city ), $this->options['gcal_location'] ) )
+				: esc_js( get_bloginfo( 'description' ) );
 
 			$param = array(
-			'action' => 'TEMPLATE',
-			'text' => $text,
-			'dates' => $gmt_start . '/' . $gmt_end,
-			'sprop' => 'website:' . home_url(),
-			'location' => rawurlencode( $location ),
+				'action' => 'TEMPLATE',
+				'text' => $text,
+				'dates' => $gmt_start . '/' . $gmt_end,
+				'sprop' => 'website:' . home_url(),
+				'location' => rawurlencode( $location ),
 			);
 
 			return add_query_arg(
@@ -893,19 +893,19 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Die showing which field has a problem
-	 *
-	 * @param string $field_name
-	 */
+		 * Die showing which field has a problem
+		 *
+		 * @param string $field_name
+		 */
 		function json_die( $field_name ) {
 			die( json_encode( array( 'error' => sprintf( __( 'Something wrong about the submitted %s', 'appointments' ), $this->get_field_name( $field_name ) ) ) ) );
 		}
 
 		/**
-	 * Check for too frequent back to back apps
-	 * return true means no spam
-	 * @return bool
-	 */
+		 * Check for too frequent back to back apps
+		 * return true means no spam
+		 * @return bool
+		 */
 		function check_spam() {
 			$options = appointments_get_options();
 			if (
@@ -929,10 +929,10 @@ if ( ! class_exists( 'Appointments' ) ) {
 				'status'     => 'pending',
 				'date_query' => array(
 				array(
-					'field'   => 'created',
-					'compare' => '>',
-					'value'   => $checkdate,
-				),
+						'field'   => 'created',
+						'compare' => '>',
+						'value'   => $checkdate,
+					),
 				),
 			) );
 
@@ -948,12 +948,12 @@ if ( ! class_exists( 'Appointments' ) ) {
 
 
 		/**
-	 * Find timestamp of first day of month for a given time
-	 * @param time: input whose first day will be found
-	 * @param add: how many months to add
-	 * @return integer (timestamp)
-	 * @since 1.0.4
-	 */
+		 * Find timestamp of first day of month for a given time
+		 * @param time: input whose first day will be found
+		 * @param add: how many months to add
+		 * @return integer (timestamp)
+		 * @since 1.0.4
+		 */
 		function first_of_month( $time, $add ) {
 			$year = date( 'Y', $time );
 			$month = date( 'n',  $time ); // Notice "n"
@@ -962,31 +962,31 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Helper function to create a monthly schedule
-	 *
-	 * @deprecated 2.0.6
-	 */
+		 * Helper function to create a monthly schedule
+		 *
+		 * @deprecated 2.0.6
+		 */
 		function get_monthly_calendar( $timestamp = false, $class = '', $long, $widget ) {
 			_deprecated_function( __FUNCTION__, '2.1', 'appointments_monthly_calendar' );
 			$this->get_lsw();
 			$args = array(
-			'service_id' => $this->service,
-			'worker_id' => $this->worker,
-			'location_id' => $this->location,
-			'class' => $class,
-			'long' => $long,
-			'echo' => false,
-			'widget' => $widget,
+				'service_id' => $this->service,
+				'worker_id' => $this->worker,
+				'location_id' => $this->location,
+				'class' => $class,
+				'long' => $long,
+				'echo' => false,
+				'widget' => $widget,
 			);
 			return appointments_monthly_calendar( $timestamp, $args );
 		}
 
 		/**
-	 * Helper function to create a time table for monthly schedule
-	 *
-	 * @since 2.2.1 Added `hide_today` argument.
-	 * @since 2.3.2 Added `worker_id` argument.
-	 */
+		 * Helper function to create a time table for monthly schedule
+		 *
+		 * @since 2.2.1 Added `hide_today` argument.
+		 * @since 2.3.2 Added `worker_id` argument.
+		 */
 		function get_timetable( $day_start, $capacity, $schedule_key = false, $hide_today = false, $worker_id = 0 ) {
 			$local_time = current_time( 'timestamp' );
 			$data = $this->_get_timetable_slots( $day_start, $capacity, $schedule_key, $worker_id );
@@ -1017,7 +1017,7 @@ if ( ! class_exists( 'Appointments' ) ) {
 				}
 
 				$ret .= '<div class="app_timetable_cell app_timetable_cell-' . date( 'H-i', $row['ccs'] ) . '  '.$row['class'].'" title="'.esc_attr( $row['title'] ).'">'.
-			        $row['hours']. '<input type="hidden" class="appointments_take_appointment" value="' . $this->pack( $row['ccs'], $row['cce'] ) . '" />';
+					$row['hours']. '<input type="hidden" class="appointments_take_appointment" value="' . $this->pack( $row['ccs'], $row['cce'] ) . '" />';
 
 				$ret .= '</div>';
 			}
@@ -1187,7 +1187,7 @@ if ( ! class_exists( 'Appointments' ) ) {
 						$class_name = 'notpossible app_past';
 					} // Then check if this time is blocked
 					else if ( isset( $this->options['app_lower_limit'] ) && $this->options['app_lower_limit']
-				          && ( $local_time + $this->options['app_lower_limit'] * 3600 ) > $cce
+						&& ( $local_time + $this->options['app_lower_limit'] * 3600 ) > $cce
 					) {
 						$class_name = 'notpossible app_blocked';
 					} // Check if this is break
@@ -1208,11 +1208,11 @@ if ( ! class_exists( 'Appointments' ) ) {
 					$title = apply_filters( 'app-schedule_cell-title', date_i18n( $this->datetime_format, $ccs ), $is_busy, $ccs, $cce, $schedule_key );
 
 					$data[] = array(
-					'class' => $class_name,
-					'title' => $title,
-					'hours' => $this->secs2hours( $ccs - $day_start ),
-					'ccs' => $ccs,
-					'cce' => $cce,
+						'class' => $class_name,
+						'title' => $title,
+						'hours' => $this->secs2hours( $ccs - $day_start ),
+						'ccs' => $ccs,
+						'cce' => $cce,
 					);
 
 					$t = apply_filters( 'app_next_time_step', $t + $step, $t, $step ); //Allows dynamic/variable step increment.
@@ -1242,10 +1242,10 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Helper function to create a weekly schedule
-	 *
-	 * @deprecated since 2.1
-	 */
+		 * Helper function to create a weekly schedule
+		 *
+		 * @deprecated since 2.1
+		 */
 		function get_weekly_calendar( $timestamp = false, $class = '', $long = false ) {
 			_deprecated_function( __FUNCTION__, '2.1', 'appointments_weekly_calendar' );
 			$this->get_lsw();
@@ -1274,12 +1274,12 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Returns the timestamp of Sunday of the current time or selected date
-	 * @param timestamp: Timestamp of the selected date or false for current time
-	 * @return integer (timestamp)
-	 *
-	 * @deprecated since 2.1
-	 */
+		 * Returns the timestamp of Sunday of the current time or selected date
+		 * @param timestamp: Timestamp of the selected date or false for current time
+		 * @return integer (timestamp)
+		 *
+		 * @deprecated since 2.1
+		 */
 		function sunday( $timestamp = false ) {
 			_deprecated_function( __FUNCTION__, '2.1' );
 			$date = $timestamp ? $timestamp : $this->local_time;
@@ -1290,12 +1290,12 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Arranges days array acc. to start of week, e.g 1234567 (Week starting with Monday)
-	 * @param days: input array
-	 * @param prepend: What to add as first element
-	 * @pram nod: If number of days (true) or name of days (false)
-	 * @return array
-	 */
+		 * Arranges days array acc. to start of week, e.g 1234567 (Week starting with Monday)
+		 * @param days: input array
+		 * @param prepend: What to add as first element
+		 * @pram nod: If number of days (true) or name of days (false)
+		 * @return array
+		 */
 		function arrange( $days, $prepend, $nod = false ) {
 			if ( $this->start_of_week ) {
 				for ( $n = 1; $n <= $this->start_of_week; $n++ ) {
@@ -1309,7 +1309,7 @@ if ( ! class_exists( 'Appointments' ) ) {
 						if ( ! $first ) {
 							$first = $day; // Save the first day
 						}						if ( $day < $first ) {
-												$temp[ $key ] = $day + 7; // Latter days should be higher than the first day
+							$temp[ $key ] = $day + 7; // Latter days should be higher than the first day
 						} else { 						$temp[ $key ] = $day; }
 					}
 					$days = $temp;
@@ -1322,9 +1322,9 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Get which days of the week we are working
-	 * @return array (may be empty)
-	 */
+		 * Get which days of the week we are working
+		 * @return array (may be empty)
+		 */
 		function get_working_days( $worker = 0, $location = 0 ) {
 			$working_days = array();
 			$result = appointments_get_worker_working_hours( 'open', $worker,  $location );
@@ -1342,13 +1342,13 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Check if this is an exceptional working day
-	 * Optionally a worker is selectable ( $w != 0 )
-	 *
-	 * @deprecated since 2.2
-	 *
-	 * @return bool
-	 */
+		 * Check if this is an exceptional working day
+		 * Optionally a worker is selectable ( $w != 0 )
+		 *
+		 * @deprecated since 2.2
+		 *
+		 * @return bool
+		 */
 		function is_exceptional_working_day( $ccs, $cce, $w = 0 ) {
 			_deprecated_function( __FUNCTION__, '2.2', 'appointments_is_exceptional_working_day' );
 
@@ -1361,10 +1361,10 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Check if it is break time
-	 * Optionally a worker is selectable ( $w != 0 )
-	 * @return bool
-	 */
+		 * Check if it is break time
+		 * Optionally a worker is selectable ( $w != 0 )
+		 * @return bool
+		 */
 		function is_break( $ccs, $cce, $w = 0 ) {
 			// A worker can be forced
 			if ( ! $w ) {
@@ -1374,12 +1374,12 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Check if a specific worker is working at this time slot
-	 * @return bool
-	 * @since 1.2.2
-	 *
-	 * @deprecated since 2.2
-	 */
+		 * Check if a specific worker is working at this time slot
+		 * @return bool
+		 * @since 1.2.2
+		 *
+		 * @deprecated since 2.2
+		 */
 		function is_working( $ccs, $cse, $w ) {
 			_deprecated_function( __FUNCTION__, '2.2', 'appointments_is_working' );
 			if ( ! $w ) {
@@ -1390,24 +1390,24 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Correctly calculate timestamp based on day and hours:min
-	 * This is required as php versions prior to 5.3 cannot calculate 24:00
-	 * @param $this_day: Date in d F Y format
-	 * @param $end: time in military hours:min format
-	 * @since 1.1.8
-	 * @return integer (timestamp)
-	 */
+		 * Correctly calculate timestamp based on day and hours:min
+		 * This is required as php versions prior to 5.3 cannot calculate 24:00
+		 * @param $this_day: Date in d F Y format
+		 * @param $end: time in military hours:min format
+		 * @since 1.1.8
+		 * @return integer (timestamp)
+		 */
 		function str2time( $this_day, $end ) {
 			if ( '24:00' != $end ) {
 				return strtotime( $this_day. ' '. $end, $this->local_time ); } else { 			return ( strtotime( $this_day. ' 23:59', $this->local_time ) + 60 ); }
 		}
 
 		/**
-	 * Check if time is enough for this service
-	 * e.g if we are working until 6pm, it is not possible to take an app with 60 mins duration at 5:30pm
-	 * Please note that "not possible" is an exception
-	 * @return bool
-	 */
+		 * Check if time is enough for this service
+		 * e.g if we are working until 6pm, it is not possible to take an app with 60 mins duration at 5:30pm
+		 * Please note that "not possible" is an exception
+		 * @return bool
+		 */
 		function is_service_possible( $ccs, $cce, $capacity ) {
 
 			// If this cell exceeds app limit then return false
@@ -1502,12 +1502,12 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Return available number of workers for a time slot
-	 * e.g if one worker works between 8-11 and another works between 13-15, there is no worker between 11-13
-	 * This is called from is_busy function
-	 * since 1.0.6
-	 * @return integer
-	 */
+		 * Return available number of workers for a time slot
+		 * e.g if one worker works between 8-11 and another works between 13-15, there is no worker between 11-13
+		 * This is called from is_busy function
+		 * since 1.0.6
+		 * @return integer
+		 */
 		function available_workers( $ccs, $cce ) {
 			// If a worker is selected we dont need to do anything special
 
@@ -1518,24 +1518,24 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Check if a cell is not available, i.e. all appointments taken OR we dont have workers for this time slot
-	 * @return bool
-	 */
+		 * Check if a cell is not available, i.e. all appointments taken OR we dont have workers for this time slot
+		 * @return bool
+		 */
 		function is_busy( $start, $end, $capacity ) {
 			$args = array(
-			'location_id' => $this->location,
-			'service_id' => $this->service,
-			'worker_id' => $this->worker,
-			'capacity' => $capacity,
+				'location_id' => $this->location,
+				'service_id' => $this->service,
+				'worker_id' => $this->worker,
+				'capacity' => $capacity,
 			);
 			return apppointments_is_range_busy( $start, $end, $args );
 		}
 
 		/**
-	 * Remove duplicate appointment objects by app ID
-	 * @since 1.1.5.1
-	 * @return array of objects
-	 */
+		 * Remove duplicate appointment objects by app ID
+		 * @since 1.1.5.1
+		 * @return array of objects
+		 */
 		function array_unique_object_by_ID( $apps ) {
 			if ( ! is_array( $apps ) || empty( $apps ) ) {
 				return array(); }
@@ -1552,9 +1552,9 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Get the maximum and minimum working hour
-	 * @return array|false
-	 */
+		 * Get the maximum and minimum working hour
+		 * @return array|false
+		 */
 		function min_max_wh( $worker = 0, $location = 0 ) {
 			$this->get_lsw();
 
@@ -1567,22 +1567,22 @@ if ( ! class_exists( 'Appointments' ) ) {
 					foreach ( $days as $day ) {
 						// Jose's fix pt2 (c19c7d65bb860a265ceb7f6a6075ae668bd60100)
 						/*
-						if ( isset( $day["active"] ) && 'yes' == $day["active"] ) {
-						$start = date( "G", strtotime( $this->to_military( $day["start"] ) ) );
-						$end_timestamp = strtotime( $this->to_military( $day["end"] ) );
-						$end = date( "G", $end_timestamp );
-						// Add 1 hour if there are some minutes left. e.g. for 10:10pm, make max as 23
-						if ( '00' != date( "i", $end_timestamp ) && $end != 24 )
-							$end = $end + 1;
-						if ( $start < $min )
-							$min = $start;
-						if ( $end > $max )
-							$max = $end;
-						// Special case: If end is 0:00, regard it as 24
-						if ( 0 == $end && '00' == date( "i", $end_timestamp ) )
-							$max = 24;
-						}
-						*/
+                        if ( isset( $day["active"] ) && 'yes' == $day["active"] ) {
+                        $start = date( "G", strtotime( $this->to_military( $day["start"] ) ) );
+                        $end_timestamp = strtotime( $this->to_military( $day["end"] ) );
+                        $end = date( "G", $end_timestamp );
+                        // Add 1 hour if there are some minutes left. e.g. for 10:10pm, make max as 23
+                        if ( '00' != date( "i", $end_timestamp ) && $end != 24 )
+                            $end = $end + 1;
+                        if ( $start < $min )
+                            $min = $start;
+                        if ( $end > $max )
+                            $max = $end;
+                        // Special case: If end is 0:00, regard it as 24
+                        if ( 0 == $end && '00' == date( "i", $end_timestamp ) )
+                            $max = 24;
+                        }
+                         */
 						if ( ! isset( $day['start'] ) || ! isset( $day['end'] ) ) {
 							continue;
 						}
@@ -1607,10 +1607,10 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Convert any time format to military format
-	 * @since 1.0.3
-	 * @return string
-	 */
+		 * Convert any time format to military format
+		 * @since 1.0.3
+		 * @return string
+		 */
 		function to_military( $time, $end = false ) {
 			// Already in military format
 			if ( 'H:i' == $this->time_format ) {
@@ -1643,10 +1643,10 @@ if ( ! class_exists( 'Appointments' ) ) {
 
 
 		/**
-	 * Pack several fields as a string using glue ":"
-	 * location : service : worker : ccs : cce : post ID
-	 * @return string
-	 */
+		 * Pack several fields as a string using glue ":"
+		 * location : service : worker : ccs : cce : post ID
+		 * @return string
+		 */
 		function pack( $ccs, $cce ) {
 			global $post;
 			if ( is_object( $post ) ) {
@@ -1655,8 +1655,8 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Make sure we clean up cookies after logging out.
-	 */
+		 * Make sure we clean up cookies after logging out.
+		 */
 		public function drop_cookies_on_logout() {
 			$options = appointments_get_options();
 			if ( 'yes' !== $options['login_required'] ) {
@@ -1667,15 +1667,15 @@ if ( ! class_exists( 'Appointments' ) ) {
 
 
 		/****************************************
-		* Methods for integration with Membership
-		*****************************************
-		*/
+         * Methods for integration with Membership
+         *****************************************
+         */
 
 
 		/**
-	* Finds if user is Membership member with sufficient level
-	* @return bool
-	*/
+		 * Finds if user is Membership member with sufficient level
+		 * @return bool
+		 */
 		function is_member() {
 			$membership_active = ( is_admin() && class_exists( 'membershipadmin' ) ) || ( ! is_admin() && class_exists( 'membershippublic' ) );
 			if ( $membership_active && isset( $this->options['members'] ) ) {
@@ -1697,15 +1697,12 @@ if ( ! class_exists( 'Appointments' ) ) {
 			return false;
 		}
 
-
-		/*******************************
-		* Methods for inits, styles, js
-		********************************
-		*/
-
+		/*********************************
+         * Methods for inits, styles, js *
+         *********************************/
 		/**
-	 * Initialize widgets
-	 */
+		 * Initialize widgets
+		 */
 		function widgets_init() {
 			if ( ! is_blog_installed() ) {
 				return; }
@@ -1716,10 +1713,10 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Add a script to be used in the footer, checking duplicates
-	 * In some servers, footer scripts were called twice. This function fixes it.
-	 * @since 1.2.0
-	 */
+		 * Add a script to be used in the footer, checking duplicates
+		 * In some servers, footer scripts were called twice. This function fixes it.
+		 * @since 1.2.0
+		 */
 		function add2footer( $script = '' ) {
 
 			if ( $script && strpos( $this->script, $script ) === false ) {
@@ -1727,22 +1724,22 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Load javascript to the footer
-	 */
+		 * Load javascript to the footer
+		 */
 		function wp_footer() {
 			$script = '';
 			$this->script = apply_filters( 'app_footer_scripts', $this->script );
 
 			if ( $this->script ) {
 				ob_start();
-				?>
-				<script type='text/javascript'>
-		        var appDocReadyHandler = function($) {
-					<?php echo $this->script; ?>
-		        };
-		        jQuery(document).ready(appDocReadyHandler);
-				</script>
-				<?php
+?>
+                <script type='text/javascript'>
+                var appDocReadyHandler = function($) {
+                    <?php echo $this->script; ?>
+            };
+            jQuery(document).ready(appDocReadyHandler);
+            </script>
+<?php
 				$script = ob_get_clean();
 			}
 
@@ -1775,7 +1772,7 @@ if ( ! class_exists( 'Appointments' ) ) {
 				return $posts;
 			}
 			// check for shortcodes only if "Always load scripts" option is disabled
-				$this->shortcode_found = false; // use this flag to see if styles and scripts need to be enqueued
+			$this->shortcode_found = false; // use this flag to see if styles and scripts need to be enqueued
 			foreach ( $posts as $post ) {
 				if ( is_object( $post ) && stripos( $post->post_content, '[app_' ) !== false ) {
 					$this->shortcode_found = true;
@@ -1789,30 +1786,34 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Function to load all necessary scripts and styles
-	 * Can be called externally, e.g. when forced from a page template
-	 */
+		 * Function to load all necessary scripts and styles
+		 * Can be called externally, e.g. when forced from a page template
+		 */
 		function load_scripts_styles() {
 			wp_enqueue_script( 'jquery' );
-			wp_enqueue_script( 'jquery-tablesorter', $this->plugin_url . '/js/jquery.tablesorter.min.js', array( 'jquery' ), $this->version );
+			wp_enqueue_script( 'jquery-tablesorter', $this->plugin_url . '/assets/js/vendor/jquery.tablesorter.min.js', array( 'jquery' ), $this->version );
 			add_action( 'wp_footer', array( &$this, 'wp_footer' ) );	// Publish plugin specific scripts in the footer
 
 			// TODO: consider this
-			wp_enqueue_script( 'app-js-check', $this->plugin_url . '/js/js-check.js', array( 'jquery' ), $this->version );
+			wp_enqueue_script( 'app-js-check', $this->plugin_url . '/assets/js/appointments-js-check.min.js', array( 'jquery' ), $this->version );
 
 			$thank_page_id = ! empty( $this->options['thank_page'] ) ? absint( $this->options['thank_page'] ) : 0;
 			$cancel_page_id = ! empty( $this->options['cancel_page'] ) ? absint( $this->options['cancel_page'] ) : 0;
 			wp_localize_script( 'app-js-check', '_appointments_data',
 				array(
-				'ajax_url' => admin_url( 'admin-ajax.php' ),
-				'root_url' => plugins_url( 'appointments/images/' ),
-				'thank_page_url' => get_permalink( $thank_page_id ),
-				'cancel_url' => get_permalink( $cancel_page_id ),
+					'ajax_url' => admin_url( 'admin-ajax.php' ),
+					'root_url' => plugins_url( 'appointments/assets/images/' ),
+					'thank_page_url' => get_permalink( $thank_page_id ),
+					'cancel_url' => get_permalink( $cancel_page_id ),
 				)
 			);
 
 			if ( ! current_theme_supports( 'appointments_style' ) ) {
-				wp_enqueue_style( 'appointments', $this->plugin_url. '/css/front.css', array(), $this->version );
+				wp_enqueue_style(
+					'appointments', $this->plugin_url. '/assets/css/appointments.min.css',
+					array(),
+					$this->version
+				);
 				add_action( 'wp_head', array( &$this, 'wp_head' ) );
 			}
 
@@ -1832,12 +1833,17 @@ if ( ! class_exists( 'Appointments' ) ) {
 
 			// Is registration allowed?
 			$do_register = is_multisite()
-			? in_array( get_site_option( 'registration' ), array( 'all', 'user' ) )
-			: (int) get_option( 'users_can_register' );
+				? in_array( get_site_option( 'registration' ), array( 'all', 'user' ) )
+				: (int) get_option( 'users_can_register' );
 
 			// Load the rest only if API use is selected
 			if ( @$this->options['accept_api_logins'] ) {
-				wp_enqueue_script( 'appointments_api_js', $this->plugin_url . '/js/appointments-api.js', array( 'jquery' ), $this->version );
+				wp_enqueue_script(
+					'appointments_api_js',
+					$this->plugin_url . '/assets/js/front-end/appointments-api.min.js',
+					array( 'jquery' ),
+					$this->version
+				);
 				wp_localize_script('appointments_api_js', 'l10nAppApi', apply_filters('app-scripts-api_l10n', array(
 					'facebook' => __( 'Login with Facebook', 'appointments' ),
 					'twitter' => __( 'Login with Twitter', 'appointments' ),
@@ -1856,69 +1862,62 @@ if ( ! class_exists( 'Appointments' ) ) {
 
 				if ( ! empty( $this->options['facebook-app_id'] ) ) {
 					if ( ! $this->options['facebook-no_init'] ) {
-						add_action('wp_footer', create_function('', "echo '" .
-							sprintf(
-								'<div id="fb-root"></div><script type="text/javascript">
-						window.fbAsyncInit = function() {
-							FB.init({
-							  appId: "%s",
-							  status: true,
-							  cookie: true,
-							  xfbml: true
-							});
-						};
-						// Load the FB SDK Asynchronously
-						(function(d){
-							var js, id = "facebook-jssdk"; if (d.getElementById(id)) {return;}
-							js = d.createElement("script"); js.id = id; js.async = true;
-							js.src = "//connect.facebook.net/en_US/all.js";
-							d.getElementsByTagName("head")[0].appendChild(js);
-						}(document));
-						</script>',
-								$this->options['facebook-app_id']
-							) .
-						"';"));
+						add_action( 'wp_footer', array( $this, 'add_facebook_fb_root_element' ) );
 					}
 				}
 				do_action( 'app-scripts-api' );
 			}
 
 			/**
-		 * Fired when scripts/styles have been loaded
-		 */
+			 * Fired when scripts/styles have been loaded
+			 */
 			do_action( 'appointments_scripts_loaded' );
 		}
 
 		/**
-	 * css that will be added to the head, again only for app pages
-	 */
-		function wp_head() {
-
-			?>
-			<style type="text/css">
-			<?php
-
-			if ( isset( $this->options['additional_css'] ) && '' != trim( $this->options['additional_css'] ) ) {
-				echo $this->options['additional_css'];
-			}
-
-			foreach ( $this->get_classes() as $class => $name ) {
-				if ( ! isset( $this->options['color_set'] ) || ! $this->options['color_set'] ) {
-					if ( isset( $this->options[ $class.'_color' ] ) ) {
-						$color = $this->options[ $class.'_color' ]; } else { 					$color = $this->get_preset( $class, 1 ); }
-				} else { 				$color = $this->get_preset( $class, $this->options['color_set'] ); }
-
-				echo 'td.'.$class.',div.'.$class.' {background: #'. $color .' !important;}';
-			}
-
-			?>
-			</style>
-			<?php
+		 * Add Facebook fb-root elements
+		 */
+		public function add_facebook_fb_root_element() {
+			$template = 'front-end/elements/facebook/fb-root';
+			$args = array( 'app_id' => $this->options['facebook-app_id'] );
+			$this->render( $template, $args );
 		}
 
 		/**
-	 * Localize the plugin
-	 */
+		 * css that will be added to the head, again only for app pages
+		 */
+		function wp_head() {
+			$template = 'front-end/css/additional';
+			$args = array(
+				'additional_css' => '',
+				'colors' => array(),
+			);
+			if ( isset( $this->options['additional_css'] ) && '' != trim( $this->options['additional_css'] ) ) {
+				$args['additional_css'] = $this->options['additional_css'];
+			}
+			foreach ( $this->get_classes() as $class => $name ) {
+				if ( ! isset( $this->options['color_set'] ) || ! $this->options['color_set'] ) {
+					if ( isset( $this->options[ $class.'_color' ] ) ) {
+						$color = $this->options[ $class.'_color' ];
+					} else {
+						$color = $this->get_preset( $class, 1 ); }
+				} else {
+					$color = $this->get_preset( $class, $this->options['color_set'] );
+				}
+				if (
+					preg_match( '/^[0-9a-f]{3}$/i', $color )
+					|| preg_match( '/^[0-9a-f]{6}$/i', $color )
+				) {
+					$color = '#'.$color;
+				}
+				$args['colors'][ $class ] = $color;
+			}
+			$this->render( $template, $args );
+		}
+
+		/**
+		 * Localize the plugin
+		 */
 		function localization() {
 			// Load up the localization file if we're using WordPress in a different language
 			// Place it in Appointments+'s "languages" folder and name it "appointments-[value in wp-config].mo"
@@ -1926,9 +1925,9 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 *	Add initial settings
-	 *
-	 */
+		 *	Add initial settings
+		 *
+		 */
 		function init() {
 
 			// Since wp-cron is not reliable, use this instead
@@ -2009,19 +2008,19 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/*******************************
-		* Methods for Confirmation
-		********************************
+         * Methods for Confirmation
+         ********************************
 
-		/**
-		 *  Replace placeholders with real values for email subject and content
-		 */
+         /**
+          *  Replace placeholders with real values for email subject and content
+         */
 		function _replace( $text, $user, $service, $worker, $datetime, $price, $deposit, $phone = '', $note = '', $address = '', $email = '', $city = '' ) {
 			/*
-			return str_replace(
-					array( "SITE_NAME", "CLIENT", "SERVICE_PROVIDER", "SERVICE", "DATE_TIME", "PRICE", "DEPOSIT", "PHONE", "NOTE", "ADDRESS", "EMAIL", "CITY" ),
-					array( wp_specialchars_decode(get_option('blogname'), ENT_QUOTES), $user, $worker, $service, mysql2date( $this->datetime_format, $datetime ), $price, $deposit, $phone, $note, $address, $email, $city ),
-					$text
-				);
+            return str_replace(
+                    array( "SITE_NAME", "CLIENT", "SERVICE_PROVIDER", "SERVICE", "DATE_TIME", "PRICE", "DEPOSIT", "PHONE", "NOTE", "ADDRESS", "EMAIL", "CITY" ),
+                    array( wp_specialchars_decode(get_option('blogname'), ENT_QUOTES), $user, $worker, $service, mysql2date( $this->datetime_format, $datetime ), $price, $deposit, $phone, $note, $address, $email, $city ),
+                    $text
+                );
 			*/
 			$balance = ! empty( $price ) && ! empty( $deposit )
 			? (float) $price - (float) $deposit
@@ -2050,33 +2049,50 @@ if ( ! class_exists( 'Appointments' ) ) {
 
 
 		/**
-	 *	Email message headers
-	 */
+		 *	Email message headers
+		 */
 		function message_headers() {
 			$admin_email = $this->get_admin_email();
 			$blogname = strip_tags( wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES ) );
 			$content_type = apply_filters( 'app-emails-content_type', 'text/plain' );
 			if ( ! (defined( 'APP_EMAIL_DROP_LEGACY_HEADERS' ) && APP_EMAIL_DROP_LEGACY_HEADERS) ) {
-				$message_headers = "MIME-Version: 1.0\n" . "From: {$blogname}" .  " <{$admin_email}>\n" . "Content-Type: {$content_type}; charset=\"" . get_option( 'blog_charset' ) . "\"\n";
+				$message_headers = "From: {$blogname}" .  " <{$admin_email}>\n" . "Content-Type: {$content_type}; charset=\"" . get_option( 'blog_charset' ) . "\"\n";
 			} else {
-				$message_headers = "MIME-Version: 1.0\n" .
-				"Content-Type: {$content_type}; charset=\"" . get_option( 'blog_charset' ) . "\"\n"
-				;
-				add_filter( 'wp_mail_from', create_function( '', "return '{$admin_email}';" ) );
-				add_filter( 'wp_mail_from_name', create_function( '', "return '{$blogname}';" ) );
+				$message_headers = "Content-Type: {$content_type}; charset=\"" . get_option( 'blog_charset' ) . "\"\n";
+				add_filter( 'wp_mail_from', array( $this, 'return_admin_email' ) );
+				add_filter( 'wp_mail_from_name', array( $this, 'return_blogname' ) );
 			}
 			// Modify message headers
 			$message_headers = apply_filters( 'app_message_headers', $message_headers );
-
 			return $message_headers;
 		}
 
 		/**
-	 *	Remove an appointment if not paid or expired
-	 *	Clear expired appointments.
-	 *	Change status to completed if they are confirmed or paid
-	 *	Change status to removed if they are pending or reserved
-	 */
+		 * Get admin mail
+		 *
+		 * @since 2.4.3
+		 */
+		public function return_admin_email( $email ) {
+			$admin_email = $this->get_admin_email();
+			return $admin_email;
+		}
+
+		/**
+		 * Get Blog Name
+		 *
+		 * @since 2.4.3
+		 */
+		public function return_blogname( $email ) {
+			$blogname = strip_tags( wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES ) );
+			return $blogname;
+		}
+
+		/**
+		 *	Remove an appointment if not paid or expired
+		 *	Clear expired appointments.
+		 *	Change status to completed if they are confirmed or paid
+		 *	Change status to removed if they are pending or reserved
+		 */
 		function remove_appointments() {
 			$process_expired = apply_filters( 'app-auto_cleanup-process_expired', true );
 			if ( ! $process_expired ) {
@@ -2126,38 +2142,38 @@ if ( ! class_exists( 'Appointments' ) ) {
 
 
 		/**
-	 * Replace CANCEL placeholder with its link
-	 * Removed due to security issues
-	 */
+		 * Replace CANCEL placeholder with its link
+		 * Removed due to security issues
+		 */
 		function add_cancel_link( $text, $app_id ) {
 			// Removed due to security issues
 			return str_replace( 'CANCEL', appointments_get_cancel_link_url( $app_id ), $text );
 		}
 
 		/*******************************
-		* Methods for Admin
-		********************************
-		*/
+         * Methods for Admin
+         ********************************
+         */
 
 
 		/**
-	 * Deletes a worker's database records in case he is deleted
-	 *
-	 * @deprecated since 2.1
-	 *
-	 * @since 1.0.4
-	 */
+		 * Deletes a worker's database records in case he is deleted
+		 *
+		 * @deprecated since 2.1
+		 *
+		 * @since 1.0.4
+		 */
 		function delete_user( $ID ) {
 			_deprecated_function( __FUNCTION__, '2.1', 'appointments_delete_worker' );
 			appointments_delete_worker( $ID );
 		}
 
 		/**
-	 * Removes a worker's database records in case he is removed from that blog
-	 * @param ID: user ID
-	 * @param blog_id: ID of the blog that user has been removed from
-	 * @since 1.2.3
-	 */
+		 * Removes a worker's database records in case he is removed from that blog
+		 * @param ID: user ID
+		 * @param blog_id: ID of the blog that user has been removed from
+		 * @since 1.2.3
+		 */
 		function remove_user_from_blog( $ID, $blog_id ) {
 			switch_to_blog( $blog_id );
 			appointments_delete_worker( $ID );
@@ -2165,10 +2181,10 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 *	Create a working hour form
-	 *  Worker can be forced.
-	 *  @param status: Open (working hours) or close (break hours)
-	 */
+		 *	Create a working hour form
+		 *  Worker can be forced.
+		 *  @param status: Open (working hours) or close (break hours)
+		 */
 		function working_hour_form( $status = 'open' ) {
 			$path = appointments_get_view_path( 'form-working-hours' );
 			if ( is_file( $path ) ) {
@@ -2177,37 +2193,37 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * @internal
-	 * @param $name
-	 * @param $min_secs
-	 * @param string $selected
-	 *
-	 * @return string
-	 */
+		 * @internal
+		 * @param $name
+		 * @param $min_secs
+		 * @param string $selected
+		 *
+		 * @return string
+		 */
 		public function _time_selector( $name, $min_secs, $selected = '', $worker = null ) {
 
 			$start_hour = apply_filters( 'appointments_first_working_hour', 0, $name, $worker );
 			ob_start();
-			?>
-			<select name="<?php echo esc_attr( $name ); ?>" autocomplete="off">
-				<?php for ( $t = $start_hour; $t < 3600 * 24; $t = $t + $min_secs ) :  ?>
-					<?php
+?>
+            <select name="<?php echo esc_attr( $name ); ?>" autocomplete="off">
+                <?php for ( $t = $start_hour; $t < 3600 * 24; $t = $t + $min_secs ) :  ?>
+<?php
 
-						$dhours = $this->secs2hours( $t, 'H:i', false ); // Hours in 08:30 format - escape, because they're values now.
-						$shours = $this->secs2hours( $t );
-					?>
-					<option <?php selected( $selected, strtotime( $dhours ) ); ?> value="<?php echo esc_attr( $dhours ); ?>"><?php echo $shours; ?></option>
-				<?php endfor; ?>
-				</select>
-			<?php
+			$dhours = $this->secs2hours( $t, 'H:i', false ); // Hours in 08:30 format - escape, because they're values now.
+			$shours = $this->secs2hours( $t );
+?>
+                    <option <?php selected( $selected, strtotime( $dhours ) ); ?> value="<?php echo esc_attr( $dhours ); ?>"><?php echo $shours; ?></option>
+                <?php endfor; ?>
+                </select>
+<?php
 			return ob_get_clean();
 		}
 
 		/**
-	 * Return a safe date format that datepick can use
-	 * @return string
-	 * @since 1.0.4.2
-	 */
+		 * Return a safe date format that datepick can use
+		 * @return string
+		 * @since 1.0.4.2
+		 */
 		function safe_date_format() {
 			// Allowed characters
 			$check = str_replace( array( '-', '/', ',', 'F', 'j', 'y', 'Y', 'd', 'M', 'm' ), '', $this->date_format );
@@ -2219,17 +2235,17 @@ if ( ! class_exists( 'Appointments' ) ) {
 		}
 
 		/**
-	 * Modify a date if it is non US
-	 * Change d/m/y to d-m-y so that strtotime can behave correctly
-	 * Also change local dates to m/d/y format
-	 * @return string
-	 *
-	 * @deprecated This function is deprecated and it will dissapear in following versions but in order
-	 * to keep backwards compatibility, is not really marked as deprecated cause can be used in another functions
-	 * see appointments_insert_appointment() and appointments_update_appointment()
-	 *
-	 * @since 1.0.4.2
-	 */
+		 * Modify a date if it is non US
+		 * Change d/m/y to d-m-y so that strtotime can behave correctly
+		 * Also change local dates to m/d/y format
+		 * @return string
+		 *
+		 * @deprecated This function is deprecated and it will dissapear in following versions but in order
+		 * to keep backwards compatibility, is not really marked as deprecated cause can be used in another functions
+		 * see appointments_insert_appointment() and appointments_update_appointment()
+		 *
+		 * @since 1.0.4.2
+		 */
 		function to_us( $date ) {
 			// Find the real format we are using
 			$date_format = $this->safe_date_format();
@@ -2250,18 +2266,18 @@ if ( ! class_exists( 'Appointments' ) ) {
 			$datepick_abb_local_months = false;
 
 			$months = array(
-			'January' => '01',
-			'February' => '02',
-			'March' => '03',
-			'April' => '04',
-			'May' => '05',
-			'June' => '06',
-						'July' => '07',
-			'August' => '08',
-			'September' => '09',
-			'October' => '10',
-			'November' => '11',
-			'December' => '12',
+				'January' => '01',
+				'February' => '02',
+				'March' => '03',
+				'April' => '04',
+				'May' => '05',
+				'June' => '06',
+				'July' => '07',
+				'August' => '08',
+				'September' => '09',
+				'October' => '10',
+				'November' => '11',
+				'December' => '12',
 			);
 			// A special check where locale is set, but language files are not loaded
 			if ( strpos( $date_format, 'F' ) !== false || strpos( $date_format, 'M' ) !== false ) {
@@ -2321,6 +2337,35 @@ if ( ! class_exists( 'Appointments' ) ) {
 
 			$this->locale_error = true;
 			return $date;
+		}
+
+		/**
+		 * Renders a view file
+		 *
+		 * @since 2.4.3
+		 *
+		 * @param $file
+		 * @param array $params
+		 * @param bool|false $return
+		 * @return string
+		 */
+		public function render( $file, $params = array(), $return = false ) {
+			$content = '';
+			if ( array_key_exists( 'this', $params ) ) {
+				unset( $params['this'] );
+			}
+			extract( $params, EXTR_OVERWRITE ); // phpcs:ignorei
+			$file = trim( $file, '/' );
+			$template_file = appointments_plugin_dir() . 'views/' . $file . '.php';
+			if ( file_exists( $template_file ) ) {
+				ob_start();
+				include $template_file;
+				$content = ob_get_clean();
+			}
+			if ( $return ) {
+				return $content;
+			}
+			echo $content;
 		}
 	}
 }
@@ -2382,7 +2427,7 @@ if ( is_admin() ) {
  * Find blogs and uninstall tables for each of them
  * @since 1.0.2
  * @until 1.4.1
- */
+		 */
 if ( ! function_exists( 'wpmudev_appointments_uninstall' ) ) {
 	function wpmudev_appointments_uninstall() {
 		do_action( 'app-core-doing_it_wrong', __FUNCTION__ ); }

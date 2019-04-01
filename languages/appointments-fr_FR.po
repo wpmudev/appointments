@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2019-01-15 11:19:54+00:00\n"
-"PO-Revision-Date: 2018-06-15 11:53:07+0000\n"
+"POT-Creation-Date: 2019-03-18 08:13:04+00:00\n"
+"PO-Revision-Date: 2019-01-20 12:49:53+0000\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1855,11 +1855,11 @@ msgstr "Paramètres à jour"
 
 #: admin/pages/class-admin-settings-page.php:233
 msgid "Number of services per page"
-msgstr ""
+msgstr "Nombre de tâches par page"
 
 #: admin/pages/class-admin-settings-page.php:245
 msgid "Number of service providers per page"
-msgstr ""
+msgstr "Nombre de fournisseurs de services par page"
 
 #: admin/pages/class-admin-transactions-page.php:18
 #: admin/pages/class-admin-transactions-page.php:19
@@ -3343,7 +3343,7 @@ msgstr "Utilisateur non enregistré"
 
 #: includes/class-app-ajax.php:330
 msgid "Error while fetching working hours."
-msgstr ""
+msgstr "Éche en récupérant les heures de travail."
 
 #: includes/class-app-ajax.php:362
 msgid ""
@@ -3566,7 +3566,7 @@ msgstr[1] "Nous n'avons pas supprimé%d rendez-vous."
 
 #: includes/class-app-gdpr.php:422
 msgid "What personal data do we collect and why?"
-msgstr ""
+msgstr "Quelles sont les données personnelles collectés et pourquoi?"
 
 #: includes/class-app-gdpr.php:424
 msgid ""
@@ -3575,51 +3575,61 @@ msgid ""
 "privacy policy to reflect any additional information you have requested from "
 "your clients."
 msgstr ""
+"Lorsque les visiteurs prennent un rendez-vous sur votre site à l'aide de "
+"‘’Appointment+’’, les données sont stockées. Si vous utilisez des extras "
+"Champs Supplémentaires, veillez mettre à jour votre politique de "
+"confidentialité afin de montrer toutes les informations supplémentaires "
+"demandées à vos clients."
 
 #: includes/class-app-gdpr.php:427 includes/class-app-gdpr.php:435
 #: includes/class-app-gdpr.php:443
-#, fuzzy
 msgid "Suggested text: "
-msgstr "Texte de connexion"
+msgstr "Texte suggéré:"
 
 #: includes/class-app-gdpr.php:428
 msgid ""
 "We collect your Name, E-Mail and Phone Number for your Appointments. The "
 "information is not shared and will be deleted on request."
 msgstr ""
+"Pour vos rendez-vous nous conservons votre nom, votre adresse E-Mail et "
+"votre numéro de téléphone . Les informations ne sont pas partagées et seront "
+"supprimées sur demande."
 
 #: includes/class-app-gdpr.php:430
-#, fuzzy
 msgid "How long Appointments+ retains your data"
-msgstr "Afficher les rendez-vous pour cet ID utilisateur"
+msgstr "Pour combien de temps ''Appointments+'' conserve vos données"
 
 #: includes/class-app-gdpr.php:432
 msgid ""
 "Manually remove user information on an erasure request or use he Appointments"
 "+ GDPR settings to automatically delete information after an allotted time."
 msgstr ""
+"Supprimer manuellement les informations d’utilisateur, lors d'une demande "
+"d'effacement ; ou utiliser les configurations ‘Appointments’ + GDPR pour "
+"supprimer automatiquement les informations après le temps calculé."
 
 #: includes/class-app-gdpr.php:436
-#, fuzzy
 msgid "Your data will be automatically erased after 20 days."
-msgstr ""
-"Toutes les données recuillis seront automatiquement suprimés%s après la date "
-"du rendez-vous."
+msgstr "Vos données seront automatiquement effacées après 20 jours passés."
 
 #: includes/class-app-gdpr.php:438
 msgid "Third Parties"
-msgstr ""
+msgstr "Tiers"
 
 #: includes/class-app-gdpr.php:440
-#, fuzzy
 msgid "If you choose to, you can sync Appointments+ with your Google Calendar."
-msgstr "Cliquez pour soumettre ce rendez-vous à votre compte Calendrier Google"
+msgstr ""
+"Si vous le souhaitez, vous pouvez synchroniser Appointments+ avec votre "
+"'Calender Google'."
 
 #: includes/class-app-gdpr.php:444
 msgid ""
 "We are using Google Calendar to sync our appointments. Your Name, E-Mail, "
 "Phone will be synced with our private Google Calendar account."
 msgstr ""
+"Pour synchroniser nos rendez-vous nous utilisons \"Google Calender\". Votre "
+"nom, votre adresse e-mail et votre téléphone seront synchronisés avec notre "
+"compte privé Google Calender."
 
 #: includes/class-app-service.php:56
 msgid ""
@@ -5103,7 +5113,7 @@ msgstr "Afficher les images"
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:234
 #: includes/pro/includes/addons/app-users-limit_services_login.php:78
 msgid "Hide"
-msgstr ""
+msgstr "Cacher"
 
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:238
 msgid "Automatic map overlays"
@@ -5120,7 +5130,7 @@ msgstr "Après mon shortcode de rendez-vous"
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:247
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:257
 msgid "Do not insert"
-msgstr ""
+msgstr "Ne pas insérer"
 
 #: includes/pro/includes/addons/app-locations-locations_on_google_maps.php:257
 msgid "After All Appointments shortcode output"
@@ -5130,6 +5140,7 @@ msgstr "Après mes shortcodes de rendez-vous"
 #: includes/pro/includes/addons/app-locations-worker_locations.php:193
 msgid "There is no locations to choose. Please add some first."
 msgstr ""
+"Il n'y a pas des géolocaux à choisir. Veuillez les ajouter tout d'd'abord."
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:211
 msgid ""
@@ -5170,12 +5181,12 @@ msgstr ""
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:394
 msgid "Service Location"
-msgstr ""
+msgstr "Géolocal des Taches"
 
 #: includes/pro/includes/addons/app-locations-service_locations.php:444
 #: includes/pro/includes/addons/app-locations-worker_locations.php:346
 msgid "No Location"
-msgstr ""
+msgstr "Pas de Géolocal"
 
 #: includes/pro/includes/addons/app-locations-worker_locations.php:69
 msgid ""
@@ -5425,15 +5436,15 @@ msgstr "Remplissage"
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:613
 msgid "Before: %s"
-msgstr ""
+msgstr "Avant: %s"
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:623
 msgid "After: %s"
-msgstr ""
+msgstr "Après: %s"
 
 #: includes/pro/includes/addons/app-schedule-paddings.php:643
 msgid "No paddings"
-msgstr ""
+msgstr "Pas de ''padding''"
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:53
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:74
@@ -5442,19 +5453,19 @@ msgstr "Partager les ressources avec"
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:81
 msgid "Share with \"%s\""
-msgstr ""
+msgstr "partager avec \"%s\""
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:84
 msgid "Do not share"
-msgstr ""
+msgstr "Ne partager pas"
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:208
 msgid "Shared resources"
-msgstr ""
+msgstr "Ressource partagée"
 
 #: includes/pro/includes/addons/app-schedule-shared_resources.php:239
 msgid "No shared resources"
-msgstr ""
+msgstr "Aucune ressource partagée"
 
 #: includes/pro/includes/addons/app-users-additional_fields.php:101
 msgid "The field %s is required"
@@ -5532,15 +5543,15 @@ msgstr "Afficher les boutons de connexion"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:72
 msgid "Show %s login button"
-msgstr ""
+msgstr "Montrer %s button du ''login''"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:78
 msgid "Show"
-msgstr ""
+msgstr "Montrer"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:84
 msgid "Name for login button"
-msgstr ""
+msgstr "Nom du bouton de ''login''"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:87
 msgid "Use %s name for login button"
@@ -5556,27 +5567,27 @@ msgstr "site"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:92
 msgid "Use"
-msgstr ""
+msgstr "Utiliser"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:92
 msgid "Do not use"
-msgstr ""
+msgstr "Ne pas utiliser"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:104
 msgid "Facebook"
-msgstr ""
+msgstr "Facebook"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:105
 msgid "Twitter"
-msgstr ""
+msgstr "Twitter"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:106
 msgid "Google"
-msgstr ""
+msgstr "Google"
 
 #: includes/pro/includes/addons/app-users-limit_services_login.php:107
 msgid "WordPress"
-msgstr ""
+msgstr "WordPress"
 
 #: includes/pro/includes/addons/lib/app_service_locations_shortcode.php:9
 msgid "Service Locations"
@@ -7155,31 +7166,3 @@ msgstr "''login''"
 msgctxt "Discard existing info"
 msgid "Cancel"
 msgstr "Annuler"
-
-#~ msgid "Plugin: Appointments"
-#~ msgstr "''Plugin: Appointments''"
-
-#~ msgid ""
-#~ "When visitors book an appointment on the site we collect the data shown "
-#~ "in the appointments form to allow future contact with a client."
-#~ msgstr ""
-#~ "Quand les visiteurs réservent un rendez-vous sur le site, nous collectons "
-#~ "les données indiquées dans le formulaire de rendez-vous, pour autoriser "
-#~ "un contact futur avec le client."
-
-#~ msgid ""
-#~ "All collected data is not shown publicly but we can send it to our "
-#~ "workers or contractors who will perform ordered services."
-#~ msgstr ""
-#~ "Toutes les données recuillis ne seront pas affichées publiquement, mais "
-#~ "nous pouvons les envoyer à nos travailleurs ou sous-traitants qui "
-#~ "effectueront des services des commandes."
-
-#~ msgctxt "policy page days string"
-#~ msgid "%d day"
-#~ msgid_plural "%d days"
-#~ msgstr[0] "%d journée"
-#~ msgstr[1] "%d journées"
-
-#~ msgid "New Appointment"
-#~ msgstr "Nouveau Rendez-vous"

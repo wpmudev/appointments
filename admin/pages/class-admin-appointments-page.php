@@ -140,13 +140,6 @@ class Appointments_Admin_Appointments_Page {
 		$appointments->admin->admin_scripts();
 		_appointments_enqueue_jquery_ui_datepicker();
 		wp_enqueue_script( 'appointments-admin-appointments', appointments_plugin_url() . 'admin/js/admin-appointments-list.js', array( 'jquery' ), true );
-
-		$date_format = $appointments->safe_date_format();
-		wp_localize_script( 'appointments-admin-appointments', 'Appi18n', array(
-			'deleteRecordsConfirm' => esc_js( __( 'Are you sure to delete the selected record(s)?', 'appointments' ) ),
-			'unexpectedError' => esc_js( __( 'Unexpected error','appointments' ) ),
-			'dateFormat' => $date_format,
-		) );
 	}
 
 	public function get_types() {

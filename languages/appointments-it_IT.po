@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Appointments +\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2019-01-15 11:19:54+00:00\n"
+"POT-Creation-Date: 2019-03-18 08:13:04+00:00\n"
 "PO-Revision-Date: 2017-08-15 06:35:02+0000\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -3509,9 +3509,8 @@ msgstr ""
 
 #: includes/class-app-gdpr.php:427 includes/class-app-gdpr.php:435
 #: includes/class-app-gdpr.php:443
-#, fuzzy
 msgid "Suggested text: "
-msgstr "Testo de conession"
+msgstr ""
 
 #: includes/class-app-gdpr.php:428
 msgid ""
@@ -3520,9 +3519,8 @@ msgid ""
 msgstr ""
 
 #: includes/class-app-gdpr.php:430
-#, fuzzy
 msgid "How long Appointments+ retains your data"
-msgstr "Mostra appuntamenti per questo utente ID"
+msgstr ""
 
 #: includes/class-app-gdpr.php:432
 msgid ""
@@ -3539,9 +3537,8 @@ msgid "Third Parties"
 msgstr ""
 
 #: includes/class-app-gdpr.php:440
-#, fuzzy
 msgid "If you choose to, you can sync Appointments+ with your Google Calendar."
-msgstr "Clicca per inviare questa appuntamento al tuo Google Calendar"
+msgstr ""
 
 #: includes/class-app-gdpr.php:444
 msgid ""
@@ -7041,6 +7038,3 @@ msgstr ""
 msgctxt "Discard existing info"
 msgid "Cancel"
 msgstr "Annulla"
-
-#~ msgid "New Appointment"
-#~ msgstr "Nuovo appuntamento"

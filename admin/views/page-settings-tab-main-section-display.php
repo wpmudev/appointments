@@ -50,17 +50,17 @@
 
 	<tr class="custom_color_row" <?php if ( @$options['color_set'] != 0 ) { echo 'style="display:none"'; } ?>>
 		<th scope="row"><?php _e( 'Custom Color Set', 'appointments' ) ?></th>
-		<td colspan="2">
+        <td colspan="2">
+            <span style="display: flex">
 			<?php foreach ( $appointments->get_classes() as $class => $name ) :  ?>
-				<label style="width:31%;display:block;float:left;">
-					<span style="float:left"><?php echo $name ?>:</span>
-							<span style="float:left;margin-right:8px;">
-								<a href="javascript:void(0)" class="pickcolor hide-if-no-js" <?php if ( isset( $options[ $class . '_color' ] ) ) { echo 'style="background-color:#' . $options[ $class . '_color' ] . '"'; } ?>></a>
-								<input style="width:50px" type="text" class="colorpicker_input" maxlength="6" name="<?php echo $class ?>_color" id="<?php echo $class ?>_color" value="<?php if ( isset( $options[ $class . '_color' ] ) ) { echo $options[ $class . '_color' ]; } ?>"/>
-							</span>
+				<label>
+                    <span><?php echo $name ?>:</span>
+                    <span>
+                        <input style="width:50px" type="text" class="colorpicker_input" name="<?php echo $class ?>_color" id="<?php echo $class ?>_color" value="<?php if ( isset( $options[ $class . '_color' ] ) ) { echo $options[ $class . '_color' ]; } ?>"/>
+                    <span>
 				</label>
-			<?php endforeach; ?>
-			<div style="clear:both"></div>
+            <?php endforeach; ?>
+            </span>
 			<span class="description"><?php _e( 'If you have selected Custom color set, for each cell enter 3 OR 6-digit Hex code of the color manually without # in front or use the colorpicker.', 'appointments' ) ?></span>
 		</td>
 	</tr>

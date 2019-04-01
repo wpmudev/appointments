@@ -42,9 +42,9 @@ if ( ! class_exists( 'App_Shortcode_All_Appointments' ) ) {
 				),
 				'public' => array(
 					'value' => 0,
-					'help' => __('Allow visitors to view list, default is 0, only logged in users can view list.', 'appointments'),
+					'help' => __( 'Allow visitors to view list, default is 0, only logged in users can view list.', 'appointments' ),
 					'example' => '1',
-				)
+				),
 			);
 		}
 
@@ -70,10 +70,9 @@ if ( ! class_exists( 'App_Shortcode_All_Appointments' ) ) {
 				$order_by = 'start';
 			}
 
-
 			$query_args = array(
 				'status'  => $statuses,
-				'orderby' => $order_by
+				'orderby' => $order_by,
 			);
 			$results    = appointments_get_appointments( $query_args );
 
@@ -89,7 +88,7 @@ if ( ! class_exists( 'App_Shortcode_All_Appointments' ) ) {
 				. '</th><th class="all-appointments-date">' . __( 'Date/time', 'appointments' )
 				. '</th><th class="all-appointments-status">' . __( 'Status', 'appointments' ) . '</th>'
 			);
-			$colspan = substr_count($ret, '<th');
+			$colspan = substr_count( $ret, '<th' );
 
 			$ret .= '</thead><tbody>';
 
@@ -137,7 +136,7 @@ if ( ! class_exists( 'App_Shortcode_All_Appointments' ) ) {
 			}
 
 			// Sort table from front end
-			if ( $_tablesorter && file_exists( appointments_plugin_dir() . 'js/jquery.tablesorter.min.js' ) ) {
+			if ( $_tablesorter && file_exists( appointments_plugin_dir() . 'assets/js/vendor/jquery.tablesorter.min.js' ) ) {
 				$appointments->add2footer( '
 				$(".all-appointments").tablesorter({
 					dateFormat: "' . $dateformat . '",

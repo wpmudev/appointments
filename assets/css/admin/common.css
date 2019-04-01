@@ -1,0 +1,180 @@
+.app-column-service, .app-column-worker, .app-column-status {
+  width: 15%;
+}
+
+.app-column-date {
+  width: 25% !important;
+}
+
+.app-column-app_ID, .app-column-subscription {
+  width: 5%;
+}
+
+.app-column-delete {
+  width: 4%;
+}
+
+th.app-column-delete, td.app-column-delete {
+  padding: 5px 0 0 0 !important;
+}
+
+.app-check-column input[type="checkbox"] {
+  margin-left: 8px;
+}
+
+a.pickcolor {
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #dfdfdf;
+  margin: 0 7px 0 3px;
+  padding: 4px 14px;
+}
+
+td.delete {
+  text-align: center;
+}
+
+.app-add_break span {
+  display: none;
+}
+.app-add_break:after {
+  content: "+";
+  font-size: 24px;
+  font-weight: bold;
+}
+
+a.app-remove_break, a.app-remove_break:hover, a.app-remove_break:active {
+  color: #C33;
+}
+
+.app-remove_break:after {
+  content: " x";
+}
+
+.app-addon-requires {
+  font-style: italic;
+  color: #633;
+}
+
+.app-beta-version {
+  color: #c33;
+}
+
+.app_deactivate_plugin {
+  color: #933;
+}
+
+.app_activate_plugin.app-beta {
+  opacity: .5;
+}
+
+.app-has_explanation {
+  border-bottom: 1px dotted #aaa;
+}
+
+.app-postbox_container {
+  width: 49%;
+  margin-right: .5%;
+}
+
+.wp-admin .app-info_trigger {
+  margin-left: 1em;
+  background: url(../images/information.png) top left no-repeat;
+  padding-left: 18px;
+}
+.wp-admin .app-info_target {
+  display: none;
+}
+
+#dashboard_right_now a.app-pending
+#dashboard_right_now a.app-active:before {
+  content: '\f469';
+  color: #56b086;
+}
+#dashboard_right_now a.app-pending
+#dashboard_right_now a.app-active.app-pending:before {
+  color: #ffa26d;
+}
+
+.app-notice .app-dismiss {
+  color: #dc3232;
+  text-decoration: none;
+  float: right;
+}
+.app-notice .app-dismiss:hover {
+  color: red;
+}
+
+.app-notice .dashicons-dismiss {
+  font-size: 18px;
+}
+
+div.appointments-settings .subsubsub a:focus {
+  outline: none;
+}
+
+.app-settings-section {
+  display: none;
+}
+
+.app-settings-section.current {
+  display: block;
+}
+
+/** WORKING HOURS PAGE **/
+body.appointments_page_app_settings .appointments-settings-tab-working_hours table.widefat {
+  background: transparent;
+  border: none;
+}
+body.appointments_page_app_settings .appointments-settings-tab-working_hours table.widefat th {
+  font-weight: bold;
+}
+
+#services-table .delete a, #workers-table .delete a {
+  cursor: pointer;
+}
+
+#app-export-date_range {
+  margin-top: 1em;
+}
+
+#app-export-date_range label,
+.app-shared_service label {
+  display: block;
+  margin-bottom: .5em;
+}
+
+.app-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.appointments-settings-tab-working_hours .app-flex > div {
+  min-width: 350px;
+}
+
+@media screen and (max-width: 550px) {
+  .ui-datepicker-inline {
+    max-width: 100%;
+  }
+
+  .app-datepick .ui-datepicker-group {
+    float: none;
+    width: auto;
+  }
+}
+div.appointments-settings .notice-app-wp-version {
+  margin-top: 2em;
+}
+
+.app-ui-slider {
+  margin: 1em 0;
+  max-width: 100px;
+}
+
+.inline-edit-row .app-time {
+  float: left;
+  width: 30%;
+  padding-left: 5px;
+}
