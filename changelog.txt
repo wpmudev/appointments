@@ -1,6 +1,7 @@
 2019-xx-xx - 2.4.4
 -------------------------------
 - Added an ability to complete disabled logging (Settings-&gt;General-&gt;Advaneced).
+- Added check for `allow_url_fopen` on Google Calendar synchronisation screen.
 
 2019-xx-xx - 2.4.3
 -------------------------------

@@ -1,5 +1,5 @@
-
 <h3><?php _e( 'Google Calendar API: Authorize access to your Google Application', 'appointments' ); ?></h3>
+<?php if ( ini_get( 'allow_url_fopen' ) ) { ?>
 <ol>
 	<li><a href="<?php echo esc_url( $auth_url ); ?>" target="_blank"><?php _e( 'Generate your access code', 'appointments' ); ?></a></li>
 	<li><?php _e( 'Fill the form below', 'appointments' ); ?></li>
@@ -15,7 +15,9 @@
 		</td>
 	</tr>
 </table>
-
+<?php } else { ?>
+<p><?php esc_html_e( 'PHP option <b>allow_url_fopen</b> is off. Please turn it on before you can turn on Google Calendar integration.', 'appointments' ); ?></p>
+<?php } ?>
 <?php wp_nonce_field( 'app-submit-gcalendar' ); ?>
 <input type="hidden" name="action" value="step-2">
 <p class="submit">

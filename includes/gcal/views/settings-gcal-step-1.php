@@ -1,4 +1,5 @@
 <h3><?php _e( 'Google Calendar API: Create a new Google Application', 'appointments' ); ?></h3>
+<?php if ( ini_get( 'allow_url_fopen' ) ) { ?>
 <h4><?php esc_html_e( 'Instructions:', 'appointments' ); ?></h4>
 <?php
 $base_url = appointments_plugin_url() .'assets/images/google-calendar-instructions/';
@@ -66,6 +67,9 @@ $base_url = appointments_plugin_url() .'assets/images/google-calendar-instructio
 		</td>
 	</tr>
 </table>
+<?php } else { ?>
+<p><?php _e( 'PHP option <b>allow_url_fopen</b> is off. Please turn it on before you can turn on Google Calendar integration.', 'appointments' ); ?></p>
+<?php } ?>
 
 <?php wp_nonce_field( 'app-submit-gcalendar' ); ?>
 <input type="hidden" name="action" value="step-1">
