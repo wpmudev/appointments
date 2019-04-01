@@ -1,3 +1,7 @@
+2019-xx-xx - 2.4.4
+-------------------------------
+- Added an ability to complete disabled logging (Settings-&gt;General-&gt;Advaneced).
+
 2019-xx-xx - 2.4.3
 -------------------------------
 - Fixed a problem with $service object.

@@ -547,7 +547,10 @@ if ( ! class_exists( 'Appointments' ) ) {
 		/**
 		 * Save a message to the log file
 		 */
-		function log( $message = '' ) {
+		public function log( $message = '' ) {
+			if ( isset( $this->options['disable_logging'] ) && 'yes' === $this->options['disable_logging'] ) {
+				return;
+			}
 			if ( $message ) {
 				$to_put = '<b>['. date_i18n( $this->datetime_format, $this->local_time ) .']</b> '. $message;
 				// Prevent multiple messages with same text and same timestamp
