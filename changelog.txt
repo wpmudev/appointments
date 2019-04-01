@@ -1,6 +1,7 @@
 2019-xx-xx - 2.4.4
 -------------------------------
 - Added an ability to complete disabled logging (Settings-&gt;General-&gt;Advaneced).
+- Fixed a problem with errors on user edit profile page.
 
 2019-xx-xx - 2.4.3
 -------------------------------
