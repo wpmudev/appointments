@@ -202,13 +202,13 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 				$query_args['worker'] = $args['provider_id'];
 			}
 
-					// Special case: If this is a single provider website, show staff appointments in his schedule too
-					$workers = appointments_get_workers();
+			// Special case: If this is a single provider website, show staff appointments in his schedule too
+			$workers = appointments_get_workers();
 			if ( App_Roles::current_user_can( 'manage_options', App_Roles::CTX_STAFF ) && ( ( $workers && count( $workers ) == 1 ) || ! $workers ) ) {
 				$query_args['worker'] = false;
 			}
 
-					$results = appointments_get_appointments( $query_args );
+			$results = appointments_get_appointments( $query_args );
 		}
 
 		// Can worker confirm pending appointments?
@@ -224,6 +224,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		} else {
 			$a_cancel = false;
 		}
+		$show_submit_confirm_button = false;
 		$template_args = wp_parse_args(
 			array(
 				'_can_display_editable' => $this->_can_display_editable(),
@@ -269,47 +270,47 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 		// Sort table from front end
 		if ( $args['_tablesorter'] && file_exists( appointments_plugin_dir() . 'assets/js/vendor/jquery.tablesorter.min.js' ) ) {
 			$appointments->add2footer( '
-				$(".my-appointments").tablesorter({
-					dateFormat: "'.$dateformat.'",
-					headers: {
-						2: {
-							sorter:"'.$sorter.'"
-						}
-					}
-				});
-				$("th.my-appointments-gcal,th.my-appointments-confirm,th.my-appointments-cancel").removeClass("header");
+                $(".my-appointments").tablesorter({
+                    dateFormat: "'.$dateformat.'",
+                    headers: {
+                        2: {
+                            sorter:"'.$sorter.'"
+                        }
+                    }
+                });
+                $("th.my-appointments-gcal,th.my-appointments-confirm,th.my-appointments-cancel").removeClass("header");
 
-				$(".app-my-appointments-cancel").change( function() {
-					if ( $(this).is(":checked") ) {
-						var cancel_box = $(this);
-						if ( !confirm("'. esc_js( __( 'Are you sure you want to cancel the selected appointment?','appointments' ) ) .'") ) {
-							cancel_box.attr("checked", false);
-							return false;
-						}
-						else{
-							var cancel_id = $(this).attr("name").replace("app_cancel[","").replace("]","");
-							if (cancel_id) {
-								var cancel_data = {action: "cancel_app", app_id: cancel_id, cancel_nonce: "'. wp_create_nonce() .'"};
-								$.post(_appointments_data.ajax_url, cancel_data, function(response) {
-									if (response && response.error ) {
-										cancel_box.attr("disabled",true);
-										alert(response.error);
-									}
-									else if (response && response.success) {
-										alert("'.esc_js( __( 'Selected appointment cancelled.','appointments' ) ).'");
-										cancel_box.closest("tr").css("opacity","0.3");
-										cancel_box.attr("disabled",true);
-									}
-									else {
-										cancel_box.attr("disabled",true);
-										alert("'.esc_js( __( 'A connection error occurred.','appointments' ) ).'");
-									}
-								}, "json");
-							}
-						}
-					}
+                $(".app-my-appointments-cancel").change( function() {
+                    if ( $(this).is(":checked") ) {
+                        var cancel_box = $(this);
+                        if ( !confirm("'. esc_js( __( 'Are you sure you want to cancel the selected appointment?','appointments' ) ) .'") ) {
+                            cancel_box.attr("checked", false);
+                            return false;
+                        }
+                        else{
+                            var cancel_id = $(this).attr("name").replace("app_cancel[","").replace("]","");
+                            if (cancel_id) {
+                                var cancel_data = {action: "cancel_app", app_id: cancel_id, cancel_nonce: "'. wp_create_nonce() .'"};
+                                $.post(_appointments_data.ajax_url, cancel_data, function(response) {
+                                    if (response && response.error ) {
+                                        cancel_box.attr("disabled",true);
+                                        alert(response.error);
+                                    }
+                                    else if (response && response.success) {
+                                        alert("'.esc_js( __( 'Selected appointment cancelled.','appointments' ) ).'");
+                                        cancel_box.closest("tr").css("opacity","0.3");
+                                        cancel_box.attr("disabled",true);
+                                    }
+                                    else {
+                                        cancel_box.attr("disabled",true);
+                                        alert("'.esc_js( __( 'A connection error occurred.','appointments' ) ).'");
+                                    }
+                                }, "json");
+                            }
+                        }
+                    }
 
-				});'
+                });'
 			); }
 
 		return $ret;
@@ -317,13 +318,13 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
 
 	public function footer_scripts() {
 		?>
-		<script>
-			"use strict"
-			jQuery(document).ready( function() {
+        <script>
+            "use strict"
+            jQuery(document).ready( function() {
                 Appointments.myAppointments();
-			});
-		</script>
-		<?php
+            });
+        </script>
+        <?php
 	}
 
 	/**
