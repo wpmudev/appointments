@@ -108,21 +108,21 @@ For help and information on installing plugins you can view our [Installing Word
 
 Once you Activate the plugin you will see a menu appear on the Menu Bar labeled **Appointments**. [
 
-![Appointments Menu](https://premium.wpmudev.org/wp-content/uploads/2012/08/1-Appointmetns-Menu.png "Appointments Menu")](https://premium.wpmudev.org/wp-content/uploads/2012/08/1-Appointmetns-Menu.png)
+![Appointments Menu](https://premium.wpmudev.org/wp-content/uploads/2012/08/1-Appointmetns-Menu.png "Appointments Menu")
 
  You will see three sub-menus appear when you click on the menu item.  We will tackle each separately and in order. [
 
-![Appointments Submenu](https://premium.wpmudev.org/wp-content/uploads/2012/08/2-Appointments-Submenu1.png "Appointments Submenu")](https://premium.wpmudev.org/wp-content/uploads/2012/08/2-Appointments-Submenu1.png)
+![Appointments Submenu](https://premium.wpmudev.org/wp-content/uploads/2012/08/2-Appointments-Submenu1.png "Appointments Submenu")
 
 ##### Appointments
 
 Clicking **Appointments** brings you to the hub of your appointments list.  You will see that your appointments will be separated by status: Active, Pending, Completed and Removed.  You can view each by clicking on their respective links, and each page will show the Client and Service basic info as below.  At the top of the page you will see an Add New button, just like you use to create a new page or post.  Click that and you can Add a new appointment manually to your calendar. [
 
-![Add New Appointment](https://premium.wpmudev.org/wp-content/uploads/2012/08/3-Add-New.png "Add New Appointment")](https://premium.wpmudev.org/wp-content/uploads/2012/08/3-Add-New.png)
+![Add New Appointment](https://premium.wpmudev.org/wp-content/uploads/2012/08/3-Add-New.png "Add New Appointment")
 
 The New Appointment Menu is pretty self explanatory.  There is a place for the client's infomation, the Service information (that will populate from the menus you fill in later) and a place for notes.  Last but not least you can set the status before Saving.  _There is a built in tutorial that covers this as well, I will show you where to find that, just in-case you have any questions or forget something._ [
 
-![Add New Meta](https://premium.wpmudev.org/wp-content/uploads/2012/08/4-Add-New-Meta.png "Add New Meta")](https://premium.wpmudev.org/wp-content/uploads/2012/08/4-Add-New-Meta.png)
+![Add New Meta](https://premium.wpmudev.org/wp-content/uploads/2012/08/4-Add-New-Meta.png "Add New Meta")
 
  next up...
 
@@ -130,7 +130,7 @@ The New Appointment Menu is pretty self explanatory.  There is a place for the 
 
 Here you will see your transactions if you are taking payments or deposits.  These are also grouped: Recent, Pending and Future.  Each accessible by clicking their respective links.  You cannot manually add a transaction, the plugin will only record what is recorded through PayPal. [
 
-![Transactions](https://premium.wpmudev.org/wp-content/uploads/2012/08/5-Transactions.png "Transactions")](https://premium.wpmudev.org/wp-content/uploads/2012/08/5-Transactions.png)
+![Transactions](https://premium.wpmudev.org/wp-content/uploads/2012/08/5-Transactions.png "Transactions")
 
  And now the meat of this beast...
 
@@ -138,13 +138,13 @@ Here you will see your transactions if you are taking payments or deposits.  Th
 
 The **Settings** menu will greet you with a Tutorial.  You should pay attention to that :) It will tell you what you need to know about setting up the plugin and the tabs you see here.  Most are pretty easy to understand and the plugin options are very well annotated, so you should have no trouble.  We can pop through and summarize them here, one by one, but I will draw your attention to the FAQ tab first. [
 
-![Settings Menu](https://premium.wpmudev.org/wp-content/uploads/2012/08/6-Settings-Menu.png "Settings Menu")](https://premium.wpmudev.org/wp-content/uploads/2012/08/6-Settings-Menu.png)
+![Settings Menu](https://premium.wpmudev.org/wp-content/uploads/2012/08/6-Settings-Menu.png "Settings Menu")
 
 ##### FAQ
 
 Here is where you will find info on everything you need in this plugin, ready for immediate access!   The TWO most important pieces of information on this page, for those who are just installing or learning how to use the plugin, are the two links at the top.  These will start (or restart) the tutorials on the Settings menu options and Entering and Editing Appointments. [
 
-![FAQ](https://premium.wpmudev.org/wp-content/uploads/2012/08/7-FAQ.png "FAQ")](https://premium.wpmudev.org/wp-content/uploads/2012/08/7-FAQ.png)
+![FAQ](https://premium.wpmudev.org/wp-content/uploads/2012/08/7-FAQ.png "FAQ")
 
  Now, let's backtrack.  Starting off at the first tab:
 
@@ -160,31 +160,31 @@ These settings are the heart and soul of your setup.  Pay special attention to 
 
 [
 
-![General Settings](https://premium.wpmudev.org/wp-content/uploads/2012/08/8-General1.png "General Settings")](https://premium.wpmudev.org/wp-content/uploads/2012/08/8-General1.png)
+![General Settings](https://premium.wpmudev.org/wp-content/uploads/2012/08/8-General1.png "General Settings")
 
 ##### Working Hours
 
 Set your hours of operation and Break Times.  Think Business Hours and '_Out to Lunch_'.  You can even specify different hours for different service providers.  Makes it easy to keep track of differing schedules! [
 
-![Working Hours](https://premium.wpmudev.org/wp-content/uploads/2012/08/9-Working-Hours.png "Working Hours")](https://premium.wpmudev.org/wp-content/uploads/2012/08/9-Working-Hours.png)
+![Working Hours](https://premium.wpmudev.org/wp-content/uploads/2012/08/9-Working-Hours.png "Working Hours")
 
 ##### Exceptions
 
 Days off, holidays, scheduled maintenance, etc.  You can add them all here.  You can also define working days that are normally non-work days (i.e. a particular Sunday).  These are also able to be set per service provider. [
 
-![Exceptions](https://premium.wpmudev.org/wp-content/uploads/2012/08/10-Exceptions.png "Exceptions")](https://premium.wpmudev.org/wp-content/uploads/2012/08/10-Exceptions.png)
+![Exceptions](https://premium.wpmudev.org/wp-content/uploads/2012/08/10-Exceptions.png "Exceptions")
 
 ##### Services
 
 What do you do?! What do you provide?!  This is where you lay it all out.  Set a capacity, price and even a description page. [
 
-![Services](https://premium.wpmudev.org/wp-content/uploads/2012/08/11-Services.png "Services")](https://premium.wpmudev.org/wp-content/uploads/2012/08/11-Services.png)
+![Services](https://premium.wpmudev.org/wp-content/uploads/2012/08/11-Services.png "Services")
 
 ##### Service Providers
 
 It is not required that you have more than one person available doing what gets done, but if you do, here is where you keep track of them all.  You can even add Additional fees and assign more than one service to a provider.  Even attach them to a Bio page.  _Note: this tab will not populate until you have **at least one** service listed in the Services tab._ [
 
-![Service Providers](https://premium.wpmudev.org/wp-content/uploads/2012/08/12-Service-Providers.png "Service Providers")](https://premium.wpmudev.org/wp-content/uploads/2012/08/12-Service-Providers.png)
+![Service Providers](https://premium.wpmudev.org/wp-content/uploads/2012/08/12-Service-Providers.png "Service Providers")
 
 ##### Shortcodes
 
@@ -198,6 +198,6 @@ Heaps of Shortcodes for your use. Insert provider or client specific tables, dro
 
 Keep up with what is happening by checking your Logs.  This nifty tab is where you will find updates on everything that happens on your site.  Status changes, transactions and the like. [
 
-![Logs](https://premium.wpmudev.org/wp-content/uploads/2012/08/14-Logs.png "Logs")](https://premium.wpmudev.org/wp-content/uploads/2012/08/14-Logs.png)
+![Logs](https://premium.wpmudev.org/wp-content/uploads/2012/08/14-Logs.png "Logs")
 
  And that's it! Well not really. You will need to download and install to see the details.  This plugin is spectacularly annotated and contains loads of helpful information along the setup process!  Enjoy!
