@@ -88,8 +88,11 @@ class Appointments_Admin_User_Profile {
 						$exceptional_days = array();
 					}
 
-					$result = $result || appointments_update_worker_working_hours( $profileuser_id, $working_hours, $stat, $location );
-					$result2 = $result2 || appointments_update_worker_exceptions( $profileuser_id, $stat, $exceptional_days );
+					//$result = $result || appointments_update_worker_working_hours( $profileuser_id, $working_hours, $stat, $location );
+					//$result2 = $result2 || appointments_update_worker_exceptions( $profileuser_id, $stat, $exceptional_days );
+
+					$result = appointments_update_worker_working_hours( $profileuser_id, $working_hours, $stat, $location );
+					$result2 = appointments_update_worker_exceptions( $profileuser_id, $stat, $exceptional_days );
 				}
 				if ( $result || $result2 ) {
 					$message = sprintf( __( '%s edited his working hours.', 'appointments' ), appointments_get_worker_name( $profileuser_id ) );
