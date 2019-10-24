@@ -15,7 +15,7 @@ class Appointments_Pro {
 		$this->includes();
 
 		// Login with Google
-		$this->google_login = new Appointments_Appointments_Google_Login();
+		$this->google_login = new App_Appointments_Google_Login();
 
 		add_action( 'plugins_loaded', array( $this, 'load_integrations' ), 999 );
 

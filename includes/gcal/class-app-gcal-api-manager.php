@@ -1,7 +1,7 @@
 <?php
 
 
-class Appointments_Appointments_Google_Calendar_API_Manager {
+class App_Appointments_Google_Calendar_API_Manager {
 
 	/**
 	 * @var bool|Appointments_Google_Client
@@ -55,7 +55,7 @@ class Appointments_Appointments_Google_Calendar_API_Manager {
 			$this->client->setScopes( 'https://www.googleapis.com/auth/calendar' );
 			$this->client->setAccessType( 'offline' );
 			$this->client->setRedirectUri( 'urn:ietf:wg:oauth:2.0:oob' );
-			$this->client->setLogger( new Appointments_Appointments_Google_Calendar_Logger( $this->client ) );
+			$this->client->setLogger( new App_Appointments_Google_Calendar_Logger( $this->client ) );
 		}
 
 		return $this->client;

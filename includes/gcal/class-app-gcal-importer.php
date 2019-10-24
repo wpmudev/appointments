@@ -1,8 +1,8 @@
 <?php
 
-class Appointments_Appointments_Google_Calendar_Importer {
+class App_Appointments_Google_Calendar_Importer {
 	/**
-	 * @var Appointments_Appointments_Google_Calendar $gcal_api
+	 * @var App_Appointments_Google_Calendar $gcal_api
 	 */
 	private $gcal_api;
 

@@ -5,7 +5,7 @@
  *
  * @since 1.9
  */
-class Appointments_Appointments_Google_Login {
+class App_Appointments_Google_Login {
 
 	public $_google_user_cache = null;
 

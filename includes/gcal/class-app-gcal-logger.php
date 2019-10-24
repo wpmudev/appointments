@@ -1,6 +1,6 @@
 <?php
 
-class Appointments_Appointments_Google_Calendar_Logger extends Appointments_Google_Logger_Abstract {
+class App_Appointments_Google_Calendar_Logger extends Appointments_Google_Logger_Abstract {
 
 	public function __construct( $client ) {
 		parent::__construct( $client );
