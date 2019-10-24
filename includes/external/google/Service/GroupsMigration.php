@@ -26,7 +26,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_GroupsMigration extends Google_Service
+class Appointments_Google_Service_GroupsMigration extends Appointments_Google_Service
 {
   /** Manage messages in groups on your domain. */
   const APPS_GROUPS_MIGRATION =
@@ -38,9 +38,9 @@ class Google_Service_GroupsMigration extends Google_Service
   /**
    * Constructs the internal representation of the GroupsMigration service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -48,7 +48,7 @@ class Google_Service_GroupsMigration extends Google_Service
     $this->version = 'v1';
     $this->serviceName = 'groupsmigration';
 
-    $this->archive = new Google_Service_GroupsMigration_Archive_Resource(
+    $this->archive = new Appointments_Google_Service_GroupsMigration_Archive_Resource(
         $this,
         $this->serviceName,
         'archive',
@@ -76,11 +76,11 @@ class Google_Service_GroupsMigration extends Google_Service
  * The "archive" collection of methods.
  * Typical usage is:
  *  <code>
- *   $groupsmigrationService = new Google_Service_GroupsMigration(...);
+ *   $groupsmigrationService = new Appointments_Google_Service_GroupsMigration(...);
  *   $archive = $groupsmigrationService->archive;
  *  </code>
  */
-class Google_Service_GroupsMigration_Archive_Resource extends Google_Service_Resource
+class Appointments_Google_Service_GroupsMigration_Archive_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -88,20 +88,20 @@ class Google_Service_GroupsMigration_Archive_Resource extends Google_Service_Res
    *
    * @param string $groupId The group ID
    * @param array $optParams Optional parameters.
-   * @return Google_Service_GroupsMigration_Groups
+   * @return Appointments_Google_Service_GroupsMigration_Groups
    */
   public function insert($groupId, $optParams = array())
   {
     $params = array('groupId' => $groupId);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_GroupsMigration_Groups");
+    return $this->call('insert', array($params), "Appointments_Google_Service_GroupsMigration_Groups");
   }
 }
 
 
 
 
-class Google_Service_GroupsMigration_Groups extends Google_Model
+class Appointments_Google_Service_GroupsMigration_Groups extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );

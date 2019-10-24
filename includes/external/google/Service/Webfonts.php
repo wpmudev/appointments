@@ -26,7 +26,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Webfonts extends Google_Service
+class Appointments_Google_Service_Webfonts extends Appointments_Google_Service
 {
 
 
@@ -36,9 +36,9 @@ class Google_Service_Webfonts extends Google_Service
   /**
    * Constructs the internal representation of the Webfonts service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -46,7 +46,7 @@ class Google_Service_Webfonts extends Google_Service
     $this->version = 'v1';
     $this->serviceName = 'webfonts';
 
-    $this->webfonts = new Google_Service_Webfonts_Webfonts_Resource(
+    $this->webfonts = new Appointments_Google_Service_Webfonts_Webfonts_Resource(
         $this,
         $this->serviceName,
         'webfonts',
@@ -73,11 +73,11 @@ class Google_Service_Webfonts extends Google_Service
  * The "webfonts" collection of methods.
  * Typical usage is:
  *  <code>
- *   $webfontsService = new Google_Service_Webfonts(...);
+ *   $webfontsService = new Appointments_Google_Service_Webfonts(...);
  *   $webfonts = $webfontsService->webfonts;
  *  </code>
  */
-class Google_Service_Webfonts_Webfonts_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Webfonts_Webfonts_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -87,20 +87,20 @@ class Google_Service_Webfonts_Webfonts_Resource extends Google_Service_Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param string sort Enables sorting of the list
-   * @return Google_Service_Webfonts_WebfontList
+   * @return Appointments_Google_Service_Webfonts_WebfontList
    */
   public function listWebfonts($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Webfonts_WebfontList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Webfonts_WebfontList");
   }
 }
 
 
 
 
-class Google_Service_Webfonts_Webfont extends Google_Collection
+class Appointments_Google_Service_Webfonts_Webfont extends Appointments_Google_Collection
 {
   protected $collection_key = 'variants';
   protected $internal_gapi_mappings = array(
@@ -181,12 +181,12 @@ class Google_Service_Webfonts_Webfont extends Google_Collection
   }
 }
 
-class Google_Service_Webfonts_WebfontList extends Google_Collection
+class Appointments_Google_Service_Webfonts_WebfontList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_Webfonts_Webfont';
+  protected $itemsType = 'Appointments_Google_Service_Webfonts_Webfont';
   protected $itemsDataType = 'array';
   public $kind;
 

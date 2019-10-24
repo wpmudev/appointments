@@ -26,7 +26,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Webmasters extends Google_Service
+class Appointments_Google_Service_Webmasters extends Appointments_Google_Service
 {
   /** View and manage Search Console data for your verified sites. */
   const WEBMASTERS =
@@ -45,9 +45,9 @@ class Google_Service_Webmasters extends Google_Service
   /**
    * Constructs the internal representation of the Webmasters service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -55,7 +55,7 @@ class Google_Service_Webmasters extends Google_Service
     $this->version = 'v3';
     $this->serviceName = 'webmasters';
 
-    $this->searchanalytics = new Google_Service_Webmasters_Searchanalytics_Resource(
+    $this->searchanalytics = new Appointments_Google_Service_Webmasters_Searchanalytics_Resource(
         $this,
         $this->serviceName,
         'searchanalytics',
@@ -75,7 +75,7 @@ class Google_Service_Webmasters extends Google_Service
           )
         )
     );
-    $this->sitemaps = new Google_Service_Webmasters_Sitemaps_Resource(
+    $this->sitemaps = new Appointments_Google_Service_Webmasters_Sitemaps_Resource(
         $this,
         $this->serviceName,
         'sitemaps',
@@ -144,7 +144,7 @@ class Google_Service_Webmasters extends Google_Service
           )
         )
     );
-    $this->sites = new Google_Service_Webmasters_Sites_Resource(
+    $this->sites = new Appointments_Google_Service_Webmasters_Sites_Resource(
         $this,
         $this->serviceName,
         'sites',
@@ -188,7 +188,7 @@ class Google_Service_Webmasters extends Google_Service
           )
         )
     );
-    $this->urlcrawlerrorscounts = new Google_Service_Webmasters_Urlcrawlerrorscounts_Resource(
+    $this->urlcrawlerrorscounts = new Appointments_Google_Service_Webmasters_Urlcrawlerrorscounts_Resource(
         $this,
         $this->serviceName,
         'urlcrawlerrorscounts',
@@ -220,7 +220,7 @@ class Google_Service_Webmasters extends Google_Service
           )
         )
     );
-    $this->urlcrawlerrorssamples = new Google_Service_Webmasters_Urlcrawlerrorssamples_Resource(
+    $this->urlcrawlerrorssamples = new Appointments_Google_Service_Webmasters_Urlcrawlerrorssamples_Resource(
         $this,
         $this->serviceName,
         'urlcrawlerrorssamples',
@@ -308,11 +308,11 @@ class Google_Service_Webmasters extends Google_Service
  * The "searchanalytics" collection of methods.
  * Typical usage is:
  *  <code>
- *   $webmastersService = new Google_Service_Webmasters(...);
+ *   $webmastersService = new Appointments_Google_Service_Webmasters(...);
  *   $searchanalytics = $webmastersService->searchanalytics;
  *  </code>
  */
-class Google_Service_Webmasters_Searchanalytics_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Webmasters_Searchanalytics_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -327,15 +327,15 @@ class Google_Service_Webmasters_Searchanalytics_Resource extends Google_Service_
    *
    * @param string $siteUrl The site's URL, including protocol. For example:
    * http://www.example.com/
-   * @param Google_SearchAnalyticsQueryRequest $postBody
+   * @param Appointments_Google_SearchAnalyticsQueryRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Webmasters_SearchAnalyticsQueryResponse
+   * @return Appointments_Google_Service_Webmasters_SearchAnalyticsQueryResponse
    */
-  public function query($siteUrl, Google_Service_Webmasters_SearchAnalyticsQueryRequest $postBody, $optParams = array())
+  public function query($siteUrl, Appointments_Google_Service_Webmasters_SearchAnalyticsQueryRequest $postBody, $optParams = array())
   {
     $params = array('siteUrl' => $siteUrl, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('query', array($params), "Google_Service_Webmasters_SearchAnalyticsQueryResponse");
+    return $this->call('query', array($params), "Appointments_Google_Service_Webmasters_SearchAnalyticsQueryResponse");
   }
 }
 
@@ -343,11 +343,11 @@ class Google_Service_Webmasters_Searchanalytics_Resource extends Google_Service_
  * The "sitemaps" collection of methods.
  * Typical usage is:
  *  <code>
- *   $webmastersService = new Google_Service_Webmasters(...);
+ *   $webmastersService = new Appointments_Google_Service_Webmasters(...);
  *   $sitemaps = $webmastersService->sitemaps;
  *  </code>
  */
-class Google_Service_Webmasters_Sitemaps_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Webmasters_Sitemaps_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -374,13 +374,13 @@ class Google_Service_Webmasters_Sitemaps_Resource extends Google_Service_Resourc
    * @param string $feedpath The URL of the actual sitemap. For example:
    * http://www.example.com/sitemap.xml
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Webmasters_WmxSitemap
+   * @return Appointments_Google_Service_Webmasters_WmxSitemap
    */
   public function get($siteUrl, $feedpath, $optParams = array())
   {
     $params = array('siteUrl' => $siteUrl, 'feedpath' => $feedpath);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Webmasters_WmxSitemap");
+    return $this->call('get', array($params), "Appointments_Google_Service_Webmasters_WmxSitemap");
   }
 
   /**
@@ -394,13 +394,13 @@ class Google_Service_Webmasters_Sitemaps_Resource extends Google_Service_Resourc
    *
    * @opt_param string sitemapIndex A URL of a site's sitemap index. For example:
    * http://www.example.com/sitemapindex.xml
-   * @return Google_Service_Webmasters_SitemapsListResponse
+   * @return Appointments_Google_Service_Webmasters_SitemapsListResponse
    */
   public function listSitemaps($siteUrl, $optParams = array())
   {
     $params = array('siteUrl' => $siteUrl);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Webmasters_SitemapsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Webmasters_SitemapsListResponse");
   }
 
   /**
@@ -424,11 +424,11 @@ class Google_Service_Webmasters_Sitemaps_Resource extends Google_Service_Resourc
  * The "sites" collection of methods.
  * Typical usage is:
  *  <code>
- *   $webmastersService = new Google_Service_Webmasters(...);
+ *   $webmastersService = new Appointments_Google_Service_Webmasters(...);
  *   $sites = $webmastersService->sites;
  *  </code>
  */
-class Google_Service_Webmasters_Sites_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Webmasters_Sites_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -465,26 +465,26 @@ class Google_Service_Webmasters_Sites_Resource extends Google_Service_Resource
    * @param string $siteUrl The URI of the property as defined in Search Console.
    * Examples: http://www.example.com/ or android-app://com.example/
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Webmasters_WmxSite
+   * @return Appointments_Google_Service_Webmasters_WmxSite
    */
   public function get($siteUrl, $optParams = array())
   {
     $params = array('siteUrl' => $siteUrl);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Webmasters_WmxSite");
+    return $this->call('get', array($params), "Appointments_Google_Service_Webmasters_WmxSite");
   }
 
   /**
    * Lists the user's Search Console sites. (sites.listSites)
    *
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Webmasters_SitesListResponse
+   * @return Appointments_Google_Service_Webmasters_SitesListResponse
    */
   public function listSites($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Webmasters_SitesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Webmasters_SitesListResponse");
   }
 }
 
@@ -492,11 +492,11 @@ class Google_Service_Webmasters_Sites_Resource extends Google_Service_Resource
  * The "urlcrawlerrorscounts" collection of methods.
  * Typical usage is:
  *  <code>
- *   $webmastersService = new Google_Service_Webmasters(...);
+ *   $webmastersService = new Appointments_Google_Service_Webmasters(...);
  *   $urlcrawlerrorscounts = $webmastersService->urlcrawlerrorscounts;
  *  </code>
  */
-class Google_Service_Webmasters_Urlcrawlerrorscounts_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Webmasters_Urlcrawlerrorscounts_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -514,13 +514,13 @@ class Google_Service_Webmasters_Urlcrawlerrorscounts_Resource extends Google_Ser
    * @opt_param string platform The user agent type (platform) that made the
    * request. For example: web. If not specified, returns results for all
    * platforms.
-   * @return Google_Service_Webmasters_UrlCrawlErrorsCountsQueryResponse
+   * @return Appointments_Google_Service_Webmasters_UrlCrawlErrorsCountsQueryResponse
    */
   public function query($siteUrl, $optParams = array())
   {
     $params = array('siteUrl' => $siteUrl);
     $params = array_merge($params, $optParams);
-    return $this->call('query', array($params), "Google_Service_Webmasters_UrlCrawlErrorsCountsQueryResponse");
+    return $this->call('query', array($params), "Appointments_Google_Service_Webmasters_UrlCrawlErrorsCountsQueryResponse");
   }
 }
 
@@ -528,11 +528,11 @@ class Google_Service_Webmasters_Urlcrawlerrorscounts_Resource extends Google_Ser
  * The "urlcrawlerrorssamples" collection of methods.
  * Typical usage is:
  *  <code>
- *   $webmastersService = new Google_Service_Webmasters(...);
+ *   $webmastersService = new Appointments_Google_Service_Webmasters(...);
  *   $urlcrawlerrorssamples = $webmastersService->urlcrawlerrorssamples;
  *  </code>
  */
-class Google_Service_Webmasters_Urlcrawlerrorssamples_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Webmasters_Urlcrawlerrorssamples_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -550,13 +550,13 @@ class Google_Service_Webmasters_Urlcrawlerrorssamples_Resource extends Google_Se
    * @param string $platform The user agent type (platform) that made the request.
    * For example: web
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Webmasters_UrlCrawlErrorsSample
+   * @return Appointments_Google_Service_Webmasters_UrlCrawlErrorsSample
    */
   public function get($siteUrl, $url, $category, $platform, $optParams = array())
   {
     $params = array('siteUrl' => $siteUrl, 'url' => $url, 'category' => $category, 'platform' => $platform);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Webmasters_UrlCrawlErrorsSample");
+    return $this->call('get', array($params), "Appointments_Google_Service_Webmasters_UrlCrawlErrorsSample");
   }
 
   /**
@@ -570,13 +570,13 @@ class Google_Service_Webmasters_Urlcrawlerrorssamples_Resource extends Google_Se
    * @param string $platform The user agent type (platform) that made the request.
    * For example: web
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Webmasters_UrlCrawlErrorsSamplesListResponse
+   * @return Appointments_Google_Service_Webmasters_UrlCrawlErrorsSamplesListResponse
    */
   public function listUrlcrawlerrorssamples($siteUrl, $category, $platform, $optParams = array())
   {
     $params = array('siteUrl' => $siteUrl, 'category' => $category, 'platform' => $platform);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Webmasters_UrlCrawlErrorsSamplesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Webmasters_UrlCrawlErrorsSamplesListResponse");
   }
 
   /**
@@ -606,7 +606,7 @@ class Google_Service_Webmasters_Urlcrawlerrorssamples_Resource extends Google_Se
 
 
 
-class Google_Service_Webmasters_ApiDataRow extends Google_Collection
+class Appointments_Google_Service_Webmasters_ApiDataRow extends Appointments_Google_Collection
 {
   protected $collection_key = 'keys';
   protected $internal_gapi_mappings = array(
@@ -660,7 +660,7 @@ class Google_Service_Webmasters_ApiDataRow extends Google_Collection
   }
 }
 
-class Google_Service_Webmasters_ApiDimensionFilter extends Google_Model
+class Appointments_Google_Service_Webmasters_ApiDimensionFilter extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -695,12 +695,12 @@ class Google_Service_Webmasters_ApiDimensionFilter extends Google_Model
   }
 }
 
-class Google_Service_Webmasters_ApiDimensionFilterGroup extends Google_Collection
+class Appointments_Google_Service_Webmasters_ApiDimensionFilterGroup extends Appointments_Google_Collection
 {
   protected $collection_key = 'filters';
   protected $internal_gapi_mappings = array(
   );
-  protected $filtersType = 'Google_Service_Webmasters_ApiDimensionFilter';
+  protected $filtersType = 'Appointments_Google_Service_Webmasters_ApiDimensionFilter';
   protected $filtersDataType = 'array';
   public $groupType;
 
@@ -723,13 +723,13 @@ class Google_Service_Webmasters_ApiDimensionFilterGroup extends Google_Collectio
   }
 }
 
-class Google_Service_Webmasters_SearchAnalyticsQueryRequest extends Google_Collection
+class Appointments_Google_Service_Webmasters_SearchAnalyticsQueryRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'dimensions';
   protected $internal_gapi_mappings = array(
   );
   public $aggregationType;
-  protected $dimensionFilterGroupsType = 'Google_Service_Webmasters_ApiDimensionFilterGroup';
+  protected $dimensionFilterGroupsType = 'Appointments_Google_Service_Webmasters_ApiDimensionFilterGroup';
   protected $dimensionFilterGroupsDataType = 'array';
   public $dimensions;
   public $endDate;
@@ -796,13 +796,13 @@ class Google_Service_Webmasters_SearchAnalyticsQueryRequest extends Google_Colle
   }
 }
 
-class Google_Service_Webmasters_SearchAnalyticsQueryResponse extends Google_Collection
+class Appointments_Google_Service_Webmasters_SearchAnalyticsQueryResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'rows';
   protected $internal_gapi_mappings = array(
   );
   public $responseAggregationType;
-  protected $rowsType = 'Google_Service_Webmasters_ApiDataRow';
+  protected $rowsType = 'Appointments_Google_Service_Webmasters_ApiDataRow';
   protected $rowsDataType = 'array';
 
 
@@ -824,12 +824,12 @@ class Google_Service_Webmasters_SearchAnalyticsQueryResponse extends Google_Coll
   }
 }
 
-class Google_Service_Webmasters_SitemapsListResponse extends Google_Collection
+class Appointments_Google_Service_Webmasters_SitemapsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'sitemap';
   protected $internal_gapi_mappings = array(
   );
-  protected $sitemapType = 'Google_Service_Webmasters_WmxSitemap';
+  protected $sitemapType = 'Appointments_Google_Service_Webmasters_WmxSitemap';
   protected $sitemapDataType = 'array';
 
 
@@ -843,12 +843,12 @@ class Google_Service_Webmasters_SitemapsListResponse extends Google_Collection
   }
 }
 
-class Google_Service_Webmasters_SitesListResponse extends Google_Collection
+class Appointments_Google_Service_Webmasters_SitesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'siteEntry';
   protected $internal_gapi_mappings = array(
   );
-  protected $siteEntryType = 'Google_Service_Webmasters_WmxSite';
+  protected $siteEntryType = 'Appointments_Google_Service_Webmasters_WmxSite';
   protected $siteEntryDataType = 'array';
 
 
@@ -862,7 +862,7 @@ class Google_Service_Webmasters_SitesListResponse extends Google_Collection
   }
 }
 
-class Google_Service_Webmasters_UrlCrawlErrorCount extends Google_Model
+class Appointments_Google_Service_Webmasters_UrlCrawlErrorCount extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -888,13 +888,13 @@ class Google_Service_Webmasters_UrlCrawlErrorCount extends Google_Model
   }
 }
 
-class Google_Service_Webmasters_UrlCrawlErrorCountsPerType extends Google_Collection
+class Appointments_Google_Service_Webmasters_UrlCrawlErrorCountsPerType extends Appointments_Google_Collection
 {
   protected $collection_key = 'entries';
   protected $internal_gapi_mappings = array(
   );
   public $category;
-  protected $entriesType = 'Google_Service_Webmasters_UrlCrawlErrorCount';
+  protected $entriesType = 'Appointments_Google_Service_Webmasters_UrlCrawlErrorCount';
   protected $entriesDataType = 'array';
   public $platform;
 
@@ -925,12 +925,12 @@ class Google_Service_Webmasters_UrlCrawlErrorCountsPerType extends Google_Collec
   }
 }
 
-class Google_Service_Webmasters_UrlCrawlErrorsCountsQueryResponse extends Google_Collection
+class Appointments_Google_Service_Webmasters_UrlCrawlErrorsCountsQueryResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'countPerTypes';
   protected $internal_gapi_mappings = array(
   );
-  protected $countPerTypesType = 'Google_Service_Webmasters_UrlCrawlErrorCountsPerType';
+  protected $countPerTypesType = 'Appointments_Google_Service_Webmasters_UrlCrawlErrorCountsPerType';
   protected $countPerTypesDataType = 'array';
 
 
@@ -944,7 +944,7 @@ class Google_Service_Webmasters_UrlCrawlErrorsCountsQueryResponse extends Google
   }
 }
 
-class Google_Service_Webmasters_UrlCrawlErrorsSample extends Google_Model
+class Appointments_Google_Service_Webmasters_UrlCrawlErrorsSample extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
         "firstDetected" => "first_detected",
@@ -954,7 +954,7 @@ class Google_Service_Webmasters_UrlCrawlErrorsSample extends Google_Model
   public $lastCrawled;
   public $pageUrl;
   public $responseCode;
-  protected $urlDetailsType = 'Google_Service_Webmasters_UrlSampleDetails';
+  protected $urlDetailsType = 'Appointments_Google_Service_Webmasters_UrlSampleDetails';
   protected $urlDetailsDataType = '';
 
 
@@ -990,7 +990,7 @@ class Google_Service_Webmasters_UrlCrawlErrorsSample extends Google_Model
   {
     return $this->responseCode;
   }
-  public function setUrlDetails(Google_Service_Webmasters_UrlSampleDetails $urlDetails)
+  public function setUrlDetails(Appointments_Google_Service_Webmasters_UrlSampleDetails $urlDetails)
   {
     $this->urlDetails = $urlDetails;
   }
@@ -1000,12 +1000,12 @@ class Google_Service_Webmasters_UrlCrawlErrorsSample extends Google_Model
   }
 }
 
-class Google_Service_Webmasters_UrlCrawlErrorsSamplesListResponse extends Google_Collection
+class Appointments_Google_Service_Webmasters_UrlCrawlErrorsSamplesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'urlCrawlErrorSample';
   protected $internal_gapi_mappings = array(
   );
-  protected $urlCrawlErrorSampleType = 'Google_Service_Webmasters_UrlCrawlErrorsSample';
+  protected $urlCrawlErrorSampleType = 'Appointments_Google_Service_Webmasters_UrlCrawlErrorsSample';
   protected $urlCrawlErrorSampleDataType = 'array';
 
 
@@ -1019,7 +1019,7 @@ class Google_Service_Webmasters_UrlCrawlErrorsSamplesListResponse extends Google
   }
 }
 
-class Google_Service_Webmasters_UrlSampleDetails extends Google_Collection
+class Appointments_Google_Service_Webmasters_UrlSampleDetails extends Appointments_Google_Collection
 {
   protected $collection_key = 'linkedFromUrls';
   protected $internal_gapi_mappings = array(
@@ -1046,7 +1046,7 @@ class Google_Service_Webmasters_UrlSampleDetails extends Google_Collection
   }
 }
 
-class Google_Service_Webmasters_WmxSite extends Google_Model
+class Appointments_Google_Service_Webmasters_WmxSite extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1072,12 +1072,12 @@ class Google_Service_Webmasters_WmxSite extends Google_Model
   }
 }
 
-class Google_Service_Webmasters_WmxSitemap extends Google_Collection
+class Appointments_Google_Service_Webmasters_WmxSitemap extends Appointments_Google_Collection
 {
   protected $collection_key = 'contents';
   protected $internal_gapi_mappings = array(
   );
-  protected $contentsType = 'Google_Service_Webmasters_WmxSitemapContent';
+  protected $contentsType = 'Appointments_Google_Service_Webmasters_WmxSitemapContent';
   protected $contentsDataType = 'array';
   public $errors;
   public $isPending;
@@ -1163,7 +1163,7 @@ class Google_Service_Webmasters_WmxSitemap extends Google_Collection
   }
 }
 
-class Google_Service_Webmasters_WmxSitemapContent extends Google_Model
+class Appointments_Google_Service_Webmasters_WmxSitemapContent extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );

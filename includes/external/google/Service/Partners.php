@@ -27,7 +27,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Partners extends Google_Service
+class Appointments_Google_Service_Partners extends Appointments_Google_Service
 {
 
 
@@ -41,9 +41,9 @@ class Google_Service_Partners extends Google_Service
   /**
    * Constructs the internal representation of the Partners service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://partners.googleapis.com/';
@@ -51,7 +51,7 @@ class Google_Service_Partners extends Google_Service
     $this->version = 'v2';
     $this->serviceName = 'partners';
 
-    $this->clientMessages = new Google_Service_Partners_ClientMessages_Resource(
+    $this->clientMessages = new Appointments_Google_Service_Partners_ClientMessages_Resource(
         $this,
         $this->serviceName,
         'clientMessages',
@@ -65,7 +65,7 @@ class Google_Service_Partners extends Google_Service
           )
         )
     );
-    $this->companies = new Google_Service_Partners_Companies_Resource(
+    $this->companies = new Appointments_Google_Service_Partners_Companies_Resource(
         $this,
         $this->serviceName,
         'companies',
@@ -236,7 +236,7 @@ class Google_Service_Partners extends Google_Service
           )
         )
     );
-    $this->companies_leads = new Google_Service_Partners_CompaniesLeads_Resource(
+    $this->companies_leads = new Appointments_Google_Service_Partners_CompaniesLeads_Resource(
         $this,
         $this->serviceName,
         'leads',
@@ -256,7 +256,7 @@ class Google_Service_Partners extends Google_Service
           )
         )
     );
-    $this->userEvents = new Google_Service_Partners_UserEvents_Resource(
+    $this->userEvents = new Appointments_Google_Service_Partners_UserEvents_Resource(
         $this,
         $this->serviceName,
         'userEvents',
@@ -270,7 +270,7 @@ class Google_Service_Partners extends Google_Service
           )
         )
     );
-    $this->userStates = new Google_Service_Partners_UserStates_Resource(
+    $this->userStates = new Appointments_Google_Service_Partners_UserStates_Resource(
         $this,
         $this->serviceName,
         'userStates',
@@ -322,11 +322,11 @@ class Google_Service_Partners extends Google_Service
  * The "clientMessages" collection of methods.
  * Typical usage is:
  *  <code>
- *   $partnersService = new Google_Service_Partners(...);
+ *   $partnersService = new Appointments_Google_Service_Partners(...);
  *   $clientMessages = $partnersService->clientMessages;
  *  </code>
  */
-class Google_Service_Partners_ClientMessages_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Partners_ClientMessages_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -334,15 +334,15 @@ class Google_Service_Partners_ClientMessages_Resource extends Google_Service_Res
    * `Profile page is running slow`, `More than 500 users have accessed this
    * result.`, etc. (clientMessages.log)
    *
-   * @param Google_LogMessageRequest $postBody
+   * @param Appointments_Google_LogMessageRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Partners_LogMessageResponse
+   * @return Appointments_Google_Service_Partners_LogMessageResponse
    */
-  public function log(Google_Service_Partners_LogMessageRequest $postBody, $optParams = array())
+  public function log(Appointments_Google_Service_Partners_LogMessageRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('log', array($params), "Google_Service_Partners_LogMessageResponse");
+    return $this->call('log', array($params), "Appointments_Google_Service_Partners_LogMessageResponse");
   }
 }
 
@@ -350,11 +350,11 @@ class Google_Service_Partners_ClientMessages_Resource extends Google_Service_Res
  * The "companies" collection of methods.
  * Typical usage is:
  *  <code>
- *   $partnersService = new Google_Service_Partners(...);
+ *   $partnersService = new Appointments_Google_Service_Partners(...);
  *   $companies = $partnersService->companies;
  *  </code>
  */
-class Google_Service_Partners_Companies_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Partners_Companies_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -391,13 +391,13 @@ class Google_Service_Partners_Companies_Resource extends Google_Service_Resource
    * @opt_param string address The address to use for sorting the company's
    * addresses by proximity. If not given, the geo-located address of the request
    * is used. Used when order_by is set.
-   * @return Google_Service_Partners_GetCompanyResponse
+   * @return Appointments_Google_Service_Partners_GetCompanyResponse
    */
   public function get($companyId, $optParams = array())
   {
     $params = array('companyId' => $companyId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Partners_GetCompanyResponse");
+    return $this->call('get', array($params), "Appointments_Google_Service_Partners_GetCompanyResponse");
   }
 
   /**
@@ -466,13 +466,13 @@ class Google_Service_Partners_Companies_Resource extends Google_Service_Resource
    * Search to get companies.
    * @opt_param string websiteUrl Website URL that will help to find a better
    * matched company. .
-   * @return Google_Service_Partners_ListCompaniesResponse
+   * @return Appointments_Google_Service_Partners_ListCompaniesResponse
    */
   public function listCompanies($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Partners_ListCompaniesResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Partners_ListCompaniesResponse");
   }
 }
 
@@ -480,26 +480,26 @@ class Google_Service_Partners_Companies_Resource extends Google_Service_Resource
  * The "leads" collection of methods.
  * Typical usage is:
  *  <code>
- *   $partnersService = new Google_Service_Partners(...);
+ *   $partnersService = new Appointments_Google_Service_Partners(...);
  *   $leads = $partnersService->leads;
  *  </code>
  */
-class Google_Service_Partners_CompaniesLeads_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Partners_CompaniesLeads_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
    * Creates an advertiser lead for the given company ID. (leads.create)
    *
    * @param string $companyId The ID of the company to contact.
-   * @param Google_CreateLeadRequest $postBody
+   * @param Appointments_Google_CreateLeadRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Partners_CreateLeadResponse
+   * @return Appointments_Google_Service_Partners_CreateLeadResponse
    */
-  public function create($companyId, Google_Service_Partners_CreateLeadRequest $postBody, $optParams = array())
+  public function create($companyId, Appointments_Google_Service_Partners_CreateLeadRequest $postBody, $optParams = array())
   {
     $params = array('companyId' => $companyId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_Partners_CreateLeadResponse");
+    return $this->call('create', array($params), "Appointments_Google_Service_Partners_CreateLeadResponse");
   }
 }
 
@@ -507,25 +507,25 @@ class Google_Service_Partners_CompaniesLeads_Resource extends Google_Service_Res
  * The "userEvents" collection of methods.
  * Typical usage is:
  *  <code>
- *   $partnersService = new Google_Service_Partners(...);
+ *   $partnersService = new Appointments_Google_Service_Partners(...);
  *   $userEvents = $partnersService->userEvents;
  *  </code>
  */
-class Google_Service_Partners_UserEvents_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Partners_UserEvents_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
    * Logs a user event. (userEvents.log)
    *
-   * @param Google_LogUserEventRequest $postBody
+   * @param Appointments_Google_LogUserEventRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Partners_LogUserEventResponse
+   * @return Appointments_Google_Service_Partners_LogUserEventResponse
    */
-  public function log(Google_Service_Partners_LogUserEventRequest $postBody, $optParams = array())
+  public function log(Appointments_Google_Service_Partners_LogUserEventRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('log', array($params), "Google_Service_Partners_LogUserEventResponse");
+    return $this->call('log', array($params), "Appointments_Google_Service_Partners_LogUserEventResponse");
   }
 }
 
@@ -533,11 +533,11 @@ class Google_Service_Partners_UserEvents_Resource extends Google_Service_Resourc
  * The "userStates" collection of methods.
  * Typical usage is:
  *  <code>
- *   $partnersService = new Google_Service_Partners(...);
+ *   $partnersService = new Appointments_Google_Service_Partners(...);
  *   $userStates = $partnersService->userStates;
  *  </code>
  */
-class Google_Service_Partners_UserStates_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Partners_UserStates_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -561,20 +561,20 @@ class Google_Service_Partners_UserStates_Resource extends Google_Service_Resourc
    * @opt_param string requestMetadata.trafficSource.trafficSubId Second level
    * identifier to indicate where the traffic comes from. An identifier has
    * multiple letters created by a team which redirected the traffic to us.
-   * @return Google_Service_Partners_ListUserStatesResponse
+   * @return Appointments_Google_Service_Partners_ListUserStatesResponse
    */
   public function listUserStates($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Partners_ListUserStatesResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Partners_ListUserStatesResponse");
   }
 }
 
 
 
 
-class Google_Service_Partners_CertificationExamStatus extends Google_Model
+class Appointments_Google_Service_Partners_CertificationExamStatus extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -600,12 +600,12 @@ class Google_Service_Partners_CertificationExamStatus extends Google_Model
   }
 }
 
-class Google_Service_Partners_CertificationStatus extends Google_Collection
+class Appointments_Google_Service_Partners_CertificationStatus extends Appointments_Google_Collection
 {
   protected $collection_key = 'examStatuses';
   protected $internal_gapi_mappings = array(
   );
-  protected $examStatusesType = 'Google_Service_Partners_CertificationExamStatus';
+  protected $examStatusesType = 'Appointments_Google_Service_Partners_CertificationExamStatus';
   protected $examStatusesDataType = 'array';
   public $isCertified;
   public $type;
@@ -637,27 +637,27 @@ class Google_Service_Partners_CertificationStatus extends Google_Collection
   }
 }
 
-class Google_Service_Partners_Company extends Google_Collection
+class Appointments_Google_Service_Partners_Company extends Appointments_Google_Collection
 {
   protected $collection_key = 'services';
   protected $internal_gapi_mappings = array(
   );
-  protected $certificationStatusesType = 'Google_Service_Partners_CertificationStatus';
+  protected $certificationStatusesType = 'Appointments_Google_Service_Partners_CertificationStatus';
   protected $certificationStatusesDataType = 'array';
-  protected $convertedMinMonthlyBudgetType = 'Google_Service_Partners_Money';
+  protected $convertedMinMonthlyBudgetType = 'Appointments_Google_Service_Partners_Money';
   protected $convertedMinMonthlyBudgetDataType = '';
   public $id;
   public $industries;
-  protected $localizedInfosType = 'Google_Service_Partners_LocalizedCompanyInfo';
+  protected $localizedInfosType = 'Appointments_Google_Service_Partners_LocalizedCompanyInfo';
   protected $localizedInfosDataType = 'array';
-  protected $locationsType = 'Google_Service_Partners_Location';
+  protected $locationsType = 'Appointments_Google_Service_Partners_Location';
   protected $locationsDataType = 'array';
   public $name;
-  protected $originalMinMonthlyBudgetType = 'Google_Service_Partners_Money';
+  protected $originalMinMonthlyBudgetType = 'Appointments_Google_Service_Partners_Money';
   protected $originalMinMonthlyBudgetDataType = '';
-  protected $publicProfileType = 'Google_Service_Partners_PublicProfile';
+  protected $publicProfileType = 'Appointments_Google_Service_Partners_PublicProfile';
   protected $publicProfileDataType = '';
-  protected $ranksType = 'Google_Service_Partners_Rank';
+  protected $ranksType = 'Appointments_Google_Service_Partners_Rank';
   protected $ranksDataType = 'array';
   public $services;
   public $websiteUrl;
@@ -671,7 +671,7 @@ class Google_Service_Partners_Company extends Google_Collection
   {
     return $this->certificationStatuses;
   }
-  public function setConvertedMinMonthlyBudget(Google_Service_Partners_Money $convertedMinMonthlyBudget)
+  public function setConvertedMinMonthlyBudget(Appointments_Google_Service_Partners_Money $convertedMinMonthlyBudget)
   {
     $this->convertedMinMonthlyBudget = $convertedMinMonthlyBudget;
   }
@@ -719,7 +719,7 @@ class Google_Service_Partners_Company extends Google_Collection
   {
     return $this->name;
   }
-  public function setOriginalMinMonthlyBudget(Google_Service_Partners_Money $originalMinMonthlyBudget)
+  public function setOriginalMinMonthlyBudget(Appointments_Google_Service_Partners_Money $originalMinMonthlyBudget)
   {
     $this->originalMinMonthlyBudget = $originalMinMonthlyBudget;
   }
@@ -727,7 +727,7 @@ class Google_Service_Partners_Company extends Google_Collection
   {
     return $this->originalMinMonthlyBudget;
   }
-  public function setPublicProfile(Google_Service_Partners_PublicProfile $publicProfile)
+  public function setPublicProfile(Appointments_Google_Service_Partners_PublicProfile $publicProfile)
   {
     $this->publicProfile = $publicProfile;
   }
@@ -761,19 +761,19 @@ class Google_Service_Partners_Company extends Google_Collection
   }
 }
 
-class Google_Service_Partners_CreateLeadRequest extends Google_Model
+class Appointments_Google_Service_Partners_CreateLeadRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $leadType = 'Google_Service_Partners_Lead';
+  protected $leadType = 'Appointments_Google_Service_Partners_Lead';
   protected $leadDataType = '';
-  protected $recaptchaChallengeType = 'Google_Service_Partners_RecaptchaChallenge';
+  protected $recaptchaChallengeType = 'Appointments_Google_Service_Partners_RecaptchaChallenge';
   protected $recaptchaChallengeDataType = '';
-  protected $requestMetadataType = 'Google_Service_Partners_RequestMetadata';
+  protected $requestMetadataType = 'Appointments_Google_Service_Partners_RequestMetadata';
   protected $requestMetadataDataType = '';
 
 
-  public function setLead(Google_Service_Partners_Lead $lead)
+  public function setLead(Appointments_Google_Service_Partners_Lead $lead)
   {
     $this->lead = $lead;
   }
@@ -781,7 +781,7 @@ class Google_Service_Partners_CreateLeadRequest extends Google_Model
   {
     return $this->lead;
   }
-  public function setRecaptchaChallenge(Google_Service_Partners_RecaptchaChallenge $recaptchaChallenge)
+  public function setRecaptchaChallenge(Appointments_Google_Service_Partners_RecaptchaChallenge $recaptchaChallenge)
   {
     $this->recaptchaChallenge = $recaptchaChallenge;
   }
@@ -789,7 +789,7 @@ class Google_Service_Partners_CreateLeadRequest extends Google_Model
   {
     return $this->recaptchaChallenge;
   }
-  public function setRequestMetadata(Google_Service_Partners_RequestMetadata $requestMetadata)
+  public function setRequestMetadata(Appointments_Google_Service_Partners_RequestMetadata $requestMetadata)
   {
     $this->requestMetadata = $requestMetadata;
   }
@@ -799,18 +799,18 @@ class Google_Service_Partners_CreateLeadRequest extends Google_Model
   }
 }
 
-class Google_Service_Partners_CreateLeadResponse extends Google_Model
+class Appointments_Google_Service_Partners_CreateLeadResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $leadType = 'Google_Service_Partners_Lead';
+  protected $leadType = 'Appointments_Google_Service_Partners_Lead';
   protected $leadDataType = '';
   public $recaptchaStatus;
-  protected $responseMetadataType = 'Google_Service_Partners_ResponseMetadata';
+  protected $responseMetadataType = 'Appointments_Google_Service_Partners_ResponseMetadata';
   protected $responseMetadataDataType = '';
 
 
-  public function setLead(Google_Service_Partners_Lead $lead)
+  public function setLead(Appointments_Google_Service_Partners_Lead $lead)
   {
     $this->lead = $lead;
   }
@@ -826,7 +826,7 @@ class Google_Service_Partners_CreateLeadResponse extends Google_Model
   {
     return $this->recaptchaStatus;
   }
-  public function setResponseMetadata(Google_Service_Partners_ResponseMetadata $responseMetadata)
+  public function setResponseMetadata(Appointments_Google_Service_Partners_ResponseMetadata $responseMetadata)
   {
     $this->responseMetadata = $responseMetadata;
   }
@@ -836,7 +836,7 @@ class Google_Service_Partners_CreateLeadResponse extends Google_Model
   }
 }
 
-class Google_Service_Partners_DebugInfo extends Google_Model
+class Appointments_Google_Service_Partners_DebugInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -871,7 +871,7 @@ class Google_Service_Partners_DebugInfo extends Google_Model
   }
 }
 
-class Google_Service_Partners_EventData extends Google_Collection
+class Appointments_Google_Service_Partners_EventData extends Appointments_Google_Collection
 {
   protected $collection_key = 'values';
   protected $internal_gapi_mappings = array(
@@ -898,17 +898,17 @@ class Google_Service_Partners_EventData extends Google_Collection
   }
 }
 
-class Google_Service_Partners_GetCompanyResponse extends Google_Model
+class Appointments_Google_Service_Partners_GetCompanyResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $companyType = 'Google_Service_Partners_Company';
+  protected $companyType = 'Appointments_Google_Service_Partners_Company';
   protected $companyDataType = '';
-  protected $responseMetadataType = 'Google_Service_Partners_ResponseMetadata';
+  protected $responseMetadataType = 'Appointments_Google_Service_Partners_ResponseMetadata';
   protected $responseMetadataDataType = '';
 
 
-  public function setCompany(Google_Service_Partners_Company $company)
+  public function setCompany(Appointments_Google_Service_Partners_Company $company)
   {
     $this->company = $company;
   }
@@ -916,7 +916,7 @@ class Google_Service_Partners_GetCompanyResponse extends Google_Model
   {
     return $this->company;
   }
-  public function setResponseMetadata(Google_Service_Partners_ResponseMetadata $responseMetadata)
+  public function setResponseMetadata(Appointments_Google_Service_Partners_ResponseMetadata $responseMetadata)
   {
     $this->responseMetadata = $responseMetadata;
   }
@@ -926,7 +926,7 @@ class Google_Service_Partners_GetCompanyResponse extends Google_Model
   }
 }
 
-class Google_Service_Partners_LatLng extends Google_Model
+class Appointments_Google_Service_Partners_LatLng extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -952,7 +952,7 @@ class Google_Service_Partners_LatLng extends Google_Model
   }
 }
 
-class Google_Service_Partners_Lead extends Google_Collection
+class Appointments_Google_Service_Partners_Lead extends Appointments_Google_Collection
 {
   protected $collection_key = 'gpsMotivations';
   protected $internal_gapi_mappings = array(
@@ -963,7 +963,7 @@ class Google_Service_Partners_Lead extends Google_Collection
   public $givenName;
   public $gpsMotivations;
   public $id;
-  protected $minMonthlyBudgetType = 'Google_Service_Partners_Money';
+  protected $minMonthlyBudgetType = 'Appointments_Google_Service_Partners_Money';
   protected $minMonthlyBudgetDataType = '';
   public $phoneNumber;
   public $type;
@@ -1018,7 +1018,7 @@ class Google_Service_Partners_Lead extends Google_Collection
   {
     return $this->id;
   }
-  public function setMinMonthlyBudget(Google_Service_Partners_Money $minMonthlyBudget)
+  public function setMinMonthlyBudget(Appointments_Google_Service_Partners_Money $minMonthlyBudget)
   {
     $this->minMonthlyBudget = $minMonthlyBudget;
   }
@@ -1052,15 +1052,15 @@ class Google_Service_Partners_Lead extends Google_Collection
   }
 }
 
-class Google_Service_Partners_ListCompaniesResponse extends Google_Collection
+class Appointments_Google_Service_Partners_ListCompaniesResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'companies';
   protected $internal_gapi_mappings = array(
   );
-  protected $companiesType = 'Google_Service_Partners_Company';
+  protected $companiesType = 'Appointments_Google_Service_Partners_Company';
   protected $companiesDataType = 'array';
   public $nextPageToken;
-  protected $responseMetadataType = 'Google_Service_Partners_ResponseMetadata';
+  protected $responseMetadataType = 'Appointments_Google_Service_Partners_ResponseMetadata';
   protected $responseMetadataDataType = '';
 
 
@@ -1080,7 +1080,7 @@ class Google_Service_Partners_ListCompaniesResponse extends Google_Collection
   {
     return $this->nextPageToken;
   }
-  public function setResponseMetadata(Google_Service_Partners_ResponseMetadata $responseMetadata)
+  public function setResponseMetadata(Appointments_Google_Service_Partners_ResponseMetadata $responseMetadata)
   {
     $this->responseMetadata = $responseMetadata;
   }
@@ -1090,17 +1090,17 @@ class Google_Service_Partners_ListCompaniesResponse extends Google_Collection
   }
 }
 
-class Google_Service_Partners_ListUserStatesResponse extends Google_Collection
+class Appointments_Google_Service_Partners_ListUserStatesResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'userStates';
   protected $internal_gapi_mappings = array(
   );
-  protected $responseMetadataType = 'Google_Service_Partners_ResponseMetadata';
+  protected $responseMetadataType = 'Appointments_Google_Service_Partners_ResponseMetadata';
   protected $responseMetadataDataType = '';
   public $userStates;
 
 
-  public function setResponseMetadata(Google_Service_Partners_ResponseMetadata $responseMetadata)
+  public function setResponseMetadata(Appointments_Google_Service_Partners_ResponseMetadata $responseMetadata)
   {
     $this->responseMetadata = $responseMetadata;
   }
@@ -1118,7 +1118,7 @@ class Google_Service_Partners_ListUserStatesResponse extends Google_Collection
   }
 }
 
-class Google_Service_Partners_LocalizedCompanyInfo extends Google_Collection
+class Appointments_Google_Service_Partners_LocalizedCompanyInfo extends Appointments_Google_Collection
 {
   protected $collection_key = 'countryCodes';
   protected $internal_gapi_mappings = array(
@@ -1163,12 +1163,12 @@ class Google_Service_Partners_LocalizedCompanyInfo extends Google_Collection
   }
 }
 
-class Google_Service_Partners_Location extends Google_Model
+class Appointments_Google_Service_Partners_Location extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $address;
-  protected $latLngType = 'Google_Service_Partners_LatLng';
+  protected $latLngType = 'Appointments_Google_Service_Partners_LatLng';
   protected $latLngDataType = '';
 
 
@@ -1180,7 +1180,7 @@ class Google_Service_Partners_Location extends Google_Model
   {
     return $this->address;
   }
-  public function setLatLng(Google_Service_Partners_LatLng $latLng)
+  public function setLatLng(Appointments_Google_Service_Partners_LatLng $latLng)
   {
     $this->latLng = $latLng;
   }
@@ -1190,14 +1190,14 @@ class Google_Service_Partners_Location extends Google_Model
   }
 }
 
-class Google_Service_Partners_LogMessageRequest extends Google_Model
+class Appointments_Google_Service_Partners_LogMessageRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $clientInfo;
   public $details;
   public $level;
-  protected $requestMetadataType = 'Google_Service_Partners_RequestMetadata';
+  protected $requestMetadataType = 'Appointments_Google_Service_Partners_RequestMetadata';
   protected $requestMetadataDataType = '';
 
 
@@ -1225,7 +1225,7 @@ class Google_Service_Partners_LogMessageRequest extends Google_Model
   {
     return $this->level;
   }
-  public function setRequestMetadata(Google_Service_Partners_RequestMetadata $requestMetadata)
+  public function setRequestMetadata(Appointments_Google_Service_Partners_RequestMetadata $requestMetadata)
   {
     $this->requestMetadata = $requestMetadata;
   }
@@ -1235,15 +1235,15 @@ class Google_Service_Partners_LogMessageRequest extends Google_Model
   }
 }
 
-class Google_Service_Partners_LogMessageResponse extends Google_Model
+class Appointments_Google_Service_Partners_LogMessageResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $responseMetadataType = 'Google_Service_Partners_ResponseMetadata';
+  protected $responseMetadataType = 'Appointments_Google_Service_Partners_ResponseMetadata';
   protected $responseMetadataDataType = '';
 
 
-  public function setResponseMetadata(Google_Service_Partners_ResponseMetadata $responseMetadata)
+  public function setResponseMetadata(Appointments_Google_Service_Partners_ResponseMetadata $responseMetadata)
   {
     $this->responseMetadata = $responseMetadata;
   }
@@ -1253,19 +1253,19 @@ class Google_Service_Partners_LogMessageResponse extends Google_Model
   }
 }
 
-class Google_Service_Partners_LogUserEventRequest extends Google_Collection
+class Appointments_Google_Service_Partners_LogUserEventRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'eventDatas';
   protected $internal_gapi_mappings = array(
   );
   public $eventAction;
   public $eventCategory;
-  protected $eventDatasType = 'Google_Service_Partners_EventData';
+  protected $eventDatasType = 'Appointments_Google_Service_Partners_EventData';
   protected $eventDatasDataType = 'array';
   public $eventScope;
-  protected $leadType = 'Google_Service_Partners_Lead';
+  protected $leadType = 'Appointments_Google_Service_Partners_Lead';
   protected $leadDataType = '';
-  protected $requestMetadataType = 'Google_Service_Partners_RequestMetadata';
+  protected $requestMetadataType = 'Appointments_Google_Service_Partners_RequestMetadata';
   protected $requestMetadataDataType = '';
   public $url;
 
@@ -1302,7 +1302,7 @@ class Google_Service_Partners_LogUserEventRequest extends Google_Collection
   {
     return $this->eventScope;
   }
-  public function setLead(Google_Service_Partners_Lead $lead)
+  public function setLead(Appointments_Google_Service_Partners_Lead $lead)
   {
     $this->lead = $lead;
   }
@@ -1310,7 +1310,7 @@ class Google_Service_Partners_LogUserEventRequest extends Google_Collection
   {
     return $this->lead;
   }
-  public function setRequestMetadata(Google_Service_Partners_RequestMetadata $requestMetadata)
+  public function setRequestMetadata(Appointments_Google_Service_Partners_RequestMetadata $requestMetadata)
   {
     $this->requestMetadata = $requestMetadata;
   }
@@ -1328,15 +1328,15 @@ class Google_Service_Partners_LogUserEventRequest extends Google_Collection
   }
 }
 
-class Google_Service_Partners_LogUserEventResponse extends Google_Model
+class Appointments_Google_Service_Partners_LogUserEventResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $responseMetadataType = 'Google_Service_Partners_ResponseMetadata';
+  protected $responseMetadataType = 'Appointments_Google_Service_Partners_ResponseMetadata';
   protected $responseMetadataDataType = '';
 
 
-  public function setResponseMetadata(Google_Service_Partners_ResponseMetadata $responseMetadata)
+  public function setResponseMetadata(Appointments_Google_Service_Partners_ResponseMetadata $responseMetadata)
   {
     $this->responseMetadata = $responseMetadata;
   }
@@ -1346,7 +1346,7 @@ class Google_Service_Partners_LogUserEventResponse extends Google_Model
   }
 }
 
-class Google_Service_Partners_Money extends Google_Model
+class Appointments_Google_Service_Partners_Money extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1381,7 +1381,7 @@ class Google_Service_Partners_Money extends Google_Model
   }
 }
 
-class Google_Service_Partners_PublicProfile extends Google_Model
+class Appointments_Google_Service_Partners_PublicProfile extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1425,7 +1425,7 @@ class Google_Service_Partners_PublicProfile extends Google_Model
   }
 }
 
-class Google_Service_Partners_Rank extends Google_Model
+class Appointments_Google_Service_Partners_Rank extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1451,7 +1451,7 @@ class Google_Service_Partners_Rank extends Google_Model
   }
 }
 
-class Google_Service_Partners_RecaptchaChallenge extends Google_Model
+class Appointments_Google_Service_Partners_RecaptchaChallenge extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1477,7 +1477,7 @@ class Google_Service_Partners_RecaptchaChallenge extends Google_Model
   }
 }
 
-class Google_Service_Partners_RequestMetadata extends Google_Collection
+class Appointments_Google_Service_Partners_RequestMetadata extends Appointments_Google_Collection
 {
   protected $collection_key = 'experimentIds';
   protected $internal_gapi_mappings = array(
@@ -1485,9 +1485,9 @@ class Google_Service_Partners_RequestMetadata extends Google_Collection
   public $experimentIds;
   public $locale;
   public $partnersSessionId;
-  protected $trafficSourceType = 'Google_Service_Partners_TrafficSource';
+  protected $trafficSourceType = 'Appointments_Google_Service_Partners_TrafficSource';
   protected $trafficSourceDataType = '';
-  protected $userOverridesType = 'Google_Service_Partners_UserOverrides';
+  protected $userOverridesType = 'Appointments_Google_Service_Partners_UserOverrides';
   protected $userOverridesDataType = '';
 
 
@@ -1515,7 +1515,7 @@ class Google_Service_Partners_RequestMetadata extends Google_Collection
   {
     return $this->partnersSessionId;
   }
-  public function setTrafficSource(Google_Service_Partners_TrafficSource $trafficSource)
+  public function setTrafficSource(Appointments_Google_Service_Partners_TrafficSource $trafficSource)
   {
     $this->trafficSource = $trafficSource;
   }
@@ -1523,7 +1523,7 @@ class Google_Service_Partners_RequestMetadata extends Google_Collection
   {
     return $this->trafficSource;
   }
-  public function setUserOverrides(Google_Service_Partners_UserOverrides $userOverrides)
+  public function setUserOverrides(Appointments_Google_Service_Partners_UserOverrides $userOverrides)
   {
     $this->userOverrides = $userOverrides;
   }
@@ -1533,15 +1533,15 @@ class Google_Service_Partners_RequestMetadata extends Google_Collection
   }
 }
 
-class Google_Service_Partners_ResponseMetadata extends Google_Model
+class Appointments_Google_Service_Partners_ResponseMetadata extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $debugInfoType = 'Google_Service_Partners_DebugInfo';
+  protected $debugInfoType = 'Appointments_Google_Service_Partners_DebugInfo';
   protected $debugInfoDataType = '';
 
 
-  public function setDebugInfo(Google_Service_Partners_DebugInfo $debugInfo)
+  public function setDebugInfo(Appointments_Google_Service_Partners_DebugInfo $debugInfo)
   {
     $this->debugInfo = $debugInfo;
   }
@@ -1551,7 +1551,7 @@ class Google_Service_Partners_ResponseMetadata extends Google_Model
   }
 }
 
-class Google_Service_Partners_TrafficSource extends Google_Model
+class Appointments_Google_Service_Partners_TrafficSource extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1577,7 +1577,7 @@ class Google_Service_Partners_TrafficSource extends Google_Model
   }
 }
 
-class Google_Service_Partners_UserOverrides extends Google_Model
+class Appointments_Google_Service_Partners_UserOverrides extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-if (!class_exists('Google_Client')) {
+if (!class_exists('Appointments_Google_Client')) {
   require_once dirname(__FILE__) . '/../autoload.php';
 }
 
@@ -24,7 +24,7 @@ if (!class_exists('Google_Client')) {
  *
  * @author Brian Eaton <beaton@google.com>
  */
-class Google_Auth_LoginTicket
+class Appointments_Google_Auth_LoginTicket
 {
   const USER_ATTR = "sub";
 
@@ -48,7 +48,7 @@ class Google_Auth_LoginTicket
 
   /**
    * Returns the numeric identifier for the user.
-   * @throws Google_Auth_Exception
+   * @throws Appointments_Google_Auth_Exception
    * @return
    */
   public function getUserId()
@@ -56,7 +56,7 @@ class Google_Auth_LoginTicket
     if (array_key_exists(self::USER_ATTR, $this->payload)) {
       return $this->payload[self::USER_ATTR];
     }
-    throw new Google_Auth_Exception("No user_id in token");
+    throw new Appointments_Google_Auth_Exception("No user_id in token");
   }
 
   /**

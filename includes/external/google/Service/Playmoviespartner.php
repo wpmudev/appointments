@@ -26,7 +26,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Playmoviespartner extends Google_Service
+class Appointments_Google_Service_Playmoviespartner extends Appointments_Google_Service
 {
   /** View the digital assets you publish on Google Play Movies and TV. */
   const PLAYMOVIES_PARTNER_READONLY =
@@ -42,9 +42,9 @@ class Google_Service_Playmoviespartner extends Google_Service
   /**
    * Constructs the internal representation of the Playmoviespartner service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://playmoviespartner.googleapis.com/';
@@ -52,7 +52,7 @@ class Google_Service_Playmoviespartner extends Google_Service
     $this->version = 'v1';
     $this->serviceName = 'playmoviespartner';
 
-    $this->accounts_avails = new Google_Service_Playmoviespartner_AccountsAvails_Resource(
+    $this->accounts_avails = new Appointments_Google_Service_Playmoviespartner_AccountsAvails_Resource(
         $this,
         $this->serviceName,
         'avails',
@@ -108,7 +108,7 @@ class Google_Service_Playmoviespartner extends Google_Service
           )
         )
     );
-    $this->accounts_experienceLocales = new Google_Service_Playmoviespartner_AccountsExperienceLocales_Resource(
+    $this->accounts_experienceLocales = new Appointments_Google_Service_Playmoviespartner_AccountsExperienceLocales_Resource(
         $this,
         $this->serviceName,
         'experienceLocales',
@@ -182,7 +182,7 @@ class Google_Service_Playmoviespartner extends Google_Service
           )
         )
     );
-    $this->accounts_orders = new Google_Service_Playmoviespartner_AccountsOrders_Resource(
+    $this->accounts_orders = new Appointments_Google_Service_Playmoviespartner_AccountsOrders_Resource(
         $this,
         $this->serviceName,
         'orders',
@@ -248,7 +248,7 @@ class Google_Service_Playmoviespartner extends Google_Service
           )
         )
     );
-    $this->accounts_storeInfos = new Google_Service_Playmoviespartner_AccountsStoreInfos_Resource(
+    $this->accounts_storeInfos = new Appointments_Google_Service_Playmoviespartner_AccountsStoreInfos_Resource(
         $this,
         $this->serviceName,
         'storeInfos',
@@ -304,7 +304,7 @@ class Google_Service_Playmoviespartner extends Google_Service
           )
         )
     );
-    $this->accounts_storeInfos_country = new Google_Service_Playmoviespartner_AccountsStoreInfosCountry_Resource(
+    $this->accounts_storeInfos_country = new Appointments_Google_Service_Playmoviespartner_AccountsStoreInfosCountry_Resource(
         $this,
         $this->serviceName,
         'country',
@@ -342,11 +342,11 @@ class Google_Service_Playmoviespartner extends Google_Service
  * The "accounts" collection of methods.
  * Typical usage is:
  *  <code>
- *   $playmoviespartnerService = new Google_Service_Playmoviespartner(...);
+ *   $playmoviespartnerService = new Appointments_Google_Service_Playmoviespartner(...);
  *   $accounts = $playmoviespartnerService->accounts;
  *  </code>
  */
-class Google_Service_Playmoviespartner_Accounts_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Playmoviespartner_Accounts_Resource extends Appointments_Google_Service_Resource
 {
 }
 
@@ -354,11 +354,11 @@ class Google_Service_Playmoviespartner_Accounts_Resource extends Google_Service_
  * The "avails" collection of methods.
  * Typical usage is:
  *  <code>
- *   $playmoviespartnerService = new Google_Service_Playmoviespartner(...);
+ *   $playmoviespartnerService = new Appointments_Google_Service_Playmoviespartner(...);
  *   $avails = $playmoviespartnerService->avails;
  *  </code>
  */
-class Google_Service_Playmoviespartner_AccountsAvails_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Playmoviespartner_AccountsAvails_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -386,24 +386,24 @@ class Google_Service_Playmoviespartner_AccountsAvails_Resource extends Google_Se
    * specific custom id.
    * @opt_param string videoIds Filter Avails that match any of the given
    * `video_id`s.
-   * @return Google_Service_Playmoviespartner_ListAvailsResponse
+   * @return Appointments_Google_Service_Playmoviespartner_ListAvailsResponse
    */
   public function listAccountsAvails($accountId, $optParams = array())
   {
     $params = array('accountId' => $accountId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Playmoviespartner_ListAvailsResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Playmoviespartner_ListAvailsResponse");
   }
 }
 /**
  * The "experienceLocales" collection of methods.
  * Typical usage is:
  *  <code>
- *   $playmoviespartnerService = new Google_Service_Playmoviespartner(...);
+ *   $playmoviespartnerService = new Appointments_Google_Service_Playmoviespartner(...);
  *   $experienceLocales = $playmoviespartnerService->experienceLocales;
  *  </code>
  */
-class Google_Service_Playmoviespartner_AccountsExperienceLocales_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Playmoviespartner_AccountsExperienceLocales_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -415,13 +415,13 @@ class Google_Service_Playmoviespartner_AccountsExperienceLocales_Resource extend
    * about this field.
    * @param string $elId REQUIRED. ExperienceLocale ID, as defined by Google.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Playmoviespartner_ExperienceLocale
+   * @return Appointments_Google_Service_Playmoviespartner_ExperienceLocale
    */
   public function get($accountId, $elId, $optParams = array())
   {
     $params = array('accountId' => $accountId, 'elId' => $elId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Playmoviespartner_ExperienceLocale");
+    return $this->call('get', array($params), "Appointments_Google_Service_Playmoviespartner_ExperienceLocale");
   }
 
   /**
@@ -450,24 +450,24 @@ class Google_Service_Playmoviespartner_AccountsExperienceLocales_Resource extend
    * insensitive, partner-specific custom id.
    * @opt_param string altCutId Filter ExperienceLocales that match a case-
    * insensitive, partner-specific Alternative Cut ID.
-   * @return Google_Service_Playmoviespartner_ListExperienceLocalesResponse
+   * @return Appointments_Google_Service_Playmoviespartner_ListExperienceLocalesResponse
    */
   public function listAccountsExperienceLocales($accountId, $optParams = array())
   {
     $params = array('accountId' => $accountId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Playmoviespartner_ListExperienceLocalesResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Playmoviespartner_ListExperienceLocalesResponse");
   }
 }
 /**
  * The "orders" collection of methods.
  * Typical usage is:
  *  <code>
- *   $playmoviespartnerService = new Google_Service_Playmoviespartner(...);
+ *   $playmoviespartnerService = new Appointments_Google_Service_Playmoviespartner(...);
  *   $orders = $playmoviespartnerService->orders;
  *  </code>
  */
-class Google_Service_Playmoviespartner_AccountsOrders_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Playmoviespartner_AccountsOrders_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -478,13 +478,13 @@ class Google_Service_Playmoviespartner_AccountsOrders_Resource extends Google_Se
    * about this field.
    * @param string $orderId REQUIRED. Order ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Playmoviespartner_Order
+   * @return Appointments_Google_Service_Playmoviespartner_Order
    */
   public function get($accountId, $orderId, $optParams = array())
   {
     $params = array('accountId' => $accountId, 'orderId' => $orderId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Playmoviespartner_Order");
+    return $this->call('get', array($params), "Appointments_Google_Service_Playmoviespartner_Order");
   }
 
   /**
@@ -508,24 +508,24 @@ class Google_Service_Playmoviespartner_AccountsOrders_Resource extends Google_Se
    * @opt_param string status Filter Orders that match one of the given status.
    * @opt_param string customId Filter Orders that match a case-insensitive,
    * partner-specific custom id.
-   * @return Google_Service_Playmoviespartner_ListOrdersResponse
+   * @return Appointments_Google_Service_Playmoviespartner_ListOrdersResponse
    */
   public function listAccountsOrders($accountId, $optParams = array())
   {
     $params = array('accountId' => $accountId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Playmoviespartner_ListOrdersResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Playmoviespartner_ListOrdersResponse");
   }
 }
 /**
  * The "storeInfos" collection of methods.
  * Typical usage is:
  *  <code>
- *   $playmoviespartnerService = new Google_Service_Playmoviespartner(...);
+ *   $playmoviespartnerService = new Appointments_Google_Service_Playmoviespartner(...);
  *   $storeInfos = $playmoviespartnerService->storeInfos;
  *  </code>
  */
-class Google_Service_Playmoviespartner_AccountsStoreInfos_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Playmoviespartner_AccountsStoreInfos_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -554,13 +554,13 @@ class Google_Service_Playmoviespartner_AccountsStoreInfos_Resource extends Googl
    * substring of the default name.
    * @opt_param string videoIds Filter StoreInfos that match any of the given
    * `video_id`s.
-   * @return Google_Service_Playmoviespartner_ListStoreInfosResponse
+   * @return Appointments_Google_Service_Playmoviespartner_ListStoreInfosResponse
    */
   public function listAccountsStoreInfos($accountId, $optParams = array())
   {
     $params = array('accountId' => $accountId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Playmoviespartner_ListStoreInfosResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Playmoviespartner_ListStoreInfosResponse");
   }
 }
 
@@ -568,11 +568,11 @@ class Google_Service_Playmoviespartner_AccountsStoreInfos_Resource extends Googl
  * The "country" collection of methods.
  * Typical usage is:
  *  <code>
- *   $playmoviespartnerService = new Google_Service_Playmoviespartner(...);
+ *   $playmoviespartnerService = new Appointments_Google_Service_Playmoviespartner(...);
  *   $country = $playmoviespartnerService->country;
  *  </code>
  */
-class Google_Service_Playmoviespartner_AccountsStoreInfosCountry_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Playmoviespartner_AccountsStoreInfosCountry_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -585,20 +585,20 @@ class Google_Service_Playmoviespartner_AccountsStoreInfosCountry_Resource extend
    * @param string $videoId REQUIRED. Video ID.
    * @param string $country REQUIRED. Edit country.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Playmoviespartner_StoreInfo
+   * @return Appointments_Google_Service_Playmoviespartner_StoreInfo
    */
   public function get($accountId, $videoId, $country, $optParams = array())
   {
     $params = array('accountId' => $accountId, 'videoId' => $videoId, 'country' => $country);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Playmoviespartner_StoreInfo");
+    return $this->call('get', array($params), "Appointments_Google_Service_Playmoviespartner_StoreInfo");
   }
 }
 
 
 
 
-class Google_Service_Playmoviespartner_Avail extends Google_Collection
+class Appointments_Google_Service_Playmoviespartner_Avail extends Appointments_Google_Collection
 {
   protected $collection_key = 'pphNames';
   protected $internal_gapi_mappings = array(
@@ -895,7 +895,7 @@ class Google_Service_Playmoviespartner_Avail extends Google_Collection
   }
 }
 
-class Google_Service_Playmoviespartner_ExperienceLocale extends Google_Collection
+class Appointments_Google_Service_Playmoviespartner_ExperienceLocale extends Appointments_Google_Collection
 {
   protected $collection_key = 'pphNames';
   protected $internal_gapi_mappings = array(
@@ -1111,12 +1111,12 @@ class Google_Service_Playmoviespartner_ExperienceLocale extends Google_Collectio
   }
 }
 
-class Google_Service_Playmoviespartner_ListAvailsResponse extends Google_Collection
+class Appointments_Google_Service_Playmoviespartner_ListAvailsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'avails';
   protected $internal_gapi_mappings = array(
   );
-  protected $availsType = 'Google_Service_Playmoviespartner_Avail';
+  protected $availsType = 'Appointments_Google_Service_Playmoviespartner_Avail';
   protected $availsDataType = 'array';
   public $nextPageToken;
 
@@ -1139,12 +1139,12 @@ class Google_Service_Playmoviespartner_ListAvailsResponse extends Google_Collect
   }
 }
 
-class Google_Service_Playmoviespartner_ListExperienceLocalesResponse extends Google_Collection
+class Appointments_Google_Service_Playmoviespartner_ListExperienceLocalesResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'experienceLocales';
   protected $internal_gapi_mappings = array(
   );
-  protected $experienceLocalesType = 'Google_Service_Playmoviespartner_ExperienceLocale';
+  protected $experienceLocalesType = 'Appointments_Google_Service_Playmoviespartner_ExperienceLocale';
   protected $experienceLocalesDataType = 'array';
   public $nextPageToken;
 
@@ -1167,13 +1167,13 @@ class Google_Service_Playmoviespartner_ListExperienceLocalesResponse extends Goo
   }
 }
 
-class Google_Service_Playmoviespartner_ListOrdersResponse extends Google_Collection
+class Appointments_Google_Service_Playmoviespartner_ListOrdersResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'orders';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $ordersType = 'Google_Service_Playmoviespartner_Order';
+  protected $ordersType = 'Appointments_Google_Service_Playmoviespartner_Order';
   protected $ordersDataType = 'array';
 
 
@@ -1195,13 +1195,13 @@ class Google_Service_Playmoviespartner_ListOrdersResponse extends Google_Collect
   }
 }
 
-class Google_Service_Playmoviespartner_ListStoreInfosResponse extends Google_Collection
+class Appointments_Google_Service_Playmoviespartner_ListStoreInfosResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'storeInfos';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $storeInfosType = 'Google_Service_Playmoviespartner_StoreInfo';
+  protected $storeInfosType = 'Appointments_Google_Service_Playmoviespartner_StoreInfo';
   protected $storeInfosDataType = 'array';
 
 
@@ -1223,7 +1223,7 @@ class Google_Service_Playmoviespartner_ListStoreInfosResponse extends Google_Col
   }
 }
 
-class Google_Service_Playmoviespartner_Order extends Google_Collection
+class Appointments_Google_Service_Playmoviespartner_Order extends Appointments_Google_Collection
 {
   protected $collection_key = 'countries';
   protected $internal_gapi_mappings = array(
@@ -1439,7 +1439,7 @@ class Google_Service_Playmoviespartner_Order extends Google_Collection
   }
 }
 
-class Google_Service_Playmoviespartner_StoreInfo extends Google_Collection
+class Appointments_Google_Service_Playmoviespartner_StoreInfo extends Appointments_Google_Collection
 {
   protected $collection_key = 'subtitles';
   protected $internal_gapi_mappings = array(

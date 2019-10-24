@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-if (!class_exists('Google_Client')) {
+if (!class_exists('Appointments_Google_Client')) {
   require_once dirname(__FILE__) . '/../autoload.php';
 }
 
@@ -24,15 +24,15 @@ if (!class_exists('Google_Client')) {
  * @author Chris Chabot <chabotc@google.com>
  *
  */
-abstract class Google_Auth_Abstract
+abstract class Appointments_Google_Auth_Abstract
 {
   /**
    * An utility function that first calls $this->auth->sign($request) and then
    * executes makeRequest() on that signed request. Used for when a request
    * should be authenticated
-   * @param Google_Http_Request $request
-   * @return Google_Http_Request $request
+   * @param Appointments_Google_Http_Request $request
+   * @return Appointments_Google_Http_Request $request
    */
-  abstract public function authenticatedRequest(Google_Http_Request $request);
-  abstract public function sign(Google_Http_Request $request);
+  abstract public function authenticatedRequest(Appointments_Google_Http_Request $request);
+  abstract public function sign(Appointments_Google_Http_Request $request);
 }

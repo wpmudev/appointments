@@ -1,15 +1,15 @@
 <?php
 
 
-class Appointments_Google_Calendar_API_Manager {
+class Appointments_Appointments_Google_Calendar_API_Manager {
 
 	/**
-	 * @var bool|Google_Client
+	 * @var bool|Appointments_Google_Client
 	 */
 	private $client = false;
 
 	/**
-	 * @var bool|Google_Service_Calendar
+	 * @var bool|Appointments_Google_Service_Calendar
 	 */
 	private $service = false;
 
@@ -35,27 +35,27 @@ class Appointments_Google_Calendar_API_Manager {
 	private $calendar = '';
 
 	public function __construct() {
-		if ( ! function_exists( 'google_api_php_client_autoload' ) ){
+		if ( ! function_exists( 'appointments_google_api_php_client_autoload' ) ){
 			include_once( appointments_plugin_dir() . 'includes/external/google/autoload.php' );
 		}
 
 		include_once( 'class-app-gcal-logger.php' );
-		$this->service = new Google_Service_Calendar( $this->get_client() );
+		$this->service = new Appointments_Google_Service_Calendar( $this->get_client() );
 	}
 
 	/**
 	 * Return the Google Client Instance
 	 *
-	 * @return Google_Client
+	 * @return Appointments_Google_Client
 	 */
 	public function get_client() {
 		if ( ! $this->client ) {
-			$this->client = new Google_Client();
+			$this->client = new Appointments_Google_Client();
 			$this->client->setApplicationName( "Appointments +" );
 			$this->client->setScopes( 'https://www.googleapis.com/auth/calendar' );
 			$this->client->setAccessType( 'offline' );
 			$this->client->setRedirectUri( 'urn:ietf:wg:oauth:2.0:oob' );
-			$this->client->setLogger( new Appointments_Google_Calendar_Logger( $this->client ) );
+			$this->client->setLogger( new Appointments_Appointments_Google_Calendar_Logger( $this->client ) );
 		}
 
 		return $this->client;
@@ -64,7 +64,7 @@ class Appointments_Google_Calendar_API_Manager {
 	/**
 	 * Return the Google Client Instance
 	 *
-	 * @return Google_Client
+	 * @return Appointments_Google_Client
 	 */
 	public function get_service() {
 		return $this->service;
@@ -239,7 +239,7 @@ class Appointments_Google_Calendar_API_Manager {
 	 *
 	 * @param string $event_id
 	 *
-	 * @return Google_Service_Calendar_Event|WP_Error
+	 * @return Appointments_Google_Service_Calendar_Event|WP_Error
 	 */
 	public function get_event( $event_id ) {
 		try {
@@ -273,7 +273,7 @@ class Appointments_Google_Calendar_API_Manager {
 	 * Update an event
 	 *
 	 * @param string $event_id
-	 * @param Google_Service_Calendar_Event $event
+	 * @param Appointments_Google_Service_Calendar_Event $event
 	 *
 	 * @return WP_Error|string
 	 */

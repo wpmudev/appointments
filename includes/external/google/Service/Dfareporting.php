@@ -26,7 +26,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Dfareporting extends Google_Service
+class Appointments_Google_Service_Dfareporting extends Appointments_Google_Service
 {
   /** View and manage DoubleClick for Advertisers reports. */
   const DFAREPORTING =
@@ -97,9 +97,9 @@ class Google_Service_Dfareporting extends Google_Service
   /**
    * Constructs the internal representation of the Dfareporting service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -107,7 +107,7 @@ class Google_Service_Dfareporting extends Google_Service
     $this->version = 'v2.4';
     $this->serviceName = 'dfareporting';
 
-    $this->accountActiveAdSummaries = new Google_Service_Dfareporting_AccountActiveAdSummaries_Resource(
+    $this->accountActiveAdSummaries = new Appointments_Google_Service_Dfareporting_AccountActiveAdSummaries_Resource(
         $this,
         $this->serviceName,
         'accountActiveAdSummaries',
@@ -132,7 +132,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->accountPermissionGroups = new Google_Service_Dfareporting_AccountPermissionGroups_Resource(
+    $this->accountPermissionGroups = new Appointments_Google_Service_Dfareporting_AccountPermissionGroups_Resource(
         $this,
         $this->serviceName,
         'accountPermissionGroups',
@@ -167,7 +167,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->accountPermissions = new Google_Service_Dfareporting_AccountPermissions_Resource(
+    $this->accountPermissions = new Appointments_Google_Service_Dfareporting_AccountPermissions_Resource(
         $this,
         $this->serviceName,
         'accountPermissions',
@@ -202,7 +202,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->accountUserProfiles = new Google_Service_Dfareporting_AccountUserProfiles_Resource(
+    $this->accountUserProfiles = new Appointments_Google_Service_Dfareporting_AccountUserProfiles_Resource(
         $this,
         $this->serviceName,
         'accountUserProfiles',
@@ -309,7 +309,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->accounts = new Google_Service_Dfareporting_Accounts_Resource(
+    $this->accounts = new Appointments_Google_Service_Dfareporting_Accounts_Resource(
         $this,
         $this->serviceName,
         'accounts',
@@ -398,7 +398,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->ads = new Google_Service_Dfareporting_Ads_Resource(
+    $this->ads = new Appointments_Google_Service_Dfareporting_Ads_Resource(
         $this,
         $this->serviceName,
         'ads',
@@ -574,7 +574,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->advertiserGroups = new Google_Service_Dfareporting_AdvertiserGroups_Resource(
+    $this->advertiserGroups = new Appointments_Google_Service_Dfareporting_AdvertiserGroups_Resource(
         $this,
         $this->serviceName,
         'advertiserGroups',
@@ -684,7 +684,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->advertisers = new Google_Service_Dfareporting_Advertisers_Resource(
+    $this->advertisers = new Appointments_Google_Service_Dfareporting_Advertisers_Resource(
         $this,
         $this->serviceName,
         'advertisers',
@@ -805,7 +805,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->browsers = new Google_Service_Dfareporting_Browsers_Resource(
+    $this->browsers = new Appointments_Google_Service_Dfareporting_Browsers_Resource(
         $this,
         $this->serviceName,
         'browsers',
@@ -825,7 +825,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->campaignCreativeAssociations = new Google_Service_Dfareporting_CampaignCreativeAssociations_Resource(
+    $this->campaignCreativeAssociations = new Appointments_Google_Service_Dfareporting_CampaignCreativeAssociations_Resource(
         $this,
         $this->serviceName,
         'campaignCreativeAssociations',
@@ -877,7 +877,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->campaigns = new Google_Service_Dfareporting_Campaigns_Resource(
+    $this->campaigns = new Appointments_Google_Service_Dfareporting_Campaigns_Resource(
         $this,
         $this->serviceName,
         'campaigns',
@@ -1013,7 +1013,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->changeLogs = new Google_Service_Dfareporting_ChangeLogs_Resource(
+    $this->changeLogs = new Appointments_Google_Service_Dfareporting_ChangeLogs_Resource(
         $this,
         $this->serviceName,
         'changeLogs',
@@ -1091,7 +1091,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->cities = new Google_Service_Dfareporting_Cities_Resource(
+    $this->cities = new Appointments_Google_Service_Dfareporting_Cities_Resource(
         $this,
         $this->serviceName,
         'cities',
@@ -1130,7 +1130,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->connectionTypes = new Google_Service_Dfareporting_ConnectionTypes_Resource(
+    $this->connectionTypes = new Appointments_Google_Service_Dfareporting_ConnectionTypes_Resource(
         $this,
         $this->serviceName,
         'connectionTypes',
@@ -1165,7 +1165,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->contentCategories = new Google_Service_Dfareporting_ContentCategories_Resource(
+    $this->contentCategories = new Appointments_Google_Service_Dfareporting_ContentCategories_Resource(
         $this,
         $this->serviceName,
         'contentCategories',
@@ -1275,7 +1275,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->countries = new Google_Service_Dfareporting_Countries_Resource(
+    $this->countries = new Appointments_Google_Service_Dfareporting_Countries_Resource(
         $this,
         $this->serviceName,
         'countries',
@@ -1310,7 +1310,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->creativeAssets = new Google_Service_Dfareporting_CreativeAssets_Resource(
+    $this->creativeAssets = new Appointments_Google_Service_Dfareporting_CreativeAssets_Resource(
         $this,
         $this->serviceName,
         'creativeAssets',
@@ -1335,7 +1335,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->creativeFieldValues = new Google_Service_Dfareporting_CreativeFieldValues_Resource(
+    $this->creativeFieldValues = new Appointments_Google_Service_Dfareporting_CreativeFieldValues_Resource(
         $this,
         $this->serviceName,
         'creativeFieldValues',
@@ -1475,7 +1475,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->creativeFields = new Google_Service_Dfareporting_CreativeFields_Resource(
+    $this->creativeFields = new Appointments_Google_Service_Dfareporting_CreativeFields_Resource(
         $this,
         $this->serviceName,
         'creativeFields',
@@ -1590,7 +1590,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->creativeGroups = new Google_Service_Dfareporting_CreativeGroups_Resource(
+    $this->creativeGroups = new Appointments_Google_Service_Dfareporting_CreativeGroups_Resource(
         $this,
         $this->serviceName,
         'creativeGroups',
@@ -1694,7 +1694,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->creatives = new Google_Service_Dfareporting_Creatives_Resource(
+    $this->creatives = new Appointments_Google_Service_Dfareporting_Creatives_Resource(
         $this,
         $this->serviceName,
         'creatives',
@@ -1834,7 +1834,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->dimensionValues = new Google_Service_Dfareporting_DimensionValues_Resource(
+    $this->dimensionValues = new Appointments_Google_Service_Dfareporting_DimensionValues_Resource(
         $this,
         $this->serviceName,
         'dimensionValues',
@@ -1862,7 +1862,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->directorySiteContacts = new Google_Service_Dfareporting_DirectorySiteContacts_Resource(
+    $this->directorySiteContacts = new Appointments_Google_Service_Dfareporting_DirectorySiteContacts_Resource(
         $this,
         $this->serviceName,
         'directorySiteContacts',
@@ -1927,7 +1927,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->directorySites = new Google_Service_Dfareporting_DirectorySites_Resource(
+    $this->directorySites = new Appointments_Google_Service_Dfareporting_DirectorySites_Resource(
         $this,
         $this->serviceName,
         'directorySites',
@@ -2025,7 +2025,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->eventTags = new Google_Service_Dfareporting_EventTags_Resource(
+    $this->eventTags = new Appointments_Google_Service_Dfareporting_EventTags_Resource(
         $this,
         $this->serviceName,
         'eventTags',
@@ -2152,7 +2152,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->files = new Google_Service_Dfareporting_Files_Resource(
+    $this->files = new Appointments_Google_Service_Dfareporting_Files_Resource(
         $this,
         $this->serviceName,
         'files',
@@ -2207,7 +2207,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->floodlightActivities = new Google_Service_Dfareporting_FloodlightActivities_Resource(
+    $this->floodlightActivities = new Appointments_Google_Service_Dfareporting_FloodlightActivities_Resource(
         $this,
         $this->serviceName,
         'floodlightActivities',
@@ -2360,7 +2360,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->floodlightActivityGroups = new Google_Service_Dfareporting_FloodlightActivityGroups_Resource(
+    $this->floodlightActivityGroups = new Appointments_Google_Service_Dfareporting_FloodlightActivityGroups_Resource(
         $this,
         $this->serviceName,
         'floodlightActivityGroups',
@@ -2467,7 +2467,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->floodlightConfigurations = new Google_Service_Dfareporting_FloodlightConfigurations_Resource(
+    $this->floodlightConfigurations = new Appointments_Google_Service_Dfareporting_FloodlightConfigurations_Resource(
         $this,
         $this->serviceName,
         'floodlightConfigurations',
@@ -2532,7 +2532,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->inventoryItems = new Google_Service_Dfareporting_InventoryItems_Resource(
+    $this->inventoryItems = new Appointments_Google_Service_Dfareporting_InventoryItems_Resource(
         $this,
         $this->serviceName,
         'inventoryItems',
@@ -2616,7 +2616,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->landingPages = new Google_Service_Dfareporting_LandingPages_Resource(
+    $this->landingPages = new Appointments_Google_Service_Dfareporting_LandingPages_Resource(
         $this,
         $this->serviceName,
         'landingPages',
@@ -2731,7 +2731,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->metros = new Google_Service_Dfareporting_Metros_Resource(
+    $this->metros = new Appointments_Google_Service_Dfareporting_Metros_Resource(
         $this,
         $this->serviceName,
         'metros',
@@ -2751,7 +2751,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->mobileCarriers = new Google_Service_Dfareporting_MobileCarriers_Resource(
+    $this->mobileCarriers = new Appointments_Google_Service_Dfareporting_MobileCarriers_Resource(
         $this,
         $this->serviceName,
         'mobileCarriers',
@@ -2786,7 +2786,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->operatingSystemVersions = new Google_Service_Dfareporting_OperatingSystemVersions_Resource(
+    $this->operatingSystemVersions = new Appointments_Google_Service_Dfareporting_OperatingSystemVersions_Resource(
         $this,
         $this->serviceName,
         'operatingSystemVersions',
@@ -2821,7 +2821,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->operatingSystems = new Google_Service_Dfareporting_OperatingSystems_Resource(
+    $this->operatingSystems = new Appointments_Google_Service_Dfareporting_OperatingSystems_Resource(
         $this,
         $this->serviceName,
         'operatingSystems',
@@ -2856,7 +2856,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->orderDocuments = new Google_Service_Dfareporting_OrderDocuments_Resource(
+    $this->orderDocuments = new Appointments_Google_Service_Dfareporting_OrderDocuments_Resource(
         $this,
         $this->serviceName,
         'orderDocuments',
@@ -2940,7 +2940,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->orders = new Google_Service_Dfareporting_Orders_Resource(
+    $this->orders = new Appointments_Google_Service_Dfareporting_Orders_Resource(
         $this,
         $this->serviceName,
         'orders',
@@ -3015,7 +3015,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->placementGroups = new Google_Service_Dfareporting_PlacementGroups_Resource(
+    $this->placementGroups = new Appointments_Google_Service_Dfareporting_PlacementGroups_Resource(
         $this,
         $this->serviceName,
         'placementGroups',
@@ -3169,7 +3169,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->placementStrategies = new Google_Service_Dfareporting_PlacementStrategies_Resource(
+    $this->placementStrategies = new Appointments_Google_Service_Dfareporting_PlacementStrategies_Resource(
         $this,
         $this->serviceName,
         'placementStrategies',
@@ -3279,7 +3279,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->placements = new Google_Service_Dfareporting_Placements_Resource(
+    $this->placements = new Appointments_Google_Service_Dfareporting_Placements_Resource(
         $this,
         $this->serviceName,
         'placements',
@@ -3472,7 +3472,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->platformTypes = new Google_Service_Dfareporting_PlatformTypes_Resource(
+    $this->platformTypes = new Appointments_Google_Service_Dfareporting_PlatformTypes_Resource(
         $this,
         $this->serviceName,
         'platformTypes',
@@ -3507,7 +3507,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->postalCodes = new Google_Service_Dfareporting_PostalCodes_Resource(
+    $this->postalCodes = new Appointments_Google_Service_Dfareporting_PostalCodes_Resource(
         $this,
         $this->serviceName,
         'postalCodes',
@@ -3542,7 +3542,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->projects = new Google_Service_Dfareporting_Projects_Resource(
+    $this->projects = new Appointments_Google_Service_Dfareporting_Projects_Resource(
         $this,
         $this->serviceName,
         'projects',
@@ -3607,7 +3607,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->regions = new Google_Service_Dfareporting_Regions_Resource(
+    $this->regions = new Appointments_Google_Service_Dfareporting_Regions_Resource(
         $this,
         $this->serviceName,
         'regions',
@@ -3627,7 +3627,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->remarketingListShares = new Google_Service_Dfareporting_RemarketingListShares_Resource(
+    $this->remarketingListShares = new Appointments_Google_Service_Dfareporting_RemarketingListShares_Resource(
         $this,
         $this->serviceName,
         'remarketingListShares',
@@ -3677,7 +3677,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->remarketingLists = new Google_Service_Dfareporting_RemarketingLists_Resource(
+    $this->remarketingLists = new Appointments_Google_Service_Dfareporting_RemarketingLists_Resource(
         $this,
         $this->serviceName,
         'remarketingLists',
@@ -3780,7 +3780,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->reports = new Google_Service_Dfareporting_Reports_Resource(
+    $this->reports = new Appointments_Google_Service_Dfareporting_Reports_Resource(
         $this,
         $this->serviceName,
         'reports',
@@ -3909,7 +3909,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->reports_compatibleFields = new Google_Service_Dfareporting_ReportsCompatibleFields_Resource(
+    $this->reports_compatibleFields = new Appointments_Google_Service_Dfareporting_ReportsCompatibleFields_Resource(
         $this,
         $this->serviceName,
         'compatibleFields',
@@ -3929,7 +3929,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->reports_files = new Google_Service_Dfareporting_ReportsFiles_Resource(
+    $this->reports_files = new Appointments_Google_Service_Dfareporting_ReportsFiles_Resource(
         $this,
         $this->serviceName,
         'files',
@@ -3990,7 +3990,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->sites = new Google_Service_Dfareporting_Sites_Resource(
+    $this->sites = new Appointments_Google_Service_Dfareporting_Sites_Resource(
         $this,
         $this->serviceName,
         'sites',
@@ -4123,7 +4123,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->sizes = new Google_Service_Dfareporting_Sizes_Resource(
+    $this->sizes = new Appointments_Google_Service_Dfareporting_Sizes_Resource(
         $this,
         $this->serviceName,
         'sizes',
@@ -4185,7 +4185,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->subaccounts = new Google_Service_Dfareporting_Subaccounts_Resource(
+    $this->subaccounts = new Appointments_Google_Service_Dfareporting_Subaccounts_Resource(
         $this,
         $this->serviceName,
         'subaccounts',
@@ -4280,7 +4280,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->targetableRemarketingLists = new Google_Service_Dfareporting_TargetableRemarketingLists_Resource(
+    $this->targetableRemarketingLists = new Appointments_Google_Service_Dfareporting_TargetableRemarketingLists_Resource(
         $this,
         $this->serviceName,
         'targetableRemarketingLists',
@@ -4344,7 +4344,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->userProfiles = new Google_Service_Dfareporting_UserProfiles_Resource(
+    $this->userProfiles = new Appointments_Google_Service_Dfareporting_UserProfiles_Resource(
         $this,
         $this->serviceName,
         'userProfiles',
@@ -4368,7 +4368,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->userRolePermissionGroups = new Google_Service_Dfareporting_UserRolePermissionGroups_Resource(
+    $this->userRolePermissionGroups = new Appointments_Google_Service_Dfareporting_UserRolePermissionGroups_Resource(
         $this,
         $this->serviceName,
         'userRolePermissionGroups',
@@ -4403,7 +4403,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->userRolePermissions = new Google_Service_Dfareporting_UserRolePermissions_Resource(
+    $this->userRolePermissions = new Appointments_Google_Service_Dfareporting_UserRolePermissions_Resource(
         $this,
         $this->serviceName,
         'userRolePermissions',
@@ -4443,7 +4443,7 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
-    $this->userRoles = new Google_Service_Dfareporting_UserRoles_Resource(
+    $this->userRoles = new Appointments_Google_Service_Dfareporting_UserRoles_Resource(
         $this,
         $this->serviceName,
         'userRoles',
@@ -4569,11 +4569,11 @@ class Google_Service_Dfareporting extends Google_Service
  * The "accountActiveAdSummaries" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $accountActiveAdSummaries = $dfareportingService->accountActiveAdSummaries;
  *  </code>
  */
-class Google_Service_Dfareporting_AccountActiveAdSummaries_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_AccountActiveAdSummaries_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -4583,13 +4583,13 @@ class Google_Service_Dfareporting_AccountActiveAdSummaries_Resource extends Goog
    * @param string $profileId User profile ID associated with this request.
    * @param string $summaryAccountId Account ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_AccountActiveAdSummary
+   * @return Appointments_Google_Service_Dfareporting_AccountActiveAdSummary
    */
   public function get($profileId, $summaryAccountId, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'summaryAccountId' => $summaryAccountId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_AccountActiveAdSummary");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_AccountActiveAdSummary");
   }
 }
 
@@ -4597,11 +4597,11 @@ class Google_Service_Dfareporting_AccountActiveAdSummaries_Resource extends Goog
  * The "accountPermissionGroups" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $accountPermissionGroups = $dfareportingService->accountPermissionGroups;
  *  </code>
  */
-class Google_Service_Dfareporting_AccountPermissionGroups_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_AccountPermissionGroups_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -4610,13 +4610,13 @@ class Google_Service_Dfareporting_AccountPermissionGroups_Resource extends Googl
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Account permission group ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_AccountPermissionGroup
+   * @return Appointments_Google_Service_Dfareporting_AccountPermissionGroup
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_AccountPermissionGroup");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_AccountPermissionGroup");
   }
 
   /**
@@ -4625,13 +4625,13 @@ class Google_Service_Dfareporting_AccountPermissionGroups_Resource extends Googl
    *
    * @param string $profileId User profile ID associated with this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_AccountPermissionGroupsListResponse
+   * @return Appointments_Google_Service_Dfareporting_AccountPermissionGroupsListResponse
    */
   public function listAccountPermissionGroups($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_AccountPermissionGroupsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_AccountPermissionGroupsListResponse");
   }
 }
 
@@ -4639,11 +4639,11 @@ class Google_Service_Dfareporting_AccountPermissionGroups_Resource extends Googl
  * The "accountPermissions" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $accountPermissions = $dfareportingService->accountPermissions;
  *  </code>
  */
-class Google_Service_Dfareporting_AccountPermissions_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_AccountPermissions_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -4652,13 +4652,13 @@ class Google_Service_Dfareporting_AccountPermissions_Resource extends Google_Ser
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Account permission ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_AccountPermission
+   * @return Appointments_Google_Service_Dfareporting_AccountPermission
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_AccountPermission");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_AccountPermission");
   }
 
   /**
@@ -4667,13 +4667,13 @@ class Google_Service_Dfareporting_AccountPermissions_Resource extends Google_Ser
    *
    * @param string $profileId User profile ID associated with this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_AccountPermissionsListResponse
+   * @return Appointments_Google_Service_Dfareporting_AccountPermissionsListResponse
    */
   public function listAccountPermissions($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_AccountPermissionsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_AccountPermissionsListResponse");
   }
 }
 
@@ -4681,11 +4681,11 @@ class Google_Service_Dfareporting_AccountPermissions_Resource extends Google_Ser
  * The "accountUserProfiles" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $accountUserProfiles = $dfareportingService->accountUserProfiles;
  *  </code>
  */
-class Google_Service_Dfareporting_AccountUserProfiles_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_AccountUserProfiles_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -4694,28 +4694,28 @@ class Google_Service_Dfareporting_AccountUserProfiles_Resource extends Google_Se
    * @param string $profileId User profile ID associated with this request.
    * @param string $id User profile ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_AccountUserProfile
+   * @return Appointments_Google_Service_Dfareporting_AccountUserProfile
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_AccountUserProfile");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_AccountUserProfile");
   }
 
   /**
    * Inserts a new account user profile. (accountUserProfiles.insert)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_AccountUserProfile $postBody
+   * @param Appointments_Google_AccountUserProfile $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_AccountUserProfile
+   * @return Appointments_Google_Service_Dfareporting_AccountUserProfile
    */
-  public function insert($profileId, Google_Service_Dfareporting_AccountUserProfile $postBody, $optParams = array())
+  public function insert($profileId, Appointments_Google_Service_Dfareporting_AccountUserProfile $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_AccountUserProfile");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_AccountUserProfile");
   }
 
   /**
@@ -4743,13 +4743,13 @@ class Google_Service_Dfareporting_AccountUserProfiles_Resource extends Google_Se
    * subaccount ID.
    * @opt_param string userRoleId Select only user profiles with the specified
    * user role ID.
-   * @return Google_Service_Dfareporting_AccountUserProfilesListResponse
+   * @return Appointments_Google_Service_Dfareporting_AccountUserProfilesListResponse
    */
   public function listAccountUserProfiles($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_AccountUserProfilesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_AccountUserProfilesListResponse");
   }
 
   /**
@@ -4758,30 +4758,30 @@ class Google_Service_Dfareporting_AccountUserProfiles_Resource extends Google_Se
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $id User profile ID.
-   * @param Google_AccountUserProfile $postBody
+   * @param Appointments_Google_AccountUserProfile $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_AccountUserProfile
+   * @return Appointments_Google_Service_Dfareporting_AccountUserProfile
    */
-  public function patch($profileId, $id, Google_Service_Dfareporting_AccountUserProfile $postBody, $optParams = array())
+  public function patch($profileId, $id, Appointments_Google_Service_Dfareporting_AccountUserProfile $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_AccountUserProfile");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_AccountUserProfile");
   }
 
   /**
    * Updates an existing account user profile. (accountUserProfiles.update)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_AccountUserProfile $postBody
+   * @param Appointments_Google_AccountUserProfile $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_AccountUserProfile
+   * @return Appointments_Google_Service_Dfareporting_AccountUserProfile
    */
-  public function update($profileId, Google_Service_Dfareporting_AccountUserProfile $postBody, $optParams = array())
+  public function update($profileId, Appointments_Google_Service_Dfareporting_AccountUserProfile $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_AccountUserProfile");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_AccountUserProfile");
   }
 }
 
@@ -4789,11 +4789,11 @@ class Google_Service_Dfareporting_AccountUserProfiles_Resource extends Google_Se
  * The "accounts" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $accounts = $dfareportingService->accounts;
  *  </code>
  */
-class Google_Service_Dfareporting_Accounts_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_Accounts_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -4802,13 +4802,13 @@ class Google_Service_Dfareporting_Accounts_Resource extends Google_Service_Resou
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Account ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Account
+   * @return Appointments_Google_Service_Dfareporting_Account
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_Account");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_Account");
   }
 
   /**
@@ -4831,13 +4831,13 @@ class Google_Service_Dfareporting_Accounts_Resource extends Google_Service_Resou
    * match objects with name "my account", "account 2015", or simply "account".
    * @opt_param string sortField Field by which to sort the list.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
-   * @return Google_Service_Dfareporting_AccountsListResponse
+   * @return Appointments_Google_Service_Dfareporting_AccountsListResponse
    */
   public function listAccounts($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_AccountsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_AccountsListResponse");
   }
 
   /**
@@ -4846,30 +4846,30 @@ class Google_Service_Dfareporting_Accounts_Resource extends Google_Service_Resou
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Account ID.
-   * @param Google_Account $postBody
+   * @param Appointments_Google_Account $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Account
+   * @return Appointments_Google_Service_Dfareporting_Account
    */
-  public function patch($profileId, $id, Google_Service_Dfareporting_Account $postBody, $optParams = array())
+  public function patch($profileId, $id, Appointments_Google_Service_Dfareporting_Account $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_Account");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_Account");
   }
 
   /**
    * Updates an existing account. (accounts.update)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_Account $postBody
+   * @param Appointments_Google_Account $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Account
+   * @return Appointments_Google_Service_Dfareporting_Account
    */
-  public function update($profileId, Google_Service_Dfareporting_Account $postBody, $optParams = array())
+  public function update($profileId, Appointments_Google_Service_Dfareporting_Account $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_Account");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_Account");
   }
 }
 
@@ -4877,11 +4877,11 @@ class Google_Service_Dfareporting_Accounts_Resource extends Google_Service_Resou
  * The "ads" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $ads = $dfareportingService->ads;
  *  </code>
  */
-class Google_Service_Dfareporting_Ads_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_Ads_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -4890,28 +4890,28 @@ class Google_Service_Dfareporting_Ads_Resource extends Google_Service_Resource
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Ad ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Ad
+   * @return Appointments_Google_Service_Dfareporting_Ad
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_Ad");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_Ad");
   }
 
   /**
    * Inserts a new ad. (ads.insert)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_Ad $postBody
+   * @param Appointments_Google_Ad $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Ad
+   * @return Appointments_Google_Service_Dfareporting_Ad
    */
-  public function insert($profileId, Google_Service_Dfareporting_Ad $postBody, $optParams = array())
+  public function insert($profileId, Appointments_Google_Service_Dfareporting_Ad $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_Ad");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_Ad");
   }
 
   /**
@@ -4965,13 +4965,13 @@ class Google_Service_Dfareporting_Ads_Resource extends Google_Service_Resource
    * @opt_param bool sslCompliant Select only ads that are SSL-compliant.
    * @opt_param bool sslRequired Select only ads that require SSL.
    * @opt_param string type Select only ads with these types.
-   * @return Google_Service_Dfareporting_AdsListResponse
+   * @return Appointments_Google_Service_Dfareporting_AdsListResponse
    */
   public function listAds($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_AdsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_AdsListResponse");
   }
 
   /**
@@ -4979,30 +4979,30 @@ class Google_Service_Dfareporting_Ads_Resource extends Google_Service_Resource
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Ad ID.
-   * @param Google_Ad $postBody
+   * @param Appointments_Google_Ad $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Ad
+   * @return Appointments_Google_Service_Dfareporting_Ad
    */
-  public function patch($profileId, $id, Google_Service_Dfareporting_Ad $postBody, $optParams = array())
+  public function patch($profileId, $id, Appointments_Google_Service_Dfareporting_Ad $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_Ad");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_Ad");
   }
 
   /**
    * Updates an existing ad. (ads.update)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_Ad $postBody
+   * @param Appointments_Google_Ad $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Ad
+   * @return Appointments_Google_Service_Dfareporting_Ad
    */
-  public function update($profileId, Google_Service_Dfareporting_Ad $postBody, $optParams = array())
+  public function update($profileId, Appointments_Google_Service_Dfareporting_Ad $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_Ad");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_Ad");
   }
 }
 
@@ -5010,11 +5010,11 @@ class Google_Service_Dfareporting_Ads_Resource extends Google_Service_Resource
  * The "advertiserGroups" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $advertiserGroups = $dfareportingService->advertiserGroups;
  *  </code>
  */
-class Google_Service_Dfareporting_AdvertiserGroups_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_AdvertiserGroups_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -5037,28 +5037,28 @@ class Google_Service_Dfareporting_AdvertiserGroups_Resource extends Google_Servi
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Advertiser group ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_AdvertiserGroup
+   * @return Appointments_Google_Service_Dfareporting_AdvertiserGroup
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_AdvertiserGroup");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_AdvertiserGroup");
   }
 
   /**
    * Inserts a new advertiser group. (advertiserGroups.insert)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_AdvertiserGroup $postBody
+   * @param Appointments_Google_AdvertiserGroup $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_AdvertiserGroup
+   * @return Appointments_Google_Service_Dfareporting_AdvertiserGroup
    */
-  public function insert($profileId, Google_Service_Dfareporting_AdvertiserGroup $postBody, $optParams = array())
+  public function insert($profileId, Appointments_Google_Service_Dfareporting_AdvertiserGroup $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_AdvertiserGroup");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_AdvertiserGroup");
   }
 
   /**
@@ -5081,13 +5081,13 @@ class Google_Service_Dfareporting_AdvertiserGroups_Resource extends Google_Servi
    * advertisergroup", "advertisergroup 2015", or simply "advertisergroup".
    * @opt_param string sortField Field by which to sort the list.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
-   * @return Google_Service_Dfareporting_AdvertiserGroupsListResponse
+   * @return Appointments_Google_Service_Dfareporting_AdvertiserGroupsListResponse
    */
   public function listAdvertiserGroups($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_AdvertiserGroupsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_AdvertiserGroupsListResponse");
   }
 
   /**
@@ -5096,30 +5096,30 @@ class Google_Service_Dfareporting_AdvertiserGroups_Resource extends Google_Servi
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Advertiser group ID.
-   * @param Google_AdvertiserGroup $postBody
+   * @param Appointments_Google_AdvertiserGroup $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_AdvertiserGroup
+   * @return Appointments_Google_Service_Dfareporting_AdvertiserGroup
    */
-  public function patch($profileId, $id, Google_Service_Dfareporting_AdvertiserGroup $postBody, $optParams = array())
+  public function patch($profileId, $id, Appointments_Google_Service_Dfareporting_AdvertiserGroup $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_AdvertiserGroup");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_AdvertiserGroup");
   }
 
   /**
    * Updates an existing advertiser group. (advertiserGroups.update)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_AdvertiserGroup $postBody
+   * @param Appointments_Google_AdvertiserGroup $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_AdvertiserGroup
+   * @return Appointments_Google_Service_Dfareporting_AdvertiserGroup
    */
-  public function update($profileId, Google_Service_Dfareporting_AdvertiserGroup $postBody, $optParams = array())
+  public function update($profileId, Appointments_Google_Service_Dfareporting_AdvertiserGroup $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_AdvertiserGroup");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_AdvertiserGroup");
   }
 }
 
@@ -5127,11 +5127,11 @@ class Google_Service_Dfareporting_AdvertiserGroups_Resource extends Google_Servi
  * The "advertisers" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $advertisers = $dfareportingService->advertisers;
  *  </code>
  */
-class Google_Service_Dfareporting_Advertisers_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_Advertisers_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -5140,28 +5140,28 @@ class Google_Service_Dfareporting_Advertisers_Resource extends Google_Service_Re
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Advertiser ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Advertiser
+   * @return Appointments_Google_Service_Dfareporting_Advertiser
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_Advertiser");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_Advertiser");
   }
 
   /**
    * Inserts a new advertiser. (advertisers.insert)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_Advertiser $postBody
+   * @param Appointments_Google_Advertiser $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Advertiser
+   * @return Appointments_Google_Service_Dfareporting_Advertiser
    */
-  public function insert($profileId, Google_Service_Dfareporting_Advertiser $postBody, $optParams = array())
+  public function insert($profileId, Appointments_Google_Service_Dfareporting_Advertiser $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_Advertiser");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_Advertiser");
   }
 
   /**
@@ -5195,13 +5195,13 @@ class Google_Service_Dfareporting_Advertisers_Resource extends Google_Service_Re
    * @opt_param string status Select only advertisers with the specified status.
    * @opt_param string subaccountId Select only advertisers with these subaccount
    * IDs.
-   * @return Google_Service_Dfareporting_AdvertisersListResponse
+   * @return Appointments_Google_Service_Dfareporting_AdvertisersListResponse
    */
   public function listAdvertisers($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_AdvertisersListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_AdvertisersListResponse");
   }
 
   /**
@@ -5210,30 +5210,30 @@ class Google_Service_Dfareporting_Advertisers_Resource extends Google_Service_Re
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Advertiser ID.
-   * @param Google_Advertiser $postBody
+   * @param Appointments_Google_Advertiser $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Advertiser
+   * @return Appointments_Google_Service_Dfareporting_Advertiser
    */
-  public function patch($profileId, $id, Google_Service_Dfareporting_Advertiser $postBody, $optParams = array())
+  public function patch($profileId, $id, Appointments_Google_Service_Dfareporting_Advertiser $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_Advertiser");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_Advertiser");
   }
 
   /**
    * Updates an existing advertiser. (advertisers.update)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_Advertiser $postBody
+   * @param Appointments_Google_Advertiser $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Advertiser
+   * @return Appointments_Google_Service_Dfareporting_Advertiser
    */
-  public function update($profileId, Google_Service_Dfareporting_Advertiser $postBody, $optParams = array())
+  public function update($profileId, Appointments_Google_Service_Dfareporting_Advertiser $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_Advertiser");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_Advertiser");
   }
 }
 
@@ -5241,11 +5241,11 @@ class Google_Service_Dfareporting_Advertisers_Resource extends Google_Service_Re
  * The "browsers" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $browsers = $dfareportingService->browsers;
  *  </code>
  */
-class Google_Service_Dfareporting_Browsers_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_Browsers_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -5253,13 +5253,13 @@ class Google_Service_Dfareporting_Browsers_Resource extends Google_Service_Resou
    *
    * @param string $profileId User profile ID associated with this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_BrowsersListResponse
+   * @return Appointments_Google_Service_Dfareporting_BrowsersListResponse
    */
   public function listBrowsers($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_BrowsersListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_BrowsersListResponse");
   }
 }
 
@@ -5267,11 +5267,11 @@ class Google_Service_Dfareporting_Browsers_Resource extends Google_Service_Resou
  * The "campaignCreativeAssociations" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $campaignCreativeAssociations = $dfareportingService->campaignCreativeAssociations;
  *  </code>
  */
-class Google_Service_Dfareporting_CampaignCreativeAssociations_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_CampaignCreativeAssociations_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -5281,15 +5281,15 @@ class Google_Service_Dfareporting_CampaignCreativeAssociations_Resource extends 
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $campaignId Campaign ID in this association.
-   * @param Google_CampaignCreativeAssociation $postBody
+   * @param Appointments_Google_CampaignCreativeAssociation $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_CampaignCreativeAssociation
+   * @return Appointments_Google_Service_Dfareporting_CampaignCreativeAssociation
    */
-  public function insert($profileId, $campaignId, Google_Service_Dfareporting_CampaignCreativeAssociation $postBody, $optParams = array())
+  public function insert($profileId, $campaignId, Appointments_Google_Service_Dfareporting_CampaignCreativeAssociation $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'campaignId' => $campaignId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_CampaignCreativeAssociation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_CampaignCreativeAssociation");
   }
 
   /**
@@ -5304,13 +5304,13 @@ class Google_Service_Dfareporting_CampaignCreativeAssociations_Resource extends 
    * @opt_param string pageToken Value of the nextPageToken from the previous
    * result page.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
-   * @return Google_Service_Dfareporting_CampaignCreativeAssociationsListResponse
+   * @return Appointments_Google_Service_Dfareporting_CampaignCreativeAssociationsListResponse
    */
   public function listCampaignCreativeAssociations($profileId, $campaignId, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'campaignId' => $campaignId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_CampaignCreativeAssociationsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_CampaignCreativeAssociationsListResponse");
   }
 }
 
@@ -5318,11 +5318,11 @@ class Google_Service_Dfareporting_CampaignCreativeAssociations_Resource extends 
  * The "campaigns" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $campaigns = $dfareportingService->campaigns;
  *  </code>
  */
-class Google_Service_Dfareporting_Campaigns_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_Campaigns_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -5331,13 +5331,13 @@ class Google_Service_Dfareporting_Campaigns_Resource extends Google_Service_Reso
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Campaign ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Campaign
+   * @return Appointments_Google_Service_Dfareporting_Campaign
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_Campaign");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_Campaign");
   }
 
   /**
@@ -5348,15 +5348,15 @@ class Google_Service_Dfareporting_Campaigns_Resource extends Google_Service_Reso
    * campaign. Must be less than 256 characters long.
    * @param string $defaultLandingPageUrl Default landing page URL for this new
    * campaign.
-   * @param Google_Campaign $postBody
+   * @param Appointments_Google_Campaign $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Campaign
+   * @return Appointments_Google_Service_Dfareporting_Campaign
    */
-  public function insert($profileId, $defaultLandingPageName, $defaultLandingPageUrl, Google_Service_Dfareporting_Campaign $postBody, $optParams = array())
+  public function insert($profileId, $defaultLandingPageName, $defaultLandingPageUrl, Appointments_Google_Service_Dfareporting_Campaign $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'defaultLandingPageName' => $defaultLandingPageName, 'defaultLandingPageUrl' => $defaultLandingPageUrl, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_Campaign");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_Campaign");
   }
 
   /**
@@ -5391,13 +5391,13 @@ class Google_Service_Dfareporting_Campaigns_Resource extends Google_Service_Reso
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
    * @opt_param string subaccountId Select only campaigns that belong to this
    * subaccount.
-   * @return Google_Service_Dfareporting_CampaignsListResponse
+   * @return Appointments_Google_Service_Dfareporting_CampaignsListResponse
    */
   public function listCampaigns($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_CampaignsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_CampaignsListResponse");
   }
 
   /**
@@ -5406,30 +5406,30 @@ class Google_Service_Dfareporting_Campaigns_Resource extends Google_Service_Reso
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Campaign ID.
-   * @param Google_Campaign $postBody
+   * @param Appointments_Google_Campaign $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Campaign
+   * @return Appointments_Google_Service_Dfareporting_Campaign
    */
-  public function patch($profileId, $id, Google_Service_Dfareporting_Campaign $postBody, $optParams = array())
+  public function patch($profileId, $id, Appointments_Google_Service_Dfareporting_Campaign $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_Campaign");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_Campaign");
   }
 
   /**
    * Updates an existing campaign. (campaigns.update)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_Campaign $postBody
+   * @param Appointments_Google_Campaign $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Campaign
+   * @return Appointments_Google_Service_Dfareporting_Campaign
    */
-  public function update($profileId, Google_Service_Dfareporting_Campaign $postBody, $optParams = array())
+  public function update($profileId, Appointments_Google_Service_Dfareporting_Campaign $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_Campaign");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_Campaign");
   }
 }
 
@@ -5437,11 +5437,11 @@ class Google_Service_Dfareporting_Campaigns_Resource extends Google_Service_Reso
  * The "changeLogs" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $changeLogs = $dfareportingService->changeLogs;
  *  </code>
  */
-class Google_Service_Dfareporting_ChangeLogs_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_ChangeLogs_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -5450,13 +5450,13 @@ class Google_Service_Dfareporting_ChangeLogs_Resource extends Google_Service_Res
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Change log ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_ChangeLog
+   * @return Appointments_Google_Service_Dfareporting_ChangeLog
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_ChangeLog");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_ChangeLog");
   }
 
   /**
@@ -5489,13 +5489,13 @@ class Google_Service_Dfareporting_ChangeLogs_Resource extends Google_Service_Res
    * name, old or new values match the search string.
    * @opt_param string userProfileIds Select only change logs with these user
    * profile IDs.
-   * @return Google_Service_Dfareporting_ChangeLogsListResponse
+   * @return Appointments_Google_Service_Dfareporting_ChangeLogsListResponse
    */
   public function listChangeLogs($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_ChangeLogsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_ChangeLogsListResponse");
   }
 }
 
@@ -5503,11 +5503,11 @@ class Google_Service_Dfareporting_ChangeLogs_Resource extends Google_Service_Res
  * The "cities" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $cities = $dfareportingService->cities;
  *  </code>
  */
-class Google_Service_Dfareporting_Cities_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_Cities_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -5521,13 +5521,13 @@ class Google_Service_Dfareporting_Cities_Resource extends Google_Service_Resourc
    * @opt_param string namePrefix Select only cities with names starting with this
    * prefix.
    * @opt_param string regionDartIds Select only cities from these regions.
-   * @return Google_Service_Dfareporting_CitiesListResponse
+   * @return Appointments_Google_Service_Dfareporting_CitiesListResponse
    */
   public function listCities($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_CitiesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_CitiesListResponse");
   }
 }
 
@@ -5535,11 +5535,11 @@ class Google_Service_Dfareporting_Cities_Resource extends Google_Service_Resourc
  * The "connectionTypes" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $connectionTypes = $dfareportingService->connectionTypes;
  *  </code>
  */
-class Google_Service_Dfareporting_ConnectionTypes_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_ConnectionTypes_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -5548,13 +5548,13 @@ class Google_Service_Dfareporting_ConnectionTypes_Resource extends Google_Servic
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Connection type ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_ConnectionType
+   * @return Appointments_Google_Service_Dfareporting_ConnectionType
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_ConnectionType");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_ConnectionType");
   }
 
   /**
@@ -5562,13 +5562,13 @@ class Google_Service_Dfareporting_ConnectionTypes_Resource extends Google_Servic
    *
    * @param string $profileId User profile ID associated with this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_ConnectionTypesListResponse
+   * @return Appointments_Google_Service_Dfareporting_ConnectionTypesListResponse
    */
   public function listConnectionTypes($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_ConnectionTypesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_ConnectionTypesListResponse");
   }
 }
 
@@ -5576,11 +5576,11 @@ class Google_Service_Dfareporting_ConnectionTypes_Resource extends Google_Servic
  * The "contentCategories" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $contentCategories = $dfareportingService->contentCategories;
  *  </code>
  */
-class Google_Service_Dfareporting_ContentCategories_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_ContentCategories_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -5603,28 +5603,28 @@ class Google_Service_Dfareporting_ContentCategories_Resource extends Google_Serv
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Content category ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_ContentCategory
+   * @return Appointments_Google_Service_Dfareporting_ContentCategory
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_ContentCategory");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_ContentCategory");
   }
 
   /**
    * Inserts a new content category. (contentCategories.insert)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_ContentCategory $postBody
+   * @param Appointments_Google_ContentCategory $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_ContentCategory
+   * @return Appointments_Google_Service_Dfareporting_ContentCategory
    */
-  public function insert($profileId, Google_Service_Dfareporting_ContentCategory $postBody, $optParams = array())
+  public function insert($profileId, Appointments_Google_Service_Dfareporting_ContentCategory $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_ContentCategory");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_ContentCategory");
   }
 
   /**
@@ -5647,13 +5647,13 @@ class Google_Service_Dfareporting_ContentCategories_Resource extends Google_Serv
    * "my contentcategory", "contentcategory 2015", or simply "contentcategory".
    * @opt_param string sortField Field by which to sort the list.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
-   * @return Google_Service_Dfareporting_ContentCategoriesListResponse
+   * @return Appointments_Google_Service_Dfareporting_ContentCategoriesListResponse
    */
   public function listContentCategories($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_ContentCategoriesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_ContentCategoriesListResponse");
   }
 
   /**
@@ -5662,30 +5662,30 @@ class Google_Service_Dfareporting_ContentCategories_Resource extends Google_Serv
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Content category ID.
-   * @param Google_ContentCategory $postBody
+   * @param Appointments_Google_ContentCategory $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_ContentCategory
+   * @return Appointments_Google_Service_Dfareporting_ContentCategory
    */
-  public function patch($profileId, $id, Google_Service_Dfareporting_ContentCategory $postBody, $optParams = array())
+  public function patch($profileId, $id, Appointments_Google_Service_Dfareporting_ContentCategory $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_ContentCategory");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_ContentCategory");
   }
 
   /**
    * Updates an existing content category. (contentCategories.update)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_ContentCategory $postBody
+   * @param Appointments_Google_ContentCategory $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_ContentCategory
+   * @return Appointments_Google_Service_Dfareporting_ContentCategory
    */
-  public function update($profileId, Google_Service_Dfareporting_ContentCategory $postBody, $optParams = array())
+  public function update($profileId, Appointments_Google_Service_Dfareporting_ContentCategory $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_ContentCategory");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_ContentCategory");
   }
 }
 
@@ -5693,11 +5693,11 @@ class Google_Service_Dfareporting_ContentCategories_Resource extends Google_Serv
  * The "countries" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $countries = $dfareportingService->countries;
  *  </code>
  */
-class Google_Service_Dfareporting_Countries_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_Countries_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -5706,13 +5706,13 @@ class Google_Service_Dfareporting_Countries_Resource extends Google_Service_Reso
    * @param string $profileId User profile ID associated with this request.
    * @param string $dartId Country DART ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Country
+   * @return Appointments_Google_Service_Dfareporting_Country
    */
   public function get($profileId, $dartId, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'dartId' => $dartId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_Country");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_Country");
   }
 
   /**
@@ -5720,13 +5720,13 @@ class Google_Service_Dfareporting_Countries_Resource extends Google_Service_Reso
    *
    * @param string $profileId User profile ID associated with this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_CountriesListResponse
+   * @return Appointments_Google_Service_Dfareporting_CountriesListResponse
    */
   public function listCountries($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_CountriesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_CountriesListResponse");
   }
 }
 
@@ -5734,11 +5734,11 @@ class Google_Service_Dfareporting_Countries_Resource extends Google_Service_Reso
  * The "creativeAssets" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $creativeAssets = $dfareportingService->creativeAssets;
  *  </code>
  */
-class Google_Service_Dfareporting_CreativeAssets_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_CreativeAssets_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -5747,15 +5747,15 @@ class Google_Service_Dfareporting_CreativeAssets_Resource extends Google_Service
    * @param string $profileId User profile ID associated with this request.
    * @param string $advertiserId Advertiser ID of this creative. This is a
    * required field.
-   * @param Google_CreativeAssetMetadata $postBody
+   * @param Appointments_Google_CreativeAssetMetadata $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_CreativeAssetMetadata
+   * @return Appointments_Google_Service_Dfareporting_CreativeAssetMetadata
    */
-  public function insert($profileId, $advertiserId, Google_Service_Dfareporting_CreativeAssetMetadata $postBody, $optParams = array())
+  public function insert($profileId, $advertiserId, Appointments_Google_Service_Dfareporting_CreativeAssetMetadata $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'advertiserId' => $advertiserId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_CreativeAssetMetadata");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_CreativeAssetMetadata");
   }
 }
 
@@ -5763,11 +5763,11 @@ class Google_Service_Dfareporting_CreativeAssets_Resource extends Google_Service
  * The "creativeFieldValues" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $creativeFieldValues = $dfareportingService->creativeFieldValues;
  *  </code>
  */
-class Google_Service_Dfareporting_CreativeFieldValues_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_CreativeFieldValues_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -5794,13 +5794,13 @@ class Google_Service_Dfareporting_CreativeFieldValues_Resource extends Google_Se
    * value.
    * @param string $id Creative Field Value ID
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_CreativeFieldValue
+   * @return Appointments_Google_Service_Dfareporting_CreativeFieldValue
    */
   public function get($profileId, $creativeFieldId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'creativeFieldId' => $creativeFieldId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_CreativeFieldValue");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_CreativeFieldValue");
   }
 
   /**
@@ -5809,15 +5809,15 @@ class Google_Service_Dfareporting_CreativeFieldValues_Resource extends Google_Se
    * @param string $profileId User profile ID associated with this request.
    * @param string $creativeFieldId Creative field ID for this creative field
    * value.
-   * @param Google_CreativeFieldValue $postBody
+   * @param Appointments_Google_CreativeFieldValue $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_CreativeFieldValue
+   * @return Appointments_Google_Service_Dfareporting_CreativeFieldValue
    */
-  public function insert($profileId, $creativeFieldId, Google_Service_Dfareporting_CreativeFieldValue $postBody, $optParams = array())
+  public function insert($profileId, $creativeFieldId, Appointments_Google_Service_Dfareporting_CreativeFieldValue $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'creativeFieldId' => $creativeFieldId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_CreativeFieldValue");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_CreativeFieldValue");
   }
 
   /**
@@ -5837,13 +5837,13 @@ class Google_Service_Dfareporting_CreativeFieldValues_Resource extends Google_Se
    * their values. Wildcards (e.g. *) are not allowed.
    * @opt_param string sortField Field by which to sort the list.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
-   * @return Google_Service_Dfareporting_CreativeFieldValuesListResponse
+   * @return Appointments_Google_Service_Dfareporting_CreativeFieldValuesListResponse
    */
   public function listCreativeFieldValues($profileId, $creativeFieldId, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'creativeFieldId' => $creativeFieldId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_CreativeFieldValuesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_CreativeFieldValuesListResponse");
   }
 
   /**
@@ -5854,15 +5854,15 @@ class Google_Service_Dfareporting_CreativeFieldValues_Resource extends Google_Se
    * @param string $creativeFieldId Creative field ID for this creative field
    * value.
    * @param string $id Creative Field Value ID
-   * @param Google_CreativeFieldValue $postBody
+   * @param Appointments_Google_CreativeFieldValue $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_CreativeFieldValue
+   * @return Appointments_Google_Service_Dfareporting_CreativeFieldValue
    */
-  public function patch($profileId, $creativeFieldId, $id, Google_Service_Dfareporting_CreativeFieldValue $postBody, $optParams = array())
+  public function patch($profileId, $creativeFieldId, $id, Appointments_Google_Service_Dfareporting_CreativeFieldValue $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'creativeFieldId' => $creativeFieldId, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_CreativeFieldValue");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_CreativeFieldValue");
   }
 
   /**
@@ -5871,15 +5871,15 @@ class Google_Service_Dfareporting_CreativeFieldValues_Resource extends Google_Se
    * @param string $profileId User profile ID associated with this request.
    * @param string $creativeFieldId Creative field ID for this creative field
    * value.
-   * @param Google_CreativeFieldValue $postBody
+   * @param Appointments_Google_CreativeFieldValue $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_CreativeFieldValue
+   * @return Appointments_Google_Service_Dfareporting_CreativeFieldValue
    */
-  public function update($profileId, $creativeFieldId, Google_Service_Dfareporting_CreativeFieldValue $postBody, $optParams = array())
+  public function update($profileId, $creativeFieldId, Appointments_Google_Service_Dfareporting_CreativeFieldValue $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'creativeFieldId' => $creativeFieldId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_CreativeFieldValue");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_CreativeFieldValue");
   }
 }
 
@@ -5887,11 +5887,11 @@ class Google_Service_Dfareporting_CreativeFieldValues_Resource extends Google_Se
  * The "creativeFields" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $creativeFields = $dfareportingService->creativeFields;
  *  </code>
  */
-class Google_Service_Dfareporting_CreativeFields_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_CreativeFields_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -5914,28 +5914,28 @@ class Google_Service_Dfareporting_CreativeFields_Resource extends Google_Service
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Creative Field ID
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_CreativeField
+   * @return Appointments_Google_Service_Dfareporting_CreativeField
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_CreativeField");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_CreativeField");
   }
 
   /**
    * Inserts a new creative field. (creativeFields.insert)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_CreativeField $postBody
+   * @param Appointments_Google_CreativeField $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_CreativeField
+   * @return Appointments_Google_Service_Dfareporting_CreativeField
    */
-  public function insert($profileId, Google_Service_Dfareporting_CreativeField $postBody, $optParams = array())
+  public function insert($profileId, Appointments_Google_Service_Dfareporting_CreativeField $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_CreativeField");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_CreativeField");
   }
 
   /**
@@ -5961,13 +5961,13 @@ class Google_Service_Dfareporting_CreativeFields_Resource extends Google_Service
    * simply "creativefield".
    * @opt_param string sortField Field by which to sort the list.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
-   * @return Google_Service_Dfareporting_CreativeFieldsListResponse
+   * @return Appointments_Google_Service_Dfareporting_CreativeFieldsListResponse
    */
   public function listCreativeFields($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_CreativeFieldsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_CreativeFieldsListResponse");
   }
 
   /**
@@ -5976,30 +5976,30 @@ class Google_Service_Dfareporting_CreativeFields_Resource extends Google_Service
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Creative Field ID
-   * @param Google_CreativeField $postBody
+   * @param Appointments_Google_CreativeField $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_CreativeField
+   * @return Appointments_Google_Service_Dfareporting_CreativeField
    */
-  public function patch($profileId, $id, Google_Service_Dfareporting_CreativeField $postBody, $optParams = array())
+  public function patch($profileId, $id, Appointments_Google_Service_Dfareporting_CreativeField $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_CreativeField");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_CreativeField");
   }
 
   /**
    * Updates an existing creative field. (creativeFields.update)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_CreativeField $postBody
+   * @param Appointments_Google_CreativeField $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_CreativeField
+   * @return Appointments_Google_Service_Dfareporting_CreativeField
    */
-  public function update($profileId, Google_Service_Dfareporting_CreativeField $postBody, $optParams = array())
+  public function update($profileId, Appointments_Google_Service_Dfareporting_CreativeField $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_CreativeField");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_CreativeField");
   }
 }
 
@@ -6007,11 +6007,11 @@ class Google_Service_Dfareporting_CreativeFields_Resource extends Google_Service
  * The "creativeGroups" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $creativeGroups = $dfareportingService->creativeGroups;
  *  </code>
  */
-class Google_Service_Dfareporting_CreativeGroups_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_CreativeGroups_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -6020,28 +6020,28 @@ class Google_Service_Dfareporting_CreativeGroups_Resource extends Google_Service
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Creative group ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_CreativeGroup
+   * @return Appointments_Google_Service_Dfareporting_CreativeGroup
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_CreativeGroup");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_CreativeGroup");
   }
 
   /**
    * Inserts a new creative group. (creativeGroups.insert)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_CreativeGroup $postBody
+   * @param Appointments_Google_CreativeGroup $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_CreativeGroup
+   * @return Appointments_Google_Service_Dfareporting_CreativeGroup
    */
-  public function insert($profileId, Google_Service_Dfareporting_CreativeGroup $postBody, $optParams = array())
+  public function insert($profileId, Appointments_Google_Service_Dfareporting_CreativeGroup $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_CreativeGroup");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_CreativeGroup");
   }
 
   /**
@@ -6069,13 +6069,13 @@ class Google_Service_Dfareporting_CreativeGroups_Resource extends Google_Service
    * simply "creativegroup".
    * @opt_param string sortField Field by which to sort the list.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
-   * @return Google_Service_Dfareporting_CreativeGroupsListResponse
+   * @return Appointments_Google_Service_Dfareporting_CreativeGroupsListResponse
    */
   public function listCreativeGroups($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_CreativeGroupsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_CreativeGroupsListResponse");
   }
 
   /**
@@ -6084,30 +6084,30 @@ class Google_Service_Dfareporting_CreativeGroups_Resource extends Google_Service
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Creative group ID.
-   * @param Google_CreativeGroup $postBody
+   * @param Appointments_Google_CreativeGroup $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_CreativeGroup
+   * @return Appointments_Google_Service_Dfareporting_CreativeGroup
    */
-  public function patch($profileId, $id, Google_Service_Dfareporting_CreativeGroup $postBody, $optParams = array())
+  public function patch($profileId, $id, Appointments_Google_Service_Dfareporting_CreativeGroup $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_CreativeGroup");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_CreativeGroup");
   }
 
   /**
    * Updates an existing creative group. (creativeGroups.update)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_CreativeGroup $postBody
+   * @param Appointments_Google_CreativeGroup $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_CreativeGroup
+   * @return Appointments_Google_Service_Dfareporting_CreativeGroup
    */
-  public function update($profileId, Google_Service_Dfareporting_CreativeGroup $postBody, $optParams = array())
+  public function update($profileId, Appointments_Google_Service_Dfareporting_CreativeGroup $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_CreativeGroup");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_CreativeGroup");
   }
 }
 
@@ -6115,11 +6115,11 @@ class Google_Service_Dfareporting_CreativeGroups_Resource extends Google_Service
  * The "creatives" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $creatives = $dfareportingService->creatives;
  *  </code>
  */
-class Google_Service_Dfareporting_Creatives_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_Creatives_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -6128,28 +6128,28 @@ class Google_Service_Dfareporting_Creatives_Resource extends Google_Service_Reso
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Creative ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Creative
+   * @return Appointments_Google_Service_Dfareporting_Creative
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_Creative");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_Creative");
   }
 
   /**
    * Inserts a new creative. (creatives.insert)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_Creative $postBody
+   * @param Appointments_Google_Creative $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Creative
+   * @return Appointments_Google_Service_Dfareporting_Creative
    */
-  public function insert($profileId, Google_Service_Dfareporting_Creative $postBody, $optParams = array())
+  public function insert($profileId, Appointments_Google_Service_Dfareporting_Creative $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_Creative");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_Creative");
   }
 
   /**
@@ -6187,13 +6187,13 @@ class Google_Service_Dfareporting_Creatives_Resource extends Google_Service_Reso
    * @opt_param string studioCreativeId Select only creatives corresponding to
    * this Studio creative ID.
    * @opt_param string types Select only creatives with these creative types.
-   * @return Google_Service_Dfareporting_CreativesListResponse
+   * @return Appointments_Google_Service_Dfareporting_CreativesListResponse
    */
   public function listCreatives($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_CreativesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_CreativesListResponse");
   }
 
   /**
@@ -6202,30 +6202,30 @@ class Google_Service_Dfareporting_Creatives_Resource extends Google_Service_Reso
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Creative ID.
-   * @param Google_Creative $postBody
+   * @param Appointments_Google_Creative $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Creative
+   * @return Appointments_Google_Service_Dfareporting_Creative
    */
-  public function patch($profileId, $id, Google_Service_Dfareporting_Creative $postBody, $optParams = array())
+  public function patch($profileId, $id, Appointments_Google_Service_Dfareporting_Creative $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_Creative");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_Creative");
   }
 
   /**
    * Updates an existing creative. (creatives.update)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_Creative $postBody
+   * @param Appointments_Google_Creative $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Creative
+   * @return Appointments_Google_Service_Dfareporting_Creative
    */
-  public function update($profileId, Google_Service_Dfareporting_Creative $postBody, $optParams = array())
+  public function update($profileId, Appointments_Google_Service_Dfareporting_Creative $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_Creative");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_Creative");
   }
 }
 
@@ -6233,11 +6233,11 @@ class Google_Service_Dfareporting_Creatives_Resource extends Google_Service_Reso
  * The "dimensionValues" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $dimensionValues = $dfareportingService->dimensionValues;
  *  </code>
  */
-class Google_Service_Dfareporting_DimensionValues_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_DimensionValues_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -6245,19 +6245,19 @@ class Google_Service_Dfareporting_DimensionValues_Resource extends Google_Servic
    * (dimensionValues.query)
    *
    * @param string $profileId The DFA user profile ID.
-   * @param Google_DimensionValueRequest $postBody
+   * @param Appointments_Google_DimensionValueRequest $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param int maxResults Maximum number of results to return.
    * @opt_param string pageToken The value of the nextToken from the previous
    * result page.
-   * @return Google_Service_Dfareporting_DimensionValueList
+   * @return Appointments_Google_Service_Dfareporting_DimensionValueList
    */
-  public function query($profileId, Google_Service_Dfareporting_DimensionValueRequest $postBody, $optParams = array())
+  public function query($profileId, Appointments_Google_Service_Dfareporting_DimensionValueRequest $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('query', array($params), "Google_Service_Dfareporting_DimensionValueList");
+    return $this->call('query', array($params), "Appointments_Google_Service_Dfareporting_DimensionValueList");
   }
 }
 
@@ -6265,11 +6265,11 @@ class Google_Service_Dfareporting_DimensionValues_Resource extends Google_Servic
  * The "directorySiteContacts" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $directorySiteContacts = $dfareportingService->directorySiteContacts;
  *  </code>
  */
-class Google_Service_Dfareporting_DirectorySiteContacts_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_DirectorySiteContacts_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -6278,13 +6278,13 @@ class Google_Service_Dfareporting_DirectorySiteContacts_Resource extends Google_
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Directory site contact ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_DirectorySiteContact
+   * @return Appointments_Google_Service_Dfareporting_DirectorySiteContact
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_DirectorySiteContact");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_DirectorySiteContact");
   }
 
   /**
@@ -6310,13 +6310,13 @@ class Google_Service_Dfareporting_DirectorySiteContacts_Resource extends Google_
    * site contact 2015", or simply "directory site contact".
    * @opt_param string sortField Field by which to sort the list.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
-   * @return Google_Service_Dfareporting_DirectorySiteContactsListResponse
+   * @return Appointments_Google_Service_Dfareporting_DirectorySiteContactsListResponse
    */
   public function listDirectorySiteContacts($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_DirectorySiteContactsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_DirectorySiteContactsListResponse");
   }
 }
 
@@ -6324,11 +6324,11 @@ class Google_Service_Dfareporting_DirectorySiteContacts_Resource extends Google_
  * The "directorySites" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $directorySites = $dfareportingService->directorySites;
  *  </code>
  */
-class Google_Service_Dfareporting_DirectorySites_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_DirectorySites_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -6337,28 +6337,28 @@ class Google_Service_Dfareporting_DirectorySites_Resource extends Google_Service
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Directory site ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_DirectorySite
+   * @return Appointments_Google_Service_Dfareporting_DirectorySite
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_DirectorySite");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_DirectorySite");
   }
 
   /**
    * Inserts a new directory site. (directorySites.insert)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_DirectorySite $postBody
+   * @param Appointments_Google_DirectorySite $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_DirectorySite
+   * @return Appointments_Google_Service_Dfareporting_DirectorySite
    */
-  public function insert($profileId, Google_Service_Dfareporting_DirectorySite $postBody, $optParams = array())
+  public function insert($profileId, Appointments_Google_Service_Dfareporting_DirectorySite $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_DirectorySite");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_DirectorySite");
   }
 
   /**
@@ -6393,13 +6393,13 @@ class Google_Service_Dfareporting_DirectorySites_Resource extends Google_Service
    * directory site", "directory site 2015" or simply, "directory site".
    * @opt_param string sortField Field by which to sort the list.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
-   * @return Google_Service_Dfareporting_DirectorySitesListResponse
+   * @return Appointments_Google_Service_Dfareporting_DirectorySitesListResponse
    */
   public function listDirectorySites($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_DirectorySitesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_DirectorySitesListResponse");
   }
 }
 
@@ -6407,11 +6407,11 @@ class Google_Service_Dfareporting_DirectorySites_Resource extends Google_Service
  * The "eventTags" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $eventTags = $dfareportingService->eventTags;
  *  </code>
  */
-class Google_Service_Dfareporting_EventTags_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_EventTags_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -6434,28 +6434,28 @@ class Google_Service_Dfareporting_EventTags_Resource extends Google_Service_Reso
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Event tag ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_EventTag
+   * @return Appointments_Google_Service_Dfareporting_EventTag
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_EventTag");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_EventTag");
   }
 
   /**
    * Inserts a new event tag. (eventTags.insert)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_EventTag $postBody
+   * @param Appointments_Google_EventTag $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_EventTag
+   * @return Appointments_Google_Service_Dfareporting_EventTag
    */
-  public function insert($profileId, Google_Service_Dfareporting_EventTag $postBody, $optParams = array())
+  public function insert($profileId, Appointments_Google_Service_Dfareporting_EventTag $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_EventTag");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_EventTag");
   }
 
   /**
@@ -6497,13 +6497,13 @@ class Google_Service_Dfareporting_EventTags_Resource extends Google_Service_Reso
    * simply "eventtag".
    * @opt_param string sortField Field by which to sort the list.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
-   * @return Google_Service_Dfareporting_EventTagsListResponse
+   * @return Appointments_Google_Service_Dfareporting_EventTagsListResponse
    */
   public function listEventTags($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_EventTagsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_EventTagsListResponse");
   }
 
   /**
@@ -6512,30 +6512,30 @@ class Google_Service_Dfareporting_EventTags_Resource extends Google_Service_Reso
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Event tag ID.
-   * @param Google_EventTag $postBody
+   * @param Appointments_Google_EventTag $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_EventTag
+   * @return Appointments_Google_Service_Dfareporting_EventTag
    */
-  public function patch($profileId, $id, Google_Service_Dfareporting_EventTag $postBody, $optParams = array())
+  public function patch($profileId, $id, Appointments_Google_Service_Dfareporting_EventTag $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_EventTag");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_EventTag");
   }
 
   /**
    * Updates an existing event tag. (eventTags.update)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_EventTag $postBody
+   * @param Appointments_Google_EventTag $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_EventTag
+   * @return Appointments_Google_Service_Dfareporting_EventTag
    */
-  public function update($profileId, Google_Service_Dfareporting_EventTag $postBody, $optParams = array())
+  public function update($profileId, Appointments_Google_Service_Dfareporting_EventTag $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_EventTag");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_EventTag");
   }
 }
 
@@ -6543,11 +6543,11 @@ class Google_Service_Dfareporting_EventTags_Resource extends Google_Service_Reso
  * The "files" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $files = $dfareportingService->files;
  *  </code>
  */
-class Google_Service_Dfareporting_Files_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_Files_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -6556,13 +6556,13 @@ class Google_Service_Dfareporting_Files_Resource extends Google_Service_Resource
    * @param string $reportId The ID of the report.
    * @param string $fileId The ID of the report file.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_DfareportingFile
+   * @return Appointments_Google_Service_Dfareporting_DfareportingFile
    */
   public function get($reportId, $fileId, $optParams = array())
   {
     $params = array('reportId' => $reportId, 'fileId' => $fileId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_DfareportingFile");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_DfareportingFile");
   }
 
   /**
@@ -6578,13 +6578,13 @@ class Google_Service_Dfareporting_Files_Resource extends Google_Service_Resource
    * default is 'MINE'.
    * @opt_param string sortField The field by which to sort the list.
    * @opt_param string sortOrder Order of sorted results, default is 'DESCENDING'.
-   * @return Google_Service_Dfareporting_FileList
+   * @return Appointments_Google_Service_Dfareporting_FileList
    */
   public function listFiles($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_FileList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_FileList");
   }
 }
 
@@ -6592,11 +6592,11 @@ class Google_Service_Dfareporting_Files_Resource extends Google_Service_Resource
  * The "floodlightActivities" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $floodlightActivities = $dfareportingService->floodlightActivities;
  *  </code>
  */
-class Google_Service_Dfareporting_FloodlightActivities_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_FloodlightActivities_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -6621,13 +6621,13 @@ class Google_Service_Dfareporting_FloodlightActivities_Resource extends Google_S
    *
    * @opt_param string floodlightActivityId Floodlight activity ID for which we
    * want to generate a tag.
-   * @return Google_Service_Dfareporting_FloodlightActivitiesGenerateTagResponse
+   * @return Appointments_Google_Service_Dfareporting_FloodlightActivitiesGenerateTagResponse
    */
   public function generatetag($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('generatetag', array($params), "Google_Service_Dfareporting_FloodlightActivitiesGenerateTagResponse");
+    return $this->call('generatetag', array($params), "Appointments_Google_Service_Dfareporting_FloodlightActivitiesGenerateTagResponse");
   }
 
   /**
@@ -6636,28 +6636,28 @@ class Google_Service_Dfareporting_FloodlightActivities_Resource extends Google_S
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Floodlight activity ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_FloodlightActivity
+   * @return Appointments_Google_Service_Dfareporting_FloodlightActivity
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_FloodlightActivity");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_FloodlightActivity");
   }
 
   /**
    * Inserts a new floodlight activity. (floodlightActivities.insert)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_FloodlightActivity $postBody
+   * @param Appointments_Google_FloodlightActivity $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_FloodlightActivity
+   * @return Appointments_Google_Service_Dfareporting_FloodlightActivity
    */
-  public function insert($profileId, Google_Service_Dfareporting_FloodlightActivity $postBody, $optParams = array())
+  public function insert($profileId, Appointments_Google_Service_Dfareporting_FloodlightActivity $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_FloodlightActivity");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_FloodlightActivity");
   }
 
   /**
@@ -6699,13 +6699,13 @@ class Google_Service_Dfareporting_FloodlightActivities_Resource extends Google_S
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
    * @opt_param string tagString Select only floodlight activities with the
    * specified tag string.
-   * @return Google_Service_Dfareporting_FloodlightActivitiesListResponse
+   * @return Appointments_Google_Service_Dfareporting_FloodlightActivitiesListResponse
    */
   public function listFloodlightActivities($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_FloodlightActivitiesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_FloodlightActivitiesListResponse");
   }
 
   /**
@@ -6714,30 +6714,30 @@ class Google_Service_Dfareporting_FloodlightActivities_Resource extends Google_S
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Floodlight activity ID.
-   * @param Google_FloodlightActivity $postBody
+   * @param Appointments_Google_FloodlightActivity $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_FloodlightActivity
+   * @return Appointments_Google_Service_Dfareporting_FloodlightActivity
    */
-  public function patch($profileId, $id, Google_Service_Dfareporting_FloodlightActivity $postBody, $optParams = array())
+  public function patch($profileId, $id, Appointments_Google_Service_Dfareporting_FloodlightActivity $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_FloodlightActivity");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_FloodlightActivity");
   }
 
   /**
    * Updates an existing floodlight activity. (floodlightActivities.update)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_FloodlightActivity $postBody
+   * @param Appointments_Google_FloodlightActivity $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_FloodlightActivity
+   * @return Appointments_Google_Service_Dfareporting_FloodlightActivity
    */
-  public function update($profileId, Google_Service_Dfareporting_FloodlightActivity $postBody, $optParams = array())
+  public function update($profileId, Appointments_Google_Service_Dfareporting_FloodlightActivity $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_FloodlightActivity");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_FloodlightActivity");
   }
 }
 
@@ -6745,11 +6745,11 @@ class Google_Service_Dfareporting_FloodlightActivities_Resource extends Google_S
  * The "floodlightActivityGroups" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $floodlightActivityGroups = $dfareportingService->floodlightActivityGroups;
  *  </code>
  */
-class Google_Service_Dfareporting_FloodlightActivityGroups_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_FloodlightActivityGroups_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -6758,28 +6758,28 @@ class Google_Service_Dfareporting_FloodlightActivityGroups_Resource extends Goog
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Floodlight activity Group ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_FloodlightActivityGroup
+   * @return Appointments_Google_Service_Dfareporting_FloodlightActivityGroup
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_FloodlightActivityGroup");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_FloodlightActivityGroup");
   }
 
   /**
    * Inserts a new floodlight activity group. (floodlightActivityGroups.insert)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_FloodlightActivityGroup $postBody
+   * @param Appointments_Google_FloodlightActivityGroup $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_FloodlightActivityGroup
+   * @return Appointments_Google_Service_Dfareporting_FloodlightActivityGroup
    */
-  public function insert($profileId, Google_Service_Dfareporting_FloodlightActivityGroup $postBody, $optParams = array())
+  public function insert($profileId, Appointments_Google_Service_Dfareporting_FloodlightActivityGroup $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_FloodlightActivityGroup");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_FloodlightActivityGroup");
   }
 
   /**
@@ -6814,13 +6814,13 @@ class Google_Service_Dfareporting_FloodlightActivityGroups_Resource extends Goog
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
    * @opt_param string type Select only floodlight activity groups with the
    * specified floodlight activity group type.
-   * @return Google_Service_Dfareporting_FloodlightActivityGroupsListResponse
+   * @return Appointments_Google_Service_Dfareporting_FloodlightActivityGroupsListResponse
    */
   public function listFloodlightActivityGroups($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_FloodlightActivityGroupsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_FloodlightActivityGroupsListResponse");
   }
 
   /**
@@ -6829,15 +6829,15 @@ class Google_Service_Dfareporting_FloodlightActivityGroups_Resource extends Goog
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Floodlight activity Group ID.
-   * @param Google_FloodlightActivityGroup $postBody
+   * @param Appointments_Google_FloodlightActivityGroup $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_FloodlightActivityGroup
+   * @return Appointments_Google_Service_Dfareporting_FloodlightActivityGroup
    */
-  public function patch($profileId, $id, Google_Service_Dfareporting_FloodlightActivityGroup $postBody, $optParams = array())
+  public function patch($profileId, $id, Appointments_Google_Service_Dfareporting_FloodlightActivityGroup $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_FloodlightActivityGroup");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_FloodlightActivityGroup");
   }
 
   /**
@@ -6845,15 +6845,15 @@ class Google_Service_Dfareporting_FloodlightActivityGroups_Resource extends Goog
    * (floodlightActivityGroups.update)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_FloodlightActivityGroup $postBody
+   * @param Appointments_Google_FloodlightActivityGroup $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_FloodlightActivityGroup
+   * @return Appointments_Google_Service_Dfareporting_FloodlightActivityGroup
    */
-  public function update($profileId, Google_Service_Dfareporting_FloodlightActivityGroup $postBody, $optParams = array())
+  public function update($profileId, Appointments_Google_Service_Dfareporting_FloodlightActivityGroup $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_FloodlightActivityGroup");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_FloodlightActivityGroup");
   }
 }
 
@@ -6861,11 +6861,11 @@ class Google_Service_Dfareporting_FloodlightActivityGroups_Resource extends Goog
  * The "floodlightConfigurations" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $floodlightConfigurations = $dfareportingService->floodlightConfigurations;
  *  </code>
  */
-class Google_Service_Dfareporting_FloodlightConfigurations_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_FloodlightConfigurations_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -6874,13 +6874,13 @@ class Google_Service_Dfareporting_FloodlightConfigurations_Resource extends Goog
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Floodlight configuration ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_FloodlightConfiguration
+   * @return Appointments_Google_Service_Dfareporting_FloodlightConfiguration
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_FloodlightConfiguration");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_FloodlightConfiguration");
   }
 
   /**
@@ -6892,13 +6892,13 @@ class Google_Service_Dfareporting_FloodlightConfigurations_Resource extends Goog
    *
    * @opt_param string ids Set of IDs of floodlight configurations to retrieve.
    * Required field; otherwise an empty list will be returned.
-   * @return Google_Service_Dfareporting_FloodlightConfigurationsListResponse
+   * @return Appointments_Google_Service_Dfareporting_FloodlightConfigurationsListResponse
    */
   public function listFloodlightConfigurations($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_FloodlightConfigurationsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_FloodlightConfigurationsListResponse");
   }
 
   /**
@@ -6907,15 +6907,15 @@ class Google_Service_Dfareporting_FloodlightConfigurations_Resource extends Goog
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Floodlight configuration ID.
-   * @param Google_FloodlightConfiguration $postBody
+   * @param Appointments_Google_FloodlightConfiguration $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_FloodlightConfiguration
+   * @return Appointments_Google_Service_Dfareporting_FloodlightConfiguration
    */
-  public function patch($profileId, $id, Google_Service_Dfareporting_FloodlightConfiguration $postBody, $optParams = array())
+  public function patch($profileId, $id, Appointments_Google_Service_Dfareporting_FloodlightConfiguration $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_FloodlightConfiguration");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_FloodlightConfiguration");
   }
 
   /**
@@ -6923,15 +6923,15 @@ class Google_Service_Dfareporting_FloodlightConfigurations_Resource extends Goog
    * (floodlightConfigurations.update)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_FloodlightConfiguration $postBody
+   * @param Appointments_Google_FloodlightConfiguration $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_FloodlightConfiguration
+   * @return Appointments_Google_Service_Dfareporting_FloodlightConfiguration
    */
-  public function update($profileId, Google_Service_Dfareporting_FloodlightConfiguration $postBody, $optParams = array())
+  public function update($profileId, Appointments_Google_Service_Dfareporting_FloodlightConfiguration $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_FloodlightConfiguration");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_FloodlightConfiguration");
   }
 }
 
@@ -6939,11 +6939,11 @@ class Google_Service_Dfareporting_FloodlightConfigurations_Resource extends Goog
  * The "inventoryItems" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $inventoryItems = $dfareportingService->inventoryItems;
  *  </code>
  */
-class Google_Service_Dfareporting_InventoryItems_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_InventoryItems_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -6953,13 +6953,13 @@ class Google_Service_Dfareporting_InventoryItems_Resource extends Google_Service
    * @param string $projectId Project ID for order documents.
    * @param string $id Inventory item ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_InventoryItem
+   * @return Appointments_Google_Service_Dfareporting_InventoryItem
    */
   public function get($profileId, $projectId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'projectId' => $projectId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_InventoryItem");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_InventoryItem");
   }
 
   /**
@@ -6982,13 +6982,13 @@ class Google_Service_Dfareporting_InventoryItems_Resource extends Google_Service
    * @opt_param string sortField Field by which to sort the list.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
    * @opt_param string type Select only inventory items with this type.
-   * @return Google_Service_Dfareporting_InventoryItemsListResponse
+   * @return Appointments_Google_Service_Dfareporting_InventoryItemsListResponse
    */
   public function listInventoryItems($profileId, $projectId, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'projectId' => $projectId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_InventoryItemsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_InventoryItemsListResponse");
   }
 }
 
@@ -6996,11 +6996,11 @@ class Google_Service_Dfareporting_InventoryItems_Resource extends Google_Service
  * The "landingPages" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $landingPages = $dfareportingService->landingPages;
  *  </code>
  */
-class Google_Service_Dfareporting_LandingPages_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_LandingPages_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -7025,13 +7025,13 @@ class Google_Service_Dfareporting_LandingPages_Resource extends Google_Service_R
    * @param string $campaignId Landing page campaign ID.
    * @param string $id Landing page ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_LandingPage
+   * @return Appointments_Google_Service_Dfareporting_LandingPage
    */
   public function get($profileId, $campaignId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'campaignId' => $campaignId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_LandingPage");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_LandingPage");
   }
 
   /**
@@ -7039,15 +7039,15 @@ class Google_Service_Dfareporting_LandingPages_Resource extends Google_Service_R
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $campaignId Landing page campaign ID.
-   * @param Google_LandingPage $postBody
+   * @param Appointments_Google_LandingPage $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_LandingPage
+   * @return Appointments_Google_Service_Dfareporting_LandingPage
    */
-  public function insert($profileId, $campaignId, Google_Service_Dfareporting_LandingPage $postBody, $optParams = array())
+  public function insert($profileId, $campaignId, Appointments_Google_Service_Dfareporting_LandingPage $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'campaignId' => $campaignId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_LandingPage");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_LandingPage");
   }
 
   /**
@@ -7057,13 +7057,13 @@ class Google_Service_Dfareporting_LandingPages_Resource extends Google_Service_R
    * @param string $profileId User profile ID associated with this request.
    * @param string $campaignId Landing page campaign ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_LandingPagesListResponse
+   * @return Appointments_Google_Service_Dfareporting_LandingPagesListResponse
    */
   public function listLandingPages($profileId, $campaignId, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'campaignId' => $campaignId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_LandingPagesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_LandingPagesListResponse");
   }
 
   /**
@@ -7073,15 +7073,15 @@ class Google_Service_Dfareporting_LandingPages_Resource extends Google_Service_R
    * @param string $profileId User profile ID associated with this request.
    * @param string $campaignId Landing page campaign ID.
    * @param string $id Landing page ID.
-   * @param Google_LandingPage $postBody
+   * @param Appointments_Google_LandingPage $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_LandingPage
+   * @return Appointments_Google_Service_Dfareporting_LandingPage
    */
-  public function patch($profileId, $campaignId, $id, Google_Service_Dfareporting_LandingPage $postBody, $optParams = array())
+  public function patch($profileId, $campaignId, $id, Appointments_Google_Service_Dfareporting_LandingPage $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'campaignId' => $campaignId, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_LandingPage");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_LandingPage");
   }
 
   /**
@@ -7089,15 +7089,15 @@ class Google_Service_Dfareporting_LandingPages_Resource extends Google_Service_R
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $campaignId Landing page campaign ID.
-   * @param Google_LandingPage $postBody
+   * @param Appointments_Google_LandingPage $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_LandingPage
+   * @return Appointments_Google_Service_Dfareporting_LandingPage
    */
-  public function update($profileId, $campaignId, Google_Service_Dfareporting_LandingPage $postBody, $optParams = array())
+  public function update($profileId, $campaignId, Appointments_Google_Service_Dfareporting_LandingPage $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'campaignId' => $campaignId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_LandingPage");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_LandingPage");
   }
 }
 
@@ -7105,11 +7105,11 @@ class Google_Service_Dfareporting_LandingPages_Resource extends Google_Service_R
  * The "metros" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $metros = $dfareportingService->metros;
  *  </code>
  */
-class Google_Service_Dfareporting_Metros_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_Metros_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -7117,13 +7117,13 @@ class Google_Service_Dfareporting_Metros_Resource extends Google_Service_Resourc
    *
    * @param string $profileId User profile ID associated with this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_MetrosListResponse
+   * @return Appointments_Google_Service_Dfareporting_MetrosListResponse
    */
   public function listMetros($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_MetrosListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_MetrosListResponse");
   }
 }
 
@@ -7131,11 +7131,11 @@ class Google_Service_Dfareporting_Metros_Resource extends Google_Service_Resourc
  * The "mobileCarriers" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $mobileCarriers = $dfareportingService->mobileCarriers;
  *  </code>
  */
-class Google_Service_Dfareporting_MobileCarriers_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_MobileCarriers_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -7144,13 +7144,13 @@ class Google_Service_Dfareporting_MobileCarriers_Resource extends Google_Service
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Mobile carrier ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_MobileCarrier
+   * @return Appointments_Google_Service_Dfareporting_MobileCarrier
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_MobileCarrier");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_MobileCarrier");
   }
 
   /**
@@ -7158,13 +7158,13 @@ class Google_Service_Dfareporting_MobileCarriers_Resource extends Google_Service
    *
    * @param string $profileId User profile ID associated with this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_MobileCarriersListResponse
+   * @return Appointments_Google_Service_Dfareporting_MobileCarriersListResponse
    */
   public function listMobileCarriers($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_MobileCarriersListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_MobileCarriersListResponse");
   }
 }
 
@@ -7172,11 +7172,11 @@ class Google_Service_Dfareporting_MobileCarriers_Resource extends Google_Service
  * The "operatingSystemVersions" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $operatingSystemVersions = $dfareportingService->operatingSystemVersions;
  *  </code>
  */
-class Google_Service_Dfareporting_OperatingSystemVersions_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_OperatingSystemVersions_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -7185,13 +7185,13 @@ class Google_Service_Dfareporting_OperatingSystemVersions_Resource extends Googl
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Operating system version ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_OperatingSystemVersion
+   * @return Appointments_Google_Service_Dfareporting_OperatingSystemVersion
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_OperatingSystemVersion");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_OperatingSystemVersion");
   }
 
   /**
@@ -7200,13 +7200,13 @@ class Google_Service_Dfareporting_OperatingSystemVersions_Resource extends Googl
    *
    * @param string $profileId User profile ID associated with this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_OperatingSystemVersionsListResponse
+   * @return Appointments_Google_Service_Dfareporting_OperatingSystemVersionsListResponse
    */
   public function listOperatingSystemVersions($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_OperatingSystemVersionsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_OperatingSystemVersionsListResponse");
   }
 }
 
@@ -7214,11 +7214,11 @@ class Google_Service_Dfareporting_OperatingSystemVersions_Resource extends Googl
  * The "operatingSystems" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $operatingSystems = $dfareportingService->operatingSystems;
  *  </code>
  */
-class Google_Service_Dfareporting_OperatingSystems_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_OperatingSystems_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -7227,13 +7227,13 @@ class Google_Service_Dfareporting_OperatingSystems_Resource extends Google_Servi
    * @param string $profileId User profile ID associated with this request.
    * @param string $dartId Operating system DART ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_OperatingSystem
+   * @return Appointments_Google_Service_Dfareporting_OperatingSystem
    */
   public function get($profileId, $dartId, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'dartId' => $dartId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_OperatingSystem");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_OperatingSystem");
   }
 
   /**
@@ -7242,13 +7242,13 @@ class Google_Service_Dfareporting_OperatingSystems_Resource extends Google_Servi
    *
    * @param string $profileId User profile ID associated with this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_OperatingSystemsListResponse
+   * @return Appointments_Google_Service_Dfareporting_OperatingSystemsListResponse
    */
   public function listOperatingSystems($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_OperatingSystemsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_OperatingSystemsListResponse");
   }
 }
 
@@ -7256,11 +7256,11 @@ class Google_Service_Dfareporting_OperatingSystems_Resource extends Google_Servi
  * The "orderDocuments" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $orderDocuments = $dfareportingService->orderDocuments;
  *  </code>
  */
-class Google_Service_Dfareporting_OrderDocuments_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_OrderDocuments_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -7270,13 +7270,13 @@ class Google_Service_Dfareporting_OrderDocuments_Resource extends Google_Service
    * @param string $projectId Project ID for order documents.
    * @param string $id Order document ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_OrderDocument
+   * @return Appointments_Google_Service_Dfareporting_OrderDocument
    */
   public function get($profileId, $projectId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'projectId' => $projectId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_OrderDocument");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_OrderDocument");
   }
 
   /**
@@ -7306,13 +7306,13 @@ class Google_Service_Dfareporting_OrderDocuments_Resource extends Google_Service
    * these sites.
    * @opt_param string sortField Field by which to sort the list.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
-   * @return Google_Service_Dfareporting_OrderDocumentsListResponse
+   * @return Appointments_Google_Service_Dfareporting_OrderDocumentsListResponse
    */
   public function listOrderDocuments($profileId, $projectId, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'projectId' => $projectId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_OrderDocumentsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_OrderDocumentsListResponse");
   }
 }
 
@@ -7320,11 +7320,11 @@ class Google_Service_Dfareporting_OrderDocuments_Resource extends Google_Service
  * The "orders" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $orders = $dfareportingService->orders;
  *  </code>
  */
-class Google_Service_Dfareporting_Orders_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_Orders_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -7334,13 +7334,13 @@ class Google_Service_Dfareporting_Orders_Resource extends Google_Service_Resourc
    * @param string $projectId Project ID for orders.
    * @param string $id Order ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Order
+   * @return Appointments_Google_Service_Dfareporting_Order
    */
   public function get($profileId, $projectId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'projectId' => $projectId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_Order");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_Order");
   }
 
   /**
@@ -7364,13 +7364,13 @@ class Google_Service_Dfareporting_Orders_Resource extends Google_Service_Resourc
    * site IDs.
    * @opt_param string sortField Field by which to sort the list.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
-   * @return Google_Service_Dfareporting_OrdersListResponse
+   * @return Appointments_Google_Service_Dfareporting_OrdersListResponse
    */
   public function listOrders($profileId, $projectId, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'projectId' => $projectId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_OrdersListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_OrdersListResponse");
   }
 }
 
@@ -7378,11 +7378,11 @@ class Google_Service_Dfareporting_Orders_Resource extends Google_Service_Resourc
  * The "placementGroups" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $placementGroups = $dfareportingService->placementGroups;
  *  </code>
  */
-class Google_Service_Dfareporting_PlacementGroups_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_PlacementGroups_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -7391,28 +7391,28 @@ class Google_Service_Dfareporting_PlacementGroups_Resource extends Google_Servic
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Placement group ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_PlacementGroup
+   * @return Appointments_Google_Service_Dfareporting_PlacementGroup
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_PlacementGroup");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_PlacementGroup");
   }
 
   /**
    * Inserts a new placement group. (placementGroups.insert)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_PlacementGroup $postBody
+   * @param Appointments_Google_PlacementGroup $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_PlacementGroup
+   * @return Appointments_Google_Service_Dfareporting_PlacementGroup
    */
-  public function insert($profileId, Google_Service_Dfareporting_PlacementGroup $postBody, $optParams = array())
+  public function insert($profileId, Appointments_Google_Service_Dfareporting_PlacementGroup $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_PlacementGroup");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_PlacementGroup");
   }
 
   /**
@@ -7469,13 +7469,13 @@ class Google_Service_Dfareporting_PlacementGroups_Resource extends Google_Servic
    * with these sites.
    * @opt_param string sortField Field by which to sort the list.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
-   * @return Google_Service_Dfareporting_PlacementGroupsListResponse
+   * @return Appointments_Google_Service_Dfareporting_PlacementGroupsListResponse
    */
   public function listPlacementGroups($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_PlacementGroupsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_PlacementGroupsListResponse");
   }
 
   /**
@@ -7484,30 +7484,30 @@ class Google_Service_Dfareporting_PlacementGroups_Resource extends Google_Servic
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Placement group ID.
-   * @param Google_PlacementGroup $postBody
+   * @param Appointments_Google_PlacementGroup $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_PlacementGroup
+   * @return Appointments_Google_Service_Dfareporting_PlacementGroup
    */
-  public function patch($profileId, $id, Google_Service_Dfareporting_PlacementGroup $postBody, $optParams = array())
+  public function patch($profileId, $id, Appointments_Google_Service_Dfareporting_PlacementGroup $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_PlacementGroup");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_PlacementGroup");
   }
 
   /**
    * Updates an existing placement group. (placementGroups.update)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_PlacementGroup $postBody
+   * @param Appointments_Google_PlacementGroup $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_PlacementGroup
+   * @return Appointments_Google_Service_Dfareporting_PlacementGroup
    */
-  public function update($profileId, Google_Service_Dfareporting_PlacementGroup $postBody, $optParams = array())
+  public function update($profileId, Appointments_Google_Service_Dfareporting_PlacementGroup $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_PlacementGroup");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_PlacementGroup");
   }
 }
 
@@ -7515,11 +7515,11 @@ class Google_Service_Dfareporting_PlacementGroups_Resource extends Google_Servic
  * The "placementStrategies" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $placementStrategies = $dfareportingService->placementStrategies;
  *  </code>
  */
-class Google_Service_Dfareporting_PlacementStrategies_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_PlacementStrategies_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -7542,28 +7542,28 @@ class Google_Service_Dfareporting_PlacementStrategies_Resource extends Google_Se
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Placement strategy ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_PlacementStrategy
+   * @return Appointments_Google_Service_Dfareporting_PlacementStrategy
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_PlacementStrategy");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_PlacementStrategy");
   }
 
   /**
    * Inserts a new placement strategy. (placementStrategies.insert)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_PlacementStrategy $postBody
+   * @param Appointments_Google_PlacementStrategy $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_PlacementStrategy
+   * @return Appointments_Google_Service_Dfareporting_PlacementStrategy
    */
-  public function insert($profileId, Google_Service_Dfareporting_PlacementStrategy $postBody, $optParams = array())
+  public function insert($profileId, Appointments_Google_Service_Dfareporting_PlacementStrategy $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_PlacementStrategy");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_PlacementStrategy");
   }
 
   /**
@@ -7587,13 +7587,13 @@ class Google_Service_Dfareporting_PlacementStrategies_Resource extends Google_Se
    * "placementstrategy".
    * @opt_param string sortField Field by which to sort the list.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
-   * @return Google_Service_Dfareporting_PlacementStrategiesListResponse
+   * @return Appointments_Google_Service_Dfareporting_PlacementStrategiesListResponse
    */
   public function listPlacementStrategies($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_PlacementStrategiesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_PlacementStrategiesListResponse");
   }
 
   /**
@@ -7602,30 +7602,30 @@ class Google_Service_Dfareporting_PlacementStrategies_Resource extends Google_Se
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Placement strategy ID.
-   * @param Google_PlacementStrategy $postBody
+   * @param Appointments_Google_PlacementStrategy $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_PlacementStrategy
+   * @return Appointments_Google_Service_Dfareporting_PlacementStrategy
    */
-  public function patch($profileId, $id, Google_Service_Dfareporting_PlacementStrategy $postBody, $optParams = array())
+  public function patch($profileId, $id, Appointments_Google_Service_Dfareporting_PlacementStrategy $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_PlacementStrategy");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_PlacementStrategy");
   }
 
   /**
    * Updates an existing placement strategy. (placementStrategies.update)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_PlacementStrategy $postBody
+   * @param Appointments_Google_PlacementStrategy $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_PlacementStrategy
+   * @return Appointments_Google_Service_Dfareporting_PlacementStrategy
    */
-  public function update($profileId, Google_Service_Dfareporting_PlacementStrategy $postBody, $optParams = array())
+  public function update($profileId, Appointments_Google_Service_Dfareporting_PlacementStrategy $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_PlacementStrategy");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_PlacementStrategy");
   }
 }
 
@@ -7633,11 +7633,11 @@ class Google_Service_Dfareporting_PlacementStrategies_Resource extends Google_Se
  * The "placements" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $placements = $dfareportingService->placements;
  *  </code>
  */
-class Google_Service_Dfareporting_Placements_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_Placements_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -7650,13 +7650,13 @@ class Google_Service_Dfareporting_Placements_Resource extends Google_Service_Res
    * This is a required field.
    * @opt_param string placementIds Generate tags for these placements.
    * @opt_param string tagFormats Tag formats to generate for these placements.
-   * @return Google_Service_Dfareporting_PlacementsGenerateTagsResponse
+   * @return Appointments_Google_Service_Dfareporting_PlacementsGenerateTagsResponse
    */
   public function generatetags($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('generatetags', array($params), "Google_Service_Dfareporting_PlacementsGenerateTagsResponse");
+    return $this->call('generatetags', array($params), "Appointments_Google_Service_Dfareporting_PlacementsGenerateTagsResponse");
   }
 
   /**
@@ -7665,28 +7665,28 @@ class Google_Service_Dfareporting_Placements_Resource extends Google_Service_Res
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Placement ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Placement
+   * @return Appointments_Google_Service_Dfareporting_Placement
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_Placement");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_Placement");
   }
 
   /**
    * Inserts a new placement. (placements.insert)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_Placement $postBody
+   * @param Appointments_Google_Placement $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Placement
+   * @return Appointments_Google_Service_Dfareporting_Placement
    */
-  public function insert($profileId, Google_Service_Dfareporting_Placement $postBody, $optParams = array())
+  public function insert($profileId, Appointments_Google_Service_Dfareporting_Placement $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_Placement");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_Placement");
   }
 
   /**
@@ -7749,13 +7749,13 @@ class Google_Service_Dfareporting_Placements_Resource extends Google_Service_Res
    * these sizes.
    * @opt_param string sortField Field by which to sort the list.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
-   * @return Google_Service_Dfareporting_PlacementsListResponse
+   * @return Appointments_Google_Service_Dfareporting_PlacementsListResponse
    */
   public function listPlacements($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_PlacementsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_PlacementsListResponse");
   }
 
   /**
@@ -7764,30 +7764,30 @@ class Google_Service_Dfareporting_Placements_Resource extends Google_Service_Res
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Placement ID.
-   * @param Google_Placement $postBody
+   * @param Appointments_Google_Placement $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Placement
+   * @return Appointments_Google_Service_Dfareporting_Placement
    */
-  public function patch($profileId, $id, Google_Service_Dfareporting_Placement $postBody, $optParams = array())
+  public function patch($profileId, $id, Appointments_Google_Service_Dfareporting_Placement $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_Placement");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_Placement");
   }
 
   /**
    * Updates an existing placement. (placements.update)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_Placement $postBody
+   * @param Appointments_Google_Placement $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Placement
+   * @return Appointments_Google_Service_Dfareporting_Placement
    */
-  public function update($profileId, Google_Service_Dfareporting_Placement $postBody, $optParams = array())
+  public function update($profileId, Appointments_Google_Service_Dfareporting_Placement $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_Placement");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_Placement");
   }
 }
 
@@ -7795,11 +7795,11 @@ class Google_Service_Dfareporting_Placements_Resource extends Google_Service_Res
  * The "platformTypes" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $platformTypes = $dfareportingService->platformTypes;
  *  </code>
  */
-class Google_Service_Dfareporting_PlatformTypes_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_PlatformTypes_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -7808,13 +7808,13 @@ class Google_Service_Dfareporting_PlatformTypes_Resource extends Google_Service_
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Platform type ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_PlatformType
+   * @return Appointments_Google_Service_Dfareporting_PlatformType
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_PlatformType");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_PlatformType");
   }
 
   /**
@@ -7822,13 +7822,13 @@ class Google_Service_Dfareporting_PlatformTypes_Resource extends Google_Service_
    *
    * @param string $profileId User profile ID associated with this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_PlatformTypesListResponse
+   * @return Appointments_Google_Service_Dfareporting_PlatformTypesListResponse
    */
   public function listPlatformTypes($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_PlatformTypesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_PlatformTypesListResponse");
   }
 }
 
@@ -7836,11 +7836,11 @@ class Google_Service_Dfareporting_PlatformTypes_Resource extends Google_Service_
  * The "postalCodes" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $postalCodes = $dfareportingService->postalCodes;
  *  </code>
  */
-class Google_Service_Dfareporting_PostalCodes_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_PostalCodes_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -7849,13 +7849,13 @@ class Google_Service_Dfareporting_PostalCodes_Resource extends Google_Service_Re
    * @param string $profileId User profile ID associated with this request.
    * @param string $code Postal code ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_PostalCode
+   * @return Appointments_Google_Service_Dfareporting_PostalCode
    */
   public function get($profileId, $code, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'code' => $code);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_PostalCode");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_PostalCode");
   }
 
   /**
@@ -7863,13 +7863,13 @@ class Google_Service_Dfareporting_PostalCodes_Resource extends Google_Service_Re
    *
    * @param string $profileId User profile ID associated with this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_PostalCodesListResponse
+   * @return Appointments_Google_Service_Dfareporting_PostalCodesListResponse
    */
   public function listPostalCodes($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_PostalCodesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_PostalCodesListResponse");
   }
 }
 
@@ -7877,11 +7877,11 @@ class Google_Service_Dfareporting_PostalCodes_Resource extends Google_Service_Re
  * The "projects" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $projects = $dfareportingService->projects;
  *  </code>
  */
-class Google_Service_Dfareporting_Projects_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_Projects_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -7890,13 +7890,13 @@ class Google_Service_Dfareporting_Projects_Resource extends Google_Service_Resou
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Project ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Project
+   * @return Appointments_Google_Service_Dfareporting_Project
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_Project");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_Project");
   }
 
   /**
@@ -7919,13 +7919,13 @@ class Google_Service_Dfareporting_Projects_Resource extends Google_Service_Resou
    * match projects with name "my project", "project 2015", or simply "project".
    * @opt_param string sortField Field by which to sort the list.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
-   * @return Google_Service_Dfareporting_ProjectsListResponse
+   * @return Appointments_Google_Service_Dfareporting_ProjectsListResponse
    */
   public function listProjects($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_ProjectsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_ProjectsListResponse");
   }
 }
 
@@ -7933,11 +7933,11 @@ class Google_Service_Dfareporting_Projects_Resource extends Google_Service_Resou
  * The "regions" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $regions = $dfareportingService->regions;
  *  </code>
  */
-class Google_Service_Dfareporting_Regions_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_Regions_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -7945,13 +7945,13 @@ class Google_Service_Dfareporting_Regions_Resource extends Google_Service_Resour
    *
    * @param string $profileId User profile ID associated with this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_RegionsListResponse
+   * @return Appointments_Google_Service_Dfareporting_RegionsListResponse
    */
   public function listRegions($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_RegionsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_RegionsListResponse");
   }
 }
 
@@ -7959,11 +7959,11 @@ class Google_Service_Dfareporting_Regions_Resource extends Google_Service_Resour
  * The "remarketingListShares" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $remarketingListShares = $dfareportingService->remarketingListShares;
  *  </code>
  */
-class Google_Service_Dfareporting_RemarketingListShares_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_RemarketingListShares_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -7973,13 +7973,13 @@ class Google_Service_Dfareporting_RemarketingListShares_Resource extends Google_
    * @param string $profileId User profile ID associated with this request.
    * @param string $remarketingListId Remarketing list ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_RemarketingListShare
+   * @return Appointments_Google_Service_Dfareporting_RemarketingListShare
    */
   public function get($profileId, $remarketingListId, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'remarketingListId' => $remarketingListId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_RemarketingListShare");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_RemarketingListShare");
   }
 
   /**
@@ -7988,30 +7988,30 @@ class Google_Service_Dfareporting_RemarketingListShares_Resource extends Google_
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $remarketingListId Remarketing list ID.
-   * @param Google_RemarketingListShare $postBody
+   * @param Appointments_Google_RemarketingListShare $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_RemarketingListShare
+   * @return Appointments_Google_Service_Dfareporting_RemarketingListShare
    */
-  public function patch($profileId, $remarketingListId, Google_Service_Dfareporting_RemarketingListShare $postBody, $optParams = array())
+  public function patch($profileId, $remarketingListId, Appointments_Google_Service_Dfareporting_RemarketingListShare $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'remarketingListId' => $remarketingListId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_RemarketingListShare");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_RemarketingListShare");
   }
 
   /**
    * Updates an existing remarketing list share. (remarketingListShares.update)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_RemarketingListShare $postBody
+   * @param Appointments_Google_RemarketingListShare $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_RemarketingListShare
+   * @return Appointments_Google_Service_Dfareporting_RemarketingListShare
    */
-  public function update($profileId, Google_Service_Dfareporting_RemarketingListShare $postBody, $optParams = array())
+  public function update($profileId, Appointments_Google_Service_Dfareporting_RemarketingListShare $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_RemarketingListShare");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_RemarketingListShare");
   }
 }
 
@@ -8019,11 +8019,11 @@ class Google_Service_Dfareporting_RemarketingListShares_Resource extends Google_
  * The "remarketingLists" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $remarketingLists = $dfareportingService->remarketingLists;
  *  </code>
  */
-class Google_Service_Dfareporting_RemarketingLists_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_RemarketingLists_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -8032,28 +8032,28 @@ class Google_Service_Dfareporting_RemarketingLists_Resource extends Google_Servi
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Remarketing list ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_RemarketingList
+   * @return Appointments_Google_Service_Dfareporting_RemarketingList
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_RemarketingList");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_RemarketingList");
   }
 
   /**
    * Inserts a new remarketing list. (remarketingLists.insert)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_RemarketingList $postBody
+   * @param Appointments_Google_RemarketingList $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_RemarketingList
+   * @return Appointments_Google_Service_Dfareporting_RemarketingList
    */
-  public function insert($profileId, Google_Service_Dfareporting_RemarketingList $postBody, $optParams = array())
+  public function insert($profileId, Appointments_Google_Service_Dfareporting_RemarketingList $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_RemarketingList");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_RemarketingList");
   }
 
   /**
@@ -8080,13 +8080,13 @@ class Google_Service_Dfareporting_RemarketingLists_Resource extends Google_Servi
    * result page.
    * @opt_param string sortField Field by which to sort the list.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
-   * @return Google_Service_Dfareporting_RemarketingListsListResponse
+   * @return Appointments_Google_Service_Dfareporting_RemarketingListsListResponse
    */
   public function listRemarketingLists($profileId, $advertiserId, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'advertiserId' => $advertiserId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_RemarketingListsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_RemarketingListsListResponse");
   }
 
   /**
@@ -8095,30 +8095,30 @@ class Google_Service_Dfareporting_RemarketingLists_Resource extends Google_Servi
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Remarketing list ID.
-   * @param Google_RemarketingList $postBody
+   * @param Appointments_Google_RemarketingList $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_RemarketingList
+   * @return Appointments_Google_Service_Dfareporting_RemarketingList
    */
-  public function patch($profileId, $id, Google_Service_Dfareporting_RemarketingList $postBody, $optParams = array())
+  public function patch($profileId, $id, Appointments_Google_Service_Dfareporting_RemarketingList $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_RemarketingList");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_RemarketingList");
   }
 
   /**
    * Updates an existing remarketing list. (remarketingLists.update)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_RemarketingList $postBody
+   * @param Appointments_Google_RemarketingList $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_RemarketingList
+   * @return Appointments_Google_Service_Dfareporting_RemarketingList
    */
-  public function update($profileId, Google_Service_Dfareporting_RemarketingList $postBody, $optParams = array())
+  public function update($profileId, Appointments_Google_Service_Dfareporting_RemarketingList $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_RemarketingList");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_RemarketingList");
   }
 }
 
@@ -8126,11 +8126,11 @@ class Google_Service_Dfareporting_RemarketingLists_Resource extends Google_Servi
  * The "reports" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $reports = $dfareportingService->reports;
  *  </code>
  */
-class Google_Service_Dfareporting_Reports_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_Reports_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -8153,28 +8153,28 @@ class Google_Service_Dfareporting_Reports_Resource extends Google_Service_Resour
    * @param string $profileId The DFA user profile ID.
    * @param string $reportId The ID of the report.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Report
+   * @return Appointments_Google_Service_Dfareporting_Report
    */
   public function get($profileId, $reportId, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'reportId' => $reportId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_Report");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_Report");
   }
 
   /**
    * Creates a report. (reports.insert)
    *
    * @param string $profileId The DFA user profile ID.
-   * @param Google_Report $postBody
+   * @param Appointments_Google_Report $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Report
+   * @return Appointments_Google_Service_Dfareporting_Report
    */
-  public function insert($profileId, Google_Service_Dfareporting_Report $postBody, $optParams = array())
+  public function insert($profileId, Appointments_Google_Service_Dfareporting_Report $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_Report");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_Report");
   }
 
   /**
@@ -8190,13 +8190,13 @@ class Google_Service_Dfareporting_Reports_Resource extends Google_Service_Resour
    * default is 'MINE'.
    * @opt_param string sortField The field by which to sort the list.
    * @opt_param string sortOrder Order of sorted results, default is 'DESCENDING'.
-   * @return Google_Service_Dfareporting_ReportList
+   * @return Appointments_Google_Service_Dfareporting_ReportList
    */
   public function listReports($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_ReportList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_ReportList");
   }
 
   /**
@@ -8204,15 +8204,15 @@ class Google_Service_Dfareporting_Reports_Resource extends Google_Service_Resour
    *
    * @param string $profileId The DFA user profile ID.
    * @param string $reportId The ID of the report.
-   * @param Google_Report $postBody
+   * @param Appointments_Google_Report $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Report
+   * @return Appointments_Google_Service_Dfareporting_Report
    */
-  public function patch($profileId, $reportId, Google_Service_Dfareporting_Report $postBody, $optParams = array())
+  public function patch($profileId, $reportId, Appointments_Google_Service_Dfareporting_Report $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'reportId' => $reportId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_Report");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_Report");
   }
 
   /**
@@ -8224,13 +8224,13 @@ class Google_Service_Dfareporting_Reports_Resource extends Google_Service_Resour
    *
    * @opt_param bool synchronous If set and true, tries to run the report
    * synchronously.
-   * @return Google_Service_Dfareporting_DfareportingFile
+   * @return Appointments_Google_Service_Dfareporting_DfareportingFile
    */
   public function run($profileId, $reportId, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'reportId' => $reportId);
     $params = array_merge($params, $optParams);
-    return $this->call('run', array($params), "Google_Service_Dfareporting_DfareportingFile");
+    return $this->call('run', array($params), "Appointments_Google_Service_Dfareporting_DfareportingFile");
   }
 
   /**
@@ -8238,15 +8238,15 @@ class Google_Service_Dfareporting_Reports_Resource extends Google_Service_Resour
    *
    * @param string $profileId The DFA user profile ID.
    * @param string $reportId The ID of the report.
-   * @param Google_Report $postBody
+   * @param Appointments_Google_Report $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Report
+   * @return Appointments_Google_Service_Dfareporting_Report
    */
-  public function update($profileId, $reportId, Google_Service_Dfareporting_Report $postBody, $optParams = array())
+  public function update($profileId, $reportId, Appointments_Google_Service_Dfareporting_Report $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'reportId' => $reportId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_Report");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_Report");
   }
 }
 
@@ -8254,11 +8254,11 @@ class Google_Service_Dfareporting_Reports_Resource extends Google_Service_Resour
  * The "compatibleFields" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $compatibleFields = $dfareportingService->compatibleFields;
  *  </code>
  */
-class Google_Service_Dfareporting_ReportsCompatibleFields_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_ReportsCompatibleFields_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -8267,26 +8267,26 @@ class Google_Service_Dfareporting_ReportsCompatibleFields_Resource extends Googl
    * report and user permissions. (compatibleFields.query)
    *
    * @param string $profileId The DFA user profile ID.
-   * @param Google_Report $postBody
+   * @param Appointments_Google_Report $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_CompatibleFields
+   * @return Appointments_Google_Service_Dfareporting_CompatibleFields
    */
-  public function query($profileId, Google_Service_Dfareporting_Report $postBody, $optParams = array())
+  public function query($profileId, Appointments_Google_Service_Dfareporting_Report $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('query', array($params), "Google_Service_Dfareporting_CompatibleFields");
+    return $this->call('query', array($params), "Appointments_Google_Service_Dfareporting_CompatibleFields");
   }
 }
 /**
  * The "files" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $files = $dfareportingService->files;
  *  </code>
  */
-class Google_Service_Dfareporting_ReportsFiles_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_ReportsFiles_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -8296,13 +8296,13 @@ class Google_Service_Dfareporting_ReportsFiles_Resource extends Google_Service_R
    * @param string $reportId The ID of the report.
    * @param string $fileId The ID of the report file.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_DfareportingFile
+   * @return Appointments_Google_Service_Dfareporting_DfareportingFile
    */
   public function get($profileId, $reportId, $fileId, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'reportId' => $reportId, 'fileId' => $fileId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_DfareportingFile");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_DfareportingFile");
   }
 
   /**
@@ -8317,13 +8317,13 @@ class Google_Service_Dfareporting_ReportsFiles_Resource extends Google_Service_R
    * result page.
    * @opt_param string sortField The field by which to sort the list.
    * @opt_param string sortOrder Order of sorted results, default is 'DESCENDING'.
-   * @return Google_Service_Dfareporting_FileList
+   * @return Appointments_Google_Service_Dfareporting_FileList
    */
   public function listReportsFiles($profileId, $reportId, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'reportId' => $reportId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_FileList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_FileList");
   }
 }
 
@@ -8331,11 +8331,11 @@ class Google_Service_Dfareporting_ReportsFiles_Resource extends Google_Service_R
  * The "sites" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $sites = $dfareportingService->sites;
  *  </code>
  */
-class Google_Service_Dfareporting_Sites_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_Sites_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -8344,28 +8344,28 @@ class Google_Service_Dfareporting_Sites_Resource extends Google_Service_Resource
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Site ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Site
+   * @return Appointments_Google_Service_Dfareporting_Site
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_Site");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_Site");
   }
 
   /**
    * Inserts a new site. (sites.insert)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_Site $postBody
+   * @param Appointments_Google_Site $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Site
+   * @return Appointments_Google_Service_Dfareporting_Site
    */
-  public function insert($profileId, Google_Service_Dfareporting_Site $postBody, $optParams = array())
+  public function insert($profileId, Appointments_Google_Service_Dfareporting_Site $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_Site");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_Site");
   }
 
   /**
@@ -8400,13 +8400,13 @@ class Google_Service_Dfareporting_Sites_Resource extends Google_Service_Resource
    * @opt_param string subaccountId Select only sites with this subaccount ID.
    * @opt_param bool unmappedSite Select only sites that have not been mapped to a
    * directory site.
-   * @return Google_Service_Dfareporting_SitesListResponse
+   * @return Appointments_Google_Service_Dfareporting_SitesListResponse
    */
   public function listSites($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_SitesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_SitesListResponse");
   }
 
   /**
@@ -8414,30 +8414,30 @@ class Google_Service_Dfareporting_Sites_Resource extends Google_Service_Resource
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Site ID.
-   * @param Google_Site $postBody
+   * @param Appointments_Google_Site $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Site
+   * @return Appointments_Google_Service_Dfareporting_Site
    */
-  public function patch($profileId, $id, Google_Service_Dfareporting_Site $postBody, $optParams = array())
+  public function patch($profileId, $id, Appointments_Google_Service_Dfareporting_Site $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_Site");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_Site");
   }
 
   /**
    * Updates an existing site. (sites.update)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_Site $postBody
+   * @param Appointments_Google_Site $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Site
+   * @return Appointments_Google_Service_Dfareporting_Site
    */
-  public function update($profileId, Google_Service_Dfareporting_Site $postBody, $optParams = array())
+  public function update($profileId, Appointments_Google_Service_Dfareporting_Site $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_Site");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_Site");
   }
 }
 
@@ -8445,11 +8445,11 @@ class Google_Service_Dfareporting_Sites_Resource extends Google_Service_Resource
  * The "sizes" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $sizes = $dfareportingService->sizes;
  *  </code>
  */
-class Google_Service_Dfareporting_Sizes_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_Sizes_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -8458,28 +8458,28 @@ class Google_Service_Dfareporting_Sizes_Resource extends Google_Service_Resource
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Size ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Size
+   * @return Appointments_Google_Service_Dfareporting_Size
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_Size");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_Size");
   }
 
   /**
    * Inserts a new size. (sizes.insert)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_Size $postBody
+   * @param Appointments_Google_Size $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Size
+   * @return Appointments_Google_Service_Dfareporting_Size
    */
-  public function insert($profileId, Google_Service_Dfareporting_Size $postBody, $optParams = array())
+  public function insert($profileId, Appointments_Google_Service_Dfareporting_Size $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_Size");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_Size");
   }
 
   /**
@@ -8492,13 +8492,13 @@ class Google_Service_Dfareporting_Sizes_Resource extends Google_Service_Resource
    * @opt_param bool iabStandard Select only IAB standard sizes.
    * @opt_param string ids Select only sizes with these IDs.
    * @opt_param int width Select only sizes with this width.
-   * @return Google_Service_Dfareporting_SizesListResponse
+   * @return Appointments_Google_Service_Dfareporting_SizesListResponse
    */
   public function listSizes($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_SizesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_SizesListResponse");
   }
 }
 
@@ -8506,11 +8506,11 @@ class Google_Service_Dfareporting_Sizes_Resource extends Google_Service_Resource
  * The "subaccounts" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $subaccounts = $dfareportingService->subaccounts;
  *  </code>
  */
-class Google_Service_Dfareporting_Subaccounts_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_Subaccounts_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -8519,28 +8519,28 @@ class Google_Service_Dfareporting_Subaccounts_Resource extends Google_Service_Re
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Subaccount ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Subaccount
+   * @return Appointments_Google_Service_Dfareporting_Subaccount
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_Subaccount");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_Subaccount");
   }
 
   /**
    * Inserts a new subaccount. (subaccounts.insert)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_Subaccount $postBody
+   * @param Appointments_Google_Subaccount $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Subaccount
+   * @return Appointments_Google_Service_Dfareporting_Subaccount
    */
-  public function insert($profileId, Google_Service_Dfareporting_Subaccount $postBody, $optParams = array())
+  public function insert($profileId, Appointments_Google_Service_Dfareporting_Subaccount $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_Subaccount");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_Subaccount");
   }
 
   /**
@@ -8562,13 +8562,13 @@ class Google_Service_Dfareporting_Subaccounts_Resource extends Google_Service_Re
    * or simply "subaccount".
    * @opt_param string sortField Field by which to sort the list.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
-   * @return Google_Service_Dfareporting_SubaccountsListResponse
+   * @return Appointments_Google_Service_Dfareporting_SubaccountsListResponse
    */
   public function listSubaccounts($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_SubaccountsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_SubaccountsListResponse");
   }
 
   /**
@@ -8577,30 +8577,30 @@ class Google_Service_Dfareporting_Subaccounts_Resource extends Google_Service_Re
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Subaccount ID.
-   * @param Google_Subaccount $postBody
+   * @param Appointments_Google_Subaccount $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Subaccount
+   * @return Appointments_Google_Service_Dfareporting_Subaccount
    */
-  public function patch($profileId, $id, Google_Service_Dfareporting_Subaccount $postBody, $optParams = array())
+  public function patch($profileId, $id, Appointments_Google_Service_Dfareporting_Subaccount $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_Subaccount");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_Subaccount");
   }
 
   /**
    * Updates an existing subaccount. (subaccounts.update)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_Subaccount $postBody
+   * @param Appointments_Google_Subaccount $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_Subaccount
+   * @return Appointments_Google_Service_Dfareporting_Subaccount
    */
-  public function update($profileId, Google_Service_Dfareporting_Subaccount $postBody, $optParams = array())
+  public function update($profileId, Appointments_Google_Service_Dfareporting_Subaccount $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_Subaccount");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_Subaccount");
   }
 }
 
@@ -8608,11 +8608,11 @@ class Google_Service_Dfareporting_Subaccounts_Resource extends Google_Service_Re
  * The "targetableRemarketingLists" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $targetableRemarketingLists = $dfareportingService->targetableRemarketingLists;
  *  </code>
  */
-class Google_Service_Dfareporting_TargetableRemarketingLists_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_TargetableRemarketingLists_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -8621,13 +8621,13 @@ class Google_Service_Dfareporting_TargetableRemarketingLists_Resource extends Go
    * @param string $profileId User profile ID associated with this request.
    * @param string $id Remarketing list ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_TargetableRemarketingList
+   * @return Appointments_Google_Service_Dfareporting_TargetableRemarketingList
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_TargetableRemarketingList");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_TargetableRemarketingList");
   }
 
   /**
@@ -8653,13 +8653,13 @@ class Google_Service_Dfareporting_TargetableRemarketingLists_Resource extends Go
    * result page.
    * @opt_param string sortField Field by which to sort the list.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
-   * @return Google_Service_Dfareporting_TargetableRemarketingListsListResponse
+   * @return Appointments_Google_Service_Dfareporting_TargetableRemarketingListsListResponse
    */
   public function listTargetableRemarketingLists($profileId, $advertiserId, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'advertiserId' => $advertiserId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_TargetableRemarketingListsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_TargetableRemarketingListsListResponse");
   }
 }
 
@@ -8667,11 +8667,11 @@ class Google_Service_Dfareporting_TargetableRemarketingLists_Resource extends Go
  * The "userProfiles" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $userProfiles = $dfareportingService->userProfiles;
  *  </code>
  */
-class Google_Service_Dfareporting_UserProfiles_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_UserProfiles_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -8679,26 +8679,26 @@ class Google_Service_Dfareporting_UserProfiles_Resource extends Google_Service_R
    *
    * @param string $profileId The user profile ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_UserProfile
+   * @return Appointments_Google_Service_Dfareporting_UserProfile
    */
   public function get($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_UserProfile");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_UserProfile");
   }
 
   /**
    * Retrieves list of user profiles for a user. (userProfiles.listUserProfiles)
    *
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_UserProfileList
+   * @return Appointments_Google_Service_Dfareporting_UserProfileList
    */
   public function listUserProfiles($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_UserProfileList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_UserProfileList");
   }
 }
 
@@ -8706,11 +8706,11 @@ class Google_Service_Dfareporting_UserProfiles_Resource extends Google_Service_R
  * The "userRolePermissionGroups" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $userRolePermissionGroups = $dfareportingService->userRolePermissionGroups;
  *  </code>
  */
-class Google_Service_Dfareporting_UserRolePermissionGroups_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_UserRolePermissionGroups_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -8719,13 +8719,13 @@ class Google_Service_Dfareporting_UserRolePermissionGroups_Resource extends Goog
    * @param string $profileId User profile ID associated with this request.
    * @param string $id User role permission group ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_UserRolePermissionGroup
+   * @return Appointments_Google_Service_Dfareporting_UserRolePermissionGroup
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_UserRolePermissionGroup");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_UserRolePermissionGroup");
   }
 
   /**
@@ -8734,13 +8734,13 @@ class Google_Service_Dfareporting_UserRolePermissionGroups_Resource extends Goog
    *
    * @param string $profileId User profile ID associated with this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_UserRolePermissionGroupsListResponse
+   * @return Appointments_Google_Service_Dfareporting_UserRolePermissionGroupsListResponse
    */
   public function listUserRolePermissionGroups($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_UserRolePermissionGroupsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_UserRolePermissionGroupsListResponse");
   }
 }
 
@@ -8748,11 +8748,11 @@ class Google_Service_Dfareporting_UserRolePermissionGroups_Resource extends Goog
  * The "userRolePermissions" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $userRolePermissions = $dfareportingService->userRolePermissions;
  *  </code>
  */
-class Google_Service_Dfareporting_UserRolePermissions_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_UserRolePermissions_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -8761,13 +8761,13 @@ class Google_Service_Dfareporting_UserRolePermissions_Resource extends Google_Se
    * @param string $profileId User profile ID associated with this request.
    * @param string $id User role permission ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_UserRolePermission
+   * @return Appointments_Google_Service_Dfareporting_UserRolePermission
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_UserRolePermission");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_UserRolePermission");
   }
 
   /**
@@ -8778,13 +8778,13 @@ class Google_Service_Dfareporting_UserRolePermissions_Resource extends Google_Se
    * @param array $optParams Optional parameters.
    *
    * @opt_param string ids Select only user role permissions with these IDs.
-   * @return Google_Service_Dfareporting_UserRolePermissionsListResponse
+   * @return Appointments_Google_Service_Dfareporting_UserRolePermissionsListResponse
    */
   public function listUserRolePermissions($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_UserRolePermissionsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_UserRolePermissionsListResponse");
   }
 }
 
@@ -8792,11 +8792,11 @@ class Google_Service_Dfareporting_UserRolePermissions_Resource extends Google_Se
  * The "userRoles" collection of methods.
  * Typical usage is:
  *  <code>
- *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $dfareportingService = new Appointments_Google_Service_Dfareporting(...);
  *   $userRoles = $dfareportingService->userRoles;
  *  </code>
  */
-class Google_Service_Dfareporting_UserRoles_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Dfareporting_UserRoles_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -8819,28 +8819,28 @@ class Google_Service_Dfareporting_UserRoles_Resource extends Google_Service_Reso
    * @param string $profileId User profile ID associated with this request.
    * @param string $id User role ID.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_UserRole
+   * @return Appointments_Google_Service_Dfareporting_UserRole
    */
   public function get($profileId, $id, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Dfareporting_UserRole");
+    return $this->call('get', array($params), "Appointments_Google_Service_Dfareporting_UserRole");
   }
 
   /**
    * Inserts a new user role. (userRoles.insert)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_UserRole $postBody
+   * @param Appointments_Google_UserRole $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_UserRole
+   * @return Appointments_Google_Service_Dfareporting_UserRole
    */
-  public function insert($profileId, Google_Service_Dfareporting_UserRole $postBody, $optParams = array())
+  public function insert($profileId, Appointments_Google_Service_Dfareporting_UserRole $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Dfareporting_UserRole");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Dfareporting_UserRole");
   }
 
   /**
@@ -8866,13 +8866,13 @@ class Google_Service_Dfareporting_UserRoles_Resource extends Google_Service_Reso
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
    * @opt_param string subaccountId Select only user roles that belong to this
    * subaccount.
-   * @return Google_Service_Dfareporting_UserRolesListResponse
+   * @return Appointments_Google_Service_Dfareporting_UserRolesListResponse
    */
   public function listUserRoles($profileId, $optParams = array())
   {
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Dfareporting_UserRolesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Dfareporting_UserRolesListResponse");
   }
 
   /**
@@ -8881,37 +8881,37 @@ class Google_Service_Dfareporting_UserRoles_Resource extends Google_Service_Reso
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $id User role ID.
-   * @param Google_UserRole $postBody
+   * @param Appointments_Google_UserRole $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_UserRole
+   * @return Appointments_Google_Service_Dfareporting_UserRole
    */
-  public function patch($profileId, $id, Google_Service_Dfareporting_UserRole $postBody, $optParams = array())
+  public function patch($profileId, $id, Appointments_Google_Service_Dfareporting_UserRole $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Dfareporting_UserRole");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Dfareporting_UserRole");
   }
 
   /**
    * Updates an existing user role. (userRoles.update)
    *
    * @param string $profileId User profile ID associated with this request.
-   * @param Google_UserRole $postBody
+   * @param Appointments_Google_UserRole $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dfareporting_UserRole
+   * @return Appointments_Google_Service_Dfareporting_UserRole
    */
-  public function update($profileId, Google_Service_Dfareporting_UserRole $postBody, $optParams = array())
+  public function update($profileId, Appointments_Google_Service_Dfareporting_UserRole $postBody, $optParams = array())
   {
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Dfareporting_UserRole");
+    return $this->call('update', array($params), "Appointments_Google_Service_Dfareporting_UserRole");
   }
 }
 
 
 
 
-class Google_Service_Dfareporting_Account extends Google_Collection
+class Appointments_Google_Service_Dfareporting_Account extends Appointments_Google_Collection
 {
   protected $collection_key = 'availablePermissionIds';
   protected $internal_gapi_mappings = array(
@@ -8933,7 +8933,7 @@ class Google_Service_Dfareporting_Account extends Google_Collection
   public $maximumImageSize;
   public $name;
   public $nielsenOcrEnabled;
-  protected $reportsConfigurationType = 'Google_Service_Dfareporting_ReportsConfiguration';
+  protected $reportsConfigurationType = 'Appointments_Google_Service_Dfareporting_ReportsConfiguration';
   protected $reportsConfigurationDataType = '';
   public $teaserSizeLimit;
 
@@ -9074,7 +9074,7 @@ class Google_Service_Dfareporting_Account extends Google_Collection
   {
     return $this->nielsenOcrEnabled;
   }
-  public function setReportsConfiguration(Google_Service_Dfareporting_ReportsConfiguration $reportsConfiguration)
+  public function setReportsConfiguration(Appointments_Google_Service_Dfareporting_ReportsConfiguration $reportsConfiguration)
   {
     $this->reportsConfiguration = $reportsConfiguration;
   }
@@ -9092,7 +9092,7 @@ class Google_Service_Dfareporting_Account extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_AccountActiveAdSummary extends Google_Model
+class Appointments_Google_Service_Dfareporting_AccountActiveAdSummary extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -9145,7 +9145,7 @@ class Google_Service_Dfareporting_AccountActiveAdSummary extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_AccountPermission extends Google_Collection
+class Appointments_Google_Service_Dfareporting_AccountPermission extends Appointments_Google_Collection
 {
   protected $collection_key = 'accountProfiles';
   protected $internal_gapi_mappings = array(
@@ -9208,7 +9208,7 @@ class Google_Service_Dfareporting_AccountPermission extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_AccountPermissionGroup extends Google_Model
+class Appointments_Google_Service_Dfareporting_AccountPermissionGroup extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -9243,12 +9243,12 @@ class Google_Service_Dfareporting_AccountPermissionGroup extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_AccountPermissionGroupsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_AccountPermissionGroupsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'accountPermissionGroups';
   protected $internal_gapi_mappings = array(
   );
-  protected $accountPermissionGroupsType = 'Google_Service_Dfareporting_AccountPermissionGroup';
+  protected $accountPermissionGroupsType = 'Appointments_Google_Service_Dfareporting_AccountPermissionGroup';
   protected $accountPermissionGroupsDataType = 'array';
   public $kind;
 
@@ -9271,12 +9271,12 @@ class Google_Service_Dfareporting_AccountPermissionGroupsListResponse extends Go
   }
 }
 
-class Google_Service_Dfareporting_AccountPermissionsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_AccountPermissionsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'accountPermissions';
   protected $internal_gapi_mappings = array(
   );
-  protected $accountPermissionsType = 'Google_Service_Dfareporting_AccountPermission';
+  protected $accountPermissionsType = 'Appointments_Google_Service_Dfareporting_AccountPermission';
   protected $accountPermissionsDataType = 'array';
   public $kind;
 
@@ -9299,15 +9299,15 @@ class Google_Service_Dfareporting_AccountPermissionsListResponse extends Google_
   }
 }
 
-class Google_Service_Dfareporting_AccountUserProfile extends Google_Model
+class Appointments_Google_Service_Dfareporting_AccountUserProfile extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $accountId;
   public $active;
-  protected $advertiserFilterType = 'Google_Service_Dfareporting_ObjectFilter';
+  protected $advertiserFilterType = 'Appointments_Google_Service_Dfareporting_ObjectFilter';
   protected $advertiserFilterDataType = '';
-  protected $campaignFilterType = 'Google_Service_Dfareporting_ObjectFilter';
+  protected $campaignFilterType = 'Appointments_Google_Service_Dfareporting_ObjectFilter';
   protected $campaignFilterDataType = '';
   public $comments;
   public $email;
@@ -9315,12 +9315,12 @@ class Google_Service_Dfareporting_AccountUserProfile extends Google_Model
   public $kind;
   public $locale;
   public $name;
-  protected $siteFilterType = 'Google_Service_Dfareporting_ObjectFilter';
+  protected $siteFilterType = 'Appointments_Google_Service_Dfareporting_ObjectFilter';
   protected $siteFilterDataType = '';
   public $subaccountId;
   public $traffickerType;
   public $userAccessType;
-  protected $userRoleFilterType = 'Google_Service_Dfareporting_ObjectFilter';
+  protected $userRoleFilterType = 'Appointments_Google_Service_Dfareporting_ObjectFilter';
   protected $userRoleFilterDataType = '';
   public $userRoleId;
 
@@ -9341,7 +9341,7 @@ class Google_Service_Dfareporting_AccountUserProfile extends Google_Model
   {
     return $this->active;
   }
-  public function setAdvertiserFilter(Google_Service_Dfareporting_ObjectFilter $advertiserFilter)
+  public function setAdvertiserFilter(Appointments_Google_Service_Dfareporting_ObjectFilter $advertiserFilter)
   {
     $this->advertiserFilter = $advertiserFilter;
   }
@@ -9349,7 +9349,7 @@ class Google_Service_Dfareporting_AccountUserProfile extends Google_Model
   {
     return $this->advertiserFilter;
   }
-  public function setCampaignFilter(Google_Service_Dfareporting_ObjectFilter $campaignFilter)
+  public function setCampaignFilter(Appointments_Google_Service_Dfareporting_ObjectFilter $campaignFilter)
   {
     $this->campaignFilter = $campaignFilter;
   }
@@ -9405,7 +9405,7 @@ class Google_Service_Dfareporting_AccountUserProfile extends Google_Model
   {
     return $this->name;
   }
-  public function setSiteFilter(Google_Service_Dfareporting_ObjectFilter $siteFilter)
+  public function setSiteFilter(Appointments_Google_Service_Dfareporting_ObjectFilter $siteFilter)
   {
     $this->siteFilter = $siteFilter;
   }
@@ -9437,7 +9437,7 @@ class Google_Service_Dfareporting_AccountUserProfile extends Google_Model
   {
     return $this->userAccessType;
   }
-  public function setUserRoleFilter(Google_Service_Dfareporting_ObjectFilter $userRoleFilter)
+  public function setUserRoleFilter(Appointments_Google_Service_Dfareporting_ObjectFilter $userRoleFilter)
   {
     $this->userRoleFilter = $userRoleFilter;
   }
@@ -9455,12 +9455,12 @@ class Google_Service_Dfareporting_AccountUserProfile extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_AccountUserProfilesListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_AccountUserProfilesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'accountUserProfiles';
   protected $internal_gapi_mappings = array(
   );
-  protected $accountUserProfilesType = 'Google_Service_Dfareporting_AccountUserProfile';
+  protected $accountUserProfilesType = 'Appointments_Google_Service_Dfareporting_AccountUserProfile';
   protected $accountUserProfilesDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -9492,12 +9492,12 @@ class Google_Service_Dfareporting_AccountUserProfilesListResponse extends Google
   }
 }
 
-class Google_Service_Dfareporting_AccountsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_AccountsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'accounts';
   protected $internal_gapi_mappings = array(
   );
-  protected $accountsType = 'Google_Service_Dfareporting_Account';
+  protected $accountsType = 'Appointments_Google_Service_Dfareporting_Account';
   protected $accountsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -9529,12 +9529,12 @@ class Google_Service_Dfareporting_AccountsListResponse extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_Activities extends Google_Collection
+class Appointments_Google_Service_Dfareporting_Activities extends Appointments_Google_Collection
 {
   protected $collection_key = 'metricNames';
   protected $internal_gapi_mappings = array(
   );
-  protected $filtersType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $filtersType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $filtersDataType = 'array';
   public $kind;
   public $metricNames;
@@ -9566,7 +9566,7 @@ class Google_Service_Dfareporting_Activities extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_Ad extends Google_Collection
+class Appointments_Google_Service_Dfareporting_Ad extends Appointments_Google_Collection
 {
   protected $collection_key = 'placementAssignments';
   protected $internal_gapi_mappings = array(
@@ -9574,57 +9574,57 @@ class Google_Service_Dfareporting_Ad extends Google_Collection
   public $accountId;
   public $active;
   public $advertiserId;
-  protected $advertiserIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $advertiserIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $advertiserIdDimensionValueDataType = '';
   public $archived;
   public $audienceSegmentId;
   public $campaignId;
-  protected $campaignIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $campaignIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $campaignIdDimensionValueDataType = '';
-  protected $clickThroughUrlType = 'Google_Service_Dfareporting_ClickThroughUrl';
+  protected $clickThroughUrlType = 'Appointments_Google_Service_Dfareporting_ClickThroughUrl';
   protected $clickThroughUrlDataType = '';
-  protected $clickThroughUrlSuffixPropertiesType = 'Google_Service_Dfareporting_ClickThroughUrlSuffixProperties';
+  protected $clickThroughUrlSuffixPropertiesType = 'Appointments_Google_Service_Dfareporting_ClickThroughUrlSuffixProperties';
   protected $clickThroughUrlSuffixPropertiesDataType = '';
   public $comments;
   public $compatibility;
-  protected $createInfoType = 'Google_Service_Dfareporting_LastModifiedInfo';
+  protected $createInfoType = 'Appointments_Google_Service_Dfareporting_LastModifiedInfo';
   protected $createInfoDataType = '';
-  protected $creativeGroupAssignmentsType = 'Google_Service_Dfareporting_CreativeGroupAssignment';
+  protected $creativeGroupAssignmentsType = 'Appointments_Google_Service_Dfareporting_CreativeGroupAssignment';
   protected $creativeGroupAssignmentsDataType = 'array';
-  protected $creativeRotationType = 'Google_Service_Dfareporting_CreativeRotation';
+  protected $creativeRotationType = 'Appointments_Google_Service_Dfareporting_CreativeRotation';
   protected $creativeRotationDataType = '';
-  protected $dayPartTargetingType = 'Google_Service_Dfareporting_DayPartTargeting';
+  protected $dayPartTargetingType = 'Appointments_Google_Service_Dfareporting_DayPartTargeting';
   protected $dayPartTargetingDataType = '';
-  protected $defaultClickThroughEventTagPropertiesType = 'Google_Service_Dfareporting_DefaultClickThroughEventTagProperties';
+  protected $defaultClickThroughEventTagPropertiesType = 'Appointments_Google_Service_Dfareporting_DefaultClickThroughEventTagProperties';
   protected $defaultClickThroughEventTagPropertiesDataType = '';
-  protected $deliveryScheduleType = 'Google_Service_Dfareporting_DeliverySchedule';
+  protected $deliveryScheduleType = 'Appointments_Google_Service_Dfareporting_DeliverySchedule';
   protected $deliveryScheduleDataType = '';
   public $dynamicClickTracker;
   public $endTime;
-  protected $eventTagOverridesType = 'Google_Service_Dfareporting_EventTagOverride';
+  protected $eventTagOverridesType = 'Appointments_Google_Service_Dfareporting_EventTagOverride';
   protected $eventTagOverridesDataType = 'array';
-  protected $geoTargetingType = 'Google_Service_Dfareporting_GeoTargeting';
+  protected $geoTargetingType = 'Appointments_Google_Service_Dfareporting_GeoTargeting';
   protected $geoTargetingDataType = '';
   public $id;
-  protected $idDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $idDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $idDimensionValueDataType = '';
-  protected $keyValueTargetingExpressionType = 'Google_Service_Dfareporting_KeyValueTargetingExpression';
+  protected $keyValueTargetingExpressionType = 'Appointments_Google_Service_Dfareporting_KeyValueTargetingExpression';
   protected $keyValueTargetingExpressionDataType = '';
   public $kind;
-  protected $lastModifiedInfoType = 'Google_Service_Dfareporting_LastModifiedInfo';
+  protected $lastModifiedInfoType = 'Appointments_Google_Service_Dfareporting_LastModifiedInfo';
   protected $lastModifiedInfoDataType = '';
   public $name;
-  protected $placementAssignmentsType = 'Google_Service_Dfareporting_PlacementAssignment';
+  protected $placementAssignmentsType = 'Appointments_Google_Service_Dfareporting_PlacementAssignment';
   protected $placementAssignmentsDataType = 'array';
-  protected $remarketingListExpressionType = 'Google_Service_Dfareporting_ListTargetingExpression';
+  protected $remarketingListExpressionType = 'Appointments_Google_Service_Dfareporting_ListTargetingExpression';
   protected $remarketingListExpressionDataType = '';
-  protected $sizeType = 'Google_Service_Dfareporting_Size';
+  protected $sizeType = 'Appointments_Google_Service_Dfareporting_Size';
   protected $sizeDataType = '';
   public $sslCompliant;
   public $sslRequired;
   public $startTime;
   public $subaccountId;
-  protected $technologyTargetingType = 'Google_Service_Dfareporting_TechnologyTargeting';
+  protected $technologyTargetingType = 'Appointments_Google_Service_Dfareporting_TechnologyTargeting';
   protected $technologyTargetingDataType = '';
   public $type;
 
@@ -9653,7 +9653,7 @@ class Google_Service_Dfareporting_Ad extends Google_Collection
   {
     return $this->advertiserId;
   }
-  public function setAdvertiserIdDimensionValue(Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
+  public function setAdvertiserIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
   {
     $this->advertiserIdDimensionValue = $advertiserIdDimensionValue;
   }
@@ -9685,7 +9685,7 @@ class Google_Service_Dfareporting_Ad extends Google_Collection
   {
     return $this->campaignId;
   }
-  public function setCampaignIdDimensionValue(Google_Service_Dfareporting_DimensionValue $campaignIdDimensionValue)
+  public function setCampaignIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $campaignIdDimensionValue)
   {
     $this->campaignIdDimensionValue = $campaignIdDimensionValue;
   }
@@ -9693,7 +9693,7 @@ class Google_Service_Dfareporting_Ad extends Google_Collection
   {
     return $this->campaignIdDimensionValue;
   }
-  public function setClickThroughUrl(Google_Service_Dfareporting_ClickThroughUrl $clickThroughUrl)
+  public function setClickThroughUrl(Appointments_Google_Service_Dfareporting_ClickThroughUrl $clickThroughUrl)
   {
     $this->clickThroughUrl = $clickThroughUrl;
   }
@@ -9701,7 +9701,7 @@ class Google_Service_Dfareporting_Ad extends Google_Collection
   {
     return $this->clickThroughUrl;
   }
-  public function setClickThroughUrlSuffixProperties(Google_Service_Dfareporting_ClickThroughUrlSuffixProperties $clickThroughUrlSuffixProperties)
+  public function setClickThroughUrlSuffixProperties(Appointments_Google_Service_Dfareporting_ClickThroughUrlSuffixProperties $clickThroughUrlSuffixProperties)
   {
     $this->clickThroughUrlSuffixProperties = $clickThroughUrlSuffixProperties;
   }
@@ -9725,7 +9725,7 @@ class Google_Service_Dfareporting_Ad extends Google_Collection
   {
     return $this->compatibility;
   }
-  public function setCreateInfo(Google_Service_Dfareporting_LastModifiedInfo $createInfo)
+  public function setCreateInfo(Appointments_Google_Service_Dfareporting_LastModifiedInfo $createInfo)
   {
     $this->createInfo = $createInfo;
   }
@@ -9741,7 +9741,7 @@ class Google_Service_Dfareporting_Ad extends Google_Collection
   {
     return $this->creativeGroupAssignments;
   }
-  public function setCreativeRotation(Google_Service_Dfareporting_CreativeRotation $creativeRotation)
+  public function setCreativeRotation(Appointments_Google_Service_Dfareporting_CreativeRotation $creativeRotation)
   {
     $this->creativeRotation = $creativeRotation;
   }
@@ -9749,7 +9749,7 @@ class Google_Service_Dfareporting_Ad extends Google_Collection
   {
     return $this->creativeRotation;
   }
-  public function setDayPartTargeting(Google_Service_Dfareporting_DayPartTargeting $dayPartTargeting)
+  public function setDayPartTargeting(Appointments_Google_Service_Dfareporting_DayPartTargeting $dayPartTargeting)
   {
     $this->dayPartTargeting = $dayPartTargeting;
   }
@@ -9757,7 +9757,7 @@ class Google_Service_Dfareporting_Ad extends Google_Collection
   {
     return $this->dayPartTargeting;
   }
-  public function setDefaultClickThroughEventTagProperties(Google_Service_Dfareporting_DefaultClickThroughEventTagProperties $defaultClickThroughEventTagProperties)
+  public function setDefaultClickThroughEventTagProperties(Appointments_Google_Service_Dfareporting_DefaultClickThroughEventTagProperties $defaultClickThroughEventTagProperties)
   {
     $this->defaultClickThroughEventTagProperties = $defaultClickThroughEventTagProperties;
   }
@@ -9765,7 +9765,7 @@ class Google_Service_Dfareporting_Ad extends Google_Collection
   {
     return $this->defaultClickThroughEventTagProperties;
   }
-  public function setDeliverySchedule(Google_Service_Dfareporting_DeliverySchedule $deliverySchedule)
+  public function setDeliverySchedule(Appointments_Google_Service_Dfareporting_DeliverySchedule $deliverySchedule)
   {
     $this->deliverySchedule = $deliverySchedule;
   }
@@ -9797,7 +9797,7 @@ class Google_Service_Dfareporting_Ad extends Google_Collection
   {
     return $this->eventTagOverrides;
   }
-  public function setGeoTargeting(Google_Service_Dfareporting_GeoTargeting $geoTargeting)
+  public function setGeoTargeting(Appointments_Google_Service_Dfareporting_GeoTargeting $geoTargeting)
   {
     $this->geoTargeting = $geoTargeting;
   }
@@ -9813,7 +9813,7 @@ class Google_Service_Dfareporting_Ad extends Google_Collection
   {
     return $this->id;
   }
-  public function setIdDimensionValue(Google_Service_Dfareporting_DimensionValue $idDimensionValue)
+  public function setIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $idDimensionValue)
   {
     $this->idDimensionValue = $idDimensionValue;
   }
@@ -9821,7 +9821,7 @@ class Google_Service_Dfareporting_Ad extends Google_Collection
   {
     return $this->idDimensionValue;
   }
-  public function setKeyValueTargetingExpression(Google_Service_Dfareporting_KeyValueTargetingExpression $keyValueTargetingExpression)
+  public function setKeyValueTargetingExpression(Appointments_Google_Service_Dfareporting_KeyValueTargetingExpression $keyValueTargetingExpression)
   {
     $this->keyValueTargetingExpression = $keyValueTargetingExpression;
   }
@@ -9837,7 +9837,7 @@ class Google_Service_Dfareporting_Ad extends Google_Collection
   {
     return $this->kind;
   }
-  public function setLastModifiedInfo(Google_Service_Dfareporting_LastModifiedInfo $lastModifiedInfo)
+  public function setLastModifiedInfo(Appointments_Google_Service_Dfareporting_LastModifiedInfo $lastModifiedInfo)
   {
     $this->lastModifiedInfo = $lastModifiedInfo;
   }
@@ -9861,7 +9861,7 @@ class Google_Service_Dfareporting_Ad extends Google_Collection
   {
     return $this->placementAssignments;
   }
-  public function setRemarketingListExpression(Google_Service_Dfareporting_ListTargetingExpression $remarketingListExpression)
+  public function setRemarketingListExpression(Appointments_Google_Service_Dfareporting_ListTargetingExpression $remarketingListExpression)
   {
     $this->remarketingListExpression = $remarketingListExpression;
   }
@@ -9869,7 +9869,7 @@ class Google_Service_Dfareporting_Ad extends Google_Collection
   {
     return $this->remarketingListExpression;
   }
-  public function setSize(Google_Service_Dfareporting_Size $size)
+  public function setSize(Appointments_Google_Service_Dfareporting_Size $size)
   {
     $this->size = $size;
   }
@@ -9909,7 +9909,7 @@ class Google_Service_Dfareporting_Ad extends Google_Collection
   {
     return $this->subaccountId;
   }
-  public function setTechnologyTargeting(Google_Service_Dfareporting_TechnologyTargeting $technologyTargeting)
+  public function setTechnologyTargeting(Appointments_Google_Service_Dfareporting_TechnologyTargeting $technologyTargeting)
   {
     $this->technologyTargeting = $technologyTargeting;
   }
@@ -9927,7 +9927,7 @@ class Google_Service_Dfareporting_Ad extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_AdSlot extends Google_Model
+class Appointments_Google_Service_Dfareporting_AdSlot extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -10007,12 +10007,12 @@ class Google_Service_Dfareporting_AdSlot extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_AdsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_AdsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'ads';
   protected $internal_gapi_mappings = array(
   );
-  protected $adsType = 'Google_Service_Dfareporting_Ad';
+  protected $adsType = 'Appointments_Google_Service_Dfareporting_Ad';
   protected $adsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -10044,7 +10044,7 @@ class Google_Service_Dfareporting_AdsListResponse extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_Advertiser extends Google_Model
+class Appointments_Google_Service_Dfareporting_Advertiser extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -10054,10 +10054,10 @@ class Google_Service_Dfareporting_Advertiser extends Google_Model
   public $defaultClickThroughEventTagId;
   public $defaultEmail;
   public $floodlightConfigurationId;
-  protected $floodlightConfigurationIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $floodlightConfigurationIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $floodlightConfigurationIdDimensionValueDataType = '';
   public $id;
-  protected $idDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $idDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $idDimensionValueDataType = '';
   public $kind;
   public $name;
@@ -10115,7 +10115,7 @@ class Google_Service_Dfareporting_Advertiser extends Google_Model
   {
     return $this->floodlightConfigurationId;
   }
-  public function setFloodlightConfigurationIdDimensionValue(Google_Service_Dfareporting_DimensionValue $floodlightConfigurationIdDimensionValue)
+  public function setFloodlightConfigurationIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $floodlightConfigurationIdDimensionValue)
   {
     $this->floodlightConfigurationIdDimensionValue = $floodlightConfigurationIdDimensionValue;
   }
@@ -10131,7 +10131,7 @@ class Google_Service_Dfareporting_Advertiser extends Google_Model
   {
     return $this->id;
   }
-  public function setIdDimensionValue(Google_Service_Dfareporting_DimensionValue $idDimensionValue)
+  public function setIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $idDimensionValue)
   {
     $this->idDimensionValue = $idDimensionValue;
   }
@@ -10189,7 +10189,7 @@ class Google_Service_Dfareporting_Advertiser extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_AdvertiserGroup extends Google_Model
+class Appointments_Google_Service_Dfareporting_AdvertiserGroup extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -10233,12 +10233,12 @@ class Google_Service_Dfareporting_AdvertiserGroup extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_AdvertiserGroupsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_AdvertiserGroupsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'advertiserGroups';
   protected $internal_gapi_mappings = array(
   );
-  protected $advertiserGroupsType = 'Google_Service_Dfareporting_AdvertiserGroup';
+  protected $advertiserGroupsType = 'Appointments_Google_Service_Dfareporting_AdvertiserGroup';
   protected $advertiserGroupsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -10270,12 +10270,12 @@ class Google_Service_Dfareporting_AdvertiserGroupsListResponse extends Google_Co
   }
 }
 
-class Google_Service_Dfareporting_AdvertisersListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_AdvertisersListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'advertisers';
   protected $internal_gapi_mappings = array(
   );
-  protected $advertisersType = 'Google_Service_Dfareporting_Advertiser';
+  protected $advertisersType = 'Appointments_Google_Service_Dfareporting_Advertiser';
   protected $advertisersDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -10307,7 +10307,7 @@ class Google_Service_Dfareporting_AdvertisersListResponse extends Google_Collect
   }
 }
 
-class Google_Service_Dfareporting_AudienceSegment extends Google_Model
+class Appointments_Google_Service_Dfareporting_AudienceSegment extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -10342,12 +10342,12 @@ class Google_Service_Dfareporting_AudienceSegment extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_AudienceSegmentGroup extends Google_Collection
+class Appointments_Google_Service_Dfareporting_AudienceSegmentGroup extends Appointments_Google_Collection
 {
   protected $collection_key = 'audienceSegments';
   protected $internal_gapi_mappings = array(
   );
-  protected $audienceSegmentsType = 'Google_Service_Dfareporting_AudienceSegment';
+  protected $audienceSegmentsType = 'Appointments_Google_Service_Dfareporting_AudienceSegment';
   protected $audienceSegmentsDataType = 'array';
   public $id;
   public $name;
@@ -10379,7 +10379,7 @@ class Google_Service_Dfareporting_AudienceSegmentGroup extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_Browser extends Google_Model
+class Appointments_Google_Service_Dfareporting_Browser extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -10441,12 +10441,12 @@ class Google_Service_Dfareporting_Browser extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_BrowsersListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_BrowsersListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'browsers';
   protected $internal_gapi_mappings = array(
   );
-  protected $browsersType = 'Google_Service_Dfareporting_Browser';
+  protected $browsersType = 'Appointments_Google_Service_Dfareporting_Browser';
   protected $browsersDataType = 'array';
   public $kind;
 
@@ -10469,44 +10469,44 @@ class Google_Service_Dfareporting_BrowsersListResponse extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_Campaign extends Google_Collection
+class Appointments_Google_Service_Dfareporting_Campaign extends Appointments_Google_Collection
 {
   protected $collection_key = 'traffickerEmails';
   protected $internal_gapi_mappings = array(
   );
   public $accountId;
-  protected $additionalCreativeOptimizationConfigurationsType = 'Google_Service_Dfareporting_CreativeOptimizationConfiguration';
+  protected $additionalCreativeOptimizationConfigurationsType = 'Appointments_Google_Service_Dfareporting_CreativeOptimizationConfiguration';
   protected $additionalCreativeOptimizationConfigurationsDataType = 'array';
   public $advertiserGroupId;
   public $advertiserId;
-  protected $advertiserIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $advertiserIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $advertiserIdDimensionValueDataType = '';
   public $archived;
-  protected $audienceSegmentGroupsType = 'Google_Service_Dfareporting_AudienceSegmentGroup';
+  protected $audienceSegmentGroupsType = 'Appointments_Google_Service_Dfareporting_AudienceSegmentGroup';
   protected $audienceSegmentGroupsDataType = 'array';
   public $billingInvoiceCode;
-  protected $clickThroughUrlSuffixPropertiesType = 'Google_Service_Dfareporting_ClickThroughUrlSuffixProperties';
+  protected $clickThroughUrlSuffixPropertiesType = 'Appointments_Google_Service_Dfareporting_ClickThroughUrlSuffixProperties';
   protected $clickThroughUrlSuffixPropertiesDataType = '';
   public $comment;
   public $comscoreVceEnabled;
-  protected $createInfoType = 'Google_Service_Dfareporting_LastModifiedInfo';
+  protected $createInfoType = 'Appointments_Google_Service_Dfareporting_LastModifiedInfo';
   protected $createInfoDataType = '';
   public $creativeGroupIds;
-  protected $creativeOptimizationConfigurationType = 'Google_Service_Dfareporting_CreativeOptimizationConfiguration';
+  protected $creativeOptimizationConfigurationType = 'Appointments_Google_Service_Dfareporting_CreativeOptimizationConfiguration';
   protected $creativeOptimizationConfigurationDataType = '';
-  protected $defaultClickThroughEventTagPropertiesType = 'Google_Service_Dfareporting_DefaultClickThroughEventTagProperties';
+  protected $defaultClickThroughEventTagPropertiesType = 'Appointments_Google_Service_Dfareporting_DefaultClickThroughEventTagProperties';
   protected $defaultClickThroughEventTagPropertiesDataType = '';
   public $endDate;
-  protected $eventTagOverridesType = 'Google_Service_Dfareporting_EventTagOverride';
+  protected $eventTagOverridesType = 'Appointments_Google_Service_Dfareporting_EventTagOverride';
   protected $eventTagOverridesDataType = 'array';
   public $externalId;
   public $id;
-  protected $idDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $idDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $idDimensionValueDataType = '';
   public $kind;
-  protected $lastModifiedInfoType = 'Google_Service_Dfareporting_LastModifiedInfo';
+  protected $lastModifiedInfoType = 'Appointments_Google_Service_Dfareporting_LastModifiedInfo';
   protected $lastModifiedInfoDataType = '';
-  protected $lookbackConfigurationType = 'Google_Service_Dfareporting_LookbackConfiguration';
+  protected $lookbackConfigurationType = 'Appointments_Google_Service_Dfareporting_LookbackConfiguration';
   protected $lookbackConfigurationDataType = '';
   public $name;
   public $nielsenOcrEnabled;
@@ -10547,7 +10547,7 @@ class Google_Service_Dfareporting_Campaign extends Google_Collection
   {
     return $this->advertiserId;
   }
-  public function setAdvertiserIdDimensionValue(Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
+  public function setAdvertiserIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
   {
     $this->advertiserIdDimensionValue = $advertiserIdDimensionValue;
   }
@@ -10579,7 +10579,7 @@ class Google_Service_Dfareporting_Campaign extends Google_Collection
   {
     return $this->billingInvoiceCode;
   }
-  public function setClickThroughUrlSuffixProperties(Google_Service_Dfareporting_ClickThroughUrlSuffixProperties $clickThroughUrlSuffixProperties)
+  public function setClickThroughUrlSuffixProperties(Appointments_Google_Service_Dfareporting_ClickThroughUrlSuffixProperties $clickThroughUrlSuffixProperties)
   {
     $this->clickThroughUrlSuffixProperties = $clickThroughUrlSuffixProperties;
   }
@@ -10603,7 +10603,7 @@ class Google_Service_Dfareporting_Campaign extends Google_Collection
   {
     return $this->comscoreVceEnabled;
   }
-  public function setCreateInfo(Google_Service_Dfareporting_LastModifiedInfo $createInfo)
+  public function setCreateInfo(Appointments_Google_Service_Dfareporting_LastModifiedInfo $createInfo)
   {
     $this->createInfo = $createInfo;
   }
@@ -10619,7 +10619,7 @@ class Google_Service_Dfareporting_Campaign extends Google_Collection
   {
     return $this->creativeGroupIds;
   }
-  public function setCreativeOptimizationConfiguration(Google_Service_Dfareporting_CreativeOptimizationConfiguration $creativeOptimizationConfiguration)
+  public function setCreativeOptimizationConfiguration(Appointments_Google_Service_Dfareporting_CreativeOptimizationConfiguration $creativeOptimizationConfiguration)
   {
     $this->creativeOptimizationConfiguration = $creativeOptimizationConfiguration;
   }
@@ -10627,7 +10627,7 @@ class Google_Service_Dfareporting_Campaign extends Google_Collection
   {
     return $this->creativeOptimizationConfiguration;
   }
-  public function setDefaultClickThroughEventTagProperties(Google_Service_Dfareporting_DefaultClickThroughEventTagProperties $defaultClickThroughEventTagProperties)
+  public function setDefaultClickThroughEventTagProperties(Appointments_Google_Service_Dfareporting_DefaultClickThroughEventTagProperties $defaultClickThroughEventTagProperties)
   {
     $this->defaultClickThroughEventTagProperties = $defaultClickThroughEventTagProperties;
   }
@@ -10667,7 +10667,7 @@ class Google_Service_Dfareporting_Campaign extends Google_Collection
   {
     return $this->id;
   }
-  public function setIdDimensionValue(Google_Service_Dfareporting_DimensionValue $idDimensionValue)
+  public function setIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $idDimensionValue)
   {
     $this->idDimensionValue = $idDimensionValue;
   }
@@ -10683,7 +10683,7 @@ class Google_Service_Dfareporting_Campaign extends Google_Collection
   {
     return $this->kind;
   }
-  public function setLastModifiedInfo(Google_Service_Dfareporting_LastModifiedInfo $lastModifiedInfo)
+  public function setLastModifiedInfo(Appointments_Google_Service_Dfareporting_LastModifiedInfo $lastModifiedInfo)
   {
     $this->lastModifiedInfo = $lastModifiedInfo;
   }
@@ -10691,7 +10691,7 @@ class Google_Service_Dfareporting_Campaign extends Google_Collection
   {
     return $this->lastModifiedInfo;
   }
-  public function setLookbackConfiguration(Google_Service_Dfareporting_LookbackConfiguration $lookbackConfiguration)
+  public function setLookbackConfiguration(Appointments_Google_Service_Dfareporting_LookbackConfiguration $lookbackConfiguration)
   {
     $this->lookbackConfiguration = $lookbackConfiguration;
   }
@@ -10741,7 +10741,7 @@ class Google_Service_Dfareporting_Campaign extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_CampaignCreativeAssociation extends Google_Model
+class Appointments_Google_Service_Dfareporting_CampaignCreativeAssociation extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -10767,12 +10767,12 @@ class Google_Service_Dfareporting_CampaignCreativeAssociation extends Google_Mod
   }
 }
 
-class Google_Service_Dfareporting_CampaignCreativeAssociationsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_CampaignCreativeAssociationsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'campaignCreativeAssociations';
   protected $internal_gapi_mappings = array(
   );
-  protected $campaignCreativeAssociationsType = 'Google_Service_Dfareporting_CampaignCreativeAssociation';
+  protected $campaignCreativeAssociationsType = 'Appointments_Google_Service_Dfareporting_CampaignCreativeAssociation';
   protected $campaignCreativeAssociationsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -10804,12 +10804,12 @@ class Google_Service_Dfareporting_CampaignCreativeAssociationsListResponse exten
   }
 }
 
-class Google_Service_Dfareporting_CampaignsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_CampaignsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'campaigns';
   protected $internal_gapi_mappings = array(
   );
-  protected $campaignsType = 'Google_Service_Dfareporting_Campaign';
+  protected $campaignsType = 'Appointments_Google_Service_Dfareporting_Campaign';
   protected $campaignsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -10841,7 +10841,7 @@ class Google_Service_Dfareporting_CampaignsListResponse extends Google_Collectio
   }
 }
 
-class Google_Service_Dfareporting_ChangeLog extends Google_Model
+class Appointments_Google_Service_Dfareporting_ChangeLog extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -10975,12 +10975,12 @@ class Google_Service_Dfareporting_ChangeLog extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_ChangeLogsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_ChangeLogsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'changeLogs';
   protected $internal_gapi_mappings = array(
   );
-  protected $changeLogsType = 'Google_Service_Dfareporting_ChangeLog';
+  protected $changeLogsType = 'Appointments_Google_Service_Dfareporting_ChangeLog';
   protected $changeLogsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -11012,12 +11012,12 @@ class Google_Service_Dfareporting_ChangeLogsListResponse extends Google_Collecti
   }
 }
 
-class Google_Service_Dfareporting_CitiesListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_CitiesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'cities';
   protected $internal_gapi_mappings = array(
   );
-  protected $citiesType = 'Google_Service_Dfareporting_City';
+  protected $citiesType = 'Appointments_Google_Service_Dfareporting_City';
   protected $citiesDataType = 'array';
   public $kind;
 
@@ -11040,7 +11040,7 @@ class Google_Service_Dfareporting_CitiesListResponse extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_City extends Google_Model
+class Appointments_Google_Service_Dfareporting_City extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -11129,7 +11129,7 @@ class Google_Service_Dfareporting_City extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_ClickTag extends Google_Model
+class Appointments_Google_Service_Dfareporting_ClickTag extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -11164,7 +11164,7 @@ class Google_Service_Dfareporting_ClickTag extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_ClickThroughUrl extends Google_Model
+class Appointments_Google_Service_Dfareporting_ClickThroughUrl extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -11208,7 +11208,7 @@ class Google_Service_Dfareporting_ClickThroughUrl extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_ClickThroughUrlSuffixProperties extends Google_Model
+class Appointments_Google_Service_Dfareporting_ClickThroughUrlSuffixProperties extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -11234,16 +11234,16 @@ class Google_Service_Dfareporting_ClickThroughUrlSuffixProperties extends Google
   }
 }
 
-class Google_Service_Dfareporting_CompanionClickThroughOverride extends Google_Model
+class Appointments_Google_Service_Dfareporting_CompanionClickThroughOverride extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $clickThroughUrlType = 'Google_Service_Dfareporting_ClickThroughUrl';
+  protected $clickThroughUrlType = 'Appointments_Google_Service_Dfareporting_ClickThroughUrl';
   protected $clickThroughUrlDataType = '';
   public $creativeId;
 
 
-  public function setClickThroughUrl(Google_Service_Dfareporting_ClickThroughUrl $clickThroughUrl)
+  public function setClickThroughUrl(Appointments_Google_Service_Dfareporting_ClickThroughUrl $clickThroughUrl)
   {
     $this->clickThroughUrl = $clickThroughUrl;
   }
@@ -11261,24 +11261,24 @@ class Google_Service_Dfareporting_CompanionClickThroughOverride extends Google_M
   }
 }
 
-class Google_Service_Dfareporting_CompatibleFields extends Google_Model
+class Appointments_Google_Service_Dfareporting_CompatibleFields extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $crossDimensionReachReportCompatibleFieldsType = 'Google_Service_Dfareporting_CrossDimensionReachReportCompatibleFields';
+  protected $crossDimensionReachReportCompatibleFieldsType = 'Appointments_Google_Service_Dfareporting_CrossDimensionReachReportCompatibleFields';
   protected $crossDimensionReachReportCompatibleFieldsDataType = '';
-  protected $floodlightReportCompatibleFieldsType = 'Google_Service_Dfareporting_FloodlightReportCompatibleFields';
+  protected $floodlightReportCompatibleFieldsType = 'Appointments_Google_Service_Dfareporting_FloodlightReportCompatibleFields';
   protected $floodlightReportCompatibleFieldsDataType = '';
   public $kind;
-  protected $pathToConversionReportCompatibleFieldsType = 'Google_Service_Dfareporting_PathToConversionReportCompatibleFields';
+  protected $pathToConversionReportCompatibleFieldsType = 'Appointments_Google_Service_Dfareporting_PathToConversionReportCompatibleFields';
   protected $pathToConversionReportCompatibleFieldsDataType = '';
-  protected $reachReportCompatibleFieldsType = 'Google_Service_Dfareporting_ReachReportCompatibleFields';
+  protected $reachReportCompatibleFieldsType = 'Appointments_Google_Service_Dfareporting_ReachReportCompatibleFields';
   protected $reachReportCompatibleFieldsDataType = '';
-  protected $reportCompatibleFieldsType = 'Google_Service_Dfareporting_ReportCompatibleFields';
+  protected $reportCompatibleFieldsType = 'Appointments_Google_Service_Dfareporting_ReportCompatibleFields';
   protected $reportCompatibleFieldsDataType = '';
 
 
-  public function setCrossDimensionReachReportCompatibleFields(Google_Service_Dfareporting_CrossDimensionReachReportCompatibleFields $crossDimensionReachReportCompatibleFields)
+  public function setCrossDimensionReachReportCompatibleFields(Appointments_Google_Service_Dfareporting_CrossDimensionReachReportCompatibleFields $crossDimensionReachReportCompatibleFields)
   {
     $this->crossDimensionReachReportCompatibleFields = $crossDimensionReachReportCompatibleFields;
   }
@@ -11286,7 +11286,7 @@ class Google_Service_Dfareporting_CompatibleFields extends Google_Model
   {
     return $this->crossDimensionReachReportCompatibleFields;
   }
-  public function setFloodlightReportCompatibleFields(Google_Service_Dfareporting_FloodlightReportCompatibleFields $floodlightReportCompatibleFields)
+  public function setFloodlightReportCompatibleFields(Appointments_Google_Service_Dfareporting_FloodlightReportCompatibleFields $floodlightReportCompatibleFields)
   {
     $this->floodlightReportCompatibleFields = $floodlightReportCompatibleFields;
   }
@@ -11302,7 +11302,7 @@ class Google_Service_Dfareporting_CompatibleFields extends Google_Model
   {
     return $this->kind;
   }
-  public function setPathToConversionReportCompatibleFields(Google_Service_Dfareporting_PathToConversionReportCompatibleFields $pathToConversionReportCompatibleFields)
+  public function setPathToConversionReportCompatibleFields(Appointments_Google_Service_Dfareporting_PathToConversionReportCompatibleFields $pathToConversionReportCompatibleFields)
   {
     $this->pathToConversionReportCompatibleFields = $pathToConversionReportCompatibleFields;
   }
@@ -11310,7 +11310,7 @@ class Google_Service_Dfareporting_CompatibleFields extends Google_Model
   {
     return $this->pathToConversionReportCompatibleFields;
   }
-  public function setReachReportCompatibleFields(Google_Service_Dfareporting_ReachReportCompatibleFields $reachReportCompatibleFields)
+  public function setReachReportCompatibleFields(Appointments_Google_Service_Dfareporting_ReachReportCompatibleFields $reachReportCompatibleFields)
   {
     $this->reachReportCompatibleFields = $reachReportCompatibleFields;
   }
@@ -11318,7 +11318,7 @@ class Google_Service_Dfareporting_CompatibleFields extends Google_Model
   {
     return $this->reachReportCompatibleFields;
   }
-  public function setReportCompatibleFields(Google_Service_Dfareporting_ReportCompatibleFields $reportCompatibleFields)
+  public function setReportCompatibleFields(Appointments_Google_Service_Dfareporting_ReportCompatibleFields $reportCompatibleFields)
   {
     $this->reportCompatibleFields = $reportCompatibleFields;
   }
@@ -11328,7 +11328,7 @@ class Google_Service_Dfareporting_CompatibleFields extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_ConnectionType extends Google_Model
+class Appointments_Google_Service_Dfareporting_ConnectionType extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -11363,12 +11363,12 @@ class Google_Service_Dfareporting_ConnectionType extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_ConnectionTypesListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_ConnectionTypesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'connectionTypes';
   protected $internal_gapi_mappings = array(
   );
-  protected $connectionTypesType = 'Google_Service_Dfareporting_ConnectionType';
+  protected $connectionTypesType = 'Appointments_Google_Service_Dfareporting_ConnectionType';
   protected $connectionTypesDataType = 'array';
   public $kind;
 
@@ -11391,12 +11391,12 @@ class Google_Service_Dfareporting_ConnectionTypesListResponse extends Google_Col
   }
 }
 
-class Google_Service_Dfareporting_ContentCategoriesListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_ContentCategoriesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'contentCategories';
   protected $internal_gapi_mappings = array(
   );
-  protected $contentCategoriesType = 'Google_Service_Dfareporting_ContentCategory';
+  protected $contentCategoriesType = 'Appointments_Google_Service_Dfareporting_ContentCategory';
   protected $contentCategoriesDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -11428,7 +11428,7 @@ class Google_Service_Dfareporting_ContentCategoriesListResponse extends Google_C
   }
 }
 
-class Google_Service_Dfareporting_ContentCategory extends Google_Model
+class Appointments_Google_Service_Dfareporting_ContentCategory extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -11472,12 +11472,12 @@ class Google_Service_Dfareporting_ContentCategory extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_CountriesListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_CountriesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'countries';
   protected $internal_gapi_mappings = array(
   );
-  protected $countriesType = 'Google_Service_Dfareporting_Country';
+  protected $countriesType = 'Appointments_Google_Service_Dfareporting_Country';
   protected $countriesDataType = 'array';
   public $kind;
 
@@ -11500,7 +11500,7 @@ class Google_Service_Dfareporting_CountriesListResponse extends Google_Collectio
   }
 }
 
-class Google_Service_Dfareporting_Country extends Google_Model
+class Appointments_Google_Service_Dfareporting_Country extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -11553,7 +11553,7 @@ class Google_Service_Dfareporting_Country extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_Creative extends Google_Collection
+class Appointments_Google_Service_Dfareporting_Creative extends Appointments_Google_Collection
 {
   protected $collection_key = 'timerCustomEvents';
   protected $internal_gapi_mappings = array(
@@ -11574,43 +11574,43 @@ class Google_Service_Dfareporting_Creative extends Google_Collection
   public $backupImageClickThroughUrl;
   public $backupImageFeatures;
   public $backupImageReportingLabel;
-  protected $backupImageTargetWindowType = 'Google_Service_Dfareporting_TargetWindow';
+  protected $backupImageTargetWindowType = 'Appointments_Google_Service_Dfareporting_TargetWindow';
   protected $backupImageTargetWindowDataType = '';
-  protected $clickTagsType = 'Google_Service_Dfareporting_ClickTag';
+  protected $clickTagsType = 'Appointments_Google_Service_Dfareporting_ClickTag';
   protected $clickTagsDataType = 'array';
   public $commercialId;
   public $companionCreatives;
   public $compatibility;
   public $convertFlashToHtml5;
-  protected $counterCustomEventsType = 'Google_Service_Dfareporting_CreativeCustomEvent';
+  protected $counterCustomEventsType = 'Appointments_Google_Service_Dfareporting_CreativeCustomEvent';
   protected $counterCustomEventsDataType = 'array';
-  protected $creativeAssetsType = 'Google_Service_Dfareporting_CreativeAsset';
+  protected $creativeAssetsType = 'Appointments_Google_Service_Dfareporting_CreativeAsset';
   protected $creativeAssetsDataType = 'array';
-  protected $creativeFieldAssignmentsType = 'Google_Service_Dfareporting_CreativeFieldAssignment';
+  protected $creativeFieldAssignmentsType = 'Appointments_Google_Service_Dfareporting_CreativeFieldAssignment';
   protected $creativeFieldAssignmentsDataType = 'array';
   public $customKeyValues;
-  protected $exitCustomEventsType = 'Google_Service_Dfareporting_CreativeCustomEvent';
+  protected $exitCustomEventsType = 'Appointments_Google_Service_Dfareporting_CreativeCustomEvent';
   protected $exitCustomEventsDataType = 'array';
-  protected $fsCommandType = 'Google_Service_Dfareporting_FsCommand';
+  protected $fsCommandType = 'Appointments_Google_Service_Dfareporting_FsCommand';
   protected $fsCommandDataType = '';
   public $htmlCode;
   public $htmlCodeLocked;
   public $id;
-  protected $idDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $idDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $idDimensionValueDataType = '';
   public $kind;
-  protected $lastModifiedInfoType = 'Google_Service_Dfareporting_LastModifiedInfo';
+  protected $lastModifiedInfoType = 'Appointments_Google_Service_Dfareporting_LastModifiedInfo';
   protected $lastModifiedInfoDataType = '';
   public $latestTraffickedCreativeId;
   public $name;
   public $overrideCss;
   public $redirectUrl;
   public $renderingId;
-  protected $renderingIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $renderingIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $renderingIdDimensionValueDataType = '';
   public $requiredFlashPluginVersion;
   public $requiredFlashVersion;
-  protected $sizeType = 'Google_Service_Dfareporting_Size';
+  protected $sizeType = 'Appointments_Google_Service_Dfareporting_Size';
   protected $sizeDataType = '';
   public $skippable;
   public $sslCompliant;
@@ -11621,9 +11621,9 @@ class Google_Service_Dfareporting_Creative extends Google_Collection
   public $subaccountId;
   public $thirdPartyBackupImageImpressionsUrl;
   public $thirdPartyRichMediaImpressionsUrl;
-  protected $thirdPartyUrlsType = 'Google_Service_Dfareporting_ThirdPartyTrackingUrl';
+  protected $thirdPartyUrlsType = 'Appointments_Google_Service_Dfareporting_ThirdPartyTrackingUrl';
   protected $thirdPartyUrlsDataType = 'array';
-  protected $timerCustomEventsType = 'Google_Service_Dfareporting_CreativeCustomEvent';
+  protected $timerCustomEventsType = 'Appointments_Google_Service_Dfareporting_CreativeCustomEvent';
   protected $timerCustomEventsDataType = 'array';
   public $totalFileSize;
   public $type;
@@ -11752,7 +11752,7 @@ class Google_Service_Dfareporting_Creative extends Google_Collection
   {
     return $this->backupImageReportingLabel;
   }
-  public function setBackupImageTargetWindow(Google_Service_Dfareporting_TargetWindow $backupImageTargetWindow)
+  public function setBackupImageTargetWindow(Appointments_Google_Service_Dfareporting_TargetWindow $backupImageTargetWindow)
   {
     $this->backupImageTargetWindow = $backupImageTargetWindow;
   }
@@ -11840,7 +11840,7 @@ class Google_Service_Dfareporting_Creative extends Google_Collection
   {
     return $this->exitCustomEvents;
   }
-  public function setFsCommand(Google_Service_Dfareporting_FsCommand $fsCommand)
+  public function setFsCommand(Appointments_Google_Service_Dfareporting_FsCommand $fsCommand)
   {
     $this->fsCommand = $fsCommand;
   }
@@ -11872,7 +11872,7 @@ class Google_Service_Dfareporting_Creative extends Google_Collection
   {
     return $this->id;
   }
-  public function setIdDimensionValue(Google_Service_Dfareporting_DimensionValue $idDimensionValue)
+  public function setIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $idDimensionValue)
   {
     $this->idDimensionValue = $idDimensionValue;
   }
@@ -11888,7 +11888,7 @@ class Google_Service_Dfareporting_Creative extends Google_Collection
   {
     return $this->kind;
   }
-  public function setLastModifiedInfo(Google_Service_Dfareporting_LastModifiedInfo $lastModifiedInfo)
+  public function setLastModifiedInfo(Appointments_Google_Service_Dfareporting_LastModifiedInfo $lastModifiedInfo)
   {
     $this->lastModifiedInfo = $lastModifiedInfo;
   }
@@ -11936,7 +11936,7 @@ class Google_Service_Dfareporting_Creative extends Google_Collection
   {
     return $this->renderingId;
   }
-  public function setRenderingIdDimensionValue(Google_Service_Dfareporting_DimensionValue $renderingIdDimensionValue)
+  public function setRenderingIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $renderingIdDimensionValue)
   {
     $this->renderingIdDimensionValue = $renderingIdDimensionValue;
   }
@@ -11960,7 +11960,7 @@ class Google_Service_Dfareporting_Creative extends Google_Collection
   {
     return $this->requiredFlashVersion;
   }
-  public function setSize(Google_Service_Dfareporting_Size $size)
+  public function setSize(Appointments_Google_Service_Dfareporting_Size $size)
   {
     $this->size = $size;
   }
@@ -12098,7 +12098,7 @@ class Google_Service_Dfareporting_Creative extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_CreativeAsset extends Google_Collection
+class Appointments_Google_Service_Dfareporting_CreativeAsset extends Appointments_Google_Collection
 {
   protected $collection_key = 'detectedFeatures';
   protected $internal_gapi_mappings = array(
@@ -12107,20 +12107,20 @@ class Google_Service_Dfareporting_CreativeAsset extends Google_Collection
   public $active;
   public $alignment;
   public $artworkType;
-  protected $assetIdentifierType = 'Google_Service_Dfareporting_CreativeAssetId';
+  protected $assetIdentifierType = 'Appointments_Google_Service_Dfareporting_CreativeAssetId';
   protected $assetIdentifierDataType = '';
-  protected $backupImageExitType = 'Google_Service_Dfareporting_CreativeCustomEvent';
+  protected $backupImageExitType = 'Appointments_Google_Service_Dfareporting_CreativeCustomEvent';
   protected $backupImageExitDataType = '';
   public $bitRate;
   public $childAssetType;
-  protected $collapsedSizeType = 'Google_Service_Dfareporting_Size';
+  protected $collapsedSizeType = 'Appointments_Google_Service_Dfareporting_Size';
   protected $collapsedSizeDataType = '';
   public $customStartTimeValue;
   public $detectedFeatures;
   public $displayType;
   public $duration;
   public $durationType;
-  protected $expandedDimensionType = 'Google_Service_Dfareporting_Size';
+  protected $expandedDimensionType = 'Appointments_Google_Service_Dfareporting_Size';
   protected $expandedDimensionDataType = '';
   public $fileSize;
   public $flashVersion;
@@ -12129,10 +12129,10 @@ class Google_Service_Dfareporting_CreativeAsset extends Google_Collection
   public $horizontallyLocked;
   public $id;
   public $mimeType;
-  protected $offsetType = 'Google_Service_Dfareporting_OffsetPosition';
+  protected $offsetType = 'Appointments_Google_Service_Dfareporting_OffsetPosition';
   protected $offsetDataType = '';
   public $originalBackup;
-  protected $positionType = 'Google_Service_Dfareporting_OffsetPosition';
+  protected $positionType = 'Appointments_Google_Service_Dfareporting_OffsetPosition';
   protected $positionDataType = '';
   public $positionLeftUnit;
   public $positionTopUnit;
@@ -12140,7 +12140,7 @@ class Google_Service_Dfareporting_CreativeAsset extends Google_Collection
   public $pushdown;
   public $pushdownDuration;
   public $role;
-  protected $sizeType = 'Google_Service_Dfareporting_Size';
+  protected $sizeType = 'Appointments_Google_Service_Dfareporting_Size';
   protected $sizeDataType = '';
   public $sslCompliant;
   public $startTimeType;
@@ -12186,7 +12186,7 @@ class Google_Service_Dfareporting_CreativeAsset extends Google_Collection
   {
     return $this->artworkType;
   }
-  public function setAssetIdentifier(Google_Service_Dfareporting_CreativeAssetId $assetIdentifier)
+  public function setAssetIdentifier(Appointments_Google_Service_Dfareporting_CreativeAssetId $assetIdentifier)
   {
     $this->assetIdentifier = $assetIdentifier;
   }
@@ -12194,7 +12194,7 @@ class Google_Service_Dfareporting_CreativeAsset extends Google_Collection
   {
     return $this->assetIdentifier;
   }
-  public function setBackupImageExit(Google_Service_Dfareporting_CreativeCustomEvent $backupImageExit)
+  public function setBackupImageExit(Appointments_Google_Service_Dfareporting_CreativeCustomEvent $backupImageExit)
   {
     $this->backupImageExit = $backupImageExit;
   }
@@ -12218,7 +12218,7 @@ class Google_Service_Dfareporting_CreativeAsset extends Google_Collection
   {
     return $this->childAssetType;
   }
-  public function setCollapsedSize(Google_Service_Dfareporting_Size $collapsedSize)
+  public function setCollapsedSize(Appointments_Google_Service_Dfareporting_Size $collapsedSize)
   {
     $this->collapsedSize = $collapsedSize;
   }
@@ -12266,7 +12266,7 @@ class Google_Service_Dfareporting_CreativeAsset extends Google_Collection
   {
     return $this->durationType;
   }
-  public function setExpandedDimension(Google_Service_Dfareporting_Size $expandedDimension)
+  public function setExpandedDimension(Appointments_Google_Service_Dfareporting_Size $expandedDimension)
   {
     $this->expandedDimension = $expandedDimension;
   }
@@ -12330,7 +12330,7 @@ class Google_Service_Dfareporting_CreativeAsset extends Google_Collection
   {
     return $this->mimeType;
   }
-  public function setOffset(Google_Service_Dfareporting_OffsetPosition $offset)
+  public function setOffset(Appointments_Google_Service_Dfareporting_OffsetPosition $offset)
   {
     $this->offset = $offset;
   }
@@ -12346,7 +12346,7 @@ class Google_Service_Dfareporting_CreativeAsset extends Google_Collection
   {
     return $this->originalBackup;
   }
-  public function setPosition(Google_Service_Dfareporting_OffsetPosition $position)
+  public function setPosition(Appointments_Google_Service_Dfareporting_OffsetPosition $position)
   {
     $this->position = $position;
   }
@@ -12402,7 +12402,7 @@ class Google_Service_Dfareporting_CreativeAsset extends Google_Collection
   {
     return $this->role;
   }
-  public function setSize(Google_Service_Dfareporting_Size $size)
+  public function setSize(Appointments_Google_Service_Dfareporting_Size $size)
   {
     $this->size = $size;
   }
@@ -12492,7 +12492,7 @@ class Google_Service_Dfareporting_CreativeAsset extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_CreativeAssetId extends Google_Model
+class Appointments_Google_Service_Dfareporting_CreativeAssetId extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -12518,21 +12518,21 @@ class Google_Service_Dfareporting_CreativeAssetId extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_CreativeAssetMetadata extends Google_Collection
+class Appointments_Google_Service_Dfareporting_CreativeAssetMetadata extends Appointments_Google_Collection
 {
   protected $collection_key = 'warnedValidationRules';
   protected $internal_gapi_mappings = array(
   );
-  protected $assetIdentifierType = 'Google_Service_Dfareporting_CreativeAssetId';
+  protected $assetIdentifierType = 'Appointments_Google_Service_Dfareporting_CreativeAssetId';
   protected $assetIdentifierDataType = '';
-  protected $clickTagsType = 'Google_Service_Dfareporting_ClickTag';
+  protected $clickTagsType = 'Appointments_Google_Service_Dfareporting_ClickTag';
   protected $clickTagsDataType = 'array';
   public $detectedFeatures;
   public $kind;
   public $warnedValidationRules;
 
 
-  public function setAssetIdentifier(Google_Service_Dfareporting_CreativeAssetId $assetIdentifier)
+  public function setAssetIdentifier(Appointments_Google_Service_Dfareporting_CreativeAssetId $assetIdentifier)
   {
     $this->assetIdentifier = $assetIdentifier;
   }
@@ -12574,24 +12574,24 @@ class Google_Service_Dfareporting_CreativeAssetMetadata extends Google_Collectio
   }
 }
 
-class Google_Service_Dfareporting_CreativeAssignment extends Google_Collection
+class Appointments_Google_Service_Dfareporting_CreativeAssignment extends Appointments_Google_Collection
 {
   protected $collection_key = 'richMediaExitOverrides';
   protected $internal_gapi_mappings = array(
   );
   public $active;
   public $applyEventTags;
-  protected $clickThroughUrlType = 'Google_Service_Dfareporting_ClickThroughUrl';
+  protected $clickThroughUrlType = 'Appointments_Google_Service_Dfareporting_ClickThroughUrl';
   protected $clickThroughUrlDataType = '';
-  protected $companionCreativeOverridesType = 'Google_Service_Dfareporting_CompanionClickThroughOverride';
+  protected $companionCreativeOverridesType = 'Appointments_Google_Service_Dfareporting_CompanionClickThroughOverride';
   protected $companionCreativeOverridesDataType = 'array';
-  protected $creativeGroupAssignmentsType = 'Google_Service_Dfareporting_CreativeGroupAssignment';
+  protected $creativeGroupAssignmentsType = 'Appointments_Google_Service_Dfareporting_CreativeGroupAssignment';
   protected $creativeGroupAssignmentsDataType = 'array';
   public $creativeId;
-  protected $creativeIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $creativeIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $creativeIdDimensionValueDataType = '';
   public $endTime;
-  protected $richMediaExitOverridesType = 'Google_Service_Dfareporting_RichMediaExitOverride';
+  protected $richMediaExitOverridesType = 'Appointments_Google_Service_Dfareporting_RichMediaExitOverride';
   protected $richMediaExitOverridesDataType = 'array';
   public $sequence;
   public $sslCompliant;
@@ -12615,7 +12615,7 @@ class Google_Service_Dfareporting_CreativeAssignment extends Google_Collection
   {
     return $this->applyEventTags;
   }
-  public function setClickThroughUrl(Google_Service_Dfareporting_ClickThroughUrl $clickThroughUrl)
+  public function setClickThroughUrl(Appointments_Google_Service_Dfareporting_ClickThroughUrl $clickThroughUrl)
   {
     $this->clickThroughUrl = $clickThroughUrl;
   }
@@ -12647,7 +12647,7 @@ class Google_Service_Dfareporting_CreativeAssignment extends Google_Collection
   {
     return $this->creativeId;
   }
-  public function setCreativeIdDimensionValue(Google_Service_Dfareporting_DimensionValue $creativeIdDimensionValue)
+  public function setCreativeIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $creativeIdDimensionValue)
   {
     $this->creativeIdDimensionValue = $creativeIdDimensionValue;
   }
@@ -12705,7 +12705,7 @@ class Google_Service_Dfareporting_CreativeAssignment extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_CreativeCustomEvent extends Google_Model
+class Appointments_Google_Service_Dfareporting_CreativeCustomEvent extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -12716,7 +12716,7 @@ class Google_Service_Dfareporting_CreativeCustomEvent extends Google_Model
   public $artworkType;
   public $exitUrl;
   public $id;
-  protected $popupWindowPropertiesType = 'Google_Service_Dfareporting_PopupWindowProperties';
+  protected $popupWindowPropertiesType = 'Appointments_Google_Service_Dfareporting_PopupWindowProperties';
   protected $popupWindowPropertiesDataType = '';
   public $targetType;
   public $videoReportingId;
@@ -12778,7 +12778,7 @@ class Google_Service_Dfareporting_CreativeCustomEvent extends Google_Model
   {
     return $this->id;
   }
-  public function setPopupWindowProperties(Google_Service_Dfareporting_PopupWindowProperties $popupWindowProperties)
+  public function setPopupWindowProperties(Appointments_Google_Service_Dfareporting_PopupWindowProperties $popupWindowProperties)
   {
     $this->popupWindowProperties = $popupWindowProperties;
   }
@@ -12804,13 +12804,13 @@ class Google_Service_Dfareporting_CreativeCustomEvent extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_CreativeField extends Google_Model
+class Appointments_Google_Service_Dfareporting_CreativeField extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $accountId;
   public $advertiserId;
-  protected $advertiserIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $advertiserIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $advertiserIdDimensionValueDataType = '';
   public $id;
   public $kind;
@@ -12834,7 +12834,7 @@ class Google_Service_Dfareporting_CreativeField extends Google_Model
   {
     return $this->advertiserId;
   }
-  public function setAdvertiserIdDimensionValue(Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
+  public function setAdvertiserIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
   {
     $this->advertiserIdDimensionValue = $advertiserIdDimensionValue;
   }
@@ -12876,7 +12876,7 @@ class Google_Service_Dfareporting_CreativeField extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_CreativeFieldAssignment extends Google_Model
+class Appointments_Google_Service_Dfareporting_CreativeFieldAssignment extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -12902,7 +12902,7 @@ class Google_Service_Dfareporting_CreativeFieldAssignment extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_CreativeFieldValue extends Google_Model
+class Appointments_Google_Service_Dfareporting_CreativeFieldValue extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -12937,12 +12937,12 @@ class Google_Service_Dfareporting_CreativeFieldValue extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_CreativeFieldValuesListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_CreativeFieldValuesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'creativeFieldValues';
   protected $internal_gapi_mappings = array(
   );
-  protected $creativeFieldValuesType = 'Google_Service_Dfareporting_CreativeFieldValue';
+  protected $creativeFieldValuesType = 'Appointments_Google_Service_Dfareporting_CreativeFieldValue';
   protected $creativeFieldValuesDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -12974,12 +12974,12 @@ class Google_Service_Dfareporting_CreativeFieldValuesListResponse extends Google
   }
 }
 
-class Google_Service_Dfareporting_CreativeFieldsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_CreativeFieldsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'creativeFields';
   protected $internal_gapi_mappings = array(
   );
-  protected $creativeFieldsType = 'Google_Service_Dfareporting_CreativeField';
+  protected $creativeFieldsType = 'Appointments_Google_Service_Dfareporting_CreativeField';
   protected $creativeFieldsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -13011,13 +13011,13 @@ class Google_Service_Dfareporting_CreativeFieldsListResponse extends Google_Coll
   }
 }
 
-class Google_Service_Dfareporting_CreativeGroup extends Google_Model
+class Appointments_Google_Service_Dfareporting_CreativeGroup extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $accountId;
   public $advertiserId;
-  protected $advertiserIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $advertiserIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $advertiserIdDimensionValueDataType = '';
   public $groupNumber;
   public $id;
@@ -13042,7 +13042,7 @@ class Google_Service_Dfareporting_CreativeGroup extends Google_Model
   {
     return $this->advertiserId;
   }
-  public function setAdvertiserIdDimensionValue(Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
+  public function setAdvertiserIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
   {
     $this->advertiserIdDimensionValue = $advertiserIdDimensionValue;
   }
@@ -13092,7 +13092,7 @@ class Google_Service_Dfareporting_CreativeGroup extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_CreativeGroupAssignment extends Google_Model
+class Appointments_Google_Service_Dfareporting_CreativeGroupAssignment extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -13118,12 +13118,12 @@ class Google_Service_Dfareporting_CreativeGroupAssignment extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_CreativeGroupsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_CreativeGroupsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'creativeGroups';
   protected $internal_gapi_mappings = array(
   );
-  protected $creativeGroupsType = 'Google_Service_Dfareporting_CreativeGroup';
+  protected $creativeGroupsType = 'Appointments_Google_Service_Dfareporting_CreativeGroup';
   protected $creativeGroupsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -13155,14 +13155,14 @@ class Google_Service_Dfareporting_CreativeGroupsListResponse extends Google_Coll
   }
 }
 
-class Google_Service_Dfareporting_CreativeOptimizationConfiguration extends Google_Collection
+class Appointments_Google_Service_Dfareporting_CreativeOptimizationConfiguration extends Appointments_Google_Collection
 {
   protected $collection_key = 'optimizationActivitys';
   protected $internal_gapi_mappings = array(
   );
   public $id;
   public $name;
-  protected $optimizationActivitysType = 'Google_Service_Dfareporting_OptimizationActivity';
+  protected $optimizationActivitysType = 'Appointments_Google_Service_Dfareporting_OptimizationActivity';
   protected $optimizationActivitysDataType = 'array';
   public $optimizationModel;
 
@@ -13201,12 +13201,12 @@ class Google_Service_Dfareporting_CreativeOptimizationConfiguration extends Goog
   }
 }
 
-class Google_Service_Dfareporting_CreativeRotation extends Google_Collection
+class Appointments_Google_Service_Dfareporting_CreativeRotation extends Appointments_Google_Collection
 {
   protected $collection_key = 'creativeAssignments';
   protected $internal_gapi_mappings = array(
   );
-  protected $creativeAssignmentsType = 'Google_Service_Dfareporting_CreativeAssignment';
+  protected $creativeAssignmentsType = 'Appointments_Google_Service_Dfareporting_CreativeAssignment';
   protected $creativeAssignmentsDataType = 'array';
   public $creativeOptimizationConfigurationId;
   public $type;
@@ -13247,7 +13247,7 @@ class Google_Service_Dfareporting_CreativeRotation extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_CreativeSettings extends Google_Model
+class Appointments_Google_Service_Dfareporting_CreativeSettings extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -13273,12 +13273,12 @@ class Google_Service_Dfareporting_CreativeSettings extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_CreativesListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_CreativesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'creatives';
   protected $internal_gapi_mappings = array(
   );
-  protected $creativesType = 'Google_Service_Dfareporting_Creative';
+  protected $creativesType = 'Appointments_Google_Service_Dfareporting_Creative';
   protected $creativesDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -13310,19 +13310,19 @@ class Google_Service_Dfareporting_CreativesListResponse extends Google_Collectio
   }
 }
 
-class Google_Service_Dfareporting_CrossDimensionReachReportCompatibleFields extends Google_Collection
+class Appointments_Google_Service_Dfareporting_CrossDimensionReachReportCompatibleFields extends Appointments_Google_Collection
 {
   protected $collection_key = 'overlapMetrics';
   protected $internal_gapi_mappings = array(
   );
-  protected $breakdownType = 'Google_Service_Dfareporting_Dimension';
+  protected $breakdownType = 'Appointments_Google_Service_Dfareporting_Dimension';
   protected $breakdownDataType = 'array';
-  protected $dimensionFiltersType = 'Google_Service_Dfareporting_Dimension';
+  protected $dimensionFiltersType = 'Appointments_Google_Service_Dfareporting_Dimension';
   protected $dimensionFiltersDataType = 'array';
   public $kind;
-  protected $metricsType = 'Google_Service_Dfareporting_Metric';
+  protected $metricsType = 'Appointments_Google_Service_Dfareporting_Metric';
   protected $metricsDataType = 'array';
-  protected $overlapMetricsType = 'Google_Service_Dfareporting_Metric';
+  protected $overlapMetricsType = 'Appointments_Google_Service_Dfareporting_Metric';
   protected $overlapMetricsDataType = 'array';
 
 
@@ -13368,12 +13368,12 @@ class Google_Service_Dfareporting_CrossDimensionReachReportCompatibleFields exte
   }
 }
 
-class Google_Service_Dfareporting_CustomRichMediaEvents extends Google_Collection
+class Appointments_Google_Service_Dfareporting_CustomRichMediaEvents extends Appointments_Google_Collection
 {
   protected $collection_key = 'filteredEventIds';
   protected $internal_gapi_mappings = array(
   );
-  protected $filteredEventIdsType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $filteredEventIdsType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $filteredEventIdsDataType = 'array';
   public $kind;
 
@@ -13396,7 +13396,7 @@ class Google_Service_Dfareporting_CustomRichMediaEvents extends Google_Collectio
   }
 }
 
-class Google_Service_Dfareporting_DateRange extends Google_Model
+class Appointments_Google_Service_Dfareporting_DateRange extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -13440,7 +13440,7 @@ class Google_Service_Dfareporting_DateRange extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_DayPartTargeting extends Google_Collection
+class Appointments_Google_Service_Dfareporting_DayPartTargeting extends Appointments_Google_Collection
 {
   protected $collection_key = 'hoursOfDay';
   protected $internal_gapi_mappings = array(
@@ -13476,7 +13476,7 @@ class Google_Service_Dfareporting_DayPartTargeting extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_DefaultClickThroughEventTagProperties extends Google_Model
+class Appointments_Google_Service_Dfareporting_DefaultClickThroughEventTagProperties extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -13502,18 +13502,18 @@ class Google_Service_Dfareporting_DefaultClickThroughEventTagProperties extends 
   }
 }
 
-class Google_Service_Dfareporting_DeliverySchedule extends Google_Model
+class Appointments_Google_Service_Dfareporting_DeliverySchedule extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $frequencyCapType = 'Google_Service_Dfareporting_FrequencyCap';
+  protected $frequencyCapType = 'Appointments_Google_Service_Dfareporting_FrequencyCap';
   protected $frequencyCapDataType = '';
   public $hardCutoff;
   public $impressionRatio;
   public $priority;
 
 
-  public function setFrequencyCap(Google_Service_Dfareporting_FrequencyCap $frequencyCap)
+  public function setFrequencyCap(Appointments_Google_Service_Dfareporting_FrequencyCap $frequencyCap)
   {
     $this->frequencyCap = $frequencyCap;
   }
@@ -13547,11 +13547,11 @@ class Google_Service_Dfareporting_DeliverySchedule extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_DfareportingFile extends Google_Model
+class Appointments_Google_Service_Dfareporting_DfareportingFile extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $dateRangeType = 'Google_Service_Dfareporting_DateRange';
+  protected $dateRangeType = 'Appointments_Google_Service_Dfareporting_DateRange';
   protected $dateRangeDataType = '';
   public $etag;
   public $fileName;
@@ -13561,11 +13561,11 @@ class Google_Service_Dfareporting_DfareportingFile extends Google_Model
   public $lastModifiedTime;
   public $reportId;
   public $status;
-  protected $urlsType = 'Google_Service_Dfareporting_DfareportingFileUrls';
+  protected $urlsType = 'Appointments_Google_Service_Dfareporting_DfareportingFileUrls';
   protected $urlsDataType = '';
 
 
-  public function setDateRange(Google_Service_Dfareporting_DateRange $dateRange)
+  public function setDateRange(Appointments_Google_Service_Dfareporting_DateRange $dateRange)
   {
     $this->dateRange = $dateRange;
   }
@@ -13637,7 +13637,7 @@ class Google_Service_Dfareporting_DfareportingFile extends Google_Model
   {
     return $this->status;
   }
-  public function setUrls(Google_Service_Dfareporting_DfareportingFileUrls $urls)
+  public function setUrls(Appointments_Google_Service_Dfareporting_DfareportingFileUrls $urls)
   {
     $this->urls = $urls;
   }
@@ -13647,7 +13647,7 @@ class Google_Service_Dfareporting_DfareportingFile extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_DfareportingFileUrls extends Google_Model
+class Appointments_Google_Service_Dfareporting_DfareportingFileUrls extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -13673,7 +13673,7 @@ class Google_Service_Dfareporting_DfareportingFileUrls extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_DfpSettings extends Google_Model
+class Appointments_Google_Service_Dfareporting_DfpSettings extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
         "dfpNetworkCode" => "dfp_network_code",
@@ -13728,7 +13728,7 @@ class Google_Service_Dfareporting_DfpSettings extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_Dimension extends Google_Model
+class Appointments_Google_Service_Dfareporting_Dimension extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -13754,7 +13754,7 @@ class Google_Service_Dfareporting_Dimension extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_DimensionFilter extends Google_Model
+class Appointments_Google_Service_Dfareporting_DimensionFilter extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -13789,7 +13789,7 @@ class Google_Service_Dfareporting_DimensionFilter extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_DimensionValue extends Google_Model
+class Appointments_Google_Service_Dfareporting_DimensionValue extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -13851,13 +13851,13 @@ class Google_Service_Dfareporting_DimensionValue extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_DimensionValueList extends Google_Collection
+class Appointments_Google_Service_Dfareporting_DimensionValueList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $etag;
-  protected $itemsType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $itemsType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -13897,14 +13897,14 @@ class Google_Service_Dfareporting_DimensionValueList extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_DimensionValueRequest extends Google_Collection
+class Appointments_Google_Service_Dfareporting_DimensionValueRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'filters';
   protected $internal_gapi_mappings = array(
   );
   public $dimensionName;
   public $endDate;
-  protected $filtersType = 'Google_Service_Dfareporting_DimensionFilter';
+  protected $filtersType = 'Appointments_Google_Service_Dfareporting_DimensionFilter';
   protected $filtersDataType = 'array';
   public $kind;
   public $startDate;
@@ -13952,26 +13952,26 @@ class Google_Service_Dfareporting_DimensionValueRequest extends Google_Collectio
   }
 }
 
-class Google_Service_Dfareporting_DirectorySite extends Google_Collection
+class Appointments_Google_Service_Dfareporting_DirectorySite extends Appointments_Google_Collection
 {
   protected $collection_key = 'interstitialTagFormats';
   protected $internal_gapi_mappings = array(
   );
   public $active;
-  protected $contactAssignmentsType = 'Google_Service_Dfareporting_DirectorySiteContactAssignment';
+  protected $contactAssignmentsType = 'Appointments_Google_Service_Dfareporting_DirectorySiteContactAssignment';
   protected $contactAssignmentsDataType = 'array';
   public $countryId;
   public $currencyId;
   public $description;
   public $id;
-  protected $idDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $idDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $idDimensionValueDataType = '';
   public $inpageTagFormats;
   public $interstitialTagFormats;
   public $kind;
   public $name;
   public $parentId;
-  protected $settingsType = 'Google_Service_Dfareporting_DirectorySiteSettings';
+  protected $settingsType = 'Appointments_Google_Service_Dfareporting_DirectorySiteSettings';
   protected $settingsDataType = '';
   public $url;
 
@@ -14024,7 +14024,7 @@ class Google_Service_Dfareporting_DirectorySite extends Google_Collection
   {
     return $this->id;
   }
-  public function setIdDimensionValue(Google_Service_Dfareporting_DimensionValue $idDimensionValue)
+  public function setIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $idDimensionValue)
   {
     $this->idDimensionValue = $idDimensionValue;
   }
@@ -14072,7 +14072,7 @@ class Google_Service_Dfareporting_DirectorySite extends Google_Collection
   {
     return $this->parentId;
   }
-  public function setSettings(Google_Service_Dfareporting_DirectorySiteSettings $settings)
+  public function setSettings(Appointments_Google_Service_Dfareporting_DirectorySiteSettings $settings)
   {
     $this->settings = $settings;
   }
@@ -14090,7 +14090,7 @@ class Google_Service_Dfareporting_DirectorySite extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_DirectorySiteContact extends Google_Model
+class Appointments_Google_Service_Dfareporting_DirectorySiteContact extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -14188,7 +14188,7 @@ class Google_Service_Dfareporting_DirectorySiteContact extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_DirectorySiteContactAssignment extends Google_Model
+class Appointments_Google_Service_Dfareporting_DirectorySiteContactAssignment extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -14214,12 +14214,12 @@ class Google_Service_Dfareporting_DirectorySiteContactAssignment extends Google_
   }
 }
 
-class Google_Service_Dfareporting_DirectorySiteContactsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_DirectorySiteContactsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'directorySiteContacts';
   protected $internal_gapi_mappings = array(
   );
-  protected $directorySiteContactsType = 'Google_Service_Dfareporting_DirectorySiteContact';
+  protected $directorySiteContactsType = 'Appointments_Google_Service_Dfareporting_DirectorySiteContact';
   protected $directorySiteContactsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -14251,14 +14251,14 @@ class Google_Service_Dfareporting_DirectorySiteContactsListResponse extends Goog
   }
 }
 
-class Google_Service_Dfareporting_DirectorySiteSettings extends Google_Model
+class Appointments_Google_Service_Dfareporting_DirectorySiteSettings extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
         "dfpSettings" => "dfp_settings",
         "instreamVideoPlacementAccepted" => "instream_video_placement_accepted",
   );
   public $activeViewOptOut;
-  protected $dfpSettingsType = 'Google_Service_Dfareporting_DfpSettings';
+  protected $dfpSettingsType = 'Appointments_Google_Service_Dfareporting_DfpSettings';
   protected $dfpSettingsDataType = '';
   public $instreamVideoPlacementAccepted;
   public $interstitialPlacementAccepted;
@@ -14275,7 +14275,7 @@ class Google_Service_Dfareporting_DirectorySiteSettings extends Google_Model
   {
     return $this->activeViewOptOut;
   }
-  public function setDfpSettings(Google_Service_Dfareporting_DfpSettings $dfpSettings)
+  public function setDfpSettings(Appointments_Google_Service_Dfareporting_DfpSettings $dfpSettings)
   {
     $this->dfpSettings = $dfpSettings;
   }
@@ -14325,12 +14325,12 @@ class Google_Service_Dfareporting_DirectorySiteSettings extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_DirectorySitesListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_DirectorySitesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'directorySites';
   protected $internal_gapi_mappings = array(
   );
-  protected $directorySitesType = 'Google_Service_Dfareporting_DirectorySite';
+  protected $directorySitesType = 'Appointments_Google_Service_Dfareporting_DirectorySite';
   protected $directorySitesDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -14362,17 +14362,17 @@ class Google_Service_Dfareporting_DirectorySitesListResponse extends Google_Coll
   }
 }
 
-class Google_Service_Dfareporting_EventTag extends Google_Collection
+class Appointments_Google_Service_Dfareporting_EventTag extends Appointments_Google_Collection
 {
   protected $collection_key = 'siteIds';
   protected $internal_gapi_mappings = array(
   );
   public $accountId;
   public $advertiserId;
-  protected $advertiserIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $advertiserIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $advertiserIdDimensionValueDataType = '';
   public $campaignId;
-  protected $campaignIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $campaignIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $campaignIdDimensionValueDataType = '';
   public $enabledByDefault;
   public $excludeFromAdxRequests;
@@ -14405,7 +14405,7 @@ class Google_Service_Dfareporting_EventTag extends Google_Collection
   {
     return $this->advertiserId;
   }
-  public function setAdvertiserIdDimensionValue(Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
+  public function setAdvertiserIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
   {
     $this->advertiserIdDimensionValue = $advertiserIdDimensionValue;
   }
@@ -14421,7 +14421,7 @@ class Google_Service_Dfareporting_EventTag extends Google_Collection
   {
     return $this->campaignId;
   }
-  public function setCampaignIdDimensionValue(Google_Service_Dfareporting_DimensionValue $campaignIdDimensionValue)
+  public function setCampaignIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $campaignIdDimensionValue)
   {
     $this->campaignIdDimensionValue = $campaignIdDimensionValue;
   }
@@ -14535,7 +14535,7 @@ class Google_Service_Dfareporting_EventTag extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_EventTagOverride extends Google_Model
+class Appointments_Google_Service_Dfareporting_EventTagOverride extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -14561,12 +14561,12 @@ class Google_Service_Dfareporting_EventTagOverride extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_EventTagsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_EventTagsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'eventTags';
   protected $internal_gapi_mappings = array(
   );
-  protected $eventTagsType = 'Google_Service_Dfareporting_EventTag';
+  protected $eventTagsType = 'Appointments_Google_Service_Dfareporting_EventTag';
   protected $eventTagsDataType = 'array';
   public $kind;
 
@@ -14589,13 +14589,13 @@ class Google_Service_Dfareporting_EventTagsListResponse extends Google_Collectio
   }
 }
 
-class Google_Service_Dfareporting_FileList extends Google_Collection
+class Appointments_Google_Service_Dfareporting_FileList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $etag;
-  protected $itemsType = 'Google_Service_Dfareporting_DfareportingFile';
+  protected $itemsType = 'Appointments_Google_Service_Dfareporting_DfareportingFile';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -14635,7 +14635,7 @@ class Google_Service_Dfareporting_FileList extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_Flight extends Google_Model
+class Appointments_Google_Service_Dfareporting_Flight extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -14679,7 +14679,7 @@ class Google_Service_Dfareporting_Flight extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_FloodlightActivitiesGenerateTagResponse extends Google_Model
+class Appointments_Google_Service_Dfareporting_FloodlightActivitiesGenerateTagResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -14705,12 +14705,12 @@ class Google_Service_Dfareporting_FloodlightActivitiesGenerateTagResponse extend
   }
 }
 
-class Google_Service_Dfareporting_FloodlightActivitiesListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_FloodlightActivitiesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'floodlightActivities';
   protected $internal_gapi_mappings = array(
   );
-  protected $floodlightActivitiesType = 'Google_Service_Dfareporting_FloodlightActivity';
+  protected $floodlightActivitiesType = 'Appointments_Google_Service_Dfareporting_FloodlightActivity';
   protected $floodlightActivitiesDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -14742,18 +14742,18 @@ class Google_Service_Dfareporting_FloodlightActivitiesListResponse extends Googl
   }
 }
 
-class Google_Service_Dfareporting_FloodlightActivity extends Google_Collection
+class Appointments_Google_Service_Dfareporting_FloodlightActivity extends Appointments_Google_Collection
 {
   protected $collection_key = 'userDefinedVariableTypes';
   protected $internal_gapi_mappings = array(
   );
   public $accountId;
   public $advertiserId;
-  protected $advertiserIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $advertiserIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $advertiserIdDimensionValueDataType = '';
   public $cacheBustingType;
   public $countingMethod;
-  protected $defaultTagsType = 'Google_Service_Dfareporting_FloodlightActivityDynamicTag';
+  protected $defaultTagsType = 'Appointments_Google_Service_Dfareporting_FloodlightActivityDynamicTag';
   protected $defaultTagsDataType = 'array';
   public $expectedUrl;
   public $floodlightActivityGroupId;
@@ -14761,17 +14761,17 @@ class Google_Service_Dfareporting_FloodlightActivity extends Google_Collection
   public $floodlightActivityGroupTagString;
   public $floodlightActivityGroupType;
   public $floodlightConfigurationId;
-  protected $floodlightConfigurationIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $floodlightConfigurationIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $floodlightConfigurationIdDimensionValueDataType = '';
   public $hidden;
   public $id;
-  protected $idDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $idDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $idDimensionValueDataType = '';
   public $imageTagEnabled;
   public $kind;
   public $name;
   public $notes;
-  protected $publisherTagsType = 'Google_Service_Dfareporting_FloodlightActivityPublisherDynamicTag';
+  protected $publisherTagsType = 'Appointments_Google_Service_Dfareporting_FloodlightActivityPublisherDynamicTag';
   protected $publisherTagsDataType = 'array';
   public $secure;
   public $sslCompliant;
@@ -14798,7 +14798,7 @@ class Google_Service_Dfareporting_FloodlightActivity extends Google_Collection
   {
     return $this->advertiserId;
   }
-  public function setAdvertiserIdDimensionValue(Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
+  public function setAdvertiserIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
   {
     $this->advertiserIdDimensionValue = $advertiserIdDimensionValue;
   }
@@ -14878,7 +14878,7 @@ class Google_Service_Dfareporting_FloodlightActivity extends Google_Collection
   {
     return $this->floodlightConfigurationId;
   }
-  public function setFloodlightConfigurationIdDimensionValue(Google_Service_Dfareporting_DimensionValue $floodlightConfigurationIdDimensionValue)
+  public function setFloodlightConfigurationIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $floodlightConfigurationIdDimensionValue)
   {
     $this->floodlightConfigurationIdDimensionValue = $floodlightConfigurationIdDimensionValue;
   }
@@ -14902,7 +14902,7 @@ class Google_Service_Dfareporting_FloodlightActivity extends Google_Collection
   {
     return $this->id;
   }
-  public function setIdDimensionValue(Google_Service_Dfareporting_DimensionValue $idDimensionValue)
+  public function setIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $idDimensionValue)
   {
     $this->idDimensionValue = $idDimensionValue;
   }
@@ -15008,7 +15008,7 @@ class Google_Service_Dfareporting_FloodlightActivity extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_FloodlightActivityDynamicTag extends Google_Model
+class Appointments_Google_Service_Dfareporting_FloodlightActivityDynamicTag extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -15043,19 +15043,19 @@ class Google_Service_Dfareporting_FloodlightActivityDynamicTag extends Google_Mo
   }
 }
 
-class Google_Service_Dfareporting_FloodlightActivityGroup extends Google_Model
+class Appointments_Google_Service_Dfareporting_FloodlightActivityGroup extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $accountId;
   public $advertiserId;
-  protected $advertiserIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $advertiserIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $advertiserIdDimensionValueDataType = '';
   public $floodlightConfigurationId;
-  protected $floodlightConfigurationIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $floodlightConfigurationIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $floodlightConfigurationIdDimensionValueDataType = '';
   public $id;
-  protected $idDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $idDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $idDimensionValueDataType = '';
   public $kind;
   public $name;
@@ -15080,7 +15080,7 @@ class Google_Service_Dfareporting_FloodlightActivityGroup extends Google_Model
   {
     return $this->advertiserId;
   }
-  public function setAdvertiserIdDimensionValue(Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
+  public function setAdvertiserIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
   {
     $this->advertiserIdDimensionValue = $advertiserIdDimensionValue;
   }
@@ -15096,7 +15096,7 @@ class Google_Service_Dfareporting_FloodlightActivityGroup extends Google_Model
   {
     return $this->floodlightConfigurationId;
   }
-  public function setFloodlightConfigurationIdDimensionValue(Google_Service_Dfareporting_DimensionValue $floodlightConfigurationIdDimensionValue)
+  public function setFloodlightConfigurationIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $floodlightConfigurationIdDimensionValue)
   {
     $this->floodlightConfigurationIdDimensionValue = $floodlightConfigurationIdDimensionValue;
   }
@@ -15112,7 +15112,7 @@ class Google_Service_Dfareporting_FloodlightActivityGroup extends Google_Model
   {
     return $this->id;
   }
-  public function setIdDimensionValue(Google_Service_Dfareporting_DimensionValue $idDimensionValue)
+  public function setIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $idDimensionValue)
   {
     $this->idDimensionValue = $idDimensionValue;
   }
@@ -15162,12 +15162,12 @@ class Google_Service_Dfareporting_FloodlightActivityGroup extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_FloodlightActivityGroupsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_FloodlightActivityGroupsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'floodlightActivityGroups';
   protected $internal_gapi_mappings = array(
   );
-  protected $floodlightActivityGroupsType = 'Google_Service_Dfareporting_FloodlightActivityGroup';
+  protected $floodlightActivityGroupsType = 'Appointments_Google_Service_Dfareporting_FloodlightActivityGroup';
   protected $floodlightActivityGroupsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -15199,16 +15199,16 @@ class Google_Service_Dfareporting_FloodlightActivityGroupsListResponse extends G
   }
 }
 
-class Google_Service_Dfareporting_FloodlightActivityPublisherDynamicTag extends Google_Model
+class Appointments_Google_Service_Dfareporting_FloodlightActivityPublisherDynamicTag extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $clickThrough;
   public $directorySiteId;
-  protected $dynamicTagType = 'Google_Service_Dfareporting_FloodlightActivityDynamicTag';
+  protected $dynamicTagType = 'Appointments_Google_Service_Dfareporting_FloodlightActivityDynamicTag';
   protected $dynamicTagDataType = '';
   public $siteId;
-  protected $siteIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $siteIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $siteIdDimensionValueDataType = '';
   public $viewThrough;
 
@@ -15229,7 +15229,7 @@ class Google_Service_Dfareporting_FloodlightActivityPublisherDynamicTag extends 
   {
     return $this->directorySiteId;
   }
-  public function setDynamicTag(Google_Service_Dfareporting_FloodlightActivityDynamicTag $dynamicTag)
+  public function setDynamicTag(Appointments_Google_Service_Dfareporting_FloodlightActivityDynamicTag $dynamicTag)
   {
     $this->dynamicTag = $dynamicTag;
   }
@@ -15245,7 +15245,7 @@ class Google_Service_Dfareporting_FloodlightActivityPublisherDynamicTag extends 
   {
     return $this->siteId;
   }
-  public function setSiteIdDimensionValue(Google_Service_Dfareporting_DimensionValue $siteIdDimensionValue)
+  public function setSiteIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $siteIdDimensionValue)
   {
     $this->siteIdDimensionValue = $siteIdDimensionValue;
   }
@@ -15263,35 +15263,35 @@ class Google_Service_Dfareporting_FloodlightActivityPublisherDynamicTag extends 
   }
 }
 
-class Google_Service_Dfareporting_FloodlightConfiguration extends Google_Collection
+class Appointments_Google_Service_Dfareporting_FloodlightConfiguration extends Appointments_Google_Collection
 {
   protected $collection_key = 'userDefinedVariableConfigurations';
   protected $internal_gapi_mappings = array(
   );
   public $accountId;
   public $advertiserId;
-  protected $advertiserIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $advertiserIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $advertiserIdDimensionValueDataType = '';
   public $analyticsDataSharingEnabled;
   public $exposureToConversionEnabled;
   public $firstDayOfWeek;
   public $id;
-  protected $idDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $idDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $idDimensionValueDataType = '';
   public $inAppAttributionTrackingEnabled;
   public $kind;
-  protected $lookbackConfigurationType = 'Google_Service_Dfareporting_LookbackConfiguration';
+  protected $lookbackConfigurationType = 'Appointments_Google_Service_Dfareporting_LookbackConfiguration';
   protected $lookbackConfigurationDataType = '';
   public $naturalSearchConversionAttributionOption;
-  protected $omnitureSettingsType = 'Google_Service_Dfareporting_OmnitureSettings';
+  protected $omnitureSettingsType = 'Appointments_Google_Service_Dfareporting_OmnitureSettings';
   protected $omnitureSettingsDataType = '';
   public $standardVariableTypes;
   public $subaccountId;
-  protected $tagSettingsType = 'Google_Service_Dfareporting_TagSettings';
+  protected $tagSettingsType = 'Appointments_Google_Service_Dfareporting_TagSettings';
   protected $tagSettingsDataType = '';
-  protected $thirdPartyAuthenticationTokensType = 'Google_Service_Dfareporting_ThirdPartyAuthenticationToken';
+  protected $thirdPartyAuthenticationTokensType = 'Appointments_Google_Service_Dfareporting_ThirdPartyAuthenticationToken';
   protected $thirdPartyAuthenticationTokensDataType = 'array';
-  protected $userDefinedVariableConfigurationsType = 'Google_Service_Dfareporting_UserDefinedVariableConfiguration';
+  protected $userDefinedVariableConfigurationsType = 'Appointments_Google_Service_Dfareporting_UserDefinedVariableConfiguration';
   protected $userDefinedVariableConfigurationsDataType = 'array';
 
 
@@ -15311,7 +15311,7 @@ class Google_Service_Dfareporting_FloodlightConfiguration extends Google_Collect
   {
     return $this->advertiserId;
   }
-  public function setAdvertiserIdDimensionValue(Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
+  public function setAdvertiserIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
   {
     $this->advertiserIdDimensionValue = $advertiserIdDimensionValue;
   }
@@ -15351,7 +15351,7 @@ class Google_Service_Dfareporting_FloodlightConfiguration extends Google_Collect
   {
     return $this->id;
   }
-  public function setIdDimensionValue(Google_Service_Dfareporting_DimensionValue $idDimensionValue)
+  public function setIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $idDimensionValue)
   {
     $this->idDimensionValue = $idDimensionValue;
   }
@@ -15375,7 +15375,7 @@ class Google_Service_Dfareporting_FloodlightConfiguration extends Google_Collect
   {
     return $this->kind;
   }
-  public function setLookbackConfiguration(Google_Service_Dfareporting_LookbackConfiguration $lookbackConfiguration)
+  public function setLookbackConfiguration(Appointments_Google_Service_Dfareporting_LookbackConfiguration $lookbackConfiguration)
   {
     $this->lookbackConfiguration = $lookbackConfiguration;
   }
@@ -15391,7 +15391,7 @@ class Google_Service_Dfareporting_FloodlightConfiguration extends Google_Collect
   {
     return $this->naturalSearchConversionAttributionOption;
   }
-  public function setOmnitureSettings(Google_Service_Dfareporting_OmnitureSettings $omnitureSettings)
+  public function setOmnitureSettings(Appointments_Google_Service_Dfareporting_OmnitureSettings $omnitureSettings)
   {
     $this->omnitureSettings = $omnitureSettings;
   }
@@ -15415,7 +15415,7 @@ class Google_Service_Dfareporting_FloodlightConfiguration extends Google_Collect
   {
     return $this->subaccountId;
   }
-  public function setTagSettings(Google_Service_Dfareporting_TagSettings $tagSettings)
+  public function setTagSettings(Appointments_Google_Service_Dfareporting_TagSettings $tagSettings)
   {
     $this->tagSettings = $tagSettings;
   }
@@ -15441,12 +15441,12 @@ class Google_Service_Dfareporting_FloodlightConfiguration extends Google_Collect
   }
 }
 
-class Google_Service_Dfareporting_FloodlightConfigurationsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_FloodlightConfigurationsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'floodlightConfigurations';
   protected $internal_gapi_mappings = array(
   );
-  protected $floodlightConfigurationsType = 'Google_Service_Dfareporting_FloodlightConfiguration';
+  protected $floodlightConfigurationsType = 'Appointments_Google_Service_Dfareporting_FloodlightConfiguration';
   protected $floodlightConfigurationsDataType = 'array';
   public $kind;
 
@@ -15469,17 +15469,17 @@ class Google_Service_Dfareporting_FloodlightConfigurationsListResponse extends G
   }
 }
 
-class Google_Service_Dfareporting_FloodlightReportCompatibleFields extends Google_Collection
+class Appointments_Google_Service_Dfareporting_FloodlightReportCompatibleFields extends Appointments_Google_Collection
 {
   protected $collection_key = 'metrics';
   protected $internal_gapi_mappings = array(
   );
-  protected $dimensionFiltersType = 'Google_Service_Dfareporting_Dimension';
+  protected $dimensionFiltersType = 'Appointments_Google_Service_Dfareporting_Dimension';
   protected $dimensionFiltersDataType = 'array';
-  protected $dimensionsType = 'Google_Service_Dfareporting_Dimension';
+  protected $dimensionsType = 'Appointments_Google_Service_Dfareporting_Dimension';
   protected $dimensionsDataType = 'array';
   public $kind;
-  protected $metricsType = 'Google_Service_Dfareporting_Metric';
+  protected $metricsType = 'Appointments_Google_Service_Dfareporting_Metric';
   protected $metricsDataType = 'array';
 
 
@@ -15517,7 +15517,7 @@ class Google_Service_Dfareporting_FloodlightReportCompatibleFields extends Googl
   }
 }
 
-class Google_Service_Dfareporting_FrequencyCap extends Google_Model
+class Appointments_Google_Service_Dfareporting_FrequencyCap extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -15543,7 +15543,7 @@ class Google_Service_Dfareporting_FrequencyCap extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_FsCommand extends Google_Model
+class Appointments_Google_Service_Dfareporting_FsCommand extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -15596,21 +15596,21 @@ class Google_Service_Dfareporting_FsCommand extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_GeoTargeting extends Google_Collection
+class Appointments_Google_Service_Dfareporting_GeoTargeting extends Appointments_Google_Collection
 {
   protected $collection_key = 'regions';
   protected $internal_gapi_mappings = array(
   );
-  protected $citiesType = 'Google_Service_Dfareporting_City';
+  protected $citiesType = 'Appointments_Google_Service_Dfareporting_City';
   protected $citiesDataType = 'array';
-  protected $countriesType = 'Google_Service_Dfareporting_Country';
+  protected $countriesType = 'Appointments_Google_Service_Dfareporting_Country';
   protected $countriesDataType = 'array';
   public $excludeCountries;
-  protected $metrosType = 'Google_Service_Dfareporting_Metro';
+  protected $metrosType = 'Appointments_Google_Service_Dfareporting_Metro';
   protected $metrosDataType = 'array';
-  protected $postalCodesType = 'Google_Service_Dfareporting_PostalCode';
+  protected $postalCodesType = 'Appointments_Google_Service_Dfareporting_PostalCode';
   protected $postalCodesDataType = 'array';
-  protected $regionsType = 'Google_Service_Dfareporting_Region';
+  protected $regionsType = 'Appointments_Google_Service_Dfareporting_Region';
   protected $regionsDataType = 'array';
 
 
@@ -15664,13 +15664,13 @@ class Google_Service_Dfareporting_GeoTargeting extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_InventoryItem extends Google_Collection
+class Appointments_Google_Service_Dfareporting_InventoryItem extends Appointments_Google_Collection
 {
   protected $collection_key = 'adSlots';
   protected $internal_gapi_mappings = array(
   );
   public $accountId;
-  protected $adSlotsType = 'Google_Service_Dfareporting_AdSlot';
+  protected $adSlotsType = 'Appointments_Google_Service_Dfareporting_AdSlot';
   protected $adSlotsDataType = 'array';
   public $advertiserId;
   public $contentCategoryId;
@@ -15679,13 +15679,13 @@ class Google_Service_Dfareporting_InventoryItem extends Google_Collection
   public $id;
   public $inPlan;
   public $kind;
-  protected $lastModifiedInfoType = 'Google_Service_Dfareporting_LastModifiedInfo';
+  protected $lastModifiedInfoType = 'Appointments_Google_Service_Dfareporting_LastModifiedInfo';
   protected $lastModifiedInfoDataType = '';
   public $name;
   public $negotiationChannelId;
   public $orderId;
   public $placementStrategyId;
-  protected $pricingType = 'Google_Service_Dfareporting_Pricing';
+  protected $pricingType = 'Appointments_Google_Service_Dfareporting_Pricing';
   protected $pricingDataType = '';
   public $projectId;
   public $rfpId;
@@ -15766,7 +15766,7 @@ class Google_Service_Dfareporting_InventoryItem extends Google_Collection
   {
     return $this->kind;
   }
-  public function setLastModifiedInfo(Google_Service_Dfareporting_LastModifiedInfo $lastModifiedInfo)
+  public function setLastModifiedInfo(Appointments_Google_Service_Dfareporting_LastModifiedInfo $lastModifiedInfo)
   {
     $this->lastModifiedInfo = $lastModifiedInfo;
   }
@@ -15806,7 +15806,7 @@ class Google_Service_Dfareporting_InventoryItem extends Google_Collection
   {
     return $this->placementStrategyId;
   }
-  public function setPricing(Google_Service_Dfareporting_Pricing $pricing)
+  public function setPricing(Appointments_Google_Service_Dfareporting_Pricing $pricing)
   {
     $this->pricing = $pricing;
   }
@@ -15856,12 +15856,12 @@ class Google_Service_Dfareporting_InventoryItem extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_InventoryItemsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_InventoryItemsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'inventoryItems';
   protected $internal_gapi_mappings = array(
   );
-  protected $inventoryItemsType = 'Google_Service_Dfareporting_InventoryItem';
+  protected $inventoryItemsType = 'Appointments_Google_Service_Dfareporting_InventoryItem';
   protected $inventoryItemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -15893,7 +15893,7 @@ class Google_Service_Dfareporting_InventoryItemsListResponse extends Google_Coll
   }
 }
 
-class Google_Service_Dfareporting_KeyValueTargetingExpression extends Google_Model
+class Appointments_Google_Service_Dfareporting_KeyValueTargetingExpression extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -15910,7 +15910,7 @@ class Google_Service_Dfareporting_KeyValueTargetingExpression extends Google_Mod
   }
 }
 
-class Google_Service_Dfareporting_LandingPage extends Google_Model
+class Appointments_Google_Service_Dfareporting_LandingPage extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -15963,13 +15963,13 @@ class Google_Service_Dfareporting_LandingPage extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_LandingPagesListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_LandingPagesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'landingPages';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $landingPagesType = 'Google_Service_Dfareporting_LandingPage';
+  protected $landingPagesType = 'Appointments_Google_Service_Dfareporting_LandingPage';
   protected $landingPagesDataType = 'array';
 
 
@@ -15991,7 +15991,7 @@ class Google_Service_Dfareporting_LandingPagesListResponse extends Google_Collec
   }
 }
 
-class Google_Service_Dfareporting_LastModifiedInfo extends Google_Model
+class Appointments_Google_Service_Dfareporting_LastModifiedInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -16008,12 +16008,12 @@ class Google_Service_Dfareporting_LastModifiedInfo extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_ListPopulationClause extends Google_Collection
+class Appointments_Google_Service_Dfareporting_ListPopulationClause extends Appointments_Google_Collection
 {
   protected $collection_key = 'terms';
   protected $internal_gapi_mappings = array(
   );
-  protected $termsType = 'Google_Service_Dfareporting_ListPopulationTerm';
+  protected $termsType = 'Appointments_Google_Service_Dfareporting_ListPopulationTerm';
   protected $termsDataType = 'array';
 
 
@@ -16027,14 +16027,14 @@ class Google_Service_Dfareporting_ListPopulationClause extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_ListPopulationRule extends Google_Collection
+class Appointments_Google_Service_Dfareporting_ListPopulationRule extends Appointments_Google_Collection
 {
   protected $collection_key = 'listPopulationClauses';
   protected $internal_gapi_mappings = array(
   );
   public $floodlightActivityId;
   public $floodlightActivityName;
-  protected $listPopulationClausesType = 'Google_Service_Dfareporting_ListPopulationClause';
+  protected $listPopulationClausesType = 'Appointments_Google_Service_Dfareporting_ListPopulationClause';
   protected $listPopulationClausesDataType = 'array';
 
 
@@ -16064,7 +16064,7 @@ class Google_Service_Dfareporting_ListPopulationRule extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_ListPopulationTerm extends Google_Model
+class Appointments_Google_Service_Dfareporting_ListPopulationTerm extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -16144,7 +16144,7 @@ class Google_Service_Dfareporting_ListPopulationTerm extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_ListTargetingExpression extends Google_Model
+class Appointments_Google_Service_Dfareporting_ListTargetingExpression extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -16161,7 +16161,7 @@ class Google_Service_Dfareporting_ListTargetingExpression extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_LookbackConfiguration extends Google_Model
+class Appointments_Google_Service_Dfareporting_LookbackConfiguration extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -16187,7 +16187,7 @@ class Google_Service_Dfareporting_LookbackConfiguration extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_Metric extends Google_Model
+class Appointments_Google_Service_Dfareporting_Metric extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -16213,7 +16213,7 @@ class Google_Service_Dfareporting_Metric extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_Metro extends Google_Model
+class Appointments_Google_Service_Dfareporting_Metro extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -16284,13 +16284,13 @@ class Google_Service_Dfareporting_Metro extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_MetrosListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_MetrosListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'metros';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $metrosType = 'Google_Service_Dfareporting_Metro';
+  protected $metrosType = 'Appointments_Google_Service_Dfareporting_Metro';
   protected $metrosDataType = 'array';
 
 
@@ -16312,7 +16312,7 @@ class Google_Service_Dfareporting_MetrosListResponse extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_MobileCarrier extends Google_Model
+class Appointments_Google_Service_Dfareporting_MobileCarrier extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -16365,13 +16365,13 @@ class Google_Service_Dfareporting_MobileCarrier extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_MobileCarriersListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_MobileCarriersListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'mobileCarriers';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $mobileCarriersType = 'Google_Service_Dfareporting_MobileCarrier';
+  protected $mobileCarriersType = 'Appointments_Google_Service_Dfareporting_MobileCarrier';
   protected $mobileCarriersDataType = 'array';
 
 
@@ -16393,7 +16393,7 @@ class Google_Service_Dfareporting_MobileCarriersListResponse extends Google_Coll
   }
 }
 
-class Google_Service_Dfareporting_ObjectFilter extends Google_Collection
+class Appointments_Google_Service_Dfareporting_ObjectFilter extends Appointments_Google_Collection
 {
   protected $collection_key = 'objectIds';
   protected $internal_gapi_mappings = array(
@@ -16429,7 +16429,7 @@ class Google_Service_Dfareporting_ObjectFilter extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_OffsetPosition extends Google_Model
+class Appointments_Google_Service_Dfareporting_OffsetPosition extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -16455,7 +16455,7 @@ class Google_Service_Dfareporting_OffsetPosition extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_OmnitureSettings extends Google_Model
+class Appointments_Google_Service_Dfareporting_OmnitureSettings extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -16481,7 +16481,7 @@ class Google_Service_Dfareporting_OmnitureSettings extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_OperatingSystem extends Google_Model
+class Appointments_Google_Service_Dfareporting_OperatingSystem extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -16534,7 +16534,7 @@ class Google_Service_Dfareporting_OperatingSystem extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_OperatingSystemVersion extends Google_Model
+class Appointments_Google_Service_Dfareporting_OperatingSystemVersion extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -16543,7 +16543,7 @@ class Google_Service_Dfareporting_OperatingSystemVersion extends Google_Model
   public $majorVersion;
   public $minorVersion;
   public $name;
-  protected $operatingSystemType = 'Google_Service_Dfareporting_OperatingSystem';
+  protected $operatingSystemType = 'Appointments_Google_Service_Dfareporting_OperatingSystem';
   protected $operatingSystemDataType = '';
 
 
@@ -16587,7 +16587,7 @@ class Google_Service_Dfareporting_OperatingSystemVersion extends Google_Model
   {
     return $this->name;
   }
-  public function setOperatingSystem(Google_Service_Dfareporting_OperatingSystem $operatingSystem)
+  public function setOperatingSystem(Appointments_Google_Service_Dfareporting_OperatingSystem $operatingSystem)
   {
     $this->operatingSystem = $operatingSystem;
   }
@@ -16597,13 +16597,13 @@ class Google_Service_Dfareporting_OperatingSystemVersion extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_OperatingSystemVersionsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_OperatingSystemVersionsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'operatingSystemVersions';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $operatingSystemVersionsType = 'Google_Service_Dfareporting_OperatingSystemVersion';
+  protected $operatingSystemVersionsType = 'Appointments_Google_Service_Dfareporting_OperatingSystemVersion';
   protected $operatingSystemVersionsDataType = 'array';
 
 
@@ -16625,13 +16625,13 @@ class Google_Service_Dfareporting_OperatingSystemVersionsListResponse extends Go
   }
 }
 
-class Google_Service_Dfareporting_OperatingSystemsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_OperatingSystemsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'operatingSystems';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $operatingSystemsType = 'Google_Service_Dfareporting_OperatingSystem';
+  protected $operatingSystemsType = 'Appointments_Google_Service_Dfareporting_OperatingSystem';
   protected $operatingSystemsDataType = 'array';
 
 
@@ -16653,12 +16653,12 @@ class Google_Service_Dfareporting_OperatingSystemsListResponse extends Google_Co
   }
 }
 
-class Google_Service_Dfareporting_OptimizationActivity extends Google_Model
+class Appointments_Google_Service_Dfareporting_OptimizationActivity extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $floodlightActivityId;
-  protected $floodlightActivityIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $floodlightActivityIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $floodlightActivityIdDimensionValueDataType = '';
   public $weight;
 
@@ -16671,7 +16671,7 @@ class Google_Service_Dfareporting_OptimizationActivity extends Google_Model
   {
     return $this->floodlightActivityId;
   }
-  public function setFloodlightActivityIdDimensionValue(Google_Service_Dfareporting_DimensionValue $floodlightActivityIdDimensionValue)
+  public function setFloodlightActivityIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $floodlightActivityIdDimensionValue)
   {
     $this->floodlightActivityIdDimensionValue = $floodlightActivityIdDimensionValue;
   }
@@ -16689,7 +16689,7 @@ class Google_Service_Dfareporting_OptimizationActivity extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_Order extends Google_Collection
+class Appointments_Google_Service_Dfareporting_Order extends Appointments_Google_Collection
 {
   protected $collection_key = 'siteNames';
   protected $internal_gapi_mappings = array(
@@ -16700,11 +16700,11 @@ class Google_Service_Dfareporting_Order extends Google_Collection
   public $buyerInvoiceId;
   public $buyerOrganizationName;
   public $comments;
-  protected $contactsType = 'Google_Service_Dfareporting_OrderContact';
+  protected $contactsType = 'Appointments_Google_Service_Dfareporting_OrderContact';
   protected $contactsDataType = 'array';
   public $id;
   public $kind;
-  protected $lastModifiedInfoType = 'Google_Service_Dfareporting_LastModifiedInfo';
+  protected $lastModifiedInfoType = 'Appointments_Google_Service_Dfareporting_LastModifiedInfo';
   protected $lastModifiedInfoDataType = '';
   public $name;
   public $notes;
@@ -16790,7 +16790,7 @@ class Google_Service_Dfareporting_Order extends Google_Collection
   {
     return $this->kind;
   }
-  public function setLastModifiedInfo(Google_Service_Dfareporting_LastModifiedInfo $lastModifiedInfo)
+  public function setLastModifiedInfo(Appointments_Google_Service_Dfareporting_LastModifiedInfo $lastModifiedInfo)
   {
     $this->lastModifiedInfo = $lastModifiedInfo;
   }
@@ -16880,7 +16880,7 @@ class Google_Service_Dfareporting_Order extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_OrderContact extends Google_Model
+class Appointments_Google_Service_Dfareporting_OrderContact extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -16933,7 +16933,7 @@ class Google_Service_Dfareporting_OrderContact extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_OrderDocument extends Google_Collection
+class Appointments_Google_Service_Dfareporting_OrderDocument extends Appointments_Google_Collection
 {
   protected $collection_key = 'lastSentRecipients';
   protected $internal_gapi_mappings = array(
@@ -16943,7 +16943,7 @@ class Google_Service_Dfareporting_OrderDocument extends Google_Collection
   public $amendedOrderDocumentId;
   public $approvedByUserProfileIds;
   public $cancelled;
-  protected $createdInfoType = 'Google_Service_Dfareporting_LastModifiedInfo';
+  protected $createdInfoType = 'Appointments_Google_Service_Dfareporting_LastModifiedInfo';
   protected $createdInfoDataType = '';
   public $effectiveDate;
   public $id;
@@ -16998,7 +16998,7 @@ class Google_Service_Dfareporting_OrderDocument extends Google_Collection
   {
     return $this->cancelled;
   }
-  public function setCreatedInfo(Google_Service_Dfareporting_LastModifiedInfo $createdInfo)
+  public function setCreatedInfo(Appointments_Google_Service_Dfareporting_LastModifiedInfo $createdInfo)
   {
     $this->createdInfo = $createdInfo;
   }
@@ -17096,14 +17096,14 @@ class Google_Service_Dfareporting_OrderDocument extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_OrderDocumentsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_OrderDocumentsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'orderDocuments';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
   public $nextPageToken;
-  protected $orderDocumentsType = 'Google_Service_Dfareporting_OrderDocument';
+  protected $orderDocumentsType = 'Appointments_Google_Service_Dfareporting_OrderDocument';
   protected $orderDocumentsDataType = 'array';
 
 
@@ -17133,14 +17133,14 @@ class Google_Service_Dfareporting_OrderDocumentsListResponse extends Google_Coll
   }
 }
 
-class Google_Service_Dfareporting_OrdersListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_OrdersListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'orders';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
   public $nextPageToken;
-  protected $ordersType = 'Google_Service_Dfareporting_Order';
+  protected $ordersType = 'Appointments_Google_Service_Dfareporting_Order';
   protected $ordersDataType = 'array';
 
 
@@ -17170,19 +17170,19 @@ class Google_Service_Dfareporting_OrdersListResponse extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_PathToConversionReportCompatibleFields extends Google_Collection
+class Appointments_Google_Service_Dfareporting_PathToConversionReportCompatibleFields extends Appointments_Google_Collection
 {
   protected $collection_key = 'perInteractionDimensions';
   protected $internal_gapi_mappings = array(
   );
-  protected $conversionDimensionsType = 'Google_Service_Dfareporting_Dimension';
+  protected $conversionDimensionsType = 'Appointments_Google_Service_Dfareporting_Dimension';
   protected $conversionDimensionsDataType = 'array';
-  protected $customFloodlightVariablesType = 'Google_Service_Dfareporting_Dimension';
+  protected $customFloodlightVariablesType = 'Appointments_Google_Service_Dfareporting_Dimension';
   protected $customFloodlightVariablesDataType = 'array';
   public $kind;
-  protected $metricsType = 'Google_Service_Dfareporting_Metric';
+  protected $metricsType = 'Appointments_Google_Service_Dfareporting_Metric';
   protected $metricsDataType = 'array';
-  protected $perInteractionDimensionsType = 'Google_Service_Dfareporting_Dimension';
+  protected $perInteractionDimensionsType = 'Appointments_Google_Service_Dfareporting_Dimension';
   protected $perInteractionDimensionsDataType = 'array';
 
 
@@ -17228,59 +17228,59 @@ class Google_Service_Dfareporting_PathToConversionReportCompatibleFields extends
   }
 }
 
-class Google_Service_Dfareporting_Placement extends Google_Collection
+class Appointments_Google_Service_Dfareporting_Placement extends Appointments_Google_Collection
 {
   protected $collection_key = 'tagFormats';
   protected $internal_gapi_mappings = array(
   );
   public $accountId;
   public $advertiserId;
-  protected $advertiserIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $advertiserIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $advertiserIdDimensionValueDataType = '';
   public $archived;
   public $campaignId;
-  protected $campaignIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $campaignIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $campaignIdDimensionValueDataType = '';
   public $comment;
   public $compatibility;
   public $contentCategoryId;
-  protected $createInfoType = 'Google_Service_Dfareporting_LastModifiedInfo';
+  protected $createInfoType = 'Appointments_Google_Service_Dfareporting_LastModifiedInfo';
   protected $createInfoDataType = '';
   public $directorySiteId;
-  protected $directorySiteIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $directorySiteIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $directorySiteIdDimensionValueDataType = '';
   public $externalId;
   public $id;
-  protected $idDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $idDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $idDimensionValueDataType = '';
   public $keyName;
   public $kind;
-  protected $lastModifiedInfoType = 'Google_Service_Dfareporting_LastModifiedInfo';
+  protected $lastModifiedInfoType = 'Appointments_Google_Service_Dfareporting_LastModifiedInfo';
   protected $lastModifiedInfoDataType = '';
-  protected $lookbackConfigurationType = 'Google_Service_Dfareporting_LookbackConfiguration';
+  protected $lookbackConfigurationType = 'Appointments_Google_Service_Dfareporting_LookbackConfiguration';
   protected $lookbackConfigurationDataType = '';
   public $name;
   public $paymentApproved;
   public $paymentSource;
   public $placementGroupId;
-  protected $placementGroupIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $placementGroupIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $placementGroupIdDimensionValueDataType = '';
   public $placementStrategyId;
-  protected $pricingScheduleType = 'Google_Service_Dfareporting_PricingSchedule';
+  protected $pricingScheduleType = 'Appointments_Google_Service_Dfareporting_PricingSchedule';
   protected $pricingScheduleDataType = '';
   public $primary;
-  protected $publisherUpdateInfoType = 'Google_Service_Dfareporting_LastModifiedInfo';
+  protected $publisherUpdateInfoType = 'Appointments_Google_Service_Dfareporting_LastModifiedInfo';
   protected $publisherUpdateInfoDataType = '';
   public $siteId;
-  protected $siteIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $siteIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $siteIdDimensionValueDataType = '';
-  protected $sizeType = 'Google_Service_Dfareporting_Size';
+  protected $sizeType = 'Appointments_Google_Service_Dfareporting_Size';
   protected $sizeDataType = '';
   public $sslRequired;
   public $status;
   public $subaccountId;
   public $tagFormats;
-  protected $tagSettingType = 'Google_Service_Dfareporting_TagSetting';
+  protected $tagSettingType = 'Appointments_Google_Service_Dfareporting_TagSetting';
   protected $tagSettingDataType = '';
 
 
@@ -17300,7 +17300,7 @@ class Google_Service_Dfareporting_Placement extends Google_Collection
   {
     return $this->advertiserId;
   }
-  public function setAdvertiserIdDimensionValue(Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
+  public function setAdvertiserIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
   {
     $this->advertiserIdDimensionValue = $advertiserIdDimensionValue;
   }
@@ -17324,7 +17324,7 @@ class Google_Service_Dfareporting_Placement extends Google_Collection
   {
     return $this->campaignId;
   }
-  public function setCampaignIdDimensionValue(Google_Service_Dfareporting_DimensionValue $campaignIdDimensionValue)
+  public function setCampaignIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $campaignIdDimensionValue)
   {
     $this->campaignIdDimensionValue = $campaignIdDimensionValue;
   }
@@ -17356,7 +17356,7 @@ class Google_Service_Dfareporting_Placement extends Google_Collection
   {
     return $this->contentCategoryId;
   }
-  public function setCreateInfo(Google_Service_Dfareporting_LastModifiedInfo $createInfo)
+  public function setCreateInfo(Appointments_Google_Service_Dfareporting_LastModifiedInfo $createInfo)
   {
     $this->createInfo = $createInfo;
   }
@@ -17372,7 +17372,7 @@ class Google_Service_Dfareporting_Placement extends Google_Collection
   {
     return $this->directorySiteId;
   }
-  public function setDirectorySiteIdDimensionValue(Google_Service_Dfareporting_DimensionValue $directorySiteIdDimensionValue)
+  public function setDirectorySiteIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $directorySiteIdDimensionValue)
   {
     $this->directorySiteIdDimensionValue = $directorySiteIdDimensionValue;
   }
@@ -17396,7 +17396,7 @@ class Google_Service_Dfareporting_Placement extends Google_Collection
   {
     return $this->id;
   }
-  public function setIdDimensionValue(Google_Service_Dfareporting_DimensionValue $idDimensionValue)
+  public function setIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $idDimensionValue)
   {
     $this->idDimensionValue = $idDimensionValue;
   }
@@ -17420,7 +17420,7 @@ class Google_Service_Dfareporting_Placement extends Google_Collection
   {
     return $this->kind;
   }
-  public function setLastModifiedInfo(Google_Service_Dfareporting_LastModifiedInfo $lastModifiedInfo)
+  public function setLastModifiedInfo(Appointments_Google_Service_Dfareporting_LastModifiedInfo $lastModifiedInfo)
   {
     $this->lastModifiedInfo = $lastModifiedInfo;
   }
@@ -17428,7 +17428,7 @@ class Google_Service_Dfareporting_Placement extends Google_Collection
   {
     return $this->lastModifiedInfo;
   }
-  public function setLookbackConfiguration(Google_Service_Dfareporting_LookbackConfiguration $lookbackConfiguration)
+  public function setLookbackConfiguration(Appointments_Google_Service_Dfareporting_LookbackConfiguration $lookbackConfiguration)
   {
     $this->lookbackConfiguration = $lookbackConfiguration;
   }
@@ -17468,7 +17468,7 @@ class Google_Service_Dfareporting_Placement extends Google_Collection
   {
     return $this->placementGroupId;
   }
-  public function setPlacementGroupIdDimensionValue(Google_Service_Dfareporting_DimensionValue $placementGroupIdDimensionValue)
+  public function setPlacementGroupIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $placementGroupIdDimensionValue)
   {
     $this->placementGroupIdDimensionValue = $placementGroupIdDimensionValue;
   }
@@ -17484,7 +17484,7 @@ class Google_Service_Dfareporting_Placement extends Google_Collection
   {
     return $this->placementStrategyId;
   }
-  public function setPricingSchedule(Google_Service_Dfareporting_PricingSchedule $pricingSchedule)
+  public function setPricingSchedule(Appointments_Google_Service_Dfareporting_PricingSchedule $pricingSchedule)
   {
     $this->pricingSchedule = $pricingSchedule;
   }
@@ -17500,7 +17500,7 @@ class Google_Service_Dfareporting_Placement extends Google_Collection
   {
     return $this->primary;
   }
-  public function setPublisherUpdateInfo(Google_Service_Dfareporting_LastModifiedInfo $publisherUpdateInfo)
+  public function setPublisherUpdateInfo(Appointments_Google_Service_Dfareporting_LastModifiedInfo $publisherUpdateInfo)
   {
     $this->publisherUpdateInfo = $publisherUpdateInfo;
   }
@@ -17516,7 +17516,7 @@ class Google_Service_Dfareporting_Placement extends Google_Collection
   {
     return $this->siteId;
   }
-  public function setSiteIdDimensionValue(Google_Service_Dfareporting_DimensionValue $siteIdDimensionValue)
+  public function setSiteIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $siteIdDimensionValue)
   {
     $this->siteIdDimensionValue = $siteIdDimensionValue;
   }
@@ -17524,7 +17524,7 @@ class Google_Service_Dfareporting_Placement extends Google_Collection
   {
     return $this->siteIdDimensionValue;
   }
-  public function setSize(Google_Service_Dfareporting_Size $size)
+  public function setSize(Appointments_Google_Service_Dfareporting_Size $size)
   {
     $this->size = $size;
   }
@@ -17564,7 +17564,7 @@ class Google_Service_Dfareporting_Placement extends Google_Collection
   {
     return $this->tagFormats;
   }
-  public function setTagSetting(Google_Service_Dfareporting_TagSetting $tagSetting)
+  public function setTagSetting(Appointments_Google_Service_Dfareporting_TagSetting $tagSetting)
   {
     $this->tagSetting = $tagSetting;
   }
@@ -17574,13 +17574,13 @@ class Google_Service_Dfareporting_Placement extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_PlacementAssignment extends Google_Model
+class Appointments_Google_Service_Dfareporting_PlacementAssignment extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $active;
   public $placementId;
-  protected $placementIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $placementIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $placementIdDimensionValueDataType = '';
   public $sslRequired;
 
@@ -17601,7 +17601,7 @@ class Google_Service_Dfareporting_PlacementAssignment extends Google_Model
   {
     return $this->placementId;
   }
-  public function setPlacementIdDimensionValue(Google_Service_Dfareporting_DimensionValue $placementIdDimensionValue)
+  public function setPlacementIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $placementIdDimensionValue)
   {
     $this->placementIdDimensionValue = $placementIdDimensionValue;
   }
@@ -17619,44 +17619,44 @@ class Google_Service_Dfareporting_PlacementAssignment extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_PlacementGroup extends Google_Collection
+class Appointments_Google_Service_Dfareporting_PlacementGroup extends Appointments_Google_Collection
 {
   protected $collection_key = 'childPlacementIds';
   protected $internal_gapi_mappings = array(
   );
   public $accountId;
   public $advertiserId;
-  protected $advertiserIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $advertiserIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $advertiserIdDimensionValueDataType = '';
   public $archived;
   public $campaignId;
-  protected $campaignIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $campaignIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $campaignIdDimensionValueDataType = '';
   public $childPlacementIds;
   public $comment;
   public $contentCategoryId;
-  protected $createInfoType = 'Google_Service_Dfareporting_LastModifiedInfo';
+  protected $createInfoType = 'Appointments_Google_Service_Dfareporting_LastModifiedInfo';
   protected $createInfoDataType = '';
   public $directorySiteId;
-  protected $directorySiteIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $directorySiteIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $directorySiteIdDimensionValueDataType = '';
   public $externalId;
   public $id;
-  protected $idDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $idDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $idDimensionValueDataType = '';
   public $kind;
-  protected $lastModifiedInfoType = 'Google_Service_Dfareporting_LastModifiedInfo';
+  protected $lastModifiedInfoType = 'Appointments_Google_Service_Dfareporting_LastModifiedInfo';
   protected $lastModifiedInfoDataType = '';
   public $name;
   public $placementGroupType;
   public $placementStrategyId;
-  protected $pricingScheduleType = 'Google_Service_Dfareporting_PricingSchedule';
+  protected $pricingScheduleType = 'Appointments_Google_Service_Dfareporting_PricingSchedule';
   protected $pricingScheduleDataType = '';
   public $primaryPlacementId;
-  protected $primaryPlacementIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $primaryPlacementIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $primaryPlacementIdDimensionValueDataType = '';
   public $siteId;
-  protected $siteIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $siteIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $siteIdDimensionValueDataType = '';
   public $subaccountId;
 
@@ -17677,7 +17677,7 @@ class Google_Service_Dfareporting_PlacementGroup extends Google_Collection
   {
     return $this->advertiserId;
   }
-  public function setAdvertiserIdDimensionValue(Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
+  public function setAdvertiserIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
   {
     $this->advertiserIdDimensionValue = $advertiserIdDimensionValue;
   }
@@ -17701,7 +17701,7 @@ class Google_Service_Dfareporting_PlacementGroup extends Google_Collection
   {
     return $this->campaignId;
   }
-  public function setCampaignIdDimensionValue(Google_Service_Dfareporting_DimensionValue $campaignIdDimensionValue)
+  public function setCampaignIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $campaignIdDimensionValue)
   {
     $this->campaignIdDimensionValue = $campaignIdDimensionValue;
   }
@@ -17733,7 +17733,7 @@ class Google_Service_Dfareporting_PlacementGroup extends Google_Collection
   {
     return $this->contentCategoryId;
   }
-  public function setCreateInfo(Google_Service_Dfareporting_LastModifiedInfo $createInfo)
+  public function setCreateInfo(Appointments_Google_Service_Dfareporting_LastModifiedInfo $createInfo)
   {
     $this->createInfo = $createInfo;
   }
@@ -17749,7 +17749,7 @@ class Google_Service_Dfareporting_PlacementGroup extends Google_Collection
   {
     return $this->directorySiteId;
   }
-  public function setDirectorySiteIdDimensionValue(Google_Service_Dfareporting_DimensionValue $directorySiteIdDimensionValue)
+  public function setDirectorySiteIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $directorySiteIdDimensionValue)
   {
     $this->directorySiteIdDimensionValue = $directorySiteIdDimensionValue;
   }
@@ -17773,7 +17773,7 @@ class Google_Service_Dfareporting_PlacementGroup extends Google_Collection
   {
     return $this->id;
   }
-  public function setIdDimensionValue(Google_Service_Dfareporting_DimensionValue $idDimensionValue)
+  public function setIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $idDimensionValue)
   {
     $this->idDimensionValue = $idDimensionValue;
   }
@@ -17789,7 +17789,7 @@ class Google_Service_Dfareporting_PlacementGroup extends Google_Collection
   {
     return $this->kind;
   }
-  public function setLastModifiedInfo(Google_Service_Dfareporting_LastModifiedInfo $lastModifiedInfo)
+  public function setLastModifiedInfo(Appointments_Google_Service_Dfareporting_LastModifiedInfo $lastModifiedInfo)
   {
     $this->lastModifiedInfo = $lastModifiedInfo;
   }
@@ -17821,7 +17821,7 @@ class Google_Service_Dfareporting_PlacementGroup extends Google_Collection
   {
     return $this->placementStrategyId;
   }
-  public function setPricingSchedule(Google_Service_Dfareporting_PricingSchedule $pricingSchedule)
+  public function setPricingSchedule(Appointments_Google_Service_Dfareporting_PricingSchedule $pricingSchedule)
   {
     $this->pricingSchedule = $pricingSchedule;
   }
@@ -17837,7 +17837,7 @@ class Google_Service_Dfareporting_PlacementGroup extends Google_Collection
   {
     return $this->primaryPlacementId;
   }
-  public function setPrimaryPlacementIdDimensionValue(Google_Service_Dfareporting_DimensionValue $primaryPlacementIdDimensionValue)
+  public function setPrimaryPlacementIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $primaryPlacementIdDimensionValue)
   {
     $this->primaryPlacementIdDimensionValue = $primaryPlacementIdDimensionValue;
   }
@@ -17853,7 +17853,7 @@ class Google_Service_Dfareporting_PlacementGroup extends Google_Collection
   {
     return $this->siteId;
   }
-  public function setSiteIdDimensionValue(Google_Service_Dfareporting_DimensionValue $siteIdDimensionValue)
+  public function setSiteIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $siteIdDimensionValue)
   {
     $this->siteIdDimensionValue = $siteIdDimensionValue;
   }
@@ -17871,14 +17871,14 @@ class Google_Service_Dfareporting_PlacementGroup extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_PlacementGroupsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_PlacementGroupsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'placementGroups';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
   public $nextPageToken;
-  protected $placementGroupsType = 'Google_Service_Dfareporting_PlacementGroup';
+  protected $placementGroupsType = 'Appointments_Google_Service_Dfareporting_PlacementGroup';
   protected $placementGroupsDataType = 'array';
 
 
@@ -17908,14 +17908,14 @@ class Google_Service_Dfareporting_PlacementGroupsListResponse extends Google_Col
   }
 }
 
-class Google_Service_Dfareporting_PlacementStrategiesListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_PlacementStrategiesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'placementStrategies';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
   public $nextPageToken;
-  protected $placementStrategiesType = 'Google_Service_Dfareporting_PlacementStrategy';
+  protected $placementStrategiesType = 'Appointments_Google_Service_Dfareporting_PlacementStrategy';
   protected $placementStrategiesDataType = 'array';
 
 
@@ -17945,7 +17945,7 @@ class Google_Service_Dfareporting_PlacementStrategiesListResponse extends Google
   }
 }
 
-class Google_Service_Dfareporting_PlacementStrategy extends Google_Model
+class Appointments_Google_Service_Dfareporting_PlacementStrategy extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -17989,13 +17989,13 @@ class Google_Service_Dfareporting_PlacementStrategy extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_PlacementTag extends Google_Collection
+class Appointments_Google_Service_Dfareporting_PlacementTag extends Appointments_Google_Collection
 {
   protected $collection_key = 'tagDatas';
   protected $internal_gapi_mappings = array(
   );
   public $placementId;
-  protected $tagDatasType = 'Google_Service_Dfareporting_TagData';
+  protected $tagDatasType = 'Appointments_Google_Service_Dfareporting_TagData';
   protected $tagDatasDataType = 'array';
 
 
@@ -18017,13 +18017,13 @@ class Google_Service_Dfareporting_PlacementTag extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_PlacementsGenerateTagsResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_PlacementsGenerateTagsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'placementTags';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $placementTagsType = 'Google_Service_Dfareporting_PlacementTag';
+  protected $placementTagsType = 'Appointments_Google_Service_Dfareporting_PlacementTag';
   protected $placementTagsDataType = 'array';
 
 
@@ -18045,14 +18045,14 @@ class Google_Service_Dfareporting_PlacementsGenerateTagsResponse extends Google_
   }
 }
 
-class Google_Service_Dfareporting_PlacementsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_PlacementsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'placements';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
   public $nextPageToken;
-  protected $placementsType = 'Google_Service_Dfareporting_Placement';
+  protected $placementsType = 'Appointments_Google_Service_Dfareporting_Placement';
   protected $placementsDataType = 'array';
 
 
@@ -18082,7 +18082,7 @@ class Google_Service_Dfareporting_PlacementsListResponse extends Google_Collecti
   }
 }
 
-class Google_Service_Dfareporting_PlatformType extends Google_Model
+class Appointments_Google_Service_Dfareporting_PlatformType extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -18117,13 +18117,13 @@ class Google_Service_Dfareporting_PlatformType extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_PlatformTypesListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_PlatformTypesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'platformTypes';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $platformTypesType = 'Google_Service_Dfareporting_PlatformType';
+  protected $platformTypesType = 'Appointments_Google_Service_Dfareporting_PlatformType';
   protected $platformTypesDataType = 'array';
 
 
@@ -18145,13 +18145,13 @@ class Google_Service_Dfareporting_PlatformTypesListResponse extends Google_Colle
   }
 }
 
-class Google_Service_Dfareporting_PopupWindowProperties extends Google_Model
+class Appointments_Google_Service_Dfareporting_PopupWindowProperties extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $dimensionType = 'Google_Service_Dfareporting_Size';
+  protected $dimensionType = 'Appointments_Google_Service_Dfareporting_Size';
   protected $dimensionDataType = '';
-  protected $offsetType = 'Google_Service_Dfareporting_OffsetPosition';
+  protected $offsetType = 'Appointments_Google_Service_Dfareporting_OffsetPosition';
   protected $offsetDataType = '';
   public $positionType;
   public $showAddressBar;
@@ -18162,7 +18162,7 @@ class Google_Service_Dfareporting_PopupWindowProperties extends Google_Model
   public $title;
 
 
-  public function setDimension(Google_Service_Dfareporting_Size $dimension)
+  public function setDimension(Appointments_Google_Service_Dfareporting_Size $dimension)
   {
     $this->dimension = $dimension;
   }
@@ -18170,7 +18170,7 @@ class Google_Service_Dfareporting_PopupWindowProperties extends Google_Model
   {
     return $this->dimension;
   }
-  public function setOffset(Google_Service_Dfareporting_OffsetPosition $offset)
+  public function setOffset(Appointments_Google_Service_Dfareporting_OffsetPosition $offset)
   {
     $this->offset = $offset;
   }
@@ -18236,7 +18236,7 @@ class Google_Service_Dfareporting_PopupWindowProperties extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_PostalCode extends Google_Model
+class Appointments_Google_Service_Dfareporting_PostalCode extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -18289,13 +18289,13 @@ class Google_Service_Dfareporting_PostalCode extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_PostalCodesListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_PostalCodesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'postalCodes';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $postalCodesType = 'Google_Service_Dfareporting_PostalCode';
+  protected $postalCodesType = 'Appointments_Google_Service_Dfareporting_PostalCode';
   protected $postalCodesDataType = 'array';
 
 
@@ -18317,14 +18317,14 @@ class Google_Service_Dfareporting_PostalCodesListResponse extends Google_Collect
   }
 }
 
-class Google_Service_Dfareporting_Pricing extends Google_Collection
+class Appointments_Google_Service_Dfareporting_Pricing extends Appointments_Google_Collection
 {
   protected $collection_key = 'flights';
   protected $internal_gapi_mappings = array(
   );
   public $capCostType;
   public $endDate;
-  protected $flightsType = 'Google_Service_Dfareporting_Flight';
+  protected $flightsType = 'Appointments_Google_Service_Dfareporting_Flight';
   protected $flightsDataType = 'array';
   public $groupType;
   public $pricingType;
@@ -18381,7 +18381,7 @@ class Google_Service_Dfareporting_Pricing extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_PricingSchedule extends Google_Collection
+class Appointments_Google_Service_Dfareporting_PricingSchedule extends Appointments_Google_Collection
 {
   protected $collection_key = 'pricingPeriods';
   protected $internal_gapi_mappings = array(
@@ -18391,7 +18391,7 @@ class Google_Service_Dfareporting_PricingSchedule extends Google_Collection
   public $endDate;
   public $flighted;
   public $floodlightActivityId;
-  protected $pricingPeriodsType = 'Google_Service_Dfareporting_PricingSchedulePricingPeriod';
+  protected $pricingPeriodsType = 'Appointments_Google_Service_Dfareporting_PricingSchedulePricingPeriod';
   protected $pricingPeriodsDataType = 'array';
   public $pricingType;
   public $startDate;
@@ -18472,7 +18472,7 @@ class Google_Service_Dfareporting_PricingSchedule extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_PricingSchedulePricingPeriod extends Google_Model
+class Appointments_Google_Service_Dfareporting_PricingSchedulePricingPeriod extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -18525,7 +18525,7 @@ class Google_Service_Dfareporting_PricingSchedulePricingPeriod extends Google_Mo
   }
 }
 
-class Google_Service_Dfareporting_Project extends Google_Model
+class Appointments_Google_Service_Dfareporting_Project extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -18539,7 +18539,7 @@ class Google_Service_Dfareporting_Project extends Google_Model
   public $endDate;
   public $id;
   public $kind;
-  protected $lastModifiedInfoType = 'Google_Service_Dfareporting_LastModifiedInfo';
+  protected $lastModifiedInfoType = 'Appointments_Google_Service_Dfareporting_LastModifiedInfo';
   protected $lastModifiedInfoDataType = '';
   public $name;
   public $overview;
@@ -18633,7 +18633,7 @@ class Google_Service_Dfareporting_Project extends Google_Model
   {
     return $this->kind;
   }
-  public function setLastModifiedInfo(Google_Service_Dfareporting_LastModifiedInfo $lastModifiedInfo)
+  public function setLastModifiedInfo(Appointments_Google_Service_Dfareporting_LastModifiedInfo $lastModifiedInfo)
   {
     $this->lastModifiedInfo = $lastModifiedInfo;
   }
@@ -18723,14 +18723,14 @@ class Google_Service_Dfareporting_Project extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_ProjectsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_ProjectsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'projects';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
   public $nextPageToken;
-  protected $projectsType = 'Google_Service_Dfareporting_Project';
+  protected $projectsType = 'Appointments_Google_Service_Dfareporting_Project';
   protected $projectsDataType = 'array';
 
 
@@ -18760,21 +18760,21 @@ class Google_Service_Dfareporting_ProjectsListResponse extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_ReachReportCompatibleFields extends Google_Collection
+class Appointments_Google_Service_Dfareporting_ReachReportCompatibleFields extends Appointments_Google_Collection
 {
   protected $collection_key = 'reachByFrequencyMetrics';
   protected $internal_gapi_mappings = array(
   );
-  protected $dimensionFiltersType = 'Google_Service_Dfareporting_Dimension';
+  protected $dimensionFiltersType = 'Appointments_Google_Service_Dfareporting_Dimension';
   protected $dimensionFiltersDataType = 'array';
-  protected $dimensionsType = 'Google_Service_Dfareporting_Dimension';
+  protected $dimensionsType = 'Appointments_Google_Service_Dfareporting_Dimension';
   protected $dimensionsDataType = 'array';
   public $kind;
-  protected $metricsType = 'Google_Service_Dfareporting_Metric';
+  protected $metricsType = 'Appointments_Google_Service_Dfareporting_Metric';
   protected $metricsDataType = 'array';
-  protected $pivotedActivityMetricsType = 'Google_Service_Dfareporting_Metric';
+  protected $pivotedActivityMetricsType = 'Appointments_Google_Service_Dfareporting_Metric';
   protected $pivotedActivityMetricsDataType = 'array';
-  protected $reachByFrequencyMetricsType = 'Google_Service_Dfareporting_Metric';
+  protected $reachByFrequencyMetricsType = 'Appointments_Google_Service_Dfareporting_Metric';
   protected $reachByFrequencyMetricsDataType = 'array';
 
 
@@ -18828,7 +18828,7 @@ class Google_Service_Dfareporting_ReachReportCompatibleFields extends Google_Col
   }
 }
 
-class Google_Service_Dfareporting_Recipient extends Google_Model
+class Appointments_Google_Service_Dfareporting_Recipient extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -18863,7 +18863,7 @@ class Google_Service_Dfareporting_Recipient extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_Region extends Google_Model
+class Appointments_Google_Service_Dfareporting_Region extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -18925,13 +18925,13 @@ class Google_Service_Dfareporting_Region extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_RegionsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_RegionsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'regions';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $regionsType = 'Google_Service_Dfareporting_Region';
+  protected $regionsType = 'Appointments_Google_Service_Dfareporting_Region';
   protected $regionsDataType = 'array';
 
 
@@ -18953,20 +18953,20 @@ class Google_Service_Dfareporting_RegionsListResponse extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_RemarketingList extends Google_Model
+class Appointments_Google_Service_Dfareporting_RemarketingList extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $accountId;
   public $active;
   public $advertiserId;
-  protected $advertiserIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $advertiserIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $advertiserIdDimensionValueDataType = '';
   public $description;
   public $id;
   public $kind;
   public $lifeSpan;
-  protected $listPopulationRuleType = 'Google_Service_Dfareporting_ListPopulationRule';
+  protected $listPopulationRuleType = 'Appointments_Google_Service_Dfareporting_ListPopulationRule';
   protected $listPopulationRuleDataType = '';
   public $listSize;
   public $listSource;
@@ -18998,7 +18998,7 @@ class Google_Service_Dfareporting_RemarketingList extends Google_Model
   {
     return $this->advertiserId;
   }
-  public function setAdvertiserIdDimensionValue(Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
+  public function setAdvertiserIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
   {
     $this->advertiserIdDimensionValue = $advertiserIdDimensionValue;
   }
@@ -19038,7 +19038,7 @@ class Google_Service_Dfareporting_RemarketingList extends Google_Model
   {
     return $this->lifeSpan;
   }
-  public function setListPopulationRule(Google_Service_Dfareporting_ListPopulationRule $listPopulationRule)
+  public function setListPopulationRule(Appointments_Google_Service_Dfareporting_ListPopulationRule $listPopulationRule)
   {
     $this->listPopulationRule = $listPopulationRule;
   }
@@ -19080,7 +19080,7 @@ class Google_Service_Dfareporting_RemarketingList extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_RemarketingListShare extends Google_Collection
+class Appointments_Google_Service_Dfareporting_RemarketingListShare extends Appointments_Google_Collection
 {
   protected $collection_key = 'sharedAdvertiserIds';
   protected $internal_gapi_mappings = array(
@@ -19125,14 +19125,14 @@ class Google_Service_Dfareporting_RemarketingListShare extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_RemarketingListsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_RemarketingListsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'remarketingLists';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
   public $nextPageToken;
-  protected $remarketingListsType = 'Google_Service_Dfareporting_RemarketingList';
+  protected $remarketingListsType = 'Appointments_Google_Service_Dfareporting_RemarketingList';
   protected $remarketingListsDataType = 'array';
 
 
@@ -19162,20 +19162,20 @@ class Google_Service_Dfareporting_RemarketingListsListResponse extends Google_Co
   }
 }
 
-class Google_Service_Dfareporting_Report extends Google_Model
+class Appointments_Google_Service_Dfareporting_Report extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $accountId;
-  protected $criteriaType = 'Google_Service_Dfareporting_ReportCriteria';
+  protected $criteriaType = 'Appointments_Google_Service_Dfareporting_ReportCriteria';
   protected $criteriaDataType = '';
-  protected $crossDimensionReachCriteriaType = 'Google_Service_Dfareporting_ReportCrossDimensionReachCriteria';
+  protected $crossDimensionReachCriteriaType = 'Appointments_Google_Service_Dfareporting_ReportCrossDimensionReachCriteria';
   protected $crossDimensionReachCriteriaDataType = '';
-  protected $deliveryType = 'Google_Service_Dfareporting_ReportDelivery';
+  protected $deliveryType = 'Appointments_Google_Service_Dfareporting_ReportDelivery';
   protected $deliveryDataType = '';
   public $etag;
   public $fileName;
-  protected $floodlightCriteriaType = 'Google_Service_Dfareporting_ReportFloodlightCriteria';
+  protected $floodlightCriteriaType = 'Appointments_Google_Service_Dfareporting_ReportFloodlightCriteria';
   protected $floodlightCriteriaDataType = '';
   public $format;
   public $id;
@@ -19183,11 +19183,11 @@ class Google_Service_Dfareporting_Report extends Google_Model
   public $lastModifiedTime;
   public $name;
   public $ownerProfileId;
-  protected $pathToConversionCriteriaType = 'Google_Service_Dfareporting_ReportPathToConversionCriteria';
+  protected $pathToConversionCriteriaType = 'Appointments_Google_Service_Dfareporting_ReportPathToConversionCriteria';
   protected $pathToConversionCriteriaDataType = '';
-  protected $reachCriteriaType = 'Google_Service_Dfareporting_ReportReachCriteria';
+  protected $reachCriteriaType = 'Appointments_Google_Service_Dfareporting_ReportReachCriteria';
   protected $reachCriteriaDataType = '';
-  protected $scheduleType = 'Google_Service_Dfareporting_ReportSchedule';
+  protected $scheduleType = 'Appointments_Google_Service_Dfareporting_ReportSchedule';
   protected $scheduleDataType = '';
   public $subAccountId;
   public $type;
@@ -19201,7 +19201,7 @@ class Google_Service_Dfareporting_Report extends Google_Model
   {
     return $this->accountId;
   }
-  public function setCriteria(Google_Service_Dfareporting_ReportCriteria $criteria)
+  public function setCriteria(Appointments_Google_Service_Dfareporting_ReportCriteria $criteria)
   {
     $this->criteria = $criteria;
   }
@@ -19209,7 +19209,7 @@ class Google_Service_Dfareporting_Report extends Google_Model
   {
     return $this->criteria;
   }
-  public function setCrossDimensionReachCriteria(Google_Service_Dfareporting_ReportCrossDimensionReachCriteria $crossDimensionReachCriteria)
+  public function setCrossDimensionReachCriteria(Appointments_Google_Service_Dfareporting_ReportCrossDimensionReachCriteria $crossDimensionReachCriteria)
   {
     $this->crossDimensionReachCriteria = $crossDimensionReachCriteria;
   }
@@ -19217,7 +19217,7 @@ class Google_Service_Dfareporting_Report extends Google_Model
   {
     return $this->crossDimensionReachCriteria;
   }
-  public function setDelivery(Google_Service_Dfareporting_ReportDelivery $delivery)
+  public function setDelivery(Appointments_Google_Service_Dfareporting_ReportDelivery $delivery)
   {
     $this->delivery = $delivery;
   }
@@ -19241,7 +19241,7 @@ class Google_Service_Dfareporting_Report extends Google_Model
   {
     return $this->fileName;
   }
-  public function setFloodlightCriteria(Google_Service_Dfareporting_ReportFloodlightCriteria $floodlightCriteria)
+  public function setFloodlightCriteria(Appointments_Google_Service_Dfareporting_ReportFloodlightCriteria $floodlightCriteria)
   {
     $this->floodlightCriteria = $floodlightCriteria;
   }
@@ -19297,7 +19297,7 @@ class Google_Service_Dfareporting_Report extends Google_Model
   {
     return $this->ownerProfileId;
   }
-  public function setPathToConversionCriteria(Google_Service_Dfareporting_ReportPathToConversionCriteria $pathToConversionCriteria)
+  public function setPathToConversionCriteria(Appointments_Google_Service_Dfareporting_ReportPathToConversionCriteria $pathToConversionCriteria)
   {
     $this->pathToConversionCriteria = $pathToConversionCriteria;
   }
@@ -19305,7 +19305,7 @@ class Google_Service_Dfareporting_Report extends Google_Model
   {
     return $this->pathToConversionCriteria;
   }
-  public function setReachCriteria(Google_Service_Dfareporting_ReportReachCriteria $reachCriteria)
+  public function setReachCriteria(Appointments_Google_Service_Dfareporting_ReportReachCriteria $reachCriteria)
   {
     $this->reachCriteria = $reachCriteria;
   }
@@ -19313,7 +19313,7 @@ class Google_Service_Dfareporting_Report extends Google_Model
   {
     return $this->reachCriteria;
   }
-  public function setSchedule(Google_Service_Dfareporting_ReportSchedule $schedule)
+  public function setSchedule(Appointments_Google_Service_Dfareporting_ReportSchedule $schedule)
   {
     $this->schedule = $schedule;
   }
@@ -19339,19 +19339,19 @@ class Google_Service_Dfareporting_Report extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_ReportCompatibleFields extends Google_Collection
+class Appointments_Google_Service_Dfareporting_ReportCompatibleFields extends Appointments_Google_Collection
 {
   protected $collection_key = 'pivotedActivityMetrics';
   protected $internal_gapi_mappings = array(
   );
-  protected $dimensionFiltersType = 'Google_Service_Dfareporting_Dimension';
+  protected $dimensionFiltersType = 'Appointments_Google_Service_Dfareporting_Dimension';
   protected $dimensionFiltersDataType = 'array';
-  protected $dimensionsType = 'Google_Service_Dfareporting_Dimension';
+  protected $dimensionsType = 'Appointments_Google_Service_Dfareporting_Dimension';
   protected $dimensionsDataType = 'array';
   public $kind;
-  protected $metricsType = 'Google_Service_Dfareporting_Metric';
+  protected $metricsType = 'Appointments_Google_Service_Dfareporting_Metric';
   protected $metricsDataType = 'array';
-  protected $pivotedActivityMetricsType = 'Google_Service_Dfareporting_Metric';
+  protected $pivotedActivityMetricsType = 'Appointments_Google_Service_Dfareporting_Metric';
   protected $pivotedActivityMetricsDataType = 'array';
 
 
@@ -19397,25 +19397,25 @@ class Google_Service_Dfareporting_ReportCompatibleFields extends Google_Collecti
   }
 }
 
-class Google_Service_Dfareporting_ReportCriteria extends Google_Collection
+class Appointments_Google_Service_Dfareporting_ReportCriteria extends Appointments_Google_Collection
 {
   protected $collection_key = 'metricNames';
   protected $internal_gapi_mappings = array(
   );
-  protected $activitiesType = 'Google_Service_Dfareporting_Activities';
+  protected $activitiesType = 'Appointments_Google_Service_Dfareporting_Activities';
   protected $activitiesDataType = '';
-  protected $customRichMediaEventsType = 'Google_Service_Dfareporting_CustomRichMediaEvents';
+  protected $customRichMediaEventsType = 'Appointments_Google_Service_Dfareporting_CustomRichMediaEvents';
   protected $customRichMediaEventsDataType = '';
-  protected $dateRangeType = 'Google_Service_Dfareporting_DateRange';
+  protected $dateRangeType = 'Appointments_Google_Service_Dfareporting_DateRange';
   protected $dateRangeDataType = '';
-  protected $dimensionFiltersType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $dimensionFiltersType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $dimensionFiltersDataType = 'array';
-  protected $dimensionsType = 'Google_Service_Dfareporting_SortedDimension';
+  protected $dimensionsType = 'Appointments_Google_Service_Dfareporting_SortedDimension';
   protected $dimensionsDataType = 'array';
   public $metricNames;
 
 
-  public function setActivities(Google_Service_Dfareporting_Activities $activities)
+  public function setActivities(Appointments_Google_Service_Dfareporting_Activities $activities)
   {
     $this->activities = $activities;
   }
@@ -19423,7 +19423,7 @@ class Google_Service_Dfareporting_ReportCriteria extends Google_Collection
   {
     return $this->activities;
   }
-  public function setCustomRichMediaEvents(Google_Service_Dfareporting_CustomRichMediaEvents $customRichMediaEvents)
+  public function setCustomRichMediaEvents(Appointments_Google_Service_Dfareporting_CustomRichMediaEvents $customRichMediaEvents)
   {
     $this->customRichMediaEvents = $customRichMediaEvents;
   }
@@ -19431,7 +19431,7 @@ class Google_Service_Dfareporting_ReportCriteria extends Google_Collection
   {
     return $this->customRichMediaEvents;
   }
-  public function setDateRange(Google_Service_Dfareporting_DateRange $dateRange)
+  public function setDateRange(Appointments_Google_Service_Dfareporting_DateRange $dateRange)
   {
     $this->dateRange = $dateRange;
   }
@@ -19465,17 +19465,17 @@ class Google_Service_Dfareporting_ReportCriteria extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_ReportCrossDimensionReachCriteria extends Google_Collection
+class Appointments_Google_Service_Dfareporting_ReportCrossDimensionReachCriteria extends Appointments_Google_Collection
 {
   protected $collection_key = 'overlapMetricNames';
   protected $internal_gapi_mappings = array(
   );
-  protected $breakdownType = 'Google_Service_Dfareporting_SortedDimension';
+  protected $breakdownType = 'Appointments_Google_Service_Dfareporting_SortedDimension';
   protected $breakdownDataType = 'array';
-  protected $dateRangeType = 'Google_Service_Dfareporting_DateRange';
+  protected $dateRangeType = 'Appointments_Google_Service_Dfareporting_DateRange';
   protected $dateRangeDataType = '';
   public $dimension;
-  protected $dimensionFiltersType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $dimensionFiltersType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $dimensionFiltersDataType = 'array';
   public $metricNames;
   public $overlapMetricNames;
@@ -19490,7 +19490,7 @@ class Google_Service_Dfareporting_ReportCrossDimensionReachCriteria extends Goog
   {
     return $this->breakdown;
   }
-  public function setDateRange(Google_Service_Dfareporting_DateRange $dateRange)
+  public function setDateRange(Appointments_Google_Service_Dfareporting_DateRange $dateRange)
   {
     $this->dateRange = $dateRange;
   }
@@ -19540,7 +19540,7 @@ class Google_Service_Dfareporting_ReportCrossDimensionReachCriteria extends Goog
   }
 }
 
-class Google_Service_Dfareporting_ReportDelivery extends Google_Collection
+class Appointments_Google_Service_Dfareporting_ReportDelivery extends Appointments_Google_Collection
 {
   protected $collection_key = 'recipients';
   protected $internal_gapi_mappings = array(
@@ -19548,7 +19548,7 @@ class Google_Service_Dfareporting_ReportDelivery extends Google_Collection
   public $emailOwner;
   public $emailOwnerDeliveryType;
   public $message;
-  protected $recipientsType = 'Google_Service_Dfareporting_Recipient';
+  protected $recipientsType = 'Appointments_Google_Service_Dfareporting_Recipient';
   protected $recipientsDataType = 'array';
 
 
@@ -19586,23 +19586,23 @@ class Google_Service_Dfareporting_ReportDelivery extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_ReportFloodlightCriteria extends Google_Collection
+class Appointments_Google_Service_Dfareporting_ReportFloodlightCriteria extends Appointments_Google_Collection
 {
   protected $collection_key = 'metricNames';
   protected $internal_gapi_mappings = array(
   );
-  protected $customRichMediaEventsType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $customRichMediaEventsType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $customRichMediaEventsDataType = 'array';
-  protected $dateRangeType = 'Google_Service_Dfareporting_DateRange';
+  protected $dateRangeType = 'Appointments_Google_Service_Dfareporting_DateRange';
   protected $dateRangeDataType = '';
-  protected $dimensionFiltersType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $dimensionFiltersType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $dimensionFiltersDataType = 'array';
-  protected $dimensionsType = 'Google_Service_Dfareporting_SortedDimension';
+  protected $dimensionsType = 'Appointments_Google_Service_Dfareporting_SortedDimension';
   protected $dimensionsDataType = 'array';
-  protected $floodlightConfigIdType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $floodlightConfigIdType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $floodlightConfigIdDataType = '';
   public $metricNames;
-  protected $reportPropertiesType = 'Google_Service_Dfareporting_ReportFloodlightCriteriaReportProperties';
+  protected $reportPropertiesType = 'Appointments_Google_Service_Dfareporting_ReportFloodlightCriteriaReportProperties';
   protected $reportPropertiesDataType = '';
 
 
@@ -19614,7 +19614,7 @@ class Google_Service_Dfareporting_ReportFloodlightCriteria extends Google_Collec
   {
     return $this->customRichMediaEvents;
   }
-  public function setDateRange(Google_Service_Dfareporting_DateRange $dateRange)
+  public function setDateRange(Appointments_Google_Service_Dfareporting_DateRange $dateRange)
   {
     $this->dateRange = $dateRange;
   }
@@ -19638,7 +19638,7 @@ class Google_Service_Dfareporting_ReportFloodlightCriteria extends Google_Collec
   {
     return $this->dimensions;
   }
-  public function setFloodlightConfigId(Google_Service_Dfareporting_DimensionValue $floodlightConfigId)
+  public function setFloodlightConfigId(Appointments_Google_Service_Dfareporting_DimensionValue $floodlightConfigId)
   {
     $this->floodlightConfigId = $floodlightConfigId;
   }
@@ -19654,7 +19654,7 @@ class Google_Service_Dfareporting_ReportFloodlightCriteria extends Google_Collec
   {
     return $this->metricNames;
   }
-  public function setReportProperties(Google_Service_Dfareporting_ReportFloodlightCriteriaReportProperties $reportProperties)
+  public function setReportProperties(Appointments_Google_Service_Dfareporting_ReportFloodlightCriteriaReportProperties $reportProperties)
   {
     $this->reportProperties = $reportProperties;
   }
@@ -19664,7 +19664,7 @@ class Google_Service_Dfareporting_ReportFloodlightCriteria extends Google_Collec
   }
 }
 
-class Google_Service_Dfareporting_ReportFloodlightCriteriaReportProperties extends Google_Model
+class Appointments_Google_Service_Dfareporting_ReportFloodlightCriteriaReportProperties extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -19699,13 +19699,13 @@ class Google_Service_Dfareporting_ReportFloodlightCriteriaReportProperties exten
   }
 }
 
-class Google_Service_Dfareporting_ReportList extends Google_Collection
+class Appointments_Google_Service_Dfareporting_ReportList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $etag;
-  protected $itemsType = 'Google_Service_Dfareporting_Report';
+  protected $itemsType = 'Appointments_Google_Service_Dfareporting_Report';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -19745,27 +19745,27 @@ class Google_Service_Dfareporting_ReportList extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_ReportPathToConversionCriteria extends Google_Collection
+class Appointments_Google_Service_Dfareporting_ReportPathToConversionCriteria extends Appointments_Google_Collection
 {
   protected $collection_key = 'perInteractionDimensions';
   protected $internal_gapi_mappings = array(
   );
-  protected $activityFiltersType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $activityFiltersType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $activityFiltersDataType = 'array';
-  protected $conversionDimensionsType = 'Google_Service_Dfareporting_SortedDimension';
+  protected $conversionDimensionsType = 'Appointments_Google_Service_Dfareporting_SortedDimension';
   protected $conversionDimensionsDataType = 'array';
-  protected $customFloodlightVariablesType = 'Google_Service_Dfareporting_SortedDimension';
+  protected $customFloodlightVariablesType = 'Appointments_Google_Service_Dfareporting_SortedDimension';
   protected $customFloodlightVariablesDataType = 'array';
-  protected $customRichMediaEventsType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $customRichMediaEventsType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $customRichMediaEventsDataType = 'array';
-  protected $dateRangeType = 'Google_Service_Dfareporting_DateRange';
+  protected $dateRangeType = 'Appointments_Google_Service_Dfareporting_DateRange';
   protected $dateRangeDataType = '';
-  protected $floodlightConfigIdType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $floodlightConfigIdType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $floodlightConfigIdDataType = '';
   public $metricNames;
-  protected $perInteractionDimensionsType = 'Google_Service_Dfareporting_SortedDimension';
+  protected $perInteractionDimensionsType = 'Appointments_Google_Service_Dfareporting_SortedDimension';
   protected $perInteractionDimensionsDataType = 'array';
-  protected $reportPropertiesType = 'Google_Service_Dfareporting_ReportPathToConversionCriteriaReportProperties';
+  protected $reportPropertiesType = 'Appointments_Google_Service_Dfareporting_ReportPathToConversionCriteriaReportProperties';
   protected $reportPropertiesDataType = '';
 
 
@@ -19801,7 +19801,7 @@ class Google_Service_Dfareporting_ReportPathToConversionCriteria extends Google_
   {
     return $this->customRichMediaEvents;
   }
-  public function setDateRange(Google_Service_Dfareporting_DateRange $dateRange)
+  public function setDateRange(Appointments_Google_Service_Dfareporting_DateRange $dateRange)
   {
     $this->dateRange = $dateRange;
   }
@@ -19809,7 +19809,7 @@ class Google_Service_Dfareporting_ReportPathToConversionCriteria extends Google_
   {
     return $this->dateRange;
   }
-  public function setFloodlightConfigId(Google_Service_Dfareporting_DimensionValue $floodlightConfigId)
+  public function setFloodlightConfigId(Appointments_Google_Service_Dfareporting_DimensionValue $floodlightConfigId)
   {
     $this->floodlightConfigId = $floodlightConfigId;
   }
@@ -19833,7 +19833,7 @@ class Google_Service_Dfareporting_ReportPathToConversionCriteria extends Google_
   {
     return $this->perInteractionDimensions;
   }
-  public function setReportProperties(Google_Service_Dfareporting_ReportPathToConversionCriteriaReportProperties $reportProperties)
+  public function setReportProperties(Appointments_Google_Service_Dfareporting_ReportPathToConversionCriteriaReportProperties $reportProperties)
   {
     $this->reportProperties = $reportProperties;
   }
@@ -19843,7 +19843,7 @@ class Google_Service_Dfareporting_ReportPathToConversionCriteria extends Google_
   }
 }
 
-class Google_Service_Dfareporting_ReportPathToConversionCriteriaReportProperties extends Google_Model
+class Appointments_Google_Service_Dfareporting_ReportPathToConversionCriteriaReportProperties extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -19932,27 +19932,27 @@ class Google_Service_Dfareporting_ReportPathToConversionCriteriaReportProperties
   }
 }
 
-class Google_Service_Dfareporting_ReportReachCriteria extends Google_Collection
+class Appointments_Google_Service_Dfareporting_ReportReachCriteria extends Appointments_Google_Collection
 {
   protected $collection_key = 'reachByFrequencyMetricNames';
   protected $internal_gapi_mappings = array(
   );
-  protected $activitiesType = 'Google_Service_Dfareporting_Activities';
+  protected $activitiesType = 'Appointments_Google_Service_Dfareporting_Activities';
   protected $activitiesDataType = '';
-  protected $customRichMediaEventsType = 'Google_Service_Dfareporting_CustomRichMediaEvents';
+  protected $customRichMediaEventsType = 'Appointments_Google_Service_Dfareporting_CustomRichMediaEvents';
   protected $customRichMediaEventsDataType = '';
-  protected $dateRangeType = 'Google_Service_Dfareporting_DateRange';
+  protected $dateRangeType = 'Appointments_Google_Service_Dfareporting_DateRange';
   protected $dateRangeDataType = '';
-  protected $dimensionFiltersType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $dimensionFiltersType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $dimensionFiltersDataType = 'array';
-  protected $dimensionsType = 'Google_Service_Dfareporting_SortedDimension';
+  protected $dimensionsType = 'Appointments_Google_Service_Dfareporting_SortedDimension';
   protected $dimensionsDataType = 'array';
   public $enableAllDimensionCombinations;
   public $metricNames;
   public $reachByFrequencyMetricNames;
 
 
-  public function setActivities(Google_Service_Dfareporting_Activities $activities)
+  public function setActivities(Appointments_Google_Service_Dfareporting_Activities $activities)
   {
     $this->activities = $activities;
   }
@@ -19960,7 +19960,7 @@ class Google_Service_Dfareporting_ReportReachCriteria extends Google_Collection
   {
     return $this->activities;
   }
-  public function setCustomRichMediaEvents(Google_Service_Dfareporting_CustomRichMediaEvents $customRichMediaEvents)
+  public function setCustomRichMediaEvents(Appointments_Google_Service_Dfareporting_CustomRichMediaEvents $customRichMediaEvents)
   {
     $this->customRichMediaEvents = $customRichMediaEvents;
   }
@@ -19968,7 +19968,7 @@ class Google_Service_Dfareporting_ReportReachCriteria extends Google_Collection
   {
     return $this->customRichMediaEvents;
   }
-  public function setDateRange(Google_Service_Dfareporting_DateRange $dateRange)
+  public function setDateRange(Appointments_Google_Service_Dfareporting_DateRange $dateRange)
   {
     $this->dateRange = $dateRange;
   }
@@ -20018,7 +20018,7 @@ class Google_Service_Dfareporting_ReportReachCriteria extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_ReportSchedule extends Google_Collection
+class Appointments_Google_Service_Dfareporting_ReportSchedule extends Appointments_Google_Collection
 {
   protected $collection_key = 'repeatsOnWeekDays';
   protected $internal_gapi_mappings = array(
@@ -20090,12 +20090,12 @@ class Google_Service_Dfareporting_ReportSchedule extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_ReportsConfiguration extends Google_Model
+class Appointments_Google_Service_Dfareporting_ReportsConfiguration extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $exposureToConversionEnabled;
-  protected $lookbackConfigurationType = 'Google_Service_Dfareporting_LookbackConfiguration';
+  protected $lookbackConfigurationType = 'Appointments_Google_Service_Dfareporting_LookbackConfiguration';
   protected $lookbackConfigurationDataType = '';
   public $reportGenerationTimeZoneId;
 
@@ -20108,7 +20108,7 @@ class Google_Service_Dfareporting_ReportsConfiguration extends Google_Model
   {
     return $this->exposureToConversionEnabled;
   }
-  public function setLookbackConfiguration(Google_Service_Dfareporting_LookbackConfiguration $lookbackConfiguration)
+  public function setLookbackConfiguration(Appointments_Google_Service_Dfareporting_LookbackConfiguration $lookbackConfiguration)
   {
     $this->lookbackConfiguration = $lookbackConfiguration;
   }
@@ -20126,7 +20126,7 @@ class Google_Service_Dfareporting_ReportsConfiguration extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_RichMediaExitOverride extends Google_Model
+class Appointments_Google_Service_Dfareporting_RichMediaExitOverride extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -20161,7 +20161,7 @@ class Google_Service_Dfareporting_RichMediaExitOverride extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_Site extends Google_Collection
+class Appointments_Google_Service_Dfareporting_Site extends Appointments_Google_Collection
 {
   protected $collection_key = 'siteContacts';
   protected $internal_gapi_mappings = array(
@@ -20169,17 +20169,17 @@ class Google_Service_Dfareporting_Site extends Google_Collection
   public $accountId;
   public $approved;
   public $directorySiteId;
-  protected $directorySiteIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $directorySiteIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $directorySiteIdDimensionValueDataType = '';
   public $id;
-  protected $idDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $idDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $idDimensionValueDataType = '';
   public $keyName;
   public $kind;
   public $name;
-  protected $siteContactsType = 'Google_Service_Dfareporting_SiteContact';
+  protected $siteContactsType = 'Appointments_Google_Service_Dfareporting_SiteContact';
   protected $siteContactsDataType = 'array';
-  protected $siteSettingsType = 'Google_Service_Dfareporting_SiteSettings';
+  protected $siteSettingsType = 'Appointments_Google_Service_Dfareporting_SiteSettings';
   protected $siteSettingsDataType = '';
   public $subaccountId;
 
@@ -20208,7 +20208,7 @@ class Google_Service_Dfareporting_Site extends Google_Collection
   {
     return $this->directorySiteId;
   }
-  public function setDirectorySiteIdDimensionValue(Google_Service_Dfareporting_DimensionValue $directorySiteIdDimensionValue)
+  public function setDirectorySiteIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $directorySiteIdDimensionValue)
   {
     $this->directorySiteIdDimensionValue = $directorySiteIdDimensionValue;
   }
@@ -20224,7 +20224,7 @@ class Google_Service_Dfareporting_Site extends Google_Collection
   {
     return $this->id;
   }
-  public function setIdDimensionValue(Google_Service_Dfareporting_DimensionValue $idDimensionValue)
+  public function setIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $idDimensionValue)
   {
     $this->idDimensionValue = $idDimensionValue;
   }
@@ -20264,7 +20264,7 @@ class Google_Service_Dfareporting_Site extends Google_Collection
   {
     return $this->siteContacts;
   }
-  public function setSiteSettings(Google_Service_Dfareporting_SiteSettings $siteSettings)
+  public function setSiteSettings(Appointments_Google_Service_Dfareporting_SiteSettings $siteSettings)
   {
     $this->siteSettings = $siteSettings;
   }
@@ -20282,7 +20282,7 @@ class Google_Service_Dfareporting_Site extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_SiteContact extends Google_Model
+class Appointments_Google_Service_Dfareporting_SiteContact extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -20362,18 +20362,18 @@ class Google_Service_Dfareporting_SiteContact extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_SiteSettings extends Google_Model
+class Appointments_Google_Service_Dfareporting_SiteSettings extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $activeViewOptOut;
-  protected $creativeSettingsType = 'Google_Service_Dfareporting_CreativeSettings';
+  protected $creativeSettingsType = 'Appointments_Google_Service_Dfareporting_CreativeSettings';
   protected $creativeSettingsDataType = '';
   public $disableBrandSafeAds;
   public $disableNewCookie;
-  protected $lookbackConfigurationType = 'Google_Service_Dfareporting_LookbackConfiguration';
+  protected $lookbackConfigurationType = 'Appointments_Google_Service_Dfareporting_LookbackConfiguration';
   protected $lookbackConfigurationDataType = '';
-  protected $tagSettingType = 'Google_Service_Dfareporting_TagSetting';
+  protected $tagSettingType = 'Appointments_Google_Service_Dfareporting_TagSetting';
   protected $tagSettingDataType = '';
   public $videoActiveViewOptOut;
 
@@ -20386,7 +20386,7 @@ class Google_Service_Dfareporting_SiteSettings extends Google_Model
   {
     return $this->activeViewOptOut;
   }
-  public function setCreativeSettings(Google_Service_Dfareporting_CreativeSettings $creativeSettings)
+  public function setCreativeSettings(Appointments_Google_Service_Dfareporting_CreativeSettings $creativeSettings)
   {
     $this->creativeSettings = $creativeSettings;
   }
@@ -20410,7 +20410,7 @@ class Google_Service_Dfareporting_SiteSettings extends Google_Model
   {
     return $this->disableNewCookie;
   }
-  public function setLookbackConfiguration(Google_Service_Dfareporting_LookbackConfiguration $lookbackConfiguration)
+  public function setLookbackConfiguration(Appointments_Google_Service_Dfareporting_LookbackConfiguration $lookbackConfiguration)
   {
     $this->lookbackConfiguration = $lookbackConfiguration;
   }
@@ -20418,7 +20418,7 @@ class Google_Service_Dfareporting_SiteSettings extends Google_Model
   {
     return $this->lookbackConfiguration;
   }
-  public function setTagSetting(Google_Service_Dfareporting_TagSetting $tagSetting)
+  public function setTagSetting(Appointments_Google_Service_Dfareporting_TagSetting $tagSetting)
   {
     $this->tagSetting = $tagSetting;
   }
@@ -20436,14 +20436,14 @@ class Google_Service_Dfareporting_SiteSettings extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_SitesListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_SitesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'sites';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
   public $nextPageToken;
-  protected $sitesType = 'Google_Service_Dfareporting_Site';
+  protected $sitesType = 'Appointments_Google_Service_Dfareporting_Site';
   protected $sitesDataType = 'array';
 
 
@@ -20473,7 +20473,7 @@ class Google_Service_Dfareporting_SitesListResponse extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_Size extends Google_Model
+class Appointments_Google_Service_Dfareporting_Size extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -20526,13 +20526,13 @@ class Google_Service_Dfareporting_Size extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_SizesListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_SizesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'sizes';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $sizesType = 'Google_Service_Dfareporting_Size';
+  protected $sizesType = 'Appointments_Google_Service_Dfareporting_Size';
   protected $sizesDataType = 'array';
 
 
@@ -20554,7 +20554,7 @@ class Google_Service_Dfareporting_SizesListResponse extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_SortedDimension extends Google_Model
+class Appointments_Google_Service_Dfareporting_SortedDimension extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -20589,7 +20589,7 @@ class Google_Service_Dfareporting_SortedDimension extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_Subaccount extends Google_Collection
+class Appointments_Google_Service_Dfareporting_Subaccount extends Appointments_Google_Collection
 {
   protected $collection_key = 'availablePermissionIds';
   protected $internal_gapi_mappings = array(
@@ -20643,14 +20643,14 @@ class Google_Service_Dfareporting_Subaccount extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_SubaccountsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_SubaccountsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'subaccounts';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
   public $nextPageToken;
-  protected $subaccountsType = 'Google_Service_Dfareporting_Subaccount';
+  protected $subaccountsType = 'Appointments_Google_Service_Dfareporting_Subaccount';
   protected $subaccountsDataType = 'array';
 
 
@@ -20680,7 +20680,7 @@ class Google_Service_Dfareporting_SubaccountsListResponse extends Google_Collect
   }
 }
 
-class Google_Service_Dfareporting_TagData extends Google_Model
+class Appointments_Google_Service_Dfareporting_TagData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -20733,7 +20733,7 @@ class Google_Service_Dfareporting_TagData extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_TagSetting extends Google_Model
+class Appointments_Google_Service_Dfareporting_TagSetting extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -20777,7 +20777,7 @@ class Google_Service_Dfareporting_TagSetting extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_TagSettings extends Google_Model
+class Appointments_Google_Service_Dfareporting_TagSettings extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -20803,7 +20803,7 @@ class Google_Service_Dfareporting_TagSettings extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_TargetWindow extends Google_Model
+class Appointments_Google_Service_Dfareporting_TargetWindow extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -20829,14 +20829,14 @@ class Google_Service_Dfareporting_TargetWindow extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_TargetableRemarketingList extends Google_Model
+class Appointments_Google_Service_Dfareporting_TargetableRemarketingList extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $accountId;
   public $active;
   public $advertiserId;
-  protected $advertiserIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $advertiserIdDimensionValueType = 'Appointments_Google_Service_Dfareporting_DimensionValue';
   protected $advertiserIdDimensionValueDataType = '';
   public $description;
   public $id;
@@ -20872,7 +20872,7 @@ class Google_Service_Dfareporting_TargetableRemarketingList extends Google_Model
   {
     return $this->advertiserId;
   }
-  public function setAdvertiserIdDimensionValue(Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
+  public function setAdvertiserIdDimensionValue(Appointments_Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
   {
     $this->advertiserIdDimensionValue = $advertiserIdDimensionValue;
   }
@@ -20946,14 +20946,14 @@ class Google_Service_Dfareporting_TargetableRemarketingList extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_TargetableRemarketingListsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_TargetableRemarketingListsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'targetableRemarketingLists';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
   public $nextPageToken;
-  protected $targetableRemarketingListsType = 'Google_Service_Dfareporting_TargetableRemarketingList';
+  protected $targetableRemarketingListsType = 'Appointments_Google_Service_Dfareporting_TargetableRemarketingList';
   protected $targetableRemarketingListsDataType = 'array';
 
 
@@ -20983,22 +20983,22 @@ class Google_Service_Dfareporting_TargetableRemarketingListsListResponse extends
   }
 }
 
-class Google_Service_Dfareporting_TechnologyTargeting extends Google_Collection
+class Appointments_Google_Service_Dfareporting_TechnologyTargeting extends Appointments_Google_Collection
 {
   protected $collection_key = 'platformTypes';
   protected $internal_gapi_mappings = array(
   );
-  protected $browsersType = 'Google_Service_Dfareporting_Browser';
+  protected $browsersType = 'Appointments_Google_Service_Dfareporting_Browser';
   protected $browsersDataType = 'array';
-  protected $connectionTypesType = 'Google_Service_Dfareporting_ConnectionType';
+  protected $connectionTypesType = 'Appointments_Google_Service_Dfareporting_ConnectionType';
   protected $connectionTypesDataType = 'array';
-  protected $mobileCarriersType = 'Google_Service_Dfareporting_MobileCarrier';
+  protected $mobileCarriersType = 'Appointments_Google_Service_Dfareporting_MobileCarrier';
   protected $mobileCarriersDataType = 'array';
-  protected $operatingSystemVersionsType = 'Google_Service_Dfareporting_OperatingSystemVersion';
+  protected $operatingSystemVersionsType = 'Appointments_Google_Service_Dfareporting_OperatingSystemVersion';
   protected $operatingSystemVersionsDataType = 'array';
-  protected $operatingSystemsType = 'Google_Service_Dfareporting_OperatingSystem';
+  protected $operatingSystemsType = 'Appointments_Google_Service_Dfareporting_OperatingSystem';
   protected $operatingSystemsDataType = 'array';
-  protected $platformTypesType = 'Google_Service_Dfareporting_PlatformType';
+  protected $platformTypesType = 'Appointments_Google_Service_Dfareporting_PlatformType';
   protected $platformTypesDataType = 'array';
 
 
@@ -21052,7 +21052,7 @@ class Google_Service_Dfareporting_TechnologyTargeting extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_ThirdPartyAuthenticationToken extends Google_Model
+class Appointments_Google_Service_Dfareporting_ThirdPartyAuthenticationToken extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -21078,7 +21078,7 @@ class Google_Service_Dfareporting_ThirdPartyAuthenticationToken extends Google_M
   }
 }
 
-class Google_Service_Dfareporting_ThirdPartyTrackingUrl extends Google_Model
+class Appointments_Google_Service_Dfareporting_ThirdPartyTrackingUrl extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -21104,7 +21104,7 @@ class Google_Service_Dfareporting_ThirdPartyTrackingUrl extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_UserDefinedVariableConfiguration extends Google_Model
+class Appointments_Google_Service_Dfareporting_UserDefinedVariableConfiguration extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -21139,7 +21139,7 @@ class Google_Service_Dfareporting_UserDefinedVariableConfiguration extends Googl
   }
 }
 
-class Google_Service_Dfareporting_UserProfile extends Google_Model
+class Appointments_Google_Service_Dfareporting_UserProfile extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -21219,13 +21219,13 @@ class Google_Service_Dfareporting_UserProfile extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_UserProfileList extends Google_Collection
+class Appointments_Google_Service_Dfareporting_UserProfileList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $etag;
-  protected $itemsType = 'Google_Service_Dfareporting_UserProfile';
+  protected $itemsType = 'Appointments_Google_Service_Dfareporting_UserProfile';
   protected $itemsDataType = 'array';
   public $kind;
 
@@ -21256,7 +21256,7 @@ class Google_Service_Dfareporting_UserProfileList extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_UserRole extends Google_Collection
+class Appointments_Google_Service_Dfareporting_UserRole extends Appointments_Google_Collection
 {
   protected $collection_key = 'permissions';
   protected $internal_gapi_mappings = array(
@@ -21267,7 +21267,7 @@ class Google_Service_Dfareporting_UserRole extends Google_Collection
   public $kind;
   public $name;
   public $parentUserRoleId;
-  protected $permissionsType = 'Google_Service_Dfareporting_UserRolePermission';
+  protected $permissionsType = 'Appointments_Google_Service_Dfareporting_UserRolePermission';
   protected $permissionsDataType = 'array';
   public $subaccountId;
 
@@ -21338,7 +21338,7 @@ class Google_Service_Dfareporting_UserRole extends Google_Collection
   }
 }
 
-class Google_Service_Dfareporting_UserRolePermission extends Google_Model
+class Appointments_Google_Service_Dfareporting_UserRolePermission extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -21391,7 +21391,7 @@ class Google_Service_Dfareporting_UserRolePermission extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_UserRolePermissionGroup extends Google_Model
+class Appointments_Google_Service_Dfareporting_UserRolePermissionGroup extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -21426,13 +21426,13 @@ class Google_Service_Dfareporting_UserRolePermissionGroup extends Google_Model
   }
 }
 
-class Google_Service_Dfareporting_UserRolePermissionGroupsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_UserRolePermissionGroupsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'userRolePermissionGroups';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $userRolePermissionGroupsType = 'Google_Service_Dfareporting_UserRolePermissionGroup';
+  protected $userRolePermissionGroupsType = 'Appointments_Google_Service_Dfareporting_UserRolePermissionGroup';
   protected $userRolePermissionGroupsDataType = 'array';
 
 
@@ -21454,13 +21454,13 @@ class Google_Service_Dfareporting_UserRolePermissionGroupsListResponse extends G
   }
 }
 
-class Google_Service_Dfareporting_UserRolePermissionsListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_UserRolePermissionsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'userRolePermissions';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $userRolePermissionsType = 'Google_Service_Dfareporting_UserRolePermission';
+  protected $userRolePermissionsType = 'Appointments_Google_Service_Dfareporting_UserRolePermission';
   protected $userRolePermissionsDataType = 'array';
 
 
@@ -21482,14 +21482,14 @@ class Google_Service_Dfareporting_UserRolePermissionsListResponse extends Google
   }
 }
 
-class Google_Service_Dfareporting_UserRolesListResponse extends Google_Collection
+class Appointments_Google_Service_Dfareporting_UserRolesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'userRoles';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
   public $nextPageToken;
-  protected $userRolesType = 'Google_Service_Dfareporting_UserRole';
+  protected $userRolesType = 'Appointments_Google_Service_Dfareporting_UserRole';
   protected $userRolesDataType = 'array';
 
 

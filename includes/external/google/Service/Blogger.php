@@ -26,7 +26,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Blogger extends Google_Service
+class Appointments_Google_Service_Blogger extends Appointments_Google_Service
 {
   /** Manage your Blogger account. */
   const BLOGGER =
@@ -48,9 +48,9 @@ class Google_Service_Blogger extends Google_Service
   /**
    * Constructs the internal representation of the Blogger service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -58,7 +58,7 @@ class Google_Service_Blogger extends Google_Service
     $this->version = 'v3';
     $this->serviceName = 'blogger';
 
-    $this->blogUserInfos = new Google_Service_Blogger_BlogUserInfos_Resource(
+    $this->blogUserInfos = new Appointments_Google_Service_Blogger_BlogUserInfos_Resource(
         $this,
         $this->serviceName,
         'blogUserInfos',
@@ -87,7 +87,7 @@ class Google_Service_Blogger extends Google_Service
           )
         )
     );
-    $this->blogs = new Google_Service_Blogger_Blogs_Resource(
+    $this->blogs = new Appointments_Google_Service_Blogger_Blogs_Resource(
         $this,
         $this->serviceName,
         'blogs',
@@ -157,7 +157,7 @@ class Google_Service_Blogger extends Google_Service
           )
         )
     );
-    $this->comments = new Google_Service_Blogger_Comments_Resource(
+    $this->comments = new Appointments_Google_Service_Blogger_Comments_Resource(
         $this,
         $this->serviceName,
         'comments',
@@ -350,7 +350,7 @@ class Google_Service_Blogger extends Google_Service
           )
         )
     );
-    $this->pageViews = new Google_Service_Blogger_PageViews_Resource(
+    $this->pageViews = new Appointments_Google_Service_Blogger_PageViews_Resource(
         $this,
         $this->serviceName,
         'pageViews',
@@ -375,7 +375,7 @@ class Google_Service_Blogger extends Google_Service
           )
         )
     );
-    $this->pages = new Google_Service_Blogger_Pages_Resource(
+    $this->pages = new Appointments_Google_Service_Blogger_Pages_Resource(
         $this,
         $this->serviceName,
         'pages',
@@ -540,7 +540,7 @@ class Google_Service_Blogger extends Google_Service
           )
         )
     );
-    $this->postUserInfos = new Google_Service_Blogger_PostUserInfos_Resource(
+    $this->postUserInfos = new Appointments_Google_Service_Blogger_PostUserInfos_Resource(
         $this,
         $this->serviceName,
         'postUserInfos',
@@ -626,7 +626,7 @@ class Google_Service_Blogger extends Google_Service
           )
         )
     );
-    $this->posts = new Google_Service_Blogger_Posts_Resource(
+    $this->posts = new Appointments_Google_Service_Blogger_Posts_Resource(
         $this,
         $this->serviceName,
         'posts',
@@ -905,7 +905,7 @@ class Google_Service_Blogger extends Google_Service
           )
         )
     );
-    $this->users = new Google_Service_Blogger_Users_Resource(
+    $this->users = new Appointments_Google_Service_Blogger_Users_Resource(
         $this,
         $this->serviceName,
         'users',
@@ -933,11 +933,11 @@ class Google_Service_Blogger extends Google_Service
  * The "blogUserInfos" collection of methods.
  * Typical usage is:
  *  <code>
- *   $bloggerService = new Google_Service_Blogger(...);
+ *   $bloggerService = new Appointments_Google_Service_Blogger(...);
  *   $blogUserInfos = $bloggerService->blogUserInfos;
  *  </code>
  */
-class Google_Service_Blogger_BlogUserInfos_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Blogger_BlogUserInfos_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -950,13 +950,13 @@ class Google_Service_Blogger_BlogUserInfos_Resource extends Google_Service_Resou
    *
    * @opt_param string maxPosts Maximum number of posts to pull back with the
    * blog.
-   * @return Google_Service_Blogger_BlogUserInfo
+   * @return Appointments_Google_Service_Blogger_BlogUserInfo
    */
   public function get($userId, $blogId, $optParams = array())
   {
     $params = array('userId' => $userId, 'blogId' => $blogId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Blogger_BlogUserInfo");
+    return $this->call('get', array($params), "Appointments_Google_Service_Blogger_BlogUserInfo");
   }
 }
 
@@ -964,11 +964,11 @@ class Google_Service_Blogger_BlogUserInfos_Resource extends Google_Service_Resou
  * The "blogs" collection of methods.
  * Typical usage is:
  *  <code>
- *   $bloggerService = new Google_Service_Blogger(...);
+ *   $bloggerService = new Appointments_Google_Service_Blogger(...);
  *   $blogs = $bloggerService->blogs;
  *  </code>
  */
-class Google_Service_Blogger_Blogs_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Blogger_Blogs_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -981,13 +981,13 @@ class Google_Service_Blogger_Blogs_Resource extends Google_Service_Resource
    * blog.
    * @opt_param string view Access level with which to view the blog. Note that
    * some fields require elevated access.
-   * @return Google_Service_Blogger_Blog
+   * @return Appointments_Google_Service_Blogger_Blog
    */
   public function get($blogId, $optParams = array())
   {
     $params = array('blogId' => $blogId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Blogger_Blog");
+    return $this->call('get', array($params), "Appointments_Google_Service_Blogger_Blog");
   }
 
   /**
@@ -998,13 +998,13 @@ class Google_Service_Blogger_Blogs_Resource extends Google_Service_Resource
    *
    * @opt_param string view Access level with which to view the blog. Note that
    * some fields require elevated access.
-   * @return Google_Service_Blogger_Blog
+   * @return Appointments_Google_Service_Blogger_Blog
    */
   public function getByUrl($url, $optParams = array())
   {
     $params = array('url' => $url);
     $params = array_merge($params, $optParams);
-    return $this->call('getByUrl', array($params), "Google_Service_Blogger_Blog");
+    return $this->call('getByUrl', array($params), "Appointments_Google_Service_Blogger_Blog");
   }
 
   /**
@@ -1023,13 +1023,13 @@ class Google_Service_Blogger_Blogs_Resource extends Google_Service_Resource
    * Live blogs only). Note that ADMIN access is required to view deleted blogs.
    * @opt_param string view Access level with which to view the blogs. Note that
    * some fields require elevated access.
-   * @return Google_Service_Blogger_BlogList
+   * @return Appointments_Google_Service_Blogger_BlogList
    */
   public function listByUser($userId, $optParams = array())
   {
     $params = array('userId' => $userId);
     $params = array_merge($params, $optParams);
-    return $this->call('listByUser', array($params), "Google_Service_Blogger_BlogList");
+    return $this->call('listByUser', array($params), "Appointments_Google_Service_Blogger_BlogList");
   }
 }
 
@@ -1037,11 +1037,11 @@ class Google_Service_Blogger_Blogs_Resource extends Google_Service_Resource
  * The "comments" collection of methods.
  * Typical usage is:
  *  <code>
- *   $bloggerService = new Google_Service_Blogger(...);
+ *   $bloggerService = new Appointments_Google_Service_Blogger(...);
  *   $comments = $bloggerService->comments;
  *  </code>
  */
-class Google_Service_Blogger_Comments_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Blogger_Comments_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1051,13 +1051,13 @@ class Google_Service_Blogger_Comments_Resource extends Google_Service_Resource
    * @param string $postId The ID of the Post.
    * @param string $commentId The ID of the comment to mark as not spam.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Blogger_Comment
+   * @return Appointments_Google_Service_Blogger_Comment
    */
   public function approve($blogId, $postId, $commentId, $optParams = array())
   {
     $params = array('blogId' => $blogId, 'postId' => $postId, 'commentId' => $commentId);
     $params = array_merge($params, $optParams);
-    return $this->call('approve', array($params), "Google_Service_Blogger_Comment");
+    return $this->call('approve', array($params), "Appointments_Google_Service_Blogger_Comment");
   }
 
   /**
@@ -1087,13 +1087,13 @@ class Google_Service_Blogger_Comments_Resource extends Google_Service_Resource
    * READER). Note that some comments will require elevated permissions, for
    * example comments where the parent posts which is in a draft state, or
    * comments that are pending moderation.
-   * @return Google_Service_Blogger_Comment
+   * @return Appointments_Google_Service_Blogger_Comment
    */
   public function get($blogId, $postId, $commentId, $optParams = array())
   {
     $params = array('blogId' => $blogId, 'postId' => $postId, 'commentId' => $commentId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Blogger_Comment");
+    return $this->call('get', array($params), "Appointments_Google_Service_Blogger_Comment");
   }
 
   /**
@@ -1115,13 +1115,13 @@ class Google_Service_Blogger_Comments_Resource extends Google_Service_Resource
    * @opt_param string status
    * @opt_param string view Access level with which to view the returned result.
    * Note that some fields require elevated access.
-   * @return Google_Service_Blogger_CommentList
+   * @return Appointments_Google_Service_Blogger_CommentList
    */
   public function listComments($blogId, $postId, $optParams = array())
   {
     $params = array('blogId' => $blogId, 'postId' => $postId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Blogger_CommentList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Blogger_CommentList");
   }
 
   /**
@@ -1141,13 +1141,13 @@ class Google_Service_Blogger_Comments_Resource extends Google_Service_Resource
    * @opt_param string startDate Earliest date of comment to fetch, a date-time
    * with RFC 3339 formatting.
    * @opt_param string status
-   * @return Google_Service_Blogger_CommentList
+   * @return Appointments_Google_Service_Blogger_CommentList
    */
   public function listByBlog($blogId, $optParams = array())
   {
     $params = array('blogId' => $blogId);
     $params = array_merge($params, $optParams);
-    return $this->call('listByBlog', array($params), "Google_Service_Blogger_CommentList");
+    return $this->call('listByBlog', array($params), "Appointments_Google_Service_Blogger_CommentList");
   }
 
   /**
@@ -1157,13 +1157,13 @@ class Google_Service_Blogger_Comments_Resource extends Google_Service_Resource
    * @param string $postId The ID of the Post.
    * @param string $commentId The ID of the comment to mark as spam.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Blogger_Comment
+   * @return Appointments_Google_Service_Blogger_Comment
    */
   public function markAsSpam($blogId, $postId, $commentId, $optParams = array())
   {
     $params = array('blogId' => $blogId, 'postId' => $postId, 'commentId' => $commentId);
     $params = array_merge($params, $optParams);
-    return $this->call('markAsSpam', array($params), "Google_Service_Blogger_Comment");
+    return $this->call('markAsSpam', array($params), "Appointments_Google_Service_Blogger_Comment");
   }
 
   /**
@@ -1173,13 +1173,13 @@ class Google_Service_Blogger_Comments_Resource extends Google_Service_Resource
    * @param string $postId The ID of the Post.
    * @param string $commentId The ID of the comment to delete content from.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Blogger_Comment
+   * @return Appointments_Google_Service_Blogger_Comment
    */
   public function removeContent($blogId, $postId, $commentId, $optParams = array())
   {
     $params = array('blogId' => $blogId, 'postId' => $postId, 'commentId' => $commentId);
     $params = array_merge($params, $optParams);
-    return $this->call('removeContent', array($params), "Google_Service_Blogger_Comment");
+    return $this->call('removeContent', array($params), "Appointments_Google_Service_Blogger_Comment");
   }
 }
 
@@ -1187,11 +1187,11 @@ class Google_Service_Blogger_Comments_Resource extends Google_Service_Resource
  * The "pageViews" collection of methods.
  * Typical usage is:
  *  <code>
- *   $bloggerService = new Google_Service_Blogger(...);
+ *   $bloggerService = new Appointments_Google_Service_Blogger(...);
  *   $pageViews = $bloggerService->pageViews;
  *  </code>
  */
-class Google_Service_Blogger_PageViews_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Blogger_PageViews_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1201,13 +1201,13 @@ class Google_Service_Blogger_PageViews_Resource extends Google_Service_Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param string range
-   * @return Google_Service_Blogger_Pageviews
+   * @return Appointments_Google_Service_Blogger_Pageviews
    */
   public function get($blogId, $optParams = array())
   {
     $params = array('blogId' => $blogId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Blogger_Pageviews");
+    return $this->call('get', array($params), "Appointments_Google_Service_Blogger_Pageviews");
   }
 }
 
@@ -1215,11 +1215,11 @@ class Google_Service_Blogger_PageViews_Resource extends Google_Service_Resource
  * The "pages" collection of methods.
  * Typical usage is:
  *  <code>
- *   $bloggerService = new Google_Service_Blogger(...);
+ *   $bloggerService = new Appointments_Google_Service_Blogger(...);
  *   $pages = $bloggerService->pages;
  *  </code>
  */
-class Google_Service_Blogger_Pages_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Blogger_Pages_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1244,31 +1244,31 @@ class Google_Service_Blogger_Pages_Resource extends Google_Service_Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param string view
-   * @return Google_Service_Blogger_Page
+   * @return Appointments_Google_Service_Blogger_Page
    */
   public function get($blogId, $pageId, $optParams = array())
   {
     $params = array('blogId' => $blogId, 'pageId' => $pageId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Blogger_Page");
+    return $this->call('get', array($params), "Appointments_Google_Service_Blogger_Page");
   }
 
   /**
    * Add a page. (pages.insert)
    *
    * @param string $blogId ID of the blog to add the page to.
-   * @param Google_Page $postBody
+   * @param Appointments_Google_Page $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param bool isDraft Whether to create the page as a draft (default:
    * false).
-   * @return Google_Service_Blogger_Page
+   * @return Appointments_Google_Service_Blogger_Page
    */
-  public function insert($blogId, Google_Service_Blogger_Page $postBody, $optParams = array())
+  public function insert($blogId, Appointments_Google_Service_Blogger_Page $postBody, $optParams = array())
   {
     $params = array('blogId' => $blogId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Blogger_Page");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Blogger_Page");
   }
 
   /**
@@ -1284,13 +1284,13 @@ class Google_Service_Blogger_Pages_Resource extends Google_Service_Resource
    * @opt_param string status
    * @opt_param string view Access level with which to view the returned result.
    * Note that some fields require elevated access.
-   * @return Google_Service_Blogger_PageList
+   * @return Appointments_Google_Service_Blogger_PageList
    */
   public function listPages($blogId, $optParams = array())
   {
     $params = array('blogId' => $blogId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Blogger_PageList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Blogger_PageList");
   }
 
   /**
@@ -1298,20 +1298,20 @@ class Google_Service_Blogger_Pages_Resource extends Google_Service_Resource
    *
    * @param string $blogId The ID of the Blog.
    * @param string $pageId The ID of the Page.
-   * @param Google_Page $postBody
+   * @param Appointments_Google_Page $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param bool publish Whether a publish action should be performed when the
    * page is updated (default: false).
    * @opt_param bool revert Whether a revert action should be performed when the
    * page is updated (default: false).
-   * @return Google_Service_Blogger_Page
+   * @return Appointments_Google_Service_Blogger_Page
    */
-  public function patch($blogId, $pageId, Google_Service_Blogger_Page $postBody, $optParams = array())
+  public function patch($blogId, $pageId, Appointments_Google_Service_Blogger_Page $postBody, $optParams = array())
   {
     $params = array('blogId' => $blogId, 'pageId' => $pageId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Blogger_Page");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Blogger_Page");
   }
 
   /**
@@ -1320,13 +1320,13 @@ class Google_Service_Blogger_Pages_Resource extends Google_Service_Resource
    * @param string $blogId The ID of the blog.
    * @param string $pageId The ID of the page.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Blogger_Page
+   * @return Appointments_Google_Service_Blogger_Page
    */
   public function publish($blogId, $pageId, $optParams = array())
   {
     $params = array('blogId' => $blogId, 'pageId' => $pageId);
     $params = array_merge($params, $optParams);
-    return $this->call('publish', array($params), "Google_Service_Blogger_Page");
+    return $this->call('publish', array($params), "Appointments_Google_Service_Blogger_Page");
   }
 
   /**
@@ -1335,13 +1335,13 @@ class Google_Service_Blogger_Pages_Resource extends Google_Service_Resource
    * @param string $blogId The ID of the blog.
    * @param string $pageId The ID of the page.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Blogger_Page
+   * @return Appointments_Google_Service_Blogger_Page
    */
   public function revert($blogId, $pageId, $optParams = array())
   {
     $params = array('blogId' => $blogId, 'pageId' => $pageId);
     $params = array_merge($params, $optParams);
-    return $this->call('revert', array($params), "Google_Service_Blogger_Page");
+    return $this->call('revert', array($params), "Appointments_Google_Service_Blogger_Page");
   }
 
   /**
@@ -1349,20 +1349,20 @@ class Google_Service_Blogger_Pages_Resource extends Google_Service_Resource
    *
    * @param string $blogId The ID of the Blog.
    * @param string $pageId The ID of the Page.
-   * @param Google_Page $postBody
+   * @param Appointments_Google_Page $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param bool publish Whether a publish action should be performed when the
    * page is updated (default: false).
    * @opt_param bool revert Whether a revert action should be performed when the
    * page is updated (default: false).
-   * @return Google_Service_Blogger_Page
+   * @return Appointments_Google_Service_Blogger_Page
    */
-  public function update($blogId, $pageId, Google_Service_Blogger_Page $postBody, $optParams = array())
+  public function update($blogId, $pageId, Appointments_Google_Service_Blogger_Page $postBody, $optParams = array())
   {
     $params = array('blogId' => $blogId, 'pageId' => $pageId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Blogger_Page");
+    return $this->call('update', array($params), "Appointments_Google_Service_Blogger_Page");
   }
 }
 
@@ -1370,11 +1370,11 @@ class Google_Service_Blogger_Pages_Resource extends Google_Service_Resource
  * The "postUserInfos" collection of methods.
  * Typical usage is:
  *  <code>
- *   $bloggerService = new Google_Service_Blogger(...);
+ *   $bloggerService = new Appointments_Google_Service_Blogger(...);
  *   $postUserInfos = $bloggerService->postUserInfos;
  *  </code>
  */
-class Google_Service_Blogger_PostUserInfos_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Blogger_PostUserInfos_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1391,13 +1391,13 @@ class Google_Service_Blogger_PostUserInfos_Resource extends Google_Service_Resou
    *
    * @opt_param string maxComments Maximum number of comments to pull back on a
    * post.
-   * @return Google_Service_Blogger_PostUserInfo
+   * @return Appointments_Google_Service_Blogger_PostUserInfo
    */
   public function get($userId, $blogId, $postId, $optParams = array())
   {
     $params = array('userId' => $userId, 'blogId' => $blogId, 'postId' => $postId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Blogger_PostUserInfo");
+    return $this->call('get', array($params), "Appointments_Google_Service_Blogger_PostUserInfo");
   }
 
   /**
@@ -1425,13 +1425,13 @@ class Google_Service_Blogger_PostUserInfos_Resource extends Google_Service_Resou
    * @opt_param string status
    * @opt_param string view Access level with which to view the returned result.
    * Note that some fields require elevated access.
-   * @return Google_Service_Blogger_PostUserInfosList
+   * @return Appointments_Google_Service_Blogger_PostUserInfosList
    */
   public function listPostUserInfos($userId, $blogId, $optParams = array())
   {
     $params = array('userId' => $userId, 'blogId' => $blogId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Blogger_PostUserInfosList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Blogger_PostUserInfosList");
   }
 }
 
@@ -1439,11 +1439,11 @@ class Google_Service_Blogger_PostUserInfos_Resource extends Google_Service_Resou
  * The "posts" collection of methods.
  * Typical usage is:
  *  <code>
- *   $bloggerService = new Google_Service_Blogger(...);
+ *   $bloggerService = new Appointments_Google_Service_Blogger(...);
  *   $posts = $bloggerService->posts;
  *  </code>
  */
-class Google_Service_Blogger_Posts_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Blogger_Posts_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1476,13 +1476,13 @@ class Google_Service_Blogger_Posts_Resource extends Google_Service_Resource
    * post.
    * @opt_param string view Access level with which to view the returned result.
    * Note that some fields require elevated access.
-   * @return Google_Service_Blogger_Post
+   * @return Appointments_Google_Service_Blogger_Post
    */
   public function get($blogId, $postId, $optParams = array())
   {
     $params = array('blogId' => $blogId, 'postId' => $postId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Blogger_Post");
+    return $this->call('get', array($params), "Appointments_Google_Service_Blogger_Post");
   }
 
   /**
@@ -1496,20 +1496,20 @@ class Google_Service_Blogger_Posts_Resource extends Google_Service_Resource
    * post.
    * @opt_param string view Access level with which to view the returned result.
    * Note that some fields require elevated access.
-   * @return Google_Service_Blogger_Post
+   * @return Appointments_Google_Service_Blogger_Post
    */
   public function getByPath($blogId, $path, $optParams = array())
   {
     $params = array('blogId' => $blogId, 'path' => $path);
     $params = array_merge($params, $optParams);
-    return $this->call('getByPath', array($params), "Google_Service_Blogger_Post");
+    return $this->call('getByPath', array($params), "Appointments_Google_Service_Blogger_Post");
   }
 
   /**
    * Add a post. (posts.insert)
    *
    * @param string $blogId ID of the blog to add the post to.
-   * @param Google_Post $postBody
+   * @param Appointments_Google_Post $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param bool fetchBody Whether the body content of the post is included
@@ -1518,13 +1518,13 @@ class Google_Service_Blogger_Posts_Resource extends Google_Service_Resource
    * included in the returned result (default: false).
    * @opt_param bool isDraft Whether to create the post as a draft (default:
    * false).
-   * @return Google_Service_Blogger_Post
+   * @return Appointments_Google_Service_Blogger_Post
    */
-  public function insert($blogId, Google_Service_Blogger_Post $postBody, $optParams = array())
+  public function insert($blogId, Appointments_Google_Service_Blogger_Post $postBody, $optParams = array())
   {
     $params = array('blogId' => $blogId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Blogger_Post");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Blogger_Post");
   }
 
   /**
@@ -1549,13 +1549,13 @@ class Google_Service_Blogger_Posts_Resource extends Google_Service_Resource
    * @opt_param string status Statuses to include in the results.
    * @opt_param string view Access level with which to view the returned result.
    * Note that some fields require escalated access.
-   * @return Google_Service_Blogger_PostList
+   * @return Appointments_Google_Service_Blogger_PostList
    */
   public function listPosts($blogId, $optParams = array())
   {
     $params = array('blogId' => $blogId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Blogger_PostList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Blogger_PostList");
   }
 
   /**
@@ -1563,7 +1563,7 @@ class Google_Service_Blogger_Posts_Resource extends Google_Service_Resource
    *
    * @param string $blogId The ID of the Blog.
    * @param string $postId The ID of the Post.
-   * @param Google_Post $postBody
+   * @param Appointments_Google_Post $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param bool fetchBody Whether the body content of the post is included
@@ -1576,13 +1576,13 @@ class Google_Service_Blogger_Posts_Resource extends Google_Service_Resource
    * post is updated (default: false).
    * @opt_param bool revert Whether a revert action should be performed when the
    * post is updated (default: false).
-   * @return Google_Service_Blogger_Post
+   * @return Appointments_Google_Service_Blogger_Post
    */
-  public function patch($blogId, $postId, Google_Service_Blogger_Post $postBody, $optParams = array())
+  public function patch($blogId, $postId, Appointments_Google_Service_Blogger_Post $postBody, $optParams = array())
   {
     $params = array('blogId' => $blogId, 'postId' => $postId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Blogger_Post");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Blogger_Post");
   }
 
   /**
@@ -1598,13 +1598,13 @@ class Google_Service_Blogger_Posts_Resource extends Google_Service_Resource
    * either published at the a previously saved schedule date (if present), or the
    * current time. If a future date is given, the post will be scheduled to be
    * published.
-   * @return Google_Service_Blogger_Post
+   * @return Appointments_Google_Service_Blogger_Post
    */
   public function publish($blogId, $postId, $optParams = array())
   {
     $params = array('blogId' => $blogId, 'postId' => $postId);
     $params = array_merge($params, $optParams);
-    return $this->call('publish', array($params), "Google_Service_Blogger_Post");
+    return $this->call('publish', array($params), "Appointments_Google_Service_Blogger_Post");
   }
 
   /**
@@ -1613,13 +1613,13 @@ class Google_Service_Blogger_Posts_Resource extends Google_Service_Resource
    * @param string $blogId The ID of the Blog.
    * @param string $postId The ID of the Post.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Blogger_Post
+   * @return Appointments_Google_Service_Blogger_Post
    */
   public function revert($blogId, $postId, $optParams = array())
   {
     $params = array('blogId' => $blogId, 'postId' => $postId);
     $params = array_merge($params, $optParams);
-    return $this->call('revert', array($params), "Google_Service_Blogger_Post");
+    return $this->call('revert', array($params), "Appointments_Google_Service_Blogger_Post");
   }
 
   /**
@@ -1633,13 +1633,13 @@ class Google_Service_Blogger_Posts_Resource extends Google_Service_Resource
    * (default: true). This should be set to false when the post bodies are not
    * required, to help minimize traffic.
    * @opt_param string orderBy Sort search results
-   * @return Google_Service_Blogger_PostList
+   * @return Appointments_Google_Service_Blogger_PostList
    */
   public function search($blogId, $q, $optParams = array())
   {
     $params = array('blogId' => $blogId, 'q' => $q);
     $params = array_merge($params, $optParams);
-    return $this->call('search', array($params), "Google_Service_Blogger_PostList");
+    return $this->call('search', array($params), "Appointments_Google_Service_Blogger_PostList");
   }
 
   /**
@@ -1647,7 +1647,7 @@ class Google_Service_Blogger_Posts_Resource extends Google_Service_Resource
    *
    * @param string $blogId The ID of the Blog.
    * @param string $postId The ID of the Post.
-   * @param Google_Post $postBody
+   * @param Appointments_Google_Post $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param bool fetchBody Whether the body content of the post is included
@@ -1660,13 +1660,13 @@ class Google_Service_Blogger_Posts_Resource extends Google_Service_Resource
    * post is updated (default: false).
    * @opt_param bool revert Whether a revert action should be performed when the
    * post is updated (default: false).
-   * @return Google_Service_Blogger_Post
+   * @return Appointments_Google_Service_Blogger_Post
    */
-  public function update($blogId, $postId, Google_Service_Blogger_Post $postBody, $optParams = array())
+  public function update($blogId, $postId, Appointments_Google_Service_Blogger_Post $postBody, $optParams = array())
   {
     $params = array('blogId' => $blogId, 'postId' => $postId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Blogger_Post");
+    return $this->call('update', array($params), "Appointments_Google_Service_Blogger_Post");
   }
 }
 
@@ -1674,11 +1674,11 @@ class Google_Service_Blogger_Posts_Resource extends Google_Service_Resource
  * The "users" collection of methods.
  * Typical usage is:
  *  <code>
- *   $bloggerService = new Google_Service_Blogger(...);
+ *   $bloggerService = new Appointments_Google_Service_Blogger(...);
  *   $users = $bloggerService->users;
  *  </code>
  */
-class Google_Service_Blogger_Users_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Blogger_Users_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1686,20 +1686,20 @@ class Google_Service_Blogger_Users_Resource extends Google_Service_Resource
    *
    * @param string $userId The ID of the user to get.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Blogger_User
+   * @return Appointments_Google_Service_Blogger_User
    */
   public function get($userId, $optParams = array())
   {
     $params = array('userId' => $userId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Blogger_User");
+    return $this->call('get', array($params), "Appointments_Google_Service_Blogger_User");
   }
 }
 
 
 
 
-class Google_Service_Blogger_Blog extends Google_Model
+class Appointments_Google_Service_Blogger_Blog extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1707,12 +1707,12 @@ class Google_Service_Blogger_Blog extends Google_Model
   public $description;
   public $id;
   public $kind;
-  protected $localeType = 'Google_Service_Blogger_BlogLocale';
+  protected $localeType = 'Appointments_Google_Service_Blogger_BlogLocale';
   protected $localeDataType = '';
   public $name;
-  protected $pagesType = 'Google_Service_Blogger_BlogPages';
+  protected $pagesType = 'Appointments_Google_Service_Blogger_BlogPages';
   protected $pagesDataType = '';
-  protected $postsType = 'Google_Service_Blogger_BlogPosts';
+  protected $postsType = 'Appointments_Google_Service_Blogger_BlogPosts';
   protected $postsDataType = '';
   public $published;
   public $selfLink;
@@ -1753,7 +1753,7 @@ class Google_Service_Blogger_Blog extends Google_Model
   {
     return $this->kind;
   }
-  public function setLocale(Google_Service_Blogger_BlogLocale $locale)
+  public function setLocale(Appointments_Google_Service_Blogger_BlogLocale $locale)
   {
     $this->locale = $locale;
   }
@@ -1769,7 +1769,7 @@ class Google_Service_Blogger_Blog extends Google_Model
   {
     return $this->name;
   }
-  public function setPages(Google_Service_Blogger_BlogPages $pages)
+  public function setPages(Appointments_Google_Service_Blogger_BlogPages $pages)
   {
     $this->pages = $pages;
   }
@@ -1777,7 +1777,7 @@ class Google_Service_Blogger_Blog extends Google_Model
   {
     return $this->pages;
   }
-  public function setPosts(Google_Service_Blogger_BlogPosts $posts)
+  public function setPosts(Appointments_Google_Service_Blogger_BlogPosts $posts)
   {
     $this->posts = $posts;
   }
@@ -1827,14 +1827,14 @@ class Google_Service_Blogger_Blog extends Google_Model
   }
 }
 
-class Google_Service_Blogger_BlogList extends Google_Collection
+class Appointments_Google_Service_Blogger_BlogList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $blogUserInfosType = 'Google_Service_Blogger_BlogUserInfo';
+  protected $blogUserInfosType = 'Appointments_Google_Service_Blogger_BlogUserInfo';
   protected $blogUserInfosDataType = 'array';
-  protected $itemsType = 'Google_Service_Blogger_Blog';
+  protected $itemsType = 'Appointments_Google_Service_Blogger_Blog';
   protected $itemsDataType = 'array';
   public $kind;
 
@@ -1865,7 +1865,7 @@ class Google_Service_Blogger_BlogList extends Google_Collection
   }
 }
 
-class Google_Service_Blogger_BlogLocale extends Google_Model
+class Appointments_Google_Service_Blogger_BlogLocale extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1900,7 +1900,7 @@ class Google_Service_Blogger_BlogLocale extends Google_Model
   }
 }
 
-class Google_Service_Blogger_BlogPages extends Google_Model
+class Appointments_Google_Service_Blogger_BlogPages extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1926,7 +1926,7 @@ class Google_Service_Blogger_BlogPages extends Google_Model
   }
 }
 
-class Google_Service_Blogger_BlogPerUserInfo extends Google_Model
+class Appointments_Google_Service_Blogger_BlogPerUserInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1988,12 +1988,12 @@ class Google_Service_Blogger_BlogPerUserInfo extends Google_Model
   }
 }
 
-class Google_Service_Blogger_BlogPosts extends Google_Collection
+class Appointments_Google_Service_Blogger_BlogPosts extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_Blogger_Post';
+  protected $itemsType = 'Appointments_Google_Service_Blogger_Post';
   protected $itemsDataType = 'array';
   public $selfLink;
   public $totalItems;
@@ -2025,19 +2025,19 @@ class Google_Service_Blogger_BlogPosts extends Google_Collection
   }
 }
 
-class Google_Service_Blogger_BlogUserInfo extends Google_Model
+class Appointments_Google_Service_Blogger_BlogUserInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
         "blogUserInfo" => "blog_user_info",
   );
-  protected $blogType = 'Google_Service_Blogger_Blog';
+  protected $blogType = 'Appointments_Google_Service_Blogger_Blog';
   protected $blogDataType = '';
-  protected $blogUserInfoType = 'Google_Service_Blogger_BlogPerUserInfo';
+  protected $blogUserInfoType = 'Appointments_Google_Service_Blogger_BlogPerUserInfo';
   protected $blogUserInfoDataType = '';
   public $kind;
 
 
-  public function setBlog(Google_Service_Blogger_Blog $blog)
+  public function setBlog(Appointments_Google_Service_Blogger_Blog $blog)
   {
     $this->blog = $blog;
   }
@@ -2045,7 +2045,7 @@ class Google_Service_Blogger_BlogUserInfo extends Google_Model
   {
     return $this->blog;
   }
-  public function setBlogUserInfo(Google_Service_Blogger_BlogPerUserInfo $blogUserInfo)
+  public function setBlogUserInfo(Appointments_Google_Service_Blogger_BlogPerUserInfo $blogUserInfo)
   {
     $this->blogUserInfo = $blogUserInfo;
   }
@@ -2063,20 +2063,20 @@ class Google_Service_Blogger_BlogUserInfo extends Google_Model
   }
 }
 
-class Google_Service_Blogger_Comment extends Google_Model
+class Appointments_Google_Service_Blogger_Comment extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $authorType = 'Google_Service_Blogger_CommentAuthor';
+  protected $authorType = 'Appointments_Google_Service_Blogger_CommentAuthor';
   protected $authorDataType = '';
-  protected $blogType = 'Google_Service_Blogger_CommentBlog';
+  protected $blogType = 'Appointments_Google_Service_Blogger_CommentBlog';
   protected $blogDataType = '';
   public $content;
   public $id;
-  protected $inReplyToType = 'Google_Service_Blogger_CommentInReplyTo';
+  protected $inReplyToType = 'Appointments_Google_Service_Blogger_CommentInReplyTo';
   protected $inReplyToDataType = '';
   public $kind;
-  protected $postType = 'Google_Service_Blogger_CommentPost';
+  protected $postType = 'Appointments_Google_Service_Blogger_CommentPost';
   protected $postDataType = '';
   public $published;
   public $selfLink;
@@ -2084,7 +2084,7 @@ class Google_Service_Blogger_Comment extends Google_Model
   public $updated;
 
 
-  public function setAuthor(Google_Service_Blogger_CommentAuthor $author)
+  public function setAuthor(Appointments_Google_Service_Blogger_CommentAuthor $author)
   {
     $this->author = $author;
   }
@@ -2092,7 +2092,7 @@ class Google_Service_Blogger_Comment extends Google_Model
   {
     return $this->author;
   }
-  public function setBlog(Google_Service_Blogger_CommentBlog $blog)
+  public function setBlog(Appointments_Google_Service_Blogger_CommentBlog $blog)
   {
     $this->blog = $blog;
   }
@@ -2116,7 +2116,7 @@ class Google_Service_Blogger_Comment extends Google_Model
   {
     return $this->id;
   }
-  public function setInReplyTo(Google_Service_Blogger_CommentInReplyTo $inReplyTo)
+  public function setInReplyTo(Appointments_Google_Service_Blogger_CommentInReplyTo $inReplyTo)
   {
     $this->inReplyTo = $inReplyTo;
   }
@@ -2132,7 +2132,7 @@ class Google_Service_Blogger_Comment extends Google_Model
   {
     return $this->kind;
   }
-  public function setPost(Google_Service_Blogger_CommentPost $post)
+  public function setPost(Appointments_Google_Service_Blogger_CommentPost $post)
   {
     $this->post = $post;
   }
@@ -2174,13 +2174,13 @@ class Google_Service_Blogger_Comment extends Google_Model
   }
 }
 
-class Google_Service_Blogger_CommentAuthor extends Google_Model
+class Appointments_Google_Service_Blogger_CommentAuthor extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $displayName;
   public $id;
-  protected $imageType = 'Google_Service_Blogger_CommentAuthorImage';
+  protected $imageType = 'Appointments_Google_Service_Blogger_CommentAuthorImage';
   protected $imageDataType = '';
   public $url;
 
@@ -2201,7 +2201,7 @@ class Google_Service_Blogger_CommentAuthor extends Google_Model
   {
     return $this->id;
   }
-  public function setImage(Google_Service_Blogger_CommentAuthorImage $image)
+  public function setImage(Appointments_Google_Service_Blogger_CommentAuthorImage $image)
   {
     $this->image = $image;
   }
@@ -2219,7 +2219,7 @@ class Google_Service_Blogger_CommentAuthor extends Google_Model
   }
 }
 
-class Google_Service_Blogger_CommentAuthorImage extends Google_Model
+class Appointments_Google_Service_Blogger_CommentAuthorImage extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2236,7 +2236,7 @@ class Google_Service_Blogger_CommentAuthorImage extends Google_Model
   }
 }
 
-class Google_Service_Blogger_CommentBlog extends Google_Model
+class Appointments_Google_Service_Blogger_CommentBlog extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2253,7 +2253,7 @@ class Google_Service_Blogger_CommentBlog extends Google_Model
   }
 }
 
-class Google_Service_Blogger_CommentInReplyTo extends Google_Model
+class Appointments_Google_Service_Blogger_CommentInReplyTo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2270,13 +2270,13 @@ class Google_Service_Blogger_CommentInReplyTo extends Google_Model
   }
 }
 
-class Google_Service_Blogger_CommentList extends Google_Collection
+class Appointments_Google_Service_Blogger_CommentList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $etag;
-  protected $itemsType = 'Google_Service_Blogger_Comment';
+  protected $itemsType = 'Appointments_Google_Service_Blogger_Comment';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -2325,7 +2325,7 @@ class Google_Service_Blogger_CommentList extends Google_Collection
   }
 }
 
-class Google_Service_Blogger_CommentPost extends Google_Model
+class Appointments_Google_Service_Blogger_CommentPost extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2342,13 +2342,13 @@ class Google_Service_Blogger_CommentPost extends Google_Model
   }
 }
 
-class Google_Service_Blogger_Page extends Google_Model
+class Appointments_Google_Service_Blogger_Page extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $authorType = 'Google_Service_Blogger_PageAuthor';
+  protected $authorType = 'Appointments_Google_Service_Blogger_PageAuthor';
   protected $authorDataType = '';
-  protected $blogType = 'Google_Service_Blogger_PageBlog';
+  protected $blogType = 'Appointments_Google_Service_Blogger_PageBlog';
   protected $blogDataType = '';
   public $content;
   public $etag;
@@ -2362,7 +2362,7 @@ class Google_Service_Blogger_Page extends Google_Model
   public $url;
 
 
-  public function setAuthor(Google_Service_Blogger_PageAuthor $author)
+  public function setAuthor(Appointments_Google_Service_Blogger_PageAuthor $author)
   {
     $this->author = $author;
   }
@@ -2370,7 +2370,7 @@ class Google_Service_Blogger_Page extends Google_Model
   {
     return $this->author;
   }
-  public function setBlog(Google_Service_Blogger_PageBlog $blog)
+  public function setBlog(Appointments_Google_Service_Blogger_PageBlog $blog)
   {
     $this->blog = $blog;
   }
@@ -2460,13 +2460,13 @@ class Google_Service_Blogger_Page extends Google_Model
   }
 }
 
-class Google_Service_Blogger_PageAuthor extends Google_Model
+class Appointments_Google_Service_Blogger_PageAuthor extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $displayName;
   public $id;
-  protected $imageType = 'Google_Service_Blogger_PageAuthorImage';
+  protected $imageType = 'Appointments_Google_Service_Blogger_PageAuthorImage';
   protected $imageDataType = '';
   public $url;
 
@@ -2487,7 +2487,7 @@ class Google_Service_Blogger_PageAuthor extends Google_Model
   {
     return $this->id;
   }
-  public function setImage(Google_Service_Blogger_PageAuthorImage $image)
+  public function setImage(Appointments_Google_Service_Blogger_PageAuthorImage $image)
   {
     $this->image = $image;
   }
@@ -2505,7 +2505,7 @@ class Google_Service_Blogger_PageAuthor extends Google_Model
   }
 }
 
-class Google_Service_Blogger_PageAuthorImage extends Google_Model
+class Appointments_Google_Service_Blogger_PageAuthorImage extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2522,7 +2522,7 @@ class Google_Service_Blogger_PageAuthorImage extends Google_Model
   }
 }
 
-class Google_Service_Blogger_PageBlog extends Google_Model
+class Appointments_Google_Service_Blogger_PageBlog extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2539,13 +2539,13 @@ class Google_Service_Blogger_PageBlog extends Google_Model
   }
 }
 
-class Google_Service_Blogger_PageList extends Google_Collection
+class Appointments_Google_Service_Blogger_PageList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $etag;
-  protected $itemsType = 'Google_Service_Blogger_Page';
+  protected $itemsType = 'Appointments_Google_Service_Blogger_Page';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -2585,13 +2585,13 @@ class Google_Service_Blogger_PageList extends Google_Collection
   }
 }
 
-class Google_Service_Blogger_Pageviews extends Google_Collection
+class Appointments_Google_Service_Blogger_Pageviews extends Appointments_Google_Collection
 {
   protected $collection_key = 'counts';
   protected $internal_gapi_mappings = array(
   );
   public $blogId;
-  protected $countsType = 'Google_Service_Blogger_PageviewsCounts';
+  protected $countsType = 'Appointments_Google_Service_Blogger_PageviewsCounts';
   protected $countsDataType = 'array';
   public $kind;
 
@@ -2622,7 +2622,7 @@ class Google_Service_Blogger_Pageviews extends Google_Collection
   }
 }
 
-class Google_Service_Blogger_PageviewsCounts extends Google_Model
+class Appointments_Google_Service_Blogger_PageviewsCounts extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2648,28 +2648,28 @@ class Google_Service_Blogger_PageviewsCounts extends Google_Model
   }
 }
 
-class Google_Service_Blogger_Post extends Google_Collection
+class Appointments_Google_Service_Blogger_Post extends Appointments_Google_Collection
 {
   protected $collection_key = 'labels';
   protected $internal_gapi_mappings = array(
   );
-  protected $authorType = 'Google_Service_Blogger_PostAuthor';
+  protected $authorType = 'Appointments_Google_Service_Blogger_PostAuthor';
   protected $authorDataType = '';
-  protected $blogType = 'Google_Service_Blogger_PostBlog';
+  protected $blogType = 'Appointments_Google_Service_Blogger_PostBlog';
   protected $blogDataType = '';
   public $content;
   public $customMetaData;
   public $etag;
   public $id;
-  protected $imagesType = 'Google_Service_Blogger_PostImages';
+  protected $imagesType = 'Appointments_Google_Service_Blogger_PostImages';
   protected $imagesDataType = 'array';
   public $kind;
   public $labels;
-  protected $locationType = 'Google_Service_Blogger_PostLocation';
+  protected $locationType = 'Appointments_Google_Service_Blogger_PostLocation';
   protected $locationDataType = '';
   public $published;
   public $readerComments;
-  protected $repliesType = 'Google_Service_Blogger_PostReplies';
+  protected $repliesType = 'Appointments_Google_Service_Blogger_PostReplies';
   protected $repliesDataType = '';
   public $selfLink;
   public $status;
@@ -2679,7 +2679,7 @@ class Google_Service_Blogger_Post extends Google_Collection
   public $url;
 
 
-  public function setAuthor(Google_Service_Blogger_PostAuthor $author)
+  public function setAuthor(Appointments_Google_Service_Blogger_PostAuthor $author)
   {
     $this->author = $author;
   }
@@ -2687,7 +2687,7 @@ class Google_Service_Blogger_Post extends Google_Collection
   {
     return $this->author;
   }
-  public function setBlog(Google_Service_Blogger_PostBlog $blog)
+  public function setBlog(Appointments_Google_Service_Blogger_PostBlog $blog)
   {
     $this->blog = $blog;
   }
@@ -2751,7 +2751,7 @@ class Google_Service_Blogger_Post extends Google_Collection
   {
     return $this->labels;
   }
-  public function setLocation(Google_Service_Blogger_PostLocation $location)
+  public function setLocation(Appointments_Google_Service_Blogger_PostLocation $location)
   {
     $this->location = $location;
   }
@@ -2775,7 +2775,7 @@ class Google_Service_Blogger_Post extends Google_Collection
   {
     return $this->readerComments;
   }
-  public function setReplies(Google_Service_Blogger_PostReplies $replies)
+  public function setReplies(Appointments_Google_Service_Blogger_PostReplies $replies)
   {
     $this->replies = $replies;
   }
@@ -2833,13 +2833,13 @@ class Google_Service_Blogger_Post extends Google_Collection
   }
 }
 
-class Google_Service_Blogger_PostAuthor extends Google_Model
+class Appointments_Google_Service_Blogger_PostAuthor extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $displayName;
   public $id;
-  protected $imageType = 'Google_Service_Blogger_PostAuthorImage';
+  protected $imageType = 'Appointments_Google_Service_Blogger_PostAuthorImage';
   protected $imageDataType = '';
   public $url;
 
@@ -2860,7 +2860,7 @@ class Google_Service_Blogger_PostAuthor extends Google_Model
   {
     return $this->id;
   }
-  public function setImage(Google_Service_Blogger_PostAuthorImage $image)
+  public function setImage(Appointments_Google_Service_Blogger_PostAuthorImage $image)
   {
     $this->image = $image;
   }
@@ -2878,7 +2878,7 @@ class Google_Service_Blogger_PostAuthor extends Google_Model
   }
 }
 
-class Google_Service_Blogger_PostAuthorImage extends Google_Model
+class Appointments_Google_Service_Blogger_PostAuthorImage extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2895,7 +2895,7 @@ class Google_Service_Blogger_PostAuthorImage extends Google_Model
   }
 }
 
-class Google_Service_Blogger_PostBlog extends Google_Model
+class Appointments_Google_Service_Blogger_PostBlog extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2912,7 +2912,7 @@ class Google_Service_Blogger_PostBlog extends Google_Model
   }
 }
 
-class Google_Service_Blogger_PostImages extends Google_Model
+class Appointments_Google_Service_Blogger_PostImages extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2929,13 +2929,13 @@ class Google_Service_Blogger_PostImages extends Google_Model
   }
 }
 
-class Google_Service_Blogger_PostList extends Google_Collection
+class Appointments_Google_Service_Blogger_PostList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $etag;
-  protected $itemsType = 'Google_Service_Blogger_Post';
+  protected $itemsType = 'Appointments_Google_Service_Blogger_Post';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -2975,7 +2975,7 @@ class Google_Service_Blogger_PostList extends Google_Collection
   }
 }
 
-class Google_Service_Blogger_PostLocation extends Google_Model
+class Appointments_Google_Service_Blogger_PostLocation extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3019,7 +3019,7 @@ class Google_Service_Blogger_PostLocation extends Google_Model
   }
 }
 
-class Google_Service_Blogger_PostPerUserInfo extends Google_Model
+class Appointments_Google_Service_Blogger_PostPerUserInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3072,12 +3072,12 @@ class Google_Service_Blogger_PostPerUserInfo extends Google_Model
   }
 }
 
-class Google_Service_Blogger_PostReplies extends Google_Collection
+class Appointments_Google_Service_Blogger_PostReplies extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_Blogger_Comment';
+  protected $itemsType = 'Appointments_Google_Service_Blogger_Comment';
   protected $itemsDataType = 'array';
   public $selfLink;
   public $totalItems;
@@ -3109,15 +3109,15 @@ class Google_Service_Blogger_PostReplies extends Google_Collection
   }
 }
 
-class Google_Service_Blogger_PostUserInfo extends Google_Model
+class Appointments_Google_Service_Blogger_PostUserInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
         "postUserInfo" => "post_user_info",
   );
   public $kind;
-  protected $postType = 'Google_Service_Blogger_Post';
+  protected $postType = 'Appointments_Google_Service_Blogger_Post';
   protected $postDataType = '';
-  protected $postUserInfoType = 'Google_Service_Blogger_PostPerUserInfo';
+  protected $postUserInfoType = 'Appointments_Google_Service_Blogger_PostPerUserInfo';
   protected $postUserInfoDataType = '';
 
 
@@ -3129,7 +3129,7 @@ class Google_Service_Blogger_PostUserInfo extends Google_Model
   {
     return $this->kind;
   }
-  public function setPost(Google_Service_Blogger_Post $post)
+  public function setPost(Appointments_Google_Service_Blogger_Post $post)
   {
     $this->post = $post;
   }
@@ -3137,7 +3137,7 @@ class Google_Service_Blogger_PostUserInfo extends Google_Model
   {
     return $this->post;
   }
-  public function setPostUserInfo(Google_Service_Blogger_PostPerUserInfo $postUserInfo)
+  public function setPostUserInfo(Appointments_Google_Service_Blogger_PostPerUserInfo $postUserInfo)
   {
     $this->postUserInfo = $postUserInfo;
   }
@@ -3147,12 +3147,12 @@ class Google_Service_Blogger_PostUserInfo extends Google_Model
   }
 }
 
-class Google_Service_Blogger_PostUserInfosList extends Google_Collection
+class Appointments_Google_Service_Blogger_PostUserInfosList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_Blogger_PostUserInfo';
+  protected $itemsType = 'Appointments_Google_Service_Blogger_PostUserInfo';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -3184,18 +3184,18 @@ class Google_Service_Blogger_PostUserInfosList extends Google_Collection
   }
 }
 
-class Google_Service_Blogger_User extends Google_Model
+class Appointments_Google_Service_Blogger_User extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $about;
-  protected $blogsType = 'Google_Service_Blogger_UserBlogs';
+  protected $blogsType = 'Appointments_Google_Service_Blogger_UserBlogs';
   protected $blogsDataType = '';
   public $created;
   public $displayName;
   public $id;
   public $kind;
-  protected $localeType = 'Google_Service_Blogger_UserLocale';
+  protected $localeType = 'Appointments_Google_Service_Blogger_UserLocale';
   protected $localeDataType = '';
   public $selfLink;
   public $url;
@@ -3209,7 +3209,7 @@ class Google_Service_Blogger_User extends Google_Model
   {
     return $this->about;
   }
-  public function setBlogs(Google_Service_Blogger_UserBlogs $blogs)
+  public function setBlogs(Appointments_Google_Service_Blogger_UserBlogs $blogs)
   {
     $this->blogs = $blogs;
   }
@@ -3249,7 +3249,7 @@ class Google_Service_Blogger_User extends Google_Model
   {
     return $this->kind;
   }
-  public function setLocale(Google_Service_Blogger_UserLocale $locale)
+  public function setLocale(Appointments_Google_Service_Blogger_UserLocale $locale)
   {
     $this->locale = $locale;
   }
@@ -3275,7 +3275,7 @@ class Google_Service_Blogger_User extends Google_Model
   }
 }
 
-class Google_Service_Blogger_UserBlogs extends Google_Model
+class Appointments_Google_Service_Blogger_UserBlogs extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3292,7 +3292,7 @@ class Google_Service_Blogger_UserBlogs extends Google_Model
   }
 }
 
-class Google_Service_Blogger_UserLocale extends Google_Model
+class Appointments_Google_Service_Blogger_UserLocale extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );

@@ -26,7 +26,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Urlshortener extends Google_Service
+class Appointments_Google_Service_Urlshortener extends Appointments_Google_Service
 {
   /** Manage your goo.gl short URLs. */
   const URLSHORTENER =
@@ -38,9 +38,9 @@ class Google_Service_Urlshortener extends Google_Service
   /**
    * Constructs the internal representation of the Urlshortener service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -48,7 +48,7 @@ class Google_Service_Urlshortener extends Google_Service
     $this->version = 'v1';
     $this->serviceName = 'urlshortener';
 
-    $this->url = new Google_Service_Urlshortener_Url_Resource(
+    $this->url = new Appointments_Google_Service_Urlshortener_Url_Resource(
         $this,
         $this->serviceName,
         'url',
@@ -97,11 +97,11 @@ class Google_Service_Urlshortener extends Google_Service
  * The "url" collection of methods.
  * Typical usage is:
  *  <code>
- *   $urlshortenerService = new Google_Service_Urlshortener(...);
+ *   $urlshortenerService = new Appointments_Google_Service_Urlshortener(...);
  *   $url = $urlshortenerService->url;
  *  </code>
  */
-class Google_Service_Urlshortener_Url_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Urlshortener_Url_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -111,27 +111,27 @@ class Google_Service_Urlshortener_Url_Resource extends Google_Service_Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param string projection Additional information to return.
-   * @return Google_Service_Urlshortener_Url
+   * @return Appointments_Google_Service_Urlshortener_Url
    */
   public function get($shortUrl, $optParams = array())
   {
     $params = array('shortUrl' => $shortUrl);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Urlshortener_Url");
+    return $this->call('get', array($params), "Appointments_Google_Service_Urlshortener_Url");
   }
 
   /**
    * Creates a new short URL. (url.insert)
    *
-   * @param Google_Url $postBody
+   * @param Appointments_Google_Url $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Urlshortener_Url
+   * @return Appointments_Google_Service_Urlshortener_Url
    */
-  public function insert(Google_Service_Urlshortener_Url $postBody, $optParams = array())
+  public function insert(Appointments_Google_Service_Urlshortener_Url $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Urlshortener_Url");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Urlshortener_Url");
   }
 
   /**
@@ -142,32 +142,32 @@ class Google_Service_Urlshortener_Url_Resource extends Google_Service_Resource
    * @opt_param string projection Additional information to return.
    * @opt_param string start-token Token for requesting successive pages of
    * results.
-   * @return Google_Service_Urlshortener_UrlHistory
+   * @return Appointments_Google_Service_Urlshortener_UrlHistory
    */
   public function listUrl($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Urlshortener_UrlHistory");
+    return $this->call('list', array($params), "Appointments_Google_Service_Urlshortener_UrlHistory");
   }
 }
 
 
 
 
-class Google_Service_Urlshortener_AnalyticsSnapshot extends Google_Collection
+class Appointments_Google_Service_Urlshortener_AnalyticsSnapshot extends Appointments_Google_Collection
 {
   protected $collection_key = 'referrers';
   protected $internal_gapi_mappings = array(
   );
-  protected $browsersType = 'Google_Service_Urlshortener_StringCount';
+  protected $browsersType = 'Appointments_Google_Service_Urlshortener_StringCount';
   protected $browsersDataType = 'array';
-  protected $countriesType = 'Google_Service_Urlshortener_StringCount';
+  protected $countriesType = 'Appointments_Google_Service_Urlshortener_StringCount';
   protected $countriesDataType = 'array';
   public $longUrlClicks;
-  protected $platformsType = 'Google_Service_Urlshortener_StringCount';
+  protected $platformsType = 'Appointments_Google_Service_Urlshortener_StringCount';
   protected $platformsDataType = 'array';
-  protected $referrersType = 'Google_Service_Urlshortener_StringCount';
+  protected $referrersType = 'Appointments_Google_Service_Urlshortener_StringCount';
   protected $referrersDataType = 'array';
   public $shortUrlClicks;
 
@@ -222,23 +222,23 @@ class Google_Service_Urlshortener_AnalyticsSnapshot extends Google_Collection
   }
 }
 
-class Google_Service_Urlshortener_AnalyticsSummary extends Google_Model
+class Appointments_Google_Service_Urlshortener_AnalyticsSummary extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $allTimeType = 'Google_Service_Urlshortener_AnalyticsSnapshot';
+  protected $allTimeType = 'Appointments_Google_Service_Urlshortener_AnalyticsSnapshot';
   protected $allTimeDataType = '';
-  protected $dayType = 'Google_Service_Urlshortener_AnalyticsSnapshot';
+  protected $dayType = 'Appointments_Google_Service_Urlshortener_AnalyticsSnapshot';
   protected $dayDataType = '';
-  protected $monthType = 'Google_Service_Urlshortener_AnalyticsSnapshot';
+  protected $monthType = 'Appointments_Google_Service_Urlshortener_AnalyticsSnapshot';
   protected $monthDataType = '';
-  protected $twoHoursType = 'Google_Service_Urlshortener_AnalyticsSnapshot';
+  protected $twoHoursType = 'Appointments_Google_Service_Urlshortener_AnalyticsSnapshot';
   protected $twoHoursDataType = '';
-  protected $weekType = 'Google_Service_Urlshortener_AnalyticsSnapshot';
+  protected $weekType = 'Appointments_Google_Service_Urlshortener_AnalyticsSnapshot';
   protected $weekDataType = '';
 
 
-  public function setAllTime(Google_Service_Urlshortener_AnalyticsSnapshot $allTime)
+  public function setAllTime(Appointments_Google_Service_Urlshortener_AnalyticsSnapshot $allTime)
   {
     $this->allTime = $allTime;
   }
@@ -246,7 +246,7 @@ class Google_Service_Urlshortener_AnalyticsSummary extends Google_Model
   {
     return $this->allTime;
   }
-  public function setDay(Google_Service_Urlshortener_AnalyticsSnapshot $day)
+  public function setDay(Appointments_Google_Service_Urlshortener_AnalyticsSnapshot $day)
   {
     $this->day = $day;
   }
@@ -254,7 +254,7 @@ class Google_Service_Urlshortener_AnalyticsSummary extends Google_Model
   {
     return $this->day;
   }
-  public function setMonth(Google_Service_Urlshortener_AnalyticsSnapshot $month)
+  public function setMonth(Appointments_Google_Service_Urlshortener_AnalyticsSnapshot $month)
   {
     $this->month = $month;
   }
@@ -262,7 +262,7 @@ class Google_Service_Urlshortener_AnalyticsSummary extends Google_Model
   {
     return $this->month;
   }
-  public function setTwoHours(Google_Service_Urlshortener_AnalyticsSnapshot $twoHours)
+  public function setTwoHours(Appointments_Google_Service_Urlshortener_AnalyticsSnapshot $twoHours)
   {
     $this->twoHours = $twoHours;
   }
@@ -270,7 +270,7 @@ class Google_Service_Urlshortener_AnalyticsSummary extends Google_Model
   {
     return $this->twoHours;
   }
-  public function setWeek(Google_Service_Urlshortener_AnalyticsSnapshot $week)
+  public function setWeek(Appointments_Google_Service_Urlshortener_AnalyticsSnapshot $week)
   {
     $this->week = $week;
   }
@@ -280,7 +280,7 @@ class Google_Service_Urlshortener_AnalyticsSummary extends Google_Model
   }
 }
 
-class Google_Service_Urlshortener_StringCount extends Google_Model
+class Appointments_Google_Service_Urlshortener_StringCount extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -306,11 +306,11 @@ class Google_Service_Urlshortener_StringCount extends Google_Model
   }
 }
 
-class Google_Service_Urlshortener_Url extends Google_Model
+class Appointments_Google_Service_Urlshortener_Url extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $analyticsType = 'Google_Service_Urlshortener_AnalyticsSummary';
+  protected $analyticsType = 'Appointments_Google_Service_Urlshortener_AnalyticsSummary';
   protected $analyticsDataType = '';
   public $created;
   public $id;
@@ -319,7 +319,7 @@ class Google_Service_Urlshortener_Url extends Google_Model
   public $status;
 
 
-  public function setAnalytics(Google_Service_Urlshortener_AnalyticsSummary $analytics)
+  public function setAnalytics(Appointments_Google_Service_Urlshortener_AnalyticsSummary $analytics)
   {
     $this->analytics = $analytics;
   }
@@ -369,12 +369,12 @@ class Google_Service_Urlshortener_Url extends Google_Model
   }
 }
 
-class Google_Service_Urlshortener_UrlHistory extends Google_Collection
+class Appointments_Google_Service_Urlshortener_UrlHistory extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_Urlshortener_Url';
+  protected $itemsType = 'Appointments_Google_Service_Urlshortener_Url';
   protected $itemsDataType = 'array';
   public $itemsPerPage;
   public $kind;

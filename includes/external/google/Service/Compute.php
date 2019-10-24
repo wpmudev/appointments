@@ -26,7 +26,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Compute extends Google_Service
+class Appointments_Google_Service_Compute extends Appointments_Google_Service
 {
   /** View and manage your data across Google Cloud Platform services. */
   const CLOUD_PLATFORM =
@@ -88,9 +88,9 @@ class Google_Service_Compute extends Google_Service
   /**
    * Constructs the internal representation of the Compute service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -98,7 +98,7 @@ class Google_Service_Compute extends Google_Service
     $this->version = 'v1';
     $this->serviceName = 'compute';
 
-    $this->addresses = new Google_Service_Compute_Addresses_Resource(
+    $this->addresses = new Appointments_Google_Service_Compute_Addresses_Resource(
         $this,
         $this->serviceName,
         'addresses',
@@ -212,7 +212,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->autoscalers = new Google_Service_Compute_Autoscalers_Resource(
+    $this->autoscalers = new Appointments_Google_Service_Compute_Autoscalers_Resource(
         $this,
         $this->serviceName,
         'autoscalers',
@@ -365,7 +365,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->backendServices = new Google_Service_Compute_BackendServices_Resource(
+    $this->backendServices = new Appointments_Google_Service_Compute_BackendServices_Resource(
         $this,
         $this->serviceName,
         'backendServices',
@@ -482,7 +482,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->diskTypes = new Google_Service_Compute_DiskTypes_Resource(
+    $this->diskTypes = new Appointments_Google_Service_Compute_DiskTypes_Resource(
         $this,
         $this->serviceName,
         'diskTypes',
@@ -561,7 +561,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->disks = new Google_Service_Compute_Disks_Resource(
+    $this->disks = new Appointments_Google_Service_Compute_Disks_Resource(
         $this,
         $this->serviceName,
         'disks',
@@ -699,7 +699,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->firewalls = new Google_Service_Compute_Firewalls_Resource(
+    $this->firewalls = new Appointments_Google_Service_Compute_Firewalls_Resource(
         $this,
         $this->serviceName,
         'firewalls',
@@ -801,7 +801,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->forwardingRules = new Google_Service_Compute_ForwardingRules_Resource(
+    $this->forwardingRules = new Appointments_Google_Service_Compute_ForwardingRules_Resource(
         $this,
         $this->serviceName,
         'forwardingRules',
@@ -935,7 +935,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->globalAddresses = new Google_Service_Compute_GlobalAddresses_Resource(
+    $this->globalAddresses = new Appointments_Google_Service_Compute_GlobalAddresses_Resource(
         $this,
         $this->serviceName,
         'globalAddresses',
@@ -1007,7 +1007,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->globalForwardingRules = new Google_Service_Compute_GlobalForwardingRules_Resource(
+    $this->globalForwardingRules = new Appointments_Google_Service_Compute_GlobalForwardingRules_Resource(
         $this,
         $this->serviceName,
         'globalForwardingRules',
@@ -1094,7 +1094,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->globalOperations = new Google_Service_Compute_GlobalOperations_Resource(
+    $this->globalOperations = new Appointments_Google_Service_Compute_GlobalOperations_Resource(
         $this,
         $this->serviceName,
         'globalOperations',
@@ -1178,7 +1178,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->httpHealthChecks = new Google_Service_Compute_HttpHealthChecks_Resource(
+    $this->httpHealthChecks = new Appointments_Google_Service_Compute_HttpHealthChecks_Resource(
         $this,
         $this->serviceName,
         'httpHealthChecks',
@@ -1280,7 +1280,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->httpsHealthChecks = new Google_Service_Compute_HttpsHealthChecks_Resource(
+    $this->httpsHealthChecks = new Appointments_Google_Service_Compute_HttpsHealthChecks_Resource(
         $this,
         $this->serviceName,
         'httpsHealthChecks',
@@ -1382,7 +1382,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->images = new Google_Service_Compute_Images_Resource(
+    $this->images = new Appointments_Google_Service_Compute_Images_Resource(
         $this,
         $this->serviceName,
         'images',
@@ -1469,7 +1469,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->instanceGroupManagers = new Google_Service_Compute_InstanceGroupManagers_Resource(
+    $this->instanceGroupManagers = new Appointments_Google_Service_Compute_InstanceGroupManagers_Resource(
         $this,
         $this->serviceName,
         'instanceGroupManagers',
@@ -1728,7 +1728,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->instanceGroups = new Google_Service_Compute_InstanceGroups_Resource(
+    $this->instanceGroups = new Appointments_Google_Service_Compute_InstanceGroups_Resource(
         $this,
         $this->serviceName,
         'instanceGroups',
@@ -1934,7 +1934,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->instanceTemplates = new Google_Service_Compute_InstanceTemplates_Resource(
+    $this->instanceTemplates = new Appointments_Google_Service_Compute_InstanceTemplates_Resource(
         $this,
         $this->serviceName,
         'instanceTemplates',
@@ -2006,7 +2006,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->instances = new Google_Service_Compute_Instances_Resource(
+    $this->instances = new Appointments_Google_Service_Compute_Instances_Resource(
         $this,
         $this->serviceName,
         'instances',
@@ -2414,7 +2414,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->licenses = new Google_Service_Compute_Licenses_Resource(
+    $this->licenses = new Appointments_Google_Service_Compute_Licenses_Resource(
         $this,
         $this->serviceName,
         'licenses',
@@ -2439,7 +2439,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->machineTypes = new Google_Service_Compute_MachineTypes_Resource(
+    $this->machineTypes = new Appointments_Google_Service_Compute_MachineTypes_Resource(
         $this,
         $this->serviceName,
         'machineTypes',
@@ -2518,7 +2518,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->networks = new Google_Service_Compute_Networks_Resource(
+    $this->networks = new Appointments_Google_Service_Compute_Networks_Resource(
         $this,
         $this->serviceName,
         'networks',
@@ -2590,7 +2590,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->projects = new Google_Service_Compute_Projects_Resource(
+    $this->projects = new Appointments_Google_Service_Compute_Projects_Resource(
         $this,
         $this->serviceName,
         'projects',
@@ -2650,7 +2650,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->regionOperations = new Google_Service_Compute_RegionOperations_Resource(
+    $this->regionOperations = new Appointments_Google_Service_Compute_RegionOperations_Resource(
         $this,
         $this->serviceName,
         'regionOperations',
@@ -2727,7 +2727,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->regions = new Google_Service_Compute_Regions_Resource(
+    $this->regions = new Appointments_Google_Service_Compute_Regions_Resource(
         $this,
         $this->serviceName,
         'regions',
@@ -2774,7 +2774,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->routes = new Google_Service_Compute_Routes_Resource(
+    $this->routes = new Appointments_Google_Service_Compute_Routes_Resource(
         $this,
         $this->serviceName,
         'routes',
@@ -2846,7 +2846,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->snapshots = new Google_Service_Compute_Snapshots_Resource(
+    $this->snapshots = new Appointments_Google_Service_Compute_Snapshots_Resource(
         $this,
         $this->serviceName,
         'snapshots',
@@ -2908,7 +2908,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->sslCertificates = new Google_Service_Compute_SslCertificates_Resource(
+    $this->sslCertificates = new Appointments_Google_Service_Compute_SslCertificates_Resource(
         $this,
         $this->serviceName,
         'sslCertificates',
@@ -2980,7 +2980,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->subnetworks = new Google_Service_Compute_Subnetworks_Resource(
+    $this->subnetworks = new Appointments_Google_Service_Compute_Subnetworks_Resource(
         $this,
         $this->serviceName,
         'subnetworks',
@@ -3094,7 +3094,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->targetHttpProxies = new Google_Service_Compute_TargetHttpProxies_Resource(
+    $this->targetHttpProxies = new Appointments_Google_Service_Compute_TargetHttpProxies_Resource(
         $this,
         $this->serviceName,
         'targetHttpProxies',
@@ -3181,7 +3181,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->targetHttpsProxies = new Google_Service_Compute_TargetHttpsProxies_Resource(
+    $this->targetHttpsProxies = new Appointments_Google_Service_Compute_TargetHttpsProxies_Resource(
         $this,
         $this->serviceName,
         'targetHttpsProxies',
@@ -3283,7 +3283,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->targetInstances = new Google_Service_Compute_TargetInstances_Resource(
+    $this->targetInstances = new Appointments_Google_Service_Compute_TargetInstances_Resource(
         $this,
         $this->serviceName,
         'targetInstances',
@@ -3397,7 +3397,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->targetPools = new Google_Service_Compute_TargetPools_Resource(
+    $this->targetPools = new Appointments_Google_Service_Compute_TargetPools_Resource(
         $this,
         $this->serviceName,
         'targetPools',
@@ -3635,7 +3635,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->targetVpnGateways = new Google_Service_Compute_TargetVpnGateways_Resource(
+    $this->targetVpnGateways = new Appointments_Google_Service_Compute_TargetVpnGateways_Resource(
         $this,
         $this->serviceName,
         'targetVpnGateways',
@@ -3749,7 +3749,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->urlMaps = new Google_Service_Compute_UrlMaps_Resource(
+    $this->urlMaps = new Appointments_Google_Service_Compute_UrlMaps_Resource(
         $this,
         $this->serviceName,
         'urlMaps',
@@ -3866,7 +3866,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->vpnTunnels = new Google_Service_Compute_VpnTunnels_Resource(
+    $this->vpnTunnels = new Appointments_Google_Service_Compute_VpnTunnels_Resource(
         $this,
         $this->serviceName,
         'vpnTunnels',
@@ -3980,7 +3980,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->zoneOperations = new Google_Service_Compute_ZoneOperations_Resource(
+    $this->zoneOperations = new Appointments_Google_Service_Compute_ZoneOperations_Resource(
         $this,
         $this->serviceName,
         'zoneOperations',
@@ -4057,7 +4057,7 @@ class Google_Service_Compute extends Google_Service
           )
         )
     );
-    $this->zones = new Google_Service_Compute_Zones_Resource(
+    $this->zones = new Appointments_Google_Service_Compute_Zones_Resource(
         $this,
         $this->serviceName,
         'zones',
@@ -4112,11 +4112,11 @@ class Google_Service_Compute extends Google_Service
  * The "addresses" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $addresses = $computeService->addresses;
  *  </code>
  */
-class Google_Service_Compute_Addresses_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_Addresses_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -4158,13 +4158,13 @@ class Google_Service_Compute_Addresses_Resource extends Google_Service_Resource
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_AddressAggregatedList
+   * @return Appointments_Google_Service_Compute_AddressAggregatedList
    */
   public function aggregatedList($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('aggregatedList', array($params), "Google_Service_Compute_AddressAggregatedList");
+    return $this->call('aggregatedList', array($params), "Appointments_Google_Service_Compute_AddressAggregatedList");
   }
 
   /**
@@ -4174,13 +4174,13 @@ class Google_Service_Compute_Addresses_Resource extends Google_Service_Resource
    * @param string $region The name of the region for this request.
    * @param string $address Name of the address resource to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $region, $address, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'address' => $address);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -4190,13 +4190,13 @@ class Google_Service_Compute_Addresses_Resource extends Google_Service_Resource
    * @param string $region The name of the region for this request.
    * @param string $address Name of the address resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Address
+   * @return Appointments_Google_Service_Compute_Address
    */
   public function get($project, $region, $address, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'address' => $address);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_Address");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_Address");
   }
 
   /**
@@ -4205,15 +4205,15 @@ class Google_Service_Compute_Addresses_Resource extends Google_Service_Resource
    *
    * @param string $project Project ID for this request.
    * @param string $region The name of the region for this request.
-   * @param Google_Address $postBody
+   * @param Appointments_Google_Address $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, $region, Google_Service_Compute_Address $postBody, $optParams = array())
+  public function insert($project, $region, Appointments_Google_Service_Compute_Address $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -4257,13 +4257,13 @@ class Google_Service_Compute_Addresses_Resource extends Google_Service_Resource
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_AddressList
+   * @return Appointments_Google_Service_Compute_AddressList
    */
   public function listAddresses($project, $region, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_AddressList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_AddressList");
   }
 }
 
@@ -4271,11 +4271,11 @@ class Google_Service_Compute_Addresses_Resource extends Google_Service_Resource
  * The "autoscalers" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $autoscalers = $computeService->autoscalers;
  *  </code>
  */
-class Google_Service_Compute_Autoscalers_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_Autoscalers_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -4317,13 +4317,13 @@ class Google_Service_Compute_Autoscalers_Resource extends Google_Service_Resourc
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_AutoscalerAggregatedList
+   * @return Appointments_Google_Service_Compute_AutoscalerAggregatedList
    */
   public function aggregatedList($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('aggregatedList', array($params), "Google_Service_Compute_AutoscalerAggregatedList");
+    return $this->call('aggregatedList', array($params), "Appointments_Google_Service_Compute_AutoscalerAggregatedList");
   }
 
   /**
@@ -4334,13 +4334,13 @@ class Google_Service_Compute_Autoscalers_Resource extends Google_Service_Resourc
    * @param string $autoscaler Name of the persistent autoscaler resource to
    * delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $zone, $autoscaler, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'autoscaler' => $autoscaler);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -4351,13 +4351,13 @@ class Google_Service_Compute_Autoscalers_Resource extends Google_Service_Resourc
    * @param string $autoscaler Name of the persistent autoscaler resource to
    * return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Autoscaler
+   * @return Appointments_Google_Service_Compute_Autoscaler
    */
   public function get($project, $zone, $autoscaler, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'autoscaler' => $autoscaler);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_Autoscaler");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_Autoscaler");
   }
 
   /**
@@ -4366,15 +4366,15 @@ class Google_Service_Compute_Autoscalers_Resource extends Google_Service_Resourc
    *
    * @param string $project Project ID for this request.
    * @param string $zone Name of the zone scoping this request.
-   * @param Google_Autoscaler $postBody
+   * @param Appointments_Google_Autoscaler $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, $zone, Google_Service_Compute_Autoscaler $postBody, $optParams = array())
+  public function insert($project, $zone, Appointments_Google_Service_Compute_Autoscaler $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -4418,13 +4418,13 @@ class Google_Service_Compute_Autoscalers_Resource extends Google_Service_Resourc
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_AutoscalerList
+   * @return Appointments_Google_Service_Compute_AutoscalerList
    */
   public function listAutoscalers($project, $zone, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_AutoscalerList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_AutoscalerList");
   }
 
   /**
@@ -4435,15 +4435,15 @@ class Google_Service_Compute_Autoscalers_Resource extends Google_Service_Resourc
    * @param string $project Project ID for this request.
    * @param string $zone Name of the zone scoping this request.
    * @param string $autoscaler Name of the autoscaler resource to update.
-   * @param Google_Autoscaler $postBody
+   * @param Appointments_Google_Autoscaler $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function patch($project, $zone, $autoscaler, Google_Service_Compute_Autoscaler $postBody, $optParams = array())
+  public function patch($project, $zone, $autoscaler, Appointments_Google_Service_Compute_Autoscaler $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'autoscaler' => $autoscaler, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Compute_Operation");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -4452,17 +4452,17 @@ class Google_Service_Compute_Autoscalers_Resource extends Google_Service_Resourc
    *
    * @param string $project Project ID for this request.
    * @param string $zone Name of the zone scoping this request.
-   * @param Google_Autoscaler $postBody
+   * @param Appointments_Google_Autoscaler $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param string autoscaler Name of the autoscaler resource to update.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function update($project, $zone, Google_Service_Compute_Autoscaler $postBody, $optParams = array())
+  public function update($project, $zone, Appointments_Google_Service_Compute_Autoscaler $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Compute_Operation");
+    return $this->call('update', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 }
 
@@ -4470,11 +4470,11 @@ class Google_Service_Compute_Autoscalers_Resource extends Google_Service_Resourc
  * The "backendServices" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $backendServices = $computeService->backendServices;
  *  </code>
  */
-class Google_Service_Compute_BackendServices_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_BackendServices_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -4483,13 +4483,13 @@ class Google_Service_Compute_BackendServices_Resource extends Google_Service_Res
    * @param string $project Project ID for this request.
    * @param string $backendService Name of the BackendService resource to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $backendService, $optParams = array())
   {
     $params = array('project' => $project, 'backendService' => $backendService);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -4498,13 +4498,13 @@ class Google_Service_Compute_BackendServices_Resource extends Google_Service_Res
    * @param string $project Project ID for this request.
    * @param string $backendService Name of the BackendService resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_BackendService
+   * @return Appointments_Google_Service_Compute_BackendService
    */
   public function get($project, $backendService, $optParams = array())
   {
     $params = array('project' => $project, 'backendService' => $backendService);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_BackendService");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_BackendService");
   }
 
   /**
@@ -4514,15 +4514,15 @@ class Google_Service_Compute_BackendServices_Resource extends Google_Service_Res
    * @param string $project
    * @param string $backendService Name of the BackendService resource to which
    * the queried instance belongs.
-   * @param Google_ResourceGroupReference $postBody
+   * @param Appointments_Google_ResourceGroupReference $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_BackendServiceGroupHealth
+   * @return Appointments_Google_Service_Compute_BackendServiceGroupHealth
    */
-  public function getHealth($project, $backendService, Google_Service_Compute_ResourceGroupReference $postBody, $optParams = array())
+  public function getHealth($project, $backendService, Appointments_Google_Service_Compute_ResourceGroupReference $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'backendService' => $backendService, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('getHealth', array($params), "Google_Service_Compute_BackendServiceGroupHealth");
+    return $this->call('getHealth', array($params), "Appointments_Google_Service_Compute_BackendServiceGroupHealth");
   }
 
   /**
@@ -4532,15 +4532,15 @@ class Google_Service_Compute_BackendServices_Resource extends Google_Service_Res
    * Guidelines for more information. (backendServices.insert)
    *
    * @param string $project Project ID for this request.
-   * @param Google_BackendService $postBody
+   * @param Appointments_Google_BackendService $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, Google_Service_Compute_BackendService $postBody, $optParams = array())
+  public function insert($project, Appointments_Google_Service_Compute_BackendService $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -4583,13 +4583,13 @@ class Google_Service_Compute_BackendServices_Resource extends Google_Service_Res
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_BackendServiceList
+   * @return Appointments_Google_Service_Compute_BackendServiceList
    */
   public function listBackendServices($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_BackendServiceList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_BackendServiceList");
   }
 
   /**
@@ -4600,15 +4600,15 @@ class Google_Service_Compute_BackendServices_Resource extends Google_Service_Res
    *
    * @param string $project Project ID for this request.
    * @param string $backendService Name of the BackendService resource to update.
-   * @param Google_BackendService $postBody
+   * @param Appointments_Google_BackendService $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function patch($project, $backendService, Google_Service_Compute_BackendService $postBody, $optParams = array())
+  public function patch($project, $backendService, Appointments_Google_Service_Compute_BackendService $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'backendService' => $backendService, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Compute_Operation");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -4619,15 +4619,15 @@ class Google_Service_Compute_BackendServices_Resource extends Google_Service_Res
    *
    * @param string $project Project ID for this request.
    * @param string $backendService Name of the BackendService resource to update.
-   * @param Google_BackendService $postBody
+   * @param Appointments_Google_BackendService $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function update($project, $backendService, Google_Service_Compute_BackendService $postBody, $optParams = array())
+  public function update($project, $backendService, Appointments_Google_Service_Compute_BackendService $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'backendService' => $backendService, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Compute_Operation");
+    return $this->call('update', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 }
 
@@ -4635,11 +4635,11 @@ class Google_Service_Compute_BackendServices_Resource extends Google_Service_Res
  * The "diskTypes" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $diskTypes = $computeService->diskTypes;
  *  </code>
  */
-class Google_Service_Compute_DiskTypes_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_DiskTypes_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -4681,13 +4681,13 @@ class Google_Service_Compute_DiskTypes_Resource extends Google_Service_Resource
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_DiskTypeAggregatedList
+   * @return Appointments_Google_Service_Compute_DiskTypeAggregatedList
    */
   public function aggregatedList($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('aggregatedList', array($params), "Google_Service_Compute_DiskTypeAggregatedList");
+    return $this->call('aggregatedList', array($params), "Appointments_Google_Service_Compute_DiskTypeAggregatedList");
   }
 
   /**
@@ -4697,13 +4697,13 @@ class Google_Service_Compute_DiskTypes_Resource extends Google_Service_Resource
    * @param string $zone The name of the zone for this request.
    * @param string $diskType Name of the disk type to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_DiskType
+   * @return Appointments_Google_Service_Compute_DiskType
    */
   public function get($project, $zone, $diskType, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'diskType' => $diskType);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_DiskType");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_DiskType");
   }
 
   /**
@@ -4747,13 +4747,13 @@ class Google_Service_Compute_DiskTypes_Resource extends Google_Service_Resource
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_DiskTypeList
+   * @return Appointments_Google_Service_Compute_DiskTypeList
    */
   public function listDiskTypes($project, $zone, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_DiskTypeList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_DiskTypeList");
   }
 }
 
@@ -4761,11 +4761,11 @@ class Google_Service_Compute_DiskTypes_Resource extends Google_Service_Resource
  * The "disks" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $disks = $computeService->disks;
  *  </code>
  */
-class Google_Service_Compute_Disks_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_Disks_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -4807,13 +4807,13 @@ class Google_Service_Compute_Disks_Resource extends Google_Service_Resource
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_DiskAggregatedList
+   * @return Appointments_Google_Service_Compute_DiskAggregatedList
    */
   public function aggregatedList($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('aggregatedList', array($params), "Google_Service_Compute_DiskAggregatedList");
+    return $this->call('aggregatedList', array($params), "Appointments_Google_Service_Compute_DiskAggregatedList");
   }
 
   /**
@@ -4822,15 +4822,15 @@ class Google_Service_Compute_Disks_Resource extends Google_Service_Resource
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone for this request.
    * @param string $disk Name of the persistent disk to snapshot.
-   * @param Google_Snapshot $postBody
+   * @param Appointments_Google_Snapshot $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function createSnapshot($project, $zone, $disk, Google_Service_Compute_Snapshot $postBody, $optParams = array())
+  public function createSnapshot($project, $zone, $disk, Appointments_Google_Service_Compute_Snapshot $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'disk' => $disk, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('createSnapshot', array($params), "Google_Service_Compute_Operation");
+    return $this->call('createSnapshot', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -4843,13 +4843,13 @@ class Google_Service_Compute_Disks_Resource extends Google_Service_Resource
    * @param string $zone The name of the zone for this request.
    * @param string $disk Name of the persistent disk to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $zone, $disk, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'disk' => $disk);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -4859,13 +4859,13 @@ class Google_Service_Compute_Disks_Resource extends Google_Service_Resource
    * @param string $zone The name of the zone for this request.
    * @param string $disk Name of the persistent disk to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Disk
+   * @return Appointments_Google_Service_Compute_Disk
    */
   public function get($project, $zone, $disk, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'disk' => $disk);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_Disk");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_Disk");
   }
 
   /**
@@ -4877,17 +4877,17 @@ class Google_Service_Compute_Disks_Resource extends Google_Service_Resource
    *
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone for this request.
-   * @param Google_Disk $postBody
+   * @param Appointments_Google_Disk $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param string sourceImage Optional. Source image to restore onto a disk.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, $zone, Google_Service_Compute_Disk $postBody, $optParams = array())
+  public function insert($project, $zone, Appointments_Google_Service_Compute_Disk $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -4931,13 +4931,13 @@ class Google_Service_Compute_Disks_Resource extends Google_Service_Resource
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_DiskList
+   * @return Appointments_Google_Service_Compute_DiskList
    */
   public function listDisks($project, $zone, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_DiskList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_DiskList");
   }
 }
 
@@ -4945,11 +4945,11 @@ class Google_Service_Compute_Disks_Resource extends Google_Service_Resource
  * The "firewalls" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $firewalls = $computeService->firewalls;
  *  </code>
  */
-class Google_Service_Compute_Firewalls_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_Firewalls_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -4958,13 +4958,13 @@ class Google_Service_Compute_Firewalls_Resource extends Google_Service_Resource
    * @param string $project Project ID for this request.
    * @param string $firewall Name of the firewall rule to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $firewall, $optParams = array())
   {
     $params = array('project' => $project, 'firewall' => $firewall);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -4973,13 +4973,13 @@ class Google_Service_Compute_Firewalls_Resource extends Google_Service_Resource
    * @param string $project Project ID for this request.
    * @param string $firewall Name of the firewall rule to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Firewall
+   * @return Appointments_Google_Service_Compute_Firewall
    */
   public function get($project, $firewall, $optParams = array())
   {
     $params = array('project' => $project, 'firewall' => $firewall);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_Firewall");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_Firewall");
   }
 
   /**
@@ -4987,15 +4987,15 @@ class Google_Service_Compute_Firewalls_Resource extends Google_Service_Resource
    * the request. (firewalls.insert)
    *
    * @param string $project Project ID for this request.
-   * @param Google_Firewall $postBody
+   * @param Appointments_Google_Firewall $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, Google_Service_Compute_Firewall $postBody, $optParams = array())
+  public function insert($project, Appointments_Google_Service_Compute_Firewall $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -5038,13 +5038,13 @@ class Google_Service_Compute_Firewalls_Resource extends Google_Service_Resource
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_FirewallList
+   * @return Appointments_Google_Service_Compute_FirewallList
    */
   public function listFirewalls($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_FirewallList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_FirewallList");
   }
 
   /**
@@ -5053,15 +5053,15 @@ class Google_Service_Compute_Firewalls_Resource extends Google_Service_Resource
    *
    * @param string $project Project ID for this request.
    * @param string $firewall Name of the firewall rule to update.
-   * @param Google_Firewall $postBody
+   * @param Appointments_Google_Firewall $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function patch($project, $firewall, Google_Service_Compute_Firewall $postBody, $optParams = array())
+  public function patch($project, $firewall, Appointments_Google_Service_Compute_Firewall $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'firewall' => $firewall, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Compute_Operation");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -5070,15 +5070,15 @@ class Google_Service_Compute_Firewalls_Resource extends Google_Service_Resource
    *
    * @param string $project Project ID for this request.
    * @param string $firewall Name of the firewall rule to update.
-   * @param Google_Firewall $postBody
+   * @param Appointments_Google_Firewall $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function update($project, $firewall, Google_Service_Compute_Firewall $postBody, $optParams = array())
+  public function update($project, $firewall, Appointments_Google_Service_Compute_Firewall $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'firewall' => $firewall, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Compute_Operation");
+    return $this->call('update', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 }
 
@@ -5086,11 +5086,11 @@ class Google_Service_Compute_Firewalls_Resource extends Google_Service_Resource
  * The "forwardingRules" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $forwardingRules = $computeService->forwardingRules;
  *  </code>
  */
-class Google_Service_Compute_ForwardingRules_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_ForwardingRules_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -5133,13 +5133,13 @@ class Google_Service_Compute_ForwardingRules_Resource extends Google_Service_Res
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_ForwardingRuleAggregatedList
+   * @return Appointments_Google_Service_Compute_ForwardingRuleAggregatedList
    */
   public function aggregatedList($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('aggregatedList', array($params), "Google_Service_Compute_ForwardingRuleAggregatedList");
+    return $this->call('aggregatedList', array($params), "Appointments_Google_Service_Compute_ForwardingRuleAggregatedList");
   }
 
   /**
@@ -5149,13 +5149,13 @@ class Google_Service_Compute_ForwardingRules_Resource extends Google_Service_Res
    * @param string $region Name of the region scoping this request.
    * @param string $forwardingRule Name of the ForwardingRule resource to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $region, $forwardingRule, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'forwardingRule' => $forwardingRule);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -5165,13 +5165,13 @@ class Google_Service_Compute_ForwardingRules_Resource extends Google_Service_Res
    * @param string $region Name of the region scoping this request.
    * @param string $forwardingRule Name of the ForwardingRule resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_ForwardingRule
+   * @return Appointments_Google_Service_Compute_ForwardingRule
    */
   public function get($project, $region, $forwardingRule, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'forwardingRule' => $forwardingRule);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_ForwardingRule");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_ForwardingRule");
   }
 
   /**
@@ -5180,15 +5180,15 @@ class Google_Service_Compute_ForwardingRules_Resource extends Google_Service_Res
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
-   * @param Google_ForwardingRule $postBody
+   * @param Appointments_Google_ForwardingRule $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, $region, Google_Service_Compute_ForwardingRule $postBody, $optParams = array())
+  public function insert($project, $region, Appointments_Google_Service_Compute_ForwardingRule $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -5232,13 +5232,13 @@ class Google_Service_Compute_ForwardingRules_Resource extends Google_Service_Res
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_ForwardingRuleList
+   * @return Appointments_Google_Service_Compute_ForwardingRuleList
    */
   public function listForwardingRules($project, $region, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_ForwardingRuleList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_ForwardingRuleList");
   }
 
   /**
@@ -5249,15 +5249,15 @@ class Google_Service_Compute_ForwardingRules_Resource extends Google_Service_Res
    * @param string $region Name of the region scoping this request.
    * @param string $forwardingRule Name of the ForwardingRule resource in which
    * target is to be set.
-   * @param Google_TargetReference $postBody
+   * @param Appointments_Google_TargetReference $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function setTarget($project, $region, $forwardingRule, Google_Service_Compute_TargetReference $postBody, $optParams = array())
+  public function setTarget($project, $region, $forwardingRule, Appointments_Google_Service_Compute_TargetReference $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'forwardingRule' => $forwardingRule, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setTarget', array($params), "Google_Service_Compute_Operation");
+    return $this->call('setTarget', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 }
 
@@ -5265,11 +5265,11 @@ class Google_Service_Compute_ForwardingRules_Resource extends Google_Service_Res
  * The "globalAddresses" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $globalAddresses = $computeService->globalAddresses;
  *  </code>
  */
-class Google_Service_Compute_GlobalAddresses_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_GlobalAddresses_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -5278,13 +5278,13 @@ class Google_Service_Compute_GlobalAddresses_Resource extends Google_Service_Res
    * @param string $project Project ID for this request.
    * @param string $address Name of the address resource to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $address, $optParams = array())
   {
     $params = array('project' => $project, 'address' => $address);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -5293,13 +5293,13 @@ class Google_Service_Compute_GlobalAddresses_Resource extends Google_Service_Res
    * @param string $project Project ID for this request.
    * @param string $address Name of the address resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Address
+   * @return Appointments_Google_Service_Compute_Address
    */
   public function get($project, $address, $optParams = array())
   {
     $params = array('project' => $project, 'address' => $address);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_Address");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_Address");
   }
 
   /**
@@ -5307,15 +5307,15 @@ class Google_Service_Compute_GlobalAddresses_Resource extends Google_Service_Res
    * in the request. (globalAddresses.insert)
    *
    * @param string $project Project ID for this request.
-   * @param Google_Address $postBody
+   * @param Appointments_Google_Address $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, Google_Service_Compute_Address $postBody, $optParams = array())
+  public function insert($project, Appointments_Google_Service_Compute_Address $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -5357,13 +5357,13 @@ class Google_Service_Compute_GlobalAddresses_Resource extends Google_Service_Res
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_AddressList
+   * @return Appointments_Google_Service_Compute_AddressList
    */
   public function listGlobalAddresses($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_AddressList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_AddressList");
   }
 }
 
@@ -5371,11 +5371,11 @@ class Google_Service_Compute_GlobalAddresses_Resource extends Google_Service_Res
  * The "globalForwardingRules" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $globalForwardingRules = $computeService->globalForwardingRules;
  *  </code>
  */
-class Google_Service_Compute_GlobalForwardingRules_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_GlobalForwardingRules_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -5384,13 +5384,13 @@ class Google_Service_Compute_GlobalForwardingRules_Resource extends Google_Servi
    * @param string $project Project ID for this request.
    * @param string $forwardingRule Name of the ForwardingRule resource to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $forwardingRule, $optParams = array())
   {
     $params = array('project' => $project, 'forwardingRule' => $forwardingRule);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -5399,13 +5399,13 @@ class Google_Service_Compute_GlobalForwardingRules_Resource extends Google_Servi
    * @param string $project Project ID for this request.
    * @param string $forwardingRule Name of the ForwardingRule resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_ForwardingRule
+   * @return Appointments_Google_Service_Compute_ForwardingRule
    */
   public function get($project, $forwardingRule, $optParams = array())
   {
     $params = array('project' => $project, 'forwardingRule' => $forwardingRule);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_ForwardingRule");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_ForwardingRule");
   }
 
   /**
@@ -5413,15 +5413,15 @@ class Google_Service_Compute_GlobalForwardingRules_Resource extends Google_Servi
    * the data included in the request. (globalForwardingRules.insert)
    *
    * @param string $project Project ID for this request.
-   * @param Google_ForwardingRule $postBody
+   * @param Appointments_Google_ForwardingRule $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, Google_Service_Compute_ForwardingRule $postBody, $optParams = array())
+  public function insert($project, Appointments_Google_Service_Compute_ForwardingRule $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -5464,13 +5464,13 @@ class Google_Service_Compute_GlobalForwardingRules_Resource extends Google_Servi
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_ForwardingRuleList
+   * @return Appointments_Google_Service_Compute_ForwardingRuleList
    */
   public function listGlobalForwardingRules($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_ForwardingRuleList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_ForwardingRuleList");
   }
 
   /**
@@ -5480,15 +5480,15 @@ class Google_Service_Compute_GlobalForwardingRules_Resource extends Google_Servi
    * @param string $project Project ID for this request.
    * @param string $forwardingRule Name of the ForwardingRule resource in which
    * target is to be set.
-   * @param Google_TargetReference $postBody
+   * @param Appointments_Google_TargetReference $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function setTarget($project, $forwardingRule, Google_Service_Compute_TargetReference $postBody, $optParams = array())
+  public function setTarget($project, $forwardingRule, Appointments_Google_Service_Compute_TargetReference $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'forwardingRule' => $forwardingRule, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setTarget', array($params), "Google_Service_Compute_Operation");
+    return $this->call('setTarget', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 }
 
@@ -5496,11 +5496,11 @@ class Google_Service_Compute_GlobalForwardingRules_Resource extends Google_Servi
  * The "globalOperations" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $globalOperations = $computeService->globalOperations;
  *  </code>
  */
-class Google_Service_Compute_GlobalOperations_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_GlobalOperations_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -5543,13 +5543,13 @@ class Google_Service_Compute_GlobalOperations_Resource extends Google_Service_Re
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_OperationAggregatedList
+   * @return Appointments_Google_Service_Compute_OperationAggregatedList
    */
   public function aggregatedList($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('aggregatedList', array($params), "Google_Service_Compute_OperationAggregatedList");
+    return $this->call('aggregatedList', array($params), "Appointments_Google_Service_Compute_OperationAggregatedList");
   }
 
   /**
@@ -5572,13 +5572,13 @@ class Google_Service_Compute_GlobalOperations_Resource extends Google_Service_Re
    * @param string $project Project ID for this request.
    * @param string $operation Name of the Operations resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function get($project, $operation, $optParams = array())
   {
     $params = array('project' => $project, 'operation' => $operation);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_Operation");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -5621,13 +5621,13 @@ class Google_Service_Compute_GlobalOperations_Resource extends Google_Service_Re
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_OperationList
+   * @return Appointments_Google_Service_Compute_OperationList
    */
   public function listGlobalOperations($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_OperationList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_OperationList");
   }
 }
 
@@ -5635,11 +5635,11 @@ class Google_Service_Compute_GlobalOperations_Resource extends Google_Service_Re
  * The "httpHealthChecks" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $httpHealthChecks = $computeService->httpHealthChecks;
  *  </code>
  */
-class Google_Service_Compute_HttpHealthChecks_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_HttpHealthChecks_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -5649,13 +5649,13 @@ class Google_Service_Compute_HttpHealthChecks_Resource extends Google_Service_Re
    * @param string $httpHealthCheck Name of the HttpHealthCheck resource to
    * delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $httpHealthCheck, $optParams = array())
   {
     $params = array('project' => $project, 'httpHealthCheck' => $httpHealthCheck);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -5665,13 +5665,13 @@ class Google_Service_Compute_HttpHealthChecks_Resource extends Google_Service_Re
    * @param string $httpHealthCheck Name of the HttpHealthCheck resource to
    * return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_HttpHealthCheck
+   * @return Appointments_Google_Service_Compute_HttpHealthCheck
    */
   public function get($project, $httpHealthCheck, $optParams = array())
   {
     $params = array('project' => $project, 'httpHealthCheck' => $httpHealthCheck);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_HttpHealthCheck");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_HttpHealthCheck");
   }
 
   /**
@@ -5679,15 +5679,15 @@ class Google_Service_Compute_HttpHealthChecks_Resource extends Google_Service_Re
    * included in the request. (httpHealthChecks.insert)
    *
    * @param string $project Project ID for this request.
-   * @param Google_HttpHealthCheck $postBody
+   * @param Appointments_Google_HttpHealthCheck $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, Google_Service_Compute_HttpHealthCheck $postBody, $optParams = array())
+  public function insert($project, Appointments_Google_Service_Compute_HttpHealthCheck $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -5730,13 +5730,13 @@ class Google_Service_Compute_HttpHealthChecks_Resource extends Google_Service_Re
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_HttpHealthCheckList
+   * @return Appointments_Google_Service_Compute_HttpHealthCheckList
    */
   public function listHttpHealthChecks($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_HttpHealthCheckList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_HttpHealthCheckList");
   }
 
   /**
@@ -5747,15 +5747,15 @@ class Google_Service_Compute_HttpHealthChecks_Resource extends Google_Service_Re
    * @param string $project Project ID for this request.
    * @param string $httpHealthCheck Name of the HttpHealthCheck resource to
    * update.
-   * @param Google_HttpHealthCheck $postBody
+   * @param Appointments_Google_HttpHealthCheck $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function patch($project, $httpHealthCheck, Google_Service_Compute_HttpHealthCheck $postBody, $optParams = array())
+  public function patch($project, $httpHealthCheck, Appointments_Google_Service_Compute_HttpHealthCheck $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'httpHealthCheck' => $httpHealthCheck, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Compute_Operation");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -5765,15 +5765,15 @@ class Google_Service_Compute_HttpHealthChecks_Resource extends Google_Service_Re
    * @param string $project Project ID for this request.
    * @param string $httpHealthCheck Name of the HttpHealthCheck resource to
    * update.
-   * @param Google_HttpHealthCheck $postBody
+   * @param Appointments_Google_HttpHealthCheck $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function update($project, $httpHealthCheck, Google_Service_Compute_HttpHealthCheck $postBody, $optParams = array())
+  public function update($project, $httpHealthCheck, Appointments_Google_Service_Compute_HttpHealthCheck $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'httpHealthCheck' => $httpHealthCheck, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Compute_Operation");
+    return $this->call('update', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 }
 
@@ -5781,11 +5781,11 @@ class Google_Service_Compute_HttpHealthChecks_Resource extends Google_Service_Re
  * The "httpsHealthChecks" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $httpsHealthChecks = $computeService->httpsHealthChecks;
  *  </code>
  */
-class Google_Service_Compute_HttpsHealthChecks_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_HttpsHealthChecks_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -5795,13 +5795,13 @@ class Google_Service_Compute_HttpsHealthChecks_Resource extends Google_Service_R
    * @param string $httpsHealthCheck Name of the HttpsHealthCheck resource to
    * delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $httpsHealthCheck, $optParams = array())
   {
     $params = array('project' => $project, 'httpsHealthCheck' => $httpsHealthCheck);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -5811,13 +5811,13 @@ class Google_Service_Compute_HttpsHealthChecks_Resource extends Google_Service_R
    * @param string $httpsHealthCheck Name of the HttpsHealthCheck resource to
    * return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_HttpsHealthCheck
+   * @return Appointments_Google_Service_Compute_HttpsHealthCheck
    */
   public function get($project, $httpsHealthCheck, $optParams = array())
   {
     $params = array('project' => $project, 'httpsHealthCheck' => $httpsHealthCheck);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_HttpsHealthCheck");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_HttpsHealthCheck");
   }
 
   /**
@@ -5825,15 +5825,15 @@ class Google_Service_Compute_HttpsHealthChecks_Resource extends Google_Service_R
    * included in the request. (httpsHealthChecks.insert)
    *
    * @param string $project Project ID for this request.
-   * @param Google_HttpsHealthCheck $postBody
+   * @param Appointments_Google_HttpsHealthCheck $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, Google_Service_Compute_HttpsHealthCheck $postBody, $optParams = array())
+  public function insert($project, Appointments_Google_Service_Compute_HttpsHealthCheck $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -5876,13 +5876,13 @@ class Google_Service_Compute_HttpsHealthChecks_Resource extends Google_Service_R
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_HttpsHealthCheckList
+   * @return Appointments_Google_Service_Compute_HttpsHealthCheckList
    */
   public function listHttpsHealthChecks($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_HttpsHealthCheckList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_HttpsHealthCheckList");
   }
 
   /**
@@ -5893,15 +5893,15 @@ class Google_Service_Compute_HttpsHealthChecks_Resource extends Google_Service_R
    * @param string $project Project ID for this request.
    * @param string $httpsHealthCheck Name of the HttpsHealthCheck resource to
    * update.
-   * @param Google_HttpsHealthCheck $postBody
+   * @param Appointments_Google_HttpsHealthCheck $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function patch($project, $httpsHealthCheck, Google_Service_Compute_HttpsHealthCheck $postBody, $optParams = array())
+  public function patch($project, $httpsHealthCheck, Appointments_Google_Service_Compute_HttpsHealthCheck $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'httpsHealthCheck' => $httpsHealthCheck, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Compute_Operation");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -5911,15 +5911,15 @@ class Google_Service_Compute_HttpsHealthChecks_Resource extends Google_Service_R
    * @param string $project Project ID for this request.
    * @param string $httpsHealthCheck Name of the HttpsHealthCheck resource to
    * update.
-   * @param Google_HttpsHealthCheck $postBody
+   * @param Appointments_Google_HttpsHealthCheck $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function update($project, $httpsHealthCheck, Google_Service_Compute_HttpsHealthCheck $postBody, $optParams = array())
+  public function update($project, $httpsHealthCheck, Appointments_Google_Service_Compute_HttpsHealthCheck $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'httpsHealthCheck' => $httpsHealthCheck, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Compute_Operation");
+    return $this->call('update', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 }
 
@@ -5927,11 +5927,11 @@ class Google_Service_Compute_HttpsHealthChecks_Resource extends Google_Service_R
  * The "images" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $images = $computeService->images;
  *  </code>
  */
-class Google_Service_Compute_Images_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_Images_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -5940,13 +5940,13 @@ class Google_Service_Compute_Images_Resource extends Google_Service_Resource
    * @param string $project Project ID for this request.
    * @param string $image Name of the image resource to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $image, $optParams = array())
   {
     $params = array('project' => $project, 'image' => $image);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -5957,15 +5957,15 @@ class Google_Service_Compute_Images_Resource extends Google_Service_Resource
    *
    * @param string $project Project ID for this request.
    * @param string $image Image name.
-   * @param Google_DeprecationStatus $postBody
+   * @param Appointments_Google_DeprecationStatus $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function deprecate($project, $image, Google_Service_Compute_DeprecationStatus $postBody, $optParams = array())
+  public function deprecate($project, $image, Appointments_Google_Service_Compute_DeprecationStatus $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'image' => $image, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('deprecate', array($params), "Google_Service_Compute_Operation");
+    return $this->call('deprecate', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -5974,13 +5974,13 @@ class Google_Service_Compute_Images_Resource extends Google_Service_Resource
    * @param string $project Project ID for this request.
    * @param string $image Name of the image resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Image
+   * @return Appointments_Google_Service_Compute_Image
    */
   public function get($project, $image, $optParams = array())
   {
     $params = array('project' => $project, 'image' => $image);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_Image");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_Image");
   }
 
   /**
@@ -5988,15 +5988,15 @@ class Google_Service_Compute_Images_Resource extends Google_Service_Resource
    * request. (images.insert)
    *
    * @param string $project Project ID for this request.
-   * @param Google_Image $postBody
+   * @param Appointments_Google_Image $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, Google_Service_Compute_Image $postBody, $optParams = array())
+  public function insert($project, Appointments_Google_Service_Compute_Image $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -6045,13 +6045,13 @@ class Google_Service_Compute_Images_Resource extends Google_Service_Resource
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_ImageList
+   * @return Appointments_Google_Service_Compute_ImageList
    */
   public function listImages($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_ImageList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_ImageList");
   }
 }
 
@@ -6059,11 +6059,11 @@ class Google_Service_Compute_Images_Resource extends Google_Service_Resource
  * The "instanceGroupManagers" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $instanceGroupManagers = $computeService->instanceGroupManagers;
  *  </code>
  */
-class Google_Service_Compute_InstanceGroupManagers_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_InstanceGroupManagers_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -6081,15 +6081,15 @@ class Google_Service_Compute_InstanceGroupManagers_Resource extends Google_Servi
    * @param string $zone The name of the zone where the managed instance group is
    * located.
    * @param string $instanceGroupManager The name of the managed instance group.
-   * @param Google_InstanceGroupManagersAbandonInstancesRequest $postBody
+   * @param Appointments_Google_InstanceGroupManagersAbandonInstancesRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function abandonInstances($project, $zone, $instanceGroupManager, Google_Service_Compute_InstanceGroupManagersAbandonInstancesRequest $postBody, $optParams = array())
+  public function abandonInstances($project, $zone, $instanceGroupManager, Appointments_Google_Service_Compute_InstanceGroupManagersAbandonInstancesRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instanceGroupManager' => $instanceGroupManager, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('abandonInstances', array($params), "Google_Service_Compute_Operation");
+    return $this->call('abandonInstances', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -6132,13 +6132,13 @@ class Google_Service_Compute_InstanceGroupManagers_Resource extends Google_Servi
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_InstanceGroupManagerAggregatedList
+   * @return Appointments_Google_Service_Compute_InstanceGroupManagerAggregatedList
    */
   public function aggregatedList($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('aggregatedList', array($params), "Google_Service_Compute_InstanceGroupManagerAggregatedList");
+    return $this->call('aggregatedList', array($params), "Appointments_Google_Service_Compute_InstanceGroupManagerAggregatedList");
   }
 
   /**
@@ -6153,13 +6153,13 @@ class Google_Service_Compute_InstanceGroupManagers_Resource extends Google_Servi
    * @param string $instanceGroupManager The name of the managed instance group to
    * delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $zone, $instanceGroupManager, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instanceGroupManager' => $instanceGroupManager);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -6175,15 +6175,15 @@ class Google_Service_Compute_InstanceGroupManagers_Resource extends Google_Servi
    * @param string $zone The name of the zone where the managed instance group is
    * located.
    * @param string $instanceGroupManager The name of the managed instance group.
-   * @param Google_InstanceGroupManagersDeleteInstancesRequest $postBody
+   * @param Appointments_Google_InstanceGroupManagersDeleteInstancesRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function deleteInstances($project, $zone, $instanceGroupManager, Google_Service_Compute_InstanceGroupManagersDeleteInstancesRequest $postBody, $optParams = array())
+  public function deleteInstances($project, $zone, $instanceGroupManager, Appointments_Google_Service_Compute_InstanceGroupManagersDeleteInstancesRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instanceGroupManager' => $instanceGroupManager, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('deleteInstances', array($params), "Google_Service_Compute_Operation");
+    return $this->call('deleteInstances', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -6195,13 +6195,13 @@ class Google_Service_Compute_InstanceGroupManagers_Resource extends Google_Servi
    * located.
    * @param string $instanceGroupManager The name of the managed instance group.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_InstanceGroupManager
+   * @return Appointments_Google_Service_Compute_InstanceGroupManager
    */
   public function get($project, $zone, $instanceGroupManager, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instanceGroupManager' => $instanceGroupManager);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_InstanceGroupManager");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_InstanceGroupManager");
   }
 
   /**
@@ -6216,15 +6216,15 @@ class Google_Service_Compute_InstanceGroupManagers_Resource extends Google_Servi
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone where you want to create the managed
    * instance group.
-   * @param Google_InstanceGroupManager $postBody
+   * @param Appointments_Google_InstanceGroupManager $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, $zone, Google_Service_Compute_InstanceGroupManager $postBody, $optParams = array())
+  public function insert($project, $zone, Appointments_Google_Service_Compute_InstanceGroupManager $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -6269,13 +6269,13 @@ class Google_Service_Compute_InstanceGroupManagers_Resource extends Google_Servi
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_InstanceGroupManagerList
+   * @return Appointments_Google_Service_Compute_InstanceGroupManagerList
    */
   public function listInstanceGroupManagers($project, $zone, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_InstanceGroupManagerList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_InstanceGroupManagerList");
   }
 
   /**
@@ -6291,13 +6291,13 @@ class Google_Service_Compute_InstanceGroupManagers_Resource extends Google_Servi
    * located.
    * @param string $instanceGroupManager The name of the managed instance group.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_InstanceGroupManagersListManagedInstancesResponse
+   * @return Appointments_Google_Service_Compute_InstanceGroupManagersListManagedInstancesResponse
    */
   public function listManagedInstances($project, $zone, $instanceGroupManager, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instanceGroupManager' => $instanceGroupManager);
     $params = array_merge($params, $optParams);
-    return $this->call('listManagedInstances', array($params), "Google_Service_Compute_InstanceGroupManagersListManagedInstancesResponse");
+    return $this->call('listManagedInstances', array($params), "Appointments_Google_Service_Compute_InstanceGroupManagersListManagedInstancesResponse");
   }
 
   /**
@@ -6313,15 +6313,15 @@ class Google_Service_Compute_InstanceGroupManagers_Resource extends Google_Servi
    * @param string $zone The name of the zone where the managed instance group is
    * located.
    * @param string $instanceGroupManager The name of the managed instance group.
-   * @param Google_InstanceGroupManagersRecreateInstancesRequest $postBody
+   * @param Appointments_Google_InstanceGroupManagersRecreateInstancesRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function recreateInstances($project, $zone, $instanceGroupManager, Google_Service_Compute_InstanceGroupManagersRecreateInstancesRequest $postBody, $optParams = array())
+  public function recreateInstances($project, $zone, $instanceGroupManager, Appointments_Google_Service_Compute_InstanceGroupManagersRecreateInstancesRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instanceGroupManager' => $instanceGroupManager, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('recreateInstances', array($params), "Google_Service_Compute_Operation");
+    return $this->call('recreateInstances', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -6342,13 +6342,13 @@ class Google_Service_Compute_InstanceGroupManagers_Resource extends Google_Servi
    * removes instances to maintain the number of instances specified by this
    * parameter.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function resize($project, $zone, $instanceGroupManager, $size, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instanceGroupManager' => $instanceGroupManager, 'size' => $size);
     $params = array_merge($params, $optParams);
-    return $this->call('resize', array($params), "Google_Service_Compute_Operation");
+    return $this->call('resize', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -6360,15 +6360,15 @@ class Google_Service_Compute_InstanceGroupManagers_Resource extends Google_Servi
    * @param string $zone The name of the zone where the managed instance group is
    * located.
    * @param string $instanceGroupManager The name of the managed instance group.
-   * @param Google_InstanceGroupManagersSetInstanceTemplateRequest $postBody
+   * @param Appointments_Google_InstanceGroupManagersSetInstanceTemplateRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function setInstanceTemplate($project, $zone, $instanceGroupManager, Google_Service_Compute_InstanceGroupManagersSetInstanceTemplateRequest $postBody, $optParams = array())
+  public function setInstanceTemplate($project, $zone, $instanceGroupManager, Appointments_Google_Service_Compute_InstanceGroupManagersSetInstanceTemplateRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instanceGroupManager' => $instanceGroupManager, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setInstanceTemplate', array($params), "Google_Service_Compute_Operation");
+    return $this->call('setInstanceTemplate', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -6384,15 +6384,15 @@ class Google_Service_Compute_InstanceGroupManagers_Resource extends Google_Servi
    * @param string $zone The name of the zone where the managed instance group is
    * located.
    * @param string $instanceGroupManager The name of the managed instance group.
-   * @param Google_InstanceGroupManagersSetTargetPoolsRequest $postBody
+   * @param Appointments_Google_InstanceGroupManagersSetTargetPoolsRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function setTargetPools($project, $zone, $instanceGroupManager, Google_Service_Compute_InstanceGroupManagersSetTargetPoolsRequest $postBody, $optParams = array())
+  public function setTargetPools($project, $zone, $instanceGroupManager, Appointments_Google_Service_Compute_InstanceGroupManagersSetTargetPoolsRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instanceGroupManager' => $instanceGroupManager, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setTargetPools', array($params), "Google_Service_Compute_Operation");
+    return $this->call('setTargetPools', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 }
 
@@ -6400,11 +6400,11 @@ class Google_Service_Compute_InstanceGroupManagers_Resource extends Google_Servi
  * The "instanceGroups" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $instanceGroups = $computeService->instanceGroups;
  *  </code>
  */
-class Google_Service_Compute_InstanceGroups_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_InstanceGroups_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -6416,15 +6416,15 @@ class Google_Service_Compute_InstanceGroups_Resource extends Google_Service_Reso
    * @param string $zone The name of the zone where the instance group is located.
    * @param string $instanceGroup The name of the instance group where you are
    * adding instances.
-   * @param Google_InstanceGroupsAddInstancesRequest $postBody
+   * @param Appointments_Google_InstanceGroupsAddInstancesRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function addInstances($project, $zone, $instanceGroup, Google_Service_Compute_InstanceGroupsAddInstancesRequest $postBody, $optParams = array())
+  public function addInstances($project, $zone, $instanceGroup, Appointments_Google_Service_Compute_InstanceGroupsAddInstancesRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instanceGroup' => $instanceGroup, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('addInstances', array($params), "Google_Service_Compute_Operation");
+    return $this->call('addInstances', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -6467,13 +6467,13 @@ class Google_Service_Compute_InstanceGroups_Resource extends Google_Service_Reso
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_InstanceGroupAggregatedList
+   * @return Appointments_Google_Service_Compute_InstanceGroupAggregatedList
    */
   public function aggregatedList($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('aggregatedList', array($params), "Google_Service_Compute_InstanceGroupAggregatedList");
+    return $this->call('aggregatedList', array($params), "Appointments_Google_Service_Compute_InstanceGroupAggregatedList");
   }
 
   /**
@@ -6485,13 +6485,13 @@ class Google_Service_Compute_InstanceGroups_Resource extends Google_Service_Reso
    * @param string $zone The name of the zone where the instance group is located.
    * @param string $instanceGroup The name of the instance group to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $zone, $instanceGroup, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instanceGroup' => $instanceGroup);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -6501,13 +6501,13 @@ class Google_Service_Compute_InstanceGroups_Resource extends Google_Service_Reso
    * @param string $zone The name of the zone where the instance group is located.
    * @param string $instanceGroup The name of the instance group.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_InstanceGroup
+   * @return Appointments_Google_Service_Compute_InstanceGroup
    */
   public function get($project, $zone, $instanceGroup, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instanceGroup' => $instanceGroup);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_InstanceGroup");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_InstanceGroup");
   }
 
   /**
@@ -6517,15 +6517,15 @@ class Google_Service_Compute_InstanceGroups_Resource extends Google_Service_Reso
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone where you want to create the
    * instance group.
-   * @param Google_InstanceGroup $postBody
+   * @param Appointments_Google_InstanceGroup $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, $zone, Google_Service_Compute_InstanceGroup $postBody, $optParams = array())
+  public function insert($project, $zone, Appointments_Google_Service_Compute_InstanceGroup $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -6569,13 +6569,13 @@ class Google_Service_Compute_InstanceGroups_Resource extends Google_Service_Reso
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_InstanceGroupList
+   * @return Appointments_Google_Service_Compute_InstanceGroupList
    */
   public function listInstanceGroups($project, $zone, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_InstanceGroupList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_InstanceGroupList");
   }
 
   /**
@@ -6586,7 +6586,7 @@ class Google_Service_Compute_InstanceGroups_Resource extends Google_Service_Reso
    * @param string $zone The name of the zone where the instance group is located.
    * @param string $instanceGroup The name of the instance group from which you
    * want to generate a list of included instances.
-   * @param Google_InstanceGroupsListInstancesRequest $postBody
+   * @param Appointments_Google_InstanceGroupsListInstancesRequest $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param string filter Sets a filter expression for filtering listed
@@ -6622,13 +6622,13 @@ class Google_Service_Compute_InstanceGroups_Resource extends Google_Service_Reso
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_InstanceGroupsListInstances
+   * @return Appointments_Google_Service_Compute_InstanceGroupsListInstances
    */
-  public function listInstances($project, $zone, $instanceGroup, Google_Service_Compute_InstanceGroupsListInstancesRequest $postBody, $optParams = array())
+  public function listInstances($project, $zone, $instanceGroup, Appointments_Google_Service_Compute_InstanceGroupsListInstancesRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instanceGroup' => $instanceGroup, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('listInstances', array($params), "Google_Service_Compute_InstanceGroupsListInstances");
+    return $this->call('listInstances', array($params), "Appointments_Google_Service_Compute_InstanceGroupsListInstances");
   }
 
   /**
@@ -6639,15 +6639,15 @@ class Google_Service_Compute_InstanceGroups_Resource extends Google_Service_Reso
    * @param string $zone The name of the zone where the instance group is located.
    * @param string $instanceGroup The name of the instance group where the
    * specified instances will be removed.
-   * @param Google_InstanceGroupsRemoveInstancesRequest $postBody
+   * @param Appointments_Google_InstanceGroupsRemoveInstancesRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function removeInstances($project, $zone, $instanceGroup, Google_Service_Compute_InstanceGroupsRemoveInstancesRequest $postBody, $optParams = array())
+  public function removeInstances($project, $zone, $instanceGroup, Appointments_Google_Service_Compute_InstanceGroupsRemoveInstancesRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instanceGroup' => $instanceGroup, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('removeInstances', array($params), "Google_Service_Compute_Operation");
+    return $this->call('removeInstances', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -6658,15 +6658,15 @@ class Google_Service_Compute_InstanceGroups_Resource extends Google_Service_Reso
    * @param string $zone The name of the zone where the instance group is located.
    * @param string $instanceGroup The name of the instance group where the named
    * ports are updated.
-   * @param Google_InstanceGroupsSetNamedPortsRequest $postBody
+   * @param Appointments_Google_InstanceGroupsSetNamedPortsRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function setNamedPorts($project, $zone, $instanceGroup, Google_Service_Compute_InstanceGroupsSetNamedPortsRequest $postBody, $optParams = array())
+  public function setNamedPorts($project, $zone, $instanceGroup, Appointments_Google_Service_Compute_InstanceGroupsSetNamedPortsRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instanceGroup' => $instanceGroup, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setNamedPorts', array($params), "Google_Service_Compute_Operation");
+    return $this->call('setNamedPorts', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 }
 
@@ -6674,11 +6674,11 @@ class Google_Service_Compute_InstanceGroups_Resource extends Google_Service_Reso
  * The "instanceTemplates" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $instanceTemplates = $computeService->instanceTemplates;
  *  </code>
  */
-class Google_Service_Compute_InstanceTemplates_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_InstanceTemplates_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -6691,13 +6691,13 @@ class Google_Service_Compute_InstanceTemplates_Resource extends Google_Service_R
    * @param string $project Project ID for this request.
    * @param string $instanceTemplate The name of the instance template to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $instanceTemplate, $optParams = array())
   {
     $params = array('project' => $project, 'instanceTemplate' => $instanceTemplate);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -6706,13 +6706,13 @@ class Google_Service_Compute_InstanceTemplates_Resource extends Google_Service_R
    * @param string $project Project ID for this request.
    * @param string $instanceTemplate The name of the instance template.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_InstanceTemplate
+   * @return Appointments_Google_Service_Compute_InstanceTemplate
    */
   public function get($project, $instanceTemplate, $optParams = array())
   {
     $params = array('project' => $project, 'instanceTemplate' => $instanceTemplate);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_InstanceTemplate");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_InstanceTemplate");
   }
 
   /**
@@ -6723,15 +6723,15 @@ class Google_Service_Compute_InstanceTemplates_Resource extends Google_Service_R
    * (instanceTemplates.insert)
    *
    * @param string $project Project ID for this request.
-   * @param Google_InstanceTemplate $postBody
+   * @param Appointments_Google_InstanceTemplate $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, Google_Service_Compute_InstanceTemplate $postBody, $optParams = array())
+  public function insert($project, Appointments_Google_Service_Compute_InstanceTemplate $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -6774,13 +6774,13 @@ class Google_Service_Compute_InstanceTemplates_Resource extends Google_Service_R
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_InstanceTemplateList
+   * @return Appointments_Google_Service_Compute_InstanceTemplateList
    */
   public function listInstanceTemplates($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_InstanceTemplateList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_InstanceTemplateList");
   }
 }
 
@@ -6788,11 +6788,11 @@ class Google_Service_Compute_InstanceTemplates_Resource extends Google_Service_R
  * The "instances" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $instances = $computeService->instances;
  *  </code>
  */
-class Google_Service_Compute_Instances_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_Instances_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -6804,15 +6804,15 @@ class Google_Service_Compute_Instances_Resource extends Google_Service_Resource
    * @param string $instance The instance name for this request.
    * @param string $networkInterface The name of the network interface to add to
    * this instance.
-   * @param Google_AccessConfig $postBody
+   * @param Appointments_Google_AccessConfig $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function addAccessConfig($project, $zone, $instance, $networkInterface, Google_Service_Compute_AccessConfig $postBody, $optParams = array())
+  public function addAccessConfig($project, $zone, $instance, $networkInterface, Appointments_Google_Service_Compute_AccessConfig $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instance' => $instance, 'networkInterface' => $networkInterface, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('addAccessConfig', array($params), "Google_Service_Compute_Operation");
+    return $this->call('addAccessConfig', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -6854,13 +6854,13 @@ class Google_Service_Compute_Instances_Resource extends Google_Service_Resource
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_InstanceAggregatedList
+   * @return Appointments_Google_Service_Compute_InstanceAggregatedList
    */
   public function aggregatedList($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('aggregatedList', array($params), "Google_Service_Compute_InstanceAggregatedList");
+    return $this->call('aggregatedList', array($params), "Appointments_Google_Service_Compute_InstanceAggregatedList");
   }
 
   /**
@@ -6869,15 +6869,15 @@ class Google_Service_Compute_Instances_Resource extends Google_Service_Resource
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone for this request.
    * @param string $instance The instance name for this request.
-   * @param Google_AttachedDisk $postBody
+   * @param Appointments_Google_AttachedDisk $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function attachDisk($project, $zone, $instance, Google_Service_Compute_AttachedDisk $postBody, $optParams = array())
+  public function attachDisk($project, $zone, $instance, Appointments_Google_Service_Compute_AttachedDisk $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instance' => $instance, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('attachDisk', array($params), "Google_Service_Compute_Operation");
+    return $this->call('attachDisk', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -6888,13 +6888,13 @@ class Google_Service_Compute_Instances_Resource extends Google_Service_Resource
    * @param string $zone The name of the zone for this request.
    * @param string $instance Name of the instance resource to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $zone, $instance, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instance' => $instance);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -6907,13 +6907,13 @@ class Google_Service_Compute_Instances_Resource extends Google_Service_Resource
    * @param string $accessConfig The name of the access config to delete.
    * @param string $networkInterface The name of the network interface.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function deleteAccessConfig($project, $zone, $instance, $accessConfig, $networkInterface, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instance' => $instance, 'accessConfig' => $accessConfig, 'networkInterface' => $networkInterface);
     $params = array_merge($params, $optParams);
-    return $this->call('deleteAccessConfig', array($params), "Google_Service_Compute_Operation");
+    return $this->call('deleteAccessConfig', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -6924,13 +6924,13 @@ class Google_Service_Compute_Instances_Resource extends Google_Service_Resource
    * @param string $instance Instance name.
    * @param string $deviceName Disk device name to detach.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function detachDisk($project, $zone, $instance, $deviceName, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instance' => $instance, 'deviceName' => $deviceName);
     $params = array_merge($params, $optParams);
-    return $this->call('detachDisk', array($params), "Google_Service_Compute_Operation");
+    return $this->call('detachDisk', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -6940,13 +6940,13 @@ class Google_Service_Compute_Instances_Resource extends Google_Service_Resource
    * @param string $zone The name of the zone for this request.
    * @param string $instance Name of the instance resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Instance
+   * @return Appointments_Google_Service_Compute_Instance
    */
   public function get($project, $zone, $instance, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instance' => $instance);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_Instance");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_Instance");
   }
 
   /**
@@ -6959,13 +6959,13 @@ class Google_Service_Compute_Instances_Resource extends Google_Service_Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param int port Specifies which COM or serial port to retrieve data from.
-   * @return Google_Service_Compute_SerialPortOutput
+   * @return Appointments_Google_Service_Compute_SerialPortOutput
    */
   public function getSerialPortOutput($project, $zone, $instance, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instance' => $instance);
     $params = array_merge($params, $optParams);
-    return $this->call('getSerialPortOutput', array($params), "Google_Service_Compute_SerialPortOutput");
+    return $this->call('getSerialPortOutput', array($params), "Appointments_Google_Service_Compute_SerialPortOutput");
   }
 
   /**
@@ -6974,15 +6974,15 @@ class Google_Service_Compute_Instances_Resource extends Google_Service_Resource
    *
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone for this request.
-   * @param Google_Instance $postBody
+   * @param Appointments_Google_Instance $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, $zone, Google_Service_Compute_Instance $postBody, $optParams = array())
+  public function insert($project, $zone, Appointments_Google_Service_Compute_Instance $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -7026,13 +7026,13 @@ class Google_Service_Compute_Instances_Resource extends Google_Service_Resource
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_InstanceList
+   * @return Appointments_Google_Service_Compute_InstanceList
    */
   public function listInstances($project, $zone, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_InstanceList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_InstanceList");
   }
 
   /**
@@ -7042,13 +7042,13 @@ class Google_Service_Compute_Instances_Resource extends Google_Service_Resource
    * @param string $zone The name of the zone for this request.
    * @param string $instance Name of the instance scoping this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function reset($project, $zone, $instance, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instance' => $instance);
     $params = array_merge($params, $optParams);
-    return $this->call('reset', array($params), "Google_Service_Compute_Operation");
+    return $this->call('reset', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -7062,13 +7062,13 @@ class Google_Service_Compute_Instances_Resource extends Google_Service_Resource
    * deleted.
    * @param string $deviceName The device name of the disk to modify.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function setDiskAutoDelete($project, $zone, $instance, $autoDelete, $deviceName, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instance' => $instance, 'autoDelete' => $autoDelete, 'deviceName' => $deviceName);
     $params = array_merge($params, $optParams);
-    return $this->call('setDiskAutoDelete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('setDiskAutoDelete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -7078,15 +7078,15 @@ class Google_Service_Compute_Instances_Resource extends Google_Service_Resource
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone for this request.
    * @param string $instance Name of the instance scoping this request.
-   * @param Google_InstancesSetMachineTypeRequest $postBody
+   * @param Appointments_Google_InstancesSetMachineTypeRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function setMachineType($project, $zone, $instance, Google_Service_Compute_InstancesSetMachineTypeRequest $postBody, $optParams = array())
+  public function setMachineType($project, $zone, $instance, Appointments_Google_Service_Compute_InstancesSetMachineTypeRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instance' => $instance, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setMachineType', array($params), "Google_Service_Compute_Operation");
+    return $this->call('setMachineType', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -7096,15 +7096,15 @@ class Google_Service_Compute_Instances_Resource extends Google_Service_Resource
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone for this request.
    * @param string $instance Name of the instance scoping this request.
-   * @param Google_Metadata $postBody
+   * @param Appointments_Google_Metadata $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function setMetadata($project, $zone, $instance, Google_Service_Compute_Metadata $postBody, $optParams = array())
+  public function setMetadata($project, $zone, $instance, Appointments_Google_Service_Compute_Metadata $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instance' => $instance, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setMetadata', array($params), "Google_Service_Compute_Operation");
+    return $this->call('setMetadata', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -7113,15 +7113,15 @@ class Google_Service_Compute_Instances_Resource extends Google_Service_Resource
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone for this request.
    * @param string $instance Instance name.
-   * @param Google_Scheduling $postBody
+   * @param Appointments_Google_Scheduling $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function setScheduling($project, $zone, $instance, Google_Service_Compute_Scheduling $postBody, $optParams = array())
+  public function setScheduling($project, $zone, $instance, Appointments_Google_Service_Compute_Scheduling $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instance' => $instance, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setScheduling', array($params), "Google_Service_Compute_Operation");
+    return $this->call('setScheduling', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -7131,15 +7131,15 @@ class Google_Service_Compute_Instances_Resource extends Google_Service_Resource
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone for this request.
    * @param string $instance Name of the instance scoping this request.
-   * @param Google_Tags $postBody
+   * @param Appointments_Google_Tags $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function setTags($project, $zone, $instance, Google_Service_Compute_Tags $postBody, $optParams = array())
+  public function setTags($project, $zone, $instance, Appointments_Google_Service_Compute_Tags $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instance' => $instance, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setTags', array($params), "Google_Service_Compute_Operation");
+    return $this->call('setTags', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -7150,13 +7150,13 @@ class Google_Service_Compute_Instances_Resource extends Google_Service_Resource
    * @param string $zone The name of the zone for this request.
    * @param string $instance Name of the instance resource to start.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function start($project, $zone, $instance, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instance' => $instance);
     $params = array_merge($params, $optParams);
-    return $this->call('start', array($params), "Google_Service_Compute_Operation");
+    return $this->call('start', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -7171,13 +7171,13 @@ class Google_Service_Compute_Instances_Resource extends Google_Service_Resource
    * @param string $zone The name of the zone for this request.
    * @param string $instance Name of the instance resource to stop.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function stop($project, $zone, $instance, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instance' => $instance);
     $params = array_merge($params, $optParams);
-    return $this->call('stop', array($params), "Google_Service_Compute_Operation");
+    return $this->call('stop', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 }
 
@@ -7185,11 +7185,11 @@ class Google_Service_Compute_Instances_Resource extends Google_Service_Resource
  * The "licenses" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $licenses = $computeService->licenses;
  *  </code>
  */
-class Google_Service_Compute_Licenses_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_Licenses_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -7198,13 +7198,13 @@ class Google_Service_Compute_Licenses_Resource extends Google_Service_Resource
    * @param string $project Project ID for this request.
    * @param string $license Name of the License resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_License
+   * @return Appointments_Google_Service_Compute_License
    */
   public function get($project, $license, $optParams = array())
   {
     $params = array('project' => $project, 'license' => $license);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_License");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_License");
   }
 }
 
@@ -7212,11 +7212,11 @@ class Google_Service_Compute_Licenses_Resource extends Google_Service_Resource
  * The "machineTypes" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $machineTypes = $computeService->machineTypes;
  *  </code>
  */
-class Google_Service_Compute_MachineTypes_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_MachineTypes_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -7258,13 +7258,13 @@ class Google_Service_Compute_MachineTypes_Resource extends Google_Service_Resour
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_MachineTypeAggregatedList
+   * @return Appointments_Google_Service_Compute_MachineTypeAggregatedList
    */
   public function aggregatedList($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('aggregatedList', array($params), "Google_Service_Compute_MachineTypeAggregatedList");
+    return $this->call('aggregatedList', array($params), "Appointments_Google_Service_Compute_MachineTypeAggregatedList");
   }
 
   /**
@@ -7274,13 +7274,13 @@ class Google_Service_Compute_MachineTypes_Resource extends Google_Service_Resour
    * @param string $zone The name of the zone for this request.
    * @param string $machineType Name of the machine type to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_MachineType
+   * @return Appointments_Google_Service_Compute_MachineType
    */
   public function get($project, $zone, $machineType, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'machineType' => $machineType);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_MachineType");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_MachineType");
   }
 
   /**
@@ -7324,13 +7324,13 @@ class Google_Service_Compute_MachineTypes_Resource extends Google_Service_Resour
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_MachineTypeList
+   * @return Appointments_Google_Service_Compute_MachineTypeList
    */
   public function listMachineTypes($project, $zone, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_MachineTypeList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_MachineTypeList");
   }
 }
 
@@ -7338,11 +7338,11 @@ class Google_Service_Compute_MachineTypes_Resource extends Google_Service_Resour
  * The "networks" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $networks = $computeService->networks;
  *  </code>
  */
-class Google_Service_Compute_Networks_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_Networks_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -7351,13 +7351,13 @@ class Google_Service_Compute_Networks_Resource extends Google_Service_Resource
    * @param string $project Project ID for this request.
    * @param string $network Name of the network to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $network, $optParams = array())
   {
     $params = array('project' => $project, 'network' => $network);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -7366,13 +7366,13 @@ class Google_Service_Compute_Networks_Resource extends Google_Service_Resource
    * @param string $project Project ID for this request.
    * @param string $network Name of the network to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Network
+   * @return Appointments_Google_Service_Compute_Network
    */
   public function get($project, $network, $optParams = array())
   {
     $params = array('project' => $project, 'network' => $network);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_Network");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_Network");
   }
 
   /**
@@ -7380,15 +7380,15 @@ class Google_Service_Compute_Networks_Resource extends Google_Service_Resource
    * request. (networks.insert)
    *
    * @param string $project Project ID for this request.
-   * @param Google_Network $postBody
+   * @param Appointments_Google_Network $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, Google_Service_Compute_Network $postBody, $optParams = array())
+  public function insert($project, Appointments_Google_Service_Compute_Network $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -7431,13 +7431,13 @@ class Google_Service_Compute_Networks_Resource extends Google_Service_Resource
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_NetworkList
+   * @return Appointments_Google_Service_Compute_NetworkList
    */
   public function listNetworks($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_NetworkList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_NetworkList");
   }
 }
 
@@ -7445,11 +7445,11 @@ class Google_Service_Compute_Networks_Resource extends Google_Service_Resource
  * The "projects" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $projects = $computeService->projects;
  *  </code>
  */
-class Google_Service_Compute_Projects_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_Projects_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -7457,28 +7457,28 @@ class Google_Service_Compute_Projects_Resource extends Google_Service_Resource
    *
    * @param string $project Project ID for this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Project
+   * @return Appointments_Google_Service_Compute_Project
    */
   public function get($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_Project");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_Project");
   }
 
   /**
    * Moves a persistent disk from one zone to another. (projects.moveDisk)
    *
    * @param string $project Project ID for this request.
-   * @param Google_DiskMoveRequest $postBody
+   * @param Appointments_Google_DiskMoveRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function moveDisk($project, Google_Service_Compute_DiskMoveRequest $postBody, $optParams = array())
+  public function moveDisk($project, Appointments_Google_Service_Compute_DiskMoveRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('moveDisk', array($params), "Google_Service_Compute_Operation");
+    return $this->call('moveDisk', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -7486,15 +7486,15 @@ class Google_Service_Compute_Projects_Resource extends Google_Service_Resource
    * (projects.moveInstance)
    *
    * @param string $project Project ID for this request.
-   * @param Google_InstanceMoveRequest $postBody
+   * @param Appointments_Google_InstanceMoveRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function moveInstance($project, Google_Service_Compute_InstanceMoveRequest $postBody, $optParams = array())
+  public function moveInstance($project, Appointments_Google_Service_Compute_InstanceMoveRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('moveInstance', array($params), "Google_Service_Compute_Operation");
+    return $this->call('moveInstance', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -7502,15 +7502,15 @@ class Google_Service_Compute_Projects_Resource extends Google_Service_Resource
    * data included in the request. (projects.setCommonInstanceMetadata)
    *
    * @param string $project Project ID for this request.
-   * @param Google_Metadata $postBody
+   * @param Appointments_Google_Metadata $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function setCommonInstanceMetadata($project, Google_Service_Compute_Metadata $postBody, $optParams = array())
+  public function setCommonInstanceMetadata($project, Appointments_Google_Service_Compute_Metadata $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setCommonInstanceMetadata', array($params), "Google_Service_Compute_Operation");
+    return $this->call('setCommonInstanceMetadata', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -7519,15 +7519,15 @@ class Google_Service_Compute_Projects_Resource extends Google_Service_Resource
    * the usage export feature will be disabled. (projects.setUsageExportBucket)
    *
    * @param string $project Project ID for this request.
-   * @param Google_UsageExportLocation $postBody
+   * @param Appointments_Google_UsageExportLocation $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function setUsageExportBucket($project, Google_Service_Compute_UsageExportLocation $postBody, $optParams = array())
+  public function setUsageExportBucket($project, Appointments_Google_Service_Compute_UsageExportLocation $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setUsageExportBucket', array($params), "Google_Service_Compute_Operation");
+    return $this->call('setUsageExportBucket', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 }
 
@@ -7535,11 +7535,11 @@ class Google_Service_Compute_Projects_Resource extends Google_Service_Resource
  * The "regionOperations" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $regionOperations = $computeService->regionOperations;
  *  </code>
  */
-class Google_Service_Compute_RegionOperations_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_RegionOperations_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -7566,13 +7566,13 @@ class Google_Service_Compute_RegionOperations_Resource extends Google_Service_Re
    * @param string $region Name of the region for this request.
    * @param string $operation Name of the Operations resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function get($project, $region, $operation, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'operation' => $operation);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_Operation");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -7616,13 +7616,13 @@ class Google_Service_Compute_RegionOperations_Resource extends Google_Service_Re
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_OperationList
+   * @return Appointments_Google_Service_Compute_OperationList
    */
   public function listRegionOperations($project, $region, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_OperationList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_OperationList");
   }
 }
 
@@ -7630,11 +7630,11 @@ class Google_Service_Compute_RegionOperations_Resource extends Google_Service_Re
  * The "regions" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $regions = $computeService->regions;
  *  </code>
  */
-class Google_Service_Compute_Regions_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_Regions_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -7643,13 +7643,13 @@ class Google_Service_Compute_Regions_Resource extends Google_Service_Resource
    * @param string $project Project ID for this request.
    * @param string $region Name of the region resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Region
+   * @return Appointments_Google_Service_Compute_Region
    */
   public function get($project, $region, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_Region");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_Region");
   }
 
   /**
@@ -7692,13 +7692,13 @@ class Google_Service_Compute_Regions_Resource extends Google_Service_Resource
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_RegionList
+   * @return Appointments_Google_Service_Compute_RegionList
    */
   public function listRegions($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_RegionList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_RegionList");
   }
 }
 
@@ -7706,11 +7706,11 @@ class Google_Service_Compute_Regions_Resource extends Google_Service_Resource
  * The "routes" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $routes = $computeService->routes;
  *  </code>
  */
-class Google_Service_Compute_Routes_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_Routes_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -7719,13 +7719,13 @@ class Google_Service_Compute_Routes_Resource extends Google_Service_Resource
    * @param string $project Project ID for this request.
    * @param string $route Name of the route resource to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $route, $optParams = array())
   {
     $params = array('project' => $project, 'route' => $route);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -7734,13 +7734,13 @@ class Google_Service_Compute_Routes_Resource extends Google_Service_Resource
    * @param string $project Project ID for this request.
    * @param string $route Name of the route resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Route
+   * @return Appointments_Google_Service_Compute_Route
    */
   public function get($project, $route, $optParams = array())
   {
     $params = array('project' => $project, 'route' => $route);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_Route");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_Route");
   }
 
   /**
@@ -7748,15 +7748,15 @@ class Google_Service_Compute_Routes_Resource extends Google_Service_Resource
    * the request. (routes.insert)
    *
    * @param string $project Project ID for this request.
-   * @param Google_Route $postBody
+   * @param Appointments_Google_Route $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, Google_Service_Compute_Route $postBody, $optParams = array())
+  public function insert($project, Appointments_Google_Service_Compute_Route $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -7799,13 +7799,13 @@ class Google_Service_Compute_Routes_Resource extends Google_Service_Resource
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_RouteList
+   * @return Appointments_Google_Service_Compute_RouteList
    */
   public function listRoutes($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_RouteList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_RouteList");
   }
 }
 
@@ -7813,11 +7813,11 @@ class Google_Service_Compute_Routes_Resource extends Google_Service_Resource
  * The "snapshots" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $snapshots = $computeService->snapshots;
  *  </code>
  */
-class Google_Service_Compute_Snapshots_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_Snapshots_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -7831,13 +7831,13 @@ class Google_Service_Compute_Snapshots_Resource extends Google_Service_Resource
    * @param string $project Project ID for this request.
    * @param string $snapshot Name of the Snapshot resource to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $snapshot, $optParams = array())
   {
     $params = array('project' => $project, 'snapshot' => $snapshot);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -7846,13 +7846,13 @@ class Google_Service_Compute_Snapshots_Resource extends Google_Service_Resource
    * @param string $project Project ID for this request.
    * @param string $snapshot Name of the Snapshot resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Snapshot
+   * @return Appointments_Google_Service_Compute_Snapshot
    */
   public function get($project, $snapshot, $optParams = array())
   {
     $params = array('project' => $project, 'snapshot' => $snapshot);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_Snapshot");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_Snapshot");
   }
 
   /**
@@ -7895,13 +7895,13 @@ class Google_Service_Compute_Snapshots_Resource extends Google_Service_Resource
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_SnapshotList
+   * @return Appointments_Google_Service_Compute_SnapshotList
    */
   public function listSnapshots($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_SnapshotList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_SnapshotList");
   }
 }
 
@@ -7909,11 +7909,11 @@ class Google_Service_Compute_Snapshots_Resource extends Google_Service_Resource
  * The "sslCertificates" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $sslCertificates = $computeService->sslCertificates;
  *  </code>
  */
-class Google_Service_Compute_SslCertificates_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_SslCertificates_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -7922,13 +7922,13 @@ class Google_Service_Compute_SslCertificates_Resource extends Google_Service_Res
    * @param string $project Project ID for this request.
    * @param string $sslCertificate Name of the SslCertificate resource to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $sslCertificate, $optParams = array())
   {
     $params = array('project' => $project, 'sslCertificate' => $sslCertificate);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -7937,13 +7937,13 @@ class Google_Service_Compute_SslCertificates_Resource extends Google_Service_Res
    * @param string $project Project ID for this request.
    * @param string $sslCertificate Name of the SslCertificate resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_SslCertificate
+   * @return Appointments_Google_Service_Compute_SslCertificate
    */
   public function get($project, $sslCertificate, $optParams = array())
   {
     $params = array('project' => $project, 'sslCertificate' => $sslCertificate);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_SslCertificate");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_SslCertificate");
   }
 
   /**
@@ -7951,15 +7951,15 @@ class Google_Service_Compute_SslCertificates_Resource extends Google_Service_Res
    * included in the request. (sslCertificates.insert)
    *
    * @param string $project Project ID for this request.
-   * @param Google_SslCertificate $postBody
+   * @param Appointments_Google_SslCertificate $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, Google_Service_Compute_SslCertificate $postBody, $optParams = array())
+  public function insert($project, Appointments_Google_Service_Compute_SslCertificate $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -8002,13 +8002,13 @@ class Google_Service_Compute_SslCertificates_Resource extends Google_Service_Res
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_SslCertificateList
+   * @return Appointments_Google_Service_Compute_SslCertificateList
    */
   public function listSslCertificates($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_SslCertificateList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_SslCertificateList");
   }
 }
 
@@ -8016,11 +8016,11 @@ class Google_Service_Compute_SslCertificates_Resource extends Google_Service_Res
  * The "subnetworks" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $subnetworks = $computeService->subnetworks;
  *  </code>
  */
-class Google_Service_Compute_Subnetworks_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_Subnetworks_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -8062,13 +8062,13 @@ class Google_Service_Compute_Subnetworks_Resource extends Google_Service_Resourc
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_SubnetworkAggregatedList
+   * @return Appointments_Google_Service_Compute_SubnetworkAggregatedList
    */
   public function aggregatedList($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('aggregatedList', array($params), "Google_Service_Compute_SubnetworkAggregatedList");
+    return $this->call('aggregatedList', array($params), "Appointments_Google_Service_Compute_SubnetworkAggregatedList");
   }
 
   /**
@@ -8078,13 +8078,13 @@ class Google_Service_Compute_Subnetworks_Resource extends Google_Service_Resourc
    * @param string $region Name of the region scoping this request.
    * @param string $subnetwork Name of the Subnetwork resource to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $region, $subnetwork, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'subnetwork' => $subnetwork);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -8094,13 +8094,13 @@ class Google_Service_Compute_Subnetworks_Resource extends Google_Service_Resourc
    * @param string $region Name of the region scoping this request.
    * @param string $subnetwork Name of the Subnetwork resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Subnetwork
+   * @return Appointments_Google_Service_Compute_Subnetwork
    */
   public function get($project, $region, $subnetwork, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'subnetwork' => $subnetwork);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_Subnetwork");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_Subnetwork");
   }
 
   /**
@@ -8109,15 +8109,15 @@ class Google_Service_Compute_Subnetworks_Resource extends Google_Service_Resourc
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
-   * @param Google_Subnetwork $postBody
+   * @param Appointments_Google_Subnetwork $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, $region, Google_Service_Compute_Subnetwork $postBody, $optParams = array())
+  public function insert($project, $region, Appointments_Google_Service_Compute_Subnetwork $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -8161,13 +8161,13 @@ class Google_Service_Compute_Subnetworks_Resource extends Google_Service_Resourc
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_SubnetworkList
+   * @return Appointments_Google_Service_Compute_SubnetworkList
    */
   public function listSubnetworks($project, $region, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_SubnetworkList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_SubnetworkList");
   }
 }
 
@@ -8175,11 +8175,11 @@ class Google_Service_Compute_Subnetworks_Resource extends Google_Service_Resourc
  * The "targetHttpProxies" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $targetHttpProxies = $computeService->targetHttpProxies;
  *  </code>
  */
-class Google_Service_Compute_TargetHttpProxies_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_TargetHttpProxies_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -8189,13 +8189,13 @@ class Google_Service_Compute_TargetHttpProxies_Resource extends Google_Service_R
    * @param string $targetHttpProxy Name of the TargetHttpProxy resource to
    * delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $targetHttpProxy, $optParams = array())
   {
     $params = array('project' => $project, 'targetHttpProxy' => $targetHttpProxy);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -8205,13 +8205,13 @@ class Google_Service_Compute_TargetHttpProxies_Resource extends Google_Service_R
    * @param string $targetHttpProxy Name of the TargetHttpProxy resource to
    * return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_TargetHttpProxy
+   * @return Appointments_Google_Service_Compute_TargetHttpProxy
    */
   public function get($project, $targetHttpProxy, $optParams = array())
   {
     $params = array('project' => $project, 'targetHttpProxy' => $targetHttpProxy);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_TargetHttpProxy");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_TargetHttpProxy");
   }
 
   /**
@@ -8219,15 +8219,15 @@ class Google_Service_Compute_TargetHttpProxies_Resource extends Google_Service_R
    * included in the request. (targetHttpProxies.insert)
    *
    * @param string $project Project ID for this request.
-   * @param Google_TargetHttpProxy $postBody
+   * @param Appointments_Google_TargetHttpProxy $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, Google_Service_Compute_TargetHttpProxy $postBody, $optParams = array())
+  public function insert($project, Appointments_Google_Service_Compute_TargetHttpProxy $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -8270,13 +8270,13 @@ class Google_Service_Compute_TargetHttpProxies_Resource extends Google_Service_R
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_TargetHttpProxyList
+   * @return Appointments_Google_Service_Compute_TargetHttpProxyList
    */
   public function listTargetHttpProxies($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_TargetHttpProxyList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_TargetHttpProxyList");
   }
 
   /**
@@ -8285,15 +8285,15 @@ class Google_Service_Compute_TargetHttpProxies_Resource extends Google_Service_R
    * @param string $project Project ID for this request.
    * @param string $targetHttpProxy The name of the TargetHttpProxy resource to
    * set a URL map for.
-   * @param Google_UrlMapReference $postBody
+   * @param Appointments_Google_UrlMapReference $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function setUrlMap($project, $targetHttpProxy, Google_Service_Compute_UrlMapReference $postBody, $optParams = array())
+  public function setUrlMap($project, $targetHttpProxy, Appointments_Google_Service_Compute_UrlMapReference $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'targetHttpProxy' => $targetHttpProxy, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setUrlMap', array($params), "Google_Service_Compute_Operation");
+    return $this->call('setUrlMap', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 }
 
@@ -8301,11 +8301,11 @@ class Google_Service_Compute_TargetHttpProxies_Resource extends Google_Service_R
  * The "targetHttpsProxies" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $targetHttpsProxies = $computeService->targetHttpsProxies;
  *  </code>
  */
-class Google_Service_Compute_TargetHttpsProxies_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_TargetHttpsProxies_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -8315,13 +8315,13 @@ class Google_Service_Compute_TargetHttpsProxies_Resource extends Google_Service_
    * @param string $targetHttpsProxy Name of the TargetHttpsProxy resource to
    * delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $targetHttpsProxy, $optParams = array())
   {
     $params = array('project' => $project, 'targetHttpsProxy' => $targetHttpsProxy);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -8331,13 +8331,13 @@ class Google_Service_Compute_TargetHttpsProxies_Resource extends Google_Service_
    * @param string $targetHttpsProxy Name of the TargetHttpsProxy resource to
    * return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_TargetHttpsProxy
+   * @return Appointments_Google_Service_Compute_TargetHttpsProxy
    */
   public function get($project, $targetHttpsProxy, $optParams = array())
   {
     $params = array('project' => $project, 'targetHttpsProxy' => $targetHttpsProxy);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_TargetHttpsProxy");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_TargetHttpsProxy");
   }
 
   /**
@@ -8345,15 +8345,15 @@ class Google_Service_Compute_TargetHttpsProxies_Resource extends Google_Service_
    * included in the request. (targetHttpsProxies.insert)
    *
    * @param string $project Project ID for this request.
-   * @param Google_TargetHttpsProxy $postBody
+   * @param Appointments_Google_TargetHttpsProxy $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, Google_Service_Compute_TargetHttpsProxy $postBody, $optParams = array())
+  public function insert($project, Appointments_Google_Service_Compute_TargetHttpsProxy $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -8396,13 +8396,13 @@ class Google_Service_Compute_TargetHttpsProxies_Resource extends Google_Service_
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_TargetHttpsProxyList
+   * @return Appointments_Google_Service_Compute_TargetHttpsProxyList
    */
   public function listTargetHttpsProxies($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_TargetHttpsProxyList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_TargetHttpsProxyList");
   }
 
   /**
@@ -8412,15 +8412,15 @@ class Google_Service_Compute_TargetHttpsProxies_Resource extends Google_Service_
    * @param string $project Project ID for this request.
    * @param string $targetHttpsProxy Name of the TargetHttpsProxy resource to set
    * an SSL certificate for.
-   * @param Google_TargetHttpsProxiesSetSslCertificatesRequest $postBody
+   * @param Appointments_Google_TargetHttpsProxiesSetSslCertificatesRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function setSslCertificates($project, $targetHttpsProxy, Google_Service_Compute_TargetHttpsProxiesSetSslCertificatesRequest $postBody, $optParams = array())
+  public function setSslCertificates($project, $targetHttpsProxy, Appointments_Google_Service_Compute_TargetHttpsProxiesSetSslCertificatesRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'targetHttpsProxy' => $targetHttpsProxy, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setSslCertificates', array($params), "Google_Service_Compute_Operation");
+    return $this->call('setSslCertificates', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -8429,15 +8429,15 @@ class Google_Service_Compute_TargetHttpsProxies_Resource extends Google_Service_
    * @param string $project Project ID for this request.
    * @param string $targetHttpsProxy Name of the TargetHttpsProxy resource whose
    * URL map is to be set.
-   * @param Google_UrlMapReference $postBody
+   * @param Appointments_Google_UrlMapReference $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function setUrlMap($project, $targetHttpsProxy, Google_Service_Compute_UrlMapReference $postBody, $optParams = array())
+  public function setUrlMap($project, $targetHttpsProxy, Appointments_Google_Service_Compute_UrlMapReference $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'targetHttpsProxy' => $targetHttpsProxy, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setUrlMap', array($params), "Google_Service_Compute_Operation");
+    return $this->call('setUrlMap', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 }
 
@@ -8445,11 +8445,11 @@ class Google_Service_Compute_TargetHttpsProxies_Resource extends Google_Service_
  * The "targetInstances" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $targetInstances = $computeService->targetInstances;
  *  </code>
  */
-class Google_Service_Compute_TargetInstances_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_TargetInstances_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -8492,13 +8492,13 @@ class Google_Service_Compute_TargetInstances_Resource extends Google_Service_Res
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_TargetInstanceAggregatedList
+   * @return Appointments_Google_Service_Compute_TargetInstanceAggregatedList
    */
   public function aggregatedList($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('aggregatedList', array($params), "Google_Service_Compute_TargetInstanceAggregatedList");
+    return $this->call('aggregatedList', array($params), "Appointments_Google_Service_Compute_TargetInstanceAggregatedList");
   }
 
   /**
@@ -8508,13 +8508,13 @@ class Google_Service_Compute_TargetInstances_Resource extends Google_Service_Res
    * @param string $zone Name of the zone scoping this request.
    * @param string $targetInstance Name of the TargetInstance resource to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $zone, $targetInstance, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'targetInstance' => $targetInstance);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -8524,13 +8524,13 @@ class Google_Service_Compute_TargetInstances_Resource extends Google_Service_Res
    * @param string $zone Name of the zone scoping this request.
    * @param string $targetInstance Name of the TargetInstance resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_TargetInstance
+   * @return Appointments_Google_Service_Compute_TargetInstance
    */
   public function get($project, $zone, $targetInstance, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'targetInstance' => $targetInstance);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_TargetInstance");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_TargetInstance");
   }
 
   /**
@@ -8539,15 +8539,15 @@ class Google_Service_Compute_TargetInstances_Resource extends Google_Service_Res
    *
    * @param string $project Project ID for this request.
    * @param string $zone Name of the zone scoping this request.
-   * @param Google_TargetInstance $postBody
+   * @param Appointments_Google_TargetInstance $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, $zone, Google_Service_Compute_TargetInstance $postBody, $optParams = array())
+  public function insert($project, $zone, Appointments_Google_Service_Compute_TargetInstance $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -8591,13 +8591,13 @@ class Google_Service_Compute_TargetInstances_Resource extends Google_Service_Res
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_TargetInstanceList
+   * @return Appointments_Google_Service_Compute_TargetInstanceList
    */
   public function listTargetInstances($project, $zone, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_TargetInstanceList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_TargetInstanceList");
   }
 }
 
@@ -8605,11 +8605,11 @@ class Google_Service_Compute_TargetInstances_Resource extends Google_Service_Res
  * The "targetPools" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $targetPools = $computeService->targetPools;
  *  </code>
  */
-class Google_Service_Compute_TargetPools_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_TargetPools_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -8618,15 +8618,15 @@ class Google_Service_Compute_TargetPools_Resource extends Google_Service_Resourc
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
    * @param string $targetPool Name of the target pool to add a health check to.
-   * @param Google_TargetPoolsAddHealthCheckRequest $postBody
+   * @param Appointments_Google_TargetPoolsAddHealthCheckRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function addHealthCheck($project, $region, $targetPool, Google_Service_Compute_TargetPoolsAddHealthCheckRequest $postBody, $optParams = array())
+  public function addHealthCheck($project, $region, $targetPool, Appointments_Google_Service_Compute_TargetPoolsAddHealthCheckRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'targetPool' => $targetPool, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('addHealthCheck', array($params), "Google_Service_Compute_Operation");
+    return $this->call('addHealthCheck', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -8636,15 +8636,15 @@ class Google_Service_Compute_TargetPools_Resource extends Google_Service_Resourc
    * @param string $region Name of the region scoping this request.
    * @param string $targetPool Name of the TargetPool resource to add instances
    * to.
-   * @param Google_TargetPoolsAddInstanceRequest $postBody
+   * @param Appointments_Google_TargetPoolsAddInstanceRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function addInstance($project, $region, $targetPool, Google_Service_Compute_TargetPoolsAddInstanceRequest $postBody, $optParams = array())
+  public function addInstance($project, $region, $targetPool, Appointments_Google_Service_Compute_TargetPoolsAddInstanceRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'targetPool' => $targetPool, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('addInstance', array($params), "Google_Service_Compute_Operation");
+    return $this->call('addInstance', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -8686,13 +8686,13 @@ class Google_Service_Compute_TargetPools_Resource extends Google_Service_Resourc
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_TargetPoolAggregatedList
+   * @return Appointments_Google_Service_Compute_TargetPoolAggregatedList
    */
   public function aggregatedList($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('aggregatedList', array($params), "Google_Service_Compute_TargetPoolAggregatedList");
+    return $this->call('aggregatedList', array($params), "Appointments_Google_Service_Compute_TargetPoolAggregatedList");
   }
 
   /**
@@ -8702,13 +8702,13 @@ class Google_Service_Compute_TargetPools_Resource extends Google_Service_Resourc
    * @param string $region Name of the region scoping this request.
    * @param string $targetPool Name of the TargetPool resource to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $region, $targetPool, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'targetPool' => $targetPool);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -8718,13 +8718,13 @@ class Google_Service_Compute_TargetPools_Resource extends Google_Service_Resourc
    * @param string $region Name of the region scoping this request.
    * @param string $targetPool Name of the TargetPool resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_TargetPool
+   * @return Appointments_Google_Service_Compute_TargetPool
    */
   public function get($project, $region, $targetPool, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'targetPool' => $targetPool);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_TargetPool");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_TargetPool");
   }
 
   /**
@@ -8735,15 +8735,15 @@ class Google_Service_Compute_TargetPools_Resource extends Google_Service_Resourc
    * @param string $region Name of the region scoping this request.
    * @param string $targetPool Name of the TargetPool resource to which the
    * queried instance belongs.
-   * @param Google_InstanceReference $postBody
+   * @param Appointments_Google_InstanceReference $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_TargetPoolInstanceHealth
+   * @return Appointments_Google_Service_Compute_TargetPoolInstanceHealth
    */
-  public function getHealth($project, $region, $targetPool, Google_Service_Compute_InstanceReference $postBody, $optParams = array())
+  public function getHealth($project, $region, $targetPool, Appointments_Google_Service_Compute_InstanceReference $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'targetPool' => $targetPool, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('getHealth', array($params), "Google_Service_Compute_TargetPoolInstanceHealth");
+    return $this->call('getHealth', array($params), "Appointments_Google_Service_Compute_TargetPoolInstanceHealth");
   }
 
   /**
@@ -8752,15 +8752,15 @@ class Google_Service_Compute_TargetPools_Resource extends Google_Service_Resourc
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
-   * @param Google_TargetPool $postBody
+   * @param Appointments_Google_TargetPool $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, $region, Google_Service_Compute_TargetPool $postBody, $optParams = array())
+  public function insert($project, $region, Appointments_Google_Service_Compute_TargetPool $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -8804,13 +8804,13 @@ class Google_Service_Compute_TargetPools_Resource extends Google_Service_Resourc
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_TargetPoolList
+   * @return Appointments_Google_Service_Compute_TargetPoolList
    */
   public function listTargetPools($project, $region, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_TargetPoolList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_TargetPoolList");
   }
 
   /**
@@ -8820,15 +8820,15 @@ class Google_Service_Compute_TargetPools_Resource extends Google_Service_Resourc
    * @param string $region Name of the region for this request.
    * @param string $targetPool Name of the target pool to remove health checks
    * from.
-   * @param Google_TargetPoolsRemoveHealthCheckRequest $postBody
+   * @param Appointments_Google_TargetPoolsRemoveHealthCheckRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function removeHealthCheck($project, $region, $targetPool, Google_Service_Compute_TargetPoolsRemoveHealthCheckRequest $postBody, $optParams = array())
+  public function removeHealthCheck($project, $region, $targetPool, Appointments_Google_Service_Compute_TargetPoolsRemoveHealthCheckRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'targetPool' => $targetPool, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('removeHealthCheck', array($params), "Google_Service_Compute_Operation");
+    return $this->call('removeHealthCheck', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -8838,15 +8838,15 @@ class Google_Service_Compute_TargetPools_Resource extends Google_Service_Resourc
    * @param string $region Name of the region scoping this request.
    * @param string $targetPool Name of the TargetPool resource to remove instances
    * from.
-   * @param Google_TargetPoolsRemoveInstanceRequest $postBody
+   * @param Appointments_Google_TargetPoolsRemoveInstanceRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function removeInstance($project, $region, $targetPool, Google_Service_Compute_TargetPoolsRemoveInstanceRequest $postBody, $optParams = array())
+  public function removeInstance($project, $region, $targetPool, Appointments_Google_Service_Compute_TargetPoolsRemoveInstanceRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'targetPool' => $targetPool, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('removeInstance', array($params), "Google_Service_Compute_Operation");
+    return $this->call('removeInstance', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -8856,17 +8856,17 @@ class Google_Service_Compute_TargetPools_Resource extends Google_Service_Resourc
    * @param string $region Name of the region scoping this request.
    * @param string $targetPool Name of the TargetPool resource to set a backup
    * pool for.
-   * @param Google_TargetReference $postBody
+   * @param Appointments_Google_TargetReference $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param float failoverRatio New failoverRatio value for the target pool.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function setBackup($project, $region, $targetPool, Google_Service_Compute_TargetReference $postBody, $optParams = array())
+  public function setBackup($project, $region, $targetPool, Appointments_Google_Service_Compute_TargetReference $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'targetPool' => $targetPool, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setBackup', array($params), "Google_Service_Compute_Operation");
+    return $this->call('setBackup', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 }
 
@@ -8874,11 +8874,11 @@ class Google_Service_Compute_TargetPools_Resource extends Google_Service_Resourc
  * The "targetVpnGateways" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $targetVpnGateways = $computeService->targetVpnGateways;
  *  </code>
  */
-class Google_Service_Compute_TargetVpnGateways_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_TargetVpnGateways_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -8921,13 +8921,13 @@ class Google_Service_Compute_TargetVpnGateways_Resource extends Google_Service_R
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_TargetVpnGatewayAggregatedList
+   * @return Appointments_Google_Service_Compute_TargetVpnGatewayAggregatedList
    */
   public function aggregatedList($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('aggregatedList', array($params), "Google_Service_Compute_TargetVpnGatewayAggregatedList");
+    return $this->call('aggregatedList', array($params), "Appointments_Google_Service_Compute_TargetVpnGatewayAggregatedList");
   }
 
   /**
@@ -8937,13 +8937,13 @@ class Google_Service_Compute_TargetVpnGateways_Resource extends Google_Service_R
    * @param string $region The name of the region for this request.
    * @param string $targetVpnGateway Name of the target VPN gateway to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $region, $targetVpnGateway, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'targetVpnGateway' => $targetVpnGateway);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -8953,13 +8953,13 @@ class Google_Service_Compute_TargetVpnGateways_Resource extends Google_Service_R
    * @param string $region The name of the region for this request.
    * @param string $targetVpnGateway Name of the target VPN gateway to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_TargetVpnGateway
+   * @return Appointments_Google_Service_Compute_TargetVpnGateway
    */
   public function get($project, $region, $targetVpnGateway, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'targetVpnGateway' => $targetVpnGateway);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_TargetVpnGateway");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_TargetVpnGateway");
   }
 
   /**
@@ -8968,15 +8968,15 @@ class Google_Service_Compute_TargetVpnGateways_Resource extends Google_Service_R
    *
    * @param string $project Project ID for this request.
    * @param string $region The name of the region for this request.
-   * @param Google_TargetVpnGateway $postBody
+   * @param Appointments_Google_TargetVpnGateway $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, $region, Google_Service_Compute_TargetVpnGateway $postBody, $optParams = array())
+  public function insert($project, $region, Appointments_Google_Service_Compute_TargetVpnGateway $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -9020,13 +9020,13 @@ class Google_Service_Compute_TargetVpnGateways_Resource extends Google_Service_R
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_TargetVpnGatewayList
+   * @return Appointments_Google_Service_Compute_TargetVpnGatewayList
    */
   public function listTargetVpnGateways($project, $region, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_TargetVpnGatewayList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_TargetVpnGatewayList");
   }
 }
 
@@ -9034,11 +9034,11 @@ class Google_Service_Compute_TargetVpnGateways_Resource extends Google_Service_R
  * The "urlMaps" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $urlMaps = $computeService->urlMaps;
  *  </code>
  */
-class Google_Service_Compute_UrlMaps_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_UrlMaps_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -9047,13 +9047,13 @@ class Google_Service_Compute_UrlMaps_Resource extends Google_Service_Resource
    * @param string $project Project ID for this request.
    * @param string $urlMap Name of the UrlMap resource to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $urlMap, $optParams = array())
   {
     $params = array('project' => $project, 'urlMap' => $urlMap);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -9062,13 +9062,13 @@ class Google_Service_Compute_UrlMaps_Resource extends Google_Service_Resource
    * @param string $project Project ID for this request.
    * @param string $urlMap Name of the UrlMap resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_UrlMap
+   * @return Appointments_Google_Service_Compute_UrlMap
    */
   public function get($project, $urlMap, $optParams = array())
   {
     $params = array('project' => $project, 'urlMap' => $urlMap);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_UrlMap");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_UrlMap");
   }
 
   /**
@@ -9076,15 +9076,15 @@ class Google_Service_Compute_UrlMaps_Resource extends Google_Service_Resource
    * the request. (urlMaps.insert)
    *
    * @param string $project Project ID for this request.
-   * @param Google_UrlMap $postBody
+   * @param Appointments_Google_UrlMap $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, Google_Service_Compute_UrlMap $postBody, $optParams = array())
+  public function insert($project, Appointments_Google_Service_Compute_UrlMap $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -9127,13 +9127,13 @@ class Google_Service_Compute_UrlMaps_Resource extends Google_Service_Resource
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_UrlMapList
+   * @return Appointments_Google_Service_Compute_UrlMapList
    */
   public function listUrlMaps($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_UrlMapList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_UrlMapList");
   }
 
   /**
@@ -9142,15 +9142,15 @@ class Google_Service_Compute_UrlMaps_Resource extends Google_Service_Resource
    *
    * @param string $project Project ID for this request.
    * @param string $urlMap Name of the UrlMap resource to update.
-   * @param Google_UrlMap $postBody
+   * @param Appointments_Google_UrlMap $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function patch($project, $urlMap, Google_Service_Compute_UrlMap $postBody, $optParams = array())
+  public function patch($project, $urlMap, Appointments_Google_Service_Compute_UrlMap $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'urlMap' => $urlMap, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Compute_Operation");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -9158,15 +9158,15 @@ class Google_Service_Compute_UrlMaps_Resource extends Google_Service_Resource
    *
    * @param string $project Project ID for this request.
    * @param string $urlMap Name of the UrlMap resource to update.
-   * @param Google_UrlMap $postBody
+   * @param Appointments_Google_UrlMap $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function update($project, $urlMap, Google_Service_Compute_UrlMap $postBody, $optParams = array())
+  public function update($project, $urlMap, Appointments_Google_Service_Compute_UrlMap $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'urlMap' => $urlMap, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Compute_Operation");
+    return $this->call('update', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -9176,15 +9176,15 @@ class Google_Service_Compute_UrlMaps_Resource extends Google_Service_Resource
    *
    * @param string $project Project ID for this request.
    * @param string $urlMap Name of the UrlMap resource to be validated as.
-   * @param Google_UrlMapsValidateRequest $postBody
+   * @param Appointments_Google_UrlMapsValidateRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_UrlMapsValidateResponse
+   * @return Appointments_Google_Service_Compute_UrlMapsValidateResponse
    */
-  public function validate($project, $urlMap, Google_Service_Compute_UrlMapsValidateRequest $postBody, $optParams = array())
+  public function validate($project, $urlMap, Appointments_Google_Service_Compute_UrlMapsValidateRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'urlMap' => $urlMap, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('validate', array($params), "Google_Service_Compute_UrlMapsValidateResponse");
+    return $this->call('validate', array($params), "Appointments_Google_Service_Compute_UrlMapsValidateResponse");
   }
 }
 
@@ -9192,11 +9192,11 @@ class Google_Service_Compute_UrlMaps_Resource extends Google_Service_Resource
  * The "vpnTunnels" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $vpnTunnels = $computeService->vpnTunnels;
  *  </code>
  */
-class Google_Service_Compute_VpnTunnels_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_VpnTunnels_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -9238,13 +9238,13 @@ class Google_Service_Compute_VpnTunnels_Resource extends Google_Service_Resource
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_VpnTunnelAggregatedList
+   * @return Appointments_Google_Service_Compute_VpnTunnelAggregatedList
    */
   public function aggregatedList($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('aggregatedList', array($params), "Google_Service_Compute_VpnTunnelAggregatedList");
+    return $this->call('aggregatedList', array($params), "Appointments_Google_Service_Compute_VpnTunnelAggregatedList");
   }
 
   /**
@@ -9254,13 +9254,13 @@ class Google_Service_Compute_VpnTunnels_Resource extends Google_Service_Resource
    * @param string $region The name of the region for this request.
    * @param string $vpnTunnel Name of the VpnTunnel resource to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function delete($project, $region, $vpnTunnel, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'vpnTunnel' => $vpnTunnel);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Compute_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -9270,13 +9270,13 @@ class Google_Service_Compute_VpnTunnels_Resource extends Google_Service_Resource
    * @param string $region The name of the region for this request.
    * @param string $vpnTunnel Name of the VpnTunnel resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_VpnTunnel
+   * @return Appointments_Google_Service_Compute_VpnTunnel
    */
   public function get($project, $region, $vpnTunnel, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'vpnTunnel' => $vpnTunnel);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_VpnTunnel");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_VpnTunnel");
   }
 
   /**
@@ -9285,15 +9285,15 @@ class Google_Service_Compute_VpnTunnels_Resource extends Google_Service_Resource
    *
    * @param string $project Project ID for this request.
    * @param string $region The name of the region for this request.
-   * @param Google_VpnTunnel $postBody
+   * @param Appointments_Google_VpnTunnel $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
-  public function insert($project, $region, Google_Service_Compute_VpnTunnel $postBody, $optParams = array())
+  public function insert($project, $region, Appointments_Google_Service_Compute_VpnTunnel $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Compute_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -9337,13 +9337,13 @@ class Google_Service_Compute_VpnTunnels_Resource extends Google_Service_Resource
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_VpnTunnelList
+   * @return Appointments_Google_Service_Compute_VpnTunnelList
    */
   public function listVpnTunnels($project, $region, $optParams = array())
   {
     $params = array('project' => $project, 'region' => $region);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_VpnTunnelList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_VpnTunnelList");
   }
 }
 
@@ -9351,11 +9351,11 @@ class Google_Service_Compute_VpnTunnels_Resource extends Google_Service_Resource
  * The "zoneOperations" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $zoneOperations = $computeService->zoneOperations;
  *  </code>
  */
-class Google_Service_Compute_ZoneOperations_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_ZoneOperations_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -9382,13 +9382,13 @@ class Google_Service_Compute_ZoneOperations_Resource extends Google_Service_Reso
    * @param string $zone Name of the zone for this request.
    * @param string $operation Name of the Operations resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Operation
+   * @return Appointments_Google_Service_Compute_Operation
    */
   public function get($project, $zone, $operation, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'operation' => $operation);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_Operation");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_Operation");
   }
 
   /**
@@ -9432,13 +9432,13 @@ class Google_Service_Compute_ZoneOperations_Resource extends Google_Service_Reso
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_OperationList
+   * @return Appointments_Google_Service_Compute_OperationList
    */
   public function listZoneOperations($project, $zone, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_OperationList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_OperationList");
   }
 }
 
@@ -9446,11 +9446,11 @@ class Google_Service_Compute_ZoneOperations_Resource extends Google_Service_Reso
  * The "zones" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeService = new Google_Service_Compute(...);
+ *   $computeService = new Appointments_Google_Service_Compute(...);
  *   $zones = $computeService->zones;
  *  </code>
  */
-class Google_Service_Compute_Zones_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Compute_Zones_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -9459,13 +9459,13 @@ class Google_Service_Compute_Zones_Resource extends Google_Service_Resource
    * @param string $project Project ID for this request.
    * @param string $zone Name of the zone resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Compute_Zone
+   * @return Appointments_Google_Service_Compute_Zone
    */
   public function get($project, $zone, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Compute_Zone");
+    return $this->call('get', array($params), "Appointments_Google_Service_Compute_Zone");
   }
 
   /**
@@ -9508,20 +9508,20 @@ class Google_Service_Compute_Zones_Resource extends Google_Service_Resource
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_Compute_ZoneList
+   * @return Appointments_Google_Service_Compute_ZoneList
    */
   public function listZones($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Compute_ZoneList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Compute_ZoneList");
   }
 }
 
 
 
 
-class Google_Service_Compute_AccessConfig extends Google_Model
+class Appointments_Google_Service_Compute_AccessConfig extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -9565,7 +9565,7 @@ class Google_Service_Compute_AccessConfig extends Google_Model
   }
 }
 
-class Google_Service_Compute_Address extends Google_Collection
+class Appointments_Google_Service_Compute_Address extends Appointments_Google_Collection
 {
   protected $collection_key = 'users';
   protected $internal_gapi_mappings = array(
@@ -9664,12 +9664,12 @@ class Google_Service_Compute_Address extends Google_Collection
   }
 }
 
-class Google_Service_Compute_AddressAggregatedList extends Google_Model
+class Appointments_Google_Service_Compute_AddressAggregatedList extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_AddressesScopedList';
+  protected $itemsType = 'Appointments_Google_Service_Compute_AddressesScopedList';
   protected $itemsDataType = 'map';
   public $kind;
   public $nextPageToken;
@@ -9718,13 +9718,13 @@ class Google_Service_Compute_AddressAggregatedList extends Google_Model
   }
 }
 
-class Google_Service_Compute_AddressList extends Google_Collection
+class Appointments_Google_Service_Compute_AddressList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_Address';
+  protected $itemsType = 'Appointments_Google_Service_Compute_Address';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -9773,14 +9773,14 @@ class Google_Service_Compute_AddressList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_AddressesScopedList extends Google_Collection
+class Appointments_Google_Service_Compute_AddressesScopedList extends Appointments_Google_Collection
 {
   protected $collection_key = 'addresses';
   protected $internal_gapi_mappings = array(
   );
-  protected $addressesType = 'Google_Service_Compute_Address';
+  protected $addressesType = 'Appointments_Google_Service_Compute_Address';
   protected $addressesDataType = 'array';
-  protected $warningType = 'Google_Service_Compute_AddressesScopedListWarning';
+  protected $warningType = 'Appointments_Google_Service_Compute_AddressesScopedListWarning';
   protected $warningDataType = '';
 
 
@@ -9792,7 +9792,7 @@ class Google_Service_Compute_AddressesScopedList extends Google_Collection
   {
     return $this->addresses;
   }
-  public function setWarning(Google_Service_Compute_AddressesScopedListWarning $warning)
+  public function setWarning(Appointments_Google_Service_Compute_AddressesScopedListWarning $warning)
   {
     $this->warning = $warning;
   }
@@ -9802,13 +9802,13 @@ class Google_Service_Compute_AddressesScopedList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_AddressesScopedListWarning extends Google_Collection
+class Appointments_Google_Service_Compute_AddressesScopedListWarning extends Appointments_Google_Collection
 {
   protected $collection_key = 'data';
   protected $internal_gapi_mappings = array(
   );
   public $code;
-  protected $dataType = 'Google_Service_Compute_AddressesScopedListWarningData';
+  protected $dataType = 'Appointments_Google_Service_Compute_AddressesScopedListWarningData';
   protected $dataDataType = 'array';
   public $message;
 
@@ -9839,7 +9839,7 @@ class Google_Service_Compute_AddressesScopedListWarning extends Google_Collectio
   }
 }
 
-class Google_Service_Compute_AddressesScopedListWarningData extends Google_Model
+class Appointments_Google_Service_Compute_AddressesScopedListWarningData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -9865,7 +9865,7 @@ class Google_Service_Compute_AddressesScopedListWarningData extends Google_Model
   }
 }
 
-class Google_Service_Compute_AttachedDisk extends Google_Collection
+class Appointments_Google_Service_Compute_AttachedDisk extends Appointments_Google_Collection
 {
   protected $collection_key = 'licenses';
   protected $internal_gapi_mappings = array(
@@ -9874,7 +9874,7 @@ class Google_Service_Compute_AttachedDisk extends Google_Collection
   public $boot;
   public $deviceName;
   public $index;
-  protected $initializeParamsType = 'Google_Service_Compute_AttachedDiskInitializeParams';
+  protected $initializeParamsType = 'Appointments_Google_Service_Compute_AttachedDiskInitializeParams';
   protected $initializeParamsDataType = '';
   public $interface;
   public $kind;
@@ -9916,7 +9916,7 @@ class Google_Service_Compute_AttachedDisk extends Google_Collection
   {
     return $this->index;
   }
-  public function setInitializeParams(Google_Service_Compute_AttachedDiskInitializeParams $initializeParams)
+  public function setInitializeParams(Appointments_Google_Service_Compute_AttachedDiskInitializeParams $initializeParams)
   {
     $this->initializeParams = $initializeParams;
   }
@@ -9974,7 +9974,7 @@ class Google_Service_Compute_AttachedDisk extends Google_Collection
   }
 }
 
-class Google_Service_Compute_AttachedDiskInitializeParams extends Google_Model
+class Appointments_Google_Service_Compute_AttachedDiskInitializeParams extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -10018,11 +10018,11 @@ class Google_Service_Compute_AttachedDiskInitializeParams extends Google_Model
   }
 }
 
-class Google_Service_Compute_Autoscaler extends Google_Model
+class Appointments_Google_Service_Compute_Autoscaler extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $autoscalingPolicyType = 'Google_Service_Compute_AutoscalingPolicy';
+  protected $autoscalingPolicyType = 'Appointments_Google_Service_Compute_AutoscalingPolicy';
   protected $autoscalingPolicyDataType = '';
   public $creationTimestamp;
   public $description;
@@ -10034,7 +10034,7 @@ class Google_Service_Compute_Autoscaler extends Google_Model
   public $zone;
 
 
-  public function setAutoscalingPolicy(Google_Service_Compute_AutoscalingPolicy $autoscalingPolicy)
+  public function setAutoscalingPolicy(Appointments_Google_Service_Compute_AutoscalingPolicy $autoscalingPolicy)
   {
     $this->autoscalingPolicy = $autoscalingPolicy;
   }
@@ -10108,12 +10108,12 @@ class Google_Service_Compute_Autoscaler extends Google_Model
   }
 }
 
-class Google_Service_Compute_AutoscalerAggregatedList extends Google_Model
+class Appointments_Google_Service_Compute_AutoscalerAggregatedList extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_AutoscalersScopedList';
+  protected $itemsType = 'Appointments_Google_Service_Compute_AutoscalersScopedList';
   protected $itemsDataType = 'map';
   public $kind;
   public $nextPageToken;
@@ -10162,13 +10162,13 @@ class Google_Service_Compute_AutoscalerAggregatedList extends Google_Model
   }
 }
 
-class Google_Service_Compute_AutoscalerList extends Google_Collection
+class Appointments_Google_Service_Compute_AutoscalerList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_Autoscaler';
+  protected $itemsType = 'Appointments_Google_Service_Compute_Autoscaler';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -10217,14 +10217,14 @@ class Google_Service_Compute_AutoscalerList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_AutoscalersScopedList extends Google_Collection
+class Appointments_Google_Service_Compute_AutoscalersScopedList extends Appointments_Google_Collection
 {
   protected $collection_key = 'autoscalers';
   protected $internal_gapi_mappings = array(
   );
-  protected $autoscalersType = 'Google_Service_Compute_Autoscaler';
+  protected $autoscalersType = 'Appointments_Google_Service_Compute_Autoscaler';
   protected $autoscalersDataType = 'array';
-  protected $warningType = 'Google_Service_Compute_AutoscalersScopedListWarning';
+  protected $warningType = 'Appointments_Google_Service_Compute_AutoscalersScopedListWarning';
   protected $warningDataType = '';
 
 
@@ -10236,7 +10236,7 @@ class Google_Service_Compute_AutoscalersScopedList extends Google_Collection
   {
     return $this->autoscalers;
   }
-  public function setWarning(Google_Service_Compute_AutoscalersScopedListWarning $warning)
+  public function setWarning(Appointments_Google_Service_Compute_AutoscalersScopedListWarning $warning)
   {
     $this->warning = $warning;
   }
@@ -10246,13 +10246,13 @@ class Google_Service_Compute_AutoscalersScopedList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_AutoscalersScopedListWarning extends Google_Collection
+class Appointments_Google_Service_Compute_AutoscalersScopedListWarning extends Appointments_Google_Collection
 {
   protected $collection_key = 'data';
   protected $internal_gapi_mappings = array(
   );
   public $code;
-  protected $dataType = 'Google_Service_Compute_AutoscalersScopedListWarningData';
+  protected $dataType = 'Appointments_Google_Service_Compute_AutoscalersScopedListWarningData';
   protected $dataDataType = 'array';
   public $message;
 
@@ -10283,7 +10283,7 @@ class Google_Service_Compute_AutoscalersScopedListWarning extends Google_Collect
   }
 }
 
-class Google_Service_Compute_AutoscalersScopedListWarningData extends Google_Model
+class Appointments_Google_Service_Compute_AutoscalersScopedListWarningData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -10309,17 +10309,17 @@ class Google_Service_Compute_AutoscalersScopedListWarningData extends Google_Mod
   }
 }
 
-class Google_Service_Compute_AutoscalingPolicy extends Google_Collection
+class Appointments_Google_Service_Compute_AutoscalingPolicy extends Appointments_Google_Collection
 {
   protected $collection_key = 'customMetricUtilizations';
   protected $internal_gapi_mappings = array(
   );
   public $coolDownPeriodSec;
-  protected $cpuUtilizationType = 'Google_Service_Compute_AutoscalingPolicyCpuUtilization';
+  protected $cpuUtilizationType = 'Appointments_Google_Service_Compute_AutoscalingPolicyCpuUtilization';
   protected $cpuUtilizationDataType = '';
-  protected $customMetricUtilizationsType = 'Google_Service_Compute_AutoscalingPolicyCustomMetricUtilization';
+  protected $customMetricUtilizationsType = 'Appointments_Google_Service_Compute_AutoscalingPolicyCustomMetricUtilization';
   protected $customMetricUtilizationsDataType = 'array';
-  protected $loadBalancingUtilizationType = 'Google_Service_Compute_AutoscalingPolicyLoadBalancingUtilization';
+  protected $loadBalancingUtilizationType = 'Appointments_Google_Service_Compute_AutoscalingPolicyLoadBalancingUtilization';
   protected $loadBalancingUtilizationDataType = '';
   public $maxNumReplicas;
   public $minNumReplicas;
@@ -10333,7 +10333,7 @@ class Google_Service_Compute_AutoscalingPolicy extends Google_Collection
   {
     return $this->coolDownPeriodSec;
   }
-  public function setCpuUtilization(Google_Service_Compute_AutoscalingPolicyCpuUtilization $cpuUtilization)
+  public function setCpuUtilization(Appointments_Google_Service_Compute_AutoscalingPolicyCpuUtilization $cpuUtilization)
   {
     $this->cpuUtilization = $cpuUtilization;
   }
@@ -10349,7 +10349,7 @@ class Google_Service_Compute_AutoscalingPolicy extends Google_Collection
   {
     return $this->customMetricUtilizations;
   }
-  public function setLoadBalancingUtilization(Google_Service_Compute_AutoscalingPolicyLoadBalancingUtilization $loadBalancingUtilization)
+  public function setLoadBalancingUtilization(Appointments_Google_Service_Compute_AutoscalingPolicyLoadBalancingUtilization $loadBalancingUtilization)
   {
     $this->loadBalancingUtilization = $loadBalancingUtilization;
   }
@@ -10375,7 +10375,7 @@ class Google_Service_Compute_AutoscalingPolicy extends Google_Collection
   }
 }
 
-class Google_Service_Compute_AutoscalingPolicyCpuUtilization extends Google_Model
+class Appointments_Google_Service_Compute_AutoscalingPolicyCpuUtilization extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -10392,7 +10392,7 @@ class Google_Service_Compute_AutoscalingPolicyCpuUtilization extends Google_Mode
   }
 }
 
-class Google_Service_Compute_AutoscalingPolicyCustomMetricUtilization extends Google_Model
+class Appointments_Google_Service_Compute_AutoscalingPolicyCustomMetricUtilization extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -10427,7 +10427,7 @@ class Google_Service_Compute_AutoscalingPolicyCustomMetricUtilization extends Go
   }
 }
 
-class Google_Service_Compute_AutoscalingPolicyLoadBalancingUtilization extends Google_Model
+class Appointments_Google_Service_Compute_AutoscalingPolicyLoadBalancingUtilization extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -10444,7 +10444,7 @@ class Google_Service_Compute_AutoscalingPolicyLoadBalancingUtilization extends G
   }
 }
 
-class Google_Service_Compute_Backend extends Google_Model
+class Appointments_Google_Service_Compute_Backend extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -10515,12 +10515,12 @@ class Google_Service_Compute_Backend extends Google_Model
   }
 }
 
-class Google_Service_Compute_BackendService extends Google_Collection
+class Appointments_Google_Service_Compute_BackendService extends Appointments_Google_Collection
 {
   protected $collection_key = 'healthChecks';
   protected $internal_gapi_mappings = array(
   );
-  protected $backendsType = 'Google_Service_Compute_Backend';
+  protected $backendsType = 'Appointments_Google_Service_Compute_Backend';
   protected $backendsDataType = 'array';
   public $creationTimestamp;
   public $description;
@@ -10642,12 +10642,12 @@ class Google_Service_Compute_BackendService extends Google_Collection
   }
 }
 
-class Google_Service_Compute_BackendServiceGroupHealth extends Google_Collection
+class Appointments_Google_Service_Compute_BackendServiceGroupHealth extends Appointments_Google_Collection
 {
   protected $collection_key = 'healthStatus';
   protected $internal_gapi_mappings = array(
   );
-  protected $healthStatusType = 'Google_Service_Compute_HealthStatus';
+  protected $healthStatusType = 'Appointments_Google_Service_Compute_HealthStatus';
   protected $healthStatusDataType = 'array';
   public $kind;
 
@@ -10670,13 +10670,13 @@ class Google_Service_Compute_BackendServiceGroupHealth extends Google_Collection
   }
 }
 
-class Google_Service_Compute_BackendServiceList extends Google_Collection
+class Appointments_Google_Service_Compute_BackendServiceList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_BackendService';
+  protected $itemsType = 'Appointments_Google_Service_Compute_BackendService';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -10725,7 +10725,7 @@ class Google_Service_Compute_BackendServiceList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_DeprecationStatus extends Google_Model
+class Appointments_Google_Service_Compute_DeprecationStatus extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -10778,7 +10778,7 @@ class Google_Service_Compute_DeprecationStatus extends Google_Model
   }
 }
 
-class Google_Service_Compute_Disk extends Google_Collection
+class Appointments_Google_Service_Compute_Disk extends Appointments_Google_Collection
 {
   protected $collection_key = 'users';
   protected $internal_gapi_mappings = array(
@@ -10958,12 +10958,12 @@ class Google_Service_Compute_Disk extends Google_Collection
   }
 }
 
-class Google_Service_Compute_DiskAggregatedList extends Google_Model
+class Appointments_Google_Service_Compute_DiskAggregatedList extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_DisksScopedList';
+  protected $itemsType = 'Appointments_Google_Service_Compute_DisksScopedList';
   protected $itemsDataType = 'map';
   public $kind;
   public $nextPageToken;
@@ -11012,13 +11012,13 @@ class Google_Service_Compute_DiskAggregatedList extends Google_Model
   }
 }
 
-class Google_Service_Compute_DiskList extends Google_Collection
+class Appointments_Google_Service_Compute_DiskList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_Disk';
+  protected $itemsType = 'Appointments_Google_Service_Compute_Disk';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -11067,7 +11067,7 @@ class Google_Service_Compute_DiskList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_DiskMoveRequest extends Google_Model
+class Appointments_Google_Service_Compute_DiskMoveRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -11093,13 +11093,13 @@ class Google_Service_Compute_DiskMoveRequest extends Google_Model
   }
 }
 
-class Google_Service_Compute_DiskType extends Google_Model
+class Appointments_Google_Service_Compute_DiskType extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $creationTimestamp;
   public $defaultDiskSizeGb;
-  protected $deprecatedType = 'Google_Service_Compute_DeprecationStatus';
+  protected $deprecatedType = 'Appointments_Google_Service_Compute_DeprecationStatus';
   protected $deprecatedDataType = '';
   public $description;
   public $id;
@@ -11126,7 +11126,7 @@ class Google_Service_Compute_DiskType extends Google_Model
   {
     return $this->defaultDiskSizeGb;
   }
-  public function setDeprecated(Google_Service_Compute_DeprecationStatus $deprecated)
+  public function setDeprecated(Appointments_Google_Service_Compute_DeprecationStatus $deprecated)
   {
     $this->deprecated = $deprecated;
   }
@@ -11192,12 +11192,12 @@ class Google_Service_Compute_DiskType extends Google_Model
   }
 }
 
-class Google_Service_Compute_DiskTypeAggregatedList extends Google_Model
+class Appointments_Google_Service_Compute_DiskTypeAggregatedList extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_DiskTypesScopedList';
+  protected $itemsType = 'Appointments_Google_Service_Compute_DiskTypesScopedList';
   protected $itemsDataType = 'map';
   public $kind;
   public $nextPageToken;
@@ -11246,13 +11246,13 @@ class Google_Service_Compute_DiskTypeAggregatedList extends Google_Model
   }
 }
 
-class Google_Service_Compute_DiskTypeList extends Google_Collection
+class Appointments_Google_Service_Compute_DiskTypeList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_DiskType';
+  protected $itemsType = 'Appointments_Google_Service_Compute_DiskType';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -11301,14 +11301,14 @@ class Google_Service_Compute_DiskTypeList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_DiskTypesScopedList extends Google_Collection
+class Appointments_Google_Service_Compute_DiskTypesScopedList extends Appointments_Google_Collection
 {
   protected $collection_key = 'diskTypes';
   protected $internal_gapi_mappings = array(
   );
-  protected $diskTypesType = 'Google_Service_Compute_DiskType';
+  protected $diskTypesType = 'Appointments_Google_Service_Compute_DiskType';
   protected $diskTypesDataType = 'array';
-  protected $warningType = 'Google_Service_Compute_DiskTypesScopedListWarning';
+  protected $warningType = 'Appointments_Google_Service_Compute_DiskTypesScopedListWarning';
   protected $warningDataType = '';
 
 
@@ -11320,7 +11320,7 @@ class Google_Service_Compute_DiskTypesScopedList extends Google_Collection
   {
     return $this->diskTypes;
   }
-  public function setWarning(Google_Service_Compute_DiskTypesScopedListWarning $warning)
+  public function setWarning(Appointments_Google_Service_Compute_DiskTypesScopedListWarning $warning)
   {
     $this->warning = $warning;
   }
@@ -11330,13 +11330,13 @@ class Google_Service_Compute_DiskTypesScopedList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_DiskTypesScopedListWarning extends Google_Collection
+class Appointments_Google_Service_Compute_DiskTypesScopedListWarning extends Appointments_Google_Collection
 {
   protected $collection_key = 'data';
   protected $internal_gapi_mappings = array(
   );
   public $code;
-  protected $dataType = 'Google_Service_Compute_DiskTypesScopedListWarningData';
+  protected $dataType = 'Appointments_Google_Service_Compute_DiskTypesScopedListWarningData';
   protected $dataDataType = 'array';
   public $message;
 
@@ -11367,7 +11367,7 @@ class Google_Service_Compute_DiskTypesScopedListWarning extends Google_Collectio
   }
 }
 
-class Google_Service_Compute_DiskTypesScopedListWarningData extends Google_Model
+class Appointments_Google_Service_Compute_DiskTypesScopedListWarningData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -11393,14 +11393,14 @@ class Google_Service_Compute_DiskTypesScopedListWarningData extends Google_Model
   }
 }
 
-class Google_Service_Compute_DisksScopedList extends Google_Collection
+class Appointments_Google_Service_Compute_DisksScopedList extends Appointments_Google_Collection
 {
   protected $collection_key = 'disks';
   protected $internal_gapi_mappings = array(
   );
-  protected $disksType = 'Google_Service_Compute_Disk';
+  protected $disksType = 'Appointments_Google_Service_Compute_Disk';
   protected $disksDataType = 'array';
-  protected $warningType = 'Google_Service_Compute_DisksScopedListWarning';
+  protected $warningType = 'Appointments_Google_Service_Compute_DisksScopedListWarning';
   protected $warningDataType = '';
 
 
@@ -11412,7 +11412,7 @@ class Google_Service_Compute_DisksScopedList extends Google_Collection
   {
     return $this->disks;
   }
-  public function setWarning(Google_Service_Compute_DisksScopedListWarning $warning)
+  public function setWarning(Appointments_Google_Service_Compute_DisksScopedListWarning $warning)
   {
     $this->warning = $warning;
   }
@@ -11422,13 +11422,13 @@ class Google_Service_Compute_DisksScopedList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_DisksScopedListWarning extends Google_Collection
+class Appointments_Google_Service_Compute_DisksScopedListWarning extends Appointments_Google_Collection
 {
   protected $collection_key = 'data';
   protected $internal_gapi_mappings = array(
   );
   public $code;
-  protected $dataType = 'Google_Service_Compute_DisksScopedListWarningData';
+  protected $dataType = 'Appointments_Google_Service_Compute_DisksScopedListWarningData';
   protected $dataDataType = 'array';
   public $message;
 
@@ -11459,7 +11459,7 @@ class Google_Service_Compute_DisksScopedListWarning extends Google_Collection
   }
 }
 
-class Google_Service_Compute_DisksScopedListWarningData extends Google_Model
+class Appointments_Google_Service_Compute_DisksScopedListWarningData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -11485,12 +11485,12 @@ class Google_Service_Compute_DisksScopedListWarningData extends Google_Model
   }
 }
 
-class Google_Service_Compute_Firewall extends Google_Collection
+class Appointments_Google_Service_Compute_Firewall extends Appointments_Google_Collection
 {
   protected $collection_key = 'targetTags';
   protected $internal_gapi_mappings = array(
   );
-  protected $allowedType = 'Google_Service_Compute_FirewallAllowed';
+  protected $allowedType = 'Appointments_Google_Service_Compute_FirewallAllowed';
   protected $allowedDataType = 'array';
   public $creationTimestamp;
   public $description;
@@ -11594,7 +11594,7 @@ class Google_Service_Compute_Firewall extends Google_Collection
   }
 }
 
-class Google_Service_Compute_FirewallAllowed extends Google_Collection
+class Appointments_Google_Service_Compute_FirewallAllowed extends Appointments_Google_Collection
 {
   protected $collection_key = 'ports';
   protected $internal_gapi_mappings = array(
@@ -11622,13 +11622,13 @@ class Google_Service_Compute_FirewallAllowed extends Google_Collection
   }
 }
 
-class Google_Service_Compute_FirewallList extends Google_Collection
+class Appointments_Google_Service_Compute_FirewallList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_Firewall';
+  protected $itemsType = 'Appointments_Google_Service_Compute_Firewall';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -11677,7 +11677,7 @@ class Google_Service_Compute_FirewallList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_ForwardingRule extends Google_Model
+class Appointments_Google_Service_Compute_ForwardingRule extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
         "iPAddress" => "IPAddress",
@@ -11786,12 +11786,12 @@ class Google_Service_Compute_ForwardingRule extends Google_Model
   }
 }
 
-class Google_Service_Compute_ForwardingRuleAggregatedList extends Google_Model
+class Appointments_Google_Service_Compute_ForwardingRuleAggregatedList extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_ForwardingRulesScopedList';
+  protected $itemsType = 'Appointments_Google_Service_Compute_ForwardingRulesScopedList';
   protected $itemsDataType = 'map';
   public $kind;
   public $nextPageToken;
@@ -11840,13 +11840,13 @@ class Google_Service_Compute_ForwardingRuleAggregatedList extends Google_Model
   }
 }
 
-class Google_Service_Compute_ForwardingRuleList extends Google_Collection
+class Appointments_Google_Service_Compute_ForwardingRuleList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_ForwardingRule';
+  protected $itemsType = 'Appointments_Google_Service_Compute_ForwardingRule';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -11895,14 +11895,14 @@ class Google_Service_Compute_ForwardingRuleList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_ForwardingRulesScopedList extends Google_Collection
+class Appointments_Google_Service_Compute_ForwardingRulesScopedList extends Appointments_Google_Collection
 {
   protected $collection_key = 'forwardingRules';
   protected $internal_gapi_mappings = array(
   );
-  protected $forwardingRulesType = 'Google_Service_Compute_ForwardingRule';
+  protected $forwardingRulesType = 'Appointments_Google_Service_Compute_ForwardingRule';
   protected $forwardingRulesDataType = 'array';
-  protected $warningType = 'Google_Service_Compute_ForwardingRulesScopedListWarning';
+  protected $warningType = 'Appointments_Google_Service_Compute_ForwardingRulesScopedListWarning';
   protected $warningDataType = '';
 
 
@@ -11914,7 +11914,7 @@ class Google_Service_Compute_ForwardingRulesScopedList extends Google_Collection
   {
     return $this->forwardingRules;
   }
-  public function setWarning(Google_Service_Compute_ForwardingRulesScopedListWarning $warning)
+  public function setWarning(Appointments_Google_Service_Compute_ForwardingRulesScopedListWarning $warning)
   {
     $this->warning = $warning;
   }
@@ -11924,13 +11924,13 @@ class Google_Service_Compute_ForwardingRulesScopedList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_ForwardingRulesScopedListWarning extends Google_Collection
+class Appointments_Google_Service_Compute_ForwardingRulesScopedListWarning extends Appointments_Google_Collection
 {
   protected $collection_key = 'data';
   protected $internal_gapi_mappings = array(
   );
   public $code;
-  protected $dataType = 'Google_Service_Compute_ForwardingRulesScopedListWarningData';
+  protected $dataType = 'Appointments_Google_Service_Compute_ForwardingRulesScopedListWarningData';
   protected $dataDataType = 'array';
   public $message;
 
@@ -11961,7 +11961,7 @@ class Google_Service_Compute_ForwardingRulesScopedListWarning extends Google_Col
   }
 }
 
-class Google_Service_Compute_ForwardingRulesScopedListWarningData extends Google_Model
+class Appointments_Google_Service_Compute_ForwardingRulesScopedListWarningData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -11987,7 +11987,7 @@ class Google_Service_Compute_ForwardingRulesScopedListWarningData extends Google
   }
 }
 
-class Google_Service_Compute_HealthCheckReference extends Google_Model
+class Appointments_Google_Service_Compute_HealthCheckReference extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -12004,7 +12004,7 @@ class Google_Service_Compute_HealthCheckReference extends Google_Model
   }
 }
 
-class Google_Service_Compute_HealthStatus extends Google_Model
+class Appointments_Google_Service_Compute_HealthStatus extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -12048,7 +12048,7 @@ class Google_Service_Compute_HealthStatus extends Google_Model
   }
 }
 
-class Google_Service_Compute_HostRule extends Google_Collection
+class Appointments_Google_Service_Compute_HostRule extends Appointments_Google_Collection
 {
   protected $collection_key = 'hosts';
   protected $internal_gapi_mappings = array(
@@ -12084,7 +12084,7 @@ class Google_Service_Compute_HostRule extends Google_Collection
   }
 }
 
-class Google_Service_Compute_HttpHealthCheck extends Google_Model
+class Appointments_Google_Service_Compute_HttpHealthCheck extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -12209,13 +12209,13 @@ class Google_Service_Compute_HttpHealthCheck extends Google_Model
   }
 }
 
-class Google_Service_Compute_HttpHealthCheckList extends Google_Collection
+class Appointments_Google_Service_Compute_HttpHealthCheckList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_HttpHealthCheck';
+  protected $itemsType = 'Appointments_Google_Service_Compute_HttpHealthCheck';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -12264,7 +12264,7 @@ class Google_Service_Compute_HttpHealthCheckList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_HttpsHealthCheck extends Google_Model
+class Appointments_Google_Service_Compute_HttpsHealthCheck extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -12389,13 +12389,13 @@ class Google_Service_Compute_HttpsHealthCheck extends Google_Model
   }
 }
 
-class Google_Service_Compute_HttpsHealthCheckList extends Google_Collection
+class Appointments_Google_Service_Compute_HttpsHealthCheckList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_HttpsHealthCheck';
+  protected $itemsType = 'Appointments_Google_Service_Compute_HttpsHealthCheck';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -12444,14 +12444,14 @@ class Google_Service_Compute_HttpsHealthCheckList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_Image extends Google_Collection
+class Appointments_Google_Service_Compute_Image extends Appointments_Google_Collection
 {
   protected $collection_key = 'licenses';
   protected $internal_gapi_mappings = array(
   );
   public $archiveSizeBytes;
   public $creationTimestamp;
-  protected $deprecatedType = 'Google_Service_Compute_DeprecationStatus';
+  protected $deprecatedType = 'Appointments_Google_Service_Compute_DeprecationStatus';
   protected $deprecatedDataType = '';
   public $description;
   public $diskSizeGb;
@@ -12459,7 +12459,7 @@ class Google_Service_Compute_Image extends Google_Collection
   public $kind;
   public $licenses;
   public $name;
-  protected $rawDiskType = 'Google_Service_Compute_ImageRawDisk';
+  protected $rawDiskType = 'Appointments_Google_Service_Compute_ImageRawDisk';
   protected $rawDiskDataType = '';
   public $selfLink;
   public $sourceDisk;
@@ -12484,7 +12484,7 @@ class Google_Service_Compute_Image extends Google_Collection
   {
     return $this->creationTimestamp;
   }
-  public function setDeprecated(Google_Service_Compute_DeprecationStatus $deprecated)
+  public function setDeprecated(Appointments_Google_Service_Compute_DeprecationStatus $deprecated)
   {
     $this->deprecated = $deprecated;
   }
@@ -12540,7 +12540,7 @@ class Google_Service_Compute_Image extends Google_Collection
   {
     return $this->name;
   }
-  public function setRawDisk(Google_Service_Compute_ImageRawDisk $rawDisk)
+  public function setRawDisk(Appointments_Google_Service_Compute_ImageRawDisk $rawDisk)
   {
     $this->rawDisk = $rawDisk;
   }
@@ -12590,13 +12590,13 @@ class Google_Service_Compute_Image extends Google_Collection
   }
 }
 
-class Google_Service_Compute_ImageList extends Google_Collection
+class Appointments_Google_Service_Compute_ImageList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_Image';
+  protected $itemsType = 'Appointments_Google_Service_Compute_Image';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -12645,7 +12645,7 @@ class Google_Service_Compute_ImageList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_ImageRawDisk extends Google_Model
+class Appointments_Google_Service_Compute_ImageRawDisk extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -12680,7 +12680,7 @@ class Google_Service_Compute_ImageRawDisk extends Google_Model
   }
 }
 
-class Google_Service_Compute_Instance extends Google_Collection
+class Appointments_Google_Service_Compute_Instance extends Appointments_Google_Collection
 {
   protected $collection_key = 'serviceAccounts';
   protected $internal_gapi_mappings = array(
@@ -12689,24 +12689,24 @@ class Google_Service_Compute_Instance extends Google_Collection
   public $cpuPlatform;
   public $creationTimestamp;
   public $description;
-  protected $disksType = 'Google_Service_Compute_AttachedDisk';
+  protected $disksType = 'Appointments_Google_Service_Compute_AttachedDisk';
   protected $disksDataType = 'array';
   public $id;
   public $kind;
   public $machineType;
-  protected $metadataType = 'Google_Service_Compute_Metadata';
+  protected $metadataType = 'Appointments_Google_Service_Compute_Metadata';
   protected $metadataDataType = '';
   public $name;
-  protected $networkInterfacesType = 'Google_Service_Compute_NetworkInterface';
+  protected $networkInterfacesType = 'Appointments_Google_Service_Compute_NetworkInterface';
   protected $networkInterfacesDataType = 'array';
-  protected $schedulingType = 'Google_Service_Compute_Scheduling';
+  protected $schedulingType = 'Appointments_Google_Service_Compute_Scheduling';
   protected $schedulingDataType = '';
   public $selfLink;
-  protected $serviceAccountsType = 'Google_Service_Compute_ServiceAccount';
+  protected $serviceAccountsType = 'Appointments_Google_Service_Compute_ServiceAccount';
   protected $serviceAccountsDataType = 'array';
   public $status;
   public $statusMessage;
-  protected $tagsType = 'Google_Service_Compute_Tags';
+  protected $tagsType = 'Appointments_Google_Service_Compute_Tags';
   protected $tagsDataType = '';
   public $zone;
 
@@ -12775,7 +12775,7 @@ class Google_Service_Compute_Instance extends Google_Collection
   {
     return $this->machineType;
   }
-  public function setMetadata(Google_Service_Compute_Metadata $metadata)
+  public function setMetadata(Appointments_Google_Service_Compute_Metadata $metadata)
   {
     $this->metadata = $metadata;
   }
@@ -12799,7 +12799,7 @@ class Google_Service_Compute_Instance extends Google_Collection
   {
     return $this->networkInterfaces;
   }
-  public function setScheduling(Google_Service_Compute_Scheduling $scheduling)
+  public function setScheduling(Appointments_Google_Service_Compute_Scheduling $scheduling)
   {
     $this->scheduling = $scheduling;
   }
@@ -12839,7 +12839,7 @@ class Google_Service_Compute_Instance extends Google_Collection
   {
     return $this->statusMessage;
   }
-  public function setTags(Google_Service_Compute_Tags $tags)
+  public function setTags(Appointments_Google_Service_Compute_Tags $tags)
   {
     $this->tags = $tags;
   }
@@ -12857,12 +12857,12 @@ class Google_Service_Compute_Instance extends Google_Collection
   }
 }
 
-class Google_Service_Compute_InstanceAggregatedList extends Google_Model
+class Appointments_Google_Service_Compute_InstanceAggregatedList extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_InstancesScopedList';
+  protected $itemsType = 'Appointments_Google_Service_Compute_InstancesScopedList';
   protected $itemsDataType = 'map';
   public $kind;
   public $nextPageToken;
@@ -12911,7 +12911,7 @@ class Google_Service_Compute_InstanceAggregatedList extends Google_Model
   }
 }
 
-class Google_Service_Compute_InstanceGroup extends Google_Collection
+class Appointments_Google_Service_Compute_InstanceGroup extends Appointments_Google_Collection
 {
   protected $collection_key = 'namedPorts';
   protected $internal_gapi_mappings = array(
@@ -12922,7 +12922,7 @@ class Google_Service_Compute_InstanceGroup extends Google_Collection
   public $id;
   public $kind;
   public $name;
-  protected $namedPortsType = 'Google_Service_Compute_NamedPort';
+  protected $namedPortsType = 'Appointments_Google_Service_Compute_NamedPort';
   protected $namedPortsDataType = 'array';
   public $network;
   public $selfLink;
@@ -13029,12 +13029,12 @@ class Google_Service_Compute_InstanceGroup extends Google_Collection
   }
 }
 
-class Google_Service_Compute_InstanceGroupAggregatedList extends Google_Model
+class Appointments_Google_Service_Compute_InstanceGroupAggregatedList extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_InstanceGroupsScopedList';
+  protected $itemsType = 'Appointments_Google_Service_Compute_InstanceGroupsScopedList';
   protected $itemsDataType = 'map';
   public $kind;
   public $nextPageToken;
@@ -13083,13 +13083,13 @@ class Google_Service_Compute_InstanceGroupAggregatedList extends Google_Model
   }
 }
 
-class Google_Service_Compute_InstanceGroupList extends Google_Collection
+class Appointments_Google_Service_Compute_InstanceGroupList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_InstanceGroup';
+  protected $itemsType = 'Appointments_Google_Service_Compute_InstanceGroup';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -13138,14 +13138,14 @@ class Google_Service_Compute_InstanceGroupList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_InstanceGroupManager extends Google_Collection
+class Appointments_Google_Service_Compute_InstanceGroupManager extends Appointments_Google_Collection
 {
   protected $collection_key = 'targetPools';
   protected $internal_gapi_mappings = array(
   );
   public $baseInstanceName;
   public $creationTimestamp;
-  protected $currentActionsType = 'Google_Service_Compute_InstanceGroupManagerActionsSummary';
+  protected $currentActionsType = 'Appointments_Google_Service_Compute_InstanceGroupManagerActionsSummary';
   protected $currentActionsDataType = '';
   public $description;
   public $fingerprint;
@@ -13154,7 +13154,7 @@ class Google_Service_Compute_InstanceGroupManager extends Google_Collection
   public $instanceTemplate;
   public $kind;
   public $name;
-  protected $namedPortsType = 'Google_Service_Compute_NamedPort';
+  protected $namedPortsType = 'Appointments_Google_Service_Compute_NamedPort';
   protected $namedPortsDataType = 'array';
   public $selfLink;
   public $targetPools;
@@ -13178,7 +13178,7 @@ class Google_Service_Compute_InstanceGroupManager extends Google_Collection
   {
     return $this->creationTimestamp;
   }
-  public function setCurrentActions(Google_Service_Compute_InstanceGroupManagerActionsSummary $currentActions)
+  public function setCurrentActions(Appointments_Google_Service_Compute_InstanceGroupManagerActionsSummary $currentActions)
   {
     $this->currentActions = $currentActions;
   }
@@ -13284,7 +13284,7 @@ class Google_Service_Compute_InstanceGroupManager extends Google_Collection
   }
 }
 
-class Google_Service_Compute_InstanceGroupManagerActionsSummary extends Google_Model
+class Appointments_Google_Service_Compute_InstanceGroupManagerActionsSummary extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -13355,12 +13355,12 @@ class Google_Service_Compute_InstanceGroupManagerActionsSummary extends Google_M
   }
 }
 
-class Google_Service_Compute_InstanceGroupManagerAggregatedList extends Google_Model
+class Appointments_Google_Service_Compute_InstanceGroupManagerAggregatedList extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_InstanceGroupManagersScopedList';
+  protected $itemsType = 'Appointments_Google_Service_Compute_InstanceGroupManagersScopedList';
   protected $itemsDataType = 'map';
   public $kind;
   public $nextPageToken;
@@ -13409,13 +13409,13 @@ class Google_Service_Compute_InstanceGroupManagerAggregatedList extends Google_M
   }
 }
 
-class Google_Service_Compute_InstanceGroupManagerList extends Google_Collection
+class Appointments_Google_Service_Compute_InstanceGroupManagerList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_InstanceGroupManager';
+  protected $itemsType = 'Appointments_Google_Service_Compute_InstanceGroupManager';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -13464,7 +13464,7 @@ class Google_Service_Compute_InstanceGroupManagerList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_InstanceGroupManagersAbandonInstancesRequest extends Google_Collection
+class Appointments_Google_Service_Compute_InstanceGroupManagersAbandonInstancesRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'instances';
   protected $internal_gapi_mappings = array(
@@ -13482,7 +13482,7 @@ class Google_Service_Compute_InstanceGroupManagersAbandonInstancesRequest extend
   }
 }
 
-class Google_Service_Compute_InstanceGroupManagersDeleteInstancesRequest extends Google_Collection
+class Appointments_Google_Service_Compute_InstanceGroupManagersDeleteInstancesRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'instances';
   protected $internal_gapi_mappings = array(
@@ -13500,12 +13500,12 @@ class Google_Service_Compute_InstanceGroupManagersDeleteInstancesRequest extends
   }
 }
 
-class Google_Service_Compute_InstanceGroupManagersListManagedInstancesResponse extends Google_Collection
+class Appointments_Google_Service_Compute_InstanceGroupManagersListManagedInstancesResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'managedInstances';
   protected $internal_gapi_mappings = array(
   );
-  protected $managedInstancesType = 'Google_Service_Compute_ManagedInstance';
+  protected $managedInstancesType = 'Appointments_Google_Service_Compute_ManagedInstance';
   protected $managedInstancesDataType = 'array';
 
 
@@ -13519,7 +13519,7 @@ class Google_Service_Compute_InstanceGroupManagersListManagedInstancesResponse e
   }
 }
 
-class Google_Service_Compute_InstanceGroupManagersRecreateInstancesRequest extends Google_Collection
+class Appointments_Google_Service_Compute_InstanceGroupManagersRecreateInstancesRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'instances';
   protected $internal_gapi_mappings = array(
@@ -13537,14 +13537,14 @@ class Google_Service_Compute_InstanceGroupManagersRecreateInstancesRequest exten
   }
 }
 
-class Google_Service_Compute_InstanceGroupManagersScopedList extends Google_Collection
+class Appointments_Google_Service_Compute_InstanceGroupManagersScopedList extends Appointments_Google_Collection
 {
   protected $collection_key = 'instanceGroupManagers';
   protected $internal_gapi_mappings = array(
   );
-  protected $instanceGroupManagersType = 'Google_Service_Compute_InstanceGroupManager';
+  protected $instanceGroupManagersType = 'Appointments_Google_Service_Compute_InstanceGroupManager';
   protected $instanceGroupManagersDataType = 'array';
-  protected $warningType = 'Google_Service_Compute_InstanceGroupManagersScopedListWarning';
+  protected $warningType = 'Appointments_Google_Service_Compute_InstanceGroupManagersScopedListWarning';
   protected $warningDataType = '';
 
 
@@ -13556,7 +13556,7 @@ class Google_Service_Compute_InstanceGroupManagersScopedList extends Google_Coll
   {
     return $this->instanceGroupManagers;
   }
-  public function setWarning(Google_Service_Compute_InstanceGroupManagersScopedListWarning $warning)
+  public function setWarning(Appointments_Google_Service_Compute_InstanceGroupManagersScopedListWarning $warning)
   {
     $this->warning = $warning;
   }
@@ -13566,13 +13566,13 @@ class Google_Service_Compute_InstanceGroupManagersScopedList extends Google_Coll
   }
 }
 
-class Google_Service_Compute_InstanceGroupManagersScopedListWarning extends Google_Collection
+class Appointments_Google_Service_Compute_InstanceGroupManagersScopedListWarning extends Appointments_Google_Collection
 {
   protected $collection_key = 'data';
   protected $internal_gapi_mappings = array(
   );
   public $code;
-  protected $dataType = 'Google_Service_Compute_InstanceGroupManagersScopedListWarningData';
+  protected $dataType = 'Appointments_Google_Service_Compute_InstanceGroupManagersScopedListWarningData';
   protected $dataDataType = 'array';
   public $message;
 
@@ -13603,7 +13603,7 @@ class Google_Service_Compute_InstanceGroupManagersScopedListWarning extends Goog
   }
 }
 
-class Google_Service_Compute_InstanceGroupManagersScopedListWarningData extends Google_Model
+class Appointments_Google_Service_Compute_InstanceGroupManagersScopedListWarningData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -13629,7 +13629,7 @@ class Google_Service_Compute_InstanceGroupManagersScopedListWarningData extends 
   }
 }
 
-class Google_Service_Compute_InstanceGroupManagersSetInstanceTemplateRequest extends Google_Model
+class Appointments_Google_Service_Compute_InstanceGroupManagersSetInstanceTemplateRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -13646,7 +13646,7 @@ class Google_Service_Compute_InstanceGroupManagersSetInstanceTemplateRequest ext
   }
 }
 
-class Google_Service_Compute_InstanceGroupManagersSetTargetPoolsRequest extends Google_Collection
+class Appointments_Google_Service_Compute_InstanceGroupManagersSetTargetPoolsRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'targetPools';
   protected $internal_gapi_mappings = array(
@@ -13673,12 +13673,12 @@ class Google_Service_Compute_InstanceGroupManagersSetTargetPoolsRequest extends 
   }
 }
 
-class Google_Service_Compute_InstanceGroupsAddInstancesRequest extends Google_Collection
+class Appointments_Google_Service_Compute_InstanceGroupsAddInstancesRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'instances';
   protected $internal_gapi_mappings = array(
   );
-  protected $instancesType = 'Google_Service_Compute_InstanceReference';
+  protected $instancesType = 'Appointments_Google_Service_Compute_InstanceReference';
   protected $instancesDataType = 'array';
 
 
@@ -13692,13 +13692,13 @@ class Google_Service_Compute_InstanceGroupsAddInstancesRequest extends Google_Co
   }
 }
 
-class Google_Service_Compute_InstanceGroupsListInstances extends Google_Collection
+class Appointments_Google_Service_Compute_InstanceGroupsListInstances extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_InstanceWithNamedPorts';
+  protected $itemsType = 'Appointments_Google_Service_Compute_InstanceWithNamedPorts';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -13747,7 +13747,7 @@ class Google_Service_Compute_InstanceGroupsListInstances extends Google_Collecti
   }
 }
 
-class Google_Service_Compute_InstanceGroupsListInstancesRequest extends Google_Model
+class Appointments_Google_Service_Compute_InstanceGroupsListInstancesRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -13764,12 +13764,12 @@ class Google_Service_Compute_InstanceGroupsListInstancesRequest extends Google_M
   }
 }
 
-class Google_Service_Compute_InstanceGroupsRemoveInstancesRequest extends Google_Collection
+class Appointments_Google_Service_Compute_InstanceGroupsRemoveInstancesRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'instances';
   protected $internal_gapi_mappings = array(
   );
-  protected $instancesType = 'Google_Service_Compute_InstanceReference';
+  protected $instancesType = 'Appointments_Google_Service_Compute_InstanceReference';
   protected $instancesDataType = 'array';
 
 
@@ -13783,14 +13783,14 @@ class Google_Service_Compute_InstanceGroupsRemoveInstancesRequest extends Google
   }
 }
 
-class Google_Service_Compute_InstanceGroupsScopedList extends Google_Collection
+class Appointments_Google_Service_Compute_InstanceGroupsScopedList extends Appointments_Google_Collection
 {
   protected $collection_key = 'instanceGroups';
   protected $internal_gapi_mappings = array(
   );
-  protected $instanceGroupsType = 'Google_Service_Compute_InstanceGroup';
+  protected $instanceGroupsType = 'Appointments_Google_Service_Compute_InstanceGroup';
   protected $instanceGroupsDataType = 'array';
-  protected $warningType = 'Google_Service_Compute_InstanceGroupsScopedListWarning';
+  protected $warningType = 'Appointments_Google_Service_Compute_InstanceGroupsScopedListWarning';
   protected $warningDataType = '';
 
 
@@ -13802,7 +13802,7 @@ class Google_Service_Compute_InstanceGroupsScopedList extends Google_Collection
   {
     return $this->instanceGroups;
   }
-  public function setWarning(Google_Service_Compute_InstanceGroupsScopedListWarning $warning)
+  public function setWarning(Appointments_Google_Service_Compute_InstanceGroupsScopedListWarning $warning)
   {
     $this->warning = $warning;
   }
@@ -13812,13 +13812,13 @@ class Google_Service_Compute_InstanceGroupsScopedList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_InstanceGroupsScopedListWarning extends Google_Collection
+class Appointments_Google_Service_Compute_InstanceGroupsScopedListWarning extends Appointments_Google_Collection
 {
   protected $collection_key = 'data';
   protected $internal_gapi_mappings = array(
   );
   public $code;
-  protected $dataType = 'Google_Service_Compute_InstanceGroupsScopedListWarningData';
+  protected $dataType = 'Appointments_Google_Service_Compute_InstanceGroupsScopedListWarningData';
   protected $dataDataType = 'array';
   public $message;
 
@@ -13849,7 +13849,7 @@ class Google_Service_Compute_InstanceGroupsScopedListWarning extends Google_Coll
   }
 }
 
-class Google_Service_Compute_InstanceGroupsScopedListWarningData extends Google_Model
+class Appointments_Google_Service_Compute_InstanceGroupsScopedListWarningData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -13875,13 +13875,13 @@ class Google_Service_Compute_InstanceGroupsScopedListWarningData extends Google_
   }
 }
 
-class Google_Service_Compute_InstanceGroupsSetNamedPortsRequest extends Google_Collection
+class Appointments_Google_Service_Compute_InstanceGroupsSetNamedPortsRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'namedPorts';
   protected $internal_gapi_mappings = array(
   );
   public $fingerprint;
-  protected $namedPortsType = 'Google_Service_Compute_NamedPort';
+  protected $namedPortsType = 'Appointments_Google_Service_Compute_NamedPort';
   protected $namedPortsDataType = 'array';
 
 
@@ -13903,13 +13903,13 @@ class Google_Service_Compute_InstanceGroupsSetNamedPortsRequest extends Google_C
   }
 }
 
-class Google_Service_Compute_InstanceList extends Google_Collection
+class Appointments_Google_Service_Compute_InstanceList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_Instance';
+  protected $itemsType = 'Appointments_Google_Service_Compute_Instance';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -13958,7 +13958,7 @@ class Google_Service_Compute_InstanceList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_InstanceMoveRequest extends Google_Model
+class Appointments_Google_Service_Compute_InstanceMoveRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -13984,25 +13984,25 @@ class Google_Service_Compute_InstanceMoveRequest extends Google_Model
   }
 }
 
-class Google_Service_Compute_InstanceProperties extends Google_Collection
+class Appointments_Google_Service_Compute_InstanceProperties extends Appointments_Google_Collection
 {
   protected $collection_key = 'serviceAccounts';
   protected $internal_gapi_mappings = array(
   );
   public $canIpForward;
   public $description;
-  protected $disksType = 'Google_Service_Compute_AttachedDisk';
+  protected $disksType = 'Appointments_Google_Service_Compute_AttachedDisk';
   protected $disksDataType = 'array';
   public $machineType;
-  protected $metadataType = 'Google_Service_Compute_Metadata';
+  protected $metadataType = 'Appointments_Google_Service_Compute_Metadata';
   protected $metadataDataType = '';
-  protected $networkInterfacesType = 'Google_Service_Compute_NetworkInterface';
+  protected $networkInterfacesType = 'Appointments_Google_Service_Compute_NetworkInterface';
   protected $networkInterfacesDataType = 'array';
-  protected $schedulingType = 'Google_Service_Compute_Scheduling';
+  protected $schedulingType = 'Appointments_Google_Service_Compute_Scheduling';
   protected $schedulingDataType = '';
-  protected $serviceAccountsType = 'Google_Service_Compute_ServiceAccount';
+  protected $serviceAccountsType = 'Appointments_Google_Service_Compute_ServiceAccount';
   protected $serviceAccountsDataType = 'array';
-  protected $tagsType = 'Google_Service_Compute_Tags';
+  protected $tagsType = 'Appointments_Google_Service_Compute_Tags';
   protected $tagsDataType = '';
 
 
@@ -14038,7 +14038,7 @@ class Google_Service_Compute_InstanceProperties extends Google_Collection
   {
     return $this->machineType;
   }
-  public function setMetadata(Google_Service_Compute_Metadata $metadata)
+  public function setMetadata(Appointments_Google_Service_Compute_Metadata $metadata)
   {
     $this->metadata = $metadata;
   }
@@ -14054,7 +14054,7 @@ class Google_Service_Compute_InstanceProperties extends Google_Collection
   {
     return $this->networkInterfaces;
   }
-  public function setScheduling(Google_Service_Compute_Scheduling $scheduling)
+  public function setScheduling(Appointments_Google_Service_Compute_Scheduling $scheduling)
   {
     $this->scheduling = $scheduling;
   }
@@ -14070,7 +14070,7 @@ class Google_Service_Compute_InstanceProperties extends Google_Collection
   {
     return $this->serviceAccounts;
   }
-  public function setTags(Google_Service_Compute_Tags $tags)
+  public function setTags(Appointments_Google_Service_Compute_Tags $tags)
   {
     $this->tags = $tags;
   }
@@ -14080,7 +14080,7 @@ class Google_Service_Compute_InstanceProperties extends Google_Collection
   }
 }
 
-class Google_Service_Compute_InstanceReference extends Google_Model
+class Appointments_Google_Service_Compute_InstanceReference extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -14097,7 +14097,7 @@ class Google_Service_Compute_InstanceReference extends Google_Model
   }
 }
 
-class Google_Service_Compute_InstanceTemplate extends Google_Model
+class Appointments_Google_Service_Compute_InstanceTemplate extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -14106,7 +14106,7 @@ class Google_Service_Compute_InstanceTemplate extends Google_Model
   public $id;
   public $kind;
   public $name;
-  protected $propertiesType = 'Google_Service_Compute_InstanceProperties';
+  protected $propertiesType = 'Appointments_Google_Service_Compute_InstanceProperties';
   protected $propertiesDataType = '';
   public $selfLink;
 
@@ -14151,7 +14151,7 @@ class Google_Service_Compute_InstanceTemplate extends Google_Model
   {
     return $this->name;
   }
-  public function setProperties(Google_Service_Compute_InstanceProperties $properties)
+  public function setProperties(Appointments_Google_Service_Compute_InstanceProperties $properties)
   {
     $this->properties = $properties;
   }
@@ -14169,13 +14169,13 @@ class Google_Service_Compute_InstanceTemplate extends Google_Model
   }
 }
 
-class Google_Service_Compute_InstanceTemplateList extends Google_Collection
+class Appointments_Google_Service_Compute_InstanceTemplateList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_InstanceTemplate';
+  protected $itemsType = 'Appointments_Google_Service_Compute_InstanceTemplate';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -14224,13 +14224,13 @@ class Google_Service_Compute_InstanceTemplateList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_InstanceWithNamedPorts extends Google_Collection
+class Appointments_Google_Service_Compute_InstanceWithNamedPorts extends Appointments_Google_Collection
 {
   protected $collection_key = 'namedPorts';
   protected $internal_gapi_mappings = array(
   );
   public $instance;
-  protected $namedPortsType = 'Google_Service_Compute_NamedPort';
+  protected $namedPortsType = 'Appointments_Google_Service_Compute_NamedPort';
   protected $namedPortsDataType = 'array';
   public $status;
 
@@ -14261,14 +14261,14 @@ class Google_Service_Compute_InstanceWithNamedPorts extends Google_Collection
   }
 }
 
-class Google_Service_Compute_InstancesScopedList extends Google_Collection
+class Appointments_Google_Service_Compute_InstancesScopedList extends Appointments_Google_Collection
 {
   protected $collection_key = 'instances';
   protected $internal_gapi_mappings = array(
   );
-  protected $instancesType = 'Google_Service_Compute_Instance';
+  protected $instancesType = 'Appointments_Google_Service_Compute_Instance';
   protected $instancesDataType = 'array';
-  protected $warningType = 'Google_Service_Compute_InstancesScopedListWarning';
+  protected $warningType = 'Appointments_Google_Service_Compute_InstancesScopedListWarning';
   protected $warningDataType = '';
 
 
@@ -14280,7 +14280,7 @@ class Google_Service_Compute_InstancesScopedList extends Google_Collection
   {
     return $this->instances;
   }
-  public function setWarning(Google_Service_Compute_InstancesScopedListWarning $warning)
+  public function setWarning(Appointments_Google_Service_Compute_InstancesScopedListWarning $warning)
   {
     $this->warning = $warning;
   }
@@ -14290,13 +14290,13 @@ class Google_Service_Compute_InstancesScopedList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_InstancesScopedListWarning extends Google_Collection
+class Appointments_Google_Service_Compute_InstancesScopedListWarning extends Appointments_Google_Collection
 {
   protected $collection_key = 'data';
   protected $internal_gapi_mappings = array(
   );
   public $code;
-  protected $dataType = 'Google_Service_Compute_InstancesScopedListWarningData';
+  protected $dataType = 'Appointments_Google_Service_Compute_InstancesScopedListWarningData';
   protected $dataDataType = 'array';
   public $message;
 
@@ -14327,7 +14327,7 @@ class Google_Service_Compute_InstancesScopedListWarning extends Google_Collectio
   }
 }
 
-class Google_Service_Compute_InstancesScopedListWarningData extends Google_Model
+class Appointments_Google_Service_Compute_InstancesScopedListWarningData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -14353,7 +14353,7 @@ class Google_Service_Compute_InstancesScopedListWarningData extends Google_Model
   }
 }
 
-class Google_Service_Compute_InstancesSetMachineTypeRequest extends Google_Model
+class Appointments_Google_Service_Compute_InstancesSetMachineTypeRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -14370,7 +14370,7 @@ class Google_Service_Compute_InstancesSetMachineTypeRequest extends Google_Model
   }
 }
 
-class Google_Service_Compute_License extends Google_Model
+class Appointments_Google_Service_Compute_License extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -14414,13 +14414,13 @@ class Google_Service_Compute_License extends Google_Model
   }
 }
 
-class Google_Service_Compute_MachineType extends Google_Collection
+class Appointments_Google_Service_Compute_MachineType extends Appointments_Google_Collection
 {
   protected $collection_key = 'scratchDisks';
   protected $internal_gapi_mappings = array(
   );
   public $creationTimestamp;
-  protected $deprecatedType = 'Google_Service_Compute_DeprecationStatus';
+  protected $deprecatedType = 'Appointments_Google_Service_Compute_DeprecationStatus';
   protected $deprecatedDataType = '';
   public $description;
   public $guestCpus;
@@ -14431,7 +14431,7 @@ class Google_Service_Compute_MachineType extends Google_Collection
   public $maximumPersistentDisksSizeGb;
   public $memoryMb;
   public $name;
-  protected $scratchDisksType = 'Google_Service_Compute_MachineTypeScratchDisks';
+  protected $scratchDisksType = 'Appointments_Google_Service_Compute_MachineTypeScratchDisks';
   protected $scratchDisksDataType = 'array';
   public $selfLink;
   public $zone;
@@ -14445,7 +14445,7 @@ class Google_Service_Compute_MachineType extends Google_Collection
   {
     return $this->creationTimestamp;
   }
-  public function setDeprecated(Google_Service_Compute_DeprecationStatus $deprecated)
+  public function setDeprecated(Appointments_Google_Service_Compute_DeprecationStatus $deprecated)
   {
     $this->deprecated = $deprecated;
   }
@@ -14551,12 +14551,12 @@ class Google_Service_Compute_MachineType extends Google_Collection
   }
 }
 
-class Google_Service_Compute_MachineTypeAggregatedList extends Google_Model
+class Appointments_Google_Service_Compute_MachineTypeAggregatedList extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_MachineTypesScopedList';
+  protected $itemsType = 'Appointments_Google_Service_Compute_MachineTypesScopedList';
   protected $itemsDataType = 'map';
   public $kind;
   public $nextPageToken;
@@ -14605,13 +14605,13 @@ class Google_Service_Compute_MachineTypeAggregatedList extends Google_Model
   }
 }
 
-class Google_Service_Compute_MachineTypeList extends Google_Collection
+class Appointments_Google_Service_Compute_MachineTypeList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_MachineType';
+  protected $itemsType = 'Appointments_Google_Service_Compute_MachineType';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -14660,7 +14660,7 @@ class Google_Service_Compute_MachineTypeList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_MachineTypeScratchDisks extends Google_Model
+class Appointments_Google_Service_Compute_MachineTypeScratchDisks extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -14677,14 +14677,14 @@ class Google_Service_Compute_MachineTypeScratchDisks extends Google_Model
   }
 }
 
-class Google_Service_Compute_MachineTypesScopedList extends Google_Collection
+class Appointments_Google_Service_Compute_MachineTypesScopedList extends Appointments_Google_Collection
 {
   protected $collection_key = 'machineTypes';
   protected $internal_gapi_mappings = array(
   );
-  protected $machineTypesType = 'Google_Service_Compute_MachineType';
+  protected $machineTypesType = 'Appointments_Google_Service_Compute_MachineType';
   protected $machineTypesDataType = 'array';
-  protected $warningType = 'Google_Service_Compute_MachineTypesScopedListWarning';
+  protected $warningType = 'Appointments_Google_Service_Compute_MachineTypesScopedListWarning';
   protected $warningDataType = '';
 
 
@@ -14696,7 +14696,7 @@ class Google_Service_Compute_MachineTypesScopedList extends Google_Collection
   {
     return $this->machineTypes;
   }
-  public function setWarning(Google_Service_Compute_MachineTypesScopedListWarning $warning)
+  public function setWarning(Appointments_Google_Service_Compute_MachineTypesScopedListWarning $warning)
   {
     $this->warning = $warning;
   }
@@ -14706,13 +14706,13 @@ class Google_Service_Compute_MachineTypesScopedList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_MachineTypesScopedListWarning extends Google_Collection
+class Appointments_Google_Service_Compute_MachineTypesScopedListWarning extends Appointments_Google_Collection
 {
   protected $collection_key = 'data';
   protected $internal_gapi_mappings = array(
   );
   public $code;
-  protected $dataType = 'Google_Service_Compute_MachineTypesScopedListWarningData';
+  protected $dataType = 'Appointments_Google_Service_Compute_MachineTypesScopedListWarningData';
   protected $dataDataType = 'array';
   public $message;
 
@@ -14743,7 +14743,7 @@ class Google_Service_Compute_MachineTypesScopedListWarning extends Google_Collec
   }
 }
 
-class Google_Service_Compute_MachineTypesScopedListWarningData extends Google_Model
+class Appointments_Google_Service_Compute_MachineTypesScopedListWarningData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -14769,7 +14769,7 @@ class Google_Service_Compute_MachineTypesScopedListWarningData extends Google_Mo
   }
 }
 
-class Google_Service_Compute_ManagedInstance extends Google_Model
+class Appointments_Google_Service_Compute_ManagedInstance extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -14777,7 +14777,7 @@ class Google_Service_Compute_ManagedInstance extends Google_Model
   public $id;
   public $instance;
   public $instanceStatus;
-  protected $lastAttemptType = 'Google_Service_Compute_ManagedInstanceLastAttempt';
+  protected $lastAttemptType = 'Appointments_Google_Service_Compute_ManagedInstanceLastAttempt';
   protected $lastAttemptDataType = '';
 
 
@@ -14813,7 +14813,7 @@ class Google_Service_Compute_ManagedInstance extends Google_Model
   {
     return $this->instanceStatus;
   }
-  public function setLastAttempt(Google_Service_Compute_ManagedInstanceLastAttempt $lastAttempt)
+  public function setLastAttempt(Appointments_Google_Service_Compute_ManagedInstanceLastAttempt $lastAttempt)
   {
     $this->lastAttempt = $lastAttempt;
   }
@@ -14823,15 +14823,15 @@ class Google_Service_Compute_ManagedInstance extends Google_Model
   }
 }
 
-class Google_Service_Compute_ManagedInstanceLastAttempt extends Google_Model
+class Appointments_Google_Service_Compute_ManagedInstanceLastAttempt extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $errorsType = 'Google_Service_Compute_ManagedInstanceLastAttemptErrors';
+  protected $errorsType = 'Appointments_Google_Service_Compute_ManagedInstanceLastAttemptErrors';
   protected $errorsDataType = '';
 
 
-  public function setErrors(Google_Service_Compute_ManagedInstanceLastAttemptErrors $errors)
+  public function setErrors(Appointments_Google_Service_Compute_ManagedInstanceLastAttemptErrors $errors)
   {
     $this->errors = $errors;
   }
@@ -14841,12 +14841,12 @@ class Google_Service_Compute_ManagedInstanceLastAttempt extends Google_Model
   }
 }
 
-class Google_Service_Compute_ManagedInstanceLastAttemptErrors extends Google_Collection
+class Appointments_Google_Service_Compute_ManagedInstanceLastAttemptErrors extends Appointments_Google_Collection
 {
   protected $collection_key = 'errors';
   protected $internal_gapi_mappings = array(
   );
-  protected $errorsType = 'Google_Service_Compute_ManagedInstanceLastAttemptErrorsErrors';
+  protected $errorsType = 'Appointments_Google_Service_Compute_ManagedInstanceLastAttemptErrorsErrors';
   protected $errorsDataType = 'array';
 
 
@@ -14860,7 +14860,7 @@ class Google_Service_Compute_ManagedInstanceLastAttemptErrors extends Google_Col
   }
 }
 
-class Google_Service_Compute_ManagedInstanceLastAttemptErrorsErrors extends Google_Model
+class Appointments_Google_Service_Compute_ManagedInstanceLastAttemptErrorsErrors extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -14895,13 +14895,13 @@ class Google_Service_Compute_ManagedInstanceLastAttemptErrorsErrors extends Goog
   }
 }
 
-class Google_Service_Compute_Metadata extends Google_Collection
+class Appointments_Google_Service_Compute_Metadata extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $fingerprint;
-  protected $itemsType = 'Google_Service_Compute_MetadataItems';
+  protected $itemsType = 'Appointments_Google_Service_Compute_MetadataItems';
   protected $itemsDataType = 'array';
   public $kind;
 
@@ -14932,7 +14932,7 @@ class Google_Service_Compute_Metadata extends Google_Collection
   }
 }
 
-class Google_Service_Compute_MetadataItems extends Google_Model
+class Appointments_Google_Service_Compute_MetadataItems extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -14958,7 +14958,7 @@ class Google_Service_Compute_MetadataItems extends Google_Model
   }
 }
 
-class Google_Service_Compute_NamedPort extends Google_Model
+class Appointments_Google_Service_Compute_NamedPort extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -14984,7 +14984,7 @@ class Google_Service_Compute_NamedPort extends Google_Model
   }
 }
 
-class Google_Service_Compute_Network extends Google_Collection
+class Appointments_Google_Service_Compute_Network extends Appointments_Google_Collection
 {
   protected $collection_key = 'subnetworks';
   protected $internal_gapi_mappings = array(
@@ -15084,12 +15084,12 @@ class Google_Service_Compute_Network extends Google_Collection
   }
 }
 
-class Google_Service_Compute_NetworkInterface extends Google_Collection
+class Appointments_Google_Service_Compute_NetworkInterface extends Appointments_Google_Collection
 {
   protected $collection_key = 'accessConfigs';
   protected $internal_gapi_mappings = array(
   );
-  protected $accessConfigsType = 'Google_Service_Compute_AccessConfig';
+  protected $accessConfigsType = 'Appointments_Google_Service_Compute_AccessConfig';
   protected $accessConfigsDataType = 'array';
   public $name;
   public $network;
@@ -15139,13 +15139,13 @@ class Google_Service_Compute_NetworkInterface extends Google_Collection
   }
 }
 
-class Google_Service_Compute_NetworkList extends Google_Collection
+class Appointments_Google_Service_Compute_NetworkList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_Network';
+  protected $itemsType = 'Appointments_Google_Service_Compute_Network';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -15194,7 +15194,7 @@ class Google_Service_Compute_NetworkList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_Operation extends Google_Collection
+class Appointments_Google_Service_Compute_Operation extends Appointments_Google_Collection
 {
   protected $collection_key = 'warnings';
   protected $internal_gapi_mappings = array(
@@ -15203,7 +15203,7 @@ class Google_Service_Compute_Operation extends Google_Collection
   public $creationTimestamp;
   public $description;
   public $endTime;
-  protected $errorType = 'Google_Service_Compute_OperationError';
+  protected $errorType = 'Appointments_Google_Service_Compute_OperationError';
   protected $errorDataType = '';
   public $httpErrorMessage;
   public $httpErrorStatusCode;
@@ -15221,7 +15221,7 @@ class Google_Service_Compute_Operation extends Google_Collection
   public $targetId;
   public $targetLink;
   public $user;
-  protected $warningsType = 'Google_Service_Compute_OperationWarnings';
+  protected $warningsType = 'Appointments_Google_Service_Compute_OperationWarnings';
   protected $warningsDataType = 'array';
   public $zone;
 
@@ -15258,7 +15258,7 @@ class Google_Service_Compute_Operation extends Google_Collection
   {
     return $this->endTime;
   }
-  public function setError(Google_Service_Compute_OperationError $error)
+  public function setError(Appointments_Google_Service_Compute_OperationError $error)
   {
     $this->error = $error;
   }
@@ -15412,12 +15412,12 @@ class Google_Service_Compute_Operation extends Google_Collection
   }
 }
 
-class Google_Service_Compute_OperationAggregatedList extends Google_Model
+class Appointments_Google_Service_Compute_OperationAggregatedList extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_OperationsScopedList';
+  protected $itemsType = 'Appointments_Google_Service_Compute_OperationsScopedList';
   protected $itemsDataType = 'map';
   public $kind;
   public $nextPageToken;
@@ -15466,12 +15466,12 @@ class Google_Service_Compute_OperationAggregatedList extends Google_Model
   }
 }
 
-class Google_Service_Compute_OperationError extends Google_Collection
+class Appointments_Google_Service_Compute_OperationError extends Appointments_Google_Collection
 {
   protected $collection_key = 'errors';
   protected $internal_gapi_mappings = array(
   );
-  protected $errorsType = 'Google_Service_Compute_OperationErrorErrors';
+  protected $errorsType = 'Appointments_Google_Service_Compute_OperationErrorErrors';
   protected $errorsDataType = 'array';
 
 
@@ -15485,7 +15485,7 @@ class Google_Service_Compute_OperationError extends Google_Collection
   }
 }
 
-class Google_Service_Compute_OperationErrorErrors extends Google_Model
+class Appointments_Google_Service_Compute_OperationErrorErrors extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -15520,13 +15520,13 @@ class Google_Service_Compute_OperationErrorErrors extends Google_Model
   }
 }
 
-class Google_Service_Compute_OperationList extends Google_Collection
+class Appointments_Google_Service_Compute_OperationList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_Operation';
+  protected $itemsType = 'Appointments_Google_Service_Compute_Operation';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -15575,13 +15575,13 @@ class Google_Service_Compute_OperationList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_OperationWarnings extends Google_Collection
+class Appointments_Google_Service_Compute_OperationWarnings extends Appointments_Google_Collection
 {
   protected $collection_key = 'data';
   protected $internal_gapi_mappings = array(
   );
   public $code;
-  protected $dataType = 'Google_Service_Compute_OperationWarningsData';
+  protected $dataType = 'Appointments_Google_Service_Compute_OperationWarningsData';
   protected $dataDataType = 'array';
   public $message;
 
@@ -15612,7 +15612,7 @@ class Google_Service_Compute_OperationWarnings extends Google_Collection
   }
 }
 
-class Google_Service_Compute_OperationWarningsData extends Google_Model
+class Appointments_Google_Service_Compute_OperationWarningsData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -15638,14 +15638,14 @@ class Google_Service_Compute_OperationWarningsData extends Google_Model
   }
 }
 
-class Google_Service_Compute_OperationsScopedList extends Google_Collection
+class Appointments_Google_Service_Compute_OperationsScopedList extends Appointments_Google_Collection
 {
   protected $collection_key = 'operations';
   protected $internal_gapi_mappings = array(
   );
-  protected $operationsType = 'Google_Service_Compute_Operation';
+  protected $operationsType = 'Appointments_Google_Service_Compute_Operation';
   protected $operationsDataType = 'array';
-  protected $warningType = 'Google_Service_Compute_OperationsScopedListWarning';
+  protected $warningType = 'Appointments_Google_Service_Compute_OperationsScopedListWarning';
   protected $warningDataType = '';
 
 
@@ -15657,7 +15657,7 @@ class Google_Service_Compute_OperationsScopedList extends Google_Collection
   {
     return $this->operations;
   }
-  public function setWarning(Google_Service_Compute_OperationsScopedListWarning $warning)
+  public function setWarning(Appointments_Google_Service_Compute_OperationsScopedListWarning $warning)
   {
     $this->warning = $warning;
   }
@@ -15667,13 +15667,13 @@ class Google_Service_Compute_OperationsScopedList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_OperationsScopedListWarning extends Google_Collection
+class Appointments_Google_Service_Compute_OperationsScopedListWarning extends Appointments_Google_Collection
 {
   protected $collection_key = 'data';
   protected $internal_gapi_mappings = array(
   );
   public $code;
-  protected $dataType = 'Google_Service_Compute_OperationsScopedListWarningData';
+  protected $dataType = 'Appointments_Google_Service_Compute_OperationsScopedListWarningData';
   protected $dataDataType = 'array';
   public $message;
 
@@ -15704,7 +15704,7 @@ class Google_Service_Compute_OperationsScopedListWarning extends Google_Collecti
   }
 }
 
-class Google_Service_Compute_OperationsScopedListWarningData extends Google_Model
+class Appointments_Google_Service_Compute_OperationsScopedListWarningData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -15730,7 +15730,7 @@ class Google_Service_Compute_OperationsScopedListWarningData extends Google_Mode
   }
 }
 
-class Google_Service_Compute_PathMatcher extends Google_Collection
+class Appointments_Google_Service_Compute_PathMatcher extends Appointments_Google_Collection
 {
   protected $collection_key = 'pathRules';
   protected $internal_gapi_mappings = array(
@@ -15738,7 +15738,7 @@ class Google_Service_Compute_PathMatcher extends Google_Collection
   public $defaultService;
   public $description;
   public $name;
-  protected $pathRulesType = 'Google_Service_Compute_PathRule';
+  protected $pathRulesType = 'Appointments_Google_Service_Compute_PathRule';
   protected $pathRulesDataType = 'array';
 
 
@@ -15776,7 +15776,7 @@ class Google_Service_Compute_PathMatcher extends Google_Collection
   }
 }
 
-class Google_Service_Compute_PathRule extends Google_Collection
+class Appointments_Google_Service_Compute_PathRule extends Appointments_Google_Collection
 {
   protected $collection_key = 'paths';
   protected $internal_gapi_mappings = array(
@@ -15803,12 +15803,12 @@ class Google_Service_Compute_PathRule extends Google_Collection
   }
 }
 
-class Google_Service_Compute_Project extends Google_Collection
+class Appointments_Google_Service_Compute_Project extends Appointments_Google_Collection
 {
   protected $collection_key = 'quotas';
   protected $internal_gapi_mappings = array(
   );
-  protected $commonInstanceMetadataType = 'Google_Service_Compute_Metadata';
+  protected $commonInstanceMetadataType = 'Appointments_Google_Service_Compute_Metadata';
   protected $commonInstanceMetadataDataType = '';
   public $creationTimestamp;
   public $description;
@@ -15816,14 +15816,14 @@ class Google_Service_Compute_Project extends Google_Collection
   public $id;
   public $kind;
   public $name;
-  protected $quotasType = 'Google_Service_Compute_Quota';
+  protected $quotasType = 'Appointments_Google_Service_Compute_Quota';
   protected $quotasDataType = 'array';
   public $selfLink;
-  protected $usageExportLocationType = 'Google_Service_Compute_UsageExportLocation';
+  protected $usageExportLocationType = 'Appointments_Google_Service_Compute_UsageExportLocation';
   protected $usageExportLocationDataType = '';
 
 
-  public function setCommonInstanceMetadata(Google_Service_Compute_Metadata $commonInstanceMetadata)
+  public function setCommonInstanceMetadata(Appointments_Google_Service_Compute_Metadata $commonInstanceMetadata)
   {
     $this->commonInstanceMetadata = $commonInstanceMetadata;
   }
@@ -15895,7 +15895,7 @@ class Google_Service_Compute_Project extends Google_Collection
   {
     return $this->selfLink;
   }
-  public function setUsageExportLocation(Google_Service_Compute_UsageExportLocation $usageExportLocation)
+  public function setUsageExportLocation(Appointments_Google_Service_Compute_UsageExportLocation $usageExportLocation)
   {
     $this->usageExportLocation = $usageExportLocation;
   }
@@ -15905,7 +15905,7 @@ class Google_Service_Compute_Project extends Google_Collection
   }
 }
 
-class Google_Service_Compute_Quota extends Google_Model
+class Appointments_Google_Service_Compute_Quota extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -15940,19 +15940,19 @@ class Google_Service_Compute_Quota extends Google_Model
   }
 }
 
-class Google_Service_Compute_Region extends Google_Collection
+class Appointments_Google_Service_Compute_Region extends Appointments_Google_Collection
 {
   protected $collection_key = 'zones';
   protected $internal_gapi_mappings = array(
   );
   public $creationTimestamp;
-  protected $deprecatedType = 'Google_Service_Compute_DeprecationStatus';
+  protected $deprecatedType = 'Appointments_Google_Service_Compute_DeprecationStatus';
   protected $deprecatedDataType = '';
   public $description;
   public $id;
   public $kind;
   public $name;
-  protected $quotasType = 'Google_Service_Compute_Quota';
+  protected $quotasType = 'Appointments_Google_Service_Compute_Quota';
   protected $quotasDataType = 'array';
   public $selfLink;
   public $status;
@@ -15967,7 +15967,7 @@ class Google_Service_Compute_Region extends Google_Collection
   {
     return $this->creationTimestamp;
   }
-  public function setDeprecated(Google_Service_Compute_DeprecationStatus $deprecated)
+  public function setDeprecated(Appointments_Google_Service_Compute_DeprecationStatus $deprecated)
   {
     $this->deprecated = $deprecated;
   }
@@ -16041,13 +16041,13 @@ class Google_Service_Compute_Region extends Google_Collection
   }
 }
 
-class Google_Service_Compute_RegionList extends Google_Collection
+class Appointments_Google_Service_Compute_RegionList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_Region';
+  protected $itemsType = 'Appointments_Google_Service_Compute_Region';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -16096,7 +16096,7 @@ class Google_Service_Compute_RegionList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_ResourceGroupReference extends Google_Model
+class Appointments_Google_Service_Compute_ResourceGroupReference extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -16113,7 +16113,7 @@ class Google_Service_Compute_ResourceGroupReference extends Google_Model
   }
 }
 
-class Google_Service_Compute_Route extends Google_Collection
+class Appointments_Google_Service_Compute_Route extends Appointments_Google_Collection
 {
   protected $collection_key = 'warnings';
   protected $internal_gapi_mappings = array(
@@ -16133,7 +16133,7 @@ class Google_Service_Compute_Route extends Google_Collection
   public $priority;
   public $selfLink;
   public $tags;
-  protected $warningsType = 'Google_Service_Compute_RouteWarnings';
+  protected $warningsType = 'Appointments_Google_Service_Compute_RouteWarnings';
   protected $warningsDataType = 'array';
 
 
@@ -16267,13 +16267,13 @@ class Google_Service_Compute_Route extends Google_Collection
   }
 }
 
-class Google_Service_Compute_RouteList extends Google_Collection
+class Appointments_Google_Service_Compute_RouteList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_Route';
+  protected $itemsType = 'Appointments_Google_Service_Compute_Route';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -16322,13 +16322,13 @@ class Google_Service_Compute_RouteList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_RouteWarnings extends Google_Collection
+class Appointments_Google_Service_Compute_RouteWarnings extends Appointments_Google_Collection
 {
   protected $collection_key = 'data';
   protected $internal_gapi_mappings = array(
   );
   public $code;
-  protected $dataType = 'Google_Service_Compute_RouteWarningsData';
+  protected $dataType = 'Appointments_Google_Service_Compute_RouteWarningsData';
   protected $dataDataType = 'array';
   public $message;
 
@@ -16359,7 +16359,7 @@ class Google_Service_Compute_RouteWarnings extends Google_Collection
   }
 }
 
-class Google_Service_Compute_RouteWarningsData extends Google_Model
+class Appointments_Google_Service_Compute_RouteWarningsData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -16385,7 +16385,7 @@ class Google_Service_Compute_RouteWarningsData extends Google_Model
   }
 }
 
-class Google_Service_Compute_Scheduling extends Google_Model
+class Appointments_Google_Service_Compute_Scheduling extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -16420,7 +16420,7 @@ class Google_Service_Compute_Scheduling extends Google_Model
   }
 }
 
-class Google_Service_Compute_SerialPortOutput extends Google_Model
+class Appointments_Google_Service_Compute_SerialPortOutput extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -16455,7 +16455,7 @@ class Google_Service_Compute_SerialPortOutput extends Google_Model
   }
 }
 
-class Google_Service_Compute_ServiceAccount extends Google_Collection
+class Appointments_Google_Service_Compute_ServiceAccount extends Appointments_Google_Collection
 {
   protected $collection_key = 'scopes';
   protected $internal_gapi_mappings = array(
@@ -16482,7 +16482,7 @@ class Google_Service_Compute_ServiceAccount extends Google_Collection
   }
 }
 
-class Google_Service_Compute_Snapshot extends Google_Collection
+class Appointments_Google_Service_Compute_Snapshot extends Appointments_Google_Collection
 {
   protected $collection_key = 'licenses';
   protected $internal_gapi_mappings = array(
@@ -16608,13 +16608,13 @@ class Google_Service_Compute_Snapshot extends Google_Collection
   }
 }
 
-class Google_Service_Compute_SnapshotList extends Google_Collection
+class Appointments_Google_Service_Compute_SnapshotList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_Snapshot';
+  protected $itemsType = 'Appointments_Google_Service_Compute_Snapshot';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -16663,7 +16663,7 @@ class Google_Service_Compute_SnapshotList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_SslCertificate extends Google_Model
+class Appointments_Google_Service_Compute_SslCertificate extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -16743,13 +16743,13 @@ class Google_Service_Compute_SslCertificate extends Google_Model
   }
 }
 
-class Google_Service_Compute_SslCertificateList extends Google_Collection
+class Appointments_Google_Service_Compute_SslCertificateList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_SslCertificate';
+  protected $itemsType = 'Appointments_Google_Service_Compute_SslCertificate';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -16798,7 +16798,7 @@ class Google_Service_Compute_SslCertificateList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_Subnetwork extends Google_Model
+class Appointments_Google_Service_Compute_Subnetwork extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -16896,12 +16896,12 @@ class Google_Service_Compute_Subnetwork extends Google_Model
   }
 }
 
-class Google_Service_Compute_SubnetworkAggregatedList extends Google_Model
+class Appointments_Google_Service_Compute_SubnetworkAggregatedList extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_SubnetworksScopedList';
+  protected $itemsType = 'Appointments_Google_Service_Compute_SubnetworksScopedList';
   protected $itemsDataType = 'map';
   public $kind;
   public $nextPageToken;
@@ -16950,13 +16950,13 @@ class Google_Service_Compute_SubnetworkAggregatedList extends Google_Model
   }
 }
 
-class Google_Service_Compute_SubnetworkList extends Google_Collection
+class Appointments_Google_Service_Compute_SubnetworkList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_Subnetwork';
+  protected $itemsType = 'Appointments_Google_Service_Compute_Subnetwork';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -17005,14 +17005,14 @@ class Google_Service_Compute_SubnetworkList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_SubnetworksScopedList extends Google_Collection
+class Appointments_Google_Service_Compute_SubnetworksScopedList extends Appointments_Google_Collection
 {
   protected $collection_key = 'subnetworks';
   protected $internal_gapi_mappings = array(
   );
-  protected $subnetworksType = 'Google_Service_Compute_Subnetwork';
+  protected $subnetworksType = 'Appointments_Google_Service_Compute_Subnetwork';
   protected $subnetworksDataType = 'array';
-  protected $warningType = 'Google_Service_Compute_SubnetworksScopedListWarning';
+  protected $warningType = 'Appointments_Google_Service_Compute_SubnetworksScopedListWarning';
   protected $warningDataType = '';
 
 
@@ -17024,7 +17024,7 @@ class Google_Service_Compute_SubnetworksScopedList extends Google_Collection
   {
     return $this->subnetworks;
   }
-  public function setWarning(Google_Service_Compute_SubnetworksScopedListWarning $warning)
+  public function setWarning(Appointments_Google_Service_Compute_SubnetworksScopedListWarning $warning)
   {
     $this->warning = $warning;
   }
@@ -17034,13 +17034,13 @@ class Google_Service_Compute_SubnetworksScopedList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_SubnetworksScopedListWarning extends Google_Collection
+class Appointments_Google_Service_Compute_SubnetworksScopedListWarning extends Appointments_Google_Collection
 {
   protected $collection_key = 'data';
   protected $internal_gapi_mappings = array(
   );
   public $code;
-  protected $dataType = 'Google_Service_Compute_SubnetworksScopedListWarningData';
+  protected $dataType = 'Appointments_Google_Service_Compute_SubnetworksScopedListWarningData';
   protected $dataDataType = 'array';
   public $message;
 
@@ -17071,7 +17071,7 @@ class Google_Service_Compute_SubnetworksScopedListWarning extends Google_Collect
   }
 }
 
-class Google_Service_Compute_SubnetworksScopedListWarningData extends Google_Model
+class Appointments_Google_Service_Compute_SubnetworksScopedListWarningData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -17097,7 +17097,7 @@ class Google_Service_Compute_SubnetworksScopedListWarningData extends Google_Mod
   }
 }
 
-class Google_Service_Compute_Tags extends Google_Collection
+class Appointments_Google_Service_Compute_Tags extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
@@ -17124,7 +17124,7 @@ class Google_Service_Compute_Tags extends Google_Collection
   }
 }
 
-class Google_Service_Compute_TargetHttpProxy extends Google_Model
+class Appointments_Google_Service_Compute_TargetHttpProxy extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -17195,13 +17195,13 @@ class Google_Service_Compute_TargetHttpProxy extends Google_Model
   }
 }
 
-class Google_Service_Compute_TargetHttpProxyList extends Google_Collection
+class Appointments_Google_Service_Compute_TargetHttpProxyList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_TargetHttpProxy';
+  protected $itemsType = 'Appointments_Google_Service_Compute_TargetHttpProxy';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -17250,7 +17250,7 @@ class Google_Service_Compute_TargetHttpProxyList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_TargetHttpsProxiesSetSslCertificatesRequest extends Google_Collection
+class Appointments_Google_Service_Compute_TargetHttpsProxiesSetSslCertificatesRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'sslCertificates';
   protected $internal_gapi_mappings = array(
@@ -17268,7 +17268,7 @@ class Google_Service_Compute_TargetHttpsProxiesSetSslCertificatesRequest extends
   }
 }
 
-class Google_Service_Compute_TargetHttpsProxy extends Google_Collection
+class Appointments_Google_Service_Compute_TargetHttpsProxy extends Appointments_Google_Collection
 {
   protected $collection_key = 'sslCertificates';
   protected $internal_gapi_mappings = array(
@@ -17349,13 +17349,13 @@ class Google_Service_Compute_TargetHttpsProxy extends Google_Collection
   }
 }
 
-class Google_Service_Compute_TargetHttpsProxyList extends Google_Collection
+class Appointments_Google_Service_Compute_TargetHttpsProxyList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_TargetHttpsProxy';
+  protected $itemsType = 'Appointments_Google_Service_Compute_TargetHttpsProxy';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -17404,7 +17404,7 @@ class Google_Service_Compute_TargetHttpsProxyList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_TargetInstance extends Google_Model
+class Appointments_Google_Service_Compute_TargetInstance extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -17493,12 +17493,12 @@ class Google_Service_Compute_TargetInstance extends Google_Model
   }
 }
 
-class Google_Service_Compute_TargetInstanceAggregatedList extends Google_Model
+class Appointments_Google_Service_Compute_TargetInstanceAggregatedList extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_TargetInstancesScopedList';
+  protected $itemsType = 'Appointments_Google_Service_Compute_TargetInstancesScopedList';
   protected $itemsDataType = 'map';
   public $kind;
   public $nextPageToken;
@@ -17547,13 +17547,13 @@ class Google_Service_Compute_TargetInstanceAggregatedList extends Google_Model
   }
 }
 
-class Google_Service_Compute_TargetInstanceList extends Google_Collection
+class Appointments_Google_Service_Compute_TargetInstanceList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_TargetInstance';
+  protected $itemsType = 'Appointments_Google_Service_Compute_TargetInstance';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -17602,14 +17602,14 @@ class Google_Service_Compute_TargetInstanceList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_TargetInstancesScopedList extends Google_Collection
+class Appointments_Google_Service_Compute_TargetInstancesScopedList extends Appointments_Google_Collection
 {
   protected $collection_key = 'targetInstances';
   protected $internal_gapi_mappings = array(
   );
-  protected $targetInstancesType = 'Google_Service_Compute_TargetInstance';
+  protected $targetInstancesType = 'Appointments_Google_Service_Compute_TargetInstance';
   protected $targetInstancesDataType = 'array';
-  protected $warningType = 'Google_Service_Compute_TargetInstancesScopedListWarning';
+  protected $warningType = 'Appointments_Google_Service_Compute_TargetInstancesScopedListWarning';
   protected $warningDataType = '';
 
 
@@ -17621,7 +17621,7 @@ class Google_Service_Compute_TargetInstancesScopedList extends Google_Collection
   {
     return $this->targetInstances;
   }
-  public function setWarning(Google_Service_Compute_TargetInstancesScopedListWarning $warning)
+  public function setWarning(Appointments_Google_Service_Compute_TargetInstancesScopedListWarning $warning)
   {
     $this->warning = $warning;
   }
@@ -17631,13 +17631,13 @@ class Google_Service_Compute_TargetInstancesScopedList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_TargetInstancesScopedListWarning extends Google_Collection
+class Appointments_Google_Service_Compute_TargetInstancesScopedListWarning extends Appointments_Google_Collection
 {
   protected $collection_key = 'data';
   protected $internal_gapi_mappings = array(
   );
   public $code;
-  protected $dataType = 'Google_Service_Compute_TargetInstancesScopedListWarningData';
+  protected $dataType = 'Appointments_Google_Service_Compute_TargetInstancesScopedListWarningData';
   protected $dataDataType = 'array';
   public $message;
 
@@ -17668,7 +17668,7 @@ class Google_Service_Compute_TargetInstancesScopedListWarning extends Google_Col
   }
 }
 
-class Google_Service_Compute_TargetInstancesScopedListWarningData extends Google_Model
+class Appointments_Google_Service_Compute_TargetInstancesScopedListWarningData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -17694,7 +17694,7 @@ class Google_Service_Compute_TargetInstancesScopedListWarningData extends Google
   }
 }
 
-class Google_Service_Compute_TargetPool extends Google_Collection
+class Appointments_Google_Service_Compute_TargetPool extends Appointments_Google_Collection
 {
   protected $collection_key = 'instances';
   protected $internal_gapi_mappings = array(
@@ -17811,12 +17811,12 @@ class Google_Service_Compute_TargetPool extends Google_Collection
   }
 }
 
-class Google_Service_Compute_TargetPoolAggregatedList extends Google_Model
+class Appointments_Google_Service_Compute_TargetPoolAggregatedList extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_TargetPoolsScopedList';
+  protected $itemsType = 'Appointments_Google_Service_Compute_TargetPoolsScopedList';
   protected $itemsDataType = 'map';
   public $kind;
   public $nextPageToken;
@@ -17865,12 +17865,12 @@ class Google_Service_Compute_TargetPoolAggregatedList extends Google_Model
   }
 }
 
-class Google_Service_Compute_TargetPoolInstanceHealth extends Google_Collection
+class Appointments_Google_Service_Compute_TargetPoolInstanceHealth extends Appointments_Google_Collection
 {
   protected $collection_key = 'healthStatus';
   protected $internal_gapi_mappings = array(
   );
-  protected $healthStatusType = 'Google_Service_Compute_HealthStatus';
+  protected $healthStatusType = 'Appointments_Google_Service_Compute_HealthStatus';
   protected $healthStatusDataType = 'array';
   public $kind;
 
@@ -17893,13 +17893,13 @@ class Google_Service_Compute_TargetPoolInstanceHealth extends Google_Collection
   }
 }
 
-class Google_Service_Compute_TargetPoolList extends Google_Collection
+class Appointments_Google_Service_Compute_TargetPoolList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_TargetPool';
+  protected $itemsType = 'Appointments_Google_Service_Compute_TargetPool';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -17948,12 +17948,12 @@ class Google_Service_Compute_TargetPoolList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_TargetPoolsAddHealthCheckRequest extends Google_Collection
+class Appointments_Google_Service_Compute_TargetPoolsAddHealthCheckRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'healthChecks';
   protected $internal_gapi_mappings = array(
   );
-  protected $healthChecksType = 'Google_Service_Compute_HealthCheckReference';
+  protected $healthChecksType = 'Appointments_Google_Service_Compute_HealthCheckReference';
   protected $healthChecksDataType = 'array';
 
 
@@ -17967,12 +17967,12 @@ class Google_Service_Compute_TargetPoolsAddHealthCheckRequest extends Google_Col
   }
 }
 
-class Google_Service_Compute_TargetPoolsAddInstanceRequest extends Google_Collection
+class Appointments_Google_Service_Compute_TargetPoolsAddInstanceRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'instances';
   protected $internal_gapi_mappings = array(
   );
-  protected $instancesType = 'Google_Service_Compute_InstanceReference';
+  protected $instancesType = 'Appointments_Google_Service_Compute_InstanceReference';
   protected $instancesDataType = 'array';
 
 
@@ -17986,12 +17986,12 @@ class Google_Service_Compute_TargetPoolsAddInstanceRequest extends Google_Collec
   }
 }
 
-class Google_Service_Compute_TargetPoolsRemoveHealthCheckRequest extends Google_Collection
+class Appointments_Google_Service_Compute_TargetPoolsRemoveHealthCheckRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'healthChecks';
   protected $internal_gapi_mappings = array(
   );
-  protected $healthChecksType = 'Google_Service_Compute_HealthCheckReference';
+  protected $healthChecksType = 'Appointments_Google_Service_Compute_HealthCheckReference';
   protected $healthChecksDataType = 'array';
 
 
@@ -18005,12 +18005,12 @@ class Google_Service_Compute_TargetPoolsRemoveHealthCheckRequest extends Google_
   }
 }
 
-class Google_Service_Compute_TargetPoolsRemoveInstanceRequest extends Google_Collection
+class Appointments_Google_Service_Compute_TargetPoolsRemoveInstanceRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'instances';
   protected $internal_gapi_mappings = array(
   );
-  protected $instancesType = 'Google_Service_Compute_InstanceReference';
+  protected $instancesType = 'Appointments_Google_Service_Compute_InstanceReference';
   protected $instancesDataType = 'array';
 
 
@@ -18024,14 +18024,14 @@ class Google_Service_Compute_TargetPoolsRemoveInstanceRequest extends Google_Col
   }
 }
 
-class Google_Service_Compute_TargetPoolsScopedList extends Google_Collection
+class Appointments_Google_Service_Compute_TargetPoolsScopedList extends Appointments_Google_Collection
 {
   protected $collection_key = 'targetPools';
   protected $internal_gapi_mappings = array(
   );
-  protected $targetPoolsType = 'Google_Service_Compute_TargetPool';
+  protected $targetPoolsType = 'Appointments_Google_Service_Compute_TargetPool';
   protected $targetPoolsDataType = 'array';
-  protected $warningType = 'Google_Service_Compute_TargetPoolsScopedListWarning';
+  protected $warningType = 'Appointments_Google_Service_Compute_TargetPoolsScopedListWarning';
   protected $warningDataType = '';
 
 
@@ -18043,7 +18043,7 @@ class Google_Service_Compute_TargetPoolsScopedList extends Google_Collection
   {
     return $this->targetPools;
   }
-  public function setWarning(Google_Service_Compute_TargetPoolsScopedListWarning $warning)
+  public function setWarning(Appointments_Google_Service_Compute_TargetPoolsScopedListWarning $warning)
   {
     $this->warning = $warning;
   }
@@ -18053,13 +18053,13 @@ class Google_Service_Compute_TargetPoolsScopedList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_TargetPoolsScopedListWarning extends Google_Collection
+class Appointments_Google_Service_Compute_TargetPoolsScopedListWarning extends Appointments_Google_Collection
 {
   protected $collection_key = 'data';
   protected $internal_gapi_mappings = array(
   );
   public $code;
-  protected $dataType = 'Google_Service_Compute_TargetPoolsScopedListWarningData';
+  protected $dataType = 'Appointments_Google_Service_Compute_TargetPoolsScopedListWarningData';
   protected $dataDataType = 'array';
   public $message;
 
@@ -18090,7 +18090,7 @@ class Google_Service_Compute_TargetPoolsScopedListWarning extends Google_Collect
   }
 }
 
-class Google_Service_Compute_TargetPoolsScopedListWarningData extends Google_Model
+class Appointments_Google_Service_Compute_TargetPoolsScopedListWarningData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -18116,7 +18116,7 @@ class Google_Service_Compute_TargetPoolsScopedListWarningData extends Google_Mod
   }
 }
 
-class Google_Service_Compute_TargetReference extends Google_Model
+class Appointments_Google_Service_Compute_TargetReference extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -18133,7 +18133,7 @@ class Google_Service_Compute_TargetReference extends Google_Model
   }
 }
 
-class Google_Service_Compute_TargetVpnGateway extends Google_Collection
+class Appointments_Google_Service_Compute_TargetVpnGateway extends Appointments_Google_Collection
 {
   protected $collection_key = 'tunnels';
   protected $internal_gapi_mappings = array(
@@ -18241,12 +18241,12 @@ class Google_Service_Compute_TargetVpnGateway extends Google_Collection
   }
 }
 
-class Google_Service_Compute_TargetVpnGatewayAggregatedList extends Google_Model
+class Appointments_Google_Service_Compute_TargetVpnGatewayAggregatedList extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_TargetVpnGatewaysScopedList';
+  protected $itemsType = 'Appointments_Google_Service_Compute_TargetVpnGatewaysScopedList';
   protected $itemsDataType = 'map';
   public $kind;
   public $nextPageToken;
@@ -18295,13 +18295,13 @@ class Google_Service_Compute_TargetVpnGatewayAggregatedList extends Google_Model
   }
 }
 
-class Google_Service_Compute_TargetVpnGatewayList extends Google_Collection
+class Appointments_Google_Service_Compute_TargetVpnGatewayList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_TargetVpnGateway';
+  protected $itemsType = 'Appointments_Google_Service_Compute_TargetVpnGateway';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -18350,14 +18350,14 @@ class Google_Service_Compute_TargetVpnGatewayList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_TargetVpnGatewaysScopedList extends Google_Collection
+class Appointments_Google_Service_Compute_TargetVpnGatewaysScopedList extends Appointments_Google_Collection
 {
   protected $collection_key = 'targetVpnGateways';
   protected $internal_gapi_mappings = array(
   );
-  protected $targetVpnGatewaysType = 'Google_Service_Compute_TargetVpnGateway';
+  protected $targetVpnGatewaysType = 'Appointments_Google_Service_Compute_TargetVpnGateway';
   protected $targetVpnGatewaysDataType = 'array';
-  protected $warningType = 'Google_Service_Compute_TargetVpnGatewaysScopedListWarning';
+  protected $warningType = 'Appointments_Google_Service_Compute_TargetVpnGatewaysScopedListWarning';
   protected $warningDataType = '';
 
 
@@ -18369,7 +18369,7 @@ class Google_Service_Compute_TargetVpnGatewaysScopedList extends Google_Collecti
   {
     return $this->targetVpnGateways;
   }
-  public function setWarning(Google_Service_Compute_TargetVpnGatewaysScopedListWarning $warning)
+  public function setWarning(Appointments_Google_Service_Compute_TargetVpnGatewaysScopedListWarning $warning)
   {
     $this->warning = $warning;
   }
@@ -18379,13 +18379,13 @@ class Google_Service_Compute_TargetVpnGatewaysScopedList extends Google_Collecti
   }
 }
 
-class Google_Service_Compute_TargetVpnGatewaysScopedListWarning extends Google_Collection
+class Appointments_Google_Service_Compute_TargetVpnGatewaysScopedListWarning extends Appointments_Google_Collection
 {
   protected $collection_key = 'data';
   protected $internal_gapi_mappings = array(
   );
   public $code;
-  protected $dataType = 'Google_Service_Compute_TargetVpnGatewaysScopedListWarningData';
+  protected $dataType = 'Appointments_Google_Service_Compute_TargetVpnGatewaysScopedListWarningData';
   protected $dataDataType = 'array';
   public $message;
 
@@ -18416,7 +18416,7 @@ class Google_Service_Compute_TargetVpnGatewaysScopedListWarning extends Google_C
   }
 }
 
-class Google_Service_Compute_TargetVpnGatewaysScopedListWarningData extends Google_Model
+class Appointments_Google_Service_Compute_TargetVpnGatewaysScopedListWarningData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -18442,7 +18442,7 @@ class Google_Service_Compute_TargetVpnGatewaysScopedListWarningData extends Goog
   }
 }
 
-class Google_Service_Compute_TestFailure extends Google_Model
+class Appointments_Google_Service_Compute_TestFailure extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -18486,7 +18486,7 @@ class Google_Service_Compute_TestFailure extends Google_Model
   }
 }
 
-class Google_Service_Compute_UrlMap extends Google_Collection
+class Appointments_Google_Service_Compute_UrlMap extends Appointments_Google_Collection
 {
   protected $collection_key = 'tests';
   protected $internal_gapi_mappings = array(
@@ -18495,15 +18495,15 @@ class Google_Service_Compute_UrlMap extends Google_Collection
   public $defaultService;
   public $description;
   public $fingerprint;
-  protected $hostRulesType = 'Google_Service_Compute_HostRule';
+  protected $hostRulesType = 'Appointments_Google_Service_Compute_HostRule';
   protected $hostRulesDataType = 'array';
   public $id;
   public $kind;
   public $name;
-  protected $pathMatchersType = 'Google_Service_Compute_PathMatcher';
+  protected $pathMatchersType = 'Appointments_Google_Service_Compute_PathMatcher';
   protected $pathMatchersDataType = 'array';
   public $selfLink;
-  protected $testsType = 'Google_Service_Compute_UrlMapTest';
+  protected $testsType = 'Appointments_Google_Service_Compute_UrlMapTest';
   protected $testsDataType = 'array';
 
 
@@ -18597,13 +18597,13 @@ class Google_Service_Compute_UrlMap extends Google_Collection
   }
 }
 
-class Google_Service_Compute_UrlMapList extends Google_Collection
+class Appointments_Google_Service_Compute_UrlMapList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_UrlMap';
+  protected $itemsType = 'Appointments_Google_Service_Compute_UrlMap';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -18652,7 +18652,7 @@ class Google_Service_Compute_UrlMapList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_UrlMapReference extends Google_Model
+class Appointments_Google_Service_Compute_UrlMapReference extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -18669,7 +18669,7 @@ class Google_Service_Compute_UrlMapReference extends Google_Model
   }
 }
 
-class Google_Service_Compute_UrlMapTest extends Google_Model
+class Appointments_Google_Service_Compute_UrlMapTest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -18713,14 +18713,14 @@ class Google_Service_Compute_UrlMapTest extends Google_Model
   }
 }
 
-class Google_Service_Compute_UrlMapValidationResult extends Google_Collection
+class Appointments_Google_Service_Compute_UrlMapValidationResult extends Appointments_Google_Collection
 {
   protected $collection_key = 'testFailures';
   protected $internal_gapi_mappings = array(
   );
   public $loadErrors;
   public $loadSucceeded;
-  protected $testFailuresType = 'Google_Service_Compute_TestFailure';
+  protected $testFailuresType = 'Appointments_Google_Service_Compute_TestFailure';
   protected $testFailuresDataType = 'array';
   public $testPassed;
 
@@ -18759,15 +18759,15 @@ class Google_Service_Compute_UrlMapValidationResult extends Google_Collection
   }
 }
 
-class Google_Service_Compute_UrlMapsValidateRequest extends Google_Model
+class Appointments_Google_Service_Compute_UrlMapsValidateRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $resourceType = 'Google_Service_Compute_UrlMap';
+  protected $resourceType = 'Appointments_Google_Service_Compute_UrlMap';
   protected $resourceDataType = '';
 
 
-  public function setResource(Google_Service_Compute_UrlMap $resource)
+  public function setResource(Appointments_Google_Service_Compute_UrlMap $resource)
   {
     $this->resource = $resource;
   }
@@ -18777,15 +18777,15 @@ class Google_Service_Compute_UrlMapsValidateRequest extends Google_Model
   }
 }
 
-class Google_Service_Compute_UrlMapsValidateResponse extends Google_Model
+class Appointments_Google_Service_Compute_UrlMapsValidateResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $resultType = 'Google_Service_Compute_UrlMapValidationResult';
+  protected $resultType = 'Appointments_Google_Service_Compute_UrlMapValidationResult';
   protected $resultDataType = '';
 
 
-  public function setResult(Google_Service_Compute_UrlMapValidationResult $result)
+  public function setResult(Appointments_Google_Service_Compute_UrlMapValidationResult $result)
   {
     $this->result = $result;
   }
@@ -18795,7 +18795,7 @@ class Google_Service_Compute_UrlMapsValidateResponse extends Google_Model
   }
 }
 
-class Google_Service_Compute_UsageExportLocation extends Google_Model
+class Appointments_Google_Service_Compute_UsageExportLocation extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -18821,7 +18821,7 @@ class Google_Service_Compute_UsageExportLocation extends Google_Model
   }
 }
 
-class Google_Service_Compute_VpnTunnel extends Google_Collection
+class Appointments_Google_Service_Compute_VpnTunnel extends Appointments_Google_Collection
 {
   protected $collection_key = 'localTrafficSelector';
   protected $internal_gapi_mappings = array(
@@ -18965,12 +18965,12 @@ class Google_Service_Compute_VpnTunnel extends Google_Collection
   }
 }
 
-class Google_Service_Compute_VpnTunnelAggregatedList extends Google_Model
+class Appointments_Google_Service_Compute_VpnTunnelAggregatedList extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_VpnTunnelsScopedList';
+  protected $itemsType = 'Appointments_Google_Service_Compute_VpnTunnelsScopedList';
   protected $itemsDataType = 'map';
   public $kind;
   public $nextPageToken;
@@ -19019,13 +19019,13 @@ class Google_Service_Compute_VpnTunnelAggregatedList extends Google_Model
   }
 }
 
-class Google_Service_Compute_VpnTunnelList extends Google_Collection
+class Appointments_Google_Service_Compute_VpnTunnelList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_VpnTunnel';
+  protected $itemsType = 'Appointments_Google_Service_Compute_VpnTunnel';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -19074,14 +19074,14 @@ class Google_Service_Compute_VpnTunnelList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_VpnTunnelsScopedList extends Google_Collection
+class Appointments_Google_Service_Compute_VpnTunnelsScopedList extends Appointments_Google_Collection
 {
   protected $collection_key = 'vpnTunnels';
   protected $internal_gapi_mappings = array(
   );
-  protected $vpnTunnelsType = 'Google_Service_Compute_VpnTunnel';
+  protected $vpnTunnelsType = 'Appointments_Google_Service_Compute_VpnTunnel';
   protected $vpnTunnelsDataType = 'array';
-  protected $warningType = 'Google_Service_Compute_VpnTunnelsScopedListWarning';
+  protected $warningType = 'Appointments_Google_Service_Compute_VpnTunnelsScopedListWarning';
   protected $warningDataType = '';
 
 
@@ -19093,7 +19093,7 @@ class Google_Service_Compute_VpnTunnelsScopedList extends Google_Collection
   {
     return $this->vpnTunnels;
   }
-  public function setWarning(Google_Service_Compute_VpnTunnelsScopedListWarning $warning)
+  public function setWarning(Appointments_Google_Service_Compute_VpnTunnelsScopedListWarning $warning)
   {
     $this->warning = $warning;
   }
@@ -19103,13 +19103,13 @@ class Google_Service_Compute_VpnTunnelsScopedList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_VpnTunnelsScopedListWarning extends Google_Collection
+class Appointments_Google_Service_Compute_VpnTunnelsScopedListWarning extends Appointments_Google_Collection
 {
   protected $collection_key = 'data';
   protected $internal_gapi_mappings = array(
   );
   public $code;
-  protected $dataType = 'Google_Service_Compute_VpnTunnelsScopedListWarningData';
+  protected $dataType = 'Appointments_Google_Service_Compute_VpnTunnelsScopedListWarningData';
   protected $dataDataType = 'array';
   public $message;
 
@@ -19140,7 +19140,7 @@ class Google_Service_Compute_VpnTunnelsScopedListWarning extends Google_Collecti
   }
 }
 
-class Google_Service_Compute_VpnTunnelsScopedListWarningData extends Google_Model
+class Appointments_Google_Service_Compute_VpnTunnelsScopedListWarningData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -19166,18 +19166,18 @@ class Google_Service_Compute_VpnTunnelsScopedListWarningData extends Google_Mode
   }
 }
 
-class Google_Service_Compute_Zone extends Google_Collection
+class Appointments_Google_Service_Compute_Zone extends Appointments_Google_Collection
 {
   protected $collection_key = 'maintenanceWindows';
   protected $internal_gapi_mappings = array(
   );
   public $creationTimestamp;
-  protected $deprecatedType = 'Google_Service_Compute_DeprecationStatus';
+  protected $deprecatedType = 'Appointments_Google_Service_Compute_DeprecationStatus';
   protected $deprecatedDataType = '';
   public $description;
   public $id;
   public $kind;
-  protected $maintenanceWindowsType = 'Google_Service_Compute_ZoneMaintenanceWindows';
+  protected $maintenanceWindowsType = 'Appointments_Google_Service_Compute_ZoneMaintenanceWindows';
   protected $maintenanceWindowsDataType = 'array';
   public $name;
   public $region;
@@ -19193,7 +19193,7 @@ class Google_Service_Compute_Zone extends Google_Collection
   {
     return $this->creationTimestamp;
   }
-  public function setDeprecated(Google_Service_Compute_DeprecationStatus $deprecated)
+  public function setDeprecated(Appointments_Google_Service_Compute_DeprecationStatus $deprecated)
   {
     $this->deprecated = $deprecated;
   }
@@ -19267,13 +19267,13 @@ class Google_Service_Compute_Zone extends Google_Collection
   }
 }
 
-class Google_Service_Compute_ZoneList extends Google_Collection
+class Appointments_Google_Service_Compute_ZoneList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Compute_Zone';
+  protected $itemsType = 'Appointments_Google_Service_Compute_Zone';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -19322,7 +19322,7 @@ class Google_Service_Compute_ZoneList extends Google_Collection
   }
 }
 
-class Google_Service_Compute_ZoneMaintenanceWindows extends Google_Model
+class Appointments_Google_Service_Compute_ZoneMaintenanceWindows extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );

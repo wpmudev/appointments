@@ -26,7 +26,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Books extends Google_Service
+class Appointments_Google_Service_Books extends Appointments_Google_Service
 {
   /** Manage your books. */
   const BOOKS =
@@ -60,9 +60,9 @@ class Google_Service_Books extends Google_Service
   /**
    * Constructs the internal representation of the Books service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -70,7 +70,7 @@ class Google_Service_Books extends Google_Service
     $this->version = 'v1';
     $this->serviceName = 'books';
 
-    $this->bookshelves = new Google_Service_Books_Bookshelves_Resource(
+    $this->bookshelves = new Appointments_Google_Service_Books_Bookshelves_Resource(
         $this,
         $this->serviceName,
         'bookshelves',
@@ -113,7 +113,7 @@ class Google_Service_Books extends Google_Service
           )
         )
     );
-    $this->bookshelves_volumes = new Google_Service_Books_BookshelvesVolumes_Resource(
+    $this->bookshelves_volumes = new Appointments_Google_Service_Books_BookshelvesVolumes_Resource(
         $this,
         $this->serviceName,
         'volumes',
@@ -154,7 +154,7 @@ class Google_Service_Books extends Google_Service
           )
         )
     );
-    $this->cloudloading = new Google_Service_Books_Cloudloading_Resource(
+    $this->cloudloading = new Appointments_Google_Service_Books_Cloudloading_Resource(
         $this,
         $this->serviceName,
         'cloudloading',
@@ -199,7 +199,7 @@ class Google_Service_Books extends Google_Service
           )
         )
     );
-    $this->dictionary = new Google_Service_Books_Dictionary_Resource(
+    $this->dictionary = new Appointments_Google_Service_Books_Dictionary_Resource(
         $this,
         $this->serviceName,
         'dictionary',
@@ -219,7 +219,7 @@ class Google_Service_Books extends Google_Service
           )
         )
     );
-    $this->layers = new Google_Service_Books_Layers_Resource(
+    $this->layers = new Appointments_Google_Service_Books_Layers_Resource(
         $this,
         $this->serviceName,
         'layers',
@@ -278,7 +278,7 @@ class Google_Service_Books extends Google_Service
           )
         )
     );
-    $this->layers_annotationData = new Google_Service_Books_LayersAnnotationData_Resource(
+    $this->layers_annotationData = new Appointments_Google_Service_Books_LayersAnnotationData_Resource(
         $this,
         $this->serviceName,
         'annotationData',
@@ -398,7 +398,7 @@ class Google_Service_Books extends Google_Service
           )
         )
     );
-    $this->layers_volumeAnnotations = new Google_Service_Books_LayersVolumeAnnotations_Resource(
+    $this->layers_volumeAnnotations = new Appointments_Google_Service_Books_LayersVolumeAnnotations_Resource(
         $this,
         $this->serviceName,
         'volumeAnnotations',
@@ -504,7 +504,7 @@ class Google_Service_Books extends Google_Service
           )
         )
     );
-    $this->myconfig = new Google_Service_Books_Myconfig_Resource(
+    $this->myconfig = new Appointments_Google_Service_Books_Myconfig_Resource(
         $this,
         $this->serviceName,
         'myconfig',
@@ -621,7 +621,7 @@ class Google_Service_Books extends Google_Service
           )
         )
     );
-    $this->mylibrary_annotations = new Google_Service_Books_MylibraryAnnotations_Resource(
+    $this->mylibrary_annotations = new Appointments_Google_Service_Books_MylibraryAnnotations_Resource(
         $this,
         $this->serviceName,
         'annotations',
@@ -738,7 +738,7 @@ class Google_Service_Books extends Google_Service
           )
         )
     );
-    $this->mylibrary_bookshelves = new Google_Service_Books_MylibraryBookshelves_Resource(
+    $this->mylibrary_bookshelves = new Appointments_Google_Service_Books_MylibraryBookshelves_Resource(
         $this,
         $this->serviceName,
         'bookshelves',
@@ -855,7 +855,7 @@ class Google_Service_Books extends Google_Service
           )
         )
     );
-    $this->mylibrary_bookshelves_volumes = new Google_Service_Books_MylibraryBookshelvesVolumes_Resource(
+    $this->mylibrary_bookshelves_volumes = new Appointments_Google_Service_Books_MylibraryBookshelvesVolumes_Resource(
         $this,
         $this->serviceName,
         'volumes',
@@ -903,7 +903,7 @@ class Google_Service_Books extends Google_Service
           )
         )
     );
-    $this->mylibrary_readingpositions = new Google_Service_Books_MylibraryReadingpositions_Resource(
+    $this->mylibrary_readingpositions = new Appointments_Google_Service_Books_MylibraryReadingpositions_Resource(
         $this,
         $this->serviceName,
         'readingpositions',
@@ -967,7 +967,7 @@ class Google_Service_Books extends Google_Service
           )
         )
     );
-    $this->notification = new Google_Service_Books_Notification_Resource(
+    $this->notification = new Appointments_Google_Service_Books_Notification_Resource(
         $this,
         $this->serviceName,
         'notification',
@@ -995,7 +995,7 @@ class Google_Service_Books extends Google_Service
           )
         )
     );
-    $this->onboarding = new Google_Service_Books_Onboarding_Resource(
+    $this->onboarding = new Appointments_Google_Service_Books_Onboarding_Resource(
         $this,
         $this->serviceName,
         'onboarding',
@@ -1040,7 +1040,7 @@ class Google_Service_Books extends Google_Service
           )
         )
     );
-    $this->personalizedstream = new Google_Service_Books_Personalizedstream_Resource(
+    $this->personalizedstream = new Appointments_Google_Service_Books_Personalizedstream_Resource(
         $this,
         $this->serviceName,
         'personalizedstream',
@@ -1067,7 +1067,7 @@ class Google_Service_Books extends Google_Service
           )
         )
     );
-    $this->promooffer = new Google_Service_Books_Promooffer_Resource(
+    $this->promooffer = new Appointments_Google_Service_Books_Promooffer_Resource(
         $this,
         $this->serviceName,
         'promooffer',
@@ -1176,7 +1176,7 @@ class Google_Service_Books extends Google_Service
           )
         )
     );
-    $this->series = new Google_Service_Books_Series_Resource(
+    $this->series = new Appointments_Google_Service_Books_Series_Resource(
         $this,
         $this->serviceName,
         'series',
@@ -1197,7 +1197,7 @@ class Google_Service_Books extends Google_Service
           )
         )
     );
-    $this->series_membership = new Google_Service_Books_SeriesMembership_Resource(
+    $this->series_membership = new Appointments_Google_Service_Books_SeriesMembership_Resource(
         $this,
         $this->serviceName,
         'membership',
@@ -1225,7 +1225,7 @@ class Google_Service_Books extends Google_Service
           )
         )
     );
-    $this->volumes = new Google_Service_Books_Volumes_Resource(
+    $this->volumes = new Appointments_Google_Service_Books_Volumes_Resource(
         $this,
         $this->serviceName,
         'volumes',
@@ -1327,7 +1327,7 @@ class Google_Service_Books extends Google_Service
           )
         )
     );
-    $this->volumes_associated = new Google_Service_Books_VolumesAssociated_Resource(
+    $this->volumes_associated = new Appointments_Google_Service_Books_VolumesAssociated_Resource(
         $this,
         $this->serviceName,
         'associated',
@@ -1363,7 +1363,7 @@ class Google_Service_Books extends Google_Service
           )
         )
     );
-    $this->volumes_mybooks = new Google_Service_Books_VolumesMybooks_Resource(
+    $this->volumes_mybooks = new Appointments_Google_Service_Books_VolumesMybooks_Resource(
         $this,
         $this->serviceName,
         'mybooks',
@@ -1404,7 +1404,7 @@ class Google_Service_Books extends Google_Service
           )
         )
     );
-    $this->volumes_recommended = new Google_Service_Books_VolumesRecommended_Resource(
+    $this->volumes_recommended = new Appointments_Google_Service_Books_VolumesRecommended_Resource(
         $this,
         $this->serviceName,
         'recommended',
@@ -1454,7 +1454,7 @@ class Google_Service_Books extends Google_Service
           )
         )
     );
-    $this->volumes_useruploaded = new Google_Service_Books_VolumesUseruploaded_Resource(
+    $this->volumes_useruploaded = new Appointments_Google_Service_Books_VolumesUseruploaded_Resource(
         $this,
         $this->serviceName,
         'useruploaded',
@@ -1503,11 +1503,11 @@ class Google_Service_Books extends Google_Service
  * The "bookshelves" collection of methods.
  * Typical usage is:
  *  <code>
- *   $booksService = new Google_Service_Books(...);
+ *   $booksService = new Appointments_Google_Service_Books(...);
  *   $bookshelves = $booksService->bookshelves;
  *  </code>
  */
-class Google_Service_Books_Bookshelves_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Books_Bookshelves_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1519,13 +1519,13 @@ class Google_Service_Books_Bookshelves_Resource extends Google_Service_Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param string source String to identify the originator of this request.
-   * @return Google_Service_Books_Bookshelf
+   * @return Appointments_Google_Service_Books_Bookshelf
    */
   public function get($userId, $shelf, $optParams = array())
   {
     $params = array('userId' => $userId, 'shelf' => $shelf);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Books_Bookshelf");
+    return $this->call('get', array($params), "Appointments_Google_Service_Books_Bookshelf");
   }
 
   /**
@@ -1536,13 +1536,13 @@ class Google_Service_Books_Bookshelves_Resource extends Google_Service_Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param string source String to identify the originator of this request.
-   * @return Google_Service_Books_Bookshelves
+   * @return Appointments_Google_Service_Books_Bookshelves
    */
   public function listBookshelves($userId, $optParams = array())
   {
     $params = array('userId' => $userId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Books_Bookshelves");
+    return $this->call('list', array($params), "Appointments_Google_Service_Books_Bookshelves");
   }
 }
 
@@ -1550,11 +1550,11 @@ class Google_Service_Books_Bookshelves_Resource extends Google_Service_Resource
  * The "volumes" collection of methods.
  * Typical usage is:
  *  <code>
- *   $booksService = new Google_Service_Books(...);
+ *   $booksService = new Appointments_Google_Service_Books(...);
  *   $volumes = $booksService->volumes;
  *  </code>
  */
-class Google_Service_Books_BookshelvesVolumes_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Books_BookshelvesVolumes_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1571,13 +1571,13 @@ class Google_Service_Books_BookshelvesVolumes_Resource extends Google_Service_Re
    * @opt_param string source String to identify the originator of this request.
    * @opt_param string startIndex Index of the first element to return (starts at
    * 0)
-   * @return Google_Service_Books_Volumes
+   * @return Appointments_Google_Service_Books_Volumes
    */
   public function listBookshelvesVolumes($userId, $shelf, $optParams = array())
   {
     $params = array('userId' => $userId, 'shelf' => $shelf);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Books_Volumes");
+    return $this->call('list', array($params), "Appointments_Google_Service_Books_Volumes");
   }
 }
 
@@ -1585,11 +1585,11 @@ class Google_Service_Books_BookshelvesVolumes_Resource extends Google_Service_Re
  * The "cloudloading" collection of methods.
  * Typical usage is:
  *  <code>
- *   $booksService = new Google_Service_Books(...);
+ *   $booksService = new Appointments_Google_Service_Books(...);
  *   $cloudloading = $booksService->cloudloading;
  *  </code>
  */
-class Google_Service_Books_Cloudloading_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Books_Cloudloading_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1604,13 +1604,13 @@ class Google_Service_Books_Cloudloading_Resource extends Google_Service_Resource
    * @opt_param string name The document name. It can be set only if the
    * drive_document_id is set.
    * @opt_param string upload_client_token
-   * @return Google_Service_Books_BooksCloudloadingResource
+   * @return Appointments_Google_Service_Books_BooksCloudloadingResource
    */
   public function addBook($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('addBook', array($params), "Google_Service_Books_BooksCloudloadingResource");
+    return $this->call('addBook', array($params), "Appointments_Google_Service_Books_BooksCloudloadingResource");
   }
 
   /**
@@ -1629,15 +1629,15 @@ class Google_Service_Books_Cloudloading_Resource extends Google_Service_Resource
   /**
    * (cloudloading.updateBook)
    *
-   * @param Google_BooksCloudloadingResource $postBody
+   * @param Appointments_Google_BooksCloudloadingResource $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Books_BooksCloudloadingResource
+   * @return Appointments_Google_Service_Books_BooksCloudloadingResource
    */
-  public function updateBook(Google_Service_Books_BooksCloudloadingResource $postBody, $optParams = array())
+  public function updateBook(Appointments_Google_Service_Books_BooksCloudloadingResource $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('updateBook', array($params), "Google_Service_Books_BooksCloudloadingResource");
+    return $this->call('updateBook', array($params), "Appointments_Google_Service_Books_BooksCloudloadingResource");
   }
 }
 
@@ -1645,11 +1645,11 @@ class Google_Service_Books_Cloudloading_Resource extends Google_Service_Resource
  * The "dictionary" collection of methods.
  * Typical usage is:
  *  <code>
- *   $booksService = new Google_Service_Books(...);
+ *   $booksService = new Appointments_Google_Service_Books(...);
  *   $dictionary = $booksService->dictionary;
  *  </code>
  */
-class Google_Service_Books_Dictionary_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Books_Dictionary_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1658,13 +1658,13 @@ class Google_Service_Books_Dictionary_Resource extends Google_Service_Resource
    *
    * @param string $cpksver The device/version ID from which to request the data.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Books_Metadata
+   * @return Appointments_Google_Service_Books_Metadata
    */
   public function listOfflineMetadata($cpksver, $optParams = array())
   {
     $params = array('cpksver' => $cpksver);
     $params = array_merge($params, $optParams);
-    return $this->call('listOfflineMetadata', array($params), "Google_Service_Books_Metadata");
+    return $this->call('listOfflineMetadata', array($params), "Appointments_Google_Service_Books_Metadata");
   }
 }
 
@@ -1672,11 +1672,11 @@ class Google_Service_Books_Dictionary_Resource extends Google_Service_Resource
  * The "layers" collection of methods.
  * Typical usage is:
  *  <code>
- *   $booksService = new Google_Service_Books(...);
+ *   $booksService = new Appointments_Google_Service_Books(...);
  *   $layers = $booksService->layers;
  *  </code>
  */
-class Google_Service_Books_Layers_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Books_Layers_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1689,13 +1689,13 @@ class Google_Service_Books_Layers_Resource extends Google_Service_Resource
    * @opt_param string contentVersion The content version for the requested
    * volume.
    * @opt_param string source String to identify the originator of this request.
-   * @return Google_Service_Books_Layersummary
+   * @return Appointments_Google_Service_Books_Layersummary
    */
   public function get($volumeId, $summaryId, $optParams = array())
   {
     $params = array('volumeId' => $volumeId, 'summaryId' => $summaryId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Books_Layersummary");
+    return $this->call('get', array($params), "Appointments_Google_Service_Books_Layersummary");
   }
 
   /**
@@ -1710,13 +1710,13 @@ class Google_Service_Books_Layers_Resource extends Google_Service_Resource
    * @opt_param string pageToken The value of the nextToken from the previous
    * page.
    * @opt_param string source String to identify the originator of this request.
-   * @return Google_Service_Books_Layersummaries
+   * @return Appointments_Google_Service_Books_Layersummaries
    */
   public function listLayers($volumeId, $optParams = array())
   {
     $params = array('volumeId' => $volumeId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Books_Layersummaries");
+    return $this->call('list', array($params), "Appointments_Google_Service_Books_Layersummaries");
   }
 }
 
@@ -1724,11 +1724,11 @@ class Google_Service_Books_Layers_Resource extends Google_Service_Resource
  * The "annotationData" collection of methods.
  * Typical usage is:
  *  <code>
- *   $booksService = new Google_Service_Books(...);
+ *   $booksService = new Appointments_Google_Service_Books(...);
  *   $annotationData = $booksService->annotationData;
  *  </code>
  */
-class Google_Service_Books_LayersAnnotationData_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Books_LayersAnnotationData_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1751,13 +1751,13 @@ class Google_Service_Books_LayersAnnotationData_Resource extends Google_Service_
    * @opt_param string source String to identify the originator of this request.
    * @opt_param int w The requested pixel width for any images. If width is
    * provided height must also be provided.
-   * @return Google_Service_Books_Annotationdata
+   * @return Appointments_Google_Service_Books_Annotationdata
    */
   public function get($volumeId, $layerId, $annotationDataId, $contentVersion, $optParams = array())
   {
     $params = array('volumeId' => $volumeId, 'layerId' => $layerId, 'annotationDataId' => $annotationDataId, 'contentVersion' => $contentVersion);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Books_Annotationdata");
+    return $this->call('get', array($params), "Appointments_Google_Service_Books_Annotationdata");
   }
 
   /**
@@ -1786,24 +1786,24 @@ class Google_Service_Books_LayersAnnotationData_Resource extends Google_Service_
    * since this timestamp (inclusive).
    * @opt_param int w The requested pixel width for any images. If width is
    * provided height must also be provided.
-   * @return Google_Service_Books_Annotationsdata
+   * @return Appointments_Google_Service_Books_Annotationsdata
    */
   public function listLayersAnnotationData($volumeId, $layerId, $contentVersion, $optParams = array())
   {
     $params = array('volumeId' => $volumeId, 'layerId' => $layerId, 'contentVersion' => $contentVersion);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Books_Annotationsdata");
+    return $this->call('list', array($params), "Appointments_Google_Service_Books_Annotationsdata");
   }
 }
 /**
  * The "volumeAnnotations" collection of methods.
  * Typical usage is:
  *  <code>
- *   $booksService = new Google_Service_Books(...);
+ *   $booksService = new Appointments_Google_Service_Books(...);
  *   $volumeAnnotations = $booksService->volumeAnnotations;
  *  </code>
  */
-class Google_Service_Books_LayersVolumeAnnotations_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Books_LayersVolumeAnnotations_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1817,13 +1817,13 @@ class Google_Service_Books_LayersVolumeAnnotations_Resource extends Google_Servi
    * @opt_param string locale The locale information for the data. ISO-639-1
    * language and ISO-3166-1 country code. Ex: 'en_US'.
    * @opt_param string source String to identify the originator of this request.
-   * @return Google_Service_Books_Volumeannotation
+   * @return Appointments_Google_Service_Books_Volumeannotation
    */
   public function get($volumeId, $layerId, $annotationId, $optParams = array())
   {
     $params = array('volumeId' => $volumeId, 'layerId' => $layerId, 'annotationId' => $annotationId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Books_Volumeannotation");
+    return $this->call('get', array($params), "Appointments_Google_Service_Books_Volumeannotation");
   }
 
   /**
@@ -1854,13 +1854,13 @@ class Google_Service_Books_LayersVolumeAnnotations_Resource extends Google_Servi
    * since this timestamp (inclusive).
    * @opt_param string volumeAnnotationsVersion The version of the volume
    * annotations that you are requesting.
-   * @return Google_Service_Books_Volumeannotations
+   * @return Appointments_Google_Service_Books_Volumeannotations
    */
   public function listLayersVolumeAnnotations($volumeId, $layerId, $contentVersion, $optParams = array())
   {
     $params = array('volumeId' => $volumeId, 'layerId' => $layerId, 'contentVersion' => $contentVersion);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Books_Volumeannotations");
+    return $this->call('list', array($params), "Appointments_Google_Service_Books_Volumeannotations");
   }
 }
 
@@ -1868,24 +1868,24 @@ class Google_Service_Books_LayersVolumeAnnotations_Resource extends Google_Servi
  * The "myconfig" collection of methods.
  * Typical usage is:
  *  <code>
- *   $booksService = new Google_Service_Books(...);
+ *   $booksService = new Appointments_Google_Service_Books(...);
  *   $myconfig = $booksService->myconfig;
  *  </code>
  */
-class Google_Service_Books_Myconfig_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Books_Myconfig_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
    * Gets the current settings for the user. (myconfig.getUserSettings)
    *
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Books_Usersettings
+   * @return Appointments_Google_Service_Books_Usersettings
    */
   public function getUserSettings($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('getUserSettings', array($params), "Google_Service_Books_Usersettings");
+    return $this->call('getUserSettings', array($params), "Appointments_Google_Service_Books_Usersettings");
   }
 
   /**
@@ -1900,13 +1900,13 @@ class Google_Service_Books_Myconfig_Resource extends Google_Service_Resource
    * @opt_param string locale ISO-639-1, ISO-3166-1 codes for message
    * localization, i.e. en_US.
    * @opt_param string source String to identify the originator of this request.
-   * @return Google_Service_Books_DownloadAccesses
+   * @return Appointments_Google_Service_Books_DownloadAccesses
    */
   public function releaseDownloadAccess($volumeIds, $cpksver, $optParams = array())
   {
     $params = array('volumeIds' => $volumeIds, 'cpksver' => $cpksver);
     $params = array_merge($params, $optParams);
-    return $this->call('releaseDownloadAccess', array($params), "Google_Service_Books_DownloadAccesses");
+    return $this->call('releaseDownloadAccess', array($params), "Appointments_Google_Service_Books_DownloadAccesses");
   }
 
   /**
@@ -1924,13 +1924,13 @@ class Google_Service_Books_Myconfig_Resource extends Google_Service_Resource
    * specified, the default is BOTH.
    * @opt_param string locale ISO-639-1, ISO-3166-1 codes for message
    * localization, i.e. en_US.
-   * @return Google_Service_Books_RequestAccess
+   * @return Appointments_Google_Service_Books_RequestAccess
    */
   public function requestAccess($source, $volumeId, $nonce, $cpksver, $optParams = array())
   {
     $params = array('source' => $source, 'volumeId' => $volumeId, 'nonce' => $nonce, 'cpksver' => $cpksver);
     $params = array_merge($params, $optParams);
-    return $this->call('requestAccess', array($params), "Google_Service_Books_RequestAccess");
+    return $this->call('requestAccess', array($params), "Appointments_Google_Service_Books_RequestAccess");
   }
 
   /**
@@ -1953,13 +1953,13 @@ class Google_Service_Books_Myconfig_Resource extends Google_Service_Resource
    * to false.
    * @opt_param string volumeIds The volume(s) to request download restrictions
    * for.
-   * @return Google_Service_Books_Volumes
+   * @return Appointments_Google_Service_Books_Volumes
    */
   public function syncVolumeLicenses($source, $nonce, $cpksver, $optParams = array())
   {
     $params = array('source' => $source, 'nonce' => $nonce, 'cpksver' => $cpksver);
     $params = array_merge($params, $optParams);
-    return $this->call('syncVolumeLicenses', array($params), "Google_Service_Books_Volumes");
+    return $this->call('syncVolumeLicenses', array($params), "Appointments_Google_Service_Books_Volumes");
   }
 
   /**
@@ -1967,15 +1967,15 @@ class Google_Service_Books_Myconfig_Resource extends Google_Service_Resource
    * overwrite the existing sub-object stored in the server. Unspecified sub-
    * objects will retain the existing value. (myconfig.updateUserSettings)
    *
-   * @param Google_Usersettings $postBody
+   * @param Appointments_Google_Usersettings $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Books_Usersettings
+   * @return Appointments_Google_Service_Books_Usersettings
    */
-  public function updateUserSettings(Google_Service_Books_Usersettings $postBody, $optParams = array())
+  public function updateUserSettings(Appointments_Google_Service_Books_Usersettings $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('updateUserSettings', array($params), "Google_Service_Books_Usersettings");
+    return $this->call('updateUserSettings', array($params), "Appointments_Google_Service_Books_Usersettings");
   }
 }
 
@@ -1983,11 +1983,11 @@ class Google_Service_Books_Myconfig_Resource extends Google_Service_Resource
  * The "mylibrary" collection of methods.
  * Typical usage is:
  *  <code>
- *   $booksService = new Google_Service_Books(...);
+ *   $booksService = new Appointments_Google_Service_Books(...);
  *   $mylibrary = $booksService->mylibrary;
  *  </code>
  */
-class Google_Service_Books_Mylibrary_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Books_Mylibrary_Resource extends Appointments_Google_Service_Resource
 {
 }
 
@@ -1995,11 +1995,11 @@ class Google_Service_Books_Mylibrary_Resource extends Google_Service_Resource
  * The "annotations" collection of methods.
  * Typical usage is:
  *  <code>
- *   $booksService = new Google_Service_Books(...);
+ *   $booksService = new Appointments_Google_Service_Books(...);
  *   $annotations = $booksService->annotations;
  *  </code>
  */
-class Google_Service_Books_MylibraryAnnotations_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Books_MylibraryAnnotations_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2020,20 +2020,20 @@ class Google_Service_Books_MylibraryAnnotations_Resource extends Google_Service_
   /**
    * Inserts a new annotation. (annotations.insert)
    *
-   * @param Google_Annotation $postBody
+   * @param Appointments_Google_Annotation $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param string country ISO-3166-1 code to override the IP-based location.
    * @opt_param bool showOnlySummaryInResponse Requests that only the summary of
    * the specified layer be provided in the response.
    * @opt_param string source String to identify the originator of this request.
-   * @return Google_Service_Books_Annotation
+   * @return Appointments_Google_Service_Books_Annotation
    */
-  public function insert(Google_Service_Books_Annotation $postBody, $optParams = array())
+  public function insert(Appointments_Google_Service_Books_Annotation $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Books_Annotation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Books_Annotation");
   }
 
   /**
@@ -2057,13 +2057,13 @@ class Google_Service_Books_MylibraryAnnotations_Resource extends Google_Service_
    * @opt_param string updatedMin RFC 3339 timestamp to restrict to items updated
    * since this timestamp (inclusive).
    * @opt_param string volumeId The volume to restrict annotations to.
-   * @return Google_Service_Books_Annotations
+   * @return Appointments_Google_Service_Books_Annotations
    */
   public function listMylibraryAnnotations($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Books_Annotations");
+    return $this->call('list', array($params), "Appointments_Google_Service_Books_Annotations");
   }
 
   /**
@@ -2072,41 +2072,41 @@ class Google_Service_Books_MylibraryAnnotations_Resource extends Google_Service_
    * @param string $layerIds Array of layer IDs to get the summary for.
    * @param string $volumeId Volume id to get the summary for.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Books_AnnotationsSummary
+   * @return Appointments_Google_Service_Books_AnnotationsSummary
    */
   public function summary($layerIds, $volumeId, $optParams = array())
   {
     $params = array('layerIds' => $layerIds, 'volumeId' => $volumeId);
     $params = array_merge($params, $optParams);
-    return $this->call('summary', array($params), "Google_Service_Books_AnnotationsSummary");
+    return $this->call('summary', array($params), "Appointments_Google_Service_Books_AnnotationsSummary");
   }
 
   /**
    * Updates an existing annotation. (annotations.update)
    *
    * @param string $annotationId The ID for the annotation to update.
-   * @param Google_Annotation $postBody
+   * @param Appointments_Google_Annotation $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param string source String to identify the originator of this request.
-   * @return Google_Service_Books_Annotation
+   * @return Appointments_Google_Service_Books_Annotation
    */
-  public function update($annotationId, Google_Service_Books_Annotation $postBody, $optParams = array())
+  public function update($annotationId, Appointments_Google_Service_Books_Annotation $postBody, $optParams = array())
   {
     $params = array('annotationId' => $annotationId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Books_Annotation");
+    return $this->call('update', array($params), "Appointments_Google_Service_Books_Annotation");
   }
 }
 /**
  * The "bookshelves" collection of methods.
  * Typical usage is:
  *  <code>
- *   $booksService = new Google_Service_Books(...);
+ *   $booksService = new Appointments_Google_Service_Books(...);
  *   $bookshelves = $booksService->bookshelves;
  *  </code>
  */
-class Google_Service_Books_MylibraryBookshelves_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Books_MylibraryBookshelves_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2150,13 +2150,13 @@ class Google_Service_Books_MylibraryBookshelves_Resource extends Google_Service_
    * @param array $optParams Optional parameters.
    *
    * @opt_param string source String to identify the originator of this request.
-   * @return Google_Service_Books_Bookshelf
+   * @return Appointments_Google_Service_Books_Bookshelf
    */
   public function get($shelf, $optParams = array())
   {
     $params = array('shelf' => $shelf);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Books_Bookshelf");
+    return $this->call('get', array($params), "Appointments_Google_Service_Books_Bookshelf");
   }
 
   /**
@@ -2166,13 +2166,13 @@ class Google_Service_Books_MylibraryBookshelves_Resource extends Google_Service_
    * @param array $optParams Optional parameters.
    *
    * @opt_param string source String to identify the originator of this request.
-   * @return Google_Service_Books_Bookshelves
+   * @return Appointments_Google_Service_Books_Bookshelves
    */
   public function listMylibraryBookshelves($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Books_Bookshelves");
+    return $this->call('list', array($params), "Appointments_Google_Service_Books_Bookshelves");
   }
 
   /**
@@ -2217,11 +2217,11 @@ class Google_Service_Books_MylibraryBookshelves_Resource extends Google_Service_
  * The "volumes" collection of methods.
  * Typical usage is:
  *  <code>
- *   $booksService = new Google_Service_Books(...);
+ *   $booksService = new Appointments_Google_Service_Books(...);
  *   $volumes = $booksService->volumes;
  *  </code>
  */
-class Google_Service_Books_MylibraryBookshelvesVolumes_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Books_MylibraryBookshelvesVolumes_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2241,24 +2241,24 @@ class Google_Service_Books_MylibraryBookshelvesVolumes_Resource extends Google_S
    * @opt_param string source String to identify the originator of this request.
    * @opt_param string startIndex Index of the first element to return (starts at
    * 0)
-   * @return Google_Service_Books_Volumes
+   * @return Appointments_Google_Service_Books_Volumes
    */
   public function listMylibraryBookshelvesVolumes($shelf, $optParams = array())
   {
     $params = array('shelf' => $shelf);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Books_Volumes");
+    return $this->call('list', array($params), "Appointments_Google_Service_Books_Volumes");
   }
 }
 /**
  * The "readingpositions" collection of methods.
  * Typical usage is:
  *  <code>
- *   $booksService = new Google_Service_Books(...);
+ *   $booksService = new Appointments_Google_Service_Books(...);
  *   $readingpositions = $booksService->readingpositions;
  *  </code>
  */
-class Google_Service_Books_MylibraryReadingpositions_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Books_MylibraryReadingpositions_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2272,13 +2272,13 @@ class Google_Service_Books_MylibraryReadingpositions_Resource extends Google_Ser
    * @opt_param string contentVersion Volume content version for which this
    * reading position is requested.
    * @opt_param string source String to identify the originator of this request.
-   * @return Google_Service_Books_ReadingPosition
+   * @return Appointments_Google_Service_Books_ReadingPosition
    */
   public function get($volumeId, $optParams = array())
   {
     $params = array('volumeId' => $volumeId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Books_ReadingPosition");
+    return $this->call('get', array($params), "Appointments_Google_Service_Books_ReadingPosition");
   }
 
   /**
@@ -2311,11 +2311,11 @@ class Google_Service_Books_MylibraryReadingpositions_Resource extends Google_Ser
  * The "notification" collection of methods.
  * Typical usage is:
  *  <code>
- *   $booksService = new Google_Service_Books(...);
+ *   $booksService = new Appointments_Google_Service_Books(...);
  *   $notification = $booksService->notification;
  *  </code>
  */
-class Google_Service_Books_Notification_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Books_Notification_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2327,13 +2327,13 @@ class Google_Service_Books_Notification_Resource extends Google_Service_Resource
    * @opt_param string locale ISO-639-1 language and ISO-3166-1 country code. Ex:
    * 'en_US'. Used for generating notification title and body.
    * @opt_param string source String to identify the originator of this request.
-   * @return Google_Service_Books_Notification
+   * @return Appointments_Google_Service_Books_Notification
    */
   public function get($notificationId, $optParams = array())
   {
     $params = array('notification_id' => $notificationId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Books_Notification");
+    return $this->call('get', array($params), "Appointments_Google_Service_Books_Notification");
   }
 }
 
@@ -2341,11 +2341,11 @@ class Google_Service_Books_Notification_Resource extends Google_Service_Resource
  * The "onboarding" collection of methods.
  * Typical usage is:
  *  <code>
- *   $booksService = new Google_Service_Books(...);
+ *   $booksService = new Appointments_Google_Service_Books(...);
  *   $onboarding = $booksService->onboarding;
  *  </code>
  */
-class Google_Service_Books_Onboarding_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Books_Onboarding_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2355,13 +2355,13 @@ class Google_Service_Books_Onboarding_Resource extends Google_Service_Resource
    *
    * @opt_param string locale ISO-639-1 language and ISO-3166-1 country code.
    * Default is en-US if unset.
-   * @return Google_Service_Books_Category
+   * @return Appointments_Google_Service_Books_Category
    */
   public function listCategories($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('listCategories', array($params), "Google_Service_Books_Category");
+    return $this->call('listCategories', array($params), "Appointments_Google_Service_Books_Category");
   }
 
   /**
@@ -2380,13 +2380,13 @@ class Google_Service_Books_Onboarding_Resource extends Google_Service_Resource
    * in the response.
    * @opt_param string pageToken The value of the nextToken from the previous
    * page.
-   * @return Google_Service_Books_Volume2
+   * @return Appointments_Google_Service_Books_Volume2
    */
   public function listCategoryVolumes($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('listCategoryVolumes', array($params), "Google_Service_Books_Volume2");
+    return $this->call('listCategoryVolumes', array($params), "Appointments_Google_Service_Books_Volume2");
   }
 }
 
@@ -2394,11 +2394,11 @@ class Google_Service_Books_Onboarding_Resource extends Google_Service_Resource
  * The "personalizedstream" collection of methods.
  * Typical usage is:
  *  <code>
- *   $booksService = new Google_Service_Books(...);
+ *   $booksService = new Appointments_Google_Service_Books(...);
  *   $personalizedstream = $booksService->personalizedstream;
  *  </code>
  */
-class Google_Service_Books_Personalizedstream_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Books_Personalizedstream_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2412,13 +2412,13 @@ class Google_Service_Books_Personalizedstream_Resource extends Google_Service_Re
    * rating of returned recommendations. Books with a higher maturity rating are
    * filtered out.
    * @opt_param string source String to identify the originator of this request.
-   * @return Google_Service_Books_Discoveryclusters
+   * @return Appointments_Google_Service_Books_Discoveryclusters
    */
   public function get($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Books_Discoveryclusters");
+    return $this->call('get', array($params), "Appointments_Google_Service_Books_Discoveryclusters");
   }
 }
 
@@ -2426,11 +2426,11 @@ class Google_Service_Books_Personalizedstream_Resource extends Google_Service_Re
  * The "promooffer" collection of methods.
  * Typical usage is:
  *  <code>
- *   $booksService = new Google_Service_Books(...);
+ *   $booksService = new Appointments_Google_Service_Books(...);
  *   $promooffer = $booksService->promooffer;
  *  </code>
  */
-class Google_Service_Books_Promooffer_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Books_Promooffer_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2485,13 +2485,13 @@ class Google_Service_Books_Promooffer_Resource extends Google_Service_Resource
    * @opt_param string model device model
    * @opt_param string product device product
    * @opt_param string serial device serial
-   * @return Google_Service_Books_Offers
+   * @return Appointments_Google_Service_Books_Offers
    */
   public function get($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Books_Offers");
+    return $this->call('get', array($params), "Appointments_Google_Service_Books_Offers");
   }
 }
 
@@ -2499,11 +2499,11 @@ class Google_Service_Books_Promooffer_Resource extends Google_Service_Resource
  * The "series" collection of methods.
  * Typical usage is:
  *  <code>
- *   $booksService = new Google_Service_Books(...);
+ *   $booksService = new Appointments_Google_Service_Books(...);
  *   $series = $booksService->series;
  *  </code>
  */
-class Google_Service_Books_Series_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Books_Series_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2511,13 +2511,13 @@ class Google_Service_Books_Series_Resource extends Google_Service_Resource
    *
    * @param string $seriesId String that identifies the series
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Books_Series
+   * @return Appointments_Google_Service_Books_Series
    */
   public function get($seriesId, $optParams = array())
   {
     $params = array('series_id' => $seriesId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Books_Series");
+    return $this->call('get', array($params), "Appointments_Google_Service_Books_Series");
   }
 }
 
@@ -2525,11 +2525,11 @@ class Google_Service_Books_Series_Resource extends Google_Service_Resource
  * The "membership" collection of methods.
  * Typical usage is:
  *  <code>
- *   $booksService = new Google_Service_Books(...);
+ *   $booksService = new Appointments_Google_Service_Books(...);
  *   $membership = $booksService->membership;
  *  </code>
  */
-class Google_Service_Books_SeriesMembership_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Books_SeriesMembership_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2542,13 +2542,13 @@ class Google_Service_Books_SeriesMembership_Resource extends Google_Service_Reso
    * in the response.
    * @opt_param string page_token The value of the nextToken from the previous
    * page.
-   * @return Google_Service_Books_Seriesmembership
+   * @return Appointments_Google_Service_Books_Seriesmembership
    */
   public function get($seriesId, $optParams = array())
   {
     $params = array('series_id' => $seriesId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Books_Seriesmembership");
+    return $this->call('get', array($params), "Appointments_Google_Service_Books_Seriesmembership");
   }
 }
 
@@ -2556,11 +2556,11 @@ class Google_Service_Books_SeriesMembership_Resource extends Google_Service_Reso
  * The "volumes" collection of methods.
  * Typical usage is:
  *  <code>
- *   $booksService = new Google_Service_Books(...);
+ *   $booksService = new Appointments_Google_Service_Books(...);
  *   $volumes = $booksService->volumes;
  *  </code>
  */
-class Google_Service_Books_Volumes_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Books_Volumes_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2577,13 +2577,13 @@ class Google_Service_Books_Volumes_Resource extends Google_Service_Resource
    * selected fields.
    * @opt_param string source String to identify the originator of this request.
    * @opt_param bool user_library_consistent_read
-   * @return Google_Service_Books_Volume
+   * @return Appointments_Google_Service_Books_Volume
    */
   public function get($volumeId, $optParams = array())
   {
     $params = array('volumeId' => $volumeId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Books_Volume");
+    return $this->call('get', array($params), "Appointments_Google_Service_Books_Volume");
   }
 
   /**
@@ -2608,13 +2608,13 @@ class Google_Service_Books_Volumes_Resource extends Google_Service_Resource
    * @opt_param string source String to identify the originator of this request.
    * @opt_param string startIndex Index of the first result to return (starts at
    * 0)
-   * @return Google_Service_Books_Volumes
+   * @return Appointments_Google_Service_Books_Volumes
    */
   public function listVolumes($q, $optParams = array())
   {
     $params = array('q' => $q);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Books_Volumes");
+    return $this->call('list', array($params), "Appointments_Google_Service_Books_Volumes");
   }
 }
 
@@ -2622,11 +2622,11 @@ class Google_Service_Books_Volumes_Resource extends Google_Service_Resource
  * The "associated" collection of methods.
  * Typical usage is:
  *  <code>
- *   $booksService = new Google_Service_Books(...);
+ *   $booksService = new Appointments_Google_Service_Books(...);
  *   $associated = $booksService->associated;
  *  </code>
  */
-class Google_Service_Books_VolumesAssociated_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Books_VolumesAssociated_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2642,24 +2642,24 @@ class Google_Service_Books_VolumesAssociated_Resource extends Google_Service_Res
    * rating of returned recommendations. Books with a higher maturity rating are
    * filtered out.
    * @opt_param string source String to identify the originator of this request.
-   * @return Google_Service_Books_Volumes
+   * @return Appointments_Google_Service_Books_Volumes
    */
   public function listVolumesAssociated($volumeId, $optParams = array())
   {
     $params = array('volumeId' => $volumeId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Books_Volumes");
+    return $this->call('list', array($params), "Appointments_Google_Service_Books_Volumes");
   }
 }
 /**
  * The "mybooks" collection of methods.
  * Typical usage is:
  *  <code>
- *   $booksService = new Google_Service_Books(...);
+ *   $booksService = new Appointments_Google_Service_Books(...);
  *   $mybooks = $booksService->mybooks;
  *  </code>
  */
-class Google_Service_Books_VolumesMybooks_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Books_VolumesMybooks_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2677,24 +2677,24 @@ class Google_Service_Books_VolumesMybooks_Resource extends Google_Service_Resour
    * @opt_param string source String to identify the originator of this request.
    * @opt_param string startIndex Index of the first result to return (starts at
    * 0)
-   * @return Google_Service_Books_Volumes
+   * @return Appointments_Google_Service_Books_Volumes
    */
   public function listVolumesMybooks($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Books_Volumes");
+    return $this->call('list', array($params), "Appointments_Google_Service_Books_Volumes");
   }
 }
 /**
  * The "recommended" collection of methods.
  * Typical usage is:
  *  <code>
- *   $booksService = new Google_Service_Books(...);
+ *   $booksService = new Appointments_Google_Service_Books(...);
  *   $recommended = $booksService->recommended;
  *  </code>
  */
-class Google_Service_Books_VolumesRecommended_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Books_VolumesRecommended_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2709,13 +2709,13 @@ class Google_Service_Books_VolumesRecommended_Resource extends Google_Service_Re
    * rating of returned recommendations. Books with a higher maturity rating are
    * filtered out.
    * @opt_param string source String to identify the originator of this request.
-   * @return Google_Service_Books_Volumes
+   * @return Appointments_Google_Service_Books_Volumes
    */
   public function listVolumesRecommended($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Books_Volumes");
+    return $this->call('list', array($params), "Appointments_Google_Service_Books_Volumes");
   }
 
   /**
@@ -2728,24 +2728,24 @@ class Google_Service_Books_VolumesRecommended_Resource extends Google_Service_Re
    * @opt_param string locale ISO-639-1 language and ISO-3166-1 country code. Ex:
    * 'en_US'. Used for generating recommendations.
    * @opt_param string source String to identify the originator of this request.
-   * @return Google_Service_Books_BooksVolumesRecommendedRateResponse
+   * @return Appointments_Google_Service_Books_BooksVolumesRecommendedRateResponse
    */
   public function rate($rating, $volumeId, $optParams = array())
   {
     $params = array('rating' => $rating, 'volumeId' => $volumeId);
     $params = array_merge($params, $optParams);
-    return $this->call('rate', array($params), "Google_Service_Books_BooksVolumesRecommendedRateResponse");
+    return $this->call('rate', array($params), "Appointments_Google_Service_Books_BooksVolumesRecommendedRateResponse");
   }
 }
 /**
  * The "useruploaded" collection of methods.
  * Typical usage is:
  *  <code>
- *   $booksService = new Google_Service_Books(...);
+ *   $booksService = new Appointments_Google_Service_Books(...);
  *   $useruploaded = $booksService->useruploaded;
  *  </code>
  */
-class Google_Service_Books_VolumesUseruploaded_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Books_VolumesUseruploaded_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2764,30 +2764,30 @@ class Google_Service_Books_VolumesUseruploaded_Resource extends Google_Service_R
    * 0)
    * @opt_param string volumeId The ids of the volumes to be returned. If not
    * specified all that match the processingState are returned.
-   * @return Google_Service_Books_Volumes
+   * @return Appointments_Google_Service_Books_Volumes
    */
   public function listVolumesUseruploaded($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Books_Volumes");
+    return $this->call('list', array($params), "Appointments_Google_Service_Books_Volumes");
   }
 }
 
 
 
 
-class Google_Service_Books_Annotation extends Google_Collection
+class Appointments_Google_Service_Books_Annotation extends Appointments_Google_Collection
 {
   protected $collection_key = 'pageIds';
   protected $internal_gapi_mappings = array(
   );
   public $afterSelectedText;
   public $beforeSelectedText;
-  protected $clientVersionRangesType = 'Google_Service_Books_AnnotationClientVersionRanges';
+  protected $clientVersionRangesType = 'Appointments_Google_Service_Books_AnnotationClientVersionRanges';
   protected $clientVersionRangesDataType = '';
   public $created;
-  protected $currentVersionRangesType = 'Google_Service_Books_AnnotationCurrentVersionRanges';
+  protected $currentVersionRangesType = 'Appointments_Google_Service_Books_AnnotationCurrentVersionRanges';
   protected $currentVersionRangesDataType = '';
   public $data;
   public $deleted;
@@ -2795,7 +2795,7 @@ class Google_Service_Books_Annotation extends Google_Collection
   public $id;
   public $kind;
   public $layerId;
-  protected $layerSummaryType = 'Google_Service_Books_AnnotationLayerSummary';
+  protected $layerSummaryType = 'Appointments_Google_Service_Books_AnnotationLayerSummary';
   protected $layerSummaryDataType = '';
   public $pageIds;
   public $selectedText;
@@ -2820,7 +2820,7 @@ class Google_Service_Books_Annotation extends Google_Collection
   {
     return $this->beforeSelectedText;
   }
-  public function setClientVersionRanges(Google_Service_Books_AnnotationClientVersionRanges $clientVersionRanges)
+  public function setClientVersionRanges(Appointments_Google_Service_Books_AnnotationClientVersionRanges $clientVersionRanges)
   {
     $this->clientVersionRanges = $clientVersionRanges;
   }
@@ -2836,7 +2836,7 @@ class Google_Service_Books_Annotation extends Google_Collection
   {
     return $this->created;
   }
-  public function setCurrentVersionRanges(Google_Service_Books_AnnotationCurrentVersionRanges $currentVersionRanges)
+  public function setCurrentVersionRanges(Appointments_Google_Service_Books_AnnotationCurrentVersionRanges $currentVersionRanges)
   {
     $this->currentVersionRanges = $currentVersionRanges;
   }
@@ -2892,7 +2892,7 @@ class Google_Service_Books_Annotation extends Google_Collection
   {
     return $this->layerId;
   }
-  public function setLayerSummary(Google_Service_Books_AnnotationLayerSummary $layerSummary)
+  public function setLayerSummary(Appointments_Google_Service_Books_AnnotationLayerSummary $layerSummary)
   {
     $this->layerSummary = $layerSummary;
   }
@@ -2942,22 +2942,22 @@ class Google_Service_Books_Annotation extends Google_Collection
   }
 }
 
-class Google_Service_Books_AnnotationClientVersionRanges extends Google_Model
+class Appointments_Google_Service_Books_AnnotationClientVersionRanges extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $cfiRangeType = 'Google_Service_Books_BooksAnnotationsRange';
+  protected $cfiRangeType = 'Appointments_Google_Service_Books_BooksAnnotationsRange';
   protected $cfiRangeDataType = '';
   public $contentVersion;
-  protected $gbImageRangeType = 'Google_Service_Books_BooksAnnotationsRange';
+  protected $gbImageRangeType = 'Appointments_Google_Service_Books_BooksAnnotationsRange';
   protected $gbImageRangeDataType = '';
-  protected $gbTextRangeType = 'Google_Service_Books_BooksAnnotationsRange';
+  protected $gbTextRangeType = 'Appointments_Google_Service_Books_BooksAnnotationsRange';
   protected $gbTextRangeDataType = '';
-  protected $imageCfiRangeType = 'Google_Service_Books_BooksAnnotationsRange';
+  protected $imageCfiRangeType = 'Appointments_Google_Service_Books_BooksAnnotationsRange';
   protected $imageCfiRangeDataType = '';
 
 
-  public function setCfiRange(Google_Service_Books_BooksAnnotationsRange $cfiRange)
+  public function setCfiRange(Appointments_Google_Service_Books_BooksAnnotationsRange $cfiRange)
   {
     $this->cfiRange = $cfiRange;
   }
@@ -2973,7 +2973,7 @@ class Google_Service_Books_AnnotationClientVersionRanges extends Google_Model
   {
     return $this->contentVersion;
   }
-  public function setGbImageRange(Google_Service_Books_BooksAnnotationsRange $gbImageRange)
+  public function setGbImageRange(Appointments_Google_Service_Books_BooksAnnotationsRange $gbImageRange)
   {
     $this->gbImageRange = $gbImageRange;
   }
@@ -2981,7 +2981,7 @@ class Google_Service_Books_AnnotationClientVersionRanges extends Google_Model
   {
     return $this->gbImageRange;
   }
-  public function setGbTextRange(Google_Service_Books_BooksAnnotationsRange $gbTextRange)
+  public function setGbTextRange(Appointments_Google_Service_Books_BooksAnnotationsRange $gbTextRange)
   {
     $this->gbTextRange = $gbTextRange;
   }
@@ -2989,7 +2989,7 @@ class Google_Service_Books_AnnotationClientVersionRanges extends Google_Model
   {
     return $this->gbTextRange;
   }
-  public function setImageCfiRange(Google_Service_Books_BooksAnnotationsRange $imageCfiRange)
+  public function setImageCfiRange(Appointments_Google_Service_Books_BooksAnnotationsRange $imageCfiRange)
   {
     $this->imageCfiRange = $imageCfiRange;
   }
@@ -2999,22 +2999,22 @@ class Google_Service_Books_AnnotationClientVersionRanges extends Google_Model
   }
 }
 
-class Google_Service_Books_AnnotationCurrentVersionRanges extends Google_Model
+class Appointments_Google_Service_Books_AnnotationCurrentVersionRanges extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $cfiRangeType = 'Google_Service_Books_BooksAnnotationsRange';
+  protected $cfiRangeType = 'Appointments_Google_Service_Books_BooksAnnotationsRange';
   protected $cfiRangeDataType = '';
   public $contentVersion;
-  protected $gbImageRangeType = 'Google_Service_Books_BooksAnnotationsRange';
+  protected $gbImageRangeType = 'Appointments_Google_Service_Books_BooksAnnotationsRange';
   protected $gbImageRangeDataType = '';
-  protected $gbTextRangeType = 'Google_Service_Books_BooksAnnotationsRange';
+  protected $gbTextRangeType = 'Appointments_Google_Service_Books_BooksAnnotationsRange';
   protected $gbTextRangeDataType = '';
-  protected $imageCfiRangeType = 'Google_Service_Books_BooksAnnotationsRange';
+  protected $imageCfiRangeType = 'Appointments_Google_Service_Books_BooksAnnotationsRange';
   protected $imageCfiRangeDataType = '';
 
 
-  public function setCfiRange(Google_Service_Books_BooksAnnotationsRange $cfiRange)
+  public function setCfiRange(Appointments_Google_Service_Books_BooksAnnotationsRange $cfiRange)
   {
     $this->cfiRange = $cfiRange;
   }
@@ -3030,7 +3030,7 @@ class Google_Service_Books_AnnotationCurrentVersionRanges extends Google_Model
   {
     return $this->contentVersion;
   }
-  public function setGbImageRange(Google_Service_Books_BooksAnnotationsRange $gbImageRange)
+  public function setGbImageRange(Appointments_Google_Service_Books_BooksAnnotationsRange $gbImageRange)
   {
     $this->gbImageRange = $gbImageRange;
   }
@@ -3038,7 +3038,7 @@ class Google_Service_Books_AnnotationCurrentVersionRanges extends Google_Model
   {
     return $this->gbImageRange;
   }
-  public function setGbTextRange(Google_Service_Books_BooksAnnotationsRange $gbTextRange)
+  public function setGbTextRange(Appointments_Google_Service_Books_BooksAnnotationsRange $gbTextRange)
   {
     $this->gbTextRange = $gbTextRange;
   }
@@ -3046,7 +3046,7 @@ class Google_Service_Books_AnnotationCurrentVersionRanges extends Google_Model
   {
     return $this->gbTextRange;
   }
-  public function setImageCfiRange(Google_Service_Books_BooksAnnotationsRange $imageCfiRange)
+  public function setImageCfiRange(Appointments_Google_Service_Books_BooksAnnotationsRange $imageCfiRange)
   {
     $this->imageCfiRange = $imageCfiRange;
   }
@@ -3056,7 +3056,7 @@ class Google_Service_Books_AnnotationCurrentVersionRanges extends Google_Model
   }
 }
 
-class Google_Service_Books_AnnotationLayerSummary extends Google_Model
+class Appointments_Google_Service_Books_AnnotationLayerSummary extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3091,7 +3091,7 @@ class Google_Service_Books_AnnotationLayerSummary extends Google_Model
   }
 }
 
-class Google_Service_Books_Annotationdata extends Google_Model
+class Appointments_Google_Service_Books_Annotationdata extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
         "encodedData" => "encoded_data",
@@ -3181,12 +3181,12 @@ class Google_Service_Books_Annotationdata extends Google_Model
   }
 }
 
-class Google_Service_Books_Annotations extends Google_Collection
+class Appointments_Google_Service_Books_Annotations extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_Books_Annotation';
+  protected $itemsType = 'Appointments_Google_Service_Books_Annotation';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -3227,13 +3227,13 @@ class Google_Service_Books_Annotations extends Google_Collection
   }
 }
 
-class Google_Service_Books_AnnotationsSummary extends Google_Collection
+class Appointments_Google_Service_Books_AnnotationsSummary extends Appointments_Google_Collection
 {
   protected $collection_key = 'layers';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $layersType = 'Google_Service_Books_AnnotationsSummaryLayers';
+  protected $layersType = 'Appointments_Google_Service_Books_AnnotationsSummaryLayers';
   protected $layersDataType = 'array';
 
 
@@ -3255,7 +3255,7 @@ class Google_Service_Books_AnnotationsSummary extends Google_Collection
   }
 }
 
-class Google_Service_Books_AnnotationsSummaryLayers extends Google_Model
+class Appointments_Google_Service_Books_AnnotationsSummaryLayers extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3308,12 +3308,12 @@ class Google_Service_Books_AnnotationsSummaryLayers extends Google_Model
   }
 }
 
-class Google_Service_Books_Annotationsdata extends Google_Collection
+class Appointments_Google_Service_Books_Annotationsdata extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_Books_Annotationdata';
+  protected $itemsType = 'Appointments_Google_Service_Books_Annotationdata';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -3354,7 +3354,7 @@ class Google_Service_Books_Annotationsdata extends Google_Collection
   }
 }
 
-class Google_Service_Books_BooksAnnotationsRange extends Google_Model
+class Appointments_Google_Service_Books_BooksAnnotationsRange extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3398,7 +3398,7 @@ class Google_Service_Books_BooksAnnotationsRange extends Google_Model
   }
 }
 
-class Google_Service_Books_BooksCloudloadingResource extends Google_Model
+class Appointments_Google_Service_Books_BooksCloudloadingResource extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3442,7 +3442,7 @@ class Google_Service_Books_BooksCloudloadingResource extends Google_Model
   }
 }
 
-class Google_Service_Books_BooksVolumesRecommendedRateResponse extends Google_Model
+class Appointments_Google_Service_Books_BooksVolumesRecommendedRateResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
         "consistencyToken" => "consistency_token",
@@ -3460,7 +3460,7 @@ class Google_Service_Books_BooksVolumesRecommendedRateResponse extends Google_Mo
   }
 }
 
-class Google_Service_Books_Bookshelf extends Google_Model
+class Appointments_Google_Service_Books_Bookshelf extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3558,12 +3558,12 @@ class Google_Service_Books_Bookshelf extends Google_Model
   }
 }
 
-class Google_Service_Books_Bookshelves extends Google_Collection
+class Appointments_Google_Service_Books_Bookshelves extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_Books_Bookshelf';
+  protected $itemsType = 'Appointments_Google_Service_Books_Bookshelf';
   protected $itemsDataType = 'array';
   public $kind;
 
@@ -3586,12 +3586,12 @@ class Google_Service_Books_Bookshelves extends Google_Collection
   }
 }
 
-class Google_Service_Books_Category extends Google_Collection
+class Appointments_Google_Service_Books_Category extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_Books_CategoryItems';
+  protected $itemsType = 'Appointments_Google_Service_Books_CategoryItems';
   protected $itemsDataType = 'array';
   public $kind;
 
@@ -3614,7 +3614,7 @@ class Google_Service_Books_Category extends Google_Collection
   }
 }
 
-class Google_Service_Books_CategoryItems extends Google_Model
+class Appointments_Google_Service_Books_CategoryItems extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3649,7 +3649,7 @@ class Google_Service_Books_CategoryItems extends Google_Model
   }
 }
 
-class Google_Service_Books_ConcurrentAccessRestriction extends Google_Model
+class Appointments_Google_Service_Books_ConcurrentAccessRestriction extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3756,18 +3756,18 @@ class Google_Service_Books_ConcurrentAccessRestriction extends Google_Model
   }
 }
 
-class Google_Service_Books_Dictlayerdata extends Google_Model
+class Appointments_Google_Service_Books_Dictlayerdata extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $commonType = 'Google_Service_Books_DictlayerdataCommon';
+  protected $commonType = 'Appointments_Google_Service_Books_DictlayerdataCommon';
   protected $commonDataType = '';
-  protected $dictType = 'Google_Service_Books_DictlayerdataDict';
+  protected $dictType = 'Appointments_Google_Service_Books_DictlayerdataDict';
   protected $dictDataType = '';
   public $kind;
 
 
-  public function setCommon(Google_Service_Books_DictlayerdataCommon $common)
+  public function setCommon(Appointments_Google_Service_Books_DictlayerdataCommon $common)
   {
     $this->common = $common;
   }
@@ -3775,7 +3775,7 @@ class Google_Service_Books_Dictlayerdata extends Google_Model
   {
     return $this->common;
   }
-  public function setDict(Google_Service_Books_DictlayerdataDict $dict)
+  public function setDict(Appointments_Google_Service_Books_DictlayerdataDict $dict)
   {
     $this->dict = $dict;
   }
@@ -3793,7 +3793,7 @@ class Google_Service_Books_Dictlayerdata extends Google_Model
   }
 }
 
-class Google_Service_Books_DictlayerdataCommon extends Google_Model
+class Appointments_Google_Service_Books_DictlayerdataCommon extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3810,18 +3810,18 @@ class Google_Service_Books_DictlayerdataCommon extends Google_Model
   }
 }
 
-class Google_Service_Books_DictlayerdataDict extends Google_Collection
+class Appointments_Google_Service_Books_DictlayerdataDict extends Appointments_Google_Collection
 {
   protected $collection_key = 'words';
   protected $internal_gapi_mappings = array(
   );
-  protected $sourceType = 'Google_Service_Books_DictlayerdataDictSource';
+  protected $sourceType = 'Appointments_Google_Service_Books_DictlayerdataDictSource';
   protected $sourceDataType = '';
-  protected $wordsType = 'Google_Service_Books_DictlayerdataDictWords';
+  protected $wordsType = 'Appointments_Google_Service_Books_DictlayerdataDictWords';
   protected $wordsDataType = 'array';
 
 
-  public function setSource(Google_Service_Books_DictlayerdataDictSource $source)
+  public function setSource(Appointments_Google_Service_Books_DictlayerdataDictSource $source)
   {
     $this->source = $source;
   }
@@ -3839,7 +3839,7 @@ class Google_Service_Books_DictlayerdataDict extends Google_Collection
   }
 }
 
-class Google_Service_Books_DictlayerdataDictSource extends Google_Model
+class Appointments_Google_Service_Books_DictlayerdataDictSource extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3865,18 +3865,18 @@ class Google_Service_Books_DictlayerdataDictSource extends Google_Model
   }
 }
 
-class Google_Service_Books_DictlayerdataDictWords extends Google_Collection
+class Appointments_Google_Service_Books_DictlayerdataDictWords extends Appointments_Google_Collection
 {
   protected $collection_key = 'senses';
   protected $internal_gapi_mappings = array(
   );
-  protected $derivativesType = 'Google_Service_Books_DictlayerdataDictWordsDerivatives';
+  protected $derivativesType = 'Appointments_Google_Service_Books_DictlayerdataDictWordsDerivatives';
   protected $derivativesDataType = 'array';
-  protected $examplesType = 'Google_Service_Books_DictlayerdataDictWordsExamples';
+  protected $examplesType = 'Appointments_Google_Service_Books_DictlayerdataDictWordsExamples';
   protected $examplesDataType = 'array';
-  protected $sensesType = 'Google_Service_Books_DictlayerdataDictWordsSenses';
+  protected $sensesType = 'Appointments_Google_Service_Books_DictlayerdataDictWordsSenses';
   protected $sensesDataType = 'array';
-  protected $sourceType = 'Google_Service_Books_DictlayerdataDictWordsSource';
+  protected $sourceType = 'Appointments_Google_Service_Books_DictlayerdataDictWordsSource';
   protected $sourceDataType = '';
 
 
@@ -3904,7 +3904,7 @@ class Google_Service_Books_DictlayerdataDictWords extends Google_Collection
   {
     return $this->senses;
   }
-  public function setSource(Google_Service_Books_DictlayerdataDictWordsSource $source)
+  public function setSource(Appointments_Google_Service_Books_DictlayerdataDictWordsSource $source)
   {
     $this->source = $source;
   }
@@ -3914,16 +3914,16 @@ class Google_Service_Books_DictlayerdataDictWords extends Google_Collection
   }
 }
 
-class Google_Service_Books_DictlayerdataDictWordsDerivatives extends Google_Model
+class Appointments_Google_Service_Books_DictlayerdataDictWordsDerivatives extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $sourceType = 'Google_Service_Books_DictlayerdataDictWordsDerivativesSource';
+  protected $sourceType = 'Appointments_Google_Service_Books_DictlayerdataDictWordsDerivativesSource';
   protected $sourceDataType = '';
   public $text;
 
 
-  public function setSource(Google_Service_Books_DictlayerdataDictWordsDerivativesSource $source)
+  public function setSource(Appointments_Google_Service_Books_DictlayerdataDictWordsDerivativesSource $source)
   {
     $this->source = $source;
   }
@@ -3941,7 +3941,7 @@ class Google_Service_Books_DictlayerdataDictWordsDerivatives extends Google_Mode
   }
 }
 
-class Google_Service_Books_DictlayerdataDictWordsDerivativesSource extends Google_Model
+class Appointments_Google_Service_Books_DictlayerdataDictWordsDerivativesSource extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3967,16 +3967,16 @@ class Google_Service_Books_DictlayerdataDictWordsDerivativesSource extends Googl
   }
 }
 
-class Google_Service_Books_DictlayerdataDictWordsExamples extends Google_Model
+class Appointments_Google_Service_Books_DictlayerdataDictWordsExamples extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $sourceType = 'Google_Service_Books_DictlayerdataDictWordsExamplesSource';
+  protected $sourceType = 'Appointments_Google_Service_Books_DictlayerdataDictWordsExamplesSource';
   protected $sourceDataType = '';
   public $text;
 
 
-  public function setSource(Google_Service_Books_DictlayerdataDictWordsExamplesSource $source)
+  public function setSource(Appointments_Google_Service_Books_DictlayerdataDictWordsExamplesSource $source)
   {
     $this->source = $source;
   }
@@ -3994,7 +3994,7 @@ class Google_Service_Books_DictlayerdataDictWordsExamples extends Google_Model
   }
 }
 
-class Google_Service_Books_DictlayerdataDictWordsExamplesSource extends Google_Model
+class Appointments_Google_Service_Books_DictlayerdataDictWordsExamplesSource extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -4020,22 +4020,22 @@ class Google_Service_Books_DictlayerdataDictWordsExamplesSource extends Google_M
   }
 }
 
-class Google_Service_Books_DictlayerdataDictWordsSenses extends Google_Collection
+class Appointments_Google_Service_Books_DictlayerdataDictWordsSenses extends Appointments_Google_Collection
 {
   protected $collection_key = 'synonyms';
   protected $internal_gapi_mappings = array(
   );
-  protected $conjugationsType = 'Google_Service_Books_DictlayerdataDictWordsSensesConjugations';
+  protected $conjugationsType = 'Appointments_Google_Service_Books_DictlayerdataDictWordsSensesConjugations';
   protected $conjugationsDataType = 'array';
-  protected $definitionsType = 'Google_Service_Books_DictlayerdataDictWordsSensesDefinitions';
+  protected $definitionsType = 'Appointments_Google_Service_Books_DictlayerdataDictWordsSensesDefinitions';
   protected $definitionsDataType = 'array';
   public $partOfSpeech;
   public $pronunciation;
   public $pronunciationUrl;
-  protected $sourceType = 'Google_Service_Books_DictlayerdataDictWordsSensesSource';
+  protected $sourceType = 'Appointments_Google_Service_Books_DictlayerdataDictWordsSensesSource';
   protected $sourceDataType = '';
   public $syllabification;
-  protected $synonymsType = 'Google_Service_Books_DictlayerdataDictWordsSensesSynonyms';
+  protected $synonymsType = 'Appointments_Google_Service_Books_DictlayerdataDictWordsSensesSynonyms';
   protected $synonymsDataType = 'array';
 
 
@@ -4079,7 +4079,7 @@ class Google_Service_Books_DictlayerdataDictWordsSenses extends Google_Collectio
   {
     return $this->pronunciationUrl;
   }
-  public function setSource(Google_Service_Books_DictlayerdataDictWordsSensesSource $source)
+  public function setSource(Appointments_Google_Service_Books_DictlayerdataDictWordsSensesSource $source)
   {
     $this->source = $source;
   }
@@ -4105,7 +4105,7 @@ class Google_Service_Books_DictlayerdataDictWordsSenses extends Google_Collectio
   }
 }
 
-class Google_Service_Books_DictlayerdataDictWordsSensesConjugations extends Google_Model
+class Appointments_Google_Service_Books_DictlayerdataDictWordsSensesConjugations extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -4131,13 +4131,13 @@ class Google_Service_Books_DictlayerdataDictWordsSensesConjugations extends Goog
   }
 }
 
-class Google_Service_Books_DictlayerdataDictWordsSensesDefinitions extends Google_Collection
+class Appointments_Google_Service_Books_DictlayerdataDictWordsSensesDefinitions extends Appointments_Google_Collection
 {
   protected $collection_key = 'examples';
   protected $internal_gapi_mappings = array(
   );
   public $definition;
-  protected $examplesType = 'Google_Service_Books_DictlayerdataDictWordsSensesDefinitionsExamples';
+  protected $examplesType = 'Appointments_Google_Service_Books_DictlayerdataDictWordsSensesDefinitionsExamples';
   protected $examplesDataType = 'array';
 
 
@@ -4159,16 +4159,16 @@ class Google_Service_Books_DictlayerdataDictWordsSensesDefinitions extends Googl
   }
 }
 
-class Google_Service_Books_DictlayerdataDictWordsSensesDefinitionsExamples extends Google_Model
+class Appointments_Google_Service_Books_DictlayerdataDictWordsSensesDefinitionsExamples extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $sourceType = 'Google_Service_Books_DictlayerdataDictWordsSensesDefinitionsExamplesSource';
+  protected $sourceType = 'Appointments_Google_Service_Books_DictlayerdataDictWordsSensesDefinitionsExamplesSource';
   protected $sourceDataType = '';
   public $text;
 
 
-  public function setSource(Google_Service_Books_DictlayerdataDictWordsSensesDefinitionsExamplesSource $source)
+  public function setSource(Appointments_Google_Service_Books_DictlayerdataDictWordsSensesDefinitionsExamplesSource $source)
   {
     $this->source = $source;
   }
@@ -4186,7 +4186,7 @@ class Google_Service_Books_DictlayerdataDictWordsSensesDefinitionsExamples exten
   }
 }
 
-class Google_Service_Books_DictlayerdataDictWordsSensesDefinitionsExamplesSource extends Google_Model
+class Appointments_Google_Service_Books_DictlayerdataDictWordsSensesDefinitionsExamplesSource extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -4212,7 +4212,7 @@ class Google_Service_Books_DictlayerdataDictWordsSensesDefinitionsExamplesSource
   }
 }
 
-class Google_Service_Books_DictlayerdataDictWordsSensesSource extends Google_Model
+class Appointments_Google_Service_Books_DictlayerdataDictWordsSensesSource extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -4238,16 +4238,16 @@ class Google_Service_Books_DictlayerdataDictWordsSensesSource extends Google_Mod
   }
 }
 
-class Google_Service_Books_DictlayerdataDictWordsSensesSynonyms extends Google_Model
+class Appointments_Google_Service_Books_DictlayerdataDictWordsSensesSynonyms extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $sourceType = 'Google_Service_Books_DictlayerdataDictWordsSensesSynonymsSource';
+  protected $sourceType = 'Appointments_Google_Service_Books_DictlayerdataDictWordsSensesSynonymsSource';
   protected $sourceDataType = '';
   public $text;
 
 
-  public function setSource(Google_Service_Books_DictlayerdataDictWordsSensesSynonymsSource $source)
+  public function setSource(Appointments_Google_Service_Books_DictlayerdataDictWordsSensesSynonymsSource $source)
   {
     $this->source = $source;
   }
@@ -4265,7 +4265,7 @@ class Google_Service_Books_DictlayerdataDictWordsSensesSynonyms extends Google_M
   }
 }
 
-class Google_Service_Books_DictlayerdataDictWordsSensesSynonymsSource extends Google_Model
+class Appointments_Google_Service_Books_DictlayerdataDictWordsSensesSynonymsSource extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -4291,7 +4291,7 @@ class Google_Service_Books_DictlayerdataDictWordsSensesSynonymsSource extends Go
   }
 }
 
-class Google_Service_Books_DictlayerdataDictWordsSource extends Google_Model
+class Appointments_Google_Service_Books_DictlayerdataDictWordsSource extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -4317,12 +4317,12 @@ class Google_Service_Books_DictlayerdataDictWordsSource extends Google_Model
   }
 }
 
-class Google_Service_Books_Discoveryclusters extends Google_Collection
+class Appointments_Google_Service_Books_Discoveryclusters extends Appointments_Google_Collection
 {
   protected $collection_key = 'clusters';
   protected $internal_gapi_mappings = array(
   );
-  protected $clustersType = 'Google_Service_Books_DiscoveryclustersClusters';
+  protected $clustersType = 'Appointments_Google_Service_Books_DiscoveryclustersClusters';
   protected $clustersDataType = 'array';
   public $kind;
   public $totalClusters;
@@ -4354,23 +4354,23 @@ class Google_Service_Books_Discoveryclusters extends Google_Collection
   }
 }
 
-class Google_Service_Books_DiscoveryclustersClusters extends Google_Collection
+class Appointments_Google_Service_Books_DiscoveryclustersClusters extends Appointments_Google_Collection
 {
   protected $collection_key = 'volumes';
   protected $internal_gapi_mappings = array(
         "bannerWithContentContainer" => "banner_with_content_container",
   );
-  protected $bannerWithContentContainerType = 'Google_Service_Books_DiscoveryclustersClustersBannerWithContentContainer';
+  protected $bannerWithContentContainerType = 'Appointments_Google_Service_Books_DiscoveryclustersClustersBannerWithContentContainer';
   protected $bannerWithContentContainerDataType = '';
   public $subTitle;
   public $title;
   public $totalVolumes;
   public $uid;
-  protected $volumesType = 'Google_Service_Books_Volume';
+  protected $volumesType = 'Appointments_Google_Service_Books_Volume';
   protected $volumesDataType = 'array';
 
 
-  public function setBannerWithContentContainer(Google_Service_Books_DiscoveryclustersClustersBannerWithContentContainer $bannerWithContentContainer)
+  public function setBannerWithContentContainer(Appointments_Google_Service_Books_DiscoveryclustersClustersBannerWithContentContainer $bannerWithContentContainer)
   {
     $this->bannerWithContentContainer = $bannerWithContentContainer;
   }
@@ -4420,7 +4420,7 @@ class Google_Service_Books_DiscoveryclustersClusters extends Google_Collection
   }
 }
 
-class Google_Service_Books_DiscoveryclustersClustersBannerWithContentContainer extends Google_Model
+class Appointments_Google_Service_Books_DiscoveryclustersClustersBannerWithContentContainer extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -4482,7 +4482,7 @@ class Google_Service_Books_DiscoveryclustersClustersBannerWithContentContainer e
   }
 }
 
-class Google_Service_Books_DownloadAccessRestriction extends Google_Model
+class Appointments_Google_Service_Books_DownloadAccessRestriction extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -4598,12 +4598,12 @@ class Google_Service_Books_DownloadAccessRestriction extends Google_Model
   }
 }
 
-class Google_Service_Books_DownloadAccesses extends Google_Collection
+class Appointments_Google_Service_Books_DownloadAccesses extends Appointments_Google_Collection
 {
   protected $collection_key = 'downloadAccessList';
   protected $internal_gapi_mappings = array(
   );
-  protected $downloadAccessListType = 'Google_Service_Books_DownloadAccessRestriction';
+  protected $downloadAccessListType = 'Appointments_Google_Service_Books_DownloadAccessRestriction';
   protected $downloadAccessListDataType = 'array';
   public $kind;
 
@@ -4626,18 +4626,18 @@ class Google_Service_Books_DownloadAccesses extends Google_Collection
   }
 }
 
-class Google_Service_Books_Geolayerdata extends Google_Model
+class Appointments_Google_Service_Books_Geolayerdata extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $commonType = 'Google_Service_Books_GeolayerdataCommon';
+  protected $commonType = 'Appointments_Google_Service_Books_GeolayerdataCommon';
   protected $commonDataType = '';
-  protected $geoType = 'Google_Service_Books_GeolayerdataGeo';
+  protected $geoType = 'Appointments_Google_Service_Books_GeolayerdataGeo';
   protected $geoDataType = '';
   public $kind;
 
 
-  public function setCommon(Google_Service_Books_GeolayerdataCommon $common)
+  public function setCommon(Appointments_Google_Service_Books_GeolayerdataCommon $common)
   {
     $this->common = $common;
   }
@@ -4645,7 +4645,7 @@ class Google_Service_Books_Geolayerdata extends Google_Model
   {
     return $this->common;
   }
-  public function setGeo(Google_Service_Books_GeolayerdataGeo $geo)
+  public function setGeo(Appointments_Google_Service_Books_GeolayerdataGeo $geo)
   {
     $this->geo = $geo;
   }
@@ -4663,7 +4663,7 @@ class Google_Service_Books_Geolayerdata extends Google_Model
   }
 }
 
-class Google_Service_Books_GeolayerdataCommon extends Google_Model
+class Appointments_Google_Service_Books_GeolayerdataCommon extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -4716,19 +4716,19 @@ class Google_Service_Books_GeolayerdataCommon extends Google_Model
   }
 }
 
-class Google_Service_Books_GeolayerdataGeo extends Google_Collection
+class Appointments_Google_Service_Books_GeolayerdataGeo extends Appointments_Google_Collection
 {
   protected $collection_key = 'boundary';
   protected $internal_gapi_mappings = array(
   );
-  protected $boundaryType = 'Google_Service_Books_GeolayerdataGeoBoundary';
+  protected $boundaryType = 'Appointments_Google_Service_Books_GeolayerdataGeoBoundary';
   protected $boundaryDataType = 'array';
   public $cachePolicy;
   public $countryCode;
   public $latitude;
   public $longitude;
   public $mapType;
-  protected $viewportType = 'Google_Service_Books_GeolayerdataGeoViewport';
+  protected $viewportType = 'Appointments_Google_Service_Books_GeolayerdataGeoViewport';
   protected $viewportDataType = '';
   public $zoom;
 
@@ -4781,7 +4781,7 @@ class Google_Service_Books_GeolayerdataGeo extends Google_Collection
   {
     return $this->mapType;
   }
-  public function setViewport(Google_Service_Books_GeolayerdataGeoViewport $viewport)
+  public function setViewport(Appointments_Google_Service_Books_GeolayerdataGeoViewport $viewport)
   {
     $this->viewport = $viewport;
   }
@@ -4799,7 +4799,7 @@ class Google_Service_Books_GeolayerdataGeo extends Google_Collection
   }
 }
 
-class Google_Service_Books_GeolayerdataGeoBoundary extends Google_Model
+class Appointments_Google_Service_Books_GeolayerdataGeoBoundary extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -4825,17 +4825,17 @@ class Google_Service_Books_GeolayerdataGeoBoundary extends Google_Model
   }
 }
 
-class Google_Service_Books_GeolayerdataGeoViewport extends Google_Model
+class Appointments_Google_Service_Books_GeolayerdataGeoViewport extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $hiType = 'Google_Service_Books_GeolayerdataGeoViewportHi';
+  protected $hiType = 'Appointments_Google_Service_Books_GeolayerdataGeoViewportHi';
   protected $hiDataType = '';
-  protected $loType = 'Google_Service_Books_GeolayerdataGeoViewportLo';
+  protected $loType = 'Appointments_Google_Service_Books_GeolayerdataGeoViewportLo';
   protected $loDataType = '';
 
 
-  public function setHi(Google_Service_Books_GeolayerdataGeoViewportHi $hi)
+  public function setHi(Appointments_Google_Service_Books_GeolayerdataGeoViewportHi $hi)
   {
     $this->hi = $hi;
   }
@@ -4843,7 +4843,7 @@ class Google_Service_Books_GeolayerdataGeoViewport extends Google_Model
   {
     return $this->hi;
   }
-  public function setLo(Google_Service_Books_GeolayerdataGeoViewportLo $lo)
+  public function setLo(Appointments_Google_Service_Books_GeolayerdataGeoViewportLo $lo)
   {
     $this->lo = $lo;
   }
@@ -4853,7 +4853,7 @@ class Google_Service_Books_GeolayerdataGeoViewport extends Google_Model
   }
 }
 
-class Google_Service_Books_GeolayerdataGeoViewportHi extends Google_Model
+class Appointments_Google_Service_Books_GeolayerdataGeoViewportHi extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -4879,7 +4879,7 @@ class Google_Service_Books_GeolayerdataGeoViewportHi extends Google_Model
   }
 }
 
-class Google_Service_Books_GeolayerdataGeoViewportLo extends Google_Model
+class Appointments_Google_Service_Books_GeolayerdataGeoViewportLo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -4905,12 +4905,12 @@ class Google_Service_Books_GeolayerdataGeoViewportLo extends Google_Model
   }
 }
 
-class Google_Service_Books_Layersummaries extends Google_Collection
+class Appointments_Google_Service_Books_Layersummaries extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_Books_Layersummary';
+  protected $itemsType = 'Appointments_Google_Service_Books_Layersummary';
   protected $itemsDataType = 'array';
   public $kind;
   public $totalItems;
@@ -4942,7 +4942,7 @@ class Google_Service_Books_Layersummaries extends Google_Collection
   }
 }
 
-class Google_Service_Books_Layersummary extends Google_Collection
+class Appointments_Google_Service_Books_Layersummary extends Appointments_Google_Collection
 {
   protected $collection_key = 'annotationTypes';
   protected $internal_gapi_mappings = array(
@@ -5068,12 +5068,12 @@ class Google_Service_Books_Layersummary extends Google_Collection
   }
 }
 
-class Google_Service_Books_Metadata extends Google_Collection
+class Appointments_Google_Service_Books_Metadata extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_Books_MetadataItems';
+  protected $itemsType = 'Appointments_Google_Service_Books_MetadataItems';
   protected $itemsDataType = 'array';
   public $kind;
 
@@ -5096,7 +5096,7 @@ class Google_Service_Books_Metadata extends Google_Collection
   }
 }
 
-class Google_Service_Books_MetadataItems extends Google_Model
+class Appointments_Google_Service_Books_MetadataItems extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
         "downloadUrl" => "download_url",
@@ -5151,7 +5151,7 @@ class Google_Service_Books_MetadataItems extends Google_Model
   }
 }
 
-class Google_Service_Books_Notification extends Google_Model
+class Appointments_Google_Service_Books_Notification extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
         "dontShowNotification" => "dont_show_notification",
@@ -5244,12 +5244,12 @@ class Google_Service_Books_Notification extends Google_Model
   }
 }
 
-class Google_Service_Books_Offers extends Google_Collection
+class Appointments_Google_Service_Books_Offers extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_Books_OffersItems';
+  protected $itemsType = 'Appointments_Google_Service_Books_OffersItems';
   protected $itemsDataType = 'array';
   public $kind;
 
@@ -5272,7 +5272,7 @@ class Google_Service_Books_Offers extends Google_Collection
   }
 }
 
-class Google_Service_Books_OffersItems extends Google_Collection
+class Appointments_Google_Service_Books_OffersItems extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
@@ -5280,7 +5280,7 @@ class Google_Service_Books_OffersItems extends Google_Collection
   public $artUrl;
   public $gservicesKey;
   public $id;
-  protected $itemsType = 'Google_Service_Books_OffersItemsItems';
+  protected $itemsType = 'Appointments_Google_Service_Books_OffersItemsItems';
   protected $itemsDataType = 'array';
 
 
@@ -5318,7 +5318,7 @@ class Google_Service_Books_OffersItems extends Google_Collection
   }
 }
 
-class Google_Service_Books_OffersItemsItems extends Google_Model
+class Appointments_Google_Service_Books_OffersItemsItems extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -5380,7 +5380,7 @@ class Google_Service_Books_OffersItemsItems extends Google_Model
   }
 }
 
-class Google_Service_Books_ReadingPosition extends Google_Model
+class Appointments_Google_Service_Books_ReadingPosition extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -5451,18 +5451,18 @@ class Google_Service_Books_ReadingPosition extends Google_Model
   }
 }
 
-class Google_Service_Books_RequestAccess extends Google_Model
+class Appointments_Google_Service_Books_RequestAccess extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $concurrentAccessType = 'Google_Service_Books_ConcurrentAccessRestriction';
+  protected $concurrentAccessType = 'Appointments_Google_Service_Books_ConcurrentAccessRestriction';
   protected $concurrentAccessDataType = '';
-  protected $downloadAccessType = 'Google_Service_Books_DownloadAccessRestriction';
+  protected $downloadAccessType = 'Appointments_Google_Service_Books_DownloadAccessRestriction';
   protected $downloadAccessDataType = '';
   public $kind;
 
 
-  public function setConcurrentAccess(Google_Service_Books_ConcurrentAccessRestriction $concurrentAccess)
+  public function setConcurrentAccess(Appointments_Google_Service_Books_ConcurrentAccessRestriction $concurrentAccess)
   {
     $this->concurrentAccess = $concurrentAccess;
   }
@@ -5470,7 +5470,7 @@ class Google_Service_Books_RequestAccess extends Google_Model
   {
     return $this->concurrentAccess;
   }
-  public function setDownloadAccess(Google_Service_Books_DownloadAccessRestriction $downloadAccess)
+  public function setDownloadAccess(Appointments_Google_Service_Books_DownloadAccessRestriction $downloadAccess)
   {
     $this->downloadAccess = $downloadAccess;
   }
@@ -5488,25 +5488,25 @@ class Google_Service_Books_RequestAccess extends Google_Model
   }
 }
 
-class Google_Service_Books_Review extends Google_Model
+class Appointments_Google_Service_Books_Review extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $authorType = 'Google_Service_Books_ReviewAuthor';
+  protected $authorType = 'Appointments_Google_Service_Books_ReviewAuthor';
   protected $authorDataType = '';
   public $content;
   public $date;
   public $fullTextUrl;
   public $kind;
   public $rating;
-  protected $sourceType = 'Google_Service_Books_ReviewSource';
+  protected $sourceType = 'Appointments_Google_Service_Books_ReviewSource';
   protected $sourceDataType = '';
   public $title;
   public $type;
   public $volumeId;
 
 
-  public function setAuthor(Google_Service_Books_ReviewAuthor $author)
+  public function setAuthor(Appointments_Google_Service_Books_ReviewAuthor $author)
   {
     $this->author = $author;
   }
@@ -5554,7 +5554,7 @@ class Google_Service_Books_Review extends Google_Model
   {
     return $this->rating;
   }
-  public function setSource(Google_Service_Books_ReviewSource $source)
+  public function setSource(Appointments_Google_Service_Books_ReviewSource $source)
   {
     $this->source = $source;
   }
@@ -5588,7 +5588,7 @@ class Google_Service_Books_Review extends Google_Model
   }
 }
 
-class Google_Service_Books_ReviewAuthor extends Google_Model
+class Appointments_Google_Service_Books_ReviewAuthor extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -5605,7 +5605,7 @@ class Google_Service_Books_ReviewAuthor extends Google_Model
   }
 }
 
-class Google_Service_Books_ReviewSource extends Google_Model
+class Appointments_Google_Service_Books_ReviewSource extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -5640,13 +5640,13 @@ class Google_Service_Books_ReviewSource extends Google_Model
   }
 }
 
-class Google_Service_Books_Series extends Google_Collection
+class Appointments_Google_Service_Books_Series extends Appointments_Google_Collection
 {
   protected $collection_key = 'series';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $seriesType = 'Google_Service_Books_SeriesSeries';
+  protected $seriesType = 'Appointments_Google_Service_Books_SeriesSeries';
   protected $seriesDataType = 'array';
 
 
@@ -5668,7 +5668,7 @@ class Google_Service_Books_Series extends Google_Collection
   }
 }
 
-class Google_Service_Books_SeriesSeries extends Google_Model
+class Appointments_Google_Service_Books_SeriesSeries extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -5721,13 +5721,13 @@ class Google_Service_Books_SeriesSeries extends Google_Model
   }
 }
 
-class Google_Service_Books_Seriesmembership extends Google_Collection
+class Appointments_Google_Service_Books_Seriesmembership extends Appointments_Google_Collection
 {
   protected $collection_key = 'member';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $memberType = 'Google_Service_Books_Volume';
+  protected $memberType = 'Appointments_Google_Service_Books_Volume';
   protected $memberDataType = 'array';
   public $nextPageToken;
 
@@ -5758,14 +5758,14 @@ class Google_Service_Books_Seriesmembership extends Google_Collection
   }
 }
 
-class Google_Service_Books_Usersettings extends Google_Model
+class Appointments_Google_Service_Books_Usersettings extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $notesExportType = 'Google_Service_Books_UsersettingsNotesExport';
+  protected $notesExportType = 'Appointments_Google_Service_Books_UsersettingsNotesExport';
   protected $notesExportDataType = '';
-  protected $notificationType = 'Google_Service_Books_UsersettingsNotification';
+  protected $notificationType = 'Appointments_Google_Service_Books_UsersettingsNotification';
   protected $notificationDataType = '';
 
 
@@ -5777,7 +5777,7 @@ class Google_Service_Books_Usersettings extends Google_Model
   {
     return $this->kind;
   }
-  public function setNotesExport(Google_Service_Books_UsersettingsNotesExport $notesExport)
+  public function setNotesExport(Appointments_Google_Service_Books_UsersettingsNotesExport $notesExport)
   {
     $this->notesExport = $notesExport;
   }
@@ -5785,7 +5785,7 @@ class Google_Service_Books_Usersettings extends Google_Model
   {
     return $this->notesExport;
   }
-  public function setNotification(Google_Service_Books_UsersettingsNotification $notification)
+  public function setNotification(Appointments_Google_Service_Books_UsersettingsNotification $notification)
   {
     $this->notification = $notification;
   }
@@ -5795,7 +5795,7 @@ class Google_Service_Books_Usersettings extends Google_Model
   }
 }
 
-class Google_Service_Books_UsersettingsNotesExport extends Google_Model
+class Appointments_Google_Service_Books_UsersettingsNotesExport extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -5821,15 +5821,15 @@ class Google_Service_Books_UsersettingsNotesExport extends Google_Model
   }
 }
 
-class Google_Service_Books_UsersettingsNotification extends Google_Model
+class Appointments_Google_Service_Books_UsersettingsNotification extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $moreFromAuthorsType = 'Google_Service_Books_UsersettingsNotificationMoreFromAuthors';
+  protected $moreFromAuthorsType = 'Appointments_Google_Service_Books_UsersettingsNotificationMoreFromAuthors';
   protected $moreFromAuthorsDataType = '';
 
 
-  public function setMoreFromAuthors(Google_Service_Books_UsersettingsNotificationMoreFromAuthors $moreFromAuthors)
+  public function setMoreFromAuthors(Appointments_Google_Service_Books_UsersettingsNotificationMoreFromAuthors $moreFromAuthors)
   {
     $this->moreFromAuthors = $moreFromAuthors;
   }
@@ -5839,7 +5839,7 @@ class Google_Service_Books_UsersettingsNotification extends Google_Model
   }
 }
 
-class Google_Service_Books_UsersettingsNotificationMoreFromAuthors extends Google_Model
+class Appointments_Google_Service_Books_UsersettingsNotificationMoreFromAuthors extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
         "optedState" => "opted_state",
@@ -5857,31 +5857,31 @@ class Google_Service_Books_UsersettingsNotificationMoreFromAuthors extends Googl
   }
 }
 
-class Google_Service_Books_Volume extends Google_Model
+class Appointments_Google_Service_Books_Volume extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $accessInfoType = 'Google_Service_Books_VolumeAccessInfo';
+  protected $accessInfoType = 'Appointments_Google_Service_Books_VolumeAccessInfo';
   protected $accessInfoDataType = '';
   public $etag;
   public $id;
   public $kind;
-  protected $layerInfoType = 'Google_Service_Books_VolumeLayerInfo';
+  protected $layerInfoType = 'Appointments_Google_Service_Books_VolumeLayerInfo';
   protected $layerInfoDataType = '';
-  protected $recommendedInfoType = 'Google_Service_Books_VolumeRecommendedInfo';
+  protected $recommendedInfoType = 'Appointments_Google_Service_Books_VolumeRecommendedInfo';
   protected $recommendedInfoDataType = '';
-  protected $saleInfoType = 'Google_Service_Books_VolumeSaleInfo';
+  protected $saleInfoType = 'Appointments_Google_Service_Books_VolumeSaleInfo';
   protected $saleInfoDataType = '';
-  protected $searchInfoType = 'Google_Service_Books_VolumeSearchInfo';
+  protected $searchInfoType = 'Appointments_Google_Service_Books_VolumeSearchInfo';
   protected $searchInfoDataType = '';
   public $selfLink;
-  protected $userInfoType = 'Google_Service_Books_VolumeUserInfo';
+  protected $userInfoType = 'Appointments_Google_Service_Books_VolumeUserInfo';
   protected $userInfoDataType = '';
-  protected $volumeInfoType = 'Google_Service_Books_VolumeVolumeInfo';
+  protected $volumeInfoType = 'Appointments_Google_Service_Books_VolumeVolumeInfo';
   protected $volumeInfoDataType = '';
 
 
-  public function setAccessInfo(Google_Service_Books_VolumeAccessInfo $accessInfo)
+  public function setAccessInfo(Appointments_Google_Service_Books_VolumeAccessInfo $accessInfo)
   {
     $this->accessInfo = $accessInfo;
   }
@@ -5913,7 +5913,7 @@ class Google_Service_Books_Volume extends Google_Model
   {
     return $this->kind;
   }
-  public function setLayerInfo(Google_Service_Books_VolumeLayerInfo $layerInfo)
+  public function setLayerInfo(Appointments_Google_Service_Books_VolumeLayerInfo $layerInfo)
   {
     $this->layerInfo = $layerInfo;
   }
@@ -5921,7 +5921,7 @@ class Google_Service_Books_Volume extends Google_Model
   {
     return $this->layerInfo;
   }
-  public function setRecommendedInfo(Google_Service_Books_VolumeRecommendedInfo $recommendedInfo)
+  public function setRecommendedInfo(Appointments_Google_Service_Books_VolumeRecommendedInfo $recommendedInfo)
   {
     $this->recommendedInfo = $recommendedInfo;
   }
@@ -5929,7 +5929,7 @@ class Google_Service_Books_Volume extends Google_Model
   {
     return $this->recommendedInfo;
   }
-  public function setSaleInfo(Google_Service_Books_VolumeSaleInfo $saleInfo)
+  public function setSaleInfo(Appointments_Google_Service_Books_VolumeSaleInfo $saleInfo)
   {
     $this->saleInfo = $saleInfo;
   }
@@ -5937,7 +5937,7 @@ class Google_Service_Books_Volume extends Google_Model
   {
     return $this->saleInfo;
   }
-  public function setSearchInfo(Google_Service_Books_VolumeSearchInfo $searchInfo)
+  public function setSearchInfo(Appointments_Google_Service_Books_VolumeSearchInfo $searchInfo)
   {
     $this->searchInfo = $searchInfo;
   }
@@ -5953,7 +5953,7 @@ class Google_Service_Books_Volume extends Google_Model
   {
     return $this->selfLink;
   }
-  public function setUserInfo(Google_Service_Books_VolumeUserInfo $userInfo)
+  public function setUserInfo(Appointments_Google_Service_Books_VolumeUserInfo $userInfo)
   {
     $this->userInfo = $userInfo;
   }
@@ -5961,7 +5961,7 @@ class Google_Service_Books_Volume extends Google_Model
   {
     return $this->userInfo;
   }
-  public function setVolumeInfo(Google_Service_Books_VolumeVolumeInfo $volumeInfo)
+  public function setVolumeInfo(Appointments_Google_Service_Books_VolumeVolumeInfo $volumeInfo)
   {
     $this->volumeInfo = $volumeInfo;
   }
@@ -5971,12 +5971,12 @@ class Google_Service_Books_Volume extends Google_Model
   }
 }
 
-class Google_Service_Books_Volume2 extends Google_Collection
+class Appointments_Google_Service_Books_Volume2 extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_Books_Volume';
+  protected $itemsType = 'Appointments_Google_Service_Books_Volume';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -6008,20 +6008,20 @@ class Google_Service_Books_Volume2 extends Google_Collection
   }
 }
 
-class Google_Service_Books_VolumeAccessInfo extends Google_Model
+class Appointments_Google_Service_Books_VolumeAccessInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $accessViewStatus;
   public $country;
-  protected $downloadAccessType = 'Google_Service_Books_DownloadAccessRestriction';
+  protected $downloadAccessType = 'Appointments_Google_Service_Books_DownloadAccessRestriction';
   protected $downloadAccessDataType = '';
   public $driveImportedContentLink;
   public $embeddable;
-  protected $epubType = 'Google_Service_Books_VolumeAccessInfoEpub';
+  protected $epubType = 'Appointments_Google_Service_Books_VolumeAccessInfoEpub';
   protected $epubDataType = '';
   public $explicitOfflineLicenseManagement;
-  protected $pdfType = 'Google_Service_Books_VolumeAccessInfoPdf';
+  protected $pdfType = 'Appointments_Google_Service_Books_VolumeAccessInfoPdf';
   protected $pdfDataType = '';
   public $publicDomain;
   public $quoteSharingAllowed;
@@ -6047,7 +6047,7 @@ class Google_Service_Books_VolumeAccessInfo extends Google_Model
   {
     return $this->country;
   }
-  public function setDownloadAccess(Google_Service_Books_DownloadAccessRestriction $downloadAccess)
+  public function setDownloadAccess(Appointments_Google_Service_Books_DownloadAccessRestriction $downloadAccess)
   {
     $this->downloadAccess = $downloadAccess;
   }
@@ -6071,7 +6071,7 @@ class Google_Service_Books_VolumeAccessInfo extends Google_Model
   {
     return $this->embeddable;
   }
-  public function setEpub(Google_Service_Books_VolumeAccessInfoEpub $epub)
+  public function setEpub(Appointments_Google_Service_Books_VolumeAccessInfoEpub $epub)
   {
     $this->epub = $epub;
   }
@@ -6087,7 +6087,7 @@ class Google_Service_Books_VolumeAccessInfo extends Google_Model
   {
     return $this->explicitOfflineLicenseManagement;
   }
-  public function setPdf(Google_Service_Books_VolumeAccessInfoPdf $pdf)
+  public function setPdf(Appointments_Google_Service_Books_VolumeAccessInfoPdf $pdf)
   {
     $this->pdf = $pdf;
   }
@@ -6145,7 +6145,7 @@ class Google_Service_Books_VolumeAccessInfo extends Google_Model
   }
 }
 
-class Google_Service_Books_VolumeAccessInfoEpub extends Google_Model
+class Appointments_Google_Service_Books_VolumeAccessInfoEpub extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -6180,7 +6180,7 @@ class Google_Service_Books_VolumeAccessInfoEpub extends Google_Model
   }
 }
 
-class Google_Service_Books_VolumeAccessInfoPdf extends Google_Model
+class Appointments_Google_Service_Books_VolumeAccessInfoPdf extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -6215,12 +6215,12 @@ class Google_Service_Books_VolumeAccessInfoPdf extends Google_Model
   }
 }
 
-class Google_Service_Books_VolumeLayerInfo extends Google_Collection
+class Appointments_Google_Service_Books_VolumeLayerInfo extends Appointments_Google_Collection
 {
   protected $collection_key = 'layers';
   protected $internal_gapi_mappings = array(
   );
-  protected $layersType = 'Google_Service_Books_VolumeLayerInfoLayers';
+  protected $layersType = 'Appointments_Google_Service_Books_VolumeLayerInfoLayers';
   protected $layersDataType = 'array';
 
 
@@ -6234,7 +6234,7 @@ class Google_Service_Books_VolumeLayerInfo extends Google_Collection
   }
 }
 
-class Google_Service_Books_VolumeLayerInfoLayers extends Google_Model
+class Appointments_Google_Service_Books_VolumeLayerInfoLayers extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -6260,7 +6260,7 @@ class Google_Service_Books_VolumeLayerInfoLayers extends Google_Model
   }
 }
 
-class Google_Service_Books_VolumeRecommendedInfo extends Google_Model
+class Appointments_Google_Service_Books_VolumeRecommendedInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -6277,7 +6277,7 @@ class Google_Service_Books_VolumeRecommendedInfo extends Google_Model
   }
 }
 
-class Google_Service_Books_VolumeSaleInfo extends Google_Collection
+class Appointments_Google_Service_Books_VolumeSaleInfo extends Appointments_Google_Collection
 {
   protected $collection_key = 'offers';
   protected $internal_gapi_mappings = array(
@@ -6285,12 +6285,12 @@ class Google_Service_Books_VolumeSaleInfo extends Google_Collection
   public $buyLink;
   public $country;
   public $isEbook;
-  protected $listPriceType = 'Google_Service_Books_VolumeSaleInfoListPrice';
+  protected $listPriceType = 'Appointments_Google_Service_Books_VolumeSaleInfoListPrice';
   protected $listPriceDataType = '';
-  protected $offersType = 'Google_Service_Books_VolumeSaleInfoOffers';
+  protected $offersType = 'Appointments_Google_Service_Books_VolumeSaleInfoOffers';
   protected $offersDataType = 'array';
   public $onSaleDate;
-  protected $retailPriceType = 'Google_Service_Books_VolumeSaleInfoRetailPrice';
+  protected $retailPriceType = 'Appointments_Google_Service_Books_VolumeSaleInfoRetailPrice';
   protected $retailPriceDataType = '';
   public $saleability;
 
@@ -6319,7 +6319,7 @@ class Google_Service_Books_VolumeSaleInfo extends Google_Collection
   {
     return $this->isEbook;
   }
-  public function setListPrice(Google_Service_Books_VolumeSaleInfoListPrice $listPrice)
+  public function setListPrice(Appointments_Google_Service_Books_VolumeSaleInfoListPrice $listPrice)
   {
     $this->listPrice = $listPrice;
   }
@@ -6343,7 +6343,7 @@ class Google_Service_Books_VolumeSaleInfo extends Google_Collection
   {
     return $this->onSaleDate;
   }
-  public function setRetailPrice(Google_Service_Books_VolumeSaleInfoRetailPrice $retailPrice)
+  public function setRetailPrice(Appointments_Google_Service_Books_VolumeSaleInfoRetailPrice $retailPrice)
   {
     $this->retailPrice = $retailPrice;
   }
@@ -6361,7 +6361,7 @@ class Google_Service_Books_VolumeSaleInfo extends Google_Collection
   }
 }
 
-class Google_Service_Books_VolumeSaleInfoListPrice extends Google_Model
+class Appointments_Google_Service_Books_VolumeSaleInfoListPrice extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -6387,16 +6387,16 @@ class Google_Service_Books_VolumeSaleInfoListPrice extends Google_Model
   }
 }
 
-class Google_Service_Books_VolumeSaleInfoOffers extends Google_Model
+class Appointments_Google_Service_Books_VolumeSaleInfoOffers extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $finskyOfferType;
-  protected $listPriceType = 'Google_Service_Books_VolumeSaleInfoOffersListPrice';
+  protected $listPriceType = 'Appointments_Google_Service_Books_VolumeSaleInfoOffersListPrice';
   protected $listPriceDataType = '';
-  protected $rentalDurationType = 'Google_Service_Books_VolumeSaleInfoOffersRentalDuration';
+  protected $rentalDurationType = 'Appointments_Google_Service_Books_VolumeSaleInfoOffersRentalDuration';
   protected $rentalDurationDataType = '';
-  protected $retailPriceType = 'Google_Service_Books_VolumeSaleInfoOffersRetailPrice';
+  protected $retailPriceType = 'Appointments_Google_Service_Books_VolumeSaleInfoOffersRetailPrice';
   protected $retailPriceDataType = '';
 
 
@@ -6408,7 +6408,7 @@ class Google_Service_Books_VolumeSaleInfoOffers extends Google_Model
   {
     return $this->finskyOfferType;
   }
-  public function setListPrice(Google_Service_Books_VolumeSaleInfoOffersListPrice $listPrice)
+  public function setListPrice(Appointments_Google_Service_Books_VolumeSaleInfoOffersListPrice $listPrice)
   {
     $this->listPrice = $listPrice;
   }
@@ -6416,7 +6416,7 @@ class Google_Service_Books_VolumeSaleInfoOffers extends Google_Model
   {
     return $this->listPrice;
   }
-  public function setRentalDuration(Google_Service_Books_VolumeSaleInfoOffersRentalDuration $rentalDuration)
+  public function setRentalDuration(Appointments_Google_Service_Books_VolumeSaleInfoOffersRentalDuration $rentalDuration)
   {
     $this->rentalDuration = $rentalDuration;
   }
@@ -6424,7 +6424,7 @@ class Google_Service_Books_VolumeSaleInfoOffers extends Google_Model
   {
     return $this->rentalDuration;
   }
-  public function setRetailPrice(Google_Service_Books_VolumeSaleInfoOffersRetailPrice $retailPrice)
+  public function setRetailPrice(Appointments_Google_Service_Books_VolumeSaleInfoOffersRetailPrice $retailPrice)
   {
     $this->retailPrice = $retailPrice;
   }
@@ -6434,7 +6434,7 @@ class Google_Service_Books_VolumeSaleInfoOffers extends Google_Model
   }
 }
 
-class Google_Service_Books_VolumeSaleInfoOffersListPrice extends Google_Model
+class Appointments_Google_Service_Books_VolumeSaleInfoOffersListPrice extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -6460,7 +6460,7 @@ class Google_Service_Books_VolumeSaleInfoOffersListPrice extends Google_Model
   }
 }
 
-class Google_Service_Books_VolumeSaleInfoOffersRentalDuration extends Google_Model
+class Appointments_Google_Service_Books_VolumeSaleInfoOffersRentalDuration extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -6486,7 +6486,7 @@ class Google_Service_Books_VolumeSaleInfoOffersRentalDuration extends Google_Mod
   }
 }
 
-class Google_Service_Books_VolumeSaleInfoOffersRetailPrice extends Google_Model
+class Appointments_Google_Service_Books_VolumeSaleInfoOffersRetailPrice extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -6512,7 +6512,7 @@ class Google_Service_Books_VolumeSaleInfoOffersRetailPrice extends Google_Model
   }
 }
 
-class Google_Service_Books_VolumeSaleInfoRetailPrice extends Google_Model
+class Appointments_Google_Service_Books_VolumeSaleInfoRetailPrice extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -6538,7 +6538,7 @@ class Google_Service_Books_VolumeSaleInfoRetailPrice extends Google_Model
   }
 }
 
-class Google_Service_Books_VolumeSearchInfo extends Google_Model
+class Appointments_Google_Service_Books_VolumeSearchInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -6555,13 +6555,13 @@ class Google_Service_Books_VolumeSearchInfo extends Google_Model
   }
 }
 
-class Google_Service_Books_VolumeUserInfo extends Google_Model
+class Appointments_Google_Service_Books_VolumeUserInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $acquiredTime;
   public $acquisitionType;
-  protected $copyType = 'Google_Service_Books_VolumeUserInfoCopy';
+  protected $copyType = 'Appointments_Google_Service_Books_VolumeUserInfoCopy';
   protected $copyDataType = '';
   public $entitlementType;
   public $isFamilySharedFromUser;
@@ -6571,15 +6571,15 @@ class Google_Service_Books_VolumeUserInfo extends Google_Model
   public $isPreordered;
   public $isPurchased;
   public $isUploaded;
-  protected $readingPositionType = 'Google_Service_Books_ReadingPosition';
+  protected $readingPositionType = 'Appointments_Google_Service_Books_ReadingPosition';
   protected $readingPositionDataType = '';
-  protected $rentalPeriodType = 'Google_Service_Books_VolumeUserInfoRentalPeriod';
+  protected $rentalPeriodType = 'Appointments_Google_Service_Books_VolumeUserInfoRentalPeriod';
   protected $rentalPeriodDataType = '';
   public $rentalState;
-  protected $reviewType = 'Google_Service_Books_Review';
+  protected $reviewType = 'Appointments_Google_Service_Books_Review';
   protected $reviewDataType = '';
   public $updated;
-  protected $userUploadedVolumeInfoType = 'Google_Service_Books_VolumeUserInfoUserUploadedVolumeInfo';
+  protected $userUploadedVolumeInfoType = 'Appointments_Google_Service_Books_VolumeUserInfoUserUploadedVolumeInfo';
   protected $userUploadedVolumeInfoDataType = '';
 
 
@@ -6599,7 +6599,7 @@ class Google_Service_Books_VolumeUserInfo extends Google_Model
   {
     return $this->acquisitionType;
   }
-  public function setCopy(Google_Service_Books_VolumeUserInfoCopy $copy)
+  public function setCopy(Appointments_Google_Service_Books_VolumeUserInfoCopy $copy)
   {
     $this->copy = $copy;
   }
@@ -6671,7 +6671,7 @@ class Google_Service_Books_VolumeUserInfo extends Google_Model
   {
     return $this->isUploaded;
   }
-  public function setReadingPosition(Google_Service_Books_ReadingPosition $readingPosition)
+  public function setReadingPosition(Appointments_Google_Service_Books_ReadingPosition $readingPosition)
   {
     $this->readingPosition = $readingPosition;
   }
@@ -6679,7 +6679,7 @@ class Google_Service_Books_VolumeUserInfo extends Google_Model
   {
     return $this->readingPosition;
   }
-  public function setRentalPeriod(Google_Service_Books_VolumeUserInfoRentalPeriod $rentalPeriod)
+  public function setRentalPeriod(Appointments_Google_Service_Books_VolumeUserInfoRentalPeriod $rentalPeriod)
   {
     $this->rentalPeriod = $rentalPeriod;
   }
@@ -6695,7 +6695,7 @@ class Google_Service_Books_VolumeUserInfo extends Google_Model
   {
     return $this->rentalState;
   }
-  public function setReview(Google_Service_Books_Review $review)
+  public function setReview(Appointments_Google_Service_Books_Review $review)
   {
     $this->review = $review;
   }
@@ -6711,7 +6711,7 @@ class Google_Service_Books_VolumeUserInfo extends Google_Model
   {
     return $this->updated;
   }
-  public function setUserUploadedVolumeInfo(Google_Service_Books_VolumeUserInfoUserUploadedVolumeInfo $userUploadedVolumeInfo)
+  public function setUserUploadedVolumeInfo(Appointments_Google_Service_Books_VolumeUserInfoUserUploadedVolumeInfo $userUploadedVolumeInfo)
   {
     $this->userUploadedVolumeInfo = $userUploadedVolumeInfo;
   }
@@ -6721,7 +6721,7 @@ class Google_Service_Books_VolumeUserInfo extends Google_Model
   }
 }
 
-class Google_Service_Books_VolumeUserInfoCopy extends Google_Model
+class Appointments_Google_Service_Books_VolumeUserInfoCopy extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -6765,7 +6765,7 @@ class Google_Service_Books_VolumeUserInfoCopy extends Google_Model
   }
 }
 
-class Google_Service_Books_VolumeUserInfoRentalPeriod extends Google_Model
+class Appointments_Google_Service_Books_VolumeUserInfoRentalPeriod extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -6791,7 +6791,7 @@ class Google_Service_Books_VolumeUserInfoRentalPeriod extends Google_Model
   }
 }
 
-class Google_Service_Books_VolumeUserInfoUserUploadedVolumeInfo extends Google_Model
+class Appointments_Google_Service_Books_VolumeUserInfoUserUploadedVolumeInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -6808,7 +6808,7 @@ class Google_Service_Books_VolumeUserInfoUserUploadedVolumeInfo extends Google_M
   }
 }
 
-class Google_Service_Books_VolumeVolumeInfo extends Google_Collection
+class Appointments_Google_Service_Books_VolumeVolumeInfo extends Appointments_Google_Collection
 {
   protected $collection_key = 'industryIdentifiers';
   protected $internal_gapi_mappings = array(
@@ -6820,11 +6820,11 @@ class Google_Service_Books_VolumeVolumeInfo extends Google_Collection
   public $categories;
   public $contentVersion;
   public $description;
-  protected $dimensionsType = 'Google_Service_Books_VolumeVolumeInfoDimensions';
+  protected $dimensionsType = 'Appointments_Google_Service_Books_VolumeVolumeInfoDimensions';
   protected $dimensionsDataType = '';
-  protected $imageLinksType = 'Google_Service_Books_VolumeVolumeInfoImageLinks';
+  protected $imageLinksType = 'Appointments_Google_Service_Books_VolumeVolumeInfoImageLinks';
   protected $imageLinksDataType = '';
-  protected $industryIdentifiersType = 'Google_Service_Books_VolumeVolumeInfoIndustryIdentifiers';
+  protected $industryIdentifiersType = 'Appointments_Google_Service_Books_VolumeVolumeInfoIndustryIdentifiers';
   protected $industryIdentifiersDataType = 'array';
   public $infoLink;
   public $language;
@@ -6839,7 +6839,7 @@ class Google_Service_Books_VolumeVolumeInfo extends Google_Collection
   public $ratingsCount;
   public $readingModes;
   public $samplePageCount;
-  protected $seriesInfoType = 'Google_Service_Books_Volumeseriesinfo';
+  protected $seriesInfoType = 'Appointments_Google_Service_Books_Volumeseriesinfo';
   protected $seriesInfoDataType = '';
   public $subtitle;
   public $title;
@@ -6901,7 +6901,7 @@ class Google_Service_Books_VolumeVolumeInfo extends Google_Collection
   {
     return $this->description;
   }
-  public function setDimensions(Google_Service_Books_VolumeVolumeInfoDimensions $dimensions)
+  public function setDimensions(Appointments_Google_Service_Books_VolumeVolumeInfoDimensions $dimensions)
   {
     $this->dimensions = $dimensions;
   }
@@ -6909,7 +6909,7 @@ class Google_Service_Books_VolumeVolumeInfo extends Google_Collection
   {
     return $this->dimensions;
   }
-  public function setImageLinks(Google_Service_Books_VolumeVolumeInfoImageLinks $imageLinks)
+  public function setImageLinks(Appointments_Google_Service_Books_VolumeVolumeInfoImageLinks $imageLinks)
   {
     $this->imageLinks = $imageLinks;
   }
@@ -7029,7 +7029,7 @@ class Google_Service_Books_VolumeVolumeInfo extends Google_Collection
   {
     return $this->samplePageCount;
   }
-  public function setSeriesInfo(Google_Service_Books_Volumeseriesinfo $seriesInfo)
+  public function setSeriesInfo(Appointments_Google_Service_Books_Volumeseriesinfo $seriesInfo)
   {
     $this->seriesInfo = $seriesInfo;
   }
@@ -7055,7 +7055,7 @@ class Google_Service_Books_VolumeVolumeInfo extends Google_Collection
   }
 }
 
-class Google_Service_Books_VolumeVolumeInfoDimensions extends Google_Model
+class Appointments_Google_Service_Books_VolumeVolumeInfoDimensions extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -7090,7 +7090,7 @@ class Google_Service_Books_VolumeVolumeInfoDimensions extends Google_Model
   }
 }
 
-class Google_Service_Books_VolumeVolumeInfoImageLinks extends Google_Model
+class Appointments_Google_Service_Books_VolumeVolumeInfoImageLinks extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -7152,7 +7152,7 @@ class Google_Service_Books_VolumeVolumeInfoImageLinks extends Google_Model
   }
 }
 
-class Google_Service_Books_VolumeVolumeInfoIndustryIdentifiers extends Google_Model
+class Appointments_Google_Service_Books_VolumeVolumeInfoIndustryIdentifiers extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -7178,7 +7178,7 @@ class Google_Service_Books_VolumeVolumeInfoIndustryIdentifiers extends Google_Mo
   }
 }
 
-class Google_Service_Books_Volumeannotation extends Google_Collection
+class Appointments_Google_Service_Books_Volumeannotation extends Appointments_Google_Collection
 {
   protected $collection_key = 'pageIds';
   protected $internal_gapi_mappings = array(
@@ -7186,7 +7186,7 @@ class Google_Service_Books_Volumeannotation extends Google_Collection
   public $annotationDataId;
   public $annotationDataLink;
   public $annotationType;
-  protected $contentRangesType = 'Google_Service_Books_VolumeannotationContentRanges';
+  protected $contentRangesType = 'Appointments_Google_Service_Books_VolumeannotationContentRanges';
   protected $contentRangesDataType = '';
   public $data;
   public $deleted;
@@ -7224,7 +7224,7 @@ class Google_Service_Books_Volumeannotation extends Google_Collection
   {
     return $this->annotationType;
   }
-  public function setContentRanges(Google_Service_Books_VolumeannotationContentRanges $contentRanges)
+  public function setContentRanges(Appointments_Google_Service_Books_VolumeannotationContentRanges $contentRanges)
   {
     $this->contentRanges = $contentRanges;
   }
@@ -7314,20 +7314,20 @@ class Google_Service_Books_Volumeannotation extends Google_Collection
   }
 }
 
-class Google_Service_Books_VolumeannotationContentRanges extends Google_Model
+class Appointments_Google_Service_Books_VolumeannotationContentRanges extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $cfiRangeType = 'Google_Service_Books_BooksAnnotationsRange';
+  protected $cfiRangeType = 'Appointments_Google_Service_Books_BooksAnnotationsRange';
   protected $cfiRangeDataType = '';
   public $contentVersion;
-  protected $gbImageRangeType = 'Google_Service_Books_BooksAnnotationsRange';
+  protected $gbImageRangeType = 'Appointments_Google_Service_Books_BooksAnnotationsRange';
   protected $gbImageRangeDataType = '';
-  protected $gbTextRangeType = 'Google_Service_Books_BooksAnnotationsRange';
+  protected $gbTextRangeType = 'Appointments_Google_Service_Books_BooksAnnotationsRange';
   protected $gbTextRangeDataType = '';
 
 
-  public function setCfiRange(Google_Service_Books_BooksAnnotationsRange $cfiRange)
+  public function setCfiRange(Appointments_Google_Service_Books_BooksAnnotationsRange $cfiRange)
   {
     $this->cfiRange = $cfiRange;
   }
@@ -7343,7 +7343,7 @@ class Google_Service_Books_VolumeannotationContentRanges extends Google_Model
   {
     return $this->contentVersion;
   }
-  public function setGbImageRange(Google_Service_Books_BooksAnnotationsRange $gbImageRange)
+  public function setGbImageRange(Appointments_Google_Service_Books_BooksAnnotationsRange $gbImageRange)
   {
     $this->gbImageRange = $gbImageRange;
   }
@@ -7351,7 +7351,7 @@ class Google_Service_Books_VolumeannotationContentRanges extends Google_Model
   {
     return $this->gbImageRange;
   }
-  public function setGbTextRange(Google_Service_Books_BooksAnnotationsRange $gbTextRange)
+  public function setGbTextRange(Appointments_Google_Service_Books_BooksAnnotationsRange $gbTextRange)
   {
     $this->gbTextRange = $gbTextRange;
   }
@@ -7361,12 +7361,12 @@ class Google_Service_Books_VolumeannotationContentRanges extends Google_Model
   }
 }
 
-class Google_Service_Books_Volumeannotations extends Google_Collection
+class Appointments_Google_Service_Books_Volumeannotations extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_Books_Volumeannotation';
+  protected $itemsType = 'Appointments_Google_Service_Books_Volumeannotation';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -7416,12 +7416,12 @@ class Google_Service_Books_Volumeannotations extends Google_Collection
   }
 }
 
-class Google_Service_Books_Volumes extends Google_Collection
+class Appointments_Google_Service_Books_Volumes extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_Books_Volume';
+  protected $itemsType = 'Appointments_Google_Service_Books_Volume';
   protected $itemsDataType = 'array';
   public $kind;
   public $totalItems;
@@ -7453,7 +7453,7 @@ class Google_Service_Books_Volumes extends Google_Collection
   }
 }
 
-class Google_Service_Books_Volumeseriesinfo extends Google_Collection
+class Appointments_Google_Service_Books_Volumeseriesinfo extends Appointments_Google_Collection
 {
   protected $collection_key = 'volumeSeries';
   protected $internal_gapi_mappings = array(
@@ -7461,7 +7461,7 @@ class Google_Service_Books_Volumeseriesinfo extends Google_Collection
   public $bookDisplayNumber;
   public $kind;
   public $shortSeriesBookTitle;
-  protected $volumeSeriesType = 'Google_Service_Books_VolumeseriesinfoVolumeSeries';
+  protected $volumeSeriesType = 'Appointments_Google_Service_Books_VolumeseriesinfoVolumeSeries';
   protected $volumeSeriesDataType = 'array';
 
 
@@ -7499,12 +7499,12 @@ class Google_Service_Books_Volumeseriesinfo extends Google_Collection
   }
 }
 
-class Google_Service_Books_VolumeseriesinfoVolumeSeries extends Google_Collection
+class Appointments_Google_Service_Books_VolumeseriesinfoVolumeSeries extends Appointments_Google_Collection
 {
   protected $collection_key = 'issue';
   protected $internal_gapi_mappings = array(
   );
-  protected $issueType = 'Google_Service_Books_VolumeseriesinfoVolumeSeriesIssue';
+  protected $issueType = 'Appointments_Google_Service_Books_VolumeseriesinfoVolumeSeriesIssue';
   protected $issueDataType = 'array';
   public $orderNumber;
   public $seriesBookType;
@@ -7545,7 +7545,7 @@ class Google_Service_Books_VolumeseriesinfoVolumeSeries extends Google_Collectio
   }
 }
 
-class Google_Service_Books_VolumeseriesinfoVolumeSeriesIssue extends Google_Model
+class Appointments_Google_Service_Books_VolumeseriesinfoVolumeSeriesIssue extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );

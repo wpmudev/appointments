@@ -27,7 +27,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_AndroidEnterprise extends Google_Service
+class Appointments_Google_Service_AndroidEnterprise extends Appointments_Google_Service
 {
   /** Manage corporate Android devices. */
   const ANDROIDENTERPRISE =
@@ -51,9 +51,9 @@ class Google_Service_AndroidEnterprise extends Google_Service
   /**
    * Constructs the internal representation of the AndroidEnterprise service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -61,7 +61,7 @@ class Google_Service_AndroidEnterprise extends Google_Service
     $this->version = 'v1';
     $this->serviceName = 'androidenterprise';
 
-    $this->collections = new Google_Service_AndroidEnterprise_Collections_Resource(
+    $this->collections = new Appointments_Google_Service_AndroidEnterprise_Collections_Resource(
         $this,
         $this->serviceName,
         'collections',
@@ -151,7 +151,7 @@ class Google_Service_AndroidEnterprise extends Google_Service
           )
         )
     );
-    $this->collectionviewers = new Google_Service_AndroidEnterprise_Collectionviewers_Resource(
+    $this->collectionviewers = new Appointments_Google_Service_AndroidEnterprise_Collectionviewers_Resource(
         $this,
         $this->serviceName,
         'collectionviewers',
@@ -256,7 +256,7 @@ class Google_Service_AndroidEnterprise extends Google_Service
           )
         )
     );
-    $this->devices = new Google_Service_AndroidEnterprise_Devices_Resource(
+    $this->devices = new Appointments_Google_Service_AndroidEnterprise_Devices_Resource(
         $this,
         $this->serviceName,
         'devices',
@@ -341,7 +341,7 @@ class Google_Service_AndroidEnterprise extends Google_Service
           )
         )
     );
-    $this->enterprises = new Google_Service_AndroidEnterprise_Enterprises_Resource(
+    $this->enterprises = new Appointments_Google_Service_AndroidEnterprise_Enterprises_Resource(
         $this,
         $this->serviceName,
         'enterprises',
@@ -451,7 +451,7 @@ class Google_Service_AndroidEnterprise extends Google_Service
           )
         )
     );
-    $this->entitlements = new Google_Service_AndroidEnterprise_Entitlements_Resource(
+    $this->entitlements = new Appointments_Google_Service_AndroidEnterprise_Entitlements_Resource(
         $this,
         $this->serviceName,
         'entitlements',
@@ -564,7 +564,7 @@ class Google_Service_AndroidEnterprise extends Google_Service
           )
         )
     );
-    $this->grouplicenses = new Google_Service_AndroidEnterprise_Grouplicenses_Resource(
+    $this->grouplicenses = new Appointments_Google_Service_AndroidEnterprise_Grouplicenses_Resource(
         $this,
         $this->serviceName,
         'grouplicenses',
@@ -599,7 +599,7 @@ class Google_Service_AndroidEnterprise extends Google_Service
           )
         )
     );
-    $this->grouplicenseusers = new Google_Service_AndroidEnterprise_Grouplicenseusers_Resource(
+    $this->grouplicenseusers = new Appointments_Google_Service_AndroidEnterprise_Grouplicenseusers_Resource(
         $this,
         $this->serviceName,
         'grouplicenseusers',
@@ -624,7 +624,7 @@ class Google_Service_AndroidEnterprise extends Google_Service
           )
         )
     );
-    $this->installs = new Google_Service_AndroidEnterprise_Installs_Resource(
+    $this->installs = new Appointments_Google_Service_AndroidEnterprise_Installs_Resource(
         $this,
         $this->serviceName,
         'installs',
@@ -754,7 +754,7 @@ class Google_Service_AndroidEnterprise extends Google_Service
           )
         )
     );
-    $this->permissions = new Google_Service_AndroidEnterprise_Permissions_Resource(
+    $this->permissions = new Appointments_Google_Service_AndroidEnterprise_Permissions_Resource(
         $this,
         $this->serviceName,
         'permissions',
@@ -778,7 +778,7 @@ class Google_Service_AndroidEnterprise extends Google_Service
           )
         )
     );
-    $this->products = new Google_Service_AndroidEnterprise_Products_Resource(
+    $this->products = new Appointments_Google_Service_AndroidEnterprise_Products_Resource(
         $this,
         $this->serviceName,
         'products',
@@ -890,7 +890,7 @@ class Google_Service_AndroidEnterprise extends Google_Service
           )
         )
     );
-    $this->storelayoutclusters = new Google_Service_AndroidEnterprise_Storelayoutclusters_Resource(
+    $this->storelayoutclusters = new Appointments_Google_Service_AndroidEnterprise_Storelayoutclusters_Resource(
         $this,
         $this->serviceName,
         'storelayoutclusters',
@@ -1010,7 +1010,7 @@ class Google_Service_AndroidEnterprise extends Google_Service
           )
         )
     );
-    $this->storelayoutpages = new Google_Service_AndroidEnterprise_Storelayoutpages_Resource(
+    $this->storelayoutpages = new Appointments_Google_Service_AndroidEnterprise_Storelayoutpages_Resource(
         $this,
         $this->serviceName,
         'storelayoutpages',
@@ -1100,7 +1100,7 @@ class Google_Service_AndroidEnterprise extends Google_Service
           )
         )
     );
-    $this->users = new Google_Service_AndroidEnterprise_Users_Resource(
+    $this->users = new Appointments_Google_Service_AndroidEnterprise_Users_Resource(
         $this,
         $this->serviceName,
         'users',
@@ -1208,11 +1208,11 @@ class Google_Service_AndroidEnterprise extends Google_Service
  * The "collections" collection of methods.
  * Typical usage is:
  *  <code>
- *   $androidenterpriseService = new Google_Service_AndroidEnterprise(...);
+ *   $androidenterpriseService = new Appointments_Google_Service_AndroidEnterprise(...);
  *   $collections = $androidenterpriseService->collections;
  *  </code>
  */
-class Google_Service_AndroidEnterprise_Collections_Resource extends Google_Service_Resource
+class Appointments_Google_Service_AndroidEnterprise_Collections_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1235,28 +1235,28 @@ class Google_Service_AndroidEnterprise_Collections_Resource extends Google_Servi
    * @param string $enterpriseId The ID of the enterprise.
    * @param string $collectionId The ID of the collection.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_Collection
+   * @return Appointments_Google_Service_AndroidEnterprise_Collection
    */
   public function get($enterpriseId, $collectionId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'collectionId' => $collectionId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_AndroidEnterprise_Collection");
+    return $this->call('get', array($params), "Appointments_Google_Service_AndroidEnterprise_Collection");
   }
 
   /**
    * Creates a new collection. (collections.insert)
    *
    * @param string $enterpriseId The ID of the enterprise.
-   * @param Google_Collection $postBody
+   * @param Appointments_Google_Collection $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_Collection
+   * @return Appointments_Google_Service_AndroidEnterprise_Collection
    */
-  public function insert($enterpriseId, Google_Service_AndroidEnterprise_Collection $postBody, $optParams = array())
+  public function insert($enterpriseId, Appointments_Google_Service_AndroidEnterprise_Collection $postBody, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_AndroidEnterprise_Collection");
+    return $this->call('insert', array($params), "Appointments_Google_Service_AndroidEnterprise_Collection");
   }
 
   /**
@@ -1265,13 +1265,13 @@ class Google_Service_AndroidEnterprise_Collections_Resource extends Google_Servi
    *
    * @param string $enterpriseId The ID of the enterprise.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_CollectionsListResponse
+   * @return Appointments_Google_Service_AndroidEnterprise_CollectionsListResponse
    */
   public function listCollections($enterpriseId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_AndroidEnterprise_CollectionsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_AndroidEnterprise_CollectionsListResponse");
   }
 
   /**
@@ -1280,15 +1280,15 @@ class Google_Service_AndroidEnterprise_Collections_Resource extends Google_Servi
    *
    * @param string $enterpriseId The ID of the enterprise.
    * @param string $collectionId The ID of the collection.
-   * @param Google_Collection $postBody
+   * @param Appointments_Google_Collection $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_Collection
+   * @return Appointments_Google_Service_AndroidEnterprise_Collection
    */
-  public function patch($enterpriseId, $collectionId, Google_Service_AndroidEnterprise_Collection $postBody, $optParams = array())
+  public function patch($enterpriseId, $collectionId, Appointments_Google_Service_AndroidEnterprise_Collection $postBody, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'collectionId' => $collectionId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_AndroidEnterprise_Collection");
+    return $this->call('patch', array($params), "Appointments_Google_Service_AndroidEnterprise_Collection");
   }
 
   /**
@@ -1296,15 +1296,15 @@ class Google_Service_AndroidEnterprise_Collections_Resource extends Google_Servi
    *
    * @param string $enterpriseId The ID of the enterprise.
    * @param string $collectionId The ID of the collection.
-   * @param Google_Collection $postBody
+   * @param Appointments_Google_Collection $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_Collection
+   * @return Appointments_Google_Service_AndroidEnterprise_Collection
    */
-  public function update($enterpriseId, $collectionId, Google_Service_AndroidEnterprise_Collection $postBody, $optParams = array())
+  public function update($enterpriseId, $collectionId, Appointments_Google_Service_AndroidEnterprise_Collection $postBody, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'collectionId' => $collectionId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_AndroidEnterprise_Collection");
+    return $this->call('update', array($params), "Appointments_Google_Service_AndroidEnterprise_Collection");
   }
 }
 
@@ -1312,11 +1312,11 @@ class Google_Service_AndroidEnterprise_Collections_Resource extends Google_Servi
  * The "collectionviewers" collection of methods.
  * Typical usage is:
  *  <code>
- *   $androidenterpriseService = new Google_Service_AndroidEnterprise(...);
+ *   $androidenterpriseService = new Appointments_Google_Service_AndroidEnterprise(...);
  *   $collectionviewers = $androidenterpriseService->collectionviewers;
  *  </code>
  */
-class Google_Service_AndroidEnterprise_Collectionviewers_Resource extends Google_Service_Resource
+class Appointments_Google_Service_AndroidEnterprise_Collectionviewers_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1345,13 +1345,13 @@ class Google_Service_AndroidEnterprise_Collectionviewers_Resource extends Google
    * @param string $collectionId The ID of the collection.
    * @param string $userId The ID of the user.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_User
+   * @return Appointments_Google_Service_AndroidEnterprise_User
    */
   public function get($enterpriseId, $collectionId, $userId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'collectionId' => $collectionId, 'userId' => $userId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_AndroidEnterprise_User");
+    return $this->call('get', array($params), "Appointments_Google_Service_AndroidEnterprise_User");
   }
 
   /**
@@ -1363,13 +1363,13 @@ class Google_Service_AndroidEnterprise_Collectionviewers_Resource extends Google
    * @param string $enterpriseId The ID of the enterprise.
    * @param string $collectionId The ID of the collection.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_CollectionViewersListResponse
+   * @return Appointments_Google_Service_AndroidEnterprise_CollectionViewersListResponse
    */
   public function listCollectionviewers($enterpriseId, $collectionId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'collectionId' => $collectionId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_AndroidEnterprise_CollectionViewersListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_AndroidEnterprise_CollectionViewersListResponse");
   }
 
   /**
@@ -1381,15 +1381,15 @@ class Google_Service_AndroidEnterprise_Collectionviewers_Resource extends Google
    * @param string $enterpriseId The ID of the enterprise.
    * @param string $collectionId The ID of the collection.
    * @param string $userId The ID of the user.
-   * @param Google_User $postBody
+   * @param Appointments_Google_User $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_User
+   * @return Appointments_Google_Service_AndroidEnterprise_User
    */
-  public function patch($enterpriseId, $collectionId, $userId, Google_Service_AndroidEnterprise_User $postBody, $optParams = array())
+  public function patch($enterpriseId, $collectionId, $userId, Appointments_Google_Service_AndroidEnterprise_User $postBody, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'collectionId' => $collectionId, 'userId' => $userId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_AndroidEnterprise_User");
+    return $this->call('patch', array($params), "Appointments_Google_Service_AndroidEnterprise_User");
   }
 
   /**
@@ -1400,15 +1400,15 @@ class Google_Service_AndroidEnterprise_Collectionviewers_Resource extends Google
    * @param string $enterpriseId The ID of the enterprise.
    * @param string $collectionId The ID of the collection.
    * @param string $userId The ID of the user.
-   * @param Google_User $postBody
+   * @param Appointments_Google_User $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_User
+   * @return Appointments_Google_Service_AndroidEnterprise_User
    */
-  public function update($enterpriseId, $collectionId, $userId, Google_Service_AndroidEnterprise_User $postBody, $optParams = array())
+  public function update($enterpriseId, $collectionId, $userId, Appointments_Google_Service_AndroidEnterprise_User $postBody, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'collectionId' => $collectionId, 'userId' => $userId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_AndroidEnterprise_User");
+    return $this->call('update', array($params), "Appointments_Google_Service_AndroidEnterprise_User");
   }
 }
 
@@ -1416,11 +1416,11 @@ class Google_Service_AndroidEnterprise_Collectionviewers_Resource extends Google
  * The "devices" collection of methods.
  * Typical usage is:
  *  <code>
- *   $androidenterpriseService = new Google_Service_AndroidEnterprise(...);
+ *   $androidenterpriseService = new Appointments_Google_Service_AndroidEnterprise(...);
  *   $devices = $androidenterpriseService->devices;
  *  </code>
  */
-class Google_Service_AndroidEnterprise_Devices_Resource extends Google_Service_Resource
+class Appointments_Google_Service_AndroidEnterprise_Devices_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1430,13 +1430,13 @@ class Google_Service_AndroidEnterprise_Devices_Resource extends Google_Service_R
    * @param string $userId The ID of the user.
    * @param string $deviceId The ID of the device.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_Device
+   * @return Appointments_Google_Service_AndroidEnterprise_Device
    */
   public function get($enterpriseId, $userId, $deviceId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'userId' => $userId, 'deviceId' => $deviceId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_AndroidEnterprise_Device");
+    return $this->call('get', array($params), "Appointments_Google_Service_AndroidEnterprise_Device");
   }
 
   /**
@@ -1450,13 +1450,13 @@ class Google_Service_AndroidEnterprise_Devices_Resource extends Google_Service_R
    * @param string $userId The ID of the user.
    * @param string $deviceId The ID of the device.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_DeviceState
+   * @return Appointments_Google_Service_AndroidEnterprise_DeviceState
    */
   public function getState($enterpriseId, $userId, $deviceId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'userId' => $userId, 'deviceId' => $deviceId);
     $params = array_merge($params, $optParams);
-    return $this->call('getState', array($params), "Google_Service_AndroidEnterprise_DeviceState");
+    return $this->call('getState', array($params), "Appointments_Google_Service_AndroidEnterprise_DeviceState");
   }
 
   /**
@@ -1465,13 +1465,13 @@ class Google_Service_AndroidEnterprise_Devices_Resource extends Google_Service_R
    * @param string $enterpriseId The ID of the enterprise.
    * @param string $userId The ID of the user.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_DevicesListResponse
+   * @return Appointments_Google_Service_AndroidEnterprise_DevicesListResponse
    */
   public function listDevices($enterpriseId, $userId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'userId' => $userId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_AndroidEnterprise_DevicesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_AndroidEnterprise_DevicesListResponse");
   }
 
   /**
@@ -1484,15 +1484,15 @@ class Google_Service_AndroidEnterprise_Devices_Resource extends Google_Service_R
    * @param string $enterpriseId The ID of the enterprise.
    * @param string $userId The ID of the user.
    * @param string $deviceId The ID of the device.
-   * @param Google_DeviceState $postBody
+   * @param Appointments_Google_DeviceState $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_DeviceState
+   * @return Appointments_Google_Service_AndroidEnterprise_DeviceState
    */
-  public function setState($enterpriseId, $userId, $deviceId, Google_Service_AndroidEnterprise_DeviceState $postBody, $optParams = array())
+  public function setState($enterpriseId, $userId, $deviceId, Appointments_Google_Service_AndroidEnterprise_DeviceState $postBody, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'userId' => $userId, 'deviceId' => $deviceId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setState', array($params), "Google_Service_AndroidEnterprise_DeviceState");
+    return $this->call('setState', array($params), "Appointments_Google_Service_AndroidEnterprise_DeviceState");
   }
 }
 
@@ -1500,11 +1500,11 @@ class Google_Service_AndroidEnterprise_Devices_Resource extends Google_Service_R
  * The "enterprises" collection of methods.
  * Typical usage is:
  *  <code>
- *   $androidenterpriseService = new Google_Service_AndroidEnterprise(...);
+ *   $androidenterpriseService = new Appointments_Google_Service_AndroidEnterprise(...);
  *   $enterprises = $androidenterpriseService->enterprises;
  *  </code>
  */
-class Google_Service_AndroidEnterprise_Enterprises_Resource extends Google_Service_Resource
+class Appointments_Google_Service_AndroidEnterprise_Enterprises_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1528,15 +1528,15 @@ class Google_Service_AndroidEnterprise_Enterprises_Resource extends Google_Servi
    *
    * @param string $token The token provided by the enterprise to register the
    * EMM.
-   * @param Google_Enterprise $postBody
+   * @param Appointments_Google_Enterprise $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_Enterprise
+   * @return Appointments_Google_Service_AndroidEnterprise_Enterprise
    */
-  public function enroll($token, Google_Service_AndroidEnterprise_Enterprise $postBody, $optParams = array())
+  public function enroll($token, Appointments_Google_Service_AndroidEnterprise_Enterprise $postBody, $optParams = array())
   {
     $params = array('token' => $token, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('enroll', array($params), "Google_Service_AndroidEnterprise_Enterprise");
+    return $this->call('enroll', array($params), "Appointments_Google_Service_AndroidEnterprise_Enterprise");
   }
 
   /**
@@ -1544,13 +1544,13 @@ class Google_Service_AndroidEnterprise_Enterprises_Resource extends Google_Servi
    *
    * @param string $enterpriseId The ID of the enterprise.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_Enterprise
+   * @return Appointments_Google_Service_AndroidEnterprise_Enterprise
    */
   public function get($enterpriseId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_AndroidEnterprise_Enterprise");
+    return $this->call('get', array($params), "Appointments_Google_Service_AndroidEnterprise_Enterprise");
   }
 
   /**
@@ -1558,13 +1558,13 @@ class Google_Service_AndroidEnterprise_Enterprises_Resource extends Google_Servi
    *
    * @param string $enterpriseId The ID of the enterprise.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_StoreLayout
+   * @return Appointments_Google_Service_AndroidEnterprise_StoreLayout
    */
   public function getStoreLayout($enterpriseId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId);
     $params = array_merge($params, $optParams);
-    return $this->call('getStoreLayout', array($params), "Google_Service_AndroidEnterprise_StoreLayout");
+    return $this->call('getStoreLayout', array($params), "Appointments_Google_Service_AndroidEnterprise_StoreLayout");
   }
 
   /**
@@ -1573,15 +1573,15 @@ class Google_Service_AndroidEnterprise_Enterprises_Resource extends Google_Servi
    *
    * @param string $token The token provided by the enterprise to register the
    * EMM.
-   * @param Google_Enterprise $postBody
+   * @param Appointments_Google_Enterprise $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_Enterprise
+   * @return Appointments_Google_Service_AndroidEnterprise_Enterprise
    */
-  public function insert($token, Google_Service_AndroidEnterprise_Enterprise $postBody, $optParams = array())
+  public function insert($token, Appointments_Google_Service_AndroidEnterprise_Enterprise $postBody, $optParams = array())
   {
     $params = array('token' => $token, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_AndroidEnterprise_Enterprise");
+    return $this->call('insert', array($params), "Appointments_Google_Service_AndroidEnterprise_Enterprise");
   }
 
   /**
@@ -1590,13 +1590,13 @@ class Google_Service_AndroidEnterprise_Enterprises_Resource extends Google_Servi
    * @param string $domain The exact primary domain name of the enterprise to look
    * up.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_EnterprisesListResponse
+   * @return Appointments_Google_Service_AndroidEnterprise_EnterprisesListResponse
    */
   public function listEnterprises($domain, $optParams = array())
   {
     $params = array('domain' => $domain);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_AndroidEnterprise_EnterprisesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_AndroidEnterprise_EnterprisesListResponse");
   }
 
   /**
@@ -1606,13 +1606,13 @@ class Google_Service_AndroidEnterprise_Enterprises_Resource extends Google_Servi
    *
    * @param string $enterpriseId The ID of the enterprise.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_EnterprisesSendTestPushNotificationResponse
+   * @return Appointments_Google_Service_AndroidEnterprise_EnterprisesSendTestPushNotificationResponse
    */
   public function sendTestPushNotification($enterpriseId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId);
     $params = array_merge($params, $optParams);
-    return $this->call('sendTestPushNotification', array($params), "Google_Service_AndroidEnterprise_EnterprisesSendTestPushNotificationResponse");
+    return $this->call('sendTestPushNotification', array($params), "Appointments_Google_Service_AndroidEnterprise_EnterprisesSendTestPushNotificationResponse");
   }
 
   /**
@@ -1620,30 +1620,30 @@ class Google_Service_AndroidEnterprise_Enterprises_Resource extends Google_Servi
    * enterprise. (enterprises.setAccount)
    *
    * @param string $enterpriseId The ID of the enterprise.
-   * @param Google_EnterpriseAccount $postBody
+   * @param Appointments_Google_EnterpriseAccount $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_EnterpriseAccount
+   * @return Appointments_Google_Service_AndroidEnterprise_EnterpriseAccount
    */
-  public function setAccount($enterpriseId, Google_Service_AndroidEnterprise_EnterpriseAccount $postBody, $optParams = array())
+  public function setAccount($enterpriseId, Appointments_Google_Service_AndroidEnterprise_EnterpriseAccount $postBody, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setAccount', array($params), "Google_Service_AndroidEnterprise_EnterpriseAccount");
+    return $this->call('setAccount', array($params), "Appointments_Google_Service_AndroidEnterprise_EnterpriseAccount");
   }
 
   /**
    * Sets the store layout resource. (enterprises.setStoreLayout)
    *
    * @param string $enterpriseId The ID of the enterprise.
-   * @param Google_StoreLayout $postBody
+   * @param Appointments_Google_StoreLayout $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_StoreLayout
+   * @return Appointments_Google_Service_AndroidEnterprise_StoreLayout
    */
-  public function setStoreLayout($enterpriseId, Google_Service_AndroidEnterprise_StoreLayout $postBody, $optParams = array())
+  public function setStoreLayout($enterpriseId, Appointments_Google_Service_AndroidEnterprise_StoreLayout $postBody, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setStoreLayout', array($params), "Google_Service_AndroidEnterprise_StoreLayout");
+    return $this->call('setStoreLayout', array($params), "Appointments_Google_Service_AndroidEnterprise_StoreLayout");
   }
 
   /**
@@ -1664,11 +1664,11 @@ class Google_Service_AndroidEnterprise_Enterprises_Resource extends Google_Servi
  * The "entitlements" collection of methods.
  * Typical usage is:
  *  <code>
- *   $androidenterpriseService = new Google_Service_AndroidEnterprise(...);
+ *   $androidenterpriseService = new Appointments_Google_Service_AndroidEnterprise(...);
  *   $entitlements = $androidenterpriseService->entitlements;
  *  </code>
  */
-class Google_Service_AndroidEnterprise_Entitlements_Resource extends Google_Service_Resource
+class Appointments_Google_Service_AndroidEnterprise_Entitlements_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1696,13 +1696,13 @@ class Google_Service_AndroidEnterprise_Entitlements_Resource extends Google_Serv
    * @param string $entitlementId The ID of the entitlement, e.g.
    * "app:com.google.android.gm".
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_Entitlement
+   * @return Appointments_Google_Service_AndroidEnterprise_Entitlement
    */
   public function get($enterpriseId, $userId, $entitlementId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'userId' => $userId, 'entitlementId' => $entitlementId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_AndroidEnterprise_Entitlement");
+    return $this->call('get', array($params), "Appointments_Google_Service_AndroidEnterprise_Entitlement");
   }
 
   /**
@@ -1712,13 +1712,13 @@ class Google_Service_AndroidEnterprise_Entitlements_Resource extends Google_Serv
    * @param string $enterpriseId The ID of the enterprise.
    * @param string $userId The ID of the user.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_EntitlementsListResponse
+   * @return Appointments_Google_Service_AndroidEnterprise_EntitlementsListResponse
    */
   public function listEntitlements($enterpriseId, $userId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'userId' => $userId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_AndroidEnterprise_EntitlementsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_AndroidEnterprise_EntitlementsListResponse");
   }
 
   /**
@@ -1729,20 +1729,20 @@ class Google_Service_AndroidEnterprise_Entitlements_Resource extends Google_Serv
    * @param string $userId The ID of the user.
    * @param string $entitlementId The ID of the entitlement, e.g.
    * "app:com.google.android.gm".
-   * @param Google_Entitlement $postBody
+   * @param Appointments_Google_Entitlement $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param bool install Set to true to also install the product on all the
    * user's devices where possible. Failure to install on one or more devices will
    * not prevent this operation from returning successfully, as long as the
    * entitlement was successfully assigned to the user.
-   * @return Google_Service_AndroidEnterprise_Entitlement
+   * @return Appointments_Google_Service_AndroidEnterprise_Entitlement
    */
-  public function patch($enterpriseId, $userId, $entitlementId, Google_Service_AndroidEnterprise_Entitlement $postBody, $optParams = array())
+  public function patch($enterpriseId, $userId, $entitlementId, Appointments_Google_Service_AndroidEnterprise_Entitlement $postBody, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'userId' => $userId, 'entitlementId' => $entitlementId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_AndroidEnterprise_Entitlement");
+    return $this->call('patch', array($params), "Appointments_Google_Service_AndroidEnterprise_Entitlement");
   }
 
   /**
@@ -1752,20 +1752,20 @@ class Google_Service_AndroidEnterprise_Entitlements_Resource extends Google_Serv
    * @param string $userId The ID of the user.
    * @param string $entitlementId The ID of the entitlement, e.g.
    * "app:com.google.android.gm".
-   * @param Google_Entitlement $postBody
+   * @param Appointments_Google_Entitlement $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param bool install Set to true to also install the product on all the
    * user's devices where possible. Failure to install on one or more devices will
    * not prevent this operation from returning successfully, as long as the
    * entitlement was successfully assigned to the user.
-   * @return Google_Service_AndroidEnterprise_Entitlement
+   * @return Appointments_Google_Service_AndroidEnterprise_Entitlement
    */
-  public function update($enterpriseId, $userId, $entitlementId, Google_Service_AndroidEnterprise_Entitlement $postBody, $optParams = array())
+  public function update($enterpriseId, $userId, $entitlementId, Appointments_Google_Service_AndroidEnterprise_Entitlement $postBody, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'userId' => $userId, 'entitlementId' => $entitlementId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_AndroidEnterprise_Entitlement");
+    return $this->call('update', array($params), "Appointments_Google_Service_AndroidEnterprise_Entitlement");
   }
 }
 
@@ -1773,11 +1773,11 @@ class Google_Service_AndroidEnterprise_Entitlements_Resource extends Google_Serv
  * The "grouplicenses" collection of methods.
  * Typical usage is:
  *  <code>
- *   $androidenterpriseService = new Google_Service_AndroidEnterprise(...);
+ *   $androidenterpriseService = new Appointments_Google_Service_AndroidEnterprise(...);
  *   $grouplicenses = $androidenterpriseService->grouplicenses;
  *  </code>
  */
-class Google_Service_AndroidEnterprise_Grouplicenses_Resource extends Google_Service_Resource
+class Appointments_Google_Service_AndroidEnterprise_Grouplicenses_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1788,13 +1788,13 @@ class Google_Service_AndroidEnterprise_Grouplicenses_Resource extends Google_Ser
    * @param string $groupLicenseId The ID of the product the group license is for,
    * e.g. "app:com.google.android.gm".
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_GroupLicense
+   * @return Appointments_Google_Service_AndroidEnterprise_GroupLicense
    */
   public function get($enterpriseId, $groupLicenseId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'groupLicenseId' => $groupLicenseId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_AndroidEnterprise_GroupLicense");
+    return $this->call('get', array($params), "Appointments_Google_Service_AndroidEnterprise_GroupLicense");
   }
 
   /**
@@ -1803,13 +1803,13 @@ class Google_Service_AndroidEnterprise_Grouplicenses_Resource extends Google_Ser
    *
    * @param string $enterpriseId The ID of the enterprise.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_GroupLicensesListResponse
+   * @return Appointments_Google_Service_AndroidEnterprise_GroupLicensesListResponse
    */
   public function listGrouplicenses($enterpriseId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_AndroidEnterprise_GroupLicensesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_AndroidEnterprise_GroupLicensesListResponse");
   }
 }
 
@@ -1817,11 +1817,11 @@ class Google_Service_AndroidEnterprise_Grouplicenses_Resource extends Google_Ser
  * The "grouplicenseusers" collection of methods.
  * Typical usage is:
  *  <code>
- *   $androidenterpriseService = new Google_Service_AndroidEnterprise(...);
+ *   $androidenterpriseService = new Appointments_Google_Service_AndroidEnterprise(...);
  *   $grouplicenseusers = $androidenterpriseService->grouplicenseusers;
  *  </code>
  */
-class Google_Service_AndroidEnterprise_Grouplicenseusers_Resource extends Google_Service_Resource
+class Appointments_Google_Service_AndroidEnterprise_Grouplicenseusers_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1832,13 +1832,13 @@ class Google_Service_AndroidEnterprise_Grouplicenseusers_Resource extends Google
    * @param string $groupLicenseId The ID of the product the group license is for,
    * e.g. "app:com.google.android.gm".
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_GroupLicenseUsersListResponse
+   * @return Appointments_Google_Service_AndroidEnterprise_GroupLicenseUsersListResponse
    */
   public function listGrouplicenseusers($enterpriseId, $groupLicenseId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'groupLicenseId' => $groupLicenseId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_AndroidEnterprise_GroupLicenseUsersListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_AndroidEnterprise_GroupLicenseUsersListResponse");
   }
 }
 
@@ -1846,11 +1846,11 @@ class Google_Service_AndroidEnterprise_Grouplicenseusers_Resource extends Google
  * The "installs" collection of methods.
  * Typical usage is:
  *  <code>
- *   $androidenterpriseService = new Google_Service_AndroidEnterprise(...);
+ *   $androidenterpriseService = new Appointments_Google_Service_AndroidEnterprise(...);
  *   $installs = $androidenterpriseService->installs;
  *  </code>
  */
-class Google_Service_AndroidEnterprise_Installs_Resource extends Google_Service_Resource
+class Appointments_Google_Service_AndroidEnterprise_Installs_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1881,13 +1881,13 @@ class Google_Service_AndroidEnterprise_Installs_Resource extends Google_Service_
    * @param string $installId The ID of the product represented by the install,
    * e.g. "app:com.google.android.gm".
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_Install
+   * @return Appointments_Google_Service_AndroidEnterprise_Install
    */
   public function get($enterpriseId, $userId, $deviceId, $installId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'userId' => $userId, 'deviceId' => $deviceId, 'installId' => $installId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_AndroidEnterprise_Install");
+    return $this->call('get', array($params), "Appointments_Google_Service_AndroidEnterprise_Install");
   }
 
   /**
@@ -1898,13 +1898,13 @@ class Google_Service_AndroidEnterprise_Installs_Resource extends Google_Service_
    * @param string $userId The ID of the user.
    * @param string $deviceId The Android ID of the device.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_InstallsListResponse
+   * @return Appointments_Google_Service_AndroidEnterprise_InstallsListResponse
    */
   public function listInstalls($enterpriseId, $userId, $deviceId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'userId' => $userId, 'deviceId' => $deviceId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_AndroidEnterprise_InstallsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_AndroidEnterprise_InstallsListResponse");
   }
 
   /**
@@ -1917,15 +1917,15 @@ class Google_Service_AndroidEnterprise_Installs_Resource extends Google_Service_
    * @param string $deviceId The Android ID of the device.
    * @param string $installId The ID of the product represented by the install,
    * e.g. "app:com.google.android.gm".
-   * @param Google_Install $postBody
+   * @param Appointments_Google_Install $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_Install
+   * @return Appointments_Google_Service_AndroidEnterprise_Install
    */
-  public function patch($enterpriseId, $userId, $deviceId, $installId, Google_Service_AndroidEnterprise_Install $postBody, $optParams = array())
+  public function patch($enterpriseId, $userId, $deviceId, $installId, Appointments_Google_Service_AndroidEnterprise_Install $postBody, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'userId' => $userId, 'deviceId' => $deviceId, 'installId' => $installId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_AndroidEnterprise_Install");
+    return $this->call('patch', array($params), "Appointments_Google_Service_AndroidEnterprise_Install");
   }
 
   /**
@@ -1938,15 +1938,15 @@ class Google_Service_AndroidEnterprise_Installs_Resource extends Google_Service_
    * @param string $deviceId The Android ID of the device.
    * @param string $installId The ID of the product represented by the install,
    * e.g. "app:com.google.android.gm".
-   * @param Google_Install $postBody
+   * @param Appointments_Google_Install $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_Install
+   * @return Appointments_Google_Service_AndroidEnterprise_Install
    */
-  public function update($enterpriseId, $userId, $deviceId, $installId, Google_Service_AndroidEnterprise_Install $postBody, $optParams = array())
+  public function update($enterpriseId, $userId, $deviceId, $installId, Appointments_Google_Service_AndroidEnterprise_Install $postBody, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'userId' => $userId, 'deviceId' => $deviceId, 'installId' => $installId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_AndroidEnterprise_Install");
+    return $this->call('update', array($params), "Appointments_Google_Service_AndroidEnterprise_Install");
   }
 }
 
@@ -1954,11 +1954,11 @@ class Google_Service_AndroidEnterprise_Installs_Resource extends Google_Service_
  * The "permissions" collection of methods.
  * Typical usage is:
  *  <code>
- *   $androidenterpriseService = new Google_Service_AndroidEnterprise(...);
+ *   $androidenterpriseService = new Appointments_Google_Service_AndroidEnterprise(...);
  *   $permissions = $androidenterpriseService->permissions;
  *  </code>
  */
-class Google_Service_AndroidEnterprise_Permissions_Resource extends Google_Service_Resource
+class Appointments_Google_Service_AndroidEnterprise_Permissions_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1970,13 +1970,13 @@ class Google_Service_AndroidEnterprise_Permissions_Resource extends Google_Servi
    *
    * @opt_param string language The BCP47 tag for the user's preferred language
    * (e.g. "en-US", "de")
-   * @return Google_Service_AndroidEnterprise_Permission
+   * @return Appointments_Google_Service_AndroidEnterprise_Permission
    */
   public function get($permissionId, $optParams = array())
   {
     $params = array('permissionId' => $permissionId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_AndroidEnterprise_Permission");
+    return $this->call('get', array($params), "Appointments_Google_Service_AndroidEnterprise_Permission");
   }
 }
 
@@ -1984,11 +1984,11 @@ class Google_Service_AndroidEnterprise_Permissions_Resource extends Google_Servi
  * The "products" collection of methods.
  * Typical usage is:
  *  <code>
- *   $androidenterpriseService = new Google_Service_AndroidEnterprise(...);
+ *   $androidenterpriseService = new Appointments_Google_Service_AndroidEnterprise(...);
  *   $products = $androidenterpriseService->products;
  *  </code>
  */
-class Google_Service_AndroidEnterprise_Products_Resource extends Google_Service_Resource
+class Appointments_Google_Service_AndroidEnterprise_Products_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1997,10 +1997,10 @@ class Google_Service_AndroidEnterprise_Products_Resource extends Google_Service_
    *
    * @param string $enterpriseId The ID of the enterprise.
    * @param string $productId The ID of the product.
-   * @param Google_ProductsApproveRequest $postBody
+   * @param Appointments_Google_ProductsApproveRequest $postBody
    * @param array $optParams Optional parameters.
    */
-  public function approve($enterpriseId, $productId, Google_Service_AndroidEnterprise_ProductsApproveRequest $postBody, $optParams = array())
+  public function approve($enterpriseId, $productId, Appointments_Google_Service_AndroidEnterprise_ProductsApproveRequest $postBody, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'productId' => $productId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
@@ -2024,13 +2024,13 @@ class Google_Service_AndroidEnterprise_Products_Resource extends Google_Service_
    *
    * @opt_param string languageCode The BCP 47 language code used for permission
    * names and descriptions in the returned iframe, for instance "en-US".
-   * @return Google_Service_AndroidEnterprise_ProductsGenerateApprovalUrlResponse
+   * @return Appointments_Google_Service_AndroidEnterprise_ProductsGenerateApprovalUrlResponse
    */
   public function generateApprovalUrl($enterpriseId, $productId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'productId' => $productId);
     $params = array_merge($params, $optParams);
-    return $this->call('generateApprovalUrl', array($params), "Google_Service_AndroidEnterprise_ProductsGenerateApprovalUrlResponse");
+    return $this->call('generateApprovalUrl', array($params), "Appointments_Google_Service_AndroidEnterprise_ProductsGenerateApprovalUrlResponse");
   }
 
   /**
@@ -2044,13 +2044,13 @@ class Google_Service_AndroidEnterprise_Products_Resource extends Google_Service_
    *
    * @opt_param string language The BCP47 tag for the user's preferred language
    * (e.g. "en-US", "de").
-   * @return Google_Service_AndroidEnterprise_Product
+   * @return Appointments_Google_Service_AndroidEnterprise_Product
    */
   public function get($enterpriseId, $productId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'productId' => $productId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_AndroidEnterprise_Product");
+    return $this->call('get', array($params), "Appointments_Google_Service_AndroidEnterprise_Product");
   }
 
   /**
@@ -2064,13 +2064,13 @@ class Google_Service_AndroidEnterprise_Products_Resource extends Google_Service_
    *
    * @opt_param string language The BCP47 tag for the user's preferred language
    * (e.g. "en-US", "de").
-   * @return Google_Service_AndroidEnterprise_AppRestrictionsSchema
+   * @return Appointments_Google_Service_AndroidEnterprise_AppRestrictionsSchema
    */
   public function getAppRestrictionsSchema($enterpriseId, $productId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'productId' => $productId);
     $params = array_merge($params, $optParams);
-    return $this->call('getAppRestrictionsSchema', array($params), "Google_Service_AndroidEnterprise_AppRestrictionsSchema");
+    return $this->call('getAppRestrictionsSchema', array($params), "Appointments_Google_Service_AndroidEnterprise_AppRestrictionsSchema");
   }
 
   /**
@@ -2080,13 +2080,13 @@ class Google_Service_AndroidEnterprise_Products_Resource extends Google_Service_
    * @param string $enterpriseId The ID of the enterprise.
    * @param string $productId The ID of the product.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_ProductPermissions
+   * @return Appointments_Google_Service_AndroidEnterprise_ProductPermissions
    */
   public function getPermissions($enterpriseId, $productId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'productId' => $productId);
     $params = array_merge($params, $optParams);
-    return $this->call('getPermissions', array($params), "Google_Service_AndroidEnterprise_ProductPermissions");
+    return $this->call('getPermissions', array($params), "Appointments_Google_Service_AndroidEnterprise_ProductPermissions");
   }
 
   /**
@@ -2095,15 +2095,15 @@ class Google_Service_AndroidEnterprise_Products_Resource extends Google_Service_
    *
    * @param string $enterpriseId The ID of the enterprise.
    * @param string $productId The ID of the product.
-   * @param Google_ProductPermissions $postBody
+   * @param Appointments_Google_ProductPermissions $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_ProductPermissions
+   * @return Appointments_Google_Service_AndroidEnterprise_ProductPermissions
    */
-  public function updatePermissions($enterpriseId, $productId, Google_Service_AndroidEnterprise_ProductPermissions $postBody, $optParams = array())
+  public function updatePermissions($enterpriseId, $productId, Appointments_Google_Service_AndroidEnterprise_ProductPermissions $postBody, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'productId' => $productId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('updatePermissions', array($params), "Google_Service_AndroidEnterprise_ProductPermissions");
+    return $this->call('updatePermissions', array($params), "Appointments_Google_Service_AndroidEnterprise_ProductPermissions");
   }
 }
 
@@ -2111,11 +2111,11 @@ class Google_Service_AndroidEnterprise_Products_Resource extends Google_Service_
  * The "storelayoutclusters" collection of methods.
  * Typical usage is:
  *  <code>
- *   $androidenterpriseService = new Google_Service_AndroidEnterprise(...);
+ *   $androidenterpriseService = new Appointments_Google_Service_AndroidEnterprise(...);
  *   $storelayoutclusters = $androidenterpriseService->storelayoutclusters;
  *  </code>
  */
-class Google_Service_AndroidEnterprise_Storelayoutclusters_Resource extends Google_Service_Resource
+class Appointments_Google_Service_AndroidEnterprise_Storelayoutclusters_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2140,13 +2140,13 @@ class Google_Service_AndroidEnterprise_Storelayoutclusters_Resource extends Goog
    * @param string $pageId The ID of the page.
    * @param string $clusterId The ID of the cluster.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_StoreCluster
+   * @return Appointments_Google_Service_AndroidEnterprise_StoreCluster
    */
   public function get($enterpriseId, $pageId, $clusterId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'pageId' => $pageId, 'clusterId' => $clusterId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_AndroidEnterprise_StoreCluster");
+    return $this->call('get', array($params), "Appointments_Google_Service_AndroidEnterprise_StoreCluster");
   }
 
   /**
@@ -2154,15 +2154,15 @@ class Google_Service_AndroidEnterprise_Storelayoutclusters_Resource extends Goog
    *
    * @param string $enterpriseId The ID of the enterprise.
    * @param string $pageId The ID of the page.
-   * @param Google_StoreCluster $postBody
+   * @param Appointments_Google_StoreCluster $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_StoreCluster
+   * @return Appointments_Google_Service_AndroidEnterprise_StoreCluster
    */
-  public function insert($enterpriseId, $pageId, Google_Service_AndroidEnterprise_StoreCluster $postBody, $optParams = array())
+  public function insert($enterpriseId, $pageId, Appointments_Google_Service_AndroidEnterprise_StoreCluster $postBody, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'pageId' => $pageId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_AndroidEnterprise_StoreCluster");
+    return $this->call('insert', array($params), "Appointments_Google_Service_AndroidEnterprise_StoreCluster");
   }
 
   /**
@@ -2172,13 +2172,13 @@ class Google_Service_AndroidEnterprise_Storelayoutclusters_Resource extends Goog
    * @param string $enterpriseId The ID of the enterprise.
    * @param string $pageId The ID of the page.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_StoreLayoutClustersListResponse
+   * @return Appointments_Google_Service_AndroidEnterprise_StoreLayoutClustersListResponse
    */
   public function listStorelayoutclusters($enterpriseId, $pageId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'pageId' => $pageId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_AndroidEnterprise_StoreLayoutClustersListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_AndroidEnterprise_StoreLayoutClustersListResponse");
   }
 
   /**
@@ -2188,15 +2188,15 @@ class Google_Service_AndroidEnterprise_Storelayoutclusters_Resource extends Goog
    * @param string $enterpriseId The ID of the enterprise.
    * @param string $pageId The ID of the page.
    * @param string $clusterId The ID of the cluster.
-   * @param Google_StoreCluster $postBody
+   * @param Appointments_Google_StoreCluster $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_StoreCluster
+   * @return Appointments_Google_Service_AndroidEnterprise_StoreCluster
    */
-  public function patch($enterpriseId, $pageId, $clusterId, Google_Service_AndroidEnterprise_StoreCluster $postBody, $optParams = array())
+  public function patch($enterpriseId, $pageId, $clusterId, Appointments_Google_Service_AndroidEnterprise_StoreCluster $postBody, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'pageId' => $pageId, 'clusterId' => $clusterId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_AndroidEnterprise_StoreCluster");
+    return $this->call('patch', array($params), "Appointments_Google_Service_AndroidEnterprise_StoreCluster");
   }
 
   /**
@@ -2205,15 +2205,15 @@ class Google_Service_AndroidEnterprise_Storelayoutclusters_Resource extends Goog
    * @param string $enterpriseId The ID of the enterprise.
    * @param string $pageId The ID of the page.
    * @param string $clusterId The ID of the cluster.
-   * @param Google_StoreCluster $postBody
+   * @param Appointments_Google_StoreCluster $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_StoreCluster
+   * @return Appointments_Google_Service_AndroidEnterprise_StoreCluster
    */
-  public function update($enterpriseId, $pageId, $clusterId, Google_Service_AndroidEnterprise_StoreCluster $postBody, $optParams = array())
+  public function update($enterpriseId, $pageId, $clusterId, Appointments_Google_Service_AndroidEnterprise_StoreCluster $postBody, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'pageId' => $pageId, 'clusterId' => $clusterId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_AndroidEnterprise_StoreCluster");
+    return $this->call('update', array($params), "Appointments_Google_Service_AndroidEnterprise_StoreCluster");
   }
 }
 
@@ -2221,11 +2221,11 @@ class Google_Service_AndroidEnterprise_Storelayoutclusters_Resource extends Goog
  * The "storelayoutpages" collection of methods.
  * Typical usage is:
  *  <code>
- *   $androidenterpriseService = new Google_Service_AndroidEnterprise(...);
+ *   $androidenterpriseService = new Appointments_Google_Service_AndroidEnterprise(...);
  *   $storelayoutpages = $androidenterpriseService->storelayoutpages;
  *  </code>
  */
-class Google_Service_AndroidEnterprise_Storelayoutpages_Resource extends Google_Service_Resource
+class Appointments_Google_Service_AndroidEnterprise_Storelayoutpages_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2248,28 +2248,28 @@ class Google_Service_AndroidEnterprise_Storelayoutpages_Resource extends Google_
    * @param string $enterpriseId The ID of the enterprise.
    * @param string $pageId The ID of the page.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_StorePage
+   * @return Appointments_Google_Service_AndroidEnterprise_StorePage
    */
   public function get($enterpriseId, $pageId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'pageId' => $pageId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_AndroidEnterprise_StorePage");
+    return $this->call('get', array($params), "Appointments_Google_Service_AndroidEnterprise_StorePage");
   }
 
   /**
    * Inserts a new store page. (storelayoutpages.insert)
    *
    * @param string $enterpriseId The ID of the enterprise.
-   * @param Google_StorePage $postBody
+   * @param Appointments_Google_StorePage $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_StorePage
+   * @return Appointments_Google_Service_AndroidEnterprise_StorePage
    */
-  public function insert($enterpriseId, Google_Service_AndroidEnterprise_StorePage $postBody, $optParams = array())
+  public function insert($enterpriseId, Appointments_Google_Service_AndroidEnterprise_StorePage $postBody, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_AndroidEnterprise_StorePage");
+    return $this->call('insert', array($params), "Appointments_Google_Service_AndroidEnterprise_StorePage");
   }
 
   /**
@@ -2278,13 +2278,13 @@ class Google_Service_AndroidEnterprise_Storelayoutpages_Resource extends Google_
    *
    * @param string $enterpriseId The ID of the enterprise.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_StoreLayoutPagesListResponse
+   * @return Appointments_Google_Service_AndroidEnterprise_StoreLayoutPagesListResponse
    */
   public function listStorelayoutpages($enterpriseId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_AndroidEnterprise_StoreLayoutPagesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_AndroidEnterprise_StoreLayoutPagesListResponse");
   }
 
   /**
@@ -2293,15 +2293,15 @@ class Google_Service_AndroidEnterprise_Storelayoutpages_Resource extends Google_
    *
    * @param string $enterpriseId The ID of the enterprise.
    * @param string $pageId The ID of the page.
-   * @param Google_StorePage $postBody
+   * @param Appointments_Google_StorePage $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_StorePage
+   * @return Appointments_Google_Service_AndroidEnterprise_StorePage
    */
-  public function patch($enterpriseId, $pageId, Google_Service_AndroidEnterprise_StorePage $postBody, $optParams = array())
+  public function patch($enterpriseId, $pageId, Appointments_Google_Service_AndroidEnterprise_StorePage $postBody, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'pageId' => $pageId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_AndroidEnterprise_StorePage");
+    return $this->call('patch', array($params), "Appointments_Google_Service_AndroidEnterprise_StorePage");
   }
 
   /**
@@ -2309,15 +2309,15 @@ class Google_Service_AndroidEnterprise_Storelayoutpages_Resource extends Google_
    *
    * @param string $enterpriseId The ID of the enterprise.
    * @param string $pageId The ID of the page.
-   * @param Google_StorePage $postBody
+   * @param Appointments_Google_StorePage $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_StorePage
+   * @return Appointments_Google_Service_AndroidEnterprise_StorePage
    */
-  public function update($enterpriseId, $pageId, Google_Service_AndroidEnterprise_StorePage $postBody, $optParams = array())
+  public function update($enterpriseId, $pageId, Appointments_Google_Service_AndroidEnterprise_StorePage $postBody, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'pageId' => $pageId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_AndroidEnterprise_StorePage");
+    return $this->call('update', array($params), "Appointments_Google_Service_AndroidEnterprise_StorePage");
   }
 }
 
@@ -2325,11 +2325,11 @@ class Google_Service_AndroidEnterprise_Storelayoutpages_Resource extends Google_
  * The "users" collection of methods.
  * Typical usage is:
  *  <code>
- *   $androidenterpriseService = new Google_Service_AndroidEnterprise(...);
+ *   $androidenterpriseService = new Appointments_Google_Service_AndroidEnterprise(...);
  *   $users = $androidenterpriseService->users;
  *  </code>
  */
-class Google_Service_AndroidEnterprise_Users_Resource extends Google_Service_Resource
+class Appointments_Google_Service_AndroidEnterprise_Users_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2342,13 +2342,13 @@ class Google_Service_AndroidEnterprise_Users_Resource extends Google_Service_Res
    * @param string $enterpriseId The ID of the enterprise.
    * @param string $userId The ID of the user.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_UserToken
+   * @return Appointments_Google_Service_AndroidEnterprise_UserToken
    */
   public function generateToken($enterpriseId, $userId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'userId' => $userId);
     $params = array_merge($params, $optParams);
-    return $this->call('generateToken', array($params), "Google_Service_AndroidEnterprise_UserToken");
+    return $this->call('generateToken', array($params), "Appointments_Google_Service_AndroidEnterprise_UserToken");
   }
 
   /**
@@ -2357,13 +2357,13 @@ class Google_Service_AndroidEnterprise_Users_Resource extends Google_Service_Res
    * @param string $enterpriseId The ID of the enterprise.
    * @param string $userId The ID of the user.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_User
+   * @return Appointments_Google_Service_AndroidEnterprise_User
    */
   public function get($enterpriseId, $userId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'userId' => $userId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_AndroidEnterprise_User");
+    return $this->call('get', array($params), "Appointments_Google_Service_AndroidEnterprise_User");
   }
 
   /**
@@ -2373,13 +2373,13 @@ class Google_Service_AndroidEnterprise_Users_Resource extends Google_Service_Res
    * @param string $enterpriseId The ID of the enterprise.
    * @param string $userId The ID of the user.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_ProductSet
+   * @return Appointments_Google_Service_AndroidEnterprise_ProductSet
    */
   public function getAvailableProductSet($enterpriseId, $userId, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'userId' => $userId);
     $params = array_merge($params, $optParams);
-    return $this->call('getAvailableProductSet', array($params), "Google_Service_AndroidEnterprise_ProductSet");
+    return $this->call('getAvailableProductSet', array($params), "Appointments_Google_Service_AndroidEnterprise_ProductSet");
   }
 
   /**
@@ -2388,13 +2388,13 @@ class Google_Service_AndroidEnterprise_Users_Resource extends Google_Service_Res
    * @param string $enterpriseId The ID of the enterprise.
    * @param string $email The exact primary email address of the user to look up.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_UsersListResponse
+   * @return Appointments_Google_Service_AndroidEnterprise_UsersListResponse
    */
   public function listUsers($enterpriseId, $email, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'email' => $email);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_AndroidEnterprise_UsersListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_AndroidEnterprise_UsersListResponse");
   }
 
   /**
@@ -2418,28 +2418,28 @@ class Google_Service_AndroidEnterprise_Users_Resource extends Google_Service_Res
    *
    * @param string $enterpriseId The ID of the enterprise.
    * @param string $userId The ID of the user.
-   * @param Google_ProductSet $postBody
+   * @param Appointments_Google_ProductSet $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_AndroidEnterprise_ProductSet
+   * @return Appointments_Google_Service_AndroidEnterprise_ProductSet
    */
-  public function setAvailableProductSet($enterpriseId, $userId, Google_Service_AndroidEnterprise_ProductSet $postBody, $optParams = array())
+  public function setAvailableProductSet($enterpriseId, $userId, Appointments_Google_Service_AndroidEnterprise_ProductSet $postBody, $optParams = array())
   {
     $params = array('enterpriseId' => $enterpriseId, 'userId' => $userId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setAvailableProductSet', array($params), "Google_Service_AndroidEnterprise_ProductSet");
+    return $this->call('setAvailableProductSet', array($params), "Appointments_Google_Service_AndroidEnterprise_ProductSet");
   }
 }
 
 
 
 
-class Google_Service_AndroidEnterprise_AppRestrictionsSchema extends Google_Collection
+class Appointments_Google_Service_AndroidEnterprise_AppRestrictionsSchema extends Appointments_Google_Collection
 {
   protected $collection_key = 'restrictions';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $restrictionsType = 'Google_Service_AndroidEnterprise_AppRestrictionsSchemaRestriction';
+  protected $restrictionsType = 'Appointments_Google_Service_AndroidEnterprise_AppRestrictionsSchemaRestriction';
   protected $restrictionsDataType = 'array';
 
 
@@ -2461,12 +2461,12 @@ class Google_Service_AndroidEnterprise_AppRestrictionsSchema extends Google_Coll
   }
 }
 
-class Google_Service_AndroidEnterprise_AppRestrictionsSchemaRestriction extends Google_Collection
+class Appointments_Google_Service_AndroidEnterprise_AppRestrictionsSchemaRestriction extends Appointments_Google_Collection
 {
   protected $collection_key = 'entryValue';
   protected $internal_gapi_mappings = array(
   );
-  protected $defaultValueType = 'Google_Service_AndroidEnterprise_AppRestrictionsSchemaRestrictionRestrictionValue';
+  protected $defaultValueType = 'Appointments_Google_Service_AndroidEnterprise_AppRestrictionsSchemaRestrictionRestrictionValue';
   protected $defaultValueDataType = '';
   public $description;
   public $entry;
@@ -2476,7 +2476,7 @@ class Google_Service_AndroidEnterprise_AppRestrictionsSchemaRestriction extends 
   public $title;
 
 
-  public function setDefaultValue(Google_Service_AndroidEnterprise_AppRestrictionsSchemaRestrictionRestrictionValue $defaultValue)
+  public function setDefaultValue(Appointments_Google_Service_AndroidEnterprise_AppRestrictionsSchemaRestrictionRestrictionValue $defaultValue)
   {
     $this->defaultValue = $defaultValue;
   }
@@ -2534,7 +2534,7 @@ class Google_Service_AndroidEnterprise_AppRestrictionsSchemaRestriction extends 
   }
 }
 
-class Google_Service_AndroidEnterprise_AppRestrictionsSchemaRestrictionRestrictionValue extends Google_Collection
+class Appointments_Google_Service_AndroidEnterprise_AppRestrictionsSchemaRestrictionRestrictionValue extends Appointments_Google_Collection
 {
   protected $collection_key = 'valueMultiselect';
   protected $internal_gapi_mappings = array(
@@ -2588,7 +2588,7 @@ class Google_Service_AndroidEnterprise_AppRestrictionsSchemaRestrictionRestricti
   }
 }
 
-class Google_Service_AndroidEnterprise_AppVersion extends Google_Model
+class Appointments_Google_Service_AndroidEnterprise_AppVersion extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2614,7 +2614,7 @@ class Google_Service_AndroidEnterprise_AppVersion extends Google_Model
   }
 }
 
-class Google_Service_AndroidEnterprise_ApprovalUrlInfo extends Google_Model
+class Appointments_Google_Service_AndroidEnterprise_ApprovalUrlInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2640,7 +2640,7 @@ class Google_Service_AndroidEnterprise_ApprovalUrlInfo extends Google_Model
   }
 }
 
-class Google_Service_AndroidEnterprise_Collection extends Google_Collection
+class Appointments_Google_Service_AndroidEnterprise_Collection extends Appointments_Google_Collection
 {
   protected $collection_key = 'productId';
   protected $internal_gapi_mappings = array(
@@ -2694,13 +2694,13 @@ class Google_Service_AndroidEnterprise_Collection extends Google_Collection
   }
 }
 
-class Google_Service_AndroidEnterprise_CollectionViewersListResponse extends Google_Collection
+class Appointments_Google_Service_AndroidEnterprise_CollectionViewersListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'user';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $userType = 'Google_Service_AndroidEnterprise_User';
+  protected $userType = 'Appointments_Google_Service_AndroidEnterprise_User';
   protected $userDataType = 'array';
 
 
@@ -2722,12 +2722,12 @@ class Google_Service_AndroidEnterprise_CollectionViewersListResponse extends Goo
   }
 }
 
-class Google_Service_AndroidEnterprise_CollectionsListResponse extends Google_Collection
+class Appointments_Google_Service_AndroidEnterprise_CollectionsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'collection';
   protected $internal_gapi_mappings = array(
   );
-  protected $collectionType = 'Google_Service_AndroidEnterprise_Collection';
+  protected $collectionType = 'Appointments_Google_Service_AndroidEnterprise_Collection';
   protected $collectionDataType = 'array';
   public $kind;
 
@@ -2750,7 +2750,7 @@ class Google_Service_AndroidEnterprise_CollectionsListResponse extends Google_Co
   }
 }
 
-class Google_Service_AndroidEnterprise_Device extends Google_Model
+class Appointments_Google_Service_AndroidEnterprise_Device extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2785,7 +2785,7 @@ class Google_Service_AndroidEnterprise_Device extends Google_Model
   }
 }
 
-class Google_Service_AndroidEnterprise_DeviceState extends Google_Model
+class Appointments_Google_Service_AndroidEnterprise_DeviceState extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2811,12 +2811,12 @@ class Google_Service_AndroidEnterprise_DeviceState extends Google_Model
   }
 }
 
-class Google_Service_AndroidEnterprise_DevicesListResponse extends Google_Collection
+class Appointments_Google_Service_AndroidEnterprise_DevicesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'device';
   protected $internal_gapi_mappings = array(
   );
-  protected $deviceType = 'Google_Service_AndroidEnterprise_Device';
+  protected $deviceType = 'Appointments_Google_Service_AndroidEnterprise_Device';
   protected $deviceDataType = 'array';
   public $kind;
 
@@ -2839,7 +2839,7 @@ class Google_Service_AndroidEnterprise_DevicesListResponse extends Google_Collec
   }
 }
 
-class Google_Service_AndroidEnterprise_Enterprise extends Google_Model
+class Appointments_Google_Service_AndroidEnterprise_Enterprise extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2883,7 +2883,7 @@ class Google_Service_AndroidEnterprise_Enterprise extends Google_Model
   }
 }
 
-class Google_Service_AndroidEnterprise_EnterpriseAccount extends Google_Model
+class Appointments_Google_Service_AndroidEnterprise_EnterpriseAccount extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2909,12 +2909,12 @@ class Google_Service_AndroidEnterprise_EnterpriseAccount extends Google_Model
   }
 }
 
-class Google_Service_AndroidEnterprise_EnterprisesListResponse extends Google_Collection
+class Appointments_Google_Service_AndroidEnterprise_EnterprisesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'enterprise';
   protected $internal_gapi_mappings = array(
   );
-  protected $enterpriseType = 'Google_Service_AndroidEnterprise_Enterprise';
+  protected $enterpriseType = 'Appointments_Google_Service_AndroidEnterprise_Enterprise';
   protected $enterpriseDataType = 'array';
   public $kind;
 
@@ -2937,7 +2937,7 @@ class Google_Service_AndroidEnterprise_EnterprisesListResponse extends Google_Co
   }
 }
 
-class Google_Service_AndroidEnterprise_EnterprisesSendTestPushNotificationResponse extends Google_Model
+class Appointments_Google_Service_AndroidEnterprise_EnterprisesSendTestPushNotificationResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2963,7 +2963,7 @@ class Google_Service_AndroidEnterprise_EnterprisesSendTestPushNotificationRespon
   }
 }
 
-class Google_Service_AndroidEnterprise_Entitlement extends Google_Model
+class Appointments_Google_Service_AndroidEnterprise_Entitlement extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2998,12 +2998,12 @@ class Google_Service_AndroidEnterprise_Entitlement extends Google_Model
   }
 }
 
-class Google_Service_AndroidEnterprise_EntitlementsListResponse extends Google_Collection
+class Appointments_Google_Service_AndroidEnterprise_EntitlementsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'entitlement';
   protected $internal_gapi_mappings = array(
   );
-  protected $entitlementType = 'Google_Service_AndroidEnterprise_Entitlement';
+  protected $entitlementType = 'Appointments_Google_Service_AndroidEnterprise_Entitlement';
   protected $entitlementDataType = 'array';
   public $kind;
 
@@ -3026,7 +3026,7 @@ class Google_Service_AndroidEnterprise_EntitlementsListResponse extends Google_C
   }
 }
 
-class Google_Service_AndroidEnterprise_GroupLicense extends Google_Model
+class Appointments_Google_Service_AndroidEnterprise_GroupLicense extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3088,13 +3088,13 @@ class Google_Service_AndroidEnterprise_GroupLicense extends Google_Model
   }
 }
 
-class Google_Service_AndroidEnterprise_GroupLicenseUsersListResponse extends Google_Collection
+class Appointments_Google_Service_AndroidEnterprise_GroupLicenseUsersListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'user';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $userType = 'Google_Service_AndroidEnterprise_User';
+  protected $userType = 'Appointments_Google_Service_AndroidEnterprise_User';
   protected $userDataType = 'array';
 
 
@@ -3116,12 +3116,12 @@ class Google_Service_AndroidEnterprise_GroupLicenseUsersListResponse extends Goo
   }
 }
 
-class Google_Service_AndroidEnterprise_GroupLicensesListResponse extends Google_Collection
+class Appointments_Google_Service_AndroidEnterprise_GroupLicensesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'groupLicense';
   protected $internal_gapi_mappings = array(
   );
-  protected $groupLicenseType = 'Google_Service_AndroidEnterprise_GroupLicense';
+  protected $groupLicenseType = 'Appointments_Google_Service_AndroidEnterprise_GroupLicense';
   protected $groupLicenseDataType = 'array';
   public $kind;
 
@@ -3144,7 +3144,7 @@ class Google_Service_AndroidEnterprise_GroupLicensesListResponse extends Google_
   }
 }
 
-class Google_Service_AndroidEnterprise_Install extends Google_Model
+class Appointments_Google_Service_AndroidEnterprise_Install extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3188,12 +3188,12 @@ class Google_Service_AndroidEnterprise_Install extends Google_Model
   }
 }
 
-class Google_Service_AndroidEnterprise_InstallsListResponse extends Google_Collection
+class Appointments_Google_Service_AndroidEnterprise_InstallsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'install';
   protected $internal_gapi_mappings = array(
   );
-  protected $installType = 'Google_Service_AndroidEnterprise_Install';
+  protected $installType = 'Appointments_Google_Service_AndroidEnterprise_Install';
   protected $installDataType = 'array';
   public $kind;
 
@@ -3216,7 +3216,7 @@ class Google_Service_AndroidEnterprise_InstallsListResponse extends Google_Colle
   }
 }
 
-class Google_Service_AndroidEnterprise_LocalizedText extends Google_Model
+class Appointments_Google_Service_AndroidEnterprise_LocalizedText extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3242,7 +3242,7 @@ class Google_Service_AndroidEnterprise_LocalizedText extends Google_Model
   }
 }
 
-class Google_Service_AndroidEnterprise_Permission extends Google_Model
+class Appointments_Google_Service_AndroidEnterprise_Permission extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3286,12 +3286,12 @@ class Google_Service_AndroidEnterprise_Permission extends Google_Model
   }
 }
 
-class Google_Service_AndroidEnterprise_Product extends Google_Collection
+class Appointments_Google_Service_AndroidEnterprise_Product extends Appointments_Google_Collection
 {
   protected $collection_key = 'appVersion';
   protected $internal_gapi_mappings = array(
   );
-  protected $appVersionType = 'Google_Service_AndroidEnterprise_AppVersion';
+  protected $appVersionType = 'Appointments_Google_Service_AndroidEnterprise_AppVersion';
   protected $appVersionDataType = 'array';
   public $authorName;
   public $detailsUrl;
@@ -3395,7 +3395,7 @@ class Google_Service_AndroidEnterprise_Product extends Google_Collection
   }
 }
 
-class Google_Service_AndroidEnterprise_ProductPermission extends Google_Model
+class Appointments_Google_Service_AndroidEnterprise_ProductPermission extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3421,13 +3421,13 @@ class Google_Service_AndroidEnterprise_ProductPermission extends Google_Model
   }
 }
 
-class Google_Service_AndroidEnterprise_ProductPermissions extends Google_Collection
+class Appointments_Google_Service_AndroidEnterprise_ProductPermissions extends Appointments_Google_Collection
 {
   protected $collection_key = 'permission';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $permissionType = 'Google_Service_AndroidEnterprise_ProductPermission';
+  protected $permissionType = 'Appointments_Google_Service_AndroidEnterprise_ProductPermission';
   protected $permissionDataType = 'array';
   public $productId;
 
@@ -3458,7 +3458,7 @@ class Google_Service_AndroidEnterprise_ProductPermissions extends Google_Collect
   }
 }
 
-class Google_Service_AndroidEnterprise_ProductSet extends Google_Collection
+class Appointments_Google_Service_AndroidEnterprise_ProductSet extends Appointments_Google_Collection
 {
   protected $collection_key = 'productId';
   protected $internal_gapi_mappings = array(
@@ -3485,15 +3485,15 @@ class Google_Service_AndroidEnterprise_ProductSet extends Google_Collection
   }
 }
 
-class Google_Service_AndroidEnterprise_ProductsApproveRequest extends Google_Model
+class Appointments_Google_Service_AndroidEnterprise_ProductsApproveRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $approvalUrlInfoType = 'Google_Service_AndroidEnterprise_ApprovalUrlInfo';
+  protected $approvalUrlInfoType = 'Appointments_Google_Service_AndroidEnterprise_ApprovalUrlInfo';
   protected $approvalUrlInfoDataType = '';
 
 
-  public function setApprovalUrlInfo(Google_Service_AndroidEnterprise_ApprovalUrlInfo $approvalUrlInfo)
+  public function setApprovalUrlInfo(Appointments_Google_Service_AndroidEnterprise_ApprovalUrlInfo $approvalUrlInfo)
   {
     $this->approvalUrlInfo = $approvalUrlInfo;
   }
@@ -3503,7 +3503,7 @@ class Google_Service_AndroidEnterprise_ProductsApproveRequest extends Google_Mod
   }
 }
 
-class Google_Service_AndroidEnterprise_ProductsGenerateApprovalUrlResponse extends Google_Model
+class Appointments_Google_Service_AndroidEnterprise_ProductsGenerateApprovalUrlResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3520,14 +3520,14 @@ class Google_Service_AndroidEnterprise_ProductsGenerateApprovalUrlResponse exten
   }
 }
 
-class Google_Service_AndroidEnterprise_StoreCluster extends Google_Collection
+class Appointments_Google_Service_AndroidEnterprise_StoreCluster extends Appointments_Google_Collection
 {
   protected $collection_key = 'productId';
   protected $internal_gapi_mappings = array(
   );
   public $id;
   public $kind;
-  protected $nameType = 'Google_Service_AndroidEnterprise_LocalizedText';
+  protected $nameType = 'Appointments_Google_Service_AndroidEnterprise_LocalizedText';
   protected $nameDataType = 'array';
   public $orderInPage;
   public $productId;
@@ -3575,7 +3575,7 @@ class Google_Service_AndroidEnterprise_StoreCluster extends Google_Collection
   }
 }
 
-class Google_Service_AndroidEnterprise_StoreLayout extends Google_Model
+class Appointments_Google_Service_AndroidEnterprise_StoreLayout extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3601,12 +3601,12 @@ class Google_Service_AndroidEnterprise_StoreLayout extends Google_Model
   }
 }
 
-class Google_Service_AndroidEnterprise_StoreLayoutClustersListResponse extends Google_Collection
+class Appointments_Google_Service_AndroidEnterprise_StoreLayoutClustersListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'cluster';
   protected $internal_gapi_mappings = array(
   );
-  protected $clusterType = 'Google_Service_AndroidEnterprise_StoreCluster';
+  protected $clusterType = 'Appointments_Google_Service_AndroidEnterprise_StoreCluster';
   protected $clusterDataType = 'array';
   public $kind;
 
@@ -3629,13 +3629,13 @@ class Google_Service_AndroidEnterprise_StoreLayoutClustersListResponse extends G
   }
 }
 
-class Google_Service_AndroidEnterprise_StoreLayoutPagesListResponse extends Google_Collection
+class Appointments_Google_Service_AndroidEnterprise_StoreLayoutPagesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'page';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $pageType = 'Google_Service_AndroidEnterprise_StorePage';
+  protected $pageType = 'Appointments_Google_Service_AndroidEnterprise_StorePage';
   protected $pageDataType = 'array';
 
 
@@ -3657,7 +3657,7 @@ class Google_Service_AndroidEnterprise_StoreLayoutPagesListResponse extends Goog
   }
 }
 
-class Google_Service_AndroidEnterprise_StorePage extends Google_Collection
+class Appointments_Google_Service_AndroidEnterprise_StorePage extends Appointments_Google_Collection
 {
   protected $collection_key = 'name';
   protected $internal_gapi_mappings = array(
@@ -3665,7 +3665,7 @@ class Google_Service_AndroidEnterprise_StorePage extends Google_Collection
   public $id;
   public $kind;
   public $link;
-  protected $nameType = 'Google_Service_AndroidEnterprise_LocalizedText';
+  protected $nameType = 'Appointments_Google_Service_AndroidEnterprise_LocalizedText';
   protected $nameDataType = 'array';
 
 
@@ -3703,7 +3703,7 @@ class Google_Service_AndroidEnterprise_StorePage extends Google_Collection
   }
 }
 
-class Google_Service_AndroidEnterprise_User extends Google_Model
+class Appointments_Google_Service_AndroidEnterprise_User extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3738,7 +3738,7 @@ class Google_Service_AndroidEnterprise_User extends Google_Model
   }
 }
 
-class Google_Service_AndroidEnterprise_UserToken extends Google_Model
+class Appointments_Google_Service_AndroidEnterprise_UserToken extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3773,13 +3773,13 @@ class Google_Service_AndroidEnterprise_UserToken extends Google_Model
   }
 }
 
-class Google_Service_AndroidEnterprise_UsersListResponse extends Google_Collection
+class Appointments_Google_Service_AndroidEnterprise_UsersListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'user';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $userType = 'Google_Service_AndroidEnterprise_User';
+  protected $userType = 'Appointments_Google_Service_AndroidEnterprise_User';
   protected $userDataType = 'array';
 
 

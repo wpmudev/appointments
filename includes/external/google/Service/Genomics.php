@@ -29,7 +29,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Genomics extends Google_Service
+class Appointments_Google_Service_Genomics extends Appointments_Google_Service
 {
   /** View and manage your data in Google BigQuery. */
   const BIGQUERY =
@@ -63,9 +63,9 @@ class Google_Service_Genomics extends Google_Service
   /**
    * Constructs the internal representation of the Genomics service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://genomics.googleapis.com/';
@@ -73,7 +73,7 @@ class Google_Service_Genomics extends Google_Service
     $this->version = 'v1';
     $this->serviceName = 'genomics';
 
-    $this->callsets = new Google_Service_Genomics_Callsets_Resource(
+    $this->callsets = new Appointments_Google_Service_Genomics_Callsets_Resource(
         $this,
         $this->serviceName,
         'callsets',
@@ -125,7 +125,7 @@ class Google_Service_Genomics extends Google_Service
           )
         )
     );
-    $this->datasets = new Google_Service_Genomics_Datasets_Resource(
+    $this->datasets = new Appointments_Google_Service_Genomics_Datasets_Resource(
         $this,
         $this->serviceName,
         'datasets',
@@ -230,7 +230,7 @@ class Google_Service_Genomics extends Google_Service
           )
         )
     );
-    $this->operations = new Google_Service_Genomics_Operations_Resource(
+    $this->operations = new Appointments_Google_Service_Genomics_Operations_Resource(
         $this,
         $this->serviceName,
         'operations',
@@ -282,7 +282,7 @@ class Google_Service_Genomics extends Google_Service
           )
         )
     );
-    $this->readgroupsets = new Google_Service_Genomics_Readgroupsets_Resource(
+    $this->readgroupsets = new Appointments_Google_Service_Genomics_Readgroupsets_Resource(
         $this,
         $this->serviceName,
         'readgroupsets',
@@ -344,7 +344,7 @@ class Google_Service_Genomics extends Google_Service
           )
         )
     );
-    $this->readgroupsets_coveragebuckets = new Google_Service_Genomics_ReadgroupsetsCoveragebuckets_Resource(
+    $this->readgroupsets_coveragebuckets = new Appointments_Google_Service_Genomics_ReadgroupsetsCoveragebuckets_Resource(
         $this,
         $this->serviceName,
         'coveragebuckets',
@@ -388,7 +388,7 @@ class Google_Service_Genomics extends Google_Service
           )
         )
     );
-    $this->reads = new Google_Service_Genomics_Reads_Resource(
+    $this->reads = new Appointments_Google_Service_Genomics_Reads_Resource(
         $this,
         $this->serviceName,
         'reads',
@@ -406,7 +406,7 @@ class Google_Service_Genomics extends Google_Service
           )
         )
     );
-    $this->references = new Google_Service_Genomics_References_Resource(
+    $this->references = new Appointments_Google_Service_Genomics_References_Resource(
         $this,
         $this->serviceName,
         'references',
@@ -430,7 +430,7 @@ class Google_Service_Genomics extends Google_Service
           )
         )
     );
-    $this->references_bases = new Google_Service_Genomics_ReferencesBases_Resource(
+    $this->references_bases = new Appointments_Google_Service_Genomics_ReferencesBases_Resource(
         $this,
         $this->serviceName,
         'bases',
@@ -466,7 +466,7 @@ class Google_Service_Genomics extends Google_Service
           )
         )
     );
-    $this->referencesets = new Google_Service_Genomics_Referencesets_Resource(
+    $this->referencesets = new Appointments_Google_Service_Genomics_Referencesets_Resource(
         $this,
         $this->serviceName,
         'referencesets',
@@ -490,7 +490,7 @@ class Google_Service_Genomics extends Google_Service
           )
         )
     );
-    $this->variants = new Google_Service_Genomics_Variants_Resource(
+    $this->variants = new Appointments_Google_Service_Genomics_Variants_Resource(
         $this,
         $this->serviceName,
         'variants',
@@ -550,7 +550,7 @@ class Google_Service_Genomics extends Google_Service
           )
         )
     );
-    $this->variantsets = new Google_Service_Genomics_Variantsets_Resource(
+    $this->variantsets = new Appointments_Google_Service_Genomics_Variantsets_Resource(
         $this,
         $this->serviceName,
         'variantsets',
@@ -620,11 +620,11 @@ class Google_Service_Genomics extends Google_Service
  * The "callsets" collection of methods.
  * Typical usage is:
  *  <code>
- *   $genomicsService = new Google_Service_Genomics(...);
+ *   $genomicsService = new Appointments_Google_Service_Genomics(...);
  *   $callsets = $genomicsService->callsets;
  *  </code>
  */
-class Google_Service_Genomics_Callsets_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Genomics_Callsets_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -633,15 +633,15 @@ class Google_Service_Genomics_Callsets_Resource extends Google_Service_Resource
    * Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
    * (callsets.create)
    *
-   * @param Google_CallSet $postBody
+   * @param Appointments_Google_CallSet $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_CallSet
+   * @return Appointments_Google_Service_Genomics_CallSet
    */
-  public function create(Google_Service_Genomics_CallSet $postBody, $optParams = array())
+  public function create(Appointments_Google_Service_Genomics_CallSet $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_Genomics_CallSet");
+    return $this->call('create', array($params), "Appointments_Google_Service_Genomics_CallSet");
   }
 
   /**
@@ -652,13 +652,13 @@ class Google_Service_Genomics_Callsets_Resource extends Google_Service_Resource
    *
    * @param string $callSetId The ID of the call set to be deleted.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_Empty
+   * @return Appointments_Google_Service_Genomics_Empty
    */
   public function delete($callSetId, $optParams = array())
   {
     $params = array('callSetId' => $callSetId);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Genomics_Empty");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Genomics_Empty");
   }
 
   /**
@@ -669,13 +669,13 @@ class Google_Service_Genomics_Callsets_Resource extends Google_Service_Resource
    *
    * @param string $callSetId The ID of the call set.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_CallSet
+   * @return Appointments_Google_Service_Genomics_CallSet
    */
   public function get($callSetId, $optParams = array())
   {
     $params = array('callSetId' => $callSetId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Genomics_CallSet");
+    return $this->call('get', array($params), "Appointments_Google_Service_Genomics_CallSet");
   }
 
   /**
@@ -685,19 +685,19 @@ class Google_Service_Genomics_Callsets_Resource extends Google_Service_Resource
    * This method supports patch semantics. (callsets.patch)
    *
    * @param string $callSetId The ID of the call set to be updated.
-   * @param Google_CallSet $postBody
+   * @param Appointments_Google_CallSet $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param string updateMask An optional mask specifying which fields to
    * update. At this time, the only mutable field is name. The only acceptable
    * value is "name". If unspecified, all mutable fields will be updated.
-   * @return Google_Service_Genomics_CallSet
+   * @return Appointments_Google_Service_Genomics_CallSet
    */
-  public function patch($callSetId, Google_Service_Genomics_CallSet $postBody, $optParams = array())
+  public function patch($callSetId, Appointments_Google_Service_Genomics_CallSet $postBody, $optParams = array())
   {
     $params = array('callSetId' => $callSetId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Genomics_CallSet");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Genomics_CallSet");
   }
 
   /**
@@ -708,15 +708,15 @@ class Google_Service_Genomics_Callsets_Resource extends Google_Service_Resource
    * s/blob/v0.5.1/src/main/resources/avro/variantmethods.avdl#L178).
    * (callsets.search)
    *
-   * @param Google_SearchCallSetsRequest $postBody
+   * @param Appointments_Google_SearchCallSetsRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_SearchCallSetsResponse
+   * @return Appointments_Google_Service_Genomics_SearchCallSetsResponse
    */
-  public function search(Google_Service_Genomics_SearchCallSetsRequest $postBody, $optParams = array())
+  public function search(Appointments_Google_Service_Genomics_SearchCallSetsRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('search', array($params), "Google_Service_Genomics_SearchCallSetsResponse");
+    return $this->call('search', array($params), "Appointments_Google_Service_Genomics_SearchCallSetsResponse");
   }
 }
 
@@ -724,11 +724,11 @@ class Google_Service_Genomics_Callsets_Resource extends Google_Service_Resource
  * The "datasets" collection of methods.
  * Typical usage is:
  *  <code>
- *   $genomicsService = new Google_Service_Genomics(...);
+ *   $genomicsService = new Appointments_Google_Service_Genomics(...);
  *   $datasets = $genomicsService->datasets;
  *  </code>
  */
-class Google_Service_Genomics_Datasets_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Genomics_Datasets_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -737,15 +737,15 @@ class Google_Service_Genomics_Datasets_Resource extends Google_Service_Resource
    * Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
    * (datasets.create)
    *
-   * @param Google_Dataset $postBody
+   * @param Appointments_Google_Dataset $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_Dataset
+   * @return Appointments_Google_Service_Genomics_Dataset
    */
-  public function create(Google_Service_Genomics_Dataset $postBody, $optParams = array())
+  public function create(Appointments_Google_Service_Genomics_Dataset $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_Genomics_Dataset");
+    return $this->call('create', array($params), "Appointments_Google_Service_Genomics_Dataset");
   }
 
   /**
@@ -756,13 +756,13 @@ class Google_Service_Genomics_Datasets_Resource extends Google_Service_Resource
    *
    * @param string $datasetId The ID of the dataset to be deleted.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_Empty
+   * @return Appointments_Google_Service_Genomics_Empty
    */
   public function delete($datasetId, $optParams = array())
   {
     $params = array('datasetId' => $datasetId);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Genomics_Empty");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Genomics_Empty");
   }
 
   /**
@@ -773,13 +773,13 @@ class Google_Service_Genomics_Datasets_Resource extends Google_Service_Resource
    *
    * @param string $datasetId The ID of the dataset.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_Dataset
+   * @return Appointments_Google_Service_Genomics_Dataset
    */
   public function get($datasetId, $optParams = array())
   {
     $params = array('datasetId' => $datasetId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Genomics_Dataset");
+    return $this->call('get', array($params), "Appointments_Google_Service_Genomics_Dataset");
   }
 
   /**
@@ -791,15 +791,15 @@ class Google_Service_Genomics_Datasets_Resource extends Google_Service_Resource
    *
    * @param string $resource REQUIRED: The resource for which policy is being
    * specified. Format is `datasets/`.
-   * @param Google_GetIamPolicyRequest $postBody
+   * @param Appointments_Google_GetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_Policy
+   * @return Appointments_Google_Service_Genomics_Policy
    */
-  public function getIamPolicy($resource, Google_Service_Genomics_GetIamPolicyRequest $postBody, $optParams = array())
+  public function getIamPolicy($resource, Appointments_Google_Service_Genomics_GetIamPolicyRequest $postBody, $optParams = array())
   {
     $params = array('resource' => $resource, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('getIamPolicy', array($params), "Google_Service_Genomics_Policy");
+    return $this->call('getIamPolicy', array($params), "Appointments_Google_Service_Genomics_Policy");
   }
 
   /**
@@ -816,13 +816,13 @@ class Google_Service_Genomics_Datasets_Resource extends Google_Service_Resource
    * @opt_param string pageToken The continuation token, which is used to page
    * through large result sets. To get the next page of results, set this
    * parameter to the value of `nextPageToken` from the previous response.
-   * @return Google_Service_Genomics_ListDatasetsResponse
+   * @return Appointments_Google_Service_Genomics_ListDatasetsResponse
    */
   public function listDatasets($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Genomics_ListDatasetsResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Genomics_ListDatasetsResponse");
   }
 
   /**
@@ -832,19 +832,19 @@ class Google_Service_Genomics_Datasets_Resource extends Google_Service_Resource
    * This method supports patch semantics. (datasets.patch)
    *
    * @param string $datasetId The ID of the dataset to be updated.
-   * @param Google_Dataset $postBody
+   * @param Appointments_Google_Dataset $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param string updateMask An optional mask specifying which fields to
    * update. At this time, the only mutable field is name. The only acceptable
    * value is "name". If unspecified, all mutable fields will be updated.
-   * @return Google_Service_Genomics_Dataset
+   * @return Appointments_Google_Service_Genomics_Dataset
    */
-  public function patch($datasetId, Google_Service_Genomics_Dataset $postBody, $optParams = array())
+  public function patch($datasetId, Appointments_Google_Service_Genomics_Dataset $postBody, $optParams = array())
   {
     $params = array('datasetId' => $datasetId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Genomics_Dataset");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Genomics_Dataset");
   }
 
   /**
@@ -856,15 +856,15 @@ class Google_Service_Genomics_Datasets_Resource extends Google_Service_Resource
    *
    * @param string $resource REQUIRED: The resource for which policy is being
    * specified. Format is `datasets/`.
-   * @param Google_SetIamPolicyRequest $postBody
+   * @param Appointments_Google_SetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_Policy
+   * @return Appointments_Google_Service_Genomics_Policy
    */
-  public function setIamPolicy($resource, Google_Service_Genomics_SetIamPolicyRequest $postBody, $optParams = array())
+  public function setIamPolicy($resource, Appointments_Google_Service_Genomics_SetIamPolicyRequest $postBody, $optParams = array())
   {
     $params = array('resource' => $resource, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setIamPolicy', array($params), "Google_Service_Genomics_Policy");
+    return $this->call('setIamPolicy', array($params), "Appointments_Google_Service_Genomics_Policy");
   }
 
   /**
@@ -876,15 +876,15 @@ class Google_Service_Genomics_Datasets_Resource extends Google_Service_Resource
    *
    * @param string $resource REQUIRED: The resource for which policy is being
    * specified. Format is `datasets/`.
-   * @param Google_TestIamPermissionsRequest $postBody
+   * @param Appointments_Google_TestIamPermissionsRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_TestIamPermissionsResponse
+   * @return Appointments_Google_Service_Genomics_TestIamPermissionsResponse
    */
-  public function testIamPermissions($resource, Google_Service_Genomics_TestIamPermissionsRequest $postBody, $optParams = array())
+  public function testIamPermissions($resource, Appointments_Google_Service_Genomics_TestIamPermissionsRequest $postBody, $optParams = array())
   {
     $params = array('resource' => $resource, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('testIamPermissions', array($params), "Google_Service_Genomics_TestIamPermissionsResponse");
+    return $this->call('testIamPermissions', array($params), "Appointments_Google_Service_Genomics_TestIamPermissionsResponse");
   }
 
   /**
@@ -895,15 +895,15 @@ class Google_Service_Genomics_Datasets_Resource extends Google_Service_Resource
    * after the deletion occurred. (datasets.undelete)
    *
    * @param string $datasetId The ID of the dataset to be undeleted.
-   * @param Google_UndeleteDatasetRequest $postBody
+   * @param Appointments_Google_UndeleteDatasetRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_Dataset
+   * @return Appointments_Google_Service_Genomics_Dataset
    */
-  public function undelete($datasetId, Google_Service_Genomics_UndeleteDatasetRequest $postBody, $optParams = array())
+  public function undelete($datasetId, Appointments_Google_Service_Genomics_UndeleteDatasetRequest $postBody, $optParams = array())
   {
     $params = array('datasetId' => $datasetId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('undelete', array($params), "Google_Service_Genomics_Dataset");
+    return $this->call('undelete', array($params), "Appointments_Google_Service_Genomics_Dataset");
   }
 }
 
@@ -911,11 +911,11 @@ class Google_Service_Genomics_Datasets_Resource extends Google_Service_Resource
  * The "operations" collection of methods.
  * Typical usage is:
  *  <code>
- *   $genomicsService = new Google_Service_Genomics(...);
+ *   $genomicsService = new Appointments_Google_Service_Genomics(...);
  *   $operations = $genomicsService->operations;
  *  </code>
  */
-class Google_Service_Genomics_Operations_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Genomics_Operations_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -926,15 +926,15 @@ class Google_Service_Genomics_Operations_Resource extends Google_Service_Resourc
    * cancellation. (operations.cancel)
    *
    * @param string $name The name of the operation resource to be cancelled.
-   * @param Google_CancelOperationRequest $postBody
+   * @param Appointments_Google_CancelOperationRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_Empty
+   * @return Appointments_Google_Service_Genomics_Empty
    */
-  public function cancel($name, Google_Service_Genomics_CancelOperationRequest $postBody, $optParams = array())
+  public function cancel($name, Appointments_Google_Service_Genomics_CancelOperationRequest $postBody, $optParams = array())
   {
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('cancel', array($params), "Google_Service_Genomics_Empty");
+    return $this->call('cancel', array($params), "Appointments_Google_Service_Genomics_Empty");
   }
 
   /**
@@ -944,13 +944,13 @@ class Google_Service_Genomics_Operations_Resource extends Google_Service_Resourc
    *
    * @param string $name The name of the operation resource.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_Operation
+   * @return Appointments_Google_Service_Genomics_Operation
    */
   public function get($name, $optParams = array())
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Genomics_Operation");
+    return $this->call('get', array($params), "Appointments_Google_Service_Genomics_Operation");
   }
 
   /**
@@ -969,13 +969,13 @@ class Google_Service_Genomics_Operations_Resource extends Google_Service_Resourc
    * @opt_param int pageSize The maximum number of results to return. If
    * unspecified, defaults to 256. The maximum value is 2048.
    * @opt_param string pageToken The standard list page token.
-   * @return Google_Service_Genomics_ListOperationsResponse
+   * @return Appointments_Google_Service_Genomics_ListOperationsResponse
    */
   public function listOperations($name, $optParams = array())
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Genomics_ListOperationsResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Genomics_ListOperationsResponse");
   }
 }
 
@@ -983,11 +983,11 @@ class Google_Service_Genomics_Operations_Resource extends Google_Service_Resourc
  * The "readgroupsets" collection of methods.
  * Typical usage is:
  *  <code>
- *   $genomicsService = new Google_Service_Genomics(...);
+ *   $genomicsService = new Appointments_Google_Service_Genomics(...);
  *   $readgroupsets = $genomicsService->readgroupsets;
  *  </code>
  */
-class Google_Service_Genomics_Readgroupsets_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Genomics_Readgroupsets_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1000,13 +1000,13 @@ class Google_Service_Genomics_Readgroupsets_Resource extends Google_Service_Reso
    * caller must have WRITE permissions to the dataset associated with this read
    * group set.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_Empty
+   * @return Appointments_Google_Service_Genomics_Empty
    */
   public function delete($readGroupSetId, $optParams = array())
   {
     $params = array('readGroupSetId' => $readGroupSetId);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Genomics_Empty");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Genomics_Empty");
   }
 
   /**
@@ -1021,15 +1021,15 @@ class Google_Service_Genomics_Readgroupsets_Resource extends Google_Service_Reso
    *
    * @param string $readGroupSetId Required. The ID of the read group set to
    * export. The caller must have READ access to this read group set.
-   * @param Google_ExportReadGroupSetRequest $postBody
+   * @param Appointments_Google_ExportReadGroupSetRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_Operation
+   * @return Appointments_Google_Service_Genomics_Operation
    */
-  public function export($readGroupSetId, Google_Service_Genomics_ExportReadGroupSetRequest $postBody, $optParams = array())
+  public function export($readGroupSetId, Appointments_Google_Service_Genomics_ExportReadGroupSetRequest $postBody, $optParams = array())
   {
     $params = array('readGroupSetId' => $readGroupSetId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('export', array($params), "Google_Service_Genomics_Operation");
+    return $this->call('export', array($params), "Appointments_Google_Service_Genomics_Operation");
   }
 
   /**
@@ -1040,13 +1040,13 @@ class Google_Service_Genomics_Readgroupsets_Resource extends Google_Service_Reso
    *
    * @param string $readGroupSetId The ID of the read group set.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_ReadGroupSet
+   * @return Appointments_Google_Service_Genomics_ReadGroupSet
    */
   public function get($readGroupSetId, $optParams = array())
   {
     $params = array('readGroupSetId' => $readGroupSetId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Genomics_ReadGroupSet");
+    return $this->call('get', array($params), "Appointments_Google_Service_Genomics_ReadGroupSet");
   }
 
   /**
@@ -1063,15 +1063,15 @@ class Google_Service_Genomics_Readgroupsets_Resource extends Google_Service_Reso
    * reads will be stripped of positional information (reference name and
    * position) (readgroupsets.import)
    *
-   * @param Google_ImportReadGroupSetsRequest $postBody
+   * @param Appointments_Google_ImportReadGroupSetsRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_Operation
+   * @return Appointments_Google_Service_Genomics_Operation
    */
-  public function import(Google_Service_Genomics_ImportReadGroupSetsRequest $postBody, $optParams = array())
+  public function import(Appointments_Google_Service_Genomics_ImportReadGroupSetsRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('import', array($params), "Google_Service_Genomics_Operation");
+    return $this->call('import', array($params), "Appointments_Google_Service_Genomics_Operation");
   }
 
   /**
@@ -1083,19 +1083,19 @@ class Google_Service_Genomics_Readgroupsets_Resource extends Google_Service_Reso
    * @param string $readGroupSetId The ID of the read group set to be updated. The
    * caller must have WRITE permissions to the dataset associated with this read
    * group set.
-   * @param Google_ReadGroupSet $postBody
+   * @param Appointments_Google_ReadGroupSet $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param string updateMask An optional mask specifying which fields to
    * update. Supported fields: * name. * referenceSetId. Leaving `updateMask`
    * unset is equivalent to specifying all mutable fields.
-   * @return Google_Service_Genomics_ReadGroupSet
+   * @return Appointments_Google_Service_Genomics_ReadGroupSet
    */
-  public function patch($readGroupSetId, Google_Service_Genomics_ReadGroupSet $postBody, $optParams = array())
+  public function patch($readGroupSetId, Appointments_Google_Service_Genomics_ReadGroupSet $postBody, $optParams = array())
   {
     $params = array('readGroupSetId' => $readGroupSetId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Genomics_ReadGroupSet");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Genomics_ReadGroupSet");
   }
 
   /**
@@ -1106,15 +1106,15 @@ class Google_Service_Genomics_Readgroupsets_Resource extends Google_Service_Reso
    * chemas/blob/v0.5.1/src/main/resources/avro/readmethods.avdl#L135).
    * (readgroupsets.search)
    *
-   * @param Google_SearchReadGroupSetsRequest $postBody
+   * @param Appointments_Google_SearchReadGroupSetsRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_SearchReadGroupSetsResponse
+   * @return Appointments_Google_Service_Genomics_SearchReadGroupSetsResponse
    */
-  public function search(Google_Service_Genomics_SearchReadGroupSetsRequest $postBody, $optParams = array())
+  public function search(Appointments_Google_Service_Genomics_SearchReadGroupSetsRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('search', array($params), "Google_Service_Genomics_SearchReadGroupSetsResponse");
+    return $this->call('search', array($params), "Appointments_Google_Service_Genomics_SearchReadGroupSetsResponse");
   }
 }
 
@@ -1122,11 +1122,11 @@ class Google_Service_Genomics_Readgroupsets_Resource extends Google_Service_Reso
  * The "coveragebuckets" collection of methods.
  * Typical usage is:
  *  <code>
- *   $genomicsService = new Google_Service_Genomics(...);
+ *   $genomicsService = new Appointments_Google_Service_Genomics(...);
  *   $coveragebuckets = $genomicsService->coveragebuckets;
  *  </code>
  */
-class Google_Service_Genomics_ReadgroupsetsCoveragebuckets_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Genomics_ReadgroupsetsCoveragebuckets_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1165,13 +1165,13 @@ class Google_Service_Genomics_ReadgroupsetsCoveragebuckets_Resource extends Goog
    * parameter to the value of `nextPageToken` from the previous response.
    * @opt_param int pageSize The maximum number of results to return in a single
    * page. If unspecified, defaults to 1024. The maximum value is 2048.
-   * @return Google_Service_Genomics_ListCoverageBucketsResponse
+   * @return Appointments_Google_Service_Genomics_ListCoverageBucketsResponse
    */
   public function listReadgroupsetsCoveragebuckets($readGroupSetId, $optParams = array())
   {
     $params = array('readGroupSetId' => $readGroupSetId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Genomics_ListCoverageBucketsResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Genomics_ListCoverageBucketsResponse");
   }
 }
 
@@ -1179,11 +1179,11 @@ class Google_Service_Genomics_ReadgroupsetsCoveragebuckets_Resource extends Goog
  * The "reads" collection of methods.
  * Typical usage is:
  *  <code>
- *   $genomicsService = new Google_Service_Genomics(...);
+ *   $genomicsService = new Appointments_Google_Service_Genomics(...);
  *   $reads = $genomicsService->reads;
  *  </code>
  */
-class Google_Service_Genomics_Reads_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Genomics_Reads_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1204,30 +1204,30 @@ class Google_Service_Genomics_Reads_Resource extends Google_Service_Resource
    * [GlobalAllianceApi.searchReads](https://github.com/ga4gh/schemas/blob/v0.5.1/
    * src/main/resources/avro/readmethods.avdl#L85). (reads.search)
    *
-   * @param Google_SearchReadsRequest $postBody
+   * @param Appointments_Google_SearchReadsRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_SearchReadsResponse
+   * @return Appointments_Google_Service_Genomics_SearchReadsResponse
    */
-  public function search(Google_Service_Genomics_SearchReadsRequest $postBody, $optParams = array())
+  public function search(Appointments_Google_Service_Genomics_SearchReadsRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('search', array($params), "Google_Service_Genomics_SearchReadsResponse");
+    return $this->call('search', array($params), "Appointments_Google_Service_Genomics_SearchReadsResponse");
   }
 
   /**
    * Returns a stream of all the reads matching the search request, ordered by
    * reference name, position, and ID. (reads.stream)
    *
-   * @param Google_StreamReadsRequest $postBody
+   * @param Appointments_Google_StreamReadsRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_StreamReadsResponse
+   * @return Appointments_Google_Service_Genomics_StreamReadsResponse
    */
-  public function stream(Google_Service_Genomics_StreamReadsRequest $postBody, $optParams = array())
+  public function stream(Appointments_Google_Service_Genomics_StreamReadsRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('stream', array($params), "Google_Service_Genomics_StreamReadsResponse");
+    return $this->call('stream', array($params), "Appointments_Google_Service_Genomics_StreamReadsResponse");
   }
 }
 
@@ -1235,11 +1235,11 @@ class Google_Service_Genomics_Reads_Resource extends Google_Service_Resource
  * The "references" collection of methods.
  * Typical usage is:
  *  <code>
- *   $genomicsService = new Google_Service_Genomics(...);
+ *   $genomicsService = new Appointments_Google_Service_Genomics(...);
  *   $references = $genomicsService->references;
  *  </code>
  */
-class Google_Service_Genomics_References_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Genomics_References_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1252,13 +1252,13 @@ class Google_Service_Genomics_References_Resource extends Google_Service_Resourc
    *
    * @param string $referenceId The ID of the reference.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_Reference
+   * @return Appointments_Google_Service_Genomics_Reference
    */
   public function get($referenceId, $optParams = array())
   {
     $params = array('referenceId' => $referenceId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Genomics_Reference");
+    return $this->call('get', array($params), "Appointments_Google_Service_Genomics_Reference");
   }
 
   /**
@@ -1269,15 +1269,15 @@ class Google_Service_Genomics_References_Resource extends Google_Service_Resourc
    * mas/blob/v0.5.1/src/main/resources/avro/referencemethods.avdl#L146).
    * (references.search)
    *
-   * @param Google_SearchReferencesRequest $postBody
+   * @param Appointments_Google_SearchReferencesRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_SearchReferencesResponse
+   * @return Appointments_Google_Service_Genomics_SearchReferencesResponse
    */
-  public function search(Google_Service_Genomics_SearchReferencesRequest $postBody, $optParams = array())
+  public function search(Appointments_Google_Service_Genomics_SearchReferencesRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('search', array($params), "Google_Service_Genomics_SearchReferencesResponse");
+    return $this->call('search', array($params), "Appointments_Google_Service_Genomics_SearchReferencesResponse");
   }
 }
 
@@ -1285,11 +1285,11 @@ class Google_Service_Genomics_References_Resource extends Google_Service_Resourc
  * The "bases" collection of methods.
  * Typical usage is:
  *  <code>
- *   $genomicsService = new Google_Service_Genomics(...);
+ *   $genomicsService = new Appointments_Google_Service_Genomics(...);
  *   $bases = $genomicsService->bases;
  *  </code>
  */
-class Google_Service_Genomics_ReferencesBases_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Genomics_ReferencesBases_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1313,13 +1313,13 @@ class Google_Service_Genomics_ReferencesBases_Resource extends Google_Service_Re
    * @opt_param int pageSize The maximum number of bases to return in a single
    * page. If unspecified, defaults to 200Kbp (kilo base pairs). The maximum value
    * is 10Mbp (mega base pairs).
-   * @return Google_Service_Genomics_ListBasesResponse
+   * @return Appointments_Google_Service_Genomics_ListBasesResponse
    */
   public function listReferencesBases($referenceId, $optParams = array())
   {
     $params = array('referenceId' => $referenceId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Genomics_ListBasesResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Genomics_ListBasesResponse");
   }
 }
 
@@ -1327,11 +1327,11 @@ class Google_Service_Genomics_ReferencesBases_Resource extends Google_Service_Re
  * The "referencesets" collection of methods.
  * Typical usage is:
  *  <code>
- *   $genomicsService = new Google_Service_Genomics(...);
+ *   $genomicsService = new Appointments_Google_Service_Genomics(...);
  *   $referencesets = $genomicsService->referencesets;
  *  </code>
  */
-class Google_Service_Genomics_Referencesets_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Genomics_Referencesets_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1344,13 +1344,13 @@ class Google_Service_Genomics_Referencesets_Resource extends Google_Service_Reso
    *
    * @param string $referenceSetId The ID of the reference set.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_ReferenceSet
+   * @return Appointments_Google_Service_Genomics_ReferenceSet
    */
   public function get($referenceSetId, $optParams = array())
   {
     $params = array('referenceSetId' => $referenceSetId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Genomics_ReferenceSet");
+    return $this->call('get', array($params), "Appointments_Google_Service_Genomics_ReferenceSet");
   }
 
   /**
@@ -1361,15 +1361,15 @@ class Google_Service_Genomics_Referencesets_Resource extends Google_Service_Reso
    * om/ga4gh/schemas/blob/v0.5.1/src/main/resources/avro/referencemethods.avdl#L7
    * 1) (referencesets.search)
    *
-   * @param Google_SearchReferenceSetsRequest $postBody
+   * @param Appointments_Google_SearchReferenceSetsRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_SearchReferenceSetsResponse
+   * @return Appointments_Google_Service_Genomics_SearchReferenceSetsResponse
    */
-  public function search(Google_Service_Genomics_SearchReferenceSetsRequest $postBody, $optParams = array())
+  public function search(Appointments_Google_Service_Genomics_SearchReferenceSetsRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('search', array($params), "Google_Service_Genomics_SearchReferenceSetsResponse");
+    return $this->call('search', array($params), "Appointments_Google_Service_Genomics_SearchReferenceSetsResponse");
   }
 }
 
@@ -1377,11 +1377,11 @@ class Google_Service_Genomics_Referencesets_Resource extends Google_Service_Reso
  * The "variants" collection of methods.
  * Typical usage is:
  *  <code>
- *   $genomicsService = new Google_Service_Genomics(...);
+ *   $genomicsService = new Appointments_Google_Service_Genomics(...);
  *   $variants = $genomicsService->variants;
  *  </code>
  */
-class Google_Service_Genomics_Variants_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Genomics_Variants_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1390,15 +1390,15 @@ class Google_Service_Genomics_Variants_Resource extends Google_Service_Resource
    * Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)
    * (variants.create)
    *
-   * @param Google_Variant $postBody
+   * @param Appointments_Google_Variant $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_Variant
+   * @return Appointments_Google_Service_Genomics_Variant
    */
-  public function create(Google_Service_Genomics_Variant $postBody, $optParams = array())
+  public function create(Appointments_Google_Service_Genomics_Variant $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_Genomics_Variant");
+    return $this->call('create', array($params), "Appointments_Google_Service_Genomics_Variant");
   }
 
   /**
@@ -1409,13 +1409,13 @@ class Google_Service_Genomics_Variants_Resource extends Google_Service_Resource
    *
    * @param string $variantId The ID of the variant to be deleted.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_Empty
+   * @return Appointments_Google_Service_Genomics_Empty
    */
   public function delete($variantId, $optParams = array())
   {
     $params = array('variantId' => $variantId);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Genomics_Empty");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Genomics_Empty");
   }
 
   /**
@@ -1426,13 +1426,13 @@ class Google_Service_Genomics_Variants_Resource extends Google_Service_Resource
    *
    * @param string $variantId The ID of the variant.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_Variant
+   * @return Appointments_Google_Service_Genomics_Variant
    */
   public function get($variantId, $optParams = array())
   {
     $params = array('variantId' => $variantId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Genomics_Variant");
+    return $this->call('get', array($params), "Appointments_Google_Service_Genomics_Variant");
   }
 
   /**
@@ -1451,15 +1451,15 @@ class Google_Service_Genomics_Variants_Resource extends Google_Service_Resource
    * context. Imported VCF headers are appended to the metadata already in a
    * variant set. (variants.import)
    *
-   * @param Google_ImportVariantsRequest $postBody
+   * @param Appointments_Google_ImportVariantsRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_Operation
+   * @return Appointments_Google_Service_Genomics_Operation
    */
-  public function import(Google_Service_Genomics_ImportVariantsRequest $postBody, $optParams = array())
+  public function import(Appointments_Google_Service_Genomics_ImportVariantsRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('import', array($params), "Google_Service_Genomics_Operation");
+    return $this->call('import', array($params), "Appointments_Google_Service_Genomics_Operation");
   }
 
   /**
@@ -1470,19 +1470,19 @@ class Google_Service_Genomics_Variants_Resource extends Google_Service_Resource
    * its calls. (variants.patch)
    *
    * @param string $variantId The ID of the variant to be updated.
-   * @param Google_Variant $postBody
+   * @param Appointments_Google_Variant $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param string updateMask An optional mask specifying which fields to
    * update. At this time, mutable fields are names and info. Acceptable values
    * are "names" and "info". If unspecified, all mutable fields will be updated.
-   * @return Google_Service_Genomics_Variant
+   * @return Appointments_Google_Service_Genomics_Variant
    */
-  public function patch($variantId, Google_Service_Genomics_Variant $postBody, $optParams = array())
+  public function patch($variantId, Appointments_Google_Service_Genomics_Variant $postBody, $optParams = array())
   {
     $params = array('variantId' => $variantId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Genomics_Variant");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Genomics_Variant");
   }
 
   /**
@@ -1493,30 +1493,30 @@ class Google_Service_Genomics_Variants_Resource extends Google_Service_Resource
    * s/blob/v0.5.1/src/main/resources/avro/variantmethods.avdl#L126).
    * (variants.search)
    *
-   * @param Google_SearchVariantsRequest $postBody
+   * @param Appointments_Google_SearchVariantsRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_SearchVariantsResponse
+   * @return Appointments_Google_Service_Genomics_SearchVariantsResponse
    */
-  public function search(Google_Service_Genomics_SearchVariantsRequest $postBody, $optParams = array())
+  public function search(Appointments_Google_Service_Genomics_SearchVariantsRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('search', array($params), "Google_Service_Genomics_SearchVariantsResponse");
+    return $this->call('search', array($params), "Appointments_Google_Service_Genomics_SearchVariantsResponse");
   }
 
   /**
    * Returns a stream of all the variants matching the search request, ordered by
    * reference name, position, and ID. (variants.stream)
    *
-   * @param Google_StreamVariantsRequest $postBody
+   * @param Appointments_Google_StreamVariantsRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_StreamVariantsResponse
+   * @return Appointments_Google_Service_Genomics_StreamVariantsResponse
    */
-  public function stream(Google_Service_Genomics_StreamVariantsRequest $postBody, $optParams = array())
+  public function stream(Appointments_Google_Service_Genomics_StreamVariantsRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('stream', array($params), "Google_Service_Genomics_StreamVariantsResponse");
+    return $this->call('stream', array($params), "Appointments_Google_Service_Genomics_StreamVariantsResponse");
   }
 }
 
@@ -1524,11 +1524,11 @@ class Google_Service_Genomics_Variants_Resource extends Google_Service_Resource
  * The "variantsets" collection of methods.
  * Typical usage is:
  *  <code>
- *   $genomicsService = new Google_Service_Genomics(...);
+ *   $genomicsService = new Appointments_Google_Service_Genomics(...);
  *   $variantsets = $genomicsService->variantsets;
  *  </code>
  */
-class Google_Service_Genomics_Variantsets_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Genomics_Variantsets_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1539,15 +1539,15 @@ class Google_Service_Genomics_Variantsets_Resource extends Google_Service_Resour
    * are optional. Note that the `id` field will be ignored, as this is assigned
    * by the server. (variantsets.create)
    *
-   * @param Google_VariantSet $postBody
+   * @param Appointments_Google_VariantSet $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_VariantSet
+   * @return Appointments_Google_Service_Genomics_VariantSet
    */
-  public function create(Google_Service_Genomics_VariantSet $postBody, $optParams = array())
+  public function create(Appointments_Google_Service_Genomics_VariantSet $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_Genomics_VariantSet");
+    return $this->call('create', array($params), "Appointments_Google_Service_Genomics_VariantSet");
   }
 
   /**
@@ -1558,13 +1558,13 @@ class Google_Service_Genomics_Variantsets_Resource extends Google_Service_Resour
    *
    * @param string $variantSetId The ID of the variant set to be deleted.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_Empty
+   * @return Appointments_Google_Service_Genomics_Empty
    */
   public function delete($variantSetId, $optParams = array())
   {
     $params = array('variantSetId' => $variantSetId);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Genomics_Empty");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Genomics_Empty");
   }
 
   /**
@@ -1576,15 +1576,15 @@ class Google_Service_Genomics_Variantsets_Resource extends Google_Service_Resour
    * @param string $variantSetId Required. The ID of the variant set that contains
    * variant data which should be exported. The caller must have READ access to
    * this variant set.
-   * @param Google_ExportVariantSetRequest $postBody
+   * @param Appointments_Google_ExportVariantSetRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_Operation
+   * @return Appointments_Google_Service_Genomics_Operation
    */
-  public function export($variantSetId, Google_Service_Genomics_ExportVariantSetRequest $postBody, $optParams = array())
+  public function export($variantSetId, Appointments_Google_Service_Genomics_ExportVariantSetRequest $postBody, $optParams = array())
   {
     $params = array('variantSetId' => $variantSetId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('export', array($params), "Google_Service_Genomics_Operation");
+    return $this->call('export', array($params), "Appointments_Google_Service_Genomics_Operation");
   }
 
   /**
@@ -1595,13 +1595,13 @@ class Google_Service_Genomics_Variantsets_Resource extends Google_Service_Resour
    *
    * @param string $variantSetId Required. The ID of the variant set.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_VariantSet
+   * @return Appointments_Google_Service_Genomics_VariantSet
    */
   public function get($variantSetId, $optParams = array())
   {
     $params = array('variantSetId' => $variantSetId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Genomics_VariantSet");
+    return $this->call('get', array($params), "Appointments_Google_Service_Genomics_VariantSet");
   }
 
   /**
@@ -1612,19 +1612,19 @@ class Google_Service_Genomics_Variantsets_Resource extends Google_Service_Resour
    *
    * @param string $variantSetId The ID of the variant to be updated (must already
    * exist).
-   * @param Google_VariantSet $postBody
+   * @param Appointments_Google_VariantSet $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param string updateMask An optional mask specifying which fields to
    * update. Supported fields: * metadata. Leaving `updateMask` unset is
    * equivalent to specifying all mutable fields.
-   * @return Google_Service_Genomics_VariantSet
+   * @return Appointments_Google_Service_Genomics_VariantSet
    */
-  public function patch($variantSetId, Google_Service_Genomics_VariantSet $postBody, $optParams = array())
+  public function patch($variantSetId, Appointments_Google_Service_Genomics_VariantSet $postBody, $optParams = array())
   {
     $params = array('variantSetId' => $variantSetId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Genomics_VariantSet");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Genomics_VariantSet");
   }
 
   /**
@@ -1635,22 +1635,22 @@ class Google_Service_Genomics_Variantsets_Resource extends Google_Service_Resour
    * /ga4gh/schemas/blob/v0.5.1/src/main/resources/avro/variantmethods.avdl#L49).
    * (variantsets.search)
    *
-   * @param Google_SearchVariantSetsRequest $postBody
+   * @param Appointments_Google_SearchVariantSetsRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Genomics_SearchVariantSetsResponse
+   * @return Appointments_Google_Service_Genomics_SearchVariantSetsResponse
    */
-  public function search(Google_Service_Genomics_SearchVariantSetsRequest $postBody, $optParams = array())
+  public function search(Appointments_Google_Service_Genomics_SearchVariantSetsRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('search', array($params), "Google_Service_Genomics_SearchVariantSetsResponse");
+    return $this->call('search', array($params), "Appointments_Google_Service_Genomics_SearchVariantSetsResponse");
   }
 }
 
 
 
 
-class Google_Service_Genomics_Binding extends Google_Collection
+class Appointments_Google_Service_Genomics_Binding extends Appointments_Google_Collection
 {
   protected $collection_key = 'members';
   protected $internal_gapi_mappings = array(
@@ -1677,7 +1677,7 @@ class Google_Service_Genomics_Binding extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_CallSet extends Google_Collection
+class Appointments_Google_Service_Genomics_CallSet extends Appointments_Google_Collection
 {
   protected $collection_key = 'variantSetIds';
   protected $internal_gapi_mappings = array(
@@ -1740,11 +1740,11 @@ class Google_Service_Genomics_CallSet extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_CancelOperationRequest extends Google_Model
+class Appointments_Google_Service_Genomics_CancelOperationRequest extends Appointments_Google_Model
 {
 }
 
-class Google_Service_Genomics_CigarUnit extends Google_Model
+class Appointments_Google_Service_Genomics_CigarUnit extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1779,11 +1779,11 @@ class Google_Service_Genomics_CigarUnit extends Google_Model
   }
 }
 
-class Google_Service_Genomics_CloudAuditOptions extends Google_Model
+class Appointments_Google_Service_Genomics_CloudAuditOptions extends Appointments_Google_Model
 {
 }
 
-class Google_Service_Genomics_Condition extends Google_Collection
+class Appointments_Google_Service_Genomics_Condition extends Appointments_Google_Collection
 {
   protected $collection_key = 'values';
   protected $internal_gapi_mappings = array(
@@ -1846,7 +1846,7 @@ class Google_Service_Genomics_Condition extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_CounterOptions extends Google_Model
+class Appointments_Google_Service_Genomics_CounterOptions extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1872,12 +1872,12 @@ class Google_Service_Genomics_CounterOptions extends Google_Model
   }
 }
 
-class Google_Service_Genomics_CoverageBucket extends Google_Model
+class Appointments_Google_Service_Genomics_CoverageBucket extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $meanCoverage;
-  protected $rangeType = 'Google_Service_Genomics_Range';
+  protected $rangeType = 'Appointments_Google_Service_Genomics_Range';
   protected $rangeDataType = '';
 
 
@@ -1889,7 +1889,7 @@ class Google_Service_Genomics_CoverageBucket extends Google_Model
   {
     return $this->meanCoverage;
   }
-  public function setRange(Google_Service_Genomics_Range $range)
+  public function setRange(Appointments_Google_Service_Genomics_Range $range)
   {
     $this->range = $range;
   }
@@ -1899,11 +1899,11 @@ class Google_Service_Genomics_CoverageBucket extends Google_Model
   }
 }
 
-class Google_Service_Genomics_DataAccessOptions extends Google_Model
+class Appointments_Google_Service_Genomics_DataAccessOptions extends Appointments_Google_Model
 {
 }
 
-class Google_Service_Genomics_Dataset extends Google_Model
+class Appointments_Google_Service_Genomics_Dataset extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1947,11 +1947,11 @@ class Google_Service_Genomics_Dataset extends Google_Model
   }
 }
 
-class Google_Service_Genomics_Empty extends Google_Model
+class Appointments_Google_Service_Genomics_Empty extends Appointments_Google_Model
 {
 }
 
-class Google_Service_Genomics_Experiment extends Google_Model
+class Appointments_Google_Service_Genomics_Experiment extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1995,7 +1995,7 @@ class Google_Service_Genomics_Experiment extends Google_Model
   }
 }
 
-class Google_Service_Genomics_ExportReadGroupSetRequest extends Google_Collection
+class Appointments_Google_Service_Genomics_ExportReadGroupSetRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'referenceNames';
   protected $internal_gapi_mappings = array(
@@ -2031,7 +2031,7 @@ class Google_Service_Genomics_ExportReadGroupSetRequest extends Google_Collectio
   }
 }
 
-class Google_Service_Genomics_ExportVariantSetRequest extends Google_Collection
+class Appointments_Google_Service_Genomics_ExportVariantSetRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'callSetIds';
   protected $internal_gapi_mappings = array(
@@ -2085,11 +2085,11 @@ class Google_Service_Genomics_ExportVariantSetRequest extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_GetIamPolicyRequest extends Google_Model
+class Appointments_Google_Service_Genomics_GetIamPolicyRequest extends Appointments_Google_Model
 {
 }
 
-class Google_Service_Genomics_ImportReadGroupSetsRequest extends Google_Collection
+class Appointments_Google_Service_Genomics_ImportReadGroupSetsRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'sourceUris';
   protected $internal_gapi_mappings = array(
@@ -2134,7 +2134,7 @@ class Google_Service_Genomics_ImportReadGroupSetsRequest extends Google_Collecti
   }
 }
 
-class Google_Service_Genomics_ImportReadGroupSetsResponse extends Google_Collection
+class Appointments_Google_Service_Genomics_ImportReadGroupSetsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'readGroupSetIds';
   protected $internal_gapi_mappings = array(
@@ -2152,7 +2152,7 @@ class Google_Service_Genomics_ImportReadGroupSetsResponse extends Google_Collect
   }
 }
 
-class Google_Service_Genomics_ImportVariantsRequest extends Google_Collection
+class Appointments_Google_Service_Genomics_ImportVariantsRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'sourceUris';
   protected $internal_gapi_mappings = array(
@@ -2197,7 +2197,7 @@ class Google_Service_Genomics_ImportVariantsRequest extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_ImportVariantsResponse extends Google_Collection
+class Appointments_Google_Service_Genomics_ImportVariantsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'callSetIds';
   protected $internal_gapi_mappings = array(
@@ -2215,15 +2215,15 @@ class Google_Service_Genomics_ImportVariantsResponse extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_LinearAlignment extends Google_Collection
+class Appointments_Google_Service_Genomics_LinearAlignment extends Appointments_Google_Collection
 {
   protected $collection_key = 'cigar';
   protected $internal_gapi_mappings = array(
   );
-  protected $cigarType = 'Google_Service_Genomics_CigarUnit';
+  protected $cigarType = 'Appointments_Google_Service_Genomics_CigarUnit';
   protected $cigarDataType = 'array';
   public $mappingQuality;
-  protected $positionType = 'Google_Service_Genomics_Position';
+  protected $positionType = 'Appointments_Google_Service_Genomics_Position';
   protected $positionDataType = '';
 
 
@@ -2243,7 +2243,7 @@ class Google_Service_Genomics_LinearAlignment extends Google_Collection
   {
     return $this->mappingQuality;
   }
-  public function setPosition(Google_Service_Genomics_Position $position)
+  public function setPosition(Appointments_Google_Service_Genomics_Position $position)
   {
     $this->position = $position;
   }
@@ -2253,7 +2253,7 @@ class Google_Service_Genomics_LinearAlignment extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_ListBasesResponse extends Google_Model
+class Appointments_Google_Service_Genomics_ListBasesResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2288,13 +2288,13 @@ class Google_Service_Genomics_ListBasesResponse extends Google_Model
   }
 }
 
-class Google_Service_Genomics_ListCoverageBucketsResponse extends Google_Collection
+class Appointments_Google_Service_Genomics_ListCoverageBucketsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'coverageBuckets';
   protected $internal_gapi_mappings = array(
   );
   public $bucketWidth;
-  protected $coverageBucketsType = 'Google_Service_Genomics_CoverageBucket';
+  protected $coverageBucketsType = 'Appointments_Google_Service_Genomics_CoverageBucket';
   protected $coverageBucketsDataType = 'array';
   public $nextPageToken;
 
@@ -2325,12 +2325,12 @@ class Google_Service_Genomics_ListCoverageBucketsResponse extends Google_Collect
   }
 }
 
-class Google_Service_Genomics_ListDatasetsResponse extends Google_Collection
+class Appointments_Google_Service_Genomics_ListDatasetsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'datasets';
   protected $internal_gapi_mappings = array(
   );
-  protected $datasetsType = 'Google_Service_Genomics_Dataset';
+  protected $datasetsType = 'Appointments_Google_Service_Genomics_Dataset';
   protected $datasetsDataType = 'array';
   public $nextPageToken;
 
@@ -2353,13 +2353,13 @@ class Google_Service_Genomics_ListDatasetsResponse extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_ListOperationsResponse extends Google_Collection
+class Appointments_Google_Service_Genomics_ListOperationsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'operations';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $operationsType = 'Google_Service_Genomics_Operation';
+  protected $operationsType = 'Appointments_Google_Service_Genomics_Operation';
   protected $operationsDataType = 'array';
 
 
@@ -2381,19 +2381,19 @@ class Google_Service_Genomics_ListOperationsResponse extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_LogConfig extends Google_Model
+class Appointments_Google_Service_Genomics_LogConfig extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $cloudAuditType = 'Google_Service_Genomics_CloudAuditOptions';
+  protected $cloudAuditType = 'Appointments_Google_Service_Genomics_CloudAuditOptions';
   protected $cloudAuditDataType = '';
-  protected $counterType = 'Google_Service_Genomics_CounterOptions';
+  protected $counterType = 'Appointments_Google_Service_Genomics_CounterOptions';
   protected $counterDataType = '';
-  protected $dataAccessType = 'Google_Service_Genomics_DataAccessOptions';
+  protected $dataAccessType = 'Appointments_Google_Service_Genomics_DataAccessOptions';
   protected $dataAccessDataType = '';
 
 
-  public function setCloudAudit(Google_Service_Genomics_CloudAuditOptions $cloudAudit)
+  public function setCloudAudit(Appointments_Google_Service_Genomics_CloudAuditOptions $cloudAudit)
   {
     $this->cloudAudit = $cloudAudit;
   }
@@ -2401,7 +2401,7 @@ class Google_Service_Genomics_LogConfig extends Google_Model
   {
     return $this->cloudAudit;
   }
-  public function setCounter(Google_Service_Genomics_CounterOptions $counter)
+  public function setCounter(Appointments_Google_Service_Genomics_CounterOptions $counter)
   {
     $this->counter = $counter;
   }
@@ -2409,7 +2409,7 @@ class Google_Service_Genomics_LogConfig extends Google_Model
   {
     return $this->counter;
   }
-  public function setDataAccess(Google_Service_Genomics_DataAccessOptions $dataAccess)
+  public function setDataAccess(Appointments_Google_Service_Genomics_DataAccessOptions $dataAccess)
   {
     $this->dataAccess = $dataAccess;
   }
@@ -2419,12 +2419,12 @@ class Google_Service_Genomics_LogConfig extends Google_Model
   }
 }
 
-class Google_Service_Genomics_Operation extends Google_Model
+class Appointments_Google_Service_Genomics_Operation extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $done;
-  protected $errorType = 'Google_Service_Genomics_Status';
+  protected $errorType = 'Appointments_Google_Service_Genomics_Status';
   protected $errorDataType = '';
   public $metadata;
   public $name;
@@ -2439,7 +2439,7 @@ class Google_Service_Genomics_Operation extends Google_Model
   {
     return $this->done;
   }
-  public function setError(Google_Service_Genomics_Status $error)
+  public function setError(Appointments_Google_Service_Genomics_Status $error)
   {
     $this->error = $error;
   }
@@ -2473,7 +2473,7 @@ class Google_Service_Genomics_Operation extends Google_Model
   }
 }
 
-class Google_Service_Genomics_OperationEvent extends Google_Model
+class Appointments_Google_Service_Genomics_OperationEvent extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2490,13 +2490,13 @@ class Google_Service_Genomics_OperationEvent extends Google_Model
   }
 }
 
-class Google_Service_Genomics_OperationMetadata extends Google_Collection
+class Appointments_Google_Service_Genomics_OperationMetadata extends Appointments_Google_Collection
 {
   protected $collection_key = 'events';
   protected $internal_gapi_mappings = array(
   );
   public $createTime;
-  protected $eventsType = 'Google_Service_Genomics_OperationEvent';
+  protected $eventsType = 'Appointments_Google_Service_Genomics_OperationEvent';
   protected $eventsDataType = 'array';
   public $projectId;
   public $request;
@@ -2536,15 +2536,15 @@ class Google_Service_Genomics_OperationMetadata extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_Policy extends Google_Collection
+class Appointments_Google_Service_Genomics_Policy extends Appointments_Google_Collection
 {
   protected $collection_key = 'rules';
   protected $internal_gapi_mappings = array(
   );
-  protected $bindingsType = 'Google_Service_Genomics_Binding';
+  protected $bindingsType = 'Appointments_Google_Service_Genomics_Binding';
   protected $bindingsDataType = 'array';
   public $etag;
-  protected $rulesType = 'Google_Service_Genomics_Rule';
+  protected $rulesType = 'Appointments_Google_Service_Genomics_Rule';
   protected $rulesDataType = 'array';
   public $version;
 
@@ -2583,7 +2583,7 @@ class Google_Service_Genomics_Policy extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_Position extends Google_Model
+class Appointments_Google_Service_Genomics_Position extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2618,7 +2618,7 @@ class Google_Service_Genomics_Position extends Google_Model
   }
 }
 
-class Google_Service_Genomics_Program extends Google_Model
+class Appointments_Google_Service_Genomics_Program extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2671,7 +2671,7 @@ class Google_Service_Genomics_Program extends Google_Model
   }
 }
 
-class Google_Service_Genomics_Range extends Google_Model
+class Appointments_Google_Service_Genomics_Range extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2706,14 +2706,14 @@ class Google_Service_Genomics_Range extends Google_Model
   }
 }
 
-class Google_Service_Genomics_Read extends Google_Collection
+class Appointments_Google_Service_Genomics_Read extends Appointments_Google_Collection
 {
   protected $collection_key = 'alignedQuality';
   protected $internal_gapi_mappings = array(
   );
   public $alignedQuality;
   public $alignedSequence;
-  protected $alignmentType = 'Google_Service_Genomics_LinearAlignment';
+  protected $alignmentType = 'Appointments_Google_Service_Genomics_LinearAlignment';
   protected $alignmentDataType = '';
   public $duplicateFragment;
   public $failedVendorQualityChecks;
@@ -2721,7 +2721,7 @@ class Google_Service_Genomics_Read extends Google_Collection
   public $fragmentName;
   public $id;
   public $info;
-  protected $nextMatePositionType = 'Google_Service_Genomics_Position';
+  protected $nextMatePositionType = 'Appointments_Google_Service_Genomics_Position';
   protected $nextMatePositionDataType = '';
   public $numberReads;
   public $properPlacement;
@@ -2748,7 +2748,7 @@ class Google_Service_Genomics_Read extends Google_Collection
   {
     return $this->alignedSequence;
   }
-  public function setAlignment(Google_Service_Genomics_LinearAlignment $alignment)
+  public function setAlignment(Appointments_Google_Service_Genomics_LinearAlignment $alignment)
   {
     $this->alignment = $alignment;
   }
@@ -2804,7 +2804,7 @@ class Google_Service_Genomics_Read extends Google_Collection
   {
     return $this->info;
   }
-  public function setNextMatePosition(Google_Service_Genomics_Position $nextMatePosition)
+  public function setNextMatePosition(Appointments_Google_Service_Genomics_Position $nextMatePosition)
   {
     $this->nextMatePosition = $nextMatePosition;
   }
@@ -2870,20 +2870,20 @@ class Google_Service_Genomics_Read extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_ReadGroup extends Google_Collection
+class Appointments_Google_Service_Genomics_ReadGroup extends Appointments_Google_Collection
 {
   protected $collection_key = 'programs';
   protected $internal_gapi_mappings = array(
   );
   public $datasetId;
   public $description;
-  protected $experimentType = 'Google_Service_Genomics_Experiment';
+  protected $experimentType = 'Appointments_Google_Service_Genomics_Experiment';
   protected $experimentDataType = '';
   public $id;
   public $info;
   public $name;
   public $predictedInsertSize;
-  protected $programsType = 'Google_Service_Genomics_Program';
+  protected $programsType = 'Appointments_Google_Service_Genomics_Program';
   protected $programsDataType = 'array';
   public $referenceSetId;
   public $sampleId;
@@ -2905,7 +2905,7 @@ class Google_Service_Genomics_ReadGroup extends Google_Collection
   {
     return $this->description;
   }
-  public function setExperiment(Google_Service_Genomics_Experiment $experiment)
+  public function setExperiment(Appointments_Google_Service_Genomics_Experiment $experiment)
   {
     $this->experiment = $experiment;
   }
@@ -2971,7 +2971,7 @@ class Google_Service_Genomics_ReadGroup extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_ReadGroupSet extends Google_Collection
+class Appointments_Google_Service_Genomics_ReadGroupSet extends Appointments_Google_Collection
 {
   protected $collection_key = 'readGroups';
   protected $internal_gapi_mappings = array(
@@ -2981,7 +2981,7 @@ class Google_Service_Genomics_ReadGroupSet extends Google_Collection
   public $id;
   public $info;
   public $name;
-  protected $readGroupsType = 'Google_Service_Genomics_ReadGroup';
+  protected $readGroupsType = 'Appointments_Google_Service_Genomics_ReadGroup';
   protected $readGroupsDataType = 'array';
   public $referenceSetId;
 
@@ -3044,7 +3044,7 @@ class Google_Service_Genomics_ReadGroupSet extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_Reference extends Google_Collection
+class Appointments_Google_Service_Genomics_Reference extends Appointments_Google_Collection
 {
   protected $collection_key = 'sourceAccessions';
   protected $internal_gapi_mappings = array(
@@ -3116,7 +3116,7 @@ class Google_Service_Genomics_Reference extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_ReferenceBound extends Google_Model
+class Appointments_Google_Service_Genomics_ReferenceBound extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3142,7 +3142,7 @@ class Google_Service_Genomics_ReferenceBound extends Google_Model
   }
 }
 
-class Google_Service_Genomics_ReferenceSet extends Google_Collection
+class Appointments_Google_Service_Genomics_ReferenceSet extends Appointments_Google_Collection
 {
   protected $collection_key = 'sourceAccessions';
   protected $internal_gapi_mappings = array(
@@ -3223,17 +3223,17 @@ class Google_Service_Genomics_ReferenceSet extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_Rule extends Google_Collection
+class Appointments_Google_Service_Genomics_Rule extends Appointments_Google_Collection
 {
   protected $collection_key = 'permissions';
   protected $internal_gapi_mappings = array(
   );
   public $action;
-  protected $conditionsType = 'Google_Service_Genomics_Condition';
+  protected $conditionsType = 'Appointments_Google_Service_Genomics_Condition';
   protected $conditionsDataType = 'array';
   public $description;
   public $in;
-  protected $logConfigType = 'Google_Service_Genomics_LogConfig';
+  protected $logConfigType = 'Appointments_Google_Service_Genomics_LogConfig';
   protected $logConfigDataType = 'array';
   public $notIn;
   public $permissions;
@@ -3297,7 +3297,7 @@ class Google_Service_Genomics_Rule extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_SearchCallSetsRequest extends Google_Collection
+class Appointments_Google_Service_Genomics_SearchCallSetsRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'variantSetIds';
   protected $internal_gapi_mappings = array(
@@ -3342,12 +3342,12 @@ class Google_Service_Genomics_SearchCallSetsRequest extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_SearchCallSetsResponse extends Google_Collection
+class Appointments_Google_Service_Genomics_SearchCallSetsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'callSets';
   protected $internal_gapi_mappings = array(
   );
-  protected $callSetsType = 'Google_Service_Genomics_CallSet';
+  protected $callSetsType = 'Appointments_Google_Service_Genomics_CallSet';
   protected $callSetsDataType = 'array';
   public $nextPageToken;
 
@@ -3370,7 +3370,7 @@ class Google_Service_Genomics_SearchCallSetsResponse extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_SearchReadGroupSetsRequest extends Google_Collection
+class Appointments_Google_Service_Genomics_SearchReadGroupSetsRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'datasetIds';
   protected $internal_gapi_mappings = array(
@@ -3415,13 +3415,13 @@ class Google_Service_Genomics_SearchReadGroupSetsRequest extends Google_Collecti
   }
 }
 
-class Google_Service_Genomics_SearchReadGroupSetsResponse extends Google_Collection
+class Appointments_Google_Service_Genomics_SearchReadGroupSetsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'readGroupSets';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $readGroupSetsType = 'Google_Service_Genomics_ReadGroupSet';
+  protected $readGroupSetsType = 'Appointments_Google_Service_Genomics_ReadGroupSet';
   protected $readGroupSetsDataType = 'array';
 
 
@@ -3443,7 +3443,7 @@ class Google_Service_Genomics_SearchReadGroupSetsResponse extends Google_Collect
   }
 }
 
-class Google_Service_Genomics_SearchReadsRequest extends Google_Collection
+class Appointments_Google_Service_Genomics_SearchReadsRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'readGroupSetIds';
   protected $internal_gapi_mappings = array(
@@ -3515,12 +3515,12 @@ class Google_Service_Genomics_SearchReadsRequest extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_SearchReadsResponse extends Google_Collection
+class Appointments_Google_Service_Genomics_SearchReadsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'alignments';
   protected $internal_gapi_mappings = array(
   );
-  protected $alignmentsType = 'Google_Service_Genomics_Read';
+  protected $alignmentsType = 'Appointments_Google_Service_Genomics_Read';
   protected $alignmentsDataType = 'array';
   public $nextPageToken;
 
@@ -3543,7 +3543,7 @@ class Google_Service_Genomics_SearchReadsResponse extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_SearchReferenceSetsRequest extends Google_Collection
+class Appointments_Google_Service_Genomics_SearchReferenceSetsRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'md5checksums';
   protected $internal_gapi_mappings = array(
@@ -3597,13 +3597,13 @@ class Google_Service_Genomics_SearchReferenceSetsRequest extends Google_Collecti
   }
 }
 
-class Google_Service_Genomics_SearchReferenceSetsResponse extends Google_Collection
+class Appointments_Google_Service_Genomics_SearchReferenceSetsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'referenceSets';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $referenceSetsType = 'Google_Service_Genomics_ReferenceSet';
+  protected $referenceSetsType = 'Appointments_Google_Service_Genomics_ReferenceSet';
   protected $referenceSetsDataType = 'array';
 
 
@@ -3625,7 +3625,7 @@ class Google_Service_Genomics_SearchReferenceSetsResponse extends Google_Collect
   }
 }
 
-class Google_Service_Genomics_SearchReferencesRequest extends Google_Collection
+class Appointments_Google_Service_Genomics_SearchReferencesRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'md5checksums';
   protected $internal_gapi_mappings = array(
@@ -3679,13 +3679,13 @@ class Google_Service_Genomics_SearchReferencesRequest extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_SearchReferencesResponse extends Google_Collection
+class Appointments_Google_Service_Genomics_SearchReferencesResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'references';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $referencesType = 'Google_Service_Genomics_Reference';
+  protected $referencesType = 'Appointments_Google_Service_Genomics_Reference';
   protected $referencesDataType = 'array';
 
 
@@ -3707,7 +3707,7 @@ class Google_Service_Genomics_SearchReferencesResponse extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_SearchVariantSetsRequest extends Google_Collection
+class Appointments_Google_Service_Genomics_SearchVariantSetsRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'datasetIds';
   protected $internal_gapi_mappings = array(
@@ -3743,13 +3743,13 @@ class Google_Service_Genomics_SearchVariantSetsRequest extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_SearchVariantSetsResponse extends Google_Collection
+class Appointments_Google_Service_Genomics_SearchVariantSetsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'variantSets';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $variantSetsType = 'Google_Service_Genomics_VariantSet';
+  protected $variantSetsType = 'Appointments_Google_Service_Genomics_VariantSet';
   protected $variantSetsDataType = 'array';
 
 
@@ -3771,7 +3771,7 @@ class Google_Service_Genomics_SearchVariantSetsResponse extends Google_Collectio
   }
 }
 
-class Google_Service_Genomics_SearchVariantsRequest extends Google_Collection
+class Appointments_Google_Service_Genomics_SearchVariantsRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'variantSetIds';
   protected $internal_gapi_mappings = array(
@@ -3861,13 +3861,13 @@ class Google_Service_Genomics_SearchVariantsRequest extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_SearchVariantsResponse extends Google_Collection
+class Appointments_Google_Service_Genomics_SearchVariantsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'variants';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $variantsType = 'Google_Service_Genomics_Variant';
+  protected $variantsType = 'Appointments_Google_Service_Genomics_Variant';
   protected $variantsDataType = 'array';
 
 
@@ -3889,15 +3889,15 @@ class Google_Service_Genomics_SearchVariantsResponse extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_SetIamPolicyRequest extends Google_Model
+class Appointments_Google_Service_Genomics_SetIamPolicyRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $policyType = 'Google_Service_Genomics_Policy';
+  protected $policyType = 'Appointments_Google_Service_Genomics_Policy';
   protected $policyDataType = '';
 
 
-  public function setPolicy(Google_Service_Genomics_Policy $policy)
+  public function setPolicy(Appointments_Google_Service_Genomics_Policy $policy)
   {
     $this->policy = $policy;
   }
@@ -3907,7 +3907,7 @@ class Google_Service_Genomics_SetIamPolicyRequest extends Google_Model
   }
 }
 
-class Google_Service_Genomics_Status extends Google_Collection
+class Appointments_Google_Service_Genomics_Status extends Appointments_Google_Collection
 {
   protected $collection_key = 'details';
   protected $internal_gapi_mappings = array(
@@ -3943,7 +3943,7 @@ class Google_Service_Genomics_Status extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_StreamReadsRequest extends Google_Model
+class Appointments_Google_Service_Genomics_StreamReadsRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3996,12 +3996,12 @@ class Google_Service_Genomics_StreamReadsRequest extends Google_Model
   }
 }
 
-class Google_Service_Genomics_StreamReadsResponse extends Google_Collection
+class Appointments_Google_Service_Genomics_StreamReadsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'alignments';
   protected $internal_gapi_mappings = array(
   );
-  protected $alignmentsType = 'Google_Service_Genomics_Read';
+  protected $alignmentsType = 'Appointments_Google_Service_Genomics_Read';
   protected $alignmentsDataType = 'array';
 
 
@@ -4015,7 +4015,7 @@ class Google_Service_Genomics_StreamReadsResponse extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_StreamVariantsRequest extends Google_Collection
+class Appointments_Google_Service_Genomics_StreamVariantsRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'callSetIds';
   protected $internal_gapi_mappings = array(
@@ -4078,12 +4078,12 @@ class Google_Service_Genomics_StreamVariantsRequest extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_StreamVariantsResponse extends Google_Collection
+class Appointments_Google_Service_Genomics_StreamVariantsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'variants';
   protected $internal_gapi_mappings = array(
   );
-  protected $variantsType = 'Google_Service_Genomics_Variant';
+  protected $variantsType = 'Appointments_Google_Service_Genomics_Variant';
   protected $variantsDataType = 'array';
 
 
@@ -4097,7 +4097,7 @@ class Google_Service_Genomics_StreamVariantsResponse extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_TestIamPermissionsRequest extends Google_Collection
+class Appointments_Google_Service_Genomics_TestIamPermissionsRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'permissions';
   protected $internal_gapi_mappings = array(
@@ -4115,7 +4115,7 @@ class Google_Service_Genomics_TestIamPermissionsRequest extends Google_Collectio
   }
 }
 
-class Google_Service_Genomics_TestIamPermissionsResponse extends Google_Collection
+class Appointments_Google_Service_Genomics_TestIamPermissionsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'permissions';
   protected $internal_gapi_mappings = array(
@@ -4133,17 +4133,17 @@ class Google_Service_Genomics_TestIamPermissionsResponse extends Google_Collecti
   }
 }
 
-class Google_Service_Genomics_UndeleteDatasetRequest extends Google_Model
+class Appointments_Google_Service_Genomics_UndeleteDatasetRequest extends Appointments_Google_Model
 {
 }
 
-class Google_Service_Genomics_Variant extends Google_Collection
+class Appointments_Google_Service_Genomics_Variant extends Appointments_Google_Collection
 {
   protected $collection_key = 'names';
   protected $internal_gapi_mappings = array(
   );
   public $alternateBases;
-  protected $callsType = 'Google_Service_Genomics_VariantCall';
+  protected $callsType = 'Appointments_Google_Service_Genomics_VariantCall';
   protected $callsDataType = 'array';
   public $created;
   public $end;
@@ -4264,7 +4264,7 @@ class Google_Service_Genomics_Variant extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_VariantCall extends Google_Collection
+class Appointments_Google_Service_Genomics_VariantCall extends Appointments_Google_Collection
 {
   protected $collection_key = 'genotypeLikelihood';
   protected $internal_gapi_mappings = array(
@@ -4327,16 +4327,16 @@ class Google_Service_Genomics_VariantCall extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_VariantSet extends Google_Collection
+class Appointments_Google_Service_Genomics_VariantSet extends Appointments_Google_Collection
 {
   protected $collection_key = 'referenceBounds';
   protected $internal_gapi_mappings = array(
   );
   public $datasetId;
   public $id;
-  protected $metadataType = 'Google_Service_Genomics_VariantSetMetadata';
+  protected $metadataType = 'Appointments_Google_Service_Genomics_VariantSetMetadata';
   protected $metadataDataType = 'array';
-  protected $referenceBoundsType = 'Google_Service_Genomics_ReferenceBound';
+  protected $referenceBoundsType = 'Appointments_Google_Service_Genomics_ReferenceBound';
   protected $referenceBoundsDataType = 'array';
   public $referenceSetId;
 
@@ -4383,7 +4383,7 @@ class Google_Service_Genomics_VariantSet extends Google_Collection
   }
 }
 
-class Google_Service_Genomics_VariantSetMetadata extends Google_Model
+class Appointments_Google_Service_Genomics_VariantSetMetadata extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );

@@ -26,7 +26,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_PlusDomains extends Google_Service
+class Appointments_Google_Service_PlusDomains extends Appointments_Google_Service
 {
   /** View your circles and the people and pages in them. */
   const PLUS_CIRCLES_READ =
@@ -70,9 +70,9 @@ class Google_Service_PlusDomains extends Google_Service
   /**
    * Constructs the internal representation of the PlusDomains service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -80,7 +80,7 @@ class Google_Service_PlusDomains extends Google_Service
     $this->version = 'v1';
     $this->serviceName = 'plusDomains';
 
-    $this->activities = new Google_Service_PlusDomains_Activities_Resource(
+    $this->activities = new Appointments_Google_Service_PlusDomains_Activities_Resource(
         $this,
         $this->serviceName,
         'activities',
@@ -137,7 +137,7 @@ class Google_Service_PlusDomains extends Google_Service
           )
         )
     );
-    $this->audiences = new Google_Service_PlusDomains_Audiences_Resource(
+    $this->audiences = new Appointments_Google_Service_PlusDomains_Audiences_Resource(
         $this,
         $this->serviceName,
         'audiences',
@@ -165,7 +165,7 @@ class Google_Service_PlusDomains extends Google_Service
           )
         )
     );
-    $this->circles = new Google_Service_PlusDomains_Circles_Resource(
+    $this->circles = new Appointments_Google_Service_PlusDomains_Circles_Resource(
         $this,
         $this->serviceName,
         'circles',
@@ -283,7 +283,7 @@ class Google_Service_PlusDomains extends Google_Service
           )
         )
     );
-    $this->comments = new Google_Service_PlusDomains_Comments_Resource(
+    $this->comments = new Appointments_Google_Service_PlusDomains_Comments_Resource(
         $this,
         $this->serviceName,
         'comments',
@@ -335,7 +335,7 @@ class Google_Service_PlusDomains extends Google_Service
           )
         )
     );
-    $this->media = new Google_Service_PlusDomains_Media_Resource(
+    $this->media = new Appointments_Google_Service_PlusDomains_Media_Resource(
         $this,
         $this->serviceName,
         'media',
@@ -360,7 +360,7 @@ class Google_Service_PlusDomains extends Google_Service
           )
         )
     );
-    $this->people = new Google_Service_PlusDomains_People_Resource(
+    $this->people = new Appointments_Google_Service_PlusDomains_People_Resource(
         $this,
         $this->serviceName,
         'people',
@@ -456,11 +456,11 @@ class Google_Service_PlusDomains extends Google_Service
  * The "activities" collection of methods.
  * Typical usage is:
  *  <code>
- *   $plusDomainsService = new Google_Service_PlusDomains(...);
+ *   $plusDomainsService = new Appointments_Google_Service_PlusDomains(...);
  *   $activities = $plusDomainsService->activities;
  *  </code>
  */
-class Google_Service_PlusDomains_Activities_Resource extends Google_Service_Resource
+class Appointments_Google_Service_PlusDomains_Activities_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -468,13 +468,13 @@ class Google_Service_PlusDomains_Activities_Resource extends Google_Service_Reso
    *
    * @param string $activityId The ID of the activity to get.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_PlusDomains_Activity
+   * @return Appointments_Google_Service_PlusDomains_Activity
    */
   public function get($activityId, $optParams = array())
   {
     $params = array('activityId' => $activityId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_PlusDomains_Activity");
+    return $this->call('get', array($params), "Appointments_Google_Service_PlusDomains_Activity");
   }
 
   /**
@@ -482,19 +482,19 @@ class Google_Service_PlusDomains_Activities_Resource extends Google_Service_Reso
    *
    * @param string $userId The ID of the user to create the activity on behalf of.
    * Its value should be "me", to indicate the authenticated user.
-   * @param Google_Activity $postBody
+   * @param Appointments_Google_Activity $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param bool preview If "true", extract the potential media attachments
    * for a URL. The response will include all possible attachments for a URL,
    * including video, photos, and articles based on the content of the page.
-   * @return Google_Service_PlusDomains_Activity
+   * @return Appointments_Google_Service_PlusDomains_Activity
    */
-  public function insert($userId, Google_Service_PlusDomains_Activity $postBody, $optParams = array())
+  public function insert($userId, Appointments_Google_Service_PlusDomains_Activity $postBody, $optParams = array())
   {
     $params = array('userId' => $userId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_PlusDomains_Activity");
+    return $this->call('insert', array($params), "Appointments_Google_Service_PlusDomains_Activity");
   }
 
   /**
@@ -512,13 +512,13 @@ class Google_Service_PlusDomains_Activities_Resource extends Google_Service_Reso
    * @opt_param string pageToken The continuation token, which is used to page
    * through large result sets. To get the next page of results, set this
    * parameter to the value of "nextPageToken" from the previous response.
-   * @return Google_Service_PlusDomains_ActivityFeed
+   * @return Appointments_Google_Service_PlusDomains_ActivityFeed
    */
   public function listActivities($userId, $collection, $optParams = array())
   {
     $params = array('userId' => $userId, 'collection' => $collection);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_PlusDomains_ActivityFeed");
+    return $this->call('list', array($params), "Appointments_Google_Service_PlusDomains_ActivityFeed");
   }
 }
 
@@ -526,11 +526,11 @@ class Google_Service_PlusDomains_Activities_Resource extends Google_Service_Reso
  * The "audiences" collection of methods.
  * Typical usage is:
  *  <code>
- *   $plusDomainsService = new Google_Service_PlusDomains(...);
+ *   $plusDomainsService = new Appointments_Google_Service_PlusDomains(...);
  *   $audiences = $plusDomainsService->audiences;
  *  </code>
  */
-class Google_Service_PlusDomains_Audiences_Resource extends Google_Service_Resource
+class Appointments_Google_Service_PlusDomains_Audiences_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -547,13 +547,13 @@ class Google_Service_PlusDomains_Audiences_Resource extends Google_Service_Resou
    * @opt_param string pageToken The continuation token, which is used to page
    * through large result sets. To get the next page of results, set this
    * parameter to the value of "nextPageToken" from the previous response.
-   * @return Google_Service_PlusDomains_AudiencesFeed
+   * @return Appointments_Google_Service_PlusDomains_AudiencesFeed
    */
   public function listAudiences($userId, $optParams = array())
   {
     $params = array('userId' => $userId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_PlusDomains_AudiencesFeed");
+    return $this->call('list', array($params), "Appointments_Google_Service_PlusDomains_AudiencesFeed");
   }
 }
 
@@ -561,11 +561,11 @@ class Google_Service_PlusDomains_Audiences_Resource extends Google_Service_Resou
  * The "circles" collection of methods.
  * Typical usage is:
  *  <code>
- *   $plusDomainsService = new Google_Service_PlusDomains(...);
+ *   $plusDomainsService = new Appointments_Google_Service_PlusDomains(...);
  *   $circles = $plusDomainsService->circles;
  *  </code>
  */
-class Google_Service_PlusDomains_Circles_Resource extends Google_Service_Resource
+class Appointments_Google_Service_PlusDomains_Circles_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -579,13 +579,13 @@ class Google_Service_PlusDomains_Circles_Resource extends Google_Service_Resourc
    * can be repeated.
    * @opt_param string userId IDs of the people to add to the circle. Optional,
    * can be repeated.
-   * @return Google_Service_PlusDomains_Circle
+   * @return Appointments_Google_Service_PlusDomains_Circle
    */
   public function addPeople($circleId, $optParams = array())
   {
     $params = array('circleId' => $circleId);
     $params = array_merge($params, $optParams);
-    return $this->call('addPeople', array($params), "Google_Service_PlusDomains_Circle");
+    return $this->call('addPeople', array($params), "Appointments_Google_Service_PlusDomains_Circle");
   }
 
   /**
@@ -593,13 +593,13 @@ class Google_Service_PlusDomains_Circles_Resource extends Google_Service_Resourc
    *
    * @param string $circleId The ID of the circle to get.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_PlusDomains_Circle
+   * @return Appointments_Google_Service_PlusDomains_Circle
    */
   public function get($circleId, $optParams = array())
   {
     $params = array('circleId' => $circleId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_PlusDomains_Circle");
+    return $this->call('get', array($params), "Appointments_Google_Service_PlusDomains_Circle");
   }
 
   /**
@@ -607,15 +607,15 @@ class Google_Service_PlusDomains_Circles_Resource extends Google_Service_Resourc
    *
    * @param string $userId The ID of the user to create the circle on behalf of.
    * The value "me" can be used to indicate the authenticated user.
-   * @param Google_Circle $postBody
+   * @param Appointments_Google_Circle $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_PlusDomains_Circle
+   * @return Appointments_Google_Service_PlusDomains_Circle
    */
-  public function insert($userId, Google_Service_PlusDomains_Circle $postBody, $optParams = array())
+  public function insert($userId, Appointments_Google_Service_PlusDomains_Circle $postBody, $optParams = array())
   {
     $params = array('userId' => $userId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_PlusDomains_Circle");
+    return $this->call('insert', array($params), "Appointments_Google_Service_PlusDomains_Circle");
   }
 
   /**
@@ -631,13 +631,13 @@ class Google_Service_PlusDomains_Circles_Resource extends Google_Service_Resourc
    * @opt_param string pageToken The continuation token, which is used to page
    * through large result sets. To get the next page of results, set this
    * parameter to the value of "nextPageToken" from the previous response.
-   * @return Google_Service_PlusDomains_CircleFeed
+   * @return Appointments_Google_Service_PlusDomains_CircleFeed
    */
   public function listCircles($userId, $optParams = array())
   {
     $params = array('userId' => $userId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_PlusDomains_CircleFeed");
+    return $this->call('list', array($params), "Appointments_Google_Service_PlusDomains_CircleFeed");
   }
 
   /**
@@ -645,15 +645,15 @@ class Google_Service_PlusDomains_Circles_Resource extends Google_Service_Resourc
    * (circles.patch)
    *
    * @param string $circleId The ID of the circle to update.
-   * @param Google_Circle $postBody
+   * @param Appointments_Google_Circle $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_PlusDomains_Circle
+   * @return Appointments_Google_Service_PlusDomains_Circle
    */
-  public function patch($circleId, Google_Service_PlusDomains_Circle $postBody, $optParams = array())
+  public function patch($circleId, Appointments_Google_Service_PlusDomains_Circle $postBody, $optParams = array())
   {
     $params = array('circleId' => $circleId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_PlusDomains_Circle");
+    return $this->call('patch', array($params), "Appointments_Google_Service_PlusDomains_Circle");
   }
 
   /**
@@ -691,15 +691,15 @@ class Google_Service_PlusDomains_Circles_Resource extends Google_Service_Resourc
    * Update a circle's description. (circles.update)
    *
    * @param string $circleId The ID of the circle to update.
-   * @param Google_Circle $postBody
+   * @param Appointments_Google_Circle $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_PlusDomains_Circle
+   * @return Appointments_Google_Service_PlusDomains_Circle
    */
-  public function update($circleId, Google_Service_PlusDomains_Circle $postBody, $optParams = array())
+  public function update($circleId, Appointments_Google_Service_PlusDomains_Circle $postBody, $optParams = array())
   {
     $params = array('circleId' => $circleId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_PlusDomains_Circle");
+    return $this->call('update', array($params), "Appointments_Google_Service_PlusDomains_Circle");
   }
 }
 
@@ -707,11 +707,11 @@ class Google_Service_PlusDomains_Circles_Resource extends Google_Service_Resourc
  * The "comments" collection of methods.
  * Typical usage is:
  *  <code>
- *   $plusDomainsService = new Google_Service_PlusDomains(...);
+ *   $plusDomainsService = new Appointments_Google_Service_PlusDomains(...);
  *   $comments = $plusDomainsService->comments;
  *  </code>
  */
-class Google_Service_PlusDomains_Comments_Resource extends Google_Service_Resource
+class Appointments_Google_Service_PlusDomains_Comments_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -719,28 +719,28 @@ class Google_Service_PlusDomains_Comments_Resource extends Google_Service_Resour
    *
    * @param string $commentId The ID of the comment to get.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_PlusDomains_Comment
+   * @return Appointments_Google_Service_PlusDomains_Comment
    */
   public function get($commentId, $optParams = array())
   {
     $params = array('commentId' => $commentId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_PlusDomains_Comment");
+    return $this->call('get', array($params), "Appointments_Google_Service_PlusDomains_Comment");
   }
 
   /**
    * Create a new comment in reply to an activity. (comments.insert)
    *
    * @param string $activityId The ID of the activity to reply to.
-   * @param Google_Comment $postBody
+   * @param Appointments_Google_Comment $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_PlusDomains_Comment
+   * @return Appointments_Google_Service_PlusDomains_Comment
    */
-  public function insert($activityId, Google_Service_PlusDomains_Comment $postBody, $optParams = array())
+  public function insert($activityId, Appointments_Google_Service_PlusDomains_Comment $postBody, $optParams = array())
   {
     $params = array('activityId' => $activityId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_PlusDomains_Comment");
+    return $this->call('insert', array($params), "Appointments_Google_Service_PlusDomains_Comment");
   }
 
   /**
@@ -756,13 +756,13 @@ class Google_Service_PlusDomains_Comments_Resource extends Google_Service_Resour
    * through large result sets. To get the next page of results, set this
    * parameter to the value of "nextPageToken" from the previous response.
    * @opt_param string sortOrder The order in which to sort the list of comments.
-   * @return Google_Service_PlusDomains_CommentFeed
+   * @return Appointments_Google_Service_PlusDomains_CommentFeed
    */
   public function listComments($activityId, $optParams = array())
   {
     $params = array('activityId' => $activityId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_PlusDomains_CommentFeed");
+    return $this->call('list', array($params), "Appointments_Google_Service_PlusDomains_CommentFeed");
   }
 }
 
@@ -770,11 +770,11 @@ class Google_Service_PlusDomains_Comments_Resource extends Google_Service_Resour
  * The "media" collection of methods.
  * Typical usage is:
  *  <code>
- *   $plusDomainsService = new Google_Service_PlusDomains(...);
+ *   $plusDomainsService = new Appointments_Google_Service_PlusDomains(...);
  *   $media = $plusDomainsService->media;
  *  </code>
  */
-class Google_Service_PlusDomains_Media_Resource extends Google_Service_Resource
+class Appointments_Google_Service_PlusDomains_Media_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -785,15 +785,15 @@ class Google_Service_PlusDomains_Media_Resource extends Google_Service_Resource
    *
    * @param string $userId The ID of the user to create the activity on behalf of.
    * @param string $collection
-   * @param Google_Media $postBody
+   * @param Appointments_Google_Media $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_PlusDomains_Media
+   * @return Appointments_Google_Service_PlusDomains_Media
    */
-  public function insert($userId, $collection, Google_Service_PlusDomains_Media $postBody, $optParams = array())
+  public function insert($userId, $collection, Appointments_Google_Service_PlusDomains_Media $postBody, $optParams = array())
   {
     $params = array('userId' => $userId, 'collection' => $collection, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_PlusDomains_Media");
+    return $this->call('insert', array($params), "Appointments_Google_Service_PlusDomains_Media");
   }
 }
 
@@ -801,11 +801,11 @@ class Google_Service_PlusDomains_Media_Resource extends Google_Service_Resource
  * The "people" collection of methods.
  * Typical usage is:
  *  <code>
- *   $plusDomainsService = new Google_Service_PlusDomains(...);
+ *   $plusDomainsService = new Appointments_Google_Service_PlusDomains(...);
  *   $people = $plusDomainsService->people;
  *  </code>
  */
-class Google_Service_PlusDomains_People_Resource extends Google_Service_Resource
+class Appointments_Google_Service_PlusDomains_People_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -814,13 +814,13 @@ class Google_Service_PlusDomains_People_Resource extends Google_Service_Resource
    * @param string $userId The ID of the person to get the profile for. The
    * special value "me" can be used to indicate the authenticated user.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_PlusDomains_Person
+   * @return Appointments_Google_Service_PlusDomains_Person
    */
   public function get($userId, $optParams = array())
   {
     $params = array('userId' => $userId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_PlusDomains_Person");
+    return $this->call('get', array($params), "Appointments_Google_Service_PlusDomains_Person");
   }
 
   /**
@@ -838,13 +838,13 @@ class Google_Service_PlusDomains_People_Resource extends Google_Service_Resource
    * @opt_param string pageToken The continuation token, which is used to page
    * through large result sets. To get the next page of results, set this
    * parameter to the value of "nextPageToken" from the previous response.
-   * @return Google_Service_PlusDomains_PeopleFeed
+   * @return Appointments_Google_Service_PlusDomains_PeopleFeed
    */
   public function listPeople($userId, $collection, $optParams = array())
   {
     $params = array('userId' => $userId, 'collection' => $collection);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_PlusDomains_PeopleFeed");
+    return $this->call('list', array($params), "Appointments_Google_Service_PlusDomains_PeopleFeed");
   }
 
   /**
@@ -862,13 +862,13 @@ class Google_Service_PlusDomains_People_Resource extends Google_Service_Resource
    * @opt_param string pageToken The continuation token, which is used to page
    * through large result sets. To get the next page of results, set this
    * parameter to the value of "nextPageToken" from the previous response.
-   * @return Google_Service_PlusDomains_PeopleFeed
+   * @return Appointments_Google_Service_PlusDomains_PeopleFeed
    */
   public function listByActivity($activityId, $collection, $optParams = array())
   {
     $params = array('activityId' => $activityId, 'collection' => $collection);
     $params = array_merge($params, $optParams);
-    return $this->call('listByActivity', array($params), "Google_Service_PlusDomains_PeopleFeed");
+    return $this->call('listByActivity', array($params), "Appointments_Google_Service_PlusDomains_PeopleFeed");
   }
 
   /**
@@ -883,27 +883,27 @@ class Google_Service_PlusDomains_People_Resource extends Google_Service_Resource
    * @opt_param string pageToken The continuation token, which is used to page
    * through large result sets. To get the next page of results, set this
    * parameter to the value of "nextPageToken" from the previous response.
-   * @return Google_Service_PlusDomains_PeopleFeed
+   * @return Appointments_Google_Service_PlusDomains_PeopleFeed
    */
   public function listByCircle($circleId, $optParams = array())
   {
     $params = array('circleId' => $circleId);
     $params = array_merge($params, $optParams);
-    return $this->call('listByCircle', array($params), "Google_Service_PlusDomains_PeopleFeed");
+    return $this->call('listByCircle', array($params), "Appointments_Google_Service_PlusDomains_PeopleFeed");
   }
 }
 
 
 
 
-class Google_Service_PlusDomains_Acl extends Google_Collection
+class Appointments_Google_Service_PlusDomains_Acl extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $description;
   public $domainRestricted;
-  protected $itemsType = 'Google_Service_PlusDomains_PlusDomainsAclentryResource';
+  protected $itemsType = 'Appointments_Google_Service_PlusDomains_PlusDomainsAclentryResource';
   protected $itemsDataType = 'array';
   public $kind;
 
@@ -942,13 +942,13 @@ class Google_Service_PlusDomains_Acl extends Google_Collection
   }
 }
 
-class Google_Service_PlusDomains_Activity extends Google_Model
+class Appointments_Google_Service_PlusDomains_Activity extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $accessType = 'Google_Service_PlusDomains_Acl';
+  protected $accessType = 'Appointments_Google_Service_PlusDomains_Acl';
   protected $accessDataType = '';
-  protected $actorType = 'Google_Service_PlusDomains_ActivityActor';
+  protected $actorType = 'Appointments_Google_Service_PlusDomains_ActivityActor';
   protected $actorDataType = '';
   public $address;
   public $annotation;
@@ -957,13 +957,13 @@ class Google_Service_PlusDomains_Activity extends Google_Model
   public $geocode;
   public $id;
   public $kind;
-  protected $locationType = 'Google_Service_PlusDomains_Place';
+  protected $locationType = 'Appointments_Google_Service_PlusDomains_Place';
   protected $locationDataType = '';
-  protected $objectType = 'Google_Service_PlusDomains_ActivityObject';
+  protected $objectType = 'Appointments_Google_Service_PlusDomains_ActivityObject';
   protected $objectDataType = '';
   public $placeId;
   public $placeName;
-  protected $providerType = 'Google_Service_PlusDomains_ActivityProvider';
+  protected $providerType = 'Appointments_Google_Service_PlusDomains_ActivityProvider';
   protected $providerDataType = '';
   public $published;
   public $radius;
@@ -973,7 +973,7 @@ class Google_Service_PlusDomains_Activity extends Google_Model
   public $verb;
 
 
-  public function setAccess(Google_Service_PlusDomains_Acl $access)
+  public function setAccess(Appointments_Google_Service_PlusDomains_Acl $access)
   {
     $this->access = $access;
   }
@@ -981,7 +981,7 @@ class Google_Service_PlusDomains_Activity extends Google_Model
   {
     return $this->access;
   }
-  public function setActor(Google_Service_PlusDomains_ActivityActor $actor)
+  public function setActor(Appointments_Google_Service_PlusDomains_ActivityActor $actor)
   {
     $this->actor = $actor;
   }
@@ -1045,7 +1045,7 @@ class Google_Service_PlusDomains_Activity extends Google_Model
   {
     return $this->kind;
   }
-  public function setLocation(Google_Service_PlusDomains_Place $location)
+  public function setLocation(Appointments_Google_Service_PlusDomains_Place $location)
   {
     $this->location = $location;
   }
@@ -1053,7 +1053,7 @@ class Google_Service_PlusDomains_Activity extends Google_Model
   {
     return $this->location;
   }
-  public function setObject(Google_Service_PlusDomains_ActivityObject $object)
+  public function setObject(Appointments_Google_Service_PlusDomains_ActivityObject $object)
   {
     $this->object = $object;
   }
@@ -1077,7 +1077,7 @@ class Google_Service_PlusDomains_Activity extends Google_Model
   {
     return $this->placeName;
   }
-  public function setProvider(Google_Service_PlusDomains_ActivityProvider $provider)
+  public function setProvider(Appointments_Google_Service_PlusDomains_ActivityProvider $provider)
   {
     $this->provider = $provider;
   }
@@ -1135,24 +1135,24 @@ class Google_Service_PlusDomains_Activity extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_ActivityActor extends Google_Model
+class Appointments_Google_Service_PlusDomains_ActivityActor extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $clientSpecificActorInfoType = 'Google_Service_PlusDomains_ActivityActorClientSpecificActorInfo';
+  protected $clientSpecificActorInfoType = 'Appointments_Google_Service_PlusDomains_ActivityActorClientSpecificActorInfo';
   protected $clientSpecificActorInfoDataType = '';
   public $displayName;
   public $id;
-  protected $imageType = 'Google_Service_PlusDomains_ActivityActorImage';
+  protected $imageType = 'Appointments_Google_Service_PlusDomains_ActivityActorImage';
   protected $imageDataType = '';
-  protected $nameType = 'Google_Service_PlusDomains_ActivityActorName';
+  protected $nameType = 'Appointments_Google_Service_PlusDomains_ActivityActorName';
   protected $nameDataType = '';
   public $url;
-  protected $verificationType = 'Google_Service_PlusDomains_ActivityActorVerification';
+  protected $verificationType = 'Appointments_Google_Service_PlusDomains_ActivityActorVerification';
   protected $verificationDataType = '';
 
 
-  public function setClientSpecificActorInfo(Google_Service_PlusDomains_ActivityActorClientSpecificActorInfo $clientSpecificActorInfo)
+  public function setClientSpecificActorInfo(Appointments_Google_Service_PlusDomains_ActivityActorClientSpecificActorInfo $clientSpecificActorInfo)
   {
     $this->clientSpecificActorInfo = $clientSpecificActorInfo;
   }
@@ -1176,7 +1176,7 @@ class Google_Service_PlusDomains_ActivityActor extends Google_Model
   {
     return $this->id;
   }
-  public function setImage(Google_Service_PlusDomains_ActivityActorImage $image)
+  public function setImage(Appointments_Google_Service_PlusDomains_ActivityActorImage $image)
   {
     $this->image = $image;
   }
@@ -1184,7 +1184,7 @@ class Google_Service_PlusDomains_ActivityActor extends Google_Model
   {
     return $this->image;
   }
-  public function setName(Google_Service_PlusDomains_ActivityActorName $name)
+  public function setName(Appointments_Google_Service_PlusDomains_ActivityActorName $name)
   {
     $this->name = $name;
   }
@@ -1200,7 +1200,7 @@ class Google_Service_PlusDomains_ActivityActor extends Google_Model
   {
     return $this->url;
   }
-  public function setVerification(Google_Service_PlusDomains_ActivityActorVerification $verification)
+  public function setVerification(Appointments_Google_Service_PlusDomains_ActivityActorVerification $verification)
   {
     $this->verification = $verification;
   }
@@ -1210,15 +1210,15 @@ class Google_Service_PlusDomains_ActivityActor extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_ActivityActorClientSpecificActorInfo extends Google_Model
+class Appointments_Google_Service_PlusDomains_ActivityActorClientSpecificActorInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $youtubeActorInfoType = 'Google_Service_PlusDomains_ActivityActorClientSpecificActorInfoYoutubeActorInfo';
+  protected $youtubeActorInfoType = 'Appointments_Google_Service_PlusDomains_ActivityActorClientSpecificActorInfoYoutubeActorInfo';
   protected $youtubeActorInfoDataType = '';
 
 
-  public function setYoutubeActorInfo(Google_Service_PlusDomains_ActivityActorClientSpecificActorInfoYoutubeActorInfo $youtubeActorInfo)
+  public function setYoutubeActorInfo(Appointments_Google_Service_PlusDomains_ActivityActorClientSpecificActorInfoYoutubeActorInfo $youtubeActorInfo)
   {
     $this->youtubeActorInfo = $youtubeActorInfo;
   }
@@ -1228,7 +1228,7 @@ class Google_Service_PlusDomains_ActivityActorClientSpecificActorInfo extends Go
   }
 }
 
-class Google_Service_PlusDomains_ActivityActorClientSpecificActorInfoYoutubeActorInfo extends Google_Model
+class Appointments_Google_Service_PlusDomains_ActivityActorClientSpecificActorInfoYoutubeActorInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1245,7 +1245,7 @@ class Google_Service_PlusDomains_ActivityActorClientSpecificActorInfoYoutubeActo
   }
 }
 
-class Google_Service_PlusDomains_ActivityActorImage extends Google_Model
+class Appointments_Google_Service_PlusDomains_ActivityActorImage extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1262,7 +1262,7 @@ class Google_Service_PlusDomains_ActivityActorImage extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_ActivityActorName extends Google_Model
+class Appointments_Google_Service_PlusDomains_ActivityActorName extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1288,7 +1288,7 @@ class Google_Service_PlusDomains_ActivityActorName extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_ActivityActorVerification extends Google_Model
+class Appointments_Google_Service_PlusDomains_ActivityActorVerification extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1305,14 +1305,14 @@ class Google_Service_PlusDomains_ActivityActorVerification extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_ActivityFeed extends Google_Collection
+class Appointments_Google_Service_PlusDomains_ActivityFeed extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $etag;
   public $id;
-  protected $itemsType = 'Google_Service_PlusDomains_Activity';
+  protected $itemsType = 'Appointments_Google_Service_PlusDomains_Activity';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextLink;
@@ -1396,31 +1396,31 @@ class Google_Service_PlusDomains_ActivityFeed extends Google_Collection
   }
 }
 
-class Google_Service_PlusDomains_ActivityObject extends Google_Collection
+class Appointments_Google_Service_PlusDomains_ActivityObject extends Appointments_Google_Collection
 {
   protected $collection_key = 'attachments';
   protected $internal_gapi_mappings = array(
   );
-  protected $actorType = 'Google_Service_PlusDomains_ActivityObjectActor';
+  protected $actorType = 'Appointments_Google_Service_PlusDomains_ActivityObjectActor';
   protected $actorDataType = '';
-  protected $attachmentsType = 'Google_Service_PlusDomains_ActivityObjectAttachments';
+  protected $attachmentsType = 'Appointments_Google_Service_PlusDomains_ActivityObjectAttachments';
   protected $attachmentsDataType = 'array';
   public $content;
   public $id;
   public $objectType;
   public $originalContent;
-  protected $plusonersType = 'Google_Service_PlusDomains_ActivityObjectPlusoners';
+  protected $plusonersType = 'Appointments_Google_Service_PlusDomains_ActivityObjectPlusoners';
   protected $plusonersDataType = '';
-  protected $repliesType = 'Google_Service_PlusDomains_ActivityObjectReplies';
+  protected $repliesType = 'Appointments_Google_Service_PlusDomains_ActivityObjectReplies';
   protected $repliesDataType = '';
-  protected $resharersType = 'Google_Service_PlusDomains_ActivityObjectResharers';
+  protected $resharersType = 'Appointments_Google_Service_PlusDomains_ActivityObjectResharers';
   protected $resharersDataType = '';
-  protected $statusForViewerType = 'Google_Service_PlusDomains_ActivityObjectStatusForViewer';
+  protected $statusForViewerType = 'Appointments_Google_Service_PlusDomains_ActivityObjectStatusForViewer';
   protected $statusForViewerDataType = '';
   public $url;
 
 
-  public function setActor(Google_Service_PlusDomains_ActivityObjectActor $actor)
+  public function setActor(Appointments_Google_Service_PlusDomains_ActivityObjectActor $actor)
   {
     $this->actor = $actor;
   }
@@ -1468,7 +1468,7 @@ class Google_Service_PlusDomains_ActivityObject extends Google_Collection
   {
     return $this->originalContent;
   }
-  public function setPlusoners(Google_Service_PlusDomains_ActivityObjectPlusoners $plusoners)
+  public function setPlusoners(Appointments_Google_Service_PlusDomains_ActivityObjectPlusoners $plusoners)
   {
     $this->plusoners = $plusoners;
   }
@@ -1476,7 +1476,7 @@ class Google_Service_PlusDomains_ActivityObject extends Google_Collection
   {
     return $this->plusoners;
   }
-  public function setReplies(Google_Service_PlusDomains_ActivityObjectReplies $replies)
+  public function setReplies(Appointments_Google_Service_PlusDomains_ActivityObjectReplies $replies)
   {
     $this->replies = $replies;
   }
@@ -1484,7 +1484,7 @@ class Google_Service_PlusDomains_ActivityObject extends Google_Collection
   {
     return $this->replies;
   }
-  public function setResharers(Google_Service_PlusDomains_ActivityObjectResharers $resharers)
+  public function setResharers(Appointments_Google_Service_PlusDomains_ActivityObjectResharers $resharers)
   {
     $this->resharers = $resharers;
   }
@@ -1492,7 +1492,7 @@ class Google_Service_PlusDomains_ActivityObject extends Google_Collection
   {
     return $this->resharers;
   }
-  public function setStatusForViewer(Google_Service_PlusDomains_ActivityObjectStatusForViewer $statusForViewer)
+  public function setStatusForViewer(Appointments_Google_Service_PlusDomains_ActivityObjectStatusForViewer $statusForViewer)
   {
     $this->statusForViewer = $statusForViewer;
   }
@@ -1510,22 +1510,22 @@ class Google_Service_PlusDomains_ActivityObject extends Google_Collection
   }
 }
 
-class Google_Service_PlusDomains_ActivityObjectActor extends Google_Model
+class Appointments_Google_Service_PlusDomains_ActivityObjectActor extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $clientSpecificActorInfoType = 'Google_Service_PlusDomains_ActivityObjectActorClientSpecificActorInfo';
+  protected $clientSpecificActorInfoType = 'Appointments_Google_Service_PlusDomains_ActivityObjectActorClientSpecificActorInfo';
   protected $clientSpecificActorInfoDataType = '';
   public $displayName;
   public $id;
-  protected $imageType = 'Google_Service_PlusDomains_ActivityObjectActorImage';
+  protected $imageType = 'Appointments_Google_Service_PlusDomains_ActivityObjectActorImage';
   protected $imageDataType = '';
   public $url;
-  protected $verificationType = 'Google_Service_PlusDomains_ActivityObjectActorVerification';
+  protected $verificationType = 'Appointments_Google_Service_PlusDomains_ActivityObjectActorVerification';
   protected $verificationDataType = '';
 
 
-  public function setClientSpecificActorInfo(Google_Service_PlusDomains_ActivityObjectActorClientSpecificActorInfo $clientSpecificActorInfo)
+  public function setClientSpecificActorInfo(Appointments_Google_Service_PlusDomains_ActivityObjectActorClientSpecificActorInfo $clientSpecificActorInfo)
   {
     $this->clientSpecificActorInfo = $clientSpecificActorInfo;
   }
@@ -1549,7 +1549,7 @@ class Google_Service_PlusDomains_ActivityObjectActor extends Google_Model
   {
     return $this->id;
   }
-  public function setImage(Google_Service_PlusDomains_ActivityObjectActorImage $image)
+  public function setImage(Appointments_Google_Service_PlusDomains_ActivityObjectActorImage $image)
   {
     $this->image = $image;
   }
@@ -1565,7 +1565,7 @@ class Google_Service_PlusDomains_ActivityObjectActor extends Google_Model
   {
     return $this->url;
   }
-  public function setVerification(Google_Service_PlusDomains_ActivityObjectActorVerification $verification)
+  public function setVerification(Appointments_Google_Service_PlusDomains_ActivityObjectActorVerification $verification)
   {
     $this->verification = $verification;
   }
@@ -1575,15 +1575,15 @@ class Google_Service_PlusDomains_ActivityObjectActor extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_ActivityObjectActorClientSpecificActorInfo extends Google_Model
+class Appointments_Google_Service_PlusDomains_ActivityObjectActorClientSpecificActorInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $youtubeActorInfoType = 'Google_Service_PlusDomains_ActivityObjectActorClientSpecificActorInfoYoutubeActorInfo';
+  protected $youtubeActorInfoType = 'Appointments_Google_Service_PlusDomains_ActivityObjectActorClientSpecificActorInfoYoutubeActorInfo';
   protected $youtubeActorInfoDataType = '';
 
 
-  public function setYoutubeActorInfo(Google_Service_PlusDomains_ActivityObjectActorClientSpecificActorInfoYoutubeActorInfo $youtubeActorInfo)
+  public function setYoutubeActorInfo(Appointments_Google_Service_PlusDomains_ActivityObjectActorClientSpecificActorInfoYoutubeActorInfo $youtubeActorInfo)
   {
     $this->youtubeActorInfo = $youtubeActorInfo;
   }
@@ -1593,7 +1593,7 @@ class Google_Service_PlusDomains_ActivityObjectActorClientSpecificActorInfo exte
   }
 }
 
-class Google_Service_PlusDomains_ActivityObjectActorClientSpecificActorInfoYoutubeActorInfo extends Google_Model
+class Appointments_Google_Service_PlusDomains_ActivityObjectActorClientSpecificActorInfoYoutubeActorInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1610,7 +1610,7 @@ class Google_Service_PlusDomains_ActivityObjectActorClientSpecificActorInfoYoutu
   }
 }
 
-class Google_Service_PlusDomains_ActivityObjectActorImage extends Google_Model
+class Appointments_Google_Service_PlusDomains_ActivityObjectActorImage extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1627,7 +1627,7 @@ class Google_Service_PlusDomains_ActivityObjectActorImage extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_ActivityObjectActorVerification extends Google_Model
+class Appointments_Google_Service_PlusDomains_ActivityObjectActorVerification extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1644,24 +1644,24 @@ class Google_Service_PlusDomains_ActivityObjectActorVerification extends Google_
   }
 }
 
-class Google_Service_PlusDomains_ActivityObjectAttachments extends Google_Collection
+class Appointments_Google_Service_PlusDomains_ActivityObjectAttachments extends Appointments_Google_Collection
 {
   protected $collection_key = 'thumbnails';
   protected $internal_gapi_mappings = array(
   );
   public $content;
   public $displayName;
-  protected $embedType = 'Google_Service_PlusDomains_ActivityObjectAttachmentsEmbed';
+  protected $embedType = 'Appointments_Google_Service_PlusDomains_ActivityObjectAttachmentsEmbed';
   protected $embedDataType = '';
-  protected $fullImageType = 'Google_Service_PlusDomains_ActivityObjectAttachmentsFullImage';
+  protected $fullImageType = 'Appointments_Google_Service_PlusDomains_ActivityObjectAttachmentsFullImage';
   protected $fullImageDataType = '';
   public $id;
-  protected $imageType = 'Google_Service_PlusDomains_ActivityObjectAttachmentsImage';
+  protected $imageType = 'Appointments_Google_Service_PlusDomains_ActivityObjectAttachmentsImage';
   protected $imageDataType = '';
   public $objectType;
-  protected $previewThumbnailsType = 'Google_Service_PlusDomains_ActivityObjectAttachmentsPreviewThumbnails';
+  protected $previewThumbnailsType = 'Appointments_Google_Service_PlusDomains_ActivityObjectAttachmentsPreviewThumbnails';
   protected $previewThumbnailsDataType = 'array';
-  protected $thumbnailsType = 'Google_Service_PlusDomains_ActivityObjectAttachmentsThumbnails';
+  protected $thumbnailsType = 'Appointments_Google_Service_PlusDomains_ActivityObjectAttachmentsThumbnails';
   protected $thumbnailsDataType = 'array';
   public $url;
 
@@ -1682,7 +1682,7 @@ class Google_Service_PlusDomains_ActivityObjectAttachments extends Google_Collec
   {
     return $this->displayName;
   }
-  public function setEmbed(Google_Service_PlusDomains_ActivityObjectAttachmentsEmbed $embed)
+  public function setEmbed(Appointments_Google_Service_PlusDomains_ActivityObjectAttachmentsEmbed $embed)
   {
     $this->embed = $embed;
   }
@@ -1690,7 +1690,7 @@ class Google_Service_PlusDomains_ActivityObjectAttachments extends Google_Collec
   {
     return $this->embed;
   }
-  public function setFullImage(Google_Service_PlusDomains_ActivityObjectAttachmentsFullImage $fullImage)
+  public function setFullImage(Appointments_Google_Service_PlusDomains_ActivityObjectAttachmentsFullImage $fullImage)
   {
     $this->fullImage = $fullImage;
   }
@@ -1706,7 +1706,7 @@ class Google_Service_PlusDomains_ActivityObjectAttachments extends Google_Collec
   {
     return $this->id;
   }
-  public function setImage(Google_Service_PlusDomains_ActivityObjectAttachmentsImage $image)
+  public function setImage(Appointments_Google_Service_PlusDomains_ActivityObjectAttachmentsImage $image)
   {
     $this->image = $image;
   }
@@ -1748,7 +1748,7 @@ class Google_Service_PlusDomains_ActivityObjectAttachments extends Google_Collec
   }
 }
 
-class Google_Service_PlusDomains_ActivityObjectAttachmentsEmbed extends Google_Model
+class Appointments_Google_Service_PlusDomains_ActivityObjectAttachmentsEmbed extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1774,7 +1774,7 @@ class Google_Service_PlusDomains_ActivityObjectAttachmentsEmbed extends Google_M
   }
 }
 
-class Google_Service_PlusDomains_ActivityObjectAttachmentsFullImage extends Google_Model
+class Appointments_Google_Service_PlusDomains_ActivityObjectAttachmentsFullImage extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1818,7 +1818,7 @@ class Google_Service_PlusDomains_ActivityObjectAttachmentsFullImage extends Goog
   }
 }
 
-class Google_Service_PlusDomains_ActivityObjectAttachmentsImage extends Google_Model
+class Appointments_Google_Service_PlusDomains_ActivityObjectAttachmentsImage extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1862,7 +1862,7 @@ class Google_Service_PlusDomains_ActivityObjectAttachmentsImage extends Google_M
   }
 }
 
-class Google_Service_PlusDomains_ActivityObjectAttachmentsPreviewThumbnails extends Google_Model
+class Appointments_Google_Service_PlusDomains_ActivityObjectAttachmentsPreviewThumbnails extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1879,12 +1879,12 @@ class Google_Service_PlusDomains_ActivityObjectAttachmentsPreviewThumbnails exte
   }
 }
 
-class Google_Service_PlusDomains_ActivityObjectAttachmentsThumbnails extends Google_Model
+class Appointments_Google_Service_PlusDomains_ActivityObjectAttachmentsThumbnails extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $description;
-  protected $imageType = 'Google_Service_PlusDomains_ActivityObjectAttachmentsThumbnailsImage';
+  protected $imageType = 'Appointments_Google_Service_PlusDomains_ActivityObjectAttachmentsThumbnailsImage';
   protected $imageDataType = '';
   public $url;
 
@@ -1897,7 +1897,7 @@ class Google_Service_PlusDomains_ActivityObjectAttachmentsThumbnails extends Goo
   {
     return $this->description;
   }
-  public function setImage(Google_Service_PlusDomains_ActivityObjectAttachmentsThumbnailsImage $image)
+  public function setImage(Appointments_Google_Service_PlusDomains_ActivityObjectAttachmentsThumbnailsImage $image)
   {
     $this->image = $image;
   }
@@ -1915,7 +1915,7 @@ class Google_Service_PlusDomains_ActivityObjectAttachmentsThumbnails extends Goo
   }
 }
 
-class Google_Service_PlusDomains_ActivityObjectAttachmentsThumbnailsImage extends Google_Model
+class Appointments_Google_Service_PlusDomains_ActivityObjectAttachmentsThumbnailsImage extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1959,7 +1959,7 @@ class Google_Service_PlusDomains_ActivityObjectAttachmentsThumbnailsImage extend
   }
 }
 
-class Google_Service_PlusDomains_ActivityObjectPlusoners extends Google_Model
+class Appointments_Google_Service_PlusDomains_ActivityObjectPlusoners extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1985,7 +1985,7 @@ class Google_Service_PlusDomains_ActivityObjectPlusoners extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_ActivityObjectReplies extends Google_Model
+class Appointments_Google_Service_PlusDomains_ActivityObjectReplies extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2011,7 +2011,7 @@ class Google_Service_PlusDomains_ActivityObjectReplies extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_ActivityObjectResharers extends Google_Model
+class Appointments_Google_Service_PlusDomains_ActivityObjectResharers extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2037,7 +2037,7 @@ class Google_Service_PlusDomains_ActivityObjectResharers extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_ActivityObjectStatusForViewer extends Google_Model
+class Appointments_Google_Service_PlusDomains_ActivityObjectStatusForViewer extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2090,7 +2090,7 @@ class Google_Service_PlusDomains_ActivityObjectStatusForViewer extends Google_Mo
   }
 }
 
-class Google_Service_PlusDomains_ActivityProvider extends Google_Model
+class Appointments_Google_Service_PlusDomains_ActivityProvider extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2107,12 +2107,12 @@ class Google_Service_PlusDomains_ActivityProvider extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_Audience extends Google_Model
+class Appointments_Google_Service_PlusDomains_Audience extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $etag;
-  protected $itemType = 'Google_Service_PlusDomains_PlusDomainsAclentryResource';
+  protected $itemType = 'Appointments_Google_Service_PlusDomains_PlusDomainsAclentryResource';
   protected $itemDataType = '';
   public $kind;
   public $memberCount;
@@ -2127,7 +2127,7 @@ class Google_Service_PlusDomains_Audience extends Google_Model
   {
     return $this->etag;
   }
-  public function setItem(Google_Service_PlusDomains_PlusDomainsAclentryResource $item)
+  public function setItem(Appointments_Google_Service_PlusDomains_PlusDomainsAclentryResource $item)
   {
     $this->item = $item;
   }
@@ -2161,13 +2161,13 @@ class Google_Service_PlusDomains_Audience extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_AudiencesFeed extends Google_Collection
+class Appointments_Google_Service_PlusDomains_AudiencesFeed extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $etag;
-  protected $itemsType = 'Google_Service_PlusDomains_Audience';
+  protected $itemsType = 'Appointments_Google_Service_PlusDomains_Audience';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -2216,7 +2216,7 @@ class Google_Service_PlusDomains_AudiencesFeed extends Google_Collection
   }
 }
 
-class Google_Service_PlusDomains_Circle extends Google_Model
+class Appointments_Google_Service_PlusDomains_Circle extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2225,7 +2225,7 @@ class Google_Service_PlusDomains_Circle extends Google_Model
   public $etag;
   public $id;
   public $kind;
-  protected $peopleType = 'Google_Service_PlusDomains_CirclePeople';
+  protected $peopleType = 'Appointments_Google_Service_PlusDomains_CirclePeople';
   protected $peopleDataType = '';
   public $selfLink;
 
@@ -2270,7 +2270,7 @@ class Google_Service_PlusDomains_Circle extends Google_Model
   {
     return $this->kind;
   }
-  public function setPeople(Google_Service_PlusDomains_CirclePeople $people)
+  public function setPeople(Appointments_Google_Service_PlusDomains_CirclePeople $people)
   {
     $this->people = $people;
   }
@@ -2288,13 +2288,13 @@ class Google_Service_PlusDomains_Circle extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_CircleFeed extends Google_Collection
+class Appointments_Google_Service_PlusDomains_CircleFeed extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $etag;
-  protected $itemsType = 'Google_Service_PlusDomains_Circle';
+  protected $itemsType = 'Appointments_Google_Service_PlusDomains_Circle';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextLink;
@@ -2370,7 +2370,7 @@ class Google_Service_PlusDomains_CircleFeed extends Google_Collection
   }
 }
 
-class Google_Service_PlusDomains_CirclePeople extends Google_Model
+class Appointments_Google_Service_PlusDomains_CirclePeople extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2387,21 +2387,21 @@ class Google_Service_PlusDomains_CirclePeople extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_Comment extends Google_Collection
+class Appointments_Google_Service_PlusDomains_Comment extends Appointments_Google_Collection
 {
   protected $collection_key = 'inReplyTo';
   protected $internal_gapi_mappings = array(
   );
-  protected $actorType = 'Google_Service_PlusDomains_CommentActor';
+  protected $actorType = 'Appointments_Google_Service_PlusDomains_CommentActor';
   protected $actorDataType = '';
   public $etag;
   public $id;
-  protected $inReplyToType = 'Google_Service_PlusDomains_CommentInReplyTo';
+  protected $inReplyToType = 'Appointments_Google_Service_PlusDomains_CommentInReplyTo';
   protected $inReplyToDataType = 'array';
   public $kind;
-  protected $objectType = 'Google_Service_PlusDomains_CommentObject';
+  protected $objectType = 'Appointments_Google_Service_PlusDomains_CommentObject';
   protected $objectDataType = '';
-  protected $plusonersType = 'Google_Service_PlusDomains_CommentPlusoners';
+  protected $plusonersType = 'Appointments_Google_Service_PlusDomains_CommentPlusoners';
   protected $plusonersDataType = '';
   public $published;
   public $selfLink;
@@ -2409,7 +2409,7 @@ class Google_Service_PlusDomains_Comment extends Google_Collection
   public $verb;
 
 
-  public function setActor(Google_Service_PlusDomains_CommentActor $actor)
+  public function setActor(Appointments_Google_Service_PlusDomains_CommentActor $actor)
   {
     $this->actor = $actor;
   }
@@ -2449,7 +2449,7 @@ class Google_Service_PlusDomains_Comment extends Google_Collection
   {
     return $this->kind;
   }
-  public function setObject(Google_Service_PlusDomains_CommentObject $object)
+  public function setObject(Appointments_Google_Service_PlusDomains_CommentObject $object)
   {
     $this->object = $object;
   }
@@ -2457,7 +2457,7 @@ class Google_Service_PlusDomains_Comment extends Google_Collection
   {
     return $this->object;
   }
-  public function setPlusoners(Google_Service_PlusDomains_CommentPlusoners $plusoners)
+  public function setPlusoners(Appointments_Google_Service_PlusDomains_CommentPlusoners $plusoners)
   {
     $this->plusoners = $plusoners;
   }
@@ -2499,22 +2499,22 @@ class Google_Service_PlusDomains_Comment extends Google_Collection
   }
 }
 
-class Google_Service_PlusDomains_CommentActor extends Google_Model
+class Appointments_Google_Service_PlusDomains_CommentActor extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $clientSpecificActorInfoType = 'Google_Service_PlusDomains_CommentActorClientSpecificActorInfo';
+  protected $clientSpecificActorInfoType = 'Appointments_Google_Service_PlusDomains_CommentActorClientSpecificActorInfo';
   protected $clientSpecificActorInfoDataType = '';
   public $displayName;
   public $id;
-  protected $imageType = 'Google_Service_PlusDomains_CommentActorImage';
+  protected $imageType = 'Appointments_Google_Service_PlusDomains_CommentActorImage';
   protected $imageDataType = '';
   public $url;
-  protected $verificationType = 'Google_Service_PlusDomains_CommentActorVerification';
+  protected $verificationType = 'Appointments_Google_Service_PlusDomains_CommentActorVerification';
   protected $verificationDataType = '';
 
 
-  public function setClientSpecificActorInfo(Google_Service_PlusDomains_CommentActorClientSpecificActorInfo $clientSpecificActorInfo)
+  public function setClientSpecificActorInfo(Appointments_Google_Service_PlusDomains_CommentActorClientSpecificActorInfo $clientSpecificActorInfo)
   {
     $this->clientSpecificActorInfo = $clientSpecificActorInfo;
   }
@@ -2538,7 +2538,7 @@ class Google_Service_PlusDomains_CommentActor extends Google_Model
   {
     return $this->id;
   }
-  public function setImage(Google_Service_PlusDomains_CommentActorImage $image)
+  public function setImage(Appointments_Google_Service_PlusDomains_CommentActorImage $image)
   {
     $this->image = $image;
   }
@@ -2554,7 +2554,7 @@ class Google_Service_PlusDomains_CommentActor extends Google_Model
   {
     return $this->url;
   }
-  public function setVerification(Google_Service_PlusDomains_CommentActorVerification $verification)
+  public function setVerification(Appointments_Google_Service_PlusDomains_CommentActorVerification $verification)
   {
     $this->verification = $verification;
   }
@@ -2564,15 +2564,15 @@ class Google_Service_PlusDomains_CommentActor extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_CommentActorClientSpecificActorInfo extends Google_Model
+class Appointments_Google_Service_PlusDomains_CommentActorClientSpecificActorInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $youtubeActorInfoType = 'Google_Service_PlusDomains_CommentActorClientSpecificActorInfoYoutubeActorInfo';
+  protected $youtubeActorInfoType = 'Appointments_Google_Service_PlusDomains_CommentActorClientSpecificActorInfoYoutubeActorInfo';
   protected $youtubeActorInfoDataType = '';
 
 
-  public function setYoutubeActorInfo(Google_Service_PlusDomains_CommentActorClientSpecificActorInfoYoutubeActorInfo $youtubeActorInfo)
+  public function setYoutubeActorInfo(Appointments_Google_Service_PlusDomains_CommentActorClientSpecificActorInfoYoutubeActorInfo $youtubeActorInfo)
   {
     $this->youtubeActorInfo = $youtubeActorInfo;
   }
@@ -2582,7 +2582,7 @@ class Google_Service_PlusDomains_CommentActorClientSpecificActorInfo extends Goo
   }
 }
 
-class Google_Service_PlusDomains_CommentActorClientSpecificActorInfoYoutubeActorInfo extends Google_Model
+class Appointments_Google_Service_PlusDomains_CommentActorClientSpecificActorInfoYoutubeActorInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2599,7 +2599,7 @@ class Google_Service_PlusDomains_CommentActorClientSpecificActorInfoYoutubeActor
   }
 }
 
-class Google_Service_PlusDomains_CommentActorImage extends Google_Model
+class Appointments_Google_Service_PlusDomains_CommentActorImage extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2616,7 +2616,7 @@ class Google_Service_PlusDomains_CommentActorImage extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_CommentActorVerification extends Google_Model
+class Appointments_Google_Service_PlusDomains_CommentActorVerification extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2633,14 +2633,14 @@ class Google_Service_PlusDomains_CommentActorVerification extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_CommentFeed extends Google_Collection
+class Appointments_Google_Service_PlusDomains_CommentFeed extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $etag;
   public $id;
-  protected $itemsType = 'Google_Service_PlusDomains_Comment';
+  protected $itemsType = 'Appointments_Google_Service_PlusDomains_Comment';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextLink;
@@ -2715,7 +2715,7 @@ class Google_Service_PlusDomains_CommentFeed extends Google_Collection
   }
 }
 
-class Google_Service_PlusDomains_CommentInReplyTo extends Google_Model
+class Appointments_Google_Service_PlusDomains_CommentInReplyTo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2741,7 +2741,7 @@ class Google_Service_PlusDomains_CommentInReplyTo extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_CommentObject extends Google_Model
+class Appointments_Google_Service_PlusDomains_CommentObject extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2776,7 +2776,7 @@ class Google_Service_PlusDomains_CommentObject extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_CommentPlusoners extends Google_Model
+class Appointments_Google_Service_PlusDomains_CommentPlusoners extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2793,16 +2793,16 @@ class Google_Service_PlusDomains_CommentPlusoners extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_Media extends Google_Collection
+class Appointments_Google_Service_PlusDomains_Media extends Appointments_Google_Collection
 {
   protected $collection_key = 'streams';
   protected $internal_gapi_mappings = array(
   );
-  protected $authorType = 'Google_Service_PlusDomains_MediaAuthor';
+  protected $authorType = 'Appointments_Google_Service_PlusDomains_MediaAuthor';
   protected $authorDataType = '';
   public $displayName;
   public $etag;
-  protected $exifType = 'Google_Service_PlusDomains_MediaExif';
+  protected $exifType = 'Appointments_Google_Service_PlusDomains_MediaExif';
   protected $exifDataType = '';
   public $height;
   public $id;
@@ -2811,7 +2811,7 @@ class Google_Service_PlusDomains_Media extends Google_Collection
   public $mediaUrl;
   public $published;
   public $sizeBytes;
-  protected $streamsType = 'Google_Service_PlusDomains_Videostream';
+  protected $streamsType = 'Appointments_Google_Service_PlusDomains_Videostream';
   protected $streamsDataType = 'array';
   public $summary;
   public $updated;
@@ -2821,7 +2821,7 @@ class Google_Service_PlusDomains_Media extends Google_Collection
   public $width;
 
 
-  public function setAuthor(Google_Service_PlusDomains_MediaAuthor $author)
+  public function setAuthor(Appointments_Google_Service_PlusDomains_MediaAuthor $author)
   {
     $this->author = $author;
   }
@@ -2845,7 +2845,7 @@ class Google_Service_PlusDomains_Media extends Google_Collection
   {
     return $this->etag;
   }
-  public function setExif(Google_Service_PlusDomains_MediaExif $exif)
+  public function setExif(Appointments_Google_Service_PlusDomains_MediaExif $exif)
   {
     $this->exif = $exif;
   }
@@ -2967,13 +2967,13 @@ class Google_Service_PlusDomains_Media extends Google_Collection
   }
 }
 
-class Google_Service_PlusDomains_MediaAuthor extends Google_Model
+class Appointments_Google_Service_PlusDomains_MediaAuthor extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $displayName;
   public $id;
-  protected $imageType = 'Google_Service_PlusDomains_MediaAuthorImage';
+  protected $imageType = 'Appointments_Google_Service_PlusDomains_MediaAuthorImage';
   protected $imageDataType = '';
   public $url;
 
@@ -2994,7 +2994,7 @@ class Google_Service_PlusDomains_MediaAuthor extends Google_Model
   {
     return $this->id;
   }
-  public function setImage(Google_Service_PlusDomains_MediaAuthorImage $image)
+  public function setImage(Appointments_Google_Service_PlusDomains_MediaAuthorImage $image)
   {
     $this->image = $image;
   }
@@ -3012,7 +3012,7 @@ class Google_Service_PlusDomains_MediaAuthor extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_MediaAuthorImage extends Google_Model
+class Appointments_Google_Service_PlusDomains_MediaAuthorImage extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3029,7 +3029,7 @@ class Google_Service_PlusDomains_MediaAuthorImage extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_MediaExif extends Google_Model
+class Appointments_Google_Service_PlusDomains_MediaExif extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3046,13 +3046,13 @@ class Google_Service_PlusDomains_MediaExif extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_PeopleFeed extends Google_Collection
+class Appointments_Google_Service_PlusDomains_PeopleFeed extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $etag;
-  protected $itemsType = 'Google_Service_PlusDomains_Person';
+  protected $itemsType = 'Appointments_Google_Service_PlusDomains_Person';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -3119,7 +3119,7 @@ class Google_Service_PlusDomains_PeopleFeed extends Google_Collection
   }
 }
 
-class Google_Service_PlusDomains_Person extends Google_Collection
+class Appointments_Google_Service_PlusDomains_Person extends Appointments_Google_Collection
 {
   protected $collection_key = 'urls';
   protected $internal_gapi_mappings = array(
@@ -3128,35 +3128,35 @@ class Google_Service_PlusDomains_Person extends Google_Collection
   public $birthday;
   public $braggingRights;
   public $circledByCount;
-  protected $coverType = 'Google_Service_PlusDomains_PersonCover';
+  protected $coverType = 'Appointments_Google_Service_PlusDomains_PersonCover';
   protected $coverDataType = '';
   public $currentLocation;
   public $displayName;
   public $domain;
-  protected $emailsType = 'Google_Service_PlusDomains_PersonEmails';
+  protected $emailsType = 'Appointments_Google_Service_PlusDomains_PersonEmails';
   protected $emailsDataType = 'array';
   public $etag;
   public $gender;
   public $id;
-  protected $imageType = 'Google_Service_PlusDomains_PersonImage';
+  protected $imageType = 'Appointments_Google_Service_PlusDomains_PersonImage';
   protected $imageDataType = '';
   public $isPlusUser;
   public $kind;
-  protected $nameType = 'Google_Service_PlusDomains_PersonName';
+  protected $nameType = 'Appointments_Google_Service_PlusDomains_PersonName';
   protected $nameDataType = '';
   public $nickname;
   public $objectType;
   public $occupation;
-  protected $organizationsType = 'Google_Service_PlusDomains_PersonOrganizations';
+  protected $organizationsType = 'Appointments_Google_Service_PlusDomains_PersonOrganizations';
   protected $organizationsDataType = 'array';
-  protected $placesLivedType = 'Google_Service_PlusDomains_PersonPlacesLived';
+  protected $placesLivedType = 'Appointments_Google_Service_PlusDomains_PersonPlacesLived';
   protected $placesLivedDataType = 'array';
   public $plusOneCount;
   public $relationshipStatus;
   public $skills;
   public $tagline;
   public $url;
-  protected $urlsType = 'Google_Service_PlusDomains_PersonUrls';
+  protected $urlsType = 'Appointments_Google_Service_PlusDomains_PersonUrls';
   protected $urlsDataType = 'array';
   public $verified;
 
@@ -3193,7 +3193,7 @@ class Google_Service_PlusDomains_Person extends Google_Collection
   {
     return $this->circledByCount;
   }
-  public function setCover(Google_Service_PlusDomains_PersonCover $cover)
+  public function setCover(Appointments_Google_Service_PlusDomains_PersonCover $cover)
   {
     $this->cover = $cover;
   }
@@ -3257,7 +3257,7 @@ class Google_Service_PlusDomains_Person extends Google_Collection
   {
     return $this->id;
   }
-  public function setImage(Google_Service_PlusDomains_PersonImage $image)
+  public function setImage(Appointments_Google_Service_PlusDomains_PersonImage $image)
   {
     $this->image = $image;
   }
@@ -3281,7 +3281,7 @@ class Google_Service_PlusDomains_Person extends Google_Collection
   {
     return $this->kind;
   }
-  public function setName(Google_Service_PlusDomains_PersonName $name)
+  public function setName(Appointments_Google_Service_PlusDomains_PersonName $name)
   {
     $this->name = $name;
   }
@@ -3387,18 +3387,18 @@ class Google_Service_PlusDomains_Person extends Google_Collection
   }
 }
 
-class Google_Service_PlusDomains_PersonCover extends Google_Model
+class Appointments_Google_Service_PlusDomains_PersonCover extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $coverInfoType = 'Google_Service_PlusDomains_PersonCoverCoverInfo';
+  protected $coverInfoType = 'Appointments_Google_Service_PlusDomains_PersonCoverCoverInfo';
   protected $coverInfoDataType = '';
-  protected $coverPhotoType = 'Google_Service_PlusDomains_PersonCoverCoverPhoto';
+  protected $coverPhotoType = 'Appointments_Google_Service_PlusDomains_PersonCoverCoverPhoto';
   protected $coverPhotoDataType = '';
   public $layout;
 
 
-  public function setCoverInfo(Google_Service_PlusDomains_PersonCoverCoverInfo $coverInfo)
+  public function setCoverInfo(Appointments_Google_Service_PlusDomains_PersonCoverCoverInfo $coverInfo)
   {
     $this->coverInfo = $coverInfo;
   }
@@ -3406,7 +3406,7 @@ class Google_Service_PlusDomains_PersonCover extends Google_Model
   {
     return $this->coverInfo;
   }
-  public function setCoverPhoto(Google_Service_PlusDomains_PersonCoverCoverPhoto $coverPhoto)
+  public function setCoverPhoto(Appointments_Google_Service_PlusDomains_PersonCoverCoverPhoto $coverPhoto)
   {
     $this->coverPhoto = $coverPhoto;
   }
@@ -3424,7 +3424,7 @@ class Google_Service_PlusDomains_PersonCover extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_PersonCoverCoverInfo extends Google_Model
+class Appointments_Google_Service_PlusDomains_PersonCoverCoverInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3450,7 +3450,7 @@ class Google_Service_PlusDomains_PersonCoverCoverInfo extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_PersonCoverCoverPhoto extends Google_Model
+class Appointments_Google_Service_PlusDomains_PersonCoverCoverPhoto extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3485,7 +3485,7 @@ class Google_Service_PlusDomains_PersonCoverCoverPhoto extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_PersonEmails extends Google_Model
+class Appointments_Google_Service_PlusDomains_PersonEmails extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3511,7 +3511,7 @@ class Google_Service_PlusDomains_PersonEmails extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_PersonImage extends Google_Model
+class Appointments_Google_Service_PlusDomains_PersonImage extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3537,7 +3537,7 @@ class Google_Service_PlusDomains_PersonImage extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_PersonName extends Google_Model
+class Appointments_Google_Service_PlusDomains_PersonName extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3599,7 +3599,7 @@ class Google_Service_PlusDomains_PersonName extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_PersonOrganizations extends Google_Model
+class Appointments_Google_Service_PlusDomains_PersonOrganizations extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3688,7 +3688,7 @@ class Google_Service_PlusDomains_PersonOrganizations extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_PersonPlacesLived extends Google_Model
+class Appointments_Google_Service_PlusDomains_PersonPlacesLived extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3714,7 +3714,7 @@ class Google_Service_PlusDomains_PersonPlacesLived extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_PersonUrls extends Google_Model
+class Appointments_Google_Service_PlusDomains_PersonUrls extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3749,20 +3749,20 @@ class Google_Service_PlusDomains_PersonUrls extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_Place extends Google_Model
+class Appointments_Google_Service_PlusDomains_Place extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $addressType = 'Google_Service_PlusDomains_PlaceAddress';
+  protected $addressType = 'Appointments_Google_Service_PlusDomains_PlaceAddress';
   protected $addressDataType = '';
   public $displayName;
   public $id;
   public $kind;
-  protected $positionType = 'Google_Service_PlusDomains_PlacePosition';
+  protected $positionType = 'Appointments_Google_Service_PlusDomains_PlacePosition';
   protected $positionDataType = '';
 
 
-  public function setAddress(Google_Service_PlusDomains_PlaceAddress $address)
+  public function setAddress(Appointments_Google_Service_PlusDomains_PlaceAddress $address)
   {
     $this->address = $address;
   }
@@ -3794,7 +3794,7 @@ class Google_Service_PlusDomains_Place extends Google_Model
   {
     return $this->kind;
   }
-  public function setPosition(Google_Service_PlusDomains_PlacePosition $position)
+  public function setPosition(Appointments_Google_Service_PlusDomains_PlacePosition $position)
   {
     $this->position = $position;
   }
@@ -3804,7 +3804,7 @@ class Google_Service_PlusDomains_Place extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_PlaceAddress extends Google_Model
+class Appointments_Google_Service_PlusDomains_PlaceAddress extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3821,7 +3821,7 @@ class Google_Service_PlusDomains_PlaceAddress extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_PlacePosition extends Google_Model
+class Appointments_Google_Service_PlusDomains_PlacePosition extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3847,7 +3847,7 @@ class Google_Service_PlusDomains_PlacePosition extends Google_Model
   }
 }
 
-class Google_Service_PlusDomains_PlusDomainsAclentryResource extends Google_Model
+class Appointments_Google_Service_PlusDomains_PlusDomainsAclentryResource extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3882,7 +3882,7 @@ class Google_Service_PlusDomains_PlusDomainsAclentryResource extends Google_Mode
   }
 }
 
-class Google_Service_PlusDomains_Videostream extends Google_Model
+class Appointments_Google_Service_PlusDomains_Videostream extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );

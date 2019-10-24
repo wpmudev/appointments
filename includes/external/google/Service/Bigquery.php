@@ -26,7 +26,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Bigquery extends Google_Service
+class Appointments_Google_Service_Bigquery extends Appointments_Google_Service
 {
   /** View and manage your data in Google BigQuery. */
   const BIGQUERY =
@@ -60,9 +60,9 @@ class Google_Service_Bigquery extends Google_Service
   /**
    * Constructs the internal representation of the Bigquery service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -70,7 +70,7 @@ class Google_Service_Bigquery extends Google_Service
     $this->version = 'v2';
     $this->serviceName = 'bigquery';
 
-    $this->datasets = new Google_Service_Bigquery_Datasets_Resource(
+    $this->datasets = new Appointments_Google_Service_Bigquery_Datasets_Resource(
         $this,
         $this->serviceName,
         'datasets',
@@ -176,7 +176,7 @@ class Google_Service_Bigquery extends Google_Service
           )
         )
     );
-    $this->jobs = new Google_Service_Bigquery_Jobs_Resource(
+    $this->jobs = new Appointments_Google_Service_Bigquery_Jobs_Resource(
         $this,
         $this->serviceName,
         'jobs',
@@ -298,7 +298,7 @@ class Google_Service_Bigquery extends Google_Service
           )
         )
     );
-    $this->projects = new Google_Service_Bigquery_Projects_Resource(
+    $this->projects = new Appointments_Google_Service_Bigquery_Projects_Resource(
         $this,
         $this->serviceName,
         'projects',
@@ -321,7 +321,7 @@ class Google_Service_Bigquery extends Google_Service
           )
         )
     );
-    $this->tabledata = new Google_Service_Bigquery_Tabledata_Resource(
+    $this->tabledata = new Appointments_Google_Service_Bigquery_Tabledata_Resource(
         $this,
         $this->serviceName,
         'tabledata',
@@ -383,7 +383,7 @@ class Google_Service_Bigquery extends Google_Service
           )
         )
     );
-    $this->tables = new Google_Service_Bigquery_Tables_Resource(
+    $this->tables = new Appointments_Google_Service_Bigquery_Tables_Resource(
         $this,
         $this->serviceName,
         'tables',
@@ -519,11 +519,11 @@ class Google_Service_Bigquery extends Google_Service
  * The "datasets" collection of methods.
  * Typical usage is:
  *  <code>
- *   $bigqueryService = new Google_Service_Bigquery(...);
+ *   $bigqueryService = new Appointments_Google_Service_Bigquery(...);
  *   $datasets = $bigqueryService->datasets;
  *  </code>
  */
-class Google_Service_Bigquery_Datasets_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Bigquery_Datasets_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -553,28 +553,28 @@ class Google_Service_Bigquery_Datasets_Resource extends Google_Service_Resource
    * @param string $projectId Project ID of the requested dataset
    * @param string $datasetId Dataset ID of the requested dataset
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Bigquery_Dataset
+   * @return Appointments_Google_Service_Bigquery_Dataset
    */
   public function get($projectId, $datasetId, $optParams = array())
   {
     $params = array('projectId' => $projectId, 'datasetId' => $datasetId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Bigquery_Dataset");
+    return $this->call('get', array($params), "Appointments_Google_Service_Bigquery_Dataset");
   }
 
   /**
    * Creates a new empty dataset. (datasets.insert)
    *
    * @param string $projectId Project ID of the new dataset
-   * @param Google_Dataset $postBody
+   * @param Appointments_Google_Dataset $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Bigquery_Dataset
+   * @return Appointments_Google_Service_Bigquery_Dataset
    */
-  public function insert($projectId, Google_Service_Bigquery_Dataset $postBody, $optParams = array())
+  public function insert($projectId, Appointments_Google_Service_Bigquery_Dataset $postBody, $optParams = array())
   {
     $params = array('projectId' => $projectId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Bigquery_Dataset");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Bigquery_Dataset");
   }
 
   /**
@@ -588,13 +588,13 @@ class Google_Service_Bigquery_Datasets_Resource extends Google_Service_Resource
    * @opt_param string maxResults The maximum number of results to return
    * @opt_param string pageToken Page token, returned by a previous call, to
    * request the next page of results
-   * @return Google_Service_Bigquery_DatasetList
+   * @return Appointments_Google_Service_Bigquery_DatasetList
    */
   public function listDatasets($projectId, $optParams = array())
   {
     $params = array('projectId' => $projectId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Bigquery_DatasetList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Bigquery_DatasetList");
   }
 
   /**
@@ -605,15 +605,15 @@ class Google_Service_Bigquery_Datasets_Resource extends Google_Service_Resource
    *
    * @param string $projectId Project ID of the dataset being updated
    * @param string $datasetId Dataset ID of the dataset being updated
-   * @param Google_Dataset $postBody
+   * @param Appointments_Google_Dataset $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Bigquery_Dataset
+   * @return Appointments_Google_Service_Bigquery_Dataset
    */
-  public function patch($projectId, $datasetId, Google_Service_Bigquery_Dataset $postBody, $optParams = array())
+  public function patch($projectId, $datasetId, Appointments_Google_Service_Bigquery_Dataset $postBody, $optParams = array())
   {
     $params = array('projectId' => $projectId, 'datasetId' => $datasetId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Bigquery_Dataset");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Bigquery_Dataset");
   }
 
   /**
@@ -623,15 +623,15 @@ class Google_Service_Bigquery_Datasets_Resource extends Google_Service_Resource
    *
    * @param string $projectId Project ID of the dataset being updated
    * @param string $datasetId Dataset ID of the dataset being updated
-   * @param Google_Dataset $postBody
+   * @param Appointments_Google_Dataset $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Bigquery_Dataset
+   * @return Appointments_Google_Service_Bigquery_Dataset
    */
-  public function update($projectId, $datasetId, Google_Service_Bigquery_Dataset $postBody, $optParams = array())
+  public function update($projectId, $datasetId, Appointments_Google_Service_Bigquery_Dataset $postBody, $optParams = array())
   {
     $params = array('projectId' => $projectId, 'datasetId' => $datasetId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Bigquery_Dataset");
+    return $this->call('update', array($params), "Appointments_Google_Service_Bigquery_Dataset");
   }
 }
 
@@ -639,11 +639,11 @@ class Google_Service_Bigquery_Datasets_Resource extends Google_Service_Resource
  * The "jobs" collection of methods.
  * Typical usage is:
  *  <code>
- *   $bigqueryService = new Google_Service_Bigquery(...);
+ *   $bigqueryService = new Appointments_Google_Service_Bigquery(...);
  *   $jobs = $bigqueryService->jobs;
  *  </code>
  */
-class Google_Service_Bigquery_Jobs_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Bigquery_Jobs_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -654,13 +654,13 @@ class Google_Service_Bigquery_Jobs_Resource extends Google_Service_Resource
    * @param string $projectId [Required] Project ID of the job to cancel
    * @param string $jobId [Required] Job ID of the job to cancel
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Bigquery_JobCancelResponse
+   * @return Appointments_Google_Service_Bigquery_JobCancelResponse
    */
   public function cancel($projectId, $jobId, $optParams = array())
   {
     $params = array('projectId' => $projectId, 'jobId' => $jobId);
     $params = array_merge($params, $optParams);
-    return $this->call('cancel', array($params), "Google_Service_Bigquery_JobCancelResponse");
+    return $this->call('cancel', array($params), "Appointments_Google_Service_Bigquery_JobCancelResponse");
   }
 
   /**
@@ -671,13 +671,13 @@ class Google_Service_Bigquery_Jobs_Resource extends Google_Service_Resource
    * @param string $projectId [Required] Project ID of the requested job
    * @param string $jobId [Required] Job ID of the requested job
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Bigquery_Job
+   * @return Appointments_Google_Service_Bigquery_Job
    */
   public function get($projectId, $jobId, $optParams = array())
   {
     $params = array('projectId' => $projectId, 'jobId' => $jobId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Bigquery_Job");
+    return $this->call('get', array($params), "Appointments_Google_Service_Bigquery_Job");
   }
 
   /**
@@ -695,13 +695,13 @@ class Google_Service_Bigquery_Jobs_Resource extends Google_Service_Resource
    * milliseconds, before returning. Default is 10 seconds. If the timeout passes
    * before the job completes, the 'jobComplete' field in the response will be
    * false
-   * @return Google_Service_Bigquery_GetQueryResultsResponse
+   * @return Appointments_Google_Service_Bigquery_GetQueryResultsResponse
    */
   public function getQueryResults($projectId, $jobId, $optParams = array())
   {
     $params = array('projectId' => $projectId, 'jobId' => $jobId);
     $params = array_merge($params, $optParams);
-    return $this->call('getQueryResults', array($params), "Google_Service_Bigquery_GetQueryResultsResponse");
+    return $this->call('getQueryResults', array($params), "Appointments_Google_Service_Bigquery_GetQueryResultsResponse");
   }
 
   /**
@@ -710,15 +710,15 @@ class Google_Service_Bigquery_Jobs_Resource extends Google_Service_Resource
    *
    * @param string $projectId Project ID of the project that will be billed for
    * the job
-   * @param Google_Job $postBody
+   * @param Appointments_Google_Job $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Bigquery_Job
+   * @return Appointments_Google_Service_Bigquery_Job
    */
-  public function insert($projectId, Google_Service_Bigquery_Job $postBody, $optParams = array())
+  public function insert($projectId, Appointments_Google_Service_Bigquery_Job $postBody, $optParams = array())
   {
     $params = array('projectId' => $projectId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Bigquery_Job");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Bigquery_Job");
   }
 
   /**
@@ -739,13 +739,13 @@ class Google_Service_Bigquery_Jobs_Resource extends Google_Service_Resource
    * @opt_param string projection Restrict information returned to a set of
    * selected fields
    * @opt_param string stateFilter Filter for job state
-   * @return Google_Service_Bigquery_JobList
+   * @return Appointments_Google_Service_Bigquery_JobList
    */
   public function listJobs($projectId, $optParams = array())
   {
     $params = array('projectId' => $projectId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Bigquery_JobList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Bigquery_JobList");
   }
 
   /**
@@ -753,15 +753,15 @@ class Google_Service_Bigquery_Jobs_Resource extends Google_Service_Resource
    * query completes within a specified timeout. (jobs.query)
    *
    * @param string $projectId Project ID of the project billed for the query
-   * @param Google_QueryRequest $postBody
+   * @param Appointments_Google_QueryRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Bigquery_QueryResponse
+   * @return Appointments_Google_Service_Bigquery_QueryResponse
    */
-  public function query($projectId, Google_Service_Bigquery_QueryRequest $postBody, $optParams = array())
+  public function query($projectId, Appointments_Google_Service_Bigquery_QueryRequest $postBody, $optParams = array())
   {
     $params = array('projectId' => $projectId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('query', array($params), "Google_Service_Bigquery_QueryResponse");
+    return $this->call('query', array($params), "Appointments_Google_Service_Bigquery_QueryResponse");
   }
 }
 
@@ -769,11 +769,11 @@ class Google_Service_Bigquery_Jobs_Resource extends Google_Service_Resource
  * The "projects" collection of methods.
  * Typical usage is:
  *  <code>
- *   $bigqueryService = new Google_Service_Bigquery(...);
+ *   $bigqueryService = new Appointments_Google_Service_Bigquery(...);
  *   $projects = $bigqueryService->projects;
  *  </code>
  */
-class Google_Service_Bigquery_Projects_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Bigquery_Projects_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -785,13 +785,13 @@ class Google_Service_Bigquery_Projects_Resource extends Google_Service_Resource
    * @opt_param string maxResults Maximum number of results to return
    * @opt_param string pageToken Page token, returned by a previous call, to
    * request the next page of results
-   * @return Google_Service_Bigquery_ProjectList
+   * @return Appointments_Google_Service_Bigquery_ProjectList
    */
   public function listProjects($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Bigquery_ProjectList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Bigquery_ProjectList");
   }
 }
 
@@ -799,11 +799,11 @@ class Google_Service_Bigquery_Projects_Resource extends Google_Service_Resource
  * The "tabledata" collection of methods.
  * Typical usage is:
  *  <code>
- *   $bigqueryService = new Google_Service_Bigquery(...);
+ *   $bigqueryService = new Appointments_Google_Service_Bigquery(...);
  *   $tabledata = $bigqueryService->tabledata;
  *  </code>
  */
-class Google_Service_Bigquery_Tabledata_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Bigquery_Tabledata_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -813,15 +813,15 @@ class Google_Service_Bigquery_Tabledata_Resource extends Google_Service_Resource
    * @param string $projectId Project ID of the destination table.
    * @param string $datasetId Dataset ID of the destination table.
    * @param string $tableId Table ID of the destination table.
-   * @param Google_TableDataInsertAllRequest $postBody
+   * @param Appointments_Google_TableDataInsertAllRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Bigquery_TableDataInsertAllResponse
+   * @return Appointments_Google_Service_Bigquery_TableDataInsertAllResponse
    */
-  public function insertAll($projectId, $datasetId, $tableId, Google_Service_Bigquery_TableDataInsertAllRequest $postBody, $optParams = array())
+  public function insertAll($projectId, $datasetId, $tableId, Appointments_Google_Service_Bigquery_TableDataInsertAllRequest $postBody, $optParams = array())
   {
     $params = array('projectId' => $projectId, 'datasetId' => $datasetId, 'tableId' => $tableId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insertAll', array($params), "Google_Service_Bigquery_TableDataInsertAllResponse");
+    return $this->call('insertAll', array($params), "Appointments_Google_Service_Bigquery_TableDataInsertAllResponse");
   }
 
   /**
@@ -837,13 +837,13 @@ class Google_Service_Bigquery_Tabledata_Resource extends Google_Service_Resource
    * @opt_param string pageToken Page token, returned by a previous call,
    * identifying the result set
    * @opt_param string startIndex Zero-based index of the starting row to read
-   * @return Google_Service_Bigquery_TableDataList
+   * @return Appointments_Google_Service_Bigquery_TableDataList
    */
   public function listTabledata($projectId, $datasetId, $tableId, $optParams = array())
   {
     $params = array('projectId' => $projectId, 'datasetId' => $datasetId, 'tableId' => $tableId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Bigquery_TableDataList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Bigquery_TableDataList");
   }
 }
 
@@ -851,11 +851,11 @@ class Google_Service_Bigquery_Tabledata_Resource extends Google_Service_Resource
  * The "tables" collection of methods.
  * Typical usage is:
  *  <code>
- *   $bigqueryService = new Google_Service_Bigquery(...);
+ *   $bigqueryService = new Appointments_Google_Service_Bigquery(...);
  *   $tables = $bigqueryService->tables;
  *  </code>
  */
-class Google_Service_Bigquery_Tables_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Bigquery_Tables_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -883,13 +883,13 @@ class Google_Service_Bigquery_Tables_Resource extends Google_Service_Resource
    * @param string $datasetId Dataset ID of the requested table
    * @param string $tableId Table ID of the requested table
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Bigquery_Table
+   * @return Appointments_Google_Service_Bigquery_Table
    */
   public function get($projectId, $datasetId, $tableId, $optParams = array())
   {
     $params = array('projectId' => $projectId, 'datasetId' => $datasetId, 'tableId' => $tableId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Bigquery_Table");
+    return $this->call('get', array($params), "Appointments_Google_Service_Bigquery_Table");
   }
 
   /**
@@ -897,15 +897,15 @@ class Google_Service_Bigquery_Tables_Resource extends Google_Service_Resource
    *
    * @param string $projectId Project ID of the new table
    * @param string $datasetId Dataset ID of the new table
-   * @param Google_Table $postBody
+   * @param Appointments_Google_Table $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Bigquery_Table
+   * @return Appointments_Google_Service_Bigquery_Table
    */
-  public function insert($projectId, $datasetId, Google_Service_Bigquery_Table $postBody, $optParams = array())
+  public function insert($projectId, $datasetId, Appointments_Google_Service_Bigquery_Table $postBody, $optParams = array())
   {
     $params = array('projectId' => $projectId, 'datasetId' => $datasetId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Bigquery_Table");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Bigquery_Table");
   }
 
   /**
@@ -919,13 +919,13 @@ class Google_Service_Bigquery_Tables_Resource extends Google_Service_Resource
    * @opt_param string maxResults Maximum number of results to return
    * @opt_param string pageToken Page token, returned by a previous call, to
    * request the next page of results
-   * @return Google_Service_Bigquery_TableList
+   * @return Appointments_Google_Service_Bigquery_TableList
    */
   public function listTables($projectId, $datasetId, $optParams = array())
   {
     $params = array('projectId' => $projectId, 'datasetId' => $datasetId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Bigquery_TableList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Bigquery_TableList");
   }
 
   /**
@@ -937,15 +937,15 @@ class Google_Service_Bigquery_Tables_Resource extends Google_Service_Resource
    * @param string $projectId Project ID of the table to update
    * @param string $datasetId Dataset ID of the table to update
    * @param string $tableId Table ID of the table to update
-   * @param Google_Table $postBody
+   * @param Appointments_Google_Table $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Bigquery_Table
+   * @return Appointments_Google_Service_Bigquery_Table
    */
-  public function patch($projectId, $datasetId, $tableId, Google_Service_Bigquery_Table $postBody, $optParams = array())
+  public function patch($projectId, $datasetId, $tableId, Appointments_Google_Service_Bigquery_Table $postBody, $optParams = array())
   {
     $params = array('projectId' => $projectId, 'datasetId' => $datasetId, 'tableId' => $tableId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Bigquery_Table");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Bigquery_Table");
   }
 
   /**
@@ -956,22 +956,22 @@ class Google_Service_Bigquery_Tables_Resource extends Google_Service_Resource
    * @param string $projectId Project ID of the table to update
    * @param string $datasetId Dataset ID of the table to update
    * @param string $tableId Table ID of the table to update
-   * @param Google_Table $postBody
+   * @param Appointments_Google_Table $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Bigquery_Table
+   * @return Appointments_Google_Service_Bigquery_Table
    */
-  public function update($projectId, $datasetId, $tableId, Google_Service_Bigquery_Table $postBody, $optParams = array())
+  public function update($projectId, $datasetId, $tableId, Appointments_Google_Service_Bigquery_Table $postBody, $optParams = array())
   {
     $params = array('projectId' => $projectId, 'datasetId' => $datasetId, 'tableId' => $tableId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Bigquery_Table");
+    return $this->call('update', array($params), "Appointments_Google_Service_Bigquery_Table");
   }
 }
 
 
 
 
-class Google_Service_Bigquery_CsvOptions extends Google_Model
+class Appointments_Google_Service_Bigquery_CsvOptions extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1033,15 +1033,15 @@ class Google_Service_Bigquery_CsvOptions extends Google_Model
   }
 }
 
-class Google_Service_Bigquery_Dataset extends Google_Collection
+class Appointments_Google_Service_Bigquery_Dataset extends Appointments_Google_Collection
 {
   protected $collection_key = 'access';
   protected $internal_gapi_mappings = array(
   );
-  protected $accessType = 'Google_Service_Bigquery_DatasetAccess';
+  protected $accessType = 'Appointments_Google_Service_Bigquery_DatasetAccess';
   protected $accessDataType = 'array';
   public $creationTime;
-  protected $datasetReferenceType = 'Google_Service_Bigquery_DatasetReference';
+  protected $datasetReferenceType = 'Appointments_Google_Service_Bigquery_DatasetReference';
   protected $datasetReferenceDataType = '';
   public $defaultTableExpirationMs;
   public $description;
@@ -1070,7 +1070,7 @@ class Google_Service_Bigquery_Dataset extends Google_Collection
   {
     return $this->creationTime;
   }
-  public function setDatasetReference(Google_Service_Bigquery_DatasetReference $datasetReference)
+  public function setDatasetReference(Appointments_Google_Service_Bigquery_DatasetReference $datasetReference)
   {
     $this->datasetReference = $datasetReference;
   }
@@ -1152,7 +1152,7 @@ class Google_Service_Bigquery_Dataset extends Google_Collection
   }
 }
 
-class Google_Service_Bigquery_DatasetAccess extends Google_Model
+class Appointments_Google_Service_Bigquery_DatasetAccess extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1161,7 +1161,7 @@ class Google_Service_Bigquery_DatasetAccess extends Google_Model
   public $role;
   public $specialGroup;
   public $userByEmail;
-  protected $viewType = 'Google_Service_Bigquery_TableReference';
+  protected $viewType = 'Appointments_Google_Service_Bigquery_TableReference';
   protected $viewDataType = '';
 
 
@@ -1205,7 +1205,7 @@ class Google_Service_Bigquery_DatasetAccess extends Google_Model
   {
     return $this->userByEmail;
   }
-  public function setView(Google_Service_Bigquery_TableReference $view)
+  public function setView(Appointments_Google_Service_Bigquery_TableReference $view)
   {
     $this->view = $view;
   }
@@ -1215,12 +1215,12 @@ class Google_Service_Bigquery_DatasetAccess extends Google_Model
   }
 }
 
-class Google_Service_Bigquery_DatasetList extends Google_Collection
+class Appointments_Google_Service_Bigquery_DatasetList extends Appointments_Google_Collection
 {
   protected $collection_key = 'datasets';
   protected $internal_gapi_mappings = array(
   );
-  protected $datasetsType = 'Google_Service_Bigquery_DatasetListDatasets';
+  protected $datasetsType = 'Appointments_Google_Service_Bigquery_DatasetListDatasets';
   protected $datasetsDataType = 'array';
   public $etag;
   public $kind;
@@ -1261,18 +1261,18 @@ class Google_Service_Bigquery_DatasetList extends Google_Collection
   }
 }
 
-class Google_Service_Bigquery_DatasetListDatasets extends Google_Model
+class Appointments_Google_Service_Bigquery_DatasetListDatasets extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $datasetReferenceType = 'Google_Service_Bigquery_DatasetReference';
+  protected $datasetReferenceType = 'Appointments_Google_Service_Bigquery_DatasetReference';
   protected $datasetReferenceDataType = '';
   public $friendlyName;
   public $id;
   public $kind;
 
 
-  public function setDatasetReference(Google_Service_Bigquery_DatasetReference $datasetReference)
+  public function setDatasetReference(Appointments_Google_Service_Bigquery_DatasetReference $datasetReference)
   {
     $this->datasetReference = $datasetReference;
   }
@@ -1306,7 +1306,7 @@ class Google_Service_Bigquery_DatasetListDatasets extends Google_Model
   }
 }
 
-class Google_Service_Bigquery_DatasetReference extends Google_Model
+class Appointments_Google_Service_Bigquery_DatasetReference extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1332,7 +1332,7 @@ class Google_Service_Bigquery_DatasetReference extends Google_Model
   }
 }
 
-class Google_Service_Bigquery_ErrorProto extends Google_Model
+class Appointments_Google_Service_Bigquery_ErrorProto extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1376,7 +1376,7 @@ class Google_Service_Bigquery_ErrorProto extends Google_Model
   }
 }
 
-class Google_Service_Bigquery_ExplainQueryStage extends Google_Collection
+class Appointments_Google_Service_Bigquery_ExplainQueryStage extends Appointments_Google_Collection
 {
   protected $collection_key = 'steps';
   protected $internal_gapi_mappings = array(
@@ -1389,7 +1389,7 @@ class Google_Service_Bigquery_ExplainQueryStage extends Google_Collection
   public $readRatioMax;
   public $recordsRead;
   public $recordsWritten;
-  protected $stepsType = 'Google_Service_Bigquery_ExplainQueryStep';
+  protected $stepsType = 'Appointments_Google_Service_Bigquery_ExplainQueryStep';
   protected $stepsDataType = 'array';
   public $waitRatioAvg;
   public $waitRatioMax;
@@ -1503,7 +1503,7 @@ class Google_Service_Bigquery_ExplainQueryStage extends Google_Collection
   }
 }
 
-class Google_Service_Bigquery_ExplainQueryStep extends Google_Collection
+class Appointments_Google_Service_Bigquery_ExplainQueryStep extends Appointments_Google_Collection
 {
   protected $collection_key = 'substeps';
   protected $internal_gapi_mappings = array(
@@ -1530,17 +1530,17 @@ class Google_Service_Bigquery_ExplainQueryStep extends Google_Collection
   }
 }
 
-class Google_Service_Bigquery_ExternalDataConfiguration extends Google_Collection
+class Appointments_Google_Service_Bigquery_ExternalDataConfiguration extends Appointments_Google_Collection
 {
   protected $collection_key = 'sourceUris';
   protected $internal_gapi_mappings = array(
   );
   public $compression;
-  protected $csvOptionsType = 'Google_Service_Bigquery_CsvOptions';
+  protected $csvOptionsType = 'Appointments_Google_Service_Bigquery_CsvOptions';
   protected $csvOptionsDataType = '';
   public $ignoreUnknownValues;
   public $maxBadRecords;
-  protected $schemaType = 'Google_Service_Bigquery_TableSchema';
+  protected $schemaType = 'Appointments_Google_Service_Bigquery_TableSchema';
   protected $schemaDataType = '';
   public $sourceFormat;
   public $sourceUris;
@@ -1554,7 +1554,7 @@ class Google_Service_Bigquery_ExternalDataConfiguration extends Google_Collectio
   {
     return $this->compression;
   }
-  public function setCsvOptions(Google_Service_Bigquery_CsvOptions $csvOptions)
+  public function setCsvOptions(Appointments_Google_Service_Bigquery_CsvOptions $csvOptions)
   {
     $this->csvOptions = $csvOptions;
   }
@@ -1578,7 +1578,7 @@ class Google_Service_Bigquery_ExternalDataConfiguration extends Google_Collectio
   {
     return $this->maxBadRecords;
   }
-  public function setSchema(Google_Service_Bigquery_TableSchema $schema)
+  public function setSchema(Appointments_Google_Service_Bigquery_TableSchema $schema)
   {
     $this->schema = $schema;
   }
@@ -1604,23 +1604,23 @@ class Google_Service_Bigquery_ExternalDataConfiguration extends Google_Collectio
   }
 }
 
-class Google_Service_Bigquery_GetQueryResultsResponse extends Google_Collection
+class Appointments_Google_Service_Bigquery_GetQueryResultsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'rows';
   protected $internal_gapi_mappings = array(
   );
   public $cacheHit;
-  protected $errorsType = 'Google_Service_Bigquery_ErrorProto';
+  protected $errorsType = 'Appointments_Google_Service_Bigquery_ErrorProto';
   protected $errorsDataType = 'array';
   public $etag;
   public $jobComplete;
-  protected $jobReferenceType = 'Google_Service_Bigquery_JobReference';
+  protected $jobReferenceType = 'Appointments_Google_Service_Bigquery_JobReference';
   protected $jobReferenceDataType = '';
   public $kind;
   public $pageToken;
-  protected $rowsType = 'Google_Service_Bigquery_TableRow';
+  protected $rowsType = 'Appointments_Google_Service_Bigquery_TableRow';
   protected $rowsDataType = 'array';
-  protected $schemaType = 'Google_Service_Bigquery_TableSchema';
+  protected $schemaType = 'Appointments_Google_Service_Bigquery_TableSchema';
   protected $schemaDataType = '';
   public $totalBytesProcessed;
   public $totalRows;
@@ -1658,7 +1658,7 @@ class Google_Service_Bigquery_GetQueryResultsResponse extends Google_Collection
   {
     return $this->jobComplete;
   }
-  public function setJobReference(Google_Service_Bigquery_JobReference $jobReference)
+  public function setJobReference(Appointments_Google_Service_Bigquery_JobReference $jobReference)
   {
     $this->jobReference = $jobReference;
   }
@@ -1690,7 +1690,7 @@ class Google_Service_Bigquery_GetQueryResultsResponse extends Google_Collection
   {
     return $this->rows;
   }
-  public function setSchema(Google_Service_Bigquery_TableSchema $schema)
+  public function setSchema(Appointments_Google_Service_Bigquery_TableSchema $schema)
   {
     $this->schema = $schema;
   }
@@ -1716,27 +1716,27 @@ class Google_Service_Bigquery_GetQueryResultsResponse extends Google_Collection
   }
 }
 
-class Google_Service_Bigquery_Job extends Google_Model
+class Appointments_Google_Service_Bigquery_Job extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
         "userEmail" => "user_email",
   );
-  protected $configurationType = 'Google_Service_Bigquery_JobConfiguration';
+  protected $configurationType = 'Appointments_Google_Service_Bigquery_JobConfiguration';
   protected $configurationDataType = '';
   public $etag;
   public $id;
-  protected $jobReferenceType = 'Google_Service_Bigquery_JobReference';
+  protected $jobReferenceType = 'Appointments_Google_Service_Bigquery_JobReference';
   protected $jobReferenceDataType = '';
   public $kind;
   public $selfLink;
-  protected $statisticsType = 'Google_Service_Bigquery_JobStatistics';
+  protected $statisticsType = 'Appointments_Google_Service_Bigquery_JobStatistics';
   protected $statisticsDataType = '';
-  protected $statusType = 'Google_Service_Bigquery_JobStatus';
+  protected $statusType = 'Appointments_Google_Service_Bigquery_JobStatus';
   protected $statusDataType = '';
   public $userEmail;
 
 
-  public function setConfiguration(Google_Service_Bigquery_JobConfiguration $configuration)
+  public function setConfiguration(Appointments_Google_Service_Bigquery_JobConfiguration $configuration)
   {
     $this->configuration = $configuration;
   }
@@ -1760,7 +1760,7 @@ class Google_Service_Bigquery_Job extends Google_Model
   {
     return $this->id;
   }
-  public function setJobReference(Google_Service_Bigquery_JobReference $jobReference)
+  public function setJobReference(Appointments_Google_Service_Bigquery_JobReference $jobReference)
   {
     $this->jobReference = $jobReference;
   }
@@ -1784,7 +1784,7 @@ class Google_Service_Bigquery_Job extends Google_Model
   {
     return $this->selfLink;
   }
-  public function setStatistics(Google_Service_Bigquery_JobStatistics $statistics)
+  public function setStatistics(Appointments_Google_Service_Bigquery_JobStatistics $statistics)
   {
     $this->statistics = $statistics;
   }
@@ -1792,7 +1792,7 @@ class Google_Service_Bigquery_Job extends Google_Model
   {
     return $this->statistics;
   }
-  public function setStatus(Google_Service_Bigquery_JobStatus $status)
+  public function setStatus(Appointments_Google_Service_Bigquery_JobStatus $status)
   {
     $this->status = $status;
   }
@@ -1810,16 +1810,16 @@ class Google_Service_Bigquery_Job extends Google_Model
   }
 }
 
-class Google_Service_Bigquery_JobCancelResponse extends Google_Model
+class Appointments_Google_Service_Bigquery_JobCancelResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $jobType = 'Google_Service_Bigquery_Job';
+  protected $jobType = 'Appointments_Google_Service_Bigquery_Job';
   protected $jobDataType = '';
   public $kind;
 
 
-  public function setJob(Google_Service_Bigquery_Job $job)
+  public function setJob(Appointments_Google_Service_Bigquery_Job $job)
   {
     $this->job = $job;
   }
@@ -1837,22 +1837,22 @@ class Google_Service_Bigquery_JobCancelResponse extends Google_Model
   }
 }
 
-class Google_Service_Bigquery_JobConfiguration extends Google_Model
+class Appointments_Google_Service_Bigquery_JobConfiguration extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $copyType = 'Google_Service_Bigquery_JobConfigurationTableCopy';
+  protected $copyType = 'Appointments_Google_Service_Bigquery_JobConfigurationTableCopy';
   protected $copyDataType = '';
   public $dryRun;
-  protected $extractType = 'Google_Service_Bigquery_JobConfigurationExtract';
+  protected $extractType = 'Appointments_Google_Service_Bigquery_JobConfigurationExtract';
   protected $extractDataType = '';
-  protected $loadType = 'Google_Service_Bigquery_JobConfigurationLoad';
+  protected $loadType = 'Appointments_Google_Service_Bigquery_JobConfigurationLoad';
   protected $loadDataType = '';
-  protected $queryType = 'Google_Service_Bigquery_JobConfigurationQuery';
+  protected $queryType = 'Appointments_Google_Service_Bigquery_JobConfigurationQuery';
   protected $queryDataType = '';
 
 
-  public function setCopy(Google_Service_Bigquery_JobConfigurationTableCopy $copy)
+  public function setCopy(Appointments_Google_Service_Bigquery_JobConfigurationTableCopy $copy)
   {
     $this->copy = $copy;
   }
@@ -1868,7 +1868,7 @@ class Google_Service_Bigquery_JobConfiguration extends Google_Model
   {
     return $this->dryRun;
   }
-  public function setExtract(Google_Service_Bigquery_JobConfigurationExtract $extract)
+  public function setExtract(Appointments_Google_Service_Bigquery_JobConfigurationExtract $extract)
   {
     $this->extract = $extract;
   }
@@ -1876,7 +1876,7 @@ class Google_Service_Bigquery_JobConfiguration extends Google_Model
   {
     return $this->extract;
   }
-  public function setLoad(Google_Service_Bigquery_JobConfigurationLoad $load)
+  public function setLoad(Appointments_Google_Service_Bigquery_JobConfigurationLoad $load)
   {
     $this->load = $load;
   }
@@ -1884,7 +1884,7 @@ class Google_Service_Bigquery_JobConfiguration extends Google_Model
   {
     return $this->load;
   }
-  public function setQuery(Google_Service_Bigquery_JobConfigurationQuery $query)
+  public function setQuery(Appointments_Google_Service_Bigquery_JobConfigurationQuery $query)
   {
     $this->query = $query;
   }
@@ -1894,7 +1894,7 @@ class Google_Service_Bigquery_JobConfiguration extends Google_Model
   }
 }
 
-class Google_Service_Bigquery_JobConfigurationExtract extends Google_Collection
+class Appointments_Google_Service_Bigquery_JobConfigurationExtract extends Appointments_Google_Collection
 {
   protected $collection_key = 'destinationUris';
   protected $internal_gapi_mappings = array(
@@ -1905,7 +1905,7 @@ class Google_Service_Bigquery_JobConfigurationExtract extends Google_Collection
   public $destinationUris;
   public $fieldDelimiter;
   public $printHeader;
-  protected $sourceTableType = 'Google_Service_Bigquery_TableReference';
+  protected $sourceTableType = 'Appointments_Google_Service_Bigquery_TableReference';
   protected $sourceTableDataType = '';
 
 
@@ -1957,7 +1957,7 @@ class Google_Service_Bigquery_JobConfigurationExtract extends Google_Collection
   {
     return $this->printHeader;
   }
-  public function setSourceTable(Google_Service_Bigquery_TableReference $sourceTable)
+  public function setSourceTable(Appointments_Google_Service_Bigquery_TableReference $sourceTable)
   {
     $this->sourceTable = $sourceTable;
   }
@@ -1967,7 +1967,7 @@ class Google_Service_Bigquery_JobConfigurationExtract extends Google_Collection
   }
 }
 
-class Google_Service_Bigquery_JobConfigurationLoad extends Google_Collection
+class Appointments_Google_Service_Bigquery_JobConfigurationLoad extends Appointments_Google_Collection
 {
   protected $collection_key = 'sourceUris';
   protected $internal_gapi_mappings = array(
@@ -1975,7 +1975,7 @@ class Google_Service_Bigquery_JobConfigurationLoad extends Google_Collection
   public $allowJaggedRows;
   public $allowQuotedNewlines;
   public $createDisposition;
-  protected $destinationTableType = 'Google_Service_Bigquery_TableReference';
+  protected $destinationTableType = 'Appointments_Google_Service_Bigquery_TableReference';
   protected $destinationTableDataType = '';
   public $encoding;
   public $fieldDelimiter;
@@ -1983,7 +1983,7 @@ class Google_Service_Bigquery_JobConfigurationLoad extends Google_Collection
   public $maxBadRecords;
   public $projectionFields;
   public $quote;
-  protected $schemaType = 'Google_Service_Bigquery_TableSchema';
+  protected $schemaType = 'Appointments_Google_Service_Bigquery_TableSchema';
   protected $schemaDataType = '';
   public $schemaInline;
   public $schemaInlineFormat;
@@ -2017,7 +2017,7 @@ class Google_Service_Bigquery_JobConfigurationLoad extends Google_Collection
   {
     return $this->createDisposition;
   }
-  public function setDestinationTable(Google_Service_Bigquery_TableReference $destinationTable)
+  public function setDestinationTable(Appointments_Google_Service_Bigquery_TableReference $destinationTable)
   {
     $this->destinationTable = $destinationTable;
   }
@@ -2073,7 +2073,7 @@ class Google_Service_Bigquery_JobConfigurationLoad extends Google_Collection
   {
     return $this->quote;
   }
-  public function setSchema(Google_Service_Bigquery_TableSchema $schema)
+  public function setSchema(Appointments_Google_Service_Bigquery_TableSchema $schema)
   {
     $this->schema = $schema;
   }
@@ -2131,26 +2131,26 @@ class Google_Service_Bigquery_JobConfigurationLoad extends Google_Collection
   }
 }
 
-class Google_Service_Bigquery_JobConfigurationQuery extends Google_Collection
+class Appointments_Google_Service_Bigquery_JobConfigurationQuery extends Appointments_Google_Collection
 {
   protected $collection_key = 'userDefinedFunctionResources';
   protected $internal_gapi_mappings = array(
   );
   public $allowLargeResults;
   public $createDisposition;
-  protected $defaultDatasetType = 'Google_Service_Bigquery_DatasetReference';
+  protected $defaultDatasetType = 'Appointments_Google_Service_Bigquery_DatasetReference';
   protected $defaultDatasetDataType = '';
-  protected $destinationTableType = 'Google_Service_Bigquery_TableReference';
+  protected $destinationTableType = 'Appointments_Google_Service_Bigquery_TableReference';
   protected $destinationTableDataType = '';
   public $flattenResults;
   public $maximumBillingTier;
   public $preserveNulls;
   public $priority;
   public $query;
-  protected $tableDefinitionsType = 'Google_Service_Bigquery_ExternalDataConfiguration';
+  protected $tableDefinitionsType = 'Appointments_Google_Service_Bigquery_ExternalDataConfiguration';
   protected $tableDefinitionsDataType = 'map';
   public $useQueryCache;
-  protected $userDefinedFunctionResourcesType = 'Google_Service_Bigquery_UserDefinedFunctionResource';
+  protected $userDefinedFunctionResourcesType = 'Appointments_Google_Service_Bigquery_UserDefinedFunctionResource';
   protected $userDefinedFunctionResourcesDataType = 'array';
   public $writeDisposition;
 
@@ -2171,7 +2171,7 @@ class Google_Service_Bigquery_JobConfigurationQuery extends Google_Collection
   {
     return $this->createDisposition;
   }
-  public function setDefaultDataset(Google_Service_Bigquery_DatasetReference $defaultDataset)
+  public function setDefaultDataset(Appointments_Google_Service_Bigquery_DatasetReference $defaultDataset)
   {
     $this->defaultDataset = $defaultDataset;
   }
@@ -2179,7 +2179,7 @@ class Google_Service_Bigquery_JobConfigurationQuery extends Google_Collection
   {
     return $this->defaultDataset;
   }
-  public function setDestinationTable(Google_Service_Bigquery_TableReference $destinationTable)
+  public function setDestinationTable(Appointments_Google_Service_Bigquery_TableReference $destinationTable)
   {
     $this->destinationTable = $destinationTable;
   }
@@ -2261,17 +2261,17 @@ class Google_Service_Bigquery_JobConfigurationQuery extends Google_Collection
   }
 }
 
-class Google_Service_Bigquery_JobConfigurationTableCopy extends Google_Collection
+class Appointments_Google_Service_Bigquery_JobConfigurationTableCopy extends Appointments_Google_Collection
 {
   protected $collection_key = 'sourceTables';
   protected $internal_gapi_mappings = array(
   );
   public $createDisposition;
-  protected $destinationTableType = 'Google_Service_Bigquery_TableReference';
+  protected $destinationTableType = 'Appointments_Google_Service_Bigquery_TableReference';
   protected $destinationTableDataType = '';
-  protected $sourceTableType = 'Google_Service_Bigquery_TableReference';
+  protected $sourceTableType = 'Appointments_Google_Service_Bigquery_TableReference';
   protected $sourceTableDataType = '';
-  protected $sourceTablesType = 'Google_Service_Bigquery_TableReference';
+  protected $sourceTablesType = 'Appointments_Google_Service_Bigquery_TableReference';
   protected $sourceTablesDataType = 'array';
   public $writeDisposition;
 
@@ -2284,7 +2284,7 @@ class Google_Service_Bigquery_JobConfigurationTableCopy extends Google_Collectio
   {
     return $this->createDisposition;
   }
-  public function setDestinationTable(Google_Service_Bigquery_TableReference $destinationTable)
+  public function setDestinationTable(Appointments_Google_Service_Bigquery_TableReference $destinationTable)
   {
     $this->destinationTable = $destinationTable;
   }
@@ -2292,7 +2292,7 @@ class Google_Service_Bigquery_JobConfigurationTableCopy extends Google_Collectio
   {
     return $this->destinationTable;
   }
-  public function setSourceTable(Google_Service_Bigquery_TableReference $sourceTable)
+  public function setSourceTable(Appointments_Google_Service_Bigquery_TableReference $sourceTable)
   {
     $this->sourceTable = $sourceTable;
   }
@@ -2318,13 +2318,13 @@ class Google_Service_Bigquery_JobConfigurationTableCopy extends Google_Collectio
   }
 }
 
-class Google_Service_Bigquery_JobList extends Google_Collection
+class Appointments_Google_Service_Bigquery_JobList extends Appointments_Google_Collection
 {
   protected $collection_key = 'jobs';
   protected $internal_gapi_mappings = array(
   );
   public $etag;
-  protected $jobsType = 'Google_Service_Bigquery_JobListJobs';
+  protected $jobsType = 'Appointments_Google_Service_Bigquery_JobListJobs';
   protected $jobsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -2364,28 +2364,28 @@ class Google_Service_Bigquery_JobList extends Google_Collection
   }
 }
 
-class Google_Service_Bigquery_JobListJobs extends Google_Model
+class Appointments_Google_Service_Bigquery_JobListJobs extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
         "userEmail" => "user_email",
   );
-  protected $configurationType = 'Google_Service_Bigquery_JobConfiguration';
+  protected $configurationType = 'Appointments_Google_Service_Bigquery_JobConfiguration';
   protected $configurationDataType = '';
-  protected $errorResultType = 'Google_Service_Bigquery_ErrorProto';
+  protected $errorResultType = 'Appointments_Google_Service_Bigquery_ErrorProto';
   protected $errorResultDataType = '';
   public $id;
-  protected $jobReferenceType = 'Google_Service_Bigquery_JobReference';
+  protected $jobReferenceType = 'Appointments_Google_Service_Bigquery_JobReference';
   protected $jobReferenceDataType = '';
   public $kind;
   public $state;
-  protected $statisticsType = 'Google_Service_Bigquery_JobStatistics';
+  protected $statisticsType = 'Appointments_Google_Service_Bigquery_JobStatistics';
   protected $statisticsDataType = '';
-  protected $statusType = 'Google_Service_Bigquery_JobStatus';
+  protected $statusType = 'Appointments_Google_Service_Bigquery_JobStatus';
   protected $statusDataType = '';
   public $userEmail;
 
 
-  public function setConfiguration(Google_Service_Bigquery_JobConfiguration $configuration)
+  public function setConfiguration(Appointments_Google_Service_Bigquery_JobConfiguration $configuration)
   {
     $this->configuration = $configuration;
   }
@@ -2393,7 +2393,7 @@ class Google_Service_Bigquery_JobListJobs extends Google_Model
   {
     return $this->configuration;
   }
-  public function setErrorResult(Google_Service_Bigquery_ErrorProto $errorResult)
+  public function setErrorResult(Appointments_Google_Service_Bigquery_ErrorProto $errorResult)
   {
     $this->errorResult = $errorResult;
   }
@@ -2409,7 +2409,7 @@ class Google_Service_Bigquery_JobListJobs extends Google_Model
   {
     return $this->id;
   }
-  public function setJobReference(Google_Service_Bigquery_JobReference $jobReference)
+  public function setJobReference(Appointments_Google_Service_Bigquery_JobReference $jobReference)
   {
     $this->jobReference = $jobReference;
   }
@@ -2433,7 +2433,7 @@ class Google_Service_Bigquery_JobListJobs extends Google_Model
   {
     return $this->state;
   }
-  public function setStatistics(Google_Service_Bigquery_JobStatistics $statistics)
+  public function setStatistics(Appointments_Google_Service_Bigquery_JobStatistics $statistics)
   {
     $this->statistics = $statistics;
   }
@@ -2441,7 +2441,7 @@ class Google_Service_Bigquery_JobListJobs extends Google_Model
   {
     return $this->statistics;
   }
-  public function setStatus(Google_Service_Bigquery_JobStatus $status)
+  public function setStatus(Appointments_Google_Service_Bigquery_JobStatus $status)
   {
     $this->status = $status;
   }
@@ -2459,7 +2459,7 @@ class Google_Service_Bigquery_JobListJobs extends Google_Model
   }
 }
 
-class Google_Service_Bigquery_JobReference extends Google_Model
+class Appointments_Google_Service_Bigquery_JobReference extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2485,17 +2485,17 @@ class Google_Service_Bigquery_JobReference extends Google_Model
   }
 }
 
-class Google_Service_Bigquery_JobStatistics extends Google_Model
+class Appointments_Google_Service_Bigquery_JobStatistics extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $creationTime;
   public $endTime;
-  protected $extractType = 'Google_Service_Bigquery_JobStatistics4';
+  protected $extractType = 'Appointments_Google_Service_Bigquery_JobStatistics4';
   protected $extractDataType = '';
-  protected $loadType = 'Google_Service_Bigquery_JobStatistics3';
+  protected $loadType = 'Appointments_Google_Service_Bigquery_JobStatistics3';
   protected $loadDataType = '';
-  protected $queryType = 'Google_Service_Bigquery_JobStatistics2';
+  protected $queryType = 'Appointments_Google_Service_Bigquery_JobStatistics2';
   protected $queryDataType = '';
   public $startTime;
   public $totalBytesProcessed;
@@ -2517,7 +2517,7 @@ class Google_Service_Bigquery_JobStatistics extends Google_Model
   {
     return $this->endTime;
   }
-  public function setExtract(Google_Service_Bigquery_JobStatistics4 $extract)
+  public function setExtract(Appointments_Google_Service_Bigquery_JobStatistics4 $extract)
   {
     $this->extract = $extract;
   }
@@ -2525,7 +2525,7 @@ class Google_Service_Bigquery_JobStatistics extends Google_Model
   {
     return $this->extract;
   }
-  public function setLoad(Google_Service_Bigquery_JobStatistics3 $load)
+  public function setLoad(Appointments_Google_Service_Bigquery_JobStatistics3 $load)
   {
     $this->load = $load;
   }
@@ -2533,7 +2533,7 @@ class Google_Service_Bigquery_JobStatistics extends Google_Model
   {
     return $this->load;
   }
-  public function setQuery(Google_Service_Bigquery_JobStatistics2 $query)
+  public function setQuery(Appointments_Google_Service_Bigquery_JobStatistics2 $query)
   {
     $this->query = $query;
   }
@@ -2559,14 +2559,14 @@ class Google_Service_Bigquery_JobStatistics extends Google_Model
   }
 }
 
-class Google_Service_Bigquery_JobStatistics2 extends Google_Collection
+class Appointments_Google_Service_Bigquery_JobStatistics2 extends Appointments_Google_Collection
 {
   protected $collection_key = 'queryPlan';
   protected $internal_gapi_mappings = array(
   );
   public $billingTier;
   public $cacheHit;
-  protected $queryPlanType = 'Google_Service_Bigquery_ExplainQueryStage';
+  protected $queryPlanType = 'Appointments_Google_Service_Bigquery_ExplainQueryStage';
   protected $queryPlanDataType = 'array';
   public $totalBytesBilled;
   public $totalBytesProcessed;
@@ -2614,7 +2614,7 @@ class Google_Service_Bigquery_JobStatistics2 extends Google_Collection
   }
 }
 
-class Google_Service_Bigquery_JobStatistics3 extends Google_Model
+class Appointments_Google_Service_Bigquery_JobStatistics3 extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2658,7 +2658,7 @@ class Google_Service_Bigquery_JobStatistics3 extends Google_Model
   }
 }
 
-class Google_Service_Bigquery_JobStatistics4 extends Google_Collection
+class Appointments_Google_Service_Bigquery_JobStatistics4 extends Appointments_Google_Collection
 {
   protected $collection_key = 'destinationUriFileCounts';
   protected $internal_gapi_mappings = array(
@@ -2676,19 +2676,19 @@ class Google_Service_Bigquery_JobStatistics4 extends Google_Collection
   }
 }
 
-class Google_Service_Bigquery_JobStatus extends Google_Collection
+class Appointments_Google_Service_Bigquery_JobStatus extends Appointments_Google_Collection
 {
   protected $collection_key = 'errors';
   protected $internal_gapi_mappings = array(
   );
-  protected $errorResultType = 'Google_Service_Bigquery_ErrorProto';
+  protected $errorResultType = 'Appointments_Google_Service_Bigquery_ErrorProto';
   protected $errorResultDataType = '';
-  protected $errorsType = 'Google_Service_Bigquery_ErrorProto';
+  protected $errorsType = 'Appointments_Google_Service_Bigquery_ErrorProto';
   protected $errorsDataType = 'array';
   public $state;
 
 
-  public function setErrorResult(Google_Service_Bigquery_ErrorProto $errorResult)
+  public function setErrorResult(Appointments_Google_Service_Bigquery_ErrorProto $errorResult)
   {
     $this->errorResult = $errorResult;
   }
@@ -2714,7 +2714,7 @@ class Google_Service_Bigquery_JobStatus extends Google_Collection
   }
 }
 
-class Google_Service_Bigquery_ProjectList extends Google_Collection
+class Appointments_Google_Service_Bigquery_ProjectList extends Appointments_Google_Collection
 {
   protected $collection_key = 'projects';
   protected $internal_gapi_mappings = array(
@@ -2722,7 +2722,7 @@ class Google_Service_Bigquery_ProjectList extends Google_Collection
   public $etag;
   public $kind;
   public $nextPageToken;
-  protected $projectsType = 'Google_Service_Bigquery_ProjectListProjects';
+  protected $projectsType = 'Appointments_Google_Service_Bigquery_ProjectListProjects';
   protected $projectsDataType = 'array';
   public $totalItems;
 
@@ -2769,7 +2769,7 @@ class Google_Service_Bigquery_ProjectList extends Google_Collection
   }
 }
 
-class Google_Service_Bigquery_ProjectListProjects extends Google_Model
+class Appointments_Google_Service_Bigquery_ProjectListProjects extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2777,7 +2777,7 @@ class Google_Service_Bigquery_ProjectListProjects extends Google_Model
   public $id;
   public $kind;
   public $numericId;
-  protected $projectReferenceType = 'Google_Service_Bigquery_ProjectReference';
+  protected $projectReferenceType = 'Appointments_Google_Service_Bigquery_ProjectReference';
   protected $projectReferenceDataType = '';
 
 
@@ -2813,7 +2813,7 @@ class Google_Service_Bigquery_ProjectListProjects extends Google_Model
   {
     return $this->numericId;
   }
-  public function setProjectReference(Google_Service_Bigquery_ProjectReference $projectReference)
+  public function setProjectReference(Appointments_Google_Service_Bigquery_ProjectReference $projectReference)
   {
     $this->projectReference = $projectReference;
   }
@@ -2823,7 +2823,7 @@ class Google_Service_Bigquery_ProjectListProjects extends Google_Model
   }
 }
 
-class Google_Service_Bigquery_ProjectReference extends Google_Model
+class Appointments_Google_Service_Bigquery_ProjectReference extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2840,11 +2840,11 @@ class Google_Service_Bigquery_ProjectReference extends Google_Model
   }
 }
 
-class Google_Service_Bigquery_QueryRequest extends Google_Model
+class Appointments_Google_Service_Bigquery_QueryRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $defaultDatasetType = 'Google_Service_Bigquery_DatasetReference';
+  protected $defaultDatasetType = 'Appointments_Google_Service_Bigquery_DatasetReference';
   protected $defaultDatasetDataType = '';
   public $dryRun;
   public $kind;
@@ -2855,7 +2855,7 @@ class Google_Service_Bigquery_QueryRequest extends Google_Model
   public $useQueryCache;
 
 
-  public function setDefaultDataset(Google_Service_Bigquery_DatasetReference $defaultDataset)
+  public function setDefaultDataset(Appointments_Google_Service_Bigquery_DatasetReference $defaultDataset)
   {
     $this->defaultDataset = $defaultDataset;
   }
@@ -2921,22 +2921,22 @@ class Google_Service_Bigquery_QueryRequest extends Google_Model
   }
 }
 
-class Google_Service_Bigquery_QueryResponse extends Google_Collection
+class Appointments_Google_Service_Bigquery_QueryResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'rows';
   protected $internal_gapi_mappings = array(
   );
   public $cacheHit;
-  protected $errorsType = 'Google_Service_Bigquery_ErrorProto';
+  protected $errorsType = 'Appointments_Google_Service_Bigquery_ErrorProto';
   protected $errorsDataType = 'array';
   public $jobComplete;
-  protected $jobReferenceType = 'Google_Service_Bigquery_JobReference';
+  protected $jobReferenceType = 'Appointments_Google_Service_Bigquery_JobReference';
   protected $jobReferenceDataType = '';
   public $kind;
   public $pageToken;
-  protected $rowsType = 'Google_Service_Bigquery_TableRow';
+  protected $rowsType = 'Appointments_Google_Service_Bigquery_TableRow';
   protected $rowsDataType = 'array';
-  protected $schemaType = 'Google_Service_Bigquery_TableSchema';
+  protected $schemaType = 'Appointments_Google_Service_Bigquery_TableSchema';
   protected $schemaDataType = '';
   public $totalBytesProcessed;
   public $totalRows;
@@ -2966,7 +2966,7 @@ class Google_Service_Bigquery_QueryResponse extends Google_Collection
   {
     return $this->jobComplete;
   }
-  public function setJobReference(Google_Service_Bigquery_JobReference $jobReference)
+  public function setJobReference(Appointments_Google_Service_Bigquery_JobReference $jobReference)
   {
     $this->jobReference = $jobReference;
   }
@@ -2998,7 +2998,7 @@ class Google_Service_Bigquery_QueryResponse extends Google_Collection
   {
     return $this->rows;
   }
-  public function setSchema(Google_Service_Bigquery_TableSchema $schema)
+  public function setSchema(Appointments_Google_Service_Bigquery_TableSchema $schema)
   {
     $this->schema = $schema;
   }
@@ -3024,7 +3024,7 @@ class Google_Service_Bigquery_QueryResponse extends Google_Collection
   }
 }
 
-class Google_Service_Bigquery_Streamingbuffer extends Google_Model
+class Appointments_Google_Service_Bigquery_Streamingbuffer extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3059,7 +3059,7 @@ class Google_Service_Bigquery_Streamingbuffer extends Google_Model
   }
 }
 
-class Google_Service_Bigquery_Table extends Google_Model
+class Appointments_Google_Service_Bigquery_Table extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3067,7 +3067,7 @@ class Google_Service_Bigquery_Table extends Google_Model
   public $description;
   public $etag;
   public $expirationTime;
-  protected $externalDataConfigurationType = 'Google_Service_Bigquery_ExternalDataConfiguration';
+  protected $externalDataConfigurationType = 'Appointments_Google_Service_Bigquery_ExternalDataConfiguration';
   protected $externalDataConfigurationDataType = '';
   public $friendlyName;
   public $id;
@@ -3076,15 +3076,15 @@ class Google_Service_Bigquery_Table extends Google_Model
   public $location;
   public $numBytes;
   public $numRows;
-  protected $schemaType = 'Google_Service_Bigquery_TableSchema';
+  protected $schemaType = 'Appointments_Google_Service_Bigquery_TableSchema';
   protected $schemaDataType = '';
   public $selfLink;
-  protected $streamingBufferType = 'Google_Service_Bigquery_Streamingbuffer';
+  protected $streamingBufferType = 'Appointments_Google_Service_Bigquery_Streamingbuffer';
   protected $streamingBufferDataType = '';
-  protected $tableReferenceType = 'Google_Service_Bigquery_TableReference';
+  protected $tableReferenceType = 'Appointments_Google_Service_Bigquery_TableReference';
   protected $tableReferenceDataType = '';
   public $type;
-  protected $viewType = 'Google_Service_Bigquery_ViewDefinition';
+  protected $viewType = 'Appointments_Google_Service_Bigquery_ViewDefinition';
   protected $viewDataType = '';
 
 
@@ -3120,7 +3120,7 @@ class Google_Service_Bigquery_Table extends Google_Model
   {
     return $this->expirationTime;
   }
-  public function setExternalDataConfiguration(Google_Service_Bigquery_ExternalDataConfiguration $externalDataConfiguration)
+  public function setExternalDataConfiguration(Appointments_Google_Service_Bigquery_ExternalDataConfiguration $externalDataConfiguration)
   {
     $this->externalDataConfiguration = $externalDataConfiguration;
   }
@@ -3184,7 +3184,7 @@ class Google_Service_Bigquery_Table extends Google_Model
   {
     return $this->numRows;
   }
-  public function setSchema(Google_Service_Bigquery_TableSchema $schema)
+  public function setSchema(Appointments_Google_Service_Bigquery_TableSchema $schema)
   {
     $this->schema = $schema;
   }
@@ -3200,7 +3200,7 @@ class Google_Service_Bigquery_Table extends Google_Model
   {
     return $this->selfLink;
   }
-  public function setStreamingBuffer(Google_Service_Bigquery_Streamingbuffer $streamingBuffer)
+  public function setStreamingBuffer(Appointments_Google_Service_Bigquery_Streamingbuffer $streamingBuffer)
   {
     $this->streamingBuffer = $streamingBuffer;
   }
@@ -3208,7 +3208,7 @@ class Google_Service_Bigquery_Table extends Google_Model
   {
     return $this->streamingBuffer;
   }
-  public function setTableReference(Google_Service_Bigquery_TableReference $tableReference)
+  public function setTableReference(Appointments_Google_Service_Bigquery_TableReference $tableReference)
   {
     $this->tableReference = $tableReference;
   }
@@ -3224,7 +3224,7 @@ class Google_Service_Bigquery_Table extends Google_Model
   {
     return $this->type;
   }
-  public function setView(Google_Service_Bigquery_ViewDefinition $view)
+  public function setView(Appointments_Google_Service_Bigquery_ViewDefinition $view)
   {
     $this->view = $view;
   }
@@ -3234,7 +3234,7 @@ class Google_Service_Bigquery_Table extends Google_Model
   }
 }
 
-class Google_Service_Bigquery_TableCell extends Google_Model
+class Appointments_Google_Service_Bigquery_TableCell extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3251,14 +3251,14 @@ class Google_Service_Bigquery_TableCell extends Google_Model
   }
 }
 
-class Google_Service_Bigquery_TableDataInsertAllRequest extends Google_Collection
+class Appointments_Google_Service_Bigquery_TableDataInsertAllRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'rows';
   protected $internal_gapi_mappings = array(
   );
   public $ignoreUnknownValues;
   public $kind;
-  protected $rowsType = 'Google_Service_Bigquery_TableDataInsertAllRequestRows';
+  protected $rowsType = 'Appointments_Google_Service_Bigquery_TableDataInsertAllRequestRows';
   protected $rowsDataType = 'array';
   public $skipInvalidRows;
   public $templateSuffix;
@@ -3306,7 +3306,7 @@ class Google_Service_Bigquery_TableDataInsertAllRequest extends Google_Collectio
   }
 }
 
-class Google_Service_Bigquery_TableDataInsertAllRequestRows extends Google_Model
+class Appointments_Google_Service_Bigquery_TableDataInsertAllRequestRows extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3332,12 +3332,12 @@ class Google_Service_Bigquery_TableDataInsertAllRequestRows extends Google_Model
   }
 }
 
-class Google_Service_Bigquery_TableDataInsertAllResponse extends Google_Collection
+class Appointments_Google_Service_Bigquery_TableDataInsertAllResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'insertErrors';
   protected $internal_gapi_mappings = array(
   );
-  protected $insertErrorsType = 'Google_Service_Bigquery_TableDataInsertAllResponseInsertErrors';
+  protected $insertErrorsType = 'Appointments_Google_Service_Bigquery_TableDataInsertAllResponseInsertErrors';
   protected $insertErrorsDataType = 'array';
   public $kind;
 
@@ -3360,12 +3360,12 @@ class Google_Service_Bigquery_TableDataInsertAllResponse extends Google_Collecti
   }
 }
 
-class Google_Service_Bigquery_TableDataInsertAllResponseInsertErrors extends Google_Collection
+class Appointments_Google_Service_Bigquery_TableDataInsertAllResponseInsertErrors extends Appointments_Google_Collection
 {
   protected $collection_key = 'errors';
   protected $internal_gapi_mappings = array(
   );
-  protected $errorsType = 'Google_Service_Bigquery_ErrorProto';
+  protected $errorsType = 'Appointments_Google_Service_Bigquery_ErrorProto';
   protected $errorsDataType = 'array';
   public $index;
 
@@ -3388,7 +3388,7 @@ class Google_Service_Bigquery_TableDataInsertAllResponseInsertErrors extends Goo
   }
 }
 
-class Google_Service_Bigquery_TableDataList extends Google_Collection
+class Appointments_Google_Service_Bigquery_TableDataList extends Appointments_Google_Collection
 {
   protected $collection_key = 'rows';
   protected $internal_gapi_mappings = array(
@@ -3396,7 +3396,7 @@ class Google_Service_Bigquery_TableDataList extends Google_Collection
   public $etag;
   public $kind;
   public $pageToken;
-  protected $rowsType = 'Google_Service_Bigquery_TableRow';
+  protected $rowsType = 'Appointments_Google_Service_Bigquery_TableRow';
   protected $rowsDataType = 'array';
   public $totalRows;
 
@@ -3443,13 +3443,13 @@ class Google_Service_Bigquery_TableDataList extends Google_Collection
   }
 }
 
-class Google_Service_Bigquery_TableFieldSchema extends Google_Collection
+class Appointments_Google_Service_Bigquery_TableFieldSchema extends Appointments_Google_Collection
 {
   protected $collection_key = 'fields';
   protected $internal_gapi_mappings = array(
   );
   public $description;
-  protected $fieldsType = 'Google_Service_Bigquery_TableFieldSchema';
+  protected $fieldsType = 'Appointments_Google_Service_Bigquery_TableFieldSchema';
   protected $fieldsDataType = 'array';
   public $mode;
   public $name;
@@ -3498,7 +3498,7 @@ class Google_Service_Bigquery_TableFieldSchema extends Google_Collection
   }
 }
 
-class Google_Service_Bigquery_TableList extends Google_Collection
+class Appointments_Google_Service_Bigquery_TableList extends Appointments_Google_Collection
 {
   protected $collection_key = 'tables';
   protected $internal_gapi_mappings = array(
@@ -3506,7 +3506,7 @@ class Google_Service_Bigquery_TableList extends Google_Collection
   public $etag;
   public $kind;
   public $nextPageToken;
-  protected $tablesType = 'Google_Service_Bigquery_TableListTables';
+  protected $tablesType = 'Appointments_Google_Service_Bigquery_TableListTables';
   protected $tablesDataType = 'array';
   public $totalItems;
 
@@ -3553,14 +3553,14 @@ class Google_Service_Bigquery_TableList extends Google_Collection
   }
 }
 
-class Google_Service_Bigquery_TableListTables extends Google_Model
+class Appointments_Google_Service_Bigquery_TableListTables extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $friendlyName;
   public $id;
   public $kind;
-  protected $tableReferenceType = 'Google_Service_Bigquery_TableReference';
+  protected $tableReferenceType = 'Appointments_Google_Service_Bigquery_TableReference';
   protected $tableReferenceDataType = '';
   public $type;
 
@@ -3589,7 +3589,7 @@ class Google_Service_Bigquery_TableListTables extends Google_Model
   {
     return $this->kind;
   }
-  public function setTableReference(Google_Service_Bigquery_TableReference $tableReference)
+  public function setTableReference(Appointments_Google_Service_Bigquery_TableReference $tableReference)
   {
     $this->tableReference = $tableReference;
   }
@@ -3607,7 +3607,7 @@ class Google_Service_Bigquery_TableListTables extends Google_Model
   }
 }
 
-class Google_Service_Bigquery_TableReference extends Google_Model
+class Appointments_Google_Service_Bigquery_TableReference extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3642,12 +3642,12 @@ class Google_Service_Bigquery_TableReference extends Google_Model
   }
 }
 
-class Google_Service_Bigquery_TableRow extends Google_Collection
+class Appointments_Google_Service_Bigquery_TableRow extends Appointments_Google_Collection
 {
   protected $collection_key = 'f';
   protected $internal_gapi_mappings = array(
   );
-  protected $fType = 'Google_Service_Bigquery_TableCell';
+  protected $fType = 'Appointments_Google_Service_Bigquery_TableCell';
   protected $fDataType = 'array';
 
 
@@ -3661,12 +3661,12 @@ class Google_Service_Bigquery_TableRow extends Google_Collection
   }
 }
 
-class Google_Service_Bigquery_TableSchema extends Google_Collection
+class Appointments_Google_Service_Bigquery_TableSchema extends Appointments_Google_Collection
 {
   protected $collection_key = 'fields';
   protected $internal_gapi_mappings = array(
   );
-  protected $fieldsType = 'Google_Service_Bigquery_TableFieldSchema';
+  protected $fieldsType = 'Appointments_Google_Service_Bigquery_TableFieldSchema';
   protected $fieldsDataType = 'array';
 
 
@@ -3680,7 +3680,7 @@ class Google_Service_Bigquery_TableSchema extends Google_Collection
   }
 }
 
-class Google_Service_Bigquery_UserDefinedFunctionResource extends Google_Model
+class Appointments_Google_Service_Bigquery_UserDefinedFunctionResource extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3706,13 +3706,13 @@ class Google_Service_Bigquery_UserDefinedFunctionResource extends Google_Model
   }
 }
 
-class Google_Service_Bigquery_ViewDefinition extends Google_Collection
+class Appointments_Google_Service_Bigquery_ViewDefinition extends Appointments_Google_Collection
 {
   protected $collection_key = 'userDefinedFunctionResources';
   protected $internal_gapi_mappings = array(
   );
   public $query;
-  protected $userDefinedFunctionResourcesType = 'Google_Service_Bigquery_UserDefinedFunctionResource';
+  protected $userDefinedFunctionResourcesType = 'Appointments_Google_Service_Bigquery_UserDefinedFunctionResource';
   protected $userDefinedFunctionResourcesDataType = 'array';
 
 

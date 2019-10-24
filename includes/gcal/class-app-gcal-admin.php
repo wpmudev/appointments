@@ -1,11 +1,11 @@
 <?php
 
-class Appointments_Google_Calendar_Admin {
+class Appointments_Appointments_Google_Calendar_Admin {
 
 	/**
-	 * Appointments_Google_Calendar_Admin constructor.
+	 * Appointments_Appointments_Google_Calendar_Admin constructor.
 	 *
-	 * @param Appointments_Google_Calendar $gcal_api
+	 * @param Appointments_Appointments_Google_Calendar $gcal_api
 	 */
 	public function __construct( $gcal_api ) {
 		$this->gcal_api = $gcal_api;

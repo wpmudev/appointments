@@ -27,7 +27,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Storagetransfer extends Google_Service
+class Appointments_Google_Service_Storagetransfer extends Appointments_Google_Service
 {
   /** View and manage your data across Google Cloud Platform services. */
   const CLOUD_PLATFORM =
@@ -42,9 +42,9 @@ class Google_Service_Storagetransfer extends Google_Service
   /**
    * Constructs the internal representation of the Storagetransfer service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://storagetransfer.googleapis.com/';
@@ -52,7 +52,7 @@ class Google_Service_Storagetransfer extends Google_Service
     $this->version = 'v1';
     $this->serviceName = 'storagetransfer';
 
-    $this->googleServiceAccounts = new Google_Service_Storagetransfer_GoogleServiceAccounts_Resource(
+    $this->googleServiceAccounts = new Appointments_Google_Service_Storagetransfer_GoogleServiceAccounts_Resource(
         $this,
         $this->serviceName,
         'googleServiceAccounts',
@@ -72,7 +72,7 @@ class Google_Service_Storagetransfer extends Google_Service
           )
         )
     );
-    $this->transferJobs = new Google_Service_Storagetransfer_TransferJobs_Resource(
+    $this->transferJobs = new Appointments_Google_Service_Storagetransfer_TransferJobs_Resource(
         $this,
         $this->serviceName,
         'transferJobs',
@@ -127,7 +127,7 @@ class Google_Service_Storagetransfer extends Google_Service
           )
         )
     );
-    $this->transferOperations = new Google_Service_Storagetransfer_TransferOperations_Resource(
+    $this->transferOperations = new Appointments_Google_Service_Storagetransfer_TransferOperations_Resource(
         $this,
         $this->serviceName,
         'transferOperations',
@@ -209,7 +209,7 @@ class Google_Service_Storagetransfer extends Google_Service
           )
         )
     );
-    $this->v1 = new Google_Service_Storagetransfer_V1_Resource(
+    $this->v1 = new Appointments_Google_Service_Storagetransfer_V1_Resource(
         $this,
         $this->serviceName,
         'v1',
@@ -236,11 +236,11 @@ class Google_Service_Storagetransfer extends Google_Service
  * The "googleServiceAccounts" collection of methods.
  * Typical usage is:
  *  <code>
- *   $storagetransferService = new Google_Service_Storagetransfer(...);
+ *   $storagetransferService = new Appointments_Google_Service_Storagetransfer(...);
  *   $googleServiceAccounts = $storagetransferService->googleServiceAccounts;
  *  </code>
  */
-class Google_Service_Storagetransfer_GoogleServiceAccounts_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Storagetransfer_GoogleServiceAccounts_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -255,13 +255,13 @@ class Google_Service_Storagetransfer_GoogleServiceAccounts_Resource extends Goog
    * @param string $projectId The ID of the Google Developers Console project that
    * the Google service account is associated with. Required.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Storagetransfer_GoogleServiceAccount
+   * @return Appointments_Google_Service_Storagetransfer_GoogleServiceAccount
    */
   public function get($projectId, $optParams = array())
   {
     $params = array('projectId' => $projectId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Storagetransfer_GoogleServiceAccount");
+    return $this->call('get', array($params), "Appointments_Google_Service_Storagetransfer_GoogleServiceAccount");
   }
 }
 
@@ -269,25 +269,25 @@ class Google_Service_Storagetransfer_GoogleServiceAccounts_Resource extends Goog
  * The "transferJobs" collection of methods.
  * Typical usage is:
  *  <code>
- *   $storagetransferService = new Google_Service_Storagetransfer(...);
+ *   $storagetransferService = new Appointments_Google_Service_Storagetransfer(...);
  *   $transferJobs = $storagetransferService->transferJobs;
  *  </code>
  */
-class Google_Service_Storagetransfer_TransferJobs_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Storagetransfer_TransferJobs_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
    * Creates a transfer job that runs periodically. (transferJobs.create)
    *
-   * @param Google_TransferJob $postBody
+   * @param Appointments_Google_TransferJob $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Storagetransfer_TransferJob
+   * @return Appointments_Google_Service_Storagetransfer_TransferJob
    */
-  public function create(Google_Service_Storagetransfer_TransferJob $postBody, $optParams = array())
+  public function create(Appointments_Google_Service_Storagetransfer_TransferJob $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_Storagetransfer_TransferJob");
+    return $this->call('create', array($params), "Appointments_Google_Service_Storagetransfer_TransferJob");
   }
 
   /**
@@ -298,13 +298,13 @@ class Google_Service_Storagetransfer_TransferJobs_Resource extends Google_Servic
    *
    * @opt_param string projectId The ID of the Google Developers Console project
    * that owns the job. Required.
-   * @return Google_Service_Storagetransfer_TransferJob
+   * @return Appointments_Google_Service_Storagetransfer_TransferJob
    */
   public function get($jobName, $optParams = array())
   {
     $params = array('jobName' => $jobName);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Storagetransfer_TransferJob");
+    return $this->call('get', array($params), "Appointments_Google_Service_Storagetransfer_TransferJob");
   }
 
   /**
@@ -322,13 +322,13 @@ class Google_Service_Storagetransfer_TransferJobs_Resource extends Google_Servic
    * `ENABLED`, `DISABLED`, and `DELETED`.
    * @opt_param int pageSize The list page size. The max allowed value is 256.
    * @opt_param string pageToken The list page token.
-   * @return Google_Service_Storagetransfer_ListTransferJobsResponse
+   * @return Appointments_Google_Service_Storagetransfer_ListTransferJobsResponse
    */
   public function listTransferJobs($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Storagetransfer_ListTransferJobsResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Storagetransfer_ListTransferJobsResponse");
   }
 
   /**
@@ -337,15 +337,15 @@ class Google_Service_Storagetransfer_TransferJobs_Resource extends Google_Servic
    * job is not allowed. (transferJobs.patch)
    *
    * @param string $jobName The name of job to update. Required.
-   * @param Google_UpdateTransferJobRequest $postBody
+   * @param Appointments_Google_UpdateTransferJobRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Storagetransfer_TransferJob
+   * @return Appointments_Google_Service_Storagetransfer_TransferJob
    */
-  public function patch($jobName, Google_Service_Storagetransfer_UpdateTransferJobRequest $postBody, $optParams = array())
+  public function patch($jobName, Appointments_Google_Service_Storagetransfer_UpdateTransferJobRequest $postBody, $optParams = array())
   {
     $params = array('jobName' => $jobName, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Storagetransfer_TransferJob");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Storagetransfer_TransferJob");
   }
 }
 
@@ -353,11 +353,11 @@ class Google_Service_Storagetransfer_TransferJobs_Resource extends Google_Servic
  * The "transferOperations" collection of methods.
  * Typical usage is:
  *  <code>
- *   $storagetransferService = new Google_Service_Storagetransfer(...);
+ *   $storagetransferService = new Appointments_Google_Service_Storagetransfer(...);
  *   $transferOperations = $storagetransferService->transferOperations;
  *  </code>
  */
-class Google_Service_Storagetransfer_TransferOperations_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Storagetransfer_TransferOperations_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -367,13 +367,13 @@ class Google_Service_Storagetransfer_TransferOperations_Resource extends Google_
    *
    * @param string $name The name of the operation resource to be cancelled.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Storagetransfer_Empty
+   * @return Appointments_Google_Service_Storagetransfer_Empty
    */
   public function cancel($name, $optParams = array())
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('cancel', array($params), "Google_Service_Storagetransfer_Empty");
+    return $this->call('cancel', array($params), "Appointments_Google_Service_Storagetransfer_Empty");
   }
 
   /**
@@ -382,13 +382,13 @@ class Google_Service_Storagetransfer_TransferOperations_Resource extends Google_
    *
    * @param string $name The name of the operation resource to be deleted.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Storagetransfer_Empty
+   * @return Appointments_Google_Service_Storagetransfer_Empty
    */
   public function delete($name, $optParams = array())
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Storagetransfer_Empty");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Storagetransfer_Empty");
   }
 
   /**
@@ -398,13 +398,13 @@ class Google_Service_Storagetransfer_TransferOperations_Resource extends Google_
    *
    * @param string $name The name of the operation resource.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Storagetransfer_Operation
+   * @return Appointments_Google_Service_Storagetransfer_Operation
    */
   public function get($name, $optParams = array())
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Storagetransfer_Operation");
+    return $this->call('get', array($params), "Appointments_Google_Service_Storagetransfer_Operation");
   }
 
   /**
@@ -420,43 +420,43 @@ class Google_Service_Storagetransfer_TransferOperations_Resource extends Google_
    * @opt_param string filter The standard list filter.
    * @opt_param int pageSize The standard list page size.
    * @opt_param string pageToken The standard list page token.
-   * @return Google_Service_Storagetransfer_ListOperationsResponse
+   * @return Appointments_Google_Service_Storagetransfer_ListOperationsResponse
    */
   public function listTransferOperations($name, $optParams = array())
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Storagetransfer_ListOperationsResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Storagetransfer_ListOperationsResponse");
   }
 
   /**
    * Pauses a transfer operation. (transferOperations.pause)
    *
    * @param string $name The name of the transfer operation. Required.
-   * @param Google_PauseTransferOperationRequest $postBody
+   * @param Appointments_Google_PauseTransferOperationRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Storagetransfer_Empty
+   * @return Appointments_Google_Service_Storagetransfer_Empty
    */
-  public function pause($name, Google_Service_Storagetransfer_PauseTransferOperationRequest $postBody, $optParams = array())
+  public function pause($name, Appointments_Google_Service_Storagetransfer_PauseTransferOperationRequest $postBody, $optParams = array())
   {
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('pause', array($params), "Google_Service_Storagetransfer_Empty");
+    return $this->call('pause', array($params), "Appointments_Google_Service_Storagetransfer_Empty");
   }
 
   /**
    * Resumes a transfer operation that is paused. (transferOperations.resume)
    *
    * @param string $name The name of the transfer operation. Required.
-   * @param Google_ResumeTransferOperationRequest $postBody
+   * @param Appointments_Google_ResumeTransferOperationRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Storagetransfer_Empty
+   * @return Appointments_Google_Service_Storagetransfer_Empty
    */
-  public function resume($name, Google_Service_Storagetransfer_ResumeTransferOperationRequest $postBody, $optParams = array())
+  public function resume($name, Appointments_Google_Service_Storagetransfer_ResumeTransferOperationRequest $postBody, $optParams = array())
   {
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('resume', array($params), "Google_Service_Storagetransfer_Empty");
+    return $this->call('resume', array($params), "Appointments_Google_Service_Storagetransfer_Empty");
   }
 }
 
@@ -464,11 +464,11 @@ class Google_Service_Storagetransfer_TransferOperations_Resource extends Google_
  * The "v1" collection of methods.
  * Typical usage is:
  *  <code>
- *   $storagetransferService = new Google_Service_Storagetransfer(...);
+ *   $storagetransferService = new Appointments_Google_Service_Storagetransfer(...);
  *   $v1 = $storagetransferService->v1;
  *  </code>
  */
-class Google_Service_Storagetransfer_V1_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Storagetransfer_V1_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -484,20 +484,20 @@ class Google_Service_Storagetransfer_V1_Resource extends Google_Service_Resource
    *
    * @opt_param string projectId The ID of the Google Developers Console project
    * that the Google service account is associated with. Required.
-   * @return Google_Service_Storagetransfer_GoogleServiceAccount
+   * @return Appointments_Google_Service_Storagetransfer_GoogleServiceAccount
    */
   public function getGoogleServiceAccount($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('getGoogleServiceAccount', array($params), "Google_Service_Storagetransfer_GoogleServiceAccount");
+    return $this->call('getGoogleServiceAccount', array($params), "Appointments_Google_Service_Storagetransfer_GoogleServiceAccount");
   }
 }
 
 
 
 
-class Google_Service_Storagetransfer_AwsAccessKey extends Google_Model
+class Appointments_Google_Service_Storagetransfer_AwsAccessKey extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -523,16 +523,16 @@ class Google_Service_Storagetransfer_AwsAccessKey extends Google_Model
   }
 }
 
-class Google_Service_Storagetransfer_AwsS3Data extends Google_Model
+class Appointments_Google_Service_Storagetransfer_AwsS3Data extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $awsAccessKeyType = 'Google_Service_Storagetransfer_AwsAccessKey';
+  protected $awsAccessKeyType = 'Appointments_Google_Service_Storagetransfer_AwsAccessKey';
   protected $awsAccessKeyDataType = '';
   public $bucketName;
 
 
-  public function setAwsAccessKey(Google_Service_Storagetransfer_AwsAccessKey $awsAccessKey)
+  public function setAwsAccessKey(Appointments_Google_Service_Storagetransfer_AwsAccessKey $awsAccessKey)
   {
     $this->awsAccessKey = $awsAccessKey;
   }
@@ -550,7 +550,7 @@ class Google_Service_Storagetransfer_AwsS3Data extends Google_Model
   }
 }
 
-class Google_Service_Storagetransfer_Date extends Google_Model
+class Appointments_Google_Service_Storagetransfer_Date extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -585,11 +585,11 @@ class Google_Service_Storagetransfer_Date extends Google_Model
   }
 }
 
-class Google_Service_Storagetransfer_Empty extends Google_Model
+class Appointments_Google_Service_Storagetransfer_Empty extends Appointments_Google_Model
 {
 }
 
-class Google_Service_Storagetransfer_ErrorLogEntry extends Google_Collection
+class Appointments_Google_Service_Storagetransfer_ErrorLogEntry extends Appointments_Google_Collection
 {
   protected $collection_key = 'errorDetails';
   protected $internal_gapi_mappings = array(
@@ -616,14 +616,14 @@ class Google_Service_Storagetransfer_ErrorLogEntry extends Google_Collection
   }
 }
 
-class Google_Service_Storagetransfer_ErrorSummary extends Google_Collection
+class Appointments_Google_Service_Storagetransfer_ErrorSummary extends Appointments_Google_Collection
 {
   protected $collection_key = 'errorLogEntries';
   protected $internal_gapi_mappings = array(
   );
   public $errorCode;
   public $errorCount;
-  protected $errorLogEntriesType = 'Google_Service_Storagetransfer_ErrorLogEntry';
+  protected $errorLogEntriesType = 'Appointments_Google_Service_Storagetransfer_ErrorLogEntry';
   protected $errorLogEntriesDataType = 'array';
 
 
@@ -653,7 +653,7 @@ class Google_Service_Storagetransfer_ErrorSummary extends Google_Collection
   }
 }
 
-class Google_Service_Storagetransfer_GcsData extends Google_Model
+class Appointments_Google_Service_Storagetransfer_GcsData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -670,7 +670,7 @@ class Google_Service_Storagetransfer_GcsData extends Google_Model
   }
 }
 
-class Google_Service_Storagetransfer_GoogleServiceAccount extends Google_Model
+class Appointments_Google_Service_Storagetransfer_GoogleServiceAccount extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -687,7 +687,7 @@ class Google_Service_Storagetransfer_GoogleServiceAccount extends Google_Model
   }
 }
 
-class Google_Service_Storagetransfer_HttpData extends Google_Model
+class Appointments_Google_Service_Storagetransfer_HttpData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -704,13 +704,13 @@ class Google_Service_Storagetransfer_HttpData extends Google_Model
   }
 }
 
-class Google_Service_Storagetransfer_ListOperationsResponse extends Google_Collection
+class Appointments_Google_Service_Storagetransfer_ListOperationsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'operations';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $operationsType = 'Google_Service_Storagetransfer_Operation';
+  protected $operationsType = 'Appointments_Google_Service_Storagetransfer_Operation';
   protected $operationsDataType = 'array';
 
 
@@ -732,13 +732,13 @@ class Google_Service_Storagetransfer_ListOperationsResponse extends Google_Colle
   }
 }
 
-class Google_Service_Storagetransfer_ListTransferJobsResponse extends Google_Collection
+class Appointments_Google_Service_Storagetransfer_ListTransferJobsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'transferJobs';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $transferJobsType = 'Google_Service_Storagetransfer_TransferJob';
+  protected $transferJobsType = 'Appointments_Google_Service_Storagetransfer_TransferJob';
   protected $transferJobsDataType = 'array';
 
 
@@ -760,7 +760,7 @@ class Google_Service_Storagetransfer_ListTransferJobsResponse extends Google_Col
   }
 }
 
-class Google_Service_Storagetransfer_ObjectConditions extends Google_Collection
+class Appointments_Google_Service_Storagetransfer_ObjectConditions extends Appointments_Google_Collection
 {
   protected $collection_key = 'includePrefixes';
   protected $internal_gapi_mappings = array(
@@ -805,12 +805,12 @@ class Google_Service_Storagetransfer_ObjectConditions extends Google_Collection
   }
 }
 
-class Google_Service_Storagetransfer_Operation extends Google_Model
+class Appointments_Google_Service_Storagetransfer_Operation extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $done;
-  protected $errorType = 'Google_Service_Storagetransfer_Status';
+  protected $errorType = 'Appointments_Google_Service_Storagetransfer_Status';
   protected $errorDataType = '';
   public $metadata;
   public $name;
@@ -825,7 +825,7 @@ class Google_Service_Storagetransfer_Operation extends Google_Model
   {
     return $this->done;
   }
-  public function setError(Google_Service_Storagetransfer_Status $error)
+  public function setError(Appointments_Google_Service_Storagetransfer_Status $error)
   {
     $this->error = $error;
   }
@@ -859,27 +859,27 @@ class Google_Service_Storagetransfer_Operation extends Google_Model
   }
 }
 
-class Google_Service_Storagetransfer_PauseTransferOperationRequest extends Google_Model
+class Appointments_Google_Service_Storagetransfer_PauseTransferOperationRequest extends Appointments_Google_Model
 {
 }
 
-class Google_Service_Storagetransfer_ResumeTransferOperationRequest extends Google_Model
+class Appointments_Google_Service_Storagetransfer_ResumeTransferOperationRequest extends Appointments_Google_Model
 {
 }
 
-class Google_Service_Storagetransfer_Schedule extends Google_Model
+class Appointments_Google_Service_Storagetransfer_Schedule extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $scheduleEndDateType = 'Google_Service_Storagetransfer_Date';
+  protected $scheduleEndDateType = 'Appointments_Google_Service_Storagetransfer_Date';
   protected $scheduleEndDateDataType = '';
-  protected $scheduleStartDateType = 'Google_Service_Storagetransfer_Date';
+  protected $scheduleStartDateType = 'Appointments_Google_Service_Storagetransfer_Date';
   protected $scheduleStartDateDataType = '';
-  protected $startTimeOfDayType = 'Google_Service_Storagetransfer_TimeOfDay';
+  protected $startTimeOfDayType = 'Appointments_Google_Service_Storagetransfer_TimeOfDay';
   protected $startTimeOfDayDataType = '';
 
 
-  public function setScheduleEndDate(Google_Service_Storagetransfer_Date $scheduleEndDate)
+  public function setScheduleEndDate(Appointments_Google_Service_Storagetransfer_Date $scheduleEndDate)
   {
     $this->scheduleEndDate = $scheduleEndDate;
   }
@@ -887,7 +887,7 @@ class Google_Service_Storagetransfer_Schedule extends Google_Model
   {
     return $this->scheduleEndDate;
   }
-  public function setScheduleStartDate(Google_Service_Storagetransfer_Date $scheduleStartDate)
+  public function setScheduleStartDate(Appointments_Google_Service_Storagetransfer_Date $scheduleStartDate)
   {
     $this->scheduleStartDate = $scheduleStartDate;
   }
@@ -895,7 +895,7 @@ class Google_Service_Storagetransfer_Schedule extends Google_Model
   {
     return $this->scheduleStartDate;
   }
-  public function setStartTimeOfDay(Google_Service_Storagetransfer_TimeOfDay $startTimeOfDay)
+  public function setStartTimeOfDay(Appointments_Google_Service_Storagetransfer_TimeOfDay $startTimeOfDay)
   {
     $this->startTimeOfDay = $startTimeOfDay;
   }
@@ -905,7 +905,7 @@ class Google_Service_Storagetransfer_Schedule extends Google_Model
   }
 }
 
-class Google_Service_Storagetransfer_Status extends Google_Collection
+class Appointments_Google_Service_Storagetransfer_Status extends Appointments_Google_Collection
 {
   protected $collection_key = 'details';
   protected $internal_gapi_mappings = array(
@@ -941,7 +941,7 @@ class Google_Service_Storagetransfer_Status extends Google_Collection
   }
 }
 
-class Google_Service_Storagetransfer_TimeOfDay extends Google_Model
+class Appointments_Google_Service_Storagetransfer_TimeOfDay extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -985,7 +985,7 @@ class Google_Service_Storagetransfer_TimeOfDay extends Google_Model
   }
 }
 
-class Google_Service_Storagetransfer_TransferCounters extends Google_Model
+class Appointments_Google_Service_Storagetransfer_TransferCounters extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1137,7 +1137,7 @@ class Google_Service_Storagetransfer_TransferCounters extends Google_Model
   }
 }
 
-class Google_Service_Storagetransfer_TransferJob extends Google_Model
+class Appointments_Google_Service_Storagetransfer_TransferJob extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1147,10 +1147,10 @@ class Google_Service_Storagetransfer_TransferJob extends Google_Model
   public $lastModificationTime;
   public $name;
   public $projectId;
-  protected $scheduleType = 'Google_Service_Storagetransfer_Schedule';
+  protected $scheduleType = 'Appointments_Google_Service_Storagetransfer_Schedule';
   protected $scheduleDataType = '';
   public $status;
-  protected $transferSpecType = 'Google_Service_Storagetransfer_TransferSpec';
+  protected $transferSpecType = 'Appointments_Google_Service_Storagetransfer_TransferSpec';
   protected $transferSpecDataType = '';
 
 
@@ -1202,7 +1202,7 @@ class Google_Service_Storagetransfer_TransferJob extends Google_Model
   {
     return $this->projectId;
   }
-  public function setSchedule(Google_Service_Storagetransfer_Schedule $schedule)
+  public function setSchedule(Appointments_Google_Service_Storagetransfer_Schedule $schedule)
   {
     $this->schedule = $schedule;
   }
@@ -1218,7 +1218,7 @@ class Google_Service_Storagetransfer_TransferJob extends Google_Model
   {
     return $this->status;
   }
-  public function setTransferSpec(Google_Service_Storagetransfer_TransferSpec $transferSpec)
+  public function setTransferSpec(Appointments_Google_Service_Storagetransfer_TransferSpec $transferSpec)
   {
     $this->transferSpec = $transferSpec;
   }
@@ -1228,26 +1228,26 @@ class Google_Service_Storagetransfer_TransferJob extends Google_Model
   }
 }
 
-class Google_Service_Storagetransfer_TransferOperation extends Google_Collection
+class Appointments_Google_Service_Storagetransfer_TransferOperation extends Appointments_Google_Collection
 {
   protected $collection_key = 'errorBreakdowns';
   protected $internal_gapi_mappings = array(
   );
-  protected $countersType = 'Google_Service_Storagetransfer_TransferCounters';
+  protected $countersType = 'Appointments_Google_Service_Storagetransfer_TransferCounters';
   protected $countersDataType = '';
   public $endTime;
-  protected $errorBreakdownsType = 'Google_Service_Storagetransfer_ErrorSummary';
+  protected $errorBreakdownsType = 'Appointments_Google_Service_Storagetransfer_ErrorSummary';
   protected $errorBreakdownsDataType = 'array';
   public $name;
   public $projectId;
   public $startTime;
   public $status;
   public $transferJobName;
-  protected $transferSpecType = 'Google_Service_Storagetransfer_TransferSpec';
+  protected $transferSpecType = 'Appointments_Google_Service_Storagetransfer_TransferSpec';
   protected $transferSpecDataType = '';
 
 
-  public function setCounters(Google_Service_Storagetransfer_TransferCounters $counters)
+  public function setCounters(Appointments_Google_Service_Storagetransfer_TransferCounters $counters)
   {
     $this->counters = $counters;
   }
@@ -1311,7 +1311,7 @@ class Google_Service_Storagetransfer_TransferOperation extends Google_Collection
   {
     return $this->transferJobName;
   }
-  public function setTransferSpec(Google_Service_Storagetransfer_TransferSpec $transferSpec)
+  public function setTransferSpec(Appointments_Google_Service_Storagetransfer_TransferSpec $transferSpec)
   {
     $this->transferSpec = $transferSpec;
   }
@@ -1321,7 +1321,7 @@ class Google_Service_Storagetransfer_TransferOperation extends Google_Collection
   }
 }
 
-class Google_Service_Storagetransfer_TransferOptions extends Google_Model
+class Appointments_Google_Service_Storagetransfer_TransferOptions extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1356,25 +1356,25 @@ class Google_Service_Storagetransfer_TransferOptions extends Google_Model
   }
 }
 
-class Google_Service_Storagetransfer_TransferSpec extends Google_Model
+class Appointments_Google_Service_Storagetransfer_TransferSpec extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $awsS3DataSourceType = 'Google_Service_Storagetransfer_AwsS3Data';
+  protected $awsS3DataSourceType = 'Appointments_Google_Service_Storagetransfer_AwsS3Data';
   protected $awsS3DataSourceDataType = '';
-  protected $gcsDataSinkType = 'Google_Service_Storagetransfer_GcsData';
+  protected $gcsDataSinkType = 'Appointments_Google_Service_Storagetransfer_GcsData';
   protected $gcsDataSinkDataType = '';
-  protected $gcsDataSourceType = 'Google_Service_Storagetransfer_GcsData';
+  protected $gcsDataSourceType = 'Appointments_Google_Service_Storagetransfer_GcsData';
   protected $gcsDataSourceDataType = '';
-  protected $httpDataSourceType = 'Google_Service_Storagetransfer_HttpData';
+  protected $httpDataSourceType = 'Appointments_Google_Service_Storagetransfer_HttpData';
   protected $httpDataSourceDataType = '';
-  protected $objectConditionsType = 'Google_Service_Storagetransfer_ObjectConditions';
+  protected $objectConditionsType = 'Appointments_Google_Service_Storagetransfer_ObjectConditions';
   protected $objectConditionsDataType = '';
-  protected $transferOptionsType = 'Google_Service_Storagetransfer_TransferOptions';
+  protected $transferOptionsType = 'Appointments_Google_Service_Storagetransfer_TransferOptions';
   protected $transferOptionsDataType = '';
 
 
-  public function setAwsS3DataSource(Google_Service_Storagetransfer_AwsS3Data $awsS3DataSource)
+  public function setAwsS3DataSource(Appointments_Google_Service_Storagetransfer_AwsS3Data $awsS3DataSource)
   {
     $this->awsS3DataSource = $awsS3DataSource;
   }
@@ -1382,7 +1382,7 @@ class Google_Service_Storagetransfer_TransferSpec extends Google_Model
   {
     return $this->awsS3DataSource;
   }
-  public function setGcsDataSink(Google_Service_Storagetransfer_GcsData $gcsDataSink)
+  public function setGcsDataSink(Appointments_Google_Service_Storagetransfer_GcsData $gcsDataSink)
   {
     $this->gcsDataSink = $gcsDataSink;
   }
@@ -1390,7 +1390,7 @@ class Google_Service_Storagetransfer_TransferSpec extends Google_Model
   {
     return $this->gcsDataSink;
   }
-  public function setGcsDataSource(Google_Service_Storagetransfer_GcsData $gcsDataSource)
+  public function setGcsDataSource(Appointments_Google_Service_Storagetransfer_GcsData $gcsDataSource)
   {
     $this->gcsDataSource = $gcsDataSource;
   }
@@ -1398,7 +1398,7 @@ class Google_Service_Storagetransfer_TransferSpec extends Google_Model
   {
     return $this->gcsDataSource;
   }
-  public function setHttpDataSource(Google_Service_Storagetransfer_HttpData $httpDataSource)
+  public function setHttpDataSource(Appointments_Google_Service_Storagetransfer_HttpData $httpDataSource)
   {
     $this->httpDataSource = $httpDataSource;
   }
@@ -1406,7 +1406,7 @@ class Google_Service_Storagetransfer_TransferSpec extends Google_Model
   {
     return $this->httpDataSource;
   }
-  public function setObjectConditions(Google_Service_Storagetransfer_ObjectConditions $objectConditions)
+  public function setObjectConditions(Appointments_Google_Service_Storagetransfer_ObjectConditions $objectConditions)
   {
     $this->objectConditions = $objectConditions;
   }
@@ -1414,7 +1414,7 @@ class Google_Service_Storagetransfer_TransferSpec extends Google_Model
   {
     return $this->objectConditions;
   }
-  public function setTransferOptions(Google_Service_Storagetransfer_TransferOptions $transferOptions)
+  public function setTransferOptions(Appointments_Google_Service_Storagetransfer_TransferOptions $transferOptions)
   {
     $this->transferOptions = $transferOptions;
   }
@@ -1424,12 +1424,12 @@ class Google_Service_Storagetransfer_TransferSpec extends Google_Model
   }
 }
 
-class Google_Service_Storagetransfer_UpdateTransferJobRequest extends Google_Model
+class Appointments_Google_Service_Storagetransfer_UpdateTransferJobRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $projectId;
-  protected $transferJobType = 'Google_Service_Storagetransfer_TransferJob';
+  protected $transferJobType = 'Appointments_Google_Service_Storagetransfer_TransferJob';
   protected $transferJobDataType = '';
   public $updateTransferJobFieldMask;
 
@@ -1442,7 +1442,7 @@ class Google_Service_Storagetransfer_UpdateTransferJobRequest extends Google_Mod
   {
     return $this->projectId;
   }
-  public function setTransferJob(Google_Service_Storagetransfer_TransferJob $transferJob)
+  public function setTransferJob(Appointments_Google_Service_Storagetransfer_TransferJob $transferJob)
   {
     $this->transferJob = $transferJob;
   }

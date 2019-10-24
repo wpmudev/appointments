@@ -15,10 +15,10 @@
  * limitations under the License.
  */
 
-if (!class_exists('Google_Client')) {
+if (!class_exists('Appointments_Google_Client')) {
   require_once dirname(__FILE__) . '/../autoload.php';
 }
 
-class Google_Auth_Exception extends Google_Exception
+class Appointments_Google_Auth_Exception extends Appointments_Google_Exception
 {
 }

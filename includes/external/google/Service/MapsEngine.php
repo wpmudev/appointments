@@ -29,7 +29,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_MapsEngine extends Google_Service
+class Appointments_Google_Service_MapsEngine extends Appointments_Google_Service
 {
   /** View and manage your Google My Maps data. */
   const MAPSENGINE =
@@ -66,9 +66,9 @@ class Google_Service_MapsEngine extends Google_Service
   /**
    * Constructs the internal representation of the MapsEngine service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -76,7 +76,7 @@ class Google_Service_MapsEngine extends Google_Service
     $this->version = 'v1';
     $this->serviceName = 'mapsengine';
 
-    $this->assets = new Google_Service_MapsEngine_Assets_Resource(
+    $this->assets = new Appointments_Google_Service_MapsEngine_Assets_Resource(
         $this,
         $this->serviceName,
         'assets',
@@ -153,7 +153,7 @@ class Google_Service_MapsEngine extends Google_Service
           )
         )
     );
-    $this->assets_parents = new Google_Service_MapsEngine_AssetsParents_Resource(
+    $this->assets_parents = new Appointments_Google_Service_MapsEngine_AssetsParents_Resource(
         $this,
         $this->serviceName,
         'parents',
@@ -181,7 +181,7 @@ class Google_Service_MapsEngine extends Google_Service
           )
         )
     );
-    $this->assets_permissions = new Google_Service_MapsEngine_AssetsPermissions_Resource(
+    $this->assets_permissions = new Appointments_Google_Service_MapsEngine_AssetsPermissions_Resource(
         $this,
         $this->serviceName,
         'permissions',
@@ -201,7 +201,7 @@ class Google_Service_MapsEngine extends Google_Service
           )
         )
     );
-    $this->layers = new Google_Service_MapsEngine_Layers_Resource(
+    $this->layers = new Appointments_Google_Service_MapsEngine_Layers_Resource(
         $this,
         $this->serviceName,
         'layers',
@@ -382,7 +382,7 @@ class Google_Service_MapsEngine extends Google_Service
           )
         )
     );
-    $this->layers_parents = new Google_Service_MapsEngine_LayersParents_Resource(
+    $this->layers_parents = new Appointments_Google_Service_MapsEngine_LayersParents_Resource(
         $this,
         $this->serviceName,
         'parents',
@@ -410,7 +410,7 @@ class Google_Service_MapsEngine extends Google_Service
           )
         )
     );
-    $this->layers_permissions = new Google_Service_MapsEngine_LayersPermissions_Resource(
+    $this->layers_permissions = new Appointments_Google_Service_MapsEngine_LayersPermissions_Resource(
         $this,
         $this->serviceName,
         'permissions',
@@ -450,7 +450,7 @@ class Google_Service_MapsEngine extends Google_Service
           )
         )
     );
-    $this->maps = new Google_Service_MapsEngine_Maps_Resource(
+    $this->maps = new Appointments_Google_Service_MapsEngine_Maps_Resource(
         $this,
         $this->serviceName,
         'maps',
@@ -606,7 +606,7 @@ class Google_Service_MapsEngine extends Google_Service
           )
         )
     );
-    $this->maps_permissions = new Google_Service_MapsEngine_MapsPermissions_Resource(
+    $this->maps_permissions = new Appointments_Google_Service_MapsEngine_MapsPermissions_Resource(
         $this,
         $this->serviceName,
         'permissions',
@@ -646,7 +646,7 @@ class Google_Service_MapsEngine extends Google_Service
           )
         )
     );
-    $this->projects = new Google_Service_MapsEngine_Projects_Resource(
+    $this->projects = new Appointments_Google_Service_MapsEngine_Projects_Resource(
         $this,
         $this->serviceName,
         'projects',
@@ -660,7 +660,7 @@ class Google_Service_MapsEngine extends Google_Service
           )
         )
     );
-    $this->projects_icons = new Google_Service_MapsEngine_ProjectsIcons_Resource(
+    $this->projects_icons = new Appointments_Google_Service_MapsEngine_ProjectsIcons_Resource(
         $this,
         $this->serviceName,
         'icons',
@@ -713,7 +713,7 @@ class Google_Service_MapsEngine extends Google_Service
           )
         )
     );
-    $this->rasterCollections = new Google_Service_MapsEngine_RasterCollections_Resource(
+    $this->rasterCollections = new Appointments_Google_Service_MapsEngine_RasterCollections_Resource(
         $this,
         $this->serviceName,
         'rasterCollections',
@@ -834,7 +834,7 @@ class Google_Service_MapsEngine extends Google_Service
           )
         )
     );
-    $this->rasterCollections_parents = new Google_Service_MapsEngine_RasterCollectionsParents_Resource(
+    $this->rasterCollections_parents = new Appointments_Google_Service_MapsEngine_RasterCollectionsParents_Resource(
         $this,
         $this->serviceName,
         'parents',
@@ -862,7 +862,7 @@ class Google_Service_MapsEngine extends Google_Service
           )
         )
     );
-    $this->rasterCollections_permissions = new Google_Service_MapsEngine_RasterCollectionsPermissions_Resource(
+    $this->rasterCollections_permissions = new Appointments_Google_Service_MapsEngine_RasterCollectionsPermissions_Resource(
         $this,
         $this->serviceName,
         'permissions',
@@ -902,7 +902,7 @@ class Google_Service_MapsEngine extends Google_Service
           )
         )
     );
-    $this->rasterCollections_rasters = new Google_Service_MapsEngine_RasterCollectionsRasters_Resource(
+    $this->rasterCollections_rasters = new Appointments_Google_Service_MapsEngine_RasterCollectionsRasters_Resource(
         $this,
         $this->serviceName,
         'rasters',
@@ -986,7 +986,7 @@ class Google_Service_MapsEngine extends Google_Service
           )
         )
     );
-    $this->rasters = new Google_Service_MapsEngine_Rasters_Resource(
+    $this->rasters = new Appointments_Google_Service_MapsEngine_Rasters_Resource(
         $this,
         $this->serviceName,
         'rasters',
@@ -1098,7 +1098,7 @@ class Google_Service_MapsEngine extends Google_Service
           )
         )
     );
-    $this->rasters_files = new Google_Service_MapsEngine_RastersFiles_Resource(
+    $this->rasters_files = new Appointments_Google_Service_MapsEngine_RastersFiles_Resource(
         $this,
         $this->serviceName,
         'files',
@@ -1123,7 +1123,7 @@ class Google_Service_MapsEngine extends Google_Service
           )
         )
     );
-    $this->rasters_parents = new Google_Service_MapsEngine_RastersParents_Resource(
+    $this->rasters_parents = new Appointments_Google_Service_MapsEngine_RastersParents_Resource(
         $this,
         $this->serviceName,
         'parents',
@@ -1151,7 +1151,7 @@ class Google_Service_MapsEngine extends Google_Service
           )
         )
     );
-    $this->rasters_permissions = new Google_Service_MapsEngine_RastersPermissions_Resource(
+    $this->rasters_permissions = new Appointments_Google_Service_MapsEngine_RastersPermissions_Resource(
         $this,
         $this->serviceName,
         'permissions',
@@ -1191,7 +1191,7 @@ class Google_Service_MapsEngine extends Google_Service
           )
         )
     );
-    $this->tables = new Google_Service_MapsEngine_Tables_Resource(
+    $this->tables = new Appointments_Google_Service_MapsEngine_Tables_Resource(
         $this,
         $this->serviceName,
         'tables',
@@ -1310,7 +1310,7 @@ class Google_Service_MapsEngine extends Google_Service
           )
         )
     );
-    $this->tables_features = new Google_Service_MapsEngine_TablesFeatures_Resource(
+    $this->tables_features = new Appointments_Google_Service_MapsEngine_TablesFeatures_Resource(
         $this,
         $this->serviceName,
         'features',
@@ -1419,7 +1419,7 @@ class Google_Service_MapsEngine extends Google_Service
           )
         )
     );
-    $this->tables_files = new Google_Service_MapsEngine_TablesFiles_Resource(
+    $this->tables_files = new Appointments_Google_Service_MapsEngine_TablesFiles_Resource(
         $this,
         $this->serviceName,
         'files',
@@ -1444,7 +1444,7 @@ class Google_Service_MapsEngine extends Google_Service
           )
         )
     );
-    $this->tables_parents = new Google_Service_MapsEngine_TablesParents_Resource(
+    $this->tables_parents = new Appointments_Google_Service_MapsEngine_TablesParents_Resource(
         $this,
         $this->serviceName,
         'parents',
@@ -1472,7 +1472,7 @@ class Google_Service_MapsEngine extends Google_Service
           )
         )
     );
-    $this->tables_permissions = new Google_Service_MapsEngine_TablesPermissions_Resource(
+    $this->tables_permissions = new Appointments_Google_Service_MapsEngine_TablesPermissions_Resource(
         $this,
         $this->serviceName,
         'permissions',
@@ -1520,11 +1520,11 @@ class Google_Service_MapsEngine extends Google_Service
  * The "assets" collection of methods.
  * Typical usage is:
  *  <code>
- *   $mapsengineService = new Google_Service_MapsEngine(...);
+ *   $mapsengineService = new Appointments_Google_Service_MapsEngine(...);
  *   $assets = $mapsengineService->assets;
  *  </code>
  */
-class Google_Service_MapsEngine_Assets_Resource extends Google_Service_Resource
+class Appointments_Google_Service_MapsEngine_Assets_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1532,13 +1532,13 @@ class Google_Service_MapsEngine_Assets_Resource extends Google_Service_Resource
    *
    * @param string $id The ID of the asset.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_Asset
+   * @return Appointments_Google_Service_MapsEngine_Asset
    */
   public function get($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_MapsEngine_Asset");
+    return $this->call('get', array($params), "Appointments_Google_Service_MapsEngine_Asset");
   }
 
   /**
@@ -1581,13 +1581,13 @@ class Google_Service_MapsEngine_Assets_Resource extends Google_Service_Resource
    * @opt_param string type A comma separated list of asset types. Returned assets
    * will have one of the types from the provided list. Supported values are
    * 'map', 'layer', 'rasterCollection' and 'table'.
-   * @return Google_Service_MapsEngine_AssetsListResponse
+   * @return Appointments_Google_Service_MapsEngine_AssetsListResponse
    */
   public function listAssets($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MapsEngine_AssetsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_MapsEngine_AssetsListResponse");
   }
 }
 
@@ -1595,11 +1595,11 @@ class Google_Service_MapsEngine_Assets_Resource extends Google_Service_Resource
  * The "parents" collection of methods.
  * Typical usage is:
  *  <code>
- *   $mapsengineService = new Google_Service_MapsEngine(...);
+ *   $mapsengineService = new Appointments_Google_Service_MapsEngine(...);
  *   $parents = $mapsengineService->parents;
  *  </code>
  */
-class Google_Service_MapsEngine_AssetsParents_Resource extends Google_Service_Resource
+class Appointments_Google_Service_MapsEngine_AssetsParents_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1613,24 +1613,24 @@ class Google_Service_MapsEngine_AssetsParents_Resource extends Google_Service_Re
    * value of nextPageToken from the previous response.
    * @opt_param string maxResults The maximum number of items to include in a
    * single response page. The maximum supported value is 50.
-   * @return Google_Service_MapsEngine_ParentsListResponse
+   * @return Appointments_Google_Service_MapsEngine_ParentsListResponse
    */
   public function listAssetsParents($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MapsEngine_ParentsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_MapsEngine_ParentsListResponse");
   }
 }
 /**
  * The "permissions" collection of methods.
  * Typical usage is:
  *  <code>
- *   $mapsengineService = new Google_Service_MapsEngine(...);
+ *   $mapsengineService = new Appointments_Google_Service_MapsEngine(...);
  *   $permissions = $mapsengineService->permissions;
  *  </code>
  */
-class Google_Service_MapsEngine_AssetsPermissions_Resource extends Google_Service_Resource
+class Appointments_Google_Service_MapsEngine_AssetsPermissions_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1639,13 +1639,13 @@ class Google_Service_MapsEngine_AssetsPermissions_Resource extends Google_Servic
    *
    * @param string $id The ID of the asset whose permissions will be listed.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_PermissionsListResponse
+   * @return Appointments_Google_Service_MapsEngine_PermissionsListResponse
    */
   public function listAssetsPermissions($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MapsEngine_PermissionsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_MapsEngine_PermissionsListResponse");
   }
 }
 
@@ -1653,11 +1653,11 @@ class Google_Service_MapsEngine_AssetsPermissions_Resource extends Google_Servic
  * The "layers" collection of methods.
  * Typical usage is:
  *  <code>
- *   $mapsengineService = new Google_Service_MapsEngine(...);
+ *   $mapsengineService = new Appointments_Google_Service_MapsEngine(...);
  *   $layers = $mapsengineService->layers;
  *  </code>
  */
-class Google_Service_MapsEngine_Layers_Resource extends Google_Service_Resource
+class Appointments_Google_Service_MapsEngine_Layers_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1665,29 +1665,29 @@ class Google_Service_MapsEngine_Layers_Resource extends Google_Service_Resource
    *
    * @param string $id The ID of the layer.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_ProcessResponse
+   * @return Appointments_Google_Service_MapsEngine_ProcessResponse
    */
   public function cancelProcessing($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('cancelProcessing', array($params), "Google_Service_MapsEngine_ProcessResponse");
+    return $this->call('cancelProcessing', array($params), "Appointments_Google_Service_MapsEngine_ProcessResponse");
   }
 
   /**
    * Create a layer asset. (layers.create)
    *
-   * @param Google_Layer $postBody
+   * @param Appointments_Google_Layer $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param bool process Whether to queue the created layer for processing.
-   * @return Google_Service_MapsEngine_Layer
+   * @return Appointments_Google_Service_MapsEngine_Layer
    */
-  public function create(Google_Service_MapsEngine_Layer $postBody, $optParams = array())
+  public function create(Appointments_Google_Service_MapsEngine_Layer $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_MapsEngine_Layer");
+    return $this->call('create', array($params), "Appointments_Google_Service_MapsEngine_Layer");
   }
 
   /**
@@ -1716,13 +1716,13 @@ class Google_Service_MapsEngine_Layers_Resource extends Google_Service_Resource
    * version of the layer should be returned. When version is set to published,
    * the published version of the layer will be returned. Please use the
    * layers.getPublished endpoint instead.
-   * @return Google_Service_MapsEngine_Layer
+   * @return Appointments_Google_Service_MapsEngine_Layer
    */
   public function get($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_MapsEngine_Layer");
+    return $this->call('get', array($params), "Appointments_Google_Service_MapsEngine_Layer");
   }
 
   /**
@@ -1730,13 +1730,13 @@ class Google_Service_MapsEngine_Layers_Resource extends Google_Service_Resource
    *
    * @param string $id The ID of the layer.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_PublishedLayer
+   * @return Appointments_Google_Service_MapsEngine_PublishedLayer
    */
   public function getPublished($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('getPublished', array($params), "Google_Service_MapsEngine_PublishedLayer");
+    return $this->call('getPublished', array($params), "Appointments_Google_Service_MapsEngine_PublishedLayer");
   }
 
   /**
@@ -1777,13 +1777,13 @@ class Google_Service_MapsEngine_Layers_Resource extends Google_Service_Resource
    * this time.
    * @opt_param string role The role parameter indicates that the response should
    * only contain assets where the current user has the specified level of access.
-   * @return Google_Service_MapsEngine_LayersListResponse
+   * @return Appointments_Google_Service_MapsEngine_LayersListResponse
    */
   public function listLayers($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MapsEngine_LayersListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_MapsEngine_LayersListResponse");
   }
 
   /**
@@ -1801,23 +1801,23 @@ class Google_Service_MapsEngine_Layers_Resource extends Google_Service_Resource
    * the response. To list all available projects with their IDs, send a Projects:
    * list request. You can also find your project ID as the value of the
    * DashboardPlace:cid URL parameter when signed in to mapsengine.google.com.
-   * @return Google_Service_MapsEngine_PublishedLayersListResponse
+   * @return Appointments_Google_Service_MapsEngine_PublishedLayersListResponse
    */
   public function listPublished($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('listPublished', array($params), "Google_Service_MapsEngine_PublishedLayersListResponse");
+    return $this->call('listPublished', array($params), "Appointments_Google_Service_MapsEngine_PublishedLayersListResponse");
   }
 
   /**
    * Mutate a layer asset. (layers.patch)
    *
    * @param string $id The ID of the layer.
-   * @param Google_Layer $postBody
+   * @param Appointments_Google_Layer $postBody
    * @param array $optParams Optional parameters.
    */
-  public function patch($id, Google_Service_MapsEngine_Layer $postBody, $optParams = array())
+  public function patch($id, Appointments_Google_Service_MapsEngine_Layer $postBody, $optParams = array())
   {
     $params = array('id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
@@ -1829,13 +1829,13 @@ class Google_Service_MapsEngine_Layers_Resource extends Google_Service_Resource
    *
    * @param string $id The ID of the layer.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_ProcessResponse
+   * @return Appointments_Google_Service_MapsEngine_ProcessResponse
    */
   public function process($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('process', array($params), "Google_Service_MapsEngine_ProcessResponse");
+    return $this->call('process', array($params), "Appointments_Google_Service_MapsEngine_ProcessResponse");
   }
 
   /**
@@ -1847,13 +1847,13 @@ class Google_Service_MapsEngine_Layers_Resource extends Google_Service_Resource
    * @opt_param bool force If set to true, the API will allow publication of the
    * layer even if it's out of date. If not true, you'll need to reprocess any
    * out-of-date layer before publishing.
-   * @return Google_Service_MapsEngine_PublishResponse
+   * @return Appointments_Google_Service_MapsEngine_PublishResponse
    */
   public function publish($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('publish', array($params), "Google_Service_MapsEngine_PublishResponse");
+    return $this->call('publish', array($params), "Appointments_Google_Service_MapsEngine_PublishResponse");
   }
 
   /**
@@ -1861,13 +1861,13 @@ class Google_Service_MapsEngine_Layers_Resource extends Google_Service_Resource
    *
    * @param string $id The ID of the layer.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_PublishResponse
+   * @return Appointments_Google_Service_MapsEngine_PublishResponse
    */
   public function unpublish($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('unpublish', array($params), "Google_Service_MapsEngine_PublishResponse");
+    return $this->call('unpublish', array($params), "Appointments_Google_Service_MapsEngine_PublishResponse");
   }
 }
 
@@ -1875,11 +1875,11 @@ class Google_Service_MapsEngine_Layers_Resource extends Google_Service_Resource
  * The "parents" collection of methods.
  * Typical usage is:
  *  <code>
- *   $mapsengineService = new Google_Service_MapsEngine(...);
+ *   $mapsengineService = new Appointments_Google_Service_MapsEngine(...);
  *   $parents = $mapsengineService->parents;
  *  </code>
  */
-class Google_Service_MapsEngine_LayersParents_Resource extends Google_Service_Resource
+class Appointments_Google_Service_MapsEngine_LayersParents_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1893,24 +1893,24 @@ class Google_Service_MapsEngine_LayersParents_Resource extends Google_Service_Re
    * value of nextPageToken from the previous response.
    * @opt_param string maxResults The maximum number of items to include in a
    * single response page. The maximum supported value is 50.
-   * @return Google_Service_MapsEngine_ParentsListResponse
+   * @return Appointments_Google_Service_MapsEngine_ParentsListResponse
    */
   public function listLayersParents($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MapsEngine_ParentsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_MapsEngine_ParentsListResponse");
   }
 }
 /**
  * The "permissions" collection of methods.
  * Typical usage is:
  *  <code>
- *   $mapsengineService = new Google_Service_MapsEngine(...);
+ *   $mapsengineService = new Appointments_Google_Service_MapsEngine(...);
  *   $permissions = $mapsengineService->permissions;
  *  </code>
  */
-class Google_Service_MapsEngine_LayersPermissions_Resource extends Google_Service_Resource
+class Appointments_Google_Service_MapsEngine_LayersPermissions_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1918,15 +1918,15 @@ class Google_Service_MapsEngine_LayersPermissions_Resource extends Google_Servic
    * (permissions.batchDelete)
    *
    * @param string $id The ID of the asset from which permissions will be removed.
-   * @param Google_PermissionsBatchDeleteRequest $postBody
+   * @param Appointments_Google_PermissionsBatchDeleteRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_PermissionsBatchDeleteResponse
+   * @return Appointments_Google_Service_MapsEngine_PermissionsBatchDeleteResponse
    */
-  public function batchDelete($id, Google_Service_MapsEngine_PermissionsBatchDeleteRequest $postBody, $optParams = array())
+  public function batchDelete($id, Appointments_Google_Service_MapsEngine_PermissionsBatchDeleteRequest $postBody, $optParams = array())
   {
     $params = array('id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('batchDelete', array($params), "Google_Service_MapsEngine_PermissionsBatchDeleteResponse");
+    return $this->call('batchDelete', array($params), "Appointments_Google_Service_MapsEngine_PermissionsBatchDeleteResponse");
   }
 
   /**
@@ -1936,15 +1936,15 @@ class Google_Service_MapsEngine_LayersPermissions_Resource extends Google_Servic
    * request is atomic. (permissions.batchUpdate)
    *
    * @param string $id The ID of the asset to which permissions will be added.
-   * @param Google_PermissionsBatchUpdateRequest $postBody
+   * @param Appointments_Google_PermissionsBatchUpdateRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_PermissionsBatchUpdateResponse
+   * @return Appointments_Google_Service_MapsEngine_PermissionsBatchUpdateResponse
    */
-  public function batchUpdate($id, Google_Service_MapsEngine_PermissionsBatchUpdateRequest $postBody, $optParams = array())
+  public function batchUpdate($id, Appointments_Google_Service_MapsEngine_PermissionsBatchUpdateRequest $postBody, $optParams = array())
   {
     $params = array('id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('batchUpdate', array($params), "Google_Service_MapsEngine_PermissionsBatchUpdateResponse");
+    return $this->call('batchUpdate', array($params), "Appointments_Google_Service_MapsEngine_PermissionsBatchUpdateResponse");
   }
 
   /**
@@ -1953,13 +1953,13 @@ class Google_Service_MapsEngine_LayersPermissions_Resource extends Google_Servic
    *
    * @param string $id The ID of the asset whose permissions will be listed.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_PermissionsListResponse
+   * @return Appointments_Google_Service_MapsEngine_PermissionsListResponse
    */
   public function listLayersPermissions($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MapsEngine_PermissionsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_MapsEngine_PermissionsListResponse");
   }
 }
 
@@ -1967,25 +1967,25 @@ class Google_Service_MapsEngine_LayersPermissions_Resource extends Google_Servic
  * The "maps" collection of methods.
  * Typical usage is:
  *  <code>
- *   $mapsengineService = new Google_Service_MapsEngine(...);
+ *   $mapsengineService = new Appointments_Google_Service_MapsEngine(...);
  *   $maps = $mapsengineService->maps;
  *  </code>
  */
-class Google_Service_MapsEngine_Maps_Resource extends Google_Service_Resource
+class Appointments_Google_Service_MapsEngine_Maps_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
    * Create a map asset. (maps.create)
    *
-   * @param Google_Map $postBody
+   * @param Appointments_Google_Map $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_Map
+   * @return Appointments_Google_Service_MapsEngine_Map
    */
-  public function create(Google_Service_MapsEngine_Map $postBody, $optParams = array())
+  public function create(Appointments_Google_Service_MapsEngine_Map $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_MapsEngine_Map");
+    return $this->call('create', array($params), "Appointments_Google_Service_MapsEngine_Map");
   }
 
   /**
@@ -2013,13 +2013,13 @@ class Google_Service_MapsEngine_Maps_Resource extends Google_Service_Resource
    * version of the map should be returned. When version is set to published, the
    * published version of the map will be returned. Please use the
    * maps.getPublished endpoint instead.
-   * @return Google_Service_MapsEngine_Map
+   * @return Appointments_Google_Service_MapsEngine_Map
    */
   public function get($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_MapsEngine_Map");
+    return $this->call('get', array($params), "Appointments_Google_Service_MapsEngine_Map");
   }
 
   /**
@@ -2027,13 +2027,13 @@ class Google_Service_MapsEngine_Maps_Resource extends Google_Service_Resource
    *
    * @param string $id The ID of the map.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_PublishedMap
+   * @return Appointments_Google_Service_MapsEngine_PublishedMap
    */
   public function getPublished($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('getPublished', array($params), "Google_Service_MapsEngine_PublishedMap");
+    return $this->call('getPublished', array($params), "Appointments_Google_Service_MapsEngine_PublishedMap");
   }
 
   /**
@@ -2074,13 +2074,13 @@ class Google_Service_MapsEngine_Maps_Resource extends Google_Service_Resource
    * this time.
    * @opt_param string role The role parameter indicates that the response should
    * only contain assets where the current user has the specified level of access.
-   * @return Google_Service_MapsEngine_MapsListResponse
+   * @return Appointments_Google_Service_MapsEngine_MapsListResponse
    */
   public function listMaps($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MapsEngine_MapsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_MapsEngine_MapsListResponse");
   }
 
   /**
@@ -2097,23 +2097,23 @@ class Google_Service_MapsEngine_Maps_Resource extends Google_Service_Resource
    * the response. To list all available projects with their IDs, send a Projects:
    * list request. You can also find your project ID as the value of the
    * DashboardPlace:cid URL parameter when signed in to mapsengine.google.com.
-   * @return Google_Service_MapsEngine_PublishedMapsListResponse
+   * @return Appointments_Google_Service_MapsEngine_PublishedMapsListResponse
    */
   public function listPublished($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('listPublished', array($params), "Google_Service_MapsEngine_PublishedMapsListResponse");
+    return $this->call('listPublished', array($params), "Appointments_Google_Service_MapsEngine_PublishedMapsListResponse");
   }
 
   /**
    * Mutate a map asset. (maps.patch)
    *
    * @param string $id The ID of the map.
-   * @param Google_Map $postBody
+   * @param Appointments_Google_Map $postBody
    * @param array $optParams Optional parameters.
    */
-  public function patch($id, Google_Service_MapsEngine_Map $postBody, $optParams = array())
+  public function patch($id, Appointments_Google_Service_MapsEngine_Map $postBody, $optParams = array())
   {
     $params = array('id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
@@ -2129,13 +2129,13 @@ class Google_Service_MapsEngine_Maps_Resource extends Google_Service_Resource
    * @opt_param bool force If set to true, the API will allow publication of the
    * map even if it's out of date. If false, the map must have a processingStatus
    * of complete before publishing.
-   * @return Google_Service_MapsEngine_PublishResponse
+   * @return Appointments_Google_Service_MapsEngine_PublishResponse
    */
   public function publish($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('publish', array($params), "Google_Service_MapsEngine_PublishResponse");
+    return $this->call('publish', array($params), "Appointments_Google_Service_MapsEngine_PublishResponse");
   }
 
   /**
@@ -2143,13 +2143,13 @@ class Google_Service_MapsEngine_Maps_Resource extends Google_Service_Resource
    *
    * @param string $id The ID of the map.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_PublishResponse
+   * @return Appointments_Google_Service_MapsEngine_PublishResponse
    */
   public function unpublish($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('unpublish', array($params), "Google_Service_MapsEngine_PublishResponse");
+    return $this->call('unpublish', array($params), "Appointments_Google_Service_MapsEngine_PublishResponse");
   }
 }
 
@@ -2157,11 +2157,11 @@ class Google_Service_MapsEngine_Maps_Resource extends Google_Service_Resource
  * The "permissions" collection of methods.
  * Typical usage is:
  *  <code>
- *   $mapsengineService = new Google_Service_MapsEngine(...);
+ *   $mapsengineService = new Appointments_Google_Service_MapsEngine(...);
  *   $permissions = $mapsengineService->permissions;
  *  </code>
  */
-class Google_Service_MapsEngine_MapsPermissions_Resource extends Google_Service_Resource
+class Appointments_Google_Service_MapsEngine_MapsPermissions_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2169,15 +2169,15 @@ class Google_Service_MapsEngine_MapsPermissions_Resource extends Google_Service_
    * (permissions.batchDelete)
    *
    * @param string $id The ID of the asset from which permissions will be removed.
-   * @param Google_PermissionsBatchDeleteRequest $postBody
+   * @param Appointments_Google_PermissionsBatchDeleteRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_PermissionsBatchDeleteResponse
+   * @return Appointments_Google_Service_MapsEngine_PermissionsBatchDeleteResponse
    */
-  public function batchDelete($id, Google_Service_MapsEngine_PermissionsBatchDeleteRequest $postBody, $optParams = array())
+  public function batchDelete($id, Appointments_Google_Service_MapsEngine_PermissionsBatchDeleteRequest $postBody, $optParams = array())
   {
     $params = array('id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('batchDelete', array($params), "Google_Service_MapsEngine_PermissionsBatchDeleteResponse");
+    return $this->call('batchDelete', array($params), "Appointments_Google_Service_MapsEngine_PermissionsBatchDeleteResponse");
   }
 
   /**
@@ -2187,15 +2187,15 @@ class Google_Service_MapsEngine_MapsPermissions_Resource extends Google_Service_
    * request is atomic. (permissions.batchUpdate)
    *
    * @param string $id The ID of the asset to which permissions will be added.
-   * @param Google_PermissionsBatchUpdateRequest $postBody
+   * @param Appointments_Google_PermissionsBatchUpdateRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_PermissionsBatchUpdateResponse
+   * @return Appointments_Google_Service_MapsEngine_PermissionsBatchUpdateResponse
    */
-  public function batchUpdate($id, Google_Service_MapsEngine_PermissionsBatchUpdateRequest $postBody, $optParams = array())
+  public function batchUpdate($id, Appointments_Google_Service_MapsEngine_PermissionsBatchUpdateRequest $postBody, $optParams = array())
   {
     $params = array('id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('batchUpdate', array($params), "Google_Service_MapsEngine_PermissionsBatchUpdateResponse");
+    return $this->call('batchUpdate', array($params), "Appointments_Google_Service_MapsEngine_PermissionsBatchUpdateResponse");
   }
 
   /**
@@ -2204,13 +2204,13 @@ class Google_Service_MapsEngine_MapsPermissions_Resource extends Google_Service_
    *
    * @param string $id The ID of the asset whose permissions will be listed.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_PermissionsListResponse
+   * @return Appointments_Google_Service_MapsEngine_PermissionsListResponse
    */
   public function listMapsPermissions($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MapsEngine_PermissionsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_MapsEngine_PermissionsListResponse");
   }
 }
 
@@ -2218,24 +2218,24 @@ class Google_Service_MapsEngine_MapsPermissions_Resource extends Google_Service_
  * The "projects" collection of methods.
  * Typical usage is:
  *  <code>
- *   $mapsengineService = new Google_Service_MapsEngine(...);
+ *   $mapsengineService = new Appointments_Google_Service_MapsEngine(...);
  *   $projects = $mapsengineService->projects;
  *  </code>
  */
-class Google_Service_MapsEngine_Projects_Resource extends Google_Service_Resource
+class Appointments_Google_Service_MapsEngine_Projects_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
    * Return all projects readable by the current user. (projects.listProjects)
    *
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_ProjectsListResponse
+   * @return Appointments_Google_Service_MapsEngine_ProjectsListResponse
    */
   public function listProjects($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MapsEngine_ProjectsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_MapsEngine_ProjectsListResponse");
   }
 }
 
@@ -2243,26 +2243,26 @@ class Google_Service_MapsEngine_Projects_Resource extends Google_Service_Resourc
  * The "icons" collection of methods.
  * Typical usage is:
  *  <code>
- *   $mapsengineService = new Google_Service_MapsEngine(...);
+ *   $mapsengineService = new Appointments_Google_Service_MapsEngine(...);
  *   $icons = $mapsengineService->icons;
  *  </code>
  */
-class Google_Service_MapsEngine_ProjectsIcons_Resource extends Google_Service_Resource
+class Appointments_Google_Service_MapsEngine_ProjectsIcons_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
    * Create an icon. (icons.create)
    *
    * @param string $projectId The ID of the project.
-   * @param Google_Icon $postBody
+   * @param Appointments_Google_Icon $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_Icon
+   * @return Appointments_Google_Service_MapsEngine_Icon
    */
-  public function create($projectId, Google_Service_MapsEngine_Icon $postBody, $optParams = array())
+  public function create($projectId, Appointments_Google_Service_MapsEngine_Icon $postBody, $optParams = array())
   {
     $params = array('projectId' => $projectId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_MapsEngine_Icon");
+    return $this->call('create', array($params), "Appointments_Google_Service_MapsEngine_Icon");
   }
 
   /**
@@ -2271,13 +2271,13 @@ class Google_Service_MapsEngine_ProjectsIcons_Resource extends Google_Service_Re
    * @param string $projectId The ID of the project.
    * @param string $id The ID of the icon.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_Icon
+   * @return Appointments_Google_Service_MapsEngine_Icon
    */
   public function get($projectId, $id, $optParams = array())
   {
     $params = array('projectId' => $projectId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_MapsEngine_Icon");
+    return $this->call('get', array($params), "Appointments_Google_Service_MapsEngine_Icon");
   }
 
   /**
@@ -2291,13 +2291,13 @@ class Google_Service_MapsEngine_ProjectsIcons_Resource extends Google_Service_Re
    * value of nextPageToken from the previous response.
    * @opt_param string maxResults The maximum number of items to include in a
    * single response page. The maximum supported value is 50.
-   * @return Google_Service_MapsEngine_IconsListResponse
+   * @return Appointments_Google_Service_MapsEngine_IconsListResponse
    */
   public function listProjectsIcons($projectId, $optParams = array())
   {
     $params = array('projectId' => $projectId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MapsEngine_IconsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_MapsEngine_IconsListResponse");
   }
 }
 
@@ -2305,11 +2305,11 @@ class Google_Service_MapsEngine_ProjectsIcons_Resource extends Google_Service_Re
  * The "rasterCollections" collection of methods.
  * Typical usage is:
  *  <code>
- *   $mapsengineService = new Google_Service_MapsEngine(...);
+ *   $mapsengineService = new Appointments_Google_Service_MapsEngine(...);
  *   $rasterCollections = $mapsengineService->rasterCollections;
  *  </code>
  */
-class Google_Service_MapsEngine_RasterCollections_Resource extends Google_Service_Resource
+class Appointments_Google_Service_MapsEngine_RasterCollections_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2318,27 +2318,27 @@ class Google_Service_MapsEngine_RasterCollections_Resource extends Google_Servic
    *
    * @param string $id The ID of the raster collection.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_ProcessResponse
+   * @return Appointments_Google_Service_MapsEngine_ProcessResponse
    */
   public function cancelProcessing($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('cancelProcessing', array($params), "Google_Service_MapsEngine_ProcessResponse");
+    return $this->call('cancelProcessing', array($params), "Appointments_Google_Service_MapsEngine_ProcessResponse");
   }
 
   /**
    * Create a raster collection asset. (rasterCollections.create)
    *
-   * @param Google_RasterCollection $postBody
+   * @param Appointments_Google_RasterCollection $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_RasterCollection
+   * @return Appointments_Google_Service_MapsEngine_RasterCollection
    */
-  public function create(Google_Service_MapsEngine_RasterCollection $postBody, $optParams = array())
+  public function create(Appointments_Google_Service_MapsEngine_RasterCollection $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_MapsEngine_RasterCollection");
+    return $this->call('create', array($params), "Appointments_Google_Service_MapsEngine_RasterCollection");
   }
 
   /**
@@ -2362,13 +2362,13 @@ class Google_Service_MapsEngine_RasterCollections_Resource extends Google_Servic
    *
    * @param string $id The ID of the raster collection.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_RasterCollection
+   * @return Appointments_Google_Service_MapsEngine_RasterCollection
    */
   public function get($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_MapsEngine_RasterCollection");
+    return $this->call('get', array($params), "Appointments_Google_Service_MapsEngine_RasterCollection");
   }
 
   /**
@@ -2410,23 +2410,23 @@ class Google_Service_MapsEngine_RasterCollections_Resource extends Google_Servic
    * this time.
    * @opt_param string role The role parameter indicates that the response should
    * only contain assets where the current user has the specified level of access.
-   * @return Google_Service_MapsEngine_RasterCollectionsListResponse
+   * @return Appointments_Google_Service_MapsEngine_RasterCollectionsListResponse
    */
   public function listRasterCollections($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MapsEngine_RasterCollectionsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_MapsEngine_RasterCollectionsListResponse");
   }
 
   /**
    * Mutate a raster collection asset. (rasterCollections.patch)
    *
    * @param string $id The ID of the raster collection.
-   * @param Google_RasterCollection $postBody
+   * @param Appointments_Google_RasterCollection $postBody
    * @param array $optParams Optional parameters.
    */
-  public function patch($id, Google_Service_MapsEngine_RasterCollection $postBody, $optParams = array())
+  public function patch($id, Appointments_Google_Service_MapsEngine_RasterCollection $postBody, $optParams = array())
   {
     $params = array('id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
@@ -2438,13 +2438,13 @@ class Google_Service_MapsEngine_RasterCollections_Resource extends Google_Servic
    *
    * @param string $id The ID of the raster collection.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_ProcessResponse
+   * @return Appointments_Google_Service_MapsEngine_ProcessResponse
    */
   public function process($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('process', array($params), "Google_Service_MapsEngine_ProcessResponse");
+    return $this->call('process', array($params), "Appointments_Google_Service_MapsEngine_ProcessResponse");
   }
 }
 
@@ -2452,11 +2452,11 @@ class Google_Service_MapsEngine_RasterCollections_Resource extends Google_Servic
  * The "parents" collection of methods.
  * Typical usage is:
  *  <code>
- *   $mapsengineService = new Google_Service_MapsEngine(...);
+ *   $mapsengineService = new Appointments_Google_Service_MapsEngine(...);
  *   $parents = $mapsengineService->parents;
  *  </code>
  */
-class Google_Service_MapsEngine_RasterCollectionsParents_Resource extends Google_Service_Resource
+class Appointments_Google_Service_MapsEngine_RasterCollectionsParents_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2472,24 +2472,24 @@ class Google_Service_MapsEngine_RasterCollectionsParents_Resource extends Google
    * value of nextPageToken from the previous response.
    * @opt_param string maxResults The maximum number of items to include in a
    * single response page. The maximum supported value is 50.
-   * @return Google_Service_MapsEngine_ParentsListResponse
+   * @return Appointments_Google_Service_MapsEngine_ParentsListResponse
    */
   public function listRasterCollectionsParents($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MapsEngine_ParentsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_MapsEngine_ParentsListResponse");
   }
 }
 /**
  * The "permissions" collection of methods.
  * Typical usage is:
  *  <code>
- *   $mapsengineService = new Google_Service_MapsEngine(...);
+ *   $mapsengineService = new Appointments_Google_Service_MapsEngine(...);
  *   $permissions = $mapsengineService->permissions;
  *  </code>
  */
-class Google_Service_MapsEngine_RasterCollectionsPermissions_Resource extends Google_Service_Resource
+class Appointments_Google_Service_MapsEngine_RasterCollectionsPermissions_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2497,15 +2497,15 @@ class Google_Service_MapsEngine_RasterCollectionsPermissions_Resource extends Go
    * (permissions.batchDelete)
    *
    * @param string $id The ID of the asset from which permissions will be removed.
-   * @param Google_PermissionsBatchDeleteRequest $postBody
+   * @param Appointments_Google_PermissionsBatchDeleteRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_PermissionsBatchDeleteResponse
+   * @return Appointments_Google_Service_MapsEngine_PermissionsBatchDeleteResponse
    */
-  public function batchDelete($id, Google_Service_MapsEngine_PermissionsBatchDeleteRequest $postBody, $optParams = array())
+  public function batchDelete($id, Appointments_Google_Service_MapsEngine_PermissionsBatchDeleteRequest $postBody, $optParams = array())
   {
     $params = array('id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('batchDelete', array($params), "Google_Service_MapsEngine_PermissionsBatchDeleteResponse");
+    return $this->call('batchDelete', array($params), "Appointments_Google_Service_MapsEngine_PermissionsBatchDeleteResponse");
   }
 
   /**
@@ -2515,15 +2515,15 @@ class Google_Service_MapsEngine_RasterCollectionsPermissions_Resource extends Go
    * request is atomic. (permissions.batchUpdate)
    *
    * @param string $id The ID of the asset to which permissions will be added.
-   * @param Google_PermissionsBatchUpdateRequest $postBody
+   * @param Appointments_Google_PermissionsBatchUpdateRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_PermissionsBatchUpdateResponse
+   * @return Appointments_Google_Service_MapsEngine_PermissionsBatchUpdateResponse
    */
-  public function batchUpdate($id, Google_Service_MapsEngine_PermissionsBatchUpdateRequest $postBody, $optParams = array())
+  public function batchUpdate($id, Appointments_Google_Service_MapsEngine_PermissionsBatchUpdateRequest $postBody, $optParams = array())
   {
     $params = array('id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('batchUpdate', array($params), "Google_Service_MapsEngine_PermissionsBatchUpdateResponse");
+    return $this->call('batchUpdate', array($params), "Appointments_Google_Service_MapsEngine_PermissionsBatchUpdateResponse");
   }
 
   /**
@@ -2532,24 +2532,24 @@ class Google_Service_MapsEngine_RasterCollectionsPermissions_Resource extends Go
    *
    * @param string $id The ID of the asset whose permissions will be listed.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_PermissionsListResponse
+   * @return Appointments_Google_Service_MapsEngine_PermissionsListResponse
    */
   public function listRasterCollectionsPermissions($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MapsEngine_PermissionsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_MapsEngine_PermissionsListResponse");
   }
 }
 /**
  * The "rasters" collection of methods.
  * Typical usage is:
  *  <code>
- *   $mapsengineService = new Google_Service_MapsEngine(...);
+ *   $mapsengineService = new Appointments_Google_Service_MapsEngine(...);
  *   $rasters = $mapsengineService->rasters;
  *  </code>
  */
-class Google_Service_MapsEngine_RasterCollectionsRasters_Resource extends Google_Service_Resource
+class Appointments_Google_Service_MapsEngine_RasterCollectionsRasters_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2560,15 +2560,15 @@ class Google_Service_MapsEngine_RasterCollectionsRasters_Resource extends Google
    *
    * @param string $id The ID of the raster collection to which these rasters
    * belong.
-   * @param Google_RasterCollectionsRasterBatchDeleteRequest $postBody
+   * @param Appointments_Google_RasterCollectionsRasterBatchDeleteRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_RasterCollectionsRastersBatchDeleteResponse
+   * @return Appointments_Google_Service_MapsEngine_RasterCollectionsRastersBatchDeleteResponse
    */
-  public function batchDelete($id, Google_Service_MapsEngine_RasterCollectionsRasterBatchDeleteRequest $postBody, $optParams = array())
+  public function batchDelete($id, Appointments_Google_Service_MapsEngine_RasterCollectionsRasterBatchDeleteRequest $postBody, $optParams = array())
   {
     $params = array('id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('batchDelete', array($params), "Google_Service_MapsEngine_RasterCollectionsRastersBatchDeleteResponse");
+    return $this->call('batchDelete', array($params), "Appointments_Google_Service_MapsEngine_RasterCollectionsRastersBatchDeleteResponse");
   }
 
   /**
@@ -2580,15 +2580,15 @@ class Google_Service_MapsEngine_RasterCollectionsRasters_Resource extends Google
    *
    * @param string $id The ID of the raster collection to which these rasters
    * belong.
-   * @param Google_RasterCollectionsRastersBatchInsertRequest $postBody
+   * @param Appointments_Google_RasterCollectionsRastersBatchInsertRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_RasterCollectionsRastersBatchInsertResponse
+   * @return Appointments_Google_Service_MapsEngine_RasterCollectionsRastersBatchInsertResponse
    */
-  public function batchInsert($id, Google_Service_MapsEngine_RasterCollectionsRastersBatchInsertRequest $postBody, $optParams = array())
+  public function batchInsert($id, Appointments_Google_Service_MapsEngine_RasterCollectionsRastersBatchInsertRequest $postBody, $optParams = array())
   {
     $params = array('id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('batchInsert', array($params), "Google_Service_MapsEngine_RasterCollectionsRastersBatchInsertResponse");
+    return $this->call('batchInsert', array($params), "Appointments_Google_Service_MapsEngine_RasterCollectionsRastersBatchInsertResponse");
   }
 
   /**
@@ -2627,13 +2627,13 @@ class Google_Service_MapsEngine_RasterCollectionsRasters_Resource extends Google
    * this time.
    * @opt_param string role The role parameter indicates that the response should
    * only contain assets where the current user has the specified level of access.
-   * @return Google_Service_MapsEngine_RasterCollectionsRastersListResponse
+   * @return Appointments_Google_Service_MapsEngine_RasterCollectionsRastersListResponse
    */
   public function listRasterCollectionsRasters($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MapsEngine_RasterCollectionsRastersListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_MapsEngine_RasterCollectionsRastersListResponse");
   }
 }
 
@@ -2641,11 +2641,11 @@ class Google_Service_MapsEngine_RasterCollectionsRasters_Resource extends Google
  * The "rasters" collection of methods.
  * Typical usage is:
  *  <code>
- *   $mapsengineService = new Google_Service_MapsEngine(...);
+ *   $mapsengineService = new Appointments_Google_Service_MapsEngine(...);
  *   $rasters = $mapsengineService->rasters;
  *  </code>
  */
-class Google_Service_MapsEngine_Rasters_Resource extends Google_Service_Resource
+class Appointments_Google_Service_MapsEngine_Rasters_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2668,13 +2668,13 @@ class Google_Service_MapsEngine_Rasters_Resource extends Google_Service_Resource
    *
    * @param string $id The ID of the raster.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_Raster
+   * @return Appointments_Google_Service_MapsEngine_Raster
    */
   public function get($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_MapsEngine_Raster");
+    return $this->call('get', array($params), "Appointments_Google_Service_MapsEngine_Raster");
   }
 
   /**
@@ -2715,23 +2715,23 @@ class Google_Service_MapsEngine_Rasters_Resource extends Google_Service_Resource
    * this time.
    * @opt_param string role The role parameter indicates that the response should
    * only contain assets where the current user has the specified level of access.
-   * @return Google_Service_MapsEngine_RastersListResponse
+   * @return Appointments_Google_Service_MapsEngine_RastersListResponse
    */
   public function listRasters($projectId, $optParams = array())
   {
     $params = array('projectId' => $projectId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MapsEngine_RastersListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_MapsEngine_RastersListResponse");
   }
 
   /**
    * Mutate a raster asset. (rasters.patch)
    *
    * @param string $id The ID of the raster.
-   * @param Google_Raster $postBody
+   * @param Appointments_Google_Raster $postBody
    * @param array $optParams Optional parameters.
    */
-  public function patch($id, Google_Service_MapsEngine_Raster $postBody, $optParams = array())
+  public function patch($id, Appointments_Google_Service_MapsEngine_Raster $postBody, $optParams = array())
   {
     $params = array('id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
@@ -2743,27 +2743,27 @@ class Google_Service_MapsEngine_Rasters_Resource extends Google_Service_Resource
    *
    * @param string $id The ID of the raster.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_ProcessResponse
+   * @return Appointments_Google_Service_MapsEngine_ProcessResponse
    */
   public function process($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('process', array($params), "Google_Service_MapsEngine_ProcessResponse");
+    return $this->call('process', array($params), "Appointments_Google_Service_MapsEngine_ProcessResponse");
   }
 
   /**
    * Create a skeleton raster asset for upload. (rasters.upload)
    *
-   * @param Google_Raster $postBody
+   * @param Appointments_Google_Raster $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_Raster
+   * @return Appointments_Google_Service_MapsEngine_Raster
    */
-  public function upload(Google_Service_MapsEngine_Raster $postBody, $optParams = array())
+  public function upload(Appointments_Google_Service_MapsEngine_Raster $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('upload', array($params), "Google_Service_MapsEngine_Raster");
+    return $this->call('upload', array($params), "Appointments_Google_Service_MapsEngine_Raster");
   }
 }
 
@@ -2771,11 +2771,11 @@ class Google_Service_MapsEngine_Rasters_Resource extends Google_Service_Resource
  * The "files" collection of methods.
  * Typical usage is:
  *  <code>
- *   $mapsengineService = new Google_Service_MapsEngine(...);
+ *   $mapsengineService = new Appointments_Google_Service_MapsEngine(...);
  *   $files = $mapsengineService->files;
  *  </code>
  */
-class Google_Service_MapsEngine_RastersFiles_Resource extends Google_Service_Resource
+class Appointments_Google_Service_MapsEngine_RastersFiles_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2796,11 +2796,11 @@ class Google_Service_MapsEngine_RastersFiles_Resource extends Google_Service_Res
  * The "parents" collection of methods.
  * Typical usage is:
  *  <code>
- *   $mapsengineService = new Google_Service_MapsEngine(...);
+ *   $mapsengineService = new Appointments_Google_Service_MapsEngine(...);
  *   $parents = $mapsengineService->parents;
  *  </code>
  */
-class Google_Service_MapsEngine_RastersParents_Resource extends Google_Service_Resource
+class Appointments_Google_Service_MapsEngine_RastersParents_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2814,24 +2814,24 @@ class Google_Service_MapsEngine_RastersParents_Resource extends Google_Service_R
    * value of nextPageToken from the previous response.
    * @opt_param string maxResults The maximum number of items to include in a
    * single response page. The maximum supported value is 50.
-   * @return Google_Service_MapsEngine_ParentsListResponse
+   * @return Appointments_Google_Service_MapsEngine_ParentsListResponse
    */
   public function listRastersParents($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MapsEngine_ParentsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_MapsEngine_ParentsListResponse");
   }
 }
 /**
  * The "permissions" collection of methods.
  * Typical usage is:
  *  <code>
- *   $mapsengineService = new Google_Service_MapsEngine(...);
+ *   $mapsengineService = new Appointments_Google_Service_MapsEngine(...);
  *   $permissions = $mapsengineService->permissions;
  *  </code>
  */
-class Google_Service_MapsEngine_RastersPermissions_Resource extends Google_Service_Resource
+class Appointments_Google_Service_MapsEngine_RastersPermissions_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -2839,15 +2839,15 @@ class Google_Service_MapsEngine_RastersPermissions_Resource extends Google_Servi
    * (permissions.batchDelete)
    *
    * @param string $id The ID of the asset from which permissions will be removed.
-   * @param Google_PermissionsBatchDeleteRequest $postBody
+   * @param Appointments_Google_PermissionsBatchDeleteRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_PermissionsBatchDeleteResponse
+   * @return Appointments_Google_Service_MapsEngine_PermissionsBatchDeleteResponse
    */
-  public function batchDelete($id, Google_Service_MapsEngine_PermissionsBatchDeleteRequest $postBody, $optParams = array())
+  public function batchDelete($id, Appointments_Google_Service_MapsEngine_PermissionsBatchDeleteRequest $postBody, $optParams = array())
   {
     $params = array('id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('batchDelete', array($params), "Google_Service_MapsEngine_PermissionsBatchDeleteResponse");
+    return $this->call('batchDelete', array($params), "Appointments_Google_Service_MapsEngine_PermissionsBatchDeleteResponse");
   }
 
   /**
@@ -2857,15 +2857,15 @@ class Google_Service_MapsEngine_RastersPermissions_Resource extends Google_Servi
    * request is atomic. (permissions.batchUpdate)
    *
    * @param string $id The ID of the asset to which permissions will be added.
-   * @param Google_PermissionsBatchUpdateRequest $postBody
+   * @param Appointments_Google_PermissionsBatchUpdateRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_PermissionsBatchUpdateResponse
+   * @return Appointments_Google_Service_MapsEngine_PermissionsBatchUpdateResponse
    */
-  public function batchUpdate($id, Google_Service_MapsEngine_PermissionsBatchUpdateRequest $postBody, $optParams = array())
+  public function batchUpdate($id, Appointments_Google_Service_MapsEngine_PermissionsBatchUpdateRequest $postBody, $optParams = array())
   {
     $params = array('id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('batchUpdate', array($params), "Google_Service_MapsEngine_PermissionsBatchUpdateResponse");
+    return $this->call('batchUpdate', array($params), "Appointments_Google_Service_MapsEngine_PermissionsBatchUpdateResponse");
   }
 
   /**
@@ -2874,13 +2874,13 @@ class Google_Service_MapsEngine_RastersPermissions_Resource extends Google_Servi
    *
    * @param string $id The ID of the asset whose permissions will be listed.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_PermissionsListResponse
+   * @return Appointments_Google_Service_MapsEngine_PermissionsListResponse
    */
   public function listRastersPermissions($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MapsEngine_PermissionsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_MapsEngine_PermissionsListResponse");
   }
 }
 
@@ -2888,25 +2888,25 @@ class Google_Service_MapsEngine_RastersPermissions_Resource extends Google_Servi
  * The "tables" collection of methods.
  * Typical usage is:
  *  <code>
- *   $mapsengineService = new Google_Service_MapsEngine(...);
+ *   $mapsengineService = new Appointments_Google_Service_MapsEngine(...);
  *   $tables = $mapsengineService->tables;
  *  </code>
  */
-class Google_Service_MapsEngine_Tables_Resource extends Google_Service_Resource
+class Appointments_Google_Service_MapsEngine_Tables_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
    * Create a table asset. (tables.create)
    *
-   * @param Google_Table $postBody
+   * @param Appointments_Google_Table $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_Table
+   * @return Appointments_Google_Service_MapsEngine_Table
    */
-  public function create(Google_Service_MapsEngine_Table $postBody, $optParams = array())
+  public function create(Appointments_Google_Service_MapsEngine_Table $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_MapsEngine_Table");
+    return $this->call('create', array($params), "Appointments_Google_Service_MapsEngine_Table");
   }
 
   /**
@@ -2931,13 +2931,13 @@ class Google_Service_MapsEngine_Tables_Resource extends Google_Service_Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param string version
-   * @return Google_Service_MapsEngine_Table
+   * @return Appointments_Google_Service_MapsEngine_Table
    */
   public function get($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_MapsEngine_Table");
+    return $this->call('get', array($params), "Appointments_Google_Service_MapsEngine_Table");
   }
 
   /**
@@ -2978,23 +2978,23 @@ class Google_Service_MapsEngine_Tables_Resource extends Google_Service_Resource
    * this time.
    * @opt_param string role The role parameter indicates that the response should
    * only contain assets where the current user has the specified level of access.
-   * @return Google_Service_MapsEngine_TablesListResponse
+   * @return Appointments_Google_Service_MapsEngine_TablesListResponse
    */
   public function listTables($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MapsEngine_TablesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_MapsEngine_TablesListResponse");
   }
 
   /**
    * Mutate a table asset. (tables.patch)
    *
    * @param string $id The ID of the table.
-   * @param Google_Table $postBody
+   * @param Appointments_Google_Table $postBody
    * @param array $optParams Optional parameters.
    */
-  public function patch($id, Google_Service_MapsEngine_Table $postBody, $optParams = array())
+  public function patch($id, Appointments_Google_Service_MapsEngine_Table $postBody, $optParams = array())
   {
     $params = array('id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
@@ -3006,13 +3006,13 @@ class Google_Service_MapsEngine_Tables_Resource extends Google_Service_Resource
    *
    * @param string $id The ID of the table.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_ProcessResponse
+   * @return Appointments_Google_Service_MapsEngine_ProcessResponse
    */
   public function process($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('process', array($params), "Google_Service_MapsEngine_ProcessResponse");
+    return $this->call('process', array($params), "Appointments_Google_Service_MapsEngine_ProcessResponse");
   }
 
   /**
@@ -3022,15 +3022,15 @@ class Google_Service_MapsEngine_Tables_Resource extends Google_Service_Resource
    * endpoint. See Table Upload in the Developer's Guide or Table.files: insert in
    * the reference documentation for more information. (tables.upload)
    *
-   * @param Google_Table $postBody
+   * @param Appointments_Google_Table $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_Table
+   * @return Appointments_Google_Service_MapsEngine_Table
    */
-  public function upload(Google_Service_MapsEngine_Table $postBody, $optParams = array())
+  public function upload(Appointments_Google_Service_MapsEngine_Table $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('upload', array($params), "Google_Service_MapsEngine_Table");
+    return $this->call('upload', array($params), "Appointments_Google_Service_MapsEngine_Table");
   }
 }
 
@@ -3038,11 +3038,11 @@ class Google_Service_MapsEngine_Tables_Resource extends Google_Service_Resource
  * The "features" collection of methods.
  * Typical usage is:
  *  <code>
- *   $mapsengineService = new Google_Service_MapsEngine(...);
+ *   $mapsengineService = new Appointments_Google_Service_MapsEngine(...);
  *   $features = $mapsengineService->features;
  *  </code>
  */
-class Google_Service_MapsEngine_TablesFeatures_Resource extends Google_Service_Resource
+class Appointments_Google_Service_MapsEngine_TablesFeatures_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -3050,10 +3050,10 @@ class Google_Service_MapsEngine_TablesFeatures_Resource extends Google_Service_R
    *
    * @param string $id The ID of the table that contains the features to be
    * deleted.
-   * @param Google_FeaturesBatchDeleteRequest $postBody
+   * @param Appointments_Google_FeaturesBatchDeleteRequest $postBody
    * @param array $optParams Optional parameters.
    */
-  public function batchDelete($id, Google_Service_MapsEngine_FeaturesBatchDeleteRequest $postBody, $optParams = array())
+  public function batchDelete($id, Appointments_Google_Service_MapsEngine_FeaturesBatchDeleteRequest $postBody, $optParams = array())
   {
     $params = array('id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
@@ -3074,10 +3074,10 @@ class Google_Service_MapsEngine_TablesFeatures_Resource extends Google_Service_R
    * Google Maps Engine developer's guide. (features.batchInsert)
    *
    * @param string $id The ID of the table to append the features to.
-   * @param Google_FeaturesBatchInsertRequest $postBody
+   * @param Appointments_Google_FeaturesBatchInsertRequest $postBody
    * @param array $optParams Optional parameters.
    */
-  public function batchInsert($id, Google_Service_MapsEngine_FeaturesBatchInsertRequest $postBody, $optParams = array())
+  public function batchInsert($id, Appointments_Google_Service_MapsEngine_FeaturesBatchInsertRequest $postBody, $optParams = array())
   {
     $params = array('id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
@@ -3105,10 +3105,10 @@ class Google_Service_MapsEngine_TablesFeatures_Resource extends Google_Service_R
    * features in the Google Maps Engine developer's guide. (features.batchPatch)
    *
    * @param string $id The ID of the table containing the features to be patched.
-   * @param Google_FeaturesBatchPatchRequest $postBody
+   * @param Appointments_Google_FeaturesBatchPatchRequest $postBody
    * @param array $optParams Optional parameters.
    */
-  public function batchPatch($id, Google_Service_MapsEngine_FeaturesBatchPatchRequest $postBody, $optParams = array())
+  public function batchPatch($id, Appointments_Google_Service_MapsEngine_FeaturesBatchPatchRequest $postBody, $optParams = array())
   {
     $params = array('id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
@@ -3127,13 +3127,13 @@ class Google_Service_MapsEngine_TablesFeatures_Resource extends Google_Service_R
    * @opt_param string select A SQL-like projection clause used to specify
    * returned properties. If this parameter is not included, all properties are
    * returned.
-   * @return Google_Service_MapsEngine_Feature
+   * @return Appointments_Google_Service_MapsEngine_Feature
    */
   public function get($tableId, $id, $optParams = array())
   {
     $params = array('tableId' => $tableId, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_MapsEngine_Feature");
+    return $this->call('get', array($params), "Appointments_Google_Service_MapsEngine_Feature");
   }
 
   /**
@@ -3162,24 +3162,24 @@ class Google_Service_MapsEngine_TablesFeatures_Resource extends Google_Service_R
    * @opt_param string select A SQL-like projection clause used to specify
    * returned properties. If this parameter is not included, all properties are
    * returned.
-   * @return Google_Service_MapsEngine_FeaturesListResponse
+   * @return Appointments_Google_Service_MapsEngine_FeaturesListResponse
    */
   public function listTablesFeatures($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MapsEngine_FeaturesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_MapsEngine_FeaturesListResponse");
   }
 }
 /**
  * The "files" collection of methods.
  * Typical usage is:
  *  <code>
- *   $mapsengineService = new Google_Service_MapsEngine(...);
+ *   $mapsengineService = new Appointments_Google_Service_MapsEngine(...);
  *   $files = $mapsengineService->files;
  *  </code>
  */
-class Google_Service_MapsEngine_TablesFiles_Resource extends Google_Service_Resource
+class Appointments_Google_Service_MapsEngine_TablesFiles_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -3203,11 +3203,11 @@ class Google_Service_MapsEngine_TablesFiles_Resource extends Google_Service_Reso
  * The "parents" collection of methods.
  * Typical usage is:
  *  <code>
- *   $mapsengineService = new Google_Service_MapsEngine(...);
+ *   $mapsengineService = new Appointments_Google_Service_MapsEngine(...);
  *   $parents = $mapsengineService->parents;
  *  </code>
  */
-class Google_Service_MapsEngine_TablesParents_Resource extends Google_Service_Resource
+class Appointments_Google_Service_MapsEngine_TablesParents_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -3221,24 +3221,24 @@ class Google_Service_MapsEngine_TablesParents_Resource extends Google_Service_Re
    * value of nextPageToken from the previous response.
    * @opt_param string maxResults The maximum number of items to include in a
    * single response page. The maximum supported value is 50.
-   * @return Google_Service_MapsEngine_ParentsListResponse
+   * @return Appointments_Google_Service_MapsEngine_ParentsListResponse
    */
   public function listTablesParents($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MapsEngine_ParentsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_MapsEngine_ParentsListResponse");
   }
 }
 /**
  * The "permissions" collection of methods.
  * Typical usage is:
  *  <code>
- *   $mapsengineService = new Google_Service_MapsEngine(...);
+ *   $mapsengineService = new Appointments_Google_Service_MapsEngine(...);
  *   $permissions = $mapsengineService->permissions;
  *  </code>
  */
-class Google_Service_MapsEngine_TablesPermissions_Resource extends Google_Service_Resource
+class Appointments_Google_Service_MapsEngine_TablesPermissions_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -3246,15 +3246,15 @@ class Google_Service_MapsEngine_TablesPermissions_Resource extends Google_Servic
    * (permissions.batchDelete)
    *
    * @param string $id The ID of the asset from which permissions will be removed.
-   * @param Google_PermissionsBatchDeleteRequest $postBody
+   * @param Appointments_Google_PermissionsBatchDeleteRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_PermissionsBatchDeleteResponse
+   * @return Appointments_Google_Service_MapsEngine_PermissionsBatchDeleteResponse
    */
-  public function batchDelete($id, Google_Service_MapsEngine_PermissionsBatchDeleteRequest $postBody, $optParams = array())
+  public function batchDelete($id, Appointments_Google_Service_MapsEngine_PermissionsBatchDeleteRequest $postBody, $optParams = array())
   {
     $params = array('id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('batchDelete', array($params), "Google_Service_MapsEngine_PermissionsBatchDeleteResponse");
+    return $this->call('batchDelete', array($params), "Appointments_Google_Service_MapsEngine_PermissionsBatchDeleteResponse");
   }
 
   /**
@@ -3264,15 +3264,15 @@ class Google_Service_MapsEngine_TablesPermissions_Resource extends Google_Servic
    * request is atomic. (permissions.batchUpdate)
    *
    * @param string $id The ID of the asset to which permissions will be added.
-   * @param Google_PermissionsBatchUpdateRequest $postBody
+   * @param Appointments_Google_PermissionsBatchUpdateRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_PermissionsBatchUpdateResponse
+   * @return Appointments_Google_Service_MapsEngine_PermissionsBatchUpdateResponse
    */
-  public function batchUpdate($id, Google_Service_MapsEngine_PermissionsBatchUpdateRequest $postBody, $optParams = array())
+  public function batchUpdate($id, Appointments_Google_Service_MapsEngine_PermissionsBatchUpdateRequest $postBody, $optParams = array())
   {
     $params = array('id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('batchUpdate', array($params), "Google_Service_MapsEngine_PermissionsBatchUpdateResponse");
+    return $this->call('batchUpdate', array($params), "Appointments_Google_Service_MapsEngine_PermissionsBatchUpdateResponse");
   }
 
   /**
@@ -3281,20 +3281,20 @@ class Google_Service_MapsEngine_TablesPermissions_Resource extends Google_Servic
    *
    * @param string $id The ID of the asset whose permissions will be listed.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_MapsEngine_PermissionsListResponse
+   * @return Appointments_Google_Service_MapsEngine_PermissionsListResponse
    */
   public function listTablesPermissions($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MapsEngine_PermissionsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_MapsEngine_PermissionsListResponse");
   }
 }
 
 
 
 
-class Google_Service_MapsEngine_AcquisitionTime extends Google_Model
+class Appointments_Google_Service_MapsEngine_AcquisitionTime extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3329,7 +3329,7 @@ class Google_Service_MapsEngine_AcquisitionTime extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_Asset extends Google_Collection
+class Appointments_Google_Service_MapsEngine_Asset extends Appointments_Google_Collection
 {
   protected $collection_key = 'tags';
   protected $internal_gapi_mappings = array(
@@ -3464,12 +3464,12 @@ class Google_Service_MapsEngine_Asset extends Google_Collection
   }
 }
 
-class Google_Service_MapsEngine_AssetsListResponse extends Google_Collection
+class Appointments_Google_Service_MapsEngine_AssetsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'assets';
   protected $internal_gapi_mappings = array(
   );
-  protected $assetsType = 'Google_Service_MapsEngine_Asset';
+  protected $assetsType = 'Appointments_Google_Service_MapsEngine_Asset';
   protected $assetsDataType = 'array';
   public $nextPageToken;
 
@@ -3492,7 +3492,7 @@ class Google_Service_MapsEngine_AssetsListResponse extends Google_Collection
   }
 }
 
-class Google_Service_MapsEngine_Border extends Google_Model
+class Appointments_Google_Service_MapsEngine_Border extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3527,7 +3527,7 @@ class Google_Service_MapsEngine_Border extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_Color extends Google_Model
+class Appointments_Google_Service_MapsEngine_Color extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3553,7 +3553,7 @@ class Google_Service_MapsEngine_Color extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_Datasource extends Google_Model
+class Appointments_Google_Service_MapsEngine_Datasource extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3570,21 +3570,21 @@ class Google_Service_MapsEngine_Datasource extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_DisplayRule extends Google_Collection
+class Appointments_Google_Service_MapsEngine_DisplayRule extends Appointments_Google_Collection
 {
   protected $collection_key = 'filters';
   protected $internal_gapi_mappings = array(
   );
-  protected $filtersType = 'Google_Service_MapsEngine_Filter';
+  protected $filtersType = 'Appointments_Google_Service_MapsEngine_Filter';
   protected $filtersDataType = 'array';
-  protected $lineOptionsType = 'Google_Service_MapsEngine_LineStyle';
+  protected $lineOptionsType = 'Appointments_Google_Service_MapsEngine_LineStyle';
   protected $lineOptionsDataType = '';
   public $name;
-  protected $pointOptionsType = 'Google_Service_MapsEngine_PointStyle';
+  protected $pointOptionsType = 'Appointments_Google_Service_MapsEngine_PointStyle';
   protected $pointOptionsDataType = '';
-  protected $polygonOptionsType = 'Google_Service_MapsEngine_PolygonStyle';
+  protected $polygonOptionsType = 'Appointments_Google_Service_MapsEngine_PolygonStyle';
   protected $polygonOptionsDataType = '';
-  protected $zoomLevelsType = 'Google_Service_MapsEngine_ZoomLevels';
+  protected $zoomLevelsType = 'Appointments_Google_Service_MapsEngine_ZoomLevels';
   protected $zoomLevelsDataType = '';
 
 
@@ -3596,7 +3596,7 @@ class Google_Service_MapsEngine_DisplayRule extends Google_Collection
   {
     return $this->filters;
   }
-  public function setLineOptions(Google_Service_MapsEngine_LineStyle $lineOptions)
+  public function setLineOptions(Appointments_Google_Service_MapsEngine_LineStyle $lineOptions)
   {
     $this->lineOptions = $lineOptions;
   }
@@ -3612,7 +3612,7 @@ class Google_Service_MapsEngine_DisplayRule extends Google_Collection
   {
     return $this->name;
   }
-  public function setPointOptions(Google_Service_MapsEngine_PointStyle $pointOptions)
+  public function setPointOptions(Appointments_Google_Service_MapsEngine_PointStyle $pointOptions)
   {
     $this->pointOptions = $pointOptions;
   }
@@ -3620,7 +3620,7 @@ class Google_Service_MapsEngine_DisplayRule extends Google_Collection
   {
     return $this->pointOptions;
   }
-  public function setPolygonOptions(Google_Service_MapsEngine_PolygonStyle $polygonOptions)
+  public function setPolygonOptions(Appointments_Google_Service_MapsEngine_PolygonStyle $polygonOptions)
   {
     $this->polygonOptions = $polygonOptions;
   }
@@ -3628,7 +3628,7 @@ class Google_Service_MapsEngine_DisplayRule extends Google_Collection
   {
     return $this->polygonOptions;
   }
-  public function setZoomLevels(Google_Service_MapsEngine_ZoomLevels $zoomLevels)
+  public function setZoomLevels(Appointments_Google_Service_MapsEngine_ZoomLevels $zoomLevels)
   {
     $this->zoomLevels = $zoomLevels;
   }
@@ -3638,17 +3638,17 @@ class Google_Service_MapsEngine_DisplayRule extends Google_Collection
   }
 }
 
-class Google_Service_MapsEngine_Feature extends Google_Model
+class Appointments_Google_Service_MapsEngine_Feature extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $geometryType = 'Google_Service_MapsEngine_GeoJsonGeometry';
+  protected $geometryType = 'Appointments_Google_Service_MapsEngine_GeoJsonGeometry';
   protected $geometryDataType = '';
   public $properties;
   public $type;
 
 
-  public function setGeometry(Google_Service_MapsEngine_GeoJsonGeometry $geometry)
+  public function setGeometry(Appointments_Google_Service_MapsEngine_GeoJsonGeometry $geometry)
   {
     $this->geometry = $geometry;
   }
@@ -3674,7 +3674,7 @@ class Google_Service_MapsEngine_Feature extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_FeatureInfo extends Google_Model
+class Appointments_Google_Service_MapsEngine_FeatureInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3691,7 +3691,7 @@ class Google_Service_MapsEngine_FeatureInfo extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_FeaturesBatchDeleteRequest extends Google_Collection
+class Appointments_Google_Service_MapsEngine_FeaturesBatchDeleteRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'primaryKeys';
   protected $internal_gapi_mappings = array(
@@ -3719,12 +3719,12 @@ class Google_Service_MapsEngine_FeaturesBatchDeleteRequest extends Google_Collec
   }
 }
 
-class Google_Service_MapsEngine_FeaturesBatchInsertRequest extends Google_Collection
+class Appointments_Google_Service_MapsEngine_FeaturesBatchInsertRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'features';
   protected $internal_gapi_mappings = array(
   );
-  protected $featuresType = 'Google_Service_MapsEngine_Feature';
+  protected $featuresType = 'Appointments_Google_Service_MapsEngine_Feature';
   protected $featuresDataType = 'array';
   public $normalizeGeometries;
 
@@ -3747,12 +3747,12 @@ class Google_Service_MapsEngine_FeaturesBatchInsertRequest extends Google_Collec
   }
 }
 
-class Google_Service_MapsEngine_FeaturesBatchPatchRequest extends Google_Collection
+class Appointments_Google_Service_MapsEngine_FeaturesBatchPatchRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'features';
   protected $internal_gapi_mappings = array(
   );
-  protected $featuresType = 'Google_Service_MapsEngine_Feature';
+  protected $featuresType = 'Appointments_Google_Service_MapsEngine_Feature';
   protected $featuresDataType = 'array';
   public $normalizeGeometries;
 
@@ -3775,16 +3775,16 @@ class Google_Service_MapsEngine_FeaturesBatchPatchRequest extends Google_Collect
   }
 }
 
-class Google_Service_MapsEngine_FeaturesListResponse extends Google_Collection
+class Appointments_Google_Service_MapsEngine_FeaturesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'features';
   protected $internal_gapi_mappings = array(
   );
   public $allowedQueriesPerSecond;
-  protected $featuresType = 'Google_Service_MapsEngine_Feature';
+  protected $featuresType = 'Appointments_Google_Service_MapsEngine_Feature';
   protected $featuresDataType = 'array';
   public $nextPageToken;
-  protected $schemaType = 'Google_Service_MapsEngine_Schema';
+  protected $schemaType = 'Appointments_Google_Service_MapsEngine_Schema';
   protected $schemaDataType = '';
   public $type;
 
@@ -3813,7 +3813,7 @@ class Google_Service_MapsEngine_FeaturesListResponse extends Google_Collection
   {
     return $this->nextPageToken;
   }
-  public function setSchema(Google_Service_MapsEngine_Schema $schema)
+  public function setSchema(Appointments_Google_Service_MapsEngine_Schema $schema)
   {
     $this->schema = $schema;
   }
@@ -3831,7 +3831,7 @@ class Google_Service_MapsEngine_FeaturesListResponse extends Google_Collection
   }
 }
 
-class Google_Service_MapsEngine_Filter extends Google_Model
+class Appointments_Google_Service_MapsEngine_Filter extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3866,7 +3866,7 @@ class Google_Service_MapsEngine_Filter extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_GeoJsonGeometry extends Google_Model
+class Appointments_Google_Service_MapsEngine_GeoJsonGeometry extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -3883,12 +3883,12 @@ class Google_Service_MapsEngine_GeoJsonGeometry extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_GeoJsonGeometryCollection extends Google_Service_MapsEngine_GeoJsonGeometry
+class Appointments_Google_Service_MapsEngine_GeoJsonGeometryCollection extends Appointments_Google_Service_MapsEngine_GeoJsonGeometry
 {
   protected $collection_key = 'geometries';
   protected $internal_gapi_mappings = array(
   );
-  protected $geometriesType = 'Google_Service_MapsEngine_GeoJsonGeometry';
+  protected $geometriesType = 'Appointments_Google_Service_MapsEngine_GeoJsonGeometry';
   protected $geometriesDataType = 'array';
   protected function gapiInit()
   {
@@ -3905,7 +3905,7 @@ class Google_Service_MapsEngine_GeoJsonGeometryCollection extends Google_Service
   }
 }
 
-class Google_Service_MapsEngine_GeoJsonLineString extends Google_Service_MapsEngine_GeoJsonGeometry
+class Appointments_Google_Service_MapsEngine_GeoJsonLineString extends Appointments_Google_Service_MapsEngine_GeoJsonGeometry
 {
   protected $collection_key = 'coordinates';
   protected $internal_gapi_mappings = array(
@@ -3926,7 +3926,7 @@ class Google_Service_MapsEngine_GeoJsonLineString extends Google_Service_MapsEng
   }
 }
 
-class Google_Service_MapsEngine_GeoJsonMultiLineString extends Google_Service_MapsEngine_GeoJsonGeometry
+class Appointments_Google_Service_MapsEngine_GeoJsonMultiLineString extends Appointments_Google_Service_MapsEngine_GeoJsonGeometry
 {
   protected $collection_key = 'coordinates';
   protected $internal_gapi_mappings = array(
@@ -3947,7 +3947,7 @@ class Google_Service_MapsEngine_GeoJsonMultiLineString extends Google_Service_Ma
   }
 }
 
-class Google_Service_MapsEngine_GeoJsonMultiPoint extends Google_Service_MapsEngine_GeoJsonGeometry
+class Appointments_Google_Service_MapsEngine_GeoJsonMultiPoint extends Appointments_Google_Service_MapsEngine_GeoJsonGeometry
 {
   protected $collection_key = 'coordinates';
   protected $internal_gapi_mappings = array(
@@ -3968,7 +3968,7 @@ class Google_Service_MapsEngine_GeoJsonMultiPoint extends Google_Service_MapsEng
   }
 }
 
-class Google_Service_MapsEngine_GeoJsonMultiPolygon extends Google_Service_MapsEngine_GeoJsonGeometry
+class Appointments_Google_Service_MapsEngine_GeoJsonMultiPolygon extends Appointments_Google_Service_MapsEngine_GeoJsonGeometry
 {
   protected $collection_key = 'coordinates';
   protected $internal_gapi_mappings = array(
@@ -3989,7 +3989,7 @@ class Google_Service_MapsEngine_GeoJsonMultiPolygon extends Google_Service_MapsE
   }
 }
 
-class Google_Service_MapsEngine_GeoJsonPoint extends Google_Service_MapsEngine_GeoJsonGeometry
+class Appointments_Google_Service_MapsEngine_GeoJsonPoint extends Appointments_Google_Service_MapsEngine_GeoJsonGeometry
 {
   protected $collection_key = 'coordinates';
   protected $internal_gapi_mappings = array(
@@ -4010,7 +4010,7 @@ class Google_Service_MapsEngine_GeoJsonPoint extends Google_Service_MapsEngine_G
   }
 }
 
-class Google_Service_MapsEngine_GeoJsonPolygon extends Google_Service_MapsEngine_GeoJsonGeometry
+class Appointments_Google_Service_MapsEngine_GeoJsonPolygon extends Appointments_Google_Service_MapsEngine_GeoJsonGeometry
 {
   protected $collection_key = 'coordinates';
   protected $internal_gapi_mappings = array(
@@ -4031,11 +4031,11 @@ class Google_Service_MapsEngine_GeoJsonPolygon extends Google_Service_MapsEngine
   }
 }
 
-class Google_Service_MapsEngine_GeoJsonProperties extends Google_Model
+class Appointments_Google_Service_MapsEngine_GeoJsonProperties extends Appointments_Google_Model
 {
 }
 
-class Google_Service_MapsEngine_Icon extends Google_Model
+class Appointments_Google_Service_MapsEngine_Icon extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -4070,15 +4070,15 @@ class Google_Service_MapsEngine_Icon extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_IconStyle extends Google_Model
+class Appointments_Google_Service_MapsEngine_IconStyle extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $id;
   public $name;
-  protected $scaledShapeType = 'Google_Service_MapsEngine_ScaledShape';
+  protected $scaledShapeType = 'Appointments_Google_Service_MapsEngine_ScaledShape';
   protected $scaledShapeDataType = '';
-  protected $scalingFunctionType = 'Google_Service_MapsEngine_ScalingFunction';
+  protected $scalingFunctionType = 'Appointments_Google_Service_MapsEngine_ScalingFunction';
   protected $scalingFunctionDataType = '';
 
 
@@ -4098,7 +4098,7 @@ class Google_Service_MapsEngine_IconStyle extends Google_Model
   {
     return $this->name;
   }
-  public function setScaledShape(Google_Service_MapsEngine_ScaledShape $scaledShape)
+  public function setScaledShape(Appointments_Google_Service_MapsEngine_ScaledShape $scaledShape)
   {
     $this->scaledShape = $scaledShape;
   }
@@ -4106,7 +4106,7 @@ class Google_Service_MapsEngine_IconStyle extends Google_Model
   {
     return $this->scaledShape;
   }
-  public function setScalingFunction(Google_Service_MapsEngine_ScalingFunction $scalingFunction)
+  public function setScalingFunction(Appointments_Google_Service_MapsEngine_ScalingFunction $scalingFunction)
   {
     $this->scalingFunction = $scalingFunction;
   }
@@ -4116,12 +4116,12 @@ class Google_Service_MapsEngine_IconStyle extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_IconsListResponse extends Google_Collection
+class Appointments_Google_Service_MapsEngine_IconsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'icons';
   protected $internal_gapi_mappings = array(
   );
-  protected $iconsType = 'Google_Service_MapsEngine_Icon';
+  protected $iconsType = 'Appointments_Google_Service_MapsEngine_Icon';
   protected $iconsDataType = 'array';
   public $nextPageToken;
 
@@ -4144,7 +4144,7 @@ class Google_Service_MapsEngine_IconsListResponse extends Google_Collection
   }
 }
 
-class Google_Service_MapsEngine_LabelStyle extends Google_Model
+class Appointments_Google_Service_MapsEngine_LabelStyle extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -4153,7 +4153,7 @@ class Google_Service_MapsEngine_LabelStyle extends Google_Model
   public $fontStyle;
   public $fontWeight;
   public $opacity;
-  protected $outlineType = 'Google_Service_MapsEngine_Color';
+  protected $outlineType = 'Appointments_Google_Service_MapsEngine_Color';
   protected $outlineDataType = '';
   public $size;
 
@@ -4198,7 +4198,7 @@ class Google_Service_MapsEngine_LabelStyle extends Google_Model
   {
     return $this->opacity;
   }
-  public function setOutline(Google_Service_MapsEngine_Color $outline)
+  public function setOutline(Appointments_Google_Service_MapsEngine_Color $outline)
   {
     $this->outline = $outline;
   }
@@ -4216,7 +4216,7 @@ class Google_Service_MapsEngine_LabelStyle extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_Layer extends Google_Collection
+class Appointments_Google_Service_MapsEngine_Layer extends Appointments_Google_Collection
 {
   protected $collection_key = 'tags';
   protected $internal_gapi_mappings = array(
@@ -4225,7 +4225,7 @@ class Google_Service_MapsEngine_Layer extends Google_Collection
   public $creationTime;
   public $creatorEmail;
   public $datasourceType;
-  protected $datasourcesType = 'Google_Service_MapsEngine_Datasource';
+  protected $datasourcesType = 'Appointments_Google_Service_MapsEngine_Datasource';
   protected $datasourcesDataType = 'array';
   public $description;
   public $draftAccessList;
@@ -4239,7 +4239,7 @@ class Google_Service_MapsEngine_Layer extends Google_Collection
   public $projectId;
   public $publishedAccessList;
   public $publishingStatus;
-  protected $styleType = 'Google_Service_MapsEngine_VectorStyle';
+  protected $styleType = 'Appointments_Google_Service_MapsEngine_VectorStyle';
   protected $styleDataType = '';
   public $tags;
   public $writersCanEditPermissions;
@@ -4277,7 +4277,7 @@ class Google_Service_MapsEngine_Layer extends Google_Collection
   {
     return $this->datasourceType;
   }
-  public function setDatasources(Google_Service_MapsEngine_Datasource $datasources)
+  public function setDatasources(Appointments_Google_Service_MapsEngine_Datasource $datasources)
   {
     $this->datasources = $datasources;
   }
@@ -4381,7 +4381,7 @@ class Google_Service_MapsEngine_Layer extends Google_Collection
   {
     return $this->publishingStatus;
   }
-  public function setStyle(Google_Service_MapsEngine_VectorStyle $style)
+  public function setStyle(Appointments_Google_Service_MapsEngine_VectorStyle $style)
   {
     $this->style = $style;
   }
@@ -4407,12 +4407,12 @@ class Google_Service_MapsEngine_Layer extends Google_Collection
   }
 }
 
-class Google_Service_MapsEngine_LayersListResponse extends Google_Collection
+class Appointments_Google_Service_MapsEngine_LayersListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'layers';
   protected $internal_gapi_mappings = array(
   );
-  protected $layersType = 'Google_Service_MapsEngine_Layer';
+  protected $layersType = 'Appointments_Google_Service_MapsEngine_Layer';
   protected $layersDataType = 'array';
   public $nextPageToken;
 
@@ -4435,21 +4435,21 @@ class Google_Service_MapsEngine_LayersListResponse extends Google_Collection
   }
 }
 
-class Google_Service_MapsEngine_LineStyle extends Google_Collection
+class Appointments_Google_Service_MapsEngine_LineStyle extends Appointments_Google_Collection
 {
   protected $collection_key = 'dash';
   protected $internal_gapi_mappings = array(
   );
-  protected $borderType = 'Google_Service_MapsEngine_Border';
+  protected $borderType = 'Appointments_Google_Service_MapsEngine_Border';
   protected $borderDataType = '';
   public $dash;
-  protected $labelType = 'Google_Service_MapsEngine_LabelStyle';
+  protected $labelType = 'Appointments_Google_Service_MapsEngine_LabelStyle';
   protected $labelDataType = '';
-  protected $strokeType = 'Google_Service_MapsEngine_LineStyleStroke';
+  protected $strokeType = 'Appointments_Google_Service_MapsEngine_LineStyleStroke';
   protected $strokeDataType = '';
 
 
-  public function setBorder(Google_Service_MapsEngine_Border $border)
+  public function setBorder(Appointments_Google_Service_MapsEngine_Border $border)
   {
     $this->border = $border;
   }
@@ -4465,7 +4465,7 @@ class Google_Service_MapsEngine_LineStyle extends Google_Collection
   {
     return $this->dash;
   }
-  public function setLabel(Google_Service_MapsEngine_LabelStyle $label)
+  public function setLabel(Appointments_Google_Service_MapsEngine_LabelStyle $label)
   {
     $this->label = $label;
   }
@@ -4473,7 +4473,7 @@ class Google_Service_MapsEngine_LineStyle extends Google_Collection
   {
     return $this->label;
   }
-  public function setStroke(Google_Service_MapsEngine_LineStyleStroke $stroke)
+  public function setStroke(Appointments_Google_Service_MapsEngine_LineStyleStroke $stroke)
   {
     $this->stroke = $stroke;
   }
@@ -4483,7 +4483,7 @@ class Google_Service_MapsEngine_LineStyle extends Google_Collection
   }
 }
 
-class Google_Service_MapsEngine_LineStyleStroke extends Google_Model
+class Appointments_Google_Service_MapsEngine_LineStyleStroke extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -4518,13 +4518,13 @@ class Google_Service_MapsEngine_LineStyleStroke extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_Map extends Google_Collection
+class Appointments_Google_Service_MapsEngine_Map extends Appointments_Google_Collection
 {
   protected $collection_key = 'versions';
   protected $internal_gapi_mappings = array(
   );
   public $bbox;
-  protected $contentsType = 'Google_Service_MapsEngine_MapItem';
+  protected $contentsType = 'Appointments_Google_Service_MapsEngine_MapItem';
   protected $contentsDataType = '';
   public $creationTime;
   public $creatorEmail;
@@ -4553,7 +4553,7 @@ class Google_Service_MapsEngine_Map extends Google_Collection
   {
     return $this->bbox;
   }
-  public function setContents(Google_Service_MapsEngine_MapItem $contents)
+  public function setContents(Appointments_Google_Service_MapsEngine_MapItem $contents)
   {
     $this->contents = $contents;
   }
@@ -4699,12 +4699,12 @@ class Google_Service_MapsEngine_Map extends Google_Collection
   }
 }
 
-class Google_Service_MapsEngine_MapFolder extends Google_Service_MapsEngine_MapItem
+class Appointments_Google_Service_MapsEngine_MapFolder extends Appointments_Google_Service_MapsEngine_MapItem
 {
   protected $collection_key = 'defaultViewport';
   protected $internal_gapi_mappings = array(
   );
-  protected $contentsType = 'Google_Service_MapsEngine_MapItem';
+  protected $contentsType = 'Appointments_Google_Service_MapsEngine_MapItem';
   protected $contentsDataType = 'array';
   public $defaultViewport;
   public $expandable;
@@ -4766,7 +4766,7 @@ class Google_Service_MapsEngine_MapFolder extends Google_Service_MapsEngine_MapI
   }
 }
 
-class Google_Service_MapsEngine_MapItem extends Google_Model
+class Appointments_Google_Service_MapsEngine_MapItem extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -4783,7 +4783,7 @@ class Google_Service_MapsEngine_MapItem extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_MapKmlLink extends Google_Service_MapsEngine_MapItem
+class Appointments_Google_Service_MapsEngine_MapKmlLink extends Appointments_Google_Service_MapsEngine_MapItem
 {
   protected $collection_key = 'defaultViewport';
   protected $internal_gapi_mappings = array(
@@ -4831,7 +4831,7 @@ class Google_Service_MapsEngine_MapKmlLink extends Google_Service_MapsEngine_Map
   }
 }
 
-class Google_Service_MapsEngine_MapLayer extends Google_Service_MapsEngine_MapItem
+class Appointments_Google_Service_MapsEngine_MapLayer extends Appointments_Google_Service_MapsEngine_MapItem
 {
   protected $collection_key = 'defaultViewport';
   protected $internal_gapi_mappings = array(
@@ -4888,12 +4888,12 @@ class Google_Service_MapsEngine_MapLayer extends Google_Service_MapsEngine_MapIt
   }
 }
 
-class Google_Service_MapsEngine_MapsListResponse extends Google_Collection
+class Appointments_Google_Service_MapsEngine_MapsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'maps';
   protected $internal_gapi_mappings = array(
   );
-  protected $mapsType = 'Google_Service_MapsEngine_Map';
+  protected $mapsType = 'Appointments_Google_Service_MapsEngine_Map';
   protected $mapsDataType = 'array';
   public $nextPageToken;
 
@@ -4916,7 +4916,7 @@ class Google_Service_MapsEngine_MapsListResponse extends Google_Collection
   }
 }
 
-class Google_Service_MapsEngine_MapsengineFile extends Google_Model
+class Appointments_Google_Service_MapsEngine_MapsengineFile extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -4951,7 +4951,7 @@ class Google_Service_MapsEngine_MapsengineFile extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_Parent extends Google_Model
+class Appointments_Google_Service_MapsEngine_Parent extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -4968,13 +4968,13 @@ class Google_Service_MapsEngine_Parent extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_ParentsListResponse extends Google_Collection
+class Appointments_Google_Service_MapsEngine_ParentsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'parents';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $parentsType = 'Google_Service_MapsEngine_Parent';
+  protected $parentsType = 'Appointments_Google_Service_MapsEngine_Parent';
   protected $parentsDataType = 'array';
 
 
@@ -4996,7 +4996,7 @@ class Google_Service_MapsEngine_ParentsListResponse extends Google_Collection
   }
 }
 
-class Google_Service_MapsEngine_Permission extends Google_Model
+class Appointments_Google_Service_MapsEngine_Permission extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -5040,7 +5040,7 @@ class Google_Service_MapsEngine_Permission extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_PermissionsBatchDeleteRequest extends Google_Collection
+class Appointments_Google_Service_MapsEngine_PermissionsBatchDeleteRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'ids';
   protected $internal_gapi_mappings = array(
@@ -5058,16 +5058,16 @@ class Google_Service_MapsEngine_PermissionsBatchDeleteRequest extends Google_Col
   }
 }
 
-class Google_Service_MapsEngine_PermissionsBatchDeleteResponse extends Google_Model
+class Appointments_Google_Service_MapsEngine_PermissionsBatchDeleteResponse extends Appointments_Google_Model
 {
 }
 
-class Google_Service_MapsEngine_PermissionsBatchUpdateRequest extends Google_Collection
+class Appointments_Google_Service_MapsEngine_PermissionsBatchUpdateRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'permissions';
   protected $internal_gapi_mappings = array(
   );
-  protected $permissionsType = 'Google_Service_MapsEngine_Permission';
+  protected $permissionsType = 'Appointments_Google_Service_MapsEngine_Permission';
   protected $permissionsDataType = 'array';
 
 
@@ -5081,16 +5081,16 @@ class Google_Service_MapsEngine_PermissionsBatchUpdateRequest extends Google_Col
   }
 }
 
-class Google_Service_MapsEngine_PermissionsBatchUpdateResponse extends Google_Model
+class Appointments_Google_Service_MapsEngine_PermissionsBatchUpdateResponse extends Appointments_Google_Model
 {
 }
 
-class Google_Service_MapsEngine_PermissionsListResponse extends Google_Collection
+class Appointments_Google_Service_MapsEngine_PermissionsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'permissions';
   protected $internal_gapi_mappings = array(
   );
-  protected $permissionsType = 'Google_Service_MapsEngine_Permission';
+  protected $permissionsType = 'Appointments_Google_Service_MapsEngine_Permission';
   protected $permissionsDataType = 'array';
 
 
@@ -5104,17 +5104,17 @@ class Google_Service_MapsEngine_PermissionsListResponse extends Google_Collectio
   }
 }
 
-class Google_Service_MapsEngine_PointStyle extends Google_Model
+class Appointments_Google_Service_MapsEngine_PointStyle extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $iconType = 'Google_Service_MapsEngine_IconStyle';
+  protected $iconType = 'Appointments_Google_Service_MapsEngine_IconStyle';
   protected $iconDataType = '';
-  protected $labelType = 'Google_Service_MapsEngine_LabelStyle';
+  protected $labelType = 'Appointments_Google_Service_MapsEngine_LabelStyle';
   protected $labelDataType = '';
 
 
-  public function setIcon(Google_Service_MapsEngine_IconStyle $icon)
+  public function setIcon(Appointments_Google_Service_MapsEngine_IconStyle $icon)
   {
     $this->icon = $icon;
   }
@@ -5122,7 +5122,7 @@ class Google_Service_MapsEngine_PointStyle extends Google_Model
   {
     return $this->icon;
   }
-  public function setLabel(Google_Service_MapsEngine_LabelStyle $label)
+  public function setLabel(Appointments_Google_Service_MapsEngine_LabelStyle $label)
   {
     $this->label = $label;
   }
@@ -5132,19 +5132,19 @@ class Google_Service_MapsEngine_PointStyle extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_PolygonStyle extends Google_Model
+class Appointments_Google_Service_MapsEngine_PolygonStyle extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $fillType = 'Google_Service_MapsEngine_Color';
+  protected $fillType = 'Appointments_Google_Service_MapsEngine_Color';
   protected $fillDataType = '';
-  protected $labelType = 'Google_Service_MapsEngine_LabelStyle';
+  protected $labelType = 'Appointments_Google_Service_MapsEngine_LabelStyle';
   protected $labelDataType = '';
-  protected $strokeType = 'Google_Service_MapsEngine_Border';
+  protected $strokeType = 'Appointments_Google_Service_MapsEngine_Border';
   protected $strokeDataType = '';
 
 
-  public function setFill(Google_Service_MapsEngine_Color $fill)
+  public function setFill(Appointments_Google_Service_MapsEngine_Color $fill)
   {
     $this->fill = $fill;
   }
@@ -5152,7 +5152,7 @@ class Google_Service_MapsEngine_PolygonStyle extends Google_Model
   {
     return $this->fill;
   }
-  public function setLabel(Google_Service_MapsEngine_LabelStyle $label)
+  public function setLabel(Appointments_Google_Service_MapsEngine_LabelStyle $label)
   {
     $this->label = $label;
   }
@@ -5160,7 +5160,7 @@ class Google_Service_MapsEngine_PolygonStyle extends Google_Model
   {
     return $this->label;
   }
-  public function setStroke(Google_Service_MapsEngine_Border $stroke)
+  public function setStroke(Appointments_Google_Service_MapsEngine_Border $stroke)
   {
     $this->stroke = $stroke;
   }
@@ -5170,11 +5170,11 @@ class Google_Service_MapsEngine_PolygonStyle extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_ProcessResponse extends Google_Model
+class Appointments_Google_Service_MapsEngine_ProcessResponse extends Appointments_Google_Model
 {
 }
 
-class Google_Service_MapsEngine_Project extends Google_Model
+class Appointments_Google_Service_MapsEngine_Project extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -5200,12 +5200,12 @@ class Google_Service_MapsEngine_Project extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_ProjectsListResponse extends Google_Collection
+class Appointments_Google_Service_MapsEngine_ProjectsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'projects';
   protected $internal_gapi_mappings = array(
   );
-  protected $projectsType = 'Google_Service_MapsEngine_Project';
+  protected $projectsType = 'Appointments_Google_Service_MapsEngine_Project';
   protected $projectsDataType = 'array';
 
 
@@ -5219,11 +5219,11 @@ class Google_Service_MapsEngine_ProjectsListResponse extends Google_Collection
   }
 }
 
-class Google_Service_MapsEngine_PublishResponse extends Google_Model
+class Appointments_Google_Service_MapsEngine_PublishResponse extends Appointments_Google_Model
 {
 }
 
-class Google_Service_MapsEngine_PublishedLayer extends Google_Model
+class Appointments_Google_Service_MapsEngine_PublishedLayer extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -5276,12 +5276,12 @@ class Google_Service_MapsEngine_PublishedLayer extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_PublishedLayersListResponse extends Google_Collection
+class Appointments_Google_Service_MapsEngine_PublishedLayersListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'layers';
   protected $internal_gapi_mappings = array(
   );
-  protected $layersType = 'Google_Service_MapsEngine_PublishedLayer';
+  protected $layersType = 'Appointments_Google_Service_MapsEngine_PublishedLayer';
   protected $layersDataType = 'array';
   public $nextPageToken;
 
@@ -5304,11 +5304,11 @@ class Google_Service_MapsEngine_PublishedLayersListResponse extends Google_Colle
   }
 }
 
-class Google_Service_MapsEngine_PublishedMap extends Google_Model
+class Appointments_Google_Service_MapsEngine_PublishedMap extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $contentsType = 'Google_Service_MapsEngine_MapItem';
+  protected $contentsType = 'Appointments_Google_Service_MapsEngine_MapItem';
   protected $contentsDataType = '';
   public $defaultViewport;
   public $description;
@@ -5317,7 +5317,7 @@ class Google_Service_MapsEngine_PublishedMap extends Google_Model
   public $projectId;
 
 
-  public function setContents(Google_Service_MapsEngine_MapItem $contents)
+  public function setContents(Appointments_Google_Service_MapsEngine_MapItem $contents)
   {
     $this->contents = $contents;
   }
@@ -5367,12 +5367,12 @@ class Google_Service_MapsEngine_PublishedMap extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_PublishedMapsListResponse extends Google_Collection
+class Appointments_Google_Service_MapsEngine_PublishedMapsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'maps';
   protected $internal_gapi_mappings = array(
   );
-  protected $mapsType = 'Google_Service_MapsEngine_PublishedMap';
+  protected $mapsType = 'Appointments_Google_Service_MapsEngine_PublishedMap';
   protected $mapsDataType = 'array';
   public $nextPageToken;
 
@@ -5395,12 +5395,12 @@ class Google_Service_MapsEngine_PublishedMapsListResponse extends Google_Collect
   }
 }
 
-class Google_Service_MapsEngine_Raster extends Google_Collection
+class Appointments_Google_Service_MapsEngine_Raster extends Appointments_Google_Collection
 {
   protected $collection_key = 'files';
   protected $internal_gapi_mappings = array(
   );
-  protected $acquisitionTimeType = 'Google_Service_MapsEngine_AcquisitionTime';
+  protected $acquisitionTimeType = 'Appointments_Google_Service_MapsEngine_AcquisitionTime';
   protected $acquisitionTimeDataType = '';
   public $attribution;
   public $bbox;
@@ -5409,7 +5409,7 @@ class Google_Service_MapsEngine_Raster extends Google_Collection
   public $description;
   public $draftAccessList;
   public $etag;
-  protected $filesType = 'Google_Service_MapsEngine_MapsengineFile';
+  protected $filesType = 'Appointments_Google_Service_MapsEngine_MapsengineFile';
   protected $filesDataType = 'array';
   public $id;
   public $lastModifiedTime;
@@ -5423,7 +5423,7 @@ class Google_Service_MapsEngine_Raster extends Google_Collection
   public $writersCanEditPermissions;
 
 
-  public function setAcquisitionTime(Google_Service_MapsEngine_AcquisitionTime $acquisitionTime)
+  public function setAcquisitionTime(Appointments_Google_Service_MapsEngine_AcquisitionTime $acquisitionTime)
   {
     $this->acquisitionTime = $acquisitionTime;
   }
@@ -5577,7 +5577,7 @@ class Google_Service_MapsEngine_Raster extends Google_Collection
   }
 }
 
-class Google_Service_MapsEngine_RasterCollection extends Google_Collection
+class Appointments_Google_Service_MapsEngine_RasterCollection extends Appointments_Google_Collection
 {
   protected $collection_key = 'bbox';
   protected $internal_gapi_mappings = array(
@@ -5739,13 +5739,13 @@ class Google_Service_MapsEngine_RasterCollection extends Google_Collection
   }
 }
 
-class Google_Service_MapsEngine_RasterCollectionsListResponse extends Google_Collection
+class Appointments_Google_Service_MapsEngine_RasterCollectionsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'rasterCollections';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $rasterCollectionsType = 'Google_Service_MapsEngine_RasterCollection';
+  protected $rasterCollectionsType = 'Appointments_Google_Service_MapsEngine_RasterCollection';
   protected $rasterCollectionsDataType = 'array';
 
 
@@ -5767,7 +5767,7 @@ class Google_Service_MapsEngine_RasterCollectionsListResponse extends Google_Col
   }
 }
 
-class Google_Service_MapsEngine_RasterCollectionsRaster extends Google_Collection
+class Appointments_Google_Service_MapsEngine_RasterCollectionsRaster extends Appointments_Google_Collection
 {
   protected $collection_key = 'tags';
   protected $internal_gapi_mappings = array(
@@ -5857,7 +5857,7 @@ class Google_Service_MapsEngine_RasterCollectionsRaster extends Google_Collectio
   }
 }
 
-class Google_Service_MapsEngine_RasterCollectionsRasterBatchDeleteRequest extends Google_Collection
+class Appointments_Google_Service_MapsEngine_RasterCollectionsRasterBatchDeleteRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'ids';
   protected $internal_gapi_mappings = array(
@@ -5875,11 +5875,11 @@ class Google_Service_MapsEngine_RasterCollectionsRasterBatchDeleteRequest extend
   }
 }
 
-class Google_Service_MapsEngine_RasterCollectionsRastersBatchDeleteResponse extends Google_Model
+class Appointments_Google_Service_MapsEngine_RasterCollectionsRastersBatchDeleteResponse extends Appointments_Google_Model
 {
 }
 
-class Google_Service_MapsEngine_RasterCollectionsRastersBatchInsertRequest extends Google_Collection
+class Appointments_Google_Service_MapsEngine_RasterCollectionsRastersBatchInsertRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'ids';
   protected $internal_gapi_mappings = array(
@@ -5897,17 +5897,17 @@ class Google_Service_MapsEngine_RasterCollectionsRastersBatchInsertRequest exten
   }
 }
 
-class Google_Service_MapsEngine_RasterCollectionsRastersBatchInsertResponse extends Google_Model
+class Appointments_Google_Service_MapsEngine_RasterCollectionsRastersBatchInsertResponse extends Appointments_Google_Model
 {
 }
 
-class Google_Service_MapsEngine_RasterCollectionsRastersListResponse extends Google_Collection
+class Appointments_Google_Service_MapsEngine_RasterCollectionsRastersListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'rasters';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $rastersType = 'Google_Service_MapsEngine_RasterCollectionsRaster';
+  protected $rastersType = 'Appointments_Google_Service_MapsEngine_RasterCollectionsRaster';
   protected $rastersDataType = 'array';
 
 
@@ -5929,13 +5929,13 @@ class Google_Service_MapsEngine_RasterCollectionsRastersListResponse extends Goo
   }
 }
 
-class Google_Service_MapsEngine_RastersListResponse extends Google_Collection
+class Appointments_Google_Service_MapsEngine_RastersListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'rasters';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $rastersType = 'Google_Service_MapsEngine_Raster';
+  protected $rastersType = 'Appointments_Google_Service_MapsEngine_Raster';
   protected $rastersDataType = 'array';
 
 
@@ -5957,18 +5957,18 @@ class Google_Service_MapsEngine_RastersListResponse extends Google_Collection
   }
 }
 
-class Google_Service_MapsEngine_ScaledShape extends Google_Model
+class Appointments_Google_Service_MapsEngine_ScaledShape extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $borderType = 'Google_Service_MapsEngine_Border';
+  protected $borderType = 'Appointments_Google_Service_MapsEngine_Border';
   protected $borderDataType = '';
-  protected $fillType = 'Google_Service_MapsEngine_Color';
+  protected $fillType = 'Appointments_Google_Service_MapsEngine_Color';
   protected $fillDataType = '';
   public $shape;
 
 
-  public function setBorder(Google_Service_MapsEngine_Border $border)
+  public function setBorder(Appointments_Google_Service_MapsEngine_Border $border)
   {
     $this->border = $border;
   }
@@ -5976,7 +5976,7 @@ class Google_Service_MapsEngine_ScaledShape extends Google_Model
   {
     return $this->border;
   }
-  public function setFill(Google_Service_MapsEngine_Color $fill)
+  public function setFill(Appointments_Google_Service_MapsEngine_Color $fill)
   {
     $this->fill = $fill;
   }
@@ -5994,15 +5994,15 @@ class Google_Service_MapsEngine_ScaledShape extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_ScalingFunction extends Google_Model
+class Appointments_Google_Service_MapsEngine_ScalingFunction extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $column;
   public $scalingType;
-  protected $sizeRangeType = 'Google_Service_MapsEngine_SizeRange';
+  protected $sizeRangeType = 'Appointments_Google_Service_MapsEngine_SizeRange';
   protected $sizeRangeDataType = '';
-  protected $valueRangeType = 'Google_Service_MapsEngine_ValueRange';
+  protected $valueRangeType = 'Appointments_Google_Service_MapsEngine_ValueRange';
   protected $valueRangeDataType = '';
 
 
@@ -6022,7 +6022,7 @@ class Google_Service_MapsEngine_ScalingFunction extends Google_Model
   {
     return $this->scalingType;
   }
-  public function setSizeRange(Google_Service_MapsEngine_SizeRange $sizeRange)
+  public function setSizeRange(Appointments_Google_Service_MapsEngine_SizeRange $sizeRange)
   {
     $this->sizeRange = $sizeRange;
   }
@@ -6030,7 +6030,7 @@ class Google_Service_MapsEngine_ScalingFunction extends Google_Model
   {
     return $this->sizeRange;
   }
-  public function setValueRange(Google_Service_MapsEngine_ValueRange $valueRange)
+  public function setValueRange(Appointments_Google_Service_MapsEngine_ValueRange $valueRange)
   {
     $this->valueRange = $valueRange;
   }
@@ -6040,12 +6040,12 @@ class Google_Service_MapsEngine_ScalingFunction extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_Schema extends Google_Collection
+class Appointments_Google_Service_MapsEngine_Schema extends Appointments_Google_Collection
 {
   protected $collection_key = 'columns';
   protected $internal_gapi_mappings = array(
   );
-  protected $columnsType = 'Google_Service_MapsEngine_TableColumn';
+  protected $columnsType = 'Appointments_Google_Service_MapsEngine_TableColumn';
   protected $columnsDataType = 'array';
   public $primaryGeometry;
   public $primaryKey;
@@ -6077,7 +6077,7 @@ class Google_Service_MapsEngine_Schema extends Google_Collection
   }
 }
 
-class Google_Service_MapsEngine_SizeRange extends Google_Model
+class Appointments_Google_Service_MapsEngine_SizeRange extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -6103,7 +6103,7 @@ class Google_Service_MapsEngine_SizeRange extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_Table extends Google_Collection
+class Appointments_Google_Service_MapsEngine_Table extends Appointments_Google_Collection
 {
   protected $collection_key = 'tags';
   protected $internal_gapi_mappings = array(
@@ -6114,7 +6114,7 @@ class Google_Service_MapsEngine_Table extends Google_Collection
   public $description;
   public $draftAccessList;
   public $etag;
-  protected $filesType = 'Google_Service_MapsEngine_MapsengineFile';
+  protected $filesType = 'Appointments_Google_Service_MapsEngine_MapsengineFile';
   protected $filesDataType = 'array';
   public $id;
   public $lastModifiedTime;
@@ -6123,7 +6123,7 @@ class Google_Service_MapsEngine_Table extends Google_Collection
   public $processingStatus;
   public $projectId;
   public $publishedAccessList;
-  protected $schemaType = 'Google_Service_MapsEngine_Schema';
+  protected $schemaType = 'Appointments_Google_Service_MapsEngine_Schema';
   protected $schemaDataType = '';
   public $sourceEncoding;
   public $tags;
@@ -6242,7 +6242,7 @@ class Google_Service_MapsEngine_Table extends Google_Collection
   {
     return $this->publishedAccessList;
   }
-  public function setSchema(Google_Service_MapsEngine_Schema $schema)
+  public function setSchema(Appointments_Google_Service_MapsEngine_Schema $schema)
   {
     $this->schema = $schema;
   }
@@ -6276,7 +6276,7 @@ class Google_Service_MapsEngine_Table extends Google_Collection
   }
 }
 
-class Google_Service_MapsEngine_TableColumn extends Google_Model
+class Appointments_Google_Service_MapsEngine_TableColumn extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -6302,13 +6302,13 @@ class Google_Service_MapsEngine_TableColumn extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_TablesListResponse extends Google_Collection
+class Appointments_Google_Service_MapsEngine_TablesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'tables';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $tablesType = 'Google_Service_MapsEngine_Table';
+  protected $tablesType = 'Appointments_Google_Service_MapsEngine_Table';
   protected $tablesDataType = 'array';
 
 
@@ -6330,7 +6330,7 @@ class Google_Service_MapsEngine_TablesListResponse extends Google_Collection
   }
 }
 
-class Google_Service_MapsEngine_ValueRange extends Google_Model
+class Appointments_Google_Service_MapsEngine_ValueRange extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -6356,14 +6356,14 @@ class Google_Service_MapsEngine_ValueRange extends Google_Model
   }
 }
 
-class Google_Service_MapsEngine_VectorStyle extends Google_Collection
+class Appointments_Google_Service_MapsEngine_VectorStyle extends Appointments_Google_Collection
 {
   protected $collection_key = 'displayRules';
   protected $internal_gapi_mappings = array(
   );
-  protected $displayRulesType = 'Google_Service_MapsEngine_DisplayRule';
+  protected $displayRulesType = 'Appointments_Google_Service_MapsEngine_DisplayRule';
   protected $displayRulesDataType = 'array';
-  protected $featureInfoType = 'Google_Service_MapsEngine_FeatureInfo';
+  protected $featureInfoType = 'Appointments_Google_Service_MapsEngine_FeatureInfo';
   protected $featureInfoDataType = '';
   public $type;
 
@@ -6376,7 +6376,7 @@ class Google_Service_MapsEngine_VectorStyle extends Google_Collection
   {
     return $this->displayRules;
   }
-  public function setFeatureInfo(Google_Service_MapsEngine_FeatureInfo $featureInfo)
+  public function setFeatureInfo(Appointments_Google_Service_MapsEngine_FeatureInfo $featureInfo)
   {
     $this->featureInfo = $featureInfo;
   }
@@ -6394,7 +6394,7 @@ class Google_Service_MapsEngine_VectorStyle extends Google_Collection
   }
 }
 
-class Google_Service_MapsEngine_ZoomLevels extends Google_Model
+class Appointments_Google_Service_MapsEngine_ZoomLevels extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );

@@ -28,7 +28,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Computeaccounts extends Google_Service
+class Appointments_Google_Service_Computeaccounts extends Appointments_Google_Service
 {
   /** View and manage your data across Google Cloud Platform services. */
   const CLOUD_PLATFORM =
@@ -49,16 +49,16 @@ class Google_Service_Computeaccounts extends Google_Service
   /**
    * Constructs the internal representation of the Computeaccounts service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->servicePath = 'computeaccounts/alpha/projects/';
     $this->version = 'alpha';
     $this->serviceName = 'computeaccounts';
 
-    $this->globalAccountsOperations = new Google_Service_Computeaccounts_GlobalAccountsOperations_Resource(
+    $this->globalAccountsOperations = new Appointments_Google_Service_Computeaccounts_GlobalAccountsOperations_Resource(
         $this,
         $this->serviceName,
         'globalAccountsOperations',
@@ -120,7 +120,7 @@ class Google_Service_Computeaccounts extends Google_Service
           )
         )
     );
-    $this->groups = new Google_Service_Computeaccounts_Groups_Resource(
+    $this->groups = new Appointments_Google_Service_Computeaccounts_Groups_Resource(
         $this,
         $this->serviceName,
         'groups',
@@ -222,7 +222,7 @@ class Google_Service_Computeaccounts extends Google_Service
           )
         )
     );
-    $this->linux = new Google_Service_Computeaccounts_Linux_Resource(
+    $this->linux = new Appointments_Google_Service_Computeaccounts_Linux_Resource(
         $this,
         $this->serviceName,
         'linux',
@@ -293,7 +293,7 @@ class Google_Service_Computeaccounts extends Google_Service
           )
         )
     );
-    $this->users = new Google_Service_Computeaccounts_Users_Resource(
+    $this->users = new Appointments_Google_Service_Computeaccounts_Users_Resource(
         $this,
         $this->serviceName,
         'users',
@@ -408,11 +408,11 @@ class Google_Service_Computeaccounts extends Google_Service
  * The "globalAccountsOperations" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeaccountsService = new Google_Service_Computeaccounts(...);
+ *   $computeaccountsService = new Appointments_Google_Service_Computeaccounts(...);
  *   $globalAccountsOperations = $computeaccountsService->globalAccountsOperations;
  *  </code>
  */
-class Google_Service_Computeaccounts_GlobalAccountsOperations_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Computeaccounts_GlobalAccountsOperations_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -435,13 +435,13 @@ class Google_Service_Computeaccounts_GlobalAccountsOperations_Resource extends G
    * @param string $project Project ID for this request.
    * @param string $operation Name of the operation resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Computeaccounts_Operation
+   * @return Appointments_Google_Service_Computeaccounts_Operation
    */
   public function get($project, $operation, $optParams = array())
   {
     $params = array('project' => $project, 'operation' => $operation);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Computeaccounts_Operation");
+    return $this->call('get', array($params), "Appointments_Google_Service_Computeaccounts_Operation");
   }
 
   /**
@@ -457,13 +457,13 @@ class Google_Service_Computeaccounts_GlobalAccountsOperations_Resource extends G
    * truncated by maxResults. Used to continue a previous list request.
    * @opt_param string maxResults Optional. Maximum count of results to be
    * returned. Maximum value is 500 and default value is 500.
-   * @return Google_Service_Computeaccounts_OperationList
+   * @return Appointments_Google_Service_Computeaccounts_OperationList
    */
   public function listGlobalAccountsOperations($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Computeaccounts_OperationList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Computeaccounts_OperationList");
   }
 }
 
@@ -471,11 +471,11 @@ class Google_Service_Computeaccounts_GlobalAccountsOperations_Resource extends G
  * The "groups" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeaccountsService = new Google_Service_Computeaccounts(...);
+ *   $computeaccountsService = new Appointments_Google_Service_Computeaccounts(...);
  *   $groups = $computeaccountsService->groups;
  *  </code>
  */
-class Google_Service_Computeaccounts_Groups_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Computeaccounts_Groups_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -483,15 +483,15 @@ class Google_Service_Computeaccounts_Groups_Resource extends Google_Service_Reso
    *
    * @param string $project Project ID for this request.
    * @param string $groupName Name of the group for this request.
-   * @param Google_GroupsAddMemberRequest $postBody
+   * @param Appointments_Google_GroupsAddMemberRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Computeaccounts_Operation
+   * @return Appointments_Google_Service_Computeaccounts_Operation
    */
-  public function addMember($project, $groupName, Google_Service_Computeaccounts_GroupsAddMemberRequest $postBody, $optParams = array())
+  public function addMember($project, $groupName, Appointments_Google_Service_Computeaccounts_GroupsAddMemberRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'groupName' => $groupName, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('addMember', array($params), "Google_Service_Computeaccounts_Operation");
+    return $this->call('addMember', array($params), "Appointments_Google_Service_Computeaccounts_Operation");
   }
 
   /**
@@ -500,13 +500,13 @@ class Google_Service_Computeaccounts_Groups_Resource extends Google_Service_Reso
    * @param string $project Project ID for this request.
    * @param string $groupName Name of the group resource to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Computeaccounts_Operation
+   * @return Appointments_Google_Service_Computeaccounts_Operation
    */
   public function delete($project, $groupName, $optParams = array())
   {
     $params = array('project' => $project, 'groupName' => $groupName);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Computeaccounts_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Computeaccounts_Operation");
   }
 
   /**
@@ -515,13 +515,13 @@ class Google_Service_Computeaccounts_Groups_Resource extends Google_Service_Reso
    * @param string $project Project ID for this request.
    * @param string $groupName Name of the group resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Computeaccounts_Group
+   * @return Appointments_Google_Service_Computeaccounts_Group
    */
   public function get($project, $groupName, $optParams = array())
   {
     $params = array('project' => $project, 'groupName' => $groupName);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Computeaccounts_Group");
+    return $this->call('get', array($params), "Appointments_Google_Service_Computeaccounts_Group");
   }
 
   /**
@@ -529,15 +529,15 @@ class Google_Service_Computeaccounts_Groups_Resource extends Google_Service_Reso
    * the request. (groups.insert)
    *
    * @param string $project Project ID for this request.
-   * @param Google_Group $postBody
+   * @param Appointments_Google_Group $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Computeaccounts_Operation
+   * @return Appointments_Google_Service_Computeaccounts_Operation
    */
-  public function insert($project, Google_Service_Computeaccounts_Group $postBody, $optParams = array())
+  public function insert($project, Appointments_Google_Service_Computeaccounts_Group $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Computeaccounts_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Computeaccounts_Operation");
   }
 
   /**
@@ -553,13 +553,13 @@ class Google_Service_Computeaccounts_Groups_Resource extends Google_Service_Reso
    * truncated by maxResults. Used to continue a previous list request.
    * @opt_param string maxResults Optional. Maximum count of results to be
    * returned. Maximum value is 500 and default value is 500.
-   * @return Google_Service_Computeaccounts_GroupList
+   * @return Appointments_Google_Service_Computeaccounts_GroupList
    */
   public function listGroups($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Computeaccounts_GroupList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Computeaccounts_GroupList");
   }
 
   /**
@@ -567,15 +567,15 @@ class Google_Service_Computeaccounts_Groups_Resource extends Google_Service_Reso
    *
    * @param string $project Project ID for this request.
    * @param string $groupName Name of the group for this request.
-   * @param Google_GroupsRemoveMemberRequest $postBody
+   * @param Appointments_Google_GroupsRemoveMemberRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Computeaccounts_Operation
+   * @return Appointments_Google_Service_Computeaccounts_Operation
    */
-  public function removeMember($project, $groupName, Google_Service_Computeaccounts_GroupsRemoveMemberRequest $postBody, $optParams = array())
+  public function removeMember($project, $groupName, Appointments_Google_Service_Computeaccounts_GroupsRemoveMemberRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'groupName' => $groupName, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('removeMember', array($params), "Google_Service_Computeaccounts_Operation");
+    return $this->call('removeMember', array($params), "Appointments_Google_Service_Computeaccounts_Operation");
   }
 }
 
@@ -583,11 +583,11 @@ class Google_Service_Computeaccounts_Groups_Resource extends Google_Service_Reso
  * The "linux" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeaccountsService = new Google_Service_Computeaccounts(...);
+ *   $computeaccountsService = new Appointments_Google_Service_Computeaccounts(...);
  *   $linux = $computeaccountsService->linux;
  *  </code>
  */
-class Google_Service_Computeaccounts_Linux_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Computeaccounts_Linux_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -600,13 +600,13 @@ class Google_Service_Computeaccounts_Linux_Resource extends Google_Service_Resou
    * @param string $instance The fully-qualified URL of the instance requesting
    * the view.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Computeaccounts_LinuxGetAuthorizedKeysViewResponse
+   * @return Appointments_Google_Service_Computeaccounts_LinuxGetAuthorizedKeysViewResponse
    */
   public function getAuthorizedKeysView($project, $zone, $user, $instance, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'user' => $user, 'instance' => $instance);
     $params = array_merge($params, $optParams);
-    return $this->call('getAuthorizedKeysView', array($params), "Google_Service_Computeaccounts_LinuxGetAuthorizedKeysViewResponse");
+    return $this->call('getAuthorizedKeysView', array($params), "Appointments_Google_Service_Computeaccounts_LinuxGetAuthorizedKeysViewResponse");
   }
 
   /**
@@ -627,13 +627,13 @@ class Google_Service_Computeaccounts_Linux_Resource extends Google_Service_Resou
    * resources.
    * @opt_param string user If provided, the user whose login is triggering an
    * immediate refresh of the views.
-   * @return Google_Service_Computeaccounts_LinuxGetLinuxAccountViewsResponse
+   * @return Appointments_Google_Service_Computeaccounts_LinuxGetLinuxAccountViewsResponse
    */
   public function getLinuxAccountViews($project, $zone, $instance, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instance' => $instance);
     $params = array_merge($params, $optParams);
-    return $this->call('getLinuxAccountViews', array($params), "Google_Service_Computeaccounts_LinuxGetLinuxAccountViewsResponse");
+    return $this->call('getLinuxAccountViews', array($params), "Appointments_Google_Service_Computeaccounts_LinuxGetLinuxAccountViewsResponse");
   }
 }
 
@@ -641,11 +641,11 @@ class Google_Service_Computeaccounts_Linux_Resource extends Google_Service_Resou
  * The "users" collection of methods.
  * Typical usage is:
  *  <code>
- *   $computeaccountsService = new Google_Service_Computeaccounts(...);
+ *   $computeaccountsService = new Appointments_Google_Service_Computeaccounts(...);
  *   $users = $computeaccountsService->users;
  *  </code>
  */
-class Google_Service_Computeaccounts_Users_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Computeaccounts_Users_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -654,15 +654,15 @@ class Google_Service_Computeaccounts_Users_Resource extends Google_Service_Resou
    *
    * @param string $project Project ID for this request.
    * @param string $user Name of the user for this request.
-   * @param Google_PublicKey $postBody
+   * @param Appointments_Google_PublicKey $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Computeaccounts_Operation
+   * @return Appointments_Google_Service_Computeaccounts_Operation
    */
-  public function addPublicKey($project, $user, Google_Service_Computeaccounts_PublicKey $postBody, $optParams = array())
+  public function addPublicKey($project, $user, Appointments_Google_Service_Computeaccounts_PublicKey $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'user' => $user, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('addPublicKey', array($params), "Google_Service_Computeaccounts_Operation");
+    return $this->call('addPublicKey', array($params), "Appointments_Google_Service_Computeaccounts_Operation");
   }
 
   /**
@@ -671,13 +671,13 @@ class Google_Service_Computeaccounts_Users_Resource extends Google_Service_Resou
    * @param string $project Project ID for this request.
    * @param string $user Name of the user resource to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Computeaccounts_Operation
+   * @return Appointments_Google_Service_Computeaccounts_Operation
    */
   public function delete($project, $user, $optParams = array())
   {
     $params = array('project' => $project, 'user' => $user);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Computeaccounts_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Computeaccounts_Operation");
   }
 
   /**
@@ -686,13 +686,13 @@ class Google_Service_Computeaccounts_Users_Resource extends Google_Service_Resou
    * @param string $project Project ID for this request.
    * @param string $user Name of the user resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Computeaccounts_User
+   * @return Appointments_Google_Service_Computeaccounts_User
    */
   public function get($project, $user, $optParams = array())
   {
     $params = array('project' => $project, 'user' => $user);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Computeaccounts_User");
+    return $this->call('get', array($params), "Appointments_Google_Service_Computeaccounts_User");
   }
 
   /**
@@ -700,15 +700,15 @@ class Google_Service_Computeaccounts_Users_Resource extends Google_Service_Resou
    * the request. (users.insert)
    *
    * @param string $project Project ID for this request.
-   * @param Google_User $postBody
+   * @param Appointments_Google_User $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Computeaccounts_Operation
+   * @return Appointments_Google_Service_Computeaccounts_Operation
    */
-  public function insert($project, Google_Service_Computeaccounts_User $postBody, $optParams = array())
+  public function insert($project, Appointments_Google_Service_Computeaccounts_User $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Computeaccounts_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Computeaccounts_Operation");
   }
 
   /**
@@ -724,13 +724,13 @@ class Google_Service_Computeaccounts_Users_Resource extends Google_Service_Resou
    * truncated by maxResults. Used to continue a previous list request.
    * @opt_param string maxResults Optional. Maximum count of results to be
    * returned. Maximum value is 500 and default value is 500.
-   * @return Google_Service_Computeaccounts_UserList
+   * @return Appointments_Google_Service_Computeaccounts_UserList
    */
   public function listUsers($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Computeaccounts_UserList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Computeaccounts_UserList");
   }
 
   /**
@@ -742,20 +742,20 @@ class Google_Service_Computeaccounts_Users_Resource extends Google_Service_Resou
    * Public keys are identified by their fingerprint, which is defined by RFC4716
    * to be the MD5 digest of the public key.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Computeaccounts_Operation
+   * @return Appointments_Google_Service_Computeaccounts_Operation
    */
   public function removePublicKey($project, $user, $fingerprint, $optParams = array())
   {
     $params = array('project' => $project, 'user' => $user, 'fingerprint' => $fingerprint);
     $params = array_merge($params, $optParams);
-    return $this->call('removePublicKey', array($params), "Google_Service_Computeaccounts_Operation");
+    return $this->call('removePublicKey', array($params), "Appointments_Google_Service_Computeaccounts_Operation");
   }
 }
 
 
 
 
-class Google_Service_Computeaccounts_AuthorizedKeysView extends Google_Collection
+class Appointments_Google_Service_Computeaccounts_AuthorizedKeysView extends Appointments_Google_Collection
 {
   protected $collection_key = 'keys';
   protected $internal_gapi_mappings = array(
@@ -773,7 +773,7 @@ class Google_Service_Computeaccounts_AuthorizedKeysView extends Google_Collectio
   }
 }
 
-class Google_Service_Computeaccounts_Group extends Google_Collection
+class Appointments_Google_Service_Computeaccounts_Group extends Appointments_Google_Collection
 {
   protected $collection_key = 'members';
   protected $internal_gapi_mappings = array(
@@ -845,13 +845,13 @@ class Google_Service_Computeaccounts_Group extends Google_Collection
   }
 }
 
-class Google_Service_Computeaccounts_GroupList extends Google_Collection
+class Appointments_Google_Service_Computeaccounts_GroupList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Computeaccounts_Group';
+  protected $itemsType = 'Appointments_Google_Service_Computeaccounts_Group';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -900,7 +900,7 @@ class Google_Service_Computeaccounts_GroupList extends Google_Collection
   }
 }
 
-class Google_Service_Computeaccounts_GroupsAddMemberRequest extends Google_Collection
+class Appointments_Google_Service_Computeaccounts_GroupsAddMemberRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'users';
   protected $internal_gapi_mappings = array(
@@ -918,7 +918,7 @@ class Google_Service_Computeaccounts_GroupsAddMemberRequest extends Google_Colle
   }
 }
 
-class Google_Service_Computeaccounts_GroupsRemoveMemberRequest extends Google_Collection
+class Appointments_Google_Service_Computeaccounts_GroupsRemoveMemberRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'users';
   protected $internal_gapi_mappings = array(
@@ -936,15 +936,15 @@ class Google_Service_Computeaccounts_GroupsRemoveMemberRequest extends Google_Co
   }
 }
 
-class Google_Service_Computeaccounts_LinuxAccountViews extends Google_Collection
+class Appointments_Google_Service_Computeaccounts_LinuxAccountViews extends Appointments_Google_Collection
 {
   protected $collection_key = 'userViews';
   protected $internal_gapi_mappings = array(
   );
-  protected $groupViewsType = 'Google_Service_Computeaccounts_LinuxGroupView';
+  protected $groupViewsType = 'Appointments_Google_Service_Computeaccounts_LinuxGroupView';
   protected $groupViewsDataType = 'array';
   public $kind;
-  protected $userViewsType = 'Google_Service_Computeaccounts_LinuxUserView';
+  protected $userViewsType = 'Appointments_Google_Service_Computeaccounts_LinuxUserView';
   protected $userViewsDataType = 'array';
 
 
@@ -974,15 +974,15 @@ class Google_Service_Computeaccounts_LinuxAccountViews extends Google_Collection
   }
 }
 
-class Google_Service_Computeaccounts_LinuxGetAuthorizedKeysViewResponse extends Google_Model
+class Appointments_Google_Service_Computeaccounts_LinuxGetAuthorizedKeysViewResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $resourceType = 'Google_Service_Computeaccounts_AuthorizedKeysView';
+  protected $resourceType = 'Appointments_Google_Service_Computeaccounts_AuthorizedKeysView';
   protected $resourceDataType = '';
 
 
-  public function setResource(Google_Service_Computeaccounts_AuthorizedKeysView $resource)
+  public function setResource(Appointments_Google_Service_Computeaccounts_AuthorizedKeysView $resource)
   {
     $this->resource = $resource;
   }
@@ -992,15 +992,15 @@ class Google_Service_Computeaccounts_LinuxGetAuthorizedKeysViewResponse extends 
   }
 }
 
-class Google_Service_Computeaccounts_LinuxGetLinuxAccountViewsResponse extends Google_Model
+class Appointments_Google_Service_Computeaccounts_LinuxGetLinuxAccountViewsResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $resourceType = 'Google_Service_Computeaccounts_LinuxAccountViews';
+  protected $resourceType = 'Appointments_Google_Service_Computeaccounts_LinuxAccountViews';
   protected $resourceDataType = '';
 
 
-  public function setResource(Google_Service_Computeaccounts_LinuxAccountViews $resource)
+  public function setResource(Appointments_Google_Service_Computeaccounts_LinuxAccountViews $resource)
   {
     $this->resource = $resource;
   }
@@ -1010,7 +1010,7 @@ class Google_Service_Computeaccounts_LinuxGetLinuxAccountViewsResponse extends G
   }
 }
 
-class Google_Service_Computeaccounts_LinuxGroupView extends Google_Collection
+class Appointments_Google_Service_Computeaccounts_LinuxGroupView extends Appointments_Google_Collection
 {
   protected $collection_key = 'members';
   protected $internal_gapi_mappings = array(
@@ -1046,7 +1046,7 @@ class Google_Service_Computeaccounts_LinuxGroupView extends Google_Collection
   }
 }
 
-class Google_Service_Computeaccounts_LinuxUserView extends Google_Model
+class Appointments_Google_Service_Computeaccounts_LinuxUserView extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1108,7 +1108,7 @@ class Google_Service_Computeaccounts_LinuxUserView extends Google_Model
   }
 }
 
-class Google_Service_Computeaccounts_Operation extends Google_Collection
+class Appointments_Google_Service_Computeaccounts_Operation extends Appointments_Google_Collection
 {
   protected $collection_key = 'warnings';
   protected $internal_gapi_mappings = array(
@@ -1116,7 +1116,7 @@ class Google_Service_Computeaccounts_Operation extends Google_Collection
   public $clientOperationId;
   public $creationTimestamp;
   public $endTime;
-  protected $errorType = 'Google_Service_Computeaccounts_OperationError';
+  protected $errorType = 'Appointments_Google_Service_Computeaccounts_OperationError';
   protected $errorDataType = '';
   public $httpErrorMessage;
   public $httpErrorStatusCode;
@@ -1134,7 +1134,7 @@ class Google_Service_Computeaccounts_Operation extends Google_Collection
   public $targetId;
   public $targetLink;
   public $user;
-  protected $warningsType = 'Google_Service_Computeaccounts_OperationWarnings';
+  protected $warningsType = 'Appointments_Google_Service_Computeaccounts_OperationWarnings';
   protected $warningsDataType = 'array';
   public $zone;
 
@@ -1163,7 +1163,7 @@ class Google_Service_Computeaccounts_Operation extends Google_Collection
   {
     return $this->endTime;
   }
-  public function setError(Google_Service_Computeaccounts_OperationError $error)
+  public function setError(Appointments_Google_Service_Computeaccounts_OperationError $error)
   {
     $this->error = $error;
   }
@@ -1317,12 +1317,12 @@ class Google_Service_Computeaccounts_Operation extends Google_Collection
   }
 }
 
-class Google_Service_Computeaccounts_OperationError extends Google_Collection
+class Appointments_Google_Service_Computeaccounts_OperationError extends Appointments_Google_Collection
 {
   protected $collection_key = 'errors';
   protected $internal_gapi_mappings = array(
   );
-  protected $errorsType = 'Google_Service_Computeaccounts_OperationErrorErrors';
+  protected $errorsType = 'Appointments_Google_Service_Computeaccounts_OperationErrorErrors';
   protected $errorsDataType = 'array';
 
 
@@ -1336,7 +1336,7 @@ class Google_Service_Computeaccounts_OperationError extends Google_Collection
   }
 }
 
-class Google_Service_Computeaccounts_OperationErrorErrors extends Google_Model
+class Appointments_Google_Service_Computeaccounts_OperationErrorErrors extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1371,13 +1371,13 @@ class Google_Service_Computeaccounts_OperationErrorErrors extends Google_Model
   }
 }
 
-class Google_Service_Computeaccounts_OperationList extends Google_Collection
+class Appointments_Google_Service_Computeaccounts_OperationList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Computeaccounts_Operation';
+  protected $itemsType = 'Appointments_Google_Service_Computeaccounts_Operation';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -1426,13 +1426,13 @@ class Google_Service_Computeaccounts_OperationList extends Google_Collection
   }
 }
 
-class Google_Service_Computeaccounts_OperationWarnings extends Google_Collection
+class Appointments_Google_Service_Computeaccounts_OperationWarnings extends Appointments_Google_Collection
 {
   protected $collection_key = 'data';
   protected $internal_gapi_mappings = array(
   );
   public $code;
-  protected $dataType = 'Google_Service_Computeaccounts_OperationWarningsData';
+  protected $dataType = 'Appointments_Google_Service_Computeaccounts_OperationWarningsData';
   protected $dataDataType = 'array';
   public $message;
 
@@ -1463,7 +1463,7 @@ class Google_Service_Computeaccounts_OperationWarnings extends Google_Collection
   }
 }
 
-class Google_Service_Computeaccounts_OperationWarningsData extends Google_Model
+class Appointments_Google_Service_Computeaccounts_OperationWarningsData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1489,7 +1489,7 @@ class Google_Service_Computeaccounts_OperationWarningsData extends Google_Model
   }
 }
 
-class Google_Service_Computeaccounts_PublicKey extends Google_Model
+class Appointments_Google_Service_Computeaccounts_PublicKey extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1542,7 +1542,7 @@ class Google_Service_Computeaccounts_PublicKey extends Google_Model
   }
 }
 
-class Google_Service_Computeaccounts_User extends Google_Collection
+class Appointments_Google_Service_Computeaccounts_User extends Appointments_Google_Collection
 {
   protected $collection_key = 'publicKeys';
   protected $internal_gapi_mappings = array(
@@ -1554,7 +1554,7 @@ class Google_Service_Computeaccounts_User extends Google_Collection
   public $kind;
   public $name;
   public $owner;
-  protected $publicKeysType = 'Google_Service_Computeaccounts_PublicKey';
+  protected $publicKeysType = 'Appointments_Google_Service_Computeaccounts_PublicKey';
   protected $publicKeysDataType = 'array';
   public $selfLink;
 
@@ -1633,13 +1633,13 @@ class Google_Service_Computeaccounts_User extends Google_Collection
   }
 }
 
-class Google_Service_Computeaccounts_UserList extends Google_Collection
+class Appointments_Google_Service_Computeaccounts_UserList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Computeaccounts_User';
+  protected $itemsType = 'Appointments_Google_Service_Computeaccounts_User';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;

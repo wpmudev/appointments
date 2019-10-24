@@ -26,7 +26,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Freebase extends Google_Service
+class Appointments_Google_Service_Freebase extends Appointments_Google_Service
 {
 
 
@@ -36,9 +36,9 @@ class Google_Service_Freebase extends Google_Service
   /**
    * Constructs the internal representation of the Freebase service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -46,7 +46,7 @@ class Google_Service_Freebase extends Google_Service
     $this->version = 'v1';
     $this->serviceName = 'freebase';
 
-    $this->base_methods = new Google_Service_Resource(
+    $this->base_methods = new Appointments_Google_Service_Resource(
         $this,
         $this->serviceName,
         '',
@@ -206,13 +206,13 @@ class Google_Service_Freebase extends Google_Service
    * @opt_param int limit Maximum number of candidates to return.
    * @opt_param string name Name of entity.
    * @opt_param string prop Property values for entity formatted as :
-   * @return Google_Service_Freebase_ReconcileGet
+   * @return Appointments_Google_Service_Freebase_ReconcileGet
    */
   public function reconcile($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->base_methods->call('reconcile', array($params), "Google_Service_Freebase_ReconcileGet");
+    return $this->base_methods->call('reconcile', array($params), "Appointments_Google_Service_Freebase_ReconcileGet");
   }
   /**
    * Search Freebase open data. (search)
@@ -260,7 +260,7 @@ class Google_Service_Freebase extends Google_Service
 
 
 
-class Google_Service_Freebase_ReconcileCandidate extends Google_Model
+class Appointments_Google_Service_Freebase_ReconcileCandidate extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -268,7 +268,7 @@ class Google_Service_Freebase_ReconcileCandidate extends Google_Model
   public $lang;
   public $mid;
   public $name;
-  protected $notableType = 'Google_Service_Freebase_ReconcileCandidateNotable';
+  protected $notableType = 'Appointments_Google_Service_Freebase_ReconcileCandidateNotable';
   protected $notableDataType = '';
 
 
@@ -304,7 +304,7 @@ class Google_Service_Freebase_ReconcileCandidate extends Google_Model
   {
     return $this->name;
   }
-  public function setNotable(Google_Service_Freebase_ReconcileCandidateNotable $notable)
+  public function setNotable(Appointments_Google_Service_Freebase_ReconcileCandidateNotable $notable)
   {
     $this->notable = $notable;
   }
@@ -314,7 +314,7 @@ class Google_Service_Freebase_ReconcileCandidate extends Google_Model
   }
 }
 
-class Google_Service_Freebase_ReconcileCandidateNotable extends Google_Model
+class Appointments_Google_Service_Freebase_ReconcileCandidateNotable extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -340,18 +340,18 @@ class Google_Service_Freebase_ReconcileCandidateNotable extends Google_Model
   }
 }
 
-class Google_Service_Freebase_ReconcileGet extends Google_Collection
+class Appointments_Google_Service_Freebase_ReconcileGet extends Appointments_Google_Collection
 {
   protected $collection_key = 'warning';
   protected $internal_gapi_mappings = array(
   );
-  protected $candidateType = 'Google_Service_Freebase_ReconcileCandidate';
+  protected $candidateType = 'Appointments_Google_Service_Freebase_ReconcileCandidate';
   protected $candidateDataType = 'array';
-  protected $costsType = 'Google_Service_Freebase_ReconcileGetCosts';
+  protected $costsType = 'Appointments_Google_Service_Freebase_ReconcileGetCosts';
   protected $costsDataType = '';
-  protected $matchType = 'Google_Service_Freebase_ReconcileCandidate';
+  protected $matchType = 'Appointments_Google_Service_Freebase_ReconcileCandidate';
   protected $matchDataType = '';
-  protected $warningType = 'Google_Service_Freebase_ReconcileGetWarning';
+  protected $warningType = 'Appointments_Google_Service_Freebase_ReconcileGetWarning';
   protected $warningDataType = 'array';
 
 
@@ -363,7 +363,7 @@ class Google_Service_Freebase_ReconcileGet extends Google_Collection
   {
     return $this->candidate;
   }
-  public function setCosts(Google_Service_Freebase_ReconcileGetCosts $costs)
+  public function setCosts(Appointments_Google_Service_Freebase_ReconcileGetCosts $costs)
   {
     $this->costs = $costs;
   }
@@ -371,7 +371,7 @@ class Google_Service_Freebase_ReconcileGet extends Google_Collection
   {
     return $this->costs;
   }
-  public function setMatch(Google_Service_Freebase_ReconcileCandidate $match)
+  public function setMatch(Appointments_Google_Service_Freebase_ReconcileCandidate $match)
   {
     $this->match = $match;
   }
@@ -389,7 +389,7 @@ class Google_Service_Freebase_ReconcileGet extends Google_Collection
   }
 }
 
-class Google_Service_Freebase_ReconcileGetCosts extends Google_Model
+class Appointments_Google_Service_Freebase_ReconcileGetCosts extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -415,7 +415,7 @@ class Google_Service_Freebase_ReconcileGetCosts extends Google_Model
   }
 }
 
-class Google_Service_Freebase_ReconcileGetWarning extends Google_Model
+class Appointments_Google_Service_Freebase_ReconcileGetWarning extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );

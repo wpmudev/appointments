@@ -27,7 +27,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_QPXExpress extends Google_Service
+class Appointments_Google_Service_QPXExpress extends Appointments_Google_Service
 {
 
 
@@ -37,9 +37,9 @@ class Google_Service_QPXExpress extends Google_Service
   /**
    * Constructs the internal representation of the QPXExpress service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -47,7 +47,7 @@ class Google_Service_QPXExpress extends Google_Service
     $this->version = 'v1';
     $this->serviceName = 'qpxExpress';
 
-    $this->trips = new Google_Service_QPXExpress_Trips_Resource(
+    $this->trips = new Appointments_Google_Service_QPXExpress_Trips_Resource(
         $this,
         $this->serviceName,
         'trips',
@@ -69,32 +69,32 @@ class Google_Service_QPXExpress extends Google_Service
  * The "trips" collection of methods.
  * Typical usage is:
  *  <code>
- *   $qpxExpressService = new Google_Service_QPXExpress(...);
+ *   $qpxExpressService = new Appointments_Google_Service_QPXExpress(...);
  *   $trips = $qpxExpressService->trips;
  *  </code>
  */
-class Google_Service_QPXExpress_Trips_Resource extends Google_Service_Resource
+class Appointments_Google_Service_QPXExpress_Trips_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
    * Returns a list of flights. (trips.search)
    *
-   * @param Google_TripsSearchRequest $postBody
+   * @param Appointments_Google_TripsSearchRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_QPXExpress_TripsSearchResponse
+   * @return Appointments_Google_Service_QPXExpress_TripsSearchResponse
    */
-  public function search(Google_Service_QPXExpress_TripsSearchRequest $postBody, $optParams = array())
+  public function search(Appointments_Google_Service_QPXExpress_TripsSearchRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('search', array($params), "Google_Service_QPXExpress_TripsSearchResponse");
+    return $this->call('search', array($params), "Appointments_Google_Service_QPXExpress_TripsSearchResponse");
   }
 }
 
 
 
 
-class Google_Service_QPXExpress_AircraftData extends Google_Model
+class Appointments_Google_Service_QPXExpress_AircraftData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -129,7 +129,7 @@ class Google_Service_QPXExpress_AircraftData extends Google_Model
   }
 }
 
-class Google_Service_QPXExpress_AirportData extends Google_Model
+class Appointments_Google_Service_QPXExpress_AirportData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -173,7 +173,7 @@ class Google_Service_QPXExpress_AirportData extends Google_Model
   }
 }
 
-class Google_Service_QPXExpress_BagDescriptor extends Google_Collection
+class Appointments_Google_Service_QPXExpress_BagDescriptor extends Appointments_Google_Collection
 {
   protected $collection_key = 'description';
   protected $internal_gapi_mappings = array(
@@ -227,7 +227,7 @@ class Google_Service_QPXExpress_BagDescriptor extends Google_Collection
   }
 }
 
-class Google_Service_QPXExpress_CarrierData extends Google_Model
+class Appointments_Google_Service_QPXExpress_CarrierData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -262,7 +262,7 @@ class Google_Service_QPXExpress_CarrierData extends Google_Model
   }
 }
 
-class Google_Service_QPXExpress_CityData extends Google_Model
+class Appointments_Google_Service_QPXExpress_CityData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -306,21 +306,21 @@ class Google_Service_QPXExpress_CityData extends Google_Model
   }
 }
 
-class Google_Service_QPXExpress_Data extends Google_Collection
+class Appointments_Google_Service_QPXExpress_Data extends Appointments_Google_Collection
 {
   protected $collection_key = 'tax';
   protected $internal_gapi_mappings = array(
   );
-  protected $aircraftType = 'Google_Service_QPXExpress_AircraftData';
+  protected $aircraftType = 'Appointments_Google_Service_QPXExpress_AircraftData';
   protected $aircraftDataType = 'array';
-  protected $airportType = 'Google_Service_QPXExpress_AirportData';
+  protected $airportType = 'Appointments_Google_Service_QPXExpress_AirportData';
   protected $airportDataType = 'array';
-  protected $carrierType = 'Google_Service_QPXExpress_CarrierData';
+  protected $carrierType = 'Appointments_Google_Service_QPXExpress_CarrierData';
   protected $carrierDataType = 'array';
-  protected $cityType = 'Google_Service_QPXExpress_CityData';
+  protected $cityType = 'Appointments_Google_Service_QPXExpress_CityData';
   protected $cityDataType = 'array';
   public $kind;
-  protected $taxType = 'Google_Service_QPXExpress_TaxData';
+  protected $taxType = 'Appointments_Google_Service_QPXExpress_TaxData';
   protected $taxDataType = 'array';
 
 
@@ -374,7 +374,7 @@ class Google_Service_QPXExpress_Data extends Google_Collection
   }
 }
 
-class Google_Service_QPXExpress_FareInfo extends Google_Model
+class Appointments_Google_Service_QPXExpress_FareInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -445,7 +445,7 @@ class Google_Service_QPXExpress_FareInfo extends Google_Model
   }
 }
 
-class Google_Service_QPXExpress_FlightInfo extends Google_Model
+class Appointments_Google_Service_QPXExpress_FlightInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -471,12 +471,12 @@ class Google_Service_QPXExpress_FlightInfo extends Google_Model
   }
 }
 
-class Google_Service_QPXExpress_FreeBaggageAllowance extends Google_Collection
+class Appointments_Google_Service_QPXExpress_FreeBaggageAllowance extends Appointments_Google_Collection
 {
   protected $collection_key = 'bagDescriptor';
   protected $internal_gapi_mappings = array(
   );
-  protected $bagDescriptorType = 'Google_Service_QPXExpress_BagDescriptor';
+  protected $bagDescriptorType = 'Appointments_Google_Service_QPXExpress_BagDescriptor';
   protected $bagDescriptorDataType = 'array';
   public $kilos;
   public $kilosPerPiece;
@@ -535,7 +535,7 @@ class Google_Service_QPXExpress_FreeBaggageAllowance extends Google_Collection
   }
 }
 
-class Google_Service_QPXExpress_LegInfo extends Google_Model
+class Appointments_Google_Service_QPXExpress_LegInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -696,7 +696,7 @@ class Google_Service_QPXExpress_LegInfo extends Google_Model
   }
 }
 
-class Google_Service_QPXExpress_PassengerCounts extends Google_Model
+class Appointments_Google_Service_QPXExpress_PassengerCounts extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -758,27 +758,27 @@ class Google_Service_QPXExpress_PassengerCounts extends Google_Model
   }
 }
 
-class Google_Service_QPXExpress_PricingInfo extends Google_Collection
+class Appointments_Google_Service_QPXExpress_PricingInfo extends Appointments_Google_Collection
 {
   protected $collection_key = 'tax';
   protected $internal_gapi_mappings = array(
   );
   public $baseFareTotal;
-  protected $fareType = 'Google_Service_QPXExpress_FareInfo';
+  protected $fareType = 'Appointments_Google_Service_QPXExpress_FareInfo';
   protected $fareDataType = 'array';
   public $fareCalculation;
   public $kind;
   public $latestTicketingTime;
-  protected $passengersType = 'Google_Service_QPXExpress_PassengerCounts';
+  protected $passengersType = 'Appointments_Google_Service_QPXExpress_PassengerCounts';
   protected $passengersDataType = '';
   public $ptc;
   public $refundable;
   public $saleFareTotal;
   public $saleTaxTotal;
   public $saleTotal;
-  protected $segmentPricingType = 'Google_Service_QPXExpress_SegmentPricing';
+  protected $segmentPricingType = 'Appointments_Google_Service_QPXExpress_SegmentPricing';
   protected $segmentPricingDataType = 'array';
-  protected $taxType = 'Google_Service_QPXExpress_TaxInfo';
+  protected $taxType = 'Appointments_Google_Service_QPXExpress_TaxInfo';
   protected $taxDataType = 'array';
 
 
@@ -822,7 +822,7 @@ class Google_Service_QPXExpress_PricingInfo extends Google_Collection
   {
     return $this->latestTicketingTime;
   }
-  public function setPassengers(Google_Service_QPXExpress_PassengerCounts $passengers)
+  public function setPassengers(Appointments_Google_Service_QPXExpress_PassengerCounts $passengers)
   {
     $this->passengers = $passengers;
   }
@@ -888,7 +888,7 @@ class Google_Service_QPXExpress_PricingInfo extends Google_Collection
   }
 }
 
-class Google_Service_QPXExpress_SegmentInfo extends Google_Collection
+class Appointments_Google_Service_QPXExpress_SegmentInfo extends Appointments_Google_Collection
 {
   protected $collection_key = 'leg';
   protected $internal_gapi_mappings = array(
@@ -898,11 +898,11 @@ class Google_Service_QPXExpress_SegmentInfo extends Google_Collection
   public $cabin;
   public $connectionDuration;
   public $duration;
-  protected $flightType = 'Google_Service_QPXExpress_FlightInfo';
+  protected $flightType = 'Appointments_Google_Service_QPXExpress_FlightInfo';
   protected $flightDataType = '';
   public $id;
   public $kind;
-  protected $legType = 'Google_Service_QPXExpress_LegInfo';
+  protected $legType = 'Appointments_Google_Service_QPXExpress_LegInfo';
   protected $legDataType = 'array';
   public $marriedSegmentGroup;
   public $subjectToGovernmentApproval;
@@ -948,7 +948,7 @@ class Google_Service_QPXExpress_SegmentInfo extends Google_Collection
   {
     return $this->duration;
   }
-  public function setFlight(Google_Service_QPXExpress_FlightInfo $flight)
+  public function setFlight(Appointments_Google_Service_QPXExpress_FlightInfo $flight)
   {
     $this->flight = $flight;
   }
@@ -998,13 +998,13 @@ class Google_Service_QPXExpress_SegmentInfo extends Google_Collection
   }
 }
 
-class Google_Service_QPXExpress_SegmentPricing extends Google_Collection
+class Appointments_Google_Service_QPXExpress_SegmentPricing extends Appointments_Google_Collection
 {
   protected $collection_key = 'freeBaggageOption';
   protected $internal_gapi_mappings = array(
   );
   public $fareId;
-  protected $freeBaggageOptionType = 'Google_Service_QPXExpress_FreeBaggageAllowance';
+  protected $freeBaggageOptionType = 'Appointments_Google_Service_QPXExpress_FreeBaggageAllowance';
   protected $freeBaggageOptionDataType = 'array';
   public $kind;
   public $segmentId;
@@ -1044,14 +1044,14 @@ class Google_Service_QPXExpress_SegmentPricing extends Google_Collection
   }
 }
 
-class Google_Service_QPXExpress_SliceInfo extends Google_Collection
+class Appointments_Google_Service_QPXExpress_SliceInfo extends Appointments_Google_Collection
 {
   protected $collection_key = 'segment';
   protected $internal_gapi_mappings = array(
   );
   public $duration;
   public $kind;
-  protected $segmentType = 'Google_Service_QPXExpress_SegmentInfo';
+  protected $segmentType = 'Appointments_Google_Service_QPXExpress_SegmentInfo';
   protected $segmentDataType = 'array';
 
 
@@ -1081,7 +1081,7 @@ class Google_Service_QPXExpress_SliceInfo extends Google_Collection
   }
 }
 
-class Google_Service_QPXExpress_SliceInput extends Google_Collection
+class Appointments_Google_Service_QPXExpress_SliceInput extends Appointments_Google_Collection
 {
   protected $collection_key = 'prohibitedCarrier';
   protected $internal_gapi_mappings = array(
@@ -1094,7 +1094,7 @@ class Google_Service_QPXExpress_SliceInput extends Google_Collection
   public $maxStops;
   public $origin;
   public $permittedCarrier;
-  protected $permittedDepartureTimeType = 'Google_Service_QPXExpress_TimeOfDayRange';
+  protected $permittedDepartureTimeType = 'Appointments_Google_Service_QPXExpress_TimeOfDayRange';
   protected $permittedDepartureTimeDataType = '';
   public $preferredCabin;
   public $prohibitedCarrier;
@@ -1164,7 +1164,7 @@ class Google_Service_QPXExpress_SliceInput extends Google_Collection
   {
     return $this->permittedCarrier;
   }
-  public function setPermittedDepartureTime(Google_Service_QPXExpress_TimeOfDayRange $permittedDepartureTime)
+  public function setPermittedDepartureTime(Appointments_Google_Service_QPXExpress_TimeOfDayRange $permittedDepartureTime)
   {
     $this->permittedDepartureTime = $permittedDepartureTime;
   }
@@ -1190,7 +1190,7 @@ class Google_Service_QPXExpress_SliceInput extends Google_Collection
   }
 }
 
-class Google_Service_QPXExpress_TaxData extends Google_Model
+class Appointments_Google_Service_QPXExpress_TaxData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1225,7 +1225,7 @@ class Google_Service_QPXExpress_TaxData extends Google_Model
   }
 }
 
-class Google_Service_QPXExpress_TaxInfo extends Google_Model
+class Appointments_Google_Service_QPXExpress_TaxInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1287,7 +1287,7 @@ class Google_Service_QPXExpress_TaxInfo extends Google_Model
   }
 }
 
-class Google_Service_QPXExpress_TimeOfDayRange extends Google_Model
+class Appointments_Google_Service_QPXExpress_TimeOfDayRange extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1322,17 +1322,17 @@ class Google_Service_QPXExpress_TimeOfDayRange extends Google_Model
   }
 }
 
-class Google_Service_QPXExpress_TripOption extends Google_Collection
+class Appointments_Google_Service_QPXExpress_TripOption extends Appointments_Google_Collection
 {
   protected $collection_key = 'slice';
   protected $internal_gapi_mappings = array(
   );
   public $id;
   public $kind;
-  protected $pricingType = 'Google_Service_QPXExpress_PricingInfo';
+  protected $pricingType = 'Appointments_Google_Service_QPXExpress_PricingInfo';
   protected $pricingDataType = 'array';
   public $saleTotal;
-  protected $sliceType = 'Google_Service_QPXExpress_SliceInfo';
+  protected $sliceType = 'Appointments_Google_Service_QPXExpress_SliceInfo';
   protected $sliceDataType = 'array';
 
 
@@ -1378,17 +1378,17 @@ class Google_Service_QPXExpress_TripOption extends Google_Collection
   }
 }
 
-class Google_Service_QPXExpress_TripOptionsRequest extends Google_Collection
+class Appointments_Google_Service_QPXExpress_TripOptionsRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'slice';
   protected $internal_gapi_mappings = array(
   );
   public $maxPrice;
-  protected $passengersType = 'Google_Service_QPXExpress_PassengerCounts';
+  protected $passengersType = 'Appointments_Google_Service_QPXExpress_PassengerCounts';
   protected $passengersDataType = '';
   public $refundable;
   public $saleCountry;
-  protected $sliceType = 'Google_Service_QPXExpress_SliceInput';
+  protected $sliceType = 'Appointments_Google_Service_QPXExpress_SliceInput';
   protected $sliceDataType = 'array';
   public $solutions;
 
@@ -1401,7 +1401,7 @@ class Google_Service_QPXExpress_TripOptionsRequest extends Google_Collection
   {
     return $this->maxPrice;
   }
-  public function setPassengers(Google_Service_QPXExpress_PassengerCounts $passengers)
+  public function setPassengers(Appointments_Google_Service_QPXExpress_PassengerCounts $passengers)
   {
     $this->passengers = $passengers;
   }
@@ -1443,20 +1443,20 @@ class Google_Service_QPXExpress_TripOptionsRequest extends Google_Collection
   }
 }
 
-class Google_Service_QPXExpress_TripOptionsResponse extends Google_Collection
+class Appointments_Google_Service_QPXExpress_TripOptionsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'tripOption';
   protected $internal_gapi_mappings = array(
   );
-  protected $dataType = 'Google_Service_QPXExpress_Data';
+  protected $dataType = 'Appointments_Google_Service_QPXExpress_Data';
   protected $dataDataType = '';
   public $kind;
   public $requestId;
-  protected $tripOptionType = 'Google_Service_QPXExpress_TripOption';
+  protected $tripOptionType = 'Appointments_Google_Service_QPXExpress_TripOption';
   protected $tripOptionDataType = 'array';
 
 
-  public function setData(Google_Service_QPXExpress_Data $data)
+  public function setData(Appointments_Google_Service_QPXExpress_Data $data)
   {
     $this->data = $data;
   }
@@ -1490,15 +1490,15 @@ class Google_Service_QPXExpress_TripOptionsResponse extends Google_Collection
   }
 }
 
-class Google_Service_QPXExpress_TripsSearchRequest extends Google_Model
+class Appointments_Google_Service_QPXExpress_TripsSearchRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $requestType = 'Google_Service_QPXExpress_TripOptionsRequest';
+  protected $requestType = 'Appointments_Google_Service_QPXExpress_TripOptionsRequest';
   protected $requestDataType = '';
 
 
-  public function setRequest(Google_Service_QPXExpress_TripOptionsRequest $request)
+  public function setRequest(Appointments_Google_Service_QPXExpress_TripOptionsRequest $request)
   {
     $this->request = $request;
   }
@@ -1508,12 +1508,12 @@ class Google_Service_QPXExpress_TripsSearchRequest extends Google_Model
   }
 }
 
-class Google_Service_QPXExpress_TripsSearchResponse extends Google_Model
+class Appointments_Google_Service_QPXExpress_TripsSearchResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $tripsType = 'Google_Service_QPXExpress_TripOptionsResponse';
+  protected $tripsType = 'Appointments_Google_Service_QPXExpress_TripOptionsResponse';
   protected $tripsDataType = '';
 
 
@@ -1525,7 +1525,7 @@ class Google_Service_QPXExpress_TripsSearchResponse extends Google_Model
   {
     return $this->kind;
   }
-  public function setTrips(Google_Service_QPXExpress_TripOptionsResponse $trips)
+  public function setTrips(Appointments_Google_Service_QPXExpress_TripOptionsResponse $trips)
   {
     $this->trips = $trips;
   }

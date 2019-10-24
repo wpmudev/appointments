@@ -22,21 +22,21 @@
  */
 use google\appengine\api\app_identity\AppIdentityService;
 
-if (!class_exists('Google_Client')) {
+if (!class_exists('Appointments_Google_Client')) {
   require_once dirname(__FILE__) . '/../autoload.php';
 }
 
 /**
  * Authentication via the Google App Engine App Identity service.
  */
-class Google_Auth_AppIdentity extends Google_Auth_Abstract
+class Appointments_Google_Auth_AppIdentity extends Appointments_Google_Auth_Abstract
 {
-  const CACHE_PREFIX = "Google_Auth_AppIdentity::";
+  const CACHE_PREFIX = "Appointments_Google_Auth_AppIdentity::";
   private $client;
   private $token = false;
   private $tokenScopes = false;
 
-  public function __construct(Google_Client $client, $config = null)
+  public function __construct(Appointments_Google_Client $client, $config = null)
   {
     $this->client = $client;
   }
@@ -91,17 +91,17 @@ class Google_Auth_AppIdentity extends Google_Auth_Abstract
    * (which can modify the request in what ever way fits the auth mechanism)
    * and then calls apiCurlIO::makeRequest on the signed request
    *
-   * @param Google_Http_Request $request
-   * @return Google_Http_Request The resulting HTTP response including the
+   * @param Appointments_Google_Http_Request $request
+   * @return Appointments_Google_Http_Request The resulting HTTP response including the
    * responseHttpCode, responseHeaders and responseBody.
    */
-  public function authenticatedRequest(Google_Http_Request $request)
+  public function authenticatedRequest(Appointments_Google_Http_Request $request)
   {
     $request = $this->sign($request);
     return $this->client->getIo()->makeRequest($request);
   }
 
-  public function sign(Google_Http_Request $request)
+  public function sign(Appointments_Google_Http_Request $request)
   {
     if (!$this->token) {
       // No token, so nothing to do.

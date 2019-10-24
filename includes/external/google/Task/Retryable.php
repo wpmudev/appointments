@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-if (!class_exists('Google_Client')) {
+if (!class_exists('Appointments_Google_Client')) {
   require_once dirname(__FILE__) . '/../autoload.php';
 }
 
@@ -23,7 +23,7 @@ if (!class_exists('Google_Client')) {
  * Interface for checking how many times a given task can be retried following
  * a failure.
  */
-interface Google_Task_Retryable
+interface Appointments_Google_Task_Retryable
 {
   /**
    * Gets the number of times the associated task can be retried.

@@ -26,7 +26,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Pubsub extends Google_Service
+class Appointments_Google_Service_Pubsub extends Appointments_Google_Service
 {
   /** View and manage your data across Google Cloud Platform services. */
   const CLOUD_PLATFORM =
@@ -43,9 +43,9 @@ class Google_Service_Pubsub extends Google_Service
   /**
    * Constructs the internal representation of the Pubsub service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://pubsub.googleapis.com/';
@@ -53,7 +53,7 @@ class Google_Service_Pubsub extends Google_Service
     $this->version = 'v1';
     $this->serviceName = 'pubsub';
 
-    $this->projects_subscriptions = new Google_Service_Pubsub_ProjectsSubscriptions_Resource(
+    $this->projects_subscriptions = new Appointments_Google_Service_Pubsub_ProjectsSubscriptions_Resource(
         $this,
         $this->serviceName,
         'subscriptions',
@@ -181,7 +181,7 @@ class Google_Service_Pubsub extends Google_Service
           )
         )
     );
-    $this->projects_topics = new Google_Service_Pubsub_ProjectsTopics_Resource(
+    $this->projects_topics = new Appointments_Google_Service_Pubsub_ProjectsTopics_Resource(
         $this,
         $this->serviceName,
         'topics',
@@ -279,7 +279,7 @@ class Google_Service_Pubsub extends Google_Service
           )
         )
     );
-    $this->projects_topics_subscriptions = new Google_Service_Pubsub_ProjectsTopicsSubscriptions_Resource(
+    $this->projects_topics_subscriptions = new Appointments_Google_Service_Pubsub_ProjectsTopicsSubscriptions_Resource(
         $this,
         $this->serviceName,
         'subscriptions',
@@ -315,11 +315,11 @@ class Google_Service_Pubsub extends Google_Service
  * The "projects" collection of methods.
  * Typical usage is:
  *  <code>
- *   $pubsubService = new Google_Service_Pubsub(...);
+ *   $pubsubService = new Appointments_Google_Service_Pubsub(...);
  *   $projects = $pubsubService->projects;
  *  </code>
  */
-class Google_Service_Pubsub_Projects_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Pubsub_Projects_Resource extends Appointments_Google_Service_Resource
 {
 }
 
@@ -327,11 +327,11 @@ class Google_Service_Pubsub_Projects_Resource extends Google_Service_Resource
  * The "subscriptions" collection of methods.
  * Typical usage is:
  *  <code>
- *   $pubsubService = new Google_Service_Pubsub(...);
+ *   $pubsubService = new Appointments_Google_Service_Pubsub(...);
  *   $subscriptions = $pubsubService->subscriptions;
  *  </code>
  */
-class Google_Service_Pubsub_ProjectsSubscriptions_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Pubsub_ProjectsSubscriptions_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -344,15 +344,15 @@ class Google_Service_Pubsub_ProjectsSubscriptions_Resource extends Google_Servic
    *
    * @param string $subscription The subscription whose message is being
    * acknowledged.
-   * @param Google_AcknowledgeRequest $postBody
+   * @param Appointments_Google_AcknowledgeRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Pubsub_Empty
+   * @return Appointments_Google_Service_Pubsub_Empty
    */
-  public function acknowledge($subscription, Google_Service_Pubsub_AcknowledgeRequest $postBody, $optParams = array())
+  public function acknowledge($subscription, Appointments_Google_Service_Pubsub_AcknowledgeRequest $postBody, $optParams = array())
   {
     $params = array('subscription' => $subscription, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('acknowledge', array($params), "Google_Service_Pubsub_Empty");
+    return $this->call('acknowledge', array($params), "Appointments_Google_Service_Pubsub_Empty");
   }
 
   /**
@@ -368,15 +368,15 @@ class Google_Service_Pubsub_ProjectsSubscriptions_Resource extends Google_Servic
    * (`[0-9]`), dashes (`-`), underscores (`_`), periods (`.`), tildes (`~`), plus
    * (`+`) or percent signs (`%`). It must be between 3 and 255 characters in
    * length, and it must not start with `"goog"`.
-   * @param Google_Subscription $postBody
+   * @param Appointments_Google_Subscription $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Pubsub_Subscription
+   * @return Appointments_Google_Service_Pubsub_Subscription
    */
-  public function create($name, Google_Service_Pubsub_Subscription $postBody, $optParams = array())
+  public function create($name, Appointments_Google_Service_Pubsub_Subscription $postBody, $optParams = array())
   {
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_Pubsub_Subscription");
+    return $this->call('create', array($params), "Appointments_Google_Service_Pubsub_Subscription");
   }
 
   /**
@@ -388,13 +388,13 @@ class Google_Service_Pubsub_ProjectsSubscriptions_Resource extends Google_Servic
    *
    * @param string $subscription The subscription to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Pubsub_Empty
+   * @return Appointments_Google_Service_Pubsub_Empty
    */
   public function delete($subscription, $optParams = array())
   {
     $params = array('subscription' => $subscription);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Pubsub_Empty");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Pubsub_Empty");
   }
 
   /**
@@ -402,13 +402,13 @@ class Google_Service_Pubsub_ProjectsSubscriptions_Resource extends Google_Servic
    *
    * @param string $subscription The name of the subscription to get.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Pubsub_Subscription
+   * @return Appointments_Google_Service_Pubsub_Subscription
    */
   public function get($subscription, $optParams = array())
   {
     $params = array('subscription' => $subscription);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Pubsub_Subscription");
+    return $this->call('get', array($params), "Appointments_Google_Service_Pubsub_Subscription");
   }
 
   /**
@@ -421,13 +421,13 @@ class Google_Service_Pubsub_ProjectsSubscriptions_Resource extends Google_Servic
    * specified in this value is resource specific and is specified in the
    * documentation for the respective GetIamPolicy rpc.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Pubsub_Policy
+   * @return Appointments_Google_Service_Pubsub_Policy
    */
   public function getIamPolicy($resource, $optParams = array())
   {
     $params = array('resource' => $resource);
     $params = array_merge($params, $optParams);
-    return $this->call('getIamPolicy', array($params), "Google_Service_Pubsub_Policy");
+    return $this->call('getIamPolicy', array($params), "Appointments_Google_Service_Pubsub_Policy");
   }
 
   /**
@@ -442,13 +442,13 @@ class Google_Service_Pubsub_ProjectsSubscriptions_Resource extends Google_Servic
    * `ListSubscriptionsResponse`; indicates that this is a continuation of a prior
    * `ListSubscriptions` call, and that the system should return the next page of
    * data.
-   * @return Google_Service_Pubsub_ListSubscriptionsResponse
+   * @return Appointments_Google_Service_Pubsub_ListSubscriptionsResponse
    */
   public function listProjectsSubscriptions($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Pubsub_ListSubscriptionsResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Pubsub_ListSubscriptionsResponse");
   }
 
   /**
@@ -458,15 +458,15 @@ class Google_Service_Pubsub_ProjectsSubscriptions_Resource extends Google_Servic
    * interrupted. (subscriptions.modifyAckDeadline)
    *
    * @param string $subscription The name of the subscription.
-   * @param Google_ModifyAckDeadlineRequest $postBody
+   * @param Appointments_Google_ModifyAckDeadlineRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Pubsub_Empty
+   * @return Appointments_Google_Service_Pubsub_Empty
    */
-  public function modifyAckDeadline($subscription, Google_Service_Pubsub_ModifyAckDeadlineRequest $postBody, $optParams = array())
+  public function modifyAckDeadline($subscription, Appointments_Google_Service_Pubsub_ModifyAckDeadlineRequest $postBody, $optParams = array())
   {
     $params = array('subscription' => $subscription, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('modifyAckDeadline', array($params), "Google_Service_Pubsub_Empty");
+    return $this->call('modifyAckDeadline', array($params), "Appointments_Google_Service_Pubsub_Empty");
   }
 
   /**
@@ -478,15 +478,15 @@ class Google_Service_Pubsub_ProjectsSubscriptions_Resource extends Google_Servic
    * (subscriptions.modifyPushConfig)
    *
    * @param string $subscription The name of the subscription.
-   * @param Google_ModifyPushConfigRequest $postBody
+   * @param Appointments_Google_ModifyPushConfigRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Pubsub_Empty
+   * @return Appointments_Google_Service_Pubsub_Empty
    */
-  public function modifyPushConfig($subscription, Google_Service_Pubsub_ModifyPushConfigRequest $postBody, $optParams = array())
+  public function modifyPushConfig($subscription, Appointments_Google_Service_Pubsub_ModifyPushConfigRequest $postBody, $optParams = array())
   {
     $params = array('subscription' => $subscription, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('modifyPushConfig', array($params), "Google_Service_Pubsub_Empty");
+    return $this->call('modifyPushConfig', array($params), "Appointments_Google_Service_Pubsub_Empty");
   }
 
   /**
@@ -497,15 +497,15 @@ class Google_Service_Pubsub_ProjectsSubscriptions_Resource extends Google_Servic
    *
    * @param string $subscription The subscription from which messages should be
    * pulled.
-   * @param Google_PullRequest $postBody
+   * @param Appointments_Google_PullRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Pubsub_PullResponse
+   * @return Appointments_Google_Service_Pubsub_PullResponse
    */
-  public function pull($subscription, Google_Service_Pubsub_PullRequest $postBody, $optParams = array())
+  public function pull($subscription, Appointments_Google_Service_Pubsub_PullRequest $postBody, $optParams = array())
   {
     $params = array('subscription' => $subscription, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('pull', array($params), "Google_Service_Pubsub_PullResponse");
+    return $this->call('pull', array($params), "Appointments_Google_Service_Pubsub_PullResponse");
   }
 
   /**
@@ -517,15 +517,15 @@ class Google_Service_Pubsub_ProjectsSubscriptions_Resource extends Google_Servic
    * `projects/{project}/zones/{zone}/disks/{disk}`. The format for the path
    * specified in this value is resource specific and is specified in the
    * documentation for the respective SetIamPolicy rpc.
-   * @param Google_SetIamPolicyRequest $postBody
+   * @param Appointments_Google_SetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Pubsub_Policy
+   * @return Appointments_Google_Service_Pubsub_Policy
    */
-  public function setIamPolicy($resource, Google_Service_Pubsub_SetIamPolicyRequest $postBody, $optParams = array())
+  public function setIamPolicy($resource, Appointments_Google_Service_Pubsub_SetIamPolicyRequest $postBody, $optParams = array())
   {
     $params = array('resource' => $resource, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setIamPolicy', array($params), "Google_Service_Pubsub_Policy");
+    return $this->call('setIamPolicy', array($params), "Appointments_Google_Service_Pubsub_Policy");
   }
 
   /**
@@ -537,26 +537,26 @@ class Google_Service_Pubsub_ProjectsSubscriptions_Resource extends Google_Servic
    * `projects/{project}/zones/{zone}/disks/{disk}`. The format for the path
    * specified in this value is resource specific and is specified in the
    * documentation for the respective TestIamPermissions rpc.
-   * @param Google_TestIamPermissionsRequest $postBody
+   * @param Appointments_Google_TestIamPermissionsRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Pubsub_TestIamPermissionsResponse
+   * @return Appointments_Google_Service_Pubsub_TestIamPermissionsResponse
    */
-  public function testIamPermissions($resource, Google_Service_Pubsub_TestIamPermissionsRequest $postBody, $optParams = array())
+  public function testIamPermissions($resource, Appointments_Google_Service_Pubsub_TestIamPermissionsRequest $postBody, $optParams = array())
   {
     $params = array('resource' => $resource, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('testIamPermissions', array($params), "Google_Service_Pubsub_TestIamPermissionsResponse");
+    return $this->call('testIamPermissions', array($params), "Appointments_Google_Service_Pubsub_TestIamPermissionsResponse");
   }
 }
 /**
  * The "topics" collection of methods.
  * Typical usage is:
  *  <code>
- *   $pubsubService = new Google_Service_Pubsub(...);
+ *   $pubsubService = new Appointments_Google_Service_Pubsub(...);
  *   $topics = $pubsubService->topics;
  *  </code>
  */
-class Google_Service_Pubsub_ProjectsTopics_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Pubsub_ProjectsTopics_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -568,15 +568,15 @@ class Google_Service_Pubsub_ProjectsTopics_Resource extends Google_Service_Resou
    * underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent signs
    * (`%`). It must be between 3 and 255 characters in length, and it must not
    * start with `"goog"`.
-   * @param Google_Topic $postBody
+   * @param Appointments_Google_Topic $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Pubsub_Topic
+   * @return Appointments_Google_Service_Pubsub_Topic
    */
-  public function create($name, Google_Service_Pubsub_Topic $postBody, $optParams = array())
+  public function create($name, Appointments_Google_Service_Pubsub_Topic $postBody, $optParams = array())
   {
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_Pubsub_Topic");
+    return $this->call('create', array($params), "Appointments_Google_Service_Pubsub_Topic");
   }
 
   /**
@@ -588,13 +588,13 @@ class Google_Service_Pubsub_ProjectsTopics_Resource extends Google_Service_Resou
    *
    * @param string $topic Name of the topic to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Pubsub_Empty
+   * @return Appointments_Google_Service_Pubsub_Empty
    */
   public function delete($topic, $optParams = array())
   {
     $params = array('topic' => $topic);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Pubsub_Empty");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Pubsub_Empty");
   }
 
   /**
@@ -602,13 +602,13 @@ class Google_Service_Pubsub_ProjectsTopics_Resource extends Google_Service_Resou
    *
    * @param string $topic The name of the topic to get.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Pubsub_Topic
+   * @return Appointments_Google_Service_Pubsub_Topic
    */
   public function get($topic, $optParams = array())
   {
     $params = array('topic' => $topic);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Pubsub_Topic");
+    return $this->call('get', array($params), "Appointments_Google_Service_Pubsub_Topic");
   }
 
   /**
@@ -621,13 +621,13 @@ class Google_Service_Pubsub_ProjectsTopics_Resource extends Google_Service_Resou
    * specified in this value is resource specific and is specified in the
    * documentation for the respective GetIamPolicy rpc.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Pubsub_Policy
+   * @return Appointments_Google_Service_Pubsub_Policy
    */
   public function getIamPolicy($resource, $optParams = array())
   {
     $params = array('resource' => $resource);
     $params = array_merge($params, $optParams);
-    return $this->call('getIamPolicy', array($params), "Google_Service_Pubsub_Policy");
+    return $this->call('getIamPolicy', array($params), "Appointments_Google_Service_Pubsub_Policy");
   }
 
   /**
@@ -640,13 +640,13 @@ class Google_Service_Pubsub_ProjectsTopics_Resource extends Google_Service_Resou
    * @opt_param string pageToken The value returned by the last
    * `ListTopicsResponse`; indicates that this is a continuation of a prior
    * `ListTopics` call, and that the system should return the next page of data.
-   * @return Google_Service_Pubsub_ListTopicsResponse
+   * @return Appointments_Google_Service_Pubsub_ListTopicsResponse
    */
   public function listProjectsTopics($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Pubsub_ListTopicsResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Pubsub_ListTopicsResponse");
   }
 
   /**
@@ -656,15 +656,15 @@ class Google_Service_Pubsub_ProjectsTopics_Resource extends Google_Service_Resou
    *
    * @param string $topic The messages in the request will be published on this
    * topic.
-   * @param Google_PublishRequest $postBody
+   * @param Appointments_Google_PublishRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Pubsub_PublishResponse
+   * @return Appointments_Google_Service_Pubsub_PublishResponse
    */
-  public function publish($topic, Google_Service_Pubsub_PublishRequest $postBody, $optParams = array())
+  public function publish($topic, Appointments_Google_Service_Pubsub_PublishRequest $postBody, $optParams = array())
   {
     $params = array('topic' => $topic, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('publish', array($params), "Google_Service_Pubsub_PublishResponse");
+    return $this->call('publish', array($params), "Appointments_Google_Service_Pubsub_PublishResponse");
   }
 
   /**
@@ -676,15 +676,15 @@ class Google_Service_Pubsub_ProjectsTopics_Resource extends Google_Service_Resou
    * `projects/{project}/zones/{zone}/disks/{disk}`. The format for the path
    * specified in this value is resource specific and is specified in the
    * documentation for the respective SetIamPolicy rpc.
-   * @param Google_SetIamPolicyRequest $postBody
+   * @param Appointments_Google_SetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Pubsub_Policy
+   * @return Appointments_Google_Service_Pubsub_Policy
    */
-  public function setIamPolicy($resource, Google_Service_Pubsub_SetIamPolicyRequest $postBody, $optParams = array())
+  public function setIamPolicy($resource, Appointments_Google_Service_Pubsub_SetIamPolicyRequest $postBody, $optParams = array())
   {
     $params = array('resource' => $resource, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setIamPolicy', array($params), "Google_Service_Pubsub_Policy");
+    return $this->call('setIamPolicy', array($params), "Appointments_Google_Service_Pubsub_Policy");
   }
 
   /**
@@ -696,15 +696,15 @@ class Google_Service_Pubsub_ProjectsTopics_Resource extends Google_Service_Resou
    * `projects/{project}/zones/{zone}/disks/{disk}`. The format for the path
    * specified in this value is resource specific and is specified in the
    * documentation for the respective TestIamPermissions rpc.
-   * @param Google_TestIamPermissionsRequest $postBody
+   * @param Appointments_Google_TestIamPermissionsRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Pubsub_TestIamPermissionsResponse
+   * @return Appointments_Google_Service_Pubsub_TestIamPermissionsResponse
    */
-  public function testIamPermissions($resource, Google_Service_Pubsub_TestIamPermissionsRequest $postBody, $optParams = array())
+  public function testIamPermissions($resource, Appointments_Google_Service_Pubsub_TestIamPermissionsRequest $postBody, $optParams = array())
   {
     $params = array('resource' => $resource, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('testIamPermissions', array($params), "Google_Service_Pubsub_TestIamPermissionsResponse");
+    return $this->call('testIamPermissions', array($params), "Appointments_Google_Service_Pubsub_TestIamPermissionsResponse");
   }
 }
 
@@ -712,11 +712,11 @@ class Google_Service_Pubsub_ProjectsTopics_Resource extends Google_Service_Resou
  * The "subscriptions" collection of methods.
  * Typical usage is:
  *  <code>
- *   $pubsubService = new Google_Service_Pubsub(...);
+ *   $pubsubService = new Appointments_Google_Service_Pubsub(...);
  *   $subscriptions = $pubsubService->subscriptions;
  *  </code>
  */
-class Google_Service_Pubsub_ProjectsTopicsSubscriptions_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Pubsub_ProjectsTopicsSubscriptions_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -732,20 +732,20 @@ class Google_Service_Pubsub_ProjectsTopicsSubscriptions_Resource extends Google_
    * `ListTopicSubscriptionsResponse`; indicates that this is a continuation of a
    * prior `ListTopicSubscriptions` call, and that the system should return the
    * next page of data.
-   * @return Google_Service_Pubsub_ListTopicSubscriptionsResponse
+   * @return Appointments_Google_Service_Pubsub_ListTopicSubscriptionsResponse
    */
   public function listProjectsTopicsSubscriptions($topic, $optParams = array())
   {
     $params = array('topic' => $topic);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Pubsub_ListTopicSubscriptionsResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Pubsub_ListTopicSubscriptionsResponse");
   }
 }
 
 
 
 
-class Google_Service_Pubsub_AcknowledgeRequest extends Google_Collection
+class Appointments_Google_Service_Pubsub_AcknowledgeRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'ackIds';
   protected $internal_gapi_mappings = array(
@@ -763,7 +763,7 @@ class Google_Service_Pubsub_AcknowledgeRequest extends Google_Collection
   }
 }
 
-class Google_Service_Pubsub_Binding extends Google_Collection
+class Appointments_Google_Service_Pubsub_Binding extends Appointments_Google_Collection
 {
   protected $collection_key = 'members';
   protected $internal_gapi_mappings = array(
@@ -790,17 +790,17 @@ class Google_Service_Pubsub_Binding extends Google_Collection
   }
 }
 
-class Google_Service_Pubsub_Empty extends Google_Model
+class Appointments_Google_Service_Pubsub_Empty extends Appointments_Google_Model
 {
 }
 
-class Google_Service_Pubsub_ListSubscriptionsResponse extends Google_Collection
+class Appointments_Google_Service_Pubsub_ListSubscriptionsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'subscriptions';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $subscriptionsType = 'Google_Service_Pubsub_Subscription';
+  protected $subscriptionsType = 'Appointments_Google_Service_Pubsub_Subscription';
   protected $subscriptionsDataType = 'array';
 
 
@@ -822,7 +822,7 @@ class Google_Service_Pubsub_ListSubscriptionsResponse extends Google_Collection
   }
 }
 
-class Google_Service_Pubsub_ListTopicSubscriptionsResponse extends Google_Collection
+class Appointments_Google_Service_Pubsub_ListTopicSubscriptionsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'subscriptions';
   protected $internal_gapi_mappings = array(
@@ -849,13 +849,13 @@ class Google_Service_Pubsub_ListTopicSubscriptionsResponse extends Google_Collec
   }
 }
 
-class Google_Service_Pubsub_ListTopicsResponse extends Google_Collection
+class Appointments_Google_Service_Pubsub_ListTopicsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'topics';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $topicsType = 'Google_Service_Pubsub_Topic';
+  protected $topicsType = 'Appointments_Google_Service_Pubsub_Topic';
   protected $topicsDataType = 'array';
 
 
@@ -877,7 +877,7 @@ class Google_Service_Pubsub_ListTopicsResponse extends Google_Collection
   }
 }
 
-class Google_Service_Pubsub_ModifyAckDeadlineRequest extends Google_Collection
+class Appointments_Google_Service_Pubsub_ModifyAckDeadlineRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'ackIds';
   protected $internal_gapi_mappings = array(
@@ -904,15 +904,15 @@ class Google_Service_Pubsub_ModifyAckDeadlineRequest extends Google_Collection
   }
 }
 
-class Google_Service_Pubsub_ModifyPushConfigRequest extends Google_Model
+class Appointments_Google_Service_Pubsub_ModifyPushConfigRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $pushConfigType = 'Google_Service_Pubsub_PushConfig';
+  protected $pushConfigType = 'Appointments_Google_Service_Pubsub_PushConfig';
   protected $pushConfigDataType = '';
 
 
-  public function setPushConfig(Google_Service_Pubsub_PushConfig $pushConfig)
+  public function setPushConfig(Appointments_Google_Service_Pubsub_PushConfig $pushConfig)
   {
     $this->pushConfig = $pushConfig;
   }
@@ -922,12 +922,12 @@ class Google_Service_Pubsub_ModifyPushConfigRequest extends Google_Model
   }
 }
 
-class Google_Service_Pubsub_Policy extends Google_Collection
+class Appointments_Google_Service_Pubsub_Policy extends Appointments_Google_Collection
 {
   protected $collection_key = 'bindings';
   protected $internal_gapi_mappings = array(
   );
-  protected $bindingsType = 'Google_Service_Pubsub_Binding';
+  protected $bindingsType = 'Appointments_Google_Service_Pubsub_Binding';
   protected $bindingsDataType = 'array';
   public $etag;
   public $version;
@@ -959,12 +959,12 @@ class Google_Service_Pubsub_Policy extends Google_Collection
   }
 }
 
-class Google_Service_Pubsub_PublishRequest extends Google_Collection
+class Appointments_Google_Service_Pubsub_PublishRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'messages';
   protected $internal_gapi_mappings = array(
   );
-  protected $messagesType = 'Google_Service_Pubsub_PubsubMessage';
+  protected $messagesType = 'Appointments_Google_Service_Pubsub_PubsubMessage';
   protected $messagesDataType = 'array';
 
 
@@ -978,7 +978,7 @@ class Google_Service_Pubsub_PublishRequest extends Google_Collection
   }
 }
 
-class Google_Service_Pubsub_PublishResponse extends Google_Collection
+class Appointments_Google_Service_Pubsub_PublishResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'messageIds';
   protected $internal_gapi_mappings = array(
@@ -996,7 +996,7 @@ class Google_Service_Pubsub_PublishResponse extends Google_Collection
   }
 }
 
-class Google_Service_Pubsub_PubsubMessage extends Google_Model
+class Appointments_Google_Service_Pubsub_PubsubMessage extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1040,7 +1040,7 @@ class Google_Service_Pubsub_PubsubMessage extends Google_Model
   }
 }
 
-class Google_Service_Pubsub_PullRequest extends Google_Model
+class Appointments_Google_Service_Pubsub_PullRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1066,12 +1066,12 @@ class Google_Service_Pubsub_PullRequest extends Google_Model
   }
 }
 
-class Google_Service_Pubsub_PullResponse extends Google_Collection
+class Appointments_Google_Service_Pubsub_PullResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'receivedMessages';
   protected $internal_gapi_mappings = array(
   );
-  protected $receivedMessagesType = 'Google_Service_Pubsub_ReceivedMessage';
+  protected $receivedMessagesType = 'Appointments_Google_Service_Pubsub_ReceivedMessage';
   protected $receivedMessagesDataType = 'array';
 
 
@@ -1085,7 +1085,7 @@ class Google_Service_Pubsub_PullResponse extends Google_Collection
   }
 }
 
-class Google_Service_Pubsub_PushConfig extends Google_Model
+class Appointments_Google_Service_Pubsub_PushConfig extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1111,12 +1111,12 @@ class Google_Service_Pubsub_PushConfig extends Google_Model
   }
 }
 
-class Google_Service_Pubsub_ReceivedMessage extends Google_Model
+class Appointments_Google_Service_Pubsub_ReceivedMessage extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $ackId;
-  protected $messageType = 'Google_Service_Pubsub_PubsubMessage';
+  protected $messageType = 'Appointments_Google_Service_Pubsub_PubsubMessage';
   protected $messageDataType = '';
 
 
@@ -1128,7 +1128,7 @@ class Google_Service_Pubsub_ReceivedMessage extends Google_Model
   {
     return $this->ackId;
   }
-  public function setMessage(Google_Service_Pubsub_PubsubMessage $message)
+  public function setMessage(Appointments_Google_Service_Pubsub_PubsubMessage $message)
   {
     $this->message = $message;
   }
@@ -1138,15 +1138,15 @@ class Google_Service_Pubsub_ReceivedMessage extends Google_Model
   }
 }
 
-class Google_Service_Pubsub_SetIamPolicyRequest extends Google_Model
+class Appointments_Google_Service_Pubsub_SetIamPolicyRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $policyType = 'Google_Service_Pubsub_Policy';
+  protected $policyType = 'Appointments_Google_Service_Pubsub_Policy';
   protected $policyDataType = '';
 
 
-  public function setPolicy(Google_Service_Pubsub_Policy $policy)
+  public function setPolicy(Appointments_Google_Service_Pubsub_Policy $policy)
   {
     $this->policy = $policy;
   }
@@ -1156,13 +1156,13 @@ class Google_Service_Pubsub_SetIamPolicyRequest extends Google_Model
   }
 }
 
-class Google_Service_Pubsub_Subscription extends Google_Model
+class Appointments_Google_Service_Pubsub_Subscription extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $ackDeadlineSeconds;
   public $name;
-  protected $pushConfigType = 'Google_Service_Pubsub_PushConfig';
+  protected $pushConfigType = 'Appointments_Google_Service_Pubsub_PushConfig';
   protected $pushConfigDataType = '';
   public $topic;
 
@@ -1183,7 +1183,7 @@ class Google_Service_Pubsub_Subscription extends Google_Model
   {
     return $this->name;
   }
-  public function setPushConfig(Google_Service_Pubsub_PushConfig $pushConfig)
+  public function setPushConfig(Appointments_Google_Service_Pubsub_PushConfig $pushConfig)
   {
     $this->pushConfig = $pushConfig;
   }
@@ -1201,7 +1201,7 @@ class Google_Service_Pubsub_Subscription extends Google_Model
   }
 }
 
-class Google_Service_Pubsub_TestIamPermissionsRequest extends Google_Collection
+class Appointments_Google_Service_Pubsub_TestIamPermissionsRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'permissions';
   protected $internal_gapi_mappings = array(
@@ -1219,7 +1219,7 @@ class Google_Service_Pubsub_TestIamPermissionsRequest extends Google_Collection
   }
 }
 
-class Google_Service_Pubsub_TestIamPermissionsResponse extends Google_Collection
+class Appointments_Google_Service_Pubsub_TestIamPermissionsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'permissions';
   protected $internal_gapi_mappings = array(
@@ -1237,7 +1237,7 @@ class Google_Service_Pubsub_TestIamPermissionsResponse extends Google_Collection
   }
 }
 
-class Google_Service_Pubsub_Topic extends Google_Model
+class Appointments_Google_Service_Pubsub_Topic extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );

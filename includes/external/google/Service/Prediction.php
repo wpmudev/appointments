@@ -27,7 +27,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Prediction extends Google_Service
+class Appointments_Google_Service_Prediction extends Appointments_Google_Service
 {
   /** Manage your data and permissions in Google Cloud Storage. */
   const DEVSTORAGE_FULL_CONTROL =
@@ -49,9 +49,9 @@ class Google_Service_Prediction extends Google_Service
   /**
    * Constructs the internal representation of the Prediction service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -59,7 +59,7 @@ class Google_Service_Prediction extends Google_Service
     $this->version = 'v1.6';
     $this->serviceName = 'prediction';
 
-    $this->hostedmodels = new Google_Service_Prediction_Hostedmodels_Resource(
+    $this->hostedmodels = new Appointments_Google_Service_Prediction_Hostedmodels_Resource(
         $this,
         $this->serviceName,
         'hostedmodels',
@@ -84,7 +84,7 @@ class Google_Service_Prediction extends Google_Service
           )
         )
     );
-    $this->trainedmodels = new Google_Service_Prediction_Trainedmodels_Resource(
+    $this->trainedmodels = new Appointments_Google_Service_Prediction_Trainedmodels_Resource(
         $this,
         $this->serviceName,
         'trainedmodels',
@@ -205,11 +205,11 @@ class Google_Service_Prediction extends Google_Service
  * The "hostedmodels" collection of methods.
  * Typical usage is:
  *  <code>
- *   $predictionService = new Google_Service_Prediction(...);
+ *   $predictionService = new Appointments_Google_Service_Prediction(...);
  *   $hostedmodels = $predictionService->hostedmodels;
  *  </code>
  */
-class Google_Service_Prediction_Hostedmodels_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Prediction_Hostedmodels_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -218,15 +218,15 @@ class Google_Service_Prediction_Hostedmodels_Resource extends Google_Service_Res
    *
    * @param string $project The project associated with the model.
    * @param string $hostedModelName The name of a hosted model.
-   * @param Google_Input $postBody
+   * @param Appointments_Google_Input $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Prediction_Output
+   * @return Appointments_Google_Service_Prediction_Output
    */
-  public function predict($project, $hostedModelName, Google_Service_Prediction_Input $postBody, $optParams = array())
+  public function predict($project, $hostedModelName, Appointments_Google_Service_Prediction_Input $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'hostedModelName' => $hostedModelName, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('predict', array($params), "Google_Service_Prediction_Output");
+    return $this->call('predict', array($params), "Appointments_Google_Service_Prediction_Output");
   }
 }
 
@@ -234,11 +234,11 @@ class Google_Service_Prediction_Hostedmodels_Resource extends Google_Service_Res
  * The "trainedmodels" collection of methods.
  * Typical usage is:
  *  <code>
- *   $predictionService = new Google_Service_Prediction(...);
+ *   $predictionService = new Appointments_Google_Service_Prediction(...);
  *   $trainedmodels = $predictionService->trainedmodels;
  *  </code>
  */
-class Google_Service_Prediction_Trainedmodels_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Prediction_Trainedmodels_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -248,13 +248,13 @@ class Google_Service_Prediction_Trainedmodels_Resource extends Google_Service_Re
    * @param string $project The project associated with the model.
    * @param string $id The unique name for the predictive model.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Prediction_Analyze
+   * @return Appointments_Google_Service_Prediction_Analyze
    */
   public function analyze($project, $id, $optParams = array())
   {
     $params = array('project' => $project, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('analyze', array($params), "Google_Service_Prediction_Analyze");
+    return $this->call('analyze', array($params), "Appointments_Google_Service_Prediction_Analyze");
   }
 
   /**
@@ -277,28 +277,28 @@ class Google_Service_Prediction_Trainedmodels_Resource extends Google_Service_Re
    * @param string $project The project associated with the model.
    * @param string $id The unique name for the predictive model.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Prediction_Insert2
+   * @return Appointments_Google_Service_Prediction_Insert2
    */
   public function get($project, $id, $optParams = array())
   {
     $params = array('project' => $project, 'id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Prediction_Insert2");
+    return $this->call('get', array($params), "Appointments_Google_Service_Prediction_Insert2");
   }
 
   /**
    * Train a Prediction API model. (trainedmodels.insert)
    *
    * @param string $project The project associated with the model.
-   * @param Google_Insert $postBody
+   * @param Appointments_Google_Insert $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Prediction_Insert2
+   * @return Appointments_Google_Service_Prediction_Insert2
    */
-  public function insert($project, Google_Service_Prediction_Insert $postBody, $optParams = array())
+  public function insert($project, Appointments_Google_Service_Prediction_Insert $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Prediction_Insert2");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Prediction_Insert2");
   }
 
   /**
@@ -309,13 +309,13 @@ class Google_Service_Prediction_Trainedmodels_Resource extends Google_Service_Re
    *
    * @opt_param string maxResults Maximum number of results to return.
    * @opt_param string pageToken Pagination token.
-   * @return Google_Service_Prediction_PredictionList
+   * @return Appointments_Google_Service_Prediction_PredictionList
    */
   public function listTrainedmodels($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Prediction_PredictionList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Prediction_PredictionList");
   }
 
   /**
@@ -323,15 +323,15 @@ class Google_Service_Prediction_Trainedmodels_Resource extends Google_Service_Re
    *
    * @param string $project The project associated with the model.
    * @param string $id The unique name for the predictive model.
-   * @param Google_Input $postBody
+   * @param Appointments_Google_Input $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Prediction_Output
+   * @return Appointments_Google_Service_Prediction_Output
    */
-  public function predict($project, $id, Google_Service_Prediction_Input $postBody, $optParams = array())
+  public function predict($project, $id, Appointments_Google_Service_Prediction_Input $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('predict', array($params), "Google_Service_Prediction_Output");
+    return $this->call('predict', array($params), "Appointments_Google_Service_Prediction_Output");
   }
 
   /**
@@ -339,37 +339,37 @@ class Google_Service_Prediction_Trainedmodels_Resource extends Google_Service_Re
    *
    * @param string $project The project associated with the model.
    * @param string $id The unique name for the predictive model.
-   * @param Google_Update $postBody
+   * @param Appointments_Google_Update $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Prediction_Insert2
+   * @return Appointments_Google_Service_Prediction_Insert2
    */
-  public function update($project, $id, Google_Service_Prediction_Update $postBody, $optParams = array())
+  public function update($project, $id, Appointments_Google_Service_Prediction_Update $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Prediction_Insert2");
+    return $this->call('update', array($params), "Appointments_Google_Service_Prediction_Insert2");
   }
 }
 
 
 
 
-class Google_Service_Prediction_Analyze extends Google_Collection
+class Appointments_Google_Service_Prediction_Analyze extends Appointments_Google_Collection
 {
   protected $collection_key = 'errors';
   protected $internal_gapi_mappings = array(
   );
-  protected $dataDescriptionType = 'Google_Service_Prediction_AnalyzeDataDescription';
+  protected $dataDescriptionType = 'Appointments_Google_Service_Prediction_AnalyzeDataDescription';
   protected $dataDescriptionDataType = '';
   public $errors;
   public $id;
   public $kind;
-  protected $modelDescriptionType = 'Google_Service_Prediction_AnalyzeModelDescription';
+  protected $modelDescriptionType = 'Appointments_Google_Service_Prediction_AnalyzeModelDescription';
   protected $modelDescriptionDataType = '';
   public $selfLink;
 
 
-  public function setDataDescription(Google_Service_Prediction_AnalyzeDataDescription $dataDescription)
+  public function setDataDescription(Appointments_Google_Service_Prediction_AnalyzeDataDescription $dataDescription)
   {
     $this->dataDescription = $dataDescription;
   }
@@ -401,7 +401,7 @@ class Google_Service_Prediction_Analyze extends Google_Collection
   {
     return $this->kind;
   }
-  public function setModelDescription(Google_Service_Prediction_AnalyzeModelDescription $modelDescription)
+  public function setModelDescription(Appointments_Google_Service_Prediction_AnalyzeModelDescription $modelDescription)
   {
     $this->modelDescription = $modelDescription;
   }
@@ -419,14 +419,14 @@ class Google_Service_Prediction_Analyze extends Google_Collection
   }
 }
 
-class Google_Service_Prediction_AnalyzeDataDescription extends Google_Collection
+class Appointments_Google_Service_Prediction_AnalyzeDataDescription extends Appointments_Google_Collection
 {
   protected $collection_key = 'features';
   protected $internal_gapi_mappings = array(
   );
-  protected $featuresType = 'Google_Service_Prediction_AnalyzeDataDescriptionFeatures';
+  protected $featuresType = 'Appointments_Google_Service_Prediction_AnalyzeDataDescriptionFeatures';
   protected $featuresDataType = 'array';
-  protected $outputFeatureType = 'Google_Service_Prediction_AnalyzeDataDescriptionOutputFeature';
+  protected $outputFeatureType = 'Appointments_Google_Service_Prediction_AnalyzeDataDescriptionOutputFeature';
   protected $outputFeatureDataType = '';
 
 
@@ -438,7 +438,7 @@ class Google_Service_Prediction_AnalyzeDataDescription extends Google_Collection
   {
     return $this->features;
   }
-  public function setOutputFeature(Google_Service_Prediction_AnalyzeDataDescriptionOutputFeature $outputFeature)
+  public function setOutputFeature(Appointments_Google_Service_Prediction_AnalyzeDataDescriptionOutputFeature $outputFeature)
   {
     $this->outputFeature = $outputFeature;
   }
@@ -448,20 +448,20 @@ class Google_Service_Prediction_AnalyzeDataDescription extends Google_Collection
   }
 }
 
-class Google_Service_Prediction_AnalyzeDataDescriptionFeatures extends Google_Model
+class Appointments_Google_Service_Prediction_AnalyzeDataDescriptionFeatures extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $categoricalType = 'Google_Service_Prediction_AnalyzeDataDescriptionFeaturesCategorical';
+  protected $categoricalType = 'Appointments_Google_Service_Prediction_AnalyzeDataDescriptionFeaturesCategorical';
   protected $categoricalDataType = '';
   public $index;
-  protected $numericType = 'Google_Service_Prediction_AnalyzeDataDescriptionFeaturesNumeric';
+  protected $numericType = 'Appointments_Google_Service_Prediction_AnalyzeDataDescriptionFeaturesNumeric';
   protected $numericDataType = '';
-  protected $textType = 'Google_Service_Prediction_AnalyzeDataDescriptionFeaturesText';
+  protected $textType = 'Appointments_Google_Service_Prediction_AnalyzeDataDescriptionFeaturesText';
   protected $textDataType = '';
 
 
-  public function setCategorical(Google_Service_Prediction_AnalyzeDataDescriptionFeaturesCategorical $categorical)
+  public function setCategorical(Appointments_Google_Service_Prediction_AnalyzeDataDescriptionFeaturesCategorical $categorical)
   {
     $this->categorical = $categorical;
   }
@@ -477,7 +477,7 @@ class Google_Service_Prediction_AnalyzeDataDescriptionFeatures extends Google_Mo
   {
     return $this->index;
   }
-  public function setNumeric(Google_Service_Prediction_AnalyzeDataDescriptionFeaturesNumeric $numeric)
+  public function setNumeric(Appointments_Google_Service_Prediction_AnalyzeDataDescriptionFeaturesNumeric $numeric)
   {
     $this->numeric = $numeric;
   }
@@ -485,7 +485,7 @@ class Google_Service_Prediction_AnalyzeDataDescriptionFeatures extends Google_Mo
   {
     return $this->numeric;
   }
-  public function setText(Google_Service_Prediction_AnalyzeDataDescriptionFeaturesText $text)
+  public function setText(Appointments_Google_Service_Prediction_AnalyzeDataDescriptionFeaturesText $text)
   {
     $this->text = $text;
   }
@@ -495,13 +495,13 @@ class Google_Service_Prediction_AnalyzeDataDescriptionFeatures extends Google_Mo
   }
 }
 
-class Google_Service_Prediction_AnalyzeDataDescriptionFeaturesCategorical extends Google_Collection
+class Appointments_Google_Service_Prediction_AnalyzeDataDescriptionFeaturesCategorical extends Appointments_Google_Collection
 {
   protected $collection_key = 'values';
   protected $internal_gapi_mappings = array(
   );
   public $count;
-  protected $valuesType = 'Google_Service_Prediction_AnalyzeDataDescriptionFeaturesCategoricalValues';
+  protected $valuesType = 'Appointments_Google_Service_Prediction_AnalyzeDataDescriptionFeaturesCategoricalValues';
   protected $valuesDataType = 'array';
 
 
@@ -523,7 +523,7 @@ class Google_Service_Prediction_AnalyzeDataDescriptionFeaturesCategorical extend
   }
 }
 
-class Google_Service_Prediction_AnalyzeDataDescriptionFeaturesCategoricalValues extends Google_Model
+class Appointments_Google_Service_Prediction_AnalyzeDataDescriptionFeaturesCategoricalValues extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -549,7 +549,7 @@ class Google_Service_Prediction_AnalyzeDataDescriptionFeaturesCategoricalValues 
   }
 }
 
-class Google_Service_Prediction_AnalyzeDataDescriptionFeaturesNumeric extends Google_Model
+class Appointments_Google_Service_Prediction_AnalyzeDataDescriptionFeaturesNumeric extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -584,7 +584,7 @@ class Google_Service_Prediction_AnalyzeDataDescriptionFeaturesNumeric extends Go
   }
 }
 
-class Google_Service_Prediction_AnalyzeDataDescriptionFeaturesText extends Google_Model
+class Appointments_Google_Service_Prediction_AnalyzeDataDescriptionFeaturesText extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -601,18 +601,18 @@ class Google_Service_Prediction_AnalyzeDataDescriptionFeaturesText extends Googl
   }
 }
 
-class Google_Service_Prediction_AnalyzeDataDescriptionOutputFeature extends Google_Collection
+class Appointments_Google_Service_Prediction_AnalyzeDataDescriptionOutputFeature extends Appointments_Google_Collection
 {
   protected $collection_key = 'text';
   protected $internal_gapi_mappings = array(
   );
-  protected $numericType = 'Google_Service_Prediction_AnalyzeDataDescriptionOutputFeatureNumeric';
+  protected $numericType = 'Appointments_Google_Service_Prediction_AnalyzeDataDescriptionOutputFeatureNumeric';
   protected $numericDataType = '';
-  protected $textType = 'Google_Service_Prediction_AnalyzeDataDescriptionOutputFeatureText';
+  protected $textType = 'Appointments_Google_Service_Prediction_AnalyzeDataDescriptionOutputFeatureText';
   protected $textDataType = 'array';
 
 
-  public function setNumeric(Google_Service_Prediction_AnalyzeDataDescriptionOutputFeatureNumeric $numeric)
+  public function setNumeric(Appointments_Google_Service_Prediction_AnalyzeDataDescriptionOutputFeatureNumeric $numeric)
   {
     $this->numeric = $numeric;
   }
@@ -630,7 +630,7 @@ class Google_Service_Prediction_AnalyzeDataDescriptionOutputFeature extends Goog
   }
 }
 
-class Google_Service_Prediction_AnalyzeDataDescriptionOutputFeatureNumeric extends Google_Model
+class Appointments_Google_Service_Prediction_AnalyzeDataDescriptionOutputFeatureNumeric extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -665,7 +665,7 @@ class Google_Service_Prediction_AnalyzeDataDescriptionOutputFeatureNumeric exten
   }
 }
 
-class Google_Service_Prediction_AnalyzeDataDescriptionOutputFeatureText extends Google_Model
+class Appointments_Google_Service_Prediction_AnalyzeDataDescriptionOutputFeatureText extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -691,13 +691,13 @@ class Google_Service_Prediction_AnalyzeDataDescriptionOutputFeatureText extends 
   }
 }
 
-class Google_Service_Prediction_AnalyzeModelDescription extends Google_Model
+class Appointments_Google_Service_Prediction_AnalyzeModelDescription extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $confusionMatrix;
   public $confusionMatrixRowTotals;
-  protected $modelinfoType = 'Google_Service_Prediction_Insert2';
+  protected $modelinfoType = 'Appointments_Google_Service_Prediction_Insert2';
   protected $modelinfoDataType = '';
 
 
@@ -717,7 +717,7 @@ class Google_Service_Prediction_AnalyzeModelDescription extends Google_Model
   {
     return $this->confusionMatrixRowTotals;
   }
-  public function setModelinfo(Google_Service_Prediction_Insert2 $modelinfo)
+  public function setModelinfo(Appointments_Google_Service_Prediction_Insert2 $modelinfo)
   {
     $this->modelinfo = $modelinfo;
   }
@@ -727,15 +727,15 @@ class Google_Service_Prediction_AnalyzeModelDescription extends Google_Model
   }
 }
 
-class Google_Service_Prediction_Input extends Google_Model
+class Appointments_Google_Service_Prediction_Input extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $inputType = 'Google_Service_Prediction_InputInput';
+  protected $inputType = 'Appointments_Google_Service_Prediction_InputInput';
   protected $inputDataType = '';
 
 
-  public function setInput(Google_Service_Prediction_InputInput $input)
+  public function setInput(Appointments_Google_Service_Prediction_InputInput $input)
   {
     $this->input = $input;
   }
@@ -745,7 +745,7 @@ class Google_Service_Prediction_Input extends Google_Model
   }
 }
 
-class Google_Service_Prediction_InputInput extends Google_Collection
+class Appointments_Google_Service_Prediction_InputInput extends Appointments_Google_Collection
 {
   protected $collection_key = 'csvInstance';
   protected $internal_gapi_mappings = array(
@@ -763,7 +763,7 @@ class Google_Service_Prediction_InputInput extends Google_Collection
   }
 }
 
-class Google_Service_Prediction_Insert extends Google_Collection
+class Appointments_Google_Service_Prediction_Insert extends Appointments_Google_Collection
 {
   protected $collection_key = 'utility';
   protected $internal_gapi_mappings = array(
@@ -774,7 +774,7 @@ class Google_Service_Prediction_Insert extends Google_Collection
   public $storageDataLocation;
   public $storagePMMLLocation;
   public $storagePMMLModelLocation;
-  protected $trainingInstancesType = 'Google_Service_Prediction_InsertTrainingInstances';
+  protected $trainingInstancesType = 'Appointments_Google_Service_Prediction_InsertTrainingInstances';
   protected $trainingInstancesDataType = 'array';
   public $utility;
 
@@ -845,14 +845,14 @@ class Google_Service_Prediction_Insert extends Google_Collection
   }
 }
 
-class Google_Service_Prediction_Insert2 extends Google_Model
+class Appointments_Google_Service_Prediction_Insert2 extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $created;
   public $id;
   public $kind;
-  protected $modelInfoType = 'Google_Service_Prediction_Insert2ModelInfo';
+  protected $modelInfoType = 'Appointments_Google_Service_Prediction_Insert2ModelInfo';
   protected $modelInfoDataType = '';
   public $modelType;
   public $selfLink;
@@ -887,7 +887,7 @@ class Google_Service_Prediction_Insert2 extends Google_Model
   {
     return $this->kind;
   }
-  public function setModelInfo(Google_Service_Prediction_Insert2ModelInfo $modelInfo)
+  public function setModelInfo(Appointments_Google_Service_Prediction_Insert2ModelInfo $modelInfo)
   {
     $this->modelInfo = $modelInfo;
   }
@@ -953,7 +953,7 @@ class Google_Service_Prediction_Insert2 extends Google_Model
   }
 }
 
-class Google_Service_Prediction_Insert2ModelInfo extends Google_Model
+class Appointments_Google_Service_Prediction_Insert2ModelInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1015,7 +1015,7 @@ class Google_Service_Prediction_Insert2ModelInfo extends Google_Model
   }
 }
 
-class Google_Service_Prediction_InsertTrainingInstances extends Google_Collection
+class Appointments_Google_Service_Prediction_InsertTrainingInstances extends Appointments_Google_Collection
 {
   protected $collection_key = 'csvInstance';
   protected $internal_gapi_mappings = array(
@@ -1042,7 +1042,7 @@ class Google_Service_Prediction_InsertTrainingInstances extends Google_Collectio
   }
 }
 
-class Google_Service_Prediction_Output extends Google_Collection
+class Appointments_Google_Service_Prediction_Output extends Appointments_Google_Collection
 {
   protected $collection_key = 'outputMulti';
   protected $internal_gapi_mappings = array(
@@ -1050,7 +1050,7 @@ class Google_Service_Prediction_Output extends Google_Collection
   public $id;
   public $kind;
   public $outputLabel;
-  protected $outputMultiType = 'Google_Service_Prediction_OutputOutputMulti';
+  protected $outputMultiType = 'Appointments_Google_Service_Prediction_OutputOutputMulti';
   protected $outputMultiDataType = 'array';
   public $outputValue;
   public $selfLink;
@@ -1106,7 +1106,7 @@ class Google_Service_Prediction_Output extends Google_Collection
   }
 }
 
-class Google_Service_Prediction_OutputOutputMulti extends Google_Model
+class Appointments_Google_Service_Prediction_OutputOutputMulti extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1132,12 +1132,12 @@ class Google_Service_Prediction_OutputOutputMulti extends Google_Model
   }
 }
 
-class Google_Service_Prediction_PredictionList extends Google_Collection
+class Appointments_Google_Service_Prediction_PredictionList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_Prediction_Insert2';
+  protected $itemsType = 'Appointments_Google_Service_Prediction_Insert2';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -1178,7 +1178,7 @@ class Google_Service_Prediction_PredictionList extends Google_Collection
   }
 }
 
-class Google_Service_Prediction_Update extends Google_Collection
+class Appointments_Google_Service_Prediction_Update extends Appointments_Google_Collection
 {
   protected $collection_key = 'csvInstance';
   protected $internal_gapi_mappings = array(

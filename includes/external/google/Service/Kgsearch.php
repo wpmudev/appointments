@@ -27,7 +27,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Kgsearch extends Google_Service
+class Appointments_Google_Service_Kgsearch extends Appointments_Google_Service
 {
 
 
@@ -37,9 +37,9 @@ class Google_Service_Kgsearch extends Google_Service
   /**
    * Constructs the internal representation of the Kgsearch service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://kgsearch.googleapis.com/';
@@ -47,7 +47,7 @@ class Google_Service_Kgsearch extends Google_Service
     $this->version = 'v1';
     $this->serviceName = 'kgsearch';
 
-    $this->entities = new Google_Service_Kgsearch_Entities_Resource(
+    $this->entities = new Appointments_Google_Service_Kgsearch_Entities_Resource(
         $this,
         $this->serviceName,
         'entities',
@@ -101,11 +101,11 @@ class Google_Service_Kgsearch extends Google_Service
  * The "entities" collection of methods.
  * Typical usage is:
  *  <code>
- *   $kgsearchService = new Google_Service_Kgsearch(...);
+ *   $kgsearchService = new Appointments_Google_Service_Kgsearch(...);
  *   $entities = $kgsearchService->entities;
  *  </code>
  */
-class Google_Service_Kgsearch_Entities_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Kgsearch_Entities_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -126,20 +126,20 @@ class Google_Service_Kgsearch_Entities_Resource extends Google_Service_Resource
    * @opt_param bool prefix Enables prefix match against names and aliases of
    * entities
    * @opt_param int limit Limits the number of entities to be returned.
-   * @return Google_Service_Kgsearch_SearchResponse
+   * @return Appointments_Google_Service_Kgsearch_SearchResponse
    */
   public function search($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('search', array($params), "Google_Service_Kgsearch_SearchResponse");
+    return $this->call('search', array($params), "Appointments_Google_Service_Kgsearch_SearchResponse");
   }
 }
 
 
 
 
-class Google_Service_Kgsearch_SearchResponse extends Google_Collection
+class Appointments_Google_Service_Kgsearch_SearchResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'itemListElement';
   protected $internal_gapi_mappings = array(

@@ -27,7 +27,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_ServiceRegistry extends Google_Service
+class Appointments_Google_Service_ServiceRegistry extends Appointments_Google_Service
 {
   /** View and manage your data across Google Cloud Platform services. */
   const CLOUD_PLATFORM =
@@ -49,9 +49,9 @@ class Google_Service_ServiceRegistry extends Google_Service
   /**
    * Constructs the internal representation of the ServiceRegistry service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -59,7 +59,7 @@ class Google_Service_ServiceRegistry extends Google_Service
     $this->version = 'alpha';
     $this->serviceName = 'serviceregistry';
 
-    $this->endpoints = new Google_Service_ServiceRegistry_Endpoints_Resource(
+    $this->endpoints = new Appointments_Google_Service_ServiceRegistry_Endpoints_Resource(
         $this,
         $this->serviceName,
         'endpoints',
@@ -165,7 +165,7 @@ class Google_Service_ServiceRegistry extends Google_Service
           )
         )
     );
-    $this->operations = new Google_Service_ServiceRegistry_Operations_Resource(
+    $this->operations = new Appointments_Google_Service_ServiceRegistry_Operations_Resource(
         $this,
         $this->serviceName,
         'operations',
@@ -224,11 +224,11 @@ class Google_Service_ServiceRegistry extends Google_Service
  * The "endpoints" collection of methods.
  * Typical usage is:
  *  <code>
- *   $serviceregistryService = new Google_Service_ServiceRegistry(...);
+ *   $serviceregistryService = new Appointments_Google_Service_ServiceRegistry(...);
  *   $endpoints = $serviceregistryService->endpoints;
  *  </code>
  */
-class Google_Service_ServiceRegistry_Endpoints_Resource extends Google_Service_Resource
+class Appointments_Google_Service_ServiceRegistry_Endpoints_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -237,13 +237,13 @@ class Google_Service_ServiceRegistry_Endpoints_Resource extends Google_Service_R
    * @param string $project The project ID for this request.
    * @param string $endpoint The name of the endpoint for this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_ServiceRegistry_Operation
+   * @return Appointments_Google_Service_ServiceRegistry_Operation
    */
   public function delete($project, $endpoint, $optParams = array())
   {
     $params = array('project' => $project, 'endpoint' => $endpoint);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_ServiceRegistry_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_ServiceRegistry_Operation");
   }
 
   /**
@@ -252,28 +252,28 @@ class Google_Service_ServiceRegistry_Endpoints_Resource extends Google_Service_R
    * @param string $project The project ID for this request.
    * @param string $endpoint The name of the endpoint for this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_ServiceRegistry_Endpoint
+   * @return Appointments_Google_Service_ServiceRegistry_Endpoint
    */
   public function get($project, $endpoint, $optParams = array())
   {
     $params = array('project' => $project, 'endpoint' => $endpoint);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_ServiceRegistry_Endpoint");
+    return $this->call('get', array($params), "Appointments_Google_Service_ServiceRegistry_Endpoint");
   }
 
   /**
    * Creates an endpoint. (endpoints.insert)
    *
    * @param string $project The project ID for this request.
-   * @param Google_Endpoint $postBody
+   * @param Appointments_Google_Endpoint $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_ServiceRegistry_Operation
+   * @return Appointments_Google_Service_ServiceRegistry_Operation
    */
-  public function insert($project, Google_Service_ServiceRegistry_Endpoint $postBody, $optParams = array())
+  public function insert($project, Appointments_Google_Service_ServiceRegistry_Endpoint $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_ServiceRegistry_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_ServiceRegistry_Operation");
   }
 
   /**
@@ -324,13 +324,13 @@ class Google_Service_ServiceRegistry_Endpoints_Resource extends Google_Service_R
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_ServiceRegistry_EndpointsListResponse
+   * @return Appointments_Google_Service_ServiceRegistry_EndpointsListResponse
    */
   public function listEndpoints($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_ServiceRegistry_EndpointsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_ServiceRegistry_EndpointsListResponse");
   }
 
   /**
@@ -338,15 +338,15 @@ class Google_Service_ServiceRegistry_Endpoints_Resource extends Google_Service_R
    *
    * @param string $project The project ID for this request.
    * @param string $endpoint The name of the endpoint for this request.
-   * @param Google_Endpoint $postBody
+   * @param Appointments_Google_Endpoint $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_ServiceRegistry_Operation
+   * @return Appointments_Google_Service_ServiceRegistry_Operation
    */
-  public function patch($project, $endpoint, Google_Service_ServiceRegistry_Endpoint $postBody, $optParams = array())
+  public function patch($project, $endpoint, Appointments_Google_Service_ServiceRegistry_Endpoint $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'endpoint' => $endpoint, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_ServiceRegistry_Operation");
+    return $this->call('patch', array($params), "Appointments_Google_Service_ServiceRegistry_Operation");
   }
 
   /**
@@ -354,15 +354,15 @@ class Google_Service_ServiceRegistry_Endpoints_Resource extends Google_Service_R
    *
    * @param string $project The project ID for this request.
    * @param string $endpoint The name of the endpoint for this request.
-   * @param Google_Endpoint $postBody
+   * @param Appointments_Google_Endpoint $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_ServiceRegistry_Operation
+   * @return Appointments_Google_Service_ServiceRegistry_Operation
    */
-  public function update($project, $endpoint, Google_Service_ServiceRegistry_Endpoint $postBody, $optParams = array())
+  public function update($project, $endpoint, Appointments_Google_Service_ServiceRegistry_Endpoint $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'endpoint' => $endpoint, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_ServiceRegistry_Operation");
+    return $this->call('update', array($params), "Appointments_Google_Service_ServiceRegistry_Operation");
   }
 }
 
@@ -370,11 +370,11 @@ class Google_Service_ServiceRegistry_Endpoints_Resource extends Google_Service_R
  * The "operations" collection of methods.
  * Typical usage is:
  *  <code>
- *   $serviceregistryService = new Google_Service_ServiceRegistry(...);
+ *   $serviceregistryService = new Appointments_Google_Service_ServiceRegistry(...);
  *   $operations = $serviceregistryService->operations;
  *  </code>
  */
-class Google_Service_ServiceRegistry_Operations_Resource extends Google_Service_Resource
+class Appointments_Google_Service_ServiceRegistry_Operations_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -383,13 +383,13 @@ class Google_Service_ServiceRegistry_Operations_Resource extends Google_Service_
    * @param string $project The project ID for this request.
    * @param string $operation The name of the operation for this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_ServiceRegistry_Operation
+   * @return Appointments_Google_Service_ServiceRegistry_Operation
    */
   public function get($project, $operation, $optParams = array())
   {
     $params = array('project' => $project, 'operation' => $operation);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_ServiceRegistry_Operation");
+    return $this->call('get', array($params), "Appointments_Google_Service_ServiceRegistry_Operation");
   }
 
   /**
@@ -440,20 +440,20 @@ class Google_Service_ServiceRegistry_Operations_Resource extends Google_Service_
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_ServiceRegistry_OperationsListResponse
+   * @return Appointments_Google_Service_ServiceRegistry_OperationsListResponse
    */
   public function listOperations($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_ServiceRegistry_OperationsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_ServiceRegistry_OperationsListResponse");
   }
 }
 
 
 
 
-class Google_Service_ServiceRegistry_Endpoint extends Google_Model
+class Appointments_Google_Service_ServiceRegistry_Endpoint extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -466,7 +466,7 @@ class Google_Service_ServiceRegistry_Endpoint extends Google_Model
   public $port;
   public $selfLink;
   public $state;
-  protected $visibilityType = 'Google_Service_ServiceRegistry_EndpointEndpointVisibility';
+  protected $visibilityType = 'Appointments_Google_Service_ServiceRegistry_EndpointEndpointVisibility';
   protected $visibilityDataType = '';
 
 
@@ -542,7 +542,7 @@ class Google_Service_ServiceRegistry_Endpoint extends Google_Model
   {
     return $this->state;
   }
-  public function setVisibility(Google_Service_ServiceRegistry_EndpointEndpointVisibility $visibility)
+  public function setVisibility(Appointments_Google_Service_ServiceRegistry_EndpointEndpointVisibility $visibility)
   {
     $this->visibility = $visibility;
   }
@@ -552,7 +552,7 @@ class Google_Service_ServiceRegistry_Endpoint extends Google_Model
   }
 }
 
-class Google_Service_ServiceRegistry_EndpointEndpointVisibility extends Google_Collection
+class Appointments_Google_Service_ServiceRegistry_EndpointEndpointVisibility extends Appointments_Google_Collection
 {
   protected $collection_key = 'projects';
   protected $internal_gapi_mappings = array(
@@ -579,12 +579,12 @@ class Google_Service_ServiceRegistry_EndpointEndpointVisibility extends Google_C
   }
 }
 
-class Google_Service_ServiceRegistry_EndpointsListResponse extends Google_Collection
+class Appointments_Google_Service_ServiceRegistry_EndpointsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'endpoints';
   protected $internal_gapi_mappings = array(
   );
-  protected $endpointsType = 'Google_Service_ServiceRegistry_Endpoint';
+  protected $endpointsType = 'Appointments_Google_Service_ServiceRegistry_Endpoint';
   protected $endpointsDataType = 'array';
   public $nextPageToken;
 
@@ -607,7 +607,7 @@ class Google_Service_ServiceRegistry_EndpointsListResponse extends Google_Collec
   }
 }
 
-class Google_Service_ServiceRegistry_Operation extends Google_Collection
+class Appointments_Google_Service_ServiceRegistry_Operation extends Appointments_Google_Collection
 {
   protected $collection_key = 'warnings';
   protected $internal_gapi_mappings = array(
@@ -616,7 +616,7 @@ class Google_Service_ServiceRegistry_Operation extends Google_Collection
   public $creationTimestamp;
   public $description;
   public $endTime;
-  protected $errorType = 'Google_Service_ServiceRegistry_OperationError';
+  protected $errorType = 'Appointments_Google_Service_ServiceRegistry_OperationError';
   protected $errorDataType = '';
   public $httpErrorMessage;
   public $httpErrorStatusCode;
@@ -634,7 +634,7 @@ class Google_Service_ServiceRegistry_Operation extends Google_Collection
   public $targetId;
   public $targetLink;
   public $user;
-  protected $warningsType = 'Google_Service_ServiceRegistry_OperationWarnings';
+  protected $warningsType = 'Appointments_Google_Service_ServiceRegistry_OperationWarnings';
   protected $warningsDataType = 'array';
   public $zone;
 
@@ -671,7 +671,7 @@ class Google_Service_ServiceRegistry_Operation extends Google_Collection
   {
     return $this->endTime;
   }
-  public function setError(Google_Service_ServiceRegistry_OperationError $error)
+  public function setError(Appointments_Google_Service_ServiceRegistry_OperationError $error)
   {
     $this->error = $error;
   }
@@ -825,12 +825,12 @@ class Google_Service_ServiceRegistry_Operation extends Google_Collection
   }
 }
 
-class Google_Service_ServiceRegistry_OperationError extends Google_Collection
+class Appointments_Google_Service_ServiceRegistry_OperationError extends Appointments_Google_Collection
 {
   protected $collection_key = 'errors';
   protected $internal_gapi_mappings = array(
   );
-  protected $errorsType = 'Google_Service_ServiceRegistry_OperationErrorErrors';
+  protected $errorsType = 'Appointments_Google_Service_ServiceRegistry_OperationErrorErrors';
   protected $errorsDataType = 'array';
 
 
@@ -844,7 +844,7 @@ class Google_Service_ServiceRegistry_OperationError extends Google_Collection
   }
 }
 
-class Google_Service_ServiceRegistry_OperationErrorErrors extends Google_Model
+class Appointments_Google_Service_ServiceRegistry_OperationErrorErrors extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -879,13 +879,13 @@ class Google_Service_ServiceRegistry_OperationErrorErrors extends Google_Model
   }
 }
 
-class Google_Service_ServiceRegistry_OperationWarnings extends Google_Collection
+class Appointments_Google_Service_ServiceRegistry_OperationWarnings extends Appointments_Google_Collection
 {
   protected $collection_key = 'data';
   protected $internal_gapi_mappings = array(
   );
   public $code;
-  protected $dataType = 'Google_Service_ServiceRegistry_OperationWarningsData';
+  protected $dataType = 'Appointments_Google_Service_ServiceRegistry_OperationWarningsData';
   protected $dataDataType = 'array';
   public $message;
 
@@ -916,7 +916,7 @@ class Google_Service_ServiceRegistry_OperationWarnings extends Google_Collection
   }
 }
 
-class Google_Service_ServiceRegistry_OperationWarningsData extends Google_Model
+class Appointments_Google_Service_ServiceRegistry_OperationWarningsData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -942,13 +942,13 @@ class Google_Service_ServiceRegistry_OperationWarningsData extends Google_Model
   }
 }
 
-class Google_Service_ServiceRegistry_OperationsListResponse extends Google_Collection
+class Appointments_Google_Service_ServiceRegistry_OperationsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'operations';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $operationsType = 'Google_Service_ServiceRegistry_Operation';
+  protected $operationsType = 'Appointments_Google_Service_ServiceRegistry_Operation';
   protected $operationsDataType = 'array';
 
 
