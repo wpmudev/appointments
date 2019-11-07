@@ -27,7 +27,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Logging extends Google_Service
+class Appointments_Google_Service_Logging extends Appointments_Google_Service
 {
   /** View and manage your data across Google Cloud Platform services. */
   const CLOUD_PLATFORM =
@@ -55,9 +55,9 @@ class Google_Service_Logging extends Google_Service
   /**
    * Constructs the internal representation of the Logging service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://logging.googleapis.com/';
@@ -65,7 +65,7 @@ class Google_Service_Logging extends Google_Service
     $this->version = 'v2beta1';
     $this->serviceName = 'logging';
 
-    $this->entries = new Google_Service_Logging_Entries_Resource(
+    $this->entries = new Appointments_Google_Service_Logging_Entries_Resource(
         $this,
         $this->serviceName,
         'entries',
@@ -83,7 +83,7 @@ class Google_Service_Logging extends Google_Service
           )
         )
     );
-    $this->monitoredResourceDescriptors = new Google_Service_Logging_MonitoredResourceDescriptors_Resource(
+    $this->monitoredResourceDescriptors = new Appointments_Google_Service_Logging_MonitoredResourceDescriptors_Resource(
         $this,
         $this->serviceName,
         'monitoredResourceDescriptors',
@@ -106,7 +106,7 @@ class Google_Service_Logging extends Google_Service
           )
         )
     );
-    $this->projects_logs = new Google_Service_Logging_ProjectsLogs_Resource(
+    $this->projects_logs = new Appointments_Google_Service_Logging_ProjectsLogs_Resource(
         $this,
         $this->serviceName,
         'logs',
@@ -126,7 +126,7 @@ class Google_Service_Logging extends Google_Service
           )
         )
     );
-    $this->projects_metrics = new Google_Service_Logging_ProjectsMetrics_Resource(
+    $this->projects_metrics = new Appointments_Google_Service_Logging_ProjectsMetrics_Resource(
         $this,
         $this->serviceName,
         'metrics',
@@ -194,7 +194,7 @@ class Google_Service_Logging extends Google_Service
           )
         )
     );
-    $this->projects_sinks = new Google_Service_Logging_ProjectsSinks_Resource(
+    $this->projects_sinks = new Appointments_Google_Service_Logging_ProjectsSinks_Resource(
         $this,
         $this->serviceName,
         'sinks',
@@ -270,11 +270,11 @@ class Google_Service_Logging extends Google_Service
  * The "entries" collection of methods.
  * Typical usage is:
  *  <code>
- *   $loggingService = new Google_Service_Logging(...);
+ *   $loggingService = new Appointments_Google_Service_Logging(...);
  *   $entries = $loggingService->entries;
  *  </code>
  */
-class Google_Service_Logging_Entries_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Logging_Entries_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -282,30 +282,30 @@ class Google_Service_Logging_Entries_Resource extends Google_Service_Resource
    * Logging. For ways to export log entries, see [Exporting
    * Logs](/logging/docs/export). (entries.listEntries)
    *
-   * @param Google_ListLogEntriesRequest $postBody
+   * @param Appointments_Google_ListLogEntriesRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Logging_ListLogEntriesResponse
+   * @return Appointments_Google_Service_Logging_ListLogEntriesResponse
    */
-  public function listEntries(Google_Service_Logging_ListLogEntriesRequest $postBody, $optParams = array())
+  public function listEntries(Appointments_Google_Service_Logging_ListLogEntriesRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Logging_ListLogEntriesResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Logging_ListLogEntriesResponse");
   }
 
   /**
    * Writes log entries to Cloud Logging. All log entries in Cloud Logging are
    * written by this method. (entries.write)
    *
-   * @param Google_WriteLogEntriesRequest $postBody
+   * @param Appointments_Google_WriteLogEntriesRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Logging_WriteLogEntriesResponse
+   * @return Appointments_Google_Service_Logging_WriteLogEntriesResponse
    */
-  public function write(Google_Service_Logging_WriteLogEntriesRequest $postBody, $optParams = array())
+  public function write(Appointments_Google_Service_Logging_WriteLogEntriesRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('write', array($params), "Google_Service_Logging_WriteLogEntriesResponse");
+    return $this->call('write', array($params), "Appointments_Google_Service_Logging_WriteLogEntriesResponse");
   }
 }
 
@@ -313,11 +313,11 @@ class Google_Service_Logging_Entries_Resource extends Google_Service_Resource
  * The "monitoredResourceDescriptors" collection of methods.
  * Typical usage is:
  *  <code>
- *   $loggingService = new Google_Service_Logging(...);
+ *   $loggingService = new Appointments_Google_Service_Logging(...);
  *   $monitoredResourceDescriptors = $loggingService->monitoredResourceDescriptors;
  *  </code>
  */
-class Google_Service_Logging_MonitoredResourceDescriptors_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Logging_MonitoredResourceDescriptors_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -335,13 +335,13 @@ class Google_Service_Logging_MonitoredResourceDescriptors_Resource extends Googl
    * supplied, then the next page of results in the set are retrieved. The
    * `pageToken` parameter must be set with the value of the `nextPageToken`
    * result parameter from the previous request.
-   * @return Google_Service_Logging_ListMonitoredResourceDescriptorsResponse
+   * @return Appointments_Google_Service_Logging_ListMonitoredResourceDescriptorsResponse
    */
   public function listMonitoredResourceDescriptors($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Logging_ListMonitoredResourceDescriptorsResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Logging_ListMonitoredResourceDescriptorsResponse");
   }
 }
 
@@ -349,11 +349,11 @@ class Google_Service_Logging_MonitoredResourceDescriptors_Resource extends Googl
  * The "projects" collection of methods.
  * Typical usage is:
  *  <code>
- *   $loggingService = new Google_Service_Logging(...);
+ *   $loggingService = new Appointments_Google_Service_Logging(...);
  *   $projects = $loggingService->projects;
  *  </code>
  */
-class Google_Service_Logging_Projects_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Logging_Projects_Resource extends Appointments_Google_Service_Resource
 {
 }
 
@@ -361,11 +361,11 @@ class Google_Service_Logging_Projects_Resource extends Google_Service_Resource
  * The "logs" collection of methods.
  * Typical usage is:
  *  <code>
- *   $loggingService = new Google_Service_Logging(...);
+ *   $loggingService = new Appointments_Google_Service_Logging(...);
  *   $logs = $loggingService->logs;
  *  </code>
  */
-class Google_Service_Logging_ProjectsLogs_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Logging_ProjectsLogs_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -375,24 +375,24 @@ class Google_Service_Logging_ProjectsLogs_Resource extends Google_Service_Resour
    * @param string $logName Required. The resource name of the log to delete.
    * Example: `"projects/my-project/logs/syslog"`.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Logging_Empty
+   * @return Appointments_Google_Service_Logging_Empty
    */
   public function delete($logName, $optParams = array())
   {
     $params = array('logName' => $logName);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Logging_Empty");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Logging_Empty");
   }
 }
 /**
  * The "metrics" collection of methods.
  * Typical usage is:
  *  <code>
- *   $loggingService = new Google_Service_Logging(...);
+ *   $loggingService = new Appointments_Google_Service_Logging(...);
  *   $metrics = $loggingService->metrics;
  *  </code>
  */
-class Google_Service_Logging_ProjectsMetrics_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Logging_ProjectsMetrics_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -401,15 +401,15 @@ class Google_Service_Logging_ProjectsMetrics_Resource extends Google_Service_Res
    * @param string $projectName The resource name of the project in which to
    * create the metric. Example: `"projects/my-project-id"`. The new metric must
    * be provided in the request.
-   * @param Google_LogMetric $postBody
+   * @param Appointments_Google_LogMetric $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Logging_LogMetric
+   * @return Appointments_Google_Service_Logging_LogMetric
    */
-  public function create($projectName, Google_Service_Logging_LogMetric $postBody, $optParams = array())
+  public function create($projectName, Appointments_Google_Service_Logging_LogMetric $postBody, $optParams = array())
   {
     $params = array('projectName' => $projectName, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_Logging_LogMetric");
+    return $this->call('create', array($params), "Appointments_Google_Service_Logging_LogMetric");
   }
 
   /**
@@ -418,13 +418,13 @@ class Google_Service_Logging_ProjectsMetrics_Resource extends Google_Service_Res
    * @param string $metricName The resource name of the metric to delete. Example:
    * `"projects/my-project-id/metrics/my-metric-id"`.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Logging_Empty
+   * @return Appointments_Google_Service_Logging_Empty
    */
   public function delete($metricName, $optParams = array())
   {
     $params = array('metricName' => $metricName);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Logging_Empty");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Logging_Empty");
   }
 
   /**
@@ -433,13 +433,13 @@ class Google_Service_Logging_ProjectsMetrics_Resource extends Google_Service_Res
    * @param string $metricName The resource name of the desired metric. Example:
    * `"projects/my-project-id/metrics/my-metric-id"`.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Logging_LogMetric
+   * @return Appointments_Google_Service_Logging_LogMetric
    */
   public function get($metricName, $optParams = array())
   {
     $params = array('metricName' => $metricName);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Logging_LogMetric");
+    return $this->call('get', array($params), "Appointments_Google_Service_Logging_LogMetric");
   }
 
   /**
@@ -459,13 +459,13 @@ class Google_Service_Logging_ProjectsMetrics_Resource extends Google_Service_Res
    * `nextPageToken` result to determine if additional results are available,
    * which you can retrieve by passing the `nextPageToken` value in the
    * `pageToken` parameter to the next request.
-   * @return Google_Service_Logging_ListLogMetricsResponse
+   * @return Appointments_Google_Service_Logging_ListLogMetricsResponse
    */
   public function listProjectsMetrics($projectName, $optParams = array())
   {
     $params = array('projectName' => $projectName);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Logging_ListLogMetricsResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Logging_ListLogMetricsResponse");
   }
 
   /**
@@ -475,26 +475,26 @@ class Google_Service_Logging_ProjectsMetrics_Resource extends Google_Service_Res
    * `"projects/my-project-id/metrics/my-metric-id"`. The updated metric must be
    * provided in the request and have the same identifier that is specified in
    * `metricName`. If the metric does not exist, it is created.
-   * @param Google_LogMetric $postBody
+   * @param Appointments_Google_LogMetric $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Logging_LogMetric
+   * @return Appointments_Google_Service_Logging_LogMetric
    */
-  public function update($metricName, Google_Service_Logging_LogMetric $postBody, $optParams = array())
+  public function update($metricName, Appointments_Google_Service_Logging_LogMetric $postBody, $optParams = array())
   {
     $params = array('metricName' => $metricName, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Logging_LogMetric");
+    return $this->call('update', array($params), "Appointments_Google_Service_Logging_LogMetric");
   }
 }
 /**
  * The "sinks" collection of methods.
  * Typical usage is:
  *  <code>
- *   $loggingService = new Google_Service_Logging(...);
+ *   $loggingService = new Appointments_Google_Service_Logging(...);
  *   $sinks = $loggingService->sinks;
  *  </code>
  */
-class Google_Service_Logging_ProjectsSinks_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Logging_ProjectsSinks_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -503,15 +503,15 @@ class Google_Service_Logging_ProjectsSinks_Resource extends Google_Service_Resou
    * @param string $projectName The resource name of the project in which to
    * create the sink. Example: `"projects/my-project-id"`. The new sink must be
    * provided in the request.
-   * @param Google_LogSink $postBody
+   * @param Appointments_Google_LogSink $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Logging_LogSink
+   * @return Appointments_Google_Service_Logging_LogSink
    */
-  public function create($projectName, Google_Service_Logging_LogSink $postBody, $optParams = array())
+  public function create($projectName, Appointments_Google_Service_Logging_LogSink $postBody, $optParams = array())
   {
     $params = array('projectName' => $projectName, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_Logging_LogSink");
+    return $this->call('create', array($params), "Appointments_Google_Service_Logging_LogSink");
   }
 
   /**
@@ -520,13 +520,13 @@ class Google_Service_Logging_ProjectsSinks_Resource extends Google_Service_Resou
    * @param string $sinkName The resource name of the sink to delete. Example:
    * `"projects/my-project-id/sinks/my-sink-id"`.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Logging_Empty
+   * @return Appointments_Google_Service_Logging_Empty
    */
   public function delete($sinkName, $optParams = array())
   {
     $params = array('sinkName' => $sinkName);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Logging_Empty");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Logging_Empty");
   }
 
   /**
@@ -535,13 +535,13 @@ class Google_Service_Logging_ProjectsSinks_Resource extends Google_Service_Resou
    * @param string $sinkName The resource name of the sink to return. Example:
    * `"projects/my-project-id/sinks/my-sink-id"`.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Logging_LogSink
+   * @return Appointments_Google_Service_Logging_LogSink
    */
   public function get($sinkName, $optParams = array())
   {
     $params = array('sinkName' => $sinkName);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Logging_LogSink");
+    return $this->call('get', array($params), "Appointments_Google_Service_Logging_LogSink");
   }
 
   /**
@@ -562,13 +562,13 @@ class Google_Service_Logging_ProjectsSinks_Resource extends Google_Service_Resou
    * `nextPageToken` result to determine if additional results are available,
    * which you can retrieve by passing the `nextPageToken` value in the
    * `pageToken` parameter to the next request.
-   * @return Google_Service_Logging_ListSinksResponse
+   * @return Appointments_Google_Service_Logging_ListSinksResponse
    */
   public function listProjectsSinks($projectName, $optParams = array())
   {
     $params = array('projectName' => $projectName);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Logging_ListSinksResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Logging_ListSinksResponse");
   }
 
   /**
@@ -578,26 +578,26 @@ class Google_Service_Logging_ProjectsSinks_Resource extends Google_Service_Resou
    * `"projects/my-project-id/sinks/my-sink-id"`. The updated sink must be
    * provided in the request and have the same name that is specified in
    * `sinkName`. If the sink does not exist, it is created.
-   * @param Google_LogSink $postBody
+   * @param Appointments_Google_LogSink $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Logging_LogSink
+   * @return Appointments_Google_Service_Logging_LogSink
    */
-  public function update($sinkName, Google_Service_Logging_LogSink $postBody, $optParams = array())
+  public function update($sinkName, Appointments_Google_Service_Logging_LogSink $postBody, $optParams = array())
   {
     $params = array('sinkName' => $sinkName, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Logging_LogSink");
+    return $this->call('update', array($params), "Appointments_Google_Service_Logging_LogSink");
   }
 }
 
 
 
 
-class Google_Service_Logging_Empty extends Google_Model
+class Appointments_Google_Service_Logging_Empty extends Appointments_Google_Model
 {
 }
 
-class Google_Service_Logging_HttpRequest extends Google_Model
+class Appointments_Google_Service_Logging_HttpRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -695,7 +695,7 @@ class Google_Service_Logging_HttpRequest extends Google_Model
   }
 }
 
-class Google_Service_Logging_LabelDescriptor extends Google_Model
+class Appointments_Google_Service_Logging_LabelDescriptor extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -730,7 +730,7 @@ class Google_Service_Logging_LabelDescriptor extends Google_Model
   }
 }
 
-class Google_Service_Logging_ListLogEntriesRequest extends Google_Collection
+class Appointments_Google_Service_Logging_ListLogEntriesRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'projectIds';
   protected $internal_gapi_mappings = array(
@@ -784,12 +784,12 @@ class Google_Service_Logging_ListLogEntriesRequest extends Google_Collection
   }
 }
 
-class Google_Service_Logging_ListLogEntriesResponse extends Google_Collection
+class Appointments_Google_Service_Logging_ListLogEntriesResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'entries';
   protected $internal_gapi_mappings = array(
   );
-  protected $entriesType = 'Google_Service_Logging_LogEntry';
+  protected $entriesType = 'Appointments_Google_Service_Logging_LogEntry';
   protected $entriesDataType = 'array';
   public $nextPageToken;
 
@@ -812,12 +812,12 @@ class Google_Service_Logging_ListLogEntriesResponse extends Google_Collection
   }
 }
 
-class Google_Service_Logging_ListLogMetricsResponse extends Google_Collection
+class Appointments_Google_Service_Logging_ListLogMetricsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'metrics';
   protected $internal_gapi_mappings = array(
   );
-  protected $metricsType = 'Google_Service_Logging_LogMetric';
+  protected $metricsType = 'Appointments_Google_Service_Logging_LogMetric';
   protected $metricsDataType = 'array';
   public $nextPageToken;
 
@@ -840,13 +840,13 @@ class Google_Service_Logging_ListLogMetricsResponse extends Google_Collection
   }
 }
 
-class Google_Service_Logging_ListMonitoredResourceDescriptorsResponse extends Google_Collection
+class Appointments_Google_Service_Logging_ListMonitoredResourceDescriptorsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'resourceDescriptors';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $resourceDescriptorsType = 'Google_Service_Logging_MonitoredResourceDescriptor';
+  protected $resourceDescriptorsType = 'Appointments_Google_Service_Logging_MonitoredResourceDescriptor';
   protected $resourceDescriptorsDataType = 'array';
 
 
@@ -868,13 +868,13 @@ class Google_Service_Logging_ListMonitoredResourceDescriptorsResponse extends Go
   }
 }
 
-class Google_Service_Logging_ListSinksResponse extends Google_Collection
+class Appointments_Google_Service_Logging_ListSinksResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'sinks';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $sinksType = 'Google_Service_Logging_LogSink';
+  protected $sinksType = 'Appointments_Google_Service_Logging_LogSink';
   protected $sinksDataType = 'array';
 
 
@@ -896,27 +896,27 @@ class Google_Service_Logging_ListSinksResponse extends Google_Collection
   }
 }
 
-class Google_Service_Logging_LogEntry extends Google_Model
+class Appointments_Google_Service_Logging_LogEntry extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $httpRequestType = 'Google_Service_Logging_HttpRequest';
+  protected $httpRequestType = 'Appointments_Google_Service_Logging_HttpRequest';
   protected $httpRequestDataType = '';
   public $insertId;
   public $jsonPayload;
   public $labels;
   public $logName;
-  protected $operationType = 'Google_Service_Logging_LogEntryOperation';
+  protected $operationType = 'Appointments_Google_Service_Logging_LogEntryOperation';
   protected $operationDataType = '';
   public $protoPayload;
-  protected $resourceType = 'Google_Service_Logging_MonitoredResource';
+  protected $resourceType = 'Appointments_Google_Service_Logging_MonitoredResource';
   protected $resourceDataType = '';
   public $severity;
   public $textPayload;
   public $timestamp;
 
 
-  public function setHttpRequest(Google_Service_Logging_HttpRequest $httpRequest)
+  public function setHttpRequest(Appointments_Google_Service_Logging_HttpRequest $httpRequest)
   {
     $this->httpRequest = $httpRequest;
   }
@@ -956,7 +956,7 @@ class Google_Service_Logging_LogEntry extends Google_Model
   {
     return $this->logName;
   }
-  public function setOperation(Google_Service_Logging_LogEntryOperation $operation)
+  public function setOperation(Appointments_Google_Service_Logging_LogEntryOperation $operation)
   {
     $this->operation = $operation;
   }
@@ -972,7 +972,7 @@ class Google_Service_Logging_LogEntry extends Google_Model
   {
     return $this->protoPayload;
   }
-  public function setResource(Google_Service_Logging_MonitoredResource $resource)
+  public function setResource(Appointments_Google_Service_Logging_MonitoredResource $resource)
   {
     $this->resource = $resource;
   }
@@ -1006,7 +1006,7 @@ class Google_Service_Logging_LogEntry extends Google_Model
   }
 }
 
-class Google_Service_Logging_LogEntryOperation extends Google_Model
+class Appointments_Google_Service_Logging_LogEntryOperation extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1050,13 +1050,13 @@ class Google_Service_Logging_LogEntryOperation extends Google_Model
   }
 }
 
-class Google_Service_Logging_LogLine extends Google_Model
+class Appointments_Google_Service_Logging_LogLine extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $logMessage;
   public $severity;
-  protected $sourceLocationType = 'Google_Service_Logging_SourceLocation';
+  protected $sourceLocationType = 'Appointments_Google_Service_Logging_SourceLocation';
   protected $sourceLocationDataType = '';
   public $time;
 
@@ -1077,7 +1077,7 @@ class Google_Service_Logging_LogLine extends Google_Model
   {
     return $this->severity;
   }
-  public function setSourceLocation(Google_Service_Logging_SourceLocation $sourceLocation)
+  public function setSourceLocation(Appointments_Google_Service_Logging_SourceLocation $sourceLocation)
   {
     $this->sourceLocation = $sourceLocation;
   }
@@ -1095,7 +1095,7 @@ class Google_Service_Logging_LogLine extends Google_Model
   }
 }
 
-class Google_Service_Logging_LogMetric extends Google_Model
+class Appointments_Google_Service_Logging_LogMetric extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1130,7 +1130,7 @@ class Google_Service_Logging_LogMetric extends Google_Model
   }
 }
 
-class Google_Service_Logging_LogSink extends Google_Model
+class Appointments_Google_Service_Logging_LogSink extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1174,7 +1174,7 @@ class Google_Service_Logging_LogSink extends Google_Model
   }
 }
 
-class Google_Service_Logging_MonitoredResource extends Google_Model
+class Appointments_Google_Service_Logging_MonitoredResource extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1200,14 +1200,14 @@ class Google_Service_Logging_MonitoredResource extends Google_Model
   }
 }
 
-class Google_Service_Logging_MonitoredResourceDescriptor extends Google_Collection
+class Appointments_Google_Service_Logging_MonitoredResourceDescriptor extends Appointments_Google_Collection
 {
   protected $collection_key = 'labels';
   protected $internal_gapi_mappings = array(
   );
   public $description;
   public $displayName;
-  protected $labelsType = 'Google_Service_Logging_LabelDescriptor';
+  protected $labelsType = 'Appointments_Google_Service_Logging_LabelDescriptor';
   protected $labelsDataType = 'array';
   public $type;
 
@@ -1246,7 +1246,7 @@ class Google_Service_Logging_MonitoredResourceDescriptor extends Google_Collecti
   }
 }
 
-class Google_Service_Logging_RequestLog extends Google_Collection
+class Appointments_Google_Service_Logging_RequestLog extends Appointments_Google_Collection
 {
   protected $collection_key = 'sourceReference';
   protected $internal_gapi_mappings = array(
@@ -1262,7 +1262,7 @@ class Google_Service_Logging_RequestLog extends Google_Collection
   public $instanceIndex;
   public $ip;
   public $latency;
-  protected $lineType = 'Google_Service_Logging_LogLine';
+  protected $lineType = 'Appointments_Google_Service_Logging_LogLine';
   protected $lineDataType = 'array';
   public $megaCycles;
   public $method;
@@ -1273,7 +1273,7 @@ class Google_Service_Logging_RequestLog extends Google_Collection
   public $requestId;
   public $resource;
   public $responseSize;
-  protected $sourceReferenceType = 'Google_Service_Logging_SourceReference';
+  protected $sourceReferenceType = 'Appointments_Google_Service_Logging_SourceReference';
   protected $sourceReferenceDataType = 'array';
   public $startTime;
   public $status;
@@ -1536,7 +1536,7 @@ class Google_Service_Logging_RequestLog extends Google_Collection
   }
 }
 
-class Google_Service_Logging_SourceLocation extends Google_Model
+class Appointments_Google_Service_Logging_SourceLocation extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1571,7 +1571,7 @@ class Google_Service_Logging_SourceLocation extends Google_Model
   }
 }
 
-class Google_Service_Logging_SourceReference extends Google_Model
+class Appointments_Google_Service_Logging_SourceReference extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1597,16 +1597,16 @@ class Google_Service_Logging_SourceReference extends Google_Model
   }
 }
 
-class Google_Service_Logging_WriteLogEntriesRequest extends Google_Collection
+class Appointments_Google_Service_Logging_WriteLogEntriesRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'entries';
   protected $internal_gapi_mappings = array(
   );
-  protected $entriesType = 'Google_Service_Logging_LogEntry';
+  protected $entriesType = 'Appointments_Google_Service_Logging_LogEntry';
   protected $entriesDataType = 'array';
   public $labels;
   public $logName;
-  protected $resourceType = 'Google_Service_Logging_MonitoredResource';
+  protected $resourceType = 'Appointments_Google_Service_Logging_MonitoredResource';
   protected $resourceDataType = '';
 
 
@@ -1634,7 +1634,7 @@ class Google_Service_Logging_WriteLogEntriesRequest extends Google_Collection
   {
     return $this->logName;
   }
-  public function setResource(Google_Service_Logging_MonitoredResource $resource)
+  public function setResource(Appointments_Google_Service_Logging_MonitoredResource $resource)
   {
     $this->resource = $resource;
   }
@@ -1644,6 +1644,6 @@ class Google_Service_Logging_WriteLogEntriesRequest extends Google_Collection
   }
 }
 
-class Google_Service_Logging_WriteLogEntriesResponse extends Google_Model
+class Appointments_Google_Service_Logging_WriteLogEntriesResponse extends Appointments_Google_Model
 {
 }

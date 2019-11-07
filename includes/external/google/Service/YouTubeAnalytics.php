@@ -26,7 +26,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_YouTubeAnalytics extends Google_Service
+class Appointments_Google_Service_YouTubeAnalytics extends Appointments_Google_Service
 {
   /** Manage your YouTube account. */
   const YOUTUBE =
@@ -54,9 +54,9 @@ class Google_Service_YouTubeAnalytics extends Google_Service
   /**
    * Constructs the internal representation of the YouTubeAnalytics service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -64,7 +64,7 @@ class Google_Service_YouTubeAnalytics extends Google_Service
     $this->version = 'v1';
     $this->serviceName = 'youtubeAnalytics';
 
-    $this->batchReportDefinitions = new Google_Service_YouTubeAnalytics_BatchReportDefinitions_Resource(
+    $this->batchReportDefinitions = new Appointments_Google_Service_YouTubeAnalytics_BatchReportDefinitions_Resource(
         $this,
         $this->serviceName,
         'batchReportDefinitions',
@@ -84,7 +84,7 @@ class Google_Service_YouTubeAnalytics extends Google_Service
           )
         )
     );
-    $this->batchReports = new Google_Service_YouTubeAnalytics_BatchReports_Resource(
+    $this->batchReports = new Appointments_Google_Service_YouTubeAnalytics_BatchReports_Resource(
         $this,
         $this->serviceName,
         'batchReports',
@@ -109,7 +109,7 @@ class Google_Service_YouTubeAnalytics extends Google_Service
           )
         )
     );
-    $this->groupItems = new Google_Service_YouTubeAnalytics_GroupItems_Resource(
+    $this->groupItems = new Appointments_Google_Service_YouTubeAnalytics_GroupItems_Resource(
         $this,
         $this->serviceName,
         'groupItems',
@@ -156,7 +156,7 @@ class Google_Service_YouTubeAnalytics extends Google_Service
           )
         )
     );
-    $this->groups = new Google_Service_YouTubeAnalytics_Groups_Resource(
+    $this->groups = new Appointments_Google_Service_YouTubeAnalytics_Groups_Resource(
         $this,
         $this->serviceName,
         'groups',
@@ -219,7 +219,7 @@ class Google_Service_YouTubeAnalytics extends Google_Service
           )
         )
     );
-    $this->reports = new Google_Service_YouTubeAnalytics_Reports_Resource(
+    $this->reports = new Appointments_Google_Service_YouTubeAnalytics_Reports_Resource(
         $this,
         $this->serviceName,
         'reports',
@@ -286,11 +286,11 @@ class Google_Service_YouTubeAnalytics extends Google_Service
  * The "batchReportDefinitions" collection of methods.
  * Typical usage is:
  *  <code>
- *   $youtubeAnalyticsService = new Google_Service_YouTubeAnalytics(...);
+ *   $youtubeAnalyticsService = new Appointments_Google_Service_YouTubeAnalytics(...);
  *   $batchReportDefinitions = $youtubeAnalyticsService->batchReportDefinitions;
  *  </code>
  */
-class Google_Service_YouTubeAnalytics_BatchReportDefinitions_Resource extends Google_Service_Resource
+class Appointments_Google_Service_YouTubeAnalytics_BatchReportDefinitions_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -300,13 +300,13 @@ class Google_Service_YouTubeAnalytics_BatchReportDefinitions_Resource extends Go
    * @param string $onBehalfOfContentOwner The onBehalfOfContentOwner parameter
    * identifies the content owner that the user is acting on behalf of.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_YouTubeAnalytics_BatchReportDefinitionList
+   * @return Appointments_Google_Service_YouTubeAnalytics_BatchReportDefinitionList
    */
   public function listBatchReportDefinitions($onBehalfOfContentOwner, $optParams = array())
   {
     $params = array('onBehalfOfContentOwner' => $onBehalfOfContentOwner);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_YouTubeAnalytics_BatchReportDefinitionList");
+    return $this->call('list', array($params), "Appointments_Google_Service_YouTubeAnalytics_BatchReportDefinitionList");
   }
 }
 
@@ -314,11 +314,11 @@ class Google_Service_YouTubeAnalytics_BatchReportDefinitions_Resource extends Go
  * The "batchReports" collection of methods.
  * Typical usage is:
  *  <code>
- *   $youtubeAnalyticsService = new Google_Service_YouTubeAnalytics(...);
+ *   $youtubeAnalyticsService = new Appointments_Google_Service_YouTubeAnalytics(...);
  *   $batchReports = $youtubeAnalyticsService->batchReports;
  *  </code>
  */
-class Google_Service_YouTubeAnalytics_BatchReports_Resource extends Google_Service_Resource
+class Appointments_Google_Service_YouTubeAnalytics_BatchReports_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -330,13 +330,13 @@ class Google_Service_YouTubeAnalytics_BatchReports_Resource extends Google_Servi
    * @param string $onBehalfOfContentOwner The onBehalfOfContentOwner parameter
    * identifies the content owner that the user is acting on behalf of.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_YouTubeAnalytics_BatchReportList
+   * @return Appointments_Google_Service_YouTubeAnalytics_BatchReportList
    */
   public function listBatchReports($batchReportDefinitionId, $onBehalfOfContentOwner, $optParams = array())
   {
     $params = array('batchReportDefinitionId' => $batchReportDefinitionId, 'onBehalfOfContentOwner' => $onBehalfOfContentOwner);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_YouTubeAnalytics_BatchReportList");
+    return $this->call('list', array($params), "Appointments_Google_Service_YouTubeAnalytics_BatchReportList");
   }
 }
 
@@ -344,11 +344,11 @@ class Google_Service_YouTubeAnalytics_BatchReports_Resource extends Google_Servi
  * The "groupItems" collection of methods.
  * Typical usage is:
  *  <code>
- *   $youtubeAnalyticsService = new Google_Service_YouTubeAnalytics(...);
+ *   $youtubeAnalyticsService = new Appointments_Google_Service_YouTubeAnalytics(...);
  *   $groupItems = $youtubeAnalyticsService->groupItems;
  *  </code>
  */
-class Google_Service_YouTubeAnalytics_GroupItems_Resource extends Google_Service_Resource
+class Appointments_Google_Service_YouTubeAnalytics_GroupItems_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -381,7 +381,7 @@ class Google_Service_YouTubeAnalytics_GroupItems_Resource extends Google_Service
   /**
    * Creates a group item. (groupItems.insert)
    *
-   * @param Google_GroupItem $postBody
+   * @param Appointments_Google_GroupItem $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param string onBehalfOfContentOwner Note: This parameter is intended
@@ -396,13 +396,13 @@ class Google_Service_YouTubeAnalytics_GroupItems_Resource extends Google_Service
    * authentication credentials for each individual channel. The CMS account that
    * the user authenticates with must be linked to the specified YouTube content
    * owner.
-   * @return Google_Service_YouTubeAnalytics_GroupItem
+   * @return Appointments_Google_Service_YouTubeAnalytics_GroupItem
    */
-  public function insert(Google_Service_YouTubeAnalytics_GroupItem $postBody, $optParams = array())
+  public function insert(Appointments_Google_Service_YouTubeAnalytics_GroupItem $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_YouTubeAnalytics_GroupItem");
+    return $this->call('insert', array($params), "Appointments_Google_Service_YouTubeAnalytics_GroupItem");
   }
 
   /**
@@ -425,13 +425,13 @@ class Google_Service_YouTubeAnalytics_GroupItems_Resource extends Google_Service
    * authentication credentials for each individual channel. The CMS account that
    * the user authenticates with must be linked to the specified YouTube content
    * owner.
-   * @return Google_Service_YouTubeAnalytics_GroupItemListResponse
+   * @return Appointments_Google_Service_YouTubeAnalytics_GroupItemListResponse
    */
   public function listGroupItems($groupId, $optParams = array())
   {
     $params = array('groupId' => $groupId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_YouTubeAnalytics_GroupItemListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_YouTubeAnalytics_GroupItemListResponse");
   }
 }
 
@@ -439,11 +439,11 @@ class Google_Service_YouTubeAnalytics_GroupItems_Resource extends Google_Service
  * The "groups" collection of methods.
  * Typical usage is:
  *  <code>
- *   $youtubeAnalyticsService = new Google_Service_YouTubeAnalytics(...);
+ *   $youtubeAnalyticsService = new Appointments_Google_Service_YouTubeAnalytics(...);
  *   $groups = $youtubeAnalyticsService->groups;
  *  </code>
  */
-class Google_Service_YouTubeAnalytics_Groups_Resource extends Google_Service_Resource
+class Appointments_Google_Service_YouTubeAnalytics_Groups_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -476,7 +476,7 @@ class Google_Service_YouTubeAnalytics_Groups_Resource extends Google_Service_Res
   /**
    * Creates a group. (groups.insert)
    *
-   * @param Google_Group $postBody
+   * @param Appointments_Google_Group $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param string onBehalfOfContentOwner Note: This parameter is intended
@@ -491,13 +491,13 @@ class Google_Service_YouTubeAnalytics_Groups_Resource extends Google_Service_Res
    * authentication credentials for each individual channel. The CMS account that
    * the user authenticates with must be linked to the specified YouTube content
    * owner.
-   * @return Google_Service_YouTubeAnalytics_Group
+   * @return Appointments_Google_Service_YouTubeAnalytics_Group
    */
-  public function insert(Google_Service_YouTubeAnalytics_Group $postBody, $optParams = array())
+  public function insert(Appointments_Google_Service_YouTubeAnalytics_Group $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_YouTubeAnalytics_Group");
+    return $this->call('insert', array($params), "Appointments_Google_Service_YouTubeAnalytics_Group");
   }
 
   /**
@@ -527,20 +527,20 @@ class Google_Service_YouTubeAnalytics_Groups_Resource extends Google_Service_Res
    * @opt_param string pageToken The pageToken parameter identifies a specific
    * page in the result set that should be returned. In an API response, the
    * nextPageToken property identifies the next page that can be retrieved.
-   * @return Google_Service_YouTubeAnalytics_GroupListResponse
+   * @return Appointments_Google_Service_YouTubeAnalytics_GroupListResponse
    */
   public function listGroups($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_YouTubeAnalytics_GroupListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_YouTubeAnalytics_GroupListResponse");
   }
 
   /**
    * Modifies a group. For example, you could change a group's title.
    * (groups.update)
    *
-   * @param Google_Group $postBody
+   * @param Appointments_Google_Group $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param string onBehalfOfContentOwner Note: This parameter is intended
@@ -555,13 +555,13 @@ class Google_Service_YouTubeAnalytics_Groups_Resource extends Google_Service_Res
    * authentication credentials for each individual channel. The CMS account that
    * the user authenticates with must be linked to the specified YouTube content
    * owner.
-   * @return Google_Service_YouTubeAnalytics_Group
+   * @return Appointments_Google_Service_YouTubeAnalytics_Group
    */
-  public function update(Google_Service_YouTubeAnalytics_Group $postBody, $optParams = array())
+  public function update(Appointments_Google_Service_YouTubeAnalytics_Group $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_YouTubeAnalytics_Group");
+    return $this->call('update', array($params), "Appointments_Google_Service_YouTubeAnalytics_Group");
   }
 }
 
@@ -569,11 +569,11 @@ class Google_Service_YouTubeAnalytics_Groups_Resource extends Google_Service_Res
  * The "reports" collection of methods.
  * Typical usage is:
  *  <code>
- *   $youtubeAnalyticsService = new Google_Service_YouTubeAnalytics(...);
+ *   $youtubeAnalyticsService = new Appointments_Google_Service_YouTubeAnalytics(...);
  *   $reports = $youtubeAnalyticsService->reports;
  *  </code>
  */
-class Google_Service_YouTubeAnalytics_Reports_Resource extends Google_Service_Resource
+class Appointments_Google_Service_YouTubeAnalytics_Reports_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -620,30 +620,30 @@ class Google_Service_YouTubeAnalytics_Reports_Resource extends Google_Service_Re
    * @opt_param int start-index An index of the first entity to retrieve. Use this
    * parameter as a pagination mechanism along with the max-results parameter
    * (one-based, inclusive).
-   * @return Google_Service_YouTubeAnalytics_ResultTable
+   * @return Appointments_Google_Service_YouTubeAnalytics_ResultTable
    */
   public function query($ids, $startDate, $endDate, $metrics, $optParams = array())
   {
     $params = array('ids' => $ids, 'start-date' => $startDate, 'end-date' => $endDate, 'metrics' => $metrics);
     $params = array_merge($params, $optParams);
-    return $this->call('query', array($params), "Google_Service_YouTubeAnalytics_ResultTable");
+    return $this->call('query', array($params), "Appointments_Google_Service_YouTubeAnalytics_ResultTable");
   }
 }
 
 
 
 
-class Google_Service_YouTubeAnalytics_BatchReport extends Google_Collection
+class Appointments_Google_Service_YouTubeAnalytics_BatchReport extends Appointments_Google_Collection
 {
   protected $collection_key = 'outputs';
   protected $internal_gapi_mappings = array(
   );
   public $id;
   public $kind;
-  protected $outputsType = 'Google_Service_YouTubeAnalytics_BatchReportOutputs';
+  protected $outputsType = 'Appointments_Google_Service_YouTubeAnalytics_BatchReportOutputs';
   protected $outputsDataType = 'array';
   public $reportId;
-  protected $timeSpanType = 'Google_Service_YouTubeAnalytics_BatchReportTimeSpan';
+  protected $timeSpanType = 'Appointments_Google_Service_YouTubeAnalytics_BatchReportTimeSpan';
   protected $timeSpanDataType = '';
   public $timeUpdated;
 
@@ -680,7 +680,7 @@ class Google_Service_YouTubeAnalytics_BatchReport extends Google_Collection
   {
     return $this->reportId;
   }
-  public function setTimeSpan(Google_Service_YouTubeAnalytics_BatchReportTimeSpan $timeSpan)
+  public function setTimeSpan(Appointments_Google_Service_YouTubeAnalytics_BatchReportTimeSpan $timeSpan)
   {
     $this->timeSpan = $timeSpan;
   }
@@ -698,7 +698,7 @@ class Google_Service_YouTubeAnalytics_BatchReport extends Google_Collection
   }
 }
 
-class Google_Service_YouTubeAnalytics_BatchReportDefinition extends Google_Model
+class Appointments_Google_Service_YouTubeAnalytics_BatchReportDefinition extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -751,12 +751,12 @@ class Google_Service_YouTubeAnalytics_BatchReportDefinition extends Google_Model
   }
 }
 
-class Google_Service_YouTubeAnalytics_BatchReportDefinitionList extends Google_Collection
+class Appointments_Google_Service_YouTubeAnalytics_BatchReportDefinitionList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_YouTubeAnalytics_BatchReportDefinition';
+  protected $itemsType = 'Appointments_Google_Service_YouTubeAnalytics_BatchReportDefinition';
   protected $itemsDataType = 'array';
   public $kind;
 
@@ -779,12 +779,12 @@ class Google_Service_YouTubeAnalytics_BatchReportDefinitionList extends Google_C
   }
 }
 
-class Google_Service_YouTubeAnalytics_BatchReportList extends Google_Collection
+class Appointments_Google_Service_YouTubeAnalytics_BatchReportList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_YouTubeAnalytics_BatchReport';
+  protected $itemsType = 'Appointments_Google_Service_YouTubeAnalytics_BatchReport';
   protected $itemsDataType = 'array';
   public $kind;
 
@@ -807,7 +807,7 @@ class Google_Service_YouTubeAnalytics_BatchReportList extends Google_Collection
   }
 }
 
-class Google_Service_YouTubeAnalytics_BatchReportOutputs extends Google_Model
+class Appointments_Google_Service_YouTubeAnalytics_BatchReportOutputs extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -842,7 +842,7 @@ class Google_Service_YouTubeAnalytics_BatchReportOutputs extends Google_Model
   }
 }
 
-class Google_Service_YouTubeAnalytics_BatchReportTimeSpan extends Google_Model
+class Appointments_Google_Service_YouTubeAnalytics_BatchReportTimeSpan extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -868,20 +868,20 @@ class Google_Service_YouTubeAnalytics_BatchReportTimeSpan extends Google_Model
   }
 }
 
-class Google_Service_YouTubeAnalytics_Group extends Google_Model
+class Appointments_Google_Service_YouTubeAnalytics_Group extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $contentDetailsType = 'Google_Service_YouTubeAnalytics_GroupContentDetails';
+  protected $contentDetailsType = 'Appointments_Google_Service_YouTubeAnalytics_GroupContentDetails';
   protected $contentDetailsDataType = '';
   public $etag;
   public $id;
   public $kind;
-  protected $snippetType = 'Google_Service_YouTubeAnalytics_GroupSnippet';
+  protected $snippetType = 'Appointments_Google_Service_YouTubeAnalytics_GroupSnippet';
   protected $snippetDataType = '';
 
 
-  public function setContentDetails(Google_Service_YouTubeAnalytics_GroupContentDetails $contentDetails)
+  public function setContentDetails(Appointments_Google_Service_YouTubeAnalytics_GroupContentDetails $contentDetails)
   {
     $this->contentDetails = $contentDetails;
   }
@@ -913,7 +913,7 @@ class Google_Service_YouTubeAnalytics_Group extends Google_Model
   {
     return $this->kind;
   }
-  public function setSnippet(Google_Service_YouTubeAnalytics_GroupSnippet $snippet)
+  public function setSnippet(Appointments_Google_Service_YouTubeAnalytics_GroupSnippet $snippet)
   {
     $this->snippet = $snippet;
   }
@@ -923,7 +923,7 @@ class Google_Service_YouTubeAnalytics_Group extends Google_Model
   }
 }
 
-class Google_Service_YouTubeAnalytics_GroupContentDetails extends Google_Model
+class Appointments_Google_Service_YouTubeAnalytics_GroupContentDetails extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -949,7 +949,7 @@ class Google_Service_YouTubeAnalytics_GroupContentDetails extends Google_Model
   }
 }
 
-class Google_Service_YouTubeAnalytics_GroupItem extends Google_Model
+class Appointments_Google_Service_YouTubeAnalytics_GroupItem extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -957,7 +957,7 @@ class Google_Service_YouTubeAnalytics_GroupItem extends Google_Model
   public $groupId;
   public $id;
   public $kind;
-  protected $resourceType = 'Google_Service_YouTubeAnalytics_GroupItemResource';
+  protected $resourceType = 'Appointments_Google_Service_YouTubeAnalytics_GroupItemResource';
   protected $resourceDataType = '';
 
 
@@ -993,7 +993,7 @@ class Google_Service_YouTubeAnalytics_GroupItem extends Google_Model
   {
     return $this->kind;
   }
-  public function setResource(Google_Service_YouTubeAnalytics_GroupItemResource $resource)
+  public function setResource(Appointments_Google_Service_YouTubeAnalytics_GroupItemResource $resource)
   {
     $this->resource = $resource;
   }
@@ -1003,13 +1003,13 @@ class Google_Service_YouTubeAnalytics_GroupItem extends Google_Model
   }
 }
 
-class Google_Service_YouTubeAnalytics_GroupItemListResponse extends Google_Collection
+class Appointments_Google_Service_YouTubeAnalytics_GroupItemListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $etag;
-  protected $itemsType = 'Google_Service_YouTubeAnalytics_GroupItem';
+  protected $itemsType = 'Appointments_Google_Service_YouTubeAnalytics_GroupItem';
   protected $itemsDataType = 'array';
   public $kind;
 
@@ -1040,7 +1040,7 @@ class Google_Service_YouTubeAnalytics_GroupItemListResponse extends Google_Colle
   }
 }
 
-class Google_Service_YouTubeAnalytics_GroupItemResource extends Google_Model
+class Appointments_Google_Service_YouTubeAnalytics_GroupItemResource extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1066,13 +1066,13 @@ class Google_Service_YouTubeAnalytics_GroupItemResource extends Google_Model
   }
 }
 
-class Google_Service_YouTubeAnalytics_GroupListResponse extends Google_Collection
+class Appointments_Google_Service_YouTubeAnalytics_GroupListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $etag;
-  protected $itemsType = 'Google_Service_YouTubeAnalytics_Group';
+  protected $itemsType = 'Appointments_Google_Service_YouTubeAnalytics_Group';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -1112,7 +1112,7 @@ class Google_Service_YouTubeAnalytics_GroupListResponse extends Google_Collectio
   }
 }
 
-class Google_Service_YouTubeAnalytics_GroupSnippet extends Google_Model
+class Appointments_Google_Service_YouTubeAnalytics_GroupSnippet extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1138,12 +1138,12 @@ class Google_Service_YouTubeAnalytics_GroupSnippet extends Google_Model
   }
 }
 
-class Google_Service_YouTubeAnalytics_ResultTable extends Google_Collection
+class Appointments_Google_Service_YouTubeAnalytics_ResultTable extends Appointments_Google_Collection
 {
   protected $collection_key = 'rows';
   protected $internal_gapi_mappings = array(
   );
-  protected $columnHeadersType = 'Google_Service_YouTubeAnalytics_ResultTableColumnHeaders';
+  protected $columnHeadersType = 'Appointments_Google_Service_YouTubeAnalytics_ResultTableColumnHeaders';
   protected $columnHeadersDataType = 'array';
   public $kind;
   public $rows;
@@ -1175,7 +1175,7 @@ class Google_Service_YouTubeAnalytics_ResultTable extends Google_Collection
   }
 }
 
-class Google_Service_YouTubeAnalytics_ResultTableColumnHeaders extends Google_Model
+class Appointments_Google_Service_YouTubeAnalytics_ResultTableColumnHeaders extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-if (!class_exists('Google_Client')) {
+if (!class_exists('Appointments_Google_Client')) {
   require_once dirname(__FILE__) . '/../autoload.php';
 }
 
@@ -25,7 +25,7 @@ if (!class_exists('Google_Client')) {
  * is available in this service, and if so construct an apiHttpRequest representing it.
  *
  */
-class Google_Service_Resource
+class Appointments_Google_Service_Resource
 {
   // Valid query parameters that work, but don't appear in discovery.
   private $stackParameters = array(
@@ -44,7 +44,7 @@ class Google_Service_Resource
   /** @var string $rootUrl */
   private $rootUrl;
 
-  /** @var Google_Client $client */
+  /** @var Appointments_Google_Client $client */
   private $client;
 
   /** @var string $serviceName */
@@ -76,8 +76,8 @@ class Google_Service_Resource
    * @param $name
    * @param $arguments
    * @param $expected_class - optional, the expected class name
-   * @return Google_Http_Request|expected_class
-   * @throws Google_Exception
+   * @return Appointments_Google_Http_Request|expected_class
+   * @throws Appointments_Google_Exception
    */
   public function call($name, $arguments, $expected_class = null)
   {
@@ -91,7 +91,7 @@ class Google_Service_Resource
           )
       );
 
-      throw new Google_Exception(
+      throw new Appointments_Google_Exception(
           "Unknown function: " .
           "{$this->serviceName}->{$this->resourceName}->{$name}()"
       );
@@ -103,7 +103,7 @@ class Google_Service_Resource
     // document as parameter, but we abuse the param entry for storing it.
     $postBody = null;
     if (isset($parameters['postBody'])) {
-      if ($parameters['postBody'] instanceof Google_Model) {
+      if ($parameters['postBody'] instanceof Appointments_Google_Model) {
         // In the cases the post body is an existing object, we want
         // to use the smart method to create a simple object for
         // for JSONification.
@@ -116,7 +116,7 @@ class Google_Service_Resource
       }
       $postBody = json_encode($parameters['postBody']);
       if ($postBody === false && $parameters['postBody'] !== false) {
-        throw new Google_Exception("JSON encoding failed. Ensure all strings in the request are UTF-8 encoded.");
+        throw new Appointments_Google_Exception("JSON encoding failed. Ensure all strings in the request are UTF-8 encoded.");
       }
       unset($parameters['postBody']);
     }
@@ -148,7 +148,7 @@ class Google_Service_Resource
                 'parameter' => $key
             )
         );
-        throw new Google_Exception("($name) unknown parameter: '$key'");
+        throw new Appointments_Google_Exception("($name) unknown parameter: '$key'");
       }
     }
 
@@ -166,7 +166,7 @@ class Google_Service_Resource
                 'parameter' => $paramName
             )
         );
-        throw new Google_Exception("($name) missing required param: '$paramName'");
+        throw new Appointments_Google_Exception("($name) missing required param: '$paramName'");
       }
       if (isset($parameters[$paramName])) {
         $value = $parameters[$paramName];
@@ -189,12 +189,12 @@ class Google_Service_Resource
         )
     );
 
-    $url = Google_Http_REST::createRequestUri(
+    $url = Appointments_Google_Http_REST::createRequestUri(
         $this->servicePath,
         $method['path'],
         $parameters
     );
-    $httpRequest = new Google_Http_Request(
+    $httpRequest = new Appointments_Google_Http_Request(
         $url,
         $method['httpMethod'],
         null,
@@ -220,7 +220,7 @@ class Google_Service_Resource
     if (isset($parameters['data']) &&
         ($parameters['uploadType']['value'] == 'media' || $parameters['uploadType']['value'] == 'multipart')) {
       // If we are doing a simple media upload, trigger that as a convenience.
-      $mfu = new Google_Http_MediaFileUpload(
+      $mfu = new Appointments_Google_Http_MediaFileUpload(
           $this->client,
           $httpRequest,
           isset($parameters['mimeType']) ? $parameters['mimeType']['value'] : 'application/octet-stream',

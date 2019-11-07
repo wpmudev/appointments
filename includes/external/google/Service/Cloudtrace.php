@@ -27,7 +27,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Cloudtrace extends Google_Service
+class Appointments_Google_Service_Cloudtrace extends Appointments_Google_Service
 {
   /** View and manage your data across Google Cloud Platform services. */
   const CLOUD_PLATFORM =
@@ -40,9 +40,9 @@ class Google_Service_Cloudtrace extends Google_Service
   /**
    * Constructs the internal representation of the Cloudtrace service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://cloudtrace.googleapis.com/';
@@ -50,7 +50,7 @@ class Google_Service_Cloudtrace extends Google_Service
     $this->version = 'v1';
     $this->serviceName = 'cloudtrace';
 
-    $this->projects = new Google_Service_Cloudtrace_Projects_Resource(
+    $this->projects = new Appointments_Google_Service_Cloudtrace_Projects_Resource(
         $this,
         $this->serviceName,
         'projects',
@@ -70,7 +70,7 @@ class Google_Service_Cloudtrace extends Google_Service
           )
         )
     );
-    $this->projects_traces = new Google_Service_Cloudtrace_ProjectsTraces_Resource(
+    $this->projects_traces = new Appointments_Google_Service_Cloudtrace_ProjectsTraces_Resource(
         $this,
         $this->serviceName,
         'traces',
@@ -141,11 +141,11 @@ class Google_Service_Cloudtrace extends Google_Service
  * The "projects" collection of methods.
  * Typical usage is:
  *  <code>
- *   $cloudtraceService = new Google_Service_Cloudtrace(...);
+ *   $cloudtraceService = new Appointments_Google_Service_Cloudtrace(...);
  *   $projects = $cloudtraceService->projects;
  *  </code>
  */
-class Google_Service_Cloudtrace_Projects_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Cloudtrace_Projects_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -157,15 +157,15 @@ class Google_Service_Cloudtrace_Projects_Resource extends Google_Service_Resourc
    *
    * @param string $projectId ID of the Cloud project where the trace data is
    * stored.
-   * @param Google_Traces $postBody
+   * @param Appointments_Google_Traces $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Cloudtrace_Empty
+   * @return Appointments_Google_Service_Cloudtrace_Empty
    */
-  public function patchTraces($projectId, Google_Service_Cloudtrace_Traces $postBody, $optParams = array())
+  public function patchTraces($projectId, Appointments_Google_Service_Cloudtrace_Traces $postBody, $optParams = array())
   {
     $params = array('projectId' => $projectId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patchTraces', array($params), "Google_Service_Cloudtrace_Empty");
+    return $this->call('patchTraces', array($params), "Appointments_Google_Service_Cloudtrace_Empty");
   }
 }
 
@@ -173,11 +173,11 @@ class Google_Service_Cloudtrace_Projects_Resource extends Google_Service_Resourc
  * The "traces" collection of methods.
  * Typical usage is:
  *  <code>
- *   $cloudtraceService = new Google_Service_Cloudtrace(...);
+ *   $cloudtraceService = new Appointments_Google_Service_Cloudtrace(...);
  *   $traces = $cloudtraceService->traces;
  *  </code>
  */
-class Google_Service_Cloudtrace_ProjectsTraces_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Cloudtrace_ProjectsTraces_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -187,13 +187,13 @@ class Google_Service_Cloudtrace_ProjectsTraces_Resource extends Google_Service_R
    * stored.
    * @param string $traceId ID of the trace to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Cloudtrace_Trace
+   * @return Appointments_Google_Service_Cloudtrace_Trace
    */
   public function get($projectId, $traceId, $optParams = array())
   {
     $params = array('projectId' => $projectId, 'traceId' => $traceId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Cloudtrace_Trace");
+    return $this->call('get', array($params), "Appointments_Google_Service_Cloudtrace_Trace");
   }
 
   /**
@@ -223,30 +223,30 @@ class Google_Service_Cloudtrace_ProjectsTraces_Resource extends Google_Service_R
    * fields of the root span) * `start` (`start_time` field of the root span)
    * Descending order can be specified by appending `desc` to the sort field (for
    * example, `name desc`). Only one sort field is permitted.
-   * @return Google_Service_Cloudtrace_ListTracesResponse
+   * @return Appointments_Google_Service_Cloudtrace_ListTracesResponse
    */
   public function listProjectsTraces($projectId, $optParams = array())
   {
     $params = array('projectId' => $projectId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Cloudtrace_ListTracesResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Cloudtrace_ListTracesResponse");
   }
 }
 
 
 
 
-class Google_Service_Cloudtrace_Empty extends Google_Model
+class Appointments_Google_Service_Cloudtrace_Empty extends Appointments_Google_Model
 {
 }
 
-class Google_Service_Cloudtrace_ListTracesResponse extends Google_Collection
+class Appointments_Google_Service_Cloudtrace_ListTracesResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'traces';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $tracesType = 'Google_Service_Cloudtrace_Trace';
+  protected $tracesType = 'Appointments_Google_Service_Cloudtrace_Trace';
   protected $tracesDataType = 'array';
 
 
@@ -268,13 +268,13 @@ class Google_Service_Cloudtrace_ListTracesResponse extends Google_Collection
   }
 }
 
-class Google_Service_Cloudtrace_Trace extends Google_Collection
+class Appointments_Google_Service_Cloudtrace_Trace extends Appointments_Google_Collection
 {
   protected $collection_key = 'spans';
   protected $internal_gapi_mappings = array(
   );
   public $projectId;
-  protected $spansType = 'Google_Service_Cloudtrace_TraceSpan';
+  protected $spansType = 'Appointments_Google_Service_Cloudtrace_TraceSpan';
   protected $spansDataType = 'array';
   public $traceId;
 
@@ -305,7 +305,7 @@ class Google_Service_Cloudtrace_Trace extends Google_Collection
   }
 }
 
-class Google_Service_Cloudtrace_TraceSpan extends Google_Model
+class Appointments_Google_Service_Cloudtrace_TraceSpan extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -376,12 +376,12 @@ class Google_Service_Cloudtrace_TraceSpan extends Google_Model
   }
 }
 
-class Google_Service_Cloudtrace_Traces extends Google_Collection
+class Appointments_Google_Service_Cloudtrace_Traces extends Appointments_Google_Collection
 {
   protected $collection_key = 'traces';
   protected $internal_gapi_mappings = array(
   );
-  protected $tracesType = 'Google_Service_Cloudtrace_Trace';
+  protected $tracesType = 'Appointments_Google_Service_Cloudtrace_Trace';
   protected $tracesDataType = 'array';
 
 

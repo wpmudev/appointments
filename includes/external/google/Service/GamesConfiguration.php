@@ -26,7 +26,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_GamesConfiguration extends Google_Service
+class Appointments_Google_Service_GamesConfiguration extends Appointments_Google_Service
 {
   /** View and manage your Google Play Developer account. */
   const ANDROIDPUBLISHER =
@@ -40,9 +40,9 @@ class Google_Service_GamesConfiguration extends Google_Service
   /**
    * Constructs the internal representation of the GamesConfiguration service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -50,7 +50,7 @@ class Google_Service_GamesConfiguration extends Google_Service
     $this->version = 'v1configuration';
     $this->serviceName = 'gamesConfiguration';
 
-    $this->achievementConfigurations = new Google_Service_GamesConfiguration_AchievementConfigurations_Resource(
+    $this->achievementConfigurations = new Appointments_Google_Service_GamesConfiguration_AchievementConfigurations_Resource(
         $this,
         $this->serviceName,
         'achievementConfigurations',
@@ -128,7 +128,7 @@ class Google_Service_GamesConfiguration extends Google_Service
           )
         )
     );
-    $this->imageConfigurations = new Google_Service_GamesConfiguration_ImageConfigurations_Resource(
+    $this->imageConfigurations = new Appointments_Google_Service_GamesConfiguration_ImageConfigurations_Resource(
         $this,
         $this->serviceName,
         'imageConfigurations',
@@ -153,7 +153,7 @@ class Google_Service_GamesConfiguration extends Google_Service
           )
         )
     );
-    $this->leaderboardConfigurations = new Google_Service_GamesConfiguration_LeaderboardConfigurations_Resource(
+    $this->leaderboardConfigurations = new Appointments_Google_Service_GamesConfiguration_LeaderboardConfigurations_Resource(
         $this,
         $this->serviceName,
         'leaderboardConfigurations',
@@ -239,11 +239,11 @@ class Google_Service_GamesConfiguration extends Google_Service
  * The "achievementConfigurations" collection of methods.
  * Typical usage is:
  *  <code>
- *   $gamesConfigurationService = new Google_Service_GamesConfiguration(...);
+ *   $gamesConfigurationService = new Appointments_Google_Service_GamesConfiguration(...);
  *   $achievementConfigurations = $gamesConfigurationService->achievementConfigurations;
  *  </code>
  */
-class Google_Service_GamesConfiguration_AchievementConfigurations_Resource extends Google_Service_Resource
+class Appointments_Google_Service_GamesConfiguration_AchievementConfigurations_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -266,13 +266,13 @@ class Google_Service_GamesConfiguration_AchievementConfigurations_Resource exten
    *
    * @param string $achievementId The ID of the achievement used by this method.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_GamesConfiguration_AchievementConfiguration
+   * @return Appointments_Google_Service_GamesConfiguration_AchievementConfiguration
    */
   public function get($achievementId, $optParams = array())
   {
     $params = array('achievementId' => $achievementId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_GamesConfiguration_AchievementConfiguration");
+    return $this->call('get', array($params), "Appointments_Google_Service_GamesConfiguration_AchievementConfiguration");
   }
 
   /**
@@ -281,15 +281,15 @@ class Google_Service_GamesConfiguration_AchievementConfigurations_Resource exten
    *
    * @param string $applicationId The application ID from the Google Play
    * developer console.
-   * @param Google_AchievementConfiguration $postBody
+   * @param Appointments_Google_AchievementConfiguration $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_GamesConfiguration_AchievementConfiguration
+   * @return Appointments_Google_Service_GamesConfiguration_AchievementConfiguration
    */
-  public function insert($applicationId, Google_Service_GamesConfiguration_AchievementConfiguration $postBody, $optParams = array())
+  public function insert($applicationId, Appointments_Google_Service_GamesConfiguration_AchievementConfiguration $postBody, $optParams = array())
   {
     $params = array('applicationId' => $applicationId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_GamesConfiguration_AchievementConfiguration");
+    return $this->call('insert', array($params), "Appointments_Google_Service_GamesConfiguration_AchievementConfiguration");
   }
 
   /**
@@ -304,13 +304,13 @@ class Google_Service_GamesConfiguration_AchievementConfigurations_Resource exten
    * return in the response, used for paging. For any response, the actual number
    * of resources returned may be less than the specified maxResults.
    * @opt_param string pageToken The token returned by the previous request.
-   * @return Google_Service_GamesConfiguration_AchievementConfigurationListResponse
+   * @return Appointments_Google_Service_GamesConfiguration_AchievementConfigurationListResponse
    */
   public function listAchievementConfigurations($applicationId, $optParams = array())
   {
     $params = array('applicationId' => $applicationId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_GamesConfiguration_AchievementConfigurationListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_GamesConfiguration_AchievementConfigurationListResponse");
   }
 
   /**
@@ -318,15 +318,15 @@ class Google_Service_GamesConfiguration_AchievementConfigurations_Resource exten
    * method supports patch semantics. (achievementConfigurations.patch)
    *
    * @param string $achievementId The ID of the achievement used by this method.
-   * @param Google_AchievementConfiguration $postBody
+   * @param Appointments_Google_AchievementConfiguration $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_GamesConfiguration_AchievementConfiguration
+   * @return Appointments_Google_Service_GamesConfiguration_AchievementConfiguration
    */
-  public function patch($achievementId, Google_Service_GamesConfiguration_AchievementConfiguration $postBody, $optParams = array())
+  public function patch($achievementId, Appointments_Google_Service_GamesConfiguration_AchievementConfiguration $postBody, $optParams = array())
   {
     $params = array('achievementId' => $achievementId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_GamesConfiguration_AchievementConfiguration");
+    return $this->call('patch', array($params), "Appointments_Google_Service_GamesConfiguration_AchievementConfiguration");
   }
 
   /**
@@ -334,15 +334,15 @@ class Google_Service_GamesConfiguration_AchievementConfigurations_Resource exten
    * (achievementConfigurations.update)
    *
    * @param string $achievementId The ID of the achievement used by this method.
-   * @param Google_AchievementConfiguration $postBody
+   * @param Appointments_Google_AchievementConfiguration $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_GamesConfiguration_AchievementConfiguration
+   * @return Appointments_Google_Service_GamesConfiguration_AchievementConfiguration
    */
-  public function update($achievementId, Google_Service_GamesConfiguration_AchievementConfiguration $postBody, $optParams = array())
+  public function update($achievementId, Appointments_Google_Service_GamesConfiguration_AchievementConfiguration $postBody, $optParams = array())
   {
     $params = array('achievementId' => $achievementId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_GamesConfiguration_AchievementConfiguration");
+    return $this->call('update', array($params), "Appointments_Google_Service_GamesConfiguration_AchievementConfiguration");
   }
 }
 
@@ -350,11 +350,11 @@ class Google_Service_GamesConfiguration_AchievementConfigurations_Resource exten
  * The "imageConfigurations" collection of methods.
  * Typical usage is:
  *  <code>
- *   $gamesConfigurationService = new Google_Service_GamesConfiguration(...);
+ *   $gamesConfigurationService = new Appointments_Google_Service_GamesConfiguration(...);
  *   $imageConfigurations = $gamesConfigurationService->imageConfigurations;
  *  </code>
  */
-class Google_Service_GamesConfiguration_ImageConfigurations_Resource extends Google_Service_Resource
+class Appointments_Google_Service_GamesConfiguration_ImageConfigurations_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -364,13 +364,13 @@ class Google_Service_GamesConfiguration_ImageConfigurations_Resource extends Goo
    * @param string $resourceId The ID of the resource used by this method.
    * @param string $imageType Selects which image in a resource for this method.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_GamesConfiguration_ImageConfiguration
+   * @return Appointments_Google_Service_GamesConfiguration_ImageConfiguration
    */
   public function upload($resourceId, $imageType, $optParams = array())
   {
     $params = array('resourceId' => $resourceId, 'imageType' => $imageType);
     $params = array_merge($params, $optParams);
-    return $this->call('upload', array($params), "Google_Service_GamesConfiguration_ImageConfiguration");
+    return $this->call('upload', array($params), "Appointments_Google_Service_GamesConfiguration_ImageConfiguration");
   }
 }
 
@@ -378,11 +378,11 @@ class Google_Service_GamesConfiguration_ImageConfigurations_Resource extends Goo
  * The "leaderboardConfigurations" collection of methods.
  * Typical usage is:
  *  <code>
- *   $gamesConfigurationService = new Google_Service_GamesConfiguration(...);
+ *   $gamesConfigurationService = new Appointments_Google_Service_GamesConfiguration(...);
  *   $leaderboardConfigurations = $gamesConfigurationService->leaderboardConfigurations;
  *  </code>
  */
-class Google_Service_GamesConfiguration_LeaderboardConfigurations_Resource extends Google_Service_Resource
+class Appointments_Google_Service_GamesConfiguration_LeaderboardConfigurations_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -405,13 +405,13 @@ class Google_Service_GamesConfiguration_LeaderboardConfigurations_Resource exten
    *
    * @param string $leaderboardId The ID of the leaderboard.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_GamesConfiguration_LeaderboardConfiguration
+   * @return Appointments_Google_Service_GamesConfiguration_LeaderboardConfiguration
    */
   public function get($leaderboardId, $optParams = array())
   {
     $params = array('leaderboardId' => $leaderboardId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_GamesConfiguration_LeaderboardConfiguration");
+    return $this->call('get', array($params), "Appointments_Google_Service_GamesConfiguration_LeaderboardConfiguration");
   }
 
   /**
@@ -420,15 +420,15 @@ class Google_Service_GamesConfiguration_LeaderboardConfigurations_Resource exten
    *
    * @param string $applicationId The application ID from the Google Play
    * developer console.
-   * @param Google_LeaderboardConfiguration $postBody
+   * @param Appointments_Google_LeaderboardConfiguration $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_GamesConfiguration_LeaderboardConfiguration
+   * @return Appointments_Google_Service_GamesConfiguration_LeaderboardConfiguration
    */
-  public function insert($applicationId, Google_Service_GamesConfiguration_LeaderboardConfiguration $postBody, $optParams = array())
+  public function insert($applicationId, Appointments_Google_Service_GamesConfiguration_LeaderboardConfiguration $postBody, $optParams = array())
   {
     $params = array('applicationId' => $applicationId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_GamesConfiguration_LeaderboardConfiguration");
+    return $this->call('insert', array($params), "Appointments_Google_Service_GamesConfiguration_LeaderboardConfiguration");
   }
 
   /**
@@ -443,13 +443,13 @@ class Google_Service_GamesConfiguration_LeaderboardConfigurations_Resource exten
    * return in the response, used for paging. For any response, the actual number
    * of resources returned may be less than the specified maxResults.
    * @opt_param string pageToken The token returned by the previous request.
-   * @return Google_Service_GamesConfiguration_LeaderboardConfigurationListResponse
+   * @return Appointments_Google_Service_GamesConfiguration_LeaderboardConfigurationListResponse
    */
   public function listLeaderboardConfigurations($applicationId, $optParams = array())
   {
     $params = array('applicationId' => $applicationId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_GamesConfiguration_LeaderboardConfigurationListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_GamesConfiguration_LeaderboardConfigurationListResponse");
   }
 
   /**
@@ -457,15 +457,15 @@ class Google_Service_GamesConfiguration_LeaderboardConfigurations_Resource exten
    * method supports patch semantics. (leaderboardConfigurations.patch)
    *
    * @param string $leaderboardId The ID of the leaderboard.
-   * @param Google_LeaderboardConfiguration $postBody
+   * @param Appointments_Google_LeaderboardConfiguration $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_GamesConfiguration_LeaderboardConfiguration
+   * @return Appointments_Google_Service_GamesConfiguration_LeaderboardConfiguration
    */
-  public function patch($leaderboardId, Google_Service_GamesConfiguration_LeaderboardConfiguration $postBody, $optParams = array())
+  public function patch($leaderboardId, Appointments_Google_Service_GamesConfiguration_LeaderboardConfiguration $postBody, $optParams = array())
   {
     $params = array('leaderboardId' => $leaderboardId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_GamesConfiguration_LeaderboardConfiguration");
+    return $this->call('patch', array($params), "Appointments_Google_Service_GamesConfiguration_LeaderboardConfiguration");
   }
 
   /**
@@ -473,32 +473,32 @@ class Google_Service_GamesConfiguration_LeaderboardConfigurations_Resource exten
    * (leaderboardConfigurations.update)
    *
    * @param string $leaderboardId The ID of the leaderboard.
-   * @param Google_LeaderboardConfiguration $postBody
+   * @param Appointments_Google_LeaderboardConfiguration $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_GamesConfiguration_LeaderboardConfiguration
+   * @return Appointments_Google_Service_GamesConfiguration_LeaderboardConfiguration
    */
-  public function update($leaderboardId, Google_Service_GamesConfiguration_LeaderboardConfiguration $postBody, $optParams = array())
+  public function update($leaderboardId, Appointments_Google_Service_GamesConfiguration_LeaderboardConfiguration $postBody, $optParams = array())
   {
     $params = array('leaderboardId' => $leaderboardId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_GamesConfiguration_LeaderboardConfiguration");
+    return $this->call('update', array($params), "Appointments_Google_Service_GamesConfiguration_LeaderboardConfiguration");
   }
 }
 
 
 
 
-class Google_Service_GamesConfiguration_AchievementConfiguration extends Google_Model
+class Appointments_Google_Service_GamesConfiguration_AchievementConfiguration extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $achievementType;
-  protected $draftType = 'Google_Service_GamesConfiguration_AchievementConfigurationDetail';
+  protected $draftType = 'Appointments_Google_Service_GamesConfiguration_AchievementConfigurationDetail';
   protected $draftDataType = '';
   public $id;
   public $initialState;
   public $kind;
-  protected $publishedType = 'Google_Service_GamesConfiguration_AchievementConfigurationDetail';
+  protected $publishedType = 'Appointments_Google_Service_GamesConfiguration_AchievementConfigurationDetail';
   protected $publishedDataType = '';
   public $stepsToUnlock;
   public $token;
@@ -512,7 +512,7 @@ class Google_Service_GamesConfiguration_AchievementConfiguration extends Google_
   {
     return $this->achievementType;
   }
-  public function setDraft(Google_Service_GamesConfiguration_AchievementConfigurationDetail $draft)
+  public function setDraft(Appointments_Google_Service_GamesConfiguration_AchievementConfigurationDetail $draft)
   {
     $this->draft = $draft;
   }
@@ -544,7 +544,7 @@ class Google_Service_GamesConfiguration_AchievementConfiguration extends Google_
   {
     return $this->kind;
   }
-  public function setPublished(Google_Service_GamesConfiguration_AchievementConfigurationDetail $published)
+  public function setPublished(Appointments_Google_Service_GamesConfiguration_AchievementConfigurationDetail $published)
   {
     $this->published = $published;
   }
@@ -570,21 +570,21 @@ class Google_Service_GamesConfiguration_AchievementConfiguration extends Google_
   }
 }
 
-class Google_Service_GamesConfiguration_AchievementConfigurationDetail extends Google_Model
+class Appointments_Google_Service_GamesConfiguration_AchievementConfigurationDetail extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $descriptionType = 'Google_Service_GamesConfiguration_LocalizedStringBundle';
+  protected $descriptionType = 'Appointments_Google_Service_GamesConfiguration_LocalizedStringBundle';
   protected $descriptionDataType = '';
   public $iconUrl;
   public $kind;
-  protected $nameType = 'Google_Service_GamesConfiguration_LocalizedStringBundle';
+  protected $nameType = 'Appointments_Google_Service_GamesConfiguration_LocalizedStringBundle';
   protected $nameDataType = '';
   public $pointValue;
   public $sortRank;
 
 
-  public function setDescription(Google_Service_GamesConfiguration_LocalizedStringBundle $description)
+  public function setDescription(Appointments_Google_Service_GamesConfiguration_LocalizedStringBundle $description)
   {
     $this->description = $description;
   }
@@ -608,7 +608,7 @@ class Google_Service_GamesConfiguration_AchievementConfigurationDetail extends G
   {
     return $this->kind;
   }
-  public function setName(Google_Service_GamesConfiguration_LocalizedStringBundle $name)
+  public function setName(Appointments_Google_Service_GamesConfiguration_LocalizedStringBundle $name)
   {
     $this->name = $name;
   }
@@ -634,12 +634,12 @@ class Google_Service_GamesConfiguration_AchievementConfigurationDetail extends G
   }
 }
 
-class Google_Service_GamesConfiguration_AchievementConfigurationListResponse extends Google_Collection
+class Appointments_Google_Service_GamesConfiguration_AchievementConfigurationListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_GamesConfiguration_AchievementConfiguration';
+  protected $itemsType = 'Appointments_Google_Service_GamesConfiguration_AchievementConfiguration';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -671,25 +671,25 @@ class Google_Service_GamesConfiguration_AchievementConfigurationListResponse ext
   }
 }
 
-class Google_Service_GamesConfiguration_GamesNumberAffixConfiguration extends Google_Model
+class Appointments_Google_Service_GamesConfiguration_GamesNumberAffixConfiguration extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $fewType = 'Google_Service_GamesConfiguration_LocalizedStringBundle';
+  protected $fewType = 'Appointments_Google_Service_GamesConfiguration_LocalizedStringBundle';
   protected $fewDataType = '';
-  protected $manyType = 'Google_Service_GamesConfiguration_LocalizedStringBundle';
+  protected $manyType = 'Appointments_Google_Service_GamesConfiguration_LocalizedStringBundle';
   protected $manyDataType = '';
-  protected $oneType = 'Google_Service_GamesConfiguration_LocalizedStringBundle';
+  protected $oneType = 'Appointments_Google_Service_GamesConfiguration_LocalizedStringBundle';
   protected $oneDataType = '';
-  protected $otherType = 'Google_Service_GamesConfiguration_LocalizedStringBundle';
+  protected $otherType = 'Appointments_Google_Service_GamesConfiguration_LocalizedStringBundle';
   protected $otherDataType = '';
-  protected $twoType = 'Google_Service_GamesConfiguration_LocalizedStringBundle';
+  protected $twoType = 'Appointments_Google_Service_GamesConfiguration_LocalizedStringBundle';
   protected $twoDataType = '';
-  protected $zeroType = 'Google_Service_GamesConfiguration_LocalizedStringBundle';
+  protected $zeroType = 'Appointments_Google_Service_GamesConfiguration_LocalizedStringBundle';
   protected $zeroDataType = '';
 
 
-  public function setFew(Google_Service_GamesConfiguration_LocalizedStringBundle $few)
+  public function setFew(Appointments_Google_Service_GamesConfiguration_LocalizedStringBundle $few)
   {
     $this->few = $few;
   }
@@ -697,7 +697,7 @@ class Google_Service_GamesConfiguration_GamesNumberAffixConfiguration extends Go
   {
     return $this->few;
   }
-  public function setMany(Google_Service_GamesConfiguration_LocalizedStringBundle $many)
+  public function setMany(Appointments_Google_Service_GamesConfiguration_LocalizedStringBundle $many)
   {
     $this->many = $many;
   }
@@ -705,7 +705,7 @@ class Google_Service_GamesConfiguration_GamesNumberAffixConfiguration extends Go
   {
     return $this->many;
   }
-  public function setOne(Google_Service_GamesConfiguration_LocalizedStringBundle $one)
+  public function setOne(Appointments_Google_Service_GamesConfiguration_LocalizedStringBundle $one)
   {
     $this->one = $one;
   }
@@ -713,7 +713,7 @@ class Google_Service_GamesConfiguration_GamesNumberAffixConfiguration extends Go
   {
     return $this->one;
   }
-  public function setOther(Google_Service_GamesConfiguration_LocalizedStringBundle $other)
+  public function setOther(Appointments_Google_Service_GamesConfiguration_LocalizedStringBundle $other)
   {
     $this->other = $other;
   }
@@ -721,7 +721,7 @@ class Google_Service_GamesConfiguration_GamesNumberAffixConfiguration extends Go
   {
     return $this->other;
   }
-  public function setTwo(Google_Service_GamesConfiguration_LocalizedStringBundle $two)
+  public function setTwo(Appointments_Google_Service_GamesConfiguration_LocalizedStringBundle $two)
   {
     $this->two = $two;
   }
@@ -729,7 +729,7 @@ class Google_Service_GamesConfiguration_GamesNumberAffixConfiguration extends Go
   {
     return $this->two;
   }
-  public function setZero(Google_Service_GamesConfiguration_LocalizedStringBundle $zero)
+  public function setZero(Appointments_Google_Service_GamesConfiguration_LocalizedStringBundle $zero)
   {
     $this->zero = $zero;
   }
@@ -739,14 +739,14 @@ class Google_Service_GamesConfiguration_GamesNumberAffixConfiguration extends Go
   }
 }
 
-class Google_Service_GamesConfiguration_GamesNumberFormatConfiguration extends Google_Model
+class Appointments_Google_Service_GamesConfiguration_GamesNumberFormatConfiguration extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $currencyCode;
   public $numDecimalPlaces;
   public $numberFormatType;
-  protected $suffixType = 'Google_Service_GamesConfiguration_GamesNumberAffixConfiguration';
+  protected $suffixType = 'Appointments_Google_Service_GamesConfiguration_GamesNumberAffixConfiguration';
   protected $suffixDataType = '';
 
 
@@ -774,7 +774,7 @@ class Google_Service_GamesConfiguration_GamesNumberFormatConfiguration extends G
   {
     return $this->numberFormatType;
   }
-  public function setSuffix(Google_Service_GamesConfiguration_GamesNumberAffixConfiguration $suffix)
+  public function setSuffix(Appointments_Google_Service_GamesConfiguration_GamesNumberAffixConfiguration $suffix)
   {
     $this->suffix = $suffix;
   }
@@ -784,7 +784,7 @@ class Google_Service_GamesConfiguration_GamesNumberFormatConfiguration extends G
   }
 }
 
-class Google_Service_GamesConfiguration_ImageConfiguration extends Google_Model
+class Appointments_Google_Service_GamesConfiguration_ImageConfiguration extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -828,15 +828,15 @@ class Google_Service_GamesConfiguration_ImageConfiguration extends Google_Model
   }
 }
 
-class Google_Service_GamesConfiguration_LeaderboardConfiguration extends Google_Model
+class Appointments_Google_Service_GamesConfiguration_LeaderboardConfiguration extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $draftType = 'Google_Service_GamesConfiguration_LeaderboardConfigurationDetail';
+  protected $draftType = 'Appointments_Google_Service_GamesConfiguration_LeaderboardConfigurationDetail';
   protected $draftDataType = '';
   public $id;
   public $kind;
-  protected $publishedType = 'Google_Service_GamesConfiguration_LeaderboardConfigurationDetail';
+  protected $publishedType = 'Appointments_Google_Service_GamesConfiguration_LeaderboardConfigurationDetail';
   protected $publishedDataType = '';
   public $scoreMax;
   public $scoreMin;
@@ -844,7 +844,7 @@ class Google_Service_GamesConfiguration_LeaderboardConfiguration extends Google_
   public $token;
 
 
-  public function setDraft(Google_Service_GamesConfiguration_LeaderboardConfigurationDetail $draft)
+  public function setDraft(Appointments_Google_Service_GamesConfiguration_LeaderboardConfigurationDetail $draft)
   {
     $this->draft = $draft;
   }
@@ -868,7 +868,7 @@ class Google_Service_GamesConfiguration_LeaderboardConfiguration extends Google_
   {
     return $this->kind;
   }
-  public function setPublished(Google_Service_GamesConfiguration_LeaderboardConfigurationDetail $published)
+  public function setPublished(Appointments_Google_Service_GamesConfiguration_LeaderboardConfigurationDetail $published)
   {
     $this->published = $published;
   }
@@ -910,15 +910,15 @@ class Google_Service_GamesConfiguration_LeaderboardConfiguration extends Google_
   }
 }
 
-class Google_Service_GamesConfiguration_LeaderboardConfigurationDetail extends Google_Model
+class Appointments_Google_Service_GamesConfiguration_LeaderboardConfigurationDetail extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $iconUrl;
   public $kind;
-  protected $nameType = 'Google_Service_GamesConfiguration_LocalizedStringBundle';
+  protected $nameType = 'Appointments_Google_Service_GamesConfiguration_LocalizedStringBundle';
   protected $nameDataType = '';
-  protected $scoreFormatType = 'Google_Service_GamesConfiguration_GamesNumberFormatConfiguration';
+  protected $scoreFormatType = 'Appointments_Google_Service_GamesConfiguration_GamesNumberFormatConfiguration';
   protected $scoreFormatDataType = '';
   public $sortRank;
 
@@ -939,7 +939,7 @@ class Google_Service_GamesConfiguration_LeaderboardConfigurationDetail extends G
   {
     return $this->kind;
   }
-  public function setName(Google_Service_GamesConfiguration_LocalizedStringBundle $name)
+  public function setName(Appointments_Google_Service_GamesConfiguration_LocalizedStringBundle $name)
   {
     $this->name = $name;
   }
@@ -947,7 +947,7 @@ class Google_Service_GamesConfiguration_LeaderboardConfigurationDetail extends G
   {
     return $this->name;
   }
-  public function setScoreFormat(Google_Service_GamesConfiguration_GamesNumberFormatConfiguration $scoreFormat)
+  public function setScoreFormat(Appointments_Google_Service_GamesConfiguration_GamesNumberFormatConfiguration $scoreFormat)
   {
     $this->scoreFormat = $scoreFormat;
   }
@@ -965,12 +965,12 @@ class Google_Service_GamesConfiguration_LeaderboardConfigurationDetail extends G
   }
 }
 
-class Google_Service_GamesConfiguration_LeaderboardConfigurationListResponse extends Google_Collection
+class Appointments_Google_Service_GamesConfiguration_LeaderboardConfigurationListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_GamesConfiguration_LeaderboardConfiguration';
+  protected $itemsType = 'Appointments_Google_Service_GamesConfiguration_LeaderboardConfiguration';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -1002,7 +1002,7 @@ class Google_Service_GamesConfiguration_LeaderboardConfigurationListResponse ext
   }
 }
 
-class Google_Service_GamesConfiguration_LocalizedString extends Google_Model
+class Appointments_Google_Service_GamesConfiguration_LocalizedString extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1037,13 +1037,13 @@ class Google_Service_GamesConfiguration_LocalizedString extends Google_Model
   }
 }
 
-class Google_Service_GamesConfiguration_LocalizedStringBundle extends Google_Collection
+class Appointments_Google_Service_GamesConfiguration_LocalizedStringBundle extends Appointments_Google_Collection
 {
   protected $collection_key = 'translations';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $translationsType = 'Google_Service_GamesConfiguration_LocalizedString';
+  protected $translationsType = 'Appointments_Google_Service_GamesConfiguration_LocalizedString';
   protected $translationsDataType = 'array';
 
 

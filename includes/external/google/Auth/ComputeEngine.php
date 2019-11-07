@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-if (!class_exists('Google_Client')) {
+if (!class_exists('Appointments_Google_Client')) {
   require_once dirname(__FILE__) . '/../autoload.php';
 }
 
@@ -25,14 +25,14 @@ if (!class_exists('Google_Client')) {
  * and the appropriate scopes.
  * @author Jonathan Parrott <jon.wayne.parrott@gmail.com>
  */
-class Google_Auth_ComputeEngine extends Google_Auth_Abstract
+class Appointments_Google_Auth_ComputeEngine extends Appointments_Google_Auth_Abstract
 {
   const METADATA_AUTH_URL =
       'http://metadata/computeMetadata/v1/instance/service-accounts/default/token';
   private $client;
   private $token;
 
-  public function __construct(Google_Client $client, $config = null)
+  public function __construct(Appointments_Google_Client $client, $config = null)
   {
     $this->client = $client;
   }
@@ -43,11 +43,11 @@ class Google_Auth_ComputeEngine extends Google_Auth_Abstract
    * (which can modify the request in what ever way fits the auth mechanism)
    * and then calls apiCurlIO::makeRequest on the signed request
    *
-   * @param Google_Http_Request $request
-   * @return Google_Http_Request The resulting HTTP response including the
+   * @param Appointments_Google_Http_Request $request
+   * @return Appointments_Google_Http_Request The resulting HTTP response including the
    * responseHttpCode, responseHeaders and responseBody.
    */
-  public function authenticatedRequest(Google_Http_Request $request)
+  public function authenticatedRequest(Appointments_Google_Http_Request $request)
   {
     $request = $this->sign($request);
     return $this->client->getIo()->makeRequest($request);
@@ -55,16 +55,16 @@ class Google_Auth_ComputeEngine extends Google_Auth_Abstract
 
   /**
    * @param string $token
-   * @throws Google_Auth_Exception
+   * @throws Appointments_Google_Auth_Exception
    */
   public function setAccessToken($token)
   {
     $token = json_decode($token, true);
     if ($token == null) {
-      throw new Google_Auth_Exception('Could not json decode the token');
+      throw new Appointments_Google_Auth_Exception('Could not json decode the token');
     }
     if (! isset($token['access_token'])) {
-      throw new Google_Auth_Exception("Invalid token format");
+      throw new Appointments_Google_Auth_Exception("Invalid token format");
     }
     $token['created'] = time();
     $this->token = $token;
@@ -77,11 +77,11 @@ class Google_Auth_ComputeEngine extends Google_Auth_Abstract
 
   /**
    * Acquires a new access token from the compute engine metadata server.
-   * @throws Google_Auth_Exception
+   * @throws Appointments_Google_Auth_Exception
    */
   public function acquireAccessToken()
   {
-    $request = new Google_Http_Request(
+    $request = new Appointments_Google_Http_Request(
         self::METADATA_AUTH_URL,
         'GET',
         array(
@@ -96,7 +96,7 @@ class Google_Auth_ComputeEngine extends Google_Auth_Abstract
       $this->token['created'] = time();
       return $this->getAccessToken();
     } else {
-      throw new Google_Auth_Exception(
+      throw new Appointments_Google_Auth_Exception(
           sprintf(
               "Error fetching service account access token, message: '%s'",
               $response->getResponseBody()
@@ -108,11 +108,11 @@ class Google_Auth_ComputeEngine extends Google_Auth_Abstract
 
   /**
    * Include an accessToken in a given apiHttpRequest.
-   * @param Google_Http_Request $request
-   * @return Google_Http_Request
-   * @throws Google_Auth_Exception
+   * @param Appointments_Google_Http_Request $request
+   * @return Appointments_Google_Http_Request
+   * @throws Appointments_Google_Auth_Exception
    */
-  public function sign(Google_Http_Request $request)
+  public function sign(Appointments_Google_Http_Request $request)
   {
     if ($this->isAccessTokenExpired()) {
       $this->acquireAccessToken();

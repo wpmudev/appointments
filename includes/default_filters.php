@@ -30,7 +30,7 @@ if ( defined( 'APP_GCAL_CLIENT_TEMP_DIR_AUTO_LOOKUP' ) && APP_GCAL_CLIENT_TEMP_D
 	 */
 	function _app_gcal_client_temp_dir_lookup( $params ) {
 		if ( ! function_exists( 'get_temp_dir' ) ) { return $params; }
-		$params['ioFileCache_directory'] = get_temp_dir() . 'Google_Client';
+		$params['ioFileCache_directory'] = get_temp_dir() . 'Appointments_Google_Client';
 		return $params;
 	}
 	add_filter( 'app-gcal-client_parameters', '_app_gcal_client_temp_dir_lookup' );

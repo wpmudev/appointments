@@ -26,7 +26,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Proximitybeacon extends Google_Service
+class Appointments_Google_Service_Proximitybeacon extends Appointments_Google_Service
 {
 
 
@@ -40,9 +40,9 @@ class Google_Service_Proximitybeacon extends Google_Service
   /**
    * Constructs the internal representation of the Proximitybeacon service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://proximitybeacon.googleapis.com/';
@@ -50,7 +50,7 @@ class Google_Service_Proximitybeacon extends Google_Service
     $this->version = 'v1beta1';
     $this->serviceName = 'proximitybeacon';
 
-    $this->beaconinfo = new Google_Service_Proximitybeacon_Beaconinfo_Resource(
+    $this->beaconinfo = new Appointments_Google_Service_Proximitybeacon_Beaconinfo_Resource(
         $this,
         $this->serviceName,
         'beaconinfo',
@@ -64,7 +64,7 @@ class Google_Service_Proximitybeacon extends Google_Service
           )
         )
     );
-    $this->beacons = new Google_Service_Proximitybeacon_Beacons_Resource(
+    $this->beacons = new Appointments_Google_Service_Proximitybeacon_Beacons_Resource(
         $this,
         $this->serviceName,
         'beacons',
@@ -145,7 +145,7 @@ class Google_Service_Proximitybeacon extends Google_Service
           )
         )
     );
-    $this->beacons_attachments = new Google_Service_Proximitybeacon_BeaconsAttachments_Resource(
+    $this->beacons_attachments = new Appointments_Google_Service_Proximitybeacon_BeaconsAttachments_Resource(
         $this,
         $this->serviceName,
         'attachments',
@@ -203,7 +203,7 @@ class Google_Service_Proximitybeacon extends Google_Service
           )
         )
     );
-    $this->beacons_diagnostics = new Google_Service_Proximitybeacon_BeaconsDiagnostics_Resource(
+    $this->beacons_diagnostics = new Appointments_Google_Service_Proximitybeacon_BeaconsDiagnostics_Resource(
         $this,
         $this->serviceName,
         'diagnostics',
@@ -235,7 +235,7 @@ class Google_Service_Proximitybeacon extends Google_Service
           )
         )
     );
-    $this->namespaces = new Google_Service_Proximitybeacon_Namespaces_Resource(
+    $this->namespaces = new Appointments_Google_Service_Proximitybeacon_Namespaces_Resource(
         $this,
         $this->serviceName,
         'namespaces',
@@ -257,26 +257,26 @@ class Google_Service_Proximitybeacon extends Google_Service
  * The "beaconinfo" collection of methods.
  * Typical usage is:
  *  <code>
- *   $proximitybeaconService = new Google_Service_Proximitybeacon(...);
+ *   $proximitybeaconService = new Appointments_Google_Service_Proximitybeacon(...);
  *   $beaconinfo = $proximitybeaconService->beaconinfo;
  *  </code>
  */
-class Google_Service_Proximitybeacon_Beaconinfo_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Proximitybeacon_Beaconinfo_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
    * Given one or more beacon observations, returns any beacon information and
    * attachments accessible to your application. (beaconinfo.getforobserved)
    *
-   * @param Google_GetInfoForObservedBeaconsRequest $postBody
+   * @param Appointments_Google_GetInfoForObservedBeaconsRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Proximitybeacon_GetInfoForObservedBeaconsResponse
+   * @return Appointments_Google_Service_Proximitybeacon_GetInfoForObservedBeaconsResponse
    */
-  public function getforobserved(Google_Service_Proximitybeacon_GetInfoForObservedBeaconsRequest $postBody, $optParams = array())
+  public function getforobserved(Appointments_Google_Service_Proximitybeacon_GetInfoForObservedBeaconsRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('getforobserved', array($params), "Google_Service_Proximitybeacon_GetInfoForObservedBeaconsResponse");
+    return $this->call('getforobserved', array($params), "Appointments_Google_Service_Proximitybeacon_GetInfoForObservedBeaconsResponse");
   }
 }
 
@@ -284,11 +284,11 @@ class Google_Service_Proximitybeacon_Beaconinfo_Resource extends Google_Service_
  * The "beacons" collection of methods.
  * Typical usage is:
  *  <code>
- *   $proximitybeaconService = new Google_Service_Proximitybeacon(...);
+ *   $proximitybeaconService = new Appointments_Google_Service_Proximitybeacon(...);
  *   $beacons = $proximitybeaconService->beacons;
  *  </code>
  */
-class Google_Service_Proximitybeacon_Beacons_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Proximitybeacon_Beacons_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -299,13 +299,13 @@ class Google_Service_Proximitybeacon_Beacons_Resource extends Google_Service_Res
    *
    * @param string $beaconName The beacon to activate. Required.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Proximitybeacon_Empty
+   * @return Appointments_Google_Service_Proximitybeacon_Empty
    */
   public function activate($beaconName, $optParams = array())
   {
     $params = array('beaconName' => $beaconName);
     $params = array_merge($params, $optParams);
-    return $this->call('activate', array($params), "Google_Service_Proximitybeacon_Empty");
+    return $this->call('activate', array($params), "Appointments_Google_Service_Proximitybeacon_Empty");
   }
 
   /**
@@ -317,13 +317,13 @@ class Google_Service_Proximitybeacon_Beacons_Resource extends Google_Service_Res
    *
    * @param string $beaconName The beacon name of this beacon.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Proximitybeacon_Empty
+   * @return Appointments_Google_Service_Proximitybeacon_Empty
    */
   public function deactivate($beaconName, $optParams = array())
   {
     $params = array('beaconName' => $beaconName);
     $params = array_merge($params, $optParams);
-    return $this->call('deactivate', array($params), "Google_Service_Proximitybeacon_Empty");
+    return $this->call('deactivate', array($params), "Appointments_Google_Service_Proximitybeacon_Empty");
   }
 
   /**
@@ -334,13 +334,13 @@ class Google_Service_Proximitybeacon_Beacons_Resource extends Google_Service_Res
    *
    * @param string $beaconName Beacon that should be decommissioned. Required.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Proximitybeacon_Empty
+   * @return Appointments_Google_Service_Proximitybeacon_Empty
    */
   public function decommission($beaconName, $optParams = array())
   {
     $params = array('beaconName' => $beaconName);
     $params = array_merge($params, $optParams);
-    return $this->call('decommission', array($params), "Google_Service_Proximitybeacon_Empty");
+    return $this->call('decommission', array($params), "Appointments_Google_Service_Proximitybeacon_Empty");
   }
 
   /**
@@ -348,13 +348,13 @@ class Google_Service_Proximitybeacon_Beacons_Resource extends Google_Service_Res
    *
    * @param string $beaconName Beacon that is requested.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Proximitybeacon_Beacon
+   * @return Appointments_Google_Service_Proximitybeacon_Beacon
    */
   public function get($beaconName, $optParams = array())
   {
     $params = array('beaconName' => $beaconName);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Proximitybeacon_Beacon");
+    return $this->call('get', array($params), "Appointments_Google_Service_Proximitybeacon_Beacon");
   }
 
   /**
@@ -410,13 +410,13 @@ class Google_Service_Proximitybeacon_Beacons_Resource extends Google_Service_Res
    * request to list beacons.
    * @opt_param int pageSize The maximum number of records to return for this
    * request, up to a server-defined upper limit.
-   * @return Google_Service_Proximitybeacon_ListBeaconsResponse
+   * @return Appointments_Google_Service_Proximitybeacon_ListBeaconsResponse
    */
   public function listBeacons($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Proximitybeacon_ListBeaconsResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Proximitybeacon_ListBeaconsResponse");
   }
 
   /**
@@ -424,15 +424,15 @@ class Google_Service_Proximitybeacon_Beacons_Resource extends Google_Service_Res
    * IDs are unique within the system. An ID can be registered only once.
    * (beacons.register)
    *
-   * @param Google_Beacon $postBody
+   * @param Appointments_Google_Beacon $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Proximitybeacon_Beacon
+   * @return Appointments_Google_Service_Proximitybeacon_Beacon
    */
-  public function register(Google_Service_Proximitybeacon_Beacon $postBody, $optParams = array())
+  public function register(Appointments_Google_Service_Proximitybeacon_Beacon $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('register', array($params), "Google_Service_Proximitybeacon_Beacon");
+    return $this->call('register', array($params), "Appointments_Google_Service_Proximitybeacon_Beacon");
   }
 
   /**
@@ -449,15 +449,15 @@ class Google_Service_Proximitybeacon_Beacons_Resource extends Google_Service_Res
    * Eddystone, `1` for iBeacon, or `5` for AltBeacon. This field must be left
    * empty when registering. After reading a beacon, clients can use the name for
    * future operations.
-   * @param Google_Beacon $postBody
+   * @param Appointments_Google_Beacon $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Proximitybeacon_Beacon
+   * @return Appointments_Google_Service_Proximitybeacon_Beacon
    */
-  public function update($beaconName, Google_Service_Proximitybeacon_Beacon $postBody, $optParams = array())
+  public function update($beaconName, Appointments_Google_Service_Proximitybeacon_Beacon $postBody, $optParams = array())
   {
     $params = array('beaconName' => $beaconName, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Proximitybeacon_Beacon");
+    return $this->call('update', array($params), "Appointments_Google_Service_Proximitybeacon_Beacon");
   }
 }
 
@@ -465,11 +465,11 @@ class Google_Service_Proximitybeacon_Beacons_Resource extends Google_Service_Res
  * The "attachments" collection of methods.
  * Typical usage is:
  *  <code>
- *   $proximitybeaconService = new Google_Service_Proximitybeacon(...);
+ *   $proximitybeaconService = new Appointments_Google_Service_Proximitybeacon(...);
  *   $attachments = $proximitybeaconService->attachments;
  *  </code>
  */
-class Google_Service_Proximitybeacon_BeaconsAttachments_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Proximitybeacon_BeaconsAttachments_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -486,13 +486,13 @@ class Google_Service_Proximitybeacon_BeaconsAttachments_Resource extends Google_
    * @opt_param string namespacedType Specifies the namespace and type of
    * attachments to delete in `namespace/type` format. Accepts `*` to specify "all
    * types in all namespaces". Optional.
-   * @return Google_Service_Proximitybeacon_DeleteAttachmentsResponse
+   * @return Appointments_Google_Service_Proximitybeacon_DeleteAttachmentsResponse
    */
   public function batchDelete($beaconName, $optParams = array())
   {
     $params = array('beaconName' => $beaconName);
     $params = array_merge($params, $optParams);
-    return $this->call('batchDelete', array($params), "Google_Service_Proximitybeacon_DeleteAttachmentsResponse");
+    return $this->call('batchDelete', array($params), "Appointments_Google_Service_Proximitybeacon_DeleteAttachmentsResponse");
   }
 
   /**
@@ -506,15 +506,15 @@ class Google_Service_Proximitybeacon_BeaconsAttachments_Resource extends Google_
    *
    * @param string $beaconName The beacon on which the attachment should be
    * created. Required.
-   * @param Google_BeaconAttachment $postBody
+   * @param Appointments_Google_BeaconAttachment $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Proximitybeacon_BeaconAttachment
+   * @return Appointments_Google_Service_Proximitybeacon_BeaconAttachment
    */
-  public function create($beaconName, Google_Service_Proximitybeacon_BeaconAttachment $postBody, $optParams = array())
+  public function create($beaconName, Appointments_Google_Service_Proximitybeacon_BeaconAttachment $postBody, $optParams = array())
   {
     $params = array('beaconName' => $beaconName, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_Proximitybeacon_BeaconAttachment");
+    return $this->call('create', array($params), "Appointments_Google_Service_Proximitybeacon_BeaconAttachment");
   }
 
   /**
@@ -528,13 +528,13 @@ class Google_Service_Proximitybeacon_BeaconsAttachments_Resource extends Google_
    * attachment to remove. For example:
    * `beacons/3!893737abc9/attachments/c5e937-af0-494-959-ec49d12738` Required.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Proximitybeacon_Empty
+   * @return Appointments_Google_Service_Proximitybeacon_Empty
    */
   public function delete($attachmentName, $optParams = array())
   {
     $params = array('attachmentName' => $attachmentName);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Proximitybeacon_Empty");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Proximitybeacon_Empty");
   }
 
   /**
@@ -551,24 +551,24 @@ class Google_Service_Proximitybeacon_BeaconsAttachments_Resource extends Google_
    * @opt_param string namespacedType Specifies the namespace and type of
    * attachment to include in response in namespace/type format. Accepts `*` to
    * specify "all types in all namespaces".
-   * @return Google_Service_Proximitybeacon_ListBeaconAttachmentsResponse
+   * @return Appointments_Google_Service_Proximitybeacon_ListBeaconAttachmentsResponse
    */
   public function listBeaconsAttachments($beaconName, $optParams = array())
   {
     $params = array('beaconName' => $beaconName);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Proximitybeacon_ListBeaconAttachmentsResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Proximitybeacon_ListBeaconAttachmentsResponse");
   }
 }
 /**
  * The "diagnostics" collection of methods.
  * Typical usage is:
  *  <code>
- *   $proximitybeaconService = new Google_Service_Proximitybeacon(...);
+ *   $proximitybeaconService = new Appointments_Google_Service_Proximitybeacon(...);
  *   $diagnostics = $proximitybeaconService->diagnostics;
  *  </code>
  */
-class Google_Service_Proximitybeacon_BeaconsDiagnostics_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Proximitybeacon_BeaconsDiagnostics_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -586,13 +586,13 @@ class Google_Service_Proximitybeacon_BeaconsDiagnostics_Resource extends Google_
    * @opt_param string alertFilter Requests only beacons that have the given
    * alert. For example, to find beacons that have low batteries use
    * `alert_filter=LOW_BATTERY`.
-   * @return Google_Service_Proximitybeacon_ListDiagnosticsResponse
+   * @return Appointments_Google_Service_Proximitybeacon_ListDiagnosticsResponse
    */
   public function listBeaconsDiagnostics($beaconName, $optParams = array())
   {
     $params = array('beaconName' => $beaconName);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Proximitybeacon_ListDiagnosticsResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Proximitybeacon_ListDiagnosticsResponse");
   }
 }
 
@@ -600,11 +600,11 @@ class Google_Service_Proximitybeacon_BeaconsDiagnostics_Resource extends Google_
  * The "namespaces" collection of methods.
  * Typical usage is:
  *  <code>
- *   $proximitybeaconService = new Google_Service_Proximitybeacon(...);
+ *   $proximitybeaconService = new Appointments_Google_Service_Proximitybeacon(...);
  *   $namespaces = $proximitybeaconService->namespaces;
  *  </code>
  */
-class Google_Service_Proximitybeacon_Namespaces_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Proximitybeacon_Namespaces_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -614,20 +614,20 @@ class Google_Service_Proximitybeacon_Namespaces_Resource extends Google_Service_
    * (namespaces.listNamespaces)
    *
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Proximitybeacon_ListNamespacesResponse
+   * @return Appointments_Google_Service_Proximitybeacon_ListNamespacesResponse
    */
   public function listNamespaces($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Proximitybeacon_ListNamespacesResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Proximitybeacon_ListNamespacesResponse");
   }
 }
 
 
 
 
-class Google_Service_Proximitybeacon_AdvertisedId extends Google_Model
+class Appointments_Google_Service_Proximitybeacon_AdvertisedId extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -653,7 +653,7 @@ class Google_Service_Proximitybeacon_AdvertisedId extends Google_Model
   }
 }
 
-class Google_Service_Proximitybeacon_AttachmentInfo extends Google_Model
+class Appointments_Google_Service_Proximitybeacon_AttachmentInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -679,25 +679,25 @@ class Google_Service_Proximitybeacon_AttachmentInfo extends Google_Model
   }
 }
 
-class Google_Service_Proximitybeacon_Beacon extends Google_Model
+class Appointments_Google_Service_Proximitybeacon_Beacon extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $advertisedIdType = 'Google_Service_Proximitybeacon_AdvertisedId';
+  protected $advertisedIdType = 'Appointments_Google_Service_Proximitybeacon_AdvertisedId';
   protected $advertisedIdDataType = '';
   public $beaconName;
   public $description;
   public $expectedStability;
-  protected $indoorLevelType = 'Google_Service_Proximitybeacon_IndoorLevel';
+  protected $indoorLevelType = 'Appointments_Google_Service_Proximitybeacon_IndoorLevel';
   protected $indoorLevelDataType = '';
-  protected $latLngType = 'Google_Service_Proximitybeacon_LatLng';
+  protected $latLngType = 'Appointments_Google_Service_Proximitybeacon_LatLng';
   protected $latLngDataType = '';
   public $placeId;
   public $properties;
   public $status;
 
 
-  public function setAdvertisedId(Google_Service_Proximitybeacon_AdvertisedId $advertisedId)
+  public function setAdvertisedId(Appointments_Google_Service_Proximitybeacon_AdvertisedId $advertisedId)
   {
     $this->advertisedId = $advertisedId;
   }
@@ -729,7 +729,7 @@ class Google_Service_Proximitybeacon_Beacon extends Google_Model
   {
     return $this->expectedStability;
   }
-  public function setIndoorLevel(Google_Service_Proximitybeacon_IndoorLevel $indoorLevel)
+  public function setIndoorLevel(Appointments_Google_Service_Proximitybeacon_IndoorLevel $indoorLevel)
   {
     $this->indoorLevel = $indoorLevel;
   }
@@ -737,7 +737,7 @@ class Google_Service_Proximitybeacon_Beacon extends Google_Model
   {
     return $this->indoorLevel;
   }
-  public function setLatLng(Google_Service_Proximitybeacon_LatLng $latLng)
+  public function setLatLng(Appointments_Google_Service_Proximitybeacon_LatLng $latLng)
   {
     $this->latLng = $latLng;
   }
@@ -771,7 +771,7 @@ class Google_Service_Proximitybeacon_Beacon extends Google_Model
   }
 }
 
-class Google_Service_Proximitybeacon_BeaconAttachment extends Google_Model
+class Appointments_Google_Service_Proximitybeacon_BeaconAttachment extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -806,20 +806,20 @@ class Google_Service_Proximitybeacon_BeaconAttachment extends Google_Model
   }
 }
 
-class Google_Service_Proximitybeacon_BeaconInfo extends Google_Collection
+class Appointments_Google_Service_Proximitybeacon_BeaconInfo extends Appointments_Google_Collection
 {
   protected $collection_key = 'attachments';
   protected $internal_gapi_mappings = array(
   );
-  protected $advertisedIdType = 'Google_Service_Proximitybeacon_AdvertisedId';
+  protected $advertisedIdType = 'Appointments_Google_Service_Proximitybeacon_AdvertisedId';
   protected $advertisedIdDataType = '';
-  protected $attachmentsType = 'Google_Service_Proximitybeacon_AttachmentInfo';
+  protected $attachmentsType = 'Appointments_Google_Service_Proximitybeacon_AttachmentInfo';
   protected $attachmentsDataType = 'array';
   public $beaconName;
   public $description;
 
 
-  public function setAdvertisedId(Google_Service_Proximitybeacon_AdvertisedId $advertisedId)
+  public function setAdvertisedId(Appointments_Google_Service_Proximitybeacon_AdvertisedId $advertisedId)
   {
     $this->advertisedId = $advertisedId;
   }
@@ -853,7 +853,7 @@ class Google_Service_Proximitybeacon_BeaconInfo extends Google_Collection
   }
 }
 
-class Google_Service_Proximitybeacon_Date extends Google_Model
+class Appointments_Google_Service_Proximitybeacon_Date extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -888,7 +888,7 @@ class Google_Service_Proximitybeacon_Date extends Google_Model
   }
 }
 
-class Google_Service_Proximitybeacon_DeleteAttachmentsResponse extends Google_Model
+class Appointments_Google_Service_Proximitybeacon_DeleteAttachmentsResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -905,14 +905,14 @@ class Google_Service_Proximitybeacon_DeleteAttachmentsResponse extends Google_Mo
   }
 }
 
-class Google_Service_Proximitybeacon_Diagnostics extends Google_Collection
+class Appointments_Google_Service_Proximitybeacon_Diagnostics extends Appointments_Google_Collection
 {
   protected $collection_key = 'alerts';
   protected $internal_gapi_mappings = array(
   );
   public $alerts;
   public $beaconName;
-  protected $estimatedLowBatteryDateType = 'Google_Service_Proximitybeacon_Date';
+  protected $estimatedLowBatteryDateType = 'Appointments_Google_Service_Proximitybeacon_Date';
   protected $estimatedLowBatteryDateDataType = '';
 
 
@@ -932,7 +932,7 @@ class Google_Service_Proximitybeacon_Diagnostics extends Google_Collection
   {
     return $this->beaconName;
   }
-  public function setEstimatedLowBatteryDate(Google_Service_Proximitybeacon_Date $estimatedLowBatteryDate)
+  public function setEstimatedLowBatteryDate(Appointments_Google_Service_Proximitybeacon_Date $estimatedLowBatteryDate)
   {
     $this->estimatedLowBatteryDate = $estimatedLowBatteryDate;
   }
@@ -942,17 +942,17 @@ class Google_Service_Proximitybeacon_Diagnostics extends Google_Collection
   }
 }
 
-class Google_Service_Proximitybeacon_Empty extends Google_Model
+class Appointments_Google_Service_Proximitybeacon_Empty extends Appointments_Google_Model
 {
 }
 
-class Google_Service_Proximitybeacon_GetInfoForObservedBeaconsRequest extends Google_Collection
+class Appointments_Google_Service_Proximitybeacon_GetInfoForObservedBeaconsRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'observations';
   protected $internal_gapi_mappings = array(
   );
   public $namespacedTypes;
-  protected $observationsType = 'Google_Service_Proximitybeacon_Observation';
+  protected $observationsType = 'Appointments_Google_Service_Proximitybeacon_Observation';
   protected $observationsDataType = 'array';
 
 
@@ -974,12 +974,12 @@ class Google_Service_Proximitybeacon_GetInfoForObservedBeaconsRequest extends Go
   }
 }
 
-class Google_Service_Proximitybeacon_GetInfoForObservedBeaconsResponse extends Google_Collection
+class Appointments_Google_Service_Proximitybeacon_GetInfoForObservedBeaconsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'beacons';
   protected $internal_gapi_mappings = array(
   );
-  protected $beaconsType = 'Google_Service_Proximitybeacon_BeaconInfo';
+  protected $beaconsType = 'Appointments_Google_Service_Proximitybeacon_BeaconInfo';
   protected $beaconsDataType = 'array';
 
 
@@ -993,7 +993,7 @@ class Google_Service_Proximitybeacon_GetInfoForObservedBeaconsResponse extends G
   }
 }
 
-class Google_Service_Proximitybeacon_IndoorLevel extends Google_Model
+class Appointments_Google_Service_Proximitybeacon_IndoorLevel extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1010,7 +1010,7 @@ class Google_Service_Proximitybeacon_IndoorLevel extends Google_Model
   }
 }
 
-class Google_Service_Proximitybeacon_LatLng extends Google_Model
+class Appointments_Google_Service_Proximitybeacon_LatLng extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1036,12 +1036,12 @@ class Google_Service_Proximitybeacon_LatLng extends Google_Model
   }
 }
 
-class Google_Service_Proximitybeacon_ListBeaconAttachmentsResponse extends Google_Collection
+class Appointments_Google_Service_Proximitybeacon_ListBeaconAttachmentsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'attachments';
   protected $internal_gapi_mappings = array(
   );
-  protected $attachmentsType = 'Google_Service_Proximitybeacon_BeaconAttachment';
+  protected $attachmentsType = 'Appointments_Google_Service_Proximitybeacon_BeaconAttachment';
   protected $attachmentsDataType = 'array';
 
 
@@ -1055,12 +1055,12 @@ class Google_Service_Proximitybeacon_ListBeaconAttachmentsResponse extends Googl
   }
 }
 
-class Google_Service_Proximitybeacon_ListBeaconsResponse extends Google_Collection
+class Appointments_Google_Service_Proximitybeacon_ListBeaconsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'beacons';
   protected $internal_gapi_mappings = array(
   );
-  protected $beaconsType = 'Google_Service_Proximitybeacon_Beacon';
+  protected $beaconsType = 'Appointments_Google_Service_Proximitybeacon_Beacon';
   protected $beaconsDataType = 'array';
   public $nextPageToken;
   public $totalCount;
@@ -1092,12 +1092,12 @@ class Google_Service_Proximitybeacon_ListBeaconsResponse extends Google_Collecti
   }
 }
 
-class Google_Service_Proximitybeacon_ListDiagnosticsResponse extends Google_Collection
+class Appointments_Google_Service_Proximitybeacon_ListDiagnosticsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'diagnostics';
   protected $internal_gapi_mappings = array(
   );
-  protected $diagnosticsType = 'Google_Service_Proximitybeacon_Diagnostics';
+  protected $diagnosticsType = 'Appointments_Google_Service_Proximitybeacon_Diagnostics';
   protected $diagnosticsDataType = 'array';
   public $nextPageToken;
 
@@ -1120,12 +1120,12 @@ class Google_Service_Proximitybeacon_ListDiagnosticsResponse extends Google_Coll
   }
 }
 
-class Google_Service_Proximitybeacon_ListNamespacesResponse extends Google_Collection
+class Appointments_Google_Service_Proximitybeacon_ListNamespacesResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'namespaces';
   protected $internal_gapi_mappings = array(
   );
-  protected $namespacesType = 'Google_Service_Proximitybeacon_ProximitybeaconNamespace';
+  protected $namespacesType = 'Appointments_Google_Service_Proximitybeacon_ProximitybeaconNamespace';
   protected $namespacesDataType = 'array';
 
 
@@ -1139,17 +1139,17 @@ class Google_Service_Proximitybeacon_ListNamespacesResponse extends Google_Colle
   }
 }
 
-class Google_Service_Proximitybeacon_Observation extends Google_Model
+class Appointments_Google_Service_Proximitybeacon_Observation extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $advertisedIdType = 'Google_Service_Proximitybeacon_AdvertisedId';
+  protected $advertisedIdType = 'Appointments_Google_Service_Proximitybeacon_AdvertisedId';
   protected $advertisedIdDataType = '';
   public $telemetry;
   public $timestampMs;
 
 
-  public function setAdvertisedId(Google_Service_Proximitybeacon_AdvertisedId $advertisedId)
+  public function setAdvertisedId(Appointments_Google_Service_Proximitybeacon_AdvertisedId $advertisedId)
   {
     $this->advertisedId = $advertisedId;
   }
@@ -1175,7 +1175,7 @@ class Google_Service_Proximitybeacon_Observation extends Google_Model
   }
 }
 
-class Google_Service_Proximitybeacon_ProximitybeaconNamespace extends Google_Model
+class Appointments_Google_Service_Proximitybeacon_ProximitybeaconNamespace extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );

@@ -27,7 +27,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Appengine extends Google_Service
+class Appointments_Google_Service_Appengine extends Appointments_Google_Service
 {
   /** View and manage your data across Google Cloud Platform services. */
   const CLOUD_PLATFORM =
@@ -42,9 +42,9 @@ class Google_Service_Appengine extends Google_Service
   /**
    * Constructs the internal representation of the Appengine service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://appengine.googleapis.com/';
@@ -52,7 +52,7 @@ class Google_Service_Appengine extends Google_Service
     $this->version = 'v1beta5';
     $this->serviceName = 'appengine';
 
-    $this->apps = new Google_Service_Appengine_Apps_Resource(
+    $this->apps = new Appointments_Google_Service_Appengine_Apps_Resource(
         $this,
         $this->serviceName,
         'apps',
@@ -76,7 +76,7 @@ class Google_Service_Appengine extends Google_Service
           )
         )
     );
-    $this->apps_operations = new Google_Service_Appengine_AppsOperations_Resource(
+    $this->apps_operations = new Appointments_Google_Service_Appengine_AppsOperations_Resource(
         $this,
         $this->serviceName,
         'operations',
@@ -123,7 +123,7 @@ class Google_Service_Appengine extends Google_Service
           )
         )
     );
-    $this->apps_services = new Google_Service_Appengine_AppsServices_Resource(
+    $this->apps_services = new Appointments_Google_Service_Appengine_AppsServices_Resource(
         $this,
         $this->serviceName,
         'services',
@@ -204,7 +204,7 @@ class Google_Service_Appengine extends Google_Service
           )
         )
     );
-    $this->apps_services_versions = new Google_Service_Appengine_AppsServicesVersions_Resource(
+    $this->apps_services_versions = new Appointments_Google_Service_Appengine_AppsServicesVersions_Resource(
         $this,
         $this->serviceName,
         'versions',
@@ -308,11 +308,11 @@ class Google_Service_Appengine extends Google_Service
  * The "apps" collection of methods.
  * Typical usage is:
  *  <code>
- *   $appengineService = new Google_Service_Appengine(...);
+ *   $appengineService = new Appointments_Google_Service_Appengine(...);
  *   $apps = $appengineService->apps;
  *  </code>
  */
-class Google_Service_Appengine_Apps_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Appengine_Apps_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -328,13 +328,13 @@ class Google_Service_Appengine_Apps_Resource extends Google_Service_Resource
    * could not be created, the request will fail with an error code. Additionally,
    * this parameter can cause the request to take longer to complete. Note: This
    * parameter will be deprecated in a future version of the API.
-   * @return Google_Service_Appengine_Application
+   * @return Appointments_Google_Service_Appengine_Application
    */
   public function get($appsId, $optParams = array())
   {
     $params = array('appsId' => $appsId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Appengine_Application");
+    return $this->call('get', array($params), "Appointments_Google_Service_Appengine_Application");
   }
 }
 
@@ -342,11 +342,11 @@ class Google_Service_Appengine_Apps_Resource extends Google_Service_Resource
  * The "operations" collection of methods.
  * Typical usage is:
  *  <code>
- *   $appengineService = new Google_Service_Appengine(...);
+ *   $appengineService = new Appointments_Google_Service_Appengine(...);
  *   $operations = $appengineService->operations;
  *  </code>
  */
-class Google_Service_Appengine_AppsOperations_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Appengine_AppsOperations_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -357,13 +357,13 @@ class Google_Service_Appengine_AppsOperations_Resource extends Google_Service_Re
    * @param string $appsId Part of `name`. The name of the operation resource.
    * @param string $operationsId Part of `name`. See documentation of `appsId`.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Appengine_Operation
+   * @return Appointments_Google_Service_Appengine_Operation
    */
   public function get($appsId, $operationsId, $optParams = array())
   {
     $params = array('appsId' => $appsId, 'operationsId' => $operationsId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Appengine_Operation");
+    return $this->call('get', array($params), "Appointments_Google_Service_Appengine_Operation");
   }
 
   /**
@@ -379,24 +379,24 @@ class Google_Service_Appengine_AppsOperations_Resource extends Google_Service_Re
    * @opt_param string filter The standard list filter.
    * @opt_param int pageSize The standard list page size.
    * @opt_param string pageToken The standard list page token.
-   * @return Google_Service_Appengine_ListOperationsResponse
+   * @return Appointments_Google_Service_Appengine_ListOperationsResponse
    */
   public function listAppsOperations($appsId, $optParams = array())
   {
     $params = array('appsId' => $appsId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Appengine_ListOperationsResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Appengine_ListOperationsResponse");
   }
 }
 /**
  * The "services" collection of methods.
  * Typical usage is:
  *  <code>
- *   $appengineService = new Google_Service_Appengine(...);
+ *   $appengineService = new Appointments_Google_Service_Appengine(...);
  *   $services = $appengineService->services;
  *  </code>
  */
-class Google_Service_Appengine_AppsServices_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Appengine_AppsServices_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -406,13 +406,13 @@ class Google_Service_Appengine_AppsServices_Resource extends Google_Service_Reso
    * example: "apps/myapp/services/default".
    * @param string $servicesId Part of `name`. See documentation of `appsId`.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Appengine_Operation
+   * @return Appointments_Google_Service_Appengine_Operation
    */
   public function delete($appsId, $servicesId, $optParams = array())
   {
     $params = array('appsId' => $appsId, 'servicesId' => $servicesId);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Appengine_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Appengine_Operation");
   }
 
   /**
@@ -422,13 +422,13 @@ class Google_Service_Appengine_AppsServices_Resource extends Google_Service_Reso
    * example: "apps/myapp/services/default".
    * @param string $servicesId Part of `name`. See documentation of `appsId`.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Appengine_Service
+   * @return Appointments_Google_Service_Appengine_Service
    */
   public function get($appsId, $servicesId, $optParams = array())
   {
     $params = array('appsId' => $appsId, 'servicesId' => $servicesId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Appengine_Service");
+    return $this->call('get', array($params), "Appointments_Google_Service_Appengine_Service");
   }
 
   /**
@@ -441,13 +441,13 @@ class Google_Service_Appengine_AppsServices_Resource extends Google_Service_Reso
    * @opt_param int pageSize Maximum results to return per page.
    * @opt_param string pageToken Continuation token for fetching the next page of
    * results.
-   * @return Google_Service_Appengine_ListServicesResponse
+   * @return Appointments_Google_Service_Appengine_ListServicesResponse
    */
   public function listAppsServices($appsId, $optParams = array())
   {
     $params = array('appsId' => $appsId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Appengine_ListServicesResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Appengine_ListServicesResponse");
   }
 
   /**
@@ -456,7 +456,7 @@ class Google_Service_Appengine_AppsServices_Resource extends Google_Service_Reso
    * @param string $appsId Part of `name`. Name of the resource to update. For
    * example: "apps/myapp/services/default".
    * @param string $servicesId Part of `name`. See documentation of `appsId`.
-   * @param Google_Service $postBody
+   * @param Appointments_Google_Service $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param string mask Standard field mask for the set of fields to be
@@ -464,13 +464,13 @@ class Google_Service_Appengine_AppsServices_Resource extends Google_Service_Reso
    * @opt_param bool migrateTraffic Whether to use Traffic Migration to shift
    * traffic gradually. Traffic can only be migrated from a single version to
    * another single version.
-   * @return Google_Service_Appengine_Operation
+   * @return Appointments_Google_Service_Appengine_Operation
    */
-  public function patch($appsId, $servicesId, Google_Service_Appengine_Service $postBody, $optParams = array())
+  public function patch($appsId, $servicesId, Appointments_Google_Service_Appengine_Service $postBody, $optParams = array())
   {
     $params = array('appsId' => $appsId, 'servicesId' => $servicesId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Appengine_Operation");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Appengine_Operation");
   }
 }
 
@@ -478,11 +478,11 @@ class Google_Service_Appengine_AppsServices_Resource extends Google_Service_Reso
  * The "versions" collection of methods.
  * Typical usage is:
  *  <code>
- *   $appengineService = new Google_Service_Appengine(...);
+ *   $appengineService = new Appointments_Google_Service_Appengine(...);
  *   $versions = $appengineService->versions;
  *  </code>
  */
-class Google_Service_Appengine_AppsServicesVersions_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Appengine_AppsServicesVersions_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -491,15 +491,15 @@ class Google_Service_Appengine_AppsServicesVersions_Resource extends Google_Serv
    * @param string $appsId Part of `name`. Name of the resource to update. For
    * example: "apps/myapp/services/default".
    * @param string $servicesId Part of `name`. See documentation of `appsId`.
-   * @param Google_Version $postBody
+   * @param Appointments_Google_Version $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Appengine_Operation
+   * @return Appointments_Google_Service_Appengine_Operation
    */
-  public function create($appsId, $servicesId, Google_Service_Appengine_Version $postBody, $optParams = array())
+  public function create($appsId, $servicesId, Appointments_Google_Service_Appengine_Version $postBody, $optParams = array())
   {
     $params = array('appsId' => $appsId, 'servicesId' => $servicesId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_Appengine_Operation");
+    return $this->call('create', array($params), "Appointments_Google_Service_Appengine_Operation");
   }
 
   /**
@@ -510,13 +510,13 @@ class Google_Service_Appengine_AppsServicesVersions_Resource extends Google_Serv
    * @param string $servicesId Part of `name`. See documentation of `appsId`.
    * @param string $versionsId Part of `name`. See documentation of `appsId`.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Appengine_Operation
+   * @return Appointments_Google_Service_Appengine_Operation
    */
   public function delete($appsId, $servicesId, $versionsId, $optParams = array())
   {
     $params = array('appsId' => $appsId, 'servicesId' => $servicesId, 'versionsId' => $versionsId);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Appengine_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Appengine_Operation");
   }
 
   /**
@@ -530,13 +530,13 @@ class Google_Service_Appengine_AppsServicesVersions_Resource extends Google_Serv
    *
    * @opt_param string view Controls the set of fields returned in the `Get`
    * response.
-   * @return Google_Service_Appengine_Version
+   * @return Appointments_Google_Service_Appengine_Version
    */
   public function get($appsId, $servicesId, $versionsId, $optParams = array())
   {
     $params = array('appsId' => $appsId, 'servicesId' => $servicesId, 'versionsId' => $versionsId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Appengine_Version");
+    return $this->call('get', array($params), "Appointments_Google_Service_Appengine_Version");
   }
 
   /**
@@ -552,20 +552,20 @@ class Google_Service_Appengine_AppsServicesVersions_Resource extends Google_Serv
    * @opt_param int pageSize Maximum results to return per page.
    * @opt_param string pageToken Continuation token for fetching the next page of
    * results.
-   * @return Google_Service_Appengine_ListVersionsResponse
+   * @return Appointments_Google_Service_Appengine_ListVersionsResponse
    */
   public function listAppsServicesVersions($appsId, $servicesId, $optParams = array())
   {
     $params = array('appsId' => $appsId, 'servicesId' => $servicesId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Appengine_ListVersionsResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Appengine_ListVersionsResponse");
   }
 }
 
 
 
 
-class Google_Service_Appengine_ApiConfigHandler extends Google_Model
+class Appointments_Google_Service_Appengine_ApiConfigHandler extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -618,7 +618,7 @@ class Google_Service_Appengine_ApiConfigHandler extends Google_Model
   }
 }
 
-class Google_Service_Appengine_ApiEndpointHandler extends Google_Model
+class Appointments_Google_Service_Appengine_ApiEndpointHandler extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -635,14 +635,14 @@ class Google_Service_Appengine_ApiEndpointHandler extends Google_Model
   }
 }
 
-class Google_Service_Appengine_Application extends Google_Collection
+class Appointments_Google_Service_Appengine_Application extends Appointments_Google_Collection
 {
   protected $collection_key = 'dispatchRules';
   protected $internal_gapi_mappings = array(
   );
   public $codeBucket;
   public $defaultBucket;
-  protected $dispatchRulesType = 'Google_Service_Appengine_UrlDispatchRule';
+  protected $dispatchRulesType = 'Appointments_Google_Service_Appengine_UrlDispatchRule';
   protected $dispatchRulesDataType = 'array';
   public $id;
   public $location;
@@ -699,14 +699,14 @@ class Google_Service_Appengine_Application extends Google_Collection
   }
 }
 
-class Google_Service_Appengine_AutomaticScaling extends Google_Model
+class Appointments_Google_Service_Appengine_AutomaticScaling extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $coolDownPeriod;
-  protected $cpuUtilizationType = 'Google_Service_Appengine_CpuUtilization';
+  protected $cpuUtilizationType = 'Appointments_Google_Service_Appengine_CpuUtilization';
   protected $cpuUtilizationDataType = '';
-  protected $diskUtilizationType = 'Google_Service_Appengine_DiskUtilization';
+  protected $diskUtilizationType = 'Appointments_Google_Service_Appengine_DiskUtilization';
   protected $diskUtilizationDataType = '';
   public $maxConcurrentRequests;
   public $maxIdleInstances;
@@ -715,9 +715,9 @@ class Google_Service_Appengine_AutomaticScaling extends Google_Model
   public $minIdleInstances;
   public $minPendingLatency;
   public $minTotalInstances;
-  protected $networkUtilizationType = 'Google_Service_Appengine_NetworkUtilization';
+  protected $networkUtilizationType = 'Appointments_Google_Service_Appengine_NetworkUtilization';
   protected $networkUtilizationDataType = '';
-  protected $requestUtilizationType = 'Google_Service_Appengine_RequestUtilization';
+  protected $requestUtilizationType = 'Appointments_Google_Service_Appengine_RequestUtilization';
   protected $requestUtilizationDataType = '';
 
 
@@ -729,7 +729,7 @@ class Google_Service_Appengine_AutomaticScaling extends Google_Model
   {
     return $this->coolDownPeriod;
   }
-  public function setCpuUtilization(Google_Service_Appengine_CpuUtilization $cpuUtilization)
+  public function setCpuUtilization(Appointments_Google_Service_Appengine_CpuUtilization $cpuUtilization)
   {
     $this->cpuUtilization = $cpuUtilization;
   }
@@ -737,7 +737,7 @@ class Google_Service_Appengine_AutomaticScaling extends Google_Model
   {
     return $this->cpuUtilization;
   }
-  public function setDiskUtilization(Google_Service_Appengine_DiskUtilization $diskUtilization)
+  public function setDiskUtilization(Appointments_Google_Service_Appengine_DiskUtilization $diskUtilization)
   {
     $this->diskUtilization = $diskUtilization;
   }
@@ -801,7 +801,7 @@ class Google_Service_Appengine_AutomaticScaling extends Google_Model
   {
     return $this->minTotalInstances;
   }
-  public function setNetworkUtilization(Google_Service_Appengine_NetworkUtilization $networkUtilization)
+  public function setNetworkUtilization(Appointments_Google_Service_Appengine_NetworkUtilization $networkUtilization)
   {
     $this->networkUtilization = $networkUtilization;
   }
@@ -809,7 +809,7 @@ class Google_Service_Appengine_AutomaticScaling extends Google_Model
   {
     return $this->networkUtilization;
   }
-  public function setRequestUtilization(Google_Service_Appengine_RequestUtilization $requestUtilization)
+  public function setRequestUtilization(Appointments_Google_Service_Appengine_RequestUtilization $requestUtilization)
   {
     $this->requestUtilization = $requestUtilization;
   }
@@ -819,7 +819,7 @@ class Google_Service_Appengine_AutomaticScaling extends Google_Model
   }
 }
 
-class Google_Service_Appengine_BasicScaling extends Google_Model
+class Appointments_Google_Service_Appengine_BasicScaling extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -845,7 +845,7 @@ class Google_Service_Appengine_BasicScaling extends Google_Model
   }
 }
 
-class Google_Service_Appengine_ContainerInfo extends Google_Model
+class Appointments_Google_Service_Appengine_ContainerInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -862,7 +862,7 @@ class Google_Service_Appengine_ContainerInfo extends Google_Model
   }
 }
 
-class Google_Service_Appengine_CpuUtilization extends Google_Model
+class Appointments_Google_Service_Appengine_CpuUtilization extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -888,20 +888,20 @@ class Google_Service_Appengine_CpuUtilization extends Google_Model
   }
 }
 
-class Google_Service_Appengine_Deployment extends Google_Collection
+class Appointments_Google_Service_Appengine_Deployment extends Appointments_Google_Collection
 {
   protected $collection_key = 'sourceReferences';
   protected $internal_gapi_mappings = array(
   );
-  protected $containerType = 'Google_Service_Appengine_ContainerInfo';
+  protected $containerType = 'Appointments_Google_Service_Appengine_ContainerInfo';
   protected $containerDataType = '';
-  protected $filesType = 'Google_Service_Appengine_FileInfo';
+  protected $filesType = 'Appointments_Google_Service_Appengine_FileInfo';
   protected $filesDataType = 'map';
-  protected $sourceReferencesType = 'Google_Service_Appengine_SourceReference';
+  protected $sourceReferencesType = 'Appointments_Google_Service_Appengine_SourceReference';
   protected $sourceReferencesDataType = 'array';
 
 
-  public function setContainer(Google_Service_Appengine_ContainerInfo $container)
+  public function setContainer(Appointments_Google_Service_Appengine_ContainerInfo $container)
   {
     $this->container = $container;
   }
@@ -927,7 +927,7 @@ class Google_Service_Appengine_Deployment extends Google_Collection
   }
 }
 
-class Google_Service_Appengine_DiskUtilization extends Google_Model
+class Appointments_Google_Service_Appengine_DiskUtilization extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -971,7 +971,7 @@ class Google_Service_Appengine_DiskUtilization extends Google_Model
   }
 }
 
-class Google_Service_Appengine_ErrorHandler extends Google_Model
+class Appointments_Google_Service_Appengine_ErrorHandler extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1006,7 +1006,7 @@ class Google_Service_Appengine_ErrorHandler extends Google_Model
   }
 }
 
-class Google_Service_Appengine_FileInfo extends Google_Model
+class Appointments_Google_Service_Appengine_FileInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1041,7 +1041,7 @@ class Google_Service_Appengine_FileInfo extends Google_Model
   }
 }
 
-class Google_Service_Appengine_HealthCheck extends Google_Model
+class Appointments_Google_Service_Appengine_HealthCheck extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1112,7 +1112,7 @@ class Google_Service_Appengine_HealthCheck extends Google_Model
   }
 }
 
-class Google_Service_Appengine_Library extends Google_Model
+class Appointments_Google_Service_Appengine_Library extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1138,13 +1138,13 @@ class Google_Service_Appengine_Library extends Google_Model
   }
 }
 
-class Google_Service_Appengine_ListOperationsResponse extends Google_Collection
+class Appointments_Google_Service_Appengine_ListOperationsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'operations';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $operationsType = 'Google_Service_Appengine_Operation';
+  protected $operationsType = 'Appointments_Google_Service_Appengine_Operation';
   protected $operationsDataType = 'array';
 
 
@@ -1166,13 +1166,13 @@ class Google_Service_Appengine_ListOperationsResponse extends Google_Collection
   }
 }
 
-class Google_Service_Appengine_ListServicesResponse extends Google_Collection
+class Appointments_Google_Service_Appengine_ListServicesResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'services';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $servicesType = 'Google_Service_Appengine_Service';
+  protected $servicesType = 'Appointments_Google_Service_Appengine_Service';
   protected $servicesDataType = 'array';
 
 
@@ -1194,13 +1194,13 @@ class Google_Service_Appengine_ListServicesResponse extends Google_Collection
   }
 }
 
-class Google_Service_Appengine_ListVersionsResponse extends Google_Collection
+class Appointments_Google_Service_Appengine_ListVersionsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'versions';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $versionsType = 'Google_Service_Appengine_Version';
+  protected $versionsType = 'Appointments_Google_Service_Appengine_Version';
   protected $versionsDataType = 'array';
 
 
@@ -1222,7 +1222,7 @@ class Google_Service_Appengine_ListVersionsResponse extends Google_Collection
   }
 }
 
-class Google_Service_Appengine_ManualScaling extends Google_Model
+class Appointments_Google_Service_Appengine_ManualScaling extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1239,7 +1239,7 @@ class Google_Service_Appengine_ManualScaling extends Google_Model
   }
 }
 
-class Google_Service_Appengine_Network extends Google_Collection
+class Appointments_Google_Service_Appengine_Network extends Appointments_Google_Collection
 {
   protected $collection_key = 'forwardedPorts';
   protected $internal_gapi_mappings = array(
@@ -1275,7 +1275,7 @@ class Google_Service_Appengine_Network extends Google_Collection
   }
 }
 
-class Google_Service_Appengine_NetworkUtilization extends Google_Model
+class Appointments_Google_Service_Appengine_NetworkUtilization extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1319,12 +1319,12 @@ class Google_Service_Appengine_NetworkUtilization extends Google_Model
   }
 }
 
-class Google_Service_Appengine_Operation extends Google_Model
+class Appointments_Google_Service_Appengine_Operation extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $done;
-  protected $errorType = 'Google_Service_Appengine_Status';
+  protected $errorType = 'Appointments_Google_Service_Appengine_Status';
   protected $errorDataType = '';
   public $metadata;
   public $name;
@@ -1339,7 +1339,7 @@ class Google_Service_Appengine_Operation extends Google_Model
   {
     return $this->done;
   }
-  public function setError(Google_Service_Appengine_Status $error)
+  public function setError(Appointments_Google_Service_Appengine_Status $error)
   {
     $this->error = $error;
   }
@@ -1373,7 +1373,7 @@ class Google_Service_Appengine_Operation extends Google_Model
   }
 }
 
-class Google_Service_Appengine_OperationMetadata extends Google_Model
+class Appointments_Google_Service_Appengine_OperationMetadata extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1435,7 +1435,7 @@ class Google_Service_Appengine_OperationMetadata extends Google_Model
   }
 }
 
-class Google_Service_Appengine_OperationMetadataV1Beta5 extends Google_Model
+class Appointments_Google_Service_Appengine_OperationMetadataV1Beta5 extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1488,7 +1488,7 @@ class Google_Service_Appengine_OperationMetadataV1Beta5 extends Google_Model
   }
 }
 
-class Google_Service_Appengine_RequestUtilization extends Google_Model
+class Appointments_Google_Service_Appengine_RequestUtilization extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1514,7 +1514,7 @@ class Google_Service_Appengine_RequestUtilization extends Google_Model
   }
 }
 
-class Google_Service_Appengine_Resources extends Google_Model
+class Appointments_Google_Service_Appengine_Resources extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1549,7 +1549,7 @@ class Google_Service_Appengine_Resources extends Google_Model
   }
 }
 
-class Google_Service_Appengine_ScriptHandler extends Google_Model
+class Appointments_Google_Service_Appengine_ScriptHandler extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1566,13 +1566,13 @@ class Google_Service_Appengine_ScriptHandler extends Google_Model
   }
 }
 
-class Google_Service_Appengine_Service extends Google_Model
+class Appointments_Google_Service_Appengine_Service extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $id;
   public $name;
-  protected $splitType = 'Google_Service_Appengine_TrafficSplit';
+  protected $splitType = 'Appointments_Google_Service_Appengine_TrafficSplit';
   protected $splitDataType = '';
 
 
@@ -1592,7 +1592,7 @@ class Google_Service_Appengine_Service extends Google_Model
   {
     return $this->name;
   }
-  public function setSplit(Google_Service_Appengine_TrafficSplit $split)
+  public function setSplit(Appointments_Google_Service_Appengine_TrafficSplit $split)
   {
     $this->split = $split;
   }
@@ -1602,7 +1602,7 @@ class Google_Service_Appengine_Service extends Google_Model
   }
 }
 
-class Google_Service_Appengine_SourceReference extends Google_Model
+class Appointments_Google_Service_Appengine_SourceReference extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1628,7 +1628,7 @@ class Google_Service_Appengine_SourceReference extends Google_Model
   }
 }
 
-class Google_Service_Appengine_StaticFilesHandler extends Google_Model
+class Appointments_Google_Service_Appengine_StaticFilesHandler extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1699,7 +1699,7 @@ class Google_Service_Appengine_StaticFilesHandler extends Google_Model
   }
 }
 
-class Google_Service_Appengine_Status extends Google_Collection
+class Appointments_Google_Service_Appengine_Status extends Appointments_Google_Collection
 {
   protected $collection_key = 'details';
   protected $internal_gapi_mappings = array(
@@ -1735,7 +1735,7 @@ class Google_Service_Appengine_Status extends Google_Collection
   }
 }
 
-class Google_Service_Appengine_TrafficSplit extends Google_Model
+class Appointments_Google_Service_Appengine_TrafficSplit extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1761,7 +1761,7 @@ class Google_Service_Appengine_TrafficSplit extends Google_Model
   }
 }
 
-class Google_Service_Appengine_UrlDispatchRule extends Google_Model
+class Appointments_Google_Service_Appengine_UrlDispatchRule extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1796,24 +1796,24 @@ class Google_Service_Appengine_UrlDispatchRule extends Google_Model
   }
 }
 
-class Google_Service_Appengine_UrlMap extends Google_Model
+class Appointments_Google_Service_Appengine_UrlMap extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $apiEndpointType = 'Google_Service_Appengine_ApiEndpointHandler';
+  protected $apiEndpointType = 'Appointments_Google_Service_Appengine_ApiEndpointHandler';
   protected $apiEndpointDataType = '';
   public $authFailAction;
   public $login;
   public $redirectHttpResponseCode;
-  protected $scriptType = 'Google_Service_Appengine_ScriptHandler';
+  protected $scriptType = 'Appointments_Google_Service_Appengine_ScriptHandler';
   protected $scriptDataType = '';
   public $securityLevel;
-  protected $staticFilesType = 'Google_Service_Appengine_StaticFilesHandler';
+  protected $staticFilesType = 'Appointments_Google_Service_Appengine_StaticFilesHandler';
   protected $staticFilesDataType = '';
   public $urlRegex;
 
 
-  public function setApiEndpoint(Google_Service_Appengine_ApiEndpointHandler $apiEndpoint)
+  public function setApiEndpoint(Appointments_Google_Service_Appengine_ApiEndpointHandler $apiEndpoint)
   {
     $this->apiEndpoint = $apiEndpoint;
   }
@@ -1845,7 +1845,7 @@ class Google_Service_Appengine_UrlMap extends Google_Model
   {
     return $this->redirectHttpResponseCode;
   }
-  public function setScript(Google_Service_Appengine_ScriptHandler $script)
+  public function setScript(Appointments_Google_Service_Appengine_ScriptHandler $script)
   {
     $this->script = $script;
   }
@@ -1861,7 +1861,7 @@ class Google_Service_Appengine_UrlMap extends Google_Model
   {
     return $this->securityLevel;
   }
-  public function setStaticFiles(Google_Service_Appengine_StaticFilesHandler $staticFiles)
+  public function setStaticFiles(Appointments_Google_Service_Appengine_StaticFilesHandler $staticFiles)
   {
     $this->staticFiles = $staticFiles;
   }
@@ -1879,44 +1879,44 @@ class Google_Service_Appengine_UrlMap extends Google_Model
   }
 }
 
-class Google_Service_Appengine_Version extends Google_Collection
+class Appointments_Google_Service_Appengine_Version extends Appointments_Google_Collection
 {
   protected $collection_key = 'libraries';
   protected $internal_gapi_mappings = array(
   );
-  protected $apiConfigType = 'Google_Service_Appengine_ApiConfigHandler';
+  protected $apiConfigType = 'Appointments_Google_Service_Appengine_ApiConfigHandler';
   protected $apiConfigDataType = '';
-  protected $automaticScalingType = 'Google_Service_Appengine_AutomaticScaling';
+  protected $automaticScalingType = 'Appointments_Google_Service_Appengine_AutomaticScaling';
   protected $automaticScalingDataType = '';
-  protected $basicScalingType = 'Google_Service_Appengine_BasicScaling';
+  protected $basicScalingType = 'Appointments_Google_Service_Appengine_BasicScaling';
   protected $basicScalingDataType = '';
   public $betaSettings;
   public $creationTime;
   public $defaultExpiration;
   public $deployer;
-  protected $deploymentType = 'Google_Service_Appengine_Deployment';
+  protected $deploymentType = 'Appointments_Google_Service_Appengine_Deployment';
   protected $deploymentDataType = '';
   public $diskUsageBytes;
   public $env;
   public $envVariables;
-  protected $errorHandlersType = 'Google_Service_Appengine_ErrorHandler';
+  protected $errorHandlersType = 'Appointments_Google_Service_Appengine_ErrorHandler';
   protected $errorHandlersDataType = 'array';
-  protected $handlersType = 'Google_Service_Appengine_UrlMap';
+  protected $handlersType = 'Appointments_Google_Service_Appengine_UrlMap';
   protected $handlersDataType = 'array';
-  protected $healthCheckType = 'Google_Service_Appengine_HealthCheck';
+  protected $healthCheckType = 'Appointments_Google_Service_Appengine_HealthCheck';
   protected $healthCheckDataType = '';
   public $id;
   public $inboundServices;
   public $instanceClass;
-  protected $librariesType = 'Google_Service_Appengine_Library';
+  protected $librariesType = 'Appointments_Google_Service_Appengine_Library';
   protected $librariesDataType = 'array';
-  protected $manualScalingType = 'Google_Service_Appengine_ManualScaling';
+  protected $manualScalingType = 'Appointments_Google_Service_Appengine_ManualScaling';
   protected $manualScalingDataType = '';
   public $name;
-  protected $networkType = 'Google_Service_Appengine_Network';
+  protected $networkType = 'Appointments_Google_Service_Appengine_Network';
   protected $networkDataType = '';
   public $nobuildFilesRegex;
-  protected $resourcesType = 'Google_Service_Appengine_Resources';
+  protected $resourcesType = 'Appointments_Google_Service_Appengine_Resources';
   protected $resourcesDataType = '';
   public $runtime;
   public $servingStatus;
@@ -1924,7 +1924,7 @@ class Google_Service_Appengine_Version extends Google_Collection
   public $vm;
 
 
-  public function setApiConfig(Google_Service_Appengine_ApiConfigHandler $apiConfig)
+  public function setApiConfig(Appointments_Google_Service_Appengine_ApiConfigHandler $apiConfig)
   {
     $this->apiConfig = $apiConfig;
   }
@@ -1932,7 +1932,7 @@ class Google_Service_Appengine_Version extends Google_Collection
   {
     return $this->apiConfig;
   }
-  public function setAutomaticScaling(Google_Service_Appengine_AutomaticScaling $automaticScaling)
+  public function setAutomaticScaling(Appointments_Google_Service_Appengine_AutomaticScaling $automaticScaling)
   {
     $this->automaticScaling = $automaticScaling;
   }
@@ -1940,7 +1940,7 @@ class Google_Service_Appengine_Version extends Google_Collection
   {
     return $this->automaticScaling;
   }
-  public function setBasicScaling(Google_Service_Appengine_BasicScaling $basicScaling)
+  public function setBasicScaling(Appointments_Google_Service_Appengine_BasicScaling $basicScaling)
   {
     $this->basicScaling = $basicScaling;
   }
@@ -1980,7 +1980,7 @@ class Google_Service_Appengine_Version extends Google_Collection
   {
     return $this->deployer;
   }
-  public function setDeployment(Google_Service_Appengine_Deployment $deployment)
+  public function setDeployment(Appointments_Google_Service_Appengine_Deployment $deployment)
   {
     $this->deployment = $deployment;
   }
@@ -2028,7 +2028,7 @@ class Google_Service_Appengine_Version extends Google_Collection
   {
     return $this->handlers;
   }
-  public function setHealthCheck(Google_Service_Appengine_HealthCheck $healthCheck)
+  public function setHealthCheck(Appointments_Google_Service_Appengine_HealthCheck $healthCheck)
   {
     $this->healthCheck = $healthCheck;
   }
@@ -2068,7 +2068,7 @@ class Google_Service_Appengine_Version extends Google_Collection
   {
     return $this->libraries;
   }
-  public function setManualScaling(Google_Service_Appengine_ManualScaling $manualScaling)
+  public function setManualScaling(Appointments_Google_Service_Appengine_ManualScaling $manualScaling)
   {
     $this->manualScaling = $manualScaling;
   }
@@ -2084,7 +2084,7 @@ class Google_Service_Appengine_Version extends Google_Collection
   {
     return $this->name;
   }
-  public function setNetwork(Google_Service_Appengine_Network $network)
+  public function setNetwork(Appointments_Google_Service_Appengine_Network $network)
   {
     $this->network = $network;
   }
@@ -2100,7 +2100,7 @@ class Google_Service_Appengine_Version extends Google_Collection
   {
     return $this->nobuildFilesRegex;
   }
-  public function setResources(Google_Service_Appengine_Resources $resources)
+  public function setResources(Appointments_Google_Service_Appengine_Resources $resources)
   {
     $this->resources = $resources;
   }

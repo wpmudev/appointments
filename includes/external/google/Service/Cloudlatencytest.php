@@ -26,7 +26,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Cloudlatencytest extends Google_Service
+class Appointments_Google_Service_Cloudlatencytest extends Appointments_Google_Service
 {
   /** View monitoring data for all of your Google Cloud and API projects. */
   const MONITORING_READONLY =
@@ -38,9 +38,9 @@ class Google_Service_Cloudlatencytest extends Google_Service
   /**
    * Constructs the internal representation of the Cloudlatencytest service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://cloudlatencytest-pa.googleapis.com/';
@@ -48,7 +48,7 @@ class Google_Service_Cloudlatencytest extends Google_Service
     $this->version = 'v2';
     $this->serviceName = 'cloudlatencytest';
 
-    $this->statscollection = new Google_Service_Cloudlatencytest_Statscollection_Resource(
+    $this->statscollection = new Appointments_Google_Service_Cloudlatencytest_Statscollection_Resource(
         $this,
         $this->serviceName,
         'statscollection',
@@ -74,51 +74,51 @@ class Google_Service_Cloudlatencytest extends Google_Service
  * The "statscollection" collection of methods.
  * Typical usage is:
  *  <code>
- *   $cloudlatencytestService = new Google_Service_Cloudlatencytest(...);
+ *   $cloudlatencytestService = new Appointments_Google_Service_Cloudlatencytest(...);
  *   $statscollection = $cloudlatencytestService->statscollection;
  *  </code>
  */
-class Google_Service_Cloudlatencytest_Statscollection_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Cloudlatencytest_Statscollection_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
    * RPC to update the new TCP stats. (statscollection.updateaggregatedstats)
    *
-   * @param Google_AggregatedStats $postBody
+   * @param Appointments_Google_AggregatedStats $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Cloudlatencytest_AggregatedStatsReply
+   * @return Appointments_Google_Service_Cloudlatencytest_AggregatedStatsReply
    */
-  public function updateaggregatedstats(Google_Service_Cloudlatencytest_AggregatedStats $postBody, $optParams = array())
+  public function updateaggregatedstats(Appointments_Google_Service_Cloudlatencytest_AggregatedStats $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('updateaggregatedstats', array($params), "Google_Service_Cloudlatencytest_AggregatedStatsReply");
+    return $this->call('updateaggregatedstats', array($params), "Appointments_Google_Service_Cloudlatencytest_AggregatedStatsReply");
   }
 
   /**
    * RPC to update the new TCP stats. (statscollection.updatestats)
    *
-   * @param Google_Stats $postBody
+   * @param Appointments_Google_Stats $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Cloudlatencytest_StatsReply
+   * @return Appointments_Google_Service_Cloudlatencytest_StatsReply
    */
-  public function updatestats(Google_Service_Cloudlatencytest_Stats $postBody, $optParams = array())
+  public function updatestats(Appointments_Google_Service_Cloudlatencytest_Stats $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('updatestats', array($params), "Google_Service_Cloudlatencytest_StatsReply");
+    return $this->call('updatestats', array($params), "Appointments_Google_Service_Cloudlatencytest_StatsReply");
   }
 }
 
 
 
 
-class Google_Service_Cloudlatencytest_AggregatedStats extends Google_Collection
+class Appointments_Google_Service_Cloudlatencytest_AggregatedStats extends Appointments_Google_Collection
 {
   protected $collection_key = 'stats';
   protected $internal_gapi_mappings = array(
   );
-  protected $statsType = 'Google_Service_Cloudlatencytest_Stats';
+  protected $statsType = 'Appointments_Google_Service_Cloudlatencytest_Stats';
   protected $statsDataType = 'array';
 
 
@@ -132,7 +132,7 @@ class Google_Service_Cloudlatencytest_AggregatedStats extends Google_Collection
   }
 }
 
-class Google_Service_Cloudlatencytest_AggregatedStatsReply extends Google_Model
+class Appointments_Google_Service_Cloudlatencytest_AggregatedStatsReply extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -149,7 +149,7 @@ class Google_Service_Cloudlatencytest_AggregatedStatsReply extends Google_Model
   }
 }
 
-class Google_Service_Cloudlatencytest_DoubleValue extends Google_Model
+class Appointments_Google_Service_Cloudlatencytest_DoubleValue extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -175,7 +175,7 @@ class Google_Service_Cloudlatencytest_DoubleValue extends Google_Model
   }
 }
 
-class Google_Service_Cloudlatencytest_IntValue extends Google_Model
+class Appointments_Google_Service_Cloudlatencytest_IntValue extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -201,16 +201,16 @@ class Google_Service_Cloudlatencytest_IntValue extends Google_Model
   }
 }
 
-class Google_Service_Cloudlatencytest_Stats extends Google_Collection
+class Appointments_Google_Service_Cloudlatencytest_Stats extends Appointments_Google_Collection
 {
   protected $collection_key = 'stringValues';
   protected $internal_gapi_mappings = array(
   );
-  protected $doubleValuesType = 'Google_Service_Cloudlatencytest_DoubleValue';
+  protected $doubleValuesType = 'Appointments_Google_Service_Cloudlatencytest_DoubleValue';
   protected $doubleValuesDataType = 'array';
-  protected $intValuesType = 'Google_Service_Cloudlatencytest_IntValue';
+  protected $intValuesType = 'Appointments_Google_Service_Cloudlatencytest_IntValue';
   protected $intValuesDataType = 'array';
-  protected $stringValuesType = 'Google_Service_Cloudlatencytest_StringValue';
+  protected $stringValuesType = 'Appointments_Google_Service_Cloudlatencytest_StringValue';
   protected $stringValuesDataType = 'array';
   public $time;
 
@@ -249,7 +249,7 @@ class Google_Service_Cloudlatencytest_Stats extends Google_Collection
   }
 }
 
-class Google_Service_Cloudlatencytest_StatsReply extends Google_Model
+class Appointments_Google_Service_Cloudlatencytest_StatsReply extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -266,7 +266,7 @@ class Google_Service_Cloudlatencytest_StatsReply extends Google_Model
   }
 }
 
-class Google_Service_Cloudlatencytest_StringValue extends Google_Model
+class Appointments_Google_Service_Cloudlatencytest_StringValue extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );

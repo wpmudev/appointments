@@ -29,7 +29,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Vision extends Google_Service
+class Appointments_Google_Service_Vision extends Appointments_Google_Service
 {
   /** View and manage your data across Google Cloud Platform services. */
   const CLOUD_PLATFORM =
@@ -41,9 +41,9 @@ class Google_Service_Vision extends Google_Service
   /**
    * Constructs the internal representation of the Vision service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://vision.googleapis.com/';
@@ -51,7 +51,7 @@ class Google_Service_Vision extends Google_Service
     $this->version = 'v1';
     $this->serviceName = 'vision';
 
-    $this->images = new Google_Service_Vision_Images_Resource(
+    $this->images = new Appointments_Google_Service_Vision_Images_Resource(
         $this,
         $this->serviceName,
         'images',
@@ -73,41 +73,41 @@ class Google_Service_Vision extends Google_Service
  * The "images" collection of methods.
  * Typical usage is:
  *  <code>
- *   $visionService = new Google_Service_Vision(...);
+ *   $visionService = new Appointments_Google_Service_Vision(...);
  *   $images = $visionService->images;
  *  </code>
  */
-class Google_Service_Vision_Images_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Vision_Images_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
    * Run image detection and annotation for a batch of images. (images.annotate)
    *
-   * @param Google_BatchAnnotateImagesRequest $postBody
+   * @param Appointments_Google_BatchAnnotateImagesRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Vision_BatchAnnotateImagesResponse
+   * @return Appointments_Google_Service_Vision_BatchAnnotateImagesResponse
    */
-  public function annotate(Google_Service_Vision_BatchAnnotateImagesRequest $postBody, $optParams = array())
+  public function annotate(Appointments_Google_Service_Vision_BatchAnnotateImagesRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('annotate', array($params), "Google_Service_Vision_BatchAnnotateImagesResponse");
+    return $this->call('annotate', array($params), "Appointments_Google_Service_Vision_BatchAnnotateImagesResponse");
   }
 }
 
 
 
 
-class Google_Service_Vision_AnnotateImageRequest extends Google_Collection
+class Appointments_Google_Service_Vision_AnnotateImageRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'features';
   protected $internal_gapi_mappings = array(
   );
-  protected $featuresType = 'Google_Service_Vision_Feature';
+  protected $featuresType = 'Appointments_Google_Service_Vision_Feature';
   protected $featuresDataType = 'array';
-  protected $imageType = 'Google_Service_Vision_Image';
+  protected $imageType = 'Appointments_Google_Service_Vision_Image';
   protected $imageDataType = '';
-  protected $imageContextType = 'Google_Service_Vision_ImageContext';
+  protected $imageContextType = 'Appointments_Google_Service_Vision_ImageContext';
   protected $imageContextDataType = '';
 
 
@@ -119,7 +119,7 @@ class Google_Service_Vision_AnnotateImageRequest extends Google_Collection
   {
     return $this->features;
   }
-  public function setImage(Google_Service_Vision_Image $image)
+  public function setImage(Appointments_Google_Service_Vision_Image $image)
   {
     $this->image = $image;
   }
@@ -127,7 +127,7 @@ class Google_Service_Vision_AnnotateImageRequest extends Google_Collection
   {
     return $this->image;
   }
-  public function setImageContext(Google_Service_Vision_ImageContext $imageContext)
+  public function setImageContext(Appointments_Google_Service_Vision_ImageContext $imageContext)
   {
     $this->imageContext = $imageContext;
   }
@@ -137,30 +137,30 @@ class Google_Service_Vision_AnnotateImageRequest extends Google_Collection
   }
 }
 
-class Google_Service_Vision_AnnotateImageResponse extends Google_Collection
+class Appointments_Google_Service_Vision_AnnotateImageResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'textAnnotations';
   protected $internal_gapi_mappings = array(
   );
-  protected $errorType = 'Google_Service_Vision_Status';
+  protected $errorType = 'Appointments_Google_Service_Vision_Status';
   protected $errorDataType = '';
-  protected $faceAnnotationsType = 'Google_Service_Vision_FaceAnnotation';
+  protected $faceAnnotationsType = 'Appointments_Google_Service_Vision_FaceAnnotation';
   protected $faceAnnotationsDataType = 'array';
-  protected $imagePropertiesAnnotationType = 'Google_Service_Vision_ImageProperties';
+  protected $imagePropertiesAnnotationType = 'Appointments_Google_Service_Vision_ImageProperties';
   protected $imagePropertiesAnnotationDataType = '';
-  protected $labelAnnotationsType = 'Google_Service_Vision_EntityAnnotation';
+  protected $labelAnnotationsType = 'Appointments_Google_Service_Vision_EntityAnnotation';
   protected $labelAnnotationsDataType = 'array';
-  protected $landmarkAnnotationsType = 'Google_Service_Vision_EntityAnnotation';
+  protected $landmarkAnnotationsType = 'Appointments_Google_Service_Vision_EntityAnnotation';
   protected $landmarkAnnotationsDataType = 'array';
-  protected $logoAnnotationsType = 'Google_Service_Vision_EntityAnnotation';
+  protected $logoAnnotationsType = 'Appointments_Google_Service_Vision_EntityAnnotation';
   protected $logoAnnotationsDataType = 'array';
-  protected $safeSearchAnnotationType = 'Google_Service_Vision_SafeSearchAnnotation';
+  protected $safeSearchAnnotationType = 'Appointments_Google_Service_Vision_SafeSearchAnnotation';
   protected $safeSearchAnnotationDataType = '';
-  protected $textAnnotationsType = 'Google_Service_Vision_EntityAnnotation';
+  protected $textAnnotationsType = 'Appointments_Google_Service_Vision_EntityAnnotation';
   protected $textAnnotationsDataType = 'array';
 
 
-  public function setError(Google_Service_Vision_Status $error)
+  public function setError(Appointments_Google_Service_Vision_Status $error)
   {
     $this->error = $error;
   }
@@ -176,7 +176,7 @@ class Google_Service_Vision_AnnotateImageResponse extends Google_Collection
   {
     return $this->faceAnnotations;
   }
-  public function setImagePropertiesAnnotation(Google_Service_Vision_ImageProperties $imagePropertiesAnnotation)
+  public function setImagePropertiesAnnotation(Appointments_Google_Service_Vision_ImageProperties $imagePropertiesAnnotation)
   {
     $this->imagePropertiesAnnotation = $imagePropertiesAnnotation;
   }
@@ -208,7 +208,7 @@ class Google_Service_Vision_AnnotateImageResponse extends Google_Collection
   {
     return $this->logoAnnotations;
   }
-  public function setSafeSearchAnnotation(Google_Service_Vision_SafeSearchAnnotation $safeSearchAnnotation)
+  public function setSafeSearchAnnotation(Appointments_Google_Service_Vision_SafeSearchAnnotation $safeSearchAnnotation)
   {
     $this->safeSearchAnnotation = $safeSearchAnnotation;
   }
@@ -226,12 +226,12 @@ class Google_Service_Vision_AnnotateImageResponse extends Google_Collection
   }
 }
 
-class Google_Service_Vision_BatchAnnotateImagesRequest extends Google_Collection
+class Appointments_Google_Service_Vision_BatchAnnotateImagesRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'requests';
   protected $internal_gapi_mappings = array(
   );
-  protected $requestsType = 'Google_Service_Vision_AnnotateImageRequest';
+  protected $requestsType = 'Appointments_Google_Service_Vision_AnnotateImageRequest';
   protected $requestsDataType = 'array';
 
 
@@ -245,12 +245,12 @@ class Google_Service_Vision_BatchAnnotateImagesRequest extends Google_Collection
   }
 }
 
-class Google_Service_Vision_BatchAnnotateImagesResponse extends Google_Collection
+class Appointments_Google_Service_Vision_BatchAnnotateImagesResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'responses';
   protected $internal_gapi_mappings = array(
   );
-  protected $responsesType = 'Google_Service_Vision_AnnotateImageResponse';
+  protected $responsesType = 'Appointments_Google_Service_Vision_AnnotateImageResponse';
   protected $responsesDataType = 'array';
 
 
@@ -264,12 +264,12 @@ class Google_Service_Vision_BatchAnnotateImagesResponse extends Google_Collectio
   }
 }
 
-class Google_Service_Vision_BoundingPoly extends Google_Collection
+class Appointments_Google_Service_Vision_BoundingPoly extends Appointments_Google_Collection
 {
   protected $collection_key = 'vertices';
   protected $internal_gapi_mappings = array(
   );
-  protected $verticesType = 'Google_Service_Vision_Vertex';
+  protected $verticesType = 'Appointments_Google_Service_Vision_Vertex';
   protected $verticesDataType = 'array';
 
 
@@ -283,7 +283,7 @@ class Google_Service_Vision_BoundingPoly extends Google_Collection
   }
 }
 
-class Google_Service_Vision_Color extends Google_Model
+class Appointments_Google_Service_Vision_Color extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -327,17 +327,17 @@ class Google_Service_Vision_Color extends Google_Model
   }
 }
 
-class Google_Service_Vision_ColorInfo extends Google_Model
+class Appointments_Google_Service_Vision_ColorInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $colorType = 'Google_Service_Vision_Color';
+  protected $colorType = 'Appointments_Google_Service_Vision_Color';
   protected $colorDataType = '';
   public $pixelFraction;
   public $score;
 
 
-  public function setColor(Google_Service_Vision_Color $color)
+  public function setColor(Appointments_Google_Service_Vision_Color $color)
   {
     $this->color = $color;
   }
@@ -363,12 +363,12 @@ class Google_Service_Vision_ColorInfo extends Google_Model
   }
 }
 
-class Google_Service_Vision_DominantColorsAnnotation extends Google_Collection
+class Appointments_Google_Service_Vision_DominantColorsAnnotation extends Appointments_Google_Collection
 {
   protected $collection_key = 'colors';
   protected $internal_gapi_mappings = array(
   );
-  protected $colorsType = 'Google_Service_Vision_ColorInfo';
+  protected $colorsType = 'Appointments_Google_Service_Vision_ColorInfo';
   protected $colorsDataType = 'array';
 
 
@@ -382,26 +382,26 @@ class Google_Service_Vision_DominantColorsAnnotation extends Google_Collection
   }
 }
 
-class Google_Service_Vision_EntityAnnotation extends Google_Collection
+class Appointments_Google_Service_Vision_EntityAnnotation extends Appointments_Google_Collection
 {
   protected $collection_key = 'properties';
   protected $internal_gapi_mappings = array(
   );
-  protected $boundingPolyType = 'Google_Service_Vision_BoundingPoly';
+  protected $boundingPolyType = 'Appointments_Google_Service_Vision_BoundingPoly';
   protected $boundingPolyDataType = '';
   public $confidence;
   public $description;
   public $locale;
-  protected $locationsType = 'Google_Service_Vision_LocationInfo';
+  protected $locationsType = 'Appointments_Google_Service_Vision_LocationInfo';
   protected $locationsDataType = 'array';
   public $mid;
-  protected $propertiesType = 'Google_Service_Vision_Property';
+  protected $propertiesType = 'Appointments_Google_Service_Vision_Property';
   protected $propertiesDataType = 'array';
   public $score;
   public $topicality;
 
 
-  public function setBoundingPoly(Google_Service_Vision_BoundingPoly $boundingPoly)
+  public function setBoundingPoly(Appointments_Google_Service_Vision_BoundingPoly $boundingPoly)
   {
     $this->boundingPoly = $boundingPoly;
   }
@@ -475,22 +475,22 @@ class Google_Service_Vision_EntityAnnotation extends Google_Collection
   }
 }
 
-class Google_Service_Vision_FaceAnnotation extends Google_Collection
+class Appointments_Google_Service_Vision_FaceAnnotation extends Appointments_Google_Collection
 {
   protected $collection_key = 'landmarks';
   protected $internal_gapi_mappings = array(
   );
   public $angerLikelihood;
   public $blurredLikelihood;
-  protected $boundingPolyType = 'Google_Service_Vision_BoundingPoly';
+  protected $boundingPolyType = 'Appointments_Google_Service_Vision_BoundingPoly';
   protected $boundingPolyDataType = '';
   public $detectionConfidence;
-  protected $fdBoundingPolyType = 'Google_Service_Vision_BoundingPoly';
+  protected $fdBoundingPolyType = 'Appointments_Google_Service_Vision_BoundingPoly';
   protected $fdBoundingPolyDataType = '';
   public $headwearLikelihood;
   public $joyLikelihood;
   public $landmarkingConfidence;
-  protected $landmarksType = 'Google_Service_Vision_Landmark';
+  protected $landmarksType = 'Appointments_Google_Service_Vision_Landmark';
   protected $landmarksDataType = 'array';
   public $panAngle;
   public $rollAngle;
@@ -516,7 +516,7 @@ class Google_Service_Vision_FaceAnnotation extends Google_Collection
   {
     return $this->blurredLikelihood;
   }
-  public function setBoundingPoly(Google_Service_Vision_BoundingPoly $boundingPoly)
+  public function setBoundingPoly(Appointments_Google_Service_Vision_BoundingPoly $boundingPoly)
   {
     $this->boundingPoly = $boundingPoly;
   }
@@ -532,7 +532,7 @@ class Google_Service_Vision_FaceAnnotation extends Google_Collection
   {
     return $this->detectionConfidence;
   }
-  public function setFdBoundingPoly(Google_Service_Vision_BoundingPoly $fdBoundingPoly)
+  public function setFdBoundingPoly(Appointments_Google_Service_Vision_BoundingPoly $fdBoundingPoly)
   {
     $this->fdBoundingPoly = $fdBoundingPoly;
   }
@@ -622,7 +622,7 @@ class Google_Service_Vision_FaceAnnotation extends Google_Collection
   }
 }
 
-class Google_Service_Vision_Feature extends Google_Model
+class Appointments_Google_Service_Vision_Feature extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -648,12 +648,12 @@ class Google_Service_Vision_Feature extends Google_Model
   }
 }
 
-class Google_Service_Vision_Image extends Google_Model
+class Appointments_Google_Service_Vision_Image extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $content;
-  protected $sourceType = 'Google_Service_Vision_ImageSource';
+  protected $sourceType = 'Appointments_Google_Service_Vision_ImageSource';
   protected $sourceDataType = '';
 
 
@@ -665,7 +665,7 @@ class Google_Service_Vision_Image extends Google_Model
   {
     return $this->content;
   }
-  public function setSource(Google_Service_Vision_ImageSource $source)
+  public function setSource(Appointments_Google_Service_Vision_ImageSource $source)
   {
     $this->source = $source;
   }
@@ -675,13 +675,13 @@ class Google_Service_Vision_Image extends Google_Model
   }
 }
 
-class Google_Service_Vision_ImageContext extends Google_Collection
+class Appointments_Google_Service_Vision_ImageContext extends Appointments_Google_Collection
 {
   protected $collection_key = 'languageHints';
   protected $internal_gapi_mappings = array(
   );
   public $languageHints;
-  protected $latLongRectType = 'Google_Service_Vision_LatLongRect';
+  protected $latLongRectType = 'Appointments_Google_Service_Vision_LatLongRect';
   protected $latLongRectDataType = '';
 
 
@@ -693,7 +693,7 @@ class Google_Service_Vision_ImageContext extends Google_Collection
   {
     return $this->languageHints;
   }
-  public function setLatLongRect(Google_Service_Vision_LatLongRect $latLongRect)
+  public function setLatLongRect(Appointments_Google_Service_Vision_LatLongRect $latLongRect)
   {
     $this->latLongRect = $latLongRect;
   }
@@ -703,15 +703,15 @@ class Google_Service_Vision_ImageContext extends Google_Collection
   }
 }
 
-class Google_Service_Vision_ImageProperties extends Google_Model
+class Appointments_Google_Service_Vision_ImageProperties extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $dominantColorsType = 'Google_Service_Vision_DominantColorsAnnotation';
+  protected $dominantColorsType = 'Appointments_Google_Service_Vision_DominantColorsAnnotation';
   protected $dominantColorsDataType = '';
 
 
-  public function setDominantColors(Google_Service_Vision_DominantColorsAnnotation $dominantColors)
+  public function setDominantColors(Appointments_Google_Service_Vision_DominantColorsAnnotation $dominantColors)
   {
     $this->dominantColors = $dominantColors;
   }
@@ -721,7 +721,7 @@ class Google_Service_Vision_ImageProperties extends Google_Model
   }
 }
 
-class Google_Service_Vision_ImageSource extends Google_Model
+class Appointments_Google_Service_Vision_ImageSource extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -738,16 +738,16 @@ class Google_Service_Vision_ImageSource extends Google_Model
   }
 }
 
-class Google_Service_Vision_Landmark extends Google_Model
+class Appointments_Google_Service_Vision_Landmark extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $positionType = 'Google_Service_Vision_Position';
+  protected $positionType = 'Appointments_Google_Service_Vision_Position';
   protected $positionDataType = '';
   public $type;
 
 
-  public function setPosition(Google_Service_Vision_Position $position)
+  public function setPosition(Appointments_Google_Service_Vision_Position $position)
   {
     $this->position = $position;
   }
@@ -765,7 +765,7 @@ class Google_Service_Vision_Landmark extends Google_Model
   }
 }
 
-class Google_Service_Vision_LatLng extends Google_Model
+class Appointments_Google_Service_Vision_LatLng extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -791,17 +791,17 @@ class Google_Service_Vision_LatLng extends Google_Model
   }
 }
 
-class Google_Service_Vision_LatLongRect extends Google_Model
+class Appointments_Google_Service_Vision_LatLongRect extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $maxLatLngType = 'Google_Service_Vision_LatLng';
+  protected $maxLatLngType = 'Appointments_Google_Service_Vision_LatLng';
   protected $maxLatLngDataType = '';
-  protected $minLatLngType = 'Google_Service_Vision_LatLng';
+  protected $minLatLngType = 'Appointments_Google_Service_Vision_LatLng';
   protected $minLatLngDataType = '';
 
 
-  public function setMaxLatLng(Google_Service_Vision_LatLng $maxLatLng)
+  public function setMaxLatLng(Appointments_Google_Service_Vision_LatLng $maxLatLng)
   {
     $this->maxLatLng = $maxLatLng;
   }
@@ -809,7 +809,7 @@ class Google_Service_Vision_LatLongRect extends Google_Model
   {
     return $this->maxLatLng;
   }
-  public function setMinLatLng(Google_Service_Vision_LatLng $minLatLng)
+  public function setMinLatLng(Appointments_Google_Service_Vision_LatLng $minLatLng)
   {
     $this->minLatLng = $minLatLng;
   }
@@ -819,15 +819,15 @@ class Google_Service_Vision_LatLongRect extends Google_Model
   }
 }
 
-class Google_Service_Vision_LocationInfo extends Google_Model
+class Appointments_Google_Service_Vision_LocationInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $latLngType = 'Google_Service_Vision_LatLng';
+  protected $latLngType = 'Appointments_Google_Service_Vision_LatLng';
   protected $latLngDataType = '';
 
 
-  public function setLatLng(Google_Service_Vision_LatLng $latLng)
+  public function setLatLng(Appointments_Google_Service_Vision_LatLng $latLng)
   {
     $this->latLng = $latLng;
   }
@@ -837,7 +837,7 @@ class Google_Service_Vision_LocationInfo extends Google_Model
   }
 }
 
-class Google_Service_Vision_Position extends Google_Model
+class Appointments_Google_Service_Vision_Position extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -872,7 +872,7 @@ class Google_Service_Vision_Position extends Google_Model
   }
 }
 
-class Google_Service_Vision_Property extends Google_Model
+class Appointments_Google_Service_Vision_Property extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -898,7 +898,7 @@ class Google_Service_Vision_Property extends Google_Model
   }
 }
 
-class Google_Service_Vision_SafeSearchAnnotation extends Google_Model
+class Appointments_Google_Service_Vision_SafeSearchAnnotation extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -942,7 +942,7 @@ class Google_Service_Vision_SafeSearchAnnotation extends Google_Model
   }
 }
 
-class Google_Service_Vision_Status extends Google_Collection
+class Appointments_Google_Service_Vision_Status extends Appointments_Google_Collection
 {
   protected $collection_key = 'details';
   protected $internal_gapi_mappings = array(
@@ -978,7 +978,7 @@ class Google_Service_Vision_Status extends Google_Collection
   }
 }
 
-class Google_Service_Vision_Vertex extends Google_Model
+class Appointments_Google_Service_Vision_Vertex extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );

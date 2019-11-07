@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-if (!class_exists('Google_Client')) {
+if (!class_exists('Appointments_Google_Client')) {
   require_once dirname(__FILE__) . '/../autoload.php';
 }
 
@@ -23,7 +23,7 @@ if (!class_exists('Google_Client')) {
  * Manage large file uploads, which may be media but can be any type
  * of sizable data.
  */
-class Google_Http_MediaFileUpload
+class Appointments_Google_Http_MediaFileUpload
 {
   const UPLOAD_MEDIA_TYPE = 'media';
   const UPLOAD_MULTIPART_TYPE = 'multipart';
@@ -50,10 +50,10 @@ class Google_Http_MediaFileUpload
   /** @var int $progress */
   private $progress;
 
-  /** @var Google_Client */
+  /** @var Appointments_Google_Client */
   private $client;
 
-  /** @var Google_Http_Request */
+  /** @var Appointments_Google_Http_Request */
   private $request;
 
   /** @var string */
@@ -73,8 +73,8 @@ class Google_Http_MediaFileUpload
    * only used if resumable=True
    */
   public function __construct(
-      Google_Client $client,
-      Google_Http_Request $request,
+      Appointments_Google_Client $client,
+      Appointments_Google_Http_Request $request,
       $mimeType,
       $data,
       $resumable = false,
@@ -129,14 +129,14 @@ class Google_Http_MediaFileUpload
   * Sends a PUT-Request to google drive and parses the response,
   * setting the appropiate variables from the response()
   *
-  * @param Google_Http_Request $httpRequest the Reuqest which will be send
+  * @param Appointments_Google_Http_Request $httpRequest the Reuqest which will be send
   *
   * @return false|mixed false when the upload is unfinished or the decoded http response
   *
   */
-  private function makePutRequest(Google_Http_Request $httpRequest)
+  private function makePutRequest(Appointments_Google_Http_Request $httpRequest)
   {
-    if ($this->client->getClassConfig("Google_Http_Request", "enable_gzip_for_uploads")) {
+    if ($this->client->getClassConfig("Appointments_Google_Http_Request", "enable_gzip_for_uploads")) {
       $httpRequest->enableGzip();
     } else {
       $httpRequest->disableGzip();
@@ -161,7 +161,7 @@ class Google_Http_MediaFileUpload
       // No problems, but upload not complete.
       return false;
     } else {
-      return Google_Http_REST::decodeHttpResponse($response, $this->client);
+      return Appointments_Google_Http_REST::decodeHttpResponse($response, $this->client);
     }
   }
 
@@ -187,7 +187,7 @@ class Google_Http_MediaFileUpload
       'expect' => '',
     );
 
-    $httpRequest = new Google_Http_Request(
+    $httpRequest = new Appointments_Google_Http_Request(
         $this->resumeUri,
         'PUT',
         $headers,
@@ -207,7 +207,7 @@ class Google_Http_MediaFileUpload
        'content-range' => "bytes */$this->size",
        'content-length' => 0,
      );
-     $httpRequest = new Google_Http_Request(
+     $httpRequest = new Appointments_Google_Http_Request(
          $this->resumeUri,
          'PUT',
          $headers
@@ -304,7 +304,7 @@ class Google_Http_MediaFileUpload
     if ($body) {
       $headers = array(
         'content-type' => 'application/json; charset=UTF-8',
-        'content-length' => Google_Utils::getStrLen($body),
+        'content-length' => Appointments_Google_Utils::getStrLen($body),
         'x-upload-content-type' => $this->mimeType,
         'x-upload-content-length' => $this->size,
         'expect' => '',
@@ -331,7 +331,7 @@ class Google_Http_MediaFileUpload
 
     $error = "Failed to start the resumable upload (HTTP {$message})";
     $this->client->getLogger()->error($error);
-    throw new Google_Exception($error);
+    throw new Appointments_Google_Exception($error);
   }
 
   public function setChunkSize($chunkSize)

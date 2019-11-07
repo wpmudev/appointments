@@ -30,7 +30,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Cloudsearch extends Google_Service
+class Appointments_Google_Service_Cloudsearch extends Appointments_Google_Service
 {
 
 
@@ -40,9 +40,9 @@ class Google_Service_Cloudsearch extends Google_Service
   /**
    * Constructs the internal representation of the Cloudsearch service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->servicePath = '';

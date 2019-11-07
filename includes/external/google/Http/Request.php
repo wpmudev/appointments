@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-if (!class_exists('Google_Client')) {
+if (!class_exists('Appointments_Google_Client')) {
   require_once dirname(__FILE__) . '/../autoload.php';
 }
 
@@ -27,7 +27,7 @@ if (!class_exists('Google_Client')) {
  * @author Chirag Shah <chirags@google.com>
  *
  */
-class Google_Http_Request
+class Appointments_Google_Http_Request
 {
   const GZIP_UA = " (gzip)";
 
@@ -222,7 +222,7 @@ class Google_Http_Request
    */
   public function setResponseHeaders($headers)
   {
-    $headers = Google_Utils::normalize($headers);
+    $headers = Appointments_Google_Utils::normalize($headers);
     if ($this->responseHeaders) {
       $headers = array_merge($this->responseHeaders, $headers);
     }
@@ -340,7 +340,7 @@ class Google_Http_Request
    */
   public function setRequestHeaders($headers)
   {
-    $headers = Google_Utils::normalize($headers);
+    $headers = Appointments_Google_Utils::normalize($headers);
     if ($this->requestHeaders) {
       $headers = array_merge($this->requestHeaders, $headers);
     }

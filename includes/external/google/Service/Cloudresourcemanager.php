@@ -27,7 +27,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Cloudresourcemanager extends Google_Service
+class Appointments_Google_Service_Cloudresourcemanager extends Appointments_Google_Service
 {
   /** View and manage your data across Google Cloud Platform services. */
   const CLOUD_PLATFORM =
@@ -43,9 +43,9 @@ class Google_Service_Cloudresourcemanager extends Google_Service
   /**
    * Constructs the internal representation of the Cloudresourcemanager service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://cloudresourcemanager.googleapis.com/';
@@ -53,7 +53,7 @@ class Google_Service_Cloudresourcemanager extends Google_Service
     $this->version = 'v1beta1';
     $this->serviceName = 'cloudresourcemanager';
 
-    $this->organizations = new Google_Service_Cloudresourcemanager_Organizations_Resource(
+    $this->organizations = new Appointments_Google_Service_Cloudresourcemanager_Organizations_Resource(
         $this,
         $this->serviceName,
         'organizations',
@@ -130,7 +130,7 @@ class Google_Service_Cloudresourcemanager extends Google_Service
           )
         )
     );
-    $this->projects = new Google_Service_Cloudresourcemanager_Projects_Resource(
+    $this->projects = new Appointments_Google_Service_Cloudresourcemanager_Projects_Resource(
         $this,
         $this->serviceName,
         'projects',
@@ -239,11 +239,11 @@ class Google_Service_Cloudresourcemanager extends Google_Service
  * The "organizations" collection of methods.
  * Typical usage is:
  *  <code>
- *   $cloudresourcemanagerService = new Google_Service_Cloudresourcemanager(...);
+ *   $cloudresourcemanagerService = new Appointments_Google_Service_Cloudresourcemanager(...);
  *   $organizations = $cloudresourcemanagerService->organizations;
  *  </code>
  */
-class Google_Service_Cloudresourcemanager_Organizations_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Cloudresourcemanager_Organizations_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -252,13 +252,13 @@ class Google_Service_Cloudresourcemanager_Organizations_Resource extends Google_
    *
    * @param string $organizationId The id of the Organization resource to fetch.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Cloudresourcemanager_Organization
+   * @return Appointments_Google_Service_Cloudresourcemanager_Organization
    */
   public function get($organizationId, $optParams = array())
   {
     $params = array('organizationId' => $organizationId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Cloudresourcemanager_Organization");
+    return $this->call('get', array($params), "Appointments_Google_Service_Cloudresourcemanager_Organization");
   }
 
   /**
@@ -270,15 +270,15 @@ class Google_Service_Cloudresourcemanager_Organizations_Resource extends Google_
    * `projectsprojectzoneszonedisksdisk*`. The format for the path specified in
    * this value is resource specific and is specified in the `getIamPolicy`
    * documentation.
-   * @param Google_GetIamPolicyRequest $postBody
+   * @param Appointments_Google_GetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Cloudresourcemanager_Policy
+   * @return Appointments_Google_Service_Cloudresourcemanager_Policy
    */
-  public function getIamPolicy($resource, Google_Service_Cloudresourcemanager_GetIamPolicyRequest $postBody, $optParams = array())
+  public function getIamPolicy($resource, Appointments_Google_Service_Cloudresourcemanager_GetIamPolicyRequest $postBody, $optParams = array())
   {
     $params = array('resource' => $resource, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('getIamPolicy', array($params), "Google_Service_Cloudresourcemanager_Policy");
+    return $this->call('getIamPolicy', array($params), "Appointments_Google_Service_Cloudresourcemanager_Policy");
   }
 
   /**
@@ -303,13 +303,13 @@ class Google_Service_Cloudresourcemanager_Organizations_Resource extends Google_
    * `owner.directory_customer_id` equal to `123456789`.|
    * |domain:google.com|Organizations corresponding to the domain `google.com`.|
    * This field is optional.
-   * @return Google_Service_Cloudresourcemanager_ListOrganizationsResponse
+   * @return Appointments_Google_Service_Cloudresourcemanager_ListOrganizationsResponse
    */
   public function listOrganizations($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Cloudresourcemanager_ListOrganizationsResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Cloudresourcemanager_ListOrganizationsResponse");
   }
 
   /**
@@ -321,15 +321,15 @@ class Google_Service_Cloudresourcemanager_Organizations_Resource extends Google_
    * `projectsprojectzoneszonedisksdisk*`. The format for the path specified in
    * this value is resource specific and is specified in the `setIamPolicy`
    * documentation.
-   * @param Google_SetIamPolicyRequest $postBody
+   * @param Appointments_Google_SetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Cloudresourcemanager_Policy
+   * @return Appointments_Google_Service_Cloudresourcemanager_Policy
    */
-  public function setIamPolicy($resource, Google_Service_Cloudresourcemanager_SetIamPolicyRequest $postBody, $optParams = array())
+  public function setIamPolicy($resource, Appointments_Google_Service_Cloudresourcemanager_SetIamPolicyRequest $postBody, $optParams = array())
   {
     $params = array('resource' => $resource, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setIamPolicy', array($params), "Google_Service_Cloudresourcemanager_Policy");
+    return $this->call('setIamPolicy', array($params), "Appointments_Google_Service_Cloudresourcemanager_Policy");
   }
 
   /**
@@ -341,15 +341,15 @@ class Google_Service_Cloudresourcemanager_Organizations_Resource extends Google_
    * `projectsprojectzoneszonedisksdisk*`. The format for the path specified in
    * this value is resource specific and is specified in the `testIamPermissions`
    * documentation.
-   * @param Google_TestIamPermissionsRequest $postBody
+   * @param Appointments_Google_TestIamPermissionsRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Cloudresourcemanager_TestIamPermissionsResponse
+   * @return Appointments_Google_Service_Cloudresourcemanager_TestIamPermissionsResponse
    */
-  public function testIamPermissions($resource, Google_Service_Cloudresourcemanager_TestIamPermissionsRequest $postBody, $optParams = array())
+  public function testIamPermissions($resource, Appointments_Google_Service_Cloudresourcemanager_TestIamPermissionsRequest $postBody, $optParams = array())
   {
     $params = array('resource' => $resource, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('testIamPermissions', array($params), "Google_Service_Cloudresourcemanager_TestIamPermissionsResponse");
+    return $this->call('testIamPermissions', array($params), "Appointments_Google_Service_Cloudresourcemanager_TestIamPermissionsResponse");
   }
 
   /**
@@ -359,15 +359,15 @@ class Google_Service_Cloudresourcemanager_Organizations_Resource extends Google_
    * @param string $organizationId An immutable id for the Organization that is
    * assigned on creation. This should be omitted when creating a new
    * Organization. This field is read-only.
-   * @param Google_Organization $postBody
+   * @param Appointments_Google_Organization $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Cloudresourcemanager_Organization
+   * @return Appointments_Google_Service_Cloudresourcemanager_Organization
    */
-  public function update($organizationId, Google_Service_Cloudresourcemanager_Organization $postBody, $optParams = array())
+  public function update($organizationId, Appointments_Google_Service_Cloudresourcemanager_Organization $postBody, $optParams = array())
   {
     $params = array('organizationId' => $organizationId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Cloudresourcemanager_Organization");
+    return $this->call('update', array($params), "Appointments_Google_Service_Cloudresourcemanager_Organization");
   }
 }
 
@@ -375,11 +375,11 @@ class Google_Service_Cloudresourcemanager_Organizations_Resource extends Google_
  * The "projects" collection of methods.
  * Typical usage is:
  *  <code>
- *   $cloudresourcemanagerService = new Google_Service_Cloudresourcemanager(...);
+ *   $cloudresourcemanagerService = new Appointments_Google_Service_Cloudresourcemanager(...);
  *   $projects = $cloudresourcemanagerService->projects;
  *  </code>
  */
-class Google_Service_Cloudresourcemanager_Projects_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Cloudresourcemanager_Projects_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -388,15 +388,15 @@ class Google_Service_Cloudresourcemanager_Projects_Resource extends Google_Servi
    * or update the Project. Several APIs are activated automatically for the
    * Project, including Google Cloud Storage. (projects.create)
    *
-   * @param Google_Project $postBody
+   * @param Appointments_Google_Project $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Cloudresourcemanager_Project
+   * @return Appointments_Google_Service_Cloudresourcemanager_Project
    */
-  public function create(Google_Service_Cloudresourcemanager_Project $postBody, $optParams = array())
+  public function create(Appointments_Google_Service_Cloudresourcemanager_Project $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_Cloudresourcemanager_Project");
+    return $this->call('create', array($params), "Appointments_Google_Service_Cloudresourcemanager_Project");
   }
 
   /**
@@ -416,13 +416,13 @@ class Google_Service_Cloudresourcemanager_Projects_Resource extends Google_Servi
    * @param string $projectId The Project ID (for example, `foo-bar-123`).
    * Required.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Cloudresourcemanager_Empty
+   * @return Appointments_Google_Service_Cloudresourcemanager_Empty
    */
   public function delete($projectId, $optParams = array())
   {
     $params = array('projectId' => $projectId);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Cloudresourcemanager_Empty");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Cloudresourcemanager_Empty");
   }
 
   /**
@@ -433,13 +433,13 @@ class Google_Service_Cloudresourcemanager_Projects_Resource extends Google_Servi
    * @param string $projectId The Project ID (for example, `my-project-123`).
    * Required.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Cloudresourcemanager_Project
+   * @return Appointments_Google_Service_Cloudresourcemanager_Project
    */
   public function get($projectId, $optParams = array())
   {
     $params = array('projectId' => $projectId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Cloudresourcemanager_Project");
+    return $this->call('get', array($params), "Appointments_Google_Service_Cloudresourcemanager_Project");
   }
 
   /**
@@ -452,15 +452,15 @@ class Google_Service_Cloudresourcemanager_Projects_Resource extends Google_Servi
    * `projectsprojectzoneszonedisksdisk*`. The format for the path specified in
    * this value is resource specific and is specified in the `getIamPolicy`
    * documentation.
-   * @param Google_GetIamPolicyRequest $postBody
+   * @param Appointments_Google_GetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Cloudresourcemanager_Policy
+   * @return Appointments_Google_Service_Cloudresourcemanager_Policy
    */
-  public function getIamPolicy($resource, Google_Service_Cloudresourcemanager_GetIamPolicyRequest $postBody, $optParams = array())
+  public function getIamPolicy($resource, Appointments_Google_Service_Cloudresourcemanager_GetIamPolicyRequest $postBody, $optParams = array())
   {
     $params = array('resource' => $resource, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('getIamPolicy', array($params), "Google_Service_Cloudresourcemanager_Policy");
+    return $this->call('getIamPolicy', array($params), "Appointments_Google_Service_Cloudresourcemanager_Policy");
   }
 
   /**
@@ -485,13 +485,13 @@ class Google_Service_Cloudresourcemanager_Projects_Resource extends Google_Servi
    * `color`.| |labels.color:red|The project's label `color` has the value `red`.|
    * |labels.color:red label.size:big|The project's label `color` has the value
    * `red` and its label `size` has the value `big`. Optional.
-   * @return Google_Service_Cloudresourcemanager_ListProjectsResponse
+   * @return Appointments_Google_Service_Cloudresourcemanager_ListProjectsResponse
    */
   public function listProjects($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Cloudresourcemanager_ListProjectsResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Cloudresourcemanager_ListProjectsResponse");
   }
 
   /**
@@ -514,15 +514,15 @@ class Google_Service_Cloudresourcemanager_Projects_Resource extends Google_Servi
    * `projectsprojectzoneszonedisksdisk*`. The format for the path specified in
    * this value is resource specific and is specified in the `setIamPolicy`
    * documentation.
-   * @param Google_SetIamPolicyRequest $postBody
+   * @param Appointments_Google_SetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Cloudresourcemanager_Policy
+   * @return Appointments_Google_Service_Cloudresourcemanager_Policy
    */
-  public function setIamPolicy($resource, Google_Service_Cloudresourcemanager_SetIamPolicyRequest $postBody, $optParams = array())
+  public function setIamPolicy($resource, Appointments_Google_Service_Cloudresourcemanager_SetIamPolicyRequest $postBody, $optParams = array())
   {
     $params = array('resource' => $resource, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setIamPolicy', array($params), "Google_Service_Cloudresourcemanager_Policy");
+    return $this->call('setIamPolicy', array($params), "Appointments_Google_Service_Cloudresourcemanager_Policy");
   }
 
   /**
@@ -534,15 +534,15 @@ class Google_Service_Cloudresourcemanager_Projects_Resource extends Google_Servi
    * `projectsprojectzoneszonedisksdisk*`. The format for the path specified in
    * this value is resource specific and is specified in the `testIamPermissions`
    * documentation.
-   * @param Google_TestIamPermissionsRequest $postBody
+   * @param Appointments_Google_TestIamPermissionsRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Cloudresourcemanager_TestIamPermissionsResponse
+   * @return Appointments_Google_Service_Cloudresourcemanager_TestIamPermissionsResponse
    */
-  public function testIamPermissions($resource, Google_Service_Cloudresourcemanager_TestIamPermissionsRequest $postBody, $optParams = array())
+  public function testIamPermissions($resource, Appointments_Google_Service_Cloudresourcemanager_TestIamPermissionsRequest $postBody, $optParams = array())
   {
     $params = array('resource' => $resource, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('testIamPermissions', array($params), "Google_Service_Cloudresourcemanager_TestIamPermissionsResponse");
+    return $this->call('testIamPermissions', array($params), "Appointments_Google_Service_Cloudresourcemanager_TestIamPermissionsResponse");
   }
 
   /**
@@ -555,13 +555,13 @@ class Google_Service_Cloudresourcemanager_Projects_Resource extends Google_Servi
    * @param string $projectId The project ID (for example, `foo-bar-123`).
    * Required.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Cloudresourcemanager_Empty
+   * @return Appointments_Google_Service_Cloudresourcemanager_Empty
    */
   public function undelete($projectId, $optParams = array())
   {
     $params = array('projectId' => $projectId);
     $params = array_merge($params, $optParams);
-    return $this->call('undelete', array($params), "Google_Service_Cloudresourcemanager_Empty");
+    return $this->call('undelete', array($params), "Appointments_Google_Service_Cloudresourcemanager_Empty");
   }
 
   /**
@@ -571,22 +571,22 @@ class Google_Service_Cloudresourcemanager_Projects_Resource extends Google_Servi
    *
    * @param string $projectId The project ID (for example, `my-project-123`).
    * Required.
-   * @param Google_Project $postBody
+   * @param Appointments_Google_Project $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Cloudresourcemanager_Project
+   * @return Appointments_Google_Service_Cloudresourcemanager_Project
    */
-  public function update($projectId, Google_Service_Cloudresourcemanager_Project $postBody, $optParams = array())
+  public function update($projectId, Appointments_Google_Service_Cloudresourcemanager_Project $postBody, $optParams = array())
   {
     $params = array('projectId' => $projectId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Cloudresourcemanager_Project");
+    return $this->call('update', array($params), "Appointments_Google_Service_Cloudresourcemanager_Project");
   }
 }
 
 
 
 
-class Google_Service_Cloudresourcemanager_Binding extends Google_Collection
+class Appointments_Google_Service_Cloudresourcemanager_Binding extends Appointments_Google_Collection
 {
   protected $collection_key = 'members';
   protected $internal_gapi_mappings = array(
@@ -613,21 +613,21 @@ class Google_Service_Cloudresourcemanager_Binding extends Google_Collection
   }
 }
 
-class Google_Service_Cloudresourcemanager_Empty extends Google_Model
+class Appointments_Google_Service_Cloudresourcemanager_Empty extends Appointments_Google_Model
 {
 }
 
-class Google_Service_Cloudresourcemanager_GetIamPolicyRequest extends Google_Model
+class Appointments_Google_Service_Cloudresourcemanager_GetIamPolicyRequest extends Appointments_Google_Model
 {
 }
 
-class Google_Service_Cloudresourcemanager_ListOrganizationsResponse extends Google_Collection
+class Appointments_Google_Service_Cloudresourcemanager_ListOrganizationsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'organizations';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $organizationsType = 'Google_Service_Cloudresourcemanager_Organization';
+  protected $organizationsType = 'Appointments_Google_Service_Cloudresourcemanager_Organization';
   protected $organizationsDataType = 'array';
 
 
@@ -649,13 +649,13 @@ class Google_Service_Cloudresourcemanager_ListOrganizationsResponse extends Goog
   }
 }
 
-class Google_Service_Cloudresourcemanager_ListProjectsResponse extends Google_Collection
+class Appointments_Google_Service_Cloudresourcemanager_ListProjectsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'projects';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $projectsType = 'Google_Service_Cloudresourcemanager_Project';
+  protected $projectsType = 'Appointments_Google_Service_Cloudresourcemanager_Project';
   protected $projectsDataType = 'array';
 
 
@@ -677,14 +677,14 @@ class Google_Service_Cloudresourcemanager_ListProjectsResponse extends Google_Co
   }
 }
 
-class Google_Service_Cloudresourcemanager_Organization extends Google_Model
+class Appointments_Google_Service_Cloudresourcemanager_Organization extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $creationTime;
   public $displayName;
   public $organizationId;
-  protected $ownerType = 'Google_Service_Cloudresourcemanager_OrganizationOwner';
+  protected $ownerType = 'Appointments_Google_Service_Cloudresourcemanager_OrganizationOwner';
   protected $ownerDataType = '';
 
 
@@ -712,7 +712,7 @@ class Google_Service_Cloudresourcemanager_Organization extends Google_Model
   {
     return $this->organizationId;
   }
-  public function setOwner(Google_Service_Cloudresourcemanager_OrganizationOwner $owner)
+  public function setOwner(Appointments_Google_Service_Cloudresourcemanager_OrganizationOwner $owner)
   {
     $this->owner = $owner;
   }
@@ -722,7 +722,7 @@ class Google_Service_Cloudresourcemanager_Organization extends Google_Model
   }
 }
 
-class Google_Service_Cloudresourcemanager_OrganizationOwner extends Google_Model
+class Appointments_Google_Service_Cloudresourcemanager_OrganizationOwner extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -739,12 +739,12 @@ class Google_Service_Cloudresourcemanager_OrganizationOwner extends Google_Model
   }
 }
 
-class Google_Service_Cloudresourcemanager_Policy extends Google_Collection
+class Appointments_Google_Service_Cloudresourcemanager_Policy extends Appointments_Google_Collection
 {
   protected $collection_key = 'bindings';
   protected $internal_gapi_mappings = array(
   );
-  protected $bindingsType = 'Google_Service_Cloudresourcemanager_Binding';
+  protected $bindingsType = 'Appointments_Google_Service_Cloudresourcemanager_Binding';
   protected $bindingsDataType = 'array';
   public $etag;
   public $version;
@@ -776,7 +776,7 @@ class Google_Service_Cloudresourcemanager_Policy extends Google_Collection
   }
 }
 
-class Google_Service_Cloudresourcemanager_Project extends Google_Model
+class Appointments_Google_Service_Cloudresourcemanager_Project extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -784,7 +784,7 @@ class Google_Service_Cloudresourcemanager_Project extends Google_Model
   public $labels;
   public $lifecycleState;
   public $name;
-  protected $parentType = 'Google_Service_Cloudresourcemanager_ResourceId';
+  protected $parentType = 'Appointments_Google_Service_Cloudresourcemanager_ResourceId';
   protected $parentDataType = '';
   public $projectId;
   public $projectNumber;
@@ -822,7 +822,7 @@ class Google_Service_Cloudresourcemanager_Project extends Google_Model
   {
     return $this->name;
   }
-  public function setParent(Google_Service_Cloudresourcemanager_ResourceId $parent)
+  public function setParent(Appointments_Google_Service_Cloudresourcemanager_ResourceId $parent)
   {
     $this->parent = $parent;
   }
@@ -848,7 +848,7 @@ class Google_Service_Cloudresourcemanager_Project extends Google_Model
   }
 }
 
-class Google_Service_Cloudresourcemanager_ResourceId extends Google_Model
+class Appointments_Google_Service_Cloudresourcemanager_ResourceId extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -874,15 +874,15 @@ class Google_Service_Cloudresourcemanager_ResourceId extends Google_Model
   }
 }
 
-class Google_Service_Cloudresourcemanager_SetIamPolicyRequest extends Google_Model
+class Appointments_Google_Service_Cloudresourcemanager_SetIamPolicyRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $policyType = 'Google_Service_Cloudresourcemanager_Policy';
+  protected $policyType = 'Appointments_Google_Service_Cloudresourcemanager_Policy';
   protected $policyDataType = '';
 
 
-  public function setPolicy(Google_Service_Cloudresourcemanager_Policy $policy)
+  public function setPolicy(Appointments_Google_Service_Cloudresourcemanager_Policy $policy)
   {
     $this->policy = $policy;
   }
@@ -892,7 +892,7 @@ class Google_Service_Cloudresourcemanager_SetIamPolicyRequest extends Google_Mod
   }
 }
 
-class Google_Service_Cloudresourcemanager_TestIamPermissionsRequest extends Google_Collection
+class Appointments_Google_Service_Cloudresourcemanager_TestIamPermissionsRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'permissions';
   protected $internal_gapi_mappings = array(
@@ -910,7 +910,7 @@ class Google_Service_Cloudresourcemanager_TestIamPermissionsRequest extends Goog
   }
 }
 
-class Google_Service_Cloudresourcemanager_TestIamPermissionsResponse extends Google_Collection
+class Appointments_Google_Service_Cloudresourcemanager_TestIamPermissionsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'permissions';
   protected $internal_gapi_mappings = array(

@@ -27,7 +27,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Cloudbilling extends Google_Service
+class Appointments_Google_Service_Cloudbilling extends Appointments_Google_Service
 {
   /** View and manage your data across Google Cloud Platform services. */
   const CLOUD_PLATFORM =
@@ -41,9 +41,9 @@ class Google_Service_Cloudbilling extends Google_Service
   /**
    * Constructs the internal representation of the Cloudbilling service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://cloudbilling.googleapis.com/';
@@ -51,7 +51,7 @@ class Google_Service_Cloudbilling extends Google_Service
     $this->version = 'v1';
     $this->serviceName = 'cloudbilling';
 
-    $this->billingAccounts = new Google_Service_Cloudbilling_BillingAccounts_Resource(
+    $this->billingAccounts = new Appointments_Google_Service_Cloudbilling_BillingAccounts_Resource(
         $this,
         $this->serviceName,
         'billingAccounts',
@@ -84,7 +84,7 @@ class Google_Service_Cloudbilling extends Google_Service
           )
         )
     );
-    $this->billingAccounts_projects = new Google_Service_Cloudbilling_BillingAccountsProjects_Resource(
+    $this->billingAccounts_projects = new Appointments_Google_Service_Cloudbilling_BillingAccountsProjects_Resource(
         $this,
         $this->serviceName,
         'projects',
@@ -112,7 +112,7 @@ class Google_Service_Cloudbilling extends Google_Service
           )
         )
     );
-    $this->projects = new Google_Service_Cloudbilling_Projects_Resource(
+    $this->projects = new Appointments_Google_Service_Cloudbilling_Projects_Resource(
         $this,
         $this->serviceName,
         'projects',
@@ -150,11 +150,11 @@ class Google_Service_Cloudbilling extends Google_Service
  * The "billingAccounts" collection of methods.
  * Typical usage is:
  *  <code>
- *   $cloudbillingService = new Google_Service_Cloudbilling(...);
+ *   $cloudbillingService = new Appointments_Google_Service_Cloudbilling(...);
  *   $billingAccounts = $cloudbillingService->billingAccounts;
  *  </code>
  */
-class Google_Service_Cloudbilling_BillingAccounts_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Cloudbilling_BillingAccounts_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -166,13 +166,13 @@ class Google_Service_Cloudbilling_BillingAccounts_Resource extends Google_Servic
    * @param string $name The resource name of the billing account to retrieve. For
    * example, `billingAccounts/012345-567890-ABCDEF`.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Cloudbilling_BillingAccount
+   * @return Appointments_Google_Service_Cloudbilling_BillingAccount
    */
   public function get($name, $optParams = array())
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Cloudbilling_BillingAccount");
+    return $this->call('get', array($params), "Appointments_Google_Service_Cloudbilling_BillingAccount");
   }
 
   /**
@@ -188,13 +188,13 @@ class Google_Service_Cloudbilling_BillingAccounts_Resource extends Google_Servic
    * This should be a `next_page_token` value returned from a previous
    * `ListBillingAccounts` call. If unspecified, the first page of results is
    * returned.
-   * @return Google_Service_Cloudbilling_ListBillingAccountsResponse
+   * @return Appointments_Google_Service_Cloudbilling_ListBillingAccountsResponse
    */
   public function listBillingAccounts($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Cloudbilling_ListBillingAccountsResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Cloudbilling_ListBillingAccountsResponse");
   }
 }
 
@@ -202,11 +202,11 @@ class Google_Service_Cloudbilling_BillingAccounts_Resource extends Google_Servic
  * The "projects" collection of methods.
  * Typical usage is:
  *  <code>
- *   $cloudbillingService = new Google_Service_Cloudbilling(...);
+ *   $cloudbillingService = new Appointments_Google_Service_Cloudbilling(...);
  *   $projects = $cloudbillingService->projects;
  *  </code>
  */
-class Google_Service_Cloudbilling_BillingAccountsProjects_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Cloudbilling_BillingAccountsProjects_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -226,13 +226,13 @@ class Google_Service_Cloudbilling_BillingAccountsProjects_Resource extends Googl
    * returned. This should be a `next_page_token` value returned from a previous
    * `ListProjectBillingInfo` call. If unspecified, the first page of results is
    * returned.
-   * @return Google_Service_Cloudbilling_ListProjectBillingInfoResponse
+   * @return Appointments_Google_Service_Cloudbilling_ListProjectBillingInfoResponse
    */
   public function listBillingAccountsProjects($name, $optParams = array())
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Cloudbilling_ListProjectBillingInfoResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Cloudbilling_ListProjectBillingInfoResponse");
   }
 }
 
@@ -240,11 +240,11 @@ class Google_Service_Cloudbilling_BillingAccountsProjects_Resource extends Googl
  * The "projects" collection of methods.
  * Typical usage is:
  *  <code>
- *   $cloudbillingService = new Google_Service_Cloudbilling(...);
+ *   $cloudbillingService = new Appointments_Google_Service_Cloudbilling(...);
  *   $projects = $cloudbillingService->projects;
  *  </code>
  */
-class Google_Service_Cloudbilling_Projects_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Cloudbilling_Projects_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -255,13 +255,13 @@ class Google_Service_Cloudbilling_Projects_Resource extends Google_Service_Resou
    * @param string $name The resource name of the project for which billing
    * information is retrieved. For example, `projects/tokyo-rain-123`.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Cloudbilling_ProjectBillingInfo
+   * @return Appointments_Google_Service_Cloudbilling_ProjectBillingInfo
    */
   public function getBillingInfo($name, $optParams = array())
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('getBillingInfo', array($params), "Google_Service_Cloudbilling_ProjectBillingInfo");
+    return $this->call('getBillingInfo', array($params), "Appointments_Google_Service_Cloudbilling_ProjectBillingInfo");
   }
 
   /**
@@ -293,22 +293,22 @@ class Google_Service_Cloudbilling_Projects_Resource extends Google_Service_Resou
    * @param string $name The resource name of the project associated with the
    * billing information that you want to update. For example, `projects/tokyo-
    * rain-123`.
-   * @param Google_ProjectBillingInfo $postBody
+   * @param Appointments_Google_ProjectBillingInfo $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Cloudbilling_ProjectBillingInfo
+   * @return Appointments_Google_Service_Cloudbilling_ProjectBillingInfo
    */
-  public function updateBillingInfo($name, Google_Service_Cloudbilling_ProjectBillingInfo $postBody, $optParams = array())
+  public function updateBillingInfo($name, Appointments_Google_Service_Cloudbilling_ProjectBillingInfo $postBody, $optParams = array())
   {
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('updateBillingInfo', array($params), "Google_Service_Cloudbilling_ProjectBillingInfo");
+    return $this->call('updateBillingInfo', array($params), "Appointments_Google_Service_Cloudbilling_ProjectBillingInfo");
   }
 }
 
 
 
 
-class Google_Service_Cloudbilling_BillingAccount extends Google_Model
+class Appointments_Google_Service_Cloudbilling_BillingAccount extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -343,12 +343,12 @@ class Google_Service_Cloudbilling_BillingAccount extends Google_Model
   }
 }
 
-class Google_Service_Cloudbilling_ListBillingAccountsResponse extends Google_Collection
+class Appointments_Google_Service_Cloudbilling_ListBillingAccountsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'billingAccounts';
   protected $internal_gapi_mappings = array(
   );
-  protected $billingAccountsType = 'Google_Service_Cloudbilling_BillingAccount';
+  protected $billingAccountsType = 'Appointments_Google_Service_Cloudbilling_BillingAccount';
   protected $billingAccountsDataType = 'array';
   public $nextPageToken;
 
@@ -371,13 +371,13 @@ class Google_Service_Cloudbilling_ListBillingAccountsResponse extends Google_Col
   }
 }
 
-class Google_Service_Cloudbilling_ListProjectBillingInfoResponse extends Google_Collection
+class Appointments_Google_Service_Cloudbilling_ListProjectBillingInfoResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'projectBillingInfo';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $projectBillingInfoType = 'Google_Service_Cloudbilling_ProjectBillingInfo';
+  protected $projectBillingInfoType = 'Appointments_Google_Service_Cloudbilling_ProjectBillingInfo';
   protected $projectBillingInfoDataType = 'array';
 
 
@@ -399,7 +399,7 @@ class Google_Service_Cloudbilling_ListProjectBillingInfoResponse extends Google_
   }
 }
 
-class Google_Service_Cloudbilling_ProjectBillingInfo extends Google_Model
+class Appointments_Google_Service_Cloudbilling_ProjectBillingInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );

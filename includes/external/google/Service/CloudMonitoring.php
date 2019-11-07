@@ -26,7 +26,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_CloudMonitoring extends Google_Service
+class Appointments_Google_Service_CloudMonitoring extends Appointments_Google_Service
 {
   /** View and manage your data across Google Cloud Platform services. */
   const CLOUD_PLATFORM =
@@ -43,9 +43,9 @@ class Google_Service_CloudMonitoring extends Google_Service
   /**
    * Constructs the internal representation of the CloudMonitoring service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -53,7 +53,7 @@ class Google_Service_CloudMonitoring extends Google_Service
     $this->version = 'v2beta2';
     $this->serviceName = 'cloudmonitoring';
 
-    $this->metricDescriptors = new Google_Service_CloudMonitoring_MetricDescriptors_Resource(
+    $this->metricDescriptors = new Appointments_Google_Service_CloudMonitoring_MetricDescriptors_Resource(
         $this,
         $this->serviceName,
         'metricDescriptors',
@@ -110,7 +110,7 @@ class Google_Service_CloudMonitoring extends Google_Service
           )
         )
     );
-    $this->timeseries = new Google_Service_CloudMonitoring_Timeseries_Resource(
+    $this->timeseries = new Appointments_Google_Service_CloudMonitoring_Timeseries_Resource(
         $this,
         $this->serviceName,
         'timeseries',
@@ -179,7 +179,7 @@ class Google_Service_CloudMonitoring extends Google_Service
           )
         )
     );
-    $this->timeseriesDescriptors = new Google_Service_CloudMonitoring_TimeseriesDescriptors_Resource(
+    $this->timeseriesDescriptors = new Appointments_Google_Service_CloudMonitoring_TimeseriesDescriptors_Resource(
         $this,
         $this->serviceName,
         'timeseriesDescriptors',
@@ -246,11 +246,11 @@ class Google_Service_CloudMonitoring extends Google_Service
  * The "metricDescriptors" collection of methods.
  * Typical usage is:
  *  <code>
- *   $cloudmonitoringService = new Google_Service_CloudMonitoring(...);
+ *   $cloudmonitoringService = new Appointments_Google_Service_CloudMonitoring(...);
  *   $metricDescriptors = $cloudmonitoringService->metricDescriptors;
  *  </code>
  */
-class Google_Service_CloudMonitoring_MetricDescriptors_Resource extends Google_Service_Resource
+class Appointments_Google_Service_CloudMonitoring_MetricDescriptors_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -258,15 +258,15 @@ class Google_Service_CloudMonitoring_MetricDescriptors_Resource extends Google_S
    *
    * @param string $project The project id. The value can be the numeric project
    * ID or string-based project name.
-   * @param Google_MetricDescriptor $postBody
+   * @param Appointments_Google_MetricDescriptor $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_CloudMonitoring_MetricDescriptor
+   * @return Appointments_Google_Service_CloudMonitoring_MetricDescriptor
    */
-  public function create($project, Google_Service_CloudMonitoring_MetricDescriptor $postBody, $optParams = array())
+  public function create($project, Appointments_Google_Service_CloudMonitoring_MetricDescriptor $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_CloudMonitoring_MetricDescriptor");
+    return $this->call('create', array($params), "Appointments_Google_Service_CloudMonitoring_MetricDescriptor");
   }
 
   /**
@@ -275,13 +275,13 @@ class Google_Service_CloudMonitoring_MetricDescriptors_Resource extends Google_S
    * @param string $project The project ID to which the metric belongs.
    * @param string $metric Name of the metric.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_CloudMonitoring_DeleteMetricDescriptorResponse
+   * @return Appointments_Google_Service_CloudMonitoring_DeleteMetricDescriptorResponse
    */
   public function delete($project, $metric, $optParams = array())
   {
     $params = array('project' => $project, 'metric' => $metric);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_CloudMonitoring_DeleteMetricDescriptorResponse");
+    return $this->call('delete', array($params), "Appointments_Google_Service_CloudMonitoring_DeleteMetricDescriptorResponse");
   }
 
   /**
@@ -305,13 +305,13 @@ class Google_Service_CloudMonitoring_MetricDescriptors_Resource extends Google_S
    * meaning that all keywords must match for a metric to be returned. If this
    * field is omitted, all metrics are returned. If an empty string is passed with
    * this field, no metrics are returned.
-   * @return Google_Service_CloudMonitoring_ListMetricDescriptorsResponse
+   * @return Appointments_Google_Service_CloudMonitoring_ListMetricDescriptorsResponse
    */
   public function listMetricDescriptors($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_CloudMonitoring_ListMetricDescriptorsResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_CloudMonitoring_ListMetricDescriptorsResponse");
   }
 }
 
@@ -319,11 +319,11 @@ class Google_Service_CloudMonitoring_MetricDescriptors_Resource extends Google_S
  * The "timeseries" collection of methods.
  * Typical usage is:
  *  <code>
- *   $cloudmonitoringService = new Google_Service_CloudMonitoring(...);
+ *   $cloudmonitoringService = new Appointments_Google_Service_CloudMonitoring(...);
  *   $timeseries = $cloudmonitoringService->timeseries;
  *  </code>
  */
-class Google_Service_CloudMonitoring_Timeseries_Resource extends Google_Service_Resource
+class Appointments_Google_Service_CloudMonitoring_Timeseries_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -373,13 +373,13 @@ class Google_Service_CloudMonitoring_Timeseries_Resource extends Google_Service_
    * only valid for non-cumulative metric types. Units: - m: minute  - h: hour  -
    * d: day  - w: week  Examples: 3m, 4w. Only one unit is allowed, for example:
    * 2w3d is not allowed; you should use 17d instead.
-   * @return Google_Service_CloudMonitoring_ListTimeseriesResponse
+   * @return Appointments_Google_Service_CloudMonitoring_ListTimeseriesResponse
    */
   public function listTimeseries($project, $metric, $youngest, $optParams = array())
   {
     $params = array('project' => $project, 'metric' => $metric, 'youngest' => $youngest);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_CloudMonitoring_ListTimeseriesResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_CloudMonitoring_ListTimeseriesResponse");
   }
 
   /**
@@ -393,15 +393,15 @@ class Google_Service_CloudMonitoring_Timeseries_Resource extends Google_Service_
    *
    * @param string $project The project ID. The value can be the numeric project
    * ID or string-based project name.
-   * @param Google_WriteTimeseriesRequest $postBody
+   * @param Appointments_Google_WriteTimeseriesRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_CloudMonitoring_WriteTimeseriesResponse
+   * @return Appointments_Google_Service_CloudMonitoring_WriteTimeseriesResponse
    */
-  public function write($project, Google_Service_CloudMonitoring_WriteTimeseriesRequest $postBody, $optParams = array())
+  public function write($project, Appointments_Google_Service_CloudMonitoring_WriteTimeseriesRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('write', array($params), "Google_Service_CloudMonitoring_WriteTimeseriesResponse");
+    return $this->call('write', array($params), "Appointments_Google_Service_CloudMonitoring_WriteTimeseriesResponse");
   }
 }
 
@@ -409,11 +409,11 @@ class Google_Service_CloudMonitoring_Timeseries_Resource extends Google_Service_
  * The "timeseriesDescriptors" collection of methods.
  * Typical usage is:
  *  <code>
- *   $cloudmonitoringService = new Google_Service_CloudMonitoring(...);
+ *   $cloudmonitoringService = new Appointments_Google_Service_CloudMonitoring(...);
  *   $timeseriesDescriptors = $cloudmonitoringService->timeseriesDescriptors;
  *  </code>
  */
-class Google_Service_CloudMonitoring_TimeseriesDescriptors_Resource extends Google_Service_Resource
+class Appointments_Google_Service_CloudMonitoring_TimeseriesDescriptors_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -463,20 +463,20 @@ class Google_Service_CloudMonitoring_TimeseriesDescriptors_Resource extends Goog
    * only valid for non-cumulative metric types. Units: - m: minute  - h: hour  -
    * d: day  - w: week  Examples: 3m, 4w. Only one unit is allowed, for example:
    * 2w3d is not allowed; you should use 17d instead.
-   * @return Google_Service_CloudMonitoring_ListTimeseriesDescriptorsResponse
+   * @return Appointments_Google_Service_CloudMonitoring_ListTimeseriesDescriptorsResponse
    */
   public function listTimeseriesDescriptors($project, $metric, $youngest, $optParams = array())
   {
     $params = array('project' => $project, 'metric' => $metric, 'youngest' => $youngest);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_CloudMonitoring_ListTimeseriesDescriptorsResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_CloudMonitoring_ListTimeseriesDescriptorsResponse");
   }
 }
 
 
 
 
-class Google_Service_CloudMonitoring_DeleteMetricDescriptorResponse extends Google_Model
+class Appointments_Google_Service_CloudMonitoring_DeleteMetricDescriptorResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -493,7 +493,7 @@ class Google_Service_CloudMonitoring_DeleteMetricDescriptorResponse extends Goog
   }
 }
 
-class Google_Service_CloudMonitoring_ListMetricDescriptorsRequest extends Google_Model
+class Appointments_Google_Service_CloudMonitoring_ListMetricDescriptorsRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -510,13 +510,13 @@ class Google_Service_CloudMonitoring_ListMetricDescriptorsRequest extends Google
   }
 }
 
-class Google_Service_CloudMonitoring_ListMetricDescriptorsResponse extends Google_Collection
+class Appointments_Google_Service_CloudMonitoring_ListMetricDescriptorsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'metrics';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $metricsType = 'Google_Service_CloudMonitoring_MetricDescriptor';
+  protected $metricsType = 'Appointments_Google_Service_CloudMonitoring_MetricDescriptor';
   protected $metricsDataType = 'array';
   public $nextPageToken;
 
@@ -547,7 +547,7 @@ class Google_Service_CloudMonitoring_ListMetricDescriptorsResponse extends Googl
   }
 }
 
-class Google_Service_CloudMonitoring_ListTimeseriesDescriptorsRequest extends Google_Model
+class Appointments_Google_Service_CloudMonitoring_ListTimeseriesDescriptorsRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -564,7 +564,7 @@ class Google_Service_CloudMonitoring_ListTimeseriesDescriptorsRequest extends Go
   }
 }
 
-class Google_Service_CloudMonitoring_ListTimeseriesDescriptorsResponse extends Google_Collection
+class Appointments_Google_Service_CloudMonitoring_ListTimeseriesDescriptorsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'timeseries';
   protected $internal_gapi_mappings = array(
@@ -572,7 +572,7 @@ class Google_Service_CloudMonitoring_ListTimeseriesDescriptorsResponse extends G
   public $kind;
   public $nextPageToken;
   public $oldest;
-  protected $timeseriesType = 'Google_Service_CloudMonitoring_TimeseriesDescriptor';
+  protected $timeseriesType = 'Appointments_Google_Service_CloudMonitoring_TimeseriesDescriptor';
   protected $timeseriesDataType = 'array';
   public $youngest;
 
@@ -619,7 +619,7 @@ class Google_Service_CloudMonitoring_ListTimeseriesDescriptorsResponse extends G
   }
 }
 
-class Google_Service_CloudMonitoring_ListTimeseriesRequest extends Google_Model
+class Appointments_Google_Service_CloudMonitoring_ListTimeseriesRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -636,7 +636,7 @@ class Google_Service_CloudMonitoring_ListTimeseriesRequest extends Google_Model
   }
 }
 
-class Google_Service_CloudMonitoring_ListTimeseriesResponse extends Google_Collection
+class Appointments_Google_Service_CloudMonitoring_ListTimeseriesResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'timeseries';
   protected $internal_gapi_mappings = array(
@@ -644,7 +644,7 @@ class Google_Service_CloudMonitoring_ListTimeseriesResponse extends Google_Colle
   public $kind;
   public $nextPageToken;
   public $oldest;
-  protected $timeseriesType = 'Google_Service_CloudMonitoring_Timeseries';
+  protected $timeseriesType = 'Appointments_Google_Service_CloudMonitoring_Timeseries';
   protected $timeseriesDataType = 'array';
   public $youngest;
 
@@ -691,17 +691,17 @@ class Google_Service_CloudMonitoring_ListTimeseriesResponse extends Google_Colle
   }
 }
 
-class Google_Service_CloudMonitoring_MetricDescriptor extends Google_Collection
+class Appointments_Google_Service_CloudMonitoring_MetricDescriptor extends Appointments_Google_Collection
 {
   protected $collection_key = 'labels';
   protected $internal_gapi_mappings = array(
   );
   public $description;
-  protected $labelsType = 'Google_Service_CloudMonitoring_MetricDescriptorLabelDescriptor';
+  protected $labelsType = 'Appointments_Google_Service_CloudMonitoring_MetricDescriptorLabelDescriptor';
   protected $labelsDataType = 'array';
   public $name;
   public $project;
-  protected $typeDescriptorType = 'Google_Service_CloudMonitoring_MetricDescriptorTypeDescriptor';
+  protected $typeDescriptorType = 'Appointments_Google_Service_CloudMonitoring_MetricDescriptorTypeDescriptor';
   protected $typeDescriptorDataType = '';
 
 
@@ -737,7 +737,7 @@ class Google_Service_CloudMonitoring_MetricDescriptor extends Google_Collection
   {
     return $this->project;
   }
-  public function setTypeDescriptor(Google_Service_CloudMonitoring_MetricDescriptorTypeDescriptor $typeDescriptor)
+  public function setTypeDescriptor(Appointments_Google_Service_CloudMonitoring_MetricDescriptorTypeDescriptor $typeDescriptor)
   {
     $this->typeDescriptor = $typeDescriptor;
   }
@@ -747,7 +747,7 @@ class Google_Service_CloudMonitoring_MetricDescriptor extends Google_Collection
   }
 }
 
-class Google_Service_CloudMonitoring_MetricDescriptorLabelDescriptor extends Google_Model
+class Appointments_Google_Service_CloudMonitoring_MetricDescriptorLabelDescriptor extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -773,7 +773,7 @@ class Google_Service_CloudMonitoring_MetricDescriptorLabelDescriptor extends Goo
   }
 }
 
-class Google_Service_CloudMonitoring_MetricDescriptorTypeDescriptor extends Google_Model
+class Appointments_Google_Service_CloudMonitoring_MetricDescriptorTypeDescriptor extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -799,12 +799,12 @@ class Google_Service_CloudMonitoring_MetricDescriptorTypeDescriptor extends Goog
   }
 }
 
-class Google_Service_CloudMonitoring_Point extends Google_Model
+class Appointments_Google_Service_CloudMonitoring_Point extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $boolValue;
-  protected $distributionValueType = 'Google_Service_CloudMonitoring_PointDistribution';
+  protected $distributionValueType = 'Appointments_Google_Service_CloudMonitoring_PointDistribution';
   protected $distributionValueDataType = '';
   public $doubleValue;
   public $end;
@@ -821,7 +821,7 @@ class Google_Service_CloudMonitoring_Point extends Google_Model
   {
     return $this->boolValue;
   }
-  public function setDistributionValue(Google_Service_CloudMonitoring_PointDistribution $distributionValue)
+  public function setDistributionValue(Appointments_Google_Service_CloudMonitoring_PointDistribution $distributionValue)
   {
     $this->distributionValue = $distributionValue;
   }
@@ -871,16 +871,16 @@ class Google_Service_CloudMonitoring_Point extends Google_Model
   }
 }
 
-class Google_Service_CloudMonitoring_PointDistribution extends Google_Collection
+class Appointments_Google_Service_CloudMonitoring_PointDistribution extends Appointments_Google_Collection
 {
   protected $collection_key = 'buckets';
   protected $internal_gapi_mappings = array(
   );
-  protected $bucketsType = 'Google_Service_CloudMonitoring_PointDistributionBucket';
+  protected $bucketsType = 'Appointments_Google_Service_CloudMonitoring_PointDistributionBucket';
   protected $bucketsDataType = 'array';
-  protected $overflowBucketType = 'Google_Service_CloudMonitoring_PointDistributionOverflowBucket';
+  protected $overflowBucketType = 'Appointments_Google_Service_CloudMonitoring_PointDistributionOverflowBucket';
   protected $overflowBucketDataType = '';
-  protected $underflowBucketType = 'Google_Service_CloudMonitoring_PointDistributionUnderflowBucket';
+  protected $underflowBucketType = 'Appointments_Google_Service_CloudMonitoring_PointDistributionUnderflowBucket';
   protected $underflowBucketDataType = '';
 
 
@@ -892,7 +892,7 @@ class Google_Service_CloudMonitoring_PointDistribution extends Google_Collection
   {
     return $this->buckets;
   }
-  public function setOverflowBucket(Google_Service_CloudMonitoring_PointDistributionOverflowBucket $overflowBucket)
+  public function setOverflowBucket(Appointments_Google_Service_CloudMonitoring_PointDistributionOverflowBucket $overflowBucket)
   {
     $this->overflowBucket = $overflowBucket;
   }
@@ -900,7 +900,7 @@ class Google_Service_CloudMonitoring_PointDistribution extends Google_Collection
   {
     return $this->overflowBucket;
   }
-  public function setUnderflowBucket(Google_Service_CloudMonitoring_PointDistributionUnderflowBucket $underflowBucket)
+  public function setUnderflowBucket(Appointments_Google_Service_CloudMonitoring_PointDistributionUnderflowBucket $underflowBucket)
   {
     $this->underflowBucket = $underflowBucket;
   }
@@ -910,7 +910,7 @@ class Google_Service_CloudMonitoring_PointDistribution extends Google_Collection
   }
 }
 
-class Google_Service_CloudMonitoring_PointDistributionBucket extends Google_Model
+class Appointments_Google_Service_CloudMonitoring_PointDistributionBucket extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -945,7 +945,7 @@ class Google_Service_CloudMonitoring_PointDistributionBucket extends Google_Mode
   }
 }
 
-class Google_Service_CloudMonitoring_PointDistributionOverflowBucket extends Google_Model
+class Appointments_Google_Service_CloudMonitoring_PointDistributionOverflowBucket extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -971,7 +971,7 @@ class Google_Service_CloudMonitoring_PointDistributionOverflowBucket extends Goo
   }
 }
 
-class Google_Service_CloudMonitoring_PointDistributionUnderflowBucket extends Google_Model
+class Appointments_Google_Service_CloudMonitoring_PointDistributionUnderflowBucket extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -997,14 +997,14 @@ class Google_Service_CloudMonitoring_PointDistributionUnderflowBucket extends Go
   }
 }
 
-class Google_Service_CloudMonitoring_Timeseries extends Google_Collection
+class Appointments_Google_Service_CloudMonitoring_Timeseries extends Appointments_Google_Collection
 {
   protected $collection_key = 'points';
   protected $internal_gapi_mappings = array(
   );
-  protected $pointsType = 'Google_Service_CloudMonitoring_Point';
+  protected $pointsType = 'Appointments_Google_Service_CloudMonitoring_Point';
   protected $pointsDataType = 'array';
-  protected $timeseriesDescType = 'Google_Service_CloudMonitoring_TimeseriesDescriptor';
+  protected $timeseriesDescType = 'Appointments_Google_Service_CloudMonitoring_TimeseriesDescriptor';
   protected $timeseriesDescDataType = '';
 
 
@@ -1016,7 +1016,7 @@ class Google_Service_CloudMonitoring_Timeseries extends Google_Collection
   {
     return $this->points;
   }
-  public function setTimeseriesDesc(Google_Service_CloudMonitoring_TimeseriesDescriptor $timeseriesDesc)
+  public function setTimeseriesDesc(Appointments_Google_Service_CloudMonitoring_TimeseriesDescriptor $timeseriesDesc)
   {
     $this->timeseriesDesc = $timeseriesDesc;
   }
@@ -1026,7 +1026,7 @@ class Google_Service_CloudMonitoring_Timeseries extends Google_Collection
   }
 }
 
-class Google_Service_CloudMonitoring_TimeseriesDescriptor extends Google_Model
+class Appointments_Google_Service_CloudMonitoring_TimeseriesDescriptor extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1061,7 +1061,7 @@ class Google_Service_CloudMonitoring_TimeseriesDescriptor extends Google_Model
   }
 }
 
-class Google_Service_CloudMonitoring_TimeseriesDescriptorLabel extends Google_Model
+class Appointments_Google_Service_CloudMonitoring_TimeseriesDescriptorLabel extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1087,17 +1087,17 @@ class Google_Service_CloudMonitoring_TimeseriesDescriptorLabel extends Google_Mo
   }
 }
 
-class Google_Service_CloudMonitoring_TimeseriesPoint extends Google_Model
+class Appointments_Google_Service_CloudMonitoring_TimeseriesPoint extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $pointType = 'Google_Service_CloudMonitoring_Point';
+  protected $pointType = 'Appointments_Google_Service_CloudMonitoring_Point';
   protected $pointDataType = '';
-  protected $timeseriesDescType = 'Google_Service_CloudMonitoring_TimeseriesDescriptor';
+  protected $timeseriesDescType = 'Appointments_Google_Service_CloudMonitoring_TimeseriesDescriptor';
   protected $timeseriesDescDataType = '';
 
 
-  public function setPoint(Google_Service_CloudMonitoring_Point $point)
+  public function setPoint(Appointments_Google_Service_CloudMonitoring_Point $point)
   {
     $this->point = $point;
   }
@@ -1105,7 +1105,7 @@ class Google_Service_CloudMonitoring_TimeseriesPoint extends Google_Model
   {
     return $this->point;
   }
-  public function setTimeseriesDesc(Google_Service_CloudMonitoring_TimeseriesDescriptor $timeseriesDesc)
+  public function setTimeseriesDesc(Appointments_Google_Service_CloudMonitoring_TimeseriesDescriptor $timeseriesDesc)
   {
     $this->timeseriesDesc = $timeseriesDesc;
   }
@@ -1115,13 +1115,13 @@ class Google_Service_CloudMonitoring_TimeseriesPoint extends Google_Model
   }
 }
 
-class Google_Service_CloudMonitoring_WriteTimeseriesRequest extends Google_Collection
+class Appointments_Google_Service_CloudMonitoring_WriteTimeseriesRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'timeseries';
   protected $internal_gapi_mappings = array(
   );
   public $commonLabels;
-  protected $timeseriesType = 'Google_Service_CloudMonitoring_TimeseriesPoint';
+  protected $timeseriesType = 'Appointments_Google_Service_CloudMonitoring_TimeseriesPoint';
   protected $timeseriesDataType = 'array';
 
 
@@ -1143,7 +1143,7 @@ class Google_Service_CloudMonitoring_WriteTimeseriesRequest extends Google_Colle
   }
 }
 
-class Google_Service_CloudMonitoring_WriteTimeseriesResponse extends Google_Model
+class Appointments_Google_Service_CloudMonitoring_WriteTimeseriesResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );

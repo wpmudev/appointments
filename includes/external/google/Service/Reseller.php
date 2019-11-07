@@ -26,7 +26,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Reseller extends Google_Service
+class Appointments_Google_Service_Reseller extends Appointments_Google_Service
 {
   /** Manage users on your domain. */
   const APPS_ORDER =
@@ -42,9 +42,9 @@ class Google_Service_Reseller extends Google_Service
   /**
    * Constructs the internal representation of the Reseller service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -52,7 +52,7 @@ class Google_Service_Reseller extends Google_Service
     $this->version = 'v1';
     $this->serviceName = 'reseller';
 
-    $this->customers = new Google_Service_Reseller_Customers_Resource(
+    $this->customers = new Appointments_Google_Service_Reseller_Customers_Resource(
         $this,
         $this->serviceName,
         'customers',
@@ -101,7 +101,7 @@ class Google_Service_Reseller extends Google_Service
           )
         )
     );
-    $this->subscriptions = new Google_Service_Reseller_Subscriptions_Resource(
+    $this->subscriptions = new Appointments_Google_Service_Reseller_Subscriptions_Resource(
         $this,
         $this->serviceName,
         'subscriptions',
@@ -283,11 +283,11 @@ class Google_Service_Reseller extends Google_Service
  * The "customers" collection of methods.
  * Typical usage is:
  *  <code>
- *   $resellerService = new Google_Service_Reseller(...);
+ *   $resellerService = new Appointments_Google_Service_Reseller(...);
  *   $customers = $resellerService->customers;
  *  </code>
  */
-class Google_Service_Reseller_Customers_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Reseller_Customers_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -296,31 +296,31 @@ class Google_Service_Reseller_Customers_Resource extends Google_Service_Resource
    *
    * @param string $customerId Id of the Customer
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Reseller_Customer
+   * @return Appointments_Google_Service_Reseller_Customer
    */
   public function get($customerId, $optParams = array())
   {
     $params = array('customerId' => $customerId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Reseller_Customer");
+    return $this->call('get', array($params), "Appointments_Google_Service_Reseller_Customer");
   }
 
   /**
    * Creates a customer resource if one does not already exist. (customers.insert)
    *
-   * @param Google_Customer $postBody
+   * @param Appointments_Google_Customer $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param string customerAuthToken An auth token needed for inserting a
    * customer for which domain already exists. Can be generated at
    * https://admin.google.com/TransferToken. Optional.
-   * @return Google_Service_Reseller_Customer
+   * @return Appointments_Google_Service_Reseller_Customer
    */
-  public function insert(Google_Service_Reseller_Customer $postBody, $optParams = array())
+  public function insert(Appointments_Google_Service_Reseller_Customer $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Reseller_Customer");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Reseller_Customer");
   }
 
   /**
@@ -328,15 +328,15 @@ class Google_Service_Reseller_Customers_Resource extends Google_Service_Resource
    * This method supports patch semantics. (customers.patch)
    *
    * @param string $customerId Id of the Customer
-   * @param Google_Customer $postBody
+   * @param Appointments_Google_Customer $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Reseller_Customer
+   * @return Appointments_Google_Service_Reseller_Customer
    */
-  public function patch($customerId, Google_Service_Reseller_Customer $postBody, $optParams = array())
+  public function patch($customerId, Appointments_Google_Service_Reseller_Customer $postBody, $optParams = array())
   {
     $params = array('customerId' => $customerId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Reseller_Customer");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Reseller_Customer");
   }
 
   /**
@@ -344,15 +344,15 @@ class Google_Service_Reseller_Customers_Resource extends Google_Service_Resource
    * (customers.update)
    *
    * @param string $customerId Id of the Customer
-   * @param Google_Customer $postBody
+   * @param Appointments_Google_Customer $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Reseller_Customer
+   * @return Appointments_Google_Service_Reseller_Customer
    */
-  public function update($customerId, Google_Service_Reseller_Customer $postBody, $optParams = array())
+  public function update($customerId, Appointments_Google_Service_Reseller_Customer $postBody, $optParams = array())
   {
     $params = array('customerId' => $customerId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Reseller_Customer");
+    return $this->call('update', array($params), "Appointments_Google_Service_Reseller_Customer");
   }
 }
 
@@ -360,11 +360,11 @@ class Google_Service_Reseller_Customers_Resource extends Google_Service_Resource
  * The "subscriptions" collection of methods.
  * Typical usage is:
  *  <code>
- *   $resellerService = new Google_Service_Reseller(...);
+ *   $resellerService = new Appointments_Google_Service_Reseller(...);
  *   $subscriptions = $resellerService->subscriptions;
  *  </code>
  */
-class Google_Service_Reseller_Subscriptions_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Reseller_Subscriptions_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -375,13 +375,13 @@ class Google_Service_Reseller_Subscriptions_Resource extends Google_Service_Reso
    * @param string $subscriptionId Id of the subscription, which is unique for a
    * customer
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Reseller_Subscription
+   * @return Appointments_Google_Service_Reseller_Subscription
    */
   public function activate($customerId, $subscriptionId, $optParams = array())
   {
     $params = array('customerId' => $customerId, 'subscriptionId' => $subscriptionId);
     $params = array_merge($params, $optParams);
-    return $this->call('activate', array($params), "Google_Service_Reseller_Subscription");
+    return $this->call('activate', array($params), "Appointments_Google_Service_Reseller_Subscription");
   }
 
   /**
@@ -390,15 +390,15 @@ class Google_Service_Reseller_Subscriptions_Resource extends Google_Service_Reso
    * @param string $customerId Id of the Customer
    * @param string $subscriptionId Id of the subscription, which is unique for a
    * customer
-   * @param Google_ChangePlanRequest $postBody
+   * @param Appointments_Google_ChangePlanRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Reseller_Subscription
+   * @return Appointments_Google_Service_Reseller_Subscription
    */
-  public function changePlan($customerId, $subscriptionId, Google_Service_Reseller_ChangePlanRequest $postBody, $optParams = array())
+  public function changePlan($customerId, $subscriptionId, Appointments_Google_Service_Reseller_ChangePlanRequest $postBody, $optParams = array())
   {
     $params = array('customerId' => $customerId, 'subscriptionId' => $subscriptionId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('changePlan', array($params), "Google_Service_Reseller_Subscription");
+    return $this->call('changePlan', array($params), "Appointments_Google_Service_Reseller_Subscription");
   }
 
   /**
@@ -408,15 +408,15 @@ class Google_Service_Reseller_Subscriptions_Resource extends Google_Service_Reso
    * @param string $customerId Id of the Customer
    * @param string $subscriptionId Id of the subscription, which is unique for a
    * customer
-   * @param Google_RenewalSettings $postBody
+   * @param Appointments_Google_RenewalSettings $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Reseller_Subscription
+   * @return Appointments_Google_Service_Reseller_Subscription
    */
-  public function changeRenewalSettings($customerId, $subscriptionId, Google_Service_Reseller_RenewalSettings $postBody, $optParams = array())
+  public function changeRenewalSettings($customerId, $subscriptionId, Appointments_Google_Service_Reseller_RenewalSettings $postBody, $optParams = array())
   {
     $params = array('customerId' => $customerId, 'subscriptionId' => $subscriptionId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('changeRenewalSettings', array($params), "Google_Service_Reseller_Subscription");
+    return $this->call('changeRenewalSettings', array($params), "Appointments_Google_Service_Reseller_Subscription");
   }
 
   /**
@@ -425,15 +425,15 @@ class Google_Service_Reseller_Subscriptions_Resource extends Google_Service_Reso
    * @param string $customerId Id of the Customer
    * @param string $subscriptionId Id of the subscription, which is unique for a
    * customer
-   * @param Google_Seats $postBody
+   * @param Appointments_Google_Seats $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Reseller_Subscription
+   * @return Appointments_Google_Service_Reseller_Subscription
    */
-  public function changeSeats($customerId, $subscriptionId, Google_Service_Reseller_Seats $postBody, $optParams = array())
+  public function changeSeats($customerId, $subscriptionId, Appointments_Google_Service_Reseller_Seats $postBody, $optParams = array())
   {
     $params = array('customerId' => $customerId, 'subscriptionId' => $subscriptionId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('changeSeats', array($params), "Google_Service_Reseller_Subscription");
+    return $this->call('changeSeats', array($params), "Appointments_Google_Service_Reseller_Subscription");
   }
 
   /**
@@ -460,32 +460,32 @@ class Google_Service_Reseller_Subscriptions_Resource extends Google_Service_Reso
    * @param string $subscriptionId Id of the subscription, which is unique for a
    * customer
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Reseller_Subscription
+   * @return Appointments_Google_Service_Reseller_Subscription
    */
   public function get($customerId, $subscriptionId, $optParams = array())
   {
     $params = array('customerId' => $customerId, 'subscriptionId' => $subscriptionId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Reseller_Subscription");
+    return $this->call('get', array($params), "Appointments_Google_Service_Reseller_Subscription");
   }
 
   /**
    * Creates/Transfers a subscription for the customer. (subscriptions.insert)
    *
    * @param string $customerId Id of the Customer
-   * @param Google_Subscription $postBody
+   * @param Appointments_Google_Subscription $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param string customerAuthToken An auth token needed for transferring a
    * subscription. Can be generated at https://www.google.com/a/cpanel/customer-
    * domain/TransferToken. Optional.
-   * @return Google_Service_Reseller_Subscription
+   * @return Appointments_Google_Service_Reseller_Subscription
    */
-  public function insert($customerId, Google_Service_Reseller_Subscription $postBody, $optParams = array())
+  public function insert($customerId, Appointments_Google_Service_Reseller_Subscription $postBody, $optParams = array())
   {
     $params = array('customerId' => $customerId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Reseller_Subscription");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Reseller_Subscription");
   }
 
   /**
@@ -502,13 +502,13 @@ class Google_Service_Reseller_Subscriptions_Resource extends Google_Service_Reso
    * which the subscriptions should be filtered. Optional
    * @opt_param string maxResults Maximum number of results to return
    * @opt_param string pageToken Token to specify next page in the list
-   * @return Google_Service_Reseller_Subscriptions
+   * @return Appointments_Google_Service_Reseller_Subscriptions
    */
   public function listSubscriptions($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Reseller_Subscriptions");
+    return $this->call('list', array($params), "Appointments_Google_Service_Reseller_Subscriptions");
   }
 
   /**
@@ -518,13 +518,13 @@ class Google_Service_Reseller_Subscriptions_Resource extends Google_Service_Reso
    * @param string $subscriptionId Id of the subscription, which is unique for a
    * customer
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Reseller_Subscription
+   * @return Appointments_Google_Service_Reseller_Subscription
    */
   public function startPaidService($customerId, $subscriptionId, $optParams = array())
   {
     $params = array('customerId' => $customerId, 'subscriptionId' => $subscriptionId);
     $params = array_merge($params, $optParams);
-    return $this->call('startPaidService', array($params), "Google_Service_Reseller_Subscription");
+    return $this->call('startPaidService', array($params), "Appointments_Google_Service_Reseller_Subscription");
   }
 
   /**
@@ -534,20 +534,20 @@ class Google_Service_Reseller_Subscriptions_Resource extends Google_Service_Reso
    * @param string $subscriptionId Id of the subscription, which is unique for a
    * customer
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Reseller_Subscription
+   * @return Appointments_Google_Service_Reseller_Subscription
    */
   public function suspend($customerId, $subscriptionId, $optParams = array())
   {
     $params = array('customerId' => $customerId, 'subscriptionId' => $subscriptionId);
     $params = array_merge($params, $optParams);
-    return $this->call('suspend', array($params), "Google_Service_Reseller_Subscription");
+    return $this->call('suspend', array($params), "Appointments_Google_Service_Reseller_Subscription");
   }
 }
 
 
 
 
-class Google_Service_Reseller_Address extends Google_Model
+class Appointments_Google_Service_Reseller_Address extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -645,14 +645,14 @@ class Google_Service_Reseller_Address extends Google_Model
   }
 }
 
-class Google_Service_Reseller_ChangePlanRequest extends Google_Model
+class Appointments_Google_Service_Reseller_ChangePlanRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $kind;
   public $planName;
   public $purchaseOrderId;
-  protected $seatsType = 'Google_Service_Reseller_Seats';
+  protected $seatsType = 'Appointments_Google_Service_Reseller_Seats';
   protected $seatsDataType = '';
 
 
@@ -680,7 +680,7 @@ class Google_Service_Reseller_ChangePlanRequest extends Google_Model
   {
     return $this->purchaseOrderId;
   }
-  public function setSeats(Google_Service_Reseller_Seats $seats)
+  public function setSeats(Appointments_Google_Service_Reseller_Seats $seats)
   {
     $this->seats = $seats;
   }
@@ -690,7 +690,7 @@ class Google_Service_Reseller_ChangePlanRequest extends Google_Model
   }
 }
 
-class Google_Service_Reseller_Customer extends Google_Model
+class Appointments_Google_Service_Reseller_Customer extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -700,7 +700,7 @@ class Google_Service_Reseller_Customer extends Google_Model
   public $customerId;
   public $kind;
   public $phoneNumber;
-  protected $postalAddressType = 'Google_Service_Reseller_Address';
+  protected $postalAddressType = 'Appointments_Google_Service_Reseller_Address';
   protected $postalAddressDataType = '';
   public $resourceUiUrl;
 
@@ -753,7 +753,7 @@ class Google_Service_Reseller_Customer extends Google_Model
   {
     return $this->phoneNumber;
   }
-  public function setPostalAddress(Google_Service_Reseller_Address $postalAddress)
+  public function setPostalAddress(Appointments_Google_Service_Reseller_Address $postalAddress)
   {
     $this->postalAddress = $postalAddress;
   }
@@ -771,7 +771,7 @@ class Google_Service_Reseller_Customer extends Google_Model
   }
 }
 
-class Google_Service_Reseller_RenewalSettings extends Google_Model
+class Appointments_Google_Service_Reseller_RenewalSettings extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -797,7 +797,7 @@ class Google_Service_Reseller_RenewalSettings extends Google_Model
   }
 }
 
-class Google_Service_Reseller_Seats extends Google_Model
+class Appointments_Google_Service_Reseller_Seats extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -841,7 +841,7 @@ class Google_Service_Reseller_Seats extends Google_Model
   }
 }
 
-class Google_Service_Reseller_Subscription extends Google_Collection
+class Appointments_Google_Service_Reseller_Subscription extends Appointments_Google_Collection
 {
   protected $collection_key = 'suspensionReasons';
   protected $internal_gapi_mappings = array(
@@ -850,21 +850,21 @@ class Google_Service_Reseller_Subscription extends Google_Collection
   public $creationTime;
   public $customerId;
   public $kind;
-  protected $planType = 'Google_Service_Reseller_SubscriptionPlan';
+  protected $planType = 'Appointments_Google_Service_Reseller_SubscriptionPlan';
   protected $planDataType = '';
   public $purchaseOrderId;
-  protected $renewalSettingsType = 'Google_Service_Reseller_RenewalSettings';
+  protected $renewalSettingsType = 'Appointments_Google_Service_Reseller_RenewalSettings';
   protected $renewalSettingsDataType = '';
   public $resourceUiUrl;
-  protected $seatsType = 'Google_Service_Reseller_Seats';
+  protected $seatsType = 'Appointments_Google_Service_Reseller_Seats';
   protected $seatsDataType = '';
   public $skuId;
   public $status;
   public $subscriptionId;
   public $suspensionReasons;
-  protected $transferInfoType = 'Google_Service_Reseller_SubscriptionTransferInfo';
+  protected $transferInfoType = 'Appointments_Google_Service_Reseller_SubscriptionTransferInfo';
   protected $transferInfoDataType = '';
-  protected $trialSettingsType = 'Google_Service_Reseller_SubscriptionTrialSettings';
+  protected $trialSettingsType = 'Appointments_Google_Service_Reseller_SubscriptionTrialSettings';
   protected $trialSettingsDataType = '';
 
 
@@ -900,7 +900,7 @@ class Google_Service_Reseller_Subscription extends Google_Collection
   {
     return $this->kind;
   }
-  public function setPlan(Google_Service_Reseller_SubscriptionPlan $plan)
+  public function setPlan(Appointments_Google_Service_Reseller_SubscriptionPlan $plan)
   {
     $this->plan = $plan;
   }
@@ -916,7 +916,7 @@ class Google_Service_Reseller_Subscription extends Google_Collection
   {
     return $this->purchaseOrderId;
   }
-  public function setRenewalSettings(Google_Service_Reseller_RenewalSettings $renewalSettings)
+  public function setRenewalSettings(Appointments_Google_Service_Reseller_RenewalSettings $renewalSettings)
   {
     $this->renewalSettings = $renewalSettings;
   }
@@ -932,7 +932,7 @@ class Google_Service_Reseller_Subscription extends Google_Collection
   {
     return $this->resourceUiUrl;
   }
-  public function setSeats(Google_Service_Reseller_Seats $seats)
+  public function setSeats(Appointments_Google_Service_Reseller_Seats $seats)
   {
     $this->seats = $seats;
   }
@@ -972,7 +972,7 @@ class Google_Service_Reseller_Subscription extends Google_Collection
   {
     return $this->suspensionReasons;
   }
-  public function setTransferInfo(Google_Service_Reseller_SubscriptionTransferInfo $transferInfo)
+  public function setTransferInfo(Appointments_Google_Service_Reseller_SubscriptionTransferInfo $transferInfo)
   {
     $this->transferInfo = $transferInfo;
   }
@@ -980,7 +980,7 @@ class Google_Service_Reseller_Subscription extends Google_Collection
   {
     return $this->transferInfo;
   }
-  public function setTrialSettings(Google_Service_Reseller_SubscriptionTrialSettings $trialSettings)
+  public function setTrialSettings(Appointments_Google_Service_Reseller_SubscriptionTrialSettings $trialSettings)
   {
     $this->trialSettings = $trialSettings;
   }
@@ -990,17 +990,17 @@ class Google_Service_Reseller_Subscription extends Google_Collection
   }
 }
 
-class Google_Service_Reseller_SubscriptionPlan extends Google_Model
+class Appointments_Google_Service_Reseller_SubscriptionPlan extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $commitmentIntervalType = 'Google_Service_Reseller_SubscriptionPlanCommitmentInterval';
+  protected $commitmentIntervalType = 'Appointments_Google_Service_Reseller_SubscriptionPlanCommitmentInterval';
   protected $commitmentIntervalDataType = '';
   public $isCommitmentPlan;
   public $planName;
 
 
-  public function setCommitmentInterval(Google_Service_Reseller_SubscriptionPlanCommitmentInterval $commitmentInterval)
+  public function setCommitmentInterval(Appointments_Google_Service_Reseller_SubscriptionPlanCommitmentInterval $commitmentInterval)
   {
     $this->commitmentInterval = $commitmentInterval;
   }
@@ -1026,7 +1026,7 @@ class Google_Service_Reseller_SubscriptionPlan extends Google_Model
   }
 }
 
-class Google_Service_Reseller_SubscriptionPlanCommitmentInterval extends Google_Model
+class Appointments_Google_Service_Reseller_SubscriptionPlanCommitmentInterval extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1052,7 +1052,7 @@ class Google_Service_Reseller_SubscriptionPlanCommitmentInterval extends Google_
   }
 }
 
-class Google_Service_Reseller_SubscriptionTransferInfo extends Google_Model
+class Appointments_Google_Service_Reseller_SubscriptionTransferInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1078,7 +1078,7 @@ class Google_Service_Reseller_SubscriptionTransferInfo extends Google_Model
   }
 }
 
-class Google_Service_Reseller_SubscriptionTrialSettings extends Google_Model
+class Appointments_Google_Service_Reseller_SubscriptionTrialSettings extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1104,14 +1104,14 @@ class Google_Service_Reseller_SubscriptionTrialSettings extends Google_Model
   }
 }
 
-class Google_Service_Reseller_Subscriptions extends Google_Collection
+class Appointments_Google_Service_Reseller_Subscriptions extends Appointments_Google_Collection
 {
   protected $collection_key = 'subscriptions';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
   public $nextPageToken;
-  protected $subscriptionsType = 'Google_Service_Reseller_Subscription';
+  protected $subscriptionsType = 'Appointments_Google_Service_Reseller_Subscription';
   protected $subscriptionsDataType = 'array';
 
 

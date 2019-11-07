@@ -26,7 +26,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_DataTransfer extends Google_Service
+class Appointments_Google_Service_DataTransfer extends Appointments_Google_Service
 {
   /** View and manage data transfers between users in your organization. */
   const ADMIN_DATATRANSFER =
@@ -42,9 +42,9 @@ class Google_Service_DataTransfer extends Google_Service
   /**
    * Constructs the internal representation of the DataTransfer service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -52,7 +52,7 @@ class Google_Service_DataTransfer extends Google_Service
     $this->version = 'datatransfer_v1';
     $this->serviceName = 'admin';
 
-    $this->applications = new Google_Service_DataTransfer_Applications_Resource(
+    $this->applications = new Appointments_Google_Service_DataTransfer_Applications_Resource(
         $this,
         $this->serviceName,
         'applications',
@@ -89,7 +89,7 @@ class Google_Service_DataTransfer extends Google_Service
           )
         )
     );
-    $this->transfers = new Google_Service_DataTransfer_Transfers_Resource(
+    $this->transfers = new Appointments_Google_Service_DataTransfer_Transfers_Resource(
         $this,
         $this->serviceName,
         'transfers',
@@ -150,11 +150,11 @@ class Google_Service_DataTransfer extends Google_Service
  * The "applications" collection of methods.
  * Typical usage is:
  *  <code>
- *   $adminService = new Google_Service_DataTransfer(...);
+ *   $adminService = new Appointments_Google_Service_DataTransfer(...);
  *   $applications = $adminService->applications;
  *  </code>
  */
-class Google_Service_DataTransfer_Applications_Resource extends Google_Service_Resource
+class Appointments_Google_Service_DataTransfer_Applications_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -163,13 +163,13 @@ class Google_Service_DataTransfer_Applications_Resource extends Google_Service_R
    *
    * @param string $applicationId ID of the application resource to be retrieved.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_DataTransfer_Application
+   * @return Appointments_Google_Service_DataTransfer_Application
    */
   public function get($applicationId, $optParams = array())
   {
     $params = array('applicationId' => $applicationId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_DataTransfer_Application");
+    return $this->call('get', array($params), "Appointments_Google_Service_DataTransfer_Application");
   }
 
   /**
@@ -182,13 +182,13 @@ class Google_Service_DataTransfer_Applications_Resource extends Google_Service_R
    * @opt_param int maxResults Maximum number of results to return. Default is
    * 100.
    * @opt_param string pageToken Token to specify next page in the list.
-   * @return Google_Service_DataTransfer_ApplicationsListResponse
+   * @return Appointments_Google_Service_DataTransfer_ApplicationsListResponse
    */
   public function listApplications($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_DataTransfer_ApplicationsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_DataTransfer_ApplicationsListResponse");
   }
 }
 
@@ -196,11 +196,11 @@ class Google_Service_DataTransfer_Applications_Resource extends Google_Service_R
  * The "transfers" collection of methods.
  * Typical usage is:
  *  <code>
- *   $adminService = new Google_Service_DataTransfer(...);
+ *   $adminService = new Appointments_Google_Service_DataTransfer(...);
  *   $transfers = $adminService->transfers;
  *  </code>
  */
-class Google_Service_DataTransfer_Transfers_Resource extends Google_Service_Resource
+class Appointments_Google_Service_DataTransfer_Transfers_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -209,27 +209,27 @@ class Google_Service_DataTransfer_Transfers_Resource extends Google_Service_Reso
    * @param string $dataTransferId ID of the resource to be retrieved. This is
    * returned in the response from the insert method.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_DataTransfer_DataTransfer
+   * @return Appointments_Google_Service_DataTransfer_DataTransfer
    */
   public function get($dataTransferId, $optParams = array())
   {
     $params = array('dataTransferId' => $dataTransferId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_DataTransfer_DataTransfer");
+    return $this->call('get', array($params), "Appointments_Google_Service_DataTransfer_DataTransfer");
   }
 
   /**
    * Inserts a data transfer request. (transfers.insert)
    *
-   * @param Google_DataTransfer $postBody
+   * @param Appointments_Google_DataTransfer $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_DataTransfer_DataTransfer
+   * @return Appointments_Google_Service_DataTransfer_DataTransfer
    */
-  public function insert(Google_Service_DataTransfer_DataTransfer $postBody, $optParams = array())
+  public function insert(Appointments_Google_Service_DataTransfer_DataTransfer $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_DataTransfer_DataTransfer");
+    return $this->call('insert', array($params), "Appointments_Google_Service_DataTransfer_DataTransfer");
   }
 
   /**
@@ -245,20 +245,20 @@ class Google_Service_DataTransfer_Transfers_Resource extends Google_Service_Reso
    * @opt_param string oldOwnerUserId Source user's profile ID.
    * @opt_param string pageToken Token to specify the next page in the list.
    * @opt_param string status Status of the transfer.
-   * @return Google_Service_DataTransfer_DataTransfersListResponse
+   * @return Appointments_Google_Service_DataTransfer_DataTransfersListResponse
    */
   public function listTransfers($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_DataTransfer_DataTransfersListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_DataTransfer_DataTransfersListResponse");
   }
 }
 
 
 
 
-class Google_Service_DataTransfer_Application extends Google_Collection
+class Appointments_Google_Service_DataTransfer_Application extends Appointments_Google_Collection
 {
   protected $collection_key = 'transferParams';
   protected $internal_gapi_mappings = array(
@@ -267,7 +267,7 @@ class Google_Service_DataTransfer_Application extends Google_Collection
   public $id;
   public $kind;
   public $name;
-  protected $transferParamsType = 'Google_Service_DataTransfer_ApplicationTransferParam';
+  protected $transferParamsType = 'Appointments_Google_Service_DataTransfer_ApplicationTransferParam';
   protected $transferParamsDataType = 'array';
 
 
@@ -313,13 +313,13 @@ class Google_Service_DataTransfer_Application extends Google_Collection
   }
 }
 
-class Google_Service_DataTransfer_ApplicationDataTransfer extends Google_Collection
+class Appointments_Google_Service_DataTransfer_ApplicationDataTransfer extends Appointments_Google_Collection
 {
   protected $collection_key = 'applicationTransferParams';
   protected $internal_gapi_mappings = array(
   );
   public $applicationId;
-  protected $applicationTransferParamsType = 'Google_Service_DataTransfer_ApplicationTransferParam';
+  protected $applicationTransferParamsType = 'Appointments_Google_Service_DataTransfer_ApplicationTransferParam';
   protected $applicationTransferParamsDataType = 'array';
   public $applicationTransferStatus;
 
@@ -350,7 +350,7 @@ class Google_Service_DataTransfer_ApplicationDataTransfer extends Google_Collect
   }
 }
 
-class Google_Service_DataTransfer_ApplicationTransferParam extends Google_Collection
+class Appointments_Google_Service_DataTransfer_ApplicationTransferParam extends Appointments_Google_Collection
 {
   protected $collection_key = 'value';
   protected $internal_gapi_mappings = array(
@@ -377,12 +377,12 @@ class Google_Service_DataTransfer_ApplicationTransferParam extends Google_Collec
   }
 }
 
-class Google_Service_DataTransfer_ApplicationsListResponse extends Google_Collection
+class Appointments_Google_Service_DataTransfer_ApplicationsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'applications';
   protected $internal_gapi_mappings = array(
   );
-  protected $applicationsType = 'Google_Service_DataTransfer_Application';
+  protected $applicationsType = 'Appointments_Google_Service_DataTransfer_Application';
   protected $applicationsDataType = 'array';
   public $etag;
   public $kind;
@@ -423,12 +423,12 @@ class Google_Service_DataTransfer_ApplicationsListResponse extends Google_Collec
   }
 }
 
-class Google_Service_DataTransfer_DataTransfer extends Google_Collection
+class Appointments_Google_Service_DataTransfer_DataTransfer extends Appointments_Google_Collection
 {
   protected $collection_key = 'applicationDataTransfers';
   protected $internal_gapi_mappings = array(
   );
-  protected $applicationDataTransfersType = 'Google_Service_DataTransfer_ApplicationDataTransfer';
+  protected $applicationDataTransfersType = 'Appointments_Google_Service_DataTransfer_ApplicationDataTransfer';
   protected $applicationDataTransfersDataType = 'array';
   public $etag;
   public $id;
@@ -505,12 +505,12 @@ class Google_Service_DataTransfer_DataTransfer extends Google_Collection
   }
 }
 
-class Google_Service_DataTransfer_DataTransfersListResponse extends Google_Collection
+class Appointments_Google_Service_DataTransfer_DataTransfersListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'dataTransfers';
   protected $internal_gapi_mappings = array(
   );
-  protected $dataTransfersType = 'Google_Service_DataTransfer_DataTransfer';
+  protected $dataTransfersType = 'Appointments_Google_Service_DataTransfer_DataTransfer';
   protected $dataTransfersDataType = 'array';
   public $etag;
   public $kind;

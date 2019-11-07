@@ -1,8 +1,8 @@
 <?php
 
-class Appointments_Google_Calendar_Importer {
+class App_Appointments_Google_Calendar_Importer {
 	/**
-	 * @var Appointments_Google_Calendar $gcal_api
+	 * @var App_Appointments_Google_Calendar $gcal_api
 	 */
 	private $gcal_api;
 
@@ -81,7 +81,7 @@ class Appointments_Google_Calendar_Importer {
 		$deleted = array();
 
 		// Create a list of event_id's
-		/** @var Google_Service_Calendar_Event $event */
+		/** @var Appointments_Google_Service_Calendar_Event $event */
 		foreach ( $events as $event ) {
 			$result = $this->import_event( $event, $worker_id );
 			if ( 'updated' === $result ) {
@@ -109,7 +109,7 @@ class Appointments_Google_Calendar_Importer {
 	}
 
 	/**
-	 * @param Google_Service_Calendar_Event $event
+	 * @param Appointments_Google_Service_Calendar_Event $event
 	 *
 	 * @return bool|string
 	 */

@@ -27,7 +27,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_DeploymentManager extends Google_Service
+class Appointments_Google_Service_DeploymentManager extends Appointments_Google_Service
 {
   /** View and manage your data across Google Cloud Platform services. */
   const CLOUD_PLATFORM =
@@ -52,9 +52,9 @@ class Google_Service_DeploymentManager extends Google_Service
   /**
    * Constructs the internal representation of the DeploymentManager service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -62,7 +62,7 @@ class Google_Service_DeploymentManager extends Google_Service
     $this->version = 'v2';
     $this->serviceName = 'deploymentmanager';
 
-    $this->deployments = new Google_Service_DeploymentManager_Deployments_Resource(
+    $this->deployments = new Appointments_Google_Service_DeploymentManager_Deployments_Resource(
         $this,
         $this->serviceName,
         'deployments',
@@ -222,7 +222,7 @@ class Google_Service_DeploymentManager extends Google_Service
           )
         )
     );
-    $this->manifests = new Google_Service_DeploymentManager_Manifests_Resource(
+    $this->manifests = new Appointments_Google_Service_DeploymentManager_Manifests_Resource(
         $this,
         $this->serviceName,
         'manifests',
@@ -279,7 +279,7 @@ class Google_Service_DeploymentManager extends Google_Service
           )
         )
     );
-    $this->operations = new Google_Service_DeploymentManager_Operations_Resource(
+    $this->operations = new Appointments_Google_Service_DeploymentManager_Operations_Resource(
         $this,
         $this->serviceName,
         'operations',
@@ -326,7 +326,7 @@ class Google_Service_DeploymentManager extends Google_Service
           )
         )
     );
-    $this->resources = new Google_Service_DeploymentManager_Resources_Resource(
+    $this->resources = new Appointments_Google_Service_DeploymentManager_Resources_Resource(
         $this,
         $this->serviceName,
         'resources',
@@ -383,7 +383,7 @@ class Google_Service_DeploymentManager extends Google_Service
           )
         )
     );
-    $this->types = new Google_Service_DeploymentManager_Types_Resource(
+    $this->types = new Appointments_Google_Service_DeploymentManager_Types_Resource(
         $this,
         $this->serviceName,
         'types',
@@ -423,11 +423,11 @@ class Google_Service_DeploymentManager extends Google_Service
  * The "deployments" collection of methods.
  * Typical usage is:
  *  <code>
- *   $deploymentmanagerService = new Google_Service_DeploymentManager(...);
+ *   $deploymentmanagerService = new Appointments_Google_Service_DeploymentManager(...);
  *   $deployments = $deploymentmanagerService->deployments;
  *  </code>
  */
-class Google_Service_DeploymentManager_Deployments_Resource extends Google_Service_Resource
+class Appointments_Google_Service_DeploymentManager_Deployments_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -436,15 +436,15 @@ class Google_Service_DeploymentManager_Deployments_Resource extends Google_Servi
    *
    * @param string $project The project ID for this request.
    * @param string $deployment The name of the deployment for this request.
-   * @param Google_DeploymentsCancelPreviewRequest $postBody
+   * @param Appointments_Google_DeploymentsCancelPreviewRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_DeploymentManager_Operation
+   * @return Appointments_Google_Service_DeploymentManager_Operation
    */
-  public function cancelPreview($project, $deployment, Google_Service_DeploymentManager_DeploymentsCancelPreviewRequest $postBody, $optParams = array())
+  public function cancelPreview($project, $deployment, Appointments_Google_Service_DeploymentManager_DeploymentsCancelPreviewRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'deployment' => $deployment, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('cancelPreview', array($params), "Google_Service_DeploymentManager_Operation");
+    return $this->call('cancelPreview', array($params), "Appointments_Google_Service_DeploymentManager_Operation");
   }
 
   /**
@@ -454,13 +454,13 @@ class Google_Service_DeploymentManager_Deployments_Resource extends Google_Servi
    * @param string $project The project ID for this request.
    * @param string $deployment The name of the deployment for this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_DeploymentManager_Operation
+   * @return Appointments_Google_Service_DeploymentManager_Operation
    */
   public function delete($project, $deployment, $optParams = array())
   {
     $params = array('project' => $project, 'deployment' => $deployment);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_DeploymentManager_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_DeploymentManager_Operation");
   }
 
   /**
@@ -469,13 +469,13 @@ class Google_Service_DeploymentManager_Deployments_Resource extends Google_Servi
    * @param string $project The project ID for this request.
    * @param string $deployment The name of the deployment for this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_DeploymentManager_Deployment
+   * @return Appointments_Google_Service_DeploymentManager_Deployment
    */
   public function get($project, $deployment, $optParams = array())
   {
     $params = array('project' => $project, 'deployment' => $deployment);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_DeploymentManager_Deployment");
+    return $this->call('get', array($params), "Appointments_Google_Service_DeploymentManager_Deployment");
   }
 
   /**
@@ -483,7 +483,7 @@ class Google_Service_DeploymentManager_Deployments_Resource extends Google_Servi
    * manifest. (deployments.insert)
    *
    * @param string $project The project ID for this request.
-   * @param Google_Deployment $postBody
+   * @param Appointments_Google_Deployment $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param bool preview If set to true, creates a deployment and creates
@@ -494,13 +494,13 @@ class Google_Service_DeploymentManager_Deployments_Resource extends Google_Servi
    * preview altogether. Note that the deployment will still exist after you
    * cancel the preview and you must separately delete this deployment if you want
    * to remove it.
-   * @return Google_Service_DeploymentManager_Operation
+   * @return Appointments_Google_Service_DeploymentManager_Operation
    */
-  public function insert($project, Google_Service_DeploymentManager_Deployment $postBody, $optParams = array())
+  public function insert($project, Appointments_Google_Service_DeploymentManager_Deployment $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_DeploymentManager_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_DeploymentManager_Operation");
   }
 
   /**
@@ -542,13 +542,13 @@ class Google_Service_DeploymentManager_Deployments_Resource extends Google_Servi
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_DeploymentManager_DeploymentsListResponse
+   * @return Appointments_Google_Service_DeploymentManager_DeploymentsListResponse
    */
   public function listDeployments($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_DeploymentManager_DeploymentsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_DeploymentManager_DeploymentsListResponse");
   }
 
   /**
@@ -557,7 +557,7 @@ class Google_Service_DeploymentManager_Deployments_Resource extends Google_Servi
    *
    * @param string $project The project ID for this request.
    * @param string $deployment The name of the deployment for this request.
-   * @param Google_Deployment $postBody
+   * @param Appointments_Google_Deployment $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param string createPolicy Sets the policy to use for creating new
@@ -573,13 +573,13 @@ class Google_Service_DeploymentManager_Deployments_Resource extends Google_Servi
    * preview altogether. Note that the deployment will still exist after you
    * cancel the preview and you must separately delete this deployment if you want
    * to remove it.
-   * @return Google_Service_DeploymentManager_Operation
+   * @return Appointments_Google_Service_DeploymentManager_Operation
    */
-  public function patch($project, $deployment, Google_Service_DeploymentManager_Deployment $postBody, $optParams = array())
+  public function patch($project, $deployment, Appointments_Google_Service_DeploymentManager_Deployment $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'deployment' => $deployment, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_DeploymentManager_Operation");
+    return $this->call('patch', array($params), "Appointments_Google_Service_DeploymentManager_Operation");
   }
 
   /**
@@ -589,15 +589,15 @@ class Google_Service_DeploymentManager_Deployments_Resource extends Google_Servi
    *
    * @param string $project The project ID for this request.
    * @param string $deployment The name of the deployment for this request.
-   * @param Google_DeploymentsStopRequest $postBody
+   * @param Appointments_Google_DeploymentsStopRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_DeploymentManager_Operation
+   * @return Appointments_Google_Service_DeploymentManager_Operation
    */
-  public function stop($project, $deployment, Google_Service_DeploymentManager_DeploymentsStopRequest $postBody, $optParams = array())
+  public function stop($project, $deployment, Appointments_Google_Service_DeploymentManager_DeploymentsStopRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'deployment' => $deployment, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('stop', array($params), "Google_Service_DeploymentManager_Operation");
+    return $this->call('stop', array($params), "Appointments_Google_Service_DeploymentManager_Operation");
   }
 
   /**
@@ -606,7 +606,7 @@ class Google_Service_DeploymentManager_Deployments_Resource extends Google_Servi
    *
    * @param string $project The project ID for this request.
    * @param string $deployment The name of the deployment for this request.
-   * @param Google_Deployment $postBody
+   * @param Appointments_Google_Deployment $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param string createPolicy Sets the policy to use for creating new
@@ -622,13 +622,13 @@ class Google_Service_DeploymentManager_Deployments_Resource extends Google_Servi
    * preview altogether. Note that the deployment will still exist after you
    * cancel the preview and you must separately delete this deployment if you want
    * to remove it.
-   * @return Google_Service_DeploymentManager_Operation
+   * @return Appointments_Google_Service_DeploymentManager_Operation
    */
-  public function update($project, $deployment, Google_Service_DeploymentManager_Deployment $postBody, $optParams = array())
+  public function update($project, $deployment, Appointments_Google_Service_DeploymentManager_Deployment $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'deployment' => $deployment, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_DeploymentManager_Operation");
+    return $this->call('update', array($params), "Appointments_Google_Service_DeploymentManager_Operation");
   }
 }
 
@@ -636,11 +636,11 @@ class Google_Service_DeploymentManager_Deployments_Resource extends Google_Servi
  * The "manifests" collection of methods.
  * Typical usage is:
  *  <code>
- *   $deploymentmanagerService = new Google_Service_DeploymentManager(...);
+ *   $deploymentmanagerService = new Appointments_Google_Service_DeploymentManager(...);
  *   $manifests = $deploymentmanagerService->manifests;
  *  </code>
  */
-class Google_Service_DeploymentManager_Manifests_Resource extends Google_Service_Resource
+class Appointments_Google_Service_DeploymentManager_Manifests_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -650,13 +650,13 @@ class Google_Service_DeploymentManager_Manifests_Resource extends Google_Service
    * @param string $deployment The name of the deployment for this request.
    * @param string $manifest The name of the manifest for this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_DeploymentManager_Manifest
+   * @return Appointments_Google_Service_DeploymentManager_Manifest
    */
   public function get($project, $deployment, $manifest, $optParams = array())
   {
     $params = array('project' => $project, 'deployment' => $deployment, 'manifest' => $manifest);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_DeploymentManager_Manifest");
+    return $this->call('get', array($params), "Appointments_Google_Service_DeploymentManager_Manifest");
   }
 
   /**
@@ -699,13 +699,13 @@ class Google_Service_DeploymentManager_Manifests_Resource extends Google_Service
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_DeploymentManager_ManifestsListResponse
+   * @return Appointments_Google_Service_DeploymentManager_ManifestsListResponse
    */
   public function listManifests($project, $deployment, $optParams = array())
   {
     $params = array('project' => $project, 'deployment' => $deployment);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_DeploymentManager_ManifestsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_DeploymentManager_ManifestsListResponse");
   }
 }
 
@@ -713,11 +713,11 @@ class Google_Service_DeploymentManager_Manifests_Resource extends Google_Service
  * The "operations" collection of methods.
  * Typical usage is:
  *  <code>
- *   $deploymentmanagerService = new Google_Service_DeploymentManager(...);
+ *   $deploymentmanagerService = new Appointments_Google_Service_DeploymentManager(...);
  *   $operations = $deploymentmanagerService->operations;
  *  </code>
  */
-class Google_Service_DeploymentManager_Operations_Resource extends Google_Service_Resource
+class Appointments_Google_Service_DeploymentManager_Operations_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -726,13 +726,13 @@ class Google_Service_DeploymentManager_Operations_Resource extends Google_Servic
    * @param string $project The project ID for this request.
    * @param string $operation The name of the operation for this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_DeploymentManager_Operation
+   * @return Appointments_Google_Service_DeploymentManager_Operation
    */
   public function get($project, $operation, $optParams = array())
   {
     $params = array('project' => $project, 'operation' => $operation);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_DeploymentManager_Operation");
+    return $this->call('get', array($params), "Appointments_Google_Service_DeploymentManager_Operation");
   }
 
   /**
@@ -774,13 +774,13 @@ class Google_Service_DeploymentManager_Operations_Resource extends Google_Servic
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_DeploymentManager_OperationsListResponse
+   * @return Appointments_Google_Service_DeploymentManager_OperationsListResponse
    */
   public function listOperations($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_DeploymentManager_OperationsListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_DeploymentManager_OperationsListResponse");
   }
 }
 
@@ -788,11 +788,11 @@ class Google_Service_DeploymentManager_Operations_Resource extends Google_Servic
  * The "resources" collection of methods.
  * Typical usage is:
  *  <code>
- *   $deploymentmanagerService = new Google_Service_DeploymentManager(...);
+ *   $deploymentmanagerService = new Appointments_Google_Service_DeploymentManager(...);
  *   $resources = $deploymentmanagerService->resources;
  *  </code>
  */
-class Google_Service_DeploymentManager_Resources_Resource extends Google_Service_Resource
+class Appointments_Google_Service_DeploymentManager_Resources_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -802,13 +802,13 @@ class Google_Service_DeploymentManager_Resources_Resource extends Google_Service
    * @param string $deployment The name of the deployment for this request.
    * @param string $resource The name of the resource for this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_DeploymentManager_DeploymentmanagerResource
+   * @return Appointments_Google_Service_DeploymentManager_DeploymentmanagerResource
    */
   public function get($project, $deployment, $resource, $optParams = array())
   {
     $params = array('project' => $project, 'deployment' => $deployment, 'resource' => $resource);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_DeploymentManager_DeploymentmanagerResource");
+    return $this->call('get', array($params), "Appointments_Google_Service_DeploymentManager_DeploymentmanagerResource");
   }
 
   /**
@@ -851,13 +851,13 @@ class Google_Service_DeploymentManager_Resources_Resource extends Google_Service
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_DeploymentManager_ResourcesListResponse
+   * @return Appointments_Google_Service_DeploymentManager_ResourcesListResponse
    */
   public function listResources($project, $deployment, $optParams = array())
   {
     $params = array('project' => $project, 'deployment' => $deployment);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_DeploymentManager_ResourcesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_DeploymentManager_ResourcesListResponse");
   }
 }
 
@@ -865,11 +865,11 @@ class Google_Service_DeploymentManager_Resources_Resource extends Google_Service
  * The "types" collection of methods.
  * Typical usage is:
  *  <code>
- *   $deploymentmanagerService = new Google_Service_DeploymentManager(...);
+ *   $deploymentmanagerService = new Appointments_Google_Service_DeploymentManager(...);
  *   $types = $deploymentmanagerService->types;
  *  </code>
  */
-class Google_Service_DeploymentManager_Types_Resource extends Google_Service_Resource
+class Appointments_Google_Service_DeploymentManager_Types_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -911,20 +911,20 @@ class Google_Service_DeploymentManager_Types_Resource extends Google_Service_Res
    * @opt_param string pageToken Specifies a page token to use. Set pageToken to
    * the nextPageToken returned by a previous list request to get the next page of
    * results.
-   * @return Google_Service_DeploymentManager_TypesListResponse
+   * @return Appointments_Google_Service_DeploymentManager_TypesListResponse
    */
   public function listTypes($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_DeploymentManager_TypesListResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_DeploymentManager_TypesListResponse");
   }
 }
 
 
 
 
-class Google_Service_DeploymentManager_ConfigFile extends Google_Model
+class Appointments_Google_Service_DeploymentManager_ConfigFile extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -941,7 +941,7 @@ class Google_Service_DeploymentManager_ConfigFile extends Google_Model
   }
 }
 
-class Google_Service_DeploymentManager_Deployment extends Google_Collection
+class Appointments_Google_Service_DeploymentManager_Deployment extends Appointments_Google_Collection
 {
   protected $collection_key = 'labels';
   protected $internal_gapi_mappings = array(
@@ -950,15 +950,15 @@ class Google_Service_DeploymentManager_Deployment extends Google_Collection
   public $fingerprint;
   public $id;
   public $insertTime;
-  protected $labelsType = 'Google_Service_DeploymentManager_DeploymentLabelEntry';
+  protected $labelsType = 'Appointments_Google_Service_DeploymentManager_DeploymentLabelEntry';
   protected $labelsDataType = 'array';
   public $manifest;
   public $name;
-  protected $operationType = 'Google_Service_DeploymentManager_Operation';
+  protected $operationType = 'Appointments_Google_Service_DeploymentManager_Operation';
   protected $operationDataType = '';
-  protected $targetType = 'Google_Service_DeploymentManager_TargetConfiguration';
+  protected $targetType = 'Appointments_Google_Service_DeploymentManager_TargetConfiguration';
   protected $targetDataType = '';
-  protected $updateType = 'Google_Service_DeploymentManager_DeploymentUpdate';
+  protected $updateType = 'Appointments_Google_Service_DeploymentManager_DeploymentUpdate';
   protected $updateDataType = '';
 
 
@@ -1018,7 +1018,7 @@ class Google_Service_DeploymentManager_Deployment extends Google_Collection
   {
     return $this->name;
   }
-  public function setOperation(Google_Service_DeploymentManager_Operation $operation)
+  public function setOperation(Appointments_Google_Service_DeploymentManager_Operation $operation)
   {
     $this->operation = $operation;
   }
@@ -1026,7 +1026,7 @@ class Google_Service_DeploymentManager_Deployment extends Google_Collection
   {
     return $this->operation;
   }
-  public function setTarget(Google_Service_DeploymentManager_TargetConfiguration $target)
+  public function setTarget(Appointments_Google_Service_DeploymentManager_TargetConfiguration $target)
   {
     $this->target = $target;
   }
@@ -1034,7 +1034,7 @@ class Google_Service_DeploymentManager_Deployment extends Google_Collection
   {
     return $this->target;
   }
-  public function setUpdate(Google_Service_DeploymentManager_DeploymentUpdate $update)
+  public function setUpdate(Appointments_Google_Service_DeploymentManager_DeploymentUpdate $update)
   {
     $this->update = $update;
   }
@@ -1044,7 +1044,7 @@ class Google_Service_DeploymentManager_Deployment extends Google_Collection
   }
 }
 
-class Google_Service_DeploymentManager_DeploymentLabelEntry extends Google_Model
+class Appointments_Google_Service_DeploymentManager_DeploymentLabelEntry extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1070,12 +1070,12 @@ class Google_Service_DeploymentManager_DeploymentLabelEntry extends Google_Model
   }
 }
 
-class Google_Service_DeploymentManager_DeploymentUpdate extends Google_Collection
+class Appointments_Google_Service_DeploymentManager_DeploymentUpdate extends Appointments_Google_Collection
 {
   protected $collection_key = 'labels';
   protected $internal_gapi_mappings = array(
   );
-  protected $labelsType = 'Google_Service_DeploymentManager_DeploymentUpdateLabelEntry';
+  protected $labelsType = 'Appointments_Google_Service_DeploymentManager_DeploymentUpdateLabelEntry';
   protected $labelsDataType = 'array';
   public $manifest;
 
@@ -1098,7 +1098,7 @@ class Google_Service_DeploymentManager_DeploymentUpdate extends Google_Collectio
   }
 }
 
-class Google_Service_DeploymentManager_DeploymentUpdateLabelEntry extends Google_Model
+class Appointments_Google_Service_DeploymentManager_DeploymentUpdateLabelEntry extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1124,7 +1124,7 @@ class Google_Service_DeploymentManager_DeploymentUpdateLabelEntry extends Google
   }
 }
 
-class Google_Service_DeploymentManager_DeploymentmanagerResource extends Google_Collection
+class Appointments_Google_Service_DeploymentManager_DeploymentmanagerResource extends Appointments_Google_Collection
 {
   protected $collection_key = 'warnings';
   protected $internal_gapi_mappings = array(
@@ -1136,11 +1136,11 @@ class Google_Service_DeploymentManager_DeploymentmanagerResource extends Google_
   public $name;
   public $properties;
   public $type;
-  protected $updateType = 'Google_Service_DeploymentManager_ResourceUpdate';
+  protected $updateType = 'Appointments_Google_Service_DeploymentManager_ResourceUpdate';
   protected $updateDataType = '';
   public $updateTime;
   public $url;
-  protected $warningsType = 'Google_Service_DeploymentManager_DeploymentmanagerResourceWarnings';
+  protected $warningsType = 'Appointments_Google_Service_DeploymentManager_DeploymentmanagerResourceWarnings';
   protected $warningsDataType = 'array';
 
 
@@ -1200,7 +1200,7 @@ class Google_Service_DeploymentManager_DeploymentmanagerResource extends Google_
   {
     return $this->type;
   }
-  public function setUpdate(Google_Service_DeploymentManager_ResourceUpdate $update)
+  public function setUpdate(Appointments_Google_Service_DeploymentManager_ResourceUpdate $update)
   {
     $this->update = $update;
   }
@@ -1234,13 +1234,13 @@ class Google_Service_DeploymentManager_DeploymentmanagerResource extends Google_
   }
 }
 
-class Google_Service_DeploymentManager_DeploymentmanagerResourceWarnings extends Google_Collection
+class Appointments_Google_Service_DeploymentManager_DeploymentmanagerResourceWarnings extends Appointments_Google_Collection
 {
   protected $collection_key = 'data';
   protected $internal_gapi_mappings = array(
   );
   public $code;
-  protected $dataType = 'Google_Service_DeploymentManager_DeploymentmanagerResourceWarningsData';
+  protected $dataType = 'Appointments_Google_Service_DeploymentManager_DeploymentmanagerResourceWarningsData';
   protected $dataDataType = 'array';
   public $message;
 
@@ -1271,7 +1271,7 @@ class Google_Service_DeploymentManager_DeploymentmanagerResourceWarnings extends
   }
 }
 
-class Google_Service_DeploymentManager_DeploymentmanagerResourceWarningsData extends Google_Model
+class Appointments_Google_Service_DeploymentManager_DeploymentmanagerResourceWarningsData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1297,7 +1297,7 @@ class Google_Service_DeploymentManager_DeploymentmanagerResourceWarningsData ext
   }
 }
 
-class Google_Service_DeploymentManager_DeploymentsCancelPreviewRequest extends Google_Model
+class Appointments_Google_Service_DeploymentManager_DeploymentsCancelPreviewRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1314,12 +1314,12 @@ class Google_Service_DeploymentManager_DeploymentsCancelPreviewRequest extends G
   }
 }
 
-class Google_Service_DeploymentManager_DeploymentsListResponse extends Google_Collection
+class Appointments_Google_Service_DeploymentManager_DeploymentsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'deployments';
   protected $internal_gapi_mappings = array(
   );
-  protected $deploymentsType = 'Google_Service_DeploymentManager_Deployment';
+  protected $deploymentsType = 'Appointments_Google_Service_DeploymentManager_Deployment';
   protected $deploymentsDataType = 'array';
   public $nextPageToken;
 
@@ -1342,7 +1342,7 @@ class Google_Service_DeploymentManager_DeploymentsListResponse extends Google_Co
   }
 }
 
-class Google_Service_DeploymentManager_DeploymentsStopRequest extends Google_Model
+class Appointments_Google_Service_DeploymentManager_DeploymentsStopRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1359,7 +1359,7 @@ class Google_Service_DeploymentManager_DeploymentsStopRequest extends Google_Mod
   }
 }
 
-class Google_Service_DeploymentManager_ImportFile extends Google_Model
+class Appointments_Google_Service_DeploymentManager_ImportFile extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1385,16 +1385,16 @@ class Google_Service_DeploymentManager_ImportFile extends Google_Model
   }
 }
 
-class Google_Service_DeploymentManager_Manifest extends Google_Collection
+class Appointments_Google_Service_DeploymentManager_Manifest extends Appointments_Google_Collection
 {
   protected $collection_key = 'imports';
   protected $internal_gapi_mappings = array(
   );
-  protected $configType = 'Google_Service_DeploymentManager_ConfigFile';
+  protected $configType = 'Appointments_Google_Service_DeploymentManager_ConfigFile';
   protected $configDataType = '';
   public $expandedConfig;
   public $id;
-  protected $importsType = 'Google_Service_DeploymentManager_ImportFile';
+  protected $importsType = 'Appointments_Google_Service_DeploymentManager_ImportFile';
   protected $importsDataType = 'array';
   public $insertTime;
   public $layout;
@@ -1402,7 +1402,7 @@ class Google_Service_DeploymentManager_Manifest extends Google_Collection
   public $selfLink;
 
 
-  public function setConfig(Google_Service_DeploymentManager_ConfigFile $config)
+  public function setConfig(Appointments_Google_Service_DeploymentManager_ConfigFile $config)
   {
     $this->config = $config;
   }
@@ -1468,12 +1468,12 @@ class Google_Service_DeploymentManager_Manifest extends Google_Collection
   }
 }
 
-class Google_Service_DeploymentManager_ManifestsListResponse extends Google_Collection
+class Appointments_Google_Service_DeploymentManager_ManifestsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'manifests';
   protected $internal_gapi_mappings = array(
   );
-  protected $manifestsType = 'Google_Service_DeploymentManager_Manifest';
+  protected $manifestsType = 'Appointments_Google_Service_DeploymentManager_Manifest';
   protected $manifestsDataType = 'array';
   public $nextPageToken;
 
@@ -1496,7 +1496,7 @@ class Google_Service_DeploymentManager_ManifestsListResponse extends Google_Coll
   }
 }
 
-class Google_Service_DeploymentManager_Operation extends Google_Collection
+class Appointments_Google_Service_DeploymentManager_Operation extends Appointments_Google_Collection
 {
   protected $collection_key = 'warnings';
   protected $internal_gapi_mappings = array(
@@ -1505,7 +1505,7 @@ class Google_Service_DeploymentManager_Operation extends Google_Collection
   public $creationTimestamp;
   public $description;
   public $endTime;
-  protected $errorType = 'Google_Service_DeploymentManager_OperationError';
+  protected $errorType = 'Appointments_Google_Service_DeploymentManager_OperationError';
   protected $errorDataType = '';
   public $httpErrorMessage;
   public $httpErrorStatusCode;
@@ -1523,7 +1523,7 @@ class Google_Service_DeploymentManager_Operation extends Google_Collection
   public $targetId;
   public $targetLink;
   public $user;
-  protected $warningsType = 'Google_Service_DeploymentManager_OperationWarnings';
+  protected $warningsType = 'Appointments_Google_Service_DeploymentManager_OperationWarnings';
   protected $warningsDataType = 'array';
   public $zone;
 
@@ -1560,7 +1560,7 @@ class Google_Service_DeploymentManager_Operation extends Google_Collection
   {
     return $this->endTime;
   }
-  public function setError(Google_Service_DeploymentManager_OperationError $error)
+  public function setError(Appointments_Google_Service_DeploymentManager_OperationError $error)
   {
     $this->error = $error;
   }
@@ -1714,12 +1714,12 @@ class Google_Service_DeploymentManager_Operation extends Google_Collection
   }
 }
 
-class Google_Service_DeploymentManager_OperationError extends Google_Collection
+class Appointments_Google_Service_DeploymentManager_OperationError extends Appointments_Google_Collection
 {
   protected $collection_key = 'errors';
   protected $internal_gapi_mappings = array(
   );
-  protected $errorsType = 'Google_Service_DeploymentManager_OperationErrorErrors';
+  protected $errorsType = 'Appointments_Google_Service_DeploymentManager_OperationErrorErrors';
   protected $errorsDataType = 'array';
 
 
@@ -1733,7 +1733,7 @@ class Google_Service_DeploymentManager_OperationError extends Google_Collection
   }
 }
 
-class Google_Service_DeploymentManager_OperationErrorErrors extends Google_Model
+class Appointments_Google_Service_DeploymentManager_OperationErrorErrors extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1768,13 +1768,13 @@ class Google_Service_DeploymentManager_OperationErrorErrors extends Google_Model
   }
 }
 
-class Google_Service_DeploymentManager_OperationWarnings extends Google_Collection
+class Appointments_Google_Service_DeploymentManager_OperationWarnings extends Appointments_Google_Collection
 {
   protected $collection_key = 'data';
   protected $internal_gapi_mappings = array(
   );
   public $code;
-  protected $dataType = 'Google_Service_DeploymentManager_OperationWarningsData';
+  protected $dataType = 'Appointments_Google_Service_DeploymentManager_OperationWarningsData';
   protected $dataDataType = 'array';
   public $message;
 
@@ -1805,7 +1805,7 @@ class Google_Service_DeploymentManager_OperationWarnings extends Google_Collecti
   }
 }
 
-class Google_Service_DeploymentManager_OperationWarningsData extends Google_Model
+class Appointments_Google_Service_DeploymentManager_OperationWarningsData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1831,13 +1831,13 @@ class Google_Service_DeploymentManager_OperationWarningsData extends Google_Mode
   }
 }
 
-class Google_Service_DeploymentManager_OperationsListResponse extends Google_Collection
+class Appointments_Google_Service_DeploymentManager_OperationsListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'operations';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $operationsType = 'Google_Service_DeploymentManager_Operation';
+  protected $operationsType = 'Appointments_Google_Service_DeploymentManager_Operation';
   protected $operationsDataType = 'array';
 
 
@@ -1859,23 +1859,23 @@ class Google_Service_DeploymentManager_OperationsListResponse extends Google_Col
   }
 }
 
-class Google_Service_DeploymentManager_ResourceUpdate extends Google_Collection
+class Appointments_Google_Service_DeploymentManager_ResourceUpdate extends Appointments_Google_Collection
 {
   protected $collection_key = 'warnings';
   protected $internal_gapi_mappings = array(
   );
-  protected $errorType = 'Google_Service_DeploymentManager_ResourceUpdateError';
+  protected $errorType = 'Appointments_Google_Service_DeploymentManager_ResourceUpdateError';
   protected $errorDataType = '';
   public $finalProperties;
   public $intent;
   public $manifest;
   public $properties;
   public $state;
-  protected $warningsType = 'Google_Service_DeploymentManager_ResourceUpdateWarnings';
+  protected $warningsType = 'Appointments_Google_Service_DeploymentManager_ResourceUpdateWarnings';
   protected $warningsDataType = 'array';
 
 
-  public function setError(Google_Service_DeploymentManager_ResourceUpdateError $error)
+  public function setError(Appointments_Google_Service_DeploymentManager_ResourceUpdateError $error)
   {
     $this->error = $error;
   }
@@ -1933,12 +1933,12 @@ class Google_Service_DeploymentManager_ResourceUpdate extends Google_Collection
   }
 }
 
-class Google_Service_DeploymentManager_ResourceUpdateError extends Google_Collection
+class Appointments_Google_Service_DeploymentManager_ResourceUpdateError extends Appointments_Google_Collection
 {
   protected $collection_key = 'errors';
   protected $internal_gapi_mappings = array(
   );
-  protected $errorsType = 'Google_Service_DeploymentManager_ResourceUpdateErrorErrors';
+  protected $errorsType = 'Appointments_Google_Service_DeploymentManager_ResourceUpdateErrorErrors';
   protected $errorsDataType = 'array';
 
 
@@ -1952,7 +1952,7 @@ class Google_Service_DeploymentManager_ResourceUpdateError extends Google_Collec
   }
 }
 
-class Google_Service_DeploymentManager_ResourceUpdateErrorErrors extends Google_Model
+class Appointments_Google_Service_DeploymentManager_ResourceUpdateErrorErrors extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1987,13 +1987,13 @@ class Google_Service_DeploymentManager_ResourceUpdateErrorErrors extends Google_
   }
 }
 
-class Google_Service_DeploymentManager_ResourceUpdateWarnings extends Google_Collection
+class Appointments_Google_Service_DeploymentManager_ResourceUpdateWarnings extends Appointments_Google_Collection
 {
   protected $collection_key = 'data';
   protected $internal_gapi_mappings = array(
   );
   public $code;
-  protected $dataType = 'Google_Service_DeploymentManager_ResourceUpdateWarningsData';
+  protected $dataType = 'Appointments_Google_Service_DeploymentManager_ResourceUpdateWarningsData';
   protected $dataDataType = 'array';
   public $message;
 
@@ -2024,7 +2024,7 @@ class Google_Service_DeploymentManager_ResourceUpdateWarnings extends Google_Col
   }
 }
 
-class Google_Service_DeploymentManager_ResourceUpdateWarningsData extends Google_Model
+class Appointments_Google_Service_DeploymentManager_ResourceUpdateWarningsData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2050,13 +2050,13 @@ class Google_Service_DeploymentManager_ResourceUpdateWarningsData extends Google
   }
 }
 
-class Google_Service_DeploymentManager_ResourcesListResponse extends Google_Collection
+class Appointments_Google_Service_DeploymentManager_ResourcesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'resources';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $resourcesType = 'Google_Service_DeploymentManager_DeploymentmanagerResource';
+  protected $resourcesType = 'Appointments_Google_Service_DeploymentManager_DeploymentmanagerResource';
   protected $resourcesDataType = 'array';
 
 
@@ -2078,18 +2078,18 @@ class Google_Service_DeploymentManager_ResourcesListResponse extends Google_Coll
   }
 }
 
-class Google_Service_DeploymentManager_TargetConfiguration extends Google_Collection
+class Appointments_Google_Service_DeploymentManager_TargetConfiguration extends Appointments_Google_Collection
 {
   protected $collection_key = 'imports';
   protected $internal_gapi_mappings = array(
   );
-  protected $configType = 'Google_Service_DeploymentManager_ConfigFile';
+  protected $configType = 'Appointments_Google_Service_DeploymentManager_ConfigFile';
   protected $configDataType = '';
-  protected $importsType = 'Google_Service_DeploymentManager_ImportFile';
+  protected $importsType = 'Appointments_Google_Service_DeploymentManager_ImportFile';
   protected $importsDataType = 'array';
 
 
-  public function setConfig(Google_Service_DeploymentManager_ConfigFile $config)
+  public function setConfig(Appointments_Google_Service_DeploymentManager_ConfigFile $config)
   {
     $this->config = $config;
   }
@@ -2107,7 +2107,7 @@ class Google_Service_DeploymentManager_TargetConfiguration extends Google_Collec
   }
 }
 
-class Google_Service_DeploymentManager_Type extends Google_Model
+class Appointments_Google_Service_DeploymentManager_Type extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2151,13 +2151,13 @@ class Google_Service_DeploymentManager_Type extends Google_Model
   }
 }
 
-class Google_Service_DeploymentManager_TypesListResponse extends Google_Collection
+class Appointments_Google_Service_DeploymentManager_TypesListResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'types';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $typesType = 'Google_Service_DeploymentManager_Type';
+  protected $typesType = 'Appointments_Google_Service_DeploymentManager_Type';
   protected $typesDataType = 'array';
 
 

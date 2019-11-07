@@ -39,7 +39,7 @@ if ( ! class_exists( 'Appointments' ) ) {
 		public $timetables = array();
 
 		public $local_time;
-		/** @var bool|Appointments_Google_Calendar  */
+		/** @var bool|App_Appointments_Google_Calendar  */
 		public $gcal_api = false;
 		public $locale_error;
 		public $time_format;
@@ -222,7 +222,7 @@ if ( ! class_exists( 'Appointments' ) ) {
 		function get_gcal_api() {
 			if ( false === $this->gcal_api && ! defined( 'APP_GCAL_DISABLE' ) ) {
 				require_once appointments_plugin_dir() . 'includes/class-app-gcal.php';
-				$this->gcal_api = new Appointments_Google_Calendar();
+				$this->gcal_api = new App_Appointments_Google_Calendar();
 			}
 			return $this->gcal_api;
 		}

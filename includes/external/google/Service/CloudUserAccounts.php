@@ -26,7 +26,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_CloudUserAccounts extends Google_Service
+class Appointments_Google_Service_CloudUserAccounts extends Appointments_Google_Service
 {
   /** View and manage your data across Google Cloud Platform services. */
   const CLOUD_PLATFORM =
@@ -50,9 +50,9 @@ class Google_Service_CloudUserAccounts extends Google_Service
   /**
    * Constructs the internal representation of the CloudUserAccounts service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -60,7 +60,7 @@ class Google_Service_CloudUserAccounts extends Google_Service
     $this->version = 'vm_alpha';
     $this->serviceName = 'clouduseraccounts';
 
-    $this->globalAccountsOperations = new Google_Service_CloudUserAccounts_GlobalAccountsOperations_Resource(
+    $this->globalAccountsOperations = new Appointments_Google_Service_CloudUserAccounts_GlobalAccountsOperations_Resource(
         $this,
         $this->serviceName,
         'globalAccountsOperations',
@@ -126,7 +126,7 @@ class Google_Service_CloudUserAccounts extends Google_Service
           )
         )
     );
-    $this->groups = new Google_Service_CloudUserAccounts_Groups_Resource(
+    $this->groups = new Appointments_Google_Service_CloudUserAccounts_Groups_Resource(
         $this,
         $this->serviceName,
         'groups',
@@ -277,7 +277,7 @@ class Google_Service_CloudUserAccounts extends Google_Service
           )
         )
     );
-    $this->linux = new Google_Service_CloudUserAccounts_Linux_Resource(
+    $this->linux = new Appointments_Google_Service_CloudUserAccounts_Linux_Resource(
         $this,
         $this->serviceName,
         'linux',
@@ -352,7 +352,7 @@ class Google_Service_CloudUserAccounts extends Google_Service
           )
         )
     );
-    $this->users = new Google_Service_CloudUserAccounts_Users_Resource(
+    $this->users = new Appointments_Google_Service_CloudUserAccounts_Users_Resource(
         $this,
         $this->serviceName,
         'users',
@@ -516,11 +516,11 @@ class Google_Service_CloudUserAccounts extends Google_Service
  * The "globalAccountsOperations" collection of methods.
  * Typical usage is:
  *  <code>
- *   $clouduseraccountsService = new Google_Service_CloudUserAccounts(...);
+ *   $clouduseraccountsService = new Appointments_Google_Service_CloudUserAccounts(...);
  *   $globalAccountsOperations = $clouduseraccountsService->globalAccountsOperations;
  *  </code>
  */
-class Google_Service_CloudUserAccounts_GlobalAccountsOperations_Resource extends Google_Service_Resource
+class Appointments_Google_Service_CloudUserAccounts_GlobalAccountsOperations_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -543,13 +543,13 @@ class Google_Service_CloudUserAccounts_GlobalAccountsOperations_Resource extends
    * @param string $project Project ID for this request.
    * @param string $operation Name of the Operations resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_CloudUserAccounts_Operation
+   * @return Appointments_Google_Service_CloudUserAccounts_Operation
    */
   public function get($project, $operation, $optParams = array())
   {
     $params = array('project' => $project, 'operation' => $operation);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_CloudUserAccounts_Operation");
+    return $this->call('get', array($params), "Appointments_Google_Service_CloudUserAccounts_Operation");
   }
 
   /**
@@ -586,13 +586,13 @@ class Google_Service_CloudUserAccounts_GlobalAccountsOperations_Resource extends
    * @opt_param string pageToken Specifies a page token to use. Use this parameter
    * if you want to list the next page of results. Set pageToken to the
    * nextPageToken returned by a previous list request.
-   * @return Google_Service_CloudUserAccounts_OperationList
+   * @return Appointments_Google_Service_CloudUserAccounts_OperationList
    */
   public function listGlobalAccountsOperations($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_CloudUserAccounts_OperationList");
+    return $this->call('list', array($params), "Appointments_Google_Service_CloudUserAccounts_OperationList");
   }
 }
 
@@ -600,11 +600,11 @@ class Google_Service_CloudUserAccounts_GlobalAccountsOperations_Resource extends
  * The "groups" collection of methods.
  * Typical usage is:
  *  <code>
- *   $clouduseraccountsService = new Google_Service_CloudUserAccounts(...);
+ *   $clouduseraccountsService = new Appointments_Google_Service_CloudUserAccounts(...);
  *   $groups = $clouduseraccountsService->groups;
  *  </code>
  */
-class Google_Service_CloudUserAccounts_Groups_Resource extends Google_Service_Resource
+class Appointments_Google_Service_CloudUserAccounts_Groups_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -612,15 +612,15 @@ class Google_Service_CloudUserAccounts_Groups_Resource extends Google_Service_Re
    *
    * @param string $project Project ID for this request.
    * @param string $groupName Name of the group for this request.
-   * @param Google_GroupsAddMemberRequest $postBody
+   * @param Appointments_Google_GroupsAddMemberRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_CloudUserAccounts_Operation
+   * @return Appointments_Google_Service_CloudUserAccounts_Operation
    */
-  public function addMember($project, $groupName, Google_Service_CloudUserAccounts_GroupsAddMemberRequest $postBody, $optParams = array())
+  public function addMember($project, $groupName, Appointments_Google_Service_CloudUserAccounts_GroupsAddMemberRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'groupName' => $groupName, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('addMember', array($params), "Google_Service_CloudUserAccounts_Operation");
+    return $this->call('addMember', array($params), "Appointments_Google_Service_CloudUserAccounts_Operation");
   }
 
   /**
@@ -629,13 +629,13 @@ class Google_Service_CloudUserAccounts_Groups_Resource extends Google_Service_Re
    * @param string $project Project ID for this request.
    * @param string $groupName Name of the Group resource to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_CloudUserAccounts_Operation
+   * @return Appointments_Google_Service_CloudUserAccounts_Operation
    */
   public function delete($project, $groupName, $optParams = array())
   {
     $params = array('project' => $project, 'groupName' => $groupName);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_CloudUserAccounts_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_CloudUserAccounts_Operation");
   }
 
   /**
@@ -644,13 +644,13 @@ class Google_Service_CloudUserAccounts_Groups_Resource extends Google_Service_Re
    * @param string $project Project ID for this request.
    * @param string $groupName Name of the Group resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_CloudUserAccounts_Group
+   * @return Appointments_Google_Service_CloudUserAccounts_Group
    */
   public function get($project, $groupName, $optParams = array())
   {
     $params = array('project' => $project, 'groupName' => $groupName);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_CloudUserAccounts_Group");
+    return $this->call('get', array($params), "Appointments_Google_Service_CloudUserAccounts_Group");
   }
 
   /**
@@ -660,13 +660,13 @@ class Google_Service_CloudUserAccounts_Groups_Resource extends Google_Service_Re
    * @param string $project Project ID for this request.
    * @param string $resource Name of the resource for this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_CloudUserAccounts_Policy
+   * @return Appointments_Google_Service_CloudUserAccounts_Policy
    */
   public function getIamPolicy($project, $resource, $optParams = array())
   {
     $params = array('project' => $project, 'resource' => $resource);
     $params = array_merge($params, $optParams);
-    return $this->call('getIamPolicy', array($params), "Google_Service_CloudUserAccounts_Policy");
+    return $this->call('getIamPolicy', array($params), "Appointments_Google_Service_CloudUserAccounts_Policy");
   }
 
   /**
@@ -674,15 +674,15 @@ class Google_Service_CloudUserAccounts_Groups_Resource extends Google_Service_Re
    * the request. (groups.insert)
    *
    * @param string $project Project ID for this request.
-   * @param Google_Group $postBody
+   * @param Appointments_Google_Group $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_CloudUserAccounts_Operation
+   * @return Appointments_Google_Service_CloudUserAccounts_Operation
    */
-  public function insert($project, Google_Service_CloudUserAccounts_Group $postBody, $optParams = array())
+  public function insert($project, Appointments_Google_Service_CloudUserAccounts_Group $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_CloudUserAccounts_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_CloudUserAccounts_Operation");
   }
 
   /**
@@ -719,13 +719,13 @@ class Google_Service_CloudUserAccounts_Groups_Resource extends Google_Service_Re
    * @opt_param string pageToken Specifies a page token to use. Use this parameter
    * if you want to list the next page of results. Set pageToken to the
    * nextPageToken returned by a previous list request.
-   * @return Google_Service_CloudUserAccounts_GroupList
+   * @return Appointments_Google_Service_CloudUserAccounts_GroupList
    */
   public function listGroups($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_CloudUserAccounts_GroupList");
+    return $this->call('list', array($params), "Appointments_Google_Service_CloudUserAccounts_GroupList");
   }
 
   /**
@@ -733,15 +733,15 @@ class Google_Service_CloudUserAccounts_Groups_Resource extends Google_Service_Re
    *
    * @param string $project Project ID for this request.
    * @param string $groupName Name of the group for this request.
-   * @param Google_GroupsRemoveMemberRequest $postBody
+   * @param Appointments_Google_GroupsRemoveMemberRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_CloudUserAccounts_Operation
+   * @return Appointments_Google_Service_CloudUserAccounts_Operation
    */
-  public function removeMember($project, $groupName, Google_Service_CloudUserAccounts_GroupsRemoveMemberRequest $postBody, $optParams = array())
+  public function removeMember($project, $groupName, Appointments_Google_Service_CloudUserAccounts_GroupsRemoveMemberRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'groupName' => $groupName, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('removeMember', array($params), "Google_Service_CloudUserAccounts_Operation");
+    return $this->call('removeMember', array($params), "Appointments_Google_Service_CloudUserAccounts_Operation");
   }
 
   /**
@@ -750,15 +750,15 @@ class Google_Service_CloudUserAccounts_Groups_Resource extends Google_Service_Re
    *
    * @param string $project Project ID for this request.
    * @param string $resource Name of the resource for this request.
-   * @param Google_Policy $postBody
+   * @param Appointments_Google_Policy $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_CloudUserAccounts_Policy
+   * @return Appointments_Google_Service_CloudUserAccounts_Policy
    */
-  public function setIamPolicy($project, $resource, Google_Service_CloudUserAccounts_Policy $postBody, $optParams = array())
+  public function setIamPolicy($project, $resource, Appointments_Google_Service_CloudUserAccounts_Policy $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'resource' => $resource, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setIamPolicy', array($params), "Google_Service_CloudUserAccounts_Policy");
+    return $this->call('setIamPolicy', array($params), "Appointments_Google_Service_CloudUserAccounts_Policy");
   }
 
   /**
@@ -767,15 +767,15 @@ class Google_Service_CloudUserAccounts_Groups_Resource extends Google_Service_Re
    *
    * @param string $project Project ID for this request.
    * @param string $resource Name of the resource for this request.
-   * @param Google_TestPermissionsRequest $postBody
+   * @param Appointments_Google_TestPermissionsRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_CloudUserAccounts_TestPermissionsResponse
+   * @return Appointments_Google_Service_CloudUserAccounts_TestPermissionsResponse
    */
-  public function testIamPermissions($project, $resource, Google_Service_CloudUserAccounts_TestPermissionsRequest $postBody, $optParams = array())
+  public function testIamPermissions($project, $resource, Appointments_Google_Service_CloudUserAccounts_TestPermissionsRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'resource' => $resource, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('testIamPermissions', array($params), "Google_Service_CloudUserAccounts_TestPermissionsResponse");
+    return $this->call('testIamPermissions', array($params), "Appointments_Google_Service_CloudUserAccounts_TestPermissionsResponse");
   }
 }
 
@@ -783,11 +783,11 @@ class Google_Service_CloudUserAccounts_Groups_Resource extends Google_Service_Re
  * The "linux" collection of methods.
  * Typical usage is:
  *  <code>
- *   $clouduseraccountsService = new Google_Service_CloudUserAccounts(...);
+ *   $clouduseraccountsService = new Appointments_Google_Service_CloudUserAccounts(...);
  *   $linux = $clouduseraccountsService->linux;
  *  </code>
  */
-class Google_Service_CloudUserAccounts_Linux_Resource extends Google_Service_Resource
+class Appointments_Google_Service_CloudUserAccounts_Linux_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -804,13 +804,13 @@ class Google_Service_CloudUserAccounts_Linux_Resource extends Google_Service_Res
    *
    * @opt_param bool login Whether the view was requested as part of a user-
    * initiated login.
-   * @return Google_Service_CloudUserAccounts_LinuxGetAuthorizedKeysViewResponse
+   * @return Appointments_Google_Service_CloudUserAccounts_LinuxGetAuthorizedKeysViewResponse
    */
   public function getAuthorizedKeysView($project, $zone, $user, $instance, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'user' => $user, 'instance' => $instance);
     $params = array_merge($params, $optParams);
-    return $this->call('getAuthorizedKeysView', array($params), "Google_Service_CloudUserAccounts_LinuxGetAuthorizedKeysViewResponse");
+    return $this->call('getAuthorizedKeysView', array($params), "Appointments_Google_Service_CloudUserAccounts_LinuxGetAuthorizedKeysViewResponse");
   }
 
   /**
@@ -850,13 +850,13 @@ class Google_Service_CloudUserAccounts_Linux_Resource extends Google_Service_Res
    * @opt_param string pageToken Specifies a page token to use. Use this parameter
    * if you want to list the next page of results. Set pageToken to the
    * nextPageToken returned by a previous list request.
-   * @return Google_Service_CloudUserAccounts_LinuxGetLinuxAccountViewsResponse
+   * @return Appointments_Google_Service_CloudUserAccounts_LinuxGetLinuxAccountViewsResponse
    */
   public function getLinuxAccountViews($project, $zone, $instance, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instance' => $instance);
     $params = array_merge($params, $optParams);
-    return $this->call('getLinuxAccountViews', array($params), "Google_Service_CloudUserAccounts_LinuxGetLinuxAccountViewsResponse");
+    return $this->call('getLinuxAccountViews', array($params), "Appointments_Google_Service_CloudUserAccounts_LinuxGetLinuxAccountViewsResponse");
   }
 }
 
@@ -864,11 +864,11 @@ class Google_Service_CloudUserAccounts_Linux_Resource extends Google_Service_Res
  * The "users" collection of methods.
  * Typical usage is:
  *  <code>
- *   $clouduseraccountsService = new Google_Service_CloudUserAccounts(...);
+ *   $clouduseraccountsService = new Appointments_Google_Service_CloudUserAccounts(...);
  *   $users = $clouduseraccountsService->users;
  *  </code>
  */
-class Google_Service_CloudUserAccounts_Users_Resource extends Google_Service_Resource
+class Appointments_Google_Service_CloudUserAccounts_Users_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -877,15 +877,15 @@ class Google_Service_CloudUserAccounts_Users_Resource extends Google_Service_Res
    *
    * @param string $project Project ID for this request.
    * @param string $user Name of the user for this request.
-   * @param Google_PublicKey $postBody
+   * @param Appointments_Google_PublicKey $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_CloudUserAccounts_Operation
+   * @return Appointments_Google_Service_CloudUserAccounts_Operation
    */
-  public function addPublicKey($project, $user, Google_Service_CloudUserAccounts_PublicKey $postBody, $optParams = array())
+  public function addPublicKey($project, $user, Appointments_Google_Service_CloudUserAccounts_PublicKey $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'user' => $user, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('addPublicKey', array($params), "Google_Service_CloudUserAccounts_Operation");
+    return $this->call('addPublicKey', array($params), "Appointments_Google_Service_CloudUserAccounts_Operation");
   }
 
   /**
@@ -894,13 +894,13 @@ class Google_Service_CloudUserAccounts_Users_Resource extends Google_Service_Res
    * @param string $project Project ID for this request.
    * @param string $user Name of the user resource to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_CloudUserAccounts_Operation
+   * @return Appointments_Google_Service_CloudUserAccounts_Operation
    */
   public function delete($project, $user, $optParams = array())
   {
     $params = array('project' => $project, 'user' => $user);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_CloudUserAccounts_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_CloudUserAccounts_Operation");
   }
 
   /**
@@ -909,13 +909,13 @@ class Google_Service_CloudUserAccounts_Users_Resource extends Google_Service_Res
    * @param string $project Project ID for this request.
    * @param string $user Name of the user resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_CloudUserAccounts_User
+   * @return Appointments_Google_Service_CloudUserAccounts_User
    */
   public function get($project, $user, $optParams = array())
   {
     $params = array('project' => $project, 'user' => $user);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_CloudUserAccounts_User");
+    return $this->call('get', array($params), "Appointments_Google_Service_CloudUserAccounts_User");
   }
 
   /**
@@ -925,13 +925,13 @@ class Google_Service_CloudUserAccounts_Users_Resource extends Google_Service_Res
    * @param string $project Project ID for this request.
    * @param string $resource Name of the resource for this request.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_CloudUserAccounts_Policy
+   * @return Appointments_Google_Service_CloudUserAccounts_Policy
    */
   public function getIamPolicy($project, $resource, $optParams = array())
   {
     $params = array('project' => $project, 'resource' => $resource);
     $params = array_merge($params, $optParams);
-    return $this->call('getIamPolicy', array($params), "Google_Service_CloudUserAccounts_Policy");
+    return $this->call('getIamPolicy', array($params), "Appointments_Google_Service_CloudUserAccounts_Policy");
   }
 
   /**
@@ -939,15 +939,15 @@ class Google_Service_CloudUserAccounts_Users_Resource extends Google_Service_Res
    * the request. (users.insert)
    *
    * @param string $project Project ID for this request.
-   * @param Google_User $postBody
+   * @param Appointments_Google_User $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_CloudUserAccounts_Operation
+   * @return Appointments_Google_Service_CloudUserAccounts_Operation
    */
-  public function insert($project, Google_Service_CloudUserAccounts_User $postBody, $optParams = array())
+  public function insert($project, Appointments_Google_Service_CloudUserAccounts_User $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_CloudUserAccounts_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_CloudUserAccounts_Operation");
   }
 
   /**
@@ -984,13 +984,13 @@ class Google_Service_CloudUserAccounts_Users_Resource extends Google_Service_Res
    * @opt_param string pageToken Specifies a page token to use. Use this parameter
    * if you want to list the next page of results. Set pageToken to the
    * nextPageToken returned by a previous list request.
-   * @return Google_Service_CloudUserAccounts_UserList
+   * @return Appointments_Google_Service_CloudUserAccounts_UserList
    */
   public function listUsers($project, $optParams = array())
   {
     $params = array('project' => $project);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_CloudUserAccounts_UserList");
+    return $this->call('list', array($params), "Appointments_Google_Service_CloudUserAccounts_UserList");
   }
 
   /**
@@ -1002,13 +1002,13 @@ class Google_Service_CloudUserAccounts_Users_Resource extends Google_Service_Res
    * Public keys are identified by their fingerprint, which is defined by RFC4716
    * to be the MD5 digest of the public key.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_CloudUserAccounts_Operation
+   * @return Appointments_Google_Service_CloudUserAccounts_Operation
    */
   public function removePublicKey($project, $user, $fingerprint, $optParams = array())
   {
     $params = array('project' => $project, 'user' => $user, 'fingerprint' => $fingerprint);
     $params = array_merge($params, $optParams);
-    return $this->call('removePublicKey', array($params), "Google_Service_CloudUserAccounts_Operation");
+    return $this->call('removePublicKey', array($params), "Appointments_Google_Service_CloudUserAccounts_Operation");
   }
 
   /**
@@ -1017,15 +1017,15 @@ class Google_Service_CloudUserAccounts_Users_Resource extends Google_Service_Res
    *
    * @param string $project Project ID for this request.
    * @param string $resource Name of the resource for this request.
-   * @param Google_Policy $postBody
+   * @param Appointments_Google_Policy $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_CloudUserAccounts_Policy
+   * @return Appointments_Google_Service_CloudUserAccounts_Policy
    */
-  public function setIamPolicy($project, $resource, Google_Service_CloudUserAccounts_Policy $postBody, $optParams = array())
+  public function setIamPolicy($project, $resource, Appointments_Google_Service_CloudUserAccounts_Policy $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'resource' => $resource, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setIamPolicy', array($params), "Google_Service_CloudUserAccounts_Policy");
+    return $this->call('setIamPolicy', array($params), "Appointments_Google_Service_CloudUserAccounts_Policy");
   }
 
   /**
@@ -1034,22 +1034,22 @@ class Google_Service_CloudUserAccounts_Users_Resource extends Google_Service_Res
    *
    * @param string $project Project ID for this request.
    * @param string $resource Name of the resource for this request.
-   * @param Google_TestPermissionsRequest $postBody
+   * @param Appointments_Google_TestPermissionsRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_CloudUserAccounts_TestPermissionsResponse
+   * @return Appointments_Google_Service_CloudUserAccounts_TestPermissionsResponse
    */
-  public function testIamPermissions($project, $resource, Google_Service_CloudUserAccounts_TestPermissionsRequest $postBody, $optParams = array())
+  public function testIamPermissions($project, $resource, Appointments_Google_Service_CloudUserAccounts_TestPermissionsRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'resource' => $resource, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('testIamPermissions', array($params), "Google_Service_CloudUserAccounts_TestPermissionsResponse");
+    return $this->call('testIamPermissions', array($params), "Appointments_Google_Service_CloudUserAccounts_TestPermissionsResponse");
   }
 }
 
 
 
 
-class Google_Service_CloudUserAccounts_AuthorizedKeysView extends Google_Collection
+class Appointments_Google_Service_CloudUserAccounts_AuthorizedKeysView extends Appointments_Google_Collection
 {
   protected $collection_key = 'keys';
   protected $internal_gapi_mappings = array(
@@ -1076,7 +1076,7 @@ class Google_Service_CloudUserAccounts_AuthorizedKeysView extends Google_Collect
   }
 }
 
-class Google_Service_CloudUserAccounts_Binding extends Google_Collection
+class Appointments_Google_Service_CloudUserAccounts_Binding extends Appointments_Google_Collection
 {
   protected $collection_key = 'members';
   protected $internal_gapi_mappings = array(
@@ -1103,7 +1103,7 @@ class Google_Service_CloudUserAccounts_Binding extends Google_Collection
   }
 }
 
-class Google_Service_CloudUserAccounts_Condition extends Google_Collection
+class Appointments_Google_Service_CloudUserAccounts_Condition extends Appointments_Google_Collection
 {
   protected $collection_key = 'values';
   protected $internal_gapi_mappings = array(
@@ -1166,7 +1166,7 @@ class Google_Service_CloudUserAccounts_Condition extends Google_Collection
   }
 }
 
-class Google_Service_CloudUserAccounts_Group extends Google_Collection
+class Appointments_Google_Service_CloudUserAccounts_Group extends Appointments_Google_Collection
 {
   protected $collection_key = 'members';
   protected $internal_gapi_mappings = array(
@@ -1238,13 +1238,13 @@ class Google_Service_CloudUserAccounts_Group extends Google_Collection
   }
 }
 
-class Google_Service_CloudUserAccounts_GroupList extends Google_Collection
+class Appointments_Google_Service_CloudUserAccounts_GroupList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_CloudUserAccounts_Group';
+  protected $itemsType = 'Appointments_Google_Service_CloudUserAccounts_Group';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -1293,7 +1293,7 @@ class Google_Service_CloudUserAccounts_GroupList extends Google_Collection
   }
 }
 
-class Google_Service_CloudUserAccounts_GroupsAddMemberRequest extends Google_Collection
+class Appointments_Google_Service_CloudUserAccounts_GroupsAddMemberRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'users';
   protected $internal_gapi_mappings = array(
@@ -1311,7 +1311,7 @@ class Google_Service_CloudUserAccounts_GroupsAddMemberRequest extends Google_Col
   }
 }
 
-class Google_Service_CloudUserAccounts_GroupsRemoveMemberRequest extends Google_Collection
+class Appointments_Google_Service_CloudUserAccounts_GroupsRemoveMemberRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'users';
   protected $internal_gapi_mappings = array(
@@ -1329,15 +1329,15 @@ class Google_Service_CloudUserAccounts_GroupsRemoveMemberRequest extends Google_
   }
 }
 
-class Google_Service_CloudUserAccounts_LinuxAccountViews extends Google_Collection
+class Appointments_Google_Service_CloudUserAccounts_LinuxAccountViews extends Appointments_Google_Collection
 {
   protected $collection_key = 'userViews';
   protected $internal_gapi_mappings = array(
   );
-  protected $groupViewsType = 'Google_Service_CloudUserAccounts_LinuxGroupView';
+  protected $groupViewsType = 'Appointments_Google_Service_CloudUserAccounts_LinuxGroupView';
   protected $groupViewsDataType = 'array';
   public $kind;
-  protected $userViewsType = 'Google_Service_CloudUserAccounts_LinuxUserView';
+  protected $userViewsType = 'Appointments_Google_Service_CloudUserAccounts_LinuxUserView';
   protected $userViewsDataType = 'array';
 
 
@@ -1367,15 +1367,15 @@ class Google_Service_CloudUserAccounts_LinuxAccountViews extends Google_Collecti
   }
 }
 
-class Google_Service_CloudUserAccounts_LinuxGetAuthorizedKeysViewResponse extends Google_Model
+class Appointments_Google_Service_CloudUserAccounts_LinuxGetAuthorizedKeysViewResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $resourceType = 'Google_Service_CloudUserAccounts_AuthorizedKeysView';
+  protected $resourceType = 'Appointments_Google_Service_CloudUserAccounts_AuthorizedKeysView';
   protected $resourceDataType = '';
 
 
-  public function setResource(Google_Service_CloudUserAccounts_AuthorizedKeysView $resource)
+  public function setResource(Appointments_Google_Service_CloudUserAccounts_AuthorizedKeysView $resource)
   {
     $this->resource = $resource;
   }
@@ -1385,15 +1385,15 @@ class Google_Service_CloudUserAccounts_LinuxGetAuthorizedKeysViewResponse extend
   }
 }
 
-class Google_Service_CloudUserAccounts_LinuxGetLinuxAccountViewsResponse extends Google_Model
+class Appointments_Google_Service_CloudUserAccounts_LinuxGetLinuxAccountViewsResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $resourceType = 'Google_Service_CloudUserAccounts_LinuxAccountViews';
+  protected $resourceType = 'Appointments_Google_Service_CloudUserAccounts_LinuxAccountViews';
   protected $resourceDataType = '';
 
 
-  public function setResource(Google_Service_CloudUserAccounts_LinuxAccountViews $resource)
+  public function setResource(Appointments_Google_Service_CloudUserAccounts_LinuxAccountViews $resource)
   {
     $this->resource = $resource;
   }
@@ -1403,7 +1403,7 @@ class Google_Service_CloudUserAccounts_LinuxGetLinuxAccountViewsResponse extends
   }
 }
 
-class Google_Service_CloudUserAccounts_LinuxGroupView extends Google_Collection
+class Appointments_Google_Service_CloudUserAccounts_LinuxGroupView extends Appointments_Google_Collection
 {
   protected $collection_key = 'members';
   protected $internal_gapi_mappings = array(
@@ -1439,7 +1439,7 @@ class Google_Service_CloudUserAccounts_LinuxGroupView extends Google_Collection
   }
 }
 
-class Google_Service_CloudUserAccounts_LinuxUserView extends Google_Model
+class Appointments_Google_Service_CloudUserAccounts_LinuxUserView extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1501,15 +1501,15 @@ class Google_Service_CloudUserAccounts_LinuxUserView extends Google_Model
   }
 }
 
-class Google_Service_CloudUserAccounts_LogConfig extends Google_Model
+class Appointments_Google_Service_CloudUserAccounts_LogConfig extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
-  protected $counterType = 'Google_Service_CloudUserAccounts_LogConfigCounterOptions';
+  protected $counterType = 'Appointments_Google_Service_CloudUserAccounts_LogConfigCounterOptions';
   protected $counterDataType = '';
 
 
-  public function setCounter(Google_Service_CloudUserAccounts_LogConfigCounterOptions $counter)
+  public function setCounter(Appointments_Google_Service_CloudUserAccounts_LogConfigCounterOptions $counter)
   {
     $this->counter = $counter;
   }
@@ -1519,7 +1519,7 @@ class Google_Service_CloudUserAccounts_LogConfig extends Google_Model
   }
 }
 
-class Google_Service_CloudUserAccounts_LogConfigCounterOptions extends Google_Model
+class Appointments_Google_Service_CloudUserAccounts_LogConfigCounterOptions extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1545,7 +1545,7 @@ class Google_Service_CloudUserAccounts_LogConfigCounterOptions extends Google_Mo
   }
 }
 
-class Google_Service_CloudUserAccounts_Operation extends Google_Collection
+class Appointments_Google_Service_CloudUserAccounts_Operation extends Appointments_Google_Collection
 {
   protected $collection_key = 'warnings';
   protected $internal_gapi_mappings = array(
@@ -1553,7 +1553,7 @@ class Google_Service_CloudUserAccounts_Operation extends Google_Collection
   public $clientOperationId;
   public $creationTimestamp;
   public $endTime;
-  protected $errorType = 'Google_Service_CloudUserAccounts_OperationError';
+  protected $errorType = 'Appointments_Google_Service_CloudUserAccounts_OperationError';
   protected $errorDataType = '';
   public $httpErrorMessage;
   public $httpErrorStatusCode;
@@ -1571,7 +1571,7 @@ class Google_Service_CloudUserAccounts_Operation extends Google_Collection
   public $targetId;
   public $targetLink;
   public $user;
-  protected $warningsType = 'Google_Service_CloudUserAccounts_OperationWarnings';
+  protected $warningsType = 'Appointments_Google_Service_CloudUserAccounts_OperationWarnings';
   protected $warningsDataType = 'array';
   public $zone;
 
@@ -1600,7 +1600,7 @@ class Google_Service_CloudUserAccounts_Operation extends Google_Collection
   {
     return $this->endTime;
   }
-  public function setError(Google_Service_CloudUserAccounts_OperationError $error)
+  public function setError(Appointments_Google_Service_CloudUserAccounts_OperationError $error)
   {
     $this->error = $error;
   }
@@ -1754,12 +1754,12 @@ class Google_Service_CloudUserAccounts_Operation extends Google_Collection
   }
 }
 
-class Google_Service_CloudUserAccounts_OperationError extends Google_Collection
+class Appointments_Google_Service_CloudUserAccounts_OperationError extends Appointments_Google_Collection
 {
   protected $collection_key = 'errors';
   protected $internal_gapi_mappings = array(
   );
-  protected $errorsType = 'Google_Service_CloudUserAccounts_OperationErrorErrors';
+  protected $errorsType = 'Appointments_Google_Service_CloudUserAccounts_OperationErrorErrors';
   protected $errorsDataType = 'array';
 
 
@@ -1773,7 +1773,7 @@ class Google_Service_CloudUserAccounts_OperationError extends Google_Collection
   }
 }
 
-class Google_Service_CloudUserAccounts_OperationErrorErrors extends Google_Model
+class Appointments_Google_Service_CloudUserAccounts_OperationErrorErrors extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1808,13 +1808,13 @@ class Google_Service_CloudUserAccounts_OperationErrorErrors extends Google_Model
   }
 }
 
-class Google_Service_CloudUserAccounts_OperationList extends Google_Collection
+class Appointments_Google_Service_CloudUserAccounts_OperationList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_CloudUserAccounts_Operation';
+  protected $itemsType = 'Appointments_Google_Service_CloudUserAccounts_Operation';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -1863,13 +1863,13 @@ class Google_Service_CloudUserAccounts_OperationList extends Google_Collection
   }
 }
 
-class Google_Service_CloudUserAccounts_OperationWarnings extends Google_Collection
+class Appointments_Google_Service_CloudUserAccounts_OperationWarnings extends Appointments_Google_Collection
 {
   protected $collection_key = 'data';
   protected $internal_gapi_mappings = array(
   );
   public $code;
-  protected $dataType = 'Google_Service_CloudUserAccounts_OperationWarningsData';
+  protected $dataType = 'Appointments_Google_Service_CloudUserAccounts_OperationWarningsData';
   protected $dataDataType = 'array';
   public $message;
 
@@ -1900,7 +1900,7 @@ class Google_Service_CloudUserAccounts_OperationWarnings extends Google_Collecti
   }
 }
 
-class Google_Service_CloudUserAccounts_OperationWarningsData extends Google_Model
+class Appointments_Google_Service_CloudUserAccounts_OperationWarningsData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1926,15 +1926,15 @@ class Google_Service_CloudUserAccounts_OperationWarningsData extends Google_Mode
   }
 }
 
-class Google_Service_CloudUserAccounts_Policy extends Google_Collection
+class Appointments_Google_Service_CloudUserAccounts_Policy extends Appointments_Google_Collection
 {
   protected $collection_key = 'rules';
   protected $internal_gapi_mappings = array(
   );
-  protected $bindingsType = 'Google_Service_CloudUserAccounts_Binding';
+  protected $bindingsType = 'Appointments_Google_Service_CloudUserAccounts_Binding';
   protected $bindingsDataType = 'array';
   public $etag;
-  protected $rulesType = 'Google_Service_CloudUserAccounts_Rule';
+  protected $rulesType = 'Appointments_Google_Service_CloudUserAccounts_Rule';
   protected $rulesDataType = 'array';
   public $version;
 
@@ -1973,7 +1973,7 @@ class Google_Service_CloudUserAccounts_Policy extends Google_Collection
   }
 }
 
-class Google_Service_CloudUserAccounts_PublicKey extends Google_Model
+class Appointments_Google_Service_CloudUserAccounts_PublicKey extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2026,17 +2026,17 @@ class Google_Service_CloudUserAccounts_PublicKey extends Google_Model
   }
 }
 
-class Google_Service_CloudUserAccounts_Rule extends Google_Collection
+class Appointments_Google_Service_CloudUserAccounts_Rule extends Appointments_Google_Collection
 {
   protected $collection_key = 'permissions';
   protected $internal_gapi_mappings = array(
   );
   public $action;
-  protected $conditionsType = 'Google_Service_CloudUserAccounts_Condition';
+  protected $conditionsType = 'Appointments_Google_Service_CloudUserAccounts_Condition';
   protected $conditionsDataType = 'array';
   public $description;
   public $ins;
-  protected $logConfigsType = 'Google_Service_CloudUserAccounts_LogConfig';
+  protected $logConfigsType = 'Appointments_Google_Service_CloudUserAccounts_LogConfig';
   protected $logConfigsDataType = 'array';
   public $notIns;
   public $permissions;
@@ -2100,7 +2100,7 @@ class Google_Service_CloudUserAccounts_Rule extends Google_Collection
   }
 }
 
-class Google_Service_CloudUserAccounts_TestPermissionsRequest extends Google_Collection
+class Appointments_Google_Service_CloudUserAccounts_TestPermissionsRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'permissions';
   protected $internal_gapi_mappings = array(
@@ -2118,7 +2118,7 @@ class Google_Service_CloudUserAccounts_TestPermissionsRequest extends Google_Col
   }
 }
 
-class Google_Service_CloudUserAccounts_TestPermissionsResponse extends Google_Collection
+class Appointments_Google_Service_CloudUserAccounts_TestPermissionsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'permissions';
   protected $internal_gapi_mappings = array(
@@ -2136,7 +2136,7 @@ class Google_Service_CloudUserAccounts_TestPermissionsResponse extends Google_Co
   }
 }
 
-class Google_Service_CloudUserAccounts_User extends Google_Collection
+class Appointments_Google_Service_CloudUserAccounts_User extends Appointments_Google_Collection
 {
   protected $collection_key = 'publicKeys';
   protected $internal_gapi_mappings = array(
@@ -2148,7 +2148,7 @@ class Google_Service_CloudUserAccounts_User extends Google_Collection
   public $kind;
   public $name;
   public $owner;
-  protected $publicKeysType = 'Google_Service_CloudUserAccounts_PublicKey';
+  protected $publicKeysType = 'Appointments_Google_Service_CloudUserAccounts_PublicKey';
   protected $publicKeysDataType = 'array';
   public $selfLink;
 
@@ -2227,13 +2227,13 @@ class Google_Service_CloudUserAccounts_User extends Google_Collection
   }
 }
 
-class Google_Service_CloudUserAccounts_UserList extends Google_Collection
+class Appointments_Google_Service_CloudUserAccounts_UserList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_CloudUserAccounts_User';
+  protected $itemsType = 'Appointments_Google_Service_CloudUserAccounts_User';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;

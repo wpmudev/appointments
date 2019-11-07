@@ -27,7 +27,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Replicapool extends Google_Service
+class Appointments_Google_Service_Replicapool extends Appointments_Google_Service
 {
   /** View and manage your data across Google Cloud Platform services. */
   const CLOUD_PLATFORM =
@@ -49,9 +49,9 @@ class Google_Service_Replicapool extends Google_Service
   /**
    * Constructs the internal representation of the Replicapool service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -59,7 +59,7 @@ class Google_Service_Replicapool extends Google_Service
     $this->version = 'v1beta2';
     $this->serviceName = 'replicapool';
 
-    $this->instanceGroupManagers = new Google_Service_Replicapool_InstanceGroupManagers_Resource(
+    $this->instanceGroupManagers = new Appointments_Google_Service_Replicapool_InstanceGroupManagers_Resource(
         $this,
         $this->serviceName,
         'instanceGroupManagers',
@@ -281,7 +281,7 @@ class Google_Service_Replicapool extends Google_Service
           )
         )
     );
-    $this->zoneOperations = new Google_Service_Replicapool_ZoneOperations_Resource(
+    $this->zoneOperations = new Appointments_Google_Service_Replicapool_ZoneOperations_Resource(
         $this,
         $this->serviceName,
         'zoneOperations',
@@ -346,11 +346,11 @@ class Google_Service_Replicapool extends Google_Service
  * The "instanceGroupManagers" collection of methods.
  * Typical usage is:
  *  <code>
- *   $replicapoolService = new Google_Service_Replicapool(...);
+ *   $replicapoolService = new Appointments_Google_Service_Replicapool(...);
  *   $instanceGroupManagers = $replicapoolService->instanceGroupManagers;
  *  </code>
  */
-class Google_Service_Replicapool_InstanceGroupManagers_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Replicapool_InstanceGroupManagers_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -362,15 +362,15 @@ class Google_Service_Replicapool_InstanceGroupManagers_Resource extends Google_S
    * @param string $zone The name of the zone in which the instance group manager
    * resides.
    * @param string $instanceGroupManager The name of the instance group manager.
-   * @param Google_InstanceGroupManagersAbandonInstancesRequest $postBody
+   * @param Appointments_Google_InstanceGroupManagersAbandonInstancesRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Replicapool_Operation
+   * @return Appointments_Google_Service_Replicapool_Operation
    */
-  public function abandonInstances($project, $zone, $instanceGroupManager, Google_Service_Replicapool_InstanceGroupManagersAbandonInstancesRequest $postBody, $optParams = array())
+  public function abandonInstances($project, $zone, $instanceGroupManager, Appointments_Google_Service_Replicapool_InstanceGroupManagersAbandonInstancesRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instanceGroupManager' => $instanceGroupManager, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('abandonInstances', array($params), "Google_Service_Replicapool_Operation");
+    return $this->call('abandonInstances', array($params), "Appointments_Google_Service_Replicapool_Operation");
   }
 
   /**
@@ -385,13 +385,13 @@ class Google_Service_Replicapool_InstanceGroupManagers_Resource extends Google_S
    * @param string $instanceGroupManager Name of the Instance Group Manager
    * resource to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Replicapool_Operation
+   * @return Appointments_Google_Service_Replicapool_Operation
    */
   public function delete($project, $zone, $instanceGroupManager, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instanceGroupManager' => $instanceGroupManager);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Replicapool_Operation");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Replicapool_Operation");
   }
 
   /**
@@ -404,15 +404,15 @@ class Google_Service_Replicapool_InstanceGroupManagers_Resource extends Google_S
    * @param string $zone The name of the zone in which the instance group manager
    * resides.
    * @param string $instanceGroupManager The name of the instance group manager.
-   * @param Google_InstanceGroupManagersDeleteInstancesRequest $postBody
+   * @param Appointments_Google_InstanceGroupManagersDeleteInstancesRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Replicapool_Operation
+   * @return Appointments_Google_Service_Replicapool_Operation
    */
-  public function deleteInstances($project, $zone, $instanceGroupManager, Google_Service_Replicapool_InstanceGroupManagersDeleteInstancesRequest $postBody, $optParams = array())
+  public function deleteInstances($project, $zone, $instanceGroupManager, Appointments_Google_Service_Replicapool_InstanceGroupManagersDeleteInstancesRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instanceGroupManager' => $instanceGroupManager, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('deleteInstances', array($params), "Google_Service_Replicapool_Operation");
+    return $this->call('deleteInstances', array($params), "Appointments_Google_Service_Replicapool_Operation");
   }
 
   /**
@@ -424,13 +424,13 @@ class Google_Service_Replicapool_InstanceGroupManagers_Resource extends Google_S
    * resides.
    * @param string $instanceGroupManager Name of the instance resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Replicapool_InstanceGroupManager
+   * @return Appointments_Google_Service_Replicapool_InstanceGroupManager
    */
   public function get($project, $zone, $instanceGroupManager, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instanceGroupManager' => $instanceGroupManager);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Replicapool_InstanceGroupManager");
+    return $this->call('get', array($params), "Appointments_Google_Service_Replicapool_InstanceGroupManager");
   }
 
   /**
@@ -441,15 +441,15 @@ class Google_Service_Replicapool_InstanceGroupManagers_Resource extends Google_S
    * @param string $zone The name of the zone in which the instance group manager
    * resides.
    * @param int $size Number of instances that should exist.
-   * @param Google_InstanceGroupManager $postBody
+   * @param Appointments_Google_InstanceGroupManager $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Replicapool_Operation
+   * @return Appointments_Google_Service_Replicapool_Operation
    */
-  public function insert($project, $zone, $size, Google_Service_Replicapool_InstanceGroupManager $postBody, $optParams = array())
+  public function insert($project, $zone, $size, Appointments_Google_Service_Replicapool_InstanceGroupManager $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'size' => $size, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Replicapool_Operation");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Replicapool_Operation");
   }
 
   /**
@@ -467,13 +467,13 @@ class Google_Service_Replicapool_InstanceGroupManagers_Resource extends Google_S
    * returned. Maximum value is 500 and default value is 500.
    * @opt_param string pageToken Optional. Tag returned by a previous list request
    * truncated by maxResults. Used to continue a previous list request.
-   * @return Google_Service_Replicapool_InstanceGroupManagerList
+   * @return Appointments_Google_Service_Replicapool_InstanceGroupManagerList
    */
   public function listInstanceGroupManagers($project, $zone, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Replicapool_InstanceGroupManagerList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Replicapool_InstanceGroupManagerList");
   }
 
   /**
@@ -485,15 +485,15 @@ class Google_Service_Replicapool_InstanceGroupManagers_Resource extends Google_S
    * @param string $zone The name of the zone in which the instance group manager
    * resides.
    * @param string $instanceGroupManager The name of the instance group manager.
-   * @param Google_InstanceGroupManagersRecreateInstancesRequest $postBody
+   * @param Appointments_Google_InstanceGroupManagersRecreateInstancesRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Replicapool_Operation
+   * @return Appointments_Google_Service_Replicapool_Operation
    */
-  public function recreateInstances($project, $zone, $instanceGroupManager, Google_Service_Replicapool_InstanceGroupManagersRecreateInstancesRequest $postBody, $optParams = array())
+  public function recreateInstances($project, $zone, $instanceGroupManager, Appointments_Google_Service_Replicapool_InstanceGroupManagersRecreateInstancesRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instanceGroupManager' => $instanceGroupManager, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('recreateInstances', array($params), "Google_Service_Replicapool_Operation");
+    return $this->call('recreateInstances', array($params), "Appointments_Google_Service_Replicapool_Operation");
   }
 
   /**
@@ -509,13 +509,13 @@ class Google_Service_Replicapool_InstanceGroupManagers_Resource extends Google_S
    * @param int $size Number of instances that should exist in this Instance Group
    * Manager.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Replicapool_Operation
+   * @return Appointments_Google_Service_Replicapool_Operation
    */
   public function resize($project, $zone, $instanceGroupManager, $size, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instanceGroupManager' => $instanceGroupManager, 'size' => $size);
     $params = array_merge($params, $optParams);
-    return $this->call('resize', array($params), "Google_Service_Replicapool_Operation");
+    return $this->call('resize', array($params), "Appointments_Google_Service_Replicapool_Operation");
   }
 
   /**
@@ -527,15 +527,15 @@ class Google_Service_Replicapool_InstanceGroupManagers_Resource extends Google_S
    * @param string $zone The name of the zone in which the instance group manager
    * resides.
    * @param string $instanceGroupManager The name of the instance group manager.
-   * @param Google_InstanceGroupManagersSetInstanceTemplateRequest $postBody
+   * @param Appointments_Google_InstanceGroupManagersSetInstanceTemplateRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Replicapool_Operation
+   * @return Appointments_Google_Service_Replicapool_Operation
    */
-  public function setInstanceTemplate($project, $zone, $instanceGroupManager, Google_Service_Replicapool_InstanceGroupManagersSetInstanceTemplateRequest $postBody, $optParams = array())
+  public function setInstanceTemplate($project, $zone, $instanceGroupManager, Appointments_Google_Service_Replicapool_InstanceGroupManagersSetInstanceTemplateRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instanceGroupManager' => $instanceGroupManager, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setInstanceTemplate', array($params), "Google_Service_Replicapool_Operation");
+    return $this->call('setInstanceTemplate', array($params), "Appointments_Google_Service_Replicapool_Operation");
   }
 
   /**
@@ -547,15 +547,15 @@ class Google_Service_Replicapool_InstanceGroupManagers_Resource extends Google_S
    * @param string $zone The name of the zone in which the instance group manager
    * resides.
    * @param string $instanceGroupManager The name of the instance group manager.
-   * @param Google_InstanceGroupManagersSetTargetPoolsRequest $postBody
+   * @param Appointments_Google_InstanceGroupManagersSetTargetPoolsRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Replicapool_Operation
+   * @return Appointments_Google_Service_Replicapool_Operation
    */
-  public function setTargetPools($project, $zone, $instanceGroupManager, Google_Service_Replicapool_InstanceGroupManagersSetTargetPoolsRequest $postBody, $optParams = array())
+  public function setTargetPools($project, $zone, $instanceGroupManager, Appointments_Google_Service_Replicapool_InstanceGroupManagersSetTargetPoolsRequest $postBody, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'instanceGroupManager' => $instanceGroupManager, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setTargetPools', array($params), "Google_Service_Replicapool_Operation");
+    return $this->call('setTargetPools', array($params), "Appointments_Google_Service_Replicapool_Operation");
   }
 }
 
@@ -563,11 +563,11 @@ class Google_Service_Replicapool_InstanceGroupManagers_Resource extends Google_S
  * The "zoneOperations" collection of methods.
  * Typical usage is:
  *  <code>
- *   $replicapoolService = new Google_Service_Replicapool(...);
+ *   $replicapoolService = new Appointments_Google_Service_Replicapool(...);
  *   $zoneOperations = $replicapoolService->zoneOperations;
  *  </code>
  */
-class Google_Service_Replicapool_ZoneOperations_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Replicapool_ZoneOperations_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -578,13 +578,13 @@ class Google_Service_Replicapool_ZoneOperations_Resource extends Google_Service_
    * @param string $zone Name of the zone scoping this request.
    * @param string $operation Name of the operation resource to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Replicapool_Operation
+   * @return Appointments_Google_Service_Replicapool_Operation
    */
   public function get($project, $zone, $operation, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone, 'operation' => $operation);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Replicapool_Operation");
+    return $this->call('get', array($params), "Appointments_Google_Service_Replicapool_Operation");
   }
 
   /**
@@ -601,25 +601,25 @@ class Google_Service_Replicapool_ZoneOperations_Resource extends Google_Service_
    * returned. Maximum value is 500 and default value is 500.
    * @opt_param string pageToken Optional. Tag returned by a previous list request
    * truncated by maxResults. Used to continue a previous list request.
-   * @return Google_Service_Replicapool_OperationList
+   * @return Appointments_Google_Service_Replicapool_OperationList
    */
   public function listZoneOperations($project, $zone, $optParams = array())
   {
     $params = array('project' => $project, 'zone' => $zone);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Replicapool_OperationList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Replicapool_OperationList");
   }
 }
 
 
 
 
-class Google_Service_Replicapool_InstanceGroupManager extends Google_Collection
+class Appointments_Google_Service_Replicapool_InstanceGroupManager extends Appointments_Google_Collection
 {
   protected $collection_key = 'targetPools';
   protected $internal_gapi_mappings = array(
   );
-  protected $autoHealingPoliciesType = 'Google_Service_Replicapool_ReplicaPoolAutoHealingPolicy';
+  protected $autoHealingPoliciesType = 'Appointments_Google_Service_Replicapool_ReplicaPoolAutoHealingPolicy';
   protected $autoHealingPoliciesDataType = 'array';
   public $baseInstanceName;
   public $creationTimestamp;
@@ -750,13 +750,13 @@ class Google_Service_Replicapool_InstanceGroupManager extends Google_Collection
   }
 }
 
-class Google_Service_Replicapool_InstanceGroupManagerList extends Google_Collection
+class Appointments_Google_Service_Replicapool_InstanceGroupManagerList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Replicapool_InstanceGroupManager';
+  protected $itemsType = 'Appointments_Google_Service_Replicapool_InstanceGroupManager';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -805,7 +805,7 @@ class Google_Service_Replicapool_InstanceGroupManagerList extends Google_Collect
   }
 }
 
-class Google_Service_Replicapool_InstanceGroupManagersAbandonInstancesRequest extends Google_Collection
+class Appointments_Google_Service_Replicapool_InstanceGroupManagersAbandonInstancesRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'instances';
   protected $internal_gapi_mappings = array(
@@ -823,7 +823,7 @@ class Google_Service_Replicapool_InstanceGroupManagersAbandonInstancesRequest ex
   }
 }
 
-class Google_Service_Replicapool_InstanceGroupManagersDeleteInstancesRequest extends Google_Collection
+class Appointments_Google_Service_Replicapool_InstanceGroupManagersDeleteInstancesRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'instances';
   protected $internal_gapi_mappings = array(
@@ -841,7 +841,7 @@ class Google_Service_Replicapool_InstanceGroupManagersDeleteInstancesRequest ext
   }
 }
 
-class Google_Service_Replicapool_InstanceGroupManagersRecreateInstancesRequest extends Google_Collection
+class Appointments_Google_Service_Replicapool_InstanceGroupManagersRecreateInstancesRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'instances';
   protected $internal_gapi_mappings = array(
@@ -859,7 +859,7 @@ class Google_Service_Replicapool_InstanceGroupManagersRecreateInstancesRequest e
   }
 }
 
-class Google_Service_Replicapool_InstanceGroupManagersSetInstanceTemplateRequest extends Google_Model
+class Appointments_Google_Service_Replicapool_InstanceGroupManagersSetInstanceTemplateRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -876,7 +876,7 @@ class Google_Service_Replicapool_InstanceGroupManagersSetInstanceTemplateRequest
   }
 }
 
-class Google_Service_Replicapool_InstanceGroupManagersSetTargetPoolsRequest extends Google_Collection
+class Appointments_Google_Service_Replicapool_InstanceGroupManagersSetTargetPoolsRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'targetPools';
   protected $internal_gapi_mappings = array(
@@ -903,7 +903,7 @@ class Google_Service_Replicapool_InstanceGroupManagersSetTargetPoolsRequest exte
   }
 }
 
-class Google_Service_Replicapool_Operation extends Google_Collection
+class Appointments_Google_Service_Replicapool_Operation extends Appointments_Google_Collection
 {
   protected $collection_key = 'warnings';
   protected $internal_gapi_mappings = array(
@@ -911,7 +911,7 @@ class Google_Service_Replicapool_Operation extends Google_Collection
   public $clientOperationId;
   public $creationTimestamp;
   public $endTime;
-  protected $errorType = 'Google_Service_Replicapool_OperationError';
+  protected $errorType = 'Appointments_Google_Service_Replicapool_OperationError';
   protected $errorDataType = '';
   public $httpErrorMessage;
   public $httpErrorStatusCode;
@@ -929,7 +929,7 @@ class Google_Service_Replicapool_Operation extends Google_Collection
   public $targetId;
   public $targetLink;
   public $user;
-  protected $warningsType = 'Google_Service_Replicapool_OperationWarnings';
+  protected $warningsType = 'Appointments_Google_Service_Replicapool_OperationWarnings';
   protected $warningsDataType = 'array';
   public $zone;
 
@@ -958,7 +958,7 @@ class Google_Service_Replicapool_Operation extends Google_Collection
   {
     return $this->endTime;
   }
-  public function setError(Google_Service_Replicapool_OperationError $error)
+  public function setError(Appointments_Google_Service_Replicapool_OperationError $error)
   {
     $this->error = $error;
   }
@@ -1112,12 +1112,12 @@ class Google_Service_Replicapool_Operation extends Google_Collection
   }
 }
 
-class Google_Service_Replicapool_OperationError extends Google_Collection
+class Appointments_Google_Service_Replicapool_OperationError extends Appointments_Google_Collection
 {
   protected $collection_key = 'errors';
   protected $internal_gapi_mappings = array(
   );
-  protected $errorsType = 'Google_Service_Replicapool_OperationErrorErrors';
+  protected $errorsType = 'Appointments_Google_Service_Replicapool_OperationErrorErrors';
   protected $errorsDataType = 'array';
 
 
@@ -1131,7 +1131,7 @@ class Google_Service_Replicapool_OperationError extends Google_Collection
   }
 }
 
-class Google_Service_Replicapool_OperationErrorErrors extends Google_Model
+class Appointments_Google_Service_Replicapool_OperationErrorErrors extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1166,13 +1166,13 @@ class Google_Service_Replicapool_OperationErrorErrors extends Google_Model
   }
 }
 
-class Google_Service_Replicapool_OperationList extends Google_Collection
+class Appointments_Google_Service_Replicapool_OperationList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
   public $id;
-  protected $itemsType = 'Google_Service_Replicapool_Operation';
+  protected $itemsType = 'Appointments_Google_Service_Replicapool_Operation';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -1221,13 +1221,13 @@ class Google_Service_Replicapool_OperationList extends Google_Collection
   }
 }
 
-class Google_Service_Replicapool_OperationWarnings extends Google_Collection
+class Appointments_Google_Service_Replicapool_OperationWarnings extends Appointments_Google_Collection
 {
   protected $collection_key = 'data';
   protected $internal_gapi_mappings = array(
   );
   public $code;
-  protected $dataType = 'Google_Service_Replicapool_OperationWarningsData';
+  protected $dataType = 'Appointments_Google_Service_Replicapool_OperationWarningsData';
   protected $dataDataType = 'array';
   public $message;
 
@@ -1258,7 +1258,7 @@ class Google_Service_Replicapool_OperationWarnings extends Google_Collection
   }
 }
 
-class Google_Service_Replicapool_OperationWarningsData extends Google_Model
+class Appointments_Google_Service_Replicapool_OperationWarningsData extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1284,7 +1284,7 @@ class Google_Service_Replicapool_OperationWarningsData extends Google_Model
   }
 }
 
-class Google_Service_Replicapool_ReplicaPoolAutoHealingPolicy extends Google_Model
+class Appointments_Google_Service_Replicapool_ReplicaPoolAutoHealingPolicy extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );

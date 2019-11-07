@@ -26,7 +26,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Classroom extends Google_Service
+class Appointments_Google_Service_Classroom extends Appointments_Google_Service
 {
   /** Manage your Google Classroom classes. */
   const CLASSROOM_COURSES =
@@ -58,9 +58,9 @@ class Google_Service_Classroom extends Google_Service
   /**
    * Constructs the internal representation of the Classroom service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://classroom.googleapis.com/';
@@ -68,7 +68,7 @@ class Google_Service_Classroom extends Google_Service
     $this->version = 'v1';
     $this->serviceName = 'classroom';
 
-    $this->courses = new Google_Service_Classroom_Courses_Resource(
+    $this->courses = new Appointments_Google_Service_Classroom_Courses_Resource(
         $this,
         $this->serviceName,
         'courses',
@@ -147,7 +147,7 @@ class Google_Service_Classroom extends Google_Service
           )
         )
     );
-    $this->courses_aliases = new Google_Service_Classroom_CoursesAliases_Resource(
+    $this->courses_aliases = new Appointments_Google_Service_Classroom_CoursesAliases_Resource(
         $this,
         $this->serviceName,
         'aliases',
@@ -200,7 +200,7 @@ class Google_Service_Classroom extends Google_Service
           )
         )
     );
-    $this->courses_students = new Google_Service_Classroom_CoursesStudents_Resource(
+    $this->courses_students = new Appointments_Google_Service_Classroom_CoursesStudents_Resource(
         $this,
         $this->serviceName,
         'students',
@@ -272,7 +272,7 @@ class Google_Service_Classroom extends Google_Service
           )
         )
     );
-    $this->courses_teachers = new Google_Service_Classroom_CoursesTeachers_Resource(
+    $this->courses_teachers = new Appointments_Google_Service_Classroom_CoursesTeachers_Resource(
         $this,
         $this->serviceName,
         'teachers',
@@ -340,7 +340,7 @@ class Google_Service_Classroom extends Google_Service
           )
         )
     );
-    $this->invitations = new Google_Service_Classroom_Invitations_Resource(
+    $this->invitations = new Appointments_Google_Service_Classroom_Invitations_Resource(
         $this,
         $this->serviceName,
         'invitations',
@@ -405,7 +405,7 @@ class Google_Service_Classroom extends Google_Service
           )
         )
     );
-    $this->userProfiles = new Google_Service_Classroom_UserProfiles_Resource(
+    $this->userProfiles = new Appointments_Google_Service_Classroom_UserProfiles_Resource(
         $this,
         $this->serviceName,
         'userProfiles',
@@ -433,11 +433,11 @@ class Google_Service_Classroom extends Google_Service
  * The "courses" collection of methods.
  * Typical usage is:
  *  <code>
- *   $classroomService = new Google_Service_Classroom(...);
+ *   $classroomService = new Appointments_Google_Service_Classroom(...);
  *   $courses = $classroomService->courses;
  *  </code>
  */
-class Google_Service_Classroom_Courses_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Classroom_Courses_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -450,15 +450,15 @@ class Google_Service_Classroom_Courses_Resource extends Google_Service_Resource
    * `ALREADY_EXISTS` if an alias was specified in the `id` and already exists.
    * (courses.create)
    *
-   * @param Google_Course $postBody
+   * @param Appointments_Google_Course $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Classroom_Course
+   * @return Appointments_Google_Service_Classroom_Course
    */
-  public function create(Google_Service_Classroom_Course $postBody, $optParams = array())
+  public function create(Appointments_Google_Service_Classroom_Course $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_Classroom_Course");
+    return $this->call('create', array($params), "Appointments_Google_Service_Classroom_Course");
   }
 
   /**
@@ -470,13 +470,13 @@ class Google_Service_Classroom_Courses_Resource extends Google_Service_Resource
    * @param string $id Identifier of the course to delete. This identifier can be
    * either the Classroom-assigned identifier or an alias.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Classroom_Empty
+   * @return Appointments_Google_Service_Classroom_Empty
    */
   public function delete($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Classroom_Empty");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Classroom_Empty");
   }
 
   /**
@@ -488,13 +488,13 @@ class Google_Service_Classroom_Courses_Resource extends Google_Service_Resource
    * @param string $id Identifier of the course to return. This identifier can be
    * either the Classroom-assigned identifier or an alias.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Classroom_Course
+   * @return Appointments_Google_Service_Classroom_Course
    */
   public function get($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Classroom_Course");
+    return $this->call('get', array($params), "Appointments_Google_Service_Classroom_Course");
   }
 
   /**
@@ -521,13 +521,13 @@ class Google_Service_Classroom_Courses_Resource extends Google_Service_Resource
    * call, indicating that the subsequent page of results should be returned. The
    * list request must be otherwise identical to the one that resulted in this
    * token.
-   * @return Google_Service_Classroom_ListCoursesResponse
+   * @return Appointments_Google_Service_Classroom_ListCoursesResponse
    */
   public function listCourses($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Classroom_ListCoursesResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Classroom_ListCoursesResponse");
   }
 
   /**
@@ -541,7 +541,7 @@ class Google_Service_Classroom_Courses_Resource extends Google_Service_Resource
    *
    * @param string $id Identifier of the course to update. This identifier can be
    * either the Classroom-assigned identifier or an alias.
-   * @param Google_Course $postBody
+   * @param Appointments_Google_Course $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param string updateMask Mask that identifies which fields on the course
@@ -550,13 +550,13 @@ class Google_Service_Classroom_Courses_Resource extends Google_Service_Resource
    * `section` * `descriptionHeading` * `description` * `room` * `courseState`
    * When set in a query parameter, this field should be specified as
    * `updateMask=,,...`
-   * @return Google_Service_Classroom_Course
+   * @return Appointments_Google_Service_Classroom_Course
    */
-  public function patch($id, Google_Service_Classroom_Course $postBody, $optParams = array())
+  public function patch($id, Appointments_Google_Service_Classroom_Course $postBody, $optParams = array())
   {
     $params = array('id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Classroom_Course");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Classroom_Course");
   }
 
   /**
@@ -568,15 +568,15 @@ class Google_Service_Classroom_Courses_Resource extends Google_Service_Resource
    *
    * @param string $id Identifier of the course to update. This identifier can be
    * either the Classroom-assigned identifier or an alias.
-   * @param Google_Course $postBody
+   * @param Appointments_Google_Course $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Classroom_Course
+   * @return Appointments_Google_Service_Classroom_Course
    */
-  public function update($id, Google_Service_Classroom_Course $postBody, $optParams = array())
+  public function update($id, Appointments_Google_Service_Classroom_Course $postBody, $optParams = array())
   {
     $params = array('id' => $id, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Classroom_Course");
+    return $this->call('update', array($params), "Appointments_Google_Service_Classroom_Course");
   }
 }
 
@@ -584,11 +584,11 @@ class Google_Service_Classroom_Courses_Resource extends Google_Service_Resource
  * The "aliases" collection of methods.
  * Typical usage is:
  *  <code>
- *   $classroomService = new Google_Service_Classroom(...);
+ *   $classroomService = new Appointments_Google_Service_Classroom(...);
  *   $aliases = $classroomService->aliases;
  *  </code>
  */
-class Google_Service_Classroom_CoursesAliases_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Classroom_CoursesAliases_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -599,15 +599,15 @@ class Google_Service_Classroom_CoursesAliases_Resource extends Google_Service_Re
    *
    * @param string $courseId Identifier of the course to alias. This identifier
    * can be either the Classroom-assigned identifier or an alias.
-   * @param Google_CourseAlias $postBody
+   * @param Appointments_Google_CourseAlias $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Classroom_CourseAlias
+   * @return Appointments_Google_Service_Classroom_CourseAlias
    */
-  public function create($courseId, Google_Service_Classroom_CourseAlias $postBody, $optParams = array())
+  public function create($courseId, Appointments_Google_Service_Classroom_CourseAlias $postBody, $optParams = array())
   {
     $params = array('courseId' => $courseId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_Classroom_CourseAlias");
+    return $this->call('create', array($params), "Appointments_Google_Service_Classroom_CourseAlias");
   }
 
   /**
@@ -622,13 +622,13 @@ class Google_Service_Classroom_CoursesAliases_Resource extends Google_Service_Re
    * @param string $alias Alias to delete. This may not be the Classroom-assigned
    * identifier.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Classroom_Empty
+   * @return Appointments_Google_Service_Classroom_Empty
    */
   public function delete($courseId, $alias, $optParams = array())
   {
     $params = array('courseId' => $courseId, 'alias' => $alias);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Classroom_Empty");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Classroom_Empty");
   }
 
   /**
@@ -648,24 +648,24 @@ class Google_Service_Classroom_CoursesAliases_Resource extends Google_Service_Re
    * call, indicating that the subsequent page of results should be returned. The
    * list request must be otherwise identical to the one that resulted in this
    * token.
-   * @return Google_Service_Classroom_ListCourseAliasesResponse
+   * @return Appointments_Google_Service_Classroom_ListCourseAliasesResponse
    */
   public function listCoursesAliases($courseId, $optParams = array())
   {
     $params = array('courseId' => $courseId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Classroom_ListCourseAliasesResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Classroom_ListCourseAliasesResponse");
   }
 }
 /**
  * The "students" collection of methods.
  * Typical usage is:
  *  <code>
- *   $classroomService = new Google_Service_Classroom(...);
+ *   $classroomService = new Appointments_Google_Service_Classroom(...);
  *   $students = $classroomService->students;
  *  </code>
  */
-class Google_Service_Classroom_CoursesStudents_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Classroom_CoursesStudents_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -680,20 +680,20 @@ class Google_Service_Classroom_CoursesStudents_Resource extends Google_Service_R
    *
    * @param string $courseId Identifier of the course to create the student in.
    * This identifier can be either the Classroom-assigned identifier or an alias.
-   * @param Google_Student $postBody
+   * @param Appointments_Google_Student $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param string enrollmentCode Enrollment code of the course to create the
    * student in. This code is required if userId corresponds to the requesting
    * user; it may be omitted if the requesting user has administrative permissions
    * to create students for any user.
-   * @return Google_Service_Classroom_Student
+   * @return Appointments_Google_Service_Classroom_Student
    */
-  public function create($courseId, Google_Service_Classroom_Student $postBody, $optParams = array())
+  public function create($courseId, Appointments_Google_Service_Classroom_Student $postBody, $optParams = array())
   {
     $params = array('courseId' => $courseId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_Classroom_Student");
+    return $this->call('create', array($params), "Appointments_Google_Service_Classroom_Student");
   }
 
   /**
@@ -710,13 +710,13 @@ class Google_Service_Classroom_CoursesStudents_Resource extends Google_Service_R
    * address of the user * the string literal `"me"`, indicating the requesting
    * user
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Classroom_Empty
+   * @return Appointments_Google_Service_Classroom_Empty
    */
   public function delete($courseId, $userId, $optParams = array())
   {
     $params = array('courseId' => $courseId, 'userId' => $userId);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Classroom_Empty");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Classroom_Empty");
   }
 
   /**
@@ -733,13 +733,13 @@ class Google_Service_Classroom_CoursesStudents_Resource extends Google_Service_R
    * address of the user * the string literal `"me"`, indicating the requesting
    * user
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Classroom_Student
+   * @return Appointments_Google_Service_Classroom_Student
    */
   public function get($courseId, $userId, $optParams = array())
   {
     $params = array('courseId' => $courseId, 'userId' => $userId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Classroom_Student");
+    return $this->call('get', array($params), "Appointments_Google_Service_Classroom_Student");
   }
 
   /**
@@ -758,24 +758,24 @@ class Google_Service_Classroom_CoursesStudents_Resource extends Google_Service_R
    * call, indicating that the subsequent page of results should be returned. The
    * list request must be otherwise identical to the one that resulted in this
    * token.
-   * @return Google_Service_Classroom_ListStudentsResponse
+   * @return Appointments_Google_Service_Classroom_ListStudentsResponse
    */
   public function listCoursesStudents($courseId, $optParams = array())
   {
     $params = array('courseId' => $courseId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Classroom_ListStudentsResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Classroom_ListStudentsResponse");
   }
 }
 /**
  * The "teachers" collection of methods.
  * Typical usage is:
  *  <code>
- *   $classroomService = new Google_Service_Classroom(...);
+ *   $classroomService = new Appointments_Google_Service_Classroom(...);
  *   $teachers = $classroomService->teachers;
  *  </code>
  */
-class Google_Service_Classroom_CoursesTeachers_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Classroom_CoursesTeachers_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -790,15 +790,15 @@ class Google_Service_Classroom_CoursesTeachers_Resource extends Google_Service_R
    *
    * @param string $courseId Identifier of the course. This identifier can be
    * either the Classroom-assigned identifier or an alias.
-   * @param Google_Teacher $postBody
+   * @param Appointments_Google_Teacher $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Classroom_Teacher
+   * @return Appointments_Google_Service_Classroom_Teacher
    */
-  public function create($courseId, Google_Service_Classroom_Teacher $postBody, $optParams = array())
+  public function create($courseId, Appointments_Google_Service_Classroom_Teacher $postBody, $optParams = array())
   {
     $params = array('courseId' => $courseId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_Classroom_Teacher");
+    return $this->call('create', array($params), "Appointments_Google_Service_Classroom_Teacher");
   }
 
   /**
@@ -816,13 +816,13 @@ class Google_Service_Classroom_CoursesTeachers_Resource extends Google_Service_R
    * address of the user * the string literal `"me"`, indicating the requesting
    * user
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Classroom_Empty
+   * @return Appointments_Google_Service_Classroom_Empty
    */
   public function delete($courseId, $userId, $optParams = array())
   {
     $params = array('courseId' => $courseId, 'userId' => $userId);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Classroom_Empty");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Classroom_Empty");
   }
 
   /**
@@ -839,13 +839,13 @@ class Google_Service_Classroom_CoursesTeachers_Resource extends Google_Service_R
    * address of the user * the string literal `"me"`, indicating the requesting
    * user
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Classroom_Teacher
+   * @return Appointments_Google_Service_Classroom_Teacher
    */
   public function get($courseId, $userId, $optParams = array())
   {
     $params = array('courseId' => $courseId, 'userId' => $userId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Classroom_Teacher");
+    return $this->call('get', array($params), "Appointments_Google_Service_Classroom_Teacher");
   }
 
   /**
@@ -864,13 +864,13 @@ class Google_Service_Classroom_CoursesTeachers_Resource extends Google_Service_R
    * call, indicating that the subsequent page of results should be returned. The
    * list request must be otherwise identical to the one that resulted in this
    * token.
-   * @return Google_Service_Classroom_ListTeachersResponse
+   * @return Appointments_Google_Service_Classroom_ListTeachersResponse
    */
   public function listCoursesTeachers($courseId, $optParams = array())
   {
     $params = array('courseId' => $courseId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Classroom_ListTeachersResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Classroom_ListTeachersResponse");
   }
 }
 
@@ -878,11 +878,11 @@ class Google_Service_Classroom_CoursesTeachers_Resource extends Google_Service_R
  * The "invitations" collection of methods.
  * Typical usage is:
  *  <code>
- *   $classroomService = new Google_Service_Classroom(...);
+ *   $classroomService = new Appointments_Google_Service_Classroom(...);
  *   $invitations = $classroomService->invitations;
  *  </code>
  */
-class Google_Service_Classroom_Invitations_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Classroom_Invitations_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -898,13 +898,13 @@ class Google_Service_Classroom_Invitations_Resource extends Google_Service_Resou
    *
    * @param string $id Identifier of the invitation to accept.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Classroom_Empty
+   * @return Appointments_Google_Service_Classroom_Empty
    */
   public function accept($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('accept', array($params), "Google_Service_Classroom_Empty");
+    return $this->call('accept', array($params), "Appointments_Google_Service_Classroom_Empty");
   }
 
   /**
@@ -918,15 +918,15 @@ class Google_Service_Classroom_Invitations_Resource extends Google_Service_Resou
    * `ALREADY_EXISTS` if an invitation for the specified user and course already
    * exists. (invitations.create)
    *
-   * @param Google_Invitation $postBody
+   * @param Appointments_Google_Invitation $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Classroom_Invitation
+   * @return Appointments_Google_Service_Classroom_Invitation
    */
-  public function create(Google_Service_Classroom_Invitation $postBody, $optParams = array())
+  public function create(Appointments_Google_Service_Classroom_Invitation $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_Classroom_Invitation");
+    return $this->call('create', array($params), "Appointments_Google_Service_Classroom_Invitation");
   }
 
   /**
@@ -937,13 +937,13 @@ class Google_Service_Classroom_Invitations_Resource extends Google_Service_Resou
    *
    * @param string $id Identifier of the invitation to delete.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Classroom_Empty
+   * @return Appointments_Google_Service_Classroom_Empty
    */
   public function delete($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_Classroom_Empty");
+    return $this->call('delete', array($params), "Appointments_Google_Service_Classroom_Empty");
   }
 
   /**
@@ -954,13 +954,13 @@ class Google_Service_Classroom_Invitations_Resource extends Google_Service_Resou
    *
    * @param string $id Identifier of the invitation to return.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Classroom_Invitation
+   * @return Appointments_Google_Service_Classroom_Invitation
    */
   public function get($id, $optParams = array())
   {
     $params = array('id' => $id);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Classroom_Invitation");
+    return $this->call('get', array($params), "Appointments_Google_Service_Classroom_Invitation");
   }
 
   /**
@@ -984,13 +984,13 @@ class Google_Service_Classroom_Invitations_Resource extends Google_Service_Resou
    * call, indicating that the subsequent page of results should be returned. The
    * list request must be otherwise identical to the one that resulted in this
    * token.
-   * @return Google_Service_Classroom_ListInvitationsResponse
+   * @return Appointments_Google_Service_Classroom_ListInvitationsResponse
    */
   public function listInvitations($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Classroom_ListInvitationsResponse");
+    return $this->call('list', array($params), "Appointments_Google_Service_Classroom_ListInvitationsResponse");
   }
 }
 
@@ -998,11 +998,11 @@ class Google_Service_Classroom_Invitations_Resource extends Google_Service_Resou
  * The "userProfiles" collection of methods.
  * Typical usage is:
  *  <code>
- *   $classroomService = new Google_Service_Classroom(...);
+ *   $classroomService = new Appointments_Google_Service_Classroom(...);
  *   $userProfiles = $classroomService->userProfiles;
  *  </code>
  */
-class Google_Service_Classroom_UserProfiles_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Classroom_UserProfiles_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1016,20 +1016,20 @@ class Google_Service_Classroom_UserProfiles_Resource extends Google_Service_Reso
    * address of the user * the string literal `"me"`, indicating the requesting
    * user
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Classroom_UserProfile
+   * @return Appointments_Google_Service_Classroom_UserProfile
    */
   public function get($userId, $optParams = array())
   {
     $params = array('userId' => $userId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Classroom_UserProfile");
+    return $this->call('get', array($params), "Appointments_Google_Service_Classroom_UserProfile");
   }
 }
 
 
 
 
-class Google_Service_Classroom_Course extends Google_Model
+class Appointments_Google_Service_Classroom_Course extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1145,7 +1145,7 @@ class Google_Service_Classroom_Course extends Google_Model
   }
 }
 
-class Google_Service_Classroom_CourseAlias extends Google_Model
+class Appointments_Google_Service_Classroom_CourseAlias extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1162,11 +1162,11 @@ class Google_Service_Classroom_CourseAlias extends Google_Model
   }
 }
 
-class Google_Service_Classroom_Empty extends Google_Model
+class Appointments_Google_Service_Classroom_Empty extends Appointments_Google_Model
 {
 }
 
-class Google_Service_Classroom_GlobalPermission extends Google_Model
+class Appointments_Google_Service_Classroom_GlobalPermission extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1183,7 +1183,7 @@ class Google_Service_Classroom_GlobalPermission extends Google_Model
   }
 }
 
-class Google_Service_Classroom_Invitation extends Google_Model
+class Appointments_Google_Service_Classroom_Invitation extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1227,12 +1227,12 @@ class Google_Service_Classroom_Invitation extends Google_Model
   }
 }
 
-class Google_Service_Classroom_ListCourseAliasesResponse extends Google_Collection
+class Appointments_Google_Service_Classroom_ListCourseAliasesResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'aliases';
   protected $internal_gapi_mappings = array(
   );
-  protected $aliasesType = 'Google_Service_Classroom_CourseAlias';
+  protected $aliasesType = 'Appointments_Google_Service_Classroom_CourseAlias';
   protected $aliasesDataType = 'array';
   public $nextPageToken;
 
@@ -1255,12 +1255,12 @@ class Google_Service_Classroom_ListCourseAliasesResponse extends Google_Collecti
   }
 }
 
-class Google_Service_Classroom_ListCoursesResponse extends Google_Collection
+class Appointments_Google_Service_Classroom_ListCoursesResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'courses';
   protected $internal_gapi_mappings = array(
   );
-  protected $coursesType = 'Google_Service_Classroom_Course';
+  protected $coursesType = 'Appointments_Google_Service_Classroom_Course';
   protected $coursesDataType = 'array';
   public $nextPageToken;
 
@@ -1283,12 +1283,12 @@ class Google_Service_Classroom_ListCoursesResponse extends Google_Collection
   }
 }
 
-class Google_Service_Classroom_ListInvitationsResponse extends Google_Collection
+class Appointments_Google_Service_Classroom_ListInvitationsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'invitations';
   protected $internal_gapi_mappings = array(
   );
-  protected $invitationsType = 'Google_Service_Classroom_Invitation';
+  protected $invitationsType = 'Appointments_Google_Service_Classroom_Invitation';
   protected $invitationsDataType = 'array';
   public $nextPageToken;
 
@@ -1311,13 +1311,13 @@ class Google_Service_Classroom_ListInvitationsResponse extends Google_Collection
   }
 }
 
-class Google_Service_Classroom_ListStudentsResponse extends Google_Collection
+class Appointments_Google_Service_Classroom_ListStudentsResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'students';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $studentsType = 'Google_Service_Classroom_Student';
+  protected $studentsType = 'Appointments_Google_Service_Classroom_Student';
   protected $studentsDataType = 'array';
 
 
@@ -1339,13 +1339,13 @@ class Google_Service_Classroom_ListStudentsResponse extends Google_Collection
   }
 }
 
-class Google_Service_Classroom_ListTeachersResponse extends Google_Collection
+class Appointments_Google_Service_Classroom_ListTeachersResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'teachers';
   protected $internal_gapi_mappings = array(
   );
   public $nextPageToken;
-  protected $teachersType = 'Google_Service_Classroom_Teacher';
+  protected $teachersType = 'Appointments_Google_Service_Classroom_Teacher';
   protected $teachersDataType = 'array';
 
 
@@ -1367,7 +1367,7 @@ class Google_Service_Classroom_ListTeachersResponse extends Google_Collection
   }
 }
 
-class Google_Service_Classroom_Name extends Google_Model
+class Appointments_Google_Service_Classroom_Name extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1402,12 +1402,12 @@ class Google_Service_Classroom_Name extends Google_Model
   }
 }
 
-class Google_Service_Classroom_Student extends Google_Model
+class Appointments_Google_Service_Classroom_Student extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $courseId;
-  protected $profileType = 'Google_Service_Classroom_UserProfile';
+  protected $profileType = 'Appointments_Google_Service_Classroom_UserProfile';
   protected $profileDataType = '';
   public $userId;
 
@@ -1420,7 +1420,7 @@ class Google_Service_Classroom_Student extends Google_Model
   {
     return $this->courseId;
   }
-  public function setProfile(Google_Service_Classroom_UserProfile $profile)
+  public function setProfile(Appointments_Google_Service_Classroom_UserProfile $profile)
   {
     $this->profile = $profile;
   }
@@ -1438,12 +1438,12 @@ class Google_Service_Classroom_Student extends Google_Model
   }
 }
 
-class Google_Service_Classroom_Teacher extends Google_Model
+class Appointments_Google_Service_Classroom_Teacher extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $courseId;
-  protected $profileType = 'Google_Service_Classroom_UserProfile';
+  protected $profileType = 'Appointments_Google_Service_Classroom_UserProfile';
   protected $profileDataType = '';
   public $userId;
 
@@ -1456,7 +1456,7 @@ class Google_Service_Classroom_Teacher extends Google_Model
   {
     return $this->courseId;
   }
-  public function setProfile(Google_Service_Classroom_UserProfile $profile)
+  public function setProfile(Appointments_Google_Service_Classroom_UserProfile $profile)
   {
     $this->profile = $profile;
   }
@@ -1474,16 +1474,16 @@ class Google_Service_Classroom_Teacher extends Google_Model
   }
 }
 
-class Google_Service_Classroom_UserProfile extends Google_Collection
+class Appointments_Google_Service_Classroom_UserProfile extends Appointments_Google_Collection
 {
   protected $collection_key = 'permissions';
   protected $internal_gapi_mappings = array(
   );
   public $emailAddress;
   public $id;
-  protected $nameType = 'Google_Service_Classroom_Name';
+  protected $nameType = 'Appointments_Google_Service_Classroom_Name';
   protected $nameDataType = '';
-  protected $permissionsType = 'Google_Service_Classroom_GlobalPermission';
+  protected $permissionsType = 'Appointments_Google_Service_Classroom_GlobalPermission';
   protected $permissionsDataType = 'array';
   public $photoUrl;
 
@@ -1504,7 +1504,7 @@ class Google_Service_Classroom_UserProfile extends Google_Collection
   {
     return $this->id;
   }
-  public function setName(Google_Service_Classroom_Name $name)
+  public function setName(Appointments_Google_Service_Classroom_Name $name)
   {
     $this->name = $name;
   }

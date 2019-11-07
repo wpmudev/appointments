@@ -26,7 +26,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Fusiontables extends Google_Service
+class Appointments_Google_Service_Fusiontables extends Appointments_Google_Service
 {
   /** Manage your Fusion Tables. */
   const FUSIONTABLES =
@@ -46,9 +46,9 @@ class Google_Service_Fusiontables extends Google_Service
   /**
    * Constructs the internal representation of the Fusiontables service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -56,7 +56,7 @@ class Google_Service_Fusiontables extends Google_Service
     $this->version = 'v2';
     $this->serviceName = 'fusiontables';
 
-    $this->column = new Google_Service_Fusiontables_Column_Resource(
+    $this->column = new Appointments_Google_Service_Fusiontables_Column_Resource(
         $this,
         $this->serviceName,
         'column',
@@ -154,7 +154,7 @@ class Google_Service_Fusiontables extends Google_Service
           )
         )
     );
-    $this->query = new Google_Service_Fusiontables_Query_Resource(
+    $this->query = new Appointments_Google_Service_Fusiontables_Query_Resource(
         $this,
         $this->serviceName,
         'query',
@@ -200,7 +200,7 @@ class Google_Service_Fusiontables extends Google_Service
           )
         )
     );
-    $this->style = new Google_Service_Fusiontables_Style_Resource(
+    $this->style = new Appointments_Google_Service_Fusiontables_Style_Resource(
         $this,
         $this->serviceName,
         'style',
@@ -298,7 +298,7 @@ class Google_Service_Fusiontables extends Google_Service
           )
         )
     );
-    $this->table = new Google_Service_Fusiontables_Table_Resource(
+    $this->table = new Appointments_Google_Service_Fusiontables_Table_Resource(
         $this,
         $this->serviceName,
         'table',
@@ -465,7 +465,7 @@ class Google_Service_Fusiontables extends Google_Service
           )
         )
     );
-    $this->task = new Google_Service_Fusiontables_Task_Resource(
+    $this->task = new Appointments_Google_Service_Fusiontables_Task_Resource(
         $this,
         $this->serviceName,
         'task',
@@ -527,7 +527,7 @@ class Google_Service_Fusiontables extends Google_Service
           )
         )
     );
-    $this->template = new Google_Service_Fusiontables_Template_Resource(
+    $this->template = new Appointments_Google_Service_Fusiontables_Template_Resource(
         $this,
         $this->serviceName,
         'template',
@@ -633,11 +633,11 @@ class Google_Service_Fusiontables extends Google_Service
  * The "column" collection of methods.
  * Typical usage is:
  *  <code>
- *   $fusiontablesService = new Google_Service_Fusiontables(...);
+ *   $fusiontablesService = new Appointments_Google_Service_Fusiontables(...);
  *   $column = $fusiontablesService->column;
  *  </code>
  */
-class Google_Service_Fusiontables_Column_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Fusiontables_Column_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -661,28 +661,28 @@ class Google_Service_Fusiontables_Column_Resource extends Google_Service_Resourc
    * @param string $columnId Name or identifier for the column that is being
    * requested.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Fusiontables_Column
+   * @return Appointments_Google_Service_Fusiontables_Column
    */
   public function get($tableId, $columnId, $optParams = array())
   {
     $params = array('tableId' => $tableId, 'columnId' => $columnId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Fusiontables_Column");
+    return $this->call('get', array($params), "Appointments_Google_Service_Fusiontables_Column");
   }
 
   /**
    * Adds a new column to the table. (column.insert)
    *
    * @param string $tableId Table for which a new column is being added.
-   * @param Google_Column $postBody
+   * @param Appointments_Google_Column $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Fusiontables_Column
+   * @return Appointments_Google_Service_Fusiontables_Column
    */
-  public function insert($tableId, Google_Service_Fusiontables_Column $postBody, $optParams = array())
+  public function insert($tableId, Appointments_Google_Service_Fusiontables_Column $postBody, $optParams = array())
   {
     $params = array('tableId' => $tableId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Fusiontables_Column");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Fusiontables_Column");
   }
 
   /**
@@ -695,13 +695,13 @@ class Google_Service_Fusiontables_Column_Resource extends Google_Service_Resourc
    * 5.
    * @opt_param string pageToken Continuation token specifying which result page
    * to return.
-   * @return Google_Service_Fusiontables_ColumnList
+   * @return Appointments_Google_Service_Fusiontables_ColumnList
    */
   public function listColumn($tableId, $optParams = array())
   {
     $params = array('tableId' => $tableId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Fusiontables_ColumnList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Fusiontables_ColumnList");
   }
 
   /**
@@ -711,15 +711,15 @@ class Google_Service_Fusiontables_Column_Resource extends Google_Service_Resourc
    * @param string $tableId Table for which the column is being updated.
    * @param string $columnId Name or identifier for the column that is being
    * updated.
-   * @param Google_Column $postBody
+   * @param Appointments_Google_Column $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Fusiontables_Column
+   * @return Appointments_Google_Service_Fusiontables_Column
    */
-  public function patch($tableId, $columnId, Google_Service_Fusiontables_Column $postBody, $optParams = array())
+  public function patch($tableId, $columnId, Appointments_Google_Service_Fusiontables_Column $postBody, $optParams = array())
   {
     $params = array('tableId' => $tableId, 'columnId' => $columnId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Fusiontables_Column");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Fusiontables_Column");
   }
 
   /**
@@ -728,15 +728,15 @@ class Google_Service_Fusiontables_Column_Resource extends Google_Service_Resourc
    * @param string $tableId Table for which the column is being updated.
    * @param string $columnId Name or identifier for the column that is being
    * updated.
-   * @param Google_Column $postBody
+   * @param Appointments_Google_Column $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Fusiontables_Column
+   * @return Appointments_Google_Service_Fusiontables_Column
    */
-  public function update($tableId, $columnId, Google_Service_Fusiontables_Column $postBody, $optParams = array())
+  public function update($tableId, $columnId, Appointments_Google_Service_Fusiontables_Column $postBody, $optParams = array())
   {
     $params = array('tableId' => $tableId, 'columnId' => $columnId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Fusiontables_Column");
+    return $this->call('update', array($params), "Appointments_Google_Service_Fusiontables_Column");
   }
 }
 
@@ -744,11 +744,11 @@ class Google_Service_Fusiontables_Column_Resource extends Google_Service_Resourc
  * The "query" collection of methods.
  * Typical usage is:
  *  <code>
- *   $fusiontablesService = new Google_Service_Fusiontables(...);
+ *   $fusiontablesService = new Appointments_Google_Service_Fusiontables(...);
  *   $query = $fusiontablesService->query;
  *  </code>
  */
-class Google_Service_Fusiontables_Query_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Fusiontables_Query_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -764,13 +764,13 @@ class Google_Service_Fusiontables_Query_Resource extends Google_Service_Resource
    * @opt_param bool typed Whether typed values are returned in the (JSON)
    * response: numbers for numeric values and parsed geometries for KML values.
    * Default is true.
-   * @return Google_Service_Fusiontables_Sqlresponse
+   * @return Appointments_Google_Service_Fusiontables_Sqlresponse
    */
   public function sql($sql, $optParams = array())
   {
     $params = array('sql' => $sql);
     $params = array_merge($params, $optParams);
-    return $this->call('sql', array($params), "Google_Service_Fusiontables_Sqlresponse");
+    return $this->call('sql', array($params), "Appointments_Google_Service_Fusiontables_Sqlresponse");
   }
 
   /**
@@ -786,13 +786,13 @@ class Google_Service_Fusiontables_Query_Resource extends Google_Service_Resource
    * @opt_param bool typed Whether typed values are returned in the (JSON)
    * response: numbers for numeric values and parsed geometries for KML values.
    * Default is true.
-   * @return Google_Service_Fusiontables_Sqlresponse
+   * @return Appointments_Google_Service_Fusiontables_Sqlresponse
    */
   public function sqlGet($sql, $optParams = array())
   {
     $params = array('sql' => $sql);
     $params = array_merge($params, $optParams);
-    return $this->call('sqlGet', array($params), "Google_Service_Fusiontables_Sqlresponse");
+    return $this->call('sqlGet', array($params), "Appointments_Google_Service_Fusiontables_Sqlresponse");
   }
 }
 
@@ -800,11 +800,11 @@ class Google_Service_Fusiontables_Query_Resource extends Google_Service_Resource
  * The "style" collection of methods.
  * Typical usage is:
  *  <code>
- *   $fusiontablesService = new Google_Service_Fusiontables(...);
+ *   $fusiontablesService = new Appointments_Google_Service_Fusiontables(...);
  *   $style = $fusiontablesService->style;
  *  </code>
  */
-class Google_Service_Fusiontables_Style_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Fusiontables_Style_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -827,28 +827,28 @@ class Google_Service_Fusiontables_Style_Resource extends Google_Service_Resource
    * @param string $tableId Table to which the requested style belongs
    * @param int $styleId Identifier (integer) for a specific style in a table
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Fusiontables_StyleSetting
+   * @return Appointments_Google_Service_Fusiontables_StyleSetting
    */
   public function get($tableId, $styleId, $optParams = array())
   {
     $params = array('tableId' => $tableId, 'styleId' => $styleId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Fusiontables_StyleSetting");
+    return $this->call('get', array($params), "Appointments_Google_Service_Fusiontables_StyleSetting");
   }
 
   /**
    * Adds a new style for the table. (style.insert)
    *
    * @param string $tableId Table for which a new style is being added
-   * @param Google_StyleSetting $postBody
+   * @param Appointments_Google_StyleSetting $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Fusiontables_StyleSetting
+   * @return Appointments_Google_Service_Fusiontables_StyleSetting
    */
-  public function insert($tableId, Google_Service_Fusiontables_StyleSetting $postBody, $optParams = array())
+  public function insert($tableId, Appointments_Google_Service_Fusiontables_StyleSetting $postBody, $optParams = array())
   {
     $params = array('tableId' => $tableId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Fusiontables_StyleSetting");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Fusiontables_StyleSetting");
   }
 
   /**
@@ -861,13 +861,13 @@ class Google_Service_Fusiontables_Style_Resource extends Google_Service_Resource
    * Default is 5.
    * @opt_param string pageToken Continuation token specifying which result page
    * to return. Optional.
-   * @return Google_Service_Fusiontables_StyleSettingList
+   * @return Appointments_Google_Service_Fusiontables_StyleSettingList
    */
   public function listStyle($tableId, $optParams = array())
   {
     $params = array('tableId' => $tableId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Fusiontables_StyleSettingList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Fusiontables_StyleSettingList");
   }
 
   /**
@@ -876,15 +876,15 @@ class Google_Service_Fusiontables_Style_Resource extends Google_Service_Resource
    *
    * @param string $tableId Table whose style is being updated.
    * @param int $styleId Identifier (within a table) for the style being updated.
-   * @param Google_StyleSetting $postBody
+   * @param Appointments_Google_StyleSetting $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Fusiontables_StyleSetting
+   * @return Appointments_Google_Service_Fusiontables_StyleSetting
    */
-  public function patch($tableId, $styleId, Google_Service_Fusiontables_StyleSetting $postBody, $optParams = array())
+  public function patch($tableId, $styleId, Appointments_Google_Service_Fusiontables_StyleSetting $postBody, $optParams = array())
   {
     $params = array('tableId' => $tableId, 'styleId' => $styleId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Fusiontables_StyleSetting");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Fusiontables_StyleSetting");
   }
 
   /**
@@ -892,15 +892,15 @@ class Google_Service_Fusiontables_Style_Resource extends Google_Service_Resource
    *
    * @param string $tableId Table whose style is being updated.
    * @param int $styleId Identifier (within a table) for the style being updated.
-   * @param Google_StyleSetting $postBody
+   * @param Appointments_Google_StyleSetting $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Fusiontables_StyleSetting
+   * @return Appointments_Google_Service_Fusiontables_StyleSetting
    */
-  public function update($tableId, $styleId, Google_Service_Fusiontables_StyleSetting $postBody, $optParams = array())
+  public function update($tableId, $styleId, Appointments_Google_Service_Fusiontables_StyleSetting $postBody, $optParams = array())
   {
     $params = array('tableId' => $tableId, 'styleId' => $styleId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Fusiontables_StyleSetting");
+    return $this->call('update', array($params), "Appointments_Google_Service_Fusiontables_StyleSetting");
   }
 }
 
@@ -908,11 +908,11 @@ class Google_Service_Fusiontables_Style_Resource extends Google_Service_Resource
  * The "table" collection of methods.
  * Typical usage is:
  *  <code>
- *   $fusiontablesService = new Google_Service_Fusiontables(...);
+ *   $fusiontablesService = new Appointments_Google_Service_Fusiontables(...);
  *   $table = $fusiontablesService->table;
  *  </code>
  */
-class Google_Service_Fusiontables_Table_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Fusiontables_Table_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -923,13 +923,13 @@ class Google_Service_Fusiontables_Table_Resource extends Google_Service_Resource
    *
    * @opt_param bool copyPresentation Whether to also copy tabs, styles, and
    * templates. Default is false.
-   * @return Google_Service_Fusiontables_Table
+   * @return Appointments_Google_Service_Fusiontables_Table
    */
   public function copy($tableId, $optParams = array())
   {
     $params = array('tableId' => $tableId);
     $params = array_merge($params, $optParams);
-    return $this->call('copy', array($params), "Google_Service_Fusiontables_Table");
+    return $this->call('copy', array($params), "Appointments_Google_Service_Fusiontables_Table");
   }
 
   /**
@@ -950,13 +950,13 @@ class Google_Service_Fusiontables_Table_Resource extends Google_Service_Resource
    *
    * @param string $tableId Identifier for the table being requested.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Fusiontables_Table
+   * @return Appointments_Google_Service_Fusiontables_Table
    */
   public function get($tableId, $optParams = array())
   {
     $params = array('tableId' => $tableId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Fusiontables_Table");
+    return $this->call('get', array($params), "Appointments_Google_Service_Fusiontables_Table");
   }
 
   /**
@@ -978,13 +978,13 @@ class Google_Service_Fusiontables_Table_Resource extends Google_Service_Resource
    * empty values. Default is true.
    * @opt_param int startLine The index of the first line from which to start
    * importing, inclusive. Default is 0.
-   * @return Google_Service_Fusiontables_Import
+   * @return Appointments_Google_Service_Fusiontables_Import
    */
   public function importRows($tableId, $optParams = array())
   {
     $params = array('tableId' => $tableId);
     $params = array_merge($params, $optParams);
-    return $this->call('importRows', array($params), "Google_Service_Fusiontables_Import");
+    return $this->call('importRows', array($params), "Appointments_Google_Service_Fusiontables_Import");
   }
 
   /**
@@ -997,27 +997,27 @@ class Google_Service_Fusiontables_Table_Resource extends Google_Service_Resource
    * can only consist of a single character. Default is ,.
    * @opt_param string encoding The encoding of the content. Default is UTF-8. Use
    * auto-detect if you are unsure of the encoding.
-   * @return Google_Service_Fusiontables_Table
+   * @return Appointments_Google_Service_Fusiontables_Table
    */
   public function importTable($name, $optParams = array())
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('importTable', array($params), "Google_Service_Fusiontables_Table");
+    return $this->call('importTable', array($params), "Appointments_Google_Service_Fusiontables_Table");
   }
 
   /**
    * Creates a new table. (table.insert)
    *
-   * @param Google_Table $postBody
+   * @param Appointments_Google_Table $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Fusiontables_Table
+   * @return Appointments_Google_Service_Fusiontables_Table
    */
-  public function insert(Google_Service_Fusiontables_Table $postBody, $optParams = array())
+  public function insert(Appointments_Google_Service_Fusiontables_Table $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Fusiontables_Table");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Fusiontables_Table");
   }
 
   /**
@@ -1029,13 +1029,13 @@ class Google_Service_Fusiontables_Table_Resource extends Google_Service_Resource
    * 5.
    * @opt_param string pageToken Continuation token specifying which result page
    * to return.
-   * @return Google_Service_Fusiontables_TableList
+   * @return Appointments_Google_Service_Fusiontables_TableList
    */
   public function listTable($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Fusiontables_TableList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Fusiontables_TableList");
   }
 
   /**
@@ -1044,19 +1044,19 @@ class Google_Service_Fusiontables_Table_Resource extends Google_Service_Resource
    * semantics. (table.patch)
    *
    * @param string $tableId ID of the table that is being updated.
-   * @param Google_Table $postBody
+   * @param Appointments_Google_Table $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param bool replaceViewDefinition Whether the view definition is also
    * updated. The specified view definition replaces the existing one. Only a view
    * can be updated with a new definition.
-   * @return Google_Service_Fusiontables_Table
+   * @return Appointments_Google_Service_Fusiontables_Table
    */
-  public function patch($tableId, Google_Service_Fusiontables_Table $postBody, $optParams = array())
+  public function patch($tableId, Appointments_Google_Service_Fusiontables_Table $postBody, $optParams = array())
   {
     $params = array('tableId' => $tableId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Fusiontables_Table");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Fusiontables_Table");
   }
 
   /**
@@ -1080,13 +1080,13 @@ class Google_Service_Fusiontables_Table_Resource extends Google_Service_Resource
    * will be padded with empty values. Default is true.
    * @opt_param int startLine The index of the first line from which to start
    * importing, inclusive. Default is 0.
-   * @return Google_Service_Fusiontables_Task
+   * @return Appointments_Google_Service_Fusiontables_Task
    */
   public function replaceRows($tableId, $optParams = array())
   {
     $params = array('tableId' => $tableId);
     $params = array_merge($params, $optParams);
-    return $this->call('replaceRows', array($params), "Google_Service_Fusiontables_Task");
+    return $this->call('replaceRows', array($params), "Appointments_Google_Service_Fusiontables_Task");
   }
 
   /**
@@ -1094,19 +1094,19 @@ class Google_Service_Fusiontables_Table_Resource extends Google_Service_Resource
    * description, and attribution will be updated. (table.update)
    *
    * @param string $tableId ID of the table that is being updated.
-   * @param Google_Table $postBody
+   * @param Appointments_Google_Table $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param bool replaceViewDefinition Whether the view definition is also
    * updated. The specified view definition replaces the existing one. Only a view
    * can be updated with a new definition.
-   * @return Google_Service_Fusiontables_Table
+   * @return Appointments_Google_Service_Fusiontables_Table
    */
-  public function update($tableId, Google_Service_Fusiontables_Table $postBody, $optParams = array())
+  public function update($tableId, Appointments_Google_Service_Fusiontables_Table $postBody, $optParams = array())
   {
     $params = array('tableId' => $tableId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Fusiontables_Table");
+    return $this->call('update', array($params), "Appointments_Google_Service_Fusiontables_Table");
   }
 }
 
@@ -1114,11 +1114,11 @@ class Google_Service_Fusiontables_Table_Resource extends Google_Service_Resource
  * The "task" collection of methods.
  * Typical usage is:
  *  <code>
- *   $fusiontablesService = new Google_Service_Fusiontables(...);
+ *   $fusiontablesService = new Appointments_Google_Service_Fusiontables(...);
  *   $task = $fusiontablesService->task;
  *  </code>
  */
-class Google_Service_Fusiontables_Task_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Fusiontables_Task_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1142,13 +1142,13 @@ class Google_Service_Fusiontables_Task_Resource extends Google_Service_Resource
    * @param string $tableId Table to which the task belongs.
    * @param string $taskId The identifier of the task to get.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Fusiontables_Task
+   * @return Appointments_Google_Service_Fusiontables_Task
    */
   public function get($tableId, $taskId, $optParams = array())
   {
     $params = array('tableId' => $tableId, 'taskId' => $taskId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Fusiontables_Task");
+    return $this->call('get', array($params), "Appointments_Google_Service_Fusiontables_Task");
   }
 
   /**
@@ -1162,13 +1162,13 @@ class Google_Service_Fusiontables_Task_Resource extends Google_Service_Resource
    * to return.
    * @opt_param string startIndex Index of the first result returned in the
    * current page.
-   * @return Google_Service_Fusiontables_TaskList
+   * @return Appointments_Google_Service_Fusiontables_TaskList
    */
   public function listTask($tableId, $optParams = array())
   {
     $params = array('tableId' => $tableId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Fusiontables_TaskList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Fusiontables_TaskList");
   }
 }
 
@@ -1176,11 +1176,11 @@ class Google_Service_Fusiontables_Task_Resource extends Google_Service_Resource
  * The "template" collection of methods.
  * Typical usage is:
  *  <code>
- *   $fusiontablesService = new Google_Service_Fusiontables(...);
+ *   $fusiontablesService = new Appointments_Google_Service_Fusiontables(...);
  *   $template = $fusiontablesService->template;
  *  </code>
  */
-class Google_Service_Fusiontables_Template_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Fusiontables_Template_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -1203,28 +1203,28 @@ class Google_Service_Fusiontables_Template_Resource extends Google_Service_Resou
    * @param string $tableId Table to which the template belongs
    * @param int $templateId Identifier for the template that is being requested
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Fusiontables_Template
+   * @return Appointments_Google_Service_Fusiontables_Template
    */
   public function get($tableId, $templateId, $optParams = array())
   {
     $params = array('tableId' => $tableId, 'templateId' => $templateId);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Fusiontables_Template");
+    return $this->call('get', array($params), "Appointments_Google_Service_Fusiontables_Template");
   }
 
   /**
    * Creates a new template for the table. (template.insert)
    *
    * @param string $tableId Table for which a new template is being created
-   * @param Google_Template $postBody
+   * @param Appointments_Google_Template $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Fusiontables_Template
+   * @return Appointments_Google_Service_Fusiontables_Template
    */
-  public function insert($tableId, Google_Service_Fusiontables_Template $postBody, $optParams = array())
+  public function insert($tableId, Appointments_Google_Service_Fusiontables_Template $postBody, $optParams = array())
   {
     $params = array('tableId' => $tableId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Fusiontables_Template");
+    return $this->call('insert', array($params), "Appointments_Google_Service_Fusiontables_Template");
   }
 
   /**
@@ -1238,13 +1238,13 @@ class Google_Service_Fusiontables_Template_Resource extends Google_Service_Resou
    * Default is 5.
    * @opt_param string pageToken Continuation token specifying which results page
    * to return. Optional.
-   * @return Google_Service_Fusiontables_TemplateList
+   * @return Appointments_Google_Service_Fusiontables_TemplateList
    */
   public function listTemplate($tableId, $optParams = array())
   {
     $params = array('tableId' => $tableId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Fusiontables_TemplateList");
+    return $this->call('list', array($params), "Appointments_Google_Service_Fusiontables_TemplateList");
   }
 
   /**
@@ -1253,15 +1253,15 @@ class Google_Service_Fusiontables_Template_Resource extends Google_Service_Resou
    *
    * @param string $tableId Table to which the updated template belongs
    * @param int $templateId Identifier for the template that is being updated
-   * @param Google_Template $postBody
+   * @param Appointments_Google_Template $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Fusiontables_Template
+   * @return Appointments_Google_Service_Fusiontables_Template
    */
-  public function patch($tableId, $templateId, Google_Service_Fusiontables_Template $postBody, $optParams = array())
+  public function patch($tableId, $templateId, Appointments_Google_Service_Fusiontables_Template $postBody, $optParams = array())
   {
     $params = array('tableId' => $tableId, 'templateId' => $templateId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_Fusiontables_Template");
+    return $this->call('patch', array($params), "Appointments_Google_Service_Fusiontables_Template");
   }
 
   /**
@@ -1269,22 +1269,22 @@ class Google_Service_Fusiontables_Template_Resource extends Google_Service_Resou
    *
    * @param string $tableId Table to which the updated template belongs
    * @param int $templateId Identifier for the template that is being updated
-   * @param Google_Template $postBody
+   * @param Appointments_Google_Template $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Fusiontables_Template
+   * @return Appointments_Google_Service_Fusiontables_Template
    */
-  public function update($tableId, $templateId, Google_Service_Fusiontables_Template $postBody, $optParams = array())
+  public function update($tableId, $templateId, Appointments_Google_Service_Fusiontables_Template $postBody, $optParams = array())
   {
     $params = array('tableId' => $tableId, 'templateId' => $templateId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_Fusiontables_Template");
+    return $this->call('update', array($params), "Appointments_Google_Service_Fusiontables_Template");
   }
 }
 
 
 
 
-class Google_Service_Fusiontables_Bucket extends Google_Model
+class Appointments_Google_Service_Fusiontables_Bucket extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1346,12 +1346,12 @@ class Google_Service_Fusiontables_Bucket extends Google_Model
   }
 }
 
-class Google_Service_Fusiontables_Column extends Google_Collection
+class Appointments_Google_Service_Fusiontables_Column extends Appointments_Google_Collection
 {
   protected $collection_key = 'validValues';
   protected $internal_gapi_mappings = array(
   );
-  protected $baseColumnType = 'Google_Service_Fusiontables_ColumnBaseColumn';
+  protected $baseColumnType = 'Appointments_Google_Service_Fusiontables_ColumnBaseColumn';
   protected $baseColumnDataType = '';
   public $columnId;
   public $columnJsonSchema;
@@ -1366,7 +1366,7 @@ class Google_Service_Fusiontables_Column extends Google_Collection
   public $validateData;
 
 
-  public function setBaseColumn(Google_Service_Fusiontables_ColumnBaseColumn $baseColumn)
+  public function setBaseColumn(Appointments_Google_Service_Fusiontables_ColumnBaseColumn $baseColumn)
   {
     $this->baseColumn = $baseColumn;
   }
@@ -1464,7 +1464,7 @@ class Google_Service_Fusiontables_Column extends Google_Collection
   }
 }
 
-class Google_Service_Fusiontables_ColumnBaseColumn extends Google_Model
+class Appointments_Google_Service_Fusiontables_ColumnBaseColumn extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1490,12 +1490,12 @@ class Google_Service_Fusiontables_ColumnBaseColumn extends Google_Model
   }
 }
 
-class Google_Service_Fusiontables_ColumnList extends Google_Collection
+class Appointments_Google_Service_Fusiontables_ColumnList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_Fusiontables_Column';
+  protected $itemsType = 'Appointments_Google_Service_Fusiontables_Column';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -1536,7 +1536,7 @@ class Google_Service_Fusiontables_ColumnList extends Google_Collection
   }
 }
 
-class Google_Service_Fusiontables_Geometry extends Google_Collection
+class Appointments_Google_Service_Fusiontables_Geometry extends Appointments_Google_Collection
 {
   protected $collection_key = 'geometries';
   protected $internal_gapi_mappings = array(
@@ -1572,7 +1572,7 @@ class Google_Service_Fusiontables_Geometry extends Google_Collection
   }
 }
 
-class Google_Service_Fusiontables_Import extends Google_Model
+class Appointments_Google_Service_Fusiontables_Import extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1598,7 +1598,7 @@ class Google_Service_Fusiontables_Import extends Google_Model
   }
 }
 
-class Google_Service_Fusiontables_Line extends Google_Collection
+class Appointments_Google_Service_Fusiontables_Line extends Appointments_Google_Collection
 {
   protected $collection_key = 'coordinates';
   protected $internal_gapi_mappings = array(
@@ -1625,16 +1625,16 @@ class Google_Service_Fusiontables_Line extends Google_Collection
   }
 }
 
-class Google_Service_Fusiontables_LineStyle extends Google_Model
+class Appointments_Google_Service_Fusiontables_LineStyle extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $strokeColor;
-  protected $strokeColorStylerType = 'Google_Service_Fusiontables_StyleFunction';
+  protected $strokeColorStylerType = 'Appointments_Google_Service_Fusiontables_StyleFunction';
   protected $strokeColorStylerDataType = '';
   public $strokeOpacity;
   public $strokeWeight;
-  protected $strokeWeightStylerType = 'Google_Service_Fusiontables_StyleFunction';
+  protected $strokeWeightStylerType = 'Appointments_Google_Service_Fusiontables_StyleFunction';
   protected $strokeWeightStylerDataType = '';
 
 
@@ -1646,7 +1646,7 @@ class Google_Service_Fusiontables_LineStyle extends Google_Model
   {
     return $this->strokeColor;
   }
-  public function setStrokeColorStyler(Google_Service_Fusiontables_StyleFunction $strokeColorStyler)
+  public function setStrokeColorStyler(Appointments_Google_Service_Fusiontables_StyleFunction $strokeColorStyler)
   {
     $this->strokeColorStyler = $strokeColorStyler;
   }
@@ -1670,7 +1670,7 @@ class Google_Service_Fusiontables_LineStyle extends Google_Model
   {
     return $this->strokeWeight;
   }
-  public function setStrokeWeightStyler(Google_Service_Fusiontables_StyleFunction $strokeWeightStyler)
+  public function setStrokeWeightStyler(Appointments_Google_Service_Fusiontables_StyleFunction $strokeWeightStyler)
   {
     $this->strokeWeightStyler = $strokeWeightStyler;
   }
@@ -1680,7 +1680,7 @@ class Google_Service_Fusiontables_LineStyle extends Google_Model
   }
 }
 
-class Google_Service_Fusiontables_Point extends Google_Collection
+class Appointments_Google_Service_Fusiontables_Point extends Appointments_Google_Collection
 {
   protected $collection_key = 'coordinates';
   protected $internal_gapi_mappings = array(
@@ -1707,12 +1707,12 @@ class Google_Service_Fusiontables_Point extends Google_Collection
   }
 }
 
-class Google_Service_Fusiontables_PointStyle extends Google_Model
+class Appointments_Google_Service_Fusiontables_PointStyle extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $iconName;
-  protected $iconStylerType = 'Google_Service_Fusiontables_StyleFunction';
+  protected $iconStylerType = 'Appointments_Google_Service_Fusiontables_StyleFunction';
   protected $iconStylerDataType = '';
 
 
@@ -1724,7 +1724,7 @@ class Google_Service_Fusiontables_PointStyle extends Google_Model
   {
     return $this->iconName;
   }
-  public function setIconStyler(Google_Service_Fusiontables_StyleFunction $iconStyler)
+  public function setIconStyler(Appointments_Google_Service_Fusiontables_StyleFunction $iconStyler)
   {
     $this->iconStyler = $iconStyler;
   }
@@ -1734,7 +1734,7 @@ class Google_Service_Fusiontables_PointStyle extends Google_Model
   }
 }
 
-class Google_Service_Fusiontables_Polygon extends Google_Collection
+class Appointments_Google_Service_Fusiontables_Polygon extends Appointments_Google_Collection
 {
   protected $collection_key = 'coordinates';
   protected $internal_gapi_mappings = array(
@@ -1761,20 +1761,20 @@ class Google_Service_Fusiontables_Polygon extends Google_Collection
   }
 }
 
-class Google_Service_Fusiontables_PolygonStyle extends Google_Model
+class Appointments_Google_Service_Fusiontables_PolygonStyle extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $fillColor;
-  protected $fillColorStylerType = 'Google_Service_Fusiontables_StyleFunction';
+  protected $fillColorStylerType = 'Appointments_Google_Service_Fusiontables_StyleFunction';
   protected $fillColorStylerDataType = '';
   public $fillOpacity;
   public $strokeColor;
-  protected $strokeColorStylerType = 'Google_Service_Fusiontables_StyleFunction';
+  protected $strokeColorStylerType = 'Appointments_Google_Service_Fusiontables_StyleFunction';
   protected $strokeColorStylerDataType = '';
   public $strokeOpacity;
   public $strokeWeight;
-  protected $strokeWeightStylerType = 'Google_Service_Fusiontables_StyleFunction';
+  protected $strokeWeightStylerType = 'Appointments_Google_Service_Fusiontables_StyleFunction';
   protected $strokeWeightStylerDataType = '';
 
 
@@ -1786,7 +1786,7 @@ class Google_Service_Fusiontables_PolygonStyle extends Google_Model
   {
     return $this->fillColor;
   }
-  public function setFillColorStyler(Google_Service_Fusiontables_StyleFunction $fillColorStyler)
+  public function setFillColorStyler(Appointments_Google_Service_Fusiontables_StyleFunction $fillColorStyler)
   {
     $this->fillColorStyler = $fillColorStyler;
   }
@@ -1810,7 +1810,7 @@ class Google_Service_Fusiontables_PolygonStyle extends Google_Model
   {
     return $this->strokeColor;
   }
-  public function setStrokeColorStyler(Google_Service_Fusiontables_StyleFunction $strokeColorStyler)
+  public function setStrokeColorStyler(Appointments_Google_Service_Fusiontables_StyleFunction $strokeColorStyler)
   {
     $this->strokeColorStyler = $strokeColorStyler;
   }
@@ -1834,7 +1834,7 @@ class Google_Service_Fusiontables_PolygonStyle extends Google_Model
   {
     return $this->strokeWeight;
   }
-  public function setStrokeWeightStyler(Google_Service_Fusiontables_StyleFunction $strokeWeightStyler)
+  public function setStrokeWeightStyler(Appointments_Google_Service_Fusiontables_StyleFunction $strokeWeightStyler)
   {
     $this->strokeWeightStyler = $strokeWeightStyler;
   }
@@ -1844,7 +1844,7 @@ class Google_Service_Fusiontables_PolygonStyle extends Google_Model
   }
 }
 
-class Google_Service_Fusiontables_Sqlresponse extends Google_Collection
+class Appointments_Google_Service_Fusiontables_Sqlresponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'rows';
   protected $internal_gapi_mappings = array(
@@ -1880,15 +1880,15 @@ class Google_Service_Fusiontables_Sqlresponse extends Google_Collection
   }
 }
 
-class Google_Service_Fusiontables_StyleFunction extends Google_Collection
+class Appointments_Google_Service_Fusiontables_StyleFunction extends Appointments_Google_Collection
 {
   protected $collection_key = 'buckets';
   protected $internal_gapi_mappings = array(
   );
-  protected $bucketsType = 'Google_Service_Fusiontables_Bucket';
+  protected $bucketsType = 'Appointments_Google_Service_Fusiontables_Bucket';
   protected $bucketsDataType = 'array';
   public $columnName;
-  protected $gradientType = 'Google_Service_Fusiontables_StyleFunctionGradient';
+  protected $gradientType = 'Appointments_Google_Service_Fusiontables_StyleFunctionGradient';
   protected $gradientDataType = '';
   public $kind;
 
@@ -1909,7 +1909,7 @@ class Google_Service_Fusiontables_StyleFunction extends Google_Collection
   {
     return $this->columnName;
   }
-  public function setGradient(Google_Service_Fusiontables_StyleFunctionGradient $gradient)
+  public function setGradient(Appointments_Google_Service_Fusiontables_StyleFunctionGradient $gradient)
   {
     $this->gradient = $gradient;
   }
@@ -1927,12 +1927,12 @@ class Google_Service_Fusiontables_StyleFunction extends Google_Collection
   }
 }
 
-class Google_Service_Fusiontables_StyleFunctionGradient extends Google_Collection
+class Appointments_Google_Service_Fusiontables_StyleFunctionGradient extends Appointments_Google_Collection
 {
   protected $collection_key = 'colors';
   protected $internal_gapi_mappings = array(
   );
-  protected $colorsType = 'Google_Service_Fusiontables_StyleFunctionGradientColors';
+  protected $colorsType = 'Appointments_Google_Service_Fusiontables_StyleFunctionGradientColors';
   protected $colorsDataType = 'array';
   public $max;
   public $min;
@@ -1964,7 +1964,7 @@ class Google_Service_Fusiontables_StyleFunctionGradient extends Google_Collectio
   }
 }
 
-class Google_Service_Fusiontables_StyleFunctionGradientColors extends Google_Model
+class Appointments_Google_Service_Fusiontables_StyleFunctionGradientColors extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1990,17 +1990,17 @@ class Google_Service_Fusiontables_StyleFunctionGradientColors extends Google_Mod
   }
 }
 
-class Google_Service_Fusiontables_StyleSetting extends Google_Model
+class Appointments_Google_Service_Fusiontables_StyleSetting extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $markerOptionsType = 'Google_Service_Fusiontables_PointStyle';
+  protected $markerOptionsType = 'Appointments_Google_Service_Fusiontables_PointStyle';
   protected $markerOptionsDataType = '';
   public $name;
-  protected $polygonOptionsType = 'Google_Service_Fusiontables_PolygonStyle';
+  protected $polygonOptionsType = 'Appointments_Google_Service_Fusiontables_PolygonStyle';
   protected $polygonOptionsDataType = '';
-  protected $polylineOptionsType = 'Google_Service_Fusiontables_LineStyle';
+  protected $polylineOptionsType = 'Appointments_Google_Service_Fusiontables_LineStyle';
   protected $polylineOptionsDataType = '';
   public $styleId;
   public $tableId;
@@ -2014,7 +2014,7 @@ class Google_Service_Fusiontables_StyleSetting extends Google_Model
   {
     return $this->kind;
   }
-  public function setMarkerOptions(Google_Service_Fusiontables_PointStyle $markerOptions)
+  public function setMarkerOptions(Appointments_Google_Service_Fusiontables_PointStyle $markerOptions)
   {
     $this->markerOptions = $markerOptions;
   }
@@ -2030,7 +2030,7 @@ class Google_Service_Fusiontables_StyleSetting extends Google_Model
   {
     return $this->name;
   }
-  public function setPolygonOptions(Google_Service_Fusiontables_PolygonStyle $polygonOptions)
+  public function setPolygonOptions(Appointments_Google_Service_Fusiontables_PolygonStyle $polygonOptions)
   {
     $this->polygonOptions = $polygonOptions;
   }
@@ -2038,7 +2038,7 @@ class Google_Service_Fusiontables_StyleSetting extends Google_Model
   {
     return $this->polygonOptions;
   }
-  public function setPolylineOptions(Google_Service_Fusiontables_LineStyle $polylineOptions)
+  public function setPolylineOptions(Appointments_Google_Service_Fusiontables_LineStyle $polylineOptions)
   {
     $this->polylineOptions = $polylineOptions;
   }
@@ -2064,12 +2064,12 @@ class Google_Service_Fusiontables_StyleSetting extends Google_Model
   }
 }
 
-class Google_Service_Fusiontables_StyleSettingList extends Google_Collection
+class Appointments_Google_Service_Fusiontables_StyleSettingList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_Fusiontables_StyleSetting';
+  protected $itemsType = 'Appointments_Google_Service_Fusiontables_StyleSetting';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -2110,7 +2110,7 @@ class Google_Service_Fusiontables_StyleSettingList extends Google_Collection
   }
 }
 
-class Google_Service_Fusiontables_Table extends Google_Collection
+class Appointments_Google_Service_Fusiontables_Table extends Appointments_Google_Collection
 {
   protected $collection_key = 'columns';
   protected $internal_gapi_mappings = array(
@@ -2119,7 +2119,7 @@ class Google_Service_Fusiontables_Table extends Google_Collection
   public $attributionLink;
   public $baseTableIds;
   public $columnPropertiesJsonSchema;
-  protected $columnsType = 'Google_Service_Fusiontables_Column';
+  protected $columnsType = 'Appointments_Google_Service_Fusiontables_Column';
   protected $columnsDataType = 'array';
   public $description;
   public $isExportable;
@@ -2237,12 +2237,12 @@ class Google_Service_Fusiontables_Table extends Google_Collection
   }
 }
 
-class Google_Service_Fusiontables_TableList extends Google_Collection
+class Appointments_Google_Service_Fusiontables_TableList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_Fusiontables_Table';
+  protected $itemsType = 'Appointments_Google_Service_Fusiontables_Table';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -2274,7 +2274,7 @@ class Google_Service_Fusiontables_TableList extends Google_Collection
   }
 }
 
-class Google_Service_Fusiontables_Task extends Google_Model
+class Appointments_Google_Service_Fusiontables_Task extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2327,12 +2327,12 @@ class Google_Service_Fusiontables_Task extends Google_Model
   }
 }
 
-class Google_Service_Fusiontables_TaskList extends Google_Collection
+class Appointments_Google_Service_Fusiontables_TaskList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_Fusiontables_Task';
+  protected $itemsType = 'Appointments_Google_Service_Fusiontables_Task';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
@@ -2373,7 +2373,7 @@ class Google_Service_Fusiontables_TaskList extends Google_Collection
   }
 }
 
-class Google_Service_Fusiontables_Template extends Google_Collection
+class Appointments_Google_Service_Fusiontables_Template extends Appointments_Google_Collection
 {
   protected $collection_key = 'automaticColumnNames';
   protected $internal_gapi_mappings = array(
@@ -2436,12 +2436,12 @@ class Google_Service_Fusiontables_Template extends Google_Collection
   }
 }
 
-class Google_Service_Fusiontables_TemplateList extends Google_Collection
+class Appointments_Google_Service_Fusiontables_TemplateList extends Appointments_Google_Collection
 {
   protected $collection_key = 'items';
   protected $internal_gapi_mappings = array(
   );
-  protected $itemsType = 'Google_Service_Fusiontables_Template';
+  protected $itemsType = 'Appointments_Google_Service_Fusiontables_Template';
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;

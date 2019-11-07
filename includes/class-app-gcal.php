@@ -4,9 +4,9 @@
  * Manages all related to Google Calendar integration,
  * import, export and sync appointments
  *
- * Class Appointments_Google_Calendar
+ * Class App_Appointments_Google_Calendar
  */
-class Appointments_Google_Calendar {
+class App_Appointments_Google_Calendar {
 
 	public $errors = array();
 
@@ -32,7 +32,7 @@ class Appointments_Google_Calendar {
 		}
 
 		include_once( 'gcal/class-app-gcal-admin.php' );
-		$this->admin = new Appointments_Google_Calendar_Admin( $this );
+		$this->admin = new App_Appointments_Google_Calendar_Admin( $this );
 
 		add_action( 'wp_ajax_app_gcal_export', array( $this, 'export_batch' ) );
 		add_action( 'wp_ajax_app_gcal_import', array( $this, 'import' ) );
@@ -68,7 +68,7 @@ class Appointments_Google_Calendar {
 	public function load_api() {
 		$options = appointments_get_options();
 		include_once( 'gcal/class-app-gcal-api-manager.php' );
-		$this->api_manager = new Appointments_Google_Calendar_API_Manager();
+		$this->api_manager = new App_Appointments_Google_Calendar_API_Manager();
 
 
 		$default_creds = array();
@@ -234,7 +234,7 @@ class Appointments_Google_Calendar {
 
 					$events_ids = array_map( array( $this, '_get_event_id' ), $events );
 
-					/** @var Google_Service_Calendar_Event $event */
+					/** @var Appointments_Google_Service_Calendar_Event $event */
 					foreach ( $events as $event ) {
 						if ( $event_id = $this->sync_event( $event, $worker->ID ) ) {
 							$processed_event_ids[] = $event_id;
@@ -292,7 +292,7 @@ class Appointments_Google_Calendar {
 		$events_ids = array_map( array( $this, '_get_event_id' ), $events );
 
 		// Import or sync Google Calendar Events
-		/** @var Google_Service_Calendar_Event $event */
+		/** @var Appointments_Google_Service_Calendar_Event $event */
 		foreach ( $events as $event ) {
 			if ( $event_id = $this->sync_event( $event ) ) {
 				$processed_event_ids[] = $event_id;
@@ -343,7 +343,7 @@ class Appointments_Google_Calendar {
 	}
 
 	/**
-	 * @param Google_Service_Calendar_Event $event
+	 * @param Appointments_Google_Service_Calendar_Event $event
 	 *
 	 * @return mixed
 	 */
@@ -352,7 +352,7 @@ class Appointments_Google_Calendar {
 	}
 
 	/**
-	 * @param Google_Service_Calendar_Event $event
+	 * @param Appointments_Google_Service_Calendar_Event $event
 	 * @param integer $worker_id
 	 *
 	 * @return string|bool
@@ -365,7 +365,7 @@ class Appointments_Google_Calendar {
 			return false;
 		}
 
-		$importer = new Appointments_Google_Calendar_Importer( $this );
+		$importer = new App_Appointments_Google_Calendar_Importer( $this );
 
 		$this->remove_appointments_hooks();
 		$importer->import_event( $event, $worker_id );
@@ -411,7 +411,7 @@ class Appointments_Google_Calendar {
 	 *
 	 * @param $app_id
 	 *
-	 * @return Google_Service_Calendar_Event|bool
+	 * @return Appointments_Google_Service_Calendar_Event|bool
 	 */
 	public function appointment_to_gcal_event( $app_id ) {
 		global $appointments;
@@ -421,7 +421,7 @@ class Appointments_Google_Calendar {
 			return false;
 		}
 
-		$event = new Google_Service_Calendar_Event();
+		$event = new Appointments_Google_Service_Calendar_Event();
 
 		$options = appointments_get_options();
 
@@ -478,16 +478,16 @@ class Appointments_Google_Calendar {
 		$location = apply_filters( 'appointments_gcal_event_location', $location, $app );
 
 		// Dates
-		$start = new Google_Service_Calendar_EventDateTime();
+		$start = new Appointments_Google_Service_Calendar_EventDateTime();
 		$start->setDateTime( $app->get_start_gmt_date( "Y-m-d\TH:i:s\Z" ) );
-		$end = new Google_Service_Calendar_EventDateTime();
+		$end = new Appointments_Google_Service_Calendar_EventDateTime();
 		$end->setDateTime( $app->get_end_gmt_date( "Y-m-d\TH:i:s\Z" ) );
 
 		// Email
 		$email = $app->get_email();
 
 		// The first atendee will be the one with this email
-		$attendee1 = new Google_Service_Calendar_EventAttendee();
+		$attendee1 = new Appointments_Google_Service_Calendar_EventAttendee();
 		$attendee1->setEmail( $email );
 		$attendees = array( $attendee1 );
 
@@ -535,7 +535,7 @@ class Appointments_Google_Calendar {
 
 	public function export_batch() {
 		include_once( 'gcal/class-app-gcal-importer.php' );
-		$importer = new Appointments_Google_Calendar_Importer( $this );
+		$importer = new App_Appointments_Google_Calendar_Importer( $this );
 		$offset = absint( $_POST['offset'] );
 		$offset = $importer->export( $offset );
 
@@ -555,7 +555,7 @@ class Appointments_Google_Calendar {
 		}
 
 		include_once( 'gcal/class-app-gcal-importer.php' );
-		$importer = new Appointments_Google_Calendar_Importer( $this );
+		$importer = new App_Appointments_Google_Calendar_Importer( $this );
 		$this->remove_appointments_hooks();
 		$results = $importer->import();
 		$this->add_appointments_hooks();
@@ -949,10 +949,10 @@ class Appointments_Google_Calendar {
 		$event = $this->appointment_to_gcal_event( $app );
 
 		/**
-		 * Allow filtering a Google_Service_Calendar_Event object before being updated
+		 * Allow filtering a Appointments_Google_Service_Calendar_Event object before being updated
 		 * on GCal
 		 *
-		 * Google_Service_Calendar_Event $event
+		 * Appointments_Google_Service_Calendar_Event $event
 		 * Appointments_Appointment $app The related appointment to this event
 		 */
 		$event = apply_filters( 'appointments_gcal_insert_event', $event, $app );
@@ -1055,9 +1055,9 @@ class Appointments_Google_Calendar {
 			$event = $this->appointment_to_gcal_event( $app );
 		}
 		else {
-			$start = new Google_Service_Calendar_EventDateTime();
+			$start = new Appointments_Google_Service_Calendar_EventDateTime();
 			$start->setDateTime( $app->get_start_gmt_date( "Y-m-d\TH:i:s\Z" ) );
-			$end = new Google_Service_Calendar_EventDateTime();
+			$end = new Appointments_Google_Service_Calendar_EventDateTime();
 			$end->setDateTime( $app->get_end_gmt_date( "Y-m-d\TH:i:s\Z" ) );
 			$event->setStart( $start );
 			$event->setEnd( $end );
@@ -1066,10 +1066,10 @@ class Appointments_Google_Calendar {
 		$event->setLocation( $location );
 
 		/**
-		 * Allow filtering a Google_Service_Calendar_Event object before being updated
+		 * Allow filtering a Appointments_Google_Service_Calendar_Event object before being updated
 		 * on GCal
 		 *
-		 * Google_Service_Calendar_Event $event
+		 * Appointments_Google_Service_Calendar_Event $event
 		 * Appointments_Appointment $app The related appointment to this event
 		 */
 		$event = apply_filters( 'appointments_gcal_update_event', $event, $app );

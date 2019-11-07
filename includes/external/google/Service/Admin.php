@@ -28,7 +28,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Admin extends Google_Service
+class Appointments_Google_Service_Admin extends Appointments_Google_Service
 {
   /** Manage email messages of users on your domain. */
   const EMAIL_MIGRATION =
@@ -40,9 +40,9 @@ class Google_Service_Admin extends Google_Service
   /**
    * Constructs the internal representation of the Admin service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -50,7 +50,7 @@ class Google_Service_Admin extends Google_Service
     $this->version = 'email_migration_v2';
     $this->serviceName = 'admin';
 
-    $this->mail = new Google_Service_Admin_Mail_Resource(
+    $this->mail = new Appointments_Google_Service_Admin_Mail_Resource(
         $this,
         $this->serviceName,
         'mail',
@@ -78,21 +78,21 @@ class Google_Service_Admin extends Google_Service
  * The "mail" collection of methods.
  * Typical usage is:
  *  <code>
- *   $adminService = new Google_Service_Admin(...);
+ *   $adminService = new Appointments_Google_Service_Admin(...);
  *   $mail = $adminService->mail;
  *  </code>
  */
-class Google_Service_Admin_Mail_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Admin_Mail_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
    * Insert Mail into Google's Gmail backends (mail.insert)
    *
    * @param string $userKey The email or immutable id of the user
-   * @param Google_MailItem $postBody
+   * @param Appointments_Google_MailItem $postBody
    * @param array $optParams Optional parameters.
    */
-  public function insert($userKey, Google_Service_Admin_MailItem $postBody, $optParams = array())
+  public function insert($userKey, Appointments_Google_Service_Admin_MailItem $postBody, $optParams = array())
   {
     $params = array('userKey' => $userKey, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
@@ -103,7 +103,7 @@ class Google_Service_Admin_Mail_Resource extends Google_Service_Resource
 
 
 
-class Google_Service_Admin_MailItem extends Google_Collection
+class Appointments_Google_Service_Admin_MailItem extends Appointments_Google_Collection
 {
   protected $collection_key = 'labels';
   protected $internal_gapi_mappings = array(

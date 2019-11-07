@@ -16,16 +16,16 @@
  */
 
 /**
- * Curl based implementation of Google_IO.
+ * Curl based implementation of Appointments_Google_IO.
  *
  * @author Stuart Langley <slangley@google.com>
  */
 
-if (!class_exists('Google_Client')) {
+if (!class_exists('Appointments_Google_Client')) {
   require_once dirname(__FILE__) . '/../autoload.php';
 }
 
-class Google_IO_Curl extends Google_IO_Abstract
+class Appointments_Google_IO_Curl extends Appointments_Google_IO_Abstract
 {
   // cURL hex representation of version 7.30.0
   const NO_QUIRK_VERSION = 0x071E00;
@@ -35,18 +35,18 @@ class Google_IO_Curl extends Google_IO_Abstract
   /** @var bool $disableProxyWorkaround */
   private $disableProxyWorkaround;
 
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     if (!extension_loaded('curl')) {
       $error = 'The cURL IO handler requires the cURL extension to be enabled';
       $client->getLogger()->critical($error);
-      throw new Google_IO_Exception($error);
+      throw new Appointments_Google_IO_Exception($error);
     }
 
     parent::__construct($client);
 
     $this->disableProxyWorkaround = $this->client->getClassConfig(
-        'Google_IO_Curl',
+        'Appointments_Google_IO_Curl',
         'disable_proxy_workaround'
     );
   }
@@ -54,11 +54,11 @@ class Google_IO_Curl extends Google_IO_Abstract
   /**
    * Execute an HTTP Request
    *
-   * @param Google_Http_Request $request the http request to be executed
+   * @param Appointments_Google_Http_Request $request the http request to be executed
    * @return array containing response headers, body, and http code
-   * @throws Google_IO_Exception on curl or IO error
+   * @throws Appointments_Google_IO_Exception on curl or IO error
    */
-  public function executeRequest(Google_Http_Request $request)
+  public function executeRequest(Appointments_Google_Http_Request $request)
   {
     $curl = curl_init();
 
@@ -93,7 +93,7 @@ class Google_IO_Curl extends Google_IO_Abstract
       curl_setopt($curl, CURLOPT_ENCODING, 'gzip,deflate');
     }
     
-    $options = $this->client->getClassConfig('Google_IO_Curl', 'options');
+    $options = $this->client->getClassConfig('Appointments_Google_IO_Curl', 'options');
     if (is_array($options)) {
       $this->setOptions($options);
     }
@@ -120,10 +120,10 @@ class Google_IO_Curl extends Google_IO_Abstract
     if ($response === false) {
       $error = curl_error($curl);
       $code = curl_errno($curl);
-      $map = $this->client->getClassConfig('Google_IO_Exception', 'retry_map');
+      $map = $this->client->getClassConfig('Appointments_Google_IO_Exception', 'retry_map');
 
       $this->client->getLogger()->error('cURL ' . $error);
-      throw new Google_IO_Exception($error, $code, null, $map);
+      throw new Appointments_Google_IO_Exception($error, $code, null, $map);
     }
     $headerSize = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
 
@@ -189,6 +189,6 @@ class Google_IO_Curl extends Google_IO_Abstract
 
     $ver = curl_version();
     $versionNum = $ver['version_number'];
-    return $versionNum < Google_IO_Curl::NO_QUIRK_VERSION;
+    return $versionNum < Appointments_Google_IO_Curl::NO_QUIRK_VERSION;
   }
 }

@@ -26,7 +26,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_IdentityToolkit extends Google_Service
+class Appointments_Google_Service_IdentityToolkit extends Appointments_Google_Service
 {
 
 
@@ -36,9 +36,9 @@ class Google_Service_IdentityToolkit extends Google_Service
   /**
    * Constructs the internal representation of the IdentityToolkit service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -46,7 +46,7 @@ class Google_Service_IdentityToolkit extends Google_Service
     $this->version = 'v3';
     $this->serviceName = 'identitytoolkit';
 
-    $this->relyingparty = new Google_Service_IdentityToolkit_Relyingparty_Resource(
+    $this->relyingparty = new Appointments_Google_Service_IdentityToolkit_Relyingparty_Resource(
         $this,
         $this->serviceName,
         'relyingparty',
@@ -124,227 +124,227 @@ class Google_Service_IdentityToolkit extends Google_Service
  * The "relyingparty" collection of methods.
  * Typical usage is:
  *  <code>
- *   $identitytoolkitService = new Google_Service_IdentityToolkit(...);
+ *   $identitytoolkitService = new Appointments_Google_Service_IdentityToolkit(...);
  *   $relyingparty = $identitytoolkitService->relyingparty;
  *  </code>
  */
-class Google_Service_IdentityToolkit_Relyingparty_Resource extends Google_Service_Resource
+class Appointments_Google_Service_IdentityToolkit_Relyingparty_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
    * Creates the URI used by the IdP to authenticate the user.
    * (relyingparty.createAuthUri)
    *
-   * @param Google_IdentitytoolkitRelyingpartyCreateAuthUriRequest $postBody
+   * @param Appointments_Google_IdentitytoolkitRelyingpartyCreateAuthUriRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_IdentityToolkit_CreateAuthUriResponse
+   * @return Appointments_Google_Service_IdentityToolkit_CreateAuthUriResponse
    */
-  public function createAuthUri(Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyCreateAuthUriRequest $postBody, $optParams = array())
+  public function createAuthUri(Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyCreateAuthUriRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('createAuthUri', array($params), "Google_Service_IdentityToolkit_CreateAuthUriResponse");
+    return $this->call('createAuthUri', array($params), "Appointments_Google_Service_IdentityToolkit_CreateAuthUriResponse");
   }
 
   /**
    * Delete user account. (relyingparty.deleteAccount)
    *
-   * @param Google_IdentitytoolkitRelyingpartyDeleteAccountRequest $postBody
+   * @param Appointments_Google_IdentitytoolkitRelyingpartyDeleteAccountRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_IdentityToolkit_DeleteAccountResponse
+   * @return Appointments_Google_Service_IdentityToolkit_DeleteAccountResponse
    */
-  public function deleteAccount(Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyDeleteAccountRequest $postBody, $optParams = array())
+  public function deleteAccount(Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyDeleteAccountRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('deleteAccount', array($params), "Google_Service_IdentityToolkit_DeleteAccountResponse");
+    return $this->call('deleteAccount', array($params), "Appointments_Google_Service_IdentityToolkit_DeleteAccountResponse");
   }
 
   /**
    * Batch download user accounts. (relyingparty.downloadAccount)
    *
-   * @param Google_IdentitytoolkitRelyingpartyDownloadAccountRequest $postBody
+   * @param Appointments_Google_IdentitytoolkitRelyingpartyDownloadAccountRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_IdentityToolkit_DownloadAccountResponse
+   * @return Appointments_Google_Service_IdentityToolkit_DownloadAccountResponse
    */
-  public function downloadAccount(Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyDownloadAccountRequest $postBody, $optParams = array())
+  public function downloadAccount(Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyDownloadAccountRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('downloadAccount', array($params), "Google_Service_IdentityToolkit_DownloadAccountResponse");
+    return $this->call('downloadAccount', array($params), "Appointments_Google_Service_IdentityToolkit_DownloadAccountResponse");
   }
 
   /**
    * Returns the account info. (relyingparty.getAccountInfo)
    *
-   * @param Google_IdentitytoolkitRelyingpartyGetAccountInfoRequest $postBody
+   * @param Appointments_Google_IdentitytoolkitRelyingpartyGetAccountInfoRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_IdentityToolkit_GetAccountInfoResponse
+   * @return Appointments_Google_Service_IdentityToolkit_GetAccountInfoResponse
    */
-  public function getAccountInfo(Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyGetAccountInfoRequest $postBody, $optParams = array())
+  public function getAccountInfo(Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyGetAccountInfoRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('getAccountInfo', array($params), "Google_Service_IdentityToolkit_GetAccountInfoResponse");
+    return $this->call('getAccountInfo', array($params), "Appointments_Google_Service_IdentityToolkit_GetAccountInfoResponse");
   }
 
   /**
    * Get a code for user action confirmation.
    * (relyingparty.getOobConfirmationCode)
    *
-   * @param Google_Relyingparty $postBody
+   * @param Appointments_Google_Relyingparty $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_IdentityToolkit_GetOobConfirmationCodeResponse
+   * @return Appointments_Google_Service_IdentityToolkit_GetOobConfirmationCodeResponse
    */
-  public function getOobConfirmationCode(Google_Service_IdentityToolkit_Relyingparty $postBody, $optParams = array())
+  public function getOobConfirmationCode(Appointments_Google_Service_IdentityToolkit_Relyingparty $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('getOobConfirmationCode', array($params), "Google_Service_IdentityToolkit_GetOobConfirmationCodeResponse");
+    return $this->call('getOobConfirmationCode', array($params), "Appointments_Google_Service_IdentityToolkit_GetOobConfirmationCodeResponse");
   }
 
   /**
    * Get project configuration. (relyingparty.getProjectConfig)
    *
    * @param array $optParams Optional parameters.
-   * @return Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyGetProjectConfigResponse
+   * @return Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyGetProjectConfigResponse
    */
   public function getProjectConfig($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('getProjectConfig', array($params), "Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyGetProjectConfigResponse");
+    return $this->call('getProjectConfig', array($params), "Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyGetProjectConfigResponse");
   }
 
   /**
    * Get token signing public key. (relyingparty.getPublicKeys)
    *
    * @param array $optParams Optional parameters.
-   * @return Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyGetPublicKeysResponse
+   * @return Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyGetPublicKeysResponse
    */
   public function getPublicKeys($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('getPublicKeys', array($params), "Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyGetPublicKeysResponse");
+    return $this->call('getPublicKeys', array($params), "Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyGetPublicKeysResponse");
   }
 
   /**
    * Get recaptcha secure param. (relyingparty.getRecaptchaParam)
    *
    * @param array $optParams Optional parameters.
-   * @return Google_Service_IdentityToolkit_GetRecaptchaParamResponse
+   * @return Appointments_Google_Service_IdentityToolkit_GetRecaptchaParamResponse
    */
   public function getRecaptchaParam($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('getRecaptchaParam', array($params), "Google_Service_IdentityToolkit_GetRecaptchaParamResponse");
+    return $this->call('getRecaptchaParam', array($params), "Appointments_Google_Service_IdentityToolkit_GetRecaptchaParamResponse");
   }
 
   /**
    * Reset password for a user. (relyingparty.resetPassword)
    *
-   * @param Google_IdentitytoolkitRelyingpartyResetPasswordRequest $postBody
+   * @param Appointments_Google_IdentitytoolkitRelyingpartyResetPasswordRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_IdentityToolkit_ResetPasswordResponse
+   * @return Appointments_Google_Service_IdentityToolkit_ResetPasswordResponse
    */
-  public function resetPassword(Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyResetPasswordRequest $postBody, $optParams = array())
+  public function resetPassword(Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyResetPasswordRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('resetPassword', array($params), "Google_Service_IdentityToolkit_ResetPasswordResponse");
+    return $this->call('resetPassword', array($params), "Appointments_Google_Service_IdentityToolkit_ResetPasswordResponse");
   }
 
   /**
    * Set account info for a user. (relyingparty.setAccountInfo)
    *
-   * @param Google_IdentitytoolkitRelyingpartySetAccountInfoRequest $postBody
+   * @param Appointments_Google_IdentitytoolkitRelyingpartySetAccountInfoRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_IdentityToolkit_SetAccountInfoResponse
+   * @return Appointments_Google_Service_IdentityToolkit_SetAccountInfoResponse
    */
-  public function setAccountInfo(Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartySetAccountInfoRequest $postBody, $optParams = array())
+  public function setAccountInfo(Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartySetAccountInfoRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('setAccountInfo', array($params), "Google_Service_IdentityToolkit_SetAccountInfoResponse");
+    return $this->call('setAccountInfo', array($params), "Appointments_Google_Service_IdentityToolkit_SetAccountInfoResponse");
   }
 
   /**
    * Sign out user. (relyingparty.signOutUser)
    *
-   * @param Google_IdentitytoolkitRelyingpartySignOutUserRequest $postBody
+   * @param Appointments_Google_IdentitytoolkitRelyingpartySignOutUserRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartySignOutUserResponse
+   * @return Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartySignOutUserResponse
    */
-  public function signOutUser(Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartySignOutUserRequest $postBody, $optParams = array())
+  public function signOutUser(Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartySignOutUserRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('signOutUser', array($params), "Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartySignOutUserResponse");
+    return $this->call('signOutUser', array($params), "Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartySignOutUserResponse");
   }
 
   /**
    * Batch upload existing user accounts. (relyingparty.uploadAccount)
    *
-   * @param Google_IdentitytoolkitRelyingpartyUploadAccountRequest $postBody
+   * @param Appointments_Google_IdentitytoolkitRelyingpartyUploadAccountRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_IdentityToolkit_UploadAccountResponse
+   * @return Appointments_Google_Service_IdentityToolkit_UploadAccountResponse
    */
-  public function uploadAccount(Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyUploadAccountRequest $postBody, $optParams = array())
+  public function uploadAccount(Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyUploadAccountRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('uploadAccount', array($params), "Google_Service_IdentityToolkit_UploadAccountResponse");
+    return $this->call('uploadAccount', array($params), "Appointments_Google_Service_IdentityToolkit_UploadAccountResponse");
   }
 
   /**
    * Verifies the assertion returned by the IdP. (relyingparty.verifyAssertion)
    *
-   * @param Google_IdentitytoolkitRelyingpartyVerifyAssertionRequest $postBody
+   * @param Appointments_Google_IdentitytoolkitRelyingpartyVerifyAssertionRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_IdentityToolkit_VerifyAssertionResponse
+   * @return Appointments_Google_Service_IdentityToolkit_VerifyAssertionResponse
    */
-  public function verifyAssertion(Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyVerifyAssertionRequest $postBody, $optParams = array())
+  public function verifyAssertion(Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyVerifyAssertionRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('verifyAssertion', array($params), "Google_Service_IdentityToolkit_VerifyAssertionResponse");
+    return $this->call('verifyAssertion', array($params), "Appointments_Google_Service_IdentityToolkit_VerifyAssertionResponse");
   }
 
   /**
    * Verifies the developer asserted ID token. (relyingparty.verifyCustomToken)
    *
-   * @param Google_IdentitytoolkitRelyingpartyVerifyCustomTokenRequest $postBody
+   * @param Appointments_Google_IdentitytoolkitRelyingpartyVerifyCustomTokenRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_IdentityToolkit_VerifyCustomTokenResponse
+   * @return Appointments_Google_Service_IdentityToolkit_VerifyCustomTokenResponse
    */
-  public function verifyCustomToken(Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyVerifyCustomTokenRequest $postBody, $optParams = array())
+  public function verifyCustomToken(Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyVerifyCustomTokenRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('verifyCustomToken', array($params), "Google_Service_IdentityToolkit_VerifyCustomTokenResponse");
+    return $this->call('verifyCustomToken', array($params), "Appointments_Google_Service_IdentityToolkit_VerifyCustomTokenResponse");
   }
 
   /**
    * Verifies the user entered password. (relyingparty.verifyPassword)
    *
-   * @param Google_IdentitytoolkitRelyingpartyVerifyPasswordRequest $postBody
+   * @param Appointments_Google_IdentitytoolkitRelyingpartyVerifyPasswordRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_IdentityToolkit_VerifyPasswordResponse
+   * @return Appointments_Google_Service_IdentityToolkit_VerifyPasswordResponse
    */
-  public function verifyPassword(Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyVerifyPasswordRequest $postBody, $optParams = array())
+  public function verifyPassword(Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyVerifyPasswordRequest $postBody, $optParams = array())
   {
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('verifyPassword', array($params), "Google_Service_IdentityToolkit_VerifyPasswordResponse");
+    return $this->call('verifyPassword', array($params), "Appointments_Google_Service_IdentityToolkit_VerifyPasswordResponse");
   }
 }
 
 
 
 
-class Google_Service_IdentityToolkit_CreateAuthUriResponse extends Google_Collection
+class Appointments_Google_Service_IdentityToolkit_CreateAuthUriResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'allProviders';
   protected $internal_gapi_mappings = array(
@@ -425,7 +425,7 @@ class Google_Service_IdentityToolkit_CreateAuthUriResponse extends Google_Collec
   }
 }
 
-class Google_Service_IdentityToolkit_DeleteAccountResponse extends Google_Model
+class Appointments_Google_Service_IdentityToolkit_DeleteAccountResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -442,14 +442,14 @@ class Google_Service_IdentityToolkit_DeleteAccountResponse extends Google_Model
   }
 }
 
-class Google_Service_IdentityToolkit_DownloadAccountResponse extends Google_Collection
+class Appointments_Google_Service_IdentityToolkit_DownloadAccountResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'users';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
   public $nextPageToken;
-  protected $usersType = 'Google_Service_IdentityToolkit_UserInfo';
+  protected $usersType = 'Appointments_Google_Service_IdentityToolkit_UserInfo';
   protected $usersDataType = 'array';
 
 
@@ -479,13 +479,13 @@ class Google_Service_IdentityToolkit_DownloadAccountResponse extends Google_Coll
   }
 }
 
-class Google_Service_IdentityToolkit_GetAccountInfoResponse extends Google_Collection
+class Appointments_Google_Service_IdentityToolkit_GetAccountInfoResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'users';
   protected $internal_gapi_mappings = array(
   );
   public $kind;
-  protected $usersType = 'Google_Service_IdentityToolkit_UserInfo';
+  protected $usersType = 'Appointments_Google_Service_IdentityToolkit_UserInfo';
   protected $usersDataType = 'array';
 
 
@@ -507,7 +507,7 @@ class Google_Service_IdentityToolkit_GetAccountInfoResponse extends Google_Colle
   }
 }
 
-class Google_Service_IdentityToolkit_GetOobConfirmationCodeResponse extends Google_Model
+class Appointments_Google_Service_IdentityToolkit_GetOobConfirmationCodeResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -542,7 +542,7 @@ class Google_Service_IdentityToolkit_GetOobConfirmationCodeResponse extends Goog
   }
 }
 
-class Google_Service_IdentityToolkit_GetRecaptchaParamResponse extends Google_Model
+class Appointments_Google_Service_IdentityToolkit_GetRecaptchaParamResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -577,7 +577,7 @@ class Google_Service_IdentityToolkit_GetRecaptchaParamResponse extends Google_Mo
   }
 }
 
-class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyCreateAuthUriRequest extends Google_Model
+class Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyCreateAuthUriRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -675,7 +675,7 @@ class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyCreateAuthUriReq
   }
 }
 
-class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyDeleteAccountRequest extends Google_Model
+class Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyDeleteAccountRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -701,7 +701,7 @@ class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyDeleteAccountReq
   }
 }
 
-class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyDownloadAccountRequest extends Google_Model
+class Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyDownloadAccountRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -736,7 +736,7 @@ class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyDownloadAccountR
   }
 }
 
-class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyGetAccountInfoRequest extends Google_Collection
+class Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyGetAccountInfoRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'localId';
   protected $internal_gapi_mappings = array(
@@ -772,14 +772,14 @@ class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyGetAccountInfoRe
   }
 }
 
-class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyGetProjectConfigResponse extends Google_Collection
+class Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyGetProjectConfigResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'idpConfig';
   protected $internal_gapi_mappings = array(
   );
   public $allowPasswordUser;
   public $apiKey;
-  protected $idpConfigType = 'Google_Service_IdentityToolkit_IdpConfig';
+  protected $idpConfigType = 'Appointments_Google_Service_IdentityToolkit_IdpConfig';
   protected $idpConfigDataType = 'array';
   public $projectId;
 
@@ -818,7 +818,7 @@ class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyGetProjectConfig
   }
 }
 
-class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyResetPasswordRequest extends Google_Model
+class Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyResetPasswordRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -862,7 +862,7 @@ class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyResetPasswordReq
   }
 }
 
-class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartySetAccountInfoRequest extends Google_Collection
+class Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartySetAccountInfoRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'provider';
   protected $internal_gapi_mappings = array(
@@ -1015,7 +1015,7 @@ class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartySetAccountInfoRe
   }
 }
 
-class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartySignOutUserRequest extends Google_Model
+class Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartySignOutUserRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1041,7 +1041,7 @@ class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartySignOutUserReque
   }
 }
 
-class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartySignOutUserResponse extends Google_Model
+class Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartySignOutUserResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1058,7 +1058,7 @@ class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartySignOutUserRespo
   }
 }
 
-class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyUploadAccountRequest extends Google_Collection
+class Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyUploadAccountRequest extends Appointments_Google_Collection
 {
   protected $collection_key = 'users';
   protected $internal_gapi_mappings = array(
@@ -1069,7 +1069,7 @@ class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyUploadAccountReq
   public $rounds;
   public $saltSeparator;
   public $signerKey;
-  protected $usersType = 'Google_Service_IdentityToolkit_UserInfo';
+  protected $usersType = 'Appointments_Google_Service_IdentityToolkit_UserInfo';
   protected $usersDataType = 'array';
 
 
@@ -1131,7 +1131,7 @@ class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyUploadAccountReq
   }
 }
 
-class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyVerifyAssertionRequest extends Google_Model
+class Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyVerifyAssertionRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1202,7 +1202,7 @@ class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyVerifyAssertionR
   }
 }
 
-class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyVerifyCustomTokenRequest extends Google_Model
+class Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyVerifyCustomTokenRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1228,7 +1228,7 @@ class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyVerifyCustomToke
   }
 }
 
-class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyVerifyPasswordRequest extends Google_Model
+class Appointments_Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyVerifyPasswordRequest extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1299,7 +1299,7 @@ class Google_Service_IdentityToolkit_IdentitytoolkitRelyingpartyVerifyPasswordRe
   }
 }
 
-class Google_Service_IdentityToolkit_IdpConfig extends Google_Model
+class Appointments_Google_Service_IdentityToolkit_IdpConfig extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1343,7 +1343,7 @@ class Google_Service_IdentityToolkit_IdpConfig extends Google_Model
   }
 }
 
-class Google_Service_IdentityToolkit_Relyingparty extends Google_Model
+class Appointments_Google_Service_IdentityToolkit_Relyingparty extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1423,7 +1423,7 @@ class Google_Service_IdentityToolkit_Relyingparty extends Google_Model
   }
 }
 
-class Google_Service_IdentityToolkit_ResetPasswordResponse extends Google_Model
+class Appointments_Google_Service_IdentityToolkit_ResetPasswordResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1449,7 +1449,7 @@ class Google_Service_IdentityToolkit_ResetPasswordResponse extends Google_Model
   }
 }
 
-class Google_Service_IdentityToolkit_SetAccountInfoResponse extends Google_Collection
+class Appointments_Google_Service_IdentityToolkit_SetAccountInfoResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'providerUserInfo';
   protected $internal_gapi_mappings = array(
@@ -1460,7 +1460,7 @@ class Google_Service_IdentityToolkit_SetAccountInfoResponse extends Google_Colle
   public $kind;
   public $newEmail;
   public $photoUrl;
-  protected $providerUserInfoType = 'Google_Service_IdentityToolkit_SetAccountInfoResponseProviderUserInfo';
+  protected $providerUserInfoType = 'Appointments_Google_Service_IdentityToolkit_SetAccountInfoResponseProviderUserInfo';
   protected $providerUserInfoDataType = 'array';
 
 
@@ -1522,7 +1522,7 @@ class Google_Service_IdentityToolkit_SetAccountInfoResponse extends Google_Colle
   }
 }
 
-class Google_Service_IdentityToolkit_SetAccountInfoResponseProviderUserInfo extends Google_Model
+class Appointments_Google_Service_IdentityToolkit_SetAccountInfoResponseProviderUserInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1557,12 +1557,12 @@ class Google_Service_IdentityToolkit_SetAccountInfoResponseProviderUserInfo exte
   }
 }
 
-class Google_Service_IdentityToolkit_UploadAccountResponse extends Google_Collection
+class Appointments_Google_Service_IdentityToolkit_UploadAccountResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'error';
   protected $internal_gapi_mappings = array(
   );
-  protected $errorType = 'Google_Service_IdentityToolkit_UploadAccountResponseError';
+  protected $errorType = 'Appointments_Google_Service_IdentityToolkit_UploadAccountResponseError';
   protected $errorDataType = 'array';
   public $kind;
 
@@ -1585,7 +1585,7 @@ class Google_Service_IdentityToolkit_UploadAccountResponse extends Google_Collec
   }
 }
 
-class Google_Service_IdentityToolkit_UploadAccountResponseError extends Google_Model
+class Appointments_Google_Service_IdentityToolkit_UploadAccountResponseError extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1611,7 +1611,7 @@ class Google_Service_IdentityToolkit_UploadAccountResponseError extends Google_M
   }
 }
 
-class Google_Service_IdentityToolkit_UserInfo extends Google_Collection
+class Appointments_Google_Service_IdentityToolkit_UserInfo extends Appointments_Google_Collection
 {
   protected $collection_key = 'providerUserInfo';
   protected $internal_gapi_mappings = array(
@@ -1624,7 +1624,7 @@ class Google_Service_IdentityToolkit_UserInfo extends Google_Collection
   public $passwordHash;
   public $passwordUpdatedAt;
   public $photoUrl;
-  protected $providerUserInfoType = 'Google_Service_IdentityToolkit_UserInfoProviderUserInfo';
+  protected $providerUserInfoType = 'Appointments_Google_Service_IdentityToolkit_UserInfoProviderUserInfo';
   protected $providerUserInfoDataType = 'array';
   public $salt;
   public $validSince;
@@ -1729,7 +1729,7 @@ class Google_Service_IdentityToolkit_UserInfo extends Google_Collection
   }
 }
 
-class Google_Service_IdentityToolkit_UserInfoProviderUserInfo extends Google_Model
+class Appointments_Google_Service_IdentityToolkit_UserInfoProviderUserInfo extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -1782,7 +1782,7 @@ class Google_Service_IdentityToolkit_UserInfoProviderUserInfo extends Google_Mod
   }
 }
 
-class Google_Service_IdentityToolkit_VerifyAssertionResponse extends Google_Collection
+class Appointments_Google_Service_IdentityToolkit_VerifyAssertionResponse extends Appointments_Google_Collection
 {
   protected $collection_key = 'verifiedProvider';
   protected $internal_gapi_mappings = array(
@@ -2070,7 +2070,7 @@ class Google_Service_IdentityToolkit_VerifyAssertionResponse extends Google_Coll
   }
 }
 
-class Google_Service_IdentityToolkit_VerifyCustomTokenResponse extends Google_Model
+class Appointments_Google_Service_IdentityToolkit_VerifyCustomTokenResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -2096,7 +2096,7 @@ class Google_Service_IdentityToolkit_VerifyCustomTokenResponse extends Google_Mo
   }
 }
 
-class Google_Service_IdentityToolkit_VerifyPasswordResponse extends Google_Model
+class Appointments_Google_Service_IdentityToolkit_VerifyPasswordResponse extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );

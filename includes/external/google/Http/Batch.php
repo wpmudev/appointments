@@ -15,14 +15,14 @@
  * limitations under the License.
  */
 
-if (!class_exists('Google_Client')) {
+if (!class_exists('Appointments_Google_Client')) {
   require_once dirname(__FILE__) . '/../autoload.php';
 }
 
 /**
  * Class to handle batched requests to the Google API service.
  */
-class Google_Http_Batch
+class Appointments_Google_Http_Batch
 {
   /** @var string Multipart Boundary. */
   private $boundary;
@@ -30,7 +30,7 @@ class Google_Http_Batch
   /** @var array service requests to be executed. */
   private $requests = array();
 
-  /** @var Google_Client */
+  /** @var Appointments_Google_Client */
   private $client;
 
   private $expected_classes = array();
@@ -39,7 +39,7 @@ class Google_Http_Batch
 
   private $batch_path;
 
-  public function __construct(Google_Client $client, $boundary = false, $rootUrl = '', $batchPath = '')
+  public function __construct(Appointments_Google_Client $client, $boundary = false, $rootUrl = '', $batchPath = '')
   {
     $this->client = $client;
     $this->root_url = rtrim($rootUrl ? $rootUrl : $this->client->getBasePath(), '/');
@@ -49,7 +49,7 @@ class Google_Http_Batch
     $this->boundary = str_replace('"', '', $boundary);
   }
 
-  public function add(Google_Http_Request $request, $key = false)
+  public function add(Appointments_Google_Http_Request $request, $key = false)
   {
     if (false == $key) {
       $key = mt_rand();
@@ -62,7 +62,7 @@ class Google_Http_Batch
   {
     $body = '';
 
-    /** @var Google_Http_Request $req */
+    /** @var Appointments_Google_Http_Request $req */
     foreach ($this->requests as $key => $req) {
       $body .= "--{$this->boundary}\n";
       $body .= $req->toBatchString($key) . "\n\n";
@@ -72,7 +72,7 @@ class Google_Http_Batch
     $body .= "--{$this->boundary}--";
 
     $url = $this->root_url . '/' . $this->batch_path;
-    $httpRequest = new Google_Http_Request($url, 'POST');
+    $httpRequest = new Appointments_Google_Http_Request($url, 'POST');
     $httpRequest->setRequestHeaders(
         array('Content-Type' => 'multipart/mixed; boundary=' . $this->boundary)
     );
@@ -83,7 +83,7 @@ class Google_Http_Batch
     return $this->parseResponse($response);
   }
 
-  public function parseResponse(Google_Http_Request $response)
+  public function parseResponse(Appointments_Google_Http_Request $response)
   {
     $contentType = $response->getResponseHeader('content-type');
     $contentType = explode(';', $contentType);
@@ -112,7 +112,7 @@ class Google_Http_Batch
           $status = $status[1];
 
           list($partHeaders, $partBody) = $this->client->getIo()->ParseHttpResponse($part, false);
-          $response = new Google_Http_Request("");
+          $response = new Appointments_Google_Http_Request("");
           $response->setResponseHttpCode($status);
           $response->setResponseHeaders($partHeaders);
           $response->setResponseBody($partBody);
@@ -127,9 +127,9 @@ class Google_Http_Batch
           }
 
           try {
-            $response = Google_Http_REST::decodeHttpResponse($response, $this->client);
+            $response = Appointments_Google_Http_REST::decodeHttpResponse($response, $this->client);
             $responses[$key] = $response;
-          } catch (Google_Service_Exception $e) {
+          } catch (Appointments_Google_Service_Exception $e) {
             // Store the exception as the response, so successful responses
             // can be processed.
             $responses[$key] = $e;

@@ -27,7 +27,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Pagespeedonline extends Google_Service
+class Appointments_Google_Service_Pagespeedonline extends Appointments_Google_Service
 {
 
 
@@ -37,9 +37,9 @@ class Google_Service_Pagespeedonline extends Google_Service
   /**
    * Constructs the internal representation of the Pagespeedonline service.
    *
-   * @param Google_Client $client
+   * @param Appointments_Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Appointments_Google_Client $client)
   {
     parent::__construct($client);
     $this->rootUrl = 'https://www.googleapis.com/';
@@ -47,7 +47,7 @@ class Google_Service_Pagespeedonline extends Google_Service
     $this->version = 'v2';
     $this->serviceName = 'pagespeedonline';
 
-    $this->pagespeedapi = new Google_Service_Pagespeedonline_Pagespeedapi_Resource(
+    $this->pagespeedapi = new Appointments_Google_Service_Pagespeedonline_Pagespeedapi_Resource(
         $this,
         $this->serviceName,
         'pagespeedapi',
@@ -96,11 +96,11 @@ class Google_Service_Pagespeedonline extends Google_Service
  * The "pagespeedapi" collection of methods.
  * Typical usage is:
  *  <code>
- *   $pagespeedonlineService = new Google_Service_Pagespeedonline(...);
+ *   $pagespeedonlineService = new Appointments_Google_Service_Pagespeedonline(...);
  *   $pagespeedapi = $pagespeedonlineService->pagespeedapi;
  *  </code>
  */
-class Google_Service_Pagespeedonline_Pagespeedapi_Resource extends Google_Service_Resource
+class Appointments_Google_Service_Pagespeedonline_Pagespeedapi_Resource extends Appointments_Google_Service_Resource
 {
 
   /**
@@ -119,25 +119,25 @@ class Google_Service_Pagespeedonline_Pagespeedapi_Resource extends Google_Servic
    * @opt_param bool screenshot Indicates if binary data containing a screenshot
    * should be included
    * @opt_param string strategy The analysis strategy to use
-   * @return Google_Service_Pagespeedonline_Result
+   * @return Appointments_Google_Service_Pagespeedonline_Result
    */
   public function runpagespeed($url, $optParams = array())
   {
     $params = array('url' => $url);
     $params = array_merge($params, $optParams);
-    return $this->call('runpagespeed', array($params), "Google_Service_Pagespeedonline_Result");
+    return $this->call('runpagespeed', array($params), "Appointments_Google_Service_Pagespeedonline_Result");
   }
 }
 
 
 
 
-class Google_Service_Pagespeedonline_PagespeedApiFormatStringV2 extends Google_Collection
+class Appointments_Google_Service_Pagespeedonline_PagespeedApiFormatStringV2 extends Appointments_Google_Collection
 {
   protected $collection_key = 'args';
   protected $internal_gapi_mappings = array(
   );
-  protected $argsType = 'Google_Service_Pagespeedonline_PagespeedApiFormatStringV2Args';
+  protected $argsType = 'Appointments_Google_Service_Pagespeedonline_PagespeedApiFormatStringV2Args';
   protected $argsDataType = 'array';
   public $format;
 
@@ -160,16 +160,16 @@ class Google_Service_Pagespeedonline_PagespeedApiFormatStringV2 extends Google_C
   }
 }
 
-class Google_Service_Pagespeedonline_PagespeedApiFormatStringV2Args extends Google_Collection
+class Appointments_Google_Service_Pagespeedonline_PagespeedApiFormatStringV2Args extends Appointments_Google_Collection
 {
   protected $collection_key = 'secondary_rects';
   protected $internal_gapi_mappings = array(
         "secondaryRects" => "secondary_rects",
   );
   public $key;
-  protected $rectsType = 'Google_Service_Pagespeedonline_PagespeedApiFormatStringV2ArgsRects';
+  protected $rectsType = 'Appointments_Google_Service_Pagespeedonline_PagespeedApiFormatStringV2ArgsRects';
   protected $rectsDataType = 'array';
-  protected $secondaryRectsType = 'Google_Service_Pagespeedonline_PagespeedApiFormatStringV2ArgsSecondaryRects';
+  protected $secondaryRectsType = 'Appointments_Google_Service_Pagespeedonline_PagespeedApiFormatStringV2ArgsSecondaryRects';
   protected $secondaryRectsDataType = 'array';
   public $type;
   public $value;
@@ -217,7 +217,7 @@ class Google_Service_Pagespeedonline_PagespeedApiFormatStringV2Args extends Goog
   }
 }
 
-class Google_Service_Pagespeedonline_PagespeedApiFormatStringV2ArgsRects extends Google_Model
+class Appointments_Google_Service_Pagespeedonline_PagespeedApiFormatStringV2ArgsRects extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -261,7 +261,7 @@ class Google_Service_Pagespeedonline_PagespeedApiFormatStringV2ArgsRects extends
   }
 }
 
-class Google_Service_Pagespeedonline_PagespeedApiFormatStringV2ArgsSecondaryRects extends Google_Model
+class Appointments_Google_Service_Pagespeedonline_PagespeedApiFormatStringV2ArgsSecondaryRects extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -305,7 +305,7 @@ class Google_Service_Pagespeedonline_PagespeedApiFormatStringV2ArgsSecondaryRect
   }
 }
 
-class Google_Service_Pagespeedonline_PagespeedApiImageV2 extends Google_Model
+class Appointments_Google_Service_Pagespeedonline_PagespeedApiImageV2 extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
         "mimeType" => "mime_type",
@@ -315,7 +315,7 @@ class Google_Service_Pagespeedonline_PagespeedApiImageV2 extends Google_Model
   public $height;
   public $key;
   public $mimeType;
-  protected $pageRectType = 'Google_Service_Pagespeedonline_PagespeedApiImageV2PageRect';
+  protected $pageRectType = 'Appointments_Google_Service_Pagespeedonline_PagespeedApiImageV2PageRect';
   protected $pageRectDataType = '';
   public $width;
 
@@ -352,7 +352,7 @@ class Google_Service_Pagespeedonline_PagespeedApiImageV2 extends Google_Model
   {
     return $this->mimeType;
   }
-  public function setPageRect(Google_Service_Pagespeedonline_PagespeedApiImageV2PageRect $pageRect)
+  public function setPageRect(Appointments_Google_Service_Pagespeedonline_PagespeedApiImageV2PageRect $pageRect)
   {
     $this->pageRect = $pageRect;
   }
@@ -370,7 +370,7 @@ class Google_Service_Pagespeedonline_PagespeedApiImageV2 extends Google_Model
   }
 }
 
-class Google_Service_Pagespeedonline_PagespeedApiImageV2PageRect extends Google_Model
+class Appointments_Google_Service_Pagespeedonline_PagespeedApiImageV2PageRect extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -414,29 +414,29 @@ class Google_Service_Pagespeedonline_PagespeedApiImageV2PageRect extends Google_
   }
 }
 
-class Google_Service_Pagespeedonline_Result extends Google_Collection
+class Appointments_Google_Service_Pagespeedonline_Result extends Appointments_Google_Collection
 {
   protected $collection_key = 'invalidRules';
   protected $internal_gapi_mappings = array(
   );
-  protected $formattedResultsType = 'Google_Service_Pagespeedonline_ResultFormattedResults';
+  protected $formattedResultsType = 'Appointments_Google_Service_Pagespeedonline_ResultFormattedResults';
   protected $formattedResultsDataType = '';
   public $id;
   public $invalidRules;
   public $kind;
-  protected $pageStatsType = 'Google_Service_Pagespeedonline_ResultPageStats';
+  protected $pageStatsType = 'Appointments_Google_Service_Pagespeedonline_ResultPageStats';
   protected $pageStatsDataType = '';
   public $responseCode;
-  protected $ruleGroupsType = 'Google_Service_Pagespeedonline_ResultRuleGroupsElement';
+  protected $ruleGroupsType = 'Appointments_Google_Service_Pagespeedonline_ResultRuleGroupsElement';
   protected $ruleGroupsDataType = 'map';
-  protected $screenshotType = 'Google_Service_Pagespeedonline_PagespeedApiImageV2';
+  protected $screenshotType = 'Appointments_Google_Service_Pagespeedonline_PagespeedApiImageV2';
   protected $screenshotDataType = '';
   public $title;
-  protected $versionType = 'Google_Service_Pagespeedonline_ResultVersion';
+  protected $versionType = 'Appointments_Google_Service_Pagespeedonline_ResultVersion';
   protected $versionDataType = '';
 
 
-  public function setFormattedResults(Google_Service_Pagespeedonline_ResultFormattedResults $formattedResults)
+  public function setFormattedResults(Appointments_Google_Service_Pagespeedonline_ResultFormattedResults $formattedResults)
   {
     $this->formattedResults = $formattedResults;
   }
@@ -468,7 +468,7 @@ class Google_Service_Pagespeedonline_Result extends Google_Collection
   {
     return $this->kind;
   }
-  public function setPageStats(Google_Service_Pagespeedonline_ResultPageStats $pageStats)
+  public function setPageStats(Appointments_Google_Service_Pagespeedonline_ResultPageStats $pageStats)
   {
     $this->pageStats = $pageStats;
   }
@@ -492,7 +492,7 @@ class Google_Service_Pagespeedonline_Result extends Google_Collection
   {
     return $this->ruleGroups;
   }
-  public function setScreenshot(Google_Service_Pagespeedonline_PagespeedApiImageV2 $screenshot)
+  public function setScreenshot(Appointments_Google_Service_Pagespeedonline_PagespeedApiImageV2 $screenshot)
   {
     $this->screenshot = $screenshot;
   }
@@ -508,7 +508,7 @@ class Google_Service_Pagespeedonline_Result extends Google_Collection
   {
     return $this->title;
   }
-  public function setVersion(Google_Service_Pagespeedonline_ResultVersion $version)
+  public function setVersion(Appointments_Google_Service_Pagespeedonline_ResultVersion $version)
   {
     $this->version = $version;
   }
@@ -518,12 +518,12 @@ class Google_Service_Pagespeedonline_Result extends Google_Collection
   }
 }
 
-class Google_Service_Pagespeedonline_ResultFormattedResults extends Google_Model
+class Appointments_Google_Service_Pagespeedonline_ResultFormattedResults extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
   public $locale;
-  protected $ruleResultsType = 'Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElement';
+  protected $ruleResultsType = 'Appointments_Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElement';
   protected $ruleResultsDataType = 'map';
 
 
@@ -545,7 +545,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResults extends Google_Model
   }
 }
 
-class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElement extends Google_Collection
+class Appointments_Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElement extends Appointments_Google_Collection
 {
   protected $collection_key = 'urlBlocks';
   protected $internal_gapi_mappings = array(
@@ -553,9 +553,9 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElement ex
   public $groups;
   public $localizedRuleName;
   public $ruleImpact;
-  protected $summaryType = 'Google_Service_Pagespeedonline_PagespeedApiFormatStringV2';
+  protected $summaryType = 'Appointments_Google_Service_Pagespeedonline_PagespeedApiFormatStringV2';
   protected $summaryDataType = '';
-  protected $urlBlocksType = 'Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrlBlocks';
+  protected $urlBlocksType = 'Appointments_Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrlBlocks';
   protected $urlBlocksDataType = 'array';
 
 
@@ -583,7 +583,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElement ex
   {
     return $this->ruleImpact;
   }
-  public function setSummary(Google_Service_Pagespeedonline_PagespeedApiFormatStringV2 $summary)
+  public function setSummary(Appointments_Google_Service_Pagespeedonline_PagespeedApiFormatStringV2 $summary)
   {
     $this->summary = $summary;
   }
@@ -601,18 +601,18 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElement ex
   }
 }
 
-class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrlBlocks extends Google_Collection
+class Appointments_Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrlBlocks extends Appointments_Google_Collection
 {
   protected $collection_key = 'urls';
   protected $internal_gapi_mappings = array(
   );
-  protected $headerType = 'Google_Service_Pagespeedonline_PagespeedApiFormatStringV2';
+  protected $headerType = 'Appointments_Google_Service_Pagespeedonline_PagespeedApiFormatStringV2';
   protected $headerDataType = '';
-  protected $urlsType = 'Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrlBlocksUrls';
+  protected $urlsType = 'Appointments_Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrlBlocksUrls';
   protected $urlsDataType = 'array';
 
 
-  public function setHeader(Google_Service_Pagespeedonline_PagespeedApiFormatStringV2 $header)
+  public function setHeader(Appointments_Google_Service_Pagespeedonline_PagespeedApiFormatStringV2 $header)
   {
     $this->header = $header;
   }
@@ -630,14 +630,14 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrl
   }
 }
 
-class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrlBlocksUrls extends Google_Collection
+class Appointments_Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrlBlocksUrls extends Appointments_Google_Collection
 {
   protected $collection_key = 'details';
   protected $internal_gapi_mappings = array(
   );
-  protected $detailsType = 'Google_Service_Pagespeedonline_PagespeedApiFormatStringV2';
+  protected $detailsType = 'Appointments_Google_Service_Pagespeedonline_PagespeedApiFormatStringV2';
   protected $detailsDataType = 'array';
-  protected $resultType = 'Google_Service_Pagespeedonline_PagespeedApiFormatStringV2';
+  protected $resultType = 'Appointments_Google_Service_Pagespeedonline_PagespeedApiFormatStringV2';
   protected $resultDataType = '';
 
 
@@ -649,7 +649,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrl
   {
     return $this->details;
   }
-  public function setResult(Google_Service_Pagespeedonline_PagespeedApiFormatStringV2 $result)
+  public function setResult(Appointments_Google_Service_Pagespeedonline_PagespeedApiFormatStringV2 $result)
   {
     $this->result = $result;
   }
@@ -659,7 +659,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrl
   }
 }
 
-class Google_Service_Pagespeedonline_ResultPageStats extends Google_Model
+class Appointments_Google_Service_Pagespeedonline_ResultPageStats extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -784,7 +784,7 @@ class Google_Service_Pagespeedonline_ResultPageStats extends Google_Model
   }
 }
 
-class Google_Service_Pagespeedonline_ResultRuleGroupsElement extends Google_Model
+class Appointments_Google_Service_Pagespeedonline_ResultRuleGroupsElement extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
@@ -801,7 +801,7 @@ class Google_Service_Pagespeedonline_ResultRuleGroupsElement extends Google_Mode
   }
 }
 
-class Google_Service_Pagespeedonline_ResultVersion extends Google_Model
+class Appointments_Google_Service_Pagespeedonline_ResultVersion extends Appointments_Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
