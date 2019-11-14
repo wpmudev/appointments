@@ -802,7 +802,7 @@ function appointments_get_worker_working_hours( $status, $worker_id = 0, $locati
 						case 'Friday': { $weekday_number = 5; break; }
 						case 'Saturday': { $weekday_number = 6; break; }
 						case 'Sunday': { $weekday_number = 7; break; }
-						default: { continue; }
+						default: { break; }
 					}
 					if ( ! isset( $working_hours->hours[ $weekday ] ) ) {
 						$working_hours->hours[ $weekday ] = array();
